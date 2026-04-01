@@ -62,13 +62,16 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
 
     const itemsGrouped = useMemo(() => {
         return map(
-            groupBy(itemsList.filter(filterItem), 'rarity'),
+            groupBy(
+                itemsList.filter(item => filterItem(item)),
+                'rarity'
+            ),
             (items, rarity): IUpgradesGroup => ({
                 label: Rarity[+rarity],
                 rarity: +rarity,
                 items: map(
                     groupBy(
-                        items.filter(x => !x.craftable).filter(x => x.material.indexOf('Coming soon') === -1),
+                        items.filter(x => !x.craftable).filter(x => !x.material.includes('Coming soon')),
                         'alphabet'
                     ),
                     (subItems, letter) => ({
@@ -89,7 +92,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
                 itemsAll: items.filter(x => !x.craftable),
                 itemsAllCrafted: items.filter(x => x.craftable),
             })
-        ).reverse();
+        ).toReversed();
     }, [itemsList, filterItem]);
 
     const update = useCallback((upgradeId: string, value: number) => {
@@ -109,9 +112,9 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
             dispatch.inventory({
                 type: 'ResetUpgrades',
             });
-            itemsList.forEach(row => {
+            for (const row of itemsList) {
                 row.quantity = 0;
-            });
+            }
         }
     }, [itemsList]);
 

@@ -74,12 +74,12 @@ export const mapUserIdToName =
             return existingUser.inGameName || existingUser.username;
         }
 
-        const bytes = userId.replace(/-/g, '').split('');
+        const bytes = [...userId.replaceAll('-', '')];
 
-        const adjIndex = parseInt(bytes[0] + bytes[1], 16) % adjectives.length;
-        const factionIndex = parseInt(bytes[2] + bytes[3], 16) % factions.length;
-        const unitIndex = parseInt(bytes[4] + bytes[5], 16) % units.length;
-        const number = parseInt(bytes.slice(-2).join(''), 16) % 100;
+        const adjIndex = Number.parseInt(bytes[0] + bytes[1], 16) % adjectives.length;
+        const factionIndex = Number.parseInt(bytes[2] + bytes[3], 16) % factions.length;
+        const unitIndex = Number.parseInt(bytes[4] + bytes[5], 16) % units.length;
+        const number = Number.parseInt(bytes.slice(-2).join(''), 16) % 100;
 
         return `${adjectives[adjIndex]}${factions[factionIndex]}${units[unitIndex]}${number}`;
     };

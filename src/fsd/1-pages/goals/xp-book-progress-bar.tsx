@@ -22,14 +22,18 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({
     const displayValue = `${applied} / ${required} (${percentage}%)`;
 
     const tooltipText = `XP Books Applied: ${applied} / Required: ${required} (${percentage}%)`;
+    const labelTextColorClass = percentage >= 50 ? 'text-white' : 'text-gray-900 dark:text-white';
 
     const bookIconName = Rarity[bookRarity].toLowerCase() + 'Book';
     return (
         <AccessibleTooltip title={tooltipText}>
             <div className="flex-box w-full max-w-[140px] items-center gap-1">
                 <div className="relative h-4 flex-grow overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
-                    <div className="h-full bg-green-800 transition-all duration-500" style={{ width: barWidth }}></div>
-                    <span className="absolute inset-0 flex items-center justify-center px-1 text-[10px] leading-none font-bold text-gray-900 dark:text-white">
+                    <div
+                        className="h-full bg-green-600 transition-all duration-500 dark:bg-green-800"
+                        style={{ width: barWidth }}></div>
+                    <span
+                        className={`absolute inset-0 flex items-center justify-center px-1 text-[10px] leading-none font-bold ${labelTextColorClass}`}>
                         {displayValue}
                     </span>
                 </div>

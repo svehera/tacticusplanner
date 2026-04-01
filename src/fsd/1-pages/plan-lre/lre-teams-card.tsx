@@ -1,10 +1,9 @@
 import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader } from '@mui/material';
-import { AgGridReact } from 'ag-grid-react';
-import React, { useContext, useEffect, useMemo, useRef } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
-import { DispatchContext, StoreContext } from '@/reducers/store.provider';
+import { StoreContext } from '@/reducers/store.provider';
 
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
@@ -26,6 +25,12 @@ interface Props {
     editTeam: (team: ILreTeam) => void;
     deleteTeam: (teamId: string) => void;
     restrictions: string[];
+    updateRestrictionSelection: (
+        eventId: ILegendaryEventTrack['eventId'],
+        section: LreTrackId,
+        restrictionName: string,
+        selected: boolean
+    ) => void;
 }
 
 export const LreTeamsCard: React.FC<Props> = ({
@@ -38,35 +43,17 @@ export const LreTeamsCard: React.FC<Props> = ({
     editTeam,
     deleteTeam,
     restrictions,
+    updateRestrictionSelection,
 }) => {
-    const gridReference = useRef<AgGridReact>(null);
-
     const { viewPreferences, autoTeamsPreferences } = useContext(StoreContext);
-    const dispatch = useContext(DispatchContext);
 
     const gridTeam = useMemo(
         () => track.suggestTeam(autoTeamsPreferences, viewPreferences.onlyUnlocked, restrictions),
         [autoTeamsPreferences, restrictions, viewPreferences.onlyUnlocked]
     );
 
-    useEffect(() => {
-        gridReference.current?.api?.sizeColumnsToFit();
-    }, [
-        viewPreferences.showAlpha,
-        viewPreferences.showBeta,
-        viewPreferences.showGamma,
-        track.eventId,
-        viewPreferences.hideCompleted,
-    ]);
-
     const handleChange = (selected: boolean, restrictionName: string) => {
-        dispatch.leSelectedRequirements({
-            type: 'Update',
-            eventId: track.eventId,
-            section: track.section,
-            restrictionName,
-            selected,
-        });
+        updateRestrictionSelection(track.eventId, track.section, restrictionName, selected);
     };
 
     const addTeam = () => {

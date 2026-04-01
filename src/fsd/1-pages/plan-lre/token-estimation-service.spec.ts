@@ -43,7 +43,7 @@ function createTrack(id: LreTrackId, numberBattles: number, reqs: ILreRequiremen
         trackId: id,
         trackName: id,
         totalPoints: 0,
-        battlesPoints: Array(numberBattles).fill(0),
+        battlesPoints: Array.from({ length: numberBattles }, () => 0),
         requirements: reqs,
         battles: Array.from({ length: numberBattles }, (_, index) =>
             createBattleProgress(numberBattles - index - 1, reqs)
@@ -95,12 +95,12 @@ describe('TokenEstimationService', () => {
             expect(milestonesAndPoints[index1].stars).toBe(3);
             expect(milestonesAndPoints[index1].round).toBe(3);
 
-            const index2 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(13000);
+            const index2 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(13_000);
             expect(index2).not.toBe(-1);
             expect(milestonesAndPoints[index2].stars).toBe(3);
             expect(milestonesAndPoints[index2].round).toBe(1);
 
-            const index3 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(20000);
+            const index3 = TokenEstimationService.getFurthestCurrencyMilestoneAchieved(20_000);
             expect(index3).not.toBe(-1);
             expect(milestonesAndPoints[index3].stars).toBe(6);
         });
@@ -129,12 +129,12 @@ describe('TokenEstimationService', () => {
                 charSnowprintIds: ['char1', 'char2', 'char3', 'char4', 'char5'],
                 expectedBattleClears: 2,
             };
-            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1, alphaTeam2], undefined);
+            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1, alphaTeam2]);
             expect(bestToken.team).toBeDefined();
             expect(bestToken.team?.id ?? '').toBe('team1');
             expect(bestToken.battleNumber).toBe(0);
             expect(bestToken.incrementalPoints).toBe(45 + 45 + 60 + 60 + 70);
-            expect(bestToken.restrictionsCleared.map(restriction => restriction.name).sort()).containSubset([
+            expect(bestToken.restrictionsCleared.map(restriction => restriction.name).toSorted()).containSubset([
                 'Flame',
                 'Pierce',
             ]);
@@ -142,7 +142,7 @@ describe('TokenEstimationService', () => {
 
         it('when all battles are complete, returns undefined', () => {
             const tracks = [{ ...alphaTrack }];
-            tracks[0].battles.forEach(battle => (battle.completed = true));
+            for (const battle of tracks[0].battles) battle.completed = true;
             const alphaTeam1: ILreTeam = {
                 id: 'team1',
                 name: 'Alpha Team 1',
@@ -151,7 +151,7 @@ describe('TokenEstimationService', () => {
                 charSnowprintIds: ['char1', 'char2', 'char3'],
                 expectedBattleClears: 1,
             };
-            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1], undefined);
+            const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam1]);
             expect(bestToken.team).not.toBeDefined();
         });
 
@@ -182,12 +182,13 @@ describe('TokenEstimationService', () => {
             const gammaTrack = createTrack('gamma', 3, gammaReqs);
 
             // Mark the three default restrictions as completed in the first battle of alpha and beta
-            [alphaTrack, betaTrack].forEach(track => {
-                const battle = track.battles[track.battles.length - 1]; // battle 0
-                [0, 1, 2].forEach(index => {
+            for (const track of [alphaTrack, betaTrack]) {
+                const battle = track.battles.at(-1); // battle 0
+                if (!battle) throw new Error('missing battle');
+                for (const index of [0, 1, 2]) {
                     battle.requirementsProgress[index].completed = true;
-                });
-            });
+                }
+            }
 
             // Team 1 can clear 'Pierce' and 'Flame' in alpha
             const team1: ILreTeam = {
@@ -209,12 +210,8 @@ describe('TokenEstimationService', () => {
             };
 
             // Mark 'Pierce' as already cleared in alpha battle 0, and 'Power' as already cleared in beta battle 0
-            alphaTrack.battles[alphaTrack.battles.length - 1].requirementsProgress.find(
-                r => r.id === 'Pierce'
-            )!.completed = true;
-            betaTrack.battles[betaTrack.battles.length - 1].requirementsProgress.find(
-                r => r.id === 'Power'
-            )!.completed = true;
+            alphaTrack.battles.at(-1)!.requirementsProgress.find(r => r.id === 'Pierce')!.completed = true;
+            betaTrack.battles.at(-1)!.requirementsProgress.find(r => r.id === 'Power')!.completed = true;
 
             // Simulate that the last token used was team1 in alpha, clearing 'Pierce' in battle 0
             const lastToken = new TokenUse();
@@ -288,22 +285,22 @@ describe('TokenEstimationService', () => {
                 ];
 
                 // Mark all requirements as completed for beta and gamma (fully completed)
-                tracks[1].battles.forEach(battle => {
+                for (const battle of tracks[1].battles) {
                     battle.completed = true;
-                    battle.requirementsProgress.forEach(requirement => (requirement.completed = true));
-                });
-                tracks[2].battles.forEach(battle => {
+                    for (const requirement of battle.requirementsProgress) requirement.completed = true;
+                }
+                for (const battle of tracks[2].battles) {
                     battle.completed = true;
-                    battle.requirementsProgress.forEach(requirement => (requirement.completed = true));
-                });
+                    for (const requirement of battle.requirementsProgress) requirement.completed = true;
+                }
 
                 // For alpha, mark some requirements as completed in all battles
-                tracks[0].battles.forEach(battle => {
-                    [0, 1, 2].forEach(index => {
+                for (const battle of tracks[0].battles) {
+                    for (const index of [0, 1, 2]) {
                         battle.requirementsProgress[index].completed = true;
-                    });
+                    }
                     battle.requirementsProgress.find(requirement => requirement.id === 'Pierce')!.completed = true;
-                });
+                }
 
                 // Teams that can clear the next available restriction in alpha
                 const alphaTeam: ILreTeam = {
@@ -316,7 +313,7 @@ describe('TokenEstimationService', () => {
                 };
 
                 // Call computeNextToken
-                const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam], undefined);
+                const bestToken = TokenEstimationService.computeNextToken(tracks, [alphaTeam]);
 
                 // Should return a token for the first (lowest index) incomplete battle in alpha
                 expect(bestToken.team).toBeDefined();
@@ -355,12 +352,13 @@ describe('TokenEstimationService', () => {
                 const gammaTrack = createTrack('gamma', 3, gammaReqs);
 
                 // Mark the three default restrictions as completed in battle 0 for all tracks
-                [alphaTrack, betaTrack, gammaTrack].forEach(track => {
-                    const battle = track.battles[track.battles.length - 1]; // battle 0
-                    [0, 1, 2].forEach(index => {
+                for (const track of [alphaTrack, betaTrack, gammaTrack]) {
+                    const battle = track.battles.at(-1); // battle 0
+                    if (!battle) throw new Error('missing battle');
+                    for (const index of [0, 1, 2]) {
                         battle.requirementsProgress[index].completed = true;
-                    });
-                });
+                    }
+                }
 
                 // Team 1 can clear 'Pierce' in alpha, Team 2 can clear 'Power' in beta
                 const team1: ILreTeam = {
@@ -382,10 +380,8 @@ describe('TokenEstimationService', () => {
 
                 // Mark 'Pierce' as already cleared in alpha battle 0 and 1, and 'Power' as already
                 // cleared in beta battle 0.
-                [1, 2].forEach(
-                    index =>
-                        (alphaTrack.battles[index].requirementsProgress.find(r => r.id === 'Pierce')!.completed = true)
-                );
+                for (const index of [1, 2])
+                    alphaTrack.battles[index].requirementsProgress.find(r => r.id === 'Pierce')!.completed = true;
                 betaTrack.battles[2].requirementsProgress.find(r => r.id === 'Power')!.completed = true;
 
                 // Now, both alpha and beta have their first battle fully completed, so next available is battle 1
@@ -393,7 +389,7 @@ describe('TokenEstimationService', () => {
 
                 // Call computeNextToken
                 const tracks = [alphaTrack, betaTrack, gammaTrack];
-                const bestToken = TokenEstimationService.computeNextToken(tracks, [team1, team2], undefined);
+                const bestToken = TokenEstimationService.computeNextToken(tracks, [team1, team2]);
 
                 expect(bestToken.team).toBeDefined();
                 expect(bestToken.team?.id).toBe(team2.id);
@@ -583,8 +579,9 @@ describe('TokenEstimationService', () => {
             };
 
             // Mark all restrictions that the teams could have completed as completed in battle 0
-            const battle0 = track.battles[track.battles.length - 1]; // battle 0
-            battle0.requirementsProgress.forEach(requirement => {
+            const battle0 = track.battles.at(-1); // battle 0
+            if (!battle0) throw new Error('missing battle');
+            for (const requirement of battle0.requirementsProgress) {
                 if (
                     team1.restrictionsIds.includes(requirement.id) ||
                     team2.restrictionsIds.includes(requirement.id) ||
@@ -592,16 +589,17 @@ describe('TokenEstimationService', () => {
                 ) {
                     requirement.completed = true;
                 }
-            });
+            }
             battle0.completed = battle0.requirementsProgress.every(requirement => requirement.completed);
 
             // In battle 1, leave 'Power' incomplete (no team can clear it), and mark the rest as completed
-            const battle1 = track.battles[track.battles.length - 2]; // battle 1
-            battle1.requirementsProgress.forEach(requirement => {
+            const battle1 = track.battles.at(-2); // battle 1
+            if (!battle1) throw new Error('missing battle');
+            for (const requirement of battle1.requirementsProgress) {
                 if (requirement.id !== 'Power') {
                     requirement.completed = true;
                 }
-            });
+            }
 
             // Now, computeAllTokenUsage should return an empty array, since teams can't clear any more restrictions
             const tokens = TokenEstimationService.computeAllTokenUsage([track], [team1, team2]);
@@ -657,18 +655,18 @@ describe('TokenEstimationService', () => {
 
             // The beta track has some points from the first two battles.
             // Battle 0 (last): fully cleared
-            track2.battles[3].requirementsProgress.forEach(requirement => (requirement.completed = true));
+            for (const requirement of track2.battles[3].requirementsProgress) requirement.completed = true;
             track2.battles[3].completed = true;
             // Battle 1: partially cleared (only _killPoints and _highScore)
-            track2.battles[2].requirementsProgress.forEach(requirement => {
+            for (const requirement of track2.battles[2].requirementsProgress) {
                 if (['_killPoints', '_highScore'].includes(requirement.id)) requirement.completed = true;
-            });
+            }
 
             // The gamma track is fully cleared.
-            track3.battles.forEach(battle => {
-                battle.requirementsProgress.forEach(requirement => (requirement.completed = true));
+            for (const battle of track3.battles) {
+                for (const requirement of battle.requirementsProgress) requirement.completed = true;
                 battle.completed = true;
-            });
+            }
 
             const points1 = TokenEstimationService.computeCurrentPointsInTrack(track1);
             const points2 = TokenEstimationService.computeCurrentPointsInTrack(track2);
@@ -718,18 +716,18 @@ describe('TokenEstimationService', () => {
             const gammaTrack = createTrack('gamma', 3, reqsGamma);
 
             // No requirements are completed in any battle
-            alphaTrack.battles.forEach(battle => {
-                battle.requirementsProgress.forEach(requirement => (requirement.completed = false));
+            for (const battle of alphaTrack.battles) {
+                for (const requirement of battle.requirementsProgress) requirement.completed = false;
                 battle.completed = false;
-            });
-            betaTrack.battles.forEach(battle => {
-                battle.requirementsProgress.forEach(requirement => (requirement.completed = false));
+            }
+            for (const battle of betaTrack.battles) {
+                for (const requirement of battle.requirementsProgress) requirement.completed = false;
                 battle.completed = false;
-            });
-            gammaTrack.battles.forEach(battle => {
-                battle.requirementsProgress.forEach(requirement => (requirement.completed = false));
+            }
+            for (const battle of gammaTrack.battles) {
+                for (const requirement of battle.requirementsProgress) requirement.completed = false;
                 battle.completed = false;
-            });
+            }
 
             expect(TokenEstimationService.computeCurrentPointsInTrack(alphaTrack)).toBe(0);
             expect(TokenEstimationService.computeCurrentPointsInTrack(betaTrack)).toBe(0);

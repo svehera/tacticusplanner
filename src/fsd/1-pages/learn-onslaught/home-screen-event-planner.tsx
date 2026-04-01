@@ -23,7 +23,7 @@ const updateTokenState =
     (setText: React.Dispatch<React.SetStateAction<string>>, setValue: React.Dispatch<React.SetStateAction<number>>) =>
     (event: React.ChangeEvent<HTMLInputElement>) => {
         const raw = event.target.value;
-        const value = parseInt(raw.trim(), 10);
+        const value = Number.parseInt(raw.trim(), 10);
         setText(raw);
         if (!Number.isNaN(value) && value >= 0) {
             setValue(value);
@@ -46,10 +46,12 @@ export const HomeScreenEventPlanner = () => {
 
     const handleToggleTrack = (track: OnslaughtTrackId) => {
         setSelections(previous => {
-            const next = { ...previous };
-            next[track] = {
-                ...previous[track],
-                selected: !previous[track].selected,
+            const next = {
+                ...previous,
+                [track]: {
+                    ...previous[track],
+                    selected: !previous[track].selected,
+                },
             };
             return next;
         });
@@ -62,9 +64,11 @@ export const HomeScreenEventPlanner = () => {
         }));
     };
 
-    const selectedTracks = Object.entries(selections)
-        .filter(([_, { selected }]) => selected)
-        .map(([track]) => track as OnslaughtTrackId);
+    const selectedTracks = new Set(
+        Object.entries(selections)
+            .filter(([_, { selected }]) => selected)
+            .map(([track]) => track as OnslaughtTrackId)
+    );
 
     const tokens = useMemo(() => {
         const returnValue = HomeScreenEventPlannerService.calculateHsePlan(
@@ -85,9 +89,9 @@ export const HomeScreenEventPlanner = () => {
                 zone: selections[OnslaughtTrackId.Chaos]?.zone ?? 0,
             },
             {
-                [OnslaughtTrackId.Imperial]: selectedTracks.includes(OnslaughtTrackId.Imperial),
-                [OnslaughtTrackId.Xenos]: selectedTracks.includes(OnslaughtTrackId.Xenos),
-                [OnslaughtTrackId.Chaos]: selectedTracks.includes(OnslaughtTrackId.Chaos),
+                [OnslaughtTrackId.Imperial]: selectedTracks.has(OnslaughtTrackId.Imperial),
+                [OnslaughtTrackId.Xenos]: selectedTracks.has(OnslaughtTrackId.Xenos),
+                [OnslaughtTrackId.Chaos]: selectedTracks.has(OnslaughtTrackId.Chaos),
             },
             preEventTokens,
             duringEventTokens
@@ -143,10 +147,12 @@ export const HomeScreenEventPlanner = () => {
                         {[OnslaughtTrackId.Imperial, OnslaughtTrackId.Xenos, OnslaughtTrackId.Chaos].map(rawTrack => {
                             const track: OnslaughtTrackId = rawTrack as OnslaughtTrackId;
                             const trackData = onslaughtData[track];
-                            const availableSectors = Object.keys(trackData.sectors).map(key => parseInt(key, 10));
+                            const availableSectors = Object.keys(trackData.sectors).map(key =>
+                                Number.parseInt(key, 10)
+                            );
                             const currentSector = selections[track].sector;
                             const availableZones = Object.keys(trackData.sectors[currentSector].killzones).map(key =>
-                                parseInt(key, 10)
+                                Number.parseInt(key, 10)
                             );
 
                             return (
@@ -165,7 +171,7 @@ export const HomeScreenEventPlanner = () => {
                                             filterOptions={(options, { inputValue }) => {
                                                 const search = inputValue.toLowerCase().replace('sector ', '').trim();
                                                 const searchAsNumberFromRoman = romanToNumber(search.toUpperCase()) - 1;
-                                                const searchAsDirectNumber = parseInt(search, 10) - 1;
+                                                const searchAsDirectNumber = Number.parseInt(search, 10) - 1;
 
                                                 return options.filter(opt => {
                                                     const romanString = numberToRoman(opt + 1).toLowerCase();
@@ -192,7 +198,7 @@ export const HomeScreenEventPlanner = () => {
                                                 const greekIndex = GREEK_ZONES.findIndex(
                                                     g => g.toLowerCase() === search
                                                 );
-                                                const directIndex = parseInt(search, 10) - 1;
+                                                const directIndex = Number.parseInt(search, 10) - 1;
 
                                                 return options.filter(opt => {
                                                     const name = GREEK_ZONES[opt]?.toLowerCase() || '';

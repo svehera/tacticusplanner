@@ -88,8 +88,8 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
 
     const title = useMemo(() => {
         const routeSections = location.pathname.split('/');
-        const menuItemId = routeSections[routeSections.length - 1];
-        if (Object.hasOwn(menuItemById, menuItemId)) {
+        const menuItemId = routeSections.at(-1);
+        if (Object.hasOwn(menuItemById, menuItemId ?? '')) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
         } else if (menuItemId === 'lre') {
             return headerTitle;

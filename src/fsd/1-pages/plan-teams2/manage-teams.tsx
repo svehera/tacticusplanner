@@ -13,7 +13,7 @@ import {
 } from '@mui/icons-material';
 import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
 import type { ChipProps } from '@mui/material';
-import { cloneDeep } from 'lodash';
+import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
@@ -63,35 +63,6 @@ enum SaveTeamMode {
 
 type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde';
 
-const getTeamCoreCharIds = (team: ITeam2) => team.chars.slice(0, team.flexIndex ?? team.chars.length);
-
-const getTeamFlexCharIds = (team: ITeam2) => team.chars.slice(team.flexIndex ?? team.chars.length);
-
-const sanitizeWarDefenseSelection = (
-    currentSelectedChars: string[],
-    currentFlexIndex: number | undefined,
-    blockedCoreCharIds: ReadonlySet<string>
-) => {
-    let nextFlexIndex = currentFlexIndex ?? currentSelectedChars.length;
-    const nextSelectedChars: string[] = [];
-
-    currentSelectedChars.forEach((charId, index) => {
-        if (blockedCoreCharIds.has(charId)) {
-            if (index < nextFlexIndex) {
-                nextFlexIndex -= 1;
-            }
-            return;
-        }
-        nextSelectedChars.push(charId);
-    });
-
-    const normalizedFlexIndex = Math.max(0, nextFlexIndex);
-    return {
-        selectedChars: nextSelectedChars,
-        flexIndex: normalizedFlexIndex >= nextSelectedChars.length ? undefined : normalizedFlexIndex,
-    };
-};
-
 export const ManageTeams = () => {
     const {
         characters: unresolvedCharacters,
@@ -110,18 +81,16 @@ export const ManageTeams = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>();
     const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2>();
     const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>();
     const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
@@ -134,7 +103,7 @@ export const ManageTeams = () => {
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
     const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
-    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
+    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>();
 
     useEffect(() => {
         setTeams(currentTeams);
@@ -145,58 +114,38 @@ export const ManageTeams = () => {
         setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
     }, [unresolvedCharacters, unresolvedMows]);
 
-    const otherWarDefenseTeams = useMemo(
+    const otherTeamsInSelectedModes = useMemo(
         () =>
             teams.filter(
                 team =>
-                    !!team.warDefense &&
+                    ((warOffenseSelected && !!team.warOffense) ||
+                        (warDefenseSelected && !!team.warDefense) ||
+                        (guildRaidSelected && !!team.raid) ||
+                        (tournamentArenaSelected && !!team.ta) ||
+                        (hordeModeSelected && !!team.horde)) &&
                     !(saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam && team.name === editingTeam.name)
             ),
-        [teams, saveTeamMode, editingTeam]
+        [
+            teams,
+            saveTeamMode,
+            editingTeam,
+            warOffenseSelected,
+            warDefenseSelected,
+            guildRaidSelected,
+            tournamentArenaSelected,
+            hordeModeSelected,
+        ]
     );
 
-    const warDefenseBlockedCoreCharIds = useMemo(
-        () => Array.from(new Set(otherWarDefenseTeams.flatMap(getTeamCoreCharIds))),
-        [otherWarDefenseTeams]
+    const deployedCharIds = useMemo(
+        () => uniq(otherTeamsInSelectedModes.flatMap(team => team.chars)),
+        [otherTeamsInSelectedModes]
     );
 
-    const warDefenseBlockedCoreCharIdsSet = useMemo(
-        () => new Set(warDefenseBlockedCoreCharIds),
-        [warDefenseBlockedCoreCharIds]
+    const deployedMowIds = useMemo(
+        () => uniq(otherTeamsInSelectedModes.flatMap(team => team.mows ?? [])),
+        [otherTeamsInSelectedModes]
     );
-
-    const warDefenseFlexCharIds = useMemo(
-        () =>
-            Array.from(
-                new Set(
-                    otherWarDefenseTeams
-                        .flatMap(getTeamFlexCharIds)
-                        .filter(charId => !warDefenseBlockedCoreCharIdsSet.has(charId))
-                )
-            ),
-        [otherWarDefenseTeams, warDefenseBlockedCoreCharIdsSet]
-    );
-
-    const warDefenseFlexMowIds = useMemo(
-        () => Array.from(new Set(otherWarDefenseTeams.flatMap(team => team.mows ?? []))),
-        [otherWarDefenseTeams]
-    );
-
-    useEffect(() => {
-        if (!warDefenseSelected) {
-            return;
-        }
-
-        const sanitized = sanitizeWarDefenseSelection(selectedChars, flexIndex, warDefenseBlockedCoreCharIdsSet);
-        if (
-            sanitized.flexIndex !== flexIndex ||
-            sanitized.selectedChars.length !== selectedChars.length ||
-            sanitized.selectedChars.some((charId, index) => charId !== selectedChars[index])
-        ) {
-            setSelectedChars(sanitized.selectedChars);
-            setFlexIndex(sanitized.flexIndex);
-        }
-    }, [warDefenseSelected, selectedChars, flexIndex, warDefenseBlockedCoreCharIdsSet]);
 
     useEffect(() => {
         let teamSizeRestrictedModesEnabled = true;
@@ -280,7 +229,7 @@ export const ManageTeams = () => {
         setImportDialogOpen(true);
     };
 
-    const onImportGo = (team: IPersonalTeam | null) => {
+    const onImportGo = (team: IPersonalTeam | undefined) => {
         setImportDialogOpen(false);
         if (!team) return;
         setSelectedChars(
@@ -320,29 +269,31 @@ export const ManageTeams = () => {
     };
 
     const onDelete = (team: ITeam2) => {
-        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+        if (
+            globalThis.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)
+        ) {
             dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };
 
     const onSave = () => {
         if (saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam) {
-            const team: ITeam2 = teams.find(t => t.name === editingTeam?.name)!;
-            team.chars = selectedChars;
-            if (selectedMows.length > 0) team.mows = selectedMows;
-            team.warOffense = warOffenseSelected ? true : undefined;
-            team.warDefense = warDefenseSelected ? true : undefined;
-            team.raid = guildRaidSelected ? true : undefined;
-            team.ta = tournamentArenaSelected ? true : undefined;
-            team.horde = hordeModeSelected ? true : undefined;
-            team.notes = notes;
-            team.flexIndex = flexIndex;
-            const editingTeams = [...teams];
-            editingTeams.forEach(t => {
-                if (t.name !== editingTeam.name) return;
-                t = team;
-            });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(editingTeams) });
+            const updatedTeam: ITeam2 = {
+                ...editingTeam,
+                name: teamName.trim(),
+                chars: selectedChars,
+                mows: selectedMows.length > 0 ? selectedMows : undefined,
+                warOffense: warOffenseSelected ? true : undefined,
+                warDefense: warDefenseSelected ? true : undefined,
+                raid: guildRaidSelected ? true : undefined,
+                ta: tournamentArenaSelected ? true : undefined,
+                horde: hordeModeSelected ? true : undefined,
+                notes,
+                flexIndex,
+            };
+
+            const updatedTeams = teams.map(team => (team.name === editingTeam.name ? updatedTeam : team));
+            dispatch.teams2({ type: 'Set', value: cloneDeep(updatedTeams) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
@@ -367,7 +318,7 @@ export const ManageTeams = () => {
     const onAddChar = (snowprintId: string) => {
         const flex = flexIndex ?? selectedChars.length;
         setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
-        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+        setFlexIndex(flexIndex === undefined ? undefined : flexIndex + 1);
     };
 
     const onAddMow = (snowprintId: string) => {
@@ -375,9 +326,9 @@ export const ManageTeams = () => {
     };
 
     const onCharClicked = (char: ICharacter2) => {
-        const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
+        const index = selectedChars.indexOf(char.snowprintId ?? '');
         if (index === -1) {
-            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            console.error('Clicked character that is not in selectedChars:', char, selectedChars, index);
             return;
         }
         let flex = flexIndex ?? selectedChars.length;
@@ -425,9 +376,8 @@ export const ManageTeams = () => {
                 onMaxRankChange={setMaxRank}
                 onFactionsChange={setFactions}
                 onRarityCapChanged={setRarityCap}
-                warDefenseBlockedCoreCharIds={warDefenseBlockedCoreCharIds}
-                warDefenseFlexCharIds={warDefenseFlexCharIds}
-                warDefenseFlexMowIds={warDefenseFlexMowIds}
+                deployedCharIds={deployedCharIds}
+                deployedMowIds={deployedMowIds}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
                 warDisallowedMessage={warDisallowedMessage}
@@ -464,7 +414,7 @@ export const ManageTeams = () => {
                         value={selectedTeamType ?? ''}
                         onChange={event => {
                             const value = event.target.value as TeamTypeKey | '';
-                            setSelectedTeamType(value ? value : undefined);
+                            setSelectedTeamType(value || undefined);
                         }}>
                         <option value="">All</option>
                         <option value="warOffense">War Offense</option>
@@ -545,8 +495,7 @@ export const ManageTeams = () => {
                                         <button
                                             className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-green-700"
                                             onClick={() => {
-                                                const team =
-                                                    legacyTeams.find(t => t.name === selectedLegacyTeamName) ?? null;
+                                                const team = legacyTeams.find(t => t.name === selectedLegacyTeamName);
                                                 onImportGo(team);
                                                 setImportDialogOpen(false);
                                             }}>

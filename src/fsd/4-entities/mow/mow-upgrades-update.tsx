@@ -55,7 +55,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
         return UpgradesService.updateInventory(inventory, totalUpgrades);
     }, [currPrimaryLevel, currSecondaryLevel]);
 
-    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
     const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
@@ -63,7 +63,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
     };
 
     const handleClose = () => {
-        setAnchorElement(null);
+        setAnchorElement(undefined);
     };
 
     const open = Boolean(anchorElement);
@@ -115,9 +115,7 @@ export const MowUpgradesUpdate: React.FC<Props> = ({
                                     />
                                 )}{' '}
                                 {inventory[x.id] ?? 0} - {inventoryUpdate[x.id]} ={' '}
-                                {(inventory[x.id] ?? 0) - inventoryUpdate[x.id] < 0
-                                    ? 0
-                                    : (inventory[x.id] ?? 0) - inventoryUpdate[x.id]}
+                                {Math.max((inventory[x.id] ?? 0) - inventoryUpdate[x.id], 0)}
                             </li>
                         ))}
                     </ul>

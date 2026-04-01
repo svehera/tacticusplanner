@@ -3,15 +3,18 @@ import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { sum } from 'lodash';
 import { isMobile } from 'react-device-detect';
 
+import { RaidUpgradeMaterialCard } from '@/routes/tables/raid-upgrade-material-card';
+
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
-import { MaterialItemInput } from '@/fsd/3-features/goals/material-item-input';
 
 interface Props {
     raids: IUpgradeRaid[];
     bonusRaids: IUpgradeRaid[];
 }
+
+const isShardRaid = (raid: IUpgradeRaid) => raid.rarity === 'Shard' || raid.rarity === 'Mythic Shard';
 
 export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
@@ -24,6 +27,8 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
     const upgradesRaids = raids
         .filter(raid => raid.raidLocations.length > 0)
         .filter(raid => raid.raidLocations.some(loc => loc.raidsToPerform > 0));
+    const completedMaterialRaids = completedRaids.filter(raid => !isShardRaid(raid));
+    const completedShardRaids = completedRaids.filter(raid => isShardRaid(raid));
 
     return (
         <>
@@ -35,23 +40,39 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </p>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+                    <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                         {upgradesRaids.map((raid, index) => (
-                            <div
-                                className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
-                                key={raid.id + '-' + index}>
-                                <MaterialItemInput upgradeRaid={raid} />
-                            </div>
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
+                                tooltipRelatedCharactersOnly={true}
+                            />
                         ))}
-                        {completedRaids.map((raid, index) => (
-                            <div
-                                className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
-                                key={raid.id + '-' + index}>
-                                <MaterialItemInput
-                                    upgradeRaid={{ ...raid, relatedCharacters: [] }}
-                                    isExhausted={true}
-                                />
-                            </div>
+                        {completedMaterialRaids.map((raid, index) => (
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
+                                tooltipRelatedCharactersOnly={true}
+                            />
+                        ))}
+                        {completedShardRaids.map((raid, index) => (
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
+                                tooltipRelatedCharactersOnly={true}
+                            />
                         ))}
                     </div>
                 </AccordionDetails>
@@ -63,13 +84,16 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </p>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className="mt-2.5 flex flex-wrap items-center justify-center gap-2">
+                    <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                         {bonusRaids.map((raid, index) => (
-                            <div
-                                className="w-full max-w-[300px] overflow-hidden p-[5px] [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
-                                key={raid.id + '-' + index}>
-                                <MaterialItemInput upgradeRaid={raid} />
-                            </div>
+                            <RaidUpgradeMaterialCard
+                                key={raid.id + '-' + index}
+                                index={index}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
+                            />
                         ))}
                     </div>
                 </AccordionDetails>

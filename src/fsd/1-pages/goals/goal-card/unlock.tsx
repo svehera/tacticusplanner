@@ -12,7 +12,7 @@ import { GoalEstimateRow } from './estimate-row';
 interface Props {
     goal: ICharacterUnlockGoal;
     goalEstimate: IGoalEstimate;
-    calendarDate: string | null;
+    calendarDate?: string;
 }
 
 /** Renders the body of an Unlock goal card, showing shard progress and energy estimate. */

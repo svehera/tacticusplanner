@@ -3,7 +3,7 @@
 import { RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
-import { UpgradesService } from './upgrades.service';
+import { recipeDataByName } from './data';
 
 export const UpgradeImage = ({
     material,
@@ -44,8 +44,7 @@ export const UpgradeImage = ({
             case RarityString.Uncommon: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_uncommon.png`);
             }
-            case RarityString.Common:
-            default: {
+            case RarityString.Common: {
                 return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_common.png`);
             }
         }
@@ -79,13 +78,15 @@ export const UpgradeImage = ({
         if (tooltip) {
             return tooltip;
         }
-        return UpgradesService.getUpgradeMaterial(material)?.material ?? material;
+        return recipeDataByName[material]?.material ?? material;
     }, [material, tooltip]);
 
     return (
         <AccessibleTooltip title={tooltipText}>
             <div style={{ width, height }} className={'upgrade'}>
-                {!imgError ? (
+                {imgError ? (
+                    <div style={imageMissingStyles}>{material}</div>
+                ) : (
                     <div className="relative mx-auto my-0 block" style={{ width, height }}>
                         <img style={centeredImageStackStyles} src={bgImgUrl} alt={`${rarity} upgrade`} />
                         <img
@@ -103,8 +104,6 @@ export const UpgradeImage = ({
                         />
                         <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} />
                     </div>
-                ) : (
-                    <div style={imageMissingStyles}>{material}</div>
                 )}
             </div>
         </AccessibleTooltip>

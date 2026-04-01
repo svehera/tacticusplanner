@@ -153,7 +153,7 @@ export const AdminToolsDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose
                     </FormControl>
                     <Button onClick={changeUserRole}>Update role</Button>
                 </Box>
-                {usersList.length > 0 && <Box>{usersList.map(renderUser)}</Box>}
+                {usersList.length > 0 && <Box>{usersList.map(user => renderUser(user))}</Box>}
             </DialogContent>
             <DialogActions>
                 <Button onClick={() => onClose()}>Close</Button>

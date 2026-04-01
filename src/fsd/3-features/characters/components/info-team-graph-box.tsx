@@ -3,14 +3,14 @@ import { Popover, IconButton } from '@mui/material';
 import React from 'react';
 
 export const InfoTeamGraphBox = () => {
-    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
         setAnchorElement(event.currentTarget);
     };
 
     const handleClose = () => {
-        setAnchorElement(null);
+        setAnchorElement(undefined);
     };
 
     const open = Boolean(anchorElement);

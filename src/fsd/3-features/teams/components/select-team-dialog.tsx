@@ -30,9 +30,9 @@ import { TeamView } from '@/fsd/3-features/teams/components/team-view';
 type Props = {
     units: IUnit[];
     team: ICharacter2[];
-    activeMow: IMow2 | null;
+    activeMow: IMow2 | undefined;
     rarityCap: Rarity;
-    onClose: (team: ICharacter2[], mow: IMow2 | null) => void;
+    onClose: (team: ICharacter2[], mow: IMow2 | undefined) => void;
 };
 
 type OrderBy = 'rank' | 'faction' | 'power';
@@ -69,10 +69,10 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
         if (isMow(unit)) {
             if (mow && mow.id) {
-                if (mow.id !== unit.id) {
-                    setMow(unit);
+                if (mow.id === unit.id) {
+                    setMow(undefined);
                 } else {
-                    setMow(null);
+                    setMow(unit);
                 }
             } else {
                 setMow(unit);
@@ -82,9 +82,9 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
 
     const filteredUnits = useMemo(() => {
         const filterUnits = () => {
-            const nameFiltered = !quickFilter
-                ? units
-                : units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()));
+            const nameFiltered = quickFilter
+                ? units.filter(x => x.name.toLowerCase().includes(quickFilter.toLowerCase()))
+                : units;
 
             switch (filterByVariable) {
                 case 'xenos': {
@@ -99,8 +99,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
                 case 'mows': {
                     return nameFiltered.filter(x => isMow(x));
                 }
-                case 'none':
-                default: {
+                case 'none': {
                     return nameFiltered;
                 }
             }
@@ -115,8 +114,7 @@ export const SelectTeamDialog: React.FC<Props> = ({ onClose, team, units, active
             case 'power': {
                 return orderBy(filtered, ['power'], ['desc']);
             }
-            case 'faction':
-            default: {
+            case 'faction': {
                 return filtered;
             }
         }

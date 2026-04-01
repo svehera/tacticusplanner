@@ -1,6 +1,7 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import React, { useCallback, useEffect, useMemo, useState } from 'react';
+import { uniq } from 'lodash';
+import React, { useCallback, useEffect, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 
@@ -47,9 +48,8 @@ interface Props {
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
     onRarityCapChanged: (rarity: Rarity) => void;
-    warDefenseBlockedCoreCharIds: string[];
-    warDefenseFlexCharIds: string[];
-    warDefenseFlexMowIds: string[];
+    deployedCharIds: string[];
+    deployedMowIds: string[];
 
     saveAllowed: boolean;
     saveDisallowedMessage: string | undefined;
@@ -100,9 +100,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     onMaxRankChange,
     onFactionsChange,
     onRarityCapChanged,
-    warDefenseBlockedCoreCharIds,
-    warDefenseFlexCharIds,
-    warDefenseFlexMowIds,
+    deployedCharIds,
+    deployedMowIds,
     onCancel,
     onSave,
 
@@ -149,30 +148,24 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     useEffect(() => {
         if (isDragging) {
-            window.addEventListener('mousemove', resizeGrids);
-            window.addEventListener('mouseup', stopResizing);
+            globalThis.addEventListener('mousemove', resizeGrids);
+            globalThis.addEventListener('mouseup', stopResizing);
             document.body.style.cursor = 'col-resize';
         } else {
             document.body.style.cursor = 'default';
         }
         return () => {
-            window.removeEventListener('mousemove', resizeGrids);
-            window.removeEventListener('mouseup', stopResizing);
+            globalThis.removeEventListener('mousemove', resizeGrids);
+            globalThis.removeEventListener('mouseup', stopResizing);
         };
     }, [isDragging, resizeGrids, stopResizing]);
 
-    const allFactions: FactionId[] = Array.from(
-        new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
-    ).sort((a, b) => a.localeCompare(b));
-
-    const warDefenseBlockedCoreCharIdsSet = useMemo(
-        () => new Set(warDefenseBlockedCoreCharIds),
-        [warDefenseBlockedCoreCharIds]
+    const allFactions: FactionId[] = uniq([...chars.map(c => c.faction), ...mows.map(m => m.faction)]).toSorted(
+        (a, b) => a.localeCompare(b)
     );
 
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId))
-        .filter(c => !warDefense || !warDefenseBlockedCoreCharIdsSet.has(c.snowprintId))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
@@ -185,7 +178,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                 searchText
             )
         )
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
@@ -197,7 +190,7 @@ export const AddTeamDialog: React.FC<Props> = ({
     const filteredMows = mows
         .filter(mow => !selectedMows.includes(mow.snowprintId))
         .filter(mow => Teams2Service.passesMowFilter(mow, allowLockedUnits, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
             if (powerB !== powerA) return powerB - powerA;
@@ -427,7 +420,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             onCharacterSelect={onAddChar}
                             showHeader={true}
                             zoom={zoom}
-                            deployedFlexUnitIds={warDefense ? warDefenseFlexCharIds : undefined}
+                            deployedUnitIds={deployedCharIds}
                         />
                     </div>
 
@@ -457,7 +450,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             onMowSelect={onAddMow}
                             showHeader={true}
                             zoom={zoom}
-                            deployedFlexUnitIds={warDefense ? warDefenseFlexMowIds : undefined}
+                            deployedUnitIds={deployedMowIds}
                         />
                     </div>
                 </div>

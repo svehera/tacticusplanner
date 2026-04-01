@@ -8,6 +8,7 @@ import PendingIcon from '@mui/icons-material/Pending';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
+import { sum } from 'lodash';
 import React, { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -86,18 +87,18 @@ export const RaidsPlan: React.FC<Props> = ({
     const characterToMaterialMap: CharacterToMaterialIndexMap = useMemo(() => {
         const characterIndexMap: CharacterToMaterialIndexMap = {};
 
-        estimatedRanks.inProgressMaterials.forEach((material, materialIndex) => {
+        for (const [materialIndex, material] of estimatedRanks.inProgressMaterials.entries()) {
             // Iterate over the related characters for the current material
-            material.relatedCharacters.forEach(fullName => {
+            for (const fullName of material.relatedCharacters) {
                 const unit = CharactersService.getUnit(fullName);
-                if (!unit || !unit.snowprintId) return;
+                if (!unit || !unit.snowprintId) continue;
                 // Check if this snowprintId has ALREADY been recorded.
                 // If it hasn't, this is the FIRST time we've seen it, so record the index.
                 if (!(unit.snowprintId in characterIndexMap)) {
                     characterIndexMap[unit.snowprintId] = materialIndex;
                 }
-            });
-        });
+            }
+        }
 
         return characterIndexMap;
     }, [estimatedRanks.inProgressMaterials]);
@@ -160,7 +161,17 @@ export const RaidsPlan: React.FC<Props> = ({
     }, [estimatedRanks.upgradesRaids.length]);
 
     const daysTotal = estimatedRanks.daysTotal;
-    const energyTotal = estimatedRanks.energyTotal;
+
+    const energyTotal = useMemo(() => {
+        const todayRaids = estimatedRanks.upgradesRaids[0]?.raids ?? [];
+        const energyAlreadySpentToday = sum(
+            todayRaids.map(raid =>
+                sum(raid.raidLocations.map(location => location.raidsAlreadyPerformed * location.energyCost))
+            )
+        );
+
+        return Math.max(0, estimatedRanks.energyTotal - energyAlreadySpentToday);
+    }, [estimatedRanks.energyTotal, estimatedRanks.upgradesRaids]);
 
     const calendarDateTotal: string = useMemo(() => {
         const nextDate = new Date();
@@ -257,17 +268,11 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto p-2">
                                         {estimatedRanks.inProgressMaterials.length > 0 &&
                                             estimatedRanks.inProgressMaterials.map((material, index) => (
-                                                <div
-                                                    className="item-raids w-64"
-                                                    key={index}
-                                                    ref={setCardReference(index)}>
+                                                <div key={index} ref={setCardReference(index)}>
                                                     <RaidUpgradeMaterialCard
+                                                        key={index}
                                                         index={index}
-                                                        upgradeMaterialSnowprintId={material.id}
-                                                        currentQuantity={material.acquiredCount}
-                                                        desiredQuantity={material.requiredCount}
-                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                        locations={material.locations}
+                                                        upgradeEstimate={material}
                                                     />
                                                 </div>
                                             ))}
@@ -303,16 +308,12 @@ export const RaidsPlan: React.FC<Props> = ({
                                     <div className="flex max-h-[600px] w-full flex-wrap gap-1 p-2">
                                         <div className="flex flex-wrap gap-x-4 gap-y-4">
                                             {estimatedRanks.finishedMaterials.map((material, index) => (
-                                                <div className="item-raids w-64" key={index}>
-                                                    <RaidUpgradeMaterialCard
-                                                        index={index}
-                                                        upgradeMaterialSnowprintId={material.id}
-                                                        currentQuantity={material.acquiredCount}
-                                                        desiredQuantity={material.requiredCount}
-                                                        relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                        locations={material.locations}
-                                                    />
-                                                </div>
+                                                <RaidUpgradeMaterialCard
+                                                    key={index}
+                                                    index={index}
+                                                    upgradeEstimate={material}
+                                                    showAdditionalInfo={false}
+                                                />
                                             ))}
                                         </div>
                                     </div>
@@ -344,7 +345,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     items listed in the table below
                                 </div>
 
-                                <div className="flex-grow">
+                                <div className="grow">
                                     {viewPreferences.raidsTableView === true ? (
                                         <div className="ag-theme-material flex h-[600px] w-full flex-col">
                                             <MaterialsTable
@@ -358,16 +359,12 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <div className="flex max-h-[600px] w-full flex-wrap gap-1 overflow-y-scroll p-2">
                                             <div className="flex flex-wrap gap-x-4 gap-y-4">
                                                 {estimatedRanks.blockedMaterials.map((material, index) => (
-                                                    <div className="item-raids w-64" key={index}>
-                                                        <RaidUpgradeMaterialCard
-                                                            index={index}
-                                                            upgradeMaterialSnowprintId={material.id}
-                                                            currentQuantity={material.acquiredCount}
-                                                            desiredQuantity={material.requiredCount}
-                                                            relatedCharacterSnowprintIds={material.relatedCharacters}
-                                                            locations={material.locations}
-                                                        />
-                                                    </div>
+                                                    <RaidUpgradeMaterialCard
+                                                        key={index}
+                                                        index={index}
+                                                        upgradeEstimate={material}
+                                                        showAdditionalInfo={false}
+                                                    />
                                                 ))}
                                             </div>
                                         </div>
@@ -394,8 +391,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                         <MiscIcon icon={'energy'} height={15} width={15} /> Days |
                                     </span>
                                     <span>
-                                        <b>{estimatedRanks.energyTotal}</b>{' '}
-                                        <MiscIcon icon={'energy'} height={15} width={15} /> |
+                                        <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} /> |
                                     </span>
                                     <span>
                                         <b>{estimatedRanks.raidsTotal}</b> Raids)

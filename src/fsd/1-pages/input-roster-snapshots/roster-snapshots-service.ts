@@ -462,25 +462,7 @@ export class RosterSnapshotsService {
 
         for (const char of compare.chars) {
             const baseChar = base.chars.find(c => c.id === char.id);
-            if (!baseChar) {
-                charDiffs.push({
-                    active: char.activeAbilityLevel,
-                    passive: char.passiveAbilityLevel,
-                    id: char.id,
-                    rank: char.rank,
-                    rarity: char.rarity,
-                    stars: char.stars,
-                    shards: char.shards,
-                    mythicShards: char.mythicShards,
-                    xpLevel: char.xpLevel,
-                    equip0: char.equip0?.id,
-                    equip1: char.equip1?.id,
-                    equip2: char.equip2?.id,
-                    equip0Level: char.equip0Level,
-                    equip1Level: char.equip1Level,
-                    equip2Level: char.equip2Level,
-                });
-            } else {
+            if (baseChar) {
                 const fixedChar = cloneDeep(char);
                 if (!diffShards) fixedChar.shards = baseChar.shards;
                 if (!diffMythicShards) fixedChar.mythicShards = baseChar.mythicShards;
@@ -498,23 +480,30 @@ export class RosterSnapshotsService {
                     // If only id is present, no changes.
                     charDiffs.push(diff);
                 }
+            } else {
+                charDiffs.push({
+                    active: char.activeAbilityLevel,
+                    passive: char.passiveAbilityLevel,
+                    id: char.id,
+                    rank: char.rank,
+                    rarity: char.rarity,
+                    stars: char.stars,
+                    shards: char.shards,
+                    mythicShards: char.mythicShards,
+                    xpLevel: char.xpLevel,
+                    equip0: char.equip0?.id,
+                    equip1: char.equip1?.id,
+                    equip2: char.equip2?.id,
+                    equip0Level: char.equip0Level,
+                    equip1Level: char.equip1Level,
+                    equip2Level: char.equip2Level,
+                });
             }
         }
 
         for (const mow of compare.mows) {
             const baseMow = base.mows.find(m => m.id === mow.id);
-            if (!baseMow) {
-                mowDiffs.push({
-                    id: mow.id,
-                    rarity: mow.rarity,
-                    stars: mow.stars,
-                    active: mow.primaryAbilityLevel,
-                    passive: mow.secondaryAbilityLevel,
-                    shards: mow.shards,
-                    mythicShards: mow.mythicShards,
-                    locked: mow.locked,
-                });
-            } else {
+            if (baseMow) {
                 const fixedMow = cloneDeep(mow);
                 if (!diffShards) fixedMow.shards = baseMow.shards;
                 if (!diffMythicShards) fixedMow.mythicShards = baseMow.mythicShards;
@@ -530,6 +519,17 @@ export class RosterSnapshotsService {
                 ) {
                     mowDiffs.push(diff);
                 }
+            } else {
+                mowDiffs.push({
+                    id: mow.id,
+                    rarity: mow.rarity,
+                    stars: mow.stars,
+                    active: mow.primaryAbilityLevel,
+                    passive: mow.secondaryAbilityLevel,
+                    shards: mow.shards,
+                    mythicShards: mow.mythicShards,
+                    locked: mow.locked,
+                });
             }
         }
 
@@ -575,7 +575,7 @@ export class RosterSnapshotsService {
                 originalIndex: index,
             }))
             .filter(item => item.snapshot.deletedDateMillisUtc !== undefined)
-            .sort((a, b) => a.snapshot.deletedDateMillisUtc! - b.snapshot.deletedDateMillisUtc!);
+            .toSorted((a, b) => a.snapshot.deletedDateMillisUtc! - b.snapshot.deletedDateMillisUtc!);
 
         const snapshotsToDeleteCount =
             deletedSnapshotsWithIndices.length - RosterSnapshotsService.MAX_DELETED_SNAPSHOTS;

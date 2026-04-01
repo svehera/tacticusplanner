@@ -45,11 +45,31 @@ export const WarDefense2 = () => {
 
     const handleSelectedTeam = (index: number, teamName: string) => {
         const newDefense = cloneDeep(warDefense2);
-        if (index === 0) newDefense.team1Name = teamName;
-        else if (index === 1) newDefense.team2Name = teamName;
-        else if (index === 2) newDefense.team3Name = teamName;
-        else if (index === 3) newDefense.team4Name = teamName;
-        else if (index === 4) newDefense.team5Name = teamName;
+        switch (index) {
+            case 0: {
+                newDefense.team1Name = teamName;
+                break;
+            }
+            case 1: {
+                newDefense.team2Name = teamName;
+                break;
+            }
+            case 2: {
+                newDefense.team3Name = teamName;
+                break;
+            }
+            case 3: {
+                newDefense.team4Name = teamName;
+                break;
+            }
+            case 4: {
+                {
+                    newDefense.team5Name = teamName;
+                    // No default
+                }
+                break;
+            }
+        }
         dispatch.warDefense2({ type: 'Set', value: newDefense });
     };
 

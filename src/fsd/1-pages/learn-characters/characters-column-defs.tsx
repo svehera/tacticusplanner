@@ -126,7 +126,7 @@ export const useCharacters = () => {
                             const character = props.data;
                             return character ? (
                                 <CharacterTitle character={character} imageSize={30} hideRarity hideRank />
-                            ) : null;
+                            ) : undefined;
                         },
                     },
                     {

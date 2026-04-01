@@ -105,7 +105,7 @@ export const LearnCharacters = () => {
         const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
             params.delete(name);
-            value.forEach(v => params.append(name, String(v)));
+            for (const v of value) params.append(name, String(v));
         } else if (value === '' || value === false) {
             params.delete(name);
         } else {
@@ -126,15 +126,15 @@ export const LearnCharacters = () => {
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const movementOptions = uniq(resolvedCharacters.map(x => x.movement))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const distanceOptions = uniq(resolvedCharacters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
@@ -142,9 +142,9 @@ export const LearnCharacters = () => {
     const traitsOptions = useMemo(() => {
         const activeTraits = new Set<string>();
 
-        resolvedCharacters.forEach(c => {
-            c.traits?.forEach(t => activeTraits.add(t));
-        });
+        for (const c of resolvedCharacters) {
+            if (c.traits) for (const t of c.traits) activeTraits.add(t);
+        }
 
         return Object.values(Trait).filter(label => {
             const key = getTraitStringFromLabel(label);
@@ -228,16 +228,12 @@ export const LearnCharacters = () => {
                 return filter.traits.every(label => {
                     const key = getTraitStringFromLabel(label);
                     if (!key) return false;
-                    if (key !== 'Mechanical') {
-                        const includes = nodeTraits.includes(key);
-                        return includes;
-                    } else {
-                        const includesMech = nodeTraits.includes('Mechanical');
-                        const includesLiving = nodeTraits.includes('LivingMetal');
-                        const result = includesMech || includesLiving;
+                    if (key !== 'Mechanical') return nodeTraits.includes(key);
+                    const includesMech = nodeTraits.includes('Mechanical');
+                    const includesLiving = nodeTraits.includes('LivingMetal');
+                    const result = includesMech || includesLiving;
 
-                        return result;
-                    }
+                    return result;
                 });
             };
 

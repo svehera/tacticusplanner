@@ -38,7 +38,9 @@ function stringToColor(string: string) {
     let index;
 
     for (index = 0; index < string.length; index += 1) {
-        hash = string.charCodeAt(index) + ((hash << 5) - hash);
+        const character = string.codePointAt(index);
+        if (!character) throw new Error('invalid codePoint');
+        hash = character + ((hash << 5) - hash);
     }
 
     let color = '#';
@@ -109,32 +111,36 @@ export const UserMenu = () => {
         navigate(url);
     };
 
-    const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
         if (file) {
-            const reader = new FileReader();
+            try {
+                const content = await file.text();
+                const personalData: IPersonalData2 = convertData(JSON.parse(content));
+                personalData.modifiedDate = new Date();
 
-            reader.onload = (event: ProgressEvent<FileReader>) => {
-                try {
-                    const content = event.target?.result as string;
-                    const personalData: IPersonalData2 = convertData(JSON.parse(content));
-                    personalData.modifiedDate = new Date();
-
-                    dispatch.setStore(new GlobalState(personalData), true, false);
-                    enqueueSnackbar('Import successful', { variant: 'success' });
-                } catch (_error) {
-                    enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
-                }
-            };
-
-            reader.readAsText(file);
+                // When we import JSON, we need to bump the local version to ensure
+                // we pick it up. It should always be considered the freshest data, and
+                // definitely fresher than what we have in the backend.
+                dispatch.setStore(
+                    {
+                        ...new GlobalState(personalData),
+                        __localVersion: store.__localVersion ? store.__localVersion + 1 : 1,
+                    },
+                    /*modified=*/ true,
+                    /*reset=*/ false
+                );
+                enqueueSnackbar('Import successful', { variant: 'success' });
+            } catch {
+                enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
+            }
         }
     };
 
     const downloadJson = () => {
         const data = GlobalState.toStore(store);
-        const jsonData = JSON.stringify(data, null, 2);
+        const jsonData = JSON.stringify(data, undefined, 2);
 
         const blob = new Blob([jsonData], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -164,10 +170,10 @@ export const UserMenu = () => {
     const restoreData = () => {
         const localStorage = new PersonalDataLocalStorage();
         const restoredData = localStorage.restoreData();
-        if (!restoredData) {
-            enqueueSnackbar('No Backup Found', { variant: 'error' });
-        } else {
+        if (restoredData) {
             setShowRestoreBackup(true);
+        } else {
+            enqueueSnackbar('No Backup Found', { variant: 'error' });
         }
     };
 
@@ -216,7 +222,14 @@ export const UserMenu = () => {
                 onClick={userMenuControls.handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                {!isAuthenticated ? (
+                {isAuthenticated ? (
+                    <MenuItem onClick={() => logout()}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
+                    </MenuItem>
+                ) : (
                     <div>
                         <MenuItem onClick={() => openLoginForm()}>
                             <ListItemIcon>
@@ -231,13 +244,6 @@ export const UserMenu = () => {
                             <ListItemText>Register</ListItemText>
                         </MenuItem>
                     </div>
-                ) : (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
                 )}
 
                 <Divider />

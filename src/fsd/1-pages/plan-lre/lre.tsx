@@ -4,7 +4,7 @@ import SettingsIcon from '@mui/icons-material/Settings';
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { Switch, Tab, Tabs } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useContext, useMemo } from 'react';
+import React, { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -31,11 +31,52 @@ import { LegendaryEvent } from './legendary-event';
 import { LegendaryEventSettings } from './legendary-event-settings';
 import { useLre } from './lre-hook';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
-import { LreSectionsSettings } from './lre-sections-settings';
+import { ILreSectionVisibilitySettings, LreSectionsSettings } from './lre-sections-settings';
 import { LreSettings } from './lre-settings';
 import { LreSection } from './lre.models';
 import PointsTable from './points-table';
 import { TokenDisplay, TokenEstimationService, TokenUse } from './token-estimation-service';
+
+const lreSectionsVisibilityStorageKey = 'tp-lre-sections-visibility';
+
+const defaultLreSectionsVisibility = (): ILreSectionVisibilitySettings =>
+    isMobile
+        ? {
+              showAlpha: true,
+              showBeta: false,
+              showGamma: false,
+          }
+        : {
+              showAlpha: true,
+              showBeta: true,
+              showGamma: true,
+          };
+
+const getStoredLreSectionsVisibility = (): ILreSectionVisibilitySettings => {
+    const defaults = defaultLreSectionsVisibility();
+    const raw = localStorage.getItem(lreSectionsVisibilityStorageKey);
+
+    if (!raw) {
+        return defaults;
+    }
+
+    try {
+        const parsed = JSON.parse(raw) as Partial<ILreSectionVisibilitySettings>;
+        const result: ILreSectionVisibilitySettings = {
+            showAlpha: typeof parsed.showAlpha === 'boolean' ? parsed.showAlpha : defaults.showAlpha,
+            showBeta: typeof parsed.showBeta === 'boolean' ? parsed.showBeta : defaults.showBeta,
+            showGamma: typeof parsed.showGamma === 'boolean' ? parsed.showGamma : defaults.showGamma,
+        };
+
+        if (!result.showAlpha && !result.showBeta && !result.showGamma) {
+            return defaults;
+        }
+
+        return result;
+    } catch {
+        return defaults;
+    }
+};
 
 export const Lre: React.FC = () => {
     const { leSelectedTeams, leSettings, viewPreferences, autoTeamsPreferences, characters, mows, goals } =
@@ -43,9 +84,27 @@ export const Lre: React.FC = () => {
     const { legendaryEvent, section, showSettings, openSettings, closeSettings, changeTab } = useLre();
     const { model, createNewModel, updateDto } = useLreProgress(legendaryEvent);
     const dispatch = useContext(DispatchContext);
-    const updatePreferencesOption = (setting: keyof ILreViewSettings, value: boolean) => {
-        dispatch.viewPreferences({ type: 'Update', setting, value });
-    };
+    const [sectionVisibility, setSectionVisibility] =
+        useState<ILreSectionVisibilitySettings>(getStoredLreSectionsVisibility);
+
+    useEffect(() => {
+        localStorage.setItem(lreSectionsVisibilityStorageKey, JSON.stringify(sectionVisibility));
+    }, [sectionVisibility]);
+
+    const updateSectionVisibility = useCallback((setting: keyof ILreSectionVisibilitySettings, value: boolean) => {
+        setSectionVisibility(current => {
+            const next = {
+                ...current,
+                [setting]: value,
+            };
+
+            if (!next.showAlpha && !next.showBeta && !next.showGamma) {
+                return current;
+            }
+
+            return next;
+        });
+    }, []);
 
     const resolvedCharacters = CharactersService.resolveStoredCharacters(characters);
     const resolvedMows = MowsService.resolveAllFromStorage(mows);
@@ -158,7 +217,13 @@ export const Lre: React.FC = () => {
     const renderTabContent = () => {
         switch (section) {
             case LreSection.teams: {
-                return <LegendaryEvent legendaryEvent={legendaryEvent} upgradeRankOrMowGoals={upgradeRankOrMowGoals} />;
+                return (
+                    <LegendaryEvent
+                        legendaryEvent={legendaryEvent}
+                        upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        sectionVisibility={sectionVisibility}
+                    />
+                );
             }
             case LreSection.progress: {
                 return <LeProgress legendaryEvent={legendaryEvent} progress={progress} />;
@@ -223,7 +288,7 @@ export const Lre: React.FC = () => {
                 </Tabs>
                 {[LreSection.teams].includes(section) && (
                     <>
-                        <LreSectionsSettings lreViewSettings={viewPreferences} save={updatePreferencesOption} />
+                        <LreSectionsSettings sectionVisibility={sectionVisibility} save={updateSectionVisibility} />
                     </>
                 )}
 
@@ -234,7 +299,7 @@ export const Lre: React.FC = () => {
                             <Switch checked={viewPreferences.lreGoalsPreview} />
                         </div>
                         <div className="flex-box" onClick={toggleView}>
-                            <TableRowsIcon color={!viewPreferences.lreGridView ? 'primary' : 'disabled'} />
+                            <TableRowsIcon color={viewPreferences.lreGridView ? 'disabled' : 'primary'} />
                             <Switch checked={viewPreferences.lreGridView} />
                             <GridViewIcon color={viewPreferences.lreGridView ? 'primary' : 'disabled'} />
                         </div>

@@ -27,7 +27,7 @@ function getRank(rank: number): Rank {
 function formatShardCount(count: number): string {
     if (count < 0) return '0';
     if (count < 1000) return count.toString();
-    if (count < 10000) return `${Math.floor(count / 1000)}k`;
+    if (count < 10_000) return `${Math.floor(count / 1000)}k`;
     return '>10k';
 }
 
@@ -143,9 +143,7 @@ export const RosterSnapshotCharacter = ({
             return <div style={{ width: equipmentHeight, height: equipmentHeight }} />;
         }
 
-        const imageUrl = getImageUrl(
-            `snowprint_assets/equipment/ui_icon_itemtype_${type?.substring(2).toLowerCase()}.png`
-        );
+        const imageUrl = getImageUrl(`snowprint_assets/equipment/ui_icon_itemtype_${type?.slice(2).toLowerCase()}.png`);
 
         return (
             <div className="relative" style={{ width: equipmentHeight, height: equipmentHeight }}>
@@ -237,7 +235,7 @@ export const RosterSnapshotCharacter = ({
             { equip: char?.equip0, level: char?.equip0Level, type: char?.equip0?.type ?? charData?.equipment1 },
             { equip: char?.equip1, level: char?.equip1Level, type: char?.equip1?.type ?? charData?.equipment2 },
             { equip: char?.equip2, level: char?.equip2Level, type: char?.equip2?.type ?? charData?.equipment3 },
-        ].sort(
+        ].toSorted(
             (a, b) =>
                 (typeOrder[a.type ?? ''] ?? Number.MAX_SAFE_INTEGER) -
                 (typeOrder[b.type ?? ''] ?? Number.MAX_SAFE_INTEGER)

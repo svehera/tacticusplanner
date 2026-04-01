@@ -73,11 +73,11 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
     };
 
     const isValid = () => {
-        const availableCharacters = gridTeam.map(x => x.snowprintId);
+        const availableCharacters = new Set(gridTeam.map(x => x.snowprintId));
         return (
             selectedTeam.length > 0 &&
             teamName.length > 0 &&
-            selectedTeam.every(character => availableCharacters.includes(character))
+            selectedTeam.every(character => availableCharacters.has(character))
         );
     };
 
@@ -108,8 +108,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                             // allow empty or numeric input only
                             if (/^\d*$/.test(v)) {
                                 setExpectedBattleClearsInput(v);
-                                const parsed = parseInt(v, 10);
-                                if (!isNaN(parsed)) {
+                                const parsed = Number.parseInt(v, 10);
+                                if (!Number.isNaN(parsed)) {
                                     setExpectedBattleClears(clampExpectedBattles(parsed));
                                 }
                             }
@@ -120,8 +120,8 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                 const clamped = clampExpectedBattles(expectedBattleClears);
                                 setExpectedBattleClearsInput(clamped.toString());
                             } else {
-                                const parsed = parseInt(expectedBattleClearsInput, 10);
-                                const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                const parsed = Number.parseInt(expectedBattleClearsInput, 10);
+                                const final = Number.isNaN(parsed) ? expectedBattleClears : parsed;
                                 const clamped = clampExpectedBattles(final);
                                 setExpectedBattleClears(clamped);
                                 setExpectedBattleClearsInput(clamped.toString());
@@ -184,7 +184,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                     key={character.id}
                                     onClick={() => addCharacter(character)}
                                     style={{
-                                        opacity: selectedTeam.some(x => x === character.snowprintId) ? 0.3 : 1,
+                                        opacity: selectedTeam.includes(character.snowprintId) ? 0.3 : 1,
                                     }}
                                     className="flex-box gap5 pointer w-[350px]">
                                     <AddIcon />

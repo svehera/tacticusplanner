@@ -38,12 +38,14 @@ export class GoalService {
             { r: 0, g: 255, b: 0, a: 0.25 },
             { r: 255, g: 255, b: 0, a: 0.25 },
             { r: 255, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.25 },
+            { r: 0, g: 0, b: 0, a: 0.08 },
+            { r: 0, g: 0, b: 0, a: 0.08 },
         ];
         if (goalEstimate !== undefined) {
             if (!goalEstimate.daysLeft) {
-                return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+                const colorObject = kBgColors.at(-1);
+                if (!colorObject) throw new Error('missing colors');
+                return GoalService.getColorString(colorObject);
             }
 
             if (goalsColorCoding === 'Battle Pass Season') {
@@ -70,7 +72,7 @@ export class GoalService {
                 }
             } else if (goalsColorCoding === 'Guild Raid Season') {
                 const daysPerRaidSeason = 14;
-                const raidSeasonStart = 1764738000000; // Arbitrary start of a past season (in milliseconds)
+                const raidSeasonStart = 1_764_738_000_000; // Arbitrary start of a past season (in milliseconds)
 
                 const nextDate = new Date();
                 nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1); // Subtracting 1 day from daysLeft is common for 'time remaining'
@@ -83,7 +85,7 @@ export class GoalService {
 
                 const nextDateSeasonIndex = Math.max(0, Math.floor(msDifference / msPerRaidSeason));
 
-                const currentMs = new Date().getTime();
+                const currentMs = Date.now();
                 const msDifferenceCurrent = currentMs - raidSeasonStart;
                 const currentSeasonIndex = Math.floor(msDifferenceCurrent / msPerRaidSeason);
 
@@ -94,6 +96,8 @@ export class GoalService {
                 );
             }
         }
-        return GoalService.getColorString(kBgColors[kBgColors.length - 1]);
+        const colorObject = kBgColors.at(-1);
+        if (!colorObject) throw new Error('missing colors');
+        return GoalService.getColorString(colorObject);
     }
 }

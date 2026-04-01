@@ -3,7 +3,7 @@ import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import Button from '@mui/material/Button';
-import { sum } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 import { Grid2x2Check, Info } from 'lucide-react';
 import React, { useState, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -60,21 +60,19 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
     const projectedRestrictions = useMemo(() => {
         const battleRestrictions = new Map<number, Set<string>>();
 
-        teams
-            .filter(team => team.section === track.trackId)
-            .forEach(team => {
-                const clears = team.expectedBattleClears ?? 0;
-                // For each battle this team is expected to clear
-                for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
-                    if (!battleRestrictions.has(battleIndex)) {
-                        battleRestrictions.set(battleIndex, new Set());
-                    }
-                    // Add all restrictions this team can clear
-                    team.restrictionsIds.forEach(restrictionId => {
-                        battleRestrictions.get(battleIndex)!.add(restrictionId);
-                    });
+        for (const team of teams.filter(team => team.section === track.trackId)) {
+            const clears = team.expectedBattleClears ?? 0;
+            // For each battle this team is expected to clear
+            for (let battleIndex = 0; battleIndex < clears && battleIndex < track.battles.length; battleIndex++) {
+                if (!battleRestrictions.has(battleIndex)) {
+                    battleRestrictions.set(battleIndex, new Set());
                 }
-            });
+                // Add all restrictions this team can clear
+                for (const restrictionId of team.restrictionsIds) {
+                    battleRestrictions.get(battleIndex)!.add(restrictionId);
+                }
+            }
+        }
 
         return battleRestrictions;
     }, [teams, track.trackId, track.battles.length]);
@@ -149,12 +147,12 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                 ? RequirementStatus.NotCleared
                 : RequirementStatus.Cleared;
 
-        let leModel = model;
-        track.battles.forEach(battle => {
-            battle.requirementsProgress.forEach(requirement => {
+        let leModel = cloneDeep(model);
+        for (const battle of track.battles) {
+            for (const requirement of battle.requirementsProgress) {
                 leModel = createNewModel(leModel, track.trackId, battle.battleIndex, requirement.id, status);
-            });
-        });
+            }
+        }
         updateDto(leModel);
     };
 
@@ -248,7 +246,13 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
                                 setState={(requirement, status) =>
                                     updateDto(
-                                        createNewModel(model, track.trackId, battle.battleIndex, requirement.id, status)
+                                        createNewModel(
+                                            { ...model, syncedProgress: undefined },
+                                            track.trackId,
+                                            battle.battleIndex,
+                                            requirement.id,
+                                            status
+                                        )
                                     )
                                 }
                             />

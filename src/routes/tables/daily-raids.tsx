@@ -27,14 +27,14 @@ function addShardsToUpgrades(
     mows: IUnit[]
 ): Record<string, number> {
     const newUpgrades = cloneDeep(upgrades);
-    characters.forEach(char => {
+    for (const char of characters) {
         newUpgrades['shards_' + char.snowprintId] = char.shards;
         newUpgrades['mythicShards_' + char.snowprintId] = char.mythicShards;
-    });
-    mows.forEach(mow => {
+    }
+    for (const mow of mows) {
         newUpgrades['shards_' + mow.snowprintId] = mow.shards;
         newUpgrades['mythicShards_' + mow.snowprintId] = mow.mythicShards;
-    });
+    }
     return newUpgrades;
 }
 
@@ -69,10 +69,12 @@ export const DailyRaids = () => {
 
     const location = useLocation();
     const [searchParams] = useSearchParams();
-    const [charSnowprintId, setCharSnowprintId] = useState<string | null>(searchParams.get('charSnowprintId'));
+    const [charSnowprintId, setCharSnowprintId] = useState<string | undefined>(
+        searchParams.get('charSnowprintId') ?? undefined
+    );
 
     useEffect(() => {
-        setCharSnowprintId(searchParams.get('charSnowprintId'));
+        setCharSnowprintId(searchParams.get('charSnowprintId') ?? undefined);
     }, [location]);
 
     const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
@@ -130,7 +132,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,
@@ -148,7 +151,7 @@ export const DailyRaids = () => {
     const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
         return UpgradesService.getUpgradesEstimatedDays(
             {
-                dailyEnergy: 88888888,
+                dailyEnergy: 88_888_888,
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
@@ -158,7 +161,8 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
-            ...[...upgradeRankOrMowGoals, ...shardsGoals]
+            ...upgradeRankOrMowGoals,
+            ...shardsGoals
         );
     }, [
         dailyRaidsPreferences.dailyEnergy,

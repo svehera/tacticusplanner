@@ -66,7 +66,7 @@ export class NpcService {
                 return 0.15;
             }
             case DamageType.Direct: {
-                return 1.0;
+                return 1;
             }
             case DamageType.Energy: {
                 return 0.3;
@@ -111,7 +111,7 @@ export class NpcService {
                 return 0.2;
             }
             case DamageType.Psychic: {
-                return 1.0;
+                return 1;
             }
             case DamageType.Toxic: {
                 return 0.7;
@@ -125,9 +125,9 @@ export class NpcService {
     /**
      * Maps a game trait name to its corresponding icon file name.
      * @param traitName The name of the trait (e.g., "ActOfFaith", "BeastSnagga").
-     * @returns The icon name (e.g., "act_of_faith", "beast_snagga") or null if no match is found.
+     * @returns The icon name (e.g., "act_of_faith", "beast_snagga") or undefined if no match is found.
      */
-    public static getTraitIcon(traitName: string): string | null {
+    public static getTraitIcon(traitName: string): string | undefined {
         // Standardize the input trait name to handle various casing styles
         // before checking the map.
         const key = traitName.toLowerCase();

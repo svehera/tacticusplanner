@@ -39,7 +39,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
         originalRank: rank,
     });
 
-    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLButtonElement>();
     const [updateInventory, setUpdateInventory] = React.useState<boolean>(true);
 
     const handleClick = (event: React.UIEvent<HTMLButtonElement>) => {
@@ -47,7 +47,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
     };
 
     const handleClose = () => {
-        setAnchorElement(null);
+        setAnchorElement(undefined);
     };
 
     const open = Boolean(anchorElement);
@@ -254,9 +254,7 @@ export const CharacterUpgrades: React.FC<Props> = ({ upgradesChanges, upgrades, 
                                     />
                                 )}{' '}
                                 {inventory.upgrades[x.snowprintId] ?? 0} - {inventoryUpdate[x.snowprintId]} ={' '}
-                                {(inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId] < 0
-                                    ? 0
-                                    : (inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId]}
+                                {Math.max((inventory.upgrades[x.snowprintId] ?? 0) - inventoryUpdate[x.snowprintId], 0)}
                             </li>
                         ))}
                     </ul>

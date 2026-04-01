@@ -97,7 +97,7 @@ export const LeTokenomics: React.FC<Props> = ({
     };
 
     // Find the first token that doesn't have yellow/red restrictions
-    const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token)) ?? null;
+    const firstToken = tokenDisplays.find(token => !hasWarningRestrictions(token));
     const firstTokenIndex = firstToken ? tokenDisplays.indexOf(firstToken) : -1;
 
     const totalFreeTokensRemainingInIteration = LeTokenService.getFreeTokensRemainingInIteration(
@@ -137,7 +137,7 @@ export const LeTokenomics: React.FC<Props> = ({
         if (model.syncedProgress === undefined) return true;
         if (model.syncedProgress.nextTokenMillisUtc === undefined) return false;
         if (Date.now() < nextEventDateUtc.getTime()) return false;
-        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86400 * 1000) return false;
+        if (Date.now() > nextEventDateUtc.getTime() + 7 * 86_400 * 1000) return false;
         // It's been long enough for a token to regenerate, so either the token count is wrong or
         // the tokenomics data is wrong (most likely).
         return Date.now() - model.syncedProgress.lastUpdateMillisUtc > 3 * 3600 * 1000;

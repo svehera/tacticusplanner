@@ -16,7 +16,7 @@ export const routes = createBrowserRouter([
                 <>
                     <h1>Uh oh!</h1>
                     <p>Something went wrong! Probably the app was updated.</p>
-                    <button onClick={() => window.location.reload()}>Click here to reload the page</button>
+                    <button onClick={() => globalThis.location.reload()}>Click here to reload the page</button>
                 </>
             );
         },

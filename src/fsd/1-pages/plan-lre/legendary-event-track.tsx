@@ -9,8 +9,8 @@ import { LreTrackId, LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import {
     ILegendaryEvent,
-    ILegendaryEventSelectedRequirements,
     ILegendaryEventTrack,
+    IRequirementProgress,
     ILreTeam,
     RequirementStatus,
 } from '@/fsd/3-features/lre';
@@ -28,6 +28,14 @@ interface Props {
     editTeam: (team: ILreTeam) => void;
     deleteTeam: (teamId: string) => void;
     progress: Record<string, number>;
+    selectedRequirementsSection: Record<string, boolean | IRequirementProgress>;
+    updateRestrictionSelection: (
+        eventId: LegendaryEventEnum,
+        section: LreTrackId,
+        restrictionName: string,
+        selected: boolean
+    ) => void;
+    clearSectionSelection: (eventId: LegendaryEventEnum, section: LreTrackId) => void;
 }
 
 export const LegendaryEventTrack: React.FC<Props> = ({
@@ -40,54 +48,40 @@ export const LegendaryEventTrack: React.FC<Props> = ({
     autoAddTeam,
     editTeam,
     deleteTeam,
+    selectedRequirementsSection,
+    updateRestrictionSelection,
+    clearSectionSelection,
 }) => {
-    const { viewPreferences, leSelectedRequirements } = useContext(StoreContext);
-
-    if (viewPreferences.hideCompleted) {
-        track.unitsRestrictions.forEach(restriction => {
-            restriction.hide = progress[restriction.name] === legendaryEvent.battlesCount;
-        });
-    }
+    const { viewPreferences } = useContext(StoreContext);
 
     const restrictions = useMemo(() => {
-        const event: ILegendaryEventSelectedRequirements = leSelectedRequirements[track.eventId] ?? {
-            id: track.eventId,
-            name: LegendaryEventEnum[track.eventId],
-            alpha: {},
-            beta: {},
-            gamma: {},
-        };
-        const section = event[track.section];
         const result: string[] = [];
 
-        track.unitsRestrictions
-            .filter(x => !x.hide)
-            .forEach(x => {
-                const saved = section[x.name];
-                let selected: boolean;
+        for (const x of track.unitsRestrictions.filter(x => !x.hide)) {
+            const saved = selectedRequirementsSection[x.name];
+            let selected: boolean;
 
-                if (saved === undefined) {
-                    // Not set, use default
-                    selected = x.selected ?? false;
-                } else if (typeof saved === 'boolean') {
-                    // Legacy boolean format
-                    selected = saved;
-                } else if (typeof saved === 'object' && 'status' in saved) {
-                    // New IRequirementProgress format - only Cleared (1) and PartiallyCleared (4) count as "selected"
-                    selected =
-                        saved.status === RequirementStatus.Cleared ||
-                        saved.status === RequirementStatus.PartiallyCleared;
-                } else {
-                    selected = false;
-                }
+            if (saved === undefined) {
+                // Not set, use default
+                selected = x.selected ?? false;
+            } else if (typeof saved === 'boolean') {
+                // Legacy boolean format
+                selected = saved;
+            } else if (typeof saved === 'object' && 'status' in saved) {
+                // New IRequirementProgress format - only Cleared (1) and PartiallyCleared (4) count as "selected"
+                selected =
+                    saved.status === RequirementStatus.Cleared || saved.status === RequirementStatus.PartiallyCleared;
+            } else {
+                selected = false;
+            }
 
-                if (selected) {
-                    result.push(x.name);
-                }
-            });
+            if (selected) {
+                result.push(x.name);
+            }
+        }
 
         return result;
-    }, [leSelectedRequirements]);
+    }, [selectedRequirementsSection, track.unitsRestrictions]);
 
     return viewPreferences.lreGridView ? (
         <div className="flex-1">
@@ -101,6 +95,7 @@ export const LegendaryEventTrack: React.FC<Props> = ({
                 deleteTeam={deleteTeam}
                 progress={progress}
                 restrictions={restrictions}
+                updateRestrictionSelection={updateRestrictionSelection}
             />
         </div>
     ) : (
@@ -115,6 +110,8 @@ export const LegendaryEventTrack: React.FC<Props> = ({
                 editTeam={editTeam}
                 progress={progress}
                 restrictions={restrictions}
+                updateRestrictionSelection={updateRestrictionSelection}
+                clearSectionSelection={clearSectionSelection}
             />
         </div>
     );

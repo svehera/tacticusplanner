@@ -1,4 +1,3 @@
-import { Card, CardContent, CardHeader } from '@mui/material';
 import React, { useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -24,7 +23,7 @@ interface Props {
 
 export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
     // 1. Add State for the modal
-    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData | null>(null);
+    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData>();
 
     /**
      * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
@@ -47,7 +46,7 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
         const upgrade = UpgradesService.getUpgrade(reward);
         if (upgrade === undefined) return <span>{reward}</span>;
         if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-            const char = CharactersService.getUnit(reward.substring(reward.indexOf('_') + 1));
+            const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
             if (char) {
                 return <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />;
             }
@@ -62,49 +61,55 @@ export const CampaignBattleCard: React.FC<Props> = ({ battle }) => {
             />
         );
     }, [reward]);
+
     return (
         <>
-            <Card variant="outlined" sx={{ width: 350, minHeight: 200 }}>
-                <CardHeader
-                    title={
-                        <div className="flex-box gap5">
-                            <div className="flex gap-x-5">
-                                <CampaignLocation key={battle.id} location={battle} short={true} unlocked={true} />
-                                <span className="flex-box gap-0.5">
-                                    <MiscIcon icon="deployment" width={24} height={24} />
-                                    <span>{battle.slots ?? 0}</span>
+            <div className="flex w-full max-w-[400px] flex-col gap-3 rounded-md border border-gray-300 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-900 dark:shadow-lg">
+                <div className="flex flex-col gap-3">
+                    {/* Header with battle info */}
+                    <div className="flex items-center justify-between border-b border-gray-200 pb-3 dark:border-gray-700">
+                        <CampaignLocation key={battle.id} location={battle} short={true} unlocked={true} />
+                        <div className="flex gap-4">
+                            <span className="flex items-center gap-1">
+                                <MiscIcon icon="deployment" width={18} height={18} />
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    {battle.slots ?? 0}
                                 </span>
-                                <span className="flex-box gap-0.5">
-                                    <MiscIcon icon="energy" width={24} height={24} />
-                                    <span>{battle.energyCost}</span>
+                            </span>
+                            <span className="flex items-center gap-1">
+                                <MiscIcon icon="energy" width={18} height={18} />
+                                <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
+                                    {battle.energyCost}
                                 </span>
-                                <span>{rewardIcon}</span>
-                            </div>
+                            </span>
+                            <div className="flex h-[32px] w-[32px] items-center justify-center">{rewardIcon}</div>
                         </div>
-                    }
-                />
-                <CardContent>
-                    <div className="flex-box column center gap10">
-                        <div className="flex-box gap10 center">
+                    </div>
+
+                    {/* Enemies */}
+                    <div>
+                        <h4 className="mb-2 text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">
+                            Enemies
+                        </h4>
+                        <div className="flex flex-wrap gap-3">
                             <CampaignBattleEnemies
                                 keyPrefix="cards"
                                 battleId={battle.id}
                                 enemies={battle.rawEnemyTypes ?? []}
                                 scale={0.3}
-                                // 2. Pass the click handler
                                 onEnemyClick={data => setSelectedEnemy(data)}
                             />
                         </div>
                     </div>
-                </CardContent>
-            </Card>
+                </div>
+            </div>
 
-            {/* 3. Add the Modal */}
+            {/* Modal */}
             <NpcDetailModal
                 isOpen={!!selectedEnemy}
-                onClose={() => setSelectedEnemy(null)}
-                npc={selectedEnemy?.npc || null}
-                stats={selectedEnemy?.stats || null}
+                onClose={() => setSelectedEnemy(undefined)}
+                npc={selectedEnemy?.npc}
+                stats={selectedEnemy?.stats}
             />
         </>
     );

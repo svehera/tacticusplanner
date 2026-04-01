@@ -19,7 +19,7 @@ export interface IGetGuidesQueryParameters {
 
 export interface IGetGuidesResponse {
     teams: IGuide[];
-    next: string | null;
+    next: string | undefined;
     total: number;
 }
 
@@ -33,7 +33,7 @@ export interface IGuide {
     youtubeLink: string;
     rejectReason: string;
     status: GuidesStatus;
-    originalTeamId: number | null;
+    originalTeamId: number | undefined;
     likes: number;
     isHonored: boolean;
     createdBy: string;

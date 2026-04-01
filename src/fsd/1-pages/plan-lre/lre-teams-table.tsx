@@ -16,7 +16,7 @@ import { isMobile } from 'react-device-detect';
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
+import { arrayToKeyedObject, useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
@@ -27,6 +27,7 @@ import { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement,
 import { LreTile } from './lre-tile';
 import { ITableRow } from './lre.models';
 import { SelectedTeamsTable } from './selected-teams-table';
+import { buildSelectedTeamsRows, ISelectedTeamTableCell } from './selected-teams-table.utils';
 import { TrackRequirementCheck } from './track-requirement-check';
 
 interface Props {
@@ -39,6 +40,13 @@ interface Props {
     progress: Record<string, number>;
     editTeam: (team: ILreTeam) => void;
     restrictions: string[];
+    updateRestrictionSelection: (
+        eventId: ILegendaryEventTrack['eventId'],
+        section: LreTrackId,
+        restrictionName: string,
+        selected: boolean
+    ) => void;
+    clearSectionSelection: (eventId: ILegendaryEventTrack['eventId'], section: LreTrackId) => void;
 }
 
 const getRowStyle = (params: RowClassParams): RowStyle => {
@@ -55,6 +63,8 @@ export const LreTeamsTable: React.FC<Props> = ({
     autoAddTeam,
     editTeam,
     restrictions,
+    updateRestrictionSelection,
+    clearSectionSelection,
 }) => {
     const gridReference = useRef<AgGridReact>(null);
 
@@ -65,7 +75,7 @@ export const LreTeamsTable: React.FC<Props> = ({
         [unresolvedCharacters]
     );
     const resolvedCharactersBySnowprintId = useMemo(
-        () => Object.fromEntries(resolvedCharacters.map(character => [character.snowprintId, character])),
+        () => arrayToKeyedObject(resolvedCharacters, 'snowprintId'),
         [resolvedCharacters]
     );
 
@@ -112,42 +122,17 @@ export const LreTeamsTable: React.FC<Props> = ({
 
     const rows: Array<ITableRow> = useMemo(() => getRows(suggestedTeams), [suggestedTeams]);
 
-    const selectedTeamsRows: Array<ITableRow> = useMemo(() => {
-        const teamRecord: Record<string, ICharacter2[]> = {};
-
-        selectedTeams.forEach(team => {
-            team.restrictionsIds.forEach(id => {
-                const existingCharacters = teamRecord[id] ?? [];
-                const newTeam = (team.charSnowprintIds ?? [])
-                    .slice(0, 5)
-                    .map(charId => resolvedCharactersBySnowprintId[charId])
-                    .filter((character): character is ICharacter2 => !!character);
-
-                teamRecord[id] = [...existingCharacters, ...newTeam];
-            });
-        });
-
-        return getRows(teamRecord);
-    }, [resolvedCharactersBySnowprintId, selectedTeams]);
+    const selectedTeamsRows: Array<ITableRow<ISelectedTeamTableCell | string>> = useMemo(
+        () => buildSelectedTeamsRows(selectedTeams, resolvedCharactersBySnowprintId),
+        [resolvedCharactersBySnowprintId, selectedTeams]
+    );
 
     useEffect(() => {
         gridReference.current?.api?.sizeColumnsToFit();
-    }, [
-        viewPreferences.showAlpha,
-        viewPreferences.showBeta,
-        viewPreferences.showGamma,
-        track.eventId,
-        viewPreferences.hideCompleted,
-    ]);
+    }, [track.eventId]);
 
     const handleChange = (selected: boolean, restrictionName: string) => {
-        dispatch.leSelectedRequirements({
-            type: 'Update',
-            eventId: track.eventId,
-            section: track.section,
-            restrictionName,
-            selected,
-        });
+        updateRestrictionSelection(track.eventId, track.section, restrictionName, selected);
     };
 
     const addNewTeam = (cellClicked: CellClickedEvent<ITableRow[], ICharacter2>) => {
@@ -186,24 +171,20 @@ export const LreTeamsTable: React.FC<Props> = ({
         }));
 
         // Create a lookup table to get the order from `columnIds`
-        const columnOrder: Record<string, number> = selectedRequirements.reduce(
-            (order, id, index) => {
-                order[id] = index;
-                return order;
-            },
-            {} as Record<string, number>
+        const columnOrder: Record<string, number> = Object.fromEntries(
+            selectedRequirements.map((id, index) => [id, index])
         );
 
         // Sort `columns` by using the order from `columnIds`, keeping unspecified columns in original order
         columns.sort((a, b) => {
-            const orderA = columnOrder[a.field!] !== undefined ? columnOrder[a.field!] : Infinity;
-            const orderB = columnOrder[b.field!] !== undefined ? columnOrder[b.field!] : Infinity;
+            const orderA = columnOrder[a.field!] === undefined ? Infinity : columnOrder[a.field!];
+            const orderB = columnOrder[b.field!] === undefined ? Infinity : columnOrder[b.field!];
             return orderA - orderB;
         });
 
-        columns.forEach((column, index) => {
+        for (const [index, column] of columns.entries()) {
             column.colSpan = () => (index === 0 ? selectedRequirements.length : 1);
-        });
+        }
 
         return columns;
     }
@@ -212,22 +193,18 @@ export const LreTeamsTable: React.FC<Props> = ({
         const size = Math.max(...Object.values(teams).map(x => x.length));
         const rows: Array<ITableRow> = Array.from({ length: size }, () => ({}));
 
-        rows.forEach((row, index) => {
+        for (const [index, row] of rows.entries()) {
             for (const team in teams) {
                 const char = teams[team][index];
                 row[team] = char ?? '';
             }
-        });
+        }
 
         return rows;
     }
 
     const clearSelection = () => {
-        dispatch.leSelectedRequirements({
-            type: 'ClearAll',
-            eventId: track.eventId,
-            section: track.section,
-        });
+        clearSectionSelection(track.eventId, track.section);
     };
 
     const deleteTeam = (teamId: string) => {

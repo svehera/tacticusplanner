@@ -27,7 +27,6 @@ import {
     IGuildWar,
     IInsightsData,
     IInventory,
-    ILegendaryEventSelectedRequirements,
     ILegendaryEventSelectedTeams,
     ILegendaryEventSettings,
     IPersonalCharacterData2,
@@ -35,20 +34,19 @@ import {
     IPersonalGoal,
     ISelectedTeamsOrdering,
     IViewPreferences,
-    LegendaryEventData,
     IGameModeTokensState,
+    LegendaryEventData,
 } from './interfaces';
 
 export class GlobalState implements IGlobalState {
     readonly modifiedDate?: Date;
-    readonly seenAppVersion?: string | null;
+    readonly seenAppVersion?: string;
 
     readonly autoTeamsPreferences: IAutoTeamsPreferences;
     readonly characters: Array<ICharacter2>;
     readonly viewPreferences: IViewPreferences;
     readonly dailyRaidsPreferences: IDailyRaidsPreferences;
     readonly selectedTeamOrder: ISelectedTeamsOrdering;
-    readonly leSelectedRequirements: LegendaryEventData<ILegendaryEventSelectedRequirements>;
     readonly goals: IPersonalGoal[];
     readonly teams: IPersonalTeam[];
     readonly teams2: ITeam2[];
@@ -73,7 +71,6 @@ export class GlobalState implements IGlobalState {
         this.dailyRaidsPreferences = personalData.dailyRaidsPreferences ?? defaultData.dailyRaidsPreferences;
 
         this.selectedTeamOrder = personalData.selectedTeamOrder;
-        this.leSelectedRequirements = personalData.leSelectedRequirements;
         this.leSelectedTeams = personalData.leTeams;
         this.leProgress = personalData.leProgress;
         this.leSettings = personalData.leSettings;
@@ -120,7 +117,7 @@ export class GlobalState implements IGlobalState {
             const passiveLevel = Math.max(personalCharData?.passiveAbilityLevel ?? 1, 1);
             const level = Math.max(personalCharData?.level ?? 1, rankLevel, activeLevel, passiveLevel);
             const upgrades = personalCharData?.upgrades
-                ? personalCharData.upgrades.filter(UpgradesService.isValidUpgrade)
+                ? personalCharData.upgrades.filter(upgrade => UpgradesService.isValidUpgrade(upgrade))
                 : [];
 
             const combinedData: IPersonalCharacterData2 = {
@@ -196,7 +193,7 @@ export class GlobalState implements IGlobalState {
 
             return result;
         }) as Array<IMow | IMow2>;
-        mows2Data.mows.forEach(staticMow => {
+        for (const staticMow of mows2Data.mows) {
             if (
                 returnValue.some(
                     x =>
@@ -204,7 +201,7 @@ export class GlobalState implements IGlobalState {
                         ('snowprintId' in x && x.snowprintId === staticMow.snowprintId)
                 )
             )
-                return;
+                continue;
             const databaseMow = databaseMows?.find(c => c.id === staticMow.snowprintId);
 
             const result: IMow2 = {
@@ -233,7 +230,7 @@ export class GlobalState implements IGlobalState {
             } as IMow2);
 
             returnValue.push(result);
-        });
+        }
         return returnValue;
     }
 
@@ -333,7 +330,6 @@ export class GlobalState implements IGlobalState {
             leTeams: leTeamsToStore,
             leProgress: value.leProgress,
             leSettings: value.leSettings,
-            leSelectedRequirements: value.leSelectedRequirements,
             characters: charactersToStore,
             mows: mowsToDatabase,
             autoTeamsPreferences: value.autoTeamsPreferences,
@@ -380,7 +376,7 @@ export class GlobalState implements IGlobalState {
 
                 const baseBattle = byId.get(location.id);
                 if (!baseBattle) {
-                    return undefined;
+                    return;
                 }
 
                 const raidsAlreadyPerformed = location.raidsAlreadyPerformed ?? 0;

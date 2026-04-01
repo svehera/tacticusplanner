@@ -16,7 +16,7 @@ interface Props {
     zoom: number;
     onCharacterSelect: (id: string) => void;
     showHeader: boolean;
-    deployedFlexUnitIds?: string[];
+    deployedUnitIds?: string[];
 }
 
 export const CharacterGrid: React.FC<Props> = ({
@@ -24,7 +24,7 @@ export const CharacterGrid: React.FC<Props> = ({
     zoom,
     onCharacterSelect,
     showHeader,
-    deployedFlexUnitIds,
+    deployedUnitIds,
 }: Props) => {
     return (
         <div>
@@ -54,7 +54,7 @@ export const CharacterGrid: React.FC<Props> = ({
                                 isDisabled={char.rank === Rank.Locked}
                             />
                         </div>
-                        {deployedFlexUnitIds?.includes(char.snowprintId) && (
+                        {deployedUnitIds?.includes(char.snowprintId) && (
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
                                 <div className="rounded-full bg-slate-950/70 p-1 shadow-lg ring-1 ring-white/20 dark:bg-slate-100/20">
                                     <MiscIcon icon="deployment" width={36} height={36} />

@@ -24,8 +24,8 @@ interface Props {
 
 export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelectChange }) => {
     const [openGoals, setOpenGoals] = useState<boolean>(false);
-    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect | null>(null);
-    const [editUnit, setEditUnit] = useState<IUnit | null>(null);
+    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect>();
+    const [editUnit, setEditUnit] = useState<IUnit>();
 
     const [currentGoalsSelect, setCurrentGoalsSelect] = useState<CharacterRaidGoalSelect[]>(goals);
 
@@ -73,11 +73,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         const currentSelected = currentGoalsSelect
             .filter(x => x.include)
             .map(x => x.goalId)
-            .join();
+            .join(',');
         const initialSelected = goals
             .filter(x => x.include)
             .map(x => x.goalId)
-            .join();
+            .join(',');
         return currentSelected !== initialSelected;
     }, [currentGoalsSelect, goals]);
 
@@ -173,7 +173,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                     goal={editGoal}
                     unit={editUnit}
                     onClose={() => {
-                        setEditGoal(null);
+                        setEditGoal(undefined);
                     }}
                 />
             )}

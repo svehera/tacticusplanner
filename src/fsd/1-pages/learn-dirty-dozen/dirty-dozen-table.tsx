@@ -31,7 +31,7 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
                 return <Score value={value ?? 0} />;
             },
             headerClass: '[&_.ag-header-cell-text]:w-full [&_.ag-header-cell-text]:text-center',
-            sortingOrder: ['desc', null],
+            sortingOrder: ['desc', undefined],
         } as ColDef<IDirtyDozenChar>;
     };
 
@@ -48,11 +48,8 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
             cellRenderer: (props: ICellRendererParams<IDirtyDozenChar>) => {
                 const characterId = props.data?.Name ?? '';
                 const character = characters.find(char => CharactersService.matchesAnyCharacterId(characterId, char));
-                if (character) {
-                    return <CharacterTitle character={character} imageSize={30} hideRarity hideRank />;
-                } else {
-                    return characterId;
-                }
+                if (!character) return characterId;
+                return <CharacterTitle character={character} imageSize={30} hideRarity hideRank />;
             },
         },
         {

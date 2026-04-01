@@ -55,7 +55,7 @@ const TextField = ({
             type={inputType}
             {...props}
             className={composeTailwindRenderProps(className, 'group flex flex-col gap-y-1')}>
-            {!props.children ? (
+            {props.children || (
                 <>
                     {label && <Label>{label}</Label>}
                     <FieldGroup
@@ -84,13 +84,11 @@ const TextField = ({
                             ) : (
                                 suffix
                             )
-                        ) : null}
+                        ) : undefined}
                     </FieldGroup>
                     {description && <Description>{description}</Description>}
                     <FieldError>{errorMessage}</FieldError>
                 </>
-            ) : (
-                props.children
             )}
         </TextFieldPrimitive>
     );

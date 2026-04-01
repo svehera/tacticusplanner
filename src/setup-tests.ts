@@ -3,7 +3,7 @@ import { vi } from 'vitest';
 
 // 1. Create a dummy storage object
 const localStorageMock = {
-    getItem: vi.fn(() => null),
+    getItem: vi.fn(() => {}),
     setItem: vi.fn(),
     removeItem: vi.fn(),
     clear: vi.fn(),
@@ -11,8 +11,4 @@ const localStorageMock = {
     key: vi.fn(),
 };
 
-// 2. Attach it to BOTH the global (Node) and window (JSDOM) scopes
-global.localStorage = localStorageMock as any;
-if (typeof window !== 'undefined') {
-    window.localStorage = localStorageMock as any;
-}
+globalThis.localStorage = localStorageMock as any;

@@ -34,6 +34,8 @@ export interface IViewPreferences
     goalColorMode: GoalColorMode;
     campaignsTableView: boolean;
     raidsTableView: boolean;
+    includeExhaustedBattlesInHse: boolean;
+    showHseWarning: boolean;
     myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
     tokenomicsTableView: boolean;
@@ -52,11 +54,7 @@ interface IWyoViewSettings {
 export interface ILreViewSettings {
     lreGoalsPreview: boolean;
     lreGridView: boolean;
-    showAlpha: boolean;
-    showBeta: boolean;
-    showGamma: boolean;
     onlyUnlocked: boolean;
-    hideCompleted: boolean;
 }
 
 export interface ILreTileSettings {

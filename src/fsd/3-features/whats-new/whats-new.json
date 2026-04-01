@@ -2668,10 +2668,10 @@
             "type": "Update",
             "new": [
                 {
-                    "text": "Added possibility to hide completed tracks for legendary planner (sasquach)",
+                    "text": "Added possibility to exclude completed tracks for legendary planner (sasquach)",
                     "images": [
                         {
-                            "path": "hideCompleted.png"
+                            "path": "excludeCompletedTracks.png"
                         }
                     ]
                 }

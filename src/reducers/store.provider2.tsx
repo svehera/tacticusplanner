@@ -1,8 +1,7 @@
 ﻿import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
-import React, { useEffect, useMemo, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from '@/reducers/guild-reducer';
@@ -17,7 +16,7 @@ import { IErrorResponse } from '@/fsd/5-shared/api';
 import { useAuth } from '@/fsd/5-shared/model';
 
 import { GlobalState } from '../models/global-state';
-import { IDispatchContext, IGlobalState } from '../models/interfaces';
+import { IDispatchContext, IGlobalState, IPersonalData2 } from '../models/interfaces';
 import { convertData, PersonalDataLocalStorage } from '../services';
 
 import { autoTeamsPreferencesReducer } from './auto-teams-settings.reducer';
@@ -28,7 +27,6 @@ import { dailyRaidsReducer } from './daily-raids.reducer';
 import { goalsReducer } from './goals.reducer';
 import { inventoryReducer } from './inventory.reducer';
 import { leProgressReducer } from './le-progress.reducer';
-import { leSelectedRequirementsReducer } from './le-selected-requirements.reducer';
 import { leSelectedTeamsReducer } from './le-selected-teams.reducer';
 import { leSettingsReducer } from './le-settings.reducer';
 import { rosterSnapshotsActionReducer } from './roster-snapshots-reducer';
@@ -39,74 +37,151 @@ import { viewPreferencesReducer } from './view-settings.reducer';
 import { xpIncomeActionReducer } from './xp-income-reducer';
 import { xpUseActionReducer } from './xp-use-reducer';
 
+// --- Local-only version marker for in-memory/localStorage state (never sent to backend)
+const LOCAL_VERSION_KEY = 'TP-LocalVersion';
+function getLocalVersion(): number {
+    const v = localStorage.getItem(LOCAL_VERSION_KEY);
+    return v ? Number.parseInt(v, 10) : 0;
+}
+
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const { isAuthenticated, setUser, setUserInfo, logout } = useAuth();
     const localStore = useMemo(() => new PersonalDataLocalStorage(), []);
 
+    // Track local-only version for in-memory/localStorage state
+    const [localVersion, setLocalVersion] = useState(() => getLocalVersion());
     const [globalState, setGlobalState] = useState(() => {
         const data = localStore.getData();
-        return new GlobalState(data);
+        return { ...new GlobalState(data), __localVersion: getLocalVersion() };
     });
 
     const [modified, setModified] = useState(false);
-    const [saveTimeoutId, setSaveTimeoutId] = useState<NodeJS.Timeout>();
-    const [abortController, setAbortController] = useState<AbortController>();
+    const saveTimeoutReference = useRef<NodeJS.Timeout | undefined>(undefined);
+    const isSaveInFlightReference = useRef(false);
+    const queuedStoreValueReference = useRef<IPersonalData2 | undefined>(undefined);
+    const modifiedDateTicksReference = useRef(localStorage.getItem('TP-ModifiedDateTicks') ?? '');
 
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
-    const [seenAppVersion, setSeenAppVersion] = useState<string | undefined | null>(globalState.seenAppVersion);
+    const [seenAppVersion, setSeenAppVersion] = useState<string | undefined>(globalState.seenAppVersion);
 
-    const [characters, dispatchCharacters] = React.useReducer(charactersReducer, globalState.characters);
-    const [mows, dispatchMows] = React.useReducer(mowsReducer, globalState.mows);
-    const [goals, dispatchGoals] = React.useReducer(goalsReducer, globalState.goals);
-    const [teams, dispatchTeams] = React.useReducer(teamsReducer, globalState.teams);
-    const [teams2, dispatchTeams2] = React.useReducer(teams2Reducer, globalState.teams2);
-    const [gameModeTokens, dispatchGameModeTokens] = React.useReducer(
+    const [characters, dispatchCharacters] = useReducer(charactersReducer, globalState.characters);
+    const [mows, dispatchMows] = useReducer(mowsReducer, globalState.mows);
+    const [goals, dispatchGoals] = useReducer(goalsReducer, globalState.goals);
+    const [teams, dispatchTeams] = useReducer(teamsReducer, globalState.teams);
+    const [teams2, dispatchTeams2] = useReducer(teams2Reducer, globalState.teams2);
+    const [gameModeTokens, dispatchGameModeTokens] = useReducer(
         gameModeTokensActionReducer,
         globalState.gameModeTokens
     );
-    const [warDefense2, dispatchWarDefense2] = React.useReducer(warDefense2Reducer, globalState.warDefense2);
-    const [warOffense2, dispatchWarOffense2] = React.useReducer(warOffense2Reducer, globalState.warOffense2);
-    const [viewPreferences, dispatchViewPreferences] = React.useReducer(
-        viewPreferencesReducer,
-        globalState.viewPreferences
-    );
-    const [dailyRaidsPreferences, dispatchDailyRaidsPreferences] = React.useReducer(
+    const [warDefense2, dispatchWarDefense2] = useReducer(warDefense2Reducer, globalState.warDefense2);
+    const [warOffense2, dispatchWarOffense2] = useReducer(warOffense2Reducer, globalState.warOffense2);
+    const [viewPreferences, dispatchViewPreferences] = useReducer(viewPreferencesReducer, globalState.viewPreferences);
+    const [dailyRaidsPreferences, dispatchDailyRaidsPreferences] = useReducer(
         dailyRaidsPreferencesReducer,
         globalState.dailyRaidsPreferences
     );
-    const [autoTeamsPreferences, dispatchAutoTeamsPreferences] = React.useReducer(
+    const [autoTeamsPreferences, dispatchAutoTeamsPreferences] = useReducer(
         autoTeamsPreferencesReducer,
         globalState.autoTeamsPreferences
     );
-    const [selectedTeamOrder, dispatchSelectedTeamsOrder] = React.useReducer(
+    const [selectedTeamOrder, dispatchSelectedTeamsOrder] = useReducer(
         selectedTeamsOrderReducer,
         globalState.selectedTeamOrder
     );
-    const [leSelectedRequirements, dispatchLeSelectedRequirements] = React.useReducer(
-        leSelectedRequirementsReducer,
-        globalState.leSelectedRequirements
-    );
-    const [leSelectedTeams, dispatchLeSelectedTeams] = React.useReducer(
-        leSelectedTeamsReducer,
-        globalState.leSelectedTeams
-    );
-    const [leProgress, dispatchLeProgress] = React.useReducer(leProgressReducer, globalState.leProgress);
-    const [leSettings, dispatchLeSettings] = React.useReducer(leSettingsReducer, globalState.leSettings);
+    const [leSelectedTeams, dispatchLeSelectedTeams] = useReducer(leSelectedTeamsReducer, globalState.leSelectedTeams);
+    const [leProgress, dispatchLeProgress] = useReducer(leProgressReducer, globalState.leProgress);
+    const [leSettings, dispatchLeSettings] = useReducer(leSettingsReducer, globalState.leSettings);
 
-    const [campaignsProgress, dispatchCampaignsProgress] = React.useReducer(
+    const [campaignsProgress, dispatchCampaignsProgress] = useReducer(
         campaignsProgressReducer,
         globalState.campaignsProgress
     );
 
-    const [inventory, dispatchInventory] = React.useReducer(inventoryReducer, globalState.inventory);
-    const [dailyRaids, dispatchDailyRaids] = React.useReducer(dailyRaidsReducer, globalState.dailyRaids);
-    const [guildWar, dispatchGuildWar] = React.useReducer(guildWarReducer, globalState.guildWar);
-    const [guild, dispatchGuild] = React.useReducer(guildReducer, globalState.guild);
-    const [xpUse, dispatchXpUse] = React.useReducer(xpUseActionReducer, globalState.xpUse);
-    const [xpIncome, dispatchXpIncome] = React.useReducer(xpIncomeActionReducer, globalState.xpIncome);
-    const [rosterSnapshots, dispatchRosterSnapshots] = React.useReducer(
+    const [inventory, dispatchInventory] = useReducer(inventoryReducer, globalState.inventory);
+    const [dailyRaids, dispatchDailyRaids] = useReducer(dailyRaidsReducer, globalState.dailyRaids);
+    const [guildWar, dispatchGuildWar] = useReducer(guildWarReducer, globalState.guildWar);
+    const [guild, dispatchGuild] = useReducer(guildReducer, globalState.guild);
+    const [xpUse, dispatchXpUse] = useReducer(xpUseActionReducer, globalState.xpUse);
+    const [xpIncome, dispatchXpIncome] = useReducer(xpIncomeActionReducer, globalState.xpIncome);
+    const [rosterSnapshots, dispatchRosterSnapshots] = useReducer(
         rosterSnapshotsActionReducer,
         globalState.rosterSnapshots
+    );
+
+    const setModifiedDateTicks = useCallback((modifiedDateTicks: string) => {
+        modifiedDateTicksReference.current = modifiedDateTicks;
+        localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
+    }, []);
+
+    const syncModifiedDateTicksFromServer = useCallback(async () => {
+        try {
+            const response = await getUserDataApi();
+            if (!response.data) {
+                return;
+            }
+
+            const { modifiedDateTicks: serverModifiedDateTicks } = response.data;
+            setModifiedDateTicks(serverModifiedDateTicks);
+        } catch {
+            // Best effort. Keep local ticks as-is if refresh fails.
+        }
+    }, [setModifiedDateTicks]);
+
+    const pushDataToServer = useCallback(
+        (storeValue: IPersonalData2, successVariant: 'success' | 'info' = 'success') => {
+            if (isSaveInFlightReference.current) {
+                queuedStoreValueReference.current = storeValue;
+                return;
+            }
+
+            isSaveInFlightReference.current = true;
+            const currentModifiedDateTicks = modifiedDateTicksReference.current;
+
+            setUserDataApi(storeValue, currentModifiedDateTicks)
+                .then(({ data }) => {
+                    const { modifiedDateTicks } = data;
+                    setModifiedDateTicks(modifiedDateTicks);
+                })
+                .catch((error: AxiosError<IErrorResponse>) => {
+                    if (error.code === 'ERR_CANCELED') {
+                        void syncModifiedDateTicksFromServer();
+                        return;
+                    }
+
+                    if (error.response?.status === 401) {
+                        logout();
+                        queuedStoreValueReference.current = undefined;
+                        enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
+                    } else if (error.response?.status === 409) {
+                        queuedStoreValueReference.current = undefined;
+                        enqueueSnackbar(
+                            'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
+                            { variant: 'error' }
+                        );
+                    } else {
+                        queuedStoreValueReference.current = undefined;
+                        enqueueSnackbar(
+                            'Failed to push data to server. Please export JSON, refresh, wait for server data, then import JSON.',
+                            {
+                                variant: 'error',
+                            }
+                        );
+                    }
+                })
+                .finally(() => {
+                    isSaveInFlightReference.current = false;
+
+                    const queuedStoreValue = queuedStoreValueReference.current;
+                    queuedStoreValueReference.current = undefined;
+
+                    if (queuedStoreValue) {
+                        pushDataToServer(queuedStoreValue, successVariant);
+                    } else {
+                        enqueueSnackbar('Pushed local data to server.', { variant: successVariant });
+                    }
+                });
+        },
+        [logout, setModifiedDateTicks, syncModifiedDateTicksFromServer]
     );
 
     function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
@@ -132,7 +207,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
             dailyRaidsPreferences: wrapDispatch(dispatchDailyRaidsPreferences),
             selectedTeamOrder: wrapDispatch(dispatchSelectedTeamsOrder),
-            leSelectedRequirements: wrapDispatch(dispatchLeSelectedRequirements),
             leSelectedTeams: wrapDispatch(dispatchLeSelectedTeams),
             leProgress: wrapDispatch(dispatchLeProgress),
             leSettings: wrapDispatch(dispatchLeSettings),
@@ -146,40 +220,45 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
             gameModeTokens: wrapDispatch(dispatchGameModeTokens),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
-                dispatchCharacters({ type: 'Set', value: data.characters });
-                dispatchMows({ type: 'Set', value: data.mows });
-                dispatchGoals({ type: 'Set', value: data.goals });
-                dispatchTeams({ type: 'Set', value: data.teams });
-                dispatchTeams2({ type: 'Set', value: data.teams2 });
-                dispatchWarDefense2({ type: 'Set', value: data.warDefense2 });
-                dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
-                dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
-                dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
-                dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
-                dispatchSelectedTeamsOrder({ type: 'Set', value: data.selectedTeamOrder });
-                dispatchLeSelectedRequirements({ type: 'Set', value: data.leSelectedRequirements });
-                dispatchLeSelectedTeams({ type: 'Set', value: data.leSelectedTeams });
-                dispatchLeProgress({ type: 'Set', value: data.leProgress });
-                dispatchLeSettings({ type: 'Set', value: data.leSettings });
-                dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
-                dispatchInventory({ type: 'Set', value: data.inventory });
-                dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
-                dispatchGuildWar({ type: 'Set', value: data.guildWar });
-                dispatchGuild({ type: 'Set', value: data.guild });
-                dispatchXpIncome({ type: 'Set', value: data.xpIncome });
-                dispatchXpUse({ type: 'Set', value: data.xpUse });
-                dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
-                dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
-
-                if (modified) {
-                    setModified(true);
-                    setModifiedDate(data.modifiedDate);
-                }
-
-                if (reset) {
-                    setModifiedDate(undefined);
-                }
-                setGlobalState(data);
+                // Only update if incoming version is newer
+                setGlobalState(current => {
+                    const incomingVersion = data.__localVersion ?? 0;
+                    const currentVersion = current.__localVersion ?? 0;
+                    if (incomingVersion > currentVersion) {
+                        dispatchCharacters({ type: 'Set', value: data.characters });
+                        dispatchMows({ type: 'Set', value: data.mows });
+                        dispatchGoals({ type: 'Set', value: data.goals });
+                        dispatchTeams({ type: 'Set', value: data.teams });
+                        dispatchTeams2({ type: 'Set', value: data.teams2 });
+                        dispatchWarDefense2({ type: 'Set', value: data.warDefense2 });
+                        dispatchWarOffense2({ type: 'Set', value: data.warOffense2 });
+                        dispatchViewPreferences({ type: 'Set', value: data.viewPreferences });
+                        dispatchDailyRaidsPreferences({ type: 'Set', value: data.dailyRaidsPreferences });
+                        dispatchAutoTeamsPreferences({ type: 'Set', value: data.autoTeamsPreferences });
+                        dispatchSelectedTeamsOrder({ type: 'Set', value: data.selectedTeamOrder });
+                        dispatchLeSelectedTeams({ type: 'Set', value: data.leSelectedTeams });
+                        dispatchLeProgress({ type: 'Set', value: data.leProgress });
+                        dispatchLeSettings({ type: 'Set', value: data.leSettings });
+                        dispatchCampaignsProgress({ type: 'Set', value: data.campaignsProgress });
+                        dispatchInventory({ type: 'Set', value: data.inventory });
+                        dispatchDailyRaids({ type: 'Set', value: data.dailyRaids });
+                        dispatchGuildWar({ type: 'Set', value: data.guildWar });
+                        dispatchGuild({ type: 'Set', value: data.guild });
+                        dispatchXpIncome({ type: 'Set', value: data.xpIncome });
+                        dispatchXpUse({ type: 'Set', value: data.xpUse });
+                        dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
+                        dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
+                        if (modified) {
+                            setModified(true);
+                            setModifiedDate(data.modifiedDate);
+                        }
+                        if (reset) {
+                            setModifiedDate(undefined);
+                        }
+                        return { ...data, __localVersion: incomingVersion };
+                    }
+                    return current;
+                });
             },
             seenAppVersion: wrapDispatch(setSeenAppVersion),
         }),
@@ -188,7 +267,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchViewPreferences,
             dispatchAutoTeamsPreferences,
             dispatchSelectedTeamsOrder,
-            dispatchLeSelectedRequirements,
             dispatchLeSelectedTeams,
             dispatchGoals,
             dispatchLeProgress,
@@ -205,6 +283,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchRosterSnapshots,
             dispatchGameModeTokens,
             setGlobalState,
+            localVersion,
         ]
     );
 
@@ -212,7 +291,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         if (!modified) {
             return;
         }
-
+        // Increment and persist localVersion on every state change
+        const nextVersion = localVersion + 1;
+        localStorage.setItem(LOCAL_VERSION_KEY, nextVersion.toString());
+        setLocalVersion(nextVersion);
         const newValue: IGlobalState = {
             characters,
             mows,
@@ -223,7 +305,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             viewPreferences,
             autoTeamsPreferences,
             selectedTeamOrder,
-            leSelectedRequirements,
             leSelectedTeams,
             leProgress,
             leSettings,
@@ -240,49 +321,56 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse,
             rosterSnapshots,
             gameModeTokens,
+            __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
-
-        setGlobalState(newValue);
+        setGlobalState({ ...newValue, __localVersion: nextVersion });
         localStore.setData(storeValue);
         setModified(false);
-
         if (isAuthenticated) {
-            abortController?.abort();
-            clearTimeout(saveTimeoutId);
-            const controller = new AbortController();
-            const timeoutId = setTimeout(
-                () => {
-                    setUserDataApi(storeValue, controller.signal)
-                        .then(({ data }) => {
-                            const { modifiedDateTicks } = data;
-                            localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
-                            enqueueSnackbar('Pushed local data to server.', { variant: 'success' });
-                        })
-                        .catch((error: AxiosError<IErrorResponse>) => {
-                            if (error.code === 'ERR_CANCELED') {
-                                return;
-                            }
-                            if (error.response?.status === 401) {
-                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (error.response?.status === 409) {
-                                enqueueSnackbar(
-                                    'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
-                                    { variant: 'error' }
-                                );
-                            } else {
-                                enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
-                                    variant: 'error',
-                                });
-                            }
-                        });
-                },
-                isMobile ? 1000 : 10000
-            );
-            setSaveTimeoutId(timeoutId);
-            setAbortController(controller);
+            clearTimeout(saveTimeoutReference.current);
+            saveTimeoutReference.current = setTimeout(() => {
+                pushDataToServer(storeValue, 'success');
+            }, 100);
         }
-    }, [modified]);
+    }, [
+        autoTeamsPreferences,
+        campaignsProgress,
+        characters,
+        dailyRaids,
+        dailyRaidsPreferences,
+        gameModeTokens,
+        goals,
+        guild,
+        guildWar,
+        inventory,
+        isAuthenticated,
+        leProgress,
+        leSelectedTeams,
+        leSettings,
+        modified,
+        modifiedDate,
+        mows,
+        localStore,
+        pushDataToServer,
+        rosterSnapshots,
+        seenAppVersion,
+        selectedTeamOrder,
+        teams,
+        teams2,
+        viewPreferences,
+        warDefense2,
+        warOffense2,
+        xpIncome,
+        xpUse,
+        localVersion,
+    ]);
+
+    useEffect(() => {
+        return () => {
+            clearTimeout(saveTimeoutReference.current);
+        };
+    }, []);
 
     function doDailyRefresh(lastRefreshDateUTC: string): void {
         const currentDate = new Date();
@@ -342,7 +430,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusGuildApiKey,
                     tacticusUserId,
                 });
-                const localModifiedDateTicks = localStorage.getItem('TP-ModifiedDateTicks');
+                const localModifiedDateTicks = modifiedDateTicksReference.current;
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
 
@@ -350,9 +438,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 const localIsNewer = !!modifiedDate && modifiedDate > serverLastModified;
 
                 const shouldAcceptServerData = !isFirstLogin && (isFreshData || localIsOlder);
-                const shouldPushLocalData = !isFreshData && (isFirstLogin || localIsNewer || hasDataConflict);
+                const shouldPushLocalData = !isFreshData && !hasDataConflict && (isFirstLogin || localIsNewer);
 
-                localStorage.setItem('TP-ModifiedDateTicks', serverModifiedDateTicks);
+                setModifiedDateTicks(serverModifiedDateTicks);
 
                 if (shouldAcceptServerData) {
                     const serverData = convertData(data);
@@ -372,33 +460,18 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                                 variant: 'warning',
                             });
                         }
-                        enqueueSnackbar('Synced with latest server data.', { variant: 'info' });
+                        enqueueSnackbar('Synced with latest server data.', {
+                            key: 'synced-with-latest-server-data',
+                            variant: 'info',
+                            preventDuplicate: true,
+                        });
                     }
 
                     setModifiedDate(serverLastModified);
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
-                    setUserDataApi(GlobalState.toStore(globalState))
-                        .then(({ data }) => {
-                            const { modifiedDateTicks } = data;
-                            localStorage.setItem('TP-ModifiedDateTicks', modifiedDateTicks);
-                            return enqueueSnackbar('Pushed local data to server.', { variant: 'info' });
-                        })
-                        .catch((error: AxiosError<IErrorResponse>) => {
-                            if (error.response?.status === 401) {
-                                logout();
-                                enqueueSnackbar('Session expired. Please re-login.', { variant: 'error' });
-                            } else if (error.response?.status === 409) {
-                                enqueueSnackbar(
-                                    'Conflict. Please refresh the page to pull latest changes. Your current changes will be lost',
-                                    { variant: 'error' }
-                                );
-                            } else {
-                                enqueueSnackbar('Failed to push data to server. Please do manual back-up.', {
-                                    variant: 'error',
-                                });
-                            }
-                        });
+                    clearTimeout(saveTimeoutReference.current);
+                    pushDataToServer(GlobalState.toStore(globalState), 'info');
                 }
             })
             .catch((error: AxiosError<IErrorResponse>) => {
@@ -410,7 +483,19 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     enqueueSnackbar('Failed to fetch data from server. Try again later', { variant: 'error' });
                 }
             });
-    }, [isAuthenticated]);
+    }, [
+        dailyRaids.lastRefreshDateUTC,
+        dispatch,
+        globalState,
+        isAuthenticated,
+        localStore,
+        logout,
+        modifiedDate,
+        pushDataToServer,
+        setModifiedDateTicks,
+        setUser,
+        setUserInfo,
+    ]);
 
     useEffect(() => {
         const sixtySeconds = 1000 * 60;
@@ -418,16 +503,16 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
         const timerId = setInterval(() => {
             const lastBackup = localStore.getBackupDate();
-            if (!lastBackup) {
-                const localData = GlobalState.toStore(globalState);
-                localStore.storeBackup(localData);
-            } else {
+            if (lastBackup) {
                 const now = new Date();
                 const timeDifference = now.getTime() - lastBackup.getTime();
                 if (timeDifference > oneDay) {
                     const localData = GlobalState.toStore(globalState);
                     localStore.storeBackup(localData);
                 }
+            } else {
+                const localData = GlobalState.toStore(globalState);
+                localStore.storeBackup(localData);
             }
         }, sixtySeconds);
 

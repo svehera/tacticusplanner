@@ -36,10 +36,10 @@ export const GuildWarDefense = () => {
     const dispatch = useContext(DispatchContext);
 
     const [openSelectTeamDialog, setOpenSelectTeamDialog] = useState(false);
-    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters | null>(null);
+    const [editedTeam, setEditedTeam] = useState<IGWTeamWithCharacters>();
 
     const [openCharacterItemDialog, setOpenCharacterItemDialog] = useState(false);
-    const [editedCharacter, setEditedCharacter] = useState<ICharacter2 | null>(null);
+    const [editedCharacter, setEditedCharacter] = useState<ICharacter2>();
 
     useEffect(() => {
         const rarityCaps = GuildWarService.getDifficultyRarityCaps(guildWar.zoneDifficulty);
@@ -51,7 +51,7 @@ export const GuildWarDefense = () => {
     };
 
     const endEditCharacter = (): void => {
-        setEditedCharacter(null);
+        setEditedCharacter(undefined);
         setOpenCharacterItemDialog(false);
     };
 
@@ -76,7 +76,7 @@ export const GuildWarDefense = () => {
                 rarityCap: editedTeam.rarityCap,
             });
         }
-        setEditedTeam(null);
+        setEditedTeam(undefined);
         setOpenSelectTeamDialog(false);
     };
 

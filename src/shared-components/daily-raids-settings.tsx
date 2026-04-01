@@ -100,17 +100,17 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index >= 0 ? index : 2; // Default to 50 BS refresh if not found.
+        return index === -1 ? 2 : index; // Default to 50 BS refresh if not found.
     });
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
     /*
-    const [character, setCharacter] = useState<ICharacter2 | null>(() => {
+    const [character, setCharacter] = useState<ICharacter2>(() => {
         return (
             characters.find(
                 x => x.snowprintId === dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.characterId
-            ) || null
+            )
         );
     });*/
 
@@ -172,7 +172,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         });
     }
 
-    function saveTrainingRushUnitChanges(unit: ICharacter2 | null): void {
+    function saveTrainingRushUnitChanges(unit: ICharacter2 | undefined): void {
         setCharacter(unit);
         setDailyRaidsPreferencesForm(current => {
             const ret = { ...current };
@@ -221,7 +221,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 name="controlled-radio-buttons-group"
                                 value={dailyRaidsPreferencesForm.farmPreferences.order}
                                 onChange={change =>
-                                    updatePreferences(parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder)
+                                    updatePreferences(
+                                        Number.parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder
+                                    )
                                 }>
                                 <FormControlLabel
                                     value={IDailyRaidsFarmOrder.totalMaterials}

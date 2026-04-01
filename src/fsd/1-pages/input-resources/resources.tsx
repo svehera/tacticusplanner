@@ -72,7 +72,7 @@ export const Resources = () => {
     ) => {
         const clickableClass = onClick ? 'cursor-pointer transition-all duration-150' : '';
         const hoverClass = onClick ? 'hover:scale-105 hover:bg-gray-700/50' : '';
-        const disabledClass = !isEnabled ? 'grayscale opacity-40' : '';
+        const disabledClass = isEnabled ? '' : 'grayscale opacity-40';
 
         return (
             <div
@@ -172,7 +172,7 @@ export const Resources = () => {
 
                                 <div className="flex flex-wrap justify-start">
                                     {rarities.map(rarity => {
-                                        if (rarity === Rarity.Common) return null; // Skip Common Orbs
+                                        if (rarity === Rarity.Common) return; // Skip Common Orbs
                                         const quantity = inventory.orbs[alliance][rarity as number as Rarity];
                                         return renderResourceItem(
                                             alliance + '-orb-' + rarity,

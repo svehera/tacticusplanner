@@ -12,7 +12,11 @@ import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 function isValidLreDate(date: unknown): date is string {
     return (
-        date !== null && typeof date === 'string' && date !== 'TBA' && date !== '' && !isNaN(new Date(date).getTime())
+        date !== null &&
+        typeof date === 'string' &&
+        date !== 'TBA' &&
+        date !== '' &&
+        !Number.isNaN(new Date(date).getTime())
     );
 }
 
@@ -42,7 +46,7 @@ export const PlanLeRoutes = () => {
     const navigate = useNavigate();
     const leMasterTableMenuItem = menuItemById['leMasterTable'];
     const sortedActiveLres: ICharacterData[] = useMemo(
-        () => [...CharactersService.activeLres].sort(sortCharsByLreDate),
+        () => CharactersService.activeLres.toSorted(sortCharsByLreDate),
         [CharactersService.activeLres]
     );
     return (

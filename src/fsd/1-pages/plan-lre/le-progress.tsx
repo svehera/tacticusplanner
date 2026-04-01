@@ -1,7 +1,7 @@
 ﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import { Accordion, AccordionDetails, AccordionSummary, Button, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
@@ -11,8 +11,9 @@ import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
+import { LeRoundOutcomeForecast } from './le-round-outcome-forecast';
 import { LreTrackOverallProgress } from './le-track-overall-progress';
-import { EventProgress } from './token-estimation-service';
+import { EventProgress, TokenEstimationService } from './token-estimation-service';
 
 /**
  * UI Element to display the progress of missions and tracks in a legendary event.
@@ -60,6 +61,11 @@ export const LeProgress = ({
         )
         .join('-');
 
+    const tokenIncrements = useMemo(() => {
+        const tokens = TokenEstimationService.computeAllTokenUsage(model.tracksProgress, teams);
+        return tokens.map(token => token.incrementalPoints);
+    }, [model.tracksProgress, teams]);
+
     return (
         <div className="gap-2">
             <div className="w-full">
@@ -85,7 +91,7 @@ export const LeProgress = ({
                                     value={notesDraft}
                                     helperText={notesDraft.length + '/10000'}
                                     onChange={event => {
-                                        setNotesDraft(event.target.value.slice(0, 10000));
+                                        setNotesDraft(event.target.value.slice(0, 10_000));
                                     }}
                                 />
 
@@ -140,6 +146,27 @@ export const LeProgress = ({
                                 )}
                             </div>
                         </div>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion
+                    TransitionProps={{ unmountOnExit: true }}
+                    expanded={accordionExpanded === 'roundForecast'}
+                    onChange={handleAccordionChange('roundForecast')}>
+                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                        <span>Round Forecast</span>
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="mb-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                            Brought to you by cpunerd (Kharnage) (DUG-38-VAT) and BennTheHuman (WOW-90-OFT).
+                        </div>
+                        <LeRoundOutcomeForecast
+                            legendaryEvent={legendaryEvent}
+                            model={model}
+                            progress={progress}
+                            tokenIncrements={tokenIncrements}
+                        />
                     </AccordionDetails>
                 </Accordion>
 

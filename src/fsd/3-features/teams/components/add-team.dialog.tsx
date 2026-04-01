@@ -48,12 +48,12 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
     const [teamName, setTeamName] = useState<string>('Team');
     const [rarityCap, setRarityCap] = useState(Rarity.Legendary);
     const [team, setTeam] = useState<ICharacter2[]>([]);
-    const [mow, setMow] = useState<IMow2 | null>(null);
+    const [mow, setMow] = useState<IMow2>();
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | undefined) => {
         setTeam(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);

@@ -116,7 +116,7 @@ export const MaterialsTable: React.FC<Props> = ({
                 {
                     headerName: 'Icon',
                     cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
-                        params.data ? <MaterialIcon data={params.data} /> : null,
+                        params.data ? <MaterialIcon data={params.data} /> : undefined,
                     valueFormatter: () => '',
                     equals: () => true,
                     sortable: false,
@@ -133,7 +133,7 @@ export const MaterialsTable: React.FC<Props> = ({
                     columnGroupShow: 'open',
                     cellStyle: { textAlign: 'center' },
                     cellRenderer: (params: ICellRendererParams<IRaidMaterialRow>) =>
-                        params.data ? <MaterialIcon data={params.data} typeOnly /> : null,
+                        params.data ? <MaterialIcon data={params.data} typeOnly /> : undefined,
                     tooltipValueGetter: params =>
                         params.data ? getMaterialMetadata(params.data.id, params.data.rarity).rarityStr : '',
                     comparator: (valueA, valueB) => getRaritySortKey(valueA) - getRaritySortKey(valueB),
@@ -184,7 +184,7 @@ export const MaterialsTable: React.FC<Props> = ({
                     columnGroupShow: 'closed',
                     maxWidth: isMobile ? 125 : 300,
                     cellRenderer: (props: ICellRendererParams<ICharacterUpgradeEstimate>) => {
-                        if (!props.data) return null;
+                        if (!props.data) return;
                         const { daysTotal, energyTotal, raidsTotal } = props.data;
                         return (
                             <ul className="m-0 ps-5">
@@ -294,7 +294,7 @@ export const MaterialsTable: React.FC<Props> = ({
         }) as IRaidMaterialRow[];
     }, [rows, inventory, alreadyUsedMaterials]);
 
-    const gridApiReference = useRef<GridReadyEvent['api'] | null>(null);
+    const gridApiReference = useRef<GridReadyEvent['api']>(null);
 
     const scrollToChar = (api: GridReadyEvent['api'], snowprintId: string) => {
         const char = CharactersService.resolveCharacter(snowprintId);

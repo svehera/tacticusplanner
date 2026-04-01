@@ -62,11 +62,11 @@ const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
 
 export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, projectedRestrictions, setState }) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
-    const [showDropdown, setShowDropdown] = useState<string | null>(null);
+    const [showDropdown, setShowDropdown] = useState<string>();
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
-    const longPressTimer = useRef<NodeJS.Timeout | null>(null);
+    const longPressTimer = useRef<NodeJS.Timeout>(null);
     const longPressTriggered = useRef<boolean>(false);
-    const resetTriggerTimer = useRef<NodeJS.Timeout | null>(null);
+    const resetTriggerTimer = useRef<NodeJS.Timeout>(null);
     const buttonReferences = useRef<Map<string, HTMLButtonElement>>(new Map());
 
     // Cleanup timers on unmount
@@ -88,7 +88,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                 const button = buttonReferences.current.get(showDropdown);
                 const target = event.target as Node;
                 if (button && target && !button.contains(target)) {
-                    setShowDropdown(null);
+                    setShowDropdown(undefined);
                 }
             }
         };
@@ -131,6 +131,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     const handlePressEnd = () => {
         if (longPressTimer.current) {
             clearTimeout(longPressTimer.current);
+            // eslint-disable-next-line unicorn/no-null
             longPressTimer.current = null;
         }
 
@@ -143,13 +144,14 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
             // Reset the flag after a short delay to prevent immediate click
             resetTriggerTimer.current = setTimeout(() => {
                 longPressTriggered.current = false;
+                // eslint-disable-next-line unicorn/no-null
                 resetTriggerTimer.current = null;
             }, 100);
         }
     };
 
     const handleDirectStatusChange = (requirement: ILreBattleRequirementsProgress, newStatus: RequirementStatus) => {
-        setShowDropdown(null);
+        setShowDropdown(undefined);
         handleStatusChange(requirement, newStatus);
     };
 
@@ -223,11 +225,11 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
     };
 
     const handleToggleAll = () => {
-        battle.requirementsProgress.forEach(requirement => {
+        for (const requirement of battle.requirementsProgress) {
             // Use handleStatusChange to properly set status and clear killScore
             const newStatus = allCompleted ? RequirementStatus.NotCleared : RequirementStatus.Cleared;
             handleStatusChange(requirement, newStatus, undefined, true); // Force overwrite when toggling
-        });
+        }
     };
 
     return (

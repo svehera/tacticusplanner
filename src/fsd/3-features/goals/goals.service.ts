@@ -1,6 +1,6 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { cloneDeep, orderBy } from 'lodash';
+import { cloneDeep, orderBy, sum } from 'lodash';
 
 import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
@@ -101,7 +101,7 @@ export class GoalsService {
     ): IGoalEstimate[] {
         const result: IGoalEstimate[] = [];
 
-        [shardsGoals, upgradeRankOrMowGoals].flat().forEach(goal => {
+        for (const goal of [shardsGoals, upgradeRankOrMowGoals].flat()) {
             const estimate: IGoalEstimate = {
                 goalId: goal.goalId,
                 energyTotal: 0,
@@ -110,15 +110,15 @@ export class GoalsService {
                 daysLeft: 0,
                 xpBooksTotal: 0,
             };
-            estimatedUpgradesTotal.upgradesRaids.forEach((day, index) => {
+            for (const [index, day] of estimatedUpgradesTotal.upgradesRaids.entries()) {
                 let raidedToday = false;
-                day.raids.forEach(raid => {
-                    if (!raid.relatedGoals.includes(goal.goalId)) return;
-                    raid.raidLocations.forEach(location => {
+                for (const raid of day.raids) {
+                    if (!raid.relatedGoals.includes(goal.goalId)) continue;
+                    for (const location of raid.raidLocations) {
                         if (UpgradesService.isOnslaughtLocation(location)) {
                             estimate.oTokensTotal += location.raidsToPerform;
                         }
-                    });
+                    }
                     if (raid.raidLocations.some(location => location.raidsToPerform > 0)) {
                         raidedToday = true;
                     }
@@ -127,19 +127,16 @@ export class GoalsService {
                         0
                     );
                     const goalRequired = raid.countByGoalId?.[goal.goalId] ?? 0;
-                    if (totalRequired > 0 && goalRequired > 0) {
-                        estimate.energyTotal += Math.round(raid.energyTotal * (goalRequired / totalRequired));
-                    } else {
-                        estimate.energyTotal += Math.round(
-                            raid.energyTotal / Math.max(1, raid.relatedCharacters.length)
-                        );
-                    }
-                });
+                    estimate.energyTotal +=
+                        totalRequired > 0 && goalRequired > 0
+                            ? Math.round(raid.energyTotal * (goalRequired / totalRequired))
+                            : Math.round(raid.energyTotal / Math.max(1, raid.relatedCharacters.length));
+                }
                 if (raidedToday) {
                     ++estimate.daysTotal;
                     estimate.daysLeft = index + 1;
                 }
-            });
+            }
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                 const currentXp = this.currentCharacterXp(
@@ -185,33 +182,33 @@ export class GoalsService {
             );
             if (!blockedEntry) {
                 estimate.blocked = false;
-            } else if (!isGoalPriority) {
-                estimate.blocked = true;
-            } else {
+            } else if (isGoalPriority) {
                 const available = blockedEntry.acquiredCount ?? 0;
                 const allGoals = [...shardsGoals, ...upgradeRankOrMowGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
 
-                const requiredForThisGoal = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
-                    if (unit.goalId !== goal.goalId) return sum;
-                    return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
-                }, 0);
+                const requiredForThisGoal = sum(
+                    estimatedUpgradesTotal.characters
+                        .filter(unit => unit.goalId === goal.goalId)
+                        .map(unit => unit.baseUpgradesTotal[blockedEntry.id] ?? 0)
+                );
 
-                const requiredForHigher = estimatedUpgradesTotal.characters.reduce((sum, unit) => {
+                let requiredForHigher = 0;
+                for (const unit of estimatedUpgradesTotal.characters) {
                     const pr = goalPriorityMap.get(unit.goalId);
-                    if (pr === undefined) return sum;
-                    if (pr < (goal.priority ?? Number.POSITIVE_INFINITY)) {
-                        return sum + (unit.baseUpgradesTotal[blockedEntry.id] ?? 0);
-                    }
-                    return sum;
-                }, 0);
+                    if (pr === undefined) continue;
+                    if (pr >= (goal.priority ?? Number.POSITIVE_INFINITY)) continue;
+                    requiredForHigher += unit.baseUpgradesTotal[blockedEntry.id] ?? 0;
+                }
 
                 estimate.blocked = isGoalPriority && available < requiredForHigher + requiredForThisGoal;
+            } else {
+                estimate.blocked = true;
             }
             estimate.completed =
                 !estimate.blocked && estimate.included && estimate.oTokensTotal === 0 && estimate.energyTotal === 0;
             result.push(estimate);
-        });
+        }
 
         if (upgradeAbilities.length > 0) {
             for (const goal of upgradeAbilities) {
@@ -284,7 +281,7 @@ export class GoalsService {
                     !relatedCharacter
                 ) {
                     console.warn('Goal not applicable for character or mow:', g);
-                    return null;
+                    return;
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
             })
@@ -316,9 +313,9 @@ export class GoalsService {
             ascendGoals,
         };
     }
-    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | null {
+    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | undefined {
         if (!unit) {
-            return null;
+            return;
         }
 
         if (isMow(unit)) {
@@ -449,10 +446,10 @@ export class GoalsService {
             }
         }
 
-        return null;
+        return;
     }
 
-    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | null {
+    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | undefined {
         const base: IPersonalGoal = {
             id: goal.goalId,
             type: goal.type,
@@ -505,7 +502,7 @@ export class GoalsService {
                 };
             }
             default: {
-                return null;
+                return;
             }
         }
     }
@@ -603,7 +600,7 @@ export class GoalsService {
         }
 
         if (xpNeeded > 0) {
-            for (const rarity of [...XP_BOOK_ORDER].reverse()) {
+            for (const rarity of XP_BOOK_ORDER.toReversed()) {
                 while (xpNeeded > 0 && heldBooks[rarity] > 0) {
                     xpNeeded = Math.max(0, xpNeeded - XP_BOOK_VALUE[rarity]);
                     heldBooks[rarity] -= 1;
@@ -749,7 +746,7 @@ export class GoalsService {
         if (xpIncomeState.manualBooksPerDay > 0) {
             const booksToAccrue = Math.ceil(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
             newAccrual = this.processGoalAccrual(booksToAccrue, xpBooksAccrual, xpIncomeState.manualBooksPerDay);
-            goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86400000);
+            goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000);
         }
 
         return { xpNeeded, newXpBooksAccrual: newAccrual };
@@ -887,12 +884,12 @@ export class GoalsService {
             }
         } catch (error) {
             console.error('Error adjusting goal estimates:', error);
-            console.error('goals: ', JSON.stringify(goals));
-            console.error('goalsEstimate: ', JSON.stringify(goalsEstimate));
-            console.error('inventory: ', JSON.stringify(inventory));
-            console.error('xpUseState: ', JSON.stringify(xpUseState));
-            console.error('upgradeRankOrMowGoals: ', JSON.stringify(upgradeRankOrMowGoals));
-            console.error('xpIncomeState: ', JSON.stringify(xpIncomeState));
+            console.error('goals:', JSON.stringify(goals));
+            console.error('goalsEstimate:', JSON.stringify(goalsEstimate));
+            console.error('inventory:', JSON.stringify(inventory));
+            console.error('xpUseState:', JSON.stringify(xpUseState));
+            console.error('upgradeRankOrMowGoals:', JSON.stringify(upgradeRankOrMowGoals));
+            console.error('xpIncomeState:', JSON.stringify(xpIncomeState));
         }
 
         return {
