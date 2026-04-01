@@ -40,7 +40,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </p>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
+                    <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                         {upgradesRaids.map((raid, index) => (
                             <RaidUpgradeMaterialCard
                                 key={raid.id + '-' + index}
@@ -84,7 +84,7 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </p>
                 </AccordionSummary>
                 <AccordionDetails>
-                    <div className="mt-2.5 flex flex-wrap items-start justify-center gap-2">
+                    <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                         {bonusRaids.map((raid, index) => (
                             <RaidUpgradeMaterialCard
                                 key={raid.id + '-' + index}
