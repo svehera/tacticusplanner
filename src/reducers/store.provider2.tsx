@@ -64,6 +64,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [modifiedDate, setModifiedDate] = useState(globalState.modifiedDate);
     const [seenAppVersion, setSeenAppVersion] = useState<string | undefined>(globalState.seenAppVersion);
 
+    // Refs so the server sync effect can read the latest values without re-running on every change.
+    const globalStateReference = useRef(globalState);
+    globalStateReference.current = globalState;
+    const modifiedDateReference = useRef(modifiedDate);
+    modifiedDateReference.current = modifiedDate;
+
     const [characters, dispatchCharacters] = useReducer(charactersReducer, globalState.characters);
     const [mows, dispatchMows] = useReducer(mowsReducer, globalState.mows);
     const [goals, dispatchGoals] = useReducer(goalsReducer, globalState.goals);
@@ -283,7 +289,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchRosterSnapshots,
             dispatchGameModeTokens,
             setGlobalState,
-            localVersion,
         ]
     );
 
@@ -418,6 +423,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
+                const modifiedDate = modifiedDateReference.current;
                 const isFreshData = !modifiedDate;
                 setUser(username, shareToken);
                 setUserInfo({
@@ -444,7 +450,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                 if (shouldAcceptServerData) {
                     const serverData = convertData(data);
-                    const localData = GlobalState.toStore(globalState);
+                    const localData = GlobalState.toStore(globalStateReference.current);
 
                     const isDataEqual = isEqual(
                         { ...localData, modifiedDate: undefined },
@@ -455,10 +461,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         const newState = new GlobalState(serverData);
                         dispatch.setStore(newState, false, false);
                         localStore.setData(GlobalState.toStore(newState));
-                        if (hasDataConflict && modifiedDate && modifiedDate > serverLastModified) {
-                            enqueueSnackbar('There has been conflict. Your local changes are overridden with server', {
-                                variant: 'warning',
-                            });
+                        if (hasDataConflict && modifiedDate && modifiedDate < serverLastModified) {
+                            enqueueSnackbar(
+                                'There has been a conflict. Your local changes are overridden with server',
+                                {
+                                    variant: 'warning',
+                                }
+                            );
                         }
                         enqueueSnackbar('Synced with latest server data.', {
                             key: 'synced-with-latest-server-data',
@@ -471,7 +480,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     localStore.setData({ modifiedDate: serverLastModified });
                 } else if (shouldPushLocalData) {
                     clearTimeout(saveTimeoutReference.current);
-                    pushDataToServer(GlobalState.toStore(globalState), 'info');
+                    pushDataToServer(GlobalState.toStore(globalStateReference.current), 'info');
                 }
             })
             .catch((error: AxiosError<IErrorResponse>) => {
@@ -485,12 +494,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             });
     }, [
         dailyRaids.lastRefreshDateUTC,
-        dispatch,
-        globalState,
         isAuthenticated,
         localStore,
         logout,
-        modifiedDate,
         pushDataToServer,
         setModifiedDateTicks,
         setUser,

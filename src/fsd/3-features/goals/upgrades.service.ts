@@ -2489,6 +2489,68 @@ export class UpgradesService {
         }
     }
 
+    private static addBaseUpgrade(baseUpgradesTotal: Record<string, number>, upgradeId: string, count: number) {
+        if (count > 0) {
+            baseUpgradesTotal[upgradeId] = (baseUpgradesTotal[upgradeId] ?? 0) + count;
+        }
+    }
+
+    // Expands crafted upgrades into their constituent requirements until only base upgrades remain.
+    // This recursively walks craft trees and uses inventory to satisfy crafted items when possible.
+    private static processCraftedUpgrades(
+        neededUncraftedUpgradesTotal: Record<string, number>,
+        neededCraftedUpgrades: Record<string, number>,
+        inventoryUpgrades: Record<string, number>,
+        depth: number
+    ) {
+        const nextLevelCraftedUpgrades: Record<string, number> = {};
+
+        for (const craftedUpgrade in neededCraftedUpgrades) {
+            const acquiredCount = inventoryUpgrades[craftedUpgrade];
+            let requiredCount = neededCraftedUpgrades[craftedUpgrade];
+
+            // If we already own enough of this crafted upgrade, consume from inventory and move on.
+            if (acquiredCount >= requiredCount) {
+                inventoryUpgrades[craftedUpgrade] -= requiredCount;
+                neededCraftedUpgrades[craftedUpgrade] -= requiredCount;
+                continue;
+            } else if (acquiredCount > 0 && acquiredCount < requiredCount) {
+                inventoryUpgrades[craftedUpgrade] = 0;
+                neededCraftedUpgrades[craftedUpgrade] -= acquiredCount;
+                requiredCount -= acquiredCount;
+            }
+
+            const craftedUpgradeData = FsdUpgradesService.craftedUpgradesData[craftedUpgrade];
+
+            // For each crafted upgrade, expand into either base materials or nested crafted upgrades.
+            if (craftedUpgradeData) {
+                for (const recipeUpgrade of craftedUpgradeData.recipe) {
+                    const isCrafted = FsdUpgradesService.craftedUpgradesData[recipeUpgrade.id] !== undefined;
+                    if (isCrafted) {
+                        nextLevelCraftedUpgrades[recipeUpgrade.id] =
+                            (nextLevelCraftedUpgrades[recipeUpgrade.id] ?? 0) + recipeUpgrade.count * requiredCount;
+                    } else {
+                        this.addBaseUpgrade(
+                            neededUncraftedUpgradesTotal,
+                            recipeUpgrade.id,
+                            recipeUpgrade.count * requiredCount
+                        );
+                    }
+                }
+            }
+        }
+
+        // If additional crafted upgrades were discovered, continue expanding them until only base upgrades remain.
+        if (Object.keys(nextLevelCraftedUpgrades).length > 0) {
+            this.processCraftedUpgrades(
+                neededUncraftedUpgradesTotal,
+                nextLevelCraftedUpgrades,
+                inventoryUpgrades,
+                depth + 1
+            );
+        }
+    }
+
     /**
      * Applies all existing inventory in `inventoryUpgrades`, then returns the total
      * count, per non-craftable material, required to reach the rank-up goal.
@@ -2500,68 +2562,6 @@ export class UpgradesService {
     ): Record<string, number> {
         // Accumulator for base (non-craftable) material requirements after inventory has been applied.
         const baseUpgradesTotal: Record<string, number> = {};
-
-        const addBaseUpgrade = (upgradeId: string, count: number): void => {
-            if (count > 0) {
-                baseUpgradesTotal[upgradeId] = (baseUpgradesTotal[upgradeId] ?? 0) + count;
-            }
-        };
-
-        // Expands crafted upgrades into their constituent requirements until only base upgrades remain.
-        // This recursively walks craft trees and uses inventory to satisfy crafted items when possible.
-        const processCraftedUpgrade = (craftedUpgrades: Record<string, number>, depth = 0): void => {
-            const nextLevelCraftedUpgrades: Record<string, number> = {};
-
-            for (const craftedUpgrade in craftedUpgrades) {
-                const acquiredCount = inventoryUpgrades[craftedUpgrade];
-                const requiredCount = craftedUpgrades[craftedUpgrade];
-
-                // If we already own enough of this crafted upgrade, consume from inventory and move on.
-                if (acquiredCount >= requiredCount) {
-                    inventoryUpgrades[craftedUpgrade] = acquiredCount - requiredCount;
-                    continue;
-                }
-
-                // If we own some but not all, consume what we can and keep the remainder to craft.
-                if (acquiredCount > 0 && acquiredCount < requiredCount) {
-                    inventoryUpgrades[craftedUpgrade] = 0;
-                    craftedUpgrades[craftedUpgrade] = requiredCount - acquiredCount;
-                }
-
-                const craftedUpgradeData = FsdUpgradesService.craftedUpgradesData[craftedUpgrade];
-                const craftedUpgradeCount = craftedUpgrades[craftedUpgrade];
-
-                // For each crafted upgrade, expand into either base materials or nested crafted upgrades.
-                if (craftedUpgradeData) {
-                    // If this crafted upgrade has no crafted subcomponents, expand directly to base upgrades.
-                    if (craftedUpgradeData.craftedUpgrades.length === 0) {
-                        for (const baseUpgrade of craftedUpgradeData.baseUpgrades) {
-                            addBaseUpgrade(baseUpgrade.id, baseUpgrade.count * craftedUpgradeCount);
-                        }
-                    } else {
-                        // Otherwise, expand each recipe item into either another crafted upgrade or a base upgrade.
-                        for (const recipeUpgrade of craftedUpgradeData.recipe) {
-                            const subCraftedUpgrade = craftedUpgradeData.craftedUpgrades.find(
-                                x => x.id === recipeUpgrade.id
-                            );
-                            const baseUpgrade = craftedUpgradeData.baseUpgrades.find(x => x.id === recipeUpgrade.id);
-                            if (subCraftedUpgrade) {
-                                nextLevelCraftedUpgrades[recipeUpgrade.id] =
-                                    (nextLevelCraftedUpgrades[recipeUpgrade.id] ?? 0) +
-                                    recipeUpgrade.count * craftedUpgradeCount;
-                            } else if (baseUpgrade) {
-                                addBaseUpgrade(recipeUpgrade.id, recipeUpgrade.count * craftedUpgradeCount);
-                            }
-                        }
-                    }
-                }
-            }
-
-            // If additional crafted upgrades were discovered, continue expanding them until only base upgrades remain.
-            if (Object.keys(nextLevelCraftedUpgrades).length > 0) {
-                processCraftedUpgrade(nextLevelCraftedUpgrades, depth + 1);
-            }
-        };
 
         // Top-level crafted upgrades are gathered from the rank-up list and expanded afterward.
         const topLevelCraftedUpgrades: Record<string, number> = {};
@@ -2577,13 +2577,13 @@ export class UpgradesService {
                 if (upgradeData.crafted) {
                     topLevelCraftedUpgrades[upgrade] = (topLevelCraftedUpgrades[upgrade] ?? 0) + 1;
                 } else {
-                    addBaseUpgrade(upgrade, 1);
+                    this.addBaseUpgrade(baseUpgradesTotal, upgrade, 1);
                 }
             }
         }
 
         // Expand crafted upgrades into their base material requirements, honoring inventory.
-        processCraftedUpgrade(topLevelCraftedUpgrades);
+        this.processCraftedUpgrades(baseUpgradesTotal, topLevelCraftedUpgrades, inventoryUpgrades, /*depth=*/ 0);
 
         // Finally, include shard requirements (if any) as base materials.
         if (upgradeShards !== undefined) {
