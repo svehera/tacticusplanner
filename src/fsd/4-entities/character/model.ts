@@ -181,6 +181,7 @@ export interface IUnitUpgradeRank {
     rankEnd: Rank;
     startRankPoint5: boolean;
     rankPoint5: boolean;
+    /** The (potentially crafted) upgrade materials needed to rank up the character. */
     upgrades: string[];
 }
 
