@@ -440,10 +440,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
 
-                const localIsOlder = !!modifiedDate && modifiedDate < serverLastModified;
                 const localIsNewer = !!modifiedDate && modifiedDate > serverLastModified;
 
-                const shouldAcceptServerData = !isFirstLogin && (isFreshData || localIsOlder);
+                const shouldAcceptServerData = !isFirstLogin && !localIsNewer;
                 const shouldPushLocalData = !isFreshData && !hasDataConflict && (isFirstLogin || localIsNewer);
 
                 setModifiedDateTicks(serverModifiedDateTicks);
@@ -459,7 +458,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                     if (!isDataEqual) {
                         const newState = new GlobalState(serverData);
-                        dispatch.setStore(newState, false, false);
+                        dispatch.setStore(
+                            { ...newState, __localVersion: (globalStateReference.current.__localVersion ?? 0) + 1 },
+                            false,
+                            false
+                        );
                         localStore.setData(GlobalState.toStore(newState));
                         if (hasDataConflict && modifiedDate && modifiedDate < serverLastModified) {
                             enqueueSnackbar(
