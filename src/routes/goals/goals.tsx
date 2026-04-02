@@ -88,6 +88,7 @@ export const Goals = () => {
     const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
     const [resourcesExpanded, setResourcesExpanded] = useState(false);
+    const [sectionsExpanded, setSectionsExpanded] = useState({ upgrades: true, shards: true, abilities: true });
 
     const updateColorCodingMode = useCallback(
         (newMode: GoalColorMode) => {
@@ -492,158 +493,198 @@ export const Goals = () => {
                 </Accordion>
             </div>
             {upgradeRankOrMowGoals.length > 0 && (
-                <div>
-                    <div className="gap5 mx-0 my-5 flex flex-wrap items-center text-xl">
-                        <span>
-                            Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
-                        </span>
-                        <span>
-                            <b>{estimatedUpgradesTotal.energyTotal - shardRaidSummary.energyTotal}</b>{' '}
-                            <MiscIcon icon={'energy'} height={15} width={15} />)
-                        </span>
-                    </div>
-                    {!viewPreferences.goalsTableView && (
-                        <div className="flex flex-wrap gap-3">
-                            {sortedUpgrades.map(goal => {
-                                // Search the NEW merged collection for this goal's estimate
-                                const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
-
-                                return (
-                                    <GoalCard
-                                        key={goal.goalId}
-                                        goal={goal}
-                                        goalEstimate={finalEstimate} // Use the consolidated estimate
-                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
-                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                        onToggleInclude={() =>
-                                            dispatch.goals({
-                                                type: 'UpdateDailyRaids',
-                                                value: [{ goalId: goal.goalId, include: !goal.include }],
-                                            })
-                                        }
-                                        // Use finalEstimate for consistent color coding
-                                        bgColor={GoalService.getBackgroundColor(
-                                            viewPreferences.goalColorMode,
-                                            finalEstimate
-                                        )}
-                                        characters={characters}
-                                        mows={resolvedMows as IMow2[]}
-                                    />
-                                );
-                            })}
+                <Accordion
+                    expanded={sectionsExpanded.upgrades}
+                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
+                    className={`my-5 overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${sectionsExpanded.upgrades ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                        sx={{
+                            minHeight: '42px !important',
+                            '& .MuiAccordionSummary-content': { margin: '6px 0 !important' },
+                        }}
+                        className="bg-transparent px-4 py-0">
+                        <div className="flex flex-wrap items-center gap-2 text-xl">
+                            <span>
+                                Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
+                            </span>
+                            <span>
+                                <b>{estimatedUpgradesTotal.energyTotal - shardRaidSummary.energyTotal}</b>{' '}
+                                <MiscIcon icon={'energy'} height={15} width={15} />)
+                            </span>
                         </div>
-                    )}
+                    </AccordionSummary>
+                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                        {!viewPreferences.goalsTableView && (
+                            <div className="flex flex-wrap gap-3">
+                                {sortedUpgrades.map(goal => {
+                                    // Search the NEW merged collection for this goal's estimate
+                                    const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
 
-                    {viewPreferences.goalsTableView && (
-                        <GoalsTable
-                            rows={sortedUpgrades}
-                            allGoals={allGoals} // Pass the global flattened list here
-                            estimate={mergedGoalEstimates} // Pass the merged estimates to the table
-                            menuItemSelect={handleMenuItemSelect}
-                            goalsColorCoding={viewPreferences.goalColorMode}
-                        />
-                    )}
-                </div>
+                                    return (
+                                        <GoalCard
+                                            key={goal.goalId}
+                                            goal={goal}
+                                            goalEstimate={finalEstimate} // Use the consolidated estimate
+                                            bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
+                                            menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                            onToggleInclude={() =>
+                                                dispatch.goals({
+                                                    type: 'UpdateDailyRaids',
+                                                    value: [{ goalId: goal.goalId, include: !goal.include }],
+                                                })
+                                            }
+                                            // Use finalEstimate for consistent color coding
+                                            bgColor={GoalService.getBackgroundColor(
+                                                viewPreferences.goalColorMode,
+                                                finalEstimate
+                                            )}
+                                            characters={characters}
+                                            mows={resolvedMows as IMow2[]}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
+
+                        {viewPreferences.goalsTableView && (
+                            <GoalsTable
+                                rows={sortedUpgrades}
+                                allGoals={allGoals} // Pass the global flattened list here
+                                estimate={mergedGoalEstimates} // Pass the merged estimates to the table
+                                menuItemSelect={handleMenuItemSelect}
+                                goalsColorCoding={viewPreferences.goalColorMode}
+                            />
+                        )}
+                    </AccordionDetails>
+                </Accordion>
             )}
             {shardsGoals.length > 0 && (
-                <div>
-                    <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
-                        <span>
-                            Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
-                        </span>
-                        <span>
-                            <b>{shardRaidSummary.energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} /> |
-                        </span>
-                        <span>
-                            <b>{shardOnslaughtTokensTotal}</b> Tokens)
-                        </span>
-                    </div>
-                    {!viewPreferences.goalsTableView && (
-                        <div className="flex flex-wrap gap-3">
-                            {sortedShards.map(goal => {
-                                const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
-                                return (
-                                    <GoalCard
-                                        characters={characters}
-                                        mows={resolvedMows as IMow2[]}
-                                        key={goal.goalId}
-                                        goal={goal}
-                                        goalEstimate={estimate}
-                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
-                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                        onToggleInclude={() =>
-                                            dispatch.goals({
-                                                type: 'UpdateDailyRaids',
-                                                value: [{ goalId: goal.goalId, include: !goal.include }],
-                                            })
-                                        }
-                                        bgColor={GoalService.getBackgroundColor(
-                                            viewPreferences.goalColorMode,
-                                            estimate
-                                        )}
-                                    />
-                                );
-                            })}
+                <Accordion
+                    expanded={sectionsExpanded.shards}
+                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}
+                    className={`my-5 overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${sectionsExpanded.shards ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                        sx={{
+                            minHeight: '42px !important',
+                            '& .MuiAccordionSummary-content': { margin: '6px 0 !important' },
+                        }}
+                        className="bg-transparent px-4 py-0">
+                        <div className="flex flex-wrap items-center gap-2 text-xl">
+                            <span>
+                                Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
+                            </span>
+                            <span>
+                                <b>{shardRaidSummary.energyTotal}</b>{' '}
+                                <MiscIcon icon={'energy'} height={15} width={15} /> |
+                            </span>
+                            <span>
+                                <b>{shardOnslaughtTokensTotal}</b> Tokens)
+                            </span>
                         </div>
-                    )}
+                    </AccordionSummary>
+                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                        {!viewPreferences.goalsTableView && (
+                            <div className="flex flex-wrap gap-3">
+                                {sortedShards.map(goal => {
+                                    const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
+                                    return (
+                                        <GoalCard
+                                            characters={characters}
+                                            mows={resolvedMows as IMow2[]}
+                                            key={goal.goalId}
+                                            goal={goal}
+                                            goalEstimate={estimate}
+                                            bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
+                                            menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                            onToggleInclude={() =>
+                                                dispatch.goals({
+                                                    type: 'UpdateDailyRaids',
+                                                    value: [{ goalId: goal.goalId, include: !goal.include }],
+                                                })
+                                            }
+                                            bgColor={GoalService.getBackgroundColor(
+                                                viewPreferences.goalColorMode,
+                                                estimate
+                                            )}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
 
-                    {viewPreferences.goalsTableView && (
-                        <GoalsTable
-                            rows={sortedShards}
-                            allGoals={allGoals} // Pass the global flattened list here
-                            estimate={mergedGoalEstimates}
-                            menuItemSelect={handleMenuItemSelect}
-                            goalsColorCoding={viewPreferences.goalColorMode}
-                        />
-                    )}
-                </div>
+                        {viewPreferences.goalsTableView && (
+                            <GoalsTable
+                                rows={sortedShards}
+                                allGoals={allGoals} // Pass the global flattened list here
+                                estimate={mergedGoalEstimates}
+                                menuItemSelect={handleMenuItemSelect}
+                                goalsColorCoding={viewPreferences.goalColorMode}
+                            />
+                        )}
+                    </AccordionDetails>
+                </Accordion>
             )}
             {upgradeAbilities.length > 0 && (
-                <div>
-                    <div className="flex-box gap5 wrap mx-0 my-5 text-xl">
-                        <span>
-                            Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
-                        </span>
-                    </div>
-                    {!viewPreferences.goalsTableView && (
-                        <div className="flex flex-wrap gap-3">
-                            {sortedAbilities.map(goal => {
-                                const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
-                                return (
-                                    <GoalCard
-                                        key={goal.goalId}
-                                        goal={goal}
-                                        goalEstimate={finalEstimate}
-                                        characters={characters}
-                                        mows={resolvedMows as IMow2[]}
-                                        bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
-                                        menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                        onToggleInclude={() =>
-                                            dispatch.goals({
-                                                type: 'UpdateDailyRaids',
-                                                value: [{ goalId: goal.goalId, include: !goal.include }],
-                                            })
-                                        }
-                                        bgColor={GoalService.getBackgroundColor(
-                                            viewPreferences.goalColorMode,
-                                            finalEstimate
-                                        )}
-                                    />
-                                );
-                            })}
+                <Accordion
+                    expanded={sectionsExpanded.abilities}
+                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}
+                    className={`my-5 overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${sectionsExpanded.abilities ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    <AccordionSummary
+                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                        sx={{
+                            minHeight: '42px !important',
+                            '& .MuiAccordionSummary-content': { margin: '6px 0 !important' },
+                        }}
+                        className="bg-transparent px-4 py-0">
+                        <div className="flex flex-wrap items-center gap-2 text-xl">
+                            <span>
+                                Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
+                            </span>
                         </div>
-                    )}
+                    </AccordionSummary>
+                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                        {!viewPreferences.goalsTableView && (
+                            <div className="flex flex-wrap gap-3">
+                                {sortedAbilities.map(goal => {
+                                    const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
+                                    return (
+                                        <GoalCard
+                                            key={goal.goalId}
+                                            goal={goal}
+                                            goalEstimate={finalEstimate}
+                                            characters={characters}
+                                            mows={resolvedMows as IMow2[]}
+                                            bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
+                                            menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
+                                            onToggleInclude={() =>
+                                                dispatch.goals({
+                                                    type: 'UpdateDailyRaids',
+                                                    value: [{ goalId: goal.goalId, include: !goal.include }],
+                                                })
+                                            }
+                                            bgColor={GoalService.getBackgroundColor(
+                                                viewPreferences.goalColorMode,
+                                                finalEstimate
+                                            )}
+                                        />
+                                    );
+                                })}
+                            </div>
+                        )}
 
-                    {viewPreferences.goalsTableView && (
-                        <GoalsTable
-                            rows={sortedAbilities}
-                            allGoals={allGoals} // Pass the global flattened list here
-                            estimate={mergedGoalEstimates}
-                            menuItemSelect={handleMenuItemSelect}
-                            goalsColorCoding={viewPreferences.goalColorMode}
-                        />
-                    )}
-                </div>
+                        {viewPreferences.goalsTableView && (
+                            <GoalsTable
+                                rows={sortedAbilities}
+                                allGoals={allGoals} // Pass the global flattened list here
+                                estimate={mergedGoalEstimates}
+                                menuItemSelect={handleMenuItemSelect}
+                                goalsColorCoding={viewPreferences.goalColorMode}
+                            />
+                        )}
+                    </AccordionDetails>
+                </Accordion>
             )}
             {!!editGoal && !!editUnit && (
                 <EditGoalDialog

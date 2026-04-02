@@ -295,7 +295,7 @@ export const LeTokenomics: React.FC<Props> = ({
                                     35
                                 )
                             }
-                            renderTeam={x => renderTeam(x, 30)}
+                            renderTeam={x => renderTeam(x, 20)}
                             isBattleVisible={isFirstTokenBattleVisible}
                             onToggleBattle={() => setIsFirstTokenBattleVisible(!isFirstTokenBattleVisible)}
                             onMaybeBattle={() => nextTokenMaybe(firstTokenIndex)}
