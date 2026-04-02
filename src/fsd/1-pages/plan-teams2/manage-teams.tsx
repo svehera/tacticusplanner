@@ -402,7 +402,7 @@ export const ManageTeams = () => {
     }
 
     return (
-        <Stack spacing={2} className="p-4">
+        <Stack spacing={2}>
             <div className="flex items-start justify-between gap-4">
                 <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                 <div className="flex items-center gap-2">
