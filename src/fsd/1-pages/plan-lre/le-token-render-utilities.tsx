@@ -78,6 +78,7 @@ export const renderTeam = (team: string[], sizePx?: number) => (
                 <UnitShardIcon
                     key={snowprintId + index}
                     icon={unit?.roundIcon ?? ''}
+                    width={sizePx === undefined ? 25 : sizePx + 15}
                     height={sizePx ?? 25}
                     tooltip={unit?.name ?? snowprintId}
                 />
