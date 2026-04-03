@@ -18,15 +18,15 @@ It is not required that you use them, so if your case needs something a little d
 
 Cheatsheet of important terms:
 - Query: An asyncronous data request
-	- `isPending` / `status === 'pending'`: The data hasn't loaded yet
-	- `isError` / `status === 'error'`: The query failed with an error
-	- `isSuccess` / `status === 'success'`: The query was successful and data is available
-	- Rule out the `isPending` and `isError` conditions and the TypeScript will narrow down that the data is available
+  - `isPending` / `status === 'pending'`: The data hasn't loaded yet
+  - `isError` / `status === 'error'`: The query failed with an error
+  - `isSuccess` / `status === 'success'`: The query was successful and data is available
+  - Rule out the `isPending` and `isError` conditions and the TypeScript will narrow down that the data is available
 - Mutation: An asyncronous data update
-	- `isIdle` / `status === 'idle'` - The mutation is currently idle or in a fresh/reset state
-	- `isPending` / `status === 'pending'` - The mutation is currently running
-	- `isError` / `status === 'error'` - The mutation encountered an error
-	- `isSuccess` / `status === 'success'` - The mutation was successful and mutation data is available
+  - `isIdle` / `status === 'idle'` - The mutation is currently idle or in a fresh/reset state
+  - `isPending` / `status === 'pending'` - The mutation is currently running
+  - `isError` / `status === 'error'` - The mutation encountered an error
+  - `isSuccess` / `status === 'success'` - The mutation was successful and mutation data is available
 */
 
 // This is just a convenience function to wrap the setup when we want data

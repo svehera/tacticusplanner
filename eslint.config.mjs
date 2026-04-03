@@ -37,6 +37,7 @@ export default defineConfig([
         'package-lock.json',
         'vite-env.d.ts',
         '**/analytics__google-analytics.d.ts',
+        'src/convex/convex-api.ts',
     ]),
     ...convexPlugin.configs.recommended,
     ...queryPlugin.configs['flat/recommended'],
