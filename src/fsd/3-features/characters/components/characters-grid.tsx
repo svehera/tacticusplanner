@@ -1,7 +1,7 @@
 ﻿/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 /* eslint-disable no-restricted-imports */
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { UnitType } from '@/fsd/5-shared/model';
@@ -16,7 +16,7 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 import { CharactersViewContext } from '../characters-view.context';
 
-const CharactersGridFn = ({
+export const CharactersGrid = ({
     characters,
     blockedCharacters = [],
     onAvailableCharacterClick,
@@ -36,16 +36,16 @@ const CharactersGridFn = ({
             const isCharacter = unit.unitType === UnitType.character;
             return (
                 <div
-                    key={unit.snowprintId!}
+                    key={unit.snowprintId}
                     onClick={() => onAvailableCharacterClick?.(unit)}
                     className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                     title={`Select ${unit.name || 'Unit'}`}>
                     <RosterSnapshotCharacter
-                        key={unit.snowprintId!}
+                        key={unit.snowprintId}
                         char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                         charData={isCharacter ? unit : undefined}
-                        mow={!isCharacter ? RosterSnapshotsService.snapshotMachineOfWar(unit) : undefined}
-                        mowData={!isCharacter ? unit : undefined}
+                        mow={isCharacter ? undefined : RosterSnapshotsService.snapshotMachineOfWar(unit)}
+                        mowData={isCharacter ? undefined : unit}
                         showShards={
                             viewContext.showCharacterLevel
                                 ? RosterSnapshotShowVariableSettings.Always
@@ -84,16 +84,16 @@ const CharactersGridFn = ({
             const isCharacter = unit.unitType === UnitType.character;
             return (
                 <div
-                    key={unit.snowprintId!}
+                    key={unit.snowprintId}
                     onClick={() => onLockedCharacterClick?.(unit)}
                     className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                     title={`Select ${unit.name || 'Unit'}`}>
                     <RosterSnapshotCharacter
-                        key={unit.snowprintId!}
+                        key={unit.snowprintId}
                         char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                         charData={isCharacter ? unit : undefined}
-                        mow={!isCharacter ? RosterSnapshotsService.snapshotMachineOfWar(unit) : undefined}
-                        mowData={!isCharacter ? unit : undefined}
+                        mow={isCharacter ? undefined : RosterSnapshotsService.snapshotMachineOfWar(unit)}
+                        mowData={isCharacter ? undefined : unit}
                         showShards={RosterSnapshotShowVariableSettings.Always}
                         showMythicShards={RosterSnapshotShowVariableSettings.Always}
                         showXpLevel={RosterSnapshotShowVariableSettings.Never}
@@ -114,7 +114,7 @@ const CharactersGridFn = ({
                 {unlockedCharacters}
             </div>
 
-            <Conditional condition={!!lockedCharacters.length}>
+            <Conditional condition={lockedCharacters.length > 0}>
                 <h4>Locked ({lockedCharacters.length})</h4>
                 <div
                     className="flex flex-wrap [box-shadow:1px_2px_3px_rgba(0,_0,_0,_0.6)]"
@@ -125,5 +125,3 @@ const CharactersGridFn = ({
         </div>
     );
 };
-
-export const CharactersGrid = React.memo(CharactersGridFn);

@@ -9,7 +9,7 @@ export class CharactersPowerService {
             return 0;
         }
 
-        const abilityWeight = 500000 / 41274;
+        const abilityWeight = 500_000 / 41_274;
         if (isCharacter(unit)) {
             const abilityPower =
                 abilityWeight *
@@ -43,7 +43,7 @@ export class CharactersPowerService {
             (1 / 9) *
             (CharactersPowerService.getRankCoeff(unit.rank + 1) - CharactersPowerService.getRankCoeff(unit.rank));
 
-        const attributesWeight = 3000000 / 9326;
+        const attributesWeight = 3_000_000 / 9326;
         const attributePower =
             attributesWeight *
             CharactersPowerService.getStarsCoeff(unit, unit.stars) *
@@ -55,8 +55,6 @@ export class CharactersPowerService {
         if (!isUnlocked(unit)) {
             return 0;
         }
-        // Leave this off as we're scaling so that 40,000 is the ultimate Power for any character.
-        //      const dirtyDozenCoeff = CharactersPowerService.getDirtyDozenCoeff(character.name);
         const powerLevel =
             CharactersPowerService.getCharacterAttributePower(unit) +
             CharactersPowerService.getCharacterAbilityPower(unit);
@@ -76,7 +74,7 @@ export class CharactersPowerService {
             return 17.3 * (level - 44) + 125.5;
         } else {
             // Mythic values estimated via AI, unsure of source of original values
-            return 35.0 * (level - 50) + 229.3;
+            return 35 * (level - 50) + 229.3;
         }
     }
 
@@ -84,34 +82,46 @@ export class CharactersPowerService {
         if (isCharacter(unit)) {
             switch (rarity) {
                 case Rarity.Common:
-                default:
-                    return 1.0;
-                case Rarity.Uncommon:
+                default: {
+                    return 1;
+                }
+                case Rarity.Uncommon: {
                     return 1.2;
-                case Rarity.Rare:
+                }
+                case Rarity.Rare: {
                     return 1.4;
-                case Rarity.Epic:
+                }
+                case Rarity.Epic: {
                     return 1.6;
-                case Rarity.Legendary:
+                }
+                case Rarity.Legendary: {
                     return 1.8;
-                case Rarity.Mythic:
-                    return 2.0;
+                }
+                case Rarity.Mythic: {
+                    return 2;
+                }
             }
         } else if (isMow(unit)) {
             switch (rarity) {
                 case Rarity.Common:
-                default:
-                    return 0.0;
-                case Rarity.Uncommon:
+                default: {
+                    return 0;
+                }
+                case Rarity.Uncommon: {
                     return 0.05;
-                case Rarity.Rare:
+                }
+                case Rarity.Rare: {
                     return 0.1;
-                case Rarity.Epic:
+                }
+                case Rarity.Epic: {
                     return 0.15;
-                case Rarity.Legendary:
+                }
+                case Rarity.Legendary: {
                     return 0.2;
-                case Rarity.Mythic:
+                }
+                case Rarity.Mythic: {
                     return 0.25;
+                }
             }
         } else {
             return 0;
@@ -120,125 +130,173 @@ export class CharactersPowerService {
 
     public static getRankCoeff(rank: Rank): number {
         switch (rank) {
-            case Rank.Stone1:
-                return 1.0;
-            case Rank.Stone2:
+            case Rank.Stone1: {
+                return 1;
+            }
+            case Rank.Stone2: {
                 return 1.25;
-            case Rank.Stone3:
+            }
+            case Rank.Stone3: {
                 return 1.25 ** 2;
-            case Rank.Iron1:
+            }
+            case Rank.Iron1: {
                 return 1.25 ** 3;
-            case Rank.Iron2:
+            }
+            case Rank.Iron2: {
                 return 1.25 ** 4;
-            case Rank.Iron3:
+            }
+            case Rank.Iron3: {
                 return 1.25 ** 5;
-            case Rank.Bronze1:
+            }
+            case Rank.Bronze1: {
                 return 1.25 ** 6;
-            case Rank.Bronze2:
+            }
+            case Rank.Bronze2: {
                 return 1.25 ** 7;
-            case Rank.Bronze3:
+            }
+            case Rank.Bronze3: {
                 return 1.25 ** 8;
-            case Rank.Silver1:
+            }
+            case Rank.Silver1: {
                 return 1.25 ** 9;
-            case Rank.Silver2:
+            }
+            case Rank.Silver2: {
                 return 1.25 ** 10;
-            case Rank.Silver3:
+            }
+            case Rank.Silver3: {
                 return 1.25 ** 11;
-            case Rank.Gold1:
+            }
+            case Rank.Gold1: {
                 return 1.25 ** 12;
-            case Rank.Gold2:
+            }
+            case Rank.Gold2: {
                 return 1.25 ** 13;
-            case Rank.Gold3:
+            }
+            case Rank.Gold3: {
                 return 1.25 ** 14;
-            case Rank.Diamond1:
+            }
+            case Rank.Diamond1: {
                 return 1.25 ** 15;
-            case Rank.Diamond2:
+            }
+            case Rank.Diamond2: {
                 return 1.25 ** 16;
-            case Rank.Diamond3:
+            }
+            case Rank.Diamond3: {
                 return 1.25 ** 17;
-            case Rank.Adamantine1:
+            }
+            case Rank.Adamantine1: {
                 return 1.25 ** 18;
-            // Uncomment once higher Adamantine ranks are supported
-            // case Rank.Adamantine2:
-            //     return 1.25 ** 19;
-            // case Rank.Adamantine3:
-            //     return 1.25 ** 20;
+            }
+            case Rank.Adamantine2: {
+                return 1.25 ** 19;
+            }
+            case Rank.Adamantine3: {
+                return 1.25 ** 20;
+            }
 
-            case Rank.Locked:
-            default:
+            case Rank.Locked: {
                 return 0;
+            }
         }
     }
 
     public static getStarsCoeff(unit: IUnit, rank: RarityStars): number {
         if (isCharacter(unit)) {
             switch (rank) {
-                case RarityStars.OneStar:
+                case RarityStars.OneStar: {
                     return 1.1;
-                case RarityStars.TwoStars:
+                }
+                case RarityStars.TwoStars: {
                     return 1.2;
-                case RarityStars.ThreeStars:
+                }
+                case RarityStars.ThreeStars: {
                     return 1.3;
-                case RarityStars.FourStars:
+                }
+                case RarityStars.FourStars: {
                     return 1.4;
-                case RarityStars.FiveStars:
+                }
+                case RarityStars.FiveStars: {
                     return 1.5;
-                case RarityStars.RedOneStar:
+                }
+                case RarityStars.RedOneStar: {
                     return 1.6;
-                case RarityStars.RedTwoStars:
+                }
+                case RarityStars.RedTwoStars: {
                     return 1.7;
-                case RarityStars.RedThreeStars:
+                }
+                case RarityStars.RedThreeStars: {
                     return 1.8;
-                case RarityStars.RedFourStars:
+                }
+                case RarityStars.RedFourStars: {
                     return 1.9;
-                case RarityStars.RedFiveStars:
-                    return 2.0;
-                case RarityStars.OneBlueStar:
+                }
+                case RarityStars.RedFiveStars: {
+                    return 2;
+                }
+                case RarityStars.OneBlueStar: {
                     return 2.1;
-                case RarityStars.TwoBlueStars:
+                }
+                case RarityStars.TwoBlueStars: {
                     return 2.2;
-                case RarityStars.ThreeBlueStars:
+                }
+                case RarityStars.ThreeBlueStars: {
                     return 2.3;
-                case RarityStars.MythicWings:
+                }
+                case RarityStars.MythicWings: {
                     return 2.4;
-                case RarityStars.None:
-                default:
-                    return 1.0;
+                }
+                case RarityStars.None: {
+                    return 1;
+                }
             }
         } else if (isMow(unit)) {
             switch (rank) {
-                case RarityStars.OneStar:
+                case RarityStars.OneStar: {
                     return 0.05;
-                case RarityStars.TwoStars:
+                }
+                case RarityStars.TwoStars: {
                     return 0.1;
-                case RarityStars.ThreeStars:
+                }
+                case RarityStars.ThreeStars: {
                     return 0.15;
-                case RarityStars.FourStars:
+                }
+                case RarityStars.FourStars: {
                     return 0.2;
-                case RarityStars.FiveStars:
+                }
+                case RarityStars.FiveStars: {
                     return 0.25;
-                case RarityStars.RedOneStar:
+                }
+                case RarityStars.RedOneStar: {
                     return 0.3;
-                case RarityStars.RedTwoStars:
+                }
+                case RarityStars.RedTwoStars: {
                     return 0.35;
-                case RarityStars.RedThreeStars:
+                }
+                case RarityStars.RedThreeStars: {
                     return 0.4;
-                case RarityStars.RedFourStars:
+                }
+                case RarityStars.RedFourStars: {
                     return 0.45;
-                case RarityStars.RedFiveStars:
+                }
+                case RarityStars.RedFiveStars: {
                     return 0.5;
-                case RarityStars.OneBlueStar:
+                }
+                case RarityStars.OneBlueStar: {
                     return 0.6;
-                case RarityStars.TwoBlueStars:
+                }
+                case RarityStars.TwoBlueStars: {
                     return 0.7;
-                case RarityStars.ThreeBlueStars:
+                }
+                case RarityStars.ThreeBlueStars: {
                     return 0.8;
-                case RarityStars.MythicWings:
+                }
+                case RarityStars.MythicWings: {
                     return 0.9;
+                }
 
-                case RarityStars.None:
-                default:
-                    return 0.0;
+                case RarityStars.None: {
+                    return 0;
+                }
             }
         }
 

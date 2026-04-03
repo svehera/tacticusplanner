@@ -27,7 +27,7 @@ export const Teams = () => {
     const { mows, characters, viewPreferences, teams } = useContext(StoreContext);
     const [quickFilter, setQuickFilter] = useDebounceValue('', 300);
     const [openCreateTeamDialog, setOpenCreateTeamDialog] = React.useState(false);
-    const [editTeam, setEditTeam] = React.useState<IPersonalTeam | null>(null);
+    const [editTeam, setEditTeam] = React.useState<IPersonalTeam>();
 
     const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
@@ -56,10 +56,10 @@ export const Teams = () => {
         return teams.filter(team => {
             const nameMatched = () => team.name.toLowerCase().includes(searchTerm);
             const modeMatched = () => {
-                const modsNames = team.subModes.map(mod =>
-                    (allModes.find(x => x.value === mod)?.label ?? '').toLowerCase()
+                const modeNames = team.subModes.map(mode =>
+                    (allModes.find(x => x.value === mode)?.label ?? '').toLowerCase()
                 );
-                return modsNames.some(mod => mod.includes(searchTerm));
+                return modeNames.some(mode => mode.includes(searchTerm));
             };
 
             return nameMatched() || modeMatched();
@@ -116,7 +116,7 @@ export const Teams = () => {
                     {editTeam && (
                         <EditTeamDialog
                             team={editTeam}
-                            onClose={() => setEditTeam(null)}
+                            onClose={() => setEditTeam(undefined)}
                             characters={characters}
                             mows={resolvedMows}
                             saveTeam={updateTeam}

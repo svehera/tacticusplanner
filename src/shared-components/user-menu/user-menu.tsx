@@ -33,13 +33,44 @@ import { OverrideDataDialog } from './override-data-dialog';
 import { RegisterUserDialog } from './register-user-dialog';
 import { RestoreBackupDialog } from './restore-backup-dialog';
 
+function stringToColor(string: string) {
+    let hash = 0;
+    let index;
+
+    for (index = 0; index < string.length; index += 1) {
+        const character = string.codePointAt(index);
+        if (!character) throw new Error('invalid codePoint');
+        hash = character + ((hash << 5) - hash);
+    }
+
+    let color = '#';
+
+    for (index = 0; index < 3; index += 1) {
+        const value = (hash >> (index * 8)) & 0xff;
+        color += `00${value.toString(16)}`.slice(-2);
+    }
+
+    return color;
+}
+
+function stringAvatar(name: string) {
+    return {
+        sx: {
+            width: 32,
+            height: 32,
+            bgcolor: stringToColor(name),
+        },
+        children: `${name.slice(0, 2)}`,
+    };
+}
+
 export const UserMenu = () => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const popupManager = usePopupManager();
     const { isAuthenticated, logout, username, userInfo } = useAuth();
     const [showAdminTools, setShowAdminTools] = useState(false);
-    const inputRef = useRef<HTMLInputElement>(null);
+    const inputReference = useRef<HTMLInputElement>(null);
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
@@ -80,32 +111,36 @@ export const UserMenu = () => {
         navigate(url);
     };
 
-    const handleFileUpload = (event: ChangeEvent<HTMLInputElement>) => {
+    const handleFileUpload = async (event: ChangeEvent<HTMLInputElement>) => {
         const file = event.target.files?.[0];
 
         if (file) {
-            const reader = new FileReader();
+            try {
+                const content = await file.text();
+                const personalData: IPersonalData2 = convertData(JSON.parse(content));
+                personalData.modifiedDate = new Date();
 
-            reader.onload = (e: ProgressEvent<FileReader>) => {
-                try {
-                    const content = e.target?.result as string;
-                    const personalData: IPersonalData2 = convertData(JSON.parse(content));
-                    personalData.modifiedDate = new Date();
-
-                    dispatch.setStore(new GlobalState(personalData), true, false);
-                    enqueueSnackbar('Import successful', { variant: 'success' });
-                } catch (_error) {
-                    enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
-                }
-            };
-
-            reader.readAsText(file);
+                // When we import JSON, we need to bump the local version to ensure
+                // we pick it up. It should always be considered the freshest data, and
+                // definitely fresher than what we have in the backend.
+                dispatch.setStore(
+                    {
+                        ...new GlobalState(personalData),
+                        __localVersion: store.__localVersion ? store.__localVersion + 1 : 1,
+                    },
+                    /*modified=*/ true,
+                    /*reset=*/ false
+                );
+                enqueueSnackbar('Import successful', { variant: 'success' });
+            } catch {
+                enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
+            }
         }
     };
 
     const downloadJson = () => {
         const data = GlobalState.toStore(store);
-        const jsonData = JSON.stringify(data, null, 2);
+        const jsonData = JSON.stringify(data, undefined, 2);
 
         const blob = new Blob([jsonData], { type: 'application/json' });
         const url = URL.createObjectURL(blob);
@@ -135,10 +170,10 @@ export const UserMenu = () => {
     const restoreData = () => {
         const localStorage = new PersonalDataLocalStorage();
         const restoredData = localStorage.restoreData();
-        if (!restoredData) {
-            enqueueSnackbar('No Backup Found', { variant: 'error' });
-        } else {
+        if (restoredData) {
             setShowRestoreBackup(true);
+        } else {
+            enqueueSnackbar('No Backup Found', { variant: 'error' });
         }
     };
 
@@ -151,35 +186,6 @@ export const UserMenu = () => {
         }
     };
 
-    function stringToColor(string: string) {
-        let hash = 0;
-        let i;
-
-        for (i = 0; i < string.length; i += 1) {
-            hash = string.charCodeAt(i) + ((hash << 5) - hash);
-        }
-
-        let color = '#';
-
-        for (i = 0; i < 3; i += 1) {
-            const value = (hash >> (i * 8)) & 0xff;
-            color += `00${value.toString(16)}`.slice(-2);
-        }
-
-        return color;
-    }
-
-    function stringAvatar(name: string) {
-        return {
-            sx: {
-                width: 32,
-                height: 32,
-                bgcolor: stringToColor(name),
-            },
-            children: `${name.slice(0, 2)}`,
-        };
-    }
-
     function syncWithTacticus(): void {
         popupManager.open(TacticusIntegrationDialog, {
             tacticusApiKey: userInfo.tacticusApiKey,
@@ -191,7 +197,7 @@ export const UserMenu = () => {
 
     return (
         <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
-            <input ref={inputRef} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
+            <input ref={inputReference} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
             <div className="flex items-center">
                 <span className="text-base font-bold">Hi, {username}</span>
                 <IconButton
@@ -216,7 +222,14 @@ export const UserMenu = () => {
                 onClick={userMenuControls.handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                {!isAuthenticated ? (
+                {isAuthenticated ? (
+                    <MenuItem onClick={() => logout()}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
+                    </MenuItem>
+                ) : (
                     <div>
                         <MenuItem onClick={() => openLoginForm()}>
                             <ListItemIcon>
@@ -231,13 +244,6 @@ export const UserMenu = () => {
                             <ListItemText>Register</ListItemText>
                         </MenuItem>
                     </div>
-                ) : (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
                 )}
 
                 <Divider />
@@ -250,7 +256,7 @@ export const UserMenu = () => {
                     </MenuItem>
                 )}
 
-                <MenuItem onClick={() => inputRef.current?.click()}>
+                <MenuItem onClick={() => inputReference.current?.click()}>
                     <ListItemIcon>
                         <UploadIcon />
                     </ListItemIcon>

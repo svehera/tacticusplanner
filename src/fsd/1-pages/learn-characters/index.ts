@@ -1,2 +1,2 @@
 export { LearnCharacters } from './characters';
-export { RankLookup } from './rankLookup';
+export { RankLookup } from './rank-lookup';

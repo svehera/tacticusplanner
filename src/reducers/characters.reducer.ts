@@ -75,16 +75,15 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             if (existingChar) {
                 const rankRarity = rankToRarity[existingChar.rank];
                 const rarityStars = rarityToStars[existingChar.rarity];
-                const updatedLevel =
-                    updatedCharacter.level < 0 ? 0 : updatedCharacter.level > 55 ? 55 : updatedCharacter.level;
+                const updatedLevel = updatedCharacter.level < 0 ? 0 : Math.min(updatedCharacter.level, 55);
 
                 const updatedCharacterData = {
                     ...existingChar,
                     rank: updatedCharacter.rank,
-                    rarity: updatedCharacter.rarity <= rankRarity ? rankRarity : updatedCharacter.rarity,
+                    rarity: Math.max(updatedCharacter.rarity, rankRarity),
                     bias: updatedCharacter.bias,
                     upgrades: updatedCharacter.upgrades,
-                    stars: updatedCharacter.stars <= rarityStars ? rarityStars : updatedCharacter.stars,
+                    stars: Math.max(updatedCharacter.stars, rarityStars),
                     xp: updatedCharacter.xp,
                     shards: updatedCharacter.shards,
                     equipment: updatedCharacter.equipment,
@@ -163,12 +162,12 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                         const mythicShards = tacticusUnit.mythicShards ?? char.mythicShards;
 
                         const equipment: IPersonalCharacterDataEquipment[] = [];
-                        tacticusUnit.items.forEach(equip => {
+                        for (const equip of tacticusUnit.items) {
                             const equipmentData = EquipmentService.convertTacticusEquipmentData(equip);
                             if (equipmentData) {
                                 equipment.push({ id: equipmentData.id, level: equip.level });
                             }
-                        });
+                        }
 
                         return {
                             ...char,
@@ -192,9 +191,9 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             stars: RarityStars.None,
                             rank: Rank.Locked,
                             xp: 0,
-                            level: 0,
-                            activeAbilityLevel: 0,
-                            passiveAbilityLevel: 0,
+                            level: 1,
+                            activeAbilityLevel: 1,
+                            passiveAbilityLevel: 1,
                             equipment: [],
                             shards: tacticusUnitShards.amount,
                         };
@@ -206,9 +205,9 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
                             stars: RarityStars.None,
                             rank: Rank.Locked,
                             xp: 0,
-                            level: 0,
-                            activeAbilityLevel: 0,
-                            passiveAbilityLevel: 0,
+                            level: 1,
+                            activeAbilityLevel: 1,
+                            passiveAbilityLevel: 1,
                             equipment: [],
                             shards: 0,
                         };
@@ -334,7 +333,8 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             }));
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

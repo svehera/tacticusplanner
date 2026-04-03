@@ -19,7 +19,7 @@ interface Props {
     characters: (ICharacter2 | undefined)[];
     onClick?: (unit: IUnit) => void;
     onEmptyClick?: (isMow: boolean) => void;
-    mow?: IMow2 | null;
+    mow?: IMow2;
     withMow?: boolean;
 }
 
@@ -57,7 +57,7 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
                         const character = characters[index];
                         return character ? (
                             <div
-                                key={character.snowprintId!}
+                                key={character.snowprintId}
                                 onClick={() => onCharacterClick(character)}
                                 className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                                 title={`Select ${character.name || 'Unit'}`}>
@@ -85,7 +85,7 @@ export const TeamView: React.FC<Props> = ({ characters, mow, withMow = false, on
                     <Divider orientation="vertical" flexItem />
                     {mow ? (
                         <div
-                            key={mow.snowprintId!}
+                            key={mow.snowprintId}
                             onClick={() => onMowClick(mow)}
                             className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                             title={`Select ${mow.name || 'Unit'}`}>

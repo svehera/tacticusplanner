@@ -70,9 +70,9 @@ export const LreAddTeam: React.FC<Props> = ({
 
     const handleChange = (checked: boolean, name: string) => {
         if (checked) {
-            setRestrictions(curr => [...curr, name]);
+            setRestrictions(current => [...current, name]);
         } else {
-            setRestrictions(curr => curr.filter(r => r !== name));
+            setRestrictions(current => current.filter(r => r !== name));
         }
     };
 
@@ -81,8 +81,7 @@ export const LreAddTeam: React.FC<Props> = ({
             id: '',
             name: teamName,
             section: trackId,
-            characters: selectedTeam,
-            charSnowprintIds: selectedTeam.map(x => x.snowprintId!),
+            charSnowprintIds: selectedTeam.map(x => x.snowprintId),
             expectedBattleClears: expectedBattleClears,
             restrictionsIds: restrictions,
         });
@@ -92,10 +91,10 @@ export const LreAddTeam: React.FC<Props> = ({
         if (selectedTeam.includes(character) || selectedTeam.length === 5) {
             return;
         }
-        setSelectedTeam(curr => [...curr, character]);
+        setSelectedTeam(current => [...current, character]);
     };
     const removeCharacter = (character: ICharacter2) => {
-        setSelectedTeam(curr => curr.filter(c => c.id !== character.id));
+        setSelectedTeam(current => current.filter(c => c.id !== character.id));
     };
 
     const updateSelectedTrack = (value: string[]) => {
@@ -112,11 +111,11 @@ export const LreAddTeam: React.FC<Props> = ({
     };
 
     const isValid = () => {
-        const availableCharacters = gridTeam.map(x => x.id);
+        const availableCharacters = new Set(gridTeam.map(x => x.id));
         return (
-            selectedTeam.length !== 0 &&
-            !!teamName.length &&
-            selectedTeam.every(character => availableCharacters.includes(character.id)) &&
+            selectedTeam.length > 0 &&
+            teamName.length > 0 &&
+            selectedTeam.every(character => availableCharacters.has(character.id)) &&
             clampExpectedBattles(expectedBattleClears) === expectedBattleClears
         );
     };
@@ -157,8 +156,8 @@ export const LreAddTeam: React.FC<Props> = ({
                                 // allow empty or numeric input only
                                 if (/^\d*$/.test(v)) {
                                     setExpectedBattleClearsInput(v);
-                                    const parsed = parseInt(v, 10);
-                                    if (!isNaN(parsed)) {
+                                    const parsed = Number.parseInt(v, 10);
+                                    if (!Number.isNaN(parsed)) {
                                         setExpectedBattleClears(clampExpectedBattles(parsed));
                                     }
                                 }
@@ -169,8 +168,8 @@ export const LreAddTeam: React.FC<Props> = ({
                                     const clamped = clampExpectedBattles(expectedBattleClears);
                                     setExpectedBattleClearsInput(clamped.toString());
                                 } else {
-                                    const parsed = parseInt(expectedBattleClearsInput, 10);
-                                    const final = isNaN(parsed) ? expectedBattleClears : parsed;
+                                    const parsed = Number.parseInt(expectedBattleClearsInput, 10);
+                                    const final = Number.isNaN(parsed) ? expectedBattleClears : parsed;
                                     const clamped = clampExpectedBattles(final);
                                     setExpectedBattleClears(clamped);
                                     setExpectedBattleClearsInput(clamped.toString());
@@ -196,18 +195,18 @@ export const LreAddTeam: React.FC<Props> = ({
                     ))}
                 </div>
 
-                <div className="flex-box full-width wrap start space-between">
+                <div className="flex-box full-width wrap space-between start">
                     <div className="min-w-[400px]">
                         <div className="flex-box gap20 space-between">
                             <h3>Selected Team ({selectedTeam.length}/5)</h3>
-                            {!!selectedTeam.length && (
+                            {selectedTeam.length > 0 && (
                                 <Button variant="text" onClick={clearAll}>
                                     Clear all
                                 </Button>
                             )}
                         </div>
-                        <div className="flex-box column start pointer gap-[3px]">
-                            {selectedTeam.length ? (
+                        <div className="flex-box column pointer start gap-[3px]">
+                            {selectedTeam.length > 0 ? (
                                 selectedTeam.map(character => (
                                     <div
                                         key={character.id}

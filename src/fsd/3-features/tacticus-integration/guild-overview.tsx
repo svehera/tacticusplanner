@@ -13,26 +13,31 @@ import {
 // Helper function to convert role enum to readable string
 const getRoleLabel = (role: TacticusGuildRole): string => {
     switch (role) {
-        case TacticusGuildRole.LEADER:
+        case TacticusGuildRole.LEADER: {
             return 'Leader';
-        case TacticusGuildRole.CO_LEADER:
+        }
+        case TacticusGuildRole.CO_LEADER: {
             return 'Co-Leader';
-        case TacticusGuildRole.OFFICER:
+        }
+        case TacticusGuildRole.OFFICER: {
             return 'Officer';
-        case TacticusGuildRole.MEMBER:
+        }
+        case TacticusGuildRole.MEMBER: {
             return 'Member';
-        default:
+        }
+        default: {
             return 'Unknown';
+        }
     }
 };
 
 // Component to format the date
-const DateFormatter: React.FC<{ value: string | null | undefined }> = ({ value }) => {
+const DateFormatter: React.FC<{ value: string | undefined }> = ({ value }) => {
     if (!value) return <span>Never</span>;
 
     const date = new Date(value);
     const formattedDate = date.toLocaleDateString();
-    const daysAgo = Math.floor((new Date().getTime() - date.getTime()) / (1000 * 3600 * 24));
+    const daysAgo = Math.floor((Date.now() - date.getTime()) / (1000 * 3600 * 24));
 
     return (
         <span>
@@ -47,22 +52,26 @@ const RoleRenderer: React.FC<{ value: TacticusGuildRole }> = ({ value }) => {
     let textColor = 'text-gray-800';
 
     switch (value) {
-        case TacticusGuildRole.LEADER:
+        case TacticusGuildRole.LEADER: {
             bgColor = 'bg-red-100';
             textColor = 'text-red-800';
             break;
-        case TacticusGuildRole.CO_LEADER:
+        }
+        case TacticusGuildRole.CO_LEADER: {
             bgColor = 'bg-orange-100';
             textColor = 'text-orange-800';
             break;
-        case TacticusGuildRole.OFFICER:
+        }
+        case TacticusGuildRole.OFFICER: {
             bgColor = 'bg-blue-100';
             textColor = 'text-blue-800';
             break;
-        case TacticusGuildRole.MEMBER:
+        }
+        case TacticusGuildRole.MEMBER: {
             bgColor = 'bg-green-100';
             textColor = 'text-green-800';
             break;
+        }
     }
 
     return (
@@ -73,14 +82,14 @@ const RoleRenderer: React.FC<{ value: TacticusGuildRole }> = ({ value }) => {
 export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
-    const [guildData, setGuildData] = useState<TacticusGuild | null>(null);
+    const [guildData, setGuildData] = useState<TacticusGuild>();
     const [loading, setLoading] = useState<boolean>(true);
-    const [error, setError] = useState<string | null>(null);
+    const [error, setError] = useState<string>();
 
     useEffect(() => {
         getTacticusGuildData()
             .then(response => {
-                setGuildData(response.data?.guild ?? null);
+                setGuildData(response.data?.guild);
                 setLoading(false);
             })
             .catch(error => {
@@ -130,7 +139,7 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
 
     // Stats calculation
     const calculateStats = () => {
-        if (!guildData) return null;
+        if (!guildData) return;
 
         const totalMembers = guildData.members.length;
         const avgLevel = guildData.members.reduce((sum, member) => sum + member.level, 0) / totalMembers;
@@ -142,9 +151,9 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
             [TacticusGuildRole.MEMBER]: 0,
         };
 
-        guildData.members.forEach(member => {
+        for (const member of guildData.members) {
             roleCount[member.role]++;
-        });
+        }
 
         // Calculate active members (active in last 7 days)
         const activeMembers = guildData.members.filter(member => {

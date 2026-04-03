@@ -30,15 +30,15 @@ export class LegendaryEventService {
             const pastEvents = allLegendaryEvents
                 .map(event => ({ event, startDate: Date.parse(safeGet(event, 'nextEventDateUtc') ?? '') }))
                 .filter(({ startDate }) => Number.isFinite(startDate) && startDate < now)
-                .sort((a, b) => b.startDate - a.startDate);
-            if (pastEvents.length !== 0) {
+                .toSorted((a, b) => b.startDate - a.startDate);
+            if (pastEvents.length > 0) {
                 startDates.push(new Date(pastEvents[0].startDate));
             } else {
-                const knownStartTimeMillis = 1766880000000; // This was the start of Farsight 1, it's arbitrary.
+                const knownStartTimeMillis = 1_766_880_000_000; // This was the start of Farsight 1, it's arbitrary.
 
                 const now = Date.now();
-                for (let i = 0; ; ++i) {
-                    const newStart = knownStartTimeMillis + i * this.getTimeBetweenLegendaryEvents();
+                for (let index = 0; ; ++index) {
+                    const newStart = knownStartTimeMillis + index * this.getTimeBetweenLegendaryEvents();
                     if (
                         newStart > now ||
                         (newStart <= now && newStart + this.getLegendaryEventDurationMillis() > now)
@@ -49,8 +49,8 @@ export class LegendaryEventService {
                 }
             }
         }
-        for (let i = 1; i < kMaxEventsToReturn; i++) {
-            startDates.push(new Date(startDates[i - 1].getTime() + this.getTimeBetweenLegendaryEvents()));
+        for (let index = 1; index < kMaxEventsToReturn; index++) {
+            startDates.push(new Date(startDates[index - 1].getTime() + this.getTimeBetweenLegendaryEvents()));
         }
         return startDates;
     }
@@ -68,24 +68,24 @@ export class LegendaryEventService {
     public static getActiveEvent(events?: ILegendaryEventStatic[]): ILegendaryEventStatic | undefined {
         const sevenDaysAgoTs = Date.now() - 7 * DAY_MS;
         const sortedEvents = (events ?? allLegendaryEvents)
-            .filter(isUnfinishedScheduledEvent)
+            .filter(event => isUnfinishedScheduledEvent(event))
             .map(event => ({ event, startDate: Date.parse(event.nextEventDateUtc) }))
             // started in the last 7 days (exclusive) or any future date
             .filter(({ startDate }) => Number.isFinite(startDate) && startDate > sevenDaysAgoTs)
-            .sort((a, b) => a.startDate - b.startDate);
+            .toSorted((a, b) => a.startDate - b.startDate);
         return sortedEvents[0]?.event;
     }
 
     public static getUnfinishedEvents(): ILegendaryEventStatic[] {
-        return allLegendaryEvents.filter(e => !e.finished);
+        return allLegendaryEvents.filter(event => !event.finished);
     }
 
     public static getEventByCharacterSnowprintId(snowprintId: string): ILegendaryEventStatic | undefined {
-        return allLegendaryEvents.find(e => e.unitSnowprintId === snowprintId);
+        return allLegendaryEvents.find(event => event.unitSnowprintId === snowprintId);
     }
 
     public static getUnfinishedLegendaryEventCharacterSnowprintIds(): string[] {
-        return allLegendaryEvents.filter(e => !e.finished).map(e => e.unitSnowprintId);
+        return allLegendaryEvents.filter(event => !event.finished).map(event => event.unitSnowprintId);
     }
 
     public static getLegendaryEvents() {

@@ -5,7 +5,7 @@ import { GameMode } from '@/fsd/3-features/teams/teams.enums';
 
 import { SlotType, GuidesGroup, GuidesStatus } from './guides.enums';
 
-export interface IGetGuidesQueryParams {
+export interface IGetGuidesQueryParameters {
     group?: GuidesGroup;
     primaryModes?: string;
     subModes?: string[];
@@ -19,7 +19,7 @@ export interface IGetGuidesQueryParams {
 
 export interface IGetGuidesResponse {
     teams: IGuide[];
-    next: string | null;
+    next: string | undefined;
     total: number;
 }
 
@@ -33,7 +33,7 @@ export interface IGuide {
     youtubeLink: string;
     rejectReason: string;
     status: GuidesStatus;
-    originalTeamId: number | null;
+    originalTeamId: number | undefined;
     likes: number;
     isHonored: boolean;
     createdBy: string;
@@ -67,7 +67,7 @@ export interface ITeamSlot {
 
 export interface IGuideFilter {
     createdBy: string | undefined;
-    primaryMod: GameMode | undefined;
-    subMods: string[] | undefined;
+    primaryMode: GameMode | undefined;
+    subModes: string[] | undefined;
     unitIds: string[] | undefined;
 }

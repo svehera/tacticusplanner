@@ -16,7 +16,7 @@ import { ILreViewSettings } from '@/fsd/3-features/view-settings/model';
 import { LeBattle } from './le-battle';
 import { ILeBattles, LeBattleService } from './le-battle.service';
 import { LeTokenCard } from './le-token-card';
-import { renderRestrictions, renderTeam } from './le-token-render-utils';
+import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
@@ -33,12 +33,17 @@ interface Props {
         model: ILreProgressModel,
         trackId: 'alpha' | 'beta' | 'gamma',
         battleIndex: number,
-        reqId: string,
+        requirementId: string,
         status: RequirementStatus,
         forceOverwrite?: boolean
     ) => ILreProgressModel;
     updateDto: (model: ILreProgressModel) => void;
 }
+
+const getRowClassName = (index: number) => {
+    // Alternate between two sets of colors for striping
+    return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
+};
 
 /**
  * Displays the tokens to be used by the player in optimal order, along with
@@ -66,9 +71,9 @@ export const LeTokenTable: React.FC<Props> = ({
     }, [isTableView, dispatch]);
 
     const onToggleBattle = (index: number) => {
-        setBattleVisibility(prev => ({
-            ...prev,
-            [index]: !prev[index],
+        setBattleVisibility(previous => ({
+            ...previous,
+            [index]: !previous[index],
         }));
     };
 
@@ -89,7 +94,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     const setRequirementStatus = (token: TokenDisplay, status: RequirementStatus) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
 
         const hasRestrictions = token.restricts.some(r => !LreRequirementStatusService.isDefaultObjective(r.id));
         // Mark the restrictions included in this token as completed
@@ -116,19 +121,14 @@ export const LeTokenTable: React.FC<Props> = ({
 
     const onMaybeBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.MaybeClear);
     };
 
     const onStopBattle = (token: TokenDisplay) => {
         if (token.track !== 'alpha' && token.track !== 'beta' && token.track !== 'gamma') return;
-        if (token.battleNumber == null || token.battleNumber < 0) return;
+        if (token.battleNumber == undefined || token.battleNumber < 0) return;
         setRequirementStatus(token, RequirementStatus.StopHere);
-    };
-
-    const getRowClassName = (index: number) => {
-        // Alternate between two sets of colors for striping
-        return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
     };
 
     return (

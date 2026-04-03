@@ -14,12 +14,12 @@ interface Props {
     dataUpdate: (upgradeId: string, value: number) => void;
 }
 
-const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
+export const InventoryItem: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
     const [amount, setAmount] = React.useState<number | ''>(data.quantity);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>, upgradeId: string) => {
         const value = event.target.value === '' ? 0 : Number(event.target.value);
-        const result = value > 1000 ? 1000 : value;
+        const result = Math.min(value, 1000);
         dataUpdate(upgradeId, result);
         setAmount(event.target.value === '' ? '' : Number(event.target.value));
     };
@@ -85,5 +85,3 @@ const InventoryItemFn: React.FC<Props> = ({ data, showIncDec, dataUpdate }) => {
         </div>
     );
 };
-
-export const InventoryItem = React.memo(InventoryItemFn);

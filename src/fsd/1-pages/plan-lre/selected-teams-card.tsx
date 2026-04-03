@@ -1,11 +1,12 @@
 import { DeleteForever, Edit } from '@mui/icons-material';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import IconButton from '@mui/material/IconButton';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
+import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
 import { ILreTeam } from '@/fsd/3-features/lre';
@@ -19,7 +20,11 @@ interface Props {
 }
 
 export const SelectedTeamCard: React.FC<Props> = ({ team, upgradeRankOrMowGoals, menuItemSelect }) => {
-    const { viewPreferences } = useContext(StoreContext);
+    const { viewPreferences, characters: unresolvedCharacters } = useContext(StoreContext);
+    const characters = useMemo(
+        () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
+        [unresolvedCharacters]
+    );
     let subheader = team.restrictionsIds.join(', ');
     if (team.points) subheader += ` (${team.points} points)`;
     if (subheader.length > 0) subheader += ' - ';
@@ -47,10 +52,10 @@ export const SelectedTeamCard: React.FC<Props> = ({ team, upgradeRankOrMowGoals,
                 subheader={subheader}
             />
             <CardContent className="flex-box column gap1 start min-h-[150]">
-                {team.characters?.map(x => (
+                {team.charSnowprintIds!.map(x => (
                     <LreTile
-                        key={x.id}
-                        character={x}
+                        key={x}
+                        character={characters.find(c => c.snowprintId === x)!}
                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
                         settings={viewPreferences}
                     />

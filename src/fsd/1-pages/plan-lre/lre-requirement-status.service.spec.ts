@@ -72,8 +72,8 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should return status from new status field when available', () => {
-            const req = createRequirementProgress('req1', RequirementStatus.MaybeClear);
-            const battle = createBattleProgress(0, [req]);
+            const requirement = createRequirementProgress('req1', RequirementStatus.MaybeClear);
+            const battle = createBattleProgress(0, [requirement]);
             const tracksProgress = [createTrackProgress('alpha', [battle])];
 
             const result = LreRequirementStatusService.getRequirementStatus(tracksProgress, 'alpha', 0, 'req1');
@@ -82,8 +82,8 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should return Cleared when legacy completed flag is true', () => {
-            const req = createRequirementProgress('req1', undefined, true, false);
-            const battle = createBattleProgress(0, [req]);
+            const requirement = createRequirementProgress('req1', undefined, true, false);
+            const battle = createBattleProgress(0, [requirement]);
             const tracksProgress = [createTrackProgress('alpha', [battle])];
 
             const result = LreRequirementStatusService.getRequirementStatus(tracksProgress, 'alpha', 0, 'req1');
@@ -92,8 +92,8 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should return StopHere when legacy blocked flag is true', () => {
-            const req = createRequirementProgress('req1', undefined, false, true);
-            const battle = createBattleProgress(0, [req]);
+            const requirement = createRequirementProgress('req1', undefined, false, true);
+            const battle = createBattleProgress(0, [requirement]);
             const tracksProgress = [createTrackProgress('alpha', [battle])];
 
             const result = LreRequirementStatusService.getRequirementStatus(tracksProgress, 'alpha', 0, 'req1');
@@ -102,8 +102,8 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should return NotCleared when both legacy flags are false', () => {
-            const req = createRequirementProgress('req1', undefined, false, false);
-            const battle = createBattleProgress(0, [req]);
+            const requirement = createRequirementProgress('req1', undefined, false, false);
+            const battle = createBattleProgress(0, [requirement]);
             const tracksProgress = [createTrackProgress('alpha', [battle])];
 
             const result = LreRequirementStatusService.getRequirementStatus(tracksProgress, 'alpha', 0, 'req1');
@@ -112,8 +112,8 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should prioritize new status field over legacy flags', () => {
-            const req = createRequirementProgress('req1', RequirementStatus.PartiallyCleared, true, false);
-            const battle = createBattleProgress(0, [req]);
+            const requirement = createRequirementProgress('req1', RequirementStatus.PartiallyCleared, true, false);
+            const battle = createBattleProgress(0, [requirement]);
             const tracksProgress = [createTrackProgress('alpha', [battle])];
 
             const result = LreRequirementStatusService.getRequirementStatus(tracksProgress, 'alpha', 0, 'req1');
@@ -122,8 +122,8 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should return NotCleared status (0) even when legacy completed flag is true', () => {
-            const req = createRequirementProgress('req1', RequirementStatus.NotCleared, true, false);
-            const battle = createBattleProgress(0, [req]);
+            const requirement = createRequirementProgress('req1', RequirementStatus.NotCleared, true, false);
+            const battle = createBattleProgress(0, [requirement]);
             const tracksProgress = [createTrackProgress('alpha', [battle])];
 
             const result = LreRequirementStatusService.getRequirementStatus(tracksProgress, 'alpha', 0, 'req1');
@@ -132,10 +132,10 @@ describe('LreRequirementStatusService', () => {
         });
 
         it('should find the correct requirement across multiple tracks and battles', () => {
-            const req1 = createRequirementProgress('req1', RequirementStatus.Cleared);
-            const req2 = createRequirementProgress('req2', RequirementStatus.StopHere);
-            const battle0 = createBattleProgress(0, [req1]);
-            const battle1 = createBattleProgress(1, [req2]);
+            const requirement1 = createRequirementProgress('req1', RequirementStatus.Cleared);
+            const requirement2 = createRequirementProgress('req2', RequirementStatus.StopHere);
+            const battle0 = createBattleProgress(0, [requirement1]);
+            const battle1 = createBattleProgress(1, [requirement2]);
 
             const tracksProgress = [createTrackProgress('alpha', [battle0]), createTrackProgress('beta', [battle1])];
 

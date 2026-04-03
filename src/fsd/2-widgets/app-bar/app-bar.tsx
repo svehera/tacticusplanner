@@ -1,13 +1,22 @@
 ﻿import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Badge, Divider, ListItemIcon, Menu, MenuItem, Tooltip, useMediaQuery } from '@mui/material';
+import {
+    Badge,
+    Divider,
+    ListSubheader,
+    Menu,
+    MenuItem,
+    ListItemIcon,
+    ListItemText,
+    Typography,
+    Tooltip,
+    useMediaQuery,
+} from '@mui/material';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import ListItemText from '@mui/material/ListItemText';
 import Toolbar from '@mui/material/Toolbar';
-import Typography from '@mui/material/Typography';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -45,6 +54,25 @@ interface Props {
     onCloseWhatsNew: () => void;
 }
 
+const generateMenuItems = (items: MenuItemTP[]) =>
+    items.map(item => (
+        <MenuItem key={item.label} component={Link} to={item.routeWeb} color="inherit">
+            <ListItemIcon>{item.icon}</ListItemIcon>
+            <ListItemText>{item.label}</ListItemText>
+        </MenuItem>
+    ));
+
+const renderMenuGroup = (label: string, items: MenuItemTP[]) => (
+    <>
+        <ListSubheader disableSticky disableGutters sx={{ pl: 1, lineHeight: 1.75 }}>
+            <Typography variant="body2" className="tracking-wide text-gray-500 uppercase">
+                {label}
+            </Typography>
+        </ListSubheader>
+        {generateMenuItems(items)}
+    </>
+);
+
 export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onCloseWhatsNew }) => {
     const isTabletOrMobile = useMediaQuery(isTabletOrMobileMediaQuery);
     const location = useLocation();
@@ -60,8 +88,8 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
 
     const title = useMemo(() => {
         const routeSections = location.pathname.split('/');
-        const menuItemId = routeSections[routeSections.length - 1];
-        if (Object.hasOwn(menuItemById, menuItemId)) {
+        const menuItemId = routeSections.at(-1);
+        if (Object.hasOwn(menuItemById, menuItemId ?? '')) {
             return menuItemById[menuItemId as keyof typeof menuItemById].title;
         } else if (menuItemId === 'lre') {
             return headerTitle;
@@ -80,14 +108,6 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         </div>
     );
 
-    const generateMenuItems = (items: MenuItemTP[]) =>
-        items.map(item => (
-            <MenuItem key={item.label} component={Link} to={item.routeWeb} color="inherit">
-                <ListItemIcon>{item.icon}</ListItemIcon>
-                <ListItemText>{item.label}</ListItemText>
-            </MenuItem>
-        ));
-
     const navigationMenu = (
         <Menu
             id="basic-menu"
@@ -98,46 +118,42 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
             MenuListProps={{
                 'aria-labelledby': 'basic-button',
             }}>
-            <MenuItem color="inherit" onClick={() => setShowWhatsNew(true)}>
-                <ListItemIcon>
-                    <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
-                        <CampaignIcon />
-                    </Badge>
-                </ListItemIcon>
-                <ListItemText>{"What's new"}</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={discordInvitationLink} target={'_blank'} color="inherit">
-                <ListItemIcon>
-                    <DiscordIcon />
-                </ListItemIcon>
-                <ListItemText>Discord</ListItemText>
-            </MenuItem>
-
-            <MenuItem component={Link} to={bmcLink} target={'_blank'} color="inherit">
-                <ListItemIcon>
-                    <BmcIcon />
-                </ListItemIcon>
-                <ListItemText>Buy me a trooper</ListItemText>
-            </MenuItem>
-
-            {generateMenuItems([menuItemById.faq])}
+            {renderMenuGroup('Input', inputSubMenu)}
 
             <Divider />
 
-            {generateMenuItems(inputSubMenu)}
+            {renderMenuGroup('Plan', planSubMenu)}
 
             <Divider />
 
-            {generateMenuItems(planSubMenu)}
+            {renderMenuGroup('Learn', learnSubMenu)}
 
             <Divider />
 
-            {generateMenuItems(learnSubMenu)}
-
-            <Divider />
-
-            {generateMenuItems(miscMenuItems)}
+            {renderMenuGroup('Misc', [
+                {
+                    ...menuItemById.faq,
+                    label: "What's new",
+                    icon: <CampaignIcon />,
+                },
+                {
+                    label: 'Discord',
+                    icon: <DiscordIcon />,
+                    routeWeb: discordInvitationLink,
+                    title: 'Discord',
+                    routeMobile: '',
+                    subMenu: [],
+                },
+                {
+                    label: 'Buy me a trooper',
+                    icon: <BmcIcon />,
+                    routeWeb: bmcLink,
+                    title: 'Buy me a trooper',
+                    routeMobile: '',
+                    subMenu: [],
+                },
+                ...miscMenuItems,
+            ])}
         </Menu>
     );
 

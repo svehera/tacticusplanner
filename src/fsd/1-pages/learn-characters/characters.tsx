@@ -31,7 +31,7 @@ import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/cha
 import { useCharacters } from './characters-column-defs';
 
 export const LearnCharacters = () => {
-    const gridRef = useRef<AgGridReact<ICharacter2>>(null);
+    const gridReference = useRef<AgGridReact<ICharacter2>>(null);
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
 
@@ -101,11 +101,11 @@ export const LearnCharacters = () => {
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
-        setFilter(prev => ({ ...prev, [name]: value }));
+        setFilter(previous => ({ ...previous, [name]: value }));
         const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
             params.delete(name);
-            value.forEach(v => params.append(name, String(v)));
+            for (const v of value) params.append(name, String(v));
         } else if (value === '' || value === false) {
             params.delete(name);
         } else {
@@ -114,7 +114,7 @@ export const LearnCharacters = () => {
         navigate({ search: params.toString() }, { replace: true });
     };
 
-    const defaultColDef: ColDef<ICharacter2> = {
+    const defaultColDefinition: ColDef<ICharacter2> = {
         sortable: true,
         resizable: true,
         autoHeight: true,
@@ -126,15 +126,15 @@ export const LearnCharacters = () => {
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const movementOptions = uniq(resolvedCharacters.map(x => x.movement))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const distanceOptions = uniq(resolvedCharacters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
-        .sort((a, b) => a - b)
+        .toSorted((a, b) => a - b)
         .map(x => x.toString());
 
     const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
@@ -142,9 +142,9 @@ export const LearnCharacters = () => {
     const traitsOptions = useMemo(() => {
         const activeTraits = new Set<string>();
 
-        resolvedCharacters.forEach(c => {
-            c.traits?.forEach(t => activeTraits.add(t));
-        });
+        for (const c of resolvedCharacters) {
+            if (c.traits) for (const t of c.traits) activeTraits.add(t);
+        }
 
         return Object.values(Trait).filter(label => {
             const key = getTraitStringFromLabel(label);
@@ -213,14 +213,14 @@ export const LearnCharacters = () => {
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
             const doesDamageTypeFilterPass = () => {
-                if (!filter.damageTypes.length) {
+                if (filter.damageTypes.length === 0) {
                     return true;
                 }
                 return filter.damageTypes.every(type => node.data?.damageTypes.all.includes(type));
             };
 
             const doesTraitsFilterPass = () => {
-                if (!filter.traits.length) {
+                if (filter.traits.length === 0) {
                     return true;
                 }
 
@@ -228,21 +228,17 @@ export const LearnCharacters = () => {
                 return filter.traits.every(label => {
                     const key = getTraitStringFromLabel(label);
                     if (!key) return false;
-                    if (key !== 'Mechanical') {
-                        const includes = nodeTraits.includes(key);
-                        return includes;
-                    } else {
-                        const includesMech = nodeTraits.includes('Mechanical');
-                        const includesLiving = nodeTraits.includes('LivingMetal');
-                        const result = includesMech || includesLiving;
+                    if (key !== 'Mechanical') return nodeTraits.includes(key);
+                    const includesMech = nodeTraits.includes('Mechanical');
+                    const includesLiving = nodeTraits.includes('LivingMetal');
+                    const result = includesMech || includesLiving;
 
-                        return result;
-                    }
+                    return result;
                 });
             };
 
             const doesAllianceFilterPass = () => {
-                if (!filter.alliance.length) {
+                if (filter.alliance.length === 0) {
                     return true;
                 }
                 return filter.alliance.some(alliance => node.data?.alliance.includes(alliance));
@@ -311,10 +307,10 @@ export const LearnCharacters = () => {
     );
 
     const refreshRowNumberColumn = useCallback(() => {
-        const columns = [gridRef.current?.api.getColumn('rowNumber') ?? ''];
-        gridRef.current?.api.refreshCells({ columns });
+        const columns = [gridReference.current?.api.getColumn('rowNumber') ?? ''];
+        gridReference.current?.api.refreshCells({ columns });
 
-        const displayedRowCount = gridRef.current?.api.getDisplayedRowCount();
+        const displayedRowCount = gridReference.current?.api.getDisplayedRowCount();
         setRowCount(displayedRowCount ?? 0);
     }, []);
 
@@ -555,11 +551,11 @@ export const LearnCharacters = () => {
             </div>
             <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
-                    ref={gridRef}
+                    ref={gridReference}
                     modules={[AllCommunityModule]}
                     theme={themeBalham}
                     suppressCellFocus={true}
-                    defaultColDef={defaultColDef}
+                    defaultColDef={defaultColDefinition}
                     columnDefs={columnDefs}
                     rowData={rows}
                     onSortChanged={refreshRowNumberColumn}

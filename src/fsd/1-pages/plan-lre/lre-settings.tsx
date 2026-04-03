@@ -31,10 +31,10 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
     const [viewSettings, setViewSettings] = useState<ILreViewSettings & ILreTileSettings>(lreViewSettings);
     const [teamsSettings, setTeamsSettings] = useState<IAutoTeamsPreferences>(autoTeamsSettings);
     const [recommendFirst, setRecommendFirst] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId!)
+        characters.filter(x => x.bias === CharacterBias.recommendFirst).map(x => x.snowprintId)
     );
     const [recommendLast, setRecommendLast] = useState<string[]>(
-        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId!)
+        characters.filter(x => x.bias === CharacterBias.recommendLast).map(x => x.snowprintId)
     );
 
     const updatePreferences = (
@@ -42,9 +42,9 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         value: boolean
     ) => {
         if (Object.hasOwn(viewSettings, setting)) {
-            setViewSettings(curr => ({ ...curr, [setting]: value }));
+            setViewSettings(current => ({ ...current, [setting]: value }));
         } else {
-            setTeamsSettings(curr => ({ ...curr, [setting]: value }));
+            setTeamsSettings(current => ({ ...current, [setting]: value }));
         }
     };
 
@@ -58,13 +58,6 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
             label: 'Only unlocked characters',
             key: 'onlyUnlocked',
             value: viewSettings.onlyUnlocked,
-            disabled: false,
-        },
-        {
-            label: 'Exclude completed tracks',
-            tooltip: 'Exclude tracks where you have completed all battles',
-            key: 'hideCompleted',
-            value: viewSettings.hideCompleted,
             disabled: false,
         },
     ];
@@ -187,16 +180,16 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
         <Dialog open={true} fullWidth onClose={onClose} maxWidth="md" fullScreen={isMobile}>
             <DialogTitle>LRE Planner Settings</DialogTitle>
             <DialogContent>
-                <div className="flex-box gap5 wrap">{lreOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreOptions.map(option => renderOption(option))}</div>
                 <Divider orientation="horizontal" />
 
                 <h3>Unit tile view</h3>
-                <div className="flex-box gap5 wrap">{lreTileViewOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreTileViewOptions.map(option => renderOption(option))}</div>
                 <LreTile character={lreTileCharacter} settings={viewSettings} upgradeRankOrMowGoals={[]} />
                 <Divider orientation="horizontal" />
 
                 <h3>Units bias</h3>
-                <div className="flex-box gap10 start mobile-wrap">
+                <div className="flex-box gap10 mobile-wrap start">
                     <MultipleSelectCheckmarks
                         values={characters.map(x => x.name)}
                         selectedValues={recommendFirst.map(x => characters.find(c => c.snowprintId === x)!.name)}
@@ -206,7 +199,7 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                                 chars
                                     .map(x => characters.find(c => c.name === x))
                                     .filter(x => x !== undefined)
-                                    .map(x => x!.snowprintId!)
+                                    .map(x => x!.snowprintId)
                             )
                         }
                     />
@@ -217,16 +210,16 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
                         selectionChanges={(chars: string[]) => {
                             setRecommendLast(
                                 chars
-                                    .map(x => characters.find(c => c.name === x || c.snowprintId! == x))
+                                    .map(x => characters.find(c => c.name === x || c.snowprintId == x))
                                     .filter(x => x !== undefined)
-                                    .map(x => x!.snowprintId!)
+                                    .map(x => x!.snowprintId)
                             );
                         }}
                     />
                 </div>
                 <Divider orientation="horizontal" />
                 <h3>Auto teams settings</h3>
-                <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(renderOption)}</div>
+                <div className="flex-box gap5 wrap">{lreAutoTeamsOptions.map(option => renderOption(option))}</div>
             </DialogContent>
             <DialogActions>
                 <Button onClick={onClose}>Cancel</Button>

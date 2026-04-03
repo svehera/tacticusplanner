@@ -194,15 +194,15 @@ describe('OrbAscensionCalculator', () => {
     it('should stop calculation if an unknown step is encountered', () => {
         const getNextStepSpy = vi.spyOn(OrbAscensionCalculator as any, '_getNextStep');
 
-        getNextStepSpy.mockImplementation((...args: any[]) => {
-            const rarity = args[0] as Rarity;
-            const stars = args[1] as RarityStars;
+        getNextStepSpy.mockImplementation((...spyArguments: any[]) => {
+            const rarity = spyArguments[0] as Rarity;
+            const stars = spyArguments[1] as RarityStars;
 
             /**
              *  Simulate a break in the path
              */
             if (rarity === Rarity.Rare && stars === RarityStars.RedOneStar) {
-                return undefined;
+                return;
             }
 
             /**
@@ -215,10 +215,10 @@ describe('OrbAscensionCalculator', () => {
             const step = (OrbAscensionCalculator as any).UPGRADE_PATH[key];
 
             if (!step) {
-                return undefined;
+                return;
             }
             if (step.nextRarity === rarity && step.nextStars === stars) {
-                return undefined;
+                return;
             }
             return step;
         });

@@ -85,7 +85,7 @@ const Checkbox = ({ className, ...props }: CheckboxProps) => {
                             ...renderProps,
                             isSelected: isSelected || isIndeterminate,
                         })}>
-                        {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : null}
+                        {isIndeterminate ? <MinusIcon /> : isSelected ? <CheckIcon /> : undefined}
                     </div>
 
                     <div className="flex flex-col gap-1">

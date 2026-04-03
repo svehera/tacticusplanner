@@ -33,16 +33,16 @@ export const SharedRoster = () => {
         filterBy: viewPreferences.wyoFilter,
         orderBy: viewPreferences.wyoOrder,
     });
-    const [nameFilter, setNameFilter] = useState<string | null>(null);
+    const [nameFilter, setNameFilter] = useState<string>();
 
     const [searchParams] = useSearchParams();
 
     const sharedUser = searchParams.get('username');
     const shareToken = searchParams.get('shareToken');
 
-    const hasValidParams = !!sharedUser && !!shareToken;
+    const hasValidParameters = !!sharedUser && !!shareToken;
 
-    if (!hasValidParams) {
+    if (!hasValidParameters) {
         return <>Invalid page params</>;
     }
 

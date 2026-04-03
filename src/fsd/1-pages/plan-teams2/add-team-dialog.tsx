@@ -1,5 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
+import { uniq } from 'lodash';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
@@ -33,8 +34,8 @@ interface Props {
     maxRank: Rank;
     factions: FactionId[];
     notes: string;
-    sizeMod: number;
-    setSizeMod: (value: number) => void;
+    zoom: number;
+    setZoom: (value: number) => void;
     onAddChar: (snowprintId: string) => void;
     onAddMow: (snowprintId: string) => void;
     onCharClicked: (char: ICharacter2) => void;
@@ -47,6 +48,8 @@ interface Props {
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
     onRarityCapChanged: (rarity: Rarity) => void;
+    deployedCharIds: string[];
+    deployedMowIds: string[];
 
     saveAllowed: boolean;
     saveDisallowedMessage: string | undefined;
@@ -82,9 +85,9 @@ export const AddTeamDialog: React.FC<Props> = ({
     maxRank,
     factions,
     notes,
-    sizeMod,
+    zoom,
     rarityCap,
-    setSizeMod,
+    setZoom,
     onAddChar,
     onAddMow,
     onCharClicked,
@@ -97,6 +100,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     onMaxRankChange,
     onFactionsChange,
     onRarityCapChanged,
+    deployedCharIds,
+    deployedMowIds,
     onCancel,
     onSave,
 
@@ -130,9 +135,9 @@ export const AddTeamDialog: React.FC<Props> = ({
     }, []);
 
     const resizeGrids = useCallback(
-        (e: MouseEvent) => {
+        (event: MouseEvent) => {
             if (isDragging) {
-                const newWidth = window.innerWidth - e.clientX;
+                const newWidth = window.innerWidth - event.clientX;
                 if (newWidth > 200 && newWidth < window.innerWidth * 0.5) {
                     setMowWidth(newWidth);
                 }
@@ -143,24 +148,24 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     useEffect(() => {
         if (isDragging) {
-            window.addEventListener('mousemove', resizeGrids);
-            window.addEventListener('mouseup', stopResizing);
+            globalThis.addEventListener('mousemove', resizeGrids);
+            globalThis.addEventListener('mouseup', stopResizing);
             document.body.style.cursor = 'col-resize';
         } else {
             document.body.style.cursor = 'default';
         }
         return () => {
-            window.removeEventListener('mousemove', resizeGrids);
-            window.removeEventListener('mouseup', stopResizing);
+            globalThis.removeEventListener('mousemove', resizeGrids);
+            globalThis.removeEventListener('mouseup', stopResizing);
         };
     }, [isDragging, resizeGrids, stopResizing]);
 
-    const allFactions: FactionId[] = Array.from(
-        new Set<FactionId>([...chars.map(c => c.faction), ...mows.map(m => m.faction)])
-    ).sort((a, b) => a.localeCompare(b));
+    const allFactions: FactionId[] = uniq([...chars.map(c => c.faction), ...mows.map(m => m.faction)]).toSorted(
+        (a, b) => a.localeCompare(b)
+    );
 
     const filteredChars = chars
-        .filter(c => !selectedChars.includes(c.snowprintId!))
+        .filter(c => !selectedChars.includes(c.snowprintId))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
@@ -173,7 +178,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                 searchText
             )
         )
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.activeAbilityLevel ?? 0, 2) + Math.pow(b.passiveAbilityLevel ?? 0, 2);
@@ -183,9 +188,9 @@ export const AddTeamDialog: React.FC<Props> = ({
         .map(a => Teams2Service.capCharacterAtRarity(a, rarityCap));
 
     const filteredMows = mows
-        .filter(mow => !selectedMows.includes(mow.snowprintId!))
+        .filter(mow => !selectedMows.includes(mow.snowprintId))
         .filter(mow => Teams2Service.passesMowFilter(mow, allowLockedUnits, minRarity, maxRarity, factions, searchText))
-        .sort((a, b) => {
+        .toSorted((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
             if (powerB !== powerA) return powerB - powerA;
@@ -199,7 +204,7 @@ export const AddTeamDialog: React.FC<Props> = ({
             <div className="z-30 flex flex-shrink-0 items-center justify-between border-b border-gray-200 bg-gray-50 p-4 dark:border-slate-700 dark:bg-[#1e293b]">
                 <div className="justify-left flex flex-wrap items-center gap-6">
                     <h2 className="text-lg font-bold text-gray-900 dark:text-white">Assemble Team</h2>
-                    <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                    <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                     {/* RARITY CAP */}
                     <div className="flex items-center gap-3">
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Rarity Cap</span>
@@ -281,7 +286,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             <input
                                 type="text"
                                 value={teamName}
-                                onChange={e => onTeamNameChanged(e.target.value)}
+                                onChange={event => onTeamNameChanged(event.target.value)}
                                 placeholder="Enter team name..."
                                 className="w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                             />
@@ -359,7 +364,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             <textarea
                                 placeholder="Add notes..."
                                 value={notes}
-                                onChange={e => onNotesChanged(e.target.value)}
+                                onChange={event => onNotesChanged(event.target.value)}
                                 className="min-h-[80px] w-full rounded-lg border border-gray-300 bg-gray-50 px-4 py-2 text-gray-900 transition-all outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-600 dark:bg-[#0f172a] dark:text-white"
                             />
                         </div>
@@ -398,7 +403,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             flexIndex={flexIndex}
                             onCharClicked={onCharClicked}
                             onMowClicked={onMowClicked}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
                         />
                     </div>
                 </section>
@@ -414,7 +419,8 @@ export const AddTeamDialog: React.FC<Props> = ({
                             characters={filteredChars}
                             onCharacterSelect={onAddChar}
                             showHeader={true}
-                            sizeMod={sizeMod}
+                            zoom={zoom}
+                            deployedUnitIds={deployedCharIds}
                         />
                     </div>
 
@@ -439,7 +445,13 @@ export const AddTeamDialog: React.FC<Props> = ({
                     </div>
 
                     <div className="w-full flex-shrink-0 rounded-lg border border-slate-200 bg-white p-4 xl:w-[var(--mow-width)] dark:border-slate-800 dark:bg-[#161b22]">
-                        <MowGrid mows={filteredMows} onMowSelect={onAddMow} showHeader={true} sizeMod={sizeMod} />
+                        <MowGrid
+                            mows={filteredMows}
+                            onMowSelect={onAddMow}
+                            showHeader={true}
+                            zoom={zoom}
+                            deployedUnitIds={deployedMowIds}
+                        />
                     </div>
                 </div>
             </div>

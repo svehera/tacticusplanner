@@ -98,7 +98,7 @@ const createRankGoal = (
     priority: 1,
     include: true,
     goalId: 'goal-rank-default',
-    unitId: baseChar.snowprintId!,
+    unitId: baseChar.snowprintId,
     unitName: baseChar.shortName ?? baseChar.name,
     unitIcon: baseChar.icon ?? '',
     unitRoundIcon: baseChar.roundIcon ?? '',
@@ -124,7 +124,7 @@ const createUnlockGoal = (
     priority: 1,
     include: true,
     goalId: 'goal-unlock-default',
-    unitId: baseChar.snowprintId!,
+    unitId: baseChar.snowprintId,
     unitName: baseChar.shortName ?? baseChar.name,
     unitIcon: baseChar.icon ?? '',
     unitRoundIcon: baseChar.roundIcon ?? '',
@@ -162,26 +162,26 @@ const buildBaseUpgradeCounts = (
         }
     };
 
-    upgradeIds.forEach(upgradeId => {
+    for (const upgradeId of upgradeIds) {
         const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-        if (!upgrade) return;
+        if (!upgrade) continue;
         if (upgrade.crafted) {
             const expanded = FsdUpgradesService.recipeExpandedUpgradeData[upgrade.snowprintId];
-            Object.entries(expanded.expandedRecipe).forEach(([baseId, count]) => {
+            for (const [baseId, count] of Object.entries(expanded.expandedRecipe)) {
                 addBaseUpgrade(baseId, count);
-            });
-            return;
+            }
+            continue;
         }
         addBaseUpgrade(upgradeId, 1);
-    });
+    }
 
     if (rarityFilter && rarityFilter.length > 0) {
-        Object.keys(counts).forEach(upgradeId => {
+        for (const upgradeId of Object.keys(counts)) {
             const upgrade = FsdUpgradesService.baseUpgradesData[upgradeId];
             if (upgrade && !rarityFilter.includes(upgrade.rarity as Rarity)) {
                 delete counts[upgradeId];
             }
-        });
+        }
     }
 
     return counts;
@@ -251,15 +251,11 @@ const createSettings = (overrides: Partial<IEstimatedRanksSettings> = {}): IEsti
 });
 
 const createAllCampaignsProgress = (): IEstimatedRanksSettings['campaignsProgress'] => {
-    return Object.values(Campaign)
-        .filter((value): value is Campaign => typeof value === 'string')
-        .reduce(
-            (acc, campaign) => {
-                acc[campaign] = 999;
-                return acc;
-            },
-            {} as IEstimatedRanksSettings['campaignsProgress']
-        );
+    return Object.fromEntries(
+        Object.values(Campaign)
+            .filter((value): value is Campaign => typeof value === 'string')
+            .map(campaign => [campaign, 999])
+    ) as IEstimatedRanksSettings['campaignsProgress'];
 };
 
 const createFilters = (overrides: Partial<ICampaignsFilters> = {}): ICampaignsFilters => ({
@@ -279,18 +275,13 @@ const createFilters = (overrides: Partial<ICampaignsFilters> = {}): ICampaignsFi
 const createCustomDailyRaidsSettings = (
     overrides: Partial<ICustomDailyRaidsSettings> = {}
 ): ICustomDailyRaidsSettings => {
-    const defaults = Object.values(Rarity)
-        .filter((value): value is Rarity => typeof value === 'number')
-        .reduce<Partial<Record<Rarity, CampaignType[]>>>(
-            (acc, rarity) => {
-                acc[rarity] = [];
-                return acc;
-            },
-            { Shard: [], 'Mythic Shard': [] } as Partial<Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>>
-        ) as Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
-
     return {
-        ...defaults,
+        Shard: [],
+        'Mythic Shard': [],
+        ...(Object.fromEntries(Object.values(Rarity).map(rarity => [rarity, [] as CampaignType[]])) as Record<
+            Rarity,
+            CampaignType[]
+        >),
         ...overrides,
     };
 };
@@ -304,6 +295,48 @@ const getRewardLocations = (rewardId: string): ICampaignBattleComposed[] => {
     );
 };
 
+const findStone1UncraftableCandidate = () => {
+    for (const [unitId, ranks] of Object.entries(rankUpData)) {
+        const stoneOne = (ranks as Record<string, string[]>)['Stone I'];
+        if (!stoneOne || stoneOne.length === 0) continue;
+        const allUncrafted = stoneOne.every(upgradeId => {
+            const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
+            return upgrade !== undefined && !upgrade.crafted;
+        });
+        const hasDuplicate = new Set(stoneOne).size < stoneOne.length;
+        if (allUncrafted && hasDuplicate) {
+            return { unitId, upgrades: stoneOne };
+        }
+    }
+    return;
+};
+
+const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
+
+const buildUpgrade = (locations: ICampaignBattleComposed[]): ICombinedUpgrade => ({
+    ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+    requiredCount: 1,
+    countByGoalId: {},
+    relatedCharacters: [],
+    relatedGoals: [],
+    locations,
+});
+
+const buildSettingsForHse = (
+    order: IDailyRaidsFarmOrder,
+    homeScreenEvent: IDailyRaidsHomeScreenEvent
+): IEstimatedRanksSettings =>
+    createSettings({
+        preferences: {
+            ...createSettings().preferences,
+            farmPreferences: {
+                order,
+                homeScreenEvent,
+            },
+            farmStrategy: DailyRaidsStrategy.leastEnergy,
+        },
+    });
+
 describe('UpgradesService.addOnslaughtsForDay', () => {
     it('adds three onslaught battles for an ascend goal with three tokens', () => {
         const baseChar = CharactersService.charactersData[0];
@@ -311,7 +344,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-1',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -378,7 +411,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-2',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -460,7 +493,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const goalA: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-a',
-            unitId: characterA.snowprintId!,
+            unitId: characterA.snowprintId,
             unitName: characterA.shortName ?? characterA.name,
             unitIcon: characterA.icon ?? '',
             unitRoundIcon: characterA.roundIcon ?? '',
@@ -474,7 +507,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         const goalB: ICharacterAscendGoal = createAscendGoal({
             priority: 2,
             goalId: 'goal-b',
-            unitId: characterB.snowprintId!,
+            unitId: characterB.snowprintId,
             unitName: characterB.shortName ?? characterB.name,
             unitIcon: characterB.icon ?? '',
             unitRoundIcon: characterB.roundIcon ?? '',
@@ -552,7 +585,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-legendary-ascend',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -624,7 +657,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-legendary-ascend',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -751,15 +784,11 @@ describe('UpgradesService.planDayRaiding', () => {
             rankEnd: Rank.Diamond3,
         });
 
-        const campaignsProgress = Object.values(Campaign)
-            .filter((value): value is Campaign => typeof value === 'string')
-            .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
-                },
-                {} as IEstimatedRanksSettings['campaignsProgress']
-            );
+        const campaignsProgress = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 999])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
 
         const inventory: Record<string, number> = {};
         const settings = createSettings({
@@ -1103,6 +1132,32 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
         const countsB = Object.fromEntries(raidB.raidLocations.map(loc => [loc.id, loc.raidsToPerform]));
         expect(countsB[locIME04.id]).toBe(1);
     });
+
+    it('does not convert planned raids into raidsAlreadyPerformed when sharing a location across goals', () => {
+        const locOE05 = createLocation('OE05');
+        const remainingMats = buildRemainingMats({ [goalA.goalId]: 2, [goalB.goalId]: 2 }, [locOE05]);
+        const inventory: Record<string, number> = {};
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalA.goalId, {
+            raidKey: `${upgradeId}::${goalA.goalId}`,
+            goal: { goalId: goalA.goalId, unitId: goalA.unitId },
+        });
+        UpgradesService.raidLocation(day, 999, inventory, locOE05, remainingMats, goals, goalB.goalId, {
+            raidKey: `${upgradeId}::${goalB.goalId}`,
+            goal: { goalId: goalB.goalId, unitId: goalB.unitId },
+        });
+
+        const raidA = day.raids.find(r => r.id === `${upgradeId}::${goalA.goalId}`)!;
+        const raidB = day.raids.find(r => r.id === `${upgradeId}::${goalB.goalId}`)!;
+
+        expect(raidA.raidLocations).toHaveLength(1);
+        expect(raidB.raidLocations).toHaveLength(1);
+        expect(raidA.raidLocations[0].raidsToPerform).toBe(2);
+        expect(raidB.raidLocations[0].raidsToPerform).toBe(2);
+        expect(raidA.raidLocations[0].raidsAlreadyPerformed).toBe(0);
+        expect(raidB.raidLocations[0].raidsAlreadyPerformed).toBe(0);
+    });
 });
 
 describe('UpgradesService.canonicalizeInventoryUpgrades', () => {
@@ -1151,22 +1206,6 @@ describe('UpgradesService.getUpgrades', () => {
     const tyranidsRareIds = ['upgArmR033', 'upgDmgR033', 'upgHpR033'];
     const tyranidsLegendaryIds = ['upgHpL116'];
 
-    const findStone1UncraftableCandidate = () => {
-        for (const [unitId, ranks] of Object.entries(rankUpData)) {
-            const stoneOne = (ranks as Record<string, string[]>)['Stone I'];
-            if (!stoneOne || stoneOne.length === 0) continue;
-            const allUncrafted = stoneOne.every(upgradeId => {
-                const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
-                return upgrade !== undefined && !upgrade.crafted;
-            });
-            const hasDuplicate = new Set(stoneOne).size < stoneOne.length;
-            if (allUncrafted && hasDuplicate) {
-                return { unitId, upgrades: stoneOne };
-            }
-        }
-        return undefined;
-    };
-
     it('counts uncraftable upgrades for a Stone I to Stone II rank-up goal', () => {
         const candidate = findStone1UncraftableCandidate();
         if (!candidate) throw new Error('No candidate with uncraftable Stone I upgrades found.');
@@ -1174,7 +1213,7 @@ describe('UpgradesService.getUpgrades', () => {
         const baseChar = CharactersService.getUnit(candidate.unitId)!;
         const goal = createRankGoal(baseChar, {
             goalId: 'goal-stone1-stone2',
-            unitId: baseChar.snowprintId!,
+            unitId: baseChar.snowprintId,
             unitName: baseChar.shortName ?? baseChar.name,
             unitIcon: baseChar.icon ?? '',
             unitRoundIcon: baseChar.roundIcon ?? '',
@@ -1201,7 +1240,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(baseChar);
         const goal = createRankGoal(baseChar, {
             goalId: 'goal-stone1-stone2-inventory',
-            unitId: baseChar.snowprintId!,
+            unitId: baseChar.snowprintId,
             unitName: baseChar.shortName ?? baseChar.name,
             unitIcon: baseChar.icon ?? '',
             unitRoundIcon: baseChar.roundIcon ?? '',
@@ -1225,7 +1264,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(kharn);
         const goal = createRankGoal(kharn, {
             goalId: 'goal-kharn-d2-d3',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1245,7 +1284,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(kharn);
         const goal = createRankGoal(kharn, {
             goalId: 'goal-kharn-legendary-filter',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1266,7 +1305,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(kharn);
         const goal = createRankGoal(kharn, {
             goalId: 'goal-kharn-non-legendary-filter',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1294,7 +1333,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(abraxas, { rank: Rank.Locked, shards: 0 });
         const goal = createUnlockGoal(abraxas, {
             goalId: 'goal-abraxas-unlock-zero',
-            unitId: abraxas.snowprintId!,
+            unitId: abraxas.snowprintId,
             unitName: abraxas.shortName ?? abraxas.name,
             unitIcon: abraxas.icon ?? '',
             unitRoundIcon: abraxas.roundIcon ?? '',
@@ -1311,7 +1350,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(abraxas, { rank: Rank.Locked, shards: 100 });
         const goal = createUnlockGoal(abraxas, {
             goalId: 'goal-abraxas-unlock-100',
-            unitId: abraxas.snowprintId!,
+            unitId: abraxas.snowprintId,
             unitName: abraxas.shortName ?? abraxas.name,
             unitIcon: abraxas.icon ?? '',
             unitRoundIcon: abraxas.roundIcon ?? '',
@@ -1329,7 +1368,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(wrask, { rank: Rank.Locked, shards: 0 });
         const goal = createUnlockGoal(wrask, {
             goalId: 'goal-wrask-unlock-zero',
-            unitId: wrask.snowprintId!,
+            unitId: wrask.snowprintId,
             unitName: wrask.shortName ?? wrask.name,
             unitIcon: wrask.icon ?? '',
             unitRoundIcon: wrask.roundIcon ?? '',
@@ -1346,7 +1385,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(wrask, { rank: Rank.Locked, shards: 60 });
         const goal = createUnlockGoal(wrask, {
             goalId: 'goal-wrask-unlock-60',
-            unitId: wrask.snowprintId!,
+            unitId: wrask.snowprintId,
             unitName: wrask.shortName ?? wrask.name,
             unitIcon: wrask.icon ?? '',
             unitRoundIcon: wrask.roundIcon ?? '',
@@ -1365,7 +1404,7 @@ describe('UpgradesService.getUpgrades', () => {
 
         const goalStoneToGold = createRankGoal(kharn, {
             goalId: 'goal-kharn-stone-gold',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1376,7 +1415,7 @@ describe('UpgradesService.getUpgrades', () => {
 
         const goalGoldToDiamond = createRankGoal(kharn, {
             goalId: 'goal-kharn-gold-diamond',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1402,12 +1441,13 @@ describe('UpgradesService.getUpgrades', () => {
         );
 
         const upgrades = UpgradesService.getUpgrades({}, [character], [], [goalStoneToGold, goalGoldToDiamond]);
-        const actualCounts = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
-            Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
-            });
-            return acc;
-        }, {});
+        const actualCounts = {} as Record<string, number>;
+        for (const upgrade of upgrades) {
+            for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
+                actualCounts[id] ||= 0;
+                actualCounts[id] += count;
+            }
+        }
 
         const actualRareTotal = worldEatersRareIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
         const actualLegendaryTotal = worldEatersLegendaryIds.reduce((sum, id) => sum + (actualCounts[id] ?? 0), 0);
@@ -1421,7 +1461,7 @@ describe('UpgradesService.getUpgrades', () => {
         const character = createCharacter(kharn);
         const goal = createRankGoal(kharn, {
             goalId: 'goal-kharn-stone-diamond',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1446,7 +1486,7 @@ describe('UpgradesService.getUpgrades', () => {
 
         const kharnGoal = createRankGoal(kharn, {
             goalId: 'goal-kharn-stone-diamond-all',
-            unitId: kharn.snowprintId!,
+            unitId: kharn.snowprintId,
             unitName: kharn.shortName ?? kharn.name,
             unitIcon: kharn.icon ?? '',
             unitRoundIcon: kharn.roundIcon ?? '',
@@ -1457,7 +1497,7 @@ describe('UpgradesService.getUpgrades', () => {
 
         const wraskGoal = createRankGoal(wrask, {
             goalId: 'goal-wrask-stone-diamond-all',
-            unitId: wrask.snowprintId!,
+            unitId: wrask.snowprintId,
             unitName: wrask.shortName ?? wrask.name,
             unitIcon: wrask.icon ?? '',
             unitRoundIcon: wrask.roundIcon ?? '',
@@ -1473,12 +1513,13 @@ describe('UpgradesService.getUpgrades', () => {
             [kharnGoal, wraskGoal]
         );
 
-        const combined = upgrades.reduce<Record<string, number>>((acc, upgrade) => {
-            Object.entries(upgrade.baseUpgradesTotal).forEach(([id, count]) => {
-                acc[id] = (acc[id] ?? 0) + count;
-            });
-            return acc;
-        }, {});
+        const combined = {} as Record<string, number>;
+        for (const upgrade of upgrades) {
+            for (const [id, count] of Object.entries(upgrade.baseUpgradesTotal)) {
+                combined[id] ||= 0;
+                combined[id] += count;
+            }
+        }
 
         expect(combined['upgHpL118']).toBe(164);
     });
@@ -1528,6 +1569,7 @@ describe('UpgradesService.getUpgrades', () => {
 });
 
 describe('UpgradesService.getUpgradesEstimatedDays', () => {
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (overrides: Partial<IEstimatedRanksSettings> = {}) =>
         createSettings({
             dailyEnergy: 638,
@@ -1549,7 +1591,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-s1',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1571,7 +1613,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(atlacoya, { rank: Rank.Stone1 });
         const goal = createRankGoal(atlacoya, {
             goalId: 'goal-atlacoya-s1-s1',
-            unitId: atlacoya.snowprintId!,
+            unitId: atlacoya.snowprintId,
             unitName: atlacoya.shortName ?? atlacoya.name,
             unitIcon: atlacoya.icon ?? '',
             unitRoundIcon: atlacoya.roundIcon ?? '',
@@ -1593,7 +1635,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(wrask, { rank: Rank.Diamond1 });
         const goal = createRankGoal(wrask, {
             goalId: 'goal-wrask-d1-d3',
-            unitId: wrask.snowprintId!,
+            unitId: wrask.snowprintId,
             unitName: wrask.shortName ?? wrask.name,
             unitIcon: wrask.icon ?? '',
             unitRoundIcon: wrask.roundIcon ?? '',
@@ -1619,7 +1661,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1637,7 +1679,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(result.daysTotal).toBe(25);
         // 15504 with current drop rates.
-        expect(Math.abs(15500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(15_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('estimates Helbrecht Stone I to Diamond III needs 108 faction legendaries', () => {
@@ -1645,7 +1687,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1698,7 +1740,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-inventory-bones',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1734,7 +1776,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-inventory-bones',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1767,7 +1809,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-inventory-bones',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1825,7 +1867,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         const character = createCharacter(hmh, { rank: Rank.Stone1 });
         const goal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-inventory',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1849,7 +1891,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         );
 
         expect(Math.abs(22 - withInventory.daysTotal)).toBeLessThanOrEqual(1);
-        expect(Math.abs(12500 - withInventory.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(12_500 - withInventory.energyTotal)).toBeLessThan(1000);
     });
 
     it('adds Atlacoya after Helbrecht and prioritizes Helbrecht materials first', () => {
@@ -1861,7 +1903,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         const hmhGoal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-priority-1',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1873,7 +1915,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         const atlacoyaGoal = createRankGoal(atlacoya, {
             goalId: 'goal-atlacoya-s1-d3-priority-2',
-            unitId: atlacoya.snowprintId!,
+            unitId: atlacoya.snowprintId,
             unitName: atlacoya.shortName ?? atlacoya.name,
             unitIcon: atlacoya.icon ?? '',
             unitRoundIcon: atlacoya.roundIcon ?? '',
@@ -1899,7 +1941,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
         );
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1000);
+        expect(Math.abs(26_500 - result.energyTotal)).toBeLessThan(1000);
     });
 
     it('prioritizes Atlacoya when its goal is more urgent than Helbrecht', () => {
@@ -1911,7 +1953,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         const hmhGoal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-priority-2',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1923,7 +1965,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         const atlacoyaGoal = createRankGoal(atlacoya, {
             goalId: 'goal-atlacoya-s1-d3-priority-1',
-            unitId: atlacoya.snowprintId!,
+            unitId: atlacoya.snowprintId,
             unitName: atlacoya.shortName ?? atlacoya.name,
             unitIcon: atlacoya.icon ?? '',
             unitRoundIcon: atlacoya.roundIcon ?? '',
@@ -1950,7 +1992,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         expect(Math.abs(44 - result.daysTotal)).toBeLessThanOrEqual(1);
         // 26581 with current drop rates.
-        expect(Math.abs(26500 - result.energyTotal)).toBeLessThan(1500);
+        expect(Math.abs(26_500 - result.energyTotal)).toBeLessThan(1500);
     });
 
     it('total energy cost is roughly equivalent regardless of priority', () => {
@@ -1962,7 +2004,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         const hmhGoal = createRankGoal(hmh, {
             goalId: 'goal-hmh-s1-d3-priority-2',
-            unitId: hmh.snowprintId!,
+            unitId: hmh.snowprintId,
             unitName: hmh.shortName ?? hmh.name,
             unitIcon: hmh.icon ?? '',
             unitRoundIcon: hmh.roundIcon ?? '',
@@ -1974,7 +2016,7 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
 
         const atlacoyaGoal = createRankGoal(atlacoya, {
             goalId: 'goal-atlacoya-s1-d3-priority-1',
-            unitId: atlacoya.snowprintId!,
+            unitId: atlacoya.snowprintId,
             unitName: atlacoya.shortName ?? atlacoya.name,
             unitIcon: atlacoya.icon ?? '',
             unitRoundIcon: atlacoya.roundIcon ?? '',
@@ -1999,9 +2041,9 @@ describe('UpgradesService.getUpgradesEstimatedDays', () => {
             atlacoyaGoal
         );
 
-        const temp = hmhGoal.priority;
+        const temporary = hmhGoal.priority;
         hmhGoal.priority = atlacoyaGoal.priority;
-        atlacoyaGoal.priority = temp;
+        atlacoyaGoal.priority = temporary;
 
         const result2 = UpgradesService.getUpgradesEstimatedDays(
             buildSettings({ upgrades: inventory }),
@@ -2023,7 +2065,7 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         priority: 1,
         include: true,
         goalId: 'goal-kharn-ranks',
-        unitId: kharn.snowprintId!,
+        unitId: kharn.snowprintId,
         unitName: kharn.shortName ?? kharn.name,
         unitIcon: kharn.icon ?? '',
         unitRoundIcon: kharn.roundIcon ?? '',
@@ -2058,6 +2100,7 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         ) as Record<string, ICombinedUpgrade>;
     };
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (completedLocations: IItemRaidLocation[], upgrades: Record<string, number>) => {
         return {
             completedLocations,
@@ -2103,14 +2146,14 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
             locations: getRewardLocations(rewardId),
         }));
 
-        rewardLocations.forEach(({ rewardId: _, locations }) => {
+        for (const { rewardId: _, locations } of rewardLocations) {
             expect(locations.length).toBeGreaterThan(0);
             expect(
                 locations.some(
                     loc => loc.campaignType === CampaignType.Elite || loc.campaignType === CampaignType.Mirror
                 )
             ).toBe(true);
-        });
+        }
 
         const completedLocations = rewardLocations.flatMap(({ locations }) =>
             locations.map(location => createCompletedLocation(location))
@@ -2211,7 +2254,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2241,7 +2284,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2273,7 +2316,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2305,7 +2348,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2336,7 +2379,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2365,7 +2408,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2395,7 +2438,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2425,7 +2468,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2456,7 +2499,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2485,7 +2528,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-1',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2511,7 +2554,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goalNoOnslaught: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-no-onslaught',
-            unitId: characterNoOnslaught.snowprintId!,
+            unitId: characterNoOnslaught.snowprintId,
             unitName: characterNoOnslaught.shortName ?? characterNoOnslaught.name,
             unitIcon: characterNoOnslaught.icon ?? '',
             unitRoundIcon: characterNoOnslaught.roundIcon ?? '',
@@ -2524,7 +2567,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
         const goalAllowsOnslaught: ICharacterAscendGoal = createAscendGoal({
             priority: 2,
             goalId: 'goal-allow-onslaught',
-            unitId: characterAllowsOnslaught.snowprintId!,
+            unitId: characterAllowsOnslaught.snowprintId,
             unitName: characterAllowsOnslaught.shortName ?? characterAllowsOnslaught.name,
             unitIcon: characterAllowsOnslaught.icon ?? '',
             unitRoundIcon: characterAllowsOnslaught.roundIcon ?? '',
@@ -2556,7 +2599,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-both-no-mythic',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2589,7 +2632,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-both-no-regular',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2629,7 +2672,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goalRegular: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-regular-tokens',
-            unitId: characterRegular.snowprintId!,
+            unitId: characterRegular.snowprintId,
             unitName: characterRegular.shortName ?? characterRegular.name,
             unitIcon: characterRegular.icon ?? '',
             unitRoundIcon: characterRegular.roundIcon ?? '',
@@ -2644,7 +2687,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goalMythic: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-mythic-tokens',
-            unitId: characterMythic.snowprintId!,
+            unitId: characterMythic.snowprintId,
             unitName: characterMythic.shortName ?? characterMythic.name,
             unitIcon: characterMythic.icon ?? '',
             unitRoundIcon: characterMythic.roundIcon ?? '',
@@ -2689,7 +2732,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goalLow: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-regular-low',
-            unitId: characterLow.snowprintId!,
+            unitId: characterLow.snowprintId,
             unitName: characterLow.shortName ?? characterLow.name,
             unitIcon: characterLow.icon ?? '',
             unitRoundIcon: characterLow.roundIcon ?? '',
@@ -2704,7 +2747,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goalHigh: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-regular-high',
-            unitId: characterHigh.snowprintId!,
+            unitId: characterHigh.snowprintId,
             unitName: characterHigh.shortName ?? characterHigh.name,
             unitIcon: characterHigh.icon ?? '',
             unitRoundIcon: characterHigh.roundIcon ?? '',
@@ -2742,7 +2785,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-only-mythic',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2775,7 +2818,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-only-regular',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2805,7 +2848,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-1',
-            unitId: character.snowprintId!,
+            unitId: character.snowprintId,
             unitName: character.shortName ?? character.name,
             unitIcon: character.icon ?? '',
             unitRoundIcon: character.roundIcon ?? '',
@@ -2831,7 +2874,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
 
         const goalNoOnslaught: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-no-onslaught',
-            unitId: characterNoOnslaught.snowprintId!,
+            unitId: characterNoOnslaught.snowprintId,
             unitName: characterNoOnslaught.shortName ?? characterNoOnslaught.name,
             unitIcon: characterNoOnslaught.icon ?? '',
             unitRoundIcon: characterNoOnslaught.roundIcon ?? '',
@@ -2844,7 +2887,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
         const goalAllowsOnslaught: ICharacterAscendGoal = createAscendGoal({
             priority: 2,
             goalId: 'goal-allow-onslaught',
-            unitId: characterAllowsOnslaught.snowprintId!,
+            unitId: characterAllowsOnslaught.snowprintId,
             unitName: characterAllowsOnslaught.shortName ?? characterAllowsOnslaught.name,
             unitIcon: characterAllowsOnslaught.icon ?? '',
             unitRoundIcon: characterAllowsOnslaught.roundIcon ?? '',
@@ -2876,7 +2919,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
 
         const goalPriorityLow: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-priority-low',
-            unitId: characterPriorityLow.snowprintId!,
+            unitId: characterPriorityLow.snowprintId,
             unitName: characterPriorityLow.shortName ?? characterPriorityLow.name,
             unitIcon: characterPriorityLow.icon ?? '',
             unitRoundIcon: characterPriorityLow.roundIcon ?? '',
@@ -2886,7 +2929,7 @@ describe('UpgradesService.findHighestPriorityOnslaughtGoal', () => {
         const goalPriorityHigh: ICharacterAscendGoal = createAscendGoal({
             priority: 2,
             goalId: 'goal-priority-high',
-            unitId: characterPriorityHigh.snowprintId!,
+            unitId: characterPriorityHigh.snowprintId,
             unitName: characterPriorityHigh.shortName ?? characterPriorityHigh.name,
             unitIcon: characterPriorityHigh.icon ?? '',
             unitRoundIcon: characterPriorityHigh.roundIcon ?? '',
@@ -3417,15 +3460,7 @@ describe('UpgradesService.populateLocationsData', () => {
 });
 
 describe('UpgradesService.populateLocationsData filters', () => {
-    const buildUpgrade = (locations: ICampaignBattleComposed[]): ICombinedUpgrade => ({
-        ...FsdUpgradesService.baseUpgradesData.upgHpC015,
-        requiredCount: 1,
-        countByGoalId: {},
-        relatedCharacters: [],
-        relatedGoals: [],
-        locations,
-    });
-
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (filters: ICampaignsFilters): IEstimatedRanksSettings =>
         createSettings({
             campaignsProgress: {
@@ -3581,7 +3616,6 @@ describe('UpgradesService.populateLocationsData filters', () => {
 });
 
 describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
-    const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
     const upgradeId = 'upgHpL118';
 
     const buildCombinedUpgrade = (overrides: Partial<ICombinedUpgrade>): ICombinedUpgrade => ({
@@ -3750,8 +3784,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             {},
-            goals,
-            undefined
+            goals
         );
         const goalAOnly = UpgradesService.calculateDaysToCompleteMaterial(
             upgradeId,
@@ -3799,8 +3832,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
             upgradeId,
             { [upgradeId]: combinedUpgrade },
             { [upgradeId]: 12 },
-            goals,
-            undefined
+            goals
         );
 
         const expected = Math.ceil(18 / getRate(location));
@@ -3809,7 +3841,6 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
 });
 
 describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () => {
-    const getRate = (location: ICampaignBattleComposed): number => location.energyPerDay / location.energyPerItem;
     const upgradeId = 'upgHpL118';
 
     const buildCombinedUpgrade = (overrides: Partial<ICombinedUpgrade>): ICombinedUpgrade => ({
@@ -3827,6 +3858,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
     const goalB = createRankGoal(baseChar, { goalId: 'goalB', priority: 2 });
     const goals = [goalA, goalB];
 
+    // eslint-disable-next-line unicorn/consistent-function-scoping -- different versions of this in multiple describe blocks
     const buildSettings = (order: IDailyRaidsFarmOrder): IEstimatedRanksSettings =>
         createSettings({
             preferences: {
@@ -4056,21 +4088,6 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
     const goal = createRankGoal(baseChar, { goalId: 'goal-hse', priority: 1 });
     const goals = [goal];
 
-    const buildSettingsForHse = (
-        order: IDailyRaidsFarmOrder,
-        homeScreenEvent: IDailyRaidsHomeScreenEvent
-    ): IEstimatedRanksSettings =>
-        createSettings({
-            preferences: {
-                ...createSettings().preferences,
-                farmPreferences: {
-                    order,
-                    homeScreenEvent,
-                },
-                farmStrategy: DailyRaidsStrategy.leastEnergy,
-            },
-        });
-
     const buildCombinedUpgradeForLocation = (
         upgradeId: string,
         location: ICampaignBattleComposed
@@ -4096,15 +4113,11 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             rankEnd: Rank.Diamond3,
         });
 
-        const campaignsProgress = Object.values(Campaign)
-            .filter((value): value is Campaign => typeof value === 'string')
-            .reduce(
-                (acc, campaign) => {
-                    acc[campaign] = 999;
-                    return acc;
-                },
-                {} as IEstimatedRanksSettings['campaignsProgress']
-            );
+        const campaignsProgress = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 999])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
 
         const inventory: Record<string, number> = {};
         const settings = createSettings({
@@ -4170,7 +4183,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.purgeOrder)
         );
 
-        expect(sorted.map(loc => loc.id)).toEqual(['Octarius36', 'Octarius40', 'Octarius Mirror Elite30']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Octarius Mirror Elite30', 'Octarius40', 'Octarius36']);
     });
 
     it('orders purge order battles by hsePoints (total materials)', () => {
@@ -4224,7 +4237,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.warpSurge)
         );
 
-        expect(sorted.map(loc => loc.id)).toEqual(['Saim-Hann Elite39', 'Saim-Hann10', 'Fall of Cadia Mirror Elite39']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Fall of Cadia Mirror Elite39', 'Saim-Hann10', 'Saim-Hann Elite39']);
     });
 
     it('orders warp surge battles by hsePoints (total materials)', () => {
@@ -4277,7 +4290,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             {},
             buildSettingsForHse(IDailyRaidsFarmOrder.goalPriority, IDailyRaidsHomeScreenEvent.machineHunt)
         );
-        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus Elite5', 'Indomitus23', 'Indomitus37']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus23', 'Indomitus37', 'Indomitus Elite5']);
     });
 
     it('orders machine hunt battles by hsePoints (total materials)', () => {
@@ -4301,6 +4314,6 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
             buildSettingsForHse(IDailyRaidsFarmOrder.totalMaterials, IDailyRaidsHomeScreenEvent.machineHunt)
         );
 
-        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus37', 'Indomitus23', 'Indomitus Elite5']);
+        expect(sorted.map(loc => loc.id)).toEqual(['Indomitus23', 'Indomitus37', 'Indomitus Elite5']);
     });
 });

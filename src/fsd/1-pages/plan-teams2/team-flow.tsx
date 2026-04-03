@@ -15,7 +15,8 @@ interface Props {
     mows: IMow2[];
     disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
     flexIndex?: number;
-    sizeMod?: number;
+    zoom?: number;
+    showEquipment?: RosterSnapshotShowVariableSettings;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
 }
@@ -25,7 +26,8 @@ export const TeamFlow: React.FC<Props> = ({
     mows,
     disabledUnits,
     flexIndex,
-    sizeMod = 1,
+    zoom = 1,
+    showEquipment = RosterSnapshotShowVariableSettings.Always,
     onCharClicked,
     onMowClicked,
 }: Props) => {
@@ -34,7 +36,7 @@ export const TeamFlow: React.FC<Props> = ({
 
     return (
         <div
-            style={{ zoom: sizeMod }}
+            style={{ zoom }}
             className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
             <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
                 {core.map(char => (
@@ -47,11 +49,11 @@ export const TeamFlow: React.FC<Props> = ({
                             showShards={RosterSnapshotShowVariableSettings.Never}
                             showXpLevel={RosterSnapshotShowVariableSettings.Never}
                             showAbilities={RosterSnapshotShowVariableSettings.Always}
-                            showEquipment={RosterSnapshotShowVariableSettings.Always}
+                            showEquipment={showEquipment}
                             showTooltip={false}
                             char={Teams2Service.convertCharacter(char!)}
                             charData={char}
-                            isDisabled={disabledUnits?.includes(char.snowprintId!)}
+                            isDisabled={disabledUnits?.includes(char.snowprintId)}
                         />
                     </div>
                 ))}
@@ -69,11 +71,11 @@ export const TeamFlow: React.FC<Props> = ({
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     showAbilities={RosterSnapshotShowVariableSettings.Always}
-                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                    showEquipment={showEquipment}
                                     showTooltip={false}
                                     char={Teams2Service.convertCharacter(char!)}
                                     charData={char}
-                                    isDisabled={disabledUnits?.includes(char.snowprintId!)}
+                                    isDisabled={disabledUnits?.includes(char.snowprintId)}
                                 />
                             </div>
                         ))}
@@ -95,7 +97,7 @@ export const TeamFlow: React.FC<Props> = ({
                                     showShards={RosterSnapshotShowVariableSettings.Never}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     showAbilities={
-                                        disabledUnits?.includes(mow.snowprintId!)
+                                        disabledUnits?.includes(mow.snowprintId)
                                             ? RosterSnapshotShowVariableSettings.Never
                                             : RosterSnapshotShowVariableSettings.Always
                                     }
@@ -103,7 +105,7 @@ export const TeamFlow: React.FC<Props> = ({
                                     showTooltip={false}
                                     mow={Teams2Service.convertMow(mow)}
                                     mowData={mow}
-                                    isDisabled={disabledUnits?.includes(mow.snowprintId!)}
+                                    isDisabled={disabledUnits?.includes(mow.snowprintId)}
                                 />
                             </div>
                         ))}

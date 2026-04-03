@@ -119,7 +119,7 @@ export interface UnitDataRaw {
 export interface ICharacterData {
     unitType: UnitType.character;
     id: string;
-    snowprintId?: string;
+    snowprintId: string;
     alliance: Alliance;
     faction: FactionId;
     name: string;
@@ -181,6 +181,7 @@ export interface IUnitUpgradeRank {
     rankEnd: Rank;
     startRankPoint5: boolean;
     rankPoint5: boolean;
+    /** The (potentially crafted) upgrade materials needed to rank up the character. */
     upgrades: string[];
 }
 

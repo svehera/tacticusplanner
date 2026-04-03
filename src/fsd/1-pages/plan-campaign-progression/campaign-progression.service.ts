@@ -38,12 +38,15 @@ const alliedFactions = (factionId: FactionId) => {
     const faction = factions.find(f => f.snowprintId === factionId);
     if (!faction) throw new Error(`Unknown faction ID: ${factionId}`);
     switch (faction.alliance) {
-        case 'Imperial':
+        case 'Imperial': {
             return imperialFactions;
-        case 'Chaos':
+        }
+        case 'Chaos': {
             return chaosFactions;
-        case 'Xenos':
+        }
+        case 'Xenos': {
             return [faction];
+        }
     }
 };
 
@@ -56,6 +59,19 @@ const factionCampaigns = Object.fromEntries(
 
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
+const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
+    const rarityMap = {
+        [Rarity.Common]: 0,
+        [Rarity.Uncommon]: 1,
+        [Rarity.Rare]: 2,
+        [Rarity.Epic]: 3,
+        [Rarity.Legendary]: 4,
+        [Rarity.Mythic]: 5,
+        Shard: 6,
+        'Mythic Shard': 7,
+    };
+    return rarityMap[rarity];
+};
 export class CampaignsProgressionService {
     /**
      * Computes the cost per goal and associates each character with the campaigns
@@ -81,9 +97,9 @@ export class CampaignsProgressionService {
     ): void {
         for (const goal of goals) {
             const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
-            goalData.unfarmableLocations.forEach(x => {
+            for (const x of goalData.unfarmableLocations) {
                 nodesToBeat.get(x.campaign)?.push(x);
-            });
+            }
             const unit = CharactersService.getUnit(goal.unitId);
             if (!unit) {
                 console.error("Couldn't find unit '" + goal.unitId + "'.");
@@ -91,16 +107,16 @@ export class CampaignsProgressionService {
             }
             // If this unit can participate in campaigns, add the farm data to the
             // campaign results.
-            factionCampaigns[unit.faction].forEach(campaign => {
+            for (const campaign of factionCampaigns[unit.faction]) {
                 if (!result.data.get(campaign.id)) {
                     console.error("no campaign data for '" + campaign.id + "'.");
-                    return;
+                    continue;
                 }
                 result.data.get(campaign.id)?.goalCost.set(goal.goalId, goalData.totalEnergy);
-            });
+            }
 
             // Sum up all the materials across all goals.
-            goalData.farmData.forEach((data, material) => {
+            for (const [material, data] of goalData.farmData.entries()) {
                 if (result.materialFarmData.has(material)) {
                     const existingData = result.materialFarmData.get(material)!;
                     existingData.count += data.count;
@@ -112,11 +128,11 @@ export class CampaignsProgressionService {
                     result.charactersNeedingMaterials.set(material, []);
                 }
                 result.charactersNeedingMaterials.get(material)?.push(goal.unitId);
-            });
+            }
         }
-        result.charactersNeedingMaterials.forEach((units, material) => {
-            result.charactersNeedingMaterials.set(material, uniq(units.sort()));
-        });
+        for (const [material, units] of result.charactersNeedingMaterials.entries()) {
+            result.charactersNeedingMaterials.set(material, uniq(units.toSorted()));
+        }
     }
 
     /**
@@ -126,7 +142,7 @@ export class CampaignsProgressionService {
     private static deduplicateNodesToBeat(
         nodes: Map<string, ICampaignBattleComposed[]>
     ): Map<string, ICampaignBattleComposed[]> {
-        const ret = new Map<string, ICampaignBattleComposed[]>();
+        const returnValue = new Map<string, ICampaignBattleComposed[]>();
         for (const [campaign, battles] of nodes.entries()) {
             const newBattles: ICampaignBattleComposed[] = [];
             const used: Set<number> = new Set<number>();
@@ -135,9 +151,9 @@ export class CampaignsProgressionService {
                 newBattles.push(battle);
                 used.add(battle.nodeNumber);
             }
-            ret.set(campaign, newBattles);
+            returnValue.set(campaign, newBattles);
         }
-        return ret;
+        return returnValue;
     }
 
     /**
@@ -185,7 +201,7 @@ export class CampaignsProgressionService {
         for (const campaign of nodesToBeat.keys()) {
             const newMaterialEnergy = new Map<string, number>();
             if ((nodesToBeat.get(campaign)?.length ?? 0) == 0) continue;
-            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.sort((a, b) => {
+            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.toSorted((a, b) => {
                 return a.nodeNumber - b.nodeNumber;
             });
             let cumulativeSavings: number = 0;
@@ -268,7 +284,7 @@ export class CampaignsProgressionService {
                 for (const upgradeMaterialId of unitUpgrade.upgrades) {
                     const expandedRecipe: IRecipeExpandedUpgrade =
                         UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
-                    if (Object.entries(expandedRecipe.expandedRecipe).length == 0) {
+                    if (Object.entries(expandedRecipe.expandedRecipe).length === 0) {
                         this.addToMaterials(materialReqs, expandedRecipe.id, 1);
                     } else {
                         for (const [material, count] of Object.entries(expandedRecipe.expandedRecipe)) {
@@ -294,20 +310,8 @@ export class CampaignsProgressionService {
             }
             materialReqs.materials = newMaterials;
         }
-        const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
-            const rarityMap = {
-                [Rarity.Common]: 0,
-                [Rarity.Uncommon]: 1,
-                [Rarity.Rare]: 2,
-                [Rarity.Epic]: 3,
-                [Rarity.Legendary]: 4,
-                [Rarity.Mythic]: 5,
-                Shard: 6,
-                'Mythic Shard': 7,
-            };
-            return rarityMap[rarity];
-        };
-        const sortedMaterials: string[] = Object.keys(materialReqs.materials).sort(
+
+        const sortedMaterials: string[] = Object.keys(materialReqs.materials).toSorted(
             (a, b) =>
                 mapRarity(UpgradesService.recipeExpandedUpgradeData[b].rarity) -
                 mapRarity(UpgradesService.recipeExpandedUpgradeData[a].rarity)
@@ -318,12 +322,12 @@ export class CampaignsProgressionService {
             result.canFarm = result.canFarm && farmData.canFarm;
             result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
             result.farmData.set(materialId, farmData);
-            farmData.farmableLocations.forEach(x => {
+            for (const x of farmData.farmableLocations) {
                 result.farmableLocations.push(x);
-            });
-            farmData.unfarmableLocations.forEach(x => {
+            }
+            for (const x of farmData.unfarmableLocations) {
                 result.unfarmableLocations.push(x);
-            });
+            }
         }
 
         return result;
@@ -386,12 +390,12 @@ export class CampaignsProgressionService {
             unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
         };
         let bestBattle: ICampaignBattleComposed | undefined = undefined;
-        result.farmableLocations.forEach(battle => {
+        for (const battle of result.farmableLocations) {
             if (!bestBattle) {
                 bestBattle = battle;
                 result.campaignType = battle.campaignType;
                 result.totalEnergy = this.getCostToFarmMaterial(battle, count);
-                return;
+                continue;
             }
             const energyCost = this.getCostToFarmMaterial(battle, count);
             if (energyCost < result.totalEnergy) {
@@ -399,7 +403,7 @@ export class CampaignsProgressionService {
                 result.campaignType = battle.campaignType;
                 result.totalEnergy = energyCost;
             }
-        });
+        }
         return result;
     }
 
@@ -409,20 +413,27 @@ export class CampaignsProgressionService {
      */
     public static getEnergyCost(type: CampaignType): number {
         switch (type) {
-            case CampaignType.Normal:
+            case CampaignType.Normal: {
                 return 6;
-            case CampaignType.Mirror:
+            }
+            case CampaignType.Mirror: {
                 return 6;
-            case CampaignType.Early:
+            }
+            case CampaignType.Early: {
                 return 5;
-            case CampaignType.SuperEarly:
+            }
+            case CampaignType.SuperEarly: {
                 return 3;
-            case CampaignType.Elite:
+            }
+            case CampaignType.Elite: {
                 return 10;
-            case CampaignType.Standard:
+            }
+            case CampaignType.Standard: {
                 return 6;
-            case CampaignType.Extremis:
+            }
+            case CampaignType.Extremis: {
                 return 6;
+            }
         }
         return -1;
     }
@@ -453,14 +464,14 @@ export class CampaignsProgressionService {
     ): ICampaignBattleComposed[] {
         const result: ICampaignBattleComposed[] = [];
 
-        Object.entries(CampaignsService.campaignsComposed).forEach(([_, battle]) => {
+        for (const [_, battle] of Object.entries(CampaignsService.campaignsComposed)) {
             if (
                 this.getReward(battle) === materialId &&
                 CampaignsService.hasCompletedBattle(battle, campaignProgress)
             ) {
                 result.push(battle);
             }
-        });
+        }
 
         return result;
     }
@@ -499,11 +510,11 @@ export class CampaignsProgressionService {
     ): ICampaignBattleComposed | undefined {
         if (farmData === undefined) return undefined;
         if (battle.campaignType != CampaignType.Elite) return undefined;
-        const baseCampaign = battle.campaign.substring(0, battle.campaign.length - 6);
+        const baseCampaign = battle.campaign.slice(0, Math.max(0, battle.campaign.length - 6));
         let result: ICampaignBattleComposed | undefined = undefined;
-        farmData.unfarmableLocations.forEach(x => {
+        for (const x of farmData.unfarmableLocations) {
             if (x.campaign == baseCampaign && this.getReward(x) == this.getReward(battle)) result = x;
-        });
+        }
         return result;
     }
 }

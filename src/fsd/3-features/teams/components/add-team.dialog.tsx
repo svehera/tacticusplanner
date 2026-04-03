@@ -48,18 +48,18 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
     const [teamName, setTeamName] = useState<string>('Team');
     const [rarityCap, setRarityCap] = useState(Rarity.Legendary);
     const [team, setTeam] = useState<ICharacter2[]>([]);
-    const [mow, setMow] = useState<IMow2 | null>(null);
+    const [mow, setMow] = useState<IMow2>();
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | undefined) => {
         setTeam(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);
     };
 
-    const updateSelectedMod = (values: string[]) => {
+    const updateSelectedMode = (values: string[]) => {
         if (values[0] !== gameMode) {
             setGameMode(values[0] as GameMode);
             setSelectedSubModes([]);
@@ -68,7 +68,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
 
     const updateSelectedGuildBosses = (values: string[]) => {
         const nonGuildBossValues = selectedSubModes.filter(
-            mod => !guildRaidBosses.some(option => option.value === mod)
+            mode => !guildRaidBosses.some(option => option.value === mode)
         );
 
         setSelectedSubModes([...nonGuildBossValues, ...values]);
@@ -76,7 +76,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
 
     const updateSelectedGuildPrimes = (values: string[]) => {
         const nonGuildPrimeValues = selectedSubModes.filter(
-            mod => !guildRaidPrimes.some(option => option.value === mod)
+            mode => !guildRaidPrimes.some(option => option.value === mode)
         );
 
         setSelectedSubModes([...nonGuildPrimeValues, ...values]);
@@ -99,11 +99,11 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
             );
             onClose();
         }
-        setActiveStep(prevActiveStep => prevActiveStep + 1);
+        setActiveStep(previousActiveStep => previousActiveStep + 1);
     };
 
     const handleBack = () => {
-        setActiveStep(prevActiveStep => prevActiveStep - 1);
+        setActiveStep(previousActiveStep => previousActiveStep - 1);
     };
 
     return (
@@ -127,7 +127,7 @@ export const AddTeamDialog: React.FC<Props> = ({ onClose, characters, mows, addT
                             label=""
                             options={gameModes}
                             multiple={false}
-                            optionsChange={updateSelectedMod}
+                            optionsChange={updateSelectedMode}
                         />
                     </>
                 )}

@@ -9,6 +9,8 @@ import {
     ILreProgressDto,
     LrePointsCategoryId,
     ProgressState,
+    battlesProgressToCompact,
+    compactToBattlesProgress,
 } from '@/fsd/3-features/lre-progress';
 
 import {
@@ -25,9 +27,9 @@ export class LreService {
         const completedReqs = trackProgress.battles.flatMap(x => x.requirementsProgress).filter(x => x.completed);
         const result: Record<string, number> = {};
 
-        trackProgress.requirements.forEach(requirement => {
+        for (const requirement of trackProgress.requirements) {
             result[requirement.id] = completedReqs.filter(x => x.id === requirement.id).length;
-        });
+        }
 
         return result;
     };
@@ -52,7 +54,10 @@ export class LreService {
             } satisfies ILreOccurrenceProgress;
         });
 
-        const battlesDto = dto?.battlesProgress ?? [];
+        // Prefer the compact format if present, fall back to legacy battlesProgress.
+        const battlesDto = dto?.compactProgress
+            ? compactToBattlesProgress(dto.compactProgress)
+            : (dto?.battlesProgress ?? []);
         const tracksProgress = (['alpha', 'beta', 'gamma'] as const).map(trackId => {
             const track = lre[trackId];
             const trackBattlesDto = battlesDto.filter(x => x.trackId === trackId);
@@ -95,24 +100,24 @@ export class LreService {
             ];
 
             const battles = track.battlesPoints.map((points, index) => {
-                const flexPointsCategories = [LrePointsCategoryId.killScore, LrePointsCategoryId.highScore];
+                const flexPointsCategories = new Set([LrePointsCategoryId.killScore, LrePointsCategoryId.highScore]);
                 const battleProgress = trackBattlesDto.find(x => x.battleIndex === index);
 
-                const requirementsProgress: ILreBattleRequirementsProgress[] = requirements.map(req => {
-                    const reqProgress = battleProgress?.requirements.find(x => x.id === req.id);
+                const requirementsProgress: ILreBattleRequirementsProgress[] = requirements.map(requirement => {
+                    const requirementProgress = battleProgress?.requirements.find(x => x.id === requirement.id);
 
                     return {
-                        id: req.id,
-                        iconId: req.iconId,
-                        name: req.name,
-                        points: flexPointsCategories.includes(req.id as LrePointsCategoryId)
+                        id: requirement.id,
+                        iconId: requirement.iconId,
+                        name: requirement.name,
+                        points: flexPointsCategories.has(requirement.id as LrePointsCategoryId)
                             ? points
-                            : req.pointsPerBattle,
-                        completed: reqProgress?.state === ProgressState.completed,
-                        blocked: reqProgress?.state === ProgressState.blocked,
-                        status: reqProgress?.status, // Load new status field
-                        killScore: reqProgress?.scoredPoints, // Load kill score from scoredPoints
-                        highScore: reqProgress?.highScoredPoints, // Load high score from highScoredPoints
+                            : requirement.pointsPerBattle,
+                        completed: requirementProgress?.state === ProgressState.completed,
+                        blocked: requirementProgress?.state === ProgressState.blocked,
+                        status: requirementProgress?.status, // Load new status field
+                        killScore: requirementProgress?.scoredPoints, // Load kill score from scoredPoints
+                        highScore: requirementProgress?.highScoredPoints, // Load high score from highScoredPoints
                     };
                 });
                 return {
@@ -123,12 +128,12 @@ export class LreService {
                 } satisfies ILreBattleProgress;
             });
 
-            requirements.forEach(req => {
-                req.completed = battles
+            for (const requirement of requirements) {
+                requirement.completed = battles
                     .flatMap(x => x.requirementsProgress)
-                    .filter(x => x.id === req.id)
+                    .filter(x => x.id === requirement.id)
                     .every(x => x.completed);
-            });
+            }
 
             const requirementsTotalPoints = sum(requirements.map(x => x.pointsPerBattle));
             const totalPoints = sum(
@@ -198,7 +203,7 @@ export class LreService {
             id: model.eventId,
             name: model.eventName,
             notes: model.notes,
-            battlesProgress,
+            compactProgress: battlesProgressToCompact(battlesProgress),
             forceProgress: model.syncedProgress,
             overview: overviewDto,
         };

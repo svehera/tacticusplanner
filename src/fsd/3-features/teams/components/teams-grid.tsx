@@ -159,30 +159,38 @@ export const TeamsGrid: React.FC<Props> = ({ teams, characters, mows, deleteTeam
 
     return (
         <div>
-            {!!guildRaidTeams.length && (
+            {guildRaidTeams.length > 0 && (
                 <div>
                     <h2>Guild Raids</h2>
-                    <div className="flex flex-wrap items-center gap-3">{guildRaidTeams.map(renderTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">
+                        {guildRaidTeams.map(team => renderTeam(team))}
+                    </div>
                 </div>
             )}
-            {!!taTeams.length && (
+            {taTeams.length > 0 && (
                 <div>
                     <h2>Tournament Arena</h2>
-                    <div className="flex flex-wrap items-center gap-3">{taTeams.map(renderCappedTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">
+                        {taTeams.map(team => renderCappedTeam(team))}
+                    </div>
                 </div>
             )}
 
-            {!!gwTeams.length && (
+            {gwTeams.length > 0 && (
                 <div>
                     <h2>Guild War</h2>
-                    <div className="flex flex-wrap items-center gap-3">{gwTeams.map(renderCappedTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">
+                        {gwTeams.map(team => renderCappedTeam(team))}
+                    </div>
                 </div>
             )}
 
-            {!!survivalTeams.length && (
+            {survivalTeams.length > 0 && (
                 <div>
                     <h2>Survival</h2>
-                    <div className="flex flex-wrap items-center gap-3">{survivalTeams.map(renderCappedTeam)}</div>
+                    <div className="flex flex-wrap items-center gap-3">
+                        {survivalTeams.map(team => renderCappedTeam(team))}
+                    </div>
                 </div>
             )}
         </div>

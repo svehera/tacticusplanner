@@ -8,19 +8,21 @@ const createMenuItem = (character: ICharacterData) =>
     new MenuItemTP(
         character.name,
         <UnitShardIcon icon={character.roundIcon} height={24} />,
-        `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId!)!.id]}`
+        `/plan/lre?character=${LegendaryEventEnum[LegendaryEventService.getEventByCharacterSnowprintId(character.snowprintId)!.id]}`
     );
 
 const activeLreChars = CharactersService.lreCharacters.filter(x => !x.lre?.finished);
 
-function utcStringToMilliseconds(utcStr?: string): number {
-    return utcStr ? Date.parse(utcStr) : Number.POSITIVE_INFINITY;
+function utcStringToMilliseconds(utcString?: string): number {
+    return utcString ? Date.parse(utcString) : Number.POSITIVE_INFINITY;
 }
 
 activeLreChars.sort(
     (a, b) => utcStringToMilliseconds(a.lre?.nextEventDateUtc) - utcStringToMilliseconds(b.lre?.nextEventDateUtc)
 );
 
-export const activeLreMenuItems = [activeLreChars.map(createMenuItem)].flat();
+export const activeLreMenuItems = [activeLreChars.map(character => createMenuItem(character))].flat();
 
-export const inactiveLreMenuItems = CharactersService.lreCharacters.filter(x => !!x.lre?.finished).map(createMenuItem);
+export const inactiveLreMenuItems = CharactersService.lreCharacters
+    .filter(x => !!x.lre?.finished)
+    .map(character => createMenuItem(character));

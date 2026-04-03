@@ -30,8 +30,8 @@ export const ShardsItemInput: React.FC<Props> = ({ shardsRaid, handleAdd }) => {
 
     const isMythic = shardsRaid.requiredCount === 0 && shardsRaid.requiredMythicCount > 0;
 
-    const acquired = !isMythic ? shardsRaid.acquiredCount : shardsRaid.acquiredMythicCount;
-    const required = !isMythic ? shardsRaid.requiredCount : shardsRaid.requiredMythicCount;
+    const acquired = isMythic ? shardsRaid.acquiredMythicCount : shardsRaid.acquiredCount;
+    const required = isMythic ? shardsRaid.requiredMythicCount : shardsRaid.requiredCount;
 
     return (
         <div className="flex-box" style={{ opacity: isAllRaidsCompleted ? 0.5 : 1 }}>

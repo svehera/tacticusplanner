@@ -73,7 +73,7 @@ export const leSelectedTeamsReducer = (
 
             const currentTeamIndex = legendaryEvent.teams.findIndex(x => x.id === teamId);
 
-            if (currentTeamIndex < 0) {
+            if (currentTeamIndex === -1) {
                 return state;
             }
 
@@ -89,7 +89,8 @@ export const leSelectedTeamsReducer = (
             return { ...state, [eventId]: { ...legendaryEvent } };
         }
         default: {
-            throw new Error();
+            // @ts-expect-error TS says this should never be reached but we want the error if it does
+            throw new Error(`Unexpected action.type received in reducer: ${action.type}`);
         }
     }
 };

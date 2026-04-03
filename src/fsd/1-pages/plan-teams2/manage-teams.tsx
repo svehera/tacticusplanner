@@ -12,8 +12,9 @@ import {
     WorkspacePremium, // Tournament
 } from '@mui/icons-material';
 import { IconButton, Tooltip, Paper, Stack, Chip, ButtonBase, Typography } from '@mui/material';
-import { cloneDeep } from 'lodash';
-import { useContext, useEffect, useState } from 'react';
+import type { ChipProps } from '@mui/material';
+import { cloneDeep, uniq } from 'lodash';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -36,7 +37,15 @@ import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 const MAX_TEAMS = 20;
 
 // Internal helper for metadata styling
-const MetadataChip = ({ icon, label, color }: { icon: React.ReactElement; label: string; color: any }) => (
+const MetadataChip = ({
+    icon,
+    label,
+    color,
+}: {
+    icon: React.ReactElement;
+    label: string;
+    color: ChipProps['color'];
+}) => (
     <Chip
         icon={icon}
         label={label}
@@ -72,18 +81,16 @@ export const ManageTeams = () => {
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
     const [selectedMows, setSelectedMows] = useState<string[]>([]);
-    const [flexIndex, setFlexIndex] = useState<number | undefined>(undefined);
+    const [flexIndex, setFlexIndex] = useState<number | undefined>();
     const [notes, setNotes] = useState<string>('');
 
     // State for the add/edit dialog.
     const [saveTeamMode, setSaveTeamMode] = useState<SaveTeamMode>(SaveTeamMode.MODE_ADD);
-    const [editingTeam, setEditingTeam] = useState<ITeam2 | null>(null);
+    const [editingTeam, setEditingTeam] = useState<ITeam2>();
     const [saveAllowed, setSaveAllowed] = useState(false);
-    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>(undefined);
-    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>(undefined);
-    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>(
-        undefined
-    );
+    const [saveDisallowedMessage, setSaveDisallowedMessage] = useState<string | undefined>();
+    const [warDisallowedMessage, setWarDisallowedMessage] = useState<string | undefined>();
+    const [tournamentArenaDisallowedMessage, setTournamentArenaDisallowedMessage] = useState<string | undefined>();
     const [warOffenseSelected, setWarOffenseSelected] = useState<boolean>(false);
     const [warDefenseSelected, setWarDefenseSelected] = useState<boolean>(false);
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
@@ -95,8 +102,8 @@ export const ManageTeams = () => {
 
     const [addTeamDialogOpen, setAddTeamDialogOpen] = useState<boolean>(false);
     const [teams, setTeams] = useState<ITeam2[]>([]);
-    const [sizeMod, setSizeMod] = useState(isMobile ? 0.5 : 1);
-    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>(undefined);
+    const [zoom, setZoom] = useState(isMobile ? 0.5 : 1);
+    const [selectedTeamType, setSelectedTeamType] = useState<TeamTypeKey | undefined>();
 
     useEffect(() => {
         setTeams(currentTeams);
@@ -106,6 +113,39 @@ export const ManageTeams = () => {
         setResolvedChars(CharactersService.resolveStoredCharacters(unresolvedCharacters));
         setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
     }, [unresolvedCharacters, unresolvedMows]);
+
+    const otherTeamsInSelectedModes = useMemo(
+        () =>
+            teams.filter(
+                team =>
+                    ((warOffenseSelected && !!team.warOffense) ||
+                        (warDefenseSelected && !!team.warDefense) ||
+                        (guildRaidSelected && !!team.raid) ||
+                        (tournamentArenaSelected && !!team.ta) ||
+                        (hordeModeSelected && !!team.horde)) &&
+                    !(saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam && team.name === editingTeam.name)
+            ),
+        [
+            teams,
+            saveTeamMode,
+            editingTeam,
+            warOffenseSelected,
+            warDefenseSelected,
+            guildRaidSelected,
+            tournamentArenaSelected,
+            hordeModeSelected,
+        ]
+    );
+
+    const deployedCharIds = useMemo(
+        () => uniq(otherTeamsInSelectedModes.flatMap(team => team.chars)),
+        [otherTeamsInSelectedModes]
+    );
+
+    const deployedMowIds = useMemo(
+        () => uniq(otherTeamsInSelectedModes.flatMap(team => team.mows ?? [])),
+        [otherTeamsInSelectedModes]
+    );
 
     useEffect(() => {
         let teamSizeRestrictedModesEnabled = true;
@@ -189,7 +229,7 @@ export const ManageTeams = () => {
         setImportDialogOpen(true);
     };
 
-    const onImportGo = (team: IPersonalTeam | null) => {
+    const onImportGo = (team: IPersonalTeam | undefined) => {
         setImportDialogOpen(false);
         if (!team) return;
         setSelectedChars(
@@ -229,29 +269,31 @@ export const ManageTeams = () => {
     };
 
     const onDelete = (team: ITeam2) => {
-        if (window.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)) {
+        if (
+            globalThis.confirm(`Are you sure you want to delete the team "${team.name}"? This action cannot be undone.`)
+        ) {
             dispatch.teams2({ type: 'Set', value: teams.filter(t => t.name !== team.name) });
         }
     };
 
     const onSave = () => {
         if (saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam) {
-            const team: ITeam2 = teams.find(t => t.name === editingTeam?.name)!;
-            team.chars = selectedChars;
-            if (selectedMows.length > 0) team.mows = selectedMows;
-            team.warOffense = warOffenseSelected ? true : undefined;
-            team.warDefense = warDefenseSelected ? true : undefined;
-            team.raid = guildRaidSelected ? true : undefined;
-            team.ta = tournamentArenaSelected ? true : undefined;
-            team.horde = hordeModeSelected ? true : undefined;
-            team.notes = notes;
-            team.flexIndex = flexIndex;
-            const curTeams = [...teams];
-            curTeams.forEach(t => {
-                if (t.name !== editingTeam.name) return;
-                t = team;
-            });
-            dispatch.teams2({ type: 'Set', value: cloneDeep(curTeams) });
+            const updatedTeam: ITeam2 = {
+                ...editingTeam,
+                name: teamName.trim(),
+                chars: selectedChars,
+                mows: selectedMows.length > 0 ? selectedMows : undefined,
+                warOffense: warOffenseSelected ? true : undefined,
+                warDefense: warDefenseSelected ? true : undefined,
+                raid: guildRaidSelected ? true : undefined,
+                ta: tournamentArenaSelected ? true : undefined,
+                horde: hordeModeSelected ? true : undefined,
+                notes,
+                flexIndex,
+            };
+
+            const updatedTeams = teams.map(team => (team.name === editingTeam.name ? updatedTeam : team));
+            dispatch.teams2({ type: 'Set', value: cloneDeep(updatedTeams) });
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
@@ -276,7 +318,7 @@ export const ManageTeams = () => {
     const onAddChar = (snowprintId: string) => {
         const flex = flexIndex ?? selectedChars.length;
         setSelectedChars([...selectedChars.slice(0, flex), snowprintId, ...selectedChars.slice(flex)]);
-        setFlexIndex(flexIndex !== undefined ? flexIndex + 1 : undefined);
+        setFlexIndex(flexIndex === undefined ? undefined : flexIndex + 1);
     };
 
     const onAddMow = (snowprintId: string) => {
@@ -284,15 +326,15 @@ export const ManageTeams = () => {
     };
 
     const onCharClicked = (char: ICharacter2) => {
-        const index = selectedChars.findIndex(id => id === (char.snowprintId ?? ''));
+        const index = selectedChars.indexOf(char.snowprintId ?? '');
         if (index === -1) {
-            console.error('Clicked character that is not in selectedChars: ', char, selectedChars, index);
+            console.error('Clicked character that is not in selectedChars:', char, selectedChars, index);
             return;
         }
         let flex = flexIndex ?? selectedChars.length;
         let newChars: string[] = [...selectedChars.slice(0, index), ...selectedChars.slice(index + 1)];
         if (index < flex) {
-            newChars = [...newChars, char.snowprintId!];
+            newChars = [...newChars, char.snowprintId];
             --flex;
         }
         setSelectedChars(newChars);
@@ -320,8 +362,8 @@ export const ManageTeams = () => {
                 maxRank={maxRank}
                 factions={factions}
                 notes={notes}
-                sizeMod={sizeMod}
-                setSizeMod={setSizeMod}
+                zoom={zoom}
+                setZoom={setZoom}
                 onAddChar={onAddChar}
                 onAddMow={onAddMow}
                 onCharClicked={onCharClicked}
@@ -334,6 +376,8 @@ export const ManageTeams = () => {
                 onMaxRankChange={setMaxRank}
                 onFactionsChange={setFactions}
                 onRarityCapChanged={setRarityCap}
+                deployedCharIds={deployedCharIds}
+                deployedMowIds={deployedMowIds}
                 saveAllowed={saveAllowed}
                 saveDisallowedMessage={saveDisallowedMessage}
                 warDisallowedMessage={warDisallowedMessage}
@@ -358,9 +402,9 @@ export const ManageTeams = () => {
     }
 
     return (
-        <Stack spacing={2} className="p-4">
+        <Stack spacing={2}>
             <div className="flex items-start justify-between gap-4">
-                <RosterSnapshotsMagnificationSlider sizeMod={sizeMod} setSizeMod={setSizeMod} />
+                <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                 <div className="flex items-center gap-2">
                     <label className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
                         Team Type
@@ -368,9 +412,9 @@ export const ManageTeams = () => {
                     <select
                         className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                         value={selectedTeamType ?? ''}
-                        onChange={e => {
-                            const value = e.target.value as TeamTypeKey | '';
-                            setSelectedTeamType(value ? value : undefined);
+                        onChange={event => {
+                            const value = event.target.value as TeamTypeKey | '';
+                            setSelectedTeamType(value || undefined);
                         }}>
                         <option value="">All</option>
                         <option value="warOffense">War Offense</option>
@@ -434,7 +478,7 @@ export const ManageTeams = () => {
                                     <select
                                         className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-900 shadow-sm transition outline-none focus:border-blue-500 focus:ring-2 focus:ring-blue-200 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-100 dark:focus:ring-blue-900/40"
                                         value={selectedLegacyTeamName}
-                                        onChange={e => setSelectedLegacyTeamName(e.target.value)}>
+                                        onChange={event => setSelectedLegacyTeamName(event.target.value)}>
                                         {legacyTeams.map(t => (
                                             <option key={t.name} value={t.name}>
                                                 {t.name}
@@ -451,8 +495,7 @@ export const ManageTeams = () => {
                                         <button
                                             className="rounded-lg bg-green-600 px-3 py-1.5 text-sm font-semibold text-white transition hover:bg-green-700"
                                             onClick={() => {
-                                                const team =
-                                                    legacyTeams.find(t => t.name === selectedLegacyTeamName) ?? null;
+                                                const team = legacyTeams.find(t => t.name === selectedLegacyTeamName);
                                                 onImportGo(team);
                                                 setImportDialogOpen(false);
                                             }}>
@@ -549,7 +592,7 @@ export const ManageTeams = () => {
                                 flexIndex={team.flexIndex}
                                 onCharClicked={() => {}}
                                 onMowClicked={() => {}}
-                                sizeMod={sizeMod}
+                                zoom={zoom}
                                 disabledUnits={[
                                     ...team.chars.map(
                                         char =>

@@ -94,7 +94,7 @@ export const XpIncome: React.FC = () => {
                 kBlueStarCharacters
                     .filter(
                         char =>
-                            (resolvedCharacters.find(c => c.snowprintId! === char.id)?.stars ?? RarityStars.None) >=
+                            (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ?? RarityStars.None) >=
                             RarityStars.OneBlueStar
                     )
                     .map(char => char.id),
@@ -135,7 +135,7 @@ export const XpIncome: React.FC = () => {
             </div>
 
             <AccessibleTooltip title="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed.">
-                <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                <div className="justify-endrounded-lg mb-5 border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
                     <BookSelect
                         label="Default XP Book for Calculations"
                         value={defaultBookToUse ?? Rarity.Legendary}
@@ -152,7 +152,7 @@ export const XpIncome: React.FC = () => {
                 <h4 className="mb-2 font-semibold">Arena League</h4>
                 <select
                     value={arenaLeague}
-                    onChange={e => dispatchUpdate('arenaLeague', e.target.value as unknown as ArenaLeague)}
+                    onChange={event => dispatchUpdate('arenaLeague', event.target.value as unknown as ArenaLeague)}
                     className="rounded-md border border-gray-300 bg-white p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white">
                     {Object.values(ArenaLeague)
                         .filter(league => typeof league === 'number')
@@ -200,7 +200,7 @@ export const XpIncome: React.FC = () => {
                                 min="1"
                                 max="15"
                                 value={raidLoops}
-                                onChange={e => setRaidLoops(parseInt(e.target.value))}
+                                onChange={event => setRaidLoops(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-orange-500"
                             />
                             <p className="mt-3">
@@ -212,7 +212,7 @@ export const XpIncome: React.FC = () => {
                                 min="0"
                                 max="5"
                                 value={extraBossesAfterLoop}
-                                onChange={e => setExtraBossesAfterLoop(parseInt(e.target.value))}
+                                onChange={event => setExtraBossesAfterLoop(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-orange-500"
                             />
                         </>
@@ -221,7 +221,9 @@ export const XpIncome: React.FC = () => {
                             <p className="mb-2">Highest Rarity Fully Cleared:</p>
                             <select
                                 value={clearRarity}
-                                onChange={e => dispatchUpdate('clearRarity', parseInt(e.target.value, 10) as Rarity)}
+                                onChange={event =>
+                                    dispatchUpdate('clearRarity', Number.parseInt(event.target.value, 10) as Rarity)
+                                }
                                 className="rounded-md border border-gray-300 bg-white p-2 dark:border-gray-500 dark:bg-gray-600 dark:text-white">
                                 {[Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic].map(rarity => (
                                     <option key={rarity} value={rarity}>
@@ -237,7 +239,7 @@ export const XpIncome: React.FC = () => {
                                 min="0"
                                 max="5"
                                 value={additionalBosses}
-                                onChange={e => setAdditionalBosses(parseInt(e.target.value))}
+                                onChange={event => setAdditionalBosses(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-green-500"
                             />
                         </>
@@ -275,7 +277,7 @@ export const XpIncome: React.FC = () => {
                         <div className="flex flex-wrap gap-4">
                             {kBlueStarCharacters.map(char => {
                                 const isStarred =
-                                    (resolvedCharacters.find(c => c.snowprintId! === char.id)?.stars ??
+                                    (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ??
                                         RarityStars.None) >= RarityStars.OneBlueStar;
 
                                 return (
@@ -287,7 +289,7 @@ export const XpIncome: React.FC = () => {
                                             <UnitShardIcon
                                                 icon={
                                                     CharactersService.charactersData.find(
-                                                        c => c.snowprintId! === char.id
+                                                        c => c.snowprintId === char.id
                                                     )?.roundIcon ?? ''
                                                 }
                                             />
@@ -413,7 +415,7 @@ export const XpIncome: React.FC = () => {
                                     max={kEliteEnergyMax}
                                     step={kEliteEnergyPerRaid}
                                     value={eliteEnergyPerDay}
-                                    onChange={e => setEliteEnergyPerDay(parseInt(e.target.value))}
+                                    onChange={event => setEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
                                 />
                                 <span className="w-12 text-right font-bold">{eliteEnergyPerDay}</span>
@@ -434,7 +436,7 @@ export const XpIncome: React.FC = () => {
                                     max={kNonEliteEnergyMax}
                                     step={kNonEliteEnergyPerRaid}
                                     value={nonEliteEnergyPerDay}
-                                    onChange={e => setNonEliteEnergyPerDay(parseInt(e.target.value))}
+                                    onChange={event => setNonEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
                                 />
                                 <span className="w-12 text-right font-bold">{nonEliteEnergyPerDay}</span>

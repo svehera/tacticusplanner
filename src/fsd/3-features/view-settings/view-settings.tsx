@@ -13,17 +13,17 @@ type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
 export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
-    const [anchorEl2, setAnchorEl2] = React.useState<HTMLButtonElement | null>(null);
+    const [anchorElement2, setAnchorElement2] = React.useState<HTMLButtonElement>();
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl2(event.currentTarget);
+        setAnchorElement2(event.currentTarget);
     };
 
     const handleClose2 = () => {
-        setAnchorEl2(null);
+        setAnchorElement2(undefined);
     };
 
-    const open2 = Boolean(anchorEl2);
+    const open2 = Boolean(anchorElement2);
 
     const updatePreferences = (setting: keyof IViewPreferences, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
@@ -54,7 +54,7 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
             </Button>
             <Popover
                 open={open2}
-                anchorEl={anchorEl2}
+                anchorEl={anchorElement2}
                 onClose={handleClose2}
                 anchorOrigin={{
                     vertical: 'bottom',
@@ -142,9 +142,9 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
 
     return (
         <FormGroup className="flex flex-row" style={{ height: preset === 'wyo' ? '55px' : 'unset' }}>
-            {preset === 'wyo' && renderPopover(wyoOptions.map(renderOption))}
-            {preset === 'inventory' && inventoryOptions.map(renderOption)}
-            {preset === 'myProgress' && myProgressOptions.map(renderOption)}
+            {preset === 'wyo' && renderPopover(wyoOptions.map(option => renderOption(option)))}
+            {preset === 'inventory' && inventoryOptions.map(option => renderOption(option))}
+            {preset === 'myProgress' && myProgressOptions.map(option => renderOption(option))}
         </FormGroup>
     );
 };

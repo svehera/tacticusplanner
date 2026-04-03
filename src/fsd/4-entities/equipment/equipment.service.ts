@@ -41,11 +41,11 @@ export class EquipmentService {
         });
     }
 
-    public static convertTacticusEquipmentData(tacticusData: TacticusEquipment): IEquipment | null {
+    public static convertTacticusEquipmentData(tacticusData: TacticusEquipment): IEquipment | undefined {
         const equipment = this.equipmentData.find(eq => eq.id === tacticusData.id);
         if (!equipment) {
             console.error("Couldn't find equipment data for ID: " + tacticusData.id);
-            return null;
+            return;
         }
         return {
             ...equipment,
@@ -62,7 +62,7 @@ export class EquipmentService {
                     CharactersService.parseEquipmentType(data.type) || ''
                 )
             )
-            .map(char => char.snowprintId!);
+            .map(char => char.snowprintId);
     }
 
     private static parseEquipmentRarity(rarity: string): Rarity {
@@ -87,18 +87,24 @@ export class EquipmentService {
 
     public static getEquipmentSlotDisplayName(slot: string): string {
         switch (slot) {
-            case 'I_Block':
+            case 'I_Block': {
                 return 'Block';
-            case 'I_Booster_Block':
+            }
+            case 'I_Booster_Block': {
                 return 'Block Booster';
-            case 'I_Crit':
+            }
+            case 'I_Crit': {
                 return 'Crit';
-            case 'I_Booster_Crit':
+            }
+            case 'I_Booster_Crit': {
                 return 'Crit Booster';
-            case 'I_Defensive':
+            }
+            case 'I_Defensive': {
                 return 'Defense';
-            default:
+            }
+            default: {
                 return 'Unknown Slot';
+            }
         }
     }
 }

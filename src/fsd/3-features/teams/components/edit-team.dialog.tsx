@@ -45,12 +45,12 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
     const [lineup, setLineup] = useState<ICharacter2[]>(
         team.lineup.map(id => characters.find(x => CharactersService.matchesAnyCharacterId(id, x))!)
     );
-    const [mow, setMow] = useState<IMow2 | null>(team.mowId ? mows.find(x => x.id === team.mowId)! : null);
+    const [mow, setMow] = useState<IMow2 | undefined>(team.mowId ? mows.find(x => x.id === team.mowId)! : undefined);
 
     const [isOpenSelectDialog, setIsOpenSelectDialog] = useState<boolean>(false);
 
     const openSelectDialog = () => setIsOpenSelectDialog(true);
-    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | null) => {
+    const closeSelectDialog = (selectedTeam: ICharacter2[], mow: IMow2 | undefined) => {
         setLineup(selectedTeam);
         setMow(mow);
         setIsOpenSelectDialog(false);
@@ -58,7 +58,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
 
     const updateSelectedGuildBosses = (values: string[]) => {
         const nonGuildBossValues = selectedSubModes.filter(
-            mod => !guildRaidBosses.some(option => option.value === mod)
+            mode => !guildRaidBosses.some(option => option.value === mode)
         );
 
         setSelectedSubModes([...nonGuildBossValues, ...values]);
@@ -66,7 +66,7 @@ export const EditTeamDialog: React.FC<Props> = ({ onClose, characters, mows, tea
 
     const updateSelectedGuildPrimes = (values: string[]) => {
         const nonGuildPrimeValues = selectedSubModes.filter(
-            mod => !guildRaidPrimes.some(option => option.value === mod)
+            mode => !guildRaidPrimes.some(option => option.value === mode)
         );
 
         setSelectedSubModes([...nonGuildPrimeValues, ...values]);

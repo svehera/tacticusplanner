@@ -5,15 +5,15 @@ import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
 
 import { IUnit } from './model';
 
-export function isCharacter(unit: IUnit | null): unit is ICharacter2 {
+export function isCharacter(unit: IUnit | null | undefined): unit is ICharacter2 {
     return !!unit && unit.unitType === UnitType.character;
 }
 
-export function isMow(unit: IUnit | null): unit is IMow2 {
+export function isMow(unit: IUnit | null | undefined): unit is IMow2 {
     return !!unit && unit.unitType === UnitType.mow;
 }
 
-export function isUnlocked(unit: IUnit | null): boolean {
+export function isUnlocked(unit: IUnit | null | undefined): boolean {
     if (isCharacter(unit)) {
         return unit.rank > Rank.Locked;
     }

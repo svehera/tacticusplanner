@@ -49,7 +49,7 @@ export class LeProgressService {
     public static computeProgress(model: ILreProgressModel, useP2P: boolean): LeProgress {
         const totalPoints = model.syncedProgress?.currentPoints ?? sum(model.tracksProgress.map(x => x.totalPoints));
         const totalCurrency = sum(model.pointsMilestones.map(x => x.engramPayout));
-        const currentPoints = sum(model.tracksProgress.map(this.computeCurrentPoints));
+        const currentPoints = sum(model.tracksProgress.map(track => this.computeCurrentPoints(track)));
 
         const premiumMissions = useP2P ? sum(model.occurrenceProgress.map(x => x.premiumMissionsProgress)) : 0;
 
@@ -79,7 +79,7 @@ export class LeProgressService {
 
         const currentChests = this.computeCurrentChests(model, currentCurrency);
 
-        const ohSoCloseShards = model.occurrenceProgress.reduce((acc, x) => acc + x.ohSoCloseShards, 0);
+        const ohSoCloseShards = model.occurrenceProgress.reduce((accumulator, x) => accumulator + x.ohSoCloseShards, 0);
 
         const currentShards = currentChests * 25 + ohSoCloseShards;
 
@@ -126,7 +126,7 @@ export class LeProgressService {
         return sum(
             track.battles
                 .flatMap(x => x.requirementsProgress)
-                .map(req => LreRequirementStatusService.getRequirementPoints(req))
+                .map(requirement => LreRequirementStatusService.getRequirementPoints(requirement))
         );
     }
 
@@ -216,7 +216,7 @@ export class LeProgressService {
     private static computeCurrentGoal(model: ILreProgressModel, currentShards: number): ShardsGoal {
         const shardThresholds = this.getShardThresholds(model.progression);
 
-        let prevThreshold = 0;
+        let previousThreshold = 0;
         for (const goal of shardThresholds) {
             if (currentShards < goal.threshold) {
                 if (goal.threshold === Infinity) {
@@ -224,7 +224,7 @@ export class LeProgressService {
                         goal: 'full clear',
                         currentShards: currentShards,
                         requiredShards: Infinity,
-                        currentIncrementalShards: currentShards - prevThreshold,
+                        currentIncrementalShards: currentShards - previousThreshold,
                         requiredIncrementalShards: Infinity,
                     };
                 }
@@ -232,17 +232,17 @@ export class LeProgressService {
                     goal: goal.name,
                     currentShards: currentShards,
                     requiredShards: goal.threshold,
-                    currentIncrementalShards: currentShards - prevThreshold,
-                    requiredIncrementalShards: goal.threshold - prevThreshold,
+                    currentIncrementalShards: currentShards - previousThreshold,
+                    requiredIncrementalShards: goal.threshold - previousThreshold,
                 };
             }
-            prevThreshold = goal.threshold;
+            previousThreshold = goal.threshold;
         }
         return {
             goal: 'full clear',
             currentShards: currentShards,
             requiredShards: Infinity,
-            currentIncrementalShards: currentShards - prevThreshold,
+            currentIncrementalShards: currentShards - previousThreshold,
             requiredIncrementalShards: Infinity,
         };
     }
@@ -272,8 +272,9 @@ export class LeProgressService {
                 return chestMilestone.cumulativePoints;
             }
         }
-
-        return model.pointsMilestones[model.pointsMilestones.length - 1].cumulativePoints;
+        const finalCumulativePoints = model.pointsMilestones.at(-1)?.cumulativePoints;
+        if (finalCumulativePoints === undefined) throw new Error('missing cumulative points');
+        return finalCumulativePoints;
     }
 
     private static computeAverageBattles(pointsForNextMilestone: number): string {
@@ -283,18 +284,24 @@ export class LeProgressService {
     /** Maps a unit's snowprintId to the planner internal ID for legendary events. */
     public static mapEventId(charId: string): LegendaryEventEnum | undefined {
         switch (charId) {
-            case 'bloodDante':
+            case 'bloodDante': {
                 return LegendaryEventEnum.Dante;
-            case 'custoTrajann':
+            }
+            case 'custoTrajann': {
                 return LegendaryEventEnum.Trajann;
-            case 'emperLucius':
+            }
+            case 'emperLucius': {
                 return LegendaryEventEnum.Lucius;
-            case 'tauFarsight':
+            }
+            case 'tauFarsight': {
                 return LegendaryEventEnum.Farsight;
-            case 'votanUthar':
+            }
+            case 'votanUthar': {
                 return LegendaryEventEnum.Uthar;
-            default:
+            }
+            default: {
                 return undefined;
+            }
         }
     }
 
@@ -320,7 +327,7 @@ export class LeProgressService {
                     `Current Model: ${currentModel.eventName} (${currentModel.eventId}).`
             );
         }
-        lanes.forEach(lane => {
+        for (const lane of lanes) {
             const externalTrack = externalData.lanes.find(x => x.id === lane.id);
             if (externalTrack === undefined) {
                 throw new Error('Unsupported Legendary Event data: Could not find ' + lane.displayName + ' Track.');
@@ -348,10 +355,10 @@ export class LeProgressService {
                 );
             }
             const errorStrings: string[] = [];
-            externalTrack.battleConfigs.forEach(externalBattleConfig => {
-                externalBattleConfig.objectives.forEach(externalObjective => {
+            for (const externalBattleConfig of externalTrack.battleConfigs) {
+                for (const externalObjective of externalBattleConfig.objectives) {
                     // Acing objectives are called something different in the planner.
-                    if (externalObjective.objectiveType === 'Acing') return;
+                    if (externalObjective.objectiveType === 'Acing') continue;
                     const requirement = lane.track.unitsRestrictions.find(
                         x =>
                             x.objectiveTarget === externalObjective.objectiveTarget &&
@@ -370,26 +377,26 @@ export class LeProgressService {
                                 `External (${externalObjective.score}) vs Planner (${requirement.points}).`
                         );
                     }
-                });
-            });
-            externalTrack.progress.forEach(progress => {
+                }
+            }
+            for (const progress of externalTrack.progress) {
                 if (progress.objectivesCleared.length > 6) {
                     errorStrings.push(
                         `Unsupported Legendary Event data: More than 6 objectives cleared in a single battle in ` +
                             `${lane.displayName} Track. Expected at most the clear score (Acing) and five restrictions.`
                     );
                 }
-                progress.objectivesCleared.forEach(objectiveCleared => {
+                for (const objectiveCleared of progress.objectivesCleared) {
                     if (objectiveCleared < 0 || objectiveCleared > 5) {
                         errorStrings.push('Invalid index in objectivesCleared: ' + objectiveCleared);
                     }
-                });
-            });
+                }
+            }
             if (errorStrings.length > 0) {
                 console.error(errorStrings.join('\n'));
                 throw new Error(errorStrings.join('\n'));
             }
-        });
+        }
         if (externalData.currentCurrency < 0) {
             throw new Error('Invalid current currency in Legendary Event data: ' + externalData.currentCurrency);
         }
@@ -454,47 +461,47 @@ export class LeProgressService {
         // model.
         const restrictionIndexMap: Record<number, number> = {};
 
-        externalTrack.battleConfigs[0].objectives.forEach((objective, index) => {
-            if (objective.objectiveType === 'Acing') return;
-            const req = eventTrack.unitsRestrictions.find(
+        for (const [index, objective] of externalTrack.battleConfigs[0].objectives.entries()) {
+            if (objective.objectiveType === 'Acing') continue;
+            const requirement = eventTrack.unitsRestrictions.find(
                 x => x.objectiveTarget === objective.objectiveTarget && x.objectiveType === objective.objectiveType
             );
-            if (req === undefined) {
+            if (requirement === undefined) {
                 throw new Error(
                     `Cannot find requirement for objectiveType=${objective.objectiveType} - ` +
                         `objectiveTarget=${objective.objectiveTarget} in track ${eventTrack.name}.`
                 );
             }
-            const reqIndex = track.requirements.findIndex(x => x.id === req.name);
-            if (reqIndex === -1) {
+            const requirementIndex = track.requirements.findIndex(x => x.id === requirement.name);
+            if (requirementIndex === -1) {
                 throw new Error(
-                    `Cannot find requirement index for ID ${req.name} in track ${eventTrack.name} of event ${eventId}.`
+                    `Cannot find requirement index for ID ${requirement.name} in track ${eventTrack.name} of event ${eventId}.`
                 );
             }
-            restrictionIndexMap[index] = reqIndex;
-        });
+            restrictionIndexMap[index] = requirementIndex;
+        }
 
-        const ret = cloneDeep(track);
+        const returnValue = cloneDeep(track);
 
-        ret.battles.forEach(battle => {
+        for (const battle of returnValue.battles) {
             battle.completed = false;
             battle.totalPoints = 0;
-            battle.requirementsProgress.forEach(reqProgress => {
-                reqProgress.completed = false;
-                reqProgress.highScore = undefined;
-                reqProgress.killScore = undefined;
-                reqProgress.blocked = false;
+            for (const requirementProgress of battle.requirementsProgress) {
+                requirementProgress.completed = false;
+                requirementProgress.highScore = undefined;
+                requirementProgress.killScore = undefined;
+                requirementProgress.blocked = false;
                 if (
-                    reqProgress.status !== RequirementStatus.MaybeClear &&
-                    reqProgress.status !== RequirementStatus.StopHere
+                    requirementProgress.status !== RequirementStatus.MaybeClear &&
+                    requirementProgress.status !== RequirementStatus.StopHere
                 ) {
-                    reqProgress.status = RequirementStatus.NotCleared;
+                    requirementProgress.status = RequirementStatus.NotCleared;
                 }
-            });
-        });
+            }
+        }
 
-        externalTrack.progress.forEach((progress, battleIndex) => {
-            const battle = ret.battles.find(b => b.battleIndex === battleIndex);
+        for (const [battleIndex, progress] of externalTrack.progress.entries()) {
+            const battle = returnValue.battles.find(b => b.battleIndex === battleIndex);
             if (battle === undefined) {
                 throw new Error('Cannot find battle index ' + battleIndex + ' in track ' + eventTrack.name);
             }
@@ -502,55 +509,55 @@ export class LeProgressService {
             // Handle case where no objectives are cleared - only sync partial scores
             if (progress.objectivesCleared.length === 0) {
                 this.syncPartialScores(battle, progress.encounterPoints, progress.highScore);
-                return;
+                continue;
             }
 
             // Handle case where all 6 objectives are cleared
             if (progress.objectivesCleared.length === 6) {
                 battle.completed = true;
-                battle.totalPoints = sum(battle.requirementsProgress.map(req => req.points));
-                battle.requirementsProgress.forEach(reqProgress => {
-                    reqProgress.completed = true;
-                    reqProgress.blocked = false;
-                    reqProgress.status = RequirementStatus.Cleared;
-                });
-                return;
+                battle.totalPoints = sum(battle.requirementsProgress.map(requirement => requirement.points));
+                for (const requirementProgress of battle.requirementsProgress) {
+                    requirementProgress.completed = true;
+                    requirementProgress.blocked = false;
+                    requirementProgress.status = RequirementStatus.Cleared;
+                }
+                continue;
             }
 
             // Handle case where defeatAll is cleared
             if (progress.objectivesCleared.includes(0)) {
-                ['_defeatAll', '_killPoints', '_highScore'].forEach(reqId => {
-                    const reqProgress = battle.requirementsProgress.find(x => x.id === reqId)!;
-                    reqProgress.completed = true;
-                    reqProgress.blocked = false;
-                    reqProgress.status = RequirementStatus.Cleared;
-                    reqProgress.killScore = undefined;
-                    reqProgress.highScore = undefined;
-                    battle.totalPoints += reqProgress.points;
-                });
+                for (const requirementId of ['_defeatAll', '_killPoints', '_highScore']) {
+                    const requirementProgress = battle.requirementsProgress.find(x => x.id === requirementId)!;
+                    requirementProgress.completed = true;
+                    requirementProgress.blocked = false;
+                    requirementProgress.status = RequirementStatus.Cleared;
+                    requirementProgress.killScore = undefined;
+                    requirementProgress.highScore = undefined;
+                    battle.totalPoints += requirementProgress.points;
+                }
             } else {
                 // If defeatAll not cleared, sync partial scores
                 this.syncPartialScores(battle, progress.encounterPoints, progress.highScore);
             }
-            progress.objectivesCleared.forEach(objectiveIndex => {
-                if (objectiveIndex === 0) return; // Handled above
-                const reqIndex = restrictionIndexMap[objectiveIndex];
-                const reqProgress = battle.requirementsProgress[reqIndex];
-                if (reqProgress === undefined) {
+            for (const objectiveIndex of progress.objectivesCleared) {
+                if (objectiveIndex === 0) continue; // Handled above
+                const requirementIndex = restrictionIndexMap[objectiveIndex];
+                const requirementProgress = battle.requirementsProgress[requirementIndex];
+                if (requirementProgress === undefined) {
                     console.error(battle);
                     throw new Error(
                         `Cannot find requirement progress for objective index ${objectiveIndex} in battle ` +
                             `${battleIndex} of track ${eventTrack.name} in event ${eventId}.`
                     );
                 }
-                reqProgress.completed = true;
-                reqProgress.blocked = false;
-                reqProgress.status = RequirementStatus.Cleared;
-                battle.totalPoints += reqProgress.points;
-            });
-        });
+                requirementProgress.completed = true;
+                requirementProgress.blocked = false;
+                requirementProgress.status = RequirementStatus.Cleared;
+                battle.totalPoints += requirementProgress.points;
+            }
+        }
 
-        return ret;
+        return returnValue;
     }
 
     /**

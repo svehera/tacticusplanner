@@ -24,7 +24,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
         const filtered: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow> = goals.filter(
             goal => goal.goalId == goalId
         );
-        if (filtered.length == 0) {
+        if (filtered.length === 0) {
             return undefined;
         }
         if (filtered.length > 1) {
@@ -73,9 +73,9 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ campaignData, 
         const goal = getGoal(goalId);
         let rankEnd: number = 1;
         if (!goal) return 1;
-        Object.entries(goal).forEach(([key, value]) => {
+        for (const [key, value] of Object.entries(goal)) {
             if (key == 'rankEnd') rankEnd = value as number;
-        });
+        }
         return rankEnd;
     }
 

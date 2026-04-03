@@ -1,14 +1,14 @@
 ﻿import React from 'react';
 
 export const usePopUpControls = () => {
-    const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-    const open = Boolean(anchorEl);
+    const [anchorElement, setAnchorElement] = React.useState<HTMLElement>();
+    const open = Boolean(anchorElement);
     const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorEl(event.currentTarget);
+        setAnchorElement(event.currentTarget);
     };
     const handleClose = () => {
-        setAnchorEl(null);
+        setAnchorElement(undefined);
     };
 
-    return { anchorEl, open, handleClick, handleClose };
+    return { anchorEl: anchorElement, open, handleClick, handleClose };
 };

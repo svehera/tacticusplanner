@@ -15,8 +15,11 @@ import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
+import { bulkGoalCreatorRoute } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.route';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
+import { cesRoute } from '@/fsd/1-pages/plan-ces/ces.route';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
+import { questsRoute } from '@/fsd/1-pages/plan-quests/quests.route';
 import { teams2Route } from '@/fsd/1-pages/plan-teams2/teams2.route';
 import { warDefense2Route } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.route';
 import { warOffense2Route } from '@/fsd/1-pages/plan-war-offense2/war-offense2.route';
@@ -53,10 +56,11 @@ export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/dailyRaids',
         async lazy() {
-            const { DailyRaids } = await import('@/routes/tables/dailyRaids');
+            const { DailyRaids } = await import('@/routes/tables/daily-raids');
             return { Component: DailyRaids };
         },
     },
+    bulkGoalCreatorRoute,
     teams2Route,
     warDefense2Route,
     warOffense2Route,
@@ -73,6 +77,15 @@ export const globalPlanRoutes: RouteObject[] = [
         },
     },
     campaignProgressionLazyRoute,
+    questsRoute,
+    cesRoute,
+    {
+        path: 'plan/hse',
+        async lazy() {
+            const { HomeScreenEvent } = await import('@/fsd/1-pages/plan-hse/hse');
+            return { Component: HomeScreenEvent };
+        },
+    },
 ];
 
 export const globalLearnRoutes: RouteObject[] = [
@@ -123,13 +136,6 @@ export const globalLearnRoutes: RouteObject[] = [
         async lazy() {
             const { Campaigns } = await import('@/fsd/1-pages/learn-campaigns/campaigns');
             return { Component: Campaigns };
-        },
-    },
-    {
-        path: 'learn/hse',
-        async lazy() {
-            const { HomeScreenEvent } = await import('@/fsd/1-pages/learn-hse/hse');
-            return { Component: HomeScreenEvent };
         },
     },
     dirtyDozenLazyRoute,

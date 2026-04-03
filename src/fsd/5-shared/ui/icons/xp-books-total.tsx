@@ -25,9 +25,9 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
             [Rarity.Mythic]: 0,
         };
         let remaining = xp;
-        for (let i = 0; i < XP_BOOK_ORDER.length; i++) {
-            const rarity = XP_BOOK_ORDER[i];
-            const isLast = i === XP_BOOK_ORDER.length - 1;
+        for (let index = 0; index < XP_BOOK_ORDER.length; index++) {
+            const rarity = XP_BOOK_ORDER[index];
+            const isLast = index === XP_BOOK_ORDER.length - 1;
             books[rarity] = isLast
                 ? Math.ceil(remaining / XP_BOOK_VALUE[rarity])
                 : Math.floor(remaining / XP_BOOK_VALUE[rarity]);
@@ -36,17 +36,19 @@ export const XpBooksTotal: React.FC<Props> = ({ xp, size = 'small' }) => {
         return books;
     }, [xp]);
     return (
-        <div className="flex-box gap20">
-            {[...XP_BOOK_ORDER].reverse().map(rarity => {
+        <div className="flex-box gap24">
+            {XP_BOOK_ORDER.toReversed().map(rarity => {
                 const booksCount = xpBooks[rarity];
                 const bookName = Rarity[rarity].toLowerCase() + 'Book';
                 return (
                     booksCount > 0 && (
-                        <Tooltip key={rarity} title={`${RarityMapper.rarityToRarityString(rarity)} XP Books`}>
-                            <Badge badgeContent={<b>{booksCount}</b>}>
-                                <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
-                            </Badge>
-                        </Tooltip>
+                        <div key={rarity} className="px-1.5">
+                            <Tooltip title={`${RarityMapper.rarityToRarityString(rarity)} XP Books`}>
+                                <Badge badgeContent={<b>{booksCount}</b>}>
+                                    <MiscIcon icon={bookName} width={sizePx} height={sizePx} />
+                                </Badge>
+                            </Tooltip>
+                        </div>
                     )
                 );
             })}

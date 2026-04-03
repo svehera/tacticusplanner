@@ -16,8 +16,19 @@ import { useMemo, useState } from 'react';
 import onslaughtData from '@/data/onslaught/data.generated.json';
 
 import { HomeScreenEventPlannerService } from './home-screen-event-planner.service';
-import { GREEK_ZONES, numToRoman, ONSLAUGHT_TRACK_NAME, romanToNum } from './id-data';
+import { GREEK_ZONES, numberToRoman, ONSLAUGHT_TRACK_NAME, romanToNumber } from './id-data';
 import { OnslaughtSectorKey, OnslaughtTrackId, OnslaughtZoneKey } from './models';
+
+const updateTokenState =
+    (setText: React.Dispatch<React.SetStateAction<string>>, setValue: React.Dispatch<React.SetStateAction<number>>) =>
+    (event: React.ChangeEvent<HTMLInputElement>) => {
+        const raw = event.target.value;
+        const value = Number.parseInt(raw.trim(), 10);
+        setText(raw);
+        if (!Number.isNaN(value) && value >= 0) {
+            setValue(value);
+        }
+    };
 
 export const HomeScreenEventPlanner = () => {
     const [preEventTokens, setPreEventTokens] = useState<number>(0);
@@ -34,29 +45,33 @@ export const HomeScreenEventPlanner = () => {
     });
 
     const handleToggleTrack = (track: OnslaughtTrackId) => {
-        setSelections(prev => {
-            const next = { ...prev };
-            next[track] = {
-                ...prev[track],
-                selected: !prev[track].selected,
+        setSelections(previous => {
+            const next = {
+                ...previous,
+                [track]: {
+                    ...previous[track],
+                    selected: !previous[track].selected,
+                },
             };
             return next;
         });
     };
 
     const updateValue = (track: OnslaughtTrackId, field: 'sector' | 'zone', value: number) => {
-        setSelections(prev => ({
-            ...prev,
-            [track]: { ...prev[track], [field]: value },
+        setSelections(previous => ({
+            ...previous,
+            [track]: { ...previous[track], [field]: value },
         }));
     };
 
-    const selectedTracks = Object.entries(selections)
-        .filter(([_, { selected }]) => selected)
-        .map(([track]) => track as OnslaughtTrackId);
+    const selectedTracks = new Set(
+        Object.entries(selections)
+            .filter(([_, { selected }]) => selected)
+            .map(([track]) => track as OnslaughtTrackId)
+    );
 
     const tokens = useMemo(() => {
-        const ret = HomeScreenEventPlannerService.calculateHsePlan(
+        const returnValue = HomeScreenEventPlannerService.calculateHsePlan(
             onslaughtData,
             {
                 track: OnslaughtTrackId.Imperial,
@@ -74,28 +89,15 @@ export const HomeScreenEventPlanner = () => {
                 zone: selections[OnslaughtTrackId.Chaos]?.zone ?? 0,
             },
             {
-                [OnslaughtTrackId.Imperial]: selectedTracks.includes(OnslaughtTrackId.Imperial),
-                [OnslaughtTrackId.Xenos]: selectedTracks.includes(OnslaughtTrackId.Xenos),
-                [OnslaughtTrackId.Chaos]: selectedTracks.includes(OnslaughtTrackId.Chaos),
+                [OnslaughtTrackId.Imperial]: selectedTracks.has(OnslaughtTrackId.Imperial),
+                [OnslaughtTrackId.Xenos]: selectedTracks.has(OnslaughtTrackId.Xenos),
+                [OnslaughtTrackId.Chaos]: selectedTracks.has(OnslaughtTrackId.Chaos),
             },
             preEventTokens,
             duringEventTokens
         );
-        return ret;
+        return returnValue;
     }, [selections, preEventTokens, duringEventTokens]);
-    const updateTokenState =
-        (
-            setText: React.Dispatch<React.SetStateAction<string>>,
-            setValue: React.Dispatch<React.SetStateAction<number>>
-        ) =>
-        (e: React.ChangeEvent<HTMLInputElement>) => {
-            const raw = e.target.value;
-            const value = parseInt(raw.trim(), 10);
-            setText(raw);
-            if (!Number.isNaN(value) && value >= 0) {
-                setValue(value);
-            }
-        };
 
     const updatePreEventTokens = updateTokenState(setPreEventTokensText, setPreEventTokens);
     const updateDuringEventTokens = updateTokenState(setDuringEventTokensText, setDuringEventTokens);
@@ -145,10 +147,12 @@ export const HomeScreenEventPlanner = () => {
                         {[OnslaughtTrackId.Imperial, OnslaughtTrackId.Xenos, OnslaughtTrackId.Chaos].map(rawTrack => {
                             const track: OnslaughtTrackId = rawTrack as OnslaughtTrackId;
                             const trackData = onslaughtData[track];
-                            const availableSectors = Object.keys(trackData.sectors).map(key => parseInt(key, 10));
+                            const availableSectors = Object.keys(trackData.sectors).map(key =>
+                                Number.parseInt(key, 10)
+                            );
                             const currentSector = selections[track].sector;
                             const availableZones = Object.keys(trackData.sectors[currentSector].killzones).map(key =>
-                                parseInt(key, 10)
+                                Number.parseInt(key, 10)
                             );
 
                             return (
@@ -160,19 +164,21 @@ export const HomeScreenEventPlanner = () => {
                                         <Autocomplete<number>
                                             options={availableSectors}
                                             value={currentSector}
-                                            getOptionLabel={option => `Sector ${numToRoman(option + 1)}`}
-                                            onChange={(_, val) => val !== null && updateValue(track, 'sector', val)}
+                                            getOptionLabel={option => `Sector ${numberToRoman(option + 1)}`}
+                                            onChange={(_, value) =>
+                                                value !== null && updateValue(track, 'sector', value)
+                                            }
                                             filterOptions={(options, { inputValue }) => {
                                                 const search = inputValue.toLowerCase().replace('sector ', '').trim();
-                                                const searchAsNumFromRoman = romanToNum(search.toUpperCase()) - 1;
-                                                const searchAsDirectNum = parseInt(search, 10) - 1;
+                                                const searchAsNumberFromRoman = romanToNumber(search.toUpperCase()) - 1;
+                                                const searchAsDirectNumber = Number.parseInt(search, 10) - 1;
 
                                                 return options.filter(opt => {
-                                                    const romanStr = numToRoman(opt + 1).toLowerCase();
+                                                    const romanString = numberToRoman(opt + 1).toLowerCase();
                                                     return (
-                                                        romanStr.includes(search) ||
-                                                        opt === searchAsNumFromRoman ||
-                                                        opt === searchAsDirectNum
+                                                        romanString.includes(search) ||
+                                                        opt === searchAsNumberFromRoman ||
+                                                        opt === searchAsDirectNumber
                                                     );
                                                 });
                                             }}
@@ -186,13 +192,13 @@ export const HomeScreenEventPlanner = () => {
                                             options={availableZones}
                                             value={selections[track].zone}
                                             getOptionLabel={option => `KillZone ${GREEK_ZONES[option] || option}`}
-                                            onChange={(_, val) => val !== null && updateValue(track, 'zone', val)}
+                                            onChange={(_, value) => value !== null && updateValue(track, 'zone', value)}
                                             filterOptions={(options, { inputValue }) => {
                                                 const search = inputValue.toLowerCase().replace('killzone ', '').trim();
                                                 const greekIndex = GREEK_ZONES.findIndex(
                                                     g => g.toLowerCase() === search
                                                 );
-                                                const directIndex = parseInt(search, 10) - 1;
+                                                const directIndex = Number.parseInt(search, 10) - 1;
 
                                                 return options.filter(opt => {
                                                     const name = GREEK_ZONES[opt]?.toLowerCase() || '';

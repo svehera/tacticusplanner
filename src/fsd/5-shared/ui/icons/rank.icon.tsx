@@ -1,5 +1,5 @@
 ﻿import { Rank } from '@/fsd/5-shared/model';
-import { getImageUrl } from '@/fsd/5-shared/ui';
+import { getImageUrl } from '@/fsd/5-shared/ui/get-image-url';
 
 export const RankIcon = ({
     rank,

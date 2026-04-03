@@ -156,16 +156,17 @@ export class ShardsService {
                     (x.requiredCount > 0 && x.acquiredCount < x.requiredCount) ||
                     (x.requiredMythicCount > 0 && x.acquiredMythicCount < x.requiredMythicCount)
             );
-        const currCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
+        const currentCampaignEventLocations = campaignsByGroup[settings.preferences.campaignEvent ?? ''] ?? [];
 
         const result: ICharacterShardsEstimate[] = [];
 
-        for (let i = 0; i < materials.length; i++) {
-            const material = materials[i];
-            const previousShardsTokens = sum(result.filter((_, index) => index < i).map(x => x.onslaughtTokensTotal));
+        for (const [materialIndex, material] of materials.entries()) {
+            const previousShardsTokens = sum(
+                result.filter((_, index) => index < materialIndex).map(x => x.onslaughtTokensTotal)
+            );
             const unlockedLocations = material.possibleLocations.filter(location => {
                 const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign);
-                const isCampaignEventLocationAvailable = currCampaignEventLocations.includes(location.campaign);
+                const isCampaignEventLocationAvailable = currentCampaignEventLocations.includes(location.campaign);
 
                 const campaignProgress = settings.campaignsProgress[location.campaign as keyof ICampaignsProgress];
                 const isPassFilter =
@@ -204,7 +205,7 @@ export class ShardsService {
                 );
             }
 
-            const isBlocked = !raidsLocations.length;
+            const isBlocked = raidsLocations.length === 0;
             const shardsLeft =
                 material.requiredMythicCount > 0
                     ? material.requiredMythicCount - material.acquiredMythicCount
@@ -422,8 +423,8 @@ export class ShardsService {
 
         let targetShards = 0;
 
-        for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
-            const progressionRequirements = charsProgression[i];
+        for (let index = currentCharProgression + 1; index <= targetProgression; index++) {
+            const progressionRequirements = charsProgression[index];
             targetShards += progressionRequirements.shards ?? 0;
         }
 
@@ -436,8 +437,8 @@ export class ShardsService {
 
         let targetShards = 0;
 
-        for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
-            const progressionRequirements = charsProgression[i];
+        for (let index = currentCharProgression + 1; index <= targetProgression; index++) {
+            const progressionRequirements = charsProgression[index];
             targetShards += progressionRequirements.mythicShards ?? 0;
         }
 
@@ -451,8 +452,8 @@ export class ShardsService {
 
         let targetShards = 0;
 
-        for (let i = currentCharProgression + 1; i <= targetProgression; i++) {
-            const progressionRequirements = charsProgression[i];
+        for (let index = currentCharProgression + 1; index <= targetProgression; index++) {
+            const progressionRequirements = charsProgression[index];
             targetShards += progressionRequirements.shards ?? 0;
         }
 
