@@ -9,7 +9,7 @@ import { TreasureBeachSchema } from './treasure-beach';
 const BattleWaveLevelSchema = z.strictObject({ xp: z.int(), chestId: z.templateLiteral(['chest_waves_', z.int()]) });
 
 const BattleWaveSchema = z.strictObject({
-    featuredHeroId: z.string().brand('heroId'),
+    featuredHeroId: z.string().brand<'HeroId'>(),
     levels: z.array(BattleWaveLevelSchema),
     tracks: TracksSchema,
     honorYourHeroes: z.any(),

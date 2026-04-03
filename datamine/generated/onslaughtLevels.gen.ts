@@ -1,6 +1,6 @@
 
 // This file is auto-generated. Do not edit directly.
-// Generated on 2026-03-13T22:57:03.747Z
+// Generated on 2026-04-03T21:08:27.447Z
 export const data = [
   {
     "xp": 20,

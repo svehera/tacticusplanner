@@ -18,6 +18,9 @@ export const CountStringSchemaGenerator = (...rewardStrings: string[]) => {
 const RARITY_VALUES = ['Common', 'Uncommon', 'Rare', 'Epic', 'Legendary', 'Mythic'] as const;
 export const RaritySchema = z.enum(RARITY_VALUES);
 
+const RARITY_LETTERS = ['C', 'U', 'R', 'E', 'L', 'M'] as const;
+export const RarityLettersSchema = z.enum(RARITY_LETTERS);
+
 const ALLIANCE_VALUES = ['Imperial', 'Xenos', 'Chaos'] as const;
 export const AllianceSchema = z.enum(ALLIANCE_VALUES);
 
@@ -96,3 +99,35 @@ export function isPropertyAscending<K extends string, O extends { [key in K]: nu
 }
 
 export const ItemSchema = z.enum(['I_Crit', 'I_Defensive', 'I_Booster_Crit', 'I_Block', 'I_Booster_Block']);
+
+export const HealthUpgradeIdSchema = z.templateLiteral([
+    'upgHp',
+    RarityLettersSchema,
+    z
+        .string()
+        .length(3)
+        .regex(/^\d{3}$/),
+    z.literal('C').optional(),
+]);
+
+export const DamageUpgradeIdSchema = z.templateLiteral([
+    'upgDmg',
+    RarityLettersSchema,
+    z
+        .string()
+        .length(3)
+        .regex(/^\d{2,3}$/),
+    z.literal('C').optional(),
+]);
+
+export const ArmorUpgradeIdSchema = z.templateLiteral([
+    'upgArm',
+    RarityLettersSchema,
+    z
+        .string()
+        .length(3)
+        .regex(/^\d{2,3}$/),
+    z.literal('C').optional(),
+]);
+
+export const UpgradeIdSchema = z.union([HealthUpgradeIdSchema, DamageUpgradeIdSchema, ArmorUpgradeIdSchema]);

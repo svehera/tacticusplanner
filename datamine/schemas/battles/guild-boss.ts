@@ -26,5 +26,5 @@ export const GuildBossSchema = z.strictObject({
             tiers: battleEndTiers.tiers,
         };
     }),
-    featuredHeroId: z.string().brand('heroId'),
+    featuredHeroId: z.string().brand<'HeroId'>(),
 });

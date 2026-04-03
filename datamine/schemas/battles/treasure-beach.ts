@@ -1,4 +1,5 @@
 import { z } from 'zod';
+
 import { AllianceSchema, isPropertyLinear, renameKeys, isPropertyAscending } from '../../utils';
 
 const WaveSchema = z.strictObject({
@@ -9,7 +10,7 @@ const WaveSchema = z.strictObject({
 
 const BattleSchema = z.strictObject({
     battleNr: z.int().positive(),
-    BoardId: z.string().brand('boardId'),
+    BoardId: z.string().brand<'BoardId'>(),
     damageToNextEncounter: z.int().positive(),
     waves: z.array(WaveSchema).refine(data => isPropertyLinear(data, 'round')),
     SpawnPointsSet: z.int().positive().optional(),
@@ -33,12 +34,12 @@ export const TreasureBeachSchema = z
             TrackSchema.refine(t => t.allowedGrandAlliance === 'Chaos'),
         ]),
         maxStamina: z.int().positive(),
-        staminaRegenerationTime: z.int().positive().brand('seconds'),
+        staminaRegenerationTime: z.int().positive().brand<'Seconds'>(),
         staminaRegenerationAmount: z.int().positive(),
-        rawNpcUnitIds: z.any(),
-        metaTutorialId: z.any(),
-        battleTutorialId: z.any(),
-        featuredHeroId: z.string().brand('heroId'),
+        rawNpcUnitIds: z.literal('[]'),
+        metaTutorialId: z.string(),
+        battleTutorialId: z.string(),
+        featuredHeroId: z.string().brand<'HeroId'>(),
     })
     .transform(data =>
         renameKeys(data, {

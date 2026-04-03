@@ -1,11 +1,8 @@
 
 // This file is auto-generated. Do not edit directly.
-// Generated on 2026-03-13T22:57:03.752Z
+// Generated on 2026-04-03T21:08:27.452Z
 export const data = {
   "ultraTigurius": {
-    "activeAbilities": [
-      "StormOfWrath"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -14,10 +11,26 @@ export const data = {
     "FactionId": "Ultramarines",
     "GrandAllianceId": "Imperial",
     "name": "Tigurius",
+    "releaseStatus": "released",
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "PsychicFortress"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "StormOfWrath"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 65,
       "Damage": 30,
@@ -343,10 +356,30 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
+    "type": "Hero"
+  },
+  "ultraEliminatorSgt": {
+    "BaseRarity": "Common",
+    "eligibilityRequirements": {
+      "canDropIfHeroUnlocked": true,
+      "canDropIfHeroNotUnlocked": true
+    },
+    "FactionId": "Ultramarines",
+    "GrandAllianceId": "Imperial",
+    "name": "Certus",
+    "releaseStatus": "released",
+    "Movement": 2,
     "traits": [
       "Hero",
-      "Psyker"
+      "Overwatch",
+      "HeavyWeapon",
+      "Infiltrate"
+    ],
+    "passiveAbilities": [
+      "CamoCloak"
+    ],
+    "activeAbilities": [
+      "MortisRound"
     ],
     "itemSlots": [
       "I_Crit",
@@ -356,24 +389,6 @@ export const data = {
     "itemSlotsRelic": [
       0
     ],
-    "type": "Hero"
-  },
-  "ultraEliminatorSgt": {
-    "activeAbilities": [
-      "MortisRound"
-    ],
-    "BaseRarity": "Common",
-    "eligibilityRequirements": {
-      "canDropIfHeroUnlocked": true,
-      "canDropIfHeroNotUnlocked": true
-    },
-    "FactionId": "Ultramarines",
-    "GrandAllianceId": "Imperial",
-    "name": "Certus",
-    "passiveAbilities": [
-      "CamoCloak"
-    ],
-    "releaseStatus": "released",
     "stats": {
       "Health": 60,
       "Damage": 55,
@@ -699,12 +714,29 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 2,
+    "type": "Hero"
+  },
+  "ultraInceptorSgt": {
+    "BaseRarity": "Common",
+    "eligibilityRequirements": {
+      "canDropIfHeroUnlocked": true,
+      "canDropIfHeroNotUnlocked": true
+    },
+    "FactionId": "Ultramarines",
+    "GrandAllianceId": "Imperial",
+    "name": "Bellator",
+    "releaseStatus": "released",
+    "Movement": 4,
     "traits": [
       "Hero",
-      "Overwatch",
-      "HeavyWeapon",
-      "Infiltrate"
+      "Flying",
+      "MkXGravis"
+    ],
+    "passiveAbilities": [
+      "ShockAssault"
+    ],
+    "activeAbilities": [
+      "DeathFromAbove"
     ],
     "itemSlots": [
       "I_Crit",
@@ -714,24 +746,6 @@ export const data = {
     "itemSlotsRelic": [
       0
     ],
-    "type": "Hero"
-  },
-  "ultraInceptorSgt": {
-    "activeAbilities": [
-      "DeathFromAbove"
-    ],
-    "BaseRarity": "Common",
-    "eligibilityRequirements": {
-      "canDropIfHeroUnlocked": true,
-      "canDropIfHeroNotUnlocked": true
-    },
-    "FactionId": "Ultramarines",
-    "GrandAllianceId": "Imperial",
-    "name": "Bellator",
-    "passiveAbilities": [
-      "ShockAssault"
-    ],
-    "releaseStatus": "released",
     "stats": {
       "Health": 85,
       "Damage": 10,
@@ -1052,26 +1066,9 @@ export const data = {
         "DamageProfile": "Bolter"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Flying",
-      "MkXGravis"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "ultraApothecary": {
-    "activeAbilities": [
-      "CombatRestoratives"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -1080,11 +1077,27 @@ export const data = {
     "FactionId": "Ultramarines",
     "GrandAllianceId": "Imperial",
     "name": "Incisus",
+    "releaseStatus": "released",
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Healer"
+    ],
     "passiveAbilities": [
       "Narthecium"
     ],
+    "activeAbilities": [
+      "CombatRestoratives"
+    ],
     "powerMultiplier": 115,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 46,
@@ -1405,25 +1418,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Healer"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "ultraCalgar": {
-    "activeAbilities": [
-      "GauntletsOfUltramar"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -1437,20 +1434,38 @@ export const data = {
     "FactionId": "Ultramarines",
     "GrandAllianceId": "Imperial",
     "name": "Calgar",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_ultraCalgar_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "CrushingStrike",
+      "FinalJustice",
+      "MkXGravis"
+    ],
     "passiveAbilities": [
       "RitesOfBattle"
     ],
+    "activeAbilities": [
+      "GauntletsOfUltramar"
+    ],
     "powerMultiplier": 109,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 28,
       "FixedArmor": 20,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_ultraCalgar_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -1765,27 +1780,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "CrushingStrike",
-      "FinalJustice",
-      "MkXGravis"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "ultraTitus": {
-    "activeAbilities": [
-      "TacticalPrecision"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -1796,20 +1793,37 @@ export const data = {
     "FactionId": "Ultramarines",
     "GrandAllianceId": "Imperial",
     "name": "Titus",
+    "releaseStatus": 1725148800000,
+    "unlockQuestIds": [
+      "hero_ultraTitus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BeastSnagga",
+      "FinalJustice"
+    ],
     "passiveAbilities": [
       "FuelledByFury"
     ],
+    "activeAbilities": [
+      "TacticalPrecision"
+    ],
     "powerMultiplier": 101,
-    "releaseStatus": "1725148800000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 26,
       "FixedArmor": 23,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_ultraTitus_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -2124,27 +2138,9 @@ export const data = {
         "DamageProfile": "Chain"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BeastSnagga",
-      "FinalJustice"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "ultraDreadnought": {
-    "activeAbilities": [
-      "DutyEternal",
-      "MacroPlasmaIncinerator"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -2155,30 +2151,31 @@ export const data = {
     "FactionId": "Ultramarines",
     "GrandAllianceId": "Imperial",
     "name": "Galatian",
-    "releaseStatus": "1723795200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1723795200000,
     "unlockQuestIds": [
       "hero_ultraDreadnought_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "WisdomOfTheAncients"
     ],
+    "activeAbilities": [
+      "DutyEternal",
+      "MacroPlasmaIncinerator"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "adeptRetributor": {
-    "activeAbilities": [
-      "ArmoriumCherub"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -2187,10 +2184,27 @@ export const data = {
     "FactionId": "Sisterhood",
     "GrandAllianceId": "Imperial",
     "name": "Vindicta",
+    "releaseStatus": "released",
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "ActOfFaith",
+      "HeavyWeapon"
+    ],
     "passiveAbilities": [
       "FireOfAbsolution"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "ArmoriumCherub"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 70,
       "Damage": 20,
@@ -2516,26 +2530,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "ActOfFaith",
-      "HeavyWeapon"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "adeptHospitaller": {
-    "activeAbilities": [
-      "RitesOfRestoration"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -2544,19 +2541,36 @@ export const data = {
     "FactionId": "Sisterhood",
     "GrandAllianceId": "Imperial",
     "name": "Isabella",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_adeptHospitaller_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "ActOfFaith",
+      "Healer"
+    ],
     "passiveAbilities": [
       "MedicusMinistorum"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "RitesOfRestoration"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 85,
       "Damage": 20,
       "FixedArmor": 18,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_adeptHospitaller_01"
-    ],
     "upgrades": [
       [
         "upgHpC006",
@@ -2871,26 +2885,9 @@ export const data = {
         "DamageProfile": "Bolter"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "ActOfFaith",
-      "Healer"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "adeptMorvenn": {
-    "activeAbilities": [
-      "SanctorumMissile"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -2899,20 +2896,39 @@ export const data = {
     "FactionId": "Sisterhood",
     "GrandAllianceId": "Imperial",
     "name": "Morvenn Vahl",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_adeptMorvenn_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "ActOfFaith",
+      "BigTarget",
+      "Explodes",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "RighteousRepugnance"
     ],
+    "activeAbilities": [
+      "SanctorumMissile"
+    ],
     "powerMultiplier": 91,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 95,
       "Damage": 24,
       "FixedArmor": 24,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_adeptMorvenn_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -3232,13 +3248,31 @@ export const data = {
         "Range": 3
       }
     ],
+    "type": "Hero"
+  },
+  "adeptCanoness": {
+    "BaseRarity": "Uncommon",
+    "eligibilityRequirements": {
+      "canDropIfHeroUnlocked": true,
+      "canDropIfHeroNotUnlocked": true
+    },
+    "FactionId": "Sisterhood",
+    "GrandAllianceId": "Imperial",
+    "name": "Roswitha",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_adeptCanoness_01"
+    ],
     "Movement": 3,
     "traits": [
       "Hero",
-      "ActOfFaith",
-      "BigTarget",
-      "Explodes",
-      "Mechanical"
+      "ActOfFaith"
+    ],
+    "passiveAbilities": [
+      "CondemnorStake"
+    ],
+    "activeAbilities": [
+      "BrazierOfHolyFire"
     ],
     "itemSlots": [
       "I_Crit",
@@ -3248,33 +3282,12 @@ export const data = {
     "itemSlotsRelic": [
       1
     ],
-    "type": "Hero"
-  },
-  "adeptCanoness": {
-    "activeAbilities": [
-      "BrazierOfHolyFire"
-    ],
-    "BaseRarity": "Uncommon",
-    "eligibilityRequirements": {
-      "canDropIfHeroUnlocked": true,
-      "canDropIfHeroNotUnlocked": true
-    },
-    "FactionId": "Sisterhood",
-    "GrandAllianceId": "Imperial",
-    "name": "Roswitha",
-    "passiveAbilities": [
-      "CondemnorStake"
-    ],
-    "releaseStatus": "released",
     "stats": {
       "Health": 85,
       "Damage": 30,
       "FixedArmor": 17,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_adeptCanoness_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -3594,25 +3607,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "ActOfFaith"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "adeptCelestine": {
-    "activeAbilities": [
-      "SkyStrike"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -3626,19 +3623,36 @@ export const data = {
     "FactionId": "Sisterhood",
     "GrandAllianceId": "Imperial",
     "name": "Celestine",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_adeptCelestine_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "ActOfFaith",
+      "Flying"
+    ],
     "passiveAbilities": [
       "GeminaeSuperia"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "SkyStrike"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 60,
       "Damage": 25,
       "FixedArmor": 20,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_adeptCelestine_01"
-    ],
     "upgrades": [
       [
         "upgHpC016",
@@ -3953,27 +3967,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "ActOfFaith",
-      "Flying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "adeptExorcist": {
-    "activeAbilities": [
-      "ThriceBlessedConflagration",
-      "DevastatingRefrain"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -3984,30 +3980,31 @@ export const data = {
     "FactionId": "Sisterhood",
     "GrandAllianceId": "Imperial",
     "name": "Exorcist",
-    "releaseStatus": "1750982400000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1750982400000,
     "unlockQuestIds": [
       "hero_adeptExorcist_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "ShieldOfFaith"
     ],
+    "activeAbilities": [
+      "ThriceBlessedConflagration",
+      "DevastatingRefrain"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "necroWarden": {
-    "activeAbilities": [
-      "AdaptiveStrategy"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -4021,10 +4018,27 @@ export const data = {
     "FactionId": "Necrons",
     "GrandAllianceId": "Xenos",
     "name": "Makhotep",
+    "releaseStatus": "released",
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "LivingMetal",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "RelentlessMarch"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "AdaptiveStrategy"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 85,
       "Damage": 18,
@@ -4350,26 +4364,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "LivingMetal",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "necroDestroyer": {
-    "activeAbilities": [
-      "MultiThreatEliminator"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -4383,19 +4380,37 @@ export const data = {
     "FactionId": "Necrons",
     "GrandAllianceId": "Xenos",
     "name": "Imospekh",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_necroDestroyer_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Overwatch",
+      "LivingMetal",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "InescapableDeath"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "MultiThreatEliminator"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 72,
       "Damage": 8,
       "FixedArmor": 15,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_necroDestroyer_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -4715,27 +4730,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Overwatch",
-      "LivingMetal",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "necroSpyder": {
-    "activeAbilities": [
-      "ScarabHive"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -4749,19 +4746,39 @@ export const data = {
     "FactionId": "Necrons",
     "GrandAllianceId": "Xenos",
     "name": "Aleph-Null",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_necroSpyder_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "LivingMetal",
+      "Explodes",
+      "Mechanical",
+      "Flying",
+      "Mechanic"
+    ],
     "passiveAbilities": [
       "FabricatorClawArray"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "ScarabHive"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 75,
       "Damage": 12,
       "FixedArmor": 22,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_necroSpyder_01"
-    ],
     "upgrades": [
       [
         "upgHpC008",
@@ -5076,29 +5093,9 @@ export const data = {
         "DamageProfile": "Particle"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "LivingMetal",
-      "Explodes",
-      "Mechanical",
-      "Flying",
-      "Mechanic"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "necroPlasmancer": {
-    "activeAbilities": [
-      "HarbingerOfDestruction"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -5112,20 +5109,38 @@ export const data = {
     "FactionId": "Necrons",
     "GrandAllianceId": "Xenos",
     "name": "Thutmose",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_necroPlasmancer_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "LivingMetal",
+      "Mechanical",
+      "Flying"
+    ],
     "passiveAbilities": [
       "LivingLightning"
     ],
+    "activeAbilities": [
+      "HarbingerOfDestruction"
+    ],
     "powerMultiplier": 95,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 75,
       "Damage": 30,
       "FixedArmor": 16,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_necroPlasmancer_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -5445,27 +5460,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "LivingMetal",
-      "Mechanical",
-      "Flying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "necroOverlord": {
-    "activeAbilities": [
-      "ResurrectionOrb"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -5479,19 +5476,36 @@ export const data = {
     "FactionId": "Necrons",
     "GrandAllianceId": "Xenos",
     "name": "Anuphet",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_necroOverlord_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "LivingMetal",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "MartialApotheosis"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "ResurrectionOrb"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 85,
       "Damage": 17,
       "FixedArmor": 19,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_necroOverlord_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -5811,26 +5825,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "LivingMetal",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "astraPrimarisPsy": {
-    "activeAbilities": [
-      "PsychicMaelstrom"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -5844,19 +5841,35 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Sibyll",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_astraPrimarisPsy_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "Nightshroud"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "PsychicMaelstrom"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 55,
       "Damage": 30,
       "FixedArmor": 20,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_astraPrimarisPsy_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -6176,25 +6189,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "astraYarrick": {
-    "activeAbilities": [
-      "SendInTheNextWave"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -6203,19 +6200,35 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Yarrick",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_astraYarrick_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "SummaryExecution"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "SendInTheNextWave"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 75,
       "Damage": 30,
       "FixedArmor": 17,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_astraYarrick_01"
-    ],
     "upgrades": [
       [
         "upgHpC005",
@@ -6535,25 +6548,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "astraBullgryn": {
-    "activeAbilities": [
-      "FragBomb"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -6567,19 +6564,35 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Kut",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_astraBullgryn_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BigTarget"
+    ],
     "passiveAbilities": [
       "AvalancheOfMuscle"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "FragBomb"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Defensive"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 95,
       "Damage": 30,
       "FixedArmor": 35,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_astraBullgryn_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -6894,25 +6907,9 @@ export const data = {
         "DamageProfile": "Physical"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BigTarget"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Defensive"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "astraOrdnance": {
-    "activeAbilities": [
-      "BasiliskBarrage"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -6926,20 +6923,37 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Thaddeus",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_astraOrdnance_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "SuppressiveFire",
+      "IndirectFire"
+    ],
     "passiveAbilities": [
       "SpotterReworked"
     ],
+    "activeAbilities": [
+      "BasiliskBarrage"
+    ],
     "powerMultiplier": 110,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 65,
       "Damage": 38,
       "FixedArmor": 15,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_astraOrdnance_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -7259,26 +7273,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "SuppressiveFire",
-      "IndirectFire"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "astraCreed": {
-    "activeAbilities": [
-      "SupremeCommander"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -7292,19 +7289,34 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Creed",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_astraCreed_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero"
+    ],
     "passiveAbilities": [
       "SwornProtector"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "SupremeCommander"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 38,
       "FixedArmor": 21,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_astraCreed_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -7619,24 +7631,9 @@ export const data = {
         "DamageProfile": "Las"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "astraDreir": {
-    "activeAbilities": [
-      "LeadingTheCharge"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -7647,20 +7644,37 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Dreir",
+    "releaseStatus": 1758240000000,
+    "unlockQuestIds": [
+      "hero_astraDreir_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Resilient",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "ToughToKill"
     ],
+    "activeAbilities": [
+      "LeadingTheCharge"
+    ],
     "powerMultiplier": 93,
-    "releaseStatus": "1758240000000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 28,
       "FixedArmor": 17,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_astraDreir_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -7975,27 +7989,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Resilient",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "astraOrdnanceBattery": {
-    "activeAbilities": [
-      "MalleusRocketLauncher",
-      "ForwardSpotter"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -8006,30 +8002,31 @@ export const data = {
     "FactionId": "AstraMilitarum",
     "GrandAllianceId": "Imperial",
     "name": "Malleus Rocket Launcher",
-    "releaseStatus": "1717747200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1717747200000,
     "unlockQuestIds": [
       "hero_astraOrdnanceBattery_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "OnMyPosition"
     ],
+    "activeAbilities": [
+      "MalleusRocketLauncher",
+      "ForwardSpotter"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "blackTerminator": {
-    "activeAbilities": [
-      "BringerOfDespair"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -8038,19 +8035,37 @@ export const data = {
     "FactionId": "BlackLegion",
     "GrandAllianceId": "Chaos",
     "name": "Angrax",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_blackTerminator_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "LetTheGalaxyBurn",
+      "TeleportStrike",
+      "TerminatorArmour"
+    ],
     "passiveAbilities": [
       "HatefulAssault"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "BringerOfDespair"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 110,
       "Damage": 19,
       "FixedArmor": 30,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_blackTerminator_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -8365,27 +8380,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "LetTheGalaxyBurn",
-      "TeleportStrike",
-      "TerminatorArmour"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "blackObliterator": {
-    "activeAbilities": [
-      "FrenziedFiring"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -8394,20 +8391,40 @@ export const data = {
     "FactionId": "BlackLegion",
     "GrandAllianceId": "Chaos",
     "name": "Volk",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_blackObliterator_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "LetTheGalaxyBurn",
+      "BigTarget",
+      "Daemon",
+      "HeavyWeapon",
+      "SuppressiveFire"
+    ],
     "passiveAbilities": [
       "FleshmetalGuns"
     ],
+    "activeAbilities": [
+      "FrenziedFiring"
+    ],
     "powerMultiplier": 95,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 125,
       "Damage": 9,
       "FixedArmor": 12,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_blackObliterator_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -8727,29 +8744,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "LetTheGalaxyBurn",
-      "BigTarget",
-      "Daemon",
-      "HeavyWeapon",
-      "SuppressiveFire"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "blackPossession": {
-    "activeAbilities": [
-      "Incursion"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -8758,20 +8755,37 @@ export const data = {
     "FactionId": "BlackLegion",
     "GrandAllianceId": "Chaos",
     "name": "Archimatos",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_blackPossession_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "LetTheGalaxyBurn",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "Possession"
     ],
+    "activeAbilities": [
+      "Incursion"
+    ],
     "powerMultiplier": 87,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 80,
       "Damage": 16,
       "FixedArmor": 18,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_blackPossession_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -9091,26 +9105,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "LetTheGalaxyBurn",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "blackHaarken": {
-    "activeAbilities": [
-      "HeraldOfTheApocalypse"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -9119,20 +9116,38 @@ export const data = {
     "FactionId": "BlackLegion",
     "GrandAllianceId": "Chaos",
     "name": "Haarken",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_blackHaarken_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "LetTheGalaxyBurn",
+      "Flying",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "HeadClaimer"
     ],
+    "activeAbilities": [
+      "HeraldOfTheApocalypse"
+    ],
     "powerMultiplier": 85,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 11,
       "FixedArmor": 20,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_blackHaarken_01"
-    ],
     "upgrades": [
       [
         "upgHpC017",
@@ -9447,27 +9462,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "LetTheGalaxyBurn",
-      "Flying",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "blackAbaddon": {
-    "activeAbilities": [
-      "Drachnyen"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -9476,20 +9473,38 @@ export const data = {
     "FactionId": "BlackLegion",
     "GrandAllianceId": "Chaos",
     "name": "Abaddon",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_blackAbaddon_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "LetTheGalaxyBurn",
+      "Resilient",
+      "TerminatorArmour"
+    ],
     "passiveAbilities": [
       "FirstAmongTraitors"
     ],
+    "activeAbilities": [
+      "Drachnyen"
+    ],
     "powerMultiplier": 78,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 15,
       "FixedArmor": 25,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_blackAbaddon_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -9809,28 +9824,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "LetTheGalaxyBurn",
-      "Resilient",
-      "TerminatorArmour"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "blackForgefiend": {
-    "activeAbilities": [
-      "HadesAutocannons",
-      "DaemonicOrdnance"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -9841,30 +9837,31 @@ export const data = {
     "FactionId": "BlackLegion",
     "GrandAllianceId": "Chaos",
     "name": "Forgefiend",
-    "releaseStatus": "1717747200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1717747200000,
     "unlockQuestIds": [
       "hero_blackForgefiend_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "ContemptuousDisregard"
     ],
+    "activeAbilities": [
+      "HadesAutocannons",
+      "DaemonicOrdnance"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "deathTyphus": {
-    "activeAbilities": [
-      "PlagueWind"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -9873,20 +9870,39 @@ export const data = {
     "FactionId": "DeathGuard",
     "GrandAllianceId": "Chaos",
     "name": "Typhus",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_deathTyphus_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "ContagionsOfNurgle",
+      "Resilient",
+      "Psyker",
+      "TerminatorArmour"
+    ],
     "passiveAbilities": [
       "DestroyerHive"
     ],
+    "activeAbilities": [
+      "PlagueWind"
+    ],
     "powerMultiplier": 85,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 120,
       "Damage": 18,
       "FixedArmor": 25,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_deathTyphus_01"
-    ],
     "upgrades": [
       [
         "upgHpC013",
@@ -10206,28 +10222,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "ContagionsOfNurgle",
-      "Resilient",
-      "Psyker",
-      "TerminatorArmour"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "deathBlightlord": {
-    "activeAbilities": [
-      "FlailSwing"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -10236,20 +10233,38 @@ export const data = {
     "FactionId": "DeathGuard",
     "GrandAllianceId": "Chaos",
     "name": "Maladus",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_deathBlightlord_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "ContagionsOfNurgle",
+      "Resilient",
+      "TerminatorArmour"
+    ],
     "passiveAbilities": [
       "HazeOfCorruption"
     ],
+    "activeAbilities": [
+      "FlailSwing"
+    ],
     "powerMultiplier": 80,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 120,
       "Damage": 26,
       "FixedArmor": 33,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_deathBlightlord_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -10564,27 +10579,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "ContagionsOfNurgle",
-      "Resilient",
-      "TerminatorArmour"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "deathRotbone": {
-    "activeAbilities": [
-      "RevitalizingMalignancy"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -10593,20 +10590,38 @@ export const data = {
     "FactionId": "DeathGuard",
     "GrandAllianceId": "Chaos",
     "name": "Nauseous",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_deathRotbone_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "ContagionsOfNurgle",
+      "Resilient",
+      "Healer"
+    ],
     "passiveAbilities": [
       "TaintedNarthecium"
     ],
+    "activeAbilities": [
+      "RevitalizingMalignancy"
+    ],
     "powerMultiplier": 85,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 120,
       "Damage": 14,
       "FixedArmor": 27,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_deathRotbone_01"
-    ],
     "upgrades": [
       [
         "upgHpC006",
@@ -10921,27 +10936,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "ContagionsOfNurgle",
-      "Resilient",
-      "Healer"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "deathPutrifier": {
-    "activeAbilities": [
-      "FoulInfusion"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -10950,20 +10947,38 @@ export const data = {
     "FactionId": "DeathGuard",
     "GrandAllianceId": "Chaos",
     "name": "Pestillian",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_deathPutrifier_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "ContagionsOfNurgle",
+      "Resilient",
+      "PutridExplosion"
+    ],
     "passiveAbilities": [
       "ExplosiveMaladies"
     ],
+    "activeAbilities": [
+      "FoulInfusion"
+    ],
     "powerMultiplier": 96,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 120,
       "Damage": 40,
       "FixedArmor": 27,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_deathPutrifier_01"
-    ],
     "upgrades": [
       [
         "upgHpC013",
@@ -11278,27 +11293,9 @@ export const data = {
         "DamageProfile": "Toxic"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "ContagionsOfNurgle",
-      "Resilient",
-      "PutridExplosion"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "deathBlightbringer": {
-    "activeAbilities": [
-      "Poxwalkers"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -11307,20 +11304,37 @@ export const data = {
     "FactionId": "DeathGuard",
     "GrandAllianceId": "Chaos",
     "name": "Corrodius",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_deathBlightbringer_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "ContagionsOfNurgle",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "CursedPlagueBell"
     ],
+    "activeAbilities": [
+      "Poxwalkers"
+    ],
     "powerMultiplier": 96,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 125,
       "Damage": 40,
       "FixedArmor": 25,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_deathBlightbringer_01"
-    ],
     "upgrades": [
       [
         "upgHpC013",
@@ -11635,27 +11649,9 @@ export const data = {
         "DamageProfile": "Plasma"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "ContagionsOfNurgle",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "deathCrawler": {
-    "activeAbilities": [
-      "EntropyCannons",
-      "PlagueburstMortar"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -11666,30 +11662,31 @@ export const data = {
     "FactionId": "DeathGuard",
     "GrandAllianceId": "Chaos",
     "name": "Plagueburst Crawler",
-    "releaseStatus": "1741939200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1741939200000,
     "unlockQuestIds": [
       "hero_deathCrawler_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "BlightedLand"
     ],
+    "activeAbilities": [
+      "EntropyCannons",
+      "PlagueburstMortar"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "orksRuntherd": {
-    "activeAbilities": [
-      "GetEmRuntz"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -11698,20 +11695,37 @@ export const data = {
     "FactionId": "Orks",
     "GrandAllianceId": "Xenos",
     "name": "Snotflogga",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_orksRuntherd_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "GetStuckIn",
+      "BeastSnagga"
+    ],
     "passiveAbilities": [
       "SquigHound"
     ],
+    "activeAbilities": [
+      "GetEmRuntz"
+    ],
     "powerMultiplier": 115,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 120,
       "Damage": 30,
       "FixedArmor": 18,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_orksRuntherd_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -12026,11 +12040,32 @@ export const data = {
         "DamageProfile": "Physical"
       }
     ],
+    "type": "Hero"
+  },
+  "orksBigMek": {
+    "BaseRarity": "Common",
+    "eligibilityRequirements": {
+      "canDropIfHeroUnlocked": true,
+      "canDropIfHeroNotUnlocked": true
+    },
+    "FactionId": "Orks",
+    "GrandAllianceId": "Xenos",
+    "name": "Gibbascrapz",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_orksBigMek_01"
+    ],
     "Movement": 3,
     "traits": [
       "Hero",
       "GetStuckIn",
-      "BeastSnagga"
+      "Mechanic"
+    ],
+    "passiveAbilities": [
+      "KustomForceField"
+    ],
+    "activeAbilities": [
+      "GrotTank"
     ],
     "itemSlots": [
       "I_Crit",
@@ -12040,33 +12075,12 @@ export const data = {
     "itemSlotsRelic": [
       1
     ],
-    "type": "Hero"
-  },
-  "orksBigMek": {
-    "activeAbilities": [
-      "GrotTank"
-    ],
-    "BaseRarity": "Common",
-    "eligibilityRequirements": {
-      "canDropIfHeroUnlocked": true,
-      "canDropIfHeroNotUnlocked": true
-    },
-    "FactionId": "Orks",
-    "GrandAllianceId": "Xenos",
-    "name": "Gibbascrapz",
-    "passiveAbilities": [
-      "KustomForceField"
-    ],
-    "releaseStatus": "released",
     "stats": {
       "Health": 75,
       "Damage": 25,
       "FixedArmor": 30,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_orksBigMek_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -12381,26 +12395,9 @@ export const data = {
         "DamageProfile": "Physical"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "GetStuckIn",
-      "Mechanic"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "orksKillaKan": {
-    "activeAbilities": [
-      "DakkaDakkaDakka"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -12409,19 +12406,38 @@ export const data = {
     "FactionId": "Orks",
     "GrandAllianceId": "Xenos",
     "name": "Snappawrecka",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_orksKillaKan_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "GetStuckIn",
+      "BigTarget",
+      "Explodes",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "PowerTrip"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "DakkaDakkaDakka"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 23,
       "FixedArmor": 20,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_orksKillaKan_01"
-    ],
     "upgrades": [
       [
         "upgHpC013",
@@ -12741,28 +12757,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "GetStuckIn",
-      "BigTarget",
-      "Explodes",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "orksNob": {
-    "activeAbilities": [
-      "UnstoppableMomentumReworked"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -12771,20 +12768,38 @@ export const data = {
     "FactionId": "Orks",
     "GrandAllianceId": "Xenos",
     "name": "Tanksmasha",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_orksNob_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "GetStuckIn",
+      "BeastSnagga",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "SmashaEad"
     ],
+    "activeAbilities": [
+      "UnstoppableMomentumReworked"
+    ],
     "powerMultiplier": 98,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 100,
       "Damage": 24,
       "FixedArmor": 15,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_orksNob_01"
-    ],
     "upgrades": [
       [
         "upgHpC013",
@@ -13099,27 +13114,9 @@ export const data = {
         "DamageProfile": "Eviscerate"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "GetStuckIn",
-      "BeastSnagga",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "orksWarboss": {
-    "activeAbilities": [
-      "Waaagh"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -13128,20 +13125,40 @@ export const data = {
     "FactionId": "Orks",
     "GrandAllianceId": "Xenos",
     "name": "Gulgortz",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_orksWarboss_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "GetStuckIn",
+      "BigTarget",
+      "CrushingStrike",
+      "FinalJustice",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "LightImUp"
     ],
+    "activeAbilities": [
+      "Waaagh"
+    ],
     "powerMultiplier": 92,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 26,
       "FixedArmor": 26,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_orksWarboss_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -13461,30 +13478,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "GetStuckIn",
-      "BigTarget",
-      "CrushingStrike",
-      "FinalJustice",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "orksRukkatrukk": {
-    "activeAbilities": [
-      "SquigLaunchas",
-      "SquigMine"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -13495,30 +13491,31 @@ export const data = {
     "FactionId": "Orks",
     "GrandAllianceId": "Xenos",
     "name": "Rukkatrukk",
-    "releaseStatus": "1760313600000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1760313600000,
     "unlockQuestIds": [
       "hero_orksRukkatrukk_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "MoreGitzOverEre"
     ],
+    "activeAbilities": [
+      "SquigLaunchas",
+      "SquigMine"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "templSwordBrother": {
-    "activeAbilities": [
-      "ThunderousAssault"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -13532,20 +13529,37 @@ export const data = {
     "FactionId": "BlackTemplars",
     "GrandAllianceId": "Imperial",
     "name": "Godswyl",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_templSwordBrother_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Parry",
+      "RapidAssault"
+    ],
     "passiveAbilities": [
       "ChampionOfTheFeast"
     ],
+    "activeAbilities": [
+      "ThunderousAssault"
+    ],
     "powerMultiplier": 122,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 60,
       "FixedArmor": 24,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_templSwordBrother_01"
-    ],
     "upgrades": [
       [
         "upgHpC006",
@@ -13860,26 +13874,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Parry",
-      "RapidAssault"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "templAggressor": {
-    "activeAbilities": [
-      "FragstormGrenadeLauncher"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -13893,20 +13890,38 @@ export const data = {
     "FactionId": "BlackTemplars",
     "GrandAllianceId": "Imperial",
     "name": "Burchard",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_templAggressor_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "CrushingStrike",
+      "MkXGravis",
+      "SuppressiveFire"
+    ],
     "passiveAbilities": [
       "Boltstorm"
     ],
+    "activeAbilities": [
+      "FragstormGrenadeLauncher"
+    ],
     "powerMultiplier": 86,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 120,
       "Damage": 18,
       "FixedArmor": 22,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_templAggressor_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -14226,27 +14241,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "CrushingStrike",
-      "MkXGravis",
-      "SuppressiveFire"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "templAncient": {
-    "activeAbilities": [
-      "UnbreakableDuty"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -14260,20 +14257,37 @@ export const data = {
     "FactionId": "BlackTemplars",
     "GrandAllianceId": "Imperial",
     "name": "Thoread",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_templAncient_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "FinalJustice",
+      "Parry"
+    ],
     "passiveAbilities": [
       "AstartesBanner"
     ],
+    "activeAbilities": [
+      "UnbreakableDuty"
+    ],
     "powerMultiplier": 108,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 33,
       "FixedArmor": 22,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_templAncient_01"
-    ],
     "upgrades": [
       [
         "upgHpC006",
@@ -14588,26 +14602,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "FinalJustice",
-      "Parry"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "templChampion": {
-    "activeAbilities": [
-      "HolyDuel"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -14621,20 +14618,38 @@ export const data = {
     "FactionId": "BlackTemplars",
     "GrandAllianceId": "Imperial",
     "name": "Jaeger",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_templChampion_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "FinalJustice",
+      "Parry",
+      "RapidAssault"
+    ],
     "passiveAbilities": [
       "MartialSuperiority"
     ],
+    "activeAbilities": [
+      "HolyDuel"
+    ],
     "powerMultiplier": 97,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 110,
       "Damage": 25,
       "FixedArmor": 25,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_templChampion_01"
-    ],
     "upgrades": [
       [
         "upgHpC004",
@@ -14949,27 +14964,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "FinalJustice",
-      "Parry",
-      "RapidAssault"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "templHelbrecht": {
-    "activeAbilities": [
-      "CrusadeOfWrath"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -14983,20 +14980,37 @@ export const data = {
     "FactionId": "BlackTemplars",
     "GrandAllianceId": "Imperial",
     "name": "Helbrecht",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_templHelbrecht_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "FinalJustice",
+      "Parry"
+    ],
     "passiveAbilities": [
       "DestroyTheWitch"
     ],
+    "activeAbilities": [
+      "CrusadeOfWrath"
+    ],
     "powerMultiplier": 95,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 15,
       "FixedArmor": 22,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_templHelbrecht_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -15316,26 +15330,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "FinalJustice",
-      "Parry"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "eldarRanger": {
-    "activeAbilities": [
-      "FireAndReposition"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -15344,20 +15341,37 @@ export const data = {
     "FactionId": "Aeldari",
     "GrandAllianceId": "Xenos",
     "name": "Calandis",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_eldarRanger_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "HeavyWeapon",
+      "Overwatch"
+    ],
     "passiveAbilities": [
       "WireweaveNet"
     ],
+    "activeAbilities": [
+      "FireAndReposition"
+    ],
     "powerMultiplier": 127,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Crit",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 70,
       "Damage": 45,
       "FixedArmor": 18,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_eldarRanger_01"
-    ],
     "upgrades": [
       [
         "upgHpC006",
@@ -15677,26 +15691,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "HeavyWeapon",
-      "Overwatch"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Crit",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "eldarAutarch": {
-    "activeAbilities": [
-      "Loki_SwoopingHawk"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -15705,19 +15702,36 @@ export const data = {
     "FactionId": "Aeldari",
     "GrandAllianceId": "Xenos",
     "name": "Aethana",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_eldarAutarch_01"
+    ],
+    "Movement": 5,
+    "traits": [
+      "Hero",
+      "Flying",
+      "TeleportStrike"
+    ],
     "passiveAbilities": [
       "PathOfCommand"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "Loki_SwoopingHawk"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 80,
       "Damage": 14,
       "FixedArmor": 17,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_eldarAutarch_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -16032,26 +16046,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 5,
-    "traits": [
-      "Hero",
-      "Flying",
-      "TeleportStrike"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "eldarFarseer": {
-    "activeAbilities": [
-      "Executioner"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -16060,20 +16057,36 @@ export const data = {
     "FactionId": "Aeldari",
     "GrandAllianceId": "Xenos",
     "name": "Eldryon",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_eldarFarseer_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "Doom"
     ],
+    "activeAbilities": [
+      "Executioner"
+    ],
     "powerMultiplier": 99,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 75,
       "Damage": 16,
       "FixedArmor": 16,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_eldarFarseer_01"
-    ],
     "upgrades": [
       [
         "upgHpC017",
@@ -16393,25 +16406,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "eldarMauganRa": {
-    "activeAbilities": [
-      "HarvesterOfSouls"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -16427,20 +16424,38 @@ export const data = {
     "FactionId": "Aeldari",
     "GrandAllianceId": "Xenos",
     "name": "Maugan Ra",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_eldarMauganRa_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Terrifying",
+      "HeavyWeapon",
+      "Overwatch"
+    ],
     "passiveAbilities": [
       "InescapableAccuracy"
     ],
+    "activeAbilities": [
+      "HarvesterOfSouls"
+    ],
     "powerMultiplier": 66,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 70,
       "Damage": 9,
       "FixedArmor": 22,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_eldarMauganRa_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -16760,27 +16775,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Terrifying",
-      "HeavyWeapon",
-      "Overwatch"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "eldarJainZar": {
-    "activeAbilities": [
-      "SilentDeath"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -16796,20 +16793,36 @@ export const data = {
     "FactionId": "Aeldari",
     "GrandAllianceId": "Xenos",
     "name": "Jain Zar",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_eldarJainZar_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Infiltrate"
+    ],
     "passiveAbilities": [
       "TerrorsLament"
     ],
+    "activeAbilities": [
+      "SilentDeath"
+    ],
     "powerMultiplier": 105,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 75,
       "Damage": 19,
       "FixedArmor": 18,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_eldarJainZar_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -17124,25 +17137,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Infiltrate"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauMarksman": {
-    "activeAbilities": [
-      "SeekerMissileFrequencyLock"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -17151,20 +17148,37 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Sho'syl",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tauMarksman_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "Camouflage",
+      "RangedSpecialist"
+    ],
     "passiveAbilities": [
       "MV71SniperDroneSquad"
     ],
+    "activeAbilities": [
+      "SeekerMissileFrequencyLock"
+    ],
     "powerMultiplier": 107,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 65,
       "Damage": 40,
       "FixedArmor": 16,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_tauMarksman_01"
-    ],
     "upgrades": [
       [
         "upgHpC017",
@@ -17484,26 +17498,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "Camouflage",
-      "RangedSpecialist"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauCrisis": {
-    "activeAbilities": [
-      "EarlyWarningOverride"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -17512,20 +17509,39 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Re'vas",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tauCrisis_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BigTarget",
+      "Flying",
+      "Mechanical",
+      "RangedSpecialist"
+    ],
     "passiveAbilities": [
       "CyclicIonBlaster"
     ],
+    "activeAbilities": [
+      "EarlyWarningOverride"
+    ],
     "powerMultiplier": 96,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 105,
       "Damage": 7,
       "FixedArmor": 25,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_tauCrisis_01"
-    ],
     "upgrades": [
       [
         "upgHpC017",
@@ -17845,28 +17861,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BigTarget",
-      "Flying",
-      "Mechanical",
-      "RangedSpecialist"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauDarkstrider": {
-    "activeAbilities": [
-      "FightingRetreat"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -17875,20 +17872,38 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Darkstrider",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tauDarkstrider_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Infiltrate",
+      "RangedSpecialist",
+      "SuppressiveFire"
+    ],
     "passiveAbilities": [
       "StructuralAnalyser"
     ],
+    "activeAbilities": [
+      "FightingRetreat"
+    ],
     "powerMultiplier": 89,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 75,
       "Damage": 25,
       "FixedArmor": 17,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_tauDarkstrider_01"
-    ],
     "upgrades": [
       [
         "upgHpC001",
@@ -18208,27 +18223,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Infiltrate",
-      "RangedSpecialist",
-      "SuppressiveFire"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauAunShi": {
-    "activeAbilities": [
-      "InspiredToGreatness"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -18244,20 +18241,35 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Aun'Shi",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tauAunShi_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero"
+    ],
     "passiveAbilities": [
       "SereneUnifier"
     ],
+    "activeAbilities": [
+      "InspiredToGreatness"
+    ],
     "powerMultiplier": 117,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 85,
       "Damage": 13,
       "FixedArmor": 16,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_tauAunShi_01"
-    ],
     "upgrades": [
       [
         "upgHpC001",
@@ -18572,24 +18584,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauShadowsun": {
-    "activeAbilities": [
-      "ExemplarOfTheKauyon"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -18605,20 +18602,39 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Shadowsun",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tauShadowsun_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Camouflage",
+      "Flying",
+      "Infiltrate",
+      "RangedSpecialist"
+    ],
     "passiveAbilities": [
       "DefenderOfTheGreaterGood"
     ],
+    "activeAbilities": [
+      "ExemplarOfTheKauyon"
+    ],
     "powerMultiplier": 75,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 80,
       "Damage": 25,
       "FixedArmor": 18,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_tauShadowsun_01"
-    ],
     "upgrades": [
       [
         "upgHpC017",
@@ -18938,28 +18954,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Camouflage",
-      "Flying",
-      "Infiltrate",
-      "RangedSpecialist"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauFarsight": {
-    "activeAbilities": [
-      "ExemplarOfTheMontka"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": false,
@@ -18968,20 +18965,39 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Farsight",
+    "releaseStatus": 1766448000000,
+    "unlockQuestIds": [
+      "hero_tauFarsight_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "BeastSnagga",
+      "BigTarget",
+      "Flying",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "WayOfTheShortBlade"
     ],
+    "activeAbilities": [
+      "ExemplarOfTheMontka"
+    ],
     "powerMultiplier": 79,
-    "releaseStatus": "1766448000000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 20,
       "FixedArmor": 20,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_tauFarsight_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -19301,29 +19317,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "BeastSnagga",
-      "BigTarget",
-      "Flying",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tauBroadside": {
-    "activeAbilities": [
-      "HeavyRailRifle",
-      "TwinSmartMissileSystem"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -19334,30 +19330,31 @@ export const data = {
     "FactionId": "Tau",
     "GrandAllianceId": "Xenos",
     "name": "Tson'ji",
-    "releaseStatus": "1732867200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1732867200000,
     "unlockQuestIds": [
       "hero_tauBroadside_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "ElectrochaffBackups"
     ],
+    "activeAbilities": [
+      "HeavyRailRifle",
+      "TwinSmartMissileSystem"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "spaceWulfen": {
-    "activeAbilities": [
-      "GreatFrostAxe"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -19366,20 +19363,37 @@ export const data = {
     "FactionId": "SpaceWolves",
     "GrandAllianceId": "Imperial",
     "name": "Ulf",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_spaceWulfen_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "FinalJustice",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "SavageKiller"
     ],
+    "activeAbilities": [
+      "GreatFrostAxe"
+    ],
     "powerMultiplier": 98,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 33,
       "FixedArmor": 20,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_spaceWulfen_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -19694,26 +19708,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "FinalJustice",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "spaceHound": {
-    "activeAbilities": [
-      "GrapnelLauncher"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -19722,20 +19719,37 @@ export const data = {
     "FactionId": "SpaceWolves",
     "GrandAllianceId": "Imperial",
     "name": "Tjark",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_spaceHound_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Infiltrate",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "HuntersBeyondDeath"
     ],
+    "activeAbilities": [
+      "GrapnelLauncher"
+    ],
     "powerMultiplier": 106,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 85,
       "Damage": 32,
       "FixedArmor": 23,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_spaceHound_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -20050,26 +20064,9 @@ export const data = {
         "DamageProfile": "Physical"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Infiltrate",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "spaceRockfist": {
-    "activeAbilities": [
-      "Foehammer"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -20078,20 +20075,39 @@ export const data = {
     "FactionId": "SpaceWolves",
     "GrandAllianceId": "Imperial",
     "name": "Arjac",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_spaceRockfist_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "Resilient",
+      "TeleportStrike",
+      "TerminatorArmour",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "AnvilShield"
     ],
+    "activeAbilities": [
+      "Foehammer"
+    ],
     "powerMultiplier": 92,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 110,
       "Damage": 23,
       "FixedArmor": 26,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_spaceRockfist_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -20406,28 +20422,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "Resilient",
-      "TeleportStrike",
-      "TerminatorArmour",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "spaceStormcaller": {
-    "activeAbilities": [
-      "Stormcaller"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -20436,20 +20433,38 @@ export const data = {
     "FactionId": "SpaceWolves",
     "GrandAllianceId": "Imperial",
     "name": "Njal",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_spaceStormcaller_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "Psyker",
+      "TerminatorArmour",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "LordOfTempests"
     ],
+    "activeAbilities": [
+      "Stormcaller"
+    ],
     "powerMultiplier": 92,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 80,
       "Damage": 8,
       "FixedArmor": 26,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_spaceStormcaller_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -20769,27 +20784,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "Psyker",
-      "TerminatorArmour",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "spaceBlackmane": {
-    "activeAbilities": [
-      "WarHowl"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -20805,20 +20802,38 @@ export const data = {
     "FactionId": "SpaceWolves",
     "GrandAllianceId": "Imperial",
     "name": "Ragnar",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_spaceBlackmane_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BeastSnagga",
+      "FinalJustice",
+      "RapidAssault"
+    ],
     "passiveAbilities": [
       "SagaOfTheWarriorBorn"
     ],
+    "activeAbilities": [
+      "WarHowl"
+    ],
     "powerMultiplier": 99,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 14,
       "FixedArmor": 24,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_spaceBlackmane_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -21133,27 +21148,9 @@ export const data = {
         "DamageProfile": "Chain"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BeastSnagga",
-      "FinalJustice",
-      "RapidAssault"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "spaceWolfPriest": {
-    "activeAbilities": [
-      "RitesOfMorkai"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -21164,20 +21161,38 @@ export const data = {
     "FactionId": "SpaceWolves",
     "GrandAllianceId": "Imperial",
     "name": "Baldr",
+    "releaseStatus": 1767830400000,
+    "unlockQuestIds": [
+      "hero_spaceWolfPriest_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Healer",
+      "FinalJustice",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "HealingBalms"
     ],
+    "activeAbilities": [
+      "RitesOfMorkai"
+    ],
     "powerMultiplier": 97,
-    "releaseStatus": "1767830400000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 90,
       "Damage": 25,
       "FixedArmor": 21,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_spaceWolfPriest_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -21492,27 +21507,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Healer",
-      "FinalJustice",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "thousTzaangor": {
-    "activeAbilities": [
-      "SorcerousFacade"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -21526,20 +21523,37 @@ export const data = {
     "FactionId": "ThousandSons",
     "GrandAllianceId": "Chaos",
     "name": "Yazaghor",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_thousTzaangor_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "WeaverOfFate",
+      "Flying"
+    ],
     "passiveAbilities": [
       "RealityUnbound"
     ],
+    "activeAbilities": [
+      "SorcerousFacade"
+    ],
     "powerMultiplier": 111,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 65,
       "Damage": 49,
       "FixedArmor": 14,
       "ProgressionIndex": 0
     },
-    "unlockQuestIds": [
-      "hero_thousTzaangor_01"
-    ],
     "upgrades": [
       [
         "upgHpC001",
@@ -21859,26 +21873,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "WeaverOfFate",
-      "Flying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "thousTerminator": {
-    "activeAbilities": [
-      "HellfyreMissileRack"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -21892,20 +21889,38 @@ export const data = {
     "FactionId": "ThousandSons",
     "GrandAllianceId": "Chaos",
     "name": "Toth",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_thousTerminator_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "WeaverOfFate",
+      "SuppressiveFire",
+      "TerminatorArmour"
+    ],
     "passiveAbilities": [
       "TimeFlux"
     ],
+    "activeAbilities": [
+      "HellfyreMissileRack"
+    ],
     "powerMultiplier": 97,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 90,
       "Damage": 10,
       "FixedArmor": 27,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_thousTerminator_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -22225,27 +22240,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "WeaverOfFate",
-      "SuppressiveFire",
-      "TerminatorArmour"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "thousInfernalMaster": {
-    "activeAbilities": [
-      "MasterOfTheTutelaries"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -22259,20 +22256,37 @@ export const data = {
     "FactionId": "ThousandSons",
     "GrandAllianceId": "Chaos",
     "name": "Abraxas",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_thousInfernalMaster_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "WeaverOfFate",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "InfernalPacts"
     ],
+    "activeAbilities": [
+      "MasterOfTheTutelaries"
+    ],
     "powerMultiplier": 96,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 70,
       "Damage": 18,
       "FixedArmor": 20,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_thousInfernalMaster_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -22592,26 +22606,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "WeaverOfFate",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "thousSorcerer": {
-    "activeAbilities": [
-      "AttemptedPossession"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -22625,20 +22622,38 @@ export const data = {
     "FactionId": "ThousandSons",
     "GrandAllianceId": "Chaos",
     "name": "Thaumachus",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_thousSorcerer_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "WeaverOfFate",
+      "Flying",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "ArcaneShield"
     ],
+    "activeAbilities": [
+      "AttemptedPossession"
+    ],
     "powerMultiplier": 94,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 75,
       "Damage": 27,
       "FixedArmor": 18,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_thousSorcerer_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -22958,27 +22973,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "WeaverOfFate",
-      "Flying",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "thousAhriman": {
-    "activeAbilities": [
-      "Doombolt"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -22992,20 +22989,38 @@ export const data = {
     "FactionId": "ThousandSons",
     "GrandAllianceId": "Chaos",
     "name": "Ahriman",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_thousAhriman_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "WeaverOfFate",
+      "Flying",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "PsychicStalk"
     ],
+    "activeAbilities": [
+      "Doombolt"
+    ],
     "powerMultiplier": 88,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 80,
       "Damage": 30,
       "FixedArmor": 18,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_thousAhriman_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -23325,28 +23340,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "WeaverOfFate",
-      "Flying",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "thousDaemonPrince": {
-    "activeAbilities": [
-      "AetherStride",
-      "InfernalCannon"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -23357,30 +23353,31 @@ export const data = {
     "FactionId": "ThousandSons",
     "GrandAllianceId": "Chaos",
     "name": "Z'Kar",
-    "releaseStatus": "1766102400000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1766102400000,
     "unlockQuestIds": [
       "hero_thousDaemonPrince_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "CabalOfSorcerers"
     ],
+    "activeAbilities": [
+      "AetherStride",
+      "InfernalCannon"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "darkaAzrael": {
-    "activeAbilities": [
-      "DarkTalonStrike"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -23389,20 +23386,37 @@ export const data = {
     "FactionId": "DarkAngels",
     "GrandAllianceId": "Imperial",
     "name": "Azrael",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_darkaAzrael_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "FinalJustice",
+      "Overwatch"
+    ],
     "passiveAbilities": [
       "LionHelm"
     ],
+    "activeAbilities": [
+      "DarkTalonStrike"
+    ],
     "powerMultiplier": 84,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 28,
       "FixedArmor": 24,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_darkaAzrael_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -23722,26 +23736,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "FinalJustice",
-      "Overwatch"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "darkaHellblaster": {
-    "activeAbilities": [
-      "Supercharge"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -23750,20 +23747,38 @@ export const data = {
     "FactionId": "DarkAngels",
     "GrandAllianceId": "Imperial",
     "name": "Sarquael",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_darkaHellblaster_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "FinalJustice",
+      "Overwatch",
+      "HeavyWeapon"
+    ],
     "passiveAbilities": [
       "GrimRetribution"
     ],
+    "activeAbilities": [
+      "Supercharge"
+    ],
     "powerMultiplier": 90,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 70,
       "Damage": 50,
       "FixedArmor": 20,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_darkaHellblaster_01"
-    ],
     "upgrades": [
       [
         "upgHpC014",
@@ -24083,27 +24098,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "FinalJustice",
-      "Overwatch",
-      "HeavyWeapon"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "darkaAsmodai": {
-    "activeAbilities": [
-      "ExemplarOfHate"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -24112,19 +24109,35 @@ export const data = {
     "FactionId": "DarkAngels",
     "GrandAllianceId": "Imperial",
     "name": "Asmodai",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_darkaAsmodai_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "FearedInterrogator"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "ExemplarOfHate"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 20,
       "FixedArmor": 23,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_darkaAsmodai_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -24439,25 +24452,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "darkaTerminator": {
-    "activeAbilities": [
-      "PlasmaCannon"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -24466,19 +24463,38 @@ export const data = {
     "FactionId": "DarkAngels",
     "GrandAllianceId": "Imperial",
     "name": "Baraqiel",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_darkaTerminator_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "TeleportStrike",
+      "CrushingStrike",
+      "HeavyWeapon",
+      "TerminatorArmour"
+    ],
     "passiveAbilities": [
       "Deathwing"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "PlasmaCannon"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 110,
       "Damage": 22,
       "FixedArmor": 29,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_darkaTerminator_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -24793,28 +24809,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "TeleportStrike",
-      "CrushingStrike",
-      "HeavyWeapon",
-      "TerminatorArmour"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "darkaCompanion": {
-    "activeAbilities": [
-      "CalibaniteGreatsword"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -24823,20 +24820,37 @@ export const data = {
     "FactionId": "DarkAngels",
     "GrandAllianceId": "Imperial",
     "name": "Forcas",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_darkaCompanion_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Camouflage",
+      "Parry"
+    ],
     "passiveAbilities": [
       "EnmityForTheUnworthy"
     ],
+    "activeAbilities": [
+      "CalibaniteGreatsword"
+    ],
     "powerMultiplier": 108,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 12,
       "FixedArmor": 21,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_darkaCompanion_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -25151,27 +25165,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Camouflage",
-      "Parry"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "darkaStormSpeeder": {
-    "activeAbilities": [
-      "DeathOnTheWind",
-      "Hailstrike"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -25182,30 +25178,31 @@ export const data = {
     "FactionId": "DarkAngels",
     "GrandAllianceId": "Imperial",
     "name": "Storm Speeder",
-    "releaseStatus": "1772179200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1772179200000,
     "unlockQuestIds": [
       "hero_darkaStormSpeeder_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "MastersOfManoeuvre"
     ],
+    "activeAbilities": [
+      "DeathOnTheWind",
+      "Hailstrike"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "tyranNeurothrope": {
-    "activeAbilities": [
-      "SpiritLeech"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -25214,20 +25211,40 @@ export const data = {
     "FactionId": "Tyranids",
     "GrandAllianceId": "Xenos",
     "name": "Neurothrope",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tyranNeurothrope_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "RangedSpecialist",
+      "Flying",
+      "Psyker",
+      "ShadowInTheWarp",
+      "Synapse"
+    ],
     "passiveAbilities": [
       "Neuroparasite"
     ],
+    "activeAbilities": [
+      "SpiritLeech"
+    ],
     "powerMultiplier": 115,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 85,
       "Damage": 20,
       "FixedArmor": 17,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_tyranNeurothrope_01"
-    ],
     "upgrades": [
       [
         "upgHpC013",
@@ -25547,29 +25564,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "RangedSpecialist",
-      "Flying",
-      "Psyker",
-      "ShadowInTheWarp",
-      "Synapse"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "tyranTyrantGuard": {
-    "activeAbilities": [
-      "CrushingClaws"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -25578,20 +25575,37 @@ export const data = {
     "FactionId": "Tyranids",
     "GrandAllianceId": "Xenos",
     "name": "Tyrant Guard",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tyranTyrantGuard_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BigTarget",
+      "CrushingStrike"
+    ],
     "passiveAbilities": [
       "GuardianOrganism"
     ],
+    "activeAbilities": [
+      "CrushingClaws"
+    ],
     "powerMultiplier": 113,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Defensive"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 125,
       "Damage": 16,
       "FixedArmor": 22,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_tyranTyrantGuard_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -25906,26 +25920,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BigTarget",
-      "CrushingStrike"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Defensive"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tyranWingedPrime": {
-    "activeAbilities": [
-      "AlphaWarrior"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -25934,19 +25931,37 @@ export const data = {
     "FactionId": "Tyranids",
     "GrandAllianceId": "Xenos",
     "name": "Winged Prime",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tyranWingedPrime_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Synapse",
+      "Flying",
+      "FinalJustice"
+    ],
     "passiveAbilities": [
       "SynapticLinchpin"
     ],
-    "releaseStatus": "released",
+    "activeAbilities": [
+      "AlphaWarrior"
+    ],
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 11,
       "FixedArmor": 19,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_tyranWingedPrime_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -26261,27 +26276,9 @@ export const data = {
         "DamageProfile": "Bio"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Synapse",
-      "Flying",
-      "FinalJustice"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tyranDeathleaper": {
-    "activeAbilities": [
-      "FearOfTheUnseen"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -26290,20 +26287,39 @@ export const data = {
     "FactionId": "Tyranids",
     "GrandAllianceId": "Xenos",
     "name": "Deathleaper",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_tyranDeathleaper_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Camouflage",
+      "TeleportStrike",
+      "Infiltrate",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "FeederTendrils"
     ],
+    "activeAbilities": [
+      "FearOfTheUnseen"
+    ],
     "powerMultiplier": 102,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 80,
       "Damage": 24,
       "FixedArmor": 17,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_tyranDeathleaper_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -26618,28 +26634,9 @@ export const data = {
         "DamageProfile": "Bio"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Camouflage",
-      "TeleportStrike",
-      "Infiltrate",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tyranParasite": {
-    "activeAbilities": [
-      "ItItches"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -26650,20 +26647,37 @@ export const data = {
     "FactionId": "Tyranids",
     "GrandAllianceId": "Xenos",
     "name": "Parasite of Mortrex",
+    "releaseStatus": 1734220800000,
+    "unlockQuestIds": [
+      "hero_tyranParasite_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Flying",
+      "Synapse"
+    ],
     "passiveAbilities": [
       "BarbedOvipositor"
     ],
+    "activeAbilities": [
+      "ItItches"
+    ],
     "powerMultiplier": 98,
-    "releaseStatus": "1734220800000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 45,
       "FixedArmor": 17,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_tyranParasite_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -26978,27 +26992,9 @@ export const data = {
         "DamageProfile": "Toxic"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Flying",
-      "Synapse"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "tyranBiovore": {
-    "activeAbilities": [
-      "BioMinefield",
-      "SporeMineLauncher"
-    ],
     "BaseRarity": "Common",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -27009,30 +27005,31 @@ export const data = {
     "FactionId": "Tyranids",
     "GrandAllianceId": "Xenos",
     "name": "Biovore",
-    "releaseStatus": "1717747200000",
-    "stats": {
-      "Health": 0,
-      "Damage": 0,
-      "FixedArmor": 0,
-      "ProgressionIndex": 0
-    },
+    "releaseStatus": 1717747200000,
     "unlockQuestIds": [
       "hero_tyranBiovore_01"
     ],
-    "upgrades": null,
-    "upgradesStatIncrease": null,
     "traits": [
       "MachineOfWar"
     ],
     "mythicAbilities": [
       "HyperCorrosiveAcid"
     ],
+    "activeAbilities": [
+      "BioMinefield",
+      "SporeMineLauncher"
+    ],
+    "upgrades": null,
+    "stats": {
+      "Health": 0,
+      "Damage": 0,
+      "FixedArmor": 0,
+      "ProgressionIndex": 0
+    },
+    "upgradesStatIncrease": null,
     "type": "MoW"
   },
   "admecDominus": {
-    "activeAbilities": [
-      "RadBombardment"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -27048,20 +27045,37 @@ export const data = {
     "FactionId": "AdeptusMechanicus",
     "GrandAllianceId": "Imperial",
     "name": "Vitruvius",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_admecDominus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Mechanical",
+      "Mechanic"
+    ],
     "passiveAbilities": [
       "MasterAnnihilator"
     ],
+    "activeAbilities": [
+      "RadBombardment"
+    ],
     "powerMultiplier": 108,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 50,
       "FixedArmor": 18,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_admecDominus_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -27381,26 +27395,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Mechanical",
-      "Mechanic"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "admecManipulus": {
-    "activeAbilities": [
-      "DefendTheDivineWork"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -27409,20 +27406,38 @@ export const data = {
     "FactionId": "AdeptusMechanicus",
     "GrandAllianceId": "Imperial",
     "name": "Actus",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_admecManipulus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Mechanical",
+      "Mechanic",
+      "Flying"
+    ],
     "passiveAbilities": [
       "GalvanicField"
     ],
+    "activeAbilities": [
+      "DefendTheDivineWork"
+    ],
     "powerMultiplier": 107,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 25,
       "FixedArmor": 19,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_admecManipulus_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -27742,27 +27757,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Mechanical",
-      "Mechanic",
-      "Flying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "admecMarshall": {
-    "activeAbilities": [
-      "DoctrinaImperatives"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -27771,20 +27768,36 @@ export const data = {
     "FactionId": "AdeptusMechanicus",
     "GrandAllianceId": "Imperial",
     "name": "Tan Gi'da",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_admecMarshall_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Mechanical"
+    ],
     "passiveAbilities": [
       "ControlEdict"
     ],
+    "activeAbilities": [
+      "DoctrinaImperatives"
+    ],
     "powerMultiplier": 117,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 85,
       "Damage": 35,
       "FixedArmor": 16,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_admecMarshall_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -28104,25 +28117,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Mechanical"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "admecRuststalker": {
-    "activeAbilities": [
-      "CordClaw"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -28131,20 +28128,39 @@ export const data = {
     "FactionId": "AdeptusMechanicus",
     "GrandAllianceId": "Imperial",
     "name": "Exitor-Rho",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_admecRuststalker_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Mechanical",
+      "Camouflage",
+      "Infiltrate",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "OptimizedGait"
     ],
+    "activeAbilities": [
+      "CordClaw"
+    ],
     "powerMultiplier": 117,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 80,
       "Damage": 30,
       "FixedArmor": 17,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_admecRuststalker_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -28459,28 +28475,9 @@ export const data = {
         "DamageProfile": "Energy"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Mechanical",
-      "Camouflage",
-      "Infiltrate",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "admecDestroyer": {
-    "activeAbilities": [
-      "SentinelDirectives"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -28489,20 +28486,39 @@ export const data = {
     "FactionId": "AdeptusMechanicus",
     "GrandAllianceId": "Imperial",
     "name": "Sy-gex",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_admecDestroyer_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "Mechanical",
+      "HeavyWeapon",
+      "Overwatch",
+      "Vehicle"
+    ],
     "passiveAbilities": [
       "HeavyGravCannon"
     ],
+    "activeAbilities": [
+      "SentinelDirectives"
+    ],
     "powerMultiplier": 98,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 95,
       "Damage": 25,
       "FixedArmor": 17,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_admecDestroyer_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -28822,28 +28838,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "Mechanical",
-      "HeavyWeapon",
-      "Overwatch",
-      "Vehicle"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "worldTerminator": {
-    "activeAbilities": [
-      "BloodyFury"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -28852,20 +28849,40 @@ export const data = {
     "FactionId": "WorldEaters",
     "GrandAllianceId": "Chaos",
     "name": "Wrask",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_worldTerminator_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "BlessingsOfKhorne",
+      "TeleportStrike",
+      "RapidAssault",
+      "TerminatorArmour",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "WrathfulDevotion"
     ],
+    "activeAbilities": [
+      "BloodyFury"
+    ],
     "powerMultiplier": 98,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      1
+    ],
     "stats": {
       "Health": 95,
       "Damage": 20,
       "FixedArmor": 28,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_worldTerminator_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -29180,29 +29197,9 @@ export const data = {
         "DamageProfile": "Flame"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "BlessingsOfKhorne",
-      "TeleportStrike",
-      "RapidAssault",
-      "TerminatorArmour",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      1
-    ],
     "type": "Hero"
   },
   "worldJakhal": {
-    "activeAbilities": [
-      "JakhalStimms"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -29211,20 +29208,37 @@ export const data = {
     "FactionId": "WorldEaters",
     "GrandAllianceId": "Chaos",
     "name": "Macer",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_worldJakhal_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BlessingsOfKhorne",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "Skullsmasher"
     ],
+    "activeAbilities": [
+      "JakhalStimms"
+    ],
     "powerMultiplier": 116,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 90,
       "Damage": 30,
       "FixedArmor": 10,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_worldJakhal_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -29539,26 +29553,9 @@ export const data = {
         "DamageProfile": "Chain"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BlessingsOfKhorne",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "worldEightbound": {
-    "activeAbilities": [
-      "OverwhelmingWrath"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -29567,20 +29564,40 @@ export const data = {
     "FactionId": "WorldEaters",
     "GrandAllianceId": "Chaos",
     "name": "Azkor",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_worldEightbound_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BlessingsOfKhorne",
+      "Daemon",
+      "Resilient",
+      "Terrifying",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "BeaconOfRage"
     ],
+    "activeAbilities": [
+      "OverwhelmingWrath"
+    ],
     "powerMultiplier": 90,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 100,
       "Damage": 24,
       "FixedArmor": 20,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_worldEightbound_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -29895,29 +29912,9 @@ export const data = {
         "DamageProfile": "Eviscerate"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BlessingsOfKhorne",
-      "Daemon",
-      "Resilient",
-      "Terrifying",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "worldExecutions": {
-    "activeAbilities": [
-      "MurderousSwing"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -29926,20 +29923,37 @@ export const data = {
     "FactionId": "WorldEaters",
     "GrandAllianceId": "Chaos",
     "name": "Tarvakh",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_worldExecutions_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BlessingsOfKhorne",
+      "RapidAssault"
+    ],
     "passiveAbilities": [
       "TrophyTaker"
     ],
+    "activeAbilities": [
+      "MurderousSwing"
+    ],
     "powerMultiplier": 112,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Crit",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 95,
       "Damage": 48,
       "FixedArmor": 24,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_worldExecutions_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -30254,26 +30268,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BlessingsOfKhorne",
-      "RapidAssault"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Crit",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "worldKharn": {
-    "activeAbilities": [
-      "KillMaimBurn"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -30289,20 +30286,38 @@ export const data = {
     "FactionId": "WorldEaters",
     "GrandAllianceId": "Chaos",
     "name": "Kharn",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_worldKharn_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "BlessingsOfKhorne",
+      "RapidAssault",
+      "FinalJustice"
+    ],
     "passiveAbilities": [
       "TheBetrayer"
     ],
+    "activeAbilities": [
+      "KillMaimBurn"
+    ],
     "powerMultiplier": 91,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 25,
       "FixedArmor": 20,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_worldKharn_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -30617,27 +30632,9 @@ export const data = {
         "DamageProfile": "Eviscerate"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "BlessingsOfKhorne",
-      "RapidAssault",
-      "FinalJustice"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "bloodIntercessor": {
-    "activeAbilities": [
-      "HammerOfWrath"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -30646,20 +30643,38 @@ export const data = {
     "FactionId": "BloodAngels",
     "GrandAllianceId": "Imperial",
     "name": "Mataneo",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_bloodIntercessor_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "TeleportStrike",
+      "Flying",
+      "RapidAssault"
+    ],
     "passiveAbilities": [
       "AggressiveOnslaught"
     ],
+    "activeAbilities": [
+      "HammerOfWrath"
+    ],
     "powerMultiplier": 107,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 40,
       "FixedArmor": 22,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_bloodIntercessor_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -30974,27 +30989,9 @@ export const data = {
         "DamageProfile": "Plasma"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "TeleportStrike",
-      "Flying",
-      "RapidAssault"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "bloodDeathCompany": {
-    "activeAbilities": [
-      "BlackRage"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -31003,20 +31000,38 @@ export const data = {
     "FactionId": "BloodAngels",
     "GrandAllianceId": "Imperial",
     "name": "Lucien",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_bloodDeathCompany_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "RapidAssault",
+      "Resilient",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "VisionsOfHeresy"
     ],
+    "activeAbilities": [
+      "BlackRage"
+    ],
     "powerMultiplier": 88,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 30,
       "FixedArmor": 21,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_bloodDeathCompany_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -31336,27 +31351,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "RapidAssault",
-      "Resilient",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "bloodSanguinary": {
-    "activeAbilities": [
-      "BloodChalice"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -31365,20 +31362,37 @@ export const data = {
     "FactionId": "BloodAngels",
     "GrandAllianceId": "Imperial",
     "name": "Nicodemus",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_bloodSanguinary_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Healer",
+      "RapidAssault"
+    ],
     "passiveAbilities": [
       "SanguinaryPriest"
     ],
+    "activeAbilities": [
+      "BloodChalice"
+    ],
     "powerMultiplier": 129,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 23,
       "FixedArmor": 23,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_bloodSanguinary_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -31693,26 +31707,9 @@ export const data = {
         "DamageProfile": "Chain"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Healer",
-      "RapidAssault"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "bloodMephiston": {
-    "activeAbilities": [
-      "TheQuickening"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -31728,20 +31725,38 @@ export const data = {
     "FactionId": "BloodAngels",
     "GrandAllianceId": "Imperial",
     "name": "Mephiston",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_bloodMephiston_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Psyker",
+      "RapidAssault",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "FuryOfTheAncients"
     ],
+    "activeAbilities": [
+      "TheQuickening"
+    ],
     "powerMultiplier": 73,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 10,
       "FixedArmor": 20,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_bloodMephiston_01"
-    ],
     "upgrades": [
       [
         "upgHpC007",
@@ -32061,27 +32076,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Psyker",
-      "RapidAssault",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "bloodDante": {
-    "activeAbilities": [
-      "LightOfSanguinius"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": false,
@@ -32090,20 +32087,40 @@ export const data = {
     "FactionId": "BloodAngels",
     "GrandAllianceId": "Imperial",
     "name": "Dante",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_bloodDante_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "TeleportStrike",
+      "FinalJustice",
+      "Flying",
+      "RapidAssault",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "LordOfTheHost"
     ],
+    "activeAbilities": [
+      "LightOfSanguinius"
+    ],
     "powerMultiplier": 77,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 11,
       "FixedArmor": 23,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_bloodDante_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -32418,29 +32435,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "TeleportStrike",
-      "FinalJustice",
-      "Flying",
-      "RapidAssault",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "genesBiophagus": {
-    "activeAbilities": [
-      "AberrantHypermorph"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -32449,20 +32446,37 @@ export const data = {
     "FactionId": "Genestealers",
     "GrandAllianceId": "Xenos",
     "name": "Hollan",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_genesBiophagus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Ambush",
+      "Healer"
+    ],
     "passiveAbilities": [
       "TwistedScience"
     ],
+    "activeAbilities": [
+      "AberrantHypermorph"
+    ],
     "powerMultiplier": 127,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 55,
       "Damage": 36,
       "FixedArmor": 12,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_genesBiophagus_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -32777,26 +32791,9 @@ export const data = {
         "DamageProfile": "Toxic"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Ambush",
-      "Healer"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "genesMagus": {
-    "activeAbilities": [
-      "MindControl"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -32805,20 +32802,37 @@ export const data = {
     "FactionId": "Genestealers",
     "GrandAllianceId": "Xenos",
     "name": "Xybia",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_genesMagus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Ambush",
+      "Psyker"
+    ],
     "passiveAbilities": [
       "SpiritualLeader"
     ],
+    "activeAbilities": [
+      "MindControl"
+    ],
     "powerMultiplier": 93,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 55,
       "Damage": 15,
       "FixedArmor": 11,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_genesMagus_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -33138,26 +33152,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Ambush",
-      "Psyker"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "genesPrimus": {
-    "activeAbilities": [
-      "CultDemagogue"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -33166,20 +33163,36 @@ export const data = {
     "FactionId": "Genestealers",
     "GrandAllianceId": "Xenos",
     "name": "Isaak",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_genesPrimus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Ambush"
+    ],
     "passiveAbilities": [
       "DecoysAndMisdirection"
     ],
+    "activeAbilities": [
+      "CultDemagogue"
+    ],
     "powerMultiplier": 115,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 70,
       "Damage": 30,
       "FixedArmor": 14,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_genesPrimus_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -33499,25 +33512,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Ambush"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "genesKelermorph": {
-    "activeAbilities": [
-      "HeroicFusillade"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -33528,20 +33525,37 @@ export const data = {
     "FactionId": "Genestealers",
     "GrandAllianceId": "Xenos",
     "name": "Judh",
+    "releaseStatus": 1743292800000,
+    "unlockQuestIds": [
+      "hero_genesKelermorph_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Ambush",
+      "BeastSnagga"
+    ],
     "passiveAbilities": [
       "HypersensoryAbilities"
     ],
+    "activeAbilities": [
+      "HeroicFusillade"
+    ],
     "powerMultiplier": 126,
-    "releaseStatus": "1743292800000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Crit",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 60,
       "Damage": 25,
       "FixedArmor": 13,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_genesKelermorph_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -33861,26 +33875,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Ambush",
-      "BeastSnagga"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Crit",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "genesPatriarch": {
-    "activeAbilities": [
-      "MightFromBelow"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -33896,20 +33893,39 @@ export const data = {
     "FactionId": "Genestealers",
     "GrandAllianceId": "Xenos",
     "name": "The Patermine",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_genesPatriarch_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "Infiltrate",
+      "Synapse",
+      "Terrifying",
+      "Unstoppable"
+    ],
     "passiveAbilities": [
       "CosmicHorror"
     ],
+    "activeAbilities": [
+      "MightFromBelow"
+    ],
     "powerMultiplier": 84,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 14,
       "FixedArmor": 17,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_genesPatriarch_01"
-    ],
     "upgrades": [
       [
         "upgHpC009",
@@ -34224,28 +34240,9 @@ export const data = {
         "DamageProfile": "Eviscerate"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "Infiltrate",
-      "Synapse",
-      "Terrifying",
-      "Unstoppable"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "custoVexilusPraetor": {
-    "activeAbilities": [
-      "VexillaMagnifica"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -34254,20 +34251,38 @@ export const data = {
     "FactionId": "Custodes",
     "GrandAllianceId": "Imperial",
     "name": "Aesoth",
+    "releaseStatus": 1747929600000,
+    "unlockQuestIds": [
+      "hero_custoVexilusPraetor_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "MartialKatah",
+      "BigTarget",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "StandVigil"
     ],
+    "activeAbilities": [
+      "VexillaMagnifica"
+    ],
     "powerMultiplier": 127,
-    "releaseStatus": "1747929600000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 110,
       "Damage": 58,
       "FixedArmor": 28,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_custoVexilusPraetor_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -34582,27 +34597,9 @@ export const data = {
         "DamageProfile": "Physical"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "MartialKatah",
-      "BigTarget",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "custoAtlacoya": {
-    "activeAbilities": [
-      "TalonsOfTheEmperor"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -34611,20 +34608,37 @@ export const data = {
     "FactionId": "Custodes",
     "GrandAllianceId": "Imperial",
     "name": "Atlacoya",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_custoAtlacoya_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "Parry",
+      "Terrifying"
+    ],
     "passiveAbilities": [
       "DaughterOfTheAbyss"
     ],
+    "activeAbilities": [
+      "TalonsOfTheEmperor"
+    ],
     "powerMultiplier": 105,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 80,
       "Damage": 30,
       "FixedArmor": 19,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_custoAtlacoya_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -34939,26 +34953,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "Parry",
-      "Terrifying"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "custoKyrus": {
-    "activeAbilities": [
-      "VigilanceEternal"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -34967,20 +34964,37 @@ export const data = {
     "FactionId": "Custodes",
     "GrandAllianceId": "Imperial",
     "name": "Tyrith",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_custoKyrus_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "MartialKatah",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "UnwaveringSentinel"
     ],
+    "activeAbilities": [
+      "VigilanceEternal"
+    ],
     "powerMultiplier": 82,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 25,
       "FixedArmor": 22,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_custoKyrus_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -35300,26 +35314,9 @@ export const data = {
         "Range": 2
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "MartialKatah",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "custoBladeChampion": {
-    "activeAbilities": [
-      "MartialInspiration"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -35330,20 +35327,40 @@ export const data = {
     "FactionId": "Custodes",
     "GrandAllianceId": "Imperial",
     "name": "Kariyan",
+    "releaseStatus": 1747929600000,
+    "unlockQuestIds": [
+      "hero_custoBladeChampion_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "MartialKatah",
+      "BeastSnagga",
+      "RapidAssault",
+      "Parry",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "LegacyOfCombat"
     ],
+    "activeAbilities": [
+      "MartialInspiration"
+    ],
     "powerMultiplier": 85,
-    "releaseStatus": "1747929600000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 95,
       "Damage": 21,
       "FixedArmor": 24,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_custoBladeChampion_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -35658,29 +35675,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "MartialKatah",
-      "BeastSnagga",
-      "RapidAssault",
-      "Parry",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "custoTrajann": {
-    "activeAbilities": [
-      "MomentShackle"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": false,
@@ -35689,20 +35686,38 @@ export const data = {
     "FactionId": "Custodes",
     "GrandAllianceId": "Imperial",
     "name": "Trajann",
+    "releaseStatus": 1747929600000,
+    "unlockQuestIds": [
+      "hero_custoTrajann_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "MartialKatah",
+      "CrushingStrike",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "LegendaryCommander"
     ],
+    "activeAbilities": [
+      "MomentShackle"
+    ],
     "powerMultiplier": 94,
-    "releaseStatus": "1747929600000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Block"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 100,
       "Damage": 11,
       "FixedArmor": 25,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_custoTrajann_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -36017,27 +36032,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "MartialKatah",
-      "CrushingStrike",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Block"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "emperNoiseMarine": {
-    "activeAbilities": [
-      "ExcruciatingFrequencies"
-    ],
     "BaseRarity": "Uncommon",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -36046,20 +36043,38 @@ export const data = {
     "FactionId": "EmperorsChildren",
     "GrandAllianceId": "Chaos",
     "name": "Shiron",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_emperNoiseMarine_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "ThrillSeekers",
+      "HeavyWeapon",
+      "SuppressiveFire"
+    ],
     "passiveAbilities": [
       "TerrifyingCrescendo"
     ],
+    "activeAbilities": [
+      "ExcruciatingFrequencies"
+    ],
     "powerMultiplier": 97,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 85,
       "Damage": 6,
       "FixedArmor": 20,
       "ProgressionIndex": 3
     },
-    "unlockQuestIds": [
-      "hero_emperNoiseMarine_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -36379,27 +36394,9 @@ export const data = {
         "Range": 3
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "ThrillSeekers",
-      "HeavyWeapon",
-      "SuppressiveFire"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "emperFlawlessBlade": {
-    "activeAbilities": [
-      "DaemonicPatrons"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -36408,20 +36405,37 @@ export const data = {
     "FactionId": "EmperorsChildren",
     "GrandAllianceId": "Chaos",
     "name": "Hascule",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_emperFlawlessBlade_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "ThrillSeekers",
+      "Parry"
+    ],
     "passiveAbilities": [
       "EcstaticSlaughter"
     ],
+    "activeAbilities": [
+      "DaemonicPatrons"
+    ],
     "powerMultiplier": 108,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 95,
       "Damage": 15,
       "FixedArmor": 19,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_emperFlawlessBlade_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -36736,26 +36750,9 @@ export const data = {
         "DamageProfile": "Piercing"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "ThrillSeekers",
-      "Parry"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "emperKakophonist": {
-    "activeAbilities": [
-      "DoomSiren"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -36764,20 +36761,36 @@ export const data = {
     "FactionId": "EmperorsChildren",
     "GrandAllianceId": "Chaos",
     "name": "Adamatar",
+    "releaseStatus": "released",
+    "unlockQuestIds": [
+      "hero_emperKakophonist_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "ThrillSeekers"
+    ],
     "passiveAbilities": [
       "ObsessiveAnnunciation"
     ],
+    "activeAbilities": [
+      "DoomSiren"
+    ],
     "powerMultiplier": 120,
-    "releaseStatus": "released",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 100,
       "Damage": 17,
       "FixedArmor": 23,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_emperKakophonist_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -37092,25 +37105,9 @@ export const data = {
         "DamageProfile": "Eviscerate"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "ThrillSeekers"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "emperExultant": {
-    "activeAbilities": [
-      "EuphoricStrikes"
-    ],
     "BaseRarity": "Epic",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -37121,20 +37118,37 @@ export const data = {
     "FactionId": "EmperorsChildren",
     "GrandAllianceId": "Chaos",
     "name": "Laviscus",
+    "releaseStatus": 1767225600000,
+    "unlockQuestIds": [
+      "hero_emperExultant_01"
+    ],
+    "Movement": 3,
+    "traits": [
+      "Hero",
+      "ThrillSeekers",
+      "CrushingStrike"
+    ],
     "passiveAbilities": [
       "RefusalToBeOutdone"
     ],
+    "activeAbilities": [
+      "EuphoricStrikes"
+    ],
     "powerMultiplier": 132,
-    "releaseStatus": "1767225600000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      2
+    ],
     "stats": {
       "Health": 90,
       "Damage": 40,
       "FixedArmor": 21,
       "ProgressionIndex": 9
     },
-    "unlockQuestIds": [
-      "hero_emperExultant_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -37449,26 +37463,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 3,
-    "traits": [
-      "Hero",
-      "ThrillSeekers",
-      "CrushingStrike"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      2
-    ],
     "type": "Hero"
   },
   "emperLucius": {
-    "activeAbilities": [
-      "LashOfTorment"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": false,
@@ -37477,20 +37474,37 @@ export const data = {
     "FactionId": "EmperorsChildren",
     "GrandAllianceId": "Chaos",
     "name": "Lucius",
+    "releaseStatus": 1754179200000,
+    "unlockQuestIds": [
+      "hero_emperLucius_01"
+    ],
+    "Movement": 4,
+    "traits": [
+      "Hero",
+      "ThrillSeekers",
+      "Parry"
+    ],
     "passiveAbilities": [
       "ArmourOfShriekingSouls"
     ],
+    "activeAbilities": [
+      "LashOfTorment"
+    ],
     "powerMultiplier": 101,
-    "releaseStatus": "1754179200000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 13,
       "FixedArmor": 20,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_emperLucius_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -37805,26 +37819,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 4,
-    "traits": [
-      "Hero",
-      "ThrillSeekers",
-      "Parry"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "votanIronmaster": {
-    "activeAbilities": [
-      "GravitonRifle"
-    ],
     "BaseRarity": "Rare",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": true,
@@ -37835,20 +37832,37 @@ export const data = {
     "FactionId": "LeaguesOfVotann",
     "GrandAllianceId": "Xenos",
     "name": "Vynn",
+    "releaseStatus": 1770249600000,
+    "unlockQuestIds": [
+      "hero_votanIronmaster_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "PrioritisedEfficiency",
+      "Mechanic"
+    ],
     "passiveAbilities": [
       "EcogSupport"
     ],
+    "activeAbilities": [
+      "GravitonRifle"
+    ],
     "powerMultiplier": 142,
-    "releaseStatus": "1770249600000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Defensive",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 80,
       "Damage": 25,
       "FixedArmor": 16,
       "ProgressionIndex": 6
     },
-    "unlockQuestIds": [
-      "hero_votanIronmaster_01"
-    ],
     "upgrades": [
       [
         "upgHpC002",
@@ -38163,26 +38177,9 @@ export const data = {
         "DamageProfile": "Power"
       }
     ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "PrioritisedEfficiency",
-      "Mechanic"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Defensive",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
-    ],
     "type": "Hero"
   },
   "votanUthar": {
-    "activeAbilities": [
-      "AncestralFortune"
-    ],
     "BaseRarity": "Legendary",
     "eligibilityRequirements": {
       "canDropIfHeroUnlocked": false,
@@ -38191,20 +38188,37 @@ export const data = {
     "FactionId": "LeaguesOfVotann",
     "GrandAllianceId": "Xenos",
     "name": "Uthar",
+    "releaseStatus": 1770249600000,
+    "unlockQuestIds": [
+      "hero_votanUthar_01"
+    ],
+    "Movement": 2,
+    "traits": [
+      "Hero",
+      "PrioritisedEfficiency",
+      "Resilient"
+    ],
     "passiveAbilities": [
       "GrimEfficiency"
     ],
+    "activeAbilities": [
+      "AncestralFortune"
+    ],
     "powerMultiplier": 81,
-    "releaseStatus": "1770249600000",
+    "itemSlots": [
+      "I_Crit",
+      "I_Block",
+      "I_Booster_Crit"
+    ],
+    "itemSlotsRelic": [
+      0
+    ],
     "stats": {
       "Health": 90,
       "Damage": 19,
       "FixedArmor": 23,
       "ProgressionIndex": 12
     },
-    "unlockQuestIds": [
-      "hero_votanUthar_01"
-    ],
     "upgrades": [
       [
         "upgHpC015",
@@ -38523,20 +38537,6 @@ export const data = {
         "DamageProfile": "Energy",
         "Range": 2
       }
-    ],
-    "Movement": 2,
-    "traits": [
-      "Hero",
-      "PrioritisedEfficiency",
-      "Resilient"
-    ],
-    "itemSlots": [
-      "I_Crit",
-      "I_Block",
-      "I_Booster_Crit"
-    ],
-    "itemSlotsRelic": [
-      0
     ],
     "type": "Hero"
   }

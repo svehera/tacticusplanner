@@ -20,7 +20,7 @@ export const UnitSchema = z
         heroProgressionStepsPerUnit: z.any(),
         lineup: LineupSchema,
         npc: z.any(),
-        sorting: z.array(z.string().brand('heroId')),
+        sorting: z.array(z.string().brand<'HeroId'>()),
         summons: z.any(),
         traitPowerModifiers: z.any(),
         upgradeSlots: z.any(),

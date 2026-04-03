@@ -13,3 +13,5 @@
 		- export as JSON and import it in the planner with `import data from './data.json'`; gives looser types but is more performant.
 - The recommened way to consume the generated game files in the planner is to symlink. This gives a live connection to the generated files without copying.
 	- Linux / MaxOS: `ln -s /path/to/original_file_or_directory /path/to/new_symlink`
+- When constructing validators, remember we are typically checking for structure and not for specific values
+	- e.g. The game config has the damage types in it. If we validated against our list of damage types and an error occured, it's our validator that's wrong.

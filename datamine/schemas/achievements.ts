@@ -7,8 +7,8 @@ const RewardSchema = CountStringSchemaGenerator('gems', 'elderShopCurrency', 'xp
 const AchievementMilestoneSchema = z.strictObject({ goal: z.int(), reward: RewardSchema });
 
 export const AchievementSchema = z.strictObject({
-    achievementId: z.string().brand('achievementId'),
-    taskId: z.string().brand('taskId'),
+    achievementId: z.string().brand<'AchievementId'>(),
+    taskId: z.string().brand<'TaskId'>(),
     taskTarget: z
         .union([z.int().positive(), RaritySchema, z.literal('gold')])
         .nullish()
