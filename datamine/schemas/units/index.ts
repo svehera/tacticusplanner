@@ -1,11 +1,16 @@
 import { z } from 'zod';
 import { renameKeys } from '../../utils';
 import { LineupSchema } from './lineup';
+import { AbilitiesSchema } from './abilities';
 
 export const UnitSchema = z
     .strictObject({
-        abilities: z.any(),
-        abilityPowerCurve: z.any(),
+        abilities: AbilitiesSchema,
+        abilityPowerCurve: z.strictObject({
+            active: z.array(z.int().positive()).length(65),
+            passive: z.array(z.int().positive()).length(65),
+            relic: z.array(z.int().positive()).length(10),
+        }),
         abilityPowerModifiers: z.any(),
         abilityUpgradeCosts: z.any(),
         abilityUpgradeCostsMoW: z.any(),

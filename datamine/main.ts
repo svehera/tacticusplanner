@@ -65,3 +65,4 @@ saveToTsConst(parsed.clientGameConfig.battles.guildBoss, 'guildBoss');
 saveToTsConst(parsed.clientGameConfig.battles.salvageRun, 'salvageRun');
 saveToTsConst(parsed.clientGameConfig.units.traits, 'traits');
 saveToTsConst(parsed.clientGameConfig.units.heros, 'heros');
+saveToTsConst(parsed.clientGameConfig.units.abilities, 'abilities');

@@ -1,6 +1,6 @@
 
 // This file is auto-generated. Do not edit directly.
-// Generated on 2026-04-03T21:08:27.452Z
+// Generated on 2026-04-03T22:34:05.921Z
 export const data = [
   "Flying",
   "HeavyWeapon",
