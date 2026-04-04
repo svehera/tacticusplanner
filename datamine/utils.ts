@@ -131,3 +131,8 @@ export const ArmorUpgradeIdSchema = z.templateLiteral([
 ]);
 
 export const UpgradeIdSchema = z.union([HealthUpgradeIdSchema, DamageUpgradeIdSchema, ArmorUpgradeIdSchema]);
+
+export const UNCAPPED_LEVELS = 65;
+export const LEVEL_CAP = 55; // Mythic goes to 65 but players are capped lower during the Mythic rollout
+export const RELIC_LEVELS = 10;
+export const MOW_MYTHIC_ABILITY_LEVELS = 4;
