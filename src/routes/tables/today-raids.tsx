@@ -49,7 +49,6 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
                                 showPlannedRaidLocationsOnly={true}
-                                tooltipRelatedCharactersOnly={true}
                             />
                         ))}
                         {completedMaterialRaids.map((raid, index) => (
@@ -60,7 +59,6 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
                                 showPlannedRaidLocationsOnly={true}
-                                tooltipRelatedCharactersOnly={true}
                             />
                         ))}
                         {completedShardRaids.map((raid, index) => (
@@ -71,7 +69,6 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                                 showRelatedCharacters={false}
                                 showAdditionalInfo={false}
                                 showPlannedRaidLocationsOnly={true}
-                                tooltipRelatedCharactersOnly={true}
                             />
                         ))}
                     </div>
