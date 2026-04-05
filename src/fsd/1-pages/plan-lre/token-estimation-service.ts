@@ -805,7 +805,12 @@ export class TokenEstimationService {
         const totalPoints = progress.syncedProgress.currentPoints;
         const currentCurrency = progress.syncedProgress.currentCurrency;
         let currentShards = progress.syncedProgress.currentShards;
-        const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
+        // The stored value mirrors the Tacticus API: 1-based count of chests opened
+        // (e.g. 2 = two chests opened). -1 is the sentinel when the API omits the field
+        // (nothing claimed). Convert to a 0-based array index by subtracting 1, clamped
+        // at -1 so that both the sentinel (-1) and "nothing opened" (0 from API) map to
+        // index -1, which safely returns undefined when used as chestMilestones[-1].
+        const lastClaimedChestIndex = Math.max(-1, progress.syncedProgress.currentClaimedChestIndex - 1);
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
         const totalCurrency = currentCurrency + (chestMilestones[lastClaimedChestIndex]?.totalNeededCurrency ?? 0);
