@@ -23,7 +23,6 @@ interface Props {
     widthClass?: string;
     compactRaidLocations?: boolean;
     showPlannedRaidLocationsOnly?: boolean;
-    tooltipRelatedCharactersOnly?: boolean;
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
@@ -71,7 +70,6 @@ const Component: React.FC<Props> = ({
     widthClass = 'w-67',
     compactRaidLocations = true,
     showPlannedRaidLocationsOnly = false,
-    tooltipRelatedCharactersOnly = false,
 }) => {
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
@@ -120,7 +118,7 @@ const Component: React.FC<Props> = ({
 
     const iconTooltipContent = (
         <div>
-            {!tooltipRelatedCharactersOnly && upgradeEstimate.label}
+            {upgradeEstimate.label}
             <ul className="ps-[15px]">
                 {relatedUnitTooltipNames.map(nameItem => (
                     <li
@@ -242,7 +240,6 @@ export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
         previous.maxLocations === next.maxLocations &&
         previous.showAdditionalInfo === next.showAdditionalInfo &&
         previous.showRelatedCharacters === next.showRelatedCharacters &&
-        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly &&
-        previous.tooltipRelatedCharactersOnly === next.tooltipRelatedCharactersOnly
+        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly
     );
 });
