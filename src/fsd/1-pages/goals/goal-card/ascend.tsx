@@ -1,7 +1,9 @@
+/* eslint-disable import-x/no-internal-modules */
 import { ArrowForward } from '@mui/icons-material';
+import { sum } from 'lodash';
 import React from 'react';
 
-import { RarityMapper } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -10,6 +12,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterAscendGoal } from '@/fsd/4-entities/goal';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import { IGoalEstimate, UpgradesService } from '@/fsd/3-features/goals';
 
 import { GoalEstimateRow } from './estimate-row';
@@ -28,6 +31,14 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDa
     const minStars = RarityMapper.toStars[goal.rarityEnd];
     const isMinStars = minStars === goal.starsEnd;
     const shardsData = UpgradesService.getShardsForGoal(characters, mows, goal);
+    const noOrbs: Record<Rarity, number> = {
+        [Rarity.Common]: 0,
+        [Rarity.Uncommon]: 0,
+        [Rarity.Rare]: 0,
+        [Rarity.Epic]: 0,
+        [Rarity.Legendary]: 0,
+        [Rarity.Mythic]: 0,
+    };
 
     return (
         <div className="flex flex-col gap-2">
@@ -46,6 +57,11 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDa
                     </>
                 )}
             </div>
+            {sum(Object.entries(goalEstimate.orbsEstimate?.orbs ?? noOrbs).map(([_, orbCount]) => orbCount)) > 0 && (
+                <div>
+                    <OrbsTotal alliance={goal.unitAlliance} orbs={goalEstimate.orbsEstimate?.orbs ?? noOrbs} />
+                </div>
+            )}
 
             {shardsData.totalIncrementalShardsNeeded > 0 && (
                 <div>
