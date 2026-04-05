@@ -1,10 +1,20 @@
+/* eslint-disable import-x/no-internal-modules */
 import { describe, it, expect } from 'vitest';
 
-import { LreTrackId } from '@/fsd/4-entities/lre';
+import { ILreTeam } from '@/models/interfaces';
 
-import { ILreTeam } from '@/fsd/3-features/lre';
+import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { ILreTrackProgress, ILreRequirements, ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
+
+import {
+    ILeProgress,
+    ILreProgressModel,
+    ILreTrackProgress,
+    ILreRequirements,
+    ILreBattleProgress,
+    ILreBattleRequirementsProgress,
+} from './lre.models';
 import { TokenEstimationService, TokenUse, milestonesAndPoints } from './token-estimation-service';
 
 function createRequirementsProgress(reqs: ILreRequirements[]): ILreBattleRequirementsProgress[] {
@@ -86,6 +96,53 @@ const gammaTrack = createTrack('gamma', 3, [
     createRequirement('Direct', 50),
     createRequirement('RapidAssault', 50),
 ]);
+
+/**
+ * Creates a minimal ILreProgressModel with the given synced progress.
+ * The synced path only reads syncedProgress fields, so all other
+ * model properties can be left as empty/dummy values.
+ */
+function makeSyncedProgressModel(syncedProgress: ILeProgress): ILreProgressModel {
+    return {
+        eventId: LegendaryEventEnum.Dante,
+        eventName: 'Dante',
+        notes: '',
+        occurrenceProgress: [],
+        tracksProgress: [],
+        regularMissions: [],
+        premiumMissions: [],
+        syncedProgress,
+        pointsMilestones: [],
+        chestsMilestones: [],
+        // progression is not used in the synced code path
+        progression: undefined as unknown as ILreProgressModel['progression'],
+        shardsPerChest: 25,
+    };
+}
+
+function makeSyncedProgress({
+    currentCurrency,
+    currentClaimedChestIndex,
+    currentShards,
+    currentPoints = 0,
+}: {
+    currentCurrency: number;
+    currentClaimedChestIndex: number;
+    currentShards: number;
+    currentPoints?: number;
+}): ILeProgress {
+    return {
+        lastUpdateMillisUtc: 0,
+        hasUsedAdForExtraTokenToday: false,
+        currentTokens: 6,
+        maxTokens: 12,
+        currentClaimedChestIndex,
+        currentPoints,
+        currentCurrency,
+        currentShards,
+        hasPremiumPayout: false,
+    };
+}
 
 describe('TokenEstimationService', () => {
     describe('getFurthestMilestoneAchievedSmokeTest', () => {
@@ -890,6 +947,86 @@ describe('TokenEstimationService', () => {
                     },
                 ] as ILreTeam[])
             ).toBe(2); // the first two teams clear everything, the other three are unnecessary.
+        });
+    });
+
+    describe('computeCurrentProgress — first-attempt unlock point thresholds', () => {
+        it('requires exactly 13,000 points to unlock on a first attempt with no free missions', () => {
+            // Fresh start: no currency from missions, no chests opened, no shards.
+            // addlCurrencyForNextMilestone = chestMilestones[15].totalNeededCurrency - 0 = 3,350
+            // Point milestones drain 3,350 → unlock at 13,000 pts (not 13,500).
+            const model = makeSyncedProgressModel(
+                makeSyncedProgress({ currentCurrency: 0, currentClaimedChestIndex: -1, currentShards: 0 })
+            );
+            const progress = TokenEstimationService.computeCurrentProgress(model, Rarity.Legendary, RarityStars.None);
+            expect(progress.addlPointsForNextMilestone).toBe(13_000);
+        });
+
+        it('requires only 12,500 points to unlock when 10 free missions are completed (250 currency)', () => {
+            // 10 free missions × 25 currency each = 250 currency available.
+            // addlCurrencyForNextMilestone = 3,350 - 250 = 3,100 — milestone payouts
+            // drain to zero at the 12,500-point milestone (cumulative payout 3,210 ≥ 3,100).
+            // Note: the threshold between 12,500 and 13,000 is 140 currency (≈6 missions);
+            // both 9 and 10 completed missions produce the same 12,500-point result.
+            const model = makeSyncedProgressModel(
+                makeSyncedProgress({ currentCurrency: 250, currentClaimedChestIndex: -1, currentShards: 0 })
+            );
+            const progress = TokenEstimationService.computeCurrentProgress(model, Rarity.Legendary, RarityStars.None);
+            expect(progress.addlPointsForNextMilestone).toBe(12_500);
+        });
+
+        it('still requires 13,000 points when fewer than 6 free missions are completed (5 missions = 125 currency)', () => {
+            // 5 free missions × 25 currency each = 125 currency — below the 140-currency
+            // threshold that would reduce the requirement to 12,500 points.
+            // addlCurrencyForNextMilestone = 3,350 - 125 = 3,225, which exhausts point
+            // milestone payouts (cumulative 3,210 at 12,500 pts) without covering the full
+            // amount, so the 13,000-point milestone is required. This means 12,750 points
+            // alone is not sufficient to unlock.
+            const model = makeSyncedProgressModel(
+                makeSyncedProgress({ currentCurrency: 125, currentClaimedChestIndex: -1, currentShards: 0 })
+            );
+            const progress = TokenEstimationService.computeCurrentProgress(model, Rarity.Legendary, RarityStars.None);
+            expect(progress.addlPointsForNextMilestone).toBe(13_000);
+        });
+
+        it('reports 13,000 total points needed when player has 1,444 pts, 65 currency, 2 chests opened (API case)', () => {
+            // API data: currentClaimedChestIndex=2 (1-based count of opened chests), stored as-is.
+            // computeCurrentProgress normalizes to 0-based index: 2-1=1.
+            // chestMilestones[1] = { shards: 50, totalNeededCurrency: 140 }.
+            // totalCurrency = 65 + 140 = 205.
+            // addlCurrencyForNextMilestone = 3,350 − 205 = 3,145.
+            // Point milestones drain 3,145 → threshold crosses zero at 13,000 pts.
+            // So the UI should display "1,444 / 13,000", not "1,444 / 13,500".
+            const model = makeSyncedProgressModel(
+                makeSyncedProgress({
+                    currentPoints: 1444,
+                    currentCurrency: 65,
+                    currentShards: 50,
+                    currentClaimedChestIndex: 2, // raw 1-based API count stored as-is
+                })
+            );
+            const progress = TokenEstimationService.computeCurrentProgress(model, Rarity.Legendary, RarityStars.None);
+            expect(progress.totalPoints + progress.addlPointsForNextMilestone).toBe(13_000);
+        });
+
+        it('reports 12,500 total points needed when player has 12,261 pts, 160 currency, 15 chests opened (API case)', () => {
+            // API data: currentClaimedChestIndex=15 (1-based count of opened chests), stored as-is.
+            // computeCurrentProgress normalizes to 0-based index: 15-1=14.
+            // chestMilestones[14] = { shards: 375, totalNeededCurrency: 3,000 }.
+            // totalCurrency = 160 + 3,000 = 3,160.
+            // addlCurrencyForNextMilestone = 3,350 − 3,160 = 190.
+            // The 12,500-pt milestone pays out 300 engrams, which covers the 190 remaining.
+            // So the UI should display "12,261 / 12,500", not "12,261 / 13,500".
+            const model = makeSyncedProgressModel(
+                makeSyncedProgress({
+                    currentPoints: 12_261,
+                    currentCurrency: 160,
+                    currentShards: 375,
+                    currentClaimedChestIndex: 15, // raw 1-based API count stored as-is
+                })
+            );
+            const progress = TokenEstimationService.computeCurrentProgress(model, Rarity.Legendary, RarityStars.None);
+            expect(progress.totalPoints + progress.addlPointsForNextMilestone).toBe(12_500);
         });
     });
 });
