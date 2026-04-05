@@ -420,7 +420,7 @@ export const WarOffense2 = () => {
                                     ).map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
                                     mows={
                                         (
-                                            team.mows
+                                            (team.mows ?? [])
                                                 ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
                                                 .filter(m => m !== undefined) as IMow2[]
                                         ).map(mow => Teams2Service.capMowAtRarity(mow, rarityCap)) ?? []
