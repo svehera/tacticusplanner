@@ -1,6 +1,5 @@
 import { OnslaughtTrackId } from './models';
 
-export const ROMAN_MAP: Record<string, number> = { I: 1, V: 5, X: 10, L: 50, C: 100 };
 export const GREEK_ZONES = ['Alpha', 'Beta', 'Gamma', 'Delta', 'Epsilon', 'Zeta'];
 
 /** Utility to convert Roman Numerals to Numbers for search */

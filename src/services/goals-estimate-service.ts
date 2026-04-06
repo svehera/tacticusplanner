@@ -2,13 +2,13 @@ import { sum } from 'lodash';
 
 import { IGoalEstimate } from '../fsd/3-features/goals/goals.models';
 
-export interface IGoalEstimateAggregate {
+interface IGoalEstimateAggregate {
     oTokensTotal: number;
     daysLeft: number;
     daysTotal: number;
 }
 
-export class GoalsEstimateService {
+class GoalsEstimateService {
     public getAggregatedGoalEstimate(estimates: IGoalEstimate[]): IGoalEstimateAggregate | undefined {
         if (estimates.length === 0) {
             return undefined;

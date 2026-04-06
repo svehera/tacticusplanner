@@ -2,7 +2,7 @@ import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { IEquipment } from '@/fsd/4-entities/equipment';
 
-export type RosterSnapshotsImageProperty = [HTMLImageElement | undefined, 'loaded' | 'loading' | 'failed'];
+type RosterSnapshotsImageProperty = [HTMLImageElement | undefined, 'loaded' | 'loading' | 'failed'];
 
 // Define the shape of your assets
 export interface RosterSnapshotAssets {

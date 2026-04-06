@@ -105,12 +105,12 @@ export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 27_000, stars: 8, round: 1, packsPerRound: 0 },
 ];
 
-export interface PointMilestone {
+interface PointMilestone {
     points: number;
     currencyPayout: number;
 }
 
-export const pointMilestones: readonly PointMilestone[] = [
+const pointMilestones: readonly PointMilestone[] = [
     { points: 100, currencyPayout: 25 },
     { points: 250, currencyPayout: 30 },
     { points: 500, currencyPayout: 35 },
@@ -201,7 +201,7 @@ interface ShardMilestone {
     totalNeededCurrency: PositiveInteger<number>;
 }
 
-export const chestMilestones: readonly ShardMilestone[] = [
+const chestMilestones: readonly ShardMilestone[] = [
     { shards: 25, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 60 },
     { shards: 50, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 140 },
     { shards: 75, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 240 },
@@ -256,14 +256,14 @@ export const chestMilestones: readonly ShardMilestone[] = [
     { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32_450 },
 ];
 
-export interface StarMilestone {
+interface StarMilestone {
     totalShards: number;
     incrementalShards: number;
     rarity: Rarity;
     stars: RarityStars;
 }
 
-export const ascensionMilestones: readonly StarMilestone[] = [
+const ascensionMilestones: readonly StarMilestone[] = [
     { totalShards: 400, incrementalShards: 400, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars },
     { totalShards: 520, incrementalShards: 120, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars },
     { totalShards: 700, incrementalShards: 180, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars },

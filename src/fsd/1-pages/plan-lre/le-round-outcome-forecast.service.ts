@@ -7,9 +7,9 @@ import { ILreProgressModel } from './lre.models';
 import { EventProgress } from './token-estimation-service';
 
 type RoundNumber = 1 | 2 | 3;
-export type LeForecastRoundStatus = 'finished' | 'active' | 'upcoming' | 'future';
+type LeForecastRoundStatus = 'finished' | 'active' | 'upcoming' | 'future';
 
-export interface LeForecastRoundConfig {
+interface LeForecastRoundConfig {
     round: RoundNumber;
     freeMissions: number;
     buyBonusDelivery: boolean;
@@ -18,7 +18,7 @@ export interface LeForecastRoundConfig {
     buyOhSoCloseShards: boolean;
 }
 
-export interface LeForecastRoundResult {
+interface LeForecastRoundResult {
     round: RoundNumber;
     status: LeForecastRoundStatus;
     message?: string;

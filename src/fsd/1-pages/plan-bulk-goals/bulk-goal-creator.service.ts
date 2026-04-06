@@ -9,7 +9,7 @@ import { IUnit } from '@/fsd/4-entities/unit';
 export type GoalCategory = 'Unlock' | 'Ascend' | 'Rank' | 'Abilities';
 export type RankStep = { rank: Rank; point5: boolean };
 export type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
-export type GoalOrder = 'character' | 'type';
+type GoalOrder = 'character' | 'type';
 
 export type BulkUnitEntry = {
     unit: IUnit | undefined;

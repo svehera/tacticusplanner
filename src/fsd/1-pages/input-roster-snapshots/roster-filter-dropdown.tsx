@@ -17,26 +17,26 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 type SectionId = 'teams' | 'teamTypes' | 'legendaryEvents';
 
-export interface RosterFilterTeamOption {
+interface RosterFilterTeamOption {
     name: string;
     isSelected: boolean;
 }
 
-export interface RosterFilterTeamTypeOption {
+interface RosterFilterTeamTypeOption {
     token: string;
     label: string;
     isSelected: boolean;
     disabled: boolean;
 }
 
-export interface RosterFilterLegendaryTrackOption {
+interface RosterFilterLegendaryTrackOption {
     token: string;
     label: string;
     isSelected: boolean;
     disabled: boolean;
 }
 
-export interface RosterFilterLegendaryEventOption {
+interface RosterFilterLegendaryEventOption {
     id: string | number;
     label: string;
     icon: string;
