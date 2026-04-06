@@ -51,7 +51,6 @@
         "@testing-library/dom": "^10.4.1",
         "@testing-library/jest-dom": "^6.9.1",
         "@testing-library/react": "^16.3.2",
-        "@testing-library/user-event": "^14.6.1",
         "@types/lodash": "^4.17.20",
         "@types/node": "^20.19.25",
         "@types/react": "^19.2.13",
@@ -96,8 +95,7 @@
         "vite-bundle-visualizer": "^1.2.1",
         "vite-plugin-image-optimizer": "^1.1.9",
         "vite-tsconfig-paths": "^5.1.4",
-        "vitest": "^3.2.4",
-        "zod": "^4.3.6"
+        "vitest": "^3.2.4"
     },
     "scripts": {
         "start": "vite",
