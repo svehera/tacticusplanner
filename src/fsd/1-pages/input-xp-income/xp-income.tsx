@@ -11,21 +11,25 @@ import { BookSelect } from '@/fsd/5-shared/ui/selects';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
-
 import { DecimalSpinner } from './decimal-spinner';
-import { ArenaLeague } from './models';
+import { ArenaLeague, XpIncomeState } from './models';
 import { useDebouncedState } from './use-debounced-state';
-import { kBlueStarCharacters, kEliteEnergyPerRaid, kNonEliteEnergyPerRaid, XpIncomeService } from './xp-income.service';
+import {
+    blueStarCharacters,
+    bossesPerLoop,
+    eliteEnergyPerRaid,
+    nonEliteEnergyPerRaid,
+    XpIncomeService,
+} from './xp-income.service';
 
-const kArenaName: Record<ArenaLeague, string> = {
-    [ArenaLeague.kHonorGuard]: 'Honor Guard',
-    [ArenaLeague.kCaptain]: 'Captains',
-    [ArenaLeague.kChapterMaster]: 'Chapter Master',
+const arenaName: Record<ArenaLeague, string> = {
+    [ArenaLeague.honorGuard]: 'Honor Guard',
+    [ArenaLeague.captain]: 'Captains',
+    [ArenaLeague.chapterMaster]: 'Chapter Master',
 };
 
-const kEliteEnergyMax = 600;
-const kNonEliteEnergyMax = 600;
+const eliteEnergyMax = 600;
+const nonEliteEnergyMax = 600;
 
 export const XpIncome: React.FC = () => {
     const { characters, xpIncome } = useContext(StoreContext);
@@ -37,7 +41,7 @@ export const XpIncome: React.FC = () => {
         arenaLeague,
         loopsRaids,
         clearRarity,
-        useAtForBooks,
+        useATForBooks,
         hasBlueStarMoW,
         additionalBooksPerWeek,
         onslaughtBlueStar,
@@ -81,39 +85,32 @@ export const XpIncome: React.FC = () => {
         [dispatch, xpIncome]
     );
 
+    const blueStarCharIds = useMemo(
+        () =>
+            blueStarCharacters
+                .filter(
+                    char =>
+                        (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ?? RarityStars.None) >=
+                        RarityStars.OneBlueStar
+                )
+                .map(char => char.id),
+        [resolvedCharacters]
+    );
+
     const estimatedBooksPerWeek = useMemo(
         () =>
             XpIncomeService.estimateWeeklyBookIncome(
-                arenaLeague,
-                loopsRaids,
+                xpIncome,
+                blueStarCharIds,
                 raidLoops,
                 extraBossesAfterLoop,
-                clearRarity,
                 additionalBosses,
-                useAtForBooks,
-                kBlueStarCharacters
-                    .filter(
-                        char =>
-                            (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ?? RarityStars.None) >=
-                            RarityStars.OneBlueStar
-                    )
-                    .map(char => char.id),
-                hasBlueStarMoW,
-                incursionLegendaryLevel,
-                onslaughtBlueStar,
                 eliteEnergyPerDay,
-                nonEliteEnergyPerDay,
-                additionalBooksPerWeek
+                nonEliteEnergyPerDay
             ),
         [
-            arenaLeague,
-            loopsRaids,
-            clearRarity,
-            useAtForBooks,
-            hasBlueStarMoW,
-            additionalBooksPerWeek,
-            onslaughtBlueStar,
-            incursionLegendaryLevel,
+            xpIncome,
+            blueStarCharIds,
             raidLoops,
             extraBossesAfterLoop,
             additionalBosses,
@@ -128,7 +125,7 @@ export const XpIncome: React.FC = () => {
         <div className="mx-auto max-w-2xl rounded-lg bg-white p-5 font-sans text-gray-800 shadow-lg dark:bg-gray-900 dark:text-white">
             <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
                 <DecimalSpinner
-                    label="Legendary Books / Day"
+                    label={`${Rarity[defaultBookToUse ?? Rarity.Legendary]} Books / Day`}
                     value={manualBooksPerDay}
                     onChange={value => dispatchUpdate('manualBooksPerDay', value)}
                 />
@@ -158,7 +155,7 @@ export const XpIncome: React.FC = () => {
                         .filter(league => typeof league === 'number')
                         .map(league => (
                             <option key={league} value={league}>
-                                {kArenaName[league]}
+                                {arenaName[league]}
                             </option>
                         ))}
                 </select>
@@ -169,6 +166,7 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="loopsRaids"
                             value="yes"
                             checked={loopsRaids === 'yes'}
                             onChange={() => dispatchUpdate('loopsRaids', 'yes')}
@@ -179,6 +177,7 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="loopsRaids"
                             value="no"
                             checked={loopsRaids === 'no'}
                             onChange={() => dispatchUpdate('loopsRaids', 'no')}
@@ -210,7 +209,7 @@ export const XpIncome: React.FC = () => {
                             <input
                                 type="range"
                                 min="0"
-                                max="5"
+                                max={bossesPerLoop - 1}
                                 value={extraBossesAfterLoop}
                                 onChange={event => setExtraBossesAfterLoop(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-orange-500"
@@ -252,9 +251,10 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="useATForBooks"
                             value="yes"
-                            checked={useAtForBooks === 'yes'}
-                            onChange={() => dispatchUpdate('useAtForBooks', 'yes')}
+                            checked={useATForBooks === 'yes'}
+                            onChange={() => dispatchUpdate('useATForBooks', 'yes')}
                             className="mr-2"
                         />{' '}
                         Yes
@@ -262,20 +262,21 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="useATForBooks"
                             value="no"
-                            checked={useAtForBooks === 'no'}
-                            onChange={() => dispatchUpdate('useAtForBooks', 'no')}
+                            checked={useATForBooks === 'no'}
+                            onChange={() => dispatchUpdate('useATForBooks', 'no')}
                             className="mr-2"
                         />{' '}
                         No
                     </label>
                 </div>
 
-                {useAtForBooks === 'yes' && (
+                {useATForBooks === 'yes' && (
                     <div className="mt-3 rounded-md border-l-4 border-yellow-500 bg-gray-100 p-3 dark:bg-gray-700">
                         <p className="mb-2 font-medium">Residual AT Sources:</p>
                         <div className="flex flex-wrap gap-4">
-                            {kBlueStarCharacters.map(char => {
+                            {blueStarCharacters.map(char => {
                                 const isStarred =
                                     (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ??
                                         RarityStars.None) >= RarityStars.OneBlueStar;
@@ -284,7 +285,7 @@ export const XpIncome: React.FC = () => {
                                     <div
                                         key={char.id}
                                         className="relative"
-                                        title={`${char.id} (${char.shardsPerWeek} S/W)`}>
+                                        title={`${CharactersService.charactersData.find(c => c.snowprintId === char.id)?.shortName ?? char.id} (${char.shardsPerWeek} S/W)`}>
                                         {
                                             <UnitShardIcon
                                                 icon={
@@ -317,6 +318,7 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="hasBlueStarMoW"
                                     value="yes"
                                     checked={hasBlueStarMoW === 'yes'}
                                     onChange={() => dispatchUpdate('hasBlueStarMoW', 'yes')}
@@ -327,6 +329,7 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="hasBlueStarMoW"
                                     value="no"
                                     checked={hasBlueStarMoW === 'no'}
                                     onChange={() => dispatchUpdate('hasBlueStarMoW', 'no')}
@@ -343,6 +346,7 @@ export const XpIncome: React.FC = () => {
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
+                                            name="incursionLegendaryLevel"
                                             value="L10"
                                             checked={incursionLegendaryLevel === 'L10'}
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'L10')}
@@ -353,6 +357,7 @@ export const XpIncome: React.FC = () => {
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
+                                            name="incursionLegendaryLevel"
                                             value="L12"
                                             checked={incursionLegendaryLevel === 'L12'}
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'L12')}
@@ -363,7 +368,8 @@ export const XpIncome: React.FC = () => {
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
-                                            value="L12"
+                                            name="incursionLegendaryLevel"
+                                            value="M"
                                             checked={incursionLegendaryLevel === 'M'}
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'M')}
                                             className="mr-2"
@@ -382,6 +388,7 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="onslaughtBlueStar"
                                     value="yes"
                                     checked={onslaughtBlueStar === 'yes'}
                                     onChange={() => dispatchUpdate('onslaughtBlueStar', 'yes')}
@@ -392,6 +399,7 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="onslaughtBlueStar"
                                     value="no"
                                     checked={onslaughtBlueStar === 'no'}
                                     onChange={() => dispatchUpdate('onslaughtBlueStar', 'no')}
@@ -406,14 +414,14 @@ export const XpIncome: React.FC = () => {
                         </h5>
                         <div className="py-2">
                             <label className="mb-2 block text-sm">
-                                Energy spent on Elite Nodes/Day ({kEliteEnergyPerRaid} energy increments):
+                                Energy spent on Elite Nodes/Day ({eliteEnergyPerRaid} energy increments):
                             </label>
                             <div className="flex items-center gap-4">
                                 <input
                                     type="range"
                                     min="0"
-                                    max={kEliteEnergyMax}
-                                    step={kEliteEnergyPerRaid}
+                                    max={eliteEnergyMax}
+                                    step={eliteEnergyPerRaid}
                                     value={eliteEnergyPerDay}
                                     onChange={event => setEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
@@ -427,14 +435,14 @@ export const XpIncome: React.FC = () => {
                         </h5>
                         <div className="py-2">
                             <label className="mb-2 block text-sm">
-                                Energy spent on Non-Elite Nodes/Day ({kNonEliteEnergyPerRaid} energy increments):
+                                Energy spent on Non-Elite Nodes/Day ({nonEliteEnergyPerRaid} energy increments):
                             </label>
                             <div className="flex items-center gap-4">
                                 <input
                                     type="range"
                                     min="0"
-                                    max={kNonEliteEnergyMax}
-                                    step={kNonEliteEnergyPerRaid}
+                                    max={nonEliteEnergyMax}
+                                    step={nonEliteEnergyPerRaid}
                                     value={nonEliteEnergyPerDay}
                                     onChange={event => setNonEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
@@ -452,13 +460,15 @@ export const XpIncome: React.FC = () => {
                 />
             </div>
             <div className="mt-5 rounded-lg border-2 border-green-600 bg-green-50 p-4 text-center dark:border-green-400 dark:bg-green-900">
-                <h3 className="text-gray-900 dark:text-white">Daily Book Estimate</h3>
+                <h3 className="text-gray-900 dark:text-white">Book Estimate</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {Rarity[defaultBookToUse ?? Rarity.Legendary]} books
+                </p>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">
-                    Estimated Breakdown:{' '}
-                    <span className="block text-xl font-bold">{estimatedBooksPerDay.toFixed(2)}</span>
+                    Per Week: <span className="block text-xl font-bold">{estimatedBooksPerWeek.toFixed(2)}</span>
                 </p>
                 <p className="mt-3 text-lg font-bold">
-                    TOTAL Books/Day:{' '}
+                    Per Day:{' '}
                     <span className="block text-3xl font-extrabold text-green-600 dark:text-green-400">
                         {estimatedBooksPerDay.toFixed(2)}
                     </span>

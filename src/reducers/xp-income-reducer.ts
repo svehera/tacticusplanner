@@ -14,7 +14,7 @@ export type XpIncomeAction =
 export const xpIncomeActionReducer = (state: XpIncomeState, action: XpIncomeAction): XpIncomeState => {
     switch (action.type) {
         case 'Set': {
-            return action.value ?? defaultData.xpIncome;
+            return { ...defaultData.xpIncome, ...action.value };
         }
 
         case 'SaveXpIncomeState': {

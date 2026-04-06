@@ -1,9 +1,9 @@
 import { Rarity } from '@/fsd/5-shared/model';
 
 export enum ArenaLeague {
-    kHonorGuard,
-    kCaptain,
-    kChapterMaster,
+    honorGuard,
+    captain,
+    chapterMaster,
 }
 
 export interface BlueStarCharacter {
@@ -34,10 +34,7 @@ export interface XpIncomeState {
     extraBossesAfterLoop: number;
 
     /** Flag: Does the user spend AT to buy books? */
-    useAtForBooks: 'yes' | 'no';
-
-    /** Array of Blue Star character IDs selected for AT contribution */
-    blueStarCharIds: string[];
+    useATForBooks: 'yes' | 'no';
 
     /** Flag: Does the user have MoW at Blue Star for Incursion farming? */
     hasBlueStarMoW: 'yes' | 'no';

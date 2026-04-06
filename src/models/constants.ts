@@ -400,7 +400,7 @@ export const defaultData: IPersonalData2 = {
         manualBooksPerDay: 0,
 
         // Arena
-        arenaLeague: ArenaLeague.kHonorGuard,
+        arenaLeague: ArenaLeague.honorGuard,
 
         // Guild Raid
         loopsRaids: 'no',
@@ -410,8 +410,7 @@ export const defaultData: IPersonalData2 = {
         extraBossesAfterLoop: 0,
 
         // AT Purchases (Base)
-        useAtForBooks: 'no',
-        blueStarCharIds: [],
+        useATForBooks: 'no',
 
         // AT Farming (Incursion MoW)
         hasBlueStarMoW: 'no',
