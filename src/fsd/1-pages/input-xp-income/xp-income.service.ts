@@ -142,10 +142,13 @@ export class XpIncomeService {
                 state.clearRarity,
                 additionalBosses
             ) +
-            this.estimateAtBooks(state, blueStarCharIds, eliteEnergyPerDay, nonEliteEnergyPerDay) +
-            state.additionalBooksPerWeek;
+            this.estimateAtBooks(state, blueStarCharIds, eliteEnergyPerDay, nonEliteEnergyPerDay);
         // Convert from Legendary-equivalent to the player's chosen display rarity
         const chosenRarity = state.defaultBookToUse ?? Rarity.Legendary;
-        return legendaryBooksPerWeek * (XP_BOOK_VALUE[Rarity.Legendary] / XP_BOOK_VALUE[chosenRarity]);
+        // additionalBooksPerWeek is entered in chosen-rarity units — add after conversion
+        return (
+            legendaryBooksPerWeek * (XP_BOOK_VALUE[Rarity.Legendary] / XP_BOOK_VALUE[chosenRarity]) +
+            state.additionalBooksPerWeek
+        );
     }
 }

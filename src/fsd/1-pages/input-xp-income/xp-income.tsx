@@ -451,11 +451,21 @@ export const XpIncome: React.FC = () => {
                     </div>
                 )}
 
-                <DecimalSpinner
-                    label="Add'l Books/Week from unspecified sources"
-                    value={additionalBooksPerWeek}
-                    onChange={value => dispatchUpdate('additionalBooksPerWeek', value)}
-                />
+                <div className="flex items-center justify-between py-2">
+                    <label className="font-bold">
+                        Add&apos;l {Rarity[defaultBookToUse ?? Rarity.Legendary]} Books/Week from unspecified sources:
+                    </label>
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        value={additionalBooksPerWeek}
+                        onChange={event =>
+                            dispatchUpdate('additionalBooksPerWeek', Number.parseInt(event.target.value) || 0)
+                        }
+                        className="w-24 rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                    />
+                </div>
             </div>
             <div className="mt-5 rounded-lg border-2 border-green-600 bg-green-50 p-4 text-center dark:border-green-400 dark:bg-green-900">
                 <h3 className="text-gray-900 dark:text-white">Book Estimate</h3>
