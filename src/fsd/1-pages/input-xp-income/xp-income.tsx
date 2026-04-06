@@ -5,16 +5,13 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { cn } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { BookSelect } from '@/fsd/5-shared/ui/selects';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
-
 import { DecimalSpinner } from './decimal-spinner';
-import { ArenaLeague } from './models';
+import { ArenaLeague, XpIncomeState } from './models';
 import { useDebouncedState } from './use-debounced-state';
 import { kBlueStarCharacters, kEliteEnergyPerRaid, kNonEliteEnergyPerRaid, XpIncomeService } from './xp-income.service';
 
@@ -134,15 +131,14 @@ export const XpIncome: React.FC = () => {
                 />
             </div>
 
-            <AccessibleTooltip title="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed.">
-                <div className="justify-endrounded-lg mb-5 border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                    <BookSelect
-                        label="Default XP Book for Calculations"
-                        value={defaultBookToUse ?? Rarity.Legendary}
-                        valueChanges={v => dispatchUpdate('defaultBookToUse', v)}
-                    />
-                </div>
-            </AccessibleTooltip>
+            <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                <BookSelect
+                    label="Default XP Book for Calculations"
+                    tooltip="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed."
+                    value={defaultBookToUse ?? Rarity.Legendary}
+                    valueChanges={v => dispatchUpdate('defaultBookToUse', v)}
+                />
+            </div>
 
             <hr className="my-5 border-gray-300 dark:border-gray-700" />
 
