@@ -1,6 +1,6 @@
-import { glob } from 'glob';
 import { rm } from 'node:fs/promises';
 
+import { glob } from 'glob';
 import { z } from 'zod';
 
 import { AchievementSchema } from './schemas/achievements';

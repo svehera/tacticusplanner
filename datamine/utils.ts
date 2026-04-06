@@ -1,17 +1,32 @@
-import fs from 'fs/promises';
+import fs from 'node:fs/promises';
 
 import { z } from 'zod';
 
-// e.g. CountStringSchemaGenerator('gold', 'gem') will create a schema that accepts 'gold', 'gem', 'gold:100', 'gem:50', etc.
-// Transforms it to an object of the form { type: 'gold', amount: 100 } or { type: 'gem', amount: 50 } for easier use in code.
+// e.g. CountStringSchemaGenerator('gold', 'gem') will create a schema that accepts
+// 'gold'
+// 'gem'
+// 'gold:30'
+// 'gem:4'
+// 'gold:30-50'
+// 'gem:4-5'
+// Transforms it to an object of the form { type: 'gold', min: 30, max: 50 } for easier use in code.
 export const CountStringSchemaGenerator = (...rewardStrings: string[]) => {
     if (rewardStrings.length === 0) throw new Error('At least one reward string must be provided');
-    const stringSchema = z.union(rewardStrings.map(str => z.literal(str)));
+    const stringSchema = z.union(rewardStrings.map(rewardString => z.literal(rewardString)));
     return z
-        .union([stringSchema, z.templateLiteral([stringSchema, z.literal(':'), z.int().positive()])])
-        .transform(val => {
-            const [type, amount = '1'] = val.split(':');
-            return { type, amount: parseInt(amount, 10) };
+        .union([
+            stringSchema,
+            z.templateLiteral([stringSchema, z.literal(':'), z.int().positive()]),
+            z.templateLiteral([stringSchema, z.literal(':'), z.int().positive(), z.literal('-'), z.int().positive()]),
+        ])
+        .transform(value => {
+            const [type, amount = '1'] = value.split(':');
+            const [min = amount, max = amount] = amount.split('-');
+            return {
+                type,
+                min: Number.parseInt(min, 10),
+                max: Number.parseInt(max, 10),
+            };
         });
 };
 
@@ -77,11 +92,11 @@ type RenameKeys<T, M extends Partial<Record<keyof T, string>>> = Prettify<{
 }>;
 
 export function renameKeys<T extends object, M extends Partial<Record<keyof T, string>>>(
-    obj: T,
+    object: T,
     keyMap: M
 ): RenameKeys<T, M> {
     return Object.fromEntries(
-        Object.entries(obj).map(([key, value]) => [keyMap[key as keyof T] ?? key, value])
+        Object.entries(object).map(([key, value]) => [keyMap[key as keyof T] ?? key, value])
     ) as RenameKeys<T, M>;
 }
 

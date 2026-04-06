@@ -3,7 +3,11 @@ import { z } from 'zod';
 import { LEVEL_CAP, RELIC_LEVELS, renameKeys, UNCAPPED_LEVELS } from '../../utils';
 
 import { AbilitiesSchema } from './abilities';
+import { HeroProgressionStepsSchema } from './hero-progression-steps';
+import { MowProgressionStepsSchema } from './hero-progression-steps-mow';
+import { HeroProgressionStepsPerUnitSchema } from './hero-progression-steps-per-unit';
 import { LineupSchema } from './lineup';
+import { NpcSchema } from './npc';
 
 export const UnitSchema = z
     .strictObject({
@@ -91,14 +95,29 @@ export const UnitSchema = z
             tutorialId1: z.string(),
             tutorialId2: z.string(),
         }),
-        factions: z.any(),
-        heroConversion: z.any(),
-        heroConversionMoW: z.any(),
-        heroProgressionSteps: z.any(),
-        heroProgressionStepsMoW: z.any(),
-        heroProgressionStepsPerUnit: z.any(),
+        factions: z.record(
+            z.string().brand<'FactionId'>(),
+            z.strictObject({ traits: z.array(z.string().brand<'TraitId'>()), unlockTimestamp: z.int().positive() })
+        ),
+        heroConversion: z.strictObject({
+            Common: z.strictObject({ shards: z.int().positive() }),
+            Uncommon: z.strictObject({ shards: z.int().positive() }),
+            Rare: z.strictObject({ shards: z.int().positive() }),
+            Epic: z.strictObject({ shards: z.int().positive() }),
+            Legendary: z.strictObject({ shards: z.int().positive() }),
+        }),
+        heroConversionMoW: z.strictObject({
+            Common: z.strictObject({ shards: z.int().positive() }),
+            Uncommon: z.strictObject({ shards: z.int().positive() }),
+            Rare: z.strictObject({ shards: z.int().positive() }),
+            Epic: z.strictObject({ shards: z.int().positive() }),
+            Legendary: z.strictObject({ shards: z.int().positive() }),
+        }),
+        heroProgressionSteps: HeroProgressionStepsSchema,
+        heroProgressionStepsMoW: MowProgressionStepsSchema,
+        heroProgressionStepsPerUnit: HeroProgressionStepsPerUnitSchema,
         lineup: LineupSchema,
-        npc: z.any(),
+        npc: NpcSchema,
         sorting: z.array(z.string().brand<'HeroId'>()),
         summons: z.any(),
         traitPowerModifiers: z.any(),

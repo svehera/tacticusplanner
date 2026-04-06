@@ -1,6 +1,6 @@
 
 // This file is auto-generated. Do not edit directly.
-// Generated on 2026-04-04T18:58:19.759Z
+// Generated on 2026-04-06T20:32:42.555Z
 export const data = [
   {
     "alliance": "Imperial",
