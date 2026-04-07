@@ -147,7 +147,7 @@ export const XpIncome: React.FC = () => {
                 <h4 className="mb-2 font-semibold">Arena League</h4>
                 <select
                     value={arenaLeague}
-                    onChange={event => dispatchUpdate('arenaLeague', event.target.value as unknown as ArenaLeague)}
+                    onChange={event => dispatchUpdate('arenaLeague', Number(event.target.value) as ArenaLeague)}
                     className="rounded-md border border-gray-300 bg-white p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white">
                     {Object.values(ArenaLeague)
                         .filter(league => typeof league === 'number')
