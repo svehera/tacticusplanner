@@ -38,7 +38,7 @@ export const BookSelect = ({
 
                     <ListboxOptions
                         transition
-                        className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl transition duration-100 ease-in data-leave:opacity-0 dark:border-slate-700 dark:bg-[#161b22]">
+                        className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl transition duration-100 ease-in data-[leave]:opacity-0 dark:border-slate-700 dark:bg-[#161b22]">
                         {XP_BOOK_ORDER.map(rarity => (
                             <ListboxOption
                                 key={rarity}
