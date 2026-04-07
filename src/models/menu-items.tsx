@@ -89,7 +89,6 @@ export const menuItemById = {
     teams: teamsMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
-    onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
     quests: questsMenuItem,
     ces: cesMenuItem,
 };
@@ -158,7 +157,6 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['insights'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
-    menuItemById['onslaught'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
@@ -170,7 +168,6 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['upgrades'],
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
-        menuItemById['onslaught'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],

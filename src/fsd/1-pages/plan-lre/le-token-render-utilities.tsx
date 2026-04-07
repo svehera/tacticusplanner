@@ -1,7 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
 
-import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
-import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 
 // eslint-disable-next-line boundaries/element-types
@@ -14,19 +12,6 @@ import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreRequirements, ILreTrackProgress } from './lre.models';
 import { STATUS_COLORS } from './requirement-status-constants';
-import { TokenDisplay } from './token-estimation-service';
-
-export const renderMilestone = (token: TokenDisplay) => {
-    if (!token.achievedStarMilestone) return <></>;
-    return (
-        <div className="flex min-w-[70px] flex-col items-center justify-center rounded-lg border border-gray-400 bg-blue-100 p-1 dark:border-gray-600 dark:bg-gray-700/50">
-            <div className="flex items-center text-lg font-bold text-gray-800 dark:text-white">
-                <RarityIcon rarity={token.rarity} />
-                <StarsIcon stars={token.stars} />
-            </div>
-        </div>
-    );
-};
 
 export const renderRestrictions = (
     restricts: ILreRequirements[],

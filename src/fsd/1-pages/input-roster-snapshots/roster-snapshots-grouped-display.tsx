@@ -1,6 +1,6 @@
 import { ReactNode, useEffect, useMemo, useState } from 'react';
 
-export interface RosterSnapshotsGroupedTeam {
+interface RosterSnapshotsGroupedTeam {
     id: string;
     title: string;
     hideTitle?: boolean;

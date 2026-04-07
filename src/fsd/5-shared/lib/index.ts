@@ -7,8 +7,8 @@ export { numberToThousandsString, numberToThousandsStringOld } from './number-to
 export { useQueryState } from './query-state';
 export { useFitGridOnWindowResize } from './resize-grid';
 export { getCompletionRateColor } from './get-completion-color';
-export { constObjectKeys, createSafeGetter, mutableCopy } from './type-helpers';
-export { getEstimatedDate, formatDateWithOrdinal } from './get-estimated-date';
+export { createSafeGetter, mutableCopy } from './type-helpers';
+export { getEstimatedDate } from './get-estimated-date';
 export { getFactionPray } from './get-faction-pray';
 export * from './array-utils';
 export * from './tacticus-api';

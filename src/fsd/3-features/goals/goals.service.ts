@@ -43,7 +43,7 @@ interface RevisedGoals {
     neededOrbs: Record<Alliance, Record<Rarity, number>>;
 }
 
-export interface IXpLevel {
+interface IXpLevel {
     currentLevel: number;
     xpAtLevel: number;
     xpFromPriorGoalApplied?: boolean;
