@@ -740,7 +740,8 @@ export class GoalsService {
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
-        currentEstimate.Books = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        currentEstimate.books = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        currentEstimate.bookRarity = xpBookRarityToUse;
         currentEstimate.xpLeft = xpNeeded;
 
         if (xpIncomeState.manualBooksPerDay > 0) {

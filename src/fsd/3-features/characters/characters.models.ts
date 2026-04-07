@@ -39,7 +39,8 @@ export type IXpLevel = {
 };
 
 export interface IXpEstimate {
-    Books: number;
+    books: number;
+    bookRarity: Rarity;
     xpFromPreviousGoalApplied?: boolean;
     gold: number;
     currentLevel: number;
