@@ -97,9 +97,11 @@ const renderSection = (
                         <div key={team.id} className="rounded-md border border-gray-600/60 bg-black/10 p-2">
                             {!team.hideTitle && <div className="mb-2 text-sm font-medium">{team.title}</div>}
                             {team.diffItems.length > 0 && (
-                                <div className="mb-2 flex flex-wrap gap-5">{team.diffItems}</div>
+                                <div className="mb-2 flex flex-wrap gap-2 sm:gap-5">{team.diffItems}</div>
                             )}
-                            {team.unitItems.length > 0 && <div className="flex flex-wrap gap-5">{team.unitItems}</div>}
+                            {team.unitItems.length > 0 && (
+                                <div className="flex flex-wrap gap-2 sm:gap-5">{team.unitItems}</div>
+                            )}
                         </div>
                     ))}
                 </div>
@@ -132,7 +134,7 @@ export const RosterSnapshotsGroupedDisplay = ({ zoom, sections }: Props) => {
     };
 
     return (
-        <div style={{ zoom }} className="p-4">
+        <div style={{ zoom }} className="p-2 sm:p-4">
             {sections.map(section => renderSection(section, 1, expandedSections, toggleSection))}
         </div>
     );

@@ -20,8 +20,8 @@ export class MowsService {
         let index = 0;
         for (const lvlUpgrade of mows2Data.upgradeCosts) {
             const actualLevel = index + 2;
-            index++;
             if (levels.length > 0 && !levels.includes(actualLevel)) {
+                index++;
                 continue;
             }
 
@@ -70,6 +70,7 @@ export class MowsService {
                 secondaryUpgrades,
                 rarity: RarityMapper.getRarityFromLevel(actualLevel),
             });
+            index++;
         }
 
         return result;
