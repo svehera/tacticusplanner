@@ -537,7 +537,7 @@ export const BulkGoalCreator = () => {
                 </div>
                 <Grid container spacing={2} className="mb-4">
                     {bulkUnits.map((entry, index) => (
-                        <Grid item xs={12} sm={6} md={4} lg={3} xl={2} xxl={1.5} key={index}>
+                        <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
                             <BulkGoalCreatorUnitCard
                                 entry={entry}
                                 index={index}
@@ -637,7 +637,7 @@ export const BulkGoalCreator = () => {
                             />
                         </Grid>
                     ))}
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={1.7} xxl={1.5}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} xl={1.7}>
                         <div className="flex h-full min-h-[420px] items-center justify-center rounded-lg border-2 border-dashed border-(--border) bg-(--secondary) p-4">
                             <Button
                                 variant="outlined"
