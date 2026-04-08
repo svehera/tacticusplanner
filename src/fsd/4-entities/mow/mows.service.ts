@@ -21,6 +21,7 @@ export class MowsService {
         for (const lvlUpgrade of mows2Data.upgradeCosts) {
             const actualLevel = index + 2;
             if (levels.length > 0 && !levels.includes(actualLevel)) {
+                index++;
                 continue;
             }
 
