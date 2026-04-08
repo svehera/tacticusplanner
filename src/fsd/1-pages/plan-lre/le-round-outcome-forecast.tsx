@@ -6,7 +6,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rank, RarityStars } from '@/fsd/5-shared/model';
-import { StarsIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -59,6 +59,14 @@ const getStatusLabel = (status: 'finished' | 'active' | 'upcoming' | 'future') =
             return 'Future round';
         }
     }
+};
+
+const getRank = (stars: RarityStars, rank: Rank | undefined): Rank => {
+    if (stars !== RarityStars.None) {
+        if (rank === undefined || rank === Rank.Locked) return Rank.Stone1;
+        return rank;
+    }
+    return Rank.Locked;
 };
 
 export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenIncrements }: Props) => {
@@ -115,6 +123,8 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
             previous.map(config => (config.round === round ? { ...config, ...update } : config))
         );
     };
+
+    console.log(forecasts);
 
     return (
         <div className="flex flex-col gap-4">
@@ -277,7 +287,10 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                             rank:
                                                                 forecast.endingStars === RarityStars.None
                                                                     ? Rank.Locked
-                                                                    : (resolvedCharacter?.rank ?? Rank.Stone1),
+                                                                    : getRank(
+                                                                          forecast.endingStars,
+                                                                          resolvedCharacter?.rank
+                                                                      ),
                                                             rarity: forecast.endingRarity,
                                                             stars: forecast.endingStars,
                                                             shards: 0,
@@ -375,6 +388,20 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                 })()}
                                             </div>
                                             <div className="text-xs text-gray-500 dark:text-gray-400">
+                                                {forecast.totalPointsForNextMilestone === 0 ? (
+                                                    <span>Points for Next Shard Milestone: 0 needed</span>
+                                                ) : forecast.totalPointsForNextMilestone === Infinity ? (
+                                                    <span>Points for Next Shard Milestone: Full Clear</span>
+                                                ) : (
+                                                    <span>
+                                                        Points for Next Shard Milestone: {forecast.endingPoints} /{' '}
+                                                        {forecast.totalPointsForNextMilestone} (
+                                                        {forecast.totalPointsForNextMilestone - forecast.endingPoints}{' '}
+                                                        needed)
+                                                    </span>
+                                                )}
+                                            </div>
+                                            <div className="text-xs text-gray-500 dark:text-gray-400">
                                                 {(() => {
                                                     const nextMilestone = ascensionMilestones.find(
                                                         milestone => milestone.label === forecast.nextMilestone
@@ -386,6 +413,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                     return (
                                                         <span className="inline-flex items-center gap-1">
                                                             <span>toward</span>
+                                                            <RarityIcon rarity={nextMilestone.rarity} />
                                                             <StarsIcon stars={nextMilestone.stars} />
                                                         </span>
                                                     );
