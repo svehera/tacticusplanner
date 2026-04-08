@@ -124,8 +124,6 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
         );
     };
 
-    console.log(forecasts);
-
     return (
         <div className="flex flex-col gap-4">
             {isEventActive && !hasKnownCurrentTokens && (
@@ -386,20 +384,6 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                         </span>
                                                     );
                                                 })()}
-                                            </div>
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">
-                                                {forecast.totalPointsForNextMilestone === 0 ? (
-                                                    <span>Points for Next Shard Milestone: 0 needed</span>
-                                                ) : forecast.totalPointsForNextMilestone === Infinity ? (
-                                                    <span>Points for Next Shard Milestone: Full Clear</span>
-                                                ) : (
-                                                    <span>
-                                                        Points for Next Shard Milestone: {forecast.endingPoints} /{' '}
-                                                        {forecast.totalPointsForNextMilestone} (
-                                                        {forecast.totalPointsForNextMilestone - forecast.endingPoints}{' '}
-                                                        needed)
-                                                    </span>
-                                                )}
                                             </div>
                                             <div className="text-xs text-gray-500 dark:text-gray-400">
                                                 {(() => {
