@@ -136,6 +136,10 @@ export const Goals = () => {
         ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
+    const energyAlreadySpent = useMemo(() => {
+        return sum(dailyRaids.raidedLocations.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
+    }, [dailyRaids]);
+
     const shardRaidSummary = useMemo(() => {
         const daysWithShardRaids = estimatedUpgradesTotal.upgradesRaids
             .map((day, index) => ({
@@ -396,7 +400,7 @@ export const Goals = () => {
                             <span className="ml-auto flex flex-wrap items-center gap-2">
                                 <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
                                     <span className="font-medium">Energy:</span>{' '}
-                                    <span>{numberToThousandsString(estimatedUpgradesTotal.energyTotal)}</span>
+                                    <span>{estimatedUpgradesTotal.energyTotal - energyAlreadySpent}</span>
                                 </span>
                                 <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
                                     <span className="font-medium">XP:</span>{' '}
@@ -415,7 +419,9 @@ export const Goals = () => {
                                     </div>
                                     <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
                                         <MiscIcon icon={'energy'} height={35} width={35} />
-                                        <b className="text-2xl text-(--fg)">{estimatedUpgradesTotal.energyTotal}</b>
+                                        <b className="text-2xl text-(--fg)">
+                                            {estimatedUpgradesTotal.energyTotal - energyAlreadySpent}
+                                        </b>
                                     </div>
                                 </div>
 
@@ -509,7 +515,11 @@ export const Goals = () => {
                                 Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
                             </span>
                             <span>
-                                <b>{estimatedUpgradesTotal.energyTotal - shardRaidSummary.energyTotal}</b>{' '}
+                                <b>
+                                    {estimatedUpgradesTotal.energyTotal -
+                                        shardRaidSummary.energyTotal -
+                                        energyAlreadySpent}
+                                </b>{' '}
                                 <MiscIcon icon={'energy'} height={15} width={15} />)
                             </span>
                         </div>

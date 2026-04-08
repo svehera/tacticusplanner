@@ -24,7 +24,7 @@ export type BulkUnitEntry = {
     incrementalGoalMode: IncrementalGoalMode;
 };
 
-type PlannedGoalItem = { category: GoalCategory; unitIndex: number; goal: IPersonalGoal };
+type PlannedGoalItem = { category: GoalCategory; unitIndex: number; goal: IPersonalGoal; rankSubOrder: number };
 
 type RankGoalPlan = {
     start: RankStep;
@@ -33,6 +33,13 @@ type RankGoalPlan = {
 };
 
 const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Rank: 2, Abilities: 3 };
+
+/** 0 = Legendary/Mythic pre-farm  1 = Epic pre-farm (D2.5+)  2 = core / plain */
+export const getRankGoalSubOrder = (filterRarities?: Rarity[]): number => {
+    if (filterRarities?.includes(Rarity.Legendary)) return 0;
+    if (filterRarities?.length === 1 && filterRarities[0] === Rarity.Epic) return 1;
+    return 2;
+};
 
 const rankValues = Object.values(Rank)
     .filter((rank): rank is Rank => typeof rank === 'number')
@@ -189,8 +196,8 @@ export const buildBulkPlannedGoals = ({
 }) => {
     const items: PlannedGoalItem[] = [];
 
-    const pushGoal = (category: GoalCategory, unitIndex: number, goal: IPersonalGoal) => {
-        items.push({ category, unitIndex, goal });
+    const pushGoal = (category: GoalCategory, unitIndex: number, goal: IPersonalGoal, rankSubOrder = 2) => {
+        items.push({ category, unitIndex, goal, rankSubOrder });
     };
 
     const pushRankGoal = (
@@ -204,18 +211,23 @@ export const buildBulkPlannedGoals = ({
             return;
         }
 
-        pushGoal('Rank', unitIndex, {
-            id: createId(),
-            character: unitId,
-            type: PersonalGoalType.UpgradeRank,
-            priority: 1,
-            dailyRaids: true,
-            startingRank: start.rank,
-            startingRankPoint5: start.point5,
-            targetRank: end.rank,
-            rankPoint5: end.point5,
-            upgradesRarity: filterRarities ?? [],
-        });
+        pushGoal(
+            'Rank',
+            unitIndex,
+            {
+                id: createId(),
+                character: unitId,
+                type: PersonalGoalType.UpgradeRank,
+                priority: 1,
+                dailyRaids: true,
+                startingRank: start.rank,
+                startingRankPoint5: start.point5,
+                targetRank: end.rank,
+                rankPoint5: end.point5,
+                upgradesRarity: filterRarities ?? [],
+            },
+            getRankGoalSubOrder(filterRarities)
+        );
     };
 
     for (const [index, entry] of bulkUnits.entries()) {
@@ -286,15 +298,38 @@ export const buildBulkPlannedGoals = ({
         }
     }
 
+    // When any unit uses incremental goals with pre-farming, all LM goals across units
+    // come first, then all Epic D2.5+ goals, then everything else per unit.
+    const hasPreFarmIncremental = bulkUnits.some(u => u.preFarmLegendaryMythic && u.useIncrementalGoals);
+
+    // group 0 = LM pre-farm (all units), group 1 = Epic pre-farm (all units), group 2 = per-unit rest
+    const charOrderGroup = (item: PlannedGoalItem): number => {
+        if (hasPreFarmIncremental && item.category === 'Rank') {
+            if (item.rankSubOrder === 0) return 0;
+            if (item.rankSubOrder === 1) return 1;
+        }
+        return 2;
+    };
+
     if (goalOrder === 'type') {
         items.sort((a, b) => {
             const categoryDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
-            return categoryDiff === 0 ? a.unitIndex - b.unitIndex : categoryDiff;
+            if (categoryDiff !== 0) return categoryDiff;
+            const subOrderDiff = a.rankSubOrder - b.rankSubOrder;
+            if (subOrderDiff !== 0) return subOrderDiff;
+            return a.unitIndex - b.unitIndex;
         });
     } else {
         items.sort((a, b) => {
-            const indexDiff = a.unitIndex - b.unitIndex;
-            return indexDiff === 0 ? CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category] : indexDiff;
+            const groupDiff = charOrderGroup(a) - charOrderGroup(b);
+            if (groupDiff !== 0) return groupDiff;
+            // within group 0 or 1: sort by unitIndex only
+            if (charOrderGroup(a) < 2) return a.unitIndex - b.unitIndex;
+            // group 2: per-unit ordering
+            if (a.unitIndex !== b.unitIndex) return a.unitIndex - b.unitIndex;
+            const categoryDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
+            if (categoryDiff !== 0) return categoryDiff;
+            return a.rankSubOrder - b.rankSubOrder;
         });
     }
 
