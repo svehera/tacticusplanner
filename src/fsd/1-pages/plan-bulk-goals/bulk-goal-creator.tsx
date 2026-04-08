@@ -2,13 +2,18 @@
 /* eslint-disable import-x/no-internal-modules */
 import AddIcon from '@mui/icons-material/Add';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
+import ExpandMore from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
+import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Grid';
+import ListItemText from '@mui/material/ListItemText';
+import Menu from '@mui/material/Menu';
+import MenuItem from '@mui/material/MenuItem';
 import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
-import { type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
+import { Fragment, type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
 import { goalsLimit, rankToRarity, rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
@@ -25,12 +30,14 @@ import { IUnit } from '@/fsd/4-entities/unit';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
+import { ITeam2 } from '../plan-teams2/models';
 import { TeamFlow } from '../plan-teams2/team-flow';
 
 import { BulkGoalCreatorUnitCard } from './bulk-goal-creator-unit-card';
 import {
     buildBulkPlannedGoals,
     getBulkRankGoalPlans,
+    getRankGoalSubOrder,
     type GoalCategory,
     type IncrementalGoalMode,
     type RankStep,
@@ -121,7 +128,7 @@ const getBulkUnitEntryFromUnit = (unit: IUnit | undefined) => {
 };
 
 export const BulkGoalCreator = () => {
-    const { characters: charactersDefault, goals, mows } = useContext(StoreContext);
+    const { characters: charactersDefault, goals, mows, teams2 } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
@@ -204,6 +211,33 @@ export const BulkGoalCreator = () => {
         });
     }, []);
 
+    const [teamMenuAnchor, setTeamMenuAnchor] = useState<HTMLElement | undefined>();
+
+    const addTeamUnits = useCallback(
+        (team: ITeam2) => {
+            const existingIds = new Set(bulkUnits.map(entry => entry.unit?.snowprintId));
+            const newEntries: typeof bulkUnits = [];
+
+            for (const charId of team.chars) {
+                if (!existingIds.has(charId)) {
+                    const unit = resolvedCharacters.find(c => c.snowprintId === charId);
+                    if (unit) newEntries.push(getBulkUnitEntryFromUnit(unit));
+                }
+            }
+            for (const mowId of team.mows ?? []) {
+                if (!existingIds.has(mowId)) {
+                    const unit = resolvedMows.find(m => m.snowprintId === mowId);
+                    if (unit) newEntries.push(getBulkUnitEntryFromUnit(unit));
+                }
+            }
+
+            if (newEntries.length > 0) {
+                setBulkUnits(previous => [...previous, ...newEntries]);
+            }
+        },
+        [bulkUnits, resolvedCharacters, resolvedMows]
+    );
+
     const bulkTeamCharacters = useMemo(
         () =>
             filterMap(bulkUnits, entry => {
@@ -229,6 +263,7 @@ export const BulkGoalCreator = () => {
             unitName: string;
             unitIcon: string;
             unitIndex: number;
+            rankSubOrder: number;
             change: ReactNode;
         }> = [];
 
@@ -262,6 +297,7 @@ export const BulkGoalCreator = () => {
                 unitName,
                 unitIcon,
                 unitIndex,
+                rankSubOrder: getRankGoalSubOrder(filterRarities),
                 change: getRankChange(start, end, filterRarities),
             });
         };
@@ -283,6 +319,7 @@ export const BulkGoalCreator = () => {
                     unitName,
                     unitIcon,
                     unitIndex: index,
+                    rankSubOrder: 2,
                     change: (
                         <div className="flex items-center gap-2">
                             <span>Locked</span>
@@ -298,6 +335,7 @@ export const BulkGoalCreator = () => {
                     unitName,
                     unitIcon,
                     unitIndex: index,
+                    rankSubOrder: 2,
                     change: <span>Unlock MoW</span>,
                 });
             }
@@ -309,6 +347,7 @@ export const BulkGoalCreator = () => {
                     unitName,
                     unitIcon,
                     unitIndex: index,
+                    rankSubOrder: 2,
                     change: (
                         <div className="flex items-center gap-2">
                             <RarityIcon rarity={unit.rarity} />
@@ -366,6 +405,7 @@ export const BulkGoalCreator = () => {
                     unitName,
                     unitIcon,
                     unitIndex: index,
+                    rankSubOrder: 2,
                     change: <span>{abilityParts.join(', ')}</span>,
                 });
             }
@@ -374,12 +414,28 @@ export const BulkGoalCreator = () => {
         if (goalOrder === 'type') {
             rows.sort((a, b) => {
                 const catDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
-                return catDiff === 0 ? a.unitIndex - b.unitIndex : catDiff;
+                if (catDiff !== 0) return catDiff;
+                const subOrderDiff = a.rankSubOrder - b.rankSubOrder;
+                if (subOrderDiff !== 0) return subOrderDiff;
+                return a.unitIndex - b.unitIndex;
             });
         } else {
+            const hasPreFarmIncremental = bulkUnits.some(u => u.preFarmLegendaryMythic && u.useIncrementalGoals);
+            const charOrderGroup = (row: (typeof rows)[number]): number => {
+                if (hasPreFarmIncremental && row.category === 'Rank') {
+                    if (row.rankSubOrder === 0) return 0;
+                    if (row.rankSubOrder === 1) return 1;
+                }
+                return 2;
+            };
             rows.sort((a, b) => {
-                const indexDiff = a.unitIndex - b.unitIndex;
-                return indexDiff === 0 ? CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category] : indexDiff;
+                const groupDiff = charOrderGroup(a) - charOrderGroup(b);
+                if (groupDiff !== 0) return groupDiff;
+                if (charOrderGroup(a) < 2) return a.unitIndex - b.unitIndex;
+                if (a.unitIndex !== b.unitIndex) return a.unitIndex - b.unitIndex;
+                const catDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
+                if (catDiff !== 0) return catDiff;
+                return a.rankSubOrder - b.rankSubOrder;
             });
         }
 
@@ -418,10 +474,70 @@ export const BulkGoalCreator = () => {
     return (
         <RosterSnapshotsAssetsProvider>
             <Paper className="mb-4 bg-slate-100 p-4 dark:bg-slate-900">
-                <div className="mb-4 text-lg font-semibold">Bulk Goal Creator</div>
+                <div className="mb-4 flex flex-wrap text-lg font-semibold">
+                    <span className="mr-4">Bulk Goal Creator</span>
+                    {teams2.length > 0 && (
+                        <div className="mr-4">
+                            <Button
+                                size="small"
+                                variant="outlined"
+                                color="primary"
+                                onClick={event => setTeamMenuAnchor(event.currentTarget)}
+                                endIcon={<ExpandMore />}
+                                sx={{ textTransform: 'none', justifyContent: 'space-between', minWidth: 220 }}>
+                                Add All Members of Team
+                            </Button>
+                            <Menu
+                                anchorEl={teamMenuAnchor}
+                                open={Boolean(teamMenuAnchor)}
+                                onClose={() => setTeamMenuAnchor(undefined)}
+                                PaperProps={{ sx: { width: 'min(92vw, 360px)', maxHeight: '72vh' } }}>
+                                {teams2.map((team, index) => (
+                                    <Fragment key={team.name}>
+                                        {index > 0 && <Divider />}
+                                        <MenuItem
+                                            onClick={() => {
+                                                addTeamUnits(team);
+                                                setTeamMenuAnchor(undefined);
+                                            }}>
+                                            <div className="flex w-full flex-col">
+                                                <ListItemText primary={team.name} />
+                                                <div className="mt-1 flex flex-wrap gap-0.5">
+                                                    {[...team.chars, ...(team.mows ?? [])].map(id => {
+                                                        const unit =
+                                                            resolvedCharacters.find(c => c.snowprintId === id) ??
+                                                            resolvedMows.find(m => m.snowprintId === id);
+                                                        return unit ? (
+                                                            <UnitShardIcon
+                                                                key={id}
+                                                                icon={unit.roundIcon ?? ''}
+                                                                height={24}
+                                                                width={24}
+                                                            />
+                                                        ) : undefined;
+                                                    })}
+                                                </div>
+                                            </div>
+                                        </MenuItem>
+                                    </Fragment>
+                                ))}
+                            </Menu>
+                        </div>
+                    )}
+                    <div className="mr-4">
+                        <Button
+                            variant="contained"
+                            color="error"
+                            size="small"
+                            className="font-bold"
+                            onClick={() => setBulkUnits([])}>
+                            Clear All Units
+                        </Button>
+                    </div>
+                </div>
                 <Grid container spacing={2} className="mb-4">
                     {bulkUnits.map((entry, index) => (
-                        <Grid item xs={12} sm={6} md={4} lg={2.4} key={index}>
+                        <Grid item xs={12} sm={6} md={4} lg={3} xl={2} xxl={1.5} key={index}>
                             <BulkGoalCreatorUnitCard
                                 entry={entry}
                                 index={index}
@@ -521,7 +637,7 @@ export const BulkGoalCreator = () => {
                             />
                         </Grid>
                     ))}
-                    <Grid item xs={12} sm={6} md={4} lg={2.4}>
+                    <Grid item xs={12} sm={6} md={4} lg={3} xl={1.7} xxl={1.5}>
                         <div className="flex h-full min-h-[420px] items-center justify-center rounded-lg border-2 border-dashed border-(--border) bg-(--secondary) p-4">
                             <Button
                                 variant="outlined"
