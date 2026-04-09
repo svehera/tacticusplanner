@@ -286,6 +286,15 @@ interface IDailyRaidsFarmPreferences {
     machineHuntPreferences?: IMachineHuntPreferences;
 }
 
+export interface IHonorYourHeroesReward {
+    tier: number;
+    maxProgressionIndex: number;
+    rewards: string[];
+}
+
+export interface IOnslaughtData {
+    honorYourHeroesRewards: IHonorYourHeroesReward[];
+}
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
