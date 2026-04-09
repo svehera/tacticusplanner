@@ -157,7 +157,7 @@ const Component: React.FC<Props> = ({
                 tooltip={iconTooltipContent}
             />
         );
-    }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId]);
+    }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId, iconTooltipContent]);
 
     const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
     const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
