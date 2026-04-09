@@ -2,6 +2,7 @@
 import { ArrowForward } from '@mui/icons-material';
 
 import { Rank } from '@/fsd/5-shared/model';
+import { UnitPortrait, ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
@@ -9,8 +10,7 @@ import { MowsService } from '@/fsd/4-entities/mow';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-import { ISnapshotCharacter, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './models';
-import { RosterSnapshotCharacter } from './roster-snapshot-character';
+import { ISnapshotUnitDiff } from './models';
 
 interface Props {
     showShards: RosterSnapshotShowVariableSettings;
@@ -42,7 +42,7 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
         <div className="170px flex w-56 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition duration-300 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
             <div className="w-1"></div>
             <div className="h-[170px] w-[96px]">
-                <RosterSnapshotCharacter
+                <UnitPortrait
                     showShards={showShards}
                     showMythicShards={showMythicShards}
                     showXpLevel={showXpLevel}
@@ -58,7 +58,7 @@ export const RosterSnapshotsUnitDiffSideBySide: React.FC<Props> = ({
             <div className="flex items-center px-0">
                 <ArrowForward className="text-gray-500" />
             </div>
-            <RosterSnapshotCharacter
+            <UnitPortrait
                 showShards={showShards}
                 showMythicShards={showMythicShards}
                 showXpLevel={showXpLevel}

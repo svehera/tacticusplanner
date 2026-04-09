@@ -8,13 +8,13 @@ import { StoreContext } from '@/reducers/store.provider';
 import { Rank, RarityStars } from '@/fsd/5-shared/model';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
+import { ISnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-import { ISnapshotCharacter } from '../input-roster-snapshots/models';
 import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 

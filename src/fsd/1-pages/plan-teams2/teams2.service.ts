@@ -1,13 +1,11 @@
-/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
 
 import { FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { IMow2 } from '@/fsd/4-entities/mow';
-
-import { ISnapshotCharacter, ISnapshotMachineOfWar } from '../input-roster-snapshots/models';
 
 const maxRankForRarity: Record<Rarity, Rank> = {
     [Rarity.Common]: Rank.Iron1,
