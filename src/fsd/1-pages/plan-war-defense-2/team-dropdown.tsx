@@ -118,5 +118,3 @@ export const TeamDropdown: React.FC<Props> = ({
         </div>
     );
 };
-
-export default TeamDropdown;

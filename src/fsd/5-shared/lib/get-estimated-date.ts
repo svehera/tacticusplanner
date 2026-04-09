@@ -18,7 +18,7 @@ function getDaySuffix(day: number): string {
     }
 }
 
-export function formatDateWithOrdinal(date: Date, withYear: boolean = false): string {
+function formatDateWithOrdinal(date: Date, withYear: boolean = false): string {
     const day = date.getDate();
     const month = date.toLocaleString('en', { month: 'long' });
     const suffix = getDaySuffix(day);

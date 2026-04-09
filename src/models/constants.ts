@@ -472,4 +472,4 @@ export const rarityToStars = RarityMapper.toStars;
 export const rarityToMaxStars = RarityMapper.toMaxStars;
 export const rarityToMaxRank = RarityMapper.toMaxRank;
 
-export { charsUnlockShards, charsReleaseShards } from '@/fsd/4-entities/character';
+export { charsUnlockShards } from '@/fsd/4-entities/character';
