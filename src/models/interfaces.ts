@@ -163,6 +163,7 @@ export interface IPersonalData2 {
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
 }
+
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */
     lastSetAtSecondsUtc?: number;
@@ -283,6 +284,15 @@ interface IDailyRaidsFarmPreferences {
     machineHuntPreferences?: IMachineHuntPreferences;
 }
 
+export interface IHonorYourHeroesReward {
+    tier: number;
+    maxProgressionIndex: number;
+    rewards: string[];
+}
+
+export interface IOnslaughtData {
+    honorYourHeroesRewards: IHonorYourHeroesReward[];
+}
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;
@@ -290,6 +300,7 @@ export interface IDailyRaidsPreferences {
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
     campaignEvent?: CampaignGroupType | 'none';
+    onslaughtSectors?: Record<Alliance, number>;
 }
 
 export type ICustomDailyRaidsSettings = Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
@@ -380,6 +391,9 @@ export interface IPersonalGoal {
     unitId?: string;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
+
+    currentRank?: Rank;
+    currentRarity?: Rarity;
 }
 
 export interface IEstimatedRanksSettings {

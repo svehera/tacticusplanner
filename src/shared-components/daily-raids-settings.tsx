@@ -25,7 +25,7 @@ import { isMobile } from 'react-device-detect';
 import { DailyRaidsStrategy } from 'src/models/enums';
 import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Alliance, Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -33,6 +33,7 @@ import { CampaignType, CampaignGroupType } from '@/fsd/4-entities/campaign';
 
 import { ICustomDailyRaidsSettings, IDailyRaidsFarmOrder, IDailyRaidsHomeScreenEvent } from '../models/interfaces';
 import { DispatchContext, StoreContext } from '../reducers/store.provider';
+import { ONSLAUGHT_SECTOR_OPTIONS } from '../services/onslaught-rewards-service';
 
 const defaultCustomSettings: ICustomDailyRaidsSettings = {
     ['Mythic Shard']: [CampaignType.Extremis],
@@ -105,6 +106,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
+
     /*
     const [character, setCharacter] = useState<ICharacter2>(() => {
         return (
@@ -132,6 +134,20 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             setDailyEnergy(value);
             setDailyRaidsPreferencesForm(current => ({ ...current, dailyEnergy: scaledValue }));
         }
+    };
+
+    const handleOnslaughtSectorChange = (alliance: Alliance, value: number) => {
+        setDailyRaidsPreferencesForm(current => ({
+            ...current,
+            onslaughtSectors: {
+                ...(current.onslaughtSectors ?? {
+                    [Alliance.Imperial]: 1,
+                    [Alliance.Xenos]: 1,
+                    [Alliance.Chaos]: 1,
+                }),
+                [alliance]: value,
+            },
+        }));
     };
 
     const saveChanges = () => {
@@ -273,7 +289,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             </RadioGroup>
                         </FormControl>
                     </div>
-                    <div className="flex flex-row items-start gap-4">
+                    <div className="flex flex-row flex-wrap items-start gap-4">
                         <FormControl>
                             <InputLabel id="home-screen-event-label">Home Screen Event</InputLabel>
                             <Select
@@ -302,6 +318,8 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             </Select>
                             <FormHelperText>Select your current Home Screen Event.</FormHelperText>
                         </FormControl>
+                    </div>
+                    <div className="flex flex-row flex-wrap items-start gap-4">
                         {/*}
                         {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
                             IDailyRaidsHomeScreenEvent.trainingRush && (
@@ -422,6 +440,63 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             Select your current Campaign Event to make it available for raids suggestions
                         </FormHelperText>
                     </FormControl>
+
+                    <div className="flex flex-col gap-2">
+                        <FormLabel className="font-bold">Onslaught Sector:</FormLabel>
+                        <div className="flex flex-row flex-wrap items-start gap-4 ps-5">
+                            <FormControl style={{ minWidth: 230 }}>
+                                <InputLabel id="imperial-onslaught-label">Imperial</InputLabel>
+                                <Select
+                                    labelId="imperial-onslaught-label"
+                                    id="imperial-onslaught-select"
+                                    value={dailyRaidsPreferencesForm.onslaughtSectors?.[Alliance.Imperial] ?? 1}
+                                    label="Imperial"
+                                    onChange={event =>
+                                        handleOnslaughtSectorChange(Alliance.Imperial, event.target.value as number)
+                                    }>
+                                    {ONSLAUGHT_SECTOR_OPTIONS.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+
+                            <FormControl style={{ minWidth: 230 }}>
+                                <InputLabel id="xenos-onslaught-label">Xenos</InputLabel>
+                                <Select
+                                    labelId="xenos-onslaught-label"
+                                    value={dailyRaidsPreferencesForm.onslaughtSectors?.[Alliance.Xenos] ?? 1}
+                                    label="Xenos"
+                                    onChange={event =>
+                                        handleOnslaughtSectorChange(Alliance.Xenos, event.target.value as number)
+                                    }>
+                                    {ONSLAUGHT_SECTOR_OPTIONS.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+
+                            <FormControl style={{ minWidth: 230 }}>
+                                <InputLabel id="chaos-onslaught-label">Chaos</InputLabel>
+                                <Select
+                                    labelId="chaos-onslaught-label"
+                                    value={dailyRaidsPreferencesForm.onslaughtSectors?.[Alliance.Chaos] ?? 1}
+                                    label="Chaos"
+                                    onChange={event =>
+                                        handleOnslaughtSectorChange(Alliance.Chaos, event.target.value as number)
+                                    }>
+                                    {ONSLAUGHT_SECTOR_OPTIONS.map(option => (
+                                        <MenuItem key={option.value} value={option.value}>
+                                            {option.label}
+                                        </MenuItem>
+                                    ))}
+                                </Select>
+                            </FormControl>
+                        </div>
+                    </div>
                 </FormGroup>
             </DialogContent>
             <DialogActions>

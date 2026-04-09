@@ -41,6 +41,11 @@ export type CharactersAction =
           value: number;
       }
     | {
+          type: 'UpdateMythicShards';
+          character: string;
+          value: number;
+      }
+    | {
           type: 'UpdateStars';
           character: string;
           value: number;
@@ -279,6 +284,20 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
             return state;
         }
 
+        case 'UpdateMythicShards': {
+            const existingCharIndex = state.findIndex(char => char.name === action.character);
+
+            if (existingCharIndex !== -1) {
+                const updatedCharacter = {
+                    ...state[existingCharIndex],
+                    mythicShards: action.value,
+                };
+
+                return [...state.slice(0, existingCharIndex), updatedCharacter, ...state.slice(existingCharIndex + 1)];
+            }
+            return state;
+        }
+
         case 'UpdateStars': {
             const existingCharIndex = state.findIndex(char => char.name === action.character);
 
@@ -323,7 +342,7 @@ export const charactersReducer = (state: ICharacter2[], action: CharactersAction
         case 'UpdateBias': {
             const { recommendedFirst, recommendedLast } = action;
 
-            return state.map(c => ({
+            return state.map((c: ICharacter2) => ({
                 ...c,
                 bias: recommendedFirst.includes(c.name)
                     ? CharacterBias.recommendFirst
