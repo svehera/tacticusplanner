@@ -12,13 +12,13 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { SupportSection } from '@/fsd/5-shared/ui/support-banner';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
+import { ISnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-import { ISnapshotCharacter } from '../input-roster-snapshots/models';
 import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
