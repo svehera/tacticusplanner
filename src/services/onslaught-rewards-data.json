@@ -1,0 +1,1675 @@
+{
+    "honorYourHeroesRewards": [
+        {
+            "tier": 1,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:2-3", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 2,
+            "rewards": [
+                "shards_[heroId]:2-3",
+                "waves_heroAscensionOrbUncommon#heroAscensionOrbUncommon_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 4,
+            "rewards": [
+                "shards_[heroId]:2-3",
+                "waves_abilityTokenUncommon#abilityTokenUncommon_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 5,
+            "rewards": [
+                "shards_[heroId]:2-3",
+                "waves_heroAscensionOrbRare#heroAscensionOrbRare_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:2-3", "waves_abilityTokenRare#abilityTokenRare_[grandAllianceId]:1%4/10"]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:2-3",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:2-3", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%3/10"]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:2-3",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:2-3",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 1,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:2-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 2,
+            "rewards": [
+                "shards_[heroId]:2-4",
+                "waves_heroAscensionOrbUncommon#heroAscensionOrbUncommon_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 4,
+            "rewards": [
+                "shards_[heroId]:2-4",
+                "waves_abilityTokenUncommon#abilityTokenUncommon_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 5,
+            "rewards": [
+                "shards_[heroId]:2-4",
+                "waves_heroAscensionOrbRare#heroAscensionOrbRare_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:2-4", "waves_abilityTokenRare#abilityTokenRare_[grandAllianceId]:1%4/10"]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:2-4",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:2-4", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%3/10"]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:2-4",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:2-4",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 2,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 5,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbRare#heroAscensionOrbRare_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:3-4", "waves_abilityTokenRare#abilityTokenRare_[grandAllianceId]:1%4/10"]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:3-4", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%3/10"]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 3,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%2/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 5,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbRare#heroAscensionOrbRare_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:3-4", "waves_abilityTokenRare#abilityTokenRare_[grandAllianceId]:1%6/10"]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:3-4", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%4/10"]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:3-4",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%3/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 4,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:3-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 5,
+            "rewards": [
+                "shards_[heroId]:3-5",
+                "waves_heroAscensionOrbRare#heroAscensionOrbRare_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:3-5", "waves_abilityTokenRare#abilityTokenRare_[grandAllianceId]:1%8/10"]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:3-5",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:3-5", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%4/10"]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:3-5",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:3-5",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%3/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 5,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:4-5",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:4-5", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%4/10"]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:4-5",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:4-5",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%3/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10"
+            ]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%3/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 6,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%3/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:5-6", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:5-6",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:5-6", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%6/10"]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:5-6",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:5-6",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%4/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 7,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:5-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 8,
+            "rewards": [
+                "shards_[heroId]:5-7",
+                "waves_heroAscensionOrbEpic#heroAscensionOrbEpic_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:5-7", "waves_abilityTokenEpic#abilityTokenEpic_[grandAllianceId]:1%8/10"]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:5-7",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:5-7",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%4/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 8,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:6-7",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:6-7",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%4/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%1/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%4/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 9,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%4/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%1/10"
+            ]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:8-9", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:8-9",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:8-9",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%6/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%6/10"
+            ]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%6/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 10,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:9-10", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 11,
+            "rewards": [
+                "shards_[heroId]:9-10",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:9-10",
+                "waves_heroAscensionOrbLegendary#heroAscensionOrbLegendary_[grandAllianceId]:1%8/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%8/10"
+            ]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%2/10",
+                "waves_abilityTokenLegendary#abilityTokenLegendary_[grandAllianceId]:1%8/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 11,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:10-11",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%2/10",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%2/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 12,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "waves_mythicShards#mythicShards_[heroId]:1%5/10",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%2/10"
+            ]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:14-16",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%4/10",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%4/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 13,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:15-17",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%4/10",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%4/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 14,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:16-18",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%4/10",
+                "abilityTokenLegendary_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%4/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 15,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "mythicShards_[heroId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%4/10"
+            ]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:16-20",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1-2"
+            ]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%5/10",
+                "abilityTokenLegendary_[grandAllianceId]:2"
+            ]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%5/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%5/10"
+            ]
+        },
+        {
+            "tier": 16,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%5/10"
+            ]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:17-21",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1-2"
+            ]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%5/10",
+                "abilityTokenLegendary_[grandAllianceId]:2"
+            ]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%5/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%5/10"
+            ]
+        },
+        {
+            "tier": 17,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%5/10"
+            ]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:18-22",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1-2"
+            ]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%5/10",
+                "abilityTokenLegendary_[grandAllianceId]:2"
+            ]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%5/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%5/10"
+            ]
+        },
+        {
+            "tier": 18,
+            "maxProgressionIndex": 19,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_abilityTokenMythic#abilityTokenMythic_[grandAllianceId]:1%5/10"
+            ]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:18-22",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1-2"
+            ]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%6/10",
+                "abilityTokenLegendary_[grandAllianceId]:2"
+            ]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%6/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "abilityTokenMythic_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 19,
+            "maxProgressionIndex": 19,
+            "rewards": ["mythicShards_[heroId]:1-2", "abilityTokenMythic_[grandAllianceId]:2"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:18-22",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1-2"
+            ]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%6/10",
+                "abilityTokenLegendary_[grandAllianceId]:2"
+            ]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:1-3",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%6/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "abilityTokenMythic_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 20,
+            "maxProgressionIndex": 19,
+            "rewards": ["mythicShards_[heroId]:1-3", "abilityTokenMythic_[grandAllianceId]:2"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 1,
+            "rewards": ["shards_[heroId]:3-4", "abilityTokenCommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 2,
+            "rewards": ["shards_[heroId]:3-4", "heroAscensionOrbUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 4,
+            "rewards": ["shards_[heroId]:4-5", "abilityTokenUncommon_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 5,
+            "rewards": ["shards_[heroId]:4-5", "heroAscensionOrbRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 7,
+            "rewards": ["shards_[heroId]:6-7", "abilityTokenRare_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 8,
+            "rewards": ["shards_[heroId]:6-7", "heroAscensionOrbEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 10,
+            "rewards": ["shards_[heroId]:10-11", "abilityTokenEpic_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 11,
+            "rewards": ["shards_[heroId]:10-11", "heroAscensionOrbLegendary_[grandAllianceId]:1"]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 14,
+            "rewards": [
+                "shards_[heroId]:18-22",
+                "heroAscensionOrbLegendary_[grandAllianceId]:1",
+                "abilityTokenLegendary_[grandAllianceId]:1-2"
+            ]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 15,
+            "rewards": [
+                "mythicShards_[heroId]:1-2",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%6/10",
+                "abilityTokenLegendary_[grandAllianceId]:2"
+            ]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 18,
+            "rewards": [
+                "mythicShards_[heroId]:2-3",
+                "waves_heroAscensionOrbMythic#heroAscensionOrbMythic_[grandAllianceId]:1%6/10",
+                "abilityTokenLegendary_[grandAllianceId]:1",
+                "abilityTokenMythic_[grandAllianceId]:1"
+            ]
+        },
+        {
+            "tier": 21,
+            "maxProgressionIndex": 19,
+            "rewards": ["mythicShards_[heroId]:2-3", "abilityTokenMythic_[grandAllianceId]:2"]
+        }
+    ]
+}

@@ -1,4 +1,6 @@
-﻿import { defaultData } from '../models/constants';
+﻿import { Alliance } from '@/fsd/5-shared/model';
+
+import { defaultData } from '../models/constants';
 import { IDailyRaidsPreferences, SetStateAction } from '../models/interfaces';
 
 export type DailyRaidsPreferencesAction =
@@ -9,6 +11,11 @@ export type DailyRaidsPreferencesAction =
       }
     | {
           type: 'UpdateEnergy';
+          value: number;
+      }
+    | {
+          type: 'UpdateOnslaughtSector';
+          alliance: Alliance;
           value: number;
       }
     | SetStateAction<IDailyRaidsPreferences>;
@@ -26,6 +33,15 @@ export const dailyRaidsPreferencesReducer = (
         }
         case 'UpdateEnergy': {
             return { ...state, dailyEnergy: action.value };
+        }
+        case 'UpdateOnslaughtSector': {
+            return {
+                ...state,
+                onslaughtSectors: {
+                    ...(state.onslaughtSectors ?? defaultData.dailyRaidsPreferences.onslaughtSectors!),
+                    [action.alliance]: action.value,
+                },
+            };
         }
         default: {
             // @ts-expect-error TS says this should never be reached but we want the error if it does

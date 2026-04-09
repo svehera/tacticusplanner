@@ -1,15 +1,17 @@
-﻿import React, { useMemo } from 'react';
+﻿import { Box, Typography } from '@mui/material';
+import React, { useEffect, useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage } from 'src/models/enums';
-import { ICampaignBattleComposed, IPersonalGoal } from 'src/models/interfaces';
-import { NumbersInput } from 'src/shared-components/goals/numbers-input';
+import { ICampaignBattleComposed, IPersonalGoal, IDailyRaidsPreferences } from 'src/models/interfaces';
+import { OnslaughtRewardsService } from 'src/services/onslaught-rewards-service';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 interface Props {
+    alliance: Alliance;
     currentRarity: Rarity;
     targetRarity: Rarity;
     currentStars: RarityStars;
@@ -22,28 +24,61 @@ interface Props {
     mythicCampaignsUsage: CampaignsLocationsUsage;
     shardsPerToken: number;
     mythicShardsPerToken: number;
+    dailyRaidsPreferences: IDailyRaidsPreferences;
     onChange: (key: keyof IPersonalGoal, value: number) => void;
 }
 
 export const SetAscendGoal: React.FC<Props> = ({
     targetStars,
+    alliance,
     targetRarity,
     currentStars,
     currentRarity,
-    possibleLocations,
-    possibleMythicLocations,
     shardsPerToken,
     mythicShardsPerToken,
+    dailyRaidsPreferences,
     onChange,
 }) => {
+    useEffect(() => {
+        const onslaughtData = OnslaughtRewardsService.data;
+        if (onslaughtData?.honorYourHeroesRewards && dailyRaidsPreferences) {
+            const sector = OnslaughtRewardsService.getAllianceSector(dailyRaidsPreferences, alliance);
+            const shards = OnslaughtRewardsService.getMeanShards(onslaughtData, sector, currentRarity, 'shards');
+            const mythicShards = OnslaughtRewardsService.getMeanShards(
+                onslaughtData,
+                sector,
+                currentRarity,
+                'mythicShards'
+            );
+
+            console.log(`[SetAscendGoal] Calculation:`, {
+                alliance,
+                rarity: Rarity[currentRarity],
+                sector,
+                calculated: { shards, mythicShards },
+                currentProps: { shardsPerToken, mythicShardsPerToken },
+            });
+
+            if (shards !== shardsPerToken) onChange('shardsPerToken', shards);
+            if (mythicShards !== mythicShardsPerToken) onChange('mythicShardsPerToken', mythicShards);
+        }
+    }, [
+        dailyRaidsPreferences?.onslaughtSectors,
+        alliance,
+        currentRarity,
+        shardsPerToken,
+        mythicShardsPerToken,
+        onChange,
+    ]);
+
     const rarityValues = useMemo(() => {
-        return getEnumValues(Rarity).filter(x => x >= currentRarity);
+        return getEnumValues(Rarity).filter((x: Rarity) => x >= currentRarity);
     }, [currentRarity]);
 
     const starsEntries = useMemo(() => {
         const minStars = rarityToStars[targetRarity];
         const maxStars = rarityToMaxStars[targetRarity];
-        return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
+        return getEnumValues(RarityStars).filter((x: RarityStars) => x >= minStars && x <= maxStars);
     }, [currentStars, targetRarity]);
 
     return (
@@ -69,57 +104,21 @@ export const SetAscendGoal: React.FC<Props> = ({
 
             {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
                 <>
-                    {possibleLocations.length > 0 && (
-                        <>
-                            <div className="flex items-center gap-3">
-                                <NumbersInput
-                                    title="Shards per onslaught"
-                                    helperText="Put 0 to ignore Onslaught raids"
-                                    value={shardsPerToken}
-                                    valueChange={value => onChange('shardsPerToken', value)}
-                                />
-                            </div>
-                        </>
-                    )}
-
-                    {possibleLocations.length === 0 && (
-                        <div className="flex-box gap10 full-width">
-                            <NumbersInput
-                                title="Shards per onslaught"
-                                helperText="You should put more than 0 to be able to create the goal"
-                                value={shardsPerToken}
-                                valueChange={value => onChange('shardsPerToken', value)}
-                            />
-                        </div>
-                    )}
+                    <Box className="flex items-center gap-3">
+                        <Typography variant="body2" color="textSecondary">
+                            Expected shards per Onslaught: <b>{shardsPerToken}</b>
+                        </Typography>
+                    </Box>
                 </>
             )}
 
             {targetRarity >= Rarity.Mythic && (
                 <>
-                    {possibleMythicLocations.length > 0 && (
-                        <div className="flex items-center gap-3">
-                            <div className="w-1/2">
-                                <NumbersInput
-                                    title="Mythic shards per onslaught"
-                                    helperText="Put 0 to ignore Onslaught raids"
-                                    value={mythicShardsPerToken}
-                                    valueChange={value => onChange('mythicShardsPerToken', value)}
-                                />
-                            </div>
-                        </div>
-                    )}
-
-                    {possibleMythicLocations.length === 0 && (
-                        <div className="flex-box gap10 full-width">
-                            <NumbersInput
-                                title="Mythic shards per onslaught"
-                                helperText="You should put more than 0 to be able to create the goal"
-                                value={mythicShardsPerToken}
-                                valueChange={value => onChange('mythicShardsPerToken', value)}
-                            />
-                        </div>
-                    )}
+                    <Box className="flex items-center gap-3">
+                        <Typography variant="body2" color="textSecondary">
+                            Expected mythic shards per Onslaught: <b>{mythicShardsPerToken}</b>
+                        </Typography>
+                    </Box>
                 </>
             )}
         </>
