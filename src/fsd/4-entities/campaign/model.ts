@@ -57,7 +57,7 @@ interface IPotentialReward {
  * the information on a particular type of enemy. If @rarity is specified, it
  * means that the enemy is a character, not an NPC.
  */
-export interface IDetailedEnemy {
+interface IDetailedEnemy {
     id: string;
     count: number;
     name: string;
