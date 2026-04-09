@@ -740,12 +740,13 @@ export class GoalsService {
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
-        currentEstimate.legendaryBooks = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        currentEstimate.books = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        currentEstimate.bookRarity = xpBookRarityToUse;
         currentEstimate.xpLeft = xpNeeded;
 
-        if (xpIncomeState.manualBooksPerDay > 0) {
+        if (xpIncomeState.manualCodicesPerDay > 0) {
             const booksToAccrue = Math.ceil(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
-            newAccrual = this.processGoalAccrual(booksToAccrue, xpBooksAccrual, xpIncomeState.manualBooksPerDay);
+            newAccrual = this.processGoalAccrual(booksToAccrue, xpBooksAccrual, xpIncomeState.manualCodicesPerDay);
             goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000);
         }
 
@@ -856,7 +857,7 @@ export class GoalsService {
                     xpIncomeState,
                     xpBooksAccrual,
                     today,
-                    xpIncomeState.defaultBookToUse
+                    xpIncomeState.defaultCodexToUse
                 );
                 totalXpNeeded += xpNeeded;
                 xpBooksAccrual = newXpBooksAccrual;

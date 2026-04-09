@@ -1,9 +1,9 @@
 import { Rarity } from '@/fsd/5-shared/model';
 
 export enum ArenaLeague {
-    kHonorGuard,
-    kCaptain,
-    kChapterMaster,
+    honorGuard,
+    captain,
+    chapterMaster,
 }
 
 export interface BlueStarCharacter {
@@ -12,10 +12,10 @@ export interface BlueStarCharacter {
 }
 
 export interface XpIncomeState {
-    /** Manual Legendary Books per day */
-    manualBooksPerDay: number;
+    /** Manual Legendary Codices per day */
+    manualCodicesPerDay: number;
 
-    /** Arena League for weekly legendary book rewards */
+    /** Arena League for weekly legendary codex rewards */
     arenaLeague: ArenaLeague;
 
     /** Flag: Are guild raids looped or cleared manually? */
@@ -33,11 +33,8 @@ export interface XpIncomeState {
     /** Extra bosses cleared after the final loop (only if loopsRaids is 'yes') */
     extraBossesAfterLoop: number;
 
-    /** Flag: Does the user spend AT to buy books? */
-    useAtForBooks: 'yes' | 'no';
-
-    /** Array of Blue Star character IDs selected for AT contribution */
-    blueStarCharIds: string[];
+    /** Flag: Does the user spend AT to buy codices? */
+    useATForCodices: 'yes' | 'no';
 
     /** Flag: Does the user have MoW at Blue Star for Incursion farming? */
     hasBlueStarMoW: 'yes' | 'no';
@@ -45,8 +42,8 @@ export interface XpIncomeState {
     /** Which Legendary Incursion level is being farmed for MoW AT */
     incursionLegendaryLevel: 'L10' | 'L12' | 'M';
 
-    /** Flag: Is the user onslaughting a Blue Star character for AT farming? */
-    onslaughtBlueStar: 'yes' | 'no';
+    /** Flag: Is the user onslaughting a Mythic Winged character for AT farming? */
+    onslaughtMythicWinged: boolean;
 
     /** Energy spent on Elite nodes per day (0-600, step 10) */
     eliteEnergyPerDay: number;
@@ -54,9 +51,9 @@ export interface XpIncomeState {
     /** Energy spent on Non-Elite nodes per day (0-600, step 6) */
     nonEliteEnergyPerDay: number;
 
-    /** Additional books per week from unlisted sources */
-    additionalBooksPerWeek: number;
+    /** Additional codices per week from unlisted sources */
+    additionalCodicesPerWeek: number;
 
-    /** Rarity of XP Books to use for calculations */
-    defaultBookToUse: Rarity;
+    /** Rarity of XP Codices to use for calculations */
+    defaultCodexToUse: Rarity;
 }

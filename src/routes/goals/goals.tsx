@@ -536,7 +536,7 @@ export const Goals = () => {
                                             key={goal.goalId}
                                             goal={goal}
                                             goalEstimate={finalEstimate} // Use the consolidated estimate
-                                            bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
+                                            bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
                                             menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                             onToggleInclude={() =>
                                                 dispatch.goals({
@@ -606,7 +606,7 @@ export const Goals = () => {
                                             key={goal.goalId}
                                             goal={goal}
                                             goalEstimate={estimate}
-                                            bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
+                                            bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
                                             menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                             onToggleInclude={() =>
                                                 dispatch.goals({
@@ -666,7 +666,7 @@ export const Goals = () => {
                                             goalEstimate={finalEstimate}
                                             characters={characters}
                                             mows={resolvedMows as IMow2[]}
-                                            bookRarity={xpIncome.defaultBookToUse ?? Rarity.Legendary}
+                                            bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
                                             menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
                                             onToggleInclude={() =>
                                                 dispatch.goals({
