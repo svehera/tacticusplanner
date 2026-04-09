@@ -43,7 +43,7 @@ export const XpIncome: React.FC = () => {
         useATForBooks,
         hasBlueStarMoW,
         additionalBooksPerWeek,
-        onslaughtBlueStar,
+        onslaughtMythicWinged,
         incursionLegendaryLevel,
     } = xpIncome;
 
@@ -98,7 +98,7 @@ export const XpIncome: React.FC = () => {
 
     const estimatedBooksPerWeek = useMemo(
         () =>
-            XpIncomeService.estimateWeeklyBookIncome(
+            XpIncomeService.estimateWeeklyCodexIncome(
                 xpIncome,
                 blueStarCharIds,
                 raidLoops,
@@ -381,15 +381,15 @@ export const XpIncome: React.FC = () => {
                         <h5 className="mt-4 border-t border-gray-300 pt-3 text-sm font-medium dark:border-gray-600">
                             Onslaught Farming Income
                         </h5>
-                        <p>Are you onslaughting a Blue Star character?</p>
+                        <p>Are you onslaughting a Mythic Winged character?</p>
                         <div className="mt-2 mb-4 flex gap-5">
                             <label>
                                 <input
                                     type="radio"
-                                    name="onslaughtBlueStar"
+                                    name="onslaughtMythicWinged"
                                     value="yes"
-                                    checked={onslaughtBlueStar === 'yes'}
-                                    onChange={() => dispatchUpdate('onslaughtBlueStar', 'yes')}
+                                    checked={onslaughtMythicWinged === 'yes'}
+                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', 'yes')}
                                     className="mr-2"
                                 />{' '}
                                 Yes
@@ -397,10 +397,10 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
-                                    name="onslaughtBlueStar"
+                                    name="onslaughtMythicWinged"
                                     value="no"
-                                    checked={onslaughtBlueStar === 'no'}
-                                    onChange={() => dispatchUpdate('onslaughtBlueStar', 'no')}
+                                    checked={onslaughtMythicWinged === 'no'}
+                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', 'no')}
                                     className="mr-2"
                                 />{' '}
                                 No

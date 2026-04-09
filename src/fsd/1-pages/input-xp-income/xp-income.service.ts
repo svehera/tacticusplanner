@@ -2,19 +2,19 @@ import { Rarity, XP_BOOK_VALUE } from '@/fsd/5-shared/model';
 
 import { ArenaLeague, BlueStarCharacter, XpIncomeState } from './models';
 
-/** AT shards cost per legendary book purchase */
+/** AT shards cost per mythic book purchase */
 const shardsPerAtBook = 57;
-const onslaughtBooksDaily = (10.5 / shardsPerAtBook) * 5;
+const onslaughtBooksWeekly = 25;
 export const eliteEnergyPerRaid = 10;
-const booksPerEliteRaid = (25 / 24 / shardsPerAtBook) * 5;
+const codicesPerEliteRaid = (25 / 24 / shardsPerAtBook) * 5;
 export const nonEliteEnergyPerRaid = 6;
-const booksPerNonEliteRaid = (3 / 7 / shardsPerAtBook) * 5;
+const codicesPerNonEliteRaid = (3 / 7 / shardsPerAtBook) * 5;
 const shardsPerL10Incursion = 203;
 const shardsPerL12Incursion = 231;
 const shardsPerMythicIncursion = 210;
-/** Legendary-equivalent value: 1 Epic book = 1/5 Legendary book */
+/** Legendary-equivalent value: 1 Epic codex = 1/5 Legendary codex */
 const epicToLegendary = 1 / 5;
-/** Legendary-equivalent value: 1 Mythic book = 5 Legendary books */
+/** Legendary-equivalent value: 1 Mythic codex = 5 Legendary codices */
 const mythicToLegendary = 5;
 
 const arenaBooksPerWeek: Record<ArenaLeague, Partial<Record<Rarity, number>>> = {
@@ -33,7 +33,7 @@ const bossesPerRarity: Record<Rarity, number> = {
     [Rarity.Mythic]: 2,
 };
 const creditsPerBoss = 1000;
-/** Guild shop cost for 1 Mythic XP book (= 5 legendary-equivalent) */
+/** Guild shop cost for 1 Mythic XP codex (= 5 legendary-equivalent) */
 const creditsPerMythicBook = 1500;
 
 /** Cumulative credits when clearing all bosses up to and including each rarity */
@@ -65,7 +65,7 @@ export const blueStarCharacters: BlueStarCharacter[] = [
 ];
 
 export class XpIncomeService {
-    private static estimateArenaBooks(arenaLeague: ArenaLeague): number {
+    private static estimateArenaCodices(arenaLeague: ArenaLeague): number {
         const row = arenaBooksPerWeek[arenaLeague];
         return (
             (row[Rarity.Epic] ?? 0) * epicToLegendary +
@@ -74,7 +74,7 @@ export class XpIncomeService {
         );
     }
 
-    private static estimateRaidBooks(
+    private static estimateWeeklyRaidCodices(
         loopsRaids: XpIncomeState['loopsRaids'],
         raidLoops: number,
         extraBossesAfterLoop: number,
@@ -85,11 +85,12 @@ export class XpIncomeService {
             loopsRaids === 'yes'
                 ? baseRaidCreditsPerSeason + raidLoops * creditsPerLoop + extraBossesAfterLoop * creditsPerBoss
                 : (raidCreditsByRarity[clearRarity] ?? 0) + additionalBosses * creditsPerBoss;
-        // Raid seasons run every 2 weeks; convert credits to weekly legendary-equivalent books
-        return ((credits / creditsPerMythicBook) * mythicToLegendary) / 2;
+        // Raid seasons run every 2 weeks; convert credits to weekly legendary-equivalent codices
+        // Cap at 18 grims × 5 = 90 legendary-equivalent codices/week (shop refresh limit)
+        return Math.min(((credits / creditsPerMythicBook) * mythicToLegendary) / 2, 90);
     }
 
-    private static estimateAtBooks(
+    private static estimateAtCodices(
         state: XpIncomeState,
         blueStarCharIds: string[],
         eliteEnergyPerDay: number,
@@ -111,20 +112,20 @@ export class XpIncomeService {
             weeklyShards += shardsPerMonth / 5;
         }
 
-        let books = (weeklyShards / shardsPerAtBook) * 5;
+        let codices = (weeklyShards / shardsPerAtBook) * 5;
 
-        if (state.onslaughtBlueStar === 'yes') {
-            books += onslaughtBooksDaily * 7;
+        if (state.onslaughtMythicWinged === 'yes') {
+            codices += onslaughtBooksWeekly;
         }
 
-        books += (eliteEnergyPerDay / eliteEnergyPerRaid) * booksPerEliteRaid * 7;
-        books += (nonEliteEnergyPerDay / nonEliteEnergyPerRaid) * booksPerNonEliteRaid * 7;
+        codices += (eliteEnergyPerDay / eliteEnergyPerRaid) * codicesPerEliteRaid * 7;
+        codices += (nonEliteEnergyPerDay / nonEliteEnergyPerRaid) * codicesPerNonEliteRaid * 7;
 
-        return books;
+        return codices;
     }
 
-    /** @returns The number of books of the user's chosen rarity they can expect to earn per week. */
-    public static estimateWeeklyBookIncome(
+    /** @returns The number of codices of the user's chosen rarity they can expect to earn per week. */
+    public static estimateWeeklyCodexIncome(
         state: XpIncomeState,
         blueStarCharIds: string[],
         raidLoops: number,
@@ -133,21 +134,21 @@ export class XpIncomeService {
         eliteEnergyPerDay: number,
         nonEliteEnergyPerDay: number
     ): number {
-        const legendaryBooksPerWeek =
-            this.estimateArenaBooks(state.arenaLeague) +
-            this.estimateRaidBooks(
+        const legendaryCodicesPerWeek =
+            this.estimateArenaCodices(state.arenaLeague) +
+            this.estimateWeeklyRaidCodices(
                 state.loopsRaids,
                 raidLoops,
                 extraBossesAfterLoop,
                 state.clearRarity,
                 additionalBosses
             ) +
-            this.estimateAtBooks(state, blueStarCharIds, eliteEnergyPerDay, nonEliteEnergyPerDay);
+            this.estimateAtCodices(state, blueStarCharIds, eliteEnergyPerDay, nonEliteEnergyPerDay);
         // Convert from Legendary-equivalent to the player's chosen display rarity
         const chosenRarity = state.defaultBookToUse ?? Rarity.Legendary;
         // additionalBooksPerWeek is entered in chosen-rarity units — add after conversion
         return (
-            legendaryBooksPerWeek * (XP_BOOK_VALUE[Rarity.Legendary] / XP_BOOK_VALUE[chosenRarity]) +
+            legendaryCodicesPerWeek * (XP_BOOK_VALUE[Rarity.Legendary] / XP_BOOK_VALUE[chosenRarity]) +
             state.additionalBooksPerWeek
         );
     }

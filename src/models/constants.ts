@@ -417,7 +417,7 @@ export const defaultData: IPersonalData2 = {
         incursionLegendaryLevel: 'L12', // Defaults to the highest level
 
         // AT Farming (Nodes)
-        onslaughtBlueStar: 'no',
+        onslaughtMythicWinged: 'no',
         eliteEnergyPerDay: 0,
         nonEliteEnergyPerDay: 0,
 

@@ -42,8 +42,8 @@ export interface XpIncomeState {
     /** Which Legendary Incursion level is being farmed for MoW AT */
     incursionLegendaryLevel: 'L10' | 'L12' | 'M';
 
-    /** Flag: Is the user onslaughting a Blue Star character for AT farming? */
-    onslaughtBlueStar: 'yes' | 'no';
+    /** Flag: Is the user onslaughting a Mythic Winged character for AT farming? */
+    onslaughtMythicWinged: 'yes' | 'no';
 
     /** Energy spent on Elite nodes per day (0-600, step 10) */
     eliteEnergyPerDay: number;
