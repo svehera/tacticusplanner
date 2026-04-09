@@ -35,14 +35,14 @@ export const XpIncome: React.FC = () => {
     const dispatch = useContext(DispatchContext);
 
     const {
-        manualBooksPerDay,
-        defaultBookToUse,
+        manualCodicesPerDay,
+        defaultCodexToUse,
         arenaLeague,
         loopsRaids,
         clearRarity,
-        useATForBooks,
+        useATForCodices,
         hasBlueStarMoW,
-        additionalBooksPerWeek,
+        additionalCodicesPerWeek,
         onslaughtMythicWinged,
         incursionLegendaryLevel,
     } = xpIncome;
@@ -96,7 +96,7 @@ export const XpIncome: React.FC = () => {
         [resolvedCharacters]
     );
 
-    const estimatedBooksPerWeek = useMemo(
+    const estimatedCodicesPerWeek = useMemo(
         () =>
             XpIncomeService.estimateWeeklyCodexIncome(
                 xpIncome,
@@ -118,24 +118,24 @@ export const XpIncome: React.FC = () => {
         ]
     );
 
-    const estimatedBooksPerDay = estimatedBooksPerWeek / 7;
+    const estimatedCodicesPerDay = estimatedCodicesPerWeek / 7;
 
     return (
         <div className="mx-auto max-w-2xl rounded-lg bg-white p-5 font-sans text-gray-800 shadow-lg dark:bg-gray-900 dark:text-white">
             <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
                 <DecimalSpinner
-                    label={`${Rarity[defaultBookToUse ?? Rarity.Legendary]} Books / Day`}
-                    value={manualBooksPerDay}
-                    onChange={value => dispatchUpdate('manualBooksPerDay', value)}
+                    label={`${Rarity[defaultCodexToUse ?? Rarity.Legendary]} Codices / Day`}
+                    value={manualCodicesPerDay}
+                    onChange={value => dispatchUpdate('manualCodicesPerDay', value)}
                 />
             </div>
 
             <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
                 <BookSelect
-                    label="Default XP Book for Calculations"
-                    tooltip="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed."
-                    value={defaultBookToUse ?? Rarity.Legendary}
-                    valueChanges={v => dispatchUpdate('defaultBookToUse', v)}
+                    label="Default XP Codex for Calculations"
+                    tooltip="This controls which codex rarity is used to display and calculate XP requirements. Smaller codices (e.g. Common) show higher counts with less waste. Larger codices (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed."
+                    value={defaultCodexToUse ?? Rarity.Legendary}
+                    valueChanges={v => dispatchUpdate('defaultCodexToUse', v)}
                 />
             </div>
 
@@ -244,15 +244,15 @@ export const XpIncome: React.FC = () => {
                 </div>
 
                 <h4 className="mt-5 font-semibold">AT Purchases (via Blue Star Characters)</h4>
-                <p>Do you use AT to buy books?</p>
+                <p>Do you use AT to buy codices?</p>
                 <div className="mt-2 mb-4 flex gap-5">
                     <label>
                         <input
                             type="radio"
-                            name="useATForBooks"
+                            name="useATForCodices"
                             value="yes"
-                            checked={useATForBooks === 'yes'}
-                            onChange={() => dispatchUpdate('useATForBooks', 'yes')}
+                            checked={useATForCodices === 'yes'}
+                            onChange={() => dispatchUpdate('useATForCodices', 'yes')}
                             className="mr-2"
                         />{' '}
                         Yes
@@ -260,17 +260,17 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
-                            name="useATForBooks"
+                            name="useATForCodices"
                             value="no"
-                            checked={useATForBooks === 'no'}
-                            onChange={() => dispatchUpdate('useATForBooks', 'no')}
+                            checked={useATForCodices === 'no'}
+                            onChange={() => dispatchUpdate('useATForCodices', 'no')}
                             className="mr-2"
                         />{' '}
                         No
                     </label>
                 </div>
 
-                {useATForBooks === 'yes' && (
+                {useATForCodices === 'yes' && (
                     <div className="mt-3 rounded-md border-l-4 border-yellow-500 bg-gray-100 p-3 dark:bg-gray-700">
                         <p className="mb-2 font-medium">Residual AT Sources:</p>
                         <div className="flex flex-wrap gap-4">
@@ -388,8 +388,8 @@ export const XpIncome: React.FC = () => {
                                     type="radio"
                                     name="onslaughtMythicWinged"
                                     value="yes"
-                                    checked={onslaughtMythicWinged === 'yes'}
-                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', 'yes')}
+                                    checked={onslaughtMythicWinged}
+                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', true)}
                                     className="mr-2"
                                 />{' '}
                                 Yes
@@ -399,8 +399,8 @@ export const XpIncome: React.FC = () => {
                                     type="radio"
                                     name="onslaughtMythicWinged"
                                     value="no"
-                                    checked={onslaughtMythicWinged === 'no'}
-                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', 'no')}
+                                    checked={!onslaughtMythicWinged}
+                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', false)}
                                     className="mr-2"
                                 />{' '}
                                 No
@@ -453,32 +453,33 @@ export const XpIncome: React.FC = () => {
 
                 <div className="flex items-center justify-between py-2">
                     <label className="font-bold">
-                        Add&apos;l {Rarity[defaultBookToUse ?? Rarity.Legendary]} Books/Week from unspecified sources:
+                        Add&apos;l {Rarity[defaultCodexToUse ?? Rarity.Legendary]} Codices/Week from unspecified
+                        sources:
                     </label>
                     <input
                         type="number"
                         min="0"
                         step="1"
-                        value={additionalBooksPerWeek}
+                        value={additionalCodicesPerWeek}
                         onChange={event =>
-                            dispatchUpdate('additionalBooksPerWeek', Number.parseInt(event.target.value) || 0)
+                            dispatchUpdate('additionalCodicesPerWeek', Number.parseInt(event.target.value) || 0)
                         }
                         className="w-24 rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
                     />
                 </div>
             </div>
             <div className="mt-5 rounded-lg border-2 border-green-600 bg-green-50 p-4 text-center dark:border-green-400 dark:bg-green-900">
-                <h3 className="text-gray-900 dark:text-white">Book Estimate</h3>
+                <h3 className="text-gray-900 dark:text-white">Codex Estimate</h3>
                 <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {Rarity[defaultBookToUse ?? Rarity.Legendary]} books
+                    {Rarity[defaultCodexToUse ?? Rarity.Legendary]} codices
                 </p>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">
-                    Per Week: <span className="block text-xl font-bold">{estimatedBooksPerWeek.toFixed(2)}</span>
+                    Per Week: <span className="block text-xl font-bold">{estimatedCodicesPerWeek.toFixed(2)}</span>
                 </p>
                 <p className="mt-3 text-lg font-bold">
                     Per Day:{' '}
                     <span className="block text-3xl font-extrabold text-green-600 dark:text-green-400">
-                        {estimatedBooksPerDay.toFixed(2)}
+                        {estimatedCodicesPerDay.toFixed(2)}
                     </span>
                 </p>
             </div>

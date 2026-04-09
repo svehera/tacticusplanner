@@ -2,13 +2,13 @@ import { Rarity, XP_BOOK_VALUE } from '@/fsd/5-shared/model';
 
 import { ArenaLeague, BlueStarCharacter, XpIncomeState } from './models';
 
-/** AT shards cost per mythic book purchase */
-const shardsPerAtBook = 57;
-const onslaughtBooksWeekly = 25;
+/** AT shards cost per mythic codex purchase */
+const ATShardsPerCodex = 57;
+const onslaughtCodicesWeekly = 25;
 export const eliteEnergyPerRaid = 10;
-const codicesPerEliteRaid = (25 / 24 / shardsPerAtBook) * 5;
+const codicesPerEliteRaid = (25 / 24 / ATShardsPerCodex) * 5;
 export const nonEliteEnergyPerRaid = 6;
-const codicesPerNonEliteRaid = (3 / 7 / shardsPerAtBook) * 5;
+const codicesPerNonEliteRaid = (3 / 7 / ATShardsPerCodex) * 5;
 const shardsPerL10Incursion = 203;
 const shardsPerL12Incursion = 231;
 const shardsPerMythicIncursion = 210;
@@ -17,7 +17,7 @@ const epicToLegendary = 1 / 5;
 /** Legendary-equivalent value: 1 Mythic codex = 5 Legendary codices */
 const mythicToLegendary = 5;
 
-const arenaBooksPerWeek: Record<ArenaLeague, Partial<Record<Rarity, number>>> = {
+const arenaCodicesPerWeek: Record<ArenaLeague, Partial<Record<Rarity, number>>> = {
     [ArenaLeague.honorGuard]: { [Rarity.Epic]: 18, [Rarity.Legendary]: 7 },
     [ArenaLeague.captain]: { [Rarity.Epic]: 20, [Rarity.Legendary]: 4, [Rarity.Mythic]: 1 },
     [ArenaLeague.chapterMaster]: { [Rarity.Epic]: 22, [Rarity.Legendary]: 5, [Rarity.Mythic]: 1 },
@@ -34,7 +34,7 @@ const bossesPerRarity: Record<Rarity, number> = {
 };
 const creditsPerBoss = 1000;
 /** Guild shop cost for 1 Mythic XP codex (= 5 legendary-equivalent) */
-const creditsPerMythicBook = 1500;
+const creditsPerMythicCodex = 1500;
 
 /** Cumulative credits when clearing all bosses up to and including each rarity */
 const raidCreditsByRarity = (() => {
@@ -66,7 +66,7 @@ export const blueStarCharacters: BlueStarCharacter[] = [
 
 export class XpIncomeService {
     private static estimateArenaCodices(arenaLeague: ArenaLeague): number {
-        const row = arenaBooksPerWeek[arenaLeague];
+        const row = arenaCodicesPerWeek[arenaLeague];
         return (
             (row[Rarity.Epic] ?? 0) * epicToLegendary +
             (row[Rarity.Legendary] ?? 0) +
@@ -87,7 +87,7 @@ export class XpIncomeService {
                 : (raidCreditsByRarity[clearRarity] ?? 0) + additionalBosses * creditsPerBoss;
         // Raid seasons run every 2 weeks; convert credits to weekly legendary-equivalent codices
         // Cap at 18 grims × 5 = 90 legendary-equivalent codices/week (shop refresh limit)
-        return Math.min(((credits / creditsPerMythicBook) * mythicToLegendary) / 2, 90);
+        return Math.min(((credits / creditsPerMythicCodex) * mythicToLegendary) / 2, 90);
     }
 
     private static estimateAtCodices(
@@ -96,7 +96,7 @@ export class XpIncomeService {
         eliteEnergyPerDay: number,
         nonEliteEnergyPerDay: number
     ): number {
-        if (state.useATForBooks !== 'yes') return 0;
+        if (state.useATForCodices !== 'yes') return 0;
 
         let weeklyShards = blueStarCharacters
             .filter(char => blueStarCharIds.includes(char.id))
@@ -112,10 +112,10 @@ export class XpIncomeService {
             weeklyShards += shardsPerMonth / 5;
         }
 
-        let codices = (weeklyShards / shardsPerAtBook) * 5;
+        let codices = (weeklyShards / ATShardsPerCodex) * 5;
 
-        if (state.onslaughtMythicWinged === 'yes') {
-            codices += onslaughtBooksWeekly;
+        if (state.onslaughtMythicWinged) {
+            codices += onslaughtCodicesWeekly;
         }
 
         codices += (eliteEnergyPerDay / eliteEnergyPerRaid) * codicesPerEliteRaid * 7;
@@ -145,11 +145,11 @@ export class XpIncomeService {
             ) +
             this.estimateAtCodices(state, blueStarCharIds, eliteEnergyPerDay, nonEliteEnergyPerDay);
         // Convert from Legendary-equivalent to the player's chosen display rarity
-        const chosenRarity = state.defaultBookToUse ?? Rarity.Legendary;
-        // additionalBooksPerWeek is entered in chosen-rarity units — add after conversion
+        const chosenRarity = state.defaultCodexToUse ?? Rarity.Legendary;
+        // additionalCodicesPerWeek is entered in chosen-rarity units — add after conversion
         return (
             legendaryCodicesPerWeek * (XP_BOOK_VALUE[Rarity.Legendary] / XP_BOOK_VALUE[chosenRarity]) +
-            state.additionalBooksPerWeek
+            state.additionalCodicesPerWeek
         );
     }
 }

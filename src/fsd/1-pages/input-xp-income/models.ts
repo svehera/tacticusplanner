@@ -12,10 +12,10 @@ export interface BlueStarCharacter {
 }
 
 export interface XpIncomeState {
-    /** Manual Legendary Books per day */
-    manualBooksPerDay: number;
+    /** Manual Legendary Codices per day */
+    manualCodicesPerDay: number;
 
-    /** Arena League for weekly legendary book rewards */
+    /** Arena League for weekly legendary codex rewards */
     arenaLeague: ArenaLeague;
 
     /** Flag: Are guild raids looped or cleared manually? */
@@ -33,8 +33,8 @@ export interface XpIncomeState {
     /** Extra bosses cleared after the final loop (only if loopsRaids is 'yes') */
     extraBossesAfterLoop: number;
 
-    /** Flag: Does the user spend AT to buy books? */
-    useATForBooks: 'yes' | 'no';
+    /** Flag: Does the user spend AT to buy codices? */
+    useATForCodices: 'yes' | 'no';
 
     /** Flag: Does the user have MoW at Blue Star for Incursion farming? */
     hasBlueStarMoW: 'yes' | 'no';
@@ -43,7 +43,7 @@ export interface XpIncomeState {
     incursionLegendaryLevel: 'L10' | 'L12' | 'M';
 
     /** Flag: Is the user onslaughting a Mythic Winged character for AT farming? */
-    onslaughtMythicWinged: 'yes' | 'no';
+    onslaughtMythicWinged: boolean;
 
     /** Energy spent on Elite nodes per day (0-600, step 10) */
     eliteEnergyPerDay: number;
@@ -51,9 +51,9 @@ export interface XpIncomeState {
     /** Energy spent on Non-Elite nodes per day (0-600, step 6) */
     nonEliteEnergyPerDay: number;
 
-    /** Additional books per week from unlisted sources */
-    additionalBooksPerWeek: number;
+    /** Additional codices per week from unlisted sources */
+    additionalCodicesPerWeek: number;
 
-    /** Rarity of XP Books to use for calculations */
-    defaultBookToUse: Rarity;
+    /** Rarity of XP Codices to use for calculations */
+    defaultCodexToUse: Rarity;
 }

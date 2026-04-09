@@ -397,7 +397,7 @@ export const defaultData: IPersonalData2 = {
     },
     xpIncome: {
         // Manual Input
-        manualBooksPerDay: 0,
+        manualCodicesPerDay: 0,
 
         // Arena
         arenaLeague: ArenaLeague.honorGuard,
@@ -410,22 +410,22 @@ export const defaultData: IPersonalData2 = {
         extraBossesAfterLoop: 0,
 
         // AT Purchases (Base)
-        useATForBooks: 'no',
+        useATForCodices: 'no',
 
         // AT Farming (Incursion MoW)
         hasBlueStarMoW: 'no',
         incursionLegendaryLevel: 'L12', // Defaults to the highest level
 
         // AT Farming (Nodes)
-        onslaughtMythicWinged: 'no',
+        onslaughtMythicWinged: false,
         eliteEnergyPerDay: 0,
         nonEliteEnergyPerDay: 0,
 
         // Additional Sources
-        additionalBooksPerWeek: 0,
+        additionalCodicesPerWeek: 0,
 
         // Calculation Preferences
-        defaultBookToUse: Rarity.Legendary,
+        defaultCodexToUse: Rarity.Legendary,
     },
     xpUse: {
         useCommon: true,
