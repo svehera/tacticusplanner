@@ -257,6 +257,25 @@ export const BulkGoalCreator = () => {
         [bulkUnits, resolvedCharacters]
     );
 
+    const bulkTeamMows = useMemo(
+        () =>
+            filterMap(bulkUnits, entry => {
+                if (!entry.unit || !('snowprintId' in entry.unit)) return;
+                const unit = entry.unit;
+                const mow = resolvedMows.find(m => m.snowprintId === unit.snowprintId);
+                if (!mow) return;
+                return {
+                    ...mow,
+                    unlocked: entry.unlockMow,
+                    rarity: entry.rarity,
+                    stars: entry.stars,
+                    primaryAbilityLevel: entry.activeAbilityLevel,
+                    secondaryAbilityLevel: entry.passiveAbilityLevel,
+                };
+            }),
+        [bulkUnits, resolvedMows]
+    );
+
     const goalSummaryRows = useMemo(() => {
         const rows: Array<{
             category: GoalCategory;
@@ -660,7 +679,7 @@ export const BulkGoalCreator = () => {
                         <div className="mb-2 text-sm font-semibold">Preview:</div>
                         <TeamFlow
                             chars={bulkTeamCharacters}
-                            mows={[]}
+                            mows={bulkTeamMows}
                             showEquipment={RosterSnapshotShowVariableSettings.Never}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
