@@ -14,7 +14,7 @@ export const ButtonPill: React.FC<ButtonPillProps> = ({
     widthClass,
     ...props
 }) => {
-    const resolvedWidthClass = widthClass ?? (compact ? 'w-[84px]' : 'w-[178px]');
+    const resolvedWidthClass = widthClass ?? (compact ? 'w-[96px]' : 'w-full');
     return (
         <button
             type="button"

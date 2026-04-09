@@ -131,13 +131,13 @@ export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, comp
             return location.nodeNumber + 'B';
         }
         return location.nodeNumber;
-    }, []);
+    }, [location]);
 
     const campaignShort = campaignDisplayNames[location.campaign] ?? location.campaign;
     const fullLocationName = `Battle ${locationNumber} - ${location.campaign}`;
 
     const locationText = compact ? campaignShort : location.campaign;
-    const setWidthClass = widthClass ?? (compact ? 'w-[84px]' : 'w-[178px]');
+    const setWidthClass = widthClass ?? (compact ? 'w-[96px]' : 'w-full');
     const isOnslaught = location.campaign === Campaign.Onslaught;
 
     return location === undefined ? (
@@ -148,14 +148,15 @@ export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, comp
                 <button
                     type="button"
                     onClick={() => setOpenDetails(true)}
-                    className={`border-muted-fg/40 inline-flex cursor-pointer items-center gap-1 rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass}`.trim()}
+                    className={`border-muted-fg/40 inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass}`.trim()}
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>
-                    <CampaignImage campaign={location.campaign} size={18} showTooltip={false} />
-                    <div className="w-full flex-row justify-between text-[12px] leading-none text-gray-200">
-                        <span className="truncate">{locationText}</span>
-                        {!isOnslaught && <span>{locationNumber}</span>}
+                    <CampaignImage campaign={location.campaign} size={20} showTooltip={false} />
+                    <div
+                        className={`flex flex-1 items-center justify-between text-[12px] leading-none text-gray-200 ${compact ? '' : 'overflow-hidden'}`.trim()}>
+                        <span className={compact ? undefined : 'min-w-0 truncate'}>{locationText}</span>
+                        {!isOnslaught && <span className="shrink-0 pl-1">{locationNumber}</span>}
                     </div>
                 </button>
             </Tooltip>

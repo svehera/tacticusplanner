@@ -43,7 +43,8 @@ const Component: React.FC<Props> = ({ locations, maxLocations, compactRaidLocati
     const collapse = useCallback(() => setExpanded(false), []);
 
     return (
-        <div className="text-muted-fg flex flex-wrap items-center gap-x-2 gap-y-1 text-xs">
+        <div
+            className={`text-muted-fg flex gap-y-1 text-xs ${compactRaidLocations ? 'flex-wrap items-center gap-x-2' : 'flex-col'}`}>
             {visibleLocationList.map(loc => (
                 <ChipCampaignLocation
                     key={loc.id}
