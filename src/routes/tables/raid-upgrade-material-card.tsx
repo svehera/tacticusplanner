@@ -165,8 +165,10 @@ const Component: React.FC<Props> = ({
 
     return (
         <div
-            className={`flex flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg ${widthClass}`.trim()}>
-            <div className="flex w-full flex-row items-start!">
+            className={`flex flex-col justify-between rounded-lg border p-3 shadow-lg ${widthClass} border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-fg)] ${
+                noSuggestedRaidsRemaining ? 'opacity-80' : ''
+            }`.trim()}>
+            <div className="flex w-full flex-row items-start! text-inherit">
                 {/* Left: Icon, quantity */}
                 <div
                     className={`flex w-14 shrink-0 flex-col items-center justify-start gap-1 ${
@@ -174,11 +176,11 @@ const Component: React.FC<Props> = ({
                     }`}>
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
-                        className={`mt-1 flex h-6 items-center text-sm font-bold ${
+                        className={`mt-1 flex h-6 items-center text-sm font-bold text-inherit ${
                             noSuggestedRaidsRemaining
-                                ? 'text-gray-400'
+                                ? 'opacity-70'
                                 : showPlannedRaidLocationsOnly
-                                  ? 'text-gray-200'
+                                  ? ''
                                   : isSufficient
                                     ? 'text-green-400'
                                     : 'text-red-400'
@@ -190,10 +192,7 @@ const Component: React.FC<Props> = ({
                 {/* Right: Content */}
                 <div className="flex min-w-0 flex-1 flex-col justify-start gap-2 pl-2">
                     <div className="flex items-center justify-between gap-1">
-                        <h4
-                            className={`mb-0 truncate text-xs font-normal ${
-                                noSuggestedRaidsRemaining ? 'text-gray-400' : 'text-gray-200'
-                            }`}>
+                        <h4 className={`mb-0 truncate text-xs font-normal text-inherit`}>
                             {name ?? upgradeEstimate.snowprintId}
                         </h4>
                     </div>

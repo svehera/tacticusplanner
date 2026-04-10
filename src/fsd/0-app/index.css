@@ -57,6 +57,10 @@
         --bg: var(--color-white);
         --fg: var(--color-slate-950);
 
+        --card-bg: var(--color-white);
+        --card-border: var(--color-slate-400);
+        --card-fg: var(--color-slate-950);
+
         --primary: var(--color-blue-600);
         --primary-fg: var(--color-white);
 
@@ -147,6 +151,10 @@
     .dark {
         --bg: rgb(37, 38, 36);
         --fg: rgba(214, 207, 195, 0.87);
+
+        --card-bg: var(--color-slate-900);
+        --card-border: var(--color-slate-800);
+        --card-fg: var(--color-white);
 
         --primary: var(--color-blue-600);
         --primary-fg: var(--color-white);
@@ -299,12 +307,15 @@ code {
 .gamma {
     background-color: #fce5cd;
 }
+
 .stone1 {
     background-color: var(--rank-stone1);
 }
+
 .stone2 {
     background-color: var(--rank-stone2);
 }
+
 .stone3 {
     background-color: var(--rank-stone3);
 }
@@ -312,9 +323,11 @@ code {
 .iron1 {
     background-color: var(--rank-iron1);
 }
+
 .iron2 {
     background-color: var(--rank-iron2);
 }
+
 .iron3 {
     background-color: var(--rank-iron3);
 }
@@ -322,9 +335,11 @@ code {
 .bronze1 {
     background-color: var(--rank-bronze1);
 }
+
 .bronze2 {
     background-color: var(--rank-bronze2);
 }
+
 .bronze3 {
     background-color: var(--rank-bronze3);
 }
@@ -332,9 +347,11 @@ code {
 .silver1 {
     background-color: var(--rank-silver1);
 }
+
 .silver2 {
     background-color: var(--rank-silver2);
 }
+
 .silver3 {
     background-color: var(--rank-silver3);
 }
@@ -342,9 +359,11 @@ code {
 .gold1 {
     background-color: var(--rank-gold1);
 }
+
 .gold2 {
     background-color: var(--rank-gold2);
 }
+
 .gold3 {
     background-color: var(--rank-gold3);
 }
@@ -352,9 +371,11 @@ code {
 .diamond1 {
     background-color: var(--rank-diamond1);
 }
+
 .diamond2 {
     background-color: var(--rank-diamond2);
 }
+
 .diamond3 {
     background-color: var(--rank-diamond3);
 }
@@ -362,9 +383,11 @@ code {
 .adamantine1 {
     background-color: var(--rank-adamantine1);
 }
+
 .adamantine2 {
     background-color: var(--rank-adamantine2);
 }
+
 .adamantine3 {
     background-color: var(--rank-adamantine3);
 }
@@ -483,48 +506,63 @@ code {
     .gap5 {
         gap: 5px;
     }
+
     .gap6 {
         gap: 6px;
     }
+
     .gap7 {
         gap: 7px;
     }
+
     .gap8 {
         gap: 8px;
     }
+
     .gap9 {
         gap: 9px;
     }
+
     .gap10 {
         gap: 10px;
     }
+
     .gap11 {
         gap: 11px;
     }
+
     .gap12 {
         gap: 12px;
     }
+
     .gap13 {
         gap: 13px;
     }
+
     .gap14 {
         gap: 14px;
     }
+
     .gap15 {
         gap: 15px;
     }
+
     .gap16 {
         gap: 16px;
     }
+
     .gap17 {
         gap: 17px;
     }
+
     .gap18 {
         gap: 18px;
     }
+
     .gap19 {
         gap: 19px;
     }
+
     .gap20 {
         gap: 20px;
     }
@@ -532,30 +570,39 @@ code {
     .p1 {
         padding: 1px;
     }
+
     .p2 {
         padding: 2px;
     }
+
     .p3 {
         padding: 3px;
     }
+
     .p4 {
         padding: 4px;
     }
+
     .p5 {
         padding: 5px;
     }
+
     .p6 {
         padding: 6px;
     }
+
     .p7 {
         padding: 7px;
     }
+
     .p8 {
         padding: 8px;
     }
+
     .p9 {
         padding: 9px;
     }
+
     .p10 {
         padding: 10px;
     }
