@@ -243,6 +243,8 @@ export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
         previous.maxLocations === next.maxLocations &&
         previous.showAdditionalInfo === next.showAdditionalInfo &&
         previous.showRelatedCharacters === next.showRelatedCharacters &&
-        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly
+        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly &&
+        previous.compactRaidLocations === next.compactRaidLocations &&
+        previous.widthClass === next.widthClass
     );
 });
