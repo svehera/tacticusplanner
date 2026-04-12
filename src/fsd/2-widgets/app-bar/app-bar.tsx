@@ -183,7 +183,12 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Sync with the Tacticus API">
-                            <SyncButton showText={false} variant={'text'} sx={{ minWidth: 0, px: 1 }} />
+                            <SyncButton
+                                showText={false}
+                                variant={'text'}
+                                sx={{ minWidth: 0, px: 1 }}
+                                color={'inherit'}
+                            />
                         </Tooltip>
                         <ThemeSwitch />
                         <Button
