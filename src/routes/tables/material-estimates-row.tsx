@@ -20,23 +20,23 @@ const MaterialEstimatesRow: React.FC<MaterialEstimatesRowProps> = ({ estimate })
     }, [estimate.daysTotal]);
 
     return (
-        <div className="mt-1 flex w-full flex-row items-center justify-evenly gap-3 rounded bg-gray-800 px-2 py-1 text-[11px] text-gray-300">
+        <div className="mt-1 flex w-full flex-row items-center justify-evenly gap-3 rounded bg-[var(--card-border)] px-2 py-1 text-[11px] text-[var(--card-fg)]">
             <AccessibleTooltip title={`${estimate.daysTotal} days. Estimated date ${calendarDate ?? ''}`}>
-                <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                <span className="inline-flex items-center gap-1 whitespace-nowrap text-inherit">
                     <CalendarMonthIcon style={{ opacity: 0.8 }} fontSize="small" sx={{ fontSize: iconSize }} />
-                    <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{estimate.daysTotal}</span>
+                    <span className="text-xs font-medium text-inherit">{estimate.daysTotal}</span>
                 </span>
             </AccessibleTooltip>
             <AccessibleTooltip title="Total energy required">
-                <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                <span className="inline-flex items-center gap-1 whitespace-nowrap text-inherit">
                     <MiscIcon icon="energy" width={iconSize} height={iconSize} className="opacity-80" />
-                    <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{estimate.energyTotal}</span>
+                    <span className="text-xs font-medium text-inherit">{estimate.energyTotal}</span>
                 </span>
             </AccessibleTooltip>
             <AccessibleTooltip title="Total raids required">
-                <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                <span className="inline-flex items-center gap-1 whitespace-nowrap text-inherit">
                     <MiscIcon icon="raidTicket" width={iconSize} height={iconSize} className="opacity-80" />
-                    <span className="text-xs font-medium text-gray-700 dark:text-gray-300">{estimate.raidsTotal}</span>
+                    <span className="text-xs font-medium text-inherit">{estimate.raidsTotal}</span>
                 </span>
             </AccessibleTooltip>
         </div>
