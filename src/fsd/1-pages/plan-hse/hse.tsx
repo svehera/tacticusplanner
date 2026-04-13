@@ -339,7 +339,7 @@ export const HomeScreenEvent = () => {
                         <button
                             type="button"
                             aria-label="Dismiss warning permanently"
-                            className="rounded px-2 py-0.5 text-red-200 hover:bg-red-500/20 hover:text-red-100"
+                            className="text-warning-fg hover:bg-warning-fg/10 rounded px-2 py-0.5"
                             onClick={() =>
                                 dispatch.viewPreferences({
                                     type: 'Update',
