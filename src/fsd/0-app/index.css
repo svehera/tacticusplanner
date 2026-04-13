@@ -15,6 +15,10 @@
     --color-bg: var(--bg);
     --color-fg: var(--fg);
 
+    --color-card-bg: var(--card-bg);
+    --color-card-border: var(--card-border);
+    --color-card-fg: var(--card-fg);
+
     --color-primary: var(--primary);
     --color-primary-fg: var(--primary-fg);
 
@@ -276,7 +280,7 @@ body {
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
 
-    @apply bg-[var(--bg)] text-[var(--fg)];
+    @apply bg-(--bg) text-(--fg);
 }
 
 code {

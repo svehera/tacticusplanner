@@ -81,7 +81,7 @@ export const Resources = () => {
                 onClick={onClick}
                 title={onClick ? `Click to ${isEnabled ? 'disable' : 'enable'}` : undefined}>
                 <div className="flex h-[45px] w-[45px] items-center justify-center">{icon}</div>
-                <span className="mt-1 text-sm font-semibold text-white">{quantity}</span>
+                <span className="mt-1 text-sm font-semibold">{quantity}</span>
             </div>
         );
     };
@@ -89,13 +89,13 @@ export const Resources = () => {
     return (
         <div className="flex flex-col gap-y-4 p-2">
             {hasSync && (
-                <div className="flex justify-end border-b border-gray-600 p-2">
+                <div className="flex justify-end border-b border-(--card-border) p-2">
                     <SyncButton showText={!isMobile} />
                 </div>
             )}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
-                    <h4 className="text-md mb-2 border-b border-gray-600 pb-2 font-bold tracking-wide text-gray-300 uppercase">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                    <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         XP Books
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
@@ -116,8 +116,8 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
-                    <h4 className="text-md mb-2 border-b border-gray-600 pb-2 font-bold tracking-wide text-gray-300 uppercase">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                    <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         Forge Badges
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
@@ -133,8 +133,8 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
-                    <h4 className="text-md mb-2 border-b border-gray-600 pb-2 font-bold tracking-wide text-gray-300 uppercase">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                    <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         Machine of War Components
                     </h4>
                     <div className="flex flex-wrap justify-start gap-x-1">
@@ -148,15 +148,15 @@ export const Resources = () => {
                     </div>
                 </div>
             </div>{' '}
-            <div className="mt-4 flex flex-col rounded-lg border border-gray-700 bg-gray-800 p-3 shadow-lg">
-                <h3 className="mb-3 border-b border-gray-600 pb-2 text-lg font-bold tracking-wider text-gray-300 uppercase">
+            <div className="mt-4 flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                <h3 className="mb-3 border-b border-(--card-border) pb-2 text-lg font-bold tracking-wider text-(--card-fg) uppercase">
                     Alliance Resources
                 </h3>
 
                 <div className="flex flex-col divide-y divide-gray-700">
                     {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                         <div key={alliance} className="py-3">
-                            <h4 className="mb-2 text-sm font-semibold text-gray-400 uppercase">{alliance}</h4>
+                            <h4 className="mb-2 text-sm font-semibold text-(--card-fg) uppercase">{alliance}</h4>
 
                             <div className="grid grid-cols-2 gap-x-4">
                                 <div className="flex flex-wrap justify-start">
