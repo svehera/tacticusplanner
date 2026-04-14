@@ -160,7 +160,14 @@ export const TokenAvailability = () => {
         <div className="text-center">
             <div className="flex flex-col gap-2">
                 <IconPulseStyles />
-                {secondsUtc < 1_776_729_599 && <h2>KINDAKHORNY</h2>} {/* April 20, 2026 23:59:59 UTC */}
+                {secondsUtc < 1_776_729_599 && (
+                    <h2>
+                        KINDAKHORNY
+                        <br />
+                        (redeem by April 20th)
+                    </h2>
+                )}{' '}
+                {/* April 20, 2026 23:59:59 UTC */}
                 <h2>Token Availability</h2>
                 <div className="flex flex-wrap items-start justify-center gap-4 tabular-nums">
                     {Object.entries(gameModeTokens.tokens ?? {})
