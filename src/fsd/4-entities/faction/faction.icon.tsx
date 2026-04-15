@@ -3,6 +3,7 @@
 // The imports are a little verbose, but this way we get proper image optimization from Vite
 // It also allows us to correct mismatches between the faction IDs and the image file names
 import Sisterhood from '@/assets/images/factions/Adepta Sororitas.png';
+import AdeptusAstartes from '@/assets/images/factions/Adeptus Astartes.png';
 import Custodes from '@/assets/images/factions/Adeptus Custodes.png';
 import AdeptusMechanicus from '@/assets/images/factions/Adeptus Mechanicus.png';
 import Aeldari from '@/assets/images/factions/Aeldari.png';
@@ -28,6 +29,7 @@ import { FactionId } from '@/fsd/5-shared/model';
 
 const factionImages: { [key in FactionId]: string } = {
     AdeptusMechanicus,
+    AdeptusAstartes,
     Aeldari,
     AstraMilitarum,
     BlackLegion,

@@ -15,6 +15,7 @@ import ArmoriumCherubIcon from '@/assets/images/snowprint_assets/abilities/ui_ic
 import ArmourOfShriekingSoulsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArmourofShriekingSouls.png';
 import AstartesBannerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AstartesBanner.png';
 import AttemptedPossessionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AttemptedPossession.png';
+import AugmentedAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AugmentedAssault.png';
 import AvalancheOfMuscleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AvalancheOfMuscle.png';
 import BarbedOvipositorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BarbedOvipositor.png';
 import BasiliskBarrageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BasiliskBarrage.png';
@@ -36,6 +37,7 @@ import CallRipperSwarmsIcon from '@/assets/images/snowprint_assets/abilities/ui_
 import CamoCloakIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CamoCloak.png';
 import CatalystIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Catalyst.png';
 import ChampionOfTheFeastIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ChampionOfTheFeast.png';
+import ChronometronIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Chronometron.png';
 import CloudOfFliesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CloudOfFlies.png';
 import CombatRestorativesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CombatRestoratives.png';
 import ConcealIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Conceal.png';
@@ -113,6 +115,7 @@ import FragstormGrenadeLauncherIcon from '@/assets/images/snowprint_assets/abili
 import FrenziedFiringIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FrenziedFiring.png';
 import FuelledByFuryIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FuelledByFury.png';
 import FullThrottleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FullThrottle.png';
+import FuryFromTheDelveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FuryFromTheDelve.png';
 import FuryOfTheAncientsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FuryOfTheAncients.png';
 import GalvanicFieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GalvanicField.png';
 import GauntletsOfUltramarIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GauntletsOfUltramar.png';
@@ -133,6 +136,7 @@ import HarbingerOfDestructionIcon from '@/assets/images/snowprint_assets/abiliti
 import HarlequinsPanoplyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HarlequinsPanoply.png';
 import HarvesterOfSoulsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HarvesterOfSouls.png';
 import HatefulAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HatefulAssault.png';
+import HaywireMineIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HaywireMine.png';
 import HazeOfCorruptionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HazeOfCorruption.png';
 import HeadClaimerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HeadClaimer.png';
 import HealingBalmsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HealingBalms.png';
@@ -291,6 +295,7 @@ import StormcallerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_
 import StormOfFlensingBladesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StormOfFlensingBlades.png';
 import StormOfWrathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StormOfWrath.png';
 import StranglethornCannonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StranglethornCannon.png';
+import StrikeFromTheShadowsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StrikeFromTheShadows.png';
 import StructuralAnalyserIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StructuralAnalyser.png';
 import SummaryExecutionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SummaryExecution.png';
 import SuperchargeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Supercharge.png';
@@ -311,6 +316,7 @@ import TheQuickeningIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import ThriceBlessedConflagrationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ThriceBlessedConflagration.png';
 import ThunderousAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ThunderousAssault.png';
 import TimeFluxIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TimeFlux.png';
+import TimesplinterMantleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TimesplinterMantle.png';
 import ToughToKillIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ToughToKill.png';
 import TrophyTakerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TrophyTaker.png';
 import TunnelingHorrorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TunnelingHorror.png';
@@ -359,6 +365,7 @@ export const abilityIcons: Record<string, IconData> = {
     ArmourOfShriekingSouls: { file: ArmourOfShriekingSoulsIcon, name: 'Armour of Shrieking Souls' },
     AstartesBanner: { file: AstartesBannerIcon, name: 'Astartes Banner' },
     AttemptedPossession: { file: AttemptedPossessionIcon, name: 'Attempted Possession' },
+    AugmentedAssault: { file: AugmentedAssaultIcon, name: 'Augmented Assault' },
     AvalancheOfMuscle: { file: AvalancheOfMuscleIcon, name: 'Avalanche of Muscle' },
     BarbedOvipositor: { file: BarbedOvipositorIcon, name: 'Barbed Ovipositor' },
     BasiliskBarrage: { file: BasiliskBarrageIcon, name: 'Basilisk Barrage' },
@@ -380,6 +387,7 @@ export const abilityIcons: Record<string, IconData> = {
     CamoCloak: { file: CamoCloakIcon, name: 'Camo Cloak' },
     Catalyst: { file: CatalystIcon, name: 'Catalyst' },
     ChampionOfTheFeast: { file: ChampionOfTheFeastIcon, name: 'Champion Of The Feast' },
+    Chronometron: { file: ChronometronIcon, name: 'Chronometron' },
     CloudOfFlies: { file: CloudOfFliesIcon, name: 'Cloud Of Flies' },
     CombatRestoratives: { file: CombatRestorativesIcon, name: 'Combat Restoratives' },
     Conceal: { file: ConcealIcon, name: 'Conceal' },
@@ -457,6 +465,7 @@ export const abilityIcons: Record<string, IconData> = {
     FrenziedFiring: { file: FrenziedFiringIcon, name: 'Frenzied Firing' },
     FuelledByFury: { file: FuelledByFuryIcon, name: 'Fuelled by Fury' },
     FullThrottle: { file: FullThrottleIcon, name: 'Full Throttle' },
+    FuryFromTheDelve: { file: FuryFromTheDelveIcon, name: 'Fury from the Dêlve' },
     FuryOfTheAncients: { file: FuryOfTheAncientsIcon, name: 'Fury of the Ancients' },
     GalvanicField: { file: GalvanicFieldIcon, name: 'Galvanic Field' },
     GauntletsOfUltramar: { file: GauntletsOfUltramarIcon, name: 'Gauntlets of Ultramar' },
@@ -477,6 +486,7 @@ export const abilityIcons: Record<string, IconData> = {
     HarlequinsPanoply: { file: HarlequinsPanoplyIcon, name: "Harlequin's Panoply" },
     HarvesterOfSouls: { file: HarvesterOfSoulsIcon, name: 'Harvester Of Souls' },
     HatefulAssault: { file: HatefulAssaultIcon, name: 'Hateful Assault' },
+    HaywireMine: { file: HaywireMineIcon, name: 'Haywire Mine' },
     HazeOfCorruption: { file: HazeOfCorruptionIcon, name: 'Haze of Corruption' },
     HeadClaimer: { file: HeadClaimerIcon, name: 'Head-Claimer' },
     HealingBalms: { file: HealingBalmsIcon, name: 'Healing Balms' },
@@ -635,6 +645,7 @@ export const abilityIcons: Record<string, IconData> = {
     StormboyzStrike: { file: StormboyzStrikeIcon, name: 'Stormboyz Strike' },
     Stormcaller: { file: StormcallerIcon, name: 'Stormcaller' },
     StranglethornCannon: { file: StranglethornCannonIcon, name: 'Stranglethorn Cannon' },
+    StrikeFromTheShadows: { file: StrikeFromTheShadowsIcon, name: 'Strike from the Shadows' },
     StructuralAnalyser: { file: StructuralAnalyserIcon, name: 'Structural Analyser' },
     SummaryExecution: { file: SummaryExecutionIcon, name: 'Summary Execution' },
     Supercharge: { file: SuperchargeIcon, name: 'Supercharge' },
@@ -655,6 +666,7 @@ export const abilityIcons: Record<string, IconData> = {
     ThriceBlessedConflagration: { file: ThriceBlessedConflagrationIcon, name: 'Thrice-Blessed Conflagration' },
     ThunderousAssault: { file: ThunderousAssaultIcon, name: 'Thunderous Assault' },
     TimeFlux: { file: TimeFluxIcon, name: 'Time Flux' },
+    TimesplinterMantle: { file: TimesplinterMantleIcon, name: 'Timesplinter Mantle' },
     ToughToKill: { file: ToughToKillIcon, name: 'Tough to Kill' },
     TrophyTaker: { file: TrophyTakerIcon, name: 'Trophy Taker' },
     TunnelingHorror: { file: TunnelingHorrorIcon, name: 'Tunnelling Horror' },

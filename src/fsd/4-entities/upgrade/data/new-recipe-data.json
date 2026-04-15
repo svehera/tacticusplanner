@@ -331,6 +331,20 @@
             }
         ]
     },
+    "upgArmE020C": {
+        "material": "Layered Ceramite Plating",
+        "snowprintId": "upgArmE020C",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE020C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR005",
+                "count": 9
+            }
+        ]
+    },
     "upgArmE021C": {
         "material": "Crusader's Tabard",
         "snowprintId": "upgArmE021C",
@@ -439,6 +453,20 @@
         "recipe": [
             {
                 "material": "upgArmR029",
+                "count": 9
+            }
+        ]
+    },
+    "upgArmE030C": {
+        "material": "Scale-Plate Strand",
+        "snowprintId": "upgArmE030C",
+        "rarity": "Epic",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmE030C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmR030",
                 "count": 9
             }
         ]
@@ -779,6 +807,24 @@
             }
         ]
     },
+    "upgArmL020C": {
+        "material": "Adamantine Blast Plating",
+        "snowprintId": "upgArmL020C",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL020C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE020C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE001C",
+                "count": 1
+            }
+        ]
+    },
     "upgArmL021C": {
         "material": "Tabard of Righteous Wrath",
         "snowprintId": "upgArmL021C",
@@ -919,6 +965,24 @@
             },
             {
                 "material": "upgArmE005C",
+                "count": 1
+            }
+        ]
+    },
+    "upgArmL030C": {
+        "material": "Scale-Plate Mantle",
+        "snowprintId": "upgArmL030C",
+        "rarity": "Legendary",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmL030C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgArmE030C",
+                "count": 2
+            },
+            {
+                "material": "upgArmE014C",
                 "count": 1
             }
         ]
@@ -2051,6 +2115,14 @@
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR029.png",
         "craftable": false
     },
+    "upgArmR030": {
+        "material": "Reinforced Scale-Plates",
+        "snowprintId": "upgArmR030",
+        "rarity": "Rare",
+        "stat": "Armour",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgArmR030.png",
+        "craftable": false
+    },
     "upgArmR031": {
         "material": "Beast Hide",
         "snowprintId": "upgArmR031",
@@ -2561,6 +2633,20 @@
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE011.png",
         "craftable": false
     },
+    "upgDmgE020C": {
+        "material": "Reliquary of Vengeance",
+        "snowprintId": "upgDmgE020C",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE020C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR007",
+                "count": 9
+            }
+        ]
+    },
     "upgDmgE021C": {
         "material": "Chain of Righteous Zeal",
         "snowprintId": "upgDmgE021C",
@@ -2683,6 +2769,20 @@
         "recipe": [
             {
                 "material": "upgDmgR029",
+                "count": 9
+            }
+        ]
+    },
+    "upgDmgE030C": {
+        "material": "Protocol of the Hungry Void",
+        "snowprintId": "upgDmgE030C",
+        "rarity": "Epic",
+        "stat": "Damage",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgDmgE030C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgDmgR009",
                 "count": 9
             }
         ]
@@ -2882,12 +2982,8 @@
         "craftable": true,
         "recipe": [
             {
-                "material": "upgDmgE005",
-                "count": 7
-            },
-            {
-                "material": "upgDmgU005",
-                "count": 7
+                "material": "upgDmgE020C",
+                "count": 2
             },
             {
                 "material": "upgDmgR015C",
@@ -3262,8 +3358,8 @@
         "craftable": true,
         "recipe": [
             {
-                "material": "upgDmgR009",
-                "count": 18
+                "material": "upgDmgE030C",
+                "count": 2
             },
             {
                 "material": "upgDmgR017C",
@@ -4572,7 +4668,7 @@
         "craftable": false
     },
     "upgDmgU005": {
-        "material": "Reliquary of Vengeance",
+        "material": "Chapter Reliquary",
         "snowprintId": "upgDmgU005",
         "rarity": "Uncommon",
         "stat": "Damage",
@@ -5127,6 +5223,20 @@
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE017.png",
         "craftable": false
     },
+    "upgHpE020C": {
+        "material": "Honour Markings",
+        "snowprintId": "upgHpE020C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE020C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR043",
+                "count": 9
+            }
+        ]
+    },
     "upgHpE021C": {
         "material": "Lights of Purgation",
         "snowprintId": "upgHpE021C",
@@ -5484,7 +5594,7 @@
                 "count": 9
             },
             {
-                "material": "upgArmR023",
+                "material": "upgArmR009",
                 "count": 9
             }
         ]
@@ -5841,6 +5951,28 @@
             }
         ]
     },
+    "upgHpE143C": {
+        "material": "Symbol of the Adeptus Astartes",
+        "snowprintId": "upgHpE143C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE143C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR043",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR007",
+                "count": 9
+            },
+            {
+                "material": "upgArmR005",
+                "count": 9
+            }
+        ]
+    },
     "upgHpECS": {
         "material": "Coming soon",
         "snowprintId": "upgHpECS",
@@ -6106,6 +6238,24 @@
             {
                 "material": "upgDmgR001C",
                 "count": 2
+            }
+        ]
+    },
+    "upgHpL020C": {
+        "material": "Honorifics of Command",
+        "snowprintId": "upgHpL020C",
+        "rarity": "Legendary",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpL020C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpE020C",
+                "count": 2
+            },
+            {
+                "material": "upgHpE002C",
+                "count": 1
             }
         ]
     },
@@ -7615,6 +7765,28 @@
             }
         ]
     },
+    "upgHpM143C": {
+        "material": "Grand Symbol of the Adeptus Astartes",
+        "snowprintId": "upgHpM143C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM143C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM001",
+                "count": 6
+            },
+            {
+                "material": "upgHpL100",
+                "count": 8
+            },
+            {
+                "material": "upgHpE143C",
+                "count": 1
+            }
+        ]
+    },
     "upgHpR001": {
         "material": "Repair Tool",
         "snowprintId": "upgHpR001",
@@ -8009,6 +8181,14 @@
         "rarity": "Rare",
         "stat": "Health",
         "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR040.png",
+        "craftable": false
+    },
+    "upgHpR043": {
+        "material": "Service Studs",
+        "snowprintId": "upgHpR043",
+        "rarity": "Rare",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpR043.png",
         "craftable": false
     },
     "upgHpRCS": {

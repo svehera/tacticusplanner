@@ -10,6 +10,7 @@ import { menuItemById } from 'src/models/menu-items';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
+import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 
 import { PlanToBeDeletedRoutes } from './to-be-deleted-routes';
@@ -28,6 +29,7 @@ export const PlanRoutes = () => {
     const teams2MenuItem = menuItemById['teams2'];
     const questsMenuItem = menuItemById['quests'];
     const cesMenuItem = menuItemById['ces'];
+    const hsesMenuItem = menuItemById['hses'];
 
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
 
@@ -42,6 +44,8 @@ export const PlanRoutes = () => {
                         campaignProgressionMenuItem,
                         questsMenuItem,
                         cesMenuItem,
+                        hsesMenuItem,
+                        bulkGoalCreatorMenuItem,
                     ].map(menuItem => (
                         <Card
                             variant="outlined"
