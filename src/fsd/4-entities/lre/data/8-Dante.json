@@ -6,7 +6,7 @@
     "eventStage": 3,
     "nextEventDate": "April 12, 2026",
     "nextEventDateUtc": "Sun, 12 April 2026 00:00:00 GMT",
-    "finished": false,
+    "finished": true,
     "regularMissions": [
         "Defeat 5 waves of enemies in any wave-based game mode, Deal 1000 damage",
         "Defeat 30 Necrons",
