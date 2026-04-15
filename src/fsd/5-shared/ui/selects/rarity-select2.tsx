@@ -11,11 +11,13 @@ export const RaritySelect2 = ({
     value,
     valueChanges,
     label,
+    hideText = false,
 }: {
     label?: string;
     rarityValues: number[];
     value: number;
     valueChanges: (value: number) => void;
+    hideText?: boolean;
 }) => {
     return (
         <div className="w-full">
@@ -28,7 +30,7 @@ export const RaritySelect2 = ({
                     <Listbox.Button className="relative w-full cursor-pointer rounded-lg border border-slate-300 bg-white py-2 pr-10 pl-3 text-left shadow-sm transition-all hover:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white">
                         <div className="flex items-center gap-2">
                             <RarityIcon rarity={value} />
-                            <span>{Rarity[value]}</span>
+                            {!hideText && <span>{Rarity[value]}</span>}
                         </div>
 
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
@@ -57,7 +59,7 @@ export const RaritySelect2 = ({
                                         <>
                                             <div className="flex items-center gap-2">
                                                 <RarityIcon rarity={rarity} />
-                                                <span>{Rarity[rarity]}</span>
+                                                {!hideText && <span>{Rarity[rarity]}</span>}
                                             </div>
 
                                             {selected && (

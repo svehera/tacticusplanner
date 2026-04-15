@@ -5,7 +5,6 @@ import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
-import Grid from '@mui/material/Grid';
 import ListItemText from '@mui/material/ListItemText';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
@@ -554,9 +553,9 @@ export const BulkGoalCreator = () => {
                         </Button>
                     </div>
                 </div>
-                <Grid container spacing={2} className="mb-4">
+                <div className="mb-4 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
                     {bulkUnits.map((entry, index) => (
-                        <Grid item xs={12} sm={6} md={4} lg={3} xl={2} key={index}>
+                        <div key={index}>
                             <BulkGoalCreatorUnitCard
                                 entry={entry}
                                 index={index}
@@ -654,10 +653,10 @@ export const BulkGoalCreator = () => {
                                     setBulkUnits(newBulkUnits);
                                 }}
                             />
-                        </Grid>
+                        </div>
                     ))}
-                    <Grid item xs={12} sm={6} md={4} lg={3} xl={1.7}>
-                        <div className="flex h-full min-h-[420px] items-center justify-center rounded-lg border-2 border-dashed border-(--border) bg-(--secondary) p-4">
+                    <div>
+                        <div className="flex h-full min-h-[100px] items-center justify-center rounded-lg border-2 border-dashed border-(--border) bg-(--secondary) p-4">
                             <Button
                                 variant="outlined"
                                 size="large"
@@ -667,8 +666,8 @@ export const BulkGoalCreator = () => {
                                 Add Unit Updater
                             </Button>
                         </div>
-                    </Grid>
-                </Grid>
+                    </div>
+                </div>
                 <div className="mb-4 flex flex-wrap gap-2">
                     <Button variant="outlined" onClick={copyFirstCharacterAttributes}>
                         Copy 1st Attributes to Others
