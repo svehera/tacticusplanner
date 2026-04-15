@@ -578,7 +578,7 @@ export class TokenEstimationService {
 
     /**
      * @returns the total number of points earned by clearing the specified
-     * restrictions in the battle, given that already-cleared restrictions.
+     * restrictions in the battle, given the already-cleared restrictions.
      */
     static computeIncrementalPointsForClearingRestrictions(
         battle: ILreBattleProgress,
@@ -588,7 +588,7 @@ export class TokenEstimationService {
         for (const requirement of battle.requirementsProgress) {
             for (const restriction of restrictions) {
                 if (requirement.id === restriction.id) {
-                    points += requirement.points;
+                    points += requirement.points - LreRequirementStatusService.getRequirementPoints(requirement);
                 }
             }
         }

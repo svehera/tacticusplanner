@@ -208,66 +208,69 @@ export const LeTokenomics: React.FC<Props> = ({
 
     return (
         <div className="flex w-full flex-col gap-y-8">
-            {firstToken && (
+            <div className="flex w-full flex-col items-center gap-y-4">
                 <div className="flex w-full flex-col items-center gap-y-4">
-                    <div className="flex w-full flex-col items-center gap-y-4">
-                        {/* Token status and sync section */}
-                        <div className="flex min-h-10 w-full items-center justify-center">
-                            <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
-                                <div className="flex items-center gap-2">
-                                    <SyncButton showText={true} />
-                                </div>
-                                <div className="flex items-center gap-2">
-                                    {isDataStale() && (
-                                        <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
-                                            <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
-                                        </AccessibleTooltip>
-                                    )}
-                                    <AccessibleTooltip
-                                        title={`${model.syncedProgress?.currentTokens ?? 0} Current Tokens in possession`}>
-                                        <div className="flex items-center gap-2">
-                                            <MiscIcon icon="legendaryEventToken" width={30} height={35} />
-                                            {model.syncedProgress?.currentTokens ?? 0}
-                                        </div>
+                    <div className="flex min-h-10 w-full items-center justify-center">
+                        <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
+                            <div className="flex items-center gap-2">
+                                <SyncButton showText={true} />
+                            </div>
+                            <div className="flex items-center gap-2">
+                                {isDataStale() && (
+                                    <AccessibleTooltip title="STALE DATA - PLEASE SYNC">
+                                        <WarningAmberIcon color="warning" sx={{ fontSize: 24 }} />
                                     </AccessibleTooltip>
-                                </div>
+                                )}
+                                <AccessibleTooltip
+                                    title={`${model.syncedProgress?.currentTokens ?? 0} Current Tokens in possession`}>
+                                    <div className="flex items-center gap-2">
+                                        <MiscIcon icon="legendaryEventToken" width={30} height={35} />
+                                        {model.syncedProgress?.currentTokens ?? 0}
+                                    </div>
+                                </AccessibleTooltip>
+                            </div>
 
-                                <div className="flex items-center gap-2">
-                                    <AccessibleTooltip
-                                        title={`${Math.max(0, totalFreeTokensRemainingInIteration - (model.syncedProgress?.currentTokens ?? 0))} free tokens remaining...`}>
-                                        <div className="flex items-center gap-2">
-                                            <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
-                                            {Math.max(
-                                                0,
-                                                totalFreeTokensRemainingInIteration -
-                                                    (model.syncedProgress?.currentTokens ?? 0)
-                                            )}{' '}
-                                            /{' '}
-                                            {Math.max(
-                                                0,
-                                                totalFreeTokensRemaining - (model.syncedProgress?.currentTokens ?? 0)
-                                            )}
-                                        </div>
-                                    </AccessibleTooltip>
-                                </div>
+                            <div className="flex items-center gap-2">
+                                <AccessibleTooltip
+                                    title={`${Math.max(0, totalFreeTokensRemainingInIteration - (model.syncedProgress?.currentTokens ?? 0))} free tokens remaining...`}>
+                                    <div className="flex items-center gap-2">
+                                        <AutorenewIcon color="primary" sx={{ fontSize: 24 }} />
+                                        {Math.max(
+                                            0,
+                                            totalFreeTokensRemainingInIteration -
+                                                (model.syncedProgress?.currentTokens ?? 0)
+                                        )}
+                                        {legendaryEvent.eventStage < 3 && (
+                                            <span>
+                                                /{' '}
+                                                {Math.max(
+                                                    0,
+                                                    totalFreeTokensRemaining -
+                                                        (model.syncedProgress?.currentTokens ?? 0)
+                                                )}
+                                            </span>
+                                        )}
+                                    </div>
+                                </AccessibleTooltip>
+                            </div>
 
-                                <div className="flex items-center gap-2">
-                                    <AccessibleTooltip
-                                        title={`${totalAdTokensRemainingInIteration} ad tokens remaining...`}>
-                                        <div className="flex items-center gap-2">
-                                            <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />
-                                            {totalAdTokensRemainingInIteration} / {totalAdTokensRemaining}
-                                        </div>
-                                    </AccessibleTooltip>
-                                </div>
+                            <div className="flex items-center gap-2">
+                                <AccessibleTooltip
+                                    title={`${totalAdTokensRemainingInIteration} ad tokens remaining...`}>
+                                    <div className="flex items-center gap-2">
+                                        <AdsClickIcon color="primary" sx={{ fontSize: 24 }} />
+                                        {totalAdTokensRemainingInIteration}
+                                        {legendaryEvent.eventStage < 3 && <span>/ {totalAdTokensRemaining}</span>}
+                                    </div>
+                                </AccessibleTooltip>
                             </div>
                         </div>
-
-                        {/* rest of your code... */}
-                    </div>{' '}
-                    <div>
-                        <h3 className="text-lg font-bold">Next Token</h3>
                     </div>
+                </div>{' '}
+                <div>
+                    <h3 className="text-lg font-bold">Next Token</h3>
+                </div>{' '}
+                {firstToken && (
                     <div className="w-full justify-center md:w-2/3 lg:w-1/2">
                         <LeTokenCard
                             token={firstToken}
@@ -317,8 +320,8 @@ export const LeTokenomics: React.FC<Props> = ({
                                 </div>
                             )}
                     </div>
-                </div>
-            )}
+                )}
+            </div>
             <div className="flex flex-col gap-y-8">
                 <SupportSection />
             </div>
