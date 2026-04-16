@@ -68,6 +68,7 @@ export const RaidsPlan: React.FC<Props> = ({
     const [grid3Loaded, setGrid3Loaded] = useState<boolean>(false);
 
     const [allDaysExpanded, setAllDaysExpanded] = useState(false);
+    const [outerExpanded, setOuterExpanded] = useState(scrollToCharSnowprintId !== undefined);
 
     const [expandedPanels, setExpandedPanels] = useState(() => ({
         related: false,
@@ -92,6 +93,7 @@ export const RaidsPlan: React.FC<Props> = ({
         onTouchStart: onDragTouchStart,
         onTouchMove: onDragTouchMove,
         onTouchEnd: onDragTouchEnd,
+        onTouchCancel: onDragTouchCancel,
     } = useDragScroll();
     const setCardReference = useCallback(
         (id: number) => (element: ReferenceElement) => {
@@ -143,6 +145,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
     useEffect(() => {
         if (scrollToCharSnowprintId !== undefined) {
+            setOuterExpanded(true);
             setExpandedPanels(previous => ({ ...previous, inProgress: true }));
         }
     }, [scrollToCharSnowprintId]);
@@ -204,7 +207,8 @@ export const RaidsPlan: React.FC<Props> = ({
 
     return (
         <Accordion
-            defaultExpanded={scrollToCharSnowprintId !== undefined}
+            expanded={outerExpanded}
+            onChange={(_, isExpanded) => setOuterExpanded(isExpanded)}
             className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
@@ -446,7 +450,8 @@ export const RaidsPlan: React.FC<Props> = ({
                             onMouseLeave={onDragLeave}
                             onTouchStart={onDragTouchStart}
                             onTouchMove={onDragTouchMove}
-                            onTouchEnd={onDragTouchEnd}>
+                            onTouchEnd={onDragTouchEnd}
+                            onTouchCancel={onDragTouchCancel}>
                             <Suspense fallback={undefined}>
                                 <div className="flex gap-2.5">
                                     {estimatedRanks.upgradesRaids

@@ -64,5 +64,6 @@ export const useDragScroll = () => {
         onTouchStart,
         onTouchMove,
         onTouchEnd,
+        onTouchCancel: onTouchEnd,
     };
 };
