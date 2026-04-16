@@ -12,7 +12,7 @@ import { LegendaryEventBase } from '@/fsd/3-features/lre/model/base.le';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILeProgress, ILreBattleProgress, ILreProgressModel, ILreTrackProgress } from './lre.models';
 
-export interface LeProgress {
+interface LeProgress {
     currentPoints: number;
     pointsForNextMilestone: number;
     totalPoints: number;

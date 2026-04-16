@@ -1,47 +1,5 @@
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
-
-import { IEquipment } from '@/fsd/4-entities/equipment';
-
-export type RosterSnapshotsImageProperty = [HTMLImageElement | undefined, 'loaded' | 'loading' | 'failed'];
-
-// Define the shape of your assets
-export interface RosterSnapshotAssets {
-    charFrames: RosterSnapshotsImageProperty[];
-    mowFrames: RosterSnapshotsImageProperty[];
-    ranks: RosterSnapshotsImageProperty[];
-    stars: RosterSnapshotsImageProperty[];
-    shardIcon: RosterSnapshotsImageProperty;
-    mythicShardIcon: RosterSnapshotsImageProperty;
-}
-
-export interface ISnapshotCharacter {
-    id: string;
-    rank: Rank;
-    rarity: Rarity;
-    stars: RarityStars;
-    shards: number;
-    mythicShards: number;
-    activeAbilityLevel: number;
-    passiveAbilityLevel: number;
-    equip0?: IEquipment;
-    equip1?: IEquipment;
-    equip2?: IEquipment;
-    equip0Level?: number;
-    equip1Level?: number;
-    equip2Level?: number;
-    xpLevel: number;
-}
-
-export interface ISnapshotMachineOfWar {
-    id: string;
-    rarity: Rarity;
-    stars: RarityStars;
-    primaryAbilityLevel: number;
-    secondaryAbilityLevel: number;
-    shards: number;
-    mythicShards: number;
-    locked: boolean;
-}
+import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
 export interface ISnapshotUnitDiff {
     id: string;

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 interface DecimalSpinnerProps {
     value: number;
@@ -8,7 +8,7 @@ interface DecimalSpinnerProps {
 
 /** Decimal spinner component for numeric input with two points of decimal precision. */
 export const DecimalSpinner: React.FC<DecimalSpinnerProps> = ({ value, onChange, label }) => {
-    const [stringValue, setStringValue] = React.useState(value.toFixed(2));
+    const [stringValue, setStringValue] = useState((value ?? 0).toFixed(2));
     const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const numericValue = Number.parseFloat(event.target.value);
         if (!Number.isNaN(numericValue)) {

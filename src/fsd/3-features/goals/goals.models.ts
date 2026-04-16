@@ -204,7 +204,7 @@ export interface IUnitUpgrade {
     relatedUpgrades: string[];
 }
 
-export interface ICharacterUpgradeRankEstimate {
+interface ICharacterUpgradeRankEstimate {
     goalId: string;
     upgrades: ICharacterUpgradeEstimate[];
 }

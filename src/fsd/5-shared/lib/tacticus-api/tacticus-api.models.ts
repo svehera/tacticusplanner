@@ -5,7 +5,7 @@ export interface TacticusPlayerResponse {
     metaData: TacticusApiResponseMetadata;
 }
 
-export interface TacticusApiResponseMetadata {
+interface TacticusApiResponseMetadata {
     /** Unix timestamp (in seconds). Empty if key never expires. */
     apiKeyExpiresOn?: number;
 
@@ -222,26 +222,26 @@ export interface TacticusLegendaryEventLane {
     progress: TacticusLegendaryEventBattlesProgress[];
 }
 
-export interface TacticusLegendaryEventBattleConfig {
+interface TacticusLegendaryEventBattleConfig {
     numEnemies: number;
     objectives: TacticusLegendaryEventObjective[];
     disallowedFactions: string[];
 }
 
-export interface TacticusLegendaryEventObjective {
+interface TacticusLegendaryEventObjective {
     objectiveType: string;
     objectiveTarget: string;
     score: number;
 }
 
-export interface TacticusLegendaryEventBattlesProgress {
+interface TacticusLegendaryEventBattlesProgress {
     // 0 is always "clear score", and the rest are 1-based indices of the restrictions.
     objectivesCleared: number[];
     highScore: number;
     encounterPoints: number;
 }
 
-export interface TacticusLegendaryEventCurrentEvent {
+interface TacticusLegendaryEventCurrentEvent {
     run: number;
     tokens: TacticusTokens;
     hasUsedAdForExtraTokenToday: boolean;

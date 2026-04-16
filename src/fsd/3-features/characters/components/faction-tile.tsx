@@ -48,7 +48,7 @@ export const FactionsTile = ({
     }, [faction.units.length]);
     const { showBsValue, showPower } = useContext(CharactersViewContext);
     return (
-        <div className="flex max-w-[525px] min-w-[375px] flex-col overflow-hidden rounded-xl border border-gray-800 bg-[#1a1a1a] shadow-lg max-[500px]:max-w-[375px] lg:max-w-[800px]">
+        <div className="flex max-w-[525px] min-w-[375px] flex-col overflow-hidden rounded-xl bg-(--muted) max-[500px]:max-w-[375px] lg:max-w-[800px]">
             {/* Modern Card Header */}
             <div
                 className="flex items-center justify-between px-3 py-2 font-medium text-white shadow-md"
@@ -85,14 +85,14 @@ export const FactionsTile = ({
             </div>
 
             {/* Units Container */}
-            <div className={`flex flex-wrap items-center gap-1 bg-[#121212]/50 p-2 ${factionClass}`}>
+            <div className={`flex flex-wrap items-center gap-1 p-2 ${factionClass}`}>
                 {faction.units.map(unit => {
                     const isCharacter = unit.unitType === UnitType.character;
                     return (
                         <div
                             key={unit.snowprintId}
                             onClick={() => onCharacterClick?.(unit)}
-                            className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                            className="shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
                             title={`Select ${unit.name || 'Unit'}`}>
                             <RosterSnapshotCharacter
                                 char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}

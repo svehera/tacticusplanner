@@ -14,6 +14,13 @@
         "color": "#962C38"
     },
     {
+        "alliance": "Imperial",
+        "name": "Adeptus Astartes",
+        "snowprintId": "AdeptusAstartes",
+        "icon": "Adeptus Astartes.png",
+        "color": "#962C38"
+    },
+    {
         "alliance": "Xenos",
         "name": "Necrons",
         "snowprintId": "Necrons",

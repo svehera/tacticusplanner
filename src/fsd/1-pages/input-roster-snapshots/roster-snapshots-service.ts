@@ -4,19 +4,13 @@ import { cloneDeep } from 'lodash';
 import { ICharacter2 } from '@/models/interfaces';
 
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
-import {
-    IRosterSnapshot,
-    ISnapshotCharacter,
-    IRosterSnapshotDiff,
-    ISnapshotMachineOfWar,
-    ISnapshotUnitDiff,
-    IRosterSnapshotsState,
-} from './models';
+import { IRosterSnapshot, IRosterSnapshotDiff, ISnapshotUnitDiff, IRosterSnapshotsState } from './models';
 
 export class RosterSnapshotsService {
     public static MAX_SNAPSHOTS: number = 20;

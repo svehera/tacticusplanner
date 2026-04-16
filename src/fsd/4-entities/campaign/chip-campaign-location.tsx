@@ -17,6 +17,7 @@ interface Props {
     unlocked: boolean;
     compact?: boolean;
     widthClass?: string;
+    clickable?: boolean;
 }
 
 interface CampaignBattleCardPreviewProps {
@@ -58,23 +59,19 @@ const CampaignBattleCardPreview: React.FC<CampaignBattleCardPreviewProps> = ({ b
     const rewardRarity = RarityMapper.stringToRarityString(rewardMaterial?.rarity ?? '');
 
     return (
-        <div className="mx-auto flex w-fit max-w-full flex-col gap-3 rounded-md border border-gray-300 bg-white p-4 shadow-md dark:border-gray-700 dark:bg-gray-900 dark:shadow-lg">
-            <div className="flex flex-wrap items-center gap-3 border-b border-gray-200 pb-3 dark:border-gray-700">
+        <div className="mx-auto flex w-fit max-w-full flex-col gap-3 rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-4 text-[var(--card-fg)] shadow-md">
+            <div className="flex flex-wrap items-center gap-3 border-b border-[var(--card-border)] pb-3 text-inherit">
                 <CampaignImage campaign={battle.campaign} size={26} showTooltip={false} />
-                <div className="ml-auto flex flex-wrap items-center gap-3">
-                    <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                <div className="ml-auto flex flex-wrap items-center gap-3 text-inherit">
+                    <span className="inline-flex items-center gap-1 whitespace-nowrap text-inherit">
                         <MiscIcon icon="deployment" width={18} height={18} />
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {battle.slots ?? 0}
-                        </span>
+                        <span className="text-sm font-medium text-inherit">{battle.slots ?? 0}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 whitespace-nowrap">
+                    <span className="inline-flex items-center gap-1 whitespace-nowrap text-inherit">
                         <MiscIcon icon="energy" width={18} height={18} />
-                        <span className="text-sm font-medium text-gray-700 dark:text-gray-300">
-                            {battle.energyCost}
-                        </span>
+                        <span className="text-sm font-medium text-inherit">{battle.energyCost}</span>
                     </span>
-                    <span className="inline-flex items-center gap-1 text-sm font-medium text-gray-700 dark:text-gray-300">
+                    <span className="inline-flex items-center gap-1 text-sm font-medium text-inherit">
                         Reward:
                         {rewardMaterial ? (
                             <UpgradeImage
@@ -85,16 +82,16 @@ const CampaignBattleCardPreview: React.FC<CampaignBattleCardPreviewProps> = ({ b
                                 tooltip={rewardName || '-'}
                             />
                         ) : (
-                            <span>{rewardName || '-'}</span>
+                            <span className="text-inherit">{rewardName || '-'}</span>
                         )}
                     </span>
                 </div>
             </div>
 
             <div>
-                <h4 className="mb-2 text-xs font-semibold text-gray-500 uppercase dark:text-gray-400">Enemies</h4>
+                <h4 className="mb-2 text-xs font-semibold text-inherit uppercase">Enemies</h4>
                 {(battle.rawEnemyTypes ?? []).length === 0 ? (
-                    <div className="text-sm text-gray-600 dark:text-gray-400">No enemy info available.</div>
+                    <div className="text-sm text-inherit">No enemy info available.</div>
                 ) : (
                     <div className="flex justify-center">
                         <CampaignBattleEnemies
@@ -110,7 +107,13 @@ const CampaignBattleCardPreview: React.FC<CampaignBattleCardPreviewProps> = ({ b
     );
 };
 
-export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, compact = true, widthClass }) => {
+export const ChipCampaignLocation: React.FC<Props> = ({
+    location,
+    unlocked,
+    compact = true,
+    widthClass,
+    clickable = true,
+}) => {
     const [openDetails, setOpenDetails] = useState(false);
 
     const locationNumber = useMemo(() => {
@@ -131,50 +134,53 @@ export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, comp
             return location.nodeNumber + 'B';
         }
         return location.nodeNumber;
-    }, []);
+    }, [location]);
 
     const campaignShort = campaignDisplayNames[location.campaign] ?? location.campaign;
     const fullLocationName = `Battle ${locationNumber} - ${location.campaign}`;
 
     const locationText = compact ? campaignShort : location.campaign;
-    const setWidthClass = widthClass ?? (compact ? 'w-[84px]' : 'w-[178px]');
+    const setWidthClass = widthClass ?? (compact ? 'w-[96px]' : 'w-full');
     const isOnslaught = location.campaign === Campaign.Onslaught;
 
     return location === undefined ? (
-        <span>undefined</span>
+        <span className="text-[var(--card-fg)]">undefined</span>
     ) : (
         <>
             <Tooltip title={location.campaign} placement="top">
                 <button
                     type="button"
-                    onClick={() => setOpenDetails(true)}
-                    className={`border-muted-fg/40 inline-flex cursor-pointer items-center gap-1 rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass}`.trim()}
+                    onClick={clickable ? () => setOpenDetails(true) : undefined}
+                    tabIndex={clickable ? undefined : -1}
+                    aria-disabled={clickable ? undefined : true}
+                    className={`border-muted-fg/40 inline-flex items-center gap-1 overflow-hidden rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass} text-[var(--card-fg)] ${clickable ? 'cursor-pointer' : 'cursor-default'}`.trim()}
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>
-                    <CampaignImage campaign={location.campaign} size={18} showTooltip={false} />
-                    <div className="w-full flex-row justify-between text-[12px] leading-none text-gray-200">
-                        <span className="truncate">{locationText}</span>
-                        {!isOnslaught && <span>{locationNumber}</span>}
+                    <CampaignImage campaign={location.campaign} size={20} showTooltip={false} />
+                    <div
+                        className={`flex flex-1 items-center text-[12px] leading-none text-inherit ${compact ? 'justify-between' : 'justify-start gap-2 overflow-hidden'}`.trim()}>
+                        <span className={compact ? undefined : 'min-w-0 truncate'}>{locationText}</span>
+                        {!isOnslaught && <span className="shrink-0 pl-1">{locationNumber}</span>}
                     </div>
                 </button>
             </Tooltip>
 
             <Dialog
-                open={openDetails}
+                open={clickable && openDetails}
                 onClose={() => setOpenDetails(false)}
                 maxWidth="sm"
                 aria-labelledby="campaign-location-dialog-title">
                 <DialogTitle
                     id="campaign-location-dialog-title"
-                    className="flex items-center justify-between gap-3 pr-2">
-                    <span>{fullLocationName}</span>
+                    className="flex items-center justify-between gap-3 pr-2 text-[var(--card-fg)]">
+                    <span className="text-inherit">{fullLocationName}</span>
                     <IconButton aria-label="close" onClick={() => setOpenDetails(false)} size="small">
                         <CloseIcon fontSize="small" />
                     </IconButton>
                 </DialogTitle>
-                <DialogContent className="pt-2! pb-3!">
-                    <div className="flex justify-center">
+                <DialogContent className="pt-2! pb-3! text-[var(--card-fg)]">
+                    <div className="flex justify-center text-inherit">
                         <CampaignBattleCardPreview battle={location} />
                     </div>
                 </DialogContent>

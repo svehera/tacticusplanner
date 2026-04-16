@@ -364,7 +364,7 @@ function getDisplay(
             unit => !hasUnitFilter || includedUnitIds.has(unit.id)
         );
         return (
-            <div className="flex flex-wrap gap-5 p-4">
+            <div className="flex flex-wrap gap-2 p-2 sm:gap-5 sm:p-4">
                 {powerUnits.map(unit => (
                     <div key={`power-${unit.id}`}>
                         <RosterSnapshotsAssetsProvider>
@@ -596,11 +596,11 @@ function getDisplay(
     return (
         <>
             <RosterSnapshotsAssetsProvider>
-                <div style={{ zoom }} className="flex flex-wrap gap-5 p-4">
+                <div style={{ zoom }} className="flex flex-wrap gap-2 p-2 sm:gap-5 sm:p-4">
                     {renderedCharDiffs}
                     {renderedMowDiffs}
                 </div>
-                <div style={{ zoom }} className="flex flex-wrap gap-5 p-4">
+                <div style={{ zoom }} className="flex flex-wrap gap-2 p-2 sm:gap-5 sm:p-4">
                     {renderedChars.filter(char => char.props.isEnabled)}
                     {renderedMows.filter(mow => mow.props.isEnabled)}
                     {renderedChars.filter(char => !char.props.isEnabled)}
@@ -1351,7 +1351,7 @@ export const RosterSnapshots = () => {
                     onDone={handleManageDone}
                 />
             </div>
-            <div className="justify-begin flex gap-2 border-b border-gray-600 p-2">
+            <div className="flex flex-wrap items-center gap-2 border-b border-gray-600 p-2">
                 <SyncButton showText={!isMobile} />
                 <Tooltip title={getTakeSnapshotTitle()}>
                     <Button

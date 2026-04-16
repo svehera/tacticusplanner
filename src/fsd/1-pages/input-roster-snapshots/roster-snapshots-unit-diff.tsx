@@ -1,7 +1,9 @@
-// eslint-disable-next-line import-x/no-internal-modules
+/* eslint-disable import-x/no-internal-modules */
+import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
+
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
-import { ISnapshotCharacter, ISnapshotMachineOfWar, ISnapshotUnitDiff } from './models';
+import { ISnapshotUnitDiff } from './models';
 import { RosterSnapshotsUnitDiffDetailed } from './roster-snapshots-unit-diff-detailed';
 import { RosterSnapshotsUnitDiffSideBySide } from './roster-snapshots-unit-diff-side-by-side';
 

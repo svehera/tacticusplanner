@@ -20,6 +20,7 @@ export const StaticDataService = {
     getFactionPray(faction: FactionId): string {
         switch (faction) {
             case 'Ultramarines':
+            case 'AdeptusAstartes':
             case 'Sisterhood':
             case 'AstraMilitarum':
             case 'BlackTemplars':
