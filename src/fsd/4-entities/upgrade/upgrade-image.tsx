@@ -1,5 +1,5 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
-import React, { useState, CSSProperties } from 'react';
+import React, { useState } from 'react';
 
 import frameCommonUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_common.png';
 import frameEpicUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_epic.png';
@@ -26,22 +26,6 @@ const FRAME_URL_BY_RARITY: Partial<Record<RarityString, string>> = {
     [RarityString.Common]: frameCommonUrl,
 };
 
-const UPGRADE_HEIGHT_RATIO = 0.78;
-
-const CENTERED_STACK_STYLES: CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    maxWidth: '100%',
-    maxHeight: '100%',
-};
-
-const CENTERED_STACK_STYLES_MAIN_IMG: CSSProperties = {
-    ...CENTERED_STACK_STYLES,
-    height: `${UPGRADE_HEIGHT_RATIO * 100}%`,
-};
-
 interface UpgradeImageBaseProps {
     material: string;
     iconPath: string;
@@ -57,30 +41,27 @@ const UpgradeImageBase = ({ material, iconPath, size, rarity }: UpgradeImageBase
     const image = getImageUrl(imagePath);
     const frameImgUrl = rarity ? FRAME_URL_BY_RARITY[rarity] : undefined;
 
-    const imageMissingStyles: CSSProperties = {
-        height,
-        width,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: `clamp(8px, ${width / 4.5}px, 14px)`,
-        textAlign: 'center',
-        overflow: 'hidden',
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-word',
-        lineHeight: '0.9',
-    };
+    // Tailwind handles most styles; fontSize remains dynamic
+    const imageMissingFontSize = `clamp(8px, ${width / 4.5}px, 14px)`;
 
     return (
-        <div style={{ width, height }} className={'upgrade'}>
+        <div style={{ width, height }} className="upgrade">
             {imgError ? (
-                <div style={imageMissingStyles}>{material}</div>
+                <div
+                    className="flex h-full w-full items-center justify-center overflow-hidden text-center leading-[0.9] break-words whitespace-pre-wrap"
+                    style={{ fontSize: imageMissingFontSize }}>
+                    {material}
+                </div>
             ) : (
                 <div className="relative mx-auto my-0 block" style={{ width, height }}>
-                    <img style={CENTERED_STACK_STYLES} src={bgUnderlayUrl} alt={`${rarity} upgrade`} />
                     <img
-                        loading={'lazy'}
-                        style={CENTERED_STACK_STYLES_MAIN_IMG}
+                        className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                        src={bgUnderlayUrl}
+                        alt={`${rarity} upgrade`}
+                    />
+                    <img
+                        loading="lazy"
+                        className="absolute top-1/2 left-1/2 h-[78%] max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
                         src={image}
                         alt={material}
                         onError={() => {
@@ -88,7 +69,11 @@ const UpgradeImageBase = ({ material, iconPath, size, rarity }: UpgradeImageBase
                             setImgError(true);
                         }}
                     />
-                    <img loading={'lazy'} style={CENTERED_STACK_STYLES} src={frameImgUrl} />
+                    <img
+                        loading="lazy"
+                        className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                        src={frameImgUrl}
+                    />
                 </div>
             )}
         </div>
