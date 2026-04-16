@@ -159,7 +159,7 @@ export const ChipCampaignLocation: React.FC<Props> = ({
                     }}>
                     <CampaignImage campaign={location.campaign} size={20} showTooltip={false} />
                     <div
-                        className={`flex flex-1 items-center justify-between text-[12px] leading-none text-inherit ${compact ? '' : 'overflow-hidden'}`.trim()}>
+                        className={`flex flex-1 items-center text-[12px] leading-none text-inherit ${compact ? 'justify-between' : 'justify-start gap-2 overflow-hidden'}`.trim()}>
                         <span className={compact ? undefined : 'min-w-0 truncate'}>{locationText}</span>
                         {!isOnslaught && <span className="shrink-0 pl-1">{locationNumber}</span>}
                     </div>
