@@ -9,5 +9,6 @@ export type {
     IRecipeExpandedUpgrade,
 } from './model';
 export { UpgradeImage } from './upgrade-image';
+export { recipeDataByName } from './data';
 export { UpgradeControl } from './upgrade-control';
 export { UpgradesService } from './upgrades.service';

@@ -5,3 +5,4 @@ export { campaignsByGroup, campaignEventsLocations } from './campaigns.constants
 export { CampaignLocation } from './campaign-location';
 export { CampaignImage } from './campaign.icon';
 export { ChipCampaignLocation } from './chip-campaign-location';
+export { CampaignBattleEnemies } from './campaign-battle-enemies';

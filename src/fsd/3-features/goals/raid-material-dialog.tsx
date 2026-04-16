@@ -1,12 +1,12 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogTitle, IconButton } from '@mui/material';
+import { Dialog, DialogContent, DialogTitle, IconButton, useMediaQuery } from '@mui/material';
 import React from 'react';
 
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { ExpandableRaidLocations } from './expandable-raid-locations';
 import { IUpgradeRaid } from './goals.models';
 import { getCharacterIcon, getDisplayName } from './raid-day-helpers';
-import { RaidLocations } from './raid-locations';
 import { RaidMaterialIcon } from './raid-material-icon';
 
 // ─── Component ───────────────────────────────────────────────────────────────
@@ -17,6 +17,7 @@ interface RaidMaterialDialogProps {
 }
 
 export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, onClose }) => {
+    const fullScreen = useMediaQuery('(max-width:600px)');
     const afterRaids = raid.acquiredCount + raid.raidLocations.reduce((s, loc) => s + loc.farmedItems, 0);
     const isSufficient = afterRaids >= raid.requiredCount;
     const inventoryPct = raid.requiredCount > 0 ? Math.min((raid.acquiredCount / raid.requiredCount) * 100, 100) : 0;
@@ -30,6 +31,7 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
         <Dialog
             open
             onClose={onClose}
+            fullScreen={fullScreen}
             maxWidth="xs"
             fullWidth
             PaperProps={{ className: 'bg-(--card-bg)! text-(--card-fg)!' }}
@@ -98,7 +100,7 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                         Locations
                     </div>
-                    <RaidLocations locations={raid.raidLocations} compactRaidLocations={false} clickable={false} />
+                    <ExpandableRaidLocations locations={raid.raidLocations} />
                 </div>
             </DialogContent>
         </Dialog>
