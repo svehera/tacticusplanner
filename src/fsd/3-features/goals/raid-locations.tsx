@@ -2,16 +2,16 @@ import React, { useMemo, useState, useCallback, memo } from 'react';
 
 import { ButtonPill } from '@/fsd/5-shared/ui';
 
-import { ICampaignBattleComposed } from '@/fsd/4-entities/campaign/@x/upgrade';
-import { ChipCampaignLocation } from '@/fsd/4-entities/campaign/chip-campaign-location';
+import { ChipCampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 
 interface Props {
     locations: ICampaignBattleComposed[];
     maxLocations?: number;
     compactRaidLocations?: boolean;
+    clickable?: boolean;
 }
 
-const Component: React.FC<Props> = ({ locations, maxLocations, compactRaidLocations = true }) => {
+const Component: React.FC<Props> = ({ locations, maxLocations, compactRaidLocations = true, clickable = true }) => {
     const [expanded, setExpanded] = useState(false);
 
     const effectiveMaxLocations = useMemo(() => {
@@ -51,6 +51,7 @@ const Component: React.FC<Props> = ({ locations, maxLocations, compactRaidLocati
                     location={loc}
                     unlocked={loc.isUnlocked ?? false}
                     compact={compactRaidLocations}
+                    clickable={clickable}
                 />
             ))}
 
@@ -73,6 +74,7 @@ export const RaidLocations = memo(Component, (previous, next) => {
     return (
         previous.maxLocations === next.maxLocations &&
         previous.locations === next.locations &&
-        previous.compactRaidLocations === next.compactRaidLocations
+        previous.compactRaidLocations === next.compactRaidLocations &&
+        previous.clickable === next.clickable
     );
 });

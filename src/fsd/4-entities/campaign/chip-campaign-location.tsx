@@ -17,6 +17,7 @@ interface Props {
     unlocked: boolean;
     compact?: boolean;
     widthClass?: string;
+    clickable?: boolean;
 }
 
 interface CampaignBattleCardPreviewProps {
@@ -106,7 +107,13 @@ const CampaignBattleCardPreview: React.FC<CampaignBattleCardPreviewProps> = ({ b
     );
 };
 
-export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, compact = true, widthClass }) => {
+export const ChipCampaignLocation: React.FC<Props> = ({
+    location,
+    unlocked,
+    compact = true,
+    widthClass,
+    clickable = true,
+}) => {
     const [openDetails, setOpenDetails] = useState(false);
 
     const locationNumber = useMemo(() => {
@@ -143,8 +150,8 @@ export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, comp
             <Tooltip title={location.campaign} placement="top">
                 <button
                     type="button"
-                    onClick={() => setOpenDetails(true)}
-                    className={`border-muted-fg/40 inline-flex cursor-pointer items-center gap-1 overflow-hidden rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass} text-[var(--card-fg)]`.trim()}
+                    onClick={clickable ? () => setOpenDetails(true) : undefined}
+                    className={`border-muted-fg/40 inline-flex items-center gap-1 overflow-hidden rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass} text-[var(--card-fg)] ${clickable ? 'cursor-pointer' : 'cursor-default'}`.trim()}
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>
@@ -158,7 +165,7 @@ export const ChipCampaignLocation: React.FC<Props> = ({ location, unlocked, comp
             </Tooltip>
 
             <Dialog
-                open={openDetails}
+                open={clickable && openDetails}
                 onClose={() => setOpenDetails(false)}
                 maxWidth="sm"
                 aria-labelledby="campaign-location-dialog-title">
