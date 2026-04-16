@@ -10,3 +10,7 @@ export { ForgeBadgeImage } from './forge-badge-image';
 export { pooEmoji, starEmoji } from './emojis';
 export { TraitImage } from './trait-image';
 export { RankIcon } from './rank.icon';
+export { OrbImage as OrbIcon } from './orb-image';
+export { ForgeBadgesTotal } from './forge-badges-total';
+export { XpBooksTotal } from './xp-books-total';
+export { MoWComponentsTotal } from './mow-components-total';
