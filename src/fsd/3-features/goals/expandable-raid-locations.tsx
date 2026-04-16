@@ -40,16 +40,14 @@ const LocationRow: React.FC<{ location: ICampaignBattleComposed }> = ({ location
                     setExpanded(v => !v);
                     setEverExpanded(true);
                 }}
-                className="flex w-full cursor-pointer items-center gap-2 px-2 py-1.5 text-sm text-[var(--card-fg)]"
-                style={{ opacity: location.isUnlocked ? 1 : 0.5 }}>
+                className={`flex w-full cursor-pointer items-center gap-2 px-2 py-1.5 text-sm text-[var(--card-fg)] ${location.isUnlocked ? '' : 'opacity-50'}`}>
                 <CampaignImage campaign={location.campaign} size={20} showTooltip={false} />
                 <div className="flex min-w-0 flex-1 items-center gap-1.5">
                     <span className="min-w-0 truncate font-medium">{location.campaign}</span>
                     {!isOnslaught && <span className="shrink-0">· {nodeLabel}</span>}
                 </div>
                 <ExpandMoreIcon
-                    className={`shrink-0 text-[var(--muted-fg)] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
-                    style={{ fontSize: 18 }}
+                    className={`shrink-0 text-[18px] text-[var(--muted-fg)] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
                 />
             </button>
 
