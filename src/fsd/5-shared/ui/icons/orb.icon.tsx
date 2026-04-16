@@ -20,7 +20,7 @@ const mapAllianceToKey = (alliance: Alliance): string => {
     return `${Alliance[alliance].toLowerCase()}Orb`;
 };
 
-export const OrbImage: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
+export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
     const allianceKey = mapAllianceToKey(alliance);
     const rarityKey = mapRarityToKey(rarity);
     // 2. Fetch the actual file source (assuming it's in a 'file' property)

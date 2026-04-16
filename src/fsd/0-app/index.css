@@ -153,6 +153,8 @@
     }
 
     .dark {
+        color-scheme: dark;
+
         --bg: rgb(37, 38, 36);
         --fg: rgba(214, 207, 195, 0.87);
 
