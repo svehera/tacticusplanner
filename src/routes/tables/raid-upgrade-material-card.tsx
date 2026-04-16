@@ -9,10 +9,9 @@ import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { RaidLocations } from '@/fsd/3-features/goals/raid-locations';
 
 const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
-
-import { RaidLocations } from './raid-locations';
 
 interface Props {
     index: number;
