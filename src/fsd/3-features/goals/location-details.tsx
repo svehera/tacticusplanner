@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignBattleEnemies, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -44,7 +45,7 @@ export const LocationDetails: React.FC<Props> = ({ location }) => {
                             <UpgradeImage
                                 material={rewardMaterial.label ?? rewardName}
                                 iconPath={rewardMaterial.icon ?? ''}
-                                rarity={rewardMaterial.rarity ?? ''}
+                                rarity={RarityMapper.stringToRarityString(rewardMaterial.rarity ?? '')}
                                 size={24}
                                 tooltip={rewardName || '-'}
                             />
