@@ -142,11 +142,13 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
             isSaveInFlightReference.current = true;
             const currentModifiedDateTicks = modifiedDateTicksReference.current;
+            let saveSucceeded = false;
 
             setUserDataApi(storeValue, currentModifiedDateTicks)
                 .then(({ data }) => {
                     const { modifiedDateTicks } = data;
                     setModifiedDateTicks(modifiedDateTicks);
+                    saveSucceeded = true;
                 })
                 .catch((error: AxiosError<IErrorResponse>) => {
                     if (error.code === 'ERR_CANCELED') {
@@ -182,7 +184,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                     if (queuedStoreValue) {
                         pushDataToServer(queuedStoreValue, successVariant);
-                    } else {
+                    } else if (saveSucceeded) {
                         enqueueSnackbar('Pushed local data to server.', { variant: successVariant });
                     }
                 });
@@ -442,7 +444,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
                 const localIsNewer = !!modifiedDate && modifiedDate > serverLastModified;
 
-                const shouldAcceptServerData = !isFirstLogin && !localIsNewer;
+                // If ticks differ, someone else wrote to the server since we last synced —
+                // that is the authoritative signal and must override the local clock comparison.
+                const shouldAcceptServerData = !isFirstLogin && hasDataConflict;
                 const shouldPushLocalData = !isFreshData && !hasDataConflict && (isFirstLogin || localIsNewer);
 
                 setModifiedDateTicks(serverModifiedDateTicks);
