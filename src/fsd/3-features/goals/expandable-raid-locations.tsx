@@ -40,7 +40,7 @@ const LocationRow: React.FC<{ location: ICampaignBattleComposed }> = ({ location
                     setExpanded(v => !v);
                     setEverExpanded(true);
                 }}
-                className={`flex w-full cursor-pointer items-center gap-2 px-2 py-1.5 text-sm text-[var(--card-fg)] ${location.isUnlocked ? '' : 'opacity-50'}`}>
+                className={`flex w-full cursor-pointer items-center gap-2 px-2 py-1.5 text-sm text-[var(--card-fg)] ${location.isUnlocked ? 'opacity-100' : 'opacity-50'}`}>
                 <CampaignImage campaign={location.campaign} size={20} showTooltip={false} />
                 <div className="flex min-w-0 flex-1 items-center gap-1.5">
                     <span className="min-w-0 truncate font-medium">{location.campaign}</span>
