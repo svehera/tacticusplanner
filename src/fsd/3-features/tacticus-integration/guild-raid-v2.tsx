@@ -182,6 +182,102 @@ const UnitIconRenderer: React.FC<{ value: ICharacterData[] | IMowStatic2[] }> = 
     );
 };
 
+const RarityColumnRenderer = (props: ICellRendererParams<TacticusGuildRaidEntry>) => {
+    const rarity = props.value ?? 0;
+    return <RarityIcon rarity={rarity} />;
+};
+
+const HeroesColumnRenderer = (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
+    const heroes = params.data?.heroDetails
+        .map((unit: TacticusGuildRaidUnit) => CharactersService.getUnit(unit.unitId))
+        .filter((character): character is ICharacterData => character !== undefined);
+    return <UnitIconRenderer value={heroes ?? []} />;
+};
+
+const MoWColumnRenderer = (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
+    const mow = params.data?.machineOfWarDetails?.unitId
+        ? MowsService.resolveToStatic(params.data.machineOfWarDetails.unitId)
+        : undefined;
+    const mowArray = mow ? [mow] : [];
+    return <UnitIconRenderer value={mowArray} />;
+};
+
+const TopHeroesColumnRenderer = (params: ICellRendererParams<UserSummary>) => {
+    const topHeroes = [...params.value.entries()]
+        .toSorted((a, b) => b[1] - a[1])
+        .slice(0, 5)
+        .map(([key]) => CharactersService.getUnit(key))
+        .filter((character): character is ICharacterData => character !== undefined);
+    return <UnitIconRenderer value={topHeroes} />;
+};
+
+const TopMoWColumnRenderer = (params: ICellRendererParams<UserSummary>) => {
+    const topMoW = [...params.value.entries()]
+        .toSorted((a, b) => b[1] - a[1])
+        .slice(0, 3)
+        .map(([key]) => MowsService.resolveToStatic(key))
+        .filter((mow): mow is IMowStatic2 => mow !== undefined);
+    return <UnitIconRenderer value={topMoW} />;
+};
+
+const getTimeUntilNextBomb = (userSummary: UserSummary) => {
+    const BOMB_COOLDOWN_HOURS = 18;
+    const lastBombTime = userSummary.lastBombTime;
+
+    if (!lastBombTime) {
+        return 0;
+    }
+
+    const timeSince = Date.now() - lastBombTime;
+    let timeUntilNext = BOMB_COOLDOWN_HOURS * HOUR - timeSince;
+
+    if (timeUntilNext < 0) {
+        timeUntilNext = 0;
+    }
+
+    return timeUntilNext;
+};
+
+const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+    const timeUntilNext = getTimeUntilNextBomb(data);
+
+    if (timeUntilNext === 0) {
+        return <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">Available</span>;
+    }
+
+    const hoursLeft = Math.floor(timeUntilNext / HOUR);
+    const minutesLeft = Math.floor((timeUntilNext % HOUR) / MINUTE);
+
+    return (
+        <span className="text-sm">
+            {hoursLeft}h {minutesLeft}m
+        </span>
+    );
+};
+
+const TokenStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
+    const tokenStatus = data.tokenStatus;
+    const now = Date.now();
+
+    if (tokenStatus.count === MAX_TOKEN) {
+        return (
+            <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
+                {tokenStatus.count} tokens available
+            </span>
+        );
+    } else {
+        const timeReloading = now - tokenStatus.reloadStart;
+        const cooldown = millisecondsPerToken - timeReloading;
+        const hoursCooldown = Math.round(cooldown / HOUR);
+        if (tokenStatus.count === 0) return <span className="text-sm">no token, {hoursCooldown}h cooldown</span>;
+        return (
+            <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
+                {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
+            </span>
+        );
+    }
+};
+
 export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
 }) => {
@@ -236,10 +332,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: true,
             filter: true,
             width: 80,
-            cellRenderer: (props: ICellRendererParams<TacticusGuildRaidEntry>) => {
-                const rarity = props.value ?? 0;
-                return <RarityIcon rarity={rarity} />;
-            },
+            cellRenderer: RarityColumnRenderer,
         },
         {
             headerName: 'Enemy Type',
@@ -297,12 +390,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: false,
             filter: true,
             width: 150,
-            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
-                const heroes = params.data?.heroDetails
-                    .map((unit: TacticusGuildRaidUnit) => CharactersService.getUnit(unit.unitId))
-                    .filter((character): character is ICharacterData => character !== undefined);
-                return <UnitIconRenderer value={heroes ?? []} />;
-            },
+            cellRenderer: HeroesColumnRenderer,
             valueFormatter: params => params.value?.map((unit: TacticusGuildRaidUnit) => unit.unitId).join(', '),
         },
         {
@@ -311,13 +399,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             sortable: false,
             filter: true,
             width: 80,
-            cellRenderer: (params: ICellRendererParams<TacticusGuildRaidEntry>) => {
-                const mow = params.data?.machineOfWarDetails?.unitId
-                    ? MowsService.resolveToStatic(params.data.machineOfWarDetails.unitId)
-                    : undefined;
-                const mowArray = mow ? [mow] : [];
-                return <UnitIconRenderer value={mowArray} />;
-            },
+            cellRenderer: MoWColumnRenderer,
             valueFormatter: params => params.value?.unitId,
         },
         {
@@ -354,65 +436,6 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             width: 180,
         },
     ];
-
-    const getTimeUntilNextBomb = (userSummary: UserSummary) => {
-        const BOMB_COOLDOWN_HOURS = 18;
-        const lastBombTime = userSummary.lastBombTime;
-
-        if (!lastBombTime) {
-            return 0;
-        }
-
-        const timeSince = Date.now() - lastBombTime;
-        let timeUntilNext = BOMB_COOLDOWN_HOURS * HOUR - timeSince;
-
-        if (timeUntilNext < 0) {
-            timeUntilNext = 0;
-        }
-
-        return timeUntilNext;
-    };
-
-    // Add this component near other renderers
-    const BombStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
-        const timeUntilNext = getTimeUntilNextBomb(data);
-
-        if (timeUntilNext === 0) {
-            return <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">Available</span>;
-        }
-
-        const hoursLeft = Math.floor(timeUntilNext / HOUR);
-        const minutesLeft = Math.floor((timeUntilNext % HOUR) / MINUTE);
-
-        return (
-            <span className="text-sm">
-                {hoursLeft}h {minutesLeft}m
-            </span>
-        );
-    };
-
-    const TokenStatusRenderer: React.FC<{ data: UserSummary }> = ({ data }) => {
-        const tokenStatus = data.tokenStatus;
-        const now = Date.now();
-
-        if (tokenStatus.count === MAX_TOKEN) {
-            return (
-                <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                    {tokenStatus.count} tokens available
-                </span>
-            );
-        } else {
-            const timeReloading = now - tokenStatus.reloadStart;
-            const cooldown = millisecondsPerToken - timeReloading;
-            const hoursCooldown = Math.round(cooldown / HOUR);
-            if (tokenStatus.count === 0) return <span className="text-sm">no token, {hoursCooldown}h cooldown</span>;
-            return (
-                <span className="rounded bg-green-100 px-2 py-1 text-xs font-medium text-green-800">
-                    {tokenStatus.count} token{tokenStatus.count > 1 ? 's' : ''}, {hoursCooldown}h cooldown
-                </span>
-            );
-        }
-    };
 
     const summaryColumnDefs: ColDef<UserSummary>[] = [
         {
@@ -509,14 +532,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Most Used Heroes',
             field: 'topHeroes',
             width: 160,
-            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
-                const topHeroes = [...params.value.entries()]
-                    .toSorted((a, b) => b[1] - a[1])
-                    .slice(0, 5)
-                    .map(([key]) => CharactersService.getUnit(key))
-                    .filter((character): character is ICharacterData => character !== undefined);
-                return <UnitIconRenderer value={topHeroes} />;
-            },
+            cellRenderer: TopHeroesColumnRenderer,
             valueFormatter: params => {
                 const topHeroes = [...params.value.entries()]
                     .toSorted((a, b) => b[1] - a[1])
@@ -529,14 +545,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             headerName: 'Most Used MoW',
             field: 'topMachinesOfWar',
             width: 120,
-            cellRenderer: (params: ICellRendererParams<UserSummary>) => {
-                const topMoW = [...params.value.entries()]
-                    .toSorted((a, b) => b[1] - a[1])
-                    .slice(0, 3)
-                    .map(([key]) => MowsService.resolveToStatic(key))
-                    .filter((mow): mow is IMowStatic2 => mow !== undefined);
-                return <UnitIconRenderer value={topMoW} />;
-            },
+            cellRenderer: TopMoWColumnRenderer,
             valueFormatter: params => {
                 const topMoW = [...params.value.entries()]
                     .toSorted((a, b) => b[1] - a[1])
@@ -680,10 +689,9 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         for (const userSummary of userMap.values()) updateTokenTo(userSummary.tokenStatus, now);
 
         return [...userMap.values()];
-    }, [filteredEntries]);
+    }, [raidData, filteredEntries]);
 
-    // Calculate summary statistics
-    const calculateStats = () => {
+    const stats = useMemo(() => {
         if (!raidData || filteredEntries.length === 0) return;
 
         // Total damage dealt across all entries
@@ -759,9 +767,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             availableBombs,
             availableTokens,
         };
-    };
-
-    const stats = useMemo(() => calculateStats(), [summaryData]);
+    }, [raidData, filteredEntries, summaryData, userIdMapper]);
 
     const [usePrefixForCopyUser, setSePrefixForCopyUser] = useState<boolean>(true);
 
