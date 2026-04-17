@@ -7,7 +7,7 @@ interface SectionAccordionProps {
     onChange: (event: React.SyntheticEvent, isExpanded: boolean) => void;
     summary: React.ReactNode;
     children: React.ReactNode;
-    transitionProps?: React.ComponentProps<typeof Accordion>['TransitionProps'];
+    transitionProps?: NonNullable<React.ComponentProps<typeof Accordion>['slotProps']>['transition'];
 }
 
 export const SectionAccordion = forwardRef<HTMLDivElement, SectionAccordionProps>(
@@ -16,7 +16,7 @@ export const SectionAccordion = forwardRef<HTMLDivElement, SectionAccordionProps
             ref={reference}
             expanded={expanded}
             onChange={onChange}
-            TransitionProps={transitionProps}
+            slotProps={{ transition: transitionProps }}
             disableGutters
             square
             className="overflow-hidden border-0 border-t border-(--border) bg-transparent shadow-none [&::before]:hidden">

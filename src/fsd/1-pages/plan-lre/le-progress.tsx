@@ -71,7 +71,7 @@ export const LeProgress = ({
             <div className="w-full">
                 <LeNextGoalProgress progress={progress} />
                 <Accordion
-                    TransitionProps={{ unmountOnExit: true }}
+                    slotProps={{ transition: { unmountOnExit: true } }}
                     expanded={accordionExpanded === 'missionAndNotes'}
                     onChange={handleAccordionChange('missionAndNotes')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -150,7 +150,7 @@ export const LeProgress = ({
                 </Accordion>
 
                 <Accordion
-                    TransitionProps={{ unmountOnExit: true }}
+                    slotProps={{ transition: { unmountOnExit: true } }}
                     expanded={accordionExpanded === 'roundForecast'}
                     onChange={handleAccordionChange('roundForecast')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>
@@ -171,7 +171,7 @@ export const LeProgress = ({
                 </Accordion>
 
                 <Accordion
-                    TransitionProps={{ unmountOnExit: true }}
+                    slotProps={{ transition: { unmountOnExit: true } }}
                     expanded={accordionExpanded === 'tracks'}
                     onChange={handleAccordionChange('tracks')}>
                     <AccordionSummary expandIcon={<ExpandMoreIcon />}>

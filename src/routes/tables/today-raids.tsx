@@ -76,7 +76,7 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                     </Suspense>
                 </AccordionDetails>
             </Accordion>
-            <Accordion TransitionProps={{ unmountOnExit: true }}>
+            <Accordion slotProps={{ transition: { unmountOnExit: true } }}>
                 <AccordionSummary expandIcon={<ExpandMore />}>
                     <p style={{ fontSize: isMobile ? 16 : 20 }}>
                         Bonus Raids (when you have extra energy <MiscIcon icon={'energy'} height={15} width={15} />)
