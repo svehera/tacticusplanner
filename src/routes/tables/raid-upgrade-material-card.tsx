@@ -38,20 +38,6 @@ const resolveUnit = (id: string) => {
     return;
 };
 
-const getRelatedUnitDisplayName = (idOrName: string) => {
-    const char = CharactersService.getUnit(idOrName);
-    if (char) {
-        return char.shortName || char.name;
-    }
-
-    const mow = mows2Data.mows.find(x => x.snowprintId === idOrName || x.name === idOrName);
-    if (mow) {
-        return mow.name;
-    }
-
-    return idOrName;
-};
-
 const hasRaidLocations = (
     estimate: ICharacterUpgradeEstimate
 ): estimate is ICharacterUpgradeEstimate & { raidLocations: IItemRaidLocation[] } => {
@@ -101,10 +87,6 @@ const Component: React.FC<Props> = ({
         return upgradeEstimate.locations;
     }, [showPlannedRaidLocationsOnly, upgradeEstimate]);
 
-    const relatedUnitTooltipNames = useMemo(() => {
-        return [...new Set(upgradeEstimate.relatedCharacters.map(idOrName => getRelatedUnitDisplayName(idOrName)))];
-    }, [upgradeEstimate.relatedCharacters]);
-
     const hasSuggestedRaidsRemaining = useMemo(() => {
         if (hasRaidLocations(upgradeEstimate)) {
             return upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0);
@@ -114,30 +96,6 @@ const Component: React.FC<Props> = ({
     }, [upgradeEstimate, displayedLocations]);
 
     const noSuggestedRaidsRemaining = !hasSuggestedRaidsRemaining;
-
-    const iconTooltipContent = useMemo(
-        () => (
-            <div>
-                {upgradeEstimate.label}
-                <ul className="ps-[15px]">
-                    {relatedUnitTooltipNames.map(nameItem => (
-                        <li
-                            key={
-                                'material-item-input-' +
-                                upgradeEstimate.id +
-                                '-' +
-                                displayedLocations.map(loc => loc.id).join(',') +
-                                '-' +
-                                nameItem
-                            }>
-                            {nameItem}
-                        </li>
-                    ))}
-                </ul>
-            </div>
-        ),
-        [upgradeEstimate.label, upgradeEstimate.id, relatedUnitTooltipNames, displayedLocations]
-    );
 
     const icon = useMemo(() => {
         if (isShard || isMythicShard) {
@@ -153,10 +111,19 @@ const Component: React.FC<Props> = ({
                 material={upgradeEstimate.label}
                 iconPath={upgradeEstimate.iconPath}
                 rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgradeEstimate.rarity))}
-                tooltip={iconTooltipContent}
+                showTooltip={false}
             />
         );
-    }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId, iconTooltipContent]);
+    }, [
+        isShard,
+        isMythicShard,
+        resolvedUnit,
+        materialId,
+        upgradeEstimate.snowprintId,
+        upgradeEstimate.label,
+        upgradeEstimate.iconPath,
+        upgradeEstimate.rarity,
+    ]);
 
     const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
     const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
