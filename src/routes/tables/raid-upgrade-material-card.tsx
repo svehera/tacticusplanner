@@ -1,4 +1,4 @@
-import { FC, Suspense, lazy, memo } from 'react';
+import { FC, Suspense, lazy } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
@@ -46,7 +46,7 @@ const hasRaidLocations = (
     );
 };
 
-const Component: FC<Props> = ({
+export const RaidUpgradeMaterialCard: FC<Props> = ({
     showRelatedCharacters = true,
     showAdditionalInfo = true,
     maxLocations,
@@ -176,5 +176,3 @@ const Component: FC<Props> = ({
         </div>
     );
 };
-
-export const RaidUpgradeMaterialCard = memo(Component);

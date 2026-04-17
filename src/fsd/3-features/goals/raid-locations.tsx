@@ -1,4 +1,4 @@
-import { useState, memo } from 'react';
+import { useState } from 'react';
 
 import { ButtonPill } from '@/fsd/5-shared/ui';
 
@@ -11,7 +11,7 @@ interface Props {
     clickable?: boolean;
 }
 
-const Component = ({ locations, maxLocations, compactRaidLocations = true, clickable = true }: Props) => {
+export const RaidLocations = ({ locations, maxLocations, compactRaidLocations = true, clickable = true }: Props) => {
     const [expanded, setExpanded] = useState(false);
 
     const effectiveMaxLocations = typeof maxLocations === 'number' ? maxLocations : compactRaidLocations ? 4 : 2;
@@ -54,5 +54,3 @@ const Component = ({ locations, maxLocations, compactRaidLocations = true, click
         </div>
     );
 };
-
-export const RaidLocations = memo(Component);
