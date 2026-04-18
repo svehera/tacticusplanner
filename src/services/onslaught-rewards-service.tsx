@@ -1,4 +1,15 @@
+/**
+ * OnslaughtRewardsService manages calculations for expected shard income from the Onslaught "Honor Your Heroes" system.
+ *
+ * The calculation depends on:
+ * - Tier: The specific Onslaught sector (e.g., Common Stone vs. Mythic).
+ * - maxProgressionIndex: Milestones within a sector. A character's rarity caps which milestones they can access,
+ *   preventing lower-rarity heroes from receiving rewards associated with higher progression indices.
+ */
+import React from 'react';
+
 import { Rarity, Alliance } from '@/fsd/5-shared/model';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import onslaughtRewardsData from './onslaught-rewards-data.json';
 
@@ -19,7 +30,7 @@ export interface OnslaughtData {
  * Maps progression indices to the maximum allowed rarity.
  * This prevents overestimating rewards for lower-rarity heroes.
  */
-const RARITY_PROGRESSION_LIMITS: Partial<Record<Rarity, number>> = {
+const RARITY_PROGRESSION_LIMITS: Record<Rarity, number> = {
     [Rarity.Common]: 3,
     [Rarity.Uncommon]: 7,
     [Rarity.Rare]: 11,
@@ -31,28 +42,38 @@ const RARITY_PROGRESSION_LIMITS: Partial<Record<Rarity, number>> = {
 /**
  * Human-readable mapping for Tiers
  */
-export const TIER_NAME_MAP: Record<number, string> = {
-    1: 'Common Stone Sector 1',
-    2: 'Common Stone Sector 2',
-    3: 'Common Stone Sector 3 (Challenge)',
-    4: 'Uncommon Iron Sector 1',
-    5: 'Uncommon Iron Sector 2',
-    6: 'Uncommon Iron Sector 3 (Challenge)',
-    7: 'Rare Bronze Sector 1',
-    8: 'Rare Bronze Sector 2',
-    9: 'Rare Bronze Sector 3 (Challenge)',
-    10: 'Epic Silver Sector 1',
-    11: 'Epic Silver Sector 2',
-    12: 'Epic Silver Sector 3 (Challenge)',
-    13: 'Legendary Gold Sector 1',
-    14: 'Legendary Gold Sector 2',
-    15: 'Legendary Gold Sector 3 (Challenge)',
-    16: 'Diamond Sector 1',
-    17: 'Diamond Sector 2',
-    18: 'Diamond Sector 3 (Challenge)',
-    19: 'Mythic Sector 1',
-    20: 'Mythic Sector 2',
-    21: 'Mythic Sector 3 (Challenge)',
+const renderTierLabel = (rarity: Rarity, label: string) => {
+    const isSectorClear = label.includes('Sector Clear');
+    return (
+        <div className="flex-box gap5 items-center">
+            <RarityIcon rarity={rarity} />
+            <span className={isSectorClear ? 'font-bold' : ''}>{label}</span>
+        </div>
+    );
+};
+/* eslint-disable-next-line react-refresh/only-export-components */
+export const TIER_NAME_MAP: Record<number, React.ReactNode> = {
+    1: renderTierLabel(Rarity.Common, 'Stone Sector I'),
+    2: renderTierLabel(Rarity.Common, 'Stone Sector II'),
+    3: renderTierLabel(Rarity.Common, 'Stone Sector (Sector Clear)'),
+    4: renderTierLabel(Rarity.Uncommon, 'Iron Sector I'),
+    5: renderTierLabel(Rarity.Uncommon, 'Iron Sector II'),
+    6: renderTierLabel(Rarity.Uncommon, 'Iron Sector (Sector Clear)'),
+    7: renderTierLabel(Rarity.Rare, 'Bronze Sector I'),
+    8: renderTierLabel(Rarity.Rare, 'Bronze Sector II'),
+    9: renderTierLabel(Rarity.Rare, 'Bronze Sector (Sector Clear)'),
+    10: renderTierLabel(Rarity.Epic, 'Silver Sector I'),
+    11: renderTierLabel(Rarity.Epic, 'Silver Sector II'),
+    12: renderTierLabel(Rarity.Epic, 'Silver Sector (Sector Clear)'),
+    13: renderTierLabel(Rarity.Legendary, 'Gold Sector I'),
+    14: renderTierLabel(Rarity.Legendary, 'Gold Sector II'),
+    15: renderTierLabel(Rarity.Legendary, 'Gold Sector (Sector Clear)'),
+    16: renderTierLabel(Rarity.Legendary, 'Diamond I'),
+    17: renderTierLabel(Rarity.Legendary, 'Diamond II'),
+    18: renderTierLabel(Rarity.Legendary, 'Diamond III+ (Sector Clear)'),
+    19: renderTierLabel(Rarity.Mythic, 'Adamantine I'),
+    20: renderTierLabel(Rarity.Mythic, 'Adamantine II'),
+    21: renderTierLabel(Rarity.Mythic, 'Adamantine III+ (Sector Clear)'),
 };
 
 /**
@@ -81,7 +102,7 @@ function parseRewardMean(rewardString: string): number {
 
         if (chanceString.includes('/')) {
             const [number_, den] = chanceString.split('/').map(Number);
-            const probability = number_ / den;
+            const probability = Number.isFinite(number_) && Number.isFinite(den) && den > 0 ? number_ / den : 0;
             return amount * probability;
         }
         return amount;
@@ -105,6 +126,14 @@ function parseRewardMean(rewardString: string): number {
  * 2. Filter by maxProgressionIndex (based on Hero Rarity).
  * 3. Match reward type (Standard vs Mythic).
  */
+function isShardReward(rewardString: string, type: 'shards' | 'mythicShards'): boolean {
+    const lowerReward = rewardString.toLowerCase();
+    const isMythicMatch = lowerReward.includes('mythicshards_') || lowerReward.includes('mythicshards:');
+    return type === 'mythicShards'
+        ? isMythicMatch
+        : (lowerReward.includes('shards_') || lowerReward.includes('shards:')) && !isMythicMatch;
+}
+/* eslint-disable-next-line react-refresh/only-export-components */
 export function getMeanShardsForSelectedTier(
     data: OnslaughtData,
     tierId: number,
@@ -112,7 +141,7 @@ export function getMeanShardsForSelectedTier(
     type: 'shards' | 'mythicShards'
 ): number {
     const rewardsForTier = data.honorYourHeroesRewards.filter(r => r.tier === tierId);
-    const maxIndexForRarity = RARITY_PROGRESSION_LIMITS[rarity] ?? 18;
+    const maxIndexForRarity = RARITY_PROGRESSION_LIMITS[rarity];
 
     let totalMean = 0;
     let highestProgressionIndexForType = -1;
@@ -123,13 +152,7 @@ export function getMeanShardsForSelectedTier(
 
     // Find the highest progression index that contains the specific reward type
     for (const milestone of eligibleMilestones) {
-        const hasRewardType = milestone.rewards.some(rewardString => {
-            const lowerReward = rewardString.toLowerCase();
-            const isMythicMatch = lowerReward.includes('mythicshards_') || lowerReward.includes('mythicshards:');
-            return type === 'mythicShards'
-                ? isMythicMatch
-                : (lowerReward.includes('shards_') || lowerReward.includes('shards:')) && !isMythicMatch;
-        });
+        const hasRewardType = milestone.rewards.some(rewardString => isShardReward(rewardString, type));
 
         if (hasRewardType && milestone.maxProgressionIndex > highestProgressionIndexForType) {
             highestProgressionIndexForType = milestone.maxProgressionIndex;
@@ -139,14 +162,7 @@ export function getMeanShardsForSelectedTier(
 
     if (selectedMilestoneForType) {
         for (const rewardString of selectedMilestoneForType.rewards) {
-            const lowerReward = rewardString.toLowerCase();
-            const isMythicMatch = lowerReward.includes('mythicshards_') || lowerReward.includes('mythicshards:');
-            const isMatch =
-                type === 'mythicShards'
-                    ? isMythicMatch
-                    : (lowerReward.includes('shards_') || lowerReward.includes('shards:')) && !isMythicMatch;
-
-            if (isMatch) {
+            if (isShardReward(rewardString, type)) {
                 totalMean += parseRewardMean(rewardString);
             }
         }

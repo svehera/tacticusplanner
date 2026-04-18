@@ -3,14 +3,26 @@ import React, { useEffect, useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { ICampaignBattleComposed, IDailyRaidsPreferences } from 'src/models/interfaces';
-import { OnslaughtRewardsService } from 'src/services/onslaught-rewards-service';
+import { OnslaughtRewardsService, OnslaughtData } from 'src/services/onslaught-rewards-service';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
+import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+
+export type ICharacterAscendGoal = CharacterRaidGoalSelect & {
+    shards: number;
+    rarityStart: Rarity;
+    rarityEnd: Rarity;
+    starsStart: RarityStars;
+    starsEnd: RarityStars;
+    shardsPerToken: number;
+    mythicShardsPerToken: number;
+};
+
 interface Props {
-    goal: any;
+    goal: ICharacterAscendGoal;
     possibleLocations: ICampaignBattleComposed[];
     unlockedLocations: string[];
     possibleMythicLocations?: ICampaignBattleComposed[];
@@ -19,7 +31,8 @@ interface Props {
     mythicShardsPerToken: number;
     alliance: Alliance;
     dailyRaidsPreferences: IDailyRaidsPreferences;
-    onChange: (key: any, value: number) => void;
+    honorYourHeroesRewards?: OnslaughtData;
+    onChange: (key: keyof ICharacterAscendGoal, value: number) => void;
 }
 
 export const EditAscendGoal: React.FC<Props> = ({
@@ -28,22 +41,18 @@ export const EditAscendGoal: React.FC<Props> = ({
     mythicShardsPerToken,
     alliance,
     dailyRaidsPreferences,
+    honorYourHeroesRewards,
     onChange,
 }) => {
     useEffect(() => {
-        const onslaughtData = OnslaughtRewardsService.data;
+        const onslaughtData = honorYourHeroesRewards ?? OnslaughtRewardsService.data;
         if (onslaughtData?.honorYourHeroesRewards && dailyRaidsPreferences) {
             const sector = OnslaughtRewardsService.getAllianceSector(dailyRaidsPreferences, alliance);
-            const shards = OnslaughtRewardsService.getMeanShards(
-                onslaughtData,
-                sector,
-                goal.rarityStart as Rarity,
-                'shards'
-            );
+            const shards = OnslaughtRewardsService.getMeanShards(onslaughtData, sector, goal.rarityStart, 'shards');
             const mythicShards = OnslaughtRewardsService.getMeanShards(
                 onslaughtData,
                 sector,
-                goal.rarityStart as Rarity,
+                goal.rarityStart,
                 'mythicShards'
             );
 
@@ -58,20 +67,27 @@ export const EditAscendGoal: React.FC<Props> = ({
             if (shards !== shardsPerToken) onChange('shardsPerToken', shards);
             if (mythicShards !== mythicShardsPerToken) onChange('mythicShardsPerToken', mythicShards);
         }
-    }, [dailyRaidsPreferences?.onslaughtSectors, alliance, goal.rarityStart, shardsPerToken, mythicShardsPerToken]);
+    }, [
+        dailyRaidsPreferences?.onslaughtSectors,
+        alliance,
+        goal.rarityStart,
+        shardsPerToken,
+        mythicShardsPerToken,
+        onChange,
+    ]);
 
     const rarityValues = useMemo(() => {
-        return getEnumValues(Rarity).filter((x: Rarity) => x >= (goal.rarityStart as Rarity));
+        return getEnumValues(Rarity).filter((x: Rarity) => x >= goal.rarityStart);
     }, [goal.rarityStart]);
 
     const starsEntries = useMemo(() => {
-        const maxStars = rarityToMaxStars[goal.rarityStart as Rarity];
+        const maxStars = rarityToMaxStars[goal.rarityStart];
         return getEnumValues(RarityStars).filter((x: RarityStars) => x >= goal.starsStart && x <= maxStars);
     }, [goal.starsStart, goal.rarityStart]);
 
     const starsTargetEntries = useMemo(() => {
-        const minStars = rarityToStars[goal.rarityEnd as Rarity];
-        const maxStars = rarityToMaxStars[goal.rarityEnd as Rarity];
+        const minStars = rarityToStars[goal.rarityEnd];
+        const maxStars = rarityToMaxStars[goal.rarityEnd];
         const entries = getEnumValues(RarityStars).filter((x: RarityStars) => x >= minStars && x <= maxStars);
         return entries.length > 0 ? entries : [RarityStars.None];
     }, [goal.rarityEnd]);
@@ -113,7 +129,7 @@ export const EditAscendGoal: React.FC<Props> = ({
                 <>
                     <Box className="flex items-center gap-3">
                         <Typography variant="body2" color="textSecondary">
-                            Expected shards per Onslaught: <b>{shardsPerToken}</b>
+                            Average shards per Onslaught: <b>{shardsPerToken}</b>
                         </Typography>
                     </Box>
                 </>

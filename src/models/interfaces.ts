@@ -100,6 +100,7 @@ export interface IGlobalState {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
+    honorYourHeroesRewards?: OnslaughtData;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -286,15 +287,6 @@ interface IDailyRaidsFarmPreferences {
     machineHuntPreferences?: IMachineHuntPreferences;
 }
 
-export interface IHonorYourHeroesReward {
-    tier: number;
-    maxProgressionIndex: number;
-    rewards: string[];
-}
-
-export interface IOnslaughtData {
-    honorYourHeroesRewards: IHonorYourHeroesReward[];
-}
 export interface IDailyRaidsPreferences {
     dailyEnergy: number;
     shardsEnergy: number;

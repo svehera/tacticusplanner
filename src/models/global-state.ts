@@ -16,7 +16,7 @@ import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
 import { WarDefense2State } from '@/fsd/1-pages/plan-war-defense-2/models';
 import { WarOffense2State } from '@/fsd/1-pages/plan-war-offense2/models';
 
-import { OnslaughtData } from '../services/onslaught-rewards-service';
+import { OnslaughtData, OnslaughtRewardsService } from '../services/onslaught-rewards-service';
 
 import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
@@ -101,7 +101,8 @@ export class GlobalState implements IGlobalState {
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
-        this.honorYourHeroesRewards = personalData.honorYourHeroesRewards ?? defaultData.honorYourHeroesRewards;
+        this.honorYourHeroesRewards =
+            personalData.honorYourHeroesRewards ?? defaultData.honorYourHeroesRewards ?? OnslaughtRewardsService.data;
     }
 
     static initCharacters(

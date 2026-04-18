@@ -2,9 +2,8 @@
 import React, { useEffect, useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
-import { CampaignsLocationsUsage } from 'src/models/enums';
-import { ICampaignBattleComposed, IPersonalGoal, IDailyRaidsPreferences } from 'src/models/interfaces';
-import { OnslaughtRewardsService } from 'src/services/onslaught-rewards-service';
+import { IPersonalGoal, IDailyRaidsPreferences } from 'src/models/interfaces';
+import { OnslaughtRewardsService, OnslaughtData } from 'src/services/onslaught-rewards-service';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
@@ -16,15 +15,10 @@ interface Props {
     targetRarity: Rarity;
     currentStars: RarityStars;
     targetStars: RarityStars;
-    possibleLocations: ICampaignBattleComposed[];
-    unlockedLocations: string[];
-    campaignsUsage: CampaignsLocationsUsage;
-    possibleMythicLocations: ICampaignBattleComposed[];
-    unlockedMythicLocations: string[];
-    mythicCampaignsUsage: CampaignsLocationsUsage;
     shardsPerToken: number;
     mythicShardsPerToken: number;
     dailyRaidsPreferences: IDailyRaidsPreferences;
+    honorYourHeroesRewards?: OnslaughtData;
     onChange: (key: keyof IPersonalGoal, value: number) => void;
 }
 
@@ -37,10 +31,11 @@ export const SetAscendGoal: React.FC<Props> = ({
     shardsPerToken,
     mythicShardsPerToken,
     dailyRaidsPreferences,
+    honorYourHeroesRewards,
     onChange,
 }) => {
     useEffect(() => {
-        const onslaughtData = OnslaughtRewardsService.data;
+        const onslaughtData = honorYourHeroesRewards ?? OnslaughtRewardsService.data;
         if (onslaughtData?.honorYourHeroesRewards && dailyRaidsPreferences) {
             const sector = OnslaughtRewardsService.getAllianceSector(dailyRaidsPreferences, alliance);
             const shards = OnslaughtRewardsService.getMeanShards(onslaughtData, sector, currentRarity, 'shards');
@@ -50,14 +45,6 @@ export const SetAscendGoal: React.FC<Props> = ({
                 currentRarity,
                 'mythicShards'
             );
-
-            console.log(`[SetAscendGoal] Calculation:`, {
-                alliance,
-                rarity: Rarity[currentRarity],
-                sector,
-                calculated: { shards, mythicShards },
-                currentProps: { shardsPerToken, mythicShardsPerToken },
-            });
 
             if (shards !== shardsPerToken) onChange('shardsPerToken', shards);
             if (mythicShards !== mythicShardsPerToken) onChange('mythicShardsPerToken', mythicShards);
@@ -106,7 +93,7 @@ export const SetAscendGoal: React.FC<Props> = ({
                 <>
                     <Box className="flex items-center gap-3">
                         <Typography variant="body2" color="textSecondary">
-                            Expected shards per Onslaught: <b>{shardsPerToken}</b>
+                            Average shards per Onslaught: <b>{shardsPerToken}</b>
                         </Typography>
                     </Box>
                 </>

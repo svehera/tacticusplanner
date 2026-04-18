@@ -2,6 +2,7 @@
 /* eslint-disable import-x/no-internal-modules */
 import { minBy, orderBy, sum, uniq, uniqBy } from 'lodash';
 
+import { charsUnlockShards } from 'src/models/constants';
 import { DailyRaidsStrategy, PersonalGoalType } from 'src/models/enums';
 import {
     IDailyRaidsFarmOrder,
@@ -12,7 +13,7 @@ import {
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
-import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, Rank, RarityStars } from '@/fsd/5-shared/model';
 
 import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
@@ -42,55 +43,7 @@ import {
     IUpgradesRaidsDay,
 } from '@/fsd/3-features/goals/goals.models';
 
-const INITIAL_STARS_FOR_RARITY: Partial<Record<Rarity, RarityStars>> = {
-    [Rarity.Common]: RarityStars.None,
-    [Rarity.Uncommon]: RarityStars.TwoStars,
-    [Rarity.Rare]: RarityStars.FourStars,
-    [Rarity.Epic]: RarityStars.RedOneStar,
-    [Rarity.Legendary]: RarityStars.RedThreeStars,
-};
-
-const SHARDS_AT_RARITY_AND_STARS: Record<Rarity, Partial<Record<RarityStars, number>>> = {
-    [Rarity.Common]: {
-        [RarityStars.None]: 40,
-        [RarityStars.OneStar]: 50,
-        [RarityStars.TwoStars]: 65,
-    },
-    [Rarity.Uncommon]: {
-        [RarityStars.TwoStars]: 80,
-        [RarityStars.ThreeStars]: 95,
-        [RarityStars.FourStars]: 110,
-    },
-    [Rarity.Rare]: {
-        [RarityStars.FourStars]: 130,
-        [RarityStars.FiveStars]: 160,
-        [RarityStars.RedOneStar]: 200,
-    },
-    [Rarity.Epic]: {
-        [RarityStars.RedOneStar]: 250,
-        [RarityStars.RedTwoStars]: 315,
-        [RarityStars.RedThreeStars]: 400,
-    },
-    [Rarity.Legendary]: {
-        [RarityStars.RedThreeStars]: 500,
-        [RarityStars.RedFourStars]: 650,
-        [RarityStars.RedFiveStars]: 900,
-        [RarityStars.OneBlueStar]: 1400,
-    },
-    [Rarity.Mythic]: {
-        // Once at Mythic, you never need more normal shards.
-        [RarityStars.OneBlueStar]: 1400,
-        [RarityStars.TwoBlueStars]: 1400,
-        [RarityStars.ThreeBlueStars]: 1400,
-        [RarityStars.MythicWings]: 1400,
-    },
-};
-const MYTHIC_SHARDS_AT_RARITY_AND_STARS: Partial<Record<RarityStars, number>> = {
-    [RarityStars.OneBlueStar]: 20,
-    [RarityStars.TwoBlueStars]: 50,
-    [RarityStars.ThreeBlueStars]: 100,
-    [RarityStars.MythicWings]: 200,
-};
+import { ShardsService } from './shards.service';
 
 interface TaggedLocation {
     loc: ICampaignBattleComposed;
@@ -1775,194 +1728,34 @@ export class UpgradesService {
         day.raidsTotal += sum(raids.map(raid => raid.raidsTotal));
     }
 
-    private static getCurrentShardsForGoal(rarityStart: Rarity, starsStart: RarityStars): number {
-        return SHARDS_AT_RARITY_AND_STARS[rarityStart][starsStart] ?? 0;
-    }
-
-    private static getCurrentMythicShardsForGoal(starsStart: RarityStars): number {
-        return MYTHIC_SHARDS_AT_RARITY_AND_STARS[starsStart] ?? 0;
-    }
-
-    /**
-     * Returns the current total number of shards the unit has, where locked with no shards is
-     * zero, and legendary blue star is 1400.
-     */
-    private static getCurrentShards(
-        chars: ICharacter2[],
-        mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        const unit = chars.find(x => x.snowprintId === goal.unitId) || mows.find(x => x.snowprintId === goal.unitId);
-        const rank = unit && 'rank' in unit ? (unit?.rank ?? Rank.Locked) : Rank.Locked;
-        const currentShards = unit ? (unit.shards ?? 0) : 0;
-        if (goal.type === PersonalGoalType.Unlock || rank === Rank.Locked) {
-            return currentShards;
-        } else if (goal.type === PersonalGoalType.Ascend) {
-            const shardsAtStartOfGoal = this.getCurrentShardsForGoal(
-                Math.max(goal.rarityStart, unit?.rarity ?? Rarity.Common),
-                Math.max(goal.starsStart, unit?.stars ?? RarityStars.None)
-            );
-            if (goal.rarityStart <= (unit?.rarity ?? 0) && goal.starsStart <= (unit?.stars ?? 0)) {
-                return currentShards + shardsAtStartOfGoal;
-            }
-            return shardsAtStartOfGoal;
-        }
-        throw new Error('Unsupported goal type: ' + goal);
-    }
-
-    /**
-     * Returns the current total number of shards the unit has, where non-mythic with no mythic
-     * shards is zero, and mythic wings is 200.
-     */
-    private static getCurrentMythicShards(
-        chars: ICharacter2[],
-        mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        const unit = chars.find(x => x.snowprintId === goal.unitId) || mows.find(x => x.snowprintId === goal.unitId);
-        const currentMythicShards = unit ? (unit.mythicShards ?? 0) : 0;
-        if (goal.type === PersonalGoalType.Unlock) {
-            return 0;
-        } else if (goal.type === PersonalGoalType.Ascend) {
-            const mythicShardsAtStartOfGoal = this.getCurrentMythicShardsForGoal(
-                Math.max(goal.starsStart, unit?.stars ?? RarityStars.None)
-            );
-            if (goal.starsStart <= (unit?.stars ?? 0) || (unit?.rarity ?? Rarity.Common) < Rarity.Mythic) {
-                return currentMythicShards + mythicShardsAtStartOfGoal;
-            }
-            return mythicShardsAtStartOfGoal;
-        } else {
-            throw new Error('Unsupported goal type: ' + goal);
-        }
-    }
-
-    /**
-     * Returns the total number of shards needed for the goal, e.g. Rare four stars is 130,
-     * legendary blue star is 1400.
-     */
-    private static getTotalShardsNeededForGoal(
-        chars: ICharacter2[],
-        _mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        const char = chars.find(x => x.snowprintId === goal.unitId);
-        let goalRarity = Rarity.Common;
-        let goalStars = RarityStars.None;
-        if (goal.type === PersonalGoalType.Unlock) {
-            goalRarity = char?.initialRarity ?? Rarity.Common; // MoWs always unlock at common.
-            goalStars = INITIAL_STARS_FOR_RARITY[goalRarity] ?? RarityStars.None;
-        } else {
-            goalRarity = goal.rarityEnd;
-            goalStars = goal.starsEnd;
-        }
-        return SHARDS_AT_RARITY_AND_STARS[goalRarity][goalStars] ?? 0;
-    }
-
-    /**
-     * Returns the total number of mythic shards needed for the goal, which is only relevant for ascension goals
-     * that end at mythic or higher, and ranges from 20 for one blue star to 200 for mythic wings.
-     */
-    private static getTotalMythicShardsNeededForGoal(goal: ICharacterAscendGoal | ICharacterUnlockGoal): number {
-        if (goal.type === PersonalGoalType.Unlock) return 0;
-        if (goal.rarityEnd < Rarity.Mythic) return 0;
-        return MYTHIC_SHARDS_AT_RARITY_AND_STARS[goal.starsEnd] ?? 0;
-    }
-
-    /** Returns the number of incremental shards this unit has over its current rarity and stars. */
-    private static getIncrementalShards(
-        chars: ICharacter2[],
-        mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        const unit = chars.find(x => x.snowprintId === goal.unitId) ?? mows.find(x => x.snowprintId === goal.unitId);
-        if (!unit) return 0;
-        return unit.shards;
-    }
-
-    /** Returns the number of incremental mythic shards this unit has over its current rarity and stars. */
-    private static getIncrementalMythicShards(
-        chars: ICharacter2[],
-        mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        const unit = chars.find(x => x.snowprintId === goal.unitId) ?? mows.find(x => x.snowprintId === goal.unitId);
-        if (!unit) return 0;
-        return unit.mythicShards;
-    }
-
-    /**
-     * Returns the total shards needed to hit the goal from the current character's rarity and
-     * stars. A locked unit needs the full stars for the target. Unlocked units need fewer than
-     * total shards. For example, if a unit is currently at rare 4 stars (which requires 130
-     * shards), and the goal is legendary blue star (which requires 1400 shards), then the
-     * target incremental shards needed is 1400 - 130 = 1270.
-     */
-    private static getTargetIncrementalShardsForGoal(
-        chars: ICharacter2[],
-        mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        const char = chars.find(x => x.snowprintId === goal.unitId);
-        const mow = mows.find(x => x.snowprintId === goal.unitId);
-        const unit = char ?? mow;
-        if (!unit) return 0;
-        if (goal.type === PersonalGoalType.Unlock) {
-            return this.getTotalShardsNeededForGoal(chars, mows, goal);
-        }
-        const locked = char ? char.rank === Rank.Locked : !mow?.unlocked;
-        if (locked) return this.getTotalShardsNeededForGoal(chars, mows, goal);
-        const rarity = unit.rarity ?? Rarity.Common;
-        const stars = unit.stars ?? RarityStars.None;
-        const totalShardsNeeded = this.getTotalShardsNeededForGoal(chars, mows, goal);
-        const shardsForCurrentRarityAndStars = SHARDS_AT_RARITY_AND_STARS[rarity]?.[stars] ?? 0;
-        return Math.max(totalShardsNeeded - shardsForCurrentRarityAndStars, 0);
-    }
-
-    /**
-     * Returns the total mythic shards needed to hit the goal from the current character's rarity
-     * and stars. A locked unit needs the full stars for the target. Unlocked units need fewer than
-     * total shards. For example, if a unit is currently at two blue stars (which requires 50
-     * mythic shards), and the goal is mythic wings (which requires 200 mythic shards), then the
-     * target incremental mythic shards needed is 200 - 50 = 150. Mythic shards are only
-     * relevant for units that are mythic or higher, so if the unit is currently below mythic, then
-     * the target incremental mythic shards needed is the full amount for the goal.
-     */
-    private static getTargetIncrementalMythicShardsForGoal(
-        chars: ICharacter2[],
-        mows: IMow2[],
-        goal: ICharacterAscendGoal | ICharacterUnlockGoal
-    ): number {
-        if (goal.type === PersonalGoalType.Unlock) return 0;
-        const char = chars.find(x => x.snowprintId === goal.unitId);
-        const mow = mows.find(x => x.snowprintId === goal.unitId);
-        const unit = char ?? mow;
-        if (!unit) return 0;
-        const locked = char ? char.rank === Rank.Locked : !mow?.unlocked;
-        if (locked) return this.getTotalMythicShardsNeededForGoal(goal);
-        const rarity = unit.rarity ?? Rarity.Common;
-        const stars = unit.stars ?? RarityStars.None;
-        if (rarity < Rarity.Mythic) return this.getTotalMythicShardsNeededForGoal(goal);
-        const totalShardsNeeded = this.getTotalMythicShardsNeededForGoal(goal);
-        const shardsForCurrentRarityAndStars = MYTHIC_SHARDS_AT_RARITY_AND_STARS[stars] ?? 0;
-        return Math.max(totalShardsNeeded - shardsForCurrentRarityAndStars, 0);
-    }
-
     public static getShardsForGoal(
         chars: ICharacter2[],
         mows: IMow2[],
         goal: ICharacterAscendGoal | ICharacterUnlockGoal
     ): IUnitShards {
+        const unit = chars.find(x => x.snowprintId === goal.unitId) || mows.find(x => x.snowprintId === goal.unitId);
+
+        const totalIncrementalShardsNeeded =
+            goal.type === PersonalGoalType.Ascend
+                ? ShardsService.getTargetShards(goal as ICharacterAscendGoal)
+                : charsUnlockShards[goal.rarity];
+
+        const totalIncrementalMythicShardsNeeded =
+            goal.type === PersonalGoalType.Ascend
+                ? ShardsService.getTargetMythicShards(goal as ICharacterAscendGoal)
+                : 0;
+
         return {
             shardName: `shards_${goal.unitId}`,
             mythicShardName: `mythicShards_${goal.unitId}`,
-            incrementalShardsAcquired: this.getIncrementalShards(chars, mows, goal),
-            totalIncrementalShardsNeeded: this.getTargetIncrementalShardsForGoal(chars, mows, goal),
-            shardsAcquired: this.getCurrentShards(chars, mows, goal),
-            totalShardsNeeded: this.getTotalShardsNeededForGoal(chars, mows, goal),
-            incrementalMythicShardsAcquired: this.getIncrementalMythicShards(chars, mows, goal),
-            totalIncrementalMythicShardsNeeded: this.getTargetIncrementalMythicShardsForGoal(chars, mows, goal),
-            mythicShardsAcquired: this.getCurrentMythicShards(chars, mows, goal),
-            totalMythicShardsNeeded: this.getTotalMythicShardsNeededForGoal(goal),
+            incrementalShardsAcquired: unit?.shards ?? 0,
+            totalIncrementalShardsNeeded,
+            shardsAcquired: unit?.shards ?? 0,
+            totalShardsNeeded: 0,
+            incrementalMythicShardsAcquired: unit?.mythicShards ?? 0,
+            totalIncrementalMythicShardsNeeded,
+            mythicShardsAcquired: unit?.mythicShards ?? 0,
+            totalMythicShardsNeeded: 0,
         };
     }
 

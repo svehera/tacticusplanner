@@ -62,7 +62,9 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const { characters, mows, goals, campaignsProgress, dailyRaidsPreferences } = useContext(StoreContext) as any;
+    const { characters, mows, goals, campaignsProgress, dailyRaidsPreferences, honorYourHeroesRewards } = useContext(
+        StoreContext
+    ) as any;
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
@@ -249,6 +251,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             );
         }
 
+        if (form.type === PersonalGoalType.Unlock) {
+            return unlockedLocations.length === 0 && (form.shardsPerToken ?? 0) <= 0;
+        }
+
         if (form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit)) {
             return (
                 (form.firstAbilityLevel ?? 0) <= unit.activeAbilityLevel &&
@@ -423,22 +429,17 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             </>
                         )}
 
-                        {form.type === PersonalGoalType.Ascend && !!unit && (
+                        {(form.type === PersonalGoalType.Ascend || form.type === PersonalGoalType.Unlock) && !!unit && (
                             <SetAscendGoal
                                 alliance={unit.alliance as Alliance}
                                 currentRarity={unit.rarity}
                                 targetRarity={form.targetRarity!}
                                 currentStars={unit.stars}
                                 targetStars={form.targetStars!}
-                                possibleLocations={possibleLocations}
-                                unlockedLocations={unlockedLocations}
-                                campaignsUsage={form.campaignsUsage!}
-                                possibleMythicLocations={possibleMythicLocations}
-                                unlockedMythicLocations={unlockedMythicLocations}
-                                mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 shardsPerToken={form.shardsPerToken!}
                                 mythicShardsPerToken={form.mythicShardsPerToken!}
                                 dailyRaidsPreferences={dailyRaidsPreferences}
+                                honorYourHeroesRewards={honorYourHeroesRewards}
                                 onChange={handleAscendGoalChanges}
                             />
                         )}

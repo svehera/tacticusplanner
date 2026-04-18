@@ -20,7 +20,7 @@ describe('OnslaughtRewardsService', () => {
             {
                 tier: 1,
                 maxProgressionIndex: 15, // Eligible for Legendary+
-                rewards: ['shards_hero%2/10'], // Mean: 0.2
+                rewards: ['shards_hero:10%8/10'], // Mean: 8
             },
             {
                 tier: 2,
@@ -69,11 +69,11 @@ describe('OnslaughtRewardsService', () => {
             expect(result).toBe(5);
         });
 
-        it('should ignore Probability rewards (e.g., "%2/10" -> 0)', () => {
+        it('should calculate mean for Probability rewards (e.g., "10%8/10" -> 8)', () => {
             // Legendary limit is index 18.
-            // Highest eligible is index 15, but it's a probability reward and currently ignored by logic
+            // Highest eligible is index 15. Reward "shards_hero:10%8/10" -> Mean 8.
             const result = OnslaughtRewardsService.getMeanShards(mockData, 1, Rarity.Legendary, 'shards');
-            expect(result).toBe(0);
+            expect(result).toBe(8);
         });
 
         it('should calculate Mythic Shards separately from standard Shards', () => {
@@ -82,12 +82,12 @@ describe('OnslaughtRewardsService', () => {
             expect(result).toBe(1);
         });
 
-        it('should handle complex reward strings like "shards_hero2%1/10"', () => {
+        it('should handle complex reward strings like "shards_hero:100%1/10"', () => {
             const complexData: OnslaughtData = {
-                honorYourHeroesRewards: [{ tier: 1, maxProgressionIndex: 3, rewards: ['shards_hero2%1/10'] }],
+                honorYourHeroesRewards: [{ tier: 1, maxProgressionIndex: 3, rewards: ['shards_hero:100%1/10'] }],
             };
-            // Probability rewards are ignored
-            expect(OnslaughtRewardsService.getMeanShards(complexData, 1, Rarity.Common)).toBe(0);
+            // 100 * 0.1 = 10
+            expect(OnslaughtRewardsService.getMeanShards(complexData, 1, Rarity.Common)).toBe(10);
         });
 
         it('should return only the highest eligible milestone (non-cumulative)', () => {

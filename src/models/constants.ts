@@ -443,6 +443,7 @@ export const defaultData: IPersonalData2 = {
     },
     rosterSnapshots: { base: undefined, diffs: [] },
     gameModeTokens: {},
+    honorYourHeroesRewards: undefined,
 };
 
 export const goalsLimit = 100;

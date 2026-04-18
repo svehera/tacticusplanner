@@ -444,7 +444,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                     <div className="flex flex-col gap-2">
                         <FormLabel className="font-bold">Onslaught Sector:</FormLabel>
                         <div className="flex flex-row flex-wrap items-start gap-4 ps-5">
-                            <FormControl style={{ minWidth: 230 }}>
+                            <FormControl className="min-w-[230px]">
                                 <InputLabel id="imperial-onslaught-label">Imperial</InputLabel>
                                 <Select
                                     labelId="imperial-onslaught-label"
@@ -462,7 +462,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 </Select>
                             </FormControl>
 
-                            <FormControl style={{ minWidth: 230 }}>
+                            <FormControl className="min-w-[230px]">
                                 <InputLabel id="xenos-onslaught-label">Xenos</InputLabel>
                                 <Select
                                     labelId="xenos-onslaught-label"
@@ -479,7 +479,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 </Select>
                             </FormControl>
 
-                            <FormControl style={{ minWidth: 230 }}>
+                            <FormControl className="min-w-[230px]">
                                 <InputLabel id="chaos-onslaught-label">Chaos</InputLabel>
                                 <Select
                                     labelId="chaos-onslaught-label"
