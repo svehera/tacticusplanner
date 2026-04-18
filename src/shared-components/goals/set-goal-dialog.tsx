@@ -62,9 +62,8 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const { characters, mows, goals, campaignsProgress, dailyRaidsPreferences, honorYourHeroesRewards } = useContext(
-        StoreContext
-    ) as any;
+    const { characters, mows, goals, campaignsProgress, dailyRaidsPreferences, honorYourHeroesRewards } =
+        useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 

@@ -45,7 +45,7 @@ const RARITY_PROGRESSION_LIMITS: Record<Rarity, number> = {
 const renderTierLabel = (rarity: Rarity, label: string) => {
     const isSectorClear = label.includes('Sector Clear');
     return (
-        <div className="flex-box gap5 items-center">
+        <div className="flex items-center gap-2">
             <RarityIcon rarity={rarity} />
             <span className={isSectorClear ? 'font-bold' : ''}>{label}</span>
         </div>

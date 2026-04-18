@@ -100,7 +100,7 @@ export interface IGlobalState {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
-    honorYourHeroesRewards?: OnslaughtData;
+    honorYourHeroesRewards: OnslaughtData;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -164,7 +164,7 @@ export interface IPersonalData2 {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
-    honorYourHeroesRewards?: OnslaughtData;
+    honorYourHeroesRewards: OnslaughtData;
 }
 
 export interface TacticusTokensState {

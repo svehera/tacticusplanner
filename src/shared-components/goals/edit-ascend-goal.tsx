@@ -56,14 +56,6 @@ export const EditAscendGoal: React.FC<Props> = ({
                 'mythicShards'
             );
 
-            console.log(`[EditAscendGoal] Calculation:`, {
-                alliance,
-                rarity: Rarity[goal.rarityStart],
-                sector,
-                calculated: { shards, mythicShards },
-                currentState: { shards: shardsPerToken, mythic: mythicShardsPerToken },
-            });
-
             if (shards !== shardsPerToken) onChange('shardsPerToken', shards);
             if (mythicShards !== mythicShardsPerToken) onChange('mythicShardsPerToken', mythicShards);
         }
@@ -126,23 +118,19 @@ export const EditAscendGoal: React.FC<Props> = ({
             </div>
 
             {(goal.rarityStart < Rarity.Mythic || goal.starsStart < RarityStars.OneBlueStar) && (
-                <>
-                    <Box className="flex items-center gap-3">
-                        <Typography variant="body2" color="textSecondary">
-                            Average shards per Onslaught: <b>{shardsPerToken}</b>
-                        </Typography>
-                    </Box>
-                </>
+                <Box className="flex items-center gap-3">
+                    <Typography variant="body2" color="textSecondary">
+                        Average shards per Onslaught: <b>{shardsPerToken}</b>
+                    </Typography>
+                </Box>
             )}
 
             {goal.rarityEnd >= Rarity.Mythic && (
-                <>
-                    <Box className="flex items-center gap-3">
-                        <Typography variant="body2" color="textSecondary">
-                            Expected mythic shards per Onslaught: <b>{mythicShardsPerToken}</b>
-                        </Typography>
-                    </Box>
-                </>
+                <Box className="flex items-center gap-3">
+                    <Typography variant="body2" color="textSecondary">
+                        Expected mythic shards per Onslaught: <b>{mythicShardsPerToken}</b>
+                    </Typography>
+                </Box>
             )}
         </>
     );
