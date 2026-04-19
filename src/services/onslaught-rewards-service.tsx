@@ -51,7 +51,7 @@ const renderTierLabel = (rarity: Rarity, label: string) => {
         </div>
     );
 };
-/* eslint-disable-next-line react-refresh/only-export-components */
+
 export const TIER_NAME_MAP: Record<number, React.ReactNode> = {
     1: renderTierLabel(Rarity.Common, 'Stone I'),
     2: renderTierLabel(Rarity.Common, 'Stone II'),
@@ -133,7 +133,7 @@ function isShardReward(rewardString: string, type: 'shards' | 'mythicShards'): b
         ? isMythicMatch
         : (lowerReward.includes('shards_') || lowerReward.includes('shards:')) && !isMythicMatch;
 }
-/* eslint-disable-next-line react-refresh/only-export-components */
+
 export function getMeanShardsForSelectedTier(
     data: OnslaughtData,
     tierId: number,
