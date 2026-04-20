@@ -15,7 +15,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 
 import { columnDefs, summaryColumnDefs, useUserIdMapper } from './guild-raid-column-defs';
-import { UserSummary, updateTokenTo, getTimeUntilNextBomb } from './guild-raid.model';
+import { UserSummary, updateTokenTo, getTimeUntilNextBomb, MINUTE } from './guild-raid.model';
 
 export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: string) => string }> = ({
     userIdMapper,
@@ -24,17 +24,25 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>();
     const [filteredEntries, setFilteredEntries] = useState<TacticusGuildRaidEntry[]>([]);
+    const [currentTime, setCurrentTime] = useState(() => Date.now());
 
     useEffect(() => {
         getTacticusGuildRaidData()
             .then(response => {
                 setRaidData(response.data);
-                setLoading(false);
                 setFilteredEntries(response.data?.entries ?? []);
             })
-            .catch(error => {
-                setError(error);
+            .catch((error_: unknown) => {
+                setError(error_ instanceof Error ? error_.message : String(error_));
+            })
+            .finally(() => {
+                setLoading(false);
             });
+    }, []);
+
+    useEffect(() => {
+        const intervalId = globalThis.setInterval(() => setCurrentTime(Date.now()), MINUTE);
+        return () => globalThis.clearInterval(intervalId);
     }, []);
 
     // Update filtered entries when filters change
@@ -49,7 +57,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
     const summaryData = useMemo(() => {
         if (!raidData) return [];
 
-        const now = Date.now();
+        const now = currentTime;
 
         // Worst case scenario: season started at first damage
         const firstEntryStart =
@@ -147,7 +155,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         for (const userSummary of userMap.values()) updateTokenTo(userSummary.tokenStatus, now);
 
         return [...userMap.values()];
-    }, [raidData, filteredEntries]);
+    }, [raidData, filteredEntries, currentTime]);
 
     const stats = useMemo(() => {
         if (!raidData || filteredEntries.length === 0) return;
