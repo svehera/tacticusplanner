@@ -1,7 +1,6 @@
-﻿import { ExpandMore } from '@mui/icons-material';
+﻿import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { sum } from 'lodash';
-import { isMobile } from 'react-device-detect';
 
 import { RaidUpgradeMaterialCard } from '@/routes/tables/raid-upgrade-material-card';
 
@@ -32,14 +31,19 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
 
     return (
         <>
-            <Accordion defaultExpanded={true}>
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                    <p style={{ fontSize: isMobile ? 16 : 20 }}>
+            <Accordion
+                defaultExpanded={true}
+                disableGutters
+                className="mt-2 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                    className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    <span className="text-sm font-semibold sm:text-base">
                         Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
                         <b>{raidsCount}</b> raids done)
-                    </p>
+                    </span>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails className="px-4 pt-0 pb-4">
                     <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                         {upgradesRaids.map((raid, index) => (
                             <RaidUpgradeMaterialCard
@@ -74,13 +78,17 @@ export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
                     </div>
                 </AccordionDetails>
             </Accordion>
-            <Accordion>
-                <AccordionSummary expandIcon={<ExpandMore />}>
-                    <p style={{ fontSize: isMobile ? 16 : 20 }}>
+            <Accordion
+                disableGutters
+                className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
+                <AccordionSummary
+                    expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                    className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    <span className="text-sm font-semibold sm:text-base">
                         Bonus Raids (when you have extra energy <MiscIcon icon={'energy'} height={15} width={15} />)
-                    </p>
+                    </span>
                 </AccordionSummary>
-                <AccordionDetails>
+                <AccordionDetails className="px-4 pt-0 pb-4">
                     <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                         {bonusRaids.map((raid, index) => (
                             <RaidUpgradeMaterialCard

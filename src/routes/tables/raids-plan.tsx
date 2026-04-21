@@ -209,7 +209,8 @@ export const RaidsPlan: React.FC<Props> = ({
         <Accordion
             expanded={outerExpanded}
             onChange={(_, isExpanded) => setOuterExpanded(isExpanded)}
-            className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
+            disableGutters
+            className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
                 className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
