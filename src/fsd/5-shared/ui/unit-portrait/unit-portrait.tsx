@@ -46,6 +46,40 @@ interface Props {
     isDisabled?: boolean;
 }
 
+const CircularBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
+    const badgeRadius = 12;
+    return (
+        <div
+            className="absolute rounded-full border border-white bg-[#272424] text-white shadow-md"
+            style={{
+                left: x - badgeRadius,
+                top: y - badgeRadius,
+                width: badgeRadius * 2,
+                height: badgeRadius * 2,
+            }}>
+            <div className="flex h-full w-full items-center justify-center text-[13px] font-bold">{val}</div>
+        </div>
+    );
+};
+
+const AbilityBadge = ({ val, x, y, pos }: { val: number; x: number; y: number; pos: 'left' | 'right' }) => {
+    const badgeRadius = 12;
+    return (
+        <>
+            <div
+                className="absolute flex items-center justify-center rounded-[4px] border border-white bg-[#272424] text-white shadow-md"
+                style={{
+                    left: x - badgeRadius - (pos === 'left' ? 4 : -2),
+                    top: y - badgeRadius,
+                    width: badgeRadius * 2 + 2,
+                    height: badgeRadius * 2,
+                }}>
+                <span className="text-[18px] text-white">{val}</span>
+            </div>
+        </>
+    );
+};
+
 export const UnitPortrait = ({
     showShards,
     showMythicShards,
@@ -256,40 +290,6 @@ export const UnitPortrait = ({
                     {renderEquipmentItem(equips[2].equip, equips[2].level, equips[2].type)}
                 </div>
             </div>
-        );
-    };
-
-    const CircularBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
-        const badgeRadius = 12;
-        return (
-            <div
-                className="absolute rounded-full border border-white bg-[#272424] text-white shadow-md"
-                style={{
-                    left: x - badgeRadius,
-                    top: y - badgeRadius,
-                    width: badgeRadius * 2,
-                    height: badgeRadius * 2,
-                }}>
-                <div className="flex h-full w-full items-center justify-center text-[13px] font-bold">{val}</div>
-            </div>
-        );
-    };
-
-    const AbilityBadge = ({ val, x, y, pos }: { val: number; x: number; y: number; pos: 'left' | 'right' }) => {
-        const badgeRadius = 12;
-        return (
-            <>
-                <div
-                    className="absolute flex items-center justify-center rounded-[4px] border border-white bg-[#272424] text-white shadow-md"
-                    style={{
-                        left: x - badgeRadius - (pos === 'left' ? 4 : -2),
-                        top: y - badgeRadius,
-                        width: badgeRadius * 2 + 2,
-                        height: badgeRadius * 2,
-                    }}>
-                    <span className="text-[18px] text-white">{val}</span>
-                </div>
-            </>
         );
     };
 

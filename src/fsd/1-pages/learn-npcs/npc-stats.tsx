@@ -17,21 +17,20 @@ interface StatCardProps {
     subIcons?: React.ReactNode[];
 }
 
-export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
-    // Helper component for stat cards to reduce repetition
-    const StatCard = ({ label, value, icon, subIcons = [] }: StatCardProps) => (
-        <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-slate-700 dark:bg-slate-800">
-            <div className="mb-1 text-xs tracking-wider text-gray-500 uppercase dark:text-gray-400">{label}</div>
-            <div className="flex items-center gap-2">
-                <MiscIcon icon={icon} />
-                {subIcons.map((s: any, index: number) => (
-                    <React.Fragment key={index}>{s}</React.Fragment>
-                ))}
-                <span className="text-xl font-bold text-gray-900 dark:text-white">{value}</span>
-            </div>
+const StatCard = ({ label, value, icon, subIcons = [] }: StatCardProps) => (
+    <div className="flex flex-col items-center justify-center rounded-lg border border-gray-200 bg-gray-100 p-3 dark:border-slate-700 dark:bg-slate-800">
+        <div className="mb-1 text-xs tracking-wider text-gray-500 uppercase dark:text-gray-400">{label}</div>
+        <div className="flex items-center gap-2">
+            <MiscIcon icon={icon} />
+            {subIcons.map((s: any, index: number) => (
+                <React.Fragment key={index}>{s}</React.Fragment>
+            ))}
+            <span className="text-xl font-bold text-gray-900 dark:text-white">{value}</span>
         </div>
-    );
+    </div>
+);
 
+export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
     return (
         <div className="space-y-6 p-6">
             {/* Primary Stats Grid */}
