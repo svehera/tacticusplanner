@@ -166,6 +166,27 @@ export class RosterSnapshotsService {
             char.xpLevel = Math.max(1, char.xpLevel);
             char.rarity = Math.max(char.rarity, CharactersService.getInitialRarity(char.id) ?? Rarity.Common);
             char.stars = Math.max(char.stars, this.getMinimumStarsForRarity(char.rarity));
+
+            // Older snapshots may have equipment slots in API order rather than canonical
+            // type order, causing false positional diffs in diffCharacter(). Re-sort here.
+            const equipSlots = [
+                { equip: char.equip0, level: char.equip0Level },
+                { equip: char.equip1, level: char.equip1Level },
+                { equip: char.equip2, level: char.equip2Level },
+            ]
+                .filter(slot => slot.equip !== undefined)
+                .toSorted((a, b) => {
+                    const diff =
+                        (EQUIPMENT_TYPE_ORDER[a.equip!.type] ?? Number.MAX_SAFE_INTEGER) -
+                        (EQUIPMENT_TYPE_ORDER[b.equip!.type] ?? Number.MAX_SAFE_INTEGER);
+                    return diff === 0 ? a.equip!.id.localeCompare(b.equip!.id) : diff;
+                });
+            char.equip0 = equipSlots[0]?.equip;
+            char.equip0Level = equipSlots[0]?.level;
+            char.equip1 = equipSlots[1]?.equip;
+            char.equip1Level = equipSlots[1]?.level;
+            char.equip2 = equipSlots[2]?.equip;
+            char.equip2Level = equipSlots[2]?.level;
         }
         for (const mow of returnValue.mows) {
             mow.primaryAbilityLevel = Math.max(1, mow.primaryAbilityLevel);
