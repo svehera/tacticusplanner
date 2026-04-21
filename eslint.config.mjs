@@ -11,6 +11,7 @@ import * as pluginImportX from 'eslint-plugin-import-x';
 import eslintPluginPrettierRecommended from 'eslint-plugin-prettier/recommended';
 import react from 'eslint-plugin-react';
 import reactCompiler from 'eslint-plugin-react-compiler';
+import * as reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import eslintPluginUnicorn from 'eslint-plugin-unicorn';
 import unusedImports from 'eslint-plugin-unused-imports';
@@ -81,6 +82,7 @@ export default defineConfig([
             react,
             'react-refresh': reactRefresh,
             'react-compiler': reactCompiler,
+            'react-hooks': reactHooks,
             boundaries,
             'unused-imports': unusedImports,
         },
@@ -134,6 +136,9 @@ export default defineConfig([
             ],
             'react-refresh/only-export-components': 'error',
             'react-compiler/react-compiler': 'error',
+            'react/no-unstable-nested-components': ['warn', { allowAsProps: false }],
+            'react-hooks/rules-of-hooks': 'warn',
+            'react-hooks/exhaustive-deps': 'warn',
             'import-x/order': [
                 'error',
                 {
