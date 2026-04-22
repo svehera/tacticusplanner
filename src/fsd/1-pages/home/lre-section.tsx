@@ -178,7 +178,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                             <div className={`h-1.5 w-1.5 rounded-full ${trackColor}`} />
                                             <span className="text-xs text-(--muted-fg)">{name}</span>
                                         </div>
-                                        <div className="flex items-end gap-1">
+                                        <div className="flex items-end gap-0.5">
                                             {stats.map(stat => {
                                                 const pct =
                                                     totalBattles > 0 ? (stat.completed / totalBattles) * 100 : 0;
@@ -187,14 +187,14 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                                         key={stat.id}
                                                         title={`${stat.name}: ${stat.completed}/${totalBattles}`}>
                                                         <div className="flex flex-col items-center gap-0.5">
-                                                            <div className="relative h-10 w-4 overflow-hidden rounded-sm bg-(--card-fg)/15">
+                                                            <div className="relative h-10 w-[18px] overflow-hidden rounded-sm bg-(--card-fg)/15">
                                                                 <div
                                                                     className={`absolute inset-x-0 bottom-0 rounded-sm ${trackColor}`}
                                                                     style={{ height: `${pct}%` }}
                                                                 />
                                                             </div>
                                                             {stat.iconId && (
-                                                                <LreRequirementImage iconId={stat.iconId} sizePx={16} />
+                                                                <LreRequirementImage iconId={stat.iconId} sizePx={18} />
                                                             )}
                                                         </div>
                                                     </AccessibleTooltip>
