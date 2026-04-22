@@ -152,13 +152,14 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                 const count = [alphaCompleted, betaCompleted, gammaCompleted][index];
                                 const tip = getTrackTooltip(trackId);
                                 const pct = totalBattles > 0 ? (count / totalBattles) * 100 : 0;
+                                const barColor = ['bg-blue-400/70', 'bg-amber-400/70', 'bg-orange-400/70'][index];
                                 const row = (
                                     <div
                                         className={`flex items-center gap-2 text-xs text-(--muted-fg) ${tip ? 'cursor-help' : ''}`}>
                                         <span className="w-3 shrink-0 text-center">{label}</span>
                                         <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-(--card-fg)/15">
                                             <div
-                                                className="absolute inset-y-0 left-0 rounded-full bg-(--card-fg)/60"
+                                                className={`absolute inset-y-0 left-0 rounded-full ${barColor}`}
                                                 style={{ width: `${pct}%` }}
                                             />
                                         </div>
@@ -179,7 +180,12 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                     )}
                     {lreShardProgress !== undefined &&
                         (lreShardProgress.addlShardsForNextMilestone === Infinity ? (
-                            <div className="text-xs text-(--muted-fg)">Shards: Complete</div>
+                            <div className="flex items-center gap-1.5 text-xs text-(--muted-fg)">
+                                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+                                    ✓
+                                </span>
+                                Shards complete
+                            </div>
                         ) : (
                             <div className="flex flex-col gap-1">
                                 <div className="flex items-center justify-between text-xs text-(--muted-fg)">
