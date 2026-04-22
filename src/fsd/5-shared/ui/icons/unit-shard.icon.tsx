@@ -1,4 +1,6 @@
-﻿import { getImageUrl } from '../get-image-url';
+﻿import React from 'react';
+
+import { getImageUrl } from '../get-image-url';
 import { AccessibleTooltip } from '../tooltip';
 
 export const UnitShardIcon = ({
@@ -11,7 +13,7 @@ export const UnitShardIcon = ({
 }: {
     icon: string;
     name?: string;
-    tooltip?: string;
+    tooltip?: React.ReactNode;
     height?: number;
     width?: number;
     mythic?: boolean;

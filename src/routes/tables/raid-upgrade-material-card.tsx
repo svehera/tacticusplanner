@@ -9,6 +9,7 @@ import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { getDisplayName } from '@/fsd/3-features/goals/raid-day-helpers';
 import { RaidLocations } from '@/fsd/3-features/goals/raid-locations';
 
 const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
@@ -84,10 +85,29 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
 
     const noSuggestedRaidsRemaining = !hasSuggestedRaidsRemaining;
 
+    const tooltipContent =
+        upgradeEstimate.relatedCharacters.length > 0 ? (
+            <div>
+                {name}
+                <ul className="ps-[15px]">
+                    {upgradeEstimate.relatedCharacters.map(id => (
+                        <li key={id}>{getDisplayName(id)}</li>
+                    ))}
+                </ul>
+            </div>
+        ) : (
+            name
+        );
+
     const icon =
         isShard || isMythicShard ? (
             resolvedUnit ? (
-                <UnitShardIcon name={upgradeEstimate.snowprintId} icon={resolvedUnit.icon} mythic={isMythicShard} />
+                <UnitShardIcon
+                    name={upgradeEstimate.snowprintId}
+                    icon={resolvedUnit.icon}
+                    mythic={isMythicShard}
+                    tooltip={tooltipContent}
+                />
             ) : (
                 materialId
             )
@@ -96,7 +116,7 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
                 material={upgradeEstimate.label}
                 iconPath={upgradeEstimate.iconPath}
                 rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgradeEstimate.rarity))}
-                showTooltip={false}
+                tooltip={tooltipContent}
             />
         );
 
