@@ -238,8 +238,10 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 totalSlots: (alpha[x.name]?.slots ?? 0) + (beta[x.name]?.slots ?? 0) + (gamma[x.name]?.slots ?? 0),
             }));
 
-        function getRestrictionsByChar(selectedTeams: ILreTeam[]): Record<string, string[]> {
-            const result: Record<string, string[]> = {};
+        function getRestrictionsByChar(
+            selectedTeams: ILreTeam[]
+        ): Record<string, { restrictions: string[]; count: number }> {
+            const result: Record<string, { restrictions: string[]; count: number }> = {};
 
             for (const team of selectedTeams) {
                 let chars = team.charSnowprintIds ?? [];
@@ -250,9 +252,10 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                 }
                 for (const character of chars) {
                     if (!result[character]) {
-                        result[character] = [];
+                        result[character] = { restrictions: [], count: 0 };
                     }
-                    result[character] = uniq([...result[character], ...team.restrictionsIds]);
+                    result[character].restrictions = uniq([...result[character].restrictions, ...team.restrictionsIds]);
+                    result[character].count += 1;
                 }
             }
             return result;
@@ -260,7 +263,7 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
 
         function getPointsAndSlots(
             track: ILegendaryEventTrack,
-            restrictionsByChar: Record<string, string[]>
+            restrictionsByChar: Record<string, { restrictions: string[]; count: number }>
         ): Record<
             string,
             {
@@ -288,10 +291,10 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
             }
 
             for (const key in restrictionsByChar) {
-                const restrictions = restrictionsByChar[key];
+                const { restrictions, count } = restrictionsByChar[key];
                 result[key] = {
                     name: key,
-                    slots: restrictionsByChar[key].length,
+                    slots: count,
                     points: sum(
                         restrictions.map(requirement => {
                             if (pointsCalculation === PointsCalculation.all) {
