@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules */
 /* eslint-disable boundaries/element-types */
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 
@@ -11,13 +11,15 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { ILegendaryEventStatic, LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { ILegendaryEventStatic, LegendaryEventEnum, LreRequirementImage } from '@/fsd/4-entities/lre';
 
 import { getLre } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 
 import { LreService } from '@/fsd/1-pages/plan-lre/lre.service';
 import { TokenEstimationService } from '@/fsd/1-pages/plan-lre/token-estimation-service';
+
+const TRACK_COLORS = ['bg-sky-400/70', 'bg-amber-400/70', 'bg-rose-400/70'] as const;
 
 function formatMonthAndDay(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
@@ -59,27 +61,34 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
 
     const totalBattles = nextEvent.alpha.battlesPoints.length;
 
-    const getTrackProgress = (trackId: 'alpha' | 'beta' | 'gamma'): number => {
-        const track = progressModel.tracksProgress.find(t => t.trackId === trackId);
-        if (!track) return 0;
-        let highest = 0;
-        for (const battle of track.battles) {
-            if (battle.requirementsProgress.some(r => r.completed)) {
-                highest = Math.max(highest, battle.battleIndex + 1);
-            }
-        }
-        return highest;
-    };
-
-    const hasTrackProgress = progressModel.tracksProgress.some(t =>
-        t.battles.some(b => b.requirementsProgress.some(r => r.completed))
+    const hasTrackProgress = useMemo(
+        () =>
+            progressModel.tracksProgress.some(t => t.battles.some(b => b.requirementsProgress.some(r => r.completed))),
+        [progressModel]
     );
-    const alphaCompleted = getTrackProgress('alpha');
-    const betaCompleted = getTrackProgress('beta');
-    const gammaCompleted = getTrackProgress('gamma');
+
+    const restrictionStatsByTrack = useMemo(() => {
+        const compute = (trackId: 'alpha' | 'beta' | 'gamma') => {
+            const track = progressModel.tracksProgress.find(t => t.trackId === trackId);
+            return lre[trackId].unitsRestrictions.map(requirement => ({
+                id: requirement.id ?? requirement.name,
+                name: requirement.name,
+                iconId: requirement.iconId,
+                completed: track
+                    ? track.battles.filter(b =>
+                          b.requirementsProgress.some(r => r.id === requirement.name && r.completed)
+                      ).length
+                    : 0,
+            }));
+        };
+        return { alpha: compute('alpha'), beta: compute('beta'), gamma: compute('gamma') };
+    }, [progressModel, lre]);
 
     // Mirror the pattern from le-tokenomics.tsx: match by snowprintId, guard with Rank.Locked.
-    const userChar = characters.find(c => c.snowprintId === nextEvent.unitSnowprintId);
+    const userChar = useMemo(
+        () => characters.find(c => c.snowprintId === nextEvent.unitSnowprintId),
+        [characters, nextEvent.unitSnowprintId]
+    );
     const charRank = userChar?.rank ?? Rank.Locked;
     const charRarity = !!userChar?.rarity && charRank !== Rank.Locked ? userChar.rarity : Rarity.Legendary;
     const charStars = !!userChar?.stars && charRank !== Rank.Locked ? userChar.stars : RarityStars.None;
@@ -91,28 +100,6 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                 : TokenEstimationService.computeCurrentProgress(progressModel, charRarity, charStars),
         [progressModel, charRarity, charStars]
     );
-
-    const getTrackTooltip = (trackId: 'alpha' | 'beta' | 'gamma'): React.ReactNode => {
-        const track = progressModel.tracksProgress.find(t => t.trackId === trackId);
-        const restrictions = lre[trackId].unitsRestrictions;
-        if (!track || restrictions.length === 0) return undefined;
-        return (
-            <div>
-                {restrictions.map(requirement => {
-                    if (!requirement.name) return;
-                    // requirementsProgress uses req.name (not req.id) as its id field
-                    const completedBattles = track.battles.filter(b =>
-                        b.requirementsProgress.some(r => r.id === requirement.name && r.completed)
-                    ).length;
-                    return (
-                        <div key={requirement.id}>
-                            {requirement.name}: {completedBattles}/{totalBattles}
-                        </div>
-                    );
-                })}
-            </div>
-        );
-    };
 
     return (
         <div className="w-full max-w-[350px]">
@@ -144,40 +131,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-1 px-4 py-3 text-sm">
-                    {hasTrackProgress && (
-                        <div className="flex flex-col gap-1.5">
-                            {(['alpha', 'beta', 'gamma'] as const).map((trackId, index) => {
-                                const label = ['α', 'β', 'γ'][index];
-                                const count = [alphaCompleted, betaCompleted, gammaCompleted][index];
-                                const tip = getTrackTooltip(trackId);
-                                const pct = totalBattles > 0 ? (count / totalBattles) * 100 : 0;
-                                const barColor = ['bg-blue-400/70', 'bg-amber-400/70', 'bg-orange-400/70'][index];
-                                const row = (
-                                    <div
-                                        className={`flex items-center gap-2 text-xs text-(--muted-fg) ${tip ? 'cursor-help' : ''}`}>
-                                        <span className="w-3 shrink-0 text-center">{label}</span>
-                                        <div className="relative h-1.5 flex-1 overflow-hidden rounded-full bg-(--card-fg)/15">
-                                            <div
-                                                className={`absolute inset-y-0 left-0 rounded-full ${barColor}`}
-                                                style={{ width: `${pct}%` }}
-                                            />
-                                        </div>
-                                        <span className="w-8 shrink-0 text-right">
-                                            {count}/{totalBattles}
-                                        </span>
-                                    </div>
-                                );
-                                return tip ? (
-                                    <AccessibleTooltip key={trackId} title={tip}>
-                                        <div>{row}</div>
-                                    </AccessibleTooltip>
-                                ) : (
-                                    <div key={trackId}>{row}</div>
-                                );
-                            })}
-                        </div>
-                    )}
+                <div className="flex flex-col gap-2 px-4 py-3 text-sm">
                     {lreShardProgress !== undefined &&
                         (lreShardProgress.addlShardsForNextMilestone === Infinity ? (
                             <div className="flex items-center gap-1.5 text-xs text-(--muted-fg)">
@@ -196,7 +150,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                         shards
                                     </span>
                                 </div>
-                                <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
+                                <div className="relative h-2 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
                                     <div
                                         className="absolute inset-y-0 left-0 rounded-full bg-(--card-fg)/60"
                                         style={{
@@ -212,6 +166,46 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                 </div>
                             </div>
                         ))}
+                    {hasTrackProgress && (
+                        <div className="flex justify-evenly gap-2">
+                            {(['alpha', 'beta', 'gamma'] as const).map((trackId, index) => {
+                                const name = trackId.charAt(0).toUpperCase() + trackId.slice(1);
+                                const stats = restrictionStatsByTrack[trackId];
+                                const trackColor = TRACK_COLORS[index];
+                                return (
+                                    <div key={trackId} className="flex flex-col items-center gap-1">
+                                        <div className="flex items-center gap-1">
+                                            <div className={`h-1.5 w-1.5 rounded-full ${trackColor}`} />
+                                            <span className="text-xs text-(--muted-fg)">{name}</span>
+                                        </div>
+                                        <div className="flex items-end gap-1">
+                                            {stats.map(stat => {
+                                                const pct =
+                                                    totalBattles > 0 ? (stat.completed / totalBattles) * 100 : 0;
+                                                return (
+                                                    <AccessibleTooltip
+                                                        key={stat.id}
+                                                        title={`${stat.name}: ${stat.completed}/${totalBattles}`}>
+                                                        <div className="flex flex-col items-center gap-0.5">
+                                                            <div className="relative h-10 w-4 overflow-hidden rounded-sm bg-(--card-fg)/15">
+                                                                <div
+                                                                    className={`absolute inset-x-0 bottom-0 rounded-sm ${trackColor}`}
+                                                                    style={{ height: `${pct}%` }}
+                                                                />
+                                                            </div>
+                                                            {stat.iconId && (
+                                                                <LreRequirementImage iconId={stat.iconId} sizePx={16} />
+                                                            )}
+                                                        </div>
+                                                    </AccessibleTooltip>
+                                                );
+                                            })}
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
                     {!hasTrackProgress && lreShardProgress === undefined && (
                         <p className="text-xs text-(--muted-fg)">
                             {isEventEnded
