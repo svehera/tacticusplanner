@@ -21,8 +21,8 @@ export const AccessibleTooltip: React.FC<Props> = ({ children, title }) => {
         return (
             <ClickAwayListener onClickAway={handleTooltipClose} mouseEvent={'onMouseUp'}>
                 <Tooltip
-                    PopperProps={{
-                        disablePortal: false,
+                    slotProps={{
+                        popper: { disablePortal: false },
                     }}
                     placement="top"
                     arrow

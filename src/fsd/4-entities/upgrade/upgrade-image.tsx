@@ -1,5 +1,5 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
-import React, { useState } from 'react';
+import React, { forwardRef, useState } from 'react';
 
 import frameCommonUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_common.png';
 import frameEpicUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_epic.png';
@@ -33,52 +33,55 @@ interface UpgradeImageBaseProps {
     rarity?: RarityString;
 }
 
-const UpgradeImageBase = ({ material, iconPath, size, rarity }: UpgradeImageBaseProps) => {
-    const [imgError, setImgError] = useState(false);
-    const width = size ?? 50;
-    const height = size ?? 50;
-    const imagePath = iconPath || material.toLowerCase() + '.png';
-    const image = getImageUrl(imagePath);
-    const frameImgUrl = rarity ? FRAME_URL_BY_RARITY[rarity] : undefined;
+const UpgradeImageBase = forwardRef<HTMLDivElement, UpgradeImageBaseProps & React.HTMLAttributes<HTMLDivElement>>(
+    ({ material, iconPath, size, rarity, ...htmlProps }, reference) => {
+        const [imgError, setImgError] = useState(false);
+        const width = size ?? 50;
+        const height = size ?? 50;
+        const imagePath = iconPath || material.toLowerCase() + '.png';
+        const image = getImageUrl(imagePath);
+        const frameImgUrl = rarity ? FRAME_URL_BY_RARITY[rarity] : undefined;
 
-    // Tailwind handles most styles; fontSize remains dynamic
-    const imageMissingFontSize = `clamp(8px, ${width / 4.5}px, 14px)`;
+        // Tailwind handles most styles; fontSize remains dynamic
+        const imageMissingFontSize = `clamp(8px, ${width / 4.5}px, 14px)`;
 
-    return (
-        <div style={{ width, height }} className="upgrade">
-            {imgError ? (
-                <div
-                    className="flex h-full w-full items-center justify-center overflow-hidden text-center leading-[0.9] break-words whitespace-pre-wrap"
-                    style={{ fontSize: imageMissingFontSize }}>
-                    {material}
-                </div>
-            ) : (
-                <div className="relative mx-auto my-0 block" style={{ width, height }}>
-                    <img
-                        className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
-                        src={bgUnderlayUrl}
-                        alt={`${rarity} upgrade`}
-                    />
-                    <img
-                        loading="lazy"
-                        className="absolute top-1/2 left-1/2 h-[78%] max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
-                        src={image}
-                        alt={material}
-                        onError={() => {
-                            console.error(`Image not found: ${imagePath}`);
-                            setImgError(true);
-                        }}
-                    />
-                    <img
-                        loading="lazy"
-                        className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
-                        src={frameImgUrl}
-                    />
-                </div>
-            )}
-        </div>
-    );
-};
+        return (
+            <div ref={reference} {...htmlProps} style={{ width, height }} className="upgrade">
+                {imgError ? (
+                    <div
+                        className="flex h-full w-full items-center justify-center overflow-hidden text-center leading-[0.9] break-words whitespace-pre-wrap"
+                        style={{ fontSize: imageMissingFontSize }}>
+                        {material}
+                    </div>
+                ) : (
+                    <div className="relative mx-auto my-0 block" style={{ width, height }}>
+                        <img
+                            className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                            src={bgUnderlayUrl}
+                            alt={`${rarity} upgrade`}
+                        />
+                        <img
+                            loading="lazy"
+                            className="absolute top-1/2 left-1/2 h-[78%] max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                            src={image}
+                            alt={material}
+                            onError={() => {
+                                console.error(`Image not found: ${imagePath}`);
+                                setImgError(true);
+                            }}
+                        />
+                        <img
+                            loading="lazy"
+                            className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                            src={frameImgUrl}
+                        />
+                    </div>
+                )}
+            </div>
+        );
+    }
+);
+UpgradeImageBase.displayName = 'UpgradeImageBase';
 
 export const UpgradeImage = ({
     material,
