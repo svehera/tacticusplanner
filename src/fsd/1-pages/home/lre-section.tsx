@@ -70,16 +70,18 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
     const restrictionStatsByTrack = useMemo(() => {
         const compute = (trackId: 'alpha' | 'beta' | 'gamma') => {
             const track = progressModel.tracksProgress.find(t => t.trackId === trackId);
-            return lre[trackId].unitsRestrictions.map(requirement => ({
-                id: requirement.id ?? requirement.name,
-                name: requirement.name,
-                iconId: requirement.iconId,
-                completed: track
-                    ? track.battles.filter(b =>
-                          b.requirementsProgress.some(r => r.id === requirement.name && r.completed)
-                      ).length
-                    : 0,
-            }));
+            return {
+                stats: lre[trackId].unitsRestrictions.map(requirement => ({
+                    id: requirement.id ?? requirement.name,
+                    name: requirement.name,
+                    iconId: requirement.iconId,
+                    completed: track
+                        ? track.battles.filter(b =>
+                              b.requirementsProgress.some(r => r.id === requirement.name && r.completed)
+                          ).length
+                        : 0,
+                })),
+            };
         };
         return { alpha: compute('alpha'), beta: compute('beta'), gamma: compute('gamma') };
     }, [progressModel, lre]);
@@ -131,7 +133,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 px-4 py-3 text-sm">
+                <div className="flex flex-col gap-3 px-4 py-3.5 text-sm">
                     {lreShardProgress !== undefined &&
                         (lreShardProgress.addlShardsForNextMilestone === Infinity ? (
                             <div className="flex items-center gap-1.5 text-xs text-(--muted-fg)">
@@ -150,7 +152,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                         shards
                                     </span>
                                 </div>
-                                <div className="relative h-2 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
+                                <div className="relative h-3 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
                                     <div
                                         className="absolute inset-y-0 left-0 rounded-full bg-(--card-fg)/60"
                                         style={{
@@ -167,38 +169,41 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                             </div>
                         ))}
                     {hasTrackProgress && (
-                        <div className="flex justify-evenly gap-2">
+                        <div className="flex flex-col gap-2.5">
                             {(['alpha', 'beta', 'gamma'] as const).map((trackId, index) => {
                                 const name = trackId.charAt(0).toUpperCase() + trackId.slice(1);
-                                const stats = restrictionStatsByTrack[trackId];
+                                const { stats } = restrictionStatsByTrack[trackId];
                                 const trackColor = TRACK_COLORS[index];
                                 return (
-                                    <div key={trackId} className="flex flex-col items-center gap-1">
-                                        <div className="flex items-center gap-1">
-                                            <div className={`h-1.5 w-1.5 rounded-full ${trackColor}`} />
+                                    <div key={trackId} className="flex items-center gap-2">
+                                        <div className="flex w-12 shrink-0 items-center gap-1">
+                                            <div className={`h-1.5 w-1.5 shrink-0 rounded-full ${trackColor}`} />
                                             <span className="text-xs text-(--muted-fg)">{name}</span>
                                         </div>
-                                        <div className="flex items-end gap-0.5">
+                                        <div className="flex flex-1 justify-between gap-1">
                                             {stats.map(stat => {
                                                 const pct =
                                                     totalBattles > 0 ? (stat.completed / totalBattles) * 100 : 0;
-                                                return (
+                                                return stat.iconId ? (
                                                     <AccessibleTooltip
                                                         key={stat.id}
                                                         title={`${stat.name}: ${stat.completed}/${totalBattles}`}>
-                                                        <div className="flex flex-col items-center gap-0.5">
-                                                            <div className="relative h-10 w-[18px] overflow-hidden rounded-sm bg-(--card-fg)/15">
+                                                        <div className="flex flex-col gap-0.5">
+                                                            <div className="flex items-center gap-1">
+                                                                <LreRequirementImage iconId={stat.iconId} sizePx={22} />
+                                                                <span className="text-[9px] leading-none text-(--muted-fg)">
+                                                                    {stat.completed}/{totalBattles}
+                                                                </span>
+                                                            </div>
+                                                            <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
                                                                 <div
-                                                                    className={`absolute inset-x-0 bottom-0 rounded-sm ${trackColor}`}
-                                                                    style={{ height: `${pct}%` }}
+                                                                    className={`absolute inset-y-0 left-0 rounded-full ${trackColor}`}
+                                                                    style={{ width: `${pct}%` }}
                                                                 />
                                                             </div>
-                                                            {stat.iconId && (
-                                                                <LreRequirementImage iconId={stat.iconId} sizePx={18} />
-                                                            )}
                                                         </div>
                                                     </AccessibleTooltip>
-                                                );
+                                                ) : undefined;
                                             })}
                                         </div>
                                     </div>
