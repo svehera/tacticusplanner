@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useMemo, useState } from 'react';
+import { FC, lazy, Suspense, useState } from 'react';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
@@ -31,27 +31,24 @@ const buildTooltip = (label: string, relatedCharacters: string[]) => (
     </div>
 );
 
-export const RaidsDayView: React.FC<Props> = ({ day, title, dayIndex, expanded, energyPerDay }) => {
+export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energyPerDay }) => {
     const [selectedRaid, setSelectedRaid] = useState<IUpgradeRaid | undefined>();
 
-    const calendarDate = useMemo(() => getEstimatedDate(dayIndex + 1), [dayIndex]);
+    const calendarDate = getEstimatedDate(dayIndex + 1);
 
-    const characterIds = useMemo(() => {
-        const seen = new Set<string>();
-        const ids: string[] = [];
-        for (const raid of day.raids) {
-            if (raid.isFinished) continue;
-            for (const charId of raid.relatedCharacters) {
-                if (!seen.has(charId)) {
-                    seen.add(charId);
-                    ids.push(charId);
-                }
+    const seen = new Set<string>();
+    const characterIds: string[] = [];
+    for (const raid of day.raids) {
+        if (raid.isFinished) continue;
+        for (const charId of raid.relatedCharacters) {
+            if (!seen.has(charId)) {
+                seen.add(charId);
+                characterIds.push(charId);
             }
         }
-        return ids;
-    }, [day.raids]);
+    }
 
-    const farmableRaids = useMemo(() => day.raids.filter(raid => raid.raidLocations.length > 0), [day.raids]);
+    const farmableRaids = day.raids.filter(raid => raid.raidLocations.length > 0);
 
     const energyFillPct = energyPerDay > 0 ? Math.min((day.energyTotal / energyPerDay) * 100, 100) : 0;
     const energyFull = energyFillPct >= 95;

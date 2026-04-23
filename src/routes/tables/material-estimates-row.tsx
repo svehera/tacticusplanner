@@ -1,5 +1,5 @@
 import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
-import React from 'react';
+import { FC } from 'react';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
@@ -12,12 +12,10 @@ interface MaterialEstimatesRowProps {
 
 const iconSize = 18;
 
-const MaterialEstimatesRow: React.FC<MaterialEstimatesRowProps> = ({ estimate }) => {
-    const calendarDate = React.useMemo(() => {
-        const date = new Date();
-        date.setDate(date.getDate() + (estimate.daysTotal ?? 0) - 1);
-        return date.toLocaleDateString();
-    }, [estimate.daysTotal]);
+const MaterialEstimatesRow: FC<MaterialEstimatesRowProps> = ({ estimate }) => {
+    const date = new Date();
+    date.setDate(date.getDate() + (estimate.daysTotal ?? 0) - 1);
+    const calendarDate = date.toLocaleDateString();
 
     return (
         <div className="mt-1 flex w-full flex-row items-center justify-evenly gap-3 rounded bg-[var(--card-border)] px-2 py-1 text-[11px] text-[var(--card-fg)]">

@@ -173,8 +173,10 @@ export const MasterTable = () => {
             return charData;
         }) as any;
 
-        function getRestrictionsByChar(selectedTeams: ILreTeam[]): Record<string, string[]> {
-            const result: Record<string, string[]> = {};
+        function getRestrictionsByChar(
+            selectedTeams: ILreTeam[]
+        ): Record<string, { restrictions: string[]; count: number }> {
+            const result: Record<string, { restrictions: string[]; count: number }> = {};
 
             for (const team of selectedTeams) {
                 let chars = team.charSnowprintIds ?? [];
@@ -185,9 +187,10 @@ export const MasterTable = () => {
                 }
                 for (const character of chars) {
                     if (!result[character]) {
-                        result[character] = [];
+                        result[character] = { restrictions: [], count: 0 };
                     }
-                    result[character] = uniq([...result[character], ...team.restrictionsIds]);
+                    result[character].restrictions = uniq([...result[character].restrictions, ...team.restrictionsIds]);
+                    result[character].count += 1;
                 }
             }
             return result;
@@ -196,7 +199,7 @@ export const MasterTable = () => {
         function getPointsAndSlots(
             legendaryEventProgress: ILreProgressModel,
             track: ILegendaryEventTrack,
-            restrictionsByChar: Record<string, string[]>
+            restrictionsByChar: Record<string, { restrictions: string[]; count: number }>
         ): Record<
             string,
             {
@@ -224,10 +227,10 @@ export const MasterTable = () => {
             }
 
             for (const key in restrictionsByChar) {
-                const restrictions = restrictionsByChar[key];
+                const { restrictions, count } = restrictionsByChar[key];
                 result[key] = {
                     name: key,
-                    slots: restrictionsByChar[key].length,
+                    slots: count,
                     points: sum(
                         restrictions.map(requirement => {
                             if (pointsCalculation === PointsCalculation.all) {

@@ -300,11 +300,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     {estimatedRanks.inProgressMaterials.length > 0 &&
                                         estimatedRanks.inProgressMaterials.map((material, index) => (
                                             <div key={index} ref={setCardReference(index)}>
-                                                <RaidUpgradeMaterialCard
-                                                    key={index}
-                                                    index={index}
-                                                    upgradeEstimate={material}
-                                                />
+                                                <RaidUpgradeMaterialCard key={index} upgradeEstimate={material} />
                                             </div>
                                         ))}
                                 </div>
@@ -340,7 +336,6 @@ export const RaidsPlan: React.FC<Props> = ({
                                     {estimatedRanks.finishedMaterials.map((material, index) => (
                                         <RaidUpgradeMaterialCard
                                             key={index}
-                                            index={index}
                                             upgradeEstimate={material}
                                             showAdditionalInfo={false}
                                         />
@@ -388,7 +383,6 @@ export const RaidsPlan: React.FC<Props> = ({
                                             {estimatedRanks.blockedMaterials.map((material, index) => (
                                                 <RaidUpgradeMaterialCard
                                                     key={index}
-                                                    index={index}
                                                     upgradeEstimate={material}
                                                     showAdditionalInfo={false}
                                                 />
