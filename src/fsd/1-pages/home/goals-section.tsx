@@ -13,6 +13,7 @@ import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rank, rankToString } from '@/fsd/5-shared/model/enums';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { CampaignImage } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 
@@ -125,7 +126,10 @@ export function GoalsSection() {
         [estimatedUpgradesTotal, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities, resolvedCharacters]
     );
 
-    const topGoalEstimate = goalsEstimates.find(estimate => estimate.goalId === topPriorityGoal?.id);
+    const totalOnslaught = useMemo(
+        () => goalsEstimates.reduce((accumulator, estimate) => accumulator + (estimate.oTokensTotal ?? 0), 0),
+        [goalsEstimates]
+    );
 
     const MAX_VISIBLE_GOALS = 3;
     const visibleGoals = goals.slice(0, MAX_VISIBLE_GOALS);
@@ -146,12 +150,21 @@ export function GoalsSection() {
                         <div className="flex items-center gap-2.5 font-medium">
                             {goalsMenuItem.icon} {goalsMenuItem.label}
                         </div>
-                        <div className="flex shrink-0 flex-col items-end text-sm text-(--muted-fg)">
-                            <span>
-                                {goals.length} goal{goals.length === 1 ? '' : 's'}
-                            </span>
-                            {topGoalEstimate && topGoalEstimate.daysLeft > 0 && (
-                                <span className="text-xs">{getEstimatedDate(topGoalEstimate.daysLeft)}</span>
+                        <div className="flex shrink-0 items-center gap-1.5 text-sm text-(--muted-fg)">
+                            {estimatedUpgradesTotal.energyTotal > 0 && (
+                                <span className="flex items-center gap-0.5">
+                                    <MiscIcon icon={'energy'} width={12} height={12} />
+                                    {estimatedUpgradesTotal.energyTotal}
+                                </span>
+                            )}
+                            {totalOnslaught > 0 && (
+                                <span className="flex items-center gap-0.5 [&>span]:flex [&>span]:items-center">
+                                    <CampaignImage campaign={'Onslaught'} size={12} showTooltip={false} />
+                                    {totalOnslaught}
+                                </span>
+                            )}
+                            {estimatedUpgradesTotal.daysTotal > 0 && (
+                                <span className="text-xs">{getEstimatedDate(estimatedUpgradesTotal.daysTotal)}</span>
                             )}
                         </div>
                     </div>
@@ -207,6 +220,12 @@ export function GoalsSection() {
                                             <span className="flex items-center gap-0.5">
                                                 <MiscIcon icon={'energy'} width={12} height={12} />
                                                 {estimate.energyTotal}
+                                            </span>
+                                        )}
+                                        {!!estimate.oTokensTotal && (
+                                            <span className="flex items-center gap-0.5 [&>span]:flex [&>span]:items-center">
+                                                <CampaignImage campaign={'Onslaught'} size={12} showTooltip={false} />
+                                                {estimate.oTokensTotal}
                                             </span>
                                         )}
                                         {estimate.daysLeft > 0 && <span>{getEstimatedDate(estimate.daysLeft)}</span>}
