@@ -329,7 +329,7 @@ export const HomeScreenEvent = () => {
     return (
         <div>
             {showHseWarning && (
-                <div className="mb-2 rounded-md border border-red-500/60 bg-red-500/10 px-3 py-2 text-red-100">
+                <div className="text-warning-fg bg-warning border-warning mb-2 rounded-md border px-3 py-2">
                     <div className="flex items-start justify-between gap-3">
                         <h1 className="m-0 text-base leading-relaxed font-semibold">
                             This page is informational only. You most likely want the Daily Raids page instead, where
@@ -339,7 +339,7 @@ export const HomeScreenEvent = () => {
                         <button
                             type="button"
                             aria-label="Dismiss warning permanently"
-                            className="rounded px-2 py-0.5 text-red-200 hover:bg-red-500/20 hover:text-red-100"
+                            className="text-warning-fg hover:bg-warning-fg/10 rounded px-2 py-0.5"
                             onClick={() =>
                                 dispatch.viewPreferences({
                                     type: 'Update',
@@ -362,7 +362,7 @@ export const HomeScreenEvent = () => {
                             value={selectedEvent}
                             onChange={event => setSelectedEvent(event.target.value as IDailyRaidsHomeScreenEvent)}
                             size="small"
-                            className="rounded-md bg-slate-700">
+                            className="rounded-md">
                             <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder}>Purge Order</MenuItem>
                             <MenuItem value={IDailyRaidsHomeScreenEvent.trainingRush}>Training Rush</MenuItem>
                             <MenuItem value={IDailyRaidsHomeScreenEvent.warpSurge}>Warp Surge</MenuItem>
@@ -386,7 +386,7 @@ export const HomeScreenEvent = () => {
                                 );
                             }}
                             size="small"
-                            className="rounded-md bg-slate-700"
+                            className="rounded-md"
                             style={{ minWidth: 200, maxWidth: 500 }}>
                             {CampaignsService.allCampaigns.map(campaign => (
                                 <MenuItem key={campaign.id} value={campaign.id} className="flex items-center gap-2">

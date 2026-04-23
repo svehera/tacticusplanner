@@ -5,3 +5,4 @@ export { RankSelect2 } from './rank-select2';
 export { RaritySelect } from './rarity-select';
 export { RaritySelect2 } from './rarity-select2';
 export { StarsSelect } from './stars-select';
+export { StarsSelect2 } from './stars-select2';

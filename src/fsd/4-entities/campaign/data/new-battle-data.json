@@ -699,13 +699,13 @@
         "enemiesTotal": 10,
         "enemiesTypes": ["Flayed One", "Makhotep", "Necron Warrior"],
         "rawEnemyTypes": [
-            { "id": "necroBossWarden:1", "count": 1 },
+            { "id": "necroBossC1Warden:1", "count": 1 },
             { "id": "necroNpc1Warrior:1", "count": 4 },
             { "id": "necroNpc2FlayedOne:1", "count": 5 }
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossWarden",
+                "id": "necroBossC1Warden",
                 "name": "Makhotep",
                 "count": 1,
                 "stars": 2,
@@ -1561,20 +1561,20 @@
                 }
             ]
         },
-        "enemyPower": 395,
+        "enemyPower": 359,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Necrons"],
         "enemiesTotal": 10,
         "enemiesTypes": ["Deathmark", "Flayed One", "Imospekh", "Necron Warrior"],
         "rawEnemyTypes": [
-            { "id": "necroBossDestroyer:1", "count": 1 },
+            { "id": "necroBossC1Destroyer:1", "count": 1 },
             { "id": "necroNpc1Warrior:2", "count": 2 },
             { "id": "necroNpc2FlayedOne:1", "count": 5 },
             { "id": "necroNpc3Deathmark:1", "count": 2 }
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossDestroyer",
+                "id": "necroBossC1Destroyer",
                 "name": "Imospekh",
                 "count": 1,
                 "stars": 3,
@@ -2591,20 +2591,20 @@
                 }
             ]
         },
-        "enemyPower": 794,
+        "enemyPower": 810,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Necrons"],
         "enemiesTotal": 12,
         "enemiesTypes": ["Aleph-Null", "Deathmark", "Flayed One", "Scarab Swarm"],
         "rawEnemyTypes": [
-            { "id": "necroBossSpyder:1", "count": 1 },
+            { "id": "necroBossC1Spyder:1", "count": 1 },
             { "id": "necroNpc2FlayedOne:1", "count": 2 },
             { "id": "necroNpc3Deathmark:1", "count": 5 },
             { "id": "necroNpc5Swarm:1", "count": 4 }
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossSpyder",
+                "id": "necroBossC1Spyder",
                 "name": "Aleph-Null",
                 "count": 1,
                 "stars": 4,
@@ -3565,13 +3565,13 @@
                 }
             ]
         },
-        "enemyPower": 2059,
+        "enemyPower": 1707,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Necrons"],
         "enemiesTotal": 10,
         "enemiesTypes": ["Deathmark", "Flayed One", "Necron Warrior", "Scarab Swarm", "Thutmose"],
         "rawEnemyTypes": [
-            { "id": "necroBossPlasmancer:1", "count": 1 },
+            { "id": "necroBossC1Plasmancer:1", "count": 1 },
             { "id": "necroNpc1Warrior:3", "count": 4 },
             { "id": "necroNpc2FlayedOne:3", "count": 2 },
             { "id": "necroNpc3Deathmark:4", "count": 1 },
@@ -3580,7 +3580,7 @@
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossPlasmancer",
+                "id": "necroBossC1Plasmancer",
                 "name": "Thutmose",
                 "count": 1,
                 "stars": 5,
@@ -4609,7 +4609,7 @@
         "enemiesTotal": 11,
         "enemiesTypes": ["Anuphet", "Deathmark", "Flayed One", "Necron Warrior", "Scarab Swarm"],
         "rawEnemyTypes": [
-            { "id": "necroBossOverlord:1", "count": 1 },
+            { "id": "necroBossC1Overlord:1", "count": 1 },
             { "id": "necroNpc1Warrior:6", "count": 2 },
             { "id": "necroNpc2FlayedOne:6", "count": 3 },
             { "id": "necroNpc3Deathmark:6", "count": 3 },
@@ -4617,7 +4617,7 @@
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossOverlord",
+                "id": "necroBossC1Overlord",
                 "name": "Anuphet",
                 "count": 1,
                 "stars": 5,
@@ -33172,17 +33172,17 @@
                     "max": 160
                 },
                 {
-                    "id": "upgDmgU005",
+                    "id": "upgHpR043",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgU005",
-                    "chance_numerator": 2,
-                    "chance_denominator": 8,
-                    "effective_rate": 0.333
+                    "id": "upgHpR043",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33241,14 +33241,19 @@
                     "id": "gold",
                     "min": 93,
                     "max": 160
+                },
+                {
+                    "id": "upgDmgR007",
+                    "min": 1,
+                    "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgE005",
-                    "chance_numerator": 4,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.714
+                    "id": "upgDmgR007",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -33537,7 +33542,7 @@
         "enemiesTotal": 9,
         "enemiesTypes": ["Flayed One", "Makhotep", "Necron Warrior", "Ophydian Destroyer", "Scarab Swarm"],
         "rawEnemyTypes": [
-            { "id": "necroBossWarden:3", "count": 1 },
+            { "id": "necroBossC1Warden:2", "count": 1 },
             { "id": "necroNpc1Warrior:10", "count": 3 },
             { "id": "necroNpc2FlayedOne:10", "count": 2 },
             { "id": "necroNpc4Destroyer:9", "count": 1 },
@@ -33545,7 +33550,7 @@
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossWarden",
+                "id": "necroBossC1Warden",
                 "name": "Makhotep",
                 "count": 1,
                 "stars": 6,
@@ -34075,13 +34080,13 @@
                 }
             ]
         },
-        "enemyPower": 38564,
+        "enemyPower": 36345,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Necrons"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Deathmark", "Flayed One", "Imospekh", "Necron Warrior", "Ophydian Destroyer"],
         "rawEnemyTypes": [
-            { "id": "necroBossDestroyer:2", "count": 1 },
+            { "id": "necroBossC1Destroyer:2", "count": 1 },
             { "id": "necroNpc1Warrior:13", "count": 3 },
             { "id": "necroNpc2FlayedOne:13", "count": 2 },
             { "id": "necroNpc3Deathmark:15", "count": 2 },
@@ -34089,7 +34094,7 @@
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossDestroyer",
+                "id": "necroBossC1Destroyer",
                 "name": "Imospekh",
                 "count": 1,
                 "stars": 6,
@@ -34651,13 +34656,13 @@
                 }
             ]
         },
-        "enemyPower": 74114,
+        "enemyPower": 74699,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Necrons"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Aleph-Null", "Deathmark", "Necron Warrior", "Ophydian Destroyer", "Scarab Swarm"],
         "rawEnemyTypes": [
-            { "id": "necroBossSpyder:2", "count": 1 },
+            { "id": "necroBossC1Spyder:2", "count": 1 },
             { "id": "necroNpc1Warrior:17", "count": 3 },
             { "id": "necroNpc3Deathmark:14", "count": 1 },
             { "id": "necroNpc4Destroyer:11", "count": 2 },
@@ -34665,7 +34670,7 @@
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossSpyder",
+                "id": "necroBossC1Spyder",
                 "name": "Aleph-Null",
                 "count": 1,
                 "stars": 7,
@@ -35186,20 +35191,20 @@
                 }
             ]
         },
-        "enemyPower": 148921,
+        "enemyPower": 142501,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Necrons"],
         "enemiesTotal": 10,
         "enemiesTypes": ["Deathmark", "Flayed One", "Necron Warrior", "Thutmose"],
         "rawEnemyTypes": [
-            { "id": "necroBossPlasmancer:2", "count": 1 },
+            { "id": "necroBossC1Plasmancer:2", "count": 1 },
             { "id": "necroNpc1Warrior:19", "count": 3 },
             { "id": "necroNpc2FlayedOne:19", "count": 4 },
             { "id": "necroNpc3Deathmark:18", "count": 2 }
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossPlasmancer",
+                "id": "necroBossC1Plasmancer",
                 "name": "Thutmose",
                 "count": 1,
                 "stars": 8,
@@ -35731,7 +35736,7 @@
         "enemiesTotal": 12,
         "enemiesTypes": ["Anuphet", "Flayed One", "Necron Warrior", "Ophydian Destroyer", "Scarab Swarm"],
         "rawEnemyTypes": [
-            { "id": "necroBossOverlord:2", "count": 1 },
+            { "id": "necroBossC1Overlord:2", "count": 1 },
             { "id": "necroNpc1Warrior:18", "count": 5 },
             { "id": "necroNpc2FlayedOne:19", "count": 2 },
             { "id": "necroNpc4Destroyer:18", "count": 2 },
@@ -35739,7 +35744,7 @@
         ],
         "detailedEnemyTypes": [
             {
-                "id": "necroBossOverlord",
+                "id": "necroBossC1Overlord",
                 "name": "Anuphet",
                 "count": 1,
                 "stars": 9,
@@ -67383,7 +67388,7 @@
                 "name": "Typhus",
                 "count": 1,
                 "stars": 12,
-                "rank": "Adamantine 1"
+                "rank": "Adamantine 2"
             }
         ]
     },
@@ -67699,18 +67704,18 @@
                 }
             ]
         },
-        "enemyPower": 165,
+        "enemyPower": 125,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum"],
         "enemiesTotal": 5,
         "enemiesTypes": ["Cadian Guardsman"],
-        "rawEnemyTypes": [{ "id": "astraNpc1Guardsman:8", "count": 5 }],
+        "rawEnemyTypes": [{ "id": "astraNpc1Guardsman:7", "count": 5 }],
         "detailedEnemyTypes": [
             {
                 "id": "astraNpc1Guardsman",
                 "name": "Cadian Guardsman",
                 "count": 5,
-                "stars": 3,
+                "stars": 2,
                 "rank": "Iron 3"
             }
         ]
@@ -67739,14 +67744,14 @@
                 }
             ]
         },
-        "enemyPower": 362,
+        "enemyPower": 250,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 5,
         "enemiesTypes": ["Battle Sister", "Cadian Guardsman"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:7", "count": 3 },
-            { "id": "astraNpc1Guardsman:7", "count": 2 }
+            { "id": "adeptNpc1BattleSister:6", "count": 3 },
+            { "id": "astraNpc1Guardsman:6", "count": 2 }
         ],
         "detailedEnemyTypes": [
             {
@@ -67754,14 +67759,14 @@
                 "name": "Battle Sister",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc1Guardsman",
                 "name": "Cadian Guardsman",
                 "count": 2,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             }
         ]
     },
@@ -67789,19 +67794,19 @@
                 }
             ]
         },
-        "enemyPower": 350,
+        "enemyPower": 300,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Sisterhood"],
         "enemiesTotal": 5,
         "enemiesTypes": ["Battle Sister"],
-        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:6", "count": 5 }],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:5", "count": 5 }],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 5,
                 "stars": 2,
-                "rank": "Iron 2"
+                "rank": "Iron 1"
             }
         ]
     },
@@ -67829,37 +67834,37 @@
                 }
             ]
         },
-        "enemyPower": 2023,
+        "enemyPower": 1212,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Vox-caster"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:8", "count": 3 },
-            { "id": "astraNpc2Lascannon:11", "count": 2 },
-            { "id": "astraNpc3Voxcaster:10", "count": 4 }
+            { "id": "adeptNpc1BattleSister:6", "count": 3 },
+            { "id": "astraNpc2Lascannon:8", "count": 2 },
+            { "id": "astraNpc3Voxcaster:8", "count": 4 }
         ],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 3,
-                "stars": 3,
-                "rank": "Iron 3"
+                "stars": 2,
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc2Lascannon",
                 "name": "Cadian Lascannon Team",
                 "count": 2,
-                "stars": 6,
-                "rank": "Bronze 2"
+                "stars": 3,
+                "rank": "Iron 3"
             },
             {
                 "id": "astraNpc3Voxcaster",
                 "name": "Cadian Vox-caster",
                 "count": 4,
-                "stars": 6,
-                "rank": "Bronze 1"
+                "stars": 3,
+                "rank": "Iron 3"
             }
         ]
     },
@@ -67887,19 +67892,19 @@
                 }
             ]
         },
-        "enemyPower": 490,
+        "enemyPower": 420,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Sisterhood"],
         "enemiesTotal": 7,
         "enemiesTypes": ["Battle Sister"],
-        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:6", "count": 7 }],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:5", "count": 7 }],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 7,
                 "stars": 2,
-                "rank": "Iron 2"
+                "rank": "Iron 1"
             }
         ]
     },
@@ -67927,15 +67932,15 @@
                 }
             ]
         },
-        "enemyPower": 685,
+        "enemyPower": 410,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 8,
         "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Vox-caster"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:7", "count": 3 },
-            { "id": "astraNpc1Guardsman:7", "count": 3 },
-            { "id": "astraNpc3Voxcaster:7", "count": 2 }
+            { "id": "adeptNpc1BattleSister:6", "count": 3 },
+            { "id": "astraNpc1Guardsman:6", "count": 3 },
+            { "id": "astraNpc3Voxcaster:6", "count": 2 }
         ],
         "detailedEnemyTypes": [
             {
@@ -67943,21 +67948,21 @@
                 "name": "Battle Sister",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc1Guardsman",
                 "name": "Cadian Guardsman",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc3Voxcaster",
                 "name": "Cadian Vox-caster",
                 "count": 2,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             }
         ]
     },
@@ -67985,22 +67990,22 @@
                 }
             ]
         },
-        "enemyPower": 1037,
+        "enemyPower": 813,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 8,
         "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Vindicta"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:8", "count": 4 },
+            { "id": "adeptNpc1BattleSister:7", "count": 4 },
             { "id": "adeptNpcRetributor:4", "count": 1 },
-            { "id": "astraNpc1Guardsman:9", "count": 3 }
+            { "id": "astraNpc1Guardsman:8", "count": 3 }
         ],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 4,
-                "stars": 3,
+                "stars": 2,
                 "rank": "Iron 3"
             },
             {
@@ -68015,7 +68020,7 @@
                 "name": "Cadian Guardsman",
                 "count": 3,
                 "stars": 3,
-                "rank": "Bronze 1"
+                "rank": "Iron 3"
             }
         ]
     },
@@ -68043,15 +68048,15 @@
                 }
             ]
         },
-        "enemyPower": 518,
+        "enemyPower": 378,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Lascannon Team"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:7", "count": 3 },
-            { "id": "astraNpc1Guardsman:8", "count": 4 },
-            { "id": "astraNpc2Lascannon:6", "count": 2 }
+            { "id": "adeptNpc1BattleSister:6", "count": 3 },
+            { "id": "astraNpc1Guardsman:7", "count": 4 },
+            { "id": "astraNpc2Lascannon:5", "count": 2 }
         ],
         "detailedEnemyTypes": [
             {
@@ -68059,13 +68064,13 @@
                 "name": "Battle Sister",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc1Guardsman",
                 "name": "Cadian Guardsman",
                 "count": 4,
-                "stars": 3,
+                "stars": 2,
                 "rank": "Iron 3"
             },
             {
@@ -68073,7 +68078,7 @@
                 "name": "Cadian Lascannon Team",
                 "count": 2,
                 "stars": 2,
-                "rank": "Iron 2"
+                "rank": "Iron 1"
             }
         ]
     },
@@ -68101,37 +68106,37 @@
                 }
             ]
         },
-        "enemyPower": 685,
+        "enemyPower": 358,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
-        "enemiesTotal": 12,
+        "enemiesTotal": 11,
         "enemiesTypes": ["Battle Sister", "Cadian Guardsman", "Cadian Lascannon Team"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:8", "count": 3 },
-            { "id": "astraNpc1Guardsman:6", "count": 7 },
-            { "id": "astraNpc2Lascannon:6", "count": 2 }
+            { "id": "adeptNpc1BattleSister:6", "count": 3 },
+            { "id": "astraNpc1Guardsman:4", "count": 6 },
+            { "id": "astraNpc2Lascannon:4", "count": 2 }
         ],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 3,
-                "stars": 3,
-                "rank": "Iron 3"
+                "stars": 2,
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc1Guardsman",
                 "name": "Cadian Guardsman",
-                "count": 7,
-                "stars": 2,
-                "rank": "Iron 2"
+                "count": 6,
+                "stars": 1,
+                "rank": "Iron 1"
             },
             {
                 "id": "astraNpc2Lascannon",
                 "name": "Cadian Lascannon Team",
                 "count": 2,
-                "stars": 2,
-                "rank": "Iron 2"
+                "stars": 1,
+                "rank": "Iron 1"
             }
         ]
     },
@@ -68159,14 +68164,14 @@
                 }
             ]
         },
-        "enemyPower": 735,
+        "enemyPower": 522,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:7", "count": 6 },
-            { "id": "astraNpc2Lascannon:6", "count": 3 }
+            { "id": "adeptNpc1BattleSister:6", "count": 6 },
+            { "id": "astraNpc2Lascannon:5", "count": 3 }
         ],
         "detailedEnemyTypes": [
             {
@@ -68174,14 +68179,14 @@
                 "name": "Battle Sister",
                 "count": 6,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc2Lascannon",
                 "name": "Cadian Lascannon Team",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 2"
+                "rank": "Iron 1"
             }
         ]
     },
@@ -68209,14 +68214,14 @@
                 }
             ]
         },
-        "enemyPower": 560,
+        "enemyPower": 391,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 7,
         "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:7", "count": 4 },
-            { "id": "astraNpc2Lascannon:7", "count": 3 }
+            { "id": "adeptNpc1BattleSister:6", "count": 4 },
+            { "id": "astraNpc2Lascannon:6", "count": 3 }
         ],
         "detailedEnemyTypes": [
             {
@@ -68224,14 +68229,14 @@
                 "name": "Battle Sister",
                 "count": 4,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "astraNpc2Lascannon",
                 "name": "Cadian Lascannon Team",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             }
         ]
     },
@@ -68259,16 +68264,16 @@
                 }
             ]
         },
-        "enemyPower": 1023,
+        "enemyPower": 844,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 11,
         "enemiesTypes": ["Battle Sister", "Cadian Lascannon Team", "Cadian Vox-caster", "Roswitha"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:7", "count": 5 },
+            { "id": "adeptNpc1BattleSister:6", "count": 5 },
             { "id": "adeptNpcCanoness:3", "count": 1 },
-            { "id": "astraNpc2Lascannon:6", "count": 2 },
-            { "id": "astraNpc3Voxcaster:6", "count": 3 }
+            { "id": "astraNpc2Lascannon:5", "count": 2 },
+            { "id": "astraNpc3Voxcaster:5", "count": 3 }
         ],
         "detailedEnemyTypes": [
             {
@@ -68276,7 +68281,7 @@
                 "name": "Battle Sister",
                 "count": 5,
                 "stars": 2,
-                "rank": "Iron 3"
+                "rank": "Iron 2"
             },
             {
                 "id": "adeptNpcCanoness",
@@ -68290,14 +68295,14 @@
                 "name": "Cadian Lascannon Team",
                 "count": 2,
                 "stars": 2,
-                "rank": "Iron 2"
+                "rank": "Iron 1"
             },
             {
                 "id": "astraNpc3Voxcaster",
                 "name": "Cadian Vox-caster",
                 "count": 3,
                 "stars": 2,
-                "rank": "Iron 2"
+                "rank": "Iron 1"
             }
         ]
     },
@@ -68639,16 +68644,17 @@
                 }
             ]
         },
-        "enemyPower": 4476,
+        "enemyPower": 5026,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 11,
-        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Isabella", "Zephyrim"],
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Isabella", "Roswitha", "Zephyrim"],
         "rawEnemyTypes": [
             { "id": "adeptNpc1BattleSister:10", "count": 4 },
             { "id": "adeptNpc2Zephyrim:10", "count": 4 },
+            { "id": "adeptNpcCanoness:8", "count": 1 },
             { "id": "adeptNpcHospitaller:9", "count": 1 },
-            { "id": "astraNpc3Voxcaster:10", "count": 2 }
+            { "id": "astraNpc3Voxcaster:10", "count": 1 }
         ],
         "detailedEnemyTypes": [
             {
@@ -68666,6 +68672,13 @@
                 "rank": "Bronze 1"
             },
             {
+                "id": "adeptNpcCanoness",
+                "name": "Roswitha",
+                "count": 1,
+                "stars": 6,
+                "rank": "Iron 3"
+            },
+            {
                 "id": "adeptNpcHospitaller",
                 "name": "Isabella",
                 "count": 1,
@@ -68675,7 +68688,7 @@
             {
                 "id": "astraNpc3Voxcaster",
                 "name": "Cadian Vox-caster",
-                "count": 2,
+                "count": 1,
                 "stars": 6,
                 "rank": "Bronze 1"
             }
@@ -68821,21 +68834,21 @@
                 }
             ]
         },
-        "enemyPower": 2982,
+        "enemyPower": 2280,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
-        "enemiesTotal": 7,
+        "enemiesTotal": 5,
         "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Zephyrim"],
         "rawEnemyTypes": [
-            { "id": "adeptNpc1BattleSister:10", "count": 3 },
+            { "id": "adeptNpc1BattleSister:10", "count": 2 },
             { "id": "adeptNpc2Zephyrim:11", "count": 2 },
-            { "id": "astraNpc3Voxcaster:11", "count": 2 }
+            { "id": "astraNpc3Voxcaster:11", "count": 1 }
         ],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
-                "count": 3,
+                "count": 2,
                 "stars": 6,
                 "rank": "Bronze 1"
             },
@@ -68849,7 +68862,7 @@
             {
                 "id": "astraNpc3Voxcaster",
                 "name": "Cadian Vox-caster",
-                "count": 2,
+                "count": 1,
                 "stars": 6,
                 "rank": "Bronze 2"
             }
@@ -69011,18 +69024,18 @@
                 }
             ]
         },
-        "enemyPower": 5796,
+        "enemyPower": 7956,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["Sisterhood"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Battle Sister"],
-        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:12", "count": 9 }],
+        "rawEnemyTypes": [{ "id": "adeptNpc1BattleSister:13", "count": 9 }],
         "detailedEnemyTypes": [
             {
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 9,
-                "stars": 5,
+                "stars": 7,
                 "rank": "Bronze 3"
             }
         ]
@@ -69051,18 +69064,36 @@
                 }
             ]
         },
-        "enemyPower": 5772,
+        "enemyPower": 7148,
         "enemiesAlliances": ["Imperial"],
-        "enemiesFactions": ["Sisterhood"],
-        "enemiesTotal": 4,
-        "enemiesTypes": ["Zephyrim"],
-        "rawEnemyTypes": [{ "id": "adeptNpc2Zephyrim:13", "count": 4 }],
+        "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Battle Sister", "Cadian Vox-caster", "Zephyrim"],
+        "rawEnemyTypes": [
+            { "id": "adeptNpc1BattleSister:14", "count": 2 },
+            { "id": "adeptNpc2Zephyrim:14", "count": 2 },
+            { "id": "astraNpc3Voxcaster:14", "count": 1 }
+        ],
         "detailedEnemyTypes": [
+            {
+                "id": "adeptNpc1BattleSister",
+                "name": "Battle Sister",
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
             {
                 "id": "adeptNpc2Zephyrim",
                 "name": "Zephyrim",
-                "count": 4,
-                "stars": 7,
+                "count": 2,
+                "stars": 9,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 1,
+                "stars": 9,
                 "rank": "Bronze 3"
             }
         ]
@@ -69539,15 +69570,15 @@
                 }
             ]
         },
-        "enemyPower": 40184,
+        "enemyPower": 35806,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 9,
         "enemiesTypes": ["Battle Sister", "Cadian Mortar Team", "Celestine", "Zephyrim"],
         "rawEnemyTypes": [
             { "id": "adeptBossCelestineCE:2", "count": 1 },
-            { "id": "adeptNpc1BattleSister:17", "count": 4 },
-            { "id": "adeptNpc2Zephyrim:17", "count": 2 },
+            { "id": "adeptNpc1BattleSister:16", "count": 4 },
+            { "id": "adeptNpc2Zephyrim:16", "count": 2 },
             { "id": "astraNpc4Mortar:16", "count": 2 }
         ],
         "detailedEnemyTypes": [
@@ -69562,15 +69593,15 @@
                 "id": "adeptNpc1BattleSister",
                 "name": "Battle Sister",
                 "count": 4,
-                "stars": 8,
-                "rank": "Silver 2"
+                "stars": 9,
+                "rank": "Silver 1"
             },
             {
                 "id": "adeptNpc2Zephyrim",
                 "name": "Zephyrim",
                 "count": 2,
-                "stars": 8,
-                "rank": "Silver 2"
+                "stars": 9,
+                "rank": "Silver 1"
             },
             {
                 "id": "astraNpc4Mortar",
@@ -71107,28 +71138,28 @@
                 "name": "Roswitha",
                 "count": 1,
                 "stars": 12,
-                "rank": "Adamantine 1"
+                "rank": "Adamantine 2"
             },
             {
                 "id": "adeptNpcHospitaller",
                 "name": "Isabella",
                 "count": 1,
                 "stars": 12,
-                "rank": "Adamantine 1"
+                "rank": "Adamantine 2"
             },
             {
                 "id": "adeptNpcMorvenn",
                 "name": "Morvenn Vahl",
                 "count": 1,
                 "stars": 12,
-                "rank": "Adamantine 1"
+                "rank": "Adamantine 2"
             },
             {
                 "id": "adeptNpcRetributor",
                 "name": "Vindicta",
                 "count": 1,
                 "stars": 12,
-                "rank": "Adamantine 1"
+                "rank": "Adamantine 2"
             },
             {
                 "id": "admecNpc2Techpriest",
@@ -71354,7 +71385,7 @@
     "ASE29": {
         "campaign": "Adepta Sororitas Extremis",
         "campaignType": "Extremis",
-        "energyCost": 3,
+        "energyCost": 6,
         "nodeNumber": 29,
         "slots": 5,
         "requiredCharacterSnowprintIds": ["worldExecutions", "worldEightbound", "worldTerminator"],
@@ -71455,7 +71486,7 @@
                 }
             ]
         },
-        "enemyPower": 3951724,
+        "enemyPower": 3863547,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "Sisterhood"],
         "enemiesTotal": 10,

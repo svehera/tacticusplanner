@@ -1,4 +1,4 @@
-import React, { useMemo, Suspense, lazy, memo } from 'react';
+import { FC, Suspense, lazy } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
@@ -9,13 +9,12 @@ import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { getDisplayName } from '@/fsd/3-features/goals/raid-day-helpers';
+import { RaidLocations } from '@/fsd/3-features/goals/raid-locations';
 
 const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
 
-import { RaidLocations } from './raid-locations';
-
 interface Props {
-    index: number;
     showRelatedCharacters?: boolean;
     showAdditionalInfo?: boolean;
     maxLocations?: number;
@@ -23,7 +22,6 @@ interface Props {
     widthClass?: string;
     compactRaidLocations?: boolean;
     showPlannedRaidLocationsOnly?: boolean;
-    tooltipRelatedCharactersOnly?: boolean;
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
@@ -40,20 +38,6 @@ const resolveUnit = (id: string) => {
     return;
 };
 
-const getRelatedUnitDisplayName = (idOrName: string) => {
-    const char = CharactersService.getUnit(idOrName);
-    if (char) {
-        return char.shortName || char.name;
-    }
-
-    const mow = mows2Data.mows.find(x => x.snowprintId === idOrName || x.name === idOrName);
-    if (mow) {
-        return mow.name;
-    }
-
-    return idOrName;
-};
-
 const hasRaidLocations = (
     estimate: ICharacterUpgradeEstimate
 ): estimate is ICharacterUpgradeEstimate & { raidLocations: IItemRaidLocation[] } => {
@@ -63,15 +47,14 @@ const hasRaidLocations = (
     );
 };
 
-const Component: React.FC<Props> = ({
+export const RaidUpgradeMaterialCard: FC<Props> = ({
     showRelatedCharacters = true,
     showAdditionalInfo = true,
     maxLocations,
     upgradeEstimate,
-    widthClass = 'w-67',
+    widthClass = 'w-76',
     compactRaidLocations = true,
     showPlannedRaidLocationsOnly = false,
-    tooltipRelatedCharactersOnly = false,
 }) => {
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
@@ -82,81 +65,60 @@ const Component: React.FC<Props> = ({
           ? upgradeEstimate.snowprintId.slice(13)
           : upgradeEstimate.snowprintId;
 
-    const resolvedUnit = useMemo(() => {
-        if (!isShard && !isMythicShard) return;
-        return resolveUnit(materialId);
-    }, [materialId, isShard, isMythicShard]);
+    const resolvedUnit = isShard || isMythicShard ? resolveUnit(materialId) : undefined;
 
-    const name = useMemo(() => {
-        if (isShard || isMythicShard) {
-            const base = resolvedUnit?.name ?? materialId;
-            return isMythicShard ? `${base} (Mythic)` : base;
-        }
+    const name =
+        isShard || isMythicShard
+            ? isMythicShard
+                ? `${resolvedUnit?.name ?? materialId} (Mythic)`
+                : (resolvedUnit?.name ?? materialId)
+            : upgradeEstimate.label;
 
-        return upgradeEstimate.label;
-    }, [isShard, isMythicShard, resolvedUnit, materialId]);
+    const displayedLocations =
+        showPlannedRaidLocationsOnly && hasRaidLocations(upgradeEstimate)
+            ? upgradeEstimate.raidLocations
+            : upgradeEstimate.locations;
 
-    const displayedLocations = useMemo(() => {
-        if (showPlannedRaidLocationsOnly && hasRaidLocations(upgradeEstimate)) {
-            return upgradeEstimate.raidLocations;
-        }
-
-        return upgradeEstimate.locations;
-    }, [showPlannedRaidLocationsOnly, upgradeEstimate]);
-
-    const relatedUnitTooltipNames = useMemo(() => {
-        return [...new Set(upgradeEstimate.relatedCharacters.map(idOrName => getRelatedUnitDisplayName(idOrName)))];
-    }, [upgradeEstimate.relatedCharacters]);
-
-    const hasSuggestedRaidsRemaining = useMemo(() => {
-        if (hasRaidLocations(upgradeEstimate)) {
-            return upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0);
-        }
-
-        return displayedLocations.some(loc => loc.isSuggested && (loc.isUnlocked ?? true));
-    }, [upgradeEstimate, displayedLocations]);
+    const hasSuggestedRaidsRemaining = hasRaidLocations(upgradeEstimate)
+        ? upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0)
+        : displayedLocations.some(loc => loc.isSuggested && (loc.isUnlocked ?? true));
 
     const noSuggestedRaidsRemaining = !hasSuggestedRaidsRemaining;
 
-    const iconTooltipContent = (
-        <div>
-            {!tooltipRelatedCharactersOnly && upgradeEstimate.label}
-            <ul className="ps-[15px]">
-                {relatedUnitTooltipNames.map(nameItem => (
-                    <li
-                        key={
-                            'material-item-input-' +
-                            upgradeEstimate.id +
-                            '-' +
-                            displayedLocations.map(loc => loc.id).join(',') +
-                            '-' +
-                            nameItem
-                        }>
-                        {nameItem}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+    const tooltipContent =
+        upgradeEstimate.relatedCharacters.length > 0 ? (
+            <div>
+                {name}
+                <ul className="ps-[15px]">
+                    {upgradeEstimate.relatedCharacters.map(id => (
+                        <li key={id}>{getDisplayName(id)}</li>
+                    ))}
+                </ul>
+            </div>
+        ) : (
+            name
+        );
 
-    const icon = useMemo(() => {
-        if (isShard || isMythicShard) {
-            if (resolvedUnit) {
-                return (
-                    <UnitShardIcon name={upgradeEstimate.snowprintId} icon={resolvedUnit.icon} mythic={isMythicShard} />
-                );
-            }
-            return materialId;
-        }
-        return (
+    const icon =
+        isShard || isMythicShard ? (
+            resolvedUnit ? (
+                <UnitShardIcon
+                    name={upgradeEstimate.snowprintId}
+                    icon={resolvedUnit.icon}
+                    mythic={isMythicShard}
+                    tooltip={tooltipContent}
+                />
+            ) : (
+                materialId
+            )
+        ) : (
             <UpgradeImage
                 material={upgradeEstimate.label}
                 iconPath={upgradeEstimate.iconPath}
                 rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgradeEstimate.rarity))}
-                tooltip={iconTooltipContent}
+                tooltip={tooltipContent}
             />
         );
-    }, [isShard, isMythicShard, resolvedUnit, materialId, upgradeEstimate.snowprintId]);
 
     const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
     const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
@@ -164,20 +126,22 @@ const Component: React.FC<Props> = ({
 
     return (
         <div
-            className={`flex flex-col justify-between rounded-lg border border-gray-700 bg-gray-900 p-3 shadow-lg ${widthClass}`.trim()}>
-            <div className="flex w-full flex-row items-start!">
+            className={`flex flex-col justify-between rounded-lg border p-3 shadow-lg ${widthClass} border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-fg)] ${
+                noSuggestedRaidsRemaining ? 'opacity-80' : ''
+            }`.trim()}>
+            <div className="flex w-full flex-row items-start! text-inherit">
                 {/* Left: Icon, quantity */}
                 <div
-                    className={`flex h-full w-14 shrink-0 flex-col items-center justify-start gap-1 ${
+                    className={`flex w-14 shrink-0 flex-col items-center justify-start gap-1 ${
                         noSuggestedRaidsRemaining ? 'opacity-70' : ''
                     }`}>
                     <div className="mt-2 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span
-                        className={`mt-1 py-0.5 text-sm font-bold ${
+                        className={`mt-1 flex h-6 items-center text-sm font-bold text-inherit ${
                             noSuggestedRaidsRemaining
-                                ? 'text-gray-400'
+                                ? 'opacity-70'
                                 : showPlannedRaidLocationsOnly
-                                  ? 'text-gray-200'
+                                  ? ''
                                   : isSufficient
                                     ? 'text-green-400'
                                     : 'text-red-400'
@@ -187,18 +151,15 @@ const Component: React.FC<Props> = ({
                 </div>
 
                 {/* Right: Content */}
-                <div className="flex h-full min-w-0 flex-1 flex-col justify-start gap-2 pl-2">
+                <div className="flex min-w-0 flex-1 flex-col justify-start gap-2 pl-2">
                     <div className="flex items-center justify-between gap-1">
-                        <h4
-                            className={`mb-0 truncate text-xs font-normal ${
-                                noSuggestedRaidsRemaining ? 'text-gray-400' : 'text-gray-200'
-                            }`}>
+                        <h4 className={`mb-0 truncate text-xs font-normal text-inherit`}>
                             {name ?? upgradeEstimate.snowprintId}
                         </h4>
                     </div>
-                    {showRelatedCharacters && (
+                    {showRelatedCharacters && upgradeEstimate.relatedCharacters.length > 0 && (
                         <div
-                            className={`flex min-h-7 flex-row items-center gap-1 ${
+                            className={`flex flex-row items-center gap-1 ${
                                 noSuggestedRaidsRemaining ? 'opacity-70' : ''
                             }`}>
                             {upgradeEstimate.relatedCharacters.map(id => (
@@ -235,14 +196,3 @@ const Component: React.FC<Props> = ({
         </div>
     );
 };
-
-export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
-    return (
-        previous.upgradeEstimate === next.upgradeEstimate &&
-        previous.maxLocations === next.maxLocations &&
-        previous.showAdditionalInfo === next.showAdditionalInfo &&
-        previous.showRelatedCharacters === next.showRelatedCharacters &&
-        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly &&
-        previous.tooltipRelatedCharactersOnly === next.tooltipRelatedCharactersOnly
-    );
-});

@@ -7,19 +7,7 @@
  * @example type Original = { a: number } & { b: string };
  * @example type Pretty = Prettify<Original>; // { a: number; b: string; }
  */
-export type Prettify<T> = { [K in keyof T]: T[K] } & {};
-
-/**
- * Type-safe version of Object.keys
- *
- * @description Normally Object.keys returns string[] which is not type safe. This wraps it to return typed keys
- *
- * @param obj The object to get the keys from
- * @returns The keys of the object as an array of keyof Obj
- * @example Object.keys({ a: 1, b: 2 }) // string[]
- * @example constObjectKeys({ a: 1, b: 2 }) // ('a' | 'b')[]
- * */
-export const constObjectKeys = <Object_ extends object>(object: Object_) => Object.keys(object) as (keyof Object_)[];
+type Prettify<T> = { [K in keyof T]: T[K] } & {};
 
 /**
  * Utility type to get _all_ the possible keys from a const array of object types

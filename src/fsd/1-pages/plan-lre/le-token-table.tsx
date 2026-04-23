@@ -226,23 +226,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                                 <SyncButton
                                                     showText={false}
                                                     variant="text"
-                                                    sx={{
-                                                        minWidth: 'auto',
-                                                        padding: 0,
-                                                        minHeight: 'auto',
-                                                        height: 'auto',
-                                                        fontSize: '1.25rem',
-                                                        lineHeight: '1.25rem',
-                                                        alignSelf: 'center',
-                                                        marginTop: '-2px',
-                                                        '& .MuiButton-startIcon': {
-                                                            margin: 0,
-                                                        },
-                                                        '& .MuiSvgIcon-root': {
-                                                            fontSize: '1.25rem',
-                                                            verticalAlign: 'middle',
-                                                        },
-                                                    }}
+                                                    className="-mt-0.5 h-auto !min-h-[auto] !min-w-[auto] self-center !p-0 text-[1.25rem] leading-5 [&_.MuiButton-startIcon]:!m-0 [&_.MuiSvgIcon-root]:align-middle [&_.MuiSvgIcon-root]:[font-size:1.25rem]"
                                                 />
                                                 <button
                                                     onClick={() => {

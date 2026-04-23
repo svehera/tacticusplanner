@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
 
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { RankSelect2, RaritySelect2, StarsSelect } from '@/fsd/5-shared/ui';
+import { RankSelect2, RaritySelect2, StarsSelect2 } from '@/fsd/5-shared/ui';
 import { RankIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -188,48 +188,55 @@ export const BulkGoalCreatorUnitCard = ({
                     </TextField>
                 )}
             </div>
-            <RaritySelect2
-                label="Rarity"
-                rarityValues={Object.values(Rarity).filter(r => typeof r === 'number') as Rarity[]}
-                value={entry.rarity}
-                valueChanges={onRarityChange}
-            />
-            {(entry.unit === undefined || 'rank' in entry.unit) && (
-                <RankSelect2
-                    label="Rank"
-                    rankValues={rankValues.filter(r => r <= (rarityToMaxRank[entry.rarity] ?? Rank.Adamantine3))}
-                    value={entry.rank}
-                    valueChanges={onRankChange}
+            <div className="flex items-end gap-2">
+                <RaritySelect2
+                    label="Rarity"
+                    rarityValues={Object.values(Rarity).filter(r => typeof r === 'number') as Rarity[]}
+                    value={entry.rarity}
+                    valueChanges={onRarityChange}
+                    hideText
                 />
-            )}
-            <StarsSelect
-                label="Stars"
-                starsValues={allStarValues.filter(
-                    s =>
-                        s >= (rarityToStars[entry.rarity] ?? RarityStars.None) &&
-                        s <= (rarityToMaxStars[entry.rarity] ?? RarityStars.MythicWings)
+                {(entry.unit === undefined || 'rank' in entry.unit) && (
+                    <RankSelect2
+                        label="Rank"
+                        rankValues={rankValues.filter(r => r <= (rarityToMaxRank[entry.rarity] ?? Rank.Adamantine3))}
+                        value={entry.rank}
+                        valueChanges={onRankChange}
+                        hideText
+                    />
                 )}
-                value={entry.stars}
-                valueChanges={onStarsChange}
-            />
-            <TextField
-                label={entry.unit && !('rank' in entry.unit) ? 'Primary Ability' : 'Active Ability'}
-                type="number"
-                size="small"
-                fullWidth
-                inputProps={{ min: 1, max: 60 }}
-                value={entry.activeAbilityLevel}
-                onChange={event => onActiveAbilityLevelChange(Number.parseInt(event.target.value) || 1)}
-            />
-            <TextField
-                label={entry.unit && !('rank' in entry.unit) ? 'Secondary Ability' : 'Passive Ability'}
-                type="number"
-                size="small"
-                fullWidth
-                inputProps={{ min: 1, max: 60 }}
-                value={entry.passiveAbilityLevel}
-                onChange={event => onPassiveAbilityLevelChange(Number.parseInt(event.target.value) || 1)}
-            />
+                <StarsSelect2
+                    label="Stars"
+                    starsValues={allStarValues.filter(
+                        s =>
+                            s >= (rarityToStars[entry.rarity] ?? RarityStars.None) &&
+                            s <= (rarityToMaxStars[entry.rarity] ?? RarityStars.MythicWings)
+                    )}
+                    value={entry.stars}
+                    valueChanges={onStarsChange}
+                    hideText
+                />
+            </div>
+            <div className="flex gap-2">
+                <TextField
+                    label={entry.unit && !('rank' in entry.unit) ? 'Primary Ability' : 'Active Ability'}
+                    type="number"
+                    size="small"
+                    fullWidth
+                    inputProps={{ min: 1, max: 60 }}
+                    value={entry.activeAbilityLevel}
+                    onChange={event => onActiveAbilityLevelChange(Number.parseInt(event.target.value) || 1)}
+                />
+                <TextField
+                    label={entry.unit && !('rank' in entry.unit) ? 'Secondary Ability' : 'Passive Ability'}
+                    type="number"
+                    size="small"
+                    fullWidth
+                    inputProps={{ min: 1, max: 60 }}
+                    value={entry.passiveAbilityLevel}
+                    onChange={event => onPassiveAbilityLevelChange(Number.parseInt(event.target.value) || 1)}
+                />
+            </div>
         </div>
     );
 };

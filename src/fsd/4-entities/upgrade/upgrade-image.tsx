@@ -1,100 +1,68 @@
-﻿import React, { useState, CSSProperties, useMemo } from 'react';
+﻿/* eslint-disable import-x/no-internal-modules */
+import React, { forwardRef, useState } from 'react';
+
+import frameCommonUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_common.png';
+import frameEpicUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_epic.png';
+import frameLegendaryUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_legendary.png';
+import frameMythicUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_mythic.png';
+import frameRareUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_rare.png';
+import frameUncommonUrl from '@/assets/images/snowprint_assets/frames/ui_frame_upgrades_uncommon.png';
+import bgUnderlayUrl from '@/assets/images/snowprint_assets/frames/ui_underlay_upgrades.png';
 
 import { RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, getImageUrl } from '@/fsd/5-shared/ui';
 
 import { recipeDataByName } from './data';
 
-export const UpgradeImage = ({
-    material,
-    iconPath,
-    size,
-    tooltip,
-    rarity,
-}: {
+// Static assets — resolved to hashed URLs by Vite at build time. Zero
+// per-render cost (just string references), unlike getImageUrl which
+// runs new URL(...) at runtime.
+const FRAME_URL_BY_RARITY: Partial<Record<RarityString, string>> = {
+    [RarityString.Mythic]: frameMythicUrl,
+    [RarityString.Legendary]: frameLegendaryUrl,
+    [RarityString.Epic]: frameEpicUrl,
+    [RarityString.Rare]: frameRareUrl,
+    [RarityString.Uncommon]: frameUncommonUrl,
+    [RarityString.Common]: frameCommonUrl,
+};
+
+interface UpgradeImageBaseProps {
     material: string;
     iconPath: string;
     size?: number;
-    tooltip?: React.ReactNode;
     rarity?: RarityString;
-}) => {
-    const [imgError, setImgError] = useState(false);
-    const width = size ?? 50;
-    const height = size ?? 50;
-    const imagePath = iconPath || material.toLowerCase() + '.png';
-    const image = getImageUrl(imagePath);
-    const frameImageDirectory = 'snowprint_assets/frames';
-    const bgImgUrl = getImageUrl(`${frameImageDirectory}/ui_underlay_upgrades.png`);
-    const upgradeHeightRatio = 0.78;
+}
 
-    function getFrameUrl(rarity?: RarityString) {
-        switch (rarity) {
-            case RarityString.Mythic: {
-                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_mythic.png`);
-            }
-            case RarityString.Legendary: {
-                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_legendary.png`);
-            }
-            case RarityString.Epic: {
-                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_epic.png`);
-            }
-            case RarityString.Rare: {
-                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_rare.png`);
-            }
-            case RarityString.Uncommon: {
-                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_uncommon.png`);
-            }
-            case RarityString.Common: {
-                return getImageUrl(`${frameImageDirectory}/ui_frame_upgrades_common.png`);
-            }
-        }
-    }
-    const frameImgUrl = getFrameUrl(rarity);
+const UpgradeImageBase = forwardRef<HTMLDivElement, UpgradeImageBaseProps & React.HTMLAttributes<HTMLDivElement>>(
+    ({ material, iconPath, size, rarity, ...htmlProps }, reference) => {
+        const [imgError, setImgError] = useState(false);
+        const width = size ?? 50;
+        const height = size ?? 50;
+        const imagePath = iconPath || material.toLowerCase() + '.png';
+        const image = getImageUrl(imagePath);
+        const frameImgUrl = rarity ? FRAME_URL_BY_RARITY[rarity] : undefined;
 
-    const centeredImageStackStyles: CSSProperties = {
-        position: 'absolute',
-        top: '50%',
-        left: '50%',
-        transform: 'translate(-50%, -50%)',
-        maxWidth: '100%',
-        maxHeight: '100%',
-    };
+        // Tailwind handles most styles; fontSize remains dynamic
+        const imageMissingFontSize = `clamp(8px, ${width / 4.5}px, 14px)`;
 
-    const imageMissingStyles: CSSProperties = {
-        height,
-        width,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        fontSize: `clamp(8px, ${width / 4.5}px, 14px)`,
-        textAlign: 'center',
-        overflow: 'hidden',
-        whiteSpace: 'pre-wrap',
-        wordBreak: 'break-word',
-        lineHeight: '0.9',
-    };
-
-    const tooltipText = useMemo(() => {
-        if (tooltip) {
-            return tooltip;
-        }
-        return recipeDataByName[material]?.material ?? material;
-    }, [material, tooltip]);
-
-    return (
-        <AccessibleTooltip title={tooltipText}>
-            <div style={{ width, height }} className={'upgrade'}>
+        return (
+            <div ref={reference} {...htmlProps} style={{ width, height }} className="upgrade">
                 {imgError ? (
-                    <div style={imageMissingStyles}>{material}</div>
+                    <div
+                        className="flex h-full w-full items-center justify-center overflow-hidden text-center leading-[0.9] break-words whitespace-pre-wrap"
+                        style={{ fontSize: imageMissingFontSize }}>
+                        {material}
+                    </div>
                 ) : (
                     <div className="relative mx-auto my-0 block" style={{ width, height }}>
-                        <img style={centeredImageStackStyles} src={bgImgUrl} alt={`${rarity} upgrade`} />
                         <img
-                            loading={'lazy'}
-                            style={{
-                                ...centeredImageStackStyles,
-                                height: `${upgradeHeightRatio * 100}%`,
-                            }}
+                            className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                            src={bgUnderlayUrl}
+                            alt={`${rarity} upgrade`}
+                        />
+                        <img
+                            loading="lazy"
+                            className="absolute top-1/2 left-1/2 h-[78%] max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
                             src={image}
                             alt={material}
                             onError={() => {
@@ -102,10 +70,37 @@ export const UpgradeImage = ({
                                 setImgError(true);
                             }}
                         />
-                        <img loading={'lazy'} style={centeredImageStackStyles} src={frameImgUrl} />
+                        <img
+                            loading="lazy"
+                            className="absolute top-1/2 left-1/2 max-h-full max-w-full -translate-x-1/2 -translate-y-1/2"
+                            src={frameImgUrl}
+                        />
                     </div>
                 )}
             </div>
+        );
+    }
+);
+UpgradeImageBase.displayName = 'UpgradeImageBase';
+
+export const UpgradeImage = ({
+    material,
+    iconPath,
+    size,
+    tooltip,
+    rarity,
+    showTooltip = true,
+}: UpgradeImageBaseProps & {
+    tooltip?: React.ReactNode;
+    showTooltip?: boolean;
+}) => {
+    if (!showTooltip) return <UpgradeImageBase material={material} iconPath={iconPath} size={size} rarity={rarity} />;
+
+    const tooltipText = tooltip ?? recipeDataByName[material]?.material ?? material;
+
+    return (
+        <AccessibleTooltip title={tooltipText}>
+            <UpgradeImageBase material={material} iconPath={iconPath} size={size} rarity={rarity} />
         </AccessibleTooltip>
     );
 };

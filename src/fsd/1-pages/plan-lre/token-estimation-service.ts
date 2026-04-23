@@ -105,12 +105,12 @@ export const milestonesAndPoints: readonly MilestoneAndPoints[] = [
     { points: 27_000, stars: 8, round: 1, packsPerRound: 0 },
 ];
 
-export interface PointMilestone {
+interface PointMilestone {
     points: number;
     currencyPayout: number;
 }
 
-export const pointMilestones: readonly PointMilestone[] = [
+const pointMilestones: readonly PointMilestone[] = [
     { points: 100, currencyPayout: 25 },
     { points: 250, currencyPayout: 30 },
     { points: 500, currencyPayout: 35 },
@@ -201,7 +201,7 @@ interface ShardMilestone {
     totalNeededCurrency: PositiveInteger<number>;
 }
 
-export const chestMilestones: readonly ShardMilestone[] = [
+const chestMilestones: readonly ShardMilestone[] = [
     { shards: 25, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 60 },
     { shards: 50, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 140 },
     { shards: 75, rarity: Rarity.Legendary, stars: RarityStars.None, totalNeededCurrency: 240 },
@@ -256,14 +256,14 @@ export const chestMilestones: readonly ShardMilestone[] = [
     { shards: 1300, rarity: Rarity.Mythic, stars: RarityStars.TwoBlueStars, totalNeededCurrency: 32_450 },
 ];
 
-export interface StarMilestone {
+interface StarMilestone {
     totalShards: number;
     incrementalShards: number;
     rarity: Rarity;
     stars: RarityStars;
 }
 
-export const ascensionMilestones: readonly StarMilestone[] = [
+const ascensionMilestones: readonly StarMilestone[] = [
     { totalShards: 400, incrementalShards: 400, rarity: Rarity.Legendary, stars: RarityStars.RedThreeStars },
     { totalShards: 520, incrementalShards: 120, rarity: Rarity.Legendary, stars: RarityStars.RedFourStars },
     { totalShards: 700, incrementalShards: 180, rarity: Rarity.Legendary, stars: RarityStars.RedFiveStars },
@@ -578,7 +578,7 @@ export class TokenEstimationService {
 
     /**
      * @returns the total number of points earned by clearing the specified
-     * restrictions in the battle, given that already-cleared restrictions.
+     * restrictions in the battle, given the already-cleared restrictions.
      */
     static computeIncrementalPointsForClearingRestrictions(
         battle: ILreBattleProgress,
@@ -588,7 +588,7 @@ export class TokenEstimationService {
         for (const requirement of battle.requirementsProgress) {
             for (const restriction of restrictions) {
                 if (requirement.id === restriction.id) {
-                    points += requirement.points;
+                    points += requirement.points - LreRequirementStatusService.getRequirementPoints(requirement);
                 }
             }
         }
@@ -805,7 +805,12 @@ export class TokenEstimationService {
         const totalPoints = progress.syncedProgress.currentPoints;
         const currentCurrency = progress.syncedProgress.currentCurrency;
         let currentShards = progress.syncedProgress.currentShards;
-        const lastClaimedChestIndex = progress.syncedProgress.currentClaimedChestIndex;
+        // The stored value mirrors the Tacticus API: 1-based count of chests opened
+        // (e.g. 2 = two chests opened). -1 is the sentinel when the API omits the field
+        // (nothing claimed). Convert to a 0-based array index by subtracting 1, clamped
+        // at -1 so that both the sentinel (-1) and "nothing opened" (0 from API) map to
+        // index -1, which safely returns undefined when used as chestMilestones[-1].
+        const lastClaimedChestIndex = Math.max(-1, progress.syncedProgress.currentClaimedChestIndex - 1);
 
         // Determine the total currency, since forced progress only gives us the current incremental currency.
         const totalCurrency = currentCurrency + (chestMilestones[lastClaimedChestIndex]?.totalNeededCurrency ?? 0);

@@ -3,7 +3,7 @@
 import PublishIcon from '@mui/icons-material/Publish';
 import RefreshIcon from '@mui/icons-material/Refresh';
 import { Button } from '@mui/material';
-import { useContext, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
@@ -39,6 +39,7 @@ export const WarOffense2 = () => {
     const [zoom, setZoom] = useState<number>(isMobile ? 0.5 : 1);
 
     const [rarityCap, setRarityCap] = useState<Rarity>(Rarity.Mythic);
+    const stagingSectionReference = useRef<HTMLElement>(null);
 
     const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
     const mows = MowsService.resolveAllFromStorage(unresolvedMows);
@@ -126,6 +127,8 @@ export const WarOffense2 = () => {
                 setStagedMows(previous => [...previous, mowId]);
             }
         }
+
+        stagingSectionReference.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
     };
 
     const startNewWar = () => {
@@ -258,8 +261,8 @@ export const WarOffense2 = () => {
                         )}
                     </div>
                 </header>
-                <section className="mb-4">
-                    <h2 className="text-lg font-semibold">To Be Deployed</h2>
+                <section ref={stagingSectionReference} className="mb-4">
+                    <h2 className="text-lg font-semibold">Team Staging</h2>
                     <div className="flex flex-col gap-2">
                         <TeamFlow
                             chars={
@@ -319,12 +322,15 @@ export const WarOffense2 = () => {
                                         sx={{ fontSize: 20 }}
                                     />
                                     <span className="text-[10px] font-bold tracking-tighter text-green-600 uppercase group-hover:text-white">
-                                        Deploy
+                                        Stage
                                     </span>
                                 </button>
 
                                 {/* 2. Team Content - Takes up the rest of the space */}
                                 <div className="flex-1 overflow-hidden py-3 pr-2">
+                                    <div className="mb-2 truncate text-base font-bold text-gray-700 dark:text-gray-200">
+                                        {team.name}
+                                    </div>
                                     <TeamFlow
                                         chars={(
                                             team.chars
@@ -420,7 +426,7 @@ export const WarOffense2 = () => {
                                     ).map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
                                     mows={
                                         (
-                                            team.mows
+                                            (team.mows ?? [])
                                                 ?.map(mowId => mows.find(mow => mow.snowprintId === mowId))
                                                 .filter(m => m !== undefined) as IMow2[]
                                         ).map(mow => Teams2Service.capMowAtRarity(mow, rarityCap)) ?? []

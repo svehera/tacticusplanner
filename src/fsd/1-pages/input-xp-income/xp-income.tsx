@@ -5,42 +5,45 @@ import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { cn } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { BookSelect } from '@/fsd/5-shared/ui/selects';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
-
 import { DecimalSpinner } from './decimal-spinner';
-import { ArenaLeague } from './models';
+import { ArenaLeague, XpIncomeState } from './models';
 import { useDebouncedState } from './use-debounced-state';
-import { kBlueStarCharacters, kEliteEnergyPerRaid, kNonEliteEnergyPerRaid, XpIncomeService } from './xp-income.service';
+import {
+    blueStarCharacters,
+    bossesPerLoop,
+    eliteEnergyPerRaid,
+    nonEliteEnergyPerRaid,
+    XpIncomeService,
+} from './xp-income.service';
 
-const kArenaName: Record<ArenaLeague, string> = {
-    [ArenaLeague.kHonorGuard]: 'Honor Guard',
-    [ArenaLeague.kCaptain]: 'Captains',
-    [ArenaLeague.kChapterMaster]: 'Chapter Master',
+const arenaName: Record<ArenaLeague, string> = {
+    [ArenaLeague.honorGuard]: 'Honor Guard',
+    [ArenaLeague.captain]: 'Captains',
+    [ArenaLeague.chapterMaster]: 'Chapter Master',
 };
 
-const kEliteEnergyMax = 600;
-const kNonEliteEnergyMax = 600;
+const eliteEnergyMax = 600;
+const nonEliteEnergyMax = 600;
 
 export const XpIncome: React.FC = () => {
     const { characters, xpIncome } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const {
-        manualBooksPerDay,
-        defaultBookToUse,
+        manualCodicesPerDay,
+        defaultCodexToUse,
         arenaLeague,
         loopsRaids,
         clearRarity,
-        useAtForBooks,
+        useATForCodices,
         hasBlueStarMoW,
-        additionalBooksPerWeek,
-        onslaughtBlueStar,
+        additionalCodicesPerWeek,
+        onslaughtMythicWinged,
         incursionLegendaryLevel,
     } = xpIncome;
 
@@ -81,39 +84,32 @@ export const XpIncome: React.FC = () => {
         [dispatch, xpIncome]
     );
 
-    const estimatedBooksPerWeek = useMemo(
+    const blueStarCharIds = useMemo(
         () =>
-            XpIncomeService.estimateWeeklyBookIncome(
-                arenaLeague,
-                loopsRaids,
+            blueStarCharacters
+                .filter(
+                    char =>
+                        (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ?? RarityStars.None) >=
+                        RarityStars.OneBlueStar
+                )
+                .map(char => char.id),
+        [resolvedCharacters]
+    );
+
+    const estimatedCodicesPerWeek = useMemo(
+        () =>
+            XpIncomeService.estimateWeeklyCodexIncome(
+                xpIncome,
+                blueStarCharIds,
                 raidLoops,
                 extraBossesAfterLoop,
-                clearRarity,
                 additionalBosses,
-                useAtForBooks,
-                kBlueStarCharacters
-                    .filter(
-                        char =>
-                            (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ?? RarityStars.None) >=
-                            RarityStars.OneBlueStar
-                    )
-                    .map(char => char.id),
-                hasBlueStarMoW,
-                incursionLegendaryLevel,
-                onslaughtBlueStar,
                 eliteEnergyPerDay,
-                nonEliteEnergyPerDay,
-                additionalBooksPerWeek
+                nonEliteEnergyPerDay
             ),
         [
-            arenaLeague,
-            loopsRaids,
-            clearRarity,
-            useAtForBooks,
-            hasBlueStarMoW,
-            additionalBooksPerWeek,
-            onslaughtBlueStar,
-            incursionLegendaryLevel,
+            xpIncome,
+            blueStarCharIds,
             raidLoops,
             extraBossesAfterLoop,
             additionalBosses,
@@ -122,27 +118,26 @@ export const XpIncome: React.FC = () => {
         ]
     );
 
-    const estimatedBooksPerDay = estimatedBooksPerWeek / 7;
+    const estimatedCodicesPerDay = estimatedCodicesPerWeek / 7;
 
     return (
         <div className="mx-auto max-w-2xl rounded-lg bg-white p-5 font-sans text-gray-800 shadow-lg dark:bg-gray-900 dark:text-white">
             <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
                 <DecimalSpinner
-                    label="Legendary Books / Day"
-                    value={manualBooksPerDay}
-                    onChange={value => dispatchUpdate('manualBooksPerDay', value)}
+                    label={`${Rarity[defaultCodexToUse ?? Rarity.Legendary]} Codices / Day`}
+                    value={manualCodicesPerDay}
+                    onChange={value => dispatchUpdate('manualCodicesPerDay', value)}
                 />
             </div>
 
-            <AccessibleTooltip title="This controls which book rarity is used to display and calculate XP requirements. Smaller books (e.g. Common) show higher counts with less waste. Larger books (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed.">
-                <div className="justify-endrounded-lg mb-5 border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                    <BookSelect
-                        label="Default XP Book for Calculations"
-                        value={defaultBookToUse ?? Rarity.Legendary}
-                        valueChanges={v => dispatchUpdate('defaultBookToUse', v)}
-                    />
-                </div>
-            </AccessibleTooltip>
+            <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
+                <BookSelect
+                    label="Default XP Codex for Calculations"
+                    tooltip="This controls which codex rarity is used to display and calculate XP requirements. Smaller codices (e.g. Common) show higher counts with less waste. Larger codices (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed."
+                    value={defaultCodexToUse ?? Rarity.Legendary}
+                    valueChanges={v => dispatchUpdate('defaultCodexToUse', v)}
+                />
+            </div>
 
             <hr className="my-5 border-gray-300 dark:border-gray-700" />
 
@@ -152,13 +147,13 @@ export const XpIncome: React.FC = () => {
                 <h4 className="mb-2 font-semibold">Arena League</h4>
                 <select
                     value={arenaLeague}
-                    onChange={event => dispatchUpdate('arenaLeague', event.target.value as unknown as ArenaLeague)}
+                    onChange={event => dispatchUpdate('arenaLeague', Number(event.target.value) as ArenaLeague)}
                     className="rounded-md border border-gray-300 bg-white p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white">
                     {Object.values(ArenaLeague)
                         .filter(league => typeof league === 'number')
                         .map(league => (
                             <option key={league} value={league}>
-                                {kArenaName[league]}
+                                {arenaName[league]}
                             </option>
                         ))}
                 </select>
@@ -169,6 +164,7 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="loopsRaids"
                             value="yes"
                             checked={loopsRaids === 'yes'}
                             onChange={() => dispatchUpdate('loopsRaids', 'yes')}
@@ -179,6 +175,7 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="loopsRaids"
                             value="no"
                             checked={loopsRaids === 'no'}
                             onChange={() => dispatchUpdate('loopsRaids', 'no')}
@@ -210,7 +207,7 @@ export const XpIncome: React.FC = () => {
                             <input
                                 type="range"
                                 min="0"
-                                max="5"
+                                max={bossesPerLoop - 1}
                                 value={extraBossesAfterLoop}
                                 onChange={event => setExtraBossesAfterLoop(Number.parseInt(event.target.value))}
                                 className="mt-1 w-full accent-orange-500"
@@ -247,14 +244,15 @@ export const XpIncome: React.FC = () => {
                 </div>
 
                 <h4 className="mt-5 font-semibold">AT Purchases (via Blue Star Characters)</h4>
-                <p>Do you use AT to buy books?</p>
+                <p>Do you use AT to buy codices?</p>
                 <div className="mt-2 mb-4 flex gap-5">
                     <label>
                         <input
                             type="radio"
+                            name="useATForCodices"
                             value="yes"
-                            checked={useAtForBooks === 'yes'}
-                            onChange={() => dispatchUpdate('useAtForBooks', 'yes')}
+                            checked={useATForCodices === 'yes'}
+                            onChange={() => dispatchUpdate('useATForCodices', 'yes')}
                             className="mr-2"
                         />{' '}
                         Yes
@@ -262,20 +260,21 @@ export const XpIncome: React.FC = () => {
                     <label>
                         <input
                             type="radio"
+                            name="useATForCodices"
                             value="no"
-                            checked={useAtForBooks === 'no'}
-                            onChange={() => dispatchUpdate('useAtForBooks', 'no')}
+                            checked={useATForCodices === 'no'}
+                            onChange={() => dispatchUpdate('useATForCodices', 'no')}
                             className="mr-2"
                         />{' '}
                         No
                     </label>
                 </div>
 
-                {useAtForBooks === 'yes' && (
+                {useATForCodices === 'yes' && (
                     <div className="mt-3 rounded-md border-l-4 border-yellow-500 bg-gray-100 p-3 dark:bg-gray-700">
                         <p className="mb-2 font-medium">Residual AT Sources:</p>
                         <div className="flex flex-wrap gap-4">
-                            {kBlueStarCharacters.map(char => {
+                            {blueStarCharacters.map(char => {
                                 const isStarred =
                                     (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ??
                                         RarityStars.None) >= RarityStars.OneBlueStar;
@@ -284,7 +283,7 @@ export const XpIncome: React.FC = () => {
                                     <div
                                         key={char.id}
                                         className="relative"
-                                        title={`${char.id} (${char.shardsPerWeek} S/W)`}>
+                                        title={`${CharactersService.charactersData.find(c => c.snowprintId === char.id)?.shortName ?? char.id} (${char.shardsPerWeek} S/W)`}>
                                         {
                                             <UnitShardIcon
                                                 icon={
@@ -317,6 +316,7 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="hasBlueStarMoW"
                                     value="yes"
                                     checked={hasBlueStarMoW === 'yes'}
                                     onChange={() => dispatchUpdate('hasBlueStarMoW', 'yes')}
@@ -327,6 +327,7 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="hasBlueStarMoW"
                                     value="no"
                                     checked={hasBlueStarMoW === 'no'}
                                     onChange={() => dispatchUpdate('hasBlueStarMoW', 'no')}
@@ -343,6 +344,7 @@ export const XpIncome: React.FC = () => {
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
+                                            name="incursionLegendaryLevel"
                                             value="L10"
                                             checked={incursionLegendaryLevel === 'L10'}
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'L10')}
@@ -353,6 +355,7 @@ export const XpIncome: React.FC = () => {
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
+                                            name="incursionLegendaryLevel"
                                             value="L12"
                                             checked={incursionLegendaryLevel === 'L12'}
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'L12')}
@@ -363,7 +366,8 @@ export const XpIncome: React.FC = () => {
                                     <label className="flex items-center">
                                         <input
                                             type="radio"
-                                            value="L12"
+                                            name="incursionLegendaryLevel"
+                                            value="M"
                                             checked={incursionLegendaryLevel === 'M'}
                                             onChange={() => dispatchUpdate('incursionLegendaryLevel', 'M')}
                                             className="mr-2"
@@ -377,14 +381,15 @@ export const XpIncome: React.FC = () => {
                         <h5 className="mt-4 border-t border-gray-300 pt-3 text-sm font-medium dark:border-gray-600">
                             Onslaught Farming Income
                         </h5>
-                        <p>Are you onslaughting a Blue Star character?</p>
+                        <p>Are you onslaughting a Mythic Winged character?</p>
                         <div className="mt-2 mb-4 flex gap-5">
                             <label>
                                 <input
                                     type="radio"
+                                    name="onslaughtMythicWinged"
                                     value="yes"
-                                    checked={onslaughtBlueStar === 'yes'}
-                                    onChange={() => dispatchUpdate('onslaughtBlueStar', 'yes')}
+                                    checked={onslaughtMythicWinged}
+                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', true)}
                                     className="mr-2"
                                 />{' '}
                                 Yes
@@ -392,9 +397,10 @@ export const XpIncome: React.FC = () => {
                             <label>
                                 <input
                                     type="radio"
+                                    name="onslaughtMythicWinged"
                                     value="no"
-                                    checked={onslaughtBlueStar === 'no'}
-                                    onChange={() => dispatchUpdate('onslaughtBlueStar', 'no')}
+                                    checked={!onslaughtMythicWinged}
+                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', false)}
                                     className="mr-2"
                                 />{' '}
                                 No
@@ -406,14 +412,14 @@ export const XpIncome: React.FC = () => {
                         </h5>
                         <div className="py-2">
                             <label className="mb-2 block text-sm">
-                                Energy spent on Elite Nodes/Day ({kEliteEnergyPerRaid} energy increments):
+                                Energy spent on Elite Nodes/Day ({eliteEnergyPerRaid} energy increments):
                             </label>
                             <div className="flex items-center gap-4">
                                 <input
                                     type="range"
                                     min="0"
-                                    max={kEliteEnergyMax}
-                                    step={kEliteEnergyPerRaid}
+                                    max={eliteEnergyMax}
+                                    step={eliteEnergyPerRaid}
                                     value={eliteEnergyPerDay}
                                     onChange={event => setEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
@@ -427,14 +433,14 @@ export const XpIncome: React.FC = () => {
                         </h5>
                         <div className="py-2">
                             <label className="mb-2 block text-sm">
-                                Energy spent on Non-Elite Nodes/Day ({kNonEliteEnergyPerRaid} energy increments):
+                                Energy spent on Non-Elite Nodes/Day ({nonEliteEnergyPerRaid} energy increments):
                             </label>
                             <div className="flex items-center gap-4">
                                 <input
                                     type="range"
                                     min="0"
-                                    max={kNonEliteEnergyMax}
-                                    step={kNonEliteEnergyPerRaid}
+                                    max={nonEliteEnergyMax}
+                                    step={nonEliteEnergyPerRaid}
                                     value={nonEliteEnergyPerDay}
                                     onChange={event => setNonEliteEnergyPerDay(Number.parseInt(event.target.value))}
                                     className="mt-1 w-full accent-yellow-500"
@@ -445,22 +451,35 @@ export const XpIncome: React.FC = () => {
                     </div>
                 )}
 
-                <DecimalSpinner
-                    label="Add'l Books/Week from unspecified sources"
-                    value={additionalBooksPerWeek}
-                    onChange={value => dispatchUpdate('additionalBooksPerWeek', value)}
-                />
+                <div className="flex items-center justify-between py-2">
+                    <label className="font-bold">
+                        Add&apos;l {Rarity[defaultCodexToUse ?? Rarity.Legendary]} Codices/Week from unspecified
+                        sources:
+                    </label>
+                    <input
+                        type="number"
+                        min="0"
+                        step="1"
+                        value={additionalCodicesPerWeek}
+                        onChange={event =>
+                            dispatchUpdate('additionalCodicesPerWeek', Number.parseInt(event.target.value) || 0)
+                        }
+                        className="w-24 rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                    />
+                </div>
             </div>
             <div className="mt-5 rounded-lg border-2 border-green-600 bg-green-50 p-4 text-center dark:border-green-400 dark:bg-green-900">
-                <h3 className="text-gray-900 dark:text-white">Daily Book Estimate</h3>
+                <h3 className="text-gray-900 dark:text-white">Codex Estimate</h3>
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {Rarity[defaultCodexToUse ?? Rarity.Legendary]} codices
+                </p>
                 <p className="mt-2 text-gray-700 dark:text-gray-300">
-                    Estimated Breakdown:{' '}
-                    <span className="block text-xl font-bold">{estimatedBooksPerDay.toFixed(2)}</span>
+                    Per Week: <span className="block text-xl font-bold">{estimatedCodicesPerWeek.toFixed(2)}</span>
                 </p>
                 <p className="mt-3 text-lg font-bold">
-                    TOTAL Books/Day:{' '}
+                    Per Day:{' '}
                     <span className="block text-3xl font-extrabold text-green-600 dark:text-green-400">
-                        {estimatedBooksPerDay.toFixed(2)}
+                        {estimatedCodicesPerDay.toFixed(2)}
                     </span>
                 </p>
             </div>

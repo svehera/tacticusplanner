@@ -59,7 +59,7 @@ export const LegendaryEvent = ({
     const { model: lreProgress } = useLreProgress(legendaryEvent);
 
     const [showAddTeam, setShowAddTeam] = useState(false);
-    const [editTeam, setEditTeam] = useState<ILreTeam>();
+    const [editTeam, setEditTeam] = useState<ILreTeam | undefined>();
     const [preselectedTrackId, setPreselectedTrackId] = useState<LreTrackId>('alpha');
     const [preselectedRequirements, setPreselectedRequirements] = useState<string[]>([]);
     const [selectedRequirementsByEvent, setSelectedRequirementsByEvent] = useState<LreSelectedRequirementsByEvent>(

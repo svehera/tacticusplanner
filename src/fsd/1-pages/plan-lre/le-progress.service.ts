@@ -12,7 +12,7 @@ import { LegendaryEventBase } from '@/fsd/3-features/lre/model/base.le';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILeProgress, ILreBattleProgress, ILreProgressModel, ILreTrackProgress } from './lre.models';
 
-export interface LeProgress {
+interface LeProgress {
     currentPoints: number;
     pointsForNextMilestone: number;
     totalPoints: number;
@@ -89,13 +89,25 @@ export class LeProgressService {
 
         const currencyForNextMilestone = this.computeCurrencyForNextMilestone(model, chestsForNextGoal);
 
+        // When synced progress is available, compute the total accumulated currency:
+        // the sum of all chest costs already paid plus the engrams currently held in hand.
+        // This is subtracted from currencyForNextMilestone so the drain loop starts from
+        // the player's actual position rather than from zero.
+        const alreadyAccumulatedCurrency = model.syncedProgress
+            ? model.chestsMilestones
+                  .filter(x => x.chestLevel <= model.syncedProgress!.currentClaimedChestIndex)
+                  .reduce((accumulator, x) => accumulator + x.engramCost, 0) + model.syncedProgress.currentCurrency
+            : 0;
+
         const pointsForNextMilestone = this.computePointsForNextMilestone(
             model,
             currencyForNextMilestone,
             regularMissionsCurrency,
             premiumMissionsCurrency,
             bundleCurrency,
-            premiumMissions
+            premiumMissions,
+            alreadyAccumulatedCurrency,
+            model.syncedProgress?.currentPoints ?? currentPoints
         );
 
         const averageBattles = this.computeAverageBattles(pointsForNextMilestone);
@@ -260,13 +272,21 @@ export class LeProgressService {
         regularMissionsCurrency: number,
         premiumMissionsCurrency: number,
         bundleCurrency: number,
-        premiumMissions: number
+        premiumMissions: number,
+        alreadyAccumulatedCurrency = 0,
+        alreadyPassedPoints = 0
     ): number {
         const additionalPayout = premiumMissions > 0 ? 15 : 0;
         let currencyLeft =
-            currencyForNextMilestone - regularMissionsCurrency - premiumMissionsCurrency - bundleCurrency;
+            currencyForNextMilestone -
+            regularMissionsCurrency -
+            premiumMissionsCurrency -
+            bundleCurrency -
+            alreadyAccumulatedCurrency;
 
         for (const chestMilestone of model.pointsMilestones) {
+            // Skip milestones whose currency has already been collected.
+            if (chestMilestone.cumulativePoints <= alreadyPassedPoints) continue;
             currencyLeft -= chestMilestone.engramPayout + additionalPayout;
             if (currencyLeft <= 0) {
                 return chestMilestone.cumulativePoints;

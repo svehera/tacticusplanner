@@ -56,7 +56,7 @@ export interface ILreRequirementsProgressDto {
 export type ILreCompactProgressDto = Partial<Record<LreTrackId, ILreCompactTrackProgressDto>>;
 
 /** Per-track compact progress: keyed by requirement id. */
-export type ILreCompactTrackProgressDto = Record<string, ILreCompactRequirementProgressDto>;
+type ILreCompactTrackProgressDto = Record<string, ILreCompactRequirementProgressDto>;
 
 export interface ILreCompactRequirementProgressDto {
     /** ProgressState per battle, indexed by battleIndex. Missing = ProgressState.none. */

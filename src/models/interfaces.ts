@@ -203,7 +203,7 @@ export interface IDailyRaids {
     lastRefreshDateUTC: string;
 }
 
-export interface IDailyRaidLocationStored {
+interface IDailyRaidLocationStored {
     id: string;
     raidsAlreadyPerformed: number;
     raidsToPerform?: number;
@@ -251,7 +251,7 @@ export enum IDailyRaidsHomeScreenEvent {
     machineHunt,
 }
 
-export enum ITrainingRushStrategy {
+enum ITrainingRushStrategy {
     maximizeRewards,
     maximizeXpForCharacter,
 }
@@ -260,7 +260,7 @@ interface IPurgeOrderPreferences {
     minimumTyranidCount: number;
 }
 
-export interface ITrainingRushPreferences {
+interface ITrainingRushPreferences {
     strategy: ITrainingRushStrategy;
 
     // Only matters when strategy is maximizeXpForCharacter
@@ -423,9 +423,5 @@ export {
     type ICampaignsFilters,
 } from '@/fsd/4-entities/campaign';
 
-export {
-    type ILreTeam,
-    type IAutoTeamsPreferences,
-    type ILegendaryEventSelectedRequirements,
-} from '@/fsd/3-features/lre';
+export { type ILreTeam, type IAutoTeamsPreferences } from '@/fsd/3-features/lre';
 export { type ICharacter2 } from '@/fsd/4-entities/character';

@@ -4,21 +4,26 @@ import { Check, ChevronsUpDown } from 'lucide-react';
 import { Rarity, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
 
 import { MiscIcon } from '../icons';
+import { AccessibleTooltip } from '../tooltip';
 
 const bookIconName = (rarity: Rarity) => Rarity[rarity].toLowerCase() + 'Book';
 
 export const BookSelect = ({
     label,
+    tooltip,
     value,
     valueChanges,
 }: {
     label?: string;
+    tooltip?: string;
     value: Rarity;
     valueChanges: (value: Rarity) => void;
 }) => {
     return (
         <Field className="flex flex-wrap items-center justify-between gap-4">
-            {label && <Label className="font-bold whitespace-nowrap">{label}:</Label>}
+            <AccessibleTooltip title={tooltip}>
+                <span>{label && <Label className="font-bold whitespace-nowrap">{label}:</Label>}</span>
+            </AccessibleTooltip>
             <div className="relative w-48">
                 <Listbox value={value} onChange={valueChanges}>
                     <ListboxButton className="relative w-full cursor-pointer rounded-lg border border-slate-300 bg-white py-2 pr-10 pl-3 text-left shadow-sm transition-all hover:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white">
@@ -33,7 +38,7 @@ export const BookSelect = ({
 
                     <ListboxOptions
                         transition
-                        className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl transition duration-100 ease-in data-[leave]:opacity-0 dark:border-slate-700 dark:bg-[#161b22]">
+                        className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl transition duration-100 ease-in data-leave:opacity-0 dark:border-slate-700 dark:bg-[#161b22]">
                         {XP_BOOK_ORDER.map(rarity => (
                             <ListboxOption
                                 key={rarity}

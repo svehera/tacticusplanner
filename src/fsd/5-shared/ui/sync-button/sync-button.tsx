@@ -1,5 +1,5 @@
 import SyncIcon from '@mui/icons-material/Sync';
-import { Button, SxProps, Theme } from '@mui/material';
+import { Button } from '@mui/material';
 import React from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
@@ -8,10 +8,10 @@ import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-s
 interface SyncButtonProps {
     showText: boolean;
     variant?: 'text' | 'outlined' | 'contained' | undefined;
-    sx?: SxProps<Theme>;
+    className?: string;
 }
 
-const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, sx }) => {
+const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className }) => {
     const { syncWithTacticus } = useSyncWithTacticus();
 
     const sync = async () => {
@@ -26,7 +26,7 @@ const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, sx }) => {
             title="Sync with Tacticus"
             variant={variant === undefined ? 'contained' : variant}
             color={'primary'}
-            sx={sx}
+            className={className}
             onClick={event => {
                 event.stopPropagation();
                 sync();

@@ -1,3 +1,3 @@
 export * from './ui';
 export type { IEquipment } from './model';
-export { EquipmentService } from './equipment.service';
+export { EquipmentService, EQUIPMENT_TYPE_ORDER } from './equipment.service';

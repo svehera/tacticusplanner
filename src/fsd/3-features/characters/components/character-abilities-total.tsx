@@ -14,6 +14,7 @@ export const CharacterAbilitiesTotal: React.FC<ICharacterAbilitiesMaterialsTotal
     return (
         <div className="flex-box gap20 wrap">
             <BadgesTotal badges={badges} alliance={alliance} />
+            <div className="w-[15px]" />
             <div className="flex-box gap5">
                 <Tooltip title="Gold">
                     <span>

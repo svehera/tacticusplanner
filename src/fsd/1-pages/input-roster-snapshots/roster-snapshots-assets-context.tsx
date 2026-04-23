@@ -1,5 +1,2 @@
-import { createContext } from 'react';
-
-import { RosterSnapshotAssets } from './models';
-
-export const AssetContext = createContext<RosterSnapshotAssets | undefined>(undefined);
+/* eslint-disable import-x/no-internal-modules */
+export { UnitPortraitAssetContext as AssetContext } from '@/fsd/5-shared/ui/unit-portrait/unit-portrait-assets-context';

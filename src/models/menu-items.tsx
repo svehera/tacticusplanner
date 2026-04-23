@@ -74,8 +74,8 @@ export const menuItemById = {
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
-    warDefense2: warDefense2MenuItem,
     warOffense2: warOffense2MenuItem,
+    warDefense2: warDefense2MenuItem,
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
@@ -89,7 +89,6 @@ export const menuItemById = {
     teams: teamsMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
-    onslaught: new MenuItemTP('Onslaught', <MilitaryTechIcon />, '/learn/onslaught?track=Imperial'),
     quests: questsMenuItem,
     ces: cesMenuItem,
 };
@@ -109,8 +108,8 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
     new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
-        menuItemById['warDefense2'],
         menuItemById['warOffense2'],
+        menuItemById['warDefense2'],
         menuItemById['zones'],
     ]),
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
@@ -158,7 +157,6 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['insights'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
-    menuItemById['onslaught'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
@@ -170,7 +168,6 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['upgrades'],
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
-        menuItemById['onslaught'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],
