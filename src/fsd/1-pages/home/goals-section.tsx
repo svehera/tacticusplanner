@@ -69,7 +69,6 @@ export function GoalsSection() {
     const goalsMenuItem = menuItemById['goals'];
 
     const topPriorityGoal = goals[0];
-    const topPriorityGoalChar = characters.find(c => c.name === topPriorityGoal?.character);
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
@@ -128,17 +127,9 @@ export function GoalsSection() {
 
     const topGoalEstimate = goalsEstimates.find(estimate => estimate.goalId === topPriorityGoal?.id);
 
-    const unlockGoals = goals.filter(x => x.type === PersonalGoalType.Unlock).length;
-    const ascendGoals = goals.filter(x => x.type === PersonalGoalType.Ascend).length;
-    const upgradeRankGoals = goals.filter(x => x.type === PersonalGoalType.UpgradeRank).length;
-
-    const goalCountSummary = [
-        unlockGoals && `${unlockGoals} unlock`,
-        ascendGoals && `${ascendGoals} ascend`,
-        upgradeRankGoals && `${upgradeRankGoals} upgrade rank`,
-    ]
-        .filter(Boolean)
-        .join(' · ');
+    const MAX_VISIBLE_GOALS = 3;
+    const visibleGoals = goals.slice(0, MAX_VISIBLE_GOALS);
+    const remainingCount = goals.length - MAX_VISIBLE_GOALS;
 
     if (goals.length === 0) return;
 
@@ -151,62 +142,90 @@ export function GoalsSection() {
                 className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors"
                 onClick={() => navigate(isMobile ? goalsMenuItem.routeMobile : goalsMenuItem.routeWeb)}>
                 <div className="border-b border-(--card-border) px-4 py-3">
-                    <div className="flex items-center gap-2.5 font-medium">
-                        {goalsMenuItem.icon} {goalsMenuItem.label}
+                    <div className="flex items-center justify-between gap-2">
+                        <div className="flex items-center gap-2.5 font-medium">
+                            {goalsMenuItem.icon} {goalsMenuItem.label}
+                        </div>
+                        <div className="flex shrink-0 flex-col items-end text-sm text-(--muted-fg)">
+                            <span>
+                                {goals.length} goal{goals.length === 1 ? '' : 's'}
+                            </span>
+                            {topGoalEstimate && topGoalEstimate.daysLeft > 0 && (
+                                <span className="text-xs">{getEstimatedDate(topGoalEstimate.daysLeft)}</span>
+                            )}
+                        </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-2 px-4 py-3 text-sm">
-                    {topPriorityGoal &&
-                        (() => {
-                            const unit = CharactersService.getUnit(topPriorityGoal.character);
-                            return (
-                                <div className="flex items-center gap-2.5">
-                                    {unit && (
+                <div className="flex flex-col divide-y divide-(--card-border) text-sm">
+                    {visibleGoals.map(goal => {
+                        const charUnit = CharactersService.getUnit(goal.character);
+                        const mowUnit = charUnit ? undefined : MowsService.resolveToStatic(goal.character);
+                        const unitDisplay = charUnit
+                            ? { roundIcon: charUnit.roundIcon, name: charUnit.shortName }
+                            : mowUnit
+                              ? { roundIcon: mowUnit.roundIcon, name: mowUnit.name }
+                              : undefined;
+                        const charRank = characters.find(char => char.name === goal.character)?.rank;
+                        const estimate = goalsEstimates.find(estimate => estimate.goalId === goal.id);
+                        return (
+                            <div key={goal.id} className="flex items-center gap-2 px-4 py-2.5">
+                                <div className="flex min-w-0 flex-1 items-center gap-2">
+                                    {unitDisplay && (
                                         <UnitShardIcon
-                                            icon={unit.roundIcon}
-                                            name={unit.shortName}
-                                            width={40}
-                                            height={40}
+                                            icon={unitDisplay.roundIcon}
+                                            name={unitDisplay.name}
+                                            width={28}
+                                            height={28}
                                         />
                                     )}
-                                    <div>
-                                        <div className="flex items-center gap-1.5">
-                                            <span className="font-semibold">
-                                                {unit?.shortName ?? topPriorityGoal.character}
+                                    <div className="min-w-0">
+                                        <div className="flex flex-wrap items-center gap-1.5">
+                                            <span className="truncate font-medium">
+                                                {unitDisplay?.name ?? goal.character}
                                             </span>
-                                            {goalTypeLabel(topPriorityGoal.type) && (
-                                                <span className="rounded bg-(--card-fg)/10 px-1.5 py-0.5 text-xs text-(--muted-fg)">
-                                                    {goalTypeLabel(topPriorityGoal.type)}
+                                            {goalTypeLabel(goal.type) && (
+                                                <span className="shrink-0 rounded bg-(--card-fg)/10 px-1.5 py-0.5 text-xs text-(--muted-fg)">
+                                                    {goalTypeLabel(goal.type)}
                                                 </span>
                                             )}
                                         </div>
-                                        <div className="text-(--muted-fg)">
-                                            {describeGoal(topPriorityGoal, topPriorityGoalChar?.rank)}
-                                        </div>
-                                        {topGoalEstimate && (
-                                            <div className="flex items-center gap-3 text-(--muted-fg)">
-                                                {topGoalEstimate.energyTotal > 0 && (
-                                                    <span className="flex items-center gap-1">
-                                                        <MiscIcon icon={'energy'} width={14} height={14} />
-                                                        {topGoalEstimate.energyTotal}
-                                                    </span>
-                                                )}
-                                                {topGoalEstimate.daysLeft > 0 && (
-                                                    <span>{getEstimatedDate(topGoalEstimate.daysLeft)}</span>
-                                                )}
-                                            </div>
-                                        )}
+                                        <div className="text-xs text-(--muted-fg)">{describeGoal(goal, charRank)}</div>
                                     </div>
                                 </div>
-                            );
-                        })()}
-                    {goalCountSummary && <div className="text-(--muted-fg)">{goalCountSummary}</div>}
-                    {!!topPriorityGoal?.notes && (
-                        <div>
-                            <span className="font-semibold">Note:</span> {topPriorityGoal.notes}
-                        </div>
-                    )}
+                                {estimate?.completed ? (
+                                    <span className="flex shrink-0 items-center gap-1 text-xs text-green-400">
+                                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-green-500/20">
+                                            ✓
+                                        </span>
+                                        Done
+                                    </span>
+                                ) : estimate?.blocked ? (
+                                    <span className="shrink-0 text-xs text-(--muted-fg)">Blocked</span>
+                                ) : estimate ? (
+                                    <div className="flex shrink-0 flex-col items-end gap-0.5 text-xs text-(--muted-fg)">
+                                        {estimate.energyTotal > 0 && (
+                                            <span className="flex items-center gap-0.5">
+                                                <MiscIcon icon={'energy'} width={12} height={12} />
+                                                {estimate.energyTotal}
+                                            </span>
+                                        )}
+                                        {estimate.daysLeft > 0 && <span>{getEstimatedDate(estimate.daysLeft)}</span>}
+                                    </div>
+                                ) : undefined}
+                            </div>
+                        );
+                    })}
                 </div>
+                {remainingCount > 0 && (
+                    <div className="px-4 pb-3 text-xs text-(--muted-fg)">
+                        +{remainingCount} more goal{remainingCount === 1 ? '' : 's'}
+                    </div>
+                )}
+                {!!topPriorityGoal?.notes && (
+                    <div className="px-4 pb-3 text-xs">
+                        <span className="font-semibold">Note:</span> {topPriorityGoal.notes}
+                    </div>
+                )}
             </div>
         </div>
     );
