@@ -54,7 +54,7 @@ export const RaidsHeader: React.FC<Props> = ({
                     </span>
                 </div>
 
-                <div className="flex-box gap10 pb-2.5">
+                <div className="flex-box gap10 flex-wrap pb-2.5">
                     {hasSync && (
                         <Button size="small" variant={'contained'} color={'primary'} onClick={syncHandle}>
                             {isMobile ? (
