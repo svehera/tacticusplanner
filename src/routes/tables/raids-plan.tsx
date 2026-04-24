@@ -437,7 +437,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         }>
                         <div
                             ref={raidsDayScrollReference}
-                            className="overflow-x-auto overflow-y-hidden"
+                            className="w-full overflow-x-auto overflow-y-hidden"
                             style={{ cursor: 'grab' }}
                             onMouseDown={onDragStart}
                             onMouseMove={onDragMove}

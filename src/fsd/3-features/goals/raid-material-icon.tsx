@@ -37,9 +37,10 @@ export interface RaidMaterialIconProps {
     raid: IUpgradeRaid;
     size?: number;
     tooltip?: React.ReactNode;
+    showTooltip?: boolean;
 }
 
-export const RaidMaterialIcon: React.FC<RaidMaterialIconProps> = ({ raid, size = 40, tooltip }) => {
+export const RaidMaterialIcon: React.FC<RaidMaterialIconProps> = ({ raid, size = 40, tooltip, showTooltip = true }) => {
     const isShard = raid.rarity === 'Shard';
     const isMythicShard = raid.rarity === 'Mythic Shard';
 
@@ -54,7 +55,7 @@ export const RaidMaterialIcon: React.FC<RaidMaterialIconProps> = ({ raid, size =
                 width={size}
             />
         );
-        return tooltip ? (
+        return tooltip && showTooltip ? (
             <AccessibleTooltip title={tooltip}>
                 <span>{icon}</span>
             </AccessibleTooltip>
@@ -70,6 +71,7 @@ export const RaidMaterialIcon: React.FC<RaidMaterialIconProps> = ({ raid, size =
             rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(raid.rarity))}
             size={size}
             tooltip={tooltip}
+            showTooltip={showTooltip}
         />
     );
 };
