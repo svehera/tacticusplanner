@@ -382,16 +382,10 @@ export const Goals = () => {
                 <Accordion
                     expanded={resourcesExpanded}
                     onChange={(_, expanded) => setResourcesExpanded(expanded)}
-                    className={`overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${resourcesExpanded ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        sx={{
-                            minHeight: '42px !important',
-                            '& .MuiAccordionSummary-content': {
-                                margin: '6px 0 !important',
-                            },
-                        }}
-                        className="bg-transparent px-4 py-0"
+                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5"
                         aria-controls="resources-content"
                         id="resources-header">
                         <div className="flex w-full flex-wrap items-center gap-2 pr-2">
@@ -409,7 +403,7 @@ export const Goals = () => {
                         </div>
                     </AccordionSummary>
 
-                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                    <AccordionDetails className="px-4 pt-0 pb-4">
                         <div className="grid grid-cols-1 gap-3">
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
@@ -501,14 +495,10 @@ export const Goals = () => {
                 <Accordion
                     expanded={sectionsExpanded.upgrades}
                     onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
-                    className={`my-5 overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${sectionsExpanded.upgrades ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        sx={{
-                            minHeight: '42px !important',
-                            '& .MuiAccordionSummary-content': { margin: '6px 0 !important' },
-                        }}
-                        className="bg-transparent px-4 py-0">
+                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
@@ -523,7 +513,7 @@ export const Goals = () => {
                             </span>
                         </div>
                     </AccordionSummary>
-                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                    <AccordionDetails className="px-4 pt-0 pb-4">
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedUpgrades.map(goal => {
@@ -572,14 +562,10 @@ export const Goals = () => {
                 <Accordion
                     expanded={sectionsExpanded.shards}
                     onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}
-                    className={`my-5 overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${sectionsExpanded.shards ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        sx={{
-                            minHeight: '42px !important',
-                            '& .MuiAccordionSummary-content': { margin: '6px 0 !important' },
-                        }}
-                        className="bg-transparent px-4 py-0">
+                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
@@ -593,7 +579,7 @@ export const Goals = () => {
                             </span>
                         </div>
                     </AccordionSummary>
-                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                    <AccordionDetails className="px-4 pt-0 pb-4">
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedShards.map(goal => {
@@ -639,21 +625,17 @@ export const Goals = () => {
                 <Accordion
                     expanded={sectionsExpanded.abilities}
                     onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}
-                    className={`my-5 overflow-hidden rounded-xl border border-(--border) bg-transparent shadow-none transition-colors ${sectionsExpanded.abilities ? 'ring-1 ring-black/5 dark:ring-white/10' : 'hover:bg-(--secondary)/40'}`}>
+                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        sx={{
-                            minHeight: '42px !important',
-                            '& .MuiAccordionSummary-content': { margin: '6px 0 !important' },
-                        }}
-                        className="bg-transparent px-4 py-0">
+                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                             </span>
                         </div>
                     </AccordionSummary>
-                    <AccordionDetails className="bg-transparent px-4 pt-0 pb-4">
+                    <AccordionDetails className="px-4 pt-0 pb-4">
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedAbilities.map(goal => {
