@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';
 
+import { cn } from '@/fsd/5-shared/lib';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -63,7 +64,10 @@ export const PlanLeRoutes = () => {
                         key={le.name}
                         role="button"
                         tabIndex={0}
-                        className={`flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors${isFinished ? 'opacity-50' : ''}`}
+                        className={cn(
+                            'flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors',
+                            isFinished && 'opacity-50'
+                        )}
                         onClick={() => navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`)}
                         onKeyDown={event_ => {
                             if (event_.key === 'Enter' || event_.key === ' ') {
