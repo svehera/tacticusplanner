@@ -1,5 +1,13 @@
 import CloseIcon from '@mui/icons-material/Close';
-import { Dialog, DialogContent, DialogTitle, IconButton, SwipeableDrawer, useMediaQuery } from '@mui/material';
+import {
+    Dialog,
+    DialogContent,
+    DialogTitle,
+    IconButton,
+    SwipeableDrawer,
+    useMediaQuery,
+    useTheme,
+} from '@mui/material';
 import React from 'react';
 
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -17,7 +25,8 @@ interface RaidMaterialDialogProps {
 }
 
 export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, onClose }) => {
-    const isMobile = useMediaQuery('(max-width:600px)');
+    const theme = useTheme();
+    const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
     const afterRaids = raid.acquiredCount + raid.raidLocations.reduce((s, loc) => s + loc.farmedItems, 0);
     const isSufficient = afterRaids >= raid.requiredCount;
     const inventoryPct = raid.requiredCount > 0 ? Math.min((raid.acquiredCount / raid.requiredCount) * 100, 100) : 0;

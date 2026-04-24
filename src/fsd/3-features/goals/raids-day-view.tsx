@@ -128,6 +128,7 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
                                     disableTouchListener>
                                     <button
                                         type="button"
+                                        aria-label={raid.label}
                                         onClick={() => setSelectedRaid(raid)}
                                         className="flex flex-col items-center gap-2 rounded-lg border border-transparent p-2 transition-all hover:border-(--card-border) hover:bg-(--secondary)">
                                         {/* Icon with count badge overlaid */}
