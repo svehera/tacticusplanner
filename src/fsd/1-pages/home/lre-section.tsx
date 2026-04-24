@@ -92,8 +92,8 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
         [characters, nextEvent.unitSnowprintId]
     );
     const charRank = userChar?.rank ?? Rank.Locked;
-    const charRarity = !!userChar?.rarity && charRank !== Rank.Locked ? userChar.rarity : Rarity.Legendary;
-    const charStars = !!userChar?.stars && charRank !== Rank.Locked ? userChar.stars : RarityStars.None;
+    const charRarity = userChar?.rarity !== undefined && charRank !== Rank.Locked ? userChar.rarity : Rarity.Legendary;
+    const charStars = userChar?.stars !== undefined && charRank !== Rank.Locked ? userChar.stars : RarityStars.None;
 
     const lreShardProgress = useMemo(
         () =>

@@ -70,8 +70,16 @@ export function DailyRaidsSection() {
                 Daily Raids
             </p>
             <div
+                role="button"
+                tabIndex={0}
                 className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors"
-                onClick={() => navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)}>
+                onClick={() => navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)}
+                onKeyDown={event_ => {
+                    if (event_.key === 'Enter' || event_.key === ' ') {
+                        event_.preventDefault();
+                        navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb);
+                    }
+                }}>
                 <div className="border-b border-(--card-border) px-4 py-3">
                     <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2.5 font-medium">

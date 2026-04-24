@@ -61,8 +61,16 @@ export const PlanLeRoutes = () => {
                 return (
                     <div
                         key={le.name}
+                        role="button"
+                        tabIndex={0}
                         className={`flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors${isFinished ? 'opacity-50' : ''}`}
-                        onClick={() => navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`)}>
+                        onClick={() => navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`)}
+                        onKeyDown={event_ => {
+                            if (event_.key === 'Enter' || event_.key === ' ') {
+                                event_.preventDefault();
+                                navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`);
+                            }
+                        }}>
                         <div className="border-b border-(--card-border) px-4 py-3">
                             <div className="flex items-center gap-2.5 font-medium">
                                 <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}

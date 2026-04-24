@@ -52,7 +52,6 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             {upgradesRaids.map((raid, index) => (
                                 <RaidUpgradeMaterialCard
                                     key={raid.id + '-' + index}
-                                    index={index}
                                     upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
@@ -62,7 +61,6 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             {completedMaterialRaids.map((raid, index) => (
                                 <RaidUpgradeMaterialCard
                                     key={raid.id + '-' + index}
-                                    index={index}
                                     upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
@@ -72,7 +70,6 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             {completedShardRaids.map((raid, index) => (
                                 <RaidUpgradeMaterialCard
                                     key={raid.id + '-' + index}
-                                    index={index}
                                     upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
@@ -100,7 +97,6 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             {bonusRaids.map((raid, index) => (
                                 <RaidUpgradeMaterialCard
                                     key={raid.id + '-' + index}
-                                    index={index}
                                     upgradeEstimate={raid}
                                     showRelatedCharacters={false}
                                     showAdditionalInfo={false}
