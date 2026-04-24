@@ -1,6 +1,7 @@
 ﻿import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { sum } from 'lodash';
+import { FC, lazy, Suspense } from 'react';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -46,41 +47,44 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                     </span>
                 </AccordionSummary>
                 <AccordionDetails className="px-4 pt-0 pb-4">
-                    <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
-                        {upgradesRaids.map((raid, index) => (
-                            <RaidUpgradeMaterialCard
-                                key={raid.id + '-' + index}
-                                index={index}
-                                upgradeEstimate={raid}
-                                showRelatedCharacters={false}
-                                showAdditionalInfo={false}
-                                showPlannedRaidLocationsOnly={true}
-                            />
-                        ))}
-                        {completedMaterialRaids.map((raid, index) => (
-                            <RaidUpgradeMaterialCard
-                                key={raid.id + '-' + index}
-                                index={index}
-                                upgradeEstimate={raid}
-                                showRelatedCharacters={false}
-                                showAdditionalInfo={false}
-                                showPlannedRaidLocationsOnly={true}
-                            />
-                        ))}
-                        {completedShardRaids.map((raid, index) => (
-                            <RaidUpgradeMaterialCard
-                                key={raid.id + '-' + index}
-                                index={index}
-                                upgradeEstimate={raid}
-                                showRelatedCharacters={false}
-                                showAdditionalInfo={false}
-                                showPlannedRaidLocationsOnly={true}
-                            />
-                        ))}
-                    </div>
+                    <Suspense fallback={undefined}>
+                        <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
+                            {upgradesRaids.map((raid, index) => (
+                                <RaidUpgradeMaterialCard
+                                    key={raid.id + '-' + index}
+                                    index={index}
+                                    upgradeEstimate={raid}
+                                    showRelatedCharacters={false}
+                                    showAdditionalInfo={false}
+                                    showPlannedRaidLocationsOnly={true}
+                                />
+                            ))}
+                            {completedMaterialRaids.map((raid, index) => (
+                                <RaidUpgradeMaterialCard
+                                    key={raid.id + '-' + index}
+                                    index={index}
+                                    upgradeEstimate={raid}
+                                    showRelatedCharacters={false}
+                                    showAdditionalInfo={false}
+                                    showPlannedRaidLocationsOnly={true}
+                                />
+                            ))}
+                            {completedShardRaids.map((raid, index) => (
+                                <RaidUpgradeMaterialCard
+                                    key={raid.id + '-' + index}
+                                    index={index}
+                                    upgradeEstimate={raid}
+                                    showRelatedCharacters={false}
+                                    showAdditionalInfo={false}
+                                    showPlannedRaidLocationsOnly={true}
+                                />
+                            ))}
+                        </div>
+                    </Suspense>
                 </AccordionDetails>
             </Accordion>
             <Accordion
+                slotProps={{ transition: { unmountOnExit: true } }}
                 disableGutters
                 className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                 <AccordionSummary
@@ -91,18 +95,20 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                     </span>
                 </AccordionSummary>
                 <AccordionDetails className="px-4 pt-0 pb-4">
-                    <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
-                        {bonusRaids.map((raid, index) => (
-                            <RaidUpgradeMaterialCard
-                                key={raid.id + '-' + index}
-                                index={index}
-                                upgradeEstimate={raid}
-                                showRelatedCharacters={false}
-                                showAdditionalInfo={false}
-                                showPlannedRaidLocationsOnly={true}
-                            />
-                        ))}
-                    </div>
+                    <Suspense fallback={undefined}>
+                        <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
+                            {bonusRaids.map((raid, index) => (
+                                <RaidUpgradeMaterialCard
+                                    key={raid.id + '-' + index}
+                                    index={index}
+                                    upgradeEstimate={raid}
+                                    showRelatedCharacters={false}
+                                    showAdditionalInfo={false}
+                                    showPlannedRaidLocationsOnly={true}
+                                />
+                            ))}
+                        </div>
+                    </Suspense>
                 </AccordionDetails>
             </Accordion>
         </>
