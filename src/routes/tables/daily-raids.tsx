@@ -1,12 +1,13 @@
 ﻿import { cloneDeep } from 'lodash';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { lazy, Suspense, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
-import { RaidsPlan } from 'src/routes/tables/raids-plan';
 import { TodayRaids } from 'src/routes/tables/today-raids';
+
+const RaidsPlan = lazy(() => import('src/routes/tables/raids-plan').then(m => ({ default: m.RaidsPlan })));
 
 import { useAuth } from '@/fsd/5-shared/model';
 
@@ -191,13 +192,15 @@ export const DailyRaids = () => {
                 <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
             </RaidsHeader>
 
-            <RaidsPlan
-                estimatedRanks={estimatedRanks}
-                upgrades={upgrades}
-                updateInventory={saveInventoryUpdateChanges}
-                updateInventoryAny={() => setHasChanges(true)}
-                scrollToCharSnowprintId={charSnowprintId ?? undefined}
-            />
+            <Suspense fallback={undefined}>
+                <RaidsPlan
+                    estimatedRanks={estimatedRanks}
+                    upgrades={upgrades}
+                    updateInventory={saveInventoryUpdateChanges}
+                    updateInventoryAny={() => setHasChanges(true)}
+                    scrollToCharSnowprintId={charSnowprintId ?? undefined}
+                />
+            </Suspense>
 
             {estimatedRanks.upgradesRaids.length > 0 && (
                 <TodayRaids

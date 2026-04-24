@@ -1,4 +1,4 @@
-import React, { useMemo, Suspense, lazy, memo } from 'react';
+import { FC, Suspense, lazy } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
@@ -9,12 +9,12 @@ import { mows2Data } from '@/fsd/4-entities/mow';
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate, IItemRaidLocation } from '@/fsd/3-features/goals/goals.models';
+import { getDisplayName } from '@/fsd/3-features/goals/raid-day-helpers';
 import { RaidLocations } from '@/fsd/3-features/goals/raid-locations';
 
 const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
 
 interface Props {
-    index: number;
     showRelatedCharacters?: boolean;
     showAdditionalInfo?: boolean;
     maxLocations?: number;
@@ -47,7 +47,7 @@ const hasRaidLocations = (
     );
 };
 
-const Component: React.FC<Props> = ({
+export const RaidUpgradeMaterialCard: FC<Props> = ({
     showRelatedCharacters = true,
     showAdditionalInfo = true,
     maxLocations,
@@ -65,65 +65,60 @@ const Component: React.FC<Props> = ({
           ? upgradeEstimate.snowprintId.slice(13)
           : upgradeEstimate.snowprintId;
 
-    const resolvedUnit = useMemo(() => {
-        if (!isShard && !isMythicShard) return;
-        return resolveUnit(materialId);
-    }, [materialId, isShard, isMythicShard]);
+    const resolvedUnit = isShard || isMythicShard ? resolveUnit(materialId) : undefined;
 
-    const name = useMemo(() => {
-        if (isShard || isMythicShard) {
-            const base = resolvedUnit?.name ?? materialId;
-            return isMythicShard ? `${base} (Mythic)` : base;
-        }
+    const name =
+        isShard || isMythicShard
+            ? isMythicShard
+                ? `${resolvedUnit?.name ?? materialId} (Mythic)`
+                : (resolvedUnit?.name ?? materialId)
+            : upgradeEstimate.label;
 
-        return upgradeEstimate.label;
-    }, [isShard, isMythicShard, resolvedUnit, materialId]);
+    const displayedLocations =
+        showPlannedRaidLocationsOnly && hasRaidLocations(upgradeEstimate)
+            ? upgradeEstimate.raidLocations
+            : upgradeEstimate.locations;
 
-    const displayedLocations = useMemo(() => {
-        if (showPlannedRaidLocationsOnly && hasRaidLocations(upgradeEstimate)) {
-            return upgradeEstimate.raidLocations;
-        }
-
-        return upgradeEstimate.locations;
-    }, [showPlannedRaidLocationsOnly, upgradeEstimate]);
-
-    const hasSuggestedRaidsRemaining = useMemo(() => {
-        if (hasRaidLocations(upgradeEstimate)) {
-            return upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0);
-        }
-
-        return displayedLocations.some(loc => loc.isSuggested && (loc.isUnlocked ?? true));
-    }, [upgradeEstimate, displayedLocations]);
+    const hasSuggestedRaidsRemaining = hasRaidLocations(upgradeEstimate)
+        ? upgradeEstimate.raidLocations.some(loc => loc.raidsToPerform > 0)
+        : displayedLocations.some(loc => loc.isSuggested && (loc.isUnlocked ?? true));
 
     const noSuggestedRaidsRemaining = !hasSuggestedRaidsRemaining;
 
-    const icon = useMemo(() => {
-        if (isShard || isMythicShard) {
-            if (resolvedUnit) {
-                return (
-                    <UnitShardIcon name={upgradeEstimate.snowprintId} icon={resolvedUnit.icon} mythic={isMythicShard} />
-                );
-            }
-            return materialId;
-        }
-        return (
+    const tooltipContent =
+        upgradeEstimate.relatedCharacters.length > 0 ? (
+            <div>
+                {name}
+                <ul className="ps-[15px]">
+                    {upgradeEstimate.relatedCharacters.map(id => (
+                        <li key={id}>{getDisplayName(id)}</li>
+                    ))}
+                </ul>
+            </div>
+        ) : (
+            name
+        );
+
+    const icon =
+        isShard || isMythicShard ? (
+            resolvedUnit ? (
+                <UnitShardIcon
+                    name={upgradeEstimate.snowprintId}
+                    icon={resolvedUnit.icon}
+                    mythic={isMythicShard}
+                    tooltip={tooltipContent}
+                />
+            ) : (
+                materialId
+            )
+        ) : (
             <UpgradeImage
                 material={upgradeEstimate.label}
                 iconPath={upgradeEstimate.iconPath}
                 rarity={RarityMapper.rarityToRarityString(mapUpgradeRarity(upgradeEstimate.rarity))}
-                showTooltip={false}
+                tooltip={tooltipContent}
             />
         );
-    }, [
-        isShard,
-        isMythicShard,
-        resolvedUnit,
-        materialId,
-        upgradeEstimate.snowprintId,
-        upgradeEstimate.label,
-        upgradeEstimate.iconPath,
-        upgradeEstimate.rarity,
-    ]);
 
     const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
     const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
@@ -201,15 +196,3 @@ const Component: React.FC<Props> = ({
         </div>
     );
 };
-
-export const RaidUpgradeMaterialCard = memo(Component, (previous, next) => {
-    return (
-        previous.upgradeEstimate === next.upgradeEstimate &&
-        previous.maxLocations === next.maxLocations &&
-        previous.showAdditionalInfo === next.showAdditionalInfo &&
-        previous.showRelatedCharacters === next.showRelatedCharacters &&
-        previous.showPlannedRaidLocationsOnly === next.showPlannedRaidLocationsOnly &&
-        previous.compactRaidLocations === next.compactRaidLocations &&
-        previous.widthClass === next.widthClass
-    );
-});

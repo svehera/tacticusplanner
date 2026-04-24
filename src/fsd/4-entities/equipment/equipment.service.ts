@@ -8,6 +8,19 @@ import { CharactersService } from '../character';
 import { newEquipmentData } from './data';
 import { IEquipment, IEquipmentStatic } from './model';
 
+export const EQUIPMENT_TYPE_ORDER: Record<string, number> = {
+    I_Crit: 0,
+    R_Crit: 0,
+    I_Block: 1,
+    R_Block: 1,
+    I_Defensive: 1,
+    R_Defensive: 1,
+    I_Booster_Block: 2,
+    R_Booster_Block: 2,
+    I_Booster_Crit: 2,
+    R_Booster_Crit: 2,
+};
+
 export class EquipmentService {
     static readonly equipmentData: IEquipment[] = this.convertEquipmentData();
 

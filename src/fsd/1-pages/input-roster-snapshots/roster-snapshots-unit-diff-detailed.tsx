@@ -11,7 +11,7 @@ import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { EquipmentService, IEquipment } from '@/fsd/4-entities/equipment';
+import { EQUIPMENT_TYPE_ORDER, EquipmentService, IEquipment } from '@/fsd/4-entities/equipment';
 import { MowsService } from '@/fsd/4-entities/mow';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
@@ -153,18 +153,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
         const pad = 4;
         const base = staticChar;
 
-        const order: Record<string, number> = {
-            I_Crit: 0,
-            R_Crit: 0,
-            I_Block: 1,
-            R_Block: 1,
-            I_Defensive: 1,
-            R_Defensive: 1,
-            I_Booster_Block: 2,
-            R_Booster_Block: 2,
-            I_Booster_Crit: 2,
-            R_Booster_Crit: 2,
-        };
+        const order = EQUIPMENT_TYPE_ORDER;
 
         const renderType = (t?: string) => {
             if (!t) {

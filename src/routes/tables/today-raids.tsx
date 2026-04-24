@@ -2,11 +2,13 @@
 import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
 import { sum } from 'lodash';
 
-import { RaidUpgradeMaterialCard } from '@/routes/tables/raid-upgrade-material-card';
-
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
+
+const RaidUpgradeMaterialCard = lazy(() =>
+    import('@/routes/tables/raid-upgrade-material-card').then(m => ({ default: m.RaidUpgradeMaterialCard }))
+);
 
 interface Props {
     raids: IUpgradeRaid[];
@@ -15,7 +17,7 @@ interface Props {
 
 const isShardRaid = (raid: IUpgradeRaid) => raid.rarity === 'Shard' || raid.rarity === 'Mythic Shard';
 
-export const TodayRaids: React.FC<Props> = ({ raids, bonusRaids }: Props) => {
+export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));

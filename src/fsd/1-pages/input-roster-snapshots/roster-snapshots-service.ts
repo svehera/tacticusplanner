@@ -7,7 +7,7 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
+import { EQUIPMENT_TYPE_ORDER, EquipmentService } from '@/fsd/4-entities/equipment/equipment.service';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { IRosterSnapshot, IRosterSnapshotDiff, ISnapshotUnitDiff, IRosterSnapshotsState } from './models';
@@ -18,6 +18,16 @@ export class RosterSnapshotsService {
 
     /** @returns a new snapshot view of the character. */
     public static snapshotCharacter(c: ICharacter2): ISnapshotCharacter {
+        // Sort equipment by type order so that positional comparison in diffCharacter() is
+        // stable regardless of the order the API returns items in.
+        const sortedEquipment = (c.equipment ?? []).toSorted((a, b) => {
+            const typeA = EquipmentService.equipmentData.find(equip => equip.id === a.id)?.type ?? '';
+            const typeB = EquipmentService.equipmentData.find(equip => equip.id === b.id)?.type ?? '';
+            const diff =
+                (EQUIPMENT_TYPE_ORDER[typeA] ?? Number.MAX_SAFE_INTEGER) -
+                (EQUIPMENT_TYPE_ORDER[typeB] ?? Number.MAX_SAFE_INTEGER);
+            return diff === 0 ? a.id.localeCompare(b.id) : diff;
+        });
         return {
             id: c.snowprintId,
             rank: c.rank,
@@ -28,12 +38,12 @@ export class RosterSnapshotsService {
             shards: c.shards,
             mythicShards: c.mythicShards,
             xpLevel: c.level,
-            equip0: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[0]?.id),
-            equip1: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[1]?.id),
-            equip2: EquipmentService.equipmentData.find(equip => equip.id === c.equipment?.[2]?.id),
-            equip0Level: c.equipment?.[0]?.level,
-            equip1Level: c.equipment?.[1]?.level,
-            equip2Level: c.equipment?.[2]?.level,
+            equip0: EquipmentService.equipmentData.find(equip => equip.id === sortedEquipment[0]?.id),
+            equip1: EquipmentService.equipmentData.find(equip => equip.id === sortedEquipment[1]?.id),
+            equip2: EquipmentService.equipmentData.find(equip => equip.id === sortedEquipment[2]?.id),
+            equip0Level: sortedEquipment[0]?.level,
+            equip1Level: sortedEquipment[1]?.level,
+            equip2Level: sortedEquipment[2]?.level,
         };
     }
 
@@ -156,6 +166,27 @@ export class RosterSnapshotsService {
             char.xpLevel = Math.max(1, char.xpLevel);
             char.rarity = Math.max(char.rarity, CharactersService.getInitialRarity(char.id) ?? Rarity.Common);
             char.stars = Math.max(char.stars, this.getMinimumStarsForRarity(char.rarity));
+
+            // Older snapshots may have equipment slots in API order rather than canonical
+            // type order, causing false positional diffs in diffCharacter(). Re-sort here.
+            const equipSlots = [
+                { equip: char.equip0, level: char.equip0Level },
+                { equip: char.equip1, level: char.equip1Level },
+                { equip: char.equip2, level: char.equip2Level },
+            ]
+                .filter(slot => slot.equip !== undefined)
+                .toSorted((a, b) => {
+                    const diff =
+                        (EQUIPMENT_TYPE_ORDER[a.equip!.type] ?? Number.MAX_SAFE_INTEGER) -
+                        (EQUIPMENT_TYPE_ORDER[b.equip!.type] ?? Number.MAX_SAFE_INTEGER);
+                    return diff === 0 ? a.equip!.id.localeCompare(b.equip!.id) : diff;
+                });
+            char.equip0 = equipSlots[0]?.equip;
+            char.equip0Level = equipSlots[0]?.level;
+            char.equip1 = equipSlots[1]?.equip;
+            char.equip1Level = equipSlots[1]?.level;
+            char.equip2 = equipSlots[2]?.equip;
+            char.equip2Level = equipSlots[2]?.level;
         }
         for (const mow of returnValue.mows) {
             mow.primaryAbilityLevel = Math.max(1, mow.primaryAbilityLevel);
