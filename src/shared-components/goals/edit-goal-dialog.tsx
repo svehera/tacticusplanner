@@ -8,7 +8,7 @@ import React, { useContext, useMemo, useState } from 'react';
 import { PersonalGoalType } from '@/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
-import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
+import { EditAscendGoal, ICharacterAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
@@ -29,7 +29,7 @@ import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 
@@ -41,7 +41,8 @@ interface Props {
 }
 
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
-    const { goals, campaignsProgress, inventory } = useContext(StoreContext);
+    const { goals, campaignsProgress, inventory, dailyRaidsPreferences, honorYourHeroesRewards } =
+        useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(isOpen);
@@ -55,23 +56,24 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
             switch (updatedGoal.type) {
                 case PersonalGoalType.Ascend: {
-                    if (CharactersService.getUnit(updatedGoal.unitId) !== undefined) {
+                    const ascendGoal = updatedGoal as ICharacterAscendGoal;
+                    if (CharactersService.getUnit(ascendGoal.unitId) !== undefined) {
                         dispatch.characters({
                             type: 'UpdateRarity',
-                            character: updatedGoal.unitId,
-                            value: updatedGoal.rarityStart,
+                            character: ascendGoal.unitId,
+                            value: ascendGoal.rarityStart,
                         });
 
                         dispatch.characters({
                             type: 'UpdateShards',
-                            character: updatedGoal.unitId,
-                            value: updatedGoal.shards,
+                            character: ascendGoal.unitId,
+                            value: ascendGoal.shards,
                         });
 
                         dispatch.characters({
                             type: 'UpdateStars',
-                            character: updatedGoal.unitId,
-                            value: updatedGoal.starsStart,
+                            character: ascendGoal.unitId,
+                            value: ascendGoal.starsStart,
                         });
                     }
                     break;
@@ -80,7 +82,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                     dispatch.characters({
                         type: 'UpdateShards',
                         character: updatedGoal.unitId,
-                        value: updatedGoal.shards,
+                        value: (updatedGoal as any).shards,
                     });
                     break;
                 }
@@ -110,7 +112,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
             if (inventoryUpdate.length > 0) {
                 dispatch.inventory({
                     type: 'DecrementUpgradeQuantity',
-                    upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
+                    upgrades: inventoryUpdate.map((x: IUpgradeRecipe) => ({ id: x.id, count: x.count })),
                 });
             }
 
@@ -125,7 +127,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     };
 
     const handleAscendGoalChanges = (key: keyof ICharacterAscendGoal, value: number) => {
-        setForm(current => ({ ...current, [key]: value }));
+        setForm(current => ({ ...current, [key]: value }) as CharacterRaidGoalSelect);
     };
 
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
@@ -163,14 +165,14 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         })
-        .map(x => x.id);
+        .map((x: any) => x.id);
 
     const unlockedMythicLocations = possibleMythicLocations
         .filter(location => {
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         })
-        .map(x => x.id);
+        .map((x: any) => x.id);
 
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
@@ -371,8 +373,10 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                         <>
                             <NumbersInput
                                 title="Owned shards"
-                                value={form.shards}
-                                valueChange={value => setForm(current => ({ ...current, shards: value }))}
+                                value={(form as any).shards}
+                                valueChange={value =>
+                                    setForm(current => ({ ...current, shards: value }) as CharacterRaidGoalSelect)
+                                }
                             />
                             <div className="flex flex-wrap gap-2">
                                 {possibleLocations.map(location => (
@@ -383,6 +387,19 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     />
                                 ))}
                             </div>
+                            <EditAscendGoal
+                                goal={form as ICharacterAscendGoal}
+                                possibleLocations={possibleLocations}
+                                possibleMythicLocations={possibleMythicLocations}
+                                unlockedLocations={unlockedLocations}
+                                unlockedMythicLocations={unlockedMythicLocations}
+                                shardsPerToken={(form as ICharacterAscendGoal).shardsPerToken ?? 0}
+                                mythicShardsPerToken={(form as ICharacterAscendGoal).mythicShardsPerToken ?? 0}
+                                alliance={unit.alliance as Alliance}
+                                dailyRaidsPreferences={dailyRaidsPreferences}
+                                honorYourHeroesRewards={honorYourHeroesRewards}
+                                onChange={handleAscendGoalChanges}
+                            />
                         </>
                     )}
 
@@ -390,15 +407,22 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                         <>
                             <NumbersInput
                                 title="Owned shards"
-                                value={form.shards}
-                                valueChange={value => setForm(current => ({ ...current, shards: value }))}
+                                value={(form as ICharacterAscendGoal).shards}
+                                valueChange={value =>
+                                    setForm(current => ({ ...current, shards: value }) as CharacterRaidGoalSelect)
+                                }
                             />
                             <EditAscendGoal
-                                goal={form}
+                                goal={form as ICharacterAscendGoal}
                                 possibleLocations={possibleLocations}
                                 possibleMythicLocations={possibleMythicLocations}
                                 unlockedLocations={unlockedLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
+                                shardsPerToken={(form as ICharacterAscendGoal).shardsPerToken ?? 0}
+                                mythicShardsPerToken={(form as ICharacterAscendGoal).mythicShardsPerToken ?? 0}
+                                alliance={unit.alliance as Alliance}
+                                dailyRaidsPreferences={dailyRaidsPreferences}
+                                honorYourHeroesRewards={honorYourHeroesRewards}
                                 onChange={handleAscendGoalChanges}
                             />
                         </>

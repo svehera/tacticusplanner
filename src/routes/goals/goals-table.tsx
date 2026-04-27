@@ -488,7 +488,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             },
             {
                 headerName: 'Onslaught tokens',
-                hide: !rows.some(row => row.type === PersonalGoalType.Ascend),
+                hide: !rows.some(row => [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(row.type)),
                 valueGetter: params => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);

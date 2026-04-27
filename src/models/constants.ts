@@ -262,6 +262,11 @@ export const defaultData: IPersonalData2 = {
         farmPreferences: { order: IDailyRaidsFarmOrder.goalPriority, homeScreenEvent: IDailyRaidsHomeScreenEvent.none },
         farmStrategy: DailyRaidsStrategy.leastEnergy,
         campaignEvent: 'none',
+        onslaughtSectors: {
+            [Alliance.Imperial]: 1,
+            [Alliance.Xenos]: 1,
+            [Alliance.Chaos]: 1,
+        },
     },
     mows: [],
     teams: [],
@@ -437,6 +442,7 @@ export const defaultData: IPersonalData2 = {
     },
     rosterSnapshots: { base: undefined, diffs: [] },
     gameModeTokens: {},
+    honorYourHeroesRewards: undefined,
 };
 
 export const goalsLimit = 100;

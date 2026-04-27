@@ -46,6 +46,7 @@ import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 import { WarOffense2Action } from '../reducers/war-offense2.reducer';
+import { OnslaughtData } from '../services/onslaught-rewards-service';
 
 import { CampaignsLocationsUsage, DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
 
@@ -99,6 +100,7 @@ export interface IGlobalState {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
+    honorYourHeroesRewards: OnslaughtData;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -162,7 +164,9 @@ export interface IPersonalData2 {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
+    honorYourHeroesRewards: OnslaughtData;
 }
+
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */
     lastSetAtSecondsUtc?: number;
@@ -290,6 +294,7 @@ export interface IDailyRaidsPreferences {
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
     campaignEvent?: CampaignGroupType | 'none';
+    onslaughtSectors?: Record<Alliance, number>;
 }
 
 export type ICustomDailyRaidsSettings = Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;
@@ -380,6 +385,9 @@ export interface IPersonalGoal {
     unitId?: string;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
+
+    currentRank?: Rank;
+    currentRarity?: Rarity;
 }
 
 export interface IEstimatedRanksSettings {

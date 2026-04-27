@@ -295,7 +295,7 @@ export class GoalsService {
 
         const upgradeRankOrMowGoals = selectedGoals.filter(x =>
             [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(x.type)
-        ) as Array<ICharacterUpgradeRankGoal>;
+        ) as Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
 
         const upgradeAbilities = selectedGoals.filter(x =>
             [PersonalGoalType.CharacterAbilities].includes(x.type)
@@ -421,6 +421,8 @@ export class GoalsService {
                     rarity: unit.rarity,
                     rank: unit.rank,
                     faction: unit.faction,
+                    //onslaughtShards: g.shardsPerToken ?? 1,
+                    //onslaughtMythicShards: 0,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     ...base,
                 };

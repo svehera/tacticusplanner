@@ -16,6 +16,8 @@ import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
 import { WarDefense2State } from '@/fsd/1-pages/plan-war-defense-2/models';
 import { WarOffense2State } from '@/fsd/1-pages/plan-war-offense2/models';
 
+import { OnslaughtData, OnslaughtRewardsService } from '../services/onslaught-rewards-service';
+
 import { defaultData, rankToLevel, rankToRarity } from './constants';
 import {
     IAutoTeamsPreferences,
@@ -27,7 +29,7 @@ import {
     IGuildWar,
     IInsightsData,
     IInventory,
-    ILegendaryEventSelectedTeams,
+    ILegendaryEventSelectedTeams, // This import is not related to the current issue and should remain.
     ILegendaryEventSettings,
     IPersonalCharacterData2,
     IPersonalData2,
@@ -65,6 +67,7 @@ export class GlobalState implements IGlobalState {
     readonly rosterSnapshots: IRosterSnapshotsState;
     readonly mows: Array<IMow | IMow2>;
     readonly gameModeTokens: IGameModeTokensState;
+    readonly honorYourHeroesRewards?: OnslaughtData;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -98,6 +101,8 @@ export class GlobalState implements IGlobalState {
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
+        this.honorYourHeroesRewards =
+            personalData.honorYourHeroesRewards ?? defaultData.honorYourHeroesRewards ?? OnslaughtRewardsService.data;
     }
 
     static initCharacters(

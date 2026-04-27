@@ -27,7 +27,7 @@ import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -38,7 +38,7 @@ import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
-import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.models';
+import { ICharacter2, IMow2, IUnit } from '@/fsd/3-features/characters/characters.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 
@@ -62,7 +62,8 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
+    const { characters, mows, goals, campaignsProgress, dailyRaidsPreferences, honorYourHeroesRewards } =
+        useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
@@ -80,8 +81,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (goal) {
             goal.dailyRaids = true;
             dispatch.goals({ type: 'Add', goal });
-            const character = characters.find(c => c.snowprintId === goal.character);
-            const mow = resolvedMows.find(m => m.snowprintId === goal.character);
+            const character = characters.find((c: ICharacter2) => c.snowprintId === goal.character);
+            const mow = resolvedMows.find((m: IMow2) => m.snowprintId === goal.character);
             enqueueSnackbar(`Goal for ${character?.shortName ?? mow?.name ?? goal.character} is added`, {
                 variant: 'success',
             });
@@ -107,7 +108,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             return [];
         }
 
-        return getEnumValues(Rank).filter(x => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
+        return getEnumValues(Rank).filter((x: Rank) => x > 0 && (!unit || x >= unit.rank) && x <= maxRank);
     }, [unit, maxRank]);
 
     useEffect(() => {
@@ -119,17 +120,20 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             case PersonalGoalType.Ascend: {
                 return ignoreRankRarity
                     ? [...characters, ...resolvedMows]
-                    : [...characters.filter(x => x.rank > Rank.Locked), ...resolvedMows.filter(x => x.unlocked)];
+                    : [
+                          ...characters.filter((x: ICharacter2) => x.rank > Rank.Locked),
+                          ...resolvedMows.filter((x: IMow2) => x.unlocked),
+                      ];
             }
             case PersonalGoalType.CharacterAbilities:
             case PersonalGoalType.UpgradeRank: {
-                return ignoreRankRarity ? characters : characters.filter(x => x.rank > Rank.Locked);
+                return ignoreRankRarity ? characters : characters.filter((x: ICharacter2) => x.rank > Rank.Locked);
             }
             case PersonalGoalType.Unlock: {
-                return characters.filter(x => x.rank === Rank.Locked);
+                return characters.filter((x: ICharacter2) => x.rank === Rank.Locked);
             }
             case PersonalGoalType.MowAbilities: {
-                return ignoreRankRarity ? resolvedMows : resolvedMows.filter(x => x.unlocked);
+                return ignoreRankRarity ? resolvedMows : resolvedMows.filter((x: IMow2) => x.unlocked);
             }
             default: {
                 return characters;
@@ -157,7 +161,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         })
-        .map(x => x.id);
+        .map((x: any) => x.id);
 
     const possibleMythicLocations =
         [PersonalGoalType.Ascend, PersonalGoalType.Unlock].includes(form.type) && !!unit
@@ -169,7 +173,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             const campaignProgress = campaignsProgress[location.campaign as keyof ICampaignsProgress];
             return location.nodeNumber <= campaignProgress;
         })
-        .map(x => x.id);
+        .map((x: any) => x.id);
 
     const handleGoalTypeChange = (event: SelectChangeEvent<number>) => {
         const newGoalType = +event.target.value;
@@ -244,6 +248,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 (form.firstAbilityLevel ?? 0) <= unit.primaryAbilityLevel &&
                 (form.secondAbilityLevel ?? 0) <= unit.secondaryAbilityLevel
             );
+        }
+
+        if (form.type === PersonalGoalType.Unlock) {
+            return unlockedLocations.length === 0 && (form.shardsPerToken ?? 0) <= 0;
         }
 
         if (form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit)) {
@@ -420,20 +428,17 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             </>
                         )}
 
-                        {form.type === PersonalGoalType.Ascend && !!unit && (
+                        {(form.type === PersonalGoalType.Ascend || form.type === PersonalGoalType.Unlock) && !!unit && (
                             <SetAscendGoal
+                                alliance={unit.alliance as Alliance}
                                 currentRarity={unit.rarity}
                                 targetRarity={form.targetRarity!}
                                 currentStars={unit.stars}
                                 targetStars={form.targetStars!}
-                                possibleLocations={possibleLocations}
-                                unlockedLocations={unlockedLocations}
-                                campaignsUsage={form.campaignsUsage!}
-                                possibleMythicLocations={possibleMythicLocations}
-                                unlockedMythicLocations={unlockedMythicLocations}
-                                mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 shardsPerToken={form.shardsPerToken!}
                                 mythicShardsPerToken={form.mythicShardsPerToken!}
+                                dailyRaidsPreferences={dailyRaidsPreferences}
+                                honorYourHeroesRewards={honorYourHeroesRewards}
                                 onChange={handleAscendGoalChanges}
                             />
                         )}
