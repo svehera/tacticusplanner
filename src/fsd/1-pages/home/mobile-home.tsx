@@ -48,7 +48,7 @@ export const MobileHome = () => {
                         <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                     </IconButton>
                     <Tooltip title="Sync">
-                        <SyncButton showText={false} variant={'text'} />
+                        <SyncButton showText={false} iconButton={true} />
                     </Tooltip>
 
                     <Tooltip title="Join Tacticus Planner community on Discord">

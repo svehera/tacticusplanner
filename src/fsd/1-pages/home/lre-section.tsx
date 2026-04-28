@@ -133,7 +133,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-col gap-3 px-4 py-3.5 text-sm">
+                <div className="flex flex-col gap-3 px-2 py-3.5 text-sm sm:px-4">
                     {lreShardProgress !== undefined &&
                         (lreShardProgress.addlShardsForNextMilestone === Infinity ? (
                             <div className="flex items-center gap-1.5 text-xs text-(--muted-fg)">
