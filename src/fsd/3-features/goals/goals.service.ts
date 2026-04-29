@@ -10,6 +10,7 @@ import { Alliance, Rank, Rarity, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-sh
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
+import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { OrbAscensionCalculator } from '@/fsd/4-entities/unit/unit-ascension.service';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
@@ -27,6 +28,7 @@ import {
     ICharacterUpgradeRankGoal,
     IEstimatedUpgrades,
     IGoalEstimate,
+    TypedGoalSelect,
 } from '@/fsd/3-features/goals/goals.models';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
@@ -93,6 +95,7 @@ export class GoalsService {
     public static buildGoalEstimates(
         estimatedUpgradesTotal: IEstimatedUpgrades,
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>,
+        upgradeMaterialGoals: IUpgradeMaterialGoal[],
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
 
         upgradeAbilities: Array<ICharacterUpgradeAbilities>,
@@ -101,7 +104,7 @@ export class GoalsService {
     ): IGoalEstimate[] {
         const result: IGoalEstimate[] = [];
 
-        for (const goal of [shardsGoals, upgradeRankOrMowGoals].flat()) {
+        for (const goal of [shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals].flat()) {
             const estimate: IGoalEstimate = {
                 goalId: goal.goalId,
                 energyTotal: 0,
@@ -137,7 +140,7 @@ export class GoalsService {
                     estimate.daysLeft = index + 1;
                 }
             }
-            if (goal.type === PersonalGoalType.UpgradeRank) {
+            if (goal.type === PersonalGoalType.UpgradeRank && !goal.manuallyFarmXp) {
                 const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                 const currentXp = this.currentCharacterXp(
                     goal.unitId,
@@ -184,7 +187,7 @@ export class GoalsService {
                 estimate.blocked = false;
             } else if (isGoalPriority) {
                 const available = blockedEntry.acquiredCount ?? 0;
-                const allGoals = [...shardsGoals, ...upgradeRankOrMowGoals];
+                const allGoals = [...shardsGoals, ...upgradeMaterialGoals, ...upgradeRankOrMowGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
 
                 const requiredForThisGoal = sum(
@@ -249,14 +252,16 @@ export class GoalsService {
         return result;
     }
 
+    // TODO - fix all callers
     static prepareGoals(
         goals: IPersonalGoal[],
         characters: IUnit[],
         onlySelected: boolean
     ): {
-        allGoals: CharacterRaidGoalSelect[];
+        allGoals: TypedGoalSelect[];
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
+        upgradeMaterialGoals: IUpgradeMaterialGoal[];
         upgradeAbilities: Array<ICharacterUpgradeAbilities>;
         ascendGoals: Array<ICharacterAscendGoal>;
     } {
@@ -270,7 +275,9 @@ export class GoalsService {
                         x.snowprintId === (resolvedChar?.snowprintId ?? '') ||
                         x.snowprintId === (resolvedMow?.snowprintId ?? '')
                 );
-                if (
+                if (g.type === PersonalGoalType.UpgradeMaterial) {
+                    return this.convertToTypedGoal(g);
+                } else if (
                     ![
                         PersonalGoalType.UpgradeRank,
                         PersonalGoalType.Ascend,
@@ -285,7 +292,7 @@ export class GoalsService {
                 }
                 return this.convertToTypedGoal(g, relatedCharacter);
             })
-            .filter(g => !!g) as CharacterRaidGoalSelect[];
+            .filter(g => !!g) as TypedGoalSelect[];
 
         const selectedGoals = onlySelected ? allGoals.filter(x => x.include) : allGoals;
 
@@ -296,6 +303,8 @@ export class GoalsService {
         const upgradeRankOrMowGoals = selectedGoals.filter(x =>
             [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(x.type)
         ) as Array<ICharacterUpgradeRankGoal>;
+
+        const upgradeMaterialGoals = selectedGoals.filter(x => x.type === PersonalGoalType.UpgradeMaterial);
 
         const upgradeAbilities = selectedGoals.filter(x =>
             [PersonalGoalType.CharacterAbilities].includes(x.type)
@@ -309,11 +318,26 @@ export class GoalsService {
             allGoals,
             shardsGoals,
             upgradeRankOrMowGoals,
+            upgradeMaterialGoals,
             upgradeAbilities,
             ascendGoals,
         };
     }
-    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): CharacterRaidGoalSelect | undefined {
+    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): TypedGoalSelect | undefined {
+        if (g.type === PersonalGoalType.UpgradeMaterial) {
+            if (g.upgradeMaterialId === undefined) return;
+            if ((g.upgradeMaterialQuantity ?? 0) < 1) return;
+            return {
+                type: PersonalGoalType.UpgradeMaterial,
+                priority: g.priority,
+                goalId: g.id,
+                include: true,
+                upgradeMaterialId: g.upgradeMaterialId,
+                quantity: g.upgradeMaterialQuantity,
+                notes: g.notes,
+            } as IUpgradeMaterialGoal;
+        }
+
         if (!unit) {
             return;
         }
@@ -361,6 +385,7 @@ export class GoalsService {
                     onslaughtMythicShards: g.mythicShardsPerToken ?? 1,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    farmType: g.shardFarmType ?? 'both',
                     ...base,
                 };
                 return result;
@@ -393,6 +418,7 @@ export class GoalsService {
                     onslaughtMythicShards: g.mythicShardsPerToken ?? 0,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
+                    farmType: g.shardFarmType ?? 'both',
                     ...base,
                 };
                 return result;
@@ -440,6 +466,7 @@ export class GoalsService {
                     level: unit.level,
                     xp: unit.xp,
                     rarity: unit.rarity,
+                    manuallyFarmXp: g.manuallyFarmXp ?? false,
                     ...base,
                 };
                 return result;
@@ -449,13 +476,13 @@ export class GoalsService {
         return;
     }
 
-    static convertToGenericGoal(goal: CharacterRaidGoalSelect): IPersonalGoal | undefined {
+    static convertToGenericGoal(goal: TypedGoalSelect): IPersonalGoal | undefined {
         const base: IPersonalGoal = {
             id: goal.goalId,
             type: goal.type,
             priority: goal.priority,
             dailyRaids: goal.include,
-            character: goal.unitId,
+            character: '',
             notes: goal.notes,
         };
         switch (goal.type) {
@@ -468,27 +495,32 @@ export class GoalsService {
             case PersonalGoalType.UpgradeRank: {
                 return {
                     ...base,
+                    character: goal.unitId,
                     startingRank: goal.rankStart,
                     startingRankPoint5: goal.rankStartPoint5,
                     targetRank: goal.rankEnd,
                     rankPoint5: goal.rankPoint5,
                     upgradesRarity: goal.upgradesRarity,
+                    manuallyFarmXp: goal.manuallyFarmXp,
                 };
             }
             case PersonalGoalType.Ascend: {
                 return {
                     ...base,
+                    character: goal.unitId,
                     targetRarity: goal.rarityEnd,
                     targetStars: goal.starsEnd,
                     campaignsUsage: goal.campaignsUsage,
                     mythicCampaignsUsage: goal.mythicCampaignsUsage,
                     shardsPerToken: goal.onslaughtShards,
                     mythicShardsPerToken: goal.onslaughtMythicShards,
+                    shardFarmType: goal.farmType,
                 };
             }
             case PersonalGoalType.MowAbilities: {
                 return {
                     ...base,
+                    character: goal.unitId,
                     firstAbilityLevel: goal.primaryEnd,
                     secondAbilityLevel: goal.secondaryEnd,
                     upgradesRarity: goal.upgradesRarity,
@@ -497,8 +529,16 @@ export class GoalsService {
             case PersonalGoalType.CharacterAbilities: {
                 return {
                     ...base,
+                    character: goal.unitId,
                     firstAbilityLevel: goal.activeEnd,
                     secondAbilityLevel: goal.passiveEnd,
+                };
+            }
+            case PersonalGoalType.UpgradeMaterial: {
+                return {
+                    ...base,
+                    upgradeMaterialId: goal.upgradeMaterialId,
+                    upgradeMaterialQuantity: goal.quantity,
                 };
             }
             default: {

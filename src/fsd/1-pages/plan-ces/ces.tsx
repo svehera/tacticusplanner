@@ -2,7 +2,7 @@
 import { orderBy } from 'lodash';
 import { useCallback, useContext, useMemo } from 'react';
 
-import { DailyRaidsStrategy } from '@/models/enums';
+import { DailyRaidsStrategy, PersonalGoalType } from '@/models/enums';
 import { ICustomDailyRaidsSettings } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
@@ -11,11 +11,12 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignImage, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
+import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
@@ -45,6 +46,20 @@ interface MaterialAvailability {
 interface MaterialNeedInfo {
     needed: number;
     relatedGoalIds: Set<string>;
+}
+
+function getNameAndIconForCharGoal(goal: CharacterRaidGoalSelect): { name: string; icon: string } {
+    return { name: goal.unitName, icon: goal.unitRoundIcon };
+}
+
+function getNameAndIconForMaterialGoal(goal: IUpgradeMaterialGoal): { name: string; icon: string } {
+    const material = FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId);
+    return { name: material?.label ?? goal.upgradeMaterialId, icon: material?.icon ?? '' };
+}
+
+function getNameAndIcon(goal: TypedGoalSelect): { name: string; icon: string } {
+    if (goal.type === PersonalGoalType.UpgradeMaterial) return getNameAndIconForMaterialGoal(goal);
+    return getNameAndIconForCharGoal(goal);
 }
 
 export const CEs = () => {
@@ -77,7 +92,7 @@ export const CEs = () => {
     );
 
     const handleGoalsSelectionChange = useCallback(
-        (selection: CharacterRaidGoalSelect[]) => {
+        (selection: TypedGoalSelect[]) => {
             dispatch.goals({
                 type: 'UpdateDailyRaids',
                 value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
@@ -131,7 +146,7 @@ export const CEs = () => {
     }, [upgradesEstimates.inProgressMaterials, upgradesEstimates.blockedMaterials]);
 
     const goalUnitById = useMemo(() => {
-        return new Map(allGoals.map(goal => [goal.goalId, { name: goal.unitName, icon: goal.unitRoundIcon }]));
+        return new Map(allGoals.map(goal => [goal.goalId, getNameAndIcon(goal)]));
     }, [allGoals]);
 
     const campaignPlans = useMemo(() => {

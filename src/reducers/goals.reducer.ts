@@ -1,4 +1,4 @@
-﻿import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+﻿import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { IPersonalGoal, SetStateAction } from '../models/interfaces';
@@ -6,7 +6,7 @@ import { IPersonalGoal, SetStateAction } from '../models/interfaces';
 export type GoalsAction =
     | {
           type: 'Update';
-          goal: CharacterRaidGoalSelect;
+          goal: TypedGoalSelect;
       }
     | {
           type: 'Swap';

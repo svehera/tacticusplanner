@@ -1,8 +1,9 @@
-﻿import React, { useMemo } from 'react';
+﻿import { MenuItem, Select } from '@mui/material';
+import React, { useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage } from 'src/models/enums';
-import { ICampaignBattleComposed, IPersonalGoal } from 'src/models/interfaces';
+import { ICampaignBattleComposed, IPersonalGoal, SHARD_FARM_TYPE_VALUES, ShardFarmType } from 'src/models/interfaces';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
@@ -22,7 +23,8 @@ interface Props {
     mythicCampaignsUsage: CampaignsLocationsUsage;
     shardsPerToken: number;
     mythicShardsPerToken: number;
-    onChange: (key: keyof IPersonalGoal, value: number) => void;
+    farmType: ShardFarmType;
+    onChange: (key: keyof IPersonalGoal, value: number | ShardFarmType) => void;
 }
 
 export const SetAscendGoal: React.FC<Props> = ({
@@ -34,6 +36,7 @@ export const SetAscendGoal: React.FC<Props> = ({
     possibleMythicLocations,
     shardsPerToken,
     mythicShardsPerToken,
+    farmType,
     onChange,
 }) => {
     const rarityValues = useMemo(() => {
@@ -122,6 +125,26 @@ export const SetAscendGoal: React.FC<Props> = ({
                     )}
                 </>
             )}
+
+            <div className="flex items-center gap-3">
+                <div className="flex-1">
+                    <label className="mb-1 block text-sm font-medium">Farm Type</label>
+                    <Select
+                        label="Farm Type"
+                        value={farmType}
+                        onChange={event => onChange('shardFarmType', event.target.value as ShardFarmType)}
+                        fullWidth>
+                        {SHARD_FARM_TYPE_VALUES.map(type => (
+                            <MenuItem key={type} value={type}>
+                                {type
+                                    .split('_')
+                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                                    .join(' ')}
+                            </MenuItem>
+                        ))}
+                    </Select>
+                </div>
+            </div>
         </>
     );
 };

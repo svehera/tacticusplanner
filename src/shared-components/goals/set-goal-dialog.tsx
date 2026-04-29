@@ -18,7 +18,7 @@ import { v4 } from 'uuid';
 
 import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
-import { ICampaignsProgress, IPersonalGoal } from 'src/models/interfaces';
+import { ICampaignsProgress, IPersonalGoal, ShardFarmType } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { PrioritySelect } from 'src/shared-components/goals/priority-select';
@@ -36,6 +36,7 @@ import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UnitTitle } from '@/fsd/4-entities/unit/ui/unit-title';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
+import { IMaterial, UpgradeMaterialAutocomplete, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
 import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.models';
@@ -59,12 +60,23 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     dailyRaids: true,
     rankPoint5: false,
     upgradesRarity: [],
+    upgradeMaterialId: undefined,
+    upgradeMaterialQuantity: 0,
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+
+    const allAvailableMaterials = useMemo(
+        () =>
+            Object.entries(UpgradesService.recipeDataByName)
+                .filter(object => !object[1].craftable)
+                .map(object => UpgradesService.getUpgradeMaterial(object[0]))
+                .filter(x => x !== undefined) as IMaterial[],
+        []
+    );
 
     const dispatch = useContext(DispatchContext);
 
@@ -80,11 +92,20 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (goal) {
             goal.dailyRaids = true;
             dispatch.goals({ type: 'Add', goal });
-            const character = characters.find(c => c.snowprintId === goal.character);
-            const mow = resolvedMows.find(m => m.snowprintId === goal.character);
-            enqueueSnackbar(`Goal for ${character?.shortName ?? mow?.name ?? goal.character} is added`, {
-                variant: 'success',
-            });
+            if (goal.type == PersonalGoalType.UpgradeMaterial) {
+                enqueueSnackbar(
+                    `Goal to farm ${goal.upgradeMaterialQuantity}x ${UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId ?? '(none)')?.material} is added`,
+                    {
+                        variant: 'success',
+                    }
+                );
+            } else {
+                const character = characters.find(c => c.snowprintId === goal.character);
+                const mow = resolvedMows.find(m => m.snowprintId === goal.character);
+                enqueueSnackbar(`Goal for ${character?.shortName ?? mow?.name ?? goal.character} is added`, {
+                    variant: 'success',
+                });
+            }
         }
         setOpenDialog(false);
         setUnit(undefined);
@@ -94,7 +115,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     };
 
-    const handleAscendGoalChanges = (key: keyof IPersonalGoal, value: number) => {
+    const handleAscendGoalChanges = (key: keyof IPersonalGoal, value: number | ShardFarmType) => {
         setForm(current => ({ ...current, [key]: value }));
     };
 
@@ -178,7 +199,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             (newGoalType === PersonalGoalType.Unlock && form.type !== PersonalGoalType.Unlock) ||
             (newGoalType !== PersonalGoalType.Unlock && form.type === PersonalGoalType.Unlock) ||
             (newGoalType === PersonalGoalType.MowAbilities && form.type !== PersonalGoalType.MowAbilities) ||
-            (newGoalType !== PersonalGoalType.MowAbilities && form.type === PersonalGoalType.MowAbilities)
+            (newGoalType !== PersonalGoalType.MowAbilities && form.type === PersonalGoalType.MowAbilities) ||
+            newGoalType === PersonalGoalType.UpgradeMaterial
         ) {
             setUnit(undefined);
         }
@@ -220,9 +242,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const isDisabled = () => {
-        if (!unit) {
-            return true;
-        }
+        if (unit === undefined && form.type !== PersonalGoalType.UpgradeMaterial) return true;
 
         if (form.type === PersonalGoalType.UpgradeRank && isCharacter(unit)) {
             const startRank =
@@ -232,6 +252,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
 
         if (form.type === PersonalGoalType.Ascend) {
+            if (unit === undefined) return true;
             return (
                 (unit.rarity === form.targetRarity && unit.stars === form.targetStars) ||
                 (hasNonMythicAscension() && unlockedLocations.length === 0 && form.shardsPerToken! <= 0) ||
@@ -250,6 +271,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             return (
                 (form.firstAbilityLevel ?? 0) <= unit.activeAbilityLevel &&
                 (form.secondAbilityLevel ?? 0) <= unit.passiveAbilityLevel
+            );
+        }
+
+        if (form.type === PersonalGoalType.UpgradeMaterial) {
+            return (
+                UpgradesService.getUpgradeMaterial(form.upgradeMaterialId ?? '(none)')?.material === undefined ||
+                form.upgradeMaterialQuantity === undefined ||
+                form.upgradeMaterialQuantity <= 0
             );
         }
 
@@ -300,6 +329,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     <MenuItem value={PersonalGoalType.Unlock}>Unlock</MenuItem>
                                     <MenuItem value={PersonalGoalType.MowAbilities}>MoW Abilities</MenuItem>
                                     <MenuItem value={PersonalGoalType.CharacterAbilities}>Character Abilities</MenuItem>
+                                    <MenuItem value={PersonalGoalType.UpgradeMaterial}>
+                                        Specific Upgrade Material
+                                    </MenuItem>
                                 </Select>
                             </FormControl>
                             <PrioritySelect
@@ -309,12 +341,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             />
                         </div>
 
-                        <UnitsAutocomplete
-                            // eslint-disable-next-line unicorn/no-null -- Autocomplete requires null
-                            unit={unit ?? null}
-                            options={allowedCharacters}
-                            onUnitChange={handleUnitChange}
-                        />
+                        <Conditional condition={form.type !== PersonalGoalType.UpgradeMaterial}>
+                            <UnitsAutocomplete
+                                // eslint-disable-next-line unicorn/no-null -- Autocomplete requires null
+                                unit={unit ?? null}
+                                options={allowedCharacters}
+                                onUnitChange={handleUnitChange}
+                            />
+                        </Conditional>
 
                         <Conditional condition={!!unit && form.type === PersonalGoalType.UpgradeRank}>
                             <RankGoalSelect
@@ -339,6 +373,17 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     }));
                                 }}
                             />
+                            <label className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    checked={form.manuallyFarmXp ?? false}
+                                    onChange={event => {
+                                        setForm(current => ({ ...current, manuallyFarmXp: event.target.checked }));
+                                    }}
+                                    className="h-4 w-4"
+                                />
+                                <span className="text-sm">Manually Farm XP</span>
+                            </label>
                         </Conditional>
 
                         {form.type === PersonalGoalType.MowAbilities && isMow(unit) && (
@@ -434,8 +479,38 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 shardsPerToken={form.shardsPerToken!}
                                 mythicShardsPerToken={form.mythicShardsPerToken!}
+                                farmType={form.shardFarmType ?? 'both'}
                                 onChange={handleAscendGoalChanges}
                             />
+                        )}
+
+                        {form.type === PersonalGoalType.UpgradeMaterial && (
+                            <div>
+                                <UpgradeMaterialAutocomplete
+                                    value={UpgradesService.getUpgradeMaterial(form.upgradeMaterialId ?? '(none)')}
+                                    options={allAvailableMaterials}
+                                    onChange={material =>
+                                        setForm(current => ({ ...current, upgradeMaterialId: material?.snowprintId }))
+                                    }
+                                />
+                                <div className="min-h-[16px]" />
+                                <NumberInput
+                                    fullWidth
+                                    label="Upgrade Material Quantity"
+                                    min={0}
+                                    value={form.upgradeMaterialQuantity ?? 0}
+                                    valueChange={quantity => {
+                                        setForm(current => ({
+                                            ...current,
+                                            upgradeMaterialQuantity: quantity,
+                                        }));
+                                    }}
+                                />
+                                <Conditional
+                                    condition={!form.upgradeMaterialId || (form.upgradeMaterialQuantity ?? 0) <= 0}>
+                                    <div className="text-sm text-red-600">Please select material and quantity</div>
+                                </Conditional>
+                            </div>
                         )}
 
                         <Conditional condition={!!unit && form.type === PersonalGoalType.Unlock}>
