@@ -1,37 +1,25 @@
-import { Tooltip } from '@mui/material';
-import { FC, lazy, Suspense, useState } from 'react';
+import { FC, lazy, memo, Suspense, useCallback, useState } from 'react';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid, IUpgradesRaidsDay } from './goals.models';
-import { getCharacterIcon, getDisplayName } from './raid-day-helpers';
-
-const buildCellTooltip = (raid: IUpgradeRaid) => {
-    const uniqueCharNames = [...new Set(raid.relatedCharacters.map(id => getDisplayName(id)))];
-    const visibleLocations = raid.raidLocations.slice(0, 4);
-    const overflow = raid.raidLocations.length - visibleLocations.length;
-    return (
-        <div className="flex flex-col gap-1 text-xs">
-            <div className="font-semibold">{raid.label}</div>
-            {uniqueCharNames.length > 0 && <div className="opacity-80">{uniqueCharNames.join(', ')}</div>}
-            {visibleLocations.length > 0 && (
-                <div className="mt-0.5 flex flex-col gap-0.5 border-t border-white/20 pt-0.5 opacity-80">
-                    {visibleLocations.map(loc => (
-                        <div key={loc.id}>
-                            {loc.campaign} {loc.nodeNumber} &times; {loc.raidsToPerform}
-                        </div>
-                    ))}
-                    {overflow > 0 && <div>+{overflow} more</div>}
-                </div>
-            )}
-        </div>
-    );
-};
+import { CharacterFilterRow } from './raids-day-view-filter';
+import { MaterialGrid } from './raids-day-view-grid';
+import { DayCardStats } from './raids-day-view-stats';
 
 const RaidMaterialDialog = lazy(() => import('./raid-material-dialog').then(m => ({ default: m.RaidMaterialDialog })));
-const RaidMaterialIcon = lazy(() => import('./raid-material-icon').then(m => ({ default: m.RaidMaterialIcon })));
+
+// Height of the card when expanded — tune this to fit the desired number of grid rows
+// 2px border (top+bottom) + 24px padding (p-3 top+bottom) + 103px header + 567px grid (5 rows × 102px + 4 gaps × 8px + 25px mt/border/pt overhead)
+const EXPANDED_CARD_HEIGHT = 700;
+
+// 0: pending+assigned, 1: pending+unassigned, 2: done (sufficient or all locations raided)
+const raidSortGroup = (raid: IUpgradeRaid) => {
+    const sufficient = Math.floor(raid.acquiredCount) >= raid.requiredCount;
+    const allRaided = raid.raidLocations.every(loc => loc.raidsAlreadyPerformed >= loc.raidsToPerform);
+    if (sufficient || allRaided) return 2;
+    return raid.relatedCharacters.length === 0 ? 1 : 0;
+};
 
 interface Props {
     day: IUpgradesRaidsDay;
@@ -39,15 +27,20 @@ interface Props {
     dayIndex: number;
     expanded: boolean;
     energyPerDay: number;
+    selectedCharId: string | undefined;
 }
 
-export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energyPerDay }) => {
+const RaidsDayViewComponent: FC<Props> = ({ day, title, dayIndex, expanded, energyPerDay, selectedCharId }) => {
     const [selectedRaid, setSelectedRaid] = useState<IUpgradeRaid | undefined>();
 
     const calendarDate = getEstimatedDate(dayIndex + 1);
+    const farmableRaids = day.raids
+        .filter(raid => raid.raidLocations.length > 0)
+        .toSorted((a, b) => raidSortGroup(a) - raidSortGroup(b));
+
     const seen = new Set<string>();
     const characterIds: string[] = [];
-    for (const raid of day.raids) {
+    for (const raid of farmableRaids) {
         if (raid.isFinished) continue;
         for (const charId of raid.relatedCharacters) {
             if (!seen.has(charId)) {
@@ -57,13 +50,15 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
         }
     }
 
-    const farmableRaids = day.raids.filter(raid => raid.raidLocations.length > 0);
-
-    const energyFillPct = energyPerDay > 0 ? Math.min((day.energyTotal / energyPerDay) * 100, 100) : 0;
-    const energyFull = energyFillPct >= 95;
+    const matchesFilter = useCallback(
+        (raid: IUpgradeRaid) => !selectedCharId || raid.relatedCharacters.includes(selectedCharId),
+        [selectedCharId]
+    );
 
     return (
-        <div className="flex min-w-[260px] flex-col rounded-xl border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-sm">
+        <div
+            className="flex max-w-[340px] min-w-[260px] flex-col rounded-xl border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-sm"
+            style={{ height: expanded ? `${EXPANDED_CARD_HEIGHT}px` : undefined }}>
             {/* Header - always visible */}
             <div className="flex flex-col gap-2">
                 {/* Title row */}
@@ -72,102 +67,19 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
                     <span className="text-xs opacity-60">{calendarDate}</span>
                 </div>
 
-                {/* Stats chips */}
-                <div className="flex items-center gap-1.5">
-                    <span className="flex items-center gap-1 rounded-full bg-(--secondary) px-2 py-0.5 text-xs">
-                        <MiscIcon icon="energy" height={12} width={12} />
-                        <span>{day.energyTotal}</span>
-                        {energyPerDay > 0 && <span className="opacity-50">/{energyPerDay}</span>}
-                    </span>
-                    <span className="flex items-center gap-1 rounded-full bg-(--secondary) px-2 py-0.5 text-xs">
-                        <MiscIcon icon="raidTicket" height={12} width={12} />
-                        {day.raidsTotal}
-                    </span>
-                </div>
+                <DayCardStats energyTotal={day.energyTotal} raidsTotal={day.raidsTotal} energyPerDay={energyPerDay} />
 
-                {/* Energy fill bar */}
-                {energyPerDay > 0 && (
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-(--secondary)">
-                        <div
-                            className={`h-full rounded-full transition-all ${energyFull ? 'bg-green-500' : 'bg-amber-400'}`}
-                            style={{ width: `${energyFillPct}%` }}
-                        />
-                    </div>
-                )}
-
-                {/* Character icons */}
-                {characterIds.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                        {characterIds.map(id => (
-                            <AccessibleTooltip key={id} title={getDisplayName(id)}>
-                                <span>
-                                    <UnitShardIcon icon={getCharacterIcon(id)} height={24} width={24} />
-                                </span>
-                            </AccessibleTooltip>
-                        ))}
-                    </div>
-                )}
+                {characterIds.length > 0 && <CharacterFilterRow characterIds={characterIds} />}
             </div>
 
-            {/* Expanded: material icon grid with count badge overlay and character avatar stack */}
             {expanded && farmableRaids.length > 0 && (
-                <Suspense fallback={undefined}>
-                    <div className="mt-3 grid grid-cols-3 gap-2 border-t border-(--card-border) pt-3">
-                        {farmableRaids.map((raid, index) => {
-                            const uniqueIds = [...new Set(raid.relatedCharacters)];
-                            const shown = uniqueIds.slice(0, 2);
-                            const overflow = uniqueIds.length - shown.length;
-                            const sufficient = Math.floor(raid.acquiredCount) >= raid.requiredCount;
-                            return (
-                                <Tooltip
-                                    key={index}
-                                    title={buildCellTooltip(raid)}
-                                    arrow
-                                    placement="top"
-                                    enterDelay={500}
-                                    disableTouchListener>
-                                    <button
-                                        type="button"
-                                        aria-label={raid.label}
-                                        onClick={() => setSelectedRaid(raid)}
-                                        className="flex flex-col items-center gap-2 rounded-lg border border-transparent p-2 transition-all hover:border-(--card-border) hover:bg-(--secondary)">
-                                        {/* Icon with count badge overlaid */}
-                                        <div className="relative pb-2">
-                                            <RaidMaterialIcon raid={raid} size={40} showTooltip={false} />
-                                            <span
-                                                className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 text-[9px] leading-none font-bold whitespace-nowrap tabular-nums shadow-sm ${
-                                                    sufficient
-                                                        ? 'bg-green-500 text-white'
-                                                        : 'bg-(--card-fg)/80 text-(--card-bg)'
-                                                }`}>
-                                                {Math.floor(raid.acquiredCount)}/{raid.requiredCount}
-                                            </span>
-                                        </div>
-                                        {/* Overlapping avatar stack */}
-                                        {uniqueIds.length > 0 && (
-                                            <div className="flex items-center">
-                                                {shown.map((id, index_) => (
-                                                    <div key={id} className={index_ > 0 ? '-ml-2' : ''}>
-                                                        <UnitShardIcon
-                                                            icon={getCharacterIcon(id)}
-                                                            height={24}
-                                                            width={24}
-                                                        />
-                                                    </div>
-                                                ))}
-                                                {overflow > 0 && (
-                                                    <span className="ml-1 text-[10px] leading-none opacity-50">
-                                                        +{overflow}
-                                                    </span>
-                                                )}
-                                            </div>
-                                        )}
-                                    </button>
-                                </Tooltip>
-                            );
-                        })}
-                    </div>
-                </Suspense>
+                <div className="min-h-0 flex-1 overflow-y-auto">
+                    <MaterialGrid
+                        farmableRaids={farmableRaids}
+                        matchesFilter={matchesFilter}
+                        onSelectRaid={setSelectedRaid}
+                    />
+                </div>
             )}
 
             {selectedRaid && (
@@ -178,3 +90,5 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
         </div>
     );
 };
+
+export const RaidsDayView = memo(RaidsDayViewComponent);
