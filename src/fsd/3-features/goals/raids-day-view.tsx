@@ -28,9 +28,18 @@ interface Props {
     expanded: boolean;
     energyPerDay: number;
     selectedCharId: string | undefined;
+    gridVisible: boolean;
 }
 
-const RaidsDayViewComponent: FC<Props> = ({ day, title, dayIndex, expanded, energyPerDay, selectedCharId }) => {
+const RaidsDayViewComponent: FC<Props> = ({
+    day,
+    title,
+    dayIndex,
+    expanded,
+    energyPerDay,
+    selectedCharId,
+    gridVisible,
+}) => {
     const [selectedRaid, setSelectedRaid] = useState<IUpgradeRaid | undefined>();
 
     const calendarDate = getEstimatedDate(dayIndex + 1);
@@ -72,7 +81,7 @@ const RaidsDayViewComponent: FC<Props> = ({ day, title, dayIndex, expanded, ener
                 {characterIds.length > 0 && <CharacterFilterRow characterIds={characterIds} />}
             </div>
 
-            {expanded && farmableRaids.length > 0 && (
+            {expanded && gridVisible && farmableRaids.length > 0 && (
                 <div className="min-h-0 flex-1 overflow-y-auto">
                     <MaterialGrid
                         farmableRaids={farmableRaids}

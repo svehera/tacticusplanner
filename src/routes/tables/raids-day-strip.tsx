@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { FC, lazy, Suspense, useCallback, useMemo, useState } from 'react';
+import { FC, lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useDragScroll } from '@/fsd/5-shared/lib/use-drag-scroll';
 
@@ -29,6 +29,9 @@ export const DayStrip: FC<DayStripProps> = ({
     onShowAll,
 }) => {
     const [selectedCharId, setSelectedCharId] = useState<string | undefined>();
+
+    // Seed first 3 so they render immediately on expand without waiting for the observer
+    const [visibleSet, setVisibleSet] = useState<Set<number>>(() => new Set([0, 1, 2]));
 
     const {
         scrollRef,
@@ -62,8 +65,45 @@ export const DayStrip: FC<DayStripProps> = ({
         []
     );
 
+    useEffect(() => {
+        if (!allDaysExpanded) {
+            setVisibleSet(new Set([0, 1, 2]));
+            return;
+        }
+        const container = scrollRef.current;
+        if (!container) return;
+
+        const observer = new IntersectionObserver(
+            entries => {
+                setVisibleSet(previous => {
+                    const next = new Set(previous);
+                    for (const entry of entries) {
+                        if (entry.isIntersecting) {
+                            next.add(Number(entry.target.dataset.dayIndex));
+                        }
+                        // Never remove — keep grid mounted once visible
+                    }
+                    return next;
+                });
+            },
+            {
+                root: container,
+                rootMargin: '0px 340px 0px 340px', // pre-render ~1 card width ahead on each side
+                threshold: 0,
+            }
+        );
+
+        for (const card of container.querySelectorAll('[data-day-index]')) {
+            observer.observe(card);
+        }
+
+        return () => observer.disconnect();
+    }, [allDaysExpanded, days.length, scrollRef]);
+
     const navigateToDay = useCallback(
         (dayIndex: number, inline: ScrollLogicalPosition = 'start') => {
+            // Pre-mount target grid before scrolling so content is ready on arrival
+            setVisibleSet(previous => new Set([...previous, dayIndex]));
             const doScroll = () => {
                 const card = scrollRef.current?.querySelector(`[data-day-index="${dayIndex}"]`);
                 card?.scrollIntoView({ behavior: 'smooth', inline, block: 'nearest' });
@@ -112,6 +152,7 @@ export const DayStrip: FC<DayStripProps> = ({
                                     expanded={allDaysExpanded}
                                     energyPerDay={energyPerDay}
                                     selectedCharId={selectedCharId}
+                                    gridVisible={visibleSet.has(index)}
                                 />
                             </div>
                         ))}

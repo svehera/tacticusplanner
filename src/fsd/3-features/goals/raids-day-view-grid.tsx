@@ -1,6 +1,6 @@
-import { Tooltip } from '@mui/material';
 import { FC, Fragment, lazy, memo, Suspense } from 'react';
 
+import { LazyTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid } from './goals.models';
@@ -68,12 +68,7 @@ const MaterialGridComponent: FC<MaterialGridProps> = ({ farmableRaids, matchesFi
                         <Fragment key={index}>
                             {hasUnassignedGroup && index === firstUnassignedIndex && gridSeparator('No goal')}
                             {hasDoneGroup && index === firstDoneIndex && gridSeparator('Raided')}
-                            <Tooltip
-                                title={buildCellTooltip(raid)}
-                                arrow
-                                placement="top"
-                                enterDelay={500}
-                                disableTouchListener>
+                            <LazyTooltip title={buildCellTooltip(raid)}>
                                 <button
                                     type="button"
                                     aria-label={raid.label}
@@ -107,7 +102,7 @@ const MaterialGridComponent: FC<MaterialGridProps> = ({ farmableRaids, matchesFi
                                         <span className="text-[10px] leading-none opacity-30">—</span>
                                     )}
                                 </button>
-                            </Tooltip>
+                            </LazyTooltip>
                         </Fragment>
                     );
                 })}
