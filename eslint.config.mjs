@@ -36,6 +36,8 @@ export default defineConfig([
         'package-lock.json',
         'vite-env.d.ts',
         '**/analytics__google-analytics.d.ts',
+        'bun.lock',
+        '*.gen.ts',
     ]),
     {
         ...eslintPluginUnicorn.configs.recommended,
