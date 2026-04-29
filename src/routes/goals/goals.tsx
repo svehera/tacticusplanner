@@ -546,7 +546,7 @@ export const Goals = () => {
 
                         {viewPreferences.goalsTableView && (
                             <GoalsTable
-                                rows={sortedUpgrades} // Filter out material goals for this section
+                                rows={sortedUpgrades}
                                 allGoals={allGoals} // Pass the global flattened list here
                                 estimate={mergedGoalEstimates} // Pass the merged estimates to the table
                                 menuItemSelect={handleMenuItemSelect}

@@ -503,7 +503,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     valueChange={quantity => {
                                         setForm(current => ({
                                             ...current,
-                                            upgradeMaterialQuantity: quantity,
+                                            upgradeMaterialQuantity: Math.max(1, quantity),
                                         }));
                                     }}
                                 />

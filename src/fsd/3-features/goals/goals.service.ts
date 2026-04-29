@@ -489,6 +489,7 @@ export class GoalsService {
             case PersonalGoalType.Unlock: {
                 return {
                     ...base,
+                    character: goal.unitId,
                     campaignsUsage: goal.campaignsUsage,
                 };
             }

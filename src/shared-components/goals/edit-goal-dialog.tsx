@@ -386,7 +386,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                             valueChange={quantity => {
                                 setForm(current => ({
                                     ...current,
-                                    quantity: quantity,
+                                    quantity: Math.max(1, quantity),
                                 }));
                             }}
                         />
