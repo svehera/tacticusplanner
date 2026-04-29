@@ -142,8 +142,7 @@ export const DayStrip: FC<DayStripProps> = ({
             )}
             <div
                 ref={scrollRef}
-                className="w-full overflow-x-auto overflow-y-hidden"
-                style={{ cursor: 'grab' }}
+                className="w-full cursor-grab overflow-x-auto overflow-y-hidden"
                 onMouseDown={onMouseDown}
                 onMouseMove={onMouseMove}
                 onMouseUp={onMouseUp}

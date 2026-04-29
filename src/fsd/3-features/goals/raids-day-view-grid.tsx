@@ -51,6 +51,7 @@ const isDone = (raid: IUpgradeRaid) =>
 const MaterialGridComponent: FC<MaterialGridProps> = ({ farmableRaids, matchesFilter, onSelectRaid }) => {
     const firstUnassignedIndex = farmableRaids.findIndex(r => r.relatedCharacters.length === 0 && !isDone(r));
     const firstDoneIndex = farmableRaids.findIndex(r => isDone(r));
+    // > 0 intentionally excludes both "not found" (-1) and "first item" (0) — no separator needed in either case
     const hasUnassignedGroup = firstUnassignedIndex > 0;
     const hasDoneGroup = firstDoneIndex > 0;
 
@@ -65,7 +66,7 @@ const MaterialGridComponent: FC<MaterialGridProps> = ({ farmableRaids, matchesFi
                     const done = isDone(raid);
                     const cellOpacity = matchesFilter(raid) ? (done ? 'opacity-50' : '') : 'opacity-30';
                     return (
-                        <Fragment key={index}>
+                        <Fragment key={raid.id}>
                             {hasUnassignedGroup && index === firstUnassignedIndex && gridSeparator('No goal')}
                             {hasDoneGroup && index === firstDoneIndex && gridSeparator('Raided')}
                             <LazyTooltip title={buildCellTooltip(raid)}>

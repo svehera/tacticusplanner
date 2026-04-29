@@ -53,7 +53,7 @@ export const MaterialsSectionContent: FC<MaterialsSectionContentProps> = ({
         <Suspense fallback={undefined}>
             <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto py-2 min-[354px]:px-2">
                 {materials.map((material, index) => (
-                    <div key={index} ref={cardRefCallback ? cardRefCallback(index) : undefined}>
+                    <div key={material.id} ref={cardRefCallback ? cardRefCallback(index) : undefined}>
                         <RaidUpgradeMaterialCard upgradeEstimate={material} showAdditionalInfo={showAdditionalInfo} />
                     </div>
                 ))}

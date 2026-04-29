@@ -10,11 +10,14 @@ interface CharacterFilterRowProps {
 
 const CharacterFilterRowComponent: FC<CharacterFilterRowProps> = ({ characterIds }) => (
     <div className="flex flex-wrap gap-1">
-        {characterIds.map(id => (
-            <div key={id} title={getDisplayName(id)} role="img" aria-label={getDisplayName(id)}>
-                <UnitShardIcon icon={getCharacterIcon(id)} height={24} width={24} />
-            </div>
-        ))}
+        {characterIds.map(id => {
+            const name = getDisplayName(id);
+            return (
+                <div key={id} title={name} role="img" aria-label={name}>
+                    <UnitShardIcon icon={getCharacterIcon(id)} height={24} width={24} />
+                </div>
+            );
+        })}
     </div>
 );
 
