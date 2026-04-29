@@ -19,6 +19,7 @@ import {
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
 } from '@/fsd/4-entities/goal';
+import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 import {
@@ -42,6 +43,8 @@ export type CharacterRaidGoalSelect =
     | ICharacterUnlockGoal
     | ICharacterUpgradeMow
     | ICharacterUpgradeAbilities;
+
+export type TypedGoalSelect = CharacterRaidGoalSelect | IUpgradeMaterialGoal;
 
 /**
  * Personal goal payload for upgrading a character's abilities.
@@ -198,6 +201,7 @@ export interface IUnitUpgrade {
     goalId: string;
     unitId: string;
     label: string;
+    upgradeMaterials: Record<string, number>;
     upgradeRanks: IUnitUpgradeRank[];
     upgradeShards: IUnitShards | undefined;
     baseUpgradesTotal: Record<string, number>;

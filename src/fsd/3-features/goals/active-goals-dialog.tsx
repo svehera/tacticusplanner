@@ -1,35 +1,31 @@
-﻿import TrackChangesIcon from '@mui/icons-material/TrackChanges';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useEffect, useMemo, useState } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { PersonalGoalType } from 'src/models/enums';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 
-// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { CharactersRaidsGoal } from '@/fsd/3-features/goals/characters-raids-goal';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { RaidsGoal } from '@/fsd/3-features/goals/raids-goal';
 
 interface Props {
-    goals: CharacterRaidGoalSelect[];
+    goals: TypedGoalSelect[];
     units: IUnit[];
-    onGoalsSelectChange: (chars: CharacterRaidGoalSelect[]) => void;
+    onGoalsSelectChange: (chars: TypedGoalSelect[]) => void;
 }
 
 export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelectChange }) => {
     const [openGoals, setOpenGoals] = useState<boolean>(false);
-    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect>();
-    const [editUnit, setEditUnit] = useState<IUnit>();
+    const [editGoal, setEditGoal] = useState<TypedGoalSelect>();
+    const [editUnit, setEditUnit] = useState<IUnit | undefined>();
 
-    const [currentGoalsSelect, setCurrentGoalsSelect] = useState<CharacterRaidGoalSelect[]>(goals);
+    const [currentGoalsSelect, setCurrentGoalsSelect] = useState<TypedGoalSelect[]>(goals);
 
-    // Sync currentGoalsSelect with goals prop when goals change while dialog is open
     useEffect(() => {
         if (openGoals) {
             setCurrentGoalsSelect(previousGoals =>
@@ -41,6 +37,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
             );
         }
     }, [goals, openGoals]);
+
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGoalsSelect(value => value.map(x => ({ ...x, include: event.target.checked })));
     };
@@ -56,14 +53,13 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
 
     const handleGoalEdit = (goalId: string) => {
         const goalToEdit = goals.find(x => x.goalId === goalId);
-        // August 2025: we're transitioning between IDs for characters. Previously be used a short version
-        // of the character's name (i.e. Ragnar, Darkstrider). Now we're moving to IDs from snowprints internal data (datamined).
-        // During this transition, it's possibly for legacy goals to have legacy IDs, which are then overwritten with
-        // Snowprint IDs. For this reason, we cater to both IDs for lookup here, with the expectation we can consolidate
-        // on snowprintIDs down the track.
-        const characterToEdit = units.find(x => x.id === goalToEdit?.unitId || x.snowprintId === goalToEdit?.unitId);
+        if (!goalToEdit) return;
 
-        if (goalToEdit && characterToEdit) {
+        const unitId = goalToEdit.type === PersonalGoalType.UpgradeMaterial ? undefined : goalToEdit.unitId;
+        const characterToEdit =
+            unitId === undefined ? undefined : units.find(x => x.id === unitId || x.snowprintId === unitId);
+
+        if (goalToEdit.type === PersonalGoalType.UpgradeMaterial || characterToEdit) {
             setEditGoal(goalToEdit);
             setEditUnit(characterToEdit);
         }
@@ -81,6 +77,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         return currentSelected !== initialSelected;
     }, [currentGoalsSelect, goals]);
 
+    const upgradeMaterialGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeMaterial);
     const upgradeRankGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeRank);
     const upgradeMowGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.MowAbilities);
     const ascendGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.Ascend);
@@ -89,12 +86,12 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     const selectedGoalsCount = goals.filter(x => x.include).length;
     const currentSelectedGoalsCount = currentGoalsSelect.filter(x => x.include).length;
 
-    const renderGoalsGroup = (name: string, goals: CharacterRaidGoalSelect[]) => {
+    const renderGoalsGroup = (name: string, goals: TypedGoalSelect[]) => {
         return (
             <div className="flex-box column gap5 start">
                 <h5 className="mt-0">{name}</h5>
                 {goals.map(goal => (
-                    <CharactersRaidsGoal
+                    <RaidsGoal
                         key={goal.goalId}
                         goal={goal}
                         onSelectChange={handleChildChange}
@@ -154,6 +151,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                         {upgradeMowGoals.length > 0 && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
                         {ascendGoals.length > 0 && renderGoalsGroup('Ascend/Promote', ascendGoals)}
                         {unlockGoals.length > 0 && renderGoalsGroup('Unlock', unlockGoals)}
+                        {upgradeMaterialGoals.length > 0 && renderGoalsGroup('Upgrade Material', upgradeMaterialGoals)}
                     </div>
                 </DialogContent>
 
@@ -167,16 +165,17 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                 </DialogActions>
             </Dialog>
 
-            {editGoal && editUnit && (
-                <EditGoalDialog
-                    isOpen={true}
-                    goal={editGoal}
-                    unit={editUnit}
-                    onClose={() => {
-                        setEditGoal(undefined);
-                    }}
-                />
-            )}
+            {editGoal !== undefined &&
+                (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (
+                    <EditGoalDialog
+                        isOpen={true}
+                        goal={editGoal}
+                        unit={editUnit}
+                        onClose={() => {
+                            setEditGoal(undefined);
+                        }}
+                    />
+                )}
         </>
     );
 };

@@ -26,13 +26,15 @@ import { RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, StarsIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
+
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import {
-    CharacterRaidGoalSelect,
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
     IGoalEstimate,
+    TypedGoalSelect,
 } from '@/fsd/3-features/goals/goals.models';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { XpTooltip } from '@/fsd/3-features/goals/xp-tooltip';
@@ -43,8 +45,8 @@ import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
 interface Props {
-    rows: CharacterRaidGoalSelect[]; // The filtered subset (e.g., just Abilities)
-    allGoals: CharacterRaidGoalSelect[]; // The full list for global priority checks
+    rows: TypedGoalSelect[]; // The filtered subset (e.g., just Abilities)
+    allGoals: TypedGoalSelect[]; // The full list for global priority checks
     estimate: IGoalEstimate[];
     goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
@@ -87,7 +89,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
         );
     };
 
-    const getGoalInfo = (goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate) => {
+    const getGoalInfo = (goal: TypedGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
                 const isSameRarity = goal.rarityStart === goal.rarityEnd;
@@ -190,6 +192,15 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     </div>
                 );
             }
+
+            case PersonalGoalType.UpgradeMaterial: {
+                return (
+                    <div className="flex-box between">
+                        <div className="flex-box gap-[3px]">{goal.quantity}</div>
+                    </div>
+                );
+            }
+
             case PersonalGoalType.MowAbilities: {
                 const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
@@ -291,12 +302,12 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
         }
     };
     const orderedAllGoals = useMemo(() => allGoals.toSorted((a, b) => a.priority - b.priority), [allGoals]);
-    const columnDefs = useMemo<Array<ColDef<CharacterRaidGoalSelect>>>(() => {
+    const columnDefs = useMemo<Array<ColDef<TypedGoalSelect>>>(() => {
         return [
             {
                 field: 'priority',
                 maxWidth: 100,
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     if (!data) return;
 
@@ -331,7 +342,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             },
             {
                 headerName: 'Actions',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     if (data) {
                         return (
@@ -351,9 +362,24 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             {
                 field: 'unitIcon',
                 headerName: 'Unit',
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     if (data) {
+                        if (data.type === PersonalGoalType.UpgradeMaterial) {
+                            const mat = UpgradesService.getUpgradeMaterial(data.upgradeMaterialId);
+                            if (mat !== undefined) {
+                                return (
+                                    <UpgradeImage
+                                        material={mat.snowprintId}
+                                        iconPath={mat.icon ?? ''}
+                                        size={30}
+                                        rarity={RarityMapper.stringToRarityString(mat.rarity)}
+                                        tooltip={mat?.label ?? ''}
+                                    />
+                                );
+                            }
+                            return '(unknown material goal)';
+                        }
                         return (
                             <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
                         );
@@ -366,7 +392,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 headerName: 'Status',
                 autoHeight: true,
                 width: 60,
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (data && goalEstimate) {
@@ -381,7 +407,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 headerName: 'Details',
                 autoHeight: true,
                 width: 300,
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
                     if (data && goalEstimate) {
@@ -392,7 +418,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             {
                 headerName: 'Estimated Date',
                 // valueGetter handles the underlying data for sorting, filtering, and clipboard
-                valueGetter: (params: ValueGetterParams<CharacterRaidGoalSelect>) => {
+                valueGetter: (params: ValueGetterParams<TypedGoalSelect>) => {
                     const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
                     // Only return blank if both estimates are missing/undefined
                     if (
@@ -416,7 +442,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     return '';
                 },
                 // cellRenderer handles the actual visual UI
-                cellRenderer: (params: ICellRendererParams<CharacterRaidGoalSelect>) => {
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
                     // Remove early guard !goalEstimate.daysLeft to allow XP-only rendering
                     if (!goalEstimate) return;

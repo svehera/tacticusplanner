@@ -1,26 +1,34 @@
-﻿import { ArrowForward, Edit } from '@mui/icons-material';
+﻿/* eslint-disable import-x/no-internal-modules */
+import { ArrowForward, Edit } from '@mui/icons-material';
 import { Checkbox, FormControlLabel, IconButton } from '@mui/material';
 import React from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { rarityToStars } from 'src/models/constants';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { PersonalGoalType } from 'src/models/enums';
 
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RankIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
+
+import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
 interface Props {
-    goal: CharacterRaidGoalSelect;
+    goal: TypedGoalSelect;
     onSelectChange: (goalId: string, selected: boolean) => void;
     onGoalEdit: () => void;
 }
 
-export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit }) => {
-    const getGoalInfo = (goal: CharacterRaidGoalSelect) => {
+export const RaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit }) => {
+    const material =
+        goal.type === PersonalGoalType.UpgradeMaterial
+            ? UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId ?? '')
+            : undefined;
+
+    const tooltopText = goal.type === PersonalGoalType.UpgradeMaterial ? material?.label : goal.unitName;
+
+    const getGoalInfo = (goal: TypedGoalSelect) => {
         switch (goal.type) {
             case PersonalGoalType.Ascend: {
                 const isSameRarity = goal.rarityStart === goal.rarityEnd;
@@ -98,6 +106,17 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
             case PersonalGoalType.Unlock: {
                 return <span>Unlock</span>;
             }
+            case PersonalGoalType.UpgradeMaterial: {
+                return (
+                    <AccessibleTooltip title={'Upgrade material goal'}>
+                        <div className="flex-box gap5">
+                            <span>
+                                {goal.quantity}× {material?.label ?? ''}
+                            </span>
+                        </div>
+                    </AccessibleTooltip>
+                );
+            }
         }
     };
 
@@ -109,9 +128,19 @@ export const CharactersRaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onG
                     <IconButton onClick={onGoalEdit}>
                         <Edit fontSize="small" />
                     </IconButton>
-                    <AccessibleTooltip title={goal.unitName}>
+                    <AccessibleTooltip title={tooltopText}>
                         <div>
-                            <UnitShardIcon icon={goal.unitRoundIcon} name={goal.unitName} />
+                            {goal.type === PersonalGoalType.UpgradeMaterial && (
+                                <UpgradeImage
+                                    material={material!.snowprintId}
+                                    iconPath={material!.icon!}
+                                    rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
+                                    size={40}
+                                />
+                            )}
+                            {goal.type !== PersonalGoalType.UpgradeMaterial && (
+                                <UnitShardIcon icon={goal.unitRoundIcon} name={goal.unitName} />
+                            )}
                         </div>
                     </AccessibleTooltip>
                     {getGoalInfo(goal)}

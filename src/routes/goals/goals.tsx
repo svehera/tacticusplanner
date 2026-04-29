@@ -35,7 +35,7 @@ import { IUnit } from '@/fsd/4-entities/unit';
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
+import { IGoalEstimate, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
@@ -83,8 +83,8 @@ export const Goals = () => {
         () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
         [unresolvedCharacters]
     );
-    const [editGoal, setEditGoal] = useState<CharacterRaidGoalSelect>();
-    const [editUnit, setEditUnit] = useState<IUnit>(characters[0]);
+    const [editGoal, setEditGoal] = useState<TypedGoalSelect>();
+    const [editUnit, setEditUnit] = useState<IUnit | undefined>(characters[0]);
     const [openSettings, setOpenSettings] = useState<boolean>(false);
     const [resourcesExpanded, setResourcesExpanded] = useState(false);
     const [sectionsExpanded, setSectionsExpanded] = useState({ upgrades: true, shards: true, abilities: true });
@@ -104,14 +104,14 @@ export const Goals = () => {
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, ascendGoals, upgradeAbilities } = useMemo(
-        () => GoalsService.prepareGoals(goals, units, false),
-        [goals, units]
-    );
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, ascendGoals, upgradeAbilities } =
+        useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
 
     // Add these sorts to ensure the UI matches the global priority order
     const sortedShards = shardsGoals.toSorted((a, b) => a.priority - b.priority);
-    const sortedUpgrades = upgradeRankOrMowGoals.toSorted((a, b) => a.priority - b.priority);
+    const sortedUpgrades = [upgradeMaterialGoals, upgradeRankOrMowGoals]
+        .flat()
+        .toSorted((a, b) => a.priority - b.priority);
     const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
 
     const onslaughtTokensToday = useMemo(
@@ -132,7 +132,7 @@ export const Goals = () => {
         },
         characters,
         resolvedMows,
-        ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+        ...[upgradeMaterialGoals, upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
     const energyAlreadySpent = useMemo(() => {
@@ -193,15 +193,13 @@ export const Goals = () => {
 
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
-            const relatedUnit = [...characters, ...resolvedMows].find(
-                // August 2025: we're transitioning between IDs for characters. Previously be used a short version
-                // of the character's name (i.e. Ragnar, Darkstrider). Now we're moving to IDs from snowprints internal data (datamined).
-                // During this transition, it's possibly for legacy goals to have legacy IDs, which are then overwritten with
-                // Snowprint IDs. For this reason, we cater to both IDs for lookup here, with the expectation we can consolidate
-                // on snowprintIDs down the track.
-                x => x.snowprintId === goal?.unitId || x.id === goal?.unitId
-            );
-            if (relatedUnit && goal) {
+            const relatedUnit =
+                goal?.type === PersonalGoalType.UpgradeMaterial
+                    ? undefined
+                    : [...characters, ...resolvedMows].find(
+                          x => x.snowprintId === goal?.unitId || x.id === goal?.unitId
+                      );
+            if (goal && (goal.type === PersonalGoalType.UpgradeMaterial || relatedUnit !== undefined)) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
             }
@@ -234,6 +232,7 @@ export const Goals = () => {
             GoalsService.buildGoalEstimates(
                 estimatedUpgradesTotal,
                 shardsGoals,
+                upgradeMaterialGoals,
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
                 characters,
@@ -321,7 +320,7 @@ export const Goals = () => {
         dispatch.goals({ type: 'DeleteAll' });
     };
 
-    const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
+    const handleGoalsSelectionChange = (selection: TypedGoalSelect[]) => {
         dispatch.goals({
             type: 'UpdateDailyRaids',
             value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
@@ -491,7 +490,7 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
-            {upgradeRankOrMowGoals.length > 0 && (
+            {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
                 <Accordion
                     expanded={sectionsExpanded.upgrades}
                     onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
@@ -517,7 +516,6 @@ export const Goals = () => {
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedUpgrades.map(goal => {
-                                    // Search the NEW merged collection for this goal's estimate
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
 
                                     return (
@@ -668,7 +666,7 @@ export const Goals = () => {
                         {viewPreferences.goalsTableView && (
                             <GoalsTable
                                 rows={sortedAbilities}
-                                allGoals={allGoals} // Pass the global flattened list here
+                                allGoals={allGoals.filter(g => g.type !== PersonalGoalType.UpgradeMaterial)}
                                 estimate={mergedGoalEstimates}
                                 menuItemSelect={handleMenuItemSelect}
                                 goalsColorCoding={viewPreferences.goalColorMode}
@@ -677,16 +675,17 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             )}
-            {!!editGoal && !!editUnit && (
-                <EditGoalDialog
-                    isOpen={true}
-                    goal={editGoal}
-                    unit={editUnit}
-                    onClose={() => {
-                        setEditGoal(undefined);
-                    }}
-                />
-            )}
+            {editGoal !== undefined &&
+                (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (
+                    <EditGoalDialog
+                        isOpen={true}
+                        goal={editGoal}
+                        unit={editUnit}
+                        onClose={() => {
+                            setEditGoal(undefined);
+                        }}
+                    />
+                )}
         </div>
     );
 };

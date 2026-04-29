@@ -1,3 +1,5 @@
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import Accordion from '@mui/material/Accordion';
 import AccordionDetails from '@mui/material/AccordionDetails';
@@ -5,11 +7,9 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { CampaignImage } from '@/fsd/4-entities/campaign';
-// eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import {
     ICharacterUpgradeRankGoal,
@@ -20,11 +20,8 @@ import {
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-// eslint-disable-next-line import-x/no-internal-modules
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-// eslint-disable-next-line import-x/no-internal-modules
-import { CharacterRaidGoalSelect } from '@/fsd/3-features/goals/goals.models';
-// eslint-disable-next-line import-x/no-internal-modules
+import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { CampaignProgressionAscensionGoals } from './campaign-progression-ascension-goals';
@@ -71,7 +68,7 @@ export const CampaignProgression = () => {
         return { allGoals, shardsGoals: filteredShardsGoals, upgradeRankOrMowGoals: filteredUpgradeRankOrMowGoals };
     }, [goals, resolvedCharacters, resolvedMows]);
 
-    const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
+    const handleGoalsSelectionChange = (selection: TypedGoalSelect[]) => {
         dispatch.goals({
             type: 'UpdateDailyRaids',
             value: selection.map(x => ({ goalId: x.goalId, include: x.include })),

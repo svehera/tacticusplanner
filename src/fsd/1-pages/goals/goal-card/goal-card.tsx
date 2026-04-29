@@ -1,16 +1,19 @@
-﻿import { CheckCircle, FilterListOff } from '@mui/icons-material';
+﻿/* eslint-disable import-x/no-internal-modules */
+import { CheckCircle, FilterListOff } from '@mui/icons-material';
 import Button from '@mui/material/Button';
 import React, { useMemo } from 'react';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { PersonalGoalType } from '@/fsd/4-entities/goal';
 import { IMow2 } from '@/fsd/4-entities/mow';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { CharacterRaidGoalSelect, IGoalEstimate } from '@/fsd/3-features/goals';
+import { IGoalEstimate } from '@/fsd/3-features/goals';
+import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
 import { GoalCardActions } from './actions';
 import { GoalCardAscend } from './ascend';
@@ -18,14 +21,17 @@ import { GoalCardCharacterAbilities } from './character-abilities';
 import { GoalCardMowAbilities } from './mow-abilities';
 import { GoalCardRaidsButton } from './raids-button';
 import { GoalCardUnlock } from './unlock';
+import { GoalCardUpgradeMaterial } from './upgrade-material';
 import { GoalCardUpgradeRank } from './upgrade-rank';
 
 /** Returns true if the goal type has an associated daily-raids shortcut button. */
-const showRaidsButton = (goal: CharacterRaidGoalSelect): boolean =>
-    goal.type === PersonalGoalType.UpgradeRank || goal.type === PersonalGoalType.MowAbilities;
+const showRaidsButton = (goal: TypedGoalSelect): boolean =>
+    goal.type === PersonalGoalType.UpgradeRank ||
+    goal.type === PersonalGoalType.MowAbilities ||
+    goal.type === PersonalGoalType.UpgradeMaterial;
 
 interface Props {
-    goal: CharacterRaidGoalSelect;
+    goal: TypedGoalSelect;
     goalEstimate?: IGoalEstimate;
     menuItemSelect?: (item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
     onToggleInclude?: () => void;
@@ -88,6 +94,9 @@ export const GoalCard: React.FC<Props> = ({
             case PersonalGoalType.Unlock: {
                 return <GoalCardUnlock goal={goal} goalEstimate={goalEstimate} calendarDate={calendarDate} />;
             }
+            case PersonalGoalType.UpgradeMaterial: {
+                return <GoalCardUpgradeMaterial goalEstimate={goalEstimate} calendarDate={calendarDate} />;
+            }
         }
     };
 
@@ -100,6 +109,11 @@ export const GoalCard: React.FC<Props> = ({
                   backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
               };
 
+    const material =
+        goal.type === PersonalGoalType.UpgradeMaterial
+            ? UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)
+            : undefined;
+
     return (
         <div
             className="flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--border) text-(--fg) shadow-sm transition-colors"
@@ -110,11 +124,24 @@ export const GoalCard: React.FC<Props> = ({
                     <span className="text-[1.35rem] leading-none font-semibold text-(--muted-fg)">
                         #{goal.priority}
                     </span>
-                    <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
+                    {goal.type === PersonalGoalType.UpgradeMaterial && (
+                        <UpgradeImage
+                            material={goal.upgradeMaterialId}
+                            iconPath={material?.icon ?? ''}
+                            rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
+                            size={40}
+                        />
+                    )}
+                    {goal.type !== PersonalGoalType.UpgradeMaterial && (
+                        <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
+                    )}
                 </div>
                 <div className="flex min-w-0 flex-col flex-wrap justify-start">
                     <span className="text-[1.05rem] leading-snug font-semibold text-(--fg)">
-                        {goal.unitName ?? goal.unitId}
+                        {goal.type === PersonalGoalType.UpgradeMaterial && (
+                            <span>{UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.material}</span>
+                        )}
+                        {goal.type !== PersonalGoalType.UpgradeMaterial && (goal.unitName ?? goal.unitId)}
                     </span>
                     {calendarDate && <span className="text-xs text-(--muted-fg)">{calendarDate}</span>}
                 </div>
@@ -152,7 +179,15 @@ export const GoalCard: React.FC<Props> = ({
                                     {goal.include ? 'Active' : 'Inactive'}
                                 </Button>
                             )}
-                            {showRaidsButton(goal) && <GoalCardRaidsButton unitId={goal.unitId} />}
+                            {showRaidsButton(goal) && (
+                                <GoalCardRaidsButton
+                                    unitId={
+                                        goal.type === PersonalGoalType.UpgradeMaterial
+                                            ? goal.upgradeMaterialId
+                                            : goal.unitId
+                                    }
+                                />
+                            )}
                         </div>
                     </>
                 )}

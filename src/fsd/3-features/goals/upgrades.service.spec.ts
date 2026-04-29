@@ -59,6 +59,7 @@ const createAscendGoal = (overrides: Partial<ICharacterAscendGoal> = {}): IChara
     campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
     mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
     type: PersonalGoalType.Ascend,
+    farmType: 'both',
     ...overrides,
 });
 
@@ -114,6 +115,7 @@ const createRankGoal = (
     rarity: baseChar.initialRarity ?? Rarity.Common,
     level: 1,
     xp: 0,
+    manuallyFarmXp: false,
     ...overrides,
 });
 
@@ -195,6 +197,7 @@ const createUnitUpgrade = (overrides: Partial<IUnitUpgrade> = {}): IUnitUpgrade 
     upgradeShards: undefined,
     baseUpgradesTotal: {},
     relatedUpgrades: [],
+    upgradeMaterials: {},
     ...overrides,
 });
 
@@ -2081,6 +2084,7 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         rarity: kharn.initialRarity ?? Rarity.Legendary,
         level: 1,
         xp: 0,
+        manuallyFarmXp: false,
     };
 
     const worldEatersRewards = ['upgDmgR038', 'upgHpR038', 'upgArmR038', 'upgHpL118'];
