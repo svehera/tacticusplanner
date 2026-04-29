@@ -1,5 +1,5 @@
 import Button from '@mui/material/Button';
-import { FC, lazy, Suspense, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useDragScroll } from '@/fsd/5-shared/lib/use-drag-scroll';
 
@@ -32,6 +32,9 @@ export const DayStrip: FC<DayStripProps> = ({
 
     // Seed first 3 so they render immediately on expand without waiting for the observer
     const [visibleSet, setVisibleSet] = useState<Set<number>>(() => new Set([0, 1, 2]));
+
+    // Pending scroll after Show All expands days — resolved once days.length updates
+    const pendingScrollReference = useRef<{ dayIndex: number; inline: ScrollLogicalPosition } | undefined>(undefined);
 
     const {
         scrollRef,
@@ -79,7 +82,7 @@ export const DayStrip: FC<DayStripProps> = ({
                     const next = new Set(previous);
                     for (const entry of entries) {
                         if (entry.isIntersecting) {
-                            next.add(Number(entry.target.dataset.dayIndex));
+                            next.add(Number((entry.target as HTMLElement).dataset.dayIndex));
                         }
                         // Never remove — keep grid mounted once visible
                     }
@@ -100,19 +103,27 @@ export const DayStrip: FC<DayStripProps> = ({
         return () => observer.disconnect();
     }, [allDaysExpanded, days.length, scrollRef]);
 
+    // Scroll to pending target once new cards are in the DOM (days.length has updated)
+    useEffect(() => {
+        if (!pendingScrollReference.current) return;
+        const { dayIndex, inline } = pendingScrollReference.current;
+        const card = scrollRef.current?.querySelector(`[data-day-index="${dayIndex}"]`);
+        if (card) {
+            pendingScrollReference.current = undefined;
+            card.scrollIntoView({ behavior: 'smooth', inline, block: 'nearest' });
+        }
+    }, [days.length, scrollRef]);
+
     const navigateToDay = useCallback(
         (dayIndex: number, inline: ScrollLogicalPosition = 'start') => {
             // Pre-mount target grid before scrolling so content is ready on arrival
             setVisibleSet(previous => new Set([...previous, dayIndex]));
-            const doScroll = () => {
+            if (dayIndex >= days.length && showShowAll) {
+                pendingScrollReference.current = { dayIndex, inline };
+                onShowAll();
+            } else {
                 const card = scrollRef.current?.querySelector(`[data-day-index="${dayIndex}"]`);
                 card?.scrollIntoView({ behavior: 'smooth', inline, block: 'nearest' });
-            };
-            if (dayIndex >= days.length && showShowAll) {
-                onShowAll();
-                setTimeout(doScroll, 100);
-            } else {
-                doScroll();
             }
         },
         [days.length, scrollRef, showShowAll, onShowAll]
