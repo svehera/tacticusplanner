@@ -98,11 +98,11 @@ export function DailyRaidsSection() {
                         </div>
                     </div>
                 </div>
-                <div className="px-4 py-3 text-sm">
+                <div className="px-2 py-3 text-sm sm:px-4">
                     {locationCount === 0 ? (
                         <p className="text-xs text-(--muted-fg)">No raids recorded today.</p>
                     ) : (
-                        <div className="flex flex-wrap gap-x-3 gap-y-1.5">
+                        <div className="grid grid-cols-1 gap-x-3 gap-y-1.5 min-[356px]:grid-cols-2">
                             {dailyRaids.raidedLocations.map(x => {
                                 const reward = getRewardDisplay(x);
                                 return (
