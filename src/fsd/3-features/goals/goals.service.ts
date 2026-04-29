@@ -331,7 +331,7 @@ export class GoalsService {
                 type: PersonalGoalType.UpgradeMaterial,
                 priority: g.priority,
                 goalId: g.id,
-                include: true,
+                include: g.dailyRaids,
                 upgradeMaterialId: g.upgradeMaterialId,
                 quantity: g.upgradeMaterialQuantity,
                 notes: g.notes,

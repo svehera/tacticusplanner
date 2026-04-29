@@ -498,6 +498,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                     fullWidth
                                     label="Upgrade Material Quantity"
                                     min={0}
+                                    max={10_000}
                                     value={form.upgradeMaterialQuantity ?? 0}
                                     valueChange={quantity => {
                                         setForm(current => ({

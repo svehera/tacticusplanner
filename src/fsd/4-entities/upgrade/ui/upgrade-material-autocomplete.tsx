@@ -36,7 +36,9 @@ export const UpgradeMaterialAutocomplete = ({
             fullWidth
             className={twMerge('min-w-[200px]', className)}
             options={options}
-            value={value ?? options[0]}
+            // We have to use null, not undefined, otherwise MUI complains about managed stuff going unmanaged.
+            // eslint-disable-next-line unicorn/no-null
+            value={value ?? null}
             open={openAutocomplete}
             onFocus={() => setOpenAutocomplete(true)}
             onBlur={() => setOpenAutocomplete(false)}

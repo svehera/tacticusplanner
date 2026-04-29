@@ -26,7 +26,7 @@ import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
 import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
-import { IUpgradeRecipe, UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
 import { ICharacterAscendGoal, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
@@ -47,7 +47,6 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     const [openDialog, setOpenDialog] = React.useState(isOpen);
 
     const [form, setForm] = useState<TypedGoalSelect>(goal);
-    const [_inventoryUpdate, setInventoryUpdate] = useState<Array<IUpgradeRecipe>>([]);
 
     const handleClose = (updatedGoal?: TypedGoalSelect | undefined): void => {
         if (updatedGoal) {
@@ -277,9 +276,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 currSecondaryLevel={form.secondaryStart}
                                 originalPrimaryLevel={unit.primaryAbilityLevel}
                                 originalSecondaryLevel={unit.secondaryAbilityLevel}
-                                inventoryDecrement={value => {
-                                    setInventoryUpdate(Object.entries(value).map(([id, count]) => ({ id, count })));
-                                }}
+                                inventoryDecrement={() => {}}
                             />
                         </>
                     )}
@@ -384,6 +381,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                             fullWidth
                             label="Upgrade Material Quantity"
                             min={0}
+                            max={10_000}
                             value={form.quantity ?? 0}
                             valueChange={quantity => {
                                 setForm(current => ({

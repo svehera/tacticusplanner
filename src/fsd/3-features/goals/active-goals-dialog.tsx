@@ -26,10 +26,6 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
 
     const [currentGoalsSelect, setCurrentGoalsSelect] = useState<TypedGoalSelect[]>(goals);
 
-    const unitId =
-        editGoal === undefined || editGoal?.type === PersonalGoalType.UpgradeMaterial ? undefined : editGoal.unitId;
-
-    // Sync currentGoalsSelect with goals prop when goals change while dialog is open
     useEffect(() => {
         if (openGoals) {
             setCurrentGoalsSelect(previousGoals =>
@@ -41,6 +37,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
             );
         }
     }, [goals, openGoals]);
+
     const handleSelectAll = (event: React.ChangeEvent<HTMLInputElement>) => {
         setCurrentGoalsSelect(value => value.map(x => ({ ...x, include: event.target.checked })));
     };
@@ -56,9 +53,13 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
 
     const handleGoalEdit = (goalId: string) => {
         const goalToEdit = goals.find(x => x.goalId === goalId);
-        const characterToEdit = units.find(x => x.id === unitId || x.snowprintId === unitId);
+        if (!goalToEdit) return;
 
-        if (goalToEdit && characterToEdit) {
+        const unitId = goalToEdit.type === PersonalGoalType.UpgradeMaterial ? undefined : goalToEdit.unitId;
+        const characterToEdit =
+            unitId === undefined ? undefined : units.find(x => x.id === unitId || x.snowprintId === unitId);
+
+        if (goalToEdit.type === PersonalGoalType.UpgradeMaterial || characterToEdit) {
             setEditGoal(goalToEdit);
             setEditUnit(characterToEdit);
         }
@@ -164,16 +165,17 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                 </DialogActions>
             </Dialog>
 
-            {editGoal && editUnit && (
-                <EditGoalDialog
-                    isOpen={true}
-                    goal={editGoal}
-                    unit={editUnit}
-                    onClose={() => {
-                        setEditGoal(undefined);
-                    }}
-                />
-            )}
+            {editGoal !== undefined &&
+                (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (
+                    <EditGoalDialog
+                        isOpen={true}
+                        goal={editGoal}
+                        unit={editUnit}
+                        onClose={() => {
+                            setEditGoal(undefined);
+                        }}
+                    />
+                )}
         </>
     );
 };

@@ -80,12 +80,16 @@ export const CEs = () => {
 
     const onslaughtTokensToday = UpgradesService.computeOnslaughtTokensToday(gameModeTokens);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(
+    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false),
         [goals, units]
     );
 
     const includedShardsGoals = useMemo(() => shardsGoals.filter(x => x.include), [shardsGoals]);
+    const includedUpgradeMaterialGoals = useMemo(
+        () => upgradeMaterialGoals.filter(x => x.include),
+        [upgradeMaterialGoals]
+    );
     const includedUpgradeRankOrMowGoals = useMemo(
         () => upgradeRankOrMowGoals.filter(x => x.include),
         [upgradeRankOrMowGoals]
@@ -115,7 +119,7 @@ export const CEs = () => {
             },
             chars,
             mows,
-            ...[includedUpgradeRankOrMowGoals, includedShardsGoals].flat()
+            ...[includedUpgradeMaterialGoals, includedUpgradeRankOrMowGoals, includedShardsGoals].flat()
         );
     }, [
         dailyRaidsPreferences,
@@ -125,6 +129,7 @@ export const CEs = () => {
         onslaughtTokensToday,
         chars,
         mows,
+        includedUpgradeMaterialGoals,
         includedUpgradeRankOrMowGoals,
         includedShardsGoals,
     ]);

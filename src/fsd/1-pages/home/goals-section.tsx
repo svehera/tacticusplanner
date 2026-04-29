@@ -98,7 +98,7 @@ export function GoalsSection() {
                 },
                 resolvedCharacters,
                 resolvedMows,
-                ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+                ...[upgradeMaterialGoals, upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
             ),
 
         [
@@ -109,6 +109,7 @@ export function GoalsSection() {
             onslaughtTokensToday,
             resolvedCharacters,
             resolvedMows,
+            upgradeMaterialGoals,
             upgradeRankOrMowGoals,
             shardsGoals,
         ]

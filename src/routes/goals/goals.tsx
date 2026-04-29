@@ -109,7 +109,7 @@ export const Goals = () => {
 
     // Add these sorts to ensure the UI matches the global priority order
     const sortedShards = shardsGoals.toSorted((a, b) => a.priority - b.priority);
-    const sortedUpgrades = [upgradeRankOrMowGoals, upgradeMaterialGoals]
+    const sortedUpgrades = [upgradeMaterialGoals, upgradeRankOrMowGoals]
         .flat()
         .toSorted((a, b) => a.priority - b.priority);
     const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
@@ -490,7 +490,7 @@ export const Goals = () => {
                     </AccordionDetails>
                 </Accordion>
             </div>
-            {upgradeRankOrMowGoals.length > 0 && (
+            {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
                 <Accordion
                     expanded={sectionsExpanded.upgrades}
                     onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
