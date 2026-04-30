@@ -1,14 +1,25 @@
-import { FC, lazy, Suspense, useState } from 'react';
+import { FC, lazy, memo, Suspense, useCallback, useState } from 'react';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid, IUpgradesRaidsDay } from './goals.models';
-import { getCharacterIcon, getDisplayName } from './raid-day-helpers';
+import { CharacterFilterRow } from './raids-day-view-filter';
+import { MaterialGrid } from './raids-day-view-grid';
+import { DayCardStats } from './raids-day-view-stats';
 
 const RaidMaterialDialog = lazy(() => import('./raid-material-dialog').then(m => ({ default: m.RaidMaterialDialog })));
-const RaidMaterialIcon = lazy(() => import('./raid-material-icon').then(m => ({ default: m.RaidMaterialIcon })));
+
+// Height of the card when expanded — tune this to fit the desired number of grid rows
+// 2px border (top+bottom) + 24px padding (p-3 top+bottom) + 103px header + 567px grid (5 rows × 102px + 4 gaps × 8px + 25px mt/border/pt overhead)
+const EXPANDED_CARD_HEIGHT = 700;
+
+// 0: pending+assigned, 1: pending+unassigned, 2: done (sufficient or all locations raided)
+const raidSortGroup = (raid: IUpgradeRaid) => {
+    const sufficient = Math.floor(raid.acquiredCount) >= raid.requiredCount;
+    const allRaided = raid.raidLocations.every(loc => loc.raidsAlreadyPerformed >= loc.raidsToPerform);
+    if (sufficient || allRaided) return 2;
+    return raid.relatedCharacters.length === 0 ? 1 : 0;
+};
 
 interface Props {
     day: IUpgradesRaidsDay;
@@ -16,29 +27,29 @@ interface Props {
     dayIndex: number;
     expanded: boolean;
     energyPerDay: number;
+    selectedCharId: string | undefined;
+    gridVisible: boolean;
 }
 
-const buildTooltip = (label: string, relatedCharacters: string[]) => (
-    <div>
-        {label}
-        {relatedCharacters.length > 0 && (
-            <ul className="ps-[15px]">
-                {[...new Set(relatedCharacters.map(name => getDisplayName(name)))].map(name => (
-                    <li key={name}>{name}</li>
-                ))}
-            </ul>
-        )}
-    </div>
-);
-
-export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energyPerDay }) => {
+const RaidsDayViewComponent: FC<Props> = ({
+    day,
+    title,
+    dayIndex,
+    expanded,
+    energyPerDay,
+    selectedCharId,
+    gridVisible,
+}) => {
     const [selectedRaid, setSelectedRaid] = useState<IUpgradeRaid | undefined>();
 
     const calendarDate = getEstimatedDate(dayIndex + 1);
+    const farmableRaids = day.raids
+        .filter(raid => raid.raidLocations.length > 0)
+        .toSorted((a, b) => raidSortGroup(a) - raidSortGroup(b));
 
     const seen = new Set<string>();
     const characterIds: string[] = [];
-    for (const raid of day.raids) {
+    for (const raid of farmableRaids) {
         if (raid.isFinished) continue;
         for (const charId of raid.relatedCharacters) {
             if (!seen.has(charId)) {
@@ -48,13 +59,15 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
         }
     }
 
-    const farmableRaids = day.raids.filter(raid => raid.raidLocations.length > 0);
-
-    const energyFillPct = energyPerDay > 0 ? Math.min((day.energyTotal / energyPerDay) * 100, 100) : 0;
-    const energyFull = energyFillPct >= 95;
+    const matchesFilter = useCallback(
+        (raid: IUpgradeRaid) => !selectedCharId || raid.relatedCharacters.includes(selectedCharId),
+        [selectedCharId]
+    );
 
     return (
-        <div className="flex min-w-[220px] flex-col rounded-xl border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-sm">
+        <div
+            className="flex max-w-[340px] min-w-[260px] flex-col rounded-xl border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-sm"
+            style={{ height: expanded ? `${EXPANDED_CARD_HEIGHT}px` : undefined }}>
             {/* Header - always visible */}
             <div className="flex flex-col gap-2">
                 {/* Title row */}
@@ -63,62 +76,19 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
                     <span className="text-xs opacity-60">{calendarDate}</span>
                 </div>
 
-                {/* Stats chips */}
-                <div className="flex items-center gap-1.5">
-                    <span className="flex items-center gap-1 rounded-full bg-(--secondary) px-2 py-0.5 text-xs">
-                        <MiscIcon icon="energy" height={12} width={12} />
-                        <span>{day.energyTotal}</span>
-                        {energyPerDay > 0 && <span className="opacity-50">/{energyPerDay}</span>}
-                    </span>
-                    <span className="flex items-center gap-1 rounded-full bg-(--secondary) px-2 py-0.5 text-xs">
-                        <MiscIcon icon="raidTicket" height={12} width={12} />
-                        {day.raidsTotal}
-                    </span>
-                </div>
+                <DayCardStats energyTotal={day.energyTotal} raidsTotal={day.raidsTotal} energyPerDay={energyPerDay} />
 
-                {/* Energy fill bar */}
-                {energyPerDay > 0 && (
-                    <div className="h-1.5 w-full overflow-hidden rounded-full bg-(--secondary)">
-                        <div
-                            className={`h-full rounded-full transition-all ${energyFull ? 'bg-green-500' : 'bg-amber-400'}`}
-                            style={{ width: `${energyFillPct}%` }}
-                        />
-                    </div>
-                )}
-
-                {/* Character icons */}
-                {characterIds.length > 0 && (
-                    <div className="flex flex-wrap gap-1">
-                        {characterIds.map(id => (
-                            <AccessibleTooltip key={id} title={getDisplayName(id)}>
-                                <span>
-                                    <UnitShardIcon icon={getCharacterIcon(id)} height={24} width={24} />
-                                </span>
-                            </AccessibleTooltip>
-                        ))}
-                    </div>
-                )}
+                {characterIds.length > 0 && <CharacterFilterRow characterIds={characterIds} />}
             </div>
 
-            {/* Expanded: 3-col material icon grid */}
-            {expanded && farmableRaids.length > 0 && (
-                <Suspense fallback={undefined}>
-                    <div className="mt-3 grid grid-cols-3 gap-1 border-t border-(--card-border) pt-3">
-                        {farmableRaids.map((raid, index) => (
-                            <button
-                                key={index}
-                                type="button"
-                                onClick={() => setSelectedRaid(raid)}
-                                className="flex items-center justify-center rounded-md p-1 transition-colors hover:bg-(--secondary)">
-                                <RaidMaterialIcon
-                                    raid={raid}
-                                    size={40}
-                                    tooltip={buildTooltip(raid.label, raid.relatedCharacters)}
-                                />
-                            </button>
-                        ))}
-                    </div>
-                </Suspense>
+            {expanded && gridVisible && farmableRaids.length > 0 && (
+                <div className="min-h-0 flex-1 overflow-y-auto">
+                    <MaterialGrid
+                        farmableRaids={farmableRaids}
+                        matchesFilter={matchesFilter}
+                        onSelectRaid={setSelectedRaid}
+                    />
+                </div>
             )}
 
             {selectedRaid && (
@@ -129,3 +99,5 @@ export const RaidsDayView: FC<Props> = ({ day, title, dayIndex, expanded, energy
         </div>
     );
 };
+
+export const RaidsDayView = memo(RaidsDayViewComponent);

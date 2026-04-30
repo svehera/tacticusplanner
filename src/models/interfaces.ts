@@ -353,6 +353,10 @@ export interface ICharProgression {
     rarity?: Rarity;
 }
 
+export const SHARD_FARM_TYPE_VALUES = ['onslaught', 'energy', 'both'] as const;
+
+export type ShardFarmType = (typeof SHARD_FARM_TYPE_VALUES)[number];
+
 export interface IPersonalGoal {
     id: string;
     character: string;
@@ -371,6 +375,8 @@ export interface IPersonalGoal {
     targetStars?: RarityStars;
     shardsPerToken?: number;
     mythicShardsPerToken?: number;
+    manuallyFarmXp?: boolean;
+    shardFarmType?: ShardFarmType;
 
     // unlock
     campaignsUsage?: CampaignsLocationsUsage;
@@ -380,6 +386,10 @@ export interface IPersonalGoal {
     unitId?: string;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
+
+    // farm specifc upgrade material
+    upgradeMaterialId?: string;
+    upgradeMaterialQuantity?: number;
 }
 
 export interface IEstimatedRanksSettings {

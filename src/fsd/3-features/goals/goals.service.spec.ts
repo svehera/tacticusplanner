@@ -68,6 +68,7 @@ describe('Goal service', () => {
                 xp: characterMock.xp,
                 rarity: characterMock.rarity,
                 type: PersonalGoalType.UpgradeRank,
+                manuallyFarmXp: false,
                 upgradesRarity: [],
             };
 
@@ -164,6 +165,7 @@ describe('Goal service', () => {
                 starsEnd: RarityStars.RedThreeStars,
                 onslaughtShards: 1,
                 onslaughtMythicShards: 0,
+                farmType: 'both',
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 type: PersonalGoalType.Ascend,

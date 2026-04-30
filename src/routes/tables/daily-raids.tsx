@@ -16,7 +16,7 @@ import { MowsService } from '@/fsd/4-entities/mow';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { CharacterRaidGoalSelect, IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
+import { IEstimatedUpgrades, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -62,7 +62,7 @@ export const DailyRaids = () => {
         [inventory.upgrades, storeCharacters, resolvedMows]
     );
     const units = useMemo(() => [...storeCharacters, ...resolvedMows], [storeCharacters, resolvedMows]);
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
+    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, units, true);
     }, [goals, units]);
 
@@ -78,7 +78,7 @@ export const DailyRaids = () => {
         setCharSnowprintId(searchParams.get('charSnowprintId') ?? undefined);
     }, [location]);
 
-    const handleGoalsSelectionChange = (selection: CharacterRaidGoalSelect[]) => {
+    const handleGoalsSelectionChange = (selection: TypedGoalSelect[]) => {
         dispatch.goals({
             type: 'UpdateDailyRaids',
             value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
@@ -133,6 +133,7 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
+            ...upgradeMaterialGoals,
             ...upgradeRankOrMowGoals,
             ...shardsGoals
         );
@@ -162,6 +163,7 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
+            ...upgradeMaterialGoals,
             ...upgradeRankOrMowGoals,
             ...shardsGoals
         );

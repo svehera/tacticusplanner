@@ -1,14 +1,16 @@
-﻿import { Card, CardContent, CardHeader } from '@mui/material';
 import { useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';
 
+import { cn } from '@/fsd/5-shared/lib';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacterData } from '@/fsd/4-entities/character/model';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+
+import { MobileNavCard } from '../components/mobile-nav-card';
 
 function isValidLreDate(date: unknown): date is string {
     return (
@@ -27,16 +29,13 @@ function sortCharsByLreDate(a: ICharacterData, b: ICharacterData) {
     const aHasValidDate = isValidLreDate(aDate);
     const bHasValidDate = isValidLreDate(bDate);
 
-    // If both have valid dates, sort by date (earliest first)
     if (aHasValidDate && bHasValidDate) {
         return new Date(aDate).getTime() - new Date(bDate).getTime();
     }
 
-    // Valid dates come before invalid/missing ones including "TBA"
     if (aHasValidDate && !bHasValidDate) return -1;
     if (!aHasValidDate && bHasValidDate) return 1;
 
-    // When both have invalid dates - sort by eventStage (descending)
     const aStage = a.lre?.eventStage || 0;
     const bStage = b.lre?.eventStage || 0;
     return bStage - aStage;
@@ -47,57 +46,52 @@ export const PlanLeRoutes = () => {
     const leMasterTableMenuItem = menuItemById['leMasterTable'];
     const sortedActiveLres: ICharacterData[] = useMemo(
         () => CharactersService.activeLres.toSorted(sortCharsByLreDate),
-        [CharactersService.activeLres]
+        []
     );
+
     return (
-        <div className="flex flex-col items-center gap-2.5">
-            <Card
-                variant="outlined"
+        <div className="flex w-full flex-col items-center gap-4">
+            <MobileNavCard
+                icon={leMasterTableMenuItem.icon}
+                label={leMasterTableMenuItem.label}
                 onClick={() => navigate(leMasterTableMenuItem.routeMobile)}
-                sx={{
-                    width: 350,
-                    minHeight: 140,
-                }}>
-                <CardHeader
-                    title={
-                        <div className="flex items-center gap-2.5">
-                            {leMasterTableMenuItem.icon} {leMasterTableMenuItem.label}
-                        </div>
-                    }
-                />
-            </Card>
+            />
 
             {sortedActiveLres.map(le => {
                 const isFinished = !!le.lre?.finished;
                 return (
-                    <Card
-                        variant="outlined"
+                    <div
                         key={le.name}
+                        role="button"
+                        tabIndex={0}
+                        className={cn(
+                            'flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors',
+                            isFinished && 'opacity-50'
+                        )}
                         onClick={() => navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`)}
-                        sx={{
-                            width: 350,
-                            minHeight: 140,
-                            opacity: isFinished ? 0.5 : 1,
-                        }}>
-                        <CardHeader
-                            title={
-                                <div className="flex items-center gap-2.5">
-                                    <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}
-                                </div>
+                        onKeyDown={event_ => {
+                            if (event_.key === 'Enter' || event_.key === ' ') {
+                                event_.preventDefault();
+                                navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`);
                             }
-                            subheader={'Legendary Event'}
-                        />
-                        <CardContent className="flex flex-col">
+                        }}>
+                        <div className="border-b border-(--card-border) px-4 py-3">
+                            <div className="flex items-center gap-2.5 font-medium">
+                                <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}
+                            </div>
+                            <span className="text-sm text-(--muted-fg)">Legendary Event</span>
+                        </div>
+                        <div className="px-4 py-3 text-sm">
                             {isFinished ? (
                                 <span>Finished</span>
                             ) : (
                                 <>
-                                    <span>Stage: {le.lre?.eventStage}/3</span>
-                                    <span>Next event: {le.lre?.nextEventDate}</span>
+                                    <div>Stage: {le.lre?.eventStage}/3</div>
+                                    <div>Next event: {le.lre?.nextEventDate}</div>
                                 </>
                             )}
-                        </CardContent>
-                    </Card>
+                        </div>
+                    </div>
                 );
             })}
         </div>

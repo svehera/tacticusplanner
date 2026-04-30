@@ -1,4 +1,4 @@
-﻿import { Warning } from '@mui/icons-material';
+import { Warning } from '@mui/icons-material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
@@ -14,7 +14,6 @@ import React, { lazy, Suspense, useCallback, useContext, useEffect, useMemo, use
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
-import { useDragScroll } from '@/fsd/5-shared/lib/use-drag-scroll';
 import { AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -22,18 +21,11 @@ import { CharactersService } from '@/fsd/4-entities/character';
 
 import { IEstimatedUpgrades } from '@/fsd/3-features/goals/goals.models';
 
+import { DayStrip } from './raids-day-strip';
+import { MaterialsSectionContent } from './raids-materials-section';
 import { SectionAccordion } from './section-accordion';
 
-const MaterialsTable = lazy(() =>
-    import('@/fsd/3-features/goals/materials-table').then(m => ({ default: m.MaterialsTable }))
-);
-const RaidsDayView = lazy(() =>
-    import('@/fsd/3-features/goals/raids-day-view').then(m => ({ default: m.RaidsDayView }))
-);
 const Inventory = lazy(() => import('@/fsd/1-pages/input-inventory').then(m => ({ default: m.Inventory })));
-const RaidUpgradeMaterialCard = lazy(() =>
-    import('./raid-upgrade-material-card').then(m => ({ default: m.RaidUpgradeMaterialCard }))
-);
 
 interface Props {
     estimatedRanks: IEstimatedUpgrades;
@@ -45,8 +37,6 @@ interface Props {
 
 type ReferenceElement = HTMLDivElement | null;
 type ReferenceMap = { [key: string]: ReferenceElement };
-
-// ─── RaidsPlan ───────────────────────────────────────────────────────────────
 
 export const RaidsPlan: React.FC<Props> = ({
     estimatedRanks,
@@ -84,17 +74,6 @@ export const RaidsPlan: React.FC<Props> = ({
     const itemReferences = useRef<ReferenceMap>({});
     const inProgressReference = useRef<HTMLDivElement>(null);
 
-    const {
-        scrollRef: raidsDayScrollReference,
-        onMouseDown: onDragStart,
-        onMouseMove: onDragMove,
-        onMouseUp: onDragEnd,
-        onMouseLeave: onDragLeave,
-        onTouchStart: onDragTouchStart,
-        onTouchMove: onDragTouchMove,
-        onTouchEnd: onDragTouchEnd,
-        onTouchCancel: onDragTouchCancel,
-    } = useDragScroll();
     const setCardReference = useCallback(
         (id: number) => (element: ReferenceElement) => {
             itemReferences.current[id] = element;
@@ -112,12 +91,9 @@ export const RaidsPlan: React.FC<Props> = ({
         const characterIndexMap: CharacterToMaterialIndexMap = {};
 
         for (const [materialIndex, material] of estimatedRanks.inProgressMaterials.entries()) {
-            // Iterate over the related characters for the current material
             for (const fullName of material.relatedCharacters) {
                 const unit = CharactersService.getUnit(fullName);
                 if (!unit || !unit.snowprintId) continue;
-                // Check if this snowprintId has ALREADY been recorded.
-                // If it hasn't, this is the FIRST time we've seen it, so record the index.
                 if (!(unit.snowprintId in characterIndexMap)) {
                     characterIndexMap[unit.snowprintId] = materialIndex;
                 }
@@ -152,15 +128,13 @@ export const RaidsPlan: React.FC<Props> = ({
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
-            // Use a brief delay to ensure the scrollable parent container and its content
-            // have finished rendering and measurement.
             const timer = setTimeout(() => {
                 scrollToTarget();
             }, 100);
 
-            return () => clearTimeout(timer); // Cleanup timer on unmount
+            return () => clearTimeout(timer);
         }
-    }, [scrollToCharSnowprintId, scrollToTarget]); // Rerun if the ID changes
+    }, [scrollToCharSnowprintId, scrollToTarget]);
 
     useEffect(() => {
         if (estimatedRanks.upgradesRaids.length > 3) {
@@ -198,6 +172,11 @@ export const RaidsPlan: React.FC<Props> = ({
         return Math.max(0, estimatedRanks.energyTotal - energyAlreadySpentToday);
     }, [estimatedRanks.energyTotal, estimatedRanks.upgradesRaids]);
 
+    const visibleDays = useMemo(
+        () => estimatedRanks.upgradesRaids.slice(upgradesPaging.start, upgradesPaging.end),
+        [estimatedRanks.upgradesRaids, upgradesPaging.start, upgradesPaging.end]
+    );
+
     const calendarDateTotal: string = useMemo(() => {
         const nextDate = new Date();
         nextDate.setDate(nextDate.getDate() + daysTotal - 1);
@@ -209,7 +188,8 @@ export const RaidsPlan: React.FC<Props> = ({
         <Accordion
             expanded={outerExpanded}
             onChange={(_, isExpanded) => setOuterExpanded(isExpanded)}
-            className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
+            disableGutters
+            className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
             <AccordionSummary
                 expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
                 className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
@@ -281,31 +261,16 @@ export const RaidsPlan: React.FC<Props> = ({
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
                             </div>
                         }>
-                        {viewPreferences.raidsTableView === true ? (
-                            <div className="ag-theme-material flex h-[600px] min-h-[150px] w-full flex-col">
-                                <Suspense fallback={undefined}>
-                                    <MaterialsTable
-                                        rows={estimatedRanks.inProgressMaterials}
-                                        updateMaterialQuantity={updateInventory}
-                                        onGridReady={() => setGrid1Loaded(true)}
-                                        inventory={upgrades}
-                                        scrollToCharSnowprintId={scrollToCharSnowprintId}
-                                        alreadyUsedMaterials={estimatedRanks.finishedMaterials}
-                                    />
-                                </Suspense>
-                            </div>
-                        ) : (
-                            <Suspense fallback={undefined}>
-                                <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto py-2 min-[354px]:px-2">
-                                    {estimatedRanks.inProgressMaterials.length > 0 &&
-                                        estimatedRanks.inProgressMaterials.map((material, index) => (
-                                            <div key={index} ref={setCardReference(index)}>
-                                                <RaidUpgradeMaterialCard key={index} upgradeEstimate={material} />
-                                            </div>
-                                        ))}
-                                </div>
-                            </Suspense>
-                        )}
+                        <MaterialsSectionContent
+                            materials={estimatedRanks.inProgressMaterials}
+                            tableView={viewPreferences.raidsTableView === true}
+                            updateInventory={updateInventory}
+                            inventory={upgrades}
+                            onGridReady={() => setGrid1Loaded(true)}
+                            scrollToCharSnowprintId={scrollToCharSnowprintId}
+                            alreadyUsedMaterials={estimatedRanks.finishedMaterials}
+                            cardRefCallback={setCardReference}
+                        />
                     </SectionAccordion>
                 )}
                 {estimatedRanks.finishedMaterials.length > 0 && (
@@ -319,30 +284,14 @@ export const RaidsPlan: React.FC<Props> = ({
                                 finished upgrades
                             </div>
                         }>
-                        {viewPreferences.raidsTableView === true ? (
-                            <div className="ag-theme-material flex h-[600px] w-full flex-col">
-                                <Suspense fallback={undefined}>
-                                    <MaterialsTable
-                                        rows={estimatedRanks.finishedMaterials}
-                                        updateMaterialQuantity={updateInventory}
-                                        onGridReady={() => setGrid3Loaded(true)}
-                                        inventory={upgrades}
-                                    />
-                                </Suspense>
-                            </div>
-                        ) : (
-                            <Suspense fallback={undefined}>
-                                <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto py-2 min-[354px]:px-2">
-                                    {estimatedRanks.finishedMaterials.map((material, index) => (
-                                        <RaidUpgradeMaterialCard
-                                            key={index}
-                                            upgradeEstimate={material}
-                                            showAdditionalInfo={false}
-                                        />
-                                    ))}
-                                </div>
-                            </Suspense>
-                        )}
+                        <MaterialsSectionContent
+                            materials={estimatedRanks.finishedMaterials}
+                            tableView={viewPreferences.raidsTableView === true}
+                            updateInventory={updateInventory}
+                            inventory={upgrades}
+                            onGridReady={() => setGrid3Loaded(true)}
+                            showAdditionalInfo={false}
+                        />
                     </SectionAccordion>
                 )}
                 {estimatedRanks.blockedMaterials.length > 0 && (
@@ -364,32 +313,15 @@ export const RaidsPlan: React.FC<Props> = ({
                                 <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the items
                                 listed in the table below
                             </div>
-
                             <div className="grow">
-                                {viewPreferences.raidsTableView === true ? (
-                                    <div className="ag-theme-material flex h-[600px] w-full flex-col">
-                                        <Suspense fallback={undefined}>
-                                            <MaterialsTable
-                                                rows={estimatedRanks.blockedMaterials}
-                                                updateMaterialQuantity={updateInventory}
-                                                onGridReady={() => setGrid2Loaded(true)}
-                                                inventory={upgrades}
-                                            />
-                                        </Suspense>
-                                    </div>
-                                ) : (
-                                    <Suspense fallback={undefined}>
-                                        <div className="flex max-h-[600px] w-full flex-wrap gap-x-4 gap-y-4 overflow-y-auto py-2 min-[354px]:px-2">
-                                            {estimatedRanks.blockedMaterials.map((material, index) => (
-                                                <RaidUpgradeMaterialCard
-                                                    key={index}
-                                                    upgradeEstimate={material}
-                                                    showAdditionalInfo={false}
-                                                />
-                                            ))}
-                                        </div>
-                                    </Suspense>
-                                )}
+                                <MaterialsSectionContent
+                                    materials={estimatedRanks.blockedMaterials}
+                                    tableView={viewPreferences.raidsTableView === true}
+                                    updateInventory={updateInventory}
+                                    inventory={upgrades}
+                                    onGridReady={() => setGrid2Loaded(true)}
+                                    showAdditionalInfo={false}
+                                />
                             </div>
                         </div>
                     </SectionAccordion>
@@ -434,51 +366,20 @@ export const RaidsPlan: React.FC<Props> = ({
                                 </div>
                             </div>
                         }>
-                        <div
-                            ref={raidsDayScrollReference}
-                            className="overflow-x-auto overflow-y-hidden"
-                            style={{ cursor: 'grab' }}
-                            onMouseDown={onDragStart}
-                            onMouseMove={onDragMove}
-                            onMouseUp={onDragEnd}
-                            onMouseLeave={onDragLeave}
-                            onTouchStart={onDragTouchStart}
-                            onTouchMove={onDragTouchMove}
-                            onTouchEnd={onDragTouchEnd}
-                            onTouchCancel={onDragTouchCancel}>
-                            <Suspense fallback={undefined}>
-                                <div className="flex gap-2.5">
-                                    {estimatedRanks.upgradesRaids
-                                        .slice(upgradesPaging.start, upgradesPaging.end)
-                                        .map((day, index) => {
-                                            return (
-                                                <RaidsDayView
-                                                    key={index}
-                                                    day={day}
-                                                    title={'Day ' + (index + 1)}
-                                                    dayIndex={index}
-                                                    expanded={allDaysExpanded}
-                                                    energyPerDay={dailyRaidsPreferences.dailyEnergy}
-                                                />
-                                            );
-                                        })}
-                                    {!upgradesPaging.completed && (
-                                        <Button
-                                            variant={'outlined'}
-                                            className="min-w-[300px] items-start pt-5"
-                                            onClick={() =>
-                                                setUpgradesPaging({
-                                                    start: 0,
-                                                    end: estimatedRanks.upgradesRaids.length,
-                                                    completed: true,
-                                                })
-                                            }>
-                                            Show All
-                                        </Button>
-                                    )}
-                                </div>
-                            </Suspense>
-                        </div>
+                        <DayStrip
+                            days={visibleDays}
+                            allDays={estimatedRanks.upgradesRaids}
+                            allDaysExpanded={allDaysExpanded}
+                            energyPerDay={dailyRaidsPreferences.dailyEnergy}
+                            showShowAll={!upgradesPaging.completed}
+                            onShowAll={() =>
+                                setUpgradesPaging({
+                                    start: 0,
+                                    end: estimatedRanks.upgradesRaids.length,
+                                    completed: true,
+                                })
+                            }
+                        />
                     </SectionAccordion>
                 )}
             </AccordionDetails>

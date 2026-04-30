@@ -1,5 +1,4 @@
 /* eslint-disable import-x/no-internal-modules */
-import { Tooltip } from '@mui/material';
 import React, { useState, useEffect, useContext } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
@@ -106,39 +105,34 @@ function renderToken(
     const nextTimerDisplay = isFull ? 'FULL' : formatTime(nextTokenInSeconds);
 
     return (
-        <div key={tokenKey} className="flex w-24 min-w-[120px] flex-col items-center gap-1">
-            <div className="relative flex h-10 w-full items-center justify-center">
-                <div className="absolute left-1/2 -translate-x-1/2">
-                    <Tooltip title={tokenNames[tokenKey] ?? tokenKey}>
-                        <span className="inline-flex">
-                            {renderTokenIcon(
-                                tokenIcons[tokenKey] ?? 'defaultToken',
-                                36,
-                                isFull,
-                                tokenPulseColors[tokenKey] ?? 'rgba(255, 255, 255, 0.25)'
-                            )}
-                        </span>
-                    </Tooltip>
-                </div>
-                <div className="absolute right-0 translate-x-1 font-bold text-gray-900 drop-shadow-md dark:text-white">
-                    <span>{displayCurrent}</span>
-                    <span className="text-[10px] opacity-60">/{tokenData.max}</span>
-                </div>
-            </div>
+        <div
+            key={tokenKey}
+            className="flex w-auto flex-col items-center gap-2 rounded-xl border border-(--card-border) bg-(--card-bg) px-3 py-3 shadow-sm sm:w-[120px] sm:px-4">
+            {renderTokenIcon(
+                tokenIcons[tokenKey] ?? 'defaultToken',
+                48,
+                isFull,
+                tokenPulseColors[tokenKey] ?? 'rgba(255, 255, 255, 0.25)'
+            )}
 
             <div className="flex flex-col items-center leading-tight">
+                <span className="text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                    {tokenNames[tokenKey]}
+                </span>
+                <span className="font-bold text-(--fg) tabular-nums">
+                    {displayCurrent}
+                    <span className="text-xs font-normal opacity-60">/{tokenData.max}</span>
+                </span>
                 <span
                     className={`text-sm tabular-nums ${
-                        isFull ? 'text-red-600 dark:text-red-400' : 'text-gray-700 dark:text-gray-300'
+                        isFull ? 'text-red-600 dark:text-red-400' : 'text-(--muted-fg)'
                     }`}>
                     {isFull ? 'FULL' : nextTimerDisplay}
                 </span>
-
-                {needsSync && (
-                    <span className="animate-pulse text-[10px] font-bold text-amber-600 dark:text-amber-500">
-                        PLEASE SYNC
-                    </span>
-                )}
+                <span
+                    className={`text-[10px] font-bold ${needsSync ? 'animate-pulse text-amber-600 dark:text-amber-500' : 'invisible'}`}>
+                    PLEASE SYNC
+                </span>
             </div>
         </div>
     );
@@ -157,25 +151,17 @@ export const TokenAvailability = () => {
     }, []);
 
     return (
-        <div className="text-center">
-            <div className="flex flex-col gap-2">
-                <IconPulseStyles />
-                {secondsUtc < 1_776_729_599 && (
-                    <h2>
-                        KINDAKHORNY
-                        <br />
-                        (redeem by April 20th)
-                    </h2>
-                )}{' '}
-                {/* April 20, 2026 23:59:59 UTC */}
-                <h2>Token Availability</h2>
-                <div className="flex flex-wrap items-start justify-center gap-4 tabular-nums">
-                    {Object.entries(gameModeTokens.tokens ?? {})
-                        .filter(([key]) => key in tokenIcons)
-                        .map(([key, token]) =>
-                            renderToken(key, token, gameModeTokens.tokens!.lastSetAtSecondsUtc ?? 0, secondsUtc)
-                        )}
-                </div>
+        <div className="flex flex-col items-center gap-3">
+            <IconPulseStyles />
+            <p className="text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+                Token Availability
+            </p>
+            <div className="flex flex-wrap items-start justify-center gap-3 tabular-nums">
+                {Object.entries(gameModeTokens.tokens ?? {})
+                    .filter(([key]) => key in tokenIcons)
+                    .map(([key, token]) =>
+                        renderToken(key, token, gameModeTokens.tokens!.lastSetAtSecondsUtc ?? 0, secondsUtc)
+                    )}
             </div>
         </div>
     );

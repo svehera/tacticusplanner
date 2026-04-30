@@ -6,6 +6,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo, useState } from 'react';
 
 import { PersonalGoalType } from '@/models/enums';
+import { ShardFarmType } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
@@ -21,23 +22,22 @@ import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
 import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
-import { CharactersService } from '@/fsd/4-entities/character';
 import { MowUpgrades } from '@/fsd/4-entities/mow/mow-upgrades';
 import { MowUpgradesUpdate } from '@/fsd/4-entities/mow/mow-upgrades-update';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
-import { IUpgradeRecipe } from '@/fsd/4-entities/upgrade';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
-import { CharacterRaidGoalSelect, ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
+import { ICharacterAscendGoal, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 
 interface Props {
     isOpen: boolean;
-    goal: CharacterRaidGoalSelect;
-    unit: IUnit;
-    onClose?: (goal?: CharacterRaidGoalSelect) => void;
+    goal: TypedGoalSelect;
+    unit: IUnit | undefined;
+    onClose?: (goal?: TypedGoalSelect) => void;
 }
 
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
@@ -46,77 +46,22 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
     const [openDialog, setOpenDialog] = React.useState(isOpen);
 
-    const [form, setForm] = useState<CharacterRaidGoalSelect>(goal);
-    const [inventoryUpdate, setInventoryUpdate] = useState<Array<IUpgradeRecipe>>([]);
+    const [form, setForm] = useState<TypedGoalSelect>(goal);
 
-    const handleClose = (updatedGoal?: CharacterRaidGoalSelect | undefined): void => {
+    const handleClose = (updatedGoal?: TypedGoalSelect | undefined): void => {
         if (updatedGoal) {
             dispatch.goals({ type: 'Update', goal: updatedGoal });
 
-            switch (updatedGoal.type) {
-                case PersonalGoalType.Ascend: {
-                    if (CharactersService.getUnit(updatedGoal.unitId) !== undefined) {
-                        dispatch.characters({
-                            type: 'UpdateRarity',
-                            character: updatedGoal.unitId,
-                            value: updatedGoal.rarityStart,
-                        });
-
-                        dispatch.characters({
-                            type: 'UpdateShards',
-                            character: updatedGoal.unitId,
-                            value: updatedGoal.shards,
-                        });
-
-                        dispatch.characters({
-                            type: 'UpdateStars',
-                            character: updatedGoal.unitId,
-                            value: updatedGoal.starsStart,
-                        });
-                    }
-                    break;
-                }
-                case PersonalGoalType.Unlock: {
-                    dispatch.characters({
-                        type: 'UpdateShards',
-                        character: updatedGoal.unitId,
-                        value: updatedGoal.shards,
-                    });
-                    break;
-                }
-                case PersonalGoalType.UpgradeRank: {
-                    // Do nothing, users can sync if they want to update their characters.
-                    break;
-                }
-                case PersonalGoalType.MowAbilities: {
-                    dispatch.mows({
-                        type: 'UpdateAbilities',
-                        mowId: updatedGoal.unitId,
-                        abilities: [updatedGoal.primaryStart, updatedGoal.secondaryStart],
-                    });
-                    break;
-                }
-
-                case PersonalGoalType.CharacterAbilities: {
-                    dispatch.characters({
-                        type: 'UpdateAbilities',
-                        characterId: updatedGoal.unitId,
-                        abilities: [updatedGoal.activeStart, updatedGoal.passiveStart],
-                    });
-                    break;
-                }
-            }
-
-            if (inventoryUpdate.length > 0) {
-                dispatch.inventory({
-                    type: 'DecrementUpgradeQuantity',
-                    upgrades: inventoryUpdate.map(x => ({ id: x.id, count: x.count })),
+            if (updatedGoal.type === PersonalGoalType.UpgradeMaterial) {
+                const material = UpgradesService.getUpgradeMaterial(updatedGoal.upgradeMaterialId);
+                enqueueSnackbar(`Goal for ${material?.material ?? 'unknown material'} was updated`, {
+                    variant: 'success',
+                });
+            } else {
+                enqueueSnackbar(`Goal for ${updatedGoal.unitName ?? updatedGoal.unitId} was updated`, {
+                    variant: 'success',
                 });
             }
-
-            enqueueSnackbar(`Goal for ${updatedGoal.unitName ?? updatedGoal.unitId} was updated`, {
-                variant: 'success',
-            });
         }
         setOpenDialog(false);
         if (onClose) {
@@ -124,7 +69,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         }
     };
 
-    const handleAscendGoalChanges = (key: keyof ICharacterAscendGoal, value: number) => {
+    const handleAscendGoalChanges = (key: keyof ICharacterAscendGoal, value: number | ShardFarmType) => {
         setForm(current => ({ ...current, [key]: value }));
     };
 
@@ -172,13 +117,29 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         })
         .map(x => x.id);
 
+    const material =
+        form.type === PersonalGoalType.UpgradeMaterial
+            ? UpgradesService.getUpgradeMaterial(form.upgradeMaterialId)
+            : undefined;
+
     return (
         <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
             <DialogTitle className="flex items-center gap-[3px]">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span> <UnitShardIcon icon={goal.unitRoundIcon} />
+                <span>Edit {PersonalGoalType[goal.type]} Goal</span>
+                {goal.type === PersonalGoalType.UpgradeMaterial ? (
+                    <UpgradeImage
+                        material={material?.snowprintId ?? ''}
+                        iconPath={material?.icon ?? ''}
+                        size={40}
+                        rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
+                    />
+                ) : (
+                    <UnitShardIcon icon={goal.unitRoundIcon} />
+                )}
             </DialogTitle>
             <DialogContent className="pt-5">
                 <Box id="edit-goal-form" className="flex flex-col gap-5">
+                    <div className="min-h-[10px]" />
                     <PrioritySelect
                         value={form.priority}
                         maxValue={goals.length}
@@ -218,6 +179,18 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     }));
                                 }}
                             />
+
+                            <label className="flex items-center gap-2">
+                                <input
+                                    type="checkbox"
+                                    checked={form.manuallyFarmXp ?? false}
+                                    onChange={event => {
+                                        setForm(current => ({ ...current, manuallyFarmXp: event.target.checked }));
+                                    }}
+                                    className="h-4 w-4"
+                                />
+                                <span className="text-sm">Manually Farm XP</span>
+                            </label>
                         </>
                     )}
 
@@ -303,9 +276,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 currSecondaryLevel={form.secondaryStart}
                                 originalPrimaryLevel={unit.primaryAbilityLevel}
                                 originalSecondaryLevel={unit.secondaryAbilityLevel}
-                                inventoryDecrement={value => {
-                                    setInventoryUpdate(Object.entries(value).map(([id, count]) => ({ id, count })));
-                                }}
+                                inventoryDecrement={() => {}}
                             />
                         </>
                     )}
@@ -399,9 +370,26 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 possibleMythicLocations={possibleMythicLocations}
                                 unlockedLocations={unlockedLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
+                                farmType={form.farmType ?? 'both'}
                                 onChange={handleAscendGoalChanges}
                             />
                         </>
+                    )}
+
+                    {form.type === PersonalGoalType.UpgradeMaterial && (
+                        <NumberInput
+                            fullWidth
+                            label="Upgrade Material Quantity"
+                            min={0}
+                            max={10_000}
+                            value={form.quantity ?? 0}
+                            valueChange={quantity => {
+                                setForm(current => ({
+                                    ...current,
+                                    quantity: Math.max(1, quantity),
+                                }));
+                            }}
+                        />
                     )}
 
                     <TextField
