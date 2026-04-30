@@ -6,7 +6,7 @@ export { usePopUpControls } from './pop-up-controls';
 export { FlexBox } from './flex-box';
 export { getImageUrl } from './get-image-url';
 export { LoaderWithText } from './loader-with-text';
-export { AccessibleTooltip } from './tooltip';
+export { AccessibleTooltip, LazyTooltip } from './tooltip';
 export { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from './constants';
 export { ConfirmationDialog } from './confirmation-dialog';
 export { ButtonPill } from './button-pill';
