@@ -563,8 +563,12 @@ export class UpgradesService {
     ): void {
         const energyAllowedCharacterIds = new Map<string, 'regular' | 'mythic' | 'both'>();
         for (const goal of goals) {
-            if (goal.type !== PersonalGoalType.Ascend) continue;
-            if (goal.farmType === 'onslaught') continue;
+            if (goal.type !== PersonalGoalType.Ascend && goal.type !== PersonalGoalType.Unlock) continue;
+            if (goal.type === PersonalGoalType.Ascend && goal.farmType === 'onslaught') continue;
+            if (goal.type === PersonalGoalType.Unlock) {
+                energyAllowedCharacterIds.set(goal.unitId, 'regular');
+                continue;
+            }
             if (goal.rarityStart < Rarity.Mythic) {
                 if (energyAllowedCharacterIds.has(goal.unitId)) {
                     const current = energyAllowedCharacterIds.get(goal.unitId);
