@@ -1,14 +1,37 @@
 ﻿import { ClickAwayListener, Tooltip } from '@mui/material';
-import React from 'react';
+import { FC, HTMLAttributes, MouseEvent, ReactElement, ReactNode, cloneElement, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 interface Props {
-    title: React.ReactNode;
-    children: React.ReactElement<any, any>;
+    title: ReactNode;
+    children: ReactElement;
 }
 
-export const AccessibleTooltip: React.FC<Props> = ({ children, title }) => {
-    const [open, setOpen] = React.useState(false);
+// Mounts zero Tooltip instances on render — activates only on first hover per element.
+export const LazyTooltip: FC<{ title: ReactNode; children: ReactElement<HTMLAttributes<HTMLElement>> }> = ({
+    title,
+    children,
+}) => {
+    const [active, setActive] = useState(false);
+
+    if (!active) {
+        return cloneElement(children, {
+            onMouseEnter: (event: MouseEvent<HTMLElement>) => {
+                setActive(true);
+                children.props.onMouseEnter?.(event);
+            },
+        });
+    }
+
+    return (
+        <Tooltip title={title} arrow placement="top" disableTouchListener>
+            {children}
+        </Tooltip>
+    );
+};
+
+export const AccessibleTooltip: FC<Props> = ({ children, title }) => {
+    const [open, setOpen] = useState(false);
 
     const handleTooltipClose = () => {
         setOpen(false);
