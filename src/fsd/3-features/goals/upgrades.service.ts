@@ -314,6 +314,11 @@ export class UpgradesService {
 
         this.populateLocationsData(combinedBaseMaterials, settings);
 
+        this.removeLocationsForOnslaughtOnlyGoals(
+            goals,
+            Object.values(combinedBaseMaterials).flatMap(x => x.locations)
+        );
+
         // Cache for expensive per-goal remaining computations keyed by
         // `${upgradeId}|${inventoryCount}|${goalId ?? 'total'}`.
         const remainingNeededCache = new Map<
@@ -546,6 +551,56 @@ export class UpgradesService {
         };
     }
 
+    private static removeLocationsForOnslaughtOnlyGoals(
+        goals: Array<
+            | ICharacterUpgradeRankGoal
+            | ICharacterUpgradeMow
+            | ICharacterAscendGoal
+            | ICharacterUnlockGoal
+            | IUpgradeMaterialGoal
+        >,
+        locs: ICampaignBattleComposed[]
+    ): void {
+        const energyAllowedCharacterIds = new Map<string, 'regular' | 'mythic' | 'both'>();
+        for (const goal of goals) {
+            if (goal.type !== PersonalGoalType.Ascend) continue;
+            if (goal.farmType === 'onslaught') continue;
+            if (goal.rarityStart < Rarity.Mythic) {
+                if (energyAllowedCharacterIds.has(goal.unitId)) {
+                    const current = energyAllowedCharacterIds.get(goal.unitId);
+                    const newValue = current === 'regular' ? 'regular' : 'both';
+                    energyAllowedCharacterIds.set(goal.unitId, newValue as 'regular' | 'mythic' | 'both');
+                } else {
+                    energyAllowedCharacterIds.set(goal.unitId, 'regular');
+                }
+            }
+            if (goal.rarityEnd === Rarity.Mythic) {
+                if (energyAllowedCharacterIds.has(goal.unitId)) {
+                    const current = energyAllowedCharacterIds.get(goal.unitId);
+                    const newValue = current === 'mythic' ? 'mythic' : 'both';
+                    energyAllowedCharacterIds.set(goal.unitId, newValue as 'regular' | 'mythic' | 'both');
+                } else {
+                    energyAllowedCharacterIds.set(goal.unitId, 'mythic');
+                }
+            }
+        }
+        for (const loc of locs) {
+            const reward = loc.rewards.potential.find(
+                r => r.id.startsWith('shards_') || r.id.startsWith('mythicShards_')
+            );
+            if (reward === undefined) continue;
+            const unitId = reward.id.split('_')[1];
+            const allowed = energyAllowedCharacterIds.get(unitId);
+            if (!allowed) {
+                loc.isSuggested = false;
+            } else if (reward.id.startsWith('shards_') && allowed === 'mythic') {
+                loc.isSuggested = false;
+            } else if (reward.id.startsWith('mythicShards_') && allowed === 'regular') {
+                loc.isSuggested = false;
+            }
+        }
+    }
+
     /*
      * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's
      * raiding plan. Returns an empty array if daily energy is too low to perform any raids.
@@ -611,7 +666,6 @@ export class UpgradesService {
             const locs = Object.values(remainingMats)
                 .flatMap(mat => mat.locations)
                 .filter(loc => loc.isSuggested);
-
             this.planDayRaiding(
                 day,
                 settings,
