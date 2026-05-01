@@ -1573,14 +1573,16 @@ export class UpgradesService {
                 if (campaignType === CampaignType.Elite) return 5;
                 return 3;
             };
+            const invertHse = settings.preferences.invertHse ?? false;
+            const hsePointsDirection = invertHse ? ('asc' as const) : ('desc' as const);
             const orderingFields =
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
                     ? ['hsePoints', 'daysToComplete']
                     : ['priority', 'hsePoints', 'daysToComplete'];
             const orderingDirections =
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
-                    ? (['desc', 'desc'] as const)
-                    : (['asc', 'desc', 'desc'] as const);
+                    ? ([hsePointsDirection, 'desc'] as const)
+                    : (['asc', hsePointsDirection, 'desc'] as const);
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
