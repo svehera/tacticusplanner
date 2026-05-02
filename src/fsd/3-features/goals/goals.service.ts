@@ -97,7 +97,6 @@ export class GoalsService {
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>,
         upgradeMaterialGoals: IUpgradeMaterialGoal[],
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
-
         upgradeAbilities: Array<ICharacterUpgradeAbilities>,
         characters: ICharacter2[],
         isGoalPriority: boolean = false

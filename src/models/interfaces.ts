@@ -290,6 +290,7 @@ export interface IDailyRaidsPreferences {
     farmStrategy: DailyRaidsStrategy;
     customSettings?: ICustomDailyRaidsSettings;
     campaignEvent?: CampaignGroupType | 'none';
+    invertHse?: boolean;
 }
 
 export type ICustomDailyRaidsSettings = Record<Rarity | 'Shard' | 'Mythic Shard', CampaignType[]>;

@@ -314,6 +314,11 @@ export class UpgradesService {
 
         this.populateLocationsData(combinedBaseMaterials, settings);
 
+        this.removeLocationsForOnslaughtOnlyGoals(
+            goals,
+            Object.values(combinedBaseMaterials).flatMap(x => x.locations)
+        );
+
         // Cache for expensive per-goal remaining computations keyed by
         // `${upgradeId}|${inventoryCount}|${goalId ?? 'total'}`.
         const remainingNeededCache = new Map<
@@ -546,6 +551,60 @@ export class UpgradesService {
         };
     }
 
+    private static removeLocationsForOnslaughtOnlyGoals(
+        goals: Array<
+            | ICharacterUpgradeRankGoal
+            | ICharacterUpgradeMow
+            | ICharacterAscendGoal
+            | ICharacterUnlockGoal
+            | IUpgradeMaterialGoal
+        >,
+        locs: ICampaignBattleComposed[]
+    ): void {
+        const energyAllowedCharacterIds = new Map<string, 'regular' | 'mythic' | 'both'>();
+        for (const goal of goals) {
+            if (goal.type !== PersonalGoalType.Ascend && goal.type !== PersonalGoalType.Unlock) continue;
+            if (goal.type === PersonalGoalType.Ascend && goal.farmType === 'onslaught') continue;
+            if (goal.type === PersonalGoalType.Unlock) {
+                energyAllowedCharacterIds.set(goal.unitId, 'regular');
+                continue;
+            }
+            if (goal.rarityStart < Rarity.Mythic) {
+                if (energyAllowedCharacterIds.has(goal.unitId)) {
+                    const current = energyAllowedCharacterIds.get(goal.unitId);
+                    const newValue = current === 'regular' ? 'regular' : 'both';
+                    energyAllowedCharacterIds.set(goal.unitId, newValue as 'regular' | 'mythic' | 'both');
+                } else {
+                    energyAllowedCharacterIds.set(goal.unitId, 'regular');
+                }
+            }
+            if (goal.rarityEnd === Rarity.Mythic) {
+                if (energyAllowedCharacterIds.has(goal.unitId)) {
+                    const current = energyAllowedCharacterIds.get(goal.unitId);
+                    const newValue = current === 'mythic' ? 'mythic' : 'both';
+                    energyAllowedCharacterIds.set(goal.unitId, newValue as 'regular' | 'mythic' | 'both');
+                } else {
+                    energyAllowedCharacterIds.set(goal.unitId, 'mythic');
+                }
+            }
+        }
+        for (const loc of locs) {
+            const reward = loc.rewards.potential.find(
+                r => r.id.startsWith('shards_') || r.id.startsWith('mythicShards_')
+            );
+            if (reward === undefined) continue;
+            const unitId = reward.id.split('_')[1];
+            const allowed = energyAllowedCharacterIds.get(unitId);
+            if (!allowed) {
+                loc.isSuggested = false;
+            } else if (reward.id.startsWith('shards_') && allowed === 'mythic') {
+                loc.isSuggested = false;
+            } else if (reward.id.startsWith('mythicShards_') && allowed === 'regular') {
+                loc.isSuggested = false;
+            }
+        }
+    }
+
     /*
      * @returns An array of `IUpgradesRaidsDay`, where each object represents a single day's
      * raiding plan. Returns an empty array if daily energy is too low to perform any raids.
@@ -611,7 +670,6 @@ export class UpgradesService {
             const locs = Object.values(remainingMats)
                 .flatMap(mat => mat.locations)
                 .filter(loc => loc.isSuggested);
-
             this.planDayRaiding(
                 day,
                 settings,
@@ -716,7 +774,10 @@ export class UpgradesService {
                     );
                 }
                 case IDailyRaidsHomeScreenEvent.machineHunt: {
-                    return this.getNonSummonMechanicalEnemyCount(loc) / loc.energyCost;
+                    return (
+                        (this.getNonSummonMechanicalEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) /
+                        loc.energyCost
+                    );
                 }
                 case IDailyRaidsHomeScreenEvent.trainingRush: {
                     return (this.getNonSummonEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
@@ -1515,14 +1576,16 @@ export class UpgradesService {
                 if (campaignType === CampaignType.Elite) return 5;
                 return 3;
             };
+            const invertHse = settings.preferences.invertHse ?? false;
+            const hsePointsDirection = invertHse ? ('asc' as const) : ('desc' as const);
             const orderingFields =
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
                     ? ['hsePoints', 'daysToComplete']
                     : ['priority', 'hsePoints', 'daysToComplete'];
             const orderingDirections =
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
-                    ? (['desc', 'desc'] as const)
-                    : (['asc', 'desc', 'desc'] as const);
+                    ? ([hsePointsDirection, 'desc'] as const)
+                    : (['asc', hsePointsDirection, 'desc'] as const);
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
@@ -1543,10 +1606,11 @@ export class UpgradesService {
                     break;
                 }
                 case IDailyRaidsHomeScreenEvent.machineHunt: {
-                    // Machine hunt is old and as of 1.36, doesn't differentiate between elite and non-elite raiding.
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
-                        hsePoints: this.getNonSummonMechanicalEnemyCount(x.loc) / x.loc.energyCost,
+                        hsePoints:
+                            (this.getNonSummonMechanicalEnemyCount(x.loc) * hsePointsPerUnit(x.loc.campaignType)) /
+                            x.loc.energyCost,
                     }));
                     break;
                 }

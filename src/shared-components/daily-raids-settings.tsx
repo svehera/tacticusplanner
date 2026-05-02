@@ -1,5 +1,6 @@
 ﻿import InfoIcon from '@mui/icons-material/Info';
 import {
+    Checkbox,
     DialogActions,
     DialogContent,
     DialogTitle,
@@ -302,6 +303,33 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             </Select>
                             <FormHelperText>Select your current Home Screen Event.</FormHelperText>
                         </FormControl>
+                        {(dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ??
+                            IDailyRaidsHomeScreenEvent.none) !== IDailyRaidsHomeScreenEvent.none && (
+                            <FormControl>
+                                <FormControlLabel
+                                    control={
+                                        <Checkbox
+                                            checked={dailyRaidsPreferencesForm.invertHse ?? false}
+                                            onChange={event_ =>
+                                                setDailyRaidsPreferencesForm(current => ({
+                                                    ...current,
+                                                    invertHse: event_.target.checked,
+                                                }))
+                                            }
+                                        />
+                                    }
+                                    label={
+                                        <div className="flex items-center gap-1">
+                                            Invert
+                                            <AccessibleTooltip title="When selected, prioritize raids that award the fewest points for the selected HSE">
+                                                <InfoIcon color="primary" fontSize="small" />
+                                            </AccessibleTooltip>
+                                        </div>
+                                    }
+                                />
+                            </FormControl>
+                        )}
+
                         {/*}
                         {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
                             IDailyRaidsHomeScreenEvent.trainingRush && (

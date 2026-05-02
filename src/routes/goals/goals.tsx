@@ -238,7 +238,15 @@ export const Goals = () => {
                 characters,
                 isGoalPriority
             ),
-        [estimatedUpgradesTotal, shardsGoals, upgradeRankOrMowGoals, upgradeAbilities, characters, isGoalPriority]
+        [
+            estimatedUpgradesTotal,
+            shardsGoals,
+            upgradeMaterialGoals,
+            upgradeRankOrMowGoals,
+            upgradeAbilities,
+            characters,
+            isGoalPriority,
+        ]
     );
 
     const adjustedGoalsEstimates = GoalsService.adjustGoalEstimates(
