@@ -774,7 +774,10 @@ export class UpgradesService {
                     );
                 }
                 case IDailyRaidsHomeScreenEvent.machineHunt: {
-                    return this.getNonSummonMechanicalEnemyCount(loc) / loc.energyCost;
+                    return (
+                        (this.getNonSummonMechanicalEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) /
+                        loc.energyCost
+                    );
                 }
                 case IDailyRaidsHomeScreenEvent.trainingRush: {
                     return (this.getNonSummonEnemyCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
@@ -1603,10 +1606,11 @@ export class UpgradesService {
                     break;
                 }
                 case IDailyRaidsHomeScreenEvent.machineHunt: {
-                    // Machine hunt is old and as of 1.36, doesn't differentiate between elite and non-elite raiding.
                     taggedLocs = taggedLocs.map(x => ({
                         ...x,
-                        hsePoints: this.getNonSummonMechanicalEnemyCount(x.loc) / x.loc.energyCost,
+                        hsePoints:
+                            (this.getNonSummonMechanicalEnemyCount(x.loc) * hsePointsPerUnit(x.loc.campaignType)) /
+                            x.loc.energyCost,
                     }));
                     break;
                 }
