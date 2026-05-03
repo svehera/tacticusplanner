@@ -363,7 +363,10 @@ export class CampaignsProgressionService {
         materialReqs: MaterialRequirements
     ): void {
         if (goal.type === PersonalGoalType.Unlock) {
-            this.addToMaterials(materialReqs, 'shards_' + goal.unitId, charsUnlockShards[goal.rarity] - goal.shards);
+            const shardsNeeded = charsUnlockShards[goal.rarity] - goal.shards;
+            if (shardsNeeded > 0) {
+                this.addToMaterials(materialReqs, 'shards_' + goal.unitId, shardsNeeded);
+            }
             return;
         }
         if (goal.type === PersonalGoalType.Ascend) {
