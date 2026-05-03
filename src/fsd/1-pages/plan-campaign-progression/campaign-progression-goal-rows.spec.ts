@@ -39,8 +39,12 @@ describe('campaign progression goal rows', () => {
                 level: 1,
                 xp: 0,
                 manuallyFarmXp: false,
+                appliedUpgrades: [],
                 rankStart: Rank.Iron1,
+                rankStartPoint5: false,
                 rankEnd: Rank.Bronze1,
+                rankPoint5: false,
+                upgradesRarity: [],
             },
             {
                 goalId: 'mow-goal',

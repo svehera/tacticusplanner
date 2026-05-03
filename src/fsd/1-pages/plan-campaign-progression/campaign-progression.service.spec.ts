@@ -321,7 +321,7 @@ describe('CampaignsProgressionService', () => {
 
         it('accumulates cumulative savings across multiple nodes', () => {
             // b1: oldEnergy=80, newCost=ceil(6·4/0.4)=60, threshold=78>60 → savings=80−60=20, cumul=20
-            // b2: oldEnergy=60 (updated), newCost=ceil(3·4/0.4)=30, threshold=60−2=58>30 → savings=80−30=50, cumul=70
+            // b2: oldEnergy=60 (updated), newCost=ceil(3·4/0.4)=30, threshold=60−2=58>30 → savings=60−30=30, cumul=50
             const result = makeProgressData('mat', { totalEnergy: 80, count: 4, canFarm: true });
             const battles = [
                 battleFor('mat', { energyCost: 6, dropRate: 0.4, nodeNumber: 1 }),
@@ -331,8 +331,10 @@ describe('CampaignsProgressionService', () => {
 
             const savings = result.data.get(Campaign.I)!.savings;
             expect(savings).toHaveLength(2);
+            expect(savings[0].savings).toBe(20);
             expect(savings[0].cumulativeSavings).toBe(20);
-            expect(savings[1].cumulativeSavings).toBe(70);
+            expect(savings[1].savings).toBe(30);
+            expect(savings[1].cumulativeSavings).toBe(50);
         });
 
         it('skips battles whose reward is not tracked in materialFarmData', () => {

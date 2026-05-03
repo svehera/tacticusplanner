@@ -31,27 +31,9 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
         const farmData = progression.materialFarmData.get(material);
         const requiredCount = farmData?.count ?? 0;
         const ownedCount = inventoryUpgrades[material] ?? 0;
-        const coveredByInventory = requiredCount > 0 && ownedCount >= requiredCount;
         const label = UpgradesService.getUpgrade(material)?.label ?? material;
         const lockedLocations = farmData?.unfarmableLocations ?? [];
         const neededBy = progression.charactersNeedingMaterials.get(material) ?? [];
-
-        if (coveredByInventory) {
-            return (
-                <div
-                    key={'covered_material-' + material}
-                    className="flex items-center justify-between gap-3 px-4 py-2 text-sm">
-                    <div className="flex items-center gap-2 text-green-700 dark:text-green-400">
-                        <MaterialIcon material={material} size={22} />
-                        <span className="font-medium">{label}</span>
-                        <span className="text-xs text-(--muted-fg)">already in inventory</span>
-                    </div>
-                    <span className="font-mono text-xs text-green-700 tabular-nums dark:text-green-400">
-                        {ownedCount}/{requiredCount}
-                    </span>
-                </div>
-            );
-        }
 
         return (
             <div
@@ -92,7 +74,9 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
                         )}
                     </div>
                 </div>
-                <span className="font-mono text-xs text-(--muted-fg) tabular-nums">need {requiredCount}</span>
+                <span className="font-mono text-xs text-(--muted-fg) tabular-nums">
+                    {ownedCount} owned · need {requiredCount}
+                </span>
             </div>
         );
     }

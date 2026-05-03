@@ -235,7 +235,7 @@ export class CampaignsProgressionService {
             const oldEnergy = latestEnergyCost.get(reward) ?? baseEnergy;
             // Only suggest a node if it saves at least count/2 energy, or if the material is not yet farmable.
             if (!canFarmNow || oldEnergy - farmData.count / 2 > newEnergyCost) {
-                const individualSavings = canFarmNow ? baseEnergy - newEnergyCost : 0;
+                const individualSavings = canFarmNow ? oldEnergy - newEnergyCost : 0;
                 if (canFarmNow) cumulativeSavings += individualSavings;
                 result.data
                     .get(campaign)
