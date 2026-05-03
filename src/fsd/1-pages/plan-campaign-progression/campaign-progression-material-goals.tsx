@@ -18,12 +18,14 @@ interface Props {
     progression: CampaignsProgressData;
 }
 
+/** Returns a tooltip explaining that a material will be unlocked before reaching this battle. */
 function getUnlockTooltip(earlierUnlockBattle?: ICampaignBattleComposed): string {
     return earlierUnlockBattle
         ? 'Currently unfarmable, but will be unlocked in ' + earlierUnlockBattle.id + ' before reaching this battle.'
         : '';
 }
 
+/** Returns a human-readable label for a material ID, resolving shard/mythic-shard prefixes to character names. */
 function getMaterialLabel(material: string): string {
     if (material.startsWith('shards_')) {
         const char = CharactersService.getUnit(material.slice('shards_'.length));
@@ -36,6 +38,7 @@ function getMaterialLabel(material: string): string {
     return UpgradesService.getUpgrade(material)?.label ?? '(unknown material)';
 }
 
+/** Renders the materials savings table for a single campaign card. */
 export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData, progression }) => {
     function getRequiredMaterialCount(material: string): number {
         return progression.materialFarmData.get(material)?.count ?? 0;

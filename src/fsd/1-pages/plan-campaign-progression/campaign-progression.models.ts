@@ -133,8 +133,10 @@ export class MaterialRequirements {
     materials: Record<string, number> = {};
 }
 
+/** A tuple of `[campaignId, CampaignProgressData]` used throughout the progression view. */
 export type CampaignData = [string, CampaignProgressData];
 
+/** A goal ID paired with its total energy cost, used to populate goal-cost tables. */
 export interface GoalCostRow {
     goalId: string;
     goalCost: number;

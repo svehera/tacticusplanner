@@ -36,6 +36,7 @@ import {
 const imperialFactions = factions.filter(f => f.alliance === 'Imperial');
 const chaosFactions = factions.filter(f => f.alliance === 'Chaos');
 
+/** Returns all factions that are allied to the given faction (same alliance, or just itself for Xenos). */
 const alliedFactions = (factionId: FactionId) => {
     const faction = factions.find(f => f.snowprintId === factionId);
     if (!faction) throw new Error(`Unknown faction ID: ${factionId}`);
@@ -61,6 +62,7 @@ const factionCampaigns = Object.fromEntries(
 
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
+/** Maps a rarity string to a numeric sort key (higher = rarer). */
 const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
     const rarityMap = {
         [Rarity.Common]: 0,
@@ -74,6 +76,10 @@ const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
     };
     return rarityMap[rarity];
 };
+/**
+ * Static service that analyses campaign progression and computes energy savings
+ * for beating uncleared nodes relative to a player's active goals.
+ */
 export class CampaignsProgressionService {
     /**
      * Computes the cost per goal and associates each character with the campaigns
@@ -484,6 +490,10 @@ export class CampaignsProgressionService {
         return { farmable, unfarmable };
     }
 
+    /**
+     * @returns All battles for `materialId` that the player has already cleared
+     *          and can therefore farm.
+     */
     public static getFarmableLocations(
         materialId: string,
         campaignProgress: ICampaignsProgress

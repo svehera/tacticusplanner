@@ -15,6 +15,7 @@ import { CampaignProgressionMaterialGoals } from './campaign-progression-materia
 import { CampaignProgressionRankupGoals } from './campaign-progression-rankup-goals';
 import { CampaignData, CampaignsProgressData } from './campaign-progression.models';
 
+/** The active tab shown in the expanded section of a campaign card. */
 export type CampaignProgressionTabId = 'ascend' | 'rankup' | 'mats';
 
 interface Props {
@@ -33,6 +34,7 @@ interface Props {
     totalBattles: number;
 }
 
+/** Collapsible card showing campaign progress, goals, and energy-savings analysis. */
 export const CampaignProgressionCard: React.FC<Props> = ({
     activeTab,
     ascendRows,

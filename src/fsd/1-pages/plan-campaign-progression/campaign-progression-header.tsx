@@ -11,6 +11,7 @@ interface Props {
     activeGoalsAction?: React.ReactNode;
 }
 
+/** Page header with title, subtitle, active-goals action slot, and a help dialog. */
 export const CampaignProgressionHeader: React.FC<Props> = ({ activeGoalsAction }) => {
     const [helpOpen, setHelpOpen] = useState(false);
 

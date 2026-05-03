@@ -9,6 +9,7 @@ interface Props {
     rows: AscensionGoalRow[];
 }
 
+/** Renders a table of ascension/unlock goal rows for a single campaign card. */
 export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ rows }) => {
     if (rows.length === 0) return;
 

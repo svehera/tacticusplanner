@@ -12,11 +12,13 @@ import { buildGoalRows, CampaignData, GoalCostRow } from './campaign-progression
 
 type RankGoal = ICharacterUpgradeRankGoal | ICharacterUpgradeMow;
 
+/** A goal-cost row enriched with ascension/unlock goal data and its associated character. */
 export interface AscensionGoalRow extends GoalCostRow {
     goal: ICharacterAscendGoal;
     unit?: ICharacterData;
 }
 
+/** A goal-cost row enriched with rank-up goal data, rank bounds, and a rank-lookup link. */
 export interface RankupGoalRow extends GoalCostRow {
     goal: RankGoal;
     unit?: ICharacterData;
@@ -25,6 +27,7 @@ export interface RankupGoalRow extends GoalCostRow {
     rankLookupHref: string;
 }
 
+/** Indexes `goals` by their `goalId`, warning if duplicates are found. */
 function buildGoalMap<T extends { goalId: string }>(goals: T[]): Map<string, T> {
     const goalsById = new Map<string, T>();
     for (const goal of goals) {
@@ -36,18 +39,22 @@ function buildGoalMap<T extends { goalId: string }>(goals: T[]): Map<string, T> 
     return goalsById;
 }
 
+/** Type guard: returns true when `goal` is an ascension (not just unlock) goal. */
 function isAscensionGoal(goal: ICharacterAscendGoal | ICharacterUnlockGoal | undefined): goal is ICharacterAscendGoal {
     return !!goal && 'rarityStart' in goal && 'starsStart' in goal;
 }
 
+/** Returns the starting rank for a rank-up or MoW goal. */
 function getRankStart(goal: RankGoal): number {
     return 'rankStart' in goal ? goal.rankStart : 0;
 }
 
+/** Returns the target rank for a rank-up or MoW goal. */
 function getRankEnd(goal: RankGoal): number {
     return 'rankEnd' in goal ? goal.rankEnd : 1;
 }
 
+/** Builds a relative URL to the rank-lookup page pre-filled with the goal's character and rank range. */
 function getRankLookupHref(goal: RankGoal): string {
     const rankStart = Math.max(getRankStart(goal), 1);
     const rankEnd = getRankEnd(goal);
@@ -61,6 +68,7 @@ function getRankLookupHref(goal: RankGoal): string {
     );
 }
 
+/** Builds ascension/unlock rows for `campaignData` filtered to goals in `goals`. */
 export function buildAscensionGoalRows(
     campaignData: CampaignData,
     goals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>
@@ -79,6 +87,7 @@ export function buildAscensionGoalRows(
     });
 }
 
+/** Builds rank-up rows for `campaignData` filtered to goals in `goals`. */
 export function buildRankupGoalRows(
     campaignData: CampaignData,
     goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>

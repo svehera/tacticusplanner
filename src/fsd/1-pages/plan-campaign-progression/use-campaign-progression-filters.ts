@@ -4,6 +4,7 @@ import { useSearchParams } from 'react-router-dom';
 import { CampaignProgressionTabId } from './campaign-progression-card';
 import { SortMode } from './campaign-progression.utils';
 
+/** All filter and sort state exposed by `useCampaignProgressionFilters`, synced to URL search params. */
 export interface CampaignProgressionFilters {
     sortMode: SortMode;
     setSortMode: (mode: SortMode) => void;
@@ -20,6 +21,7 @@ export interface CampaignProgressionFilters {
     getActiveTab: (campaign: string) => CampaignProgressionTabId;
 }
 
+/** Manages filter/sort state for the Campaign Progression page, persisting selections to URL search params. */
 export function useCampaignProgressionFilters(): CampaignProgressionFilters {
     const [searchParameters, setSearchParameters] = useSearchParams();
 

@@ -8,6 +8,7 @@ import {
 
 import { CampaignData } from './campaign-progression.models';
 
+/** Sort order for the campaign card list on the Campaign Progression page. */
 export type SortMode = 'savings' | 'earlyPayoff' | 'goalPriority' | 'unlocks';
 
 type AnyGoal = ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow;

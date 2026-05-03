@@ -9,6 +9,7 @@ interface Props {
     rows: RankupGoalRow[];
 }
 
+/** Renders a table of rank-up goal rows for a single campaign card. */
 export const CampaignProgressionRankupGoals: React.FC<Props> = ({ rows }) => {
     if (rows.length === 0) return;
 

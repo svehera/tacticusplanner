@@ -32,6 +32,7 @@ import { CampaignsProgressionService } from './campaign-progression.service';
 import { getCampaignLockReason, getCampaignTags, sortCampaignData } from './campaign-progression.utils';
 import { useCampaignProgressionFilters } from './use-campaign-progression-filters';
 
+/** Root component for the Campaign Progression planning page. */
 export const CampaignProgression = () => {
     const dispatch = useContext(DispatchContext);
     const {

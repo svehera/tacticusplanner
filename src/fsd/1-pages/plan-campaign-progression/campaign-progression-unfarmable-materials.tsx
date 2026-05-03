@@ -20,6 +20,7 @@ interface Props {
     inventoryUpgrades: Record<string, number>;
 }
 
+/** Collapsible panel listing all materials that are not yet farmable (no cleared battle drops them). */
 export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
     progression,
     campaignDataArray,
