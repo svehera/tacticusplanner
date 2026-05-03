@@ -105,7 +105,6 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     return (
         <>
             <Button
-                size="small"
                 variant={'outlined'}
                 disabled={!goals?.length}
                 onClick={() => {

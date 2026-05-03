@@ -134,3 +134,22 @@ export class MaterialRequirements {
 }
 
 export type CampaignData = [string, CampaignProgressData];
+
+export interface GoalCostRow {
+    goalId: string;
+    goalCost: number;
+}
+
+/**
+ * Builds goal rows from a campaign's goal costs, keeping only goals that
+ * satisfy `predicate`.
+ */
+export function buildGoalRows(campaignData: CampaignData, predicate: (goalId: string) => boolean): GoalCostRow[] {
+    const rowData: GoalCostRow[] = [];
+    for (const [goalId, cost] of campaignData[1].goalCost) {
+        if (predicate(goalId)) {
+            rowData.push({ goalId, goalCost: cost });
+        }
+    }
+    return rowData;
+}
