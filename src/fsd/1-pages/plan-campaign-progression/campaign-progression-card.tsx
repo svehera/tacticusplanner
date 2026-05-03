@@ -76,6 +76,7 @@ export const CampaignProgressionCard: React.FC<Props> = ({
         <div
             className={`flex flex-col overflow-hidden rounded-xl border bg-(--card-bg) shadow-sm ${lockReason ? 'border-l-[3px] border-(--border) border-l-amber-500' : 'border-(--border)'}`}>
             <button
+                type="button"
                 aria-expanded={expanded}
                 aria-controls={detailId}
                 className="flex w-full cursor-pointer items-start gap-2 border-b border-(--border) px-3 py-2.5 text-left transition-colors hover:bg-(--muted) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset sm:gap-3 sm:px-4 sm:py-3"
