@@ -3,7 +3,7 @@ import { uniq } from 'lodash';
 // eslint-disable-next-line import-x/no-internal-modules
 import factions from '@/data/factions.json';
 
-import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { CampaignsService, CampaignType, ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import {
@@ -60,6 +60,16 @@ const factionCampaigns = Object.fromEntries(
     })
 );
 
+const allianceCampaigns: Record<Alliance, typeof CampaignsService.allCampaigns> = {
+    [Alliance.Imperial]: CampaignsService.allCampaigns.filter(c =>
+        imperialFactions.some(f => f.snowprintId === c.faction)
+    ),
+    [Alliance.Chaos]: CampaignsService.allCampaigns.filter(c => chaosFactions.some(f => f.snowprintId === c.faction)),
+    [Alliance.Xenos]: CampaignsService.allCampaigns.filter(c =>
+        factions.some(f => f.alliance === Alliance.Xenos && f.snowprintId === c.faction)
+    ),
+};
+
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
 /** Maps a rarity string to a numeric sort key (higher = rarer). */
@@ -81,6 +91,22 @@ const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
  * for beating uncleared nodes relative to a player's active goals.
  */
 export class CampaignsProgressionService {
+    private static getGoalCampaigns(
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal
+    ) {
+        if (goal.type === PersonalGoalType.MowAbilities) {
+            return allianceCampaigns[goal.unitAlliance] ?? [];
+        }
+
+        const unit = CharactersService.getUnit(goal.unitId);
+        if (!unit) {
+            console.error("Couldn't find unit '" + goal.unitId + "'.");
+            return [];
+        }
+
+        return factionCampaigns[unit.faction] ?? [];
+    }
+
     /**
      * Computes the cost per goal and associates each character with the campaigns
      * in which they can participate. Also computes the nodes we can beat to bring
@@ -109,14 +135,9 @@ export class CampaignsProgressionService {
             for (const x of goalData.unfarmableLocations) {
                 nodesToBeat.get(x.campaign)?.push(x);
             }
-            const unit = CharactersService.getUnit(goal.unitId);
-            if (!unit) {
-                console.error("Couldn't find unit '" + goal.unitId + "'.");
-                continue;
-            }
             // If this unit can participate in campaigns, add the farm data to the
             // campaign results.
-            for (const campaign of factionCampaigns[unit.faction]) {
+            for (const campaign of this.getGoalCampaigns(goal)) {
                 if (!result.data.get(campaign.id)) {
                     console.error("no campaign data for '" + campaign.id + "'.");
                     continue;
@@ -329,6 +350,9 @@ export class CampaignsProgressionService {
             result.farmData.set(materialId, farmData);
             result.farmableLocations.push(...farmData.farmableLocations);
             result.unfarmableLocations.push(...farmData.unfarmableLocations);
+        }
+        if (!result.canFarm) {
+            result.totalEnergy = result.totalEnergy === 0 ? -1 : -result.totalEnergy;
         }
         return result;
     }

@@ -1,13 +1,15 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 
 import { Alliance, Rarity } from '@/fsd/5-shared/model';
 
 import { Campaign, CampaignType, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
+import { ICharacterUpgradeMow, PersonalGoalType } from '@/fsd/4-entities/goal';
 
 import {
     CampaignProgressData,
     CampaignsProgressData,
     FarmData,
+    GoalData,
     MaterialRequirements,
 } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
@@ -194,6 +196,67 @@ describe('CampaignsProgressionService', () => {
             reqs.materials = { mat1: 10, mat2: 3, mat3: 5 };
             service.subtractInventory(reqs, { mat1: 4, mat2: 3 });
             expect(reqs.materials).toEqual({ mat1: 6, mat3: 5 });
+        });
+    });
+
+    describe('computeGoalCost', () => {
+        it('preserves a negative sentinel when any required material is still locked', () => {
+            const gatherSpy = vi
+                .spyOn(service, 'gatherMaterialRequirements')
+                .mockImplementation((...arguments_: unknown[]) => {
+                    const [, reqs] = arguments_ as [unknown, MaterialRequirements];
+                    reqs.materials = { mat1: 2 };
+                });
+            const subtractSpy = vi.spyOn(service, 'subtractInventory').mockImplementation(() => {});
+            const farmSpy = vi
+                .spyOn(CampaignsProgressionService, 'getCostToFarm')
+                .mockReturnValue(
+                    makeFarmData({ canFarm: false, totalEnergy: 40, unfarmableLocations: [makeBattle('locked-node')] })
+                );
+
+            const result = CampaignsProgressionService.computeGoalCost({} as never, {} as never, {});
+
+            expect(result.canFarm).toBe(false);
+            expect(result.totalEnergy).toBe(-40);
+
+            gatherSpy.mockRestore();
+            subtractSpy.mockRestore();
+            farmSpy.mockRestore();
+        });
+    });
+
+    describe('computeCampaignsProgress', () => {
+        it('adds MoW goals to alliance campaign goal costs', () => {
+            const computeGoalCostSpy = vi
+                .spyOn(CampaignsProgressionService, 'computeGoalCost')
+                .mockReturnValue(Object.assign(new GoalData(), { totalEnergy: 42, canFarm: true }));
+            const mowGoal: ICharacterUpgradeMow = {
+                goalId: 'mow-goal',
+                include: true,
+                notes: '',
+                priority: 1,
+                type: PersonalGoalType.MowAbilities,
+                unitAlliance: Alliance.Chaos,
+                unitIcon: 'mow.png',
+                unitId: 'blackForgefiend',
+                unitName: 'Forgefiend',
+                unitRoundIcon: 'mow-round.png',
+                primaryStart: 1,
+                primaryEnd: 2,
+                secondaryStart: 1,
+                secondaryEnd: 2,
+                upgradesRarity: [],
+                shards: 0,
+                stars: 0,
+                rarity: Rarity.Common,
+            };
+
+            const result = CampaignsProgressionService.computeCampaignsProgress([mowGoal], {} as never, {});
+            const campaignsWithGoal = [...result.data.values()].filter(data => data.goalCost.get('mow-goal') === 42);
+
+            expect(campaignsWithGoal.length).toBeGreaterThan(0);
+
+            computeGoalCostSpy.mockRestore();
         });
     });
 

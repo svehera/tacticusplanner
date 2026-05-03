@@ -140,6 +140,7 @@ export type CampaignData = [string, CampaignProgressData];
 export interface GoalCostRow {
     goalId: string;
     goalCost: number;
+    canFarm: boolean;
 }
 
 /**
@@ -150,7 +151,7 @@ export function buildGoalRows(campaignData: CampaignData, predicate: (goalId: st
     const rowData: GoalCostRow[] = [];
     for (const [goalId, cost] of campaignData[1].goalCost) {
         if (predicate(goalId)) {
-            rowData.push({ goalId, goalCost: cost });
+            rowData.push({ goalId, goalCost: Math.abs(cost), canFarm: cost >= 0 });
         }
     }
     return rowData;

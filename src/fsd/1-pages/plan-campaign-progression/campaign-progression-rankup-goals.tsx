@@ -34,35 +34,50 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ rows }) => {
                     </tr>
                 </thead>
                 <tbody>
-                    {rows.map(({ goalCost, goalId, rankEnd, rankLookupHref, rankStart, unit }) => {
-                        return (
-                            <tr key={goalId} className="border-b border-(--border)/50">
-                                <td className="px-2 py-1.5 align-middle">
-                                    <a
-                                        href={rankLookupHref}
-                                        aria-label={`View rank lookup for ${unit?.name ?? goalId}`}>
-                                        <UnitShardIcon
-                                            icon={unit?.roundIcon ?? '(undefined)'}
-                                            height={28}
-                                            tooltip={unit?.name}
-                                        />
-                                    </a>
-                                </td>
-                                <td className="px-2 py-1.5 align-middle">
-                                    <RankIcon rank={rankStart} />
-                                </td>
-                                <td className="px-1 py-1.5 align-middle">
-                                    <ArrowForward sx={{ fontSize: 16 }} className="text-(--muted-fg)" />
-                                </td>
-                                <td className="px-2 py-1.5 align-middle">
-                                    <RankIcon rank={rankEnd} />
-                                </td>
-                                <td className="px-2 py-1.5 align-middle font-mono font-semibold text-blue-600 tabular-nums dark:text-blue-400">
-                                    costs {goalCost} <MiscIcon icon={'energy'} height={15} width={15} />
-                                </td>
-                            </tr>
-                        );
-                    })}
+                    {rows.map(
+                        ({
+                            canFarm,
+                            goalCost,
+                            goalId,
+                            rankEnd,
+                            rankLookupHref,
+                            rankStart,
+                            unitName,
+                            unitRoundIcon,
+                        }) => {
+                            return (
+                                <tr key={goalId} className="border-b border-(--border)/50">
+                                    <td className="px-2 py-1.5 align-middle">
+                                        <a href={rankLookupHref} aria-label={`View rank lookup for ${unitName}`}>
+                                            <UnitShardIcon
+                                                icon={unitRoundIcon || '(undefined)'}
+                                                height={28}
+                                                tooltip={unitName}
+                                            />
+                                        </a>
+                                    </td>
+                                    <td className="px-2 py-1.5 align-middle">
+                                        <RankIcon rank={rankStart} />
+                                    </td>
+                                    <td className="px-1 py-1.5 align-middle">
+                                        <ArrowForward sx={{ fontSize: 16 }} className="text-(--muted-fg)" />
+                                    </td>
+                                    <td className="px-2 py-1.5 align-middle">
+                                        <RankIcon rank={rankEnd} />
+                                    </td>
+                                    <td className="px-2 py-1.5 align-middle font-mono font-semibold tabular-nums">
+                                        {canFarm ? (
+                                            <span className="text-blue-600 dark:text-blue-400">
+                                                costs {goalCost} <MiscIcon icon={'energy'} height={15} width={15} />
+                                            </span>
+                                        ) : (
+                                            <span className="text-amber-600 dark:text-amber-400">Unlock first</span>
+                                        )}
+                                    </td>
+                                </tr>
+                            );
+                        }
+                    )}
                 </tbody>
             </table>
         </div>

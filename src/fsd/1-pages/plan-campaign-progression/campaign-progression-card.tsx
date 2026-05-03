@@ -51,6 +51,9 @@ export const CampaignProgressionCard: React.FC<Props> = ({
     totalBattles,
 }) => {
     const [campaign] = campaignData;
+    const campaignSlug = campaign.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-');
+    const detailId = `campaign-detail-${campaignSlug}`;
+    const tabsId = `campaign-tabs-${campaignSlug}`;
     const upcoming = Math.max(0, totalBattles - lastCleared);
     const progress = totalBattles > 0 ? lastCleared / totalBattles : 0;
     const cumulativeSavings = campaignData[1].savings.at(-1)?.cumulativeSavings ?? 0;
@@ -67,13 +70,14 @@ export const CampaignProgressionCard: React.FC<Props> = ({
     const visibleTabs = tabs.filter(tab => tab.visible);
     const effectiveTab =
         showTabs && !visibleTabs.some(t => t.id === activeTab) ? (visibleTabs[0]?.id ?? activeTab) : activeTab;
+    const panelId = `campaign-panel-${campaignSlug}-${effectiveTab}`;
 
     return (
         <div
             className={`flex flex-col overflow-hidden rounded-xl border bg-(--card-bg) shadow-sm ${lockReason ? 'border-l-[3px] border-(--border) border-l-amber-500' : 'border-(--border)'}`}>
             <button
                 aria-expanded={expanded}
-                aria-controls={`campaign-detail-${campaign}`}
+                aria-controls={detailId}
                 className="flex w-full cursor-pointer items-start gap-2 border-b border-(--border) px-3 py-2.5 text-left transition-colors hover:bg-(--muted) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset sm:gap-3 sm:px-4 sm:py-3"
                 onClick={onToggle}>
                 <div className="flex h-[50px] w-[70px] flex-shrink-0 items-center justify-center overflow-hidden">
@@ -163,13 +167,23 @@ export const CampaignProgressionCard: React.FC<Props> = ({
             </button>
 
             {expanded && (
-                <div id={`campaign-detail-${campaign}`} className="flex flex-col">
+                <div id={detailId} className="flex flex-col">
                     {showTabs && (
-                        <div className="flex border-b border-(--border)">
+                        <div
+                            id={tabsId}
+                            role="tablist"
+                            aria-label={`${campaign} goal views`}
+                            className="flex border-b border-(--border)">
                             {visibleTabs.map(tab => (
                                 <button
                                     key={tab.id}
+                                    id={`campaign-tab-${campaignSlug}-${tab.id}`}
+                                    type="button"
                                     onClick={() => onTabChange(tab.id)}
+                                    role="tab"
+                                    aria-selected={effectiveTab === tab.id}
+                                    aria-controls={`campaign-panel-${campaignSlug}-${tab.id}`}
+                                    tabIndex={effectiveTab === tab.id ? 0 : -1}
                                     className={`px-3 py-1.5 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset ${
                                         effectiveTab === tab.id
                                             ? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
@@ -183,7 +197,11 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                             ))}
                         </div>
                     )}
-                    <div className="p-3">
+                    <div
+                        id={panelId}
+                        role={showTabs ? 'tabpanel' : undefined}
+                        aria-labelledby={showTabs ? `campaign-tab-${campaignSlug}-${effectiveTab}` : undefined}
+                        className="p-3">
                         {showTabs ? (
                             <>
                                 {effectiveTab === 'ascend' && hasAscend && (
