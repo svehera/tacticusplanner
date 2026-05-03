@@ -150,7 +150,10 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                     <ArrowForward sx={{ fontSize: 16 }} className="text-(--muted-fg)" />
                                 </td>
                                 <td className="px-2 py-1.5 align-middle">
-                                    <MaterialIcon material={material} size={28} />
+                                    <div className="flex items-center gap-1.5">
+                                        <MaterialIcon material={material} size={24} />
+                                        <span className="text-xs">{getMaterialLabel(material)}</span>
+                                    </div>
                                 </td>
                                 {!isMobile && (
                                     <td className="px-2 py-1.5 align-middle font-mono tabular-nums">

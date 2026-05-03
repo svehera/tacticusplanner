@@ -278,5 +278,40 @@ describe('CampaignsProgressionService', () => {
 
             expect(result.data.get(Campaign.I)!.savings).toHaveLength(0);
         });
+
+        it('transitions from unlock to savings after the first unlock node', () => {
+            // canFarm=false → first node is "Unlocks", second node becomes "Saves"
+            // b1: unlock row (canFarmPrior=false), firstUnlockEnergy = ceil(6*5/0.3) = 100
+            // b2: canFarmNow=true; newCost=ceil(3*5/0.3)=50; threshold: 100 - 5/2=97.5 > 50 → included
+            //     savings = firstUnlockEnergy(100) - 50 = 50, cumul = 50
+            const result = makeProgressData('mat', { totalEnergy: 0, count: 5, canFarm: false });
+            const battles = [
+                battleFor('mat', { energyCost: 6, dropRate: 0.3, nodeNumber: 1 }),
+                battleFor('mat', { energyCost: 3, dropRate: 0.3, nodeNumber: 2 }),
+            ];
+            service.computeBattleSavings(Campaign.I, battles, result);
+
+            const savings = result.data.get(Campaign.I)!.savings;
+            expect(savings).toHaveLength(2);
+            expect(savings[0].canFarmPrior).toBe(false);
+            expect(savings[1].canFarmPrior).toBe(true);
+            expect(savings[1].savings).toBe(50);
+            expect(savings[1].cumulativeSavings).toBe(50);
+        });
+
+        it('does not add a second unlock when threshold is not met after transition', () => {
+            // b1: unlock, firstUnlockEnergy=60; b2: canFarmNow=true, newCost=60 (same),
+            // threshold: 60 - 5/2=57.5 > 60 = false → excluded
+            const result = makeProgressData('mat', { totalEnergy: 0, count: 5, canFarm: false });
+            const battles = [
+                battleFor('mat', { energyCost: 6, dropRate: 0.5, nodeNumber: 1 }),
+                battleFor('mat', { energyCost: 6, dropRate: 0.5, nodeNumber: 2 }),
+            ];
+            service.computeBattleSavings(Campaign.I, battles, result);
+
+            const savings = result.data.get(Campaign.I)!.savings;
+            expect(savings).toHaveLength(1);
+            expect(savings[0].canFarmPrior).toBe(false);
+        });
     });
 });

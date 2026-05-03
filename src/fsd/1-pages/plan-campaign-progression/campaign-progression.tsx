@@ -100,6 +100,8 @@ export const CampaignProgression = () => {
 
     const campaignDataArray = useMemo(() => [...progression.data.entries()], [progression]);
 
+    const hasGoals = shardsGoals.length > 0 || upgradeRankOrMowGoals.length > 0;
+
     const summaryStats = useMemo(() => {
         const totalSavings = campaignDataArray.reduce(
             (sum, entry) => sum + (entry[1].savings.at(-1)?.cumulativeSavings ?? 0),
@@ -178,7 +180,7 @@ export const CampaignProgression = () => {
                 inventoryUpgrades={inventory.upgrades}
             />
 
-            {campaignDataArray.length === 0 && (
+            {!hasGoals && (
                 <div className="mt-2 flex max-w-md flex-col gap-3 overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) p-4 shadow-sm">
                     <p className="font-semibold">No campaign data yet</p>
                     <p className="text-sm text-(--muted-fg)">
@@ -192,7 +194,7 @@ export const CampaignProgression = () => {
                 </div>
             )}
 
-            {campaignDataArray.length > 0 && (
+            {hasGoals && (
                 <div className="flex flex-col gap-2">
                     <CampaignProgressionSummary stats={summaryStats} />
                     <CampaignProgressionControls

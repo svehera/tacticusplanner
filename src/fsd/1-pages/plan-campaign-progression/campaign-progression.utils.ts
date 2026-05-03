@@ -22,7 +22,7 @@ export function getCampaignTags(campaign: string): string[] {
         model.difficulty === CampaignDifficulty.eventExtremis ||
         model.difficulty === CampaignDifficulty.eventChallenge
     ) {
-        tags.push('Elite/Extermis');
+        tags.push('Elite/Extremis');
     }
     if (
         model.difficulty === CampaignDifficulty.eventStandard ||

@@ -98,7 +98,8 @@ export class CampaignsProgressionService {
         nodesToBeat: Map<string, ICampaignBattleComposed[]>
     ): void {
         for (const goal of goals) {
-            const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
+            // Pass empty inventory so raw (pre-inventory) counts are aggregated below.
+            const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, {});
             for (const x of goalData.unfarmableLocations) {
                 nodesToBeat.get(x.campaign)?.push(x);
             }
@@ -117,12 +118,11 @@ export class CampaignsProgressionService {
                 result.data.get(campaign.id)?.goalCost.set(goal.goalId, goalData.totalEnergy);
             }
 
-            // Sum up all the materials across all goals.
+            // Sum up all the materials across all goals (raw counts, no inventory yet).
             for (const [material, data] of goalData.farmData.entries()) {
                 if (result.materialFarmData.has(material)) {
                     const existingData = result.materialFarmData.get(material)!;
                     existingData.count += data.count;
-                    existingData.totalEnergy += data.totalEnergy;
                 } else {
                     result.materialFarmData.set(material, data);
                 }
@@ -134,6 +134,25 @@ export class CampaignsProgressionService {
         }
         for (const [material, units] of result.charactersNeedingMaterials.entries()) {
             result.charactersNeedingMaterials.set(material, uniq(units.toSorted()));
+        }
+
+        // Apply inventory subtraction once against the aggregate counts (not per-goal).
+        for (const [material, farmData] of result.materialFarmData.entries()) {
+            const remaining = farmData.count - (inventoryUpgrades[material] ?? 0);
+            if (remaining <= 0) {
+                result.materialFarmData.delete(material);
+                continue;
+            }
+            farmData.count = remaining;
+            // Recompute totalEnergy with the adjusted count using the best farmable location.
+            if (farmData.canFarm && farmData.farmableLocations.length > 0) {
+                let best = Infinity;
+                for (const loc of farmData.farmableLocations) {
+                    const cost = this.getCostToFarmMaterial(loc, remaining);
+                    if (cost < best) best = cost;
+                }
+                farmData.totalEnergy = best;
+            }
         }
     }
 
@@ -169,22 +188,36 @@ export class CampaignsProgressionService {
         result: CampaignsProgressData
     ): void {
         const latestEnergyCost = new Map<string, number>();
+        // Track materials unlocked within this loop so subsequent nodes switch to savings mode.
+        const unlockedMaterials = new Set<string>();
+        // For materials that start unfarmable, record the first unlock node's cost as the baseline.
+        const firstUnlockEnergy = new Map<string, number>();
         let cumulativeSavings = 0;
 
         for (const battle of nodes) {
             const reward = this.getReward(battle);
             if (!result.materialFarmData.has(reward)) continue;
             const farmData = result.materialFarmData.get(reward)!;
+            const canFarmNow = farmData.canFarm || unlockedMaterials.has(reward);
             const newEnergyCost = this.getCostToFarmMaterial(battle, farmData.count);
-            const oldEnergy = latestEnergyCost.get(reward) ?? farmData.totalEnergy;
+            // For materials that started unfarmable but have been unlocked in this loop,
+            // use the first unlock node's cost as the energy baseline (farmData.totalEnergy is 0).
+            const baseEnergy = farmData.canFarm
+                ? farmData.totalEnergy
+                : (firstUnlockEnergy.get(reward) ?? newEnergyCost);
+            const oldEnergy = latestEnergyCost.get(reward) ?? baseEnergy;
             // Only suggest a node if it saves at least count/2 energy, or if the material is not yet farmable.
-            if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
-                const individualSavings = farmData.totalEnergy - newEnergyCost;
-                if (farmData.canFarm) cumulativeSavings += individualSavings;
+            if (!canFarmNow || oldEnergy - farmData.count / 2 > newEnergyCost) {
+                const individualSavings = canFarmNow ? baseEnergy - newEnergyCost : 0;
+                if (canFarmNow) cumulativeSavings += individualSavings;
                 result.data
                     .get(campaign)
-                    ?.savings.push(new BattleSavings(battle, individualSavings, cumulativeSavings, farmData.canFarm));
+                    ?.savings.push(new BattleSavings(battle, individualSavings, cumulativeSavings, canFarmNow));
                 latestEnergyCost.set(reward, newEnergyCost);
+                if (!canFarmNow) {
+                    unlockedMaterials.add(reward);
+                    firstUnlockEnergy.set(reward, newEnergyCost);
+                }
             }
         }
     }

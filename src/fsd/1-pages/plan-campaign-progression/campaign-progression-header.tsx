@@ -17,7 +17,6 @@ export const CampaignProgressionHeader: React.FC<Props> = ({ activeGoalsAction }
     return (
         <>
             <div className="flex flex-col gap-1 border-b border-(--border) pb-3">
-                <span className="text-xs text-(--muted-fg)">Plan / Campaign Progression</span>
                 <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
                     <div className="flex min-w-0 flex-col gap-1">
                         <div className="flex items-center gap-1.5">
