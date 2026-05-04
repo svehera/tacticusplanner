@@ -1,4 +1,4 @@
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+﻿import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -14,8 +14,6 @@ import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progres
 
 import { MobileCategoryCard } from '../components/mobile-category-card';
 import { MobileNavCard } from '../components/mobile-nav-card';
-
-import { PlanToBeDeletedRoutes } from './to-be-deleted-routes';
 
 enum SelectedRoutes {
     all,
@@ -82,7 +80,6 @@ export const PlanRoutes = () => {
 
             {selectedRoutes === SelectedRoutes.lre && <PlanLeRoutes />}
             {selectedRoutes === SelectedRoutes.gw && <PlanGuildWarRoutes />}
-            {selectedRoutes === SelectedRoutes.tbk && <PlanToBeDeletedRoutes />}
         </div>
     );
 };
