@@ -1,4 +1,4 @@
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+﻿import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -15,13 +15,10 @@ import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progres
 import { MobileCategoryCard } from '../components/mobile-category-card';
 import { MobileNavCard } from '../components/mobile-nav-card';
 
-import { PlanToBeDeletedRoutes } from './to-be-deleted-routes';
-
 enum SelectedRoutes {
     all,
     lre,
     gw,
-    tbk,
 }
 
 export const PlanRoutes = () => {
@@ -69,12 +66,6 @@ export const PlanRoutes = () => {
                         items={['Master Table', ...CharactersService.activeLres.map(le => le.name)]}
                         onClick={() => setSelectedRoutes(SelectedRoutes.lre)}
                     />
-                    <MobileCategoryCard
-                        icon={<FormatListBulletedIcon />}
-                        label="To Be Deleted"
-                        items={['Old Teams', 'Old Guild War Offense', 'Old Guild War Defense']}
-                        onClick={() => setSelectedRoutes(SelectedRoutes.tbk)}
-                    />
                 </>
             ) : (
                 <Button onClick={() => setSelectedRoutes(SelectedRoutes.all)}>Go Back</Button>
@@ -82,7 +73,6 @@ export const PlanRoutes = () => {
 
             {selectedRoutes === SelectedRoutes.lre && <PlanLeRoutes />}
             {selectedRoutes === SelectedRoutes.gw && <PlanGuildWarRoutes />}
-            {selectedRoutes === SelectedRoutes.tbk && <PlanToBeDeletedRoutes />}
         </div>
     );
 };

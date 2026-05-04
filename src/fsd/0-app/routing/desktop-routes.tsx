@@ -5,9 +5,7 @@ import { guidesLazyRoute } from '@/fsd/1-pages/guides/guides.route';
 import { guildLazyRoute } from '@/fsd/1-pages/guild/guild.route';
 import { guildApiLazyRoute } from '@/fsd/1-pages/guild-api/guild-api.route';
 import { guildInsightsLazyRoute } from '@/fsd/1-pages/guild-insights/guild-insights.route';
-import { guildWarDefenseLazyRoute } from '@/fsd/1-pages/guild-war-defense/guild-war-defense.route';
 import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war-zones.route';
-import { guildWarOffenseLazyRoute } from '@/fsd/1-pages/guild-war-offense/guild-war-offense.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
 import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
@@ -24,7 +22,6 @@ import { teams2Route } from '@/fsd/1-pages/plan-teams2/teams2.route';
 import { warDefense2Route } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.route';
 import { warOffense2Route } from '@/fsd/1-pages/plan-war-offense2/war-offense2.route';
 import { sharedRosterRoute } from '@/fsd/1-pages/shared-roster/shared-roster.route';
-import { teamsDesktopLazyRoute } from '@/fsd/1-pages/teams/teams.route';
 import { wyoLazyRoute } from '@/fsd/1-pages/who-you-own/who-you-own.route';
 
 import DesktopApp from './desktop-app';
@@ -64,10 +61,7 @@ export const globalPlanRoutes: RouteObject[] = [
     teams2Route,
     warDefense2Route,
     warOffense2Route,
-    guildWarOffenseLazyRoute,
-    guildWarDefenseLazyRoute,
     guildWarZonesLazyRoute,
-    teamsDesktopLazyRoute,
     lreLazyRoute,
     {
         path: 'plan/leMasterTable',
