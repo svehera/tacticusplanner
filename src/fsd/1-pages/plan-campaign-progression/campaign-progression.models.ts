@@ -133,4 +133,26 @@ export class MaterialRequirements {
     materials: Record<string, number> = {};
 }
 
+/** A tuple of `[campaignId, CampaignProgressData]` used throughout the progression view. */
 export type CampaignData = [string, CampaignProgressData];
+
+/** A goal ID paired with its total energy cost, used to populate goal-cost tables. */
+export interface GoalCostRow {
+    goalId: string;
+    goalCost: number;
+    canFarm: boolean;
+}
+
+/**
+ * Builds goal rows from a campaign's goal costs, keeping only goals that
+ * satisfy `predicate`.
+ */
+export function buildGoalRows(campaignData: CampaignData, predicate: (goalId: string) => boolean): GoalCostRow[] {
+    const rowData: GoalCostRow[] = [];
+    for (const [goalId, cost] of campaignData[1].goalCost) {
+        if (predicate(goalId)) {
+            rowData.push({ goalId, goalCost: Math.abs(cost), canFarm: cost >= 0 });
+        }
+    }
+    return rowData;
+}

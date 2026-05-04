@@ -3,7 +3,7 @@ import { uniq } from 'lodash';
 // eslint-disable-next-line import-x/no-internal-modules
 import factions from '@/data/factions.json';
 
-import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 
 import { CampaignsService, CampaignType, ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import {
@@ -22,6 +22,8 @@ import {
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IRecipeExpandedUpgrade, UpgradesService } from '@/fsd/4-entities/upgrade';
 
+import { ShardsService } from '@/fsd/3-features/goals';
+
 import {
     CampaignsProgressData,
     GoalData,
@@ -34,6 +36,7 @@ import {
 const imperialFactions = factions.filter(f => f.alliance === 'Imperial');
 const chaosFactions = factions.filter(f => f.alliance === 'Chaos');
 
+/** Returns all factions that are allied to the given faction (same alliance, or just itself for Xenos). */
 const alliedFactions = (factionId: FactionId) => {
     const faction = factions.find(f => f.snowprintId === factionId);
     if (!faction) throw new Error(`Unknown faction ID: ${factionId}`);
@@ -57,8 +60,19 @@ const factionCampaigns = Object.fromEntries(
     })
 );
 
+const allianceCampaigns: Record<Alliance, typeof CampaignsService.allCampaigns> = {
+    [Alliance.Imperial]: CampaignsService.allCampaigns.filter(c =>
+        imperialFactions.some(f => f.snowprintId === c.faction)
+    ),
+    [Alliance.Chaos]: CampaignsService.allCampaigns.filter(c => chaosFactions.some(f => f.snowprintId === c.faction)),
+    [Alliance.Xenos]: CampaignsService.allCampaigns.filter(c =>
+        factions.some(f => f.alliance === Alliance.Xenos && f.snowprintId === c.faction)
+    ),
+};
+
 const campaignFactions = Object.fromEntries(CampaignsService.allCampaigns.map(c => [c.id, alliedFactions(c.faction)]));
 
+/** Maps a rarity string to a numeric sort key (higher = rarer). */
 const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
     const rarityMap = {
         [Rarity.Common]: 0,
@@ -72,7 +86,27 @@ const mapRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): number => {
     };
     return rarityMap[rarity];
 };
+/**
+ * Static service that analyses campaign progression and computes energy savings
+ * for beating uncleared nodes relative to a player's active goals.
+ */
 export class CampaignsProgressionService {
+    private static getGoalCampaigns(
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal
+    ) {
+        if (goal.type === PersonalGoalType.MowAbilities) {
+            return allianceCampaigns[goal.unitAlliance] ?? [];
+        }
+
+        const unit = CharactersService.getUnit(goal.unitId);
+        if (!unit) {
+            console.error("Couldn't find unit '" + goal.unitId + "'.");
+            return [];
+        }
+
+        return factionCampaigns[unit.faction] ?? [];
+    }
+
     /**
      * Computes the cost per goal and associates each character with the campaigns
      * in which they can participate. Also computes the nodes we can beat to bring
@@ -96,18 +130,14 @@ export class CampaignsProgressionService {
         nodesToBeat: Map<string, ICampaignBattleComposed[]>
     ): void {
         for (const goal of goals) {
-            const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, inventoryUpgrades);
+            // Pass empty inventory so raw (pre-inventory) counts are aggregated below.
+            const goalData: GoalData = this.computeGoalCost(goal, campaignProgress, {});
             for (const x of goalData.unfarmableLocations) {
                 nodesToBeat.get(x.campaign)?.push(x);
             }
-            const unit = CharactersService.getUnit(goal.unitId);
-            if (!unit) {
-                console.error("Couldn't find unit '" + goal.unitId + "'.");
-                continue;
-            }
             // If this unit can participate in campaigns, add the farm data to the
             // campaign results.
-            for (const campaign of factionCampaigns[unit.faction]) {
+            for (const campaign of this.getGoalCampaigns(goal)) {
                 if (!result.data.get(campaign.id)) {
                     console.error("no campaign data for '" + campaign.id + "'.");
                     continue;
@@ -115,12 +145,11 @@ export class CampaignsProgressionService {
                 result.data.get(campaign.id)?.goalCost.set(goal.goalId, goalData.totalEnergy);
             }
 
-            // Sum up all the materials across all goals.
+            // Sum up all the materials across all goals (raw counts, no inventory yet).
             for (const [material, data] of goalData.farmData.entries()) {
                 if (result.materialFarmData.has(material)) {
                     const existingData = result.materialFarmData.get(material)!;
                     existingData.count += data.count;
-                    existingData.totalEnergy += data.totalEnergy;
                 } else {
                     result.materialFarmData.set(material, data);
                 }
@@ -132,6 +161,25 @@ export class CampaignsProgressionService {
         }
         for (const [material, units] of result.charactersNeedingMaterials.entries()) {
             result.charactersNeedingMaterials.set(material, uniq(units.toSorted()));
+        }
+
+        // Apply inventory subtraction once against the aggregate counts (not per-goal).
+        for (const [material, farmData] of result.materialFarmData.entries()) {
+            const remaining = farmData.count - (inventoryUpgrades[material] ?? 0);
+            if (remaining <= 0) {
+                result.materialFarmData.delete(material);
+                continue;
+            }
+            farmData.count = remaining;
+            // Recompute totalEnergy with the adjusted count using the best farmable location.
+            if (farmData.canFarm && farmData.farmableLocations.length > 0) {
+                let best = Infinity;
+                for (const loc of farmData.farmableLocations) {
+                    const cost = this.getCostToFarmMaterial(loc, remaining);
+                    if (cost < best) best = cost;
+                }
+                farmData.totalEnergy = best;
+            }
         }
     }
 
@@ -154,6 +202,51 @@ export class CampaignsProgressionService {
             returnValue.set(campaign, newBattles);
         }
         return returnValue;
+    }
+
+    /**
+     * For a single campaign, walks its unbeaten nodes in order and records
+     * any battle that either unlocks a new material or saves enough energy
+     * to be worth suggesting.
+     */
+    private static computeBattleSavings(
+        campaign: string,
+        nodes: ICampaignBattleComposed[],
+        result: CampaignsProgressData
+    ): void {
+        const latestEnergyCost = new Map<string, number>();
+        // Track materials unlocked within this loop so subsequent nodes switch to savings mode.
+        const unlockedMaterials = new Set<string>();
+        // For materials that start unfarmable, record the first unlock node's cost as the baseline.
+        const firstUnlockEnergy = new Map<string, number>();
+        let cumulativeSavings = 0;
+
+        for (const battle of nodes) {
+            const reward = this.getReward(battle);
+            if (!result.materialFarmData.has(reward)) continue;
+            const farmData = result.materialFarmData.get(reward)!;
+            const canFarmNow = farmData.canFarm || unlockedMaterials.has(reward);
+            const newEnergyCost = this.getCostToFarmMaterial(battle, farmData.count);
+            // For materials that started unfarmable but have been unlocked in this loop,
+            // use the first unlock node's cost as the energy baseline (farmData.totalEnergy is 0).
+            const baseEnergy = farmData.canFarm
+                ? farmData.totalEnergy
+                : (firstUnlockEnergy.get(reward) ?? newEnergyCost);
+            const oldEnergy = latestEnergyCost.get(reward) ?? baseEnergy;
+            // Only suggest a node if it saves at least count/2 energy, or if the material is not yet farmable.
+            if (!canFarmNow || oldEnergy - farmData.count / 2 > newEnergyCost) {
+                const individualSavings = canFarmNow ? oldEnergy - newEnergyCost : 0;
+                if (canFarmNow) cumulativeSavings += individualSavings;
+                result.data
+                    .get(campaign)
+                    ?.savings.push(new BattleSavings(battle, individualSavings, cumulativeSavings, canFarmNow));
+                latestEnergyCost.set(reward, newEnergyCost);
+                if (!canFarmNow) {
+                    unlockedMaterials.add(reward);
+                    firstUnlockEnergy.set(reward, newEnergyCost);
+                }
+            }
+        }
     }
 
     /**
@@ -180,7 +273,8 @@ export class CampaignsProgressionService {
      */
     public static computeCampaignsProgress(
         goals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal>,
-        campaignProgress: ICampaignsProgress
+        campaignProgress: ICampaignsProgress,
+        inventoryUpgrades: Record<string, number> = {}
     ): CampaignsProgressData {
         const result = new CampaignsProgressData();
 
@@ -194,45 +288,17 @@ export class CampaignsProgressionService {
             result.data.set(campaign, new CampaignProgressData());
         }
 
-        this.computeGoalCostsAndUnbeatenNodes(goals, campaignProgress, {}, result, nodesToBeat);
+        this.computeGoalCostsAndUnbeatenNodes(goals, campaignProgress, inventoryUpgrades, result, nodesToBeat);
 
         nodesToBeat = this.deduplicateNodesToBeat(nodesToBeat);
 
-        for (const campaign of nodesToBeat.keys()) {
-            const newMaterialEnergy = new Map<string, number>();
-            if ((nodesToBeat.get(campaign)?.length ?? 0) == 0) continue;
-            const nodes: ICampaignBattleComposed[] = nodesToBeat.get(campaign)!.toSorted((a, b) => {
-                return a.nodeNumber - b.nodeNumber;
-            });
-            let cumulativeSavings: number = 0;
-
-            // For each campaign, go through each node (in battle order) and compute the
-            // savings we achieve by being able to farm the node. If we don't save anything,
-            // then we omit the node from the results.
-            for (const battle of nodes) {
-                if (!result.materialFarmData.has(this.getReward(battle))) {
-                    // This is a character shard.
-                    continue;
-                }
-                const farmData = result.materialFarmData.get(this.getReward(battle))!;
-                const newEnergyCost: number = this.getCostToFarmMaterial(battle, farmData.count);
-                const oldEnergy = newMaterialEnergy.get(this.getReward(battle)) ?? farmData.totalEnergy;
-                // If we need X instances of an upgrade material, only suggest beating a node if we
-                // save at least X/2 energy by doing so (or if we can't farm the item).
-                if (oldEnergy - farmData.count / 2 > newEnergyCost || !farmData.canFarm) {
-                    const individualSavings = farmData.totalEnergy - newEnergyCost;
-                    // Only add to cumulative savings if this is actually a savings (not an unlock)
-                    if (farmData.canFarm) {
-                        cumulativeSavings += individualSavings;
-                    }
-                    result.data
-                        .get(campaign)
-                        ?.savings.push(
-                            new BattleSavings(battle, individualSavings, cumulativeSavings, farmData.canFarm)
-                        );
-                    newMaterialEnergy.set(this.getReward(battle), newEnergyCost);
-                }
-            }
+        for (const [campaign, nodes] of nodesToBeat) {
+            if (nodes.length === 0) continue;
+            this.computeBattleSavings(
+                campaign,
+                nodes.toSorted((a, b) => a.nodeNumber - b.nodeNumber),
+                result
+            );
         }
 
         return result;
@@ -246,11 +312,7 @@ export class CampaignsProgressionService {
      * @param count The number of this specific material that we need.
      */
     private static addToMaterials(materialReqs: MaterialRequirements, material: string, count: number): void {
-        if (materialReqs.materials[material]) {
-            materialReqs.materials[material] += count;
-        } else {
-            materialReqs.materials[material] = count;
-        }
+        materialReqs.materials[material] = (materialReqs.materials[material] ?? 0) + count;
     }
 
     /**
@@ -272,65 +334,80 @@ export class CampaignsProgressionService {
         inventoryUpgrades: Record<string, number>
     ): GoalData {
         const materialReqs = new MaterialRequirements();
-        if (goal.type == PersonalGoalType.Unlock) {
-            this.addToMaterials(materialReqs, goal.unitName, charsUnlockShards[goal.rarity] - goal.shards);
-        } else {
-            const upgradeRanks =
-                goal.type === PersonalGoalType.UpgradeRank
-                    ? CharacterUpgradesService.getCharacterUpgradeRank(goal as ICharacterUpgradeRankGoal)
-                    : CampaignsProgressionService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
+        this.gatherMaterialRequirements(goal, materialReqs);
+        this.subtractInventory(materialReqs, inventoryUpgrades);
 
-            for (const unitUpgrade of upgradeRanks) {
-                for (const upgradeMaterialId of unitUpgrade.upgrades) {
-                    const expandedRecipe: IRecipeExpandedUpgrade =
-                        UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
-                    if (Object.entries(expandedRecipe.expandedRecipe).length === 0) {
-                        this.addToMaterials(materialReqs, expandedRecipe.id, 1);
-                    } else {
-                        for (const [material, count] of Object.entries(expandedRecipe.expandedRecipe)) {
-                            if (material == 'Gold') continue;
-                            this.addToMaterials(materialReqs, material, count);
-                        }
+        const result = new GoalData();
+        const sortedMaterials = Object.keys(materialReqs.materials).toSorted((a, b) => {
+            const rarityA = UpgradesService.recipeExpandedUpgradeData[a]?.rarity;
+            const rarityB = UpgradesService.recipeExpandedUpgradeData[b]?.rarity;
+            return mapRarity(rarityB ?? 'Shard') - mapRarity(rarityA ?? 'Shard');
+        });
+        for (const materialId of sortedMaterials) {
+            const farmData = this.getCostToFarm(materialId, materialReqs.materials[materialId], campaignProgress);
+            result.canFarm = result.canFarm && farmData.canFarm;
+            result.totalEnergy += farmData.totalEnergy;
+            result.farmData.set(materialId, farmData);
+            result.farmableLocations.push(...farmData.farmableLocations);
+            result.unfarmableLocations.push(...farmData.unfarmableLocations);
+        }
+        if (!result.canFarm) {
+            result.totalEnergy = result.totalEnergy === 0 ? -1 : -result.totalEnergy;
+        }
+        return result;
+    }
+
+    /** Populates `materialReqs` with every base material the goal needs. */
+    private static gatherMaterialRequirements(
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterUnlockGoal | ICharacterAscendGoal,
+        materialReqs: MaterialRequirements
+    ): void {
+        if (goal.type === PersonalGoalType.Unlock) {
+            const shardsNeeded = charsUnlockShards[goal.rarity] - goal.shards;
+            if (shardsNeeded > 0) {
+                this.addToMaterials(materialReqs, 'shards_' + goal.unitId, shardsNeeded);
+            }
+            return;
+        }
+        if (goal.type === PersonalGoalType.Ascend) {
+            const shardsNeeded = ShardsService.getTargetShards(goal) - goal.shards;
+            if (shardsNeeded > 0) {
+                this.addToMaterials(materialReqs, 'shards_' + goal.unitId, shardsNeeded);
+            }
+            return;
+        }
+        const upgradeRanks =
+            goal.type === PersonalGoalType.UpgradeRank
+                ? CharacterUpgradesService.getCharacterUpgradeRank(goal as ICharacterUpgradeRankGoal)
+                : CampaignsProgressionService.getMowUpgradeRank(goal as ICharacterUpgradeMow);
+
+        for (const unitUpgrade of upgradeRanks) {
+            for (const upgradeMaterialId of unitUpgrade.upgrades) {
+                const expandedRecipe: IRecipeExpandedUpgrade =
+                    UpgradesService.recipeExpandedUpgradeData[upgradeMaterialId];
+                if (Object.keys(expandedRecipe.expandedRecipe).length === 0) {
+                    this.addToMaterials(materialReqs, expandedRecipe.id, 1);
+                } else {
+                    for (const [material, count] of Object.entries(expandedRecipe.expandedRecipe)) {
+                        if (material === 'Gold') continue;
+                        this.addToMaterials(materialReqs, material, count);
                     }
                 }
             }
         }
-        const result: GoalData = new GoalData();
+    }
 
-        {
-            const newMaterials: Record<string, number> = {};
-            for (const [material, count] of Object.entries(materialReqs.materials)) {
-                let newCount: number = count;
-                if (inventoryUpgrades[material]) {
-                    newCount -= inventoryUpgrades[material];
-                }
-                if (newCount > 0) {
-                    newMaterials[material] = newCount;
-                }
-            }
-            materialReqs.materials = newMaterials;
+    /** Reduces material counts by what is already in inventory, removing fully-covered entries. */
+    private static subtractInventory(
+        materialReqs: MaterialRequirements,
+        inventoryUpgrades: Record<string, number>
+    ): void {
+        const adjusted: Record<string, number> = {};
+        for (const [material, count] of Object.entries(materialReqs.materials)) {
+            const remaining = count - (inventoryUpgrades[material] ?? 0);
+            if (remaining > 0) adjusted[material] = remaining;
         }
-
-        const sortedMaterials: string[] = Object.keys(materialReqs.materials).toSorted(
-            (a, b) =>
-                mapRarity(UpgradesService.recipeExpandedUpgradeData[b].rarity) -
-                mapRarity(UpgradesService.recipeExpandedUpgradeData[a].rarity)
-        );
-        for (const materialId of sortedMaterials) {
-            const count: number = materialReqs.materials[materialId];
-            const farmData: FarmData = this.getCostToFarm(materialId, count, campaignProgress);
-            result.canFarm = result.canFarm && farmData.canFarm;
-            result.totalEnergy = result.totalEnergy + farmData.totalEnergy;
-            result.farmData.set(materialId, farmData);
-            for (const x of farmData.farmableLocations) {
-                result.farmableLocations.push(x);
-            }
-            for (const x of farmData.unfarmableLocations) {
-                result.unfarmableLocations.push(x);
-            }
-        }
-
-        return result;
+        materialReqs.materials = adjusted;
     }
 
     /**
@@ -379,15 +456,15 @@ export class CampaignsProgressionService {
      *          nodes we can use now, and in the future.
      */
     public static getCostToFarm(materialId: string, count: number, campaignProgress: ICampaignsProgress): FarmData {
-        const farmableLocs = this.getFarmableLocations(materialId, campaignProgress);
+        const { farmable, unfarmable } = this.partitionLocations(materialId, campaignProgress);
         const result: FarmData = {
             material: materialId,
             totalEnergy: 0,
-            canFarm: farmableLocs.length > 0,
-            count: count,
+            canFarm: farmable.length > 0,
+            count,
             campaignType: CampaignType.Normal,
-            farmableLocations: farmableLocs,
-            unfarmableLocations: this.getUnfarmableLocations(materialId, campaignProgress),
+            farmableLocations: farmable,
+            unfarmableLocations: unfarmable,
         };
         let bestBattle: ICampaignBattleComposed | undefined = undefined;
         for (const battle of result.farmableLocations) {
@@ -408,37 +485,6 @@ export class CampaignsProgressionService {
     }
 
     /**
-     * @param type The campaign type of the node.
-     * @returns the energy cost to raid/battle a node of the specified type.
-     */
-    public static getEnergyCost(type: CampaignType): number {
-        switch (type) {
-            case CampaignType.Normal: {
-                return 6;
-            }
-            case CampaignType.Mirror: {
-                return 6;
-            }
-            case CampaignType.Early: {
-                return 5;
-            }
-            case CampaignType.SuperEarly: {
-                return 3;
-            }
-            case CampaignType.Elite: {
-                return 10;
-            }
-            case CampaignType.Standard: {
-                return 6;
-            }
-            case CampaignType.Extremis: {
-                return 6;
-            }
-        }
-        return -1;
-    }
-
-    /**
      * @param battle The campaign battle to farm.
      * @param count The number of items to farm.
      * @returns The total expected energy cost using the ideal strategy to minimize
@@ -451,29 +497,35 @@ export class CampaignsProgressionService {
     }
 
     /**
-     *
-     * @param material The ID of the material to farm.
-     * @param campaignProgress Our campaign progress thus far, which restricts our ability
-     *                         to farm certain materials more cheaply (e.g. if we haven't
-     *                         beaten an elite node, only a normal node).
-     * @returns The locations from which we can currently farm a specific material.
+     * Partitions all battles for `materialId` into farmable (already cleared) and
+     * unfarmable (not yet cleared) in a single pass over the campaign data.
+     */
+    private static partitionLocations(
+        materialId: string,
+        campaignProgress: ICampaignsProgress
+    ): { farmable: ICampaignBattleComposed[]; unfarmable: ICampaignBattleComposed[] } {
+        const farmable: ICampaignBattleComposed[] = [];
+        const unfarmable: ICampaignBattleComposed[] = [];
+        for (const battle of Object.values(CampaignsService.campaignsComposed)) {
+            if (this.getReward(battle) !== materialId) continue;
+            if (CampaignsService.hasCompletedBattle(battle, campaignProgress)) {
+                farmable.push(battle);
+            } else {
+                unfarmable.push(battle);
+            }
+        }
+        return { farmable, unfarmable };
+    }
+
+    /**
+     * @returns All battles for `materialId` that the player has already cleared
+     *          and can therefore farm.
      */
     public static getFarmableLocations(
         materialId: string,
         campaignProgress: ICampaignsProgress
     ): ICampaignBattleComposed[] {
-        const result: ICampaignBattleComposed[] = [];
-
-        for (const [_, battle] of Object.entries(CampaignsService.campaignsComposed)) {
-            if (
-                this.getReward(battle) === materialId &&
-                CampaignsService.hasCompletedBattle(battle, campaignProgress)
-            ) {
-                result.push(battle);
-            }
-        }
-
-        return result;
+        return this.partitionLocations(materialId, campaignProgress).farmable;
     }
 
     /**
@@ -485,17 +537,10 @@ export class CampaignsProgressionService {
      *          we have yet to beat the necessary battle.
      */
     public static getUnfarmableLocations(
-        material: string,
+        materialId: string,
         campaignProgress: ICampaignsProgress
     ): ICampaignBattleComposed[] {
-        return Object.entries(CampaignsService.campaignsComposed)
-            .filter(([_, battle]) => {
-                return (
-                    this.getReward(battle) === material &&
-                    !CampaignsService.hasCompletedBattle(battle, campaignProgress)
-                );
-            })
-            .map(([_, battle]) => battle);
+        return this.partitionLocations(materialId, campaignProgress).unfarmable;
     }
 
     /**
