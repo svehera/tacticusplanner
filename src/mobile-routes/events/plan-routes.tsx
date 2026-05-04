@@ -19,7 +19,6 @@ enum SelectedRoutes {
     all,
     lre,
     gw,
-    tbk,
 }
 
 export const PlanRoutes = () => {
@@ -66,12 +65,6 @@ export const PlanRoutes = () => {
                         label="LRE"
                         items={['Master Table', ...CharactersService.activeLres.map(le => le.name)]}
                         onClick={() => setSelectedRoutes(SelectedRoutes.lre)}
-                    />
-                    <MobileCategoryCard
-                        icon={<FormatListBulletedIcon />}
-                        label="To Be Deleted"
-                        items={['Old Teams', 'Old Guild War Offense', 'Old Guild War Defense']}
-                        onClick={() => setSelectedRoutes(SelectedRoutes.tbk)}
                     />
                 </>
             ) : (
