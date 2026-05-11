@@ -147,22 +147,8 @@ interface SyncBannerProps {
 function SyncBanner({ currentSecondsUtc, lastSetAtSecondsUtc, onSync }: SyncBannerProps) {
     const staleAge = formatStaleAge(currentSecondsUtc, lastSetAtSecondsUtc);
     return (
-        <div
-            className="flex w-full items-center gap-3 rounded-[10px] border px-3.5 py-2.5 text-amber-400"
-            style={{
-                borderColor: 'rgba(245, 158, 11, 0.35)',
-                backgroundColor: 'rgba(245, 158, 11, 0.10)',
-            }}>
-            <span
-                className="animate-pulse-dot shrink-0 rounded-full"
-                style={{
-                    width: 8,
-                    height: 8,
-                    backgroundColor: '#f59e0b',
-                    boxShadow: '0 0 8px #f59e0b',
-                    display: 'inline-block',
-                }}
-            />
+        <div className="flex w-full items-center gap-3 rounded-[10px] border border-amber-400/35 bg-amber-400/10 px-3.5 py-2.5 text-amber-400">
+            <span className="animate-pulse-dot inline-block size-2 shrink-0 rounded-full bg-amber-400 [box-shadow:0_0_8px_#f59e0b]" />
             <span className="text-[11px] font-bold tracking-[1.2px] uppercase">Refresh Required</span>
             <span className="text-xs font-medium opacity-70">Last sync {staleAge}</span>
             <span className="flex-1" />
@@ -220,29 +206,22 @@ function TokenCard({ tokenKey, tokenData, lastSetAtSecondsUtc, currentSecondsUtc
             </span>
 
             {/* Progress bar */}
-            <div
-                className="mt-1.5 w-full overflow-hidden rounded-full"
-                style={{ height: 4, backgroundColor: 'rgba(255,255,255,0.08)' }}>
+            <div className="mt-1.5 h-1 w-full overflow-hidden rounded-full bg-white/8">
                 <div
-                    className="h-full transition-[width] duration-500 ease-out"
-                    style={{
-                        width: `${pct * 100}%`,
-                        background: isFull
-                            ? 'linear-gradient(90deg, #ef4444, #fb7185)'
-                            : 'linear-gradient(90deg, #818cf8, #a78bfa)',
-                    }}
+                    className={`h-full bg-gradient-to-r transition-[width] duration-500 ease-out ${isFull ? 'from-red-500 to-rose-400' : 'from-indigo-400 to-violet-400'}`}
+                    style={{ width: `${pct * 100}%` }}
                 />
             </div>
 
             {/* FULL IN caption — hidden when max===1 (next token = full, same timer) */}
             {!isFull && showCapCaption && (
-                <span className="mt-1 text-[10px] font-semibold tracking-[1px] uppercase" style={{ color: '#94a3b8' }}>
+                <span className="mt-1 text-[10px] font-semibold tracking-[1px] text-slate-400 uppercase">
                     FULL IN {formatShort(fullSec)}
                 </span>
             )}
             {/* OVER CAP caption — only when regen estimation capped the token (accurate duration known) */}
             {isFull && cappedForSec > 0 && (
-                <span className="mt-1 text-[10px] font-semibold tracking-[1px] uppercase" style={{ color: '#fca5a5' }}>
+                <span className="mt-1 text-[10px] font-semibold tracking-[1px] text-red-300 uppercase">
                     OVER CAP +{formatShort(cappedForSec)}
                 </span>
             )}
