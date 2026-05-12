@@ -14,6 +14,7 @@ interface Props {
     battle: ILreBattleProgress;
     maxKillPoints: number;
     projectedRestrictions: Set<string>;
+    projectedClear: boolean;
     setState: (
         requirement: ILreBattleRequirementsProgress,
         status: RequirementStatus,
@@ -60,7 +61,13 @@ const getNextStatus = (currentStatus: RequirementStatus): RequirementStatus => {
     }
 };
 
-export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, projectedRestrictions, setState }) => {
+export const LreTrackBattleSummary: React.FC<Props> = ({
+    battle,
+    maxKillPoints,
+    projectedRestrictions,
+    projectedClear,
+    setState,
+}) => {
     const [confirmDialogOpen, setConfirmDialogOpen] = useState(false);
     const [showDropdown, setShowDropdown] = useState<string>();
     const [dropdownPosition, setDropdownPosition] = useState<'top' | 'bottom'>('bottom');
@@ -266,6 +273,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                                         score={isKillScore ? requirement.killScore : requirement.highScore}
                                         scoreType={isKillScore ? 'killScore' : 'highScore'}
                                         maxScore={maxKillPoints}
+                                        projectedClear={projectedClear}
                                         onChange={(newStatus, newScore) =>
                                             handleStatusChange(requirement, newStatus, newScore)
                                         }
@@ -274,7 +282,9 @@ export const LreTrackBattleSummary: React.FC<Props> = ({ battle, maxKillPoints, 
                             }
 
                             // Use simple cycling button for other requirements
-                            const isProjected = projectedRestrictions.has(requirement.id);
+                            const isDefeatAll = requirement.id === LrePointsCategoryId.defeatAll;
+                            const isProjected =
+                                projectedRestrictions.has(requirement.id) || (isDefeatAll && projectedClear);
                             const isNotSet = status === RequirementStatus.NotCleared;
                             const shouldShowGreenBorder = isProjected && isNotSet;
 
