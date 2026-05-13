@@ -350,6 +350,7 @@ export const defaultData: IPersonalData2 = {
         forgeBadges: createRarityRecord(0),
         orbs: createAllianceRecord(createRarityRecord(0)),
         upgrades: {},
+        items: {},
     },
     guildWar: {
         zoneDifficulty: Difficulty.Easy,

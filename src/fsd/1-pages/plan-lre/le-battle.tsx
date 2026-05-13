@@ -165,7 +165,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                                     ).href
                                 }
                                 alt={`Map for Battle ${battle.number}`}
-                                className="h-auto w-[512px] object-cover"
+                                className="h-auto max-w-[512px] object-cover"
                             />
                         </div>
                     )}
