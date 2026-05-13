@@ -82,6 +82,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                 forgeBadges: { ...forgeBadges },
                 components: { ...components },
                 upgrades: upgrades,
+                items: {},
             };
         }
         case 'SyncWithTacticus': {
