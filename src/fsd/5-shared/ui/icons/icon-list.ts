@@ -173,6 +173,11 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     movement: snowprintIcons.movement,
     leShard: snowprintIcons.leShard,
     raidTicket: snowprintIcons.raidTicket,
+    bloodAngelsReq: snowprintIcons.bloodAngelsReq,
+    orksReq: snowprintIcons.orksReq,
+    armageddonCurrency: snowprintIcons.armageddonCurrency,
+    salvage: snowprintIcons.salvage,
+    mythicSalvage: snowprintIcons.mythicSalvage,
 };
 
 export const starsIcons = {

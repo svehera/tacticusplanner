@@ -79,6 +79,11 @@ import rareOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascensio
 import uncommonOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_uncommon.png';
 import xenosOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png';
 import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
+import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
+import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
+import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
+import mythicSalvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_mythic_salvage.png';
+import salvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_salvage.png';
 import chaosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_chaos.png';
 import imperialComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_imperial.png';
 import xenosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_xenos.png';
@@ -450,5 +455,25 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     raidTicket: {
         file: raidTicket,
         label: 'Raid Ticket',
+    },
+    bloodAngelsReq: {
+        file: bloodAngelsReq,
+        label: 'Blood Angels Requisition',
+    },
+    orksReq: {
+        file: orksReq,
+        label: 'Orks Requisition',
+    },
+    armageddonCurrency: {
+        file: armageddonCurrency,
+        label: 'Armageddon Currency',
+    },
+    salvage: {
+        file: salvage,
+        label: 'Salvage',
+    },
+    mythicSalvage: {
+        file: mythicSalvage,
+        label: 'Mythic Salvage',
     },
 };
