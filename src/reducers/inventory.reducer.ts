@@ -177,9 +177,6 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                 items[equipment.id][equipment.level] = equipment.amount;
             }
 
-            console.log('action.inventory.items', action.inventory.items);
-            console.log('update items', items);
-
             return {
                 ...state,
                 xpBooks: books,
