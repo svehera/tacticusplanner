@@ -410,6 +410,8 @@ export interface IInventory {
     forgeBadges: Record<Rarity, number>;
     orbs: Record<Alliance, Record<Rarity, number>>;
     upgrades: Record<string, number>;
+    // id -> <level -> quantity>
+    items: Record<string, Record<number, number>>;
 }
 
 export interface ILegendaryEventSettings {

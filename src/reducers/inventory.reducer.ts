@@ -113,6 +113,7 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
             const orbs = cloneDeep(badges);
             const forgeBadges = createEmptyRarityRecord();
             const components = { [Alliance.Imperial]: 0, [Alliance.Xenos]: 0, [Alliance.Chaos]: 0 };
+            const items: Record<string, Record<number, number>> = {};
             for (const book of xpBooks) {
                 books[RarityMapper.stringToRarity(book.rarity) ?? Rarity.Common] = book.amount;
             }
@@ -170,14 +171,24 @@ export const inventoryReducer = (state: IInventory, action: InventoryAction): II
                     result[upgradeId] = upgrade.amount;
                 }
             }
+
+            for (const equipment of action.inventory.items) {
+                items[equipment.id] = items[equipment.id] || {};
+                items[equipment.id][equipment.level] = equipment.amount;
+            }
+
+            console.log('action.inventory.items', action.inventory.items);
+            console.log('update items', items);
+
             return {
                 ...state,
-                xpBooks: { ...books },
-                abilityBadges: { ...badges },
-                orbs: { ...orbs },
-                forgeBadges: { ...forgeBadges },
-                components: { ...components },
+                xpBooks: books,
+                abilityBadges: badges,
+                orbs: orbs,
+                forgeBadges: forgeBadges,
+                components: components,
                 upgrades: result,
+                items: items,
             };
         }
         default: {

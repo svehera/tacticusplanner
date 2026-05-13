@@ -17,6 +17,7 @@ import { guildMenuItem } from '@/fsd/1-pages/guild/guild.menu-item';
 import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
+import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
 import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
@@ -53,6 +54,7 @@ export const menuItemById = {
     myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
     resources: resourcesMenuItem,
+    equipment: equipmentMenuItem,
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
@@ -93,6 +95,7 @@ export const inputSubMenu: MenuItemTP[] = [
     menuItemById['inventory'],
     menuItemById['xpIncome'],
     menuItemById['resources'],
+    menuItemById['equipment'],
     menuItemById['guild'],
 ];
 
