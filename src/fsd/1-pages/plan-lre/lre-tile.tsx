@@ -37,6 +37,7 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
         let maxEpicRank: Rank = character.rank;
         let maxLegendaryRank: Rank = character.rank;
         for (const rawGoal of upgradeRankOrMowGoals) {
+            if (!rawGoal.include) continue;
             // If it's not an upgrade, it's probably a MoW. Skip it.
             if (rawGoal.type !== PersonalGoalType.UpgradeRank) continue;
             const goal = rawGoal as ICharacterUpgradeRankGoal;

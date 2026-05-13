@@ -244,6 +244,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                 battle={battle}
                                 maxKillPoints={track.battlesPoints[battle.battleIndex]}
                                 projectedRestrictions={projectedRestrictions.get(battle.battleIndex) ?? new Set()}
+                                projectedClear={projectedRestrictions.has(battle.battleIndex)}
                                 setState={(requirement, status) =>
                                     updateDto(
                                         createNewModel(

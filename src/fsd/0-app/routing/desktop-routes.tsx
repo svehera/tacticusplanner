@@ -6,6 +6,7 @@ import { guildLazyRoute } from '@/fsd/1-pages/guild/guild.route';
 import { guildApiLazyRoute } from '@/fsd/1-pages/guild-api/guild-api.route';
 import { guildInsightsLazyRoute } from '@/fsd/1-pages/guild-insights/guild-insights.route';
 import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war-zones.route';
+import { equipmentLazyRoute } from '@/fsd/1-pages/input-equipment/equipment.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
 import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
@@ -39,6 +40,7 @@ export const globalInputRoutes: RouteObject[] = [
     },
     xpIncomeLazyRoute,
     resourcesLazyRoute,
+    equipmentLazyRoute,
     guildLazyRoute,
 ];
 

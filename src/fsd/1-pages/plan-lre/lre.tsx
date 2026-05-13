@@ -17,7 +17,8 @@ import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
+import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
+import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { IAutoTeamsPreferences, RequirementStatus } from '@/fsd/3-features/lre';
 import { ILreViewSettings } from '@/fsd/3-features/view-settings';
@@ -109,11 +110,11 @@ export const Lre: React.FC = () => {
     const resolvedCharacters = CharactersService.resolveStoredCharacters(characters);
     const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
-    const upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[] = GoalsService.prepareGoals(
-        goals,
-        [...resolvedCharacters, ...resolvedMows],
-        false
-    ).upgradeRankOrMowGoals;
+    const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
+    const { allGoals, upgradeRankOrMowGoals } = useMemo(
+        () => GoalsService.prepareGoals(goals, units, false),
+        [goals, units]
+    );
 
     const leUnitAscensionData = useMemo(() => {
         const character = resolvedCharacters.find(c => c.snowprintId === legendaryEvent.unitSnowprintId);
@@ -262,6 +263,13 @@ export const Lre: React.FC = () => {
         }
     };
 
+    const handleGoalsSelectionChange = (selection: TypedGoalSelect[]) => {
+        dispatch.goals({
+            type: 'UpdateDailyRaids',
+            value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
+        });
+    };
+
     function toggleView() {
         updateView(!viewPreferences.lreGridView);
     }
@@ -298,6 +306,13 @@ export const Lre: React.FC = () => {
                             Goals Preview
                             <Switch checked={viewPreferences.lreGoalsPreview} />
                         </div>
+                        {viewPreferences.lreGoalsPreview && (
+                            <ActiveGoalsDialog
+                                units={units}
+                                goals={allGoals}
+                                onGoalsSelectChange={handleGoalsSelectionChange}
+                            />
+                        )}
                         <div className="flex-box" onClick={toggleView}>
                             <TableRowsIcon color={viewPreferences.lreGridView ? 'disabled' : 'primary'} />
                             <Switch checked={viewPreferences.lreGridView} />

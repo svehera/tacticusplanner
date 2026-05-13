@@ -11,7 +11,7 @@ import { Alliance, Rank, Rarity, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-sh
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
 import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { IMow2, IMowLevelMaterials, MowsService } from '@/fsd/4-entities/mow';
 import { OrbAscensionCalculator } from '@/fsd/4-entities/unit/unit-ascension.service';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 
@@ -160,10 +160,35 @@ export class GoalsService {
             if (goal.type === PersonalGoalType.MowAbilities) {
                 const mowMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
 
-                estimate.mowEstimate = MowLookupService.getTotals([
-                    ...mowMaterials.slice(goal.primaryStart - 1, goal.primaryEnd - 1),
-                    ...mowMaterials.slice(goal.secondaryStart - 1, goal.secondaryEnd - 1),
-                ]);
+                // Collect indices already covered by higher-priority goals on the same MoW.
+                const coveredPrimary = new Set<number>();
+                const coveredSecondary = new Set<number>();
+                for (const otherGoal of upgradeRankOrMowGoals) {
+                    if (
+                        otherGoal.type !== PersonalGoalType.MowAbilities ||
+                        otherGoal.unitId !== goal.unitId ||
+                        otherGoal.priority >= goal.priority
+                    )
+                        continue;
+                    for (let index = otherGoal.primaryStart - 1; index < otherGoal.primaryEnd - 1; index++) {
+                        if (mowMaterials[index] !== undefined) coveredPrimary.add(index);
+                    }
+                    for (let index = otherGoal.secondaryStart - 1; index < otherGoal.secondaryEnd - 1; index++) {
+                        if (mowMaterials[index] !== undefined) coveredSecondary.add(index);
+                    }
+                }
+
+                const filteredMaterials: IMowLevelMaterials[] = [];
+                for (let index = goal.primaryStart - 1; index < goal.primaryEnd - 1; index++) {
+                    const m = mowMaterials[index];
+                    if (m !== undefined && !coveredPrimary.has(index)) filteredMaterials.push(m);
+                }
+                for (let index = goal.secondaryStart - 1; index < goal.secondaryEnd - 1; index++) {
+                    const m = mowMaterials[index];
+                    if (m !== undefined && !coveredSecondary.has(index)) filteredMaterials.push(m);
+                }
+
+                estimate.mowEstimate = MowLookupService.getTotals(filteredMaterials);
             }
             if (goal.type === PersonalGoalType.Ascend) {
                 const ascendGoal = goal as ICharacterAscendGoal;

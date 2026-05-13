@@ -24,13 +24,14 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
-import { Alliance, Rarity, useAuth } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
 import { ForgeBadgesTotal, MiscIcon, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService, IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { BadgesTotal } from '@/fsd/3-features/characters/components/badges-total';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
@@ -43,6 +44,29 @@ import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
+
+const MYTHIC_UNCRAFTABLE_UPGRADES = [
+    {
+        id: 'upgHpM001',
+        material: 'Imperial Aquila',
+        icon: 'snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM001.png',
+    },
+    {
+        id: 'upgHpM002',
+        material: 'Mutant Form',
+        icon: 'snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM002.png',
+    },
+    {
+        id: 'upgHpM003',
+        material: 'Ancient Inscription',
+        icon: 'snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM003.png',
+    },
+    {
+        id: 'upgHpM004',
+        material: 'Venerable Battle Mark',
+        icon: 'snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM004.png',
+    },
+] as const;
 
 const isShardRewardId = (rewardId: string | undefined): boolean =>
     rewardId !== undefined && (UpgradesService.isShard(rewardId) || UpgradesService.isMythicShard(rewardId));
@@ -138,6 +162,22 @@ export const Goals = () => {
     const energyAlreadySpent = useMemo(() => {
         return sum(dailyRaids.raidedLocations.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     }, [dailyRaids]);
+
+    const mythicMissingByUpgradeId = useMemo(() => {
+        const mythicIds = new Set<string>(MYTHIC_UNCRAFTABLE_UPGRADES.map(u => u.id));
+        const totalNeeded: Record<string, number> = {};
+        for (const mat of [...estimatedUpgradesTotal.inProgressMaterials, ...estimatedUpgradesTotal.blockedMaterials]) {
+            if (mat.id && mythicIds.has(mat.id)) {
+                totalNeeded[mat.id] = (totalNeeded[mat.id] ?? 0) + mat.requiredCount;
+            }
+        }
+        return Object.fromEntries(
+            MYTHIC_UNCRAFTABLE_UPGRADES.map(u => [
+                u.id,
+                Math.max(0, (totalNeeded[u.id] ?? 0) - (inventory.upgrades[u.id] ?? 0)),
+            ])
+        );
+    }, [estimatedUpgradesTotal, inventory.upgrades]);
 
     const shardRaidSummary = useMemo(() => {
         const daysWithShardRaids = estimatedUpgradesTotal.upgradesRaids
@@ -491,6 +531,29 @@ export const Goals = () => {
                                             components={adjustedGoalsEstimates.neededComponents}
                                             size={'medium'}
                                         />
+                                    </div>
+                                </div>
+
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                        Mythic Upgrade Materials
+                                    </div>
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                        <div className="flex flex-wrap gap-1">
+                                            {MYTHIC_UNCRAFTABLE_UPGRADES.map(upg => (
+                                                <div key={upg.id} className="flex flex-col items-center">
+                                                    <UpgradeImage
+                                                        material={upg.material}
+                                                        iconPath={upg.icon}
+                                                        rarity={RarityMapper.rarityToRarityString(Rarity.Mythic)}
+                                                        size={45}
+                                                    />
+                                                    <span className="mt-1 text-sm font-semibold">
+                                                        {mythicMissingByUpgradeId[upg.id] ?? 0}
+                                                    </span>
+                                                </div>
+                                            ))}
+                                        </div>
                                     </div>
                                 </div>
                             </div>
