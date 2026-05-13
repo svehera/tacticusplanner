@@ -82,7 +82,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
     let targetRankValues: number[] = [];
 
     if (form.type === PersonalGoalType.UpgradeRank) {
-        targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= form.rankStart && x <= maxRank);
+        const currentRank = isCharacter(unit) ? unit.rank : form.rankStart;
+        targetRankValues = getEnumValues(Rank).filter(x => x > 0 && x >= currentRank && x <= maxRank);
     }
 
     let possibleLocations: ICampaignBattleComposed[] = [];
