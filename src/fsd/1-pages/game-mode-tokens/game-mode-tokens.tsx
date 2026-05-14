@@ -182,7 +182,7 @@ function TokenCard({ tokenKey, tokenData, lastSetAtSecondsUtc, currentSecondsUtc
     const showCapCaption = !(tokenData.max === 1 && !isFull);
 
     return (
-        <div className="flex w-auto flex-col items-center gap-1 rounded-xl border border-(--card-border) bg-(--card-bg) px-3 pt-3.5 pb-3 shadow-sm sm:w-[124px]">
+        <div className="flex h-[176px] w-[124px] flex-col items-center gap-1 rounded-xl border border-(--card-border) bg-(--card-bg) px-3 pt-3.5 pb-3 shadow-sm">
             <MiscIcon
                 icon={(tokenIcons[tokenKey] ?? 'defaultToken') as keyof typeof tacticusIcons}
                 width={48}
