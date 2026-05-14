@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(grep -E '\\\\.\\(tsx?|json\\)$')",
+      "Bash(grep -n \"equipment1\\\\|equipment2\\\\|equipment3\" /c/Users/vkonupcik/source/GitHub/tacticusplanner/src/fsd/4-entities/character/*.ts)",
+      "Bash(grep -E '\\\\.\\(tsx|ts\\)$')"
+    ]
+  }
+}
