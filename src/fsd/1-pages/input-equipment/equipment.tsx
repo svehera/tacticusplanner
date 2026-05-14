@@ -348,6 +348,13 @@ export const Equipment = () => {
                 <span className="text-sm text-(--muted-fg)">{totalOwned} total pieces</span>
             </div>
 
+            {onlyRelics && Date.now() < Date.UTC(2026, 4, 20, 23, 59, 59) && (
+                <h2 className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-base font-semibold text-amber-400">
+                    {'In-Game code, valid until May 20th: '}
+                    <span className="font-mono tracking-wide">AHRIRELICWHEN</span>
+                </h2>
+            )}
+
             {/* Filters */}
             <div className="flex flex-wrap items-end gap-4 rounded-xl border border-(--border) bg-(--overlay) p-4">
                 {/* Rarity multi-select */}
