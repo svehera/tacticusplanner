@@ -3,6 +3,7 @@ import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
+import { armageddonReducer } from '@/reducers/armageddon.reducer';
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from '@/reducers/guild-reducer';
 import { guildWarReducer } from '@/reducers/guild-war-reducer';
@@ -79,6 +80,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         gameModeTokensActionReducer,
         globalState.gameModeTokens
     );
+    const [armageddon, dispatchArmageddon] = useReducer(armageddonReducer, globalState.armageddon);
     const [warDefense2, dispatchWarDefense2] = useReducer(warDefense2Reducer, globalState.warDefense2);
     const [warOffense2, dispatchWarOffense2] = useReducer(warOffense2Reducer, globalState.warOffense2);
     const [viewPreferences, dispatchViewPreferences] = useReducer(viewPreferencesReducer, globalState.viewPreferences);
@@ -227,6 +229,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse: wrapDispatch(dispatchXpUse),
             rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
             gameModeTokens: wrapDispatch(dispatchGameModeTokens),
+            armageddon: wrapDispatch(dispatchArmageddon),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 // Only update if incoming version is newer
                 setGlobalState(current => {
@@ -256,6 +259,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatchXpUse({ type: 'Set', value: data.xpUse });
                         dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
                         dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
+                        dispatchArmageddon({ type: 'Set', value: data.armageddon });
                         if (modified) {
                             setModified(true);
                             setModifiedDate(data.modifiedDate);
@@ -290,6 +294,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchXpUse,
             dispatchRosterSnapshots,
             dispatchGameModeTokens,
+            dispatchArmageddon,
             setGlobalState,
         ]
     );
@@ -328,6 +333,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse,
             rosterSnapshots,
             gameModeTokens,
+            armageddon,
             __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
@@ -348,6 +354,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         dailyRaidsPreferences,
         gameModeTokens,
         goals,
+        armageddon,
         guild,
         guildWar,
         inventory,

@@ -129,6 +129,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     ...activeLreMenuItems,
+    menuItemById['armageddon'],
     menuItemById['quests'],
     menuItemById['campaignProgression'],
     menuItemById['hses'],
