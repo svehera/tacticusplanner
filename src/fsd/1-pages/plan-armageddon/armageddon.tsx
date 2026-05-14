@@ -24,6 +24,28 @@ import { UpgradesService as GoalUpgradesService } from '@/fsd/3-features/goals/u
 
 import armageddonData from './data/armageddon.json';
 
+// Source of event currency:
+// Yarrick's quest (week 1?): 5, 10, 10, 15
+// TA (week 2?): 10, 10, 10, 10
+// Lav's quest (week 3?): 5, 10, 10, 15 ---> says Lav, but it will probably be someone else
+// shop itself: 6x5 per week for free
+// global hse week 1: 2x35
+// global hse week 2: 2x40
+// global hse week 3: 2x50
+// hse (per week)): 25, 50
+// milestones payouts (per week): 16x50
+// premium mission chain (per week): 10x50
+// calendar (per week): free currency 2x10
+// tactician's club offer: 100 (costs 400 credits)
+//
+// 1st week f2p: 40+30+75+70+800+20 = 1065
+// 2nd week f2p: 40+30+75+80+800+20 = 1075
+// 3rd week f2p: 40+30+75+80+800+20 = 1095
+//
+// 1st week with bonus: 1945
+// 2nd week with bonus: 1955
+// 3rd week with bonus: 1975
+
 // ─── uncraftable mythic upgrade materials (same set as goals page) ────────────
 
 const MYTHIC_UNCRAFTABLE_UPGRADES = [
@@ -1189,7 +1211,7 @@ export const Armageddon = () => {
                             {coverageRows.map(row => (
                                 <div
                                     key={row.rewardType}
-                                    className="flex flex-col gap-2 rounded-lg border border-(--border) bg-(--muted) p-3 sm:flex-row sm:items-start">
+                                    className="flex flex-col gap-2 rounded-lg border border-(--border) bg-(--muted) p-3 sm:flex-row sm:flex-wrap sm:items-start">
                                     {/* Icon + label */}
                                     <div className="flex shrink-0 items-center gap-2 sm:w-52">
                                         <div className="flex h-8 w-8 items-center justify-center">{row.icon}</div>
@@ -1215,7 +1237,10 @@ export const Armageddon = () => {
                                             <span className="text-(--muted-fg)">
                                                 Cart{' '}
                                                 <span className="font-semibold text-green-400">
-                                                    +{row.cartTotal.toLocaleString()}
+                                                    +
+                                                    {row.rewardType === 'gold'
+                                                        ? formatGold(row.cartTotal)
+                                                        : row.cartTotal.toLocaleString()}
                                                 </span>
                                             </span>
                                         )}
@@ -1248,6 +1273,26 @@ export const Armageddon = () => {
                     )}
                 </div>
             )}
+
+            {/* Currency earnings infographic */}
+            <div className="flex flex-wrap gap-3 rounded-xl border border-(--border) bg-(--overlay) px-4 py-3 text-sm">
+                <div className="flex items-center gap-1.5">
+                    <MiscIcon icon="armageddonCurrency" width={16} height={16} />
+                    <span className="text-(--muted-fg)">F2P per week:</span>
+                    <span className="font-semibold text-amber-400">1,050 – 1,100</span>
+                </div>
+                <span className="text-(--muted-fg) select-none">·</span>
+                <div className="flex items-center gap-1.5">
+                    <MiscIcon icon="armageddonCurrency" width={16} height={16} />
+                    <span className="text-(--muted-fg)">Bonus shipment:</span>
+                    <span className="font-semibold text-amber-400">+900</span>
+                </div>
+                <span className="text-(--muted-fg) select-none">·</span>
+                <div className="flex items-center gap-1.5">
+                    <MiscIcon icon="armageddonCurrency" width={16} height={16} />
+                    <span className="text-(--muted-fg)">Resets each week</span>
+                </div>
+            </div>
 
             {/* Shop grid */}
             {resolvedSlots.length === 0 ? (
