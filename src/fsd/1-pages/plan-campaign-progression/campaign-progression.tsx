@@ -1,21 +1,19 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import React, { useContext, useMemo } from 'react';
-import { isMobile } from 'react-device-detect';
+import { useContext, useMemo } from 'react';
+import { Link } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
-import { CampaignImage } from '@/fsd/4-entities/campaign';
+import { Rank } from '@/fsd/5-shared/model';
+
+import { CampaignsService } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import {
-    ICharacterUpgradeRankGoal,
-    ICharacterUpgradeMow,
-    ICharacterUnlockGoal,
     ICharacterAscendGoal,
+    ICharacterUnlockGoal,
+    ICharacterUpgradeMow,
+    ICharacterUpgradeRankGoal,
 } from '@/fsd/4-entities/goal';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -24,29 +22,26 @@ import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
 import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
-import { CampaignProgressionAscensionGoals } from './campaign-progression-ascension-goals';
+import { CampaignProgressionCard } from './campaign-progression-card';
+import { CampaignProgressionControls } from './campaign-progression-controls';
+import { buildAscensionGoalRows, buildRankupGoalRows } from './campaign-progression-goal-rows';
 import { CampaignProgressionHeader } from './campaign-progression-header';
-import { CampaignProgressionMaterialGoals } from './campaign-progression-material-goals';
-import { CampaignProgressionRankupGoals } from './campaign-progression-rankup-goals';
+import { CampaignProgressionSummary } from './campaign-progression-summary';
 import { CampaignProgressionUnfarmableMaterials } from './campaign-progression-unfarmable-materials';
-import { CampaignData } from './campaign-progression.models';
 import { CampaignsProgressionService } from './campaign-progression.service';
+import { getCampaignLockReason, getCampaignTags, sortCampaignData } from './campaign-progression.utils';
+import { useCampaignProgressionFilters } from './use-campaign-progression-filters';
 
-/**
- * @returns the row data for the grid that holds the material
- * requirements related to the campaign.
- */
-function getCampaignMaterialData(campaignData: CampaignData): any[] {
-    const rowData: any[] = [];
-    for (const savings of campaignData[1].savings) {
-        rowData.push({ savingsData: [{ savings: savings }] });
-    }
-    return rowData;
-}
-
+/** Root component for the Campaign Progression planning page. */
 export const CampaignProgression = () => {
     const dispatch = useContext(DispatchContext);
-    const { characters: storeCharacters, mows: storeMows, goals, campaignsProgress } = useContext(StoreContext);
+    const {
+        characters: storeCharacters,
+        mows: storeMows,
+        goals,
+        campaignsProgress,
+        inventory,
+    } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
@@ -55,7 +50,27 @@ export const CampaignProgression = () => {
         [storeCharacters]
     );
 
-    const [units] = React.useState<IUnit[]>([...resolvedCharacters, ...resolvedMows]);
+    const units = useMemo<IUnit[]>(() => [...resolvedCharacters, ...resolvedMows], [resolvedCharacters, resolvedMows]);
+
+    const ownedCharacterIds = useMemo(
+        () => new Set(resolvedCharacters.filter(c => c.rank !== Rank.Locked).map(c => c.snowprintId)),
+        [resolvedCharacters]
+    );
+
+    const {
+        sortMode,
+        setSortMode,
+        expandedCardId,
+        setExpandedCardId,
+        hideNoDrops,
+        setHideNoDrops,
+        hideLocked,
+        setHideLocked,
+        hideCE,
+        setHideCE,
+        setActiveTabs,
+        getActiveTab,
+    } = useCampaignProgressionFilters();
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals } = useMemo(() => {
         const { allGoals, shardsGoals, upgradeRankOrMowGoals } = GoalsService.prepareGoals(
@@ -63,9 +78,11 @@ export const CampaignProgression = () => {
             [...resolvedCharacters, ...resolvedMows],
             false
         );
-        const filteredShardsGoals = shardsGoals.filter(goal => goal.include);
-        const filteredUpgradeRankOrMowGoals = upgradeRankOrMowGoals.filter(goal => goal.include);
-        return { allGoals, shardsGoals: filteredShardsGoals, upgradeRankOrMowGoals: filteredUpgradeRankOrMowGoals };
+        return {
+            allGoals,
+            shardsGoals: shardsGoals.filter(goal => goal.include),
+            upgradeRankOrMowGoals: upgradeRankOrMowGoals.filter(goal => goal.include),
+        };
     }, [goals, resolvedCharacters, resolvedMows]);
 
     const handleGoalsSelectionChange = (selection: TypedGoalSelect[]) => {
@@ -76,180 +93,147 @@ export const CampaignProgression = () => {
     };
 
     const progression = useMemo(() => {
-        const allGoals: Array<
+        const combined: Array<
             ICharacterUpgradeMow | ICharacterUpgradeRankGoal | ICharacterUnlockGoal | ICharacterAscendGoal
         > = [...shardsGoals, ...upgradeRankOrMowGoals];
-        return CampaignsProgressionService.computeCampaignsProgress(allGoals, campaignsProgress);
-    }, [shardsGoals, upgradeRankOrMowGoals, campaignsProgress]);
+        return CampaignsProgressionService.computeCampaignsProgress(combined, campaignsProgress, inventory.upgrades);
+    }, [shardsGoals, upgradeRankOrMowGoals, campaignsProgress, inventory.upgrades]);
 
-    const campaignDataArray = useMemo(() => {
-        const result: CampaignData[] = [];
-        for (const [campaign, data] of progression.data.entries()) {
-            result.push([campaign, data]);
-        }
-        return result;
-    }, [progression]);
+    const campaignDataArray = useMemo(() => [...progression.data.entries()], [progression]);
 
-    /** @returns the goal with the given ID. */
-    function getGoal(
-        goalId: string
-    ): ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow | undefined {
-        let filtered: Array<
+    const hasGoals = shardsGoals.length > 0 || upgradeRankOrMowGoals.length > 0;
+
+    const summaryStats = useMemo(() => {
+        const totalSavings = campaignDataArray.reduce(
+            (sum, entry) => sum + (entry[1].savings.at(-1)?.cumulativeSavings ?? 0),
+            0
+        );
+        const activeCampaigns = campaignDataArray.filter(
+            entry => entry[1].savings.length > 0 || entry[1].goalCost.size > 0
+        ).length;
+        const allGoalIds = new Set(campaignDataArray.flatMap(entry => [...entry[1].goalCost.keys()]));
+        const lockedMaterials = [...progression.materialFarmData.values()].filter(f => !f.canFarm).length;
+        return { totalSavings, activeCampaigns, goalCount: allGoalIds.size, lockedMaterials };
+    }, [campaignDataArray, progression.materialFarmData]);
+
+    const goalsById = useMemo(() => {
+        const map = new Map<
+            string,
             ICharacterAscendGoal | ICharacterUnlockGoal | ICharacterUpgradeRankGoal | ICharacterUpgradeMow
-        > = upgradeRankOrMowGoals.filter(goal => goal.goalId == goalId);
-        if (filtered.length === 0) {
-            filtered = shardsGoals.filter(goal => goal.goalId == goalId);
+        >();
+        for (const goal of [...upgradeRankOrMowGoals, ...shardsGoals]) {
+            map.set(goal.goalId, goal);
         }
-        if (filtered.length === 0) {
-            console.warn('goalId not found { ' + goalId + ' ' + upgradeRankOrMowGoals.length + ' }');
-            return undefined;
-        }
-        if (filtered.length > 1) {
-            console.warn('multiple goals with ID ' + goalId + ' found.');
-        }
-        return filtered[0];
-    }
+        return map;
+    }, [shardsGoals, upgradeRankOrMowGoals]);
 
-    /**
-     * @returns the rankup goal with the given ID, or undefined if it either
-     *          doesn't exist, or isn't a rankup goal.
-     */
-    function getRankUpGoal(goalId: string): ICharacterUpgradeRankGoal | undefined {
-        const goal = getGoal(goalId);
-        if (goal && 'rankStart' in goal) return goal as ICharacterUpgradeRankGoal;
-        return undefined;
-    }
+    const sortedCampaignDataArray = useMemo(
+        () => sortCampaignData(campaignDataArray, sortMode, goalsById),
+        [campaignDataArray, goalsById, sortMode]
+    );
 
-    /**
-     * @returns the row data for the grid that holds the ascend-character
-     *          goals related to the campaign.
-     */
-    function getRankUpGoalData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
-        for (const [goalId, cost] of campaignData[1].goalCost) {
-            const goal = getRankUpGoal(goalId);
-            if (goal) rowData.push({ goalData: [{ goalId: goalId, goalCost: cost }] });
-        }
-        return rowData;
-    }
-
-    /**
-     * @returns the ascension goal with the given ID, or undefined if it either
-     *          doesn't exist, or isn't an ascension goal.
-     */
-    function getAscensionGoal(goalId: string): ICharacterAscendGoal | undefined {
-        const goal = getGoal(goalId);
-        if (goal && 'rarityStart' in goal && 'starsStart' in goal) return goal as ICharacterAscendGoal;
-        return undefined;
-    }
-
-    /**
-     * @returns the row data for the grid that holds the ascend-character
-     *          goals related to the campaign.
-     */
-    function getAscendGoalData(campaignData: CampaignData): any[] {
-        const rowData: any[] = [];
-        for (const [goalId, cost] of campaignData[1].goalCost) {
-            const goal = getAscensionGoal(goalId);
-            if (goal) {
-                rowData.push({ goalData: [{ goalId: goalId, goalCost: cost }] });
-            }
-        }
-        return rowData;
-    }
-
-    /**
-     * @returns a string representing the current battle to
-     * be completed for the given campaign. This is only ever
-     * called for incomplete campaigns.
-     */
-    function getCampaignProgress(campaign: string): any {
-        let returnValue = <>Completed</>;
-        for (const [key, value] of Object.entries(campaignsProgress)) {
-            if (key == campaign) {
-                returnValue = <div>Last Completed Battle: {value}</div>;
-            }
-        }
-        return returnValue;
-    }
+    const campaignCards = useMemo(
+        () =>
+            sortedCampaignDataArray
+                .map(campaignData => {
+                    const campaign = campaignData[0];
+                    return {
+                        campaign,
+                        campaignData,
+                        tags: getCampaignTags(campaign),
+                        lockReason: getCampaignLockReason(campaign, campaignsProgress, ownedCharacterIds),
+                        lastCleared: campaignsProgress[campaign as keyof typeof campaignsProgress] ?? 0,
+                        totalBattles: CampaignsService.campaignsGrouped[campaign]?.length ?? 0,
+                        ascendRows: buildAscensionGoalRows(campaignData, shardsGoals),
+                        rankupRows: buildRankupGoalRows(campaignData, upgradeRankOrMowGoals),
+                    };
+                })
+                .filter(card => card.campaignData[1].savings.length > 0 || card.campaignData[1].goalCost.size > 0)
+                .filter(card => !hideNoDrops || card.campaignData[1].savings.length > 0)
+                .filter(card => !hideLocked || !card.lockReason)
+                .filter(card => !hideCE || !card.tags.includes('Campaign Event')),
+        [
+            campaignsProgress,
+            hideCE,
+            hideLocked,
+            hideNoDrops,
+            ownedCharacterIds,
+            shardsGoals,
+            sortedCampaignDataArray,
+            upgradeRankOrMowGoals,
+        ]
+    );
 
     return (
-        <div key="root">
-            <CampaignProgressionHeader />
-            <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
-            <CampaignProgressionUnfarmableMaterials progression={progression} campaignDataArray={campaignDataArray} />
-            <h1>Campaign Progression</h1>
-            {campaignDataArray.map(entry => {
-                return (
-                    <div key={'accordion_' + entry[0]}>
-                        {entry[1].savings.length > 0 && (
-                            <Accordion defaultExpanded={entry[1].savings.length > 0}>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1-content"
-                                    id={'accordion-details-' + entry[0]}>
-                                    <table>
-                                        <tbody>
-                                            <tr>
-                                                <td>
-                                                    <CampaignImage campaign={entry[0]} />
-                                                </td>
-                                                {!isMobile && (
-                                                    <>
-                                                        <td>{entry[0]}</td>
-                                                        <td> - </td>
-                                                        <td>{getCampaignProgress(entry[0])}</td>
-                                                    </>
-                                                )}
-                                            </tr>
-                                        </tbody>
-                                    </table>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1-content"
-                                            id={'ascend-goals-' + entry[0]}>
-                                            Ascension/Unlock Goals
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            {getAscendGoalData(entry).length > 0 && (
-                                                <CampaignProgressionAscensionGoals
-                                                    campaignData={entry}
-                                                    goals={shardsGoals}
-                                                />
-                                            )}
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    <Accordion>
-                                        <AccordionSummary
-                                            expandIcon={<ExpandMoreIcon />}
-                                            aria-controls="panel1-content"
-                                            id={'rankup-goals-' + entry[0]}>
-                                            Rank-Up Goals
-                                        </AccordionSummary>
-                                        <AccordionDetails>
-                                            {getRankUpGoalData(entry).length > 0 && (
-                                                <CampaignProgressionRankupGoals
-                                                    campaignData={entry}
-                                                    goals={upgradeRankOrMowGoals}
-                                                />
-                                            )}
-                                        </AccordionDetails>
-                                    </Accordion>
-                                    {getCampaignMaterialData(entry).length > 0 && (
-                                        <CampaignProgressionMaterialGoals
-                                            campaignData={entry}
-                                            progression={progression}
-                                        />
-                                    )}
-                                </AccordionDetails>
-                            </Accordion>
-                        )}
-                    </div>
-                );
-            })}
+        <div key="root" className="mx-auto flex max-w-[1100px] min-w-0 flex-col gap-2 overflow-x-hidden">
+            <CampaignProgressionHeader
+                activeGoalsAction={
+                    <ActiveGoalsDialog
+                        units={units}
+                        goals={allGoals}
+                        onGoalsSelectChange={handleGoalsSelectionChange}
+                    />
+                }
+            />
+            <CampaignProgressionUnfarmableMaterials
+                progression={progression}
+                campaignDataArray={campaignDataArray}
+                inventoryUpgrades={inventory.upgrades}
+            />
+
+            {!hasGoals && (
+                <div className="mt-2 flex max-w-md flex-col gap-3 overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) p-4 shadow-sm">
+                    <p className="font-semibold">No campaign data yet</p>
+                    <p className="text-sm text-(--muted-fg)">
+                        Add goals with campaign-farmable materials or shard goals to see savings analysis.
+                    </p>
+                    <Link
+                        to="/plan/goals"
+                        className="w-fit rounded border border-(--card-border) px-3 py-1.5 text-sm font-medium transition-colors hover:bg-(--card-border)">
+                        Go to Goals
+                    </Link>
+                </div>
+            )}
+
+            {hasGoals && (
+                <div className="flex flex-col gap-2">
+                    <CampaignProgressionSummary stats={summaryStats} />
+                    <CampaignProgressionControls
+                        sortMode={sortMode}
+                        setSortMode={setSortMode}
+                        hideNoDrops={hideNoDrops}
+                        setHideNoDrops={setHideNoDrops}
+                        hideLocked={hideLocked}
+                        setHideLocked={setHideLocked}
+                        hideCE={hideCE}
+                        setHideCE={setHideCE}
+                    />
+                </div>
+            )}
+
+            <div className="flex flex-col gap-3">
+                {campaignCards.map(card => {
+                    const isExpanded = expandedCardId === card.campaign;
+                    return (
+                        <CampaignProgressionCard
+                            key={card.campaign}
+                            activeTab={getActiveTab(card.campaign)}
+                            ascendRows={card.ascendRows}
+                            campaignData={card.campaignData}
+                            expanded={isExpanded}
+                            lastCleared={card.lastCleared}
+                            onTabChange={tab => setActiveTabs(previous => ({ ...previous, [card.campaign]: tab }))}
+                            onToggle={() => setExpandedCardId(isExpanded ? undefined : card.campaign)}
+                            lockReason={card.lockReason}
+                            ownedCharacterIds={ownedCharacterIds}
+                            progression={progression}
+                            rankupRows={card.rankupRows}
+                            tags={card.tags}
+                            totalBattles={card.totalBattles}
+                        />
+                    );
+                })}
+            </div>
         </div>
     );
 };

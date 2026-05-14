@@ -10,10 +10,18 @@ interface Props {
     score?: number;
     scoreType: 'killScore' | 'highScore';
     maxScore: number;
+    projectedClear?: boolean;
     onChange: (status: RequirementStatus, score?: number) => void;
 }
 
-export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType, maxScore, onChange }) => {
+export const BattleStatusCheckbox: React.FC<Props> = ({
+    status,
+    score,
+    scoreType,
+    maxScore,
+    projectedClear,
+    onChange,
+}) => {
     const [showDropdown, setShowDropdown] = useState(false);
     const [anchorElement, setAnchorElement] = useState<HTMLElement>();
     const [scoreInput, setScoreInput] = useState<string>(String(score || ''));
@@ -120,7 +128,10 @@ export const BattleStatusCheckbox: React.FC<Props> = ({ status, score, scoreType
                     onClick={toggleDropdown}
                     className="size-8 rounded border-2 p-1 text-center text-sm font-bold md:size-10 md:p-1.5 md:text-base"
                     style={{
-                        color: STATUS_COLORS[displayStatus],
+                        color:
+                            projectedClear && displayStatus === RequirementStatus.NotCleared
+                                ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
+                                : STATUS_COLORS[displayStatus],
                         borderColor: `${STATUS_COLORS[displayStatus]}20`,
                     }}>
                     {score && status === RequirementStatus.PartiallyCleared ? (

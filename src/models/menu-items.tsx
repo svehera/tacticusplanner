@@ -1,5 +1,4 @@
 ﻿import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import Diversity3Icon from '@mui/icons-material/Diversity3';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
 import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
@@ -17,9 +16,8 @@ import { guidesMenuItem } from '@/fsd/1-pages/guides/guides-menu.item';
 import { guildMenuItem } from '@/fsd/1-pages/guild/guild.menu-item';
 import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
-import { guildWarDefenseMenuItem } from '@/fsd/1-pages/guild-war-defense/guild-war-defense.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
-import { guildWarOffenseMenuItem } from '@/fsd/1-pages/guild-war-offense/guild-war-offense.menu-item';
+import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
 import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
@@ -35,7 +33,6 @@ import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
 import { warDefense2MenuItem } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.menu-item';
 import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
-import { teamsMenuItem } from '@/fsd/1-pages/teams/teams.menu-item';
 import { wyoMenuItem } from '@/fsd/1-pages/who-you-own/who-you-own.menu-item';
 
 export class MenuItemTP {
@@ -57,6 +54,7 @@ export const menuItemById = {
     myProgress: myProgressMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
     resources: resourcesMenuItem,
+    equipment: equipmentMenuItem,
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
@@ -80,13 +78,10 @@ export const menuItemById = {
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
     ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
     faq: faqMenuItem,
-    defense: guildWarDefenseMenuItem,
-    offense: guildWarOffenseMenuItem,
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,
     guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
-    teams: teamsMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
     quests: questsMenuItem,
@@ -100,6 +95,7 @@ export const inputSubMenu: MenuItemTP[] = [
     menuItemById['inventory'],
     menuItemById['xpIncome'],
     menuItemById['resources'],
+    menuItemById['equipment'],
     menuItemById['guild'],
 ];
 
@@ -107,7 +103,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
-    new MenuItemTP('Guild War', menuItemById['defense'].icon, '', '', '', [
+    new MenuItemTP('Guild War', menuItemById['warDefense2'].icon, '', '', '', [
         menuItemById['warOffense2'],
         menuItemById['warDefense2'],
         menuItemById['zones'],
@@ -119,11 +115,6 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['ces'],
     menuItemById['hses'],
     menuItemById['bulkGoalCreator'],
-    new MenuItemTP('To Be Deleted', <DeleteForeverIcon />, '', '', '', [
-        menuItemById['teams'],
-        menuItemById['defense'],
-        menuItemById['offense'],
-    ]),
 ];
 
 export const planSubMenu: MenuItemTP[] = [
@@ -139,9 +130,6 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['campaignProgression'],
     menuItemById['hses'],
     menuItemById['bulkGoalCreator'],
-    menuItemById['teams'],
-    menuItemById['defense'],
-    menuItemById['offense'],
 ];
 
 export const learnSubMenuMobile: MenuItemTP[] = [

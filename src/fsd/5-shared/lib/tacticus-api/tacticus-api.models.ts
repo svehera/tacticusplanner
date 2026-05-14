@@ -40,6 +40,13 @@ export interface TacticusEquipment {
     slotId: string; // Slot1
 }
 
+export interface TacticusInventoryEquipment {
+    id: string; // I_Crit_M007
+    name: string; // Supa-Killy Slugga
+    level: number; // 1-3/11.
+    amount: number; // Amount of this item owned.
+}
+
 export interface TacticusInventory {
     upgrades: TacticusUpgrade[];
     shards: TacticusShard[];
@@ -49,6 +56,7 @@ export interface TacticusInventory {
     orbs: TacticusOrbs;
     forgeBadges: TacticusForgeBadge[];
     components: TacticusComponents[];
+    items: TacticusInventoryEquipment[];
 }
 
 interface TacticusOrb {
