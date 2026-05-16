@@ -19,7 +19,7 @@ import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { LreService } from '@/fsd/1-pages/plan-lre/lre.service';
 import { TokenEstimationService } from '@/fsd/1-pages/plan-lre/token-estimation-service';
 
-const TRACK_COLORS = ['bg-sky-400/70', 'bg-amber-400/70', 'bg-rose-400/70'] as const;
+const TRACK_COLORS = ['bg-(--lre-alpha)/70', 'bg-(--lre-beta)/70', 'bg-(--lre-gamma)/70'] as const;
 
 function formatMonthAndDay(date: Date): string {
     const options: Intl.DateTimeFormatOptions = { month: 'long', day: 'numeric' };
@@ -137,7 +137,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                     {lreShardProgress !== undefined &&
                         (lreShardProgress.addlShardsForNextMilestone === Infinity ? (
                             <div className="flex items-center gap-1.5 text-xs text-(--muted-fg)">
-                                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-green-500/20 text-green-400">
+                                <span className="flex h-4 w-4 items-center justify-center rounded-full bg-(--success)/20 text-(--success)">
                                     ✓
                                 </span>
                                 Shards complete
@@ -152,9 +152,9 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                         shards
                                     </span>
                                 </div>
-                                <div className="relative h-3 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
+                                <div className="relative h-3 w-full overflow-hidden rounded-full bg-(--fg)/12">
                                     <div
-                                        className="absolute inset-y-0 left-0 rounded-full bg-(--card-fg)/60"
+                                        className="absolute inset-y-0 left-0 rounded-full bg-(--fg)/50"
                                         style={{
                                             width: `${Math.min(
                                                 (lreShardProgress.currentShards /
@@ -195,7 +195,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                                                     {stat.completed}/{totalBattles}
                                                                 </span>
                                                             </div>
-                                                            <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-(--card-fg)/15">
+                                                            <div className="relative h-1.5 w-full overflow-hidden rounded-full bg-(--fg)/12">
                                                                 <div
                                                                     className={`absolute inset-y-0 left-0 rounded-full ${trackColor}`}
                                                                     style={{ width: `${pct}%` }}

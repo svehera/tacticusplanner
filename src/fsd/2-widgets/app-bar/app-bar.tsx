@@ -1,4 +1,4 @@
-﻿import CampaignIcon from '@mui/icons-material/Campaign';
+import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
 import {
     Badge,
@@ -12,11 +12,8 @@ import {
     Tooltip,
     useMediaQuery,
 } from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -25,8 +22,8 @@ import {
     learnSubMenu,
     menuItemById,
     miscMenuItems,
+    NAV_SECTIONS,
     planSubMenu,
-    planSubMenuWeb,
     // eslint-disable-next-line import-x/no-internal-modules
 } from '@/models/menu-items'; // TODO refactor for FSD
 // eslint-disable-next-line import-x/no-internal-modules
@@ -46,8 +43,6 @@ import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
 import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
 
-import { AppBarSubMenu } from './app-bar-sub-menu';
-
 interface Props {
     headerTitle: string;
     seenAppVersion: string;
@@ -64,7 +59,7 @@ const generateMenuItems = (items: MenuItemTP[]) =>
 
 const renderMenuGroup = (label: string, items: MenuItemTP[]) => (
     <>
-        <ListSubheader disableSticky disableGutters sx={{ pl: 1, lineHeight: 1.75 }}>
+        <ListSubheader disableSticky disableGutters className="pl-2 leading-[1.75]">
             <Typography variant="body2" className="tracking-wide text-gray-500 uppercase">
                 {label}
             </Typography>
@@ -98,15 +93,24 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         }
     }, [location.pathname, headerTitle]);
 
-    const nav = isTabletOrMobile ? undefined : (
-        <div className="me-5 flex items-center">
-            <AppBarSubMenu rootLabel={'Input'} options={inputSubMenu} />
-
-            <AppBarSubMenu rootLabel={'Plan'} options={planSubMenuWeb} />
-
-            <AppBarSubMenu rootLabel={'Learn'} options={learnSubMenu} />
-        </div>
-    );
+    const breadcrumb = useMemo(() => {
+        const activeSegment = location.pathname.split('/').at(-1) ?? '';
+        const section = NAV_SECTIONS.find(s =>
+            s.items.some(
+                item =>
+                    (!!item.routeWeb && item.routeWeb.split('/').at(-1) === activeSegment) ||
+                    item.subMenu.some(sub => sub.routeWeb.split('/').at(-1) === activeSegment)
+            )
+        );
+        if (!section) return title;
+        const activeItem = section.items.find(
+            item =>
+                (!!item.routeWeb && item.routeWeb.split('/').at(-1) === activeSegment) ||
+                item.subMenu.some(sub => sub.routeWeb.split('/').at(-1) === activeSegment)
+        );
+        const activeSub = activeItem?.subMenu.find(sub => sub.routeWeb.split('/').at(-1) === activeSegment);
+        return `${section.key} / ${activeSub?.label ?? activeItem?.label ?? title}`;
+    }, [location.pathname, title]);
 
     const navigationMenu = (
         <Menu
@@ -118,7 +122,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
             MenuListProps={{
                 'aria-labelledby': 'basic-button',
             }}>
-            {renderMenuGroup('Input', inputSubMenu)}
+            {renderMenuGroup('My Game', inputSubMenu)}
 
             <Divider />
 
@@ -126,7 +130,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
 
             <Divider />
 
-            {renderMenuGroup('Learn', learnSubMenu)}
+            {renderMenuGroup('Library', learnSubMenu)}
 
             <Divider />
 
@@ -158,50 +162,60 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <>
+            <div className="flex h-[60px] flex-shrink-0 items-center justify-between border-b border-[var(--border)] bg-[var(--sidebar)] px-4 text-[var(--fg)]">
+                {isTabletOrMobile ? (
                     <FlexBox onClick={() => navigate('./home')} className="cursor-pointer">
-                        <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
-                        <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
+                        <img src="/android-chrome-192x192.png" height="40px" width="40px" alt="logo" />
+                        <Typography variant="h5" component="div">
                             {title}
                         </Typography>
                     </FlexBox>
-                    <div className="flex items-center">
-                        {nav}
-                        <IconButton color="inherit" onClick={() => navigate('./faq')}>
-                            <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
+                ) : (
+                    <span className="font-medium">{breadcrumb}</span>
+                )}
+                <div className="flex items-center">
+                    <IconButton color="inherit" onClick={() => navigate('./faq')}>
+                        <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
+                    </IconButton>
+                    <Tooltip title="Join Tacticus Planner community on Discord">
+                        <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
+                            <DiscordIcon />
                         </IconButton>
-                        <Tooltip title="Join Tacticus Planner community on Discord">
-                            <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
-                                <DiscordIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Buy me a trooper">
-                            <IconButton color="inherit" component={Link} to={bmcLink} target={'_blank'}>
-                                <BmcIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Sync with the Tacticus API">
-                            <SyncButton showText={false} iconButton={true} />
-                        </Tooltip>
-                        <ThemeSwitch />
-                        <Button
-                            id="basic-button"
-                            aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={navigationMenuControls.open ? 'true' : undefined}
-                            color="inherit"
-                            onClick={navigationMenuControls.handleClick}>
+                    </Tooltip>
+                    <Tooltip title="Buy me a trooper">
+                        <IconButton color="inherit" component={Link} to={bmcLink} target={'_blank'}>
+                            <BmcIcon />
+                        </IconButton>
+                    </Tooltip>
+                    <Tooltip title="Sync with the Tacticus API">
+                        <SyncButton showText={false} iconButton={true} />
+                    </Tooltip>
+                    <ThemeSwitch />
+                    <Tooltip title="What's new">
+                        <IconButton color="inherit" onClick={() => setShowWhatsNew(true)}>
                             <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
-                                <MenuIcon />
+                                <CampaignIcon />
                             </Badge>
-                        </Button>
-                        <UserMenu />
-                        {navigationMenu}
-                    </div>
-                </Toolbar>
-            </AppBar>
+                        </IconButton>
+                    </Tooltip>
+                    {isTabletOrMobile && (
+                        <>
+                            <Button
+                                id="basic-button"
+                                aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={navigationMenuControls.open ? 'true' : undefined}
+                                color="inherit"
+                                onClick={navigationMenuControls.handleClick}>
+                                <MenuIcon />
+                            </Button>
+                            <UserMenu />
+                            {navigationMenu}
+                        </>
+                    )}
+                </div>
+            </div>
             <WhatsNewDialog
                 isOpen={showWhatsNew}
                 onClose={() => {
@@ -209,6 +223,6 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                     setShowWhatsNew(false);
                 }}
             />
-        </Box>
+        </>
     );
 };

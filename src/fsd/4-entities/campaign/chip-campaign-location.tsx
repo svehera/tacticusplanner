@@ -153,7 +153,7 @@ export const ChipCampaignLocation: React.FC<Props> = ({
                     onClick={clickable ? () => setOpenDetails(true) : undefined}
                     tabIndex={clickable ? undefined : -1}
                     aria-disabled={clickable ? undefined : true}
-                    className={`border-muted-fg/40 inline-flex items-center gap-1 overflow-hidden rounded-full border bg-transparent px-2 py-0.5 ${setWidthClass} text-[var(--card-fg)] ${clickable ? 'cursor-pointer' : 'cursor-default'}`.trim()}
+                    className={`inline-flex items-center gap-1 overflow-hidden rounded-full border border-(--muted-fg)/40 bg-transparent px-2 py-0.5 transition-colors ${setWidthClass} text-(--card-fg) ${clickable ? 'cursor-pointer hover:border-(--primary)/60 hover:bg-(--primary)/8' : 'cursor-default'}`.trim()}
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>

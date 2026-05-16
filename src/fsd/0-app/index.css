@@ -43,9 +43,6 @@
     --color-overlay: var(--overlay);
     --color-overlay-fg: var(--overlay-fg);
 
-    --color-navbar: var(--navbar);
-    --color-navbar-fg: var(--navbar-fg);
-
     --color-sidebar: var(--sidebar);
     --color-sidebar-fg: var(--sidebar-fg);
 
@@ -59,26 +56,26 @@
 @layer base {
     :root {
         --bg: var(--color-white);
-        --fg: var(--color-slate-950);
+        --fg: var(--color-zinc-950);
 
         --card-bg: var(--color-white);
-        --card-border: var(--color-slate-400);
-        --card-fg: var(--color-slate-950);
+        --card-border: var(--color-zinc-400);
+        --card-fg: var(--color-zinc-950);
 
-        --primary: var(--color-blue-600);
+        --primary: oklch(0.45 0.2 265);
         --primary-fg: var(--color-white);
 
-        --secondary: var(--color-slate-100);
-        --secondary-fg: var(--color-slate-950);
+        --secondary: var(--color-zinc-100);
+        --secondary-fg: var(--color-zinc-950);
 
         --overlay: var(--color-white);
-        --overlay-fg: var(--color-slate-950);
+        --overlay-fg: var(--color-zinc-950);
 
-        --accent: var(--color-blue-600);
-        --accent-fg: var(--color-white);
+        --accent: oklch(0.65 0.14 65);
+        --accent-fg: var(--color-zinc-950);
 
-        --muted: var(--color-slate-100);
-        --muted-fg: var(--color-slate-600);
+        --muted: var(--color-zinc-100);
+        --muted-fg: var(--color-zinc-600);
 
         --success: var(--color-emerald-600);
         --success-fg: var(--color-white);
@@ -89,21 +86,18 @@
         --danger: var(--color-red-600);
         --danger-fg: var(--color-red-50);
 
-        --border: var(--color-slate-200);
-        --input: var(--color-slate-300);
-        --ring: var(--color-blue-600);
+        --border: var(--color-zinc-200);
+        --input: var(--color-zinc-300);
+        --ring: oklch(0.45 0.2 265);
 
-        --navbar: #1976d2;
-        --navbar-fg: var(--color-slate-950);
+        --sidebar: var(--color-zinc-50);
+        --sidebar-fg: var(--color-zinc-950);
 
-        --sidebar: var(--color-slate-50);
-        --sidebar-fg: var(--color-slate-950);
-
-        --chart-1: var(--color-blue-600);
-        --chart-2: var(--color-blue-400);
-        --chart-3: var(--color-blue-300);
-        --chart-4: var(--color-blue-200);
-        --chart-5: var(--color-blue-100);
+        --chart-1: oklch(0.45 0.2 265);
+        --chart-2: oklch(0.55 0.18 265);
+        --chart-3: oklch(0.65 0.15 265);
+        --chart-4: oklch(0.75 0.12 265);
+        --chart-5: oklch(0.85 0.08 265);
 
         --radius-lg: 0.5rem;
         --radius-xs: calc(var(--radius-lg) * 0.5);
@@ -113,6 +107,11 @@
         --radius-2xl: calc(var(--radius-lg) * 1.5);
         --radius-3xl: calc(var(--radius-lg) * 2);
         --radius-4xl: calc(var(--radius-lg) * 3);
+
+        /* LRE track colours */
+        --lre-alpha: oklch(0.72 0.13 220);
+        --lre-beta: oklch(0.82 0.15 80);
+        --lre-gamma: oklch(0.7 0.18 15);
 
         /*Rarity*/
         --rarity-common: #cdb3a0;
@@ -155,27 +154,27 @@
     .dark {
         color-scheme: dark;
 
-        --bg: rgb(37, 38, 36);
-        --fg: rgba(214, 207, 195, 0.87);
+        --bg: var(--color-zinc-900);
+        --fg: var(--color-zinc-100);
 
-        --card-bg: var(--color-slate-900);
-        --card-border: var(--color-slate-800);
-        --card-fg: var(--color-white);
+        --card-bg: var(--color-zinc-800);
+        --card-border: var(--color-zinc-700);
+        --card-fg: var(--color-zinc-50);
 
-        --primary: var(--color-blue-600);
+        --primary: oklch(0.6 0.2 265);
         --primary-fg: var(--color-white);
 
-        --secondary: rgb(35, 35, 34);
-        --secondary-fg: var(--color-slate-50);
+        --secondary: var(--color-zinc-800);
+        --secondary-fg: var(--color-zinc-100);
 
-        --accent: var(--color-blue-600);
-        --accent-fg: var(--color-white);
+        --accent: oklch(0.65 0.14 65);
+        --accent-fg: var(--color-zinc-950);
 
-        --muted: oklch(0.21 0.006 285.885);
-        --muted-fg: var(--color-slate-400);
+        --muted: var(--color-zinc-800);
+        --muted-fg: var(--color-zinc-400);
 
-        --overlay: rgb(35, 35, 34);
-        --overlay-fg: var(--color-slate-50);
+        --overlay: var(--color-zinc-800);
+        --overlay-fg: var(--color-zinc-100);
 
         --success: var(--color-emerald-600);
         --success-fg: var(--color-white);
@@ -186,21 +185,23 @@
         --danger: var(--color-red-600);
         --danger-fg: var(--color-red-50);
 
-        --border: oklch(0.272 0.044 257.287);
-        --input: oklch(0.292 0.044 257.287);
-        --ring: var(--color-blue-600);
+        --border: var(--color-zinc-700);
+        --input: var(--color-zinc-700);
+        --ring: oklch(0.6 0.2 265);
 
-        --navbar: rgb(45, 90, 134);
-        --navbar-fg: var(--color-slate-50);
+        --sidebar: var(--color-zinc-950);
+        --sidebar-fg: var(--color-zinc-50);
 
-        --sidebar: oklch(0.158 0.042 265.755);
-        --sidebar-fg: var(--color-slate-50);
+        --chart-1: oklch(0.6 0.2 265);
+        --chart-2: oklch(0.68 0.17 265);
+        --chart-3: oklch(0.75 0.13 265);
+        --chart-4: oklch(0.82 0.09 265);
+        --chart-5: oklch(0.88 0.05 265);
 
-        --chart-1: var(--color-blue-700);
-        --chart-2: var(--color-blue-500);
-        --chart-3: var(--color-blue-400);
-        --chart-4: var(--color-blue-300);
-        --chart-5: var(--color-blue-200);
+        /* LRE track colours */
+        --lre-alpha: oklch(0.72 0.14 220);
+        --lre-beta: oklch(0.82 0.16 80);
+        --lre-gamma: oklch(0.7 0.2 15);
 
         /*Rarity*/
         --rarity-common: #8a705d;
@@ -236,6 +237,8 @@
         --rank-diamond3: #2b4b71;
 
         --rank-adamantine1: #d9886c;
+        --rank-adamantine2: #bf6e4e;
+        --rank-adamantine3: #9e5535;
     }
 
     h2 {

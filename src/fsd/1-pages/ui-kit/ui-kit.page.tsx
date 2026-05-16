@@ -1,0 +1,1703 @@
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import { Listbox, Transition } from '@headlessui/react';
+import { Check, ChevronDown, ChevronsUpDown, Download, Edit, Mail, Plus, Search, Trash2, X } from 'lucide-react';
+import React, { Fragment, useContext, useMemo, useState } from 'react';
+
+import { StoreContext } from 'src/reducers/store.provider';
+import { RaidUpgradeMaterialCard } from 'src/routes/tables/raid-upgrade-material-card';
+
+import { FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, LazyTooltip, Button, ButtonPill } from '@/fsd/5-shared/ui';
+import { Badge } from '@/fsd/5-shared/ui/badge';
+import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/fsd/5-shared/ui/card';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { TextField } from '@/fsd/5-shared/ui/input/text-field';
+import { Loader } from '@/fsd/5-shared/ui/loader';
+import { Dialog } from '@/fsd/5-shared/ui/modal/dialog';
+import { Modal } from '@/fsd/5-shared/ui/modal/modal';
+import {
+    FactionSelect2,
+    MultipleSelectCheckmarks,
+    RankSelect2,
+    RaritySelect2,
+    StarsSelect2,
+} from '@/fsd/5-shared/ui/selects';
+import { Separator } from '@/fsd/5-shared/ui/separator';
+import { Switch } from '@/fsd/5-shared/ui/switch';
+
+import { CampaignsService, ChipCampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
+import { CharactersService } from '@/fsd/4-entities/character';
+import { LegendaryEventService } from '@/fsd/4-entities/lre';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
+import { DailyRaidsSection } from '@/fsd/1-pages/home/daily-raids-section';
+import { GoalsSection } from '@/fsd/1-pages/home/goals-section';
+import { LreSection } from '@/fsd/1-pages/home/lre-section';
+
+// ─── nav ─────────────────────────────────────────────────────────────────────
+
+const NAV_PRIMITIVES = [
+    { id: 'colours', label: 'Colours' },
+    { id: 'button', label: 'Button' },
+    { id: 'button-pill', label: 'ButtonPill' },
+    { id: 'text-field', label: 'TextField' },
+    { id: 'switch', label: 'Switch' },
+    { id: 'badge', label: 'Badge' },
+    { id: 'card', label: 'Card' },
+    { id: 'loader', label: 'Loader' },
+    { id: 'modal', label: 'Modal' },
+    { id: 'separator', label: 'Separator' },
+    { id: 'tooltip', label: 'Tooltip' },
+    { id: 'domain-selects', label: 'Domain selects' },
+    { id: 'progress', label: 'Progress' },
+    { id: 'accordion', label: 'Accordion' },
+    { id: 'radio', label: 'Radio group' },
+    { id: 'campaign-chips', label: 'Campaign chips' },
+    { id: 'filters', label: 'Filters' },
+] as const;
+
+const NAV_LIVE = [
+    { id: 'home-cards', label: 'Home cards' },
+    { id: 'goals', label: 'Goals' },
+    { id: 'daily-raids', label: 'Daily Raids' },
+] as const;
+
+const navLink =
+    'rounded px-2 py-0.5 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg) whitespace-nowrap';
+const navChapter = 'text-[10px] font-bold tracking-[.14em] uppercase text-(--muted-fg) select-none';
+
+const UiKitNav = () => (
+    <nav className="sticky top-0 z-10 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-(--border) bg-(--bg)/95 px-3 py-2 text-xs backdrop-blur-sm">
+        <span className={navChapter}>Primitives</span>
+        {NAV_PRIMITIVES.map(s => (
+            <a key={s.id} href={`#${s.id}`} className={navLink}>
+                {s.label}
+            </a>
+        ))}
+        <Separator orientation="vertical" className="mx-1 h-4" />
+        <span className={navChapter}>Live</span>
+        {NAV_LIVE.map(s => (
+            <a key={s.id} href={`#${s.id}`} className={navLink}>
+                {s.label}
+            </a>
+        ))}
+    </nav>
+);
+
+// ─── layout helpers ──────────────────────────────────────────────────────────
+
+const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
+    <section id={id} className="scroll-mt-16 space-y-6">
+        <p className="text-[10px] font-bold tracking-[.14em] text-(--muted-fg) uppercase">{title}</p>
+        {children}
+    </section>
+);
+
+const ChapterDivider = ({ label }: { label: string }) => (
+    <div className="flex items-center gap-4 py-2">
+        <div className="h-px flex-1 bg-(--border)" />
+        <span className="text-[10px] font-bold tracking-[.18em] text-(--muted-fg) uppercase">{label}</span>
+        <div className="h-px flex-1 bg-(--border)" />
+    </div>
+);
+
+const Group = ({ label, children }: { label: string; children: React.ReactNode }) => (
+    <div className="space-y-3">
+        <p className="text-xs font-semibold text-(--muted-fg)">{label}</p>
+        {children}
+    </div>
+);
+
+const Row = ({ children, className }: { children: React.ReactNode; className?: string }) => (
+    <div className={`flex flex-wrap items-center gap-3 ${className ?? ''}`}>{children}</div>
+);
+
+// ─── live: home page cards ───────────────────────────────────────────────────
+
+const HomeLreCard = () => {
+    const { leProgress, characters } = useContext(StoreContext);
+    const nextEvent = useMemo(() => LegendaryEventService.getActiveEvent(), []);
+    if (!nextEvent) return <p className="text-sm text-(--muted-fg)">No active legendary event.</p>;
+    return <LreSection nextEvent={nextEvent} leProgress={leProgress} characters={characters} />;
+};
+
+// ─── live: goals ─────────────────────────────────────────────────────────────
+
+const GoalCardShowcase = () => {
+    const { goals, characters, mows, campaignsProgress, inventory, dailyRaids, dailyRaidsPreferences, gameModeTokens } =
+        useContext(StoreContext);
+
+    const resolvedChars = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const units = useMemo(() => [...resolvedChars, ...resolvedMows], [resolvedChars, resolvedMows]);
+
+    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities } = useMemo(
+        () => GoalsService.prepareGoals(goals, units, false),
+        [goals, units]
+    );
+
+    const onslaughtTokensToday = useMemo(
+        () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
+        [gameModeTokens]
+    );
+
+    const estimatedUpgradesTotal = useMemo(
+        () =>
+            UpgradesService.getUpgradesEstimatedDays(
+                {
+                    dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                    campaignsProgress,
+                    preferences: dailyRaidsPreferences,
+                    upgrades: inventory.upgrades,
+                    completedLocations: dailyRaids.raidedLocations,
+                    onslaughtTokensToday,
+                },
+                resolvedChars,
+                resolvedMows,
+                ...[upgradeMaterialGoals, upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+            ),
+        [
+            dailyRaidsPreferences,
+            campaignsProgress,
+            inventory.upgrades,
+            dailyRaids.raidedLocations,
+            onslaughtTokensToday,
+            resolvedChars,
+            resolvedMows,
+            upgradeMaterialGoals,
+            upgradeRankOrMowGoals,
+            shardsGoals,
+        ]
+    );
+
+    const goalsEstimates = useMemo(
+        () =>
+            GoalsService.buildGoalEstimates(
+                estimatedUpgradesTotal,
+                shardsGoals,
+                upgradeMaterialGoals,
+                upgradeRankOrMowGoals,
+                upgradeAbilities,
+                resolvedChars
+            ),
+        [
+            estimatedUpgradesTotal,
+            shardsGoals,
+            upgradeMaterialGoals,
+            upgradeRankOrMowGoals,
+            upgradeAbilities,
+            resolvedChars,
+        ]
+    );
+
+    const samples = useMemo(
+        () => [shardsGoals[0], upgradeRankOrMowGoals[0], upgradeMaterialGoals[0], upgradeAbilities[0]].filter(Boolean),
+        [shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities]
+    );
+
+    if (samples.length === 0) {
+        return (
+            <p className="text-sm text-(--muted-fg)">
+                No goals set — add goals of different types on the Goals page to see variations here.
+            </p>
+        );
+    }
+
+    return (
+        <div className="flex flex-wrap gap-4">
+            {samples.map(goal => (
+                <GoalCard
+                    key={goal.goalId}
+                    goal={goal}
+                    goalEstimate={goalsEstimates.find(estimate => estimate.goalId === goal.goalId)}
+                    bgColor="rgba(0, 0, 0, 0)"
+                    characters={characters}
+                    mows={resolvedMows as IMow2[]}
+                    bookRarity={Rarity.Legendary}
+                    onToggleInclude={() => {}}
+                    menuItemSelect={() => {}}
+                />
+            ))}
+        </div>
+    );
+};
+
+// ─── live: daily raids ────────────────────────────────────────────────────────
+
+const RaidCardsShowcase = () => {
+    const { goals, characters, mows, campaignsProgress, inventory, dailyRaids, dailyRaidsPreferences, gameModeTokens } =
+        useContext(StoreContext);
+
+    const resolvedChars = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const units = useMemo(() => [...resolvedChars, ...resolvedMows], [resolvedChars, resolvedMows]);
+
+    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals } = useMemo(
+        () => GoalsService.prepareGoals(goals, units, true),
+        [goals, units]
+    );
+
+    const onslaughtTokensToday = useMemo(
+        () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
+        [gameModeTokens]
+    );
+
+    const estimatedRanks = useMemo(
+        () =>
+            UpgradesService.getUpgradesEstimatedDays(
+                {
+                    dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                    campaignsProgress,
+                    preferences: dailyRaidsPreferences,
+                    upgrades: inventory.upgrades,
+                    completedLocations: dailyRaids.raidedLocations,
+                    onslaughtTokensToday,
+                },
+                resolvedChars,
+                resolvedMows,
+                ...upgradeMaterialGoals,
+                ...upgradeRankOrMowGoals,
+                ...shardsGoals
+            ),
+        [
+            dailyRaidsPreferences,
+            campaignsProgress,
+            inventory.upgrades,
+            dailyRaids.raidedLocations,
+            onslaughtTokensToday,
+            resolvedChars,
+            resolvedMows,
+            upgradeMaterialGoals,
+            upgradeRankOrMowGoals,
+            shardsGoals,
+        ]
+    );
+
+    const inProgress = estimatedRanks.inProgressMaterials;
+    const daily = estimatedRanks.upgradesRaids[0]?.raids ?? [];
+    const blocked = estimatedRanks.blockedMaterials;
+
+    if (inProgress.length === 0 && daily.length === 0 && blocked.length === 0) {
+        return (
+            <p className="text-sm text-(--muted-fg)">
+                No active raid goals — enable goals on the Daily Raids page to see cards here.
+            </p>
+        );
+    }
+
+    return (
+        <div className="space-y-6">
+            {inProgress.length > 0 && (
+                <Group label={`In progress (${inProgress.length})`}>
+                    <div className="flex flex-wrap gap-3">
+                        {inProgress.slice(0, 6).map(raid => (
+                            <RaidUpgradeMaterialCard
+                                key={raid.id}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={true}
+                                showAdditionalInfo={true}
+                                showPlannedRaidLocationsOnly={false}
+                            />
+                        ))}
+                    </div>
+                </Group>
+            )}
+            {daily.length > 0 && (
+                <Group label={`Daily (${daily.length})`}>
+                    <div className="flex flex-wrap gap-3">
+                        {daily.slice(0, 6).map(raid => (
+                            <RaidUpgradeMaterialCard
+                                key={raid.id}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={false}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={true}
+                            />
+                        ))}
+                    </div>
+                </Group>
+            )}
+            {blocked.length > 0 && (
+                <Group label={`Blocked (${blocked.length})`}>
+                    <div className="flex flex-wrap gap-3">
+                        {blocked.slice(0, 6).map(raid => (
+                            <RaidUpgradeMaterialCard
+                                key={raid.id}
+                                upgradeEstimate={raid}
+                                showRelatedCharacters={true}
+                                showAdditionalInfo={false}
+                                showPlannedRaidLocationsOnly={false}
+                            />
+                        ))}
+                    </div>
+                </Group>
+            )}
+        </div>
+    );
+};
+
+// ─── domain selects showcase ─────────────────────────────────────────────────
+
+const RARITY_VALUES = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
+const RANK_VALUES = [
+    Rank.Stone1,
+    Rank.Stone2,
+    Rank.Stone3,
+    Rank.Iron1,
+    Rank.Iron2,
+    Rank.Iron3,
+    Rank.Bronze1,
+    Rank.Bronze2,
+    Rank.Bronze3,
+    Rank.Silver1,
+    Rank.Silver2,
+    Rank.Silver3,
+    Rank.Gold1,
+    Rank.Gold2,
+    Rank.Gold3,
+    Rank.Diamond1,
+    Rank.Diamond2,
+    Rank.Diamond3,
+    Rank.Adamantine1,
+    Rank.Adamantine2,
+    Rank.Adamantine3,
+];
+const STARS_VALUES = [
+    RarityStars.None,
+    RarityStars.OneStar,
+    RarityStars.TwoStars,
+    RarityStars.ThreeStars,
+    RarityStars.FourStars,
+    RarityStars.FiveStars,
+    RarityStars.RedOneStar,
+    RarityStars.RedTwoStars,
+    RarityStars.RedThreeStars,
+    RarityStars.RedFourStars,
+    RarityStars.RedFiveStars,
+];
+
+const DomainSelectsShowcase = () => {
+    const [rarity, setRarity] = useState<number>(Rarity.Epic);
+    const [rank, setRank] = useState<number>(Rank.Gold1);
+    const [stars, setStars] = useState<number>(RarityStars.FiveStars);
+    const [factions, setFactions] = useState<FactionId[]>([]);
+
+    const allFactions = useMemo<FactionId[]>(() => {
+        const set = new Set<string>();
+        for (const char of Object.values(CharactersService.charactersBySnowprintId)) {
+            if (char?.faction) set.add(char.faction);
+        }
+        return [...set].toSorted() as FactionId[];
+    }, []);
+
+    return (
+        <div className="flex flex-wrap gap-4">
+            <div className="w-44">
+                <RaritySelect2 label="Rarity" rarityValues={RARITY_VALUES} value={rarity} valueChanges={setRarity} />
+            </div>
+            <div className="w-64">
+                <RankSelect2 label="Rank" rankValues={RANK_VALUES} value={rank} valueChanges={setRank} />
+            </div>
+            <div className="w-56">
+                <StarsSelect2 label="Stars" starsValues={STARS_VALUES} value={stars} valueChanges={setStars} />
+            </div>
+            <div className="w-56">
+                <FactionSelect2
+                    label="Faction"
+                    factionValues={allFactions}
+                    value={factions}
+                    valueChanges={setFactions}
+                />
+            </div>
+        </div>
+    );
+};
+
+// ─── progress bar ────────────────────────────────────────────────────────────
+
+const ProgressBar = ({
+    value,
+    max,
+    label,
+    intent = 'primary',
+}: {
+    value: number;
+    max: number;
+    label?: string;
+    intent?: 'primary' | 'success' | 'warning' | 'danger';
+}) => {
+    const pct = max > 0 ? Math.min(100, Math.round((value / max) * 100)) : 0;
+    const fill = {
+        primary: 'bg-(--primary)',
+        success: 'bg-(--success)',
+        warning: 'bg-(--warning)',
+        danger: 'bg-(--danger)',
+    }[intent];
+    return (
+        <div className="w-full space-y-1">
+            {label && (
+                <div className="flex justify-between text-xs text-(--muted-fg)">
+                    <span>{label}</span>
+                    <span>{pct}%</span>
+                </div>
+            )}
+            <div className="h-2 overflow-hidden rounded-full bg-(--secondary)">
+                <div className={`h-full transition-all duration-500 ${fill}`} style={{ width: `${pct}%` }} />
+            </div>
+        </div>
+    );
+};
+
+// ─── accordion ────────────────────────────────────────────────────────────────
+
+const AccordionItem = ({
+    title,
+    children,
+    defaultOpen = false,
+}: {
+    title: React.ReactNode;
+    children: React.ReactNode;
+    defaultOpen?: boolean;
+}) => {
+    const [open, setOpen] = useState(defaultOpen);
+    return (
+        <div className="border-t border-(--border) first:border-t-0">
+            <button
+                onClick={() => setOpen(o => !o)}
+                className="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left text-sm font-medium text-(--fg) transition-colors hover:bg-(--secondary)">
+                {title}
+                <ChevronDown
+                    className={`h-4 w-4 shrink-0 text-(--muted-fg) transition-transform ${open ? 'rotate-180' : ''}`}
+                />
+            </button>
+            {open && <div className="px-4 pb-4 text-sm text-(--muted-fg)">{children}</div>}
+        </div>
+    );
+};
+
+// ─── radio group ─────────────────────────────────────────────────────────────
+
+const RadioOption = ({
+    name,
+    value,
+    checked,
+    onChange,
+    label,
+}: {
+    name: string;
+    value: string;
+    checked: boolean;
+    onChange: () => void;
+    label: string;
+}) => (
+    <label className="flex cursor-pointer items-center gap-2">
+        <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
+        <div
+            className={[
+                'flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors',
+                checked ? 'border-(--primary)' : 'border-(--input)',
+            ].join(' ')}>
+            {checked && <div className="h-2 w-2 rounded-full bg-(--primary)" />}
+        </div>
+        <span className="text-sm text-(--fg)">{label}</span>
+    </label>
+);
+
+const RadioGroupShowcase = () => {
+    const [section, setSection] = useState('alpha');
+    const [sort, setSort] = useState('name');
+    return (
+        <div className="flex flex-wrap gap-12">
+            <fieldset className="border-0 p-0">
+                <legend className="mb-3 text-sm font-medium text-(--muted-fg)">LRE Section (inline)</legend>
+                <div className="flex gap-4">
+                    {[
+                        { value: 'alpha', label: 'Alpha' },
+                        { value: 'beta', label: 'Beta' },
+                        { value: 'gamma', label: 'Gamma' },
+                    ].map(opt => (
+                        <RadioOption
+                            key={opt.value}
+                            name="lre-section"
+                            value={opt.value}
+                            checked={section === opt.value}
+                            onChange={() => setSection(opt.value)}
+                            label={opt.label}
+                        />
+                    ))}
+                </div>
+            </fieldset>
+            <fieldset className="border-0 p-0">
+                <legend className="mb-3 text-sm font-medium text-(--muted-fg)">Sort order (stacked)</legend>
+                <div className="space-y-2">
+                    {[
+                        { value: 'name', label: 'Name' },
+                        { value: 'rarity', label: 'Rarity' },
+                        { value: 'rank', label: 'Rank' },
+                    ].map(opt => (
+                        <RadioOption
+                            key={opt.value}
+                            name="sort-order"
+                            value={opt.value}
+                            checked={sort === opt.value}
+                            onChange={() => setSort(opt.value)}
+                            label={opt.label}
+                        />
+                    ))}
+                </div>
+            </fieldset>
+        </div>
+    );
+};
+
+// ─── MUI multi-select demo ────────────────────────────────────────────────────
+
+const MUI_TRAITS = [
+    'Psyker',
+    'Flying',
+    'Big Target',
+    'Ranged Specialist',
+    'Mechanical',
+    'Crushing Strike',
+    'Final Vengeance',
+    'Parry',
+    'Resilient',
+];
+
+const MuiMultiSelectDemo = () => {
+    const [selected, setSelected] = useState<string[]>([]);
+    return (
+        <MultipleSelectCheckmarks
+            values={MUI_TRAITS}
+            selectedValues={selected}
+            selectionChanges={setSelected}
+            placeholder="Traits"
+            minWidth={280}
+        />
+    );
+};
+
+// ─── filter primitives ───────────────────────────────────────────────────────
+
+const RARITY_ORDER = [Rarity.Mythic, Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common];
+
+const SORT_OPTIONS = [
+    { value: 'name', label: 'Name' },
+    { value: 'rarity', label: 'Rarity' },
+    { value: 'rank', label: 'Rank' },
+    { value: 'power', label: 'Power' },
+];
+const CAMPAIGN_OPTIONS = [
+    { value: 'ind', label: 'Indomitus' },
+    { value: 'foc', label: 'Fall of Cadia' },
+    { value: 'oct', label: 'Octarius' },
+];
+const TRAIT_OPTIONS = [
+    { value: 'psyker', label: 'Psyker' },
+    { value: 'flying', label: 'Flying' },
+    { value: 'big-target', label: 'Big Target' },
+    { value: 'ranged-specialist', label: 'Ranged Specialist' },
+    { value: 'mechanical', label: 'Mechanical' },
+    { value: 'crushing-strike', label: 'Crushing Strike' },
+    { value: 'final-vengeance', label: 'Final Vengeance' },
+    { value: 'parry', label: 'Parry' },
+    { value: 'resilient', label: 'Resilient' },
+];
+const SORT_MODES = [
+    { value: 'savings', label: 'Savings' },
+    { value: 'payoff', label: 'Early Payoff' },
+    { value: 'priority', label: 'Priority' },
+];
+const VIEW_MODES = [
+    { value: 'table', label: 'Table' },
+    { value: 'grid', label: 'Grid' },
+];
+
+// shared dropdown styles
+const dropTrigger = [
+    'relative w-full cursor-pointer rounded-lg border border-(--border) bg-(--bg)',
+    'py-2 pr-9 pl-3 text-left text-sm text-(--fg) shadow-sm',
+    'transition-all hover:border-(--primary) focus:outline-none focus:ring-2 focus:ring-(--primary)',
+].join(' ');
+
+const dropPanel =
+    'absolute z-50 mt-1 w-full overflow-auto rounded-lg border border-(--border) bg-(--overlay) py-1 shadow-xl';
+
+// ── Select (single) ───────────────────────────────────────────────────────────
+
+interface SelectOption {
+    value: string;
+    label: string;
+}
+
+const SelectSingle = ({
+    label,
+    options,
+    value,
+    onChange,
+    placeholder = 'Select…',
+}: {
+    label?: string;
+    options: SelectOption[];
+    value: string | undefined;
+    onChange: (v: string | undefined) => void;
+    placeholder?: string;
+}) => (
+    <div className="w-full">
+        {label && <label className="mb-1.5 block text-sm font-medium text-(--muted-fg)">{label}</label>}
+        <Listbox value={value} onChange={onChange}>
+            <div className="relative">
+                <Listbox.Button className={dropTrigger}>
+                    <span className={value ? '' : 'text-(--muted-fg)'}>
+                        {value ? (options.find(o => o.value === value)?.label ?? placeholder) : placeholder}
+                    </span>
+                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--muted-fg)" />
+                </Listbox.Button>
+                <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0">
+                    <Listbox.Options className={dropPanel}>
+                        {options.map(opt => (
+                            <Listbox.Option
+                                key={opt.value}
+                                value={opt.value}
+                                className={({ active }) =>
+                                    `relative cursor-pointer py-2 pr-4 pl-9 text-sm text-(--fg) transition-colors select-none ${active ? 'bg-(--primary)/18' : ''}`
+                                }>
+                                {({ selected }) => (
+                                    <>
+                                        {opt.label}
+                                        {selected && (
+                                            <span className="absolute inset-y-0 left-0 flex items-center pl-2.5 text-(--primary)">
+                                                <Check className="h-4 w-4" />
+                                            </span>
+                                        )}
+                                    </>
+                                )}
+                            </Listbox.Option>
+                        ))}
+                    </Listbox.Options>
+                </Transition>
+            </div>
+        </Listbox>
+    </div>
+);
+
+// ── Select (multi) ────────────────────────────────────────────────────────────
+
+const SelectMulti = ({
+    label,
+    options,
+    value,
+    onChange,
+    placeholder = 'All',
+}: {
+    label?: string;
+    options: SelectOption[];
+    value: string[];
+    onChange: (v: string[]) => void;
+    placeholder?: string;
+}) => (
+    <div className="w-full">
+        {label && <label className="mb-1.5 block text-sm font-medium text-(--muted-fg)">{label}</label>}
+        <Listbox value={value} onChange={onChange} multiple>
+            <div className="relative">
+                <Listbox.Button className={dropTrigger}>
+                    {value.length === 0 ? (
+                        <span className="text-(--muted-fg)">{placeholder}</span>
+                    ) : (
+                        <span>{value.length} selected</span>
+                    )}
+                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--muted-fg)" />
+                </Listbox.Button>
+                <Transition
+                    as={Fragment}
+                    leave="transition ease-in duration-100"
+                    leaveFrom="opacity-100"
+                    leaveTo="opacity-0">
+                    <Listbox.Options className={dropPanel}>
+                        {options.map(opt => (
+                            <Listbox.Option
+                                key={opt.value}
+                                value={opt.value}
+                                className={({ active }) =>
+                                    `cursor-pointer text-sm text-(--fg) transition-colors select-none ${active ? 'bg-(--primary)/18' : ''}`
+                                }>
+                                {({ selected }) => (
+                                    <div className="flex items-center gap-2.5 px-3 py-2">
+                                        <div
+                                            className={[
+                                                'flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors',
+                                                selected ? 'border-(--primary) bg-(--primary)' : 'border-(--border)',
+                                            ].join(' ')}>
+                                            {selected && <Check className="h-3 w-3 text-white" />}
+                                        </div>
+                                        {opt.label}
+                                    </div>
+                                )}
+                            </Listbox.Option>
+                        ))}
+                    </Listbox.Options>
+                </Transition>
+            </div>
+        </Listbox>
+    </div>
+);
+
+// ── Segmented control ─────────────────────────────────────────────────────────
+
+const SegmentedControl = ({
+    value,
+    onChange,
+    options,
+}: {
+    value: string;
+    onChange: (v: string) => void;
+    options: SelectOption[];
+}) => (
+    <div className="inline-flex rounded-lg border border-(--border) bg-(--secondary) p-0.5">
+        {options.map(opt => (
+            <button
+                key={opt.value}
+                onClick={() => onChange(opt.value)}
+                className={[
+                    'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+                    opt.value === value ? 'bg-(--bg) text-(--fg) shadow-sm' : 'text-(--muted-fg) hover:text-(--fg)',
+                ].join(' ')}>
+                {opt.label}
+            </button>
+        ))}
+    </div>
+);
+
+// ── individual showcases ──────────────────────────────────────────────────────
+
+const TextSearchShowcase = () => {
+    const [search, setSearch] = useState('');
+    return (
+        <TextField
+            value={search}
+            onChange={setSearch}
+            placeholder="Search characters…"
+            prefix={<Search className="size-4 text-(--muted-fg)" />}
+            suffix={
+                search ? (
+                    <button
+                        aria-label="Clear"
+                        onMouseDown={event_ => {
+                            event_.preventDefault();
+                            setSearch('');
+                        }}
+                        className="cursor-pointer text-(--muted-fg) transition-colors hover:text-(--fg)">
+                        <X className="size-4" />
+                    </button>
+                ) : undefined
+            }
+        />
+    );
+};
+
+const SelectShowcase = () => {
+    const [sort, setSort] = useState<string | undefined>();
+    const [campaign, setCampaign] = useState<string | undefined>();
+    return (
+        <div className="flex flex-wrap gap-4">
+            <div className="w-44">
+                <SelectSingle
+                    value={sort}
+                    onChange={setSort}
+                    label="Sort by"
+                    options={SORT_OPTIONS}
+                    placeholder="Default"
+                />
+            </div>
+            <div className="w-48">
+                <SelectSingle
+                    value={campaign}
+                    onChange={setCampaign}
+                    label="Campaign"
+                    options={CAMPAIGN_OPTIONS}
+                    placeholder="All campaigns"
+                />
+            </div>
+        </div>
+    );
+};
+
+const MultiSelectShowcase = () => {
+    const [traits, setTraits] = useState<string[]>([]);
+    return (
+        <div className="w-52">
+            <SelectMulti
+                value={traits}
+                onChange={setTraits}
+                label="Traits"
+                options={TRAIT_OPTIONS}
+                placeholder="All traits"
+            />
+        </div>
+    );
+};
+
+const ChipsShowcase = () => {
+    const [selected, setSelected] = useState<Rarity[]>([]);
+    const toggle = (r: Rarity) =>
+        setSelected(previous => (previous.includes(r) ? previous.filter(x => x !== r) : [...previous, r]));
+    return (
+        <div className="flex flex-wrap gap-1.5">
+            {RARITY_ORDER.map(rarity => {
+                const active = selected.includes(rarity);
+                return (
+                    <button
+                        key={rarity}
+                        onClick={() => toggle(rarity)}
+                        className={[
+                            'flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors',
+                            active
+                                ? 'border-(--primary)/50 bg-(--primary)/15 text-(--fg)'
+                                : 'border-(--border) bg-transparent text-(--muted-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
+                        ].join(' ')}>
+                        <RarityIcon rarity={rarity} />
+                        <span>{Rarity[rarity]}</span>
+                    </button>
+                );
+            })}
+        </div>
+    );
+};
+
+const SegmentedShowcase = () => {
+    const [sort, setSort] = useState('savings');
+    const [view, setView] = useState('table');
+    return (
+        <div className="flex flex-wrap items-start gap-4">
+            <SegmentedControl value={sort} onChange={setSort} options={SORT_MODES} />
+            <SegmentedControl value={view} onChange={setView} options={VIEW_MODES} />
+        </div>
+    );
+};
+
+const RangeShowcase = () => {
+    const [min, setMin] = useState('');
+    const [max, setMax] = useState('');
+    return (
+        <div className="flex items-end gap-2">
+            <TextField type="number" label="Min rank" placeholder="0" value={min} onChange={setMin} className="w-28" />
+            <span className="mb-2.5 text-(--muted-fg)">–</span>
+            <TextField type="number" label="Max rank" placeholder="∞" value={max} onChange={setMax} className="w-28" />
+        </div>
+    );
+};
+
+// ── combined filter bar ───────────────────────────────────────────────────────
+
+const FilterBarShowcase = () => {
+    const [search, setSearch] = useState('');
+    const [selectedRarities, setSelectedRarities] = useState<Rarity[]>([]);
+    const [onlyRelics, setOnlyRelics] = useState(false);
+    const hasFilters = search !== '' || selectedRarities.length > 0 || onlyRelics;
+
+    const toggleRarity = (r: Rarity) =>
+        setSelectedRarities(previous => (previous.includes(r) ? previous.filter(x => x !== r) : [...previous, r]));
+
+    return (
+        <div className="overflow-hidden rounded-xl border border-(--border) bg-(--overlay)">
+            {/* Header */}
+            <div className="flex items-center gap-4 border-b border-(--border) px-4 py-2.5">
+                <span className="text-[10px] font-bold tracking-[.14em] text-(--muted-fg) uppercase">Filters</span>
+                <div className="flex flex-1 items-center justify-end gap-3">
+                    <Switch isSelected={onlyRelics} onChange={setOnlyRelics}>
+                        Only Relics
+                    </Switch>
+                    <Button
+                        appearance="plain"
+                        intent="primary"
+                        size="extra-small"
+                        isDisabled={!hasFilters}
+                        onPress={() => {
+                            setSearch('');
+                            setSelectedRarities([]);
+                            setOnlyRelics(false);
+                        }}>
+                        Clear
+                    </Button>
+                </div>
+            </div>
+            {/* Search */}
+            <div className="border-b border-(--border) px-4 py-3">
+                <TextField
+                    value={search}
+                    onChange={setSearch}
+                    placeholder="Search characters…"
+                    prefix={<Search className="size-4 text-(--muted-fg)" />}
+                    suffix={
+                        search ? (
+                            <button
+                                aria-label="Clear search"
+                                onMouseDown={event_ => {
+                                    event_.preventDefault();
+                                    setSearch('');
+                                }}
+                                className="cursor-pointer text-(--muted-fg) transition-colors hover:text-(--fg)">
+                                <X className="size-4" />
+                            </button>
+                        ) : undefined
+                    }
+                />
+            </div>
+            {/* Rarity chips */}
+            <div className="flex flex-wrap items-center gap-1.5 px-4 py-3">
+                {RARITY_ORDER.map(rarity => {
+                    const active = selectedRarities.includes(rarity);
+                    return (
+                        <button
+                            key={rarity}
+                            onClick={() => toggleRarity(rarity)}
+                            className={[
+                                'flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors',
+                                active
+                                    ? 'border-(--primary)/50 bg-(--primary)/15 text-(--fg)'
+                                    : 'border-(--border) bg-transparent text-(--muted-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
+                            ].join(' ')}>
+                            <RarityIcon rarity={rarity} />
+                            <span>{Rarity[rarity]}</span>
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
+};
+
+// ─── campaign chips ──────────────────────────────────────────────────────────
+
+const firstBattle = (campaign: string): ICampaignBattleComposed | undefined =>
+    Object.values(CampaignsService.campaignsComposed).find(b => b.campaign === campaign);
+
+const CHIP_COMPACT: ICampaignBattleComposed[] = [
+    firstBattle('Indomitus'),
+    firstBattle('Indomitus Elite'),
+    firstBattle('Fall of Cadia'),
+    firstBattle('Fall of Cadia Mirror Elite'),
+    firstBattle('Octarius'),
+    firstBattle('Saim-Hann'),
+    firstBattle('Adeptus Mechanicus Standard'),
+    firstBattle('Tyranids Standard'),
+    firstBattle('Onslaught'),
+].filter((b): b is ICampaignBattleComposed => b !== undefined);
+
+const CHIP_LOCKED: ICampaignBattleComposed[] = [
+    firstBattle('Indomitus Mirror'),
+    firstBattle('Fall of Cadia Elite'),
+    firstBattle('Death Guard Standard'),
+    firstBattle("T'au Empire Standard"),
+].filter((b): b is ICampaignBattleComposed => b !== undefined);
+
+const CHIP_FULL: ICampaignBattleComposed[] = [
+    firstBattle('Adeptus Mechanicus Standard Challenge'),
+    firstBattle('Adeptus Mechanicus Extremis Challenge'),
+    firstBattle('Fall of Cadia Mirror Elite'),
+    firstBattle('Indomitus'),
+    firstBattle('Onslaught'),
+].filter((b): b is ICampaignBattleComposed => b !== undefined);
+
+const CampaignChipsShowcase = () => (
+    <Section id="campaign-chips" title="Campaign chips">
+        <Group label="Compact (clickable)">
+            <div className="flex flex-wrap gap-2">
+                {CHIP_COMPACT.map(loc => (
+                    <ChipCampaignLocation key={loc.id} location={loc} unlocked compact clickable />
+                ))}
+            </div>
+        </Group>
+        <Group label="Compact (locked / unclickable)">
+            <div className="flex flex-wrap gap-2">
+                {CHIP_LOCKED.map(loc => (
+                    <ChipCampaignLocation key={loc.id} location={loc} unlocked={false} compact clickable={false} />
+                ))}
+            </div>
+        </Group>
+        <Group label="Full width">
+            <div className="flex w-64 flex-col gap-1.5">
+                {CHIP_FULL.map(loc => (
+                    <ChipCampaignLocation
+                        key={loc.id}
+                        location={loc}
+                        unlocked
+                        compact={false}
+                        widthClass="w-full"
+                        clickable
+                    />
+                ))}
+            </div>
+        </Group>
+    </Section>
+);
+
+// ─── colours ─────────────────────────────────────────────────────────────────
+
+interface SwatchProps {
+    token: string;
+    label: string;
+    fg?: string;
+}
+const Swatch = ({ token, label, fg }: SwatchProps) => (
+    <div className="flex min-w-[80px] flex-col gap-1.5">
+        <div
+            className="h-14 w-full rounded-lg border border-(--border) shadow-sm"
+            style={{ background: `var(${token})` }}
+        />
+        {fg && (
+            <div
+                className="flex h-6 items-center justify-center rounded-md text-[11px] font-medium"
+                style={{ background: `var(${token})`, color: `var(${fg})` }}>
+                Aa
+            </div>
+        )}
+        <p className="font-mono text-[11px] leading-tight text-(--muted-fg)">{token}</p>
+        <p className="text-[11px] leading-tight text-(--fg)">{label}</p>
+    </div>
+);
+
+const SEMANTIC_PAIRS: Array<{ token: string; fg: string; label: string }> = [
+    { token: '--primary', fg: '--primary-fg', label: 'Primary' },
+    { token: '--secondary', fg: '--secondary-fg', label: 'Secondary' },
+    { token: '--accent', fg: '--accent-fg', label: 'Accent' },
+    { token: '--success', fg: '--success-fg', label: 'Success' },
+    { token: '--warning', fg: '--warning-fg', label: 'Warning' },
+    { token: '--danger', fg: '--danger-fg', label: 'Danger' },
+    { token: '--muted', fg: '--muted-fg', label: 'Muted' },
+    { token: '--overlay', fg: '--overlay-fg', label: 'Overlay' },
+    { token: '--sidebar', fg: '--sidebar-fg', label: 'Sidebar' },
+    { token: '--bg', fg: '--fg', label: 'Background' },
+];
+
+const CARD_TOKENS: Array<{ token: string; label: string }> = [
+    { token: '--card-bg', label: 'Card bg' },
+    { token: '--card-border', label: 'Card border' },
+    { token: '--card-fg', label: 'Card fg' },
+];
+
+const BORDER_TOKENS: Array<{ token: string; label: string }> = [
+    { token: '--border', label: 'Border' },
+    { token: '--input', label: 'Input' },
+    { token: '--ring', label: 'Ring' },
+];
+
+const CHART_TOKENS = [1, 2, 3, 4, 5].map(n => ({
+    token: `--chart-${n}` as string,
+    label: `Chart ${n}`,
+}));
+
+const RARITY_TOKENS: Array<{ token: string; label: string }> = [
+    { token: '--rarity-common', label: 'Common' },
+    { token: '--rarity-uncommon', label: 'Uncommon' },
+    { token: '--rarity-rare', label: 'Rare' },
+    { token: '--rarity-epic', label: 'Epic' },
+    { token: '--rarity-legendary', label: 'Legendary' },
+    { token: '--rarity-mythic', label: 'Mythic' },
+];
+
+const RANK_GROUPS = [
+    { label: 'Stone', tokens: ['--rank-stone1', '--rank-stone2', '--rank-stone3'] },
+    { label: 'Iron', tokens: ['--rank-iron1', '--rank-iron2', '--rank-iron3'] },
+    { label: 'Bronze', tokens: ['--rank-bronze1', '--rank-bronze2', '--rank-bronze3'] },
+    { label: 'Silver', tokens: ['--rank-silver1', '--rank-silver2', '--rank-silver3'] },
+    { label: 'Gold', tokens: ['--rank-gold1', '--rank-gold2', '--rank-gold3'] },
+    { label: 'Diamond', tokens: ['--rank-diamond1', '--rank-diamond2', '--rank-diamond3'] },
+    { label: 'Adamantine', tokens: ['--rank-adamantine1', '--rank-adamantine2', '--rank-adamantine3'] },
+];
+
+const ColoursSection = () => (
+    <Section id="colours" title="Colours">
+        <Group label="Semantic pairs (background + foreground)">
+            <div className="flex flex-wrap gap-4">
+                {SEMANTIC_PAIRS.map(({ token, fg, label }) => (
+                    <Swatch key={token} token={token} fg={fg} label={label} />
+                ))}
+            </div>
+        </Group>
+        <Group label="Card surface">
+            <div className="flex flex-wrap gap-4">
+                {CARD_TOKENS.map(({ token, label }) => (
+                    <Swatch key={token} token={token} label={label} />
+                ))}
+            </div>
+        </Group>
+        <Group label="Border / input / ring">
+            <div className="flex flex-wrap gap-4">
+                {BORDER_TOKENS.map(({ token, label }) => (
+                    <Swatch key={token} token={token} label={label} />
+                ))}
+            </div>
+        </Group>
+        <Group label="Chart palette">
+            <div className="flex flex-wrap gap-4">
+                {CHART_TOKENS.map(({ token, label }) => (
+                    <Swatch key={token} token={token} label={label} />
+                ))}
+            </div>
+        </Group>
+        <Group label="Rarity">
+            <div className="flex flex-wrap gap-4">
+                {RARITY_TOKENS.map(({ token, label }) => (
+                    <Swatch key={token} token={token} label={label} />
+                ))}
+            </div>
+        </Group>
+        <Group label="Rank tiers">
+            <div className="space-y-3">
+                {RANK_GROUPS.map(({ label, tokens }) => (
+                    <div key={label} className="flex items-center gap-3">
+                        <span className="w-24 shrink-0 text-[11px] font-medium text-(--muted-fg)">{label}</span>
+                        <div className="flex gap-2">
+                            {tokens.map(token => (
+                                <div
+                                    key={token}
+                                    title={token}
+                                    className="h-8 w-16 rounded-md border border-(--border) shadow-sm"
+                                    style={{ background: `var(${token})` }}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </Group>
+    </Section>
+);
+
+// ─── page ────────────────────────────────────────────────────────────────────
+
+export const UiKitPage = () => {
+    const [switchA, setSwitchA] = useState(true);
+    const [switchB, setSwitchB] = useState(false);
+
+    return (
+        <div className="space-y-12 py-6">
+            <div>
+                <h2>UI Kit</h2>
+                <p className="text-sm text-(--muted-fg)">Live components and design primitives</p>
+            </div>
+
+            <UiKitNav />
+
+            {/* ── Primitives ───────────────────────────────────────────── */}
+
+            <ColoursSection />
+
+            <Separator />
+
+            <Section id="button" title="Button">
+                <Group label="Intents & appearances">
+                    <Row>
+                        <Button intent="primary">Primary</Button>
+                        <Button intent="secondary">Secondary</Button>
+                        <Button intent="warning">Warning</Button>
+                        <Button intent="danger">Danger</Button>
+                        <Separator orientation="vertical" className="h-8" />
+                        <Button intent="primary" appearance="outline">
+                            Outline
+                        </Button>
+                        <Button intent="primary" appearance="plain">
+                            Plain
+                        </Button>
+                    </Row>
+                </Group>
+                <Group label="Sizes">
+                    <Row className="items-end">
+                        <Button size="extra-small">XS</Button>
+                        <Button size="small">Small</Button>
+                        <Button size="medium">Medium</Button>
+                        <Button size="large">Large</Button>
+                    </Row>
+                </Group>
+                <Group label="States">
+                    <Row>
+                        <Button isDisabled>Disabled</Button>
+                        <Button isPending>Pending</Button>
+                    </Row>
+                </Group>
+                <Group label="Icon only">
+                    <Row>
+                        <Button size="square-petite" intent="primary">
+                            <Plus data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" intent="secondary">
+                            <Search data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" intent="danger">
+                            <Trash2 data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" appearance="outline" intent="primary">
+                            <Edit data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <Download data-slot="icon" />
+                        </Button>
+                    </Row>
+                </Group>
+                <Group label="Icon + label">
+                    <Row className="items-end">
+                        <Button size="extra-small" intent="primary">
+                            <Plus data-slot="icon" />
+                            Add
+                        </Button>
+                        <Button size="small" intent="primary">
+                            <Plus data-slot="icon" />
+                            Add goal
+                        </Button>
+                        <Button size="small" intent="secondary" appearance="outline">
+                            <Edit data-slot="icon" />
+                            Edit
+                        </Button>
+                        <Button size="small" intent="danger" appearance="outline">
+                            <Trash2 data-slot="icon" />
+                            Delete
+                        </Button>
+                        <Button size="small" intent="primary">
+                            <Download data-slot="icon" />
+                            Export JSON
+                        </Button>
+                        <Button size="medium" intent="primary">
+                            <Plus data-slot="icon" />
+                            Add new goal
+                        </Button>
+                        <Button size="medium" intent="secondary" appearance="outline">
+                            <Search data-slot="icon" />
+                            Search characters
+                        </Button>
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="button-pill" title="ButtonPill">
+                <Group label="Widths">
+                    <Row>
+                        <ButtonPill>Compact</ButtonPill>
+                        <ButtonPill widthClass="w-36">Wider</ButtonPill>
+                        <ButtonPill compact={false} widthClass="w-full max-w-xs">
+                            Full width
+                        </ButtonPill>
+                    </Row>
+                </Group>
+                <Group label="States">
+                    <Row>
+                        <ButtonPill>Default</ButtonPill>
+                        <ButtonPill disabled>Disabled</ButtonPill>
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="text-field" title="TextField">
+                <Group label="Basic">
+                    <div className="flex flex-wrap gap-4">
+                        <TextField placeholder="Placeholder text" className="w-56" />
+                        <TextField label="Label" placeholder="With label" className="w-56" />
+                        <TextField
+                            label="With description"
+                            placeholder="Enter value"
+                            description="Helper text shown below the field."
+                            className="w-56"
+                        />
+                    </div>
+                </Group>
+                <Group label="States">
+                    <div className="flex flex-wrap gap-4">
+                        <TextField label="Disabled" placeholder="Cannot edit" isDisabled className="w-56" />
+                        <TextField
+                            label="Invalid"
+                            placeholder="Bad value"
+                            isInvalid
+                            errorMessage="This field is required."
+                            className="w-56"
+                        />
+                        <TextField label="Pending" placeholder="Loading…" isPending className="w-56" />
+                    </div>
+                </Group>
+                <Group label="Variants">
+                    <div className="flex flex-wrap gap-4">
+                        <TextField
+                            label="With prefix"
+                            placeholder="Username"
+                            prefix={<Mail className="size-4 text-(--muted-fg)" />}
+                            className="w-56"
+                        />
+                        <TextField
+                            label="With suffix"
+                            placeholder="Search…"
+                            suffix={<Search className="size-4 text-(--muted-fg)" />}
+                            className="w-56"
+                        />
+                        <TextField
+                            label="Password"
+                            type="password"
+                            isRevealable
+                            placeholder="••••••••"
+                            className="w-56"
+                        />
+                    </div>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="switch" title="Switch">
+                <Group label="Interactive">
+                    <Row>
+                        <Switch isSelected={switchA} onChange={setSwitchA}>
+                            {switchA ? 'On' : 'Off'}
+                        </Switch>
+                        <Switch isSelected={switchB} onChange={setSwitchB}>
+                            {switchB ? 'Enabled' : 'Disabled'}
+                        </Switch>
+                        <Switch isSelected={switchA} onChange={setSwitchA} aria-label="No label" />
+                    </Row>
+                </Group>
+                <Group label="Disabled">
+                    <Row>
+                        <Switch isSelected={true} isDisabled>
+                            Always on
+                        </Switch>
+                        <Switch isSelected={false} isDisabled>
+                            Always off
+                        </Switch>
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="badge" title="Badge">
+                <Group label="Solid">
+                    <Row>
+                        <Badge>Default</Badge>
+                        <Badge intent="primary">Primary</Badge>
+                        <Badge intent="success">Success</Badge>
+                        <Badge intent="warning">Warning</Badge>
+                        <Badge intent="danger">Danger</Badge>
+                    </Row>
+                </Group>
+                <Group label="Outline">
+                    <Row>
+                        <Badge appearance="outline">Default</Badge>
+                        <Badge intent="primary" appearance="outline">
+                            Primary
+                        </Badge>
+                        <Badge intent="success" appearance="outline">
+                            Success
+                        </Badge>
+                        <Badge intent="warning" appearance="outline">
+                            Warning
+                        </Badge>
+                        <Badge intent="danger" appearance="outline">
+                            Danger
+                        </Badge>
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="card" title="Card">
+                <Group label="Header + content">
+                    <div className="flex flex-wrap items-start gap-4">
+                        <Card className="w-72">
+                            <CardHeader>
+                                <CardTitle>Daily Raids</CardTitle>
+                                <span className="text-sm text-(--muted-fg)">3 locations</span>
+                            </CardHeader>
+                            <CardContent className="text-xs text-(--muted-fg)">Location list goes here.</CardContent>
+                        </Card>
+                        <Card className="w-72">
+                            <CardHeader>
+                                <CardTitle>Your Goals</CardTitle>
+                                <Badge intent="primary">450 ⚡</Badge>
+                            </CardHeader>
+                            <CardContent>
+                                <p className="text-xs text-(--muted-fg)">Goal rows go here.</p>
+                            </CardContent>
+                        </Card>
+                    </div>
+                </Group>
+                <Group label="Header + content + footer">
+                    <Card className="w-72">
+                        <CardHeader>
+                            <CardTitle>Edit goal</CardTitle>
+                        </CardHeader>
+                        <CardContent>
+                            <p className="text-xs text-(--muted-fg)">Form fields go here.</p>
+                        </CardContent>
+                        <CardFooter>
+                            <Button size="small" intent="primary">
+                                Save
+                            </Button>
+                            <Button size="small" appearance="outline">
+                                Cancel
+                            </Button>
+                        </CardFooter>
+                    </Card>
+                </Group>
+                <Group label="Minimal">
+                    <Card className="w-72 p-4">
+                        <p className="font-medium">Inline content</p>
+                        <p className="mt-1 text-xs text-(--muted-fg)">Skip slots, use p-* directly.</p>
+                    </Card>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="loader" title="Loader">
+                <Group label="Variants">
+                    <Row className="items-center">
+                        <Loader variant="spin" size="medium" />
+                        <Loader variant="bars" size="medium" />
+                        <Loader variant="ring" size="medium" />
+                    </Row>
+                </Group>
+                <Group label="Sizes (spin)">
+                    <Row className="items-center">
+                        <Loader variant="spin" size="small" />
+                        <Loader variant="spin" size="medium" />
+                        <Loader variant="spin" size="large" />
+                        <Loader variant="spin" size="extra-large" />
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="modal" title="Modal">
+                <Group label="Variants">
+                    <Row>
+                        <Modal>
+                            <Button intent="secondary" appearance="outline">
+                                Info
+                            </Button>
+                            <Modal.Content size="sm">
+                                <Dialog.Header title="About this feature" description="Here's what you need to know." />
+                                <Dialog.Body>
+                                    <p className="text-sm text-(--muted-fg)">Closes on click-away or Escape.</p>
+                                </Dialog.Body>
+                                <Dialog.Footer>
+                                    <Dialog.Close intent="primary">Got it</Dialog.Close>
+                                </Dialog.Footer>
+                            </Modal.Content>
+                        </Modal>
+
+                        <Modal>
+                            <Button intent="danger" appearance="outline">
+                                Danger confirm
+                            </Button>
+                            <Modal.Content size="sm">
+                                <Dialog.Header title="Delete goal?" description="This action cannot be undone." />
+                                <Dialog.Body>
+                                    <p className="text-sm text-(--muted-fg)">
+                                        The goal and all associated progress will be permanently removed.
+                                    </p>
+                                </Dialog.Body>
+                                <Dialog.Footer>
+                                    <Dialog.Close appearance="outline">Cancel</Dialog.Close>
+                                    <Dialog.Close intent="danger">Delete</Dialog.Close>
+                                </Dialog.Footer>
+                            </Modal.Content>
+                        </Modal>
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="separator" title="Separator">
+                <Group label="Horizontal">
+                    <Separator />
+                </Group>
+                <Group label="Vertical">
+                    <div className="flex h-6 items-center gap-3 text-sm">
+                        <span>Raids</span>
+                        <Separator orientation="vertical" />
+                        <span>Goals</span>
+                        <Separator orientation="vertical" />
+                        <span>Progress</span>
+                    </div>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="tooltip" title="Tooltip">
+                <Group label="Wrapping interactive elements">
+                    <Row>
+                        <AccessibleTooltip title="Applies all pending changes">
+                            <Button intent="primary">Save</Button>
+                        </AccessibleTooltip>
+                        <AccessibleTooltip title="Permanently deletes this goal — cannot be undone">
+                            <Button intent="danger" appearance="outline">
+                                Delete
+                            </Button>
+                        </AccessibleTooltip>
+                        <AccessibleTooltip title="Days until completion: 14">
+                            <span tabIndex={0}>
+                                <Badge intent="warning">450 ⚡</Badge>
+                            </span>
+                        </AccessibleTooltip>
+                    </Row>
+                </Group>
+                <Group label="Rich content">
+                    <AccessibleTooltip
+                        title={
+                            <div className="space-y-0.5 text-xs">
+                                <div className="font-semibold">Bolter Executioner</div>
+                                <div>Damage: 450 · Range: 2</div>
+                                <div>Faction: Ultramarines</div>
+                            </div>
+                        }>
+                        <Button intent="secondary" appearance="outline">
+                            Unit info
+                        </Button>
+                    </AccessibleTooltip>
+                </Group>
+                <Group label="LazyTooltip (mounts on first hover only)">
+                    <Row>
+                        <LazyTooltip title="Mounts only on first hover for performance">
+                            <Button intent="secondary" appearance="outline">
+                                Hover me
+                            </Button>
+                        </LazyTooltip>
+                        <LazyTooltip title="Another lazy tooltip">
+                            <span tabIndex={0}>
+                                <Badge intent="success">Optimised</Badge>
+                            </span>
+                        </LazyTooltip>
+                    </Row>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="domain-selects" title="Domain selects">
+                <Group label="Rarity · Rank · Stars · Faction">
+                    <DomainSelectsShowcase />
+                </Group>
+                <Group label="MUI Autocomplete multi-select">
+                    <MuiMultiSelectDemo />
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="progress" title="Progress">
+                <Group label="Intents">
+                    <div className="w-full max-w-md space-y-4">
+                        <ProgressBar label="Primary" value={72} max={100} intent="primary" />
+                        <ProgressBar label="Success" value={100} max={100} intent="success" />
+                        <ProgressBar label="Warning" value={45} max={100} intent="warning" />
+                        <ProgressBar label="Danger" value={18} max={100} intent="danger" />
+                    </div>
+                </Group>
+                <Group label="Without label">
+                    <div className="w-full max-w-md space-y-2">
+                        <ProgressBar value={60} max={100} intent="primary" />
+                        <ProgressBar value={30} max={100} intent="danger" />
+                    </div>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="accordion" title="Accordion">
+                <Group label="Interactive">
+                    <div className="w-full max-w-lg overflow-hidden rounded-lg border border-(--border)">
+                        <AccordionItem title="Daily Raids" defaultOpen>
+                            3 locations planned · 420 energy · Est. 14 days to next rank
+                        </AccordionItem>
+                        <AccordionItem title="Goals summary">
+                            5 active goals · 2 completed this week · Next: Marneus Calgar → Gold 3
+                        </AccordionItem>
+                        <AccordionItem title="Campaign progress">
+                            Indomitus: 12/30 · Fall of Cadia: 5/24 · Octarius: 0/18
+                        </AccordionItem>
+                    </div>
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="radio" title="Radio group">
+                <Group label="Fieldsets">
+                    <RadioGroupShowcase />
+                </Group>
+            </Section>
+
+            <Separator />
+
+            <CampaignChipsShowcase />
+
+            <Separator />
+
+            <Section id="filters" title="Filters">
+                <Group label="Text search">
+                    <div className="w-72">
+                        <TextSearchShowcase />
+                    </div>
+                </Group>
+                <Group label="Select (single)">
+                    <SelectShowcase />
+                </Group>
+                <Group label="Select (multi)">
+                    <MultiSelectShowcase />
+                </Group>
+                <Group label="Toggle chips">
+                    <ChipsShowcase />
+                </Group>
+                <Group label="Segmented control">
+                    <SegmentedShowcase />
+                </Group>
+                <Group label="Number range">
+                    <RangeShowcase />
+                </Group>
+                <Group label="Combined">
+                    <div className="max-w-2xl">
+                        <FilterBarShowcase />
+                    </div>
+                </Group>
+            </Section>
+
+            {/* ── Live ─────────────────────────────────────────────────── */}
+
+            <ChapterDivider label="Live" />
+
+            <Section id="home-cards" title="Home page cards">
+                <div className="flex flex-wrap items-start gap-4">
+                    <DailyRaidsSection />
+                    <HomeLreCard />
+                    <GoalsSection />
+                </div>
+            </Section>
+
+            <Separator />
+
+            <Section id="goals" title="Goals">
+                <GoalCardShowcase />
+            </Section>
+
+            <Separator />
+
+            <Section id="daily-raids" title="Daily Raids">
+                <RaidCardsShowcase />
+            </Section>
+        </div>
+    );
+};

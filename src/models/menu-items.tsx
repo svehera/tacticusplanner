@@ -164,4 +164,27 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['guildInsights'],
 ];
 
+export const librarySubMenu: MenuItemTP[] = [
+    new MenuItemTP('Lookups', <TableChartIcon />, '', '', '', [
+        menuItemById['rankLookup'],
+        menuItemById['mowLookup'],
+        menuItemById['characters'],
+        menuItemById['npcs'],
+        menuItemById['upgrades'],
+        new MenuItemTP('Equipment Lookup', <ListIcon />, '/learn/equipment'),
+        menuItemById['campaigns'],
+    ]),
+    menuItemById['guides'],
+    menuItemById['dirtyDozen'],
+    menuItemById['insights'],
+    menuItemById['guildApi'],
+    menuItemById['guildInsights'],
+];
+
+export const NAV_SECTIONS = [
+    { key: 'My Game' as const, items: inputSubMenu },
+    { key: 'Plan' as const, items: planSubMenuWeb },
+    { key: 'Library' as const, items: librarySubMenu },
+];
+
 export const miscMenuItems: MenuItemTP[] = [menuItemById['home'], menuItemById['contacts'], menuItemById['ty']];

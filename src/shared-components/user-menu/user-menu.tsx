@@ -8,9 +8,7 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import Box from '@mui/material/Box';
-import ListItemText from '@mui/material/ListItemText';
+import { Avatar, Badge, IconButton, Popover } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -55,16 +53,17 @@ function stringToColor(string: string) {
 
 function stringAvatar(name: string) {
     return {
-        sx: {
-            width: 32,
-            height: 32,
-            bgcolor: stringToColor(name),
-        },
+        className: '!w-8 !h-8',
+        style: { backgroundColor: stringToColor(name) },
         children: `${name.slice(0, 2)}`,
     };
 }
 
-export const UserMenu = () => {
+interface UserMenuProps {
+    compact?: boolean;
+}
+
+export const UserMenu = ({ compact = false }: UserMenuProps) => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const popupManager = usePopupManager();
@@ -195,130 +194,181 @@ export const UserMenu = () => {
         });
     }
 
+    const itemClass =
+        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-[7px] border-none cursor-pointer text-[13px] text-[var(--muted-fg)] bg-transparent hover:bg-[var(--primary)]/[.18] hover:text-[var(--fg)] transition-colors';
+    const iconClass = 'flex-shrink-0 !text-[18px]';
+
+    const close = () => userMenuControls.handleClose();
+
     return (
-        <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
+        <div className={`flex items-center ${compact ? 'justify-center' : 'w-full justify-start'}`}>
             <input ref={inputReference} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
-            <div className="flex items-center">
-                <span className="text-base font-bold">Hi, {username}</span>
+            <div className="flex items-center gap-2">
                 <IconButton
                     onClick={userMenuControls.handleClick}
                     size="small"
-                    sx={{ ml: 2 }}
                     aria-controls={userMenuControls.open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={userMenuControls.open ? 'true' : undefined}>
                     {isAuthenticated ? (
-                        <Avatar {...stringAvatar(username)}></Avatar>
+                        <Avatar {...stringAvatar(username)} />
                     ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                        <Avatar className="!h-8 !w-8">TP</Avatar>
                     )}
                 </IconButton>
+                {!compact && <span className="truncate text-sm font-semibold">{username}</span>}
             </div>
-            <Menu
-                anchorEl={userMenuControls.anchorEl}
+
+            <Popover
                 id="account-menu"
+                anchorEl={userMenuControls.anchorEl}
                 open={userMenuControls.open}
-                onClose={userMenuControls.handleClose}
-                onClick={userMenuControls.handleClose}
-                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                {isAuthenticated ? (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
-                ) : (
-                    <div>
-                        <MenuItem onClick={() => openLoginForm()}>
-                            <ListItemIcon>
-                                <LoginIcon />
-                            </ListItemIcon>
-                            <ListItemText>Login</ListItemText>
-                        </MenuItem>
-                        <MenuItem onClick={() => setShowRegisterUser(true)}>
-                            <ListItemIcon>
-                                <RegisterIcon />
-                            </ListItemIcon>
-                            <ListItemText>Register</ListItemText>
-                        </MenuItem>
-                    </div>
-                )}
-
-                <Divider />
-                {isAuthenticated && (
-                    <MenuItem onClick={syncWithTacticus}>
-                        <ListItemIcon>
-                            <SyncIcon />
-                        </ListItemIcon>
-                        <ListItemText>Sync via Tacticus API</ListItemText>
-                    </MenuItem>
-                )}
-
-                <MenuItem onClick={() => inputReference.current?.click()}>
-                    <ListItemIcon>
-                        <UploadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Import JSON</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={() => downloadJson()}>
-                    <ListItemIcon>
-                        <DownloadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Export JSON</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={() => restoreData()}>
-                    <ListItemIcon>
-                        <SettingsBackupRestoreIcon />
-                    </ListItemIcon>
-                    <ListItemText>Restore Backup</ListItemText>
-                </MenuItem>
-
-                <Divider />
-                {isDesktopView ? (
-                    <MenuItem onClick={() => navigateToMobileView()}>
-                        <ListItemIcon>
-                            <PhoneIcon />
-                        </ListItemIcon>
-                        <ListItemText>Use mobile view</ListItemText>
-                    </MenuItem>
-                ) : (
-                    <MenuItem onClick={() => navigateToDesktopView()}>
-                        <ListItemIcon>
-                            <ComputerIcon />
-                        </ListItemIcon>
-                        <ListItemText>Use desktop view</ListItemText>
-                    </MenuItem>
-                )}
-
-                <Divider />
-
-                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
-                    <MenuItem onClick={() => setShowAdminTools(true)}>
-                        <ListItemIcon>
-                            <SupervisorAccountIcon />
-                        </ListItemIcon>
-                        <ListItemText>Admin tools</ListItemText>
-                    </MenuItem>
-                )}
-
-                <MenuItem onClick={() => navigateToReviewTeams()}>
-                    <ListItemIcon>
-                        <GroupWorkIcon />
-                    </ListItemIcon>
-                    {userInfo.rejectedTeamsCount > 0 ? (
-                        <Badge badgeContent={userInfo.rejectedTeamsCount} color="error">
-                            <ListItemText>Review guides</ListItemText>
-                        </Badge>
+                onClose={close}
+                anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
+                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
+                elevation={0}
+                PaperProps={{
+                    className: 'bg-[var(--sidebar)] border border-[var(--border)] rounded-lg shadow-xl w-[220px] p-1',
+                }}>
+                {/* Identity row */}
+                <div className="mb-1 flex items-center gap-2.5 border-b border-[var(--border)] px-2 py-2">
+                    {isAuthenticated ? (
+                        <Avatar {...stringAvatar(username)} />
                     ) : (
-                        <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
-                            <ListItemText>Review guides</ListItemText>
-                        </Badge>
+                        <Avatar className="!h-8 !w-8">TP</Avatar>
                     )}
-                </MenuItem>
-            </Menu>
+                    <span className="truncate text-[13px] font-semibold text-[var(--fg)]">{username}</span>
+                </div>
+
+                {/* Auth */}
+                {isAuthenticated ? (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            logout();
+                            close();
+                        }}>
+                        <LogoutIcon className={iconClass} />
+                        <span>Logout</span>
+                    </button>
+                ) : (
+                    <>
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                openLoginForm();
+                                close();
+                            }}>
+                            <LoginIcon className={iconClass} />
+                            <span>Login</span>
+                        </button>
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                setShowRegisterUser(true);
+                                close();
+                            }}>
+                            <RegisterIcon className={iconClass} />
+                            <span>Register</span>
+                        </button>
+                    </>
+                )}
+
+                {isAuthenticated && (
+                    <>
+                        <hr className="my-1 border-[var(--border)]" />
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                syncWithTacticus();
+                                close();
+                            }}>
+                            <SyncIcon className={iconClass} />
+                            <span>Sync via Tacticus API</span>
+                        </button>
+                    </>
+                )}
+
+                <hr className="my-1 border-[var(--border)]" />
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        inputReference.current?.click();
+                        close();
+                    }}>
+                    <UploadIcon className={iconClass} />
+                    <span>Import JSON</span>
+                </button>
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        downloadJson();
+                        close();
+                    }}>
+                    <DownloadIcon className={iconClass} />
+                    <span>Export JSON</span>
+                </button>
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        restoreData();
+                        close();
+                    }}>
+                    <SettingsBackupRestoreIcon className={iconClass} />
+                    <span>Restore Backup</span>
+                </button>
+
+                <hr className="my-1 border-[var(--border)]" />
+                {isDesktopView ? (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            navigateToMobileView();
+                            close();
+                        }}>
+                        <PhoneIcon className={iconClass} />
+                        <span>Use mobile view</span>
+                    </button>
+                ) : (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            navigateToDesktopView();
+                            close();
+                        }}>
+                        <ComputerIcon className={iconClass} />
+                        <span>Use desktop view</span>
+                    </button>
+                )}
+
+                <hr className="my-1 border-[var(--border)]" />
+                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            setShowAdminTools(true);
+                            close();
+                        }}>
+                        <SupervisorAccountIcon className={iconClass} />
+                        <span>Admin tools</span>
+                    </button>
+                )}
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        navigateToReviewTeams();
+                        close();
+                    }}>
+                    <GroupWorkIcon className={iconClass} />
+                    <Badge
+                        badgeContent={
+                            userInfo.rejectedTeamsCount > 0 ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount
+                        }
+                        color={userInfo.rejectedTeamsCount > 0 ? 'error' : 'warning'}>
+                        <span>Review guides</span>
+                    </Badge>
+                </button>
+            </Popover>
             <RegisterUserDialog
                 isOpen={showRegisterUser}
                 onClose={success => {
@@ -343,6 +393,6 @@ export const UserMenu = () => {
                     setShowAdminTools(false);
                 }}
             />
-        </Box>
+        </div>
     );
 };

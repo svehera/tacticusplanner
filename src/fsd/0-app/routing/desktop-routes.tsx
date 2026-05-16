@@ -173,6 +173,13 @@ export const appRoutes: () => RouteObject[] = () => [
             },
             faqLazyRoute,
             sharedRosterRoute,
+            {
+                path: 'ui-kit',
+                async lazy() {
+                    const { UiKitPage } = await import('@/fsd/1-pages/ui-kit');
+                    return { Component: UiKitPage };
+                },
+            },
         ],
     },
 ];

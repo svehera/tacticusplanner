@@ -47,12 +47,5 @@ export const darkTheme = createTheme({
                 },
             },
         },
-        MuiToolbar: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: 'var(--navbar)',
-                },
-            },
-        },
     },
 });

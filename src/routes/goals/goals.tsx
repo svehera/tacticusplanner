@@ -453,11 +453,11 @@ export const Goals = () => {
                     <AccordionDetails className="px-4 pt-0 pb-4">
                         <div className="grid grid-cols-1 gap-3">
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         Energy
                                     </div>
-                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <MiscIcon icon={'energy'} height={35} width={35} />
                                         <b className="text-2xl text-(--fg)">
                                             {estimatedUpgradesTotal.energyTotal - energyAlreadySpent}
@@ -465,22 +465,22 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         XP Books
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         Badges
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                             <div key={alliance} className="flex-box mb-2 last:mb-0">
                                                 <BadgesTotal
@@ -493,11 +493,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         Orbs
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                             <div key={alliance} className="flex-box mb-2 last:mb-0">
                                                 <OrbsTotal
@@ -510,11 +510,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         Forge Badges
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <ForgeBadgesTotal
                                             badges={adjustedGoalsEstimates.neededForgeBadges}
                                             size={'medium'}
@@ -522,11 +522,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         MoW Components
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <MoWComponentsTotal
                                             components={adjustedGoalsEstimates.neededComponents}
                                             size={'medium'}
@@ -534,11 +534,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
                                     <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
                                         Mythic Upgrade Materials
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <div className="flex flex-wrap gap-1">
                                             {MYTHIC_UNCRAFTABLE_UPGRADES.map(upg => (
                                                 <div key={upg.id} className="flex flex-col items-center">

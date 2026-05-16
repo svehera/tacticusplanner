@@ -20,18 +20,18 @@ export const RankSelect2 = ({
 }) => {
     return (
         <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">{label}</label>
+            <label className="mb-2 block text-sm font-medium text-(--muted-fg)">{label}</label>
 
             <Listbox value={value} onChange={valueChanges}>
                 <div className="relative">
-                    <Listbox.Button className="relative w-full cursor-pointer rounded-lg border border-slate-300 bg-white py-2 pr-10 pl-3 text-left shadow-sm transition-all hover:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white">
+                    <Listbox.Button className="relative flex h-10 w-full cursor-pointer items-center rounded-lg border border-(--input) bg-(--bg) pr-10 pl-3 text-left text-(--fg) shadow-sm transition-all hover:border-(--primary) focus:ring-2 focus:ring-(--ring) focus:outline-none">
                         <div className="flex items-center gap-2">
                             <RankIcon rank={value} />
                             {!hideText && <span>{Rank[value]}</span>}
                         </div>
 
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronsUpDown className="h-4 w-4 text-gray-400" />
+                            <ChevronsUpDown className="h-4 w-4 text-(--muted-fg)" />
                         </span>
                     </Listbox.Button>
 
@@ -40,16 +40,14 @@ export const RankSelect2 = ({
                         leave="transition ease-in duration-100"
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0">
-                        <Listbox.Options className="absolute z-50 mt-2 max-h-[min(60vh,24rem)] w-full overflow-y-auto overscroll-contain rounded-lg border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-700 dark:bg-[#161b22]">
+                        <Listbox.Options className="absolute z-50 mt-2 max-h-[min(60vh,24rem)] w-full overflow-y-auto overscroll-contain rounded-lg border border-(--border) bg-(--overlay) py-1 shadow-xl">
                             {rankValues.map(rank => (
                                 <Listbox.Option
                                     key={rank}
                                     value={rank}
                                     className={({ active }) =>
-                                        `relative cursor-pointer py-2 pr-4 pl-10 transition-colors select-none ${
-                                            active
-                                                ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
-                                                : 'text-gray-900 dark:text-gray-200'
+                                        `relative cursor-pointer py-2 pr-4 pl-10 text-(--fg) transition-colors select-none ${
+                                            active ? 'bg-(--primary)/10 text-(--primary)' : ''
                                         }`
                                     }>
                                     {({ selected }) => (
@@ -60,7 +58,7 @@ export const RankSelect2 = ({
                                             </div>
 
                                             {selected && (
-                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 dark:text-blue-400">
+                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-(--primary)">
                                                     <Check className="h-4 w-4" />
                                                 </span>
                                             )}
