@@ -129,6 +129,10 @@ export class PersonalDataLocalStorage {
                     ...defaultData.gameModeTokens,
                     ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
+                armageddon: {
+                    ...defaultData.armageddon,
+                    ...(this.getItem<typeof defaultData.armageddon>('armageddon') ?? defaultData.armageddon),
+                },
             };
         } else {
             // no version (convert v1 to v2)
@@ -258,6 +262,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             warOffense2: defaultData.warOffense2,
             rosterSnapshots: defaultData.rosterSnapshots,
             gameModeTokens: defaultData.gameModeTokens,
+            armageddon: defaultData.armageddon,
         };
     }
 
@@ -271,6 +276,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
         gameModeTokens: {
             ...defaultData.gameModeTokens,
             ...v1Data.gameModeTokens,
+        },
+        armageddon: {
+            ...defaultData.armageddon,
+            ...v1Data.armageddon,
         },
     };
 };
