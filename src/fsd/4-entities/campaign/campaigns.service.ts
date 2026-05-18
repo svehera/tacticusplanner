@@ -143,7 +143,10 @@ export class CampaignsService {
                     battle
                 );
             }
-            if (allies.factions.length === 0) {
+            if (
+                allies.factions.length === 0 &&
+                ![Campaign.DAS, Campaign.DASC, Campaign.DAE, Campaign.DAEC].includes(battle.campaign as Campaign)
+            ) {
                 console.warn(
                     'no ally factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,

@@ -2310,7 +2310,7 @@
         ]
     },
     "upgArmU012": {
-        "material": "Reinforced Scale-Plates",
+        "material": "Scale-Plates",
         "snowprintId": "upgArmU012",
         "rarity": "Uncommon",
         "stat": "Armour",
@@ -5718,7 +5718,7 @@
         "craftable": true,
         "recipe": [
             {
-                "material": "upgHpR002",
+                "material": "upgHpR011",
                 "count": 9
             },
             {
@@ -5726,7 +5726,7 @@
                 "count": 9
             },
             {
-                "material": "upgArmR006",
+                "material": "upgArmR030",
                 "count": 9
             }
         ]

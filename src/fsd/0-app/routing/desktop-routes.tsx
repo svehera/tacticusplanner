@@ -14,6 +14,7 @@ import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
+import { armageddonLazyRoute } from '@/fsd/1-pages/plan-armageddon/armageddon.route';
 import { bulkGoalCreatorRoute } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.route';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesRoute } from '@/fsd/1-pages/plan-ces/ces.route';
@@ -72,6 +73,7 @@ export const globalPlanRoutes: RouteObject[] = [
             return { Component: MasterTable };
         },
     },
+    armageddonLazyRoute,
     campaignProgressionLazyRoute,
     questsRoute,
     cesRoute,

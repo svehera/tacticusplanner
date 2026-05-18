@@ -379,6 +379,47 @@ export const campaignsList: ICampaignModel[] = [
         groupType: CampaignGroupType.sistersCE,
         difficulty: CampaignDifficulty.eventChallenge,
     },
+    // Dark Angels Campaign Events
+    {
+        id: Campaign.DAS,
+        name: 'Dark Angels Standard',
+        displayName: 'Dark Angels Standard',
+        faction: 'DarkAngels',
+        coreCharacters: ['necroSpyder', 'necroDestroyer', 'necroPlasmancer'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.darkAngelsCE,
+        difficulty: CampaignDifficulty.eventStandard,
+    },
+    {
+        id: Campaign.DASC,
+        name: 'Dark Angels Standard Challenge',
+        displayName: 'Dark Angels Standard Challenge',
+        faction: 'DarkAngels',
+        coreCharacters: ['necroSpyder', 'necroDestroyer', 'necroPlasmancer'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.darkAngelsCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
+    {
+        id: Campaign.DAE,
+        name: 'Dark Angels Extremis',
+        displayName: 'Dark Angels Extremis',
+        faction: 'DarkAngels',
+        coreCharacters: ['necroSpyder', 'necroDestroyer', 'necroPlasmancer'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.darkAngelsCE,
+        difficulty: CampaignDifficulty.eventExtremis,
+    },
+    {
+        id: Campaign.DAEC,
+        name: 'Dark Angels Extremis Challenge',
+        displayName: 'Dark Angels Extremis Challenge',
+        faction: 'DarkAngels',
+        coreCharacters: ['necroSpyder', 'necroDestroyer', 'necroPlasmancer'],
+        releaseType: CampaignReleaseType.event,
+        groupType: CampaignGroupType.darkAngelsCE,
+        difficulty: CampaignDifficulty.eventChallenge,
+    },
 ];
 
 export const campaignsByGroup: Record<string, Campaign[]> = mapValues(groupBy(campaignsList, 'groupType'), value =>
