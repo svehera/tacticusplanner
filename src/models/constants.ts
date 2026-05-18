@@ -148,6 +148,11 @@ const defaultCampaignsProgress: ICampaignsProgress = {
     [Campaign.ASSC]: 0,
     [Campaign.ASE]: 0,
     [Campaign.ASEC]: 0,
+
+    [Campaign.DAS]: 0,
+    [Campaign.DASC]: 0,
+    [Campaign.DAE]: 0,
+    [Campaign.DAEC]: 0,
 };
 
 const defaultGWLayout: IGWLayoutZone[] = [
