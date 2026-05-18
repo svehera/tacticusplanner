@@ -1,4 +1,6 @@
-﻿import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+﻿import { ArmageddonState, defaultArmageddonState } from '@/reducers/armageddon.reducer';
+
+import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
@@ -65,6 +67,7 @@ export class GlobalState implements IGlobalState {
     readonly rosterSnapshots: IRosterSnapshotsState;
     readonly mows: Array<IMow | IMow2>;
     readonly gameModeTokens: IGameModeTokensState;
+    readonly armageddon: ArmageddonState;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -98,6 +101,7 @@ export class GlobalState implements IGlobalState {
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
+        this.armageddon = personalData.armageddon ?? defaultArmageddonState;
     }
 
     static initCharacters(
@@ -344,6 +348,7 @@ export class GlobalState implements IGlobalState {
             xpUse: value.xpUse,
             rosterSnapshots: value.rosterSnapshots,
             gameModeTokens: value.gameModeTokens,
+            armageddon: value.armageddon,
             teams: value.teams,
             teams2: value.teams2,
             warDefense2: value.warDefense2,

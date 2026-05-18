@@ -9,6 +9,7 @@ import { menuItemById } from 'src/models/menu-items';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
+import { armageddonMenuItem } from '@/fsd/1-pages/plan-armageddon/armageddon.menu-item';
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 
@@ -44,6 +45,7 @@ export const PlanRoutes = () => {
                         questsMenuItem,
                         cesMenuItem,
                         hsesMenuItem,
+                        armageddonMenuItem,
                         bulkGoalCreatorMenuItem,
                     ].map(menuItem => (
                         <MobileNavCard

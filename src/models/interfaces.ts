@@ -1,5 +1,6 @@
 ﻿import React from 'react';
 
+import { ArmageddonAction, ArmageddonState } from '@/reducers/armageddon.reducer';
 import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
 import { GuildAction } from '@/reducers/guild-reducer';
 import { GuildWarAction } from '@/reducers/guild-war-reducer';
@@ -99,6 +100,7 @@ export interface IGlobalState {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
+    armageddon: ArmageddonState;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -131,6 +133,7 @@ export interface IDispatchContext {
     xpUse: React.Dispatch<XpUseAction>;
     rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     gameModeTokens: React.Dispatch<GameModeTokensAction>;
+    armageddon: React.Dispatch<ArmageddonAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -162,6 +165,7 @@ export interface IPersonalData2 {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
+    armageddon: ArmageddonState;
 }
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */

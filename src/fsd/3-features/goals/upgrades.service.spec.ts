@@ -855,8 +855,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
     const createLocation = (id: string): ICampaignBattleComposed => {
         const base = CampaignsService.campaignsComposed[id];
         const baseRewards = base.rewards || { guaranteed: [], potential: [] };
-        const potential =
-            baseRewards.potential && baseRewards.potential.length > 0 ? baseRewards.potential : [{ id: upgradeId }];
+        const potential = [{ id: upgradeId }];
         return {
             ...base,
             rewards: {

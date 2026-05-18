@@ -25,6 +25,7 @@ import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-i
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
+import { armageddonMenuItem } from '@/fsd/1-pages/plan-armageddon/armageddon.menu-item';
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
@@ -69,6 +70,7 @@ export const menuItemById = {
     bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
+    armageddon: armageddonMenuItem,
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
@@ -110,6 +112,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
+    menuItemById['armageddon'],
     menuItemById['campaignProgression'],
     menuItemById['quests'],
     menuItemById['ces'],
@@ -126,6 +129,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     ...activeLreMenuItems,
+    menuItemById['armageddon'],
     menuItemById['quests'],
     menuItemById['campaignProgression'],
     menuItemById['hses'],
