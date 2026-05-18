@@ -60,8 +60,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
         const now = currentTime;
 
         // Worst case scenario: season started at first damage
-        const firstEntryStart =
-            (raidData.entries.find(entry => Number.isFinite(entry.startedOn))?.startedOn ?? 0) * 1000;
+        const firstEntryStart = raidData.entries.find(entry => Number.isFinite(entry.startedOn))?.startedOn ?? 0;
         const seasonStart = firstEntryStart === 0 ? now : firstEntryStart;
 
         const userMap = new Map<string, UserSummary>();
@@ -99,7 +98,7 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             if (entry.damageType === TacticusDamageType.Bomb) {
                 userSummary.bombCount += 1;
                 if (entry.completedOn !== undefined) {
-                    userSummary.lastBombTime = entry.completedOn! * 1000;
+                    userSummary.lastBombTime = entry.completedOn!;
                 }
             } else {
                 // Battle attacks
@@ -120,14 +119,14 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
 
                 if (entry.startedOn !== undefined) {
                     // update token status at entry.startedOn
-                    updateTokenTo(userSummary.tokenStatus, entry.startedOn! * 1000);
+                    updateTokenTo(userSummary.tokenStatus, entry.startedOn!);
                     // one token was used for this battle attack
                     userSummary.tokenStatus.count--;
 
                     if (userSummary.tokenStatus.count < 0) {
                         // Estimation was too pessimist, let's refine according to this datapoint
                         userSummary.tokenStatus.count = 0;
-                        userSummary.tokenStatus.reloadStart = entry.startedOn! * 1000;
+                        userSummary.tokenStatus.reloadStart = entry.startedOn!;
                     }
                 }
             }
