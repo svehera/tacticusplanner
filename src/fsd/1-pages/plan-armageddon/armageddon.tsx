@@ -1290,7 +1290,7 @@ export const Armageddon = () => {
                 <span className="text-(--muted-fg) select-none">·</span>
                 <div className="flex items-center gap-1.5">
                     <MiscIcon icon="armageddonCurrency" width={16} height={16} />
-                    <span className="text-(--muted-fg)">Resets each week</span>
+                    <span className="text-(--muted-fg)">Rolls over each week</span>
                 </div>
             </div>
 
