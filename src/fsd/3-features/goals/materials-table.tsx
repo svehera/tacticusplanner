@@ -5,7 +5,6 @@ import {
     ColGroupDef,
     ICellRendererParams,
     CellEditingStoppedEvent,
-    themeBalham,
     GridReadyEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -318,7 +317,7 @@ export const MaterialsTable: React.FC<Props> = ({
     return (
         <AgGridReact
             modules={[AllCommunityModule]}
-            theme={themeBalham}
+            theme="legacy"
             onCellEditingStopped={saveChanges}
             suppressChangeDetection
             singleClickEdit
