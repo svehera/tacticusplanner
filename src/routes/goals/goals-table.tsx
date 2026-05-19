@@ -11,7 +11,7 @@ import {
 import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -587,7 +587,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
-                theme={themeBalham}
+                theme="legacy"
                 defaultColDef={{
                     suppressMovable: true,
                     sortable: true,
