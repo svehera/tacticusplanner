@@ -1,17 +1,45 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { Listbox, Transition } from '@headlessui/react';
-import { Check, ChevronDown, ChevronsUpDown, Download, Edit, Mail, Plus, Search, Trash2, X } from 'lucide-react';
-import React, { Fragment, useContext, useMemo, useState } from 'react';
+import {
+    AllCommunityModule,
+    type ColDef,
+    type GridApi,
+    type ICellRendererParams,
+    type RowDragEndEvent,
+} from 'ag-grid-community';
+import { AgGridReact } from 'ag-grid-react';
+import { cloneDeep } from 'lodash';
+import {
+    AlertTriangle,
+    ArrowDown,
+    ArrowRight,
+    ArrowUp,
+    Check,
+    CheckCircle2,
+    ChevronDown,
+    ChevronsUpDown,
+    Download,
+    Edit,
+    ExternalLink,
+    GripVertical,
+    Mail,
+    Plus,
+    Search,
+    Trash2,
+    X,
+} from 'lucide-react';
+import React, { Fragment, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { StoreContext } from 'src/reducers/store.provider';
 import { RaidUpgradeMaterialCard } from 'src/routes/tables/raid-upgrade-material-card';
 
-import { FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { FactionId, Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, LazyTooltip, Button, ButtonPill } from '@/fsd/5-shared/ui';
 import { Badge } from '@/fsd/5-shared/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/fsd/5-shared/ui/card';
-import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { RarityIcon, RankIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { TextField } from '@/fsd/5-shared/ui/input/text-field';
 import { Loader } from '@/fsd/5-shared/ui/loader';
 import { Dialog } from '@/fsd/5-shared/ui/modal/dialog';
@@ -27,14 +55,22 @@ import { Separator } from '@/fsd/5-shared/ui/separator';
 import { Switch } from '@/fsd/5-shared/ui/switch';
 
 import { CampaignsService, ChipCampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
-import { CharactersService } from '@/fsd/4-entities/character';
+import { CharactersService, charsUnlockShards } from '@/fsd/4-entities/character';
+import { PersonalGoalType } from '@/fsd/4-entities/goal';
 import { LegendaryEventService } from '@/fsd/4-entities/lre';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { UpgradeImage, UpgradesService as UpgradeEntityService } from '@/fsd/4-entities/upgrade';
 
+import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters';
+import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
+import { MowMaterialsTotal } from '@/fsd/3-features/goals';
+import { type IGoalEstimate, type TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
+import { XpGoalProgressBar } from '@/fsd/1-pages/goals/xp-book-progress-bar';
 import { DailyRaidsSection } from '@/fsd/1-pages/home/daily-raids-section';
 import { GoalsSection } from '@/fsd/1-pages/home/goals-section';
 import { LreSection } from '@/fsd/1-pages/home/lre-section';
@@ -58,6 +94,7 @@ const NAV_PRIMITIVES = [
     { id: 'accordion', label: 'Accordion' },
     { id: 'radio', label: 'Radio group' },
     { id: 'campaign-chips', label: 'Campaign chips' },
+    { id: 'table', label: 'Table' },
     { id: 'filters', label: 'Filters' },
 ] as const;
 
@@ -129,14 +166,24 @@ const HomeLreCard = () => {
 // ─── live: goals ─────────────────────────────────────────────────────────────
 
 const GoalCardShowcase = () => {
-    const { goals, characters, mows, campaignsProgress, inventory, dailyRaids, dailyRaidsPreferences, gameModeTokens } =
-        useContext(StoreContext);
+    const {
+        goals,
+        characters,
+        mows,
+        campaignsProgress,
+        inventory,
+        dailyRaids,
+        dailyRaidsPreferences,
+        gameModeTokens,
+        xpIncome,
+        xpUse,
+    } = useContext(StoreContext);
 
     const resolvedChars = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const units = useMemo(() => [...resolvedChars, ...resolvedMows], [resolvedChars, resolvedMows]);
 
-    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities } = useMemo(
+    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false),
         [goals, units]
     );
@@ -175,7 +222,7 @@ const GoalCardShowcase = () => {
         ]
     );
 
-    const goalsEstimates = useMemo(
+    const rawGoalsEstimates = useMemo(
         () =>
             GoalsService.buildGoalEstimates(
                 estimatedUpgradesTotal,
@@ -194,6 +241,16 @@ const GoalCardShowcase = () => {
             resolvedChars,
         ]
     );
+
+    const goalsEstimates = GoalsService.adjustGoalEstimates(
+        cloneDeep(goals),
+        cloneDeep(rawGoalsEstimates),
+        inventory,
+        xpUse,
+        upgradeRankOrMowGoals,
+        ascendGoals,
+        xpIncome
+    ).goalEstimates;
 
     const samples = useMemo(
         () => [shardsGoals[0], upgradeRankOrMowGoals[0], upgradeMaterialGoals[0], upgradeAbilities[0]].filter(Boolean),
@@ -459,10 +516,13 @@ const AccordionItem = ({
     title,
     children,
     defaultOpen = false,
+    flush = false,
 }: {
     title: React.ReactNode;
     children: React.ReactNode;
     defaultOpen?: boolean;
+    /** Remove body padding — use when the child fills the full width (e.g. a data grid). */
+    flush?: boolean;
 }) => {
     const [open, setOpen] = useState(defaultOpen);
     return (
@@ -475,7 +535,9 @@ const AccordionItem = ({
                     className={`h-4 w-4 shrink-0 text-(--muted-fg) transition-transform ${open ? 'rotate-180' : ''}`}
                 />
             </button>
-            {open && <div className="px-4 pb-4 text-sm text-(--muted-fg)">{children}</div>}
+            {open && (
+                <div className={flush ? 'overflow-hidden' : 'px-4 pb-4 text-sm text-(--muted-fg)'}>{children}</div>
+            )}
         </div>
     );
 };
@@ -1040,6 +1102,848 @@ const CampaignChipsShowcase = () => (
         </Group>
     </Section>
 );
+
+// ─── table ───────────────────────────────────────────────────────────────────
+
+type TableDensity = 'compact' | 'default' | 'comfortable';
+
+const TABLE_DENSITY_OPTIONS: { value: TableDensity; label: string }[] = [
+    { value: 'compact', label: 'Compact' },
+    { value: 'default', label: 'Default' },
+    { value: 'comfortable', label: 'Comfortable' },
+];
+
+// ─── goal progress bar (have / need with colour flip at 100 %) ───────────────
+
+const GoalBar = ({ have, need, unit }: { have: number; need: number; unit: string }) => {
+    const pct = need > 0 ? Math.min(100, Math.round((have / need) * 100)) : 0;
+    const over = have >= need;
+    return (
+        <div className={`flex items-center gap-2 ${over ? 'text-(--success)' : 'text-(--muted-fg)'}`}>
+            <div
+                className="h-1.5 min-w-[60px] flex-1 overflow-hidden rounded-full bg-(--secondary)"
+                style={{ maxWidth: 160 }}>
+                <div
+                    className={`h-full rounded-full transition-all ${over ? 'bg-(--success)' : 'bg-(--primary)'}`}
+                    style={{ width: `${pct}%` }}
+                />
+            </div>
+            <span className={`text-[11px] whitespace-nowrap tabular-nums ${over ? 'font-semibold' : ''}`}>
+                {have.toLocaleString()} / {need.toLocaleString()} {unit}
+                {over && ' ✓'}
+            </span>
+        </div>
+    );
+};
+
+// ─── sub-grid (one per section) ──────────────────────────────────────────────
+
+interface GoalsSectionGridProps {
+    rows: TypedGoalSelect[];
+    allGoals: TypedGoalSelect[];
+    goalsEstimates: IGoalEstimate[];
+    densityClass: string;
+    rowHeight: number;
+    bookRarity: Rarity;
+}
+
+const GoalsSectionGrid = ({
+    rows,
+    allGoals: _allGoals,
+    goalsEstimates,
+    densityClass,
+    rowHeight,
+    bookRarity,
+}: GoalsSectionGridProps) => {
+    // Local ordered copy — updated by drag and arrow buttons for visual showcase
+    const [orderedRows, setOrderedRows] = useState<TypedGoalSelect[]>(() => [...rows]);
+    useEffect(() => setOrderedRows([...rows]), [rows]);
+
+    /** Reassigns priority values to match the new visual order, preserving the same set of numbers. */
+    const applyPriorities = (reordered: TypedGoalSelect[], original: TypedGoalSelect[]): TypedGoalSelect[] => {
+        const sorted = [...original].map(r => r.priority).toSorted((a, b) => a - b);
+        return reordered.map((row, index) => ({ ...row, priority: sorted[index] }));
+    };
+
+    const moveRow = (fromIndex: number, toIndex: number) => {
+        setOrderedRows(previous => {
+            const next = [...previous];
+            const [item] = next.splice(fromIndex, 1);
+            next.splice(toIndex, 0, item);
+            return applyPriorities(next, previous);
+        });
+    };
+
+    const toggleInclude = (goalId: string) => {
+        setOrderedRows(previous =>
+            previous.map(r => (r.goalId === goalId ? { ...r, include: r.include === false ? true : false } : r))
+        );
+    };
+
+    const handleRowDragEnd = (event_: RowDragEndEvent<TypedGoalSelect>) => {
+        const newOrder: TypedGoalSelect[] = [];
+        event_.api.forEachNodeAfterFilterAndSort(node => {
+            if (node.data) newOrder.push(node.data);
+        });
+        setOrderedRows(previous => applyPriorities(newOrder, previous));
+    };
+
+    // Stable refs so columnDefs closure is never stale — avoids
+    // ag-Grid fully resetting columns on every orderedRows change.
+    const moveRowReference = useRef(moveRow);
+    moveRowReference.current = moveRow;
+    const toggleIncludeReference = useRef(toggleInclude);
+    toggleIncludeReference.current = toggleInclude;
+
+    const gridApiReference = useRef<GridApi | null>(null);
+    useEffect(() => {
+        gridApiReference.current?.redrawRows();
+    }, [goalsEstimates]);
+
+    const isAbilitiesOnly = rows.every(r => r.type === PersonalGoalType.CharacterAbilities);
+    const hasAscend = rows.some(r => r.type === PersonalGoalType.Ascend || r.type === PersonalGoalType.Unlock);
+    const hasXpBooks = rows.some(
+        r => r.type === PersonalGoalType.UpgradeRank || r.type === PersonalGoalType.CharacterAbilities
+    );
+    const hasMow = rows.some(r => r.type === PersonalGoalType.MowAbilities);
+
+    const columnDefs = useMemo<ColDef<TypedGoalSelect>[]>(
+        () => [
+            // ── 1. Drag grip ──────────────────────────────────────────────
+            {
+                headerName: '',
+                width: 36,
+                maxWidth: 36,
+                rowDrag: true,
+                cellRenderer: () => (
+                    <div className="flex h-full cursor-grab items-center justify-center text-(--muted-fg) opacity-40 hover:opacity-80 active:cursor-grabbing">
+                        <GripVertical className="size-4" />
+                    </div>
+                ),
+                suppressNavigable: true,
+                sortable: false,
+            },
+            // ── 2. Priority + arrows ──────────────────────────────────────
+            {
+                headerName: 'Prio',
+                width: 96,
+                maxWidth: 96,
+                sortable: false,
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    if (!params.data) return;
+                    // rowIndex is live from ag-Grid — correct after both drag and arrow moves
+                    const index = params.node.rowIndex ?? 0;
+                    const total = params.api.getDisplayedRowCount();
+                    const est = goalsEstimates.find(goal => goal.goalId === params.data?.goalId);
+                    return (
+                        <div className="flex h-full items-center gap-1.5 leading-normal">
+                            <span className="min-w-[20px] text-center text-base font-bold text-(--fg) tabular-nums">
+                                {params.data.priority}
+                            </span>
+                            {est?.blocked && (
+                                <span title="Blocked">
+                                    <AlertTriangle className="size-3.5 text-(--danger)" aria-label="Blocked" />
+                                </span>
+                            )}
+                            <div className="flex flex-col gap-0.5">
+                                <button
+                                    title="Move Up"
+                                    disabled={index <= 0}
+                                    onClick={() => moveRowReference.current(index, index - 1)}
+                                    className="flex h-5 w-5 cursor-pointer items-center justify-center rounded p-0 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                    <ArrowUp className="size-3.5" />
+                                </button>
+                                <button
+                                    title="Move Down"
+                                    disabled={index >= total - 1}
+                                    onClick={() => moveRowReference.current(index, index + 1)}
+                                    className="flex h-5 w-5 cursor-pointer items-center justify-center rounded p-0 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                    <ArrowDown className="size-3.5" />
+                                </button>
+                            </div>
+                        </div>
+                    );
+                },
+            },
+            // ── 3. Actions — include toggle + edit + delete + optional raids link
+            {
+                headerName: 'Actions',
+                width: 160,
+                maxWidth: 160,
+                sortable: false,
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const { data } = params;
+                    if (!data) return;
+                    const showRaidsLink =
+                        data.type === PersonalGoalType.UpgradeRank ||
+                        data.type === PersonalGoalType.MowAbilities ||
+                        data.type === PersonalGoalType.UpgradeMaterial;
+                    const raidsUnitId =
+                        data.type === PersonalGoalType.UpgradeMaterial
+                            ? (data.upgradeMaterialId ?? data.goalId)
+                            : data.unitId;
+                    const isActive = data.include !== false;
+                    return (
+                        <div className="flex h-full items-center justify-end gap-1.5 leading-normal">
+                            {/* Plain button toggle — react-aria Switch blocks ag-Grid cell events */}
+                            <button
+                                title={isActive ? 'Active — click to exclude' : 'Inactive — click to include'}
+                                onClick={event_ => {
+                                    event_.stopPropagation();
+                                    toggleIncludeReference.current(data.goalId);
+                                }}
+                                className={`relative inline-flex h-6 w-11 shrink-0 cursor-pointer rounded-full border-2 border-transparent transition-colors focus:outline-none ${isActive ? 'bg-(--success)' : 'bg-(--input)'}`}>
+                                <span
+                                    className={`pointer-events-none block h-5 w-5 rounded-full bg-white shadow-sm transition-transform ${isActive ? 'translate-x-5' : 'translate-x-0'}`}
+                                />
+                            </button>
+                            {showRaidsLink && (
+                                <Link
+                                    to={`/plan/dailyRaids?charSnowprintId=${encodeURIComponent(raidsUnitId)}`}
+                                    title="Go to Raids Table"
+                                    onClick={event_ => event_.stopPropagation()}
+                                    className="flex h-7 w-7 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg)">
+                                    <ExternalLink className="size-4" />
+                                </Link>
+                            )}
+                            <button
+                                title="Edit"
+                                onClick={event_ => event_.stopPropagation()}
+                                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg)">
+                                <Edit className="size-4" />
+                            </button>
+                            <button
+                                title="Delete"
+                                onClick={event_ => event_.stopPropagation()}
+                                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--danger)">
+                                <Trash2 className="size-4" />
+                            </button>
+                        </div>
+                    );
+                },
+            },
+            // ── 4. Character — portrait + name + subline ──────────────────
+            {
+                headerName: 'Character',
+                flex: 2,
+                minWidth: 180,
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const { data } = params;
+                    if (!data) return;
+
+                    let portrait: React.ReactNode;
+                    let name: string;
+                    let subline: string;
+
+                    if (data.type === PersonalGoalType.UpgradeMaterial) {
+                        const mat = UpgradeEntityService.getUpgradeMaterial(data.upgradeMaterialId);
+                        portrait = mat ? (
+                            <UpgradeImage
+                                material={mat.snowprintId}
+                                iconPath={mat.icon ?? ''}
+                                size={30}
+                                rarity={RarityMapper.stringToRarityString(mat.rarity)}
+                                tooltip={mat.label ?? ''}
+                            />
+                        ) : undefined;
+                        name = mat?.label ?? '';
+                        subline = 'Material';
+                    } else {
+                        portrait = (
+                            <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
+                        );
+                        name = data.unitName ?? '';
+                        const char = CharactersService.charactersBySnowprintId[data.unitId];
+                        subline = char
+                            ? `${char.faction} · ${Rarity[char.initialRarity ?? 0]}`
+                            : PersonalGoalType[data.type].replaceAll(/([A-Z])/g, ' $1').trim();
+                    }
+
+                    return (
+                        <div className="flex h-full min-w-0 items-center gap-2.5 leading-normal">
+                            <div className="shrink-0">{portrait}</div>
+                            <div className="flex min-w-0 flex-col" style={{ lineHeight: 1.25 }}>
+                                <span className="truncate text-sm font-medium text-(--fg)">{name}</span>
+                                <span className="truncate text-[11px] text-(--muted-fg)">{subline}</span>
+                            </div>
+                        </div>
+                    );
+                },
+            },
+            // ── 5. Goal · Progress — transition atoms + progress bar ──────
+            {
+                headerName: 'Goal · Progress',
+                flex: 2,
+                minWidth: 180,
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const { data } = params;
+                    const est = goalsEstimates.find(x => x.goalId === data?.goalId);
+                    if (!data || !est) return;
+
+                    let transition: React.ReactNode;
+                    let progressNode: React.ReactNode;
+
+                    switch (data.type) {
+                        case PersonalGoalType.Ascend: {
+                            const isSameRarity = data.rarityStart === data.rarityEnd;
+                            const farmBadgeClass =
+                                data.farmType === 'onslaught'
+                                    ? 'bg-(--accent)/20 text-(--accent-fg)'
+                                    : data.farmType === 'energy'
+                                      ? 'bg-(--primary)/15 text-(--primary)'
+                                      : 'bg-(--muted) text-(--muted-fg)';
+                            transition = (
+                                <div className="flex flex-wrap items-center gap-1">
+                                    {isSameRarity ? (
+                                        <>
+                                            <StarsIcon stars={data.starsStart} />
+                                            <ArrowRight className="size-3 text-(--muted-fg)" />
+                                            <StarsIcon stars={data.starsEnd} />
+                                        </>
+                                    ) : (
+                                        <>
+                                            <RarityIcon rarity={data.rarityStart} />
+                                            <ArrowRight className="size-3 text-(--muted-fg)" />
+                                            <RarityIcon rarity={data.rarityEnd} />
+                                            <StarsIcon stars={data.starsEnd} />
+                                        </>
+                                    )}
+                                    {data.farmType && (
+                                        <span
+                                            className={`rounded px-1 py-0.5 text-[10px] font-medium capitalize ${farmBadgeClass}`}>
+                                            {data.farmType}
+                                        </span>
+                                    )}
+                                </div>
+                            );
+                            const targetShards = ShardsService.getTargetShards(data);
+                            const targetMythicShards = ShardsService.getTargetMythicShards(data);
+                            if (targetShards > 0) {
+                                progressNode = <GoalBar have={data.shards} need={targetShards} unit="shards" />;
+                            } else if (targetMythicShards > 0) {
+                                progressNode = (
+                                    <GoalBar have={data.mythicShards} need={targetMythicShards} unit="mythic shards" />
+                                );
+                            }
+                            if (est?.orbsEstimate) {
+                                const neededOrbs = Object.fromEntries(
+                                    Object.entries(est.orbsEstimate.orbs).filter(([, n]) => n > 0)
+                                );
+                                if (Object.keys(neededOrbs).length > 0) {
+                                    progressNode = (
+                                        <>
+                                            {progressNode}
+                                            <OrbsTotal
+                                                alliance={data.unitAlliance}
+                                                orbs={est.orbsEstimate.orbs}
+                                                displayOrbs={neededOrbs}
+                                                size={20}
+                                            />
+                                        </>
+                                    );
+                                }
+                            }
+                            break;
+                        }
+                        case PersonalGoalType.UpgradeRank: {
+                            transition = (
+                                <div className="flex items-center gap-1.5">
+                                    <RankIcon rank={data.rankStart} rankPoint5={data.rankStartPoint5} />
+                                    <ArrowRight className="size-3 text-(--muted-fg)" />
+                                    <RankIcon rank={data.rankEnd} rankPoint5={data.rankPoint5} />
+                                    {data.upgradesRarity.length > 0 && (
+                                        <div className="ml-1 flex items-center gap-0.5">
+                                            {data.upgradesRarity.map((r, index) => (
+                                                <RarityIcon key={index} rarity={r} />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                            if (est?.xpBooksApplied !== undefined && est?.xpBooksRequired !== undefined) {
+                                progressNode = (
+                                    <XpGoalProgressBar
+                                        applied={est.xpBooksApplied}
+                                        required={est.xpBooksRequired}
+                                        bookRarity={bookRarity}
+                                    />
+                                );
+                            }
+                            break;
+                        }
+                        case PersonalGoalType.UpgradeMaterial: {
+                            transition = <span className="text-sm">{data.quantity}×</span>;
+                            break;
+                        }
+                        case PersonalGoalType.MowAbilities: {
+                            transition = (
+                                <div className="flex flex-col gap-0.5 text-xs">
+                                    {data.primaryEnd > data.primaryStart && (
+                                        <div className="flex items-center gap-1">
+                                            <span>Primary:</span> <b>{data.primaryStart}</b>
+                                            <ArrowRight className="inline size-3" />
+                                            <b>{data.primaryEnd}</b>
+                                        </div>
+                                    )}
+                                    {data.secondaryEnd > data.secondaryStart && (
+                                        <div className="flex items-center gap-1">
+                                            <span>Secondary:</span> <b>{data.secondaryStart}</b>
+                                            <ArrowRight className="inline size-3" />
+                                            <b>{data.secondaryEnd}</b>
+                                        </div>
+                                    )}
+                                    {data.upgradesRarity.length > 0 && (
+                                        <div className="flex items-center gap-0.5">
+                                            {data.upgradesRarity.map((r, index) => (
+                                                <RarityIcon key={index} rarity={r} />
+                                            ))}
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                            if (est?.mowEstimate) {
+                                progressNode = (
+                                    <MowMaterialsTotal
+                                        total={est.mowEstimate}
+                                        mowAlliance={data.unitAlliance}
+                                        size="small"
+                                    />
+                                );
+                            }
+                            break;
+                        }
+                        case PersonalGoalType.CharacterAbilities: {
+                            transition = (
+                                <div className="flex flex-col gap-0.5 text-xs">
+                                    {data.activeEnd > data.activeStart && (
+                                        <div className="flex items-center gap-1">
+                                            <span>Active:</span> <b>{data.activeStart}</b>
+                                            <ArrowRight className="inline size-3" />
+                                            <b>{data.activeEnd}</b>
+                                        </div>
+                                    )}
+                                    {data.passiveEnd > data.passiveStart && (
+                                        <div className="flex items-center gap-1">
+                                            <span>Passive:</span> <b>{data.passiveStart}</b>
+                                            <ArrowRight className="inline size-3" />
+                                            <b>{data.passiveEnd}</b>
+                                        </div>
+                                    )}
+                                </div>
+                            );
+                            if (est?.abilitiesEstimate) {
+                                progressNode = <CharacterAbilitiesTotal {...est.abilitiesEstimate} />;
+                            }
+                            break;
+                        }
+                        case PersonalGoalType.Unlock: {
+                            const targetShards = charsUnlockShards[data.rarity];
+                            transition = <span className="text-xs text-(--muted-fg)">Unlock</span>;
+                            progressNode = <GoalBar have={data.shards} need={targetShards} unit="shards" />;
+                            break;
+                        }
+                    }
+
+                    return (
+                        <div className="flex h-full min-w-0 flex-col justify-center gap-1.5 py-2 leading-normal">
+                            <div className="flex flex-wrap items-center gap-1.5 text-xs">
+                                {transition}
+                                {est?.completed && (
+                                    <CheckCircle2
+                                        className="size-3.5 text-(--success)"
+                                        title="Completed"
+                                        aria-label="Completed"
+                                    />
+                                )}
+                            </div>
+                            {progressNode}
+                        </div>
+                    );
+                },
+            },
+            // ── 6. Estimate — days left + XP days + completion % ─────────
+            {
+                headerName: 'Estimate',
+                flex: 1,
+                minWidth: 120,
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const { data } = params;
+                    const est = goalsEstimates.find(x => x.goalId === data?.goalId);
+
+                    // Completion % — type-specific progress metric
+                    let completionPct: number | undefined;
+                    if (data && est) {
+                        switch (data.type) {
+                            case PersonalGoalType.Ascend: {
+                                const target = ShardsService.getTargetShards(data);
+                                const targetMythic = ShardsService.getTargetMythicShards(data);
+                                if (target > 0) completionPct = Math.min(100, Math.round((data.shards / target) * 100));
+                                else if (targetMythic > 0)
+                                    completionPct = Math.min(100, Math.round((data.mythicShards / targetMythic) * 100));
+
+                                break;
+                            }
+                            case PersonalGoalType.Unlock: {
+                                const target = charsUnlockShards[data.rarity];
+                                if (target > 0) completionPct = Math.min(100, Math.round((data.shards / target) * 100));
+
+                                break;
+                            }
+                            case PersonalGoalType.UpgradeRank:
+                            case PersonalGoalType.CharacterAbilities: {
+                                if (
+                                    est.xpBooksApplied !== undefined &&
+                                    est.xpBooksRequired &&
+                                    est.xpBooksRequired > 0
+                                ) {
+                                    completionPct = Math.min(
+                                        100,
+                                        Math.round((est.xpBooksApplied / est.xpBooksRequired) * 100)
+                                    );
+                                }
+
+                                break;
+                            }
+                            // No default
+                        }
+                    }
+
+                    const matDays = est && est.daysLeft > 0 ? est.daysLeft : undefined;
+                    const xpDays =
+                        est && est.xpDaysLeft !== undefined && est.xpDaysLeft > 0 ? est.xpDaysLeft : undefined;
+                    const primaryDays = matDays ?? xpDays;
+
+                    if (!primaryDays && completionPct === undefined) {
+                        return (
+                            <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
+                                —
+                            </div>
+                        );
+                    }
+
+                    let shortDate: string | undefined;
+                    if (primaryDays) {
+                        const d = new Date();
+                        d.setDate(d.getDate() + Math.ceil(primaryDays) - 1);
+                        shortDate = d.toLocaleDateString('en', { month: 'short', day: 'numeric' });
+                    }
+
+                    return (
+                        <div className="flex h-full min-w-0 flex-col justify-center gap-0.5 text-xs leading-normal">
+                            {matDays && <span className="font-medium text-(--fg)">{matDays} days</span>}
+                            {xpDays && (
+                                <span
+                                    className={`text-[11px] ${matDays ? 'text-(--muted-fg)' : 'font-medium text-(--fg)'}`}>
+                                    XP: {xpDays} days
+                                </span>
+                            )}
+                            {shortDate && <span className="text-[11px] text-(--muted-fg)">by {shortDate}</span>}
+                            {completionPct !== undefined && (
+                                <div className="flex items-center gap-1 pt-0.5">
+                                    <div
+                                        className="h-1 min-w-[40px] flex-1 overflow-hidden rounded-full bg-(--secondary)"
+                                        style={{ maxWidth: 60 }}>
+                                        <div
+                                            className={`h-full rounded-full transition-all ${completionPct >= 100 ? 'bg-(--success)' : 'bg-(--primary)'}`}
+                                            style={{ width: `${completionPct}%` }}
+                                        />
+                                    </div>
+                                    <span
+                                        className={`text-[10px] font-medium tabular-nums ${completionPct >= 100 ? 'text-(--success)' : 'text-(--muted-fg)'}`}>
+                                        {completionPct}%
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                    );
+                },
+            },
+            // ── 7. Days Total ─────────────────────────────────────────────
+            {
+                headerName: 'Days Total',
+                width: 90,
+                maxWidth: 90,
+                headerClass: 'ag-right-aligned-header',
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const v = goalsEstimates.find(x => x.goalId === params.data?.goalId)?.daysTotal;
+                    return (
+                        <div className="flex h-full w-full items-center justify-end text-sm leading-normal tabular-nums">
+                            {v ? v.toLocaleString() : <span className="text-(--muted-fg) opacity-50">—</span>}
+                        </div>
+                    );
+                },
+            },
+            // ── 8. Energy ──────────────────────────────────────────────────
+            {
+                headerName: 'Energy',
+                hide: isAbilitiesOnly,
+                width: 90,
+                maxWidth: 90,
+                headerClass: 'ag-right-aligned-header',
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const v = goalsEstimates.find(x => x.goalId === params.data?.goalId)?.energyTotal;
+                    return (
+                        <div className="flex h-full w-full items-center justify-end text-sm leading-normal tabular-nums">
+                            {v ? v.toLocaleString() : <span className="text-(--muted-fg) opacity-50">—</span>}
+                        </div>
+                    );
+                },
+            },
+            // ── 9. Tokens ─────────────────────────────────────────────────
+            {
+                headerName: 'Tokens',
+                hide: !hasAscend,
+                width: 90,
+                maxWidth: 90,
+                headerClass: 'ag-right-aligned-header',
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const v = goalsEstimates.find(x => x.goalId === params.data?.goalId)?.oTokensTotal;
+                    return (
+                        <div className="flex h-full w-full items-center justify-end text-sm leading-normal tabular-nums">
+                            {v ? v.toLocaleString() : <span className="text-(--muted-fg) opacity-50">—</span>}
+                        </div>
+                    );
+                },
+            },
+            // ── 10. XP Books total ────────────────────────────────────────
+            {
+                headerName: 'Books',
+                hide: !hasXpBooks,
+                width: 90,
+                maxWidth: 90,
+                headerClass: 'ag-right-aligned-header',
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const v = goalsEstimates.find(x => x.goalId === params.data?.goalId)?.xpBooksTotal;
+                    return (
+                        <div className="flex h-full w-full items-center justify-end text-sm leading-normal tabular-nums">
+                            {v ? v.toLocaleString() : <span className="text-(--muted-fg) opacity-50">—</span>}
+                        </div>
+                    );
+                },
+            },
+            // ── 11. MoW Gold ──────────────────────────────────────────────
+            {
+                headerName: 'Gold',
+                hide: !hasMow,
+                width: 100,
+                maxWidth: 100,
+                headerClass: 'ag-right-aligned-header',
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const v = goalsEstimates.find(x => x.goalId === params.data?.goalId)?.mowEstimate?.gold;
+                    return (
+                        <div className="flex h-full w-full items-center justify-end text-sm leading-normal tabular-nums">
+                            {v ? v.toLocaleString() : <span className="text-(--muted-fg) opacity-50">—</span>}
+                        </div>
+                    );
+                },
+            },
+            // ── 12. Notes ─────────────────────────────────────────────────
+            {
+                field: 'notes',
+                headerName: 'Notes',
+                flex: 1,
+                minWidth: 120,
+                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                    const notes = params.data?.notes ?? '';
+                    return (
+                        <div
+                            className="flex h-full items-center truncate text-xs leading-normal text-(--muted-fg)"
+                            title={notes}>
+                            {notes}
+                        </div>
+                    );
+                },
+            },
+        ],
+        // orderedRows intentionally omitted: moveRowRef/toggleIncludeRef keep callbacks fresh
+
+        [goalsEstimates, isAbilitiesOnly, hasAscend, hasXpBooks, hasMow, bookRarity]
+    );
+
+    return (
+        <div
+            className={`ag-theme-material ${densityClass} w-full`}
+            style={{ height: Math.max(200, orderedRows.length * rowHeight + 42) }}>
+            <AgGridReact
+                modules={[AllCommunityModule]}
+                theme="legacy"
+                columnDefs={columnDefs}
+                rowData={orderedRows}
+                defaultColDef={{ suppressMovable: true, sortable: true }}
+                rowHeight={rowHeight}
+                rowDragManaged={true}
+                animateRows={true}
+                getRowId={params => params.data.goalId}
+                getRowClass={params => {
+                    const isActive = params.data?.include !== false;
+                    if (!isActive) return 'row-goal row-inactive';
+                    const completed = goalsEstimates.find(g => g.goalId === params.data?.goalId)?.completed;
+                    return completed ? 'row-goal row-active row-completed' : 'row-goal row-active';
+                }}
+                onGridReady={event_ => {
+                    gridApiReference.current = event_.api;
+                }}
+                onRowDragEnd={handleRowDragEnd}
+                onRowDataUpdated={event_ => event_.api.redrawRows()}
+            />
+        </div>
+    );
+};
+
+const GoalsTableShowcase = () => {
+    const [density, setDensity] = useState<TableDensity>('default');
+
+    const {
+        goals,
+        characters,
+        mows,
+        campaignsProgress,
+        inventory,
+        dailyRaids,
+        dailyRaidsPreferences,
+        gameModeTokens,
+        xpIncome,
+        xpUse,
+    } = useContext(StoreContext);
+
+    const resolvedChars = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
+    const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+    const units = useMemo(() => [...resolvedChars, ...resolvedMows], [resolvedChars, resolvedMows]);
+
+    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals } =
+        useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
+
+    const onslaughtTokensToday = useMemo(
+        () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
+        [gameModeTokens]
+    );
+
+    const estimatedUpgradesTotal = useMemo(
+        () =>
+            UpgradesService.getUpgradesEstimatedDays(
+                {
+                    dailyEnergy: dailyRaidsPreferences.dailyEnergy,
+                    campaignsProgress,
+                    preferences: dailyRaidsPreferences,
+                    upgrades: inventory.upgrades,
+                    completedLocations: dailyRaids.raidedLocations,
+                    onslaughtTokensToday,
+                },
+                resolvedChars,
+                resolvedMows,
+                ...[upgradeMaterialGoals, upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+            ),
+        [
+            dailyRaidsPreferences,
+            campaignsProgress,
+            inventory.upgrades,
+            dailyRaids.raidedLocations,
+            onslaughtTokensToday,
+            resolvedChars,
+            resolvedMows,
+            upgradeMaterialGoals,
+            upgradeRankOrMowGoals,
+            shardsGoals,
+        ]
+    );
+
+    const rawGoalsEstimates = useMemo(
+        () =>
+            GoalsService.buildGoalEstimates(
+                estimatedUpgradesTotal,
+                shardsGoals,
+                upgradeMaterialGoals,
+                upgradeRankOrMowGoals,
+                upgradeAbilities,
+                resolvedChars
+            ),
+        [
+            estimatedUpgradesTotal,
+            shardsGoals,
+            upgradeMaterialGoals,
+            upgradeRankOrMowGoals,
+            upgradeAbilities,
+            resolvedChars,
+        ]
+    );
+
+    const goalsEstimates = GoalsService.adjustGoalEstimates(
+        cloneDeep(goals),
+        cloneDeep(rawGoalsEstimates),
+        inventory,
+        xpUse,
+        upgradeRankOrMowGoals,
+        ascendGoals,
+        xpIncome
+    ).goalEstimates;
+
+    const sortedUpgrades = useMemo(
+        () => [...upgradeMaterialGoals, ...upgradeRankOrMowGoals].toSorted((a, b) => a.priority - b.priority),
+        [upgradeMaterialGoals, upgradeRankOrMowGoals]
+    );
+    const sortedShards = useMemo(() => shardsGoals.toSorted((a, b) => a.priority - b.priority), [shardsGoals]);
+    const sortedAbilities = useMemo(
+        () => upgradeAbilities.toSorted((a, b) => a.priority - b.priority),
+        [upgradeAbilities]
+    );
+
+    const densityClass =
+        density === 'compact' ? 'density-compact' : density === 'comfortable' ? 'density-comfortable' : '';
+    const rowHeight = density === 'compact' ? 36 : density === 'comfortable' ? 96 : 80;
+
+    if (allGoals.length === 0) {
+        return <p className="text-sm text-(--muted-fg)">No goals — add some on the Goals page to see them here.</p>;
+    }
+
+    const gridProps: Omit<GoalsSectionGridProps, 'rows'> = {
+        allGoals,
+        goalsEstimates,
+        densityClass,
+        rowHeight,
+        bookRarity: Rarity.Legendary,
+    };
+
+    return (
+        <div className="space-y-2">
+            <div className="flex items-center gap-3">
+                <span className="text-xs text-(--muted-fg)">Density</span>
+                <div className="inline-flex rounded-lg border border-(--border) bg-(--secondary) p-0.5">
+                    {TABLE_DENSITY_OPTIONS.map(opt => (
+                        <button
+                            key={opt.value}
+                            onClick={() => setDensity(opt.value)}
+                            className={[
+                                'cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
+                                density === opt.value
+                                    ? 'bg-(--bg) text-(--fg) shadow-sm'
+                                    : 'text-(--muted-fg) hover:text-(--fg)',
+                            ].join(' ')}>
+                            {opt.label}
+                        </button>
+                    ))}
+                </div>
+            </div>
+
+            <div className="overflow-hidden rounded-lg border border-(--border)">
+                {sortedUpgrades.length > 0 && (
+                    <AccordionItem title="Upgrade rank / MoW" defaultOpen flush>
+                        <GoalsSectionGrid rows={sortedUpgrades} {...gridProps} />
+                    </AccordionItem>
+                )}
+                {sortedShards.length > 0 && (
+                    <AccordionItem title="Ascend / Promote / Unlock" defaultOpen flush>
+                        <GoalsSectionGrid rows={sortedShards} {...gridProps} />
+                    </AccordionItem>
+                )}
+                {sortedAbilities.length > 0 && (
+                    <AccordionItem title="Character Abilities" defaultOpen flush>
+                        <GoalsSectionGrid rows={sortedAbilities} {...gridProps} />
+                    </AccordionItem>
+                )}
+            </div>
+        </div>
+    );
+};
 
 // ─── colours ─────────────────────────────────────────────────────────────────
 
@@ -1644,6 +2548,14 @@ export const UiKitPage = () => {
             <Separator />
 
             <CampaignChipsShowcase />
+
+            <Separator />
+
+            <Section id="table" title="Table">
+                <Group label="Goals (live data · density variants)">
+                    <GoalsTableShowcase />
+                </Group>
+            </Section>
 
             <Separator />
 

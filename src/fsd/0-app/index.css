@@ -1,6 +1,9 @@
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme' layer(theme);
 @import 'tailwindcss/utilities' layer(utilities);
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-material.css';
+@import './tacticus-ag-theme.css';
 /*@import 'tailwindcss';*/
 @plugin 'tailwindcss-animate';
 
@@ -401,27 +404,6 @@ code {
     background-color: var(--rank-adamantine3);
 }
 
-.ag-theme-material {
-    --ag-grid-size: 5px;
-    --ag-row-hover-color: transparent;
-    --ag-colum-hover-color: transparent;
-
-    .ag-cell-wrap-text {
-        word-break: unset;
-        white-space: break-spaces;
-    }
-
-    &.auto-teams {
-        .ag-header-cell {
-            padding: 0;
-        }
-
-        .ag-cell {
-            padding: 0;
-        }
-    }
-}
-
 .common {
     background-color: var(--rarity-common);
 }
@@ -630,11 +612,4 @@ input.item-quantity-input::-webkit-inner-spin-button {
 /* Firefox */
 input.item-quantity-input[type='number'] {
     -moz-appearance: textfield;
-}
-
-/* styles.css */
-.center-header-text .ag-header-cell-label {
-    text-align: center;
-    display: flex;
-    justify-content: center;
 }
