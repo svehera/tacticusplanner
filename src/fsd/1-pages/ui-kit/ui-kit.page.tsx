@@ -106,7 +106,7 @@ const NAV_LIVE = [
 
 const navLink =
     'rounded px-2 py-0.5 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg) whitespace-nowrap';
-const navChapter = 'text-[10px] font-bold tracking-[.14em] uppercase text-(--muted-fg) select-none';
+const navChapter = 'text-xs font-bold tracking-widest uppercase text-(--muted-fg) select-none';
 
 const UiKitNav = () => (
     <nav className="sticky top-0 z-10 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-(--border) bg-(--bg)/95 px-3 py-2 text-xs backdrop-blur-sm">
@@ -130,7 +130,7 @@ const UiKitNav = () => (
 
 const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
     <section id={id} className="scroll-mt-16 space-y-6">
-        <p className="text-[10px] font-bold tracking-[.14em] text-(--muted-fg) uppercase">{title}</p>
+        <p className="text-xs font-bold tracking-widest text-(--muted-fg) uppercase">{title}</p>
         {children}
     </section>
 );
@@ -138,7 +138,7 @@ const Section = ({ id, title, children }: { id: string; title: string; children:
 const ChapterDivider = ({ label }: { label: string }) => (
     <div className="flex items-center gap-4 py-2">
         <div className="h-px flex-1 bg-(--border)" />
-        <span className="text-[10px] font-bold tracking-[.18em] text-(--muted-fg) uppercase">{label}</span>
+        <span className="text-xs font-bold tracking-widest text-(--muted-fg) uppercase">{label}</span>
         <div className="h-px flex-1 bg-(--border)" />
     </div>
 );
@@ -1218,35 +1218,38 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             width: 96,
             maxWidth: 96,
             valueGetter: params => params.data?.priority ?? 0,
+            cellClass: 'prio-cell',
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 if (!params.data) return;
                 const index = params.node.rowIndex ?? 0;
                 const total = params.api.getDisplayedRowCount();
                 const est = goalsEstimates.find(goal => goal.goalId === params.data?.goalId);
                 return (
-                    <div className="flex h-full items-center gap-1.5 leading-normal">
-                        <span className="min-w-[20px] text-center text-sm font-medium text-(--muted-fg) tabular-nums">
-                            {params.data.priority}
-                        </span>
-                        {est?.blocked && (
-                            <span title="Blocked">
-                                <AlertTriangle className="size-3.5 text-(--danger)" aria-label="Blocked" />
+                    <div className="flex h-full w-full">
+                        <div className="flex flex-1 items-center gap-1 px-3">
+                            <span className="min-w-[20px] text-center text-sm font-medium text-(--muted-fg) tabular-nums">
+                                {params.data.priority}
                             </span>
-                        )}
-                        <div className="flex flex-col gap-0.5">
+                            {est?.blocked && (
+                                <span title="Blocked">
+                                    <AlertTriangle className="size-3.5 text-(--danger)" aria-label="Blocked" />
+                                </span>
+                            )}
+                        </div>
+                        <div className="flex w-10 flex-col border-l border-(--border)">
                             <button
                                 title="Move Up"
                                 disabled={index <= 0}
                                 onClick={() => moveRowReference.current(index, index - 1)}
-                                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded p-0 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
-                                <ArrowUp className="size-3.5" />
+                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                <ArrowUp className="size-3" />
                             </button>
                             <button
                                 title="Move Down"
                                 disabled={index >= total - 1}
                                 onClick={() => moveRowReference.current(index, index + 1)}
-                                className="flex h-7 w-7 cursor-pointer items-center justify-center rounded p-0 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
-                                <ArrowDown className="size-3.5" />
+                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                <ArrowDown className="size-3" />
                             </button>
                         </div>
                     </div>
@@ -1289,20 +1292,20 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 to={`/plan/dailyRaids?charSnowprintId=${encodeURIComponent(raidsUnitId)}`}
                                 title="Go to Raids Table"
                                 onClick={event_ => event_.stopPropagation()}
-                                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg)">
+                                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--fg)">
                                 <ExternalLink className="size-4" />
                             </Link>
                         )}
                         <button
                             title="Edit"
                             onClick={event_ => event_.stopPropagation()}
-                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg)">
+                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--fg)">
                             <Edit className="size-4" />
                         </button>
                         <button
                             title="Delete"
                             onClick={event_ => event_.stopPropagation()}
-                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--danger)">
+                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
                             <Trash2 className="size-4" />
                         </button>
                     </div>
@@ -1314,7 +1317,11 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             headerName: 'Character',
             flex: 2,
             minWidth: 180,
-            valueGetter: params => params.data?.unitName ?? params.data?.upgradeMaterialId ?? '',
+            valueGetter: params => {
+                const data = params.data;
+                if (!data) return '';
+                return data.type === PersonalGoalType.UpgradeMaterial ? data.upgradeMaterialId : data.unitName;
+            },
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
                 if (!data) return;
@@ -1442,59 +1449,66 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const est = goalsEstimates.find(x => x.goalId === data?.goalId);
                 if (!data || !est) return;
                 let transition: React.ReactNode;
-                if (data.type === PersonalGoalType.UpgradeRank) {
-                    transition = (
-                        <div className="flex items-center gap-1.5">
-                            <RankIcon rank={data.rankStart} rankPoint5={data.rankStartPoint5} />
-                            <ArrowRight className="size-3 text-(--muted-fg)" />
-                            <RankIcon rank={data.rankEnd} rankPoint5={data.rankPoint5} />
-                            {data.upgradesRarity.length > 0 && (
-                                <div className="ml-1 flex items-center gap-0.5">
-                                    {data.upgradesRarity.map((r, index) => (
-                                        <RarityIcon key={index} rarity={r} />
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    );
-                } else if (data.type === PersonalGoalType.MowAbilities) {
-                    transition = (
-                        <div className="flex flex-col gap-0.5 text-xs">
-                            {data.primaryEnd > data.primaryStart && (
-                                <div className="flex items-center gap-1">
-                                    <span>Primary:</span> <b>{data.primaryStart}</b>
-                                    <ArrowRight className="inline size-3" />
-                                    <b>{data.primaryEnd}</b>
-                                </div>
-                            )}
-                            {data.secondaryEnd > data.secondaryStart && (
-                                <div className="flex items-center gap-1">
-                                    <span>Secondary:</span> <b>{data.secondaryStart}</b>
-                                    <ArrowRight className="inline size-3" />
-                                    <b>{data.secondaryEnd}</b>
-                                </div>
-                            )}
-                            {data.upgradesRarity.length > 0 && (
-                                <div className="flex items-center gap-0.5">
-                                    {data.upgradesRarity.map((r, index) => (
-                                        <RarityIcon key={index} rarity={r} />
-                                    ))}
-                                </div>
-                            )}
-                        </div>
-                    );
-                } else {
-                    transition = <span className="text-sm">{data.quantity}×</span>;
+                switch (data.type) {
+                    case PersonalGoalType.UpgradeRank: {
+                        transition = (
+                            <div className="flex items-center gap-1.5">
+                                <RankIcon rank={data.rankStart} rankPoint5={data.rankStartPoint5} />
+                                <ArrowRight className="size-3 text-(--muted-fg)" />
+                                <RankIcon rank={data.rankEnd} rankPoint5={data.rankPoint5} />
+                                {data.upgradesRarity.length > 0 && (
+                                    <div className="ml-1 flex items-center gap-0.5">
+                                        {data.upgradesRarity.map((r, index) => (
+                                            <RarityIcon key={index} rarity={r} />
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        );
+
+                        break;
+                    }
+                    case PersonalGoalType.MowAbilities: {
+                        transition = (
+                            <div className="flex flex-col gap-0.5 text-xs">
+                                {data.primaryEnd > data.primaryStart && (
+                                    <div className="flex items-center gap-1">
+                                        <span>Primary:</span> <b>{data.primaryStart}</b>
+                                        <ArrowRight className="inline size-3" />
+                                        <b>{data.primaryEnd}</b>
+                                    </div>
+                                )}
+                                {data.secondaryEnd > data.secondaryStart && (
+                                    <div className="flex items-center gap-1">
+                                        <span>Secondary:</span> <b>{data.secondaryStart}</b>
+                                        <ArrowRight className="inline size-3" />
+                                        <b>{data.secondaryEnd}</b>
+                                    </div>
+                                )}
+                                {data.upgradesRarity.length > 0 && (
+                                    <div className="flex items-center gap-0.5">
+                                        {data.upgradesRarity.map((r, index) => (
+                                            <RarityIcon key={index} rarity={r} />
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        );
+
+                        break;
+                    }
+                    case PersonalGoalType.UpgradeMaterial: {
+                        transition = <span className="text-sm">{data.quantity}×</span>;
+
+                        break;
+                    }
+                    // No default
                 }
                 return (
                     <div className="flex h-full min-w-0 items-center gap-1.5 leading-normal">
                         <div className="flex flex-wrap items-center gap-1 text-xs">{transition}</div>
                         {est.completed && (
-                            <CheckCircle2
-                                className="size-3.5 shrink-0 text-(--success)"
-                                title="Completed"
-                                aria-label="Completed"
-                            />
+                            <CheckCircle2 className="size-3.5 shrink-0 text-(--success)" aria-label="Completed" />
                         )}
                     </div>
                 );
@@ -1652,11 +1666,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                     <div className="flex h-full min-w-0 items-center gap-1.5 leading-normal">
                         <div className="flex flex-wrap items-center gap-1 text-xs">{transition}</div>
                         {est.completed && (
-                            <CheckCircle2
-                                className="size-3.5 shrink-0 text-(--success)"
-                                title="Completed"
-                                aria-label="Completed"
-                            />
+                            <CheckCircle2 className="size-3.5 shrink-0 text-(--success)" aria-label="Completed" />
                         )}
                     </div>
                 );
@@ -1675,8 +1685,11 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                     const have = ShardsService.getTargetShards(data) > 0 ? data.shards : data.mythicShards;
                     return target > 0 ? have / target : 0;
                 }
-                const target = charsUnlockShards[data.rarity] ?? 0;
-                return target > 0 ? data.shards / target : 0;
+                if (data.type === PersonalGoalType.Unlock) {
+                    const target = charsUnlockShards[data.rarity] ?? 0;
+                    return target > 0 ? data.shards / target : 0;
+                }
+                return 0;
             },
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
@@ -1698,8 +1711,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                             </div>
                         );
                     }
-                } else {
-                    // Unlock
+                } else if (data.type === PersonalGoalType.Unlock) {
                     const targetShards = charsUnlockShards[data.rarity];
                     return (
                         <div className="flex h-full min-w-0 flex-col justify-center gap-1 py-2 leading-normal">
@@ -1723,7 +1735,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
                 const est = goalsEstimates.find(x => x.goalId === data?.goalId);
-                if (!data || !est?.orbsEstimate) {
+                if (!data || !est?.orbsEstimate || data.type === PersonalGoalType.UpgradeMaterial) {
                     return (
                         <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
                             —
@@ -1797,11 +1809,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                             )}
                         </div>
                         {est.completed && (
-                            <CheckCircle2
-                                className="size-3.5 shrink-0 text-(--success)"
-                                title="Completed"
-                                aria-label="Completed"
-                            />
+                            <CheckCircle2 className="size-3.5 shrink-0 text-(--success)" aria-label="Completed" />
                         )}
                     </div>
                 );
@@ -2095,13 +2103,13 @@ const Swatch = ({ token, label, fg }: SwatchProps) => (
         />
         {fg && (
             <div
-                className="flex h-6 items-center justify-center rounded-md text-[11px] font-medium"
+                className="flex h-6 items-center justify-center rounded-md text-xs font-medium"
                 style={{ background: `var(${token})`, color: `var(${fg})` }}>
                 Aa
             </div>
         )}
-        <p className="font-mono text-[11px] leading-tight text-(--muted-fg)">{token}</p>
-        <p className="text-[11px] leading-tight text-(--fg)">{label}</p>
+        <p className="font-mono text-xs leading-tight text-(--muted-fg)">{token}</p>
+        <p className="text-xs leading-tight text-(--fg)">{label}</p>
     </div>
 );
 
@@ -2195,7 +2203,7 @@ const ColoursSection = () => (
             <div className="space-y-3">
                 {RANK_GROUPS.map(({ label, tokens }) => (
                     <div key={label} className="flex items-center gap-3">
-                        <span className="w-24 shrink-0 text-[11px] font-medium text-(--muted-fg)">{label}</span>
+                        <span className="w-24 shrink-0 text-xs font-medium text-(--muted-fg)">{label}</span>
                         <div className="flex gap-2">
                             {tokens.map(token => (
                                 <div
@@ -2222,7 +2230,7 @@ export const UiKitPage = () => {
     return (
         <div className="space-y-12 py-6">
             <div>
-                <h2>UI Kit</h2>
+                <h2 className="text-2xl leading-tight font-bold text-(--fg)">UI Kit</h2>
                 <p className="text-sm text-(--muted-fg)">Live components and design primitives</p>
             </div>
 

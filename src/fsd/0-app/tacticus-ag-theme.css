@@ -298,3 +298,14 @@
     height: 1.4em;
     width: auto;
 }
+
+/* Priority cell — full-height split layout, flush padding */
+.ag-theme-material .prio-cell {
+    align-items: stretch !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.ag-theme-material .prio-cell .ag-cell-wrapper {
+    align-items: stretch !important;
+    height: 100% !important;
+}

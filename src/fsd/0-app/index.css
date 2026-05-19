@@ -62,7 +62,7 @@
         --fg: var(--color-zinc-950);
 
         --card-bg: var(--color-white);
-        --card-border: var(--color-zinc-400);
+        --card-border: var(--color-zinc-200);
         --card-fg: var(--color-zinc-950);
 
         --primary: oklch(0.45 0.2 265);

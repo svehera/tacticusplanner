@@ -4,7 +4,7 @@ import { twMerge } from 'tailwind-merge';
 const Card = ({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) => (
     <div
         className={twMerge(
-            'flex flex-col overflow-hidden rounded-xl border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-fg)] shadow-sm',
+            'flex flex-col overflow-hidden rounded-[var(--radius-2xl)] border border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-fg)] shadow-sm',
             className
         )}
         {...props}
