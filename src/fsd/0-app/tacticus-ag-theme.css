@@ -185,6 +185,9 @@
 .ag-theme-material .ag-row.row-goal.row-completed {
     background-color: color-mix(in srgb, var(--success) 8%, transparent);
 }
+.dark .ag-theme-material .ag-row.row-goal.row-completed {
+    background-color: color-mix(in srgb, var(--success) 12%, transparent);
+}
 .ag-theme-material .ag-row.row-goal.row-completed::before {
     width: 4px;
 }
@@ -288,4 +291,10 @@
     text-align: center;
     display: flex;
     justify-content: center;
+}
+
+/* Book icons inside grid cells — standardised size, no !important hacks */
+.ag-theme-material .book-icon {
+    height: 1.4em;
+    width: auto;
 }
