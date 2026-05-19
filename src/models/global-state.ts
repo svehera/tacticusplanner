@@ -1,4 +1,5 @@
 ﻿import { ArmageddonState, defaultArmageddonState } from '@/reducers/armageddon.reducer';
+import { defaultPlayerMetadataState, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
 
 import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
@@ -68,6 +69,7 @@ export class GlobalState implements IGlobalState {
     readonly mows: Array<IMow | IMow2>;
     readonly gameModeTokens: IGameModeTokensState;
     readonly armageddon: ArmageddonState;
+    readonly playerMetadata: PlayerMetadataState;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -102,6 +104,7 @@ export class GlobalState implements IGlobalState {
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
         this.armageddon = personalData.armageddon ?? defaultArmageddonState;
+        this.playerMetadata = personalData.playerMetadata ?? defaultPlayerMetadataState;
     }
 
     static initCharacters(
@@ -349,6 +352,7 @@ export class GlobalState implements IGlobalState {
             rosterSnapshots: value.rosterSnapshots,
             gameModeTokens: value.gameModeTokens,
             armageddon: value.armageddon,
+            playerMetadata: value.playerMetadata,
             teams: value.teams,
             teams2: value.teams2,
             warDefense2: value.warDefense2,

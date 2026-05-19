@@ -5,6 +5,7 @@ import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
 import { GuildAction } from '@/reducers/guild-reducer';
 import { GuildWarAction } from '@/reducers/guild-war-reducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
+import { PlayerMetadataAction, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';
 import { WarDefense2Action } from '@/reducers/war-defense2.reducer';
@@ -101,6 +102,7 @@ export interface IGlobalState {
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
     armageddon: ArmageddonState;
+    playerMetadata: PlayerMetadataState;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -134,6 +136,7 @@ export interface IDispatchContext {
     rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     gameModeTokens: React.Dispatch<GameModeTokensAction>;
     armageddon: React.Dispatch<ArmageddonAction>;
+    playerMetadata: React.Dispatch<PlayerMetadataAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -166,6 +169,7 @@ export interface IPersonalData2 {
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
     armageddon: ArmageddonState;
+    playerMetadata: PlayerMetadataState;
 }
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */
@@ -180,6 +184,8 @@ export interface TacticusTokensState {
 export interface IGameModeTokensState {
     tokens?: TacticusTokensState;
 }
+
+export type { IArmageddonCartEntry, IArmageddonCart } from '@/reducers/armageddon.reducer';
 
 export interface IGuild {
     members: IGuildMember[];

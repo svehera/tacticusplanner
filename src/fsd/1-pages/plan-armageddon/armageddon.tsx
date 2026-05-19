@@ -1,16 +1,24 @@
 /* eslint-disable import-x/no-internal-modules */
 import { cloneDeep } from 'lodash';
-import { ChevronDown, Info, Minus, Plus, Trash2 } from 'lucide-react';
+import { ChevronDown, Info, Minus, Plus, TriangleAlert, Trash2 } from 'lucide-react';
 import { JSX, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { IDailyRaidsFarmOrder } from '@/models/interfaces';
+import { IDailyRaidsFarmOrder, IArmageddonCartEntry, IArmageddonCart } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { Alliance, Rarity, RarityMapper, RarityString, RarityStars, XP_BOOK_VALUE } from '@/fsd/5-shared/model';
+import {
+    Alliance,
+    Rarity,
+    RarityMapper,
+    RarityString,
+    RarityStars,
+    XP_BOOK_VALUE,
+    useAuth,
+} from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { BadgeImage, ForgeBadgeImage, MiscIcon, OrbIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -106,6 +114,36 @@ const DAY_LABELS: Record<Day, string> = {
     SAT: 'Saturday',
     SUN: 'Sunday',
 };
+
+// Event start date: June 22, 2026 (Monday of week 1)
+const EVENT_START_UTC = Date.UTC(2026, 5, 22); // months are 0-indexed
+
+function getEventDate(week: 1 | 2 | 3, day: Day): string {
+    const dayIndex = DAYS.indexOf(day);
+    const offsetMs = ((week - 1) * 7 + dayIndex) * 86_400_000;
+    const d = new Date(EVENT_START_UTC + offsetMs);
+    const month = d.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
+    const dayNumber = d.getUTCDate().toString().padStart(2, '0');
+    return `${month} ${dayNumber}`;
+}
+
+// Computed once at module load (acceptable: changes at most once per day).
+const _TODAY_OFFSET_DAYS = (() => {
+    const now = new Date();
+    const utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    return Math.round((utcMs - EVENT_START_UTC) / 86_400_000);
+})();
+// 0–20 if currently in the event, -1 otherwise.
+const TODAY_EVENT_INDEX = _TODAY_OFFSET_DAYS >= 0 && _TODAY_OFFSET_DAYS < 21 ? _TODAY_OFFSET_DAYS : -1;
+// Default index for the Daily Purchases dropdown:
+//   before event → first day (0), during event → today, after event → last day (20).
+const TODAY_DEFAULT_INDEX = TODAY_EVENT_INDEX >= 0 ? TODAY_EVENT_INDEX : _TODAY_OFFSET_DAYS < 0 ? 0 : 20;
+
+// All 21 event day slots, indexed 0–20.
+const ALL_EVENT_DATES = Array.from({ length: 21 }, (_, index) => ({
+    week: (Math.floor(index / 7) + 1) as 1 | 2 | 3,
+    day: DAYS[index % 7],
+}));
 
 // PL tier thresholds
 const PL_HIGH = 25;
@@ -303,19 +341,8 @@ interface ResolvedSlot {
 
 // ─── cart ─────────────────────────────────────────────────────────────────────
 
-interface CartEntry {
-    week: 1 | 2 | 3;
-    slotIndex: number;
-    day: Day;
-    quantity: number;
-    label: string;
-    rewardString: string;
-    costPerUnit: number;
-    maxQty: number | undefined;
-    qtyPerPack: number;
-}
-
-type CartRecord = Record<string, CartEntry>;
+type CartEntry = IArmageddonCartEntry;
+type CartRecord = IArmageddonCart;
 
 function cartKey(week: 1 | 2 | 3, slotIndex: number, day: Day): string {
     return `${week}-${slotIndex}-${day}`;
@@ -343,6 +370,7 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
     };
 
     const sliderMax = maxQty ?? 10;
+    const confirmDisabled = sliderValue === 0 && cartQty === 0;
 
     const handleConfirm = () => {
         onSetQty(sliderValue);
@@ -423,7 +451,7 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                             </div>
                             <input
                                 type="range"
-                                min={1}
+                                min={0}
                                 max={sliderMax}
                                 value={sliderValue}
                                 onChange={event_ => setSliderValue(Number(event_.currentTarget.value))}
@@ -435,8 +463,12 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                         <Button appearance="outline" className="w-full sm:w-auto" onPress={() => setDialogOpen(false)}>
                             Cancel
                         </Button>
-                        <Button intent="primary" className="w-full sm:w-auto" onPress={handleConfirm}>
-                            Add ×{sliderValue} to list
+                        <Button
+                            intent="primary"
+                            className="w-full sm:w-auto"
+                            isDisabled={confirmDisabled}
+                            onPress={handleConfirm}>
+                            {sliderValue === 0 ? 'Remove from list' : `Add ×${sliderValue} to list`}
                         </Button>
                     </Modal.Footer>
                 </Modal.Content>
@@ -457,6 +489,7 @@ function ShoppingList({
     onResetWeek: (w: 1 | 2 | 3) => void;
 }) {
     const weekNumbers = [1, 2, 3] as const;
+    const [sortByDay, setSortByDay] = useState(false);
     const total = useMemo(
         () => Object.values(cart).reduce((sum, cartEntry) => sum + cartEntry.quantity * cartEntry.costPerUnit, 0),
         [cart]
@@ -466,18 +499,34 @@ function ShoppingList({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 className="text-xl font-bold">Shopping List</h2>
-                <div className="flex items-center gap-1 text-sm">
-                    <span className="text-(--muted-fg)">Grand total:</span>
-                    <span className="font-semibold text-amber-400">{total.toLocaleString()}</span>
-                    <MiscIcon icon="armageddonCurrency" width={14} height={14} />
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setSortByDay(previous => !previous)}
+                        className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+                            sortByDay
+                                ? 'border-blue-500 bg-blue-500/15 text-blue-400'
+                                : 'border-(--border) bg-(--overlay) text-(--muted-fg) hover:border-blue-500'
+                        }`}>
+                        Sort by {sortByDay ? 'day' : 'item type'}
+                    </button>
+                    <div className="flex items-center gap-1 text-sm">
+                        <span className="text-(--muted-fg)">Grand total:</span>
+                        <span className="font-semibold text-amber-400">{total.toLocaleString()}</span>
+                        <MiscIcon icon="armageddonCurrency" width={14} height={14} />
+                    </div>
                 </div>
             </div>
 
             {weekNumbers.map(w => {
-                const entries = Object.entries(cart).filter(([, cartEntry]) => cartEntry.week === w);
-                if (entries.length === 0) return;
+                const rawEntries = Object.entries(cart).filter(([, cartEntry]) => cartEntry.week === w);
+                const entries = rawEntries.toSorted(([, a], [, b]) =>
+                    sortByDay
+                        ? DAYS.indexOf(a.day) - DAYS.indexOf(b.day) || a.label.localeCompare(b.label)
+                        : a.label.localeCompare(b.label)
+                );
+                if (rawEntries.length === 0) return;
                 const weekTotal = entries.reduce(
                     (sum, [, cartEntry]) => sum + cartEntry.quantity * cartEntry.costPerUnit,
                     0
@@ -659,31 +708,24 @@ export const Armageddon = () => {
         xpIncome,
         xpUse,
         armageddon: armageddonState,
+        playerMetadata,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
+    const { userInfo } = useAuth();
+    const hasSync = !!userInfo.tacticusApiKey;
+
     const [week, setWeekState] = useState<1 | 2 | 3>(1);
     const [day, setDayState] = useState<Day>('MON');
-    const [pl, setPlState] = useState<number>(() => armageddonState.powerLevel ?? 1);
-    const [cart, setCart] = useState<CartRecord>(() => {
-        try {
-            return armageddonState.cart ? (JSON.parse(armageddonState.cart) as CartRecord) : {};
-        } catch {
-            return {};
-        }
-    });
+    const pl = playerMetadata.powerLevel ?? 1;
+    const [cart, setCart] = useState<CartRecord>(() => armageddonState.cart ?? {});
     const [confirmResetWeek, setConfirmResetWeek] = useState<1 | 2 | 3 | undefined>();
     const [coverageExpanded, setCoverageExpanded] = useState(false);
+    const [dailyPurchasesExpanded, setDailyPurchasesExpanded] = useState(false);
+    const [selectedDateIndex, setSelectedDateIndex] = useState(TODAY_DEFAULT_INDEX);
 
     const setWeek = setWeekState;
     const setDay = setDayState;
-    const setPl = useCallback(
-        (value: number) => {
-            setPlState(value);
-            dispatch.armageddon({ type: 'Update', setting: 'powerLevel', value });
-        },
-        [dispatch]
-    );
 
     // Persist cart whenever it changes (skip initial render to avoid a spurious save on mount)
     const isFirstCartPersist = useRef(true);
@@ -692,7 +734,7 @@ export const Armageddon = () => {
             isFirstCartPersist.current = false;
             return;
         }
-        dispatch.armageddon({ type: 'Update', setting: 'cart', value: JSON.stringify(cart) });
+        dispatch.armageddon({ type: 'Update', setting: 'cart', value: cart });
     }, [cart, dispatch]);
 
     // Resolve characters and mows
@@ -1113,7 +1155,10 @@ export const Armageddon = () => {
         <div className="flex flex-col gap-6 p-4">
             {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <h1 className="text-2xl font-bold">Armageddon Shop</h1>
+                <div className="flex items-center gap-2">
+                    <h1 className="text-2xl font-bold">Armageddon Shop</h1>
+                    {hasSync && <SyncButton showText={false} iconButton={true} />}
+                </div>
                 <span className="text-sm text-(--muted-fg)">{resolvedSlots.length} offers available</span>
             </div>
 
@@ -1122,7 +1167,17 @@ export const Armageddon = () => {
                 {/* Player Level */}
                 <div className="flex flex-col gap-0.5">
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Power Level</span>
-                    <NumberInput label="" min={1} max={99} value={pl} valueChange={setPl} />
+                    {playerMetadata.powerLevel === undefined ? (
+                        <AccessibleTooltip title="Power level is retrieved from the Tacticus API. Sync to load your power level.">
+                            <span>
+                                <SyncButton showText={true} />
+                            </span>
+                        </AccessibleTooltip>
+                    ) : (
+                        <p className="flex items-center gap-1 text-sm font-semibold tabular-nums">
+                            {playerMetadata.powerLevel}
+                        </p>
+                    )}
                     <p className="mt-1 flex items-center gap-1 text-xs text-(--muted-fg)">
                         <span>
                             {'Tier: '}
@@ -1170,17 +1225,110 @@ export const Armageddon = () => {
                             <button
                                 key={d}
                                 onClick={() => setDay(d)}
-                                className={`rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
+                                className={`flex flex-col items-center rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
                                     day === d
                                         ? 'bg-blue-600 text-white'
                                         : 'border border-(--border) bg-(--overlay) hover:border-blue-500'
                                 }`}>
-                                {DAY_LABELS[d].slice(0, 3)}
+                                <span>{DAY_LABELS[d].slice(0, 3)}</span>
+                                <span className="text-[10px] font-normal tabular-nums opacity-70">
+                                    {getEventDate(week, d)}
+                                </span>
                             </button>
                         ))}
                     </div>
                 </div>
             </div>
+
+            {/* Daily Purchases */}
+            {(() => {
+                const { week: selWeek, day: selDay } = ALL_EVENT_DATES[selectedDateIndex];
+                const dayEntries = Object.entries(cart).filter(
+                    ([, entry]) => entry.week === selWeek && entry.day === selDay
+                );
+                const dayTotal = dayEntries.reduce((s, [, entry]) => s + entry.quantity * entry.costPerUnit, 0);
+                const dateLabel = `${DAY_LABELS[selDay]}, ${getEventDate(selWeek, selDay)}`;
+                return (
+                    <div className="rounded-xl border border-(--border) bg-(--overlay)">
+                        <button
+                            onClick={() => setDailyPurchasesExpanded(previous => !previous)}
+                            className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--muted)">
+                            <div className="flex items-center gap-2">
+                                <span className="font-semibold">Daily Purchases</span>
+                                <select
+                                    value={selectedDateIndex}
+                                    onClick={event => event.stopPropagation()}
+                                    onChange={event => setSelectedDateIndex(Number(event.currentTarget.value))}
+                                    className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs text-(--fg)">
+                                    {ALL_EVENT_DATES.map(({ week: w, day: d }, index) => (
+                                        <option key={index} value={index}>
+                                            {`Week ${w} · ${DAY_LABELS[d].slice(0, 3)} ${getEventDate(w, d)}${index === TODAY_EVENT_INDEX ? ' (Today)' : ''}`}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <ChevronDown
+                                className={`size-4 text-(--muted-fg) transition-transform duration-200 ${
+                                    dailyPurchasesExpanded ? 'rotate-180' : ''
+                                }`}
+                            />
+                        </button>
+
+                        {dailyPurchasesExpanded && (
+                            <div className="flex flex-col gap-3 border-t border-(--border) p-4">
+                                {dayEntries.length === 0 ? (
+                                    <p className="text-sm text-(--muted-fg)">No purchases planned for {dateLabel}.</p>
+                                ) : (
+                                    <>
+                                        <div className="flex flex-col gap-2">
+                                            {dayEntries.map(([key, entry]) => {
+                                                const { icon } = rewardInfo(entry.rewardString);
+                                                const lineTotal = entry.quantity * entry.costPerUnit;
+                                                return (
+                                                    <div
+                                                        key={key}
+                                                        className="flex items-center gap-2 rounded-lg bg-(--muted) p-2">
+                                                        <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
+                                                            {icon}
+                                                        </div>
+                                                        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                                            <span className="truncate text-sm font-medium">
+                                                                {entry.label}
+                                                            </span>
+                                                            {entry.qtyPerPack > 1 && (
+                                                                <span className="text-xs text-(--muted-fg)">
+                                                                    ×{entry.qtyPerPack} each
+                                                                </span>
+                                                            )}
+                                                        </div>
+                                                        <div className="flex shrink-0 items-center gap-1">
+                                                            <span className="text-xs font-semibold text-amber-400 tabular-nums">
+                                                                {lineTotal.toLocaleString()}
+                                                            </span>
+                                                            <MiscIcon
+                                                                icon="armageddonCurrency"
+                                                                width={12}
+                                                                height={12}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                        <div className="flex items-center justify-end gap-1 border-t border-(--border) pt-2 text-sm">
+                                            <span className="text-(--muted-fg)">Day total:</span>
+                                            <span className="font-semibold text-amber-400 tabular-nums">
+                                                {dayTotal.toLocaleString()}
+                                            </span>
+                                            <MiscIcon icon="armageddonCurrency" width={14} height={14} />
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                );
+            })()}
 
             {/* Missing resources coverage */}
             {coverageRows.length > 0 && (
@@ -1229,7 +1377,7 @@ export const Armageddon = () => {
                                             </span>
                                             {row.note && (
                                                 <LazyTooltip title={row.note}>
-                                                    <Info className="size-3.5 cursor-help text-(--muted-fg)" />
+                                                    <TriangleAlert className="size-3.5 cursor-help text-amber-400" />
                                                 </LazyTooltip>
                                             )}
                                         </span>

@@ -129,9 +129,22 @@ export class PersonalDataLocalStorage {
                     ...defaultData.gameModeTokens,
                     ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
-                armageddon: {
-                    ...defaultData.armageddon,
-                    ...(this.getItem<typeof defaultData.armageddon>('armageddon') ?? defaultData.armageddon),
+                armageddon: (() => {
+                    const stored = this.getItem<typeof defaultData.armageddon>('armageddon');
+                    const base = { ...defaultData.armageddon, ...(stored ?? defaultData.armageddon) };
+                    const rawCart: unknown = base.cart;
+                    if (typeof rawCart === 'string') {
+                        try {
+                            base.cart = JSON.parse(rawCart);
+                        } catch {
+                            base.cart = {};
+                        }
+                    }
+                    return base;
+                })(),
+                playerMetadata: {
+                    ...defaultData.playerMetadata,
+                    ...this.getItem<typeof defaultData.playerMetadata>('playerMetadata'),
                 },
             };
         } else {
@@ -277,10 +290,18 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             ...defaultData.gameModeTokens,
             ...v1Data.gameModeTokens,
         },
-        armageddon: {
-            ...defaultData.armageddon,
-            ...v1Data.armageddon,
-        },
+        armageddon: (() => {
+            const base = { ...defaultData.armageddon, ...v1Data.armageddon };
+            const rawCart: unknown = base.cart;
+            if (typeof rawCart === 'string') {
+                try {
+                    base.cart = JSON.parse(rawCart);
+                } catch {
+                    base.cart = {};
+                }
+            }
+            return base;
+        })(),
     };
 };
 
