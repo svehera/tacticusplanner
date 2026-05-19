@@ -68,6 +68,16 @@ Go through the file and list every violation. Be specific — file and approxima
 - Section labels styled inconsistently → `text-xs font-bold tracking-widest uppercase text-(--muted-fg)`
 - `margin` / `padding` inline styles for spacing → `space-y-*`, `gap-*`
 
+### Page layout & alignment (check these too)
+The shell (`desktop-app.tsx`) wraps every outlet in `mx-5 my-2.5`. Pages must NOT double-pad.
+
+- `px-*` or `mx-*` on the page root div → remove it; the shell already handles horizontal padding
+- `max-w-*` on the page root wrapping a table or card grid → remove it; these content types should fill all available width
+- Missing `max-w-2xl` / `max-w-3xl` on a form or text-heavy page → add it to the inner content container, not the root
+- Content centered when it should be left-aligned → remove centering; default is left-aligned. Only empty states and large single-stat displays are intentionally centered
+- Numbers in table cells without `text-right tabular-nums` → add both
+- Action cluster in filter row not pushed right → wrap in `<div className="flex flex-1 items-center justify-end gap-3">`
+
 ### Typography
 - `style={{ fontSize: '...' }}` → use the scale from conventions.md
 - `style={{ fontWeight: 'bold' }}` → `font-semibold`

@@ -48,6 +48,9 @@ Wrong section = broken nav. Think for two seconds.
 
 - Named export. `export const PageName = () => {}`
 - Page root is `<div className="space-y-8 py-6">`. Not `space-y-4`. Not `p-4`. Not a div with inline style.
+- **No horizontal padding on the root.** The shell (`desktop-app.tsx`) already applies `mx-5` around the outlet. Adding `px-*` or `mx-*` on the root double-pads the page.
+- **No `max-w-*` on the root.** Tables and card grids fill all available width. Only put `max-w-2xl` / `max-w-3xl` on the specific inner container that needs it (a form, a text block). See conventions.md "When to constrain width".
+- **Left-align content by default.** Centering is intentional for empty states and large single-stat displays only. See conventions.md "Content alignment rules".
 - Always start with a heading block:
   ```tsx
   <div>

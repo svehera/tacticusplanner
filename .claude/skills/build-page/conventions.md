@@ -95,6 +95,48 @@ Import from `@/fsd/5-shared/ui/badge`:
 
 ---
 
+## Page layout context
+
+The desktop shell (`desktop-app.tsx`) wraps every page:
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│  Sidebar  │  TopAppBar (full remaining width, ~48px tall)   │
+│  248px    ├─────────────────────────────────────────────────┤
+│  (64px    │  mx-5 my-2.5  ←── shell padding (do not repeat) │
+│   when    │  ┌─────────────────────────────────────────────┐ │
+│  collapsed│  │  <Outlet /> — your page root lives here     │ │
+│  )        │  └─────────────────────────────────────────────┘ │
+└─────────────────────────────────────────────────────────────┘
+```
+
+- The shell applies `mx-5` (20 px each side) around the outlet. **Do not add horizontal padding to the page root** — `py-6` vertical only.
+- The content area is `flex-1 min-w-0` — it fills all width left after the sidebar.
+- There is **no global `max-width`** on the content area. Pages set their own constraints where appropriate.
+
+### When to constrain width
+
+| Content type | Width strategy |
+|---|---|
+| Table / ag-Grid | None — fill all available width (`w-full`) |
+| Card / tile grid | None — tiles wrap naturally with `flex flex-wrap gap-*` |
+| Form / settings | `max-w-2xl` on the form container only |
+| Article / text-heavy reference | `max-w-3xl` on the text container |
+| Mixed: heading + table | Both full width — heading does not narrow the table |
+
+Do **not** add `max-w-*` to the page root. Constrain the specific inner container that needs it.
+
+### Content alignment rules
+
+- **Left-align everything by default.** Centering is a deliberate choice for empty states and large stat displays, not a default layout.
+- Filter bars and section headings: always flush left, full width.
+- Numbers in table cells: `text-right tabular-nums`.
+- Action clusters in a filter header row: `<div className="flex flex-1 items-center justify-end gap-3">` — label left, controls pushed right.
+- Card grids: `flex flex-wrap gap-6` — items fill left-to-right, no forced horizontal centering.
+- Empty state: `flex flex-col items-center justify-center text-center gap-3` inside a full-width container with a minimum height.
+
+---
+
 ## Layout patterns
 
 ### Page root
