@@ -581,7 +581,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
 
     return (
         <div
-            className="ag-theme-material min-h-[150px] w-full"
+            className="ag-theme-material density-compact min-h-[150px] w-full"
             style={{
                 height: baseRowHeight + rows.length * baseRowHeight,
             }}>
