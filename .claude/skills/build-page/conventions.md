@@ -22,7 +22,7 @@
 | `--sidebar`      | zinc-50                   | zinc-950                  | Sidebar background               |
 | `--sidebar-fg`   | zinc-950                  | zinc-50                   | Text in sidebar                  |
 | `--card-bg`      | white                     | zinc-800                  | Card surface                     |
-| `--card-border`  | zinc-400                  | zinc-700                  | Card border                      |
+| `--card-border`  | zinc-200                  | zinc-700                  | Card border                      |
 | `--card-fg`      | zinc-950                  | zinc-50                   | Text/elements on card surface    |
 | `--success`      | emerald-600               | emerald-600               | Success states                   |
 | `--success-fg`   | white                     | white                     | Text on success background       |
@@ -52,6 +52,7 @@ For opacity modifiers: `bg-(--primary)/15`, `hover:bg-(--primary)/18`.
 | `style={{ color: '#...' }}`, `style={{ background: '...' }}` | Use a token class instead                                                                   |
 | `bg-(--secondary)` as a progress bar track                   | `--secondary` equals the card surface in dark mode — use `bg-(--fg)/12` for overlaid tracks |
 | `bg-(--card-fg)/60` as a progress fill                       | Pick a semantic fill: `bg-(--primary)` or the relevant domain token                         |
+| `hover:bg-(--secondary)` on buttons inside cards/tables      | `--secondary` = card surface in dark mode — invisible hover. Use `hover:bg-(--primary)/15` (neutral actions) or `hover:bg-(--danger)/10` (destructive actions) |
 
 ---
 
@@ -112,7 +113,7 @@ Import from `@/fsd/5-shared/ui/badge`:
 
 ```tsx
 <section className="space-y-4">
-    <p className="text-[10px] font-bold tracking-[.14em] text-(--muted-fg) uppercase">Section Label</p>
+    <p className="text-xs font-bold tracking-widest text-(--muted-fg) uppercase">Section Label</p>
     {/* content */}
 </section>
 ```
@@ -199,7 +200,7 @@ const dropPanel =
 | Use            | Classes                                                              |
 | -------------- | -------------------------------------------------------------------- |
 | Page heading   | `<h2>` (uses global h2 styles)                                       |
-| Section label  | `text-[10px] font-bold tracking-[.14em] uppercase text-(--muted-fg)` |
+| Section label  | `text-xs font-bold tracking-widest uppercase text-(--muted-fg)`      |
 | Group label    | `text-xs font-semibold text-(--muted-fg)`                            |
 | Body / table   | `text-sm text-(--fg)`                                                |
 | Caption / meta | `text-xs text-(--muted-fg)`                                          |

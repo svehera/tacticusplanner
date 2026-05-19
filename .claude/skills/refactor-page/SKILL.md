@@ -46,6 +46,7 @@ Go through the file and list every violation. Be specific — file and approxima
 - `border-slate-*`, `border-gray-*` → `border-(--border)`
 - `dark:bg-*` / `dark:text-*` manual dark variants → delete them, tokens handle dark mode
 - `style={{ color: '...' }}`, `style={{ background: '...' }}` → className with token
+- `hover:bg-(--secondary)` on buttons inside cards/tables → invisible in dark mode (`--secondary` = card surface). Use `hover:bg-(--primary)/15` for neutral actions, `hover:bg-(--danger)/10` for destructive
 - Map: white→`--bg`, zinc-950→`--fg`, zinc-600→`--muted-fg`, zinc-200→`--border`, zinc-300→`--input`, indigo→`--primary`, zinc-100→`--secondary`
 
 ### Components (replace where a shared component exists)
@@ -64,7 +65,7 @@ Go through the file and list every violation. Be specific — file and approxima
 - Filter toggles and chips crammed on the same row → split: controls in header, values in body
 - Clear button rendered conditionally → always render it, `isDisabled={!hasFilters}`
 - No page heading → add `<h2>` + `<p className="text-sm text-(--muted-fg)">`
-- Section labels styled inconsistently → `text-[10px] font-bold tracking-[.14em] uppercase text-(--muted-fg)`
+- Section labels styled inconsistently → `text-xs font-bold tracking-widest uppercase text-(--muted-fg)`
 - `margin` / `padding` inline styles for spacing → `space-y-*`, `gap-*`
 
 ### Typography
