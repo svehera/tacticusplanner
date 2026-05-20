@@ -1846,15 +1846,15 @@ export const Armageddon = () => {
                 </Modal.Content>
             </Modal>
 
-            {purchasedDialogKey !== null && cart[purchasedDialogKey] && (
+            {purchasedDialogKey !== null && cart[purchasedDialogKey ?? ''] && (
                 <PurchasedQtyModal
                     key={purchasedDialogKey}
                     isOpen={true}
-                    entry={cart[purchasedDialogKey]!}
-                    icon={rewardInfo(cart[purchasedDialogKey]!.rewardString).icon}
-                    initialPurchased={purchased[purchasedDialogKey] ?? 0}
+                    entry={cart[purchasedDialogKey ?? '']!}
+                    icon={rewardInfo(cart[purchasedDialogKey ?? '']!.rewardString).icon}
+                    initialPurchased={purchased[purchasedDialogKey ?? ''] ?? 0}
                     onConfirm={qty => {
-                        setPurchasedQty(purchasedDialogKey, qty);
+                        setPurchasedQty(purchasedDialogKey ?? '', qty);
                         setPurchasedDialogKey(undefined);
                     }}
                     onClose={() => setPurchasedDialogKey(undefined)}
