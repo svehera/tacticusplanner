@@ -204,31 +204,34 @@ export class GoalsService {
                 };
             }
             estimate.included = goal.include;
-            const blockedEntry = estimatedUpgradesTotal.blockedMaterials.find(m =>
+            const blockedEntries = estimatedUpgradesTotal.blockedMaterials.filter(m =>
                 m.relatedGoals.includes(goal.goalId)
             );
-            if (!blockedEntry) {
+            if (blockedEntries.length === 0) {
                 estimate.blocked = false;
             } else if (isGoalPriority) {
-                const available = blockedEntry.acquiredCount ?? 0;
                 const allGoals = [...shardsGoals, ...upgradeMaterialGoals, ...upgradeRankOrMowGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
 
-                const requiredForThisGoal = sum(
-                    estimatedUpgradesTotal.characters
-                        .filter(unit => unit.goalId === goal.goalId)
-                        .map(unit => unit.baseUpgradesTotal[blockedEntry.id] ?? 0)
-                );
+                estimate.blocked = blockedEntries.some(blockedEntry => {
+                    const available = blockedEntry.acquiredCount ?? 0;
 
-                let requiredForHigher = 0;
-                for (const unit of estimatedUpgradesTotal.characters) {
-                    const pr = goalPriorityMap.get(unit.goalId);
-                    if (pr === undefined) continue;
-                    if (pr >= (goal.priority ?? Number.POSITIVE_INFINITY)) continue;
-                    requiredForHigher += unit.baseUpgradesTotal[blockedEntry.id] ?? 0;
-                }
+                    const requiredForThisGoal = sum(
+                        estimatedUpgradesTotal.characters
+                            .filter(unit => unit.goalId === goal.goalId)
+                            .map(unit => unit.baseUpgradesTotal[blockedEntry.id] ?? 0)
+                    );
 
-                estimate.blocked = isGoalPriority && available < requiredForHigher + requiredForThisGoal;
+                    let requiredForHigher = 0;
+                    for (const unit of estimatedUpgradesTotal.characters) {
+                        const pr = goalPriorityMap.get(unit.goalId);
+                        if (pr === undefined) continue;
+                        if (pr >= (goal.priority ?? Number.POSITIVE_INFINITY)) continue;
+                        requiredForHigher += unit.baseUpgradesTotal[blockedEntry.id] ?? 0;
+                    }
+
+                    return available < requiredForHigher + requiredForThisGoal;
+                });
             } else {
                 estimate.blocked = true;
             }
