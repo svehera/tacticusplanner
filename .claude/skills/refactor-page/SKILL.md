@@ -105,10 +105,22 @@ After swapping components, the import list will be wrong. Fix it:
 
 ---
 
-## TypeScript check — run it, fix it, then run it again
+## CI checks — run them all, fix them all, then run them again
+
+Run the same checks GitHub will run on the PR, in order:
 
 ```bash
+# 1. Formatting
+npm run format-ci
+
+# 2. Lint (errors only)
+npm run lint-ci
+
+# 3. TypeScript
 npx tsc --noEmit 2>&1 | grep "error" | head -30
+
+# 4. Tests
+npm run test
 ```
 
 Common traps you will fall into:
@@ -116,8 +128,9 @@ Common traps you will fall into:
 - `Button` uses `onPress`, not `onClick` — react-aria, not HTML
 - `Switch` uses `isSelected`, not `checked` or `value`
 - `RaritySelect2` / `RankSelect2` / `StarsSelect2` want `Rarity` / `Rank` / `RarityStars` typed values, not raw `number`
+- Prettier will reject files you never touched if they were already malformatted — run `npm run format` to auto-fix, then commit
 
-Do not report done until TypeScript is clean.
+Do not report done until all four pass.
 
 ---
 

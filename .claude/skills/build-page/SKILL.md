@@ -128,13 +128,25 @@ Ask the user if they want you to make these edits directly. Do not just make the
 
 ---
 
-## TypeScript check — non-negotiable
+## CI checks — non-negotiable
+
+Run the same checks GitHub will run on the PR, in order:
 
 ```bash
+# 1. Formatting
+npm run format-ci
+
+# 2. Lint (errors only)
+npm run lint-ci
+
+# 3. TypeScript
 npx tsc --noEmit 2>&1 | grep -E "(error|{name})" | head -30
+
+# 4. Tests
+npm run test
 ```
 
-Do not report the task as done until this passes. If it fails, fix it. That's the job.
+Do not report the task as done until all four pass. If any fails, fix it. That's the job.
 
 ---
 
