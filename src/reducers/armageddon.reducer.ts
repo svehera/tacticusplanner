@@ -1,17 +1,33 @@
 import type { SetStateAction } from '@/models/interfaces';
 
+export interface IArmageddonCartEntry {
+    week: 1 | 2 | 3;
+    slotIndex: number;
+    day: 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN';
+    quantity: number;
+    label: string;
+    rewardString: string;
+    costPerUnit: number;
+    maxQty: number | undefined;
+    qtyPerPack: number;
+}
+
+export type IArmageddonCart = Record<string, IArmageddonCartEntry>;
+
 export interface ArmageddonState {
     powerLevel: number;
     week: 1 | 2 | 3;
     day: string;
-    cart: string; // JSON-serialised CartRecord
+    structuredCart: IArmageddonCart;
+    purchased: Record<string, number>;
 }
 
 export const defaultArmageddonState: ArmageddonState = {
     powerLevel: 1,
     week: 1,
     day: 'MON',
-    cart: '{}',
+    structuredCart: {},
+    purchased: {},
 };
 
 export type ArmageddonAction =

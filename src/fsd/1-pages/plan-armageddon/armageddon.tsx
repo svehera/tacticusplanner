@@ -1,16 +1,24 @@
 /* eslint-disable import-x/no-internal-modules */
 import { cloneDeep } from 'lodash';
-import { ChevronDown, Info, Minus, Plus, Trash2 } from 'lucide-react';
+import { Check, ChevronDown, Info, Minus, Plus, SlidersHorizontal, TriangleAlert, Trash2 } from 'lucide-react';
 import { JSX, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
-import { IDailyRaidsFarmOrder } from '@/models/interfaces';
+import { IDailyRaidsFarmOrder, IArmageddonCartEntry, IArmageddonCart } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { Alliance, Rarity, RarityMapper, RarityString, RarityStars, XP_BOOK_VALUE } from '@/fsd/5-shared/model';
+import {
+    Alliance,
+    Rarity,
+    RarityMapper,
+    RarityString,
+    RarityStars,
+    XP_BOOK_VALUE,
+    useAuth,
+} from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { BadgeImage, ForgeBadgeImage, MiscIcon, OrbIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
+import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -106,6 +114,36 @@ const DAY_LABELS: Record<Day, string> = {
     SAT: 'Saturday',
     SUN: 'Sunday',
 };
+
+// Event start date: June 22, 2026 (Monday of week 1)
+const EVENT_START_UTC = Date.UTC(2026, 5, 22); // months are 0-indexed
+
+function getEventDate(week: 1 | 2 | 3, day: Day): string {
+    const dayIndex = DAYS.indexOf(day);
+    const offsetMs = ((week - 1) * 7 + dayIndex) * 86_400_000;
+    const d = new Date(EVENT_START_UTC + offsetMs);
+    const month = d.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
+    const dayNumber = d.getUTCDate().toString().padStart(2, '0');
+    return `${month} ${dayNumber}`;
+}
+
+// Computed once at module load (acceptable: changes at most once per day).
+const _TODAY_OFFSET_DAYS = (() => {
+    const now = new Date();
+    const utcMs = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+    return Math.round((utcMs - EVENT_START_UTC) / 86_400_000);
+})();
+// 0–20 if currently in the event, -1 otherwise.
+const TODAY_EVENT_INDEX = _TODAY_OFFSET_DAYS >= 0 && _TODAY_OFFSET_DAYS < 21 ? _TODAY_OFFSET_DAYS : -1;
+// Default index for the Daily Purchases dropdown:
+//   before event → first day (0), during event → today, after event → last day (20).
+const TODAY_DEFAULT_INDEX = TODAY_EVENT_INDEX >= 0 ? TODAY_EVENT_INDEX : _TODAY_OFFSET_DAYS < 0 ? 0 : 20;
+
+// All 21 event day slots, indexed 0–20.
+const ALL_EVENT_DATES = Array.from({ length: 21 }, (_, index) => ({
+    week: (Math.floor(index / 7) + 1) as 1 | 2 | 3,
+    day: DAYS[index % 7],
+}));
 
 // PL tier thresholds
 const PL_HIGH = 25;
@@ -303,19 +341,8 @@ interface ResolvedSlot {
 
 // ─── cart ─────────────────────────────────────────────────────────────────────
 
-interface CartEntry {
-    week: 1 | 2 | 3;
-    slotIndex: number;
-    day: Day;
-    quantity: number;
-    label: string;
-    rewardString: string;
-    costPerUnit: number;
-    maxQty: number | undefined;
-    qtyPerPack: number;
-}
-
-type CartRecord = Record<string, CartEntry>;
+type CartEntry = IArmageddonCartEntry;
+type CartRecord = IArmageddonCart;
 
 function cartKey(week: 1 | 2 | 3, slotIndex: number, day: Day): string {
     return `${week}-${slotIndex}-${day}`;
@@ -343,6 +370,7 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
     };
 
     const sliderMax = maxQty ?? 10;
+    const confirmDisabled = sliderValue === 0 && cartQty === 0;
 
     const handleConfirm = () => {
         onSetQty(sliderValue);
@@ -423,7 +451,7 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                             </div>
                             <input
                                 type="range"
-                                min={1}
+                                min={0}
                                 max={sliderMax}
                                 value={sliderValue}
                                 onChange={event_ => setSliderValue(Number(event_.currentTarget.value))}
@@ -435,8 +463,12 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                         <Button appearance="outline" className="w-full sm:w-auto" onPress={() => setDialogOpen(false)}>
                             Cancel
                         </Button>
-                        <Button intent="primary" className="w-full sm:w-auto" onPress={handleConfirm}>
-                            Add ×{sliderValue} to list
+                        <Button
+                            intent="primary"
+                            className="w-full sm:w-auto"
+                            isDisabled={confirmDisabled}
+                            onPress={handleConfirm}>
+                            {sliderValue === 0 ? 'Remove from list' : `Add ×${sliderValue} to list`}
                         </Button>
                     </Modal.Footer>
                 </Modal.Content>
@@ -457,6 +489,15 @@ function ShoppingList({
     onResetWeek: (w: 1 | 2 | 3) => void;
 }) {
     const weekNumbers = [1, 2, 3] as const;
+    const [sortByDay, setSortByDay] = useState(false);
+    const [expandedWeeks, setExpandedWeeks] = useState<Set<number>>(new Set());
+    const toggleWeek = (w: number) =>
+        setExpandedWeeks(previous => {
+            const next = new Set(previous);
+            if (next.has(w)) next.delete(w);
+            else next.add(w);
+            return next;
+        });
     const total = useMemo(
         () => Object.values(cart).reduce((sum, cartEntry) => sum + cartEntry.quantity * cartEntry.costPerUnit, 0),
         [cart]
@@ -466,18 +507,34 @@ function ShoppingList({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-between gap-2">
+            <div className="flex flex-wrap items-center justify-between gap-2">
                 <h2 className="text-xl font-bold">Shopping List</h2>
-                <div className="flex items-center gap-1 text-sm">
-                    <span className="text-(--muted-fg)">Grand total:</span>
-                    <span className="font-semibold text-amber-400">{total.toLocaleString()}</span>
-                    <MiscIcon icon="armageddonCurrency" width={14} height={14} />
+                <div className="flex items-center gap-3">
+                    <button
+                        onClick={() => setSortByDay(previous => !previous)}
+                        className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
+                            sortByDay
+                                ? 'border-blue-500 bg-blue-500/15 text-blue-400'
+                                : 'border-(--border) bg-(--overlay) text-(--muted-fg) hover:border-blue-500'
+                        }`}>
+                        Sort by {sortByDay ? 'day' : 'item type'}
+                    </button>
+                    <div className="flex items-center gap-1 text-sm">
+                        <span className="text-(--muted-fg)">Grand total:</span>
+                        <span className="font-semibold text-amber-400">{total.toLocaleString()}</span>
+                        <MiscIcon icon="armageddonCurrency" width={14} height={14} />
+                    </div>
                 </div>
             </div>
 
             {weekNumbers.map(w => {
-                const entries = Object.entries(cart).filter(([, cartEntry]) => cartEntry.week === w);
-                if (entries.length === 0) return;
+                const rawEntries = Object.entries(cart).filter(([, cartEntry]) => cartEntry.week === w);
+                const entries = rawEntries.toSorted(([, a], [, b]) =>
+                    sortByDay
+                        ? DAYS.indexOf(a.day) - DAYS.indexOf(b.day) || a.label.localeCompare(b.label)
+                        : a.label.localeCompare(b.label)
+                );
+                if (rawEntries.length === 0) return;
                 const weekTotal = entries.reduce(
                     (sum, [, cartEntry]) => sum + cartEntry.quantity * cartEntry.costPerUnit,
                     0
@@ -497,26 +554,28 @@ function ShoppingList({
                 }
 
                 return (
-                    <div key={w} className="flex flex-col gap-3 rounded-xl border border-(--border) bg-(--overlay) p-4">
-                        <div className="flex items-center justify-between gap-2">
-                            <span className="font-semibold">Week {w}</span>
-                            <div className="flex items-center gap-3">
+                    <div key={w} className="flex flex-col rounded-xl border border-(--border) bg-(--overlay)">
+                        {/* Collapsible header */}
+                        <div className="flex items-center gap-2 p-4">
+                            <button onClick={() => toggleWeek(w)} className="flex flex-1 items-center gap-2 text-left">
+                                <ChevronDown
+                                    className={`size-4 shrink-0 text-(--muted-fg) transition-transform duration-200 ${
+                                        expandedWeeks.has(w) ? 'rotate-180' : ''
+                                    }`}
+                                />
+                                <span className="font-semibold">Week {w}</span>
                                 <div className="flex items-center gap-1 text-sm">
                                     <span className="font-semibold text-amber-400">{weekTotal.toLocaleString()}</span>
                                     <MiscIcon icon="armageddonCurrency" width={12} height={12} />
                                 </div>
-                                <Button
-                                    intent="danger"
-                                    appearance="outline"
-                                    size="small"
-                                    onPress={() => onResetWeek(w)}>
-                                    Reset Week {w}
-                                </Button>
-                            </div>
+                            </button>
+                            <Button intent="danger" appearance="outline" size="small" onPress={() => onResetWeek(w)}>
+                                Reset Week {w}
+                            </Button>
                         </div>
 
-                        {/* Resource summary */}
-                        <div className="flex flex-wrap gap-3 rounded-lg bg-(--muted) p-2">
+                        {/* Resource summary — always visible */}
+                        <div className="flex flex-wrap gap-3 border-t border-(--border) bg-(--muted) px-4 py-2">
                             {Object.entries(resourceMap).map(([rKey, resource]) => (
                                 <div key={rKey} className="flex items-center gap-2">
                                     <div className="flex h-7 w-7 shrink-0 items-center justify-center">
@@ -529,60 +588,66 @@ function ShoppingList({
                             ))}
                         </div>
 
-                        {/* Line items */}
-                        <div className="flex flex-col gap-2">
-                            {entries.map(([key, entry]) => {
-                                const { icon } = rewardInfo(entry.rewardString);
-                                const lineTotal = entry.quantity * entry.costPerUnit;
+                        {/* Line items — only when expanded */}
+                        {expandedWeeks.has(w) && (
+                            <div className="flex flex-col gap-2 border-t border-(--border) p-4">
+                                {entries.map(([key, entry]) => {
+                                    const { icon } = rewardInfo(entry.rewardString);
+                                    const lineTotal = entry.quantity * entry.costPerUnit;
 
-                                return (
-                                    <div key={key} className="flex items-center gap-2 rounded-lg bg-(--muted) p-2">
-                                        <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
-                                            {icon}
-                                        </div>
-                                        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                                            <span className="truncate text-sm font-medium">{entry.label}</span>
-                                            <span className="text-xs text-(--muted-fg)">
-                                                {DAY_LABELS[entry.day]}
-                                                {entry.qtyPerPack > 1 && (
-                                                    <span> &middot; ×{entry.qtyPerPack} each</span>
-                                                )}
-                                            </span>
-                                        </div>
-                                        <div className="flex shrink-0 items-center gap-0.5">
+                                    return (
+                                        <div key={key} className="flex items-center gap-2 rounded-lg bg-(--muted) p-2">
+                                            <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
+                                                {icon}
+                                            </div>
+                                            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                                <span className="truncate text-sm font-medium">{entry.label}</span>
+                                                <span className="text-xs text-(--muted-fg)">
+                                                    {DAY_LABELS[entry.day]}
+                                                    {entry.qtyPerPack > 1 && (
+                                                        <span> &middot; ×{entry.qtyPerPack} each</span>
+                                                    )}
+                                                </span>
+                                            </div>
+                                            <div className="flex shrink-0 items-center gap-0.5">
+                                                <Button
+                                                    size="square-petite"
+                                                    appearance="outline"
+                                                    onPress={() => onSetQty(key, entry.quantity - 1)}>
+                                                    <Minus className="size-3" />
+                                                </Button>
+                                                <span className="min-w-[1.5rem] text-center text-sm font-bold tabular-nums">
+                                                    {entry.quantity}
+                                                </span>
+                                                <Button
+                                                    size="square-petite"
+                                                    appearance="outline"
+                                                    isDisabled={
+                                                        entry.maxQty === undefined
+                                                            ? false
+                                                            : entry.quantity >= entry.maxQty
+                                                    }
+                                                    onPress={() => onSetQty(key, entry.quantity + 1)}>
+                                                    <Plus className="size-3" />
+                                                </Button>
+                                            </div>
+                                            <div className="flex shrink-0 items-center gap-1">
+                                                <span className="text-xs font-semibold text-amber-400">
+                                                    {lineTotal}
+                                                </span>
+                                                <MiscIcon icon="armageddonCurrency" width={12} height={12} />
+                                            </div>
                                             <Button
                                                 size="square-petite"
-                                                appearance="outline"
-                                                onPress={() => onSetQty(key, entry.quantity - 1)}>
-                                                <Minus className="size-3" />
-                                            </Button>
-                                            <span className="min-w-[1.5rem] text-center text-sm font-bold tabular-nums">
-                                                {entry.quantity}
-                                            </span>
-                                            <Button
-                                                size="square-petite"
-                                                appearance="outline"
-                                                isDisabled={
-                                                    entry.maxQty === undefined ? false : entry.quantity >= entry.maxQty
-                                                }
-                                                onPress={() => onSetQty(key, entry.quantity + 1)}>
-                                                <Plus className="size-3" />
+                                                appearance="plain"
+                                                onPress={() => onSetQty(key, 0)}>
+                                                <Trash2 className="size-3.5 text-red-400" />
                                             </Button>
                                         </div>
-                                        <div className="flex shrink-0 items-center gap-1">
-                                            <span className="text-xs font-semibold text-amber-400">{lineTotal}</span>
-                                            <MiscIcon icon="armageddonCurrency" width={12} height={12} />
-                                        </div>
-                                        <Button
-                                            size="square-petite"
-                                            appearance="plain"
-                                            onPress={() => onSetQty(key, 0)}>
-                                            <Trash2 className="size-3.5 text-red-400" />
-                                        </Button>
-                                    </div>
-                                );
-                            })}
-                        </div>
+                                    );
+                                })}
+                            </div>
+                        )}
                     </div>
                 );
             })}
@@ -601,6 +666,7 @@ interface CoverageRow {
     remaining: number;
     availability: Array<{ week: 1 | 2 | 3; days: Day[] }>;
     note?: string;
+    estimatedCost?: number;
 }
 
 function getNeededForRewardType(
@@ -641,7 +707,71 @@ function coverageRowSortPriority(rewardType: string): number {
     if (rewardType.startsWith('heroAscensionOrb')) return 3;
     if (rewardType.startsWith('itemAscensionResource_')) return 4;
     if (['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004'].includes(rewardType)) return 5;
-    return 6;
+    if (rewardType.startsWith('shards_') || rewardType.startsWith('mythicShards_')) return 6;
+    return 7;
+}
+
+// ─── purchased qty modal ─────────────────────────────────────────────────────
+
+interface PurchasedQtyModalProps {
+    isOpen: boolean;
+    entry: CartEntry;
+    icon: JSX.Element;
+    initialPurchased: number;
+    onConfirm: (qty: number) => void;
+    onClose: () => void;
+}
+
+function PurchasedQtyModal({ isOpen, entry, icon, initialPurchased, onConfirm, onClose }: PurchasedQtyModalProps) {
+    const [sliderValue, setSliderValue] = useState(initialPurchased);
+
+    useEffect(() => {
+        if (isOpen) setSliderValue(initialPurchased);
+    }, [isOpen, initialPurchased]);
+
+    return (
+        <Modal
+            isOpen={isOpen}
+            onOpenChange={open => {
+                if (!open) onClose();
+            }}>
+            <Modal.Content size="sm">
+                <Modal.Header>
+                    <Modal.Title className="flex items-center gap-2">
+                        <span className="inline-flex h-9 w-9 items-center justify-center">{icon}</span>
+                        {entry.label}
+                    </Modal.Title>
+                    <Modal.Description>How many did you purchase? (0 = clear)</Modal.Description>
+                </Modal.Header>
+                <Modal.Body>
+                    <div className="flex flex-col gap-4 py-2">
+                        <div className="flex items-center justify-between">
+                            <span className="text-sm text-(--muted-fg)">
+                                Purchased: <span className="font-bold text-(--fg)">{sliderValue}</span>
+                                <span className="text-(--muted-fg)"> / {entry.quantity}</span>
+                            </span>
+                        </div>
+                        <input
+                            type="range"
+                            min={0}
+                            max={entry.quantity}
+                            value={sliderValue}
+                            onChange={event => setSliderValue(Number(event.currentTarget.value))}
+                            className="w-full accent-blue-500"
+                        />
+                    </div>
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button appearance="outline" className="w-full sm:w-auto" onPress={onClose}>
+                        Cancel
+                    </Button>
+                    <Button intent="primary" className="w-full sm:w-auto" onPress={() => onConfirm(sliderValue)}>
+                        {sliderValue === 0 ? 'Clear purchase' : `Purchased ×${sliderValue}`}
+                    </Button>
+                </Modal.Footer>
+            </Modal.Content>
+        </Modal>
+    );
 }
 
 // ─── main page ────────────────────────────────────────────────────────────────
@@ -659,31 +789,29 @@ export const Armageddon = () => {
         xpIncome,
         xpUse,
         armageddon: armageddonState,
+        playerMetadata,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
+    const { userInfo } = useAuth();
+    const hasSync = !!userInfo.tacticusApiKey;
+
     const [week, setWeekState] = useState<1 | 2 | 3>(1);
     const [day, setDayState] = useState<Day>('MON');
-    const [pl, setPlState] = useState<number>(() => armageddonState.powerLevel ?? 1);
-    const [cart, setCart] = useState<CartRecord>(() => {
-        try {
-            return armageddonState.cart ? (JSON.parse(armageddonState.cart) as CartRecord) : {};
-        } catch {
-            return {};
-        }
-    });
+    const pl = playerMetadata.powerLevel ?? 1;
+    const [cart, setCart] = useState<CartRecord>(() => armageddonState.structuredCart ?? {});
+    const [purchased, setPurchased] = useState<Record<string, number>>(() => armageddonState.purchased ?? {});
+    const [purchasedDialogKey, setPurchasedDialogKey] = useState<string | undefined>();
     const [confirmResetWeek, setConfirmResetWeek] = useState<1 | 2 | 3 | undefined>();
+    const [needsSync, setNeedsSync] = useState(false);
+    const needsSyncFirstRender = useRef(true);
     const [coverageExpanded, setCoverageExpanded] = useState(false);
+    const [purchasedExpanded, setPurchasedExpanded] = useState(false);
+    const [dailyPurchasesExpanded, setDailyPurchasesExpanded] = useState(false);
+    const [selectedDateIndex, setSelectedDateIndex] = useState(TODAY_DEFAULT_INDEX);
 
     const setWeek = setWeekState;
     const setDay = setDayState;
-    const setPl = useCallback(
-        (value: number) => {
-            setPlState(value);
-            dispatch.armageddon({ type: 'Update', setting: 'powerLevel', value });
-        },
-        [dispatch]
-    );
 
     // Persist cart whenever it changes (skip initial render to avoid a spurious save on mount)
     const isFirstCartPersist = useRef(true);
@@ -692,8 +820,40 @@ export const Armageddon = () => {
             isFirstCartPersist.current = false;
             return;
         }
-        dispatch.armageddon({ type: 'Update', setting: 'cart', value: JSON.stringify(cart) });
+        dispatch.armageddon({ type: 'Update', setting: 'structuredCart', value: cart });
     }, [cart, dispatch]);
+
+    // Persist purchased whenever it changes
+    const isFirstPurchasedPersist = useRef(true);
+    useEffect(() => {
+        if (isFirstPurchasedPersist.current) {
+            isFirstPurchasedPersist.current = false;
+            return;
+        }
+        dispatch.armageddon({ type: 'Update', setting: 'purchased', value: purchased });
+    }, [purchased, dispatch]);
+
+    // Mark needs-sync when purchases change (after first render)
+    useEffect(() => {
+        if (needsSyncFirstRender.current) {
+            needsSyncFirstRender.current = false;
+            return;
+        }
+        if (hasPurchased) setNeedsSync(true);
+        else setNeedsSync(false);
+    }, [purchased]); // eslint-disable-line react-hooks/exhaustive-deps
+
+    // Remove purchased entries for cart items that have been removed
+    useEffect(() => {
+        const validKeys = new Set(Object.keys(cart));
+        setPurchased(p => {
+            const toRemove = Object.keys(p).filter(k => !validKeys.has(k));
+            if (toRemove.length === 0) return p;
+            const next = { ...p };
+            for (const k of toRemove) delete next[k];
+            return next;
+        });
+    }, [cart]);
 
     // Resolve characters and mows
     const characters = useMemo(
@@ -837,6 +997,17 @@ export const Armageddon = () => {
         });
     }, []);
 
+    const setPurchasedQty = useCallback((key: string, qty: number) => {
+        setPurchased(previous => {
+            if (qty <= 0) {
+                const next = { ...previous };
+                delete next[key];
+                return next;
+            }
+            return { ...previous, [key]: qty };
+        });
+    }, []);
+
     const resetWeek = useCallback((w: 1 | 2 | 3) => {
         setCart(previous => {
             const next = { ...previous };
@@ -921,14 +1092,70 @@ export const Armageddon = () => {
     }, [matchesConditions]);
 
     // ── coverage rows ─────────────────────────────────────────────────────────
-    const cartTotalsByType = useMemo(() => {
+    const effectiveCartTotalsByType = useMemo(() => {
         const totals: Record<string, number> = {};
-        for (const entry of Object.values(cart)) {
+        for (const [key, entry] of Object.entries(cart)) {
+            const unpurchasedQty = Math.max(0, entry.quantity - (purchased[key] ?? 0));
+            if (unpurchasedQty === 0) continue;
             const type = entry.rewardString.split(':')[0];
-            totals[type] = (totals[type] ?? 0) + entry.quantity * entry.qtyPerPack;
+            totals[type] = (totals[type] ?? 0) + unpurchasedQty * entry.qtyPerPack;
         }
         return totals;
-    }, [cart]);
+    }, [cart, purchased]);
+
+    const neededShardsByType = useMemo(() => {
+        const result: Record<string, number> = {};
+        for (const goal of shardsGoals) {
+            const u = GoalUpgradesService.getShardsForGoal(characters, resolvedMows, goal);
+            const neededShards = Math.max(0, u.totalIncrementalShardsNeeded - u.incrementalShardsAcquired);
+            if (neededShards > 0) result[u.shardName] = (result[u.shardName] ?? 0) + neededShards;
+            const neededMythic = Math.max(0, u.totalIncrementalMythicShardsNeeded - u.incrementalMythicShardsAcquired);
+            if (neededMythic > 0) result[u.mythicShardName] = (result[u.mythicShardName] ?? 0) + neededMythic;
+        }
+        return result;
+    }, [shardsGoals, characters, resolvedMows]);
+
+    const hasPurchased = useMemo(() => Object.values(purchased).some(q => q > 0), [purchased]);
+
+    const purchasedItemsByType = useMemo(() => {
+        const map: Record<string, { label: string; icon: JSX.Element; total: number }> = {};
+        for (const [key, purchasedQty] of Object.entries(purchased)) {
+            if (purchasedQty <= 0) continue;
+            const entry = cart[key];
+            if (!entry) continue;
+            const typePrefix = entry.rewardString.split(':')[0];
+            const totalItems = purchasedQty * entry.qtyPerPack;
+            if (map[typePrefix]) {
+                map[typePrefix].total += totalItems;
+            } else {
+                const { icon, label } = rewardInfo(entry.rewardString);
+                map[typePrefix] = { label, icon, total: totalItems };
+            }
+        }
+        return Object.entries(map).filter(([, v]) => v.total > 0);
+    }, [cart, purchased]);
+
+    // Cheapest paid product per reward-type prefix (minimize cost per item unit).
+    const cheapestOptionByType = useMemo(() => {
+        const map = new Map<string, { qtyPerPack: number; costPerPack: number }>();
+        for (let w = 1; w <= 3; w++) {
+            const wd = (armageddonData as unknown as ArmageddonWeek[])[w - 1];
+            for (const slot of wd.products) {
+                for (const d of DAYS) {
+                    const match = slot.find(p => cronMatchesDay(p.cronSchedule, d) && matchesConditions(p));
+                    if (!match || match.freeOffer !== undefined) continue;
+                    const [typePrefix, qtyString] = match.reward.split(':');
+                    const qty = qtyString === undefined ? 1 : Number.parseInt(qtyString, 10);
+                    const cost = match.cost.amount;
+                    const existing = map.get(typePrefix);
+                    if (!existing || cost / qty < existing.costPerPack / existing.qtyPerPack) {
+                        map.set(typePrefix, { qtyPerPack: qty, costPerPack: cost });
+                    }
+                }
+            }
+        }
+        return map;
+    }, [matchesConditions]);
 
     const coverageRows = useMemo<CoverageRow[]>(() => {
         const XP_BOOK_TYPES = new Set(['xpRare', 'xpLegendary', 'xpMythic']);
@@ -938,7 +1165,7 @@ export const Armageddon = () => {
             if (XP_BOOK_TYPES.has(typePrefix)) continue;
             const needed = getNeededForRewardType(typePrefix, neededBadges, neededOrbs, neededForgeBadges);
             if (needed === 0) continue;
-            const cartTotal = cartTotalsByType[typePrefix] ?? 0;
+            const cartTotal = effectiveCartTotalsByType[typePrefix] ?? 0;
             const availability = [...weekDayMap.entries()]
                 .toSorted(([a], [b]) => a - b)
                 .map(([w, daysSet]) => ({
@@ -946,14 +1173,21 @@ export const Armageddon = () => {
                     days: DAYS.filter(d => daysSet.has(d)),
                 }));
             const { icon, label } = rewardInfo(typePrefix);
+            const remaining = Math.max(0, needed - cartTotal);
+            const cheapest = cheapestOptionByType.get(typePrefix);
+            const estimatedCost =
+                remaining > 0 && cheapest
+                    ? Math.ceil(remaining / cheapest.qtyPerPack) * cheapest.costPerPack
+                    : undefined;
             rows.push({
                 rewardType: typePrefix,
                 label,
                 icon,
                 needed,
                 cartTotal,
-                remaining: Math.max(0, needed - cartTotal),
+                remaining,
                 availability,
+                estimatedCost,
             });
         }
 
@@ -996,9 +1230,8 @@ export const Armageddon = () => {
                 xpMythic: XP_BOOK_VALUE[Rarity.Mythic],
             };
             let cartXp = 0;
-            for (const entry of Object.values(cart)) {
-                const xpPerBook = xpBookXpValues[entry.rewardString.split(':')[0]];
-                if (xpPerBook !== undefined) cartXp += entry.quantity * entry.qtyPerPack * xpPerBook;
+            for (const [xpType, xpValue] of Object.entries(xpBookXpValues)) {
+                cartXp += (effectiveCartTotalsByType[xpType] ?? 0) * xpValue;
             }
             const cartBooks = Math.floor(cartXp / xpBookValue);
             const availability = [...xpWeekDayMap.entries()]
@@ -1007,14 +1240,21 @@ export const Armageddon = () => {
                     week: w,
                     days: DAYS.filter(d => daysSet.has(d)),
                 }));
+            const xpRemaining = Math.max(0, neededBooks - cartBooks);
+            const xpCheapest = cheapestOptionByType.get(xpBook.type);
+            const xpEstimatedCost =
+                xpRemaining > 0 && xpCheapest
+                    ? Math.ceil(xpRemaining / xpCheapest.qtyPerPack) * xpCheapest.costPerPack
+                    : undefined;
             rows.push({
                 rewardType: xpBook.type,
                 label: xpBook.label,
                 icon: <MiscIcon icon={xpBook.iconKey} width={ICON_SIZE} height={ICON_SIZE} />,
                 needed: neededBooks,
                 cartTotal: cartBooks,
-                remaining: Math.max(0, neededBooks - cartBooks),
+                remaining: xpRemaining,
                 availability,
+                estimatedCost: xpEstimatedCost,
             });
         }
 
@@ -1022,13 +1262,19 @@ export const Armageddon = () => {
         for (const upg of MYTHIC_UNCRAFTABLE_UPGRADES) {
             const needed = mythicMissingByUpgradeId[upg.id] ?? 0;
             if (needed === 0) continue;
-            const cartTotal = cartTotalsByType[upg.id] ?? 0;
+            const cartTotal = effectiveCartTotalsByType[upg.id] ?? 0;
             const weekDayMap = allWeekDayAvailability.get(upg.id);
             const availability = weekDayMap
                 ? [...weekDayMap.entries()]
                       .toSorted(([a], [b]) => a - b)
                       .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }))
                 : [];
+            const upgRemaining = Math.max(0, needed - cartTotal);
+            const upgCheapest = cheapestOptionByType.get(upg.id);
+            const upgEstimatedCost =
+                upgRemaining > 0 && upgCheapest
+                    ? Math.ceil(upgRemaining / upgCheapest.qtyPerPack) * upgCheapest.costPerPack
+                    : undefined;
             rows.push({
                 rewardType: upg.id,
                 label: upg.material,
@@ -1042,29 +1288,65 @@ export const Armageddon = () => {
                 ),
                 needed,
                 cartTotal,
-                remaining: Math.max(0, needed - cartTotal),
+                remaining: upgRemaining,
                 availability,
+                estimatedCost: upgEstimatedCost,
             });
         }
 
         // ── Gold ───────────────────────────────────────────────────────────
         if (totalGold > 0) {
-            const cartGold = cartTotalsByType['gold'] ?? 0;
+            const cartGold = effectiveCartTotalsByType['gold'] ?? 0;
             const goldWeekDayMap = allWeekDayAvailability.get('gold');
             const goldAvailability = goldWeekDayMap
                 ? [...goldWeekDayMap.entries()]
                       .toSorted(([a], [b]) => a - b)
                       .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }))
                 : [];
+            const goldRemaining = Math.max(0, totalGold - cartGold);
+            const goldCheapest = cheapestOptionByType.get('gold');
+            const goldEstimatedCost =
+                goldRemaining > 0 && goldCheapest
+                    ? Math.ceil(goldRemaining / goldCheapest.qtyPerPack) * goldCheapest.costPerPack
+                    : undefined;
             rows.push({
                 rewardType: 'gold',
                 label: 'Gold',
                 icon: <MiscIcon icon="coin" width={ICON_SIZE} height={ICON_SIZE} />,
                 needed: totalGold,
                 cartTotal: cartGold,
-                remaining: Math.max(0, totalGold - cartGold),
+                remaining: goldRemaining,
                 availability: goldAvailability,
                 note: 'The API does not tell us how many coins you have, so this is the total you need, not the total you are missing.',
+                estimatedCost: goldEstimatedCost,
+            });
+        }
+
+        // ── Character shards ──────────────────────────────────────────────────────
+        for (const [shardType, needed] of Object.entries(neededShardsByType)) {
+            if (needed === 0) continue;
+            const weekDayMap = allWeekDayAvailability.get(shardType);
+            if (!weekDayMap) continue; // only show if purchasable in the shop
+            const cartTotal = effectiveCartTotalsByType[shardType] ?? 0;
+            const availability = [...weekDayMap.entries()]
+                .toSorted(([a], [b]) => a - b)
+                .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }));
+            const shardRemaining = Math.max(0, needed - cartTotal);
+            const shardCheapest = cheapestOptionByType.get(shardType);
+            const shardEstimatedCost =
+                shardRemaining > 0 && shardCheapest
+                    ? Math.ceil(shardRemaining / shardCheapest.qtyPerPack) * shardCheapest.costPerPack
+                    : undefined;
+            const { icon, label } = rewardInfo(shardType);
+            rows.push({
+                rewardType: shardType,
+                label,
+                icon,
+                needed,
+                cartTotal,
+                remaining: shardRemaining,
+                availability,
+                estimatedCost: shardEstimatedCost,
             });
         }
 
@@ -1078,12 +1360,13 @@ export const Armageddon = () => {
         neededBadges,
         neededOrbs,
         neededForgeBadges,
-        cartTotalsByType,
+        effectiveCartTotalsByType,
         neededXp,
-        cart,
         pl,
         mythicMissingByUpgradeId,
         totalGold,
+        neededShardsByType,
+        cheapestOptionByType,
     ]);
 
     const weekData: ArmageddonWeek = (armageddonData as unknown as ArmageddonWeek[])[week - 1];
@@ -1113,7 +1396,17 @@ export const Armageddon = () => {
         <div className="flex flex-col gap-6 p-4">
             {/* Header */}
             <div className="flex flex-wrap items-center justify-between gap-2">
-                <h1 className="text-2xl font-bold">Armageddon Shop</h1>
+                <div className="flex items-center gap-2">
+                    <h1 className="text-2xl font-bold">Armageddon Shop</h1>
+                    {hasSync && (
+                        <div className="relative">
+                            <SyncButton showText={false} iconButton={true} onAfterSync={() => setNeedsSync(false)} />
+                            {needsSync && (
+                                <span className="absolute -top-0.5 -right-0.5 size-2.5 rounded-full bg-orange-500 ring-2 ring-(--bg)" />
+                            )}
+                        </div>
+                    )}
+                </div>
                 <span className="text-sm text-(--muted-fg)">{resolvedSlots.length} offers available</span>
             </div>
 
@@ -1122,7 +1415,17 @@ export const Armageddon = () => {
                 {/* Player Level */}
                 <div className="flex flex-col gap-0.5">
                     <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Power Level</span>
-                    <NumberInput label="" min={1} max={99} value={pl} valueChange={setPl} />
+                    {playerMetadata.powerLevel === undefined ? (
+                        <AccessibleTooltip title="Power level is retrieved from the Tacticus API. Sync to load your power level.">
+                            <span>
+                                <SyncButton showText={true} />
+                            </span>
+                        </AccessibleTooltip>
+                    ) : (
+                        <p className="flex items-center gap-1 text-sm font-semibold tabular-nums">
+                            {playerMetadata.powerLevel}
+                        </p>
+                    )}
                     <p className="mt-1 flex items-center gap-1 text-xs text-(--muted-fg)">
                         <span>
                             {'Tier: '}
@@ -1170,17 +1473,195 @@ export const Armageddon = () => {
                             <button
                                 key={d}
                                 onClick={() => setDay(d)}
-                                className={`rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
+                                className={`flex flex-col items-center rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
                                     day === d
                                         ? 'bg-blue-600 text-white'
                                         : 'border border-(--border) bg-(--overlay) hover:border-blue-500'
                                 }`}>
-                                {DAY_LABELS[d].slice(0, 3)}
+                                <span>{DAY_LABELS[d].slice(0, 3)}</span>
+                                <span className="text-[10px] font-normal tabular-nums opacity-70">
+                                    {getEventDate(week, d)}
+                                </span>
                             </button>
                         ))}
                     </div>
                 </div>
             </div>
+
+            {/* Daily Purchases */}
+            {(() => {
+                const { week: selWeek, day: selDay } = ALL_EVENT_DATES[selectedDateIndex];
+                const dayEntries = Object.entries(cart).filter(
+                    ([, entry]) => entry.week === selWeek && entry.day === selDay
+                );
+                const dayTotal = dayEntries.reduce((s, [, entry]) => s + entry.quantity * entry.costPerUnit, 0);
+                const dateLabel = `${DAY_LABELS[selDay]}, ${getEventDate(selWeek, selDay)}`;
+                return (
+                    <div className="rounded-xl border border-(--border) bg-(--overlay)">
+                        <button
+                            onClick={() => setDailyPurchasesExpanded(previous => !previous)}
+                            className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--muted)">
+                            <div className="flex items-center gap-2">
+                                <span className="font-semibold">Daily Purchases</span>
+                                <select
+                                    value={selectedDateIndex}
+                                    onClick={event => event.stopPropagation()}
+                                    onChange={event => setSelectedDateIndex(Number(event.currentTarget.value))}
+                                    className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs text-(--fg)">
+                                    {ALL_EVENT_DATES.map(({ week: w, day: d }, index) => (
+                                        <option key={index} value={index}>
+                                            {`Week ${w} · ${DAY_LABELS[d].slice(0, 3)} ${getEventDate(w, d)}${index === TODAY_EVENT_INDEX ? ' (Today)' : ''}`}
+                                        </option>
+                                    ))}
+                                </select>
+                            </div>
+                            <ChevronDown
+                                className={`size-4 text-(--muted-fg) transition-transform duration-200 ${
+                                    dailyPurchasesExpanded ? 'rotate-180' : ''
+                                }`}
+                            />
+                        </button>
+
+                        {dailyPurchasesExpanded && (
+                            <div className="flex flex-col gap-3 border-t border-(--border) p-4">
+                                {dayEntries.length === 0 ? (
+                                    <p className="text-sm text-(--muted-fg)">No purchases planned for {dateLabel}.</p>
+                                ) : (
+                                    <>
+                                        <div className="flex flex-col gap-2">
+                                            {dayEntries.map(([key, entry]) => {
+                                                const { icon } = rewardInfo(entry.rewardString);
+                                                const lineTotal = entry.quantity * entry.costPerUnit;
+                                                const purchasedQty = purchased[key] ?? 0;
+                                                const isFullyPurchased = purchasedQty >= entry.quantity;
+                                                return (
+                                                    <div
+                                                        key={key}
+                                                        className={`flex items-center gap-2 rounded-lg bg-(--muted) p-2 ${
+                                                            isFullyPurchased ? 'opacity-60' : ''
+                                                        }`}>
+                                                        <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
+                                                            {icon}
+                                                        </div>
+                                                        <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                                            <span
+                                                                className={`truncate text-sm font-medium ${
+                                                                    isFullyPurchased ? 'line-through' : ''
+                                                                }`}>
+                                                                {entry.label}
+                                                            </span>
+                                                            <div className="flex flex-wrap items-center gap-1.5">
+                                                                {entry.qtyPerPack > 1 && (
+                                                                    <span className="text-xs text-(--muted-fg)">
+                                                                        ×{entry.qtyPerPack} each
+                                                                    </span>
+                                                                )}
+                                                                {purchasedQty > 0 && (
+                                                                    <span
+                                                                        className={`text-xs font-medium ${
+                                                                            isFullyPurchased
+                                                                                ? 'text-green-400'
+                                                                                : 'text-amber-400'
+                                                                        }`}>
+                                                                        purchased {purchasedQty}/{entry.quantity}
+                                                                    </span>
+                                                                )}
+                                                            </div>
+                                                        </div>
+                                                        <div className="flex shrink-0 items-center gap-1">
+                                                            <AccessibleTooltip
+                                                                title={
+                                                                    isFullyPurchased
+                                                                        ? 'Clear purchase'
+                                                                        : 'Mark full quantity as purchased'
+                                                                }>
+                                                                <button
+                                                                    onClick={() =>
+                                                                        setPurchasedQty(
+                                                                            key,
+                                                                            isFullyPurchased ? 0 : entry.quantity
+                                                                        )
+                                                                    }
+                                                                    className={`flex size-7 items-center justify-center rounded-md border transition-colors ${
+                                                                        isFullyPurchased
+                                                                            ? 'border-green-500 bg-green-500/20 text-green-400'
+                                                                            : 'border-(--border) hover:border-green-500 hover:text-green-400'
+                                                                    }`}>
+                                                                    <Check className="size-3.5" />
+                                                                </button>
+                                                            </AccessibleTooltip>
+                                                            <AccessibleTooltip title="Mark partial quantity as purchased">
+                                                                <button
+                                                                    onClick={() => setPurchasedDialogKey(key)}
+                                                                    className="flex size-7 items-center justify-center rounded-md border border-(--border) transition-colors hover:border-blue-500 hover:text-blue-400">
+                                                                    <SlidersHorizontal className="size-3.5" />
+                                                                </button>
+                                                            </AccessibleTooltip>
+                                                        </div>
+                                                        <div className="flex shrink-0 items-center gap-1">
+                                                            <span className="text-xs font-semibold text-amber-400 tabular-nums">
+                                                                {lineTotal.toLocaleString()}
+                                                            </span>
+                                                            <MiscIcon
+                                                                icon="armageddonCurrency"
+                                                                width={12}
+                                                                height={12}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                );
+                                            })}
+                                        </div>
+                                        <div className="flex items-center justify-end gap-1 border-t border-(--border) pt-2 text-sm">
+                                            <span className="text-(--muted-fg)">Day total:</span>
+                                            <span className="font-semibold text-amber-400 tabular-nums">
+                                                {dayTotal.toLocaleString()}
+                                            </span>
+                                            <MiscIcon icon="armageddonCurrency" width={14} height={14} />
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                        )}
+                    </div>
+                );
+            })()}
+
+            {/* Purchased items summary */}
+            {purchasedItemsByType.length > 0 && (
+                <div className="rounded-xl border border-(--border) bg-(--overlay)">
+                    <button
+                        onClick={() => setPurchasedExpanded(previous => !previous)}
+                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--muted)">
+                        <div className="flex items-center gap-2">
+                            <span className="font-semibold">Purchased Items</span>
+                            <span className="rounded-full bg-(--secondary) px-2 py-0.5 text-xs text-(--muted-fg)">
+                                {purchasedItemsByType.length === 1 ? '1 type' : `${purchasedItemsByType.length} types`}
+                            </span>
+                        </div>
+                        <ChevronDown
+                            className={`size-4 text-(--muted-fg) transition-transform duration-200 ${
+                                purchasedExpanded ? 'rotate-180' : ''
+                            }`}
+                        />
+                    </button>
+                    {purchasedExpanded && (
+                        <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-(--border) p-4">
+                            {purchasedItemsByType.map(([type, info]) => (
+                                <div key={type} className="flex items-center gap-2">
+                                    <div className="flex h-8 w-8 shrink-0 items-center justify-center">{info.icon}</div>
+                                    <div className="flex flex-col leading-tight">
+                                        <span className="text-xs font-medium">{info.label}</span>
+                                        <span className="text-xs font-semibold text-green-400 tabular-nums">
+                                            ×{info.total.toLocaleString()}
+                                        </span>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    )}
+                </div>
+            )}
 
             {/* Missing resources coverage */}
             {coverageRows.length > 0 && (
@@ -1229,7 +1710,7 @@ export const Armageddon = () => {
                                             </span>
                                             {row.note && (
                                                 <LazyTooltip title={row.note}>
-                                                    <Info className="size-3.5 cursor-help text-(--muted-fg)" />
+                                                    <TriangleAlert className="size-3.5 cursor-help text-amber-400" />
                                                 </LazyTooltip>
                                             )}
                                         </span>
@@ -1252,6 +1733,15 @@ export const Armageddon = () => {
                                                 ? '✓ Covered'
                                                 : `${row.rewardType === 'gold' ? formatGold(row.remaining) : row.remaining.toLocaleString()} remaining`}
                                         </span>
+                                        {row.remaining > 0 && row.estimatedCost !== undefined && (
+                                            <span className="flex items-center gap-0.5 text-xs text-(--muted-fg)">
+                                                ≈
+                                                <span className="font-semibold text-amber-400 tabular-nums">
+                                                    {row.estimatedCost.toLocaleString()}
+                                                </span>
+                                                <MiscIcon icon="armageddonCurrency" width={11} height={11} />
+                                            </span>
+                                        )}
                                     </div>
 
                                     {/* Availability chips */}
@@ -1355,6 +1845,21 @@ export const Armageddon = () => {
                     </Modal.Footer>
                 </Modal.Content>
             </Modal>
+
+            {purchasedDialogKey !== null && cart[purchasedDialogKey ?? ''] && (
+                <PurchasedQtyModal
+                    key={purchasedDialogKey}
+                    isOpen={true}
+                    entry={cart[purchasedDialogKey ?? '']!}
+                    icon={rewardInfo(cart[purchasedDialogKey ?? '']!.rewardString).icon}
+                    initialPurchased={purchased[purchasedDialogKey ?? ''] ?? 0}
+                    onConfirm={qty => {
+                        setPurchasedQty(purchasedDialogKey ?? '', qty);
+                        setPurchasedDialogKey(undefined);
+                    }}
+                    onClose={() => setPurchasedDialogKey(undefined)}
+                />
+            )}
         </div>
     );
 };
