@@ -1,52 +1,26 @@
-import React, { useMemo, useContext, useCallback } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { cn } from '@/fsd/5-shared/lib';
 import { Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { BookSelect } from '@/fsd/5-shared/ui/selects';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { DecimalSpinner } from './decimal-spinner';
-import { ArenaLeague, XpIncomeState } from './models';
+import { CalculatorCard } from './calculator-card';
+import { computeSources } from './compute-sources';
+import { HeroRail } from './hero-rail';
+import { XpIncomeState } from './models';
 import { useDebouncedState } from './use-debounced-state';
-import {
-    blueStarCharacters,
-    bossesPerLoop,
-    eliteEnergyPerRaid,
-    nonEliteEnergyPerRaid,
-    XpIncomeService,
-} from './xp-income.service';
+import { blueStarCharacters } from './xp-income.service';
 
-const arenaName: Record<ArenaLeague, string> = {
-    [ArenaLeague.honorGuard]: 'Honor Guard',
-    [ArenaLeague.captain]: 'Captains',
-    [ArenaLeague.chapterMaster]: 'Chapter Master',
-};
-
-const eliteEnergyMax = 600;
-const nonEliteEnergyMax = 600;
+type SourceId = 'arena' | 'raid' | 'at' | 'other';
 
 export const XpIncome: React.FC = () => {
     const { characters, xpIncome } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
-    const {
-        manualCodicesPerDay,
-        defaultCodexToUse,
-        arenaLeague,
-        loopsRaids,
-        clearRarity,
-        useATForCodices,
-        hasBlueStarMoW,
-        additionalCodicesPerWeek,
-        onslaughtMythicWinged,
-        incursionLegendaryLevel,
-    } = xpIncome;
-
+    // ── Debounced slider/input values ──────────────────────────────
     const [raidLoops, setRaidLoops] = useDebouncedState('raidLoops', xpIncome.raidLoops, xpIncome);
     const [extraBossesAfterLoop, setExtraBossesAfterLoop] = useDebouncedState(
         'extraBossesAfterLoop',
@@ -69,20 +43,19 @@ export const XpIncome: React.FC = () => {
         xpIncome
     );
 
-    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
-
+    // ── Store helpers ──────────────────────────────────────────────
     const dispatchUpdate = useCallback(
         (key: keyof XpIncomeState, value: XpIncomeState[keyof XpIncomeState]) => {
             dispatch.xpIncome({
                 type: 'SaveXpIncomeState',
-                value: {
-                    ...xpIncome,
-                    [key]: value,
-                },
+                value: { ...xpIncome, [key]: value },
             });
         },
         [dispatch, xpIncome]
     );
+
+    // ── Roster-derived blue-star char IDs ─────────────────────────
+    const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
     const blueStarCharIds = useMemo(
         () =>
@@ -96,9 +69,10 @@ export const XpIncome: React.FC = () => {
         [resolvedCharacters]
     );
 
-    const estimatedCodicesPerWeek = useMemo(
+    // ── Per-source breakdown ───────────────────────────────────────
+    const sources = useMemo(
         () =>
-            XpIncomeService.estimateWeeklyCodexIncome(
+            computeSources(
                 xpIncome,
                 blueStarCharIds,
                 raidLoops,
@@ -118,371 +92,84 @@ export const XpIncome: React.FC = () => {
         ]
     );
 
-    const estimatedCodicesPerDay = estimatedCodicesPerWeek / 7;
+    const helperWeekly = useMemo(() => sources.reduce((sum, s) => sum + s.weekly, 0), [sources]);
+    const helperDaily = helperWeekly / 7;
+
+    // ── Accordion state (single-expand) ───────────────────────────
+    const [expanded, setExpanded] = useState<Record<SourceId, boolean>>({
+        arena: false,
+        raid: false,
+        at: false,
+        other: false,
+    });
+
+    const toggleExpanded = useCallback((id: SourceId) => {
+        setExpanded(previous => ({
+            arena: false,
+            raid: false,
+            at: false,
+            other: false,
+            [id]: !previous[id],
+        }));
+    }, []);
+
+    // ── Apply calculator total to manual field ─────────────────────
+    const handleApply = useCallback(() => {
+        dispatchUpdate('manualCodicesPerDay', Math.round(helperDaily * 100) / 100);
+    }, [dispatchUpdate, helperDaily]);
+
+    const chosenName = Rarity[xpIncome.defaultCodexToUse ?? Rarity.Legendary];
 
     return (
-        <div className="mx-auto max-w-2xl rounded-lg bg-white p-5 font-sans text-gray-800 shadow-lg dark:bg-gray-900 dark:text-white">
-            <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                <DecimalSpinner
-                    label={`${Rarity[defaultCodexToUse ?? Rarity.Legendary]} Codices / Day`}
-                    value={manualCodicesPerDay}
-                    onChange={value => dispatchUpdate('manualCodicesPerDay', value)}
-                />
-            </div>
+        <>
+            <h2>XP Income</h2>
+            <p className="-mt-1 mb-5 max-w-2xl text-sm text-[var(--muted-fg)]">
+                Pick your codex rarity, then tell us how many you earn per day. Use the calculator on the left if
+                you&apos;d like help.
+            </p>
 
-            <div className="mb-5 rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                <BookSelect
-                    label="Default XP Codex for Calculations"
-                    tooltip="This controls which codex rarity is used to display and calculate XP requirements. Smaller codices (e.g. Common) show higher counts with less waste. Larger codices (e.g. Mythic) show lower counts but may round up to cover remaining XP, costing more than needed."
-                    value={defaultCodexToUse ?? Rarity.Legendary}
-                    valueChanges={v => dispatchUpdate('defaultCodexToUse', v)}
-                />
-            </div>
-
-            <hr className="my-5 border-gray-300 dark:border-gray-700" />
-
-            <h3 className="mb-4 text-lg font-semibold">Let Me Help You Estimate</h3>
-
-            <div className="rounded-lg border border-gray-200 bg-gray-50 p-4 dark:border-gray-700 dark:bg-gray-800">
-                <h4 className="mb-2 font-semibold">Arena League</h4>
-                <select
-                    value={arenaLeague}
-                    onChange={event => dispatchUpdate('arenaLeague', Number(event.target.value) as ArenaLeague)}
-                    className="rounded-md border border-gray-300 bg-white p-2 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white">
-                    {Object.values(ArenaLeague)
-                        .filter(league => typeof league === 'number')
-                        .map(league => (
-                            <option key={league} value={league}>
-                                {arenaName[league]}
-                            </option>
-                        ))}
-                </select>
-
-                <h4 className="mt-5 font-semibold">Guild Raid</h4>
-                <p>Do you loop guild raids?</p>
-                <div className="mt-2 mb-4 flex gap-5">
-                    <label>
-                        <input
-                            type="radio"
-                            name="loopsRaids"
-                            value="yes"
-                            checked={loopsRaids === 'yes'}
-                            onChange={() => dispatchUpdate('loopsRaids', 'yes')}
-                            className="mr-2"
-                        />{' '}
-                        Yes
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="loopsRaids"
-                            value="no"
-                            checked={loopsRaids === 'no'}
-                            onChange={() => dispatchUpdate('loopsRaids', 'no')}
-                            className="mr-2"
-                        />{' '}
-                        No
-                    </label>
+            {/* Responsive 2-column grid:
+                  ≥ 1100px → calculator left (flex), hero rail right (380px sticky)
+                  < 1100px → single column, hero first */}
+            <div className="grid items-start gap-5 [@media(min-width:1100px)]:grid-cols-[minmax(0,1fr)_380px]">
+                <div className="order-2 min-w-0 [@media(min-width:1100px)]:order-1">
+                    <CalculatorCard
+                        state={xpIncome}
+                        sources={sources}
+                        helperWeekly={helperWeekly}
+                        helperDaily={helperDaily}
+                        chosenName={chosenName}
+                        expanded={expanded}
+                        onToggle={toggleExpanded}
+                        blueStarCharIds={blueStarCharIds}
+                        resolvedCharacters={resolvedCharacters}
+                        raidLoops={raidLoops}
+                        setRaidLoops={setRaidLoops}
+                        extraBossesAfterLoop={extraBossesAfterLoop}
+                        setExtraBossesAfterLoop={setExtraBossesAfterLoop}
+                        additionalBosses={additionalBosses}
+                        setAdditionalBosses={setAdditionalBosses}
+                        eliteEnergyPerDay={eliteEnergyPerDay}
+                        setEliteEnergyPerDay={setEliteEnergyPerDay}
+                        nonEliteEnergyPerDay={nonEliteEnergyPerDay}
+                        setNonEliteEnergyPerDay={setNonEliteEnergyPerDay}
+                        onUpdate={dispatchUpdate}
+                        onApply={handleApply}
+                    />
                 </div>
-
-                <div
-                    className={`mt-3 rounded-md border-l-4 p-3 ${loopsRaids === 'yes' ? 'border-orange-500' : 'border-green-500'} bg-gray-100 dark:bg-gray-700`}>
-                    {loopsRaids === 'yes' ? (
-                        <>
-                            <p>
-                                Loops Done: <span className="text-lg font-bold">{raidLoops}</span>
-                            </p>
-                            <input
-                                type="range"
-                                min="1"
-                                max="15"
-                                value={raidLoops}
-                                onChange={event => setRaidLoops(Number.parseInt(event.target.value))}
-                                className="mt-1 w-full accent-orange-500"
-                            />
-                            <p className="mt-3">
-                                Extra Bosses (after final full loop):{' '}
-                                <span className="text-lg font-bold">{extraBossesAfterLoop}</span>
-                            </p>
-                            <input
-                                type="range"
-                                min="0"
-                                max={bossesPerLoop - 1}
-                                value={extraBossesAfterLoop}
-                                onChange={event => setExtraBossesAfterLoop(Number.parseInt(event.target.value))}
-                                className="mt-1 w-full accent-orange-500"
-                            />
-                        </>
-                    ) : (
-                        <>
-                            <p className="mb-2">Highest Rarity Fully Cleared:</p>
-                            <select
-                                value={clearRarity}
-                                onChange={event =>
-                                    dispatchUpdate('clearRarity', Number.parseInt(event.target.value, 10) as Rarity)
-                                }
-                                className="rounded-md border border-gray-300 bg-white p-2 dark:border-gray-500 dark:bg-gray-600 dark:text-white">
-                                {[Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic].map(rarity => (
-                                    <option key={rarity} value={rarity}>
-                                        {Rarity[rarity]}
-                                    </option>
-                                ))}
-                            </select>
-                            <p className="mt-3">
-                                Additional Bosses Cleared: <span className="text-lg font-bold">{additionalBosses}</span>
-                            </p>
-                            <input
-                                type="range"
-                                min="0"
-                                max="5"
-                                value={additionalBosses}
-                                onChange={event => setAdditionalBosses(Number.parseInt(event.target.value))}
-                                className="mt-1 w-full accent-green-500"
-                            />
-                        </>
-                    )}
-                </div>
-
-                <h4 className="mt-5 font-semibold">AT Purchases (via Blue Star Characters)</h4>
-                <p>Do you use AT to buy codices?</p>
-                <div className="mt-2 mb-4 flex gap-5">
-                    <label>
-                        <input
-                            type="radio"
-                            name="useATForCodices"
-                            value="yes"
-                            checked={useATForCodices === 'yes'}
-                            onChange={() => dispatchUpdate('useATForCodices', 'yes')}
-                            className="mr-2"
-                        />{' '}
-                        Yes
-                    </label>
-                    <label>
-                        <input
-                            type="radio"
-                            name="useATForCodices"
-                            value="no"
-                            checked={useATForCodices === 'no'}
-                            onChange={() => dispatchUpdate('useATForCodices', 'no')}
-                            className="mr-2"
-                        />{' '}
-                        No
-                    </label>
-                </div>
-
-                {useATForCodices === 'yes' && (
-                    <div className="mt-3 rounded-md border-l-4 border-yellow-500 bg-gray-100 p-3 dark:bg-gray-700">
-                        <p className="mb-2 font-medium">Residual AT Sources:</p>
-                        <div className="flex flex-wrap gap-4">
-                            {blueStarCharacters.map(char => {
-                                const isStarred =
-                                    (resolvedCharacters.find(c => c.snowprintId === char.id)?.stars ??
-                                        RarityStars.None) >= RarityStars.OneBlueStar;
-
-                                return (
-                                    <div
-                                        key={char.id}
-                                        className="relative"
-                                        title={`${CharactersService.charactersData.find(c => c.snowprintId === char.id)?.shortName ?? char.id} (${char.shardsPerWeek} S/W)`}>
-                                        {
-                                            <UnitShardIcon
-                                                icon={
-                                                    CharactersService.charactersData.find(
-                                                        c => c.snowprintId === char.id
-                                                    )?.roundIcon ?? ''
-                                                }
-                                            />
-                                        }
-
-                                        <div
-                                            className={cn(
-                                                `absolute top-0 right-0 flex h-5 w-5 items-center justify-center rounded-full border-2 text-xs font-bold transition-all`,
-                                                isStarred && // Appearance when starred (visible)
-                                                    'scale-100 border-white bg-green-500 text-white opacity-100 dark:border-gray-900',
-                                                isStarred || 'scale-0 opacity-0' // Hidden when not starred
-                                            )}>
-                                            ✓
-                                        </div>
-                                    </div>
-                                );
-                            })}
-                        </div>
-
-                        <h5 className="mt-6 border-t border-gray-300 pt-3 text-sm font-medium dark:border-gray-600">
-                            Incursion Farming (MoW)
-                        </h5>
-                        <p>MoW at blue star for Incursion farming?</p>
-                        <div className="mt-2 mb-4 flex gap-5">
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="hasBlueStarMoW"
-                                    value="yes"
-                                    checked={hasBlueStarMoW === 'yes'}
-                                    onChange={() => dispatchUpdate('hasBlueStarMoW', 'yes')}
-                                    className="mr-2"
-                                />{' '}
-                                Yes
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="hasBlueStarMoW"
-                                    value="no"
-                                    checked={hasBlueStarMoW === 'no'}
-                                    onChange={() => dispatchUpdate('hasBlueStarMoW', 'no')}
-                                    className="mr-2"
-                                />{' '}
-                                No
-                            </label>
-                        </div>
-
-                        {hasBlueStarMoW === 'yes' && (
-                            <div className="mt-2 border-l border-gray-400 pl-4 dark:border-gray-600">
-                                <p className="mb-2 text-sm font-semibold">Which Legendary Level are you farming?</p>
-                                <div className="flex gap-4">
-                                    <label className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            name="incursionLegendaryLevel"
-                                            value="L10"
-                                            checked={incursionLegendaryLevel === 'L10'}
-                                            onChange={() => dispatchUpdate('incursionLegendaryLevel', 'L10')}
-                                            className="mr-2"
-                                        />
-                                        Legendary 10
-                                    </label>
-                                    <label className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            name="incursionLegendaryLevel"
-                                            value="L12"
-                                            checked={incursionLegendaryLevel === 'L12'}
-                                            onChange={() => dispatchUpdate('incursionLegendaryLevel', 'L12')}
-                                            className="mr-2"
-                                        />
-                                        Legendary 12
-                                    </label>
-                                    <label className="flex items-center">
-                                        <input
-                                            type="radio"
-                                            name="incursionLegendaryLevel"
-                                            value="M"
-                                            checked={incursionLegendaryLevel === 'M'}
-                                            onChange={() => dispatchUpdate('incursionLegendaryLevel', 'M')}
-                                            className="mr-2"
-                                        />
-                                        Mythic
-                                    </label>
-                                </div>
-                            </div>
-                        )}
-
-                        <h5 className="mt-4 border-t border-gray-300 pt-3 text-sm font-medium dark:border-gray-600">
-                            Onslaught Farming Income
-                        </h5>
-                        <p>Are you onslaughting a Mythic Winged character?</p>
-                        <div className="mt-2 mb-4 flex gap-5">
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="onslaughtMythicWinged"
-                                    value="yes"
-                                    checked={onslaughtMythicWinged}
-                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', true)}
-                                    className="mr-2"
-                                />{' '}
-                                Yes
-                            </label>
-                            <label>
-                                <input
-                                    type="radio"
-                                    name="onslaughtMythicWinged"
-                                    value="no"
-                                    checked={!onslaughtMythicWinged}
-                                    onChange={() => dispatchUpdate('onslaughtMythicWinged', false)}
-                                    className="mr-2"
-                                />{' '}
-                                No
-                            </label>
-                        </div>
-
-                        <h5 className="mt-4 border-t border-gray-300 pt-3 text-sm font-medium dark:border-gray-600">
-                            Elite Node Energy Usage
-                        </h5>
-                        <div className="py-2">
-                            <label className="mb-2 block text-sm">
-                                Energy spent on Elite Nodes/Day ({eliteEnergyPerRaid} energy increments):
-                            </label>
-                            <div className="flex items-center gap-4">
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max={eliteEnergyMax}
-                                    step={eliteEnergyPerRaid}
-                                    value={eliteEnergyPerDay}
-                                    onChange={event => setEliteEnergyPerDay(Number.parseInt(event.target.value))}
-                                    className="mt-1 w-full accent-yellow-500"
-                                />
-                                <span className="w-12 text-right font-bold">{eliteEnergyPerDay}</span>
-                            </div>
-                        </div>
-
-                        <h5 className="mt-4 border-t border-gray-300 pt-3 text-sm font-medium dark:border-gray-600">
-                            Non-Elite Node Energy Usage
-                        </h5>
-                        <div className="py-2">
-                            <label className="mb-2 block text-sm">
-                                Energy spent on Non-Elite Nodes/Day ({nonEliteEnergyPerRaid} energy increments):
-                            </label>
-                            <div className="flex items-center gap-4">
-                                <input
-                                    type="range"
-                                    min="0"
-                                    max={nonEliteEnergyMax}
-                                    step={nonEliteEnergyPerRaid}
-                                    value={nonEliteEnergyPerDay}
-                                    onChange={event => setNonEliteEnergyPerDay(Number.parseInt(event.target.value))}
-                                    className="mt-1 w-full accent-yellow-500"
-                                />
-                                <span className="w-12 text-right font-bold">{nonEliteEnergyPerDay}</span>
-                            </div>
-                        </div>
-                    </div>
-                )}
-
-                <div className="flex items-center justify-between py-2">
-                    <label className="font-bold">
-                        Add&apos;l {Rarity[defaultCodexToUse ?? Rarity.Legendary]} Codices/Week from unspecified
-                        sources:
-                    </label>
-                    <input
-                        type="number"
-                        min="0"
-                        step="1"
-                        value={additionalCodicesPerWeek}
-                        onChange={event =>
-                            dispatchUpdate('additionalCodicesPerWeek', Number.parseInt(event.target.value) || 0)
-                        }
-                        className="w-24 rounded-md border border-gray-300 bg-gray-100 p-2 text-gray-800 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-white"
+                <div className="order-1 [@media(min-width:1100px)]:order-2">
+                    <HeroRail
+                        state={xpIncome}
+                        chosenName={chosenName}
+                        helperDaily={helperDaily}
+                        onUpdate={dispatchUpdate}
+                        onApply={handleApply}
                     />
                 </div>
             </div>
-            <div className="mt-5 rounded-lg border-2 border-green-600 bg-green-50 p-4 text-center dark:border-green-400 dark:bg-green-900">
-                <h3 className="text-gray-900 dark:text-white">Codex Estimate</h3>
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {Rarity[defaultCodexToUse ?? Rarity.Legendary]} codices
-                </p>
-                <p className="mt-2 text-gray-700 dark:text-gray-300">
-                    Per Week: <span className="block text-xl font-bold">{estimatedCodicesPerWeek.toFixed(2)}</span>
-                </p>
-                <p className="mt-3 text-lg font-bold">
-                    Per Day:{' '}
-                    <span className="block text-3xl font-extrabold text-green-600 dark:text-green-400">
-                        {estimatedCodicesPerDay.toFixed(2)}
-                    </span>
-                </p>
-            </div>
-        </div>
+
+            {/* Bottom breathing room */}
+            <div className="h-10" />
+        </>
     );
 };

@@ -16,6 +16,7 @@ import rangedIcon from '@/assets/images/icons/ranged.png';
 import redStar from '@/assets/images/icons/red star small.png';
 import goldStar from '@/assets/images/icons/star small.png';
 import warTokenIcon from '@/assets/images/icons/warToken.png';
+import archeoTechIcon from '@/assets/images/upgrades/archeotech bionics.png';
 
 /* eslint-enable import-x/no-internal-modules */
 import { snowprintIcons } from '@/fsd/5-shared/assets';
@@ -26,6 +27,11 @@ interface TacticusIcon {
 }
 
 export const tacticusIcons: Record<string, TacticusIcon> = {
+    archeoTech: {
+        file: archeoTechIcon,
+        label: 'ArcheoTech',
+    },
+    blueStar: snowprintIcons.blueStar,
     armour: {
         file: armourIcon,
         label: 'Armour',

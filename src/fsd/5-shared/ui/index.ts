@@ -1,4 +1,5 @@
 export * from './contexts';
+export * from './segmented';
 export { MenuItemTP } from './menu-item';
 export type { IMenuOption } from './menu-option';
 export { Conditional } from './conditional';

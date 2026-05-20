@@ -1,4 +1,5 @@
 export { BmcIcon } from './bmc.icon';
+export { tacticusIcons, starsIcons } from './icon-list';
 export { DiscordIcon } from './discord.icon';
 export { MiscIcon } from './misc.icon';
 export { RarityIcon } from './rarity.icon';
