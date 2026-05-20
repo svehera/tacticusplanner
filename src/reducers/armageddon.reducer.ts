@@ -18,14 +18,16 @@ export interface ArmageddonState {
     powerLevel: number;
     week: 1 | 2 | 3;
     day: string;
-    cart: IArmageddonCart;
+    structuredCart: IArmageddonCart;
+    purchased: Record<string, number>;
 }
 
 export const defaultArmageddonState: ArmageddonState = {
     powerLevel: 1,
     week: 1,
     day: 'MON',
-    cart: {},
+    structuredCart: {},
+    purchased: {},
 };
 
 export type ArmageddonAction =

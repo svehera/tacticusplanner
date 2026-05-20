@@ -10,14 +10,16 @@ interface SyncButtonProps {
     variant?: 'text' | 'outlined' | 'contained' | undefined;
     className?: string;
     iconButton?: boolean;
+    onAfterSync?: () => void;
 }
 
-const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, iconButton }) => {
+const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, iconButton, onAfterSync }) => {
     const { syncWithTacticus } = useSyncWithTacticus();
 
     const sync = async () => {
         console.log('Syncing with Tacticus...');
         await syncWithTacticus();
+        onAfterSync?.();
     };
 
     const handleClick = (event: React.MouseEvent) => {

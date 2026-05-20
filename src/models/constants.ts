@@ -196,7 +196,6 @@ export const defaultData: IPersonalData2 = {
     schemaVersion: 2,
     modifiedDate: undefined,
     seenAppVersion: undefined,
-    playerMetadata: { playerName: undefined, powerLevel: undefined },
     dailyRaids: {
         filters: {
             enemiesAlliance: [],
@@ -444,8 +443,8 @@ export const defaultData: IPersonalData2 = {
     },
     rosterSnapshots: { base: undefined, diffs: [] },
     gameModeTokens: {},
-    armageddon: { powerLevel: 1, week: 1, day: 'MON', cart: {} },
-    playerMetadata: {},
+    armageddon: { powerLevel: 1, week: 1, day: 'MON', structuredCart: {}, purchased: {} },
+    playerMetadata: { playerName: undefined, powerLevel: undefined },
 };
 
 export const goalsLimit = 100;
