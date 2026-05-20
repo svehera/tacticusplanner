@@ -1,14 +1,18 @@
-﻿import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
-import Diversity3Icon from '@mui/icons-material/Diversity3';
+﻿import BuildIcon from '@mui/icons-material/Build';
+import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
+import EventIcon from '@mui/icons-material/Event';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
-import FormatListNumberedIcon from '@mui/icons-material/FormatListNumbered';
-import HealthAndSafetyIcon from '@mui/icons-material/HealthAndSafety';
 import HomeIcon from '@mui/icons-material/Home';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import ListIcon from '@mui/icons-material/List';
+import MapIcon from '@mui/icons-material/Map';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
+import PersonIcon from '@mui/icons-material/Person';
+import SmartToyIcon from '@mui/icons-material/SmartToy';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
+import UpgradeIcon from '@mui/icons-material/Upgrade';
+import VolunteerActivismIcon from '@mui/icons-material/VolunteerActivism';
 import React from 'react';
 
 import { faqMenuItem } from '@/fsd/1-pages/faq/faq.menu-item';
@@ -58,14 +62,14 @@ export const menuItemById = {
     goals: new MenuItemTP('Goals', <TrackChangesIcon />, '/plan/goals'),
     dailyRaids: new MenuItemTP('Daily Raids', <EventRepeatIcon />, '/plan/dailyRaids'),
     leMasterTable: new MenuItemTP('Master Table', <TableChartIcon />, '/plan/leMasterTable'),
-    characters: new MenuItemTP('Characters', <Diversity3Icon />, '/learn/characters'),
-    npcs: new MenuItemTP('NPCs', <Diversity3Icon />, '/learn/npcs'),
-    upgrades: new MenuItemTP('Upgrades', <ListIcon />, '/learn/upgrades'),
-    learnEquipment: new MenuItemTP('Equipment', <ListIcon />, '/learn/equipment'),
+    characters: new MenuItemTP('Characters', <PersonIcon />, '/learn/characters'),
+    npcs: new MenuItemTP('NPCs', <SmartToyIcon />, '/learn/npcs'),
+    upgrades: new MenuItemTP('Upgrades', <UpgradeIcon />, '/learn/upgrades'),
+    learnEquipment: new MenuItemTP('Equipment', <BuildIcon />, '/learn/equipment'),
     rankLookup: new MenuItemTP('Rank Lookup', <MilitaryTechIcon />, '/learn/rankLookup'),
     mowLookup: mowLookupMenuItem,
-    campaigns: new MenuItemTP('Campaigns', <FormatListNumberedIcon />, '/learn/campaigns'),
-    hses: new MenuItemTP('Home-Screen Events', <FormatListNumberedIcon />, '/plan/hse'),
+    campaigns: new MenuItemTP('Campaigns', <MapIcon />, '/learn/campaigns'),
+    hses: new MenuItemTP('Home-Screen Events', <EventIcon />, '/plan/hse'),
     bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
@@ -76,7 +80,7 @@ export const menuItemById = {
     warDefense2: warDefense2MenuItem,
     home: new MenuItemTP('Home', <HomeIcon />, '/home', 'Tacticus Planner'),
     contacts: new MenuItemTP('Contacts', <ContactEmergencyIcon />, '/contacts'),
-    ty: new MenuItemTP('Thank You', <HealthAndSafetyIcon />, '/ty', 'Thank You Page'),
+    ty: new MenuItemTP('Thank You', <VolunteerActivismIcon />, '/ty', 'Thank You Page'),
     faq: faqMenuItem,
     zones: guildWarZonesMenuItem,
     guild: guildMenuItem,

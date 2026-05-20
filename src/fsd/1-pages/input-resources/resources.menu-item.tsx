@@ -1,5 +1,5 @@
-import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
+import DiamondIcon from '@mui/icons-material/Diamond';
 
 import { MenuItemTP } from '@/fsd/5-shared/ui';
 
-export const resourcesMenuItem = new MenuItemTP('Resources', <MilitaryTechIcon />, '/input/resources');
+export const resourcesMenuItem = new MenuItemTP('Resources', <DiamondIcon />, '/input/resources');
