@@ -152,6 +152,14 @@
         --rank-adamantine1: #d9886c;
         --rank-adamantine2: #c97a5c;
         --rank-adamantine3: #b06b4b;
+
+        /* Campaign difficulty colours */
+        --diff-standard: oklch(0.55 0.18 250);
+        --diff-mirror: oklch(0.62 0.15 200);
+        --diff-elite: oklch(0.65 0.18 60);
+        --diff-event-std: oklch(0.6 0.18 320);
+        --diff-event-ext: oklch(0.55 0.2 20);
+        --diff-event-chal: oklch(0.55 0.2 340);
     }
 
     .dark {
@@ -242,6 +250,14 @@
         --rank-adamantine1: #d9886c;
         --rank-adamantine2: #bf6e4e;
         --rank-adamantine3: #9e5535;
+
+        /* Campaign difficulty colours */
+        --diff-standard: oklch(0.7 0.18 250);
+        --diff-mirror: oklch(0.72 0.14 200);
+        --diff-elite: oklch(0.75 0.16 60);
+        --diff-event-std: oklch(0.7 0.16 320);
+        --diff-event-ext: oklch(0.7 0.2 20);
+        --diff-event-chal: oklch(0.7 0.18 340);
     }
 
     h2 {

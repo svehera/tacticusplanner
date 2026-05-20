@@ -1,19 +1,19 @@
 ﻿import SettingsIcon from '@mui/icons-material/Settings';
 import { FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/material';
 import Button from '@mui/material/Button';
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { IViewPreferences, IViewOption } from './model';
 
-type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
+type OptionsPreset = 'wyo' | 'inventory';
 
 export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
-    const [anchorElement2, setAnchorElement2] = React.useState<HTMLButtonElement>();
+    const [anchorElement2, setAnchorElement2] = useState<HTMLButtonElement>();
 
     const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
         setAnchorElement2(event.currentTarget);
@@ -131,20 +131,10 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
         },
     ];
 
-    const myProgressOptions: IViewOption[] = [
-        {
-            label: 'Show core characters',
-            key: 'myProgressShowCoreCharacters',
-            value: viewPreferences.myProgressShowCoreCharacters,
-            disabled: false,
-        },
-    ];
-
     return (
         <FormGroup className="flex flex-row" style={{ height: preset === 'wyo' ? '55px' : 'unset' }}>
             {preset === 'wyo' && renderPopover(wyoOptions.map(option => renderOption(option)))}
             {preset === 'inventory' && inventoryOptions.map(option => renderOption(option))}
-            {preset === 'myProgress' && myProgressOptions.map(option => renderOption(option))}
         </FormGroup>
     );
 };

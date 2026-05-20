@@ -36,7 +36,6 @@ export interface IViewPreferences
     raidsTableView: boolean;
     includeExhaustedBattlesInHse: boolean;
     showHseWarning: boolean;
-    myProgressShowCoreCharacters: boolean;
     apiIntegrationSyncOptions: string[];
     tokenomicsTableView: boolean;
 }
