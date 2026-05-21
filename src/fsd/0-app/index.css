@@ -187,7 +187,7 @@
         --overlay: var(--color-zinc-800);
         --overlay-fg: var(--color-zinc-100);
 
-        --success: var(--color-emerald-600);
+        --success: var(--color-emerald-500);
         --success-fg: var(--color-white);
 
         --warning: var(--color-amber-400);
