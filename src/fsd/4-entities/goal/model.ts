@@ -1,9 +1,12 @@
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { ShardFarmType } from '@/models/interfaces';
 
 import { Alliance, FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { IRankLookup } from '@/fsd/4-entities/character/@x/goal';
+
+import type { OnslaughtSector, OnslaughtTier } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 
 import { CampaignsLocationsUsage, PersonalGoalType } from './enums';
 
@@ -74,6 +77,10 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
     mythicShards: number;
     onslaughtShards: number;
     onslaughtMythicShards: number;
+    /** Onslaught sector the player uses for this alliance — used for dynamic reward re-computation. */
+    onslaughtSector?: OnslaughtSector;
+    /** Onslaught tier the player uses for this alliance — used for dynamic reward re-computation. */
+    onslaughtTier?: OnslaughtTier;
     campaignsUsage: CampaignsLocationsUsage;
     mythicCampaignsUsage: CampaignsLocationsUsage;
     farmType: ShardFarmType;

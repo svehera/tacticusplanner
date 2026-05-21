@@ -52,6 +52,7 @@ export const DailyRaids = () => {
         campaignsProgress,
         dailyRaidsPreferences,
         inventory,
+        onslaughtPreferences,
     } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
@@ -63,8 +64,8 @@ export const DailyRaids = () => {
     );
     const units = useMemo(() => [...storeCharacters, ...resolvedMows], [storeCharacters, resolvedMows]);
     const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, units, true);
-    }, [goals, units]);
+        return GoalsService.prepareGoals(goals, units, true, onslaughtPreferences);
+    }, [goals, units, onslaughtPreferences]);
 
     const hasSync = !!userInfo.tacticusApiKey;
 

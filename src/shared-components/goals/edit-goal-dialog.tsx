@@ -41,7 +41,7 @@ interface Props {
 }
 
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
-    const { goals, campaignsProgress, inventory } = useContext(StoreContext);
+    const { goals, campaignsProgress, inventory, onslaughtPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
     const [openDialog, setOpenDialog] = React.useState(isOpen);
@@ -360,11 +360,6 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
 
                     {form.type === PersonalGoalType.Ascend && (
                         <>
-                            <NumbersInput
-                                title="Owned shards"
-                                value={form.shards}
-                                valueChange={value => setForm(current => ({ ...current, shards: value }))}
-                            />
                             <EditAscendGoal
                                 goal={form}
                                 possibleLocations={possibleLocations}
@@ -372,6 +367,8 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 unlockedLocations={unlockedLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 farmType={form.farmType ?? 'both'}
+                                alliance={isCharacter(unit) ? unit.alliance : undefined}
+                                onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}
                             />
                         </>

@@ -7,6 +7,7 @@ import { armageddonReducer } from '@/reducers/armageddon.reducer';
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from '@/reducers/guild-reducer';
 import { guildWarReducer } from '@/reducers/guild-war-reducer';
+import { onslaughtPreferencesReducer } from '@/reducers/onslaught-preferences.reducer';
 import { playerMetadataReducer } from '@/reducers/player-metadata.reducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
@@ -83,6 +84,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     );
     const [armageddon, dispatchArmageddon] = useReducer(armageddonReducer, globalState.armageddon);
     const [playerMetadata, dispatchPlayerMetadata] = useReducer(playerMetadataReducer, globalState.playerMetadata);
+    const [onslaughtPreferences, dispatchOnslaughtPreferences] = useReducer(
+        onslaughtPreferencesReducer,
+        globalState.onslaughtPreferences
+    );
     const [warDefense2, dispatchWarDefense2] = useReducer(warDefense2Reducer, globalState.warDefense2);
     const [warOffense2, dispatchWarOffense2] = useReducer(warOffense2Reducer, globalState.warOffense2);
     const [viewPreferences, dispatchViewPreferences] = useReducer(viewPreferencesReducer, globalState.viewPreferences);
@@ -233,6 +238,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             gameModeTokens: wrapDispatch(dispatchGameModeTokens),
             armageddon: wrapDispatch(dispatchArmageddon),
             playerMetadata: wrapDispatch(dispatchPlayerMetadata),
+            onslaughtPreferences: wrapDispatch(dispatchOnslaughtPreferences),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 // Only update if incoming version is newer
                 setGlobalState(current => {
@@ -264,6 +270,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
                         dispatchArmageddon({ type: 'Set', value: data.armageddon });
                         dispatchPlayerMetadata({ type: 'Set', value: data.playerMetadata });
+                        dispatchOnslaughtPreferences({ type: 'Set', value: data.onslaughtPreferences });
                         if (modified) {
                             setModified(true);
                             setModifiedDate(data.modifiedDate);
@@ -300,6 +307,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchGameModeTokens,
             dispatchArmageddon,
             dispatchPlayerMetadata,
+            dispatchOnslaughtPreferences,
             setGlobalState,
         ]
     );
@@ -340,6 +348,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             gameModeTokens,
             armageddon,
             playerMetadata,
+            onslaughtPreferences,
             __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
@@ -362,6 +371,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         goals,
         armageddon,
         playerMetadata,
+        onslaughtPreferences,
         guild,
         guildWar,
         inventory,

@@ -29,6 +29,7 @@ import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
 
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
@@ -45,6 +46,7 @@ import { GoalsAction } from '../reducers/goals.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { LeProgressAction } from '../reducers/le-progress.reducer';
 import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
+import { OnslaughtPreferencesAction } from '../reducers/onslaught-preferences.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 import { WarOffense2Action } from '../reducers/war-offense2.reducer';
@@ -103,6 +105,7 @@ export interface IGlobalState {
     gameModeTokens: IGameModeTokensState;
     armageddon: ArmageddonState;
     playerMetadata: PlayerMetadataState;
+    onslaughtPreferences: IOnslaughtPreferences;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -137,6 +140,7 @@ export interface IDispatchContext {
     gameModeTokens: React.Dispatch<GameModeTokensAction>;
     armageddon: React.Dispatch<ArmageddonAction>;
     playerMetadata: React.Dispatch<PlayerMetadataAction>;
+    onslaughtPreferences: React.Dispatch<OnslaughtPreferencesAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -170,6 +174,7 @@ export interface IPersonalData2 {
     gameModeTokens: IGameModeTokensState;
     armageddon: ArmageddonState;
     playerMetadata: PlayerMetadataState;
+    onslaughtPreferences?: IOnslaughtPreferences;
 }
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */

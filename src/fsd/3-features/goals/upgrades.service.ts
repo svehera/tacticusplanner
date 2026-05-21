@@ -43,6 +43,8 @@ import {
     IUpgradesRaidsDay,
 } from '@/fsd/3-features/goals/goals.models';
 
+import { getOnslaughtRewardMidpoint } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
+
 const INITIAL_STARS_FOR_RARITY: Partial<Record<Rarity, RarityStars>> = {
     [Rarity.Common]: RarityStars.None,
     [Rarity.Uncommon]: RarityStars.TwoStars,
@@ -474,9 +476,17 @@ export class UpgradesService {
                 return false;
             } else if (
                 mat.id.startsWith('mythicShards_') &&
-                !this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal as ICharacterAscendGoal)
+                !this.canOnslaughtCharacterForMythicShards(
+                    goal.unitId,
+                    characters,
+                    mows,
+                    goal as ICharacterAscendGoal
+                ) &&
+                !this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal as ICharacterAscendGoal)
             ) {
-                // We have an ascension goal requiring mythic shards, but we can't farm them with onslaught, so the goal is blocked.
+                // We have an ascension goal requiring mythic shards, but neither mythic shard
+                // onslaught nor regular shard onslaught (which will eventually lead to blue star
+                // for cross-boundary goals) is available, so the goal is blocked.
                 return false;
             }
         }
@@ -1640,8 +1650,22 @@ export class UpgradesService {
         unitId: string,
         chars: ICharacter2[],
         mows: IMow2[],
-        goal: ICharacterAscendGoal
+        goal: ICharacterAscendGoal,
+        inventory?: Record<string, number>
     ): boolean {
+        // In simulation context, check virtual state: if the character has virtually reached
+        // blue star they no longer need regular shards from onslaught.
+        if (inventory !== undefined && goal.onslaughtSector && goal.onslaughtTier) {
+            const incrementalShards = inventory['shards_' + unitId] ?? 0;
+            const [, virtualStars] = this.getVirtualRarityAndStars(
+                goal.rarityStart,
+                goal.starsStart,
+                goal.rarityEnd,
+                goal.starsEnd,
+                incrementalShards
+            );
+            if (virtualStars >= RarityStars.OneBlueStar) return false;
+        }
         const char = chars.find(char => unitId === char.snowprintId);
         if (char !== undefined) {
             return char.rank !== Rank.Locked && char.stars < RarityStars.OneBlueStar && goal.onslaughtShards > 0;
@@ -1653,13 +1677,34 @@ export class UpgradesService {
     /**
      * Returns true if the character can be onslaughted for mythic shards. This is true if the
      * user allows it, the character is unlocked, and the character is at blue star or higher.
+     * In simulation context (when inventory is provided), also returns true for cross-boundary
+     * goals where the character has virtually reached blue star.
      */
     public static canOnslaughtCharacterForMythicShards(
         unitId: string,
         chars: ICharacter2[],
         mows: IMow2[],
-        goal: ICharacterAscendGoal
+        goal: ICharacterAscendGoal,
+        inventory?: Record<string, number>
     ): boolean {
+        // In simulation context, check virtual state: if the character has virtually reached
+        // blue star (from accumulated regular shards) they can now farm mythic shards.
+        if (inventory !== undefined && goal.onslaughtSector && goal.onslaughtTier && goal.onslaughtMythicShards > 0) {
+            const incrementalShards = inventory['shards_' + unitId] ?? 0;
+            const [, virtualStars] = this.getVirtualRarityAndStars(
+                goal.rarityStart,
+                goal.starsStart,
+                goal.rarityEnd,
+                goal.starsEnd,
+                incrementalShards
+            );
+            if (virtualStars >= RarityStars.OneBlueStar) {
+                const char = chars.find(char => unitId === char.snowprintId);
+                if (char !== undefined) return char.rank !== Rank.Locked;
+                const mow = mows.find(mow => unitId === mow.snowprintId);
+                return mow !== undefined && mow.unlocked;
+            }
+        }
         const char = chars.find(char => unitId === char.snowprintId);
         if (char !== undefined) {
             return char.rank !== Rank.Locked && char.stars >= RarityStars.OneBlueStar && goal.onslaughtMythicShards > 0;
@@ -1681,20 +1726,27 @@ export class UpgradesService {
         goal: ICharacterAscendGoal
     ): number {
         const shardData = this.getShardsForGoal(characters, mows, goal);
-        const tokensForRegularShards = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal)
+        const canRegular = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal, inventory);
+        const canMythic = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal, inventory);
+        const tokensForRegularShards = canRegular
             ? Math.ceil(
                   Math.max(0, shardData.totalIncrementalShardsNeeded - (inventory['shards_' + goal.unitId] ?? 0)) /
                       goal.onslaughtShards
               )
             : 0;
-        const tokensForMythicShards = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal)
-            ? Math.ceil(
-                  Math.max(
-                      0,
-                      shardData.totalIncrementalMythicShardsNeeded - (inventory['mythicShards_' + goal.unitId] ?? 0)
-                  ) / goal.onslaughtMythicShards
-              )
-            : 0;
+        // For cross-boundary goals (character below blue star, goal reaches blue star or mythic),
+        // count the mythic shard tokens even before the virtual state reaches blue star, so that
+        // the total token estimate includes both phases of the goal.
+        const shouldCountMythic = canMythic || (canRegular && goal.onslaughtMythicShards > 0);
+        const tokensForMythicShards =
+            shouldCountMythic && goal.onslaughtMythicShards > 0
+                ? Math.ceil(
+                      Math.max(
+                          0,
+                          shardData.totalIncrementalMythicShardsNeeded - (inventory['mythicShards_' + goal.unitId] ?? 0)
+                      ) / goal.onslaughtMythicShards
+                  )
+                : 0;
         return tokensForRegularShards + tokensForMythicShards;
     }
 
@@ -1711,14 +1763,18 @@ export class UpgradesService {
         const shardGoal = minBy(
             goals
                 .filter(goal => goal.farmType !== 'energy')
-                .filter(goal => this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal))
+                .filter(goal =>
+                    this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal, inventory)
+                )
                 .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0),
             'priority'
         );
         const mythicShardGoal = minBy(
             goals
                 .filter(goal => goal.farmType !== 'energy')
-                .filter(goal => this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal))
+                .filter(goal =>
+                    this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal, inventory)
+                )
                 .filter(goal => this.getOnslaughtTokensForGoal(inventory, characters, mows, goal) > 0),
             'priority'
         );
@@ -1811,6 +1867,38 @@ export class UpgradesService {
     }
 
     /** Adds the daily onslaught battles to the specified day's raids plan. */
+    private static getVirtualRarityAndStars(
+        rarityStart: Rarity,
+        starsStart: RarityStars,
+        rarityEnd: Rarity,
+        starsEnd: RarityStars,
+        incrementalShards: number
+    ): [Rarity, RarityStars] {
+        const baseThreshold = SHARDS_AT_RARITY_AND_STARS[rarityStart]?.[starsStart] ?? 0;
+        const virtualTotal = baseThreshold + incrementalShards;
+        let bestRarity = rarityStart;
+        let bestStars = starsStart;
+        for (const rarity of getEnumValues(Rarity) as Rarity[]) {
+            if (rarity < rarityStart || rarity > rarityEnd) continue;
+            const starsMap = SHARDS_AT_RARITY_AND_STARS[rarity];
+            if (!starsMap) continue;
+            for (const stars of getEnumValues(RarityStars) as RarityStars[]) {
+                if (rarity === rarityStart && stars < starsStart) continue;
+                if (rarity === rarityEnd && stars > starsEnd) continue;
+                const threshold = starsMap[stars];
+                if (threshold === undefined) continue;
+                if (
+                    virtualTotal >= threshold &&
+                    (rarity > bestRarity || (rarity === bestRarity && stars > bestStars))
+                ) {
+                    bestRarity = rarity;
+                    bestStars = stars;
+                }
+            }
+        }
+        return [bestRarity, bestStars];
+    }
+
     public static addOnslaughtsForDay(
         day: IUpgradesRaidsDay,
         characters: ICharacter2[],
@@ -1836,11 +1924,29 @@ export class UpgradesService {
             if (goal === undefined) break;
             let upgradeId = '';
             let shards = 0;
-            if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal)) {
+            if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal, inventory)) {
                 upgradeId = 'shards_' + goal.unitId;
-                shards = goal.onslaughtShards;
+                if (goal.onslaughtSector && goal.onslaughtTier) {
+                    const currentIncrementalShards = inventory[upgradeId] ?? 0;
+                    const [virtualRarity, virtualStars] = this.getVirtualRarityAndStars(
+                        goal.rarityStart,
+                        goal.starsStart,
+                        goal.rarityEnd,
+                        goal.starsEnd,
+                        currentIncrementalShards
+                    );
+                    shards = getOnslaughtRewardMidpoint(
+                        virtualRarity,
+                        virtualStars,
+                        goal.onslaughtSector,
+                        goal.onslaughtTier
+                    );
+                } else {
+                    shards = goal.onslaughtShards;
+                }
             } else {
                 // canOnslaughtCharacterForMythicShards must be true
+                // (either real stars >= OneBlueStar, or virtual state reached OneBlueStar for a cross-boundary goal)
                 upgradeId = 'mythicShards_' + goal.unitId;
                 shards = goal.onslaughtMythicShards;
             }

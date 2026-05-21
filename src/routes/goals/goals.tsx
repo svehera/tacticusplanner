@@ -99,6 +99,7 @@ export const Goals = () => {
         viewPreferences,
         xpIncome,
         xpUse,
+        onslaughtPreferences,
     } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
@@ -129,7 +130,10 @@ export const Goals = () => {
     const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
 
     const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, ascendGoals, upgradeAbilities } =
-        useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
+        useMemo(
+            () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
+            [goals, units, onslaughtPreferences]
+        );
 
     // Add these sorts to ensure the UI matches the global priority order
     const sortedShards = shardsGoals.toSorted((a, b) => a.priority - b.priority);
