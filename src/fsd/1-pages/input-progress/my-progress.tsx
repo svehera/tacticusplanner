@@ -47,9 +47,7 @@ interface SectionHeadingProps {
 const SectionHeading = ({ label, count, cleared }: SectionHeadingProps) => (
     <div className="flex items-center gap-2 border-b border-(--border) pb-2">
         <span className="text-[11px] font-bold tracking-[0.12em] text-(--fg) uppercase">{label}</span>
-        <span
-            className="rounded-full border border-(--border) px-2 py-0.5 text-[10px] font-bold"
-            style={{ background: 'var(--secondary)' }}>
+        <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-[10px] font-bold">
             {count}
         </span>
         <span className="flex-1" />
@@ -73,8 +71,7 @@ const StatBlock = ({ label, pct, done, maxTotal, cleared, count, accent }: StatB
     <div className="flex flex-col gap-0.5 text-right">
         <p className="text-[10px] font-bold tracking-[0.14em] text-(--muted-fg) uppercase">{label}</p>
         <p
-            className="text-[32px] leading-none font-bold tabular-nums"
-            style={{ letterSpacing: '-0.02em', color: accent ? 'var(--primary)' : 'var(--fg)' }}>
+            className={`text-[32px] leading-none font-bold tracking-[-0.02em] tabular-nums ${accent ? 'text-(--primary)' : 'text-(--fg)'}`}>
             {pct}%
         </p>
         <p className="text-[11px] text-(--muted-fg) tabular-nums">
@@ -126,15 +123,15 @@ export const MyProgress = () => {
     return (
         <div className="space-y-8 py-6">
             {/* page header */}
-            <div className="flex items-start justify-between gap-6">
+            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                 <div>
                     <p className="text-[10px] font-bold tracking-[0.16em] text-(--muted-fg) uppercase">Input</p>
                     <h2 className="mt-1 mb-1">My Progress</h2>
-                    <p className="text-sm text-(--muted-fg)" style={{ maxWidth: '70ch' }}>
+                    <p className="max-w-[70ch] text-sm text-(--muted-fg)">
                         Track your campaign completion across all storylines.
                     </p>
                 </div>
-                <div className="flex shrink-0 items-start gap-8">
+                <div className="flex shrink-0 items-start gap-4 sm:gap-8">
                     <StatBlock label="Normal" accent {...normalStats} />
                     <StatBlock label="Mirror" {...mirrorStats} />
                     <StatBlock label="Events" {...eventsStats} />
@@ -142,7 +139,7 @@ export const MyProgress = () => {
             </div>
 
             {/* Normal + Mirror side by side */}
-            <div className="grid grid-cols-2 items-start gap-6">
+            <div className="grid grid-cols-1 items-start gap-6 sm:grid-cols-2">
                 <section className="space-y-3">
                     <SectionHeading
                         label="Normal Campaigns"

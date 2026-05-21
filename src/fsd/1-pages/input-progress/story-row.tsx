@@ -7,6 +7,16 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { CharacterChipRow } from './character-chip';
 import { getMaxNodes } from './get-max-nodes';
 
+// Static map so Tailwind's scanner can detect every class at build time.
+const DIFF_BAR_CLASS: Record<CampaignDifficulty, string> = {
+    [CampaignDifficulty.standard]: 'bg-[var(--diff-standard)]',
+    [CampaignDifficulty.mirror]: 'bg-[var(--diff-mirror)]',
+    [CampaignDifficulty.elite]: 'bg-[var(--diff-elite)]',
+    [CampaignDifficulty.eventStandard]: 'bg-[var(--diff-event-std)]',
+    [CampaignDifficulty.eventExtremis]: 'bg-[var(--diff-event-ext)]',
+    [CampaignDifficulty.eventChallenge]: 'bg-[var(--diff-event-chal)]',
+};
+
 // ─── TileB ────────────────────────────────────────────────────────────────────
 
 interface TileBProps {
@@ -34,7 +44,7 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
         debounced(clamped);
     };
 
-    const diffToken = `var(--diff-${difficultyTokenSuffix(campaign.difficulty)})`;
+    const diffClass = DIFF_BAR_CLASS[campaign.difficulty] ?? 'bg-[var(--diff-standard)]';
     const isChallenge = campaign.difficulty === CampaignDifficulty.eventChallenge;
     const challengeBaseDifficulty =
         isChallenge && (campaign.id as string).includes('Extremis')
@@ -48,16 +58,15 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
           ? 'border-l-2 border-l-(--primary)'
           : 'border-l-2 border-l-transparent';
 
-    const bgStyle: React.CSSProperties = cleared
-        ? { background: 'color-mix(in oklab, var(--success) 5%, transparent)' }
+    const bgClass = cleared
+        ? 'bg-[color-mix(in_oklab,var(--success)_5%,transparent)]'
         : isActiveGoal
-          ? { background: 'color-mix(in oklab, var(--primary) 5%, transparent)' }
-          : {};
+          ? 'bg-[color-mix(in_oklab,var(--primary)_5%,transparent)]'
+          : '';
 
     return (
         <div
-            className={`flex flex-col gap-1.5 border-r border-(--border) px-3 py-2.5 last:border-r-0 ${stripeClass}`}
-            style={bgStyle}>
+            className={`flex flex-col gap-1.5 border-b border-(--border) px-3 py-2.5 last:border-b-0 sm:border-r sm:border-b-0 sm:last:border-r-0 ${stripeClass} ${bgClass}`}>
             {/* head: difficulty chip + status indicator */}
             <div className="flex items-center justify-between">
                 {isChallenge ? (
@@ -75,27 +84,21 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
                 )}
                 {isActiveGoal && !cleared && (
                     <span
-                        className="inline-block rounded-full"
+                        className="inline-block size-[7px] rounded-full bg-(--primary) shadow-[0_0_0_2px_var(--card-bg),0_0_0_3px_var(--primary)]"
                         title="Linked to active goal"
-                        style={{
-                            width: 7,
-                            height: 7,
-                            background: 'var(--primary)',
-                            boxShadow: '0 0 0 2px var(--card-bg), 0 0 0 3px var(--primary)',
-                        }}
                     />
                 )}
             </div>
 
             {/* progress bar + value */}
             <div className="flex items-center gap-2">
-                <div className="flex-1 overflow-hidden rounded-full" style={{ height: 6, background: 'var(--fg)/12' }}>
+                <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-(--fg)/12">
                     <div
-                        className="h-full rounded-full motion-safe:transition-[width] motion-safe:duration-200"
-                        style={{ width: `${pct}%`, background: diffToken }}
+                        className={`h-full rounded-full motion-safe:transition-[width] motion-safe:duration-200 ${diffClass}`}
+                        style={{ width: `${pct}%` }}
                     />
                 </div>
-                <div className="shrink-0 text-xs tabular-nums" style={{ minWidth: 44 }}>
+                <div className="min-w-[44px] shrink-0 text-xs tabular-nums">
                     <strong>{localValue}</strong>
                     <span className="text-(--muted-fg)">/{max}</span>
                 </div>
@@ -142,34 +145,6 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
     );
 };
 
-// ─── helpers ──────────────────────────────────────────────────────────────────
-
-const difficultyTokenSuffix = (d: CampaignDifficulty): string => {
-    switch (d) {
-        case CampaignDifficulty.standard: {
-            return 'standard';
-        }
-        case CampaignDifficulty.mirror: {
-            return 'mirror';
-        }
-        case CampaignDifficulty.elite: {
-            return 'elite';
-        }
-        case CampaignDifficulty.eventStandard: {
-            return 'event-std';
-        }
-        case CampaignDifficulty.eventExtremis: {
-            return 'event-ext';
-        }
-        case CampaignDifficulty.eventChallenge: {
-            return 'event-chal';
-        }
-        default: {
-            return 'standard';
-        }
-    }
-};
-
 // ─── StoryRow ─────────────────────────────────────────────────────────────────
 
 interface StoryRowProps {
@@ -202,28 +177,25 @@ export const StoryRow = ({ campaigns, progress, characters, activeGoals, onSet }
     return (
         <div className="overflow-hidden rounded-[var(--radius-md)] border border-(--card-border) bg-(--card-bg)">
             {/* row header */}
-            <div
-                className="grid gap-6 border-b border-(--border) px-4 py-4"
-                style={{
-                    gridTemplateColumns: '1fr 220px',
-                    background: 'color-mix(in oklab, var(--secondary) 50%, var(--card-bg))',
-                }}>
+            <div className="flex flex-col gap-3 border-b border-(--border) bg-[color-mix(in_oklab,var(--secondary)_50%,var(--card-bg))] px-4 py-4 sm:grid sm:grid-cols-[1fr_220px] sm:gap-6">
                 {/* left: icon + name + characters */}
-                <div className="flex min-w-0 items-center gap-4">
-                    <div className="shrink-0">
-                        <CampaignImage campaign={representative.id} size={40} showTooltip={false} />
+                <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
+                    <div className="flex min-w-0 items-center gap-4">
+                        <div className="shrink-0">
+                            <CampaignImage campaign={representative.id} size={40} showTooltip={false} />
+                        </div>
+                        <span className="mx-1 truncate text-base font-bold text-(--fg)">{storyName}</span>
                     </div>
-                    <span className="mx-1 truncate text-base font-bold text-(--fg)">{storyName}</span>
                     {coreCharacters.length > 0 && <CharacterChipRow characters={coreCharacters} gap={4} />}
                 </div>
 
                 {/* right: aggregate % + bar */}
-                <div className="flex shrink-0 flex-col justify-center gap-1">
-                    <div className="text-[20px] leading-none font-bold text-(--fg) tabular-nums">
+                <div className="flex items-center gap-2 sm:shrink-0 sm:flex-col sm:justify-center sm:gap-1">
+                    <div className="shrink-0 text-base leading-none font-bold text-(--fg) tabular-nums sm:text-[20px]">
                         {pct}
                         <span className="ml-0.5 text-xs font-normal text-(--muted-fg)">%</span>
                     </div>
-                    <div className="overflow-hidden rounded-full" style={{ height: 6, background: 'var(--fg)/12' }}>
+                    <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-(--fg)/12 sm:w-full sm:flex-none">
                         <div
                             className="h-full rounded-full bg-(--primary) motion-safe:transition-[width] motion-safe:duration-200"
                             style={{ width: `${pct}%` }}
@@ -234,10 +206,8 @@ export const StoryRow = ({ campaigns, progress, characters, activeGoals, onSet }
 
             {/* tiles */}
             <div
-                style={{
-                    display: 'grid',
-                    gridTemplateColumns: `repeat(${campaigns.length}, 1fr)`,
-                }}>
+                className="flex flex-col sm:grid sm:grid-cols-[repeat(var(--cols),1fr)]"
+                style={{ '--cols': campaigns.length } as React.CSSProperties}>
                 {campaigns.map(c => (
                     <TileB
                         key={c.id}

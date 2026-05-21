@@ -84,7 +84,7 @@ interface RowProps {
 }
 
 export const CharacterChipRow = ({ characters, gap = 4, size = 44 }: RowProps) => (
-    <div className="inline-flex flex-wrap items-center" style={{ gap }}>
+    <div className="flex flex-wrap items-center" style={{ gap }}>
         {characters.map(c => (
             <CharacterChip key={c.snowprintId} character={c} size={size} />
         ))}
