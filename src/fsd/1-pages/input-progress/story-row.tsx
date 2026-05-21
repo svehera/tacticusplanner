@@ -30,7 +30,7 @@ interface TileBProps {
 
 const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
     const [localValue, setLocalValue] = useState(value);
-    const debounced = useDebounceCallback(onSet, 500);
+    const debounced = useDebounceCallback(onSet, 1500);
 
     useEffect(() => {
         setLocalValue(value);
