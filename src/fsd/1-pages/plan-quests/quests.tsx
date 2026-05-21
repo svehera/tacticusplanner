@@ -8,9 +8,9 @@ import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { FactionImage } from '@/fsd/4-entities/faction';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { INpcData, INpcStats } from '@/fsd/4-entities/npc/model';
 import { NpcPortrait } from '@/fsd/4-entities/npc/npc-portrait';
 import { NpcService } from '@/fsd/4-entities/npc/npc-service';
@@ -20,6 +20,8 @@ import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-ent
 
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { useUpgradeNeeds } from './quests.hooks';
 
 // Type definition for the data we extract from the string
 interface ResolvedEnemyData {
@@ -89,38 +91,13 @@ export const Quests = () => {
         ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
+    const unitsNeedingUpgrade = useUpgradeNeeds(estimatedUpgradesTotal, chars, mows);
+
     // Toggles
     const toggleTier = (tierIndex: number) =>
         setExpandedTiers(previous => ({ ...previous, [tierIndex]: !previous[tierIndex] }));
     const toggleBattle = (battleKey: string) =>
         setExpandedBattles(previous => ({ ...previous, [battleKey]: !previous[battleKey] }));
-
-    const unitsNeedingUpgrade = (
-        upgradeId: string
-    ): { acquired: number; required: number; units: Array<ICharacter2 | IMow2> } => {
-        const inProgressMat = estimatedUpgradesTotal.inProgressMaterials.find(upgrade => upgrade.id === upgradeId);
-        const blockedMat = estimatedUpgradesTotal.blockedMaterials.find(upgrade => upgrade.id === upgradeId);
-        const acquired = (inProgressMat?.acquiredCount ?? 0) + (blockedMat?.acquiredCount ?? 0);
-        const required = (inProgressMat?.requiredCount ?? 0) + (blockedMat?.requiredCount ?? 0);
-        if (required === 0) return { acquired, required, units: [] };
-        const units = [
-            estimatedUpgradesTotal.inProgressMaterials.find(upgrade => upgrade.id === upgradeId)?.relatedCharacters,
-            estimatedUpgradesTotal.blockedMaterials.find(upgrade => upgrade.id === upgradeId)?.relatedCharacters,
-        ]
-            .flat()
-            .filter(x => x !== undefined);
-        const resolvedChars = units
-            .flat()
-            .filter(x => x !== undefined)
-            .map(charName => chars.find(c => c.shortName === charName))
-            .filter(x => x !== undefined);
-        const resolvedMows = units
-            .flat()
-            .filter(x => x !== undefined)
-            .map(mowName => mows.find(m => m.name === mowName))
-            .filter(x => x !== undefined);
-        return { acquired, required, units: [...resolvedChars, ...resolvedMows] as Array<ICharacter2 | IMow2> };
-    };
 
     return (
         <div className="space-y-8 py-6">
