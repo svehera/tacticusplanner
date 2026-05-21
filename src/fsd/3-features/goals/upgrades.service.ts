@@ -2078,6 +2078,8 @@ export class UpgradesService {
         const unit = char ?? mow;
         if (!unit) return 0;
         if (goal.type === PersonalGoalType.Unlock) {
+            const alreadyUnlocked = char ? char.rank > Rank.Locked : (mow?.unlocked ?? false);
+            if (alreadyUnlocked) return 0;
             return this.getTotalShardsNeededForGoal(chars, mows, goal);
         }
         const locked = char ? char.rank === Rank.Locked : !mow?.unlocked;
