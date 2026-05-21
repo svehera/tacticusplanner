@@ -1,6 +1,8 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { useDebounceCallback } from 'usehooks-ts';
 
+import { Slider } from '@/fsd/5-shared/ui';
+
 import { Campaign, CampaignDifficulty, CampaignImage, DifficultyChip, ICampaignModel } from '@/fsd/4-entities/campaign';
 import { ICharacter2 } from '@/fsd/4-entities/character';
 
@@ -36,7 +38,6 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
 
     const max = useMemo(() => getMaxNodes(campaign.difficulty), [campaign.difficulty]);
     const cleared = localValue >= max && max > 0;
-    const pct = max > 0 ? (localValue / max) * 100 : 0;
 
     const update = (v: number) => {
         const clamped = Math.max(0, Math.min(max, v));
@@ -92,12 +93,7 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
 
             {/* progress bar + value */}
             <div className="flex items-center gap-2">
-                <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-(--fg)/12">
-                    <div
-                        className={`h-full rounded-full motion-safe:transition-[width] motion-safe:duration-200 ${diffClass}`}
-                        style={{ width: `${pct}%` }}
-                    />
-                </div>
+                <Slider className="flex-1" value={localValue} max={max} onChange={update} fillClassName={diffClass} />
                 <div className="min-w-[44px] shrink-0 text-xs tabular-nums">
                     <strong>{localValue}</strong>
                     <span className="text-(--muted-fg)">/{max}</span>

@@ -28,3 +28,5 @@ export { Badge, badgeStyles } from './badge';
 export type { BadgeProps } from './badge';
 export { Separator } from './separator';
 export type { SeparatorProps } from './separator';
+export { Slider } from './slider';
+export type { SliderProps } from './slider';

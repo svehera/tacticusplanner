@@ -53,6 +53,7 @@ import {
     StarsSelect2,
 } from '@/fsd/5-shared/ui/selects';
 import { Separator } from '@/fsd/5-shared/ui/separator';
+import { Slider } from '@/fsd/5-shared/ui/slider';
 import { Switch } from '@/fsd/5-shared/ui/switch';
 
 import { CampaignsService, ChipCampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -954,6 +955,49 @@ const RangeShowcase = () => {
             <TextField type="number" label="Min rank" placeholder="0" value={min} onChange={setMin} className="w-28" />
             <span className="mb-2.5 text-(--muted-fg)">–</span>
             <TextField type="number" label="Max rank" placeholder="∞" value={max} onChange={setMax} className="w-28" />
+        </div>
+    );
+};
+
+const SliderShowcase = () => {
+    const [a, setA] = useState(30);
+    const [b, setB] = useState(15);
+    const [c, setC] = useState(3);
+    return (
+        <div className="flex flex-col gap-6">
+            <div className="flex flex-col gap-1">
+                <span className="text-xs text-(--muted-fg)">Default (primary) — max 75</span>
+                <div className="flex items-center gap-3">
+                    <Slider className="flex-1" value={a} max={75} onChange={setA} />
+                    <span className="w-12 shrink-0 text-right text-sm tabular-nums">{a} / 75</span>
+                </div>
+            </div>
+            <div className="flex flex-col gap-1">
+                <span className="text-xs text-(--muted-fg)">Custom fill — max 40</span>
+                <div className="flex items-center gap-3">
+                    <Slider
+                        className="flex-1"
+                        value={b}
+                        max={40}
+                        onChange={setB}
+                        fillClassName="bg-[var(--diff-elite)]"
+                    />
+                    <span className="w-12 shrink-0 text-right text-sm tabular-nums">{b} / 40</span>
+                </div>
+            </div>
+            <div className="flex flex-col gap-1">
+                <span className="text-xs text-(--muted-fg)">Event challenge — max 3</span>
+                <div className="flex items-center gap-3">
+                    <Slider
+                        className="flex-1"
+                        value={c}
+                        max={3}
+                        onChange={setC}
+                        fillClassName="bg-[var(--diff-event-chal)]"
+                    />
+                    <span className="w-12 shrink-0 text-right text-sm tabular-nums">{c} / 3</span>
+                </div>
+            </div>
         </div>
     );
 };
@@ -2522,6 +2566,12 @@ export const UiKitPage = () => {
                         <Loader variant="spin" size="extra-large" />
                     </Row>
                 </Group>
+            </Section>
+
+            <Separator />
+
+            <Section id="slider" title="Slider">
+                <SliderShowcase />
             </Section>
 
             <Separator />
