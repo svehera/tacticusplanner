@@ -1400,6 +1400,42 @@ describe('UpgradesService.getUpgrades', () => {
         expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(80);
     });
 
+    it('requires zero shards for an unlock goal when the character is already unlocked', () => {
+        const abraxas = CharactersService.getUnit('thousInfernalMaster')!;
+        const character = createCharacter(abraxas, { rank: Rank.Stone1, shards: 0 });
+        const goal = createUnlockGoal(abraxas, {
+            goalId: 'goal-abraxas-already-unlocked',
+            unitId: abraxas.snowprintId,
+            unitName: abraxas.shortName ?? abraxas.name,
+            unitIcon: abraxas.icon ?? '',
+            unitRoundIcon: abraxas.roundIcon ?? '',
+            unitAlliance: abraxas.alliance ?? Alliance.Chaos,
+        });
+
+        const upgrades = UpgradesService.getUpgrades({}, [character], [], [goal]);
+        const shardName = `shards_${abraxas.snowprintId}`;
+
+        expect(upgrades[0].baseUpgradesTotal[shardName] ?? 0).toBe(0);
+    });
+
+    it('still requires shards for an unlock goal when the character is not yet unlocked', () => {
+        const abraxas = CharactersService.getUnit('thousInfernalMaster')!;
+        const character = createCharacter(abraxas, { rank: Rank.Locked, shards: 50 });
+        const goal = createUnlockGoal(abraxas, {
+            goalId: 'goal-abraxas-not-yet-unlocked',
+            unitId: abraxas.snowprintId,
+            unitName: abraxas.shortName ?? abraxas.name,
+            unitIcon: abraxas.icon ?? '',
+            unitRoundIcon: abraxas.roundIcon ?? '',
+            unitAlliance: abraxas.alliance ?? Alliance.Chaos,
+        });
+
+        const upgrades = UpgradesService.getUpgrades({}, [character], [], [goal]);
+        const shardName = `shards_${abraxas.snowprintId}`;
+
+        expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(130);
+    });
+
     it('counts World Eaters rares and legendaries across two Kharn goals', () => {
         const kharn = CharactersService.getUnit('worldKharn')!;
         const character = createCharacter(kharn);
