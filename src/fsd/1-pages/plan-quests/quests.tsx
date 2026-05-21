@@ -5,6 +5,7 @@ import { useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
@@ -26,6 +27,15 @@ interface ResolvedEnemyData {
     npc: INpcData;
     stats: INpcStats; // The specific stats for this level
 }
+
+const tierBadgeBg: Record<number, string> = {
+    [Rarity.Common]: 'bg-(--rarity-common)/30 border-(--rarity-common)/60',
+    [Rarity.Uncommon]: 'bg-(--rarity-uncommon)/30 border-(--rarity-uncommon)/60',
+    [Rarity.Rare]: 'bg-(--rarity-rare)/30 border-(--rarity-rare)/60',
+    [Rarity.Epic]: 'bg-(--rarity-epic)/30 border-(--rarity-epic)/60',
+    [Rarity.Legendary]: 'bg-(--rarity-legendary)/30 border-(--rarity-legendary)/60',
+    [Rarity.Mythic]: 'bg-(--rarity-mythic)/30 border-(--rarity-mythic)/60',
+};
 
 const getUpgradeRarity = (upgradeId: string): RarityString => {
     const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
@@ -112,18 +122,15 @@ export const Quests = () => {
         return { acquired, required, units: [...resolvedChars, ...resolvedMows] as Array<ICharacter2 | IMow2> };
     };
 
-    const showLaunchBanner = Date.now() <= new Date('2026-03-22T23:59:59').getTime();
-
     return (
-        <div className="flex flex-col gap-4 p-2 text-slate-900 dark:text-slate-100">
-            {showLaunchBanner && (
-                <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-100">
-                    Thanks for using the new quests feature! Use this code in game <b>PLANNERQUEST</b>
-                </div>
-            )}
+        <div className="space-y-8 py-6">
+            <div>
+                <h2>Quests</h2>
+                <p className="text-sm text-(--muted-fg)">Browse hero quest tiers, battles, and loot requirements.</p>
+            </div>
 
             {/* Header / Selector */}
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-slate-100 p-4 dark:bg-slate-800">
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-(--secondary) p-4">
                 <UnitsAutocomplete<IUnit>
                     // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
                     unit={char ?? null}
@@ -141,15 +148,15 @@ export const Quests = () => {
                 {quest && (
                     <div className="flex items-center gap-4">
                         <div className="flex flex-col items-end">
-                            <span className="text-xs font-bold uppercase opacity-60">Allowed</span>
+                            <span className="text-xs font-bold text-(--muted-fg) uppercase">Allowed</span>
                             <div className="flex gap-1">
                                 {quest.allowedFactions.map(f => (
                                     <FactionImage key={f} faction={f} />
                                 ))}
                             </div>
                         </div>
-                        <div className="flex flex-col items-end border-l border-slate-300 pl-4 dark:border-slate-700">
-                            <span className="text-xs font-bold uppercase opacity-60">Enemies</span>
+                        <div className="flex flex-col items-end border-l border-(--border) pl-4">
+                            <span className="text-xs font-bold text-(--muted-fg) uppercase">Enemies</span>
                             <div className="flex gap-1">
                                 {quest.enemyFactions.map(f => (
                                     <FactionImage key={f} faction={f} />
@@ -167,22 +174,23 @@ export const Quests = () => {
                     return (
                         <div
                             key={tier.index}
-                            className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+                            className="overflow-hidden rounded-xl border border-(--border) bg-(--card-bg) shadow-sm">
                             <button
                                 onClick={() => toggleTier(tier.index)}
-                                className="flex w-full items-center justify-between p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800">
+                                className="flex w-full cursor-pointer items-center justify-between p-4 transition-colors hover:bg-(--primary)/10">
                                 <div className="flex items-center gap-3">
-                                    <div className="rounded-md bg-blue-600 px-3 py-1 text-sm font-bold text-white">
+                                    <div
+                                        className={`rounded-md border px-3 py-1 text-sm font-bold text-(--fg) ${tierBadgeBg[tier.index] ?? ''}`}>
                                         {RarityMapper.rarityToRarityString(tier.index as unknown as Rarity)} Tier
                                     </div>
-                                    <span className="text-sm opacity-70">{tier.battles.length} Battles</span>
+                                    <span className="text-sm text-(--muted-fg)">{tier.battles.length} Battles</span>
                                 </div>
                                 {isTierExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
                             </button>
 
                             {/* Battles Content */}
                             {isTierExpanded && (
-                                <div className="divide-y divide-slate-100 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-700">
+                                <div className="divide-y divide-(--border) border-t border-(--border)">
                                     {tier.battles.toReversed().map(battle => {
                                         const battleKey = `${quest.unitId}-${tier.index}-${battle.battleNr}`;
                                         const isBattleExpanded = !!expandedBattles[battleKey];
@@ -196,7 +204,7 @@ export const Quests = () => {
                                                         <span className="min-w-[70px] text-sm font-medium">
                                                             Battle {battle.battleNr}
                                                         </span>
-                                                        <div className="flex items-center gap-2 rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+                                                        <div className="flex items-center gap-2 rounded-md bg-(--fg)/8 px-2 py-1">
                                                             <UpgradeImage
                                                                 material={battle.loot.reward.upgradeId}
                                                                 iconPath={
@@ -207,7 +215,7 @@ export const Quests = () => {
                                                                 rarity={getUpgradeRarity(battle.loot.reward.upgradeId)}
                                                             />
                                                             <span
-                                                                className={`text-xs font-bold ${needing.acquired >= needing.required ? 'text-green-500' : ''}`}>
+                                                                className={`text-xs font-bold ${needing.acquired >= needing.required ? 'text-(--success)' : ''}`}>
                                                                 {needing.acquired} / {needing.required}
                                                             </span>
                                                         </div>
@@ -222,19 +230,21 @@ export const Quests = () => {
                                                     </div>
 
                                                     <div className="flex items-center gap-2">
-                                                        <button
-                                                            onClick={() => toggleBattle(battleKey)}
-                                                            className="flex items-center gap-1 text-xs font-semibold tracking-wider text-blue-500 uppercase hover:text-blue-600">
+                                                        <Button
+                                                            appearance="plain"
+                                                            intent="primary"
+                                                            size="extra-small"
+                                                            onPress={() => toggleBattle(battleKey)}>
                                                             <Users size={14} />
                                                             {isBattleExpanded ? 'Hide Enemies' : 'Show Enemies'}
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
 
                                                 {/* Expandable Enemy Section */}
                                                 {isBattleExpanded && (
-                                                    <div className="bg-slate-50 px-4 pt-2 pb-4 dark:bg-black/20">
-                                                        <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-slate-200 p-3 dark:border-slate-700">
+                                                    <div className="bg-(--fg)/5 px-4 pt-2 pb-4">
+                                                        <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-(--border) p-3">
                                                             <div className="mb-3 flex flex-wrap items-start gap-x-3 gap-y-6">
                                                                 {battle.enemies.map((enemy, enemyIndex) => {
                                                                     const npc = NpcService.getNpcById(enemy.name);
@@ -249,7 +259,7 @@ export const Quests = () => {
                                                                         return (
                                                                             <div
                                                                                 key={enemyIndex}
-                                                                                className="text-xs text-red-500">
+                                                                                className="text-xs text-(--danger)">
                                                                                 Error: {enemy.name}
                                                                             </div>
                                                                         );
@@ -260,21 +270,15 @@ export const Quests = () => {
                                                                         stats: npc.stats[progressionIndex],
                                                                     };
                                                                     return (
-                                                                        <button
+                                                                        <div
                                                                             key={enemyIndex}
-                                                                            onClick={() => {}}
-                                                                            className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                                                            style={{
-                                                                                transform: 'scale(0.3)',
-                                                                                transformOrigin: 'top left',
-                                                                            }}
-                                                                            title="Click for details">
+                                                                            className="relative h-[75px] w-[60px] origin-top-left scale-[0.3] rounded transition-all">
                                                                             <NpcPortrait
                                                                                 id={data.id}
                                                                                 rank={data.stats.rank}
                                                                                 stars={data.stats.rarityStars}
                                                                             />
-                                                                        </button>
+                                                                        </div>
                                                                     );
                                                                 })}
                                                             </div>
