@@ -1,4 +1,5 @@
-﻿import { ArmageddonState, defaultArmageddonState } from '@/reducers/armageddon.reducer';
+﻿import { ArmageddonState } from '@/reducers/armageddon.reducer';
+import { migrateArmageddonState } from '@/reducers/migrations';
 import { defaultPlayerMetadataState, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
 
 import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
@@ -105,7 +106,7 @@ export class GlobalState implements IGlobalState {
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
-        this.armageddon = personalData.armageddon ?? defaultArmageddonState;
+        this.armageddon = migrateArmageddonState(personalData.armageddon);
         this.playerMetadata = personalData.playerMetadata ?? defaultPlayerMetadataState;
         this.onslaughtPreferences = personalData.onslaughtPreferences ?? defaultOnslaughtPreferences;
     }
