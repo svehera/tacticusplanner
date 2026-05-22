@@ -26,7 +26,7 @@ const ALL_OPTIONS: OnslaughtTierOption[] = ONSLAUGHT_SECTORS.flatMap(sector => [
 ]);
 
 function optionKey(o: OnslaughtTierOption) {
-    return o.isWhole ? `${o.sector}-whole` : `${o.sector}-${o.tier}`;
+    return `${o.sector}-${o.tier}`;
 }
 
 export const OnslaughtTierSelect = ({
