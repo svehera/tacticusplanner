@@ -9,6 +9,7 @@ import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/characte
 import { GuildWarTeamType, IGWLayoutZone } from '@/fsd/3-features/guild-war/guild-war.models';
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
+import { defaultOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { ArenaLeague } from '@/fsd/1-pages/input-xp-income/models';
 
 import { DailyRaidsStrategy, Difficulty, PersonalGoalType } from './enums';
@@ -445,6 +446,7 @@ export const defaultData: IPersonalData2 = {
     gameModeTokens: {},
     armageddon: { powerLevel: 1, week: 1, day: 'MON', structuredCart: {}, purchased: {} },
     playerMetadata: { playerName: undefined, powerLevel: undefined },
+    onslaughtPreferences: defaultOnslaughtPreferences,
 };
 
 export const goalsLimit = 100;

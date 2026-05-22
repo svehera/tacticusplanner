@@ -6,7 +6,7 @@ import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
-import { Alliance, Rank, Rarity, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
+import { Alliance, Rank, Rarity, RarityStars, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
@@ -32,6 +32,11 @@ import {
 } from '@/fsd/3-features/goals/goals.models';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
+import {
+    IOnslaughtPreferences,
+    defaultOnslaughtPreferences,
+    getOnslaughtMidpointForCharacter,
+} from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 import { MowLookupService } from '@/fsd/1-pages/learn-mow/mow-lookup.service';
@@ -283,7 +288,8 @@ export class GoalsService {
     static prepareGoals(
         goals: IPersonalGoal[],
         characters: IUnit[],
-        onlySelected: boolean
+        onlySelected: boolean,
+        onslaughtPreferences: IOnslaughtPreferences = defaultOnslaughtPreferences
     ): {
         allGoals: TypedGoalSelect[];
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
@@ -317,7 +323,7 @@ export class GoalsService {
                     console.warn('Goal not applicable for character or mow:', g);
                     return;
                 }
-                return this.convertToTypedGoal(g, relatedCharacter);
+                return this.convertToTypedGoal(g, relatedCharacter, onslaughtPreferences);
             })
             .filter(g => !!g) as TypedGoalSelect[];
 
@@ -350,7 +356,11 @@ export class GoalsService {
             ascendGoals,
         };
     }
-    static convertToTypedGoal(g: IPersonalGoal, unit?: IUnit): TypedGoalSelect | undefined {
+    static convertToTypedGoal(
+        g: IPersonalGoal,
+        unit?: IUnit,
+        onslaughtPreferences: IOnslaughtPreferences = defaultOnslaughtPreferences
+    ): TypedGoalSelect | undefined {
         if (g.type === PersonalGoalType.UpgradeMaterial) {
             if (g.upgradeMaterialId === undefined) return;
             if ((g.upgradeMaterialQuantity ?? 0) < 1) return;
@@ -408,7 +418,18 @@ export class GoalsService {
                     mythicShards: unit.mythicShards ?? 0,
                     starsStart: unit.stars,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
-                    onslaughtShards: g.shardsPerToken ?? 1,
+                    onslaughtShards:
+                        g.shardsPerToken ??
+                        (unit.alliance
+                            ? Math.round(
+                                  getOnslaughtMidpointForCharacter(
+                                      unit.rarity,
+                                      unit.stars,
+                                      unit.alliance as Alliance,
+                                      onslaughtPreferences
+                                  )
+                              )
+                            : 0),
                     onslaughtMythicShards: g.mythicShardsPerToken ?? 1,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
@@ -433,6 +454,22 @@ export class GoalsService {
             };
 
             if (g.type === PersonalGoalType.Ascend) {
+                const targetStars = g.targetStars ?? rarityToStars[g.targetRarity!];
+                const targetNeedsMythicShards =
+                    g.targetRarity! >= Rarity.Mythic ||
+                    (g.targetRarity! === Rarity.Legendary && targetStars >= RarityStars.OneBlueStar);
+                const isCrossBoundary = unit.stars < RarityStars.OneBlueStar && targetNeedsMythicShards;
+                const defaultMythicShards =
+                    isCrossBoundary && unit.alliance
+                        ? Math.round(
+                              getOnslaughtMidpointForCharacter(
+                                  Rarity.Legendary,
+                                  RarityStars.OneBlueStar,
+                                  unit.alliance,
+                                  onslaughtPreferences
+                              )
+                          )
+                        : 0;
                 const result: ICharacterAscendGoal = {
                     type: PersonalGoalType.Ascend,
                     rarityStart: unit.rarity,
@@ -440,9 +477,20 @@ export class GoalsService {
                     shards: unit.shards,
                     mythicShards: unit.mythicShards ?? 0,
                     starsStart: unit.stars,
-                    starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
-                    onslaughtShards: g.shardsPerToken ?? 1,
-                    onslaughtMythicShards: g.mythicShardsPerToken ?? 0,
+                    starsEnd: targetStars,
+                    onslaughtShards:
+                        g.shardsPerToken ??
+                        (unit.alliance
+                            ? Math.round(
+                                  getOnslaughtMidpointForCharacter(
+                                      unit.rarity,
+                                      unit.stars,
+                                      unit.alliance,
+                                      onslaughtPreferences
+                                  )
+                              )
+                            : 0),
+                    onslaughtMythicShards: g.mythicShardsPerToken ?? defaultMythicShards,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',

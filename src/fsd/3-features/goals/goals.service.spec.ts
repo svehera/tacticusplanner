@@ -205,7 +205,7 @@ describe('Goal service', () => {
                 mythicShards: 0,
                 starsStart: characterMock.stars,
                 starsEnd: RarityStars.RedThreeStars,
-                onslaughtShards: 1,
+                onslaughtShards: 0,
                 onslaughtMythicShards: 0,
                 farmType: 'both',
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,

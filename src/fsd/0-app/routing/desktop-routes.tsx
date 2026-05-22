@@ -7,6 +7,7 @@ import { guildApiLazyRoute } from '@/fsd/1-pages/guild-api/guild-api.route';
 import { guildInsightsLazyRoute } from '@/fsd/1-pages/guild-insights/guild-insights.route';
 import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war-zones.route';
 import { equipmentLazyRoute } from '@/fsd/1-pages/input-equipment/equipment.route';
+import { onslaughtLazyRoute } from '@/fsd/1-pages/input-onslaught/onslaught.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
 import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
@@ -31,6 +32,7 @@ import DesktopApp from './desktop-app';
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
     rosterSnapshotsLazyRoute,
+    onslaughtLazyRoute,
     myProgressLazyRoute,
     {
         path: 'input/inventory',

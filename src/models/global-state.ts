@@ -12,6 +12,7 @@ import { UpgradesService } from '@/fsd/4-entities/upgrade';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
+import { IOnslaughtPreferences, defaultOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
@@ -70,6 +71,7 @@ export class GlobalState implements IGlobalState {
     readonly gameModeTokens: IGameModeTokensState;
     readonly armageddon: ArmageddonState;
     readonly playerMetadata: PlayerMetadataState;
+    readonly onslaughtPreferences: IOnslaughtPreferences;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -105,6 +107,7 @@ export class GlobalState implements IGlobalState {
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
         this.armageddon = personalData.armageddon ?? defaultArmageddonState;
         this.playerMetadata = personalData.playerMetadata ?? defaultPlayerMetadataState;
+        this.onslaughtPreferences = personalData.onslaughtPreferences ?? defaultOnslaughtPreferences;
     }
 
     static initCharacters(
@@ -353,6 +356,7 @@ export class GlobalState implements IGlobalState {
             gameModeTokens: value.gameModeTokens,
             armageddon: value.armageddon,
             playerMetadata: value.playerMetadata,
+            onslaughtPreferences: value.onslaughtPreferences,
             teams: value.teams,
             teams2: value.teams2,
             warDefense2: value.warDefense2,
