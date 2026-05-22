@@ -119,7 +119,6 @@ export const UserMenu = () => {
             try {
                 const content = await file.text();
                 const personalData: IPersonalData2 = convertData(JSON.parse(content));
-                console.error('json armageddon:', personalData.armageddon);
                 personalData.modifiedDate = new Date();
 
                 // When we import JSON, we need to bump the local version to ensure
