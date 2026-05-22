@@ -799,8 +799,8 @@ export const Armageddon = () => {
     const [week, setWeekState] = useState<1 | 2 | 3>(1);
     const [day, setDayState] = useState<Day>('MON');
     const pl = playerMetadata.powerLevel ?? 1;
-    const [cart, setCart] = useState<CartRecord>(() => armageddonState.structuredCart ?? {});
-    const [purchased, setPurchased] = useState<Record<string, number>>(() => armageddonState.purchased ?? {});
+    const cart: CartRecord = armageddonState.structuredCart ?? {};
+    const purchased: Record<string, number> = armageddonState.purchased ?? {};
     const [purchasedDialogKey, setPurchasedDialogKey] = useState<string | undefined>();
     const [confirmResetWeek, setConfirmResetWeek] = useState<1 | 2 | 3 | undefined>();
     const [needsSync, setNeedsSync] = useState(false);
@@ -813,26 +813,6 @@ export const Armageddon = () => {
     const setWeek = setWeekState;
     const setDay = setDayState;
 
-    // Persist cart whenever it changes (skip initial render to avoid a spurious save on mount)
-    const isFirstCartPersist = useRef(true);
-    useEffect(() => {
-        if (isFirstCartPersist.current) {
-            isFirstCartPersist.current = false;
-            return;
-        }
-        dispatch.armageddon({ type: 'Update', setting: 'structuredCart', value: cart });
-    }, [cart, dispatch]);
-
-    // Persist purchased whenever it changes
-    const isFirstPurchasedPersist = useRef(true);
-    useEffect(() => {
-        if (isFirstPurchasedPersist.current) {
-            isFirstPurchasedPersist.current = false;
-            return;
-        }
-        dispatch.armageddon({ type: 'Update', setting: 'purchased', value: purchased });
-    }, [purchased, dispatch]);
-
     // Mark needs-sync when purchases change (after first render)
     useEffect(() => {
         if (needsSyncFirstRender.current) {
@@ -841,19 +821,17 @@ export const Armageddon = () => {
         }
         if (hasPurchased) setNeedsSync(true);
         else setNeedsSync(false);
-    }, [purchased]); // eslint-disable-line react-hooks/exhaustive-deps
+    }, [armageddonState.purchased]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Remove purchased entries for cart items that have been removed
     useEffect(() => {
         const validKeys = new Set(Object.keys(cart));
-        setPurchased(p => {
-            const toRemove = Object.keys(p).filter(k => !validKeys.has(k));
-            if (toRemove.length === 0) return p;
-            const next = { ...p };
-            for (const k of toRemove) delete next[k];
-            return next;
-        });
-    }, [cart]);
+        const toRemove = Object.keys(purchased).filter(k => !validKeys.has(k));
+        if (toRemove.length === 0) return;
+        const next = { ...purchased };
+        for (const k of toRemove) delete next[k];
+        dispatch.armageddon({ type: 'Update', setting: 'purchased', value: next });
+    }, [armageddonState.structuredCart]); // eslint-disable-line react-hooks/exhaustive-deps
 
     // Resolve characters and mows
     const characters = useMemo(
@@ -983,41 +961,48 @@ export const Armageddon = () => {
         );
     }, [estimatedUpgradesTotal, inventory.upgrades]);
 
-    const setCartQty = useCallback((key: string, qty: number, newEntryMeta?: Omit<CartEntry, 'quantity'>) => {
-        setCart(previous => {
+    const setCartQty = useCallback(
+        (key: string, qty: number, newEntryMeta?: Omit<CartEntry, 'quantity'>) => {
+            const previous = cart;
+            let next: CartRecord;
             if (qty <= 0) {
-                const next = { ...previous };
+                next = { ...previous };
                 delete next[key];
-                return next;
+            } else {
+                const existing = previous[key];
+                if (existing) {
+                    next = { ...previous, [key]: { ...existing, quantity: qty } };
+                } else if (newEntryMeta) {
+                    next = { ...previous, [key]: { ...newEntryMeta, quantity: qty } };
+                } else {
+                    return;
+                }
             }
-            const existing = previous[key];
-            if (existing) return { ...previous, [key]: { ...existing, quantity: qty } };
-            if (newEntryMeta) return { ...previous, [key]: { ...newEntryMeta, quantity: qty } };
-            return previous;
-        });
-    }, []);
+            dispatch.armageddon({ type: 'Update', setting: 'structuredCart', value: next });
+        },
+        [cart, dispatch]
+    );
 
-    const setPurchasedQty = useCallback((key: string, qty: number) => {
-        setPurchased(previous => {
-            if (qty <= 0) {
-                const next = { ...previous };
-                delete next[key];
-                return next;
-            }
-            return { ...previous, [key]: qty };
-        });
-    }, []);
+    const setPurchasedQty = useCallback(
+        (key: string, qty: number) => {
+            const previous = purchased;
+            const next = qty <= 0 ? (({ [key]: _, ...rest }) => rest)(previous) : { ...previous, [key]: qty };
+            dispatch.armageddon({ type: 'Update', setting: 'purchased', value: next });
+        },
+        [purchased, dispatch]
+    );
 
-    const resetWeek = useCallback((w: 1 | 2 | 3) => {
-        setCart(previous => {
-            const next = { ...previous };
+    const resetWeek = useCallback(
+        (w: 1 | 2 | 3) => {
+            const next = { ...cart };
             for (const k of Object.keys(next)) {
                 if (next[k].week === w) delete next[k];
             }
-            return next;
-        });
-        setConfirmResetWeek(undefined);
-    }, []);
+            dispatch.armageddon({ type: 'Update', setting: 'structuredCart', value: next });
+            setConfirmResetWeek(undefined);
+        },
+        [cart, dispatch]
+    );
 
     const tier = plTier(pl);
 
