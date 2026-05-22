@@ -157,6 +157,7 @@ export const Goals = () => {
             upgrades: inventory.upgrades,
             completedLocations: dailyRaids.raidedLocations,
             onslaughtTokensToday,
+            onslaughtPreferences,
         },
         characters,
         resolvedMows,

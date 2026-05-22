@@ -416,6 +416,7 @@ export interface IEstimatedRanksSettings {
     filters?: ICampaignsFilters;
     upgrades: Record<string, number>;
     onslaughtTokensToday?: number;
+    onslaughtPreferences?: IOnslaughtPreferences;
 }
 
 export interface IInventory {

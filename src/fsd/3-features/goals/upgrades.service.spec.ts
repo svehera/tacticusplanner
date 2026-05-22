@@ -1,3 +1,4 @@
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { describe, it, expect } from 'vitest';
 
@@ -37,6 +38,8 @@ import {
     IUpgradeRaid,
 } from '@/fsd/3-features/goals/goals.models';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 
 const createAscendGoal = (overrides: Partial<ICharacterAscendGoal> = {}): ICharacterAscendGoal => ({
     priority: 1,
@@ -378,6 +381,11 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             },
             upgrades: inventory,
             onslaughtTokensToday: 3,
+            onslaughtPreferences: {
+                [Alliance.Imperial]: { sector: 'stone', tier: 1 },
+                [Alliance.Xenos]: { sector: 'stone', tier: 1 },
+                [Alliance.Chaos]: { sector: 'stone', tier: 1 },
+            },
         };
 
         const day: IUpgradesRaidsDay = {
@@ -405,12 +413,12 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids[0].id).toBe(`shards_${character.snowprintId}`);
         expect(day.raids[0].raidLocations).toHaveLength(3);
         expect(day.raids[0].raidLocations.every(loc => loc.raidsToPerform === 1)).toBe(true);
-        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([6, 7, 6]);
+        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([2, 3, 2]);
     });
 
     it('consumes only the tokens needed to complete onslaught shards', () => {
         const baseChar = CharactersService.charactersData[0];
-        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar, shards: 40 });
+        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar, shards: 45 });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-2',
@@ -450,6 +458,11 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             },
             upgrades: inventory,
             onslaughtTokensToday: 3,
+            onslaughtPreferences: {
+                [Alliance.Imperial]: { sector: 'stone', tier: 1 },
+                [Alliance.Xenos]: { sector: 'stone', tier: 1 },
+                [Alliance.Chaos]: { sector: 'stone', tier: 1 },
+            },
         };
 
         const day: IUpgradesRaidsDay = {
@@ -476,7 +489,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids).toHaveLength(1);
         expect(day.raids[0].id).toBe(`shards_${character.snowprintId}`);
         expect(day.raids[0].raidLocations).toHaveLength(2);
-        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([6, 7]);
+        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([2, 3]);
     });
 
     it('allocates onslaught raids across two goals that each need one token', () => {
@@ -788,12 +801,12 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             starsEnd: RarityStars.ThreeBlueStars,
             onslaughtShards: 10.5,
             onslaughtMythicShards: 1.5,
-            onslaughtSector: 'diamond',
-            onslaughtTier: 1,
         });
 
         const inventory: Record<string, number> = { [`shards_${character.snowprintId}`]: 20 };
-        const settings = createSettings();
+        const settings = createSettings({
+            onslaughtPreferences: { [Alliance.Imperial]: { sector: 'diamond', tier: 1 } } as IOnslaughtPreferences,
+        });
         const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
 
         UpgradesService.addOnslaughtsForDay(day, [character], [], 1, [goal], {}, settings, inventory);
@@ -823,12 +836,12 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             starsEnd: RarityStars.ThreeBlueStars,
             onslaughtShards: 10.5,
             onslaughtMythicShards: 1.5,
-            onslaughtSector: 'diamond',
-            onslaughtTier: 1,
         });
 
         const inventory: Record<string, number> = { [`shards_${character.snowprintId}`]: 1085 };
-        const settings = createSettings();
+        const settings = createSettings({
+            onslaughtPreferences: { [Alliance.Imperial]: { sector: 'diamond', tier: 1 } } as IOnslaughtPreferences,
+        });
         const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
 
         UpgradesService.addOnslaughtsForDay(day, [character], [], 1, [goal], {}, settings, inventory);
@@ -3198,8 +3211,6 @@ describe('UpgradesService.canOnslaughtCharacterForRegularShards', () => {
             starsEnd: RarityStars.ThreeBlueStars,
             onslaughtShards: 10.5,
             onslaughtMythicShards: 1.5,
-            onslaughtSector: 'diamond',
-            onslaughtTier: 1,
         });
 
         // Epic.RedTwoStars = 315 base. BlueStar = 1400. Incremental = 1085.
@@ -3295,8 +3306,6 @@ describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
             starsEnd: RarityStars.ThreeBlueStars,
             onslaughtShards: 10.5,
             onslaughtMythicShards: 1.5,
-            onslaughtSector: 'diamond',
-            onslaughtTier: 1,
         });
 
         // Real character is below blue star, but virtual state crosses the threshold → can farm mythic shards.

@@ -207,8 +207,6 @@ describe('Goal service', () => {
                 starsEnd: RarityStars.RedThreeStars,
                 onslaughtShards: 0,
                 onslaughtMythicShards: 0,
-                onslaughtSector: undefined,
-                onslaughtTier: undefined,
                 farmType: 'both',
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,

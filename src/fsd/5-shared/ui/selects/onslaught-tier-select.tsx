@@ -79,7 +79,7 @@ export const OnslaughtTierSelect = ({
                                             : `${ONSLAUGHT_SECTOR_LABELS[opt.sector]} tier ${opt.tier}`
                                     }
                                     className={({ active }) =>
-                                        `pl-3' relative cursor-pointer py-2 pr-4 font-medium transition-colors select-none ${
+                                        `relative cursor-pointer py-2 pr-4 pl-3 font-medium transition-colors select-none ${
                                             active
                                                 ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
                                                 : 'text-gray-900 dark:text-gray-200'

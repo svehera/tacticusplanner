@@ -431,8 +431,6 @@ export class GoalsService {
                               )
                             : 0),
                     onslaughtMythicShards: g.mythicShardsPerToken ?? 1,
-                    onslaughtSector: onslaughtPreferences[unit.alliance as Alliance]?.sector,
-                    onslaughtTier: onslaughtPreferences[unit.alliance as Alliance]?.tier,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
@@ -493,8 +491,6 @@ export class GoalsService {
                               )
                             : 0),
                     onslaughtMythicShards: g.mythicShardsPerToken ?? defaultMythicShards,
-                    onslaughtSector: onslaughtPreferences[unit.alliance]?.sector,
-                    onslaughtTier: onslaughtPreferences[unit.alliance]?.tier,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',

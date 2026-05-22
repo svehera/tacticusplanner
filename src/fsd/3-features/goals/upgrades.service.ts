@@ -1655,7 +1655,7 @@ export class UpgradesService {
     ): boolean {
         // In simulation context, check virtual state: if the character has virtually reached
         // blue star they no longer need regular shards from onslaught.
-        if (inventory !== undefined && goal.onslaughtSector && goal.onslaughtTier) {
+        if (inventory !== undefined) {
             const incrementalShards = inventory['shards_' + unitId] ?? 0;
             const [, virtualStars] = this.getVirtualRarityAndStars(
                 goal.rarityStart,
@@ -1689,7 +1689,7 @@ export class UpgradesService {
     ): boolean {
         // In simulation context, check virtual state: if the character has virtually reached
         // blue star (from accumulated regular shards) they can now farm mythic shards.
-        if (inventory !== undefined && goal.onslaughtSector && goal.onslaughtTier && goal.onslaughtMythicShards > 0) {
+        if (inventory !== undefined) {
             const incrementalShards = inventory['shards_' + unitId] ?? 0;
             const [, virtualStars] = this.getVirtualRarityAndStars(
                 goal.rarityStart,
@@ -1926,24 +1926,24 @@ export class UpgradesService {
             let shards = 0;
             if (this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal, inventory)) {
                 upgradeId = 'shards_' + goal.unitId;
-                if (goal.onslaughtSector && goal.onslaughtTier) {
-                    const currentIncrementalShards = inventory[upgradeId] ?? 0;
-                    const [virtualRarity, virtualStars] = this.getVirtualRarityAndStars(
-                        goal.rarityStart,
-                        goal.starsStart,
-                        goal.rarityEnd,
-                        goal.starsEnd,
-                        currentIncrementalShards
-                    );
-                    shards = getOnslaughtRewardMidpoint(
-                        virtualRarity,
-                        virtualStars,
-                        goal.onslaughtSector,
-                        goal.onslaughtTier
-                    );
-                } else {
-                    shards = goal.onslaughtShards;
-                }
+                const alliancePrefs = settings.onslaughtPreferences?.[goal.unitAlliance] ?? {
+                    sector: 'stone',
+                    tier: 1,
+                };
+                const currentIncrementalShards = inventory[upgradeId] ?? 0;
+                const [virtualRarity, virtualStars] = this.getVirtualRarityAndStars(
+                    goal.rarityStart,
+                    goal.starsStart,
+                    goal.rarityEnd,
+                    goal.starsEnd,
+                    currentIncrementalShards
+                );
+                shards = getOnslaughtRewardMidpoint(
+                    virtualRarity,
+                    virtualStars,
+                    alliancePrefs.sector,
+                    alliancePrefs.tier
+                );
             } else {
                 // canOnslaughtCharacterForMythicShards must be true
                 // (either real stars >= OneBlueStar, or virtual state reached OneBlueStar for a cross-boundary goal)
