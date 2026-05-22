@@ -242,7 +242,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
         if (form.type === PersonalGoalType.Ascend) {
             if (unit === undefined) return true;
-            return unit.rarity === form.targetRarity && unit.stars === form.targetStars;
+            return unit.rarity <= (form.targetRarity ?? unit.rarity) && unit.stars <= (form.targetStars ?? unit.stars);
         }
 
         if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {

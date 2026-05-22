@@ -90,43 +90,37 @@ export const SetAscendGoal: React.FC<Props> = ({
                 </span>
             </div>
 
-            {(currentRarity < Rarity.Legendary || currentStars < RarityStars.OneBlueStar) && (
-                <>
-                    {alliance && shardRangeLabel && (
-                        <div className="flex items-center gap-2 text-sm">
-                            <OnslaughtIcon
-                                sector={onslaughtPreferences[alliance].sector}
-                                tier={onslaughtPreferences[alliance].tier}
-                                size={50}
-                            />
-                            <span className="text-gray-500">Estimated shards per onslaught:</span>
-                            <span className="font-medium">{shardRangeLabel}</span>
-                        </div>
-                    )}
-                </>
+            {currentStars < RarityStars.OneBlueStar && alliance && shardRangeLabel && (
+                <div className="flex items-center gap-2 text-sm">
+                    <OnslaughtIcon
+                        sector={onslaughtPreferences[alliance].sector}
+                        tier={onslaughtPreferences[alliance].tier}
+                        size={50}
+                    />
+                    <span className="text-gray-500">Estimated shards per onslaught:</span>
+                    <span className="font-medium">{shardRangeLabel}</span>
+                </div>
             )}
 
             {targetRarity >= Rarity.Mythic && alliance && (
-                <>
-                    <div className="flex items-center gap-2 text-sm">
-                        <OnslaughtIcon
-                            sector={onslaughtPreferences[alliance].sector}
-                            tier={onslaughtPreferences[alliance].tier}
-                            size={50}
-                        />
-                        <span className="text-gray-500">Estimated mythic shards per onslaught:</span>
-                        <span className="font-medium text-purple-600">
-                            {alliance
-                                ? formatOnslaughtRewardRange(
-                                      Rarity.Legendary,
-                                      RarityStars.OneBlueStar,
-                                      onslaughtPreferences[alliance].sector,
-                                      onslaughtPreferences[alliance].tier
-                                  )
-                                : '—'}
-                        </span>
-                    </div>
-                </>
+                <div className="flex items-center gap-2 text-sm">
+                    <OnslaughtIcon
+                        sector={onslaughtPreferences[alliance].sector}
+                        tier={onslaughtPreferences[alliance].tier}
+                        size={50}
+                    />
+                    <span className="text-gray-500">Estimated mythic shards per onslaught:</span>
+                    <span className="font-medium text-purple-600">
+                        {alliance
+                            ? formatOnslaughtRewardRange(
+                                  Rarity.Legendary,
+                                  RarityStars.OneBlueStar,
+                                  onslaughtPreferences[alliance].sector,
+                                  onslaughtPreferences[alliance].tier
+                              )
+                            : '—'}
+                    </span>
+                </div>
             )}
 
             <div className="flex items-center gap-3">

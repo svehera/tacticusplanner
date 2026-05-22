@@ -90,7 +90,7 @@ export const EditAscendGoal: React.FC<Props> = ({
                 </span>
             </div>
 
-            {(goal.rarityStart < Rarity.Mythic || goal.starsStart < RarityStars.OneBlueStar) && (
+            {goal.starsStart < RarityStars.OneBlueStar && (
                 <>
                     {alliance && (
                         <div className="flex items-center gap-2 text-sm">
