@@ -150,6 +150,9 @@ export const DailyRaids = () => {
         resolvedCharacters,
         resolvedMows,
         campaignsProgress,
+        gameModeTokens,
+        upgradeMaterialGoals,
+        onslaughtPreferences,
     ]);
 
     const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
@@ -181,6 +184,9 @@ export const DailyRaids = () => {
         resolvedCharacters,
         resolvedMows,
         campaignsProgress,
+        gameModeTokens,
+        onslaughtPreferences,
+        upgradeMaterialGoals,
     ]);
 
     return (

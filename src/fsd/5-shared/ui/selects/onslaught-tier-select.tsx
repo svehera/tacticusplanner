@@ -17,14 +17,12 @@ import {
 interface OnslaughtTierOption {
     sector: OnslaughtSector;
     tier: OnslaughtTier;
-    /** When true, this is the "whole sector cleared" shortcut (maps to tier 3) */
-    isWhole: boolean;
 }
 
 /** Flattened list: for each sector, show a "whole sector" option then tiers 1-3 */
 const ALL_OPTIONS: OnslaughtTierOption[] = ONSLAUGHT_SECTORS.flatMap(sector => [
-    ...ONSLAUGHT_TIERS.map(tier => ({ sector, tier, isWhole: false })),
-    { sector, tier: 4 as OnslaughtTier, isWhole: true },
+    ...ONSLAUGHT_TIERS.map(tier => ({ sector, tier })),
+    { sector, tier: 4 as OnslaughtTier },
 ]);
 
 function optionKey(o: OnslaughtTierOption) {
@@ -45,7 +43,7 @@ export const OnslaughtTierSelect = ({
     const handleChange = (value: OnslaughtTierOption) => onChange(value.sector, value.tier);
 
     // Find the matching option; prefer exact tier match, fall back to whole
-    const currentOption: OnslaughtTierOption = { sector, tier, isWhole: false };
+    const currentOption: OnslaughtTierOption = { sector, tier };
 
     return (
         <div className="w-full">
@@ -54,7 +52,7 @@ export const OnslaughtTierSelect = ({
             <Listbox
                 value={currentOption}
                 onChange={handleChange}
-                by={(a, z) => a.sector === z.sector && a.tier === z.tier && a.isWhole === z.isWhole}>
+                by={(a, z) => a.sector === z.sector && a.tier === z.tier}>
                 <div className="relative">
                     <Listbox.Button className="relative w-full cursor-pointer rounded-lg border border-slate-300 bg-white py-2 pr-10 pl-3 text-left shadow-sm transition-all hover:border-blue-500 focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white">
                         <OnslaughtIcon sector={sector} tier={tier} size={tier < 4 ? 40 : 50} />
@@ -73,11 +71,7 @@ export const OnslaughtTierSelect = ({
                                 <Listbox.Option
                                     key={optionKey(opt)}
                                     value={opt}
-                                    title={
-                                        opt.isWhole
-                                            ? `${ONSLAUGHT_SECTOR_LABELS[opt.sector]} (cleared — uses tier 3)`
-                                            : `${ONSLAUGHT_SECTOR_LABELS[opt.sector]} tier ${opt.tier}`
-                                    }
+                                    title={`${ONSLAUGHT_SECTOR_LABELS[opt.sector]} tier ${opt.tier}`}
                                     className={({ active }) =>
                                         `relative cursor-pointer py-2 pr-4 pl-3 font-medium transition-colors select-none ${
                                             active
