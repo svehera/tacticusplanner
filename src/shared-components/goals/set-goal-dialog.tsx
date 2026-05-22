@@ -27,7 +27,7 @@ import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
+import { Rarity, RarityStars, Rank, Alliance } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -61,6 +61,23 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     upgradeMaterialId: undefined,
     upgradeMaterialQuantity: 0,
 });
+
+function stringToAlliance(allianceString: string): Alliance | undefined {
+    switch (allianceString.toLowerCase()) {
+        case 'imperial': {
+            return Alliance.Imperial;
+        }
+        case 'xenos': {
+            return Alliance.Xenos;
+        }
+        case 'chaos': {
+            return Alliance.Chaos;
+        }
+        default: {
+            return undefined;
+        }
+    }
+}
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress, onslaughtPreferences } = useContext(StoreContext);
@@ -463,7 +480,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 farmType={form.shardFarmType ?? 'both'}
-                                alliance={isCharacter(unit) ? unit.alliance : undefined}
+                                alliance={
+                                    isCharacter(unit) || isMow(unit) ? stringToAlliance(unit.alliance) : undefined
+                                }
                                 onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}
                             />

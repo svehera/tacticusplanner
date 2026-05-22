@@ -40,6 +40,23 @@ interface Props {
     onClose?: (goal?: TypedGoalSelect) => void;
 }
 
+function stringToAlliance(allianceString: string): Alliance | undefined {
+    switch (allianceString.toLowerCase()) {
+        case 'imperial': {
+            return Alliance.Imperial;
+        }
+        case 'xenos': {
+            return Alliance.Xenos;
+        }
+        case 'chaos': {
+            return Alliance.Chaos;
+        }
+        default: {
+            return undefined;
+        }
+    }
+}
+
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
     const { goals, campaignsProgress, inventory, onslaughtPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -367,7 +384,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 unlockedLocations={unlockedLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 farmType={form.farmType ?? 'both'}
-                                alliance={isCharacter(unit) ? unit.alliance : undefined}
+                                alliance={
+                                    isCharacter(unit) || isMow(unit) ? stringToAlliance(unit.alliance) : undefined
+                                }
                                 onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}
                             />
