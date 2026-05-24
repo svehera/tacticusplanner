@@ -1,7 +1,7 @@
 // eslint-disable-next-line import-x/no-internal-modules
 import type factions from '@/data/factions.json';
 
-export { Alliance } from './alliance.enum';
+export { Alliance, allianceFromString } from './alliance.enum';
 export { Rarity, RarityString, XP_BOOK_ORDER, XP_BOOK_VALUE } from './rarity.enum';
 export { RarityStars } from './rarity-stars.enum';
 export { Rank, rankToString } from './rank.enum';

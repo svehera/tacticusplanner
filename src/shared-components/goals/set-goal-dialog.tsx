@@ -27,7 +27,7 @@ import { SetAscendGoal } from 'src/shared-components/goals/set-ascend-goal';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Rarity, RarityStars, Rank } from '@/fsd/5-shared/model';
+import { Rarity, RarityStars, Rank, allianceFromString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -463,7 +463,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 mythicCampaignsUsage={form.mythicCampaignsUsage!}
                                 farmType={form.shardFarmType ?? 'both'}
-                                alliance={isCharacter(unit) ? unit.alliance : undefined}
+                                alliance={
+                                    isCharacter(unit) || isMow(unit) ? allianceFromString(unit.alliance) : undefined
+                                }
                                 onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}
                             />
