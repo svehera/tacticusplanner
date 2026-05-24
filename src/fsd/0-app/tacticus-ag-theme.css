@@ -48,21 +48,21 @@
     /* via style-loader, appending after all static CSS. Our doubled-class    */
     /* selector (0,2,0) would lose to the injected rules on source order when */
     /* specificity is equal. !important wins the cascade unconditionally.     */
-    --ag-foreground-color: var(--fg) !important;
-    --ag-background-color: var(--card-bg) !important;
+    --ag-foreground-color: var(--data-surface-fg) !important;
+    --ag-background-color: var(--data-surface) !important;
     --ag-secondary-foreground-color: var(--muted-fg) !important;
-    --ag-data-color: var(--fg) !important;
+    --ag-data-color: var(--data-surface-fg) !important;
     --ag-disabled-foreground-color: color-mix(in oklab, var(--fg) 45%, transparent) !important;
     --ag-subheader-background-color: var(--muted) !important;
-    --ag-control-panel-background-color: var(--card-bg) !important;
+    --ag-control-panel-background-color: var(--data-surface) !important;
     --ag-modal-overlay-background-color: color-mix(in oklab, var(--fg) 50%, transparent) !important;
     --ag-tooltip-background-color: var(--overlay) !important;
 
     /* ─── Borders & dividers ─────────────────────────────────────────────── */
-    --ag-border-color: var(--border) !important;
-    --ag-secondary-border-color: var(--border) !important;
-    --ag-row-border-color: var(--border) !important;
-    --ag-cell-horizontal-border: solid var(--border) !important;
+    --ag-border-color: var(--data-surface-border) !important;
+    --ag-secondary-border-color: var(--data-surface-border) !important;
+    --ag-row-border-color: var(--data-surface-border) !important;
+    --ag-cell-horizontal-border: solid var(--data-surface-border) !important;
     --ag-header-column-separator-color: transparent !important;
     --ag-header-column-resize-handle-color: var(--border) !important;
     --ag-header-column-resize-handle-height: 50%;
@@ -93,13 +93,13 @@
     --ag-input-focus-box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
     --ag-input-disabled-background-color: var(--muted);
     --ag-input-disabled-border-color: var(--border);
-    --ag-checkbox-background-color: var(--card-bg);
+    --ag-checkbox-background-color: var(--data-surface);
     --ag-checkbox-checked-color: var(--primary);
     --ag-checkbox-unchecked-color: var(--input);
     --ag-checkbox-indeterminate-color: var(--primary);
     --ag-toggle-button-on-background-color: var(--primary);
     --ag-toggle-button-off-background-color: var(--input);
-    --ag-toggle-button-switch-background-color: var(--card-bg);
+    --ag-toggle-button-switch-background-color: var(--data-surface);
 
     /* ─── States / accents ───────────────────────────────────────────────── */
     --ag-active-color: var(--primary);
@@ -123,7 +123,7 @@
 
 /* Header — eyebrow-style uppercase weight, like the rest of the kit */
 .ag-theme-material .ag-header {
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--data-surface-border);
 }
 .ag-theme-material .ag-header-cell-text {
     font-weight: 600;
@@ -146,7 +146,7 @@
 
 /* Rows — explicit bottom border (more reliable than ag's row-border-only mode) */
 .ag-theme-material .ag-row {
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--data-surface-border);
 }
 .ag-theme-material .ag-row-last {
     border-bottom: 0;
@@ -195,13 +195,13 @@
 /* Pinned columns — solid bg + clean divider */
 .ag-theme-material .ag-pinned-left-cols-container,
 .ag-theme-material .ag-pinned-left-header {
-    border-right: 1px solid var(--border);
-    background: var(--card-bg);
+    border-right: 1px solid var(--data-surface-border);
+    background: var(--data-surface);
 }
 .ag-theme-material .ag-pinned-right-cols-container,
 .ag-theme-material .ag-pinned-right-header {
-    border-left: 1px solid var(--border);
-    background: var(--card-bg);
+    border-left: 1px solid var(--data-surface-border);
+    background: var(--data-surface);
 }
 
 /* Focused cell — primary ring, not material's default blue underline */

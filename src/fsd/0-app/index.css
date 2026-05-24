@@ -10,23 +10,42 @@
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-border: var(--border);
-    --color-input: var(--input);
-
-    --color-ring: var(--ring);
-
+    /* ── Page ─────────────────────────────────── */
     --color-bg: var(--bg);
     --color-fg: var(--fg);
+    --color-border: var(--border);
+    --color-input: var(--input);
+    --color-ring: var(--ring);
 
+    /* ── Card ─────────────────────────────────── */
     --color-card-bg: var(--card-bg);
-    --color-card-border: var(--card-border);
     --color-card-fg: var(--card-fg);
+    --color-card-border: var(--card-border);
 
-    --color-primary: var(--primary);
-    --color-primary-fg: var(--primary-fg);
+    /* ── Sidebar ──────────────────────────────── */
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-fg: var(--sidebar-fg);
 
+    /* ── Overlay ──────────────────────────────── */
+    --color-overlay: var(--overlay);
+    --color-overlay-fg: var(--overlay-fg);
+
+    /* ── Secondary ────────────────────────────── */
     --color-secondary: var(--secondary);
     --color-secondary-fg: var(--secondary-fg);
+
+    /* ── Muted ────────────────────────────────── */
+    --color-muted: var(--muted);
+    --color-muted-fg: var(--muted-fg);
+
+    /* ── Data surface ─────────────────────────── */
+    --color-data-surface: var(--data-surface);
+    --color-data-surface-fg: var(--data-surface-fg);
+    --color-data-surface-border: var(--data-surface-border);
+
+    /* ── Brand / intent ───────────────────────── */
+    --color-primary: var(--primary);
+    --color-primary-fg: var(--primary-fg);
 
     --color-accent: var(--accent);
     --color-accent-fg: var(--accent-fg);
@@ -34,21 +53,13 @@
     --color-success: var(--success);
     --color-success-fg: var(--success-fg);
 
-    --color-danger: var(--danger);
-    --color-danger-fg: var(--danger-fg);
-
     --color-warning: var(--warning);
     --color-warning-fg: var(--warning-fg);
 
-    --color-muted: var(--muted);
-    --color-muted-fg: var(--muted-fg);
+    --color-danger: var(--danger);
+    --color-danger-fg: var(--danger-fg);
 
-    --color-overlay: var(--overlay);
-    --color-overlay-fg: var(--overlay-fg);
-
-    --color-sidebar: var(--sidebar);
-    --color-sidebar-fg: var(--sidebar-fg);
-
+    /* ── Charts ────────────────────────────────── */
     --color-chart-1: var(--chart-1);
     --color-chart-2: var(--chart-2);
     --color-chart-3: var(--chart-3);
@@ -58,27 +69,45 @@
 
 @layer base {
     :root {
+        /* ── Page ─────────────────────────────────── */
         --bg: var(--color-white);
         --fg: var(--color-zinc-950);
+        --border: var(--color-zinc-200);
+        --input: var(--color-zinc-300);
+        --ring: oklch(0.45 0.2 265);
 
+        /* ── Card ─────────────────────────────────── */
         --card-bg: var(--color-white);
-        --card-border: var(--color-zinc-200);
         --card-fg: var(--color-zinc-950);
+        --card-border: var(--color-zinc-200);
 
-        --primary: oklch(0.45 0.2 265);
-        --primary-fg: var(--color-white);
+        /* ── Sidebar ──────────────────────────────── */
+        --sidebar: var(--color-zinc-50);
+        --sidebar-fg: var(--color-zinc-950);
 
-        --secondary: var(--color-zinc-100);
-        --secondary-fg: var(--color-zinc-950);
-
+        /* ── Overlay (popups, menus, dialogs) ─────── */
         --overlay: var(--color-white);
         --overlay-fg: var(--color-zinc-950);
 
-        --accent: oklch(0.65 0.14 65);
-        --accent-fg: var(--color-zinc-950);
+        /* ── Secondary (buttons, badges, headers) ─── */
+        --secondary: var(--color-zinc-100);
+        --secondary-fg: var(--color-zinc-950);
 
+        /* ── Muted (subdued text, disabled areas) ─── */
         --muted: var(--color-zinc-100);
         --muted-fg: var(--color-zinc-600);
+
+        /* ── Data surface (grids, tables) ─────────── */
+        --data-surface: var(--color-zinc-50);
+        --data-surface-fg: var(--color-zinc-950);
+        --data-surface-border: var(--color-zinc-200);
+
+        /* ── Brand / intent ───────────────────────── */
+        --primary: oklch(0.45 0.2 265);
+        --primary-fg: var(--color-white);
+
+        --accent: oklch(0.65 0.14 65);
+        --accent-fg: var(--color-zinc-950);
 
         --success: var(--color-emerald-600);
         --success-fg: var(--color-white);
@@ -89,19 +118,14 @@
         --danger: var(--color-red-600);
         --danger-fg: var(--color-red-50);
 
-        --border: var(--color-zinc-200);
-        --input: var(--color-zinc-300);
-        --ring: oklch(0.45 0.2 265);
-
-        --sidebar: var(--color-zinc-50);
-        --sidebar-fg: var(--color-zinc-950);
-
+        /* ── Charts ────────────────────────────────── */
         --chart-1: oklch(0.45 0.2 265);
         --chart-2: oklch(0.55 0.18 265);
         --chart-3: oklch(0.65 0.15 265);
         --chart-4: oklch(0.75 0.12 265);
         --chart-5: oklch(0.85 0.08 265);
 
+        /* ── Radius ────────────────────────────────── */
         --radius-lg: 0.5rem;
         --radius-xs: calc(var(--radius-lg) * 0.5);
         --radius-sm: calc(var(--radius-lg) * 0.75);
@@ -111,12 +135,13 @@
         --radius-3xl: calc(var(--radius-lg) * 2);
         --radius-4xl: calc(var(--radius-lg) * 3);
 
+        /* ── Domain ────────────────────────────────── */
         /* LRE track colours */
         --lre-alpha: oklch(0.72 0.13 220);
         --lre-beta: oklch(0.82 0.15 80);
         --lre-gamma: oklch(0.7 0.18 15);
 
-        /*Rarity*/
+        /* Rarity */
         --rarity-common: #cdb3a0;
         --rarity-uncommon: #f9cb9c;
         --rarity-rare: #efefef;
@@ -124,7 +149,7 @@
         --rarity-legendary: #cfe2f3;
         --rarity-mythic: #d84300;
 
-        /*Ranks*/
+        /* Ranks */
         --rank-stone1: #cdb3a0;
         --rank-stone2: #b09a8a;
         --rank-stone3: #8c827a;
@@ -165,27 +190,45 @@
     .dark {
         color-scheme: dark;
 
+        /* ── Page ─────────────────────────────────── */
         --bg: var(--color-zinc-900);
         --fg: var(--color-zinc-100);
+        --border: var(--color-zinc-700);
+        --input: var(--color-zinc-600);
+        --ring: oklch(0.6 0.2 265);
 
-        --card-bg: var(--color-zinc-800);
+        /* ── Card ─────────────────────────────────── */
+        --card-bg: var(--color-zinc-900);
+        --card-fg: var(--color-zinc-100);
         --card-border: var(--color-zinc-700);
-        --card-fg: var(--color-zinc-50);
 
-        --primary: oklch(0.6 0.2 265);
-        --primary-fg: var(--color-white);
+        /* ── Sidebar ──────────────────────────────── */
+        --sidebar: var(--color-zinc-950);
+        --sidebar-fg: var(--color-zinc-100);
 
+        /* ── Overlay (popups, menus, dialogs) ─────── */
+        --overlay: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-700));
+        --overlay-fg: var(--color-zinc-100);
+
+        /* ── Secondary (buttons, badges, headers) ─── */
         --secondary: var(--color-zinc-800);
         --secondary-fg: var(--color-zinc-100);
 
-        --accent: oklch(0.65 0.14 65);
-        --accent-fg: var(--color-zinc-950);
-
-        --muted: var(--color-zinc-800);
+        /* ── Muted (subdued text, disabled areas) ─── */
+        --muted: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-900));
         --muted-fg: var(--color-zinc-400);
 
-        --overlay: var(--color-zinc-800);
-        --overlay-fg: var(--color-zinc-100);
+        /* ── Data surface (grids, tables) ─────────── */
+        --data-surface: var(--color-zinc-800);
+        --data-surface-fg: var(--color-zinc-100);
+        --data-surface-border: var(--color-zinc-700);
+
+        /* ── Brand / intent ───────────────────────── */
+        --primary: oklch(0.6 0.2 265);
+        --primary-fg: var(--color-white);
+
+        --accent: oklch(0.65 0.14 65);
+        --accent-fg: var(--color-zinc-950);
 
         --success: var(--color-emerald-500);
         --success-fg: var(--color-white);
@@ -196,25 +239,20 @@
         --danger: var(--color-red-600);
         --danger-fg: var(--color-red-50);
 
-        --border: var(--color-zinc-700);
-        --input: var(--color-zinc-700);
-        --ring: oklch(0.6 0.2 265);
-
-        --sidebar: var(--color-zinc-950);
-        --sidebar-fg: var(--color-zinc-50);
-
+        /* ── Charts ────────────────────────────────── */
         --chart-1: oklch(0.6 0.2 265);
         --chart-2: oklch(0.68 0.17 265);
         --chart-3: oklch(0.75 0.13 265);
         --chart-4: oklch(0.82 0.09 265);
         --chart-5: oklch(0.88 0.05 265);
 
+        /* ── Domain ────────────────────────────────── */
         /* LRE track colours */
         --lre-alpha: oklch(0.72 0.14 220);
         --lre-beta: oklch(0.82 0.16 80);
         --lre-gamma: oklch(0.7 0.2 15);
 
-        /*Rarity*/
+        /* Rarity */
         --rarity-common: #8a705d;
         --rarity-uncommon: #b3845f;
         --rarity-rare: #6b6b6b;
@@ -222,7 +260,7 @@
         --rarity-legendary: #5a7892;
         --rarity-mythic: #d9886c;
 
-        /*Ranks*/
+        /* Ranks */
         --rank-stone1: #8a705d;
         --rank-stone2: #7a6455;
         --rank-stone3: #5f554f;
