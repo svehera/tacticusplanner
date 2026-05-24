@@ -1,5 +1,5 @@
 ﻿import { Badge } from '@mui/material';
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { mapValues, sum } from 'lodash';
 import { useState } from 'react';
@@ -90,10 +90,10 @@ export const PlayersTable = ({
     ]);
 
     return (
-        <div className="ag-theme-material h-[350px] w-full [&_.ag-header-cell-label]:justify-center">
+        <div className="ag-theme-material density-compact h-[350px] w-full [&_.ag-header-cell-label]:justify-center">
             <AgGridReact
                 modules={[AllCommunityModule]}
-                theme={themeBalham}
+                theme="legacy"
                 suppressCellFocus={true}
                 columnDefs={columnDefs}
                 rowHeight={40}

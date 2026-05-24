@@ -13,7 +13,7 @@ import {
 import Button from '@mui/material/Button';
 import IconButton from '@mui/material/IconButton';
 import InputLabel from '@mui/material/InputLabel';
-import { ColDef, IRowNode, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ColDef, IRowNode, AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
 import { ChangeEvent, useCallback, useContext, useMemo, useRef, useState, useEffect } from 'react';
@@ -549,11 +549,11 @@ export const LearnCharacters = () => {
                     />
                 </div>
             </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
+            <div className="ag-theme-material density-compact" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
                 <AgGridReact
                     ref={gridReference}
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     suppressCellFocus={true}
                     defaultColDef={defaultColDefinition}
                     columnDefs={columnDefs}

@@ -1,7 +1,7 @@
 ﻿import { ArrowForward, Info } from '@mui/icons-material';
 import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
-import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { orderBy } from 'lodash';
 import React, { useContext, useMemo, useState } from 'react';
@@ -365,10 +365,10 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div className="ag-theme-material h-[800px] w-full">
+                <div className="ag-theme-material density-compact h-[800px] w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         suppressCellFocus={true}
                         defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                         rowHeight={60}

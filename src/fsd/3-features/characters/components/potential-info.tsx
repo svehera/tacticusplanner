@@ -3,7 +3,7 @@ import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import IconButton from '@mui/material/IconButton';
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
@@ -95,10 +95,10 @@ export const PotentialInfo: React.FC = () => {
                         If mentioned character&apos;s stats are above or equal to stats defined by rarity caps (see
                         table below) then character has maximum potential (100)
                     </p>
-                    <div className="ag-theme-material h-55">
+                    <div className="ag-theme-material density-compact h-55">
                         <AgGridReact
                             modules={[AllCommunityModule]}
-                            theme={themeBalham}
+                            theme="legacy"
                             suppressCellFocus={true}
                             columnDefs={columnDefs}
                             rowHeight={35}
