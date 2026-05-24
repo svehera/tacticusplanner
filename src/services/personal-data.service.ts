@@ -129,6 +129,32 @@ export class PersonalDataLocalStorage {
                     ...defaultData.gameModeTokens,
                     ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
+                armageddon: (() => {
+                    const stored = this.getItem<Record<string, unknown>>('armageddon');
+                    const base = {
+                        ...defaultData.armageddon,
+                        ...(stored ?? defaultData.armageddon),
+                    } as typeof defaultData.armageddon & { cart?: unknown };
+                    // Migrate legacy 'cart' field (JSON string from old version) to structuredCart
+                    if ('cart' in base) {
+                        const legacyCart = base.cart;
+                        const isEmpty = !base.structuredCart || Object.keys(base.structuredCart).length === 0;
+                        if (isEmpty && typeof legacyCart === 'string') {
+                            try {
+                                base.structuredCart = JSON.parse(legacyCart);
+                            } catch {
+                                base.structuredCart = {};
+                            }
+                        }
+                        delete (base as unknown as Record<string, unknown>).cart;
+                        this.setItem('armageddon', base);
+                    }
+                    return base;
+                })(),
+                playerMetadata: {
+                    ...defaultData.playerMetadata,
+                    ...this.getItem<typeof defaultData.playerMetadata>('playerMetadata'),
+                },
             };
         } else {
             // no version (convert v1 to v2)
@@ -222,6 +248,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
     if (isV1Data(v1Data)) {
         return {
             schemaVersion: 2,
+            playerMetadata: {
+                playerName: undefined,
+                powerLevel: undefined,
+            },
             modifiedDate: v1Data.modifiedDate ? new Date(v1Data.modifiedDate) : defaultData.modifiedDate,
             autoTeamsPreferences: {
                 ...defaultData.autoTeamsPreferences,
@@ -258,6 +288,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             warOffense2: defaultData.warOffense2,
             rosterSnapshots: defaultData.rosterSnapshots,
             gameModeTokens: defaultData.gameModeTokens,
+            armageddon: defaultData.armageddon,
         };
     }
 
@@ -272,6 +303,26 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             ...defaultData.gameModeTokens,
             ...v1Data.gameModeTokens,
         },
+        armageddon: (() => {
+            const base = {
+                ...defaultData.armageddon,
+                ...v1Data.armageddon,
+            } as typeof defaultData.armageddon & { cart?: unknown };
+            // Migrate legacy 'cart' field (JSON string from old version) to structuredCart
+            if ('cart' in base) {
+                const legacyCart = base.cart;
+                const isEmpty = !base.structuredCart || Object.keys(base.structuredCart).length === 0;
+                if (isEmpty && typeof legacyCart === 'string') {
+                    try {
+                        base.structuredCart = JSON.parse(legacyCart);
+                    } catch {
+                        base.structuredCart = {};
+                    }
+                }
+                delete (base as unknown as Record<string, unknown>).cart;
+            }
+            return base;
+        })(),
     };
 };
 

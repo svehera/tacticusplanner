@@ -271,7 +271,7 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": ["Necrons", "Aeldari", "Tau"],
         "levels": [
             {
                 "goldCost": 0,
@@ -898,7 +898,7 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": ["Necrons", "Aeldari", "Tau"],
         "levels": [
             {
                 "goldCost": 0,
@@ -1687,7 +1687,7 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": ["Necrons", "Aeldari", "Tau"],
         "levels": [
             {
                 "goldCost": 0,
@@ -2403,7 +2403,7 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": ["Necrons", "Aeldari", "Tau"],
         "levels": [
             {
                 "goldCost": 0,
@@ -2850,7 +2850,7 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["Aeldari", "Tau"],
+        "allowedFactions": ["Necrons", "Aeldari", "Tau"],
         "levels": [
             {
                 "goldCost": 0,
@@ -15390,6 +15390,108 @@
             }
         ]
     },
+    "R_Booster_Crit_ChaliceOfBaal": {
+        "name": "Chalice of Baal",
+        "rarity": "Mythic",
+        "type": "I_Booster_Crit",
+        "abilityId": "ChaliceOfBaal",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["bloodSanguinary"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 350
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 369
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 388
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 407
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 426
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 445
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 464
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 483
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 502
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChanceBonus": 6,
+                    "critDamageBonus": 521
+                }
+            }
+        ]
+    },
     "R_Booster_Crit_IntoxicatingElixir": {
         "name": "Intoxicating Elixir",
         "rarity": "Mythic",
@@ -16308,6 +16410,210 @@
             }
         ]
     },
+    "R_Crit_HeadwoppasKillchoppa": {
+        "name": "Headwoppa's Killchoppa",
+        "rarity": "Mythic",
+        "type": "I_Crit",
+        "abilityId": "HeadwoppasKillchoppa",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["orksWarboss"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1050
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1107
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1164
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1221
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1277
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1334
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1391
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1447
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1504
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1561
+                }
+            }
+        ]
+    },
+    "R_Crit_Lakrimae": {
+        "name": "Lakrimae",
+        "rarity": "Mythic",
+        "type": "I_Crit",
+        "abilityId": "Lakrimae",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["deathTyphus"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1050
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1107
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1164
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1221
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1277
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1334
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1391
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1447
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1504
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1561
+                }
+            }
+        ]
+    },
     "R_Crit_Maugetar": {
         "name": "Maugetar",
         "rarity": "Mythic",
@@ -16723,7 +17029,14 @@
         "abilityId": "RelicBoltPistol",
         "isRelic": true,
         "isUniqueRelic": false,
-        "allowedUnits": ["ultraInceptorSgt", "ultraTitus", "templSwordBrother", "darkaHellblaster", "spaceHound"],
+        "allowedUnits": [
+            "ultraInceptorSgt",
+            "ultraTitus",
+            "templSwordBrother",
+            "darkaHellblaster",
+            "spaceHound",
+            "astarCyrus"
+        ],
         "allowedFactions": [],
         "levels": [
             {

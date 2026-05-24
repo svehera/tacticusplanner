@@ -27475,7 +27475,7 @@
                     {
                         "mapId": "LE3_24",
                         "number": 11,
-                        "power": 753881,
+                        "power": 746538,
                         "tier": 1,
                         "disallowedFactions": [
                             "Orks",
@@ -27547,7 +27547,7 @@
                                     "orksNpc1Grot:35",
                                     "orksNpc1Grot:35"
                                 ],
-                                "power": 133143,
+                                "power": 125800,
                                 "round": 5
                             },
                             {

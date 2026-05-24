@@ -7,6 +7,7 @@ import { guildApiLazyRoute } from '@/fsd/1-pages/guild-api/guild-api.route';
 import { guildInsightsLazyRoute } from '@/fsd/1-pages/guild-insights/guild-insights.route';
 import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war-zones.route';
 import { equipmentLazyRoute } from '@/fsd/1-pages/input-equipment/equipment.route';
+import { onslaughtLazyRoute } from '@/fsd/1-pages/input-onslaught/onslaught.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
 import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
@@ -14,6 +15,7 @@ import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
+import { armageddonLazyRoute } from '@/fsd/1-pages/plan-armageddon/armageddon.route';
 import { bulkGoalCreatorRoute } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.route';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesRoute } from '@/fsd/1-pages/plan-ces/ces.route';
@@ -30,6 +32,7 @@ import DesktopApp from './desktop-app';
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
     rosterSnapshotsLazyRoute,
+    onslaughtLazyRoute,
     myProgressLazyRoute,
     {
         path: 'input/inventory',
@@ -72,6 +75,7 @@ export const globalPlanRoutes: RouteObject[] = [
             return { Component: MasterTable };
         },
     },
+    armageddonLazyRoute,
     campaignProgressionLazyRoute,
     questsRoute,
     cesRoute,

@@ -4530,10 +4530,10 @@
             ],
             "potential": [
                 {
-                    "id": "upgHpL010",
-                    "chance_numerator": 1,
-                    "chance_denominator": 10,
-                    "effective_rate": 0.181
+                    "id": "upgArmR030",
+                    "chance_numerator": 2,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.5
                 }
             ]
         },
@@ -8412,7 +8412,7 @@
             ],
             "potential": [
                 {
-                    "id": "upgArmR028",
+                    "id": "upgHpR043",
                     "chance_numerator": 2,
                     "chance_denominator": 5,
                     "effective_rate": 0.5
@@ -17990,10 +17990,10 @@
             ],
             "potential": [
                 {
-                    "id": "upgDmgE005",
-                    "chance_numerator": 1,
-                    "chance_denominator": 4,
-                    "effective_rate": 0.4
+                    "id": "upgArmR030",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
                 }
             ]
         },
@@ -26549,7 +26549,7 @@
                 }
             ]
         },
-        "enemyPower": 1698,
+        "enemyPower": 1665,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 9,
@@ -43291,17 +43291,17 @@
                     "max": 160
                 },
                 {
-                    "id": "upgArmC011",
+                    "id": "upgDmgR009",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgArmC011",
-                    "chance_numerator": 3,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "id": "upgDmgR009",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -43354,17 +43354,17 @@
                     "max": 160
                 },
                 {
-                    "id": "upgHpU012",
+                    "id": "upgArmR030",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgHpU012",
-                    "chance_numerator": 2,
-                    "chance_denominator": 8,
-                    "effective_rate": 0.333
+                    "id": "upgArmR030",
+                    "chance_numerator": 1,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.153
                 }
             ]
         },
@@ -49006,7 +49006,7 @@
                 }
             ]
         },
-        "enemyPower": 57631,
+        "enemyPower": 54333,
         "enemiesAlliances": ["Xenos"],
         "enemiesFactions": ["Orks"],
         "enemiesTotal": 10,
@@ -49197,17 +49197,17 @@
                     "max": 180
                 },
                 {
-                    "id": "upgDmgC002",
+                    "id": "upgHpU012",
                     "min": 1,
                     "max": 1
                 }
             ],
             "potential": [
                 {
-                    "id": "upgDmgC002",
-                    "chance_numerator": 3,
-                    "chance_denominator": 6,
-                    "effective_rate": 0.571
+                    "id": "upgHpU012",
+                    "chance_numerator": 2,
+                    "chance_denominator": 8,
+                    "effective_rate": 0.333
                 }
             ]
         },
@@ -71524,6 +71524,3731 @@
                 "name": "Cadian Mortar Team",
                 "count": 1,
                 "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAS01": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC002",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 225,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Infiltrator"],
+        "rawEnemyTypes": [{ "id": "darkaNpc1Infiltrator:3", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 5,
+                "stars": 1,
+                "rank": "Stone 3"
+            }
+        ]
+    },
+    "DAS02": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC012",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 260,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Infiltrator"],
+        "rawEnemyTypes": [{ "id": "darkaNpc1Infiltrator:4", "count": 4 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS03": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC002",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 270,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Infiltrator"],
+        "rawEnemyTypes": [{ "id": "darkaNpc1Infiltrator:3", "count": 6 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 6,
+                "stars": 1,
+                "rank": "Stone 3"
+            }
+        ]
+    },
+    "DASC03B": {
+        "campaign": "Dark Angels Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 1133,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:7", "count": 1 },
+            { "id": "astraNpc3Voxcaster:6", "count": 2 },
+            { "id": "darkaNpc1Infiltrator:7", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:6", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "DAS04": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC017",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 366,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:4", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:3", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 1,
+                "rank": "Stone 3"
+            }
+        ]
+    },
+    "DAS05": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 40,
+                    "max": 66
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC003",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 399,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Hellblaster"],
+        "rawEnemyTypes": [{ "id": "darkaNpc2Hellblaster:3", "count": 7 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 7,
+                "stars": 1,
+                "rank": "Stone 3"
+            }
+        ]
+    },
+    "DAS06": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaHellblaster",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 655,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Hellblaster", "Infiltrator", "Sarquael", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:3", "count": 4 },
+            { "id": "darkaNpc2Hellblaster:3", "count": 3 },
+            { "id": "darkaNpc4Watcher:3", "count": 1 },
+            { "id": "darkaNpcHellblaster:3", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 1,
+                "rank": "Stone 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 1,
+                "rank": "Stone 3"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 1,
+                "rank": "Stone 3"
+            },
+            {
+                "id": "darkaNpcHellblaster",
+                "name": "Sarquael",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS07": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC013",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 404,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Deathwing Knight"],
+        "rawEnemyTypes": [{ "id": "darkaNpc3Terminator:4", "count": 4 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 4,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS08": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC015",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 563,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:4", "count": 4 },
+            { "id": "darkaNpc3Terminator:4", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS09": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC002",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 563,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:4", "count": 4 },
+            { "id": "darkaNpc3Terminator:4", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 1,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS10": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 45,
+                    "max": 75
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR032",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 544,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:3", "count": 4 },
+            { "id": "darkaNpc3Terminator:5", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 1,
+                "rank": "Stone 3"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 2,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS11": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaTerminator",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 769,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Baraqiel", "Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:3", "count": 5 },
+            { "id": "darkaNpc3Terminator:4", "count": 2 },
+            { "id": "darkaNpcTerminator:3", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 1,
+                "rank": "Stone 3"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 1,
+                "rank": "Iron 1"
+            },
+            {
+                "id": "darkaNpcTerminator",
+                "name": "Baraqiel",
+                "count": 1,
+                "stars": 3,
+                "rank": "Iron 1"
+            }
+        ]
+    },
+    "DAS12": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC006",
+                    "chance_numerator": 12,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.928
+                }
+            ]
+        },
+        "enemyPower": 724,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Vox-caster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:6", "count": 4 },
+            { "id": "darkaNpc1Infiltrator:6", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 2,
+                "rank": "Iron 2"
+            }
+        ]
+    },
+    "DAS13": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU002",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 1305,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:7", "count": 3 },
+            { "id": "astraNpc3Voxcaster:8", "count": 3 },
+            { "id": "darkaNpc1Infiltrator:7", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 2,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "DASC13B": {
+        "campaign": "Dark Angels Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpE003",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemyPower": 5309,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Baraqiel", "Cadian Lascannon Team", "Deathwing Knight"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:12", "count": 2 },
+            { "id": "darkaNpc3Terminator:10", "count": 4 },
+            { "id": "darkaNpcTerminator:8", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpcTerminator",
+                "name": "Baraqiel",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DAS14": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU009",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 2074,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:8", "count": 2 },
+            { "id": "astraNpc3Voxcaster:8", "count": 3 },
+            { "id": "darkaNpc1Infiltrator:8", "count": 5 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 5,
+                "stars": 3,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "DAS15": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 2901,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:8", "count": 3 },
+            { "id": "astraNpc3Voxcaster:8", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:8", "count": 6 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 3,
+                "rank": "Iron 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 6,
+                "stars": 3,
+                "rank": "Iron 3"
+            }
+        ]
+    },
+    "DAS16": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 48,
+                    "max": 82
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR032",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 2753,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Cadian Vox-caster", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:10", "count": 2 },
+            { "id": "darkaNpc1Infiltrator:10", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:9", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DAS17": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaCompanion",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 4298,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Forcas", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:11", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:10", "count": 2 },
+            { "id": "darkaNpcCompanion:7", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpcCompanion",
+                "name": "Forcas",
+                "count": 1,
+                "stars": 5,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DAS18": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU012",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 3119,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:11", "count": 3 },
+            { "id": "darkaNpc3Terminator:9", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DAS19": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU014",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 3308,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:10", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:10", "count": 3 },
+            { "id": "darkaNpc3Terminator:9", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 1,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DAS20": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU013",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 7440,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:12", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:11", "count": 4 },
+            { "id": "darkaNpc3Terminator:9", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 3,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DAS21": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 52,
+                    "max": 90
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR032",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 7288,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:11", "count": 4 },
+            { "id": "darkaNpc2Hellblaster:11", "count": 4 },
+            { "id": "darkaNpc3Terminator:10", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 1"
+            }
+        ]
+    },
+    "DAS22": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaAsmodai",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 5894,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Asmodai", "Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:11", "count": 5 },
+            { "id": "darkaNpc3Terminator:10", "count": 1 },
+            { "id": "darkaNpcAsmodai:8", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 5,
+                "stars": 6,
+                "rank": "Bronze 2"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 1"
+            },
+            {
+                "id": "darkaNpcAsmodai",
+                "name": "Asmodai",
+                "count": 1,
+                "stars": 6,
+                "rank": "Bronze 2"
+            }
+        ]
+    },
+    "DAS23": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU017",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 5401,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:12", "count": 2 },
+            { "id": "astraNpc3Voxcaster:12", "count": 3 },
+            { "id": "darkaNpc1Infiltrator:12", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 5,
+                "rank": "Bronze 3"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 5,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "DAS24": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU003",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 7964,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 4,
+        "enemiesTypes": ["Hellblaster"],
+        "rawEnemyTypes": [{ "id": "darkaNpc2Hellblaster:13", "count": 4 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 7,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "DAS25": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU001",
+                    "chance_numerator": 3,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.799
+                }
+            ]
+        },
+        "enemyPower": 12468,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 3,
+        "enemiesTypes": ["Deathwing Knight"],
+        "rawEnemyTypes": [{ "id": "darkaNpc3Terminator:15", "count": 3 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DASC25B": {
+        "campaign": "Dark Angels Standard Challenge",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgE011",
+                    "chance_numerator": 1,
+                    "chance_denominator": 4,
+                    "effective_rate": 0.4
+                }
+            ]
+        },
+        "enemyPower": 50103,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Asmodai", "Azrael", "Baraqiel", "Cadian Vox-caster", "Forcas", "Sarquael"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:15", "count": 4 },
+            { "id": "darkaNpcAsmodai:11", "count": 1 },
+            { "id": "darkaNpcAzrael:11", "count": 1 },
+            { "id": "darkaNpcCompanion:11", "count": 1 },
+            { "id": "darkaNpcHellblaster:11", "count": 1 },
+            { "id": "darkaNpcTerminator:11", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpcAsmodai",
+                "name": "Asmodai",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "darkaNpcAzrael",
+                "name": "Azrael",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "darkaNpcCompanion",
+                "name": "Forcas",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "darkaNpcHellblaster",
+                "name": "Sarquael",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            },
+            {
+                "id": "darkaNpcTerminator",
+                "name": "Baraqiel",
+                "count": 1,
+                "stars": 8,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DAS26": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR018",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 17864,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Deathwing Knight", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc3Terminator:15", "count": 4 },
+            { "id": "darkaNpc4Watcher:14", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 4,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 9,
+                "rank": "Bronze 3"
+            }
+        ]
+    },
+    "DAS27": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR005",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 25938,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:15", "count": 5 },
+            { "id": "darkaNpc3Terminator:15", "count": 2 },
+            { "id": "darkaNpc4Watcher:15", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DAS28": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR015",
+                    "chance_numerator": 3,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.571
+                }
+            ]
+        },
+        "enemyPower": 29122,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Cadian Lascannon Team", "Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:15", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:16", "count": 5 },
+            { "id": "darkaNpc3Terminator:15", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DAS29": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL112",
+                    "chance_numerator": 1,
+                    "chance_denominator": 9,
+                    "effective_rate": 0.199
+                }
+            ]
+        },
+        "enemyPower": 33421,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:15", "count": 1 },
+            { "id": "astraNpc3Voxcaster:16", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:16", "count": 5 },
+            { "id": "darkaNpc3Terminator:15", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DAS30": {
+        "campaign": "Dark Angels Standard",
+        "campaignType": "Standard",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaAzrael",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 51276,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Lion El'Jonson", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaBossLion:2", "count": 1 },
+            { "id": "darkaNpc2Hellblaster:16", "count": 3 },
+            { "id": "darkaNpc3Terminator:15", "count": 1 },
+            { "id": "darkaNpc4Watcher:15", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaBossLion",
+                "name": "Lion El'Jonson",
+                "count": 1,
+                "stars": 6,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 9,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 7,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DAE01": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 1,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC002",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 17772,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Infiltrator"],
+        "rawEnemyTypes": [{ "id": "darkaNpc1Infiltrator:16", "count": 6 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 6,
+                "stars": 9,
+                "rank": "Silver 1"
+            }
+        ]
+    },
+    "DAE02": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 2,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC012",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 36058,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:19", "count": 3 },
+            { "id": "darkaNpc3Terminator:18", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 8,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 9,
+                "rank": "Silver 2"
+            }
+        ]
+    },
+    "DAE03": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC002",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 55160,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Deathwing Knight"],
+        "rawEnemyTypes": [{ "id": "darkaNpc3Terminator:19", "count": 5 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 5,
+                "stars": 8,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DAEC03B": {
+        "campaign": "Dark Angels Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 3,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmE013",
+                    "chance_numerator": 2,
+                    "chance_denominator": 6,
+                    "effective_rate": 0.428
+                }
+            ]
+        },
+        "enemyPower": 164781,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-caster", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:22", "count": 3 },
+            { "id": "astraNpc4Mortar:20", "count": 2 },
+            { "id": "darkaNpc1Infiltrator:22", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:22", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DAE04": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 4,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC017",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 108798,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:20", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:22", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DAE05": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 5,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC003",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 126576,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Hellblaster"],
+        "rawEnemyTypes": [{ "id": "darkaNpc2Hellblaster:22", "count": 6 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 6,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DAE06": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 6,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaHellblaster",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 186709,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Hellblaster", "Infiltrator", "Sarquael", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:22", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:22", "count": 4 },
+            { "id": "darkaNpc4Watcher:22", "count": 1 },
+            { "id": "darkaNpcHellblaster:14", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpcHellblaster",
+                "name": "Sarquael",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DAE07": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 7,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC013",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 119846,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 5,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:22", "count": 3 },
+            { "id": "darkaNpc3Terminator:22", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DAE08": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 8,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpC015",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 138345,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:22", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:22", "count": 3 },
+            { "id": "darkaNpc3Terminator:20", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DAE09": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 9,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgC002",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 89352,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:21", "count": 6 },
+            { "id": "darkaNpc3Terminator:20", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 6,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 10,
+                "rank": "Silver 3"
+            }
+        ]
+    },
+    "DAE10": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 10,
+        "slots": 4,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 56,
+                    "max": 98
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmC006",
+                    "chance_numerator": 15,
+                    "chance_denominator": 16,
+                    "effective_rate": 0.941
+                }
+            ]
+        },
+        "enemyPower": 133759,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:22", "count": 5 },
+            { "id": "darkaNpc3Terminator:22", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 1,
+                "stars": 11,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DAE11": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 11,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaTerminator",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 185033,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Baraqiel", "Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:22", "count": 6 },
+            { "id": "darkaNpc3Terminator:20", "count": 2 },
+            { "id": "darkaNpcTerminator:13", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 6,
+                "stars": 11,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 10,
+                "rank": "Silver 3"
+            },
+            {
+                "id": "darkaNpcTerminator",
+                "name": "Baraqiel",
+                "count": 1,
+                "stars": 9,
+                "rank": "Gold 1"
+            }
+        ]
+    },
+    "DAE12": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 12,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmU013",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 147732,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Vox-caster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:23", "count": 4 },
+            { "id": "darkaNpc1Infiltrator:24", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 4,
+                "stars": 10,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DAE13": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpU002",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 148866,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-caster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:24", "count": 2 },
+            { "id": "astraNpc4Mortar:21", "count": 2 },
+            { "id": "darkaNpc1Infiltrator:24", "count": 4 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 2,
+                "stars": 10,
+                "rank": "Gold 1"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DAEC13B": {
+        "campaign": "Dark Angels Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 13,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 60,
+                    "max": 106
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmL204",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 1412146,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Baraqiel", "Cadian Lascannon Team", "Deathwing Knight", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:33", "count": 4 },
+            { "id": "darkaNpc3Terminator:30", "count": 3 },
+            { "id": "darkaNpc4Watcher:33", "count": 2 },
+            { "id": "darkaNpcTerminator:18", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 4,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpcTerminator",
+                "name": "Baraqiel",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE14": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 14,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgU009",
+                    "chance_numerator": 4,
+                    "chance_denominator": 5,
+                    "effective_rate": 0.833
+                }
+            ]
+        },
+        "enemyPower": 247720,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Vox-caster", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:24", "count": 3 },
+            { "id": "darkaNpc1Infiltrator:24", "count": 4 },
+            { "id": "darkaNpc2Hellblaster:24", "count": 3 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DAE15": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 15,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR018",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 289135,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Cadian Vox-caster", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:24", "count": 3 },
+            { "id": "darkaNpc1Infiltrator:24", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:24", "count": 5 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 11,
+                "rank": "Gold 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 11,
+                "rank": "Gold 2"
+            }
+        ]
+    },
+    "DAE16": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 16,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR005",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 255303,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 7,
+        "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-caster", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:26", "count": 2 },
+            { "id": "astraNpc4Mortar:26", "count": 1 },
+            { "id": "darkaNpc1Infiltrator:26", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:26", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Gold 3"
+            }
+        ]
+    },
+    "DAE17": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 17,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaCompanion",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 639554,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Forcas", "Hellblaster", "Infiltrator", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:26", "count": 1 },
+            { "id": "darkaNpc2Hellblaster:28", "count": 5 },
+            { "id": "darkaNpc4Watcher:28", "count": 1 },
+            { "id": "darkaNpcCompanion:17", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 1,
+                "stars": 11,
+                "rank": "Gold 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 11,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 11,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "darkaNpcCompanion",
+                "name": "Forcas",
+                "count": 1,
+                "stars": 11,
+                "rank": "Diamond 3"
+            }
+        ]
+    },
+    "DAE18": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 18,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR015",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 475198,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Deathwing Knight", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:29", "count": 4 },
+            { "id": "darkaNpc3Terminator:28", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 10,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "DAE19": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 19,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpR032",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 633804,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:30", "count": 4 },
+            { "id": "darkaNpc2Hellblaster:30", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 2"
+            }
+        ]
+    },
+    "DAE20": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 20,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgR032",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 1573100,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Vox-caster", "Deathwing Knight", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:33", "count": 2 },
+            { "id": "darkaNpc1Infiltrator:32", "count": 4 },
+            { "id": "darkaNpc2Hellblaster:30", "count": 4 },
+            { "id": "darkaNpc3Terminator:28", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 11,
+                "rank": "Diamond 2"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "DAE21": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 21,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 74,
+                    "max": 123
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgArmR032",
+                    "chance_numerator": 8,
+                    "chance_denominator": 12,
+                    "effective_rate": 0.692
+                }
+            ]
+        },
+        "enemyPower": 1625096,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 12,
+        "enemiesTypes": ["Cadian Vox-caster", "Deathwing Knight", "Hellblaster", "Infiltrator"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc3Voxcaster:33", "count": 2 },
+            { "id": "darkaNpc1Infiltrator:32", "count": 4 },
+            { "id": "darkaNpc2Hellblaster:31", "count": 4 },
+            { "id": "darkaNpc3Terminator:28", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 4,
+                "stars": 11,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 10,
+                "rank": "Diamond 3"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 1"
+            }
+        ]
+    },
+    "DAE22": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 22,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 93,
+                    "max": 140
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaAsmodai",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 1965448,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 11,
+        "enemiesTypes": ["Asmodai", "Deathwing Knight", "Infiltrator", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:33", "count": 7 },
+            { "id": "darkaNpc3Terminator:28", "count": 2 },
+            { "id": "darkaNpc4Watcher:33", "count": 1 },
+            { "id": "darkaNpcAsmodai:18", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 7,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Diamond 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpcAsmodai",
+                "name": "Asmodai",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE23": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 23,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpL112",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 1664415,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 11,
+        "enemiesTypes": [
+            "Cadian Lascannon Team",
+            "Cadian Mortar Team",
+            "Cadian Vox-caster",
+            "Hellblaster",
+            "Infiltrator"
+        ],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:33", "count": 2 },
+            { "id": "astraNpc3Voxcaster:34", "count": 3 },
+            { "id": "astraNpc4Mortar:33", "count": 1 },
+            { "id": "darkaNpc1Infiltrator:33", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:33", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 3,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "astraNpc4Mortar",
+                "name": "Cadian Mortar Team",
+                "count": 1,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE24": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 24,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "shards_darkaAzrael",
+                    "chance_numerator": 8,
+                    "chance_denominator": 13,
+                    "effective_rate": 0.642
+                }
+            ]
+        },
+        "enemyPower": 2264592,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Hellblaster"],
+        "rawEnemyTypes": [{ "id": "darkaNpc2Hellblaster:35", "count": 6 }],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 6,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE25": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 3,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_darkaHellblaster",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 2104346,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 6,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc2Hellblaster:35", "count": 4 },
+            { "id": "darkaNpc3Terminator:33", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAEC25B": {
+        "campaign": "Dark Angels Extremis Challenge",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 25,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgDmgL204",
+                    "chance_numerator": 1,
+                    "chance_denominator": 7,
+                    "effective_rate": 0.25
+                }
+            ]
+        },
+        "enemyPower": 4259108,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": [
+            "Asmodai",
+            "Azrael",
+            "Baraqiel",
+            "Forcas",
+            "Hellblaster",
+            "Infiltrator",
+            "Sarquael",
+            "Watcher"
+        ],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:33", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:33", "count": 2 },
+            { "id": "darkaNpc4Watcher:35", "count": 1 },
+            { "id": "darkaNpcAsmodai:19", "count": 1 },
+            { "id": "darkaNpcAzrael:19", "count": 1 },
+            { "id": "darkaNpcCompanion:19", "count": 1 },
+            { "id": "darkaNpcHellblaster:18", "count": 1 },
+            { "id": "darkaNpcTerminator:18", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpcAsmodai",
+                "name": "Asmodai",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "darkaNpcAzrael",
+                "name": "Azrael",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "darkaNpcCompanion",
+                "name": "Forcas",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "darkaNpcHellblaster",
+                "name": "Sarquael",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpcTerminator",
+                "name": "Baraqiel",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE26": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 26,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_darkaTerminator",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 2919090,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Infiltrator", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:33", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:35", "count": 4 },
+            { "id": "darkaNpc3Terminator:33", "count": 3 },
+            { "id": "darkaNpc4Watcher:35", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 3,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE27": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 27,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_darkaCompanion",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 3105191,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 9,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Infiltrator", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaNpc1Infiltrator:37", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:36", "count": 4 },
+            { "id": "darkaNpc3Terminator:33", "count": 2 },
+            { "id": "darkaNpc4Watcher:35", "count": 1 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaNpc1Infiltrator",
+                "name": "Infiltrator",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 11,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 1,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE28": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 28,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_darkaAsmodai",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 3137088,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Lascannon Team", "Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:36", "count": 3 },
+            { "id": "darkaNpc2Hellblaster:36", "count": 5 },
+            { "id": "darkaNpc3Terminator:34", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 3,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 5,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE29": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 29,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 84,
+                    "max": 147
+                }
+            ],
+            "potential": [
+                {
+                    "id": "mythicShards_darkaAzrael",
+                    "chance_numerator": 3,
+                    "chance_denominator": 14,
+                    "effective_rate": 0.266
+                }
+            ]
+        },
+        "enemyPower": 3299024,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
+        "enemiesTotal": 10,
+        "enemiesTypes": ["Cadian Lascannon Team", "Cadian Vox-caster", "Deathwing Knight", "Hellblaster"],
+        "rawEnemyTypes": [
+            { "id": "astraNpc2Lascannon:38", "count": 2 },
+            { "id": "astraNpc3Voxcaster:38", "count": 2 },
+            { "id": "darkaNpc2Hellblaster:36", "count": 4 },
+            { "id": "darkaNpc3Terminator:36", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "astraNpc2Lascannon",
+                "name": "Cadian Lascannon Team",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "astraNpc3Voxcaster",
+                "name": "Cadian Vox-caster",
+                "count": 2,
+                "stars": 12,
+                "rank": "Adamantine 2"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 2,
+                "stars": 14,
+                "rank": "Adamantine 1"
+            }
+        ]
+    },
+    "DAE30": {
+        "campaign": "Dark Angels Extremis",
+        "campaignType": "Extremis",
+        "energyCost": 6,
+        "nodeNumber": 30,
+        "slots": 5,
+        "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
+        "rewards": {
+            "guaranteed": [
+                {
+                    "id": "gold",
+                    "min": 90,
+                    "max": 155
+                }
+            ],
+            "potential": [
+                {
+                    "id": "upgHpM004",
+                    "chance_numerator": 3,
+                    "chance_denominator": 25,
+                    "effective_rate": 0.153
+                }
+            ]
+        },
+        "enemyPower": 6024196,
+        "enemiesAlliances": ["Imperial"],
+        "enemiesFactions": ["DarkAngels"],
+        "enemiesTotal": 8,
+        "enemiesTypes": ["Deathwing Knight", "Hellblaster", "Lion El'Jonson", "Watcher"],
+        "rawEnemyTypes": [
+            { "id": "darkaBossLion:4", "count": 1 },
+            { "id": "darkaNpc2Hellblaster:35", "count": 4 },
+            { "id": "darkaNpc3Terminator:35", "count": 1 },
+            { "id": "darkaNpc4Watcher:35", "count": 2 }
+        ],
+        "detailedEnemyTypes": [
+            {
+                "id": "darkaBossLion",
+                "name": "Lion El'Jonson",
+                "count": 1,
+                "stars": 12,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc2Hellblaster",
+                "name": "Hellblaster",
+                "count": 4,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc3Terminator",
+                "name": "Deathwing Knight",
+                "count": 1,
+                "stars": 13,
+                "rank": "Adamantine 1"
+            },
+            {
+                "id": "darkaNpc4Watcher",
+                "name": "Watcher",
+                "count": 2,
+                "stars": 13,
                 "rank": "Adamantine 1"
             }
         ]

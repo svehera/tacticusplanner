@@ -1,3 +1,4 @@
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { describe, it, expect } from 'vitest';
 
@@ -37,6 +38,8 @@ import {
     IUpgradeRaid,
 } from '@/fsd/3-features/goals/goals.models';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 
 const createAscendGoal = (overrides: Partial<ICharacterAscendGoal> = {}): ICharacterAscendGoal => ({
     priority: 1,
@@ -378,6 +381,11 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             },
             upgrades: inventory,
             onslaughtTokensToday: 3,
+            onslaughtPreferences: {
+                [Alliance.Imperial]: { sector: 'stone', tier: 1 },
+                [Alliance.Xenos]: { sector: 'stone', tier: 1 },
+                [Alliance.Chaos]: { sector: 'stone', tier: 1 },
+            },
         };
 
         const day: IUpgradesRaidsDay = {
@@ -405,12 +413,12 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids[0].id).toBe(`shards_${character.snowprintId}`);
         expect(day.raids[0].raidLocations).toHaveLength(3);
         expect(day.raids[0].raidLocations.every(loc => loc.raidsToPerform === 1)).toBe(true);
-        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([6, 7, 6]);
+        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([2, 3, 2]);
     });
 
     it('consumes only the tokens needed to complete onslaught shards', () => {
         const baseChar = CharactersService.charactersData[0];
-        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar, shards: 40 });
+        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar, shards: 45 });
 
         const goal: ICharacterAscendGoal = createAscendGoal({
             goalId: 'goal-2',
@@ -450,6 +458,11 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
             },
             upgrades: inventory,
             onslaughtTokensToday: 3,
+            onslaughtPreferences: {
+                [Alliance.Imperial]: { sector: 'stone', tier: 1 },
+                [Alliance.Xenos]: { sector: 'stone', tier: 1 },
+                [Alliance.Chaos]: { sector: 'stone', tier: 1 },
+            },
         };
 
         const day: IUpgradesRaidsDay = {
@@ -476,7 +489,7 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.raids).toHaveLength(1);
         expect(day.raids[0].id).toBe(`shards_${character.snowprintId}`);
         expect(day.raids[0].raidLocations).toHaveLength(2);
-        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([6, 7]);
+        expect(day.raids[0].raidLocations.map(loc => loc.farmedItems)).toEqual([2, 3]);
     });
 
     it('allocates onslaught raids across two goals that each need one token', () => {
@@ -767,6 +780,142 @@ describe('UpgradesService.addOnslaughtsForDay', () => {
         expect(day.energyTotal).toBe(0);
         expect(day.raidsTotal).toBe(0);
     });
+
+    it('farms regular shards for a cross-boundary goal when below blue-star threshold', () => {
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === 'votanBeserk');
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar!, {
+            rarity: Rarity.Epic,
+            stars: RarityStars.RedTwoStars,
+            shards: 0,
+        });
+
+        // Epic.RedTwoStars base = 315 shards. BlueStar = 1400. Incremental threshold = 1085.
+        // inventory starts at 20 — well below threshold, so regular shards should be farmed.
+        const goal = createAscendGoal({
+            goalId: 'goal-cross-boundary-regular',
+            unitId: character.snowprintId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 10.5,
+            onslaughtMythicShards: 1.5,
+        });
+
+        const inventory: Record<string, number> = { [`shards_${character.snowprintId}`]: 20 };
+        const settings = createSettings({
+            onslaughtPreferences: { [Alliance.Imperial]: { sector: 'diamond', tier: 1 } } as IOnslaughtPreferences,
+        });
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.addOnslaughtsForDay(day, [character], [], 1, [goal], {}, settings, inventory);
+
+        expect(day.onslaughtTokens).toBe(1);
+        expect(day.raids).toHaveLength(1);
+        expect(day.raids[0].id).toBe(`shards_${character.snowprintId}`);
+    });
+
+    it('switches to mythic shards for a cross-boundary goal once blue-star threshold is reached', () => {
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === 'votanBeserk');
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar!, {
+            rarity: Rarity.Epic,
+            stars: RarityStars.RedTwoStars,
+            shards: 0,
+        });
+
+        // Epic.RedTwoStars base = 315. BlueStar = 1400. Incremental needed = 1085.
+        // Inventory AT the threshold: virtual total = 315 + 1085 = 1400 => virtually at BlueStar.
+        const goal = createAscendGoal({
+            goalId: 'goal-cross-boundary-mythic',
+            unitId: character.snowprintId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 10.5,
+            onslaughtMythicShards: 1.5,
+        });
+
+        const inventory: Record<string, number> = { [`shards_${character.snowprintId}`]: 1085 };
+        const settings = createSettings({
+            onslaughtPreferences: { [Alliance.Imperial]: { sector: 'diamond', tier: 1 } } as IOnslaughtPreferences,
+        });
+        const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+
+        UpgradesService.addOnslaughtsForDay(day, [character], [], 1, [goal], {}, settings, inventory);
+
+        expect(day.onslaughtTokens).toBe(1);
+        expect(day.raids).toHaveLength(1);
+        expect(day.raids[0].id).toBe(`mythicShards_${character.snowprintId}`);
+    });
+});
+
+function buildShardsMat(unitId: string, goalId: string, isMythic: boolean): ICombinedUpgrade {
+    return {
+        id: (isMythic ? 'mythicShards_' : 'shards_') + unitId,
+        snowprintId: (isMythic ? 'mythicShards_' : 'shards_') + unitId,
+        label: isMythic ? 'Mythic Shard' : 'Shard',
+        rarity: isMythic ? 'Mythic Shard' : 'Shard',
+        iconPath: '',
+        locations: [], // no campaign locations → triggers onslaught check
+        crafted: false,
+        stat: 'Shard',
+        countByGoalId: { [goalId]: 20 },
+        requiredCount: 20,
+        relatedCharacters: [unitId],
+        relatedGoals: [goalId],
+    };
+}
+
+describe('UpgradesService.canRaidMaterial (cross-boundary goals)', () => {
+    it('does not block mythicShards for a cross-boundary goal when character can farm regular shards', () => {
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === 'votanBeserk');
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar!, {
+            rarity: Rarity.Epic,
+            stars: RarityStars.RedTwoStars,
+        });
+
+        const goal = createAscendGoal({
+            goalId: 'goal-cross-boundary-block-check',
+            unitId: character.snowprintId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 10.5,
+            onslaughtMythicShards: 1.5,
+        });
+
+        const mythicShardsMat = buildShardsMat(character.snowprintId, goal.goalId, true);
+        expect(UpgradesService.canRaidMaterial(mythicShardsMat, [character], [], [goal])).toBe(true);
+    });
+
+    it('blocks mythicShards when character is locked and cannot farm either shard type', () => {
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === 'votanBeserk');
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar!, {
+            rarity: Rarity.Epic,
+            stars: RarityStars.RedTwoStars,
+            rank: Rank.Locked,
+        });
+
+        const goal = createAscendGoal({
+            goalId: 'goal-locked-block-check',
+            unitId: character.snowprintId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 10.5,
+            onslaughtMythicShards: 1.5,
+        });
+
+        const mythicShardsMat = buildShardsMat(character.snowprintId, goal.goalId, true);
+        expect(UpgradesService.canRaidMaterial(mythicShardsMat, [character], [], [goal])).toBe(false);
+    });
 });
 
 describe('UpgradesService.planDayRaiding', () => {
@@ -855,8 +1004,7 @@ describe('UpgradesService.addRaidForLocation (daily caps)', () => {
     const createLocation = (id: string): ICampaignBattleComposed => {
         const base = CampaignsService.campaignsComposed[id];
         const baseRewards = base.rewards || { guaranteed: [], potential: [] };
-        const potential =
-            baseRewards.potential && baseRewards.potential.length > 0 ? baseRewards.potential : [{ id: upgradeId }];
+        const potential = [{ id: upgradeId }];
         return {
             ...base,
             rewards: {
@@ -1399,6 +1547,42 @@ describe('UpgradesService.getUpgrades', () => {
         const shardName = `shards_${wrask.snowprintId}`;
 
         expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(80);
+    });
+
+    it('requires zero shards for an unlock goal when the character is already unlocked', () => {
+        const abraxas = CharactersService.getUnit('thousInfernalMaster')!;
+        const character = createCharacter(abraxas, { rank: Rank.Stone1, shards: 0 });
+        const goal = createUnlockGoal(abraxas, {
+            goalId: 'goal-abraxas-already-unlocked',
+            unitId: abraxas.snowprintId,
+            unitName: abraxas.shortName ?? abraxas.name,
+            unitIcon: abraxas.icon ?? '',
+            unitRoundIcon: abraxas.roundIcon ?? '',
+            unitAlliance: abraxas.alliance ?? Alliance.Chaos,
+        });
+
+        const upgrades = UpgradesService.getUpgrades({}, [character], [], [goal]);
+        const shardName = `shards_${abraxas.snowprintId}`;
+
+        expect(upgrades[0].baseUpgradesTotal[shardName] ?? 0).toBe(0);
+    });
+
+    it('still requires shards for an unlock goal when the character is not yet unlocked', () => {
+        const abraxas = CharactersService.getUnit('thousInfernalMaster')!;
+        const character = createCharacter(abraxas, { rank: Rank.Locked, shards: 50 });
+        const goal = createUnlockGoal(abraxas, {
+            goalId: 'goal-abraxas-not-yet-unlocked',
+            unitId: abraxas.snowprintId,
+            unitName: abraxas.shortName ?? abraxas.name,
+            unitIcon: abraxas.icon ?? '',
+            unitRoundIcon: abraxas.roundIcon ?? '',
+            unitAlliance: abraxas.alliance ?? Alliance.Chaos,
+        });
+
+        const upgrades = UpgradesService.getUpgrades({}, [character], [], [goal]);
+        const shardName = `shards_${abraxas.snowprintId}`;
+
+        expect(upgrades[0].baseUpgradesTotal[shardName]).toBe(130);
     });
 
     it('counts World Eaters rares and legendaries across two Kharn goals', () => {
@@ -2311,7 +2495,7 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
         expect(tokens).toBe(30);
     });
 
-    it('returns normal onslaughts only when character has a goal from pre-mythic to mythic but character is not yet mythic', () => {
+    it('returns tokens for both phases when character has a cross-boundary goal from pre-mythic to mythic and one regular token remains', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
             rarity: Rarity.Legendary,
@@ -2340,7 +2524,8 @@ describe('UpgradesService.getOnslaughtTokensForGoal', () => {
 
         const tokens = UpgradesService.getOnslaughtTokensForGoal(inventory, [character], [], goal);
 
-        expect(tokens).toBe(1);
+        // 1 regular token (ceil(6/6.5)) + 4 mythic tokens (ceil(4/1)) = 5 total
+        expect(tokens).toBe(5);
     });
 
     it('returns mythic onslaughts only when character has a goal from pre-mythic to mythic and character is now mythic', () => {
@@ -2593,7 +2778,7 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
         expect(result?.goalId).toBe(goalAllowsOnslaught.goalId);
     });
 
-    it('returns undefined when the only goal needs both shard types but mythic onslaught is disabled', () => {
+    it('returns the goal when regular shards are done virtually and one mythic shard remains for a cross-boundary goal', () => {
         const baseChar = CharactersService.charactersData[0];
         const character = createCharacter(baseChar, {
             rarity: Rarity.Legendary,
@@ -2621,9 +2806,11 @@ describe('UpgradesService.findLongestOnslaughtGoal', () => {
             [`mythicShards_${character.snowprintId}`]: 49,
         };
 
+        // Virtual total = 900 (RedFiveStar base) + 1394 = 2294 >= 1400 (BlueStar threshold).
+        // Regular shards phase is done virtually; 1 mythic shard remains.
         const result = UpgradesService.findLongestOnslaughtGoal(inventory, [character], [], [goal]);
 
-        expect(result).toBeUndefined();
+        expect(result).toBe(goal);
     });
 
     it('returns undefined when the only goal needs both shard types but regular onslaught is disabled', () => {
@@ -3005,6 +3192,38 @@ describe('UpgradesService.canOnslaughtCharacterForRegularShards', () => {
         );
         expect(shardsOnslaughtResult).toBe(true);
     });
+
+    it('returns false when inventory shows character has virtually reached blue star', () => {
+        const unitId = 'votanBeserk';
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === unitId);
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar!, {
+            snowprintId: unitId,
+            rarity: Rarity.Epic,
+            stars: RarityStars.RedTwoStars, // real state: below blue star
+        });
+
+        const goal = createAscendGoal({
+            unitId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 10.5,
+            onslaughtMythicShards: 1.5,
+        });
+
+        // Epic.RedTwoStars = 315 base. BlueStar = 1400. Incremental = 1085.
+        const inventoryAtThreshold: Record<string, number> = { [`shards_${unitId}`]: 1085 };
+        const result = UpgradesService.canOnslaughtCharacterForRegularShards(
+            unitId,
+            [character],
+            [],
+            goal,
+            inventoryAtThreshold
+        );
+        expect(result).toBe(false);
+    });
 });
 
 describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
@@ -3067,6 +3286,38 @@ describe('UpgradesService.canOnslaughtCharacterForMythicShards', () => {
             oneOnslaughtGoal
         );
         expect(oneOnslaughtResult).toBe(true);
+    });
+
+    it('returns true when inventory shows character has virtually reached blue star (cross-boundary goal)', () => {
+        const unitId = 'votanBeserk';
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === unitId);
+        expect(baseChar).toBeDefined();
+        const character = createCharacter(baseChar!, {
+            snowprintId: unitId,
+            rarity: Rarity.Epic,
+            stars: RarityStars.RedTwoStars, // real state: below blue star
+        });
+
+        const goal = createAscendGoal({
+            unitId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 10.5,
+            onslaughtMythicShards: 1.5,
+        });
+
+        // Real character is below blue star, but virtual state crosses the threshold → can farm mythic shards.
+        const inventoryAtThreshold: Record<string, number> = { [`shards_${unitId}`]: 1085 };
+        const result = UpgradesService.canOnslaughtCharacterForMythicShards(
+            unitId,
+            [character],
+            [],
+            goal,
+            inventoryAtThreshold
+        );
+        expect(result).toBe(true);
     });
 });
 

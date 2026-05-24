@@ -22,6 +22,7 @@ import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
 import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
+import { onslaughtMenuItem } from '@/fsd/1-pages/input-onslaught/onslaught.menu-item';
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
 import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
@@ -29,6 +30,7 @@ import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-i
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
+import { armageddonMenuItem } from '@/fsd/1-pages/plan-armageddon/armageddon.menu-item';
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
@@ -56,6 +58,7 @@ export class MenuItemTP {
 export const menuItemById = {
     wyo: wyoMenuItem,
     myProgress: myProgressMenuItem,
+    onslaught: onslaughtMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
     resources: resourcesMenuItem,
     equipment: equipmentMenuItem,
@@ -73,6 +76,7 @@ export const menuItemById = {
     bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
+    armageddon: armageddonMenuItem,
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
@@ -95,6 +99,7 @@ export const menuItemById = {
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['rosterSnapshots'],
+    menuItemById['onslaught'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
     menuItemById['xpIncome'],
@@ -114,6 +119,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
     new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
+    menuItemById['armageddon'],
     menuItemById['campaignProgression'],
     menuItemById['quests'],
     menuItemById['ces'],
@@ -130,6 +136,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     ...activeLreMenuItems,
+    menuItemById['armageddon'],
     menuItemById['quests'],
     menuItemById['campaignProgression'],
     menuItemById['hses'],

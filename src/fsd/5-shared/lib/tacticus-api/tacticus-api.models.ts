@@ -19,7 +19,13 @@ interface TacticusApiResponseMetadata {
     lastUpdatedOn?: number;
 }
 
+interface TacticusPlayerDetails {
+    name?: string;
+    powerLevel?: number;
+}
+
 interface TacticusPlayer {
+    details: TacticusPlayerDetails;
     units: TacticusUnit[];
     inventory: TacticusInventory;
     progress: TacticusProgress;

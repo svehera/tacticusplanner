@@ -1,4 +1,8 @@
-﻿import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
+﻿import { ArmageddonState } from '@/reducers/armageddon.reducer';
+import { migrateArmageddonState } from '@/reducers/migrations';
+import { defaultPlayerMetadataState, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
+
+import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
@@ -9,6 +13,7 @@ import { UpgradesService } from '@/fsd/4-entities/upgrade';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
+import { IOnslaughtPreferences, defaultOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
@@ -65,6 +70,9 @@ export class GlobalState implements IGlobalState {
     readonly rosterSnapshots: IRosterSnapshotsState;
     readonly mows: Array<IMow | IMow2>;
     readonly gameModeTokens: IGameModeTokensState;
+    readonly armageddon: ArmageddonState;
+    readonly playerMetadata: PlayerMetadataState;
+    readonly onslaughtPreferences: IOnslaughtPreferences;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -98,6 +106,9 @@ export class GlobalState implements IGlobalState {
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
+        this.armageddon = migrateArmageddonState(personalData.armageddon);
+        this.playerMetadata = personalData.playerMetadata ?? defaultPlayerMetadataState;
+        this.onslaughtPreferences = personalData.onslaughtPreferences ?? defaultOnslaughtPreferences;
     }
 
     static initCharacters(
@@ -344,6 +355,9 @@ export class GlobalState implements IGlobalState {
             xpUse: value.xpUse,
             rosterSnapshots: value.rosterSnapshots,
             gameModeTokens: value.gameModeTokens,
+            armageddon: value.armageddon,
+            playerMetadata: value.playerMetadata,
+            onslaughtPreferences: value.onslaughtPreferences,
             teams: value.teams,
             teams2: value.teams2,
             warDefense2: value.warDefense2,

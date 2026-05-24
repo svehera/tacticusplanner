@@ -3,9 +3,12 @@ import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
+import { armageddonReducer } from '@/reducers/armageddon.reducer';
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from '@/reducers/guild-reducer';
 import { guildWarReducer } from '@/reducers/guild-war-reducer';
+import { onslaughtPreferencesReducer } from '@/reducers/onslaught-preferences.reducer';
+import { playerMetadataReducer } from '@/reducers/player-metadata.reducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { teams2Reducer } from 'src/reducers/teams2.reducer';
@@ -78,6 +81,12 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [gameModeTokens, dispatchGameModeTokens] = useReducer(
         gameModeTokensActionReducer,
         globalState.gameModeTokens
+    );
+    const [armageddon, dispatchArmageddon] = useReducer(armageddonReducer, globalState.armageddon);
+    const [playerMetadata, dispatchPlayerMetadata] = useReducer(playerMetadataReducer, globalState.playerMetadata);
+    const [onslaughtPreferences, dispatchOnslaughtPreferences] = useReducer(
+        onslaughtPreferencesReducer,
+        globalState.onslaughtPreferences
     );
     const [warDefense2, dispatchWarDefense2] = useReducer(warDefense2Reducer, globalState.warDefense2);
     const [warOffense2, dispatchWarOffense2] = useReducer(warOffense2Reducer, globalState.warOffense2);
@@ -227,6 +236,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse: wrapDispatch(dispatchXpUse),
             rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
             gameModeTokens: wrapDispatch(dispatchGameModeTokens),
+            armageddon: wrapDispatch(dispatchArmageddon),
+            playerMetadata: wrapDispatch(dispatchPlayerMetadata),
+            onslaughtPreferences: wrapDispatch(dispatchOnslaughtPreferences),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 // Only update if incoming version is newer
                 setGlobalState(current => {
@@ -256,6 +268,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatchXpUse({ type: 'Set', value: data.xpUse });
                         dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
                         dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
+                        dispatchArmageddon({ type: 'Set', value: data.armageddon });
+                        dispatchPlayerMetadata({ type: 'Set', value: data.playerMetadata });
+                        dispatchOnslaughtPreferences({ type: 'Set', value: data.onslaughtPreferences });
                         if (modified) {
                             setModified(true);
                             setModifiedDate(data.modifiedDate);
@@ -290,6 +305,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchXpUse,
             dispatchRosterSnapshots,
             dispatchGameModeTokens,
+            dispatchArmageddon,
+            dispatchPlayerMetadata,
+            dispatchOnslaughtPreferences,
             setGlobalState,
         ]
     );
@@ -328,6 +346,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse,
             rosterSnapshots,
             gameModeTokens,
+            armageddon,
+            playerMetadata,
+            onslaughtPreferences,
             __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
@@ -348,6 +369,9 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         dailyRaidsPreferences,
         gameModeTokens,
         goals,
+        armageddon,
+        playerMetadata,
+        onslaughtPreferences,
         guild,
         guildWar,
         inventory,
@@ -379,22 +403,25 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         };
     }, []);
 
-    function doDailyRefresh(lastRefreshDateUTC: string): void {
-        const currentDate = new Date();
-        const lastRefreshDate = new Date(lastRefreshDateUTC);
+    const doDailyRefresh = useCallback(
+        (lastRefreshDateUTC: string): void => {
+            const currentDate = new Date();
+            const lastRefreshDate = new Date(lastRefreshDateUTC);
 
-        // Set the hours, minutes, seconds, and milliseconds to 0 for accurate comparison
-        currentDate.setUTCHours(0, 0, 0, 0);
-        lastRefreshDate.setUTCHours(0, 0, 0, 0);
+            // Set the hours, minutes, seconds, and milliseconds to 0 for accurate comparison
+            currentDate.setUTCHours(0, 0, 0, 0);
+            lastRefreshDate.setUTCHours(0, 0, 0, 0);
 
-        // Compare timestamps to check if last refresh date is yesterday or before
-        const isYesterdayOrBefore = lastRefreshDate.getTime() < currentDate.getTime();
+            // Compare timestamps to check if last refresh date is yesterday or before
+            const isYesterdayOrBefore = lastRefreshDate.getTime() < currentDate.getTime();
 
-        if (isYesterdayOrBefore) {
-            dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
-            enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
-        }
-    }
+            if (isYesterdayOrBefore) {
+                dispatch.dailyRaids({ type: 'ResetCompletedBattlesDaily' });
+                enqueueSnackbar('Daily Reset Completed', { variant: 'info' });
+            }
+        },
+        [dispatch]
+    );
 
     useEffect(() => {
         if (!isAuthenticated) {
@@ -501,6 +528,8 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             });
     }, [
         dailyRaids.lastRefreshDateUTC,
+        dispatch,
+        doDailyRefresh,
         isAuthenticated,
         localStore,
         logout,
@@ -520,17 +549,17 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                 const now = new Date();
                 const timeDifference = now.getTime() - lastBackup.getTime();
                 if (timeDifference > oneDay) {
-                    const localData = GlobalState.toStore(globalState);
+                    const localData = GlobalState.toStore(globalStateReference.current);
                     localStore.storeBackup(localData);
                 }
             } else {
-                const localData = GlobalState.toStore(globalState);
+                const localData = GlobalState.toStore(globalStateReference.current);
                 localStore.storeBackup(localData);
             }
         }, sixtySeconds);
 
         return () => clearInterval(timerId);
-    }, []);
+    }, [localStore]);
 
     return (
         <DispatchContext.Provider value={dispatch}>

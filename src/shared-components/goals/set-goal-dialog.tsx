@@ -52,8 +52,6 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     targetRarity: Rarity.Common,
     targetRank: Rank.Stone1,
     targetStars: RarityStars.None,
-    shardsPerToken: 0,
-    mythicShardsPerToken: 0,
     campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
     mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
     priority,
@@ -65,7 +63,7 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
-    const { characters, mows, goals, campaignsProgress } = useContext(StoreContext);
+    const { characters, mows, goals, campaignsProgress, onslaughtPreferences } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
 
@@ -232,15 +230,6 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
     };
 
-    const hasNonMythicAscension = () => {
-        if (form.type !== PersonalGoalType.Ascend) return false;
-        return unit && unit.stars < RarityStars.OneBlueStar;
-    };
-    const hasMythicAscension = () => {
-        if (form.type !== PersonalGoalType.Ascend) return false;
-        return (form.targetRarity ?? Rarity.Common) >= Rarity.Mythic;
-    };
-
     const isDisabled = () => {
         if (unit === undefined && form.type !== PersonalGoalType.UpgradeMaterial) return true;
 
@@ -253,11 +242,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
         if (form.type === PersonalGoalType.Ascend) {
             if (unit === undefined) return true;
-            return (
-                (unit.rarity === form.targetRarity && unit.stars === form.targetStars) ||
-                (hasNonMythicAscension() && unlockedLocations.length === 0 && form.shardsPerToken! <= 0) ||
-                (hasMythicAscension() && unlockedMythicLocations.length === 0 && form.mythicShardsPerToken! <= 0)
-            );
+            return unit.rarity === form.targetRarity && unit.stars === form.targetStars;
         }
 
         if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {
@@ -477,9 +462,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 possibleMythicLocations={possibleMythicLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 mythicCampaignsUsage={form.mythicCampaignsUsage!}
-                                shardsPerToken={form.shardsPerToken!}
-                                mythicShardsPerToken={form.mythicShardsPerToken!}
                                 farmType={form.shardFarmType ?? 'both'}
+                                alliance={isCharacter(unit) ? unit.alliance : undefined}
+                                onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}
                             />
                         )}
