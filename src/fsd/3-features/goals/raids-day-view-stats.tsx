@@ -28,7 +28,7 @@ const DayCardStatsComponent: FC<DayCardStatsProps> = ({ energyTotal, raidsTotal,
             {energyPerDay > 0 && (
                 <div className="h-1.5 w-full overflow-hidden rounded-full bg-(--secondary)">
                     <div
-                        className={`h-full rounded-full transition-all ${energyFull ? 'bg-green-500' : 'bg-amber-400'}`}
+                        className={`h-full rounded-full transition-all ${energyFull ? 'bg-(--success)' : 'bg-(--warning)'}`}
                         style={{ width: `${energyFillPct}%` }}
                     />
                 </div>

@@ -73,9 +73,12 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
             <div>
                 <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">Progress</div>
                 <div className="relative mb-3 h-3 w-full overflow-hidden rounded-full bg-(--secondary)">
-                    <div className="absolute top-0 left-0 h-full bg-slate-400" style={{ width: `${inventoryPct}%` }} />
                     <div
-                        className={`absolute top-0 h-full transition-all ${isSufficient ? 'bg-green-500' : 'bg-orange-400'}`}
+                        className="absolute top-0 left-0 h-full bg-(--muted-fg)"
+                        style={{ width: `${inventoryPct}%` }}
+                    />
+                    <div
+                        className={`absolute top-0 h-full transition-all ${isSufficient ? 'bg-(--success)' : 'bg-(--warning)'}`}
                         style={{ left: `${inventoryPct}%`, width: `${gainPct}%` }}
                     />
                 </div>
@@ -86,7 +89,7 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
                     </div>
                     <div className="rounded-lg bg-(--secondary) p-2">
                         <div className="text-xs text-(--muted-fg)">After raids</div>
-                        <div className={`text-xl font-bold ${isSufficient ? 'text-green-500' : 'text-orange-400'}`}>
+                        <div className={`text-xl font-bold ${isSufficient ? 'text-(--success)' : 'text-(--warning)'}`}>
                             {Math.floor(afterRaids)}
                         </div>
                     </div>

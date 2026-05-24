@@ -103,9 +103,9 @@ export const GoalCard: React.FC<Props> = ({
     const hasFooter = !!onToggleInclude || showRaidsButton(goal);
     const cardBackgroundStyle =
         bgColor === 'rgba(0, 0, 0, 0)'
-            ? { backgroundColor: 'var(--overlay)' }
+            ? { backgroundColor: 'var(--card-bg)' }
             : {
-                  backgroundColor: 'var(--overlay)',
+                  backgroundColor: 'var(--card-bg)',
                   backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
               };
 
@@ -116,10 +116,10 @@ export const GoalCard: React.FC<Props> = ({
 
     return (
         <div
-            className="flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--border) text-(--fg) shadow-sm transition-colors"
+            className="flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors"
             style={cardBackgroundStyle}>
             {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
-            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--border) px-4 pt-3 pb-2">
+            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--card-border) px-4 pt-3 pb-2">
                 <div className="flex items-center gap-1 self-start">
                     <span className="text-[1.35rem] leading-none font-semibold text-(--muted-fg)">
                         #{goal.priority}
@@ -156,7 +156,7 @@ export const GoalCard: React.FC<Props> = ({
                 </div>
                 {hasFooter && (
                     <>
-                        <div className="mt-3 mb-2 border-t border-(--border)" />
+                        <div className="mt-3 mb-2 border-t border-(--card-border)" />
                         <div className="flex items-center justify-between gap-2">
                             {onToggleInclude && (
                                 <Button
@@ -165,8 +165,8 @@ export const GoalCard: React.FC<Props> = ({
                                     className={
                                         'rounded-full bg-(--secondary) px-3 ' +
                                         (goal.include
-                                            ? '!border-green-700/50 !text-green-700 hover:!bg-green-500/10 dark:!border-green-400/50 dark:!text-green-400'
-                                            : '!border-red-700/50 !text-red-700 hover:!bg-red-500/10 dark:!border-red-400/50 dark:!text-red-400')
+                                            ? '!border-(--success)/50 !text-(--success) hover:!bg-(--success)/10'
+                                            : '!border-(--danger)/50 !text-(--danger) hover:!bg-(--danger)/10')
                                     }
                                     startIcon={
                                         goal.include ? (

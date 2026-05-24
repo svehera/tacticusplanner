@@ -437,7 +437,7 @@ export const Goals = () => {
                     className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5"
+                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5"
                         aria-controls="resources-content"
                         id="resources-header">
                         <div className="flex w-full flex-wrap items-center gap-2 pr-2">
@@ -573,7 +573,7 @@ export const Goals = () => {
                     className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
@@ -639,7 +639,7 @@ export const Goals = () => {
                     className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
@@ -702,7 +702,7 @@ export const Goals = () => {
                     className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)

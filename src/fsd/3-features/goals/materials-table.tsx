@@ -215,7 +215,7 @@ export const MaterialsTable: React.FC<Props> = ({
                                 <li>
                                     {usedLocations}/{canBeUsedLocations} - used
                                 </li>
-                                {lockedLocations > 0 && <li className="text-red-500">{lockedLocations} - locked</li>}
+                                {lockedLocations > 0 && <li className="text-(--danger)">{lockedLocations} - locked</li>}
                             </ul>
                         );
                     },

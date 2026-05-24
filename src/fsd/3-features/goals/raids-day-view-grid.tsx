@@ -17,7 +17,7 @@ const buildCellTooltip = (raid: IUpgradeRaid) => {
             <div className="font-semibold">{raid.label}</div>
             {uniqueCharNames.length > 0 && <div className="opacity-80">{uniqueCharNames.join(', ')}</div>}
             {visibleLocations.length > 0 && (
-                <div className="mt-0.5 flex flex-col gap-0.5 border-t border-white/20 pt-0.5 opacity-80">
+                <div className="mt-0.5 flex flex-col gap-0.5 border-t border-(--overlay-fg)/20 pt-0.5 opacity-80">
                     {visibleLocations.map(loc => (
                         <div key={loc.id}>
                             {loc.campaign} {loc.nodeNumber} &times; {loc.raidsToPerform}
@@ -80,7 +80,7 @@ const MaterialGridComponent: FC<MaterialGridProps> = ({ farmableRaids, matchesFi
                                         <span
                                             className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 text-[9px] leading-none font-bold whitespace-nowrap tabular-nums shadow-sm ${
                                                 sufficient
-                                                    ? 'bg-green-500 text-white'
+                                                    ? 'bg-(--success) text-(--success-fg)'
                                                     : 'bg-(--card-fg)/80 text-(--card-bg)'
                                             }`}>
                                             {Math.floor(raid.acquiredCount)}/{raid.requiredCount}

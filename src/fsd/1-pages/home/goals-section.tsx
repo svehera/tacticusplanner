@@ -215,8 +215,8 @@ export function GoalsSection() {
                                     </div>
                                 </div>
                                 {estimate?.completed ? (
-                                    <span className="flex shrink-0 items-center gap-1 text-xs text-green-400">
-                                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-green-500/20">
+                                    <span className="flex shrink-0 items-center gap-1 text-xs text-(--success)">
+                                        <span className="flex h-4 w-4 items-center justify-center rounded-full bg-(--success)/20">
                                             ✓
                                         </span>
                                         Done

@@ -107,7 +107,7 @@ export const Quests = () => {
             </div>
 
             {/* Header / Selector */}
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-(--secondary) p-4">
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-(--card-border) bg-(--card-bg) p-4 shadow-sm">
                 <UnitsAutocomplete<IUnit>
                     // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
                     unit={char ?? null}
@@ -132,7 +132,7 @@ export const Quests = () => {
                                 ))}
                             </div>
                         </div>
-                        <div className="flex flex-col items-end border-l border-(--border) pl-4">
+                        <div className="flex flex-col items-end border-l border-(--card-border) pl-4">
                             <span className="text-xs font-bold text-(--muted-fg) uppercase">Enemies</span>
                             <div className="flex gap-1">
                                 {quest.enemyFactions.map(f => (
@@ -151,10 +151,10 @@ export const Quests = () => {
                     return (
                         <div
                             key={tier.index}
-                            className="overflow-hidden rounded-xl border border-(--border) bg-(--card-bg) shadow-sm">
+                            className="overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm">
                             <button
                                 onClick={() => toggleTier(tier.index)}
-                                className="flex w-full cursor-pointer items-center justify-between p-4 transition-colors hover:bg-(--primary)/10">
+                                className="flex w-full cursor-pointer items-center justify-between bg-(--muted) p-4 transition-colors hover:bg-(--primary)/10">
                                 <div className="flex items-center gap-3">
                                     <div
                                         className={`rounded-md border px-3 py-1 text-sm font-bold text-(--fg) ${tierBadgeBg[tier.index] ?? ''}`}>
@@ -167,7 +167,7 @@ export const Quests = () => {
 
                             {/* Battles Content */}
                             {isTierExpanded && (
-                                <div className="divide-y divide-(--border) border-t border-(--border)">
+                                <div className="divide-y divide-(--card-border) border-t border-(--card-border)">
                                     {tier.battles.toReversed().map(battle => {
                                         const battleKey = `${quest.unitId}-${tier.index}-${battle.battleNr}`;
                                         const isBattleExpanded = !!expandedBattles[battleKey];
@@ -181,7 +181,7 @@ export const Quests = () => {
                                                         <span className="min-w-[70px] text-sm font-medium">
                                                             Battle {battle.battleNr}
                                                         </span>
-                                                        <div className="flex items-center gap-2 rounded-md bg-(--fg)/8 px-2 py-1">
+                                                        <div className="flex items-center gap-2 rounded-md bg-(--muted) px-2 py-1">
                                                             <UpgradeImage
                                                                 material={battle.loot.reward.upgradeId}
                                                                 iconPath={
@@ -220,8 +220,8 @@ export const Quests = () => {
 
                                                 {/* Expandable Enemy Section */}
                                                 {isBattleExpanded && (
-                                                    <div className="bg-(--fg)/5 px-4 pt-2 pb-4">
-                                                        <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-(--border) p-3">
+                                                    <div className="bg-(--muted) px-4 pt-2 pb-4">
+                                                        <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-(--card-border) p-3">
                                                             <div className="mb-3 flex flex-wrap items-start gap-x-3 gap-y-6">
                                                                 {battle.enemies.map((enemy, enemyIndex) => {
                                                                     const npc = NpcService.getNpcById(enemy.name);
