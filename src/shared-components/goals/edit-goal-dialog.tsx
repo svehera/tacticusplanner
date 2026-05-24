@@ -16,7 +16,7 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, allianceFromString, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -38,23 +38,6 @@ interface Props {
     goal: TypedGoalSelect;
     unit: IUnit | undefined;
     onClose?: (goal?: TypedGoalSelect) => void;
-}
-
-function stringToAlliance(allianceString: string): Alliance | undefined {
-    switch (allianceString.toLowerCase()) {
-        case 'imperial': {
-            return Alliance.Imperial;
-        }
-        case 'xenos': {
-            return Alliance.Xenos;
-        }
-        case 'chaos': {
-            return Alliance.Chaos;
-        }
-        default: {
-            return undefined;
-        }
-    }
 }
 
 export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
@@ -385,7 +368,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 farmType={form.farmType ?? 'both'}
                                 alliance={
-                                    isCharacter(unit) || isMow(unit) ? stringToAlliance(unit.alliance) : undefined
+                                    isCharacter(unit) || isMow(unit) ? allianceFromString(unit.alliance) : undefined
                                 }
                                 onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}

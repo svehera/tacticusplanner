@@ -51,8 +51,6 @@ export const EditAscendGoal: React.FC<Props> = ({
         return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
     }, [goal.rarityEnd]);
 
-    console.log('goal:', goal);
-
     return (
         <>
             <div className="flex gap-3">
