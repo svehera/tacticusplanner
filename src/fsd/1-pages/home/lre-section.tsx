@@ -105,20 +105,20 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
 
     return (
         <div className="w-full max-w-[350px]">
-            <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+            <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                 {isEventEnded ? 'Past ' : isEventStarted ? 'Ongoing ' : 'Upcoming '}Legendary Event
             </p>
             <div
-                className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors"
+                className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-colors"
                 onClick={navigateToNextLre}>
                 <div className="border-b border-(--card-border) px-4 py-3">
                     <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2.5 font-medium">
                             <UnitShardIcon icon={nextLeUnit?.roundIcon ?? ''} height={40} width={40} />
                             {nextLeUnit?.shortName}
-                            <span className="text-sm font-normal text-(--muted-fg)">({nextEvent.eventStage}/3)</span>
+                            <span className="text-sm font-normal text-(--soft-fg)">({nextEvent.eventStage}/3)</span>
                         </div>
-                        <div className="flex shrink-0 flex-col items-end text-sm text-(--muted-fg)">
+                        <div className="flex shrink-0 flex-col items-end text-sm text-(--soft-fg)">
                             <span>
                                 {isEventEnded ? 'Ended' : isEventStarted ? 'Ends' : 'Starts'}{' '}
                                 {formatMonthAndDay(isEventStarted ? nextLeDateEnd : nextLeDateStart)}
@@ -136,7 +136,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                 <div className="flex flex-col gap-3 px-2 py-3.5 text-sm sm:px-4">
                     {lreShardProgress !== undefined &&
                         (lreShardProgress.addlShardsForNextMilestone === Infinity ? (
-                            <div className="flex items-center gap-1.5 text-xs text-(--muted-fg)">
+                            <div className="flex items-center gap-1.5 text-xs text-(--soft-fg)">
                                 <span className="flex h-4 w-4 items-center justify-center rounded-full bg-(--success)/20 text-(--success)">
                                     ✓
                                 </span>
@@ -144,7 +144,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                             </div>
                         ) : (
                             <div className="flex flex-col gap-1">
-                                <div className="flex items-center justify-between text-xs text-(--muted-fg)">
+                                <div className="flex items-center justify-between text-xs text-(--soft-fg)">
                                     <span>To {lreShardProgress.nextMilestone}</span>
                                     <span>
                                         {lreShardProgress.currentShards} /{' '}
@@ -178,7 +178,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                     <div key={trackId} className="flex items-center gap-2">
                                         <div className="flex w-12 shrink-0 items-center gap-1">
                                             <div className={`h-1.5 w-1.5 shrink-0 rounded-full ${trackColor}`} />
-                                            <span className="text-xs text-(--muted-fg)">{name}</span>
+                                            <span className="text-xs text-(--soft-fg)">{name}</span>
                                         </div>
                                         <div className="flex flex-1 justify-between gap-1">
                                             {stats.map(stat => {
@@ -191,7 +191,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                                         <div className="flex flex-col gap-0.5">
                                                             <div className="flex items-center gap-1">
                                                                 <LreRequirementImage iconId={stat.iconId} sizePx={22} />
-                                                                <span className="text-[9px] leading-none text-(--muted-fg)">
+                                                                <span className="text-[9px] leading-none text-(--soft-fg)">
                                                                     {stat.completed}/{totalBattles}
                                                                 </span>
                                                             </div>
@@ -212,7 +212,7 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                         </div>
                     )}
                     {!hasTrackProgress && lreShardProgress === undefined && (
-                        <p className="text-xs text-(--muted-fg)">
+                        <p className="text-xs text-(--soft-fg)">
                             {isEventEnded
                                 ? 'Event complete.'
                                 : isEventStarted

@@ -21,7 +21,7 @@ export const SectionAccordion = forwardRef<HTMLDivElement, SectionAccordionProps
             square
             className="overflow-hidden border-0 border-t border-(--border) bg-transparent shadow-none [&::before]:hidden">
             <AccordionSummary
-                expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                expandIcon={<ExpandMoreIcon className="text-(--soft-fg)" />}
                 className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
                 {summary}
             </AccordionSummary>

@@ -26,10 +26,10 @@ export const CampaignProgressionHeader: React.FC<Props> = ({ activeGoalsAction }
                                 size="small"
                                 aria-label="How to use this page"
                                 onClick={() => setHelpOpen(true)}>
-                                <HelpOutlineIcon fontSize="small" className="text-(--muted-fg)" />
+                                <HelpOutlineIcon fontSize="small" className="text-(--soft-fg)" />
                             </IconButton>
                         </div>
-                        <p className="hidden max-w-prose text-sm text-(--muted-fg) sm:block">
+                        <p className="hidden max-w-prose text-sm text-(--soft-fg) sm:block">
                             Ranked next steps across your campaigns. Energy savings are computed against your active
                             goals and current progress.
                         </p>
@@ -65,7 +65,7 @@ export const CampaignProgressionHeader: React.FC<Props> = ({ activeGoalsAction }
                             </ul>
                         </li>
                     </ol>
-                    <p className="mt-4 text-xs text-(--muted-fg)">
+                    <p className="mt-4 text-xs text-(--soft-fg)">
                         Bugs or feature requests? Contact cpunerd via{' '}
                         <a href="https://discord.gg/8mcWKVAYZf">Discord&apos;s Tacticus Planner channel</a>.
                     </p>

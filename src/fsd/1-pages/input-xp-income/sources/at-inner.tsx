@@ -34,7 +34,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
 }) => (
     <div className="space-y-4 py-1">
         <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-[var(--muted-fg)]">Do you use AT to buy codices?</p>
+            <p className="text-xs text-[var(--soft-fg)]">Do you use AT to buy codices?</p>
             <Segmented
                 value={state.useATForCodices}
                 onChange={v => onUpdate('useATForCodices', v)}
@@ -49,7 +49,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
             <div className="fade-in space-y-4">
                 {/* Residual AT sources — display-only chips derived from roster */}
                 <div>
-                    <div className="mb-2 text-[11px] font-bold tracking-wider text-[var(--muted-fg)] uppercase">
+                    <div className="mb-2 text-[11px] font-bold tracking-wider text-[var(--soft-fg)] uppercase">
                         Residual AT sources
                     </div>
                     <div className="flex flex-wrap gap-2">
@@ -75,7 +75,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
                                     <div className="relative flex-shrink-0">
                                         <UnitShardIcon icon={roundIcon} />
                                         {isStarred && (
-                                            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--success)] text-white shadow ring-2 ring-[var(--card-bg)]">
+                                            <span className="absolute -top-1 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-[var(--success)] text-white shadow ring-2 ring-[var(--card)]">
                                                 <svg
                                                     width="8"
                                                     height="8"
@@ -93,10 +93,10 @@ export const AtInner: React.FC<AtInnerProps> = ({
                                     <div className="min-w-0 leading-tight">
                                         <div
                                             className="text-xs font-semibold"
-                                            style={{ color: isStarred ? 'var(--fg)' : 'var(--muted-fg)' }}>
+                                            style={{ color: isStarred ? 'var(--fg)' : 'var(--soft-fg)' }}>
                                             {shortName}
                                         </div>
-                                        <div className="text-[10px] text-[var(--muted-fg)] tabular-nums">
+                                        <div className="text-[10px] text-[var(--soft-fg)] tabular-nums">
                                             {char.shardsPerWeek} S/W
                                         </div>
                                     </div>
@@ -104,7 +104,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
                             );
                         })}
                     </div>
-                    <p className="mt-1.5 text-[10px] text-[var(--muted-fg)]">
+                    <p className="mt-1.5 text-[10px] text-[var(--soft-fg)]">
                         Detected from your roster. Update star levels in Who You Own.
                     </p>
                 </div>
@@ -114,7 +114,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
                     <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
                             <div className="text-sm font-semibold text-[var(--fg)]">Incursion farming (MoW)</div>
-                            <div className="text-[11px] text-[var(--muted-fg)]">MoW at blue star for Incursion?</div>
+                            <div className="text-[11px] text-[var(--soft-fg)]">MoW at blue star for Incursion?</div>
                         </div>
                         <Segmented
                             value={state.hasBlueStarMoW}
@@ -127,7 +127,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
                     </div>
                     {state.hasBlueStarMoW === 'yes' && (
                         <div className="fade-in mt-3">
-                            <div className="mb-1.5 text-[11px] text-[var(--muted-fg)]">
+                            <div className="mb-1.5 text-[11px] text-[var(--soft-fg)]">
                                 Legendary level you&apos;re farming
                             </div>
                             <Segmented
@@ -147,7 +147,7 @@ export const AtInner: React.FC<AtInnerProps> = ({
                 <div className="flex flex-wrap items-center justify-between gap-3 rounded-md border border-[var(--border)] bg-[var(--bg)] p-3">
                     <div>
                         <div className="text-sm font-semibold text-[var(--fg)]">Onslaught — Mythic Winged</div>
-                        <div className="text-[11px] text-[var(--muted-fg)]">
+                        <div className="text-[11px] text-[var(--soft-fg)]">
                             +{onslaughtCodicesWeekly} legendary-equiv /wk
                         </div>
                     </div>
@@ -162,10 +162,10 @@ export const AtInner: React.FC<AtInnerProps> = ({
                 <div className="grid grid-cols-2 gap-5 rounded-md border border-[var(--border)] bg-[var(--bg)] p-3">
                     <div>
                         <div className="text-xs font-semibold text-[var(--fg)]">Elite energy / day</div>
-                        <div className="mb-2 text-[11px] text-[var(--muted-fg)]">{eliteEnergyPerRaid}-energy steps</div>
+                        <div className="mb-2 text-[11px] text-[var(--soft-fg)]">{eliteEnergyPerRaid}-energy steps</div>
                         <div className="flex items-baseline justify-between gap-2">
                             <span className="text-sm font-bold text-[var(--fg)] tabular-nums">{eliteEnergyPerDay}</span>
-                            <span className="text-xs text-[var(--muted-fg)]">/ 600</span>
+                            <span className="text-xs text-[var(--soft-fg)]">/ 600</span>
                         </div>
                         <input
                             type="range"
@@ -179,14 +179,14 @@ export const AtInner: React.FC<AtInnerProps> = ({
                     </div>
                     <div>
                         <div className="text-xs font-semibold text-[var(--fg)]">Non-elite energy / day</div>
-                        <div className="mb-2 text-[11px] text-[var(--muted-fg)]">
+                        <div className="mb-2 text-[11px] text-[var(--soft-fg)]">
                             {nonEliteEnergyPerRaid}-energy steps
                         </div>
                         <div className="flex items-baseline justify-between gap-2">
                             <span className="text-sm font-bold text-[var(--fg)] tabular-nums">
                                 {nonEliteEnergyPerDay}
                             </span>
-                            <span className="text-xs text-[var(--muted-fg)]">/ 600</span>
+                            <span className="text-xs text-[var(--soft-fg)]">/ 600</span>
                         </div>
                         <input
                             type="range"

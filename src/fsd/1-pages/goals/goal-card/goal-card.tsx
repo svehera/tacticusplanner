@@ -103,9 +103,9 @@ export const GoalCard: React.FC<Props> = ({
     const hasFooter = !!onToggleInclude || showRaidsButton(goal);
     const cardBackgroundStyle =
         bgColor === 'rgba(0, 0, 0, 0)'
-            ? { backgroundColor: 'var(--card-bg)' }
+            ? { backgroundColor: 'var(--card)' }
             : {
-                  backgroundColor: 'var(--card-bg)',
+                  backgroundColor: 'var(--card)',
                   backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
               };
 
@@ -121,9 +121,7 @@ export const GoalCard: React.FC<Props> = ({
             {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
             <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--card-border) px-4 pt-3 pb-2">
                 <div className="flex items-center gap-1 self-start">
-                    <span className="text-[1.35rem] leading-none font-semibold text-(--muted-fg)">
-                        #{goal.priority}
-                    </span>
+                    <span className="text-[1.35rem] leading-none font-semibold text-(--soft-fg)">#{goal.priority}</span>
                     {goal.type === PersonalGoalType.UpgradeMaterial && (
                         <UpgradeImage
                             material={goal.upgradeMaterialId}
@@ -143,7 +141,7 @@ export const GoalCard: React.FC<Props> = ({
                         )}
                         {goal.type !== PersonalGoalType.UpgradeMaterial && (goal.unitName ?? goal.unitId)}
                     </span>
-                    {calendarDate && <span className="text-xs text-(--muted-fg)">{calendarDate}</span>}
+                    {calendarDate && <span className="text-xs text-(--soft-fg)">{calendarDate}</span>}
                 </div>
                 <div className="self-start">
                     <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />
@@ -152,7 +150,7 @@ export const GoalCard: React.FC<Props> = ({
             <div className="flex flex-1 flex-col px-4 pt-3 pb-3 text-sm">
                 <div className="flex-1">
                     {renderBody()}
-                    {goal.notes && <p className="mt-2 text-sm text-(--muted-fg)">{goal.notes}</p>}
+                    {goal.notes && <p className="mt-2 text-sm text-(--soft-fg)">{goal.notes}</p>}
                 </div>
                 {hasFooter && (
                     <>
@@ -163,7 +161,7 @@ export const GoalCard: React.FC<Props> = ({
                                     size="small"
                                     variant="outlined"
                                     className={
-                                        'rounded-full bg-(--secondary) px-3 ' +
+                                        'rounded-full bg-(--neutral) px-3 ' +
                                         (goal.include
                                             ? '!border-(--success)/50 !text-(--success) hover:!bg-(--success)/10'
                                             : '!border-(--danger)/50 !text-(--danger) hover:!bg-(--danger)/10')

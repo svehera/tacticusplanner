@@ -53,7 +53,7 @@ export const Slider = ({ value, max, onChange, fillClassName = 'bg-(--primary)',
             </div>
             {/* thumb */}
             <div
-                className={`pointer-events-none absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-(--card-bg) shadow-sm ${fillClassName} ${dragging ? 'scale-125' : 'scale-100'} motion-safe:transition-[left,transform] motion-safe:duration-200`}
+                className={`pointer-events-none absolute top-1/2 size-3 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 border-(--card) shadow-sm ${fillClassName} ${dragging ? 'scale-125' : 'scale-100'} motion-safe:transition-[left,transform] motion-safe:duration-200`}
                 style={{ left: `${pct}%` }}
             />
         </div>

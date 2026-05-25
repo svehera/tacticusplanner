@@ -1,8 +1,7 @@
-﻿import { ExpandMore as ExpandMoreIcon } from '@mui/icons-material';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { sum } from 'lodash';
+﻿import { sum } from 'lodash';
 import { FC, lazy, Suspense } from 'react';
 
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUpgradeRaid } from '@/fsd/3-features/goals/goals.models';
@@ -34,19 +33,14 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
 
     return (
         <>
-            <Accordion
-                defaultExpanded={true}
-                disableGutters
-                className="mt-2 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                    className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+            <Accordion defaultExpanded className="mt-2">
+                <AccordionHeader>
                     <span className="text-sm font-semibold sm:text-base">
                         Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
                         <b>{raidsCount}</b> raids done)
                     </span>
-                </AccordionSummary>
-                <AccordionDetails className="px-4 pt-0 pb-4">
+                </AccordionHeader>
+                <AccordionBody>
                     <Suspense fallback={undefined}>
                         <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                             {upgradesRaids.map((raid, index) => (
@@ -78,20 +72,15 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             ))}
                         </div>
                     </Suspense>
-                </AccordionDetails>
+                </AccordionBody>
             </Accordion>
-            <Accordion
-                slotProps={{ transition: { unmountOnExit: true } }}
-                disableGutters
-                className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                    className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+            <Accordion className="my-5">
+                <AccordionHeader>
                     <span className="text-sm font-semibold sm:text-base">
                         Bonus Raids (when you have extra energy <MiscIcon icon={'energy'} height={15} width={15} />)
                     </span>
-                </AccordionSummary>
-                <AccordionDetails className="px-4 pt-0 pb-4">
+                </AccordionHeader>
+                <AccordionBody>
                     <Suspense fallback={undefined}>
                         <div className="m-2.5 flex flex-wrap items-start justify-center gap-2">
                             {bonusRaids.map((raid, index) => (
@@ -105,7 +94,7 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             ))}
                         </div>
                     </Suspense>
-                </AccordionDetails>
+                </AccordionBody>
             </Accordion>
         </>
     );

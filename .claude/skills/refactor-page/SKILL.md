@@ -20,6 +20,7 @@ Glob: src/fsd/1-pages/**/{name}.tsx
 If you get multiple matches, ask which one. Don't pick the first hit — page names sometimes overlap (an old `/routes/` version and a newer `/fsd/1-pages/` version can coexist mid-migration).
 
 Check whether `rebuild` appears in `$ARGUMENTS`:
+
 - **Yes** → full JSX rewrite, logic copied across byte-for-byte.
 - **No** → targeted in-place edits.
 
@@ -55,15 +56,13 @@ A worked example, on a hypothetical snippet:
 
 ```tsx
 // before
-<div className="p-4 max-w-4xl mx-auto">
-  <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>Goals</h1>
-  <Stack direction="row" sx={{ gap: 2, mb: 2 }}>
-    {hasFilters && <button className="bg-blue-500 text-white px-3 py-1 rounded">Clear</button>}
-    <Switch checked={showCompleted} onChange={e => setShowCompleted(e.target.checked)} />
-  </Stack>
-  <div className="border-slate-200 border rounded bg-white p-4 dark:bg-slate-800">
-    {/* ... */}
-  </div>
+<div className="mx-auto max-w-4xl p-4">
+    <h1 style={{ fontSize: '24px', fontWeight: 'bold' }}>Goals</h1>
+    <Stack direction="row" sx={{ gap: 2, mb: 2 }}>
+        {hasFilters && <button className="rounded bg-blue-500 px-3 py-1 text-white">Clear</button>}
+        <Switch checked={showCompleted} onChange={e => setShowCompleted(e.target.checked)} />
+    </Stack>
+    <div className="rounded border border-slate-200 bg-white p-4 dark:bg-slate-800">{/* ... */}</div>
 </div>
 ```
 
@@ -79,7 +78,7 @@ Audit:
 [L4] Component: raw `<button>` for a real action → `<Button>` from `@/fsd/5-shared/ui`.
 [L4] Colors: `bg-blue-500 text-white` → `<Button>` default styling (don't reach for tokens directly when the component handles it).
 [L5] Component: MUI Switch with `checked` / `onChange={e => ...}` → shared `<Switch>` with `isSelected` / `onChange={setShowCompleted}` (react-aria signature, not DOM event).
-[L7] Colors: `border-slate-200 bg-white dark:bg-slate-800` → `border-(--border) bg-(--card-bg)`. The `dark:` variant goes away — tokens flip automatically.
+[L7] Colors: `border-slate-200 bg-white dark:bg-slate-800` → `border-(--border) bg-(--card)`. The `dark:` variant goes away — tokens flip automatically.
 ```
 
 If the audit comes back genuinely empty, tell the user the file already matches the design system and stop. Don't invent violations to justify the work.
@@ -90,10 +89,10 @@ The categories below are the ones that show up over and over. Use conventions.md
 
 **Colors**
 
-- Tailwind palette classes (`bg-blue-*`, `text-gray-*`, `border-slate-*`, `bg-white`, `text-black`, etc.) → token equivalents. Common mappings: white → `--bg`, zinc-950 → `--fg`, zinc-600 → `--muted-fg`, zinc-200 → `--border`, zinc-300 → `--input`, indigo → `--primary`.
+- Tailwind palette classes (`bg-blue-*`, `text-gray-*`, `border-slate-*`, `bg-white`, `text-black`, etc.) → token equivalents. Common mappings: white → `--bg`, zinc-950 → `--fg`, zinc-600 → `--soft-fg`, zinc-200 → `--border`, zinc-300 → `--input-border`, indigo → `--primary`.
 - Manual `dark:` variants → delete them. Tokens already handle dark mode and the two will fight each other.
-- `hover:bg-(--secondary)` on buttons inside cards or tables → these look invisible in dark mode because `--secondary` *is* the card surface in dark mode. Use `hover:bg-(--primary)/15` for neutral actions or `hover:bg-(--danger)/10` for destructive ones.
-- `bg-(--secondary)` as a progress track → same problem; use `bg-(--fg)/12` for overlaid tracks.
+- `hover:bg-(--neutral)` on buttons inside cards or tables → these look invisible in dark mode because `--neutral` _is_ the card surface in dark mode. Use `hover:bg-(--primary)/15` for neutral actions or `hover:bg-(--danger)/10` for destructive ones.
+- `bg-(--neutral)` as a progress track → same problem; use `bg-(--fg)/12` for overlaid tracks.
 
 (Inline `style={{ color: ... }}` and `sx={{ color: ... }}` are covered in **Styling approach** below.)
 
@@ -126,7 +125,7 @@ The codebase is migrating to Tailwind classes; `style={{...}}` and MUI's `sx` pr
 
 - Filter toggles, chips, and clear button crammed onto one row → split per conventions.md "Filter bar header pattern": Switch + Clear in the header row, chips/search in the body.
 - Clear button rendered conditionally → always render with `isDisabled={!hasFilters}`.
-- Missing page heading → add `<h2>` + `<p className="text-sm text-(--muted-fg)">`.
+- Missing page heading → add `<h2>` + `<p className="text-sm text-(--soft-fg)">`.
 
 **Page layout & alignment**
 
@@ -134,7 +133,7 @@ The shell wraps every outlet in `mx-5 my-2.5`. Pages that double-pad either look
 
 - `px-*` or `mx-*` on the page root → remove. The shell handles horizontal padding.
 - `max-w-*` on the page root, with a table or card grid as content → remove. These content types should fill width.
-- Missing `max-w-2xl` / `max-w-3xl` on a form or text-heavy page → add it to the *inner* content container (the form, the prose block), not the root.
+- Missing `max-w-2xl` / `max-w-3xl` on a form or text-heavy page → add it to the _inner_ content container (the form, the prose block), not the root.
 - Content centered when it should be left-aligned → remove the centering. Default is left-aligned. Centering is intentional for empty states and large single-stat displays only.
 - Numbers in table cells without `text-right tabular-nums` → add both.
 - Action cluster in a filter row not pushed right → wrap in `<div className="flex flex-1 items-center justify-end gap-3">`.
@@ -157,17 +156,19 @@ The principle: every diff hunk should be either (a) a design-system fix, (b) an 
 Four tiers:
 
 **1. Always in scope, no flag needed.** Pure wins, do them silently:
+
 - Remove unused imports
 - Remove dead code (functions/variables that aren't referenced)
 - Remove `console.log` and other debugging statements
 - Remove commented-out blocks
 - Migrate `style={{...}}` and MUI `sx={{...}}` to Tailwind `className` — both are legacy. Policy for `sx`:
-  - Plain property `sx={{ display: 'flex', gap: 2, p: 3 }}` → Tailwind classes (`className="flex gap-2 p-3"`)
-  - Responsive `sx={{ p: { xs: 1, md: 3 } }}` → Tailwind responsive (`className="p-2 md:p-6"`)
-  - Theme-referenced `sx={{ color: 'primary.main' }}` → token class (`className="text-(--primary)"`)
-  - Selector-based `sx={{ '& .MuiButton-root': {...} }}` → leave it and flag in summary. If you're also swapping the MUI component for a shared one, the override is probably going away anyway.
+    - Plain property `sx={{ display: 'flex', gap: 2, p: 3 }}` → Tailwind classes (`className="flex gap-2 p-3"`)
+    - Responsive `sx={{ p: { xs: 1, md: 3 } }}` → Tailwind responsive (`className="p-2 md:p-6"`)
+    - Theme-referenced `sx={{ color: 'primary.main' }}` → token class (`className="text-(--primary)"`)
+    - Selector-based `sx={{ '& .MuiButton-root': {...} }}` → leave it and flag in summary. If you're also swapping the MUI component for a shared one, the override is probably going away anyway.
 
 **2. In scope when you're already editing that area.** If your hand is already on the keyboard in this hunk, improve it:
+
 - A poorly-named local variable inside a function you're already changing → rename it (update local references too)
 - Inline computation in a JSX block you're rewriting anyway → lift to `useMemo`
 - An awkwardly-defined handler attached to a component you're swapping → clean up the handler shape
@@ -176,6 +177,7 @@ Four tiers:
 The qualifier matters. Don't go hunting — if you're editing a hunk and the cleanup is right there, do it. If you'd have to navigate to another part of the file, don't.
 
 **3. Flag, don't fix.** Things you noticed but have enough blast radius that the user should decide:
+
 - Renaming exported symbols (other files import them)
 - Restructuring component composition (props would need to flow differently)
 - Splitting the file (extracting a hook or sub-component)
@@ -185,10 +187,11 @@ The qualifier matters. Don't go hunting — if you're editing a hunk and the cle
 List these in your final summary as "noticed but didn't change — happy to address in a follow-up or as part of this PR if you want."
 
 **4. Hard out of scope.** Don't touch under any circumstance, even if you spot something wrong:
+
 - Business logic, algorithms, computed values
 - `useEffect` / `useMemo` dependency arrays
 - Event handler behavior
-- Anything that changes what the page *does*
+- Anything that changes what the page _does_
 
 If you spot a real bug in this category while reading, surface it in the summary as a separate note. Don't fix it under the cover of a visual refactor — that makes the PR harder to review and harder to revert if something breaks.
 
@@ -200,7 +203,7 @@ The mental model for a reviewer: when they look at the diff, every hunk should b
 
 **Targeted refactor** (default): use `Edit`. Work in passes so the diff stays readable — imports first, then colors, then component swaps, then layout. One logical group at a time.
 
-**Full rebuild** (`rebuild` was in args): extract every piece of logic from the original — state declarations, `useMemo` blocks, `useContext`, handlers, computed values — and copy them verbatim to the top of the new file. Then rewrite *only* the JSX. Use `Write` to replace the file.
+**Full rebuild** (`rebuild` was in args): extract every piece of logic from the original — state declarations, `useMemo` blocks, `useContext`, handlers, computed values — and copy them verbatim to the top of the new file. Then rewrite _only_ the JSX. Use `Write` to replace the file.
 
 **The constraint that doesn't bend, regardless of mode:** business logic stays untouched. Don't rename variables. Don't refactor handlers. Don't "clean up" `useMemo` dependencies. Don't optimize. If you spot a real bug while reading, mention it in the final summary as a separate note — don't fix it under the cover of a visual refactor.
 

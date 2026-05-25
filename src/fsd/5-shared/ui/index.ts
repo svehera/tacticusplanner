@@ -24,6 +24,7 @@ export { Dialog, Modal } from './modal';
 export { Switch } from './switch';
 export type { SwitchProps } from './switch';
 export { Card, CardHeader, CardTitle, CardDescription, CardContent, CardFooter } from './card';
+export { Accordion, AccordionHeader, AccordionBody } from './accordion';
 export { Badge, badgeStyles } from './badge';
 export type { BadgeProps } from './badge';
 export { Separator } from './separator';

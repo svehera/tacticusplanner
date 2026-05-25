@@ -1,12 +1,11 @@
 import { Warning } from '@mui/icons-material';
 import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import GridViewIcon from '@mui/icons-material/GridView';
 import InfoIcon from '@mui/icons-material/Info';
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PendingIcon from '@mui/icons-material/Pending';
 import TableRowsIcon from '@mui/icons-material/TableRows';
-import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { sum } from 'lodash';
 import React, { lazy, Suspense, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
@@ -14,7 +13,7 @@ import React, { lazy, Suspense, useCallback, useContext, useEffect, useMemo, use
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
-import { AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Accordion, AccordionHeader, AccordionBody, FlexBox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -185,14 +184,8 @@ export const RaidsPlan: React.FC<Props> = ({
     }, [daysTotal]);
 
     return (
-        <Accordion
-            expanded={outerExpanded}
-            onChange={(_, isExpanded) => setOuterExpanded(isExpanded)}
-            disableGutters
-            className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-            <AccordionSummary
-                expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+        <Accordion className="my-5" expanded={outerExpanded} onToggle={setOuterExpanded}>
+            <AccordionHeader>
                 <FlexBox className="flex-col items-start">
                     <div className="flex flex-wrap items-center gap-2 text-base font-semibold sm:text-lg">
                         <span>
@@ -229,10 +222,10 @@ export const RaidsPlan: React.FC<Props> = ({
                             }
                         />
                     </div>
-                    <span className="text-sm text-(--muted-fg) italic">{calendarDateTotal}</span>
+                    <span className="text-sm text-(--soft-fg) italic">{calendarDateTotal}</span>
                 </FlexBox>
-            </AccordionSummary>
-            <AccordionDetails className="p-0!">
+            </AccordionHeader>
+            <AccordionBody className="p-0">
                 {estimatedRanks.relatedUpgrades.length > 0 && (
                     <SectionAccordion
                         expanded={expandedPanels.related}
@@ -335,7 +328,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         summary={
                             <div className="flex w-full flex-col gap-1">
                                 <span className="text-sm font-semibold sm:text-base">Daily Raids</span>
-                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-(--muted-fg)">
+                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-(--soft-fg)">
                                     <span>
                                         <b className="text-(--card-fg)">{estimatedRanks.upgradesRaids.length}</b> days
                                     </span>
@@ -382,7 +375,7 @@ export const RaidsPlan: React.FC<Props> = ({
                         />
                     </SectionAccordion>
                 )}
-            </AccordionDetails>
+            </AccordionBody>
         </Accordion>
     );
 };

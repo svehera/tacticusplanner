@@ -74,14 +74,14 @@ const MaterialGridComponent: FC<MaterialGridProps> = ({ farmableRaids, matchesFi
                                     type="button"
                                     aria-label={raid.label}
                                     onClick={() => onSelectRaid(raid)}
-                                    className={`flex flex-col items-center gap-2 rounded-lg border border-transparent p-2 transition-[opacity,border-color,background-color] duration-100 ease-out hover:border-(--card-border) hover:bg-(--secondary) ${cellOpacity}`}>
+                                    className={`flex flex-col items-center gap-2 rounded-lg border border-transparent p-2 transition-[opacity,border-color,background-color] duration-100 ease-out hover:border-(--card-border) hover:bg-(--neutral) ${cellOpacity}`}>
                                     <div className="relative pb-2">
                                         <RaidMaterialIcon raid={raid} size={40} showTooltip={false} />
                                         <span
                                             className={`absolute -bottom-0.5 left-1/2 -translate-x-1/2 rounded-full px-1.5 py-0.5 text-[9px] leading-none font-bold whitespace-nowrap tabular-nums shadow-sm ${
                                                 sufficient
                                                     ? 'bg-(--success) text-(--success-fg)'
-                                                    : 'bg-(--card-fg)/80 text-(--card-bg)'
+                                                    : 'bg-(--card-fg)/80 text-(--card)'
                                             }`}>
                                             {Math.floor(raid.acquiredCount)}/{raid.requiredCount}
                                         </span>

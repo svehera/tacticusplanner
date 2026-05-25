@@ -196,7 +196,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
     }
 
     const itemClass =
-        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-[7px] border-none cursor-pointer text-[13px] text-[var(--muted-fg)] bg-transparent hover:bg-[var(--primary)]/[.18] hover:text-[var(--fg)] transition-colors';
+        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-[7px] border-none cursor-pointer text-[13px] text-[var(--soft-fg)] bg-transparent hover:bg-[var(--primary)]/[.18] hover:text-[var(--fg)] transition-colors';
     const iconClass = 'flex-shrink-0 !text-[18px]';
 
     const close = () => userMenuControls.handleClose();

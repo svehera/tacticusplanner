@@ -46,7 +46,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
                             <span className="font-medium">{label}</span>
                             {neededBy.length > 0 && (
                                 <>
-                                    <span className="text-xs text-(--muted-fg)">needed by</span>
+                                    <span className="text-xs text-(--soft-fg)">needed by</span>
                                     {neededBy.map(unitId => {
                                         const unit = CharactersService.getUnit(unitId);
                                         return (
@@ -64,17 +64,17 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
                         </div>
                         {lockedLocations.length > 0 ? (
                             <div className="flex flex-wrap items-center gap-1">
-                                <span className="text-xs text-(--muted-fg)">Unlocks at:</span>
+                                <span className="text-xs text-(--soft-fg)">Unlocks at:</span>
                                 {lockedLocations.map(loc => (
                                     <CampaignLocation key={loc.id} location={loc} unlocked={false} short={true} />
                                 ))}
                             </div>
                         ) : (
-                            <span className="text-xs text-(--muted-fg)">No known campaign locations</span>
+                            <span className="text-xs text-(--soft-fg)">No known campaign locations</span>
                         )}
                     </div>
                 </div>
-                <span className="font-mono text-xs text-(--muted-fg) tabular-nums">
+                <span className="font-mono text-xs text-(--soft-fg) tabular-nums">
                     {ownedCount} owned · need {requiredCount}
                 </span>
             </div>
@@ -101,7 +101,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
                 square
                 className="overflow-hidden rounded-xl! border-l-[3px] border-(--border) border-l-amber-500 bg-transparent shadow-none [&::before]:hidden">
                 <AccordionSummary
-                    expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
+                    expandIcon={<ExpandMoreIcon className="text-(--soft-fg)" />}
                     aria-controls="unfarmable-materials-content"
                     id="unfarmable-materials-accordion"
                     className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">

@@ -28,7 +28,7 @@ export const XpGoalProgressBar: React.FC<XpGoalProgressBarProps> = ({
     return (
         <AccessibleTooltip title={tooltipText}>
             <div className="flex-box w-full max-w-[140px] items-center gap-1">
-                <div className="relative h-4 flex-grow overflow-hidden rounded-full bg-(--muted)">
+                <div className="relative h-4 flex-grow overflow-hidden rounded-full bg-(--soft)">
                     <div
                         className="h-full bg-(--success) transition-all duration-500"
                         style={{ width: barWidth }}></div>

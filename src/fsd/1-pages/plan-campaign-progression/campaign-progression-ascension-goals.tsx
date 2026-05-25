@@ -18,20 +18,20 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ rows }) => 
             <table className="w-full border-collapse text-[13px]">
                 <thead>
                     <tr>
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             Character
                         </th>
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             From Rarity
                         </th>
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             Stars
                         </th>
                         <th className="border-b border-(--border) px-1 py-1.5" />
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             To Rarity
                         </th>
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             Stars
                         </th>
                     </tr>
@@ -54,7 +54,7 @@ export const CampaignProgressionAscensionGoals: React.FC<Props> = ({ rows }) => 
                                     {goal && <StarsIcon stars={goal.starsStart} />}
                                 </td>
                                 <td className="px-1 py-1.5 align-middle">
-                                    <ArrowForward sx={{ fontSize: 16 }} className="text-(--muted-fg)" />
+                                    <ArrowForward sx={{ fontSize: 16 }} className="text-(--soft-fg)" />
                                 </td>
                                 <td className="px-2 py-1.5 align-middle">
                                     {goal && <RarityIcon rarity={goal.rarityEnd} />}

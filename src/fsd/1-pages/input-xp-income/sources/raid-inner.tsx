@@ -39,7 +39,7 @@ export const RaidInner: React.FC<RaidInnerProps> = ({
 }) => (
     <div className="space-y-4 py-1">
         <div className="flex flex-wrap items-center justify-between gap-3">
-            <p className="text-xs text-[var(--muted-fg)]">Do you loop guild raids?</p>
+            <p className="text-xs text-[var(--soft-fg)]">Do you loop guild raids?</p>
             <Segmented
                 value={loopsRaids}
                 onChange={v => onUpdate('loopsRaids', v)}
@@ -94,7 +94,7 @@ export const RaidInner: React.FC<RaidInnerProps> = ({
                     <select
                         value={clearRarity}
                         onChange={event_ => onUpdate('clearRarity', Number.parseInt(event_.target.value, 10) as Rarity)}
-                        className="rounded-[var(--radius-lg)] border border-[var(--input)] bg-[var(--bg)] px-3 py-2 text-sm font-semibold text-[var(--fg)] focus:border-[var(--primary)] focus:outline-none">
+                        className="rounded-[var(--radius-lg)] border border-[var(--input-border)] bg-[var(--bg)] px-3 py-2 text-sm font-semibold text-[var(--fg)] focus:border-[var(--primary)] focus:outline-none">
                         {rarityOptions.map(r => (
                             <option key={r} value={r}>
                                 {rarityName[r]}

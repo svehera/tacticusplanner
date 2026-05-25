@@ -81,7 +81,7 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
                 </span>
                 <div className="min-w-0 flex-1">
                     <div className="text-sm font-semibold text-[var(--fg)]">Help me estimate</div>
-                    <div className="text-[11px] text-[var(--muted-fg)]">
+                    <div className="text-[11px] text-[var(--soft-fg)]">
                         Calculate from your arena, raids and AT purchases — click any source to tweak.
                     </div>
                 </div>
@@ -131,18 +131,18 @@ export const CalculatorCard: React.FC<CalculatorCardProps> = ({
                 {/* Footer total + Apply */}
                 <div
                     className="border-t-2 border-[var(--primary)] px-5 py-4"
-                    style={{ background: 'color-mix(in oklab, var(--secondary) 50%, transparent)' }}>
+                    style={{ background: 'color-mix(in oklab, var(--neutral) 50%, transparent)' }}>
                     <div className="flex flex-wrap items-center justify-between gap-3">
                         <div>
-                            <div className="text-[10px] font-bold tracking-[.18em] text-[var(--muted-fg)] uppercase">
+                            <div className="text-[10px] font-bold tracking-[.18em] text-[var(--soft-fg)] uppercase">
                                 Calculator total
                             </div>
                             <div className="mt-1 flex items-baseline gap-1.5">
                                 <span className="text-3xl font-extrabold text-[var(--fg)] tabular-nums">
                                     {helperDaily.toFixed(2)}
                                 </span>
-                                <span className="text-sm text-[var(--muted-fg)]">{chosenName.toLowerCase()} / day</span>
-                                <span className="ml-2 text-xs text-[var(--muted-fg)]">
+                                <span className="text-sm text-[var(--soft-fg)]">{chosenName.toLowerCase()} / day</span>
+                                <span className="ml-2 text-xs text-[var(--soft-fg)]">
                                     ({helperWeekly.toFixed(2)} / wk)
                                 </span>
                             </div>

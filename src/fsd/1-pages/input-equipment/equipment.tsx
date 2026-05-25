@@ -172,11 +172,11 @@ const EquipmentRow = ({
                             <div
                                 key={level}
                                 className="flex flex-col items-center rounded border border-(--border) px-2 py-1 text-center">
-                                <span className="text-xs text-(--muted-fg)">Lv {level}</span>
+                                <span className="text-xs text-(--soft-fg)">Lv {level}</span>
                                 <span className="text-sm font-bold">×{inInventory}</span>
                                 {equippers.length > 0 && (
                                     <div className="mt-1 flex flex-col items-center gap-0.5">
-                                        <span className="text-xs text-(--muted-fg)">+{equippers.length} eq.</span>
+                                        <span className="text-xs text-(--soft-fg)">+{equippers.length} eq.</span>
                                         <div className="flex flex-wrap justify-center gap-0.5">
                                             {equippers.map((char, index) => (
                                                 <span key={`${char.snowprintId}-${index}`}>
@@ -345,7 +345,7 @@ export const Equipment = () => {
         <div className="flex flex-col gap-6 p-4">
             <div className="flex items-center justify-between">
                 <h1 className="text-2xl font-bold">Equipment</h1>
-                <span className="text-sm text-(--muted-fg)">{totalOwned} total pieces</span>
+                <span className="text-sm text-(--soft-fg)">{totalOwned} total pieces</span>
             </div>
 
             {onlyRelics && Date.now() < Date.UTC(2026, 4, 20, 23, 59, 59) && (
@@ -419,7 +419,7 @@ export const Equipment = () => {
 
             {/* Results */}
             {groupedEquipment.size === 0 ? (
-                <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--muted-fg)">
+                <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--soft-fg)">
                     {ownedEquipment.length === 0
                         ? 'No equipment in your inventory yet.'
                         : 'No equipment matches the selected filters.'}
@@ -430,7 +430,7 @@ export const Equipment = () => {
                         <section key={type}>
                             <h2 className="mb-3 text-lg font-semibold">
                                 {TYPE_DISPLAY_NAMES[type] ?? type}
-                                <span className="ml-2 text-sm font-normal text-(--muted-fg)">
+                                <span className="ml-2 text-sm font-normal text-(--soft-fg)">
                                     ({items.length} {items.length === 1 ? 'item' : 'items'})
                                 </span>
                             </h2>

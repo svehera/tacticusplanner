@@ -66,7 +66,7 @@ const RaidsDayViewComponent: FC<Props> = ({
 
     return (
         <div
-            className="flex max-w-[340px] min-w-[260px] flex-col rounded-xl border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-sm"
+            className="flex max-w-[340px] min-w-[260px] flex-col rounded-xl border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-sm"
             style={{ height: expanded ? `${EXPANDED_CARD_HEIGHT}px` : undefined }}>
             {/* Header - always visible */}
             <div className="flex flex-col gap-2">

@@ -39,7 +39,7 @@ const DayFilterBarComponent: FC<DayFilterBarProps> = ({
                         onClick={() => onToggle(id)}
                         className={`cursor-pointer rounded-full p-0.5 transition-[opacity,transform] duration-100 ease-out focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring) ${
                             isSelected
-                                ? 'scale-105 ring-2 ring-(--primary) ring-offset-2 ring-offset-(--card-bg)'
+                                ? 'scale-105 ring-2 ring-(--primary) ring-offset-2 ring-offset-(--card)'
                                 : filterActive
                                   ? 'opacity-50 hover:opacity-100'
                                   : ''
@@ -54,14 +54,14 @@ const DayFilterBarComponent: FC<DayFilterBarProps> = ({
                     <button
                         type="button"
                         onClick={() => onNavigate(firstDay, 'start')}
-                        className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card-bg) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--secondary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
+                        className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--neutral) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
                         ← Day {firstDay + 1}
                     </button>
                     {lastDay !== undefined && lastDay !== firstDay && (
                         <button
                             type="button"
                             onClick={() => onNavigate(lastDay, 'end')}
-                            className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card-bg) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--secondary) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
+                            className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--neutral) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
                             Day {lastDay + 1} →
                         </button>
                     )}

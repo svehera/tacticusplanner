@@ -5,7 +5,7 @@ const badgeStyles = tv({
     base: 'inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs font-medium whitespace-nowrap',
     variants: {
         intent: {
-            default: 'bg-[var(--secondary)] text-[var(--secondary-fg)]',
+            default: 'bg-[var(--neutral)] text-[var(--neutral-fg)]',
             primary: 'bg-[var(--primary)] text-[var(--primary-fg)]',
             success: 'bg-[var(--success)] text-[var(--success-fg)]',
             warning: 'bg-[var(--warning)] text-[var(--warning-fg)]',

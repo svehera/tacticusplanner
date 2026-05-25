@@ -64,14 +64,14 @@ export const DesktopHome = () => {
                 <GoalsSection />
 
                 <div>
-                    <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+                    <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                         Events calendar
                     </p>
                     <div className="flex flex-wrap justify-center gap-2.5">
                         {!!calendarUrls.current && (
                             <div className="w-full max-w-[350px]">
                                 {!!calendarUrls.next && (
-                                    <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Current Season
                                     </p>
                                 )}
@@ -89,7 +89,7 @@ export const DesktopHome = () => {
 
                         {!!calendarUrls.next && (
                             <div className="w-full max-w-[350px]">
-                                <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                                     Next Season
                                 </p>
                                 <Zoom>

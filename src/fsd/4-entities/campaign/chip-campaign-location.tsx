@@ -59,7 +59,7 @@ const CampaignBattleCardPreview: React.FC<CampaignBattleCardPreviewProps> = ({ b
     const rewardRarity = RarityMapper.stringToRarityString(rewardMaterial?.rarity ?? '');
 
     return (
-        <div className="mx-auto flex w-fit max-w-full flex-col gap-3 rounded-md border border-[var(--card-border)] bg-[var(--card-bg)] p-4 text-[var(--card-fg)] shadow-md">
+        <div className="mx-auto flex w-fit max-w-full flex-col gap-3 rounded-md border border-[var(--card-border)] bg-[var(--card)] p-4 text-[var(--card-fg)] shadow-md">
             <div className="flex flex-wrap items-center gap-3 border-b border-[var(--card-border)] pb-3 text-inherit">
                 <CampaignImage campaign={battle.campaign} size={26} showTooltip={false} />
                 <div className="ml-auto flex flex-wrap items-center gap-3 text-inherit">
@@ -153,7 +153,7 @@ export const ChipCampaignLocation: React.FC<Props> = ({
                     onClick={clickable ? () => setOpenDetails(true) : undefined}
                     tabIndex={clickable ? undefined : -1}
                     aria-disabled={clickable ? undefined : true}
-                    className={`inline-flex items-center gap-1 overflow-hidden rounded-full border border-(--muted-fg)/40 bg-transparent px-2 py-0.5 transition-colors ${setWidthClass} text-(--card-fg) ${clickable ? 'cursor-pointer hover:border-(--primary)/60 hover:bg-(--primary)/8' : 'cursor-default'}`.trim()}
+                    className={`inline-flex items-center gap-1 overflow-hidden rounded-full border border-(--soft-fg)/40 bg-transparent px-2 py-0.5 transition-colors ${setWidthClass} text-(--card-fg) ${clickable ? 'cursor-pointer hover:border-(--primary)/60 hover:bg-(--primary)/8' : 'cursor-default'}`.trim()}
                     style={{
                         opacity: unlocked ? 1 : 0.5,
                     }}>

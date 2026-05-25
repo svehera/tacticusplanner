@@ -123,7 +123,7 @@ export const XpIncome: React.FC = () => {
     return (
         <>
             <h2>XP Income</h2>
-            <p className="-mt-1 mb-5 max-w-2xl text-sm text-[var(--muted-fg)]">
+            <p className="-mt-1 mb-5 max-w-2xl text-sm text-[var(--soft-fg)]">
                 Pick your codex rarity, then tell us how many you earn per day. Use the calculator on the left if
                 you&apos;d like help.
             </p>

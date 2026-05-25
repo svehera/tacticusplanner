@@ -20,7 +20,7 @@ export const ArenaInner: React.FC<ArenaInnerProps> = ({ arenaLeague, onUpdate })
 
     return (
         <div className="space-y-3 py-1">
-            <p className="text-xs text-[var(--muted-fg)]">Which league are you in?</p>
+            <p className="text-xs text-[var(--soft-fg)]">Which league are you in?</p>
             <Segmented
                 value={arenaLeague}
                 onChange={v => onUpdate('arenaLeague', v)}
@@ -34,7 +34,7 @@ export const ArenaInner: React.FC<ArenaInnerProps> = ({ arenaLeague, onUpdate })
                 {Object.entries(rewards).map(([rarity, count]) => (
                     <span
                         key={rarity}
-                        className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--bg)] px-2.5 py-0.5 text-xs text-[var(--muted-fg)]">
+                        className="inline-flex items-center gap-1 rounded-full border border-[var(--border)] bg-[var(--bg)] px-2.5 py-0.5 text-xs text-[var(--soft-fg)]">
                         <span className="font-semibold text-[var(--fg)] tabular-nums">{count}</span>
                         {rarity} / wk
                     </span>

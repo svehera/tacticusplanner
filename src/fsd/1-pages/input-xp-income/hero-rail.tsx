@@ -59,12 +59,12 @@ export const HeroRail: React.FC<HeroRailProps> = ({ state, chosenName, helperDai
                                 <MiscIcon icon={r.iconKey} width={32} height={32} className="rounded-md" />
                                 <span
                                     className="text-[11px] font-semibold tracking-tight"
-                                    style={{ color: selected ? 'var(--fg)' : 'var(--muted-fg)' }}>
+                                    style={{ color: selected ? 'var(--fg)' : 'var(--soft-fg)' }}>
                                     {r.name}
                                 </span>
                                 {/* Check pip */}
                                 {selected && (
-                                    <span className="absolute top-1 right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--primary)] text-white shadow ring-2 ring-[var(--card-bg)]">
+                                    <span className="absolute top-1 right-1 flex h-3.5 w-3.5 items-center justify-center rounded-full bg-[var(--primary)] text-white shadow ring-2 ring-[var(--card)]">
                                         <svg
                                             width="7"
                                             height="7"
@@ -87,7 +87,7 @@ export const HeroRail: React.FC<HeroRailProps> = ({ state, chosenName, helperDai
             {/* Step 2 — Earned per day */}
             <div
                 className="border-t border-[var(--border)] px-5 pt-4 pb-5"
-                style={{ background: 'color-mix(in oklab, var(--secondary) 30%, transparent)' }}>
+                style={{ background: 'color-mix(in oklab, var(--neutral) 30%, transparent)' }}>
                 <div className="mb-3 flex items-baseline gap-2">
                     <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[var(--primary)] text-[10px] font-bold text-[var(--primary-fg)]">
                         2
@@ -102,15 +102,15 @@ export const HeroRail: React.FC<HeroRailProps> = ({ state, chosenName, helperDai
                     onChange={event_ =>
                         onUpdate('manualCodicesPerDay', event_.target.value === '' ? 0 : Number(event_.target.value))
                     }
-                    className="w-full rounded-[var(--radius-lg)] border border-[var(--input)] bg-[var(--bg)] px-3 py-2 text-[36px] font-extrabold text-[var(--fg)] tabular-nums focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 focus:outline-none"
+                    className="w-full rounded-[var(--radius-lg)] border border-[var(--input-border)] bg-[var(--bg)] px-3 py-2 text-[36px] font-extrabold text-[var(--fg)] tabular-nums focus:border-[var(--primary)] focus:ring-2 focus:ring-[var(--primary)]/20 focus:outline-none"
                 />
-                <div className="mt-1 text-[11px] text-[var(--muted-fg)]">{chosenName} codices / day</div>
+                <div className="mt-1 text-[11px] text-[var(--soft-fg)]">{chosenName} codices / day</div>
 
                 {/* Quick-adjust slider */}
                 <div className="mt-4">
                     <div className="mb-1.5 flex items-center gap-2">
-                        <span className="text-[11px] text-[var(--muted-fg)]">Quick adjust</span>
-                        <span className="ml-auto text-[11px] text-[var(--muted-fg)] tabular-nums">0 – 10</span>
+                        <span className="text-[11px] text-[var(--soft-fg)]">Quick adjust</span>
+                        <span className="ml-auto text-[11px] text-[var(--soft-fg)] tabular-nums">0 – 10</span>
                     </div>
                     <input
                         type="range"
@@ -131,7 +131,7 @@ export const HeroRail: React.FC<HeroRailProps> = ({ state, chosenName, helperDai
                     style={{ background: 'color-mix(in oklab, var(--primary) 14%, transparent)' }}>
                     <div className="flex items-center justify-between gap-3">
                         <div className="text-xs leading-tight">
-                            <div className="text-[var(--muted-fg)]">Calculator suggests</div>
+                            <div className="text-[var(--soft-fg)]">Calculator suggests</div>
                             <div className="mt-0.5 text-base font-extrabold text-[var(--primary)] tabular-nums">
                                 {helperDaily.toFixed(2)}
                             </div>
@@ -157,8 +157,8 @@ export const HeroRail: React.FC<HeroRailProps> = ({ state, chosenName, helperDai
                 </div>
             ) : (
                 <div
-                    className="border-t border-[var(--border)] px-5 py-3 text-[11px] leading-snug text-[var(--muted-fg)]"
-                    style={{ background: 'color-mix(in oklab, var(--secondary) 30%, transparent)' }}>
+                    className="border-t border-[var(--border)] px-5 py-3 text-[11px] leading-snug text-[var(--soft-fg)]"
+                    style={{ background: 'color-mix(in oklab, var(--neutral) 30%, transparent)' }}>
                     Used in Goals planning, Daily Raids and Campaign Progression to estimate timelines.
                 </div>
             )}

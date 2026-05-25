@@ -20,7 +20,7 @@ export const StarsSelect2 = ({
 }) => {
     return (
         <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-(--muted-fg)">{label}</label>
+            <label className="mb-2 block text-sm font-medium text-(--soft-fg)">{label}</label>
 
             <Listbox value={value} onChange={valueChanges}>
                 <div className="relative">
@@ -31,7 +31,7 @@ export const StarsSelect2 = ({
                         </div>
 
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronsUpDown className="h-4 w-4 text-(--muted-fg)" />
+                            <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
                         </span>
                     </Listbox.Button>
 

@@ -14,11 +14,11 @@
     --color-bg: var(--bg);
     --color-fg: var(--fg);
     --color-border: var(--border);
-    --color-input: var(--input);
+    --color-input-border: var(--input-border);
     --color-ring: var(--ring);
 
     /* ── Card ─────────────────────────────────── */
-    --color-card-bg: var(--card-bg);
+    --color-card: var(--card);
     --color-card-fg: var(--card-fg);
     --color-card-border: var(--card-border);
 
@@ -30,13 +30,13 @@
     --color-overlay: var(--overlay);
     --color-overlay-fg: var(--overlay-fg);
 
-    /* ── Secondary ────────────────────────────── */
-    --color-secondary: var(--secondary);
-    --color-secondary-fg: var(--secondary-fg);
+    /* ── Neutral ──────────────────────────────── */
+    --color-neutral: var(--neutral);
+    --color-neutral-fg: var(--neutral-fg);
 
-    /* ── Muted ────────────────────────────────── */
-    --color-muted: var(--muted);
-    --color-muted-fg: var(--muted-fg);
+    /* ── Soft ─────────────────────────────────── */
+    --color-soft: var(--soft);
+    --color-soft-fg: var(--soft-fg);
 
     /* ── Data surface ─────────────────────────── */
     --color-data-surface: var(--data-surface);
@@ -73,11 +73,11 @@
         --bg: var(--color-white);
         --fg: var(--color-zinc-950);
         --border: var(--color-zinc-200);
-        --input: var(--color-zinc-300);
+        --input-border: var(--color-zinc-300);
         --ring: oklch(0.45 0.2 265);
 
         /* ── Card ─────────────────────────────────── */
-        --card-bg: var(--color-white);
+        --card: var(--color-white);
         --card-fg: var(--color-zinc-950);
         --card-border: var(--color-zinc-200);
 
@@ -89,13 +89,13 @@
         --overlay: var(--color-white);
         --overlay-fg: var(--color-zinc-950);
 
-        /* ── Secondary (buttons, badges, headers) ─── */
-        --secondary: var(--color-zinc-100);
-        --secondary-fg: var(--color-zinc-950);
+        /* ── Neutral (hover fills, badges, headers) ── */
+        --neutral: var(--color-zinc-100);
+        --neutral-fg: var(--color-zinc-950);
 
-        /* ── Muted (subdued text, disabled areas) ─── */
-        --muted: var(--color-zinc-100);
-        --muted-fg: var(--color-zinc-600);
+        /* ── Soft (de-emphasized text areas) ──────── */
+        --soft: var(--color-zinc-100);
+        --soft-fg: var(--color-zinc-600);
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-50);
@@ -194,11 +194,11 @@
         --bg: var(--color-zinc-900);
         --fg: var(--color-zinc-100);
         --border: var(--color-zinc-700);
-        --input: var(--color-zinc-600);
+        --input-border: var(--color-zinc-600);
         --ring: oklch(0.6 0.2 265);
 
         /* ── Card ─────────────────────────────────── */
-        --card-bg: var(--color-zinc-900);
+        --card: var(--color-zinc-900);
         --card-fg: var(--color-zinc-100);
         --card-border: var(--color-zinc-700);
 
@@ -210,13 +210,13 @@
         --overlay: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-700));
         --overlay-fg: var(--color-zinc-100);
 
-        /* ── Secondary (buttons, badges, headers) ─── */
-        --secondary: var(--color-zinc-800);
-        --secondary-fg: var(--color-zinc-100);
+        /* ── Neutral (hover fills, badges, headers) ── */
+        --neutral: var(--color-zinc-800);
+        --neutral-fg: var(--color-zinc-100);
 
-        /* ── Muted (subdued text, disabled areas) ─── */
-        --muted: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-900));
-        --muted-fg: var(--color-zinc-400);
+        /* ── Soft (de-emphasized text areas) ──────── */
+        --soft: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-900));
+        --soft-fg: var(--color-zinc-400);
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-800);
@@ -362,18 +362,6 @@ code {
     align-items: center;
 }
 
-.alpha {
-    background-color: #93c47d;
-}
-
-.beta {
-    background-color: #c9daf8;
-}
-
-.gamma {
-    background-color: #fce5cd;
-}
-
 .stone1 {
     background-color: var(--rank-stone1);
 }
@@ -484,30 +472,6 @@ code {
 
 .upgrade {
     background-color: #012a41;
-}
-
-.common-upgrade {
-    border: 2px solid #cdb3a0;
-}
-
-.uncommon-upgrade {
-    border: 2px solid #f9cb9c;
-}
-
-.rare-upgrade {
-    border: 2px solid #efefef;
-}
-
-.epic-upgrade {
-    border: 2px solid #ffe599;
-}
-
-.legendary-upgrade {
-    border: 2px solid #cfe2f3;
-}
-
-.mythic-upgrade {
-    border: 2px solid #d9886c;
 }
 
 .flex-box {
@@ -687,7 +651,7 @@ input.item-quantity-input[type='number'] {
 
 /* Range slider accent variants (success = emerald, warning = amber) */
 input[type='range'].accent-success {
-    background: color-mix(in oklab, var(--success) 22%, var(--secondary));
+    background: color-mix(in oklab, var(--success) 22%, var(--neutral));
 }
 input[type='range'].accent-success::-webkit-slider-thumb {
     background: var(--success);
@@ -697,7 +661,7 @@ input[type='range'].accent-success::-moz-range-thumb {
 }
 
 input[type='range'].accent-warning {
-    background: color-mix(in oklab, var(--warning) 26%, var(--secondary));
+    background: color-mix(in oklab, var(--warning) 26%, var(--neutral));
 }
 input[type='range'].accent-warning::-webkit-slider-thumb {
     background: var(--warning);

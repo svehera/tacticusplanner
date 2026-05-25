@@ -85,7 +85,7 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
                 )}
                 {isActiveGoal && !cleared && (
                     <span
-                        className="inline-block size-[7px] rounded-full bg-(--primary) shadow-[0_0_0_2px_var(--card-bg),0_0_0_3px_var(--primary)]"
+                        className="inline-block size-[7px] rounded-full bg-(--primary) shadow-[0_0_0_2px_var(--card),0_0_0_3px_var(--primary)]"
                         title="Linked to active goal"
                     />
                 )}
@@ -96,7 +96,7 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
                 <Slider className="flex-1" value={localValue} max={max} onChange={update} fillClassName={diffClass} />
                 <div className="min-w-[44px] shrink-0 text-xs tabular-nums">
                     <strong>{localValue}</strong>
-                    <span className="text-(--muted-fg)">/{max}</span>
+                    <span className="text-(--soft-fg)">/{max}</span>
                 </div>
             </div>
 
@@ -104,7 +104,7 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
             <div className="flex items-center gap-[3px]">
                 <button
                     onClick={() => update(localValue - 1)}
-                    className="grid size-[22px] shrink-0 cursor-pointer place-items-center rounded border border-(--border) bg-(--card-bg) text-xs leading-none font-bold text-(--fg) hover:bg-(--primary)/15 focus-visible:ring-2 focus-visible:ring-(--ring)/60 focus-visible:outline-none active:bg-(--primary)/25"
+                    className="grid size-[22px] shrink-0 cursor-pointer place-items-center rounded border border-(--border) bg-(--card) text-xs leading-none font-bold text-(--fg) hover:bg-(--primary)/15 focus-visible:ring-2 focus-visible:ring-(--ring)/60 focus-visible:outline-none active:bg-(--primary)/25"
                     aria-label="Decrease">
                     −
                 </button>
@@ -126,7 +126,7 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
                 />
                 <button
                     onClick={() => update(localValue + 1)}
-                    className="grid size-[22px] shrink-0 cursor-pointer place-items-center rounded border border-(--border) bg-(--card-bg) text-xs leading-none font-bold text-(--fg) hover:bg-(--primary)/15 focus-visible:ring-2 focus-visible:ring-(--ring)/60 focus-visible:outline-none active:bg-(--primary)/25"
+                    className="grid size-[22px] shrink-0 cursor-pointer place-items-center rounded border border-(--border) bg-(--card) text-xs leading-none font-bold text-(--fg) hover:bg-(--primary)/15 focus-visible:ring-2 focus-visible:ring-(--ring)/60 focus-visible:outline-none active:bg-(--primary)/25"
                     aria-label="Increase">
                     +
                 </button>
@@ -171,9 +171,9 @@ export const StoryRow = ({ campaigns, progress, characters, activeGoals, onSet }
     const storyName = representative.groupType as string;
 
     return (
-        <div className="overflow-hidden rounded-[var(--radius-md)] border border-(--card-border) bg-(--card-bg)">
+        <div className="overflow-hidden rounded-[var(--radius-md)] border border-(--card-border) bg-(--card)">
             {/* row header */}
-            <div className="flex flex-col gap-3 border-b border-(--border) bg-[color-mix(in_oklab,var(--secondary)_50%,var(--card-bg))] px-4 py-4 sm:grid sm:grid-cols-[1fr_220px] sm:gap-6">
+            <div className="flex flex-col gap-3 border-b border-(--border) bg-[color-mix(in_oklab,var(--neutral)_50%,var(--card))] px-4 py-4 sm:grid sm:grid-cols-[1fr_220px] sm:gap-6">
                 {/* left: icon + name + characters */}
                 <div className="flex min-w-0 flex-col gap-2 sm:flex-row sm:items-center sm:gap-4">
                     <div className="flex min-w-0 items-center gap-4">
@@ -189,7 +189,7 @@ export const StoryRow = ({ campaigns, progress, characters, activeGoals, onSet }
                 <div className="flex items-center gap-2 sm:shrink-0 sm:flex-col sm:justify-center sm:gap-1">
                     <div className="shrink-0 text-base leading-none font-bold text-(--fg) tabular-nums sm:text-[20px]">
                         {pct}
-                        <span className="ml-0.5 text-xs font-normal text-(--muted-fg)">%</span>
+                        <span className="ml-0.5 text-xs font-normal text-(--soft-fg)">%</span>
                     </div>
                     <div className="h-[6px] flex-1 overflow-hidden rounded-full bg-(--fg)/12 sm:w-full sm:flex-none">
                         <div

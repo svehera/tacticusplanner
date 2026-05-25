@@ -103,11 +103,11 @@ export const Quests = () => {
         <div className="space-y-8 py-6">
             <div>
                 <h2>Quests</h2>
-                <p className="text-sm text-(--muted-fg)">Browse hero quest tiers, battles, and loot requirements.</p>
+                <p className="text-sm text-(--soft-fg)">Browse hero quest tiers, battles, and loot requirements.</p>
             </div>
 
             {/* Header / Selector */}
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-(--card-border) bg-(--card-bg) p-4 shadow-sm">
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-(--card-border) bg-(--card) p-4 shadow-sm">
                 <UnitsAutocomplete<IUnit>
                     // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
                     unit={char ?? null}
@@ -125,7 +125,7 @@ export const Quests = () => {
                 {quest && (
                     <div className="flex items-center gap-4">
                         <div className="flex flex-col items-end">
-                            <span className="text-xs font-bold text-(--muted-fg) uppercase">Allowed</span>
+                            <span className="text-xs font-bold text-(--soft-fg) uppercase">Allowed</span>
                             <div className="flex gap-1">
                                 {quest.allowedFactions.map(f => (
                                     <FactionImage key={f} faction={f} />
@@ -133,7 +133,7 @@ export const Quests = () => {
                             </div>
                         </div>
                         <div className="flex flex-col items-end border-l border-(--card-border) pl-4">
-                            <span className="text-xs font-bold text-(--muted-fg) uppercase">Enemies</span>
+                            <span className="text-xs font-bold text-(--soft-fg) uppercase">Enemies</span>
                             <div className="flex gap-1">
                                 {quest.enemyFactions.map(f => (
                                     <FactionImage key={f} faction={f} />
@@ -151,16 +151,16 @@ export const Quests = () => {
                     return (
                         <div
                             key={tier.index}
-                            className="overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm">
+                            className="overflow-hidden rounded-xl border border-(--card-border) bg-(--soft) shadow-sm">
                             <button
                                 onClick={() => toggleTier(tier.index)}
-                                className="flex w-full cursor-pointer items-center justify-between bg-(--muted) p-4 transition-colors hover:bg-(--primary)/10">
+                                className="flex w-full cursor-pointer items-center justify-between bg-(--soft) p-4 transition-colors hover:bg-(--primary)/10">
                                 <div className="flex items-center gap-3">
                                     <div
                                         className={`rounded-md border px-3 py-1 text-sm font-bold text-(--fg) ${tierBadgeBg[tier.index] ?? ''}`}>
                                         {RarityMapper.rarityToRarityString(tier.index as unknown as Rarity)} Tier
                                     </div>
-                                    <span className="text-sm text-(--muted-fg)">{tier.battles.length} Battles</span>
+                                    <span className="text-sm text-(--soft-fg)">{tier.battles.length} Battles</span>
                                 </div>
                                 {isTierExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
                             </button>
@@ -181,7 +181,7 @@ export const Quests = () => {
                                                         <span className="min-w-[70px] text-sm font-medium">
                                                             Battle {battle.battleNr}
                                                         </span>
-                                                        <div className="flex items-center gap-2 rounded-md bg-(--muted) px-2 py-1">
+                                                        <div className="flex items-center gap-2 rounded-md bg-(--soft) px-2 py-1">
                                                             <UpgradeImage
                                                                 material={battle.loot.reward.upgradeId}
                                                                 iconPath={
@@ -220,7 +220,7 @@ export const Quests = () => {
 
                                                 {/* Expandable Enemy Section */}
                                                 {isBattleExpanded && (
-                                                    <div className="bg-(--muted) px-4 pt-2 pb-4">
+                                                    <div className="bg-(--soft) px-4 pt-2 pb-4">
                                                         <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-(--card-border) p-3">
                                                             <div className="mb-3 flex flex-wrap items-start gap-x-3 gap-y-6">
                                                                 {battle.enemies.map((enemy, enemyIndex) => {

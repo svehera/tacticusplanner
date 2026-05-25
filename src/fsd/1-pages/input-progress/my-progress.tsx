@@ -47,11 +47,11 @@ interface SectionHeadingProps {
 const SectionHeading = ({ label, count, cleared }: SectionHeadingProps) => (
     <div className="flex items-center gap-2 border-b border-(--border) pb-2">
         <span className="text-[11px] font-bold tracking-[0.12em] text-(--fg) uppercase">{label}</span>
-        <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-[10px] font-bold">
+        <span className="rounded-full border border-(--border) bg-(--neutral) px-2 py-0.5 text-[10px] font-bold">
             {count}
         </span>
         <span className="flex-1" />
-        <span className="text-[11px] text-(--muted-fg)">{cleared} cleared</span>
+        <span className="text-[11px] text-(--soft-fg)">{cleared} cleared</span>
     </div>
 );
 
@@ -69,12 +69,12 @@ interface StatBlockProps {
 
 const StatBlock = ({ label, pct, done, maxTotal, cleared, count, accent }: StatBlockProps) => (
     <div className="flex flex-col gap-0.5 text-right">
-        <p className="text-[10px] font-bold tracking-[0.14em] text-(--muted-fg) uppercase">{label}</p>
+        <p className="text-[10px] font-bold tracking-[0.14em] text-(--soft-fg) uppercase">{label}</p>
         <p
             className={`text-[32px] leading-none font-bold tracking-[-0.02em] tabular-nums ${accent ? 'text-(--primary)' : 'text-(--fg)'}`}>
             {pct}%
         </p>
-        <p className="text-[11px] text-(--muted-fg) tabular-nums">
+        <p className="text-[11px] text-(--soft-fg) tabular-nums">
             {done}/{maxTotal} · {cleared}/{count} cleared
         </p>
     </div>
@@ -125,9 +125,9 @@ export const MyProgress = () => {
             {/* page header */}
             <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
                 <div>
-                    <p className="text-[10px] font-bold tracking-[0.16em] text-(--muted-fg) uppercase">Input</p>
+                    <p className="text-[10px] font-bold tracking-[0.16em] text-(--soft-fg) uppercase">Input</p>
                     <h2 className="mt-1 mb-1">My Progress</h2>
-                    <p className="max-w-[70ch] text-sm text-(--muted-fg)">
+                    <p className="max-w-[70ch] text-sm text-(--soft-fg)">
                         Track your campaign completion across all storylines.
                     </p>
                 </div>

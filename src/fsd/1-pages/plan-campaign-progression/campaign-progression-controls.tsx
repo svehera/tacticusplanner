@@ -26,9 +26,9 @@ export const CampaignProgressionControls: React.FC<Props> = ({
     setHideCE,
 }) => {
     return (
-        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-(--border) bg-(--card-bg) px-3 py-2 shadow-sm">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-(--border) bg-(--card) px-3 py-2 shadow-sm">
             <div className="flex items-center gap-2">
-                <span className="text-sm text-(--muted-fg)">Sort:</span>
+                <span className="text-sm text-(--soft-fg)">Sort:</span>
                 <div className="flex overflow-hidden rounded-md border border-(--border) text-xs font-medium">
                     {(
                         [
@@ -41,7 +41,7 @@ export const CampaignProgressionControls: React.FC<Props> = ({
                         <button
                             key={option.value}
                             onClick={() => setSortMode(option.value)}
-                            className={`px-3 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset ${index > 0 ? 'border-l border-(--border)' : ''} ${sortMode === option.value ? 'bg-(--card-fg)/10 text-(--card-fg)' : 'text-(--muted-fg) hover:bg-(--muted) hover:text-(--card-fg)'}`}>
+                            className={`px-3 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset ${index > 0 ? 'border-l border-(--border)' : ''} ${sortMode === option.value ? 'bg-(--card-fg)/10 text-(--card-fg)' : 'text-(--soft-fg) hover:bg-(--soft) hover:text-(--card-fg)'}`}>
                             {option.label}
                         </button>
                     ))}
@@ -75,7 +75,7 @@ export const CampaignProgressionControls: React.FC<Props> = ({
                                 size="small"
                             />
                         }
-                        label={<span className="w-[4.5rem] text-[11px] text-(--muted-fg)">{toggle.label}</span>}
+                        label={<span className="w-[4.5rem] text-[11px] text-(--soft-fg)">{toggle.label}</span>}
                     />
                 ))}
             </div>

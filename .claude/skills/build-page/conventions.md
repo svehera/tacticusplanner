@@ -8,95 +8,99 @@ The codebase has uneven quality — some pages match this doc, many predate it. 
 
 ## Design tokens
 
-All colours come from CSS custom properties defined in `src/fsd/0-app/index.css`. Tokens are class-scoped to `:root` and `.dark` and flip automatically when the `.dark` class is set on the document. **Never use raw Tailwind palette classes** (`bg-blue-500`, `text-gray-600`) — they don't respect the theme switch.
+All colours come from CSS custom properties defined in `src/fsd/0-app/index.css`. Tokens are class-scoped to `:root` and `.dark` and flip automatically when the `.dark` class is set on the document.
 
-In Tailwind, use `bg-(--primary)`, `text-(--fg)`, `border-(--border)`, etc. For opacity modifiers: `bg-(--primary)/15`, `hover:bg-(--primary)/18`.
+In Tailwind, use `bg-(--primary)`, `text-(--fg)`, `border-(--border)`, etc. For opacity modifiers: `bg-(--primary)/15`, `hover:bg-(--primary)/18`. For shade variations of token-mapped colours, Tailwind palette classes with explicit `dark:` variants are allowed — see the "Shade-picking guide" section below.
 
 ### Foundational tokens
 
-| Token            | Light                | Dark                 | Use for                                |
-| ---------------- | -------------------- | -------------------- | -------------------------------------- |
-| `--bg`           | white                | zinc-900             | Page background                        |
-| `--fg`           | zinc-950             | zinc-100             | Primary text                           |
-| `--border`       | zinc-200             | zinc-700             | Card borders, dividers                 |
-| `--input`        | zinc-300             | zinc-700             | Input borders, switch off-track        |
-| `--ring`         | indigo (0.45)        | indigo (0.60)        | Focus rings                            |
+| Token            | Light         | Dark          | Use for                         |
+| ---------------- | ------------- | ------------- | ------------------------------- |
+| `--bg`           | white         | zinc-900      | Page background                 |
+| `--fg`           | zinc-950      | zinc-100      | Primary text                    |
+| `--border`       | zinc-200      | zinc-700      | Card borders, dividers          |
+| `--input-border` | zinc-300      | zinc-700      | Input borders, switch off-track |
+| `--ring`         | indigo (0.45) | indigo (0.60) | Focus rings                     |
 
 ### Surface tokens
 
 The surface tokens have a subtle semantic structure worth knowing — values may match today but the distinctions exist so they can diverge later without a refactor.
 
-| Token            | Light                | Dark                 | Use for                                              |
-| ---------------- | -------------------- | -------------------- | ---------------------------------------------------- |
-| `--card-bg`      | white                | zinc-800             | Card surface (persistent, in the flow)               |
-| `--card-border`  | zinc-200             | zinc-700             | Card border                                          |
-| `--card-fg`      | zinc-950             | zinc-50              | Text/elements on card surface                        |
-| `--overlay`      | white                | zinc-800             | Dropdown/popover surface (transient, floating above) |
-| `--overlay-fg`   | zinc-950             | zinc-100             | Text on overlay surface                              |
-| `--sidebar`      | zinc-50              | zinc-950             | Sidebar background                                   |
-| `--sidebar-fg`   | zinc-950             | zinc-50              | Text in sidebar                                      |
+| Token                   | Light    | Dark     | Use for                                              |
+| ----------------------- | -------- | -------- | ---------------------------------------------------- |
+| `--card`                | white    | zinc-800 | Card surface (persistent, in the flow)               |
+| `--card-border`         | zinc-200 | zinc-700 | Card border                                          |
+| `--card-fg`             | zinc-950 | zinc-50  | Text/elements on card surface                        |
+| `--overlay`             | white    | zinc-800 | Dropdown/popover surface (transient, floating above) |
+| `--overlay-fg`          | zinc-950 | zinc-100 | Text on overlay surface                              |
+| `--sidebar`             | zinc-50  | zinc-950 | Sidebar background                                   |
+| `--sidebar-fg`          | zinc-950 | zinc-50  | Text in sidebar                                      |
+| `--data-surface`        | zinc-50  | zinc-800 | AG Grid / data table background                      |
+| `--data-surface-fg`     | zinc-950 | zinc-100 | Text on data surface                                 |
+| `--data-surface-border` | zinc-200 | zinc-700 | Borders inside data tables                           |
 
-`--card-bg` and `--overlay` are intentionally separate even though they have identical values today — overlays may pick up a subtle elevation tint later. Use the one that matches semantic intent, not whichever happens to be in the nearest file.
+`--card` and `--overlay` are intentionally separate even though they have identical values today — overlays may pick up a subtle elevation tint later. Use the one that matches semantic intent, not whichever happens to be in the nearest file.
 
 ### Neutral fill tokens
 
-`--muted` and `--secondary` have **identical background values** but are paired with different foregrounds, which makes them different tokens in practice:
+`--soft` and `--neutral` have **identical background values** but are paired with different foregrounds, which makes them different tokens in practice:
 
-| Token            | Light                | Dark                 | Pair with        | Use for                              |
-| ---------------- | -------------------- | -------------------- | ---------------- | ------------------------------------ |
-| `--muted`        | zinc-100             | zinc-800             | `--muted-fg`     | Subtle fills behind de-emphasized text (captions, labels, metadata) |
-| `--muted-fg`     | zinc-600             | zinc-400             | —                | De-emphasized text (captions, helper text) |
-| `--secondary`    | zinc-100             | zinc-800             | `--secondary-fg` | Hover backgrounds, subtle fills under primary text |
-| `--secondary-fg` | zinc-950             | zinc-100             | —                | Full-contrast text on a neutral surface |
+| Token          | Light    | Dark     | Pair with      | Use for                                                             |
+| -------------- | -------- | -------- | -------------- | ------------------------------------------------------------------- |
+| `--soft`       | zinc-100 | zinc-800 | `--soft-fg`    | Subtle fills behind de-emphasized text (captions, labels, metadata) |
+| `--soft-fg`    | zinc-600 | zinc-400 | —              | De-emphasized text (captions, helper text)                          |
+| `--neutral`    | zinc-100 | zinc-800 | `--neutral-fg` | Hover backgrounds, subtle fills under primary text                  |
+| `--neutral-fg` | zinc-950 | zinc-100 | —              | Full-contrast text on a neutral surface                             |
 
 Pick by the foreground you need on top:
-- Caption-style text → `--muted` + `--muted-fg`
-- Normal/strong text on a neutral fill → `--secondary` + `--secondary-fg`
+
+- Caption-style text → `--soft` + `--soft-fg`
+- Normal/strong text on a neutral fill → `--neutral` + `--neutral-fg`
 
 ### Accent tokens
 
-| Token            | Light                | Dark                 | Use for                                              |
-| ---------------- | -------------------- | -------------------- | ---------------------------------------------------- |
-| `--primary`      | oklch(0.45 0.20 265) | oklch(0.60 0.20 265) | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
-| `--primary-fg`   | white                | white                | Text on primary background                           |
-| `--accent`       | oklch(0.65 0.14 65)  | oklch(0.65 0.14 65)  | Decorative accent (amber-ish)                        |
-| `--accent-fg`    | zinc-950             | zinc-950             | Text on accent background                            |
+| Token          | Light                | Dark                 | Use for                                                               |
+| -------------- | -------------------- | -------------------- | --------------------------------------------------------------------- |
+| `--primary`    | oklch(0.45 0.20 265) | oklch(0.60 0.20 265) | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
+| `--primary-fg` | white                | white                | Text on primary background                                            |
+| `--accent`     | oklch(0.65 0.14 65)  | oklch(0.65 0.14 65)  | Decorative accent (amber-ish)                                         |
+| `--accent-fg`  | zinc-950             | zinc-950             | Text on accent background                                             |
 
 ### Semantic state tokens
 
-| Token            | Light                | Dark                 | Pair with        | Use for                                              |
-| ---------------- | -------------------- | -------------------- | ---------------- | ---------------------------------------------------- |
-| `--success`      | emerald-600          | emerald-500          | `--success-fg`   | Success states. Shifts one step lighter in dark mode for contrast on zinc-800. |
-| `--success-fg`   | white                | white                | —                | Text on success background                           |
-| `--warning`      | amber-400            | amber-400            | `--warning-fg`   | Warning states. No dark-mode shift — amber-400 is already high-lightness. |
-| `--warning-fg`   | amber-950            | amber-950            | —                | Text on warning background                           |
-| `--danger`       | red-600              | red-600              | `--danger-fg`    | Error / destructive states. No dark-mode shift — mostly used as badge background with --danger-fg text. |
-| `--danger-fg`    | red-50               | red-50               | —                | Text on danger background                            |
+| Token          | Light       | Dark        | Pair with      | Use for                                                                                                 |
+| -------------- | ----------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------- |
+| `--success`    | emerald-600 | emerald-500 | `--success-fg` | Success states. Shifts one step lighter in dark mode for contrast on zinc-800.                          |
+| `--success-fg` | white       | white       | —              | Text on success background                                                                              |
+| `--warning`    | amber-400   | amber-400   | `--warning-fg` | Warning states. No dark-mode shift — amber-400 is already high-lightness.                               |
+| `--warning-fg` | amber-950   | amber-950   | —              | Text on warning background                                                                              |
+| `--danger`     | red-600     | red-600     | `--danger-fg`  | Error / destructive states. No dark-mode shift — mostly used as badge background with --danger-fg text. |
+| `--danger-fg`  | red-50      | red-50      | —              | Text on danger background                                                                               |
 
 ### Chart tokens
 
 Indigo scale, light → dark steps. Use for data visualisation series.
 
-| Token         | Light                | Dark                 |
-| ------------- | -------------------- | -------------------- |
-| `--chart-1`   | oklch(0.45 0.20 265) | oklch(0.60 0.20 265) |
-| `--chart-2`   | oklch(0.55 0.18 265) | oklch(0.68 0.17 265) |
-| `--chart-3`   | oklch(0.65 0.15 265) | oklch(0.75 0.13 265) |
-| `--chart-4`   | oklch(0.75 0.12 265) | oklch(0.82 0.09 265) |
-| `--chart-5`   | oklch(0.85 0.08 265) | oklch(0.88 0.05 265) |
+| Token       | Light                | Dark                 |
+| ----------- | -------------------- | -------------------- |
+| `--chart-1` | oklch(0.45 0.20 265) | oklch(0.60 0.20 265) |
+| `--chart-2` | oklch(0.55 0.18 265) | oklch(0.68 0.17 265) |
+| `--chart-3` | oklch(0.65 0.15 265) | oklch(0.75 0.13 265) |
+| `--chart-4` | oklch(0.75 0.12 265) | oklch(0.82 0.09 265) |
+| `--chart-5` | oklch(0.85 0.08 265) | oklch(0.88 0.05 265) |
 
 ### Domain tokens — rarities
 
 Used directly via `bg-(--rarity-common)` etc. when you need just the colour (e.g., as a row tint or background fill). For icon display, prefer the `RarityIcon` component.
 
-| Token                 | Light    | Dark     |
-| --------------------- | -------- | -------- |
-| `--rarity-common`     | `#cdb3a0`| `#8a705d`|
-| `--rarity-uncommon`   | `#f9cb9c`| `#b3845f`|
-| `--rarity-rare`       | `#efefef`| `#6b6b6b`|
-| `--rarity-epic`       | `#ffe599`| `#a88a48`|
-| `--rarity-legendary`  | `#cfe2f3`| `#5a7892`|
-| `--rarity-mythic`     | `#d84300`| `#d9886c`|
+| Token                | Light     | Dark      |
+| -------------------- | --------- | --------- |
+| `--rarity-common`    | `#cdb3a0` | `#8a705d` |
+| `--rarity-uncommon`  | `#f9cb9c` | `#b3845f` |
+| `--rarity-rare`      | `#efefef` | `#6b6b6b` |
+| `--rarity-epic`      | `#ffe599` | `#a88a48` |
+| `--rarity-legendary` | `#cfe2f3` | `#5a7892` |
+| `--rarity-mythic`    | `#d84300` | `#d9886c` |
 
 ### Domain tokens — ranks
 
@@ -129,41 +133,67 @@ LRE (Legendary Release Event) has three track colours, used directly in track he
 
 ### Radius scale
 
-| Token         | Value                                  |
-| ------------- | -------------------------------------- |
-| `--radius-xs` | `calc(--radius-lg * 0.5)` (~0.25rem)   |
-| `--radius-sm` | `calc(--radius-lg * 0.75)` (~0.375rem) |
-| `--radius-md` | `calc(--radius-lg * 0.9)`              |
-| `--radius-lg` | `0.5rem` (base)                        |
-| `--radius-xl` | `calc(--radius-lg * 1.25)` (~0.625rem) |
-| `--radius-2xl`| `calc(--radius-lg * 1.5)`              |
-| `--radius-3xl`| `calc(--radius-lg * 2)`                |
-| `--radius-4xl`| `calc(--radius-lg * 3)`                |
+| Token          | Value                                  |
+| -------------- | -------------------------------------- |
+| `--radius-xs`  | `calc(--radius-lg * 0.5)` (~0.25rem)   |
+| `--radius-sm`  | `calc(--radius-lg * 0.75)` (~0.375rem) |
+| `--radius-md`  | `calc(--radius-lg * 0.9)`              |
+| `--radius-lg`  | `0.5rem` (base)                        |
+| `--radius-xl`  | `calc(--radius-lg * 1.25)` (~0.625rem) |
+| `--radius-2xl` | `calc(--radius-lg * 1.5)`              |
+| `--radius-3xl` | `calc(--radius-lg * 2)`                |
+| `--radius-4xl` | `calc(--radius-lg * 3)`                |
 
 Tailwind's `rounded-*` utilities map to these. Prefer named utilities (`rounded-lg`, `rounded-xl`) over raw `rounded-[0.5rem]`.
 
 ### Adding a new token
 
 New tokens go in `src/fsd/0-app/index.css`:
+
 1. Add the variable definition in both `:root` and `.dark` blocks. Always define both, even if the values match — the explicit duplication signals intent.
 2. If the token is colour-like and should be addressable via Tailwind utilities (`bg-(--foo)`), add a corresponding `--color-foo: var(--foo)` line to the `@theme` block at the top of the file.
 
 ### Don'ts
 
-| ❌ Don't                                                       | ✅ Do instead                                                                                  |
-| -------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `bg-blue-500`, `text-gray-600`, `border-slate-200`             | Use a token — every colour has one                                                            |
-| `bg-white`, `bg-black`, `text-white`, `text-black`             | `bg-(--bg)`, `bg-(--overlay)`, `text-(--fg)`, `text-(--primary-fg)`                           |
-| `bg-green-500`, `text-green-400`                               | `bg-(--success)`, `text-(--success)`                                                          |
-| `bg-red-*`, `text-red-*`                                       | `bg-(--danger)`, `text-(--danger)`                                                            |
-| `bg-amber-*`, `text-amber-*`                                   | `bg-(--warning)`, `text-(--warning)`                                                          |
-| `ring-black/5`, `ring-white/10`                                | `ring-(--border)/50`                                                                          |
-| `dark:bg-*`, `dark:text-*`, `dark:border-*`                    | Never add manual dark variants — tokens flip automatically                                    |
-| `style={{ color: '#...' }}`, `style={{ background: '...' }}`   | Use a token class instead                                                                     |
-| MUI `sx={{ ... }}`                                             | Tailwind `className` with tokens (see migration policy in refactor-page skill)                |
-| `bg-(--secondary)` as a progress bar track                     | `--secondary` equals the card surface in dark mode — use `bg-(--fg)/12` for overlaid tracks   |
-| `bg-(--card-fg)/60` as a progress fill                         | Pick a semantic fill: `bg-(--primary)` or the relevant domain token                           |
-| `hover:bg-(--secondary)` on buttons inside cards/tables        | `--secondary` = card surface in dark mode — invisible hover. Use `hover:bg-(--primary)/15` (neutral) or `hover:bg-(--danger)/10` (destructive) |
+| ❌ Don't                                                     | ✅ Do instead                                                                                                                                |
+| ------------------------------------------------------------ | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bg-blue-500`, `text-gray-600`, `border-slate-200`           | Use a token — every colour has one                                                                                                           |
+| `bg-white`, `bg-black`, `text-white`, `text-black`           | `bg-(--bg)`, `bg-(--overlay)`, `text-(--fg)`, `text-(--primary-fg)`                                                                          |
+| `bg-slate-*`, `text-gray-*`, `border-gray-*`                 | Wrong grey family — system uses zinc. Use tokens for all neutrals.                                                                           |
+| `ring-black/5`, `ring-white/10`                              | `ring-(--border)/50`                                                                                                                         |
+| `style={{ color: '#...' }}`, `style={{ background: '...' }}` | Use a token class instead                                                                                                                    |
+| MUI `sx={{ ... }}`                                           | Tailwind `className` with tokens (see migration policy in refactor-page skill)                                                               |
+| `bg-(--neutral)` as a progress bar track                     | `--neutral` equals the card surface in dark mode — use `bg-(--fg)/12` for overlaid tracks                                                    |
+| `bg-(--card-fg)/60` as a progress fill                       | Pick a semantic fill: `bg-(--primary)` or the relevant domain token                                                                          |
+| `hover:bg-(--neutral)` on buttons inside cards/tables        | `--neutral` = card surface in dark mode — invisible hover. Use `hover:bg-(--primary)/15` (neutral) or `hover:bg-(--danger)/10` (destructive) |
+
+### Shade-picking guide
+
+**Tokens for identity. Tailwind for variation.** If changing the colour would change what the app _is_ (brand, intent, semantic meaning), it's a token. If it's just picking a lighter or darker shade of something that already has a token, use Tailwind's scale with explicit `dark:` variants.
+
+Allowed: Tailwind palette shades of colours that map to an existing token, **with** a `dark:` variant:
+
+| Token       | Tailwind family  |
+| ----------- | ---------------- |
+| `--primary` | `indigo`         |
+| `--success` | `emerald`        |
+| `--warning` | `amber`          |
+| `--danger`  | `red`            |
+| `--accent`  | `amber` (hue 65) |
+
+**Not allowed:** random Tailwind palette classes with no token relationship (`bg-blue-500`, `text-teal-300`) or wrong grey families (`bg-slate-200`, `text-gray-500` — system uses zinc).
+
+Common shade recipes:
+
+| Use case      | Light mode             | Dark mode                   |
+| ------------- | ---------------------- | --------------------------- |
+| Alert tint bg | `bg-{color}-50`        | `dark:bg-{color}-950/40`    |
+| Badge fill    | `bg-{color}-100`       | `dark:bg-{color}-900/30`    |
+| Icon / accent | `text-{color}-600`     | `dark:text-{color}-400`     |
+| Text on white | `text-{color}-700`     | `dark:text-{color}-300`     |
+| Hover on card | `hover:bg-{color}-100` | `dark:hover:bg-{color}-800` |
+
+Alpha modifiers on tokens (`bg-(--primary)/15`) are still fine for one-off transparency effects — the shade recipes above are for cases where you need a deterministic colour that doesn't shift with the background.
 
 ---
 
@@ -173,33 +203,33 @@ New tokens go in `src/fsd/0-app/index.css`:
 
 ### Simple 1:1 replacements
 
-| Legacy class | Tailwind replacement   |
-| ------------ | ---------------------- |
-| `.bold`      | `font-bold`            |
-| `.italic`    | `italic`               |
-| `.pointer`   | `cursor-pointer`       |
-| `.flex-row`  | `flex items-center`    |
+| Legacy class | Tailwind replacement |
+| ------------ | -------------------- |
+| `.bold`      | `font-bold`          |
+| `.italic`    | `italic`             |
+| `.pointer`   | `cursor-pointer`     |
+| `.flex-row`  | `flex items-center`  |
 
 ### `.flex-box` compound pattern
 
 `.flex-box` is a flex container with modifier classes chained via `&.modifier` SCSS-style selectors, plus child gap and padding utility classes. Replace the whole cluster with Tailwind:
 
-| `.flex-box` modifier   | Tailwind replacement                                          |
-| ---------------------- | ------------------------------------------------------------- |
-| base (no modifiers)    | `flex items-center`                                           |
-| `.column`              | `flex flex-col` (drop `items-center` — usually wants stretch) |
-| `.between`             | `justify-between`                                             |
-| `.around`              | `justify-around`                                              |
-| `.center`              | `justify-center`                                              |
-| `.start`               | `items-start`                                                 |
-| `.wrap`                | `flex-wrap`                                                   |
-| `.full-width`          | `w-full`                                                      |
-| `.mobile-wrap`         | `max-[700px]:flex-wrap`                                       |
-| `.gap5`                | `gap-1` (snap 5px → 4px)                                      |
-| `.gap10`               | `gap-2.5` (10px)                                              |
-| `.gap15`               | `gap-4` (snap 15px → 16px)                                    |
-| `.gap20`               | `gap-5` (20px)                                                |
-| `.p1`–`.p10`           | `p-px` through `p-2.5`                                        |
+| `.flex-box` modifier | Tailwind replacement                                          |
+| -------------------- | ------------------------------------------------------------- |
+| base (no modifiers)  | `flex items-center`                                           |
+| `.column`            | `flex flex-col` (drop `items-center` — usually wants stretch) |
+| `.between`           | `justify-between`                                             |
+| `.around`            | `justify-around`                                              |
+| `.center`            | `justify-center`                                              |
+| `.start`             | `items-start`                                                 |
+| `.wrap`              | `flex-wrap`                                                   |
+| `.full-width`        | `w-full`                                                      |
+| `.mobile-wrap`       | `max-[700px]:flex-wrap`                                       |
+| `.gap5`              | `gap-1` (snap 5px → 4px)                                      |
+| `.gap10`             | `gap-2.5` (10px)                                              |
+| `.gap15`             | `gap-4` (snap 15px → 16px)                                    |
+| `.gap20`             | `gap-5` (20px)                                                |
+| `.p1`–`.p10`         | `p-px` through `p-2.5`                                        |
 
 Example: `className="flex-box between gap10"` → `className="flex items-center justify-between gap-2.5"`.
 
@@ -221,6 +251,7 @@ Import from `@/fsd/5-shared/ui`:
 - `Switch` — `isSelected`, `onChange` (receives boolean directly, not event), `children` (label), `isDisabled`
 - `Badge` — intents: primary/success/warning/danger; appearances: solid/outline
 - `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`
+- `Accordion`, `AccordionHeader`, `AccordionBody` — card-style collapsible. Controlled (`expanded`+`onToggle`) or uncontrolled (`defaultExpanded`). Prefer over MUI Accordion.
 - `Separator` — horizontal (default) or `orientation="vertical"`
 - `Modal`, `Dialog` — `Modal` wraps trigger + `Modal.Content`; inside use `Dialog.Header`, `Dialog.Body`, `Dialog.Footer`, `Dialog.Close`
 - `Loader` — variants: spin/bars/ring; sizes: small/medium/large/extra-large
@@ -298,7 +329,7 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
 <div className="space-y-8 py-6">
     <div>
         <h2>Page Title</h2>
-        <p className="text-sm text-(--muted-fg)">Short description</p>
+        <p className="text-sm text-(--soft-fg)">Short description</p>
     </div>
     {/* content */}
 </div>
@@ -308,7 +339,7 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
 
 ```tsx
 <section className="space-y-4">
-    <h3 className="text-xs font-bold tracking-widest uppercase text-(--muted-fg)">Section label</h3>
+    <h3 className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Section label</h3>
     {/* content */}
 </section>
 ```
@@ -318,7 +349,7 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
 ```tsx
 <div className="overflow-hidden rounded-xl border border-(--border) bg-(--overlay)">
     <div className="flex items-center gap-4 border-b border-(--border) px-4 py-2.5">
-        <span className="text-[10px] font-bold tracking-[.14em] text-(--muted-fg) uppercase">Filters</span>
+        <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">Filters</span>
         <div className="flex flex-1 items-center justify-end gap-3">
             <Switch isSelected={toggle} onChange={setToggle}>
                 Label
@@ -341,7 +372,7 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
         'flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors',
         active
             ? 'border-(--primary)/50 bg-(--primary)/15 text-(--fg)'
-            : 'border-(--border) bg-transparent text-(--muted-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
+            : 'border-(--border) bg-transparent text-(--soft-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
     ].join(' ')}>
     {/* icon + label */}
 </button>
@@ -350,14 +381,14 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
 ### Segmented control
 
 ```tsx
-<div className="inline-flex rounded-lg border border-(--border) bg-(--secondary) p-0.5">
+<div className="inline-flex rounded-lg border border-(--border) bg-(--neutral) p-0.5">
     {options.map(opt => (
         <button
             key={opt.value}
             onClick={() => onChange(opt.value)}
             className={[
                 'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-                opt.value === value ? 'bg-(--bg) text-(--fg) shadow-sm' : 'text-(--muted-fg) hover:text-(--fg)',
+                opt.value === value ? 'bg-(--bg) text-(--fg) shadow-sm' : 'text-(--soft-fg) hover:text-(--fg)',
             ].join(' ')}>
             {opt.label}
         </button>
@@ -365,7 +396,34 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
 </div>
 ```
 
-### Accordion item
+### Accordion (card-style, standalone)
+
+Use the shared `Accordion` component from `@/fsd/5-shared/ui` for standalone collapsible sections. It renders as a card with a soft header strip, chevron icon, and collapsible body.
+
+```tsx
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
+
+<Accordion defaultExpanded>
+    <AccordionHeader>
+        <span className="text-sm font-semibold">Section title</span>
+        <span className="text-sm text-(--soft-fg)">3 items</span>
+    </AccordionHeader>
+    <AccordionBody>
+        <div className="p-4">{children}</div>
+    </AccordionBody>
+</Accordion>;
+```
+
+- **Container**: card surface (`--card` + `--card-border` + `shadow-sm` + `rounded-xl`)
+- **Header**: `bg-(--soft)` with `hover:bg-(--primary)/10` — the clickable strip has visual weight
+- **Body**: `border-t border-(--card-border)` — clean separator, no background wash
+- **Icon**: Lucide `ChevronDown` / `ChevronRight`, auto-managed by the component
+- Supports both **controlled** (`expanded` + `onToggle`) and **uncontrolled** (`defaultExpanded`) modes
+- Prefer this over MUI `<Accordion>` — it uses design tokens natively and doesn't need `!important` overrides
+
+### Accordion item (inline, inside a card)
+
+For collapsible rows _inside_ an existing card or panel (e.g. FAQ items, nested details):
 
 ```tsx
 <div className="border-t border-(--border) first:border-t-0">
@@ -373,13 +431,13 @@ Do **not** add `max-w-*` to the page root. Constrain the specific inner containe
         onClick={() => setOpen(o => !o)}
         className="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left text-sm font-medium text-(--fg) hover:bg-(--primary)/10">
         {title}
-        <ChevronDown className={`h-4 w-4 text-(--muted-fg) transition-transform ${open ? 'rotate-180' : ''}`} />
+        <ChevronDown className={`h-4 w-4 text-(--soft-fg) transition-transform ${open ? 'rotate-180' : ''}`} />
     </button>
-    {open && <div className="px-4 pb-4 text-sm text-(--muted-fg)">{children}</div>}
+    {open && <div className="px-4 pb-4 text-sm text-(--soft-fg)">{children}</div>}
 </div>
 ```
 
-(Hover uses `hover:bg-(--primary)/10` rather than `hover:bg-(--secondary)` so the hover is visible when the accordion lives inside a card. See the don'ts table for why.)
+(Hover uses `hover:bg-(--primary)/10` rather than `hover:bg-(--neutral)` so the hover is visible when the accordion lives inside a card. See the don'ts table for why.)
 
 ### Custom single-value dropdown (headlessUI Listbox)
 
@@ -397,17 +455,19 @@ const dropPanel =
 <Listbox value={value} onChange={onChange}>
     <Listbox.Button className={dropTrigger}>
         {value.label}
-        <ChevronDown className="absolute top-2.5 right-2 h-4 w-4 text-(--muted-fg)" />
+        <ChevronDown className="absolute top-2.5 right-2 h-4 w-4 text-(--soft-fg)" />
     </Listbox.Button>
     <Listbox.Options className={dropPanel}>
         {options.map(opt => (
-            <Listbox.Option key={opt.value} value={opt}
-                className="flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-(--overlay-fg) ui-active:bg-(--primary)/10">
+            <Listbox.Option
+                key={opt.value}
+                value={opt}
+                className="ui-active:bg-(--primary)/10 flex cursor-pointer items-center gap-2 px-3 py-1.5 text-sm text-(--overlay-fg)">
                 {opt.label}
             </Listbox.Option>
         ))}
     </Listbox.Options>
-</Listbox>
+</Listbox>;
 ```
 
 ---
@@ -417,21 +477,25 @@ const dropPanel =
 Base styles for `h2` and `h3` live in `src/fsd/0-app/index.css` (`@layer base`):
 
 ```css
-h2 { @apply mt-2 mb-2 text-2xl font-bold; }
-h3 { @apply mt-2 mb-2 text-lg font-bold; }
+h2 {
+    @apply mt-2 mb-2 text-2xl font-bold;
+}
+h3 {
+    @apply mt-2 mb-2 text-lg font-bold;
+}
 ```
 
 So `<h2>` and `<h3>` carry their styles intrinsically — no className needed for the heading itself.
 
-| Use            | Classes                                                              |
-| -------------- | -------------------------------------------------------------------- |
-| Page heading   | `<h2>` (global)                                                      |
-| Subheading     | `<h3>` (global)                                                      |
-| Section label  | `text-xs font-bold tracking-widest uppercase text-(--muted-fg)`      |
-| Group label    | `text-xs font-semibold text-(--muted-fg)`                            |
-| Body / table   | `text-sm text-(--fg)`                                                |
-| Caption / meta | `text-xs text-(--muted-fg)`                                          |
-| Input label    | `text-sm font-medium text-(--muted-fg)`                              |
+| Use            | Classes                                                        |
+| -------------- | -------------------------------------------------------------- |
+| Page heading   | `<h2>` (global)                                                |
+| Subheading     | `<h3>` (global)                                                |
+| Section label  | `text-xs font-bold tracking-widest uppercase text-(--soft-fg)` |
+| Group label    | `text-xs font-semibold text-(--soft-fg)`                       |
+| Body / table   | `text-sm text-(--fg)`                                          |
+| Caption / meta | `text-xs text-(--soft-fg)`                                     |
+| Input label    | `text-sm font-medium text-(--soft-fg)`                         |
 
 ---
 
@@ -439,24 +503,24 @@ So `<h2>` and `<h3>` carry their styles intrinsically — no className needed fo
 
 A loose convention rather than a hard rule, but these are the values to reach for first. Deviating is fine if you have a reason; reaching for an arbitrary `gap-7` or `space-y-5` when one of these would do is just noise.
 
-| Use                                     | Spacing                    |
-| --------------------------------------- | -------------------------- |
-| Page root section gap                   | `space-y-8`                |
-| Page root vertical padding              | `py-6`                     |
-| Card-internal section gap               | `space-y-4` or `space-y-6` |
-| Inline control cluster (header row)     | `gap-3`                    |
-| Inline control cluster (compact)        | `gap-2`                    |
-| Card / tile grid                        | `gap-6`                    |
-| Filter header internal padding          | `px-4 py-2.5`              |
-| Section header → body                   | `space-y-4`                |
-| Small badge / chip internal padding     | `px-2.5 py-1`              |
+| Use                                 | Spacing                    |
+| ----------------------------------- | -------------------------- |
+| Page root section gap               | `space-y-8`                |
+| Page root vertical padding          | `py-6`                     |
+| Card-internal section gap           | `space-y-4` or `space-y-6` |
+| Inline control cluster (header row) | `gap-3`                    |
+| Inline control cluster (compact)    | `gap-2`                    |
+| Card / tile grid                    | `gap-6`                    |
+| Filter header internal padding      | `px-4 py-2.5`              |
+| Section header → body               | `space-y-4`                |
+| Small badge / chip internal padding | `px-2.5 py-1`              |
 
 ---
 
 ## Sidebar nav item style (reference — sidebar.tsx)
 
 Active: `border-l-[var(--primary)] bg-[var(--primary)]/[.18] text-[var(--fg)] font-semibold`
-Inactive: `border-l-transparent bg-transparent text-[var(--muted-fg)] font-medium`
+Inactive: `border-l-transparent bg-transparent text-[var(--soft-fg)] font-medium`
 Base: `w-full flex items-center text-left px-2 py-1.5 gap-2.5 rounded-[7px] border-none cursor-pointer whitespace-nowrap text-[13px] border-l-2`
 
 Icon size in sidebar: `text-[18px]`
@@ -477,6 +541,7 @@ The codebase follows Feature-Sliced Design with numbered layers:
 **Rule:** lower-numbered layers may import from higher-numbered ones, never the reverse. A page (`1-pages/`) may import from features, entities, and shared. A shared component cannot import from a page.
 
 Import path aliases:
+
 - `@/fsd/5-shared/ui` → shared components
 - `@/fsd/4-entities/{name}` → domain entities
 - `@/fsd/3-features/{name}` → feature logic

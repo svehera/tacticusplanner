@@ -106,8 +106,8 @@ const NAV_LIVE = [
 ] as const;
 
 const navLink =
-    'rounded px-2 py-0.5 text-(--muted-fg) transition-colors hover:bg-(--secondary) hover:text-(--fg) whitespace-nowrap';
-const navChapter = 'text-xs font-bold tracking-widest uppercase text-(--muted-fg) select-none';
+    'rounded px-2 py-0.5 text-(--soft-fg) transition-colors hover:bg-(--neutral) hover:text-(--fg) whitespace-nowrap';
+const navChapter = 'text-xs font-bold tracking-widest uppercase text-(--soft-fg) select-none';
 
 const UiKitNav = () => (
     <nav className="sticky top-0 z-10 flex flex-wrap items-center gap-x-3 gap-y-1 rounded-lg border border-(--border) bg-(--bg)/95 px-3 py-2 text-xs backdrop-blur-sm">
@@ -131,7 +131,7 @@ const UiKitNav = () => (
 
 const Section = ({ id, title, children }: { id: string; title: string; children: React.ReactNode }) => (
     <section id={id} className="scroll-mt-16 space-y-6">
-        <p className="text-xs font-bold tracking-widest text-(--muted-fg) uppercase">{title}</p>
+        <p className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">{title}</p>
         {children}
     </section>
 );
@@ -139,14 +139,14 @@ const Section = ({ id, title, children }: { id: string; title: string; children:
 const ChapterDivider = ({ label }: { label: string }) => (
     <div className="flex items-center gap-4 py-2">
         <div className="h-px flex-1 bg-(--border)" />
-        <span className="text-xs font-bold tracking-widest text-(--muted-fg) uppercase">{label}</span>
+        <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">{label}</span>
         <div className="h-px flex-1 bg-(--border)" />
     </div>
 );
 
 const Group = ({ label, children }: { label: string; children: React.ReactNode }) => (
     <div className="space-y-3">
-        <p className="text-xs font-semibold text-(--muted-fg)">{label}</p>
+        <p className="text-xs font-semibold text-(--soft-fg)">{label}</p>
         {children}
     </div>
 );
@@ -160,7 +160,7 @@ const Row = ({ children, className }: { children: React.ReactNode; className?: s
 const HomeLreCard = () => {
     const { leProgress, characters } = useContext(StoreContext);
     const nextEvent = useMemo(() => LegendaryEventService.getActiveEvent(), []);
-    if (!nextEvent) return <p className="text-sm text-(--muted-fg)">No active legendary event.</p>;
+    if (!nextEvent) return <p className="text-sm text-(--soft-fg)">No active legendary event.</p>;
     return <LreSection nextEvent={nextEvent} leProgress={leProgress} characters={characters} />;
 };
 
@@ -260,7 +260,7 @@ const GoalCardShowcase = () => {
 
     if (samples.length === 0) {
         return (
-            <p className="text-sm text-(--muted-fg)">
+            <p className="text-sm text-(--soft-fg)">
                 No goals set — add goals of different types on the Goals page to see variations here.
             </p>
         );
@@ -342,7 +342,7 @@ const RaidCardsShowcase = () => {
 
     if (inProgress.length === 0 && daily.length === 0 && blocked.length === 0) {
         return (
-            <p className="text-sm text-(--muted-fg)">
+            <p className="text-sm text-(--soft-fg)">
                 No active raid goals — enable goals on the Daily Raids page to see cards here.
             </p>
         );
@@ -499,12 +499,12 @@ const ProgressBar = ({
     return (
         <div className="w-full space-y-1">
             {label && (
-                <div className="flex justify-between text-xs text-(--muted-fg)">
+                <div className="flex justify-between text-xs text-(--soft-fg)">
                     <span>{label}</span>
                     <span>{pct}%</span>
                 </div>
             )}
-            <div className="h-2 overflow-hidden rounded-full bg-(--secondary)">
+            <div className="h-2 overflow-hidden rounded-full bg-(--neutral)">
                 <div className={`h-full transition-all duration-500 ${fill}`} style={{ width: `${pct}%` }} />
             </div>
         </div>
@@ -530,15 +530,13 @@ const AccordionItem = ({
         <div className="border-t border-(--border) first:border-t-0">
             <button
                 onClick={() => setOpen(o => !o)}
-                className="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left text-sm font-medium text-(--fg) transition-colors hover:bg-(--secondary)">
+                className="flex w-full cursor-pointer items-center justify-between px-4 py-3 text-left text-sm font-medium text-(--fg) transition-colors hover:bg-(--primary)/10">
                 {title}
                 <ChevronDown
-                    className={`h-4 w-4 shrink-0 text-(--muted-fg) transition-transform ${open ? 'rotate-180' : ''}`}
+                    className={`h-4 w-4 shrink-0 text-(--soft-fg) transition-transform ${open ? 'rotate-180' : ''}`}
                 />
             </button>
-            {open && (
-                <div className={flush ? 'overflow-hidden' : 'px-4 pb-4 text-sm text-(--muted-fg)'}>{children}</div>
-            )}
+            {open && <div className={flush ? 'overflow-hidden' : 'px-4 pb-4 text-sm text-(--soft-fg)'}>{children}</div>}
         </div>
     );
 };
@@ -577,7 +575,7 @@ const RadioGroupShowcase = () => {
     return (
         <div className="flex flex-wrap gap-12">
             <fieldset className="border-0 p-0">
-                <legend className="mb-3 text-sm font-medium text-(--muted-fg)">LRE Section (inline)</legend>
+                <legend className="mb-3 text-sm font-medium text-(--soft-fg)">LRE Section (inline)</legend>
                 <div className="flex gap-4">
                     {[
                         { value: 'alpha', label: 'Alpha' },
@@ -596,7 +594,7 @@ const RadioGroupShowcase = () => {
                 </div>
             </fieldset>
             <fieldset className="border-0 p-0">
-                <legend className="mb-3 text-sm font-medium text-(--muted-fg)">Sort order (stacked)</legend>
+                <legend className="mb-3 text-sm font-medium text-(--soft-fg)">Sort order (stacked)</legend>
                 <div className="space-y-2">
                     {[
                         { value: 'name', label: 'Name' },
@@ -712,14 +710,14 @@ const SelectSingle = ({
     placeholder?: string;
 }) => (
     <div className="w-full">
-        {label && <label className="mb-1.5 block text-sm font-medium text-(--muted-fg)">{label}</label>}
+        {label && <label className="mb-1.5 block text-sm font-medium text-(--soft-fg)">{label}</label>}
         <Listbox value={value} onChange={onChange}>
             <div className="relative">
                 <Listbox.Button className={dropTrigger}>
-                    <span className={value ? '' : 'text-(--muted-fg)'}>
+                    <span className={value ? '' : 'text-(--soft-fg)'}>
                         {value ? (options.find(o => o.value === value)?.label ?? placeholder) : placeholder}
                     </span>
-                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--muted-fg)" />
+                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--soft-fg)" />
                 </Listbox.Button>
                 <Transition
                     as={Fragment}
@@ -769,16 +767,16 @@ const SelectMulti = ({
     placeholder?: string;
 }) => (
     <div className="w-full">
-        {label && <label className="mb-1.5 block text-sm font-medium text-(--muted-fg)">{label}</label>}
+        {label && <label className="mb-1.5 block text-sm font-medium text-(--soft-fg)">{label}</label>}
         <Listbox value={value} onChange={onChange} multiple>
             <div className="relative">
                 <Listbox.Button className={dropTrigger}>
                     {value.length === 0 ? (
-                        <span className="text-(--muted-fg)">{placeholder}</span>
+                        <span className="text-(--soft-fg)">{placeholder}</span>
                     ) : (
                         <span>{value.length} selected</span>
                     )}
-                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--muted-fg)" />
+                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--soft-fg)" />
                 </Listbox.Button>
                 <Transition
                     as={Fragment}
@@ -825,14 +823,14 @@ const SegmentedControl = ({
     onChange: (v: string) => void;
     options: SelectOption[];
 }) => (
-    <div className="inline-flex rounded-lg border border-(--border) bg-(--secondary) p-0.5">
+    <div className="inline-flex rounded-lg border border-(--border) bg-(--neutral) p-0.5">
         {options.map(opt => (
             <button
                 key={opt.value}
                 onClick={() => onChange(opt.value)}
                 className={[
                     'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
-                    opt.value === value ? 'bg-(--bg) text-(--fg) shadow-sm' : 'text-(--muted-fg) hover:text-(--fg)',
+                    opt.value === value ? 'bg-(--bg) text-(--fg) shadow-sm' : 'text-(--soft-fg) hover:text-(--fg)',
                 ].join(' ')}>
                 {opt.label}
             </button>
@@ -849,7 +847,7 @@ const TextSearchShowcase = () => {
             value={search}
             onChange={setSearch}
             placeholder="Search characters…"
-            prefix={<Search className="size-4 text-(--muted-fg)" />}
+            prefix={<Search className="size-4 text-(--soft-fg)" />}
             suffix={
                 search ? (
                     <button
@@ -858,7 +856,7 @@ const TextSearchShowcase = () => {
                             event_.preventDefault();
                             setSearch('');
                         }}
-                        className="cursor-pointer text-(--muted-fg) transition-colors hover:text-(--fg)">
+                        className="cursor-pointer text-(--soft-fg) transition-colors hover:text-(--fg)">
                         <X className="size-4" />
                     </button>
                 ) : undefined
@@ -925,7 +923,7 @@ const ChipsShowcase = () => {
                             'flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors',
                             active
                                 ? 'border-(--primary)/50 bg-(--primary)/15 text-(--fg)'
-                                : 'border-(--border) bg-transparent text-(--muted-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
+                                : 'border-(--border) bg-transparent text-(--soft-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
                         ].join(' ')}>
                         <RarityIcon rarity={rarity} />
                         <span>{Rarity[rarity]}</span>
@@ -953,7 +951,7 @@ const RangeShowcase = () => {
     return (
         <div className="flex items-end gap-2">
             <TextField type="number" label="Min rank" placeholder="0" value={min} onChange={setMin} className="w-28" />
-            <span className="mb-2.5 text-(--muted-fg)">–</span>
+            <span className="mb-2.5 text-(--soft-fg)">–</span>
             <TextField type="number" label="Max rank" placeholder="∞" value={max} onChange={setMax} className="w-28" />
         </div>
     );
@@ -966,14 +964,14 @@ const SliderShowcase = () => {
     return (
         <div className="flex flex-col gap-6">
             <div className="flex flex-col gap-1">
-                <span className="text-xs text-(--muted-fg)">Default (primary) — max 75</span>
+                <span className="text-xs text-(--soft-fg)">Default (primary) — max 75</span>
                 <div className="flex items-center gap-3">
                     <Slider className="flex-1" value={a} max={75} onChange={setA} />
                     <span className="w-12 shrink-0 text-right text-sm tabular-nums">{a} / 75</span>
                 </div>
             </div>
             <div className="flex flex-col gap-1">
-                <span className="text-xs text-(--muted-fg)">Custom fill — max 40</span>
+                <span className="text-xs text-(--soft-fg)">Custom fill — max 40</span>
                 <div className="flex items-center gap-3">
                     <Slider
                         className="flex-1"
@@ -986,7 +984,7 @@ const SliderShowcase = () => {
                 </div>
             </div>
             <div className="flex flex-col gap-1">
-                <span className="text-xs text-(--muted-fg)">Event challenge — max 3</span>
+                <span className="text-xs text-(--soft-fg)">Event challenge — max 3</span>
                 <div className="flex items-center gap-3">
                     <Slider
                         className="flex-1"
@@ -1017,7 +1015,7 @@ const FilterBarShowcase = () => {
         <div className="overflow-hidden rounded-xl border border-(--border) bg-(--overlay)">
             {/* Header */}
             <div className="flex items-center gap-4 border-b border-(--border) px-4 py-2.5">
-                <span className="text-[10px] font-bold tracking-[.14em] text-(--muted-fg) uppercase">Filters</span>
+                <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">Filters</span>
                 <div className="flex flex-1 items-center justify-end gap-3">
                     <Switch isSelected={onlyRelics} onChange={setOnlyRelics}>
                         Only Relics
@@ -1042,7 +1040,7 @@ const FilterBarShowcase = () => {
                     value={search}
                     onChange={setSearch}
                     placeholder="Search characters…"
-                    prefix={<Search className="size-4 text-(--muted-fg)" />}
+                    prefix={<Search className="size-4 text-(--soft-fg)" />}
                     suffix={
                         search ? (
                             <button
@@ -1051,7 +1049,7 @@ const FilterBarShowcase = () => {
                                     event_.preventDefault();
                                     setSearch('');
                                 }}
-                                className="cursor-pointer text-(--muted-fg) transition-colors hover:text-(--fg)">
+                                className="cursor-pointer text-(--soft-fg) transition-colors hover:text-(--fg)">
                                 <X className="size-4" />
                             </button>
                         ) : undefined
@@ -1070,7 +1068,7 @@ const FilterBarShowcase = () => {
                                 'flex cursor-pointer items-center gap-1.5 rounded-full border px-2.5 py-1 text-xs transition-colors',
                                 active
                                     ? 'border-(--primary)/50 bg-(--primary)/15 text-(--fg)'
-                                    : 'border-(--border) bg-transparent text-(--muted-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
+                                    : 'border-(--border) bg-transparent text-(--soft-fg) hover:border-(--primary)/40 hover:bg-(--primary)/10 hover:text-(--fg)',
                             ].join(' ')}>
                             <RarityIcon rarity={rarity} />
                             <span>{Rarity[rarity]}</span>
@@ -1174,7 +1172,7 @@ const GoalBar = ({
     const bookIconName = bookRarity === undefined ? undefined : Rarity[bookRarity].toLowerCase() + 'Book';
     return (
         <span
-            className={`flex items-center gap-1 text-xs whitespace-nowrap tabular-nums ${over ? 'font-semibold text-(--success)' : 'text-(--muted-fg)'}`}>
+            className={`flex items-center gap-1 text-xs whitespace-nowrap tabular-nums ${over ? 'font-semibold text-(--success)' : 'text-(--soft-fg)'}`}>
             {have.toLocaleString()} / {need.toLocaleString()}
             {bookIconName ? <MiscIcon icon={bookIconName} className="book-icon" /> : ` ${unit}`}
             {over && ' ✓'}
@@ -1249,7 +1247,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             maxWidth: 36,
             rowDrag: true,
             cellRenderer: () => (
-                <div className="flex h-full cursor-grab items-center justify-center text-(--muted-fg) opacity-40 transition-opacity duration-150 hover:opacity-80 active:cursor-grabbing">
+                <div className="flex h-full cursor-grab items-center justify-center text-(--soft-fg) opacity-40 transition-opacity duration-150 hover:opacity-80 active:cursor-grabbing">
                     <GripVertical className="size-4" />
                 </div>
             ),
@@ -1271,7 +1269,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 return (
                     <div className="flex h-full w-full">
                         <div className="flex flex-1 items-center gap-1 px-3">
-                            <span className="min-w-[20px] text-center text-sm font-medium text-(--muted-fg) tabular-nums">
+                            <span className="min-w-[20px] text-center text-sm font-medium text-(--soft-fg) tabular-nums">
                                 {params.data.priority}
                             </span>
                             {est?.blocked && (
@@ -1285,14 +1283,14 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 title="Move Up"
                                 disabled={index <= 0}
                                 onClick={() => moveRowReference.current(index, index - 1)}
-                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
                                 <ArrowUp className="size-3" />
                             </button>
                             <button
                                 title="Move Down"
                                 disabled={index >= total - 1}
                                 onClick={() => moveRowReference.current(index, index + 1)}
-                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
                                 <ArrowDown className="size-3" />
                             </button>
                         </div>
@@ -1336,20 +1334,20 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 to={`/plan/dailyRaids?charSnowprintId=${encodeURIComponent(raidsUnitId)}`}
                                 title="Go to Raids Table"
                                 onClick={event_ => event_.stopPropagation()}
-                                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--fg)">
+                                className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--fg)">
                                 <ExternalLink className="size-4" />
                             </Link>
                         )}
                         <button
                             title="Edit"
                             onClick={event_ => event_.stopPropagation()}
-                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--fg)">
+                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--fg)">
                             <Edit className="size-4" />
                         </button>
                         <button
                             title="Delete"
                             onClick={event_ => event_.stopPropagation()}
-                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--muted-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
+                            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded text-(--soft-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
                             <Trash2 className="size-4" />
                         </button>
                     </div>
@@ -1397,7 +1395,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                         <div className="shrink-0">{portrait}</div>
                         <div className="flex min-w-0 flex-col leading-tight">
                             <span className="truncate text-sm font-medium text-(--fg)">{name}</span>
-                            {subline && <span className="truncate text-xs text-(--muted-fg)">{subline}</span>}
+                            {subline && <span className="truncate text-xs text-(--soft-fg)">{subline}</span>}
                         </div>
                     </div>
                 );
@@ -1417,10 +1415,10 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                         {v ? (
                             <>
                                 {v.toLocaleString()}
-                                <Calendar className="size-3.5 shrink-0 text-(--muted-fg)" />
+                                <Calendar className="size-3.5 shrink-0 text-(--soft-fg)" />
                             </>
                         ) : (
-                            <span className="text-(--muted-fg) opacity-50">—</span>
+                            <span className="text-(--soft-fg) opacity-50">—</span>
                         )}
                     </div>
                 );
@@ -1446,7 +1444,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                           : undefined;
                 if (!daysLeft) {
                     return (
-                        <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
+                        <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
                             —
                         </div>
                     );
@@ -1457,7 +1455,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 return (
                     <div className="flex h-full min-w-0 flex-col justify-center gap-0.5 leading-normal">
                         <span className="text-sm font-medium text-(--fg)">{shortDate}</span>
-                        <span className="text-xs text-(--muted-fg)">in {daysLeft} days</span>
+                        <span className="text-xs text-(--soft-fg)">in {daysLeft} days</span>
                     </div>
                 );
             },
@@ -1473,7 +1471,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const notes = params.data?.notes ?? '';
                 return (
                     <div
-                        className="flex h-full items-center truncate text-xs leading-normal text-(--muted-fg)"
+                        className="flex h-full items-center truncate text-xs leading-normal text-(--soft-fg)"
                         title={notes}>
                         {notes}
                     </div>
@@ -1498,7 +1496,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                         transition = (
                             <div className="flex items-center gap-1.5">
                                 <RankIcon rank={data.rankStart} rankPoint5={data.rankStartPoint5} />
-                                <ArrowRight className="size-3 text-(--muted-fg)" />
+                                <ArrowRight className="size-3 text-(--soft-fg)" />
                                 <RankIcon rank={data.rankEnd} rankPoint5={data.rankPoint5} />
                                 {data.upgradesRarity.length > 0 && (
                                     <div className="ml-1 flex items-center gap-0.5">
@@ -1580,7 +1578,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 {est.xpBooksTotal.toLocaleString()}
                                 {iconName && <MiscIcon icon={iconName} className="book-icon" />}
                             </span>
-                            {levelRange && <span className="text-xs text-(--muted-fg)">{levelRange}</span>}
+                            {levelRange && <span className="text-xs text-(--soft-fg)">{levelRange}</span>}
                         </div>
                     );
                 }
@@ -1592,9 +1590,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                     );
                 }
                 return (
-                    <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
-                        —
-                    </div>
+                    <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">—</div>
                 );
             },
         };
@@ -1615,7 +1611,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 <MiscIcon icon="energy" width={15} height={18} />
                             </>
                         ) : (
-                            <span className="text-(--muted-fg) opacity-50">—</span>
+                            <span className="text-(--soft-fg) opacity-50">—</span>
                         )}
                     </div>
                 );
@@ -1652,7 +1648,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 <MiscIcon icon="coin" width={16} height={16} />
                             </>
                         ) : (
-                            <span className="text-(--muted-fg) opacity-50">—</span>
+                            <span className="text-(--soft-fg) opacity-50">—</span>
                         )}
                     </div>
                 );
@@ -1678,19 +1674,19 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                             ? 'bg-(--accent)/20 text-(--accent-fg)'
                             : data.farmType === 'energy'
                               ? 'bg-(--primary)/15 text-(--primary)'
-                              : 'bg-(--muted) text-(--muted-fg)';
+                              : 'bg-(--soft) text-(--soft-fg)';
                     transition = (
                         <div className="flex flex-wrap items-center gap-1">
                             {isSameRarity ? (
                                 <>
                                     <StarsIcon stars={data.starsStart} />
-                                    <ArrowRight className="size-3 text-(--muted-fg)" />
+                                    <ArrowRight className="size-3 text-(--soft-fg)" />
                                     <StarsIcon stars={data.starsEnd} />
                                 </>
                             ) : (
                                 <>
                                     <RarityIcon rarity={data.rarityStart} />
-                                    <ArrowRight className="size-3 text-(--muted-fg)" />
+                                    <ArrowRight className="size-3 text-(--soft-fg)" />
                                     <RarityIcon rarity={data.rarityEnd} />
                                     <StarsIcon stars={data.starsEnd} />
                                 </>
@@ -1704,7 +1700,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                         </div>
                     );
                 } else {
-                    transition = <span className="text-xs text-(--muted-fg)">Unlock</span>;
+                    transition = <span className="text-xs text-(--soft-fg)">Unlock</span>;
                 }
                 return (
                     <div className="flex h-full min-w-0 items-center gap-1.5 leading-normal">
@@ -1764,9 +1760,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                     );
                 }
                 return (
-                    <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
-                        —
-                    </div>
+                    <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">—</div>
                 );
             },
         };
@@ -1781,7 +1775,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const est = goalsEstimates.find(x => x.goalId === data?.goalId);
                 if (!data || !est?.orbsEstimate || data.type === PersonalGoalType.UpgradeMaterial) {
                     return (
-                        <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
+                        <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
                             —
                         </div>
                     );
@@ -1789,7 +1783,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const neededOrbs = Object.fromEntries(Object.entries(est.orbsEstimate.orbs).filter(([, n]) => n > 0));
                 if (Object.keys(neededOrbs).length === 0) {
                     return (
-                        <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
+                        <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
                             —
                         </div>
                     );
@@ -1817,7 +1811,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const v = goalsEstimates.find(x => x.goalId === params.data?.goalId)?.oTokensTotal;
                 return (
                     <div className="flex h-full w-full items-center justify-end text-sm leading-normal tabular-nums">
-                        {v ? v.toLocaleString() : <span className="text-(--muted-fg) opacity-50">—</span>}
+                        {v ? v.toLocaleString() : <span className="text-(--soft-fg) opacity-50">—</span>}
                     </div>
                 );
             },
@@ -1869,7 +1863,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const est = goalsEstimates.find(x => x.goalId === params.data?.goalId);
                 if (!est?.abilitiesEstimate) {
                     return (
-                        <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
+                        <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
                             —
                         </div>
                     );
@@ -1891,7 +1885,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 const est = goalsEstimates.find(x => x.goalId === params.data?.goalId);
                 if (!est || est.xpBooksTotal === 0) {
                     return (
-                        <div className="flex h-full items-center text-sm leading-normal text-(--muted-fg) opacity-50">
+                        <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
                             —
                         </div>
                     );
@@ -1906,7 +1900,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                             {est.xpBooksTotal.toLocaleString()}
                             {iconName && <MiscIcon icon={iconName} className="book-icon" />}
                         </span>
-                        {levelRange && <span className="text-xs text-(--muted-fg)">{levelRange}</span>}
+                        {levelRange && <span className="text-xs text-(--soft-fg)">{levelRange}</span>}
                     </div>
                 );
             },
@@ -1929,7 +1923,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                                 <MiscIcon icon="coin" width={16} height={16} />
                             </>
                         ) : (
-                            <span className="text-(--muted-fg) opacity-50">—</span>
+                            <span className="text-(--soft-fg) opacity-50">—</span>
                         )}
                     </div>
                 );
@@ -2081,7 +2075,7 @@ const GoalsTableShowcase = () => {
     const rowHeight = density === 'compact' ? 36 : density === 'comfortable' ? 96 : 80;
 
     if (allGoals.length === 0) {
-        return <p className="text-sm text-(--muted-fg)">No goals — add some on the Goals page to see them here.</p>;
+        return <p className="text-sm text-(--soft-fg)">No goals — add some on the Goals page to see them here.</p>;
     }
 
     const gridProps: Omit<GoalsSectionGridProps, 'rows' | 'variant'> = {
@@ -2093,8 +2087,8 @@ const GoalsTableShowcase = () => {
     return (
         <div className="space-y-2">
             <div className="flex items-center gap-3">
-                <span className="text-xs text-(--muted-fg)">Density</span>
-                <div className="inline-flex rounded-lg border border-(--border) bg-(--secondary) p-0.5">
+                <span className="text-xs text-(--soft-fg)">Density</span>
+                <div className="inline-flex rounded-lg border border-(--border) bg-(--neutral) p-0.5">
                     {TABLE_DENSITY_OPTIONS.map(opt => (
                         <button
                             key={opt.value}
@@ -2103,7 +2097,7 @@ const GoalsTableShowcase = () => {
                                 'cursor-pointer rounded-md px-3 py-1.5 text-xs font-medium transition-colors',
                                 density === opt.value
                                     ? 'bg-(--bg) text-(--fg) shadow-sm'
-                                    : 'text-(--muted-fg) hover:text-(--fg)',
+                                    : 'text-(--soft-fg) hover:text-(--fg)',
                             ].join(' ')}>
                             {opt.label}
                         </button>
@@ -2152,19 +2146,19 @@ const Swatch = ({ token, label, fg }: SwatchProps) => (
                 Aa
             </div>
         )}
-        <p className="font-mono text-xs leading-tight text-(--muted-fg)">{token}</p>
+        <p className="font-mono text-xs leading-tight text-(--soft-fg)">{token}</p>
         <p className="text-xs leading-tight text-(--fg)">{label}</p>
     </div>
 );
 
 const SEMANTIC_PAIRS: Array<{ token: string; fg: string; label: string }> = [
     { token: '--primary', fg: '--primary-fg', label: 'Primary' },
-    { token: '--secondary', fg: '--secondary-fg', label: 'Secondary' },
+    { token: '--neutral', fg: '--neutral-fg', label: 'Neutral' },
     { token: '--accent', fg: '--accent-fg', label: 'Accent' },
     { token: '--success', fg: '--success-fg', label: 'Success' },
     { token: '--warning', fg: '--warning-fg', label: 'Warning' },
     { token: '--danger', fg: '--danger-fg', label: 'Danger' },
-    { token: '--muted', fg: '--muted-fg', label: 'Muted' },
+    { token: '--soft', fg: '--soft-fg', label: 'Soft' },
     { token: '--overlay', fg: '--overlay-fg', label: 'Overlay' },
     { token: '--sidebar', fg: '--sidebar-fg', label: 'Sidebar' },
     { token: '--bg', fg: '--fg', label: 'Background' },
@@ -2247,7 +2241,7 @@ const ColoursSection = () => (
             <div className="space-y-3">
                 {RANK_GROUPS.map(({ label, tokens }) => (
                     <div key={label} className="flex items-center gap-3">
-                        <span className="w-24 shrink-0 text-xs font-medium text-(--muted-fg)">{label}</span>
+                        <span className="w-24 shrink-0 text-xs font-medium text-(--soft-fg)">{label}</span>
                         <div className="flex gap-2">
                             {tokens.map(token => (
                                 <div
@@ -2275,7 +2269,7 @@ export const UiKitPage = () => {
         <div className="space-y-12 py-6">
             <div>
                 <h2 className="text-2xl leading-tight font-bold text-(--fg)">UI Kit</h2>
-                <p className="text-sm text-(--muted-fg)">Live components and design primitives</p>
+                <p className="text-sm text-(--soft-fg)">Live components and design primitives</p>
             </div>
 
             <UiKitNav />
@@ -2422,13 +2416,13 @@ export const UiKitPage = () => {
                         <TextField
                             label="With prefix"
                             placeholder="Username"
-                            prefix={<Mail className="size-4 text-(--muted-fg)" />}
+                            prefix={<Mail className="size-4 text-(--soft-fg)" />}
                             className="w-56"
                         />
                         <TextField
                             label="With suffix"
                             placeholder="Search…"
-                            suffix={<Search className="size-4 text-(--muted-fg)" />}
+                            suffix={<Search className="size-4 text-(--soft-fg)" />}
                             className="w-56"
                         />
                         <TextField
@@ -2507,9 +2501,9 @@ export const UiKitPage = () => {
                         <Card className="w-72">
                             <CardHeader>
                                 <CardTitle>Daily Raids</CardTitle>
-                                <span className="text-sm text-(--muted-fg)">3 locations</span>
+                                <span className="text-sm text-(--soft-fg)">3 locations</span>
                             </CardHeader>
-                            <CardContent className="text-xs text-(--muted-fg)">Location list goes here.</CardContent>
+                            <CardContent className="text-xs text-(--soft-fg)">Location list goes here.</CardContent>
                         </Card>
                         <Card className="w-72">
                             <CardHeader>
@@ -2517,7 +2511,7 @@ export const UiKitPage = () => {
                                 <Badge intent="primary">450 ⚡</Badge>
                             </CardHeader>
                             <CardContent>
-                                <p className="text-xs text-(--muted-fg)">Goal rows go here.</p>
+                                <p className="text-xs text-(--soft-fg)">Goal rows go here.</p>
                             </CardContent>
                         </Card>
                     </div>
@@ -2528,7 +2522,7 @@ export const UiKitPage = () => {
                             <CardTitle>Edit goal</CardTitle>
                         </CardHeader>
                         <CardContent>
-                            <p className="text-xs text-(--muted-fg)">Form fields go here.</p>
+                            <p className="text-xs text-(--soft-fg)">Form fields go here.</p>
                         </CardContent>
                         <CardFooter>
                             <Button size="small" intent="primary">
@@ -2543,7 +2537,7 @@ export const UiKitPage = () => {
                 <Group label="Minimal">
                     <Card className="w-72 p-4">
                         <p className="font-medium">Inline content</p>
-                        <p className="mt-1 text-xs text-(--muted-fg)">Skip slots, use p-* directly.</p>
+                        <p className="mt-1 text-xs text-(--soft-fg)">Skip slots, use p-* directly.</p>
                     </Card>
                 </Group>
             </Section>
@@ -2586,7 +2580,7 @@ export const UiKitPage = () => {
                             <Modal.Content size="sm">
                                 <Dialog.Header title="About this feature" description="Here's what you need to know." />
                                 <Dialog.Body>
-                                    <p className="text-sm text-(--muted-fg)">Closes on click-away or Escape.</p>
+                                    <p className="text-sm text-(--soft-fg)">Closes on click-away or Escape.</p>
                                 </Dialog.Body>
                                 <Dialog.Footer>
                                     <Dialog.Close intent="primary">Got it</Dialog.Close>
@@ -2601,7 +2595,7 @@ export const UiKitPage = () => {
                             <Modal.Content size="sm">
                                 <Dialog.Header title="Delete goal?" description="This action cannot be undone." />
                                 <Dialog.Body>
-                                    <p className="text-sm text-(--muted-fg)">
+                                    <p className="text-sm text-(--soft-fg)">
                                         The goal and all associated progress will be permanently removed.
                                     </p>
                                 </Dialog.Body>

@@ -182,9 +182,9 @@ export const CampaignProgression = () => {
             />
 
             {!hasGoals && (
-                <div className="mt-2 flex max-w-md flex-col gap-3 overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) p-4 shadow-sm">
+                <div className="mt-2 flex max-w-md flex-col gap-3 overflow-hidden rounded-xl border border-(--card-border) bg-(--card) p-4 shadow-sm">
                     <p className="font-semibold">No campaign data yet</p>
-                    <p className="text-sm text-(--muted-fg)">
+                    <p className="text-sm text-(--soft-fg)">
                         Add goals with campaign-farmable materials or shard goals to see savings analysis.
                     </p>
                     <Link

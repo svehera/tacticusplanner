@@ -15,7 +15,7 @@ export const GoalCardRaidsButton: React.FC<Props> = ({ unitId }) => {
         <Button
             size="small"
             variant={'outlined'}
-            className="rounded-full border-(--border) bg-(--secondary) px-3 text-[color:var(--fg)]"
+            className="rounded-full border-(--border) bg-(--neutral) px-3 text-[color:var(--fg)]"
             component={Link}
             to={to}
             target={'_self'}>

@@ -148,18 +148,18 @@ export function GoalsSection() {
 
     return (
         <div className="w-full max-w-[350px]">
-            <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+            <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                 Your Goals
             </p>
             <div
-                className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors"
+                className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-colors"
                 onClick={() => navigate(isMobile ? goalsMenuItem.routeMobile : goalsMenuItem.routeWeb)}>
                 <div className="border-b border-(--card-border) px-4 py-3">
                     <div className="flex items-center justify-between gap-2">
                         <div className="flex items-center gap-2.5 font-medium">
                             {goalsMenuItem.icon} {goalsMenuItem.label}
                         </div>
-                        <div className="flex shrink-0 items-center gap-1.5 text-sm text-(--muted-fg)">
+                        <div className="flex shrink-0 items-center gap-1.5 text-sm text-(--soft-fg)">
                             {estimatedUpgradesTotal.energyTotal > 0 && (
                                 <span className="flex items-center gap-0.5">
                                     <MiscIcon icon={'energy'} width={12} height={12} />
@@ -206,12 +206,12 @@ export function GoalsSection() {
                                                 {unitDisplay?.name ?? goal.character}
                                             </span>
                                             {goalTypeLabel(goal.type) && (
-                                                <span className="shrink-0 rounded bg-(--card-fg)/10 px-1.5 py-0.5 text-xs text-(--muted-fg)">
+                                                <span className="shrink-0 rounded bg-(--card-fg)/10 px-1.5 py-0.5 text-xs text-(--soft-fg)">
                                                     {goalTypeLabel(goal.type)}
                                                 </span>
                                             )}
                                         </div>
-                                        <div className="text-xs text-(--muted-fg)">{describeGoal(goal, charRank)}</div>
+                                        <div className="text-xs text-(--soft-fg)">{describeGoal(goal, charRank)}</div>
                                     </div>
                                 </div>
                                 {estimate?.completed ? (
@@ -222,9 +222,9 @@ export function GoalsSection() {
                                         Done
                                     </span>
                                 ) : estimate?.blocked ? (
-                                    <span className="shrink-0 text-xs text-(--muted-fg)">Blocked</span>
+                                    <span className="shrink-0 text-xs text-(--soft-fg)">Blocked</span>
                                 ) : estimate ? (
-                                    <div className="flex shrink-0 flex-col items-end gap-0.5 text-xs text-(--muted-fg)">
+                                    <div className="flex shrink-0 flex-col items-end gap-0.5 text-xs text-(--soft-fg)">
                                         {estimate.energyTotal > 0 && (
                                             <span className="flex items-center gap-0.5">
                                                 <MiscIcon icon={'energy'} width={12} height={12} />
@@ -245,7 +245,7 @@ export function GoalsSection() {
                     })}
                 </div>
                 {remainingCount > 0 && (
-                    <div className="px-4 pb-3 text-xs text-(--muted-fg)">
+                    <div className="px-4 pb-3 text-xs text-(--soft-fg)">
                         +{remainingCount} more goal{remainingCount === 1 ? '' : 's'}
                     </div>
                 )}

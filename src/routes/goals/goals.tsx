@@ -1,12 +1,11 @@
 ﻿import {
     Delete as DeleteIcon,
-    ExpandMore as ExpandMoreIcon,
     GridView as GridViewIcon,
     Link as LinkIcon,
     TableRows as TableRowsIcon,
 } from '@mui/icons-material';
 import SettingsIcon from '@mui/icons-material/Settings';
-import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
+import { FormControlLabel, Switch } from '@mui/material';
 import Button from '@mui/material/Button';
 import { cloneDeep, sum } from 'lodash';
 import { useCallback, useContext, useMemo, useState } from 'react';
@@ -25,6 +24,7 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 import { ForgeBadgesTotal, MiscIcon, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
@@ -431,38 +431,31 @@ export const Goals = () => {
                 />
             </div>
             <div className="my-2 w-full max-w-[1100px]">
-                <Accordion
-                    expanded={resourcesExpanded}
-                    onChange={(_, expanded) => setResourcesExpanded(expanded)}
-                    className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5"
-                        aria-controls="resources-content"
-                        id="resources-header">
+                <Accordion expanded={resourcesExpanded} onToggle={setResourcesExpanded}>
+                    <AccordionHeader>
                         <div className="flex w-full flex-wrap items-center gap-2 pr-2">
                             <span className="text-sm font-semibold text-(--fg)">Total Resources Missing</span>
                             <span className="ml-auto flex flex-wrap items-center gap-2">
-                                <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
+                                <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
                                     <span className="font-medium">Energy:</span>{' '}
                                     <span>{estimatedUpgradesTotal.energyTotal - energyAlreadySpent}</span>
                                 </span>
-                                <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
+                                <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
                                     <span className="font-medium">XP:</span>{' '}
                                     <span>{formatCompactValue(adjustedGoalsEstimates.neededXp)}</span>
                                 </span>
                             </span>
                         </div>
-                    </AccordionSummary>
+                    </AccordionHeader>
 
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    <AccordionBody>
                         <div className="grid grid-cols-1 gap-3">
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Energy
                                     </div>
-                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <MiscIcon icon={'energy'} height={35} width={35} />
                                         <b className="text-2xl text-(--fg)">
                                             {estimatedUpgradesTotal.energyTotal - energyAlreadySpent}
@@ -471,10 +464,10 @@ export const Goals = () => {
                                 </div>
 
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         XP Books
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                                     </div>
                                 </div>
@@ -482,10 +475,10 @@ export const Goals = () => {
 
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Badges
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                             <div key={alliance} className="flex-box mb-2 last:mb-0">
                                                 <BadgesTotal
@@ -499,10 +492,10 @@ export const Goals = () => {
                                 </div>
 
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Orbs
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
                                             <div key={alliance} className="flex-box mb-2 last:mb-0">
                                                 <OrbsTotal
@@ -516,10 +509,10 @@ export const Goals = () => {
                                 </div>
 
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Forge Badges
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <ForgeBadgesTotal
                                             badges={adjustedGoalsEstimates.neededForgeBadges}
                                             size={'medium'}
@@ -528,10 +521,10 @@ export const Goals = () => {
                                 </div>
 
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         MoW Components
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <MoWComponentsTotal
                                             components={adjustedGoalsEstimates.neededComponents}
                                             size={'medium'}
@@ -540,10 +533,10 @@ export const Goals = () => {
                                 </div>
 
                                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Mythic Upgrade Materials
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <div className="flex flex-wrap gap-1">
                                             {MYTHIC_UNCRAFTABLE_UPGRADES.map(upg => (
                                                 <div key={upg.id} className="flex flex-col items-center">
@@ -563,17 +556,15 @@ export const Goals = () => {
                                 </div>
                             </div>
                         </div>
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             </div>
             {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
                 <Accordion
+                    className="my-5"
                     expanded={sectionsExpanded.upgrades}
-                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
-                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}>
+                    <AccordionHeader>
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
@@ -587,8 +578,8 @@ export const Goals = () => {
                                 <MiscIcon icon={'energy'} height={15} width={15} />)
                             </span>
                         </div>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    </AccordionHeader>
+                    <AccordionBody>
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedUpgrades.map(goal => {
@@ -629,17 +620,15 @@ export const Goals = () => {
                                 goalsColorCoding={viewPreferences.goalColorMode}
                             />
                         )}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             )}
             {shardsGoals.length > 0 && (
                 <Accordion
+                    className="my-5"
                     expanded={sectionsExpanded.shards}
-                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}
-                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}>
+                    <AccordionHeader>
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
@@ -652,8 +641,8 @@ export const Goals = () => {
                                 <b>{shardOnslaughtTokensTotal}</b> Tokens)
                             </span>
                         </div>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    </AccordionHeader>
+                    <AccordionBody>
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedShards.map(goal => {
@@ -692,24 +681,22 @@ export const Goals = () => {
                                 goalsColorCoding={viewPreferences.goalColorMode}
                             />
                         )}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             )}
             {upgradeAbilities.length > 0 && (
                 <Accordion
+                    className="my-5"
                     expanded={sectionsExpanded.abilities}
-                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}
-                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="bg-(--muted) px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}>
+                    <AccordionHeader>
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                             </span>
                         </div>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    </AccordionHeader>
+                    <AccordionBody>
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedAbilities.map(goal => {
@@ -748,7 +735,7 @@ export const Goals = () => {
                                 goalsColorCoding={viewPreferences.goalColorMode}
                             />
                         )}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             )}
             {editGoal !== undefined &&

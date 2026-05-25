@@ -56,13 +56,13 @@ export const Sidebar = () => {
         'w-full flex items-center text-left px-2 py-1.5 gap-2.5 rounded-[7px] border-none cursor-pointer whitespace-nowrap text-[13px] border-l-2';
     const itemActiveClass = 'border-l-[var(--primary)] bg-[var(--primary)]/[.18] text-[var(--fg)] font-semibold';
     const itemInactiveClass =
-        'border-l-transparent bg-transparent text-[var(--muted-fg)] font-medium hover:bg-[var(--primary)]/[.08] hover:text-[var(--fg)]';
+        'border-l-transparent bg-transparent text-[var(--soft-fg)] font-medium hover:bg-[var(--primary)]/[.08] hover:text-[var(--fg)]';
 
     const subBase =
         'w-full block text-left pl-9 pr-2 py-1.5 rounded-[7px] border-none cursor-pointer whitespace-nowrap text-[12px] border-l-2';
     const subActiveClass = 'border-l-[var(--primary)] bg-[var(--primary)]/[.18] text-[var(--fg)] font-semibold';
     const subInactiveClass =
-        'border-l-transparent bg-transparent text-[var(--muted-fg)] font-normal hover:bg-[var(--primary)]/[.08] hover:text-[var(--fg)]';
+        'border-l-transparent bg-transparent text-[var(--soft-fg)] font-normal hover:bg-[var(--primary)]/[.08] hover:text-[var(--fg)]';
 
     return (
         <div
@@ -107,7 +107,7 @@ export const Sidebar = () => {
                             ) : (
                                 <button
                                     onClick={() => toggleSection(key)}
-                                    className="flex w-full cursor-pointer items-center gap-1 border-none bg-transparent px-1 py-1 text-left text-[var(--muted-fg)]">
+                                    className="flex w-full cursor-pointer items-center gap-1 border-none bg-transparent px-1 py-1 text-left text-[var(--soft-fg)]">
                                     {sectionsOpen[key] ? (
                                         <ExpandLessIcon className="!text-[11px]" />
                                     ) : (

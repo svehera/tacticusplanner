@@ -111,26 +111,26 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
             <table className="w-full border-collapse text-[13px]">
                 <thead>
                     <tr>
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             Node
                         </th>
                         <th className="border-b border-(--border) px-1 py-1.5" />
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             {isMobile ? 'Mat.' : 'Material / Shard'}
                         </th>
                         {!isMobile && (
-                            <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                            <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                                 Qty
                             </th>
                         )}
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             Savings
                         </th>
-                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                        <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                             {isMobile ? 'Total' : 'Cumulative'}
                         </th>
                         {!isMobile && (
-                            <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--muted-fg) uppercase">
+                            <th className="border-b border-(--border) px-2 py-1.5 text-left text-[11px] font-medium tracking-wider text-(--soft-fg) uppercase">
                                 Needed By
                             </th>
                         )}
@@ -150,7 +150,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                     <CampaignLocation location={savings.battle} short={true} unlocked={true} />
                                 </td>
                                 <td className="px-1 py-1.5 align-middle">
-                                    <ArrowForward sx={{ fontSize: 16 }} className="text-(--muted-fg)" />
+                                    <ArrowForward sx={{ fontSize: 16 }} className="text-(--soft-fg)" />
                                 </td>
                                 <td className="px-2 py-1.5 align-middle">
                                     <div className="flex items-center gap-1.5">

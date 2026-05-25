@@ -21,20 +21,20 @@ export const FactionSelect2 = ({
 }) => {
     return (
         <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-(--muted-fg)">{label}</label>
+            <label className="mb-2 block text-sm font-medium text-(--soft-fg)">{label}</label>
             <div className="relative">
                 <Listbox value={value} onChange={valueChanges} multiple>
                     <div className="relative">
                         <Listbox.Button className="relative flex min-h-10 w-full cursor-pointer items-center rounded-lg border border-(--input) bg-(--bg) py-1 pr-10 pl-3 text-left text-(--fg) shadow-sm transition-all hover:border-(--primary) focus:ring-2 focus:ring-(--ring) focus:outline-none">
                             <div className="flex flex-wrap items-center gap-2">
-                                {value.length === 0 && <span className="text-(--muted-fg)">Select factions</span>}
+                                {value.length === 0 && <span className="text-(--soft-fg)">Select factions</span>}
                                 {value.map(faction => (
                                     <FactionImage key={faction} faction={faction} />
                                 ))}
                             </div>
 
                             <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                                <ChevronsUpDown className="h-4 w-4 text-(--muted-fg)" />
+                                <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
                             </span>
                         </Listbox.Button>
 

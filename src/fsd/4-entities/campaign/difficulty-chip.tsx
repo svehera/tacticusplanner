@@ -27,7 +27,7 @@ export const DifficultyChip = ({ difficulty, compact = false, label: labelOverri
             style={
                 {
                     '--c': token,
-                    background: 'color-mix(in oklab, var(--c) 14%, var(--card-bg))',
+                    background: 'color-mix(in oklab, var(--c) 14%, var(--card))',
                     border: '1px solid color-mix(in oklab, var(--c) 45%, transparent)',
                     color: 'color-mix(in oklab, var(--c) 70%, var(--fg))',
                 } as React.CSSProperties
