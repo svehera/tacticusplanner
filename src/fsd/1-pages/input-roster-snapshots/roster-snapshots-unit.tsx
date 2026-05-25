@@ -33,8 +33,8 @@ export const RosterSnapshotsUnit: React.FC<Props> = ({
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
 
     return (
-        <div className="flex h-[200px] w-[110px] overflow-hidden rounded-lg border border-gray-200 bg-white shadow-xl transition duration-300 hover:border-blue-500/50 hover:shadow-2xl dark:border-gray-700/50 dark:bg-gray-800">
-            <div className="relative flex h-full w-full flex-shrink-0 items-center justify-center bg-gray-100 p-1 dark:bg-gray-900">
+        <div className="flex h-[200px] w-[110px] overflow-hidden rounded-lg border border-(--card-border) bg-(--card) shadow-sm transition duration-300 hover:border-(--primary)/50 hover:shadow-md">
+            <div className="relative flex h-full w-full flex-shrink-0 items-center justify-center bg-(--soft) p-1">
                 {char !== undefined && staticChar !== undefined && (
                     <UnitPortrait
                         showShards={showShards}

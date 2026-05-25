@@ -63,17 +63,17 @@ const renderSection = (
     const headingClass = headingClassByLevel[level as 1 | 2 | 3] ?? 'text-sm';
 
     const sectionClassByLevel = {
-        1: 'border-2 border-sky-500/50 bg-sky-950/10 shadow-sm',
-        2: 'border-2 border-indigo-500/45 bg-indigo-950/10',
-        3: 'border border-violet-500/40 bg-violet-950/10',
+        1: 'border-2 border-(--primary)/40 bg-(--primary)/5 shadow-sm',
+        2: 'border-2 border-(--primary)/30 bg-(--primary)/8',
+        3: 'border border-(--primary)/20 bg-(--primary)/6',
     } as const;
 
     const sectionClass = sectionClassByLevel[level as 1 | 2 | 3] ?? sectionClassByLevel[3];
 
     const headingAccentByLevel = {
-        1: 'text-sky-200',
-        2: 'text-indigo-200',
-        3: 'text-violet-200',
+        1: 'text-(--fg)',
+        2: 'text-(--fg)',
+        3: 'text-(--soft-fg)',
     } as const;
 
     const headingAccent = headingAccentByLevel[level as 1 | 2 | 3] ?? headingAccentByLevel[3];
@@ -84,8 +84,8 @@ const renderSection = (
                 type="button"
                 aria-expanded={isExpanded}
                 onClick={() => onToggleSection(section.id)}
-                className="mb-2 flex w-full items-center gap-2 rounded px-1 py-1 text-left hover:bg-white/5">
-                <span className="inline-flex w-5 items-center justify-center text-base leading-none font-bold text-gray-200">
+                className="mb-2 flex w-full items-center gap-2 rounded px-1 py-1 text-left hover:bg-(--fg)/5">
+                <span className="inline-flex w-5 items-center justify-center text-base leading-none font-bold text-(--soft-fg)">
                     {isExpanded ? '▾' : '▸'}
                 </span>
                 <span className={`font-semibold ${headingClass} ${headingAccent}`}>{section.title}</span>
@@ -94,7 +94,7 @@ const renderSection = (
                 <div className="flex flex-col gap-3">
                     {renderedSubsections}
                     {renderedTeams.map(team => (
-                        <div key={team.id} className="rounded-md border border-gray-600/60 bg-black/10 p-2">
+                        <div key={team.id} className="rounded-md border border-(--border) bg-(--fg)/5 p-2">
                             {!team.hideTitle && <div className="mb-2 text-sm font-medium">{team.title}</div>}
                             {team.diffItems.length > 0 && (
                                 <div className="mb-2 flex flex-wrap gap-2 sm:gap-5">{team.diffItems}</div>

@@ -11,8 +11,6 @@ import {
     Select,
     MenuItem,
     TextField,
-    Box,
-    Typography,
 } from '@mui/material';
 import React, { useState, useEffect, useMemo } from 'react';
 
@@ -148,10 +146,8 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
             <DialogTitle>Manage Roster Snapshots</DialogTitle>
             <DialogContent dividers>
                 {/* Display Options Section */}
-                <div className="flex flex-col gap-4 rounded border border-gray-200 p-4 dark:border-gray-700">
-                    <Typography variant="h6" gutterBottom>
-                        Display Options
-                    </Typography>
+                <div className="flex flex-col gap-4 rounded border border-(--border) p-4">
+                    <h3>Display Options</h3>
                     <div className="flex flex-col gap-4">
                         {/* Row 1: Shards */}
                         <div className="flex gap-4">
@@ -293,10 +289,8 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                     </div>
                 </div>
                 <div className="h-5"></div>
-                <div className="flex flex-col gap-4 rounded border border-gray-200 p-4 dark:border-gray-700">
-                    <Typography variant="h6" gutterBottom>
-                        Snapshot Management
-                    </Typography>
+                <div className="flex flex-col gap-4 rounded border border-(--border) p-4">
+                    <h3>Snapshot Management</h3>
                     <FormControl fullWidth disabled={allLiveSnapshots.length === 0}>
                         <InputLabel>Select Snapshot</InputLabel>
                         <Select
@@ -312,7 +306,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                     </FormControl>
 
                     {/* Rename Section */}
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                    <div className="flex items-start gap-2">
                         <TextField
                             disabled={allLiveSnapshots.length === 0}
                             fullWidth
@@ -325,14 +319,14 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                         <Button
                             variant="contained"
                             onClick={handleRename}
-                            sx={{ mt: 1 }}
+                            className="mt-2"
                             disabled={allLiveSnapshots.length === 0}>
                             Rename
                         </Button>
-                    </Box>
+                    </div>
 
                     {/* Restore Deleted Section */}
-                    <Box sx={{ display: 'flex', alignItems: 'flex-start', gap: 1 }}>
+                    <div className="flex items-start gap-2">
                         <FormControl fullWidth disabled={allDeletedSnapshots.length === 0}>
                             <InputLabel>Restore Deleted Snapshot</InputLabel>
                             <Select
@@ -349,15 +343,13 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                         <Button
                             variant="contained"
                             onClick={() => onRestoreSnapshot(selectedDeletedIndex)}
-                            sx={{ mt: 1 }}
+                            className="mt-2"
                             disabled={allDeletedSnapshots.length === 0}>
                             Restore
                         </Button>
-                    </Box>
+                    </div>
                     <div className="mt-4 flex flex-wrap items-center justify-between gap-2">
-                        <Typography variant="body2" color="text.secondary">
-                            Danger Zone
-                        </Typography>
+                        <p className="text-sm text-(--soft-fg)">Danger Zone</p>
                         <div>
                             <Button
                                 disabled={allLiveSnapshots.length === 0}
