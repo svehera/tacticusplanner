@@ -1,6 +1,4 @@
-﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { groupBy, map, orderBy } from 'lodash';
+﻿import { groupBy, map, orderBy } from 'lodash';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -8,6 +6,7 @@ import { isMobile } from 'react-device-detect';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rarity } from '@/fsd/5-shared/model';
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -124,19 +123,19 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
 
             {itemsGrouped.map(group => (
                 <Accordion key={group.rarity} defaultExpanded={!isMobile && !viewPreferences.craftableItemsInInventory}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <AccordionHeader>
                         <h2 className="flex items-center gap-1">
                             <RarityIcon rarity={group.rarity} /> <span>{group.label}</span>
                         </h2>
-                    </AccordionSummary>
-                    <AccordionDetails>
+                    </AccordionHeader>
+                    <AccordionBody>
                         <UpgradesGroup
                             group={group}
                             showAlphabet={viewPreferences.inventoryShowAlphabet}
                             showPlusMinus={viewPreferences.inventoryShowPlusMinus}
                             dataUpdate={update}
                         />
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             ))}
         </>

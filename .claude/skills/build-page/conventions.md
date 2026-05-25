@@ -66,6 +66,22 @@ Pick by the foreground you need on top:
 | `--accent`     | oklch(0.65 0.14 65)  | oklch(0.65 0.14 65)  | Decorative accent (amber-ish)                                         |
 | `--accent-fg`  | zinc-950             | zinc-950             | Text on accent background                                             |
 
+`--accent` is used for the `ButtonPill` toggle — on hover and active state the pill fills with the accent colour. It's intentionally distinct from `--primary` so toggled pills read as "selected" rather than "action."
+
+```tsx
+{
+    /* ButtonPill uses accent internally — you rarely reach for --accent directly */
+}
+<ButtonPill isSelected={active} onClick={toggle}>
+    Label
+</ButtonPill>;
+
+{
+    /* If you do need it manually: */
+}
+<span className="rounded-full bg-(--accent)/20 px-2 py-0.5 text-xs text-(--accent-fg)">New</span>;
+```
+
 ### Semantic state tokens
 
 | Token          | Light       | Dark        | Pair with      | Use for                                                                                                 |
@@ -76,6 +92,49 @@ Pick by the foreground you need on top:
 | `--warning-fg` | amber-950   | amber-950   | —              | Text on warning background                                                                              |
 | `--danger`     | red-600     | red-600     | `--danger-fg`  | Error / destructive states. No dark-mode shift — mostly used as badge background with --danger-fg text. |
 | `--danger-fg`  | red-50      | red-50      | —              | Text on danger background                                                                               |
+
+Common patterns for semantic state tokens:
+
+```tsx
+{/* Status icon — colour the icon directly */}
+<CheckCircle2 className="size-3.5 text-(--success)" />
+<AlertTriangle className="size-3.5 text-(--danger)" />
+
+{/* Inline status text */}
+<span className={completed ? 'text-(--success) font-semibold' : 'text-(--soft-fg)'}>
+    {count} / {total}
+</span>
+
+{/* Progress bar fill — success when full, warning when partial */}
+<div className="h-2 overflow-hidden rounded-full bg-(--fg)/12">
+    <div
+        className={`h-full transition-all ${isFull ? 'bg-(--success)' : 'bg-(--warning)'}`}
+        style={{ width: `${percent}%` }}
+    />
+</div>
+
+{/* Toggle button — success for included, danger for excluded */}
+<Button
+    appearance="outline"
+    className={
+        included
+            ? 'border-(--success)/50 text-(--success) hover:bg-(--success)/10'
+            : 'border-(--danger)/50 text-(--danger) hover:bg-(--danger)/10'
+    }
+    onPress={toggle}>
+    {included ? 'Included' : 'Excluded'}
+</Button>
+
+{/* Destructive hover action (e.g. delete icon button) */}
+<button className="text-(--soft-fg) hover:bg-(--danger)/10 hover:text-(--danger) rounded p-2 transition-colors">
+    <Trash2 className="size-4" />
+</button>
+
+{/* Solid badge — handled by the Badge component */}
+<Badge intent="success">Complete</Badge>
+<Badge intent="warning">Partial</Badge>
+<Badge intent="danger">Blocked</Badge>
+```
 
 ### Chart tokens
 
@@ -251,7 +310,7 @@ Import from `@/fsd/5-shared/ui`:
 - `Switch` — `isSelected`, `onChange` (receives boolean directly, not event), `children` (label), `isDisabled`
 - `Badge` — intents: primary/success/warning/danger; appearances: solid/outline
 - `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`
-- `Accordion`, `AccordionHeader`, `AccordionBody` — card-style collapsible. Controlled (`expanded`+`onToggle`) or uncontrolled (`defaultExpanded`). Prefer over MUI Accordion.
+- `Accordion`, `AccordionHeader`, `AccordionBody` — card-style collapsible. Controlled (`expanded`+`onToggle`) or uncontrolled (`defaultExpanded`). MUI `Accordion`/`AccordionSummary`/`AccordionDetails` are migration targets — use this component instead.
 - `Separator` — horizontal (default) or `orientation="vertical"`
 - `Modal`, `Dialog` — `Modal` wraps trigger + `Modal.Content`; inside use `Dialog.Header`, `Dialog.Body`, `Dialog.Footer`, `Dialog.Close`
 - `Loader` — variants: spin/bars/ring; sizes: small/medium/large/extra-large
