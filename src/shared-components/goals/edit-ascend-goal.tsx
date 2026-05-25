@@ -113,7 +113,7 @@ export const EditAscendGoal: React.FC<Props> = ({
                 </>
             )}
 
-            {goal.rarityEnd >= Rarity.Mythic && (
+            {goal.starsStart >= RarityStars.OneBlueStar && (
                 <>
                     {alliance && (
                         <div className="flex items-center gap-2 text-sm">

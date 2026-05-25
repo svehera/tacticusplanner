@@ -16,7 +16,7 @@ import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
-import { Alliance, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { Alliance, allianceFromString, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
 
@@ -367,7 +367,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                 unlockedLocations={unlockedLocations}
                                 unlockedMythicLocations={unlockedMythicLocations}
                                 farmType={form.farmType ?? 'both'}
-                                alliance={isCharacter(unit) ? unit.alliance : undefined}
+                                alliance={
+                                    isCharacter(unit) || isMow(unit) ? allianceFromString(unit.alliance) : undefined
+                                }
                                 onslaughtPreferences={onslaughtPreferences}
                                 onChange={handleAscendGoalChanges}
                             />
