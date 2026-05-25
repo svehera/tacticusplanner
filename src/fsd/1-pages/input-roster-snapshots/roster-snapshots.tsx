@@ -1353,7 +1353,7 @@ export const RosterSnapshots = () => {
                 onRestoreSnapshot={handleRestoreSnapshot}
                 onDone={handleManageDone}
             />
-            <div className="flex flex-wrap items-center gap-2 border-b border-(--border) p-2">
+            <div className="flex flex-wrap items-center gap-3 border-b border-(--border) px-1 py-3">
                 <SyncButton showText={!isMobile} />
                 <AccessibleTooltip title={getTakeSnapshotTitle()}>
                     <Button
@@ -1369,18 +1369,18 @@ export const RosterSnapshots = () => {
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
-                <div className="ml-2">
-                    <RosterFilterDropdown
-                        summaryLabel={rosterFilterSummaryLabel}
-                        teams={teamFilterOptions}
-                        teamTypes={teamTypeFilterOptions}
-                        legendaryEvents={legendaryEventFilterOptions}
-                        renderTeamIcons={renderTeamMemberIcons}
-                        onToggleTeam={toggleTeam}
-                        onToggleTeamType={toggleTeamType}
-                        onToggleLegendaryTrack={toggleLegendaryTrack}
-                    />
-                </div>
+                <div className="mx-1 hidden h-6 w-px bg-(--border) sm:block" />
+                <RosterFilterDropdown
+                    summaryLabel={rosterFilterSummaryLabel}
+                    teams={teamFilterOptions}
+                    teamTypes={teamTypeFilterOptions}
+                    legendaryEvents={legendaryEventFilterOptions}
+                    renderTeamIcons={renderTeamMemberIcons}
+                    onToggleTeam={toggleTeam}
+                    onToggleTeamType={toggleTeamType}
+                    onToggleLegendaryTrack={toggleLegendaryTrack}
+                />
+                <div className="mx-1 hidden h-6 w-px bg-(--border) sm:block" />
                 <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
 
@@ -1393,7 +1393,7 @@ export const RosterSnapshots = () => {
                         <select
                             id="left-snapshot"
                             value={leftIndex}
-                            className="rounded border border-(--border) bg-(--overlay) p-1 text-sm text-(--overlay-fg)"
+                            className="rounded border border-(--border) bg-(--overlay) p-1 text-sm text-(--overlay-fg) focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:outline-none"
                             onChange={event => {
                                 const newLeftIndex = Number.parseInt(event.target.value, 10);
                                 setLeftIndex(newLeftIndex);
@@ -1415,7 +1415,7 @@ export const RosterSnapshots = () => {
                         <select
                             id="right-snapshot"
                             value={rightIndex}
-                            className="rounded border border-(--border) bg-(--overlay) p-1 text-sm text-(--overlay-fg)"
+                            className="rounded border border-(--border) bg-(--overlay) p-1 text-sm text-(--overlay-fg) focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:outline-none"
                             onChange={event => {
                                 setRightIndex(Number.parseInt(event.target.value, 10));
                             }}>

@@ -267,9 +267,9 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     };
 
     return (
-        <div className="flex flex-col justify-start gap-2 overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition duration-300 hover:border-(--primary) hover:shadow-md">
+        <div className="flex flex-col justify-start gap-2 overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-[border-color,box-shadow] duration-150 hover:border-(--primary)/50 hover:shadow-md">
             <div className="flex min-h-30 w-82 justify-start">
-                <div className="relative flex h-full w-18 flex-shrink-0 items-center justify-center bg-(--soft) p-1">
+                <div className="relative flex h-full w-18 flex-shrink-0 items-center justify-center p-1">
                     {(staticChar || staticMow) && <CharacterPortraitImage icon={(staticChar || staticMow)!.icon} />}
                 </div>
 

@@ -288,8 +288,7 @@ export const ManageSnapshotsDialog: React.FC<ManageSnapshotsDialogProps> = ({
                         </FormControl>
                     </div>
                 </div>
-                <div className="h-5"></div>
-                <div className="flex flex-col gap-4 rounded border border-(--border) p-4">
+                <div className="mt-5 flex flex-col gap-4 rounded border border-(--border) p-4">
                     <h3>Snapshot Management</h3>
                     <FormControl fullWidth disabled={allLiveSnapshots.length === 0}>
                         <InputLabel>Select Snapshot</InputLabel>
