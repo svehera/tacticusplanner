@@ -6,8 +6,10 @@ import { Fragment, useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { FactionId, Rarity } from '@/fsd/5-shared/model';
+import { Button } from '@/fsd/5-shared/ui';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { FactionSelect2 } from '@/fsd/5-shared/ui/selects';
+import { Switch } from '@/fsd/5-shared/ui/switch';
 
 import { ICharacter2, ICharacterData, CharactersService } from '@/fsd/4-entities/character';
 import { IEquipment, EquipmentService, EQUIPMENT_TYPE_ORDER } from '@/fsd/4-entities/equipment';
@@ -47,19 +49,19 @@ const RarityMultiSelect = ({
 }) => {
     return (
         <div className="w-full">
-            <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Rarity</label>
+            <label className="mb-2 block text-sm font-medium text-(--soft-fg)">Rarity</label>
             <Listbox value={value} onChange={onChange} multiple disabled={disabled}>
                 <div className="relative">
                     <Listbox.Button
-                        className={`relative w-full rounded-lg border border-slate-300 py-2 pr-10 pl-3 text-left shadow-sm transition-all focus:ring-2 focus:ring-blue-500 focus:outline-none dark:border-slate-600 dark:bg-[#0f172a] dark:text-white ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer bg-white hover:border-blue-500'}`}>
+                        className={`relative w-full rounded-lg border border-(--input-border) bg-(--bg) py-2 pr-10 pl-3 text-left text-(--fg) shadow-sm transition-all focus:ring-2 focus:ring-(--ring) focus:outline-none ${disabled ? 'cursor-not-allowed opacity-50' : 'cursor-pointer hover:border-(--primary)'}`}>
                         <div className="flex flex-wrap items-center gap-1">
-                            {value.length === 0 && <span className="text-gray-400">All rarities</span>}
+                            {value.length === 0 && <span className="text-(--soft-fg)">All rarities</span>}
                             {value.map(r => (
                                 <RarityIcon key={r} rarity={r} />
                             ))}
                         </div>
                         <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronsUpDown className="h-4 w-4 text-gray-400" />
+                            <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
                         </span>
                     </Listbox.Button>
 
@@ -68,16 +70,14 @@ const RarityMultiSelect = ({
                         leave="transition ease-in duration-100"
                         leaveFrom="opacity-100"
                         leaveTo="opacity-0">
-                        <Listbox.Options className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-slate-200 bg-white py-1 shadow-xl dark:border-slate-700 dark:bg-[#161b22]">
+                        <Listbox.Options className="absolute z-50 mt-2 w-full overflow-auto rounded-lg border border-(--border) bg-(--overlay) py-1 shadow-xl">
                             {RARITY_ORDER.map(rarity => (
                                 <Listbox.Option
                                     key={rarity}
                                     value={rarity}
                                     className={({ active }) =>
                                         `relative cursor-pointer py-2 pr-4 pl-10 transition-colors select-none ${
-                                            active
-                                                ? 'bg-blue-50 text-blue-600 dark:bg-blue-900/20 dark:text-blue-400'
-                                                : 'text-gray-900 dark:text-gray-200'
+                                            active ? 'bg-(--primary)/10 text-(--primary)' : 'text-(--overlay-fg)'
                                         }`
                                     }>
                                     {({ selected }) => (
@@ -87,7 +87,7 @@ const RarityMultiSelect = ({
                                                 <span>{Rarity[rarity]}</span>
                                             </div>
                                             {selected && (
-                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-blue-600 dark:text-blue-400">
+                                                <span className="absolute inset-y-0 left-0 flex items-center pl-3 text-(--primary)">
                                                     <Check className="h-4 w-4" />
                                                 </span>
                                             )}
@@ -342,79 +342,80 @@ export const Equipment = () => {
     }, [inventory.items, equippedIndex]);
 
     return (
-        <div className="flex flex-col gap-6 p-4">
-            <div className="flex items-center justify-between">
-                <h1 className="text-2xl font-bold">Equipment</h1>
-                <span className="text-sm text-(--soft-fg)">{totalOwned} total pieces</span>
+        <div className="space-y-8 py-6">
+            <div>
+                <h2>Equipment</h2>
+                <p className="text-sm text-(--soft-fg)">{totalOwned} total pieces</p>
             </div>
 
             {onlyRelics && Date.now() < Date.UTC(2026, 4, 20, 23, 59, 59) && (
-                <h2 className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-base font-semibold text-amber-400">
+                <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-base font-semibold text-amber-400">
                     {'In-Game code, valid until May 20th: '}
                     <span className="font-mono tracking-wide">AHRIRELICWHEN</span>
-                </h2>
+                </div>
             )}
 
             {/* Filters */}
-            <div className="flex flex-wrap items-end gap-4 rounded-xl border border-(--border) bg-(--overlay) p-4">
-                {/* Rarity multi-select */}
-                <div className="min-w-[160px] flex-1">
-                    <RarityMultiSelect value={selectedRarities} onChange={setSelectedRarities} disabled={onlyRelics} />
+            <div className="overflow-hidden rounded-xl border border-(--border) bg-(--overlay)">
+                <div className="flex items-center gap-4 border-b border-(--border) px-4 py-2.5">
+                    <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">Filters</span>
+                    <div className="flex flex-1 items-center justify-end gap-3">
+                        <Switch isSelected={onlyRelics} onChange={handleOnlyRelicsChange}>
+                            Only Relics
+                        </Switch>
+                        <Button
+                            appearance="plain"
+                            intent="primary"
+                            size="extra-small"
+                            isDisabled={
+                                selectedRarities.length === 0 &&
+                                selectedFactions.length === 0 &&
+                                selectedCharacters.length === 0 &&
+                                !onlyRelics
+                            }
+                            onPress={() => {
+                                setSelectedRarities([]);
+                                setSavedRarities([]);
+                                setSelectedFactions([]);
+                                setSelectedCharacters([]);
+                                setOnlyRelics(false);
+                            }}>
+                            Clear
+                        </Button>
+                    </div>
                 </div>
+                <div className="flex flex-wrap items-start gap-4 p-4">
+                    {/* Rarity multi-select */}
+                    <div className="min-w-[160px] flex-1">
+                        <RarityMultiSelect
+                            value={selectedRarities}
+                            onChange={setSelectedRarities}
+                            disabled={onlyRelics}
+                        />
+                    </div>
 
-                {/* Faction multi-select */}
-                <div className="min-w-[180px] flex-1">
-                    <FactionSelect2
-                        label="Faction"
-                        factionValues={availableFactions}
-                        value={selectedFactions}
-                        valueChanges={setSelectedFactions}
-                    />
+                    {/* Faction multi-select */}
+                    <div className="min-w-[180px] flex-1">
+                        <FactionSelect2
+                            label="Faction"
+                            factionValues={availableFactions}
+                            value={selectedFactions}
+                            valueChanges={setSelectedFactions}
+                        />
+                    </div>
+
+                    {/* Character multi-select */}
+                    <div className="min-w-[220px] flex-1">
+                        <label className="mb-2 block text-sm font-medium text-(--soft-fg)">Character</label>
+                        <UnitsAutocomplete<ICharacter2>
+                            unit={selectedCharacters}
+                            options={characters}
+                            multiple
+                            label="Character"
+                            onUnitsChange={setSelectedCharacters}
+                        />
+                    </div>
                 </div>
-
-                {/* Character multi-select */}
-                <div className="min-w-[220px] flex-1">
-                    <label className="mb-2 block text-sm font-medium text-gray-700 dark:text-gray-300">Character</label>
-                    <UnitsAutocomplete<ICharacter2>
-                        unit={selectedCharacters}
-                        options={characters}
-                        multiple
-                        label="Character"
-                        onUnitsChange={setSelectedCharacters}
-                    />
-                </div>
-
-                {/* Only relics checkbox */}
-                <div className="flex items-center gap-2 pb-2">
-                    <input
-                        id="only-relics"
-                        type="checkbox"
-                        checked={onlyRelics}
-                        onChange={event => handleOnlyRelicsChange(event.target.checked)}
-                        className="h-4 w-4 cursor-pointer rounded border-gray-300"
-                    />
-                    <label htmlFor="only-relics" className="cursor-pointer text-sm font-medium">
-                        Only Relics
-                    </label>
-                </div>
-
-                {/* Clear filters */}
-                {(selectedRarities.length > 0 ||
-                    selectedFactions.length > 0 ||
-                    selectedCharacters.length > 0 ||
-                    onlyRelics) && (
-                    <button
-                        className="pb-2 text-sm text-blue-500 hover:underline"
-                        onClick={() => {
-                            setSelectedRarities([]);
-                            setSavedRarities([]);
-                            setSelectedFactions([]);
-                            setSelectedCharacters([]);
-                            setOnlyRelics(false);
-                        }}>
-                        Clear filters
-                    </button>
-                )}
             </div>
 
             {/* Results */}
@@ -425,15 +426,15 @@ export const Equipment = () => {
                         : 'No equipment matches the selected filters.'}
                 </div>
             ) : (
-                <div className="flex flex-col gap-8">
+                <div className="space-y-8">
                     {[...groupedEquipment.entries()].map(([type, items]) => (
                         <section key={type}>
-                            <h2 className="mb-3 text-lg font-semibold">
+                            <h3 className="mb-3">
                                 {TYPE_DISPLAY_NAMES[type] ?? type}
                                 <span className="ml-2 text-sm font-normal text-(--soft-fg)">
                                     ({items.length} {items.length === 1 ? 'item' : 'items'})
                                 </span>
-                            </h2>
+                            </h3>
                             <div className="grid grid-cols-1 gap-2 lg:grid-cols-2">
                                 {items.map(eq => (
                                     <EquipmentRow
