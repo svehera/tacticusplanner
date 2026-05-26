@@ -79,7 +79,7 @@
         /* ── Card ─────────────────────────────────── */
         --card: var(--color-white);
         --card-fg: var(--color-zinc-950);
-        --card-border: var(--color-zinc-200);
+        --card-border: var(--color-zinc-300);
 
         /* ── Sidebar ──────────────────────────────── */
         --sidebar: var(--color-zinc-50);
@@ -100,7 +100,7 @@
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-50);
         --data-surface-fg: var(--color-zinc-950);
-        --data-surface-border: var(--color-zinc-200);
+        --data-surface-border: var(--color-zinc-300);
 
         /* ── Brand / intent ───────────────────────── */
         --primary: oklch(0.45 0.2 265);
