@@ -257,8 +257,6 @@ export const buildBulkPlannedGoals = ({
                 dailyRaids: true,
                 targetRarity: entry.rarity,
                 targetStars: entry.stars as RarityStars,
-                shardsPerToken: 0,
-                mythicShardsPerToken: 0,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
                 mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
             });

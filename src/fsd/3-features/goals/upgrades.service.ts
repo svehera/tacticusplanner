@@ -2464,7 +2464,18 @@ export class UpgradesService {
                         ((this.isShard(upgradeId) &&
                             this.canOnslaughtCharacterForRegularShards(ascendGoal.unitId, chars, mows, ascendGoal)) ||
                             (this.isMythicShard(upgradeId) &&
-                                this.canOnslaughtCharacterForMythicShards(ascendGoal.unitId, chars, mows, ascendGoal)))
+                                (this.canOnslaughtCharacterForMythicShards(
+                                    ascendGoal.unitId,
+                                    chars,
+                                    mows,
+                                    ascendGoal
+                                ) ||
+                                    this.canOnslaughtCharacterForRegularShards(
+                                        ascendGoal.unitId,
+                                        chars,
+                                        mows,
+                                        ascendGoal
+                                    ))))
                     ) {
                         estimate.isBlocked = false;
                     }

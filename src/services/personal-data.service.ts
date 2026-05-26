@@ -1,6 +1,6 @@
 ﻿import { v4 } from 'uuid';
 
-import { Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
@@ -16,6 +16,7 @@ import {
 } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
@@ -155,6 +156,12 @@ export class PersonalDataLocalStorage {
                     ...defaultData.playerMetadata,
                     ...this.getItem<typeof defaultData.playerMetadata>('playerMetadata'),
                 },
+                onslaughtPreferences: this.getItem<IOnslaughtPreferences>('onslaughtPreferences') ??
+                    defaultData.onslaughtPreferences ?? {
+                        [Alliance.Imperial]: { sector: 'stone', tier: 1 },
+                        [Alliance.Xenos]: { sector: 'stone', tier: 1 },
+                        [Alliance.Chaos]: { sector: 'stone', tier: 1 },
+                    },
             };
         } else {
             // no version (convert v1 to v2)
