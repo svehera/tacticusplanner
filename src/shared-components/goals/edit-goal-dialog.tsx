@@ -157,17 +157,25 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     allowedValues={targetRankValues}
                                     startingRank={form.rankStart}
                                     startingPoint5={form.rankStartPoint5}
-                                    onStartChange={(startRank, startRankPoint5) =>
+                                    startingAppliedUpgrades={form.rankStartAppliedUpgrades ?? 0}
+                                    onStartChange={(startRank, startRankPoint5, startingRankAppliedUpgrades) =>
                                         setForm(current => ({
                                             ...current,
                                             rankStart: startRank,
                                             rankStartPoint5: startRankPoint5,
+                                            rankStartAppliedUpgrades: startingRankAppliedUpgrades,
                                         }))
                                     }
                                     rank={form.rankEnd}
                                     point5={form.rankPoint5}
-                                    onChange={(targetRank, rankPoint5) =>
-                                        setForm(current => ({ ...current, rankEnd: targetRank, rankPoint5 }))
+                                    appliedUpgrades={form.rankAppliedUpgrades ?? 0}
+                                    onChange={(targetRank, rankPoint5, rankAppliedUpgrades) =>
+                                        setForm(current => ({
+                                            ...current,
+                                            rankEnd: targetRank,
+                                            rankPoint5,
+                                            rankAppliedUpgrades,
+                                        }))
                                     }
                                 />
                             </div>

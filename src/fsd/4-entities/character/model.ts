@@ -212,4 +212,8 @@ export interface IRankLookup {
     rankStartPoint5: boolean;
     rankPoint5: boolean;
     upgradesRarity: Rarity[];
+    /** Adamantine+: number of upgrades already applied at the starting rank (1-5). Replaces rankStartPoint5 logic. */
+    rankStartAppliedUpgrades?: number;
+    /** Adamantine+: number of upgrades to include at the target rank (1-5). Replaces rankPoint5 logic. */
+    rankAppliedUpgrades?: number;
 }

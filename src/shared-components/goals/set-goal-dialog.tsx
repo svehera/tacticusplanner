@@ -234,10 +234,17 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (unit === undefined && form.type !== PersonalGoalType.UpgradeMaterial) return true;
 
         if (form.type === PersonalGoalType.UpgradeRank && isCharacter(unit)) {
-            const startRank =
-                ((form.startingRank ?? unit.rank ?? Rank.Stone1) as number) + (form.startingRankPoint5 ? 0.5 : 0);
-            const endRank = ((form.targetRank ?? unit.rank ?? Rank.Stone1) as number) + (form.rankPoint5 ? 0.5 : 0);
-            return (unit.rank === form.targetRank && !form.rankPoint5) || startRank >= endRank;
+            const startingRank = (form.startingRank ?? unit.rank ?? Rank.Stone1) as number;
+            const targetRank = (form.targetRank ?? unit.rank ?? Rank.Stone1) as number;
+            const startPartial =
+                startingRank >= Rank.Adamantine1
+                    ? (form.startingRankAppliedUpgrades ?? 0) / 6
+                    : form.startingRankPoint5
+                      ? 0.5
+                      : 0;
+            const endPartial =
+                targetRank >= Rank.Adamantine1 ? (form.rankAppliedUpgrades ?? 0) / 6 : form.rankPoint5 ? 0.5 : 0;
+            return startingRank + startPartial >= targetRank + endPartial;
         }
 
         if (form.type === PersonalGoalType.Ascend) {
@@ -340,13 +347,20 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                 allowedValues={rankValues}
                                 startingRank={form.startingRank ?? (unit as ICharacter2).rank ?? Rank.Stone1}
                                 startingPoint5={!!form.startingRankPoint5}
-                                onStartChange={(startingRank, startingRankPoint5) =>
-                                    setForm(current => ({ ...current, startingRank, startingRankPoint5 }))
+                                startingAppliedUpgrades={form.startingRankAppliedUpgrades ?? 0}
+                                onStartChange={(startingRank, startingRankPoint5, startingRankAppliedUpgrades) =>
+                                    setForm(current => ({
+                                        ...current,
+                                        startingRank,
+                                        startingRankPoint5,
+                                        startingRankAppliedUpgrades,
+                                    }))
                                 }
                                 rank={form.targetRank ?? (unit as ICharacter2).rank ?? Rank.Stone1}
                                 point5={!!form.rankPoint5}
-                                onChange={(targetRank, rankPoint5) =>
-                                    setForm(current => ({ ...current, targetRank, rankPoint5 }))
+                                appliedUpgrades={form.rankAppliedUpgrades ?? 0}
+                                onChange={(targetRank, rankPoint5, rankAppliedUpgrades) =>
+                                    setForm(current => ({ ...current, targetRank, rankPoint5, rankAppliedUpgrades }))
                                 }
                             />
                             <UpgradesRaritySelect

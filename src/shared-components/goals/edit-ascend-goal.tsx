@@ -125,8 +125,8 @@ export const EditAscendGoal: React.FC<Props> = ({
                             <span className="text-gray-500">Estimated mythic shards per onslaught:</span>
                             <span className="font-medium text-purple-600">
                                 {formatOnslaughtRewardRange(
-                                    Rarity.Legendary,
-                                    RarityStars.OneBlueStar,
+                                    goal.rarityStart,
+                                    goal.starsStart,
                                     onslaughtPreferences[alliance].sector,
                                     onslaughtPreferences[alliance].tier
                                 )}
