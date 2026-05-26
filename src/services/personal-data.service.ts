@@ -1,6 +1,6 @@
 ﻿import { v4 } from 'uuid';
 
-import { Rank } from '@/fsd/5-shared/model';
+import { Alliance, Rank } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
@@ -16,6 +16,7 @@ import {
 } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources/models';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income/models';
@@ -129,10 +130,38 @@ export class PersonalDataLocalStorage {
                     ...defaultData.gameModeTokens,
                     ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
-                armageddon: {
-                    ...defaultData.armageddon,
-                    ...(this.getItem<typeof defaultData.armageddon>('armageddon') ?? defaultData.armageddon),
+                armageddon: (() => {
+                    const stored = this.getItem<Record<string, unknown>>('armageddon');
+                    const base = {
+                        ...defaultData.armageddon,
+                        ...(stored ?? defaultData.armageddon),
+                    } as typeof defaultData.armageddon & { cart?: unknown };
+                    // Migrate legacy 'cart' field (JSON string from old version) to structuredCart
+                    if ('cart' in base) {
+                        const legacyCart = base.cart;
+                        const isEmpty = !base.structuredCart || Object.keys(base.structuredCart).length === 0;
+                        if (isEmpty && typeof legacyCart === 'string') {
+                            try {
+                                base.structuredCart = JSON.parse(legacyCart);
+                            } catch {
+                                base.structuredCart = {};
+                            }
+                        }
+                        delete (base as unknown as Record<string, unknown>).cart;
+                        this.setItem('armageddon', base);
+                    }
+                    return base;
+                })(),
+                playerMetadata: {
+                    ...defaultData.playerMetadata,
+                    ...this.getItem<typeof defaultData.playerMetadata>('playerMetadata'),
                 },
+                onslaughtPreferences: this.getItem<IOnslaughtPreferences>('onslaughtPreferences') ??
+                    defaultData.onslaughtPreferences ?? {
+                        [Alliance.Imperial]: { sector: 'stone', tier: 1 },
+                        [Alliance.Xenos]: { sector: 'stone', tier: 1 },
+                        [Alliance.Chaos]: { sector: 'stone', tier: 1 },
+                    },
             };
         } else {
             // no version (convert v1 to v2)
@@ -226,6 +255,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
     if (isV1Data(v1Data)) {
         return {
             schemaVersion: 2,
+            playerMetadata: {
+                playerName: undefined,
+                powerLevel: undefined,
+            },
             modifiedDate: v1Data.modifiedDate ? new Date(v1Data.modifiedDate) : defaultData.modifiedDate,
             autoTeamsPreferences: {
                 ...defaultData.autoTeamsPreferences,
@@ -277,10 +310,26 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             ...defaultData.gameModeTokens,
             ...v1Data.gameModeTokens,
         },
-        armageddon: {
-            ...defaultData.armageddon,
-            ...v1Data.armageddon,
-        },
+        armageddon: (() => {
+            const base = {
+                ...defaultData.armageddon,
+                ...v1Data.armageddon,
+            } as typeof defaultData.armageddon & { cart?: unknown };
+            // Migrate legacy 'cart' field (JSON string from old version) to structuredCart
+            if ('cart' in base) {
+                const legacyCart = base.cart;
+                const isEmpty = !base.structuredCart || Object.keys(base.structuredCart).length === 0;
+                if (isEmpty && typeof legacyCart === 'string') {
+                    try {
+                        base.structuredCart = JSON.parse(legacyCart);
+                    } catch {
+                        base.structuredCart = {};
+                    }
+                }
+                delete (base as unknown as Record<string, unknown>).cart;
+            }
+            return base;
+        })(),
     };
 };
 

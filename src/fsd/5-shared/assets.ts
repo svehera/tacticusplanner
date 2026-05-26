@@ -64,6 +64,72 @@ import legendaryEventToken from '@/assets/images/snowprint_assets/misc/ui_icon_r
 import onslaughtToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_onslaught.png';
 import salvageRunToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_salvage_run.png';
 import survivalToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_survival.png';
+import chaosOnslaught from '@/assets/images/snowprint_assets/onslaught/chaos.png';
+import imperialOnslaught from '@/assets/images/snowprint_assets/onslaught/imperial.png';
+import onslaughtAdamantine1 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_1.png';
+import onslaughtAdamantine2 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_2.png';
+import onslaughtAdamantine3 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_3.png';
+import onslaughtAdamantine4 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_4.png';
+import onslaughtBronze1 from '@/assets/images/snowprint_assets/onslaught/onslaught_bronze_1.png';
+import onslaughtBronze2 from '@/assets/images/snowprint_assets/onslaught/onslaught_bronze_2.png';
+import onslaughtBronze3 from '@/assets/images/snowprint_assets/onslaught/onslaught_bronze_3.png';
+import onslaughtBronze4 from '@/assets/images/snowprint_assets/onslaught/onslaught_bronze_4.png';
+import onslaughtDiamond1 from '@/assets/images/snowprint_assets/onslaught/onslaught_diamond_1.png';
+import onslaughtDiamond2 from '@/assets/images/snowprint_assets/onslaught/onslaught_diamond_2.png';
+import onslaughtDiamond3 from '@/assets/images/snowprint_assets/onslaught/onslaught_diamond_3.png';
+import onslaughtDiamond4 from '@/assets/images/snowprint_assets/onslaught/onslaught_diamond_4.png';
+import onslaughtGold1 from '@/assets/images/snowprint_assets/onslaught/onslaught_gold_1.png';
+import onslaughtGold2 from '@/assets/images/snowprint_assets/onslaught/onslaught_gold_2.png';
+import onslaughtGold3 from '@/assets/images/snowprint_assets/onslaught/onslaught_gold_3.png';
+import onslaughtGold4 from '@/assets/images/snowprint_assets/onslaught/onslaught_gold_4.png';
+import onslaughtIron1 from '@/assets/images/snowprint_assets/onslaught/onslaught_iron_1.png';
+import onslaughtIron2 from '@/assets/images/snowprint_assets/onslaught/onslaught_iron_2.png';
+import onslaughtIron3 from '@/assets/images/snowprint_assets/onslaught/onslaught_iron_3.png';
+import onslaughtIron4 from '@/assets/images/snowprint_assets/onslaught/onslaught_iron_4.png';
+import onslaughtSilver1 from '@/assets/images/snowprint_assets/onslaught/onslaught_silver_1.png';
+import onslaughtSilver2 from '@/assets/images/snowprint_assets/onslaught/onslaught_silver_2.png';
+import onslaughtSilver3 from '@/assets/images/snowprint_assets/onslaught/onslaught_silver_3.png';
+import onslaughtSilver4 from '@/assets/images/snowprint_assets/onslaught/onslaught_silver_4.png';
+import onslaughtStone1 from '@/assets/images/snowprint_assets/onslaught/onslaught_stone_1.png';
+import onslaughtStone2 from '@/assets/images/snowprint_assets/onslaught/onslaught_stone_2.png';
+import onslaughtStone3 from '@/assets/images/snowprint_assets/onslaught/onslaught_stone_3.png';
+import onslaughtStone4 from '@/assets/images/snowprint_assets/onslaught/onslaught_stone_4.png';
+import onslaughtFrameChallenge from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_challenge.png';
+import onslaughtFrameCommon from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_common.png';
+import onslaughtFrameEpic from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_epic.png';
+import onslaughtFrameLegendary from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_legendary.png';
+import onslaughtFrameMythic from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_mythic.png';
+import onslaughtFrameRare from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_rare.png';
+import onslaughtFrameUncommon from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_frame_uncommon.png';
+import onslaughtRankAdamantine1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_adamantine_1.png';
+import onslaughtRankAdamantine2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_adamantine_2.png';
+import onslaughtRankAdamantine3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_adamantine_3.png';
+import onslaughtRankAdamantine4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_adamantine_4.png';
+import onslaughtRankBronze1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_bronze_1.png';
+import onslaughtRankBronze2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_bronze_2.png';
+import onslaughtRankBronze3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_bronze_3.png';
+import onslaughtRankBronze4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_bronze_4.png';
+import onslaughtRankDiamond1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_diamond_1.png';
+import onslaughtRankDiamond2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_diamond_2.png';
+import onslaughtRankDiamond3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_diamond_3.png';
+import onslaughtRankDiamond4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_diamond_4.png';
+import onslaughtRankGold1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_gold_1.png';
+import onslaughtRankGold2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_gold_2.png';
+import onslaughtRankGold3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_gold_3.png';
+import onslaughtRankGold4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_gold_4.png';
+import onslaughtRankIron1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_iron_1.png';
+import onslaughtRankIron2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_iron_2.png';
+import onslaughtRankIron3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_iron_3.png';
+import onslaughtRankIron4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_iron_4.png';
+import onslaughtRankSilver1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_silver_1.png';
+import onslaughtRankSilver2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_silver_2.png';
+import onslaughtRankSilver3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_silver_3.png';
+import onslaughtRankSilver4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_silver_4.png';
+import onslaughtRankStone1 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_stone_1.png';
+import onslaughtRankStone2 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_stone_2.png';
+import onslaughtRankStone3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_stone_3.png';
+import onslaughtRankStone4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_stone_4.png';
+import xenosOnslaught from '@/assets/images/snowprint_assets/onslaught/xenos.png';
 import commonForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_common.png';
 import epicForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_epic.png';
 import legendaryForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_legendary.png';
@@ -476,4 +542,70 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: mythicSalvage,
         label: 'Mythic Salvage',
     },
+    onslaughtFrameChallenge: { file: onslaughtFrameChallenge, label: 'Onslaught Frame Challenge' },
+    onslaughtFrameCommon: { file: onslaughtFrameCommon, label: 'Onslaught Frame Common' },
+    onslaughtFrameEpic: { file: onslaughtFrameEpic, label: 'Onslaught Frame Epic' },
+    onslaughtFrameLegendary: { file: onslaughtFrameLegendary, label: 'Onslaught Frame Legendary' },
+    onslaughtFrameMythic: { file: onslaughtFrameMythic, label: 'Onslaught Frame Mythic' },
+    onslaughtFrameRare: { file: onslaughtFrameRare, label: 'Onslaught Frame Rare' },
+    onslaughtFrameUncommon: { file: onslaughtFrameUncommon, label: 'Onslaught Frame Uncommon' },
+    onslaughtRankStone1: { file: onslaughtRankStone1, label: 'Onslaught Stone 1' },
+    onslaughtRankStone2: { file: onslaughtRankStone2, label: 'Onslaught Stone 2' },
+    onslaughtRankStone3: { file: onslaughtRankStone3, label: 'Onslaught Stone 3' },
+    onslaughtRankStone4: { file: onslaughtRankStone4, label: 'Onslaught Stone 4' },
+    onslaughtRankIron1: { file: onslaughtRankIron1, label: 'Onslaught Iron 1' },
+    onslaughtRankIron2: { file: onslaughtRankIron2, label: 'Onslaught Iron 2' },
+    onslaughtRankIron3: { file: onslaughtRankIron3, label: 'Onslaught Iron 3' },
+    onslaughtRankIron4: { file: onslaughtRankIron4, label: 'Onslaught Iron 4' },
+    onslaughtRankBronze1: { file: onslaughtRankBronze1, label: 'Onslaught Bronze 1' },
+    onslaughtRankBronze2: { file: onslaughtRankBronze2, label: 'Onslaught Bronze 2' },
+    onslaughtRankBronze3: { file: onslaughtRankBronze3, label: 'Onslaught Bronze 3' },
+    onslaughtRankBronze4: { file: onslaughtRankBronze4, label: 'Onslaught Bronze 4' },
+    onslaughtRankSilver1: { file: onslaughtRankSilver1, label: 'Onslaught Silver 1' },
+    onslaughtRankSilver2: { file: onslaughtRankSilver2, label: 'Onslaught Silver 2' },
+    onslaughtRankSilver3: { file: onslaughtRankSilver3, label: 'Onslaught Silver 3' },
+    onslaughtRankSilver4: { file: onslaughtRankSilver4, label: 'Onslaught Silver 4' },
+    onslaughtRankGold1: { file: onslaughtRankGold1, label: 'Onslaught Gold 1' },
+    onslaughtRankGold2: { file: onslaughtRankGold2, label: 'Onslaught Gold 2' },
+    onslaughtRankGold3: { file: onslaughtRankGold3, label: 'Onslaught Gold 3' },
+    onslaughtRankGold4: { file: onslaughtRankGold4, label: 'Onslaught Gold 4' },
+    onslaughtRankDiamond1: { file: onslaughtRankDiamond1, label: 'Onslaught Diamond 1' },
+    onslaughtRankDiamond2: { file: onslaughtRankDiamond2, label: 'Onslaught Diamond 2' },
+    onslaughtRankDiamond3: { file: onslaughtRankDiamond3, label: 'Onslaught Diamond 3' },
+    onslaughtRankDiamond4: { file: onslaughtRankDiamond4, label: 'Onslaught Diamond 4' },
+    onslaughtRankAdamantine1: { file: onslaughtRankAdamantine1, label: 'Onslaught Adamantine 1' },
+    onslaughtRankAdamantine2: { file: onslaughtRankAdamantine2, label: 'Onslaught Adamantine 2' },
+    onslaughtRankAdamantine3: { file: onslaughtRankAdamantine3, label: 'Onslaught Adamantine 3' },
+    onslaughtRankAdamantine4: { file: onslaughtRankAdamantine4, label: 'Onslaught Adamantine 4' },
+    onslaughtStone1: { file: onslaughtStone1, label: 'Onslaught Stone 1' },
+    onslaughtStone2: { file: onslaughtStone2, label: 'Onslaught Stone 2' },
+    onslaughtStone3: { file: onslaughtStone3, label: 'Onslaught Stone 3' },
+    onslaughtStone4: { file: onslaughtStone4, label: 'Onslaught Stone 4' },
+    onslaughtIron1: { file: onslaughtIron1, label: 'Onslaught Iron 1' },
+    onslaughtIron2: { file: onslaughtIron2, label: 'Onslaught Iron 2' },
+    onslaughtIron3: { file: onslaughtIron3, label: 'Onslaught Iron 3' },
+    onslaughtIron4: { file: onslaughtIron4, label: 'Onslaught Iron 4' },
+    onslaughtBronze1: { file: onslaughtBronze1, label: 'Onslaught Bronze 1' },
+    onslaughtBronze2: { file: onslaughtBronze2, label: 'Onslaught Bronze 2' },
+    onslaughtBronze3: { file: onslaughtBronze3, label: 'Onslaught Bronze 3' },
+    onslaughtBronze4: { file: onslaughtBronze4, label: 'Onslaught Bronze 4' },
+    onslaughtSilver1: { file: onslaughtSilver1, label: 'Onslaught Silver 1' },
+    onslaughtSilver2: { file: onslaughtSilver2, label: 'Onslaught Silver 2' },
+    onslaughtSilver3: { file: onslaughtSilver3, label: 'Onslaught Silver 3' },
+    onslaughtSilver4: { file: onslaughtSilver4, label: 'Onslaught Silver 4' },
+    onslaughtGold1: { file: onslaughtGold1, label: 'Onslaught Gold 1' },
+    onslaughtGold2: { file: onslaughtGold2, label: 'Onslaught Gold 2' },
+    onslaughtGold3: { file: onslaughtGold3, label: 'Onslaught Gold 3' },
+    onslaughtGold4: { file: onslaughtGold4, label: 'Onslaught Gold 4' },
+    onslaughtDiamond1: { file: onslaughtDiamond1, label: 'Onslaught Diamond 1' },
+    onslaughtDiamond2: { file: onslaughtDiamond2, label: 'Onslaught Diamond 2' },
+    onslaughtDiamond3: { file: onslaughtDiamond3, label: 'Onslaught Diamond 3' },
+    onslaughtDiamond4: { file: onslaughtDiamond4, label: 'Onslaught Diamond 4' },
+    onslaughtAdamantine1: { file: onslaughtAdamantine1, label: 'Onslaught Adamantine 1' },
+    onslaughtAdamantine2: { file: onslaughtAdamantine2, label: 'Onslaught Adamantine 2' },
+    onslaughtAdamantine3: { file: onslaughtAdamantine3, label: 'Onslaught Adamantine 3' },
+    onslaughtAdamantine4: { file: onslaughtAdamantine4, label: 'Onslaught Adamantine 4' },
+    imperialOnslaughtMarker: { file: imperialOnslaught, label: 'Imperial Onslaught' },
+    xenosOnslaughtMarker: { file: xenosOnslaught, label: 'Xenos Onslaught' },
+    chaosOnslaughtMarker: { file: chaosOnslaught, label: 'Chaos Onslaught' },
 };

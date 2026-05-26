@@ -18,6 +18,7 @@ import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
 import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
+import { onslaughtMenuItem } from '@/fsd/1-pages/input-onslaught/onslaught.menu-item';
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
 import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
@@ -53,6 +54,7 @@ export class MenuItemTP {
 export const menuItemById = {
     wyo: wyoMenuItem,
     myProgress: myProgressMenuItem,
+    onslaught: onslaughtMenuItem,
     inventory: new MenuItemTP('Inventory', <InventoryIcon />, '/input/inventory'),
     resources: resourcesMenuItem,
     equipment: equipmentMenuItem,
@@ -93,6 +95,7 @@ export const menuItemById = {
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['rosterSnapshots'],
+    menuItemById['onslaught'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
     menuItemById['xpIncome'],

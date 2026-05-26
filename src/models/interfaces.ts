@@ -5,6 +5,7 @@ import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
 import { GuildAction } from '@/reducers/guild-reducer';
 import { GuildWarAction } from '@/reducers/guild-war-reducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
+import { PlayerMetadataAction, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';
 import { WarDefense2Action } from '@/reducers/war-defense2.reducer';
@@ -28,6 +29,7 @@ import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 import { IViewPreferences } from '@/fsd/3-features/view-settings';
 
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { IRosterSnapshotsState } from '@/fsd/1-pages/input-roster-snapshots/models';
 import { XpIncomeState } from '@/fsd/1-pages/input-xp-income';
@@ -44,6 +46,7 @@ import { GoalsAction } from '../reducers/goals.reducer';
 import { InventoryAction } from '../reducers/inventory.reducer';
 import { LeProgressAction } from '../reducers/le-progress.reducer';
 import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
+import { OnslaughtPreferencesAction } from '../reducers/onslaught-preferences.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 import { WarOffense2Action } from '../reducers/war-offense2.reducer';
@@ -101,6 +104,8 @@ export interface IGlobalState {
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
     armageddon: ArmageddonState;
+    playerMetadata: PlayerMetadataState;
+    onslaughtPreferences: IOnslaughtPreferences;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -134,6 +139,8 @@ export interface IDispatchContext {
     rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     gameModeTokens: React.Dispatch<GameModeTokensAction>;
     armageddon: React.Dispatch<ArmageddonAction>;
+    playerMetadata: React.Dispatch<PlayerMetadataAction>;
+    onslaughtPreferences: React.Dispatch<OnslaughtPreferencesAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -166,6 +173,8 @@ export interface IPersonalData2 {
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
     armageddon: ArmageddonState;
+    playerMetadata: PlayerMetadataState;
+    onslaughtPreferences?: IOnslaughtPreferences;
 }
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */
@@ -180,6 +189,8 @@ export interface TacticusTokensState {
 export interface IGameModeTokensState {
     tokens?: TacticusTokensState;
 }
+
+export type { IArmageddonCartEntry, IArmageddonCart } from '@/reducers/armageddon.reducer';
 
 export interface IGuild {
     members: IGuildMember[];
@@ -405,6 +416,7 @@ export interface IEstimatedRanksSettings {
     filters?: ICampaignsFilters;
     upgrades: Record<string, number>;
     onslaughtTokensToday?: number;
+    onslaughtPreferences?: IOnslaughtPreferences;
 }
 
 export interface IInventory {

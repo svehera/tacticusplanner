@@ -70,6 +70,13 @@ export const useSyncWithTacticus = () => {
 
             if (result.data) {
                 console.log('Tacticus API data for debug', result.data);
+                dispatch.playerMetadata({
+                    type: 'Set',
+                    value: {
+                        playerName: result.data.player.details.name,
+                        powerLevel: result.data.player.details.powerLevel,
+                    },
+                });
                 dispatch.mows({
                     type: 'SyncWithTacticus',
                     units: result.data.player.units,

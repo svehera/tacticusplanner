@@ -1,6 +1,7 @@
 export { BookSelect } from './book-select';
 export { FactionSelect2 } from './faction-select2';
 export { MultipleSelectCheckmarks } from './multiple-select';
+export { OnslaughtTierSelect } from './onslaught-tier-select';
 export { RankSelect2 } from './rank-select2';
 export { RaritySelect } from './rarity-select';
 export { RaritySelect2 } from './rarity-select2';

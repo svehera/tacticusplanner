@@ -52,6 +52,7 @@ export const DailyRaids = () => {
         campaignsProgress,
         dailyRaidsPreferences,
         inventory,
+        onslaughtPreferences,
     } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
@@ -63,8 +64,8 @@ export const DailyRaids = () => {
     );
     const units = useMemo(() => [...storeCharacters, ...resolvedMows], [storeCharacters, resolvedMows]);
     const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(() => {
-        return GoalsService.prepareGoals(goals, units, true);
-    }, [goals, units]);
+        return GoalsService.prepareGoals(goals, units, true, onslaughtPreferences);
+    }, [goals, units, onslaughtPreferences]);
 
     const hasSync = !!userInfo.tacticusApiKey;
 
@@ -130,6 +131,7 @@ export const DailyRaids = () => {
                 completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
                 filters: dailyRaids.filters,
                 onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
+                onslaughtPreferences,
             },
             resolvedCharacters,
             resolvedMows,
@@ -148,6 +150,9 @@ export const DailyRaids = () => {
         resolvedCharacters,
         resolvedMows,
         campaignsProgress,
+        gameModeTokens,
+        upgradeMaterialGoals,
+        onslaughtPreferences,
     ]);
 
     const infiniteEstimatedRanks: IEstimatedUpgrades = useMemo(() => {
@@ -160,6 +165,7 @@ export const DailyRaids = () => {
                 completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
                 filters: dailyRaids.filters,
                 onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
+                onslaughtPreferences,
             },
             resolvedCharacters,
             resolvedMows,
@@ -178,6 +184,9 @@ export const DailyRaids = () => {
         resolvedCharacters,
         resolvedMows,
         campaignsProgress,
+        gameModeTokens,
+        onslaughtPreferences,
+        upgradeMaterialGoals,
     ]);
 
     return (

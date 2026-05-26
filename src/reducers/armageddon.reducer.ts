@@ -1,17 +1,36 @@
 import type { SetStateAction } from '@/models/interfaces';
+import { migrateArmageddonState } from '@/reducers/migrations';
+
+export interface IArmageddonCartEntry {
+    week: 1 | 2 | 3;
+    slotIndex: number;
+    day: 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN';
+    quantity: number;
+    label: string;
+    rewardString: string;
+    costPerUnit: number;
+    maxQty: number | undefined;
+    qtyPerPack: number;
+}
+
+export type IArmageddonCart = Record<string, IArmageddonCartEntry>;
 
 export interface ArmageddonState {
     powerLevel: number;
     week: 1 | 2 | 3;
     day: string;
-    cart: string; // JSON-serialised CartRecord
+    cart?: string; // Serialized JSON
+    structuredCart?: IArmageddonCart;
+    purchased: Record<string, number>;
 }
 
 export const defaultArmageddonState: ArmageddonState = {
     powerLevel: 1,
     week: 1,
     day: 'MON',
-    cart: '{}',
+    cart: undefined,
+    structuredCart: {},
+    purchased: {},
 };
 
 export type ArmageddonAction =
@@ -21,7 +40,7 @@ export type ArmageddonAction =
 export const armageddonReducer = (state: ArmageddonState, action: ArmageddonAction): ArmageddonState => {
     switch (action.type) {
         case 'Set': {
-            return action.value ?? defaultArmageddonState;
+            return migrateArmageddonState(action.value) ?? defaultArmageddonState;
         }
         case 'Update': {
             return { ...state, [action.setting]: action.value };

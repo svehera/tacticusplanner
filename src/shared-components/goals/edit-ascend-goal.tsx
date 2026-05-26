@@ -3,13 +3,19 @@ import React, { useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { ICampaignBattleComposed, SHARD_FARM_TYPE_VALUES, ShardFarmType } from 'src/models/interfaces';
-import { NumbersInput } from 'src/shared-components/goals/numbers-input';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
+import { OnslaughtIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
+
+import {
+    formatOnslaughtRewardRange,
+    IOnslaughtPreferences,
+    defaultOnslaughtPreferences,
+} from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 
 interface Props {
     goal: ICharacterAscendGoal;
@@ -18,14 +24,16 @@ interface Props {
     possibleMythicLocations: ICampaignBattleComposed[];
     unlockedMythicLocations: string[];
     farmType: ShardFarmType;
+    alliance?: Alliance;
+    onslaughtPreferences?: IOnslaughtPreferences;
     onChange: (key: keyof ICharacterAscendGoal, value: number | ShardFarmType) => void;
 }
 
 export const EditAscendGoal: React.FC<Props> = ({
     goal,
-    possibleLocations,
-    possibleMythicLocations,
     farmType,
+    alliance,
+    onslaughtPreferences = defaultOnslaughtPreferences,
     onChange,
 }) => {
     const rarityValues = useMemo(() => {
@@ -76,57 +84,53 @@ export const EditAscendGoal: React.FC<Props> = ({
                 />
             </div>
 
-            {(goal.rarityStart < Rarity.Mythic || goal.starsStart < RarityStars.OneBlueStar) && (
-                <>
-                    {possibleLocations.length > 0 && (
-                        <div className="flex gap-3">
-                            <div className="w-1/2">
-                                <NumbersInput
-                                    title="Shards per onslaught"
-                                    helperText="Put 0 to ignore Onslaught raids"
-                                    value={goal.onslaughtShards}
-                                    valueChange={value => onChange('onslaughtShards', value)}
-                                />
-                            </div>
-                        </div>
-                    )}
+            <div>
+                <span className="text-sm text-gray-500">
+                    Change your onslaught sector by going to input &gt; onslaught
+                </span>
+            </div>
 
-                    {possibleLocations.length === 0 && (
-                        <div className="flex-box gap10 full-width">
-                            <NumbersInput
-                                title="Shards per onslaught"
-                                helperText="You should put more than 0 to be able to create the goal"
-                                value={goal.onslaughtShards}
-                                valueChange={value => onChange('onslaughtShards', value)}
+            {goal.starsStart < RarityStars.OneBlueStar && (
+                <>
+                    {alliance && (
+                        <div className="flex items-center gap-2 text-sm">
+                            <OnslaughtIcon
+                                sector={onslaughtPreferences[alliance].sector}
+                                tier={onslaughtPreferences[alliance].tier}
+                                size={24}
                             />
+                            <span className="text-gray-500">Estimated shards per onslaught:</span>
+                            <span className="font-medium">
+                                {formatOnslaughtRewardRange(
+                                    goal.rarityStart,
+                                    goal.starsStart,
+                                    onslaughtPreferences[alliance].sector,
+                                    onslaughtPreferences[alliance].tier
+                                )}
+                            </span>
                         </div>
                     )}
                 </>
             )}
 
-            {goal.rarityEnd >= Rarity.Mythic && (
+            {goal.starsStart >= RarityStars.OneBlueStar && (
                 <>
-                    {possibleMythicLocations.length > 0 && (
-                        <div className="flex gap-3">
-                            <div className="w-1/2">
-                                <NumbersInput
-                                    title="Mythic Shards per onslaught"
-                                    helperText="Put 0 to ignore mythic Onslaught raids"
-                                    value={goal.onslaughtMythicShards}
-                                    valueChange={value => onChange('onslaughtMythicShards', value)}
-                                />
-                            </div>
-                        </div>
-                    )}
-
-                    {possibleMythicLocations.length === 0 && (
-                        <div className="flex-box gap10 full-width">
-                            <NumbersInput
-                                title="Mythic Shards per onslaught"
-                                helperText="You should put more than 0 to be able to create the goal"
-                                value={goal.onslaughtMythicShards}
-                                valueChange={value => onChange('onslaughtMythicShards', value)}
+                    {alliance && (
+                        <div className="flex items-center gap-2 text-sm">
+                            <OnslaughtIcon
+                                sector={onslaughtPreferences[alliance].sector}
+                                tier={onslaughtPreferences[alliance].tier}
+                                size={24}
                             />
+                            <span className="text-gray-500">Estimated mythic shards per onslaught:</span>
+                            <span className="font-medium text-purple-600">
+                                {formatOnslaughtRewardRange(
+                                    Rarity.Legendary,
+                                    RarityStars.OneBlueStar,
+                                    onslaughtPreferences[alliance].sector,
+                                    onslaughtPreferences[alliance].tier
+                                )}
+                            </span>
                         </div>
                     )}
                 </>
