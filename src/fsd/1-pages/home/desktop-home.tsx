@@ -24,7 +24,7 @@ export const DesktopHome = () => {
     const nextLeMenuItem = LegendaryEventService.getActiveEvent();
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_138.webp'),
+        current: getImageUrl('calendar/calendar_139.webp'),
     };
 
     const announcements = () => {
