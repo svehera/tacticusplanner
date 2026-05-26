@@ -98,7 +98,7 @@ export const CharactersGrid = ({
                         showMythicShards={RosterSnapshotShowVariableSettings.Always}
                         showXpLevel={RosterSnapshotShowVariableSettings.Never}
                         showAbilities={RosterSnapshotShowVariableSettings.Never}
-                        showEquipment={RosterSnapshotShowVariableSettings.Always}
+                        showEquipment={RosterSnapshotShowVariableSettings.Never}
                         showTooltip={true}
                         isDisabled={false}
                     />
