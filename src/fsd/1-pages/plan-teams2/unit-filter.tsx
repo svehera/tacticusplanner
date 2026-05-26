@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
-import { FactionSelect2, RankSelect2, RaritySelect2 } from '@/fsd/5-shared/ui';
+import { FactionSelect, RankSelect, RaritySelect } from '@/fsd/5-shared/ui';
 
 const RARITIES = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
 
@@ -116,13 +116,13 @@ export const UnitFilter: React.FC<Props> = ({
                         </label>
 
                         <div className="grid grid-cols-2 gap-3">
-                            <RaritySelect2
+                            <RaritySelect
                                 label="Min"
                                 rarityValues={RARITIES}
                                 value={minRarity}
                                 valueChanges={onMinRarityChange}
                             />
-                            <RaritySelect2
+                            <RaritySelect
                                 label="Max"
                                 rarityValues={RARITIES}
                                 value={maxRarity}
@@ -138,18 +138,8 @@ export const UnitFilter: React.FC<Props> = ({
                         </label>
 
                         <div className="grid grid-cols-2 gap-3">
-                            <RankSelect2
-                                label="Min"
-                                rankValues={RANKS}
-                                value={minRank}
-                                valueChanges={onMinRankChange}
-                            />
-                            <RankSelect2
-                                label="Max"
-                                rankValues={RANKS}
-                                value={maxRank}
-                                valueChanges={onMaxRankChange}
-                            />
+                            <RankSelect label="Min" rankValues={RANKS} value={minRank} valueChanges={onMinRankChange} />
+                            <RankSelect label="Max" rankValues={RANKS} value={maxRank} valueChanges={onMaxRankChange} />
                         </div>
                     </div>
                 </div>
@@ -160,7 +150,7 @@ export const UnitFilter: React.FC<Props> = ({
                         Factions
                     </label>
 
-                    <FactionSelect2
+                    <FactionSelect
                         label=""
                         value={factions}
                         factionValues={allFactions}

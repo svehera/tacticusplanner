@@ -1,9 +1,18 @@
+// Primitives
+export { Select } from './select';
+export type { SelectProps } from './select';
+export { SelectMulti } from './select-multi';
+export type { SelectMultiProps } from './select-multi';
+export { ComboBox } from './combo-box';
+export type { ComboBoxProps } from './combo-box';
+export { ComboBoxMulti } from './combo-box-multi';
+export type { ComboBoxMultiProps } from './combo-box-multi';
+
+// Domain selects
 export { BookSelect } from './book-select';
-export { FactionSelect2 } from './faction-select2';
+export { FactionSelect } from './faction-select';
 export { MultipleSelectCheckmarks } from './multiple-select';
 export { OnslaughtTierSelect } from './onslaught-tier-select';
-export { RankSelect2 } from './rank-select2';
+export { RankSelect } from './rank-select';
 export { RaritySelect } from './rarity-select';
-export { RaritySelect2 } from './rarity-select2';
 export { StarsSelect } from './stars-select';
-export { StarsSelect2 } from './stars-select2';

@@ -110,7 +110,7 @@ These have shared replacements; reach for them rather than rebuilding:
 - MUI `Card` → `<Card>` from `@/fsd/5-shared/ui/card`
 - MUI `Divider` → `<Separator>`
 - MUI `CircularProgress` / `LinearProgress` → `<Loader>` or the token ProgressBar pattern
-- Raw `<select>` for rarity / rank / stars / faction → `RaritySelect2` / `RankSelect2` / `StarsSelect2` / `FactionSelect2` from `@/fsd/5-shared/ui/selects`
+- Raw `<select>` for rarity / rank / stars / faction → `RaritySelect` / `RankSelect` / `StarsSelect` / `FactionSelect` from `@/fsd/5-shared/ui/selects`. For custom selects use the generic `Select<T>`, `SelectMulti<T>`, `ComboBox<T>`, `ComboBoxMulti<T>` primitives.
 
 **Styling approach**
 
@@ -242,7 +242,7 @@ Common failures specific to this kind of refactor:
 
 - `Button` uses `onPress`, not `onClick`. React-aria signature.
 - `Switch` uses `isSelected`, not `checked` or `value`. The `onChange` receives the boolean directly, not a DOM event.
-- `RaritySelect2` / `RankSelect2` / `StarsSelect2` expect the typed enum (`Rarity`, `Rank`, `RarityStars`), not raw `number`. If TypeScript complains, cast at the boundary.
+- `RaritySelect` / `RankSelect` / `StarsSelect` expect the typed enum (`Rarity`, `Rank`, `RarityStars`), not raw `number`. If TypeScript complains, cast at the boundary.
 - Prettier may rewrite files you didn't touch if they were already malformatted — run `npm run format` to auto-fix.
 
 Don't report done until all four pass.

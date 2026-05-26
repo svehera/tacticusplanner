@@ -1,6 +1,5 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { Listbox, Transition } from '@headlessui/react';
 import {
     AllCommunityModule,
     type ColDef,
@@ -16,10 +15,8 @@ import {
     ArrowRight,
     ArrowUp,
     Calendar,
-    Check,
     CheckCircle2,
     ChevronDown,
-    ChevronsUpDown,
     Download,
     Edit,
     ExternalLink,
@@ -30,7 +27,7 @@ import {
     Trash2,
     X,
 } from 'lucide-react';
-import React, { Fragment, useContext, useEffect, useMemo, useRef, useState } from 'react';
+import React, { useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { StoreContext } from 'src/reducers/store.provider';
@@ -46,11 +43,13 @@ import { Loader } from '@/fsd/5-shared/ui/loader';
 import { Dialog } from '@/fsd/5-shared/ui/modal/dialog';
 import { Modal } from '@/fsd/5-shared/ui/modal/modal';
 import {
-    FactionSelect2,
-    MultipleSelectCheckmarks,
-    RankSelect2,
-    RaritySelect2,
-    StarsSelect2,
+    ComboBox,
+    FactionSelect,
+    RankSelect,
+    RaritySelect,
+    Select,
+    SelectMulti as SelectMultiPrimitive,
+    StarsSelect,
 } from '@/fsd/5-shared/ui/selects';
 import { Separator } from '@/fsd/5-shared/ui/separator';
 import { Slider } from '@/fsd/5-shared/ui/slider';
@@ -456,16 +455,16 @@ const DomainSelectsShowcase = () => {
     return (
         <div className="flex flex-wrap gap-4">
             <div className="w-44">
-                <RaritySelect2 label="Rarity" rarityValues={RARITY_VALUES} value={rarity} valueChanges={setRarity} />
+                <RaritySelect label="Rarity" rarityValues={RARITY_VALUES} value={rarity} valueChanges={setRarity} />
             </div>
             <div className="w-64">
-                <RankSelect2 label="Rank" rankValues={RANK_VALUES} value={rank} valueChanges={setRank} />
+                <RankSelect label="Rank" rankValues={RANK_VALUES} value={rank} valueChanges={setRank} />
             </div>
             <div className="w-56">
-                <StarsSelect2 label="Stars" starsValues={STARS_VALUES} value={stars} valueChanges={setStars} />
+                <StarsSelect label="Stars" starsValues={STARS_VALUES} value={stars} valueChanges={setStars} />
             </div>
             <div className="w-56">
-                <FactionSelect2
+                <FactionSelect
                     label="Faction"
                     factionValues={allFactions}
                     value={factions}
@@ -618,28 +617,22 @@ const RadioGroupShowcase = () => {
 
 // ─── MUI multi-select demo ────────────────────────────────────────────────────
 
-const MUI_TRAITS = [
-    'Psyker',
-    'Flying',
-    'Big Target',
-    'Ranged Specialist',
-    'Mechanical',
-    'Crushing Strike',
-    'Final Vengeance',
-    'Parry',
-    'Resilient',
-];
+const COMBOBOX_UNITS = ['Bellator', 'Abraxas', 'Marneus Calgar', 'Ragnar', 'Sho\u2019syl', 'Thaddeus Noble', 'Certus'];
 
-const MuiMultiSelectDemo = () => {
-    const [selected, setSelected] = useState<string[]>([]);
+const ComboBoxDemo = () => {
+    // eslint-disable-next-line unicorn/no-null -- Headless UI Combobox requires null for empty state
+    const [selected, setSelected] = useState<string | null>(null);
     return (
-        <MultipleSelectCheckmarks
-            values={MUI_TRAITS}
-            selectedValues={selected}
-            selectionChanges={setSelected}
-            placeholder="Traits"
-            minWidth={280}
-        />
+        <div className="w-64">
+            <ComboBox<string>
+                options={COMBOBOX_UNITS}
+                value={selected}
+                onChange={setSelected}
+                displayValue={v => v}
+                label="ComboBox (single)"
+                placeholder="Search units…"
+            />
+        </div>
     );
 };
 
@@ -679,138 +672,10 @@ const VIEW_MODES = [
     { value: 'grid', label: 'Grid' },
 ];
 
-// shared dropdown styles
-const dropTrigger = [
-    'relative w-full cursor-pointer rounded-lg border border-(--border) bg-(--bg)',
-    'py-2 pr-9 pl-3 text-left text-sm text-(--fg) shadow-sm',
-    'transition-all hover:border-(--primary) focus:outline-none focus:ring-2 focus:ring-(--primary)',
-].join(' ');
-
-const dropPanel =
-    'absolute z-50 mt-1 w-full overflow-auto rounded-lg border border-(--border) bg-(--overlay) py-1 shadow-xl';
-
-// ── Select (single) ───────────────────────────────────────────────────────────
-
 interface SelectOption {
     value: string;
     label: string;
 }
-
-const SelectSingle = ({
-    label,
-    options,
-    value,
-    onChange,
-    placeholder = 'Select…',
-}: {
-    label?: string;
-    options: SelectOption[];
-    value: string | undefined;
-    onChange: (v: string | undefined) => void;
-    placeholder?: string;
-}) => (
-    <div className="w-full">
-        {label && <label className="mb-1.5 block text-sm font-medium text-(--soft-fg)">{label}</label>}
-        <Listbox value={value} onChange={onChange}>
-            <div className="relative">
-                <Listbox.Button className={dropTrigger}>
-                    <span className={value ? '' : 'text-(--soft-fg)'}>
-                        {value ? (options.find(o => o.value === value)?.label ?? placeholder) : placeholder}
-                    </span>
-                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--soft-fg)" />
-                </Listbox.Button>
-                <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
-                    <Listbox.Options className={dropPanel}>
-                        {options.map(opt => (
-                            <Listbox.Option
-                                key={opt.value}
-                                value={opt.value}
-                                className={({ active }) =>
-                                    `relative cursor-pointer py-2 pr-4 pl-9 text-sm text-(--fg) transition-colors select-none ${active ? 'bg-(--primary)/18' : ''}`
-                                }>
-                                {({ selected }) => (
-                                    <>
-                                        {opt.label}
-                                        {selected && (
-                                            <span className="absolute inset-y-0 left-0 flex items-center pl-2.5 text-(--primary)">
-                                                <Check className="h-4 w-4" />
-                                            </span>
-                                        )}
-                                    </>
-                                )}
-                            </Listbox.Option>
-                        ))}
-                    </Listbox.Options>
-                </Transition>
-            </div>
-        </Listbox>
-    </div>
-);
-
-// ── Select (multi) ────────────────────────────────────────────────────────────
-
-const SelectMulti = ({
-    label,
-    options,
-    value,
-    onChange,
-    placeholder = 'All',
-}: {
-    label?: string;
-    options: SelectOption[];
-    value: string[];
-    onChange: (v: string[]) => void;
-    placeholder?: string;
-}) => (
-    <div className="w-full">
-        {label && <label className="mb-1.5 block text-sm font-medium text-(--soft-fg)">{label}</label>}
-        <Listbox value={value} onChange={onChange} multiple>
-            <div className="relative">
-                <Listbox.Button className={dropTrigger}>
-                    {value.length === 0 ? (
-                        <span className="text-(--soft-fg)">{placeholder}</span>
-                    ) : (
-                        <span>{value.length} selected</span>
-                    )}
-                    <ChevronsUpDown className="pointer-events-none absolute top-1/2 right-2.5 h-4 w-4 -translate-y-1/2 text-(--soft-fg)" />
-                </Listbox.Button>
-                <Transition
-                    as={Fragment}
-                    leave="transition ease-in duration-100"
-                    leaveFrom="opacity-100"
-                    leaveTo="opacity-0">
-                    <Listbox.Options className={dropPanel}>
-                        {options.map(opt => (
-                            <Listbox.Option
-                                key={opt.value}
-                                value={opt.value}
-                                className={({ active }) =>
-                                    `cursor-pointer text-sm text-(--fg) transition-colors select-none ${active ? 'bg-(--primary)/18' : ''}`
-                                }>
-                                {({ selected }) => (
-                                    <div className="flex items-center gap-2.5 px-3 py-2">
-                                        <div
-                                            className={[
-                                                'flex h-4 w-4 shrink-0 items-center justify-center rounded border transition-colors',
-                                                selected ? 'border-(--primary) bg-(--primary)' : 'border-(--border)',
-                                            ].join(' ')}>
-                                            {selected && <Check className="h-3 w-3 text-white" />}
-                                        </div>
-                                        {opt.label}
-                                    </div>
-                                )}
-                            </Listbox.Option>
-                        ))}
-                    </Listbox.Options>
-                </Transition>
-            </div>
-        </Listbox>
-    </div>
-);
 
 // ── Segmented control ─────────────────────────────────────────────────────────
 
@@ -866,26 +731,26 @@ const TextSearchShowcase = () => {
 };
 
 const SelectShowcase = () => {
-    const [sort, setSort] = useState<string | undefined>();
-    const [campaign, setCampaign] = useState<string | undefined>();
+    const [sort, setSort] = useState(SORT_OPTIONS[0].value);
+    const [campaign, setCampaign] = useState(CAMPAIGN_OPTIONS[0].value);
     return (
         <div className="flex flex-wrap gap-4">
             <div className="w-44">
-                <SelectSingle
+                <Select
                     value={sort}
                     onChange={setSort}
                     label="Sort by"
-                    options={SORT_OPTIONS}
-                    placeholder="Default"
+                    options={SORT_OPTIONS.map(o => o.value)}
+                    renderOption={v => SORT_OPTIONS.find(o => o.value === v)?.label ?? v}
                 />
             </div>
             <div className="w-48">
-                <SelectSingle
+                <Select
                     value={campaign}
                     onChange={setCampaign}
                     label="Campaign"
-                    options={CAMPAIGN_OPTIONS}
-                    placeholder="All campaigns"
+                    options={CAMPAIGN_OPTIONS.map(o => o.value)}
+                    renderOption={v => CAMPAIGN_OPTIONS.find(o => o.value === v)?.label ?? v}
                 />
             </div>
         </div>
@@ -896,11 +761,12 @@ const MultiSelectShowcase = () => {
     const [traits, setTraits] = useState<string[]>([]);
     return (
         <div className="w-52">
-            <SelectMulti
+            <SelectMultiPrimitive
                 value={traits}
                 onChange={setTraits}
                 label="Traits"
-                options={TRAIT_OPTIONS}
+                options={TRAIT_OPTIONS.map(o => o.value)}
+                renderOption={v => TRAIT_OPTIONS.find(o => o.value === v)?.label ?? v}
                 placeholder="All traits"
             />
         </div>
@@ -2682,8 +2548,8 @@ export const UiKitPage = () => {
                 <Group label="Rarity · Rank · Stars · Faction">
                     <DomainSelectsShowcase />
                 </Group>
-                <Group label="MUI Autocomplete multi-select">
-                    <MuiMultiSelectDemo />
+                <Group label="ComboBox (searchable single-select)">
+                    <ComboBoxDemo />
                 </Group>
             </Section>
 

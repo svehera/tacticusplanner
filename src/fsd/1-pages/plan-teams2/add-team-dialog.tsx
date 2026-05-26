@@ -7,7 +7,7 @@ import { ICharacter2 } from '@/models/interfaces';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { RaritySelect2 } from '@/fsd/5-shared/ui/selects/rarity-select2';
+import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
@@ -210,7 +210,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                         <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Rarity Cap</span>
 
                         <div className="min-w-[180px]">
-                            <RaritySelect2
+                            <RaritySelect
                                 rarityValues={[
                                     Rarity.Common,
                                     Rarity.Uncommon,

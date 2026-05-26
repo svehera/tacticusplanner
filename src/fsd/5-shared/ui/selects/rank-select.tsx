@@ -1,31 +1,30 @@
-import { Rarity } from '@/fsd/5-shared/model';
-
-import { RarityIcon } from '../icons';
+import { Rank } from '@/fsd/5-shared/model';
+import { RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { Select } from './select';
 
-export const RaritySelect = ({
-    rarityValues,
+export const RankSelect = ({
+    rankValues,
     value,
     valueChanges,
     label,
     hideText = false,
 }: {
-    label?: string;
-    rarityValues: number[];
+    label: string;
+    rankValues: number[];
     value: number;
     valueChanges: (value: number) => void;
     hideText?: boolean;
 }) => (
     <Select
-        options={rarityValues}
+        options={rankValues}
         value={value}
         onChange={valueChanges}
         label={label}
-        renderOption={rarity => (
+        renderOption={rank => (
             <div className="flex items-center gap-2">
-                <RarityIcon rarity={rarity} />
-                {!hideText && <span>{Rarity[rarity]}</span>}
+                <RankIcon rank={rank} />
+                {!hideText && <span>{Rank[rank]}</span>}
             </div>
         )}
     />

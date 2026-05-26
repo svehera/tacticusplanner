@@ -24,9 +24,9 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
-import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
+import { MultipleSelectCheckmarks, RankSelect, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
-import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { useCharacters } from './characters-column-defs';
 

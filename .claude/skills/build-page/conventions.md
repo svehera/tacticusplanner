@@ -323,12 +323,18 @@ Import from `@/fsd/5-shared/ui`:
 
 Import from `@/fsd/5-shared/ui/selects`:
 
-- `RaritySelect2` — single, `rarityValues: Rarity[]`, `value: Rarity`
-- `RankSelect2` — single, `rankValues: Rank[]`, `value: Rank`
-- `StarsSelect2` — single, `starsValues: RarityStars[]`, `value: RarityStars`
-- `FactionSelect2` — multi, `factionValues: FactionId[]`, `value: FactionId[]`
-- `MultipleSelectCheckmarks` — MUI-based multi, `values: string[]`, `selectedValues: string[]`, `selectionChanges`, `placeholder`, `minWidth`
-- `RaritySelect`, `StarsSelect` — older MUI variants. Prefer the `*2` versions.
+**Primitives (generic, for building custom selects):**
+- `Select<T>` — single non-searchable, `options: T[]`, `value: T`, `onChange`, `renderOption?`, `renderValue?`, `by?`
+- `SelectMulti<T>` — multi non-searchable, `options: T[]`, `value: T[]`, `onChange`, `renderOption?`, `renderValue?`, `by?`
+- `ComboBox<T>` — single searchable, `options: T[]`, `value: T | null`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`
+- `ComboBoxMulti<T>` — multi searchable, `options: T[]`, `value: T[]`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`
+
+**Domain selects (thin wrappers around primitives):**
+- `RaritySelect` — single, `rarityValues: number[]`, `value: number`, `valueChanges`
+- `RankSelect` — single, `rankValues: number[]`, `value: number`, `valueChanges`
+- `StarsSelect` — single, `starsValues: number[]`, `value: number`, `valueChanges`
+- `FactionSelect` — multi, `factionValues: FactionId[]`, `value: FactionId[]`, `valueChanges`
+- `MultipleSelectCheckmarks` — multi searchable string select, `values: string[]`, `selectedValues: string[]`, `selectionChanges`, `placeholder`
 
 Import from `@/fsd/5-shared/ui/icons`:
 
