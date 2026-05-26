@@ -419,7 +419,7 @@ export class GoalsService {
                     starsStart: unit.stars,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards:
-                        g.shardsPerToken ??
+                        (g.shardsPerToken || undefined) ??
                         (unit.alliance
                             ? Math.round(
                                   getOnslaughtMidpointForCharacter(
@@ -430,7 +430,7 @@ export class GoalsService {
                                   )
                               )
                             : 0),
-                    onslaughtMythicShards: g.mythicShardsPerToken ?? 1,
+                    onslaughtMythicShards: (g.mythicShardsPerToken || undefined) ?? 1,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
@@ -479,7 +479,7 @@ export class GoalsService {
                     starsStart: unit.stars,
                     starsEnd: targetStars,
                     onslaughtShards:
-                        g.shardsPerToken ??
+                        (g.shardsPerToken || undefined) ??
                         (unit.alliance
                             ? Math.round(
                                   getOnslaughtMidpointForCharacter(
@@ -490,7 +490,7 @@ export class GoalsService {
                                   )
                               )
                             : 0),
-                    onslaughtMythicShards: g.mythicShardsPerToken ?? defaultMythicShards,
+                    onslaughtMythicShards: (g.mythicShardsPerToken || undefined) ?? defaultMythicShards,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
