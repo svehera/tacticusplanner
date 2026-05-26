@@ -55,7 +55,7 @@ interface AllianceSelectorProps {
 
 const AllianceSelector: React.FC<AllianceSelectorProps> = ({ alliance, prefs, onUpdate }) => (
     <div className="flex flex-col gap-2">
-        <h3 className="text-base font-semibold">{ALLIANCE_LABELS[alliance]}</h3>
+        <h3>{ALLIANCE_LABELS[alliance]}</h3>
         <OnslaughtTierSelect
             label=""
             sector={prefs.sector}
@@ -77,12 +77,14 @@ export const Onslaught: React.FC = () => {
     );
 
     return (
-        <div className="flex flex-col gap-6 p-4">
-            <h2 className="text-xl font-bold">Onslaught Preferences</h2>
-            <p className="text-sm text-gray-500">
-                Set your current sector and tier for each alliance. These values are used to estimate shards earned per
-                onslaught token when computing ascension goal timelines.
-            </p>
+        <div className="space-y-8 py-6">
+            <div>
+                <h2>Onslaught Preferences</h2>
+                <p className="text-sm text-(--soft-fg)">
+                    Set your current sector and tier for each alliance. These values are used to estimate shards earned
+                    per onslaught token when computing ascension goal timelines.
+                </p>
+            </div>
 
             <div className="flex flex-wrap gap-6">
                 {([Alliance.Imperial, Alliance.Xenos, Alliance.Chaos] as Alliance[]).map(alliance => (
@@ -95,16 +97,20 @@ export const Onslaught: React.FC = () => {
                 ))}
             </div>
 
-            <div className="mt-4">
-                <h3 className="mb-2 text-base font-semibold">Shard Rewards Reference Table</h3>
+            <section className="space-y-4">
+                <h3>Shard Rewards Reference Table</h3>
                 <div className="overflow-x-auto">
-                    <table className="min-w-full border-collapse text-sm">
+                    <table className="min-w-full border-collapse border border-(--data-surface-border) text-sm">
                         <thead>
-                            <tr className="bg-gray-100 dark:bg-gray-800">
-                                <th className="border px-2 py-1 text-left">Sector / Tier</th>
-                                <th className="w-px border px-2 py-1"></th>
+                            <tr className="bg-(--data-surface)">
+                                <th className="border border-(--data-surface-border) px-2 py-1 text-left">
+                                    Sector / Tier
+                                </th>
+                                <th className="w-px border border-(--data-surface-border) px-2 py-1"></th>
                                 {REWARD_ROWS.map(row => (
-                                    <th key={`${row.rarity}-${row.stars}`} className="border px-2 py-1 text-center">
+                                    <th
+                                        key={`${row.rarity}-${row.stars}`}
+                                        className="border border-(--data-surface-border) px-2 py-1 text-center">
                                         <div className="flex flex-col items-center gap-0.5">
                                             <RarityIcon rarity={row.rarity} />
                                             <StarsIcon stars={row.stars} />
@@ -131,11 +137,11 @@ export const Onslaught: React.FC = () => {
                                     return (
                                         <tr
                                             key={`${sector}-${tier}`}
-                                            className="odd:bg-white even:bg-gray-50 dark:odd:bg-gray-900 dark:even:bg-gray-800">
-                                            <td className="border px-2 py-1 font-medium whitespace-nowrap">
+                                            className="odd:bg-(--bg) even:bg-(--data-surface)">
+                                            <td className="border border-(--data-surface-border) px-2 py-1 font-medium whitespace-nowrap">
                                                 {ONSLAUGHT_SECTOR_LABELS[sector]} {tier}
                                             </td>
-                                            <td className="w-px border px-1 py-1">
+                                            <td className="w-px border border-(--data-surface-border) px-1 py-1">
                                                 <div className="flex items-center gap-0.5">
                                                     {activeAlliances.map(([, iconKey]) => {
                                                         const icon = snowprintIcons[iconKey];
@@ -178,7 +184,7 @@ export const Onslaught: React.FC = () => {
                                                 return (
                                                     <td
                                                         key={`${row.rarity}-${row.stars}`}
-                                                        className={`border px-2 py-1 text-center ${isMythic ? 'font-medium text-purple-600' : ''}`}>
+                                                        className={`border border-(--data-surface-border) px-2 py-1 text-center ${isMythic ? 'font-medium text-(--rarity-mythic)' : ''}`}>
                                                         {label}
                                                     </td>
                                                 );
@@ -190,7 +196,7 @@ export const Onslaught: React.FC = () => {
                         </tbody>
                     </table>
                 </div>
-            </div>
+            </section>
         </div>
     );
 };
