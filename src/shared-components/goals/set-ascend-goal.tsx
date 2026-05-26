@@ -113,8 +113,8 @@ export const SetAscendGoal: React.FC<Props> = ({
                     <span className="font-medium text-purple-600">
                         {alliance
                             ? formatOnslaughtRewardRange(
-                                  Rarity.Legendary,
-                                  RarityStars.OneBlueStar,
+                                  currentRarity,
+                                  currentStars,
                                   onslaughtPreferences[alliance].sector,
                                   onslaughtPreferences[alliance].tier
                               )

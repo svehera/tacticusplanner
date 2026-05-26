@@ -4,7 +4,7 @@ import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { orderBy } from 'lodash';
-import React, { useContext, useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -58,8 +58,8 @@ export const RankLookup = () => {
         return !!queryParametersRankPoint5 && queryParametersRankPoint5 === 'true';
     });
 
-    const [anchorElement2, setAnchorElement2] = React.useState<HTMLElement>();
-    const [materialRecipe, setMaterialRecipe] = React.useState<IMaterialFull>();
+    const [anchorElement2, setAnchorElement2] = useState<HTMLElement>();
+    const [materialRecipe, setMaterialRecipe] = useState<IMaterialFull>();
 
     /**
      * Holds the set of uncraftable upgrade materials needed to rank up this
@@ -70,17 +70,21 @@ export const RankLookup = () => {
             return [];
         }
 
+        if (rankStart > rankEnd) return [];
+
+        const adjustedRankStart = rankStart === Rank.Adamantine2 ? Rank.Adamantine1 : rankStart;
+
         return RankLookupService.getUpgradeMaterialsToRankUp({
             unitId: character.snowprintId ?? '',
             unitName: character.id,
-            rankStart,
+            rankStart: adjustedRankStart,
             rankEnd,
             appliedUpgrades: [],
             rankPoint5,
             rankStartPoint5: false,
             upgradesRarity: [],
         });
-    }, [character?.id, rankStart, rankEnd, rankPoint5]);
+    }, [character, rankStart, rankEnd, rankPoint5]);
 
     const message = (function () {
         if (!character) {
@@ -116,11 +120,11 @@ export const RankLookup = () => {
         }
 
         return result;
-    }, [upgrades, rankStart]);
+    }, [upgrades, rankStart, rankEnd, rankPoint5]);
 
     const totalMaterials = useMemo<IMaterialEstimated2[]>(() => {
         return orderBy(RankLookupService.getAllMaterials(campaignsProgress, {}, upgrades), ['rarity'], ['desc']);
-    }, [upgrades]);
+    }, [upgrades, campaignsProgress]);
 
     const renderUpgradesMaterials = (materials: Array<IMaterialRecipeIngredientFull>, depth = 0) => (
         <ul className={depth > 0 ? 'pl-4' : undefined}>
