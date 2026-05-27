@@ -63,6 +63,20 @@ export const SetAscendGoal: React.FC<Props> = ({
         );
     }, [alliance, currentRarity, currentStars, onslaughtPreferences]);
 
+    const mythicShardRangeLabel = useMemo(() => {
+        if (!alliance) return;
+        // Mythic shards are earned once the character is at Legendary+OneBlueStar or above.
+        // Use that threshold when the current stars are below it (cross-boundary goal).
+        const mythicRarity = currentStars >= RarityStars.OneBlueStar ? currentRarity : Rarity.Legendary;
+        const mythicStars = Math.max(currentStars, RarityStars.OneBlueStar);
+        return formatOnslaughtRewardRange(
+            mythicRarity,
+            mythicStars,
+            onslaughtPreferences[alliance].sector,
+            onslaughtPreferences[alliance].tier
+        );
+    }, [alliance, currentRarity, currentStars, onslaughtPreferences]);
+
     return (
         <>
             <div className="flex items-center gap-3">
@@ -110,16 +124,7 @@ export const SetAscendGoal: React.FC<Props> = ({
                         size={50}
                     />
                     <span className="text-gray-500">Estimated mythic shards per onslaught:</span>
-                    <span className="font-medium text-purple-600">
-                        {alliance
-                            ? formatOnslaughtRewardRange(
-                                  Rarity.Legendary,
-                                  RarityStars.OneBlueStar,
-                                  onslaughtPreferences[alliance].sector,
-                                  onslaughtPreferences[alliance].tier
-                              )
-                            : '—'}
-                    </span>
+                    <span className="font-medium text-purple-600">{mythicShardRangeLabel ?? '—'}</span>
                 </div>
             )}
 

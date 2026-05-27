@@ -23,7 +23,19 @@ export class CharacterUpgradesService {
         const ranksRange = this.rankEntries.filter(r => r >= rankLookup.rankStart && r < rankLookup.rankEnd);
         const upgradeRanks: IUnitUpgradeRank[] = [];
 
-        if (rankLookup.rankStartPoint5) {
+        const startApplied = rankLookup.rankStartAppliedUpgrades ?? 0;
+        if (startApplied > 0 && ranksRange.length > 0) {
+            // Adamantine+: skip the first N upgrades already applied at the starting rank
+            const rank = ranksRange.shift()!;
+            const upgrades = characterRankUpData[rankToString(rank)] ?? [];
+            upgradeRanks.push({
+                rankStart: rank,
+                rankEnd: rank + 1,
+                startRankPoint5: false,
+                rankPoint5: false,
+                upgrades: upgrades.slice(startApplied),
+            });
+        } else if (rankLookup.rankStartPoint5) {
             const rank = ranksRange.shift()!;
             const upgrades = characterRankUpData[rankToString(rank)] ?? [];
             // select every odd upgrade (bottom row in game)
@@ -47,7 +59,18 @@ export class CharacterUpgradesService {
             });
         }
 
-        if (rankLookup.rankPoint5) {
+        const targetApplied = rankLookup.rankAppliedUpgrades ?? 0;
+        if (targetApplied > 0) {
+            // Adamantine+: include only the first N upgrades of the target rank
+            const lastRankUpgrades = characterRankUpData[rankToString(rankLookup.rankEnd)] ?? [];
+            upgradeRanks.push({
+                rankStart: rankLookup.rankEnd,
+                rankEnd: rankLookup.rankEnd,
+                startRankPoint5: false,
+                rankPoint5: true,
+                upgrades: lastRankUpgrades.slice(0, targetApplied),
+            });
+        } else if (rankLookup.rankPoint5) {
             const lastRankUpgrades = characterRankUpData[rankToString(rankLookup.rankEnd)] ?? [];
             // select every even upgrade (top row in game)
             const rankPoint5Upgrades = lastRankUpgrades.filter((_, index) => (index + 1) % 2 !== 0);

@@ -1,4 +1,4 @@
-/* eslint-disable import-x/no-internal-modules */
+﻿/* eslint-disable import-x/no-internal-modules */
 /* eslint-disable boundaries/element-types */
 import { useContext } from 'react';
 import Zoom from 'react-medium-image-zoom';
@@ -24,7 +24,7 @@ export const DesktopHome = () => {
     const nextLeMenuItem = LegendaryEventService.getActiveEvent();
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_138.webp'),
+        current: getImageUrl('calendar/calendar_139.webp'),
     };
 
     const announcements = () => {

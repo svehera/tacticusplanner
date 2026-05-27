@@ -77,7 +77,11 @@ export class GoalsService {
         for (const goal of priorGoals) {
             if (goal.type === PersonalGoalType.UpgradeRank) {
                 const upgradeGoal = goal as ICharacterUpgradeRankGoal;
-                const targetLevel = rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
+                const rankApplied = upgradeGoal.rankAppliedUpgrades ?? 0;
+                const targetLevel =
+                    rankApplied > 0 && upgradeGoal.rankEnd >= Rank.Adamantine1
+                        ? rankToLevel[(upgradeGoal.rankEnd - 1) as Rank] + rankApplied - 1
+                        : rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
                 if (targetLevel > returnValue.currentLevel) {
                     returnValue.currentLevel = targetLevel;
                     returnValue.xpAtLevel = 0;
@@ -145,7 +149,11 @@ export class GoalsService {
                 }
             }
             if (goal.type === PersonalGoalType.UpgradeRank && !goal.manuallyFarmXp) {
-                const targetLevel = rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
+                const rankApplied = goal.rankAppliedUpgrades ?? 0;
+                const targetLevel =
+                    rankApplied > 0 && goal.rankEnd >= Rank.Adamantine1
+                        ? rankToLevel[(goal.rankEnd - 1) as Rank] + rankApplied - 1
+                        : rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                 const currentXp = this.currentCharacterXp(
                     goal.unitId,
                     [...upgradeRankOrMowGoals, ...upgradeAbilities],
@@ -421,16 +429,23 @@ export class GoalsService {
                     onslaughtShards:
                         (g.shardsPerToken || undefined) ??
                         (unit.alliance
-                            ? Math.round(
-                                  getOnslaughtMidpointForCharacter(
-                                      unit.rarity,
-                                      unit.stars,
-                                      unit.alliance as Alliance,
-                                      onslaughtPreferences
-                                  )
+                            ? getOnslaughtMidpointForCharacter(
+                                  unit.rarity,
+                                  unit.stars,
+                                  unit.alliance as Alliance,
+                                  onslaughtPreferences
                               )
                             : 0),
-                    onslaughtMythicShards: (g.mythicShardsPerToken || undefined) ?? 1,
+                    onslaughtMythicShards:
+                        (g.mythicShardsPerToken || undefined) ??
+                        (unit.alliance
+                            ? getOnslaughtMidpointForCharacter(
+                                  Math.max(unit.rarity, Rarity.Legendary) as Rarity,
+                                  Math.max(unit.stars, RarityStars.OneBlueStar) as RarityStars,
+                                  unit.alliance as Alliance,
+                                  onslaughtPreferences
+                              )
+                            : 1),
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
@@ -458,16 +473,15 @@ export class GoalsService {
                 const targetNeedsMythicShards =
                     g.targetRarity! >= Rarity.Mythic ||
                     (g.targetRarity! === Rarity.Legendary && targetStars >= RarityStars.OneBlueStar);
-                const isCrossBoundary = unit.stars < RarityStars.OneBlueStar && targetNeedsMythicShards;
+                // Mythic shards are earned once the character reaches Legendary+OneBlueStar.
+                // Clamp to that threshold so cross-boundary goals don't use the regular shard rate.
                 const defaultMythicShards =
-                    isCrossBoundary && unit.alliance
-                        ? Math.round(
-                              getOnslaughtMidpointForCharacter(
-                                  Rarity.Legendary,
-                                  RarityStars.OneBlueStar,
-                                  unit.alliance,
-                                  onslaughtPreferences
-                              )
+                    targetNeedsMythicShards && unit.alliance
+                        ? getOnslaughtMidpointForCharacter(
+                              Math.max(unit.rarity, Rarity.Legendary) as Rarity,
+                              Math.max(unit.stars, RarityStars.OneBlueStar) as RarityStars,
+                              unit.alliance,
+                              onslaughtPreferences
                           )
                         : 0;
                 const result: ICharacterAscendGoal = {
@@ -481,13 +495,11 @@ export class GoalsService {
                     onslaughtShards:
                         (g.shardsPerToken || undefined) ??
                         (unit.alliance
-                            ? Math.round(
-                                  getOnslaughtMidpointForCharacter(
-                                      unit.rarity,
-                                      unit.stars,
-                                      unit.alliance,
-                                      onslaughtPreferences
-                                  )
+                            ? getOnslaughtMidpointForCharacter(
+                                  unit.rarity,
+                                  unit.stars,
+                                  unit.alliance,
+                                  onslaughtPreferences
                               )
                             : 0),
                     onslaughtMythicShards: (g.mythicShardsPerToken || undefined) ?? defaultMythicShards,
@@ -535,6 +547,8 @@ export class GoalsService {
                     rankEnd: g.targetRank!,
                     rankPoint5: g.rankPoint5!,
                     rankStartPoint5: g.startingRankPoint5 ?? false,
+                    rankAppliedUpgrades: g.rankAppliedUpgrades ?? 0,
+                    rankStartAppliedUpgrades: g.startingRankAppliedUpgrades ?? 0,
                     upgradesRarity: g.upgradesRarity ?? [],
                     appliedUpgrades:
                         Math.max(g.startingRank ?? unit.rank, unit.rank) === unit.rank ? unit.upgrades : [],
@@ -574,8 +588,10 @@ export class GoalsService {
                     character: goal.unitId,
                     startingRank: goal.rankStart,
                     startingRankPoint5: goal.rankStartPoint5,
+                    startingRankAppliedUpgrades: goal.rankStartAppliedUpgrades,
                     targetRank: goal.rankEnd,
                     rankPoint5: goal.rankPoint5,
+                    rankAppliedUpgrades: goal.rankAppliedUpgrades,
                     upgradesRarity: goal.upgradesRarity,
                     manuallyFarmXp: goal.manuallyFarmXp,
                 };
@@ -624,12 +640,14 @@ export class GoalsService {
     }
     static isGoalCompleted(goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate): boolean {
         if (goal.type == PersonalGoalType.UpgradeRank) {
+            const adamantinePartial = goal.rankAppliedUpgrades ?? 0;
+            const hasPartialTarget = goal.rankPoint5 || adamantinePartial > 0;
             return (
-                (!goal.rankPoint5 && goal.rankStart >= goal.rankEnd) ||
-                (goal.rankPoint5 &&
+                (!hasPartialTarget && goal.rankStart >= goal.rankEnd) ||
+                (hasPartialTarget &&
                     (goal.rankStart > goal.rankEnd ||
                         (goal.rankStart === goal.rankEnd &&
-                            goal.appliedUpgrades.length >= 3 &&
+                            goal.appliedUpgrades.length >= (adamantinePartial > 0 ? adamantinePartial : 3) &&
                             goalEstimate.energyTotal <= 0)))
             );
         }
@@ -967,30 +985,34 @@ export class GoalsService {
                     continue;
                 }
 
-                const { xpNeeded, newXpBooksAccrual } = this._adjustGoalXp(
-                    goal,
-                    heldBooks,
-                    xpIncomeState,
-                    xpBooksAccrual,
-                    today,
-                    xpIncomeState.defaultCodexToUse
-                );
-                totalXpNeeded += xpNeeded;
-                xpBooksAccrual = newXpBooksAccrual;
+                if (goal.included !== false) {
+                    const { xpNeeded, newXpBooksAccrual } = this._adjustGoalXp(
+                        goal,
+                        heldBooks,
+                        xpIncomeState,
+                        xpBooksAccrual,
+                        today,
+                        xpIncomeState.defaultCodexToUse
+                    );
+                    totalXpNeeded += xpNeeded;
+                    xpBooksAccrual = newXpBooksAccrual;
+                }
 
-                this._processGoalAdjustments(
-                    goal,
-                    heldBadges,
-                    neededBadges,
-                    heldOrbs,
-                    neededOrbs,
-                    heldForgeBadges,
-                    neededForgeBadges,
-                    heldComponents,
-                    neededComponents,
-                    upgradeRankOrMowGoals,
-                    ascendGoals
-                );
+                if (goal.included !== false) {
+                    this._processGoalAdjustments(
+                        goal,
+                        heldBadges,
+                        neededBadges,
+                        heldOrbs,
+                        neededOrbs,
+                        heldForgeBadges,
+                        neededForgeBadges,
+                        heldComponents,
+                        neededComponents,
+                        upgradeRankOrMowGoals,
+                        ascendGoals
+                    );
+                }
                 if (
                     goal.completed &&
                     goal.orbsEstimate &&

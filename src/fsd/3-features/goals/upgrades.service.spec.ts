@@ -4572,3 +4572,106 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
         expect(sorted.map(loc => loc.id)).toEqual(['Indomitus23', 'Indomitus37', 'Indomitus Elite5']);
     });
 });
+
+describe('UpgradesService.canRaidMaterial – shard goal blocked regression', () => {
+    const unitId = 'votanBeserk';
+    const baseChar = CharactersService.charactersData.find(c => c.snowprintId === unitId)!;
+
+    const makeShardsmat = (goalId: string): ICombinedUpgrade => ({
+        id: `shards_${unitId}`,
+        snowprintId: `shards_${unitId}`,
+        label: 'Shards',
+        rarity: 'Shard',
+        iconPath: '',
+        locations: [], // no suggested locations → onslaught path
+        crafted: false,
+        stat: 'Shard',
+        countByGoalId: { [goalId]: 10 },
+        requiredCount: 10,
+        relatedCharacters: [unitId],
+        relatedGoals: [goalId],
+    });
+
+    const makeMythicShardsmat = (goalId: string): ICombinedUpgrade => ({
+        id: `mythicShards_${unitId}`,
+        snowprintId: `mythicShards_${unitId}`,
+        label: 'Mythic Shards',
+        rarity: 'Mythic Shard',
+        iconPath: '',
+        locations: [], // no suggested locations → onslaught path
+        crafted: false,
+        stat: 'Shard',
+        countByGoalId: { [goalId]: 5 },
+        requiredCount: 5,
+        relatedCharacters: [unitId],
+        relatedGoals: [goalId],
+    });
+
+    it('regular-shards-only goal (character below blue star) is not blocked', () => {
+        const goalId = 'goal-regular-only';
+        const character = createCharacter(baseChar, {
+            snowprintId: unitId,
+            stars: RarityStars.RedTwoStars,
+            rank: Rank.Silver1,
+        });
+        const goal = createAscendGoal({
+            goalId,
+            unitId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Legendary,
+            starsEnd: RarityStars.RedThreeStars,
+            onslaughtShards: 6.5,
+            onslaughtMythicShards: 0,
+        });
+
+        const result = UpgradesService.canRaidMaterial(makeShardsmat(goalId), [character], [], [goal]);
+        expect(result).toBe(true);
+    });
+
+    it('mythic-shards-only goal (character already at blue star) is not blocked', () => {
+        const goalId = 'goal-mythic-only';
+        const character = createCharacter(baseChar, {
+            snowprintId: unitId,
+            stars: RarityStars.OneBlueStar,
+            rarityStars: RarityStars.OneBlueStar,
+            rank: Rank.Silver1,
+        });
+        const goal = createAscendGoal({
+            goalId,
+            unitId,
+            rarityStart: Rarity.Legendary,
+            starsStart: RarityStars.OneBlueStar,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.TwoBlueStars,
+            onslaughtShards: 0,
+            onslaughtMythicShards: 10.5,
+        });
+
+        const result = UpgradesService.canRaidMaterial(makeMythicShardsmat(goalId), [character], [], [goal]);
+        expect(result).toBe(true);
+    });
+
+    it('cross-boundary goal (below blue star targeting mythic) mythic shards are not blocked', () => {
+        const goalId = 'goal-cross-boundary';
+        const character = createCharacter(baseChar, {
+            snowprintId: unitId,
+            stars: RarityStars.RedTwoStars,
+            rank: Rank.Silver1,
+        });
+        // onslaughtShards > 0 because regular onslaught will eventually cross the blue-star boundary
+        const goal = createAscendGoal({
+            goalId,
+            unitId,
+            rarityStart: Rarity.Epic,
+            starsStart: RarityStars.RedTwoStars,
+            rarityEnd: Rarity.Mythic,
+            starsEnd: RarityStars.ThreeBlueStars,
+            onslaughtShards: 6.5,
+            onslaughtMythicShards: 0,
+        });
+
+        const result = UpgradesService.canRaidMaterial(makeMythicShardsmat(goalId), [character], [], [goal]);
+        expect(result).toBe(true);
+    });
+});

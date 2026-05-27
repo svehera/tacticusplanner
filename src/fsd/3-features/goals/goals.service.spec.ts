@@ -1,9 +1,9 @@
-﻿import { describe, it, expect } from 'vitest';
+﻿/* eslint-disable import-x/no-internal-modules */
+/* eslint-disable boundaries/element-types */
+import { describe, it, expect } from 'vitest';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { IPersonalGoal } from 'src/models/interfaces';
+import { IPersonalGoal, IInventory } from 'src/models/interfaces';
 
 import { Alliance, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/model';
 
@@ -15,10 +15,13 @@ import {
     ICharacterUpgradeRankGoal,
     ICharacterUpgradeMow,
     IEstimatedUpgrades,
-    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+    IGoalEstimate,
 } from '@/fsd/3-features/goals/goals.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
+import { XpUseState } from '@/fsd/1-pages/input-resources';
+import { ArenaLeague, XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
 const makeEstimatedUpgrades = (overrides: Partial<IEstimatedUpgrades> = {}): IEstimatedUpgrades => ({
     upgradesRaids: [],
@@ -105,6 +108,8 @@ describe('Goal service', () => {
                 rankEnd: goalMock.targetRank!,
                 rankPoint5: goalMock.rankPoint5!,
                 rankStartPoint5: goalMock.startingRankPoint5!,
+                rankAppliedUpgrades: 0,
+                rankStartAppliedUpgrades: 0,
                 appliedUpgrades: characterMock.upgrades,
                 level: characterMock.level,
                 xp: characterMock.xp,
@@ -216,6 +221,118 @@ describe('Goal service', () => {
             const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
 
             expect(result).toEqual(expectedResult);
+        });
+
+        describe('cross-boundary Ascend (character below OneBlueStar targeting Mythic)', () => {
+            // At adamantine tier 3:
+            //   legendary (no blue star) = regularShards(18, 22) → midpoint 20
+            //   legendaryBlue (OneBlueStar) = mythicShards(1, 2) → midpoint 1.5
+            // Without the fix, defaultMythicShards would be 20 (using regular shard rate).
+            // With the fix, it must be 1.5.
+            const adamantine3Prefs: IOnslaughtPreferences = {
+                [Alliance.Imperial]: { sector: 'adamantine', tier: 3 },
+                [Alliance.Xenos]: { sector: 'adamantine', tier: 3 },
+                [Alliance.Chaos]: { sector: 'adamantine', tier: 3 },
+            };
+
+            it('uses the legendaryBlue midpoint for onslaughtMythicShards when stars < OneBlueStar', () => {
+                const characterMock: ICharacter2 = {
+                    unitType: UnitType.character,
+                    id: 'roswitha',
+                    snowprintId: 'roswitha',
+                    name: 'Roswitha',
+                    shortName: 'Roswitha',
+                    alliance: Alliance.Imperial,
+                    shards: 65,
+                    mythicShards: 0,
+                    rarity: Rarity.Legendary,
+                    stars: RarityStars.RedThreeStars, // below OneBlueStar
+                } as ICharacter2;
+
+                const goalMock: IPersonalGoal = {
+                    id: 'g1',
+                    character: 'roswitha',
+                    type: PersonalGoalType.Ascend,
+                    priority: 1,
+                    dailyRaids: true,
+                    targetRarity: Rarity.Mythic,
+                };
+
+                const result = GoalsService.convertToTypedGoal(
+                    goalMock,
+                    characterMock,
+                    adamantine3Prefs
+                ) as ICharacterAscendGoal;
+
+                // Regular shards: adamantine 3 legendary = regularShards(18,22) → midpoint 20
+                expect(result?.onslaughtShards).toBe(20);
+                // Mythic shards MUST use legendaryBlue bucket = mythicShards(1,2) → midpoint 1.5, NOT 20
+                expect(result?.onslaughtMythicShards).toBe(1.5);
+            });
+
+            it('uses the same rate when character is already at OneBlueStar (no clamping needed)', () => {
+                const characterMock: ICharacter2 = {
+                    unitType: UnitType.character,
+                    id: 'character2',
+                    snowprintId: 'character2',
+                    name: 'Character 2',
+                    shortName: 'char2',
+                    alliance: Alliance.Imperial,
+                    shards: 0,
+                    mythicShards: 0,
+                    rarity: Rarity.Legendary,
+                    stars: RarityStars.OneBlueStar,
+                } as ICharacter2;
+
+                const goalMock: IPersonalGoal = {
+                    id: 'g2',
+                    character: 'character2',
+                    type: PersonalGoalType.Ascend,
+                    priority: 1,
+                    dailyRaids: true,
+                    targetRarity: Rarity.Mythic,
+                };
+
+                const result = GoalsService.convertToTypedGoal(
+                    goalMock,
+                    characterMock,
+                    adamantine3Prefs
+                ) as ICharacterAscendGoal;
+
+                // Already at OneBlueStar, so clamping has no effect — still 1.5
+                expect(result?.onslaughtMythicShards).toBe(1.5);
+            });
+
+            it('returns onslaughtMythicShards 0 for a non-mythic target (target is Legendary, no blue star)', () => {
+                const characterMock: ICharacter2 = {
+                    unitType: UnitType.character,
+                    id: 'character3',
+                    snowprintId: 'character3',
+                    name: 'Character 3',
+                    shortName: 'char3',
+                    alliance: Alliance.Imperial,
+                    shards: 0,
+                    rarity: Rarity.Epic,
+                    stars: RarityStars.FiveStars,
+                } as ICharacter2;
+
+                const goalMock: IPersonalGoal = {
+                    id: 'g3',
+                    character: 'character3',
+                    type: PersonalGoalType.Ascend,
+                    priority: 1,
+                    dailyRaids: true,
+                    targetRarity: Rarity.Legendary,
+                };
+
+                const result = GoalsService.convertToTypedGoal(
+                    goalMock,
+                    characterMock,
+                    adamantine3Prefs
+                ) as ICharacterAscendGoal;
+
+                expect(result?.onslaughtMythicShards).toBe(0);
+            });
         });
     });
 
@@ -364,6 +481,561 @@ describe('Goal service', () => {
 
             const biovoreEstimate = result.find(est => est.goalId === goalId);
             expect(biovoreEstimate?.blocked).toBe(false);
+        });
+    });
+});
+
+// ─── adjustGoalEstimates ─────────────────────────────────────────────────────
+
+const makeEmptyRarityRecord = (): Record<Rarity, number> => ({
+    [Rarity.Common]: 0,
+    [Rarity.Uncommon]: 0,
+    [Rarity.Rare]: 0,
+    [Rarity.Epic]: 0,
+    [Rarity.Legendary]: 0,
+    [Rarity.Mythic]: 0,
+});
+
+const makeEmptyAllianceRarityRecord = (): Record<Alliance, Record<Rarity, number>> => ({
+    [Alliance.Imperial]: makeEmptyRarityRecord(),
+    [Alliance.Chaos]: makeEmptyRarityRecord(),
+    [Alliance.Xenos]: makeEmptyRarityRecord(),
+});
+
+const makeEmptyInventory = (): IInventory => ({
+    xpBooks: makeEmptyRarityRecord(),
+    abilityBadges: makeEmptyAllianceRarityRecord(),
+    components: { [Alliance.Imperial]: 0, [Alliance.Chaos]: 0, [Alliance.Xenos]: 0 },
+    forgeBadges: makeEmptyRarityRecord(),
+    orbs: makeEmptyAllianceRarityRecord(),
+    upgrades: {},
+    items: {},
+});
+
+const noXpUse: XpUseState = {
+    useCommon: false,
+    useUncommon: false,
+    useRare: false,
+    useEpic: false,
+    useLegendary: false,
+    useMythic: false,
+};
+
+const noXpIncome: XpIncomeState = {
+    manualCodicesPerDay: 0,
+    arenaLeague: ArenaLeague.honorGuard,
+    loopsRaids: 'no',
+    clearRarity: Rarity.Common,
+    additionalBosses: 0,
+    raidLoops: 0,
+    extraBossesAfterLoop: 0,
+    useATForCodices: 'no',
+    hasBlueStarMoW: 'no',
+    incursionLegendaryLevel: 'L10',
+    onslaughtMythicWinged: false,
+    eliteEnergyPerDay: 0,
+    nonEliteEnergyPerDay: 0,
+    additionalCodicesPerWeek: 0,
+    defaultCodexToUse: Rarity.Legendary,
+};
+
+const makePersonalGoal = (
+    id: string,
+    type: PersonalGoalType,
+    priority: number,
+    dailyRaids: boolean,
+    character = 'unit-a'
+): IPersonalGoal => ({
+    id,
+    character,
+    type,
+    priority,
+    dailyRaids,
+});
+
+const makeGoalEstimate = (
+    goalId: string,
+    included: boolean,
+    overrides: Partial<IGoalEstimate> = {}
+): IGoalEstimate => ({
+    goalId,
+    daysTotal: 0,
+    daysLeft: 0,
+    energyTotal: 0,
+    oTokensTotal: 0,
+    xpBooksTotal: 0,
+    included,
+    ...overrides,
+});
+
+describe('GoalsService.adjustGoalEstimates', () => {
+    describe('included rank-up goal', () => {
+        it('appears in goal estimates when included', () => {
+            const goalId = 'goal-rankup';
+            const estimate = makeGoalEstimate(goalId, true);
+
+            const inventory = makeEmptyInventory();
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+
+            const result = GoalsService.adjustGoalEstimates([goal], [estimate], inventory, noXpUse, [], [], noXpIncome);
+
+            const goalResult = result.goalEstimates.find(estimate => estimate.goalId === goalId);
+            expect(goalResult).toBeDefined();
+            expect(goalResult?.included).toBe(true);
+        });
+    });
+
+    describe('included MoW abilities goal', () => {
+        it('contributes ability badges to neededBadges', () => {
+            const goalId = 'goal-mow';
+            const badgesNeeded: Record<Rarity, number> = { ...makeEmptyRarityRecord(), [Rarity.Epic]: 3 };
+            const estimate = makeGoalEstimate(goalId, true, {
+                mowEstimate: {
+                    components: 0,
+                    salvage: 0,
+                    gold: 0,
+                    badges: badgesNeeded,
+                    forgeBadges: makeEmptyRarityRecord(),
+                    orbs: makeEmptyRarityRecord(),
+                },
+            });
+
+            const mowGoal: ICharacterUpgradeMow = {
+                goalId,
+                unitId: 'tyranBiovore',
+                unitName: 'Biovore',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Xenos,
+                priority: 1,
+                include: true,
+                notes: '',
+                primaryStart: 1,
+                primaryEnd: 5,
+                secondaryStart: 1,
+                secondaryEnd: 5,
+                type: PersonalGoalType.MowAbilities,
+                upgradesRarity: [],
+                shards: 0,
+                stars: RarityStars.None,
+                rarity: Rarity.Common,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.MowAbilities, 1, true);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [mowGoal],
+                [],
+                noXpIncome
+            );
+
+            expect(result.neededBadges[Alliance.Xenos][Rarity.Epic]).toBe(3);
+        });
+
+        it('contributes forge badges to neededForgeBadges', () => {
+            const goalId = 'goal-mow-forge';
+            const forgeBadgesNeeded: Record<Rarity, number> = { ...makeEmptyRarityRecord(), [Rarity.Legendary]: 2 };
+            const estimate = makeGoalEstimate(goalId, true, {
+                mowEstimate: {
+                    components: 0,
+                    salvage: 0,
+                    gold: 0,
+                    badges: makeEmptyRarityRecord(),
+                    forgeBadges: forgeBadgesNeeded,
+                    orbs: makeEmptyRarityRecord(),
+                },
+            });
+
+            const mowGoal: ICharacterUpgradeMow = {
+                goalId,
+                unitId: 'tyranBiovore',
+                unitName: 'Biovore',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Xenos,
+                priority: 1,
+                include: true,
+                notes: '',
+                primaryStart: 1,
+                primaryEnd: 5,
+                secondaryStart: 1,
+                secondaryEnd: 5,
+                type: PersonalGoalType.MowAbilities,
+                upgradesRarity: [],
+                shards: 0,
+                stars: RarityStars.None,
+                rarity: Rarity.Common,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.MowAbilities, 1, true);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [mowGoal],
+                [],
+                noXpIncome
+            );
+
+            expect(result.neededForgeBadges[Rarity.Legendary]).toBe(2);
+        });
+
+        it('contributes components to neededComponents', () => {
+            const goalId = 'goal-mow-components';
+            const estimate = makeGoalEstimate(goalId, true, {
+                mowEstimate: {
+                    components: 7,
+                    salvage: 0,
+                    gold: 0,
+                    badges: makeEmptyRarityRecord(),
+                    forgeBadges: makeEmptyRarityRecord(),
+                    orbs: makeEmptyRarityRecord(),
+                },
+            });
+
+            const mowGoal: ICharacterUpgradeMow = {
+                goalId,
+                unitId: 'tyranBiovore',
+                unitName: 'Biovore',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Xenos,
+                priority: 1,
+                include: true,
+                notes: '',
+                primaryStart: 1,
+                primaryEnd: 5,
+                secondaryStart: 1,
+                secondaryEnd: 5,
+                type: PersonalGoalType.MowAbilities,
+                upgradesRarity: [],
+                shards: 0,
+                stars: RarityStars.None,
+                rarity: Rarity.Common,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.MowAbilities, 1, true);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [mowGoal],
+                [],
+                noXpIncome
+            );
+
+            expect(result.neededComponents[Alliance.Xenos]).toBe(7);
+        });
+    });
+
+    describe('included ascend goal', () => {
+        it('contributes orbs to neededOrbs', () => {
+            const goalId = 'goal-ascend';
+            const orbsNeeded: Record<Rarity, number> = { ...makeEmptyRarityRecord(), [Rarity.Legendary]: 4 };
+            const estimate = makeGoalEstimate(goalId, true, {
+                orbsEstimate: {
+                    alliance: Alliance.Imperial,
+                    orbs: orbsNeeded,
+                },
+            });
+
+            const ascendGoal: ICharacterAscendGoal = {
+                goalId,
+                unitId: 'unit-a',
+                unitName: 'Unit A',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Imperial,
+                priority: 1,
+                include: true,
+                notes: '',
+                rarityStart: Rarity.Legendary,
+                rarityEnd: Rarity.Mythic,
+                shards: 0,
+                mythicShards: 0,
+                starsStart: RarityStars.OneBlueStar,
+                starsEnd: RarityStars.TwoBlueStars,
+                onslaughtShards: 0,
+                onslaughtMythicShards: 0,
+                farmType: 'both',
+                campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
+                mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
+                type: PersonalGoalType.Ascend,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.Ascend, 1, true);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [],
+                [ascendGoal],
+                noXpIncome
+            );
+
+            expect(result.neededOrbs[Alliance.Imperial][Rarity.Legendary]).toBe(4);
+        });
+    });
+
+    describe('excluded goals have no impact on missing resources', () => {
+        it('excluded MoW abilities goal does not add to neededBadges', () => {
+            const goalId = 'goal-inactive-mow';
+            const badgesNeeded: Record<Rarity, number> = { ...makeEmptyRarityRecord(), [Rarity.Epic]: 5 };
+            const estimate = makeGoalEstimate(goalId, false, {
+                mowEstimate: {
+                    components: 0,
+                    salvage: 0,
+                    gold: 0,
+                    badges: badgesNeeded,
+                    forgeBadges: makeEmptyRarityRecord(),
+                    orbs: makeEmptyRarityRecord(),
+                },
+            });
+
+            const mowGoal: ICharacterUpgradeMow = {
+                goalId,
+                unitId: 'tyranBiovore',
+                unitName: 'Biovore',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Xenos,
+                priority: 1,
+                include: false,
+                notes: '',
+                primaryStart: 1,
+                primaryEnd: 5,
+                secondaryStart: 1,
+                secondaryEnd: 5,
+                type: PersonalGoalType.MowAbilities,
+                upgradesRarity: [],
+                shards: 0,
+                stars: RarityStars.None,
+                rarity: Rarity.Common,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.MowAbilities, 1, false);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [mowGoal],
+                [],
+                noXpIncome
+            );
+
+            expect(result.neededBadges[Alliance.Xenos][Rarity.Epic]).toBe(0);
+        });
+
+        it('excluded MoW abilities goal does not add to neededForgeBadges or neededComponents', () => {
+            const goalId = 'goal-inactive-mow-forge';
+            const estimate = makeGoalEstimate(goalId, false, {
+                mowEstimate: {
+                    components: 10,
+                    salvage: 0,
+                    gold: 0,
+                    badges: makeEmptyRarityRecord(),
+                    forgeBadges: { ...makeEmptyRarityRecord(), [Rarity.Epic]: 6 },
+                    orbs: makeEmptyRarityRecord(),
+                },
+            });
+
+            const mowGoal: ICharacterUpgradeMow = {
+                goalId,
+                unitId: 'tyranBiovore',
+                unitName: 'Biovore',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Xenos,
+                priority: 1,
+                include: false,
+                notes: '',
+                primaryStart: 1,
+                primaryEnd: 5,
+                secondaryStart: 1,
+                secondaryEnd: 5,
+                type: PersonalGoalType.MowAbilities,
+                upgradesRarity: [],
+                shards: 0,
+                stars: RarityStars.None,
+                rarity: Rarity.Common,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.MowAbilities, 1, false);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [mowGoal],
+                [],
+                noXpIncome
+            );
+
+            expect(result.neededForgeBadges[Rarity.Epic]).toBe(0);
+            expect(result.neededComponents[Alliance.Xenos]).toBe(0);
+        });
+
+        it('excluded ascend goal does not add to neededOrbs', () => {
+            const goalId = 'goal-inactive-ascend';
+            const orbsNeeded: Record<Rarity, number> = { ...makeEmptyRarityRecord(), [Rarity.Legendary]: 8 };
+            const estimate = makeGoalEstimate(goalId, false, {
+                orbsEstimate: {
+                    alliance: Alliance.Imperial,
+                    orbs: orbsNeeded,
+                },
+            });
+
+            const ascendGoal: ICharacterAscendGoal = {
+                goalId,
+                unitId: 'unit-a',
+                unitName: 'Unit A',
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: Alliance.Imperial,
+                priority: 1,
+                include: false,
+                notes: '',
+                rarityStart: Rarity.Legendary,
+                rarityEnd: Rarity.Mythic,
+                shards: 0,
+                mythicShards: 0,
+                starsStart: RarityStars.OneBlueStar,
+                starsEnd: RarityStars.TwoBlueStars,
+                onslaughtShards: 0,
+                onslaughtMythicShards: 0,
+                farmType: 'both',
+                campaignsUsage: CampaignsLocationsUsage.LeastEnergy,
+                mythicCampaignsUsage: CampaignsLocationsUsage.LeastEnergy,
+                type: PersonalGoalType.Ascend,
+            };
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.Ascend, 1, false);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                noXpUse,
+                [],
+                [ascendGoal],
+                noXpIncome
+            );
+
+            expect(result.neededOrbs[Alliance.Imperial][Rarity.Legendary]).toBe(0);
+        });
+
+        it('excluded rank-up goal with xpEstimate does not add to neededXp', () => {
+            const goalId = 'goal-inactive-xp';
+            const estimate = makeGoalEstimate(goalId, false, {
+                xpEstimate: {
+                    books: 5,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 10,
+                    targetLevel: 20,
+                    xpLeft: 50_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, false);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates([goal], [estimate], inventory, noXpUse, [], [], noXpIncome);
+
+            expect(result.neededXp).toBe(0);
+        });
+
+        it('excluded goal does not consume held xp books that active goals need', () => {
+            const inactiveGoalId = 'goal-inactive-xp-books';
+            const activeGoalId = 'goal-active-xp-books';
+
+            const inactiveEstimate = makeGoalEstimate(inactiveGoalId, false, {
+                xpEstimate: {
+                    books: 3,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 5,
+                    targetLevel: 10,
+                    xpLeft: 30_000,
+                },
+            });
+            const activeEstimate = makeGoalEstimate(activeGoalId, true, {
+                xpEstimate: {
+                    books: 2,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 10,
+                    targetLevel: 15,
+                    xpLeft: 20_000,
+                },
+            });
+
+            const goals = [
+                makePersonalGoal(inactiveGoalId, PersonalGoalType.UpgradeRank, 1, false),
+                makePersonalGoal(activeGoalId, PersonalGoalType.UpgradeRank, 2, true),
+            ];
+
+            // Give inventory exactly enough books to cover the active goal (20 000 XP)
+            const inventory = makeEmptyInventory();
+            inventory.xpBooks[Rarity.Legendary] = 2; // 2 × 10 000 = 20 000 XP
+
+            const xpUseWithLegendary: XpUseState = { ...noXpUse, useLegendary: true };
+
+            const result = GoalsService.adjustGoalEstimates(
+                goals,
+                [inactiveEstimate, activeEstimate],
+                inventory,
+                xpUseWithLegendary,
+                [],
+                [],
+                noXpIncome
+            );
+
+            // The inactive goal must NOT consume the held books — the active goal should be fully covered
+            expect(result.neededXp).toBe(0);
+        });
+    });
+
+    describe('included goal with xpEstimate', () => {
+        it('adds xpLeft to neededXp', () => {
+            const goalId = 'goal-active-xp';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 5,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 10,
+                    targetLevel: 20,
+                    xpLeft: 50_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates([goal], [estimate], inventory, noXpUse, [], [], noXpIncome);
+
+            expect(result.neededXp).toBe(50_000);
         });
     });
 });

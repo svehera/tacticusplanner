@@ -1,6 +1,7 @@
 /* eslint-disable import-x/no-internal-modules */
+import { FormControlLabel, Switch } from '@mui/material';
 import { orderBy } from 'lodash';
-import { useCallback, useContext, useMemo } from 'react';
+import { useCallback, useContext, useMemo, useState } from 'react';
 
 import { DailyRaidsStrategy, PersonalGoalType } from '@/models/enums';
 import { ICustomDailyRaidsSettings } from '@/models/interfaces';
@@ -79,6 +80,8 @@ export const CEs = () => {
     const units = useMemo(() => [...chars, ...mows], [chars, mows]);
 
     const onslaughtTokensToday = UpgradesService.computeOnslaughtTokensToday(gameModeTokens);
+
+    const [showAllBattles, setShowAllBattles] = useState(false);
 
     const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false),
@@ -172,7 +175,10 @@ export const CEs = () => {
                 }
 
                 const campaignProgress = campaignsProgress[battle.campaign] ?? 0;
-                if (UpgradesService.mapNodeNumber(battle.campaign, battle.nodeNumber) > campaignProgress) {
+                if (
+                    !showAllBattles &&
+                    UpgradesService.mapNodeNumber(battle.campaign, battle.nodeNumber) > campaignProgress
+                ) {
                     continue;
                 }
 
@@ -311,7 +317,7 @@ export const CEs = () => {
         }
 
         return orderBy(plans, [x => x.totalEstimatedEnergy, x => x.totalNeededMaterials], ['desc', 'desc']);
-    }, [campaignsProgress, dailyRaidsPreferences, neededByMaterial]);
+    }, [campaignsProgress, dailyRaidsPreferences, neededByMaterial, showAllBattles]);
 
     const standardPlans = useMemo(
         () =>
@@ -467,8 +473,14 @@ export const CEs = () => {
 
     return (
         <div className="space-y-6">
-            <div>
+            <div className="flex flex-wrap items-center gap-4">
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
+                <FormControlLabel
+                    control={
+                        <Switch checked={showAllBattles} onChange={event => setShowAllBattles(event.target.checked)} />
+                    }
+                    label={`Selected: ${showAllBattles ? 'All Battles' : 'Cleared Battles'}`}
+                />
             </div>
             {renderCampaignSection('Extremis Campaign Events', extremisPlans, true)}
             {renderCampaignSection('Standard Campaign Events', standardPlans, false)}

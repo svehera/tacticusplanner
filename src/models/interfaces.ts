@@ -383,8 +383,10 @@ export interface IPersonalGoal {
     // upgrade rank
     startingRank?: Rank;
     startingRankPoint5?: boolean;
+    startingRankAppliedUpgrades?: number; // 1-5: Adamantine+ upgrades already done at starting rank
     targetRank?: Rank;
     rankPoint5?: boolean;
+    rankAppliedUpgrades?: number; // 1-5: Adamantine+ upgrades to include at target rank (replaces point5)
     upgradesRarity?: Rarity[];
     // ascend
     targetRarity?: Rarity;
