@@ -2481,6 +2481,9 @@ export const UiKitPage = () => {
                 <Group label="Horizontal">
                     <Separator />
                 </Group>
+                <Group label="With text">
+                    <Separator>Section Label</Separator>
+                </Group>
                 <Group label="Vertical">
                     <div className="flex h-6 items-center gap-3 text-sm">
                         <span>Raids</span>

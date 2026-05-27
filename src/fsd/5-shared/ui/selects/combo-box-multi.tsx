@@ -1,8 +1,10 @@
 import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronsUpDown, X } from 'lucide-react';
 import { type ReactNode, useMemo, useState } from 'react';
 
 import { cn, normalizeSearchText } from '@/fsd/5-shared/lib';
+
+import { Badge } from '../badge';
 
 import {
     checkIconClass,
@@ -57,13 +59,37 @@ export const ComboBoxMulti = <T,>({
     const defaultRenderOption = (option: T) => <span>{displayValue(option)}</span>;
     const renderFunction = renderOption ?? defaultRenderOption;
 
+    const defaultRenderValue = (items: T[]) => (
+        <div className="flex flex-wrap items-center gap-1.5">
+            {items.map((item, index) => (
+                <Badge key={index} appearance="outline" className="gap-1 pr-1">
+                    <span className="max-w-[150px] truncate">{displayValue(item)}</span>
+                    <button
+                        type="button"
+                        className="ml-0.5 rounded-full p-0.5 text-(--soft-fg) hover:bg-(--neutral) hover:text-(--fg)"
+                        onClick={event_ => {
+                            event_.stopPropagation();
+                            event_.preventDefault();
+                            const next = by ? value.filter(v => !by(v, item)) : value.filter(v => v !== item);
+                            onChange(next);
+                        }}
+                        aria-label={`Remove ${displayValue(item)}`}>
+                        <X className="h-3 w-3" />
+                    </button>
+                </Badge>
+            ))}
+        </div>
+    );
+
+    const displayRenderValue = renderValue ?? defaultRenderValue;
+
     return (
         <div className={cn('w-full', className)}>
             {label && <label className={labelClass}>{label}</label>}
 
             <Combobox value={value} onChange={onChange} by={by} multiple immediate onClose={() => setQuery('')}>
                 <div className="relative">
-                    {value.length > 0 && renderValue && <div className="mb-1.5">{renderValue(value)}</div>}
+                    {value.length > 0 && <div className="mb-1.5">{displayRenderValue(value)}</div>}
 
                     <div className="relative">
                         <ComboboxInput

@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { type ReactNode, useMemo } from 'react';
 
 import { ComboBoxMulti } from './combo-box-multi';
 
@@ -9,6 +9,7 @@ export const MultipleSelectCheckmarks = <T extends string>({
     placeholder,
     groupByFirstLetter = false,
     sortByAlphabet = false,
+    renderOption,
 }: {
     values: T[];
     selectedValues: NoInfer<T>[];
@@ -20,6 +21,7 @@ export const MultipleSelectCheckmarks = <T extends string>({
     minWidth?: number;
     maxWidth?: number;
     disableCloseOnSelect?: boolean;
+    renderOption?: (option: NoInfer<T>) => ReactNode;
 }) => {
     const sortedOptions = useMemo(
         () => (groupByFirstLetter || sortByAlphabet ? values.toSorted((a, b) => a.localeCompare(b)) : values),
@@ -34,6 +36,7 @@ export const MultipleSelectCheckmarks = <T extends string>({
             displayValue={item => item}
             label={placeholder}
             placeholder="Type to filter…"
+            renderOption={renderOption}
         />
     );
 };

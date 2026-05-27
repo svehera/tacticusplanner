@@ -4,7 +4,7 @@ import { cn } from '@/fsd/5-shared/lib';
 
 const triggerBase = [
     'relative flex w-full cursor-pointer items-center rounded-lg border border-(--input)',
-    'bg-(--bg) pr-10 pl-3 text-left text-(--fg) shadow-sm',
+    'bg-(--neutral) pr-10 pl-3 text-left text-(--fg) shadow-sm',
     'transition-all hover:border-(--primary) focus:ring-2 focus:ring-(--ring) focus:outline-none',
 ].join(' ');
 

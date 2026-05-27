@@ -68,11 +68,11 @@ const AccordionHeader = ({ children, className, _expanded, _onToggle, ...props }
         type="button"
         onClick={_onToggle}
         className={twMerge(
-            'flex w-full cursor-pointer items-center justify-between bg-(--soft) p-4 transition-colors hover:bg-(--primary)/10',
+            'flex w-full cursor-pointer items-center justify-between gap-3 bg-(--soft) p-4 transition-colors hover:bg-(--primary)/10',
             className
         )}
         {...props}>
-        <div className="flex items-center gap-3">{children}</div>
+        <div className="flex min-w-0 flex-1 items-center gap-3">{children}</div>
         {_expanded ? (
             <ChevronDown size={20} className="shrink-0 text-(--soft-fg)" />
         ) : (
