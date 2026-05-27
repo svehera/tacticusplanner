@@ -35,6 +35,7 @@ const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, i
             <Button
                 size="square-petite"
                 appearance="plain"
+                intent="secondary"
                 aria-label="Sync with Tacticus"
                 className={className}
                 onPress={() => sync()}>

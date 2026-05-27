@@ -1,19 +1,7 @@
 import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-    Badge,
-    Divider,
-    ListSubheader,
-    Menu,
-    MenuItem,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-    Tooltip,
-    useMediaQuery,
-} from '@mui/material';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
+import { Divider, ListSubheader, Menu, MenuItem, ListItemIcon, ListItemText, useMediaQuery } from '@mui/material';
+import MuiButton from '@mui/material/Button';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -30,7 +18,9 @@ import {
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
 import {
+    Button,
     FlexBox,
+    LazyTooltip,
     MenuItemTP,
     bmcLink,
     discordInvitationLink,
@@ -38,6 +28,7 @@ import {
     usePopUpControls,
 } from '@/fsd/5-shared/ui';
 import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
@@ -60,9 +51,7 @@ const generateMenuItems = (items: MenuItemTP[]) =>
 const renderMenuGroup = (label: string, items: MenuItemTP[]) => (
     <>
         <ListSubheader disableSticky disableGutters className="pl-2 leading-[1.75]">
-            <Typography variant="body2" className="tracking-wide text-gray-500 uppercase">
-                {label}
-            </Typography>
+            <span className="text-sm tracking-wide text-(--soft-fg) uppercase">{label}</span>
         </ListSubheader>
         {generateMenuItems(items)}
     </>
@@ -163,45 +152,66 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
 
     return (
         <>
-            <div className="flex h-[60px] flex-shrink-0 items-center justify-between border-b border-[var(--border)] bg-[var(--sidebar)] px-4 text-[var(--fg)]">
+            <div className="flex h-[60px] flex-shrink-0 items-center justify-between border-b border-(--border) bg-(--sidebar) px-4 text-(--fg)">
                 {isTabletOrMobile ? (
                     <FlexBox onClick={() => navigate('./home')} className="cursor-pointer">
                         <img src="/android-chrome-192x192.png" height="40px" width="40px" alt="logo" />
-                        <Typography variant="h5" component="div">
-                            {title}
-                        </Typography>
+                        <span className="text-xl font-bold">{title}</span>
                     </FlexBox>
                 ) : (
                     <span className="font-medium">{breadcrumb}</span>
                 )}
                 <div className="flex items-center">
-                    <IconButton color="inherit" onClick={() => navigate('./faq')}>
-                        <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
-                    </IconButton>
-                    <Tooltip title="Join Tacticus Planner community on Discord">
-                        <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
+                    <LazyTooltip title="Frequently Asked Questions">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            onPress={() => navigate('./faq')}>
+                            {menuItemById.faq.icon}
+                        </Button>
+                    </LazyTooltip>
+                    <LazyTooltip title="Join Tacticus Planner community on Discord">
+                        <LinkButton
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            href={discordInvitationLink}
+                            target="_blank">
                             <DiscordIcon />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Buy me a trooper">
-                        <IconButton color="inherit" component={Link} to={bmcLink} target={'_blank'}>
+                        </LinkButton>
+                    </LazyTooltip>
+                    <LazyTooltip title="Buy me a trooper">
+                        <LinkButton
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            href={bmcLink}
+                            target="_blank">
                             <BmcIcon />
-                        </IconButton>
-                    </Tooltip>
-                    <Tooltip title="Sync with the Tacticus API">
+                        </LinkButton>
+                    </LazyTooltip>
+                    <LazyTooltip title="Sync with the Tacticus API">
                         <SyncButton showText={false} iconButton={true} />
-                    </Tooltip>
+                    </LazyTooltip>
                     <ThemeSwitch />
-                    <Tooltip title="What's new">
-                        <IconButton color="inherit" onClick={() => setShowWhatsNew(true)}>
-                            <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
+                    <LazyTooltip title="What's new">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            onPress={() => setShowWhatsNew(true)}>
+                            <span className="relative">
                                 <CampaignIcon />
-                            </Badge>
-                        </IconButton>
-                    </Tooltip>
+                                {!seenNewVersion && (
+                                    <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-(--primary)" />
+                                )}
+                            </span>
+                        </Button>
+                    </LazyTooltip>
                     {isTabletOrMobile && (
                         <>
-                            <Button
+                            <MuiButton
                                 id="basic-button"
                                 aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
                                 aria-haspopup="true"
@@ -209,7 +219,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                                 color="inherit"
                                 onClick={navigationMenuControls.handleClick}>
                                 <MenuIcon />
-                            </Button>
+                            </MuiButton>
                             <UserMenu />
                             {navigationMenu}
                         </>
