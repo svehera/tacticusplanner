@@ -436,7 +436,16 @@ export class GoalsService {
                                   onslaughtPreferences
                               )
                             : 0),
-                    onslaughtMythicShards: (g.mythicShardsPerToken || undefined) ?? 1,
+                    onslaughtMythicShards:
+                        (g.mythicShardsPerToken || undefined) ??
+                        (unit.alliance
+                            ? getOnslaughtMidpointForCharacter(
+                                  Math.max(unit.rarity, Rarity.Legendary) as Rarity,
+                                  Math.max(unit.stars, RarityStars.OneBlueStar) as RarityStars,
+                                  unit.alliance as Alliance,
+                                  onslaughtPreferences
+                              )
+                            : 1),
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
@@ -464,9 +473,16 @@ export class GoalsService {
                 const targetNeedsMythicShards =
                     g.targetRarity! >= Rarity.Mythic ||
                     (g.targetRarity! === Rarity.Legendary && targetStars >= RarityStars.OneBlueStar);
+                // Mythic shards are earned once the character reaches Legendary+OneBlueStar.
+                // Clamp to that threshold so cross-boundary goals don't use the regular shard rate.
                 const defaultMythicShards =
                     targetNeedsMythicShards && unit.alliance
-                        ? getOnslaughtMidpointForCharacter(unit.rarity, unit.stars, unit.alliance, onslaughtPreferences)
+                        ? getOnslaughtMidpointForCharacter(
+                              Math.max(unit.rarity, Rarity.Legendary) as Rarity,
+                              Math.max(unit.stars, RarityStars.OneBlueStar) as RarityStars,
+                              unit.alliance,
+                              onslaughtPreferences
+                          )
                         : 0;
                 const result: ICharacterAscendGoal = {
                     type: PersonalGoalType.Ascend,
