@@ -16,7 +16,7 @@ If `$ARGUMENTS` is empty or you can't tell what the page should do, ask the user
 These four files are non-optional context. The skill instructions below are deliberately thin in places where these files are authoritative — you need them loaded.
 
 ```
-Read: .claude/skills/build-page/conventions.md
+Read: CONVENTIONS.md
 Read: src/fsd/1-pages/ui-kit/ui-kit.page.tsx
 Read: src/fsd/0-app/routing/desktop-routes.tsx
 Read: src/models/menu-items.tsx

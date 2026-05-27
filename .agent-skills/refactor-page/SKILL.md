@@ -33,7 +33,7 @@ The distinction matters for how you'll apply changes later.
 Load these in parallel:
 
 ```
-Read: .claude/skills/build-page/conventions.md
+Read: CONVENTIONS.md
 Read: src/fsd/1-pages/ui-kit/ui-kit.page.tsx
 Read: {target file}
 ```
@@ -108,9 +108,10 @@ These have shared replacements; reach for them rather than rebuilding:
 - MUI `Tooltip` → `<AccessibleTooltip>` or `<LazyTooltip>`
 - MUI `Accordion` → `<Accordion>` + `<AccordionHeader>` + `<AccordionBody>` from `@/fsd/5-shared/ui`. Note: `AccordionSummary` → `AccordionHeader`, `AccordionDetails` → `AccordionBody`. The `expandIcon` prop is removed (shared component manages its own chevron). MUI `onChange={(e, expanded) => ...}` → `onToggle={(expanded) => ...}` (no event param).
 - MUI `Card` → `<Card>` from `@/fsd/5-shared/ui/card`
-- MUI `Divider` → `<Separator>`
+- MUI `Divider` → `<Separator>`. For labeled dividers, pass children: `<Separator>Section Label</Separator>`
 - MUI `CircularProgress` / `LinearProgress` → `<Loader>` or the token ProgressBar pattern
 - Raw `<select>` for rarity / rank / stars / faction → `RaritySelect` / `RankSelect` / `StarsSelect` / `FactionSelect` from `@/fsd/5-shared/ui/selects`. For custom selects use the generic `Select<T>`, `SelectMulti<T>`, `ComboBox<T>`, `ComboBoxMulti<T>` primitives.
+- MUI `Select` with `MenuItem`s that have icons → `SelectMulti<T>` with `renderOption` (icon + text for dropdown) and `renderValue` (compact icons for trigger). See the "Icon-rich multi-select" pattern in conventions.md. Available icon components: `MiscIcon` (damage types via `damage${name}` key), `TraitImage` (trait enum), `ComponentImage` (alliance), `RarityIcon`, `FactionImage`.
 
 **Styling approach**
 

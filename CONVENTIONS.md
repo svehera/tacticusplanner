@@ -311,7 +311,7 @@ Import from `@/fsd/5-shared/ui`:
 - `Badge` — intents: primary/success/warning/danger; appearances: solid/outline
 - `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`
 - `Accordion`, `AccordionHeader`, `AccordionBody` — card-style collapsible. Controlled (`expanded`+`onToggle`) or uncontrolled (`defaultExpanded`). MUI `Accordion`/`AccordionSummary`/`AccordionDetails` are migration targets — use this component instead.
-- `Separator` — horizontal (default) or `orientation="vertical"`
+- `Separator` — horizontal (default) or `orientation="vertical"`. Pass `children` for a labeled horizontal separator: `<Separator>Section Label</Separator>` renders a centered uppercase label between two lines.
 - `Modal`, `Dialog` — `Modal` wraps trigger + `Modal.Content`; inside use `Dialog.Header`, `Dialog.Body`, `Dialog.Footer`, `Dialog.Close`
 - `Loader` — variants: spin/bars/ring; sizes: small/medium/large/extra-large
 - `AccessibleTooltip` — wraps any element, `title` prop (string or JSX)
@@ -327,18 +327,20 @@ Import from `@/fsd/5-shared/ui/selects`:
 - `Select<T>` — single non-searchable, `options: T[]`, `value: T`, `onChange`, `renderOption?`, `renderValue?`, `by?`
 - `SelectMulti<T>` — multi non-searchable, `options: T[]`, `value: T[]`, `onChange`, `renderOption?`, `renderValue?`, `by?`
 - `ComboBox<T>` — single searchable, `options: T[]`, `value: T | null`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`
-- `ComboBoxMulti<T>` — multi searchable, `options: T[]`, `value: T[]`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`
+- `ComboBoxMulti<T>` — multi searchable, `options: T[]`, `value: T[]`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`, `renderValue?`. When no `renderValue` is provided, selected items automatically display as removable Badge chips above the input.
 
 **Domain selects (thin wrappers around primitives):**
 - `RaritySelect` — single, `rarityValues: number[]`, `value: number`, `valueChanges`
 - `RankSelect` — single, `rankValues: number[]`, `value: number`, `valueChanges`
 - `StarsSelect` — single, `starsValues: number[]`, `value: number`, `valueChanges`
 - `FactionSelect` — multi, `factionValues: FactionId[]`, `value: FactionId[]`, `valueChanges`
-- `MultipleSelectCheckmarks` — multi searchable string select, `values: string[]`, `selectedValues: string[]`, `selectionChanges`, `placeholder`
+- `MultipleSelectCheckmarks` — multi searchable string select, `values: string[]`, `selectedValues: string[]`, `selectionChanges`, `placeholder`, `renderOption?`. Wraps `ComboBoxMulti` for simple string lists. Pass `renderOption` to add icons to dropdown items.
 
 Import from `@/fsd/5-shared/ui/icons`:
 
-- `RarityIcon`, `RankIcon`, `StarsIcon`, `FactionImage`, `MiscIcon`, `UnitShardIcon`, `BmcIcon`
+- `RarityIcon`, `RankIcon`, `StarsIcon`, `FactionImage`, `MiscIcon`, `UnitShardIcon`, `BmcIcon`, `TraitImage`, `ComponentImage`
+  - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
+  - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
 
 ---
 
@@ -534,6 +536,83 @@ const dropPanel =
     </Listbox.Options>
 </Listbox>;
 ```
+
+### Icon-rich multi-select (SelectMulti with renderOption + renderValue)
+
+When a multi-select needs icons in both the dropdown and the trigger, use `SelectMulti` with `renderOption` (icon + text for dropdown items) and `renderValue` (compact icons-only for the trigger button). This is the pattern used for Rarity, Faction, Damage Types, Traits, and Alliance selects.
+
+```tsx
+import { SelectMulti } from '@/fsd/5-shared/ui/selects';
+import { MiscIcon, TraitImage, ComponentImage } from '@/fsd/5-shared/ui/icons';
+
+{/* Damage types — MiscIcon with key pattern 'damage' + type (spaces removed) */}
+<SelectMulti<string>
+    options={damageTypesOptions}
+    value={selectedDamageTypes}
+    onChange={setSelectedDamageTypes}
+    label="Damage Types"
+    placeholder="All damage types"
+    renderOption={dt => (
+        <div className="flex items-center gap-2">
+            <MiscIcon icon={`damage${dt.replace(/ /g, '')}` as never} width={20} height={20} />
+            <span>{dt}</span>
+        </div>
+    )}
+    renderValue={selected => (
+        <div className="flex flex-wrap items-center gap-1">
+            {selected.map(dt => (
+                <MiscIcon key={dt} icon={`damage${dt.replace(/ /g, '')}` as never} width={18} height={18} />
+            ))}
+        </div>
+    )}
+/>
+
+{/* Alliance — ComponentImage */}
+<SelectMulti<string>
+    options={Object.values(Alliance)}
+    value={selectedAlliance}
+    onChange={setSelectedAlliance}
+    label="Alliance"
+    placeholder="All alliances"
+    renderOption={a => (
+        <div className="flex items-center gap-2">
+            <ComponentImage alliance={a as Alliance} size="small" />
+            <span>{a}</span>
+        </div>
+    )}
+    renderValue={selected => (
+        <div className="flex flex-wrap items-center gap-1">
+            {selected.map(a => (
+                <ComponentImage key={a} alliance={a as Alliance} size="small" />
+            ))}
+        </div>
+    )}
+/>
+
+{/* Traits — TraitImage */}
+<SelectMulti<string>
+    options={traitsOptions}
+    value={selectedTraits}
+    onChange={setSelectedTraits}
+    label="Traits"
+    placeholder="All traits"
+    renderOption={t => (
+        <div className="flex items-center gap-2">
+            <TraitImage trait={t as Trait} width={20} height={20} />
+            <span>{t}</span>
+        </div>
+    )}
+    renderValue={selected => (
+        <div className="flex flex-wrap items-center gap-1">
+            {selected.map(t => (
+                <TraitImage key={t} trait={t as Trait} width={18} height={18} />
+            ))}
+        </div>
+    )}
+/>
+```
+
+For factions specifically, use the pre-built `FactionSelect` wrapper which handles icons internally.
 
 ---
 
