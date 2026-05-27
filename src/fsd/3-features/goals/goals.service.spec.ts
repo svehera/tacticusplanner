@@ -19,6 +19,7 @@ import {
 } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
+import { IOnslaughtPreferences } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 import { XpUseState } from '@/fsd/1-pages/input-resources';
 import { ArenaLeague, XpIncomeState } from '@/fsd/1-pages/input-xp-income';
 
@@ -220,6 +221,118 @@ describe('Goal service', () => {
             const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
 
             expect(result).toEqual(expectedResult);
+        });
+
+        describe('cross-boundary Ascend (character below OneBlueStar targeting Mythic)', () => {
+            // At adamantine tier 3:
+            //   legendary (no blue star) = regularShards(18, 22) → midpoint 20
+            //   legendaryBlue (OneBlueStar) = mythicShards(1, 2) → midpoint 1.5
+            // Without the fix, defaultMythicShards would be 20 (using regular shard rate).
+            // With the fix, it must be 1.5.
+            const adamantine3Prefs: IOnslaughtPreferences = {
+                [Alliance.Imperial]: { sector: 'adamantine', tier: 3 },
+                [Alliance.Xenos]: { sector: 'adamantine', tier: 3 },
+                [Alliance.Chaos]: { sector: 'adamantine', tier: 3 },
+            };
+
+            it('uses the legendaryBlue midpoint for onslaughtMythicShards when stars < OneBlueStar', () => {
+                const characterMock: ICharacter2 = {
+                    unitType: UnitType.character,
+                    id: 'roswitha',
+                    snowprintId: 'roswitha',
+                    name: 'Roswitha',
+                    shortName: 'Roswitha',
+                    alliance: Alliance.Imperial,
+                    shards: 65,
+                    mythicShards: 0,
+                    rarity: Rarity.Legendary,
+                    stars: RarityStars.RedThreeStars, // below OneBlueStar
+                } as ICharacter2;
+
+                const goalMock: IPersonalGoal = {
+                    id: 'g1',
+                    character: 'roswitha',
+                    type: PersonalGoalType.Ascend,
+                    priority: 1,
+                    dailyRaids: true,
+                    targetRarity: Rarity.Mythic,
+                };
+
+                const result = GoalsService.convertToTypedGoal(
+                    goalMock,
+                    characterMock,
+                    adamantine3Prefs
+                ) as ICharacterAscendGoal;
+
+                // Regular shards: adamantine 3 legendary = regularShards(18,22) → midpoint 20
+                expect(result?.onslaughtShards).toBe(20);
+                // Mythic shards MUST use legendaryBlue bucket = mythicShards(1,2) → midpoint 1.5, NOT 20
+                expect(result?.onslaughtMythicShards).toBe(1.5);
+            });
+
+            it('uses the same rate when character is already at OneBlueStar (no clamping needed)', () => {
+                const characterMock: ICharacter2 = {
+                    unitType: UnitType.character,
+                    id: 'character2',
+                    snowprintId: 'character2',
+                    name: 'Character 2',
+                    shortName: 'char2',
+                    alliance: Alliance.Imperial,
+                    shards: 0,
+                    mythicShards: 0,
+                    rarity: Rarity.Legendary,
+                    stars: RarityStars.OneBlueStar,
+                } as ICharacter2;
+
+                const goalMock: IPersonalGoal = {
+                    id: 'g2',
+                    character: 'character2',
+                    type: PersonalGoalType.Ascend,
+                    priority: 1,
+                    dailyRaids: true,
+                    targetRarity: Rarity.Mythic,
+                };
+
+                const result = GoalsService.convertToTypedGoal(
+                    goalMock,
+                    characterMock,
+                    adamantine3Prefs
+                ) as ICharacterAscendGoal;
+
+                // Already at OneBlueStar, so clamping has no effect — still 1.5
+                expect(result?.onslaughtMythicShards).toBe(1.5);
+            });
+
+            it('returns onslaughtMythicShards 0 for a non-mythic target (target is Legendary, no blue star)', () => {
+                const characterMock: ICharacter2 = {
+                    unitType: UnitType.character,
+                    id: 'character3',
+                    snowprintId: 'character3',
+                    name: 'Character 3',
+                    shortName: 'char3',
+                    alliance: Alliance.Imperial,
+                    shards: 0,
+                    rarity: Rarity.Epic,
+                    stars: RarityStars.FiveStars,
+                } as ICharacter2;
+
+                const goalMock: IPersonalGoal = {
+                    id: 'g3',
+                    character: 'character3',
+                    type: PersonalGoalType.Ascend,
+                    priority: 1,
+                    dailyRaids: true,
+                    targetRarity: Rarity.Legendary,
+                };
+
+                const result = GoalsService.convertToTypedGoal(
+                    goalMock,
+                    characterMock,
+                    adamantine3Prefs
+                ) as ICharacterAscendGoal;
+
+                expect(result?.onslaughtMythicShards).toBe(0);
+            });
         });
     });
 

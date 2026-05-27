@@ -113,7 +113,7 @@ export const EditAscendGoal: React.FC<Props> = ({
                 </>
             )}
 
-            {goal.starsStart >= RarityStars.OneBlueStar && (
+            {(goal.starsStart >= RarityStars.OneBlueStar || goal.rarityEnd >= Rarity.Mythic) && (
                 <>
                     {alliance && (
                         <div className="flex items-center gap-2 text-sm">
@@ -125,8 +125,8 @@ export const EditAscendGoal: React.FC<Props> = ({
                             <span className="text-gray-500">Estimated mythic shards per onslaught:</span>
                             <span className="font-medium text-purple-600">
                                 {formatOnslaughtRewardRange(
-                                    goal.rarityStart,
-                                    goal.starsStart,
+                                    goal.starsStart >= RarityStars.OneBlueStar ? goal.rarityStart : Rarity.Legendary,
+                                    Math.max(goal.starsStart, RarityStars.OneBlueStar),
                                     onslaughtPreferences[alliance].sector,
                                     onslaughtPreferences[alliance].tier
                                 )}
