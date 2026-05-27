@@ -59,12 +59,14 @@ Pick by the foreground you need on top:
 
 ### Accent tokens
 
-| Token          | Light                | Dark                 | Use for                                                               |
-| -------------- | -------------------- | -------------------- | --------------------------------------------------------------------- |
-| `--primary`    | oklch(0.45 0.20 265) | oklch(0.60 0.20 265) | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
-| `--primary-fg` | white                | white                | Text on primary background                                            |
-| `--accent`     | oklch(0.65 0.14 65)  | oklch(0.65 0.14 65)  | Decorative accent (amber-ish)                                         |
-| `--accent-fg`  | zinc-950             | zinc-950             | Text on accent background                                             |
+| Token            | Light    | Dark     | Use for                                                               |
+| ---------------- | -------- | -------- | --------------------------------------------------------------------- |
+| `--primary`      | blue-700 | blue-500 | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
+| `--primary-fg`   | white    | white    | Text on primary background                                            |
+| `--secondary`    | zinc-200 | zinc-700 | Subdued/neutral button fills, outline/plain hover surfaces            |
+| `--secondary-fg` | zinc-950 | zinc-100 | Text on secondary background, icon-button text in both themes         |
+| `--accent`       | amber-600 | amber-600 | Decorative accent (amber)                                            |
+| `--accent-fg`    | zinc-950 | zinc-950 | Text on accent background                                             |
 
 `--accent` is used for the `ButtonPill` toggle — on hover and active state the pill fills with the accent colour. It's intentionally distinct from `--primary` so toggled pills read as "selected" rather than "action."
 
@@ -116,11 +118,8 @@ Common patterns for semantic state tokens:
 {/* Toggle button — success for included, danger for excluded */}
 <Button
     appearance="outline"
-    className={
-        included
-            ? 'border-(--success)/50 text-(--success) hover:bg-(--success)/10'
-            : 'border-(--danger)/50 text-(--danger) hover:bg-(--danger)/10'
-    }
+    intent={included ? 'success' : 'danger'}
+    size="small"
     onPress={toggle}>
     {included ? 'Included' : 'Excluded'}
 </Button>
@@ -232,13 +231,14 @@ New tokens go in `src/fsd/0-app/index.css`:
 
 Allowed: Tailwind palette shades of colours that map to an existing token, **with** a `dark:` variant:
 
-| Token       | Tailwind family  |
-| ----------- | ---------------- |
-| `--primary` | `indigo`         |
-| `--success` | `emerald`        |
-| `--warning` | `amber`          |
-| `--danger`  | `red`            |
-| `--accent`  | `amber` (hue 65) |
+| Token         | Tailwind family |
+| ------------- | --------------- |
+| `--primary`   | `blue`          |
+| `--secondary` | `zinc`          |
+| `--success`   | `emerald`       |
+| `--warning`   | `amber`         |
+| `--danger`    | `red`           |
+| `--accent`    | `amber`         |
 
 **Not allowed:** random Tailwind palette classes with no token relationship (`bg-blue-500`, `text-teal-300`) or wrong grey families (`bg-slate-200`, `text-gray-500` — system uses zinc).
 
@@ -304,7 +304,8 @@ The rank classes (`.stone1`–`.adamantine3`) and rarity classes (`.common`–`.
 
 Import from `@/fsd/5-shared/ui`:
 
-- `Button` — intents: primary/secondary/warning/danger; appearances: solid/outline/plain; sizes: extra-small/small/medium/large/square-petite. Uses `onPress`, not `onClick` (react-aria).
+- `Button` — intents: primary/secondary/success/warning/danger; appearances: solid/outline/plain; sizes: extra-small/small/medium/large/square-petite; shapes: square (default, rounded-lg)/circle (rounded-full). Uses `onPress`, not `onClick` (react-aria). Outline/plain appearances show a state-layer overlay on hover/press and use the intent's accent colour for text (`--btn-accent`). For icon-only buttons use `size="square-petite" appearance="plain"`.
+- `LinkButton` — same API as `Button` (intent, appearance, size, shape) but renders a React Aria `<Link>` (`<a>`) instead of `<button>`. Import from `@/fsd/5-shared/ui/link`. Use for navigation buttons that look like buttons but route via links (e.g. "Go to Goals", "Go to Raids"). Defaults to `intent="primary"`.
 - `ButtonPill` — pill-shaped toggle button
 - `TextField` — label, description, prefix, suffix, isDisabled, isInvalid, errorMessage, isPending, isRevealable, type
 - `Switch` — `isSelected`, `onChange` (receives boolean directly, not event), `children` (label), `isDisabled`

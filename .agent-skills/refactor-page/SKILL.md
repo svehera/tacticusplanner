@@ -76,6 +76,8 @@ Audit:
 [L3] Styling: MUI `Stack` with `sx={{ gap: 2, mb: 2 }}` → plain `<div className="flex gap-2 mb-2">` (Stack is unnecessary when Tailwind covers it).
 [L4] Layout: Clear button rendered conditionally → always render with `isDisabled={!hasFilters}`.
 [L4] Component: raw `<button>` for a real action → `<Button>` from `@/fsd/5-shared/ui`.
+[L4] Component: MUI `Button component={Link}` → `<LinkButton>` from `@/fsd/5-shared/ui/link`.
+[L4] Component: MUI `IconButton` → `<Button size="square-petite" appearance="plain">` with Lucide icon.
 [L4] Colors: `bg-blue-500 text-white` → `<Button>` default styling (don't reach for tokens directly when the component handles it).
 [L5] Component: MUI Switch with `checked` / `onChange={e => ...}` → shared `<Switch>` with `isSelected` / `onChange={setShowCompleted}` (react-aria signature, not DOM event).
 [L7] Colors: `border-slate-200 bg-white dark:bg-slate-800` → `border-(--border) bg-(--card)`. The `dark:` variant goes away — tokens flip automatically.
@@ -101,6 +103,8 @@ The categories below are the ones that show up over and over. Use conventions.md
 These have shared replacements; reach for them rather than rebuilding:
 
 - Raw `<button>` for a real action → `<Button>` from `@/fsd/5-shared/ui` (uses `onPress`, not `onClick` — react-aria, not DOM)
+- MUI `Button component={Link}` (navigation button) → `<LinkButton>` from `@/fsd/5-shared/ui/link` (same props as `Button`: intent, appearance, size, shape)
+- MUI `IconButton` → `<Button size="square-petite" appearance="plain">` with a Lucide icon using `data-slot="icon"`
 - MUI `TextField` or raw `<input>` → `<TextField>` from `@/fsd/5-shared/ui`
 - MUI `Switch` → `<Switch>` from `@/fsd/5-shared/ui/switch` (uses `isSelected`, not `checked`)
 - MUI `Chip` for filters → the token-aware chip pattern from conventions.md "Rarity / tag chips"

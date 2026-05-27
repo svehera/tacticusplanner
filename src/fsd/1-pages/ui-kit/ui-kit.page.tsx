@@ -17,13 +17,17 @@ import {
     Calendar,
     CheckCircle2,
     ChevronDown,
-    Download,
     Edit,
     ExternalLink,
     GripVertical,
+    HelpCircle,
+    Link2,
     Mail,
-    Plus,
+    Megaphone,
+    Menu,
+    RefreshCw,
     Search,
+    Settings,
     Trash2,
     X,
 } from 'lucide-react';
@@ -2019,6 +2023,7 @@ const Swatch = ({ token, label, fg }: SwatchProps) => (
 
 const SEMANTIC_PAIRS: Array<{ token: string; fg: string; label: string }> = [
     { token: '--primary', fg: '--primary-fg', label: 'Primary' },
+    { token: '--secondary', fg: '--secondary-fg', label: 'Secondary' },
     { token: '--neutral', fg: '--neutral-fg', label: 'Neutral' },
     { token: '--accent', fg: '--accent-fg', label: 'Accent' },
     { token: '--success', fg: '--success-fg', label: 'Success' },
@@ -2151,6 +2156,7 @@ export const UiKitPage = () => {
                     <Row>
                         <Button intent="primary">Primary</Button>
                         <Button intent="secondary">Secondary</Button>
+                        <Button intent="success">Success</Button>
                         <Button intent="warning">Warning</Button>
                         <Button intent="danger">Danger</Button>
                         <Separator orientation="vertical" className="h-8" />
@@ -2176,54 +2182,100 @@ export const UiKitPage = () => {
                         <Button isPending>Pending</Button>
                     </Row>
                 </Group>
-                <Group label="Icon only">
-                    <Row>
-                        <Button size="square-petite" intent="primary">
-                            <Plus data-slot="icon" />
-                        </Button>
-                        <Button size="square-petite" intent="secondary">
-                            <Search data-slot="icon" />
-                        </Button>
-                        <Button size="square-petite" intent="danger">
-                            <Trash2 data-slot="icon" />
-                        </Button>
-                        <Button size="square-petite" appearance="outline" intent="primary">
-                            <Edit data-slot="icon" />
+                <ChapterDivider label="Real-world examples" />
+                <Group label="App bar (replaces MUI IconButton)">
+                    <Row className="rounded-lg border border-(--border) bg-(--sidebar) px-3 py-2">
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <HelpCircle data-slot="icon" />
                         </Button>
                         <Button size="square-petite" appearance="plain" intent="secondary">
-                            <Download data-slot="icon" />
+                            <ExternalLink data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <RefreshCw data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <Megaphone data-slot="icon" />
+                        </Button>
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <Menu data-slot="icon" />
                         </Button>
                     </Row>
                 </Group>
-                <Group label="Icon + label">
-                    <Row className="items-end">
-                        <Button size="extra-small" intent="primary">
-                            <Plus data-slot="icon" />
-                            Add
+                <Group label="Goal card actions">
+                    <Row>
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <ArrowUp data-slot="icon" />
                         </Button>
-                        <Button size="small" intent="primary">
-                            <Plus data-slot="icon" />
-                            Add goal
+                        <Button size="square-petite" appearance="plain" intent="secondary">
+                            <ArrowDown data-slot="icon" />
                         </Button>
-                        <Button size="small" intent="secondary" appearance="outline">
+                        <Button size="square-petite" appearance="plain" intent="secondary">
                             <Edit data-slot="icon" />
-                            Edit
+                        </Button>
+                        <Button size="square-petite" appearance="plain" intent="danger">
+                            <Trash2 data-slot="icon" />
+                        </Button>
+                        <Separator orientation="vertical" className="h-8" />
+                        <Button size="small" intent="success" appearance="outline">
+                            <CheckCircle2 data-slot="icon" />
+                            Active
                         </Button>
                         <Button size="small" intent="danger" appearance="outline">
-                            <Trash2 data-slot="icon" />
-                            Delete
+                            <X data-slot="icon" />
+                            Inactive
+                        </Button>
+                        <Separator orientation="vertical" className="h-8" />
+                        <Button size="small" intent="secondary" appearance="outline">
+                            <Link2 data-slot="icon" />
+                            Go to Raids Table
+                        </Button>
+                    </Row>
+                </Group>
+                <Group label="Goals / Raids header">
+                    <Row>
+                        <Button size="small" intent="primary">
+                            <Link2 data-slot="icon" />
+                            Go to Goals
+                        </Button>
+                        <Button size="small" intent="secondary" appearance="outline">
+                            <Settings data-slot="icon" />
+                            Raids Settings
                         </Button>
                         <Button size="small" intent="primary">
-                            <Download data-slot="icon" />
-                            Export JSON
+                            <RefreshCw data-slot="icon" />
+                            Sync
                         </Button>
-                        <Button size="medium" intent="primary">
-                            <Plus data-slot="icon" />
-                            Add new goal
+                        <Button size="small" intent="success">
+                            <RefreshCw data-slot="icon" />
+                            Refresh
                         </Button>
-                        <Button size="medium" intent="secondary" appearance="outline">
-                            <Search data-slot="icon" />
-                            Search characters
+                        <Button size="small" intent="danger">
+                            <X data-slot="icon" />
+                            Reset day
+                        </Button>
+                        <Button size="small" intent="danger">
+                            <Trash2 data-slot="icon" />
+                            Delete all
+                        </Button>
+                    </Row>
+                </Group>
+                <Group label="LRE dialogs">
+                    <Row>
+                        <Button size="small" intent="primary" appearance="plain">
+                            Save
+                        </Button>
+                        <Button size="small" intent="secondary" appearance="plain">
+                            Cancel
+                        </Button>
+                        <Button size="small" intent="danger">
+                            Delete
+                        </Button>
+                        <Button size="small" intent="secondary" appearance="plain">
+                            Clear all
+                        </Button>
+                        <Button size="small" intent="primary" appearance="plain">
+                            Add top 5
                         </Button>
                     </Row>
                 </Group>

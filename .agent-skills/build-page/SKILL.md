@@ -94,7 +94,7 @@ All colors come from design tokens — `bg-(--primary)`, `text-(--soft-fg)`, `bo
 
 **Components**
 
-- Generic UI components: import from `@/fsd/5-shared/ui` (Button, TextField, Switch, Badge, Card, Modal, Separator, AccessibleTooltip, Loader, …). The full list is in conventions.md.
+- Generic UI components: import from `@/fsd/5-shared/ui` (Button, TextField, Switch, Badge, Card, Modal, Separator, AccessibleTooltip, Loader, …). The full list is in conventions.md. For navigation buttons use `LinkButton` from `@/fsd/5-shared/ui/link` (same API as Button but renders an `<a>`). For icon-only buttons use `Button size="square-petite" appearance="plain"` with a Lucide icon using `data-slot="icon"`.
 - Domain selects: import from `@/fsd/5-shared/ui/selects` — `RaritySelect`, `RankSelect`, `StarsSelect`, `FactionSelect`. Generic primitives: `Select<T>`, `SelectMulti<T>`, `ComboBox<T>`, `ComboBoxMulti<T>`.
 - Icons: MUI from `@mui/icons-material/` or Lucide from `lucide-react`. Check the surrounding pages for which one's in use and stay consistent. Pick an icon that actually relates to the page's purpose (e.g., a database/inbox icon for data entry, a target/compass for planning, a book/library for reference) — not the first one that comes to mind.
   **Filter bars**
