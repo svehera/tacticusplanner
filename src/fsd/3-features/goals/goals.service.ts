@@ -969,16 +969,18 @@ export class GoalsService {
                     continue;
                 }
 
-                const { xpNeeded, newXpBooksAccrual } = this._adjustGoalXp(
-                    goal,
-                    heldBooks,
-                    xpIncomeState,
-                    xpBooksAccrual,
-                    today,
-                    xpIncomeState.defaultCodexToUse
-                );
-                totalXpNeeded += xpNeeded;
-                xpBooksAccrual = newXpBooksAccrual;
+                if (goal.included !== false) {
+                    const { xpNeeded, newXpBooksAccrual } = this._adjustGoalXp(
+                        goal,
+                        heldBooks,
+                        xpIncomeState,
+                        xpBooksAccrual,
+                        today,
+                        xpIncomeState.defaultCodexToUse
+                    );
+                    totalXpNeeded += xpNeeded;
+                    xpBooksAccrual = newXpBooksAccrual;
+                }
 
                 if (goal.included !== false) {
                     this._processGoalAdjustments(
