@@ -830,5 +830,99 @@ describe('GoalsService.adjustGoalEstimates', () => {
 
             expect(result.neededOrbs[Alliance.Imperial][Rarity.Legendary]).toBe(0);
         });
+
+        it('excluded rank-up goal with xpEstimate does not add to neededXp', () => {
+            const goalId = 'goal-inactive-xp';
+            const estimate = makeGoalEstimate(goalId, false, {
+                xpEstimate: {
+                    books: 5,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 10,
+                    targetLevel: 20,
+                    xpLeft: 50_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, false);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates([goal], [estimate], inventory, noXpUse, [], [], noXpIncome);
+
+            expect(result.neededXp).toBe(0);
+        });
+
+        it('excluded goal does not consume held xp books that active goals need', () => {
+            const inactiveGoalId = 'goal-inactive-xp-books';
+            const activeGoalId = 'goal-active-xp-books';
+
+            const inactiveEstimate = makeGoalEstimate(inactiveGoalId, false, {
+                xpEstimate: {
+                    books: 3,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 5,
+                    targetLevel: 10,
+                    xpLeft: 30_000,
+                },
+            });
+            const activeEstimate = makeGoalEstimate(activeGoalId, true, {
+                xpEstimate: {
+                    books: 2,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 10,
+                    targetLevel: 15,
+                    xpLeft: 20_000,
+                },
+            });
+
+            const goals = [
+                makePersonalGoal(inactiveGoalId, PersonalGoalType.UpgradeRank, 1, false),
+                makePersonalGoal(activeGoalId, PersonalGoalType.UpgradeRank, 2, true),
+            ];
+
+            // Give inventory exactly enough books to cover the active goal (20 000 XP)
+            const inventory = makeEmptyInventory();
+            inventory.xpBooks[Rarity.Legendary] = 2; // 2 × 10 000 = 20 000 XP
+
+            const xpUseWithLegendary: XpUseState = { ...noXpUse, useLegendary: true };
+
+            const result = GoalsService.adjustGoalEstimates(
+                goals,
+                [inactiveEstimate, activeEstimate],
+                inventory,
+                xpUseWithLegendary,
+                [],
+                [],
+                noXpIncome
+            );
+
+            // The inactive goal must NOT consume the held books — the active goal should be fully covered
+            expect(result.neededXp).toBe(0);
+        });
+    });
+
+    describe('included goal with xpEstimate', () => {
+        it('adds xpLeft to neededXp', () => {
+            const goalId = 'goal-active-xp';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 5,
+                    bookRarity: Rarity.Legendary,
+                    gold: 0,
+                    currentLevel: 10,
+                    targetLevel: 20,
+                    xpLeft: 50_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+            const inventory = makeEmptyInventory();
+
+            const result = GoalsService.adjustGoalEstimates([goal], [estimate], inventory, noXpUse, [], [], noXpIncome);
+
+            expect(result.neededXp).toBe(50_000);
+        });
     });
 });
