@@ -1,16 +1,7 @@
-﻿import {
-    Delete as DeleteIcon,
-    GridView as GridViewIcon,
-    Link as LinkIcon,
-    TableRows as TableRowsIcon,
-} from '@mui/icons-material';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { FormControlLabel, Switch } from '@mui/material';
-import Button from '@mui/material/Button';
-import { cloneDeep, sum } from 'lodash';
+﻿import { cloneDeep, sum } from 'lodash';
+import { Grid2x2, Link2, Rows3, Settings, Trash2 } from 'lucide-react';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { Link } from 'react-router-dom';
 
 import { IDailyRaidsFarmOrder } from '@/models/interfaces';
 import { GoalsEstimateFunction } from '@/services/goals-estimate-service';
@@ -24,8 +15,10 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
-import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
+import { Accordion, AccordionHeader, AccordionBody, Button, Separator } from '@/fsd/5-shared/ui';
 import { ForgeBadgesTotal, MiscIcon, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
+import { Switch } from '@/fsd/5-shared/ui/switch';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -381,56 +374,67 @@ export const Goals = () => {
     };
 
     return (
-        <div>
-            <div className="flex flex-wrap items-center gap-5">
-                <Button
-                    size="small"
-                    variant={'contained'}
-                    component={Link}
-                    to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
-                    <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
-                </Button>
-
-                <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
-                    <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
-                </Button>
-
-                <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
-
-                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
+        <div className="space-y-8 py-6">
+            <div>
+                <h2>Goals</h2>
+                <p className="text-sm text-(--soft-fg)">
+                    Set and track character upgrade, ascension, and ability goals.
+                </p>
+            </div>
+            <div className="flex flex-wrap items-center gap-3">
+                {/* Primary CTA */}
                 <SetGoalDialog key={goals.length} />
-                {hasSync && <SyncButton showText={!isMobile} />}
-                {}
-                <Button size="small" variant="contained" color="error" onClick={onDeleteAll}>
-                    <DeleteIcon sx={{ mr: 1 }} /> delete all
+
+                <Separator orientation="vertical" className="mx-1 h-6" />
+
+                {/* Navigation / utility */}
+                <LinkButton
+                    appearance="outline"
+                    size="small"
+                    className="no-underline"
+                    href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
+                    <Link2 data-slot="icon" /> Go to Raids
+                </LinkButton>
+                <Button appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
+                    <Settings data-slot="icon" /> Raids Settings
                 </Button>
-                <span className="text-xl">
-                    {goals.length}/{goalsLimit}
+                {hasSync && <SyncButton showText={!isMobile} variant="outlined" />}
+                <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
+                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
+
+                <Separator orientation="vertical" className="mx-1 h-6" />
+
+                {/* Counter */}
+                <span className="text-sm text-(--soft-fg)">
+                    <span className="font-medium text-(--fg)">Slots</span> {goals.length}/{goalsLimit}
                 </span>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.goalsTableView}
-                            onChange={event => updateView(event.target.checked)}
-                        />
-                    }
-                    label={
-                        <div className="flex-box gap5">
-                            {viewPreferences.goalsTableView ? (
-                                <TableRowsIcon color="primary" />
-                            ) : (
-                                <GridViewIcon color="primary" />
-                            )}{' '}
-                            view
-                        </div>
-                    }
-                />
+
+                <Separator orientation="vertical" className="mx-1 h-6" />
+
+                {/* View options */}
+                <Switch isSelected={viewPreferences.goalsTableView} onChange={updateView}>
+                    <span className="flex items-center gap-1">
+                        {viewPreferences.goalsTableView ? (
+                            <Rows3 className="size-5 text-(--primary)" />
+                        ) : (
+                            <Grid2x2 className="size-5 text-(--primary)" />
+                        )}{' '}
+                        view
+                    </span>
+                </Switch>
                 <GoalColorCodingToggle
-                    currentMode={viewPreferences.goalColorMode || 'None'} // Read the new state property
+                    currentMode={viewPreferences.goalColorMode || 'None'}
                     onToggle={updateColorCodingMode}
                 />
+
+                <Separator orientation="vertical" className="mx-1 h-6" />
+
+                {/* Destructive — pushed right */}
+                <Button appearance="outline" intent="danger" size="small" onPress={onDeleteAll}>
+                    <Trash2 data-slot="icon" /> Delete All
+                </Button>
             </div>
-            <div className="my-2 w-full max-w-[1100px]">
+            <div className="w-full max-w-[1100px]">
                 <Accordion expanded={resourcesExpanded} onToggle={setResourcesExpanded}>
                     <AccordionHeader>
                         <div className="flex w-full flex-wrap items-center gap-2 pr-2">
@@ -480,7 +484,7 @@ export const Goals = () => {
                                     </div>
                                     <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                            <div key={alliance} className="flex-box mb-2 last:mb-0">
+                                            <div key={alliance} className="mb-2 flex items-center last:mb-0">
                                                 <BadgesTotal
                                                     badges={adjustedGoalsEstimates.neededBadges[alliance]}
                                                     alliance={alliance}
@@ -497,7 +501,7 @@ export const Goals = () => {
                                     </div>
                                     <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                            <div key={alliance} className="flex-box mb-2 last:mb-0">
+                                            <div key={alliance} className="mb-2 flex items-center last:mb-0">
                                                 <OrbsTotal
                                                     orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
                                                     alliance={alliance}
@@ -561,7 +565,6 @@ export const Goals = () => {
             </div>
             {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
                 <Accordion
-                    className="my-5"
                     expanded={sectionsExpanded.upgrades}
                     onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}>
                     <AccordionHeader>
@@ -625,7 +628,6 @@ export const Goals = () => {
             )}
             {shardsGoals.length > 0 && (
                 <Accordion
-                    className="my-5"
                     expanded={sectionsExpanded.shards}
                     onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}>
                     <AccordionHeader>
@@ -686,7 +688,6 @@ export const Goals = () => {
             )}
             {upgradeAbilities.length > 0 && (
                 <Accordion
-                    className="my-5"
                     expanded={sectionsExpanded.abilities}
                     onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}>
                     <AccordionHeader>

@@ -1,6 +1,7 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
-import { CheckCircle, FilterListOff } from '@mui/icons-material';
+import { FilterListOff } from '@mui/icons-material';
 import Button from '@mui/material/Button';
+import { Calendar, CheckCircle2 } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
@@ -100,9 +101,17 @@ export const GoalCard: React.FC<Props> = ({
         }
     };
 
-    const hasFooter = !!onToggleInclude || showRaidsButton(goal);
+    const isReached = !!goalEstimate.completed && !goalEstimate.blocked;
+    const hasFooter = !!onToggleInclude || showRaidsButton(goal) || isReached;
+
+    const stripeClass = isReached
+        ? 'border-l-[3px] border-l-(--success)'
+        : goalEstimate.blocked
+          ? 'border-l-[3px] border-l-(--danger)'
+          : '';
+
     const cardBackgroundStyle =
-        bgColor === 'rgba(0, 0, 0, 0)'
+        isReached || bgColor === 'rgba(0, 0, 0, 0)'
             ? { backgroundColor: 'var(--card)' }
             : {
                   backgroundColor: 'var(--card)',
@@ -116,7 +125,7 @@ export const GoalCard: React.FC<Props> = ({
 
     return (
         <div
-            className="flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors"
+            className={`flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors ${stripeClass}`}
             style={cardBackgroundStyle}>
             {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
             <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--card-border) px-4 pt-3 pb-2">
@@ -149,35 +158,56 @@ export const GoalCard: React.FC<Props> = ({
             </div>
             <div className="flex flex-1 flex-col px-4 pt-3 pb-3 text-sm">
                 <div className="flex-1">
-                    {renderBody()}
+                    {isReached ? (
+                        <div className="flex flex-col gap-2">
+                            <span className="inline-flex items-center gap-1.5 text-sm font-medium text-(--success)">
+                                <CheckCircle2 className="size-4" /> Reached
+                            </span>
+                            <div className="flex items-center gap-2 text-sm text-(--soft-fg)">
+                                <Calendar className="size-4" />
+                                Reached {calendarDate ?? ''}
+                            </div>
+                        </div>
+                    ) : (
+                        renderBody()
+                    )}
                     {goal.notes && <p className="mt-2 text-sm text-(--soft-fg)">{goal.notes}</p>}
                 </div>
                 {hasFooter && (
                     <>
                         <div className="mt-3 mb-2 border-t border-(--card-border)" />
                         <div className="flex items-center justify-between gap-2">
-                            {onToggleInclude && (
+                            {isReached ? (
+                                <Button
+                                    size="small"
+                                    variant="outlined"
+                                    disabled
+                                    className="rounded-full !border-(--success)/50 !bg-(--success)/10 px-3 !text-(--success)"
+                                    startIcon={<CheckCircle2 className="size-4" />}>
+                                    Reached
+                                </Button>
+                            ) : onToggleInclude ? (
                                 <Button
                                     size="small"
                                     variant="outlined"
                                     className={
                                         'rounded-full bg-(--neutral) px-3 ' +
                                         (goal.include
-                                            ? '!border-(--success)/50 !text-(--success) hover:!bg-(--success)/10'
-                                            : '!border-(--danger)/50 !text-(--danger) hover:!bg-(--danger)/10')
+                                            ? '!border-(--primary)/50 !text-(--primary) hover:!bg-(--primary)/10'
+                                            : '!border-(--soft-fg)/50 !text-(--soft-fg) hover:!bg-(--neutral)')
                                     }
                                     startIcon={
                                         goal.include ? (
-                                            <CheckCircle fontSize="small" />
+                                            <CheckCircle2 className="size-4" />
                                         ) : (
                                             <FilterListOff fontSize="small" />
                                         )
                                     }
                                     onClick={onToggleInclude}>
-                                    {goal.include ? 'Active' : 'Inactive'}
+                                    {goal.include ? 'In Progress' : 'Paused'}
                                 </Button>
-                            )}
-                            {showRaidsButton(goal) && (
+                            ) : undefined}
+                            {!isReached && showRaidsButton(goal) && (
                                 <GoalCardRaidsButton
                                     unitId={
                                         goal.type === PersonalGoalType.UpgradeMaterial

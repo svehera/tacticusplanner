@@ -1,4 +1,4 @@
-import { ArrowDownward, ArrowUpward, Block, CheckCircle, DeleteForever, Edit } from '@mui/icons-material';
+import { ArrowDownward, ArrowUpward, Block, DeleteForever, Edit } from '@mui/icons-material';
 import IconButton from '@mui/material/IconButton';
 import React from 'react';
 
@@ -14,13 +14,6 @@ interface Props {
 /** Renders the action buttons and status indicators (completion, blocked) for a goal card. */
 export const GoalCardActions: React.FC<Props> = ({ goalEstimate, menuItemSelect }) => (
     <div className="flex items-center gap-0.5 text-(--soft-fg)">
-        {!!goalEstimate.completed && !goalEstimate.blocked && (
-            <AccessibleTooltip title="Goal is completed in current estimation.">
-                <span className="flex-box gap-[3px]" tabIndex={0}>
-                    <CheckCircle fontSize="small" className="text-success" />
-                </span>
-            </AccessibleTooltip>
-        )}
         {!!goalEstimate.blocked && (
             <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
                 <span className="flex-box gap-[3px]" tabIndex={0}>

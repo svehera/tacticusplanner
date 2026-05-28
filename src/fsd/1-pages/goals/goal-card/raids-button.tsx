@@ -1,4 +1,3 @@
-import LinkIcon from '@mui/icons-material/Link';
 import Button from '@mui/material/Button';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
@@ -19,7 +18,7 @@ export const GoalCardRaidsButton: React.FC<Props> = ({ unitId }) => {
             component={Link}
             to={to}
             target={'_self'}>
-            <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
+            Open in raids <span className="pl-0.5">→</span>
         </Button>
     );
 };

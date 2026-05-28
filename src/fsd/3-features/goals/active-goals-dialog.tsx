@@ -2,12 +2,14 @@
 /* eslint-disable import-x/no-internal-modules */
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
 import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
-import Button from '@mui/material/Button';
+import MuiButton from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { PersonalGoalType } from 'src/models/enums';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
+
+import { Button } from '@/fsd/5-shared/ui';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
@@ -105,13 +107,14 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     return (
         <>
             <Button
-                variant={'outlined'}
-                disabled={!goals?.length}
-                onClick={() => {
+                appearance="outline"
+                size="small"
+                isDisabled={!goals?.length}
+                onPress={() => {
                     setCurrentGoalsSelect(goals);
                     setOpenGoals(true);
                 }}>
-                <TrackChangesIcon /> {selectedGoalsCount} of {goals.length}
+                <TrackChangesIcon data-slot="icon" /> {selectedGoalsCount} of {goals.length}
             </Button>
 
             <Dialog
@@ -155,12 +158,12 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                 </DialogContent>
 
                 <DialogActions>
-                    <Button variant={'outlined'} onClick={() => setOpenGoals(false)}>
+                    <MuiButton variant={'outlined'} onClick={() => setOpenGoals(false)}>
                         Cancel
-                    </Button>
-                    <Button variant={'contained'} disabled={!hasChanges} color="success" onClick={handleSaveChanges}>
+                    </MuiButton>
+                    <MuiButton variant={'contained'} disabled={!hasChanges} color="success" onClick={handleSaveChanges}>
                         Save changes
-                    </Button>
+                    </MuiButton>
                 </DialogActions>
             </Dialog>
 
