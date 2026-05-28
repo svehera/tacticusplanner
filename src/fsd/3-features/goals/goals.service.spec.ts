@@ -8,6 +8,7 @@ import { IPersonalGoal, IInventory } from 'src/models/interfaces';
 import { Alliance, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
+import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 
 import {
     ICharacterAscendGoal,
@@ -1036,6 +1037,188 @@ describe('GoalsService.adjustGoalEstimates', () => {
             const result = GoalsService.adjustGoalEstimates([goal], [estimate], inventory, noXpUse, [], [], noXpIncome);
 
             expect(result.neededXp).toBe(50_000);
+        });
+    });
+});
+
+// ─── computeMaterialQuantityInfo ─────────────────────────────────────────────
+
+const makeMaterialGoal = (
+    goalId: string,
+    materialId: string,
+    quantity: number,
+    priority: number
+): IUpgradeMaterialGoal => ({
+    goalId,
+    priority,
+    include: true,
+    notes: '',
+    type: PersonalGoalType.UpgradeMaterial,
+    upgradeMaterialId: materialId,
+    quantity,
+});
+
+/** Shorthand to build the allDemands array from IUpgradeMaterialGoals for the same material. */
+const demandsFromMaterialGoals = (goals: IUpgradeMaterialGoal[]) =>
+    goals.map(g => ({ goalId: g.goalId, priority: g.priority, quantity: g.quantity }));
+
+describe('GoalsService.computeMaterialQuantityInfo', () => {
+    const MAT = 'mat-boltstorm-shells';
+
+    describe('total-materials mode (isGoalPriority = false)', () => {
+        it('shows held / totalNeeded across all goals / thisGoalQuantity', () => {
+            // Three other goals need 5 each = 15, this goal needs 3, held = 8 → 8/18(3)
+            const thisGoal = makeMaterialGoal('g-this', MAT, 3, 3);
+            const allDemands = demandsFromMaterialGoals([
+                makeMaterialGoal('g-0', MAT, 5, 0),
+                makeMaterialGoal('g-1', MAT, 5, 1),
+                makeMaterialGoal('g-2', MAT, 5, 2),
+                thisGoal,
+            ]);
+
+            const result = GoalsService.computeMaterialQuantityInfo(thisGoal, allDemands, 8, false);
+
+            expect(result.held).toBe(8);
+            expect(result.totalNeeded).toBe(18);
+            expect(result.thisGoalQuantity).toBe(3);
+            expect(result.isGoalPriority).toBe(false);
+            expect(result.coveredByInventory).toBeUndefined();
+        });
+
+        it('includes rank/mow goal demands in totalNeeded', () => {
+            // UpgradeMaterial goal wants 28, two rank goals need 6 each → total 40
+            const thisGoal = makeMaterialGoal('g-mat', MAT, 28, 2);
+            const allDemands = [
+                { goalId: 'g-dante', priority: 0, quantity: 6 }, // rank goal (Dante)
+                { goalId: 'g-boss', priority: 1, quantity: 6 }, // rank goal (Boss)
+                { goalId: thisGoal.goalId, priority: 2, quantity: 28 },
+            ];
+
+            const result = GoalsService.computeMaterialQuantityInfo(thisGoal, allDemands, 26, false);
+
+            expect(result.held).toBe(26);
+            expect(result.totalNeeded).toBe(40);
+            expect(result.thisGoalQuantity).toBe(28);
+        });
+    });
+
+    describe('goal-priority mode (isGoalPriority = true)', () => {
+        // Setup: goal 0 needs 5, goal 1 needs 4, this goal (priority 2) needs 3, goal 3 needs 6
+        // totalNeeded = 18
+        // eslint-disable-next-line unicorn/consistent-function-scoping
+        const makeBaseDemands = (thisGoalId: string) => [
+            { goalId: 'g-0', priority: 0, quantity: 5 },
+            { goalId: 'g-1', priority: 1, quantity: 4 },
+            { goalId: thisGoalId, priority: 2, quantity: 3 },
+            { goalId: 'g-3', priority: 3, quantity: 6 },
+        ];
+
+        it('coveredByInventory = 0 when inventory is exhausted by higher-priority goals (held = 6)', () => {
+            const thisGoal = makeMaterialGoal('g-this', MAT, 3, 2);
+            // held=6: goal-0 takes 5 → 1 remaining; goal-1 takes min(1,4)=1 → 0; this gets 0
+            const result = GoalsService.computeMaterialQuantityInfo(
+                thisGoal,
+                makeBaseDemands(thisGoal.goalId),
+                6,
+                true
+            );
+            expect(result.coveredByInventory).toBe(0);
+            expect(result.held).toBe(6);
+            expect(result.totalNeeded).toBe(18);
+        });
+
+        it('coveredByInventory = thisGoalQuantity when enough inventory remains (held = 30)', () => {
+            const thisGoal = makeMaterialGoal('g-this', MAT, 3, 2);
+            // held=30: goal-0 takes 5 → 25; goal-1 takes 4 → 21; this takes min(21,3)=3
+            const result = GoalsService.computeMaterialQuantityInfo(
+                thisGoal,
+                makeBaseDemands(thisGoal.goalId),
+                30,
+                true
+            );
+            expect(result.coveredByInventory).toBe(3);
+        });
+
+        it('coveredByInventory = 0 when held = 0', () => {
+            const thisGoal = makeMaterialGoal('g-this', MAT, 3, 2);
+            const result = GoalsService.computeMaterialQuantityInfo(
+                thisGoal,
+                makeBaseDemands(thisGoal.goalId),
+                0,
+                true
+            );
+            expect(result.coveredByInventory).toBe(0);
+        });
+
+        it('coveredByInventory = thisGoalQuantity when held = 17', () => {
+            const thisGoal = makeMaterialGoal('g-this', MAT, 3, 2);
+            // held=17: goal-0 takes 5 → 12; goal-1 takes 4 → 8; this takes min(8,3)=3
+            const result = GoalsService.computeMaterialQuantityInfo(
+                thisGoal,
+                makeBaseDemands(thisGoal.goalId),
+                17,
+                true
+            );
+            expect(result.coveredByInventory).toBe(3);
+            expect(result.held).toBe(17);
+            expect(result.totalNeeded).toBe(18);
+        });
+
+        it('highest-priority goal gets first dibs (held = 3, wants 5, gets all 3)', () => {
+            const thisGoal = makeMaterialGoal('g-this', MAT, 5, 0);
+            const result = GoalsService.computeMaterialQuantityInfo(
+                thisGoal,
+                [
+                    { goalId: thisGoal.goalId, priority: 0, quantity: 5 },
+                    { goalId: 'g-lower', priority: 1, quantity: 3 },
+                ],
+                3,
+                true
+            );
+            expect(result.coveredByInventory).toBe(3);
+        });
+
+        it('coveredByInventory = 0 when held = 0 and this is the highest-priority goal', () => {
+            const thisGoal = makeMaterialGoal('g-this', MAT, 5, 0);
+            const result = GoalsService.computeMaterialQuantityInfo(
+                thisGoal,
+                [
+                    { goalId: thisGoal.goalId, priority: 0, quantity: 5 },
+                    { goalId: 'g-lower', priority: 1, quantity: 3 },
+                ],
+                0,
+                true
+            );
+            expect(result.coveredByInventory).toBe(0);
+        });
+
+        describe("user's scenario: Dante (A1→A2) + Boss (D3→A1) + material goal for 28 aquilas", () => {
+            // Dante (rank goal, priority 0): needs 6 aquilas
+            // Boss (rank goal, priority 1): needs 6 aquilas
+            // Material goal (priority 2): quantity 28
+            // totalNeeded = 40, held = 26
+            // Expected: coveredByInventory=14, i.e. display 14/28 (26/40)
+            const AQUILA = 'upgHpM001';
+            const matGoal = makeMaterialGoal('g-mat', AQUILA, 28, 2);
+            const allDemands = [
+                { goalId: 'g-dante', priority: 0, quantity: 6 },
+                { goalId: 'g-boss', priority: 1, quantity: 6 },
+                { goalId: matGoal.goalId, priority: 2, quantity: 28 },
+            ];
+
+            it('coveredByInventory = 14 (held=26 minus 6+6 for rank goals)', () => {
+                const result = GoalsService.computeMaterialQuantityInfo(matGoal, allDemands, 26, true);
+                expect(result.coveredByInventory).toBe(14);
+                expect(result.held).toBe(26);
+                expect(result.totalNeeded).toBe(40);
+                expect(result.thisGoalQuantity).toBe(28);
+            });
+
+            it('totalNeeded = 40 in total-materials mode too', () => {
+                const result = GoalsService.computeMaterialQuantityInfo(matGoal, allDemands, 26, false);
+                expect(result.totalNeeded).toBe(40);
+                expect(result.held).toBe(26);
+            });
         });
     });
 });
