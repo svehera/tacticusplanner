@@ -28,6 +28,7 @@ import {
     ICharacterUpgradeRankGoal,
     IEstimatedUpgrades,
     IGoalEstimate,
+    IMaterialQuantityInfo,
     TypedGoalSelect,
 } from '@/fsd/3-features/goals/goals.models';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -638,6 +639,48 @@ export class GoalsService {
             }
         }
     }
+
+    /**
+     * Computes inventory/demand info for an UpgradeMaterial goal card.
+     *
+     * Total-materials mode: returns held / totalNeeded across all goals / this goal's quantity.
+     * Goal-priority mode: also returns how much of this goal is covered by inventory remaining
+     * after all higher-priority goals for the same material have taken their share.
+     *
+     * @param thisGoal - the UpgradeMaterial goal being rendered
+     * @param allDemands - flat list of ALL goals (any type) that need this same material, with
+     *   their priority and quantity. This MUST include rank, mow, and other upgrade-material goals.
+     * @param held - units of this material currently in inventory
+     * @param isGoalPriority - whether the farm mode is goal-priority
+     */
+    static computeMaterialQuantityInfo(
+        thisGoal: IUpgradeMaterialGoal,
+        allDemands: Array<{ goalId: string; priority: number; quantity: number }>,
+        held: number,
+        isGoalPriority: boolean
+    ): IMaterialQuantityInfo {
+        const totalNeeded = sum(allDemands.map(d => d.quantity));
+
+        if (!isGoalPriority) {
+            return { held, totalNeeded, thisGoalQuantity: thisGoal.quantity, isGoalPriority: false };
+        }
+
+        // Allocate held inventory greedily in priority order (lower number = higher priority).
+        const sorted = [...allDemands].toSorted((a, b) => a.priority - b.priority);
+        let remaining = held;
+        let coveredByInventory = 0;
+        for (const d of sorted) {
+            const allocated = Math.min(remaining, d.quantity);
+            remaining -= allocated;
+            if (d.goalId === thisGoal.goalId) {
+                coveredByInventory = allocated;
+                break;
+            }
+        }
+
+        return { held, totalNeeded, thisGoalQuantity: thisGoal.quantity, coveredByInventory, isGoalPriority: true };
+    }
+
     static isGoalCompleted(goal: CharacterRaidGoalSelect, goalEstimate: IGoalEstimate): boolean {
         if (goal.type == PersonalGoalType.UpgradeRank) {
             const adamantinePartial = goal.rankAppliedUpgrades ?? 0;
