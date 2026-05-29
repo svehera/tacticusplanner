@@ -5,7 +5,7 @@ import { rankToLevel } from 'src/models/constants';
 
 import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { RankSelect } from '@/fsd/5-shared/ui/selects';
+import { RankSelect, Select } from '@/fsd/5-shared/ui/selects';
 import { Switch } from '@/fsd/5-shared/ui/switch';
 
 const ADAMANTINE_PARTIAL_COUNT = 5; // 5 intermediate XP levels before full rank-up
@@ -106,17 +106,15 @@ export const RankGoalSelect: React.FC<Props> = ({
             <div className="flex items-center gap-2">
                 {isAdamantine(form.startingRank) ? (
                     <div className="flex-1">
-                        <label className="mb-1.5 block text-sm font-medium text-(--soft-fg)">Upgrades done</label>
-                        <select
+                        <Select<number>
+                            label="Upgrades done"
+                            options={ADAMANTINE_OPTIONS}
                             value={form.startingAppliedUpgrades}
-                            onChange={event_ => handleStartAppliedUpgradesChange(Number(event_.target.value))}
-                            className="w-full rounded-lg border border-(--input-border) bg-(--bg) px-3 py-2 text-sm text-(--fg) focus:ring-2 focus:ring-(--ring) focus:outline-none">
-                            {ADAMANTINE_OPTIONS.map(n => (
-                                <option key={n} value={n}>
-                                    {n === 0 ? 'None' : `${n} of 6 — ${adamantineLevelLabel(form.startingRank, n)}`}
-                                </option>
-                            ))}
-                        </select>
+                            onChange={handleStartAppliedUpgradesChange}
+                            renderOption={n =>
+                                n === 0 ? 'None' : `${n} of 6 — ${adamantineLevelLabel(form.startingRank, n)}`
+                            }
+                        />
                     </div>
                 ) : (
                     <Switch isSelected={form.startingPoint5} onChange={handleStartPoint5Change}>
@@ -138,17 +136,15 @@ export const RankGoalSelect: React.FC<Props> = ({
             <div className="flex items-center gap-2">
                 {isAdamantine(form.rank) ? (
                     <div className="flex-1">
-                        <label className="mb-1.5 block text-sm font-medium text-(--soft-fg)">Partial target</label>
-                        <select
+                        <Select<number>
+                            label="Partial target"
+                            options={ADAMANTINE_OPTIONS}
                             value={form.appliedUpgrades}
-                            onChange={event_ => handleAppliedUpgradesChange(Number(event_.target.value))}
-                            className="w-full rounded-lg border border-(--input-border) bg-(--bg) px-3 py-2 text-sm text-(--fg) focus:ring-2 focus:ring-(--ring) focus:outline-none">
-                            {ADAMANTINE_OPTIONS.map(n => (
-                                <option key={n} value={n}>
-                                    {n === 0 ? 'None (full rank)' : `${n} of 6 — ${adamantineLevelLabel(form.rank, n)}`}
-                                </option>
-                            ))}
-                        </select>
+                            onChange={handleAppliedUpgradesChange}
+                            renderOption={n =>
+                                n === 0 ? 'None (full rank)' : `${n} of 6 — ${adamantineLevelLabel(form.rank, n)}`
+                            }
+                        />
                     </div>
                 ) : (
                     <Switch isSelected={form.point5} onChange={handlePoint5Change}>

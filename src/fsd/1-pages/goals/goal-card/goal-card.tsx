@@ -1,11 +1,10 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
-import { FilterListOff } from '@mui/icons-material';
-import Button from '@mui/material/Button';
-import { Calendar, CheckCircle2 } from 'lucide-react';
+import { Calendar, CheckCircle2, CircleSlash } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -180,30 +179,23 @@ export const GoalCard: React.FC<Props> = ({
                             {isReached ? (
                                 <Button
                                     size="small"
-                                    variant="outlined"
-                                    disabled
-                                    className="rounded-full !border-(--success)/50 !bg-(--success)/10 px-3 !text-(--success)"
-                                    startIcon={<CheckCircle2 className="size-4" />}>
+                                    appearance="outline"
+                                    intent="success"
+                                    className="pointer-events-none">
+                                    <CheckCircle2 data-slot="icon" />
                                     Reached
                                 </Button>
                             ) : onToggleInclude ? (
                                 <Button
                                     size="small"
-                                    variant="outlined"
-                                    className={
-                                        'rounded-full bg-(--neutral) px-3 ' +
-                                        (goal.include
-                                            ? '!border-(--primary)/50 !text-(--primary) hover:!bg-(--primary)/10'
-                                            : '!border-(--soft-fg)/50 !text-(--soft-fg) hover:!bg-(--neutral)')
-                                    }
-                                    startIcon={
-                                        goal.include ? (
-                                            <CheckCircle2 className="size-4" />
-                                        ) : (
-                                            <FilterListOff fontSize="small" />
-                                        )
-                                    }
-                                    onClick={onToggleInclude}>
+                                    appearance="outline"
+                                    intent={goal.include ? 'primary' : 'secondary'}
+                                    onPress={onToggleInclude}>
+                                    {goal.include ? (
+                                        <CheckCircle2 data-slot="icon" />
+                                    ) : (
+                                        <CircleSlash data-slot="icon" />
+                                    )}
                                     {goal.include ? 'In Progress' : 'Paused'}
                                 </Button>
                             ) : undefined}

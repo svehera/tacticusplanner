@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules */
-import { ArrowForward } from '@mui/icons-material';
 import { sum } from 'lodash';
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
@@ -45,14 +45,14 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDa
             <div className="flex-box gap5">
                 {!isSameRarity && (
                     <>
-                        <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                        <RarityIcon rarity={goal.rarityStart} /> <ArrowRight className="size-4" />
                         <RarityIcon rarity={goal.rarityEnd} />
                         {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                     </>
                 )}
                 {isSameRarity && (
                     <>
-                        <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                        <StarsIcon stars={goal.starsStart} /> <ArrowRight className="size-4" />
                         <StarsIcon stars={goal.starsEnd} />
                     </>
                 )}

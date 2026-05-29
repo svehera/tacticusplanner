@@ -1,4 +1,4 @@
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Calendar } from 'lucide-react';
 import React from 'react';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
@@ -15,7 +15,7 @@ export const GoalEstimateRow: React.FC<Props> = ({ daysLeft, calendarDate, energ
     <>
         <AccessibleTooltip title={`${daysLeft} days. Estimated date ${calendarDate ?? ''}`}>
             <div className="flex-box gap-[3px] text-(--soft-fg)">
-                <CalendarMonthIcon /> {daysLeft}
+                <Calendar className="size-4" /> {daysLeft}
             </div>
         </AccessibleTooltip>
         {energyTotal !== undefined && (
