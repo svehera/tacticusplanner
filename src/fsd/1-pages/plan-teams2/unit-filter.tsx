@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
-import { FactionSelect, RankSelect, RaritySelect } from '@/fsd/5-shared/ui';
+import { Button, FactionSelect, RankSelect, RaritySelect } from '@/fsd/5-shared/ui';
 
 const RARITIES = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
 
@@ -76,7 +76,7 @@ export const UnitFilter: React.FC<Props> = ({
     };
 
     return (
-        <header className="rounded-xl border border-slate-200 bg-white p-4 md:p-6 dark:border-slate-800 dark:bg-[#161b22]">
+        <header className="rounded-xl border border-(--card-border) bg-(--card) p-4 md:p-6">
             <div className="grid grid-cols-1 gap-6">
                 {/* ALLOW LOCKED UNITS */}
                 <div className="flex items-center gap-2">
@@ -85,17 +85,17 @@ export const UnitFilter: React.FC<Props> = ({
                         type="checkbox"
                         checked={allowLockedUnits}
                         onChange={event => onAllowLockedUnitsChange(event.target.checked)}
-                        className="h-4 w-4 rounded border-slate-300 text-blue-600 focus:ring-blue-500 dark:border-slate-700"
+                        className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring)"
                     />
                     <label
                         htmlFor="allow-locked-units"
-                        className="text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        className="text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                         Allow Locked Units
                     </label>
                 </div>
                 {/* SEARCH */}
                 <div>
-                    <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                    <label className="mb-2 block text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                         Search Unit
                     </label>
                     <input
@@ -103,7 +103,7 @@ export const UnitFilter: React.FC<Props> = ({
                         placeholder="e.g. Bellator..."
                         value={searchText}
                         onChange={event => onSearchTextChange(event.target.value)}
-                        className="w-full rounded-lg border border-slate-300 bg-white px-4 py-2 text-sm text-slate-900 outline-none focus:ring-2 focus:ring-blue-500 dark:border-slate-700 dark:bg-[#0d1117] dark:text-slate-100"
+                        className="w-full rounded-lg border border-(--input-border) bg-(--bg) px-4 py-2 text-sm text-(--fg) outline-none focus:ring-2 focus:ring-(--ring)"
                     />
                 </div>
 
@@ -111,7 +111,7 @@ export const UnitFilter: React.FC<Props> = ({
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                     {/* RARITY */}
                     <div>
-                        <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        <label className="mb-2 block text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                             Rarity
                         </label>
 
@@ -133,7 +133,7 @@ export const UnitFilter: React.FC<Props> = ({
 
                     {/* RANK */}
                     <div>
-                        <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                        <label className="mb-2 block text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                             Rank
                         </label>
 
@@ -146,7 +146,7 @@ export const UnitFilter: React.FC<Props> = ({
 
                 {/* FACTIONS */}
                 <div>
-                    <label className="mb-2 block text-xs font-semibold tracking-wide text-slate-500 uppercase dark:text-slate-400">
+                    <label className="mb-2 block text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                         Factions
                     </label>
 
@@ -160,11 +160,9 @@ export const UnitFilter: React.FC<Props> = ({
 
                 {/* RESET BUTTON */}
                 <div className="flex justify-end pt-2">
-                    <button
-                        className="rounded-lg bg-blue-600 px-5 py-2 text-sm font-medium text-white transition hover:bg-blue-700"
-                        onClick={handleResetAllFilters}>
+                    <Button intent="primary" size="small" onPress={handleResetAllFilters}>
                         Reset All Filters
-                    </button>
+                    </Button>
                 </div>
             </div>
         </header>

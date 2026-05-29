@@ -25,7 +25,7 @@ export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, 
             {showHeader && (
                 <div className="mb-4 flex justify-between">
                     <h3 className="font-bold">Machines of War</h3>
-                    <span className="text-xs text-slate-500">Showing {mows.length} units</span>
+                    <span className="text-xs text-(--soft-fg)">Showing {mows.length} units</span>
                 </div>
             )}
             <div className="flex flex-wrap gap-4">
@@ -54,7 +54,7 @@ export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, 
                         </div>
                         {deployedUnitIds?.includes(mow.snowprintId) && (
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                                <div className="rounded-full bg-slate-950/70 p-1 shadow-lg ring-1 ring-white/20 dark:bg-slate-100/20">
+                                <div className="rounded-full bg-(--fg)/70 p-1 shadow-lg ring-1 ring-white/20 dark:bg-slate-100/20">
                                     <MiscIcon icon="deployment" width={50} height={50} />
                                 </div>
                             </div>
