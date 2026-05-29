@@ -334,6 +334,34 @@ export const Goals = () => {
         }
 
         // For other goal types (like Shards), we typically have one estimate per goalId
+        if (goal?.type === PersonalGoalType.UpgradeMaterial) {
+            const matId = goal.upgradeMaterialId;
+            const held = inventory.upgrades[matId] ?? 0;
+
+            // Build demands from ALL goal types that consume this material.
+            // Upgrade-material goals: their quantity field directly.
+            // Rank/mow goals: look up from estimatedUpgradesTotal.characters.
+            const allDemands: Array<{ goalId: string; priority: number; quantity: number }> = [];
+
+            for (const rankGoal of upgradeRankOrMowGoals) {
+                const charData = estimatedUpgradesTotal.characters.find(c => c.goalId === rankGoal.goalId);
+                const qty = charData?.baseUpgradesTotal[matId] ?? 0;
+                if (qty > 0) allDemands.push({ goalId: rankGoal.goalId, priority: rankGoal.priority, quantity: qty });
+            }
+
+            for (const matGoal of upgradeMaterialGoals) {
+                if (matGoal.upgradeMaterialId === matId) {
+                    allDemands.push({ goalId: matGoal.goalId, priority: matGoal.priority, quantity: matGoal.quantity });
+                }
+            }
+
+            first.materialQuantityInfo = GoalsService.computeMaterialQuantityInfo(
+                goal,
+                allDemands,
+                held,
+                isGoalPriority
+            );
+        }
         return first;
     });
 
