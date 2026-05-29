@@ -89,6 +89,22 @@ export interface ICharacterUpgradeAbilities extends ICharacterRaidGoalSelectBase
     passiveEnd: number;
 }
 
+/** Inventory/demand summary for an UpgradeMaterial goal, used to display stock status on the card. */
+export interface IMaterialQuantityInfo {
+    /** How many of this material are currently in inventory. */
+    held: number;
+    /** Total demanded by ALL upgrade-material goals for this material. */
+    totalNeeded: number;
+    /** The quantity demanded by this specific goal. */
+    thisGoalQuantity: number;
+    /**
+     * (Goal-priority mode only) How many of this goal's quantity is covered by
+     * the remaining inventory after all higher-priority goals have taken their share.
+     */
+    coveredByInventory?: number;
+    isGoalPriority: boolean;
+}
+
 export interface IGoalEstimate {
     goalId: string;
     daysTotal: number;
@@ -104,6 +120,7 @@ export interface IGoalEstimate {
     orbsEstimate?: ICharacterAscendOrbsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
+    materialQuantityInfo?: IMaterialQuantityInfo;
 
     /** If the goal is already done and no further raiding/onslaught is required. */
     completed?: boolean;

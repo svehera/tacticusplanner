@@ -9,10 +9,21 @@ interface Props {
     calendarDate?: string;
 }
 
-/** Renders the body of an UpgradeMaterial goal card, showing an energy and date estimate. */
+/** Renders the body of an UpgradeMaterial goal card, showing quantity info and an energy/date estimate. */
 export const GoalCardUpgradeMaterial: React.FC<Props> = ({ goalEstimate, calendarDate }) => {
+    const info = goalEstimate.materialQuantityInfo;
+
+    const quantityLabel = info
+        ? info.isGoalPriority
+            ? `${info.coveredByInventory ?? 0}/${info.thisGoalQuantity} (${info.held}/${info.totalNeeded})`
+            : `${info.held}/${info.totalNeeded} (${info.thisGoalQuantity})`
+        : undefined;
+
     return (
         <div className="flex flex-col gap-2">
+            {quantityLabel !== undefined && (
+                <div className="text-sm font-medium text-(--fg) tabular-nums">{quantityLabel}</div>
+            )}
             {goalEstimate.included && (
                 <div className="flex-box wrap gap-2">
                     <GoalEstimateRow
