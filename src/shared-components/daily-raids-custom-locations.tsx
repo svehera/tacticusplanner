@@ -1,10 +1,10 @@
-﻿import Checkbox from '@mui/material/Checkbox';
-import { uniq } from 'lodash';
+﻿import { uniq } from 'lodash';
 import React, { useMemo } from 'react';
 
 import { ICustomDailyRaidsSettings } from 'src/models/interfaces';
 
 import { Rarity } from '@/fsd/5-shared/model';
+import { Checkbox } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons/misc.icon';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
@@ -106,13 +106,10 @@ export const DailyRaidsCustomLocations: React.FC<Props> = ({ settings, settingsC
                             {rarity === 'Mythic Shard' && <MiscIcon icon="mythicShard" height={26} width={-1} />}
                             {isRarity(rarity) && <RarityIcon rarity={rarity} />}
                             {campaignTypes.map(type => (
-                                <div
-                                    key={type}
-                                    className="flex min-h-[42px] min-w-[42px] flex-col justify-center gap-3">
+                                <div key={type} className="flex min-h-[42px] min-w-[42px] items-center justify-center">
                                     <Checkbox
-                                        className="mt-2"
                                         checked={value.includes(type)}
-                                        onChange={event => handleChange(rarity, event.target.checked, [type])}
+                                        onChange={checked => handleChange(rarity, checked, [type])}
                                     />
                                 </div>
                             ))}

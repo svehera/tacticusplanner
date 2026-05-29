@@ -1,6 +1,6 @@
 ---
 name: build-page
-description: Scaffold a new page in the Tacticus Planner FSD app. Use when the user says "build page", "create page", "new page", or gives a page name and describes what it should do.
+description: Scaffold a new page in the Tacticus Planner FSD app. Use when the user says "build page", "create page", "new page", "add a page", "scaffold a page", "set up a new route", or gives a page name and describes what it should do. Also trigger when the user says things like "I need a page for X" or "make a view for Y" — any request that implies creating a new routable page component from scratch.
 argument-hint: <page-name> "<what it does>"
 allowed-tools: Read Glob Grep Write Edit Bash
 ---
@@ -94,7 +94,8 @@ All colors come from design tokens — `bg-(--primary)`, `text-(--soft-fg)`, `bo
 
 **Components**
 
-- Generic UI components: import from `@/fsd/5-shared/ui` (Button, TextField, Switch, Badge, Card, Modal, Separator, AccessibleTooltip, Loader, …). The full list is in conventions.md. For navigation buttons use `LinkButton` from `@/fsd/5-shared/ui/link` (same API as Button but renders an `<a>`). For icon-only buttons use `Button size="square-petite" appearance="plain"` with a Lucide icon using `data-slot="icon"`.
+- Generic UI components: import from `@/fsd/5-shared/ui` (Button, TextField, Switch, Badge, Card, Modal, Separator, Accordion/AccordionHeader/AccordionBody, AccessibleTooltip, Loader, …). The full list is in conventions.md. For navigation buttons use `LinkButton` from `@/fsd/5-shared/ui/link` (same API as Button but renders an `<a>`). For icon-only buttons use `Button size="square-petite" appearance="plain"` with a Lucide icon using `data-slot="icon"`.
+- Dialogs: if the dialog contains shared `Select`, `ComboBox`, or any portaled dropdown, use the custom **portal dialog** pattern (conventions.md "Form dialog") — not the shared Modal, whose react-aria focus trap blocks portaled dropdowns. The shared Modal is fine for simple confirmation dialogs. Reference: `src/shared-components/goals/set-goal-dialog.tsx`.
 - Domain selects: import from `@/fsd/5-shared/ui/selects` — `RaritySelect`, `RankSelect`, `StarsSelect`, `FactionSelect`. Generic primitives: `Select<T>`, `SelectMulti<T>`, `ComboBox<T>`, `ComboBoxMulti<T>`.
 - Icons: MUI from `@mui/icons-material/` or Lucide from `lucide-react`. Check the surrounding pages for which one's in use and stay consistent. Pick an icon that actually relates to the page's purpose (e.g., a database/inbox icon for data entry, a target/compass for planning, a book/library for reference) — not the first one that comes to mind.
   **Filter bars**
@@ -139,13 +140,13 @@ The route uses `lazy()` so the page bundle only loads when navigated to. Every o
 
 ### 3. `src/fsd/1-pages/{name}/{name}.menu-item.tsx`
 
-Before writing this, glob a neighbouring menu-item file to confirm whether this codebase uses `MenuItem` or `MenuItemTP` — there's been a migration in flight and you want to match what the adjacent files use, not what you remember.
+There's been a migration from `MenuItem` (legacy, from `@/models/menu-item`) to `MenuItemTP` (shared UI, from `@/fsd/5-shared/ui`). **Use `MenuItemTP` for new pages.** Glob a neighbouring menu-item file if you want to confirm the pattern, but default to the newer convention:
 
 ```tsx
 import SomeIcon from '@mui/icons-material/SomeIcon';
-import { MenuItem } from '@/models/menu-item';
+import { MenuItemTP } from '@/fsd/5-shared/ui';
 
-export const {camelName}MenuItem = new MenuItem(
+export const {camelName}MenuItem = new MenuItemTP(
     '{Label}',
     <SomeIcon />,
     '/{section}/{name}'

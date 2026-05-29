@@ -59,14 +59,14 @@ Pick by the foreground you need on top:
 
 ### Accent tokens
 
-| Token            | Light    | Dark     | Use for                                                               |
-| ---------------- | -------- | -------- | --------------------------------------------------------------------- |
-| `--primary`      | blue-700 | blue-500 | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
-| `--primary-fg`   | white    | white    | Text on primary background                                            |
-| `--secondary`    | zinc-200 | zinc-700 | Subdued/neutral button fills, outline/plain hover surfaces            |
-| `--secondary-fg` | zinc-950 | zinc-100 | Text on secondary background, icon-button text in both themes         |
-| `--accent`       | amber-600 | amber-600 | Decorative accent (amber)                                            |
-| `--accent-fg`    | zinc-950 | zinc-950 | Text on accent background                                             |
+| Token            | Light     | Dark      | Use for                                                               |
+| ---------------- | --------- | --------- | --------------------------------------------------------------------- |
+| `--primary`      | blue-700  | blue-500  | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
+| `--primary-fg`   | white     | white     | Text on primary background                                            |
+| `--secondary`    | zinc-200  | zinc-700  | Subdued/neutral button fills, outline/plain hover surfaces            |
+| `--secondary-fg` | zinc-950  | zinc-100  | Text on secondary background, icon-button text in both themes         |
+| `--accent`       | amber-600 | amber-600 | Decorative accent (amber)                                             |
+| `--accent-fg`    | zinc-950  | zinc-950  | Text on accent background                                             |
 
 `--accent` is used for the `ButtonPill` toggle — on hover and active state the pill fills with the accent colour. It's intentionally distinct from `--primary` so toggled pills read as "selected" rather than "action."
 
@@ -313,7 +313,7 @@ Import from `@/fsd/5-shared/ui`:
 - `Card`, `CardHeader`, `CardTitle`, `CardDescription`, `CardContent`, `CardFooter`
 - `Accordion`, `AccordionHeader`, `AccordionBody` — card-style collapsible. Controlled (`expanded`+`onToggle`) or uncontrolled (`defaultExpanded`). MUI `Accordion`/`AccordionSummary`/`AccordionDetails` are migration targets — use this component instead.
 - `Separator` — horizontal (default) or `orientation="vertical"`. Pass `children` for a labeled horizontal separator: `<Separator>Section Label</Separator>` renders a centered uppercase label between two lines.
-- `Modal`, `Dialog` — `Modal` wraps trigger + `Modal.Content`; inside use `Dialog.Header`, `Dialog.Body`, `Dialog.Footer`, `Dialog.Close`
+- `Modal`, `Dialog` — `Modal` wraps trigger + `Modal.Content`; inside use `Dialog.Header`, `Dialog.Body`, `Dialog.Footer`, `Dialog.Close`. **Important:** the shared Modal uses react-aria's focus trap, which blocks interaction with portaled dropdowns (shared `Select`, `ComboBox`, MUI `Autocomplete`). For form dialogs that contain dropdowns, use the custom portal dialog pattern instead (see "Form dialog" in Layout patterns below). The shared Modal is fine for confirmation dialogs and dialogs with only text/buttons.
 - `Loader` — variants: spin/bars/ring; sizes: small/medium/large/extra-large
 - `AccessibleTooltip` — wraps any element, `title` prop (string or JSX)
 - `LazyTooltip` — same API, only mounts tooltip DOM on first hover
@@ -325,12 +325,14 @@ Import from `@/fsd/5-shared/ui`:
 Import from `@/fsd/5-shared/ui/selects`:
 
 **Primitives (generic, for building custom selects):**
+
 - `Select<T>` — single non-searchable, `options: T[]`, `value: T`, `onChange`, `renderOption?`, `renderValue?`, `by?`
 - `SelectMulti<T>` — multi non-searchable, `options: T[]`, `value: T[]`, `onChange`, `renderOption?`, `renderValue?`, `by?`
 - `ComboBox<T>` — single searchable, `options: T[]`, `value: T | null`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`
 - `ComboBoxMulti<T>` — multi searchable, `options: T[]`, `value: T[]`, `onChange`, `displayValue`, `filterFn?`, `renderOption?`, `renderValue?`. When no `renderValue` is provided, selected items automatically display as removable Badge chips above the input.
 
 **Domain selects (thin wrappers around primitives):**
+
 - `RaritySelect` — single, `rarityValues: number[]`, `value: number`, `valueChanges`
 - `RankSelect` — single, `rankValues: number[]`, `value: number`, `valueChanges`
 - `StarsSelect` — single, `starsValues: number[]`, `value: number`, `valueChanges`
@@ -340,8 +342,8 @@ Import from `@/fsd/5-shared/ui/selects`:
 Import from `@/fsd/5-shared/ui/icons`:
 
 - `RarityIcon`, `RankIcon`, `StarsIcon`, `FactionImage`, `MiscIcon`, `UnitShardIcon`, `BmcIcon`, `TraitImage`, `ComponentImage`
-  - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
-  - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
+    - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
+    - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
 
 ---
 
@@ -546,7 +548,9 @@ When a multi-select needs icons in both the dropdown and the trigger, use `Selec
 import { SelectMulti } from '@/fsd/5-shared/ui/selects';
 import { MiscIcon, TraitImage, ComponentImage } from '@/fsd/5-shared/ui/icons';
 
-{/* Damage types — MiscIcon with key pattern 'damage' + type (spaces removed) */}
+{
+    /* Damage types — MiscIcon with key pattern 'damage' + type (spaces removed) */
+}
 <SelectMulti<string>
     options={damageTypesOptions}
     value={selectedDamageTypes}
@@ -566,9 +570,11 @@ import { MiscIcon, TraitImage, ComponentImage } from '@/fsd/5-shared/ui/icons';
             ))}
         </div>
     )}
-/>
+/>;
 
-{/* Alliance — ComponentImage */}
+{
+    /* Alliance — ComponentImage */
+}
 <SelectMulti<string>
     options={Object.values(Alliance)}
     value={selectedAlliance}
@@ -588,9 +594,11 @@ import { MiscIcon, TraitImage, ComponentImage } from '@/fsd/5-shared/ui/icons';
             ))}
         </div>
     )}
-/>
+/>;
 
-{/* Traits — TraitImage */}
+{
+    /* Traits — TraitImage */
+}
 <SelectMulti<string>
     options={traitsOptions}
     value={selectedTraits}
@@ -610,10 +618,39 @@ import { MiscIcon, TraitImage, ComponentImage } from '@/fsd/5-shared/ui/icons';
             ))}
         </div>
     )}
-/>
+/>;
 ```
 
 For factions specifically, use the pre-built `FactionSelect` wrapper which handles icons internally.
+
+### Form dialog (`PortalDialog`, for dialogs with dropdowns)
+
+Use `PortalDialog` from `@/fsd/5-shared/ui` for any dialog that contains shared `Select`, `ComboBox`, or other portaled dropdown components. The shared `Modal` (react-aria) traps focus and blocks interaction with portaled elements; `PortalDialog` avoids that by using `createPortal` with no focus trap.
+
+```tsx
+import { PortalDialog, Button } from '@/fsd/5-shared/ui';
+
+<PortalDialog open={open} onClose={onClose} aria-label="Dialog title" size="xl">
+    <PortalDialog.Header>Title</PortalDialog.Header>
+    <PortalDialog.Body>{/* form fields, shared Select, ComboBox, etc. */}</PortalDialog.Body>
+    <PortalDialog.Footer>
+        <Button appearance="outline" onPress={onClose}>
+            Cancel
+        </Button>
+        <Button onPress={onSave}>Save</Button>
+    </PortalDialog.Footer>
+</PortalDialog>;
+```
+
+Key details:
+
+- `size` prop: `xs` through `5xl` (default `lg`) — maps to `max-w-*` on the panel
+- `PortalDialog.Header` renders a title area + X close button (wired automatically)
+- `PortalDialog.Body` defaults to `flex flex-col gap-5` — override gap via `className`
+- `PortalDialog.Footer` defaults to `flex justify-end gap-3`
+- No focus trap means shared `Select`, `ComboBox`, and `UnitsAutocomplete` all work correctly
+- Handles scroll lock, backdrop click, Escape key, and focus management internally
+- Reference implementations: `set-goal-dialog.tsx`, `daily-raids-settings.tsx`
 
 ---
 

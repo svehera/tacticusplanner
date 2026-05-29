@@ -1,6 +1,6 @@
 ---
 name: refactor-page
-description: Refactor or rebuild an existing page to match the current design system. Use when the user says "refactor", "redesign", "update to new style", "migrate to tokens", or points at a page that looks like it was written in 2021.
+description: Refactor or rebuild an existing page to match the current design system. Use when the user says "refactor", "redesign", "update to new style", "migrate to tokens", "fix the styling", "update the UI", "make it match the design system", "convert to tailwind", "replace MUI", or points at a page that looks visually inconsistent with the rest of the app. Also trigger when the user references a specific page and asks to clean it up, modernize it, or bring it in line with conventions.
 argument-hint: <page-path-or-name> ["rebuild" for full JSX rewrite | default: targeted refactor]
 allowed-tools: Read Glob Grep Write Edit Bash
 ---
@@ -116,6 +116,9 @@ These have shared replacements; reach for them rather than rebuilding:
 - MUI `CircularProgress` / `LinearProgress` → `<Loader>` or the token ProgressBar pattern
 - Raw `<select>` for rarity / rank / stars / faction → `RaritySelect` / `RankSelect` / `StarsSelect` / `FactionSelect` from `@/fsd/5-shared/ui/selects`. For custom selects use the generic `Select<T>`, `SelectMulti<T>`, `ComboBox<T>`, `ComboBoxMulti<T>` primitives.
 - MUI `Select` with `MenuItem`s that have icons → `SelectMulti<T>` with `renderOption` (icon + text for dropdown) and `renderValue` (compact icons for trigger). See the "Icon-rich multi-select" pattern in conventions.md. Available icon components: `MiscIcon` (damage types via `damage${name}` key), `TraitImage` (trait enum), `ComponentImage` (alliance), `RarityIcon`, `FactionImage`.
+- MUI `Dialog` → **depends on content.** If the dialog contains shared `Select`, `ComboBox`, `UnitsAutocomplete`, or any portaled dropdown, use the custom portal dialog pattern (conventions.md "Form dialog"). If it's a simple confirmation dialog with only text/buttons, use the shared `Modal` from `@/fsd/5-shared/ui`. The shared Modal's react-aria focus trap blocks portaled dropdowns — this is the deciding factor.
+- MUI `Select` with simple `MenuItem`s (no icons) → shared `Select<T>` with `options`, `value`, `onChange`, `renderOption`, `label`. The shared Select uses Headless UI Listbox internally.
+- MUI info icons (`InfoIcon` from `@mui/icons-material`) → Lucide `Info` from `lucide-react`.
 
 **Styling approach**
 

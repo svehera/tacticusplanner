@@ -46,6 +46,7 @@ import { TextField } from '@/fsd/5-shared/ui/input/text-field';
 import { Loader } from '@/fsd/5-shared/ui/loader';
 import { Dialog } from '@/fsd/5-shared/ui/modal/dialog';
 import { Modal } from '@/fsd/5-shared/ui/modal/modal';
+import { RadioOption } from '@/fsd/5-shared/ui/radio';
 import {
     ComboBox,
     FactionSelect,
@@ -546,32 +547,6 @@ const AccordionItem = ({
 
 // ─── radio group ─────────────────────────────────────────────────────────────
 
-const RadioOption = ({
-    name,
-    value,
-    checked,
-    onChange,
-    label,
-}: {
-    name: string;
-    value: string;
-    checked: boolean;
-    onChange: () => void;
-    label: string;
-}) => (
-    <label className="flex cursor-pointer items-center gap-2">
-        <input type="radio" name={name} value={value} checked={checked} onChange={onChange} className="sr-only" />
-        <div
-            className={[
-                'flex h-4 w-4 shrink-0 items-center justify-center rounded-full border-2 transition-colors',
-                checked ? 'border-(--primary)' : 'border-(--input)',
-            ].join(' ')}>
-            {checked && <div className="h-2 w-2 rounded-full bg-(--primary)" />}
-        </div>
-        <span className="text-sm text-(--fg)">{label}</span>
-    </label>
-);
-
 const RadioGroupShowcase = () => {
     const [section, setSection] = useState('alpha');
     const [sort, setSort] = useState('name');
@@ -590,9 +565,9 @@ const RadioGroupShowcase = () => {
                             name="lre-section"
                             value={opt.value}
                             checked={section === opt.value}
-                            onChange={() => setSection(opt.value)}
-                            label={opt.label}
-                        />
+                            onChange={() => setSection(opt.value)}>
+                            {opt.label}
+                        </RadioOption>
                     ))}
                 </div>
             </fieldset>
@@ -609,9 +584,9 @@ const RadioGroupShowcase = () => {
                             name="sort-order"
                             value={opt.value}
                             checked={sort === opt.value}
-                            onChange={() => setSort(opt.value)}
-                            label={opt.label}
-                        />
+                            onChange={() => setSort(opt.value)}>
+                            {opt.label}
+                        </RadioOption>
                     ))}
                 </div>
             </fieldset>
