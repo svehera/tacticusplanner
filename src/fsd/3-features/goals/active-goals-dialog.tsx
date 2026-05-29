@@ -1,15 +1,12 @@
-﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import TrackChangesIcon from '@mui/icons-material/TrackChanges';
-import { Checkbox, DialogActions, DialogContent, DialogTitle, FormControlLabel } from '@mui/material';
-import MuiButton from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
+import { Target } from 'lucide-react';
 import React, { useEffect, useMemo, useState } from 'react';
 
 import { PersonalGoalType } from 'src/models/enums';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 
-import { Button } from '@/fsd/5-shared/ui';
+import { Button, PortalDialog } from '@/fsd/5-shared/ui';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
@@ -90,7 +87,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
 
     const renderGoalsGroup = (name: string, goals: TypedGoalSelect[]) => {
         return (
-            <div className="flex-box column gap5 start">
+            <div className="flex flex-col items-start gap-1">
                 <h5 className="mt-0">{name}</h5>
                 {goals.map(goal => (
                     <RaidsGoal
@@ -114,58 +111,66 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                     setCurrentGoalsSelect(goals);
                     setOpenGoals(true);
                 }}>
-                <TrackChangesIcon data-slot="icon" /> {selectedGoalsCount} of {goals.length}
+                <Target data-slot="icon" /> {selectedGoalsCount} of {goals.length}
             </Button>
 
-            <Dialog
+            <PortalDialog
                 open={openGoals}
-                maxWidth={'xl'}
                 onClose={() => {
                     setCurrentGoalsSelect(goals);
                     setOpenGoals(false);
-                }}>
-                <DialogTitle className="flex-box between">
-                    <div className="flex-box gap5 text-[20px]">
-                        <TrackChangesIcon />
+                }}
+                aria-label="Active goals"
+                size="xl">
+                <PortalDialog.Header>
+                    <span className="flex items-center gap-1 text-xl">
+                        <Target className="size-5" />
                         <span>
                             <b>{currentSelectedGoalsCount}</b> of {goals.length} active goals
                         </span>
+                    </span>
+                </PortalDialog.Header>
+                <PortalDialog.Body>
+                    <div className="flex items-center justify-end border-b border-(--border) pb-2.5">
+                        <label className="flex cursor-pointer items-center gap-2 text-sm">
+                            <input
+                                type="checkbox"
+                                checked={currentGoalsSelect.every(x => x.include)}
+                                ref={element => {
+                                    if (element)
+                                        element.indeterminate =
+                                            currentGoalsSelect.some(x => x.include) &&
+                                            !currentGoalsSelect.every(x => x.include);
+                                }}
+                                onChange={handleSelectAll}
+                                className="size-4 cursor-pointer accent-(--primary)"
+                            />
+                            Select all
+                        </label>
                     </div>
-                    <div className="flex-box gap10">
-                        <FormControlLabel
-                            label="Select all"
-                            control={
-                                <Checkbox
-                                    checked={currentGoalsSelect.every(x => x.include)}
-                                    indeterminate={
-                                        currentGoalsSelect.some(x => x.include) &&
-                                        !currentGoalsSelect.every(x => x.include)
-                                    }
-                                    onChange={handleSelectAll}
-                                />
-                            }
-                        />
-                    </div>
-                </DialogTitle>
-                <DialogContent>
-                    <div className="flex-box wrap start">
+                    <div className="flex flex-wrap items-start gap-4">
                         {upgradeRankGoals.length > 0 && renderGoalsGroup('Upgrade rank', upgradeRankGoals)}
                         {upgradeMowGoals.length > 0 && renderGoalsGroup('Upgrade MoW', upgradeMowGoals)}
                         {ascendGoals.length > 0 && renderGoalsGroup('Ascend/Promote', ascendGoals)}
                         {unlockGoals.length > 0 && renderGoalsGroup('Unlock', unlockGoals)}
                         {upgradeMaterialGoals.length > 0 && renderGoalsGroup('Upgrade Material', upgradeMaterialGoals)}
                     </div>
-                </DialogContent>
+                </PortalDialog.Body>
 
-                <DialogActions>
-                    <MuiButton variant={'outlined'} onClick={() => setOpenGoals(false)}>
+                <PortalDialog.Footer>
+                    <Button
+                        appearance="outline"
+                        onPress={() => {
+                            setCurrentGoalsSelect(goals);
+                            setOpenGoals(false);
+                        }}>
                         Cancel
-                    </MuiButton>
-                    <MuiButton variant={'contained'} disabled={!hasChanges} color="success" onClick={handleSaveChanges}>
+                    </Button>
+                    <Button intent="success" isDisabled={!hasChanges} onPress={handleSaveChanges}>
                         Save changes
-                    </MuiButton>
-                </DialogActions>
-            </Dialog>
+                    </Button>
+                </PortalDialog.Footer>
+            </PortalDialog>
 
             {editGoal !== undefined &&
                 (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (

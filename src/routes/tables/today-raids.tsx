@@ -33,7 +33,7 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
 
     return (
         <>
-            <Accordion defaultExpanded className="mt-2">
+            <Accordion defaultExpanded>
                 <AccordionHeader>
                     <span className="text-sm font-semibold sm:text-base">
                         Today (<b>{energySpent}</b> <MiscIcon icon={'energy'} height={15} width={15} /> spent |{' '}
@@ -74,7 +74,7 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                     </Suspense>
                 </AccordionBody>
             </Accordion>
-            <Accordion className="my-5">
+            <Accordion>
                 <AccordionHeader>
                     <span className="text-sm font-semibold sm:text-base">
                         Bonus Raids (when you have extra energy <MiscIcon icon={'energy'} height={15} width={15} />)

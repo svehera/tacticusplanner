@@ -60,7 +60,7 @@ export const ComboBoxMulti = <T,>({
     const renderFunction = renderOption ?? defaultRenderOption;
 
     const defaultRenderValue = (items: T[]) => (
-        <div className="flex flex-wrap items-center gap-1.5">
+        <div className="flex flex-wrap gap-1.5">
             {items.map((item, index) => (
                 <Badge key={index} appearance="outline" className="gap-1 pr-1">
                     <span className="max-w-[150px] truncate">{displayValue(item)}</span>
@@ -89,21 +89,39 @@ export const ComboBoxMulti = <T,>({
 
             <Combobox value={value} onChange={onChange} by={by} multiple immediate onClose={() => setQuery('')}>
                 <div className="relative">
-                    {value.length > 0 && <div className="mb-1.5">{displayRenderValue(value)}</div>}
+                    <div
+                        className={cn(
+                            triggerDisabled(triggerMulti, disabled),
+                            'flex-col items-stretch gap-1.5 pr-3',
+                            'focus-within:ring-2 focus-within:ring-(--ring)'
+                        )}>
+                        {value.length > 0 && displayRenderValue(value)}
 
-                    <div className="relative">
-                        <ComboboxInput
-                            className={triggerDisabled(cn(triggerMulti, 'pr-10'), disabled)}
-                            onChange={event_ => setQuery(event_.target.value)}
-                            placeholder={
-                                value.length === 0 ? placeholder : `${value.length} selected — type to filter…`
-                            }
-                            disabled={disabled}
-                        />
-
-                        <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
-                            <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
-                        </ComboboxButton>
+                        <div className="flex items-center gap-1">
+                            <ComboboxInput
+                                className="flex-1 bg-transparent text-sm outline-none placeholder:text-(--soft-fg)"
+                                onChange={event_ => setQuery(event_.target.value)}
+                                placeholder={value.length === 0 ? placeholder : 'Type to filter…'}
+                                disabled={disabled}
+                            />
+                            <div className="flex shrink-0 items-center gap-0.5">
+                                {value.length > 0 && !disabled && (
+                                    <span
+                                        role="button"
+                                        aria-label="Clear all"
+                                        onClick={event_ => {
+                                            event_.stopPropagation();
+                                            onChange([]);
+                                        }}
+                                        className="cursor-pointer rounded p-0.5 text-(--soft-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
+                                        <X className="h-3.5 w-3.5" />
+                                    </span>
+                                )}
+                                <ComboboxButton className="flex items-center">
+                                    <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
+                                </ComboboxButton>
+                            </div>
+                        </div>
                     </div>
 
                     <ComboboxOptions transition className={panelAbsolute}>

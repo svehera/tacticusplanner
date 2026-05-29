@@ -15,7 +15,7 @@ import {
 
 export interface ComboBoxProps<T> {
     options: T[];
-    value: T | null;
+    value: T | null | undefined;
     onChange: (value: T | null) => void;
     displayValue: (item: T) => string;
     filterFn?: (option: T, query: string) => boolean;

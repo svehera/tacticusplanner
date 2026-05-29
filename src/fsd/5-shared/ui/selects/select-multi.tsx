@@ -1,18 +1,10 @@
 import { Listbox, ListboxButton, ListboxOption, ListboxOptions } from '@headlessui/react';
-import { Check, ChevronsUpDown } from 'lucide-react';
+import { Check, ChevronsUpDown, X } from 'lucide-react';
 import { type ReactNode } from 'react';
 
 import { cn } from '@/fsd/5-shared/lib';
 
-import {
-    checkIconClass,
-    chevronClass,
-    labelClass,
-    optionClassName,
-    panel,
-    triggerDisabled,
-    triggerMulti,
-} from './select-styles';
+import { checkIconClass, labelClass, optionClassName, panel, triggerDisabled, triggerMulti } from './select-styles';
 
 export interface SelectMultiProps<T> {
     options: T[];
@@ -55,16 +47,29 @@ export const SelectMulti = <T,>({
 
             <Listbox value={value} onChange={onChange} by={by} multiple disabled={disabled}>
                 <div className="relative">
-                    <ListboxButton className={triggerDisabled(triggerMulti, disabled)}>
-                        {value.length === 0 ? (
-                            <span className="text-(--soft-fg)">{placeholder}</span>
-                        ) : (
-                            displayValue(value)
-                        )}
-
-                        <span className={chevronClass}>
+                    <ListboxButton className={cn(triggerDisabled(triggerMulti, disabled), 'gap-2 pr-3')}>
+                        <div className="min-w-0 flex-1">
+                            {value.length === 0 ? (
+                                <span className="text-(--soft-fg)">{placeholder}</span>
+                            ) : (
+                                displayValue(value)
+                            )}
+                        </div>
+                        <div className="flex shrink-0 items-center gap-0.5">
+                            {value.length > 0 && !disabled && (
+                                <span
+                                    role="button"
+                                    aria-label="Clear selection"
+                                    onClick={event_ => {
+                                        event_.stopPropagation();
+                                        onChange([]);
+                                    }}
+                                    className="cursor-pointer rounded p-0.5 text-(--soft-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
+                                    <X className="h-3.5 w-3.5" />
+                                </span>
+                            )}
                             <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
-                        </span>
+                        </div>
                     </ListboxButton>
 
                     <ListboxOptions transition anchor="bottom start" className={panel}>
