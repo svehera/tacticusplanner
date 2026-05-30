@@ -12,7 +12,7 @@ export const GoalCardRaidsButton: React.FC<Props> = ({ unitId }) => {
     const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
     const to = `${linkBase}?charSnowprintId=${encodeURIComponent(unitId)}`;
     return (
-        <Link to={to} className={buttonStyles({ appearance: 'outline', size: 'small', className: 'no-underline' })}>
+        <Link to={to} className={buttonStyles({ appearance: 'outline', size: 'small' })}>
             Open in raids →
         </Link>
     );

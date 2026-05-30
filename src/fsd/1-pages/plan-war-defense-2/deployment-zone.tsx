@@ -35,8 +35,8 @@ export const DeploymentZone = ({
     zoom = 1,
 }: Props) => {
     return (
-        <div className="flex min-w-[400px] flex-col items-center gap-2 rounded-md border border-gray-200 bg-gray-50 p-3 dark:border-gray-700 dark:bg-gray-800">
-            <div className="flex items-center gap-2 text-sm font-medium text-gray-700 dark:text-gray-200">
+        <div className="flex w-full flex-col items-center gap-2 rounded-xl border border-(--card-border) bg-(--card) p-3 sm:w-auto sm:min-w-[400px]">
+            <div className="flex items-center gap-2 text-sm font-medium text-(--card-fg)">
                 <span>Rarity Cap:</span> <RarityIcon rarity={rarityCap} />
                 <TeamDropdown
                     teams={teams}

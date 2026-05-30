@@ -419,7 +419,6 @@ export const Goals = () => {
                 <LinkButton
                     appearance="outline"
                     size="small"
-                    className="no-underline"
                     href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <Link2 data-slot="icon" /> Go to Raids
                 </LinkButton>

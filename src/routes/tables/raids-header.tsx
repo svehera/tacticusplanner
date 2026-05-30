@@ -75,11 +75,7 @@ export const RaidsHeader: React.FC<Props> = ({
                 <Separator orientation="vertical" className="mx-1 h-6" />
 
                 {/* Navigation */}
-                <LinkButton
-                    appearance="outline"
-                    size="small"
-                    className="no-underline"
-                    href={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
+                <LinkButton appearance="outline" size="small" href={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
                     <Link2 data-slot="icon" />
                     Go to Goals
                 </LinkButton>

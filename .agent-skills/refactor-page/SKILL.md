@@ -40,11 +40,31 @@ Read: {target file}
 
 Read the target file in full — not just the JSX. You need to understand what state it manages, which store fields it reads, what the event handlers do, and how computed values flow through. **None of that logic should change.** You were asked to fix visuals; everything else stays where it is.
 
+Then scan the target file's local imports (relative paths — `./` and `../`) and read each one. These are the component files that make up the page. They need the same colour-scheme audit as the page itself.
+
+For each component file you just read, do one more level: scan its local imports and read any that live in the same feature directory (same `1-pages/` subfolder). Stop there — you don't need to recurse into shared UI or entity layers. The goal is to cover the whole feature, not the entire dependency tree.
+
 ---
 
 ## Audit — list every violation before editing
 
-Walk the file top to bottom and produce an audit list. Each entry should name the issue, the approximate line number, the current code, and the replacement. This audit is both your work plan and what you'll show the user at the end.
+**Scope the audit correctly.** The target file is the starting point, but pages are made of components. Audit every local component file you read above — not just the page. For each file, run the full colour-scheme check:
+
+- Any `gray-*`, `slate-*`, or `neutral-*` Tailwind palette class → wrong grey family, replace with a token.
+- Any manual `dark:` variant → delete it, tokens handle dark mode automatically.
+- Any `bg-white`, `text-black`, `bg-gray-50`, `border-gray-200`, etc. → replace with surface/border tokens (`--card`, `--card-border`, `--card-fg`, `--overlay`, `--border`, etc.).
+- Any hardcoded colour that should be a semantic token (e.g. `text-red-600` for a destructive label → `text-(--danger)`).
+
+A component file with no MUI imports is not automatically clean. Colour violations are just as common in pure-Tailwind files that were written before the token system existed.
+
+All violations — from the target page file and from every component file — go into a single unified audit list. Prefix each entry with the filename so it's clear where the fix lives:
+
+```
+[war-defense2.tsx L106] Colors: text-slate-500 → text-(--soft-fg)
+[deployment-zone.tsx L38] Colors: border-gray-200 bg-gray-50 → border-(--card-border) bg-(--card)
+```
+
+Walk each file top to bottom and produce this list. It is both your work plan and what you'll show the user at the end.
 
 Format each entry as:
 
@@ -92,7 +112,8 @@ The categories below are the ones that show up over and over. Use conventions.md
 **Colors**
 
 - Tailwind palette classes (`bg-blue-*`, `text-gray-*`, `border-slate-*`, `bg-white`, `text-black`, etc.) → token equivalents. Common mappings: white → `--bg`, zinc-950 → `--fg`, zinc-600 → `--soft-fg`, zinc-200 → `--border`, zinc-300 → `--input-border`, indigo → `--primary`.
-- Manual `dark:` variants → delete them. Tokens already handle dark mode and the two will fight each other.
+- **Wrong grey family** — the design system uses `zinc`. Any `gray-*`, `slate-*`, or `neutral-*` Tailwind palette class is a violation, even in files that have no MUI imports at all. Replace with the appropriate token (`--card-fg`, `--soft-fg`, `--border`, etc.).
+- Manual `dark:` variants → delete them. Tokens already handle dark mode and the two will fight each other. A file can have zero MUI imports and still be full of `dark:` violations — always check.
 - `hover:bg-(--neutral)` on buttons inside cards or tables → these look invisible in dark mode because `--neutral` _is_ the card surface in dark mode. Use `hover:bg-(--primary)/15` for neutral actions or `hover:bg-(--danger)/10` for destructive ones.
 - `bg-(--neutral)` as a progress track → same problem; use `bg-(--fg)/12` for overlaid tracks.
 
@@ -103,7 +124,7 @@ The categories below are the ones that show up over and over. Use conventions.md
 These have shared replacements; reach for them rather than rebuilding:
 
 - Raw `<button>` for a real action → `<Button>` from `@/fsd/5-shared/ui` (uses `onPress`, not `onClick` — react-aria, not DOM)
-- MUI `Button component={Link}` (navigation button) → `<LinkButton>` from `@/fsd/5-shared/ui/link` (same props as `Button`: intent, appearance, size, shape)
+- MUI `Button component={Link}` (navigation button) → `<LinkButton>` from `@/fsd/5-shared/ui/link` (same props as `Button`: intent, appearance, size, shape). **Do not add `className="no-underline"`** — it is already baked into `buttonStyles` base and is a no-op on `<button>` elements. If you see an existing `className="no-underline"` on a `LinkButton`, remove it.
 - MUI `IconButton` → `<Button size="square-petite" appearance="plain">` with a Lucide icon using `data-slot="icon"`
 - MUI `TextField` or raw `<input>` → `<TextField>` from `@/fsd/5-shared/ui`
 - MUI `Switch` → `<Switch>` from `@/fsd/5-shared/ui/switch` (uses `isSelected`, not `checked`)
@@ -135,6 +156,11 @@ The codebase is migrating to Tailwind classes; `style={{...}}` and MUI's `sx` pr
 - Filter toggles, chips, and clear button crammed onto one row → split per conventions.md "Filter bar header pattern": Switch + Clear in the header row, chips/search in the body.
 - Clear button rendered conditionally → always render with `isDisabled={!hasFilters}`.
 - Missing page heading → add `<h2>` + `<p className="text-sm text-(--soft-fg)">`.
+
+*Mobile responsiveness* — the page must work at ~390px (phone) as well as full desktop width. Two failure modes come up constantly:
+
+- **Control bar overflow** — a `flex` row containing multiple buttons, labels, selects, or sliders with no `flex-wrap` will overflow horizontally on mobile. Add `flex-wrap` so controls reflow to a second line.
+- **Card min-width wider than phone screen** — a card with `min-w-[400px]` (or similar) sitting in a `flex-wrap` grid will cause horizontal scroll on a 390px phone even if the zoom slider scales the content inside. The fix is responsive: `w-full sm:w-auto sm:min-w-[400px]`. Mobile gets full-width stacking; desktop restores the original min-width so cards wrap naturally in rows. **Do not use `w-full` alone** — it forces all cards to stack full-width on desktop too.
 
 **Page layout & alignment**
 
