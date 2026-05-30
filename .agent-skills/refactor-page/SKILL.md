@@ -157,10 +157,10 @@ The codebase is migrating to Tailwind classes; `style={{...}}` and MUI's `sx` pr
 - Clear button rendered conditionally → always render with `isDisabled={!hasFilters}`.
 - Missing page heading → add `<h2>` + `<p className="text-sm text-(--soft-fg)">`.
 
-*Mobile responsiveness* — the page must work at ~390px (phone) as well as full desktop width. Two failure modes come up constantly:
+_Mobile responsiveness_ — the page must work at ~300px (phone) as well as full desktop width. Two failure modes come up constantly:
 
 - **Control bar overflow** — a `flex` row containing multiple buttons, labels, selects, or sliders with no `flex-wrap` will overflow horizontally on mobile. Add `flex-wrap` so controls reflow to a second line.
-- **Card min-width wider than phone screen** — a card with `min-w-[400px]` (or similar) sitting in a `flex-wrap` grid will cause horizontal scroll on a 390px phone even if the zoom slider scales the content inside. The fix is responsive: `w-full sm:w-auto sm:min-w-[400px]`. Mobile gets full-width stacking; desktop restores the original min-width so cards wrap naturally in rows. **Do not use `w-full` alone** — it forces all cards to stack full-width on desktop too.
+- **Card min-width wider than phone screen** — a card with `min-w-[400px]` (or similar) sitting in a `flex-wrap` grid will cause horizontal scroll on a 300px phone even if the zoom slider scales the content inside. The fix is responsive: `w-full sm:w-auto sm:min-w-[400px]`. Mobile gets full-width stacking; desktop restores the original min-width so cards wrap naturally in rows. **Do not use `w-full` alone** — it forces all cards to stack full-width on desktop too.
 
 **Page layout & alignment**
 

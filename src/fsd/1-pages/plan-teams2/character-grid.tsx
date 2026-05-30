@@ -56,7 +56,7 @@ export const CharacterGrid: React.FC<Props> = ({
                         </div>
                         {deployedUnitIds?.includes(char.snowprintId) && (
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                                <div className="rounded-full bg-(--fg)/70 p-1 shadow-lg ring-1 ring-white/20 dark:bg-slate-100/20">
+                                <div className="rounded-full bg-(--fg)/70 p-1 shadow-lg ring-1 ring-(--border)/50">
                                     <MiscIcon icon="deployment" width={36} height={36} />
                                 </div>
                             </div>
