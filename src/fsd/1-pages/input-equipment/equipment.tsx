@@ -4,7 +4,7 @@ import { useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { FactionId, Rarity } from '@/fsd/5-shared/model';
-import { Button } from '@/fsd/5-shared/ui';
+import { Button, usePageMetaOverride } from '@/fsd/5-shared/ui';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { FactionSelect, SelectMulti } from '@/fsd/5-shared/ui/selects';
 import { Switch } from '@/fsd/5-shared/ui/switch';
@@ -272,13 +272,10 @@ export const Equipment = () => {
         return fromInventory + fromEquipped;
     }, [inventory.items, equippedIndex]);
 
+    usePageMetaOverride({ section: 'My Game', title: 'Equipment', description: `${totalOwned} total pieces` });
+
     return (
         <div className="space-y-8 py-6">
-            <div>
-                <h2>Equipment</h2>
-                <p className="text-sm text-(--soft-fg)">{totalOwned} total pieces</p>
-            </div>
-
             {onlyRelics && Date.now() < Date.UTC(2026, 4, 20, 23, 59, 59) && (
                 <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-base font-semibold text-amber-400">
                     {'In-Game code, valid until May 20th: '}

@@ -1312,12 +1312,6 @@ export const RosterSnapshots = () => {
 
     return (
         <div className="space-y-8 py-6">
-            <div>
-                <h2>Roster Snapshots</h2>
-                <p className="text-sm text-(--soft-fg)">
-                    Compare snapshots of your roster over time to track progression.
-                </p>
-            </div>
             <TakeSnapshotDialog
                 snapshotNames={[rosterSnapshots.base?.name ?? '', ...rosterSnapshots.diffs.map(d => d.name)]}
                 isOpen={isTakeSnapshotDialogOpen}

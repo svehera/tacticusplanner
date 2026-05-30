@@ -2,6 +2,7 @@ import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Divider, ListSubheader, Menu, MenuItem, ListItemIcon, ListItemText, useMediaQuery } from '@mui/material';
 import MuiButton from '@mui/material/Button';
+import { Info } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -10,7 +11,6 @@ import {
     learnSubMenu,
     menuItemById,
     miscMenuItems,
-    NAV_SECTIONS,
     planSubMenu,
     // eslint-disable-next-line import-x/no-internal-modules
 } from '@/models/menu-items'; // TODO refactor for FSD
@@ -29,6 +29,7 @@ import {
 } from '@/fsd/5-shared/ui';
 import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
 import { LinkButton } from '@/fsd/5-shared/ui/link';
+import { usePageMeta } from '@/fsd/5-shared/ui/page-meta';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
@@ -82,24 +83,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         }
     }, [location.pathname, headerTitle]);
 
-    const breadcrumb = useMemo(() => {
-        const activeSegment = location.pathname.split('/').at(-1) ?? '';
-        const section = NAV_SECTIONS.find(s =>
-            s.items.some(
-                item =>
-                    (!!item.routeWeb && item.routeWeb.split('/').at(-1) === activeSegment) ||
-                    item.subMenu.some(sub => sub.routeWeb.split('/').at(-1) === activeSegment)
-            )
-        );
-        if (!section) return title;
-        const activeItem = section.items.find(
-            item =>
-                (!!item.routeWeb && item.routeWeb.split('/').at(-1) === activeSegment) ||
-                item.subMenu.some(sub => sub.routeWeb.split('/').at(-1) === activeSegment)
-        );
-        const activeSub = activeItem?.subMenu.find(sub => sub.routeWeb.split('/').at(-1) === activeSegment);
-        return `${section.key} / ${activeSub?.label ?? activeItem?.label ?? title}`;
-    }, [location.pathname, title]);
+    const meta = usePageMeta();
 
     const navigationMenu = (
         <Menu
@@ -159,7 +143,19 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                         <span className="text-xl font-bold">{title}</span>
                     </FlexBox>
                 ) : (
-                    <span className="font-medium">{breadcrumb}</span>
+                    <nav className="flex items-center gap-2 pl-4 whitespace-nowrap">
+                        {meta.section && (
+                            <span className="text-[13px] tracking-[.04em] text-(--soft-fg)">{meta.section}&nbsp;/</span>
+                        )}
+                        <h1 className="m-0 text-lg font-bold tracking-[-0.01em] text-(--fg)">{meta.title}</h1>
+                        {meta.description && (
+                            <LazyTooltip title={meta.description}>
+                                <button className="inline-flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-(--soft-fg) transition hover:text-(--fg)">
+                                    <Info size={14} />
+                                </button>
+                            </LazyTooltip>
+                        )}
+                    </nav>
                 )}
                 <div className="flex items-center">
                     <LazyTooltip title="Frequently Asked Questions">

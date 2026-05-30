@@ -122,20 +122,11 @@ export const MyProgress = () => {
 
     return (
         <div className="space-y-8 py-6">
-            {/* page header */}
-            <div className="flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between sm:gap-6">
-                <div>
-                    <p className="text-[10px] font-bold tracking-[0.16em] text-(--soft-fg) uppercase">Input</p>
-                    <h2 className="mt-1 mb-1">My Progress</h2>
-                    <p className="max-w-[70ch] text-sm text-(--soft-fg)">
-                        Track your campaign completion across all storylines.
-                    </p>
-                </div>
-                <div className="flex shrink-0 items-start gap-4 sm:gap-8">
-                    <StatBlock label="Normal" accent {...normalStats} />
-                    <StatBlock label="Mirror" {...mirrorStats} />
-                    <StatBlock label="Events" {...eventsStats} />
-                </div>
+            {/* Summary stats */}
+            <div className="flex flex-wrap gap-4 sm:gap-8">
+                <StatBlock label="Normal" accent {...normalStats} />
+                <StatBlock label="Mirror" {...mirrorStats} />
+                <StatBlock label="Events" {...eventsStats} />
             </div>
 
             {/* Normal + Mirror side by side */}

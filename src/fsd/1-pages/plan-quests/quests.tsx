@@ -101,11 +101,6 @@ export const Quests = () => {
 
     return (
         <div className="space-y-8 py-6">
-            <div>
-                <h2>Quests</h2>
-                <p className="text-sm text-(--soft-fg)">Browse hero quest tiers, battles, and loot requirements.</p>
-            </div>
-
             {/* Header / Selector */}
             <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-(--card-border) bg-(--card) p-4 shadow-sm">
                 <UnitsAutocomplete<IUnit>

@@ -15,7 +15,7 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
-import { Accordion, AccordionHeader, AccordionBody, Button, Separator } from '@/fsd/5-shared/ui';
+import { Accordion, AccordionHeader, AccordionBody, Button, PageToolbar, PageToolbarDivider } from '@/fsd/5-shared/ui';
 import { ForgeBadgesTotal, MiscIcon, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons';
 import { LinkButton } from '@/fsd/5-shared/ui/link';
 import { Switch } from '@/fsd/5-shared/ui/switch';
@@ -403,17 +403,11 @@ export const Goals = () => {
 
     return (
         <div className="space-y-8 py-6">
-            <div>
-                <h2>Goals</h2>
-                <p className="text-sm text-(--soft-fg)">
-                    Set and track character upgrade, ascension, and ability goals.
-                </p>
-            </div>
-            <div className="flex flex-wrap items-center gap-3">
+            <PageToolbar>
                 {/* Primary CTA */}
                 <SetGoalDialog key={goals.length} />
 
-                <Separator orientation="vertical" className="mx-1 h-6" />
+                <PageToolbarDivider />
 
                 {/* Navigation / utility */}
                 <LinkButton
@@ -429,14 +423,14 @@ export const Goals = () => {
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
 
-                <Separator orientation="vertical" className="mx-1 h-6" />
+                <PageToolbarDivider />
 
                 {/* Counter */}
                 <span className="text-sm text-(--soft-fg)">
                     <span className="font-medium text-(--fg)">Slots</span> {goals.length}/{goalsLimit}
                 </span>
 
-                <Separator orientation="vertical" className="mx-1 h-6" />
+                <PageToolbarDivider />
 
                 {/* View options */}
                 <Switch isSelected={viewPreferences.goalsTableView} onChange={updateView}>
@@ -454,13 +448,13 @@ export const Goals = () => {
                     onToggle={updateColorCodingMode}
                 />
 
-                <Separator orientation="vertical" className="mx-1 h-6" />
+                <PageToolbarDivider />
 
                 {/* Destructive — pushed right */}
                 <Button appearance="outline" intent="danger" size="small" onPress={onDeleteAll}>
                     <Trash2 data-slot="icon" /> Delete All
                 </Button>
-            </div>
+            </PageToolbar>
             <div className="w-full max-w-[1100px]">
                 <Accordion expanded={resourcesExpanded} onToggle={setResourcesExpanded}>
                     <AccordionHeader>

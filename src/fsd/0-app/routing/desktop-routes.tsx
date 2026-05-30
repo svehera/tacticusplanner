@@ -36,6 +36,11 @@ export const globalInputRoutes: RouteObject[] = [
     myProgressLazyRoute,
     {
         path: 'input/inventory',
+        handle: {
+            section: 'My Game',
+            title: 'Inventory',
+            description: 'View and manage your crafting materials and upgrade components.',
+        },
         async lazy() {
             const { Inventory } = await import('@/fsd/1-pages/input-inventory');
             return { Component: Inventory };
@@ -50,6 +55,11 @@ export const globalInputRoutes: RouteObject[] = [
 export const globalPlanRoutes: RouteObject[] = [
     {
         path: 'plan/goals',
+        handle: {
+            section: 'Plan',
+            title: 'Goals',
+            description: 'Set and track character upgrade, ascension, and ability goals.',
+        },
         async lazy() {
             const { Goals } = await import('@/routes/goals/goals');
             return { Component: Goals };
@@ -57,6 +67,11 @@ export const globalPlanRoutes: RouteObject[] = [
     },
     {
         path: 'plan/dailyRaids',
+        handle: {
+            section: 'Plan',
+            title: 'Daily Raids',
+            description: 'Allocate your energy across raid nodes each day to hit your upgrade goals on time.',
+        },
         async lazy() {
             const { DailyRaids } = await import('@/routes/tables/daily-raids');
             return { Component: DailyRaids };
@@ -70,6 +85,7 @@ export const globalPlanRoutes: RouteObject[] = [
     lreLazyRoute,
     {
         path: 'plan/leMasterTable',
+        handle: { section: 'Plan', title: 'LE Master Table' },
         async lazy() {
             const { MasterTable } = await import('@/fsd/1-pages/plan-lre/master-table');
             return { Component: MasterTable };
@@ -81,6 +97,11 @@ export const globalPlanRoutes: RouteObject[] = [
     cesRoute,
     {
         path: 'plan/hse',
+        handle: {
+            section: 'Plan',
+            title: 'HSE',
+            description: 'Plan your battles and reward path for the current Home Screen Event.',
+        },
         async lazy() {
             const { HomeScreenEvent } = await import('@/fsd/1-pages/plan-hse/hse');
             return { Component: HomeScreenEvent };
@@ -91,6 +112,11 @@ export const globalPlanRoutes: RouteObject[] = [
 export const globalLearnRoutes: RouteObject[] = [
     {
         path: 'learn/characters',
+        handle: {
+            section: 'Library',
+            title: 'Characters',
+            description: 'Browse all characters — factions, traits, abilities, and upgrade paths.',
+        },
         async lazy() {
             const { LearnCharacters } = await import('@/fsd/1-pages/learn-characters');
             return { Component: LearnCharacters };
@@ -98,6 +124,11 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     {
         path: 'learn/npcs',
+        handle: {
+            section: 'Library',
+            title: 'NPCs',
+            description: 'Reference stats and mechanics for non-player characters you fight in campaigns.',
+        },
         async lazy() {
             const { NpcInfo } = await import('@/fsd/1-pages/learn-npcs');
             return { Component: NpcInfo };
@@ -105,6 +136,11 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     {
         path: 'learn/upgrades',
+        handle: {
+            section: 'Library',
+            title: 'Upgrades',
+            description: 'Look up crafting recipes and shard requirements for every upgrade tier.',
+        },
         async lazy() {
             const { Upgrades } = await import('@/fsd/1-pages/learn-upgrades');
             return { Component: Upgrades };
@@ -112,6 +148,11 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     {
         path: 'learn/equipment',
+        handle: {
+            section: 'Library',
+            title: 'Equipment',
+            description: 'Browse all equipment pieces, their bonuses, and how to unlock them.',
+        },
         async lazy() {
             const { Equipment } = await import('@/fsd/1-pages/learn-equipment');
             return { Component: Equipment };
@@ -119,6 +160,11 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     {
         path: 'learn/nerd-math',
+        handle: {
+            section: 'Library',
+            title: 'Nerd Math',
+            description: 'Detailed calculations for damage, survivability, and stat efficiency.',
+        },
         async lazy() {
             const { NerdMath } = await import('@/fsd/1-pages/learn-nerd-math');
             return { Component: NerdMath };
@@ -126,6 +172,11 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     {
         path: 'learn/rankLookup',
+        handle: {
+            section: 'Library',
+            title: 'Rank Lookup',
+            description: 'Find the exact materials needed to take any character from one rank to another.',
+        },
         async lazy() {
             const { RankLookup } = await import('@/fsd/1-pages/learn-characters');
             return { Component: RankLookup };
@@ -133,6 +184,11 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     {
         path: 'learn/campaigns',
+        handle: {
+            section: 'Library',
+            title: 'Campaigns',
+            description: 'Browse every campaign node — drop tables, enemy types, and difficulty flags.',
+        },
         async lazy() {
             const { Campaigns } = await import('@/fsd/1-pages/learn-campaigns/campaigns');
             return { Component: Campaigns };
@@ -153,6 +209,10 @@ export const appRoutes: () => RouteObject[] = () => [
         children: [
             {
                 path: 'home',
+                handle: {
+                    title: 'Home',
+                    description: 'Your dashboard — quick links and an overview of your current progress.',
+                },
                 async lazy() {
                     const { DesktopHome } = await import('@/fsd/1-pages/home');
                     return { Component: DesktopHome };
@@ -163,6 +223,7 @@ export const appRoutes: () => RouteObject[] = () => [
             ...globalLearnRoutes,
             {
                 path: 'contacts',
+                handle: { title: 'Contacts', description: 'Get in touch with the Tacticus Planner team.' },
                 async lazy() {
                     const { Contacts } = await import('@/fsd/1-pages/contacts');
                     return { Component: Contacts };
@@ -170,6 +231,7 @@ export const appRoutes: () => RouteObject[] = () => [
             },
             {
                 path: 'ty',
+                handle: { title: 'Thank You' },
                 async lazy() {
                     const { Thanks } = await import('@/fsd/3-features/thank-you/thanks');
                     return { Component: Thanks };
@@ -179,6 +241,7 @@ export const appRoutes: () => RouteObject[] = () => [
             sharedRosterRoute,
             {
                 path: 'ui-kit',
+                handle: { title: 'UI Kit' },
                 async lazy() {
                     const { UiKitPage } = await import('@/fsd/1-pages/ui-kit');
                     return { Component: UiKitPage };

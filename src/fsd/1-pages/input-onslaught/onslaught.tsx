@@ -78,14 +78,6 @@ export const Onslaught: React.FC = () => {
 
     return (
         <div className="space-y-8 py-6">
-            <div>
-                <h2>Onslaught Preferences</h2>
-                <p className="text-sm text-(--soft-fg)">
-                    Set your current sector and tier for each alliance. These values are used to estimate shards earned
-                    per onslaught token when computing ascension goal timelines.
-                </p>
-            </div>
-
             <div className="flex flex-wrap gap-6">
                 {([Alliance.Imperial, Alliance.Xenos, Alliance.Chaos] as Alliance[]).map(alliance => (
                     <AllianceSelector

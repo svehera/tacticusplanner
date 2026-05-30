@@ -38,6 +38,9 @@
     --color-soft: var(--soft);
     --color-soft-fg: var(--soft-fg);
 
+    /* ── Hairline (quieter than border) ──────── */
+    --color-hairline: var(--hairline);
+
     /* ── Data surface ─────────────────────────── */
     --color-data-surface: var(--data-surface);
     --color-data-surface-fg: var(--data-surface-fg);
@@ -99,6 +102,9 @@
         /* ── Soft (de-emphasized text areas) ──────── */
         --soft: var(--color-zinc-100);
         --soft-fg: var(--color-zinc-600);
+
+        /* ── Hairline ─────────────────────────────── */
+        --hairline: color-mix(in srgb, var(--border) 45%, transparent);
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-50);
@@ -223,6 +229,9 @@
         /* ── Soft (de-emphasized text areas) ──────── */
         --soft: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-900));
         --soft-fg: var(--color-zinc-400);
+
+        /* ── Hairline ─────────────────────────────── */
+        --hairline: color-mix(in srgb, var(--border) 45%, transparent);
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-800);
