@@ -1,19 +1,19 @@
-import { Warning } from '@mui/icons-material';
-import CheckCircleIcon from '@mui/icons-material/CheckCircle';
-import GridViewIcon from '@mui/icons-material/GridView';
-import InfoIcon from '@mui/icons-material/Info';
-import InventoryIcon from '@mui/icons-material/Inventory';
-import PendingIcon from '@mui/icons-material/Pending';
-import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControlLabel, Switch } from '@mui/material';
-import Button from '@mui/material/Button';
 import { sum } from 'lodash';
+import { CheckCircle2, Clock, Info, LayoutGrid, Package, Rows3, TriangleAlert } from 'lucide-react';
 import React, { lazy, Suspense, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 import { formatDateWithOrdinal } from 'src/shared-logic/functions';
 
-import { AccessibleTooltip, Accordion, AccordionHeader, AccordionBody, FlexBox } from '@/fsd/5-shared/ui';
+import {
+    AccessibleTooltip,
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
+    Button,
+    FlexBox,
+    Switch,
+} from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -52,10 +52,6 @@ export const RaidsPlan: React.FC<Props> = ({
         completed: boolean;
     }>({ start: 0, end: 3, completed: true });
 
-    const [grid1Loaded, setGrid1Loaded] = useState<boolean>(false);
-    const [grid2Loaded, setGrid2Loaded] = useState<boolean>(false);
-    const [grid3Loaded, setGrid3Loaded] = useState<boolean>(false);
-
     const [allDaysExpanded, setAllDaysExpanded] = useState(false);
     const [outerExpanded, setOuterExpanded] = useState(scrollToCharSnowprintId !== undefined);
 
@@ -67,7 +63,7 @@ export const RaidsPlan: React.FC<Props> = ({
         raids: false,
     }));
 
-    const togglePanel = (key: keyof typeof expandedPanels) => (_: React.SyntheticEvent, isExpanded: boolean) =>
+    const togglePanel = (key: keyof typeof expandedPanels) => (isExpanded: boolean) =>
         setExpandedPanels(previous => ({ ...previous, [key]: isExpanded }));
 
     const itemReferences = useRef<ReferenceMap>({});
@@ -194,33 +190,23 @@ export const RaidsPlan: React.FC<Props> = ({
                         <span>
                             <b>{energyTotal}</b> <MiscIcon icon={'energy'} height={15} width={15} />)
                         </span>
-                        <FormControlLabel
-                            control={
-                                <Switch
-                                    checked={viewPreferences.raidsTableView}
-                                    onChange={event => {
-                                        event.stopPropagation();
-                                        updateView(event.target.checked);
-                                    }}
-                                    onClick={event => event.stopPropagation()}
-                                    onFocus={event => event.stopPropagation()}
-                                    onMouseDown={event => event.stopPropagation()}
-                                />
-                            }
-                            label={
+                        <div onClick={event => event.stopPropagation()}>
+                            <Switch isSelected={viewPreferences.raidsTableView} onChange={updateView}>
                                 <div className="flex items-center gap-1">
                                     {viewPreferences.raidsTableView ? (
-                                        <div className="flex items-center gap-1">
-                                            <TableRowsIcon color="primary" /> <span>Table View</span>
-                                        </div>
+                                        <>
+                                            <Rows3 className="size-4 text-(--primary)" />
+                                            <span>Table View</span>
+                                        </>
                                     ) : (
-                                        <div className="flex items-center gap-1">
-                                            <GridViewIcon color="primary" /> <span>Cards View</span>
-                                        </div>
+                                        <>
+                                            <LayoutGrid className="size-4 text-(--primary)" />
+                                            <span>Cards View</span>
+                                        </>
                                     )}
                                 </div>
-                            }
-                        />
+                            </Switch>
+                        </div>
                     </div>
                     <span className="text-sm text-(--soft-fg) italic">{calendarDateTotal}</span>
                 </FlexBox>
@@ -230,10 +216,9 @@ export const RaidsPlan: React.FC<Props> = ({
                     <SectionAccordion
                         expanded={expandedPanels.related}
                         onChange={togglePanel('related')}
-                        transitionProps={{ unmountOnExit: true }}
                         summary={
                             <div className="flex flex-wrap items-center gap-2 text-sm font-semibold sm:text-base">
-                                <InventoryIcon />
+                                <Package className="size-4" />
                                 <b>{estimatedRanks.relatedUpgrades.length}</b> related upgrades (Inventory)
                             </div>
                         }>
@@ -247,10 +232,9 @@ export const RaidsPlan: React.FC<Props> = ({
                         ref={inProgressReference}
                         expanded={expandedPanels.inProgress}
                         onChange={togglePanel('inProgress')}
-                        transitionProps={{ unmountOnExit: !grid1Loaded }}
                         summary={
                             <div className="flex flex-wrap items-center gap-2 text-sm font-semibold sm:text-base">
-                                <PendingIcon color={'primary'} />
+                                <Clock className="size-4 text-(--primary)" />
                                 <b>{estimatedRanks.inProgressMaterials.length}</b> in progress upgrades
                             </div>
                         }>
@@ -259,7 +243,6 @@ export const RaidsPlan: React.FC<Props> = ({
                             tableView={viewPreferences.raidsTableView === true}
                             updateInventory={updateInventory}
                             inventory={upgrades}
-                            onGridReady={() => setGrid1Loaded(true)}
                             scrollToCharSnowprintId={scrollToCharSnowprintId}
                             alreadyUsedMaterials={estimatedRanks.finishedMaterials}
                             cardRefCallback={setCardReference}
@@ -270,11 +253,10 @@ export const RaidsPlan: React.FC<Props> = ({
                     <SectionAccordion
                         expanded={expandedPanels.finished}
                         onChange={togglePanel('finished')}
-                        transitionProps={{ unmountOnExit: !grid3Loaded }}
                         summary={
                             <div className="flex flex-wrap items-center gap-2 text-sm font-semibold sm:text-base">
-                                <CheckCircleIcon color={'success'} /> <b>{estimatedRanks.finishedMaterials.length}</b>{' '}
-                                finished upgrades
+                                <CheckCircle2 className="size-4 text-(--success)" />
+                                <b>{estimatedRanks.finishedMaterials.length}</b> finished upgrades
                             </div>
                         }>
                         <MaterialsSectionContent
@@ -282,7 +264,6 @@ export const RaidsPlan: React.FC<Props> = ({
                             tableView={viewPreferences.raidsTableView === true}
                             updateInventory={updateInventory}
                             inventory={upgrades}
-                            onGridReady={() => setGrid3Loaded(true)}
                             showAdditionalInfo={false}
                         />
                     </SectionAccordion>
@@ -291,20 +272,19 @@ export const RaidsPlan: React.FC<Props> = ({
                     <SectionAccordion
                         expanded={expandedPanels.blocked}
                         onChange={togglePanel('blocked')}
-                        transitionProps={{ unmountOnExit: !grid2Loaded }}
                         summary={
                             <AccessibleTooltip
                                 title={`You don't any have location for ${estimatedRanks.blockedMaterials.length} upgrades`}>
                                 <div className="flex flex-wrap items-center gap-2 text-sm font-semibold sm:text-base">
-                                    <Warning color={'warning'} />
+                                    <TriangleAlert className="size-4 text-(--warning)" />
                                     <b>{estimatedRanks.blockedMaterials.length}</b> blocked upgrades
                                 </div>
                             </AccessibleTooltip>
                         }>
                         <div className="flex flex-col">
                             <div className="flex items-center gap-2 p-2">
-                                <InfoIcon color="primary" /> You don&apos;t have available campaigns nodes for the items
-                                listed in the table below
+                                <Info className="size-4 shrink-0 text-(--primary)" /> You don&apos;t have available
+                                campaigns nodes for the items listed in the table below
                             </div>
                             <div className="grow">
                                 <MaterialsSectionContent
@@ -312,7 +292,6 @@ export const RaidsPlan: React.FC<Props> = ({
                                     tableView={viewPreferences.raidsTableView === true}
                                     updateInventory={updateInventory}
                                     inventory={upgrades}
-                                    onGridReady={() => setGrid2Loaded(true)}
                                     showAdditionalInfo={false}
                                 />
                             </div>
@@ -324,39 +303,36 @@ export const RaidsPlan: React.FC<Props> = ({
                     <SectionAccordion
                         expanded={expandedPanels.raids}
                         onChange={togglePanel('raids')}
-                        transitionProps={{ unmountOnExit: !upgradesPaging.completed }}
                         summary={
-                            <div className="flex w-full flex-col gap-1">
-                                <span className="text-sm font-semibold sm:text-base">Daily Raids</span>
-                                <div className="flex flex-wrap items-center gap-x-3 gap-y-1 text-sm text-(--soft-fg)">
-                                    <span>
-                                        <b className="text-(--card-fg)">{estimatedRanks.upgradesRaids.length}</b> days
-                                    </span>
-                                    <span className="flex items-center gap-1">
-                                        <b className="text-(--card-fg)">{energyTotal}</b>
-                                        <MiscIcon icon={'energy'} height={13} width={13} />
-                                    </span>
-                                    <span className="flex items-center gap-1">
-                                        <b className="text-(--card-fg)">{estimatedRanks.raidsTotal}</b>
-                                        <MiscIcon icon={'raidTicket'} height={13} width={13} />
-                                    </span>
-                                    <span className="flex items-center gap-1">
-                                        <b className="text-(--card-fg)">{estimatedRanks.freeEnergyDays}</b> days unused
-                                        <MiscIcon icon={'energy'} height={13} width={13} />
-                                    </span>
-                                    <span className="italic">{upgradesCalendarDate}</span>
-                                    {expandedPanels.raids && (
+                            <div className="flex w-full flex-wrap items-center gap-x-3 gap-y-1 text-sm font-semibold sm:text-base">
+                                <span>Daily Raids</span>
+                                <span className="font-normal text-(--soft-fg)">
+                                    <b className="text-(--card-fg)">{estimatedRanks.upgradesRaids.length}</b> days
+                                </span>
+                                <span className="flex items-center gap-1 font-normal text-(--soft-fg)">
+                                    <b className="text-(--card-fg)">{energyTotal}</b>
+                                    <MiscIcon icon={'energy'} height={13} width={13} />
+                                </span>
+                                <span className="flex items-center gap-1 font-normal text-(--soft-fg)">
+                                    <b className="text-(--card-fg)">{estimatedRanks.raidsTotal}</b>
+                                    <MiscIcon icon={'raidTicket'} height={13} width={13} />
+                                </span>
+                                <span className="flex items-center gap-1 font-normal text-(--soft-fg)">
+                                    <b className="text-(--card-fg)">{estimatedRanks.freeEnergyDays}</b> days unused
+                                    <MiscIcon icon={'energy'} height={13} width={13} />
+                                </span>
+                                <span className="font-normal text-(--soft-fg) italic">{upgradesCalendarDate}</span>
+                                {expandedPanels.raids && (
+                                    <div onClick={event => event.stopPropagation()}>
                                         <Button
+                                            appearance="outline"
+                                            intent="secondary"
                                             size="small"
-                                            variant="outlined"
-                                            onClick={event => {
-                                                event.stopPropagation();
-                                                setAllDaysExpanded(v => !v);
-                                            }}>
+                                            onPress={() => setAllDaysExpanded(v => !v)}>
                                             {allDaysExpanded ? 'Collapse cards' : 'Expand cards'}
                                         </Button>
-                                    )}
-                                </div>
+                                    </div>
+                                )}
                             </div>
                         }>
                         <DayStrip

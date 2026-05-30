@@ -131,7 +131,7 @@ These have shared replacements; reach for them rather than rebuilding:
 - MUI `Chip` for filters → the token-aware chip pattern from conventions.md "Rarity / tag chips"
 - MUI `Menu` + `MenuItem` for a dropdown → headlessUI `Listbox` with token classes (conventions.md "Custom single-value dropdown")
 - MUI `Tooltip` → `<AccessibleTooltip>` or `<LazyTooltip>`
-- MUI `Accordion` → `<Accordion>` + `<AccordionHeader>` + `<AccordionBody>` from `@/fsd/5-shared/ui`. Note: `AccordionSummary` → `AccordionHeader`, `AccordionDetails` → `AccordionBody`. The `expandIcon` prop is removed (shared component manages its own chevron). MUI `onChange={(e, expanded) => ...}` → `onToggle={(expanded) => ...}` (no event param).
+- MUI `Accordion` → `<Accordion>` + `<AccordionHeader>` + `<AccordionBody>` from `@/fsd/5-shared/ui`. Note: `AccordionSummary` → `AccordionHeader`, `AccordionDetails` → `AccordionBody`. The `expandIcon` prop is removed (shared component manages its own chevron). MUI `onChange={(e, expanded) => ...}` → `onToggle={(expanded) => ...}` (no event param). If multiple accordions are stacked (no gap between them), wrap them with the accordion group classes and use controlled mode for mutual exclusivity — see conventions.md "Accordion group (stacked, mutually exclusive)".
 - MUI `Card` → `<Card>` from `@/fsd/5-shared/ui/card`
 - MUI `Divider` → `<Separator>`. For labeled dividers, pass children: `<Separator>Section Label</Separator>`
 - MUI `CircularProgress` / `LinearProgress` → `<Loader>` or the token ProgressBar pattern

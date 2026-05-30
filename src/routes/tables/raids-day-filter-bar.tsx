@@ -54,14 +54,14 @@ const DayFilterBarComponent: FC<DayFilterBarProps> = ({
                     <button
                         type="button"
                         onClick={() => onNavigate(firstDay, 'start')}
-                        className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--neutral) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
+                        className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--primary)/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
                         ← Day {firstDay + 1}
                     </button>
                     {lastDay !== undefined && lastDay !== firstDay && (
                         <button
                             type="button"
                             onClick={() => onNavigate(lastDay, 'end')}
-                            className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--neutral) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
+                            className="inline-flex min-h-[36px] items-center rounded-full border border-(--card-border) bg-(--card) px-3 py-2 text-xs font-medium text-(--card-fg) transition-colors hover:bg-(--primary)/15 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--ring)">
                             Day {lastDay + 1} →
                         </button>
                     )}

@@ -17,8 +17,10 @@ const DayCardStatsComponent: FC<DayCardStatsProps> = ({ energyTotal, raidsTotal,
             <div className="flex items-center gap-1.5">
                 <span className="flex items-center gap-1 rounded-full bg-(--neutral) px-2 py-0.5 text-xs">
                     <MiscIcon icon="energy" height={12} width={12} />
-                    <span>{energyTotal}</span>
-                    {energyPerDay > 0 && <span className="opacity-50">/{energyPerDay}</span>}
+                    <span>
+                        {energyTotal}
+                        {energyPerDay > 0 && <span className="opacity-50">/{energyPerDay}</span>}
+                    </span>
                 </span>
                 <span className="flex items-center gap-1 rounded-full bg-(--neutral) px-2 py-0.5 text-xs">
                     <MiscIcon icon="raidTicket" height={12} width={12} />

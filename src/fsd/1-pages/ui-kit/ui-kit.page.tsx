@@ -38,7 +38,15 @@ import { StoreContext } from 'src/reducers/store.provider';
 import { RaidUpgradeMaterialCard } from 'src/routes/tables/raid-upgrade-material-card';
 
 import { FactionId, Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
-import { AccessibleTooltip, LazyTooltip, Button, ButtonPill } from '@/fsd/5-shared/ui';
+import {
+    AccessibleTooltip,
+    LazyTooltip,
+    Button,
+    ButtonPill,
+    Accordion,
+    AccordionHeader,
+    AccordionBody,
+} from '@/fsd/5-shared/ui';
 import { Badge } from '@/fsd/5-shared/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/fsd/5-shared/ui/card';
 import { MiscIcon, RarityIcon, RankIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -545,6 +553,42 @@ const AccordionItem = ({
     );
 };
 
+const AccordionGroupShowcase = () => {
+    const [open, setOpen] = useState<string | undefined>('raids');
+    const items = [
+        {
+            id: 'raids',
+            title: 'Daily Raids',
+            body: '3 locations planned · 420 energy · Est. 14 days to next rank',
+        },
+        {
+            id: 'goals',
+            title: 'Goals summary',
+            body: '5 active goals · 2 completed this week · Next: Marneus Calgar → Gold 3',
+        },
+        {
+            id: 'campaigns',
+            title: 'Campaign progress',
+            body: 'Indomitus: 12/30 · Fall of Cadia: 5/24 · Octarius: 0/18',
+        },
+    ];
+    return (
+        <div className="w-full max-w-lg [&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none">
+            {items.map(item => (
+                <Accordion
+                    key={item.id}
+                    expanded={open === item.id}
+                    onToggle={next => setOpen(next ? item.id : undefined)}>
+                    <AccordionHeader>{item.title}</AccordionHeader>
+                    <AccordionBody>
+                        <p className="text-sm text-(--soft-fg)">{item.body}</p>
+                    </AccordionBody>
+                </Accordion>
+            ))}
+        </div>
+    );
+};
+
 // ─── radio group ─────────────────────────────────────────────────────────────
 
 const RadioGroupShowcase = () => {
@@ -706,6 +750,44 @@ const TextSearchShowcase = () => {
                 ) : undefined
             }
         />
+    );
+};
+
+const QuickFilterShowcase = () => {
+    const [filter, setFilter] = useState('');
+    const [showCraftable, setShowCraftable] = useState(true);
+    const [showAlphabet, setShowAlphabet] = useState(false);
+
+    return (
+        <div className="flex flex-wrap items-center gap-5">
+            <TextField
+                placeholder="Quick Filter"
+                value={filter}
+                onChange={setFilter}
+                suffix={
+                    filter ? (
+                        <button
+                            aria-label="Clear"
+                            onMouseDown={event_ => {
+                                event_.preventDefault();
+                                setFilter('');
+                            }}
+                            className="cursor-pointer text-(--soft-fg) transition-colors hover:text-(--fg)">
+                            <X className="size-4" />
+                        </button>
+                    ) : undefined
+                }
+            />
+            <Button intent="danger" onPress={() => setFilter('')}>
+                Reset All
+            </Button>
+            <Switch isSelected={showCraftable} onChange={setShowCraftable}>
+                Show craftable items
+            </Switch>
+            <Switch isSelected={showAlphabet} onChange={setShowAlphabet}>
+                Show alphabet
+            </Switch>
+        </div>
     );
 };
 
@@ -2618,6 +2700,9 @@ export const UiKitPage = () => {
                         </AccordionItem>
                     </div>
                 </Group>
+                <Group label="Grouped (mutually exclusive · squared inner corners)">
+                    <AccordionGroupShowcase />
+                </Group>
             </Section>
 
             <Separator />
@@ -2647,6 +2732,9 @@ export const UiKitPage = () => {
                     <div className="w-72">
                         <TextSearchShowcase />
                     </div>
+                </Group>
+                <Group label="Quick filter bar">
+                    <QuickFilterShowcase />
                 </Group>
                 <Group label="Select (single)">
                     <SelectShowcase />

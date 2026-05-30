@@ -491,6 +491,36 @@ import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 - Supports both **controlled** (`expanded` + `onToggle`) and **uncontrolled** (`defaultExpanded`) modes
 - Prefer this over MUI `<Accordion>` — it uses design tokens natively and doesn't need `!important` overrides
 
+### Accordion group (stacked, mutually exclusive)
+
+When multiple `Accordion` components are stacked without gaps between them, wrap them in a container that squares off the touching inner corners and collapses the double border:
+
+```tsx
+<div className="[&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none">
+    {items.map(item => (
+        <Accordion
+            key={item.id}
+            expanded={open === item.id}
+            onToggle={next => setOpen(next ? item.id : null)}>
+            <AccordionHeader>{item.title}</AccordionHeader>
+            <AccordionBody>{item.body}</AccordionBody>
+        </Accordion>
+    ))}
+</div>
+```
+
+Three classes on the wrapper:
+
+| Class | Effect |
+| --- | --- |
+| `[&>*:not(:first-child)]:-mt-px` | Overlaps adjacent borders so only one line is visible between items |
+| `[&>*:not(:first-child)]:rounded-t-none` | Squares the top corners of every item except the first |
+| `[&>*:not(:last-child)]:rounded-b-none` | Squares the bottom corners of every item except the last |
+
+The result is rounded on the outer edges only — first item's top-left/top-right corners stay rounded; last item's bottom-left/bottom-right corners stay rounded; everything in between is a straight edge.
+
+Use **controlled mode** (`expanded` + `onToggle`) with a shared `string | number | null` state so expanding one automatically collapses the others. Uncontrolled (`defaultExpanded`) makes mutual exclusivity impossible.
+
 ### Accordion item (inline, inside a card)
 
 For collapsible rows _inside_ an existing card or panel (e.g. FAQ items, nested details):
