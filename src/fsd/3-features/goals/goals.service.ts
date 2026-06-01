@@ -80,8 +80,8 @@ export class GoalsService {
                 const upgradeGoal = goal as ICharacterUpgradeRankGoal;
                 const rankApplied = upgradeGoal.rankAppliedUpgrades ?? 0;
                 const targetLevel =
-                    rankApplied > 0 && upgradeGoal.rankEnd >= Rank.Adamantine1
-                        ? rankToLevel[(upgradeGoal.rankEnd - 1) as Rank] + rankApplied - 1
+                    rankApplied > 0 && upgradeGoal.rankEnd >= Rank.Diamond3
+                        ? rankToLevel[upgradeGoal.rankEnd as Rank] + rankApplied - 1
                         : rankToLevel[(upgradeGoal.rankEnd ?? Rank.Stone2) as Rank];
                 if (targetLevel > returnValue.currentLevel) {
                     returnValue.currentLevel = targetLevel;
@@ -152,8 +152,8 @@ export class GoalsService {
             if (goal.type === PersonalGoalType.UpgradeRank && !goal.manuallyFarmXp) {
                 const rankApplied = goal.rankAppliedUpgrades ?? 0;
                 const targetLevel =
-                    rankApplied > 0 && goal.rankEnd >= Rank.Adamantine1
-                        ? rankToLevel[(goal.rankEnd - 1) as Rank] + rankApplied - 1
+                    rankApplied > 0 && goal.rankEnd >= Rank.Diamond3
+                        ? rankToLevel[goal.rankEnd as Rank] + rankApplied - 1
                         : rankToLevel[(goal.rankEnd ?? Rank.Stone2) as Rank];
                 const currentXp = this.currentCharacterXp(
                     goal.unitId,

@@ -153,7 +153,7 @@ function buildNewSnapshot(
             // New member: store full base data
             members.push({ userId, chars: currentChars, mows: currentMows });
         } else {
-            const latestRoster = RosterSnapshotsService.fixSnapshot(memberHistory.at(-1).resolvedRoster);
+            const latestRoster = RosterSnapshotsService.fixSnapshot(memberHistory.at(-1)!.resolvedRoster);
             const charDiffs: GuildUnitDiff[] = [];
             const mowDiffs: GuildUnitDiff[] = [];
 

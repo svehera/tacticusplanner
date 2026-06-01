@@ -237,13 +237,13 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             const startingRank = (form.startingRank ?? unit.rank ?? Rank.Stone1) as number;
             const targetRank = (form.targetRank ?? unit.rank ?? Rank.Stone1) as number;
             const startPartial =
-                startingRank >= Rank.Adamantine1
+                startingRank >= Rank.Diamond3
                     ? (form.startingRankAppliedUpgrades ?? 0) / 6
                     : form.startingRankPoint5
                       ? 0.5
                       : 0;
             const endPartial =
-                targetRank >= Rank.Adamantine1 ? (form.rankAppliedUpgrades ?? 0) / 6 : form.rankPoint5 ? 0.5 : 0;
+                targetRank >= Rank.Diamond3 ? (form.rankAppliedUpgrades ?? 0) / 6 : form.rankPoint5 ? 0.5 : 0;
             return startingRank + startPartial >= targetRank + endPartial;
         }
 
