@@ -73,14 +73,14 @@ export const mobileAppRoutes: () => RouteObject[] = () => [
                 },
             },
             faqLazyRoute,
-            {
-                path: '/sharedRoster',
-                loader: ({ request }) => {
-                    const { search } = new URL(request.url);
-                    return redirect(`/mobile/sharedRoster${search}`);
-                },
-            },
             sharedRosterRoute,
         ],
+    },
+    {
+        path: '/sharedRoster',
+        loader: ({ request }) => {
+            const { search } = new URL(request.url);
+            return redirect(`/mobile/sharedRoster${search}`);
+        },
     },
 ];
