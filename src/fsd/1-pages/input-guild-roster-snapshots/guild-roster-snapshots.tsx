@@ -94,7 +94,7 @@ export const GuildRosterSnapshots = () => {
     return (
         <UnitPortraitAssetsProvider>
             <div className="flex flex-col gap-4 px-4 py-4">
-                <h1 className="text-2xl font-bold">Guild Roster Snapshots</h1>
+                <h1 className="text-2xl font-bold">Guild</h1>
 
                 <div className="flex items-center gap-4">
                     <Button intent="primary" isDisabled={isLoading} onPress={loadMembers}>

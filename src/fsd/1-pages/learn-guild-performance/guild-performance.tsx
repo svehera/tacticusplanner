@@ -26,7 +26,7 @@ type TabId = (typeof TAB_IDS)[number];
 const TAB_LABELS: Record<TabId, string> = {
     overview: 'Overview',
     damage: 'Damage',
-    boss: 'Boss',
+    boss: 'Leaderboard',
     loops: 'Loops',
     performance: 'Performance',
 };
@@ -141,7 +141,7 @@ export const GuildPerformance = () => {
                     />
                 </div>
                 <div className={activeTab === 'boss' ? undefined : 'hidden'}>
-                    <BossTab />
+                    <BossTab currentData={currentData} historyData={historyData} names={names} />
                 </div>
                 <div className={activeTab === 'loops' ? undefined : 'hidden'}>
                     <LoopsTab currentData={currentData} historyData={historyData} />
