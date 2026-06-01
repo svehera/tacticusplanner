@@ -161,13 +161,17 @@ export const OverviewTab = ({
     names: Map<string, string>;
 }) => {
     const [tokens, setTokens] = useState<GuildTokenEntry[] | typeof LOADING>(cachedTokens ?? LOADING);
+    const [tokenError, setTokenError] = useState<string | undefined>();
 
     useEffect(() => {
         if (cachedTokens !== undefined) return;
-        makeApiCall<GuildTokenEntry[]>('GET', 'guild/tokens').then(({ data }) => {
+        makeApiCall<GuildTokenEntry[]>('GET', 'guild/tokens').then(({ data, error }) => {
             if (data) {
                 cachedTokens = data;
                 setTokens(data);
+            } else if (error) {
+                setTokenError(typeof error === 'string' ? error : (error.message ?? 'Unknown error'));
+                setTokens([]);
             }
         });
     }, []);
@@ -186,7 +190,11 @@ export const OverviewTab = ({
                 <section className="flex flex-col gap-3">
                     <h2 className="text-base font-semibold">Raid Tokens</h2>
                     {tokenData === undefined ? (
-                        <p className="text-sm text-gray-500">Loading…</p>
+                        tokenError ? (
+                            <p className="text-sm text-red-500">{tokenError}</p>
+                        ) : (
+                            <p className="text-sm text-gray-500">Loading…</p>
+                        )
                     ) : (
                         <TokenTable entries={tokenData} names={names} />
                     )}
@@ -195,7 +203,11 @@ export const OverviewTab = ({
                 <section className="flex flex-col gap-3">
                     <h2 className="text-base font-semibold">Bombs</h2>
                     {tokenData === undefined ? (
-                        <p className="text-sm text-gray-500">Loading…</p>
+                        tokenError ? (
+                            <p className="text-sm text-red-500">{tokenError}</p>
+                        ) : (
+                            <p className="text-sm text-gray-500">Loading…</p>
+                        )
                     ) : (
                         <BombTable entries={tokenData} names={names} />
                     )}

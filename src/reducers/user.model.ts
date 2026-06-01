@@ -14,7 +14,7 @@ export interface IUserDataResponse {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
-    shareInGameName: boolean;
-    shareRosterData: boolean;
+    shareInGameName?: boolean;
+    shareRosterData?: boolean;
     data: IPersonalData | IPersonalData2 | undefined;
 }
