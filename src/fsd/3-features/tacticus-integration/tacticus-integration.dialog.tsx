@@ -18,6 +18,8 @@ interface Props extends DialogProps {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
+    shareInGameName?: boolean;
+    shareRosterData?: boolean;
 }
 
 function buildErrorMessage(error: string | Error | undefined): string {
@@ -32,6 +34,8 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     tacticusApiKey,
     tacticusUserId,
     tacticusGuildApiKey,
+    shareInGameName,
+    shareRosterData,
 }) => {
     const loader = useLoader();
     const auth = useAuth();
@@ -43,6 +47,10 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     const [currentGuildApiKey, setCurrentGuildApiKey] = useState<string>(tacticusGuildApiKey);
     const [userId, setUserId] = useState<string>(tacticusUserId);
     const [currentUserId, setCurrentUserId] = useState<string>(tacticusUserId);
+    const [currentShareInGameName, setCurrentShareInGameName] = useState<boolean>(shareInGameName ?? false);
+    const [savedShareInGameName, setSavedShareInGameName] = useState<boolean>(shareInGameName ?? false);
+    const [currentShareRosterData, setCurrentShareRosterData] = useState<boolean>(shareRosterData ?? false);
+    const [savedShareRosterData, setSavedShareRosterData] = useState<boolean>(shareRosterData ?? false);
 
     async function syncWithTacticusApi() {
         onClose();
@@ -52,7 +60,13 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     async function updateApiKey() {
         loader.startLoading('Updating settings. Please wait...');
         try {
-            const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
+            const response = await updateTacticusApiKey(
+                apiKey,
+                guildApiKey,
+                userId,
+                currentShareInGameName,
+                currentShareRosterData
+            );
 
             if (!response.data) {
                 enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
@@ -64,10 +78,14 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 tacticusApiKey: apiKey,
                 tacticusGuildApiKey: guildApiKey,
                 tacticusUserId: userId,
+                shareInGameName: currentShareInGameName,
+                shareRosterData: currentShareRosterData,
             });
             setCurrentApiKey(apiKey);
             setCurrentGuildApiKey(guildApiKey);
             setCurrentUserId(userId);
+            setSavedShareInGameName(currentShareInGameName);
+            setSavedShareRosterData(currentShareRosterData);
 
             enqueueSnackbar('Settings updated', { variant: 'success' });
         } catch (error) {
@@ -157,12 +175,36 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             autoComplete="new-password"
                             isRevealable
                         />
+                        {userId && (
+                            <div className="flex w-[80%] flex-col gap-2 pt-2">
+                                <label className="flex cursor-pointer items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        className="size-4 cursor-pointer accent-blue-600"
+                                        checked={currentShareInGameName}
+                                        onChange={event => setCurrentShareInGameName(event.target.checked)}
+                                    />
+                                    <span className="text-sm">Share in-game player name with guild</span>
+                                </label>
+                                <label className="flex cursor-pointer items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        className="size-4 cursor-pointer accent-blue-600"
+                                        checked={currentShareRosterData}
+                                        onChange={event => setCurrentShareRosterData(event.target.checked)}
+                                    />
+                                    <span className="text-sm">Share roster with guild</span>
+                                </label>
+                            </div>
+                        )}
                         <Button
                             intent="primary"
                             isDisabled={
                                 apiKey === currentApiKey &&
                                 guildApiKey === currentGuildApiKey &&
-                                userId === currentUserId
+                                userId === currentUserId &&
+                                currentShareInGameName === savedShareInGameName &&
+                                currentShareRosterData === savedShareRosterData
                             }
                             onPress={updateApiKey}>
                             Update

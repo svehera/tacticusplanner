@@ -18,6 +18,7 @@ import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
 import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
+import { guildRosterSnapshotsMenuItem } from '@/fsd/1-pages/input-guild-roster-snapshots/guild-roster-snapshots.menu-item';
 import { onslaughtMenuItem } from '@/fsd/1-pages/input-onslaught/onslaught.menu-item';
 import { myProgressMenuItem } from '@/fsd/1-pages/input-progress/my-progress.menu-item';
 import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-item';
@@ -25,6 +26,7 @@ import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/ro
 import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-item';
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
+import { guildPerformanceMenuItem } from '@/fsd/1-pages/learn-guild-performance';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
 import { armageddonMenuItem } from '@/fsd/1-pages/plan-armageddon/armageddon.menu-item';
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
@@ -75,6 +77,7 @@ export const menuItemById = {
     armageddon: armageddonMenuItem,
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
+    guildRosterSnapshots: guildRosterSnapshotsMenuItem,
     teams2: teams2MenuItem,
     warOffense2: warOffense2MenuItem,
     warDefense2: warDefense2MenuItem,
@@ -86,6 +89,7 @@ export const menuItemById = {
     guild: guildMenuItem,
     guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
+    guildPerformance: guildPerformanceMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
     quests: questsMenuItem,
@@ -95,6 +99,7 @@ export const menuItemById = {
 export const inputSubMenu: MenuItemTP[] = [
     menuItemById['wyo'],
     menuItemById['rosterSnapshots'],
+    menuItemById['guildRosterSnapshots'],
     menuItemById['onslaught'],
     menuItemById['myProgress'],
     menuItemById['inventory'],
@@ -150,6 +155,7 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    menuItemById['guildPerformance'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];
@@ -167,6 +173,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    menuItemById['guildPerformance'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];

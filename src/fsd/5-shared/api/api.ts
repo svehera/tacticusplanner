@@ -2,11 +2,13 @@
 
 const baseURL = import.meta.env.VITE_API_HOST + '/api/';
 
+const functionsKey = import.meta.env.VITE_FUNCTIONS_KEY;
+
 const api = axios.create({
     baseURL,
     headers: {
         'Content-Type': 'application/json',
-        'x-functions-key': import.meta.env.VITE_FUNCTIONS_KEY,
+        ...(functionsKey ? { 'x-functions-key': functionsKey } : {}),
     },
 });
 

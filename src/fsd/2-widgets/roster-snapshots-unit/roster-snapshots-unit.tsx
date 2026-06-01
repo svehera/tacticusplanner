@@ -1,10 +1,9 @@
-/* eslint-disable import-x/no-internal-modules */
-import { UnitPortrait, ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
+import { ISnapshotCharacter, ISnapshotMachineOfWar, UnitPortrait } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
 interface Props {
     showShards: RosterSnapshotShowVariableSettings;
@@ -18,7 +17,7 @@ interface Props {
     isEnabled: boolean;
 }
 
-export const RosterSnapshotsUnit: React.FC<Props> = ({
+export const RosterSnapshotsUnit = ({
     showShards,
     showMythicShards,
     showXpLevel,

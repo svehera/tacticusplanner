@@ -4,6 +4,16 @@
 /*@import 'tailwindcss';*/
 @plugin 'tailwindcss-animate';
 
+@keyframes shimmer-green {
+    0%,
+    100% {
+        color: #4ade80;
+    }
+    50% {
+        color: #bbf7d0;
+    }
+}
+
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
