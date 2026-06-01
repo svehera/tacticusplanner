@@ -72,12 +72,10 @@ export const RankLookup = () => {
 
         if (rankStart > rankEnd) return [];
 
-        const adjustedRankStart = rankStart === Rank.Adamantine2 ? Rank.Adamantine1 : rankStart;
-
         return RankLookupService.getUpgradeMaterialsToRankUp({
             unitId: character.snowprintId ?? '',
             unitName: character.id,
-            rankStart: adjustedRankStart,
+            rankStart,
             rankEnd,
             appliedUpgrades: [],
             rankPoint5,
@@ -102,10 +100,10 @@ export const RankLookup = () => {
         }> = [];
 
         let currentRank = Math.max(rankStart, Rank.Stone1);
-        const endRank = rankEnd < rankStart ? rankStart : rankEnd > Rank.Adamantine2 ? Rank.Adamantine1 : rankEnd;
+        const endRank = Math.max(rankStart, rankEnd);
         const upgradesCopy = [...upgrades];
 
-        while (currentRank !== endRank) {
+        while (currentRank < endRank) {
             const rankUpgrades = upgradesCopy.splice(0, 6);
             result.push({ rank1: currentRank, rank2: currentRank + 1, materials: rankUpgrades });
             currentRank++;

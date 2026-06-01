@@ -7,7 +7,6 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { useAuth } from '@/fsd/5-shared/model';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
@@ -19,7 +18,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
 
     const { shareToken, username, setUser } = useAuth();
 
-    const shareRoute = (isMobile ? '/mobile' : '') + `/sharedRoster?username=${username}&shareToken=${shareToken}`;
+    const shareRoute = `/sharedRoster?username=${username}&shareToken=${shareToken}`;
     const shareLink = shareToken ? location.origin + shareRoute : undefined;
 
     const copyLink = () => {
