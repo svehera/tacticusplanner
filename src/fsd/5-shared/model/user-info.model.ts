@@ -9,4 +9,6 @@ export interface IUserInfo {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
+    shareInGameName?: boolean;
+    shareRosterData?: boolean;
 }

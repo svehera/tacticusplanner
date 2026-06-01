@@ -192,6 +192,8 @@ export const UserMenu = () => {
             tacticusApiKey: userInfo.tacticusApiKey,
             tacticusUserId: userInfo.tacticusUserId,
             tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
+            shareInGameName: userInfo.shareInGameName ?? false,
+            shareRosterData: userInfo.shareRosterData ?? false,
             onClose: () => {},
         });
     }

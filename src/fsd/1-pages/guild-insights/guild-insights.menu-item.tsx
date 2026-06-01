@@ -3,4 +3,8 @@
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MenuItem } from '@/models/menu-item';
 
-export const guildInsightsMenuItem = new MenuItem('Guild Insights', <SavedSearchIcon />, '/learn/guildInsights');
+export const guildInsightsMenuItem = new MenuItem(
+    'Guild Insights (To Be Deleted)',
+    <SavedSearchIcon />,
+    '/learn/guildInsights'
+);

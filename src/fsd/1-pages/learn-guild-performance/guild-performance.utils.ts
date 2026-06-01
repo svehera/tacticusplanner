@@ -1,0 +1,284 @@
+/* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import {
+    TacticusDamageType,
+    TacticusEncounterType,
+    type TacticusGuildRaidEntry,
+} from '@/fsd/5-shared/lib/tacticus-api';
+import { Rarity } from '@/fsd/5-shared/model';
+
+// ---------------------------------------------------------------------------
+// Icon maps — derived from src/assets/visual_mapping/visuals.csv
+// ---------------------------------------------------------------------------
+
+/** Round portraits for each boss / prime / minion unitId. */
+export const unitRoundIconMap: Record<string, string> = {
+    // Boss 1 – Tervigon (portrait only, no RoundPortrait available)
+    GuildBoss1Boss1TyranTervigonLeviathan: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_01.png',
+    GuildBoss1Boss2TyranTervigonKronos: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_02.png',
+    GuildBoss1Boss3TyranTervigonGorgon: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_03.png',
+    GuildBoss1MiniBoss1TyranWarriorLeviathan: 'snowprint_assets/characters/ui_image_RoundPortrait_tyran_warrior_01.png',
+    GuildBoss1MiniBoss2TyranWarriorKronos: 'snowprint_assets/characters/ui_image_RoundPortrait_tyran_warrior_02.png',
+    GuildBoss1MiniBoss3TyranWarriorGorgon: 'snowprint_assets/characters/ui_image_RoundPortrait_tyran_warrior_03.png',
+    // Boss 2 – Hive Tyrant
+    GuildBoss2Boss1TyranHiveTyrantLeviathan: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_tyrant_01.png',
+    GuildBoss2Boss2TyranHiveTyrantKronos: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_tyrant_02.png',
+    GuildBoss2Boss3TyranHiveTyrantGorgon: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_tyrant_03.png',
+    // Boss 3 – Silent King + Minions
+    GuildBoss3Boss1NecroSilentKing: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_silentking_01.png',
+    GuildBoss3Minion1NecroMesophet: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_mesophet_01.png',
+    GuildBoss3Minion2NecroHapthatra: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_hapthatra_01.png',
+    GuildBoss3Minion3NecroMenhir: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_menhir_01.png',
+    // Boss 4 – Ghazghkull
+    GuildBoss4Boss1OrksGhazghkull: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_ghazghkull_01.png',
+    // Boss 5 – Mortarion + Minion
+    GuildBoss5Boss1DeathMortarion: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_mortarion_01.png',
+    GuildBoss5Minion1DeathBlightlord: 'snowprint_assets/characters/ui_image_RoundPortrait_death_blightlord_01.png',
+    // Boss 6 – Screamer-killer
+    GuildBoss6Boss1TyranScreamerKiller:
+        'snowprint_assets/characters/ui_image_RoundPortrait_guild_screamerkiller_01.png',
+    // Boss 7 – Rogaldorn
+    GuildBoss7Boss1AstraRogaldorn: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_rogaldorn_01.png',
+    // Boss 8 – Avatar of Khaine
+    GuildBoss8Boss1EldarAvatar: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_avatar_01.png',
+    // Boss 9 – Magnus
+    GuildBoss9Boss1ThousMagnus: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_magnus_01.png',
+    // Boss 10 – Belisarius Cawl
+    GuildBoss10Boss1AdmecBelisarius: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_belisarius_01.png',
+    // Boss 11 – Riptide
+    GuildBoss11Boss1TauRiptide: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_riptide_01.png',
+};
+
+/** Full (non-round) portraits for main boss unitIds, used in the Overview tab. */
+export const bossPortraitMap: Record<string, string> = {
+    GuildBoss1Boss1TyranTervigonLeviathan: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_01.png',
+    GuildBoss1Boss2TyranTervigonKronos: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_02.png',
+    GuildBoss1Boss3TyranTervigonGorgon: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_03.png',
+    GuildBoss2Boss1TyranHiveTyrantLeviathan: 'snowprint_assets/characters/ui_image_portrait_guild_tyrant_01.png',
+    GuildBoss2Boss2TyranHiveTyrantKronos: 'snowprint_assets/characters/ui_image_portrait_guild_tyrant_02.png',
+    GuildBoss2Boss3TyranHiveTyrantGorgon: 'snowprint_assets/characters/ui_image_portrait_guild_tyrant_03.png',
+    GuildBoss3Boss1NecroSilentKing: 'snowprint_assets/characters/ui_image_portrait_necro_silentking_01.png',
+    GuildBoss4Boss1OrksGhazghkull: 'snowprint_assets/characters/ui_image_portrait_guild_ghazghkull_01.png',
+    GuildBoss5Boss1DeathMortarion: 'snowprint_assets/characters/ui_image_portrait_guild_mortarion_01.png',
+    GuildBoss6Boss1TyranScreamerKiller: 'snowprint_assets/characters/ui_image_portrait_guild_screamerkiller_01.png',
+    GuildBoss7Boss1AstraRogaldorn: 'snowprint_assets/characters/ui_image_portrait_guild_rogaldorn_01.png',
+    GuildBoss8Boss1EldarAvatar: 'snowprint_assets/characters/ui_image_portrait_guild_avatar_01.png',
+    GuildBoss9Boss1ThousMagnus: 'snowprint_assets/characters/ui_image_portrait_guild_magnus_01.png',
+    GuildBoss10Boss1AdmecBelisarius: 'snowprint_assets/characters/ui_image_portrait_guild_belisarius_01.png',
+    GuildBoss11Boss1TauRiptide: 'snowprint_assets/characters/ui_image_portrait_guild_riptide_01.png',
+};
+
+// ---------------------------------------------------------------------------
+// Damage colour coding
+// ---------------------------------------------------------------------------
+
+export function getDamageColorClass(entry: TacticusGuildRaidEntry, avgDamage: number | undefined): string {
+    if (entry.damageType === TacticusDamageType.Bomb) return 'text-green-700 dark:text-green-400';
+    if (entry.remainingHp === 0) return 'text-gray-400 dark:text-gray-500';
+    if (avgDamage === undefined || avgDamage === 0) return 'text-green-700 dark:text-green-400';
+    const ratio = entry.damageDealt / avgDamage;
+    if (ratio > 1.2) return 'animate-[shimmer-green_1.5s_ease-in-out_infinite]';
+    if (ratio >= 0.8) return 'text-green-700 dark:text-green-400';
+    if (ratio >= 0.75) return 'text-yellow-600 dark:text-yellow-400';
+    return 'text-red-600 dark:text-red-400';
+}
+
+// ---------------------------------------------------------------------------
+// Average damage map
+// ---------------------------------------------------------------------------
+
+/**
+ * Builds a map of `unitId:rarity` → average raid-token damage, excluding
+ * entries that killed the boss/prime (remainingHp === 0) and bomb entries.
+ */
+export function buildAvgDamageMap(entries: TacticusGuildRaidEntry[]): Map<string, number> {
+    const statsMap = new Map<string, { sum: number; count: number }>();
+    for (const entry of entries) {
+        if (entry.damageType === TacticusDamageType.Bomb) continue;
+        if (entry.remainingHp === 0) continue;
+        const key = `${entry.unitId}:${entry.rarity}`;
+        const existing = statsMap.get(key) ?? { sum: 0, count: 0 };
+        existing.sum += entry.damageDealt;
+        existing.count++;
+        statsMap.set(key, existing);
+    }
+    const result = new Map<string, number>();
+    for (const [key, { sum, count }] of statsMap) {
+        result.set(key, sum / count);
+    }
+    return result;
+}
+
+// ---------------------------------------------------------------------------
+// Per-loop token counts
+// ---------------------------------------------------------------------------
+
+export interface LoopCountMaps {
+    loopRaidNumber: Map<TacticusGuildRaidEntry, number>;
+    loopBombNumber: Map<TacticusGuildRaidEntry, number>;
+}
+
+/**
+ * Assigns sequential per-unitId loop counts to each entry, resetting all
+ * counters when a boss is killed (encounterType === Boss && remainingHp === 0).
+ */
+export function buildLoopCountMaps(entries: TacticusGuildRaidEntry[]): LoopCountMaps {
+    const loopRaidNumber = new Map<TacticusGuildRaidEntry, number>();
+    const loopBombNumber = new Map<TacticusGuildRaidEntry, number>();
+    const chronological = [...entries].toSorted((a, b) => (a.completedOn ?? 0) - (b.completedOn ?? 0));
+    const raidCounters = new Map<string, number>();
+    const bombCounters = new Map<string, number>();
+    for (const entry of chronological) {
+        const isBomb = entry.damageType === TacticusDamageType.Bomb;
+        const key = entry.unitId;
+        if (isBomb) {
+            bombCounters.set(key, (bombCounters.get(key) ?? 0) + 1);
+        } else {
+            raidCounters.set(key, (raidCounters.get(key) ?? 0) + 1);
+        }
+        loopRaidNumber.set(entry, raidCounters.get(key) ?? 0);
+        loopBombNumber.set(entry, bombCounters.get(key) ?? 0);
+        if (entry.encounterType === TacticusEncounterType.Boss && entry.remainingHp === 0) {
+            raidCounters.clear();
+            bombCounters.clear();
+        }
+    }
+    return { loopRaidNumber, loopBombNumber };
+}
+
+// ---------------------------------------------------------------------------
+// Current boss detection
+// ---------------------------------------------------------------------------
+
+/**
+ * Returns the most-recent main boss entry from `entries`.
+ * If the latest entry is a SideBoss/prime, finds the boss sharing the same
+ * GuildBoss{N} prefix.
+ */
+export function getCurrentBossEntry(entries: TacticusGuildRaidEntry[]): TacticusGuildRaidEntry | undefined {
+    if (entries.length === 0) return undefined;
+    const sorted = [...entries].toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0));
+    const mostRecent = sorted[0]!;
+    if (mostRecent.encounterType === TacticusEncounterType.Boss) return mostRecent;
+
+    // SideBoss/prime: match by GuildBoss{N} prefix
+    const prefix = /^(GuildBoss\d+)/.exec(mostRecent.unitId)?.[1];
+    if (prefix) {
+        const match = sorted.find(
+            entry => entry.encounterType === TacticusEncounterType.Boss && entry.unitId.startsWith(prefix)
+        );
+        if (match) return match;
+    }
+    return sorted.find(entry => entry.encounterType === TacticusEncounterType.Boss);
+}
+
+// ---------------------------------------------------------------------------
+// Token table sorting
+// ---------------------------------------------------------------------------
+
+export interface GuildTokenEntryWithDisplay {
+    userId: string;
+    displayName: string;
+    tokens: number | null | undefined;
+    nextTokenAtUtc: number | null | undefined;
+    bombAvailableAtUtc: number | null | undefined;
+}
+
+export function sortTokenEntries(entries: GuildTokenEntryWithDisplay[]): GuildTokenEntryWithDisplay[] {
+    return entries.toSorted((a, b) => {
+        const aTokens = a.tokens ?? -1;
+        const bTokens = b.tokens ?? -1;
+        if (bTokens !== aTokens) return bTokens - aTokens;
+
+        const aNext = a.nextTokenAtUtc ?? 0;
+        const bNext = b.nextTokenAtUtc ?? 0;
+        if (bNext !== aNext) return bNext - aNext;
+
+        return a.displayName.localeCompare(b.displayName);
+    });
+}
+
+export function sortBombEntries(entries: GuildTokenEntryWithDisplay[]): GuildTokenEntryWithDisplay[] {
+    // "has bomb" (bombAvailableAtUtc null = bomb ready) sorts above "no bomb"
+    return entries.toSorted((a, b) => {
+        const aHas = a.tokens != undefined && a.bombAvailableAtUtc == undefined ? 1 : 0;
+        const bHas = b.tokens != undefined && b.bombAvailableAtUtc == undefined ? 1 : 0;
+        if (bHas !== aHas) return bHas - aHas;
+
+        const aNext = a.bombAvailableAtUtc ?? 0;
+        const bNext = b.bombAvailableAtUtc ?? 0;
+        if (bNext !== aNext) return bNext - aNext;
+
+        return a.displayName.localeCompare(b.displayName);
+    });
+}
+
+export function formatTime(utcSeconds: number): string {
+    return new Date(utcSeconds * 1000).toLocaleTimeString(undefined, {
+        hour: '2-digit',
+        minute: '2-digit',
+        timeZoneName: 'short',
+    });
+}
+
+// ---------------------------------------------------------------------------
+// Damage-tab filters
+// ---------------------------------------------------------------------------
+
+/** Human-readable name for each GuildBoss{N} prefix. */
+export const bossPrefixDisplayNames: Record<string, string> = {
+    GuildBoss1: 'Tervigon',
+    GuildBoss2: 'Hive Tyrant',
+    GuildBoss3: 'Silent King',
+    GuildBoss4: 'Ghazghkull',
+    GuildBoss5: 'Mortarion',
+    GuildBoss6: 'Screamer-Killer',
+    GuildBoss7: 'Rogaldorn',
+    GuildBoss8: 'Avatar of Khaine',
+    GuildBoss9: 'Magnus',
+    GuildBoss10: 'Belisarius Cawl',
+    GuildBoss11: 'Riptide',
+};
+
+/**
+ * Round-portrait icon path for each GuildBoss{N} prefix.
+ * Built from unitRoundIconMap by taking the first icon per prefix.
+ */
+export const bossPrefixRoundIconMap: Record<string, string> = (() => {
+    const map: Record<string, string> = {};
+    for (const [unitId, icon] of Object.entries(unitRoundIconMap)) {
+        const prefix = /^(GuildBoss\d+)/.exec(unitId)?.[1];
+        if (prefix !== undefined && map[prefix] === undefined) map[prefix] = icon;
+    }
+    return map;
+})();
+
+/** Extracts the `GuildBoss{N}` prefix from any raid entry unitId. */
+export function getBossPrefix(unitId: string): string {
+    return /^(GuildBoss\d+)/.exec(unitId)?.[1] ?? unitId;
+}
+
+/**
+ * Returns unique GuildBoss{N} prefixes present in `entries`, sorted
+ * numerically (GuildBoss1, GuildBoss2, …, GuildBoss11).
+ */
+export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[]): string[] {
+    const prefixes = new Set<string>();
+    for (const entry of entries) prefixes.add(getBossPrefix(entry.unitId));
+    return [...prefixes].toSorted((a, b) => {
+        const na = Number.parseInt(/GuildBoss(\d+)/.exec(a)?.[1] ?? '0', 10);
+        const nb = Number.parseInt(/GuildBoss(\d+)/.exec(b)?.[1] ?? '0', 10);
+        return na - nb;
+    });
+}
+
+/**
+ * Returns the default rarity filter for `entries`.
+ * Defaults to the highest rarity present; if that is Legendary, also
+ * includes Mythic so top-tier content is always shown together.
+ */
+export function computeDefaultRarities(entries: TacticusGuildRaidEntry[]): Rarity[] {
+    if (entries.length === 0) return [Rarity.Common];
+    const maxRarity = Math.max(...entries.map(entry => entry.rarity)) as Rarity;
+    if (maxRarity >= Rarity.Legendary) return [Rarity.Legendary, Rarity.Mythic];
+    return [maxRarity];
+}
