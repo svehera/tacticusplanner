@@ -194,6 +194,9 @@ export const UserMenu = () => {
             tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
             shareInGameName: userInfo.shareInGameName ?? false,
             shareRosterData: userInfo.shareRosterData ?? false,
+            shareGuildMemberPerformance: userInfo.shareGuildMemberPerformance ?? false,
+            combinedGuildTags: userInfo.combinedGuildTags ?? [],
+            guildTag: userInfo.guildTag ?? '',
             onClose: () => {},
         });
     }

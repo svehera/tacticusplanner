@@ -1,4 +1,6 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { enqueueSnackbar } from 'notistack';
 import { useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
@@ -38,16 +40,65 @@ export const NoKeyMessage = () => (
 // DebugJson
 // ---------------------------------------------------------------------------
 
-export const DebugJson = ({ label, value }: { label: string; value: unknown }) => (
-    <details className="rounded border border-yellow-300 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-950">
-        <summary className="cursor-pointer px-3 py-1 text-xs font-semibold text-yellow-800 dark:text-yellow-200">
-            [DEBUG] {label}
-        </summary>
-        <pre className="max-h-96 overflow-auto px-3 py-2 text-xs text-yellow-900 dark:text-yellow-100">
-            {JSON.stringify(value, undefined, 2)}
-        </pre>
-    </details>
-);
+export const DebugJson = ({ label, value }: { label: string; value: unknown }) => {
+    const text = JSON.stringify(value, undefined, 2);
+    const handleCopy = () => {
+        navigator.clipboard.writeText(text).then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
+    };
+    return (
+        <details className="rounded border border-yellow-300 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-950">
+            <summary className="flex cursor-pointer items-center gap-2 px-3 py-1 text-xs font-semibold text-yellow-800 dark:text-yellow-200">
+                <span className="grow">[DEBUG] {label}</span>
+                <button
+                    type="button"
+                    title="Copy to clipboard"
+                    onClick={event => {
+                        event.preventDefault();
+                        handleCopy();
+                    }}
+                    className="rounded p-0.5 hover:bg-yellow-200 dark:hover:bg-yellow-800">
+                    <ContentCopyIcon fontSize="inherit" />
+                </button>
+            </summary>
+            <pre className="max-h-96 overflow-auto px-3 py-2 text-xs text-yellow-900 dark:text-yellow-100">{text}</pre>
+        </details>
+    );
+};
+
+// ---------------------------------------------------------------------------
+// CompIcons
+// ---------------------------------------------------------------------------
+
+/** Resolves a comp unitId to its portrait, trying character then machine-of-war. */
+function resolveCompIcon(unitId: string): { icon: string; name: string } | undefined {
+    const character = CharactersService.getUnit(unitId);
+    if (character !== undefined) return { icon: character.roundIcon ?? '', name: character.name };
+    const mow = MowsService.resolveToStatic(unitId);
+    if (mow !== undefined) return { icon: mow.roundIcon ?? '', name: mow.name };
+    return;
+}
+
+/** Renders comp portraits from a flat unitId list (heroes then MoW), resolving each id's type. */
+export function CompIcons({ comp, size = 22 }: { comp: string[]; size?: number }) {
+    return (
+        <span className="flex items-center gap-0.5">
+            {comp.flatMap((unitId, index) => {
+                const resolved = resolveCompIcon(unitId);
+                if (resolved === undefined) return [];
+                return [
+                    <UnitShardIcon
+                        key={index}
+                        icon={resolved.icon}
+                        name={resolved.name}
+                        tooltip={resolved.name}
+                        width={size}
+                        height={size}
+                    />,
+                ];
+            })}
+        </span>
+    );
+}
 
 // ---------------------------------------------------------------------------
 // EntryRow

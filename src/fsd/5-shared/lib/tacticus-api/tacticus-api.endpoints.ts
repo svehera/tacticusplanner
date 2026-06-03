@@ -6,18 +6,31 @@ export const getTacticusPlayerData = () => makeApiCall<TacticusPlayerResponse>('
 export const getTacticusGuildData = () => makeApiCall<TacticusGuildResponse>('GET', 'guild');
 export const getTacticusGuildRaidData = () => makeApiCall<TacticusGuildRaidResponse>('GET', 'guildRaid');
 
+export interface UpdateTacticusApiKeyOptions {
+    shareInGameName?: boolean;
+    shareRosterData?: boolean;
+    /** Guild-leader opt-in: privately share each guild member's performance data with that member only. */
+    shareGuildMemberPerformance?: boolean;
+    /** Other guild tags whose leaderboards should be combined with this guild's. Each is 5 alphanumeric chars. */
+    combinedGuildTags?: string[];
+    /** This player's own guild tag (5 alphanumeric chars), used when no guild API key is provided. */
+    guildTag?: string;
+}
+
 export const updateTacticusApiKey = (
     apiKey: string,
     guildApiKey: string,
     tacticusUserId: string,
-    shareInGameName?: boolean,
-    shareRosterData?: boolean
+    options: UpdateTacticusApiKeyOptions = {}
 ) => {
     return makeApiCall<TacticusPlayerResponse>('PUT', 'users/tacticusApiKey', {
         apiKey,
         guildApiKey,
         tacticusUserId,
-        shareInGameNameWithGuild: shareInGameName,
-        shareRosterDataWithGuild: shareRosterData,
+        shareInGameNameWithGuild: options.shareInGameName,
+        shareRosterDataWithGuild: options.shareRosterData,
+        shareGuildMemberPerformance: options.shareGuildMemberPerformance,
+        combinedGuildTags: options.combinedGuildTags,
+        guildTag: options.guildTag,
     });
 };

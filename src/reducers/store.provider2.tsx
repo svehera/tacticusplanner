@@ -449,8 +449,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusApiKey,
                     tacticusGuildApiKey,
                     tacticusUserId,
-                    shareInGameName,
-                    shareRosterData,
+                    shareInGameNameWithGuild,
+                    shareRosterDataWithGuild,
+                    shareGuildMemberPerformance,
+                    combinedGuildTags,
+                    guildTag,
                 } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
@@ -466,8 +469,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusApiKey,
                     tacticusGuildApiKey,
                     tacticusUserId,
-                    shareInGameName,
-                    shareRosterData,
+                    shareInGameName: shareInGameNameWithGuild,
+                    shareRosterData: shareRosterDataWithGuild,
+                    shareGuildMemberPerformance,
+                    combinedGuildTags,
+                    guildTag,
                 });
                 const localModifiedDateTicks = modifiedDateTicksReference.current;
 

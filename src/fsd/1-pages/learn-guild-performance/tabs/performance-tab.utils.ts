@@ -2,9 +2,10 @@
 import {
     TacticusDamageType,
     TacticusEncounterType,
+    type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { getBossPrefix } from '../guild-performance.utils';
 
@@ -278,6 +279,122 @@ export function buildGuildView(
         totalHits,
         fairShareHits,
     };
+}
+
+/**
+ * The full-guild Performance Index value for a single player in one season (bosses only, excluding
+ * kills) — each non-kill boss hit ÷ that boss's guild non-kill average, meaned. Returns undefined
+ * when the player logged no non-kill boss hits that season. Matches {@link buildGuildPerformanceIndexRows}.
+ */
+export function playerPerformanceIndex(summary: GuildSeasonSummary, playerId: string): number | undefined {
+    const ratios: number[] = [];
+    for (const entry of summary.bossPerformance) {
+        if (entry.enemyInfo.encounterIndex !== 0) continue; // bosses only
+        const guildAvg = entry.guildAverageDamageWithoutKills;
+        if (guildAvg <= 0) continue;
+        const player = entry.playerEntries.find(candidate => candidate.playerId === playerId);
+        if (player === undefined) continue;
+        for (const hit of player.nonKillHits) ratios.push(hit / guildAvg);
+    }
+    if (ratios.length === 0) return undefined;
+    return ratios.reduce((sum, ratio) => sum + ratio, 0) / ratios.length;
+}
+
+export interface PerformanceIndexSeasonPoint {
+    season: number;
+    performanceIndex: number;
+}
+
+/**
+ * Players who have at least one chartable Performance Index point across history — i.e. a non-kill
+ * boss hit in some season. Sorted by display name.
+ */
+export function getHistoricalPerformancePlayers(
+    seasonData: GuildSeasonSummary[],
+    names: Map<string, string>
+): { userId: string; displayName: string }[] {
+    const seen = new Map<string, string>();
+    for (const summary of seasonData) {
+        for (const entry of summary.bossPerformance) {
+            if (entry.enemyInfo.encounterIndex !== 0) continue; // bosses only
+            for (const player of entry.playerEntries) {
+                // Anonymized rows (no id) can't be attributed to an individual, so they're skipped.
+                if (player.playerId === undefined) continue;
+                if (player.nonKillHits.length > 0 && !seen.has(player.playerId)) {
+                    seen.set(player.playerId, names.get(player.playerId) ?? player.playerId);
+                }
+            }
+        }
+    }
+    return [...seen.entries()]
+        .map(([userId, displayName]) => ({ userId, displayName }))
+        .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+}
+
+/**
+ * The selected player's per-season Performance Index across all history, ascending by season.
+ * Seasons the player didn't participate in (no non-kill boss hits) are omitted.
+ */
+export function buildPlayerPerformanceIndexSeries(
+    seasonData: GuildSeasonSummary[],
+    playerId: string
+): PerformanceIndexSeasonPoint[] {
+    const points: PerformanceIndexSeasonPoint[] = [];
+    for (const summary of seasonData) {
+        const performanceIndex = playerPerformanceIndex(summary, playerId);
+        if (performanceIndex !== undefined) points.push({ season: summary.season, performanceIndex });
+    }
+    return points.toSorted((a, b) => a.season - b.season);
+}
+
+/**
+ * Builds the full-guild Performance Index rows for a historical season, reconstructed from the
+ * aggregate's raw per-player boss hit arrays (`bossPerformance`). This reproduces the live tab's
+ * default Performance Index exactly: bosses only, excluding kills — each non-kill hit is divided
+ * by the guild's non-kill average for that boss, and the per-player mean of those ratios is the
+ * index. Limited to the season's top-2 rarities (all `bossPerformance` covers).
+ *
+ * Only the fields the Performance Index table reads are meaningful; the rest are left at 0.
+ */
+export function buildGuildPerformanceIndexRows(summary: GuildSeasonSummary, names: Map<string, string>): PlayerRow[] {
+    const ratiosByPlayer = new Map<string, number[]>();
+    for (const entry of summary.bossPerformance) {
+        if (entry.enemyInfo.encounterIndex !== 0) continue; // bosses only
+        const guildAvg = entry.guildAverageDamageWithoutKills;
+        if (guildAvg <= 0) continue;
+        for (const player of entry.playerEntries) {
+            // Anonymized rows (no id) can't be attributed to an individual, so they're skipped.
+            if (player.playerId === undefined) continue;
+            if (player.nonKillHits.length === 0) continue;
+            let ratios = ratiosByPlayer.get(player.playerId);
+            if (ratios === undefined) {
+                ratios = [];
+                ratiosByPlayer.set(player.playerId, ratios);
+            }
+            for (const hit of player.nonKillHits) ratios.push(hit / guildAvg);
+        }
+    }
+
+    const rows: PlayerRow[] = [];
+    for (const [userId, ratios] of ratiosByPlayer) {
+        const ratioSum = ratios.reduce((sum, ratio) => sum + ratio, 0);
+        const performanceIndex = ratios.length > 0 ? ratioSum / ratios.length : 0;
+        rows.push({
+            userId,
+            displayName: names.get(userId) ?? userId,
+            performanceIndex,
+            performanceDiffPct: ratios.length > 0 ? (performanceIndex - 1) * 100 : 0,
+            equivalentHits: ratioSum,
+            avg: 0,
+            max: 0,
+            total: 0,
+            avgDiffPct: 0,
+            maxDiffPct: 0,
+            totalDiffPct: 0,
+            equivalentDiffPct: 0,
+        });
+    }
+    return rows;
 }
 
 /**
@@ -568,6 +685,71 @@ export function buildPlayerView(
     return rows.toSorted((a, b) => {
         if (a.rarity !== b.rarity) return b.rarity - a.rarity;
         if (a.set !== b.set) return b.set - a.set;
+        return b.encounterIndex - a.encounterIndex;
+    });
+}
+
+/**
+ * Per-unit rows for one player in a historical season, reconstructed from the aggregate's raw boss
+ * hit arrays (`bossPerformance`). Mirrors {@link buildPlayerView}: avg respects `excludeKills`,
+ * while max and the hit distribution stay kill-inclusive. Covers bosses + primes the player hit, at
+ * the season's top-2 rarities. No `set` in the aggregate, so families are kept together (and
+ * ordered) by the parent boss's max HP instead.
+ */
+export function buildPlayerViewFromSummary(
+    summary: GuildSeasonSummary,
+    userId: string,
+    excludeKills: boolean
+): UnitRow[] {
+    const bossHpByFamily = new Map<string, number>();
+    for (const entry of summary.bossPerformance) {
+        if (entry.enemyInfo.encounterIndex !== 0) continue;
+        const key = `${getBossPrefix(entry.enemyInfo.enemyId)}:${entry.enemyInfo.rarity}`;
+        bossHpByFamily.set(key, Math.max(bossHpByFamily.get(key) ?? 0, entry.enemyInfo.maxHp));
+    }
+
+    const rows: UnitRow[] = [];
+    for (const entry of summary.bossPerformance) {
+        const player = entry.playerEntries.find(candidate => candidate.playerId === userId);
+        if (player === undefined) continue;
+        const playerHitsAll = [...player.nonKillHits, ...player.killHits];
+        if (playerHitsAll.length === 0) continue;
+
+        const { enemyId, rarity: rarityName, encounterIndex, maxHp } = entry.enemyInfo;
+        const rarity = RarityMapper.stringToNumber[rarityName];
+        const isBoss = encounterIndex === 0;
+        const bossPrefix = getBossPrefix(enemyId);
+
+        const playerAvgSource = excludeKills ? player.nonKillHits : playerHitsAll;
+        const playerAvgStats = aggregate(playerAvgSource);
+        const playerMaxStats = aggregate(playerHitsAll);
+        const guildAvg = excludeKills ? entry.guildAverageDamageWithoutKills : entry.guildAverageDamage;
+        const guildMax = entry.guildMaxDamage;
+
+        rows.push({
+            unitKey: `${enemyId}:${rarity}:${encounterIndex}`,
+            unitId: enemyId,
+            rarity,
+            set: 0,
+            encounterIndex,
+            isBoss,
+            bossPrefix,
+            unitMaxHp: maxHp,
+            parentBossMaxHp: isBoss ? maxHp : (bossHpByFamily.get(`${bossPrefix}:${rarityName}`) ?? maxHp),
+            avg: playerAvgStats.avg,
+            max: playerMaxStats.max,
+            guildAvg,
+            guildMax,
+            avgDiffPct: guildAvg > 0 ? ((playerAvgStats.avg - guildAvg) / guildAvg) * 100 : 0,
+            maxDiffPct: guildMax > 0 ? ((playerMaxStats.max - guildMax) / guildMax) * 100 : 0,
+            playerHits: playerHitsAll,
+        });
+    }
+
+    // No `set`; keep each boss family together and ordered by its boss max HP, primes before boss.
+    return rows.toSorted((a, b) => {
+        if (a.rarity !== b.rarity) return b.rarity - a.rarity;
+        if (a.parentBossMaxHp !== b.parentBossMaxHp) return b.parentBossMaxHp - a.parentBossMaxHp;
         return b.encounterIndex - a.encounterIndex;
     });
 }

@@ -2,6 +2,7 @@
 import {
     TacticusDamageType,
     TacticusEncounterType,
+    type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
@@ -258,13 +259,29 @@ export function getBossPrefix(unitId: string): string {
 }
 
 /**
- * Returns unique GuildBoss{N} prefixes present in `entries`, sorted
- * numerically (GuildBoss1, GuildBoss2, …, GuildBoss11).
+ * Resolves a player's display name. An undefined id means the row was anonymized (another member
+ * in a keyless member's view) and shows as "Anonymous"; otherwise falls back to the raw id.
  */
-export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[]): string[] {
-    const prefixes = new Set<string>();
-    for (const entry of entries) prefixes.add(getBossPrefix(entry.unitId));
-    return [...prefixes].toSorted((a, b) => {
+export function resolvePlayerName(playerId: string | undefined, names: Map<string, string>): string {
+    if (playerId === undefined) return 'Anonymous';
+    return names.get(playerId) ?? playerId;
+}
+
+/**
+ * Merges an extra (typically the fresh current-season) summary into a list of season summaries,
+ * deduped by season number with the extra winning. Sorted ascending by season. Used for keyless
+ * members, whose current season arrives separately from the stored history.
+ */
+export function mergeSeasonSummaries(seasons: GuildSeasonSummary[], extra: GuildSeasonSummary): GuildSeasonSummary[] {
+    const bySeason = new Map<number, GuildSeasonSummary>();
+    for (const summary of seasons) bySeason.set(summary.season, summary);
+    bySeason.set(extra.season, extra);
+    return [...bySeason.values()].toSorted((a, b) => a.season - b.season);
+}
+
+/** Dedupes and sorts GuildBoss{N} prefixes numerically (GuildBoss1, GuildBoss2, …, GuildBoss11). */
+export function sortBossPrefixes(prefixes: Iterable<string>): string[] {
+    return [...new Set(prefixes)].toSorted((a, b) => {
         const na = Number.parseInt(/GuildBoss(\d+)/.exec(a)?.[1] ?? '0', 10);
         const nb = Number.parseInt(/GuildBoss(\d+)/.exec(b)?.[1] ?? '0', 10);
         return na - nb;
@@ -272,13 +289,26 @@ export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[]): str
 }
 
 /**
- * Returns the default rarity filter for `entries`.
+ * Returns unique GuildBoss{N} prefixes present in `entries`, sorted
+ * numerically (GuildBoss1, GuildBoss2, …, GuildBoss11).
+ */
+export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[]): string[] {
+    return sortBossPrefixes(entries.map(entry => getBossPrefix(entry.unitId)));
+}
+
+/**
+ * Returns the default rarity filter for the given rarities.
  * Defaults to the highest rarity present; if that is Legendary, also
  * includes Mythic so top-tier content is always shown together.
  */
-export function computeDefaultRarities(entries: TacticusGuildRaidEntry[]): Rarity[] {
-    if (entries.length === 0) return [Rarity.Common];
-    const maxRarity = Math.max(...entries.map(entry => entry.rarity)) as Rarity;
+export function computeDefaultRaritiesFromRarities(rarities: Rarity[]): Rarity[] {
+    if (rarities.length === 0) return [Rarity.Common];
+    const maxRarity = Math.max(...rarities) as Rarity;
     if (maxRarity >= Rarity.Legendary) return [Rarity.Legendary, Rarity.Mythic];
     return [maxRarity];
+}
+
+/** {@link computeDefaultRaritiesFromRarities} over the rarities present in `entries`. */
+export function computeDefaultRarities(entries: TacticusGuildRaidEntry[]): Rarity[] {
+    return computeDefaultRaritiesFromRarities(entries.map(entry => entry.rarity));
 }

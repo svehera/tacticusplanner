@@ -3,6 +3,7 @@ import { useMemo, useState } from 'react';
 
 import {
     TacticusDamageType,
+    type GuildSeasonHistoryResponse,
     type TacticusGuildRaidEntry,
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
@@ -19,9 +20,11 @@ import {
 } from '../guild-performance.utils';
 
 import {
+    buildGuildPerformanceIndexRows,
     buildGuildView,
     buildPlayerBreakdowns,
     buildPlayerView,
+    buildPlayerViewFromSummary,
     buildUnitPlayerBuckets,
     filterPerformanceEntries,
     getAvailableBossPrefixes,
@@ -756,25 +759,47 @@ const bossIconFor = (prefix: string) => ({
 
 export const PerformanceTab = ({
     currentData,
-    historyData,
+    seasonHistory,
     names,
+    memberUserId,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
-    historyData: TacticusGuildRaidResponse | undefined;
+    seasonHistory?: GuildSeasonHistoryResponse;
     names: Map<string, string>;
+    /** When set (a keyless member), the view is pinned to this player and the player select is hidden. */
+    memberUserId?: string;
 }) => {
     // --- season ---
     const availableSeasons = useMemo(() => {
         const set = new Set<number>();
         if (currentData?.season != undefined) set.add(currentData.season);
-        if (historyData?.season != undefined) set.add(historyData.season);
+        for (const season of seasonHistory?.seasonData ?? []) set.add(season.season);
         return [...set].toSorted((a, b) => b - a);
-    }, [currentData, historyData]);
+    }, [currentData, seasonHistory]);
 
     const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
     const selectedSeason = seasonOverride ?? availableSeasons[0];
-    const selectedData = selectedSeason === historyData?.season ? historyData : currentData;
-    const allSeasonEntries: TacticusGuildRaidEntry[] = useMemo(() => selectedData?.entries ?? [], [selectedData]);
+
+    // A historical season currently supports only the full-guild Performance Index (reconstructed
+    // from the aggregate); the live season keeps the full per-hit tables and filters.
+    const historySummary = useMemo(
+        () =>
+            selectedSeason === currentData?.season
+                ? undefined
+                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+        [selectedSeason, currentData, seasonHistory]
+    );
+    const isHistorical = historySummary !== undefined;
+
+    const allSeasonEntries: TacticusGuildRaidEntry[] = useMemo(
+        () => (isHistorical ? [] : (currentData?.entries ?? [])),
+        [isHistorical, currentData]
+    );
+
+    const historyPerformanceRows = useMemo(
+        () => (historySummary ? buildGuildPerformanceIndexRows(historySummary, names) : []),
+        [historySummary, names]
+    );
 
     // --- rarity (default = highest present) ---
     const defaultRarities = useMemo(() => computeDefaultRarities(allSeasonEntries), [allSeasonEntries]);
@@ -798,17 +823,40 @@ export const PerformanceTab = ({
 
     // --- player & exclude kills ---
     const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
+    // A member is locked to their own rows; otherwise the dropdown drives the selection.
+    const effectiveUserId = memberUserId ?? selectedUserId;
     const [excludeKills, setExcludeKills] = useState(true);
 
     const availablePlayers = useMemo(() => {
         const seen = new Map<string, string>();
-        for (const entry of allSeasonEntries) {
-            if (!seen.has(entry.userId)) seen.set(entry.userId, names.get(entry.userId) ?? entry.userId);
+        if (historySummary) {
+            // Historical: named players with any boss/prime hit (top-2 rarities). Anonymized rows
+            // (no id — other members in a keyless member's view) aren't individually selectable.
+            for (const entry of historySummary.bossPerformance) {
+                for (const player of entry.playerEntries) {
+                    if (player.playerId === undefined) continue;
+                    if (!seen.has(player.playerId)) {
+                        seen.set(player.playerId, names.get(player.playerId) ?? player.playerId);
+                    }
+                }
+            }
+        } else {
+            for (const entry of allSeasonEntries) {
+                if (!seen.has(entry.userId)) seen.set(entry.userId, names.get(entry.userId) ?? entry.userId);
+            }
         }
         return [...seen.entries()]
             .map(([userId, displayName]) => ({ userId, displayName }))
             .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
-    }, [allSeasonEntries, names]);
+    }, [historySummary, allSeasonEntries, names]);
+
+    const historyPlayerView = useMemo(
+        () =>
+            historySummary && effectiveUserId !== undefined
+                ? buildPlayerViewFromSummary(historySummary, effectiveUserId, excludeKills)
+                : [],
+        [historySummary, effectiveUserId, excludeKills]
+    );
 
     // --- cascade-reset dependent filters ---
     const handleSeasonChange = (season: number) => {
@@ -877,8 +925,64 @@ export const PerformanceTab = ({
         return { icon: undefined, name: unitId.replace(/^GuildBoss\d+(MiniBoss|Minion)\d+/, '') };
     };
 
-    if (currentData === undefined && historyData === undefined) {
+    if (currentData === undefined && seasonHistory === undefined) {
         return <p className="text-sm text-gray-500">Loading…</p>;
+    }
+
+    if (isHistorical) {
+        // Rarity/Boss/Prime filters need per-hit data, so they're live-only. Historical supports the
+        // full-guild Performance Index (no player) and the four per-player graphs (player selected).
+        return (
+            <div className="flex flex-col gap-4">
+                <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
+                    <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={handleSeasonChange} />
+                    {/* A keyless member only sees their own data, so the player select is hidden for them. */}
+                    {memberUserId === undefined && (
+                        <PlayerSelect players={availablePlayers} value={selectedUserId} onChange={setSelectedUserId} />
+                    )}
+                    {effectiveUserId !== undefined && (
+                        <ExcludeKillsCheckbox value={excludeKills} onChange={setExcludeKills} />
+                    )}
+                </div>
+                {effectiveUserId === undefined ? (
+                    historyPerformanceRows.length === 0 ? (
+                        <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
+                            No boss performance recorded for this season.
+                        </div>
+                    ) : (
+                        <PlayerComparisonTable
+                            title="Performance Index"
+                            subtitle="Weighted average hit/token vs guild avg/token. Bosses only, excluding kills."
+                            baselineLabel="Baseline"
+                            rows={historyPerformanceRows}
+                            diffKey="performanceDiffPct"
+                            valueKey="performanceIndex"
+                            guildValue={1}
+                            formatValue={value => value.toFixed(2)}
+                        />
+                    )
+                ) : historyPlayerView.length === 0 ? (
+                    <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
+                        No boss/prime data recorded for this player this season.
+                    </div>
+                ) : (
+                    <div className="flex flex-col gap-6">
+                        <UnitComparisonTable
+                            title="Average damage vs guild (per boss/prime)"
+                            rows={historyPlayerView}
+                            diffKey="avgDiffPct"
+                            valueKey="avg"
+                        />
+                        <UnitMaxVsGuildTable
+                            title="Max damage (% of guild max per boss/prime)"
+                            rows={historyPlayerView}
+                        />
+                        <UnitDistributionTable rows={historyPlayerView} />
+                        <UnitDistributionVsAvgTable rows={historyPlayerView} />
+                    </div>
+                )}
+            </div>
+        );
     }
 
     return (
