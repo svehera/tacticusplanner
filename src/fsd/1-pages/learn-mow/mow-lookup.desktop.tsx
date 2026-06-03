@@ -1,14 +1,11 @@
-﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import { sortBy } from 'lodash';
+﻿import { sortBy } from 'lodash';
 import { useContext, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { Alliance } from '@/fsd/5-shared/model';
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
@@ -69,31 +66,31 @@ export const MowLookup = () => {
 
             {inputs.mow && (
                 <>
-                    <Accordion defaultExpanded={true}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Accordion defaultExpanded>
+                        <AccordionHeader>
                             <MowMaterialsTotal
                                 label="Upgrades Needed for Selected Levels:"
                                 mowAlliance={inputs.mow.alliance as Alliance}
                                 total={customTotal}
                             />
-                        </AccordionSummary>
-                        <AccordionDetails>
+                        </AccordionHeader>
+                        <AccordionBody>
                             <MowUpgradesTable rows={customUpgrades} />
-                        </AccordionDetails>
+                        </AccordionBody>
                     </Accordion>
 
-                    <Accordion defaultExpanded={false}>
-                        <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    <Accordion>
+                        <AccordionHeader>
                             <MowMaterialsTotal
                                 label="Complete Upgrade Table:"
                                 mowAlliance={inputs.mow.alliance as Alliance}
                                 total={maxedTotal}
                             />
-                        </AccordionSummary>
-                        <AccordionDetails className="flex-box gap20">
+                        </AccordionHeader>
+                        <AccordionBody className="flex flex-wrap gap-5">
                             <MowMaterialsTable rows={mowMaterials} />
                             <MowUpgradesTable rows={upgradesTotal} />
-                        </AccordionDetails>
+                        </AccordionBody>
                     </Accordion>
                 </>
             )}

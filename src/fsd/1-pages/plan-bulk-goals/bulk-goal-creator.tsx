@@ -656,7 +656,7 @@ export const BulkGoalCreator = () => {
                         </div>
                     ))}
                     <div>
-                        <div className="flex h-full min-h-[100px] items-center justify-center rounded-lg border-2 border-dashed border-(--border) bg-(--secondary) p-4">
+                        <div className="flex h-full min-h-[100px] items-center justify-center rounded-lg border-2 border-dashed border-(--border) bg-(--neutral) p-4">
                             <Button
                                 variant="outlined"
                                 size="large"

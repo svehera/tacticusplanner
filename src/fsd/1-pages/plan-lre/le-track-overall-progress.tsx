@@ -1,7 +1,3 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import Button from '@mui/material/Button';
 import { cloneDeep, sum } from 'lodash';
 import { Grid2x2Check, Info } from 'lucide-react';
@@ -9,7 +5,7 @@ import React, { useState, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { getCompletionRateColor } from '@/fsd/5-shared/lib';
-import { AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
+import { Accordion, AccordionHeader, AccordionBody, AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { LegendaryEventEnum, LreRequirementImage, LreTrackId } from '@/fsd/4-entities/lre';
@@ -186,26 +182,14 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                     </div>
                 ))}
             </div>
-            <Accordion
-                defaultExpanded={!isMobile}
-                className="mt-2"
-                sx={{
-                    width: '100%',
-                    padding: '0px !important',
-                }}>
-                <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+            <Accordion defaultExpanded={!isMobile} className="mt-2 w-full">
+                <AccordionHeader>
                     <span className="pe-[5px]">Battles Progress</span>
                     <span className="font-bold">
                         {currentPoints}/{track.totalPoints}
                     </span>
-                </AccordionSummary>
-                <AccordionDetails
-                    sx={{
-                        padding: '3px !important',
-                        display: 'flex',
-                        flexDirection: 'column',
-                        width: '100%',
-                    }}>
+                </AccordionHeader>
+                <AccordionBody className="flex w-full flex-col p-1">
                     <div className="flex-box gap5 items-center justify-center pb-2.5">
                         <Button size="medium" variant="text" onClick={handleToggle}>
                             <Grid2x2Check className="size-5 md:size-6" />
@@ -259,7 +243,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                             />
                         ))}
                     </div>
-                </AccordionDetails>
+                </AccordionBody>
             </Accordion>
 
             <ConfirmationDialog

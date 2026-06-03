@@ -20,7 +20,7 @@ import { renderRestrictions, renderTeam } from './le-token-render-utilities';
 import { LeTokenService } from './le-token-service';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreProgressModel, ILreTrackProgress, LeTokenCardRenderMode } from './lre.models';
-import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
+import { STATUS_LABELS, STATUS_TEXT_CLASSES } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
 
 interface Props {
@@ -42,7 +42,7 @@ interface Props {
 
 const getRowClassName = (index: number) => {
     // Alternate between two sets of colors for striping
-    return index % 2 === 0 ? 'bg-gray-100 dark:bg-gray-800' : 'bg-gray-200 dark:bg-gray-900';
+    return index % 2 === 0 ? 'bg-zinc-100 dark:bg-zinc-800' : 'bg-zinc-200 dark:bg-zinc-900';
 };
 
 /**
@@ -133,7 +133,7 @@ export const LeTokenTable: React.FC<Props> = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex items-center justify-end rounded-lg border border-gray-300 bg-gray-200 p-2 dark:border-gray-700 dark:bg-gray-800/50">
+            <div className="flex items-center justify-end rounded-lg border border-(--border) bg-(--soft) p-2">
                 <FormControlLabel
                     control={
                         <Switch
@@ -143,7 +143,7 @@ export const LeTokenTable: React.FC<Props> = ({
                         />
                     }
                     label={
-                        <div className="flex items-center gap-2 text-gray-700 dark:text-gray-300">
+                        <div className="flex items-center gap-2 text-(--fg)">
                             {isTableView ? (
                                 <>
                                     <TableRowsIcon fontSize="small" /> <span>Table View</span>
@@ -159,12 +159,12 @@ export const LeTokenTable: React.FC<Props> = ({
             </div>
 
             {isTableView ? (
-                <div className="overflow-x-auto rounded-xl border border-gray-300 shadow-2xl dark:border-gray-700/50">
+                <div className="overflow-x-auto rounded-xl border border-(--border) shadow-2xl">
                     <table
                         key="tokensTable"
-                        className="min-w-full table-auto border-separate border-spacing-0 bg-white text-sm text-gray-800 dark:bg-gray-900 dark:text-gray-200">
+                        className="min-w-full table-auto border-separate border-spacing-0 bg-(--card) text-sm text-(--card-fg)">
                         <thead>
-                            <tr className="sticky top-0 bg-gray-300 text-gray-800 uppercase dark:bg-gray-700 dark:text-gray-100">
+                            <tr className="sticky top-0 bg-zinc-300 text-zinc-800 uppercase dark:bg-zinc-700 dark:text-zinc-100">
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">Token</th>
                                 <th className="px-3 py-3 text-center font-semibold whitespace-nowrap">
                                     Milestone
@@ -193,7 +193,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                 return (
                                     <tr
                                         key={index}
-                                        className={`${getRowClassName(index)} border-t border-gray-300 transition duration-150 ease-in-out hover:bg-gray-300 dark:border-gray-700/50 dark:hover:bg-gray-700`}>
+                                        className={`${getRowClassName(index)} border-t border-(--border) transition duration-150 ease-in-out hover:bg-(--primary)/10`}>
                                         <td className="px-3 py-2 text-center font-medium">{index + 1}</td>
                                         <td className="flex h-full items-center justify-center px-3 py-2">
                                             {token.achievedStarMilestone ? (
@@ -217,7 +217,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                             )}
                                         </td>
                                         <td className="px-3 py-2 text-right font-mono">{token.incrementalPoints}</td>
-                                        <td className="px-3 py-2 text-right font-mono font-bold text-blue-400">
+                                        <td className="px-3 py-2 text-right font-mono font-bold text-(--primary)">
                                             {token.totalPoints}
                                         </td>
                                         <td className="px-3 py-2 text-center">{renderTeam(token.team, 25)}</td>
@@ -232,8 +232,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                                     onClick={() => {
                                                         onMaybeBattle(token);
                                                     }}
-                                                    style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
-                                                    className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
+                                                    className={`text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50 ${STATUS_TEXT_CLASSES[RequirementStatus.MaybeClear]}`}
                                                     title="Potentially will not succeed with this token.">
                                                     {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
                                                 </button>
@@ -241,8 +240,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                                     onClick={() => {
                                                         onStopBattle(token);
                                                     }}
-                                                    style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
-                                                    className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
+                                                    className={`text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50 ${STATUS_TEXT_CLASSES[RequirementStatus.StopHere]}`}
                                                     title="Do not attempt this token.">
                                                     {STATUS_LABELS[RequirementStatus.StopHere]}
                                                 </button>
@@ -291,7 +289,7 @@ export const LeTokenTable: React.FC<Props> = ({
                                     </div>
                                 ) : (
                                     isVisible && (
-                                        <div className="w-full rounded-xl border border-gray-300 p-4 text-center text-gray-600 dark:border-gray-700 dark:text-gray-500">
+                                        <div className="w-full rounded-xl border border-(--border) p-4 text-center text-(--soft-fg)">
                                             Battle data not available.
                                         </div>
                                     )

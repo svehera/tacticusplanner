@@ -1,17 +1,7 @@
-﻿import {
-    Delete as DeleteIcon,
-    ExpandMore as ExpandMoreIcon,
-    GridView as GridViewIcon,
-    Link as LinkIcon,
-    TableRows as TableRowsIcon,
-} from '@mui/icons-material';
-import SettingsIcon from '@mui/icons-material/Settings';
-import { Accordion, AccordionDetails, AccordionSummary, FormControlLabel, Switch } from '@mui/material';
-import Button from '@mui/material/Button';
-import { cloneDeep, sum } from 'lodash';
+﻿import { cloneDeep, sum } from 'lodash';
+import { Grid2x2, Link2, Rows3, Settings, Trash2 } from 'lucide-react';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { Link } from 'react-router-dom';
 
 import { IDailyRaidsFarmOrder } from '@/models/interfaces';
 import { GoalsEstimateFunction } from '@/services/goals-estimate-service';
@@ -25,7 +15,10 @@ import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
+import { Accordion, AccordionHeader, AccordionBody, Button, PageToolbar, PageToolbarDivider } from '@/fsd/5-shared/ui';
 import { ForgeBadgesTotal, MiscIcon, MoWComponentsTotal, XpBooksTotal } from '@/fsd/5-shared/ui/icons';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
+import { Switch } from '@/fsd/5-shared/ui/switch';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -409,88 +402,85 @@ export const Goals = () => {
     };
 
     return (
-        <div>
-            <div className="flex flex-wrap items-center gap-5">
-                <Button
-                    size="small"
-                    variant={'contained'}
-                    component={Link}
-                    to={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
-                    <LinkIcon /> <span className="pl-[5px]">Go to Raids</span>
-                </Button>
-
-                <Button variant="outlined" size="small" onClick={() => setOpenSettings(true)}>
-                    <SettingsIcon style={{ marginRight: 4 }} /> Raids Settings
-                </Button>
-
-                <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
-
-                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
+        <div className="space-y-8 py-6">
+            <PageToolbar>
+                {/* Primary CTA */}
                 <SetGoalDialog key={goals.length} />
-                {hasSync && <SyncButton showText={!isMobile} />}
-                {}
-                <Button size="small" variant="contained" color="error" onClick={onDeleteAll}>
-                    <DeleteIcon sx={{ mr: 1 }} /> delete all
+
+                <PageToolbarDivider />
+
+                {/* Navigation / utility */}
+                <LinkButton
+                    appearance="outline"
+                    size="small"
+                    href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
+                    <Link2 data-slot="icon" /> Go to Raids
+                </LinkButton>
+                <Button appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
+                    <Settings data-slot="icon" /> Raids Settings
                 </Button>
-                <span className="text-xl">
-                    {goals.length}/{goalsLimit}
+                {hasSync && <SyncButton showText={!isMobile} variant="outlined" />}
+                <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
+                <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
+
+                <PageToolbarDivider />
+
+                {/* Counter */}
+                <span className="text-sm text-(--soft-fg)">
+                    <span className="font-medium text-(--fg)">Slots</span> {goals.length}/{goalsLimit}
                 </span>
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.goalsTableView}
-                            onChange={event => updateView(event.target.checked)}
-                        />
-                    }
-                    label={
-                        <div className="flex-box gap5">
-                            {viewPreferences.goalsTableView ? (
-                                <TableRowsIcon color="primary" />
-                            ) : (
-                                <GridViewIcon color="primary" />
-                            )}{' '}
-                            view
-                        </div>
-                    }
-                />
+
+                <PageToolbarDivider />
+
+                {/* View options */}
+                <Switch isSelected={viewPreferences.goalsTableView} onChange={updateView}>
+                    <span className="flex items-center gap-1">
+                        {viewPreferences.goalsTableView ? (
+                            <Rows3 className="size-5 text-(--primary)" />
+                        ) : (
+                            <Grid2x2 className="size-5 text-(--primary)" />
+                        )}{' '}
+                        view
+                    </span>
+                </Switch>
                 <GoalColorCodingToggle
-                    currentMode={viewPreferences.goalColorMode || 'None'} // Read the new state property
+                    currentMode={viewPreferences.goalColorMode || 'None'}
                     onToggle={updateColorCodingMode}
                 />
-            </div>
-            <div className="my-2 w-full max-w-[1100px]">
-                <Accordion
-                    expanded={resourcesExpanded}
-                    onChange={(_, expanded) => setResourcesExpanded(expanded)}
-                    className="overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5"
-                        aria-controls="resources-content"
-                        id="resources-header">
+
+                <PageToolbarDivider />
+
+                {/* Destructive — pushed right */}
+                <Button appearance="outline" intent="danger" size="small" onPress={onDeleteAll}>
+                    <Trash2 data-slot="icon" /> Delete All
+                </Button>
+            </PageToolbar>
+            <div className="w-full max-w-[1100px]">
+                <Accordion expanded={resourcesExpanded} onToggle={setResourcesExpanded}>
+                    <AccordionHeader>
                         <div className="flex w-full flex-wrap items-center gap-2 pr-2">
                             <span className="text-sm font-semibold text-(--fg)">Total Resources Missing</span>
                             <span className="ml-auto flex flex-wrap items-center gap-2">
-                                <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
+                                <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
                                     <span className="font-medium">Energy:</span>{' '}
                                     <span>{estimatedUpgradesTotal.energyTotal - energyAlreadySpent}</span>
                                 </span>
-                                <span className="rounded-full border border-(--border) bg-(--secondary) px-2 py-0.5 text-xs text-(--fg)">
+                                <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
                                     <span className="font-medium">XP:</span>{' '}
                                     <span>{formatCompactValue(adjustedGoalsEstimates.neededXp)}</span>
                                 </span>
                             </span>
                         </div>
-                    </AccordionSummary>
+                    </AccordionHeader>
 
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    <AccordionBody>
                         <div className="grid grid-cols-1 gap-3">
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Energy
                                     </div>
-                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <MiscIcon icon={'energy'} height={35} width={35} />
                                         <b className="text-2xl text-(--fg)">
                                             {estimatedUpgradesTotal.energyTotal - energyAlreadySpent}
@@ -498,24 +488,24 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         XP Books
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
                                     </div>
                                 </div>
                             </div>
 
                             <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Badges
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                            <div key={alliance} className="flex-box mb-2 last:mb-0">
+                                            <div key={alliance} className="mb-2 flex items-center last:mb-0">
                                                 <BadgesTotal
                                                     badges={adjustedGoalsEstimates.neededBadges[alliance]}
                                                     alliance={alliance}
@@ -526,13 +516,13 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Orbs
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                            <div key={alliance} className="flex-box mb-2 last:mb-0">
+                                            <div key={alliance} className="mb-2 flex items-center last:mb-0">
                                                 <OrbsTotal
                                                     orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
                                                     alliance={alliance}
@@ -543,11 +533,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Forge Badges
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <ForgeBadgesTotal
                                             badges={adjustedGoalsEstimates.neededForgeBadges}
                                             size={'medium'}
@@ -555,11 +545,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         MoW Components
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <MoWComponentsTotal
                                             components={adjustedGoalsEstimates.neededComponents}
                                             size={'medium'}
@@ -567,11 +557,11 @@ export const Goals = () => {
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                                         Mythic Upgrade Materials
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--secondary) p-3 shadow-sm ring-1 ring-black/5 dark:ring-white/10">
+                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
                                         <div className="flex flex-wrap gap-1">
                                             {MYTHIC_UNCRAFTABLE_UPGRADES.map(upg => (
                                                 <div key={upg.id} className="flex flex-col items-center">
@@ -591,17 +581,14 @@ export const Goals = () => {
                                 </div>
                             </div>
                         </div>
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             </div>
             {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
                 <Accordion
                     expanded={sectionsExpanded.upgrades}
-                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
-                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}>
+                    <AccordionHeader>
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
@@ -615,8 +602,8 @@ export const Goals = () => {
                                 <MiscIcon icon={'energy'} height={15} width={15} />)
                             </span>
                         </div>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    </AccordionHeader>
+                    <AccordionBody>
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedUpgrades.map(goal => {
@@ -657,17 +644,14 @@ export const Goals = () => {
                                 goalsColorCoding={viewPreferences.goalColorMode}
                             />
                         )}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             )}
             {shardsGoals.length > 0 && (
                 <Accordion
                     expanded={sectionsExpanded.shards}
-                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}
-                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}>
+                    <AccordionHeader>
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
@@ -680,8 +664,8 @@ export const Goals = () => {
                                 <b>{shardOnslaughtTokensTotal}</b> Tokens)
                             </span>
                         </div>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    </AccordionHeader>
+                    <AccordionBody>
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedShards.map(goal => {
@@ -720,24 +704,21 @@ export const Goals = () => {
                                 goalsColorCoding={viewPreferences.goalColorMode}
                             />
                         )}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             )}
             {upgradeAbilities.length > 0 && (
                 <Accordion
                     expanded={sectionsExpanded.abilities}
-                    onChange={(_, expanded) => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}
-                    className="my-5 overflow-hidden rounded-xl! border border-(--border) bg-transparent shadow-none">
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                        className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}>
+                    <AccordionHeader>
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                             </span>
                         </div>
-                    </AccordionSummary>
-                    <AccordionDetails className="px-4 pt-0 pb-4">
+                    </AccordionHeader>
+                    <AccordionBody>
                         {!viewPreferences.goalsTableView && (
                             <div className="flex flex-wrap gap-3">
                                 {sortedAbilities.map(goal => {
@@ -776,7 +757,7 @@ export const Goals = () => {
                                 goalsColorCoding={viewPreferences.goalColorMode}
                             />
                         )}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             )}
             {editGoal !== undefined &&

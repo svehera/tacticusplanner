@@ -1,15 +1,15 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { FormControl, Select, MenuItem, Box } from '@mui/material';
 import { cloneDeep } from 'lodash';
 import { useContext, useEffect, useState } from 'react';
 import { isMobile } from 'react-device-detect';
-import { Link } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
+import { Select } from '@/fsd/5-shared/ui/selects';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -90,57 +90,36 @@ export const WarDefense2 = () => {
     return (
         <RosterSnapshotsAssetsProvider>
             <div className="gap-4">
-                <div className="mb-4 flex items-center justify-center gap-4">
-                    <Link
-                        to={isMobile ? '/mobile/plan/waroffense2' : '/plan/waroffense2'}
-                        className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white no-underline transition hover:bg-blue-700">
+                <div className="mb-4 flex flex-wrap items-center justify-center gap-4">
+                    <LinkButton href={isMobile ? '/mobile/plan/waroffense2' : '/plan/waroffense2'} size="small">
                         Go to Offense
-                    </Link>
+                    </LinkButton>
 
-                    <Link
-                        to={isMobile ? '/mobile/plan/teams2' : '/plan/teams2'}
-                        className="rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-semibold text-white no-underline transition hover:bg-blue-700">
+                    <LinkButton href={isMobile ? '/mobile/plan/teams2' : '/plan/teams2'} size="small">
                         Go to Teams
-                    </Link>
+                    </LinkButton>
 
-                    <span className="text-xs font-semibold tracking-wider text-slate-500 uppercase dark:text-slate-400">
+                    <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
                         Battlefield Zone
                     </span>
 
-                    <FormControl sx={{ minWidth: 160, width: 'auto' }}>
-                        <Select
-                            size="small"
-                            value={warDefense2.zoneLevel ?? 0}
-                            onChange={event => handleZoneIndexChange(Number(event.target.value))}
-                            renderValue={value => {
-                                const z = ZONES[Number(value)];
-                                return (
-                                    <Box className="flex items-center gap-1">
-                                        <RarityIcon rarity={z.twoSlotRarity} />
-                                        <RarityIcon rarity={z.twoSlotRarity} />
-                                        <RarityIcon rarity={z.threeSlotRarity} />
-                                        <RarityIcon rarity={z.threeSlotRarity} />
-                                        <RarityIcon rarity={z.threeSlotRarity} />
-                                    </Box>
-                                );
-                            }}>
-                            {ZONES.map((zone, index) => (
-                                <MenuItem key={index} value={index}>
-                                    <Box className="flex items-center gap-1">
-                                        <RarityIcon rarity={zone.twoSlotRarity} />
-                                        <RarityIcon rarity={zone.twoSlotRarity} />
-                                        <RarityIcon rarity={zone.threeSlotRarity} />
-                                        <RarityIcon rarity={zone.threeSlotRarity} />
-                                        <RarityIcon rarity={zone.threeSlotRarity} />
-                                    </Box>
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                    <Select<number>
+                        options={[0, 1, 2, 3]}
+                        value={warDefense2.zoneLevel ?? 0}
+                        onChange={handleZoneIndexChange}
+                        renderOption={index => (
+                            <div className="flex items-center gap-1">
+                                <RarityIcon rarity={ZONES[index].twoSlotRarity} />
+                                <RarityIcon rarity={ZONES[index].twoSlotRarity} />
+                                <RarityIcon rarity={ZONES[index].threeSlotRarity} />
+                                <RarityIcon rarity={ZONES[index].threeSlotRarity} />
+                                <RarityIcon rarity={ZONES[index].threeSlotRarity} />
+                            </div>
+                        )}
+                        className="w-auto"
+                    />
 
-                    <div className="flex items-start justify-start">
-                        <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
-                    </div>
+                    <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                 </div>
                 <div>
                     <div className="flex flex-wrap items-center justify-center gap-4">

@@ -1,7 +1,7 @@
-import Button from '@mui/material/Button';
 import { FC, lazy, Suspense, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { useDragScroll } from '@/fsd/5-shared/lib/use-drag-scroll';
+import { Button } from '@/fsd/5-shared/ui';
 
 import { IUpgradesRaidsDay } from '@/fsd/3-features/goals/goals.models';
 
@@ -168,12 +168,11 @@ export const DayStrip: FC<DayStripProps> = ({
                         ))}
                     </Suspense>
                     {showShowAll && (
-                        <Button
-                            variant="outlined"
-                            className="min-w-[300px] shrink-0 items-start pt-5"
-                            onClick={onShowAll}>
-                            Show All
-                        </Button>
+                        <div className="flex min-w-[300px] shrink-0 items-start pt-5">
+                            <Button appearance="outline" intent="secondary" size="small" onPress={onShowAll}>
+                                Show All
+                            </Button>
+                        </div>
                     )}
                 </div>
             </div>

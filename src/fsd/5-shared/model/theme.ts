@@ -43,14 +43,7 @@ export const darkTheme = createTheme({
         MuiAccordion: {
             styleOverrides: {
                 root: {
-                    backgroundColor: 'var(--secondary)',
-                },
-            },
-        },
-        MuiToolbar: {
-            styleOverrides: {
-                root: {
-                    backgroundColor: 'var(--navbar)',
+                    backgroundColor: 'var(--neutral)',
                 },
             },
         },

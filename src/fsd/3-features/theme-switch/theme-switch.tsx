@@ -1,9 +1,9 @@
 import DarkModeIcon from '@mui/icons-material/DarkMode';
 import LightModeIcon from '@mui/icons-material/LightMode';
 import SettingsBrightnessIcon from '@mui/icons-material/SettingsBrightness';
-import { IconButton, Tooltip } from '@mui/material';
 
 import { Theme, useTheme } from '@/fsd/5-shared/model';
+import { Button, LazyTooltip } from '@/fsd/5-shared/ui';
 
 export const ThemeSwitch = () => {
     const { userThemePreference, setUserThemePreference } = useTheme();
@@ -11,29 +11,41 @@ export const ThemeSwitch = () => {
     switch (userThemePreference) {
         case Theme.Device: {
             return (
-                <Tooltip title="Switch to light mode">
-                    <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Light)}>
+                <LazyTooltip title="Switch to light mode">
+                    <Button
+                        size="square-petite"
+                        appearance="plain"
+                        intent="secondary"
+                        onPress={() => setUserThemePreference(Theme.Light)}>
                         <SettingsBrightnessIcon />
-                    </IconButton>
-                </Tooltip>
+                    </Button>
+                </LazyTooltip>
             );
         }
         case Theme.Light: {
             return (
-                <Tooltip title="Switch to dark mode">
-                    <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Dark)}>
+                <LazyTooltip title="Switch to dark mode">
+                    <Button
+                        size="square-petite"
+                        appearance="plain"
+                        intent="secondary"
+                        onPress={() => setUserThemePreference(Theme.Dark)}>
                         <LightModeIcon />
-                    </IconButton>
-                </Tooltip>
+                    </Button>
+                </LazyTooltip>
             );
         }
         case Theme.Dark: {
             return (
-                <Tooltip title="Switch to device default">
-                    <IconButton color="inherit" onClick={() => setUserThemePreference(Theme.Device)}>
+                <LazyTooltip title="Switch to device default">
+                    <Button
+                        size="square-petite"
+                        appearance="plain"
+                        intent="secondary"
+                        onPress={() => setUserThemePreference(Theme.Device)}>
                         <DarkModeIcon />
-                    </IconButton>
-                </Tooltip>
+                    </Button>
+                </LazyTooltip>
             );
         }
     }

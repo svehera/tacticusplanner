@@ -9,7 +9,7 @@ import TextField from '@mui/material/TextField';
 import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
 
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { RankSelect2, RaritySelect2, StarsSelect2 } from '@/fsd/5-shared/ui';
+import { RankSelect, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { RankIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -189,7 +189,7 @@ export const BulkGoalCreatorUnitCard = ({
                 )}
             </div>
             <div className="flex items-end gap-2">
-                <RaritySelect2
+                <RaritySelect
                     label="Rarity"
                     rarityValues={Object.values(Rarity).filter(r => typeof r === 'number') as Rarity[]}
                     value={entry.rarity}
@@ -197,7 +197,7 @@ export const BulkGoalCreatorUnitCard = ({
                     hideText
                 />
                 {(entry.unit === undefined || 'rank' in entry.unit) && (
-                    <RankSelect2
+                    <RankSelect
                         label="Rank"
                         rankValues={rankValues.filter(r => r <= (rarityToMaxRank[entry.rarity] ?? Rank.Adamantine3))}
                         value={entry.rank}
@@ -205,7 +205,7 @@ export const BulkGoalCreatorUnitCard = ({
                         hideText
                     />
                 )}
-                <StarsSelect2
+                <StarsSelect
                     label="Stars"
                     starsValues={allStarValues.filter(
                         s =>

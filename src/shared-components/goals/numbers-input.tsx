@@ -1,6 +1,4 @@
-﻿import { FormControl, FormHelperText, Input } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import React from 'react';
+import React, { useState } from 'react';
 
 interface Props {
     title: string;
@@ -10,26 +8,27 @@ interface Props {
 }
 
 export const NumbersInput: React.FC<Props> = ({ value, valueChange, title, helperText }) => {
-    function handleChange(event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) {
-        const value = event.target.value === '' ? '' : (Number(event.target.value) as any);
-        valueChange(Math.min(value, 10_000));
-    }
+    const [inputValue, setInputValue] = useState((value ?? '').toString());
 
     return (
-        <FormControl variant={'outlined'} fullWidth>
-            <InputLabel>{title}</InputLabel>
-            <Input
-                value={value ?? ''}
-                onChange={handleChange}
-                inputProps={{
-                    step: 1,
-                    min: 0,
-                    max: 10_000,
-                    type: 'number',
-                    'aria-labelledby': 'input-slider',
+        <div className="flex flex-col gap-y-1">
+            <label className="mb-1 block text-sm font-medium text-(--soft-fg)">{title}</label>
+            <input
+                type="number"
+                value={inputValue}
+                onChange={event => {
+                    setInputValue(event.target.value);
+                    const newValue = Number(event.target.value);
+                    if (!Number.isNaN(newValue)) {
+                        valueChange(Math.min(newValue, 10_000));
+                    }
                 }}
+                min={0}
+                max={10_000}
+                step={1}
+                className="h-10 w-full rounded-lg border border-(--input) bg-(--neutral) px-3 text-sm text-(--fg) shadow-sm transition-all hover:border-(--primary) focus:ring-2 focus:ring-(--ring) focus:outline-none"
             />
-            {helperText && <FormHelperText>{helperText}</FormHelperText>}
-        </FormControl>
+            {helperText && <span className="text-xs text-(--soft-fg)">{helperText}</span>}
+        </div>
     );
 };

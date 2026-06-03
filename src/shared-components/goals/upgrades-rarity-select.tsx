@@ -1,4 +1,4 @@
-﻿import { Info } from '@mui/icons-material';
+﻿import { Info } from 'lucide-react';
 import React from 'react';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
@@ -23,7 +23,7 @@ export const UpgradesRaritySelect: React.FC<Props> = ({ upgradesRarity, upgrades
                 title={
                     'You can limit rarity of base upgrades that will be required to reach the goal. One of use cases is to pre-farm Legendary upgrades (usually takes the most time) before starting farming other upgrades'
                 }>
-                <Info color="primary" />
+                <Info className="size-5 text-(--primary)" />
             </AccessibleTooltip>
         </div>
     );

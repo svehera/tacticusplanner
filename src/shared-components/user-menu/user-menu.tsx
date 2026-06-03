@@ -8,8 +8,7 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem, Switch } from '@mui/material';
-import Box from '@mui/material/Box';
+import { Avatar, Badge, Divider, IconButton, ListItemIcon, MenuItem, Popover, Switch } from '@mui/material';
 import ListItemText from '@mui/material/ListItemText';
 import { enqueueSnackbar } from 'notistack';
 import { ChangeEvent, useContext, useRef, useState } from 'react';
@@ -55,16 +54,17 @@ function stringToColor(string: string) {
 
 function stringAvatar(name: string) {
     return {
-        sx: {
-            width: 32,
-            height: 32,
-            bgcolor: stringToColor(name),
-        },
+        className: '!w-8 !h-8',
+        style: { backgroundColor: stringToColor(name) },
         children: `${name.slice(0, 2)}`,
     };
 }
 
-export const UserMenu = () => {
+interface UserMenuProps {
+    compact?: boolean;
+}
+
+export const UserMenu = ({ compact = false }: UserMenuProps) => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const popupManager = usePopupManager();
@@ -202,28 +202,34 @@ export const UserMenu = () => {
         });
     }
 
+    const itemClass =
+        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-[7px] border-none cursor-pointer text-[13px] text-[var(--soft-fg)] bg-transparent hover:bg-[var(--primary)]/[.18] hover:text-[var(--fg)] transition-colors';
+    const iconClass = 'flex-shrink-0 !text-[18px]';
+
+    const close = () => userMenuControls.handleClose();
+
     return (
-        <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
+        <div className={`flex items-center ${compact ? 'justify-center' : 'w-full justify-start'}`}>
             <input ref={inputReference} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
-            <div className="flex items-center">
-                <span className="text-base font-bold">Hi, {username}</span>
+            <div className="flex items-center gap-2">
                 <IconButton
                     onClick={userMenuControls.handleClick}
                     size="small"
-                    sx={{ ml: 2 }}
                     aria-controls={userMenuControls.open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={userMenuControls.open ? 'true' : undefined}>
                     {isAuthenticated ? (
-                        <Avatar {...stringAvatar(username)}></Avatar>
+                        <Avatar {...stringAvatar(username)} />
                     ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                        <Avatar className="!h-8 !w-8">TP</Avatar>
                     )}
                 </IconButton>
+                {!compact && <span className="truncate text-sm font-semibold">{username}</span>}
             </div>
-            <Menu
-                anchorEl={userMenuControls.anchorEl}
+
+            <Popover
                 id="account-menu"
+                anchorEl={userMenuControls.anchorEl}
                 open={userMenuControls.open}
                 onClose={userMenuControls.handleClose}
                 onClick={userMenuControls.handleClose}
@@ -330,12 +336,149 @@ export const UserMenu = () => {
                             <ListItemText>Review guides</ListItemText>
                         </Badge>
                     ) : (
-                        <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
-                            <ListItemText>Review guides</ListItemText>
-                        </Badge>
+                        <ListItemText>Review guides</ListItemText>
                     )}
                 </MenuItem>
-            </Menu>
+
+                {/* Identity row */}
+                <div className="mb-1 flex items-center gap-2.5 border-b border-[var(--border)] px-2 py-2">
+                    {isAuthenticated ? (
+                        <Avatar {...stringAvatar(username)} />
+                    ) : (
+                        <Avatar className="!h-8 !w-8">TP</Avatar>
+                    )}
+                    <span className="truncate text-[13px] font-semibold text-[var(--fg)]">{username}</span>
+                </div>
+
+                {/* Auth */}
+                {isAuthenticated ? (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            logout();
+                            close();
+                        }}>
+                        <LogoutIcon className={iconClass} />
+                        <span>Logout</span>
+                    </button>
+                ) : (
+                    <>
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                openLoginForm();
+                                close();
+                            }}>
+                            <LoginIcon className={iconClass} />
+                            <span>Login</span>
+                        </button>
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                setShowRegisterUser(true);
+                                close();
+                            }}>
+                            <RegisterIcon className={iconClass} />
+                            <span>Register</span>
+                        </button>
+                    </>
+                )}
+
+                {isAuthenticated && (
+                    <>
+                        <hr className="my-1 border-[var(--border)]" />
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                syncWithTacticus();
+                                close();
+                            }}>
+                            <SyncIcon className={iconClass} />
+                            <span>Sync via Tacticus API</span>
+                        </button>
+                    </>
+                )}
+
+                <hr className="my-1 border-[var(--border)]" />
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        inputReference.current?.click();
+                        close();
+                    }}>
+                    <UploadIcon className={iconClass} />
+                    <span>Import JSON</span>
+                </button>
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        downloadJson();
+                        close();
+                    }}>
+                    <DownloadIcon className={iconClass} />
+                    <span>Export JSON</span>
+                </button>
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        restoreData();
+                        close();
+                    }}>
+                    <SettingsBackupRestoreIcon className={iconClass} />
+                    <span>Restore Backup</span>
+                </button>
+
+                <hr className="my-1 border-[var(--border)]" />
+                {isDesktopView ? (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            navigateToMobileView();
+                            close();
+                        }}>
+                        <PhoneIcon className={iconClass} />
+                        <span>Use mobile view</span>
+                    </button>
+                ) : (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            navigateToDesktopView();
+                            close();
+                        }}>
+                        <ComputerIcon className={iconClass} />
+                        <span>Use desktop view</span>
+                    </button>
+                )}
+
+                <hr className="my-1 border-[var(--border)]" />
+                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            setShowAdminTools(true);
+                            close();
+                        }}>
+                        <SupervisorAccountIcon className={iconClass} />
+                        <span>Admin tools</span>
+                    </button>
+                )}
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        navigateToReviewTeams();
+                        close();
+                    }}>
+                    <GroupWorkIcon className={iconClass} />
+                    <Badge
+                        badgeContent={
+                            userInfo.rejectedTeamsCount > 0 ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount
+                        }
+                        color={userInfo.rejectedTeamsCount > 0 ? 'error' : 'warning'}>
+                        <span>Review guides</span>
+                    </Badge>
+                </button>
+            </Popover>
             <RegisterUserDialog
                 isOpen={showRegisterUser}
                 onClose={success => {
@@ -360,6 +503,6 @@ export const UserMenu = () => {
                     setShowAdminTools(false);
                 }}
             />
-        </Box>
+        </div>
     );
 };

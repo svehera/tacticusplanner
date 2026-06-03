@@ -1,5 +1,5 @@
 ﻿/* eslint-disable boundaries/element-types */
-import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useMemo } from 'react';
 
@@ -173,10 +173,12 @@ export const MowMaterialsTable: React.FC<Props> = ({ rows }) => {
     }, []);
 
     return (
-        <div className="ag-theme-material max-h-[50vh] min-h-[150px] w-full" style={{ height: 50 + rows.length * 45 }}>
+        <div
+            className="ag-theme-material density-compact max-h-[50vh] min-h-[150px] w-full"
+            style={{ height: 50 + rows.length * 45 }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
-                theme={themeBalham}
+                theme="legacy"
                 defaultColDef={{
                     suppressMovable: true,
                     sortable: true,

@@ -64,9 +64,9 @@ const TextField = ({
                         data-loading={isPending ? 'true' : undefined}>
                         {prefix && typeof prefix === 'string' ? (
                             <span className="text-muted-fg ml-2">{prefix}</span>
-                        ) : (
-                            prefix
-                        )}
+                        ) : prefix ? (
+                            <span className="ml-2.5 flex shrink-0 items-center">{prefix}</span>
+                        ) : undefined}
                         <Input placeholder={placeholder} />
                         {isRevealable ? (
                             <ButtonPrimitive
@@ -82,7 +82,7 @@ const TextField = ({
                             typeof suffix === 'string' ? (
                                 <span className="text-muted-fg mr-2">{suffix}</span>
                             ) : (
-                                suffix
+                                <span className="mr-2.5 flex shrink-0 items-center">{suffix}</span>
                             )
                         ) : undefined}
                     </FieldGroup>

@@ -1,21 +1,8 @@
-import {
-    ArrowForward,
-    DeleteForever,
-    Edit,
-    ArrowUpward,
-    ArrowDownward,
-    FilterListOff,
-    Block,
-    CheckCircle,
-} from '@mui/icons-material';
-import LinkIcon from '@mui/icons-material/Link';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import { ArrowDown, ArrowRight, ArrowUp, Ban, CheckCircle2, FilterX, Link2, Pencil, Trash2 } from 'lucide-react';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
-import { Link } from 'react-router-dom';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
@@ -23,7 +10,9 @@ import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
 import { getEstimatedDate } from 'src/shared-logic/functions';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
+import { Button } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -64,24 +53,24 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             <div>
                 {!!goalEstimate.completed && (
                     <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                        <span className="flex-box gap-[3px]" tabIndex={0}>
-                            <CheckCircle fontSize="small" sx={{ color: 'success.main' }} />
+                        <span className="flex items-center gap-[3px]" tabIndex={0}>
+                            <CheckCircle2 className="size-4 text-(--success)" />
                         </span>
                     </AccessibleTooltip>
                 )}
                 {!!goalEstimate.blocked && (
                     <AccessibleTooltip
                         title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
-                        <span className="flex-box gap-[3px]" tabIndex={0}>
-                            <Block fontSize="small" sx={{ color: 'error.main' }} />
+                        <span className="flex items-center gap-[3px]" tabIndex={0}>
+                            <Ban className="size-4 text-(--danger)" />
                         </span>
                     </AccessibleTooltip>
                 )}
                 {goalEstimate.included === false && (
                     <AccessibleTooltip
                         title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                        <span className="flex-box gap-[3px]" tabIndex={0}>
-                            <FilterListOff fontSize="small" sx={{ color: 'error.main' }} />
+                        <span className="flex items-center gap-[3px]" tabIndex={0}>
+                            <FilterX className="size-4 text-(--danger)" />
                         </span>
                     </AccessibleTooltip>
                 )}
@@ -100,12 +89,12 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 const targetMythicShards = ShardsService.getTargetMythicShards(goal);
                 return (
                     <div>
-                        <div className="flex-box between items-center">
-                            <div className="flex-box column">
-                                <div className="flex-box gap5">
+                        <div className="flex items-center justify-between">
+                            <div className="flex flex-col">
+                                <div className="flex items-center gap-1">
                                     {!isSameRarity && (
                                         <>
-                                            <RarityIcon rarity={goal.rarityStart} /> <ArrowForward />
+                                            <RarityIcon rarity={goal.rarityStart} /> <ArrowRight className="size-4" />
                                             <RarityIcon rarity={goal.rarityEnd} />
                                             {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                                         </>
@@ -113,7 +102,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
 
                                     {isSameRarity && (
                                         <>
-                                            <StarsIcon stars={goal.starsStart} /> <ArrowForward />
+                                            <StarsIcon stars={goal.starsStart} /> <ArrowRight className="size-4" />
                                             <StarsIcon stars={goal.starsEnd} />
                                         </>
                                     )}
@@ -159,12 +148,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             case PersonalGoalType.UpgradeRank: {
                 return (
                     <div>
-                        <div className="flex-box between">
-                            <div className="flex-box gap-[3px]">
-                                <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} /> <ArrowForward />
+                        <div className="flex items-center justify-between">
+                            <div className="flex items-center gap-[3px]">
+                                <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} />{' '}
+                                <ArrowRight className="size-4" />
                                 <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
                                 {goal.upgradesRarity.length > 0 && (
-                                    <div className="flex-box gap-[3px]">
+                                    <div className="flex items-center gap-[3px]">
                                         {goal.upgradesRarity.map(x => (
                                             <RarityIcon key={x} rarity={x} />
                                         ))}
@@ -195,8 +185,8 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
 
             case PersonalGoalType.UpgradeMaterial: {
                 return (
-                    <div className="flex-box between">
-                        <div className="flex-box gap-[3px]">{goal.quantity}</div>
+                    <div className="flex items-center justify-between">
+                        <div className="flex items-center gap-[3px]">{goal.quantity}</div>
                     </div>
                 );
             }
@@ -206,26 +196,28 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
                 return (
                     <div>
-                        <div className="flex-box between gap10">
-                            <div className="flex-box column start">
+                        <div className="flex items-center justify-between gap-2.5">
+                            <div className="flex flex-col items-start">
                                 {hasPrimaryGoal && (
-                                    <div className="flex-box gap-[3px]">
-                                        <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward />
+                                    <div className="flex items-center gap-[3px]">
+                                        <span>Primary:</span> <b>{goal.primaryStart}</b>{' '}
+                                        <ArrowRight className="size-4" />
                                         <b>{goal.primaryEnd}</b>
                                     </div>
                                 )}
 
                                 {hasSecondaryGoal && (
-                                    <div className="flex-box gap-[3px]">
-                                        <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward />
+                                    <div className="flex items-center gap-[3px]">
+                                        <span>Secondary:</span> <b>{goal.secondaryStart}</b>{' '}
+                                        <ArrowRight className="size-4" />
                                         <b>{goal.secondaryEnd}</b>
                                     </div>
                                 )}
                             </div>
                         </div>
                         {goal.upgradesRarity.length > 0 && (
-                            <div className="flex-box gap-[3px]">
-                                <ArrowForward />
+                            <div className="flex items-center gap-[3px]">
+                                <ArrowRight className="size-4" />
                                 {goal.upgradesRarity.map(x => (
                                     <RarityIcon key={x} rarity={x} />
                                 ))}
@@ -248,18 +240,19 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
                 return (
                     <div>
-                        <div className="flex-box gap10">
-                            <div className="flex-box column start">
+                        <div className="flex items-center gap-2.5">
+                            <div className="flex flex-col items-start">
                                 {hasActiveGoal && (
-                                    <div className="flex-box gap-[3px]">
-                                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward />
+                                    <div className="flex items-center gap-[3px]">
+                                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowRight className="size-4" />
                                         <b>{goal.activeEnd}</b>
                                     </div>
                                 )}
 
                                 {hasPassiveGoal && (
-                                    <div className="flex-box gap-[3px]">
-                                        <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward />
+                                    <div className="flex items-center gap-[3px]">
+                                        <span>Passive:</span> <b>{goal.passiveStart}</b>{' '}
+                                        <ArrowRight className="size-4" />
                                         <b>{goal.passiveEnd}</b>
                                     </div>
                                 )}
@@ -276,7 +269,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                                 </div>
                             )}
                         {goalEstimate.abilitiesEstimate && (
-                            <div className="flex-box gap-[3px]">
+                            <div className="flex items-center gap-[3px]">
                                 <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
                             </div>
                         )}
@@ -288,7 +281,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
 
                 return (
                     <div>
-                        <div className="flex-box between">
+                        <div className="flex items-center justify-between">
                             <div>
                                 <b>
                                     {goal.shards} of {targetShards}
@@ -326,15 +319,23 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                         dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
                     };
                     return (
-                        <div className="flex-box column center">
-                            <div className="flex-box gap5 items-center">
+                        <div className="flex flex-col items-center justify-center">
+                            <div className="flex items-center gap-1">
                                 <div>{data.priority}</div>
-                                <IconButton size="small" aria-label="Increase Priority" onClick={moveUp}>
-                                    <ArrowUpward fontSize="small" />
-                                </IconButton>
-                                <IconButton size="small" aria-label="Decrease Priority" onClick={moveDown}>
-                                    <ArrowDownward fontSize="small" />
-                                </IconButton>
+                                <Button
+                                    size="square-petite"
+                                    appearance="plain"
+                                    aria-label="Increase Priority"
+                                    onPress={moveUp}>
+                                    <ArrowUp data-slot="icon" />
+                                </Button>
+                                <Button
+                                    size="square-petite"
+                                    appearance="plain"
+                                    aria-label="Decrease Priority"
+                                    onPress={moveDown}>
+                                    <ArrowDown data-slot="icon" />
+                                </Button>
                             </div>
                         </div>
                     );
@@ -347,12 +348,18 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     if (data) {
                         return (
                             <>
-                                <IconButton onClick={() => menuItemSelect(data.goalId, 'edit')}>
-                                    <Edit fontSize="small" />
-                                </IconButton>
-                                <IconButton onClick={() => menuItemSelect(data.goalId, 'delete')}>
-                                    <DeleteForever fontSize="small" />
-                                </IconButton>
+                                <Button
+                                    size="square-petite"
+                                    appearance="plain"
+                                    onPress={() => menuItemSelect(data.goalId, 'edit')}>
+                                    <Pencil data-slot="icon" />
+                                </Button>
+                                <Button
+                                    size="square-petite"
+                                    appearance="plain"
+                                    onPress={() => menuItemSelect(data.goalId, 'delete')}>
+                                    <Trash2 data-slot="icon" />
+                                </Button>
                             </>
                         );
                     }
@@ -450,12 +457,12 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                     const { daysLeft, xpDaysLeft } = goalEstimate;
 
                     return (
-                        <div className="flex-box column gap-0.5 py-1">
+                        <div className="flex flex-col gap-0.5 py-1">
                             {/* Material / Shards Row: Render only if daysLeft is defined */}
                             {daysLeft !== undefined && (
                                 <AccessibleTooltip
                                     title={`${daysLeft} days for materials. Estimated date ${getEstimatedDate(daysLeft)}`}>
-                                    <div className="flex-box gap-[3px] leading-tight">
+                                    <div className="flex items-center gap-[3px] leading-tight">
                                         <span className="text-sm">{getEstimatedDate(daysLeft)}</span>
                                     </div>
                                 </AccessibleTooltip>
@@ -465,7 +472,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                             {xpDaysLeft !== undefined && (
                                 <AccessibleTooltip
                                     title={`${Math.ceil(xpDaysLeft)} days for XP. Estimated date ${getEstimatedDate(xpDaysLeft)}`}>
-                                    <div className="flex-box gap-[3px] leading-tight">
+                                    <div className="flex items-center gap-[3px] leading-tight">
                                         <span className="text-sm">{`XP: ${getEstimatedDate(xpDaysLeft)}`}</span>
                                     </div>
                                 </AccessibleTooltip>
@@ -545,14 +552,9 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                             params = `?charSnowprintId=${data.unitId}`;
                         }
                         return (
-                            <Button
-                                size="small"
-                                variant={'outlined'}
-                                component={Link}
-                                to={linkBase + params}
-                                target={'_self'}>
-                                <LinkIcon /> <span className="pl-[5px]">Go to Raids Table</span>
-                            </Button>
+                            <LinkButton size="small" appearance="outline" href={linkBase + params}>
+                                <Link2 data-slot="icon" /> Go to Raids Table
+                            </LinkButton>
                         );
                     }
                 },
@@ -581,13 +583,13 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
 
     return (
         <div
-            className="ag-theme-material min-h-[150px] w-full"
+            className="ag-theme-material density-compact min-h-[150px] w-full"
             style={{
                 height: baseRowHeight + rows.length * baseRowHeight,
             }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
-                theme={themeBalham}
+                theme="legacy"
                 defaultColDef={{
                     suppressMovable: true,
                     sortable: true,

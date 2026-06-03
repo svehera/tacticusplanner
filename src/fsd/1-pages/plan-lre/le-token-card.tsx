@@ -6,7 +6,7 @@ import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { RequirementStatus } from '@/fsd/3-features/lre';
 
 import { LeTokenCardRenderMode } from './lre.models';
-import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
+import { STATUS_LABELS, STATUS_TEXT_CLASSES } from './requirement-status-constants';
 import { TokenDisplay } from './token-estimation-service';
 
 interface CardProps {
@@ -103,8 +103,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                 }, COMPLETE_DELAY_MILLIS);
                             }}
                             disabled={isCompleting}
-                            style={{ color: STATUS_COLORS[RequirementStatus.MaybeClear] }}
-                            className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
+                            className={`text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50 ${STATUS_TEXT_CLASSES[RequirementStatus.MaybeClear]}`}
                             title="Potentially will not succeed with this token.">
                             {STATUS_LABELS[RequirementStatus.MaybeClear]}{' '}
                         </button>
@@ -118,8 +117,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                                 }, COMPLETE_DELAY_MILLIS);
                             }}
                             disabled={isCompleting}
-                            style={{ color: STATUS_COLORS[RequirementStatus.StopHere] }}
-                            className="text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50"
+                            className={`text-xs font-semibold uppercase transition-colors duration-500 focus:outline-none disabled:opacity-50 ${STATUS_TEXT_CLASSES[RequirementStatus.StopHere]}`}
                             title="Do not attempt this token.">
                             {STATUS_LABELS[RequirementStatus.StopHere]}
                         </button>

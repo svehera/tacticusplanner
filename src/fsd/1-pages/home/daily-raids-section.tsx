@@ -66,13 +66,13 @@ export function DailyRaidsSection() {
 
     return (
         <div className="w-full max-w-[350px]">
-            <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+            <p className="mb-1 text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                 Daily Raids
             </p>
             <div
                 role="button"
                 tabIndex={0}
-                className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors"
+                className="flex w-full cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-colors"
                 onClick={() => navigate(isMobile ? dailyRaidsMenuItem.routeMobile : dailyRaidsMenuItem.routeWeb)}
                 onKeyDown={event_ => {
                     if (event_.key === 'Enter' || event_.key === ' ') {
@@ -85,7 +85,7 @@ export function DailyRaidsSection() {
                         <div className="flex items-center gap-2.5 font-medium">
                             {dailyRaidsMenuItem.icon} {dailyRaidsMenuItem.label}
                         </div>
-                        <div className="flex shrink-0 flex-col items-end text-sm text-(--muted-fg)">
+                        <div className="flex shrink-0 flex-col items-end text-sm text-(--soft-fg)">
                             <span>
                                 {locationCount} location{locationCount === 1 ? '' : 's'}
                             </span>
@@ -100,14 +100,14 @@ export function DailyRaidsSection() {
                 </div>
                 <div className="px-2 py-3 text-sm sm:px-4">
                     {locationCount === 0 ? (
-                        <p className="text-xs text-(--muted-fg)">No raids recorded today.</p>
+                        <p className="text-xs text-(--soft-fg)">No raids recorded today.</p>
                     ) : (
                         <div className="grid grid-cols-1 gap-x-3 gap-y-1.5 min-[356px]:grid-cols-2">
                             {dailyRaids.raidedLocations.map(x => {
                                 const reward = getRewardDisplay(x);
                                 return (
                                     <div key={x.id} className="flex items-center gap-1">
-                                        <span className="w-6 shrink-0 text-right text-xs text-(--muted-fg) tabular-nums">
+                                        <span className="w-6 shrink-0 text-right text-xs text-(--soft-fg) tabular-nums">
                                             {x.raidsAlreadyPerformed}×
                                         </span>
                                         <ChipCampaignLocation

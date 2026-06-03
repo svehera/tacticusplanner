@@ -214,7 +214,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                             }}
                         />
                     )}
-                    <div className="absolute top-0 right-0 text-[15px] font-bold text-black dark:text-white">
+                    <div className="absolute top-0 right-0 text-[15px] font-bold text-(--fg)">
                         {Math.min(11, Math.max(1, level ?? 1))}
                     </div>
                 </div>
@@ -267,13 +267,13 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
     };
 
     return (
-        <div className="flex flex-col justify-start gap-2 overflow-hidden rounded-xl border border-gray-200 bg-white shadow-lg transition duration-300 hover:border-blue-500 hover:shadow-xl dark:border-gray-700 dark:bg-gray-800">
+        <div className="flex flex-col justify-start gap-2 overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-[border-color,box-shadow] duration-150 hover:border-(--primary)/50 hover:shadow-md">
             <div className="flex min-h-30 w-82 justify-start">
-                <div className="relative flex h-full w-18 flex-shrink-0 items-center justify-center bg-gray-100 p-1 dark:bg-gray-900">
+                <div className="relative flex h-full w-18 flex-shrink-0 items-center justify-center p-1">
                     {(staticChar || staticMow) && <CharacterPortraitImage icon={(staticChar || staticMow)!.icon} />}
                 </div>
 
-                <div className="flex flex-grow justify-start p-3 text-gray-900 dark:text-white">
+                <div className="flex flex-grow justify-start p-3 text-(--card-fg)">
                     <div className="justify-center space-y-1">
                         <ProgressionRow
                             diffFlag={rarityDiff}
@@ -294,12 +294,12 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                         )}
                     </div>
 
-                    <div className="mx-2 w-px bg-gray-200 dark:bg-gray-700"></div>
+                    <div className="mx-2 w-px bg-(--border)"></div>
 
                     <div className="flex flex-col items-start justify-start space-y-1 text-sm">
                         <div className="grid grid-cols-[auto_auto_auto_auto] items-start gap-x-1">
                             <span
-                                className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
+                                className="w-6 text-right font-medium text-(--soft-fg)"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
                                 {!!char && (
                                     <img
@@ -315,7 +315,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                 )}
                             </span>
                             <span
-                                className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
+                                className={`w-6 text-center font-extrabold text-(--primary) ${
                                     shouldShowAbilities() && activeDiff ? '' : 'opacity-0'
                                 }`}>
                                 {active1}
@@ -325,14 +325,14 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                 <ArrowForward fontSize="inherit" />
                             </div>
                             <span
-                                className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400"
+                                className="w-6 text-center font-extrabold text-(--primary)"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
                                 {active2}
                             </span>
 
                             {/* Passive/Secondary Ability Row */}
                             <span
-                                className="w-6 text-right font-medium text-gray-600 dark:text-gray-400"
+                                className="w-6 text-right font-medium text-(--soft-fg)"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
                                 {!!char && (
                                     <img
@@ -348,7 +348,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                 )}
                             </span>
                             <span
-                                className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
+                                className={`w-6 text-center font-extrabold text-(--primary) ${
                                     shouldShowAbilities() && passiveDiff ? '' : 'opacity-0'
                                 }`}>
                                 {passive1}
@@ -358,18 +358,16 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                 <ArrowForward fontSize="inherit" />
                             </div>
                             <span
-                                className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400"
+                                className="w-6 text-center font-extrabold text-(--primary)"
                                 style={{ opacity: shouldShowAbilities() ? 1 : 0 }}>
                                 {passive2}
                             </span>
 
                             {shouldShowXpLevel() && (
                                 <>
-                                    <span className="w-6 text-right font-medium text-gray-600 dark:text-gray-400">
-                                        XP:
-                                    </span>
+                                    <span className="w-6 text-right font-medium text-(--soft-fg)">XP:</span>
                                     <span
-                                        className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
+                                        className={`w-6 text-center font-extrabold text-(--primary) ${
                                             xpDiff ? '' : 'opacity-0'
                                         }`}>
                                         {char?.xpLevel ?? 0}
@@ -377,7 +375,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                     <div className={`flex w-4 justify-center ${xpDiff ? '' : 'opacity-0'}`}>
                                         <ArrowForward fontSize="inherit" />
                                     </div>
-                                    <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
+                                    <span className="w-6 text-center font-extrabold text-(--primary)">
                                         {diff.xpLevel ?? char?.xpLevel ?? 0}
                                     </span>
                                 </>
@@ -385,11 +383,11 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
 
                             {shouldShowShards() && (
                                 <>
-                                    <div className="w-6 text-right font-medium text-gray-600 dark:text-gray-400">
+                                    <div className="w-6 text-right font-medium text-(--soft-fg)">
                                         <MiscIcon icon="shard" width={24} height={20} />
                                     </div>
                                     <span
-                                        className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
+                                        className={`w-6 text-center font-extrabold text-(--primary) ${
                                             shardsDiff ? '' : 'opacity-0'
                                         }`}>
                                         {shards1}
@@ -397,19 +395,17 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                     <div className={`flex w-4 justify-center ${shardsDiff ? '' : 'opacity-0'}`}>
                                         <ArrowForward fontSize="inherit" />
                                     </div>
-                                    <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
-                                        {shards2}
-                                    </span>
+                                    <span className="w-6 text-center font-extrabold text-(--primary)">{shards2}</span>
                                 </>
                             )}
 
                             {shouldShowMythicShards() && (
                                 <>
-                                    <div className="w-6 text-right font-medium text-gray-600 dark:text-gray-400">
+                                    <div className="w-6 text-right font-medium text-(--soft-fg)">
                                         <MiscIcon icon="mythicShard" width={24} height={20} />
                                     </div>
                                     <span
-                                        className={`w-6 text-center font-extrabold text-blue-500 dark:text-blue-400 ${
+                                        className={`w-6 text-center font-extrabold text-(--primary) ${
                                             mythicShardsDiff ? '' : 'opacity-0'
                                         }`}>
                                         {mythicShards1}
@@ -417,7 +413,7 @@ export const RosterSnapshotsUnitDiffDetailed: React.FC<Props> = ({
                                     <div className={`flex w-4 justify-center ${mythicShardsDiff ? '' : 'opacity-0'}`}>
                                         <ArrowForward fontSize="inherit" />
                                     </div>
-                                    <span className="w-6 text-center font-extrabold text-blue-500 dark:text-blue-400">
+                                    <span className="w-6 text-center font-extrabold text-(--primary)">
                                         {mythicShards2}
                                     </span>
                                 </>

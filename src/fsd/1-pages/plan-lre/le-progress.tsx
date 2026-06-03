@@ -1,10 +1,11 @@
-﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary, Button, TextField } from '@mui/material';
+﻿import { Button, TextField } from '@mui/material';
 import { sum } from 'lodash';
-import React, { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
+
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
@@ -42,7 +43,7 @@ export const LeProgress = ({
 
     const teams = leSelectedTeams[legendaryEvent.id]?.teams ?? [];
 
-    const handleAccordionChange = (section: string) => (_event: React.SyntheticEvent, isExpanded: boolean) => {
+    const handleAccordionToggle = (section: string) => (isExpanded: boolean) => {
         setAccordionExpanded(isExpanded ? section : false);
     };
 
@@ -71,14 +72,13 @@ export const LeProgress = ({
             <div className="w-full">
                 <LeNextGoalProgress progress={progress} />
                 <Accordion
-                    slotProps={{ transition: { unmountOnExit: true } }}
                     expanded={accordionExpanded === 'missionAndNotes'}
-                    onChange={handleAccordionChange('missionAndNotes')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    onToggle={handleAccordionToggle('missionAndNotes')}>
+                    <AccordionHeader>
                         <span>Notes & Missions</span>
-                    </AccordionSummary>
+                    </AccordionHeader>
 
-                    <AccordionDetails className="flex-box wrap gap20">
+                    <AccordionBody className="flex flex-wrap gap-5">
                         <div className="flex-box column start min-w-[450px] flex-1">
                             <div className="w-full">
                                 <TextField
@@ -146,19 +146,18 @@ export const LeProgress = ({
                                 )}
                             </div>
                         </div>
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
 
                 <Accordion
-                    slotProps={{ transition: { unmountOnExit: true } }}
                     expanded={accordionExpanded === 'roundForecast'}
-                    onChange={handleAccordionChange('roundForecast')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
+                    onToggle={handleAccordionToggle('roundForecast')}>
+                    <AccordionHeader>
                         <span>Round Forecast</span>
-                    </AccordionSummary>
+                    </AccordionHeader>
 
-                    <AccordionDetails>
-                        <div className="mb-3 rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                    <AccordionBody>
+                        <div className="mb-3 rounded border border-(--border) bg-(--soft) px-3 py-2 text-xs text-(--soft-fg)">
                             Brought to you by cpunerd (Kharnage) (DUG-38-VAT) and BennTheHuman (WOW-90-OFT).
                         </div>
                         <LeRoundOutcomeForecast
@@ -167,22 +166,17 @@ export const LeProgress = ({
                             progress={progress}
                             tokenIncrements={tokenIncrements}
                         />
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
 
-                <Accordion
-                    slotProps={{ transition: { unmountOnExit: true } }}
-                    expanded={accordionExpanded === 'tracks'}
-                    onChange={handleAccordionChange('tracks')}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <div className="flex-box gap5">
-                            <span>
-                                Tracks Progress <span className="font-bold">({tracksTotalProgress})</span>
-                            </span>
-                        </div>
-                    </AccordionSummary>
+                <Accordion expanded={accordionExpanded === 'tracks'} onToggle={handleAccordionToggle('tracks')}>
+                    <AccordionHeader>
+                        <span>
+                            Tracks Progress <span className="font-bold">({tracksTotalProgress})</span>
+                        </span>
+                    </AccordionHeader>
 
-                    <AccordionDetails className="start box-border flex flex-wrap">
+                    <AccordionBody className="flex flex-wrap items-start">
                         {model.tracksProgress.map(track => (
                             <LreTrackOverallProgress
                                 key={track.trackId}
@@ -194,7 +188,7 @@ export const LeProgress = ({
                                 model={model}
                             />
                         ))}
-                    </AccordionDetails>
+                    </AccordionBody>
                 </Accordion>
             </div>
             <div className="h-[5px] w-full"></div>

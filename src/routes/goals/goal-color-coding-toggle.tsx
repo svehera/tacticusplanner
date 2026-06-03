@@ -1,6 +1,6 @@
-import Button from '@mui/material/Button';
 import React, { useCallback, useMemo } from 'react';
 
+import { Button } from '@/fsd/5-shared/ui';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 export type GoalColorMode = 'None' | 'Battle Pass Season' | 'Guild Raid Season';
@@ -40,7 +40,7 @@ export const GoalColorCodingToggle: React.FC<ColorCodingToggleProps> = ({ curren
 
     return (
         <AccessibleTooltip title={tooltipText}>
-            <Button onClick={handleClick} size="small" variant="contained">
+            <Button onPress={handleClick} size="small" appearance="outline">
                 {buttonLabel}
             </Button>
         </AccessibleTooltip>

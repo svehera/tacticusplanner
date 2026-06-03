@@ -1,9 +1,18 @@
 import SyncIcon from '@mui/icons-material/Sync';
-import { Button, IconButton } from '@mui/material';
 import React from 'react';
+
+import { Button } from '@/fsd/5-shared/ui';
 
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
 import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
+
+type Appearance = 'solid' | 'outline' | 'plain';
+
+const variantToAppearance: Record<string, Appearance> = {
+    contained: 'solid',
+    outlined: 'outline',
+    text: 'plain',
+};
 
 interface SyncButtonProps {
     showText: boolean;
@@ -17,37 +26,34 @@ const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, i
     const { syncWithTacticus } = useSyncWithTacticus();
 
     const sync = async () => {
-        console.log('Syncing with Tacticus...');
         await syncWithTacticus();
         onAfterSync?.();
     };
 
-    const handleClick = (event: React.MouseEvent) => {
-        event.stopPropagation();
-        sync();
-    };
-
     if (iconButton) {
         return (
-            <IconButton
-                color="inherit"
+            <Button
+                size="square-petite"
+                appearance="plain"
+                intent="secondary"
                 aria-label="Sync with Tacticus"
-                title="Sync with Tacticus"
-                onClick={handleClick}>
+                className={className}
+                onPress={() => sync()}>
                 <SyncIcon />
-            </IconButton>
+            </Button>
         );
     }
+
+    const appearance = variantToAppearance[variant ?? 'contained'] ?? 'solid';
 
     return (
         <Button
             size="small"
+            intent="primary"
+            appearance={appearance}
             aria-label="Sync with Tacticus"
-            title="Sync with Tacticus"
-            variant={variant === undefined ? 'contained' : variant}
-            color={'primary'}
             className={className}
-            onClick={handleClick}>
+            onPress={() => sync()}>
             <SyncIcon /> {showText && 'Sync'}
         </Button>
     );

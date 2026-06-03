@@ -1,11 +1,7 @@
-﻿import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
+
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 
 const faqData = {
     'Getting Started': [
@@ -47,13 +43,7 @@ const faqData = {
 
 export const Faq = () => {
     return (
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'column',
-                margin: 'auto',
-                maxWidth: isMobile ? undefined : 800,
-            }}>
+        <div className={`flex flex-col ${isMobile ? '' : 'mx-auto max-w-[800px]'}`}>
             <p>
                 Below you&apos;ll find answers to the most common questions you may have on the Tacticus Planner app. If
                 you still can&apos;t find the answer you&apos;re looking for, just{' '}
@@ -64,16 +54,16 @@ export const Faq = () => {
                     <h2>{category}</h2>
                     {faqs.map(({ question, answer }) => (
                         <Accordion key={question}>
-                            <AccordionSummary expandIcon={<ArrowDownwardIcon />}>
-                                <Typography>Q: {question}</Typography>
-                            </AccordionSummary>
-                            <AccordionDetails>
-                                <Typography>A: {answer}</Typography>
-                            </AccordionDetails>
+                            <AccordionHeader>
+                                <span className="text-sm font-medium">Q: {question}</span>
+                            </AccordionHeader>
+                            <AccordionBody>
+                                <p className="text-sm">A: {answer}</p>
+                            </AccordionBody>
                         </Accordion>
                     ))}
                 </div>
             ))}
-        </Box>
+        </div>
     );
 };

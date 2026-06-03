@@ -1,22 +1,7 @@
-﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
-import {
-    Badge,
-    FormControl,
-    FormControlLabel,
-    MenuItem,
-    Select,
-    SelectChangeEvent,
-    Switch,
-    TextField,
-} from '@mui/material';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel';
-import { ColDef, IRowNode, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ColDef, IRowNode, AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
-import { ChangeEvent, useCallback, useContext, useMemo, useRef, useState, useEffect } from 'react';
+import { useCallback, useContext, useMemo, useRef, useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules
@@ -24,11 +9,27 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
-import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
+import {
+    Accordion,
+    AccordionBody,
+    AccordionHeader,
+    Button,
+    TextField,
+    RankSelect,
+    RaritySelect,
+    Separator,
+    StarsSelect,
+} from '@/fsd/5-shared/ui';
+import { MiscIcon, ComponentImage, TraitImage } from '@/fsd/5-shared/ui/icons';
+import { Select, SelectMulti } from '@/fsd/5-shared/ui/selects';
+import { Switch } from '@/fsd/5-shared/ui/switch';
 
-import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { useCharacters } from './characters-column-defs';
+
+const renderAnyOption = (opt: string) => (opt === '' ? 'Any' : opt);
+const attackTypeLabel = (opt: string) => (opt === '' ? 'Any' : opt === 'melee' ? 'Melee Only' : 'Range Only');
 
 export const LearnCharacters = () => {
     const gridReference = useRef<AgGridReact<ICharacter2>>(null);
@@ -49,7 +50,6 @@ export const LearnCharacters = () => {
 
     const [onlyUnlocked, setOnlyUnlocked] = useState<boolean>(false);
     const [rowCount, setRowCount] = useState(0);
-    const [showFilters, setShowFilters] = useState(false);
 
     type Filter = {
         name: string;
@@ -76,7 +76,7 @@ export const LearnCharacters = () => {
     });
 
     useEffect(() => {
-        const damageTypes = searchParams.getAll('damageTypes'); // supports multiple ?damageTypes=... values
+        const damageTypes = searchParams.getAll('damageTypes');
         const name = searchParams.get('name');
         const minHits = searchParams.get('minHits');
         const maxHits = searchParams.get('maxHits');
@@ -97,7 +97,6 @@ export const LearnCharacters = () => {
             alliance: alliance,
         };
         setFilter(newFilter);
-        if (Object.values(newFilter).some(v => v !== '')) setShowFilters(true);
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
@@ -224,7 +223,7 @@ export const LearnCharacters = () => {
                     return true;
                 }
 
-                const nodeTraits = (node.data?.traits ?? []) as unknown as string[]; // stored as enum keys
+                const nodeTraits = (node.data?.traits ?? []) as unknown as string[];
                 return filter.traits.every(label => {
                     const key = getTraitStringFromLabel(label);
                     if (!key) return false;
@@ -326,6 +325,7 @@ export const LearnCharacters = () => {
             traits: [],
             alliance: [],
         });
+        setOnlyUnlocked(false);
         const params = new URLSearchParams(searchParams);
         params.delete('minHits');
         params.delete('maxHits');
@@ -339,221 +339,221 @@ export const LearnCharacters = () => {
         navigate({ search: params.toString() }, { replace: true });
     };
 
+    const hasAnyFilter = filtersCount > 0 || onlyUnlocked;
+
     return (
-        <div>
-            <div className="flex-box gap20 wrap">
-                <FormControlLabel
-                    label="Only unlocked"
-                    control={
-                        <Switch
-                            checked={onlyUnlocked}
-                            onChange={event => setOnlyUnlocked(event.target.checked)}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    }
-                />
-                <TextField
-                    style={{ minWidth: 140 }}
-                    label="Quick Filter"
-                    variant="outlined"
-                    onChange={(event: ChangeEvent<HTMLInputElement>) => handleFilterChange('name', event.target.value)}
-                    value={filter.name}
-                />
-                <div className="flex-box gap10">
-                    {filtersCount > 0 ? (
-                        <>
-                            <Badge badgeContent={filtersCount} color="warning">
-                                <IconButton onClick={() => setShowFilters(value => !value)}>
-                                    <FilterAltIcon />
-                                </IconButton>
-                            </Badge>
-                            <Button color="error" onClick={resetFilters}>
-                                Clear Filters
-                            </Button>
-                        </>
-                    ) : (
-                        <Button variant="outlined" onClick={() => setShowFilters(value => !value)}>
-                            Filter <FilterAltOutlinedIcon />
-                        </Button>
+        <div className="flex h-[calc(100vh-80px)] flex-col gap-4 py-4">
+            {/* ── Filter panel ──────────────────────────────────────────────── */}
+            <Accordion defaultExpanded>
+                <AccordionHeader>
+                    <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">Filters</span>
+                    {filtersCount > 0 && (
+                        <span className="rounded-full bg-(--primary) px-1.5 py-0.5 text-[10px] font-bold text-(--primary-fg)">
+                            {filtersCount}
+                        </span>
                     )}
-                    <span>
+                    <div
+                        className="flex flex-1 items-center justify-end gap-3"
+                        onClick={event_ => event_.stopPropagation()}>
+                        <Button
+                            appearance="outline"
+                            intent="warning"
+                            size="extra-small"
+                            isDisabled={!hasAnyFilter}
+                            onPress={resetFilters}>
+                            Clear
+                        </Button>
+                        <Switch isSelected={onlyUnlocked} onChange={setOnlyUnlocked}>
+                            Only unlocked
+                        </Switch>
+                    </div>
+                    <span className="text-xs text-(--soft-fg)">
                         ({rowCount} of {rows.length})
                     </span>
-                </div>
-            </div>
-            <br />
-            {showFilters && (
-                <>
-                    <div className="flex-box gap10 wrap">
-                        <FormControl style={{ minWidth: '110px' }}>
-                            <InputLabel>Min Hits</InputLabel>
-                            <Select<number>
-                                label="Min Hits"
-                                value={filter.minHits}
-                                onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange(
-                                        'minHits',
-                                        value.target.value === '' ? '' : Number(value.target.value)
-                                    )
-                                }>
-                                <MenuItem value="">
-                                    <span>Any</span>
-                                </MenuItem>
-                                {hitsOptions.map(hit => (
-                                    <MenuItem key={hit} value={hit}>
-                                        <span>{hit}</span>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                </AccordionHeader>
 
-                        <FormControl style={{ minWidth: '110px' }}>
-                            <InputLabel>Max Hits</InputLabel>
-                            <Select<number>
-                                label="Max Hits"
-                                value={filter.maxHits}
-                                onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange(
-                                        'maxHits',
-                                        value.target.value === '' ? '' : Number(value.target.value)
-                                    )
-                                }>
-                                <MenuItem value="">
-                                    <span>Any</span>
-                                </MenuItem>
-                                {hitsOptions.map(hit => (
-                                    <MenuItem key={hit} value={hit}>
-                                        <span>{hit}</span>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                <AccordionBody>
+                    <div className="flex flex-wrap items-start gap-4">
+                        <div className="min-w-[160px] flex-1">
+                            <TextField
+                                label="Quick Filter"
+                                placeholder="Character name…"
+                                value={filter.name}
+                                onChange={value => handleFilterChange('name', value)}
+                            />
+                        </div>
 
-                        <FormControl style={{ minWidth: '130px' }}>
-                            <InputLabel>Attack Type</InputLabel>
+                        <div className="min-w-[150px] flex-1">
                             <Select<string>
-                                label="Attack Type"
+                                options={['', 'melee', 'range']}
                                 value={filter.attackType}
-                                onChange={(value: SelectChangeEvent<string>) =>
-                                    handleFilterChange('attackType', value.target.value)
-                                }>
-                                <MenuItem value="">
-                                    <span>Any</span>
-                                </MenuItem>
-                                <MenuItem value="melee">
-                                    <span>Melee Only</span>
-                                </MenuItem>
-                                <MenuItem value="range">
-                                    <span>Range Only</span>
-                                </MenuItem>
-                            </Select>
-                        </FormControl>
+                                onChange={v => handleFilterChange('attackType', v)}
+                                label="Attack Type"
+                                renderOption={attackTypeLabel}
+                                renderValue={attackTypeLabel}
+                            />
+                        </div>
 
-                        <FormControl style={{ minWidth: '120px' }}>
-                            <InputLabel>Movement</InputLabel>
-                            <Select<number>
+                        <div className="min-w-[120px] flex-1">
+                            <Select<string>
+                                options={['', ...hitsOptions]}
+                                value={String(filter.minHits)}
+                                onChange={v => handleFilterChange('minHits', v === '' ? '' : Number(v))}
+                                label="Min Hits"
+                                renderOption={renderAnyOption}
+                                renderValue={renderAnyOption}
+                            />
+                        </div>
+
+                        <div className="min-w-[120px] flex-1">
+                            <Select<string>
+                                options={['', ...hitsOptions]}
+                                value={String(filter.maxHits)}
+                                onChange={v => handleFilterChange('maxHits', v === '' ? '' : Number(v))}
+                                label="Max Hits"
+                                renderOption={renderAnyOption}
+                                renderValue={renderAnyOption}
+                            />
+                        </div>
+
+                        <div className="min-w-[120px] flex-1">
+                            <Select<string>
+                                options={['', ...movementOptions]}
+                                value={String(filter.movement)}
+                                onChange={v => handleFilterChange('movement', v === '' ? '' : Number(v))}
                                 label="Movement"
-                                value={filter.movement}
-                                onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange(
-                                        'movement',
-                                        value.target.value === '' ? '' : Number(value.target.value)
-                                    )
-                                }>
-                                <MenuItem value="">
-                                    <span>Any</span>
-                                </MenuItem>
-                                {movementOptions.map(hit => (
-                                    <MenuItem key={hit} value={hit}>
-                                        <span>{hit}</span>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                                renderOption={renderAnyOption}
+                                renderValue={renderAnyOption}
+                            />
+                        </div>
 
-                        <FormControl style={{ minWidth: '110px' }}>
-                            <InputLabel>Distance</InputLabel>
-                            <Select<number>
+                        <div className="min-w-[120px] flex-1">
+                            <Select<string>
+                                options={['', ...distanceOptions]}
+                                value={String(filter.distance)}
+                                onChange={v => handleFilterChange('distance', v === '' ? '' : Number(v))}
                                 label="Distance"
-                                value={filter.distance}
-                                onChange={(value: SelectChangeEvent<number>) =>
-                                    handleFilterChange(
-                                        'distance',
-                                        value.target.value === '' ? '' : Number(value.target.value)
-                                    )
-                                }>
-                                <MenuItem value="">
-                                    <span>Any</span>
-                                </MenuItem>
-                                {distanceOptions.map(hit => (
-                                    <MenuItem key={hit} value={hit}>
-                                        <span>{hit}</span>
-                                    </MenuItem>
-                                ))}
-                            </Select>
-                        </FormControl>
+                                renderOption={renderAnyOption}
+                                renderValue={renderAnyOption}
+                            />
+                        </div>
 
-                        <MultipleSelectCheckmarks
-                            maxWidth={250}
-                            groupByFirstLetter
-                            placeholder="Damage Types"
-                            selectedValues={filter.damageTypes}
-                            values={damageTypesOptions}
-                            selectionChanges={(value: string[]) => handleFilterChange('damageTypes', value)}
-                        />
-                        <MultipleSelectCheckmarks
-                            maxWidth={250}
-                            groupByFirstLetter
-                            placeholder="Traits"
-                            // @ts-expect-error FIXME: The type of `filter.traits` is looser than the values provided
-                            selectedValues={filter.traits}
-                            values={traitsOptions}
-                            selectionChanges={(value: string[]) => handleFilterChange('traits', value)}
-                        />
-                        <MultipleSelectCheckmarks
-                            maxWidth={250}
-                            placeholder="Alliance"
-                            // @ts-expect-error FIXME: The type of `filter.alliance` is looser than the values provided
-                            selectedValues={filter.alliance}
-                            values={Object.values(Alliance)}
-                            selectionChanges={(value: string[]) => handleFilterChange('alliance', value)}
-                        />
+                        <div className="min-w-[200px] flex-1">
+                            <SelectMulti<string>
+                                options={damageTypesOptions}
+                                value={filter.damageTypes}
+                                onChange={v => handleFilterChange('damageTypes', v)}
+                                label="Damage Types"
+                                placeholder="All damage types"
+                                renderOption={dt => (
+                                    <div className="flex items-center gap-2">
+                                        <MiscIcon
+                                            icon={`damage${dt.replaceAll(' ', '')}` as never}
+                                            width={20}
+                                            height={20}
+                                        />
+                                        <span>{dt}</span>
+                                    </div>
+                                )}
+                                renderValue={selected => (
+                                    <div className="flex flex-wrap items-center gap-1">
+                                        {selected.map(dt => (
+                                            <MiscIcon
+                                                key={dt}
+                                                icon={`damage${dt.replaceAll(' ', '')}` as never}
+                                                width={18}
+                                                height={18}
+                                            />
+                                        ))}
+                                    </div>
+                                )}
+                            />
+                        </div>
+
+                        <div className="min-w-[200px] flex-1">
+                            <SelectMulti<string>
+                                options={traitsOptions}
+                                value={filter.traits}
+                                onChange={v => handleFilterChange('traits', v)}
+                                label="Traits"
+                                placeholder="All traits"
+                                renderOption={t => (
+                                    <div className="flex items-center gap-2">
+                                        <TraitImage trait={t as Trait} width={20} height={20} />
+                                        <span>{t}</span>
+                                    </div>
+                                )}
+                                renderValue={selected => (
+                                    <div className="flex flex-wrap items-center gap-1">
+                                        {selected.map(t => (
+                                            <TraitImage key={t} trait={t as Trait} width={18} height={18} />
+                                        ))}
+                                    </div>
+                                )}
+                            />
+                        </div>
+
+                        <div className="min-w-[200px] flex-1">
+                            <SelectMulti<string>
+                                options={Object.values(Alliance)}
+                                value={filter.alliance}
+                                onChange={v => handleFilterChange('alliance', v)}
+                                label="Alliance"
+                                placeholder="All alliances"
+                                renderOption={a => (
+                                    <div className="flex items-center gap-2">
+                                        <ComponentImage alliance={a as Alliance} size="small" />
+                                        <span>{a}</span>
+                                    </div>
+                                )}
+                                renderValue={selected => (
+                                    <div className="flex flex-wrap items-center gap-1">
+                                        {selected.map(a => (
+                                            <ComponentImage key={a} alliance={a as Alliance} size="small" />
+                                        ))}
+                                    </div>
+                                )}
+                            />
+                        </div>
                     </div>
-                    <br />
-                </>
-            )}
 
-            <div className="justify-left flex gap-[3px]">
-                <div style={{ width: 200 }}>
-                    <RaritySelect
-                        label={'Target Rarity'}
-                        rarityValues={getEnumValues(Rarity)}
-                        value={targetRarity}
-                        valueChanges={value => onTargetRarityChanged(value)}
-                    />
-                </div>
-                <div style={{ width: 200 }}>
-                    <StarsSelect
-                        label={'Target Stars'}
-                        starsValues={starValues}
-                        value={targetStars}
-                        valueChanges={value => onTargetStarsChanged(value)}
-                    />
-                </div>
-                <div style={{ width: 200 }}>
-                    <RankSelect
-                        label={'Target Rank'}
-                        rankValues={rankValues}
-                        value={targetRank}
-                        valueChanges={value => onTargetRankChanged(value)}
-                    />
-                </div>
-            </div>
-            <div className="ag-theme-material" style={{ height: 'calc(100vh - 180px)', width: '100%' }}>
+                    {/* Target stats */}
+                    <Separator className="my-4">Target Stats</Separator>
+                    <div className="flex flex-wrap items-start gap-4">
+                        <div className="min-w-[160px] flex-1">
+                            <RaritySelect
+                                label="Target Rarity"
+                                rarityValues={getEnumValues(Rarity)}
+                                value={targetRarity}
+                                valueChanges={value => onTargetRarityChanged(value)}
+                            />
+                        </div>
+                        <div className="min-w-[160px] flex-1">
+                            <StarsSelect
+                                label="Target Stars"
+                                starsValues={starValues}
+                                value={targetStars}
+                                valueChanges={value => onTargetStarsChanged(value)}
+                            />
+                        </div>
+                        <div className="min-w-[160px] flex-1">
+                            <RankSelect
+                                label="Target Rank"
+                                rankValues={rankValues}
+                                value={targetRank}
+                                valueChanges={value => onTargetRankChanged(value)}
+                            />
+                        </div>
+                    </div>
+                </AccordionBody>
+            </Accordion>
+
+            {/* ── Grid ──────────────────────────────────────────────────────── */}
+            <div className="ag-theme-material density-compact min-h-0 flex-1">
                 <AgGridReact
                     ref={gridReference}
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     suppressCellFocus={true}
                     defaultColDef={defaultColDefinition}
                     columnDefs={columnDefs}

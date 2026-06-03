@@ -1,22 +1,8 @@
-﻿import CampaignIcon from '@mui/icons-material/Campaign';
+import CampaignIcon from '@mui/icons-material/Campaign';
 import MenuIcon from '@mui/icons-material/Menu';
-import {
-    Badge,
-    Divider,
-    ListSubheader,
-    Menu,
-    MenuItem,
-    ListItemIcon,
-    ListItemText,
-    Typography,
-    Tooltip,
-    useMediaQuery,
-} from '@mui/material';
-import AppBar from '@mui/material/AppBar';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import Toolbar from '@mui/material/Toolbar';
+import { Divider, ListSubheader, Menu, MenuItem, ListItemIcon, ListItemText, useMediaQuery } from '@mui/material';
+import MuiButton from '@mui/material/Button';
+import { Info } from 'lucide-react';
 import React, { useMemo, useState } from 'react';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
@@ -26,14 +12,15 @@ import {
     menuItemById,
     miscMenuItems,
     planSubMenu,
-    planSubMenuWeb,
     // eslint-disable-next-line import-x/no-internal-modules
 } from '@/models/menu-items'; // TODO refactor for FSD
 // eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
 import {
+    Button,
     FlexBox,
+    LazyTooltip,
     MenuItemTP,
     bmcLink,
     discordInvitationLink,
@@ -41,12 +28,12 @@ import {
     usePopUpControls,
 } from '@/fsd/5-shared/ui';
 import { DiscordIcon, BmcIcon } from '@/fsd/5-shared/ui/icons';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
+import { usePageMeta } from '@/fsd/5-shared/ui/page-meta';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
 import { ThemeSwitch } from '@/fsd/3-features/theme-switch';
 import { WhatsNewDialog } from 'src/fsd/3-features/whats-new';
-
-import { AppBarSubMenu } from './app-bar-sub-menu';
 
 interface Props {
     headerTitle: string;
@@ -64,10 +51,8 @@ const generateMenuItems = (items: MenuItemTP[]) =>
 
 const renderMenuGroup = (label: string, items: MenuItemTP[]) => (
     <>
-        <ListSubheader disableSticky disableGutters sx={{ pl: 1, lineHeight: 1.75 }}>
-            <Typography variant="body2" className="tracking-wide text-gray-500 uppercase">
-                {label}
-            </Typography>
+        <ListSubheader disableSticky disableGutters className="pl-2 leading-[1.75]">
+            <span className="text-sm tracking-wide text-(--soft-fg) uppercase">{label}</span>
         </ListSubheader>
         {generateMenuItems(items)}
     </>
@@ -98,15 +83,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         }
     }, [location.pathname, headerTitle]);
 
-    const nav = isTabletOrMobile ? undefined : (
-        <div className="me-5 flex items-center">
-            <AppBarSubMenu rootLabel={'Input'} options={inputSubMenu} />
-
-            <AppBarSubMenu rootLabel={'Plan'} options={planSubMenuWeb} />
-
-            <AppBarSubMenu rootLabel={'Learn'} options={learnSubMenu} />
-        </div>
-    );
+    const meta = usePageMeta();
 
     const navigationMenu = (
         <Menu
@@ -118,7 +95,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
             MenuListProps={{
                 'aria-labelledby': 'basic-button',
             }}>
-            {renderMenuGroup('Input', inputSubMenu)}
+            {renderMenuGroup('My Game', inputSubMenu)}
 
             <Divider />
 
@@ -126,7 +103,7 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
 
             <Divider />
 
-            {renderMenuGroup('Learn', learnSubMenu)}
+            {renderMenuGroup('Library', learnSubMenu)}
 
             <Divider />
 
@@ -158,50 +135,93 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
     );
 
     return (
-        <Box sx={{ flexGrow: 1 }}>
-            <AppBar position="static">
-                <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
+        <>
+            <div className="flex h-[60px] flex-shrink-0 items-center justify-between border-b border-(--border) bg-(--sidebar) px-4 text-(--fg)">
+                {isTabletOrMobile ? (
                     <FlexBox onClick={() => navigate('./home')} className="cursor-pointer">
-                        <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
-                        <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
-                            {title}
-                        </Typography>
+                        <img src="/android-chrome-192x192.png" height="40px" width="40px" alt="logo" />
+                        <span className="text-xl font-bold">{title}</span>
                     </FlexBox>
-                    <div className="flex items-center">
-                        {nav}
-                        <IconButton color="inherit" onClick={() => navigate('./faq')}>
-                            <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
-                        </IconButton>
-                        <Tooltip title="Join Tacticus Planner community on Discord">
-                            <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
-                                <DiscordIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Buy me a trooper">
-                            <IconButton color="inherit" component={Link} to={bmcLink} target={'_blank'}>
-                                <BmcIcon />
-                            </IconButton>
-                        </Tooltip>
-                        <Tooltip title="Sync with the Tacticus API">
-                            <SyncButton showText={false} iconButton={true} />
-                        </Tooltip>
-                        <ThemeSwitch />
+                ) : (
+                    <nav className="flex items-center gap-2 pl-4 whitespace-nowrap">
+                        {meta.section && (
+                            <span className="text-[13px] tracking-[.04em] text-(--soft-fg)">{meta.section}&nbsp;/</span>
+                        )}
+                        <h1 className="m-0 text-lg font-bold tracking-[-0.01em] text-(--fg)">{meta.title}</h1>
+                        {meta.description && (
+                            <LazyTooltip title={meta.description}>
+                                <button className="inline-flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-(--soft-fg) transition hover:text-(--fg)">
+                                    <Info size={14} />
+                                </button>
+                            </LazyTooltip>
+                        )}
+                    </nav>
+                )}
+                <div className="flex items-center">
+                    <LazyTooltip title="Frequently Asked Questions">
                         <Button
-                            id="basic-button"
-                            aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
-                            aria-haspopup="true"
-                            aria-expanded={navigationMenuControls.open ? 'true' : undefined}
-                            color="inherit"
-                            onClick={navigationMenuControls.handleClick}>
-                            <Badge color="secondary" variant="dot" invisible={seenNewVersion}>
-                                <MenuIcon />
-                            </Badge>
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            onPress={() => navigate('./faq')}>
+                            {menuItemById.faq.icon}
                         </Button>
-                        <UserMenu />
-                        {navigationMenu}
-                    </div>
-                </Toolbar>
-            </AppBar>
+                    </LazyTooltip>
+                    <LazyTooltip title="Join Tacticus Planner community on Discord">
+                        <LinkButton
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            href={discordInvitationLink}
+                            target="_blank">
+                            <DiscordIcon />
+                        </LinkButton>
+                    </LazyTooltip>
+                    <LazyTooltip title="Buy me a trooper">
+                        <LinkButton
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            href={bmcLink}
+                            target="_blank">
+                            <BmcIcon />
+                        </LinkButton>
+                    </LazyTooltip>
+                    <LazyTooltip title="Sync with the Tacticus API">
+                        <SyncButton showText={false} iconButton={true} />
+                    </LazyTooltip>
+                    <ThemeSwitch />
+                    <LazyTooltip title="What's new">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            intent="secondary"
+                            onPress={() => setShowWhatsNew(true)}>
+                            <span className="relative">
+                                <CampaignIcon />
+                                {!seenNewVersion && (
+                                    <span className="absolute -top-0.5 -right-0.5 size-2 rounded-full bg-(--primary)" />
+                                )}
+                            </span>
+                        </Button>
+                    </LazyTooltip>
+                    {isTabletOrMobile && (
+                        <>
+                            <MuiButton
+                                id="basic-button"
+                                aria-controls={navigationMenuControls.open ? 'basic-menu' : undefined}
+                                aria-haspopup="true"
+                                aria-expanded={navigationMenuControls.open ? 'true' : undefined}
+                                color="inherit"
+                                onClick={navigationMenuControls.handleClick}>
+                                <MenuIcon />
+                            </MuiButton>
+                            <UserMenu />
+                            {navigationMenu}
+                        </>
+                    )}
+                </div>
+            </div>
             <WhatsNewDialog
                 isOpen={showWhatsNew}
                 onClose={() => {
@@ -209,6 +229,6 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                     setShowWhatsNew(false);
                 }}
             />
-        </Box>
+        </>
     );
 };

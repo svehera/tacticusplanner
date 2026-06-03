@@ -31,7 +31,7 @@ export const CharacterGrid: React.FC<Props> = ({
             {showHeader && (
                 <div className="mb-4 flex justify-between">
                     <h3 className="font-bold">Characters</h3>
-                    <span className="text-xs text-slate-500">Showing {characters.length} units</span>
+                    <span className="text-xs text-(--soft-fg)">Showing {characters.length} units</span>
                 </div>
             )}
             <div className="flex flex-wrap gap-4">
@@ -56,7 +56,7 @@ export const CharacterGrid: React.FC<Props> = ({
                         </div>
                         {deployedUnitIds?.includes(char.snowprintId) && (
                             <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
-                                <div className="rounded-full bg-slate-950/70 p-1 shadow-lg ring-1 ring-white/20 dark:bg-slate-100/20">
+                                <div className="rounded-full bg-(--fg)/70 p-1 shadow-lg ring-1 ring-(--border)/50">
                                     <MiscIcon icon="deployment" width={36} height={36} />
                                 </div>
                             </div>
