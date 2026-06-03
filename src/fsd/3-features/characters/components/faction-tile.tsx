@@ -48,7 +48,7 @@ export const FactionsTile = ({
     }, [faction.units.length]);
     const { showBsValue, showPower } = useContext(CharactersViewContext);
     return (
-        <div className="flex max-w-[525px] min-w-[375px] flex-col overflow-hidden rounded-xl bg-(--muted) max-[500px]:max-w-[375px] lg:max-w-[800px]">
+        <div className="flex max-w-[525px] min-w-[375px] flex-col overflow-hidden rounded-xl bg-(--soft) max-[500px]:max-w-[375px] lg:max-w-[800px]">
             {/* Modern Card Header */}
             <div
                 className="flex items-center justify-between px-3 py-2 font-medium text-white shadow-md"

@@ -5,7 +5,6 @@
     ICellRendererParams,
     RowClassParams,
     RowStyle,
-    themeBalham,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
@@ -119,11 +118,11 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
 
     return (
         <div
-            className="ag-theme-material auto-teams min-h-[230px] w-full border-2 border-solid border-black"
+            className="ag-theme-material density-compact auto-teams min-h-[230px] w-full border-2 border-solid border-black"
             style={{ height: rows.length * 35, minWidth: isMobile ? '750px' : '' }}>
             <AgGridReact
                 modules={[AllCommunityModule]}
-                theme={themeBalham}
+                theme="legacy"
                 ref={gridReference}
                 rowData={rows}
                 rowHeight={35}

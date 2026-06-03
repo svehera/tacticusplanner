@@ -1,7 +1,7 @@
-import { ArrowForward, Info } from '@mui/icons-material';
+﻿import { ArrowForward, Info } from '@mui/icons-material';
 import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
-import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { orderBy } from 'lodash';
 import { useContext, useMemo, useState } from 'react';
@@ -13,11 +13,11 @@ import { StoreContext } from '@/reducers/store.provider';
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, RankSelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
-import { RankSelect, ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import {
     IMaterialFull,
@@ -27,6 +27,15 @@ import {
 } from '@/fsd/4-entities/upgrade';
 
 import { RankLookupService } from './rank-lookup.service';
+
+const trackRankLookupSearch = (action: string, status?: 'applied' | 'cleared') => {
+    trackEvent('search', {
+        feature: 'rank_lookup',
+        action,
+        search_location: 'rank_lookup_inputs',
+        status,
+    });
+};
 
 export const RankLookup = () => {
     const { characters, campaignsProgress } = useContext(StoreContext);
@@ -215,11 +224,7 @@ export const RankLookup = () => {
     ]);
 
     const updateRankStart = (value: number) => {
-        trackEvent('search', {
-            feature: 'rank_lookup',
-            action: 'change_rank_start',
-            search_location: 'rank_lookup_inputs',
-        });
+        trackRankLookupSearch('change_rank_start');
         setRankStart(value);
 
         setSearchParameters(current => {
@@ -229,11 +234,7 @@ export const RankLookup = () => {
     };
 
     const updateRankEnd = (value: number) => {
-        trackEvent('search', {
-            feature: 'rank_lookup',
-            action: 'change_rank_end',
-            search_location: 'rank_lookup_inputs',
-        });
+        trackRankLookupSearch('change_rank_end');
         setRankEnd(value);
 
         setSearchParameters(current => {
@@ -243,12 +244,7 @@ export const RankLookup = () => {
     };
 
     const updateRankPoint5 = (value: boolean) => {
-        trackEvent('search', {
-            feature: 'rank_lookup',
-            action: 'toggle_rank_point5',
-            search_location: 'rank_lookup_inputs',
-            status: value ? 'applied' : 'cleared',
-        });
+        trackRankLookupSearch('toggle_rank_point5', value ? 'applied' : 'cleared');
         setRankPoint5(value);
 
         setSearchParameters(current => {
@@ -321,11 +317,7 @@ export const RankLookup = () => {
                     unit={character ?? null}
                     options={characters}
                     onUnitChange={value => {
-                        trackEvent('search', {
-                            feature: 'rank_lookup',
-                            action: 'select_unit',
-                            search_location: 'rank_lookup_inputs',
-                        });
+                        trackRankLookupSearch('select_unit');
                         setCharacter(value ?? undefined);
 
                         setSearchParameters(current => {
@@ -389,10 +381,10 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div className="ag-theme-material h-[800px] w-full">
+                <div className="ag-theme-material density-compact h-[800px] w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         suppressCellFocus={true}
                         defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                         rowHeight={60}

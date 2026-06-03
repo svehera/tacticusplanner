@@ -66,13 +66,17 @@ export interface AnalyticsEventParameters {
     [key: string]: AnalyticsParameterValue;
 }
 
+const measurementId = import.meta.env.VITE_GTAG;
+
 const analytics = Analytics({
     app: 'Tacticus Planner',
-    plugins: [
-        googleAnalytics({
-            measurementIds: [import.meta.env.VITE_GTAG],
-        }),
-    ],
+    plugins: measurementId
+        ? [
+              googleAnalytics({
+                  measurementIds: [measurementId],
+              }),
+          ]
+        : [],
 });
 
 export function getRouteGroup(pathname = globalThis.location?.pathname ?? ''): AnalyticsRouteGroup {

@@ -47,7 +47,7 @@ function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags
 
     return (
         <div className="flex w-full flex-col gap-1">
-            <span className="text-sm font-semibold">Other guilds with whom to combine leaderboards</span>
+            <span className="text-sm font-semibold">Share leaderboards with these guilds</span>
             <div className="flex items-center gap-2">
                 <input
                     type="text"
@@ -277,7 +277,12 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                         type="checkbox"
                                         className="size-4 cursor-pointer accent-blue-600"
                                         checked={currentShareInGameName}
-                                        onChange={event => setCurrentShareInGameName(event.target.checked)}
+                                        onChange={event => {
+                                            setCurrentShareInGameName(event.target.checked);
+                                            if (!event.target.checked) {
+                                                setCurrentShareRosterData(false);
+                                            }
+                                        }}
                                     />
                                     <span className="text-sm">Share in-game player name with guild</span>
                                 </label>
@@ -287,6 +292,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                         className="size-4 cursor-pointer accent-blue-600"
                                         checked={currentShareRosterData}
                                         onChange={event => setCurrentShareRosterData(event.target.checked)}
+                                        disabled={currentShareInGameName === false}
                                     />
                                     <span className="text-sm">Share roster with guild</span>
                                 </label>

@@ -1,6 +1,6 @@
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import React from 'react';
+
+import { Switch } from '@/fsd/5-shared/ui/switch';
 
 import { SortMode } from './campaign-progression.utils';
 
@@ -26,9 +26,9 @@ export const CampaignProgressionControls: React.FC<Props> = ({
     setHideCE,
 }) => {
     return (
-        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-(--border) bg-(--card-bg) px-3 py-2 shadow-sm">
+        <div className="sticky top-0 z-10 flex flex-wrap items-center justify-between gap-2 rounded-lg border border-(--border) bg-(--card) px-3 py-2 shadow-sm">
             <div className="flex items-center gap-2">
-                <span className="text-sm text-(--muted-fg)">Sort:</span>
+                <span className="text-sm text-(--soft-fg)">Sort:</span>
                 <div className="flex overflow-hidden rounded-md border border-(--border) text-xs font-medium">
                     {(
                         [
@@ -41,13 +41,13 @@ export const CampaignProgressionControls: React.FC<Props> = ({
                         <button
                             key={option.value}
                             onClick={() => setSortMode(option.value)}
-                            className={`px-3 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset ${index > 0 ? 'border-l border-(--border)' : ''} ${sortMode === option.value ? 'bg-(--card-fg)/10 text-(--card-fg)' : 'text-(--muted-fg) hover:bg-(--muted) hover:text-(--card-fg)'}`}>
+                            className={`px-3 py-1.5 transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset ${index > 0 ? 'border-l border-(--border)' : ''} ${sortMode === option.value ? 'bg-(--card-fg)/10 text-(--card-fg)' : 'text-(--soft-fg) hover:bg-(--soft) hover:text-(--card-fg)'}`}>
                             {option.label}
                         </button>
                     ))}
                 </div>
             </div>
-            <div className="flex flex-wrap items-center gap-y-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 {(
                     [
                         {
@@ -65,18 +65,9 @@ export const CampaignProgressionControls: React.FC<Props> = ({
                         { key: 'ce', label: 'Hide CE', checked: hideCE, onChange: setHideCE },
                     ] as const
                 ).map(toggle => (
-                    <FormControlLabel
-                        key={toggle.key}
-                        className="!mr-3 !ml-0"
-                        control={
-                            <Switch
-                                checked={toggle.checked}
-                                onChange={event => toggle.onChange(event.target.checked)}
-                                size="small"
-                            />
-                        }
-                        label={<span className="w-[4.5rem] text-[11px] text-(--muted-fg)">{toggle.label}</span>}
-                    />
+                    <Switch key={toggle.key} isSelected={toggle.checked} onChange={toggle.onChange}>
+                        <span className="w-[4.5rem] text-[11px] text-(--soft-fg)">{toggle.label}</span>
+                    </Switch>
                 ))}
             </div>
         </div>

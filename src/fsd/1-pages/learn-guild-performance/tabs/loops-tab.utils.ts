@@ -7,7 +7,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { getBossPrefix } from '../guild-performance.utils';
+import { getBossOrder, getBossPrefix } from '../guild-performance.utils';
 
 export interface LoopTokenCounts {
     loopNumber: number;
@@ -260,8 +260,8 @@ export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossL
         rows.push({
             bossPrefix: key.slice(0, key.lastIndexOf(':')),
             rarity: group.rarity,
-            // No `set` in the aggregate; sort within a rarity by boss max HP instead.
-            set: group.bossMaxHp,
+            // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
+            set: getBossOrder(group.bossUnitId),
             bossUnitId: group.bossUnitId,
             bossMaxHp: group.bossMaxHp,
             leftPrimeUnitId: primes.left,

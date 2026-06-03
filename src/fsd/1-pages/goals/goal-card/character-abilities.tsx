@@ -1,4 +1,4 @@
-import { ArrowForward } from '@mui/icons-material';
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters';
@@ -18,13 +18,13 @@ export const GoalCardCharacterAbilities: React.FC<Props> = ({ goal, goalEstimate
             <div className="flex-box column start gap-[3px]">
                 {hasActiveGoal && (
                     <div className="flex-box gap-[3px]">
-                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowForward fontSize="small" />
+                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowRight className="size-4" />
                         <b>{goal.activeEnd}</b>
                     </div>
                 )}
                 {hasPassiveGoal && (
                     <div className="flex-box gap-[3px]">
-                        <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowForward fontSize="small" />
+                        <span>Passive:</span> <b>{goal.passiveStart}</b> <ArrowRight className="size-4" />
                         <b>{goal.passiveEnd}</b>
                     </div>
                 )}

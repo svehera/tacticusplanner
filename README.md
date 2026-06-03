@@ -63,6 +63,10 @@ To contribute to this open-source project, follow these steps:
 - **format**: Format the source files using Prettier.
 - **format-ci**: Check if source files are formatted correctly.
 
+## UI Conventions
+
+See [CONVENTIONS.md](CONVENTIONS.md) for the design system reference — tokens, shared components, layout patterns, and styling guidelines.
+
 Feel free to explore, contribute, and make this planner even more awesome! 🚀
 
 ![CodeRabbit Pull Request Reviews](https://img.shields.io/coderabbit/prs/github/svehera/tacticusplanner?labelColor=171717&color=FF570A&link=https%3A%2F%2Fcoderabbit.ai&label=CodeRabbit%20Reviews)

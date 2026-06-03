@@ -1,9 +1,6 @@
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Accordion from '@mui/material/Accordion';
-import AccordionDetails from '@mui/material/AccordionDetails';
-import AccordionSummary from '@mui/material/AccordionSummary';
 import React from 'react';
 
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
@@ -46,7 +43,7 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
                             <span className="font-medium">{label}</span>
                             {neededBy.length > 0 && (
                                 <>
-                                    <span className="text-xs text-(--muted-fg)">needed by</span>
+                                    <span className="text-xs text-(--soft-fg)">needed by</span>
                                     {neededBy.map(unitId => {
                                         const unit = CharactersService.getUnit(unitId);
                                         return (
@@ -64,17 +61,17 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
                         </div>
                         {lockedLocations.length > 0 ? (
                             <div className="flex flex-wrap items-center gap-1">
-                                <span className="text-xs text-(--muted-fg)">Unlocks at:</span>
+                                <span className="text-xs text-(--soft-fg)">Unlocks at:</span>
                                 {lockedLocations.map(loc => (
                                     <CampaignLocation key={loc.id} location={loc} unlocked={false} short={true} />
                                 ))}
                             </div>
                         ) : (
-                            <span className="text-xs text-(--muted-fg)">No known campaign locations</span>
+                            <span className="text-xs text-(--soft-fg)">No known campaign locations</span>
                         )}
                     </div>
                 </div>
-                <span className="font-mono text-xs text-(--muted-fg) tabular-nums">
+                <span className="font-mono text-xs text-(--soft-fg) tabular-nums">
                     {ownedCount} owned · need {requiredCount}
                 </span>
             </div>
@@ -96,27 +93,18 @@ export const CampaignProgressionUnfarmableMaterials: React.FC<Props> = ({
         }
 
         return (
-            <Accordion
-                disableGutters
-                square
-                className="overflow-hidden rounded-xl! border-l-[3px] border-(--border) border-l-amber-500 bg-transparent shadow-none [&::before]:hidden">
-                <AccordionSummary
-                    expandIcon={<ExpandMoreIcon className="text-(--muted-fg)" />}
-                    aria-controls="unfarmable-materials-content"
-                    id="unfarmable-materials-accordion"
-                    className="px-4 py-0 [&_.MuiAccordionSummary-content]:my-1.5">
+            <Accordion className="border-l-[3px] border-l-amber-500">
+                <AccordionHeader>
                     <div className="flex items-center gap-2">
                         <span className="text-sm font-medium">Locked materials blocking your goals</span>
                         <span className="rounded-full bg-amber-100 px-2 py-0.5 font-mono text-xs text-amber-800 tabular-nums dark:bg-amber-900/30 dark:text-amber-300">
                             {missingMaterials.size}
                         </span>
                     </div>
-                </AccordionSummary>
-                <AccordionDetails
-                    id="unfarmable-materials-content"
-                    className="grid grid-cols-1 divide-y divide-(--border) border-t border-(--border) p-0! sm:grid-cols-2 sm:divide-x sm:divide-y-0">
+                </AccordionHeader>
+                <AccordionBody className="grid grid-cols-1 divide-y divide-(--border) p-0 sm:grid-cols-2 sm:divide-x sm:divide-y-0">
                     {[...missingMaterials.values()].map(material => renderMissingMaterial(material))}
-                </AccordionDetails>
+                </AccordionBody>
             </Accordion>
         );
     }

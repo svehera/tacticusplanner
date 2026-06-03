@@ -6,8 +6,10 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { trackPageView } from '@/fsd/5-shared/monitoring';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
+import { PageMetaProvider } from '@/fsd/5-shared/ui/page-meta';
 
 import { TopAppBar } from '@/fsd/2-widgets/app-bar';
+import { Sidebar } from '@/fsd/2-widgets/sidebar';
 
 const DesktopApp = () => {
     const navigate = useNavigate();
@@ -45,6 +47,10 @@ const DesktopApp = () => {
     }, []);
 
     useEffect(() => {
+        if (location.pathname === '/' || location.pathname === '/mobile') {
+            return;
+        }
+
         trackPageView(location.pathname);
     }, [location.pathname]);
 
@@ -56,16 +62,21 @@ const DesktopApp = () => {
     };
 
     return (
-        <div className="size-full">
-            <TopAppBar
-                headerTitle={headerTitle}
-                seenAppVersion={seenAppVersion ?? ''}
-                onCloseWhatsNew={handleWhatsNewClose}
-            />
-            <div className="mx-5 my-2.5">
-                <Outlet />
+        <PageMetaProvider>
+            <div className="flex">
+                <Sidebar />
+                <div className="flex min-w-0 flex-1 flex-col">
+                    <TopAppBar
+                        headerTitle={headerTitle}
+                        seenAppVersion={seenAppVersion ?? ''}
+                        onCloseWhatsNew={handleWhatsNewClose}
+                    />
+                    <div className="mx-5 my-2.5">
+                        <Outlet />
+                    </div>
+                </div>
             </div>
-        </div>
+        </PageMetaProvider>
     );
 };
 

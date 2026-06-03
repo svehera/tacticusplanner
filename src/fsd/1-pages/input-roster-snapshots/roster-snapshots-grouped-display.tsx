@@ -63,39 +63,47 @@ const renderSection = (
     const headingClass = headingClassByLevel[level as 1 | 2 | 3] ?? 'text-sm';
 
     const sectionClassByLevel = {
-        1: 'border-2 border-sky-500/50 bg-sky-950/10 shadow-sm',
-        2: 'border-2 border-indigo-500/45 bg-indigo-950/10',
-        3: 'border border-violet-500/40 bg-violet-950/10',
+        1: 'border border-(--card-border) bg-(--card) shadow-sm',
+        2: 'border border-(--border) bg-(--fg)/3',
+        3: 'border border-(--border)/60 bg-(--fg)/2',
     } as const;
 
     const sectionClass = sectionClassByLevel[level as 1 | 2 | 3] ?? sectionClassByLevel[3];
 
     const headingAccentByLevel = {
-        1: 'text-sky-200',
-        2: 'text-indigo-200',
-        3: 'text-violet-200',
+        1: 'text-(--fg)',
+        2: 'text-(--fg)',
+        3: 'text-(--soft-fg)',
     } as const;
 
     const headingAccent = headingAccentByLevel[level as 1 | 2 | 3] ?? headingAccentByLevel[3];
 
     return (
-        <div key={section.id} className={`mb-4 rounded-md p-3 ${sectionClass}`}>
+        <div key={section.id} className={`mb-3 rounded-xl p-3 ${sectionClass}`}>
             <button
                 type="button"
                 aria-expanded={isExpanded}
                 onClick={() => onToggleSection(section.id)}
-                className="mb-2 flex w-full items-center gap-2 rounded px-1 py-1 text-left hover:bg-white/5">
-                <span className="inline-flex w-5 items-center justify-center text-base leading-none font-bold text-gray-200">
-                    {isExpanded ? '▾' : '▸'}
-                </span>
+                className="mb-2 flex w-full cursor-pointer items-center gap-2 rounded-lg px-2 py-1.5 text-left transition-colors duration-100 hover:bg-(--primary)/10">
+                <svg
+                    aria-hidden="true"
+                    className={`h-4 w-4 shrink-0 text-(--soft-fg) transition-transform duration-150 ${isExpanded ? 'rotate-90' : ''}`}
+                    viewBox="0 0 16 16"
+                    fill="currentColor">
+                    <path d="M6.22 4.22a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06l-3.25 3.25a.75.75 0 0 1-1.06-1.06L8.94 8 6.22 5.28a.75.75 0 0 1 0-1.06Z" />
+                </svg>
                 <span className={`font-semibold ${headingClass} ${headingAccent}`}>{section.title}</span>
             </button>
             {isExpanded && (
                 <div className="flex flex-col gap-3">
                     {renderedSubsections}
                     {renderedTeams.map(team => (
-                        <div key={team.id} className="rounded-md border border-gray-600/60 bg-black/10 p-2">
-                            {!team.hideTitle && <div className="mb-2 text-sm font-medium">{team.title}</div>}
+                        <div key={team.id} className="rounded-lg border border-(--border)/50 bg-(--card) p-3">
+                            {!team.hideTitle && (
+                                <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                    {team.title}
+                                </div>
+                            )}
                             {team.diffItems.length > 0 && (
                                 <div className="mb-2 flex flex-wrap gap-2 sm:gap-5">{team.diffItems}</div>
                             )}

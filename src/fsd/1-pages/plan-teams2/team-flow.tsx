@@ -35,9 +35,7 @@ export const TeamFlow: React.FC<Props> = ({
     const flex = chars.slice(flexIndex ?? chars.length);
 
     return (
-        <div
-            style={{ zoom }}
-            className="w-full rounded-lg border-2 border-dashed border-slate-200 bg-slate-50/50 p-3 dark:border-slate-800 dark:bg-black/10">
+        <div style={{ zoom }} className="w-full rounded-lg border-2 border-dashed border-(--border) bg-(--card)/50 p-3">
             <div className="flex min-w-[120px] flex-1 flex-auto flex-wrap items-start gap-2">
                 {core.map(char => (
                     <div
@@ -60,7 +58,7 @@ export const TeamFlow: React.FC<Props> = ({
 
                 {flex.length > 0 && (
                     <>
-                        {core.length > 0 && <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />}
+                        {core.length > 0 && <div className="mx-4 w-px self-stretch bg-(--border)" />}
                         {flex.map(char => (
                             <div
                                 key={char.snowprintId}
@@ -85,7 +83,7 @@ export const TeamFlow: React.FC<Props> = ({
                 {mows.length > 0 && (
                     <>
                         {(core.length > 0 || flex.length > 0) && (
-                            <div className="mx-4 w-px self-stretch bg-slate-300 dark:bg-slate-700" />
+                            <div className="mx-4 w-px self-stretch bg-(--border)" />
                         )}
                         {mows.map(mow => (
                             <div

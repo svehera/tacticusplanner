@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules */
 import { MenuItem, Select } from '@mui/material';
-import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useContext, useMemo, useRef, useState } from 'react';
 
@@ -422,10 +422,10 @@ export const HomeScreenEvent = () => {
                     </div>
                 </div>
             </div>
-            <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
+            <div className="ag-theme-material density-compact h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     ref={gridReference}
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}

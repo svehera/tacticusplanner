@@ -1,4 +1,4 @@
-import { AllCommunityModule, ColDef, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState, useEffect } from 'react';
 
@@ -258,10 +258,10 @@ export const TacticusGuildVisualization: React.FC<{ userIdMapper: (userId: strin
             {/* Members Table */}
             <div className="bg-overlay rounded-lg p-4 shadow">
                 <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Guild Members</h2>
-                <div className="h-96 w-full">
+                <div className="ag-theme-material density-compact h-96 w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         rowData={guildData.members}
                         columnDefs={columnDefs}
                         defaultColDef={{

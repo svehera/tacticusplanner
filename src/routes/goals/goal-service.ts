@@ -27,8 +27,7 @@ export class GoalService {
 
     public static getBackgroundColor(goalsColorCoding: GoalColorMode, goalEstimate: IGoalEstimate | undefined): string {
         if (goalEstimate?.completed) {
-            const colorObject = { r: 0, g: 255, b: 0, a: 0.5 };
-            return GoalService.getColorString(colorObject);
+            return GoalService.getColorString({ r: 0, g: 0, b: 0, a: 0 });
         }
         if (goalsColorCoding === 'None') {
             return GoalService.getColorString({

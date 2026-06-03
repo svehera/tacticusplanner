@@ -1,0 +1,311 @@
+/* ============================================================================
+ * tacticus-ag-theme.css
+ * ----------------------------------------------------------------------------
+ * ag-Grid theme that consumes the Just D / Tacticus design tokens from
+ * `src/fsd/0-app/index.css`. Drop this file alongside `index.css` and import
+ * after it, OR paste the contents into `index.css` (replacing the existing
+ * `.ag-theme-material` block).
+ *
+ * Compatibility: ag-grid-community ^33.3.2 (your current version).
+ * On v33+ you MUST pass `theme: "legacy"` in grid options for class-based
+ * themes to apply:
+ *
+ *     const gridOptions = {
+ *         theme: "legacy",
+ *         columnDefs: [...],
+ *         ...
+ *     };
+ *
+ * Apply by keeping `className="ag-theme-material"` on the grid container.
+ * Dark mode auto-follows the `<html class="dark">` token re-map.
+ *
+ * SPECIFICITY: the var-setting rules use the doubled-class pattern
+ * `.ag-theme-material.ag-theme-material` so they beat ag-grid's bundled
+ * defaults regardless of stylesheet load order. (ag-Grid v33 inserts its
+ * theme CSS at runtime, so source order alone is unreliable.)
+ * ========================================================================== */
+
+.ag-theme-material.ag-theme-material {
+    /* ─── Sizing ─────────────────────────────────────────────────────────── */
+    --ag-grid-size: 5px;
+    --ag-font-size: 13px;
+    --ag-font-family: inherit;
+    --ag-row-height: 48px;
+    --ag-header-height: 44px;
+    --ag-list-item-height: 32px;
+    --ag-icon-size: 16px;
+    --ag-cell-horizontal-padding: 12px;
+    --ag-widget-container-vertical-padding: 8px;
+    --ag-widget-container-horizontal-padding: 12px;
+    --ag-borders: solid 1px;
+    --ag-border-radius: var(--radius-md);
+    --ag-card-radius: var(--radius-lg);
+    --ag-popup-shadow: 0 10px 25px -5px rgb(0 0 0 / 0.18), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+    --ag-card-shadow: 0 1px 2px rgb(0 0 0 / 0.04);
+
+    /* ─── Foundation — text & surface ────────────────────────────────────── */
+    /* !important is required: ag-Grid v33 injects its theme CSS at runtime   */
+    /* via style-loader, appending after all static CSS. Our doubled-class    */
+    /* selector (0,2,0) would lose to the injected rules on source order when */
+    /* specificity is equal. !important wins the cascade unconditionally.     */
+    --ag-foreground-color: var(--data-surface-fg) !important;
+    --ag-background-color: var(--data-surface) !important;
+    --ag-secondary-foreground-color: var(--soft-fg) !important;
+    --ag-data-color: var(--data-surface-fg) !important;
+    --ag-disabled-foreground-color: color-mix(in oklab, var(--fg) 45%, transparent) !important;
+    --ag-subheader-background-color: var(--soft) !important;
+    --ag-control-panel-background-color: var(--data-surface) !important;
+    --ag-modal-overlay-background-color: color-mix(in oklab, var(--fg) 50%, transparent) !important;
+    --ag-tooltip-background-color: var(--overlay) !important;
+
+    /* ─── Borders & dividers ─────────────────────────────────────────────── */
+    --ag-border-color: var(--data-surface-border) !important;
+    --ag-secondary-border-color: var(--data-surface-border) !important;
+    --ag-row-border-color: var(--data-surface-border) !important;
+    --ag-cell-horizontal-border: solid var(--data-surface-border) !important;
+    --ag-header-column-separator-color: transparent !important;
+    --ag-header-column-resize-handle-color: var(--border) !important;
+    --ag-header-column-resize-handle-height: 50%;
+
+    /* ─── Header ─────────────────────────────────────────────────────────── */
+    --ag-header-foreground-color: var(--fg) !important;
+    --ag-header-background-color: var(--neutral) !important;
+    --ag-header-cell-hover-background-color: color-mix(in oklab, var(--primary) 8%, var(--neutral)) !important;
+    --ag-header-cell-moving-background-color: color-mix(in oklab, var(--primary) 12%, var(--neutral)) !important;
+
+    /* ─── Rows ───────────────────────────────────────────────────────────── */
+    --ag-odd-row-background-color: color-mix(in oklab, var(--neutral) 35%, transparent) !important;
+    --ag-row-hover-color: color-mix(in oklab, var(--primary) 8%, transparent) !important;
+    --ag-column-hover-color: color-mix(in oklab, var(--primary) 5%, transparent) !important;
+    --ag-selected-row-background-color: color-mix(in oklab, var(--primary) 14%, transparent) !important;
+
+    /* ─── Range / cell selection ─────────────────────────────────────────── */
+    --ag-range-selection-background-color: color-mix(in oklab, var(--primary) 14%, transparent);
+    --ag-range-selection-background-color-2: color-mix(in oklab, var(--primary) 24%, transparent);
+    --ag-range-selection-background-color-3: color-mix(in oklab, var(--primary) 32%, transparent);
+    --ag-range-selection-background-color-4: color-mix(in oklab, var(--primary) 40%, transparent);
+    --ag-range-selection-border-color: var(--primary);
+    --ag-range-selection-border-style: solid;
+
+    /* ─── Inputs & checkboxes ────────────────────────────────────────────── */
+    --ag-input-border-color: var(--input-border);
+    --ag-input-focus-border-color: var(--primary);
+    --ag-input-focus-box-shadow: 0 0 0 4px color-mix(in oklab, var(--ring) 20%, transparent);
+    --ag-input-disabled-background-color: var(--soft);
+    --ag-input-disabled-border-color: var(--border);
+    --ag-checkbox-background-color: var(--data-surface);
+    --ag-checkbox-checked-color: var(--primary);
+    --ag-checkbox-unchecked-color: var(--input-border);
+    --ag-checkbox-indeterminate-color: var(--primary);
+    --ag-toggle-button-on-background-color: var(--primary);
+    --ag-toggle-button-off-background-color: var(--input-border);
+    --ag-toggle-button-switch-background-color: var(--data-surface);
+
+    /* ─── States / accents ───────────────────────────────────────────────── */
+    --ag-active-color: var(--primary);
+    --ag-material-primary-color: var(--primary);
+    --ag-material-accent-color: var(--accent);
+    --ag-invalid-color: var(--danger);
+    --ag-icon-font-color: var(--soft-fg);
+    --ag-chip-background-color: var(--neutral);
+
+    /* ─── Side bar / advanced filters / tabs ─────────────────────────────── */
+    --ag-side-bar-panel-width: 220px;
+    --ag-side-button-selected-background-color: var(--neutral);
+    --ag-selected-tab-underline-color: var(--primary);
+    --ag-selected-tab-underline-width: 2px;
+    --ag-menu-min-width: 200px;
+}
+
+/* ============================================================================
+ * Selector-level refinements — things you can't do with vars alone.
+ * ========================================================================== */
+
+/* Header — eyebrow-style uppercase weight, like the rest of the kit */
+.ag-theme-material .ag-header {
+    border-bottom: 1px solid var(--data-surface-border);
+}
+.ag-theme-material .ag-header-cell-text {
+    font-weight: 600;
+    font-size: 12px;
+    letter-spacing: 0.02em;
+}
+
+/* Cells — flex + vertical centre (matches themeBalham default behaviour).
+ * Target both .ag-cell and .ag-cell-wrapper; use !important because ag-Grid v33
+ * injects its own theme CSS at runtime after the stylesheet is parsed. */
+.ag-theme-material .ag-cell {
+    display: flex !important;
+    align-items: center !important;
+}
+.ag-theme-material .ag-cell-wrapper {
+    display: flex !important;
+    align-items: center !important;
+    width: 100%;
+}
+
+/* Rows — explicit bottom border (more reliable than ag's row-border-only mode) */
+.ag-theme-material .ag-row {
+    border-bottom: 1px solid var(--data-surface-border);
+}
+.ag-theme-material .ag-row-last {
+    border-bottom: 0;
+}
+
+/* Selected row — left-side primary accent stripe */
+.ag-theme-material .ag-row-selected::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--primary);
+    pointer-events: none;
+}
+
+/* Active goal row — 3 px success stripe on left edge.
+ * Inactive goals lose the stripe and dim to 62 % opacity. */
+.ag-theme-material .ag-row.row-goal::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 3px;
+    background: var(--success);
+    pointer-events: none;
+}
+.ag-theme-material .ag-row.row-goal.row-inactive {
+    opacity: 0.62;
+}
+.ag-theme-material .ag-row.row-goal.row-inactive::before {
+    background: transparent;
+}
+.ag-theme-material .ag-row.row-goal.row-completed {
+    background-color: color-mix(in srgb, var(--success) 8%, transparent);
+}
+.dark .ag-theme-material .ag-row.row-goal.row-completed {
+    background-color: color-mix(in srgb, var(--success) 12%, transparent);
+}
+.ag-theme-material .ag-row.row-goal.row-completed::before {
+    width: 4px;
+}
+
+/* Pinned columns — solid bg + clean divider */
+.ag-theme-material .ag-pinned-left-cols-container,
+.ag-theme-material .ag-pinned-left-header {
+    border-right: 1px solid var(--data-surface-border);
+    background: var(--data-surface);
+}
+.ag-theme-material .ag-pinned-right-cols-container,
+.ag-theme-material .ag-pinned-right-header {
+    border-left: 1px solid var(--data-surface-border);
+    background: var(--data-surface);
+}
+
+/* Focused cell — primary ring, not material's default blue underline */
+.ag-theme-material .ag-cell-focus,
+.ag-theme-material .ag-full-width-row.ag-row-focus {
+    border-color: var(--primary) !important;
+}
+
+/* Popups, menus, filters — match overlay surface */
+.ag-theme-material .ag-popup-child,
+.ag-theme-material .ag-menu,
+.ag-theme-material .ag-filter,
+.ag-theme-material .ag-panel {
+    background: var(--overlay);
+    color: var(--overlay-fg);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--ag-popup-shadow);
+}
+
+/* Inputs inside grid (filter fields, editors) — match TextField primitive */
+.ag-theme-material input[class^='ag-']:not([type]),
+.ag-theme-material input[class^='ag-'][type='text'],
+.ag-theme-material input[class^='ag-'][type='number'],
+.ag-theme-material textarea[class^='ag-'] {
+    background: var(--bg);
+    border: 1px solid var(--input-border);
+    border-radius: var(--radius-sm);
+    color: var(--fg);
+    padding: 6px 10px;
+}
+.ag-theme-material input[class^='ag-']:focus,
+.ag-theme-material textarea[class^='ag-']:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--ring) 20%, transparent);
+    outline: none;
+}
+
+/* Scrollbar — themed, subtle */
+.ag-theme-material ::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+}
+.ag-theme-material ::-webkit-scrollbar-track {
+    background: transparent;
+}
+.ag-theme-material ::-webkit-scrollbar-thumb {
+    background: color-mix(in oklab, var(--fg) 18%, transparent);
+    border-radius: 999px;
+    border: 2px solid transparent;
+    background-clip: padding-box;
+}
+.ag-theme-material ::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in oklab, var(--fg) 30%, transparent);
+    background-clip: padding-box;
+}
+
+/* ============================================================================
+ * Density modifiers — apply via className on the grid container.
+ *     <div className="ag-theme-material density-compact">…</div>
+ * ========================================================================== */
+.ag-theme-material.density-compact.density-compact {
+    --ag-row-height: 36px;
+    --ag-header-height: 36px;
+    --ag-font-size: 12px;
+    --ag-list-item-height: 28px;
+}
+.ag-theme-material.density-comfortable.density-comfortable {
+    --ag-row-height: 56px;
+    --ag-header-height: 48px;
+    --ag-list-item-height: 36px;
+}
+
+/* ============================================================================
+ * Existing project overrides — preserved verbatim from index.css so that
+ * pasting this file in does not break anything.
+ * ========================================================================== */
+.ag-theme-material .ag-cell-wrap-text {
+    word-break: unset;
+    white-space: break-spaces;
+}
+.ag-theme-material.auto-teams .ag-header-cell,
+.ag-theme-material.auto-teams .ag-cell {
+    padding: 0;
+}
+.center-header-text .ag-header-cell-label {
+    text-align: center;
+    display: flex;
+    justify-content: center;
+}
+
+/* Book icons inside grid cells — standardised size, no !important hacks */
+.ag-theme-material .book-icon {
+    height: 1.4em;
+    width: auto;
+}
+
+/* Priority cell — full-height split layout, flush padding */
+.ag-theme-material .prio-cell {
+    align-items: stretch !important;
+    padding-left: 0 !important;
+    padding-right: 0 !important;
+}
+.ag-theme-material .prio-cell .ag-cell-wrapper {
+    align-items: stretch !important;
+    height: 100% !important;
+}

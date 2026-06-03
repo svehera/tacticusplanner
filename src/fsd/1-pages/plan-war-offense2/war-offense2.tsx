@@ -1,15 +1,14 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import PublishIcon from '@mui/icons-material/Publish';
-import RefreshIcon from '@mui/icons-material/Refresh';
-import { Button } from '@mui/material';
+import { RotateCcw, Upload, X } from 'lucide-react';
 import { useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rank, Rarity } from '@/fsd/5-shared/model';
-import { RaritySelect2 } from '@/fsd/5-shared/ui/selects/rarity-select2';
+import { Button } from '@/fsd/5-shared/ui';
+import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
@@ -157,15 +156,18 @@ export const WarOffense2 = () => {
 
     return (
         <RosterSnapshotsAssetsProvider>
-            <div className="flex flex-col gap-6 bg-gray-50 p-2 dark:bg-gray-900">
+            <div className="flex flex-col gap-6 py-6">
                 {showApiWarning && (
-                    <div className="mb-4 flex items-center justify-between rounded bg-red-100 p-2 text-sm text-red-600 dark:bg-red-900 dark:text-red-100">
+                    <div className="mb-4 flex items-center justify-between rounded bg-(--warning)/20 p-2 text-sm text-(--warning)">
                         <span>
                             The Tacticus API does not currently return guild-war data, thus deployments must be managed
                             manually.
                         </span>
-                        <button
-                            onClick={() => {
+                        <Button
+                            appearance="plain"
+                            intent="warning"
+                            size="square-petite"
+                            onPress={() => {
                                 setShowApiWarning(false);
                                 dispatch.warOffense2({
                                     type: 'Set',
@@ -176,20 +178,22 @@ export const WarOffense2 = () => {
                                         showUnderConstructionWarning,
                                     },
                                 });
-                            }}
-                            className="min-w-[40px] text-2xl text-red-600 transition hover:text-red-800">
-                            &times;
-                        </button>
+                            }}>
+                            <X data-slot="icon" />
+                        </Button>
                     </div>
                 )}
                 {showUnderConstructionWarning && (
-                    <div className="mb-4 flex items-center justify-between rounded bg-red-100 p-2 text-sm text-red-600 dark:bg-red-900 dark:text-red-100">
+                    <div className="mb-4 flex items-center justify-between rounded bg-(--warning)/20 p-2 text-sm text-(--warning)">
                         <span>
                             This page is currently under construction. Expect bugs/errors, and please report them on the
                             community discord.
                         </span>
-                        <button
-                            onClick={() => {
+                        <Button
+                            appearance="plain"
+                            intent="warning"
+                            size="square-petite"
+                            onPress={() => {
                                 setShowUnderConstructionWarning(false);
                                 dispatch.warOffense2({
                                     type: 'Set',
@@ -200,22 +204,21 @@ export const WarOffense2 = () => {
                                         showUnderConstructionWarning: false,
                                     },
                                 });
-                            }}
-                            className="min-w-[40px] text-2xl text-red-600 transition hover:text-red-800">
-                            &times;
-                        </button>
+                            }}>
+                            <X data-slot="icon" />
+                        </Button>
                     </div>
                 )}
                 <header className="mb-4 flex justify-between">
                     <div className="flex flex-wrap items-center gap-2">
-                        <h1 className="text-lg font-bold">War Offense</h1>
+                        <h2 className="text-lg font-bold">War Offense</h2>
                         <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                         {/* RARITY CAP */}
                         <div className="flex items-center gap-3">
-                            <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Rarity Cap</span>
+                            <span className="text-sm font-medium text-(--soft-fg)">Rarity Cap</span>
 
                             <div className="min-w-[180px]">
-                                <RaritySelect2
+                                <RaritySelect
                                     rarityValues={[
                                         Rarity.Common,
                                         Rarity.Uncommon,
@@ -232,18 +235,18 @@ export const WarOffense2 = () => {
                     </div>
                     <div className="flex flex-wrap gap-2">
                         <Button
-                            className="mr-2 rounded bg-blue-500 px-4 py-2 text-white"
-                            variant="contained"
-                            onClick={startNewWar}
-                            disabled={deployedCharacters.length === 0 && deployedMows.length === 0}>
-                            <RefreshIcon className="mr-1" />
+                            intent="primary"
+                            size="small"
+                            onPress={startNewWar}
+                            isDisabled={deployedCharacters.length === 0 && deployedMows.length === 0}>
+                            <RotateCcw data-slot="icon" />
                             Start New War
                         </Button>
                         {!(showApiWarning && showUnderConstructionWarning) && (
                             <Button
-                                className="mr-2 rounded bg-blue-500 px-4 py-2 text-white"
-                                variant="contained"
-                                onClick={() => {
+                                appearance="outline"
+                                size="small"
+                                onPress={() => {
                                     setShowApiWarning(true);
                                     setShowUnderConstructionWarning(true);
                                     dispatch.warOffense2({
@@ -262,7 +265,7 @@ export const WarOffense2 = () => {
                     </div>
                 </header>
                 <section ref={stagingSectionReference} className="mb-4">
-                    <h2 className="text-lg font-semibold">Team Staging</h2>
+                    <h3 className="text-lg font-semibold">Team Staging</h3>
                     <div className="flex flex-col gap-2">
                         <TeamFlow
                             chars={
@@ -283,25 +286,24 @@ export const WarOffense2 = () => {
                     <div className="mt-4"> </div>
                     <div className="flex flex-wrap gap-4">
                         <Button
-                            className="rounded bg-green-500 px-4 py-2 text-xs text-white sm:text-sm md:text-sm lg:text-base"
-                            variant="contained"
-                            onClick={deployTeam}
-                            disabled={stagedChars.length === 0 || stagedChars.length > 5 || stagedMows.length > 1}>
+                            intent="success"
+                            size="small"
+                            onPress={deployTeam}
+                            isDisabled={stagedChars.length === 0 || stagedChars.length > 5 || stagedMows.length > 1}>
                             Deploy Team
                         </Button>
                         <Button
-                            className="rounded bg-green-500 px-4 py-2 text-xs text-white sm:text-[10px] md:text-sm lg:text-base"
-                            variant="contained"
-                            color="error"
-                            onClick={clearTeam}
-                            disabled={stagedChars.length === 0 && stagedMows.length === 0}>
+                            intent="danger"
+                            size="small"
+                            onPress={clearTeam}
+                            isDisabled={stagedChars.length === 0 && stagedMows.length === 0}>
                             Clear Team
                         </Button>
                     </div>
                 </section>
 
-                <details open className="group mb-4 rounded-lg bg-white p-4 shadow dark:bg-gray-800">
-                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-blue-600">
+                <details open className="group mb-4 rounded-lg border border-(--card-border) bg-(--card) p-4 shadow-sm">
+                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-(--primary)">
                         <div className="flex items-center justify-between">
                             <span>Deployable Teams ({teams.length})</span>
                             <span className="transition group-open:rotate-180">▼</span>
@@ -311,24 +313,21 @@ export const WarOffense2 = () => {
                         {teams.map((team, index) => (
                             <div
                                 key={index}
-                                className="relative mb-3 flex items-stretch gap-3 rounded-lg border border-gray-200 bg-white shadow-sm dark:border-gray-700 dark:bg-gray-800/50">
+                                className="relative mb-3 flex items-stretch gap-3 rounded-lg border border-(--card-border) bg-(--card) shadow-sm">
                                 {/* 1. Integrated Action Strip */}
                                 <button
                                     onClick={() => stageTeam(team)}
-                                    className="group flex w-12 flex-shrink-0 flex-col items-center justify-center gap-1 rounded-l-lg bg-blue-600/10 transition-colors hover:bg-blue-600 hover:text-white"
+                                    className="group flex w-12 flex-shrink-0 flex-col items-center justify-center gap-1 rounded-l-lg bg-(--primary)/10 transition-colors hover:bg-(--primary) hover:text-white"
                                     title="Deploy Team">
-                                    <PublishIcon
-                                        className="text-blue-600 group-hover:text-white"
-                                        sx={{ fontSize: 20 }}
-                                    />
-                                    <span className="text-[10px] font-bold tracking-tighter text-green-600 uppercase group-hover:text-white">
+                                    <Upload className="size-5 text-(--primary) group-hover:text-white" />
+                                    <span className="text-[10px] font-bold tracking-tighter text-(--success) uppercase group-hover:text-white">
                                         Stage
                                     </span>
                                 </button>
 
                                 {/* 2. Team Content - Takes up the rest of the space */}
                                 <div className="flex-1 overflow-hidden py-3 pr-2">
-                                    <div className="mb-2 truncate text-base font-bold text-gray-700 dark:text-gray-200">
+                                    <div className="mb-2 truncate text-base font-bold text-(--card-fg)">
                                         {team.name}
                                     </div>
                                     <TeamFlow
@@ -354,8 +353,8 @@ export const WarOffense2 = () => {
                     </div>
                 </details>
 
-                <details open className="group mb-4 rounded-lg bg-white p-4 shadow dark:bg-gray-800">
-                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-blue-600">
+                <details open className="group mb-4 rounded-lg border border-(--card-border) bg-(--card) p-4 shadow-sm">
+                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-(--primary)">
                         <div className="flex items-center justify-between">
                             <span>Deployable Units ({deployableCharacters.length + deployableMows.length})</span>
                             <span className="transition group-open:rotate-180">▼</span>
@@ -381,8 +380,8 @@ export const WarOffense2 = () => {
                     </div>
                 </details>
 
-                <details className="group mb-4 rounded-lg bg-white p-4 shadow dark:bg-gray-800">
-                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-blue-600">
+                <details className="group mb-4 rounded-lg border border-(--card-border) bg-(--card) p-4 shadow-sm">
+                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-(--primary)">
                         <div className="flex items-center justify-between">
                             <span>Deployed Units ({deployedCharacters.length + deployedMows.length})</span>
                             <span className="transition group-open:rotate-180">▼</span>
@@ -408,8 +407,8 @@ export const WarOffense2 = () => {
                     </div>
                 </details>
 
-                <details className="group mb-4 rounded-lg bg-white p-4 shadow dark:bg-gray-800">
-                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-blue-600">
+                <details className="group mb-4 rounded-lg border border-(--card-border) bg-(--card) p-4 shadow-sm">
+                    <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-(--primary)">
                         <div className="flex items-center justify-between">
                             <span>Undeployable Teams ({undeployableTeams.length})</span>
                             <span className="transition group-open:rotate-180">▼</span>

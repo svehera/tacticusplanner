@@ -33,7 +33,7 @@ const LocationRow: React.FC<{ location: ICampaignBattleComposed }> = ({ location
     const isOnslaught = location.campaign === Campaign.Onslaught;
 
     return (
-        <div className={`rounded-md transition-colors ${expanded ? 'bg-(--secondary)' : 'hover:bg-(--secondary)'}`}>
+        <div className={`rounded-md transition-colors ${expanded ? 'bg-(--neutral)' : 'hover:bg-(--neutral)'}`}>
             <button
                 type="button"
                 onClick={() => {
@@ -47,7 +47,7 @@ const LocationRow: React.FC<{ location: ICampaignBattleComposed }> = ({ location
                     {!isOnslaught && <span className="shrink-0">· {nodeLabel}</span>}
                 </div>
                 <ExpandMoreIcon
-                    className={`shrink-0 text-[18px] text-[var(--muted-fg)] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+                    className={`shrink-0 text-[18px] text-[var(--soft-fg)] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
                 />
             </button>
 

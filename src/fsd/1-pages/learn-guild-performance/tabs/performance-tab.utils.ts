@@ -7,7 +7,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { getBossPrefix } from '../guild-performance.utils';
+import { getBossOrder, getBossPrefix } from '../guild-performance.utils';
 
 export interface FilterOptions {
     selectedRarities: Set<Rarity>;
@@ -303,6 +303,30 @@ export function playerPerformanceIndex(summary: GuildSeasonSummary, playerId: st
 export interface PerformanceIndexSeasonPoint {
     season: number;
     performanceIndex: number;
+}
+
+export interface PlayerPerformanceLine {
+    /** Stable series id — the player's userId. */
+    userId: string;
+    displayName: string;
+    points: PerformanceIndexSeasonPoint[];
+}
+
+/**
+ * One Performance Index line per player across all history, for the multi-line chart. Players with
+ * no chartable points are omitted. Sorted by display name.
+ */
+export function buildAllPlayersPerformanceLines(
+    seasonData: GuildSeasonSummary[],
+    names: Map<string, string>
+): PlayerPerformanceLine[] {
+    return getHistoricalPerformancePlayers(seasonData, names)
+        .map(player => ({
+            userId: player.userId,
+            displayName: player.displayName,
+            points: buildPlayerPerformanceIndexSeries(seasonData, player.userId),
+        }))
+        .filter(line => line.points.length > 0);
 }
 
 /**
@@ -693,8 +717,8 @@ export function buildPlayerView(
  * Per-unit rows for one player in a historical season, reconstructed from the aggregate's raw boss
  * hit arrays (`bossPerformance`). Mirrors {@link buildPlayerView}: avg respects `excludeKills`,
  * while max and the hit distribution stay kill-inclusive. Covers bosses + primes the player hit, at
- * the season's top-2 rarities. No `set` in the aggregate, so families are kept together (and
- * ordered) by the parent boss's max HP instead.
+ * the season's top-2 rarities. The aggregate has no `set`, so rows sort by the GuildBoss{N} rotation
+ * order (which matches `set` within a rarity).
  */
 export function buildPlayerViewFromSummary(
     summary: GuildSeasonSummary,
@@ -730,7 +754,8 @@ export function buildPlayerViewFromSummary(
             unitKey: `${enemyId}:${rarity}:${encounterIndex}`,
             unitId: enemyId,
             rarity,
-            set: 0,
+            // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
+            set: getBossOrder(enemyId),
             encounterIndex,
             isBoss,
             bossPrefix,
@@ -746,10 +771,11 @@ export function buildPlayerViewFromSummary(
         });
     }
 
-    // No `set`; keep each boss family together and ordered by its boss max HP, primes before boss.
+    // Match the live player view: highest rarity, then latest set (GuildBoss order), then primes
+    // before boss within a family.
     return rows.toSorted((a, b) => {
         if (a.rarity !== b.rarity) return b.rarity - a.rarity;
-        if (a.parentBossMaxHp !== b.parentBossMaxHp) return b.parentBossMaxHp - a.parentBossMaxHp;
+        if (a.set !== b.set) return b.set - a.set;
         return b.encounterIndex - a.encounterIndex;
     });
 }

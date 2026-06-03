@@ -6,11 +6,12 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
+import { Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersService } from '@/fsd/4-entities/character';
 import { FactionImage } from '@/fsd/4-entities/faction';
-import { IMow2, MowsService } from '@/fsd/4-entities/mow';
+import { MowsService } from '@/fsd/4-entities/mow';
 import { INpcData, INpcStats } from '@/fsd/4-entities/npc/model';
 import { NpcPortrait } from '@/fsd/4-entities/npc/npc-portrait';
 import { NpcService } from '@/fsd/4-entities/npc/npc-service';
@@ -21,6 +22,8 @@ import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-ent
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
+import { useUpgradeNeeds } from './quests.hooks';
+
 // Type definition for the data we extract from the string
 interface ResolvedEnemyData {
     id: string;
@@ -28,12 +31,28 @@ interface ResolvedEnemyData {
     stats: INpcStats; // The specific stats for this level
 }
 
+const tierBadgeBg: Record<number, string> = {
+    [Rarity.Common]: 'bg-(--rarity-common)/30 border-(--rarity-common)/60',
+    [Rarity.Uncommon]: 'bg-(--rarity-uncommon)/30 border-(--rarity-uncommon)/60',
+    [Rarity.Rare]: 'bg-(--rarity-rare)/30 border-(--rarity-rare)/60',
+    [Rarity.Epic]: 'bg-(--rarity-epic)/30 border-(--rarity-epic)/60',
+    [Rarity.Legendary]: 'bg-(--rarity-legendary)/30 border-(--rarity-legendary)/60',
+    [Rarity.Mythic]: 'bg-(--rarity-mythic)/30 border-(--rarity-mythic)/60',
+};
+
 const getUpgradeRarity = (upgradeId: string): RarityString => {
     const upgrade = FsdUpgradesService.getUpgrade(upgradeId);
     if (!upgrade || upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
         return RarityMapper.rarityToRarityString(Rarity.Common);
     }
     return RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity);
+};
+
+const trackQuestPlanUpdate = (action: string) => {
+    trackEvent('quest_plan_update', {
+        feature: 'quests',
+        action,
+    });
 };
 
 export const Quests = () => {
@@ -80,61 +99,22 @@ export const Quests = () => {
         ...[upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
+    const unitsNeedingUpgrade = useUpgradeNeeds(estimatedUpgradesTotal, chars, mows);
+
     // Toggles
     const toggleTier = (tierIndex: number) => {
-        trackEvent('quest_plan_update', {
-            feature: 'quests',
-            action: 'toggle_tier',
-        });
+        trackQuestPlanUpdate('toggle_tier');
         setExpandedTiers(previous => ({ ...previous, [tierIndex]: !previous[tierIndex] }));
     };
     const toggleBattle = (battleKey: string) => {
-        trackEvent('quest_plan_update', {
-            feature: 'quests',
-            action: 'toggle_battle',
-        });
+        trackQuestPlanUpdate('toggle_battle');
         setExpandedBattles(previous => ({ ...previous, [battleKey]: !previous[battleKey] }));
     };
 
-    const unitsNeedingUpgrade = (
-        upgradeId: string
-    ): { acquired: number; required: number; units: Array<ICharacter2 | IMow2> } => {
-        const inProgressMat = estimatedUpgradesTotal.inProgressMaterials.find(upgrade => upgrade.id === upgradeId);
-        const blockedMat = estimatedUpgradesTotal.blockedMaterials.find(upgrade => upgrade.id === upgradeId);
-        const acquired = (inProgressMat?.acquiredCount ?? 0) + (blockedMat?.acquiredCount ?? 0);
-        const required = (inProgressMat?.requiredCount ?? 0) + (blockedMat?.requiredCount ?? 0);
-        if (required === 0) return { acquired, required, units: [] };
-        const units = [
-            estimatedUpgradesTotal.inProgressMaterials.find(upgrade => upgrade.id === upgradeId)?.relatedCharacters,
-            estimatedUpgradesTotal.blockedMaterials.find(upgrade => upgrade.id === upgradeId)?.relatedCharacters,
-        ]
-            .flat()
-            .filter(x => x !== undefined);
-        const resolvedChars = units
-            .flat()
-            .filter(x => x !== undefined)
-            .map(charName => chars.find(c => c.shortName === charName))
-            .filter(x => x !== undefined);
-        const resolvedMows = units
-            .flat()
-            .filter(x => x !== undefined)
-            .map(mowName => mows.find(m => m.name === mowName))
-            .filter(x => x !== undefined);
-        return { acquired, required, units: [...resolvedChars, ...resolvedMows] as Array<ICharacter2 | IMow2> };
-    };
-
-    const showLaunchBanner = Date.now() <= new Date('2026-03-22T23:59:59').getTime();
-
     return (
-        <div className="flex flex-col gap-4 p-2 text-slate-900 dark:text-slate-100">
-            {showLaunchBanner && (
-                <div className="rounded-lg border border-blue-200 bg-blue-50 px-4 py-3 text-sm text-blue-900 dark:border-blue-800 dark:bg-blue-950/40 dark:text-blue-100">
-                    Thanks for using the new quests feature! Use this code in game <b>PLANNERQUEST</b>
-                </div>
-            )}
-
+        <div className="space-y-8 py-6">
             {/* Header / Selector */}
-            <div className="flex flex-wrap items-center justify-between gap-4 rounded-lg bg-slate-100 p-4 dark:bg-slate-800">
+            <div className="flex flex-wrap items-center justify-between gap-4 rounded-xl border border-(--card-border) bg-(--card) p-4 shadow-sm">
                 <UnitsAutocomplete<IUnit>
                     // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
                     unit={char ?? null}
@@ -147,10 +127,7 @@ export const Quests = () => {
                         )
                         .filter(x => !!x)}
                     onUnitChange={value => {
-                        trackEvent('quest_plan_update', {
-                            feature: 'quests',
-                            action: 'select_quest',
-                        });
+                        trackQuestPlanUpdate('select_quest');
                         setQuestId(value?.snowprintId ?? '');
                     }}
                 />
@@ -158,15 +135,15 @@ export const Quests = () => {
                 {quest && (
                     <div className="flex items-center gap-4">
                         <div className="flex flex-col items-end">
-                            <span className="text-xs font-bold uppercase opacity-60">Allowed</span>
+                            <span className="text-xs font-bold text-(--soft-fg) uppercase">Allowed</span>
                             <div className="flex gap-1">
                                 {quest.allowedFactions.map(f => (
                                     <FactionImage key={f} faction={f} />
                                 ))}
                             </div>
                         </div>
-                        <div className="flex flex-col items-end border-l border-slate-300 pl-4 dark:border-slate-700">
-                            <span className="text-xs font-bold uppercase opacity-60">Enemies</span>
+                        <div className="flex flex-col items-end border-l border-(--card-border) pl-4">
+                            <span className="text-xs font-bold text-(--soft-fg) uppercase">Enemies</span>
                             <div className="flex gap-1">
                                 {quest.enemyFactions.map(f => (
                                     <FactionImage key={f} faction={f} />
@@ -184,22 +161,23 @@ export const Quests = () => {
                     return (
                         <div
                             key={tier.index}
-                            className="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm dark:border-slate-700 dark:bg-slate-900">
+                            className="overflow-hidden rounded-xl border border-(--card-border) bg-(--soft) shadow-sm">
                             <button
                                 onClick={() => toggleTier(tier.index)}
-                                className="flex w-full items-center justify-between p-4 transition-colors hover:bg-slate-50 dark:hover:bg-slate-800">
+                                className="flex w-full cursor-pointer items-center justify-between bg-(--soft) p-4 transition-colors hover:bg-(--primary)/10">
                                 <div className="flex items-center gap-3">
-                                    <div className="rounded-md bg-blue-600 px-3 py-1 text-sm font-bold text-white">
+                                    <div
+                                        className={`rounded-md border px-3 py-1 text-sm font-bold text-(--fg) ${tierBadgeBg[tier.index] ?? ''}`}>
                                         {RarityMapper.rarityToRarityString(tier.index as unknown as Rarity)} Tier
                                     </div>
-                                    <span className="text-sm opacity-70">{tier.battles.length} Battles</span>
+                                    <span className="text-sm text-(--soft-fg)">{tier.battles.length} Battles</span>
                                 </div>
                                 {isTierExpanded ? <ChevronDown size={20} /> : <ChevronRight size={20} />}
                             </button>
 
                             {/* Battles Content */}
                             {isTierExpanded && (
-                                <div className="divide-y divide-slate-100 border-t border-slate-200 dark:divide-slate-800 dark:border-slate-700">
+                                <div className="divide-y divide-(--card-border) border-t border-(--card-border)">
                                     {tier.battles.toReversed().map(battle => {
                                         const battleKey = `${quest.unitId}-${tier.index}-${battle.battleNr}`;
                                         const isBattleExpanded = !!expandedBattles[battleKey];
@@ -213,7 +191,7 @@ export const Quests = () => {
                                                         <span className="min-w-[70px] text-sm font-medium">
                                                             Battle {battle.battleNr}
                                                         </span>
-                                                        <div className="flex items-center gap-2 rounded-md bg-slate-100 px-2 py-1 dark:bg-slate-800">
+                                                        <div className="flex items-center gap-2 rounded-md bg-(--soft) px-2 py-1">
                                                             <UpgradeImage
                                                                 material={battle.loot.reward.upgradeId}
                                                                 iconPath={
@@ -224,7 +202,7 @@ export const Quests = () => {
                                                                 rarity={getUpgradeRarity(battle.loot.reward.upgradeId)}
                                                             />
                                                             <span
-                                                                className={`text-xs font-bold ${needing.acquired >= needing.required ? 'text-green-500' : ''}`}>
+                                                                className={`text-xs font-bold ${needing.acquired >= needing.required ? 'text-(--success)' : ''}`}>
                                                                 {needing.acquired} / {needing.required}
                                                             </span>
                                                         </div>
@@ -239,19 +217,21 @@ export const Quests = () => {
                                                     </div>
 
                                                     <div className="flex items-center gap-2">
-                                                        <button
-                                                            onClick={() => toggleBattle(battleKey)}
-                                                            className="flex items-center gap-1 text-xs font-semibold tracking-wider text-blue-500 uppercase hover:text-blue-600">
+                                                        <Button
+                                                            appearance="plain"
+                                                            intent="primary"
+                                                            size="extra-small"
+                                                            onPress={() => toggleBattle(battleKey)}>
                                                             <Users size={14} />
                                                             {isBattleExpanded ? 'Hide Enemies' : 'Show Enemies'}
-                                                        </button>
+                                                        </Button>
                                                     </div>
                                                 </div>
 
                                                 {/* Expandable Enemy Section */}
                                                 {isBattleExpanded && (
-                                                    <div className="bg-slate-50 px-4 pt-2 pb-4 dark:bg-black/20">
-                                                        <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-slate-200 p-3 dark:border-slate-700">
+                                                    <div className="bg-(--soft) px-4 pt-2 pb-4">
+                                                        <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-(--card-border) p-3">
                                                             <div className="mb-3 flex flex-wrap items-start gap-x-3 gap-y-6">
                                                                 {battle.enemies.map((enemy, enemyIndex) => {
                                                                     const npc = NpcService.getNpcById(enemy.name);
@@ -266,7 +246,7 @@ export const Quests = () => {
                                                                         return (
                                                                             <div
                                                                                 key={enemyIndex}
-                                                                                className="text-xs text-red-500">
+                                                                                className="text-xs text-(--danger)">
                                                                                 Error: {enemy.name}
                                                                             </div>
                                                                         );
@@ -277,21 +257,15 @@ export const Quests = () => {
                                                                         stats: npc.stats[progressionIndex],
                                                                     };
                                                                     return (
-                                                                        <button
+                                                                        <div
                                                                             key={enemyIndex}
-                                                                            onClick={() => {}}
-                                                                            className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-blue-500 focus:outline-none"
-                                                                            style={{
-                                                                                transform: 'scale(0.3)',
-                                                                                transformOrigin: 'top left',
-                                                                            }}
-                                                                            title="Click for details">
+                                                                            className="relative h-[75px] w-[60px] origin-top-left scale-[0.3] rounded transition-all">
                                                                             <NpcPortrait
                                                                                 id={data.id}
                                                                                 rank={data.stats.rank}
                                                                                 stars={data.stats.rarityStars}
                                                                             />
-                                                                        </button>
+                                                                        </div>
                                                                     );
                                                                 })}
                                                             </div>

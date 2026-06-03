@@ -1,5 +1,5 @@
 import { FormControlLabel, Switch, TextField, Tooltip } from '@mui/material';
-import { ColDef, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useMemo, useRef, useState } from 'react';
 
@@ -192,12 +192,12 @@ export const Equipment = () => {
                 />
             </div>
             <div
-                className="ag-theme-material"
+                className="ag-theme-material density-compact"
                 style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
                 <AgGridReact
                     ref={gridReference}
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}

@@ -11,7 +11,7 @@ export const MobileCategoryCard = ({ icon, label, items, onClick }: MobileCatego
     <div
         role="button"
         tabIndex={0}
-        className="flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors"
+        className="flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-colors"
         onClick={onClick}
         onKeyDown={event_ => {
             if (event_.key === 'Enter' || event_.key === ' ') {

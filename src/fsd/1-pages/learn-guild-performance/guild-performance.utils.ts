@@ -259,12 +259,49 @@ export function getBossPrefix(unitId: string): string {
 }
 
 /**
+ * The boss family's position in the fixed game rotation, parsed from `GuildBoss{N}` — this matches
+ * the API `set` ordering (within a rarity, sets advance with the boss number) and is used to sort
+ * historical rows, which lack `set`. Boss HP is NOT monotonic with order, so it can't substitute.
+ * Unknown ids return -1 so they sort last under the descending sort the views use.
+ */
+export function getBossOrder(unitId: string): number {
+    const match = /GuildBoss(\d+)/.exec(unitId);
+    return match ? Number.parseInt(match[1], 10) : -1;
+}
+
+/**
  * Resolves a player's display name. An undefined id means the row was anonymized (another member
  * in a keyless member's view) and shows as "Anonymous"; otherwise falls back to the raw id.
  */
 export function resolvePlayerName(playerId: string | undefined, names: Map<string, string>): string {
     if (playerId === undefined) return 'Anonymous';
     return names.get(playerId) ?? playerId;
+}
+
+/**
+ * Union of all named players across the live current season and every historical season, sorted by
+ * display name. Used for the page-level player select that stays sticky across tabs and seasons.
+ * Anonymized rows (no id) are skipped.
+ */
+export function getAllGuildPlayers(
+    currentEntries: TacticusGuildRaidEntry[],
+    seasonData: GuildSeasonSummary[],
+    names: Map<string, string>
+): { userId: string; displayName: string }[] {
+    const seen = new Map<string, string>();
+    for (const entry of currentEntries) {
+        if (!seen.has(entry.userId)) seen.set(entry.userId, resolvePlayerName(entry.userId, names));
+    }
+    for (const summary of seasonData) {
+        for (const player of summary.damageSummary.textData.playerData) {
+            if (player.playerId !== undefined && !seen.has(player.playerId)) {
+                seen.set(player.playerId, resolvePlayerName(player.playerId, names));
+            }
+        }
+    }
+    return [...seen.entries()]
+        .map(([userId, displayName]) => ({ userId, displayName }))
+        .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
 }
 
 /**

@@ -1,10 +1,7 @@
-import ClearIcon from '@mui/icons-material/Clear';
-import { FormControl, InputAdornment } from '@mui/material';
-import Button from '@mui/material/Button';
-import IconButton from '@mui/material/IconButton';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import { X } from 'lucide-react';
 import React, { useState } from 'react';
+
+import { Button, TextField } from '@/fsd/5-shared/ui';
 
 import { ViewSettings } from '@/fsd/3-features/view-settings';
 
@@ -19,35 +16,29 @@ export const InventoryControls: React.FC<Props> = ({ resetUpgrades, nameFilter, 
 
     return (
         <div className="m-5 flex flex-wrap items-center justify-center gap-5">
-            <FormControl sx={{ m: 1, width: '25ch' }} variant="outlined">
-                <InputLabel htmlFor="quick-filter-input">Quick Filter</InputLabel>
-                <OutlinedInput
-                    id="quick-filter-input"
-                    value={nameFilterRaw}
-                    onFocus={event => event.target.select()}
-                    onChange={change => {
-                        const value = change.target.value;
-                        setNameFilterRaw(value);
-                        setTimeout(() => setNameFilter(value), value ? 50 : 0);
-                    }}
-                    endAdornment={
-                        nameFilter ? (
-                            <InputAdornment position="end">
-                                <IconButton
-                                    onClick={() => {
-                                        setNameFilterRaw('');
-                                        setTimeout(() => setNameFilter(''), 0);
-                                    }}
-                                    edge="end">
-                                    <ClearIcon />
-                                </IconButton>
-                            </InputAdornment>
-                        ) : undefined
-                    }
-                    label="Quick Filter"
-                />
-            </FormControl>
-            <Button onClick={resetUpgrades} color="error" variant="contained">
+            <TextField
+                placeholder="Quick Filter"
+                value={nameFilterRaw}
+                onFocus={event => (event.target as HTMLInputElement).select()}
+                onChange={value => {
+                    setNameFilterRaw(value);
+                    setTimeout(() => setNameFilter(value), value ? 50 : 0);
+                }}
+                suffix={
+                    nameFilter ? (
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            onPress={() => {
+                                setNameFilterRaw('');
+                                setTimeout(() => setNameFilter(''), 0);
+                            }}>
+                            <X className="size-4" />
+                        </Button>
+                    ) : undefined
+                }
+            />
+            <Button intent="danger" onPress={resetUpgrades}>
                 Reset All
             </Button>
             <ViewSettings preset={'inventory'} />

@@ -1,6 +1,6 @@
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import { Button, Checkbox, FormControlLabel } from '@mui/material';
-import { AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { enqueueSnackbar } from 'notistack';
 import React, { useState, useEffect, useMemo } from 'react';
@@ -461,10 +461,10 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
                         </Button>
                     </div>
                 </div>
-                <div className="ag-theme-alpine h-96 w-full">
+                <div className="ag-theme-material density-compact h-96 w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         rowData={summaryData}
                         columnDefs={summaryColumnDefs}
                         context={gridContext}
@@ -479,10 +479,10 @@ export const TacticusGuildRaidVisualization: React.FC<{ userIdMapper: (userId: s
             {/* Raid Entries Table */}
             <div className="bg-overlay rounded-lg p-4 shadow">
                 <h2 className="text-overlay-fg mb-3 text-lg font-semibold">Raid Attacks</h2>
-                <div className="ag-theme-alpine h-96 w-full">
+                <div className="ag-theme-material density-compact h-96 w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         rowData={filteredEntries}
                         columnDefs={columnDefs}
                         context={gridContext}

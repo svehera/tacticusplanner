@@ -1,5 +1,4 @@
-﻿import { MenuItem, Select } from '@mui/material';
-import React, { useMemo } from 'react';
+﻿import React, { useMemo } from 'react';
 
 import { rarityToMaxStars, rarityToStars } from 'src/models/constants';
 import { ICampaignBattleComposed, SHARD_FARM_TYPE_VALUES, ShardFarmType } from 'src/models/interfaces';
@@ -8,6 +7,7 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Alliance, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { OnslaughtIcon } from '@/fsd/5-shared/ui/icons';
+import { Select } from '@/fsd/5-shared/ui/selects';
 
 import { ICharacterAscendGoal } from '@/fsd/3-features/goals/goals.models';
 
@@ -136,25 +136,18 @@ export const EditAscendGoal: React.FC<Props> = ({
                 </>
             )}
 
-            <div className="flex items-center gap-3">
-                <div className="flex-1">
-                    <label className="mb-1 block text-sm font-medium">Farm Type</label>
-                    <Select
-                        label="Farm Type"
-                        value={farmType}
-                        onChange={event => onChange('farmType', event.target.value as ShardFarmType)}
-                        fullWidth>
-                        {SHARD_FARM_TYPE_VALUES.map(type => (
-                            <MenuItem key={type} value={type}>
-                                {type
-                                    .split('_')
-                                    .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
-                                    .join(' ')}
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </div>
-            </div>
+            <Select<ShardFarmType>
+                label="Farm Type"
+                options={[...SHARD_FARM_TYPE_VALUES]}
+                value={farmType}
+                onChange={value => onChange('farmType', value)}
+                renderOption={type =>
+                    type
+                        .split('_')
+                        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+                        .join(' ')
+                }
+            />
         </>
     );
 };

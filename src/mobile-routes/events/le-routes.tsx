@@ -85,7 +85,7 @@ export const PlanLeRoutes = () => {
                         role="button"
                         tabIndex={0}
                         className={cn(
-                            'flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors',
+                            'flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-colors',
                             isFinished && 'opacity-50'
                         )}
                         onClick={() => navigateToLre(le.lre!.id)}
@@ -99,7 +99,7 @@ export const PlanLeRoutes = () => {
                             <div className="flex items-center gap-2.5 font-medium">
                                 <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}
                             </div>
-                            <span className="text-sm text-(--muted-fg)">Legendary Event</span>
+                            <span className="text-sm text-(--soft-fg)">Legendary Event</span>
                         </div>
                         <div className="px-4 py-3 text-sm">
                             {isFinished ? (

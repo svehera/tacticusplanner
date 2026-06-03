@@ -73,7 +73,6 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.roundIcon} />}
-            {}
             <UnitsAutocomplete
                 className="max-w-[250px]"
                 unit={mow}
