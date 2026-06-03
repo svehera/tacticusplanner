@@ -8,7 +8,8 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, IconButton, Popover } from '@mui/material';
+import { Avatar, Badge, Divider, IconButton, ListItemIcon, MenuItem, Popover, Switch } from '@mui/material';
+import ListItemText from '@mui/material/ListItemText';
 import { enqueueSnackbar } from 'notistack';
 import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -73,6 +74,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
+    const [debugMode, setDebugMode] = useState(() => localStorage.getItem('debugMode') === 'true');
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
     const navigate = useNavigate();
@@ -229,13 +231,115 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                 id="account-menu"
                 anchorEl={userMenuControls.anchorEl}
                 open={userMenuControls.open}
-                onClose={close}
-                anchorOrigin={{ vertical: 'top', horizontal: 'left' }}
-                transformOrigin={{ vertical: 'bottom', horizontal: 'left' }}
-                elevation={0}
-                PaperProps={{
-                    className: 'bg-[var(--sidebar)] border border-[var(--border)] rounded-lg shadow-xl w-[220px] p-1',
-                }}>
+                onClose={userMenuControls.handleClose}
+                onClick={userMenuControls.handleClose}
+                transformOrigin={{ horizontal: 'right', vertical: 'top' }}
+                anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+                {isAuthenticated ? (
+                    <MenuItem onClick={() => logout()}>
+                        <ListItemIcon>
+                            <LogoutIcon />
+                        </ListItemIcon>
+                        <ListItemText>Logout</ListItemText>
+                    </MenuItem>
+                ) : (
+                    <div>
+                        <MenuItem onClick={() => openLoginForm()}>
+                            <ListItemIcon>
+                                <LoginIcon />
+                            </ListItemIcon>
+                            <ListItemText>Login</ListItemText>
+                        </MenuItem>
+                        <MenuItem onClick={() => setShowRegisterUser(true)}>
+                            <ListItemIcon>
+                                <RegisterIcon />
+                            </ListItemIcon>
+                            <ListItemText>Register</ListItemText>
+                        </MenuItem>
+                    </div>
+                )}
+
+                <Divider />
+                {isAuthenticated && (
+                    <MenuItem onClick={syncWithTacticus}>
+                        <ListItemIcon>
+                            <SyncIcon />
+                        </ListItemIcon>
+                        <ListItemText>Sync via Tacticus API</ListItemText>
+                    </MenuItem>
+                )}
+
+                <MenuItem onClick={() => inputReference.current?.click()}>
+                    <ListItemIcon>
+                        <UploadIcon />
+                    </ListItemIcon>
+                    <ListItemText>Import JSON</ListItemText>
+                </MenuItem>
+                <MenuItem onClick={() => downloadJson()}>
+                    <ListItemIcon>
+                        <DownloadIcon />
+                    </ListItemIcon>
+                    <ListItemText>Export JSON</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem onClick={() => restoreData()}>
+                    <ListItemIcon>
+                        <SettingsBackupRestoreIcon />
+                    </ListItemIcon>
+                    <ListItemText>Restore Backup</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem
+                    onClick={() => {
+                        const next = !debugMode;
+                        localStorage.setItem('debugMode', String(next));
+                        setDebugMode(next);
+                    }}>
+                    <ListItemText>Debug Mode</ListItemText>
+                    <Switch checked={debugMode} size="small" />
+                </MenuItem>
+
+                <Divider />
+                {isDesktopView ? (
+                    <MenuItem onClick={() => navigateToMobileView()}>
+                        <ListItemIcon>
+                            <PhoneIcon />
+                        </ListItemIcon>
+                        <ListItemText>Use mobile view</ListItemText>
+                    </MenuItem>
+                ) : (
+                    <MenuItem onClick={() => navigateToDesktopView()}>
+                        <ListItemIcon>
+                            <ComputerIcon />
+                        </ListItemIcon>
+                        <ListItemText>Use desktop view</ListItemText>
+                    </MenuItem>
+                )}
+
+                <Divider />
+
+                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
+                    <MenuItem onClick={() => setShowAdminTools(true)}>
+                        <ListItemIcon>
+                            <SupervisorAccountIcon />
+                        </ListItemIcon>
+                        <ListItemText>Admin tools</ListItemText>
+                    </MenuItem>
+                )}
+
+                <MenuItem onClick={() => navigateToReviewTeams()}>
+                    <ListItemIcon>
+                        <GroupWorkIcon />
+                    </ListItemIcon>
+                    {userInfo.rejectedTeamsCount > 0 ? (
+                        <Badge badgeContent={userInfo.rejectedTeamsCount} color="error">
+                            <ListItemText>Review guides</ListItemText>
+                        </Badge>
+                    ) : (
+                        <ListItemText>Review guides</ListItemText>
+                    )}
+                </MenuItem>
+
                 {/* Identity row */}
                 <div className="mb-1 flex items-center gap-2.5 border-b border-[var(--border)] px-2 py-2">
                     {isAuthenticated ? (
