@@ -2,9 +2,12 @@
 import {
     TacticusDamageType,
     TacticusEncounterType,
+    type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+
+import { getBossPrefix } from '../guild-performance.utils';
 
 export interface LoopTokenCounts {
     loopNumber: number;
@@ -196,6 +199,78 @@ export function buildBossLoopRows(entries: TacticusGuildRaidEntry[]): BossLoopRo
     }
 
     // Graphs are sorted descending: highest rarity / latest set first
+    return rows.toSorted((a, b) => {
+        if (a.rarity !== b.rarity) return b.rarity - a.rarity;
+        return b.set - a.set;
+    });
+}
+
+/**
+ * Builds boss loop rows from a historical season aggregate. The aggregate stores per-loop token
+ * counts directly (`summary.loops`), so no kill/loop-boundary inference is needed. Like the live
+ * tab, only legendary/mythic encounters are shown.
+ *
+ * Two fields aren't in the aggregate: prime unit identities (cross-referenced from the per-enemy
+ * `guildEntries`, which covers the top-2 rarities = the legendary/mythic shown here) and per-loop
+ * final boss HP (omitted — historical rows don't show the "remaining" readout).
+ */
+export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossLoopRow[] {
+    // Prime unitIds keyed by `${bossPrefix}:${numericRarity}` (same key shape as the loop groups).
+    const primeLookup = new Map<string, { left?: string; right?: string }>();
+    for (const entry of summary.damageSummary.guildEntries) {
+        const { enemyId, rarity, encounterIndex } = entry.enemyInfo;
+        if (encounterIndex === 0) continue;
+        const key = `${getBossPrefix(enemyId)}:${RarityMapper.stringToNumber[rarity]}`;
+        const slot = primeLookup.get(key) ?? {};
+        if (encounterIndex === 1) slot.left = enemyId;
+        else if (encounterIndex === 2) slot.right = enemyId;
+        primeLookup.set(key, slot);
+    }
+
+    interface GroupAccumulator {
+        rarity: Rarity;
+        bossUnitId: string;
+        bossMaxHp: number;
+        loops: LoopTokenCounts[];
+    }
+    const groups = new Map<string, GroupAccumulator>();
+    for (const loop of summary.loops) {
+        const rarity = RarityMapper.stringToNumber[loop.enemyInfo.rarity];
+        if (rarity < Rarity.Legendary) continue;
+        const key = `${getBossPrefix(loop.enemyInfo.enemyId)}:${rarity}`;
+        let group = groups.get(key);
+        if (group === undefined) {
+            group = { rarity, bossUnitId: loop.enemyInfo.enemyId, bossMaxHp: loop.enemyInfo.maxHp, loops: [] };
+            groups.set(key, group);
+        }
+        group.bossMaxHp = Math.max(group.bossMaxHp, loop.enemyInfo.maxHp);
+        group.loops.push({
+            loopNumber: loop.loopNumber,
+            boss: loop.bossTokens,
+            left: loop.leftPrimeTokens,
+            right: loop.rightPrimeTokens,
+            total: loop.bossTokens + loop.leftPrimeTokens + loop.rightPrimeTokens,
+            finalRemainingHp: undefined,
+        });
+    }
+
+    const rows: BossLoopRow[] = [];
+    for (const [key, group] of groups) {
+        const primes = primeLookup.get(key) ?? {};
+        rows.push({
+            bossPrefix: key.slice(0, key.lastIndexOf(':')),
+            rarity: group.rarity,
+            // No `set` in the aggregate; sort within a rarity by boss max HP instead.
+            set: group.bossMaxHp,
+            bossUnitId: group.bossUnitId,
+            bossMaxHp: group.bossMaxHp,
+            leftPrimeUnitId: primes.left,
+            rightPrimeUnitId: primes.right,
+            hasPrimes: group.loops.some(loop => loop.left > 0 || loop.right > 0),
+            loops: group.loops.toSorted((a, b) => a.loopNumber - b.loopNumber),
+        });
+    }
+
     return rows.toSorted((a, b) => {
         if (a.rarity !== b.rarity) return b.rarity - a.rarity;
         return b.set - a.set;

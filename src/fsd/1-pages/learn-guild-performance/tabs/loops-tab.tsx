@@ -1,14 +1,19 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 import { useMemo, useState } from 'react';
 
-import { type TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
+import { type GuildSeasonHistoryResponse, type TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
 
 import { unitRoundIconMap } from '../guild-performance.utils';
 
-import { buildBossLoopRows, type BossLoopRow, type LoopTokenCounts } from './loops-tab.utils';
+import {
+    buildBossLoopRows,
+    buildBossLoopRowsFromSummary,
+    type BossLoopRow,
+    type LoopTokenCounts,
+} from './loops-tab.utils';
 
 // ---------------------------------------------------------------------------
 // Season select
@@ -181,26 +186,37 @@ function BossLoopCard({ row, maxLoopTotal }: { row: BossLoopRow; maxLoopTotal: n
 
 export const LoopsTab = ({
     currentData,
-    historyData,
+    seasonHistory,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
-    historyData: TacticusGuildRaidResponse | undefined;
+    seasonHistory?: GuildSeasonHistoryResponse;
 }) => {
     const availableSeasons = useMemo(() => {
         const s = new Set<number>();
         if (currentData?.season != undefined) s.add(currentData.season);
-        if (historyData?.season != undefined) s.add(historyData.season);
+        for (const season of seasonHistory?.seasonData ?? []) s.add(season.season);
         return [...s].toSorted((a, b) => b - a);
-    }, [currentData, historyData]);
+    }, [currentData, seasonHistory]);
 
     const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
     const selectedSeason = seasonOverride ?? availableSeasons[0];
-    const selectedData = selectedSeason === historyData?.season ? historyData : currentData;
+
+    // A historical season reads per-loop counts straight from the aggregate; the live season derives
+    // them from raw per-hit entries.
+    const historySummary = useMemo(
+        () =>
+            selectedSeason === currentData?.season
+                ? undefined
+                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+        [selectedSeason, currentData, seasonHistory]
+    );
 
     const rows = useMemo(
-        () => buildBossLoopRows(selectedData?.entries ?? []),
-
-        [selectedData]
+        () =>
+            historySummary
+                ? buildBossLoopRowsFromSummary(historySummary)
+                : buildBossLoopRows(currentData?.entries ?? []),
+        [historySummary, currentData]
     );
 
     const maxLoopTotal = useMemo(() => {
@@ -213,7 +229,7 @@ export const LoopsTab = ({
         return max;
     }, [rows]);
 
-    if (currentData === undefined && historyData === undefined) {
+    if (currentData === undefined && seasonHistory === undefined) {
         return <p className="text-sm text-gray-500">Loading…</p>;
     }
 

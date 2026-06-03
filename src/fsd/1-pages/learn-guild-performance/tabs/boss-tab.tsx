@@ -4,20 +4,26 @@ import { useMemo, useState } from 'react';
 import {
     TacticusDamageType,
     TacticusEncounterType,
+    type GuildSeasonBossLeaderboardEntry,
+    type GuildSeasonHistoryResponse,
+    type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
-import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
+import { CompIcons } from '../guild-performance.components';
 import {
     bossPrefixDisplayNames,
     bossPrefixRoundIconMap,
-    computeDefaultRarities,
+    computeDefaultRaritiesFromRarities,
     getAvailableBossPrefixes,
+    getBossPrefix,
+    resolvePlayerName,
+    sortBossPrefixes,
     unitRoundIconMap,
 } from '../guild-performance.utils';
 
@@ -165,10 +171,12 @@ function NumberInput({ label, value, onChange }: { label: string; value: number;
 // ---------------------------------------------------------------------------
 
 interface LeaderboardEntry {
-    userId: string;
+    /** Undefined when anonymized (another member in a keyless member's view). */
+    userId?: string;
     displayName: string;
     damage: number;
-    raw: TacticusGuildRaidEntry;
+    /** Hero unitIds followed by the machine-of-war unitId (if any). Empty when anonymized. */
+    comp: string[];
 }
 
 interface PrimeSlot {
@@ -209,8 +217,24 @@ function buildTopN(
             userId: entry.userId,
             displayName: names.get(entry.userId) ?? entry.userId,
             damage: entry.damageDealt,
-            raw: entry,
+            comp: [
+                ...entry.heroDetails.map(hero => hero.unitId),
+                ...(entry.machineOfWarDetails ? [entry.machineOfWarDetails.unitId] : []),
+            ],
         }));
+}
+
+/** Maps aggregated leaderboard entries (historical seasons) into {@link LeaderboardEntry} rows. */
+function toLeaderboardEntries(
+    entries: GuildSeasonBossLeaderboardEntry[],
+    names: Map<string, string>
+): LeaderboardEntry[] {
+    return entries.map(entry => ({
+        userId: entry.playerId,
+        displayName: resolvePlayerName(entry.playerId, names),
+        damage: entry.damage,
+        comp: entry.comp,
+    }));
 }
 
 function buildLeaderboardGroups(
@@ -278,6 +302,70 @@ function buildLeaderboardGroups(
     });
 }
 
+/**
+ * Reconstructs leaderboard groups from a historical season aggregate. Each leaderboard is already
+ * the top-5 single hits for one enemy (boss or prime, top-2 rarities only); we re-group a boss with
+ * its primes by GuildBoss{N} prefix + rarity. `bossTopN`/`primeTopN` can only trim the stored five.
+ */
+function buildLeaderboardGroupsFromSummary(
+    summary: GuildSeasonSummary,
+    selectedRarities: Rarity[],
+    selectedBossPrefixes: string[],
+    names: Map<string, string>,
+    bossTopN: number,
+    primeTopN: number
+): BossGroup[] {
+    interface GroupAccumulator {
+        bossPrefix: string;
+        rarity: Rarity;
+        bossUnitId: string;
+        bossMaxHp: number;
+        bossEntries: LeaderboardEntry[];
+        primeSlots: PrimeSlot[];
+    }
+    const groups = new Map<string, GroupAccumulator>();
+
+    for (const board of summary.leaderboards) {
+        const { enemyId, rarity: rarityName, encounterIndex, maxHp } = board.enemyInfo;
+        const rarity = RarityMapper.stringToNumber[rarityName];
+        if (!selectedRarities.includes(rarity)) continue;
+        const bossPrefix = getBossPrefix(enemyId);
+        if (selectedBossPrefixes.length > 0 && !selectedBossPrefixes.includes(bossPrefix)) continue;
+
+        const key = `${bossPrefix}:${rarity}`;
+        let group = groups.get(key);
+        if (group === undefined) {
+            group = { bossPrefix, rarity, bossUnitId: '', bossMaxHp: 0, bossEntries: [], primeSlots: [] };
+            groups.set(key, group);
+        }
+        const entries = toLeaderboardEntries(board.entries, names);
+        if (encounterIndex === 0) {
+            group.bossUnitId = enemyId;
+            group.bossMaxHp = maxHp;
+            group.bossEntries = entries.slice(0, bossTopN);
+        } else {
+            group.primeSlots.push({ unitId: enemyId, encounterIndex, entries: entries.slice(0, primeTopN) });
+        }
+    }
+
+    return [...groups.values()]
+        .map(group => ({
+            bossPrefix: group.bossPrefix,
+            bossUnitId: group.bossUnitId,
+            rarity: group.rarity,
+            // No `set` in the aggregate; sort within a rarity by boss max HP (biggest first) instead.
+            set: group.bossMaxHp,
+            bossEntries: group.bossEntries,
+            primeSlots: group.primeSlots
+                .toSorted((a, b) => a.encounterIndex - b.encounterIndex)
+                .filter(prime => prime.entries.length > 0),
+        }))
+        .toSorted((a, b) => {
+            if (a.rarity !== b.rarity) return b.rarity - a.rarity;
+            return b.set - a.set;
+        });
+}
+
 // ---------------------------------------------------------------------------
 /**
  * Given a GuildBoss unit ID, returns the best display name:
@@ -336,10 +424,6 @@ function UnitIcon({ unitId }: { unitId: string }) {
 }
 
 function LeaderboardRow({ rank, entry }: { rank: number; entry: LeaderboardEntry }) {
-    const heroes = entry.raw.heroDetails.map(u => CharactersService.getUnit(u.unitId)).filter(c => c !== undefined);
-    const mow = entry.raw.machineOfWarDetails?.unitId
-        ? MowsService.resolveToStatic(entry.raw.machineOfWarDetails.unitId)
-        : undefined;
     return (
         <div className="grid grid-cols-[1.5rem_minmax(0,8rem)_auto_4.5rem] items-center gap-x-1.5 px-2 py-1 text-sm even:bg-gray-50 dark:even:bg-gray-800/40">
             <span className="flex items-center justify-center">
@@ -348,27 +432,7 @@ function LeaderboardRow({ rank, entry }: { rank: number; entry: LeaderboardEntry
             <span className="min-w-0 truncate font-medium" title={entry.userId}>
                 {entry.displayName}
             </span>
-            <span className="flex items-center gap-0.5">
-                {heroes.map((hero, index) => (
-                    <UnitShardIcon
-                        key={index}
-                        icon={hero!.roundIcon ?? ''}
-                        name={hero!.name}
-                        tooltip={hero!.name}
-                        width={20}
-                        height={20}
-                    />
-                ))}
-                {mow && (
-                    <UnitShardIcon
-                        icon={mow.roundIcon ?? ''}
-                        name={mow.name}
-                        tooltip={mow.name}
-                        width={20}
-                        height={20}
-                    />
-                )}
-            </span>
+            <CompIcons comp={entry.comp} size={20} />
             <span className="text-right font-semibold tabular-nums">{entry.damage.toLocaleString()}</span>
         </div>
     );
@@ -386,7 +450,7 @@ function LeaderboardCard({ unitId, rarity, entries }: { unitId: string; rarity: 
             </div>
             <div className="flex flex-col divide-y divide-gray-100 dark:divide-gray-800">
                 {entries.map((entry, index) => (
-                    <LeaderboardRow key={entry.userId} rank={index + 1} entry={entry} />
+                    <LeaderboardRow key={index} rank={index + 1} entry={entry} />
                 ))}
             </div>
         </div>
@@ -433,28 +497,54 @@ function BossGroupSection({ group }: { group: BossGroup }) {
 
 export const LeaderboardTab = ({
     currentData,
-    historyData,
+    seasonHistory,
     names,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
-    historyData: TacticusGuildRaidResponse | undefined;
+    seasonHistory?: GuildSeasonHistoryResponse;
     names: Map<string, string>;
 }) => {
     // --- season ---
     const availableSeasons = useMemo(() => {
         const s = new Set<number>();
         if (currentData?.season !== undefined) s.add(currentData.season);
-        if (historyData?.season !== undefined) s.add(historyData.season);
+        for (const season of seasonHistory?.seasonData ?? []) s.add(season.season);
         return [...s].toSorted((a, b) => b - a);
-    }, [currentData, historyData]);
+    }, [currentData, seasonHistory]);
 
     const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
     const selectedSeason = seasonOverride ?? availableSeasons[0];
-    const selectedData = selectedSeason === historyData?.season ? historyData : currentData;
-    const allSeasonEntries: TacticusGuildRaidEntry[] = useMemo(() => selectedData?.entries ?? [], [selectedData]);
+
+    // A historical season builds its leaderboards from the aggregated top-5s; the live season builds
+    // them from raw per-hit entries.
+    const historySummary = useMemo(
+        () =>
+            selectedSeason === currentData?.season
+                ? undefined
+                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+        [selectedSeason, currentData, seasonHistory]
+    );
+    const isHistorical = historySummary !== undefined;
+
+    // Live-season entries; empty for a historical season (no per-hit data exists).
+    const allSeasonEntries: TacticusGuildRaidEntry[] = useMemo(
+        () => (isHistorical ? [] : (currentData?.entries ?? [])),
+        [isHistorical, currentData]
+    );
 
     // --- rarity ---
-    const defaultRarities = useMemo(() => computeDefaultRarities(allSeasonEntries), [allSeasonEntries]);
+    const raritiesPresent = useMemo<Rarity[]>(
+        () =>
+            historySummary
+                ? [
+                      ...new Set(
+                          historySummary.leaderboards.map(board => RarityMapper.stringToNumber[board.enemyInfo.rarity])
+                      ),
+                  ]
+                : allSeasonEntries.map(entry => entry.rarity),
+        [historySummary, allSeasonEntries]
+    );
+    const defaultRarities = useMemo(() => computeDefaultRaritiesFromRarities(raritiesPresent), [raritiesPresent]);
     const [rarityOverride, setRarityOverride] = useState<Rarity[] | undefined>();
     const selectedRarities = rarityOverride ?? defaultRarities;
 
@@ -464,10 +554,16 @@ export const LeaderboardTab = ({
     );
 
     // --- boss ---
-    const availableBossPrefixes = useMemo(
-        () => getAvailableBossPrefixes(rarityFilteredEntries),
-        [rarityFilteredEntries]
-    );
+    const availableBossPrefixes = useMemo(() => {
+        if (historySummary) {
+            return sortBossPrefixes(
+                historySummary.leaderboards
+                    .filter(board => selectedRarities.includes(RarityMapper.stringToNumber[board.enemyInfo.rarity]))
+                    .map(board => getBossPrefix(board.enemyInfo.enemyId))
+            );
+        }
+        return getAvailableBossPrefixes(rarityFilteredEntries);
+    }, [historySummary, selectedRarities, rarityFilteredEntries]);
     const [selectedBossPrefixes, setSelectedBossPrefixes] = useState<string[] | undefined>();
     const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
 
@@ -488,8 +584,18 @@ export const LeaderboardTab = ({
 
     // --- groups ---
     const groups = useMemo(
-        () => buildLeaderboardGroups(rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN),
-        [rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN]
+        () =>
+            historySummary
+                ? buildLeaderboardGroupsFromSummary(
+                      historySummary,
+                      selectedRarities,
+                      effectiveBossPrefixes,
+                      names,
+                      bossTopN,
+                      primeTopN
+                  )
+                : buildLeaderboardGroups(rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN),
+        [historySummary, selectedRarities, rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN]
     );
 
     return (
@@ -502,8 +608,13 @@ export const LeaderboardTab = ({
                     selected={effectiveBossPrefixes}
                     onChange={setSelectedBossPrefixes}
                 />
-                <NumberInput label="Boss top N" value={bossTopN} onChange={setBossTopN} />
-                <NumberInput label="Prime top N" value={primeTopN} onChange={setPrimeTopN} />
+                {/* Historical leaderboards are pre-capped at top-5 server-side, so top-N is live-only. */}
+                {!isHistorical && (
+                    <>
+                        <NumberInput label="Boss top N" value={bossTopN} onChange={setBossTopN} />
+                        <NumberInput label="Prime top N" value={primeTopN} onChange={setPrimeTopN} />
+                    </>
+                )}
             </div>
             {groups.length === 0 ? (
                 <p className="text-sm text-gray-400">No data for selected filters.</p>
