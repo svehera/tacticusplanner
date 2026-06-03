@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 
 import { makeApiCall } from '@/fsd/5-shared/api';
 import type { TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
+import { useDebugMode } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import { DebugJson } from '../guild-performance.components';
@@ -177,10 +178,11 @@ export const OverviewTab = ({
     }, []);
 
     const tokenData = tokens === LOADING ? undefined : tokens;
+    const debugMode = useDebugMode();
 
     return (
         <div className="flex flex-col gap-8">
-            <DebugJson label="guild/tokens" value={tokenData ?? 'loading\u2026'} />
+            {debugMode && <DebugJson label="guild/tokens" value={tokenData ?? 'loading\u2026'} />}
             <section className="flex flex-col gap-3">
                 <h2 className="text-base font-semibold">Current Boss</h2>
                 <CurrentBoss data={currentData} />

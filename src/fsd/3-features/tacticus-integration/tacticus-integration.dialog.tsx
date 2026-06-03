@@ -11,9 +11,9 @@ import { Button } from '@/fsd/5-shared/ui/button';
 import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
+import { Switch } from '@/fsd/5-shared/ui/switch';
 
 import { GUILD_TAG_LENGTH, isValidGuildTag, sameGuildTags } from './guild-sharing';
-import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 interface Props extends DialogProps {
     tacticusApiKey: string;
@@ -61,35 +61,35 @@ function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags
                             addTag();
                         }
                     }}
-                    className="w-32 rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
+                    className="w-32 rounded border border-(--input-border) bg-(--bg) px-2 py-1 text-sm"
                 />
-                <button
-                    type="button"
+                <Button
+                    appearance="outline"
+                    size="square-petite"
                     aria-label="Add guild tag"
-                    onClick={addTag}
-                    disabled={!canAdd}
-                    className="flex size-7 items-center justify-center rounded border border-gray-300 text-lg leading-none disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-600">
+                    onPress={addTag}
+                    isDisabled={!canAdd}>
                     +
-                </button>
+                </Button>
             </div>
             {trimmed.length > 0 && !isValidGuildTag(trimmed) && (
-                <p className="text-xs text-red-600 dark:text-red-400">
+                <p className="text-xs text-(--danger)">
                     Guild tag must be exactly {GUILD_TAG_LENGTH} alphanumeric characters.
                 </p>
             )}
-            {isDuplicate && <p className="text-xs text-red-600 dark:text-red-400">That guild tag is already added.</p>}
+            {isDuplicate && <p className="text-xs text-(--danger)">That guild tag is already added.</p>}
             {tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 pt-1">
                     {tags.map(tag => (
                         <span
                             key={tag}
-                            className="flex items-center gap-1 rounded-full border border-gray-300 px-2 py-0.5 text-xs dark:border-gray-600">
+                            className="flex items-center gap-1 rounded-full border border-(--border) px-2 py-0.5 text-xs">
                             {tag}
                             <button
                                 type="button"
                                 aria-label={`Remove ${tag}`}
                                 onClick={() => onChange(tags.filter(existing => existing !== tag))}
-                                className="text-gray-500 hover:text-red-600 dark:hover:text-red-400">
+                                className="rounded text-(--soft-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
                                 ×
                             </button>
                         </span>
@@ -114,7 +114,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
 }) => {
     const loader = useLoader();
     const auth = useAuth();
-    const { syncWithTacticus } = useSyncWithTacticus();
 
     const [apiKey, setApiKey] = useState<string>(tacticusApiKey);
     const [currentApiKey, setCurrentApiKey] = useState<string>(tacticusApiKey);
@@ -139,11 +138,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
 
     const trimmedGuildTag = guildTag.trim();
     const guildTagInvalid = trimmedGuildTag.length > 0 && !isValidGuildTag(trimmedGuildTag);
-
-    async function syncWithTacticusApi() {
-        onClose();
-        await syncWithTacticus();
-    }
 
     async function updateApiKey() {
         loader.startLoading('Updating settings. Please wait...');
@@ -184,7 +178,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
 
             enqueueSnackbar('Settings updated', { variant: 'success' });
         } catch (error) {
-            console.error(error);
             const parsedError =
                 typeof error === 'string' || error instanceof Error || error === undefined ? error : String(error);
             enqueueSnackbar(buildErrorMessage(parsedError), { variant: 'error' });
@@ -203,151 +196,125 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             }}>
             <Modal.Content>
                 <Modal.Header>
-                    <Modal.Title>Sync with Tacticus via API</Modal.Title>
+                    <Modal.Title>Tacticus API settings</Modal.Title>
                     <Modal.Description>
-                        <span className="font-semibold text-red-600 dark:text-red-500">⚠ Warning:&nbsp;</span>
+                        <span className="font-semibold text-(--danger)">⚠ Warning:&nbsp;</span>
                         The Planner is in an early stage of integration with the Tacticus API. Unexpected issues may
                         occur.
                     </Modal.Description>
                 </Modal.Header>
                 <Modal.Body className="pb-1">
-                    <div>
-                        <span className="font-bold">Acquire your API key at </span>
-                        <a
-                            href="https://api.tacticusgame.com/"
-                            target="_blank"
-                            rel="noreferrer"
-                            className="font-semibold text-blue-600 underline hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
-                            https://api.tacticusgame.com
-                        </a>
-                        .
-                        <br />
-                        <br />
-                        <p>
-                            <span className="font-semibold text-yellow-700 dark:text-yellow-400">
-                                🔑 DO NOT SHARE PUBLICLY:&nbsp;
-                            </span>
-                            <span>
-                                Only share this key with trusted parties. Do not post your key on forums or in open
-                                chats.
-                            </span>
-                        </p>
-                    </div>
+                    <div className="flex flex-col gap-4">
+                        <div className="space-y-3">
+                            <p>
+                                <span className="font-bold">Acquire your API key at </span>
+                                <a
+                                    href="https://api.tacticusgame.com/"
+                                    target="_blank"
+                                    rel="noreferrer"
+                                    className="font-semibold text-(--primary) underline hover:opacity-80">
+                                    https://api.tacticusgame.com
+                                </a>
+                                .
+                            </p>
+                            <p>
+                                <span className="font-semibold text-amber-700 dark:text-amber-400">
+                                    🔑 DO NOT SHARE PUBLICLY:&nbsp;
+                                </span>
+                                <span>
+                                    Only share this key with trusted parties. Do not post your key on forums or in open
+                                    chats.
+                                </span>
+                            </p>
+                        </div>
 
-                    <br />
-
-                    <div className="flex flex-col items-center justify-between">
-                        <TextField
-                            name={`apikey-${Math.random()}`}
-                            description="Used to fetch Player data. Player scope is required for this key"
-                            type="password"
-                            label="Personal API key"
-                            className="w-[80%]"
-                            value={apiKey}
-                            onChange={setApiKey}
-                            autoComplete="new-password"
-                            isRevealable
-                        />
-                        <TextField
-                            name={`guildApikey-${Math.random()}`}
-                            description="Used to fetch Guild Raid data. Ask your guild leader or co-leader to generate API key with 'Guild Raid' and 'Guild' scopes"
-                            type="password"
-                            label="Guild API key"
-                            className="w-[80%]"
-                            value={guildApiKey}
-                            onChange={setGuildApiKey}
-                            autoComplete="new-password"
-                            isRevealable
-                        />
-                        <TextField
-                            name={`apikey-${Math.random()}`}
-                            type="password"
-                            description="Used to identify your account in the Guild Raid data"
-                            label="Tacticus User ID"
-                            className="w-[80%]"
-                            value={userId}
-                            onChange={setUserId}
-                            autoComplete="new-password"
-                            isRevealable
-                        />
-                        {userId && (
-                            <div className="flex w-[80%] flex-col gap-2 pt-2">
-                                <label className="flex cursor-pointer items-center gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="size-4 cursor-pointer accent-blue-600"
-                                        checked={currentShareInGameName}
-                                        onChange={event => setCurrentShareInGameName(event.target.checked)}
-                                    />
-                                    <span className="text-sm">Share in-game player name with guild</span>
-                                </label>
-                                <label className="flex cursor-pointer items-center gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="size-4 cursor-pointer accent-blue-600"
-                                        checked={currentShareRosterData}
-                                        onChange={event => setCurrentShareRosterData(event.target.checked)}
-                                    />
-                                    <span className="text-sm">Share roster with guild</span>
-                                </label>
-                            </div>
-                        )}
-                        {guildApiKey && (
-                            <div className="flex w-[80%] flex-col gap-3 pt-2">
-                                <label className="flex cursor-pointer items-start gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="mt-0.5 size-4 cursor-pointer accent-blue-600"
-                                        checked={shareGuildMemberPerformance}
-                                        onChange={event => setShareGuildMemberPerformance(event.target.checked)}
-                                    />
-                                    <span className="text-sm">
+                        <div className="flex flex-col gap-4">
+                            <TextField
+                                name={`apikey-${Math.random()}`}
+                                description="Used to fetch Player data. Player scope is required for this key"
+                                type="password"
+                                label="Personal API key"
+                                value={apiKey}
+                                onChange={setApiKey}
+                                autoComplete="new-password"
+                                isRevealable
+                            />
+                            <TextField
+                                name={`guildApikey-${Math.random()}`}
+                                description="Used to fetch Guild Raid data. Ask your guild leader or co-leader to generate API key with 'Guild Raid' and 'Guild' scopes"
+                                type="password"
+                                label="Guild API key"
+                                value={guildApiKey}
+                                onChange={setGuildApiKey}
+                                autoComplete="new-password"
+                                isRevealable
+                            />
+                            <TextField
+                                name={`apikey-${Math.random()}`}
+                                type="password"
+                                description="Used to identify your account in the Guild Raid data"
+                                label="Tacticus User ID"
+                                value={userId}
+                                onChange={setUserId}
+                                autoComplete="new-password"
+                                isRevealable
+                            />
+                            {userId && (
+                                <div className="flex flex-col gap-2">
+                                    <Switch isSelected={currentShareInGameName} onChange={setCurrentShareInGameName}>
+                                        Share in-game player name with guild
+                                    </Switch>
+                                    <Switch isSelected={currentShareRosterData} onChange={setCurrentShareRosterData}>
+                                        Share roster with guild
+                                    </Switch>
+                                </div>
+                            )}
+                            {guildApiKey && (
+                                <div className="flex flex-col gap-3">
+                                    <Switch
+                                        isSelected={shareGuildMemberPerformance}
+                                        onChange={setShareGuildMemberPerformance}>
                                         Privately share each guild member&apos;s performance data (visible only to that
                                         member)
-                                    </span>
-                                </label>
-                                <GuildTagListInput tags={combinedTags} onChange={setCombinedTags} />
-                            </div>
-                        )}
-                        {!guildApiKey && userId && (
-                            <TextField
-                                description={`Your guild's tag — exactly ${GUILD_TAG_LENGTH} alphanumeric characters`}
-                                label="Guild tag"
-                                className="w-[80%] pt-2"
-                                value={guildTag}
-                                onChange={setGuildTag}
-                                errorMessage={
-                                    guildTagInvalid
-                                        ? `Guild tag must be exactly ${GUILD_TAG_LENGTH} alphanumeric characters.`
-                                        : undefined
-                                }
-                            />
-                        )}
-                        <Button
-                            intent="primary"
-                            isDisabled={
-                                guildTagInvalid ||
-                                (apiKey === currentApiKey &&
-                                    guildApiKey === currentGuildApiKey &&
-                                    userId === currentUserId &&
-                                    currentShareInGameName === savedShareInGameName &&
-                                    currentShareRosterData === savedShareRosterData &&
-                                    shareGuildMemberPerformance === savedShareGuildMemberPerformance &&
-                                    sameGuildTags(combinedTags, savedCombinedTags) &&
-                                    guildTag === savedGuildTag)
-                            }
-                            onPress={updateApiKey}>
-                            Update
-                        </Button>
+                                    </Switch>
+                                    <GuildTagListInput tags={combinedTags} onChange={setCombinedTags} />
+                                </div>
+                            )}
+                            {!guildApiKey && userId && (
+                                <TextField
+                                    description={`Your guild's tag — exactly ${GUILD_TAG_LENGTH} alphanumeric characters`}
+                                    label="Guild tag"
+                                    value={guildTag}
+                                    onChange={setGuildTag}
+                                    errorMessage={
+                                        guildTagInvalid
+                                            ? `Guild tag must be exactly ${GUILD_TAG_LENGTH} alphanumeric characters.`
+                                            : undefined
+                                    }
+                                />
+                            )}
+                        </div>
                     </div>
-                    <br />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button intent="secondary" onPress={onClose}>
                         Cancel
                     </Button>
-                    <Button intent="primary" onPress={syncWithTacticusApi} isDisabled={!currentApiKey}>
-                        Sync
+                    <Button
+                        intent="primary"
+                        isDisabled={
+                            guildTagInvalid ||
+                            (apiKey === currentApiKey &&
+                                guildApiKey === currentGuildApiKey &&
+                                userId === currentUserId &&
+                                currentShareInGameName === savedShareInGameName &&
+                                currentShareRosterData === savedShareRosterData &&
+                                shareGuildMemberPerformance === savedShareGuildMemberPerformance &&
+                                sameGuildTags(combinedTags, savedCombinedTags) &&
+                                guildTag === savedGuildTag)
+                        }
+                        onPress={updateApiKey}>
+                        Update
                     </Button>
                 </Modal.Footer>
             </Modal.Content>

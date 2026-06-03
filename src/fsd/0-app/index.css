@@ -264,7 +264,7 @@
         --secondary: var(--color-zinc-700);
         --secondary-fg: var(--color-zinc-100);
 
-        --danger: var(--color-red-600);
+        --danger: var(--color-red-500);
         --danger-fg: var(--color-red-50);
 
         /* ── Charts ────────────────────────────────── */

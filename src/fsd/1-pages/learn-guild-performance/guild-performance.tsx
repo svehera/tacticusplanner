@@ -10,7 +10,7 @@ import {
     type GuildSeasonHistoryResponse,
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { useAuth } from '@/fsd/5-shared/model';
+import { useDebugMode, useAuth } from '@/fsd/5-shared/model';
 
 import { NoKeyMessage, DebugJson } from './guild-performance.components';
 import { LOADING, type GuildMemberName, type LoadingOrData } from './guild-performance.types';
@@ -90,6 +90,7 @@ export const GuildPerformance = () => {
     // Members have no raw current-season data, so the Overview tab is empty for them — land on Damage.
     const [activeTab, setActiveTab] = useState<TabId>(isMember ? 'damage' : 'overview');
     const [isRefreshing, setIsRefreshing] = useState(false);
+    const debugMode = useDebugMode();
 
     const currentData = current === LOADING ? undefined : current;
 
@@ -200,12 +201,16 @@ export const GuildPerformance = () => {
                     {historyError}
                 </div>
             )}
-            <DebugJson label="guild/raid?history=false" value={currentData ?? 'loading\u2026'} />
-            <DebugJson
-                label="guild/raid?history=true (parsed)"
-                value={historyError ?? seasonHistory ?? 'loading\u2026'}
-            />
-            <DebugJson label="guild/members/names" value={rawNames} />
+            {debugMode && (
+                <>
+                    <DebugJson label="guild/raid?history=false" value={currentData ?? 'loading\u2026'} />
+                    <DebugJson
+                        label="guild/raid?history=true (parsed)"
+                        value={historyError ?? seasonHistory ?? 'loading\u2026'}
+                    />
+                    <DebugJson label="guild/members/names" value={rawNames} />
+                </>
+            )}
             <TabBar active={activeTab} onChange={setActiveTab} />
             <div className="pt-2">
                 <div className={activeTab === 'overview' ? undefined : 'hidden'}>

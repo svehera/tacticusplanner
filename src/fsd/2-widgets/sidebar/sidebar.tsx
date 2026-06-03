@@ -8,10 +8,10 @@ import { useLocation, useNavigate } from 'react-router-dom';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { NAV_SECTIONS } from '@/models/menu-items'; // TODO refactor for FSD
-// eslint-disable-next-line import-x/no-internal-modules
-import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
 import { MenuItemTP, isTabletOrMobileMediaQuery } from '@/fsd/5-shared/ui';
+
+import { AccountDock } from './account-dock';
 
 export const Sidebar = () => {
     const isSmall = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -176,10 +176,8 @@ export const Sidebar = () => {
                     ))}
                 </nav>
 
-                {/* User footer */}
-                <div className="flex-shrink-0 border-t border-[var(--border)] px-3 py-2">
-                    <UserMenu compact={collapsed} />
-                </div>
+                {/* Account dock */}
+                <AccountDock collapsed={collapsed} />
             </aside>
         </div>
     );
