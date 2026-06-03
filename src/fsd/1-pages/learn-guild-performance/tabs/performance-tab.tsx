@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
     TacticusDamageType,
@@ -48,63 +48,6 @@ const ALL_RARITIES: Rarity[] = [
     Rarity.Legendary,
     Rarity.Mythic,
 ];
-
-function SeasonSelect({
-    seasons,
-    value,
-    onChange,
-}: {
-    seasons: number[];
-    value: number | undefined;
-    onChange: (season: number) => void;
-}) {
-    return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
-            <select
-                value={value ?? ''}
-                onChange={event => {
-                    onChange(Number(event.target.value));
-                }}
-                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-                {seasons.map(s => (
-                    <option key={s} value={s}>
-                        Season {s}
-                    </option>
-                ))}
-            </select>
-        </label>
-    );
-}
-
-function PlayerSelect({
-    players,
-    value,
-    onChange,
-}: {
-    players: { userId: string; displayName: string }[];
-    value: string | undefined;
-    onChange: (userId: string | undefined) => void;
-}) {
-    return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Player</span>
-            <select
-                value={value ?? ''}
-                onChange={event => {
-                    onChange(event.target.value === '' ? undefined : event.target.value);
-                }}
-                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-                <option value="">All players (guild)</option>
-                {players.map(player => (
-                    <option key={player.userId} value={player.userId}>
-                        {player.displayName}
-                    </option>
-                ))}
-            </select>
-        </label>
-    );
-}
 
 function RarityFilterGroup({ selected, onChange }: { selected: Rarity[]; onChange: (rarities: Rarity[]) => void }) {
     const toggle = (rarity: Rarity) => {
@@ -761,25 +704,17 @@ export const PerformanceTab = ({
     currentData,
     seasonHistory,
     names,
-    memberUserId,
+    selectedSeason,
+    selectedPlayerId,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
     names: Map<string, string>;
-    /** When set (a keyless member), the view is pinned to this player and the player select is hidden. */
-    memberUserId?: string;
+    /** Page-level sticky season selection. */
+    selectedSeason: number | undefined;
+    /** Page-level sticky player selection. */
+    selectedPlayerId: string | undefined;
 }) => {
-    // --- season ---
-    const availableSeasons = useMemo(() => {
-        const set = new Set<number>();
-        if (currentData?.season != undefined) set.add(currentData.season);
-        for (const season of seasonHistory?.seasonData ?? []) set.add(season.season);
-        return [...set].toSorted((a, b) => b - a);
-    }, [currentData, seasonHistory]);
-
-    const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
-    const selectedSeason = seasonOverride ?? availableSeasons[0];
-
     // A historical season currently supports only the full-guild Performance Index (reconstructed
     // from the aggregate); the live season keeps the full per-hit tables and filters.
     const historySummary = useMemo(
@@ -821,51 +756,24 @@ export const PerformanceTab = ({
     const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
     const effectivePrimeUnitIds = useMemo(() => selectedPrimeUnitIds ?? [], [selectedPrimeUnitIds]);
 
-    // --- player & exclude kills ---
-    const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
-    // A member is locked to their own rows; otherwise the dropdown drives the selection.
-    const effectiveUserId = memberUserId ?? selectedUserId;
+    // --- exclude kills ---
     const [excludeKills, setExcludeKills] = useState(true);
-
-    const availablePlayers = useMemo(() => {
-        const seen = new Map<string, string>();
-        if (historySummary) {
-            // Historical: named players with any boss/prime hit (top-2 rarities). Anonymized rows
-            // (no id — other members in a keyless member's view) aren't individually selectable.
-            for (const entry of historySummary.bossPerformance) {
-                for (const player of entry.playerEntries) {
-                    if (player.playerId === undefined) continue;
-                    if (!seen.has(player.playerId)) {
-                        seen.set(player.playerId, names.get(player.playerId) ?? player.playerId);
-                    }
-                }
-            }
-        } else {
-            for (const entry of allSeasonEntries) {
-                if (!seen.has(entry.userId)) seen.set(entry.userId, names.get(entry.userId) ?? entry.userId);
-            }
-        }
-        return [...seen.entries()]
-            .map(([userId, displayName]) => ({ userId, displayName }))
-            .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
-    }, [historySummary, allSeasonEntries, names]);
 
     const historyPlayerView = useMemo(
         () =>
-            historySummary && effectiveUserId !== undefined
-                ? buildPlayerViewFromSummary(historySummary, effectiveUserId, excludeKills)
+            historySummary && selectedPlayerId !== undefined
+                ? buildPlayerViewFromSummary(historySummary, selectedPlayerId, excludeKills)
                 : [],
-        [historySummary, effectiveUserId, excludeKills]
+        [historySummary, selectedPlayerId, excludeKills]
     );
 
-    // --- cascade-reset dependent filters ---
-    const handleSeasonChange = (season: number) => {
-        setSeasonOverride(season);
+    // Reset the live-season filters when the page-level season changes.
+    useEffect(() => {
         setRarityOverride(undefined);
         setSelectedBossPrefixes(undefined);
         setSelectedPrimeUnitIds(undefined);
-        setSelectedUserId(undefined);
-    };
+    }, [selectedSeason]);
+
     const handleRarityChange = (rarities: Rarity[]) => {
         setRarityOverride(rarities);
         setSelectedBossPrefixes(undefined);
@@ -901,8 +809,8 @@ export const PerformanceTab = ({
         [filteredEntries, names, excludeKills]
     );
     const playerView = useMemo(
-        () => (selectedUserId === undefined ? [] : buildPlayerView(filteredEntries, selectedUserId, excludeKills)),
-        [filteredEntries, selectedUserId, excludeKills]
+        () => (selectedPlayerId === undefined ? [] : buildPlayerView(filteredEntries, selectedPlayerId, excludeKills)),
+        [filteredEntries, selectedPlayerId, excludeKills]
     );
     const playerBreakdowns = useMemo(() => buildPlayerBreakdowns(breakdownEntries, names), [breakdownEntries, names]);
     const unitPlayerBuckets = useMemo(() => buildUnitPlayerBuckets(playerBreakdowns), [playerBreakdowns]);
@@ -934,17 +842,12 @@ export const PerformanceTab = ({
         // full-guild Performance Index (no player) and the four per-player graphs (player selected).
         return (
             <div className="flex flex-col gap-4">
-                <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                    <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={handleSeasonChange} />
-                    {/* A keyless member only sees their own data, so the player select is hidden for them. */}
-                    {memberUserId === undefined && (
-                        <PlayerSelect players={availablePlayers} value={selectedUserId} onChange={setSelectedUserId} />
-                    )}
-                    {effectiveUserId !== undefined && (
+                {selectedPlayerId !== undefined && (
+                    <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
                         <ExcludeKillsCheckbox value={excludeKills} onChange={setExcludeKills} />
-                    )}
-                </div>
-                {effectiveUserId === undefined ? (
+                    </div>
+                )}
+                {selectedPlayerId === undefined ? (
                     historyPerformanceRows.length === 0 ? (
                         <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
                             No boss performance recorded for this season.
@@ -988,8 +891,6 @@ export const PerformanceTab = ({
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={handleSeasonChange} />
-                <PlayerSelect players={availablePlayers} value={selectedUserId} onChange={setSelectedUserId} />
                 <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
                 <PrefixFilterGroup
                     label="Bosses"
@@ -1012,7 +913,7 @@ export const PerformanceTab = ({
                 <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
                     No entries match the current filters.
                 </div>
-            ) : selectedUserId === undefined ? (
+            ) : selectedPlayerId === undefined ? (
                 <div className="flex flex-col gap-6">
                     <PlayerComparisonTable
                         title="Performance Index"

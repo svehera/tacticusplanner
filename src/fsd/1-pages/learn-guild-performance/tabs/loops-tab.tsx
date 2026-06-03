@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import { type GuildSeasonHistoryResponse, type TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -14,38 +14,6 @@ import {
     type BossLoopRow,
     type LoopTokenCounts,
 } from './loops-tab.utils';
-
-// ---------------------------------------------------------------------------
-// Season select
-// ---------------------------------------------------------------------------
-
-function SeasonSelect({
-    seasons,
-    value,
-    onChange,
-}: {
-    seasons: number[];
-    value: number | undefined;
-    onChange: (season: number) => void;
-}) {
-    return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
-            <select
-                value={value ?? ''}
-                onChange={event => {
-                    onChange(Number(event.target.value));
-                }}
-                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-                {seasons.map(s => (
-                    <option key={s} value={s}>
-                        Season {s}
-                    </option>
-                ))}
-            </select>
-        </label>
-    );
-}
 
 // ---------------------------------------------------------------------------
 // Icon component shared by boss + prime slots
@@ -187,20 +155,13 @@ function BossLoopCard({ row, maxLoopTotal }: { row: BossLoopRow; maxLoopTotal: n
 export const LoopsTab = ({
     currentData,
     seasonHistory,
+    selectedSeason,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
+    /** Page-level sticky season selection. */
+    selectedSeason: number | undefined;
 }) => {
-    const availableSeasons = useMemo(() => {
-        const s = new Set<number>();
-        if (currentData?.season != undefined) s.add(currentData.season);
-        for (const season of seasonHistory?.seasonData ?? []) s.add(season.season);
-        return [...s].toSorted((a, b) => b - a);
-    }, [currentData, seasonHistory]);
-
-    const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
-    const selectedSeason = seasonOverride ?? availableSeasons[0];
-
     // A historical season reads per-loop counts straight from the aggregate; the live season derives
     // them from raw per-hit entries.
     const historySummary = useMemo(
@@ -235,14 +196,7 @@ export const LoopsTab = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-end justify-between gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                <SeasonSelect
-                    seasons={availableSeasons}
-                    value={selectedSeason}
-                    onChange={s => {
-                        setSeasonOverride(s);
-                    }}
-                />
+            <div className="flex flex-wrap items-end justify-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
                 {COLOR_LEGEND}
             </div>
             {rows.length === 0 ? (
