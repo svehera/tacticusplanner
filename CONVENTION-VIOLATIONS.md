@@ -88,15 +88,18 @@ The shared `Button` (react-aria) uses `onPress`, not `onClick`.
 The `STATUS_COLORS` map in `requirement-status-constants.tsx` holds hex strings used via `style={{ color }}` across multiple LRE files. The right fix is to convert `STATUS_COLORS` values to CSS custom properties (tokens) and reference them via className.
 
 **Root cause file:**
+
 - [x] `src/fsd/1-pages/plan-lre/requirement-status-constants.tsx` — convert hex values to CSS tokens
 
 **Consumers (fix after root cause):**
+
 - [x] `src/fsd/1-pages/plan-lre/le-token-card.tsx` (lines 106, 121)
 - [x] `src/fsd/1-pages/plan-lre/le-token-table.tsx` (lines 235, 244)
 - [x] `src/fsd/1-pages/plan-lre/le-track-battle.tsx`
 - [x] `src/fsd/1-pages/plan-lre/battle-status-checkbox.tsx`
 
 **Dynamic colour functions (harder — needs a token-based approach or semantic classes):**
+
 - [ ] `src/fsd/1-pages/guild-war-defense/guild-war-defense.tsx` (line 246) — `getCompletionRateColor()`
 - [ ] `src/fsd/1-pages/guild-war-offense/guild-war-offense.tsx` (line 435) — `getCompletionRateColor()`
 

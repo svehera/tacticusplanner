@@ -498,10 +498,7 @@ When multiple `Accordion` components are stacked without gaps between them, wrap
 ```tsx
 <div className="[&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none">
     {items.map(item => (
-        <Accordion
-            key={item.id}
-            expanded={open === item.id}
-            onToggle={next => setOpen(next ? item.id : null)}>
+        <Accordion key={item.id} expanded={open === item.id} onToggle={next => setOpen(next ? item.id : null)}>
             <AccordionHeader>{item.title}</AccordionHeader>
             <AccordionBody>{item.body}</AccordionBody>
         </Accordion>
@@ -511,11 +508,11 @@ When multiple `Accordion` components are stacked without gaps between them, wrap
 
 Three classes on the wrapper:
 
-| Class | Effect |
-| --- | --- |
-| `[&>*:not(:first-child)]:-mt-px` | Overlaps adjacent borders so only one line is visible between items |
-| `[&>*:not(:first-child)]:rounded-t-none` | Squares the top corners of every item except the first |
-| `[&>*:not(:last-child)]:rounded-b-none` | Squares the bottom corners of every item except the last |
+| Class                                    | Effect                                                              |
+| ---------------------------------------- | ------------------------------------------------------------------- |
+| `[&>*:not(:first-child)]:-mt-px`         | Overlaps adjacent borders so only one line is visible between items |
+| `[&>*:not(:first-child)]:rounded-t-none` | Squares the top corners of every item except the first              |
+| `[&>*:not(:last-child)]:rounded-b-none`  | Squares the bottom corners of every item except the last            |
 
 The result is rounded on the outer edges only — first item's top-left/top-right corners stay rounded; last item's bottom-left/bottom-right corners stay rounded; everything in between is a straight edge.
 
