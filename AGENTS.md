@@ -1,4 +1,4 @@
-- When reporting information to me, be extremely concise and sacrifice grammar for the sake of concision.
+- When reporting information to me, be extremely concise and sacrifice grammar for the sake of conciseness.
 - IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning.
     - [Code Review](.agent-skills/code-review/SKILL.md)
     - [Revise Agent Configuration](.agent-skills/revise-agent-configuration/SKILL.md)
@@ -7,3 +7,22 @@
     - [Better alternatives to useEffect](https://react.dev/learn/you-might-not-need-an-effect.md)
 - The primary branch for this repo is `develop`
 - Use Tailwind v4 for styling all new code
+- We use unicorn lint rules, which are much more aggressive than normal prettier/eslint rules. Please never introduce new lint violations.
+- The original maintainer tried migrating to fsd, but left the codebase in a bad state. As much as possible, try to put things in the proper src/fsd/#-\* directory, but also it's okay to import stuff breaking FSD ruless if necessary.
+- Real logic goes inside of .ts files, only component definitions and layout-related stuff go inside of .tsx files.
+
+- Tacticus is a resource management game consisting of battles across various modes, resources, heroes (also called characters), and machines of war (MoWs).
+- Heroes and MoWs all have starting rarities. Heroes also have ranks.
+- Heroes have active and passive abilities. MoWs have primary and secondary abilities.
+- There are six rarities at the time of writing, but there may be more. Consult the Rarity enum for up-to-date information.
+- Each rarity has three or four star variations to go alongside it. You can look in the RarityStars enum. Common goes from 0 to 2, Uncommon from 2 to 4, Rare from 4 to 5 to 1 red, Epic from 1 red to 3 red, legendary 3 red thru 5 red to 1 blue, and mythic from 1 blue to 3 blue to mythic wings/skulls. Adding stars is called promoting, increasing rarity is called ascending.
+- The game uses the name of metals for ranks, each of which can go from one to three. The metals are "stone", "iron", "bronze", "silver", "gold", "diamond", and "adamantine".
+- People often abbreviate ranks, so Diamond Three would be D3, Adamantine Two would be A2, etc. People usually use "St1" for Stone one and "S1" for silver one.
+- Characters must achieve a minimum rarity to rank up beyond at a point. The rarity requirements to reach each rank are defined in rankToRarity in constants.ts.
+- In order to promote or ascend, characters and mows need a certain number of incremental shards and orbs. The incremental shard count is defined in charProgression in constants.ts.
+- Hereos and MoWs have IDs. These are also called snowprint IDs. There is a legacy ID system that we are mostly rid of, but we haven't cleaned it up, so if you aren't sure, please ask for clarification.
+- In order to rank up, heroes need not only to ascend, but they must also hit a minimum XP level and a apply rank upgrades. The XP levels are defined in rankToLevel in constants.ts.
+- Heroes must upgrade materials. Materials (AKA upgrades, mats) can be crafted or uncrafted, and are defined in new-recipe-data.json. The materials a character must apply to rank up are defined in new-rank-up-data.json. The key is the _current_ rank of the character, and the value is an array of six updgrade materials to reach the new rank. It takes six upgrade materials to reach a new rank. Two rows of three columns. The rank-up data is specified in column major order, starting with the first column.
+- Raid bosses come in rarity tiers, starting at common. When you defeat one boss, you open the next boss and its primes (there are always two). You do not have to defeat both primes to fight nor kill the boss. If you defeat the final mythic boss, your guild then loops around to fight the first legendary boss again. Primes are also called side bosses or minions.
+- We are trying to avoid using material UI too much in new code, and instead relying on CSS styling of native HTML components. We aren't 100% opposed to new uses of MUI, but when it makes sense, it's best to avoid it.
+- When a character hits a new rank below D3 and is not rarity capped, they can apply the first row of upgrades without needing to get an XP level up. In order to apply the second row though, they need to start gaining XP levels. For example, A D2 character at level 47 can apply the top row of upgrades, but they need to be level 48 to apply the bottom left, 49 to apply the bottom center, and 50 to apply the bottom right. Once they've applied all six upgrades, they can rank up. This changes at D3 though. From D3 on, they can apply the top left upgrade without any extra XP, but each subsequent upgrade in book-reading order requires a new level up.

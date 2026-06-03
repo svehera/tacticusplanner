@@ -191,6 +191,11 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
             tacticusApiKey: userInfo.tacticusApiKey,
             tacticusUserId: userInfo.tacticusUserId,
             tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
+            shareInGameName: userInfo.shareInGameName ?? false,
+            shareRosterData: userInfo.shareRosterData ?? false,
+            shareGuildMemberPerformance: userInfo.shareGuildMemberPerformance ?? false,
+            combinedGuildTags: userInfo.combinedGuildTags ?? [],
+            guildTag: userInfo.guildTag ?? '',
             onClose: () => {},
         });
     }

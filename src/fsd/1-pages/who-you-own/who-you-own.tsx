@@ -3,7 +3,6 @@
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
@@ -59,7 +58,7 @@ export const WhoYouOwn = () => {
     const hasShareParameters = !!sharedUser && !!shareToken;
 
     if (hasShareParameters) {
-        navigate((isMobile ? '/mobile' : '') + `/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
+        navigate(`/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
         return <></>;
     }
 

@@ -7,6 +7,7 @@ import { guildApiLazyRoute } from '@/fsd/1-pages/guild-api/guild-api.route';
 import { guildInsightsLazyRoute } from '@/fsd/1-pages/guild-insights/guild-insights.route';
 import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war-zones.route';
 import { equipmentLazyRoute } from '@/fsd/1-pages/input-equipment/equipment.route';
+import { guildRosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-guild-roster-snapshots';
 import { onslaughtLazyRoute } from '@/fsd/1-pages/input-onslaught/onslaught.route';
 import { myProgressLazyRoute } from '@/fsd/1-pages/input-progress/my-progress.route';
 import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.route';
@@ -14,6 +15,7 @@ import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
 import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route';
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
+import { guildPerformanceLazyRoute } from '@/fsd/1-pages/learn-guild-performance';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
 import { armageddonLazyRoute } from '@/fsd/1-pages/plan-armageddon/armageddon.route';
 import { bulkGoalCreatorRoute } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.route';
@@ -32,6 +34,7 @@ import DesktopApp from './desktop-app';
 export const globalInputRoutes: RouteObject[] = [
     wyoLazyRoute,
     rosterSnapshotsLazyRoute,
+    guildRosterSnapshotsLazyRoute,
     onslaughtLazyRoute,
     myProgressLazyRoute,
     {
@@ -196,6 +199,7 @@ export const globalLearnRoutes: RouteObject[] = [
     },
     dirtyDozenLazyRoute,
     insightsLazyRoute,
+    guildPerformanceLazyRoute,
     guildInsightsLazyRoute,
     mowLookupDesktopLazyRoute,
     guidesLazyRoute,

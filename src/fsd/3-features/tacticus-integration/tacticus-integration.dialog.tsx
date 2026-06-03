@@ -12,12 +12,18 @@ import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
+import { GUILD_TAG_LENGTH, isValidGuildTag, sameGuildTags } from './guild-sharing';
 import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 interface Props extends DialogProps {
     tacticusApiKey: string;
     tacticusUserId: string;
     tacticusGuildApiKey: string;
+    shareInGameName?: boolean;
+    shareRosterData?: boolean;
+    shareGuildMemberPerformance?: boolean;
+    combinedGuildTags?: string[];
+    guildTag?: string;
 }
 
 function buildErrorMessage(error: string | Error | undefined): string {
@@ -26,12 +32,85 @@ function buildErrorMessage(error: string | Error | undefined): string {
     return detail ? `${baseMessage}: ${detail}` : baseMessage;
 }
 
+/** Add-and-chip list input for guild tags (each exactly 5 alphanumeric chars). */
+function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags: string[]) => void }) {
+    const [draft, setDraft] = useState('');
+    const trimmed = draft.trim();
+    const isDuplicate = tags.includes(trimmed);
+    const canAdd = isValidGuildTag(trimmed) && !isDuplicate;
+
+    const addTag = () => {
+        if (!canAdd) return;
+        onChange([...tags, trimmed]);
+        setDraft('');
+    };
+
+    return (
+        <div className="flex w-full flex-col gap-1">
+            <span className="text-sm font-semibold">Other guilds with whom to combine leaderboards</span>
+            <div className="flex items-center gap-2">
+                <input
+                    type="text"
+                    value={draft}
+                    maxLength={GUILD_TAG_LENGTH}
+                    placeholder="Guild tag"
+                    onChange={event => setDraft(event.target.value)}
+                    onKeyDown={event => {
+                        if (event.key === 'Enter') {
+                            event.preventDefault();
+                            addTag();
+                        }
+                    }}
+                    className="w-32 rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
+                />
+                <button
+                    type="button"
+                    aria-label="Add guild tag"
+                    onClick={addTag}
+                    disabled={!canAdd}
+                    className="flex size-7 items-center justify-center rounded border border-gray-300 text-lg leading-none disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-600">
+                    +
+                </button>
+            </div>
+            {trimmed.length > 0 && !isValidGuildTag(trimmed) && (
+                <p className="text-xs text-red-600 dark:text-red-400">
+                    Guild tag must be exactly {GUILD_TAG_LENGTH} alphanumeric characters.
+                </p>
+            )}
+            {isDuplicate && <p className="text-xs text-red-600 dark:text-red-400">That guild tag is already added.</p>}
+            {tags.length > 0 && (
+                <div className="flex flex-wrap gap-1 pt-1">
+                    {tags.map(tag => (
+                        <span
+                            key={tag}
+                            className="flex items-center gap-1 rounded-full border border-gray-300 px-2 py-0.5 text-xs dark:border-gray-600">
+                            {tag}
+                            <button
+                                type="button"
+                                aria-label={`Remove ${tag}`}
+                                onClick={() => onChange(tags.filter(existing => existing !== tag))}
+                                className="text-gray-500 hover:text-red-600 dark:hover:text-red-400">
+                                ×
+                            </button>
+                        </span>
+                    ))}
+                </div>
+            )}
+        </div>
+    );
+}
+
 export const TacticusIntegrationDialog: React.FC<Props> = ({
     isOpen,
     onClose,
     tacticusApiKey,
     tacticusUserId,
     tacticusGuildApiKey,
+    shareInGameName,
+    shareRosterData,
+    shareGuildMemberPerformance: shareGuildMemberPerformanceProperty,
+    combinedGuildTags,
+    guildTag: guildTagProperty,
 }) => {
     const loader = useLoader();
     const auth = useAuth();
@@ -43,6 +122,23 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     const [currentGuildApiKey, setCurrentGuildApiKey] = useState<string>(tacticusGuildApiKey);
     const [userId, setUserId] = useState<string>(tacticusUserId);
     const [currentUserId, setCurrentUserId] = useState<string>(tacticusUserId);
+    const [currentShareInGameName, setCurrentShareInGameName] = useState<boolean>(shareInGameName ?? false);
+    const [savedShareInGameName, setSavedShareInGameName] = useState<boolean>(shareInGameName ?? false);
+    const [currentShareRosterData, setCurrentShareRosterData] = useState<boolean>(shareRosterData ?? false);
+    const [savedShareRosterData, setSavedShareRosterData] = useState<boolean>(shareRosterData ?? false);
+    const [shareGuildMemberPerformance, setShareGuildMemberPerformance] = useState<boolean>(
+        shareGuildMemberPerformanceProperty ?? false
+    );
+    const [savedShareGuildMemberPerformance, setSavedShareGuildMemberPerformance] = useState<boolean>(
+        shareGuildMemberPerformanceProperty ?? false
+    );
+    const [combinedTags, setCombinedTags] = useState<string[]>(combinedGuildTags ?? []);
+    const [savedCombinedTags, setSavedCombinedTags] = useState<string[]>(combinedGuildTags ?? []);
+    const [guildTag, setGuildTag] = useState<string>(guildTagProperty ?? '');
+    const [savedGuildTag, setSavedGuildTag] = useState<string>(guildTagProperty ?? '');
+
+    const trimmedGuildTag = guildTag.trim();
+    const guildTagInvalid = trimmedGuildTag.length > 0 && !isValidGuildTag(trimmedGuildTag);
 
     async function syncWithTacticusApi() {
         onClose();
@@ -52,7 +148,13 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     async function updateApiKey() {
         loader.startLoading('Updating settings. Please wait...');
         try {
-            const response = await updateTacticusApiKey(apiKey, guildApiKey, userId);
+            const response = await updateTacticusApiKey(apiKey, guildApiKey, userId, {
+                shareInGameName: currentShareInGameName,
+                shareRosterData: currentShareRosterData,
+                shareGuildMemberPerformance,
+                combinedGuildTags: combinedTags,
+                guildTag: trimmedGuildTag,
+            });
 
             if (!response.data) {
                 enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
@@ -64,10 +166,21 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 tacticusApiKey: apiKey,
                 tacticusGuildApiKey: guildApiKey,
                 tacticusUserId: userId,
+                shareInGameName: currentShareInGameName,
+                shareRosterData: currentShareRosterData,
+                shareGuildMemberPerformance,
+                combinedGuildTags: combinedTags,
+                guildTag: trimmedGuildTag,
             });
             setCurrentApiKey(apiKey);
             setCurrentGuildApiKey(guildApiKey);
             setCurrentUserId(userId);
+            setSavedShareInGameName(currentShareInGameName);
+            setSavedShareRosterData(currentShareRosterData);
+            setSavedShareGuildMemberPerformance(shareGuildMemberPerformance);
+            setSavedCombinedTags(combinedTags);
+            setGuildTag(trimmedGuildTag);
+            setSavedGuildTag(trimmedGuildTag);
 
             enqueueSnackbar('Settings updated', { variant: 'success' });
         } catch (error) {
@@ -157,12 +270,71 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             autoComplete="new-password"
                             isRevealable
                         />
+                        {userId && (
+                            <div className="flex w-[80%] flex-col gap-2 pt-2">
+                                <label className="flex cursor-pointer items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        className="size-4 cursor-pointer accent-blue-600"
+                                        checked={currentShareInGameName}
+                                        onChange={event => setCurrentShareInGameName(event.target.checked)}
+                                    />
+                                    <span className="text-sm">Share in-game player name with guild</span>
+                                </label>
+                                <label className="flex cursor-pointer items-center gap-3">
+                                    <input
+                                        type="checkbox"
+                                        className="size-4 cursor-pointer accent-blue-600"
+                                        checked={currentShareRosterData}
+                                        onChange={event => setCurrentShareRosterData(event.target.checked)}
+                                    />
+                                    <span className="text-sm">Share roster with guild</span>
+                                </label>
+                            </div>
+                        )}
+                        {guildApiKey && (
+                            <div className="flex w-[80%] flex-col gap-3 pt-2">
+                                <label className="flex cursor-pointer items-start gap-3">
+                                    <input
+                                        type="checkbox"
+                                        className="mt-0.5 size-4 cursor-pointer accent-blue-600"
+                                        checked={shareGuildMemberPerformance}
+                                        onChange={event => setShareGuildMemberPerformance(event.target.checked)}
+                                    />
+                                    <span className="text-sm">
+                                        Privately share each guild member&apos;s performance data (visible only to that
+                                        member)
+                                    </span>
+                                </label>
+                                <GuildTagListInput tags={combinedTags} onChange={setCombinedTags} />
+                            </div>
+                        )}
+                        {!guildApiKey && userId && (
+                            <TextField
+                                description={`Your guild's tag — exactly ${GUILD_TAG_LENGTH} alphanumeric characters`}
+                                label="Guild tag"
+                                className="w-[80%] pt-2"
+                                value={guildTag}
+                                onChange={setGuildTag}
+                                errorMessage={
+                                    guildTagInvalid
+                                        ? `Guild tag must be exactly ${GUILD_TAG_LENGTH} alphanumeric characters.`
+                                        : undefined
+                                }
+                            />
+                        )}
                         <Button
                             intent="primary"
                             isDisabled={
-                                apiKey === currentApiKey &&
-                                guildApiKey === currentGuildApiKey &&
-                                userId === currentUserId
+                                guildTagInvalid ||
+                                (apiKey === currentApiKey &&
+                                    guildApiKey === currentGuildApiKey &&
+                                    userId === currentUserId &&
+                                    currentShareInGameName === savedShareInGameName &&
+                                    currentShareRosterData === savedShareRosterData &&
+                                    shareGuildMemberPerformance === savedShareGuildMemberPerformance &&
+                                    sameGuildTags(combinedTags, savedCombinedTags) &&
+                                    guildTag === savedGuildTag)
                             }
                             onPress={updateApiKey}>
                             Update

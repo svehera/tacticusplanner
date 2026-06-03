@@ -24,6 +24,8 @@ import { getLre, ILreTeam } from '@/fsd/3-features/lre';
 // eslint-disable-next-line import-x/no-internal-modules
 import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
+import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
+
 import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
 import { IRosterSnapshot, IRosterSnapshotsState } from './models';
 import { RosterFilterDropdown } from './roster-filter-dropdown';
@@ -31,7 +33,6 @@ import { RosterSnapshotsAssetsProvider } from './roster-snapshots-assets-provide
 import { RosterSnapshotsGroupedDisplay, RosterSnapshotsGroupedSection } from './roster-snapshots-grouped-display';
 import { RosterSnapshotsMagnificationSlider } from './roster-snapshots-magnification-slider';
 import { RosterSnapshotsService } from './roster-snapshots-service';
-import { RosterSnapshotsUnit } from './roster-snapshots-unit';
 import { RosterSnapshotsUnitDiff } from './roster-snapshots-unit-diff';
 import { TakeSnapshotDialog } from './take-snapshot-dialog';
 

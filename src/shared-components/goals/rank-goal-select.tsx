@@ -11,12 +11,12 @@ import { Switch } from '@/fsd/5-shared/ui/switch';
 const ADAMANTINE_PARTIAL_COUNT = 5; // 5 intermediate XP levels before full rank-up
 
 function isAdamantine(rank: Rank): boolean {
-    return rank >= Rank.Adamantine1;
+    return rank >= Rank.Diamond3;
 }
 
-/** Returns the XP level label for Adamantine partial option N (1–5) at the given rank. */
+/** Returns the XP level label for D3+ partial option N (1–5) at the given rank. */
 function adamantineLevelLabel(rank: Rank, n: number): string {
-    const baseLevel = rankToLevel[(rank - 1) as Rank] ?? 0;
+    const baseLevel = rankToLevel[rank as Rank] ?? 0;
     return `Level ${baseLevel + n - 1}`;
 }
 
