@@ -1,4 +1,4 @@
-﻿import { ArrowForward, Info } from '@mui/icons-material';
+import { ArrowForward, Info } from '@mui/icons-material';
 import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
 import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
@@ -12,6 +12,7 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -214,6 +215,11 @@ export const RankLookup = () => {
     ]);
 
     const updateRankStart = (value: number) => {
+        trackEvent('search', {
+            feature: 'rank_lookup',
+            action: 'change_rank_start',
+            search_location: 'rank_lookup_inputs',
+        });
         setRankStart(value);
 
         setSearchParameters(current => {
@@ -223,6 +229,11 @@ export const RankLookup = () => {
     };
 
     const updateRankEnd = (value: number) => {
+        trackEvent('search', {
+            feature: 'rank_lookup',
+            action: 'change_rank_end',
+            search_location: 'rank_lookup_inputs',
+        });
         setRankEnd(value);
 
         setSearchParameters(current => {
@@ -232,6 +243,12 @@ export const RankLookup = () => {
     };
 
     const updateRankPoint5 = (value: boolean) => {
+        trackEvent('search', {
+            feature: 'rank_lookup',
+            action: 'toggle_rank_point5',
+            search_location: 'rank_lookup_inputs',
+            status: value ? 'applied' : 'cleared',
+        });
         setRankPoint5(value);
 
         setSearchParameters(current => {
@@ -304,6 +321,11 @@ export const RankLookup = () => {
                     unit={character ?? null}
                     options={characters}
                     onUnitChange={value => {
+                        trackEvent('search', {
+                            feature: 'rank_lookup',
+                            action: 'select_unit',
+                            search_location: 'rank_lookup_inputs',
+                        });
                         setCharacter(value ?? undefined);
 
                         setSearchParameters(current => {

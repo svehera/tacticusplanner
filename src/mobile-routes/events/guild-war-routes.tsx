@@ -1,5 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
+
 import { menuItemById } from '../../models/menu-items';
 import { MobileNavCard } from '../components/mobile-nav-card';
 
@@ -16,7 +18,15 @@ export const PlanGuildWarRoutes = () => {
                     key={item.label}
                     icon={item.icon}
                     label={item.label}
-                    onClick={() => navigate(item.routeMobile)}
+                    onClick={() => {
+                        trackEvent('nav_menu_select', {
+                            feature: 'navigation',
+                            action: 'select',
+                            destination_path: item.routeMobile,
+                            source: 'mobile_category_card',
+                        });
+                        navigate(item.routeMobile);
+                    }}
                 />
             ))}
         </div>

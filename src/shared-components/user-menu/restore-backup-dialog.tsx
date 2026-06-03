@@ -1,4 +1,4 @@
-﻿import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
+import { DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
@@ -10,8 +10,12 @@ import { IPersonalData2 } from '../../models/interfaces';
 import { DispatchContext } from '../../reducers/store.provider';
 import { PersonalDataLocalStorage } from '../../services';
 
+import { useAuth } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
+
 export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const { setStore } = useContext(DispatchContext);
+    const { isAuthenticated } = useAuth();
     const [data, setData] = useState<IPersonalData2>();
 
     useEffect(() => {
@@ -26,6 +30,13 @@ export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onCl
         if (data) {
             setStore(new GlobalState(data), true, false);
             enqueueSnackbar('Data restored', { variant: 'success' });
+            trackEvent('data_import', {
+                feature: 'backup',
+                action: 'restore',
+                status: 'success',
+                source: 'local_backup',
+                authenticated: isAuthenticated,
+            });
         }
         onClose();
     };

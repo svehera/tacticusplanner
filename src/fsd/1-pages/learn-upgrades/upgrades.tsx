@@ -1,4 +1,4 @@
-﻿import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
+import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -7,6 +7,7 @@ import { isMobile } from 'react-device-detect';
 
 import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 import { Rarity, RarityString, Rank, stringToRank, RarityMapper, FactionId } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { MiscIcon, UnitShardIcon, RarityIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignsService, CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -293,13 +294,28 @@ export const Upgrades = () => {
                     label="Quick Filter"
                     variant="outlined"
                     onChange={change => setNameFilter(change.target.value)}
+                    onBlur={() =>
+                        trackEvent('search', {
+                            feature: 'learn_upgrades',
+                            action: 'filter',
+                            search_location: 'upgrades_quick_filter',
+                        })
+                    }
                 />
                 <FormControl className="m-5 w-[250px]">
                     <InputLabel>Selection</InputLabel>
                     <Select
                         label={'Selection'}
                         value={selection}
-                        onChange={event => setSelection(event.target.value as Selection)}>
+                        onChange={event => {
+                            trackEvent('search', {
+                                feature: 'learn_upgrades',
+                                action: 'filter',
+                                search_location: 'upgrades_selection_filter',
+                                mode: event.target.value,
+                            });
+                            setSelection(event.target.value as Selection);
+                        }}>
                         {selectionOptions.map(value => (
                             <MenuItem key={value} value={value}>
                                 {value}
@@ -313,7 +329,15 @@ export const Upgrades = () => {
                         <Switch
                             checked={showCharacters}
                             value={showCharacters}
-                            onChange={event => setShowCharacters(event.target.checked)}
+                            onChange={event => {
+                                trackEvent('search', {
+                                    feature: 'learn_upgrades',
+                                    action: 'filter',
+                                    search_location: 'upgrades_characters_toggle',
+                                    status: event.target.checked ? 'applied' : 'cleared',
+                                });
+                                setShowCharacters(event.target.checked);
+                            }}
                             inputProps={{ 'aria-label': 'controlled' }}
                         />
                     }

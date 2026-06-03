@@ -5,6 +5,7 @@ import { useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
@@ -80,10 +81,20 @@ export const Quests = () => {
     );
 
     // Toggles
-    const toggleTier = (tierIndex: number) =>
+    const toggleTier = (tierIndex: number) => {
+        trackEvent('quest_plan_update', {
+            feature: 'quests',
+            action: 'toggle_tier',
+        });
         setExpandedTiers(previous => ({ ...previous, [tierIndex]: !previous[tierIndex] }));
-    const toggleBattle = (battleKey: string) =>
+    };
+    const toggleBattle = (battleKey: string) => {
+        trackEvent('quest_plan_update', {
+            feature: 'quests',
+            action: 'toggle_battle',
+        });
         setExpandedBattles(previous => ({ ...previous, [battleKey]: !previous[battleKey] }));
+    };
 
     const unitsNeedingUpgrade = (
         upgradeId: string
@@ -135,7 +146,13 @@ export const Quests = () => {
                                 mows.find(m => m.snowprintId === q.unitId)
                         )
                         .filter(x => !!x)}
-                    onUnitChange={value => setQuestId(value?.snowprintId ?? '')}
+                    onUnitChange={value => {
+                        trackEvent('quest_plan_update', {
+                            feature: 'quests',
+                            action: 'select_quest',
+                        });
+                        setQuestId(value?.snowprintId ?? '');
+                    }}
                 />
 
                 {quest && (

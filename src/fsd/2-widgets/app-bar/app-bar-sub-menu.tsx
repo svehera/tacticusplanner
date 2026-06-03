@@ -1,8 +1,9 @@
-﻿import { ChevronLeft, ChevronRight, ExpandLess, ExpandMore } from '@mui/icons-material';
+import { ChevronLeft, ChevronRight, ExpandLess, ExpandMore } from '@mui/icons-material';
 import { Collapse, List, ListItemButton, ListItemText } from '@mui/material';
 import * as React from 'react';
 import { useNavigate } from 'react-router-dom';
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { MenuItemTP, Conditional } from '@/fsd/5-shared/ui';
 
 export const AppBarSubMenu = ({ rootLabel, options }: { rootLabel: string; options: Array<MenuItemTP> }) => {
@@ -44,6 +45,12 @@ const MenuOption: React.FC<{ option: MenuItemTP; onOptionClick: () => void }> = 
 
     const handleOptionClick = (o: MenuItemTP) => {
         setOpen(false);
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'select',
+            destination_path: o.routeWeb,
+            source: 'desktop_top_menu',
+        });
         navigate(o.routeWeb);
         onOptionClick();
     };

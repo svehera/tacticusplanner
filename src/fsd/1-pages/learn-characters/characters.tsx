@@ -1,4 +1,4 @@
-﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import {
     Badge,
@@ -24,6 +24,7 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
@@ -101,6 +102,17 @@ export const LearnCharacters = () => {
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
+        if (name !== 'name') {
+            trackEvent('search', {
+                feature: 'learn_characters',
+                action: 'filter',
+                search_location: 'characters_advanced_filter',
+                status:
+                    value === '' || value === false || (Array.isArray(value) && value.length === 0)
+                        ? 'cleared'
+                        : 'applied',
+            });
+        }
         setFilter(previous => ({ ...previous, [name]: value }));
         const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
@@ -347,7 +359,15 @@ export const LearnCharacters = () => {
                     control={
                         <Switch
                             checked={onlyUnlocked}
-                            onChange={event => setOnlyUnlocked(event.target.checked)}
+                            onChange={event => {
+                                trackEvent('search', {
+                                    feature: 'learn_characters',
+                                    action: 'filter',
+                                    search_location: 'characters_unlocked_toggle',
+                                    status: event.target.checked ? 'applied' : 'cleared',
+                                });
+                                setOnlyUnlocked(event.target.checked);
+                            }}
                             inputProps={{ 'aria-label': 'controlled' }}
                         />
                     }
@@ -357,6 +377,13 @@ export const LearnCharacters = () => {
                     label="Quick Filter"
                     variant="outlined"
                     onChange={(event: ChangeEvent<HTMLInputElement>) => handleFilterChange('name', event.target.value)}
+                    onBlur={() =>
+                        trackEvent('search', {
+                            feature: 'learn_characters',
+                            action: 'filter',
+                            search_location: 'characters_quick_filter',
+                        })
+                    }
                     value={filter.name}
                 />
                 <div className="flex-box gap10">

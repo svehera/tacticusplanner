@@ -6,6 +6,7 @@ import { Fragment, useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { FactionId, Rarity } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { FactionSelect2 } from '@/fsd/5-shared/ui/selects';
 
@@ -225,6 +226,11 @@ export const Equipment = () => {
     const [onlyRelics, setOnlyRelics] = useState(false);
 
     const handleOnlyRelicsChange = (checked: boolean) => {
+        trackEvent('equipment_update', {
+            feature: 'equipment',
+            action: 'toggle_relics_filter',
+            status: checked ? 'applied' : 'cleared',
+        });
         if (checked) {
             setSavedRarities(selectedRarities);
             setSelectedRarities([Rarity.Mythic]);
@@ -359,7 +365,18 @@ export const Equipment = () => {
             <div className="flex flex-wrap items-end gap-4 rounded-xl border border-(--border) bg-(--overlay) p-4">
                 {/* Rarity multi-select */}
                 <div className="min-w-[160px] flex-1">
-                    <RarityMultiSelect value={selectedRarities} onChange={setSelectedRarities} disabled={onlyRelics} />
+                    <RarityMultiSelect
+                        value={selectedRarities}
+                        onChange={value => {
+                            trackEvent('equipment_update', {
+                                feature: 'equipment',
+                                action: 'filter_rarity',
+                                status: value.length > 0 ? 'applied' : 'cleared',
+                            });
+                            setSelectedRarities(value);
+                        }}
+                        disabled={onlyRelics}
+                    />
                 </div>
 
                 {/* Faction multi-select */}
@@ -368,7 +385,14 @@ export const Equipment = () => {
                         label="Faction"
                         factionValues={availableFactions}
                         value={selectedFactions}
-                        valueChanges={setSelectedFactions}
+                        valueChanges={value => {
+                            trackEvent('equipment_update', {
+                                feature: 'equipment',
+                                action: 'filter_faction',
+                                status: value.length > 0 ? 'applied' : 'cleared',
+                            });
+                            setSelectedFactions(value);
+                        }}
                     />
                 </div>
 
@@ -380,7 +404,14 @@ export const Equipment = () => {
                         options={characters}
                         multiple
                         label="Character"
-                        onUnitsChange={setSelectedCharacters}
+                        onUnitsChange={value => {
+                            trackEvent('equipment_update', {
+                                feature: 'equipment',
+                                action: 'filter_character',
+                                status: value.length > 0 ? 'applied' : 'cleared',
+                            });
+                            setSelectedCharacters(value);
+                        }}
                     />
                 </div>
 
@@ -406,6 +437,11 @@ export const Equipment = () => {
                     <button
                         className="pb-2 text-sm text-blue-500 hover:underline"
                         onClick={() => {
+                            trackEvent('equipment_update', {
+                                feature: 'equipment',
+                                action: 'clear_filters',
+                                status: 'cleared',
+                            });
                             setSelectedRarities([]);
                             setSavedRarities([]);
                             setSelectedFactions([]);
