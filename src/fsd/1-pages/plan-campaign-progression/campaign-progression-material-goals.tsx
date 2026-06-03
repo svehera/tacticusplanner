@@ -1,8 +1,8 @@
-import { ArrowForward } from '@mui/icons-material';
-import { Tooltip } from '@mui/material';
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { LazyTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
@@ -77,20 +77,20 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
     ) {
         if (savings.canFarmPrior) {
             return (
-                <Tooltip title={getSavingsTooltipText(material)}>
+                <LazyTooltip title={getSavingsTooltipText(material)}>
                     <span className="font-mono font-semibold text-blue-600 tabular-nums dark:text-blue-400">
                         Saves {savings.savings} <MiscIcon icon={'energy'} height={15} width={15} />
                     </span>
-                </Tooltip>
+                </LazyTooltip>
             );
         }
         return (
-            <Tooltip title={getUnlockTooltip(earlierUnlockBattle)}>
+            <LazyTooltip title={getUnlockTooltip(earlierUnlockBattle)}>
                 <span className="text-amber-600 dark:text-amber-400">
                     Unlocks{isMobile ? '' : ' the material'}
                     {earlierUnlockBattle ? '*' : ''}
                 </span>
-            </Tooltip>
+            </LazyTooltip>
         );
     }
 
@@ -150,7 +150,7 @@ export const CampaignProgressionMaterialGoals: React.FC<Props> = ({ campaignData
                                     <CampaignLocation location={savings.battle} short={true} unlocked={true} />
                                 </td>
                                 <td className="px-1 py-1.5 align-middle">
-                                    <ArrowForward sx={{ fontSize: 16 }} className="text-(--soft-fg)" />
+                                    <ArrowRight size={16} className="text-(--soft-fg)" />
                                 </td>
                                 <td className="px-2 py-1.5 align-middle">
                                     <div className="flex items-center gap-1.5">

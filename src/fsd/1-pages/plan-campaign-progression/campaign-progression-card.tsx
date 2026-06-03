@@ -1,9 +1,8 @@
-import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Tooltip from '@mui/material/Tooltip';
+import { Lock, LockOpen } from 'lucide-react';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { LazyTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignDifficulty, CampaignImage, CampaignsService } from '@/fsd/4-entities/campaign';
@@ -87,13 +86,9 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                 <div className="flex min-w-0 flex-1 flex-col gap-1">
                     <div className="flex flex-wrap items-center gap-1.5">
                         {lockReason && (
-                            <Tooltip title={lockReason}>
-                                <LockOutlinedIcon
-                                    sx={{ fontSize: 14 }}
-                                    className="text-amber-500"
-                                    aria-label={lockReason}
-                                />
-                            </Tooltip>
+                            <LazyTooltip title={lockReason}>
+                                <Lock size={14} className="text-amber-500" aria-label={lockReason} />
+                            </LazyTooltip>
                         )}
                         <span className="text-sm font-semibold">{campaign}</span>
                         {tags.map(tag => (
@@ -101,7 +96,7 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                                 key={tag}
                                 className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${
                                     tag === 'Campaign Event'
-                                        ? 'bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300'
+                                        ? 'bg-(--primary)/15 text-(--primary)'
                                         : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
                                 }`}>
                                 {tag}
@@ -113,15 +108,15 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                         goal{campaignData[1].goalCost.size === 1 ? '' : 's'}
                         {unlockCount > 0 && (
                             <span className="ml-1.5 inline-flex items-center gap-0.5 text-(--soft-fg)">
-                                · <LockOpenOutlinedIcon sx={{ fontSize: 11, verticalAlign: 'middle' }} /> {unlockCount}{' '}
-                                unlock{unlockCount === 1 ? '' : 's'}
+                                · <LockOpen size={11} className="align-middle" /> {unlockCount} unlock
+                                {unlockCount === 1 ? '' : 's'}
                             </span>
                         )}
                     </p>
                     {totalBattles > 0 && (
                         <div className="h-1 w-full max-w-xs overflow-hidden rounded-full bg-(--border)">
                             <div
-                                className="h-full rounded-full bg-blue-500 dark:bg-blue-400"
+                                className="h-full rounded-full bg-(--primary)"
                                 style={{ width: `${progress * 100}%` }}
                             />
                         </div>

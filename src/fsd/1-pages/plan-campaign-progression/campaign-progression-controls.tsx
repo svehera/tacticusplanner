@@ -1,6 +1,6 @@
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Switch from '@mui/material/Switch';
 import React from 'react';
+
+import { Switch } from '@/fsd/5-shared/ui/switch';
 
 import { SortMode } from './campaign-progression.utils';
 
@@ -47,7 +47,7 @@ export const CampaignProgressionControls: React.FC<Props> = ({
                     ))}
                 </div>
             </div>
-            <div className="flex flex-wrap items-center gap-y-1">
+            <div className="flex flex-wrap items-center gap-x-3 gap-y-1">
                 {(
                     [
                         {
@@ -65,18 +65,9 @@ export const CampaignProgressionControls: React.FC<Props> = ({
                         { key: 'ce', label: 'Hide CE', checked: hideCE, onChange: setHideCE },
                     ] as const
                 ).map(toggle => (
-                    <FormControlLabel
-                        key={toggle.key}
-                        className="!mr-3 !ml-0"
-                        control={
-                            <Switch
-                                checked={toggle.checked}
-                                onChange={event => toggle.onChange(event.target.checked)}
-                                size="small"
-                            />
-                        }
-                        label={<span className="w-[4.5rem] text-[11px] text-(--soft-fg)">{toggle.label}</span>}
-                    />
+                    <Switch key={toggle.key} isSelected={toggle.checked} onChange={toggle.onChange}>
+                        <span className="w-[4.5rem] text-[11px] text-(--soft-fg)">{toggle.label}</span>
+                    </Switch>
                 ))}
             </div>
         </div>

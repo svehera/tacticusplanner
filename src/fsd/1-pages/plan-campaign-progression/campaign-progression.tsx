@@ -1,11 +1,11 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { useContext, useMemo } from 'react';
-import { Link } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { Rank } from '@/fsd/5-shared/model';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
 
 import { CampaignsService } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
@@ -165,7 +165,7 @@ export const CampaignProgression = () => {
     );
 
     return (
-        <div key="root" className="mx-auto flex max-w-[1100px] min-w-0 flex-col gap-2 overflow-x-hidden">
+        <div className="space-y-8 py-6">
             <CampaignProgressionHeader
                 activeGoalsAction={
                     <ActiveGoalsDialog
@@ -187,11 +187,9 @@ export const CampaignProgression = () => {
                     <p className="text-sm text-(--soft-fg)">
                         Add goals with campaign-farmable materials or shard goals to see savings analysis.
                     </p>
-                    <Link
-                        to="/plan/goals"
-                        className="w-fit rounded border border-(--card-border) px-3 py-1.5 text-sm font-medium transition-colors hover:bg-(--card-border)">
+                    <LinkButton href="/plan/goals" appearance="outline" size="small">
                         Go to Goals
-                    </Link>
+                    </LinkButton>
                 </div>
             )}
 

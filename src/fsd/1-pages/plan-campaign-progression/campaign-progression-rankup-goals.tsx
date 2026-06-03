@@ -1,4 +1,4 @@
-import { ArrowForward } from '@mui/icons-material';
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
 import { MiscIcon, UnitShardIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
@@ -60,7 +60,7 @@ export const CampaignProgressionRankupGoals: React.FC<Props> = ({ rows }) => {
                                         <RankIcon rank={rankStart} />
                                     </td>
                                     <td className="px-1 py-1.5 align-middle">
-                                        <ArrowForward sx={{ fontSize: 16 }} className="text-(--soft-fg)" />
+                                        <ArrowRight size={16} className="text-(--soft-fg)" />
                                     </td>
                                     <td className="px-2 py-1.5 align-middle">
                                         <RankIcon rank={rankEnd} />
