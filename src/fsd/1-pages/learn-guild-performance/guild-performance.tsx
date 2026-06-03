@@ -12,9 +12,9 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
 
-import { NoKeyMessage, DebugJson } from './guild-performance.components';
+import { NoKeyMessage, DebugJson, SeasonSelect, PlayerSelect } from './guild-performance.components';
 import { LOADING, type GuildMemberName, type LoadingOrData } from './guild-performance.types';
-import { buildAvgDamageMap, mergeSeasonSummaries } from './guild-performance.utils';
+import { buildAvgDamageMap, getAllGuildPlayers, mergeSeasonSummaries } from './guild-performance.utils';
 import { BossTab } from './tabs/boss-tab';
 import { DamageTab } from './tabs/damage-tab';
 import { HistoricalPerformanceTab } from './tabs/historical-performance-tab';
@@ -92,6 +92,25 @@ export const GuildPerformance = () => {
     const [isRefreshing, setIsRefreshing] = useState(false);
 
     const currentData = current === LOADING ? undefined : current;
+
+    // --- sticky season + player selection (shared across tabs) ---
+    const availableSeasons = useMemo(() => {
+        const set = new Set<number>();
+        if (currentData?.season != undefined) set.add(currentData.season);
+        for (const season of seasonHistory?.seasonData ?? []) set.add(season.season);
+        return [...set].toSorted((a, b) => b - a);
+    }, [currentData, seasonHistory]);
+
+    const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
+    const selectedSeason = seasonOverride ?? availableSeasons[0];
+
+    const allPlayers = useMemo(
+        () => getAllGuildPlayers(currentData?.entries ?? [], seasonHistory?.seasonData ?? [], names),
+        [currentData, seasonHistory, names]
+    );
+    const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
+    // A keyless member is pinned to their own rows; a leader drives selection via the dropdown.
+    const selectedPlayerId = isMember ? memberUserId : selectedUserId;
 
     const avgDamageMap = useMemo(() => {
         const allEntries = (currentData?.entries ?? []).filter(
@@ -206,7 +225,16 @@ export const GuildPerformance = () => {
                 value={historyError ?? seasonHistory ?? 'loading\u2026'}
             />
             <DebugJson label="guild/members/names" value={rawNames} />
-            <TabBar active={activeTab} onChange={setActiveTab} />
+            <div className="flex flex-wrap items-end justify-between gap-4">
+                <TabBar active={activeTab} onChange={setActiveTab} />
+                <div className="flex flex-wrap items-end gap-4">
+                    <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={setSeasonOverride} />
+                    {/* Player select is for guild leaders only; keyless members are pinned to themselves. */}
+                    {hasGuildApiKey && (
+                        <PlayerSelect players={allPlayers} value={selectedUserId} onChange={setSelectedUserId} />
+                    )}
+                </div>
+            </div>
             <div className="pt-2">
                 <div className={activeTab === 'overview' ? undefined : 'hidden'}>
                     <OverviewTab currentData={currentData} names={names} />
@@ -217,25 +245,36 @@ export const GuildPerformance = () => {
                         seasonHistory={seasonHistory}
                         names={names}
                         avgDamageMap={avgDamageMap}
-                        memberUserId={memberUserId}
+                        selectedSeason={selectedSeason}
+                        selectedPlayerId={selectedPlayerId}
                     />
                 </div>
                 <div className={activeTab === 'boss' ? undefined : 'hidden'}>
-                    <BossTab currentData={currentData} seasonHistory={seasonHistory} names={names} />
+                    <BossTab
+                        currentData={currentData}
+                        seasonHistory={seasonHistory}
+                        names={names}
+                        selectedSeason={selectedSeason}
+                    />
                 </div>
                 <div className={activeTab === 'loops' ? undefined : 'hidden'}>
-                    <LoopsTab currentData={currentData} seasonHistory={seasonHistory} />
+                    <LoopsTab currentData={currentData} seasonHistory={seasonHistory} selectedSeason={selectedSeason} />
                 </div>
                 <div className={activeTab === 'performance' ? undefined : 'hidden'}>
                     <PerformanceTab
                         currentData={currentData}
                         seasonHistory={seasonHistory}
                         names={names}
-                        memberUserId={memberUserId}
+                        selectedSeason={selectedSeason}
+                        selectedPlayerId={selectedPlayerId}
                     />
                 </div>
                 <div className={activeTab === 'historical-performance' ? undefined : 'hidden'}>
-                    <HistoricalPerformanceTab seasonHistory={seasonHistory} names={names} memberUserId={memberUserId} />
+                    <HistoricalPerformanceTab
+                        seasonHistory={seasonHistory}
+                        names={names}
+                        selectedPlayerId={selectedPlayerId}
+                    />
                 </div>
             </div>
         </div>

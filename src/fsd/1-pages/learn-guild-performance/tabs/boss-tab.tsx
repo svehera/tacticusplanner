@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
     TacticusDamageType,
@@ -21,6 +21,7 @@ import {
     bossPrefixRoundIconMap,
     computeDefaultRaritiesFromRarities,
     getAvailableBossPrefixes,
+    getBossOrder,
     getBossPrefix,
     resolvePlayerName,
     sortBossPrefixes,
@@ -39,34 +40,6 @@ const ALL_RARITIES: Rarity[] = [
     Rarity.Legendary,
     Rarity.Mythic,
 ];
-
-function SeasonSelect({
-    seasons,
-    value,
-    onChange,
-}: {
-    seasons: number[];
-    value: number | undefined;
-    onChange: (season: number) => void;
-}) {
-    return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
-            <select
-                value={value ?? ''}
-                onChange={event => {
-                    onChange(Number(event.target.value));
-                }}
-                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-                {seasons.map(s => (
-                    <option key={s} value={s}>
-                        Season {s}
-                    </option>
-                ))}
-            </select>
-        </label>
-    );
-}
 
 function RarityFilterGroup({ selected, onChange }: { selected: Rarity[]; onChange: (rarities: Rarity[]) => void }) {
     const toggle = (r: Rarity) => {
@@ -319,14 +292,13 @@ function buildLeaderboardGroupsFromSummary(
         bossPrefix: string;
         rarity: Rarity;
         bossUnitId: string;
-        bossMaxHp: number;
         bossEntries: LeaderboardEntry[];
         primeSlots: PrimeSlot[];
     }
     const groups = new Map<string, GroupAccumulator>();
 
     for (const board of summary.leaderboards) {
-        const { enemyId, rarity: rarityName, encounterIndex, maxHp } = board.enemyInfo;
+        const { enemyId, rarity: rarityName, encounterIndex } = board.enemyInfo;
         const rarity = RarityMapper.stringToNumber[rarityName];
         if (!selectedRarities.includes(rarity)) continue;
         const bossPrefix = getBossPrefix(enemyId);
@@ -335,13 +307,12 @@ function buildLeaderboardGroupsFromSummary(
         const key = `${bossPrefix}:${rarity}`;
         let group = groups.get(key);
         if (group === undefined) {
-            group = { bossPrefix, rarity, bossUnitId: '', bossMaxHp: 0, bossEntries: [], primeSlots: [] };
+            group = { bossPrefix, rarity, bossUnitId: '', bossEntries: [], primeSlots: [] };
             groups.set(key, group);
         }
         const entries = toLeaderboardEntries(board.entries, names);
         if (encounterIndex === 0) {
             group.bossUnitId = enemyId;
-            group.bossMaxHp = maxHp;
             group.bossEntries = entries.slice(0, bossTopN);
         } else {
             group.primeSlots.push({ unitId: enemyId, encounterIndex, entries: entries.slice(0, primeTopN) });
@@ -353,8 +324,8 @@ function buildLeaderboardGroupsFromSummary(
             bossPrefix: group.bossPrefix,
             bossUnitId: group.bossUnitId,
             rarity: group.rarity,
-            // No `set` in the aggregate; sort within a rarity by boss max HP (biggest first) instead.
-            set: group.bossMaxHp,
+            // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
+            set: getBossOrder(group.bossUnitId),
             bossEntries: group.bossEntries,
             primeSlots: group.primeSlots
                 .toSorted((a, b) => a.encounterIndex - b.encounterIndex)
@@ -499,22 +470,14 @@ export const LeaderboardTab = ({
     currentData,
     seasonHistory,
     names,
+    selectedSeason,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
     names: Map<string, string>;
+    /** Page-level sticky season selection. */
+    selectedSeason: number | undefined;
 }) => {
-    // --- season ---
-    const availableSeasons = useMemo(() => {
-        const s = new Set<number>();
-        if (currentData?.season !== undefined) s.add(currentData.season);
-        for (const season of seasonHistory?.seasonData ?? []) s.add(season.season);
-        return [...s].toSorted((a, b) => b - a);
-    }, [currentData, seasonHistory]);
-
-    const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
-    const selectedSeason = seasonOverride ?? availableSeasons[0];
-
     // A historical season builds its leaderboards from the aggregated top-5s; the live season builds
     // them from raw per-hit entries.
     const historySummary = useMemo(
@@ -571,12 +534,12 @@ export const LeaderboardTab = ({
     const [bossTopN, setBossTopN] = useState(5);
     const [primeTopN, setPrimeTopN] = useState(3);
 
-    // cascade-reset on season/rarity change
-    const handleSeasonChange = (season: number) => {
-        setSeasonOverride(season);
+    // Reset the rarity/boss filters when the page-level season changes.
+    useEffect(() => {
         setRarityOverride(undefined);
         setSelectedBossPrefixes(undefined);
-    };
+    }, [selectedSeason]);
+
     const handleRarityChange = (rarities: Rarity[]) => {
         setRarityOverride(rarities);
         setSelectedBossPrefixes(undefined);
@@ -601,7 +564,6 @@ export const LeaderboardTab = ({
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={handleSeasonChange} />
                 <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
                 <BossFilterGroup
                     available={availableBossPrefixes}

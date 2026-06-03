@@ -8,7 +8,7 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
+import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem, Switch } from '@mui/material';
 import Box from '@mui/material/Box';
 import ListItemText from '@mui/material/ListItemText';
 import { enqueueSnackbar } from 'notistack';
@@ -74,6 +74,7 @@ export const UserMenu = () => {
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
+    const [debugMode, setDebugMode] = useState(() => localStorage.getItem('debugMode') === 'true');
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
     const navigate = useNavigate();
@@ -280,6 +281,16 @@ export const UserMenu = () => {
                         <SettingsBackupRestoreIcon />
                     </ListItemIcon>
                     <ListItemText>Restore Backup</ListItemText>
+                </MenuItem>
+                <Divider />
+                <MenuItem
+                    onClick={() => {
+                        const next = !debugMode;
+                        localStorage.setItem('debugMode', String(next));
+                        setDebugMode(next);
+                    }}>
+                    <ListItemText>Debug Mode</ListItemText>
+                    <Switch checked={debugMode} size="small" />
                 </MenuItem>
 
                 <Divider />

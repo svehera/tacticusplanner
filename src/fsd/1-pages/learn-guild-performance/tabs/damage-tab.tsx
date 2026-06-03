@@ -1,5 +1,7 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useMemo, useState } from 'react';
+import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { enqueueSnackbar } from 'notistack';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
     TacticusDamageType,
@@ -21,6 +23,7 @@ import {
     bossPrefixRoundIconMap,
     computeDefaultRarities,
     getAvailableBossPrefixes,
+    getBossOrder,
     resolvePlayerName,
     unitRoundIconMap,
 } from '../guild-performance.utils';
@@ -37,63 +40,6 @@ const ALL_RARITIES: Rarity[] = [
     Rarity.Legendary,
     Rarity.Mythic,
 ];
-
-function SeasonSelect({
-    seasons,
-    value,
-    onChange,
-}: {
-    seasons: number[];
-    value: number | undefined;
-    onChange: (season: number) => void;
-}) {
-    return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
-            <select
-                value={value ?? ''}
-                onChange={event => {
-                    onChange(Number(event.target.value));
-                }}
-                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-                {seasons.map(s => (
-                    <option key={s} value={s}>
-                        Season {s}
-                    </option>
-                ))}
-            </select>
-        </label>
-    );
-}
-
-function PlayerSelect({
-    players,
-    value,
-    onChange,
-}: {
-    players: { userId: string; displayName: string }[];
-    value: string | undefined;
-    onChange: (userId: string | undefined) => void;
-}) {
-    return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Player</span>
-            <select
-                value={value ?? ''}
-                onChange={event => {
-                    onChange(event.target.value === '' ? undefined : event.target.value);
-                }}
-                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-                <option value="">All players</option>
-                {players.map(p => (
-                    <option key={p.userId} value={p.userId}>
-                        {p.displayName}
-                    </option>
-                ))}
-            </select>
-        </label>
-    );
-}
 
 function RarityFilterGroup({ selected, onChange }: { selected: Rarity[]; onChange: (rarities: Rarity[]) => void }) {
     const toggle = (r: Rarity) => {
@@ -196,6 +142,10 @@ interface BossRarityStatEntry {
     comp: string[];
 }
 
+function cloneEntryWithSortedUnitIds(entry: TacticusGuildRaidEntry): TacticusGuildRaidEntry {
+    return { ...entry, heroDetails: entry.heroDetails.toSorted((a, b) => a.unitId.localeCompare(b.unitId)) };
+}
+
 function buildBossRarityStats(entries: TacticusGuildRaidEntry[], names: Map<string, string>): BossRarityStatEntry[] {
     const groups = new Map<
         string,
@@ -239,7 +189,7 @@ function buildBossRarityStats(entries: TacticusGuildRaidEntry[], names: Map<stri
         }
         // max includes kills
         if (g.maxEntry === undefined || entry.damageDealt > g.maxEntry.damageDealt) {
-            g.maxEntry = entry;
+            g.maxEntry = cloneEntryWithSortedUnitIds(entry);
         }
     }
     return (
@@ -296,7 +246,8 @@ function toSummaryStatEntry(
     return {
         unitId: enemyId,
         rarity: RarityMapper.stringToNumber[rarity],
-        set: 0,
+        // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
+        set: getBossOrder(enemyId),
         encounterIndex,
         encounterType: encounterIndex === 0 ? TacticusEncounterType.Boss : TacticusEncounterType.SideBoss,
         unitMaxHp: maxHp,
@@ -309,10 +260,10 @@ function toSummaryStatEntry(
     };
 }
 
-/** Sort matching the live summary: highest rarity first, then largest enemy, then boss before primes. */
+/** Sort matching the live summary: highest rarity first, then latest set, then boss before primes. */
 function compareSummaryStatRows(a: BossRarityStatEntry, b: BossRarityStatEntry): number {
     if (a.rarity !== b.rarity) return b.rarity - a.rarity;
-    if (a.unitMaxHp !== b.unitMaxHp) return b.unitMaxHp - a.unitMaxHp;
+    if (a.set !== b.set) return b.set - a.set;
     return b.encounterIndex - a.encounterIndex;
 }
 
@@ -573,6 +524,20 @@ function PlayerSummaryTextSection({ text }: { text: string }) {
                 Season Summary — Text
             </summary>
             <div className="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
+                <span className="items-right flex justify-end">
+                    <button
+                        type="button"
+                        title="Copy to clipboard"
+                        onClick={event => {
+                            event.preventDefault();
+                            navigator.clipboard
+                                .writeText(text)
+                                .then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
+                        }}
+                        className="rounded p-0.5 hover:bg-yellow-200 dark:hover:bg-yellow-800">
+                        <ContentCopyIcon fontSize="inherit" />
+                    </button>
+                </span>
                 <pre className="max-h-96 overflow-auto font-mono text-xs whitespace-pre">{text}</pre>
             </div>
         </details>
@@ -630,26 +595,18 @@ export const DamageTab = ({
     seasonHistory,
     names,
     avgDamageMap,
-    memberUserId,
+    selectedSeason,
+    selectedPlayerId,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
     names: Map<string, string>;
     avgDamageMap: Map<string, number>;
-    /** When set (a keyless member), the view is pinned to this player and the player select is hidden. */
-    memberUserId?: string;
+    /** Page-level sticky season selection. */
+    selectedSeason: number | undefined;
+    /** Page-level sticky player selection (a keyless member's own id, or a leader's dropdown choice). */
+    selectedPlayerId: string | undefined;
 }) => {
-    // --- season ---
-    const availableSeasons = useMemo(() => {
-        const s = new Set<number>();
-        if (currentData?.season != undefined) s.add(currentData.season);
-        for (const season of seasonHistory?.seasonData ?? []) s.add(season.season);
-        return [...s].toSorted((a, b) => b - a);
-    }, [currentData, seasonHistory]);
-
-    const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
-    const selectedSeason = seasonOverride ?? availableSeasons[0];
-
     // A historical season renders from the aggregated summary; the live (current) season renders
     // from raw per-hit entries. Only the live season has filters and the per-hit raid/bomb table.
     const historySummary = useMemo(
@@ -685,41 +642,23 @@ export const DamageTab = ({
     const [selectedBossPrefixes, setSelectedBossPrefixes] = useState<string[] | undefined>();
     const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
 
-    // --- player ---
-    const availablePlayers = useMemo(() => {
-        // Historical: list named players (anonymized rows have no id, so they aren't selectable).
-        if (historySummary) {
-            const named: { userId: string; displayName: string }[] = [];
-            for (const player of historySummary.damageSummary.textData.playerData) {
-                if (player.playerId === undefined) continue;
-                named.push({ userId: player.playerId, displayName: resolvePlayerName(player.playerId, names) });
-            }
-            return named.toSorted((a, b) => a.displayName.localeCompare(b.displayName));
-        }
-        const seen = new Map<string, string>();
-        for (const entry of rarityFilteredEntries) {
-            if (!seen.has(entry.userId)) seen.set(entry.userId, names.get(entry.userId) ?? entry.userId);
-        }
-        return [...seen.entries()]
-            .map(([userId, displayName]) => ({ userId, displayName }))
-            .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
-    }, [historySummary, rarityFilteredEntries, names]);
-
-    const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
-    // A member is locked to their own rows; otherwise the dropdown drives the selection.
-    const effectiveUserId = memberUserId ?? selectedUserId;
+    // Reset the live-season filters when the page-level season changes.
+    useEffect(() => {
+        setRarityOverride(undefined);
+        setSelectedBossPrefixes(undefined);
+    }, [selectedSeason]);
 
     // --- final filtered set ---
     const filteredEntries = useMemo(
         () =>
             rarityFilteredEntries
-                .filter(entry => selectedUserId === undefined || entry.userId === selectedUserId)
+                .filter(entry => selectedPlayerId === undefined || entry.userId === selectedPlayerId)
                 .filter(
                     entry =>
                         effectiveBossPrefixes.length === 0 ||
                         effectiveBossPrefixes.some(prefix => entry.unitId.startsWith(prefix))
                 ),
-        [rarityFilteredEntries, selectedUserId, effectiveBossPrefixes]
+        [rarityFilteredEntries, selectedPlayerId, effectiveBossPrefixes]
     );
 
     // --- summary view models (per source) ---
@@ -727,27 +666,19 @@ export const DamageTab = ({
     // otherwise the guild-wide rollup. Live: the existing per-hit aggregation.
     const bossRows = useMemo(() => {
         if (historySummary) {
-            return effectiveUserId === undefined
+            return selectedPlayerId === undefined
                 ? buildBossRarityStatsFromSummary(historySummary, names)
-                : buildPlayerBossRarityStatsFromSummary(historySummary, effectiveUserId, names);
+                : buildPlayerBossRarityStatsFromSummary(historySummary, selectedPlayerId, names);
         }
         return buildBossRarityStats(filteredEntries, names);
-    }, [historySummary, effectiveUserId, filteredEntries, names]);
+    }, [historySummary, selectedPlayerId, filteredEntries, names]);
 
     const summaryText = useMemo(() => {
         if (historySummary) {
-            return buildPlayerSummaryTextFromSummary(historySummary, names, effectiveUserId);
+            return buildPlayerSummaryTextFromSummary(historySummary, names, selectedPlayerId);
         }
-        return buildPlayerSummaryText(effectiveUserId === undefined ? allSeasonEntries : filteredEntries, names);
-    }, [historySummary, effectiveUserId, allSeasonEntries, filteredEntries, names]);
-
-    // cascade-reset dependent filters when upstream changes
-    const handleSeasonChange = (season: number) => {
-        setSeasonOverride(season);
-        setRarityOverride(undefined);
-        setSelectedBossPrefixes(undefined);
-        setSelectedUserId(undefined);
-    };
+        return buildPlayerSummaryText(selectedPlayerId === undefined ? allSeasonEntries : filteredEntries, names);
+    }, [historySummary, selectedPlayerId, allSeasonEntries, filteredEntries, names]);
 
     const handleRarityChange = (rarities: Rarity[]) => {
         setRarityOverride(rarities);
@@ -756,27 +687,18 @@ export const DamageTab = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={handleSeasonChange} />
-                {/* A keyless member only sees their own data, so the player select is hidden for them. */}
-                {memberUserId === undefined && (
-                    <PlayerSelect players={availablePlayers} value={selectedUserId} onChange={setSelectedUserId} />
-                )}
-                {/* Rarity/Boss filters and the per-hit raid table need per-hit data, so they are
-                    live-season only for now; historical seasons support the player filter via the
-                    aggregated per-player summaries. */}
-                {!isHistorical && (
-                    <>
-                        <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
-                        <BossFilterGroup
-                            available={availableBossPrefixes}
-                            selected={effectiveBossPrefixes}
-                            onChange={setSelectedBossPrefixes}
-                        />
-                    </>
-                )}
-            </div>
-            <BossRarityStatsTable rows={bossRows} hidePlayer={effectiveUserId !== undefined} />
+            {/* Rarity/Boss filters and the per-hit raid table need per-hit data, so they are live-only. */}
+            {!isHistorical && (
+                <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
+                    <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
+                    <BossFilterGroup
+                        available={availableBossPrefixes}
+                        selected={effectiveBossPrefixes}
+                        onChange={setSelectedBossPrefixes}
+                    />
+                </div>
+            )}
+            <BossRarityStatsTable rows={bossRows} hidePlayer={selectedPlayerId !== undefined} />
             <PlayerSummaryTextSection text={summaryText} />
             {!isHistorical && (
                 <RaidTable

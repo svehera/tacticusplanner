@@ -17,6 +17,63 @@ import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { buildLoopCountMaps, getDamageColorClass, unitRoundIconMap } from './guild-performance.utils';
 
 // ---------------------------------------------------------------------------
+// Season / Player selects (shared across tabs, owned by the page)
+// ---------------------------------------------------------------------------
+
+export const SeasonSelect = ({
+    seasons,
+    value,
+    onChange,
+}: {
+    seasons: number[];
+    value: number | undefined;
+    onChange: (season: number) => void;
+}) => (
+    <label className="flex flex-col gap-0.5 text-xs">
+        <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
+        <select
+            value={value ?? ''}
+            onChange={event => {
+                onChange(Number(event.target.value));
+            }}
+            className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
+            {seasons.map(season => (
+                <option key={season} value={season}>
+                    Season {season}
+                </option>
+            ))}
+        </select>
+    </label>
+);
+
+export const PlayerSelect = ({
+    players,
+    value,
+    onChange,
+}: {
+    players: { userId: string; displayName: string }[];
+    value: string | undefined;
+    onChange: (userId: string | undefined) => void;
+}) => (
+    <label className="flex flex-col gap-0.5 text-xs">
+        <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Player</span>
+        <select
+            value={value ?? ''}
+            onChange={event => {
+                onChange(event.target.value === '' ? undefined : event.target.value);
+            }}
+            className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
+            <option value="">All players</option>
+            {players.map(player => (
+                <option key={player.userId} value={player.userId}>
+                    {player.displayName}
+                </option>
+            ))}
+        </select>
+    </label>
+);
+
+// ---------------------------------------------------------------------------
 // NoKeyMessage
 // ---------------------------------------------------------------------------
 
@@ -41,10 +98,12 @@ export const NoKeyMessage = () => (
 // ---------------------------------------------------------------------------
 
 export const DebugJson = ({ label, value }: { label: string; value: unknown }) => {
+    const debugEnabled = localStorage.getItem('debugMode') === 'true';
     const text = JSON.stringify(value, undefined, 2);
     const handleCopy = () => {
         navigator.clipboard.writeText(text).then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
     };
+    if (!debugEnabled) return <></>;
     return (
         <details className="rounded border border-yellow-300 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-950">
             <summary className="flex cursor-pointer items-center gap-2 px-3 py-1 text-xs font-semibold text-yellow-800 dark:text-yellow-200">
