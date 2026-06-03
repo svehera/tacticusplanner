@@ -31,6 +31,14 @@ Replace with Tailwind equivalents (see conventions §Legacy global utility class
 - [ ] `src/fsd/1-pages/goals/goal-card/estimate-row.tsx`
 - [ ] `src/fsd/1-pages/goals/goal-card/unlock.tsx`
 - [ ] `src/fsd/1-pages/goals/goal-card/upgrade-material.tsx`
+- [ ] `src/fsd/1-pages/goals/xp-book-progress-bar.tsx` (1 instance)
+- [ ] `src/fsd/1-pages/learn-mow/mow-upgrades-table.tsx` (1 instance)
+- [ ] `src/fsd/1-pages/plan-lre/lre-teams-card.tsx` (~4 instances)
+- [ ] `src/fsd/1-pages/plan-lre/lre-teams-table.tsx` (~3 instances)
+- [ ] `src/fsd/1-pages/plan-lre/lre-settings.tsx` (~4 instances)
+- [ ] `src/fsd/1-pages/plan-lre/lre.tsx` (~4 instances)
+- [ ] `src/fsd/1-pages/plan-lre/le-track-overall-progress.tsx` (~2 instances)
+- [ ] `src/fsd/1-pages/plan-lre/lre-tile.tsx` (1 instance)
 
 ---
 
