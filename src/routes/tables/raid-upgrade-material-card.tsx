@@ -126,7 +126,7 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
 
     return (
         <div
-            className={`flex flex-col justify-between rounded-lg border p-3 shadow-lg ${widthClass} border-[var(--card-border)] bg-[var(--card-bg)] text-[var(--card-fg)] ${
+            className={`flex flex-col justify-between rounded-lg border p-3 shadow-lg ${widthClass} border-[var(--card-border)] bg-[var(--card)] text-[var(--card-fg)] ${
                 noSuggestedRaidsRemaining ? 'opacity-80' : ''
             }`.trim()}>
             <div className="flex w-full flex-row items-start! text-inherit">

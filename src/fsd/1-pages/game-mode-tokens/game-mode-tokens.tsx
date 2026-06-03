@@ -182,7 +182,7 @@ function TokenCard({ tokenKey, tokenData, lastSetAtSecondsUtc, currentSecondsUtc
     const showCapCaption = !(tokenData.max === 1 && !isFull);
 
     return (
-        <div className="flex h-[176px] w-[124px] flex-col items-center gap-1 rounded-xl border border-(--card-border) bg-(--card-bg) px-3 pt-3.5 pb-3 shadow-sm">
+        <div className="flex h-[176px] w-[124px] flex-col items-center gap-1 rounded-xl border border-(--card-border) bg-(--card) px-3 pt-3.5 pb-3 shadow-sm">
             <MiscIcon
                 icon={(tokenIcons[tokenKey] ?? 'defaultToken') as keyof typeof tacticusIcons}
                 width={48}
@@ -194,12 +194,12 @@ function TokenCard({ tokenKey, tokenData, lastSetAtSecondsUtc, currentSecondsUtc
                     } as React.CSSProperties
                 }
             />
-            <span className="text-[10px] font-bold tracking-[1.2px] text-(--muted-fg) uppercase">
+            <span className="text-[10px] font-bold tracking-[1.2px] text-(--soft-fg) uppercase">
                 {tokenNames[tokenKey]}
             </span>
             <span className="text-[20px] leading-none font-extrabold text-(--fg) tabular-nums">
                 {displayCurrent}
-                <span className="text-xs font-medium text-(--muted-fg)">/{tokenData.max}</span>
+                <span className="text-xs font-medium text-(--soft-fg)">/{tokenData.max}</span>
             </span>
             <span className={`text-sm font-semibold tabular-nums ${isFull ? 'text-red-300' : 'text-(--fg)'}`}>
                 {isFull ? 'CAPPED' : formatTime(nextTokenInSeconds)}
@@ -255,7 +255,7 @@ export const TokenAvailability = () => {
     return (
         <div className="flex flex-col items-center gap-3">
             <AnimationStyles />
-            <p className="text-center text-sm font-semibold tracking-wide text-(--muted-fg) uppercase">
+            <p className="text-center text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">
                 Token Availability
             </p>
             {/* Inner wrapper constrains the banner width to match the cards row */}

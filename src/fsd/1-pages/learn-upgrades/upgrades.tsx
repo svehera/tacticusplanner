@@ -1,6 +1,6 @@
 ﻿import { FormControl, FormControlLabel, MenuItem, Select, Switch, TextField, Tooltip } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ColDef, ValueFormatterParams, ICellRendererParams, AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -321,12 +321,12 @@ export const Upgrades = () => {
                 />
             </div>
 
-            <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
+            <div className="ag-theme-material density-compact h-[calc(100vh-220px)] w-full">
                 <AgGridReact
                     key={selection}
                     ref={gridReference}
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}

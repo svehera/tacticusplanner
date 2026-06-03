@@ -7,7 +7,6 @@ import {
     ICellRendererParams,
     RowStyle,
     RowClassParams,
-    themeBalham,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useContext, useEffect, useMemo, useRef } from 'react';
@@ -230,14 +229,14 @@ export const LreTeamsTable: React.FC<Props> = ({
                 )}
             </div>
             <div
-                className="ag-theme-material auto-teams w-full border-2 border-solid border-black"
+                className="ag-theme-material density-compact auto-teams w-full border-2 border-solid border-black"
                 style={{
                     height: isMobile ? '350px' : 'calc((100vh - 100px) / 2)',
                     minWidth: isMobile ? '750px' : '',
                 }}>
                 <AgGridReact
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     ref={gridReference}
                     defaultColDef={defaultColumnDefinition}
                     columnDefs={columnsDefs}

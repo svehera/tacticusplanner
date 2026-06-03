@@ -1,5 +1,6 @@
-import { ZoomIn, ZoomOut } from '@mui/icons-material';
-import { Slider } from '@mui/material';
+import { ZoomIn, ZoomOut } from 'lucide-react';
+
+import { Slider } from '@/fsd/5-shared/ui';
 
 export const RosterSnapshotsMagnificationSlider = ({
     zoom,
@@ -10,22 +11,11 @@ export const RosterSnapshotsMagnificationSlider = ({
 }) => {
     return (
         <div className="flex items-center gap-2">
-            <ZoomOut fontSize="small" />
+            <ZoomOut className="size-4" />
             <div className="min-w-[100px]">
-                <Slider
-                    size="small"
-                    min={0.25}
-                    max={2}
-                    step={0.05}
-                    value={zoom}
-                    onChange={(_, value) => {
-                        setZoom(value as number);
-                    }}
-                    valueLabelDisplay="auto"
-                    aria-label="unit size"
-                />
+                <Slider min={0.25} max={2} step={0.05} value={zoom} onChange={setZoom} aria-label="unit size" />
             </div>
-            <ZoomIn fontSize="small" />
+            <ZoomIn className="size-4" />
         </div>
     );
 };

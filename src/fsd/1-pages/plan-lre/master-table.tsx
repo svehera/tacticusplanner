@@ -23,7 +23,6 @@ import {
     ITooltipParams,
     ValueGetterParams,
     AllCommunityModule,
-    themeBalham,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { groupBy, map, sum, uniq } from 'lodash';
@@ -533,11 +532,11 @@ export const MasterTable = () => {
                     </span>
                 )}
             </div>
-            <div className="ag-theme-material h-[calc(100vh-150px)] w-full">
+            <div className="ag-theme-material density-compact h-[calc(100vh-150px)] w-full">
                 <AgGridReact
                     ref={gridReference}
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}
                     columnDefs={columnDefinitions}

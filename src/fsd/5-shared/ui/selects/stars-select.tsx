@@ -1,32 +1,31 @@
-﻿import { FormControl, MenuItem, Select } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import React from 'react';
+import { RarityStars } from '@/fsd/5-shared/model';
+import { StarsIcon } from '@/fsd/5-shared/ui/icons';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Select } from './select';
 
-import { FlexBox } from '../flex-box';
-import { StarsIcon } from '../icons';
-
-interface Props {
+export const StarsSelect = ({
+    starsValues,
+    value,
+    valueChanges,
+    label,
+    hideText = false,
+}: {
     label: string;
     starsValues: number[];
     value: number;
     valueChanges: (value: number) => void;
-}
-
-export const StarsSelect: React.FC<Props> = ({ starsValues, valueChanges, value, label }) => {
-    return (
-        <FormControl fullWidth>
-            <InputLabel>{label}</InputLabel>
-            <Select<Rarity> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
-                {starsValues.map(star => (
-                    <MenuItem key={star} value={star}>
-                        <FlexBox gap={5}>
-                            <StarsIcon stars={star} />
-                        </FlexBox>
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
-    );
-};
+    hideText?: boolean;
+}) => (
+    <Select
+        options={starsValues}
+        value={value}
+        onChange={valueChanges}
+        label={label}
+        renderOption={stars => (
+            <div className="flex items-center gap-2">
+                <StarsIcon stars={stars as RarityStars} />
+                {!hideText && <span>{RarityStars[stars]}</span>}
+            </div>
+        )}
+    />
+);

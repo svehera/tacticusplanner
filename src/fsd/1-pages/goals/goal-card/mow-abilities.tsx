@@ -1,4 +1,4 @@
-import { ArrowForward } from '@mui/icons-material';
+import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
@@ -27,20 +27,20 @@ export const GoalCardMowAbilities: React.FC<Props> = ({ goal, goalEstimate, cale
                 <div className="flex-box column start gap-[3px]">
                     {hasPrimaryGoal && (
                         <div className="flex-box gap-[3px]">
-                            <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowForward fontSize="small" />
+                            <span>Primary:</span> <b>{goal.primaryStart}</b> <ArrowRight className="size-4" />
                             <b>{goal.primaryEnd}</b>
                         </div>
                     )}
                     {hasSecondaryGoal && (
                         <div className="flex-box gap-[3px]">
-                            <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowForward fontSize="small" />
+                            <span>Secondary:</span> <b>{goal.secondaryStart}</b> <ArrowRight className="size-4" />
                             <b>{goal.secondaryEnd}</b>
                         </div>
                     )}
                 </div>
                 {goal.upgradesRarity.length > 0 && (
                     <div className="flex-box gap-[3px]">
-                        <ArrowForward fontSize="small" />
+                        <ArrowRight className="size-4" />
                         {goal.upgradesRarity.map(x => (
                             <RarityIcon key={x} rarity={x} />
                         ))}

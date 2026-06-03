@@ -1,6 +1,5 @@
 import AddAPhoto from '@mui/icons-material/AddAPhoto';
 import Settings from '@mui/icons-material/Settings';
-import { Button, Tooltip } from '@mui/material';
 import { cloneDeep, orderBy } from 'lodash';
 import { ReactNode, useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -9,6 +8,7 @@ import { isMobile } from 'react-device-detect';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rank } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
@@ -1312,88 +1312,83 @@ export const RosterSnapshots = () => {
     };
 
     return (
-        <div>
-            <div>
-                <TakeSnapshotDialog
-                    snapshotNames={[rosterSnapshots.base?.name ?? '', ...rosterSnapshots.diffs.map(d => d.name)]}
-                    isOpen={isTakeSnapshotDialogOpen}
-                    currentTimeMillis={currentTimeMillis}
-                    onSave={handleSaveSnapshot}
-                    onCancel={handleCancelSnapshot}
-                />
-            </div>
-            <div>
-                <ManageSnapshotsDialog
-                    rosterSnapshots={rosterSnapshots}
-                    isOpen={isManageDialogOpen}
-                    showShards={showShardsSetting}
-                    showMythicShards={showMythicShardsSetting}
-                    showXpLevel={showXpLevelSetting}
-                    showEquipment={showEquipmentSetting}
-                    diffStyle={viewPreferences.rosterSnapshotsDiffStyle}
-                    showShardDiffs={showShardDiffsSetting}
-                    showMythicShardsDiffs={showMythicShardsDiffsSetting}
-                    showXpLevelDiffs={showXpLevelDiffsSetting}
-                    showEquipmentDiffs={showEquipmentDiffsSetting}
-                    onShowShardsChange={handleShowShardsChange}
-                    onShowMythicShardsChange={handleShowMythicShardsChange}
-                    onShowXpLevelChange={handleShowXpLevelChange}
-                    onShowEquipmentChange={handleShowEquipmentChange}
-                    onDiffStyleChange={handleDiffStyleChange}
-                    onShowShardDiffsChange={handleShowShardDiffsChange}
-                    onShowMythicShardsDiffsChange={handleShowMythicShardsDiffsChange}
-                    onShowXpLevelDiffsChange={handleShowXpLevelDiffsChange}
-                    onShowEquipmentDiffsChange={handleShowEquipmentDiffsChange}
-                    onDeleteSnapshot={handleDeleteSnapshot}
-                    onDeleteAllSnapshots={handleDeleteAllSnapshots}
-                    onPurgeDeleted={handelPurgeAllDeleted}
-                    onRenameSnapshot={handleRenameSnapshot}
-                    onRestoreSnapshot={handleRestoreSnapshot}
-                    onDone={handleManageDone}
-                />
-            </div>
-            <div className="flex flex-wrap items-center gap-2 border-b border-gray-600 p-2">
+        <div className="space-y-8 py-6">
+            <TakeSnapshotDialog
+                snapshotNames={[rosterSnapshots.base?.name ?? '', ...rosterSnapshots.diffs.map(d => d.name)]}
+                isOpen={isTakeSnapshotDialogOpen}
+                currentTimeMillis={currentTimeMillis}
+                onSave={handleSaveSnapshot}
+                onCancel={handleCancelSnapshot}
+            />
+            <ManageSnapshotsDialog
+                rosterSnapshots={rosterSnapshots}
+                isOpen={isManageDialogOpen}
+                showShards={showShardsSetting}
+                showMythicShards={showMythicShardsSetting}
+                showXpLevel={showXpLevelSetting}
+                showEquipment={showEquipmentSetting}
+                diffStyle={viewPreferences.rosterSnapshotsDiffStyle}
+                showShardDiffs={showShardDiffsSetting}
+                showMythicShardsDiffs={showMythicShardsDiffsSetting}
+                showXpLevelDiffs={showXpLevelDiffsSetting}
+                showEquipmentDiffs={showEquipmentDiffsSetting}
+                onShowShardsChange={handleShowShardsChange}
+                onShowMythicShardsChange={handleShowMythicShardsChange}
+                onShowXpLevelChange={handleShowXpLevelChange}
+                onShowEquipmentChange={handleShowEquipmentChange}
+                onDiffStyleChange={handleDiffStyleChange}
+                onShowShardDiffsChange={handleShowShardDiffsChange}
+                onShowMythicShardsDiffsChange={handleShowMythicShardsDiffsChange}
+                onShowXpLevelDiffsChange={handleShowXpLevelDiffsChange}
+                onShowEquipmentDiffsChange={handleShowEquipmentDiffsChange}
+                onDeleteSnapshot={handleDeleteSnapshot}
+                onDeleteAllSnapshots={handleDeleteAllSnapshots}
+                onPurgeDeleted={handelPurgeAllDeleted}
+                onRenameSnapshot={handleRenameSnapshot}
+                onRestoreSnapshot={handleRestoreSnapshot}
+                onDone={handleManageDone}
+            />
+            <div className="flex flex-wrap items-center gap-3 border-b border-(--border) px-1 py-3">
                 <SyncButton showText={!isMobile} />
-                <Tooltip title={getTakeSnapshotTitle()}>
+                <AccessibleTooltip title={getTakeSnapshotTitle()}>
                     <Button
                         size="small"
-                        variant="contained"
-                        color="primary"
-                        onClick={takeSnapshot}
-                        disabled={rosterSnapshots.diffs.length >= RosterSnapshotsService.MAX_SNAPSHOTS - 1}>
+                        intent="primary"
+                        onPress={takeSnapshot}
+                        isDisabled={rosterSnapshots.diffs.length >= RosterSnapshotsService.MAX_SNAPSHOTS - 1}>
                         <AddAPhoto className="mr-1" />
                         {!isMobile && 'Take Snapshot'}
                     </Button>
-                </Tooltip>
-                <Button size="small" variant="contained" color="primary" onClick={openManage}>
+                </AccessibleTooltip>
+                <Button size="small" intent="primary" onPress={openManage}>
                     <Settings className="mr-1" />
                     {!isMobile && 'Manage'}
                 </Button>
-                <div className="ml-2">
-                    <RosterFilterDropdown
-                        summaryLabel={rosterFilterSummaryLabel}
-                        teams={teamFilterOptions}
-                        teamTypes={teamTypeFilterOptions}
-                        legendaryEvents={legendaryEventFilterOptions}
-                        renderTeamIcons={renderTeamMemberIcons}
-                        onToggleTeam={toggleTeam}
-                        onToggleTeamType={toggleTeamType}
-                        onToggleLegendaryTrack={toggleLegendaryTrack}
-                    />
-                </div>
+                <div className="mx-1 hidden h-6 w-px bg-(--border) sm:block" />
+                <RosterFilterDropdown
+                    summaryLabel={rosterFilterSummaryLabel}
+                    teams={teamFilterOptions}
+                    teamTypes={teamTypeFilterOptions}
+                    legendaryEvents={legendaryEventFilterOptions}
+                    renderTeamIcons={renderTeamMemberIcons}
+                    onToggleTeam={toggleTeam}
+                    onToggleTeamType={toggleTeamType}
+                    onToggleLegendaryTrack={toggleLegendaryTrack}
+                />
+                <div className="mx-1 hidden h-6 w-px bg-(--border) sm:block" />
                 <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
             </div>
 
             {liveSnapshotIndices.length > 0 && (
                 <div className="flex items-center gap-4 p-2">
                     <div>
-                        <label htmlFor="left-snapshot" className="mr-2">
+                        <label htmlFor="left-snapshot" className="mr-2 text-sm font-medium text-(--soft-fg)">
                             Left:
                         </label>
                         <select
                             id="left-snapshot"
                             value={leftIndex}
-                            className="rounded border bg-gray-700 p-1"
+                            className="rounded border border-(--border) bg-(--overlay) p-1 text-sm text-(--overlay-fg) focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:outline-none"
                             onChange={event => {
                                 const newLeftIndex = Number.parseInt(event.target.value, 10);
                                 setLeftIndex(newLeftIndex);
@@ -1409,13 +1404,13 @@ export const RosterSnapshots = () => {
                         </select>
                     </div>
                     <div>
-                        <label htmlFor="right-snapshot" className="mr-2">
+                        <label htmlFor="right-snapshot" className="mr-2 text-sm font-medium text-(--soft-fg)">
                             Right:
                         </label>
                         <select
                             id="right-snapshot"
                             value={rightIndex}
-                            className="rounded border bg-gray-700 p-1"
+                            className="rounded border border-(--border) bg-(--overlay) p-1 text-sm text-(--overlay-fg) focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:outline-none"
                             onChange={event => {
                                 setRightIndex(Number.parseInt(event.target.value, 10));
                             }}>

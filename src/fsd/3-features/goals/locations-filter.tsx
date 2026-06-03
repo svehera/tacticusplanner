@@ -1,17 +1,28 @@
-﻿import FilterAltIcon from '@mui/icons-material/FilterAlt';
-import { Autocomplete, Badge, DialogActions, DialogContent, DialogTitle, IconButton, TextField } from '@mui/material';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
+import { SlidersHorizontal } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import factionsData from 'src/data/factions.json';
 
 import { factionLookup } from '@/fsd/5-shared/lib';
-import { Alliance, FactionId, FactionName, RarityMapper, RarityString } from '@/fsd/5-shared/model';
-import { MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
+import { Alliance, FactionId, Rarity } from '@/fsd/5-shared/model';
+import { Button, PortalDialog, MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
+import { ComponentImage, RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { ComboBox, SelectMulti } from '@/fsd/5-shared/ui/selects';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
+import { FactionImage } from '@/fsd/4-entities/faction';
+
+const UPGRADE_RARITY_OPTIONS: (Rarity | 'Shard' | 'Mythic Shard')[] = [
+    Rarity.Common,
+    Rarity.Uncommon,
+    Rarity.Rare,
+    Rarity.Epic,
+    Rarity.Legendary,
+    Rarity.Mythic,
+    'Shard',
+    'Mythic Shard',
+];
 
 interface Props {
     filter: ICampaignsFilters;
@@ -23,7 +34,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     const [open, setOpen] = React.useState<boolean>(false);
 
     const allFactions = useMemo(
-        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, faction: x.name })),
+        () => factionsData.map(x => ({ alliance: x.alliance as Alliance, id: x.snowprintId as FactionId })),
         [factionsData]
     );
 
@@ -81,56 +92,63 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     };
 
     const renderUnitsFilter = (type: 'allies' | 'enemies', alliance: Alliance[], factions: FactionId[]) => {
-        const allowedFactions =
+        const allowedFactionIds =
             alliance.length === 0
-                ? allFactions.map(x => x.faction)
-                : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.faction);
-        const selectedFactionNames = factions.map(factionId => factionLookup[factionId]?.name).filter(Boolean);
-
-        const allianceFilterChanged = (values: string[]) => {
-            if (type === 'allies') {
-                setCurrentFilter({ ...currentFilter, alliesAlliance: values as Alliance[] });
-            }
-
-            if (type === 'enemies') {
-                setCurrentFilter({ ...currentFilter, enemiesAlliance: values as Alliance[] });
-            }
-        };
-
-        const factionsFilterChanged = (values: FactionName[]) => {
-            const factionIds = values
-                .map(factionName => Object.values(factionLookup).find(f => f.name === factionName)?.snowprintId)
-                .filter((function_): function_ is FactionId => !!function_); // Use a type guard to clean up the filter
-            if (type === 'allies') {
-                setCurrentFilter({ ...currentFilter, alliesFactions: factionIds });
-            }
-
-            if (type === 'enemies') {
-                setCurrentFilter({ ...currentFilter, enemiesFactions: factionIds });
-            }
-        };
+                ? allFactions.map(x => x.id)
+                : allFactions.filter(x => alliance.includes(x.alliance)).map(x => x.id);
 
         return (
             <div className="flex items-center gap-3">
-                <MultipleSelectCheckmarks
-                    size="small"
-                    placeholder="Alliances"
-                    selectedValues={alliance}
-                    values={Object.values(Alliance)}
-                    selectionChanges={allianceFilterChanged}
-                    disableCloseOnSelect={false}
-                    minWidth={150}
+                <SelectMulti<Alliance>
+                    options={Object.values(Alliance) as Alliance[]}
+                    value={alliance}
+                    onChange={values =>
+                        setCurrentFilter({
+                            ...currentFilter,
+                            ...(type === 'allies' ? { alliesAlliance: values } : { enemiesAlliance: values }),
+                        })
+                    }
+                    label="Alliances"
+                    placeholder="All alliances"
+                    renderOption={a => (
+                        <div className="flex items-center gap-2">
+                            <ComponentImage alliance={a} size="small" />
+                            <span>{a}</span>
+                        </div>
+                    )}
+                    renderValue={selected => (
+                        <div className="flex flex-wrap items-center gap-1">
+                            {selected.map(a => (
+                                <ComponentImage key={a} alliance={a} size="small" />
+                            ))}
+                        </div>
+                    )}
                 />
 
-                <MultipleSelectCheckmarks
-                    sortByAlphabet
-                    size="small"
-                    placeholder="Factions"
-                    selectedValues={selectedFactionNames}
-                    values={allowedFactions}
-                    selectionChanges={factionsFilterChanged as (value: string[]) => void}
-                    disableCloseOnSelect={false}
-                    minWidth={150}
+                <SelectMulti<FactionId>
+                    options={allowedFactionIds}
+                    value={factions}
+                    onChange={values =>
+                        setCurrentFilter({
+                            ...currentFilter,
+                            ...(type === 'allies' ? { alliesFactions: values } : { enemiesFactions: values }),
+                        })
+                    }
+                    label="Factions"
+                    placeholder="All factions"
+                    renderOption={id => (
+                        <div className="flex items-center gap-2">
+                            <FactionImage faction={id} />
+                            <span>{factionLookup[id]?.name ?? id}</span>
+                        </div>
+                    )}
+                    renderValue={selected => (
+                        <div className="flex flex-wrap items-center gap-1">
+                            {selected.map(id => (
+                                <FactionImage key={id} faction={id} />
+                            ))}
+                        </div>
+                    )}
                 />
             </div>
         );
@@ -138,139 +156,165 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
 
     return (
         <>
-            <IconButton onClick={handleClick}>
-                <Badge color="warning" badgeContent={filtersCount}>
-                    <FilterAltIcon />
-                </Badge>
-            </IconButton>
-            <Dialog open={open} onClose={handleClose} fullWidth>
-                <DialogTitle>Raids Filters</DialogTitle>
-                <DialogContent>
-                    <h5>Allies</h5>
-                    {renderUnitsFilter('allies', currentFilter.alliesAlliance, currentFilter.alliesFactions)}
+            <div className="relative inline-flex">
+                <Button size="square-petite" appearance="outline" onPress={handleClick}>
+                    <SlidersHorizontal data-slot="icon" />
+                </Button>
+                {filtersCount > 0 && (
+                    <span className="pointer-events-none absolute -top-1.5 -right-1.5 flex size-4 items-center justify-center rounded-full bg-(--warning) text-[10px] font-bold text-(--warning-fg)">
+                        {filtersCount}
+                    </span>
+                )}
+            </div>
 
-                    <h5>Enemies</h5>
-                    {renderUnitsFilter('enemies', currentFilter.enemiesAlliance, currentFilter.enemiesFactions)}
+            <PortalDialog open={open} onClose={handleClose} aria-label="Raids Filters">
+                <PortalDialog.Header>Raids Filters</PortalDialog.Header>
+                <PortalDialog.Body>
+                    <div className="space-y-4">
+                        <section className="space-y-2">
+                            <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Allies</span>
+                            {renderUnitsFilter('allies', currentFilter.alliesAlliance, currentFilter.alliesFactions)}
+                        </section>
 
-                    <div className="mt-2.5 flex items-center gap-3">
-                        <Autocomplete
-                            fullWidth
-                            size="small"
-                            value={currentFilter.enemiesMinCount?.toString()}
-                            options={enemiesCountOptions}
-                            onChange={(_, value) => {
-                                setCurrentFilter({ ...currentFilter, enemiesMinCount: value ? +value : undefined });
-                            }}
-                            sx={{ minWidth: 150, maxWidth: 300 }}
-                            renderInput={params => <TextField {...params} label="Min Enemy" />}
-                        />
-                        <Autocomplete
-                            fullWidth
-                            size="small"
-                            value={currentFilter.enemiesMaxCount?.toString()}
-                            options={enemiesCountOptions}
-                            onChange={(_, value) => {
-                                setCurrentFilter({ ...currentFilter, enemiesMaxCount: value ? +value : undefined });
-                            }}
-                            sx={{ minWidth: 150, maxWidth: 300 }}
-                            renderInput={params => <TextField {...params} label="Max Enemy" />}
-                        />
+                        <section className="space-y-2">
+                            <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
+                                Enemies
+                            </span>
+                            {renderUnitsFilter('enemies', currentFilter.enemiesAlliance, currentFilter.enemiesFactions)}
+                            <div className="flex items-end gap-3">
+                                <ComboBox<string>
+                                    className="w-[110px] shrink-0"
+                                    options={enemiesCountOptions}
+                                    value={currentFilter.enemiesMinCount?.toString() ?? undefined}
+                                    onChange={value =>
+                                        setCurrentFilter({
+                                            ...currentFilter,
+                                            enemiesMinCount: value ? +value : undefined,
+                                        })
+                                    }
+                                    displayValue={v => v ?? ''}
+                                    label="Min Enemy"
+                                />
+                                <ComboBox<string>
+                                    className="w-[110px] shrink-0"
+                                    options={enemiesCountOptions}
+                                    value={currentFilter.enemiesMaxCount?.toString() ?? undefined}
+                                    onChange={value =>
+                                        setCurrentFilter({
+                                            ...currentFilter,
+                                            enemiesMaxCount: value ? +value : undefined,
+                                        })
+                                    }
+                                    displayValue={v => v ?? ''}
+                                    label="Max Enemy"
+                                />
 
-                        <MultipleSelectCheckmarks
-                            size="small"
-                            placeholder="Enemy Types"
-                            selectedValues={currentFilter.enemiesTypes ?? []}
-                            values={enemiesTypeOptions}
-                            selectionChanges={values => {
-                                setCurrentFilter({ ...currentFilter, enemiesTypes: values });
-                            }}
-                            disableCloseOnSelect={false}
-                            minWidth={150}
-                        />
+                                <MultipleSelectCheckmarks
+                                    placeholder="Enemy Types"
+                                    selectedValues={currentFilter.enemiesTypes ?? []}
+                                    values={enemiesTypeOptions}
+                                    selectionChanges={values => {
+                                        setCurrentFilter({ ...currentFilter, enemiesTypes: values });
+                                    }}
+                                />
+                            </div>
+                        </section>
+
+                        <section className="space-y-2">
+                            <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
+                                Locations
+                            </span>
+                            <div className="flex items-center gap-3">
+                                <MultipleSelectCheckmarks
+                                    placeholder="Types"
+                                    selectedValues={
+                                        currentFilter.campaignTypes as (
+                                            | CampaignType.Early
+                                            | CampaignType.Extremis
+                                            | CampaignType.Standard
+                                            | CampaignType.Mirror
+                                            | CampaignType.Normal
+                                            | CampaignType.Elite
+                                        )[]
+                                    }
+                                    values={[
+                                        CampaignType.Elite,
+                                        CampaignType.Extremis,
+                                        CampaignType.Standard,
+                                        CampaignType.Mirror,
+                                        CampaignType.Normal,
+                                        CampaignType.Early,
+                                    ]}
+                                    selectionChanges={values => {
+                                        setCurrentFilter({ ...currentFilter, campaignTypes: values as CampaignType[] });
+                                    }}
+                                />
+
+                                <MultipleSelectCheckmarks
+                                    placeholder="Slots"
+                                    selectedValues={
+                                        (currentFilter.slotsCount?.map(x => x.toString()) ?? []) as ('3' | '4' | '5')[]
+                                    }
+                                    values={['3', '4', '5']}
+                                    selectionChanges={values => {
+                                        setCurrentFilter({
+                                            ...currentFilter,
+                                            slotsCount: values.map(x => Number(x) as 3 | 4 | 5),
+                                        });
+                                    }}
+                                />
+                            </div>
+                        </section>
+
+                        <section className="space-y-2">
+                            <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
+                                Upgrades
+                            </span>
+                            <SelectMulti<Rarity | 'Shard' | 'Mythic Shard'>
+                                options={UPGRADE_RARITY_OPTIONS}
+                                value={currentFilter.upgradesRarity}
+                                onChange={values => setCurrentFilter({ ...currentFilter, upgradesRarity: values })}
+                                label="Rarity"
+                                placeholder="All rarities"
+                                renderOption={opt =>
+                                    typeof opt === 'string' ? (
+                                        <span>{opt}</span>
+                                    ) : (
+                                        <div className="flex items-center gap-2">
+                                            <RarityIcon rarity={opt} />
+                                            <span>{Rarity[opt]}</span>
+                                        </div>
+                                    )
+                                }
+                                renderValue={selected => (
+                                    <div className="flex flex-wrap items-center gap-1">
+                                        {selected.map((opt, index) =>
+                                            typeof opt === 'string' ? (
+                                                <span key={index} className="text-xs">
+                                                    {opt === 'Mythic Shard' ? 'M.Shard' : opt}
+                                                </span>
+                                            ) : (
+                                                <RarityIcon key={index} rarity={opt} />
+                                            )
+                                        )}
+                                    </div>
+                                )}
+                            />
+                        </section>
                     </div>
-
-                    <h5>Locations</h5>
-                    <div className="flex items-center gap-3">
-                        <MultipleSelectCheckmarks
-                            size="small"
-                            placeholder="Types"
-                            selectedValues={
-                                currentFilter.campaignTypes as (
-                                    | CampaignType.Early
-                                    | CampaignType.Extremis
-                                    | CampaignType.Standard
-                                    | CampaignType.Mirror
-                                    | CampaignType.Normal
-                                    | CampaignType.Elite
-                                )[]
-                            }
-                            values={[
-                                CampaignType.Elite,
-                                CampaignType.Extremis,
-                                CampaignType.Standard,
-                                CampaignType.Mirror,
-                                CampaignType.Normal,
-                                CampaignType.Early,
-                            ]}
-                            selectionChanges={values => {
-                                setCurrentFilter({ ...currentFilter, campaignTypes: values as CampaignType[] });
-                            }}
-                            disableCloseOnSelect={false}
-                            minWidth={150}
-                        />
-
-                        <MultipleSelectCheckmarks
-                            size="small"
-                            placeholder="Slots"
-                            // Cast the result of the map to the specific literals
-                            selectedValues={
-                                (currentFilter.slotsCount?.map(x => x.toString()) ?? []) as ('3' | '4' | '5')[]
-                            }
-                            values={['3', '4', '5']}
-                            selectionChanges={values => {
-                                setCurrentFilter({
-                                    ...currentFilter,
-                                    slotsCount: values.map(x => Number(x) as 3 | 4 | 5),
-                                });
-                            }}
-                            disableCloseOnSelect={false}
-                            minWidth={150}
-                        />
-                    </div>
-
-                    <h5>Upgrades</h5>
-                    <MultipleSelectCheckmarks
-                        size="small"
-                        placeholder="Rarity"
-                        selectedValues={currentFilter.upgradesRarity.map(x => {
-                            if (x === 'Shard') return 'Shard';
-                            if (x === 'Mythic Shard') return 'Mythic Shard';
-                            return RarityMapper.rarityToRarityString(x);
-                        })}
-                        values={[Object.values(RarityString), 'Shard', 'Mythic Shard'].flat()}
-                        selectionChanges={values => {
-                            setCurrentFilter({
-                                ...currentFilter,
-                                upgradesRarity: values.map(x => {
-                                    if (x === 'Shard') return 'Shard';
-                                    if (x === 'Mythic Shard') return 'Mythic Shard';
-                                    return RarityMapper.stringToNumber[x as RarityString];
-                                }),
-                            });
-                        }}
-                        disableCloseOnSelect={false}
-                    />
-                </DialogContent>
-                <DialogActions>
-                    <Button onClick={handleClose}>Close</Button>
-                    <Button onClick={resetFilters} variant="outlined" color="error">
+                </PortalDialog.Body>
+                <PortalDialog.Footer>
+                    <Button appearance="outline" onPress={handleClose}>
+                        Close
+                    </Button>
+                    <Button appearance="outline" intent="danger" onPress={resetFilters}>
                         Reset
                     </Button>
-                    <Button onClick={saveChanges} variant="outlined" color="success">
+                    <Button appearance="outline" intent="success" onPress={saveChanges}>
                         Apply
                     </Button>
-                </DialogActions>
-            </Dialog>
+                </PortalDialog.Footer>
+            </PortalDialog>
         </>
     );
 };

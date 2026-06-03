@@ -1,4 +1,4 @@
-﻿import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+﻿import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React from 'react';
 
@@ -88,10 +88,10 @@ export const DirtyDozenTable: React.FC<Props> = ({ characters, rows, columns }) 
     ];
 
     return (
-        <div className="ag-theme-material h-[calc(100vh_-_130px)] w-full">
+        <div className="ag-theme-material density-compact h-[calc(100vh_-_130px)] w-full">
             <AgGridReact
                 modules={[AllCommunityModule]}
-                theme={themeBalham}
+                theme="legacy"
                 suppressCellFocus={true}
                 defaultColDef={defaultColumnDefinition}
                 columnDefs={columnDefs}

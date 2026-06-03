@@ -1,8 +1,7 @@
-﻿import { Input } from '@mui/material';
-import Button from '@mui/material/Button';
-import React, { useEffect } from 'react';
+﻿import React, { useEffect } from 'react';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
+import { Button } from '@/fsd/5-shared/ui';
 
 import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
@@ -43,7 +42,7 @@ export const InventoryItem: React.FC<Props> = ({ data, showIncDec, dataUpdate })
     }, [data.quantity]);
 
     return (
-        <div key={data.snowprintId} className="flex max-w-[60px] flex-col">
+        <div key={data.snowprintId} className="flex max-w-[60px] flex-col items-center">
             <div className="px-[5px] py-0">
                 <UpgradeImage
                     material={data.material}
@@ -51,33 +50,28 @@ export const InventoryItem: React.FC<Props> = ({ data, showIncDec, dataUpdate })
                     rarity={RarityMapper.rarityToRarityString(data.rarity)}
                 />
             </div>
-            <Input
-                className="justify-center"
+            <input
+                type="number"
+                className="item-quantity-input w-full border-0 border-b border-(--input-border) bg-transparent py-0.5 text-center text-sm text-(--fg) outline-none focus:border-(--primary)"
                 value={amount}
-                size="small"
                 onFocus={event => event.target.select()}
                 onChange={event => handleInputChange(event, data.snowprintId)}
-                inputProps={{
-                    step: 1,
-                    min: 0,
-                    max: 1000,
-                    type: 'number',
-                    style: { width: amount.toString().length * 10 },
-                    className: 'item-quantity-input',
-                }}
+                step={1}
+                min={0}
+                max={1000}
             />
             {showIncDec && (
-                <div>
+                <div className="flex">
                     <Button
-                        size="small"
-                        className="w-[30px] !min-w-0"
-                        onClick={() => decrement(data.snowprintId, +amount)}>
+                        size="square-petite"
+                        appearance="plain"
+                        onPress={() => decrement(data.snowprintId, +amount)}>
                         -
                     </Button>
                     <Button
-                        size="small"
-                        className="w-[30px] !min-w-0"
-                        onClick={() => increment(data.snowprintId, +amount)}>
+                        size="square-petite"
+                        appearance="plain"
+                        onPress={() => increment(data.snowprintId, +amount)}>
                         +
                     </Button>
                 </div>

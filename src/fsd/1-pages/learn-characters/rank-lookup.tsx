@@ -1,7 +1,7 @@
 ﻿import { ArrowForward, Info } from '@mui/icons-material';
 import InfoIcon from '@mui/icons-material/Info';
 import { FormControlLabel, Popover, Switch } from '@mui/material';
-import { AllCommunityModule, themeBalham, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueFormatterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { orderBy } from 'lodash';
 import { useContext, useMemo, useState } from 'react';
@@ -12,11 +12,11 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, RankSelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
-import { RankSelect, ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import { UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import {
     IMaterialFull,
@@ -367,10 +367,10 @@ export const RankLookup = () => {
             </div>
 
             <div>
-                <div className="ag-theme-material h-[800px] w-full">
+                <div className="ag-theme-material density-compact h-[800px] w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         suppressCellFocus={true}
                         defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                         rowHeight={60}

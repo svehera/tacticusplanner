@@ -7,8 +7,6 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { TodayRaids } from 'src/routes/tables/today-raids';
 
-const RaidsPlan = lazy(() => import('src/routes/tables/raids-plan').then(m => ({ default: m.RaidsPlan })));
-
 import { useAuth } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -21,6 +19,8 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
+
+const RaidsPlan = lazy(() => import('src/routes/tables/raids-plan').then(m => ({ default: m.RaidsPlan })));
 
 function addShardsToUpgrades(
     upgrades: Record<string, number>,
@@ -100,7 +100,6 @@ export const DailyRaids = () => {
     };
 
     const sync = async () => {
-        console.log('Syncing with Tacticus...');
         await syncWithTacticus();
         setHasChanges(false);
     };
@@ -190,7 +189,7 @@ export const DailyRaids = () => {
     ]);
 
     return (
-        <div>
+        <div className="space-y-8 py-6">
             <RaidsHeader
                 hasSync={hasSync}
                 syncHandle={sync}

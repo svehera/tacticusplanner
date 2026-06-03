@@ -184,16 +184,15 @@ export const LeTokenomics: React.FC<Props> = ({
                     )}
                 </div>
                 <div className="flex w-full items-center justify-center gap-2">
-                    <div className="relative h-6 w-40 overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+                    <div className="relative h-6 w-40 overflow-hidden rounded-full bg-(--fg)/12">
                         <div
-                            className="h-full bg-blue-600"
+                            className="h-full bg-(--primary)"
                             style={{
                                 width: `${shardBarWidth}%`,
-                                // Optional: adds a slight round to the leading edge as it grows
                                 borderTopRightRadius: '9999px',
                                 borderBottomRightRadius: '9999px',
                             }}></div>
-                        <span className="absolute inset-0 flex h-full w-full items-center justify-center text-xs font-medium text-gray-800 dark:text-gray-100">
+                        <span className="absolute inset-0 flex h-full w-full items-center justify-center text-xs font-medium text-(--fg)">
                             {progress.currentShards} /{' '}
                             {progress.addlShardsForNextMilestone === Infinity ? '∞' : incrementalShardsForNextMilestone}
                         </span>
@@ -211,7 +210,7 @@ export const LeTokenomics: React.FC<Props> = ({
             <div className="flex w-full flex-col items-center gap-y-4">
                 <div className="flex w-full flex-col items-center gap-y-4">
                     <div className="flex min-h-10 w-full items-center justify-center">
-                        <div className="flex gap-x-8 text-sm text-gray-600 dark:text-gray-400">
+                        <div className="flex gap-x-8 text-sm text-(--soft-fg)">
                             <div className="flex items-center gap-2">
                                 <SyncButton showText={true} />
                             </div>
@@ -315,7 +314,7 @@ export const LeTokenomics: React.FC<Props> = ({
                             )}
                         {isFirstTokenBattleVisible &&
                             LeBattleService.getBattleFromToken(firstToken, battles) === undefined && (
-                                <div className="mt-4 w-full rounded-xl border border-gray-300 p-4 text-center text-gray-600 dark:border-gray-700 dark:text-gray-500">
+                                <div className="mt-4 w-full rounded-xl border border-(--border) p-4 text-center text-(--soft-fg)">
                                     Battle data not available.
                                 </div>
                             )}

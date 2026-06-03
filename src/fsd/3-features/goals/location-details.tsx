@@ -58,7 +58,7 @@ export const LocationDetails: React.FC<Props> = ({ location }) => {
 
             {(location.rawEnemyTypes ?? []).length > 0 && (
                 <div>
-                    <div className="mb-1 text-xs font-semibold text-[var(--muted-fg)] uppercase">Enemies</div>
+                    <div className="mb-1 text-xs font-semibold text-[var(--soft-fg)] uppercase">Enemies</div>
                     <div className="flex justify-center">
                         <CampaignBattleEnemies
                             keyPrefix="expandable"

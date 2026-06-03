@@ -196,7 +196,7 @@ export const Resources = () => {
                 </div>
             )}
             <div className="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-3">
-                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
                     <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         XP Books
                     </h4>
@@ -218,7 +218,7 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
                     <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         Forge Badges
                     </h4>
@@ -236,7 +236,7 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
                     <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         Machine of War Components
                     </h4>
@@ -251,7 +251,7 @@ export const Resources = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+                <div className="flex flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
                     <h4 className="text-md mb-2 border-b border-(--card-border) pb-2 font-bold tracking-wide text-(--card-fg) uppercase">
                         Mythic Upgrade Materials
                     </h4>
@@ -277,7 +277,7 @@ export const Resources = () => {
                     </div>
                 </div>
             </div>{' '}
-            <div className="mt-4 flex flex-col rounded-lg border border-(--card-border) bg-(--card-bg) p-3 text-(--card-fg) shadow-lg">
+            <div className="mt-4 flex flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
                 <h3 className="mb-3 border-b border-(--card-border) pb-2 text-lg font-bold tracking-wider text-(--card-fg) uppercase">
                     Alliance Resources
                 </h3>

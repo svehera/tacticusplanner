@@ -3,7 +3,7 @@ import React, { useEffect, useRef, useState } from 'react';
 
 import { RequirementStatus } from '@/fsd/3-features/lre';
 
-import { STATUS_COLORS, STATUS_LABELS } from './requirement-status-constants';
+import { STATUS_BORDER_CLASSES, STATUS_LABELS, STATUS_TEXT_CLASSES } from './requirement-status-constants';
 
 interface Props {
     status: RequirementStatus;
@@ -126,14 +126,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({
                 <button
                     ref={buttonReference}
                     onClick={toggleDropdown}
-                    className="size-8 rounded border-2 p-1 text-center text-sm font-bold md:size-10 md:p-1.5 md:text-base"
-                    style={{
-                        color:
-                            projectedClear && displayStatus === RequirementStatus.NotCleared
-                                ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
-                                : STATUS_COLORS[displayStatus],
-                        borderColor: `${STATUS_COLORS[displayStatus]}20`,
-                    }}>
+                    className={`size-8 rounded border-2 p-1 text-center text-sm font-bold md:size-10 md:p-1.5 md:text-base ${projectedClear && displayStatus === RequirementStatus.NotCleared ? 'text-(--success)/40' : STATUS_TEXT_CLASSES[displayStatus]} ${STATUS_BORDER_CLASSES[displayStatus]}`}>
                     {score && status === RequirementStatus.PartiallyCleared ? (
                         <span className="text-xs md:text-sm">{score}</span>
                     ) : (
@@ -153,10 +146,7 @@ export const BattleStatusCheckbox: React.FC<Props> = ({
                             <button
                                 key={option.value}
                                 onClick={() => handleStatusClick(option.value)}
-                                className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
-                                style={{
-                                    color: STATUS_COLORS[option.value],
-                                }}>
+                                className={`flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 ${STATUS_TEXT_CLASSES[option.value]}`}>
                                 {option.label}
                             </button>
                         ))}
