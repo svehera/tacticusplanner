@@ -195,6 +195,7 @@ export const librarySubMenu: MenuItemTP[] = [
     menuItemById['guides'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
+    menuItemById['guildPerformance'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
 ];
