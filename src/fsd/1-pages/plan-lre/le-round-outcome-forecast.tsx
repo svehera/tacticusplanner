@@ -158,19 +158,17 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                             <div className="flex items-start justify-between gap-3">
                                 <div>
                                     <div className="font-semibold">{getRoundLabel(forecast.round)}</div>
-                                    <div className="text-sm text-gray-600 dark:text-gray-400">
-                                        {getStatusLabel(status)}
-                                    </div>
+                                    <div className="text-sm text-(--soft-fg)">{getStatusLabel(status)}</div>
                                 </div>
                             </div>
 
                             {status === 'finished' ? (
-                                <div className="text-sm text-gray-600 dark:text-gray-400">{forecast.message}</div>
+                                <div className="text-sm text-(--soft-fg)">{forecast.message}</div>
                             ) : (
                                 <>
                                     <div className="grid gap-4">
                                         {isRoundActive && (
-                                            <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                                            <div className="rounded border border-(--border) bg-(--soft) px-3 py-2 text-xs text-(--soft-fg)">
                                                 Event in Progress, Mission Status Synced
                                             </div>
                                         )}
@@ -207,7 +205,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                             </>
                                         )}
                                         {config.buyBonusDelivery && isRoundActive && (
-                                            <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                                            <div className="rounded border border-(--border) bg-(--soft) px-3 py-2 text-xs text-(--soft-fg)">
                                                 Event in Progress, Mission Status Synced
                                             </div>
                                         )}
@@ -239,7 +237,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                             />
                                         )}
                                         {isRoundActive && (
-                                            <div className="rounded border border-gray-200 bg-gray-50 px-3 py-2 text-xs text-gray-600 dark:border-gray-700 dark:bg-gray-900/40 dark:text-gray-400">
+                                            <div className="rounded border border-(--border) bg-(--soft) px-3 py-2 text-xs text-(--soft-fg)">
                                                 Event in Progress, Extra Currency Synced
                                             </div>
                                         )}
@@ -258,7 +256,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                         )}
                                     </div>
 
-                                    <div className="mt-2 rounded border border-gray-200 p-3 text-sm dark:border-gray-700">
+                                    <div className="mt-2 rounded border border-(--border) p-3 text-sm">
                                         <div className="mb-2 font-medium">End of round outcome</div>
                                         <div>
                                             Tokens: {forecast.tokensUsed} / {forecast.tokensAvailable} used
@@ -302,9 +300,9 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                     isDisabled={false}
                                                 />
                                             </RosterSnapshotsAssetsProvider>
-                                            <div className="relative h-5 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+                                            <div className="relative h-5 w-full overflow-hidden rounded-full bg-(--fg)/12">
                                                 <div
-                                                    className="h-full bg-blue-600"
+                                                    className="h-full bg-(--primary)"
                                                     style={{
                                                         width: `${
                                                             forecast.shardsNeededForNextMilestone > 0
@@ -321,14 +319,14 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                         borderBottomRightRadius: '9999px',
                                                     }}
                                                 />
-                                                <span className="absolute inset-0 flex h-full w-full items-center justify-center text-xs font-medium text-gray-800 dark:text-gray-100">
+                                                <span className="absolute inset-0 flex h-full w-full items-center justify-center text-xs font-medium text-(--fg)">
                                                     {forecast.endingShards} /{' '}
                                                     {forecast.shardsNeededForNextMilestone > 0
                                                         ? forecast.endingShards + forecast.shardsNeededForNextMilestone
                                                         : '∞'}
                                                 </span>
                                             </div>
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                            <div className="text-xs text-(--soft-fg)">
                                                 {(() => {
                                                     const nextChestCost = cumulativeChestCosts.find(
                                                         cost => cost > forecast.endingCurrency
@@ -347,7 +345,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                     );
                                                 })()}
                                             </div>
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                            <div className="text-xs text-(--soft-fg)">
                                                 {(() => {
                                                     if (forecast.shardsNeededForNextMilestone <= 0) {
                                                         return <span>Currency for Next Shard Milestone: 0 needed</span>;
@@ -385,7 +383,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                     );
                                                 })()}
                                             </div>
-                                            <div className="text-xs text-gray-500 dark:text-gray-400">
+                                            <div className="text-xs text-(--soft-fg)">
                                                 {(() => {
                                                     const nextMilestone = ascensionMilestones.find(
                                                         milestone => milestone.label === forecast.nextMilestone
@@ -408,7 +406,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                             <div>Oh, So Close! shards bought: {forecast.boughtOhSoCloseShards}</div>
                                         )}
                                         {!forecast.ohSoCloseEligible && forecast.shardsNeededForNextMilestone > 0 && (
-                                            <div className="flex justify-center text-gray-600 dark:text-gray-400">
+                                            <div className="flex justify-center text-(--soft-fg)">
                                                 Not close enough for &quot;Oh, So Close!&quot; shards this round.
                                             </div>
                                         )}

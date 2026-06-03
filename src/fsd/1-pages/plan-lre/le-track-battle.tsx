@@ -8,7 +8,12 @@ import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 import { BattleStatusCheckbox } from './battle-status-checkbox';
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreBattleProgress, ILreBattleRequirementsProgress } from './lre.models';
-import { STATUS_COLORS, STATUS_LABELS, STATUS_LABEL_TEXT } from './requirement-status-constants';
+import {
+    STATUS_BORDER_CLASSES,
+    STATUS_LABEL_TEXT,
+    STATUS_LABELS,
+    STATUS_TEXT_CLASSES,
+} from './requirement-status-constants';
 
 interface Props {
     battle: ILreBattleProgress;
@@ -317,13 +322,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                         aria-haspopup="menu"
                                         aria-expanded={showDropdown === requirement.id}
                                         aria-controls={`dropdown-${requirement.id}`}
-                                        className="size-8 rounded border-2 p-1 text-center text-sm font-bold select-none md:size-10 md:p-1.5 md:text-base"
-                                        style={{
-                                            color: shouldShowGreenBorder
-                                                ? `${STATUS_COLORS[RequirementStatus.Cleared]}60`
-                                                : STATUS_COLORS[status],
-                                            borderColor: `${STATUS_COLORS[status]}20`,
-                                        }}>
+                                        className={`size-8 rounded border-2 p-1 text-center text-sm font-bold select-none md:size-10 md:p-1.5 md:text-base ${shouldShowGreenBorder ? 'text-(--success)/40' : STATUS_TEXT_CLASSES[status]} ${STATUS_BORDER_CLASSES[status]}`}>
                                         {STATUS_LABELS[status]}
                                     </button>
 
@@ -355,10 +354,7 @@ export const LreTrackBattleSummary: React.FC<Props> = ({
                                                         event.stopPropagation();
                                                         handleDirectStatusChange(requirement, statusOption);
                                                     }}
-                                                    className="flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700"
-                                                    style={{
-                                                        color: STATUS_COLORS[statusOption],
-                                                    }}>
+                                                    className={`flex w-full items-center justify-center px-3 py-2 text-left hover:bg-gray-100 dark:hover:bg-gray-700 ${STATUS_TEXT_CLASSES[statusOption]}`}>
                                                     {STATUS_LABELS[statusOption]}
                                                 </button>
                                             ))}
