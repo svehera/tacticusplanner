@@ -11,6 +11,15 @@ import { trackEvent, trackPageView } from '@/fsd/5-shared/monitoring';
 import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
+const trackBottomNavigation = (destinationPath: string) => {
+    trackEvent('nav_menu_select', {
+        feature: 'navigation',
+        action: 'select',
+        destination_path: destinationPath,
+        source: 'mobile_bottom_nav',
+    });
+};
+
 const MobileApp = () => {
     const location = useLocation();
     const navigate = useNavigate();
@@ -44,15 +53,6 @@ const MobileApp = () => {
     useEffect(() => {
         trackPageView(location.pathname);
     }, [location.pathname]);
-
-    const trackBottomNavigation = (destinationPath: string) => {
-        trackEvent('nav_menu_select', {
-            feature: 'navigation',
-            action: 'select',
-            destination_path: destinationPath,
-            source: 'mobile_bottom_nav',
-        });
-    };
 
     return (
         <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>

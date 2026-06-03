@@ -5,13 +5,13 @@ import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
 import { useContext, useEffect, useState } from 'react';
 
+import { useAuth } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
+
 import { GlobalState } from '../../models/global-state';
 import { IPersonalData2 } from '../../models/interfaces';
 import { DispatchContext } from '../../reducers/store.provider';
 import { PersonalDataLocalStorage } from '../../services';
-
-import { useAuth } from '@/fsd/5-shared/model';
-import { trackEvent } from '@/fsd/5-shared/monitoring';
 
 export const RestoreBackupDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) => {
     const { setStore } = useContext(DispatchContext);

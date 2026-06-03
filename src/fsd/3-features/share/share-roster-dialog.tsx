@@ -53,7 +53,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
                         source: 'share_roster_dialog',
                     });
                 })
-                .catch(() => undefined)
+                .catch(() => {})
                 .finally(() => setLoading(false));
         }
     };
@@ -76,7 +76,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
                         source: 'share_roster_dialog',
                     });
                 })
-                .catch(() => undefined)
+                .catch(() => {})
                 .finally(() => setLoading(false));
         }
     };
@@ -97,7 +97,7 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
                         source: 'share_roster_dialog',
                     });
                 })
-                .catch(() => undefined)
+                .catch(() => {})
                 .finally(() => setLoading(false));
         }
     };

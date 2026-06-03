@@ -16,6 +16,14 @@ interface Props {
     inputsChange: (value: IMowLookupInputs) => void;
 }
 
+const trackMowLookupFilter = (action: string) => {
+    trackEvent('search', {
+        feature: 'mow_lookup',
+        action,
+        search_location: 'mow_lookup_inputs',
+    });
+};
+
 export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange }) => {
     const [mow, setMow] = useQueryState<IMow2 | null>(
         'mow',
@@ -52,14 +60,6 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
         secondaryAbilityEnd => secondaryAbilityEnd.toString()
     );
 
-    const trackMowLookupFilter = (action: string) => {
-        trackEvent('search', {
-            feature: 'mow_lookup',
-            action,
-            search_location: 'mow_lookup_inputs',
-        });
-    };
-
     useEffect(() => {
         inputsChange({
             mow: mow ?? undefined,
@@ -73,10 +73,10 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.roundIcon} />}
-            {/* eslint-disable-next-line unicorn/no-null -- autocomplete requires null */}
+            {}
             <UnitsAutocomplete
                 className="max-w-[250px]"
-                unit={mow ?? null}
+                unit={mow}
                 options={mows}
                 onUnitChange={value => {
                     trackMowLookupFilter('select_unit');

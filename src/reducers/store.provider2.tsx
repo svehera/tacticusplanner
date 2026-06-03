@@ -125,22 +125,47 @@ function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated
     } else if (scope === 'dailyRaids' && actionType === 'UpdateFilters') {
         trackEvent('daily_raids_filter_change', { ...commonParameters, feature: 'daily_raids' });
     } else if (scope === 'goals') {
-        if (actionType === 'Add') {
-            trackEvent('goal_create', { ...commonParameters, feature: 'goals', goal_type: getGoalType(action) });
-        } else if (actionType === 'Update') {
-            trackEvent('goal_update', { ...commonParameters, feature: 'goals', goal_type: getGoalType(action) });
-        } else if (actionType === 'Delete') {
-            trackEvent('goal_delete', { ...commonParameters, feature: 'goals' });
-        } else if (actionType === 'DeleteAll') {
-            trackEvent('goals_clear_all', { ...commonParameters, feature: 'goals' });
+        switch (actionType) {
+            case 'Add': {
+                trackEvent('goal_create', { ...commonParameters, feature: 'goals', goal_type: getGoalType(action) });
+
+                break;
+            }
+            case 'Update': {
+                trackEvent('goal_update', { ...commonParameters, feature: 'goals', goal_type: getGoalType(action) });
+
+                break;
+            }
+            case 'Delete': {
+                trackEvent('goal_delete', { ...commonParameters, feature: 'goals' });
+
+                break;
+            }
+            case 'DeleteAll': {
+                trackEvent('goals_clear_all', { ...commonParameters, feature: 'goals' });
+
+                break;
+            }
+            // No default
         }
     } else if (scope === 'teams') {
-        if (actionType === 'Add') {
-            trackEvent('team_create', { ...commonParameters, feature: 'teams' });
-        } else if (actionType === 'Update') {
-            trackEvent('team_update', { ...commonParameters, feature: 'teams' });
-        } else if (actionType === 'Delete') {
-            trackEvent('team_delete', { ...commonParameters, feature: 'teams' });
+        switch (actionType) {
+            case 'Add': {
+                trackEvent('team_create', { ...commonParameters, feature: 'teams' });
+
+                break;
+            }
+            case 'Update': {
+                trackEvent('team_update', { ...commonParameters, feature: 'teams' });
+
+                break;
+            }
+            case 'Delete': {
+                trackEvent('team_delete', { ...commonParameters, feature: 'teams' });
+
+                break;
+            }
+            // No default
         }
     } else if (scope === 'teams2' && actionType === 'Set') {
         trackEvent('team_update', { ...commonParameters, feature: 'teams2' });
@@ -149,18 +174,31 @@ function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated
     } else if (scope === 'guildWar') {
         if (['DeployCharacter', 'WithdrawCharacter', 'DeployTeam', 'WithdrawTeam'].includes(actionType)) {
             trackEvent('guild_war_deploy', { ...commonParameters, feature: 'guild_war' });
-        } else if (['UpdateZoneDifficulty', 'UpdateLayoutBfLevel', 'SwapLayoutZones', 'UpdateZonePlayers'].includes(actionType)) {
+        } else if (
+            ['UpdateZoneDifficulty', 'UpdateLayoutBfLevel', 'SwapLayoutZones', 'UpdateZonePlayers'].includes(actionType)
+        ) {
             trackEvent('guild_war_zone_update', { ...commonParameters, feature: 'guild_war' });
         } else if (actionType !== 'Set') {
             trackEvent('guild_war_team_update', { ...commonParameters, feature: 'guild_war' });
         }
     } else if (scope === 'leSelectedTeams') {
-        if (actionType === 'AddTeam') {
-            trackEvent('lre_team_create', { ...commonParameters, feature: 'lre' });
-        } else if (actionType === 'UpdateTeam') {
-            trackEvent('lre_team_update', { ...commonParameters, feature: 'lre' });
-        } else if (actionType === 'DeleteTeam') {
-            trackEvent('lre_team_update', { ...commonParameters, feature: 'lre' });
+        switch (actionType) {
+            case 'AddTeam': {
+                trackEvent('lre_team_create', { ...commonParameters, feature: 'lre' });
+
+                break;
+            }
+            case 'UpdateTeam': {
+                trackEvent('lre_team_update', { ...commonParameters, feature: 'lre' });
+
+                break;
+            }
+            case 'DeleteTeam': {
+                trackEvent('lre_team_update', { ...commonParameters, feature: 'lre' });
+
+                break;
+            }
+            // No default
         }
     } else if (scope === 'leProgress' && actionType === 'Update') {
         trackEvent('lre_progress_update', { ...commonParameters, feature: 'lre' });

@@ -95,12 +95,15 @@ function getAuthenticated(): boolean {
 }
 
 function normalizeParameters(parameters: AnalyticsEventParameters): Record<string, string | number | boolean> {
-    return Object.entries(parameters).reduce<Record<string, string | number | boolean>>((result, [key, value]) => {
+    const result: Record<string, string | number | boolean> = {};
+
+    for (const [key, value] of Object.entries(parameters)) {
         if (value !== undefined) {
             result[key] = value;
         }
-        return result;
-    }, {});
+    }
+
+    return result;
 }
 
 export function trackEvent(eventName: AnalyticsEventName, parameters: AnalyticsEventParameters = {}): void {
