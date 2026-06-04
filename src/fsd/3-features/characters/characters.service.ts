@@ -1,46 +1,33 @@
-﻿import { groupBy, orderBy, sum } from 'lodash';
+﻿/* eslint-disable import-x/no-internal-modules */
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { groupBy, orderBy, sum } from 'lodash';
+
 import factionsData from 'src/data/factions.json';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { charsUnlockShards, charsProgression } from 'src/models/constants';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IPersonalCharacterData2, ICharProgression } from 'src/models/interfaces';
 
 import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, UnitType, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersFilterBy } from '@/fsd/4-entities/character/characters-filter-by.enum';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersOrderBy } from '@/fsd/4-entities/character/characters-order-by.enum';
 import { IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersValueService } from '@/fsd/4-entities/unit/characters-value.service';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.functions';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { rarityCaps } from '@/fsd/3-features/characters/characters.constants';
 
 import { IFaction } from './characters.models';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { blueStarReady } from './functions/blue-star-ready';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { canAscendCharacter } from './functions/can-ascend';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { canPromoteUnit } from './functions/can-promote';
 import { filterChaos } from './functions/filter-by-chaos';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { filterImperial } from './functions/filter-by-imperial';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { filterXenos } from './functions/filter-by-xenos';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { needToAscendCharacter } from './functions/need-to-ascend';
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
@@ -59,6 +46,14 @@ export class CharactersService {
             }
             case CharactersFilterBy.CanAscend: {
                 return filteredCharactersByName.filter(character => canAscendCharacter(character));
+            }
+            case CharactersFilterBy.CanPromote: {
+                return filteredCharactersByName.filter(character => canPromoteUnit(character));
+            }
+            case CharactersFilterBy.CanAscendPromote: {
+                return filteredCharactersByName.filter(
+                    character => canAscendCharacter(character) || canPromoteUnit(character)
+                );
             }
             case CharactersFilterBy.NeedToLevel: {
                 return filteredCharactersByName.filter(character => needToLevelCharacter(character));
