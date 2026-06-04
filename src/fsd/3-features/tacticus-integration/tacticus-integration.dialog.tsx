@@ -271,86 +271,18 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             )}
                             {guildApiKey && (
                                 <div className="flex flex-col gap-3">
-                                    <Switch
-                                        isSelected={shareGuildMemberPerformance}
-                                        onChange={setShareGuildMemberPerformance}>
-                    <br />
-
-                    <div className="flex flex-col items-center justify-between">
-                        <TextField
-                            name={`apikey-${Math.random()}`}
-                            description="Used to fetch Player data. Player scope is required for this key"
-                            type="password"
-                            label="Personal API key"
-                            className="w-[80%]"
-                            value={apiKey}
-                            onChange={setApiKey}
-                            autoComplete="new-password"
-                            isRevealable
-                        />
-                        <TextField
-                            name={`guildApikey-${Math.random()}`}
-                            description="Used to fetch Guild Raid data. Ask your guild leader or co-leader to generate API key with 'Guild Raid' and 'Guild' scopes"
-                            type="password"
-                            label="Guild API key"
-                            className="w-[80%]"
-                            value={guildApiKey}
-                            onChange={setGuildApiKey}
-                            autoComplete="new-password"
-                            isRevealable
-                        />
-                        <TextField
-                            name={`apikey-${Math.random()}`}
-                            type="password"
-                            description="Used to identify your account in the Guild Raid data"
-                            label="Tacticus User ID"
-                            className="w-[80%]"
-                            value={userId}
-                            onChange={setUserId}
-                            autoComplete="new-password"
-                            isRevealable
-                        />
-                        {userId && (
-                            <div className="flex w-[80%] flex-col gap-2 pt-2">
-                                <label className="flex cursor-pointer items-center gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="size-4 cursor-pointer accent-blue-600"
-                                        checked={currentShareInGameName}
-                                        onChange={event => {
-                                            setCurrentShareInGameName(event.target.checked);
-                                            if (!event.target.checked) {
-                                                setCurrentShareRosterData(false);
-                                            }
-                                        }}
-                                    />
-                                    <span className="text-sm">Share in-game player name with guild</span>
-                                </label>
-                                <label className="flex cursor-pointer items-center gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="size-4 cursor-pointer accent-blue-600"
-                                        checked={currentShareRosterData}
-                                        onChange={event => setCurrentShareRosterData(event.target.checked)}
-                                        disabled={currentShareInGameName === false}
-                                    />
-                                    <span className="text-sm">Share roster with guild</span>
-                                </label>
-                            </div>
-                        )}
-                        {guildApiKey && (
-                            <div className="flex w-[80%] flex-col gap-3 pt-2">
-                                <label className="flex cursor-pointer items-start gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="mt-0.5 size-4 cursor-pointer accent-blue-600"
-                                        checked={shareGuildMemberPerformance}
-                                        onChange={event => setShareGuildMemberPerformance(event.target.checked)}
-                                    />
-                                    <span className="text-sm">
-                                        Privately share each guild member&apos;s performance data (visible only to that
-                                        member)
-                                    </Switch>
+                                    <label className="flex cursor-pointer items-start gap-3">
+                                        <input
+                                            type="checkbox"
+                                            className="mt-0.5 size-4 cursor-pointer accent-blue-600"
+                                            checked={shareGuildMemberPerformance}
+                                            onChange={event => setShareGuildMemberPerformance(event.target.checked)}
+                                        />
+                                        <span className="text-sm">
+                                            Privately share each guild member&apos;s performance data (visible only to
+                                            that member)
+                                        </span>
+                                    </label>
                                     <GuildTagListInput tags={combinedTags} onChange={setCombinedTags} />
                                 </div>
                             )}
