@@ -8,4 +8,6 @@
     Imperial,
     Xenos,
     MoW,
+    CanPromote,
+    CanAscendPromote,
 }
