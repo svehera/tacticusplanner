@@ -5,8 +5,9 @@ on:
     push:
         branches:
             - master
+    workflow_dispatch:
 
-# Prevent overlapping deploys of the same SHA on master
+# Prevent overlapping deploys of the same ref
 concurrency:
     group: production-${{ github.ref }}
     cancel-in-progress: true
