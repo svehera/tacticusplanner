@@ -293,14 +293,17 @@ export const Upgrades = () => {
                 <TextField
                     label="Quick Filter"
                     variant="outlined"
-                    onChange={change => setNameFilter(change.target.value)}
-                    onBlur={() =>
+                    onChange={change => {
+                        const newNameFilter = change.target.value;
+
                         trackEvent('search', {
                             feature: 'learn_upgrades',
                             action: 'filter',
                             search_location: 'upgrades_quick_filter',
-                        })
-                    }
+                            status: newNameFilter.length > 0 ? 'applied' : 'cleared',
+                        });
+                        setNameFilter(newNameFilter);
+                    }}
                 />
                 <FormControl className="m-5 w-[250px]">
                     <InputLabel>Selection</InputLabel>
