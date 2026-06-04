@@ -12,6 +12,7 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { AccessibleTooltip, RankSelect } from '@/fsd/5-shared/ui';
 import { MiscIcon, RankIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -26,6 +27,15 @@ import {
 } from '@/fsd/4-entities/upgrade';
 
 import { RankLookupService } from './rank-lookup.service';
+
+const trackRankLookupSearch = (action: string, status?: 'applied' | 'cleared') => {
+    trackEvent('search', {
+        feature: 'rank_lookup',
+        action,
+        search_location: 'rank_lookup_inputs',
+        status,
+    });
+};
 
 export const RankLookup = () => {
     const { characters, campaignsProgress } = useContext(StoreContext);
@@ -214,6 +224,7 @@ export const RankLookup = () => {
     ]);
 
     const updateRankStart = (value: number) => {
+        trackRankLookupSearch('change_rank_start');
         setRankStart(value);
 
         setSearchParameters(current => {
@@ -223,6 +234,7 @@ export const RankLookup = () => {
     };
 
     const updateRankEnd = (value: number) => {
+        trackRankLookupSearch('change_rank_end');
         setRankEnd(value);
 
         setSearchParameters(current => {
@@ -232,6 +244,7 @@ export const RankLookup = () => {
     };
 
     const updateRankPoint5 = (value: boolean) => {
+        trackRankLookupSearch('toggle_rank_point5', value ? 'applied' : 'cleared');
         setRankPoint5(value);
 
         setSearchParameters(current => {
@@ -304,6 +317,7 @@ export const RankLookup = () => {
                     unit={character ?? null}
                     options={characters}
                     onUnitChange={value => {
+                        trackRankLookupSearch('select_unit');
                         setCharacter(value ?? undefined);
 
                         setSearchParameters(current => {

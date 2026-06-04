@@ -1,14 +1,24 @@
-﻿import { Home, Input, School as Learn, TrackChanges as Plan } from '@mui/icons-material';
+import { Home, Input, School as Learn, TrackChanges as Plan } from '@mui/icons-material';
 import { BottomNavigation, BottomNavigationAction, Paper } from '@mui/material';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 
 import { menuItemById } from 'src/models/menu-items';
 
+import { trackEvent, trackPageView } from '@/fsd/5-shared/monitoring';
 import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
+
+const trackBottomNavigation = (destinationPath: string) => {
+    trackEvent('nav_menu_select', {
+        feature: 'navigation',
+        action: 'select',
+        destination_path: destinationPath,
+        source: 'mobile_bottom_nav',
+    });
+};
 
 const MobileApp = () => {
     const location = useLocation();
@@ -40,6 +50,10 @@ const MobileApp = () => {
         }
     }, [location.pathname]);
 
+    useEffect(() => {
+        trackPageView(location.pathname);
+    }, [location.pathname]);
+
     return (
         <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
             <Conditional condition={!!title}>
@@ -56,10 +70,38 @@ const MobileApp = () => {
             </div>
             <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>
                 <BottomNavigation showLabels value={value}>
-                    <BottomNavigationAction value={0} component={Link} to={'./'} label="Home" icon={<Home />} />
-                    <BottomNavigationAction value={1} component={Link} to={'./input'} label="Input" icon={<Input />} />
-                    <BottomNavigationAction value={2} component={Link} to={'./plan'} label="Plan" icon={<Plan />} />
-                    <BottomNavigationAction value={3} component={Link} to={'./learn'} label="Learn" icon={<Learn />} />
+                    <BottomNavigationAction
+                        value={0}
+                        component={Link}
+                        to={'./'}
+                        label="Home"
+                        icon={<Home />}
+                        onClick={() => trackBottomNavigation('/mobile/home')}
+                    />
+                    <BottomNavigationAction
+                        value={1}
+                        component={Link}
+                        to={'./input'}
+                        label="Input"
+                        icon={<Input />}
+                        onClick={() => trackBottomNavigation('/mobile/input')}
+                    />
+                    <BottomNavigationAction
+                        value={2}
+                        component={Link}
+                        to={'./plan'}
+                        label="Plan"
+                        icon={<Plan />}
+                        onClick={() => trackBottomNavigation('/mobile/plan')}
+                    />
+                    <BottomNavigationAction
+                        value={3}
+                        component={Link}
+                        to={'./learn'}
+                        label="Learn"
+                        icon={<Learn />}
+                        onClick={() => trackBottomNavigation('/mobile/learn')}
+                    />
                 </BottomNavigation>
             </Paper>
         </Box>

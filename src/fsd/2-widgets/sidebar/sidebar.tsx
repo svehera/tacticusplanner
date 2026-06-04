@@ -11,7 +11,17 @@ import { NAV_SECTIONS } from '@/models/menu-items'; // TODO refactor for FSD
 // eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { MenuItemTP, isTabletOrMobileMediaQuery } from '@/fsd/5-shared/ui';
+
+const trackSidebarNavigation = (destinationPath: string, source = 'desktop_sidebar') => {
+    trackEvent('nav_menu_select', {
+        feature: 'navigation',
+        action: 'select',
+        destination_path: destinationPath,
+        source,
+    });
+};
 
 export const Sidebar = () => {
     const isSmall = useMediaQuery(isTabletOrMobileMediaQuery);
@@ -83,7 +93,10 @@ export const Sidebar = () => {
                 {/* Brand row */}
                 <div
                     className="flex h-[60px] flex-shrink-0 cursor-pointer items-center gap-2.5 border-b border-[var(--border)] px-4"
-                    onClick={() => navigate('./home')}>
+                    onClick={() => {
+                        trackSidebarNavigation('/home', 'desktop_logo');
+                        navigate('./home');
+                    }}>
                     <img
                         src="/android-chrome-192x192.png"
                         height={28}
@@ -132,11 +145,15 @@ export const Sidebar = () => {
                                                 placement="right"
                                                 enterDelay={200}>
                                                 <button
-                                                    onClick={() =>
-                                                        isGroup || item.subMenu.length > 0
-                                                            ? toggleItem(item.label)
-                                                            : navigate(item.routeWeb)
-                                                    }
+                                                    onClick={() => {
+                                                        if (isGroup || item.subMenu.length > 0) {
+                                                            toggleItem(item.label);
+                                                            return;
+                                                        }
+
+                                                        trackSidebarNavigation(item.routeWeb);
+                                                        navigate(item.routeWeb);
+                                                    }}
                                                     className={`${itemBase} ${active ? itemActiveClass : itemInactiveClass}`}>
                                                     <span className="flex flex-shrink-0 text-[18px]">{item.icon}</span>
                                                     {!collapsed && (
@@ -161,7 +178,10 @@ export const Sidebar = () => {
                                                         return (
                                                             <button
                                                                 key={sub.label}
-                                                                onClick={() => navigate(sub.routeWeb)}
+                                                                onClick={() => {
+                                                                    trackSidebarNavigation(sub.routeWeb);
+                                                                    navigate(sub.routeWeb);
+                                                                }}
                                                                 className={`${subBase} ${subActive ? subActiveClass : subInactiveClass}`}>
                                                                 {sub.label}
                                                             </button>
