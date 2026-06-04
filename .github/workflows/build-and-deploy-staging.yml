@@ -5,6 +5,7 @@ on:
     push:
         branches:
             - develop
+    workflow_dispatch:
 
 # Prevent overlapping deploys of the same SHA on develop
 concurrency:
