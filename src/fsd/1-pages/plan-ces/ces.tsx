@@ -8,6 +8,7 @@ import { ICustomDailyRaidsSettings } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignImage, CampaignsService, CampaignType } from '@/fsd/4-entities/campaign';
@@ -100,6 +101,10 @@ export const CEs = () => {
 
     const handleGoalsSelectionChange = useCallback(
         (selection: TypedGoalSelect[]) => {
+            trackEvent('campaign_event_filter_change', {
+                feature: 'campaign_events',
+                action: 'select_goals',
+            });
             dispatch.goals({
                 type: 'UpdateDailyRaids',
                 value: selection.map(x => ({ goalId: x.goalId, include: x.include })),
@@ -477,7 +482,17 @@ export const CEs = () => {
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <FormControlLabel
                     control={
-                        <Switch checked={showAllBattles} onChange={event => setShowAllBattles(event.target.checked)} />
+                        <Switch
+                            checked={showAllBattles}
+                            onChange={event => {
+                                trackEvent('campaign_event_filter_change', {
+                                    feature: 'campaign_events',
+                                    action: 'toggle_all_battles',
+                                    status: event.target.checked ? 'applied' : 'cleared',
+                                });
+                                setShowAllBattles(event.target.checked);
+                            }}
+                        />
                     }
                     label={`Selected: ${showAllBattles ? 'All Battles' : 'Cleared Battles'}`}
                 />

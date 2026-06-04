@@ -32,6 +32,7 @@ import {
 // eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import {
     FlexBox,
     MenuItemTP,
@@ -54,9 +55,31 @@ interface Props {
     onCloseWhatsNew: () => void;
 }
 
+const trackNavigationSelect = (destinationPath: string, source: string) => {
+    trackEvent('nav_menu_select', {
+        feature: 'navigation',
+        action: 'select',
+        destination_path: destinationPath,
+        source,
+    });
+};
+
+const trackExternalLinkClick = (destinationType: string) => {
+    trackEvent('external_link_click', {
+        feature: 'navigation',
+        action: 'open',
+        destination_type: destinationType,
+    });
+};
+
 const generateMenuItems = (items: MenuItemTP[]) =>
     items.map(item => (
-        <MenuItem key={item.label} component={Link} to={item.routeWeb} color="inherit">
+        <MenuItem
+            key={item.label}
+            component={Link}
+            to={item.routeWeb}
+            color="inherit"
+            onClick={() => trackNavigationSelect(item.routeWeb, 'desktop_drawer_menu')}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText>{item.label}</ListItemText>
         </MenuItem>
@@ -161,7 +184,12 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         <Box sx={{ flexGrow: 1 }}>
             <AppBar position="static">
                 <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-                    <FlexBox onClick={() => navigate('./home')} className="cursor-pointer">
+                    <FlexBox
+                        onClick={() => {
+                            trackNavigationSelect('/home', 'desktop_logo');
+                            navigate('./home');
+                        }}
+                        className="cursor-pointer">
                         <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
                         <Typography variant={isTabletOrMobile ? 'h5' : 'h4'} component="div">
                             {title}
@@ -169,16 +197,31 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                     </FlexBox>
                     <div className="flex items-center">
                         {nav}
-                        <IconButton color="inherit" onClick={() => navigate('./faq')}>
+                        <IconButton
+                            color="inherit"
+                            onClick={() => {
+                                trackNavigationSelect('/faq', 'desktop_icon');
+                                navigate('./faq');
+                            }}>
                             <Tooltip title="Frequently Asked Questions">{menuItemById.faq.icon}</Tooltip>
                         </IconButton>
                         <Tooltip title="Join Tacticus Planner community on Discord">
-                            <IconButton color="inherit" component={Link} to={discordInvitationLink} target={'_blank'}>
+                            <IconButton
+                                color="inherit"
+                                component={Link}
+                                to={discordInvitationLink}
+                                target={'_blank'}
+                                onClick={() => trackExternalLinkClick('discord')}>
                                 <DiscordIcon />
                             </IconButton>
                         </Tooltip>
                         <Tooltip title="Buy me a trooper">
-                            <IconButton color="inherit" component={Link} to={bmcLink} target={'_blank'}>
+                            <IconButton
+                                color="inherit"
+                                component={Link}
+                                to={bmcLink}
+                                target={'_blank'}
+                                onClick={() => trackExternalLinkClick('support')}>
                                 <BmcIcon />
                             </IconButton>
                         </Tooltip>

@@ -24,11 +24,24 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { MultipleSelectCheckmarks, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 
 import { CharactersService, ICharacter2, RankSelect } from '@/fsd/4-entities/character';
 
 import { useCharacters } from './characters-column-defs';
+
+const getFilterStatus = (value: string | boolean | number | string[]) =>
+    value === '' || value === false || (Array.isArray(value) && value.length === 0) ? 'cleared' : 'applied';
+
+const trackCharactersFilter = (searchLocation: string, status?: string) => {
+    trackEvent('search', {
+        feature: 'learn_characters',
+        action: 'filter',
+        search_location: searchLocation,
+        status,
+    });
+};
 
 export const LearnCharacters = () => {
     const gridReference = useRef<AgGridReact<ICharacter2>>(null);
@@ -101,6 +114,10 @@ export const LearnCharacters = () => {
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
+        if (name !== 'name') {
+            trackCharactersFilter('characters_advanced_filter', getFilterStatus(value));
+        }
+
         setFilter(previous => ({ ...previous, [name]: value }));
         const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
@@ -315,6 +332,7 @@ export const LearnCharacters = () => {
     }, []);
 
     const resetFilters = () => {
+        trackCharactersFilter('characters_advanced_filter', 'cleared');
         setFilter({
             name: '',
             minHits: '',
@@ -347,7 +365,13 @@ export const LearnCharacters = () => {
                     control={
                         <Switch
                             checked={onlyUnlocked}
-                            onChange={event => setOnlyUnlocked(event.target.checked)}
+                            onChange={event => {
+                                trackCharactersFilter(
+                                    'characters_unlocked_toggle',
+                                    event.target.checked ? 'applied' : 'cleared'
+                                );
+                                setOnlyUnlocked(event.target.checked);
+                            }}
                             inputProps={{ 'aria-label': 'controlled' }}
                         />
                     }
@@ -357,6 +381,7 @@ export const LearnCharacters = () => {
                     label="Quick Filter"
                     variant="outlined"
                     onChange={(event: ChangeEvent<HTMLInputElement>) => handleFilterChange('name', event.target.value)}
+                    onBlur={() => trackCharactersFilter('characters_quick_filter')}
                     value={filter.name}
                 />
                 <div className="flex-box gap10">

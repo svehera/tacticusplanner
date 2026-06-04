@@ -20,6 +20,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { RankIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
@@ -486,6 +487,11 @@ export const BulkGoalCreator = () => {
             });
         }
 
+        trackEvent('bulk_goals_create', {
+            feature: 'bulk_goals',
+            action: 'create',
+            status: 'success',
+        });
         setBulkUnits([]);
     }, [currentLowestPriority, dispatch, goalInsertPriorityMode, plannedGoals, wouldExceedGoalsLimit]);
 
