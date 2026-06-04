@@ -10,7 +10,7 @@ import {
     type GuildSeasonHistoryResponse,
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
-import { useDebugMode, useAuth } from '@/fsd/5-shared/model';
+import { useAuth } from '@/fsd/5-shared/model';
 
 import { NoKeyMessage, DebugJson, SeasonSelect, PlayerSelect } from './guild-performance.components';
 import { LOADING, type GuildMemberName, type LoadingOrData } from './guild-performance.types';
@@ -90,7 +90,6 @@ export const GuildPerformance = () => {
     // Members have no raw current-season data, so the Overview tab is empty for them — land on Damage.
     const [activeTab, setActiveTab] = useState<TabId>(isMember ? 'damage' : 'overview');
     const [isRefreshing, setIsRefreshing] = useState(false);
-    const debugMode = useDebugMode();
 
     const currentData = current === LOADING ? undefined : current;
 
