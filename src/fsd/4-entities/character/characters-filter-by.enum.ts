@@ -2,8 +2,6 @@
     None,
     NeedToAscend,
     CanAscend,
-    CanPromote,
-    CanAscendPromote,
     NeedToLevel,
     BlueStarReady,
     Chaos,
