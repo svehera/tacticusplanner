@@ -7,6 +7,7 @@ import { IDispatchContext, TacticusTokensState } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { getTacticusPlayerData, TacticusLegendaryEventProgress } from '@/fsd/5-shared/lib/tacticus-api';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { useLoader } from '@/fsd/5-shared/ui';
 
 import { CampaignMapperService } from '@/fsd/4-entities/campaign/campaign-mapper-service';
@@ -63,6 +64,11 @@ export const useSyncWithTacticus = () => {
 
     async function syncWithTacticus() {
         dispatch.viewPreferences({ type: 'Update', setting: 'apiIntegrationSyncOptions', value: [] });
+        trackEvent('tacticus_sync_start', {
+            feature: 'tacticus_api',
+            action: 'sync',
+            sync_scope: 'player',
+        });
         try {
             loader.startLoading('Syncing data via Tacticus API. Please wait...');
             const result = await getTacticusPlayerData();
@@ -133,6 +139,12 @@ export const useSyncWithTacticus = () => {
                 }
 
                 enqueueSnackbar('Successfully synced with Tacticus API', { variant: 'success' });
+                trackEvent('tacticus_sync_complete', {
+                    feature: 'tacticus_api',
+                    action: 'sync',
+                    status: 'success',
+                    sync_scope: 'player',
+                });
             } else {
                 enqueueSnackbar('There was an error while syncing with Tacticus API', { variant: 'error' });
             }

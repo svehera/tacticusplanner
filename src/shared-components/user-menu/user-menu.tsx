@@ -1,4 +1,4 @@
-﻿import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
+import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
 import DownloadIcon from '@mui/icons-material/Download';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import LoginIcon from '@mui/icons-material/Login';
@@ -23,6 +23,7 @@ import { convertData, PersonalDataLocalStorage } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { usePopUpControls } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration/tacticus-integration.dialog';
@@ -84,11 +85,25 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'switch_view',
+            destination_path: '/home',
+            source: 'user_menu',
+            authenticated: isAuthenticated,
+        });
         navigate('/home');
     };
 
     const navigateToMobileView = () => {
         localStorage.setItem('preferredView', 'mobile');
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'switch_view',
+            destination_path: '/mobile/home',
+            source: 'user_menu',
+            authenticated: isAuthenticated,
+        });
         navigate('/mobile/home');
     };
 
@@ -134,6 +149,13 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                     /*reset=*/ false
                 );
                 enqueueSnackbar('Import successful', { variant: 'success' });
+                trackEvent('data_import', {
+                    feature: 'backup',
+                    action: 'import',
+                    status: 'success',
+                    source: 'json',
+                    authenticated: isAuthenticated,
+                });
             } catch {
                 enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
             }
@@ -167,6 +189,13 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
         link.click();
 
         URL.revokeObjectURL(url);
+        trackEvent('data_export', {
+            feature: 'backup',
+            action: 'export',
+            status: 'success',
+            source: 'json',
+            authenticated: isAuthenticated,
+        });
     };
 
     const restoreData = () => {

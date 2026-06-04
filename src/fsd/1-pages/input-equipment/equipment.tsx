@@ -4,6 +4,7 @@ import { useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { FactionId, Rarity } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { Button, usePageMetaOverride } from '@/fsd/5-shared/ui';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { FactionSelect, SelectMulti } from '@/fsd/5-shared/ui/selects';
@@ -33,6 +34,14 @@ const TYPE_DISPLAY_NAMES: Record<string, string> = {
 };
 
 const RARITY_ORDER = [Rarity.Mythic, Rarity.Legendary, Rarity.Epic, Rarity.Rare, Rarity.Uncommon, Rarity.Common];
+
+const trackEquipmentUpdate = (action: string, status: 'applied' | 'cleared') => {
+    trackEvent('equipment_update', {
+        feature: 'equipment',
+        action,
+        status,
+    });
+};
 
 // ─── equipment row ────────────────────────────────────────────────────────────
 
@@ -156,6 +165,8 @@ export const Equipment = () => {
     const [onlyRelics, setOnlyRelics] = useState(false);
 
     const handleOnlyRelicsChange = (checked: boolean) => {
+        trackEquipmentUpdate('toggle_relics_filter', checked ? 'applied' : 'cleared');
+
         if (checked) {
             setSavedRarities(selectedRarities);
             setSelectedRarities([Rarity.Mythic]);
@@ -302,6 +313,7 @@ export const Equipment = () => {
                                 !onlyRelics
                             }
                             onPress={() => {
+                                trackEquipmentUpdate('clear_filters', 'cleared');
                                 setSelectedRarities([]);
                                 setSavedRarities([]);
                                 setSelectedFactions([]);
@@ -318,7 +330,10 @@ export const Equipment = () => {
                         <SelectMulti<Rarity>
                             options={RARITY_ORDER}
                             value={selectedRarities}
-                            onChange={setSelectedRarities}
+                            onChange={value => {
+                                trackEquipmentUpdate('filter_rarity', value.length > 0 ? 'applied' : 'cleared');
+                                setSelectedRarities(value);
+                            }}
                             label="Rarity"
                             placeholder="All rarities"
                             disabled={onlyRelics}
@@ -344,7 +359,10 @@ export const Equipment = () => {
                             label="Faction"
                             factionValues={availableFactions}
                             value={selectedFactions}
-                            valueChanges={setSelectedFactions}
+                            valueChanges={value => {
+                                trackEquipmentUpdate('filter_faction', value.length > 0 ? 'applied' : 'cleared');
+                                setSelectedFactions(value);
+                            }}
                         />
                     </div>
 
@@ -355,7 +373,10 @@ export const Equipment = () => {
                             options={characters}
                             multiple
                             label="Character"
-                            onUnitsChange={setSelectedCharacters}
+                            onUnitsChange={value => {
+                                trackEquipmentUpdate('filter_character', value.length > 0 ? 'applied' : 'cleared');
+                                setSelectedCharacters(value);
+                            }}
                         />
                     </div>
                 </div>

@@ -5,6 +5,7 @@ import { useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -45,6 +46,13 @@ const getUpgradeRarity = (upgradeId: string): RarityString => {
         return RarityMapper.rarityToRarityString(Rarity.Common);
     }
     return RarityMapper.rarityToRarityString(upgrade.rarity as unknown as Rarity);
+};
+
+const trackQuestPlanUpdate = (action: string) => {
+    trackEvent('quest_plan_update', {
+        feature: 'quests',
+        action,
+    });
 };
 
 export const Quests = () => {
@@ -94,10 +102,14 @@ export const Quests = () => {
     const unitsNeedingUpgrade = useUpgradeNeeds(estimatedUpgradesTotal, chars, mows);
 
     // Toggles
-    const toggleTier = (tierIndex: number) =>
+    const toggleTier = (tierIndex: number) => {
+        trackQuestPlanUpdate('toggle_tier');
         setExpandedTiers(previous => ({ ...previous, [tierIndex]: !previous[tierIndex] }));
-    const toggleBattle = (battleKey: string) =>
+    };
+    const toggleBattle = (battleKey: string) => {
+        trackQuestPlanUpdate('toggle_battle');
         setExpandedBattles(previous => ({ ...previous, [battleKey]: !previous[battleKey] }));
+    };
 
     return (
         <div className="space-y-8 py-6">
@@ -114,7 +126,10 @@ export const Quests = () => {
                                 mows.find(m => m.snowprintId === q.unitId)
                         )
                         .filter(x => !!x)}
-                    onUnitChange={value => setQuestId(value?.snowprintId ?? '')}
+                    onUnitChange={value => {
+                        trackQuestPlanUpdate('select_quest');
+                        setQuestId(value?.snowprintId ?? '');
+                    }}
                 />
 
                 {quest && (

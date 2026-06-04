@@ -1,4 +1,4 @@
-﻿import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 import { Badge, Fab, Tab, Tabs } from '@mui/material';
@@ -13,6 +13,7 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
 import { SearchParametersStateContext } from '@/fsd/5-shared/ui/contexts';
 
@@ -48,7 +49,15 @@ import { ICreateGuide, IGetGuidesQueryParameters, IGuide, IGuideFilter } from '@
 const handleShare = (teamId: number) => {
     const shareRoute = (isMobile ? '/mobile' : '') + `/learn/guides?guideId=${teamId}`;
     const shareLink = location.origin + shareRoute;
-    navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Link Copied', { variant: 'success' }));
+    navigator.clipboard.writeText(shareLink).then(_ => {
+        enqueueSnackbar('Link Copied', { variant: 'success' });
+        trackEvent('share', {
+            feature: 'guides',
+            action: 'copy',
+            status: 'success',
+            source: 'guide_card',
+        });
+    });
 };
 
 const handleViewOriginal = (teamId: number | undefined) => {
@@ -206,6 +215,13 @@ export const Guides: React.FC = () => {
             const { error } = await createTeamApi(team);
             if (error) {
                 console.error('Error while creating team', error);
+            } else {
+                trackEvent('team_create', {
+                    feature: 'guides',
+                    action: 'create',
+                    status: 'success',
+                    source: 'guides',
+                });
             }
         } catch (error) {
             console.error('Error while creating team', error);
@@ -227,6 +243,13 @@ export const Guides: React.FC = () => {
             const { error } = await updateTeamApi(guideId, guide);
             if (error) {
                 console.error('Error while updating guide', error);
+            } else {
+                trackEvent('team_update', {
+                    feature: 'guides',
+                    action: 'update',
+                    status: 'success',
+                    source: 'guides',
+                });
             }
         } catch (error) {
             console.error('Error while updating guide', error);
@@ -403,6 +426,15 @@ export const Guides: React.FC = () => {
     };
 
     const handleApplyFilters = (filter: IGuideFilter) => {
+        trackEvent('search', {
+            feature: 'guides',
+            action: 'filter',
+            search_location: 'guides_filter',
+            status:
+                filter.primaryMode || filter.createdBy || filter.subModes?.length || filter.unitIds?.length
+                    ? 'applied'
+                    : 'cleared',
+        });
         setTeams([]);
         setNextQueryParameters(undefined);
         setGuidesFilter(filter);
@@ -493,7 +525,14 @@ export const Guides: React.FC = () => {
                         key={team.teamId}
                         team={team}
                         units={[...characters, ...resolvedMows]}
-                        onView={() => setViewGuide(team)}
+                        onView={() => {
+                            trackEvent('guide_open', {
+                                feature: 'guides',
+                                action: 'open',
+                                source: 'guide_card',
+                            });
+                            setViewGuide(team);
+                        }}
                         onShare={() => handleShare(team.teamId)}
                         onViewOriginal={() => handleViewOriginal(team.originalTeamId)}
                         onEdit={() => handleEdit(team)}
