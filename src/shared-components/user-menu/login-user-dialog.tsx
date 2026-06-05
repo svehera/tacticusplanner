@@ -1,4 +1,4 @@
-﻿import {
+import {
     Backdrop,
     CircularProgress,
     DialogActions,
@@ -17,6 +17,7 @@ import React, { useState } from 'react';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
 import { useAuth } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 
 import { loginUser } from './auth.endpoints';
 
@@ -62,6 +63,12 @@ export const LoginUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClose:
                         loginUser(loginForm.username, loginForm.password)
                             .then(response => {
                                 login(response.data?.accessToken ?? '');
+                                trackEvent('login', {
+                                    feature: 'account',
+                                    action: 'login',
+                                    status: 'success',
+                                    source: 'user_menu',
+                                });
                                 onClose();
                             })
                             .catch((error: AxiosError<IErrorResponse>) => {

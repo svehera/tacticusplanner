@@ -1,6 +1,7 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 
@@ -14,6 +15,14 @@ interface Props {
     inputs: IMowLookupInputs;
     inputsChange: (value: IMowLookupInputs) => void;
 }
+
+const trackMowLookupFilter = (action: string) => {
+    trackEvent('search', {
+        feature: 'mow_lookup',
+        action,
+        search_location: 'mow_lookup_inputs',
+    });
+};
 
 export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange }) => {
     const [mow, setMow] = useQueryState<IMow2 | null>(
@@ -64,19 +73,54 @@ export const MowLookupInputs: React.FC<Props> = ({ mows, inputs, inputsChange })
     return (
         <div className="flex-box gap20 wrap">
             {mow && <UnitShardIcon icon={mow.roundIcon} />}
-            {/* eslint-disable-next-line unicorn/no-null -- autocomplete requires null */}
-            <UnitsAutocomplete className="max-w-[250px]" unit={mow ?? null} options={mows} onUnitChange={setMow} />
+            <UnitsAutocomplete
+                className="max-w-[250px]"
+                unit={mow}
+                options={mows}
+                onUnitChange={value => {
+                    trackMowLookupFilter('select_unit');
+                    setMow(value);
+                }}
+            />
             <div className="flex-box gap15 p10">
                 <span>Primary:</span>
 
-                <NumberInput label="Start" value={primaryAbilityStart} valueChange={setPrimaryAbilityStart} />
-                <NumberInput label="End" value={primaryAbilityEnd} valueChange={setPrimaryAbilityEnd} />
+                <NumberInput
+                    label="Start"
+                    value={primaryAbilityStart}
+                    valueChange={value => {
+                        trackMowLookupFilter('change_primary_start');
+                        setPrimaryAbilityStart(value);
+                    }}
+                />
+                <NumberInput
+                    label="End"
+                    value={primaryAbilityEnd}
+                    valueChange={value => {
+                        trackMowLookupFilter('change_primary_end');
+                        setPrimaryAbilityEnd(value);
+                    }}
+                />
             </div>
             <div className="flex-box gap15 p10">
                 <span>Secondary:</span>
 
-                <NumberInput label="Start" value={secondaryAbilityStart} valueChange={setSecondaryAbilityStart} />
-                <NumberInput label="End" value={secondaryAbilityEnd} valueChange={setSecondaryAbilityEnd} />
+                <NumberInput
+                    label="Start"
+                    value={secondaryAbilityStart}
+                    valueChange={value => {
+                        trackMowLookupFilter('change_secondary_start');
+                        setSecondaryAbilityStart(value);
+                    }}
+                />
+                <NumberInput
+                    label="End"
+                    value={secondaryAbilityEnd}
+                    valueChange={value => {
+                        trackMowLookupFilter('change_secondary_end');
+                        setSecondaryAbilityEnd(value);
+                    }}
+                />
             </div>
         </div>
     );

@@ -9,6 +9,7 @@ import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import {
     Accordion,
     AccordionBody,
@@ -30,6 +31,18 @@ import { useCharacters } from './characters-column-defs';
 
 const renderAnyOption = (opt: string) => (opt === '' ? 'Any' : opt);
 const attackTypeLabel = (opt: string) => (opt === '' ? 'Any' : opt === 'melee' ? 'Melee Only' : 'Range Only');
+
+const getFilterStatus = (value: string | boolean | number | string[]) =>
+    value === '' || value === false || (Array.isArray(value) && value.length === 0) ? 'cleared' : 'applied';
+
+const trackCharactersFilter = (searchLocation: string, status?: string) => {
+    trackEvent('search', {
+        feature: 'learn_characters',
+        action: 'filter',
+        search_location: searchLocation,
+        status,
+    });
+};
 
 export const LearnCharacters = () => {
     const gridReference = useRef<AgGridReact<ICharacter2>>(null);
@@ -100,6 +113,10 @@ export const LearnCharacters = () => {
     }, []);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
+        if (name !== 'name') {
+            trackCharactersFilter('characters_advanced_filter', getFilterStatus(value));
+        }
+
         setFilter(previous => ({ ...previous, [name]: value }));
         const params = new URLSearchParams(searchParams);
         if (Array.isArray(value)) {
@@ -363,7 +380,12 @@ export const LearnCharacters = () => {
                             onPress={resetFilters}>
                             Clear
                         </Button>
-                        <Switch isSelected={onlyUnlocked} onChange={setOnlyUnlocked}>
+                        <Switch
+                            isSelected={onlyUnlocked}
+                            onChange={value => {
+                                trackCharactersFilter('characters_unlocked_toggle', value ? 'applied' : 'cleared');
+                                setOnlyUnlocked(value);
+                            }}>
                             Only unlocked
                         </Switch>
                     </div>
@@ -380,6 +402,7 @@ export const LearnCharacters = () => {
                                 placeholder="Character name…"
                                 value={filter.name}
                                 onChange={value => handleFilterChange('name', value)}
+                                onBlur={() => trackCharactersFilter('characters_quick_filter')}
                             />
                         </div>
 
