@@ -21,7 +21,7 @@ vi.mock('@/fsd/3-features/characters/characters.constants', () => ({
     },
 }));
 
-vi.mock('@/fsd/4-entities/character', () => ({
+vi.mock('@/fsd/3-features/characters/characters.service', () => ({
     CharactersService: {
         getTotalProgressionUntil: vi.fn(),
     },
