@@ -2,7 +2,7 @@ import { Tab, Tabs } from '@mui/material';
 import { useState } from 'react';
 
 import { useAuth } from '@/fsd/5-shared/model';
-import { Button } from '@/fsd/5-shared/ui/button';
+import { Button, DebugJson } from '@/fsd/5-shared/ui';
 import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { parseErrorState, parseUnits } from './guild-roster-snapshots.helpers';
@@ -106,6 +106,17 @@ export const GuildRosterSnapshots = () => {
                 </div>
 
                 {topLevelError && <p className="text-sm text-red-600 dark:text-red-400">{topLevelError}</p>}
+
+                <DebugJson label="guild/members" value={members ?? 'not loaded'} />
+                <DebugJson label="guild/member/{id} (all states)" value={Object.fromEntries(memberStates)} />
+                <DebugJson
+                    label="guild/roster/member"
+                    value={Object.fromEntries(
+                        [...memberStates.entries()].flatMap(([id, s]) =>
+                            s.status === 'success' ? [[id, s.roster]] : []
+                        )
+                    )}
+                />
 
                 <Tabs value={activeTab} onChange={(_, value: GuildTab) => setActiveTab(value)}>
                     <Tab label="Rosters" value="rosters" />

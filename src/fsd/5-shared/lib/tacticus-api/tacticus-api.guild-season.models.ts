@@ -19,6 +19,22 @@ import { RarityString } from '@/fsd/5-shared/model';
  *                      rarity (loops stay separate only for the per-loop token counts).
  */
 
+/** Indicates whether the backend has successfully computed and stored a season's summary. */
+export enum SeasonFetchStatus {
+    Found = 0,
+    NotFound = 1,
+    Empty = 2,
+    TransientError = 3,
+}
+
+/** One element of `GuildSeasonHistoryResponse.seasonData`. Wraps an optional summary with metadata. */
+export interface GuildSeasonHistoryEntry {
+    season: number;
+    status: SeasonFetchStatus;
+    /** Absent when `status` is not `Found` (backend has not computed this season yet). */
+    summary?: GuildSeasonSummary;
+}
+
 /** Boss/prime slot of an enemy within a raid encounter. */
 export enum GuildSeasonEncounterIndex {
     Boss = 0,
@@ -33,6 +49,7 @@ export interface EnemyInfo {
     rarity: RarityString;
     encounterIndex: GuildSeasonEncounterIndex;
     maxHp: number;
+    set: number;
 }
 
 // ---------------------------------------------------------------------------
@@ -106,7 +123,12 @@ export interface GuildDamageSeasonSummary {
 
 export interface GuildSeasonBossLeaderboardEntry {
     damage: number;
-    /** `null`/absent when anonymized — i.e. another member's row in a keyless member's view. */
+    /** Present in `GET guild/sharedLeaderboards` responses; identifies the source guild (5-char tag). */
+    guildTag?: string;
+    /** Present and true for entries that belong to the requesting guild in a shared-leaderboard response. */
+    isOwnGuild?: boolean;
+    /** `null`/absent when anonymized — i.e. another member's row in a keyless member's view.
+     *  In shared-leaderboard responses the backend replaces this with the guild's display name. */
     playerId?: string;
     /** Hero unitIds followed by the machine-of-war unitId (if any). */
     comp: string[];
@@ -115,6 +137,12 @@ export interface GuildSeasonBossLeaderboardEntry {
 export interface GuildSeasonBossLeaderboard {
     enemyInfo: EnemyInfo;
     entries: GuildSeasonBossLeaderboardEntry[];
+}
+
+/** Response body of `GET guild/sharedLeaderboards`. */
+export interface SharedLeaderboardsResponse {
+    season: number;
+    leaderboards: GuildSeasonBossLeaderboard[];
 }
 
 // ---------------------------------------------------------------------------
@@ -198,5 +226,5 @@ export interface GuildSeasonSummary {
  */
 export interface GuildSeasonHistoryResponse {
     sequenceNumber: number;
-    seasonData: GuildSeasonSummary[];
+    seasonData: GuildSeasonHistoryEntry[];
 }
