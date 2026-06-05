@@ -20,6 +20,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { convertData, PersonalDataLocalStorage } from 'src/services';
 
 import { setDebugMode, useAuth, useDebugMode, UserRole } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { Badge } from '@/fsd/5-shared/ui';
 
 import { useOpenTacticusSettings } from '@/fsd/3-features/tacticus-integration';
@@ -76,6 +77,13 @@ export function useUserMenuItems({ onClose }: { onClose: () => void }) {
                     false
                 );
                 enqueueSnackbar('Import successful', { variant: 'success' });
+                trackEvent('data_import', {
+                    feature: 'backup',
+                    action: 'import',
+                    status: 'success',
+                    source: 'json',
+                    authenticated: isAuthenticated,
+                });
             } catch {
                 enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
             }
@@ -103,6 +111,13 @@ export function useUserMenuItems({ onClose }: { onClose: () => void }) {
         link.download = `${realUsername}-data-${formattedDate}.json`;
         link.click();
         URL.revokeObjectURL(url);
+        trackEvent('data_export', {
+            feature: 'backup',
+            action: 'export',
+            status: 'success',
+            source: 'json',
+            authenticated: isAuthenticated,
+        });
     };
 
     const restoreData = () => {
@@ -126,11 +141,25 @@ export function useUserMenuItems({ onClose }: { onClose: () => void }) {
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'switch_view',
+            destination_path: '/home',
+            source: 'user_menu',
+            authenticated: isAuthenticated,
+        });
         navigate('/home');
     };
 
     const navigateToMobileView = () => {
         localStorage.setItem('preferredView', 'mobile');
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'switch_view',
+            destination_path: '/mobile/home',
+            source: 'user_menu',
+            authenticated: isAuthenticated,
+        });
         navigate('/mobile/home');
     };
 
