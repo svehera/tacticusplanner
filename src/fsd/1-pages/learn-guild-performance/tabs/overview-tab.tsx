@@ -1,22 +1,16 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useEffect, useState } from 'react';
-
-import { makeApiCall } from '@/fsd/5-shared/api';
 import type { TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
-import { DebugJson } from '../guild-performance.components';
 import type { GuildTokenEntry } from '../guild-performance.types';
-import { LOADING } from '../guild-performance.types';
 import {
     getCurrentBossEntry,
     bossPortraitMap,
     formatTime,
     sortTokenEntries,
     sortBombEntries,
+    obfuscateUserId,
 } from '../guild-performance.utils';
-
-let cachedTokens: GuildTokenEntry[] | undefined;
 
 const HpBar = ({ remainingHp, maxHp }: { remainingHp: number; maxHp: number }) => {
     const pct = maxHp > 0 ? (remainingHp / maxHp) * 100 : 0;
@@ -64,7 +58,7 @@ const CurrentBoss = ({ data }: { data: TacticusGuildRaidResponse | undefined }) 
 const TokenTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map<string, string> }) => {
     const rows = entries.map(entry => ({
         userId: entry.userId,
-        displayName: names.get(entry.userId) ?? entry.name ?? entry.userId,
+        displayName: names.get(entry.userId) ?? entry.name ?? obfuscateUserId(entry.userId),
         tokens: entry.tokens,
         nextTokenAtUtc: entry.nextTokenAtUtc,
         bombAvailableAtUtc: entry.bombAvailableAtUtc,
@@ -106,7 +100,7 @@ const TokenTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map
 const BombTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map<string, string> }) => {
     const rows = entries.map(entry => ({
         userId: entry.userId,
-        displayName: names.get(entry.userId) ?? entry.name ?? entry.userId,
+        displayName: names.get(entry.userId) ?? entry.name ?? obfuscateUserId(entry.userId),
         tokens: entry.tokens,
         nextTokenAtUtc: entry.nextTokenAtUtc,
         bombAvailableAtUtc: entry.bombAvailableAtUtc,
@@ -156,31 +150,16 @@ const BombTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map<
 export const OverviewTab = ({
     currentData,
     names,
+    tokenData,
+    tokenError,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     names: Map<string, string>;
+    tokenData: GuildTokenEntry[] | undefined;
+    tokenError: string | undefined;
 }) => {
-    const [tokens, setTokens] = useState<GuildTokenEntry[] | typeof LOADING>(cachedTokens ?? LOADING);
-    const [tokenError, setTokenError] = useState<string | undefined>();
-
-    useEffect(() => {
-        if (cachedTokens !== undefined) return;
-        makeApiCall<GuildTokenEntry[]>('GET', 'guild/tokens').then(({ data, error }) => {
-            if (data) {
-                cachedTokens = data;
-                setTokens(data);
-            } else if (error) {
-                setTokenError(typeof error === 'string' ? error : (error.message ?? 'Unknown error'));
-                setTokens([]);
-            }
-        });
-    }, []);
-
-    const tokenData = tokens === LOADING ? undefined : tokens;
-
     return (
         <div className="flex flex-col gap-8">
-            <DebugJson label="guild/tokens" value={tokenData ?? 'loading\u2026'} />
             <section className="flex flex-col gap-3">
                 <h2 className="text-base font-semibold">Current Boss</h2>
                 <CurrentBoss data={currentData} />

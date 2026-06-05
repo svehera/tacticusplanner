@@ -45,7 +45,10 @@ export const HistoricalPerformanceTab = ({
     const chartTheme = useMemo(() => chartThemeFor(isDark), [isDark]);
     const fadedLineColor = isDark ? 'rgba(148, 163, 184, 0.18)' : 'rgba(100, 116, 139, 0.2)'; // slate
 
-    const seasonData = useMemo(() => seasonHistory?.seasonData ?? [], [seasonHistory]);
+    const seasonData = useMemo(
+        () => seasonHistory?.seasonData.flatMap(entry => (entry.summary ? [entry.summary] : [])) ?? [],
+        [seasonHistory]
+    );
 
     const lines = useMemo(() => buildAllPlayersPerformanceLines(seasonData, names), [seasonData, names]);
     const nameById = useMemo(() => new Map(lines.map(line => [line.userId, line.displayName])), [lines]);

@@ -12,7 +12,10 @@ export {
     safeParseGuildSeasonHistory,
     parseGuildSeasonSummary,
     safeParseGuildSeasonSummary,
+    parseSharedLeaderboards,
+    safeParseSharedLeaderboards,
     GuildSeasonParseError,
     type GuildSeasonHistoryParseResult,
     type GuildSeasonSummaryParseResult,
+    type SharedLeaderboardsParseResult,
 } from './tacticus-api.guild-season.parser';

@@ -168,15 +168,25 @@ export const LoopsTab = ({
         () =>
             selectedSeason === currentData?.season
                 ? undefined
-                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+                : seasonHistory?.seasonData.find(entry => entry.season === selectedSeason)?.summary,
         [selectedSeason, currentData, seasonHistory]
     );
 
     const rows = useMemo(
         () =>
-            historySummary
+            (historySummary
                 ? buildBossLoopRowsFromSummary(historySummary)
-                : buildBossLoopRows(currentData?.entries ?? []),
+                : buildBossLoopRows(currentData?.entries ?? [])
+            ).toSorted((a, b) => {
+                // Sort by boss rarity, then boss max HP, then boss unit ID as a tiebreaker
+                if (a.rarity !== b.rarity) {
+                    return b.rarity - a.rarity;
+                }
+                if (a.set !== b.set) {
+                    return b.set - a.set;
+                }
+                return b.bossUnitId.localeCompare(a.bossUnitId);
+            }),
         [historySummary, currentData]
     );
 
