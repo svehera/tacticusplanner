@@ -26,6 +26,10 @@ interface Props extends DialogProps {
     guildTag?: string;
 }
 
+const PERSONAL_API_KEY_INPUT_NAME = 'tacticus-personal-api-key';
+const GUILD_API_KEY_INPUT_NAME = 'tacticus-guild-api-key';
+const USER_ID_INPUT_NAME = 'tacticus-user-id';
+
 function buildErrorMessage(error: string | Error | undefined): string {
     const baseMessage = 'Failed to update settings';
     const detail = typeof error === 'string' ? error : error?.message;
@@ -51,9 +55,12 @@ function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags
             <div className="flex items-center gap-2">
                 <input
                     type="text"
+                    aria-label="Guild tag"
+                    name="guild-tag"
+                    autoComplete="off"
                     value={draft}
                     maxLength={GUILD_TAG_LENGTH}
-                    placeholder="Guild tag"
+                    placeholder="Guild tag…"
                     onChange={event => setDraft(event.target.value)}
                     onKeyDown={event => {
                         if (event.key === 'Enter') {
@@ -61,7 +68,7 @@ function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags
                             addTag();
                         }
                     }}
-                    className="w-32 rounded border border-(--input-border) bg-(--bg) px-2 py-1 text-sm"
+                    className="w-32 rounded border border-(--input-border) bg-(--bg) px-2 py-1 text-sm focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none"
                 />
                 <Button
                     appearance="outline"
@@ -72,12 +79,14 @@ function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags
                     +
                 </Button>
             </div>
-            {trimmed.length > 0 && !isValidGuildTag(trimmed) && (
-                <p className="text-xs text-(--danger)">
-                    Guild tag must be exactly {GUILD_TAG_LENGTH} alphanumeric characters.
-                </p>
-            )}
-            {isDuplicate && <p className="text-xs text-(--danger)">That guild tag is already added.</p>}
+            <div aria-live="polite">
+                {trimmed.length > 0 && !isValidGuildTag(trimmed) && (
+                    <p className="text-xs text-(--danger)">
+                        Guild tag must be exactly {GUILD_TAG_LENGTH} alphanumeric characters.
+                    </p>
+                )}
+                {isDuplicate && <p className="text-xs text-(--danger)">That guild tag is already added.</p>}
+            </div>
             {tags.length > 0 && (
                 <div className="flex flex-wrap gap-1 pt-1">
                     {tags.map(tag => (
@@ -85,13 +94,13 @@ function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags
                             key={tag}
                             className="flex items-center gap-1 rounded-full border border-(--border) px-2 py-0.5 text-xs">
                             {tag}
-                            <button
-                                type="button"
+                            <Button
+                                appearance="plain"
+                                size="square-petite"
                                 aria-label={`Remove ${tag}`}
-                                onClick={() => onChange(tags.filter(existing => existing !== tag))}
-                                className="rounded text-(--soft-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger)">
-                                ×
-                            </button>
+                                onPress={() => onChange(tags.filter(existing => existing !== tag))}>
+                                <span aria-hidden="true">×</span>
+                            </Button>
                         </span>
                     ))}
                 </div>
@@ -140,7 +149,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     const guildTagInvalid = trimmedGuildTag.length > 0 && !isValidGuildTag(trimmedGuildTag);
 
     async function updateApiKey() {
-        loader.startLoading('Updating settings. Please wait...');
+        loader.startLoading('Updating settings. Please wait…');
         try {
             const response = await updateTacticusApiKey(apiKey, guildApiKey, userId, {
                 shareInGameName: currentShareInGameName,
@@ -196,7 +205,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             }}>
             <Modal.Content>
                 <Modal.Header>
-                    <Modal.Title>Tacticus API settings</Modal.Title>
+                    <Modal.Title>Tacticus API Settings</Modal.Title>
                     <Modal.Description>
                         <span className="font-semibold text-(--danger)">⚠ Warning:&nbsp;</span>
                         The Planner is in an early stage of integration with the Tacticus API. Unexpected issues may
@@ -230,7 +239,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
 
                         <div className="flex flex-col gap-4">
                             <TextField
-                                name={`apikey-${Math.random()}`}
+                                name={PERSONAL_API_KEY_INPUT_NAME}
                                 description="Used to fetch Player data. Player scope is required for this key"
                                 type="password"
                                 label="Personal API key"
@@ -240,7 +249,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                 isRevealable
                             />
                             <TextField
-                                name={`guildApikey-${Math.random()}`}
+                                name={GUILD_API_KEY_INPUT_NAME}
                                 description="Used to fetch Guild Raid data. Ask your guild leader or co-leader to generate API key with 'Guild Raid' and 'Guild' scopes"
                                 type="password"
                                 label="Guild API key"
@@ -250,7 +259,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                 isRevealable
                             />
                             <TextField
-                                name={`apikey-${Math.random()}`}
+                                name={USER_ID_INPUT_NAME}
                                 type="password"
                                 description="Used to identify your account in the Guild Raid data"
                                 label="Tacticus User ID"
@@ -274,7 +283,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                     <label className="flex cursor-pointer items-start gap-3">
                                         <input
                                             type="checkbox"
-                                            className="mt-0.5 size-4 cursor-pointer accent-blue-600"
+                                            className="mt-0.5 size-4 cursor-pointer accent-(--primary)"
                                             checked={shareGuildMemberPerformance}
                                             onChange={event => setShareGuildMemberPerformance(event.target.checked)}
                                         />
@@ -320,7 +329,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                 guildTag === savedGuildTag)
                         }
                         onPress={updateApiKey}>
-                        Update
+                        Save Settings
                     </Button>
                 </Modal.Footer>
             </Modal.Content>
