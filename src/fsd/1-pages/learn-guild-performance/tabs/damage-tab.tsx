@@ -25,7 +25,6 @@ import {
     computeDefaultRarities,
     getAvailableBossPrefixes,
     getBossOrder,
-    obfuscateUserId,
     resolvePlayerName,
     unitRoundIconMap,
 } from '../guild-performance.utils';
@@ -215,7 +214,7 @@ function buildBossRarityStats(entries: TacticusGuildRaidEntry[], names: Map<stri
                     avgDamage: g.avgCount > 0 ? Math.round(g.avgSum / g.avgCount) : 0,
                     maxDamage: maxEntry.damageDealt,
                     maxPlayerId: maxEntry.userId,
-                    maxPlayerName: names.get(maxEntry.userId) ?? obfuscateUserId(maxEntry.userId),
+                    maxPlayerName: resolvePlayerName(maxEntry.userId, names),
                     comp,
                 };
             })
@@ -339,6 +338,7 @@ function StatBossIcon({ unitId }: { unitId: string }) {
 
 function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hidePlayer: boolean }) {
     const cols = hidePlayer ? 'grid-cols-[24px_20px_6rem_6rem_auto]' : 'grid-cols-[24px_20px_6rem_6rem_1fr_auto]';
+    const id = row.maxPlayerName;
     return (
         <div
             className={`grid ${cols} items-center gap-x-2 rounded border border-gray-200 bg-white px-2 py-1 text-sm dark:border-gray-700 dark:bg-gray-900`}>
@@ -353,8 +353,8 @@ function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hide
             </span>
             <span className="text-right font-semibold tabular-nums">{row.maxDamage.toLocaleString()}</span>
             {!hidePlayer && (
-                <span className="min-w-0 truncate" title={row.maxPlayerId}>
-                    {obfuscateUserId(row.maxPlayerName)}
+                <span className="min-w-0 truncate" title={id}>
+                    {id}
                 </span>
             )}
             <CompIcons comp={row.comp} />
@@ -414,7 +414,7 @@ function buildPlayerSummaryText(entries: TacticusGuildRaidEntry[], names: Map<st
         if (stats === undefined) {
             stats = {
                 userId: entry.userId,
-                displayName: names.get(entry.userId) ?? obfuscateUserId(entry.userId),
+                displayName: resolvePlayerName(entry.userId, names),
                 tokens: 0,
                 bombs: 0,
                 primeHits: 0,

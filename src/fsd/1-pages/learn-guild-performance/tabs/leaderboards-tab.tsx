@@ -26,6 +26,7 @@ import {
     getAvailableBossPrefixes,
     getBossOrder,
     getBossPrefix,
+    isLikelyUserId,
     obfuscateUserId,
     resolvePlayerName,
     sortBossPrefixes,
@@ -236,7 +237,7 @@ function buildTopN(
         .slice(0, maxCount)
         .map(entry => ({
             userId: entry.userId,
-            displayName: names.get(entry.userId) ?? entry.userId,
+            displayName: resolvePlayerName(entry.userId, names),
             damage: entry.damageDealt,
             comp: [
                 ...entry.heroDetails.map(hero => hero.unitId),
@@ -540,10 +541,6 @@ function UnitIcon({ unitId }: { unitId: string }) {
     return <span className="text-xs text-gray-500">{unitId}</span>;
 }
 
-function isLikelyUserId(displayName: string): boolean {
-    return displayName.match(/^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/) !== null;
-}
-
 function LeaderboardRow({ rank, entry }: { rank: number; entry: LeaderboardEntry }) {
     return (
         <div className="grid grid-cols-[1.5rem_minmax(0,8rem)_auto_4.5rem] items-center gap-x-1.5 px-2 py-1 text-sm even:bg-gray-50 dark:even:bg-gray-800/40">
@@ -551,7 +548,7 @@ function LeaderboardRow({ rank, entry }: { rank: number; entry: LeaderboardEntry
                 <MedalBadge rank={rank} />
             </span>
             <span className="min-w-0 truncate font-medium" title={entry.userId}>
-                {isLikelyUserId(entry.displayName) ? obfuscateUserId(entry.displayName) : entry.displayName}
+                {entry.displayName}
             </span>
             <CompIcons comp={entry.comp} size={20} />
             <span className="text-right font-semibold tabular-nums">{entry.damage.toLocaleString()}</span>

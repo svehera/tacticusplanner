@@ -10,13 +10,11 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
 ): Promise<{ data: TResponse | undefined; error: AxiosError<IErrorResponse> | string | undefined }> => {
     const fetchData = async () => {
         try {
-            console.log('calling API endpoint', { method, url, body });
             const response = await API<TResponse, AxiosResponse<TResponse>, TRequestBody>({
                 url: url,
                 method: method,
                 data: body,
             });
-            console.log('API response', { method, url, body, response });
 
             const data = response?.data;
 

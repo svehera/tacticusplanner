@@ -267,7 +267,6 @@ export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossL
         rows.push({
             bossPrefix: key.slice(0, key.lastIndexOf(':')),
             rarity: group.rarity,
-            // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
             set: group.set,
             bossUnitId: group.bossUnitId,
             bossMaxHp: group.bossMaxHp,
