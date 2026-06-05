@@ -39,3 +39,4 @@ export type { SliderProps } from './slider';
 export { PageToolbar, PageToolbarSpacer, PageToolbarDivider } from './page-toolbar';
 export { PageMetaProvider, usePageMetaOverride } from './page-meta';
 export type { PageMeta } from './page-meta';
+export { DebugJson } from './debug-json';

@@ -10,12 +10,15 @@ import {
     GuildSeasonBossLeaderboardEntry,
     GuildSeasonBossPerformanceEntry,
     GuildSeasonEncounterIndex,
+    GuildSeasonHistoryEntry,
     GuildSeasonHistoryResponse,
     GuildSeasonLoopInfo,
     GuildSeasonPerformanceIndexEntry,
     GuildSeasonPerformanceIndexPlayerEntry,
     GuildSeasonPlayerPerformanceEntry,
     GuildSeasonSummary,
+    SeasonFetchStatus,
+    SharedLeaderboardsResponse,
 } from './tacticus-api.guild-season.models';
 
 /**
@@ -38,6 +41,7 @@ export class GuildSeasonParseError extends Error {
         /** Dotted path to the node that failed validation, e.g. `seasonData[2].loops[0].bossTokens`. */
         public readonly path: string
     ) {
+        console.trace('invalid guild season history');
         super(`Invalid guild season history at "${path}": ${message}`);
         this.name = 'GuildSeasonParseError';
     }
@@ -52,9 +56,19 @@ export function parseGuildSeasonHistory(raw: unknown): GuildSeasonHistoryRespons
     const root = asObject(raw, 'root');
     return {
         sequenceNumber: asNumber(root.sequenceNumber, 'sequenceNumber'),
-        seasonData: asArray(root.seasonData, 'seasonData').map((season, index) =>
-            parseSeasonSummary(season, `seasonData[${index}]`)
+        seasonData: asArray(root.seasonData, 'seasonData').map((entry, index) =>
+            parseGuildSeasonHistoryEntry(entry, `seasonData[${index}]`)
         ),
+    };
+}
+
+function parseGuildSeasonHistoryEntry(value: unknown, path: string): GuildSeasonHistoryEntry {
+    const o = asObject(value, path);
+    const rawSummary = optional(o.summary);
+    return {
+        season: asNumber(o.season, `${path}.season`),
+        status: asSeasonFetchStatus(o.status, `${path}.status`),
+        summary: rawSummary === undefined ? undefined : parseSeasonSummary(rawSummary, `${path}.summary`),
     };
 }
 
@@ -85,6 +99,31 @@ export function parseGuildSeasonSummary(raw: unknown): GuildSeasonSummary {
 export function safeParseGuildSeasonSummary(raw: unknown): GuildSeasonSummaryParseResult {
     try {
         return { success: true, data: parseGuildSeasonSummary(raw) };
+    } catch (error) {
+        if (error instanceof GuildSeasonParseError) return { success: false, error };
+        throw error;
+    }
+}
+
+export type SharedLeaderboardsParseResult =
+    | { success: true; data: SharedLeaderboardsResponse }
+    | { success: false; error: GuildSeasonParseError };
+
+/** Validates and structures the raw `GET guild/sharedLeaderboards` response. */
+export function parseSharedLeaderboards(raw: unknown): SharedLeaderboardsResponse {
+    const root = asObject(raw, 'root');
+    return {
+        season: asNumber(root.season, 'root.season'),
+        leaderboards: asArray(root.leaderboards, 'root.leaderboards').map((lb, index) =>
+            parseLeaderboard(lb, `root.leaderboards[${index}]`)
+        ),
+    };
+}
+
+/** Non-throwing variant of {@link parseSharedLeaderboards}. */
+export function safeParseSharedLeaderboards(raw: unknown): SharedLeaderboardsParseResult {
+    try {
+        return { success: true, data: parseSharedLeaderboards(raw) };
     } catch (error) {
         if (error instanceof GuildSeasonParseError) return { success: false, error };
         throw error;
@@ -185,6 +224,8 @@ function parseLeaderboard(value: unknown, path: string): GuildSeasonBossLeaderbo
             const entry = asObject(element, `${path}.entries[${index}]`);
             return {
                 damage: asNumber(entry.damage, `${path}.entries[${index}].damage`),
+                guildTag: optString(entry.guildTag, `${path}.entries[${index}].guildTag`),
+                isOwnGuild: optBool(entry.isOwnGuild, `${path}.entries[${index}].isOwnGuild`),
                 playerId: optString(entry.playerId, `${path}.entries[${index}].playerId`),
                 comp: compArray(entry.comp, `${path}.entries[${index}].comp`),
             };
@@ -257,6 +298,7 @@ function parseEnemyInfo(value: unknown, path: string): EnemyInfo {
         rarity: asRarity(o.rarity, `${path}.rarity`),
         encounterIndex: asNumber(o.encounterIndex, `${path}.encounterIndex`) as GuildSeasonEncounterIndex,
         maxHp: asNumber(o.maxHp, `${path}.maxHp`),
+        set: asNumber(o.set, `${path}.set`),
     };
 }
 
@@ -271,6 +313,7 @@ function optional(value: unknown): unknown {
 
 function asObject(value: unknown, path: string): Record<string, unknown> {
     if (typeof value !== 'object' || value === null || Array.isArray(value)) {
+        console.error('expected object, got', value, 'at path', path);
         throw new GuildSeasonParseError(`expected object, got ${describe(value)}`, path);
     }
     return value as Record<string, unknown>;
@@ -306,6 +349,7 @@ function asNumberArray(value: unknown, path: string): number[] {
 }
 
 const RARITY_VALUES = new Set<string>(Object.values(RarityString));
+const SEASON_FETCH_STATUS_VALUES = new Set<number>([0, 1, 2, 3]);
 
 function asRarity(value: unknown, path: string): RarityString {
     const rarityName = asString(value, path);
@@ -313,6 +357,25 @@ function asRarity(value: unknown, path: string): RarityString {
         throw new GuildSeasonParseError(`expected one of ${[...RARITY_VALUES].join(', ')}, got "${rarityName}"`, path);
     }
     return rarityName as RarityString;
+}
+
+function asSeasonFetchStatus(value: unknown, path: string): SeasonFetchStatus {
+    const name = asNumber(value, path);
+    if (!SEASON_FETCH_STATUS_VALUES.has(name)) {
+        throw new GuildSeasonParseError(
+            `expected one of ${[...SEASON_FETCH_STATUS_VALUES].join(', ')}, got "${name}"`,
+            path
+        );
+    }
+    return name as SeasonFetchStatus;
+}
+
+function optBool(value: unknown, path: string): boolean | undefined {
+    const present = optional(value);
+    if (present === undefined) return undefined;
+    if (typeof present !== 'boolean')
+        throw new GuildSeasonParseError(`expected boolean, got ${describe(present)}`, path);
+    return present;
 }
 
 function optNumber(value: unknown, path: string): number | undefined {
