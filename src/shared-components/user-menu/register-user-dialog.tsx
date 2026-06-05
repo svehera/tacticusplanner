@@ -1,4 +1,4 @@
-﻿import {
+import {
     Backdrop,
     CircularProgress,
     DialogActions,
@@ -17,6 +17,7 @@ import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 
 import { registerUser } from './auth.endpoints';
 
@@ -106,6 +107,12 @@ export const RegisterUserDialog = ({ isOpen, onClose }: { isOpen: boolean; onClo
                         setOpen(true);
                         registerUser(registerForm.username, registerForm.password)
                             .then(() => {
+                                trackEvent('sign_up', {
+                                    feature: 'account',
+                                    action: 'register',
+                                    status: 'success',
+                                    source: 'user_menu',
+                                });
                                 onClose(true);
                                 enqueueSnackbar(
                                     registerForm.username +

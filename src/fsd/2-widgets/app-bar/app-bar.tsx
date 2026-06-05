@@ -17,6 +17,7 @@ import {
 // eslint-disable-next-line import-x/no-internal-modules
 import { UserMenu } from '@/shared-components/user-menu/user-menu'; // TODO refactor for FSD
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import {
     Button,
     FlexBox,
@@ -41,9 +42,31 @@ interface Props {
     onCloseWhatsNew: () => void;
 }
 
+const trackNavigationSelect = (destinationPath: string, source: string) => {
+    trackEvent('nav_menu_select', {
+        feature: 'navigation',
+        action: 'select',
+        destination_path: destinationPath,
+        source,
+    });
+};
+
+const trackExternalLinkClick = (destinationType: string) => {
+    trackEvent('external_link_click', {
+        feature: 'navigation',
+        action: 'open',
+        destination_type: destinationType,
+    });
+};
+
 const generateMenuItems = (items: MenuItemTP[]) =>
     items.map(item => (
-        <MenuItem key={item.label} component={Link} to={item.routeWeb} color="inherit">
+        <MenuItem
+            key={item.label}
+            component={Link}
+            to={item.routeWeb}
+            color="inherit"
+            onClick={() => trackNavigationSelect(item.routeWeb, 'desktop_drawer_menu')}>
             <ListItemIcon>{item.icon}</ListItemIcon>
             <ListItemText>{item.label}</ListItemText>
         </MenuItem>
@@ -138,7 +161,12 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
         <>
             <div className="flex h-[60px] flex-shrink-0 items-center justify-between border-b border-(--border) bg-(--sidebar) px-4 text-(--fg)">
                 {isTabletOrMobile ? (
-                    <FlexBox onClick={() => navigate('./home')} className="cursor-pointer">
+                    <FlexBox
+                        onClick={() => {
+                            trackNavigationSelect('/home', 'desktop_logo');
+                            navigate('./home');
+                        }}
+                        className="cursor-pointer">
                         <img src="/android-chrome-192x192.png" height="40px" width="40px" alt="logo" />
                         <span className="text-xl font-bold">{title}</span>
                     </FlexBox>
@@ -163,7 +191,10 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                             size="square-petite"
                             appearance="plain"
                             intent="secondary"
-                            onPress={() => navigate('./faq')}>
+                            onPress={() => {
+                                trackNavigationSelect('/faq', 'desktop_icon');
+                                navigate('./faq');
+                            }}>
                             {menuItemById.faq.icon}
                         </Button>
                     </LazyTooltip>
@@ -173,7 +204,8 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                             appearance="plain"
                             intent="secondary"
                             href={discordInvitationLink}
-                            target="_blank">
+                            target="_blank"
+                            onPress={() => trackExternalLinkClick('discord')}>
                             <DiscordIcon />
                         </LinkButton>
                     </LazyTooltip>
@@ -183,7 +215,8 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                             appearance="plain"
                             intent="secondary"
                             href={bmcLink}
-                            target="_blank">
+                            target="_blank"
+                            onPress={() => trackExternalLinkClick('support')}>
                             <BmcIcon />
                         </LinkButton>
                     </LazyTooltip>
