@@ -1,4 +1,4 @@
-﻿import EditIcon from '@mui/icons-material/Edit';
+import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import MoreVertIcon from '@mui/icons-material/MoreVert';
@@ -15,6 +15,7 @@ import { TokenImage } from '@/shared-components/images/token-image';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RichTextViewer } from '@/shared-components/inputs/rich-text-viewer';
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
@@ -65,7 +66,16 @@ export const GuideCard: React.FC<Props> = ({
             return (
                 <>
                     {guide.youtubeLink && (
-                        <IconButton href={guide.youtubeLink} target="_blank">
+                        <IconButton
+                            href={guide.youtubeLink}
+                            target="_blank"
+                            onClick={() =>
+                                trackEvent('external_link_click', {
+                                    feature: 'guides',
+                                    action: 'open',
+                                    destination_type: 'youtube',
+                                })
+                            }>
                             <AccessibleTooltip title="Youtube">
                                 <YouTubeIcon color="error" />
                             </AccessibleTooltip>
@@ -115,7 +125,16 @@ export const GuideCard: React.FC<Props> = ({
                 </IconButton>
 
                 {guide.youtubeLink && (
-                    <IconButton href={guide.youtubeLink} target="_blank">
+                    <IconButton
+                        href={guide.youtubeLink}
+                        target="_blank"
+                        onClick={() =>
+                            trackEvent('external_link_click', {
+                                feature: 'guides',
+                                action: 'open',
+                                destination_type: 'youtube',
+                            })
+                        }>
                         <AccessibleTooltip title="Youtube">
                             <YouTubeIcon color="error" />
                         </AccessibleTooltip>

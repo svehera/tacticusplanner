@@ -1,4 +1,4 @@
-﻿import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
 import Button from '@mui/material/Button';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -6,6 +6,8 @@ import { useNavigate } from 'react-router-dom';
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guild-war-routes';
 import { PlanLeRoutes } from 'src/mobile-routes/events/le-routes';
 import { menuItemById } from 'src/models/menu-items';
+
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
@@ -52,7 +54,15 @@ export const PlanRoutes = () => {
                             key={menuItem.label}
                             icon={menuItem.icon}
                             label={menuItem.label}
-                            onClick={() => navigate(menuItem.routeMobile)}
+                            onClick={() => {
+                                trackEvent('nav_menu_select', {
+                                    feature: 'navigation',
+                                    action: 'select',
+                                    destination_path: menuItem.routeMobile,
+                                    source: 'mobile_category_card',
+                                });
+                                navigate(menuItem.routeMobile);
+                            }}
                         />
                     ))}
 
@@ -60,13 +70,29 @@ export const PlanRoutes = () => {
                         icon={<FormatListBulletedIcon />}
                         label="Guild War"
                         items={['Defense', 'Offense', 'War zones']}
-                        onClick={() => setSelectedRoutes(SelectedRoutes.gw)}
+                        onClick={() => {
+                            trackEvent('nav_menu_select', {
+                                feature: 'navigation',
+                                action: 'open_category',
+                                destination_path: '/mobile/plan/guild-war',
+                                source: 'mobile_category_card',
+                            });
+                            setSelectedRoutes(SelectedRoutes.gw);
+                        }}
                     />
                     <MobileCategoryCard
                         icon={<FormatListBulletedIcon />}
                         label="LRE"
                         items={['Master Table', ...CharactersService.activeLres.map(le => le.name)]}
-                        onClick={() => setSelectedRoutes(SelectedRoutes.lre)}
+                        onClick={() => {
+                            trackEvent('nav_menu_select', {
+                                feature: 'navigation',
+                                action: 'open_category',
+                                destination_path: '/mobile/plan/lre',
+                                source: 'mobile_category_card',
+                            });
+                            setSelectedRoutes(SelectedRoutes.lre);
+                        }}
                     />
                 </>
             ) : (
