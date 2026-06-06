@@ -8,8 +8,7 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, MenuItem, Popover, Switch } from '@mui/material';
-import ListItemText from '@mui/material/ListItemText';
+import { Avatar, Badge, IconButton, Popover } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -24,7 +23,7 @@ import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-di
 
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
-import { usePopUpControls } from '@/fsd/5-shared/ui';
+import { Switch, usePopUpControls } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration/tacticus-integration.dialog';
 
@@ -232,7 +231,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
     }
 
     const itemClass =
-        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-[7px] border-none cursor-pointer text-[13px] text-[var(--soft-fg)] bg-transparent hover:bg-[var(--primary)]/[.18] hover:text-[var(--fg)] transition-colors';
+        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-lg border-none cursor-pointer text-[13px] text-(--soft-fg) bg-transparent hover:bg-(--primary)/18 hover:text-(--fg) transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset';
     const iconClass = 'flex-shrink-0 !text-[18px]';
 
     const close = () => userMenuControls.handleClose();
@@ -264,125 +263,10 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                 onClick={userMenuControls.handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
-                {isAuthenticated ? (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
-                ) : (
-                    <div>
-                        <MenuItem onClick={() => openLoginForm()}>
-                            <ListItemIcon>
-                                <LoginIcon />
-                            </ListItemIcon>
-                            <ListItemText>Login</ListItemText>
-                        </MenuItem>
-                        <MenuItem onClick={() => setShowRegisterUser(true)}>
-                            <ListItemIcon>
-                                <RegisterIcon />
-                            </ListItemIcon>
-                            <ListItemText>Register</ListItemText>
-                        </MenuItem>
-                    </div>
-                )}
-
-                <Divider />
-                {isAuthenticated && (
-                    <MenuItem onClick={syncWithTacticus}>
-                        <ListItemIcon>
-                            <SyncIcon />
-                        </ListItemIcon>
-                        <ListItemText>Sync via Tacticus API</ListItemText>
-                    </MenuItem>
-                )}
-
-                <MenuItem onClick={() => inputReference.current?.click()}>
-                    <ListItemIcon>
-                        <UploadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Import JSON</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={() => downloadJson()}>
-                    <ListItemIcon>
-                        <DownloadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Export JSON</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={() => restoreData()}>
-                    <ListItemIcon>
-                        <SettingsBackupRestoreIcon />
-                    </ListItemIcon>
-                    <ListItemText>Restore Backup</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem
-                    onClick={() => {
-                        const next = !debugMode;
-                        localStorage.setItem('debugMode', String(next));
-                        setDebugMode(next);
-                    }}>
-                    <ListItemText>Debug Mode</ListItemText>
-                    <Switch checked={debugMode} size="small" />
-                </MenuItem>
-
-                <Divider />
-                {isDesktopView ? (
-                    <MenuItem onClick={() => navigateToMobileView()}>
-                        <ListItemIcon>
-                            <PhoneIcon />
-                        </ListItemIcon>
-                        <ListItemText>Use mobile view</ListItemText>
-                    </MenuItem>
-                ) : (
-                    <MenuItem onClick={() => navigateToDesktopView()}>
-                        <ListItemIcon>
-                            <ComputerIcon />
-                        </ListItemIcon>
-                        <ListItemText>Use desktop view</ListItemText>
-                    </MenuItem>
-                )}
-
-                <Divider />
-
-                {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
-                    <MenuItem onClick={() => setShowAdminTools(true)}>
-                        <ListItemIcon>
-                            <SupervisorAccountIcon />
-                        </ListItemIcon>
-                        <ListItemText>Admin tools</ListItemText>
-                    </MenuItem>
-                )}
-
-                <MenuItem onClick={() => navigateToReviewTeams()}>
-                    <ListItemIcon>
-                        <GroupWorkIcon />
-                    </ListItemIcon>
-                    {userInfo.rejectedTeamsCount > 0 ? (
-                        <Badge badgeContent={userInfo.rejectedTeamsCount} color="error">
-                            <ListItemText>Review guides</ListItemText>
-                        </Badge>
-                    ) : (
-                        <ListItemText>Review guides</ListItemText>
-                    )}
-                </MenuItem>
-
-                {/* Identity row */}
-                <div className="mb-1 flex items-center gap-2.5 border-b border-[var(--border)] px-2 py-2">
-                    {isAuthenticated ? (
-                        <Avatar {...stringAvatar(username)} />
-                    ) : (
-                        <Avatar className="!h-8 !w-8">TP</Avatar>
-                    )}
-                    <span className="truncate text-[13px] font-semibold text-[var(--fg)]">{username}</span>
-                </div>
-
                 {/* Auth */}
                 {isAuthenticated ? (
                     <button
-                        className={itemClass}
+                        className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-none bg-transparent px-2 py-1.5 text-left text-[13px] text-(--danger) transition-colors hover:bg-(--danger)/14 hover:text-red-500 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset dark:hover:text-red-400"
                         onClick={() => {
                             logout();
                             close();
@@ -413,22 +297,20 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                     </>
                 )}
 
+                {/* Data */}
+                <hr className="my-1 border-(--border)" />
+                <div className="px-2 pt-2 pb-1 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Data</div>
                 {isAuthenticated && (
-                    <>
-                        <hr className="my-1 border-[var(--border)]" />
-                        <button
-                            className={itemClass}
-                            onClick={() => {
-                                syncWithTacticus();
-                                close();
-                            }}>
-                            <SyncIcon className={iconClass} />
-                            <span>Sync via Tacticus API</span>
-                        </button>
-                    </>
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            syncWithTacticus();
+                            close();
+                        }}>
+                        <SyncIcon className={iconClass} />
+                        <span>Sync via Tacticus API</span>
+                    </button>
                 )}
-
-                <hr className="my-1 border-[var(--border)]" />
                 <button
                     className={itemClass}
                     onClick={() => {
@@ -457,7 +339,9 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                     <span>Restore Backup</span>
                 </button>
 
-                <hr className="my-1 border-[var(--border)]" />
+                {/* App */}
+                <hr className="my-1 border-(--border)" />
+                <div className="px-2 pt-2 pb-1 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">App</div>
                 {isDesktopView ? (
                     <button
                         className={itemClass}
@@ -479,8 +363,6 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                         <span>Use desktop view</span>
                     </button>
                 )}
-
-                <hr className="my-1 border-[var(--border)]" />
                 {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
                     <button
                         className={itemClass}
@@ -507,6 +389,21 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                         <span>Review guides</span>
                     </Badge>
                 </button>
+
+                {/* Debug */}
+                <hr className="my-1 border-(--border)" />
+                <div
+                    className="w-full rounded-lg px-2 py-1.5 transition-colors hover:bg-(--primary)/18"
+                    onClick={event_ => event_.stopPropagation()}>
+                    <Switch
+                        isSelected={debugMode}
+                        onChange={v => {
+                            localStorage.setItem('debugMode', String(v));
+                            setDebugMode(v);
+                        }}>
+                        Debug Mode
+                    </Switch>
+                </div>
             </Popover>
             <RegisterUserDialog
                 isOpen={showRegisterUser}

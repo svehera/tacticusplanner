@@ -676,6 +676,24 @@ input.item-quantity-input[type='number'] {
         transform: none;
     }
 }
+@keyframes accountDockMenuIn {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.account-dock-menu-in {
+    animation: accountDockMenuIn 0.18s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+    .account-dock-menu-in {
+        animation: none;
+    }
+}
 
 /* Range slider accent variants (success = emerald, warning = amber) */
 input[type='range'].accent-success {
