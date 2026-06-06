@@ -172,7 +172,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
         link.href = url;
         const dateTimestamp =
             typeof data.modifiedDate === 'string' ? data.modifiedDate : data.modifiedDate?.toISOString();
-        const date = new Date(dateTimestamp ?? '');
+        const date = new Date(dateTimestamp ?? Date.now());
 
         const options: Intl.DateTimeFormatOptions = {
             year: 'numeric',

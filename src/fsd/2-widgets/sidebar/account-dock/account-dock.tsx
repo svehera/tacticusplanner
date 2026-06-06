@@ -32,6 +32,7 @@ import { Switch } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration/tacticus-integration.dialog';
 
+/** Deterministically maps a string to a hex colour. Used to generate consistent avatar background colours from a username. */
 function stringToColor(string: string) {
     let hash = 0;
     let index;
@@ -48,6 +49,7 @@ function stringToColor(string: string) {
     return color;
 }
 
+/** Returns MUI Avatar props (className, style, children) derived from a username string. */
 function stringAvatar(name: string) {
     return {
         className: '!w-[34px] !h-[34px] !text-[13px] !font-extrabold',
@@ -56,6 +58,11 @@ function stringAvatar(name: string) {
     };
 }
 
+/**
+ * Formats a human-readable relative sync time string from a UTC epoch seconds timestamp.
+ * Returns "Synced just now", "Synced X min ago", "Synced X hr ago", "Synced X days ago",
+ * or "Not synced" when no timestamp is available.
+ */
 function getSyncMeta(lastSyncSec: number | undefined): string {
     if (!lastSyncSec) return 'Not synced';
     const diffSec = Math.floor(Date.now() / 1000) - lastSyncSec;
@@ -67,10 +74,20 @@ function getSyncMeta(lastSyncSec: number | undefined): string {
     return `Synced ${Math.floor(diffHr / 24)} day${Math.floor(diffHr / 24) === 1 ? '' : 's'} ago`;
 }
 
+/** Props for the {@link AccountDock} component. */
 interface AccountDockProps {
+    /** When true the sidebar is in icon-only mode; the dock renders a compact avatar button with a floating popover instead of the inline expanding menu. */
     collapsed?: boolean;
 }
 
+/**
+ * Bottom-of-sidebar account dock (Variant F).
+ *
+ * - **Expanded sidebar**: trigger row shows avatar, username, and a live sync meta line.
+ *   Clicking opens an inline menu that slides up above the trigger row.
+ * - **Collapsed sidebar**: renders a compact avatar icon button; clicking opens a floating
+ *   MUI Popover (the `aside` has `overflow: hidden` which would clip an inline menu).
+ */
 export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
@@ -176,7 +193,7 @@ export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
         link.href = url;
         const dateTimestamp =
             typeof data.modifiedDate === 'string' ? data.modifiedDate : data.modifiedDate?.toISOString();
-        const date = new Date(dateTimestamp ?? '');
+        const date = new Date(dateTimestamp ?? Date.now());
         const formattedDate = new Intl.DateTimeFormat(navigator.language, {
             year: 'numeric',
             month: 'short',
