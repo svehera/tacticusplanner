@@ -231,7 +231,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
     }
 
     const itemClass =
-        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-lg border-none cursor-pointer text-[13px] text-(--soft-fg) bg-transparent hover:bg-(--primary)/18 hover:text-(--fg) transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset';
+        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-lg border-none cursor-pointer text-[13px] text-(--soft-fg) bg-transparent hover:bg-(--primary)/10 hover:text-(--fg) transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset';
     const iconClass = 'flex-shrink-0 !text-[18px]';
 
     const close = () => userMenuControls.handleClose();
@@ -393,7 +393,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                 {/* Debug */}
                 <hr className="my-1 border-(--border)" />
                 <div
-                    className="w-full rounded-lg px-2 py-1.5 transition-colors hover:bg-(--primary)/18"
+                    className="w-full rounded-lg px-2 py-1.5 transition-colors hover:bg-(--primary)/10"
                     onClick={event_ => event_.stopPropagation()}>
                     <Switch
                         isSelected={debugMode}
