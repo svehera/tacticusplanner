@@ -1,18 +1,27 @@
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
+import {
+    AllCommunityModule,
+    ColDef,
+    ColumnResizedEvent,
+    GridApi,
+    GridReadyEvent,
+    ICellRendererParams,
+    RowClassParams,
+    ValueGetterParams,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { ArrowDown, ArrowRight, ArrowUp, Ban, CheckCircle2, FilterX, Link2, Pencil, Trash2 } from 'lucide-react';
-import React, { useContext, useMemo } from 'react';
+import { ArrowDown, ArrowRight, ArrowUp, BadgeCheck, Link2, Lock, Pause, Pencil, Play, Trash2 } from 'lucide-react';
+import React, { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
+import { Link } from 'react-router-dom';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
+import { DispatchContext } from 'src/reducers/store.provider';
 import { getEstimatedDate } from 'src/shared-logic/functions';
 
 import { RarityMapper } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { LinkButton } from '@/fsd/5-shared/ui/link';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -33,50 +42,96 @@ import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
 import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 
+const STATUS_COL_ID = 'status';
+const STATUS_COL_DEFAULT_WIDTH = 62;
+const STATUS_COL_TEXT_THRESHOLD = 110;
+
+// Defined outside the component so ag-grid never receives new references on re-render.
+// New references on defaultColDef or modules cause ag-grid to re-initialize columns,
+// which resets user-resized column widths.
+const GRID_MODULES = [AllCommunityModule];
+const GRID_DEFAULT_COL_DEF = { suppressMovable: true, sortable: true, wrapText: true };
+
 interface Props {
     rows: TypedGoalSelect[]; // The filtered subset (e.g., just Abilities)
     allGoals: TypedGoalSelect[]; // The full list for global priority checks
     estimate: IGoalEstimate[];
     goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
+    onToggleInclude?: (goalId: string) => void;
 }
 
-export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsColorCoding, menuItemSelect }) => {
-    const { characters, viewPreferences } = useContext(StoreContext);
+export const GoalsTable: React.FC<Props> = ({
+    rows,
+    allGoals,
+    estimate,
+    goalsColorCoding,
+    menuItemSelect,
+    onToggleInclude,
+}) => {
     const dispatch = useContext(DispatchContext);
 
-    const getStatusIcons = (goalEstimate: IGoalEstimate) => {
-        if (!goalEstimate.completed && !goalEstimate.blocked && !!goalEstimate.included) {
-            return <div className="h-0" />;
+    // All frequently-changing values live in refs so columnDefs can have
+    // empty deps and never recompute — which would reset user-resized column widths.
+    const statusColWidthReference = useRef(STATUS_COL_DEFAULT_WIDTH);
+    const gridApiReference = useRef<GridApi | null>(null);
+    // Persists all user-resized column widths so they survive ag-grid's
+    // internal reset that happens when rowData changes.
+    const savedWidthsReference = useRef<Record<string, number>>({});
+    const goalsColorCodingReference = useRef(goalsColorCoding);
+    goalsColorCodingReference.current = goalsColorCoding;
+    const onToggleIncludeReference = useRef(onToggleInclude);
+    onToggleIncludeReference.current = onToggleInclude;
+    // Map keyed by goalId for O(1) lookups in cell renderers.
+    // Using .find() here would be O(n) × 9 renderers × N rows = O(N²) per render.
+    const estimateMapReference = useRef<Map<string, IGoalEstimate>>(new Map());
+    estimateMapReference.current = new Map(estimate.map(est => [est.goalId, est]));
+    const orderedAllGoalsReference = useRef<typeof allGoals>([]);
+    const menuItemSelectReference = useRef(menuItemSelect);
+    menuItemSelectReference.current = menuItemSelect;
+    const dispatchReference = useRef(dispatch);
+    dispatchReference.current = dispatch;
+    // rowsRef lets columnDefs (empty deps) read the initial row types for hide logic.
+    // Goal types never change mid-session so the initial values stay correct.
+    const rowsReference = useRef(rows);
+
+    orderedAllGoalsReference.current = useMemo(() => allGoals.toSorted((a, b) => a.priority - b.priority), [allGoals]);
+
+    // Refresh all cells when estimate changes so date/status columns stay current
+    // without needing estimate in columnDefs deps.
+    useEffect(() => {
+        gridApiReference.current?.refreshCells({ force: true });
+    }, [estimate]);
+
+    const handleGridReady = useCallback((event_: GridReadyEvent) => {
+        gridApiReference.current = event_.api;
+    }, []);
+
+    const handleColumnResized = useCallback((event_: ColumnResizedEvent) => {
+        if (!event_.finished || !event_.column) return;
+        const colId = event_.column.getColId();
+        const width = event_.column.getActualWidth();
+        // Save every resized column so we can restore after rowData changes.
+        savedWidthsReference.current[colId] = width;
+        if (colId === STATUS_COL_ID) {
+            statusColWidthReference.current = width;
+            gridApiReference.current?.refreshCells({ force: true, columns: [STATUS_COL_ID] });
         }
-        return (
-            <div>
-                {!!goalEstimate.completed && (
-                    <AccessibleTooltip title={`Goal is completed in current estimation.`}>
-                        <span className="flex items-center gap-[3px]" tabIndex={0}>
-                            <CheckCircle2 className="size-4 text-(--success)" />
-                        </span>
-                    </AccessibleTooltip>
-                )}
-                {!!goalEstimate.blocked && (
-                    <AccessibleTooltip
-                        title={`Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.`}>
-                        <span className="flex items-center gap-[3px]" tabIndex={0}>
-                            <Ban className="size-4 text-(--danger)" />
-                        </span>
-                    </AccessibleTooltip>
-                )}
-                {goalEstimate.included === false && (
-                    <AccessibleTooltip
-                        title={`Goal is excluded from current estimation. Enable it using the goal filter in the Daily Raids page.`}>
-                        <span className="flex items-center gap-[3px]" tabIndex={0}>
-                            <FilterX className="size-4 text-(--danger)" />
-                        </span>
-                    </AccessibleTooltip>
-                )}
-            </div>
-        );
-    };
+    }, []);
+
+    const handleRowDataUpdated = useCallback(() => {
+        const saved = savedWidthsReference.current;
+        if (Object.keys(saved).length === 0) return;
+        gridApiReference.current?.applyColumnState({
+            state: Object.entries(saved).map(([colId, width]) => ({ colId, width })),
+        });
+        // If the status column was resized, sync the ref and refresh cells
+        // so the text label reflects the restored width.
+        if (saved[STATUS_COL_ID] !== undefined) {
+            statusColWidthReference.current = saved[STATUS_COL_ID];
+            gridApiReference.current?.refreshCells({ force: true, columns: [STATUS_COL_ID] });
+        }
+    }, []);
 
     const getGoalInfo = (goal: TypedGoalSelect, goalEstimate: IGoalEstimate) => {
         switch (goal.type) {
@@ -294,77 +349,100 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             }
         }
     };
-    const orderedAllGoals = useMemo(() => allGoals.toSorted((a, b) => a.priority - b.priority), [allGoals]);
+    // columnDefs has empty deps so it NEVER recomputes — all changing values are
+    // read from refs inside cell renderers, and refreshCells() is called externally
+    // when data changes. This prevents ag-grid from resetting user-resized column widths.
+    // hide values use rowsRef.current (captured at mount); goal types never change mid-session.
     const columnDefs = useMemo<Array<ColDef<TypedGoalSelect>>>(() => {
+        const initialRows = rowsReference.current;
+        const isCharAbilities = initialRows.every(r => r.type === PersonalGoalType.CharacterAbilities);
+        const hasAscend = initialRows.some(r => r.type === PersonalGoalType.Ascend);
+        const hasUpgrades = initialRows.some(r =>
+            [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(r.type)
+        );
         return [
             {
                 field: 'priority',
-                maxWidth: 100,
+                width: 110,
+                maxWidth: 110,
                 cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     if (!data) return;
 
-                    // Find the index in the GLOBAL list to determine true neighbors
-                    const globalIndex = orderedAllGoals.findIndex(x => x.goalId === data.goalId);
+                    const ordered = orderedAllGoalsReference.current;
+                    const globalIndex = ordered.findIndex(x => x.goalId === data.goalId);
 
                     const moveUp = () => {
-                        if (globalIndex <= 0) return; // Already at the absolute top
-                        const neighbor = orderedAllGoals[globalIndex - 1];
-                        dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
+                        if (globalIndex <= 0) return;
+                        const neighbor = ordered[globalIndex - 1];
+                        dispatchReference.current.goals({
+                            type: 'Swap',
+                            goalId: data.goalId,
+                            neighborId: neighbor.goalId,
+                        });
                     };
 
                     const moveDown = () => {
-                        if (globalIndex >= orderedAllGoals.length - 1) return;
-                        const neighbor = orderedAllGoals[globalIndex + 1];
-                        dispatch.goals({ type: 'Swap', goalId: data.goalId, neighborId: neighbor.goalId });
+                        if (globalIndex >= ordered.length - 1) return;
+                        const neighbor = ordered[globalIndex + 1];
+                        dispatchReference.current.goals({
+                            type: 'Swap',
+                            goalId: data.goalId,
+                            neighborId: neighbor.goalId,
+                        });
                     };
                     return (
-                        <div className="flex flex-col items-center justify-center">
-                            <div className="flex items-center gap-1">
-                                <div>{data.priority}</div>
-                                <Button
-                                    size="square-petite"
-                                    appearance="plain"
-                                    aria-label="Increase Priority"
-                                    onPress={moveUp}>
-                                    <ArrowUp data-slot="icon" />
-                                </Button>
-                                <Button
-                                    size="square-petite"
-                                    appearance="plain"
-                                    aria-label="Decrease Priority"
-                                    onPress={moveDown}>
-                                    <ArrowDown data-slot="icon" />
-                                </Button>
-                            </div>
+                        <div className="flex h-full items-center justify-center gap-1">
+                            <span className="text-sm font-semibold text-(--soft-fg)">#{data.priority}</span>
+                            <Button
+                                size="square-petite"
+                                appearance="plain"
+                                className="!size-7 [--btn-accent:var(--soft-fg)]"
+                                aria-label="Increase Priority"
+                                onPress={moveUp}>
+                                <ArrowUp data-slot="icon" />
+                            </Button>
+                            <Button
+                                size="square-petite"
+                                appearance="plain"
+                                className="!size-7 [--btn-accent:var(--soft-fg)]"
+                                aria-label="Decrease Priority"
+                                onPress={moveDown}>
+                                <ArrowDown data-slot="icon" />
+                            </Button>
                         </div>
                     );
                 },
             },
             {
                 headerName: 'Actions',
+                width: 96,
+                maxWidth: 96,
                 cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     if (data) {
                         return (
-                            <>
+                            <div className="flex h-full items-center justify-center">
                                 <Button
                                     size="square-petite"
                                     appearance="plain"
-                                    onPress={() => menuItemSelect(data.goalId, 'edit')}>
+                                    className="[--btn-accent:var(--soft-fg)]"
+                                    aria-label="Edit Goal"
+                                    onPress={() => menuItemSelectReference.current(data.goalId, 'edit')}>
                                     <Pencil data-slot="icon" />
                                 </Button>
                                 <Button
                                     size="square-petite"
                                     appearance="plain"
-                                    onPress={() => menuItemSelect(data.goalId, 'delete')}>
+                                    className="[--btn-accent:var(--soft-fg)] data-hovered:[--btn-accent:var(--danger)]"
+                                    aria-label="Delete Goal"
+                                    onPress={() => menuItemSelectReference.current(data.goalId, 'delete')}>
                                     <Trash2 data-slot="icon" />
                                 </Button>
-                            </>
+                            </div>
                         );
                     }
                 },
-                maxWidth: 90,
             },
             {
                 field: 'unitIcon',
@@ -396,18 +474,91 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 maxWidth: 60,
             },
             {
+                colId: STATUS_COL_ID,
                 headerName: 'Status',
-                autoHeight: true,
-                width: 60,
+                sortable: false,
+                resizable: true,
+                width: STATUS_COL_DEFAULT_WIDTH,
+                minWidth: STATUS_COL_DEFAULT_WIDTH,
+                cellStyle: { padding: 0, overflow: 'hidden' },
                 cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (data && goalEstimate) {
-                        const statusEstimate = goalEstimate.blocked
-                            ? { ...goalEstimate, completed: false }
-                            : goalEstimate;
-                        return getStatusIcons(statusEstimate);
+                    if (!data) return;
+
+                    const goalEstimate = estimateMapReference.current.get(data.goalId);
+                    const isReached = !!goalEstimate?.completed && !goalEstimate?.blocked;
+                    const isBlocked = !!goalEstimate?.blocked;
+                    const showText = statusColWidthReference.current >= STATUS_COL_TEXT_THRESHOLD;
+
+                    if (isReached) {
+                        return (
+                            <AccessibleTooltip title="Goal is complete.">
+                                <div
+                                    className="flex h-full w-full items-center justify-center gap-1.5 text-(--success)"
+                                    tabIndex={0}>
+                                    <BadgeCheck className="size-4 shrink-0" />
+                                    {showText && <span className="truncate text-sm font-medium">Reached</span>}
+                                </div>
+                            </AccessibleTooltip>
+                        );
                     }
+
+                    if (isBlocked) {
+                        return (
+                            <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
+                                <button
+                                    type="button"
+                                    className={[
+                                        'flex h-full w-full cursor-pointer items-center justify-center gap-1.5',
+                                        'border-0 bg-transparent transition-colors',
+                                        'focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none focus-visible:ring-inset',
+                                        'text-amber-500 hover:bg-amber-500/10',
+                                    ].join(' ')}
+                                    aria-label="Locked"
+                                    onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                    <Lock className="size-4 shrink-0" />
+                                    {showText && <span className="truncate text-sm font-medium">Locked</span>}
+                                </button>
+                            </AccessibleTooltip>
+                        );
+                    }
+
+                    if (!onToggleIncludeReference.current) return;
+
+                    const isIncluded = !!data.include;
+
+                    return (
+                        <AccessibleTooltip
+                            title={
+                                isIncluded
+                                    ? 'Included in daily raids. Click to pause.'
+                                    : 'Excluded from daily raids. Click to include.'
+                            }>
+                            <button
+                                type="button"
+                                className={[
+                                    'flex h-full w-full cursor-pointer items-center justify-center gap-1.5',
+                                    'border-0 bg-transparent transition-colors',
+                                    'focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:outline-none focus-visible:ring-inset',
+                                    isIncluded
+                                        ? 'text-(--primary) hover:bg-(--primary)/10'
+                                        : 'text-(--soft-fg) hover:bg-(--overlay)',
+                                ].join(' ')}
+                                aria-label={isIncluded ? 'In Progress' : 'Paused'}
+                                onClick={() => onToggleIncludeReference.current!(data.goalId)}>
+                                {isIncluded ? (
+                                    <Play className="size-4 shrink-0" />
+                                ) : (
+                                    <Pause className="size-4 shrink-0" />
+                                )}
+                                {showText && (
+                                    <span className="truncate text-sm font-medium">
+                                        {isIncluded ? 'In Progress' : 'Paused'}
+                                    </span>
+                                )}
+                            </button>
+                        </AccessibleTooltip>
+                    );
                 },
             },
             {
@@ -416,7 +567,7 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 width: 300,
                 cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
+                    const goalEstimate = data ? estimateMapReference.current.get(data.goalId) : undefined;
                     if (data && goalEstimate) {
                         return getGoalInfo(data, goalEstimate);
                     }
@@ -424,41 +575,28 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
             },
             {
                 headerName: 'Estimated Date',
-                // valueGetter handles the underlying data for sorting, filtering, and clipboard
                 valueGetter: (params: ValueGetterParams<TypedGoalSelect>) => {
-                    const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
-                    // Only return blank if both estimates are missing/undefined
+                    const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
                     if (
                         !goalEstimate ||
                         (goalEstimate.daysLeft === undefined && goalEstimate.xpDaysLeft === undefined)
                     ) {
                         return '';
                     }
-
                     const { daysLeft, xpDaysLeft } = goalEstimate;
                     const materialDate = daysLeft === undefined ? undefined : getEstimatedDate(daysLeft);
                     const xpDate = xpDaysLeft === undefined ? undefined : getEstimatedDate(xpDaysLeft);
-
-                    if (materialDate && xpDate) {
-                        return `${materialDate} (XP by ${xpDate})`;
-                    }
-
+                    if (materialDate && xpDate) return `${materialDate} (XP by ${xpDate})`;
                     if (materialDate) return materialDate;
                     if (xpDate) return `XP by ${xpDate}`;
-
                     return '';
                 },
-                // cellRenderer handles the actual visual UI
                 cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const goalEstimate = estimate.find(x => x.goalId === params.data?.goalId);
-                    // Remove early guard !goalEstimate.daysLeft to allow XP-only rendering
+                    const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
                     if (!goalEstimate) return;
-
                     const { daysLeft, xpDaysLeft } = goalEstimate;
-
                     return (
                         <div className="flex flex-col gap-0.5 py-1">
-                            {/* Material / Shards Row: Render only if daysLeft is defined */}
                             {daysLeft !== undefined && (
                                 <AccessibleTooltip
                                     title={`${daysLeft} days for materials. Estimated date ${getEstimatedDate(daysLeft)}`}>
@@ -467,8 +605,6 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                                     </div>
                                 </AccessibleTooltip>
                             )}
-
-                            {/* XP Row: Render if xpDaysLeft exists, even if materials (daysLeft) are 0 or undefined */}
                             {xpDaysLeft !== undefined && (
                                 <AccessibleTooltip
                                     title={`${Math.ceil(xpDaysLeft)} days for XP. Estimated date ${getEstimatedDate(xpDaysLeft)}`}>
@@ -484,100 +620,80 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 autoHeight: true,
             },
             {
+                colId: 'days-left',
                 headerName: 'Days left',
-                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (goalEstimate) {
-                        return goalEstimate.daysLeft;
-                    }
-                },
+                hide: isCharAbilities,
+                valueGetter: params =>
+                    params.data ? estimateMapReference.current.get(params.data.goalId)?.daysLeft : undefined,
                 maxWidth: 110,
             },
             {
+                colId: 'days-total',
                 headerName: 'Days total',
-                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (goalEstimate) {
-                        return goalEstimate.daysTotal;
-                    }
-                },
+                hide: isCharAbilities,
+                valueGetter: params =>
+                    params.data ? estimateMapReference.current.get(params.data.goalId)?.daysTotal : undefined,
                 maxWidth: 110,
             },
             {
+                colId: 'energy',
                 headerName: 'Energy',
-                hide: rows.every(row => row.type === PersonalGoalType.CharacterAbilities),
-                valueGetter: params => {
-                    const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (goalEstimate) {
-                        return goalEstimate.energyTotal;
-                    }
-                },
+                hide: isCharAbilities,
+                valueGetter: params =>
+                    params.data ? estimateMapReference.current.get(params.data.goalId)?.energyTotal : undefined,
                 maxWidth: 110,
             },
             {
+                colId: 'onslaught-tokens',
                 headerName: 'Onslaught tokens',
-                hide: !rows.some(row => row.type === PersonalGoalType.Ascend),
-                valueGetter: params => {
-                    const { data } = params;
-                    const goalEstimate = estimate.find(x => x.goalId === data?.goalId);
-                    if (goalEstimate) {
-                        return goalEstimate.oTokensTotal;
-                    }
-                },
+                hide: !hasAscend,
+                valueGetter: params =>
+                    params.data ? estimateMapReference.current.get(params.data.goalId)?.oTokensTotal : undefined,
                 maxWidth: 140,
             },
             {
+                colId: 'upgrades',
                 headerName: 'Upgrades',
-                hide: !rows.some(row =>
-                    [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(row.type)
-                ),
+                hide: !hasUpgrades,
+                width: 140,
+                cellStyle: { padding: 0, overflow: 'hidden' },
                 cellRenderer: (params: ICellRendererParams<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>) => {
                     const { data } = params;
-                    if (data) {
-                        let linkBase: string = '';
-                        let params: string = '';
-
-                        if (data.type === PersonalGoalType.UpgradeRank) {
-                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                            params = `?charSnowprintId=${data.unitId}`;
-                        }
-
-                        if (data.type === PersonalGoalType.MowAbilities) {
-                            linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                            params = `?charSnowprintId=${data.unitId}`;
-                        }
-                        return (
-                            <LinkButton size="small" appearance="outline" href={linkBase + params}>
-                                <Link2 data-slot="icon" /> Go to Raids Table
-                            </LinkButton>
-                        );
-                    }
+                    if (!data) return;
+                    if (data.type !== PersonalGoalType.UpgradeRank && data.type !== PersonalGoalType.MowAbilities)
+                        return;
+                    const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                    return (
+                        <Link
+                            to={`${linkBase}?charSnowprintId=${encodeURIComponent(data.unitId)}`}
+                            className="flex h-full w-full items-center justify-center gap-2 text-(--primary) no-underline hover:bg-(--primary)/10">
+                            <Link2 className="size-4 shrink-0" />
+                            Go to Raids
+                        </Link>
+                    );
                 },
-                // width: 120,
             },
             {
                 field: 'notes',
-                // width: 120,
             },
         ];
-    }, [rows, dispatch, menuItemSelect, estimate, characters, orderedAllGoals]);
+    }, []); // empty deps — all values read from refs; column widths are never reset
 
-    const getRowStyle = useMemo(
-        () => (params: any) => {
-            return {
-                background: GoalService.getBackgroundColor(
-                    goalsColorCoding,
-                    estimate.find(x => x.goalId === params.data?.goalId)
-                ),
-            };
-        },
-        [estimate, goalsColorCoding, viewPreferences]
-    );
+    const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>) => {
+        const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
+
+        if (goalEstimate?.completed && !goalEstimate?.blocked) {
+            return { background: 'color-mix(in srgb, var(--success) 12%, transparent)' };
+        }
+
+        if (goalEstimate?.blocked) {
+            return { background: 'color-mix(in srgb, rgb(245 158 11) 12%, transparent)' };
+        }
+
+        return {
+            background: GoalService.getBackgroundColor(goalsColorCodingReference.current, goalEstimate),
+        };
+    }, []); // all values read from refs — stable reference, no column resets
 
     const baseRowHeight = rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 90 : 60;
 
@@ -588,17 +704,16 @@ export const GoalsTable: React.FC<Props> = ({ rows, allGoals, estimate, goalsCol
                 height: baseRowHeight + rows.length * baseRowHeight,
             }}>
             <AgGridReact
-                modules={[AllCommunityModule]}
+                modules={GRID_MODULES}
                 theme="legacy"
-                defaultColDef={{
-                    suppressMovable: true,
-                    sortable: true,
-                    wrapText: true,
-                }}
+                defaultColDef={GRID_DEFAULT_COL_DEF}
                 rowHeight={60}
                 columnDefs={columnDefs}
                 rowData={rows}
                 getRowStyle={getRowStyle}
+                onGridReady={handleGridReady}
+                onColumnResized={handleColumnResized}
+                onRowDataUpdated={handleRowDataUpdated}
             />
         </div>
     );
