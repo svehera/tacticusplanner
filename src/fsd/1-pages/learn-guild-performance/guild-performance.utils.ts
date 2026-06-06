@@ -2,6 +2,8 @@
 import {
     TacticusDamageType,
     TacticusEncounterType,
+    SeasonFetchStatus,
+    type GuildSeasonHistoryEntry,
     type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
 } from '@/fsd/5-shared/lib/tacticus-api';
@@ -258,6 +260,15 @@ export function getBossPrefix(unitId: string): string {
     return /^(GuildBoss\d+)/.exec(unitId)?.[1] ?? unitId;
 }
 
+export function isLikelyUserId(displayName: string): boolean {
+    return displayName.match(/^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/) !== null;
+}
+
+/** Obfuscates a user ID by replacing the middle characters with asterisks. */
+export function obfuscateUserId(userId: string): string {
+    return userId.slice(0, 4) + userId.slice(4, -4).replaceAll(/[a-z0-9A-Z]/g, '*') + userId.slice(-4);
+}
+
 /**
  * The boss family's position in the fixed game rotation, parsed from `GuildBoss{N}` — this matches
  * the API `set` ordering (within a rarity, sets advance with the boss number) and is used to sort
@@ -275,7 +286,7 @@ export function getBossOrder(unitId: string): number {
  */
 export function resolvePlayerName(playerId: string | undefined, names: Map<string, string>): string {
     if (playerId === undefined) return 'Anonymous';
-    return names.get(playerId) ?? playerId;
+    return names.get(playerId) ?? obfuscateUserId(playerId);
 }
 
 /**
@@ -285,15 +296,15 @@ export function resolvePlayerName(playerId: string | undefined, names: Map<strin
  */
 export function getAllGuildPlayers(
     currentEntries: TacticusGuildRaidEntry[],
-    seasonData: GuildSeasonSummary[],
+    seasonData: GuildSeasonHistoryEntry[],
     names: Map<string, string>
 ): { userId: string; displayName: string }[] {
     const seen = new Map<string, string>();
     for (const entry of currentEntries) {
         if (!seen.has(entry.userId)) seen.set(entry.userId, resolvePlayerName(entry.userId, names));
     }
-    for (const summary of seasonData) {
-        for (const player of summary.damageSummary.textData.playerData) {
+    for (const entry of seasonData) {
+        for (const player of entry.summary?.damageSummary.textData.playerData ?? []) {
             if (player.playerId !== undefined && !seen.has(player.playerId)) {
                 seen.set(player.playerId, resolvePlayerName(player.playerId, names));
             }
@@ -309,10 +320,19 @@ export function getAllGuildPlayers(
  * deduped by season number with the extra winning. Sorted ascending by season. Used for keyless
  * members, whose current season arrives separately from the stored history.
  */
-export function mergeSeasonSummaries(seasons: GuildSeasonSummary[], extra: GuildSeasonSummary): GuildSeasonSummary[] {
-    const bySeason = new Map<number, GuildSeasonSummary>();
-    for (const summary of seasons) bySeason.set(summary.season, summary);
-    bySeason.set(extra.season, extra);
+export function mergeSeasonSummaries(
+    seasons: GuildSeasonHistoryEntry[],
+    extra: GuildSeasonSummary
+): GuildSeasonHistoryEntry[] {
+    const bySeason = new Map<number, GuildSeasonHistoryEntry>();
+    for (const entry of seasons) bySeason.set(entry.season, entry);
+    const existing = bySeason.get(extra.season);
+    bySeason.set(
+        extra.season,
+        existing
+            ? { ...existing, summary: extra }
+            : { season: extra.season, status: SeasonFetchStatus.Found, summary: extra }
+    );
     return [...bySeason.values()].toSorted((a, b) => a.season - b.season);
 }
 

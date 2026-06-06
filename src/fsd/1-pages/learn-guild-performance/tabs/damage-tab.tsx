@@ -16,6 +16,7 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
 import { CompIcons, RaidTable } from '../guild-performance.components';
 import {
@@ -213,7 +214,7 @@ function buildBossRarityStats(entries: TacticusGuildRaidEntry[], names: Map<stri
                     avgDamage: g.avgCount > 0 ? Math.round(g.avgSum / g.avgCount) : 0,
                     maxDamage: maxEntry.damageDealt,
                     maxPlayerId: maxEntry.userId,
-                    maxPlayerName: names.get(maxEntry.userId) ?? maxEntry.userId,
+                    maxPlayerName: resolvePlayerName(maxEntry.userId, names),
                     comp,
                 };
             })
@@ -243,6 +244,8 @@ function toSummaryStatEntry(
     names: Map<string, string>
 ): BossRarityStatEntry {
     const { enemyId, rarity, encounterIndex, maxHp } = enemyInfo;
+    const heroUnits = comp.filter(unitId => MowsService.resolveToStatic(unitId) === undefined).toSorted();
+    const mow = comp.find(unitId => MowsService.resolveToStatic(unitId) !== undefined);
     return {
         unitId: enemyId,
         rarity: RarityMapper.stringToNumber[rarity],
@@ -256,7 +259,7 @@ function toSummaryStatEntry(
         maxDamage,
         maxPlayerId: playerId,
         maxPlayerName: resolvePlayerName(playerId, names),
-        comp,
+        comp: mow ? [...heroUnits, mow] : heroUnits,
     };
 }
 
@@ -335,6 +338,7 @@ function StatBossIcon({ unitId }: { unitId: string }) {
 
 function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hidePlayer: boolean }) {
     const cols = hidePlayer ? 'grid-cols-[24px_20px_6rem_6rem_auto]' : 'grid-cols-[24px_20px_6rem_6rem_1fr_auto]';
+    const id = row.maxPlayerName;
     return (
         <div
             className={`grid ${cols} items-center gap-x-2 rounded border border-gray-200 bg-white px-2 py-1 text-sm dark:border-gray-700 dark:bg-gray-900`}>
@@ -349,8 +353,8 @@ function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hide
             </span>
             <span className="text-right font-semibold tabular-nums">{row.maxDamage.toLocaleString()}</span>
             {!hidePlayer && (
-                <span className="min-w-0 truncate" title={row.maxPlayerId}>
-                    {row.maxPlayerName}
+                <span className="min-w-0 truncate" title={id}>
+                    {id}
                 </span>
             )}
             <CompIcons comp={row.comp} />
@@ -410,7 +414,7 @@ function buildPlayerSummaryText(entries: TacticusGuildRaidEntry[], names: Map<st
         if (stats === undefined) {
             stats = {
                 userId: entry.userId,
-                displayName: names.get(entry.userId) ?? entry.userId,
+                displayName: resolvePlayerName(entry.userId, names),
                 tokens: 0,
                 bombs: 0,
                 primeHits: 0,
@@ -613,7 +617,7 @@ export const DamageTab = ({
         () =>
             selectedSeason === currentData?.season
                 ? undefined
-                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+                : seasonHistory?.seasonData.find(entry => entry.season === selectedSeason)?.summary,
         [selectedSeason, currentData, seasonHistory]
     );
     const isHistorical = historySummary !== undefined;

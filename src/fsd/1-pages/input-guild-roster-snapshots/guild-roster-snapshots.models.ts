@@ -112,3 +112,6 @@ export const getGuildRosterHistoryApi = () => makeApiCall<GuildRosterHistoryResp
 
 export const postGuildRosterSnapshotApi = (sequenceNumber: number, snapshot: GuildRosterSnapshot) =>
     makeApiCall<{ sequenceNumber: number }>('PUT', 'guild/roster/history', { sequenceNumber, snapshot });
+
+export const deleteGuildRosterSnapshotApi = (name: string) =>
+    makeApiCall<GuildRosterHistoryResponse>('DELETE', `guild/roster/deleteHistory?name=${encodeURIComponent(name)}`);

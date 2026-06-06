@@ -721,7 +721,7 @@ export const PerformanceTab = ({
         () =>
             selectedSeason === currentData?.season
                 ? undefined
-                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+                : seasonHistory?.seasonData.find(entry => entry.season === selectedSeason)?.summary,
         [selectedSeason, currentData, seasonHistory]
     );
     const isHistorical = historySummary !== undefined;
