@@ -7,7 +7,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { getBossOrder, getBossPrefix } from '../guild-performance.utils';
+import { getBossPrefix } from '../guild-performance.utils';
 
 export interface LoopTokenCounts {
     loopNumber: number;
@@ -231,6 +231,7 @@ export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossL
         rarity: Rarity;
         bossUnitId: string;
         bossMaxHp: number;
+        set: number;
         loops: LoopTokenCounts[];
     }
     const groups = new Map<string, GroupAccumulator>();
@@ -240,7 +241,13 @@ export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossL
         const key = `${getBossPrefix(loop.enemyInfo.enemyId)}:${rarity}`;
         let group = groups.get(key);
         if (group === undefined) {
-            group = { rarity, bossUnitId: loop.enemyInfo.enemyId, bossMaxHp: loop.enemyInfo.maxHp, loops: [] };
+            group = {
+                rarity,
+                bossUnitId: loop.enemyInfo.enemyId,
+                bossMaxHp: loop.enemyInfo.maxHp,
+                set: loop.enemyInfo.set,
+                loops: [],
+            };
             groups.set(key, group);
         }
         group.bossMaxHp = Math.max(group.bossMaxHp, loop.enemyInfo.maxHp);
@@ -260,8 +267,7 @@ export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossL
         rows.push({
             bossPrefix: key.slice(0, key.lastIndexOf(':')),
             rarity: group.rarity,
-            // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
-            set: getBossOrder(group.bossUnitId),
+            set: group.set,
             bossUnitId: group.bossUnitId,
             bossMaxHp: group.bossMaxHp,
             leftPrimeUnitId: primes.left,

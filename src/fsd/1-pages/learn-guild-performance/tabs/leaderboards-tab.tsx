@@ -4,9 +4,11 @@ import { useEffect, useMemo, useState } from 'react';
 import {
     TacticusDamageType,
     TacticusEncounterType,
+    type GuildSeasonBossLeaderboard,
     type GuildSeasonBossLeaderboardEntry,
     type GuildSeasonHistoryResponse,
     type GuildSeasonSummary,
+    type SharedLeaderboardsResponse,
     type TacticusGuildRaidEntry,
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
@@ -14,6 +16,7 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+import { MowsService } from '@/fsd/4-entities/mow';
 
 import { CompIcons } from '../guild-performance.components';
 import {
@@ -23,6 +26,8 @@ import {
     getAvailableBossPrefixes,
     getBossOrder,
     getBossPrefix,
+    isLikelyUserId,
+    obfuscateUserId,
     resolvePlayerName,
     sortBossPrefixes,
     unitRoundIconMap,
@@ -120,6 +125,50 @@ function BossFilterGroup({
     );
 }
 
+function GuildFilterGroup({
+    guilds,
+    selected,
+    onChange,
+}: {
+    guilds: GuildOption[];
+    selected: Set<string>;
+    onChange: (tags: Set<string>) => void;
+}) {
+    return (
+        <div className="flex flex-col gap-0.5 text-xs">
+            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Guilds</span>
+            <div className="flex flex-wrap gap-1">
+                {guilds.map(guild => {
+                    const isSelected = guild.isOwnGuild || selected.has(guild.guildTag);
+                    return (
+                        <button
+                            key={guild.guildTag}
+                            type="button"
+                            onClick={() => {
+                                if (guild.isOwnGuild) return;
+                                const next = new Set(selected);
+                                if (next.has(guild.guildTag)) next.delete(guild.guildTag);
+                                else next.add(guild.guildTag);
+                                onChange(next);
+                            }}
+                            className={[
+                                'rounded border px-2 py-0.5 transition-colors',
+                                isSelected
+                                    ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
+                                    : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
+                                guild.isOwnGuild ? 'cursor-default' : '',
+                            ]
+                                .filter(Boolean)
+                                .join(' ')}>
+                            {guild.displayName}
+                        </button>
+                    );
+                })}
+            </div>
+        </div>
+    );
+}
+
 function NumberInput({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
     return (
         <label className="flex flex-col gap-0.5 text-xs">
@@ -188,7 +237,7 @@ function buildTopN(
         .slice(0, maxCount)
         .map(entry => ({
             userId: entry.userId,
-            displayName: names.get(entry.userId) ?? entry.userId,
+            displayName: resolvePlayerName(entry.userId, names),
             damage: entry.damageDealt,
             comp: [
                 ...entry.heroDetails.map(hero => hero.unitId),
@@ -267,6 +316,14 @@ function buildLeaderboardGroups(
             primeSlots,
         });
     }
+    // Sort each composition by unitId, but maintaining the machine of war at the end if present.
+    for (const group of groups) {
+        for (const entry of group.bossEntries) {
+            const heroUnits = entry.comp.filter(unitId => MowsService.resolveToStatic(unitId) === undefined).toSorted();
+            const mow = entry.comp.find(unitId => MowsService.resolveToStatic(unitId) !== undefined);
+            entry.comp = [...heroUnits, ...(mow ? [mow] : [])];
+        }
+    }
 
     // Sort: rarity desc, then set desc
     return groups.toSorted((a, b) => {
@@ -335,6 +392,96 @@ function buildLeaderboardGroupsFromSummary(
             if (a.rarity !== b.rarity) return b.rarity - a.rarity;
             return b.set - a.set;
         });
+}
+
+// ---------------------------------------------------------------------------
+// Guild-filter data model + helpers
+// ---------------------------------------------------------------------------
+
+interface GuildOption {
+    guildTag: string;
+    displayName: string;
+    isOwnGuild: boolean;
+}
+
+function buildGuildOptions(leaderboards: GuildSeasonBossLeaderboard[]): GuildOption[] {
+    const seen = new Map<string, { displayName: string; isOwnGuild: boolean }>();
+    for (const lb of leaderboards) {
+        for (const entry of lb.entries) {
+            if (entry.guildTag !== undefined && !seen.has(entry.guildTag)) {
+                seen.set(entry.guildTag, {
+                    displayName: entry.playerId ?? entry.guildTag,
+                    isOwnGuild: entry.isOwnGuild === true,
+                });
+            }
+        }
+    }
+
+    const nameCounts = new Map<string, number>();
+    for (const { displayName } of seen.values()) {
+        nameCounts.set(displayName, (nameCounts.get(displayName) ?? 0) + 1);
+    }
+
+    return [...seen.entries()]
+        .map(([tag, { displayName, isOwnGuild }]) => ({
+            guildTag: tag,
+            displayName: (nameCounts.get(displayName) ?? 0) > 1 ? `${displayName} (${tag})` : displayName,
+            isOwnGuild,
+        }))
+        .toSorted((a, b) => {
+            if (a.isOwnGuild !== b.isOwnGuild) return a.isOwnGuild ? -1 : 1;
+            return a.displayName.localeCompare(b.displayName);
+        });
+}
+
+/** Merges entries from the selected guilds (non-own) into the existing boss groups, re-sorting after. */
+function mergeSharedEntries(
+    groups: BossGroup[],
+    sharedLeaderboards: GuildSeasonBossLeaderboard[],
+    selectedGuildTags: Set<string>,
+    bossTopN: number,
+    primeTopN: number
+): BossGroup[] {
+    // key: `${enemyId}:${rarityNumber}:${encounterIndex}`
+    const sharedByKey = new Map<string, LeaderboardEntry[]>();
+    for (const lb of sharedLeaderboards) {
+        const rarityNumber = RarityMapper.stringToNumber[lb.enemyInfo.rarity];
+        const key = `${lb.enemyInfo.enemyId}:${rarityNumber}:${lb.enemyInfo.encounterIndex}`;
+        for (const entry of lb.entries) {
+            if (entry.isOwnGuild || entry.guildTag === undefined || !selectedGuildTags.has(entry.guildTag)) continue;
+            const mapped: LeaderboardEntry = {
+                displayName: isLikelyUserId(entry.playerId ?? '')
+                    ? obfuscateUserId(entry.playerId ?? '')
+                    : (entry.playerId ?? entry.guildTag),
+                damage: entry.damage,
+                comp: entry.comp,
+            };
+            const bucket = sharedByKey.get(key);
+            if (bucket) bucket.push(mapped);
+            else sharedByKey.set(key, [mapped]);
+        }
+    }
+
+    if (sharedByKey.size === 0) return groups;
+
+    return groups.map(group => {
+        const bossKey = `${group.bossUnitId}:${group.rarity}:0`;
+        const sharedBossEntries = sharedByKey.get(bossKey) ?? [];
+        const bossEntries = [...group.bossEntries, ...sharedBossEntries]
+            .toSorted((a, b) => b.damage - a.damage)
+            .slice(0, bossTopN);
+
+        const primeSlots = group.primeSlots.map(prime => {
+            const primeKey = `${prime.unitId}:${group.rarity}:${prime.encounterIndex}`;
+            const sharedPrimeEntries = sharedByKey.get(primeKey) ?? [];
+            const entries = [...prime.entries, ...sharedPrimeEntries]
+                .toSorted((a, b) => b.damage - a.damage)
+                .slice(0, primeTopN);
+            return { ...prime, entries };
+        });
+
+        return { ...group, bossEntries, primeSlots };
+    });
 }
 
 // ---------------------------------------------------------------------------
@@ -471,12 +618,14 @@ export const LeaderboardTab = ({
     seasonHistory,
     names,
     selectedSeason,
+    sharedLeaderboards,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
     names: Map<string, string>;
     /** Page-level sticky season selection. */
     selectedSeason: number | undefined;
+    sharedLeaderboards?: SharedLeaderboardsResponse;
 }) => {
     // A historical season builds its leaderboards from the aggregated top-5s; the live season builds
     // them from raw per-hit entries.
@@ -484,7 +633,7 @@ export const LeaderboardTab = ({
         () =>
             selectedSeason === currentData?.season
                 ? undefined
-                : seasonHistory?.seasonData.find(season => season.season === selectedSeason),
+                : seasonHistory?.seasonData.find(entry => entry.season === selectedSeason)?.summary,
         [selectedSeason, currentData, seasonHistory]
     );
     const isHistorical = historySummary !== undefined;
@@ -534,10 +683,23 @@ export const LeaderboardTab = ({
     const [bossTopN, setBossTopN] = useState(5);
     const [primeTopN, setPrimeTopN] = useState(3);
 
-    // Reset the rarity/boss filters when the page-level season changes.
+    // --- guild filter (shared leaderboards) ---
+    // Only applies when the shared leaderboard season matches the selected season.
+    const sharedForSeason = useMemo(
+        () =>
+            sharedLeaderboards !== undefined && sharedLeaderboards.season === selectedSeason
+                ? sharedLeaderboards.leaderboards
+                : [],
+        [sharedLeaderboards, selectedSeason]
+    );
+    const guildOptions = useMemo(() => buildGuildOptions(sharedForSeason), [sharedForSeason]);
+    const [selectedGuildTags, setSelectedGuildTags] = useState<Set<string>>(() => new Set());
+
+    // Reset all filters when the page-level season changes.
     useEffect(() => {
         setRarityOverride(undefined);
         setSelectedBossPrefixes(undefined);
+        setSelectedGuildTags(new Set());
     }, [selectedSeason]);
 
     const handleRarityChange = (rarities: Rarity[]) => {
@@ -546,24 +708,41 @@ export const LeaderboardTab = ({
     };
 
     // --- groups ---
-    const groups = useMemo(
-        () =>
-            historySummary
-                ? buildLeaderboardGroupsFromSummary(
-                      historySummary,
-                      selectedRarities,
-                      effectiveBossPrefixes,
-                      names,
-                      bossTopN,
-                      primeTopN
-                  )
-                : buildLeaderboardGroups(rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN),
-        [historySummary, selectedRarities, rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN]
-    );
+    const groups = useMemo(() => {
+        const rawGroups = historySummary
+            ? buildLeaderboardGroupsFromSummary(
+                  historySummary,
+                  selectedRarities,
+                  effectiveBossPrefixes,
+                  names,
+                  bossTopN,
+                  primeTopN
+              )
+            : buildLeaderboardGroups(rarityFilteredEntries, effectiveBossPrefixes, names, bossTopN, primeTopN);
+        if (sharedForSeason.length === 0 || selectedGuildTags.size === 0) return rawGroups;
+        return mergeSharedEntries(rawGroups, sharedForSeason, selectedGuildTags, bossTopN, primeTopN);
+    }, [
+        historySummary,
+        selectedRarities,
+        rarityFilteredEntries,
+        effectiveBossPrefixes,
+        names,
+        bossTopN,
+        primeTopN,
+        sharedForSeason,
+        selectedGuildTags,
+    ]);
 
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
+                {guildOptions.length > 1 && (
+                    <GuildFilterGroup
+                        guilds={guildOptions}
+                        selected={selectedGuildTags}
+                        onChange={setSelectedGuildTags}
+                    />
+                )}
                 <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
                 <BossFilterGroup
                     available={availableBossPrefixes}

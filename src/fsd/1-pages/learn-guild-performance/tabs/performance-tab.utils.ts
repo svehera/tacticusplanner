@@ -739,11 +739,12 @@ export function buildPlayerViewFromSummary(
         const playerHitsAll = [...player.nonKillHits, ...player.killHits];
         if (playerHitsAll.length === 0) continue;
 
-        const { enemyId, rarity: rarityName, encounterIndex, maxHp } = entry.enemyInfo;
+        const { enemyId, rarity: rarityName, encounterIndex, maxHp, set } = entry.enemyInfo;
         const rarity = RarityMapper.stringToNumber[rarityName];
         const isBoss = encounterIndex === 0;
         const bossPrefix = getBossPrefix(enemyId);
 
+        if (excludeKills && player.nonKillHits.length === 0) continue;
         const playerAvgSource = excludeKills ? player.nonKillHits : playerHitsAll;
         const playerAvgStats = aggregate(playerAvgSource);
         const playerMaxStats = aggregate(playerHitsAll);
@@ -754,8 +755,7 @@ export function buildPlayerViewFromSummary(
             unitKey: `${enemyId}:${rarity}:${encounterIndex}`,
             unitId: enemyId,
             rarity,
-            // The aggregate has no `set`; the GuildBoss{N} rotation order stands in for it.
-            set: getBossOrder(enemyId),
+            set: set ?? getBossOrder(bossPrefix),
             encounterIndex,
             isBoss,
             bossPrefix,

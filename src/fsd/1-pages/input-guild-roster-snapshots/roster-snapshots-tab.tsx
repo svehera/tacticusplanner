@@ -3,244 +3,38 @@
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
 import { useMemo, useState } from 'react';
 
-import { UnitType } from '@/fsd/5-shared/model';
+import { DebugJson } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
-import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
-
-import { CharactersPowerService } from '@/fsd/4-entities/unit';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
 
-import { IRosterSnapshot, IRosterSnapshotDiff, ISnapshotUnitDiff } from '../input-roster-snapshots/models';
+import { IRosterSnapshot, ISnapshotUnitDiff } from '../input-roster-snapshots/models';
 import { RosterSnapshotsService } from '../input-roster-snapshots/roster-snapshots-service';
 import { RosterSnapshotsUnitDiffDetailed } from '../input-roster-snapshots/roster-snapshots-unit-diff-detailed';
 
 import {
     GuildRosterHistoryResponse,
-    GuildRosterSnapshot,
-    GuildRosterSnapshotMember,
-    GuildUnitDiff,
     MemberState,
+    deleteGuildRosterSnapshotApi,
     getGuildRosterHistoryApi,
     postGuildRosterSnapshotApi,
 } from './guild-roster-snapshots.models';
+import {
+    DiffEntry,
+    applyCapTrimming,
+    buildMemberHistoryMap,
+    buildNewSnapshot,
+    getMemberRosterAtIndex,
+    getPlayerName,
+    makeDefaultSnapshotName,
+    snapshotCharPower,
+    snapshotMowPower,
+} from './roster-snapshots-tab.utils';
 
 const SHOW_ALL = RosterSnapshotShowVariableSettings.Always;
 const SNAPSHOT_LIMIT = 20;
-
-// ---------------------------------------------------------------------------
-// Pure helpers (defined outside component)
-// ---------------------------------------------------------------------------
-
-interface MemberHistoryEntry {
-    globalIndex: number;
-    resolvedRoster: IRosterSnapshot;
-}
-
-function buildMemberHistoryMap(history: GuildRosterHistoryResponse | undefined): Map<string, MemberHistoryEntry[]> {
-    const map = new Map<string, MemberHistoryEntry[]>();
-    if (!history) return map;
-
-    const currentBase = new Map<string, IRosterSnapshot>();
-
-    for (let globalIndex = 0; globalIndex < history.snapshots.length; globalIndex++) {
-        const snapshot = history.snapshots[globalIndex];
-        for (const member of snapshot.members ?? []) {
-            if (member.chars !== undefined) {
-                const resolvedRoster: IRosterSnapshot = {
-                    name: snapshot.name,
-                    dateMillisUtc: 0,
-                    chars: member.chars,
-                    mows: member.mows ?? [],
-                };
-                currentBase.set(member.userId, resolvedRoster);
-                const entries = map.get(member.userId) ?? [];
-                entries.push({ globalIndex, resolvedRoster });
-                map.set(member.userId, entries);
-            } else if (member.charDiffs !== undefined || member.mowDiffs !== undefined) {
-                const base = currentBase.get(member.userId);
-                if (!base) continue;
-
-                const diffObject: IRosterSnapshotDiff = {
-                    name: snapshot.name,
-                    dateMillisUtc: 0,
-                    // GuildUnitDiff is structurally identical to ISnapshotUnitDiff
-                    charDiffs: (member.charDiffs ?? []) as ISnapshotUnitDiff[],
-                    mowDiffs: (member.mowDiffs ?? []) as ISnapshotUnitDiff[],
-                };
-                const resolvedRoster = RosterSnapshotsService.resolveSnapshotDiff(base, diffObject);
-                currentBase.set(member.userId, resolvedRoster);
-                const entries = map.get(member.userId) ?? [];
-                entries.push({ globalIndex, resolvedRoster });
-                map.set(member.userId, entries);
-            }
-        }
-    }
-
-    return map;
-}
-
-/** Returns the member's last known resolved roster at or before targetIndex. */
-function getMemberRosterAtIndex(memberHistory: MemberHistoryEntry[], targetIndex: number): IRosterSnapshot | undefined {
-    let result: IRosterSnapshot | undefined;
-    for (const entry of memberHistory) {
-        if (entry.globalIndex <= targetIndex) {
-            result = entry.resolvedRoster;
-        }
-    }
-    return result;
-}
-
-function getPlayerName(userId: string, memberStates: Map<string, MemberState>): string {
-    const state = memberStates.get(userId);
-    if (state?.status === 'success' || state?.status === 'name-only') {
-        return state.playerName;
-    }
-    return userId;
-}
-
-function charToFullDiff(char: ISnapshotCharacter): GuildUnitDiff {
-    return {
-        id: char.id,
-        rank: char.rank,
-        rarity: char.rarity,
-        stars: char.stars,
-        shards: char.shards,
-        mythicShards: char.mythicShards,
-        xpLevel: char.xpLevel,
-        active: char.activeAbilityLevel,
-        passive: char.passiveAbilityLevel,
-        equip0: char.equip0?.id,
-        equip1: char.equip1?.id,
-        equip2: char.equip2?.id,
-        equip0Level: char.equip0Level,
-        equip1Level: char.equip1Level,
-        equip2Level: char.equip2Level,
-    };
-}
-
-function mowToFullDiff(mow: ISnapshotMachineOfWar): GuildUnitDiff {
-    return {
-        id: mow.id,
-        rarity: mow.rarity,
-        stars: mow.stars,
-        shards: mow.shards,
-        mythicShards: mow.mythicShards,
-        active: mow.primaryAbilityLevel,
-        passive: mow.secondaryAbilityLevel,
-        locked: mow.locked,
-    };
-}
-
-/** Builds the new snapshot entry from current member rosters, diffing against the most recent history. */
-function buildNewSnapshot(
-    name: string,
-    memberStates: Map<string, MemberState>,
-    memberHistoryMap: Map<string, MemberHistoryEntry[]>
-): GuildRosterSnapshot {
-    const members: GuildRosterSnapshotMember[] = [];
-
-    for (const [userId, state] of memberStates) {
-        if (state.status !== 'success') continue;
-
-        const currentChars = state.parsed.units.flatMap(u => (u.char ? [u.char] : []));
-        const currentMows = state.parsed.units.flatMap(u => (u.mow ? [u.mow] : []));
-        const memberHistory = memberHistoryMap.get(userId);
-
-        if (!memberHistory || memberHistory.length === 0) {
-            // New member: store full base data
-            members.push({ userId, chars: currentChars, mows: currentMows });
-        } else {
-            const latestRoster = RosterSnapshotsService.fixSnapshot(memberHistory.at(-1)!.resolvedRoster);
-            const charDiffs: GuildUnitDiff[] = [];
-            const mowDiffs: GuildUnitDiff[] = [];
-
-            for (const currentChar of currentChars) {
-                const baseChar = latestRoster.chars.find(c => c.id === currentChar.id);
-                if (baseChar) {
-                    const diff = RosterSnapshotsService.diffCharacter(baseChar, currentChar) as GuildUnitDiff;
-                    if (Object.keys(diff).length > 1) charDiffs.push(diff);
-                } else {
-                    charDiffs.push(charToFullDiff(currentChar));
-                }
-            }
-
-            for (const currentMow of currentMows) {
-                const baseMow = latestRoster.mows.find(m => m.id === currentMow.id);
-                if (baseMow) {
-                    const diff = RosterSnapshotsService.diffMachineOfWar(baseMow, currentMow) as GuildUnitDiff;
-                    if (Object.keys(diff).length > 1) mowDiffs.push(diff);
-                } else {
-                    mowDiffs.push(mowToFullDiff(currentMow));
-                }
-            }
-
-            if (charDiffs.length > 0 || mowDiffs.length > 0) {
-                members.push({ userId, charDiffs, mowDiffs });
-            }
-        }
-    }
-
-    return { name, members };
-}
-
-/**
- * Removes the oldest snapshot and migrates the new oldest (formerly second-oldest) to full base
- * data so it no longer relies on the deleted entry as its diff base.
- */
-function applyCapTrimming(history: GuildRosterHistoryResponse): GuildRosterHistoryResponse {
-    const memberMap = buildMemberHistoryMap(history);
-    const migratedMembers: GuildRosterSnapshotMember[] = [];
-
-    for (const [userId, memberEntries] of memberMap) {
-        const roster = getMemberRosterAtIndex(memberEntries, 1);
-        if (roster) {
-            migratedMembers.push({ userId, chars: roster.chars, mows: roster.mows });
-        }
-    }
-
-    const trimmed = history.snapshots.slice(1);
-    return {
-        ...history,
-        snapshots: [{ ...trimmed[0], members: migratedMembers }, ...trimmed.slice(1)],
-    };
-}
-
-function makeDefaultSnapshotName(): string {
-    return `${new Date().toISOString().slice(0, 19).replace('T', ' ')} UTC`;
-}
-
-interface DiffEntry {
-    char?: ISnapshotCharacter;
-    mow?: ISnapshotMachineOfWar;
-    diff: ISnapshotUnitDiff;
-    hasChanged: boolean;
-    power: number;
-}
-
-function snapshotCharPower(char: ISnapshotCharacter): number {
-    return CharactersPowerService.getCharacterPower({
-        unitType: UnitType.character,
-        rank: char.rank,
-        rarity: char.rarity,
-        stars: char.stars,
-        activeAbilityLevel: char.activeAbilityLevel,
-        passiveAbilityLevel: char.passiveAbilityLevel,
-    } as any);
-}
-
-function snapshotMowPower(mow: ISnapshotMachineOfWar): number {
-    return CharactersPowerService.getCharacterAbilityPower({
-        unitType: UnitType.mow,
-        unlocked: !mow.locked,
-        rarity: mow.rarity,
-        stars: mow.stars,
-        primaryAbilityLevel: mow.primaryAbilityLevel,
-        secondaryAbilityLevel: mow.secondaryAbilityLevel,
-    } as any);
-}
 
 // ---------------------------------------------------------------------------
 // Component
@@ -266,6 +60,12 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const [snapshotName, setSnapshotName] = useState('');
     const [isSaving, setIsSaving] = useState(false);
     const [saveError, setSaveError] = useState<string | undefined>();
+
+    // Delete dialog
+    const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
+    const [selectedSnapshotToDelete, setSelectedSnapshotToDelete] = useState<string | undefined>();
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [deleteError, setDeleteError] = useState<string | undefined>();
 
     const loadHistory = async () => {
         setIsLoadingHistory(true);
@@ -330,6 +130,36 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         setHistory(updatedHistory);
         setIsSaving(false);
         setSaveDialogOpen(false);
+    };
+
+    const openDeleteDialog = () => {
+        setSelectedSnapshotToDelete(undefined);
+        setDeleteError(undefined);
+        setDeleteDialogOpen(true);
+    };
+
+    const closeDeleteDialog = () => setDeleteDialogOpen(false);
+
+    const handleDeleteSnapshot = async () => {
+        if (!selectedSnapshotToDelete) return;
+        setIsDeleting(true);
+        setDeleteError(undefined);
+
+        const { data, error } = await deleteGuildRosterSnapshotApi(selectedSnapshotToDelete);
+
+        if (error) {
+            setDeleteError(typeof error === 'string' ? error : (error.message ?? 'Failed to delete snapshot'));
+            setIsDeleting(false);
+            return;
+        }
+
+        setHistory(data);
+        setIsDeleting(false);
+        setDeleteDialogOpen(false);
+        // Clear comparison selections that may now reference deleted snapshots.
+        setLeftSnapshotIndex(undefined);
+        setRightSnapshotSelection(undefined);
+        setSelectedUserId(undefined);
     };
 
     const rightOptions = useMemo((): Array<{ value: number | 'current'; label: string }> => {
@@ -468,6 +298,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         'rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100';
     const labelClass = 'text-sm font-semibold text-gray-700 dark:text-gray-300';
     const canSave = hasLoadedHistoryOnce && !isLoadingHistory && members !== undefined;
+    const canDelete = hasLoadedHistoryOnce && !isLoadingHistory && snapshots.length > 0;
 
     return (
         <div className="flex flex-col gap-4">
@@ -476,8 +307,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 <Button intent="primary" isDisabled={isLoadingHistory} onPress={loadHistory}>
                     {hasLoadedHistoryOnce ? 'Refresh History' : 'Load History'}
                 </Button>
-                <Button intent="secondary" isDisabled={!canSave} onPress={openSaveDialog}>
+                <Button intent="primary" isDisabled={!canSave} onPress={openSaveDialog}>
                     Save Snapshot
+                </Button>
+                <Button intent="danger" isDisabled={!canDelete} onPress={openDeleteDialog}>
+                    Delete Snapshot
                 </Button>
                 {isLoadingHistory && (
                     <span className="inline-block size-4 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
@@ -485,6 +319,8 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             </div>
 
             {historyError && <p className="text-sm text-red-600 dark:text-red-400">{historyError}</p>}
+
+            <DebugJson label="guild/roster/history" value={history ?? 'not loaded'} />
 
             {!hasLoadedHistoryOnce && (
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -704,6 +540,46 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                     </Button>
                     <Button intent="primary" isDisabled={!isNameValid || isSaving} onPress={handleSaveSnapshot}>
                         {isSaving ? 'Saving…' : 'Save'}
+                    </Button>
+                </DialogActions>
+            </Dialog>
+
+            {/* Delete Snapshot dialog */}
+            <Dialog open={deleteDialogOpen} onClose={closeDeleteDialog} maxWidth="sm" fullWidth>
+                <DialogTitle>Delete Snapshot</DialogTitle>
+                <DialogContent>
+                    <div className="flex flex-col gap-3 pt-2">
+                        <p className="text-sm text-gray-600 dark:text-gray-400">
+                            Select a snapshot to permanently delete:
+                        </p>
+                        <div className="max-h-64 overflow-y-auto rounded border border-gray-200 dark:border-gray-700">
+                            {snapshots.map(snapshot => (
+                                <button
+                                    key={snapshot.name}
+                                    type="button"
+                                    onClick={() => setSelectedSnapshotToDelete(snapshot.name)}
+                                    className={[
+                                        'w-full px-3 py-2 text-left text-sm transition-colors',
+                                        selectedSnapshotToDelete === snapshot.name
+                                            ? 'bg-blue-50 font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300'
+                                            : 'hover:bg-gray-50 dark:hover:bg-gray-800',
+                                    ].join(' ')}>
+                                    {snapshot.name}
+                                </button>
+                            ))}
+                        </div>
+                        {deleteError && <p className="text-sm text-red-600 dark:text-red-400">{deleteError}</p>}
+                    </div>
+                </DialogContent>
+                <DialogActions>
+                    <Button intent="secondary" onPress={closeDeleteDialog}>
+                        Cancel
+                    </Button>
+                    <Button
+                        intent="danger"
+                        isDisabled={!selectedSnapshotToDelete || isDeleting}
+                        onPress={handleDeleteSnapshot}>
+                        {isDeleting ? 'Deleting…' : 'Delete'}
                     </Button>
                 </DialogActions>
             </Dialog>
