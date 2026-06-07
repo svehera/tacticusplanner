@@ -1,4 +1,4 @@
-import { AxiosError } from 'axios';
+﻿import { AxiosError } from 'axios';
 import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
@@ -636,9 +636,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     shareInGameName: shareInGameNameWithGuild,
                     shareRosterData: shareRosterDataWithGuild,
                     shareGuildMemberPerformance,
-                    combinedGuildTags,
+                    combinedGuildTags: combinedGuildTags ?? undefined,
                     guildTag,
                 });
+                console.log('[users/me] setUserInfo combinedGuildTags →', combinedGuildTags ?? undefined);
                 const localModifiedDateTicks = modifiedDateTicksReference.current;
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;

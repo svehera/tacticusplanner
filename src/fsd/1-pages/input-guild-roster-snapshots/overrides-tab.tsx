@@ -3,6 +3,7 @@ import MuiButton from '@mui/material/Button';
 import { Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import { Button } from '@/fsd/5-shared/ui/button';
 
 import { buildCsv, parseCsvText } from './guild-roster-snapshots.helpers';
@@ -224,11 +225,11 @@ export const OverridesTab = ({ members }: OverridesTabProps) => {
                                             onChange={event_ => updateRow(index, 'userId', event_.target.value)}
                                             className={inputCls}>
                                             {!optionsForRow.includes(row.userId) && (
-                                                <option value={row.userId}>{row.userId}</option>
+                                                <option value={row.userId}>{obfuscateUserId(row.userId)}</option>
                                             )}
                                             {optionsForRow.map(id => (
                                                 <option key={id} value={id}>
-                                                    {id}
+                                                    {obfuscateUserId(id)}
                                                 </option>
                                             ))}
                                         </select>
@@ -278,7 +279,7 @@ export const OverridesTab = ({ members }: OverridesTabProps) => {
                                         </option>
                                         {availableForNew.map(id => (
                                             <option key={id} value={id}>
-                                                {id}
+                                                {obfuscateUserId(id)}
                                             </option>
                                         ))}
                                     </select>

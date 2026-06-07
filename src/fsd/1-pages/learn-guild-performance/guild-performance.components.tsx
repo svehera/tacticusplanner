@@ -2,6 +2,7 @@
 import { useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
+import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import {
     TacticusDamageType,
     type TacticusGuildRaidEntry,
@@ -12,7 +13,7 @@ import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
-import { buildLoopCountMaps, getDamageColorClass, obfuscateUserId, unitRoundIconMap } from './guild-performance.utils';
+import { buildLoopCountMaps, getDamageColorClass, unitRoundIconMap } from './guild-performance.utils';
 
 // ---------------------------------------------------------------------------
 // Season / Player selects (shared across tabs, owned by the page)

@@ -1,6 +1,7 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 import { useEffect, useMemo, useState } from 'react';
 
+import { isLikelyUserId, obfuscateUserId } from '@/fsd/5-shared/lib';
 import {
     TacticusDamageType,
     TacticusEncounterType,
@@ -26,8 +27,6 @@ import {
     getAvailableBossPrefixes,
     getBossOrder,
     getBossPrefix,
-    isLikelyUserId,
-    obfuscateUserId,
     resolvePlayerName,
     sortBossPrefixes,
     unitRoundIconMap,
@@ -136,16 +135,15 @@ function GuildFilterGroup({
 }) {
     return (
         <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Guilds</span>
+            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Other Guilds</span>
             <div className="flex flex-wrap gap-1">
                 {guilds.map(guild => {
-                    const isSelected = guild.isOwnGuild || selected.has(guild.guildTag);
+                    const isSelected = selected.has(guild.guildTag);
                     return (
                         <button
                             key={guild.guildTag}
                             type="button"
                             onClick={() => {
-                                if (guild.isOwnGuild) return;
                                 const next = new Set(selected);
                                 if (next.has(guild.guildTag)) next.delete(guild.guildTag);
                                 else next.add(guild.guildTag);
@@ -156,10 +154,7 @@ function GuildFilterGroup({
                                 isSelected
                                     ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
                                     : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                                guild.isOwnGuild ? 'cursor-default' : '',
-                            ]
-                                .filter(Boolean)
-                                .join(' ')}>
+                            ].join(' ')}>
                             {guild.displayName}
                         </button>
                     );
@@ -401,37 +396,30 @@ function buildLeaderboardGroupsFromSummary(
 interface GuildOption {
     guildTag: string;
     displayName: string;
-    isOwnGuild: boolean;
 }
 
+/** Returns one entry per non-own guild present in the shared leaderboard data, alphabetically sorted.
+ *  Guilds with duplicate display names get their tag appended for disambiguation. */
 function buildGuildOptions(leaderboards: GuildSeasonBossLeaderboard[]): GuildOption[] {
-    const seen = new Map<string, { displayName: string; isOwnGuild: boolean }>();
+    const seen = new Map<string, string>(); // tag → raw display name
     for (const lb of leaderboards) {
         for (const entry of lb.entries) {
-            if (entry.guildTag !== undefined && !seen.has(entry.guildTag)) {
-                seen.set(entry.guildTag, {
-                    displayName: entry.playerId ?? entry.guildTag,
-                    isOwnGuild: entry.isOwnGuild === true,
-                });
-            }
+            if (entry.isOwnGuild || entry.guildTag === undefined || seen.has(entry.guildTag)) continue;
+            seen.set(entry.guildTag, entry.playerId ?? entry.guildTag);
         }
     }
 
     const nameCounts = new Map<string, number>();
-    for (const { displayName } of seen.values()) {
+    for (const displayName of seen.values()) {
         nameCounts.set(displayName, (nameCounts.get(displayName) ?? 0) + 1);
     }
 
     return [...seen.entries()]
-        .map(([tag, { displayName, isOwnGuild }]) => ({
+        .map(([tag, displayName]) => ({
             guildTag: tag,
             displayName: (nameCounts.get(displayName) ?? 0) > 1 ? `${displayName} (${tag})` : displayName,
-            isOwnGuild,
         }))
-        .toSorted((a, b) => {
-            if (a.isOwnGuild !== b.isOwnGuild) return a.isOwnGuild ? -1 : 1;
-            return a.displayName.localeCompare(b.displayName);
-        });
+        .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
 }
 
 /** Merges entries from the selected guilds (non-own) into the existing boss groups, re-sorting after. */
@@ -619,6 +607,7 @@ export const LeaderboardTab = ({
     names,
     selectedSeason,
     sharedLeaderboards,
+    onRefreshSharedLeaderboards,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
@@ -626,6 +615,7 @@ export const LeaderboardTab = ({
     /** Page-level sticky season selection. */
     selectedSeason: number | undefined;
     sharedLeaderboards?: SharedLeaderboardsResponse;
+    onRefreshSharedLeaderboards?: () => Promise<void>;
 }) => {
     // A historical season builds its leaderboards from the aggregated top-5s; the live season builds
     // them from raw per-hit entries.
@@ -692,8 +682,20 @@ export const LeaderboardTab = ({
                 : [],
         [sharedLeaderboards, selectedSeason]
     );
+
     const guildOptions = useMemo(() => buildGuildOptions(sharedForSeason), [sharedForSeason]);
     const [selectedGuildTags, setSelectedGuildTags] = useState<Set<string>>(() => new Set());
+    const [isRefreshingShared, setIsRefreshingShared] = useState(false);
+
+    const handleRefreshShared = async () => {
+        if (!onRefreshSharedLeaderboards) return;
+        setIsRefreshingShared(true);
+        try {
+            await onRefreshSharedLeaderboards();
+        } finally {
+            setIsRefreshingShared(false);
+        }
+    };
 
     // Reset all filters when the page-level season changes.
     useEffect(() => {
@@ -736,7 +738,7 @@ export const LeaderboardTab = ({
     return (
         <div className="flex flex-col gap-4">
             <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                {guildOptions.length > 1 && (
+                {guildOptions.length > 0 && (
                     <GuildFilterGroup
                         guilds={guildOptions}
                         selected={selectedGuildTags}
@@ -755,6 +757,17 @@ export const LeaderboardTab = ({
                         <NumberInput label="Boss top N" value={bossTopN} onChange={setBossTopN} />
                         <NumberInput label="Prime top N" value={primeTopN} onChange={setPrimeTopN} />
                     </>
+                )}
+                {onRefreshSharedLeaderboards && localStorage.getItem('debugMode') === 'true' && (
+                    <button
+                        type="button"
+                        onClick={() => {
+                            void handleRefreshShared();
+                        }}
+                        disabled={isRefreshingShared}
+                        className="rounded border border-gray-300 bg-white px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
+                        {isRefreshingShared ? 'Refreshing…' : 'Refresh Shared'}
+                    </button>
                 )}
             </div>
             {groups.length === 0 ? (

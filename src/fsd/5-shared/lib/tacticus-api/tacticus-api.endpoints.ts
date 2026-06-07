@@ -17,13 +17,18 @@ export interface UpdateTacticusApiKeyOptions {
     guildTag?: string;
 }
 
+export interface UpdateTacticusApiKeyResponse {
+    player: TacticusPlayerResponse;
+    combinedGuildTags: string[] | null;
+}
+
 export const updateTacticusApiKey = (
     apiKey: string,
     guildApiKey: string,
     tacticusUserId: string,
     options: UpdateTacticusApiKeyOptions = {}
 ) => {
-    return makeApiCall<TacticusPlayerResponse>('PUT', 'users/tacticusApiKey', {
+    return makeApiCall<UpdateTacticusApiKeyResponse>('PUT', 'users/tacticusApiKey', {
         apiKey,
         guildApiKey,
         tacticusUserId,

@@ -1,4 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import {
     TacticusDamageType,
     TacticusEncounterType,
@@ -256,7 +257,7 @@ export function buildGuildView(
         const equivalentHits = ratioSum;
         rows.push({
             userId,
-            displayName: names.get(userId) ?? userId,
+            displayName: names.get(userId) ?? obfuscateUserId(userId),
             avg: avgStats.avg,
             max: maxStats.max,
             total: avgStats.sum,
@@ -345,7 +346,7 @@ export function getHistoricalPerformancePlayers(
                 // Anonymized rows (no id) can't be attributed to an individual, so they're skipped.
                 if (player.playerId === undefined) continue;
                 if (player.nonKillHits.length > 0 && !seen.has(player.playerId)) {
-                    seen.set(player.playerId, names.get(player.playerId) ?? player.playerId);
+                    seen.set(player.playerId, names.get(player.playerId) ?? obfuscateUserId(player.playerId));
                 }
             }
         }
@@ -405,7 +406,7 @@ export function buildGuildPerformanceIndexRows(summary: GuildSeasonSummary, name
         const performanceIndex = ratios.length > 0 ? ratioSum / ratios.length : 0;
         rows.push({
             userId,
-            displayName: names.get(userId) ?? userId,
+            displayName: names.get(userId) ?? obfuscateUserId(userId),
             performanceIndex,
             performanceDiffPct: ratios.length > 0 ? (performanceIndex - 1) * 100 : 0,
             equivalentHits: ratioSum,
@@ -512,7 +513,7 @@ export function buildPlayerBreakdowns(
         }
         breakdowns.push({
             userId,
-            displayName: names.get(userId) ?? userId,
+            displayName: names.get(userId) ?? obfuscateUserId(userId),
             units,
         });
     }

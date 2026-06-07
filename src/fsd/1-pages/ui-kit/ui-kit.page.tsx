@@ -2400,13 +2400,7 @@ export const UiKitPage = () => {
                             suffix={<Search className="size-4 text-(--soft-fg)" />}
                             className="w-56"
                         />
-                        <TextField
-                            label="Password"
-                            type="password"
-                            isRevealable
-                            placeholder="••••••••"
-                            className="w-56"
-                        />
+                        <TextField label="Password" isRevealable placeholder="••••••••" className="w-56" />
                     </div>
                 </Group>
             </Section>

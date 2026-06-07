@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { isLikelyUserId, obfuscateUserId } from '@/fsd/5-shared/lib';
+
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
@@ -48,7 +50,7 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
                     <ul className="flex flex-wrap gap-2">
                         {notShared.map(id => (
                             <li key={id} className="rounded bg-gray-100 px-2 py-0.5 font-mono text-xs dark:bg-gray-800">
-                                {id}
+                                {isLikelyUserId(id) ? obfuscateUserId(id) : id}
                             </li>
                         ))}
                     </ul>

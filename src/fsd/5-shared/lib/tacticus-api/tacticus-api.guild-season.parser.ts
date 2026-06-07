@@ -313,7 +313,6 @@ function optional(value: unknown): unknown {
 
 function asObject(value: unknown, path: string): Record<string, unknown> {
     if (typeof value !== 'object' || value === null || Array.isArray(value)) {
-        console.error('expected object, got', value, 'at path', path);
         throw new GuildSeasonParseError(`expected object, got ${describe(value)}`, path);
     }
     return value as Record<string, unknown>;

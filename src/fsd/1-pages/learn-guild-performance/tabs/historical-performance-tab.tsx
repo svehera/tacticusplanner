@@ -4,6 +4,7 @@ import { ResponsiveLine } from '@nivo/line';
 import { type PartialTheme } from '@nivo/theming';
 import { useMemo, useState } from 'react';
 
+import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import { type GuildSeasonHistoryResponse } from '@/fsd/5-shared/lib/tacticus-api';
 
 import { buildAllPlayersPerformanceLines } from './performance-tab.utils';
@@ -134,7 +135,7 @@ export const HistoricalPerformanceTab = ({
                     tooltip={({ point }) => (
                         <div className="rounded border border-gray-300 bg-white px-2 py-1 text-xs shadow dark:border-gray-600 dark:bg-gray-900">
                             <span className="font-semibold">
-                                {nameById.get(String(point.seriesId)) ?? String(point.seriesId)}
+                                {nameById.get(String(point.seriesId)) ?? obfuscateUserId(String(point.seriesId))}
                             </span>
                             {' — '}Season {String(point.data.x)}: {Number(point.data.y).toFixed(2)}
                         </div>

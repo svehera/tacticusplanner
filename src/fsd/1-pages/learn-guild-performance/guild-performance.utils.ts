@@ -7,6 +7,7 @@ import {
     type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
 } from '@/fsd/5-shared/lib/tacticus-api';
+import { obfuscateUserId } from '@/fsd/5-shared/lib/user-id-utils';
 import { Rarity } from '@/fsd/5-shared/model';
 
 // ---------------------------------------------------------------------------
@@ -258,15 +259,6 @@ export const bossPrefixRoundIconMap: Record<string, string> = (() => {
 /** Extracts the `GuildBoss{N}` prefix from any raid entry unitId. */
 export function getBossPrefix(unitId: string): string {
     return /^(GuildBoss\d+)/.exec(unitId)?.[1] ?? unitId;
-}
-
-export function isLikelyUserId(displayName: string): boolean {
-    return displayName.match(/^[0-9a-z]{8}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{4}-[0-9a-z]{12}$/) !== null;
-}
-
-/** Obfuscates a user ID by replacing the middle characters with asterisks. */
-export function obfuscateUserId(userId: string): string {
-    return userId.slice(0, 4) + userId.slice(4, -4).replaceAll(/[a-z0-9A-Z]/g, '*') + userId.slice(-4);
 }
 
 /**
