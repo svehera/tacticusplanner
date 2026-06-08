@@ -24,6 +24,7 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
         );
     }
 
+    const errors = members.filter(id => memberStates.get(id)?.status === 'error');
     const notShared = members.filter(id => memberStates.get(id)?.status === 'not-shared');
     const nameOnly = members.filter(id => memberStates.get(id)?.status === 'name-only');
     const successes = members.filter(id => memberStates.get(id)?.status === 'success');
@@ -41,6 +42,23 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
             )}
 
             {members.length === 0 && <p className="text-sm text-gray-500 dark:text-gray-400">No members found.</p>}
+
+            {errors.length > 0 && (
+                <section className="flex flex-col gap-2">
+                    <h2 className="text-sm font-semibold text-red-600 dark:text-red-400">
+                        API key errors ({errors.length})
+                    </h2>
+                    <ul className="flex flex-wrap gap-2">
+                        {errors.map(id => (
+                            <li
+                                key={id}
+                                className="rounded bg-red-100 px-2 py-0.5 font-mono text-xs text-red-700 dark:bg-red-900/50 dark:text-red-300">
+                                {isLikelyUserId(id) ? obfuscateUserId(id) : id}
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
 
             {notShared.length > 0 && (
                 <section className="flex flex-col gap-2">

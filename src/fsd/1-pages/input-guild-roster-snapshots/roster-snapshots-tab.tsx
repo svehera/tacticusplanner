@@ -1,14 +1,19 @@
 /* eslint-disable import-x/no-internal-modules */
 /* eslint-disable boundaries/element-types */
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useMemo, useState } from 'react';
+import { useContext, useMemo, useState } from 'react';
 
+import { StoreContext } from '@/reducers/store.provider';
+
+import { isLikelyUserId, obfuscateUserId } from '@/fsd/5-shared/lib';
 import { DebugJson } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
+
+import { getUnitIdsFromTeamNames } from '@/fsd/1-pages/plan-teams2/team-filter.utils';
 
 import { IRosterSnapshot, ISnapshotUnitDiff } from '../input-roster-snapshots/models';
 import { RosterSnapshotsService } from '../input-roster-snapshots/roster-snapshots-service';
@@ -21,6 +26,7 @@ import {
     getGuildRosterHistoryApi,
     postGuildRosterSnapshotApi,
 } from './guild-roster-snapshots.models';
+import { RaidTeamFilterDropdown } from './raid-team-filter-dropdown';
 import {
     DiffEntry,
     applyCapTrimming,
@@ -54,6 +60,9 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const [leftSnapshotIndex, setLeftSnapshotIndex] = useState<number | undefined>();
     const [rightSnapshotSelection, setRightSnapshotSelection] = useState<number | 'current' | undefined>();
     const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
+    const [selectedRaidTeamNames, setSelectedRaidTeamNames] = useState<string[]>([]);
+
+    const { teams2 } = useContext(StoreContext);
 
     // Save dialog
     const [saveDialogOpen, setSaveDialogOpen] = useState(false);
@@ -215,6 +224,25 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         snapshots,
     ]);
 
+    const raidTeams = useMemo(() => teams2.filter(t => t.raid), [teams2]);
+
+    const raidTeamFilterOptions = useMemo(
+        () => raidTeams.map(t => ({ name: t.name, isSelected: selectedRaidTeamNames.includes(t.name) })),
+        [raidTeams, selectedRaidTeamNames]
+    );
+
+    const toggleRaidTeam = (teamName: string) => {
+        setSelectedRaidTeamNames(current => {
+            const next = new Set(current);
+            if (next.has(teamName)) {
+                next.delete(teamName);
+            } else {
+                next.add(teamName);
+            }
+            return [...next];
+        });
+    };
+
     const diffEntries = useMemo((): DiffEntry[] => {
         if (selectedUserId === undefined || leftSnapshotIndex === undefined || rightSnapshotSelection === undefined) {
             return [];
@@ -287,7 +315,14 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         return results;
     }, [selectedUserId, leftSnapshotIndex, rightSnapshotSelection, memberHistoryMap, memberStates]);
 
+    const filteredDiffEntries = useMemo((): DiffEntry[] => {
+        const unitIds = getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames);
+        if (unitIds.size === 0) return diffEntries;
+        return diffEntries.filter(({ char, mow }) => (char && unitIds.has(char.id)) || (mow && unitIds.has(mow.id)));
+    }, [diffEntries, raidTeams, selectedRaidTeamNames]);
+
     const isNoHistoryMode = hasLoadedHistoryOnce && snapshots.length === 0;
+    const apiKeyErrorIds = members?.filter(id => memberStates.get(id)?.status === 'error') ?? [];
 
     // Current-roster fallback (no-history mode)
     const selectedMemberState = selectedUserId === undefined ? undefined : memberStates.get(selectedUserId);
@@ -321,6 +356,23 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             {historyError && <p className="text-sm text-red-600 dark:text-red-400">{historyError}</p>}
 
             <DebugJson label="guild/roster/history" value={history ?? 'not loaded'} />
+
+            {apiKeyErrorIds.length > 0 && (
+                <section className="flex flex-col gap-2">
+                    <h2 className="text-sm font-semibold text-red-600 dark:text-red-400">
+                        API key errors ({apiKeyErrorIds.length})
+                    </h2>
+                    <ul className="flex flex-wrap gap-2">
+                        {apiKeyErrorIds.map(id => (
+                            <li
+                                key={id}
+                                className="rounded bg-red-100 px-2 py-0.5 font-mono text-xs text-red-700 dark:bg-red-900/50 dark:text-red-300">
+                                {isLikelyUserId(id) ? obfuscateUserId(id) : id}
+                            </li>
+                        ))}
+                    </ul>
+                </section>
+            )}
 
             {!hasLoadedHistoryOnce && (
                 <p className="text-sm text-gray-500 dark:text-gray-400">
@@ -387,6 +439,10 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                         </>
                     )}
 
+                    {raidTeams.length > 0 && (
+                        <RaidTeamFilterDropdown teams={raidTeamFilterOptions} onToggleTeam={toggleRaidTeam} />
+                    )}
+
                     {membersInComparison.length > 0 && (
                         <div className="flex items-center gap-2">
                             <label htmlFor="history-member-select" className={labelClass}>
@@ -413,10 +469,12 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             {isNoHistoryMode && <p className="text-sm text-gray-500 dark:text-gray-400">No roster history found.</p>}
 
             {/* Diff view */}
-            {diffEntries.length > 0 &&
+            {filteredDiffEntries.length > 0 &&
                 (() => {
-                    const changed = diffEntries.filter(event => event.hasChanged).toSorted((a, b) => b.power - a.power);
-                    const unchanged = diffEntries
+                    const changed = filteredDiffEntries
+                        .filter(event => event.hasChanged)
+                        .toSorted((a, b) => b.power - a.power);
+                    const unchanged = filteredDiffEntries
                         .filter(event => !event.hasChanged)
                         .toSorted((a, b) => b.power - a.power);
                     return (
