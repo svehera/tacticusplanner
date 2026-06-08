@@ -6,6 +6,7 @@ import { GoToRaidsButton } from 'src/routes/goals/raids-button';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { buttonStyles } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -107,16 +108,17 @@ export const GoalCard: React.FC<Props> = ({
     const stripeClass = isReached
         ? 'border-l-[3px] border-l-(--success)'
         : isBlocked
-          ? 'border-l-[3px] border-l-amber-500'
+          ? 'border-l-[3px] border-l-(--warning)'
           : '';
 
-    const cardBackgroundStyle =
-        isReached || bgColor === 'rgba(0, 0, 0, 0)'
-            ? { backgroundColor: 'var(--card)' }
-            : {
-                  backgroundColor: 'var(--card)',
-                  backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
-              };
+    const cardBackgroundStyle = isReached
+        ? { backgroundColor: 'color-mix(in srgb, var(--success) 20%, var(--card))' }
+        : bgColor === 'transparent'
+          ? { backgroundColor: 'var(--card)' }
+          : {
+                backgroundColor: 'var(--card)',
+                backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
+            };
 
     const material =
         goal.type === PersonalGoalType.UpgradeMaterial
@@ -165,8 +167,9 @@ export const GoalCard: React.FC<Props> = ({
                         <div className="flex items-center justify-between gap-2">
                             {/* Status pill — one slot, four states */}
                             {isReached ? (
-                                <span className="inline-flex items-center gap-1.5 rounded-full bg-(--success)/15 px-3 py-1.5 text-sm font-medium text-(--success)">
-                                    <BadgeCheck className="size-3.5" />
+                                <span
+                                    className={`${buttonStyles({ appearance: 'plain', intent: 'success', size: 'medium', shape: 'circle' })} bg-(--success)/15`}>
+                                    <BadgeCheck className="size-4" />
                                     Reached
                                 </span>
                             ) : isBlocked ? (
@@ -174,13 +177,14 @@ export const GoalCard: React.FC<Props> = ({
                                     <button
                                         type="button"
                                         onClick={onToggleInclude}
-                                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border-0 bg-amber-500/15 px-3 py-1.5 text-sm font-medium text-amber-500 transition-colors hover:bg-amber-500/25">
-                                        <Lock className="size-3.5" />
+                                        className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15 hover:after:opacity-[0.15]`}>
+                                        <Lock className="size-4" />
                                         Locked
                                     </button>
                                 ) : (
-                                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1.5 text-sm font-medium text-amber-500">
-                                        <Lock className="size-3.5" />
+                                    <span
+                                        className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15`}>
+                                        <Lock className="size-4" />
                                         Locked
                                     </span>
                                 )
@@ -188,13 +192,8 @@ export const GoalCard: React.FC<Props> = ({
                                 <button
                                     type="button"
                                     onClick={onToggleInclude}
-                                    className={[
-                                        'inline-flex cursor-pointer items-center gap-1.5 rounded-full border-0 px-3 py-1.5 text-sm font-medium transition-colors',
-                                        goal.include
-                                            ? 'bg-(--primary)/15 text-(--primary) hover:bg-(--primary)/25'
-                                            : 'bg-(--soft-fg)/10 text-(--soft-fg) hover:bg-(--soft-fg)/20',
-                                    ].join(' ')}>
-                                    {goal.include ? <Play className="size-3.5" /> : <Pause className="size-3.5" />}
+                                    className={`${buttonStyles({ appearance: 'plain', intent: goal.include ? 'primary' : 'secondary', size: 'medium', shape: 'circle' })} ${goal.include ? 'bg-(--primary)/15' : 'bg-(--soft-fg)/10'} hover:after:opacity-[0.15]`}>
+                                    {goal.include ? <Play className="size-4" /> : <Pause className="size-4" />}
                                     {goal.include ? 'In Progress' : 'Paused'}
                                 </button>
                             ) : undefined}

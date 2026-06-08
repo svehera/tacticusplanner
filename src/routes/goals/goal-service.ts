@@ -1,9 +1,14 @@
-import { LegendaryEventService } from '@/fsd/4-entities/lre/legendary-event-service';
-
 import { IGoalEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { GoalColorMode } from './goal-color-coding-toggle';
 import { IGoalColor } from './models';
+
+const kGoalColorVariables = [
+    'var(--goal-on-track)',
+    'var(--goal-caution)',
+    'var(--goal-urgent)',
+    'transparent',
+] as const;
 
 export class GoalService {
     /**
@@ -26,81 +31,43 @@ export class GoalService {
     }
 
     public static getBackgroundColor(goalsColorCoding: GoalColorMode, goalEstimate: IGoalEstimate | undefined): string {
-        if (goalEstimate?.completed) {
-            return GoalService.getColorString({ r: 0, g: 0, b: 0, a: 0 });
+        if (goalEstimate?.completed || goalsColorCoding === 'None') {
+            return 'transparent';
         }
-        if (goalsColorCoding === 'None') {
-            return GoalService.getColorString({
-                r: 0,
-                g: 0,
-                b: 0,
-                a: 0,
-            });
+        if (goalEstimate === undefined || !goalEstimate.daysLeft) {
+            return 'transparent';
         }
-        const kBgColors: IGoalColor[] = [
-            { r: 0, g: 255, b: 0, a: 0.25 },
-            { r: 255, g: 255, b: 0, a: 0.25 },
-            { r: 255, g: 0, b: 0, a: 0.25 },
-            { r: 0, g: 0, b: 0, a: 0.08 },
-            { r: 0, g: 0, b: 0, a: 0.08 },
-        ];
-        if (goalEstimate !== undefined) {
-            if (!goalEstimate.daysLeft) {
-                const colorObject = kBgColors.at(-1);
-                if (!colorObject) throw new Error('missing colors');
-                return GoalService.getColorString(colorObject);
-            }
 
-            if (goalsColorCoding === 'Battle Pass Season') {
-                const nextDate = new Date();
-                nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
-                const kStartDates = LegendaryEventService.getLegendaryEventStartDates();
-                for (let index: number = 0; index < kStartDates.length && index < kBgColors.length - 1; ++index) {
-                    if (nextDate < kStartDates[index]) {
-                        return GoalService.getColorString(kBgColors[index]);
-                    }
-                    if (
-                        nextDate <
-                        new Date(kStartDates[index].getTime() + LegendaryEventService.getLegendaryEventDurationMillis())
-                    ) {
-                        return GoalService.getColorString(
-                            GoalService.interpolateColor(
-                                kBgColors[index],
-                                kBgColors[index + 1],
-                                (nextDate.getTime() - kStartDates[index].getTime()) /
-                                    LegendaryEventService.getLegendaryEventDurationMillis()
-                            )
-                        );
-                    }
-                }
-            } else if (goalsColorCoding === 'Guild Raid Season') {
-                const daysPerRaidSeason = 14;
-                const raidSeasonStart = 1_764_738_000_000; // Arbitrary start of a past season (in milliseconds)
+        const nextDate = new Date();
+        nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1);
+        const nextDateMs = nextDate.getTime();
+        const currentMs = Date.now();
+        const msPerDay = 1000 * 60 * 60 * 24;
 
-                const nextDate = new Date();
-                nextDate.setDate(nextDate.getDate() + goalEstimate.daysLeft - 1); // Subtracting 1 day from daysLeft is common for 'time remaining'
-
-                const msPerDay = 1000 * 60 * 60 * 24;
-                const msPerRaidSeason = daysPerRaidSeason * msPerDay;
-
-                const nextDateMs = nextDate.getTime();
-                const msDifference = nextDateMs - raidSeasonStart;
-
-                const nextDateSeasonIndex = Math.max(0, Math.floor(msDifference / msPerRaidSeason));
-
-                const currentMs = Date.now();
-                const msDifferenceCurrent = currentMs - raidSeasonStart;
-                const currentSeasonIndex = Math.floor(msDifferenceCurrent / msPerRaidSeason);
-
-                const colorIndex = Math.max(0, Math.min(3, nextDateSeasonIndex - currentSeasonIndex));
-
-                return GoalService.getColorString(
-                    GoalService.interpolateColor(kBgColors[colorIndex], kBgColors[colorIndex + 1], /*factor=*/ 0)
-                );
-            }
+        if (goalsColorCoding === 'Battle Pass Season') {
+            const msPerBpSeason = 35 * msPerDay;
+            const bpSeasonStart = 1_779_580_800_000; // Sun 24 May 2026 — start of Battle Pass S38
+            const nextDateSeasonIndex = Math.max(0, Math.floor((nextDateMs - bpSeasonStart) / msPerBpSeason));
+            const currentSeasonIndex = Math.floor((currentMs - bpSeasonStart) / msPerBpSeason);
+            const colorIndex = Math.max(
+                0,
+                Math.min(kGoalColorVariables.length - 1, nextDateSeasonIndex - currentSeasonIndex)
+            );
+            return kGoalColorVariables[colorIndex];
         }
-        const colorObject = kBgColors.at(-1);
-        if (!colorObject) throw new Error('missing colors');
-        return GoalService.getColorString(colorObject);
+
+        if (goalsColorCoding === 'Guild Raid Season') {
+            const msPerRaidSeason = 14 * msPerDay;
+            const raidSeasonStart = 1_764_738_000_000; // Arbitrary start of a past season (in milliseconds)
+            const nextDateSeasonIndex = Math.max(0, Math.floor((nextDateMs - raidSeasonStart) / msPerRaidSeason));
+            const currentSeasonIndex = Math.floor((currentMs - raidSeasonStart) / msPerRaidSeason);
+            const colorIndex = Math.max(
+                0,
+                Math.min(kGoalColorVariables.length - 1, nextDateSeasonIndex - currentSeasonIndex)
+            );
+            return kGoalColorVariables[colorIndex];
+        }
+
+        return 'transparent';
     }
 }

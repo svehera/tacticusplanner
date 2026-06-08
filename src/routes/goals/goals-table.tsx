@@ -6,6 +6,7 @@ import {
     GridReadyEvent,
     ICellRendererParams,
     RowClassParams,
+    RowStyle,
     ValueGetterParams,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
@@ -511,8 +512,8 @@ export const GoalsTable: React.FC<Props> = ({
                                     className={[
                                         'flex h-full w-full cursor-pointer items-center justify-center gap-1.5',
                                         'border-0 bg-transparent transition-colors',
-                                        'focus-visible:ring-2 focus-visible:ring-amber-500 focus-visible:outline-none focus-visible:ring-inset',
-                                        'text-amber-500 hover:bg-amber-500/10',
+                                        'focus-visible:ring-2 focus-visible:ring-(--warning) focus-visible:outline-none focus-visible:ring-inset',
+                                        'text-(--warning) hover:bg-(--warning)/10',
                                     ].join(' ')}
                                     aria-label="Locked"
                                     onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
@@ -679,19 +680,22 @@ export const GoalsTable: React.FC<Props> = ({
         ];
     }, []); // empty deps — all values read from refs; column widths are never reset
 
-    const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>) => {
+    const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>): RowStyle | undefined => {
         const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
 
         if (goalEstimate?.completed && !goalEstimate?.blocked) {
-            return { background: 'color-mix(in srgb, var(--success) 12%, transparent)' };
+            return {
+                background: 'color-mix(in srgb, var(--success) 20%, transparent)',
+                borderLeft: '3px solid var(--success)',
+            };
         }
 
-        if (goalEstimate?.blocked) {
-            return { background: 'color-mix(in srgb, rgb(245 158 11) 12%, transparent)' };
-        }
+        const colorBg = GoalService.getBackgroundColor(goalsColorCodingReference.current, goalEstimate);
+        const borderColor = goalEstimate?.blocked ? 'var(--warning)' : 'transparent';
 
         return {
-            background: GoalService.getBackgroundColor(goalsColorCodingReference.current, goalEstimate),
+            background: colorBg,
+            borderLeft: `3px solid ${borderColor}`,
         };
     }, []); // all values read from refs — stable reference, no column resets
 

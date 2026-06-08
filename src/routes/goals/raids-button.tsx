@@ -15,7 +15,7 @@ export const GoToRaidsButton: React.FC<Props> = ({ unitId }) => {
     return (
         <Link
             to={to}
-            className={`${buttonStyles({ appearance: 'outline', intent: 'primary', size: 'small' })} hover:bg-(--primary)/10`}>
+            className={`${buttonStyles({ appearance: 'plain', intent: 'primary', size: 'medium', shape: 'circle' })} hover:after:opacity-[0.15]`}>
             <Link2 className="size-4 shrink-0" />
             Go to Raids
         </Link>

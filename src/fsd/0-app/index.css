@@ -134,6 +134,10 @@
         --warning: var(--color-amber-400);
         --warning-fg: var(--color-amber-950);
 
+        --goal-on-track: color-mix(in srgb, var(--success) 20%, transparent);
+        --goal-caution: color-mix(in srgb, var(--warning) 22%, transparent);
+        --goal-urgent: color-mix(in srgb, var(--danger) 20%, transparent);
+
         --secondary: var(--color-zinc-200);
         --secondary-fg: var(--color-zinc-950);
 
@@ -260,6 +264,10 @@
 
         --warning: var(--color-amber-400);
         --warning-fg: var(--color-amber-950);
+
+        --goal-on-track: color-mix(in srgb, var(--success) 22%, transparent);
+        --goal-caution: color-mix(in srgb, var(--warning) 25%, transparent);
+        --goal-urgent: color-mix(in srgb, var(--color-red-400) 25%, transparent);
 
         --secondary: var(--color-zinc-700);
         --secondary-fg: var(--color-zinc-100);
