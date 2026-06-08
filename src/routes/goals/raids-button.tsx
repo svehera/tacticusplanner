@@ -7,11 +7,12 @@ import { buttonStyles } from '@/fsd/5-shared/ui';
 
 interface Props {
     unitId: string;
+    blocked?: boolean;
 }
 
-export const GoToRaidsButton: React.FC<Props> = ({ unitId }) => {
+export const GoToRaidsButton: React.FC<Props> = ({ unitId, blocked }) => {
     const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-    const to = `${linkBase}?charSnowprintId=${encodeURIComponent(unitId)}`;
+    const to = blocked ? `${linkBase}?openBlocked=true` : `${linkBase}?charSnowprintId=${encodeURIComponent(unitId)}`;
     return (
         <Link
             to={to}

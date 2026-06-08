@@ -6,7 +6,7 @@ import { GoToRaidsButton } from 'src/routes/goals/raids-button';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { buttonStyles } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, buttonStyles } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -173,21 +173,23 @@ export const GoalCard: React.FC<Props> = ({
                                     Reached
                                 </span>
                             ) : isBlocked ? (
-                                onToggleInclude ? (
-                                    <button
-                                        type="button"
-                                        onClick={onToggleInclude}
-                                        className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15 hover:after:opacity-[0.15]`}>
-                                        <Lock className="size-4" />
-                                        Locked
-                                    </button>
-                                ) : (
-                                    <span
-                                        className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15`}>
-                                        <Lock className="size-4" />
-                                        Locked
-                                    </span>
-                                )
+                                <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
+                                    {onToggleInclude ? (
+                                        <button
+                                            type="button"
+                                            onClick={onToggleInclude}
+                                            className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15 hover:after:opacity-[0.15]`}>
+                                            <Lock className="size-4" />
+                                            Locked
+                                        </button>
+                                    ) : (
+                                        <span
+                                            className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15`}>
+                                            <Lock className="size-4" />
+                                            Locked
+                                        </span>
+                                    )}
+                                </AccessibleTooltip>
                             ) : onToggleInclude ? (
                                 <button
                                     type="button"
@@ -197,22 +199,17 @@ export const GoalCard: React.FC<Props> = ({
                                     {goal.include ? 'In Progress' : 'Paused'}
                                 </button>
                             ) : undefined}
-                            {/* Raids shortcut — disabled (muted) when blocked, hidden when reached */}
-                            {!isReached &&
-                                showRaidsButton(goal) &&
-                                (isBlocked ? (
-                                    <span className="cursor-not-allowed text-sm text-(--soft-fg)/50">
-                                        Open in raids →
-                                    </span>
-                                ) : (
-                                    <GoToRaidsButton
-                                        unitId={
-                                            goal.type === PersonalGoalType.UpgradeMaterial
-                                                ? goal.upgradeMaterialId
-                                                : goal.unitId
-                                        }
-                                    />
-                                ))}
+                            {/* Raids shortcut — links to blocked upgrades when blocked, hidden when reached */}
+                            {!isReached && showRaidsButton(goal) && (
+                                <GoToRaidsButton
+                                    unitId={
+                                        goal.type === PersonalGoalType.UpgradeMaterial
+                                            ? goal.upgradeMaterialId
+                                            : goal.unitId
+                                    }
+                                    blocked={isBlocked}
+                                />
+                            )}
                         </div>
                     </>
                 )}

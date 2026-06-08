@@ -74,9 +74,11 @@ export const DailyRaids = () => {
     const [charSnowprintId, setCharSnowprintId] = useState<string | undefined>(
         searchParams.get('charSnowprintId') ?? undefined
     );
+    const [openBlocked, setOpenBlocked] = useState(searchParams.get('openBlocked') === 'true');
 
     useEffect(() => {
         setCharSnowprintId(searchParams.get('charSnowprintId') ?? undefined);
+        setOpenBlocked(searchParams.get('openBlocked') === 'true');
     }, [location]);
 
     const handleGoalsSelectionChange = (selection: TypedGoalSelect[]) => {
@@ -209,6 +211,7 @@ export const DailyRaids = () => {
                     updateInventory={saveInventoryUpdateChanges}
                     updateInventoryAny={() => setHasChanges(true)}
                     scrollToCharSnowprintId={charSnowprintId ?? undefined}
+                    openBlocked={openBlocked}
                 />
             </Suspense>
 
