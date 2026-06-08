@@ -639,7 +639,6 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     combinedGuildTags: combinedGuildTags ?? undefined,
                     guildTag,
                 });
-                console.log('[users/me] setUserInfo combinedGuildTags →', combinedGuildTags ?? undefined);
                 const localModifiedDateTicks = modifiedDateTicksReference.current;
 
                 const hasDataConflict = localModifiedDateTicks !== serverModifiedDateTicks;
