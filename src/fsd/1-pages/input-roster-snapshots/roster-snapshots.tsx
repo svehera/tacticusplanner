@@ -26,6 +26,9 @@ import { RosterSnapshotDiffStyle, RosterSnapshotShowVariableSettings } from '@/f
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
 
+// eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
+import { getUnitIdsFromTeamNames } from '@/fsd/1-pages/plan-teams2/team-filter.utils';
+
 import { ManageSnapshotsDialog } from './manage-snapshots-dialog';
 import { IRosterSnapshot, IRosterSnapshotsState } from './models';
 import { RosterFilterDropdown } from './roster-filter-dropdown';
@@ -795,11 +798,9 @@ export const RosterSnapshots = () => {
     const rosterFilterSummaryLabel = selectedFilterCount === 0 ? 'All Units' : `${selectedFilterCount} selected`;
 
     const selectedUnitIds = useMemo(() => {
-        const selectedTeamUnitIds = teams2
-            .filter(team => selectedTeamNames.includes(team.name))
-            .flatMap(team => [...team.chars, ...(team.mows ?? [])]);
+        const teamUnitIds = getUnitIdsFromTeamNames(teams2, selectedTeamNames);
         const selectedLeUnitIds = selectedLeOptions.flatMap(option => option.unitIds);
-        const allSelectedUnitIds = [...selectedTeamUnitIds, ...selectedLeUnitIds];
+        const allSelectedUnitIds = [...teamUnitIds, ...selectedLeUnitIds];
 
         if (allSelectedUnitIds.length === 0) {
             return new Set<string>();
