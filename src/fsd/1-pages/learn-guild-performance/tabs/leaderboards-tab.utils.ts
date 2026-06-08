@@ -13,7 +13,7 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { bossPrefixDisplayNames, getBossOrder, getBossPrefix, resolvePlayerName } from '../guild-performance.utils';
+import { bossPrefixDisplayNames, getBossPrefix, resolvePlayerName } from '../guild-performance.utils';
 
 export const ALL_RARITIES: Rarity[] = [
     Rarity.Common,
@@ -181,6 +181,7 @@ export function buildLeaderboardGroupsFromSummary(
     interface GroupAccumulator {
         bossPrefix: string;
         rarity: Rarity;
+        set: number;
         bossUnitId: string;
         bossEntries: LeaderboardEntry[];
         primeSlots: PrimeSlot[];
@@ -188,7 +189,7 @@ export function buildLeaderboardGroupsFromSummary(
     const groups = new Map<string, GroupAccumulator>();
 
     for (const board of summary.leaderboards) {
-        const { enemyId, rarity: rarityName, encounterIndex } = board.enemyInfo;
+        const { enemyId, rarity: rarityName, encounterIndex, set } = board.enemyInfo;
         const rarity = RarityMapper.stringToNumber[rarityName];
         if (!selectedRarities.includes(rarity)) continue;
         const bossPrefix = getBossPrefix(enemyId);
@@ -197,12 +198,13 @@ export function buildLeaderboardGroupsFromSummary(
         const key = `${bossPrefix}:${rarity}`;
         let group = groups.get(key);
         if (group === undefined) {
-            group = { bossPrefix, rarity, bossUnitId: '', bossEntries: [], primeSlots: [] };
+            group = { bossPrefix, rarity, set, bossUnitId: '', bossEntries: [], primeSlots: [] };
             groups.set(key, group);
         }
         const entries = toLeaderboardEntries(board.entries, names);
         if (encounterIndex === 0) {
             group.bossUnitId = enemyId;
+            group.set = set;
             group.bossEntries = entries.slice(0, bossTopN);
         } else {
             group.primeSlots.push({ unitId: enemyId, encounterIndex, entries: entries.slice(0, primeTopN) });
@@ -214,7 +216,7 @@ export function buildLeaderboardGroupsFromSummary(
             bossPrefix: group.bossPrefix,
             bossUnitId: group.bossUnitId,
             rarity: group.rarity,
-            set: getBossOrder(group.bossUnitId),
+            set: group.set,
             bossEntries: group.bossEntries,
             primeSlots: group.primeSlots
                 .toSorted((a, b) => a.encounterIndex - b.encounterIndex)

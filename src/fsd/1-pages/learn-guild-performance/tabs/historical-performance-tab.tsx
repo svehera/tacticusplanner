@@ -1,13 +1,13 @@
-/* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 import { useTheme } from '@mui/material';
 import { ResponsiveLine } from '@nivo/line';
 import { type PartialTheme } from '@nivo/theming';
 import { useMemo, useState } from 'react';
 
 import { obfuscateUserId } from '@/fsd/5-shared/lib';
-import { type GuildSeasonHistoryResponse } from '@/fsd/5-shared/lib/tacticus-api';
 
-import { buildAllPlayersPerformanceLines } from './performance-tab.utils';
+import { type GuildPerformanceIndexApiResponse } from '../guild-performance.api';
+
+import { buildLinesFromPerformanceIndex } from './performance-tab.utils';
 
 /** Nivo theme tuned for legibility in both light and dark CSS modes. */
 function chartThemeFor(isDark: boolean): PartialTheme {
@@ -33,25 +33,26 @@ const ACTIVE_LINE_COLOR = '#3b82f6'; // blue-500
 // ---------------------------------------------------------------------------
 
 export const HistoricalPerformanceTab = ({
-    seasonHistory,
+    performanceIndex,
     names,
     selectedPlayerId,
+    ownUserId,
 }: {
-    seasonHistory?: GuildSeasonHistoryResponse;
+    performanceIndex?: GuildPerformanceIndexApiResponse;
     names: Map<string, string>;
     /** Page-level player selection — highlights this player's line (others stay faded). */
     selectedPlayerId: string | undefined;
+    /** The caller's own userId — used to resolve null-playerId rows for keyless members. */
+    ownUserId?: string;
 }) => {
     const isDark = useTheme().palette.mode === 'dark';
     const chartTheme = useMemo(() => chartThemeFor(isDark), [isDark]);
     const fadedLineColor = isDark ? 'rgba(148, 163, 184, 0.18)' : 'rgba(100, 116, 139, 0.2)'; // slate
 
-    const seasonData = useMemo(
-        () => seasonHistory?.seasonData.flatMap(entry => (entry.summary ? [entry.summary] : [])) ?? [],
-        [seasonHistory]
+    const lines = useMemo(
+        () => buildLinesFromPerformanceIndex(performanceIndex?.entries ?? [], names, ownUserId),
+        [performanceIndex, names, ownUserId]
     );
-
-    const lines = useMemo(() => buildAllPlayersPerformanceLines(seasonData, names), [seasonData, names]);
     const nameById = useMemo(() => new Map(lines.map(line => [line.userId, line.displayName])), [lines]);
 
     const chartData = useMemo(
@@ -67,12 +68,14 @@ export const HistoricalPerformanceTab = ({
     const [hoveredId, setHoveredId] = useState<string | undefined>();
     const activeId = hoveredId ?? selectedPlayerId;
 
-    // X axis spans the full recorded history.
-    const allSeasons = useMemo(() => seasonData.map(summary => summary.season), [seasonData]);
+    const allSeasons = useMemo(
+        () => [...new Set(lines.flatMap(l => l.points.map(p => p.season)))].toSorted((a, b) => a - b),
+        [lines]
+    );
     const firstSeason = allSeasons[0];
     const lastSeason = allSeasons.at(-1);
 
-    if (seasonData.length === 0) {
+    if (!performanceIndex || (performanceIndex.entries?.length ?? 0) === 0) {
         return <p className="text-sm text-gray-500">No season history available yet.</p>;
     }
     if (lines.length === 0) {

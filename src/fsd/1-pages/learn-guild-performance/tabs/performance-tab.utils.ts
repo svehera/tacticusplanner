@@ -8,6 +8,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
+import { type GuildSeasonPerformanceIndex } from '../guild-performance.api';
 import { getBossOrder, getBossPrefix } from '../guild-performance.utils';
 
 export interface FilterOptions {
@@ -779,4 +780,39 @@ export function buildPlayerViewFromSummary(
         if (a.set !== b.set) return b.set - a.set;
         return b.encounterIndex - a.encounterIndex;
     });
+}
+
+/**
+ * Converts the `/guild/raid/performance-index` response (season-major) into one line per player
+ * (player-major) for the historical performance chart. Null playerId entries (keyless member's own
+ * row) are keyed by `ownUserId` when provided.
+ */
+export function buildLinesFromPerformanceIndex(
+    entries: GuildSeasonPerformanceIndex[],
+    names: Map<string, string>,
+    ownUserId?: string
+): PlayerPerformanceLine[] {
+    const byPlayer = new Map<string, PerformanceIndexSeasonPoint[]>();
+    for (const { season, playerEntries } of entries) {
+        if (season === undefined || !playerEntries) continue;
+        for (const { playerId, performanceIndex } of playerEntries) {
+            if (performanceIndex === undefined) continue;
+            const userId = playerId ?? ownUserId;
+            if (!userId) continue;
+            let points = byPlayer.get(userId);
+            if (!points) {
+                points = [];
+                byPlayer.set(userId, points);
+            }
+            points.push({ season, performanceIndex });
+        }
+    }
+    return [...byPlayer.entries()]
+        .map(([userId, points]) => ({
+            userId,
+            displayName: names.get(userId) ?? obfuscateUserId(userId),
+            points: points.toSorted((a, b) => a.season - b.season),
+        }))
+        .filter(line => line.points.length > 0)
+        .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
 }

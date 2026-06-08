@@ -23,10 +23,13 @@ export const SeasonSelect = ({
     seasons,
     value,
     onChange,
+    seasonStatusLabel,
 }: {
     seasons: number[];
     value: number | undefined;
     onChange: (season: number) => void;
+    /** Optional label appended to an option, e.g. "not aggregated" or "error". */
+    seasonStatusLabel?: (season: number) => string | undefined;
 }) => (
     <label className="flex flex-col gap-0.5 text-xs">
         <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
@@ -36,11 +39,14 @@ export const SeasonSelect = ({
                 onChange(Number(event.target.value));
             }}
             className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-            {seasons.map(season => (
-                <option key={season} value={season}>
-                    Season {season}
-                </option>
-            ))}
+            {seasons.map(season => {
+                const statusLabel = seasonStatusLabel?.(season);
+                return (
+                    <option key={season} value={season}>
+                        {statusLabel ? `Season ${season} (${statusLabel})` : `Season ${season}`}
+                    </option>
+                );
+            })}
         </select>
     </label>
 );

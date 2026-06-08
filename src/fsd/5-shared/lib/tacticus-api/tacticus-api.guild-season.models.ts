@@ -25,6 +25,10 @@ export enum SeasonFetchStatus {
     NotFound = 1,
     Empty = 2,
     TransientError = 3,
+    /** Season is outside the 11-season window and was never persisted. */
+    TooOld = 4,
+    /** Season is within the 11-season window but has not yet been aggregated. */
+    NotAggregated = 5,
 }
 
 /** One element of `GuildSeasonHistoryResponse.seasonData`. Wraps an optional summary with metadata. */
