@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { DebugJson } from '@/fsd/5-shared/ui';
 
@@ -79,6 +79,9 @@ export const GuildPerformance = () => {
 
     // Members have no raw current-season data, so the Overview tab is empty for them — land on Damage.
     const [activeTab, setActiveTab] = useState<TabId>(isMember ? 'damage' : 'overview');
+    useEffect(() => {
+        setActiveTab(isMember ? 'damage' : 'overview');
+    }, [isMember]);
     const [seasonOverride, setSeasonOverride] = useState<number | undefined>();
     const selectedSeason = seasonOverride ?? availableSeasons[0];
     const [selectedUserId, setSelectedUserId] = useState<string | undefined>();

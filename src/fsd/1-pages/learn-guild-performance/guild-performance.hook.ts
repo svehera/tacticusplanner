@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { makeApiCall } from '@/fsd/5-shared/api';
 import {
@@ -46,6 +46,9 @@ export function useGuildPerformance() {
     // For a keyless member, the player-aware tabs are pinned to their own (un-anonymized) rows.
     const memberUserId = isMember && ownUserId ? ownUserId : undefined;
 
+    const authIdentity = `${userInfo?.tacticusGuildApiKey ?? ''}|${userInfo?.tacticusUserId ?? ''}|${userInfo?.guildTag ?? ''}`;
+    const previousIdentityReference = useRef<string | undefined>(undefined);
+
     const [current, setCurrent] = useState<LoadingOrData<TacticusGuildRaidResponse>>(cachedCurrent ?? LOADING);
     const [seasonHistory, setSeasonHistory] = useState<GuildSeasonHistoryResponse | undefined>(cachedHistory);
     const [sharedLeaderboards, setSharedLeaderboards] = useState<SharedLeaderboardsResponse | undefined>(
@@ -58,6 +61,29 @@ export function useGuildPerformance() {
     const [tokens, setTokens] = useState<GuildTokenEntry[] | typeof LOADING>(cachedTokens ?? LOADING);
     const [tokenError, setTokenError] = useState<string | undefined>();
     const [isRefreshing, setIsRefreshing] = useState(false);
+
+    useEffect(() => {
+        const previous = previousIdentityReference.current;
+        previousIdentityReference.current = authIdentity;
+        if (previous === undefined || previous === authIdentity) return;
+        cachedCurrent = undefined;
+        cachedHistory = undefined;
+        cachedSharedLeaderboards = undefined;
+        cachedGuildInfo = undefined;
+        cachedNames = undefined;
+        cachedRawNames = undefined;
+        cachedTokens = undefined;
+        cachedFetched = false;
+        setCurrent(LOADING);
+        setSeasonHistory(undefined);
+        setSharedLeaderboards(undefined);
+        setGuildInfo(undefined);
+        setHistoryError(undefined);
+        setNames(new Map());
+        setRawNames(undefined);
+        setTokens(LOADING);
+        setTokenError(undefined);
+    }, [authIdentity]);
 
     const currentData = current === LOADING ? undefined : current;
     const tokenData = tokens === LOADING ? undefined : tokens;
@@ -168,6 +194,7 @@ export function useGuildPerformance() {
             if (tokensResponse.data) {
                 cachedTokens = tokensResponse.data;
                 setTokens(tokensResponse.data);
+                setTokenError(undefined);
             } else if (tokensResponse.error) {
                 const error = tokensResponse.error;
                 setTokenError(typeof error === 'string' ? error : ((error as Error).message ?? 'Unknown error'));
