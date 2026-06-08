@@ -642,6 +642,17 @@ export const Goals = () => {
                                 estimate={mergedGoalEstimates} // Pass the merged estimates to the table
                                 menuItemSelect={handleMenuItemSelect}
                                 goalsColorCoding={viewPreferences.goalColorMode}
+                                onToggleInclude={goalId =>
+                                    dispatch.goals({
+                                        type: 'UpdateDailyRaids',
+                                        value: [
+                                            {
+                                                goalId,
+                                                include: !allGoals.find(g => g.goalId === goalId)?.include,
+                                            },
+                                        ],
+                                    })
+                                }
                             />
                         )}
                     </AccordionBody>
@@ -702,6 +713,17 @@ export const Goals = () => {
                                 estimate={mergedGoalEstimates}
                                 menuItemSelect={handleMenuItemSelect}
                                 goalsColorCoding={viewPreferences.goalColorMode}
+                                onToggleInclude={goalId =>
+                                    dispatch.goals({
+                                        type: 'UpdateDailyRaids',
+                                        value: [
+                                            {
+                                                goalId,
+                                                include: !allGoals.find(g => g.goalId === goalId)?.include,
+                                            },
+                                        ],
+                                    })
+                                }
                             />
                         )}
                     </AccordionBody>
@@ -755,6 +777,17 @@ export const Goals = () => {
                                 estimate={mergedGoalEstimates}
                                 menuItemSelect={handleMenuItemSelect}
                                 goalsColorCoding={viewPreferences.goalColorMode}
+                                onToggleInclude={goalId =>
+                                    dispatch.goals({
+                                        type: 'UpdateDailyRaids',
+                                        value: [
+                                            {
+                                                goalId,
+                                                include: !allGoals.find(g => g.goalId === goalId)?.include,
+                                            },
+                                        ],
+                                    })
+                                }
                             />
                         )}
                     </AccordionBody>

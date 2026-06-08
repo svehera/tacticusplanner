@@ -1,10 +1,11 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
-import { Calendar, CheckCircle2, CircleSlash } from 'lucide-react';
+import { BadgeCheck, Lock, Pause, Play } from 'lucide-react';
 import React, { useMemo } from 'react';
+
+import { GoToRaidsButton } from 'src/routes/goals/raids-button';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { Button } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -19,7 +20,6 @@ import { GoalCardActions } from './actions';
 import { GoalCardAscend } from './ascend';
 import { GoalCardCharacterAbilities } from './character-abilities';
 import { GoalCardMowAbilities } from './mow-abilities';
-import { GoalCardRaidsButton } from './raids-button';
 import { GoalCardUnlock } from './unlock';
 import { GoalCardUpgradeMaterial } from './upgrade-material';
 import { GoalCardUpgradeRank } from './upgrade-rank';
@@ -101,12 +101,13 @@ export const GoalCard: React.FC<Props> = ({
     };
 
     const isReached = !!goalEstimate.completed && !goalEstimate.blocked;
-    const hasFooter = !!onToggleInclude || showRaidsButton(goal) || isReached;
+    const isBlocked = !!goalEstimate.blocked;
+    const hasFooter = isReached || isBlocked || !!onToggleInclude || showRaidsButton(goal);
 
     const stripeClass = isReached
         ? 'border-l-[3px] border-l-(--success)'
-        : goalEstimate.blocked
-          ? 'border-l-[3px] border-l-(--danger)'
+        : isBlocked
+          ? 'border-l-[3px] border-l-amber-500'
           : '';
 
     const cardBackgroundStyle =
@@ -126,9 +127,9 @@ export const GoalCard: React.FC<Props> = ({
         <div
             className={`flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors ${stripeClass}`}
             style={cardBackgroundStyle}>
-            {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
-            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--card-border) px-4 pt-3 pb-2">
-                <div className="flex items-center gap-1 self-start">
+            {/* Header: 3-column grid — [#n + icon] | name + date | actions */}
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 border-b border-(--card-border) px-4 py-3">
+                <div className="flex items-center gap-1">
                     <span className="text-[1.35rem] leading-none font-semibold text-(--soft-fg)">#{goal.priority}</span>
                     {goal.type === PersonalGoalType.UpgradeMaterial && (
                         <UpgradeImage
@@ -142,7 +143,7 @@ export const GoalCard: React.FC<Props> = ({
                         <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
                     )}
                 </div>
-                <div className="flex min-w-0 flex-col flex-wrap justify-start">
+                <div className="flex min-w-0 flex-col">
                     <span className="text-[1.05rem] leading-snug font-semibold text-(--fg)">
                         {goal.type === PersonalGoalType.UpgradeMaterial && (
                             <span>{UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.material}</span>
@@ -151,63 +152,68 @@ export const GoalCard: React.FC<Props> = ({
                     </span>
                     {calendarDate && <span className="text-xs text-(--soft-fg)">{calendarDate}</span>}
                 </div>
-                <div className="self-start">
-                    <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />
-                </div>
+                <GoalCardActions menuItemSelect={menuItemSelect} />
             </div>
             <div className="flex flex-1 flex-col px-4 pt-3 pb-3 text-sm">
                 <div className="flex-1">
-                    {isReached ? (
-                        <div className="flex flex-col gap-2">
-                            <span className="inline-flex items-center gap-1.5 text-sm font-medium text-(--success)">
-                                <CheckCircle2 className="size-4" /> Reached
-                            </span>
-                            <div className="flex items-center gap-2 text-sm text-(--soft-fg)">
-                                <Calendar className="size-4" />
-                                Reached {calendarDate ?? ''}
-                            </div>
-                        </div>
-                    ) : (
-                        renderBody()
-                    )}
+                    {renderBody()}
                     {goal.notes && <p className="mt-2 text-sm text-(--soft-fg)">{goal.notes}</p>}
                 </div>
                 {hasFooter && (
                     <>
                         <div className="mt-3 mb-2 border-t border-(--card-border)" />
                         <div className="flex items-center justify-between gap-2">
+                            {/* Status pill — one slot, four states */}
                             {isReached ? (
-                                <Button
-                                    size="small"
-                                    appearance="outline"
-                                    intent="success"
-                                    className="pointer-events-none">
-                                    <CheckCircle2 data-slot="icon" />
+                                <span className="inline-flex items-center gap-1.5 rounded-full bg-(--success)/15 px-3 py-1.5 text-sm font-medium text-(--success)">
+                                    <BadgeCheck className="size-3.5" />
                                     Reached
-                                </Button>
+                                </span>
+                            ) : isBlocked ? (
+                                onToggleInclude ? (
+                                    <button
+                                        type="button"
+                                        onClick={onToggleInclude}
+                                        className="inline-flex cursor-pointer items-center gap-1.5 rounded-full border-0 bg-amber-500/15 px-3 py-1.5 text-sm font-medium text-amber-500 transition-colors hover:bg-amber-500/25">
+                                        <Lock className="size-3.5" />
+                                        Locked
+                                    </button>
+                                ) : (
+                                    <span className="inline-flex items-center gap-1.5 rounded-full bg-amber-500/15 px-3 py-1.5 text-sm font-medium text-amber-500">
+                                        <Lock className="size-3.5" />
+                                        Locked
+                                    </span>
+                                )
                             ) : onToggleInclude ? (
-                                <Button
-                                    size="small"
-                                    appearance="outline"
-                                    intent={goal.include ? 'primary' : 'secondary'}
-                                    onPress={onToggleInclude}>
-                                    {goal.include ? (
-                                        <CheckCircle2 data-slot="icon" />
-                                    ) : (
-                                        <CircleSlash data-slot="icon" />
-                                    )}
+                                <button
+                                    type="button"
+                                    onClick={onToggleInclude}
+                                    className={[
+                                        'inline-flex cursor-pointer items-center gap-1.5 rounded-full border-0 px-3 py-1.5 text-sm font-medium transition-colors',
+                                        goal.include
+                                            ? 'bg-(--primary)/15 text-(--primary) hover:bg-(--primary)/25'
+                                            : 'bg-(--soft-fg)/10 text-(--soft-fg) hover:bg-(--soft-fg)/20',
+                                    ].join(' ')}>
+                                    {goal.include ? <Play className="size-3.5" /> : <Pause className="size-3.5" />}
                                     {goal.include ? 'In Progress' : 'Paused'}
-                                </Button>
+                                </button>
                             ) : undefined}
-                            {!isReached && showRaidsButton(goal) && (
-                                <GoalCardRaidsButton
-                                    unitId={
-                                        goal.type === PersonalGoalType.UpgradeMaterial
-                                            ? goal.upgradeMaterialId
-                                            : goal.unitId
-                                    }
-                                />
-                            )}
+                            {/* Raids shortcut — disabled (muted) when blocked, hidden when reached */}
+                            {!isReached &&
+                                showRaidsButton(goal) &&
+                                (isBlocked ? (
+                                    <span className="cursor-not-allowed text-sm text-(--soft-fg)/50">
+                                        Open in raids →
+                                    </span>
+                                ) : (
+                                    <GoToRaidsButton
+                                        unitId={
+                                            goal.type === PersonalGoalType.UpgradeMaterial
+                                                ? goal.upgradeMaterialId
+                                                : goal.unitId
+                                        }
+                                    />
+                                ))}
                         </div>
                     </>
                 )}

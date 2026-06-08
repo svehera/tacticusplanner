@@ -279,13 +279,14 @@ export class GoalsService {
                 result.push({
                     goalId: goal.goalId,
                     abilitiesEstimate,
-                    xpEstimateAbilities: xpEstimate!,
+                    xpEstimateAbilities: xpEstimate,
                     daysLeft: 0,
                     energyTotal: 0,
                     oTokensTotal: 0,
                     daysTotal: 0,
                     xpBooksTotal: 0,
                     included: goal.include,
+                    completed: goal.activeStart >= goal.activeEnd && goal.passiveStart >= goal.passiveEnd,
                 });
             }
         }
