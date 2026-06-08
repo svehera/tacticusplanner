@@ -1,13 +1,15 @@
+/* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 import { useTheme } from '@mui/material';
 import { ResponsiveLine } from '@nivo/line';
 import { type PartialTheme } from '@nivo/theming';
 import { useMemo, useState } from 'react';
 
 import { obfuscateUserId } from '@/fsd/5-shared/lib';
+import { type TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 
 import { type GuildPerformanceIndexApiResponse } from '../guild-performance.api';
 
-import { buildLinesFromPerformanceIndex } from './performance-tab.utils';
+import { buildCurrentSeasonPIEntry, buildLinesFromPerformanceIndex } from './performance-tab.utils';
 
 /** Nivo theme tuned for legibility in both light and dark CSS modes. */
 function chartThemeFor(isDark: boolean): PartialTheme {
@@ -33,11 +35,14 @@ const ACTIVE_LINE_COLOR = '#3b82f6'; // blue-500
 // ---------------------------------------------------------------------------
 
 export const HistoricalPerformanceTab = ({
+    currentData,
     performanceIndex,
     names,
     selectedPlayerId,
     ownUserId,
 }: {
+    /** Raw current-season raid data — used to compute the live season's PI on the fly. */
+    currentData: TacticusGuildRaidResponse | undefined;
     performanceIndex?: GuildPerformanceIndexApiResponse;
     names: Map<string, string>;
     /** Page-level player selection — highlights this player's line (others stay faded). */
@@ -49,9 +54,24 @@ export const HistoricalPerformanceTab = ({
     const chartTheme = useMemo(() => chartThemeFor(isDark), [isDark]);
     const fadedLineColor = isDark ? 'rgba(148, 163, 184, 0.18)' : 'rgba(100, 116, 139, 0.2)'; // slate
 
+    // Current season PI computed from raw entries; merged with historical index data.
+    const currentEntry = useMemo(
+        () => (currentData ? buildCurrentSeasonPIEntry(currentData) : undefined),
+        [currentData]
+    );
+
+    // Combine current + historical, deduplicating by season number in case the backend has already
+    // persisted the current season into the performance-index endpoint.
+    const allEntries = useMemo(() => {
+        const historical = performanceIndex?.entries ?? [];
+        if (!currentEntry) return historical;
+        const deduped = historical.filter(entry => entry.season !== currentEntry.season);
+        return [currentEntry, ...deduped];
+    }, [performanceIndex, currentEntry]);
+
     const lines = useMemo(
-        () => buildLinesFromPerformanceIndex(performanceIndex?.entries ?? [], names, ownUserId),
-        [performanceIndex, names, ownUserId]
+        () => buildLinesFromPerformanceIndex(allEntries, names, ownUserId),
+        [allEntries, names, ownUserId]
     );
     const nameById = useMemo(() => new Map(lines.map(line => [line.userId, line.displayName])), [lines]);
 
@@ -75,7 +95,7 @@ export const HistoricalPerformanceTab = ({
     const firstSeason = allSeasons[0];
     const lastSeason = allSeasons.at(-1);
 
-    if (!performanceIndex || (performanceIndex.entries?.length ?? 0) === 0) {
+    if (allEntries.length === 0) {
         return <p className="text-sm text-gray-500">No season history available yet.</p>;
     }
     if (lines.length === 0) {

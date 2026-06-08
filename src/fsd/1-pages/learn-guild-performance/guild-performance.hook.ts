@@ -22,6 +22,10 @@ import {
     getGuildPerformanceIndexApi,
     getGuildRaidSeasonApi,
     getGuildRaidSeasonsApi,
+    getMemberCurrentRaidSeasonApi,
+    getMemberPerformanceIndexApi,
+    getMemberRaidSeasonApi,
+    getMemberSharedLeaderboardsApi,
 } from './guild-performance.api';
 import { LOADING, type GuildMemberName, type GuildTokenEntry, type LoadingOrData } from './guild-performance.types';
 import { buildAvgDamageMap, getAllGuildPlayers } from './guild-performance.utils';
@@ -161,12 +165,17 @@ export function useGuildPerformance() {
         return buildAvgDamageMap(allEntries);
     }, [currentData]);
 
-    const refreshSharedLeaderboards = useCallback(async () => {
-        const response = await makeApiCall<unknown>('GET', 'guild/sharedLeaderboards');
-        const parsedSharedLb = response.data === undefined ? undefined : safeParseSharedLeaderboards(response.data);
-        cachedSharedLeaderboards = parsedSharedLb?.success ? parsedSharedLb.data : undefined;
-        setSharedLeaderboards(cachedSharedLeaderboards);
-    }, []);
+    const refreshSharedLeaderboards = useCallback(
+        async (season?: number) => {
+            const response = isMember
+                ? await getMemberSharedLeaderboardsApi(season)
+                : await makeApiCall<unknown>('GET', 'guild/sharedLeaderboards');
+            const parsedSharedLb = response.data === undefined ? undefined : safeParseSharedLeaderboards(response.data);
+            cachedSharedLeaderboards = parsedSharedLb?.success ? parsedSharedLb.data : undefined;
+            setSharedLeaderboards(cachedSharedLeaderboards);
+        },
+        [isMember]
+    );
 
     /**
      * Fetch (or re-fetch) current-season data plus the season list, names, tokens, and shared
@@ -177,8 +186,82 @@ export function useGuildPerformance() {
         async (forceRefreshAfter?: number) => {
             setIsRefreshing(true);
             try {
-                const [seasonsResponse, namesResponse, tokensResponse, sharedLbResponse, guildResponse, piResponse] =
-                    await Promise.all([
+                if (isMember) {
+                    // --- Member path ---
+                    // Fetch current season, PI (historical list), and leaderboards in parallel.
+                    const [currentSeasonResponse, piResponse, sharedLbResponse] = await Promise.all([
+                        getMemberCurrentRaidSeasonApi(),
+                        getMemberPerformanceIndexApi(),
+                        getMemberSharedLeaderboardsApi(),
+                    ]);
+
+                    if (piResponse.data) {
+                        cachedPerformanceIndex = piResponse.data;
+                        setPerformanceIndex(cachedPerformanceIndex);
+                    }
+
+                    // Store current season data.
+                    const currentEntry = currentSeasonResponse.data
+                        ? mapHistoricalApiResponse(currentSeasonResponse.data as HistoricalSeasonApiResponse)
+                        : undefined;
+                    if (currentEntry) {
+                        cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(currentEntry.season, currentEntry);
+                        setSeasonDataMap(new Map(cachedSeasonDataMap));
+                    }
+
+                    // Build a synthetic season list: current season + historical from PI (deduped).
+                    const currentSeasonNumber = currentEntry?.season;
+                    const piEntries = piResponse.data?.entries ?? [];
+                    const piSeasons = piEntries.flatMap(entry => (entry.season == undefined ? [] : [entry.season]));
+                    const allSeasons =
+                        currentSeasonNumber == undefined
+                            ? piSeasons
+                            : [currentSeasonNumber, ...piSeasons.filter(s => s !== currentSeasonNumber)];
+
+                    if (allSeasons.length > 0) {
+                        const memberSeasonList: GuildRaidSeasonsResponse = {
+                            currentSeason: allSeasons[0],
+                            guildTag: piResponse.data?.guildTag ?? '',
+                            seasons: allSeasons.map(s => ({ season: s, status: SeasonFetchStatus.Found })),
+                        };
+                        cachedSeasonList = memberSeasonList;
+                        setSeasonList(memberSeasonList);
+                        setHistoryError(undefined);
+                    } else if (!cachedSeasonList) {
+                        setHistoryError(
+                            errorText(currentSeasonResponse.error ?? piResponse.error) ?? 'Unable to load season data'
+                        );
+                    }
+
+                    // Names: only self (no guild names API for members)
+                    const nameMap = new Map<string, string>();
+                    if (ownUserId) nameMap.set(ownUserId, 'You');
+                    cachedNames = nameMap;
+                    cachedRawNames = undefined;
+                    setNames(nameMap);
+                    setRawNames(undefined);
+
+                    // Tokens: not available for members
+                    cachedTokens = [];
+                    setTokens([]);
+                    setTokenError(undefined);
+
+                    const parsedMemberLb =
+                        sharedLbResponse.data === undefined
+                            ? undefined
+                            : safeParseSharedLeaderboards(sharedLbResponse.data);
+                    cachedSharedLeaderboards = parsedMemberLb?.success ? parsedMemberLb.data : undefined;
+                    setSharedLeaderboards(cachedSharedLeaderboards);
+                } else {
+                    // --- Keyholder path ---
+                    const [
+                        seasonsResponse,
+                        namesResponse,
+                        tokensResponse,
+                        sharedLbResponse,
+                        guildResponse,
+                        piResponse,
+                    ] = await Promise.all([
                         getGuildRaidSeasonsApi(),
                         makeApiCall<GuildMemberName[]>('GET', 'guild/members/names'),
                         makeApiCall<GuildTokenEntry[]>('GET', 'guild/tokens'),
@@ -187,83 +270,70 @@ export function useGuildPerformance() {
                         getGuildPerformanceIndexApi(),
                     ]);
 
-                // --- season list ---
-                if (seasonsResponse.data) {
-                    cachedSeasonList = seasonsResponse.data;
-                    setSeasonList(cachedSeasonList);
-                }
+                    if (seasonsResponse.data) {
+                        cachedSeasonList = seasonsResponse.data;
+                        setSeasonList(cachedSeasonList);
+                    }
 
-                // --- current season ---
-                const currentSeasonNumber = seasonsResponse.data?.currentSeason;
-                if (currentSeasonNumber != undefined) {
-                    const seasonResponse = await getGuildRaidSeasonApi(currentSeasonNumber, forceRefreshAfter);
-                    if (seasonResponse.data) {
-                        if (isCurrentSeasonResponse(seasonResponse.data)) {
-                            // Guild leader: raw per-hit Tacticus response
-                            const raw = seasonResponse.data.raidResponse as unknown as
-                                | TacticusGuildRaidResponse
-                                | undefined;
-                            if (raw) {
-                                cachedCurrent = raw;
-                                setCurrent(raw);
+                    const currentSeasonNumber = seasonsResponse.data?.currentSeason;
+                    if (currentSeasonNumber != undefined) {
+                        const seasonResponse = await getGuildRaidSeasonApi(currentSeasonNumber, forceRefreshAfter);
+                        if (seasonResponse.data) {
+                            if (isCurrentSeasonResponse(seasonResponse.data)) {
+                                const raw = seasonResponse.data.raidResponse as unknown as
+                                    | TacticusGuildRaidResponse
+                                    | undefined;
+                                if (raw) {
+                                    cachedCurrent = raw;
+                                    setCurrent(raw);
+                                }
+                            } else {
+                                const entry = mapHistoricalApiResponse(seasonResponse.data);
+                                cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(entry.season, entry);
+                                setSeasonDataMap(new Map(cachedSeasonDataMap));
                             }
-                        } else {
-                            // Keyless member: anonymized summary — goes into the season data map
-                            const entry = mapHistoricalApiResponse(seasonResponse.data);
-                            cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(entry.season, entry);
-                            setSeasonDataMap(new Map(cachedSeasonDataMap));
                         }
                     }
-                }
 
-                // --- names ---
-                const nameMap = new Map<string, string>();
-                for (const member of namesResponse.data ?? []) {
-                    if (member.name) nameMap.set(member.userId, member.name);
-                }
-                if (isMember && ownUserId) nameMap.set(ownUserId, nameMap.get(ownUserId) ?? 'You');
-                cachedRawNames = namesResponse.data;
-                setRawNames(namesResponse.data);
-                cachedNames = nameMap;
-                setNames(nameMap);
-
-                // Surface a backend access error when no data at all
-                if (isMember && !seasonsResponse.data && !cachedSeasonList) {
-                    setHistoryError(errorText(seasonsResponse.error) ?? 'Unable to load season data');
-                } else {
+                    const nameMap = new Map<string, string>();
+                    for (const member of namesResponse.data ?? []) {
+                        if (member.name) nameMap.set(member.userId, member.name);
+                    }
+                    cachedRawNames = namesResponse.data;
+                    setRawNames(namesResponse.data);
+                    cachedNames = nameMap;
+                    setNames(nameMap);
                     setHistoryError(undefined);
-                }
 
-                // --- tokens ---
-                if (tokensResponse.data) {
-                    cachedTokens = tokensResponse.data;
-                    setTokens(tokensResponse.data);
-                    setTokenError(undefined);
-                } else if (tokensResponse.error) {
-                    const error = tokensResponse.error;
-                    setTokenError(typeof error === 'string' ? error : ((error as Error).message ?? 'Unknown error'));
-                    setTokens([]);
-                }
+                    if (tokensResponse.data) {
+                        cachedTokens = tokensResponse.data;
+                        setTokens(tokensResponse.data);
+                        setTokenError(undefined);
+                    } else if (tokensResponse.error) {
+                        const error = tokensResponse.error;
+                        setTokenError(
+                            typeof error === 'string' ? error : ((error as Error).message ?? 'Unknown error')
+                        );
+                        setTokens([]);
+                    }
 
-                // --- shared leaderboards ---
-                const parsedSharedLb =
-                    sharedLbResponse.data === undefined
-                        ? undefined
-                        : safeParseSharedLeaderboards(sharedLbResponse.data);
-                cachedSharedLeaderboards = parsedSharedLb?.success ? parsedSharedLb.data : undefined;
-                setSharedLeaderboards(cachedSharedLeaderboards);
+                    const parsedSharedLb =
+                        sharedLbResponse.data === undefined
+                            ? undefined
+                            : safeParseSharedLeaderboards(sharedLbResponse.data);
+                    cachedSharedLeaderboards = parsedSharedLb?.success ? parsedSharedLb.data : undefined;
+                    setSharedLeaderboards(cachedSharedLeaderboards);
 
-                // --- guild info ---
-                if (guildResponse.data?.guild) {
-                    const { guildTag, name } = guildResponse.data.guild;
-                    cachedGuildInfo = { tag: guildTag, name };
-                    setGuildInfo({ tag: guildTag, name });
-                }
+                    if (guildResponse.data?.guild) {
+                        const { guildTag, name } = guildResponse.data.guild;
+                        cachedGuildInfo = { tag: guildTag, name };
+                        setGuildInfo({ tag: guildTag, name });
+                    }
 
-                // --- performance index ---
-                if (piResponse.data) {
-                    cachedPerformanceIndex = piResponse.data;
-                    setPerformanceIndex(cachedPerformanceIndex);
+                    if (piResponse.data) {
+                        cachedPerformanceIndex = piResponse.data;
+                        setPerformanceIndex(cachedPerformanceIndex);
+                    }
                 }
 
                 cachedFetched = true;
@@ -277,20 +347,23 @@ export function useGuildPerformance() {
     /**
      * Fetch a single historical season on demand.  No-ops if already cached.
      */
-    const fetchSeasonData = useCallback(async (season: number) => {
-        if (cachedSeasonDataMap.has(season)) return;
-        setIsLoadingHistoricalSeason(true);
-        try {
-            const response = await getGuildRaidSeasonApi(season);
-            if (response.data && !isCurrentSeasonResponse(response.data)) {
-                const entry = mapHistoricalApiResponse(response.data);
-                cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(season, entry);
-                setSeasonDataMap(new Map(cachedSeasonDataMap));
+    const fetchSeasonData = useCallback(
+        async (season: number) => {
+            if (cachedSeasonDataMap.has(season)) return;
+            setIsLoadingHistoricalSeason(true);
+            try {
+                const response = isMember ? await getMemberRaidSeasonApi(season) : await getGuildRaidSeasonApi(season);
+                if (response.data && (isMember || !isCurrentSeasonResponse(response.data))) {
+                    const entry = mapHistoricalApiResponse(response.data as HistoricalSeasonApiResponse);
+                    cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(season, entry);
+                    setSeasonDataMap(new Map(cachedSeasonDataMap));
+                }
+            } finally {
+                setIsLoadingHistoricalSeason(false);
             }
-        } finally {
-            setIsLoadingHistoricalSeason(false);
-        }
-    }, []);
+        },
+        [isMember]
+    );
 
     useEffect(() => {
         if (!hasAccess) return;

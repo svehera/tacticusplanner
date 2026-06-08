@@ -90,6 +90,91 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/sharedLeaderboards': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns combined cross-guild leaderboards for the requesting guild and any guilds listing this guild's tag in CombinedGuildTags. Guild API key holders only. */
+        get: operations['getSharedLeaderboards'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/member/raid/performance-index': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns the calling member's own performance-index scalar for every aggregated historical season. */
+        get: operations['getMemberGuildPerformanceIndex'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/member/raid': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns an anonymized aggregated summary of the current raid season for the calling member. Always GuildSeasonSummary shape (never raw). Non-self playerIds become 'Anonymous'; comps are preserved. */
+        get: operations['getMemberGuildRaidCurrentSeason'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/member/raid/{season}': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns an anonymized aggregated raid season summary for the calling member. Always GuildSeasonSummary shape (never raw). Non-self playerIds become 'Anonymous'; comps are preserved. Members may trigger backfill for historical seasons. */
+        get: operations['getMemberGuildRaidSeason'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/member/sharedLeaderboards': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns combined cross-guild leaderboards for the member's guild. Requires ShareGuildMemberPerformance and confirmed Tacticus membership. */
+        get: operations['getMemberSharedLeaderboards'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
@@ -304,6 +389,15 @@ export interface components {
             guildTag?: string;
             /** @description One entry per season with stored performance-index data, newest first. */
             entries?: components['schemas']['SeasonPerformanceIndexData'][];
+        };
+        SharedLeaderboardsResponse: {
+            season: number;
+            /** @description Combined boss leaderboard entries across all participating guilds. Player IDs are replaced with guild display names. */
+            leaderboards: components['schemas']['GuildSeasonBossLeaderboard'][];
+            /** @description Diagnostic timing data (milliseconds per phase) */
+            timing?: {
+                [key: string]: number;
+            };
         };
     };
     responses: {
@@ -525,6 +619,136 @@ export interface operations {
                     'application/json': components['schemas']['GuildApiError'];
                 };
             };
+        };
+    };
+    getSharedLeaderboards: {
+        parameters: {
+            query?: {
+                /** @description Season number; omit for current season (live data) */
+                season?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Combined leaderboards */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['SharedLeaderboardsResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getMemberGuildPerformanceIndex: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GuildPerformanceIndexResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getMemberGuildRaidCurrentSeason: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Anonymized current-season summary */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['HistoricalSeasonResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getMemberGuildRaidSeason: {
+        parameters: {
+            query?: {
+                /** @description Unix epoch milliseconds. Any persisted row aggregated before this timestamp is re-fetched. */
+                forceRefreshAfter?: number;
+            };
+            header?: never;
+            path: {
+                season: number;
+            };
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Anonymized season summary (always GuildSeasonSummary shape; non-self playerIds are 'Anonymous') */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['HistoricalSeasonResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getMemberSharedLeaderboards: {
+        parameters: {
+            query?: {
+                /** @description Season number; omit for current season */
+                season?: number;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Combined leaderboards */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['SharedLeaderboardsResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
         };
     };
 }

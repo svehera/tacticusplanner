@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { SeasonFetchStatus } from '@/fsd/5-shared/lib/tacticus-api';
 import { DebugJson } from '@/fsd/5-shared/ui';
@@ -129,6 +129,18 @@ export const GuildPerformance = () => {
         }
     }, [selectedSeason, currentSeasonNumber, seasonDataMap, seasonList, fetchSeasonData]);
 
+    // For keyless members, shared leaderboards are per-season. Re-fetch when the season changes,
+    // but skip the very first render (fetchData already loaded the initial season's leaderboards).
+    const leaderboardSeasonFetchedReference = useRef(false);
+    useEffect(() => {
+        if (!isMember || selectedSeason === undefined) return;
+        if (!leaderboardSeasonFetchedReference.current) {
+            leaderboardSeasonFetchedReference.current = true;
+            return;
+        }
+        void refreshSharedLeaderboards(selectedSeason);
+    }, [isMember, selectedSeason, refreshSharedLeaderboards]);
+
     if (!hasAccess) return <NoKeyMessage />;
 
     return (
@@ -152,13 +164,32 @@ export const GuildPerformance = () => {
                 </div>
             )}
 
-            <DebugJson label="guild/raid/seasons" value={seasonList ?? 'loading…'} />
-            <DebugJson label="guild/raid/seasons - cached season data" value={Object.fromEntries(seasonDataMap)} />
-            <DebugJson label="guild/raid/{currentSeason} (current)" value={currentData ?? 'loading…'} />
-            <DebugJson label="guild/members/names" value={rawNames} />
-            <DebugJson label="guild/tokens" value={tokenData ?? 'loading…'} />
-            <DebugJson label="guild/sharedLeaderboards" value={sharedLeaderboards ?? 'loading…'} />
-            <DebugJson label="guild/raid/performance-index" value={performanceIndex ?? 'loading…'} />
+            <DebugJson
+                label={isMember ? 'season list (derived from PI)' : 'guild/raid/seasons'}
+                value={seasonList ?? 'loading…'}
+            />
+            <DebugJson
+                label={isMember ? 'guild/member/raid - cached season data' : 'guild/raid/seasons - cached season data'}
+                value={Object.fromEntries(seasonDataMap)}
+            />
+            {hasGuildApiKey && (
+                <DebugJson label="guild/raid/{currentSeason} (current)" value={currentData ?? 'loading…'} />
+            )}
+            {isMember && <DebugJson label="guild/member/raid (current season)" value={seasonDataMap ?? 'loading…'} />}
+            {hasGuildApiKey && <DebugJson label="guild/members/names" value={rawNames} />}
+            {hasGuildApiKey && <DebugJson label="guild/tokens" value={tokenData ?? 'loading…'} />}
+            <DebugJson
+                label={
+                    isMember
+                        ? `guild/member/sharedLeaderboards?season=${selectedSeason ?? '…'}`
+                        : 'guild/sharedLeaderboards'
+                }
+                value={sharedLeaderboards ?? 'loading…'}
+            />
+            <DebugJson
+                label={isMember ? 'guild/member/raid/performance-index' : 'guild/raid/performance-index'}
+                value={performanceIndex ?? 'loading…'}
+            />
 
             <div className="flex flex-wrap items-end justify-between gap-4">
                 <TabBar active={activeTab} onChange={setActiveTab} hasGuildApiKey={hasGuildApiKey} />
@@ -216,7 +247,7 @@ export const GuildPerformance = () => {
                             names={names}
                             selectedSeason={selectedSeason}
                             sharedLeaderboards={sharedLeaderboards}
-                            onRefreshSharedLeaderboards={refreshSharedLeaderboards}
+                            onRefreshSharedLeaderboards={() => refreshSharedLeaderboards(selectedSeason)}
                         />
                     </div>
                     <div className={activeTab === 'loops' ? undefined : 'hidden'}>
@@ -237,6 +268,7 @@ export const GuildPerformance = () => {
                     </div>
                     <div className={activeTab === 'historical-performance' ? undefined : 'hidden'}>
                         <HistoricalPerformanceTab
+                            currentData={currentData}
                             performanceIndex={performanceIndex}
                             names={names}
                             selectedPlayerId={selectedPlayerId}

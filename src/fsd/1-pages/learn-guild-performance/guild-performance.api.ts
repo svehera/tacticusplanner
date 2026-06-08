@@ -53,3 +53,19 @@ export interface GuildPerformanceIndexApiResponse {
 
 export const getGuildPerformanceIndexApi = () =>
     makeApiCall<GuildPerformanceIndexApiResponse>('GET', 'guild/raid/performance-index');
+
+export const getMemberCurrentRaidSeasonApi = () => makeApiCall<HistoricalSeasonApiResponse>('GET', 'guild/member/raid');
+
+export const getMemberRaidSeasonApi = (season: number, forceRefreshAfter?: number) => {
+    const query = forceRefreshAfter === undefined ? '' : `?forceRefreshAfter=${forceRefreshAfter}`;
+    return makeApiCall<HistoricalSeasonApiResponse>('GET', `guild/member/raid/${season}${query}`);
+};
+
+export const getMemberPerformanceIndexApi = () =>
+    makeApiCall<GuildPerformanceIndexApiResponse>('GET', 'guild/member/raid/performance-index');
+
+export const getMemberSharedLeaderboardsApi = (season?: number) =>
+    makeApiCall<unknown>(
+        'GET',
+        season == undefined ? 'guild/member/sharedLeaderboards' : `guild/member/sharedLeaderboards?season=${season}`
+    );
