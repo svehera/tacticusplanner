@@ -7,15 +7,28 @@ import { buttonStyles } from '@/fsd/5-shared/ui';
 
 interface Props {
     unitId: string;
+    blocked?: boolean;
+    reached?: boolean;
 }
 
-export const GoToRaidsButton: React.FC<Props> = ({ unitId }) => {
+export const GoToRaidsButton: React.FC<Props> = ({ unitId, blocked, reached }) => {
     const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-    const to = `${linkBase}?charSnowprintId=${encodeURIComponent(unitId)}`;
+
+    if (reached) {
+        return (
+            <span
+                className={`${buttonStyles({ appearance: 'plain', intent: 'primary', size: 'medium', shape: 'circle', isDisabled: true })} cursor-not-allowed`}>
+                <Link2 className="size-4 shrink-0" />
+                Go to Raids
+            </span>
+        );
+    }
+
+    const to = blocked ? `${linkBase}?openBlocked=true` : `${linkBase}?charSnowprintId=${encodeURIComponent(unitId)}`;
     return (
         <Link
             to={to}
-            className={`${buttonStyles({ appearance: 'outline', intent: 'primary', size: 'small' })} hover:bg-(--primary)/10`}>
+            className={`${buttonStyles({ appearance: 'plain', intent: 'primary', size: 'medium', shape: 'circle' })} hover:after:opacity-[0.15]`}>
             <Link2 className="size-4 shrink-0" />
             Go to Raids
         </Link>

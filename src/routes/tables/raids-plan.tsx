@@ -29,6 +29,7 @@ const Inventory = lazy(() => import('@/fsd/1-pages/input-inventory').then(m => (
 interface Props {
     estimatedRanks: IEstimatedUpgrades;
     scrollToCharSnowprintId?: string;
+    openBlocked?: boolean;
     upgrades: Record<string, number>;
     updateInventory: (materialId: string, value: number) => void;
     updateInventoryAny: () => void;
@@ -40,6 +41,7 @@ type ReferenceMap = { [key: string]: ReferenceElement };
 export const RaidsPlan: React.FC<Props> = ({
     estimatedRanks,
     scrollToCharSnowprintId,
+    openBlocked,
     updateInventoryAny,
     upgrades,
     updateInventory,
@@ -53,13 +55,13 @@ export const RaidsPlan: React.FC<Props> = ({
     }>({ start: 0, end: 3, completed: true });
 
     const [allDaysExpanded, setAllDaysExpanded] = useState(false);
-    const [outerExpanded, setOuterExpanded] = useState(scrollToCharSnowprintId !== undefined);
+    const [outerExpanded, setOuterExpanded] = useState(scrollToCharSnowprintId !== undefined || !!openBlocked);
 
     const [expandedPanels, setExpandedPanels] = useState(() => ({
         related: false,
         inProgress: scrollToCharSnowprintId !== undefined,
         finished: false,
-        blocked: false,
+        blocked: !!openBlocked,
         raids: false,
     }));
 
@@ -68,6 +70,7 @@ export const RaidsPlan: React.FC<Props> = ({
 
     const itemReferences = useRef<ReferenceMap>({});
     const inProgressReference = useRef<HTMLDivElement>(null);
+    const blockedReference = useRef<HTMLDivElement>(null);
 
     const setCardReference = useCallback(
         (id: number) => (element: ReferenceElement) => {
@@ -120,6 +123,17 @@ export const RaidsPlan: React.FC<Props> = ({
             setExpandedPanels(previous => ({ ...previous, inProgress: true }));
         }
     }, [scrollToCharSnowprintId]);
+
+    useEffect(() => {
+        if (openBlocked) {
+            setOuterExpanded(true);
+            setExpandedPanels(previous => ({ ...previous, blocked: true }));
+            const timer = setTimeout(() => {
+                blockedReference.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+            return () => clearTimeout(timer);
+        }
+    }, [openBlocked]);
 
     useEffect(() => {
         if (scrollToCharSnowprintId) {
@@ -270,6 +284,7 @@ export const RaidsPlan: React.FC<Props> = ({
                 )}
                 {estimatedRanks.blockedMaterials.length > 0 && (
                     <SectionAccordion
+                        ref={blockedReference}
                         expanded={expandedPanels.blocked}
                         onChange={togglePanel('blocked')}
                         summary={
