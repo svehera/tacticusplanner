@@ -27,7 +27,6 @@ interface Props extends DialogProps {
 }
 
 function buildErrorMessage(error: string | Error | undefined): string {
-    console.trace('error: ', error);
     const baseMessage = 'Failed to update settings';
     const detail = typeof error === 'string' ? error : error?.message;
     return detail ? `${baseMessage}: ${detail}` : baseMessage;

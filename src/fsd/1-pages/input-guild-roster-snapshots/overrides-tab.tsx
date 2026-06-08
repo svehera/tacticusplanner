@@ -4,7 +4,6 @@ import { Trash2 } from 'lucide-react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { obfuscateUserId } from '@/fsd/5-shared/lib';
-import { Button } from '@/fsd/5-shared/ui/button';
 
 import { buildCsv, parseCsvText } from './guild-roster-snapshots.helpers';
 import {
@@ -164,6 +163,7 @@ export const OverridesTab = ({ members }: OverridesTabProps) => {
         setCsvImportStatus(undefined);
     };
 
+    const hasChanges = JSON.stringify(rows) !== JSON.stringify(savedRows);
     const csvPreview = buildCsv(rows);
 
     return (
@@ -195,6 +195,9 @@ export const OverridesTab = ({ members }: OverridesTabProps) => {
                     </MuiButton>
                     <MuiButton variant="outlined" size="small" onClick={handleRevert}>
                         Revert
+                    </MuiButton>
+                    <MuiButton variant="outlined" size="small" onClick={handleSave} disabled={!hasChanges || isSaving}>
+                        {isSaving ? 'Saving…' : 'Save'}
                     </MuiButton>
                 </div>
 
@@ -290,12 +293,6 @@ export const OverridesTab = ({ members }: OverridesTabProps) => {
                 </table>
 
                 {saveError && <p className="text-sm text-red-600 dark:text-red-400">{saveError}</p>}
-
-                <div>
-                    <Button intent="primary" isDisabled={isSaving} onPress={handleSave}>
-                        {isSaving ? 'Saving…' : 'Save'}
-                    </Button>
-                </div>
 
                 {/* Copyable CSV preview */}
                 <div className="flex flex-col gap-1">
