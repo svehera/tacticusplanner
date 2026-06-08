@@ -27,6 +27,7 @@ interface Props extends DialogProps {
 }
 
 function buildErrorMessage(error: string | Error | undefined): string {
+    console.trace('error: ', error);
     const baseMessage = 'Failed to update settings';
     const detail = typeof error === 'string' ? error : error?.message;
     return detail ? `${baseMessage}: ${detail}` : baseMessage;
@@ -156,10 +157,13 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 guildTag: trimmedGuildTag,
             });
 
-            if (!response.data) {
+            if (!response.data && tacticusApiKey !== undefined && tacticusApiKey.length > 0) {
                 enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
                 return;
             }
+
+            // Server returns the canonicalized combinedGuildTags — use that as the new source of truth.
+            const serverCombinedTags = response.data?.combinedGuildTags ?? [];
 
             auth.setUserInfo({
                 ...auth.userInfo,
@@ -169,7 +173,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 shareInGameName: currentShareInGameName,
                 shareRosterData: currentShareRosterData,
                 shareGuildMemberPerformance,
-                combinedGuildTags: combinedTags,
+                combinedGuildTags: serverCombinedTags.length > 0 ? serverCombinedTags : undefined,
                 guildTag: trimmedGuildTag,
             });
             setCurrentApiKey(apiKey);
@@ -178,7 +182,8 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             setSavedShareInGameName(currentShareInGameName);
             setSavedShareRosterData(currentShareRosterData);
             setSavedShareGuildMemberPerformance(shareGuildMemberPerformance);
-            setSavedCombinedTags(combinedTags);
+            setCombinedTags(serverCombinedTags);
+            setSavedCombinedTags(serverCombinedTags);
             setGuildTag(trimmedGuildTag);
             setSavedGuildTag(trimmedGuildTag);
 
@@ -240,34 +245,32 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                         <TextField
                             name={`apikey-${Math.random()}`}
                             description="Used to fetch Player data. Player scope is required for this key"
-                            type="password"
                             label="Personal API key"
                             className="w-[80%]"
                             value={apiKey}
                             onChange={setApiKey}
-                            autoComplete="new-password"
+                            autoComplete="off"
                             isRevealable
                         />
                         <TextField
                             name={`guildApikey-${Math.random()}`}
                             description="Used to fetch Guild Raid data. Ask your guild leader or co-leader to generate API key with 'Guild Raid' and 'Guild' scopes"
-                            type="password"
                             label="Guild API key"
                             className="w-[80%]"
                             value={guildApiKey}
                             onChange={setGuildApiKey}
-                            autoComplete="new-password"
+                            autoComplete="off"
                             isRevealable
+                            isDisabled={apiKey === undefined || apiKey.length === 0}
                         />
                         <TextField
                             name={`apikey-${Math.random()}`}
-                            type="password"
                             description="Used to identify your account in the Guild Raid data"
                             label="Tacticus User ID"
                             className="w-[80%]"
                             value={userId}
                             onChange={setUserId}
-                            autoComplete="new-password"
+                            autoComplete="off"
                             isRevealable
                         />
                         {userId && (

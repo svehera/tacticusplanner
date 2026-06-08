@@ -13,3 +13,4 @@ export { getFactionPray } from './get-faction-pray';
 export * from './array-utils';
 export * from './tacticus-api';
 export { normalizeSearchText } from './normalize-search-text';
+export { isLikelyUserId, obfuscateUserId } from './user-id-utils';

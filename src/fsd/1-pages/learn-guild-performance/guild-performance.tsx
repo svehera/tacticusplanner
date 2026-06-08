@@ -4,6 +4,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { makeApiCall } from '@/fsd/5-shared/api';
 import {
     TacticusDamageType,
+    getTacticusGuildData,
     safeParseGuildSeasonHistory,
     safeParseGuildSeasonSummary,
     safeParseSharedLeaderboards,
@@ -29,6 +30,7 @@ import { PerformanceTab } from './tabs/performance-tab';
 let cachedCurrent: TacticusGuildRaidResponse | undefined;
 let cachedHistory: GuildSeasonHistoryResponse | undefined;
 let cachedSharedLeaderboards: SharedLeaderboardsResponse | undefined;
+let cachedGuildInfo: { tag: string; name: string } | undefined;
 let cachedNames: Map<string, string> | undefined;
 let cachedRawNames: GuildMemberName[] | undefined;
 let cachedTokens: GuildTokenEntry[] | undefined;
@@ -54,9 +56,18 @@ const TAB_LABELS: Record<TabId, string> = {
     'historical-performance': 'Historical Performance',
 };
 
-const TabBar = ({ active, onChange }: { active: TabId; onChange: (tab: TabId) => void }) => (
+const TabBar = ({
+    active,
+    hasGuildApiKey,
+    onChange,
+}: {
+    active: TabId;
+    hasGuildApiKey: boolean;
+    onChange: (tab: TabId) => void;
+}) => (
     <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700">
-        {TAB_IDS.map(id => (
+        {/* we show all TAB_LABELs, unless the user is a keyless member and thus has no access, in which case we show only the non-overview tabs */}
+        {TAB_IDS.filter(id => hasGuildApiKey || id !== 'overview').map(id => (
             <button
                 key={id}
                 type="button"
@@ -92,6 +103,7 @@ export const GuildPerformance = () => {
     const [sharedLeaderboards, setSharedLeaderboards] = useState<SharedLeaderboardsResponse | undefined>(
         cachedSharedLeaderboards
     );
+    const [guildInfo, setGuildInfo] = useState<{ tag: string; name: string } | undefined>(cachedGuildInfo);
     const [historyError, setHistoryError] = useState<string | undefined>();
     const [names, setNames] = useState<Map<string, string>>(cachedNames ?? new Map());
     const [rawNames, setRawNames] = useState<GuildMemberName[] | undefined>(cachedRawNames);
@@ -130,16 +142,24 @@ export const GuildPerformance = () => {
         return buildAvgDamageMap(allEntries);
     }, [currentData]);
 
+    const refreshSharedLeaderboards = useCallback(async () => {
+        const response = await makeApiCall<unknown>('GET', 'guild/sharedLeaderboards');
+        const parsedSharedLb = response.data === undefined ? undefined : safeParseSharedLeaderboards(response.data);
+        cachedSharedLeaderboards = parsedSharedLb?.success ? parsedSharedLb.data : undefined;
+        setSharedLeaderboards(cachedSharedLeaderboards);
+    }, []);
+
     const fetchData = useCallback(async () => {
         setIsRefreshing(true);
         try {
-            const [currentResponse, historyResponse, namesResponse, tokensResponse, sharedLbResponse] =
+            const [currentResponse, historyResponse, namesResponse, tokensResponse, sharedLbResponse, guildResponse] =
                 await Promise.all([
                     makeApiCall<unknown>('GET', 'guild/raid?history=false'),
                     makeApiCall<unknown>('GET', 'guild/raid?history=true'),
                     makeApiCall<GuildMemberName[]>('GET', 'guild/members/names'),
                     makeApiCall<GuildTokenEntry[]>('GET', 'guild/tokens'),
                     makeApiCall<unknown>('GET', 'guild/sharedLeaderboards'),
+                    getTacticusGuildData(),
                 ]);
 
             // --- names (shared) ---
@@ -169,8 +189,9 @@ export const GuildPerformance = () => {
             }
 
             if (hasGuildApiKey) {
-                // Leader: current season is the raw per-hit response.
-                const raw = currentResponse.data as TacticusGuildRaidResponse | undefined;
+                // Leader: current season is the raw per-hit response, wrapped in { raidResponse: ... }.
+                const wrapper = currentResponse.data as { raidResponse?: TacticusGuildRaidResponse } | undefined;
+                const raw = wrapper?.raidResponse;
                 if (raw) {
                     cachedCurrent = raw;
                     setCurrent(raw);
@@ -180,13 +201,17 @@ export const GuildPerformance = () => {
                 setSeasonHistory(history);
                 setHistoryError(parseError);
             } else {
-                // Member: current season is a single anonymized summary — merge it into the history.
+                // Member: current season is a single anonymized summary wrapped in { summary: ... }.
                 if (currentResponse.data !== undefined) {
-                    const parsed = safeParseGuildSeasonSummary(currentResponse.data);
-                    if (parsed.success) {
-                        seasonData = mergeSeasonSummaries(seasonData, parsed.data);
-                    } else {
-                        parseError ??= parsed.error.message;
+                    const wrapper = currentResponse.data as { summary?: unknown } | undefined;
+                    const summaryData = wrapper?.summary;
+                    if (summaryData !== undefined) {
+                        const parsed = safeParseGuildSeasonSummary(summaryData);
+                        if (parsed.success) {
+                            seasonData = mergeSeasonSummaries(seasonData, parsed.data);
+                        } else {
+                            parseError ??= parsed.error.message;
+                        }
                     }
                 }
                 const history = { sequenceNumber, seasonData };
@@ -211,12 +236,16 @@ export const GuildPerformance = () => {
             }
 
             // --- shared leaderboards ---
-            if (sharedLbResponse.data !== undefined) {
-                const parsed = safeParseSharedLeaderboards(sharedLbResponse.data);
-                if (parsed.success) {
-                    cachedSharedLeaderboards = parsed.data;
-                    setSharedLeaderboards(parsed.data);
-                }
+            const parsedSharedLb =
+                sharedLbResponse.data === undefined ? undefined : safeParseSharedLeaderboards(sharedLbResponse.data);
+            cachedSharedLeaderboards = parsedSharedLb?.success ? parsedSharedLb.data : undefined;
+            setSharedLeaderboards(cachedSharedLeaderboards);
+
+            // --- guild info ---
+            if (guildResponse.data?.guild) {
+                const { guildTag, name } = guildResponse.data.guild;
+                cachedGuildInfo = { tag: guildTag, name };
+                setGuildInfo({ tag: guildTag, name });
             }
 
             cachedFetched = true;
@@ -261,7 +290,7 @@ export const GuildPerformance = () => {
             <DebugJson label="guild/tokens" value={tokenData ?? 'loading…'} />
             <DebugJson label="guild/sharedLeaderboards" value={sharedLeaderboards ?? 'loading…'} />
             <div className="flex flex-wrap items-end justify-between gap-4">
-                <TabBar active={activeTab} onChange={setActiveTab} />
+                <TabBar active={activeTab} onChange={setActiveTab} hasGuildApiKey={hasGuildApiKey} />
                 <div className="flex flex-wrap items-end gap-4">
                     <SeasonSelect seasons={availableSeasons} value={selectedSeason} onChange={setSeasonOverride} />
                     {/* Player select is for guild leaders only; keyless members are pinned to themselves. */}
@@ -271,14 +300,18 @@ export const GuildPerformance = () => {
                 </div>
             </div>
             <div className="pt-2">
-                <div className={activeTab === 'overview' ? undefined : 'hidden'}>
-                    <OverviewTab
-                        currentData={currentData}
-                        names={names}
-                        tokenData={tokenData}
-                        tokenError={tokenError}
-                    />
-                </div>
+                {/* We can only mount the overview tab if the player has a guild API key */}
+                {hasGuildApiKey && (
+                    <div className={activeTab === 'overview' ? undefined : 'hidden'}>
+                        <OverviewTab
+                            currentData={currentData}
+                            names={names}
+                            tokenData={tokenData}
+                            tokenError={tokenError}
+                            guildInfo={guildInfo}
+                        />
+                    </div>
+                )}
                 <div className={activeTab === 'damage' ? undefined : 'hidden'}>
                     <DamageTab
                         currentData={currentData}
@@ -296,6 +329,7 @@ export const GuildPerformance = () => {
                         names={names}
                         selectedSeason={selectedSeason}
                         sharedLeaderboards={sharedLeaderboards}
+                        onRefreshSharedLeaderboards={refreshSharedLeaderboards}
                     />
                 </div>
                 <div className={activeTab === 'loops' ? undefined : 'hidden'}>

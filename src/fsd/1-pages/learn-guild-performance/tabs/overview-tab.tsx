@@ -1,4 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import type { TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 
@@ -9,7 +10,6 @@ import {
     formatTime,
     sortTokenEntries,
     sortBombEntries,
-    obfuscateUserId,
 } from '../guild-performance.utils';
 
 const HpBar = ({ remainingHp, maxHp }: { remainingHp: number; maxHp: number }) => {
@@ -152,16 +152,23 @@ export const OverviewTab = ({
     names,
     tokenData,
     tokenError,
+    guildInfo,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     names: Map<string, string>;
     tokenData: GuildTokenEntry[] | undefined;
     tokenError: string | undefined;
+    guildInfo?: { tag: string; name: string };
 }) => {
     return (
         <div className="flex flex-col gap-8">
             <section className="flex flex-col gap-3">
                 <h2 className="text-base font-semibold">Current Boss</h2>
+                {guildInfo && (
+                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                        <span className="font-mono font-semibold">[{guildInfo.tag}]</span> {guildInfo.name}
+                    </p>
+                )}
                 <CurrentBoss data={currentData} />
             </section>
 
