@@ -199,8 +199,8 @@ export const GoalCard: React.FC<Props> = ({
                                     {goal.include ? 'In Progress' : 'Paused'}
                                 </button>
                             ) : undefined}
-                            {/* Raids shortcut — links to blocked upgrades when blocked, hidden when reached */}
-                            {!isReached && showRaidsButton(goal) && (
+                            {/* Raids shortcut — muted when reached, links to blocked section when blocked */}
+                            {showRaidsButton(goal) && (
                                 <GoToRaidsButton
                                     unitId={
                                         goal.type === PersonalGoalType.UpgradeMaterial
@@ -208,6 +208,7 @@ export const GoalCard: React.FC<Props> = ({
                                             : goal.unitId
                                     }
                                     blocked={isBlocked}
+                                    reached={isReached}
                                 />
                             )}
                         </div>

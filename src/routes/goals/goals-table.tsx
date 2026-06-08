@@ -663,7 +663,17 @@ export const GoalsTable: React.FC<Props> = ({
                     if (!data) return;
                     if (data.type !== PersonalGoalType.UpgradeRank && data.type !== PersonalGoalType.MowAbilities)
                         return;
+                    const goalEstimate = estimateMapReference.current.get(data.goalId);
+                    const isReached = !!goalEstimate?.completed && !goalEstimate?.blocked;
                     const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                    if (isReached) {
+                        return (
+                            <span className="flex h-full w-full cursor-not-allowed items-center justify-center gap-2 text-(--primary) opacity-50">
+                                <Link2 className="size-4 shrink-0" />
+                                Go to Raids
+                            </span>
+                        );
+                    }
                     return (
                         <Link
                             to={`${linkBase}?charSnowprintId=${encodeURIComponent(data.unitId)}`}
