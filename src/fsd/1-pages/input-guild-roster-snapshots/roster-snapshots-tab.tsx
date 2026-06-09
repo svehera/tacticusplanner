@@ -159,18 +159,24 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
 
     const memberHistoryMap = useMemo(() => buildMemberHistoryMap(effectiveHistory), [effectiveHistory]);
 
-    // Convert snapshotId → index in sortedMeta (= index in effectiveHistory when all details are loaded)
+    // Subset of sortedMeta that have details loaded — mirrors effectiveHistory.snapshots index-for-index.
+    const filteredMeta = useMemo(
+        () => sortedMeta.filter(meta => snapshotDetailCache.has(meta.snapshotId)),
+        [sortedMeta, snapshotDetailCache]
+    );
+
+    // Convert snapshotId → index in filteredMeta (= index in effectiveHistory / memberHistoryMap)
     const leftIndex = useMemo(
-        () => (leftSnapshotId === undefined ? undefined : sortedMeta.findIndex(m => m.snapshotId === leftSnapshotId)),
-        [leftSnapshotId, sortedMeta]
+        () => (leftSnapshotId === undefined ? undefined : filteredMeta.findIndex(m => m.snapshotId === leftSnapshotId)),
+        [leftSnapshotId, filteredMeta]
     );
 
     const rightIndexOrCurrent = useMemo((): number | 'current' | undefined => {
         if (rightSnapshotId === undefined) return undefined;
         if (rightSnapshotId === 'current') return 'current';
-        const index = sortedMeta.findIndex(m => m.snapshotId === rightSnapshotId);
+        const index = filteredMeta.findIndex(m => m.snapshotId === rightSnapshotId);
         return index === -1 ? undefined : index;
-    }, [rightSnapshotId, sortedMeta]);
+    }, [rightSnapshotId, filteredMeta]);
 
     // Save dialog: existing snapshot names for duplicate detection
     const existingNames = useMemo(() => new Set(sortedMeta.map(s => s.name)), [sortedMeta]);
@@ -181,15 +187,17 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
 
     // "To" dropdown options: snapshots NEWER than left selection + "Current Rosters"
     const rightOptions = useMemo((): Array<{ value: string | 'current'; label: string }> => {
-        if (leftIndex === undefined || leftIndex === -1) return [];
+        if (leftSnapshotId === undefined) return [];
+        const leftSortedIndex = sortedMeta.findIndex(m => m.snapshotId === leftSnapshotId);
+        if (leftSortedIndex === -1) return [];
         const options: Array<{ value: string | 'current'; label: string }> = [];
-        for (let index = leftIndex + 1; index < sortedMeta.length; index++) {
+        for (let index = leftSortedIndex + 1; index < sortedMeta.length; index++) {
             options.push({ value: sortedMeta[index]!.snapshotId, label: sortedMeta[index]!.name });
         }
         const membersLoadedLabel = members === undefined ? 'Current Rosters (loading…)' : 'Current Rosters';
         options.push({ value: 'current', label: membersLoadedLabel });
         return options;
-    }, [leftIndex, sortedMeta, members]);
+    }, [leftSnapshotId, sortedMeta, members]);
 
     // Players eligible for the Player dropdown
     const membersInComparison = useMemo((): Array<{ userId: string; isNew: boolean }> => {
@@ -549,6 +557,28 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                         <RaidTeamFilterDropdown teams={raidTeamFilterOptions} onToggleTeam={toggleRaidTeam} />
                     )}
 
+                    {sortedMeta.length === 0 && members !== undefined && (
+                        <div className="flex items-center gap-2">
+                            <label htmlFor="current-member-select" className={labelClass}>
+                                Player:
+                            </label>
+                            <select
+                                id="current-member-select"
+                                value={selectedUserId ?? ''}
+                                onChange={event_ => setSelectedUserId(event_.target.value || undefined)}
+                                className={selectClass}>
+                                <option value="">— select a player —</option>
+                                {members
+                                    .filter(id => memberStates.get(id)?.status === 'success')
+                                    .map(id => (
+                                        <option key={id} value={id}>
+                                            {getPlayerName(id, memberStates)}
+                                        </option>
+                                    ))}
+                            </select>
+                        </div>
+                    )}
+
                     {membersInComparison.length > 0 && (
                         <div className="flex items-center gap-2">
                             <label htmlFor="history-member-select" className={labelClass}>
@@ -572,7 +602,13 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 </div>
             )}
 
-            {isNoHistoryMode && <p className="text-sm text-gray-500 dark:text-gray-400">No roster snapshots found.</p>}
+            {isNoHistoryMode && (
+                <p className="text-sm text-gray-500 dark:text-gray-400">
+                    {members === undefined
+                        ? 'No roster snapshots yet. Load members above to view current rosters.'
+                        : 'No roster snapshots yet. Save a snapshot to enable roster comparison.'}
+                </p>
+            )}
 
             {/* Diff view */}
             {filteredDiffEntries.length > 0 &&

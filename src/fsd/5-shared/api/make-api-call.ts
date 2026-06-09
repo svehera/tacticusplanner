@@ -20,7 +20,7 @@ export const makeApiCall = <TResponse, TRequestBody = unknown>(
 
             return { data, error: undefined };
         } catch (error: unknown) {
-            console.error('error during API call to endpoint', { method, url, body, error });
+            console.error('error during API call to endpoint', { method, url, error });
             const castError = error as Error | AxiosError<IErrorResponse>;
             // replace here with your own error handling
             if (axios.isAxiosError(castError)) {
