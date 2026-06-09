@@ -5,10 +5,12 @@ import {
     TacticusEncounterType,
     type GuildSeasonSummary,
     type TacticusGuildRaidEntry,
+    type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { getBossOrder, getBossPrefix } from '../guild-performance.utils';
+import { type GuildSeasonPerformanceIndex } from '../guild-performance.api';
+import { computeDefaultRarities, getBossOrder, getBossPrefix } from '../guild-performance.utils';
 
 export interface FilterOptions {
     selectedRarities: Set<Rarity>;
@@ -779,4 +781,90 @@ export function buildPlayerViewFromSummary(
         if (a.set !== b.set) return b.set - a.set;
         return b.encounterIndex - a.encounterIndex;
     });
+}
+
+/**
+ * Computes per-player performance index for the current (live) season from the raw Tacticus raid
+ * response. Mirrors the backend definition: non-bomb, non-kill, boss-only hits at the top-2
+ * rarities; each hit is divided by the per-unit guild average, and the player's PI is the mean of
+ * those ratios. Returns a `GuildSeasonPerformanceIndex` entry suitable for merging with the
+ * historical entries from `/guild/raid/performance-index`.
+ */
+export function buildCurrentSeasonPIEntry(currentData: TacticusGuildRaidResponse): GuildSeasonPerformanceIndex {
+    const top2Rarities = new Set(computeDefaultRarities(currentData.entries));
+    const relevant = currentData.entries.filter(
+        entry =>
+            entry.damageType !== TacticusDamageType.Bomb &&
+            entry.encounterType === TacticusEncounterType.Boss &&
+            entry.remainingHp !== 0 &&
+            top2Rarities.has(entry.rarity)
+    );
+
+    const unitSums = new Map<string, { sum: number; count: number }>();
+    for (const entry of relevant) {
+        const key = `${entry.unitId}:${entry.rarity}`;
+        const agg = unitSums.get(key) ?? { sum: 0, count: 0 };
+        agg.sum += entry.damageDealt;
+        agg.count++;
+        unitSums.set(key, agg);
+    }
+    const guildAvgByUnit = new Map<string, number>();
+    for (const [key, { sum, count }] of unitSums) {
+        if (count > 0) guildAvgByUnit.set(key, sum / count);
+    }
+
+    const ratiosByPlayer = new Map<string, number[]>();
+    for (const entry of relevant) {
+        const unitAvg = guildAvgByUnit.get(`${entry.unitId}:${entry.rarity}`);
+        if (!unitAvg) continue;
+        let ratios = ratiosByPlayer.get(entry.userId);
+        if (!ratios) {
+            ratios = [];
+            ratiosByPlayer.set(entry.userId, ratios);
+        }
+        ratios.push(entry.damageDealt / unitAvg);
+    }
+
+    return {
+        season: currentData.season,
+        playerEntries: [...ratiosByPlayer.entries()].map(([playerId, ratios]) => ({
+            playerId,
+            performanceIndex: ratios.reduce((s, r) => s + r, 0) / ratios.length,
+        })),
+    };
+}
+
+/**
+ * Converts the `/guild/raid/performance-index` response (season-major) into one line per player
+ * (player-major) for the historical performance chart. Null playerId entries (keyless member's own
+ * row) are keyed by `ownUserId` when provided.
+ */
+export function buildLinesFromPerformanceIndex(
+    entries: GuildSeasonPerformanceIndex[],
+    names: Map<string, string>,
+    ownUserId?: string
+): PlayerPerformanceLine[] {
+    const byPlayer = new Map<string, PerformanceIndexSeasonPoint[]>();
+    for (const { season, playerEntries } of entries) {
+        if (season === undefined || !playerEntries) continue;
+        for (const { playerId, performanceIndex } of playerEntries) {
+            if (performanceIndex === undefined) continue;
+            const userId = playerId ?? ownUserId;
+            if (!userId) continue;
+            let points = byPlayer.get(userId);
+            if (!points) {
+                points = [];
+                byPlayer.set(userId, points);
+            }
+            points.push({ season, performanceIndex });
+        }
+    }
+    return [...byPlayer.entries()]
+        .map(([userId, points]) => ({
+            userId,
+            displayName: names.get(userId) ?? obfuscateUserId(userId),
+            points: points.toSorted((a, b) => a.season - b.season),
+        }))
+        .filter(line => line.points.length > 0)
+        .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
 }

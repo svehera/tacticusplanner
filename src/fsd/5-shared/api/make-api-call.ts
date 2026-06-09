@@ -3,7 +3,7 @@
 import API from './api';
 import { IErrorResponse } from './api.models';
 
-export const makeApiCall = <TResponse, TRequestBody = any>(
+export const makeApiCall = <TResponse, TRequestBody = unknown>(
     method: Method,
     url: string,
     body?: TRequestBody
@@ -19,8 +19,8 @@ export const makeApiCall = <TResponse, TRequestBody = any>(
             const data = response?.data;
 
             return { data, error: undefined };
-        } catch (error: any) {
-            console.error(error);
+        } catch (error: unknown) {
+            console.error('error during API call to endpoint', { method, url, error });
             const castError = error as Error | AxiosError<IErrorResponse>;
             // replace here with your own error handling
             if (axios.isAxiosError(castError)) {
