@@ -305,17 +305,30 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         return results;
     }, [selectedUserId, leftIndex, rightIndexOrCurrent, memberHistoryMap, memberStates]);
 
+    const selectedUnitIds = useMemo(
+        () => getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames),
+        [raidTeams, selectedRaidTeamNames]
+    );
+
     const filteredDiffEntries = useMemo((): DiffEntry[] => {
-        const unitIds = getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames);
-        if (unitIds.size === 0) return diffEntries;
-        return diffEntries.filter(({ char, mow }) => (char && unitIds.has(char.id)) || (mow && unitIds.has(mow.id)));
-    }, [diffEntries, raidTeams, selectedRaidTeamNames]);
+        if (selectedUnitIds.size === 0) return diffEntries;
+        return diffEntries.filter(
+            ({ char, mow }) => (char && selectedUnitIds.has(char.id)) || (mow && selectedUnitIds.has(mow.id))
+        );
+    }, [diffEntries, selectedUnitIds]);
 
     // No-history fallback: show current roster for selected member
     const isNoHistoryMode = snapshotMeta !== undefined && snapshotMeta.length === 0;
     const selectedMemberState = selectedUserId === undefined ? undefined : memberStates.get(selectedUserId);
     const currentUnits =
         isNoHistoryMode && selectedMemberState?.status === 'success' ? selectedMemberState.parsed.units : undefined;
+
+    const filteredNonDiffEntries = useMemo(() => {
+        if (selectedUnitIds.size === 0) return currentUnits;
+        return currentUnits?.filter(u =>
+            u.char ? selectedUnitIds.has(u.char.id) : u.mow ? selectedUnitIds.has(u.mow.id) : false
+        );
+    }, [currentUnits, selectedUnitIds]);
 
     const apiKeyErrorIds = members?.filter(id => memberStates.get(id)?.status === 'error') ?? [];
 
@@ -666,9 +679,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 })()}
 
             {/* No-history fallback: show current roster for selected member */}
-            {currentUnits !== undefined && (
+            {filteredNonDiffEntries !== undefined && (
                 <div className="flex flex-wrap gap-2">
-                    {currentUnits.map(({ char, mow }) =>
+                    {/* Similar to the diff case, we need to filter currentUnits to show only characters and mows
+                    from the selected raid teams (if any; if nothing selected, we show everything). */}
+                    {filteredNonDiffEntries.map(({ char, mow }) =>
                         char ? (
                             <RosterSnapshotsUnit
                                 key={char.id}
