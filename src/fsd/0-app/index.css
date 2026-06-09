@@ -685,6 +685,15 @@ input.item-quantity-input[type='number'] {
     }
 }
 
+/* ── Scrollbar utilities ────────────────────────────────────── */
+
+@utility scrollbar-hide {
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+}
+
 /* ── Account dock utilities ─────────────────────────────────── */
 
 /* Dock in animation for accordion rows and apply-hint reveal */
