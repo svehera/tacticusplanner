@@ -18,7 +18,6 @@ import { IEstimatedUpgrades, TypedGoalSelect } from '@/fsd/3-features/goals/goal
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
-import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
 const RaidsPlan = lazy(() => import('src/routes/tables/raids-plan').then(m => ({ default: m.RaidsPlan })));
 
@@ -42,7 +41,6 @@ function addShardsToUpgrades(
 export const DailyRaids = () => {
     const dispatch = useContext(DispatchContext);
     const { userInfo } = useAuth();
-    const { syncWithTacticus } = useSyncWithTacticus();
     const {
         dailyRaids,
         characters: storeCharacters,
@@ -98,11 +96,6 @@ export const DailyRaids = () => {
     };
 
     const refresh = () => {
-        setHasChanges(false);
-    };
-
-    const sync = async () => {
-        await syncWithTacticus();
         setHasChanges(false);
     };
 
@@ -194,7 +187,7 @@ export const DailyRaids = () => {
         <div className="space-y-8 py-6">
             <RaidsHeader
                 hasSync={hasSync}
-                syncHandle={sync}
+                onAfterSync={() => setHasChanges(false)}
                 actualDailyEnergy={actualEnergy.toString()}
                 refreshDisabled={!hasChanges}
                 refreshHandle={refresh}

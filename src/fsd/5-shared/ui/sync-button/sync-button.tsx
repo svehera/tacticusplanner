@@ -1,4 +1,4 @@
-import SyncIcon from '@mui/icons-material/Sync';
+import { RefreshCcw } from 'lucide-react';
 import React from 'react';
 
 import { Button } from '@/fsd/5-shared/ui';
@@ -6,23 +6,21 @@ import { Button } from '@/fsd/5-shared/ui';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types
 import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-sync-with-tacticus';
 
-type Appearance = 'solid' | 'outline' | 'plain';
-
-const variantToAppearance: Record<string, Appearance> = {
-    contained: 'solid',
-    outlined: 'outline',
-    text: 'plain',
-};
-
 interface SyncButtonProps {
     showText: boolean;
-    variant?: 'text' | 'outlined' | 'contained' | undefined;
+    appearance?: 'solid' | 'outline' | 'plain';
     className?: string;
     iconButton?: boolean;
     onAfterSync?: () => void;
 }
 
-const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, iconButton, onAfterSync }) => {
+const SyncButton: React.FC<SyncButtonProps> = ({
+    showText,
+    appearance = 'solid',
+    className,
+    iconButton,
+    onAfterSync,
+}) => {
     const { syncWithTacticus } = useSyncWithTacticus();
 
     const sync = async () => {
@@ -39,12 +37,10 @@ const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, i
                 aria-label="Sync with Tacticus"
                 className={className}
                 onPress={() => sync()}>
-                <SyncIcon />
+                <RefreshCcw data-slot="icon" />
             </Button>
         );
     }
-
-    const appearance = variantToAppearance[variant ?? 'contained'] ?? 'solid';
 
     return (
         <Button
@@ -54,7 +50,7 @@ const SyncButton: React.FC<SyncButtonProps> = ({ showText, variant, className, i
             aria-label="Sync with Tacticus"
             className={className}
             onPress={() => sync()}>
-            <SyncIcon /> {showText && 'Sync'}
+            <RefreshCcw data-slot="icon" /> {showText && 'Sync'}
         </Button>
     );
 };

@@ -414,27 +414,21 @@ export const Goals = () => {
 
                 <PageToolbarDivider />
 
-                {/* Primary CTA */}
+                {/* Primary CTA + utility */}
                 <SetGoalDialog key={goals.length} />
-
-                <PageToolbarDivider />
-
-                {/* Utility */}
                 <Button appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
                     <Settings data-slot="icon" /> Raids Settings
                 </Button>
-                {hasSync && <SyncButton showText={!isMobile} variant="outlined" />}
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
 
+                {hasSync && <SyncButton showText={true} appearance="outline" />}
                 <PageToolbarDivider />
 
                 {/* Counter */}
                 <span className="text-sm text-(--soft-fg)">
                     <span className="font-medium text-(--fg)">Slots</span> {goals.length}/{goalsLimit}
                 </span>
-
-                <PageToolbarDivider />
 
                 {/* View options */}
                 <Switch isSelected={viewPreferences.goalsTableView} onChange={updateView}>
