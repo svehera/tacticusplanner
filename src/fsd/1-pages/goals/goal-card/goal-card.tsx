@@ -1,10 +1,12 @@
 ﻿/* eslint-disable import-x/no-internal-modules */
-import { CheckCircle, FilterListOff } from '@mui/icons-material';
-import Button from '@mui/material/Button';
+import { BadgeCheck, Lock, Pause, Play } from 'lucide-react';
 import React, { useMemo } from 'react';
+
+import { GoToRaidsButton } from 'src/routes/goals/raids-button';
 
 import { getEstimatedDate } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, buttonStyles } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -19,7 +21,6 @@ import { GoalCardActions } from './actions';
 import { GoalCardAscend } from './ascend';
 import { GoalCardCharacterAbilities } from './character-abilities';
 import { GoalCardMowAbilities } from './mow-abilities';
-import { GoalCardRaidsButton } from './raids-button';
 import { GoalCardUnlock } from './unlock';
 import { GoalCardUpgradeMaterial } from './upgrade-material';
 import { GoalCardUpgradeRank } from './upgrade-rank';
@@ -100,14 +101,24 @@ export const GoalCard: React.FC<Props> = ({
         }
     };
 
-    const hasFooter = !!onToggleInclude || showRaidsButton(goal);
-    const cardBackgroundStyle =
-        bgColor === 'rgba(0, 0, 0, 0)'
-            ? { backgroundColor: 'var(--overlay)' }
-            : {
-                  backgroundColor: 'var(--overlay)',
-                  backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
-              };
+    const isReached = !!goalEstimate.completed && !goalEstimate.blocked;
+    const isBlocked = !!goalEstimate.blocked;
+    const hasFooter = isReached || isBlocked || !!onToggleInclude || showRaidsButton(goal);
+
+    const stripeClass = isReached
+        ? 'border-l-[3px] border-l-(--success)'
+        : isBlocked
+          ? 'border-l-[3px] border-l-(--warning)'
+          : '';
+
+    const cardBackgroundStyle = isReached
+        ? { backgroundColor: 'color-mix(in srgb, var(--success) 20%, var(--card))' }
+        : bgColor === 'transparent'
+          ? { backgroundColor: 'var(--card)' }
+          : {
+                backgroundColor: 'var(--card)',
+                backgroundImage: `linear-gradient(${bgColor}, ${bgColor})`,
+            };
 
     const material =
         goal.type === PersonalGoalType.UpgradeMaterial
@@ -116,14 +127,12 @@ export const GoalCard: React.FC<Props> = ({
 
     return (
         <div
-            className="flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--border) text-(--fg) shadow-sm transition-colors"
+            className={`flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors ${stripeClass}`}
             style={cardBackgroundStyle}>
-            {/* Header: 3-column grid — [icon + #n] | name+date | actions */}
-            <div className="grid min-h-[83px] grid-cols-[auto_1fr_auto] gap-x-3 gap-y-0 border-b border-(--border) px-4 pt-3 pb-2">
-                <div className="flex items-center gap-1 self-start">
-                    <span className="text-[1.35rem] leading-none font-semibold text-(--muted-fg)">
-                        #{goal.priority}
-                    </span>
+            {/* Header: 3-column grid — [#n + icon] | name + date | actions */}
+            <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 border-b border-(--card-border) px-4 py-3">
+                <div className="flex items-center gap-1">
+                    <span className="text-[1.35rem] leading-none font-semibold text-(--soft-fg)">#{goal.priority}</span>
                     {goal.type === PersonalGoalType.UpgradeMaterial && (
                         <UpgradeImage
                             material={goal.upgradeMaterialId}
@@ -136,56 +145,70 @@ export const GoalCard: React.FC<Props> = ({
                         <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
                     )}
                 </div>
-                <div className="flex min-w-0 flex-col flex-wrap justify-start">
+                <div className="flex min-w-0 flex-col">
                     <span className="text-[1.05rem] leading-snug font-semibold text-(--fg)">
                         {goal.type === PersonalGoalType.UpgradeMaterial && (
                             <span>{UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.material}</span>
                         )}
                         {goal.type !== PersonalGoalType.UpgradeMaterial && (goal.unitName ?? goal.unitId)}
                     </span>
-                    {calendarDate && <span className="text-xs text-(--muted-fg)">{calendarDate}</span>}
+                    {calendarDate && <span className="text-xs text-(--soft-fg)">{calendarDate}</span>}
                 </div>
-                <div className="self-start">
-                    <GoalCardActions goalEstimate={goalEstimate} menuItemSelect={menuItemSelect} />
-                </div>
+                <GoalCardActions menuItemSelect={menuItemSelect} />
             </div>
             <div className="flex flex-1 flex-col px-4 pt-3 pb-3 text-sm">
                 <div className="flex-1">
                     {renderBody()}
-                    {goal.notes && <p className="mt-2 text-sm text-(--muted-fg)">{goal.notes}</p>}
+                    {goal.notes && <p className="mt-2 text-sm text-(--soft-fg)">{goal.notes}</p>}
                 </div>
                 {hasFooter && (
                     <>
-                        <div className="mt-3 mb-2 border-t border-(--border)" />
+                        <div className="mt-3 mb-2 border-t border-(--card-border)" />
                         <div className="flex items-center justify-between gap-2">
-                            {onToggleInclude && (
-                                <Button
-                                    size="small"
-                                    variant="outlined"
-                                    className={
-                                        'rounded-full bg-(--secondary) px-3 ' +
-                                        (goal.include
-                                            ? '!border-green-700/50 !text-green-700 hover:!bg-green-500/10 dark:!border-green-400/50 dark:!text-green-400'
-                                            : '!border-red-700/50 !text-red-700 hover:!bg-red-500/10 dark:!border-red-400/50 dark:!text-red-400')
-                                    }
-                                    startIcon={
-                                        goal.include ? (
-                                            <CheckCircle fontSize="small" />
-                                        ) : (
-                                            <FilterListOff fontSize="small" />
-                                        )
-                                    }
-                                    onClick={onToggleInclude}>
-                                    {goal.include ? 'Active' : 'Inactive'}
-                                </Button>
-                            )}
+                            {/* Status pill — one slot, four states */}
+                            {isReached ? (
+                                <span
+                                    className={`${buttonStyles({ appearance: 'plain', intent: 'success', size: 'medium', shape: 'circle' })} bg-(--success)/15`}>
+                                    <BadgeCheck className="size-4" />
+                                    Reached
+                                </span>
+                            ) : isBlocked ? (
+                                <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
+                                    {onToggleInclude ? (
+                                        <button
+                                            type="button"
+                                            onClick={onToggleInclude}
+                                            className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15 hover:after:opacity-[0.15]`}>
+                                            <Lock className="size-4" />
+                                            Locked
+                                        </button>
+                                    ) : (
+                                        <span
+                                            className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15`}>
+                                            <Lock className="size-4" />
+                                            Locked
+                                        </span>
+                                    )}
+                                </AccessibleTooltip>
+                            ) : onToggleInclude ? (
+                                <button
+                                    type="button"
+                                    onClick={onToggleInclude}
+                                    className={`${buttonStyles({ appearance: 'plain', intent: goal.include ? 'primary' : 'secondary', size: 'medium', shape: 'circle' })} ${goal.include ? 'bg-(--primary)/15' : 'bg-(--soft-fg)/10'} hover:after:opacity-[0.15]`}>
+                                    {goal.include ? <Play className="size-4" /> : <Pause className="size-4" />}
+                                    {goal.include ? 'In Progress' : 'Paused'}
+                                </button>
+                            ) : undefined}
+                            {/* Raids shortcut — muted when reached, links to blocked section when blocked */}
                             {showRaidsButton(goal) && (
-                                <GoalCardRaidsButton
+                                <GoToRaidsButton
                                     unitId={
                                         goal.type === PersonalGoalType.UpgradeMaterial
                                             ? goal.upgradeMaterialId
                                             : goal.unitId
                                     }
+                                    blocked={isBlocked}
+                                    reached={isReached}
                                 />
                             )}
                         </div>

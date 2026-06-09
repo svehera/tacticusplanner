@@ -1,4 +1,4 @@
-import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
+import { Calendar } from 'lucide-react';
 import React from 'react';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
@@ -14,13 +14,13 @@ interface Props {
 export const GoalEstimateRow: React.FC<Props> = ({ daysLeft, calendarDate, energyTotal }) => (
     <>
         <AccessibleTooltip title={`${daysLeft} days. Estimated date ${calendarDate ?? ''}`}>
-            <div className="flex-box gap-[3px] text-(--muted-fg)">
-                <CalendarMonthIcon /> {daysLeft}
+            <div className="flex-box gap-[3px] text-(--soft-fg)">
+                <Calendar className="size-4" /> {daysLeft}
             </div>
         </AccessibleTooltip>
         {energyTotal !== undefined && (
             <AccessibleTooltip title={`${energyTotal} energy`}>
-                <div className="flex-box gap-[3px] text-(--muted-fg)">
+                <div className="flex-box gap-[3px] text-(--soft-fg)">
                     <MiscIcon icon={'energy'} height={18} width={15} /> {energyTotal}
                 </div>
             </AccessibleTooltip>

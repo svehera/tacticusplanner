@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { menuItemById } from 'src/models/menu-items';
 
 import { cn } from '@/fsd/5-shared/lib';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -49,12 +50,31 @@ export const PlanLeRoutes = () => {
         []
     );
 
+    const navigateToLre = (eventId: LegendaryEventEnum) => {
+        const destinationPath = `/mobile/plan/lre?character=${LegendaryEventEnum[eventId]}`;
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'select',
+            destination_path: destinationPath,
+            source: 'mobile_category_card',
+        });
+        navigate(destinationPath);
+    };
+
     return (
         <div className="flex w-full flex-col items-center gap-4">
             <MobileNavCard
                 icon={leMasterTableMenuItem.icon}
                 label={leMasterTableMenuItem.label}
-                onClick={() => navigate(leMasterTableMenuItem.routeMobile)}
+                onClick={() => {
+                    trackEvent('nav_menu_select', {
+                        feature: 'navigation',
+                        action: 'select',
+                        destination_path: leMasterTableMenuItem.routeMobile,
+                        source: 'mobile_category_card',
+                    });
+                    navigate(leMasterTableMenuItem.routeMobile);
+                }}
             />
 
             {sortedActiveLres.map(le => {
@@ -65,21 +85,21 @@ export const PlanLeRoutes = () => {
                         role="button"
                         tabIndex={0}
                         className={cn(
-                            'flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card-bg) shadow-sm transition-colors',
+                            'flex min-h-[140px] w-full max-w-[350px] cursor-pointer flex-col overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-colors',
                             isFinished && 'opacity-50'
                         )}
-                        onClick={() => navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`)}
+                        onClick={() => navigateToLre(le.lre!.id)}
                         onKeyDown={event_ => {
                             if (event_.key === 'Enter' || event_.key === ' ') {
                                 event_.preventDefault();
-                                navigate(`/mobile/plan/lre?character=${LegendaryEventEnum[le.lre!.id]}`);
+                                navigateToLre(le.lre!.id);
                             }
                         }}>
                         <div className="border-b border-(--card-border) px-4 py-3">
                             <div className="flex items-center gap-2.5 font-medium">
                                 <UnitShardIcon icon={le.roundIcon} name={le.name} /> {le.name}
                             </div>
-                            <span className="text-sm text-(--muted-fg)">Legendary Event</span>
+                            <span className="text-sm text-(--soft-fg)">Legendary Event</span>
                         </div>
                         <div className="px-4 py-3 text-sm">
                             {isFinished ? (

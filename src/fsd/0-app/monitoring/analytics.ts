@@ -1,13 +1,8 @@
-import googleAnalytics from '@analytics/google-analytics';
-import Analytics from 'analytics';
-
-const analytics = Analytics({
-    app: 'Tacticus Planner',
-    plugins: [
-        googleAnalytics({
-            measurementIds: [import.meta.env.VITE_GTAG],
-        }),
-    ],
-});
-
-export default analytics;
+export {
+    default,
+    getRouteGroup,
+    getViewMode,
+    trackEvent,
+    trackPageView,
+    type AnalyticsEventParameters,
+} from '@/fsd/5-shared/monitoring';

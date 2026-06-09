@@ -15,7 +15,7 @@ interface Props {
 
 export const CampaignProgressionSummary: React.FC<Props> = ({ stats }) => {
     return (
-        <dl className="flex flex-wrap overflow-hidden rounded-xl border border-(--border) bg-(--card-bg)">
+        <dl className="flex flex-wrap overflow-hidden rounded-xl border border-(--border) bg-(--card)">
             {[
                 {
                     label: 'Goals',
@@ -39,13 +39,13 @@ export const CampaignProgressionSummary: React.FC<Props> = ({ stats }) => {
                 <div
                     key={stat.label}
                     className={`flex min-w-0 flex-1 flex-col gap-0.5 px-4 py-3 ${index < array.length - 1 ? 'border-r border-(--border)' : ''}`}>
-                    <dt className="text-[11px] font-medium tracking-wide text-(--muted-fg) uppercase">{stat.label}</dt>
+                    <dt className="text-[11px] font-medium tracking-wide text-(--soft-fg) uppercase">{stat.label}</dt>
                     <dd
                         className={`flex items-center gap-1 font-mono text-lg tabular-nums sm:text-2xl ${stat.accent ? 'text-blue-600 dark:text-blue-400' : 'text-(--card-fg)'}`}>
                         {stat.accent && <MiscIcon icon="energy" height={14} width={14} />}
                         {stat.value}
                     </dd>
-                    <span className="text-xs text-(--muted-fg)">{stat.sub}</span>
+                    <span className="text-xs text-(--soft-fg)">{stat.sub}</span>
                 </div>
             ))}
         </dl>

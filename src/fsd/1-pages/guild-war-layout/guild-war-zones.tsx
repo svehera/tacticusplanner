@@ -1,18 +1,3 @@
-﻿import {
-    Badge,
-    Card,
-    CardContent,
-    CardHeader,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    Tab,
-    Tabs,
-    Tooltip,
-} from '@mui/material';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import { CommonProps } from '@mui/material/OverridableComponent';
 import React, { useContext, useMemo } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -28,7 +13,16 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { getCompletionRateColor } from 'src/shared-logic/functions';
 
 import { Rank } from '@/fsd/5-shared/model';
-import { LoaderWithText, AccessibleTooltip, FlexBox } from '@/fsd/5-shared/ui';
+import {
+    AccessibleTooltip,
+    Button,
+    Card,
+    CardContent,
+    CardHeader,
+    FlexBox,
+    LoaderWithText,
+    PortalDialog,
+} from '@/fsd/5-shared/ui';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { RarityIcon } from '@/fsd/5-shared/ui/icons/rarity.icon';
 
@@ -184,7 +178,7 @@ export const GuildWarZones = () => {
             <div>
                 {zoneStats.name}
                 <FlexBox className="text-lg" gap={5}>
-                    <div className="flex-box gap-[3px]">
+                    <div className="flex items-center gap-[3px]">
                         {caps.map((rarity, index) => (
                             <RarityIcon key={index} rarity={rarity} />
                         ))}
@@ -207,35 +201,49 @@ export const GuildWarZones = () => {
         return activeLayout.zones.flatMap(x => x.players).filter(user => !!data && data.guildUsers.includes(user));
     }, [activeLayout, guildWar.layouts, data?.guildUsers]);
 
+    const closePlayersDialog = () => {
+        setEditZonePlayersIndex(-1);
+        setEditZonePlayer1(false);
+        setEditZonePlayer2(false);
+    };
+
     return (
         <>
             {loading && <LoaderWithText loading={true} />}
             <FlexBox justifyContent={'center'} gap={10}>
                 <BfLevelSelect value={activeLayout.bfLevel} valueChange={handleBfLevelChange} />
 
-                <Tabs value={tab} onChange={handleTabChange} centered sx={{ zoom: isMobile ? 0.9 : 1 }}>
-                    {guildWar.layouts.map(x => {
-                        return <Tab key={x.id} label={x.name} />;
-                    })}
-                </Tabs>
+                <div
+                    className="inline-flex rounded-lg border border-(--border) bg-(--neutral) p-0.5"
+                    style={{ zoom: isMobile ? 0.9 : 1 }}>
+                    {guildWar.layouts.map((x, index) => (
+                        <button
+                            key={x.id}
+                            onClick={() => handleTabChange({} as React.SyntheticEvent, index)}
+                            className={[
+                                'cursor-pointer rounded-md px-3 py-1.5 text-sm font-medium transition-colors',
+                                tab === index
+                                    ? 'bg-(--bg) text-(--fg) shadow-sm'
+                                    : 'text-(--soft-fg) hover:text-(--fg)',
+                            ].join(' ')}>
+                            {x.name}
+                        </button>
+                    ))}
+                </div>
             </FlexBox>
             <FlexBox className="mt-2.5" justifyContent={'center'} gap={5}>
-                <Tooltip
-                    title={'Select 2 war zones whose positions you want to swap'}
-                    open={editZonesMode}
-                    placement={'top'}>
+                <AccessibleTooltip title={editZonesMode ? 'Select 2 war zones whose positions you want to swap' : ''}>
                     <Button
-                        variant={'contained'}
-                        onClick={() => {
+                        intent={editZonesMode ? 'success' : 'primary'}
+                        onPress={() => {
                             setEditZonesMode(value => !value);
                             if (editZonesMode) {
                                 setSwapZones([]);
                             }
-                        }}
-                        color={editZonesMode ? 'success' : 'primary'}>
+                        }}>
                         {editZonesMode ? 'Stop editing' : 'Edit war zones'}
                     </Button>
-                </Tooltip>
+                </AccessibleTooltip>
                 {guildWarPlayers.length > 0 && (
                     <>
                         <ViewGuild guildWarPlayers={guildWarPlayers} />
@@ -273,75 +281,63 @@ export const GuildWarZones = () => {
                         bfLevel={activeLayout.bfLevel}
                         zone={zone}
                         players={guildWarPlayers}
-                        style={{ backgroundColor: swapZones.includes(index) ? '#409FFF' : '' }}
+                        isSelected={swapZones.includes(index)}
                         onClick={() => handleZoneClick(zone, index)}
                     />
                 ))}
             </div>
-            {editZonePlayersIndex >= 0 && (
-                <Dialog
-                    open={editZonePlayersIndex >= 0}
-                    onClose={() => {
-                        setEditZonePlayersIndex(-1);
-                        setEditZonePlayer1(false);
-                        setEditZonePlayer2(false);
-                    }}
-                    maxWidth={isMobile ? 'xl' : 'lg'}
-                    fullWidth>
-                    <DialogTitle>{editZonePlayersDialogTitle}</DialogTitle>
-                    <DialogContent>
-                        <Tooltip
-                            title={'Select a player from the table for slot 1'}
-                            open={editZonePlayer1}
-                            placement={'top'}>
+            <PortalDialog
+                open={editZonePlayersIndex >= 0}
+                onClose={closePlayersDialog}
+                aria-label="Edit zone players"
+                size="xl">
+                <PortalDialog.Header>{editZonePlayersDialogTitle}</PortalDialog.Header>
+                <PortalDialog.Body>
+                    <div className="flex gap-2">
+                        <AccessibleTooltip title={editZonePlayer1 ? 'Select a player from the table for slot 1' : ''}>
                             <Button
-                                disabled={editZonePlayer2}
-                                onClick={() => setEditZonePlayer1(value => !value)}
-                                color={activeLayout.zones[editZonePlayersIndex].players[0] ? 'primary' : 'error'}>
-                                {activeLayout.zones[editZonePlayersIndex].players[0] ?? 'Slot 1'}
+                                isDisabled={editZonePlayer2}
+                                onPress={() => setEditZonePlayer1(value => !value)}
+                                intent={activeLayout.zones[editZonePlayersIndex]?.players[0] ? 'primary' : 'danger'}
+                                appearance="outline">
+                                {activeLayout.zones[editZonePlayersIndex]?.players[0] ?? 'Slot 1'}
                             </Button>
-                        </Tooltip>
+                        </AccessibleTooltip>
 
-                        <Tooltip
-                            title={'Select a player from the table for slot 2'}
-                            open={editZonePlayer2}
-                            placement={'top'}>
+                        <AccessibleTooltip title={editZonePlayer2 ? 'Select a player from the table for slot 2' : ''}>
                             <Button
-                                disabled={editZonePlayer1}
-                                onClick={() => setEditZonePlayer2(value => !value)}
-                                color={activeLayout.zones[editZonePlayersIndex].players[1] ? 'primary' : 'error'}>
-                                {activeLayout.zones[editZonePlayersIndex].players[1] ?? 'Slot 2'}
+                                isDisabled={editZonePlayer1}
+                                onPress={() => setEditZonePlayer2(value => !value)}
+                                intent={activeLayout.zones[editZonePlayersIndex]?.players[1] ? 'primary' : 'danger'}
+                                appearance="outline">
+                                {activeLayout.zones[editZonePlayersIndex]?.players[1] ?? 'Slot 2'}
                             </Button>
-                        </Tooltip>
-
-                        <PlayersTable rows={guildWarPlayers} onRowClick={updatePlayerSelection} />
-                    </DialogContent>
-                    <DialogActions>
-                        <Button color="error" onClick={clearPlayerSelection}>
-                            Clear players
-                        </Button>
-                        <Button
-                            onClick={() => {
-                                setEditZonePlayersIndex(-1);
-                                setEditZonePlayer1(false);
-                                setEditZonePlayer2(false);
-                            }}>
-                            Close
-                        </Button>
-                    </DialogActions>
-                </Dialog>
-            )}
+                        </AccessibleTooltip>
+                    </div>
+                    <PlayersTable rows={guildWarPlayers} onRowClick={updatePlayerSelection} />
+                </PortalDialog.Body>
+                <PortalDialog.Footer>
+                    <Button intent="danger" appearance="outline" onPress={clearPlayerSelection}>
+                        Clear players
+                    </Button>
+                    <Button appearance="outline" onPress={closePlayersDialog}>
+                        Close
+                    </Button>
+                </PortalDialog.Footer>
+            </PortalDialog>
         </>
     );
 };
 
-interface ZoneCardProps extends React.DOMAttributes<HTMLElement>, CommonProps {
+interface ZoneCardProps {
     bfLevel: number;
     zone: IGWLayoutZone;
     players: IGuildWarPlayer[];
+    isSelected: boolean;
+    onClick: () => void;
 }
 
-const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, players }) => {
+const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, isSelected, players }) => {
     const zoneStats = GuildWarService.getZone(zone.id);
     const { difficulty, caps } = zoneStats.rarityCaps[bfLevel];
     const maxRarity = Math.max(...caps);
@@ -360,48 +356,43 @@ const ZoneCard: React.FC<ZoneCardProps> = ({ zone, bfLevel, onClick, style, play
 
     return (
         <Card
-            variant="outlined"
-            style={style}
-            onClick={onClick}
-            sx={{
-                maxWidth: 400,
-                minHeight: isMobile ? 170 : 150,
-                boxShadow: '1px 2px 3px rgba(0, 0, 0, 0.6)',
-                cursor: 'pointer',
+            className={[
+                'max-w-[400px] cursor-pointer shadow-md',
+                isMobile ? 'min-h-[170px]' : 'min-h-[150px]',
+                isSelected ? 'bg-(--primary)/10 ring-2 ring-(--primary)' : '',
+            ].join(' ')}
+            style={{
                 borderInlineStart: '10px solid',
                 borderInlineColor: potentialColor,
                 zoom: isMobile ? 0.7 : 1,
-            }}>
-            <CardHeader
-                titleTypographyProps={{ variant: 'h6', fontSize: isMobile ? '1rem' : undefined }}
-                title={zoneStats.name}
-                subheader={
+            }}
+            onClick={onClick}>
+            <CardHeader>
+                <div className="flex flex-1 flex-col gap-1">
+                    <div className="text-base leading-tight font-semibold">{zoneStats.name}</div>
                     <FlexBox gap={5}>
                         <DifficultyImage difficulty={difficultyEnum} withColor />
-                        <Badge badgeContent={maxRarityCount}>
+                        <span className="inline-flex items-center gap-1">
                             <RarityIcon rarity={maxRarity} />
-                        </Badge>
+                            <span className="text-xs font-medium text-(--soft-fg)">×{maxRarityCount}</span>
+                        </span>
                         <span>{zoneStats.warScore.toString().slice(0, 2)}K</span>
                         <span>{difficulty}</span>
                     </FlexBox>
-                }
-                action={
-                    zoneStats.buff ? (
-                        <Tooltip title={zoneStats.buff} placement="top" arrow>
-                            <div>
-                                <WarZoneBuffImage zoneId={zoneStats.iconId ?? zoneStats.id} />
-                            </div>
-                        </Tooltip>
-                    ) : (
-                        <></>
-                    )
-                }
-            />
-            <CardContent className="py-0">
-                <FlexBox className="flex-col items-start">
+                </div>
+                {zoneStats.buff && (
+                    <AccessibleTooltip title={zoneStats.buff}>
+                        <div>
+                            <WarZoneBuffImage zoneId={zoneStats.iconId ?? zoneStats.id} />
+                        </div>
+                    </AccessibleTooltip>
+                )}
+            </CardHeader>
+            <CardContent className="py-2">
+                <div className="flex flex-col items-start text-sm">
                     <div>1: {player1 ? `${player1.username} - ${player1Potential}` : ''}</div>
                     <div>2: {player2 ? `${player2.username} - ${player2Potential}` : ''}</div>
-                </FlexBox>
+                </div>
             </CardContent>
         </Card>
     );

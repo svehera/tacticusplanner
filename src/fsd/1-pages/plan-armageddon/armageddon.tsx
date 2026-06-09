@@ -324,7 +324,7 @@ function rewardInfo(reward: string): { icon: JSX.Element; label: string; qty: nu
     }
 
     // ── fallback ──────────────────────────────────────────────────────────────
-    return { icon: <span className="text-xs break-all text-(--muted-fg)">{type}</span>, label: type, qty };
+    return { icon: <span className="text-xs break-all text-(--soft-fg)">{type}</span>, label: type, qty };
 }
 
 // ─── resolved product ─────────────────────────────────────────────────────────
@@ -398,7 +398,7 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                 <div className="flex h-[45px] w-[45px] items-center justify-center">{icon}</div>
                 {/* Pack qty */}
                 {qtyPerPack !== undefined && (
-                    <span className="text-xs font-bold text-(--muted-fg) tabular-nums">
+                    <span className="text-xs font-bold text-(--soft-fg) tabular-nums">
                         ×{qtyPerPack.toLocaleString()}
                     </span>
                 )}
@@ -415,7 +415,7 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                 )}
                 {/* Remaining */}
                 {remaining !== undefined && !isFree && (
-                    <span className="text-[10px] text-(--muted-fg)">{remaining} left</span>
+                    <span className="text-[10px] text-(--soft-fg)">{remaining} left</span>
                 )}
                 {/* Label – don't show it */}
                 {/* <p className="hidden w-full truncate text-center text-xs font-semibold sm:block">{label}</p> */}
@@ -440,9 +440,9 @@ function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                     <Modal.Body>
                         <div className="flex flex-col gap-4 py-2">
                             <div className="flex items-center justify-between">
-                                <span className="text-sm text-(--muted-fg)">
+                                <span className="text-sm text-(--soft-fg)">
                                     Quantity: <span className="text-fg font-bold">{sliderValue}</span>
-                                    {maxQty !== undefined && <span className="text-(--muted-fg)"> / {maxQty}</span>}
+                                    {maxQty !== undefined && <span className="text-(--soft-fg)"> / {maxQty}</span>}
                                 </span>
                                 <div className="flex items-center gap-1">
                                     <span className="text-sm font-semibold text-amber-400">{sliderValue * cost}</span>
@@ -515,12 +515,12 @@ function ShoppingList({
                         className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
                             sortByDay
                                 ? 'border-blue-500 bg-blue-500/15 text-blue-400'
-                                : 'border-(--border) bg-(--overlay) text-(--muted-fg) hover:border-blue-500'
+                                : 'border-(--border) bg-(--overlay) text-(--soft-fg) hover:border-blue-500'
                         }`}>
                         Sort by {sortByDay ? 'day' : 'item type'}
                     </button>
                     <div className="flex items-center gap-1 text-sm">
-                        <span className="text-(--muted-fg)">Grand total:</span>
+                        <span className="text-(--soft-fg)">Grand total:</span>
                         <span className="font-semibold text-amber-400">{total.toLocaleString()}</span>
                         <MiscIcon icon="armageddonCurrency" width={14} height={14} />
                     </div>
@@ -559,7 +559,7 @@ function ShoppingList({
                         <div className="flex items-center gap-2 p-4">
                             <button onClick={() => toggleWeek(w)} className="flex flex-1 items-center gap-2 text-left">
                                 <ChevronDown
-                                    className={`size-4 shrink-0 text-(--muted-fg) transition-transform duration-200 ${
+                                    className={`size-4 shrink-0 text-(--soft-fg) transition-transform duration-200 ${
                                         expandedWeeks.has(w) ? 'rotate-180' : ''
                                     }`}
                                 />
@@ -575,7 +575,7 @@ function ShoppingList({
                         </div>
 
                         {/* Resource summary — always visible */}
-                        <div className="flex flex-wrap gap-3 border-t border-(--border) bg-(--muted) px-4 py-2">
+                        <div className="flex flex-wrap gap-3 border-t border-(--border) bg-(--soft) px-4 py-2">
                             {Object.entries(resourceMap).map(([rKey, resource]) => (
                                 <div key={rKey} className="flex items-center gap-2">
                                     <div className="flex h-7 w-7 shrink-0 items-center justify-center">
@@ -596,13 +596,13 @@ function ShoppingList({
                                     const lineTotal = entry.quantity * entry.costPerUnit;
 
                                     return (
-                                        <div key={key} className="flex items-center gap-2 rounded-lg bg-(--muted) p-2">
+                                        <div key={key} className="flex items-center gap-2 rounded-lg bg-(--soft) p-2">
                                             <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
                                                 {icon}
                                             </div>
                                             <div className="flex min-w-0 flex-1 flex-col gap-0.5">
                                                 <span className="truncate text-sm font-medium">{entry.label}</span>
-                                                <span className="text-xs text-(--muted-fg)">
+                                                <span className="text-xs text-(--soft-fg)">
                                                     {DAY_LABELS[entry.day]}
                                                     {entry.qtyPerPack > 1 && (
                                                         <span> &middot; ×{entry.qtyPerPack} each</span>
@@ -746,9 +746,9 @@ function PurchasedQtyModal({ isOpen, entry, icon, initialPurchased, onConfirm, o
                 <Modal.Body>
                     <div className="flex flex-col gap-4 py-2">
                         <div className="flex items-center justify-between">
-                            <span className="text-sm text-(--muted-fg)">
+                            <span className="text-sm text-(--soft-fg)">
                                 Purchased: <span className="font-bold text-(--fg)">{sliderValue}</span>
-                                <span className="text-(--muted-fg)"> / {entry.quantity}</span>
+                                <span className="text-(--soft-fg)"> / {entry.quantity}</span>
                             </span>
                         </div>
                         <input
@@ -1392,7 +1392,7 @@ export const Armageddon = () => {
                         </div>
                     )}
                 </div>
-                <span className="text-sm text-(--muted-fg)">{resolvedSlots.length} offers available</span>
+                <span className="text-sm text-(--soft-fg)">{resolvedSlots.length} offers available</span>
             </div>
 
             {/* Controls */}
@@ -1411,7 +1411,7 @@ export const Armageddon = () => {
                             {playerMetadata.powerLevel}
                         </p>
                     )}
-                    <p className="mt-1 flex items-center gap-1 text-xs text-(--muted-fg)">
+                    <p className="mt-1 flex items-center gap-1 text-xs text-(--soft-fg)">
                         <span>
                             {'Tier: '}
                             <span className="font-semibold text-amber-400 capitalize">{tier}</span>
@@ -1485,7 +1485,7 @@ export const Armageddon = () => {
                     <div className="rounded-xl border border-(--border) bg-(--overlay)">
                         <button
                             onClick={() => setDailyPurchasesExpanded(previous => !previous)}
-                            className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--muted)">
+                            className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
                             <div className="flex items-center gap-2">
                                 <span className="font-semibold">Daily Purchases</span>
                                 <select
@@ -1501,7 +1501,7 @@ export const Armageddon = () => {
                                 </select>
                             </div>
                             <ChevronDown
-                                className={`size-4 text-(--muted-fg) transition-transform duration-200 ${
+                                className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
                                     dailyPurchasesExpanded ? 'rotate-180' : ''
                                 }`}
                             />
@@ -1510,7 +1510,7 @@ export const Armageddon = () => {
                         {dailyPurchasesExpanded && (
                             <div className="flex flex-col gap-3 border-t border-(--border) p-4">
                                 {dayEntries.length === 0 ? (
-                                    <p className="text-sm text-(--muted-fg)">No purchases planned for {dateLabel}.</p>
+                                    <p className="text-sm text-(--soft-fg)">No purchases planned for {dateLabel}.</p>
                                 ) : (
                                     <>
                                         <div className="flex flex-col gap-2">
@@ -1522,7 +1522,7 @@ export const Armageddon = () => {
                                                 return (
                                                     <div
                                                         key={key}
-                                                        className={`flex items-center gap-2 rounded-lg bg-(--muted) p-2 ${
+                                                        className={`flex items-center gap-2 rounded-lg bg-(--soft) p-2 ${
                                                             isFullyPurchased ? 'opacity-60' : ''
                                                         }`}>
                                                         <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
@@ -1537,7 +1537,7 @@ export const Armageddon = () => {
                                                             </span>
                                                             <div className="flex flex-wrap items-center gap-1.5">
                                                                 {entry.qtyPerPack > 1 && (
-                                                                    <span className="text-xs text-(--muted-fg)">
+                                                                    <span className="text-xs text-(--soft-fg)">
                                                                         ×{entry.qtyPerPack} each
                                                                     </span>
                                                                 )}
@@ -1598,7 +1598,7 @@ export const Armageddon = () => {
                                             })}
                                         </div>
                                         <div className="flex items-center justify-end gap-1 border-t border-(--border) pt-2 text-sm">
-                                            <span className="text-(--muted-fg)">Day total:</span>
+                                            <span className="text-(--soft-fg)">Day total:</span>
                                             <span className="font-semibold text-amber-400 tabular-nums">
                                                 {dayTotal.toLocaleString()}
                                             </span>
@@ -1617,15 +1617,15 @@ export const Armageddon = () => {
                 <div className="rounded-xl border border-(--border) bg-(--overlay)">
                     <button
                         onClick={() => setPurchasedExpanded(previous => !previous)}
-                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--muted)">
+                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
                         <div className="flex items-center gap-2">
                             <span className="font-semibold">Purchased Items</span>
-                            <span className="rounded-full bg-(--secondary) px-2 py-0.5 text-xs text-(--muted-fg)">
+                            <span className="rounded-full bg-(--neutral) px-2 py-0.5 text-xs text-(--soft-fg)">
                                 {purchasedItemsByType.length === 1 ? '1 type' : `${purchasedItemsByType.length} types`}
                             </span>
                         </div>
                         <ChevronDown
-                            className={`size-4 text-(--muted-fg) transition-transform duration-200 ${
+                            className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
                                 purchasedExpanded ? 'rotate-180' : ''
                             }`}
                         />
@@ -1653,10 +1653,10 @@ export const Armageddon = () => {
                 <div className="rounded-xl border border-(--border) bg-(--overlay)">
                     <button
                         onClick={() => setCoverageExpanded(previous => !previous)}
-                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--muted)">
+                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
                         <div className="flex items-center gap-2">
                             <span className="font-semibold">Missing Resources</span>
-                            <span className="rounded-full bg-(--secondary) px-2 py-0.5 text-xs text-(--muted-fg)">
+                            <span className="rounded-full bg-(--neutral) px-2 py-0.5 text-xs text-(--soft-fg)">
                                 {coverageRows.length === 1 ? '1 type' : `${coverageRows.length} types`}
                             </span>
                             {coverageRows.some(r => r.remaining > 0) && (
@@ -1666,7 +1666,7 @@ export const Armageddon = () => {
                             )}
                         </div>
                         <ChevronDown
-                            className={`size-4 text-(--muted-fg) transition-transform duration-200 ${
+                            className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
                                 coverageExpanded ? 'rotate-180' : ''
                             }`}
                         />
@@ -1677,7 +1677,7 @@ export const Armageddon = () => {
                             {coverageRows.map(row => (
                                 <div
                                     key={row.rewardType}
-                                    className="flex flex-col gap-2 rounded-lg border border-(--border) bg-(--muted) p-3 sm:flex-row sm:flex-wrap sm:items-start">
+                                    className="flex flex-col gap-2 rounded-lg border border-(--border) bg-(--soft) p-3 sm:flex-row sm:flex-wrap sm:items-start">
                                     {/* Icon + label */}
                                     <div className="flex shrink-0 items-center gap-2 sm:w-52">
                                         <div className="flex h-8 w-8 items-center justify-center">{row.icon}</div>
@@ -1686,7 +1686,7 @@ export const Armageddon = () => {
 
                                     {/* Counts */}
                                     <div className="flex shrink-0 items-center gap-3 text-sm">
-                                        <span className="flex items-center gap-1 text-(--muted-fg)">
+                                        <span className="flex items-center gap-1 text-(--soft-fg)">
                                             Need{' '}
                                             <span className="font-semibold text-amber-400">
                                                 {row.rewardType === 'gold'
@@ -1700,7 +1700,7 @@ export const Armageddon = () => {
                                             )}
                                         </span>
                                         {row.cartTotal > 0 && (
-                                            <span className="text-(--muted-fg)">
+                                            <span className="text-(--soft-fg)">
                                                 Cart{' '}
                                                 <span className="font-semibold text-green-400">
                                                     +
@@ -1719,7 +1719,7 @@ export const Armageddon = () => {
                                                 : `${row.rewardType === 'gold' ? formatGold(row.remaining) : row.remaining.toLocaleString()} remaining`}
                                         </span>
                                         {row.remaining > 0 && row.estimatedCost !== undefined && (
-                                            <span className="flex items-center gap-0.5 text-xs text-(--muted-fg)">
+                                            <span className="flex items-center gap-0.5 text-xs text-(--soft-fg)">
                                                 ≈
                                                 <span className="font-semibold text-amber-400 tabular-nums">
                                                     {row.estimatedCost.toLocaleString()}
@@ -1736,7 +1736,7 @@ export const Armageddon = () => {
                                                 key={w}
                                                 className="flex items-center gap-1 rounded-full border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs">
                                                 <span className="font-semibold">W{w}</span>
-                                                <span className="text-(--muted-fg)">
+                                                <span className="text-(--soft-fg)">
                                                     {days.map(d => DAY_LABELS[d].slice(0, 3)).join(', ')}
                                                 </span>
                                             </span>
@@ -1753,25 +1753,25 @@ export const Armageddon = () => {
             <div className="flex flex-wrap gap-3 rounded-xl border border-(--border) bg-(--overlay) px-4 py-3 text-sm">
                 <div className="flex items-center gap-1.5">
                     <MiscIcon icon="armageddonCurrency" width={16} height={16} />
-                    <span className="text-(--muted-fg)">F2P per week:</span>
+                    <span className="text-(--soft-fg)">F2P per week:</span>
                     <span className="font-semibold text-amber-400">1,050 – 1,100</span>
                 </div>
-                <span className="text-(--muted-fg) select-none">·</span>
+                <span className="text-(--soft-fg) select-none">·</span>
                 <div className="flex items-center gap-1.5">
                     <MiscIcon icon="armageddonCurrency" width={16} height={16} />
-                    <span className="text-(--muted-fg)">Bonus shipment:</span>
+                    <span className="text-(--soft-fg)">Bonus shipment:</span>
                     <span className="font-semibold text-amber-400">+900</span>
                 </div>
-                <span className="text-(--muted-fg) select-none">·</span>
+                <span className="text-(--soft-fg) select-none">·</span>
                 <div className="flex items-center gap-1.5">
                     <MiscIcon icon="armageddonCurrency" width={16} height={16} />
-                    <span className="text-(--muted-fg)">Rolls over each week</span>
+                    <span className="text-(--soft-fg)">Rolls over each week</span>
                 </div>
             </div>
 
             {/* Shop grid */}
             {resolvedSlots.length === 0 ? (
-                <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--muted-fg)">
+                <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--soft-fg)">
                     No offers available for the selected week / day / player level.
                 </div>
             ) : (

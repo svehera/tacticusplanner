@@ -1,8 +1,4 @@
-﻿import { DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
-import Box from '@mui/material/Box';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import { enqueueSnackbar } from 'notistack';
+﻿import { enqueueSnackbar } from 'notistack';
 import React, { useContext, useMemo, useState } from 'react';
 
 import { PersonalGoalType } from '@/models/enums';
@@ -11,14 +7,15 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { StaticDataService } from 'src/services';
 import { EditAscendGoal } from 'src/shared-components/goals/edit-ascend-goal';
 import { NumbersInput } from 'src/shared-components/goals/numbers-input';
-import { PrioritySelect } from 'src/shared-components/goals/priority-select';
 import { RankGoalSelect } from 'src/shared-components/goals/rank-goal-select';
 import { UpgradesRaritySelect } from 'src/shared-components/goals/upgrades-rarity-select';
 import { getEnumValues } from 'src/shared-logic/functions';
 
 import { Alliance, allianceFromString, Rank, RarityMapper } from '@/fsd/5-shared/model';
+import { Button, PortalDialog } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input/number-input';
+import { Select } from '@/fsd/5-shared/ui/selects';
 
 import { ICampaignBattleComposed, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CampaignLocation } from '@/fsd/4-entities/campaign/campaign-location';
@@ -124,27 +121,30 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
             : undefined;
 
     return (
-        <Dialog open={openDialog} onClose={() => handleClose()} fullWidth>
-            <DialogTitle className="flex items-center gap-[3px]">
-                <span>Edit {PersonalGoalType[goal.type]} Goal</span>
-                {goal.type === PersonalGoalType.UpgradeMaterial ? (
-                    <UpgradeImage
-                        material={material?.snowprintId ?? ''}
-                        iconPath={material?.icon ?? ''}
-                        size={40}
-                        rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
-                    />
-                ) : (
-                    <UnitShardIcon icon={goal.unitRoundIcon} />
-                )}
-            </DialogTitle>
-            <DialogContent className="pt-5">
-                <Box id="edit-goal-form" className="flex flex-col gap-5">
+        <PortalDialog open={openDialog} onClose={() => handleClose()} aria-label="Edit goal">
+            <PortalDialog.Header>
+                <div className="flex items-center gap-2">
+                    <span>Edit {PersonalGoalType[goal.type]} Goal</span>
+                    {goal.type === PersonalGoalType.UpgradeMaterial ? (
+                        <UpgradeImage
+                            material={material?.snowprintId ?? ''}
+                            iconPath={material?.icon ?? ''}
+                            size={40}
+                            rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
+                        />
+                    ) : (
+                        <UnitShardIcon icon={goal.unitRoundIcon} />
+                    )}
+                </div>
+            </PortalDialog.Header>
+            <PortalDialog.Body>
+                <div className="flex flex-col gap-5">
                     <div className="min-h-[10px]" />
-                    <PrioritySelect
+                    <Select<number>
                         value={form.priority}
-                        maxValue={goals.length}
-                        valueChange={value => setForm(current => ({ ...current, priority: value }))}
+                        onChange={priority => setForm(current => ({ ...current, priority }))}
+                        options={Array.from({ length: goals.length }, (_, index) => index + 1)}
+                        label="Priority"
                     />
 
                     {form.type === PersonalGoalType.UpgradeRank && (
@@ -400,24 +400,31 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                         />
                     )}
 
-                    <TextField
-                        fullWidth
-                        id="outlined-textarea"
-                        label="Notes"
-                        placeholder="Notes"
-                        multiline
-                        helperText="Optional. Max length 200 characters."
-                        value={form.notes}
-                        onChange={event =>
-                            setForm(current => ({ ...current, notes: event.target.value.slice(0, 200) }))
-                        }
-                    />
-                </Box>
-            </DialogContent>
-            <DialogActions>
-                <Button onClick={() => handleClose()}>Cancel</Button>
-                <Button onClick={() => handleClose(form)}>Save</Button>
-            </DialogActions>
-        </Dialog>
+                    <div className="flex flex-col gap-y-1">
+                        <label className="mb-1 block text-sm font-medium text-(--soft-fg)">Notes</label>
+                        <textarea
+                            id="notes-textarea"
+                            placeholder="Notes"
+                            rows={3}
+                            maxLength={200}
+                            value={form.notes ?? ''}
+                            onChange={event =>
+                                setForm(current => ({ ...current, notes: event.target.value.slice(0, 200) }))
+                            }
+                            className="w-full resize-y rounded-lg border border-(--border) bg-(--neutral) px-2.5 py-2 text-sm text-(--fg) outline-none placeholder:text-(--soft-fg) focus:ring-2 focus:ring-(--ring)"
+                        />
+                        <span className="text-xs text-(--soft-fg)">Optional. Max length 200 characters.</span>
+                    </div>
+                </div>
+            </PortalDialog.Body>
+            <PortalDialog.Footer>
+                <Button appearance="outline" onPress={() => handleClose()}>
+                    Cancel
+                </Button>
+                <Button intent="success" onPress={() => handleClose(form)}>
+                    Save
+                </Button>
+            </PortalDialog.Footer>
+        </PortalDialog>
     );
 };

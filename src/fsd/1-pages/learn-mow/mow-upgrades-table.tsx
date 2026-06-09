@@ -1,4 +1,4 @@
-﻿import { AllCommunityModule, ColDef, ICellRendererParams, themeBalham } from 'ag-grid-community';
+﻿import { AllCommunityModule, ColDef, ICellRendererParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import React, { useState } from 'react';
 
@@ -89,10 +89,12 @@ export const MowUpgradesTable: React.FC<Props> = ({ rows }) => {
 
     return (
         <>
-            <div className="ag-theme-material max-h-[50vh] w-full" style={{ height: 50 + rows.length * 60 }}>
+            <div
+                className="ag-theme-material density-compact max-h-[50vh] w-full"
+                style={{ height: 50 + rows.length * 60 }}>
                 <AgGridReact
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     suppressCellFocus={true}
                     defaultColDef={{ suppressMovable: true, sortable: true, wrapText: true, autoHeight: true }}
                     rowHeight={60}

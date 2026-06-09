@@ -1,34 +1,13 @@
-﻿import InfoIcon from '@mui/icons-material/Info';
-import {
-    Checkbox,
-    DialogActions,
-    DialogContent,
-    DialogTitle,
-    FormControl,
-    FormControlLabel,
-    FormGroup,
-    FormHelperText,
-    FormLabel,
-    InputLabel,
-    MenuItem,
-    Radio,
-    RadioGroup,
-    Select,
-    SelectChangeEvent,
-    Slider,
-} from '@mui/material';
-import Button from '@mui/material/Button';
-import Dialog from '@mui/material/Dialog';
-import Typography from '@mui/material/Typography';
+import { Info } from 'lucide-react';
 import React, { useCallback, useContext } from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { DailyRaidsStrategy } from 'src/models/enums';
 import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
 
 import { Rarity } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Button, PortalDialog, RadioOption, Slider, Switch } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { Select } from '@/fsd/5-shared/ui/selects';
 
 import { CampaignType, CampaignGroupType } from '@/fsd/4-entities/campaign';
 
@@ -59,34 +38,83 @@ const defaultCustomSettings: ICustomDailyRaidsSettings = {
 };
 
 const energyMarks = [
+    { value: 288 + 30 + 60, label: 'Ad Only' },
+    { value: 288 + 30 + 60 + 60, label: '25 BS' },
+    { value: 288 + 30 + 60 + 60 + 100, label: '50 BS' },
+    { value: 288 + 30 + 60 + 60 + 100 + 100, label: '110 BS' },
+    { value: 288 + 30 + 60 + 60 + 100 + 100 + 100, label: '250 BS' },
+    { value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100, label: '500 BS' },
+    { value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100 + 100, label: '1000 BS' },
+];
+
+const HSE_OPTIONS = [
+    IDailyRaidsHomeScreenEvent.none,
+    IDailyRaidsHomeScreenEvent.purgeOrder,
+    IDailyRaidsHomeScreenEvent.trainingRush,
+    IDailyRaidsHomeScreenEvent.warpSurge,
+    IDailyRaidsHomeScreenEvent.machineHunt,
+];
+
+const HSE_LABELS: Record<number, string> = {
+    [IDailyRaidsHomeScreenEvent.none]: 'None',
+    [IDailyRaidsHomeScreenEvent.purgeOrder]: 'Purge Order',
+    [IDailyRaidsHomeScreenEvent.trainingRush]: 'Training Rush',
+    [IDailyRaidsHomeScreenEvent.warpSurge]: 'Warp Surge',
+    [IDailyRaidsHomeScreenEvent.machineHunt]: 'Machine Hunt',
+};
+
+const CAMPAIGN_EVENT_OPTIONS: Array<CampaignGroupType | 'none'> = [
+    'none',
+    CampaignGroupType.adMechCE,
+    CampaignGroupType.tyranidCE,
+    CampaignGroupType.tauCE,
+    CampaignGroupType.deathGuardCE,
+    CampaignGroupType.sistersCE,
+    CampaignGroupType.darkAngelsCE,
+];
+
+const CAMPAIGN_EVENT_LABELS: Record<string, string> = {
+    none: 'None',
+    [CampaignGroupType.adMechCE]: 'Adeptus Mechanicus',
+    [CampaignGroupType.tyranidCE]: 'Tyranids',
+    [CampaignGroupType.tauCE]: "T'au Empire",
+    [CampaignGroupType.deathGuardCE]: 'Death Guard',
+    [CampaignGroupType.sistersCE]: 'Adepta Sororitas',
+    [CampaignGroupType.darkAngelsCE]: 'Dark Angels',
+};
+
+const farmOrderOptions = [
     {
-        value: 288 + 30 + 60,
-        label: 'Ad Only',
+        value: IDailyRaidsFarmOrder.totalMaterials,
+        label: 'By total materials',
+        tooltip: (
+            <p>
+                Materials required to accomplish all selected goals will be combined together.
+                <br /> Pros: You will farm materials for all characters at once and overall it will take less time to
+                accomplish all selected goals
+                <br /> Cons: Goals priority is ignored and it will take more time to accomplish your high priority goals
+            </p>
+        ),
     },
     {
-        value: 288 + 30 + 60 + 60,
-        label: '25 BS',
+        value: IDailyRaidsFarmOrder.goalPriority,
+        label: 'By goals priority',
+        tooltip: (
+            <p>
+                Materials grouped by goals priority.
+                <br /> Pros: You will farm materials for each character individually and will faster accomplish your
+                high priority goals
+                <br /> Cons: Overall it will take more time to accomplish all selected goals. It is especially
+                noticeable when you need to farm Legendary upgrades for characters of different factions
+            </p>
+        ),
     },
-    {
-        value: 288 + 30 + 60 + 60 + 100,
-        label: '50 BS',
-    },
-    {
-        value: 288 + 30 + 60 + 60 + 100 + 100,
-        label: '110 BS',
-    },
-    {
-        value: 288 + 30 + 60 + 60 + 100 + 100 + 100,
-        label: '250 BS',
-    },
-    {
-        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100,
-        label: '500 BS',
-    },
-    {
-        value: 288 + 30 + 60 + 60 + 100 + 100 + 100 + 100 + 100,
-        label: '1000 BS',
-    },
+];
+
+const locationStrategyOptions = [
+    { value: DailyRaidsStrategy.leastEnergy, label: 'Least energy' },
+    { value: DailyRaidsStrategy.allLocations, label: 'All locations' },
+    { value: DailyRaidsStrategy.custom, label: 'Custom' },
 ];
 
 interface Props {
@@ -95,27 +123,17 @@ interface Props {
 }
 
 const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
-    // const { characters } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { dailyRaidsPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
-        return index === -1 ? 2 : index; // Default to 50 BS refresh if not found.
+        return index === -1 ? 2 : index;
     });
     const [customLocationsSettings, setCustomLocationsSettings] = React.useState<ICustomDailyRaidsSettings>(
         dailyRaidsPreferences.customSettings ?? defaultCustomSettings
     );
-    /*
-    const [character, setCharacter] = useState<ICharacter2>(() => {
-        return (
-            characters.find(
-                x => x.snowprintId === dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.characterId
-            )
-        );
-    });*/
 
-    // Keep local form state in sync if preferences change externally (e.g., API auto-detect)
     React.useEffect(() => {
         setDailyRaidsPreferencesForm(dailyRaidsPreferences);
     }, [dailyRaidsPreferences]);
@@ -127,12 +145,10 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         }));
     }, []);
 
-    const handleEnergyChange = (_: any, value: number | number[]) => {
-        if (typeof value === 'number') {
-            const scaledValue = energyMarks[value]?.value || 288; // Adjust the index and default
-            setDailyEnergy(value);
-            setDailyRaidsPreferencesForm(current => ({ ...current, dailyEnergy: scaledValue }));
-        }
+    const handleEnergyChange = (value: number) => {
+        const scaledValue = energyMarks[value]?.value || 288;
+        setDailyEnergy(value);
+        setDailyRaidsPreferencesForm(current => ({ ...current, dailyEnergy: scaledValue }));
     };
 
     const saveChanges = () => {
@@ -140,330 +156,154 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         close();
     };
 
-    function valueLabelFormat(value: number) {
-        const mark = energyMarks.find(mark => mark.value === value);
-        return mark ? mark.label : value;
-    }
+    const selectedHse = dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ?? IDailyRaidsHomeScreenEvent.none;
+    const selectedCampaignEvent = dailyRaidsPreferencesForm.campaignEvent ?? 'none';
 
-    function saveCampaignEventChanges(event: SelectChangeEvent<CampaignGroupType | 'none'>): void {
-        setDailyRaidsPreferencesForm(current => ({
-            ...current,
-            campaignEvent: event.target.value as CampaignGroupType | 'none',
-        }));
-    }
-
-    function saveHomeScreenEventChanges(event: SelectChangeEvent<IDailyRaidsHomeScreenEvent>): void {
-        setDailyRaidsPreferencesForm(current => ({
-            ...current,
-            farmPreferences: {
-                ...current.farmPreferences,
-                homeScreenEvent: event.target.value as IDailyRaidsHomeScreenEvent,
-            },
-        }));
-    }
-    /*
-    function saveTrainingRushStrategyChanges(event: SelectChangeEvent<ITrainingRushStrategy>): void {
-        setDailyRaidsPreferencesForm(current => {
-            const ret = { ...current };
-            ret.farmPreferences.trainingRushPreferences = {
-                ...ret.farmPreferences.trainingRushPreferences,
-                strategy: event.target.value as ITrainingRushStrategy,
-            };
-            return ret;
-        });
-    }
-
-    function saveTrainingRushUnitChanges(unit: ICharacter2 | undefined): void {
-        setCharacter(unit);
-        setDailyRaidsPreferencesForm(current => {
-            const ret = { ...current };
-            ret.farmPreferences.trainingRushPreferences = {
-                strategy:
-                    ret.farmPreferences.trainingRushPreferences?.strategy ?? ITrainingRushStrategy.maximizeRewards,
-                characterId: unit ? unit.snowprintId : undefined,
-            };
-            return ret;
-        });
-    }
-*/
     return (
-        <Dialog open={open} onClose={close} fullWidth maxWidth={'md'} fullScreen={isMobile}>
-            <DialogTitle>Raids settings</DialogTitle>
-            <DialogContent>
-                <FormGroup className="flex flex-col gap-5 px-5 py-0">
-                    <div>
-                        <Typography className="flex items-center gap-1">
-                            <b>{energyMarks[dailyEnergy].value}</b> <MiscIcon icon={'energy'} width={20} height={20} />{' '}
-                            per day
-                        </Typography>
-                        <Slider
-                            aria-label="Restricted values"
-                            min={0}
-                            max={energyMarks.length - 1} // Align with the number of marks
-                            step={1}
-                            valueLabelFormat={valueLabelFormat}
-                            value={dailyEnergy}
-                            onChange={handleEnergyChange}
-                            marks={energyMarks.map((mark, index) => ({
-                                ...mark,
-                                value: index, // Distribute marks evenly
-                            }))}
+        <PortalDialog open={open} onClose={close} aria-label="Raids settings" size="2xl">
+            <PortalDialog.Header>Raids settings</PortalDialog.Header>
+
+            <PortalDialog.Body>
+                {/* Energy per day */}
+                <div className="px-2">
+                    <span className="flex items-center gap-1 text-sm font-semibold">
+                        <span>{energyMarks[dailyEnergy].value}</span>
+                        <MiscIcon icon={'energy'} width={20} height={20} /> per day
+                    </span>
+                    <Slider
+                        aria-label="Daily energy"
+                        min={0}
+                        max={energyMarks.length - 1}
+                        value={dailyEnergy}
+                        onChange={handleEnergyChange}
+                        marks={energyMarks.map((mark, index) => ({
+                            value: index,
+                            label: mark.label,
+                        }))}
+                    />
+                </div>
+
+                {/* Raids order + Home Screen Event — side by side */}
+                <div className="flex flex-wrap gap-6">
+                    <fieldset className="min-w-[200px] flex-1">
+                        <legend className="mb-2 text-sm font-semibold text-(--fg)">Raids order/grouping:</legend>
+                        <div className="flex flex-col gap-2 ps-2">
+                            {farmOrderOptions.map(opt => (
+                                <RadioOption
+                                    key={opt.value}
+                                    name="farm-order"
+                                    value={opt.value}
+                                    checked={dailyRaidsPreferencesForm.farmPreferences.order === opt.value}
+                                    onChange={() => updatePreferences(opt.value)}>
+                                    <span className="flex items-center gap-1">
+                                        {opt.label}
+                                        <AccessibleTooltip title={opt.tooltip}>
+                                            <Info className="size-4 text-(--primary)" />
+                                        </AccessibleTooltip>
+                                    </span>
+                                </RadioOption>
+                            ))}
+                        </div>
+                    </fieldset>
+
+                    <div className="flex min-w-[200px] flex-1 flex-col gap-3">
+                        <Select<IDailyRaidsHomeScreenEvent>
+                            options={HSE_OPTIONS}
+                            value={selectedHse}
+                            onChange={value => {
+                                setDailyRaidsPreferencesForm(current => ({
+                                    ...current,
+                                    farmPreferences: {
+                                        ...current.farmPreferences,
+                                        homeScreenEvent: value,
+                                    },
+                                }));
+                            }}
+                            renderOption={opt => HSE_LABELS[opt]}
+                            label="Home Screen Event"
+                        />
+
+                        {selectedHse !== IDailyRaidsHomeScreenEvent.none && (
+                            <div className="flex items-center gap-1">
+                                <Switch
+                                    isSelected={dailyRaidsPreferencesForm.invertHse ?? false}
+                                    onChange={checked =>
+                                        setDailyRaidsPreferencesForm(current => ({
+                                            ...current,
+                                            invertHse: checked,
+                                        }))
+                                    }>
+                                    Invert
+                                </Switch>
+                                <AccessibleTooltip title="When selected, prioritize raids that award the fewest points for the selected HSE">
+                                    <Info className="size-4 text-(--primary)" />
+                                </AccessibleTooltip>
+                            </div>
+                        )}
+                    </div>
+                </div>
+
+                {/* Locations selection + Campaign Event — side by side */}
+                <div className="flex flex-wrap gap-6">
+                    <fieldset className="min-w-[200px] flex-1">
+                        <legend className="mb-2 text-sm font-semibold text-(--fg)">Locations selection:</legend>
+                        <div className="flex flex-col gap-2 ps-2">
+                            {locationStrategyOptions.map(opt => (
+                                <RadioOption
+                                    key={opt.value}
+                                    name="location-strategy"
+                                    value={opt.value}
+                                    checked={dailyRaidsPreferencesForm.farmStrategy === opt.value}
+                                    onChange={() =>
+                                        setDailyRaidsPreferencesForm(current => ({
+                                            ...current,
+                                            farmStrategy: opt.value,
+                                        }))
+                                    }>
+                                    {opt.label}
+                                </RadioOption>
+                            ))}
+                        </div>
+                    </fieldset>
+
+                    <div className="min-w-[200px] flex-1">
+                        <Select<CampaignGroupType | 'none'>
+                            options={CAMPAIGN_EVENT_OPTIONS}
+                            value={selectedCampaignEvent}
+                            onChange={value => {
+                                setDailyRaidsPreferencesForm(current => ({
+                                    ...current,
+                                    campaignEvent: value as CampaignGroupType | 'none',
+                                }));
+                            }}
+                            renderOption={opt => CAMPAIGN_EVENT_LABELS[opt]}
+                            label="Campaign Event"
                         />
                     </div>
+                </div>
 
-                    <div className="items-[unset] flex flex-wrap gap-10">
-                        <FormControl>
-                            <FormLabel id="radio-buttons-group" className="font-bold">
-                                Raids order/grouping:
-                            </FormLabel>
-                            <RadioGroup
-                                className="ps-5"
-                                aria-labelledby="radio-buttons-group"
-                                name="controlled-radio-buttons-group"
-                                value={dailyRaidsPreferencesForm.farmPreferences.order}
-                                onChange={change =>
-                                    updatePreferences(
-                                        Number.parseInt(change.target.value) as unknown as IDailyRaidsFarmOrder
-                                    )
-                                }>
-                                <FormControlLabel
-                                    value={IDailyRaidsFarmOrder.totalMaterials}
-                                    control={<Radio />}
-                                    label={
-                                        <div className="flex-box gap5 start">
-                                            By total materials{' '}
-                                            <AccessibleTooltip
-                                                title={
-                                                    <p>
-                                                        Materials required to accomplish all selected goals will be
-                                                        combined together.
-                                                        <br /> Pros: You will farm materials for all characters at once
-                                                        and overall it will take less time to accomplish all selected
-                                                        goals
-                                                        <br /> Cons: Goals priority is ignored and it will take more
-                                                        time to accomplish your high priority goals
-                                                    </p>
-                                                }>
-                                                <InfoIcon color="primary" />
-                                            </AccessibleTooltip>
-                                        </div>
-                                    }
-                                />
-                                <FormControlLabel
-                                    value={IDailyRaidsFarmOrder.goalPriority}
-                                    control={<Radio />}
-                                    label={
-                                        <div className="flex-box gap5 start">
-                                            By goals priority{' '}
-                                            <AccessibleTooltip
-                                                title={
-                                                    <p>
-                                                        Materials grouped by goals priority.
-                                                        <br /> Pros: You will farm materials for each character
-                                                        individually and will faster accomplish your high priority goals
-                                                        <br /> Cons: Overall it will take more time to accomplish all
-                                                        selected goals. It is especially noticeable when you need to
-                                                        farm Legendary upgrades for characters of different factions
-                                                    </p>
-                                                }>
-                                                <InfoIcon color="primary" />
-                                            </AccessibleTooltip>
-                                        </div>
-                                    }
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </div>
-                    <div className="flex flex-row items-start gap-4">
-                        <FormControl>
-                            <InputLabel id="home-screen-event-label">Home Screen Event</InputLabel>
-                            <Select
-                                labelId="home-screen-event-label"
-                                id="home-screen-event-select"
-                                value={
-                                    dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ??
-                                    IDailyRaidsHomeScreenEvent.none
-                                }
-                                label="Home Screen Event"
-                                onChange={saveHomeScreenEventChanges}
-                                style={{ minWidth: 180 }}>
-                                <MenuItem value={IDailyRaidsHomeScreenEvent.none}>None</MenuItem>
-                                <MenuItem value={IDailyRaidsHomeScreenEvent.purgeOrder} className="flex-box gap10">
-                                    <span>Purge Order</span>
-                                </MenuItem>
-                                <MenuItem value={IDailyRaidsHomeScreenEvent.trainingRush} className="flex-box gap10">
-                                    <span>Training Rush</span>
-                                </MenuItem>
-                                <MenuItem value={IDailyRaidsHomeScreenEvent.warpSurge} className="flex-box gap10">
-                                    <span>Warp Surge</span>
-                                </MenuItem>
-                                <MenuItem value={IDailyRaidsHomeScreenEvent.machineHunt} className="flex-box gap10">
-                                    <span>Machine Hunt</span>
-                                </MenuItem>
-                            </Select>
-                            <FormHelperText>Select your current Home Screen Event.</FormHelperText>
-                        </FormControl>
-                        {(dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ??
-                            IDailyRaidsHomeScreenEvent.none) !== IDailyRaidsHomeScreenEvent.none && (
-                            <FormControl>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={dailyRaidsPreferencesForm.invertHse ?? false}
-                                            onChange={event_ =>
-                                                setDailyRaidsPreferencesForm(current => ({
-                                                    ...current,
-                                                    invertHse: event_.target.checked,
-                                                }))
-                                            }
-                                        />
-                                    }
-                                    label={
-                                        <div className="flex items-center gap-1">
-                                            Invert
-                                            <AccessibleTooltip title="When selected, prioritize raids that award the fewest points for the selected HSE">
-                                                <InfoIcon color="primary" fontSize="small" />
-                                            </AccessibleTooltip>
-                                        </div>
-                                    }
-                                />
-                            </FormControl>
-                        )}
+                {/* Custom locations (only when strategy is custom) */}
+                {dailyRaidsPreferencesForm.farmStrategy === DailyRaidsStrategy.custom && (
+                    <DailyRaidsCustomLocations
+                        hasCE={!!dailyRaidsPreferencesForm.campaignEvent && selectedCampaignEvent !== 'none'}
+                        settings={customLocationsSettings}
+                        settingsChange={value => {
+                            setCustomLocationsSettings(value);
+                            setDailyRaidsPreferencesForm(current => ({ ...current, customSettings: value }));
+                        }}
+                    />
+                )}
+            </PortalDialog.Body>
 
-                        {/*}
-                        {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
-                            IDailyRaidsHomeScreenEvent.trainingRush && (
-                            <FormControl>
-                                <InputLabel id="training-rush-strategy-label">Training Rush Strategy</InputLabel>
-                                <Select
-                                    labelId="training-rush-strategy-label"
-                                    id="training-rush-strategy-select"
-                                    value={
-                                        dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.strategy ??
-                                        ITrainingRushStrategy.maximizeRewards
-                                    }
-                                    label="Training Rush Strategy"
-                                    onChange={saveTrainingRushStrategyChanges}
-                                    style={{ minWidth: 180 }}>
-                                    <MenuItem value={ITrainingRushStrategy.maximizeRewards} className="flex-box gap10">
-                                        <span>Maximize Rewards</span>
-                                    </MenuItem>
-                                    <MenuItem
-                                        value={ITrainingRushStrategy.maximizeXpForCharacter}
-                                        className="flex-box gap10">
-                                        <span>Maximize XP</span>
-                                    </MenuItem>
-                                </Select>
-                                <FormHelperText>Select your current Training Rush Strategy.</FormHelperText>
-                            </FormControl>
-                        )}
-                        {dailyRaidsPreferencesForm.farmPreferences.homeScreenEvent ===
-                            IDailyRaidsHomeScreenEvent.trainingRush &&
-                            (dailyRaidsPreferencesForm.farmPreferences.trainingRushPreferences?.strategy ??
-                                ITrainingRushStrategy.maximizeRewards) ===
-                                ITrainingRushStrategy.maximizeXpForCharacter && (
-                                <FormControl>
-                                    <UnitsAutocomplete
-                                        unit={character}
-                                        options={characters}
-                                        onUnitChange={saveTrainingRushUnitChanges}
-                                    />
-                                    <FormHelperText>Select your character.</FormHelperText>
-                                </FormControl>
-                            )}
-                                */}
-                    </div>
-
-                    <div className="flex flex-wrap gap-10">
-                        <FormControl>
-                            <FormLabel id="radio-buttons-group2" className="font-bold">
-                                Locations selection:
-                            </FormLabel>
-                            <RadioGroup
-                                className="ps-5"
-                                aria-labelledby="radio-buttons-group2"
-                                name="controlled-radio-buttons-group"
-                                value={dailyRaidsPreferencesForm.farmStrategy}
-                                onChange={change => {
-                                    const value = +change.target.value as DailyRaidsStrategy;
-                                    setDailyRaidsPreferencesForm(current => ({ ...current, farmStrategy: value }));
-                                }}>
-                                <FormControlLabel
-                                    value={DailyRaidsStrategy.leastEnergy}
-                                    control={<Radio />}
-                                    label="Least energy"
-                                />
-                                <FormControlLabel
-                                    value={DailyRaidsStrategy.allLocations}
-                                    control={<Radio />}
-                                    label="All locations"
-                                />
-                                <FormControlLabel
-                                    value={DailyRaidsStrategy.custom}
-                                    control={<Radio />}
-                                    label="Custom"
-                                />
-                            </RadioGroup>
-                        </FormControl>
-
-                        {dailyRaidsPreferencesForm.farmStrategy === DailyRaidsStrategy.custom && (
-                            <DailyRaidsCustomLocations
-                                hasCE={
-                                    !!dailyRaidsPreferencesForm.campaignEvent &&
-                                    dailyRaidsPreferencesForm.campaignEvent !== 'none'
-                                }
-                                settings={customLocationsSettings}
-                                settingsChange={value => {
-                                    setCustomLocationsSettings(value);
-                                    setDailyRaidsPreferencesForm(current => ({ ...current, customSettings: value }));
-                                }}
-                            />
-                        )}
-                    </div>
-
-                    <FormControl fullWidth>
-                        <InputLabel id="demo-simple-select-label">Campaign Event</InputLabel>
-                        <Select
-                            labelId="demo-simple-select-label"
-                            id="demo-simple-select"
-                            value={dailyRaidsPreferencesForm.campaignEvent ?? 'none'}
-                            label="Campaign Event"
-                            onChange={saveCampaignEventChanges}>
-                            <MenuItem value={'none'}>None</MenuItem>
-                            <MenuItem value={CampaignGroupType.adMechCE} className="flex-box gap10">
-                                <span>Adeptus Mechanicus</span>
-                            </MenuItem>
-                            <MenuItem value={CampaignGroupType.tyranidCE} className="flex-box gap10">
-                                <span>Tyranids</span>
-                            </MenuItem>
-                            <MenuItem value={CampaignGroupType.tauCE} className="flex-box gap10">
-                                <span>T&apos;au Empire</span>
-                            </MenuItem>
-                            <MenuItem value={CampaignGroupType.deathGuardCE} className="flex-box gap10">
-                                <span>Death Guard</span>
-                            </MenuItem>
-                            <MenuItem value={CampaignGroupType.sistersCE} className="flex-box gap10">
-                                <span>Adepta Sororitas</span>
-                            </MenuItem>
-                            <MenuItem value={CampaignGroupType.darkAngelsCE} className="flex-box gap10">
-                                <span>Dark Angels</span>
-                            </MenuItem>
-                        </Select>
-                        <FormHelperText>
-                            Select your current Campaign Event to make it available for raids suggestions
-                        </FormHelperText>
-                    </FormControl>
-                </FormGroup>
-            </DialogContent>
-            <DialogActions>
-                <Button variant={'outlined'} onClick={close}>
+            <PortalDialog.Footer>
+                <Button appearance="outline" onPress={close}>
                     Cancel
                 </Button>
-                <Button variant={'contained'} color="success" onClick={saveChanges}>
+                <Button intent="success" onPress={saveChanges}>
                     Save changes
                 </Button>
-            </DialogActions>
-        </Dialog>
+            </PortalDialog.Footer>
+        </PortalDialog>
     );
 };
 

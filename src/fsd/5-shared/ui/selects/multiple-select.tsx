@@ -1,16 +1,15 @@
-﻿import { Autocomplete, TextField } from '@mui/material';
+import { type ReactNode, useMemo } from 'react';
+
+import { ComboBoxMulti } from './combo-box-multi';
 
 export const MultipleSelectCheckmarks = <T extends string>({
     values,
     selectedValues,
     selectionChanges,
-    size = 'medium',
     placeholder,
     groupByFirstLetter = false,
     sortByAlphabet = false,
-    minWidth = 300,
-    maxWidth,
-    disableCloseOnSelect = true,
+    renderOption,
 }: {
     values: T[];
     selectedValues: NoInfer<T>[];
@@ -22,25 +21,22 @@ export const MultipleSelectCheckmarks = <T extends string>({
     minWidth?: number;
     maxWidth?: number;
     disableCloseOnSelect?: boolean;
+    renderOption?: (option: NoInfer<T>) => ReactNode;
 }) => {
-    const handleChange = (newValue: NoInfer<T>[]) => {
-        selectionChanges(newValue);
-    };
+    const sortedOptions = useMemo(
+        () => (groupByFirstLetter || sortByAlphabet ? values.toSorted((a, b) => a.localeCompare(b)) : values),
+        [values, groupByFirstLetter, sortByAlphabet]
+    );
 
     return (
-        <Autocomplete
-            fullWidth
-            multiple
-            disableCloseOnSelect={disableCloseOnSelect}
-            size={size}
+        <ComboBoxMulti<NoInfer<T>>
+            options={sortedOptions}
             value={selectedValues}
-            options={
-                groupByFirstLetter || sortByAlphabet ? values.toSorted((a, b) => -b[0].localeCompare(a[0])) : values
-            }
-            groupBy={groupByFirstLetter ? option => option[0] : undefined}
-            onChange={(_, value) => handleChange(value)}
-            sx={{ minWidth, maxWidth }}
-            renderInput={params => <TextField {...params} label={placeholder} />}
+            onChange={selectionChanges}
+            displayValue={item => item}
+            label={placeholder}
+            placeholder="Type to filter…"
+            renderOption={renderOption}
         />
     );
 };

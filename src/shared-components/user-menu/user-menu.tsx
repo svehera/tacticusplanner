@@ -1,4 +1,4 @@
-﻿import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
+import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
 import DownloadIcon from '@mui/icons-material/Download';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import LoginIcon from '@mui/icons-material/Login';
@@ -8,9 +8,7 @@ import SettingsBackupRestoreIcon from '@mui/icons-material/SettingsBackupRestore
 import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
 import SyncIcon from '@mui/icons-material/Sync';
 import UploadIcon from '@mui/icons-material/Upload';
-import { Avatar, Badge, Divider, IconButton, ListItemIcon, Menu, MenuItem } from '@mui/material';
-import Box from '@mui/material/Box';
-import ListItemText from '@mui/material/ListItemText';
+import { Avatar, Badge, IconButton, Popover } from '@mui/material';
 import { enqueueSnackbar } from 'notistack';
 import { ChangeEvent, useContext, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
@@ -24,7 +22,8 @@ import { convertData, PersonalDataLocalStorage } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
-import { usePopUpControls } from '@/fsd/5-shared/ui';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
+import { Switch, usePopUpControls } from '@/fsd/5-shared/ui';
 
 import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration/tacticus-integration.dialog';
 
@@ -55,16 +54,17 @@ function stringToColor(string: string) {
 
 function stringAvatar(name: string) {
     return {
-        sx: {
-            width: 32,
-            height: 32,
-            bgcolor: stringToColor(name),
-        },
+        className: '!w-8 !h-8',
+        style: { backgroundColor: stringToColor(name) },
         children: `${name.slice(0, 2)}`,
     };
 }
 
-export const UserMenu = () => {
+interface UserMenuProps {
+    compact?: boolean;
+}
+
+export const UserMenu = ({ compact = false }: UserMenuProps) => {
     const store = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const popupManager = usePopupManager();
@@ -74,6 +74,7 @@ export const UserMenu = () => {
     const [showRegisterUser, setShowRegisterUser] = useState(false);
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
+    const [debugMode, setDebugMode] = useState(() => localStorage.getItem('debugMode') === 'true');
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
     const userMenuControls = usePopUpControls();
     const navigate = useNavigate();
@@ -83,11 +84,25 @@ export const UserMenu = () => {
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'switch_view',
+            destination_path: '/home',
+            source: 'user_menu',
+            authenticated: isAuthenticated,
+        });
         navigate('/home');
     };
 
     const navigateToMobileView = () => {
         localStorage.setItem('preferredView', 'mobile');
+        trackEvent('nav_menu_select', {
+            feature: 'navigation',
+            action: 'switch_view',
+            destination_path: '/mobile/home',
+            source: 'user_menu',
+            authenticated: isAuthenticated,
+        });
         navigate('/mobile/home');
     };
 
@@ -133,6 +148,13 @@ export const UserMenu = () => {
                     /*reset=*/ false
                 );
                 enqueueSnackbar('Import successful', { variant: 'success' });
+                trackEvent('data_import', {
+                    feature: 'backup',
+                    action: 'import',
+                    status: 'success',
+                    source: 'json',
+                    authenticated: isAuthenticated,
+                });
             } catch {
                 enqueueSnackbar('Import failed. Error parsing JSON.', { variant: 'error' });
             }
@@ -150,7 +172,7 @@ export const UserMenu = () => {
         link.href = url;
         const dateTimestamp =
             typeof data.modifiedDate === 'string' ? data.modifiedDate : data.modifiedDate?.toISOString();
-        const date = new Date(dateTimestamp ?? '');
+        const date = new Date(dateTimestamp ?? Date.now());
 
         const options: Intl.DateTimeFormatOptions = {
             year: 'numeric',
@@ -166,6 +188,13 @@ export const UserMenu = () => {
         link.click();
 
         URL.revokeObjectURL(url);
+        trackEvent('data_export', {
+            feature: 'backup',
+            action: 'export',
+            status: 'success',
+            source: 'json',
+            authenticated: isAuthenticated,
+        });
     };
 
     const restoreData = () => {
@@ -192,134 +221,190 @@ export const UserMenu = () => {
             tacticusApiKey: userInfo.tacticusApiKey,
             tacticusUserId: userInfo.tacticusUserId,
             tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
+            shareInGameName: userInfo.shareInGameName ?? false,
+            shareRosterData: userInfo.shareRosterData ?? false,
+            shareGuildMemberPerformance: userInfo.shareGuildMemberPerformance ?? false,
+            combinedGuildTags: userInfo.combinedGuildTags ?? [],
+            guildTag: userInfo.guildTag ?? '',
             onClose: () => {},
         });
     }
 
+    const itemClass =
+        'w-full flex items-center text-left gap-2.5 px-2 py-1.5 rounded-lg border-none cursor-pointer text-[13px] text-(--soft-fg) bg-transparent hover:bg-(--primary)/10 hover:text-(--fg) transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset';
+    const iconClass = 'flex-shrink-0 !text-[18px]';
+
+    const close = () => userMenuControls.handleClose();
+
     return (
-        <Box sx={{ display: 'flex', textAlign: 'center', justifyContent: 'flex-end' }}>
+        <div className={`flex items-center ${compact ? 'justify-center' : 'w-full justify-start'}`}>
             <input ref={inputReference} className="hidden" type="file" accept=".json" onChange={handleFileUpload} />
-            <div className="flex items-center">
-                <span className="text-base font-bold">Hi, {username}</span>
+            <div className="flex items-center gap-2">
                 <IconButton
                     onClick={userMenuControls.handleClick}
                     size="small"
-                    sx={{ ml: 2 }}
                     aria-controls={userMenuControls.open ? 'account-menu' : undefined}
                     aria-haspopup="true"
                     aria-expanded={userMenuControls.open ? 'true' : undefined}>
                     {isAuthenticated ? (
-                        <Avatar {...stringAvatar(username)}></Avatar>
+                        <Avatar {...stringAvatar(username)} />
                     ) : (
-                        <Avatar sx={{ width: 32, height: 32 }}>TP</Avatar>
+                        <Avatar className="!h-8 !w-8">TP</Avatar>
                     )}
                 </IconButton>
+                {!compact && <span className="truncate text-sm font-semibold">{username}</span>}
             </div>
-            <Menu
-                anchorEl={userMenuControls.anchorEl}
+
+            <Popover
                 id="account-menu"
+                anchorEl={userMenuControls.anchorEl}
                 open={userMenuControls.open}
                 onClose={userMenuControls.handleClose}
                 onClick={userMenuControls.handleClose}
                 transformOrigin={{ horizontal: 'right', vertical: 'top' }}
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
+                {/* Auth */}
                 {isAuthenticated ? (
-                    <MenuItem onClick={() => logout()}>
-                        <ListItemIcon>
-                            <LogoutIcon />
-                        </ListItemIcon>
-                        <ListItemText>Logout</ListItemText>
-                    </MenuItem>
+                    <button
+                        className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-none bg-transparent px-2 py-1.5 text-left text-[13px] text-(--danger) transition-colors hover:bg-(--danger)/14 hover:text-red-500 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset dark:hover:text-red-400"
+                        onClick={() => {
+                            logout();
+                            close();
+                        }}>
+                        <LogoutIcon className={iconClass} />
+                        <span>Logout</span>
+                    </button>
                 ) : (
-                    <div>
-                        <MenuItem onClick={() => openLoginForm()}>
-                            <ListItemIcon>
-                                <LoginIcon />
-                            </ListItemIcon>
-                            <ListItemText>Login</ListItemText>
-                        </MenuItem>
-                        <MenuItem onClick={() => setShowRegisterUser(true)}>
-                            <ListItemIcon>
-                                <RegisterIcon />
-                            </ListItemIcon>
-                            <ListItemText>Register</ListItemText>
-                        </MenuItem>
-                    </div>
+                    <>
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                openLoginForm();
+                                close();
+                            }}>
+                            <LoginIcon className={iconClass} />
+                            <span>Login</span>
+                        </button>
+                        <button
+                            className={itemClass}
+                            onClick={() => {
+                                setShowRegisterUser(true);
+                                close();
+                            }}>
+                            <RegisterIcon className={iconClass} />
+                            <span>Register</span>
+                        </button>
+                    </>
                 )}
 
-                <Divider />
+                {/* Data */}
+                <hr className="my-1 border-(--border)" />
+                <div className="px-2 pt-2 pb-1 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Data</div>
                 {isAuthenticated && (
-                    <MenuItem onClick={syncWithTacticus}>
-                        <ListItemIcon>
-                            <SyncIcon />
-                        </ListItemIcon>
-                        <ListItemText>Sync via Tacticus API</ListItemText>
-                    </MenuItem>
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            syncWithTacticus();
+                            close();
+                        }}>
+                        <SyncIcon className={iconClass} />
+                        <span>Sync via Tacticus API</span>
+                    </button>
                 )}
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        inputReference.current?.click();
+                        close();
+                    }}>
+                    <UploadIcon className={iconClass} />
+                    <span>Import JSON</span>
+                </button>
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        downloadJson();
+                        close();
+                    }}>
+                    <DownloadIcon className={iconClass} />
+                    <span>Export JSON</span>
+                </button>
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        restoreData();
+                        close();
+                    }}>
+                    <SettingsBackupRestoreIcon className={iconClass} />
+                    <span>Restore Backup</span>
+                </button>
 
-                <MenuItem onClick={() => inputReference.current?.click()}>
-                    <ListItemIcon>
-                        <UploadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Import JSON</ListItemText>
-                </MenuItem>
-                <MenuItem onClick={() => downloadJson()}>
-                    <ListItemIcon>
-                        <DownloadIcon />
-                    </ListItemIcon>
-                    <ListItemText>Export JSON</ListItemText>
-                </MenuItem>
-                <Divider />
-                <MenuItem onClick={() => restoreData()}>
-                    <ListItemIcon>
-                        <SettingsBackupRestoreIcon />
-                    </ListItemIcon>
-                    <ListItemText>Restore Backup</ListItemText>
-                </MenuItem>
-
-                <Divider />
+                {/* App */}
+                <hr className="my-1 border-(--border)" />
+                <div className="px-2 pt-2 pb-1 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">App</div>
                 {isDesktopView ? (
-                    <MenuItem onClick={() => navigateToMobileView()}>
-                        <ListItemIcon>
-                            <PhoneIcon />
-                        </ListItemIcon>
-                        <ListItemText>Use mobile view</ListItemText>
-                    </MenuItem>
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            navigateToMobileView();
+                            close();
+                        }}>
+                        <PhoneIcon className={iconClass} />
+                        <span>Use mobile view</span>
+                    </button>
                 ) : (
-                    <MenuItem onClick={() => navigateToDesktopView()}>
-                        <ListItemIcon>
-                            <ComputerIcon />
-                        </ListItemIcon>
-                        <ListItemText>Use desktop view</ListItemText>
-                    </MenuItem>
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            navigateToDesktopView();
+                            close();
+                        }}>
+                        <ComputerIcon className={iconClass} />
+                        <span>Use desktop view</span>
+                    </button>
                 )}
-
-                <Divider />
-
                 {[UserRole.admin, UserRole.moderator].includes(userInfo.role) && (
-                    <MenuItem onClick={() => setShowAdminTools(true)}>
-                        <ListItemIcon>
-                            <SupervisorAccountIcon />
-                        </ListItemIcon>
-                        <ListItemText>Admin tools</ListItemText>
-                    </MenuItem>
+                    <button
+                        className={itemClass}
+                        onClick={() => {
+                            setShowAdminTools(true);
+                            close();
+                        }}>
+                        <SupervisorAccountIcon className={iconClass} />
+                        <span>Admin tools</span>
+                    </button>
                 )}
+                <button
+                    className={itemClass}
+                    onClick={() => {
+                        navigateToReviewTeams();
+                        close();
+                    }}>
+                    <GroupWorkIcon className={iconClass} />
+                    <Badge
+                        badgeContent={
+                            userInfo.rejectedTeamsCount > 0 ? userInfo.rejectedTeamsCount : userInfo.pendingTeamsCount
+                        }
+                        color={userInfo.rejectedTeamsCount > 0 ? 'error' : 'warning'}>
+                        <span>Review guides</span>
+                    </Badge>
+                </button>
 
-                <MenuItem onClick={() => navigateToReviewTeams()}>
-                    <ListItemIcon>
-                        <GroupWorkIcon />
-                    </ListItemIcon>
-                    {userInfo.rejectedTeamsCount > 0 ? (
-                        <Badge badgeContent={userInfo.rejectedTeamsCount} color="error">
-                            <ListItemText>Review guides</ListItemText>
-                        </Badge>
-                    ) : (
-                        <Badge badgeContent={userInfo.pendingTeamsCount} color="warning">
-                            <ListItemText>Review guides</ListItemText>
-                        </Badge>
-                    )}
-                </MenuItem>
-            </Menu>
+                {/* Debug */}
+                <hr className="my-1 border-(--border)" />
+                <div
+                    className="w-full rounded-lg px-2 py-1.5 transition-colors hover:bg-(--primary)/10"
+                    onClick={event_ => event_.stopPropagation()}>
+                    <Switch
+                        isSelected={debugMode}
+                        onChange={v => {
+                            localStorage.setItem('debugMode', String(v));
+                            setDebugMode(v);
+                        }}>
+                        Debug Mode
+                    </Switch>
+                </div>
+            </Popover>
             <RegisterUserDialog
                 isOpen={showRegisterUser}
                 onClose={success => {
@@ -344,6 +429,6 @@ export const UserMenu = () => {
                     setShowAdminTools(false);
                 }}
             />
-        </Box>
+        </div>
     );
 };

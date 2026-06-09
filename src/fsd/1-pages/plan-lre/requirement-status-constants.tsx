@@ -11,12 +11,28 @@ export const STATUS_LABELS: Record<RequirementStatus, ReactNode> = {
     [RequirementStatus.PartiallyCleared]: <CircleFadingPlus className="size-5 md:size-6" />,
 };
 
-export const STATUS_COLORS: Record<RequirementStatus, string> = {
-    [RequirementStatus.NotCleared]: '#6b7280', // Gray
-    [RequirementStatus.Cleared]: '#4caf50', // Green
-    [RequirementStatus.MaybeClear]: '#eab308', // Yellow
-    [RequirementStatus.StopHere]: '#be123c', // Red
-    [RequirementStatus.PartiallyCleared]: '#2196f3', // Blue
+export const STATUS_TEXT_CLASSES: Record<RequirementStatus, string> = {
+    [RequirementStatus.NotCleared]: 'text-(--soft-fg)',
+    [RequirementStatus.Cleared]: 'text-(--success)',
+    [RequirementStatus.MaybeClear]: 'text-(--warning)',
+    [RequirementStatus.StopHere]: 'text-(--danger)',
+    [RequirementStatus.PartiallyCleared]: 'text-(--primary)',
+};
+
+export const STATUS_BORDER_CLASSES: Record<RequirementStatus, string> = {
+    [RequirementStatus.NotCleared]: 'border-(--soft-fg)/12',
+    [RequirementStatus.Cleared]: 'border-(--success)/12',
+    [RequirementStatus.MaybeClear]: 'border-(--warning)/12',
+    [RequirementStatus.StopHere]: 'border-(--danger)/12',
+    [RequirementStatus.PartiallyCleared]: 'border-(--primary)/12',
+};
+
+export const STATUS_BORDER_SOLID_CLASSES: Record<RequirementStatus, string> = {
+    [RequirementStatus.NotCleared]: 'border-(--soft-fg)',
+    [RequirementStatus.Cleared]: 'border-(--success)',
+    [RequirementStatus.MaybeClear]: 'border-(--warning)',
+    [RequirementStatus.StopHere]: 'border-(--danger)',
+    [RequirementStatus.PartiallyCleared]: 'border-(--primary)',
 };
 
 export const STATUS_LABEL_TEXT: Record<RequirementStatus, string> = {

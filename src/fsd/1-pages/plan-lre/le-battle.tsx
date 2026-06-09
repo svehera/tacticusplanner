@@ -62,7 +62,7 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
                 if (!data) {
                     console.error('could not resolve enemy data for string:', enemyString);
                     return (
-                        <div key={index} className="text-xs text-red-500">
+                        <div key={index} className="text-xs text-(--danger)">
                             Error: {enemyString}
                         </div>
                     );
@@ -72,7 +72,7 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
                     <button
                         key={index}
                         onClick={() => onEnemyClick(data)} // Trigger the modal
-                        className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                        className="relative h-[75px] w-[60px] cursor-pointer rounded transition-all hover:brightness-110 focus:ring-2 focus:ring-(--ring) focus:outline-none"
                         style={{ transform: 'scale(0.3)', transformOrigin: 'top left' }}
                         title="Click for details">
                         <NpcPortrait id={data.id} rank={data.stats.rank} stars={data.stats.rarityStars} />
@@ -83,26 +83,26 @@ const WaveDisplay: React.FC<WaveDisplayProps> = ({ wave, waveIndex, onEnemyClick
     );
 
     return (
-        <div className="flex flex-col gap-1 border-l-2 border-gray-400 p-2 transition-colors duration-150 hover:bg-gray-200 dark:border-gray-700 dark:hover:bg-gray-800/50">
+        <div className="flex flex-col gap-1 border-l-2 border-(--border) p-2 transition-colors duration-150 hover:bg-(--primary)/10">
             <div className="flex items-start justify-between">
                 <div className="flex items-center gap-2">
-                    <span className="text-sm font-bold text-blue-600 dark:text-blue-400">Wave {waveIndex + 1}</span>
-                    <span className="text-xs text-gray-600 dark:text-gray-500">| Round {wave.round}</span>
+                    <span className="text-sm font-bold text-(--primary)">Wave {waveIndex + 1}</span>
+                    <span className="text-xs text-(--soft-fg)">| Round {wave.round}</span>
                 </div>
                 <div className="text-right">
-                    <div className="text-[10px] text-gray-600 uppercase dark:text-gray-500">Power</div>
-                    <div className="font-mono text-xs text-gray-800 dark:text-gray-300">{wave.power}</div>
+                    <div className="text-[10px] text-(--soft-fg) uppercase">Power</div>
+                    <div className="font-mono text-xs text-(--fg)">{wave.power}</div>
                 </div>
             </div>
 
             <div className="mt-1">
-                <h5 className="mb-1 text-[10px] font-semibold text-gray-600 uppercase dark:text-gray-500">
+                <h5 className="mb-1 text-[10px] font-semibold text-(--soft-fg) uppercase">
                     {hasEnemies ? 'Enemy Deployment' : 'No Enemies This Wave'}
                 </h5>
                 {hasEnemies ? (
                     renderEnemies(wave.enemies)
                 ) : (
-                    <span className="text-xs text-gray-500 italic dark:text-gray-600">The battle continues...</span>
+                    <span className="text-xs text-(--soft-fg) italic">The battle continues...</span>
                 )}
             </div>
         </div>
@@ -132,19 +132,17 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
 
     return (
         <>
-            <div className="w-full rounded-xl border border-gray-300 bg-gray-100 p-4 shadow-lg dark:border-gray-700/50 dark:bg-gray-900">
-                <div className="mb-4 flex items-center justify-between border-b border-gray-300 pb-3 dark:border-gray-800">
+            <div className="w-full rounded-xl border border-(--card-border) bg-(--card) p-4 shadow-lg">
+                <div className="mb-4 flex items-center justify-between border-b border-(--card-border) pb-3">
                     <div className="flex items-center gap-3">
-                        <span className="rounded-md bg-blue-600 px-3 py-1 text-sm font-bold text-white uppercase">
+                        <span className="rounded-md bg-(--primary) px-3 py-1 text-sm font-bold text-(--primary-fg) uppercase">
                             {trackName}
                         </span>
-                        <span className="text-lg font-bold text-gray-800 dark:text-gray-200">
-                            Battle {battle.number}
-                        </span>
+                        <span className="text-lg font-bold text-(--fg)">Battle {battle.number}</span>
                     </div>
                     <div className="text-right">
-                        <div className="text-xs text-gray-600 dark:text-gray-400">Total Enemy Power</div>
-                        <div className="font-mono text-xl font-bold text-green-600 dark:text-green-400">
+                        <div className="text-xs text-(--soft-fg)">Total Enemy Power</div>
+                        <div className="font-mono text-xl font-bold text-emerald-600 dark:text-emerald-400">
                             {battle.power}
                         </div>
                     </div>
@@ -152,11 +150,11 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                 <div className="mb-4">
                     <button
                         onClick={() => setIsMapVisible(previous => !previous)}
-                        className="mb-2 rounded px-2 py-1 text-sm font-semibold text-blue-600 hover:underline focus:ring-2 focus:ring-blue-500 focus:outline-none dark:text-blue-400">
+                        className="mb-2 rounded px-2 py-1 text-sm font-semibold text-(--primary) hover:underline focus:ring-2 focus:ring-(--ring) focus:outline-none">
                         {isMapVisible ? 'Hide Map' : 'Show Map'}
                     </button>
                     {isMapVisible && (
-                        <div className="overflow-hidden rounded-lg border border-gray-300 dark:border-gray-700/50">
+                        <div className="overflow-hidden rounded-lg border border-(--border)">
                             <img
                                 src={
                                     new URL(
@@ -171,9 +169,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                     )}
                 </div>
 
-                <h3 className="mb-3 ml-2 text-sm font-semibold text-gray-600 uppercase dark:text-gray-400">
-                    Deployment Schedule
-                </h3>
+                <h3 className="mb-3 ml-2 text-sm font-semibold text-(--soft-fg) uppercase">Deployment Schedule</h3>
 
                 <div className="flex flex-col gap-2">
                     {sortedWaves.length > 0 ? (
@@ -181,7 +177,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                             <WaveDisplay key={index} wave={wave} waveIndex={index} onEnemyClick={handleEnemyClick} />
                         ))
                     ) : (
-                        <div className="py-4 text-center text-gray-600 dark:text-gray-500">No wave data found.</div>
+                        <div className="py-4 text-center text-(--soft-fg)">No wave data found.</div>
                     )}
                 </div>
             </div>

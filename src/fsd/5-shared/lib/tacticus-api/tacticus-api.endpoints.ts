@@ -6,5 +6,36 @@ export const getTacticusPlayerData = () => makeApiCall<TacticusPlayerResponse>('
 export const getTacticusGuildData = () => makeApiCall<TacticusGuildResponse>('GET', 'guild');
 export const getTacticusGuildRaidData = () => makeApiCall<TacticusGuildRaidResponse>('GET', 'guildRaid');
 
-export const updateTacticusApiKey = (apiKey: string, guildApiKey: string, tacticusUserId: string) =>
-    makeApiCall<TacticusPlayerResponse>('PUT', 'users/tacticusApiKey', { apiKey, guildApiKey, tacticusUserId });
+export interface UpdateTacticusApiKeyOptions {
+    shareInGameName?: boolean;
+    shareRosterData?: boolean;
+    /** Guild-leader opt-in: privately share each guild member's performance data with that member only. */
+    shareGuildMemberPerformance?: boolean;
+    /** Other guild tags whose leaderboards should be combined with this guild's. Each is 5 alphanumeric chars. */
+    combinedGuildTags?: string[];
+    /** This player's own guild tag (5 alphanumeric chars), used when no guild API key is provided. */
+    guildTag?: string;
+}
+
+export interface UpdateTacticusApiKeyResponse {
+    player: TacticusPlayerResponse;
+    combinedGuildTags: string[] | null;
+}
+
+export const updateTacticusApiKey = (
+    apiKey: string,
+    guildApiKey: string,
+    tacticusUserId: string,
+    options: UpdateTacticusApiKeyOptions = {}
+) => {
+    return makeApiCall<UpdateTacticusApiKeyResponse>('PUT', 'users/tacticusApiKey', {
+        apiKey,
+        guildApiKey,
+        tacticusUserId,
+        shareInGameNameWithGuild: options.shareInGameName,
+        shareRosterDataWithGuild: options.shareRosterData,
+        shareGuildMemberPerformance: options.shareGuildMemberPerformance,
+        combinedGuildTags: options.combinedGuildTags,
+        guildTag: options.guildTag,
+    });
+};

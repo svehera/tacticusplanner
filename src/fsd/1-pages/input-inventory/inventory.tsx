@@ -1,13 +1,11 @@
-﻿import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import { Accordion, AccordionDetails, AccordionSummary } from '@mui/material';
-import { groupBy, map, orderBy } from 'lodash';
+﻿import { groupBy, map, orderBy } from 'lodash';
 import React, { useCallback, useContext, useMemo, useState } from 'react';
-import { isMobile } from 'react-device-detect';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Rarity } from '@/fsd/5-shared/model';
+import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -26,6 +24,7 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
     const { inventory, viewPreferences } = useContext(StoreContext);
 
     const [nameFilter, setNameFilter] = useState<string>('');
+    const [openRarity, setOpenRarity] = useState<number | undefined>();
 
     const itemsList = useMemo<IInventoryUpgrade[]>(() => {
         return orderBy(
@@ -122,23 +121,28 @@ export const Inventory: React.FC<Props> = ({ itemsFilter = [], onUpdate }) => {
         <>
             <InventoryControls nameFilter={nameFilter} setNameFilter={setNameFilter} resetUpgrades={resetUpgrades} />
 
-            {itemsGrouped.map(group => (
-                <Accordion key={group.rarity} defaultExpanded={!isMobile && !viewPreferences.craftableItemsInInventory}>
-                    <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-                        <h2 className="flex items-center gap-1">
-                            <RarityIcon rarity={group.rarity} /> <span>{group.label}</span>
-                        </h2>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <UpgradesGroup
-                            group={group}
-                            showAlphabet={viewPreferences.inventoryShowAlphabet}
-                            showPlusMinus={viewPreferences.inventoryShowPlusMinus}
-                            dataUpdate={update}
-                        />
-                    </AccordionDetails>
-                </Accordion>
-            ))}
+            <div className="[&>*:not(:first-child)]:-mt-px [&>*:not(:first-child)]:rounded-t-none [&>*:not(:last-child)]:rounded-b-none">
+                {itemsGrouped.map(group => (
+                    <Accordion
+                        key={group.rarity}
+                        expanded={openRarity === group.rarity}
+                        onToggle={next => setOpenRarity(next ? group.rarity : undefined)}>
+                        <AccordionHeader>
+                            <h2 className="flex items-center gap-1">
+                                <RarityIcon rarity={group.rarity} /> <span>{group.label}</span>
+                            </h2>
+                        </AccordionHeader>
+                        <AccordionBody>
+                            <UpgradesGroup
+                                group={group}
+                                showAlphabet={viewPreferences.inventoryShowAlphabet}
+                                showPlusMinus={viewPreferences.inventoryShowPlusMinus}
+                                dataUpdate={update}
+                            />
+                        </AccordionBody>
+                    </Accordion>
+                ))}
+            </div>
         </>
     );
 };

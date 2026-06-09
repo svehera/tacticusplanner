@@ -2,7 +2,7 @@
 import TableRowsIcon from '@mui/icons-material/TableRows';
 import { FormControl, FormControlLabel, MenuItem, Select, Switch } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams, themeBalham } from 'ag-grid-community';
+import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
 import { useContext, useMemo, useRef, useState } from 'react';
@@ -274,10 +274,10 @@ export const Campaigns = () => {
                 )}
             </div>
             {viewPreferences.campaignsTableView ? (
-                <div className="ag-theme-material h-[calc(100vh-220px)] w-full">
+                <div className="ag-theme-material density-compact h-[calc(100vh-220px)] w-full">
                     <AgGridReact
                         modules={[AllCommunityModule]}
-                        theme={themeBalham}
+                        theme="legacy"
                         ref={gridReference}
                         suppressCellFocus={true}
                         defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}

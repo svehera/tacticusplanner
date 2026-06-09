@@ -34,7 +34,7 @@ export const MaterialsSectionContent: FC<MaterialsSectionContentProps> = ({
 }) => {
     if (tableView) {
         return (
-            <div className="ag-theme-material flex h-[600px] min-h-[150px] w-full flex-col">
+            <div className="ag-theme-material density-compact flex h-[600px] min-h-[150px] w-full flex-col">
                 <Suspense fallback={undefined}>
                     <MaterialsTable
                         rows={materials}

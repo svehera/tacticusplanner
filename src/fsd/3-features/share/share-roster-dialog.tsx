@@ -1,4 +1,4 @@
-﻿import AddIcon from '@mui/icons-material/Add';
+import AddIcon from '@mui/icons-material/Add';
 import CancelIcon from '@mui/icons-material/Cancel';
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import RefreshIcon from '@mui/icons-material/Refresh';
@@ -7,9 +7,9 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import { enqueueSnackbar } from 'notistack';
 import React from 'react';
-import { isMobile } from 'react-device-detect';
 
 import { useAuth } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { LoaderWithText } from '@/fsd/5-shared/ui';
 
 import { createShareToken, refreshShareToken, removeShareToken } from './share-roster.endpoints';
@@ -19,12 +19,20 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
 
     const { shareToken, username, setUser } = useAuth();
 
-    const shareRoute = (isMobile ? '/mobile' : '') + `/sharedRoster?username=${username}&shareToken=${shareToken}`;
+    const shareRoute = `/sharedRoster?username=${username}&shareToken=${shareToken}`;
     const shareLink = shareToken ? location.origin + shareRoute : undefined;
 
     const copyLink = () => {
         if (shareLink) {
-            navigator.clipboard.writeText(shareLink).then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
+            navigator.clipboard.writeText(shareLink).then(_ => {
+                enqueueSnackbar('Copied', { variant: 'success' });
+                trackEvent('share', {
+                    feature: 'shared_roster',
+                    action: 'copy',
+                    status: 'success',
+                    source: 'share_roster_dialog',
+                });
+            });
         }
     };
 
@@ -36,7 +44,16 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             createShareToken()
-                .then(response => setUser(response.data?.username ?? '', response.data?.shareToken))
+                .then(response => {
+                    setUser(response.data?.username ?? '', response.data?.shareToken);
+                    trackEvent('share', {
+                        feature: 'shared_roster',
+                        action: 'create',
+                        status: 'success',
+                        source: 'share_roster_dialog',
+                    });
+                })
+                .catch(() => {})
                 .finally(() => setLoading(false));
         }
     };
@@ -50,7 +67,16 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             refreshShareToken()
-                .then(response => setUser(response.data?.username ?? '', response.data?.shareToken))
+                .then(response => {
+                    setUser(response.data?.username ?? '', response.data?.shareToken);
+                    trackEvent('share', {
+                        feature: 'shared_roster',
+                        action: 'refresh',
+                        status: 'success',
+                        source: 'share_roster_dialog',
+                    });
+                })
+                .catch(() => {})
                 .finally(() => setLoading(false));
         }
     };
@@ -62,7 +88,16 @@ export const ShareRosterDialog = ({ isOpen, onClose }: { isOpen: boolean; onClos
             setLoading(true);
 
             removeShareToken()
-                .then(() => setUser(username, ''))
+                .then(() => {
+                    setUser(username, '');
+                    trackEvent('share', {
+                        feature: 'shared_roster',
+                        action: 'revoke',
+                        status: 'success',
+                        source: 'share_roster_dialog',
+                    });
+                })
+                .catch(() => {})
                 .finally(() => setLoading(false));
         }
     };

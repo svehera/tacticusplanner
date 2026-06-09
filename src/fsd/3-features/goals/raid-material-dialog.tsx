@@ -56,7 +56,7 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
         <DialogContent className="flex flex-col gap-5 pb-5! text-(--card-fg)">
             {uniqueCharIds.length > 0 && (
                 <div>
-                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">
+                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                         Characters
                     </div>
                     <div className="flex flex-wrap gap-3">
@@ -71,34 +71,37 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
             )}
 
             <div>
-                <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">Progress</div>
-                <div className="relative mb-3 h-3 w-full overflow-hidden rounded-full bg-(--secondary)">
-                    <div className="absolute top-0 left-0 h-full bg-slate-400" style={{ width: `${inventoryPct}%` }} />
+                <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">Progress</div>
+                <div className="relative mb-3 h-3 w-full overflow-hidden rounded-full bg-(--neutral)">
                     <div
-                        className={`absolute top-0 h-full transition-all ${isSufficient ? 'bg-green-500' : 'bg-orange-400'}`}
+                        className="absolute top-0 left-0 h-full bg-(--soft-fg)"
+                        style={{ width: `${inventoryPct}%` }}
+                    />
+                    <div
+                        className={`absolute top-0 h-full transition-all ${isSufficient ? 'bg-(--success)' : 'bg-(--warning)'}`}
                         style={{ left: `${inventoryPct}%`, width: `${gainPct}%` }}
                     />
                 </div>
                 <div className="grid grid-cols-3 gap-2 text-center">
-                    <div className="rounded-lg bg-(--secondary) p-2">
-                        <div className="text-xs text-(--muted-fg)">In inventory</div>
+                    <div className="rounded-lg bg-(--neutral) p-2">
+                        <div className="text-xs text-(--soft-fg)">In inventory</div>
                         <div className="text-xl font-bold text-inherit">{Math.floor(raid.acquiredCount)}</div>
                     </div>
-                    <div className="rounded-lg bg-(--secondary) p-2">
-                        <div className="text-xs text-(--muted-fg)">After raids</div>
-                        <div className={`text-xl font-bold ${isSufficient ? 'text-green-500' : 'text-orange-400'}`}>
+                    <div className="rounded-lg bg-(--neutral) p-2">
+                        <div className="text-xs text-(--soft-fg)">After raids</div>
+                        <div className={`text-xl font-bold ${isSufficient ? 'text-(--success)' : 'text-(--warning)'}`}>
                             {Math.floor(afterRaids)}
                         </div>
                     </div>
-                    <div className="rounded-lg bg-(--secondary) p-2">
-                        <div className="text-xs text-(--muted-fg)">Required</div>
+                    <div className="rounded-lg bg-(--neutral) p-2">
+                        <div className="text-xs text-(--soft-fg)">Required</div>
                         <div className="text-xl font-bold text-inherit">{raid.requiredCount}</div>
                     </div>
                 </div>
             </div>
 
             <div>
-                <div className="mb-2 text-xs font-semibold tracking-wide text-(--muted-fg) uppercase">Locations</div>
+                <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">Locations</div>
                 <ExpandableRaidLocations locations={raid.raidLocations} />
             </div>
         </DialogContent>
@@ -113,7 +116,7 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
                 onOpen={() => {}}
                 disableSwipeToOpen
                 PaperProps={{
-                    className: 'bg-(--card-bg)! text-(--card-fg)!',
+                    className: 'bg-(--card)! text-(--card-fg)!',
                     sx: { borderTopLeftRadius: 16, borderTopRightRadius: 16, maxHeight: '85vh' },
                 }}
                 aria-labelledby="raid-material-dialog-title">
@@ -132,7 +135,7 @@ export const RaidMaterialDialog: React.FC<RaidMaterialDialogProps> = ({ raid, on
             onClose={onClose}
             maxWidth="xs"
             fullWidth
-            PaperProps={{ className: 'bg-(--card-bg)! text-(--card-fg)!' }}
+            PaperProps={{ className: 'bg-(--card)! text-(--card-fg)!' }}
             aria-labelledby="raid-material-dialog-title">
             {titleRow}
             {bodyContent}

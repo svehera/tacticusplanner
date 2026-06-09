@@ -14,7 +14,7 @@ export const callApi = <TData = any | undefined, TError = any | undefined, TResp
         url: baseUrl + url,
         headers: {
             'Content-Type': 'application/json',
-            'x-functions-key': import.meta.env.VITE_FUNCTIONS_KEY,
+            ...(import.meta.env.VITE_FUNCTIONS_KEY ? { 'x-functions-key': import.meta.env.VITE_FUNCTIONS_KEY } : {}),
             Authorization: localStorage.getItem('token'),
             ...headers,
         },

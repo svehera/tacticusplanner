@@ -7,7 +7,6 @@ import {
     ICellRendererParams,
     ITooltipParams,
     ValueGetterParams,
-    themeBalham,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { sum, uniq } from 'lodash';
@@ -461,10 +460,10 @@ const PointsTable = (props: { legendaryEvent: ILegendaryEvent }) => {
                     </span>
                 )}
             </div>
-            <div className="ag-theme-material h-[calc(100vh-250px)] w-full">
+            <div className="ag-theme-material density-compact h-[calc(100vh-250px)] w-full">
                 <AgGridReact
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     ref={gridReference}
                     tooltipShowDelay={100}
                     rowData={selection === 'selected' ? selectedCharsRows : rows}

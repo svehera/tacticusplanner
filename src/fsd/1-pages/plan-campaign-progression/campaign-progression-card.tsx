@@ -1,9 +1,8 @@
-import LockOpenOutlinedIcon from '@mui/icons-material/LockOpenOutlined';
-import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Tooltip from '@mui/material/Tooltip';
+import { Lock, LockOpen } from 'lucide-react';
 import React from 'react';
 import { isMobile } from 'react-device-detect';
 
+import { LazyTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignDifficulty, CampaignImage, CampaignsService } from '@/fsd/4-entities/campaign';
@@ -74,12 +73,12 @@ export const CampaignProgressionCard: React.FC<Props> = ({
 
     return (
         <div
-            className={`flex flex-col overflow-hidden rounded-xl border bg-(--card-bg) shadow-sm ${lockReason ? 'border-l-[3px] border-(--border) border-l-amber-500' : 'border-(--border)'}`}>
+            className={`flex flex-col overflow-hidden rounded-xl border bg-(--card) shadow-sm ${lockReason ? 'border-l-[3px] border-(--border) border-l-amber-500' : 'border-(--border)'}`}>
             <button
                 type="button"
                 aria-expanded={expanded}
                 aria-controls={detailId}
-                className="flex w-full cursor-pointer items-start gap-2 border-b border-(--border) px-3 py-2.5 text-left transition-colors hover:bg-(--muted) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset sm:gap-3 sm:px-4 sm:py-3"
+                className="flex w-full cursor-pointer items-start gap-2 border-b border-(--border) px-3 py-2.5 text-left transition-colors hover:bg-(--soft) focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset sm:gap-3 sm:px-4 sm:py-3"
                 onClick={onToggle}>
                 <div className="flex h-[50px] w-[70px] flex-shrink-0 items-center justify-center overflow-hidden">
                     <CampaignImage campaign={campaign} />
@@ -87,13 +86,9 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                 <div className="flex min-w-0 flex-1 flex-col gap-1">
                     <div className="flex flex-wrap items-center gap-1.5">
                         {lockReason && (
-                            <Tooltip title={lockReason}>
-                                <LockOutlinedIcon
-                                    sx={{ fontSize: 14 }}
-                                    className="text-amber-500"
-                                    aria-label={lockReason}
-                                />
-                            </Tooltip>
+                            <LazyTooltip title={lockReason}>
+                                <Lock size={14} className="text-amber-500" aria-label={lockReason} />
+                            </LazyTooltip>
                         )}
                         <span className="text-sm font-semibold">{campaign}</span>
                         {tags.map(tag => (
@@ -101,27 +96,27 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                                 key={tag}
                                 className={`rounded-full px-2 py-0.5 text-[11px] font-medium ${
                                     tag === 'Campaign Event'
-                                        ? 'bg-violet-100 text-violet-800 dark:bg-violet-900/30 dark:text-violet-300'
+                                        ? 'bg-(--primary)/15 text-(--primary)'
                                         : 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
                                 }`}>
                                 {tag}
                             </span>
                         ))}
                     </div>
-                    <p className="font-mono text-xs text-(--muted-fg)">
+                    <p className="font-mono text-xs text-(--soft-fg)">
                         Cleared {lastCleared}/{totalBattles} · {upcoming} upcoming · {campaignData[1].goalCost.size}{' '}
                         goal{campaignData[1].goalCost.size === 1 ? '' : 's'}
                         {unlockCount > 0 && (
-                            <span className="ml-1.5 inline-flex items-center gap-0.5 text-(--muted-fg)">
-                                · <LockOpenOutlinedIcon sx={{ fontSize: 11, verticalAlign: 'middle' }} /> {unlockCount}{' '}
-                                unlock{unlockCount === 1 ? '' : 's'}
+                            <span className="ml-1.5 inline-flex items-center gap-0.5 text-(--soft-fg)">
+                                · <LockOpen size={11} className="align-middle" /> {unlockCount} unlock
+                                {unlockCount === 1 ? '' : 's'}
                             </span>
                         )}
                     </p>
                     {totalBattles > 0 && (
                         <div className="h-1 w-full max-w-xs overflow-hidden rounded-full bg-(--border)">
                             <div
-                                className="h-full rounded-full bg-blue-500 dark:bg-blue-400"
+                                className="h-full rounded-full bg-(--primary)"
                                 style={{ width: `${progress * 100}%` }}
                             />
                         </div>
@@ -159,10 +154,10 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                             <MiscIcon icon={'energy'} height={14} width={14} />
                             {cumulativeSavings}
                         </span>
-                        <span className="text-[11px] text-(--muted-fg)">cumulative if cleared</span>
+                        <span className="text-[11px] text-(--soft-fg)">cumulative if cleared</span>
                     </div>
                 )}
-                <span className="ml-1 text-(--muted-fg)" aria-hidden="true">
+                <span className="ml-1 text-(--soft-fg)" aria-hidden="true">
                     {expanded ? '▲' : '▼'}
                 </span>
             </button>
@@ -188,7 +183,7 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                                     className={`px-3 py-1.5 text-xs font-medium transition-colors focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset ${
                                         effectiveTab === tab.id
                                             ? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-                                            : 'text-(--muted-fg) hover:text-(--card-fg)'
+                                            : 'text-(--soft-fg) hover:text-(--card-fg)'
                                     }`}>
                                     {tab.label}
                                     <span className="ml-1.5 rounded-full bg-(--card-fg)/10 px-1.5 py-0.5 text-[10px] font-normal tabular-nums">
@@ -221,7 +216,7 @@ export const CampaignProgressionCard: React.FC<Props> = ({
                         ) : hasMats ? (
                             <CampaignProgressionMaterialGoals campaignData={campaignData} progression={progression} />
                         ) : (
-                            <p className="text-center text-xs text-(--muted-fg)">
+                            <p className="text-center text-xs text-(--soft-fg)">
                                 {lockReason
                                     ? 'Clear the base campaign to unlock farming here.'
                                     : 'No farmable materials match your current goals.'}

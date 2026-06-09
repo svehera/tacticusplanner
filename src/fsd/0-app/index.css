@@ -1,29 +1,64 @@
 @layer theme, base, components, utilities;
 @import 'tailwindcss/theme' layer(theme);
 @import 'tailwindcss/utilities' layer(utilities);
+@import 'ag-grid-community/styles/ag-grid.css';
+@import 'ag-grid-community/styles/ag-theme-material.css';
+@import './tacticus-ag-theme.css';
 /*@import 'tailwindcss';*/
 @plugin 'tailwindcss-animate';
+
+@keyframes shimmer-green {
+    0%,
+    100% {
+        color: #4ade80;
+    }
+    50% {
+        color: #bbf7d0;
+    }
+}
 
 @variant dark (&:where(.dark, .dark *));
 
 @theme {
-    --color-border: var(--border);
-    --color-input: var(--input);
-
-    --color-ring: var(--ring);
-
+    /* ── Page ─────────────────────────────────── */
     --color-bg: var(--bg);
     --color-fg: var(--fg);
+    --color-border: var(--border);
+    --color-input-border: var(--input-border);
+    --color-ring: var(--ring);
 
-    --color-card-bg: var(--card-bg);
-    --color-card-border: var(--card-border);
+    /* ── Card ─────────────────────────────────── */
+    --color-card: var(--card);
     --color-card-fg: var(--card-fg);
+    --color-card-border: var(--card-border);
 
+    /* ── Sidebar ──────────────────────────────── */
+    --color-sidebar: var(--sidebar);
+    --color-sidebar-fg: var(--sidebar-fg);
+
+    /* ── Overlay ──────────────────────────────── */
+    --color-overlay: var(--overlay);
+    --color-overlay-fg: var(--overlay-fg);
+
+    /* ── Neutral ──────────────────────────────── */
+    --color-neutral: var(--neutral);
+    --color-neutral-fg: var(--neutral-fg);
+
+    /* ── Soft ─────────────────────────────────── */
+    --color-soft: var(--soft);
+    --color-soft-fg: var(--soft-fg);
+
+    /* ── Hairline (quieter than border) ──────── */
+    --color-hairline: var(--hairline);
+
+    /* ── Data surface ─────────────────────────── */
+    --color-data-surface: var(--data-surface);
+    --color-data-surface-fg: var(--data-surface-fg);
+    --color-data-surface-border: var(--data-surface-border);
+
+    /* ── Brand / intent ───────────────────────── */
     --color-primary: var(--primary);
     --color-primary-fg: var(--primary-fg);
-
-    --color-secondary: var(--secondary);
-    --color-secondary-fg: var(--secondary-fg);
 
     --color-accent: var(--accent);
     --color-accent-fg: var(--accent-fg);
@@ -31,24 +66,16 @@
     --color-success: var(--success);
     --color-success-fg: var(--success-fg);
 
-    --color-danger: var(--danger);
-    --color-danger-fg: var(--danger-fg);
-
     --color-warning: var(--warning);
     --color-warning-fg: var(--warning-fg);
 
-    --color-muted: var(--muted);
-    --color-muted-fg: var(--muted-fg);
+    --color-secondary: var(--secondary);
+    --color-secondary-fg: var(--secondary-fg);
 
-    --color-overlay: var(--overlay);
-    --color-overlay-fg: var(--overlay-fg);
+    --color-danger: var(--danger);
+    --color-danger-fg: var(--danger-fg);
 
-    --color-navbar: var(--navbar);
-    --color-navbar-fg: var(--navbar-fg);
-
-    --color-sidebar: var(--sidebar);
-    --color-sidebar-fg: var(--sidebar-fg);
-
+    /* ── Charts ────────────────────────────────── */
     --color-chart-1: var(--chart-1);
     --color-chart-2: var(--chart-2);
     --color-chart-3: var(--chart-3);
@@ -58,27 +85,48 @@
 
 @layer base {
     :root {
+        /* ── Page ─────────────────────────────────── */
         --bg: var(--color-white);
-        --fg: var(--color-slate-950);
+        --fg: var(--color-zinc-950);
+        --border: var(--color-zinc-200);
+        --input-border: var(--color-zinc-300);
+        --ring: var(--color-blue-700);
 
-        --card-bg: var(--color-white);
-        --card-border: var(--color-slate-400);
-        --card-fg: var(--color-slate-950);
+        /* ── Card ─────────────────────────────────── */
+        --card: var(--color-white);
+        --card-fg: var(--color-zinc-950);
+        --card-border: var(--color-zinc-300);
 
-        --primary: var(--color-blue-600);
+        /* ── Sidebar ──────────────────────────────── */
+        --sidebar: var(--color-zinc-50);
+        --sidebar-fg: var(--color-zinc-950);
+
+        /* ── Overlay (popups, menus, dialogs) ─────── */
+        --overlay: var(--color-white);
+        --overlay-fg: var(--color-zinc-950);
+
+        /* ── Neutral (hover fills, badges, headers) ── */
+        --neutral: var(--color-zinc-100);
+        --neutral-fg: var(--color-zinc-950);
+
+        /* ── Soft (de-emphasized text areas) ──────── */
+        --soft: var(--color-zinc-100);
+        --soft-fg: var(--color-zinc-600);
+
+        /* ── Hairline ─────────────────────────────── */
+        --hairline: color-mix(in srgb, var(--border) 45%, transparent);
+
+        /* ── Data surface (grids, tables) ─────────── */
+        --data-surface: var(--color-zinc-50);
+        --data-surface-fg: var(--color-zinc-950);
+        --data-surface-border: var(--color-zinc-300);
+
+        /* ── Brand / intent ───────────────────────── */
+        --primary: var(--color-blue-700);
         --primary-fg: var(--color-white);
 
-        --secondary: var(--color-slate-100);
-        --secondary-fg: var(--color-slate-950);
-
-        --overlay: var(--color-white);
-        --overlay-fg: var(--color-slate-950);
-
-        --accent: var(--color-blue-600);
-        --accent-fg: var(--color-white);
-
-        --muted: var(--color-slate-100);
-        --muted-fg: var(--color-slate-600);
+        --accent: var(--color-amber-600);
+        --accent-fg: var(--color-zinc-950);
 
         --success: var(--color-emerald-600);
         --success-fg: var(--color-white);
@@ -86,25 +134,24 @@
         --warning: var(--color-amber-400);
         --warning-fg: var(--color-amber-950);
 
+        --goal-on-track: color-mix(in srgb, var(--success) 20%, transparent);
+        --goal-caution: color-mix(in srgb, var(--warning) 22%, transparent);
+        --goal-urgent: color-mix(in srgb, var(--danger) 20%, transparent);
+
+        --secondary: var(--color-zinc-200);
+        --secondary-fg: var(--color-zinc-950);
+
         --danger: var(--color-red-600);
         --danger-fg: var(--color-red-50);
 
-        --border: var(--color-slate-200);
-        --input: var(--color-slate-300);
-        --ring: var(--color-blue-600);
+        /* ── Charts ────────────────────────────────── */
+        --chart-1: var(--color-blue-700);
+        --chart-2: var(--color-blue-600);
+        --chart-3: var(--color-blue-500);
+        --chart-4: var(--color-blue-400);
+        --chart-5: var(--color-blue-300);
 
-        --navbar: #1976d2;
-        --navbar-fg: var(--color-slate-950);
-
-        --sidebar: var(--color-slate-50);
-        --sidebar-fg: var(--color-slate-950);
-
-        --chart-1: var(--color-blue-600);
-        --chart-2: var(--color-blue-400);
-        --chart-3: var(--color-blue-300);
-        --chart-4: var(--color-blue-200);
-        --chart-5: var(--color-blue-100);
-
+        /* ── Radius ────────────────────────────────── */
         --radius-lg: 0.5rem;
         --radius-xs: calc(var(--radius-lg) * 0.5);
         --radius-sm: calc(var(--radius-lg) * 0.75);
@@ -114,7 +161,13 @@
         --radius-3xl: calc(var(--radius-lg) * 2);
         --radius-4xl: calc(var(--radius-lg) * 3);
 
-        /*Rarity*/
+        /* ── Domain ────────────────────────────────── */
+        /* LRE track colours */
+        --lre-alpha: oklch(0.72 0.13 220);
+        --lre-beta: oklch(0.82 0.15 80);
+        --lre-gamma: oklch(0.7 0.18 15);
+
+        /* Rarity */
         --rarity-common: #cdb3a0;
         --rarity-uncommon: #f9cb9c;
         --rarity-rare: #efefef;
@@ -122,7 +175,7 @@
         --rarity-legendary: #cfe2f3;
         --rarity-mythic: #d84300;
 
-        /*Ranks*/
+        /* Ranks */
         --rank-stone1: #cdb3a0;
         --rank-stone2: #b09a8a;
         --rank-stone3: #8c827a;
@@ -150,59 +203,92 @@
         --rank-adamantine1: #d9886c;
         --rank-adamantine2: #c97a5c;
         --rank-adamantine3: #b06b4b;
+
+        /* Campaign difficulty colours */
+        --diff-standard: oklch(0.55 0.18 250);
+        --diff-mirror: oklch(0.62 0.15 200);
+        --diff-elite: oklch(0.65 0.18 60);
+        --diff-event-std: oklch(0.6 0.18 320);
+        --diff-event-ext: oklch(0.55 0.2 20);
+        --diff-event-chal: oklch(0.55 0.2 340);
     }
 
     .dark {
         color-scheme: dark;
 
-        --bg: rgb(37, 38, 36);
-        --fg: rgba(214, 207, 195, 0.87);
+        /* ── Page ─────────────────────────────────── */
+        --bg: var(--color-zinc-900);
+        --fg: var(--color-zinc-100);
+        --border: var(--color-zinc-700);
+        --input-border: var(--color-zinc-600);
+        --ring: var(--color-blue-500);
 
-        --card-bg: var(--color-slate-900);
-        --card-border: var(--color-slate-800);
-        --card-fg: var(--color-white);
+        /* ── Card ─────────────────────────────────── */
+        --card: var(--color-zinc-900);
+        --card-fg: var(--color-zinc-100);
+        --card-border: var(--color-zinc-700);
 
-        --primary: var(--color-blue-600);
+        /* ── Sidebar ──────────────────────────────── */
+        --sidebar: var(--color-zinc-950);
+        --sidebar-fg: var(--color-zinc-100);
+
+        /* ── Overlay (popups, menus, dialogs) ─────── */
+        --overlay: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-700));
+        --overlay-fg: var(--color-zinc-100);
+
+        /* ── Neutral (hover fills, badges, headers) ── */
+        --neutral: var(--color-zinc-800);
+        --neutral-fg: var(--color-zinc-100);
+
+        /* ── Soft (de-emphasized text areas) ──────── */
+        --soft: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-900));
+        --soft-fg: var(--color-zinc-400);
+
+        /* ── Hairline ─────────────────────────────── */
+        --hairline: color-mix(in srgb, var(--border) 45%, transparent);
+
+        /* ── Data surface (grids, tables) ─────────── */
+        --data-surface: var(--color-zinc-800);
+        --data-surface-fg: var(--color-zinc-100);
+        --data-surface-border: var(--color-zinc-700);
+
+        /* ── Brand / intent ───────────────────────── */
+        --primary: var(--color-blue-500);
         --primary-fg: var(--color-white);
 
-        --secondary: rgb(35, 35, 34);
-        --secondary-fg: var(--color-slate-50);
+        --accent: var(--color-amber-600);
+        --accent-fg: var(--color-zinc-950);
 
-        --accent: var(--color-blue-600);
-        --accent-fg: var(--color-white);
-
-        --muted: oklch(0.21 0.006 285.885);
-        --muted-fg: var(--color-slate-400);
-
-        --overlay: rgb(35, 35, 34);
-        --overlay-fg: var(--color-slate-50);
-
-        --success: var(--color-emerald-600);
+        --success: var(--color-emerald-500);
         --success-fg: var(--color-white);
 
         --warning: var(--color-amber-400);
         --warning-fg: var(--color-amber-950);
 
+        --goal-on-track: color-mix(in srgb, var(--success) 22%, transparent);
+        --goal-caution: color-mix(in srgb, var(--warning) 25%, transparent);
+        --goal-urgent: color-mix(in srgb, var(--color-red-400) 25%, transparent);
+
+        --secondary: var(--color-zinc-700);
+        --secondary-fg: var(--color-zinc-100);
+
         --danger: var(--color-red-600);
         --danger-fg: var(--color-red-50);
 
-        --border: oklch(0.272 0.044 257.287);
-        --input: oklch(0.292 0.044 257.287);
-        --ring: var(--color-blue-600);
+        /* ── Charts ────────────────────────────────── */
+        --chart-1: var(--color-blue-500);
+        --chart-2: var(--color-blue-400);
+        --chart-3: var(--color-blue-300);
+        --chart-4: var(--color-blue-200);
+        --chart-5: var(--color-blue-100);
 
-        --navbar: rgb(45, 90, 134);
-        --navbar-fg: var(--color-slate-50);
+        /* ── Domain ────────────────────────────────── */
+        /* LRE track colours */
+        --lre-alpha: oklch(0.72 0.14 220);
+        --lre-beta: oklch(0.82 0.16 80);
+        --lre-gamma: oklch(0.7 0.2 15);
 
-        --sidebar: oklch(0.158 0.042 265.755);
-        --sidebar-fg: var(--color-slate-50);
-
-        --chart-1: var(--color-blue-700);
-        --chart-2: var(--color-blue-500);
-        --chart-3: var(--color-blue-400);
-        --chart-4: var(--color-blue-300);
-        --chart-5: var(--color-blue-200);
-
-        /*Rarity*/
+        /* Rarity */
         --rarity-common: #8a705d;
         --rarity-uncommon: #b3845f;
         --rarity-rare: #6b6b6b;
@@ -210,7 +296,7 @@
         --rarity-legendary: #5a7892;
         --rarity-mythic: #d9886c;
 
-        /*Ranks*/
+        /* Ranks */
         --rank-stone1: #8a705d;
         --rank-stone2: #7a6455;
         --rank-stone3: #5f554f;
@@ -236,6 +322,16 @@
         --rank-diamond3: #2b4b71;
 
         --rank-adamantine1: #d9886c;
+        --rank-adamantine2: #bf6e4e;
+        --rank-adamantine3: #9e5535;
+
+        /* Campaign difficulty colours */
+        --diff-standard: oklch(0.7 0.18 250);
+        --diff-mirror: oklch(0.72 0.14 200);
+        --diff-elite: oklch(0.75 0.16 60);
+        --diff-event-std: oklch(0.7 0.16 320);
+        --diff-event-ext: oklch(0.7 0.2 20);
+        --diff-event-chal: oklch(0.7 0.18 340);
     }
 
     h2 {
@@ -300,18 +396,6 @@ code {
 .flex-row {
     display: flex;
     align-items: center;
-}
-
-.alpha {
-    background-color: #93c47d;
-}
-
-.beta {
-    background-color: #c9daf8;
-}
-
-.gamma {
-    background-color: #fce5cd;
 }
 
 .stone1 {
@@ -398,27 +482,6 @@ code {
     background-color: var(--rank-adamantine3);
 }
 
-.ag-theme-material {
-    --ag-grid-size: 5px;
-    --ag-row-hover-color: transparent;
-    --ag-colum-hover-color: transparent;
-
-    .ag-cell-wrap-text {
-        word-break: unset;
-        white-space: break-spaces;
-    }
-
-    &.auto-teams {
-        .ag-header-cell {
-            padding: 0;
-        }
-
-        .ag-cell {
-            padding: 0;
-        }
-    }
-}
-
 .common {
     background-color: var(--rarity-common);
 }
@@ -445,30 +508,6 @@ code {
 
 .upgrade {
     background-color: #012a41;
-}
-
-.common-upgrade {
-    border: 2px solid #cdb3a0;
-}
-
-.uncommon-upgrade {
-    border: 2px solid #f9cb9c;
-}
-
-.rare-upgrade {
-    border: 2px solid #efefef;
-}
-
-.epic-upgrade {
-    border: 2px solid #ffe599;
-}
-
-.legendary-upgrade {
-    border: 2px solid #cfe2f3;
-}
-
-.mythic-upgrade {
-    border: 2px solid #d9886c;
 }
 
 .flex-box {
@@ -629,9 +668,62 @@ input.item-quantity-input[type='number'] {
     -moz-appearance: textfield;
 }
 
-/* styles.css */
-.center-header-text .ag-header-cell-label {
-    text-align: center;
-    display: flex;
-    justify-content: center;
+/* ── XP Income page utilities ─────────────────────────────────── */
+
+/* Fade-in animation for accordion rows and apply-hint reveal */
+.fade-in {
+    animation: fadeIn 0.18s ease-out;
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-2px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+/* ── Account dock utilities ─────────────────────────────────── */
+
+/* Dock in animation for accordion rows and apply-hint reveal */
+@keyframes account-dock-menu-in {
+    from {
+        opacity: 0;
+        transform: translateY(6px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+.account-dock-menu-in {
+    animation: account-dock-menu-in 0.18s ease-out;
+}
+@media (prefers-reduced-motion: reduce) {
+    .account-dock-menu-in {
+        animation: none;
+    }
+}
+
+/* Range slider accent variants (success = emerald, warning = amber) */
+input[type='range'].accent-success {
+    background: color-mix(in oklab, var(--success) 22%, var(--neutral));
+}
+input[type='range'].accent-success::-webkit-slider-thumb {
+    background: var(--success);
+}
+input[type='range'].accent-success::-moz-range-thumb {
+    background: var(--success);
+}
+
+input[type='range'].accent-warning {
+    background: color-mix(in oklab, var(--warning) 26%, var(--neutral));
+}
+input[type='range'].accent-warning::-webkit-slider-thumb {
+    background: var(--warning);
+}
+input[type='range'].accent-warning::-moz-range-thumb {
+    background: var(--warning);
 }

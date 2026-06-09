@@ -7,25 +7,22 @@ interface Props {
     children: ReactElement;
 }
 
-// Mounts zero Tooltip instances on render — activates only on first hover per element.
+// Keeps a stable Tooltip wrapper so children are never remounted on first hover.
+// The title is withheld until first hover to avoid showing stale/empty tooltips.
 export const LazyTooltip: FC<{ title: ReactNode; children: ReactElement<HTMLAttributes<HTMLElement>> }> = ({
     title,
     children,
 }) => {
     const [active, setActive] = useState(false);
 
-    if (!active) {
-        return cloneElement(children, {
-            onMouseEnter: (event: MouseEvent<HTMLElement>) => {
-                setActive(true);
-                children.props.onMouseEnter?.(event);
-            },
-        });
-    }
-
     return (
-        <Tooltip title={title} arrow placement="top" disableTouchListener>
-            {children}
+        <Tooltip title={active ? title : ''} arrow placement="top" disableTouchListener>
+            {cloneElement(children, {
+                onMouseEnter: (event: MouseEvent<HTMLElement>) => {
+                    if (!active) setActive(true);
+                    children.props.onMouseEnter?.(event);
+                },
+            })}
         </Tooltip>
     );
 };

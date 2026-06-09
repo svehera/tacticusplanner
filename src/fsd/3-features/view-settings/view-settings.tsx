@@ -1,68 +1,35 @@
-﻿import SettingsIcon from '@mui/icons-material/Settings';
-import { FormControlLabel, FormGroup, Popover, Switch, Tooltip } from '@mui/material';
-import Button from '@mui/material/Button';
-import React, { useContext } from 'react';
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
+import { Settings } from 'lucide-react';
+import { useContext } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
+import { AccessibleTooltip, Switch, buttonStyles } from '@/fsd/5-shared/ui';
+
 import { IViewPreferences, IViewOption } from './model';
 
-type OptionsPreset = 'wyo' | 'inventory' | 'myProgress';
+type OptionsPreset = 'wyo' | 'inventory';
 
 export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
     const dispatch = useContext(DispatchContext);
     const { viewPreferences } = useContext(StoreContext);
-    const [anchorElement2, setAnchorElement2] = React.useState<HTMLButtonElement>();
-
-    const handleClick2 = (event: React.MouseEvent<HTMLButtonElement>) => {
-        setAnchorElement2(event.currentTarget);
-    };
-
-    const handleClose2 = () => {
-        setAnchorElement2(undefined);
-    };
-
-    const open2 = Boolean(anchorElement2);
 
     const updatePreferences = (setting: keyof IViewPreferences, value: boolean) => {
         dispatch.viewPreferences({ type: 'Update', setting, value });
     };
 
-    const renderOption = (option: IViewOption) => {
-        return (
-            <Tooltip title={option.tooltip} key={option.key}>
-                <FormControlLabel
-                    label={option.label}
-                    control={
-                        <Switch
-                            checked={option.value}
-                            disabled={option.disabled}
-                            onChange={event => updatePreferences(option.key, event.target.checked)}
-                            inputProps={{ 'aria-label': 'controlled' }}
-                        />
-                    }
-                />
-            </Tooltip>
-        );
-    };
-
-    const renderPopover = (children: React.ReactNode) => (
-        <>
-            <Button variant="outlined" onClick={handleClick2}>
-                View <SettingsIcon />
-            </Button>
-            <Popover
-                open={open2}
-                anchorEl={anchorElement2}
-                onClose={handleClose2}
-                anchorOrigin={{
-                    vertical: 'bottom',
-                    horizontal: 'left',
-                }}>
-                <div className="m-5 w-[300px]">{children}</div>
-            </Popover>
-        </>
+    const renderOption = (option: IViewOption) => (
+        <AccessibleTooltip key={option.key} title={option.tooltip ?? ''}>
+            <div>
+                <Switch
+                    isSelected={option.value}
+                    isDisabled={option.disabled}
+                    onChange={value => updatePreferences(option.key, value)}>
+                    {option.label}
+                </Switch>
+            </div>
+        </AccessibleTooltip>
     );
 
     const wyoOptions: IViewOption[] = [
@@ -131,20 +98,24 @@ export const ViewSettings = ({ preset }: { preset: OptionsPreset }) => {
         },
     ];
 
-    const myProgressOptions: IViewOption[] = [
-        {
-            label: 'Show core characters',
-            key: 'myProgressShowCoreCharacters',
-            value: viewPreferences.myProgressShowCoreCharacters,
-            disabled: false,
-        },
-    ];
+    if (preset === 'inventory') {
+        return (
+            <div className="flex flex-wrap items-center gap-3">
+                {inventoryOptions.map(option => renderOption(option))}
+            </div>
+        );
+    }
 
     return (
-        <FormGroup className="flex flex-row" style={{ height: preset === 'wyo' ? '55px' : 'unset' }}>
-            {preset === 'wyo' && renderPopover(wyoOptions.map(option => renderOption(option)))}
-            {preset === 'inventory' && inventoryOptions.map(option => renderOption(option))}
-            {preset === 'myProgress' && myProgressOptions.map(option => renderOption(option))}
-        </FormGroup>
+        <Popover className="relative">
+            <PopoverButton className={buttonStyles({ appearance: 'outline', intent: 'secondary', size: 'small' })}>
+                View <Settings className="ml-1 size-4" />
+            </PopoverButton>
+            <PopoverPanel
+                anchor="bottom start"
+                className="z-50 mt-1 flex w-[280px] flex-col gap-2 rounded-xl border border-(--border) bg-(--overlay) p-4 shadow-xl">
+                {wyoOptions.map(option => renderOption(option))}
+            </PopoverPanel>
+        </Popover>
     );
 };

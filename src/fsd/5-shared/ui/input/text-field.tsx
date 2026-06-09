@@ -22,7 +22,8 @@ interface BaseTextFieldProps extends TextFieldPrimitiveProps, FieldProps {
 
 interface RevealableTextFieldProps extends BaseTextFieldProps {
     isRevealable: true;
-    type: 'password';
+    /** type is controlled internally for revealable fields — do not pass. */
+    type?: never;
 }
 
 interface NonRevealableTextFieldProps extends BaseTextFieldProps {
@@ -45,10 +46,16 @@ const TextField = ({
     type,
     ...props
 }: TextFieldProps) => {
-    const [isPasswordVisible, setIsPasswordVisible] = useState(false);
-    const inputType = isRevealable ? (isPasswordVisible ? 'text' : 'password') : type;
-    const handleTogglePasswordVisibility = () => {
-        setIsPasswordVisible(previous => !previous);
+    const [isValueVisible, setIsValueVisible] = useState(false);
+    // Always use type="text" for revealable fields so browsers never treat them as passwords.
+    // Obfuscation is handled via -webkit-text-security when hidden.
+    const inputType = isRevealable ? 'text' : type;
+    // -webkit-text-security is a non-standard property not in React.CSSProperties.
+    type SensitiveStyle = React.CSSProperties & { WebkitTextSecurity?: string };
+    const sensitiveInputStyle: SensitiveStyle | undefined =
+        isRevealable && !isValueVisible ? { WebkitTextSecurity: 'disc' } : undefined;
+    const handleToggleVisibility = () => {
+        setIsValueVisible(previous => !previous);
     };
     return (
         <TextFieldPrimitive
@@ -64,17 +71,17 @@ const TextField = ({
                         data-loading={isPending ? 'true' : undefined}>
                         {prefix && typeof prefix === 'string' ? (
                             <span className="text-muted-fg ml-2">{prefix}</span>
-                        ) : (
-                            prefix
-                        )}
-                        <Input placeholder={placeholder} />
+                        ) : prefix ? (
+                            <span className="ml-2.5 flex shrink-0 items-center">{prefix}</span>
+                        ) : undefined}
+                        <Input placeholder={placeholder} style={sensitiveInputStyle} />
                         {isRevealable ? (
                             <ButtonPrimitive
                                 type="button"
-                                aria-label="Toggle password visibility"
-                                onPress={handleTogglePasswordVisibility}
+                                aria-label="Toggle value visibility"
+                                onPress={handleToggleVisibility}
                                 className="data-focus-visible:*:data-[slot=icon]:text-primary *:data-[slot=icon]:text-muted-fg relative mr-1 grid shrink-0 place-content-center rounded-sm border-transparent outline-hidden">
-                                {isPasswordVisible ? <EyeOffIcon /> : <EyeIcon />}
+                                {isValueVisible ? <EyeOffIcon /> : <EyeIcon />}
                             </ButtonPrimitive>
                         ) : isPending ? (
                             <Loader variant="spin" />
@@ -82,7 +89,7 @@ const TextField = ({
                             typeof suffix === 'string' ? (
                                 <span className="text-muted-fg mr-2">{suffix}</span>
                             ) : (
-                                suffix
+                                <span className="mr-2.5 flex shrink-0 items-center">{suffix}</span>
                             )
                         ) : undefined}
                     </FieldGroup>

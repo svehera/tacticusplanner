@@ -1,8 +1,9 @@
 import { FormControlLabel, Switch, TextField, Tooltip } from '@mui/material';
-import { ColDef, ICellRendererParams, AllCommunityModule, themeBalham } from 'ag-grid-community';
+import { ColDef, ICellRendererParams, AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 import { useMemo, useRef, useState } from 'react';
 
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -163,12 +164,27 @@ export const Equipment = () => {
                     label="Quick Filter"
                     variant="outlined"
                     onChange={change => setNameFilter(change.target.value)}
+                    onBlur={() =>
+                        trackEvent('search', {
+                            feature: 'learn_equipment',
+                            action: 'filter',
+                            search_location: 'equipment_quick_filter',
+                        })
+                    }
                 />
                 <FormControlLabel
                     control={
                         <Switch
                             checked={showCharacters}
-                            onChange={event => setShowCharacters(event.target.checked)}
+                            onChange={event => {
+                                trackEvent('search', {
+                                    feature: 'learn_equipment',
+                                    action: 'filter',
+                                    search_location: 'equipment_characters_toggle',
+                                    status: event.target.checked ? 'applied' : 'cleared',
+                                });
+                                setShowCharacters(event.target.checked);
+                            }}
                             slotProps={{ input: { 'aria-label': 'controlled' } }}
                         />
                     }
@@ -176,12 +192,12 @@ export const Equipment = () => {
                 />
             </div>
             <div
-                className="ag-theme-material"
+                className="ag-theme-material density-compact"
                 style={{ height: 'calc(100vh - 12rem)', minHeight: '400px', width: '100%' }}>
                 <AgGridReact
                     ref={gridReference}
                     modules={[AllCommunityModule]}
-                    theme={themeBalham}
+                    theme="legacy"
                     suppressCellFocus={true}
                     defaultColDef={{ resizable: true, sortable: true, autoHeight: true, wrapText: true }}
                     columnDefs={columnDefs}

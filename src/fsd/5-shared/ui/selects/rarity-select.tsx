@@ -1,34 +1,32 @@
-﻿import { FormControl, MenuItem, Select } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { FlexBox } from '../flex-box';
 import { RarityIcon } from '../icons';
+
+import { Select } from './select';
 
 export const RaritySelect = ({
     rarityValues,
-    valueChanges,
     value,
+    valueChanges,
     label,
+    hideText = false,
 }: {
-    label: string;
+    label?: string;
     rarityValues: number[];
     value: number;
     valueChanges: (value: number) => void;
-}) => {
-    return (
-        <FormControl fullWidth>
-            <InputLabel>{label}</InputLabel>
-            <Select<Rarity> label={label} value={value} onChange={event => valueChanges(+event.target.value)}>
-                {rarityValues.map(rarity => (
-                    <MenuItem key={rarity} value={rarity}>
-                        <FlexBox gap={5}>
-                            <RarityIcon rarity={rarity} /> {Rarity[rarity]}
-                        </FlexBox>
-                    </MenuItem>
-                ))}
-            </Select>
-        </FormControl>
-    );
-};
+    hideText?: boolean;
+}) => (
+    <Select
+        options={rarityValues}
+        value={value}
+        onChange={valueChanges}
+        label={label}
+        renderOption={rarity => (
+            <div className="flex items-center gap-2">
+                <RarityIcon rarity={rarity} />
+                {!hideText && <span>{Rarity[rarity]}</span>}
+            </div>
+        )}
+    />
+);

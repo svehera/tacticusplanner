@@ -1,25 +1,26 @@
-﻿import { Info } from '@mui/icons-material';
-import { FormControl, FormControlLabel, InputLabel, MenuItem, Select, Switch } from '@mui/material';
+import { Info } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 
 import { rankToLevel } from 'src/models/constants';
 
 import { Rank } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-
-import { RankSelect } from '@/fsd/4-entities/character';
+import { RankSelect, Select } from '@/fsd/5-shared/ui/selects';
+import { Switch } from '@/fsd/5-shared/ui/switch';
 
 const ADAMANTINE_PARTIAL_COUNT = 5; // 5 intermediate XP levels before full rank-up
 
 function isAdamantine(rank: Rank): boolean {
-    return rank >= Rank.Adamantine1;
+    return rank >= Rank.Diamond3;
 }
 
-/** Returns the XP level label for Adamantine partial option N (1–5) at the given rank. */
+/** Returns the XP level label for D3+ partial option N (1–5) at the given rank. */
 function adamantineLevelLabel(rank: Rank, n: number): string {
-    const baseLevel = rankToLevel[(rank - 1) as Rank] ?? 0;
+    const baseLevel = rankToLevel[rank as Rank] ?? 0;
     return `Level ${baseLevel + n - 1}`;
 }
+
+const ADAMANTINE_OPTIONS = [0, ...Array.from({ length: ADAMANTINE_PARTIAL_COUNT }, (_, index) => index + 1)];
 
 interface Props {
     allowedValues: Rank[];
@@ -67,9 +68,9 @@ export const RankGoalSelect: React.FC<Props> = ({
         setForm(current => ({ ...current, rank: value, appliedUpgrades: newApplied }));
     };
 
-    const handlePoint5Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onChange(form.rank, event.target.checked, form.appliedUpgrades);
-        setForm(current => ({ ...current, point5: event.target.checked }));
+    const handlePoint5Change = (checked: boolean) => {
+        onChange(form.rank, checked, form.appliedUpgrades);
+        setForm(current => ({ ...current, point5: checked }));
     };
 
     const handleAppliedUpgradesChange = (value: number) => {
@@ -83,9 +84,9 @@ export const RankGoalSelect: React.FC<Props> = ({
         setForm(current => ({ ...current, startingRank: value, startingAppliedUpgrades: newApplied }));
     };
 
-    const handleStartPoint5Change = (event: React.ChangeEvent<HTMLInputElement>) => {
-        onStartChange(form.startingRank, event.target.checked, form.startingAppliedUpgrades);
-        setForm(current => ({ ...current, startingPoint5: event.target.checked }));
+    const handleStartPoint5Change = (checked: boolean) => {
+        onStartChange(form.startingRank, checked, form.startingAppliedUpgrades);
+        setForm(current => ({ ...current, startingPoint5: checked }));
     };
 
     const handleStartAppliedUpgradesChange = (value: number) => {
@@ -96,7 +97,7 @@ export const RankGoalSelect: React.FC<Props> = ({
     return (
         <div className="grid grid-cols-2 gap-x-6 gap-y-4">
             <RankSelect
-                label={'Starting Rank'}
+                label="Starting Rank"
                 rankValues={allowedValues}
                 value={form.startingRank}
                 valueChanges={handleStartRankChange}
@@ -104,42 +105,29 @@ export const RankGoalSelect: React.FC<Props> = ({
 
             <div className="flex items-center gap-2">
                 {isAdamantine(form.startingRank) ? (
-                    <FormControl size="small" className="flex-1">
-                        <InputLabel id="start-applied-label">Upgrades done</InputLabel>
-                        <Select
-                            labelId="start-applied-label"
+                    <div className="flex-1">
+                        <Select<number>
                             label="Upgrades done"
+                            options={ADAMANTINE_OPTIONS}
                             value={form.startingAppliedUpgrades}
-                            onChange={event => handleStartAppliedUpgradesChange(Number(event.target.value))}>
-                            <MenuItem value={0}>
-                                <em>None</em>
-                            </MenuItem>
-                            {Array.from({ length: ADAMANTINE_PARTIAL_COUNT }, (_, index) => index + 1).map(n => (
-                                <MenuItem key={n} value={n}>
-                                    {n} of 6 — {adamantineLevelLabel(form.startingRank, n)}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                            onChange={handleStartAppliedUpgradesChange}
+                            renderOption={n =>
+                                n === 0 ? 'None' : `${n} of 6 — ${adamantineLevelLabel(form.startingRank, n)}`
+                            }
+                        />
+                    </div>
                 ) : (
-                    <FormControlLabel
-                        label="Point Five"
-                        control={
-                            <Switch
-                                checked={form.startingPoint5}
-                                onChange={handleStartPoint5Change}
-                                inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                        }
-                    />
+                    <Switch isSelected={form.startingPoint5} onChange={handleStartPoint5Change}>
+                        Point Five
+                    </Switch>
                 )}
-                <AccessibleTooltip title={"Starting rank, defaults to your character's current rank."}>
-                    <Info color="primary" />
+                <AccessibleTooltip title="Starting rank, defaults to your character's current rank.">
+                    <Info className="size-5 text-(--primary)" />
                 </AccessibleTooltip>
             </div>
 
             <RankSelect
-                label={'Target Rank'}
+                label="Target Rank"
                 rankValues={allowedValues}
                 value={form.rank}
                 valueChanges={handleRankChange}
@@ -147,34 +135,21 @@ export const RankGoalSelect: React.FC<Props> = ({
 
             <div className="flex items-center gap-2">
                 {isAdamantine(form.rank) ? (
-                    <FormControl size="small" className="flex-1">
-                        <InputLabel id="target-applied-label">Partial target</InputLabel>
-                        <Select
-                            labelId="target-applied-label"
+                    <div className="flex-1">
+                        <Select<number>
                             label="Partial target"
+                            options={ADAMANTINE_OPTIONS}
                             value={form.appliedUpgrades}
-                            onChange={event => handleAppliedUpgradesChange(Number(event.target.value))}>
-                            <MenuItem value={0}>
-                                <em>None (full rank)</em>
-                            </MenuItem>
-                            {Array.from({ length: ADAMANTINE_PARTIAL_COUNT }, (_, index) => index + 1).map(n => (
-                                <MenuItem key={n} value={n}>
-                                    {n} of 6 — {adamantineLevelLabel(form.rank, n)}
-                                </MenuItem>
-                            ))}
-                        </Select>
-                    </FormControl>
+                            onChange={handleAppliedUpgradesChange}
+                            renderOption={n =>
+                                n === 0 ? 'None (full rank)' : `${n} of 6 — ${adamantineLevelLabel(form.rank, n)}`
+                            }
+                        />
+                    </div>
                 ) : (
-                    <FormControlLabel
-                        label="Point Five"
-                        control={
-                            <Switch
-                                checked={form.point5}
-                                onChange={handlePoint5Change}
-                                inputProps={{ 'aria-label': 'controlled' }}
-                            />
-                        }
-                    />
+                    <Switch isSelected={form.point5} onChange={handlePoint5Change}>
+                        Point Five
+                    </Switch>
                 )}
                 <AccessibleTooltip
                     title={
@@ -182,7 +157,7 @@ export const RankGoalSelect: React.FC<Props> = ({
                             ? 'Each Adamantine upgrade unlocks at a successive XP level. Select how many to include in this goal beyond the target rank-up.'
                             : 'When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\r\nIf you toggle on this switch then these upgrades will be included in your daily raids plan.'
                     }>
-                    <Info color="primary" />
+                    <Info className="size-5 text-(--primary)" />
                 </AccessibleTooltip>
             </div>
         </div>

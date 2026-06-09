@@ -17,6 +17,7 @@ import { warOffense2Reducer } from 'src/reducers/war-offense2.reducer';
 
 import { IErrorResponse } from '@/fsd/5-shared/api';
 import { useAuth } from '@/fsd/5-shared/model';
+import { trackEvent } from '@/fsd/5-shared/monitoring';
 
 import { GlobalState } from '../models/global-state';
 import { IDispatchContext, IGlobalState, IPersonalData2 } from '../models/interfaces';
@@ -45,6 +46,165 @@ const LOCAL_VERSION_KEY = 'TP-LocalVersion';
 function getLocalVersion(): number {
     const v = localStorage.getItem(LOCAL_VERSION_KEY);
     return v ? Number.parseInt(v, 10) : 0;
+}
+
+type DispatchScope = keyof Pick<
+    IDispatchContext,
+    | 'characters'
+    | 'mows'
+    | 'teams'
+    | 'teams2'
+    | 'warDefense2'
+    | 'warOffense2'
+    | 'dailyRaidsPreferences'
+    | 'campaignsProgress'
+    | 'goals'
+    | 'inventory'
+    | 'dailyRaids'
+    | 'guildWar'
+    | 'xpIncome'
+    | 'xpUse'
+    | 'rosterSnapshots'
+    | 'armageddon'
+    | 'onslaughtPreferences'
+    | 'leSelectedTeams'
+    | 'leProgress'
+>;
+
+function getActionRecord(action: unknown): Record<string, unknown> | undefined {
+    if (typeof action === 'object' && action !== null && 'type' in action) {
+        return action as Record<string, unknown>;
+    }
+
+    return undefined;
+}
+
+function getActionType(action: unknown): string | undefined {
+    const record = getActionRecord(action);
+    return typeof record?.type === 'string' ? record.type : undefined;
+}
+
+function getGoalType(action: unknown): string | undefined {
+    const record = getActionRecord(action);
+    const goal = record?.goal;
+    if (typeof goal === 'object' && goal !== null && 'type' in goal) {
+        return String((goal as Record<string, unknown>).type);
+    }
+
+    return undefined;
+}
+
+function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated: boolean): void {
+    const actionType = getActionType(action);
+    if (!actionType || actionType === 'SyncWithTacticus') {
+        return;
+    }
+
+    const commonParameters = { action: actionType, authenticated };
+
+    if (scope === 'characters' && actionType !== 'Set') {
+        trackEvent('roster_unit_update', { ...commonParameters, feature: 'roster', unit_type: 'character' });
+    } else if (scope === 'mows' && actionType !== 'Set') {
+        trackEvent('roster_unit_update', { ...commonParameters, feature: 'roster', unit_type: 'mow' });
+    } else if (scope === 'inventory' && actionType !== 'Set') {
+        trackEvent('inventory_update', { ...commonParameters, feature: 'inventory' });
+    } else if (scope === 'campaignsProgress' && actionType !== 'Set') {
+        trackEvent('campaign_progress_update', { ...commonParameters, feature: 'campaign_progress' });
+    } else if (scope === 'xpIncome' && actionType !== 'Set') {
+        trackEvent('xp_income_update', { ...commonParameters, feature: 'xp_income' });
+    } else if (scope === 'xpUse') {
+        trackEvent('resource_update', { ...commonParameters, feature: 'resources' });
+    } else if (scope === 'rosterSnapshots' && actionType !== 'Set') {
+        trackEvent('roster_unit_update', { ...commonParameters, feature: 'roster_snapshots', unit_type: 'roster' });
+    } else if (scope === 'onslaughtPreferences' && actionType !== 'Set') {
+        trackEvent('onslaught_preference_update', { ...commonParameters, feature: 'onslaught' });
+    } else if (scope === 'dailyRaidsPreferences' && actionType === 'Set') {
+        trackEvent('daily_raids_settings_save', { ...commonParameters, feature: 'daily_raids' });
+    } else if (scope === 'dailyRaids' && actionType === 'AddCompletedBattle') {
+        trackEvent('daily_raid_mark_complete', { ...commonParameters, feature: 'daily_raids' });
+    } else if (scope === 'dailyRaids' && actionType === 'UpdateFilters') {
+        trackEvent('daily_raids_filter_change', { ...commonParameters, feature: 'daily_raids' });
+    } else if (scope === 'goals') {
+        switch (actionType) {
+            case 'Add': {
+                trackEvent('goal_create', { ...commonParameters, feature: 'goals', goal_type: getGoalType(action) });
+
+                break;
+            }
+            case 'Update': {
+                trackEvent('goal_update', { ...commonParameters, feature: 'goals', goal_type: getGoalType(action) });
+
+                break;
+            }
+            case 'Delete': {
+                trackEvent('goal_delete', { ...commonParameters, feature: 'goals' });
+
+                break;
+            }
+            case 'DeleteAll': {
+                trackEvent('goals_clear_all', { ...commonParameters, feature: 'goals' });
+
+                break;
+            }
+            // No default
+        }
+    } else if (scope === 'teams') {
+        switch (actionType) {
+            case 'Add': {
+                trackEvent('team_create', { ...commonParameters, feature: 'teams' });
+
+                break;
+            }
+            case 'Update': {
+                trackEvent('team_update', { ...commonParameters, feature: 'teams' });
+
+                break;
+            }
+            case 'Delete': {
+                trackEvent('team_delete', { ...commonParameters, feature: 'teams' });
+
+                break;
+            }
+            // No default
+        }
+    } else if (scope === 'teams2' && actionType === 'Set') {
+        trackEvent('team_update', { ...commonParameters, feature: 'teams2' });
+    } else if ((scope === 'warDefense2' || scope === 'warOffense2') && actionType === 'Set') {
+        trackEvent('guild_war_team_update', { ...commonParameters, feature: scope });
+    } else if (scope === 'guildWar') {
+        if (['DeployCharacter', 'WithdrawCharacter', 'DeployTeam', 'WithdrawTeam'].includes(actionType)) {
+            trackEvent('guild_war_deploy', { ...commonParameters, feature: 'guild_war' });
+        } else if (
+            ['UpdateZoneDifficulty', 'UpdateLayoutBfLevel', 'SwapLayoutZones', 'UpdateZonePlayers'].includes(actionType)
+        ) {
+            trackEvent('guild_war_zone_update', { ...commonParameters, feature: 'guild_war' });
+        } else if (actionType !== 'Set') {
+            trackEvent('guild_war_team_update', { ...commonParameters, feature: 'guild_war' });
+        }
+    } else if (scope === 'leSelectedTeams') {
+        switch (actionType) {
+            case 'AddTeam': {
+                trackEvent('lre_team_create', { ...commonParameters, feature: 'lre' });
+
+                break;
+            }
+            case 'UpdateTeam': {
+                trackEvent('lre_team_update', { ...commonParameters, feature: 'lre' });
+
+                break;
+            }
+            case 'DeleteTeam': {
+                trackEvent('lre_team_update', { ...commonParameters, feature: 'lre' });
+
+                break;
+            }
+            // No default
+        }
+    } else if (scope === 'leProgress' && actionType === 'Update') {
+        trackEvent('lre_progress_update', { ...commonParameters, feature: 'lre' });
+    } else if (scope === 'armageddon' && actionType !== 'Set') {
+        trackEvent('armageddon_shop_update', { ...commonParameters, feature: 'armageddon' });
+    }
 }
 
 export const StoreProvider = ({ children }: React.PropsWithChildren) => {
@@ -201,8 +361,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         [logout, setModifiedDateTicks, syncModifiedDateTicksFromServer]
     );
 
-    function wrapDispatch<T>(dispatch: React.Dispatch<T>): React.Dispatch<T> {
+    function wrapDispatch<T>(dispatchScope: DispatchScope | undefined, dispatch: React.Dispatch<T>): React.Dispatch<T> {
         return (action: T) => {
+            if (dispatchScope) {
+                trackDispatchEvent(dispatchScope, action, isAuthenticated);
+            }
             requestAnimationFrame(() => {
                 dispatch(action);
                 setModified(true);
@@ -213,32 +376,32 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
 
     const dispatch = useMemo<IDispatchContext>(
         () => ({
-            characters: wrapDispatch(dispatchCharacters),
-            mows: wrapDispatch(dispatchMows),
-            teams: wrapDispatch(dispatchTeams),
-            teams2: wrapDispatch(dispatchTeams2),
-            warDefense2: wrapDispatch(dispatchWarDefense2),
-            warOffense2: wrapDispatch(dispatchWarOffense2),
-            goals: wrapDispatch(dispatchGoals),
-            viewPreferences: wrapDispatch(dispatchViewPreferences),
-            autoTeamsPreferences: wrapDispatch(dispatchAutoTeamsPreferences),
-            dailyRaidsPreferences: wrapDispatch(dispatchDailyRaidsPreferences),
-            selectedTeamOrder: wrapDispatch(dispatchSelectedTeamsOrder),
-            leSelectedTeams: wrapDispatch(dispatchLeSelectedTeams),
-            leProgress: wrapDispatch(dispatchLeProgress),
-            leSettings: wrapDispatch(dispatchLeSettings),
-            campaignsProgress: wrapDispatch(dispatchCampaignsProgress),
-            inventory: wrapDispatch(dispatchInventory),
-            dailyRaids: wrapDispatch(dispatchDailyRaids),
-            guildWar: wrapDispatch(dispatchGuildWar),
-            guild: wrapDispatch(dispatchGuild),
-            xpIncome: wrapDispatch(dispatchXpIncome),
-            xpUse: wrapDispatch(dispatchXpUse),
-            rosterSnapshots: wrapDispatch(dispatchRosterSnapshots),
-            gameModeTokens: wrapDispatch(dispatchGameModeTokens),
-            armageddon: wrapDispatch(dispatchArmageddon),
-            playerMetadata: wrapDispatch(dispatchPlayerMetadata),
-            onslaughtPreferences: wrapDispatch(dispatchOnslaughtPreferences),
+            characters: wrapDispatch('characters', dispatchCharacters),
+            mows: wrapDispatch('mows', dispatchMows),
+            teams: wrapDispatch('teams', dispatchTeams),
+            teams2: wrapDispatch('teams2', dispatchTeams2),
+            warDefense2: wrapDispatch('warDefense2', dispatchWarDefense2),
+            warOffense2: wrapDispatch('warOffense2', dispatchWarOffense2),
+            goals: wrapDispatch('goals', dispatchGoals),
+            viewPreferences: wrapDispatch(undefined, dispatchViewPreferences),
+            autoTeamsPreferences: wrapDispatch(undefined, dispatchAutoTeamsPreferences),
+            dailyRaidsPreferences: wrapDispatch('dailyRaidsPreferences', dispatchDailyRaidsPreferences),
+            selectedTeamOrder: wrapDispatch(undefined, dispatchSelectedTeamsOrder),
+            leSelectedTeams: wrapDispatch('leSelectedTeams', dispatchLeSelectedTeams),
+            leProgress: wrapDispatch('leProgress', dispatchLeProgress),
+            leSettings: wrapDispatch(undefined, dispatchLeSettings),
+            campaignsProgress: wrapDispatch('campaignsProgress', dispatchCampaignsProgress),
+            inventory: wrapDispatch('inventory', dispatchInventory),
+            dailyRaids: wrapDispatch('dailyRaids', dispatchDailyRaids),
+            guildWar: wrapDispatch('guildWar', dispatchGuildWar),
+            guild: wrapDispatch(undefined, dispatchGuild),
+            xpIncome: wrapDispatch('xpIncome', dispatchXpIncome),
+            xpUse: wrapDispatch('xpUse', dispatchXpUse),
+            rosterSnapshots: wrapDispatch('rosterSnapshots', dispatchRosterSnapshots),
+            gameModeTokens: wrapDispatch(undefined, dispatchGameModeTokens),
+            armageddon: wrapDispatch('armageddon', dispatchArmageddon),
+            playerMetadata: wrapDispatch(undefined, dispatchPlayerMetadata),
+            onslaughtPreferences: wrapDispatch('onslaughtPreferences', dispatchOnslaughtPreferences),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 // Only update if incoming version is newer
                 setGlobalState(current => {
@@ -283,7 +446,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     return current;
                 });
             },
-            seenAppVersion: wrapDispatch(setSeenAppVersion),
+            seenAppVersion: wrapDispatch(undefined, setSeenAppVersion),
         }),
         [
             dispatchCharacters,
@@ -308,6 +471,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchArmageddon,
             dispatchPlayerMetadata,
             dispatchOnslaughtPreferences,
+            isAuthenticated,
             setGlobalState,
         ]
     );
@@ -449,6 +613,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusApiKey,
                     tacticusGuildApiKey,
                     tacticusUserId,
+                    shareInGameNameWithGuild,
+                    shareRosterDataWithGuild,
+                    shareGuildMemberPerformance,
+                    combinedGuildTags,
+                    guildTag,
                 } = response.data;
                 const serverLastModified = new Date(lastModifiedDate);
                 const isFirstLogin = !data;
@@ -464,6 +633,11 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                     tacticusApiKey,
                     tacticusGuildApiKey,
                     tacticusUserId,
+                    shareInGameName: shareInGameNameWithGuild,
+                    shareRosterData: shareRosterDataWithGuild,
+                    shareGuildMemberPerformance,
+                    combinedGuildTags: combinedGuildTags ?? undefined,
+                    guildTag,
                 });
                 const localModifiedDateTicks = modifiedDateTicksReference.current;
 

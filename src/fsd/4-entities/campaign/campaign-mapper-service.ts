@@ -60,27 +60,26 @@ export class CampaignMapperService {
         switch (id) {
             case 'eventcampaign1': {
                 result.baseCampaignEventId = isStandard ? Campaign.AMS : isExtremis ? Campaign.AME : undefined;
-
                 break;
             }
             case 'eventcampaign2': {
                 result.baseCampaignEventId = isStandard ? Campaign.TS : isExtremis ? Campaign.TE : undefined;
-
                 break;
             }
             case 'eventcampaign3': {
                 result.baseCampaignEventId = isStandard ? Campaign.TAS : isExtremis ? Campaign.TAE : undefined;
-
                 break;
             }
             case 'eventcampaign4': {
                 result.baseCampaignEventId = isStandard ? Campaign.DGS : isExtremis ? Campaign.DGE : undefined;
-
                 break;
             }
             case 'eventcampaign5': {
                 result.baseCampaignEventId = isStandard ? Campaign.ASS : isExtremis ? Campaign.ASE : undefined;
-
+                break;
+            }
+            case 'eventcampaign6': {
+                result.baseCampaignEventId = isStandard ? Campaign.DAS : isExtremis ? Campaign.DAE : undefined;
                 break;
             }
             default: {
@@ -95,10 +94,14 @@ export class CampaignMapperService {
             [Campaign.AME]: Campaign.AMEC,
             [Campaign.TS]: Campaign.TSC,
             [Campaign.TE]: Campaign.TEC,
-            [Campaign.DGS]: Campaign.DGSC,
-            [Campaign.DGE]: Campaign.DGEC,
             [Campaign.TAS]: Campaign.TASC,
             [Campaign.TAE]: Campaign.TAEC,
+            [Campaign.DGS]: Campaign.DGSC,
+            [Campaign.DGE]: Campaign.DGEC,
+            [Campaign.ASS]: Campaign.ASSC,
+            [Campaign.ASE]: Campaign.ASEC,
+            [Campaign.DAS]: Campaign.DASC,
+            [Campaign.DAE]: Campaign.DAEC,
         };
 
         if (result.baseCampaignEventId === undefined) {

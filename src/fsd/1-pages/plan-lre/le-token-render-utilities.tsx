@@ -11,7 +11,7 @@ import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { LreRequirementStatusService } from './lre-requirement-status.service';
 import { ILreRequirements, ILreTrackProgress } from './lre.models';
-import { STATUS_COLORS } from './requirement-status-constants';
+import { STATUS_BORDER_SOLID_CLASSES } from './requirement-status-constants';
 
 export const renderRestrictions = (
     restricts: ILreRequirements[],
@@ -32,18 +32,11 @@ export const renderRestrictions = (
                 battleNumber,
                 restrict.id
             );
-            const borderColor = STATUS_COLORS[status];
 
             return (
                 <div
                     key={`${restrict.id}-${index}`}
-                    style={{
-                        borderWidth: '2px',
-                        borderStyle: 'solid',
-                        borderColor: borderColor,
-                        borderRadius: '4px',
-                        padding: '2px',
-                    }}>
+                    className={`rounded border-2 p-0.5 ${STATUS_BORDER_SOLID_CLASSES[status]}`}>
                     <LreRequirementImage
                         iconId={restrict.iconId}
                         tooltip={`${restrict.name} - ${restrict.pointsPerBattle}`}
