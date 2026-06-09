@@ -300,6 +300,19 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                 </label>
                             </div>
                         )}
+
+                        {currentShareRosterData && new Date() < new Date('2026-06-15T00:00:00Z') && (
+                            <div className="mt-2 w-[80%] rounded border border-blue-300 bg-blue-50 px-3 py-2 text-sm dark:border-blue-700 dark:bg-blue-950">
+                                <p className="font-semibold text-blue-700 dark:text-blue-300">
+                                    Thanks for sharing your roster!
+                                </p>
+                                <p className="mt-1 text-blue-600 dark:text-blue-400">
+                                    Use code <span className="font-mono font-bold tracking-wide">PLANNERRAIDS</span>{' '}
+                                    in-game to claim a reward.
+                                </p>
+                            </div>
+                        )}
+
                         {guildApiKey && (
                             <div className="flex w-[80%] flex-col gap-3 pt-2">
                                 <label className="flex cursor-pointer items-start gap-3">
