@@ -404,18 +404,22 @@ export const Goals = () => {
     return (
         <div className="space-y-8 py-6">
             <PageToolbar>
-                {/* Primary CTA */}
-                <SetGoalDialog key={goals.length} />
-
-                <PageToolbarDivider />
-
-                {/* Navigation / utility */}
+                {/* Navigation */}
                 <LinkButton
                     appearance="outline"
                     size="small"
                     href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <Link2 data-slot="icon" /> Go to Raids
                 </LinkButton>
+
+                <PageToolbarDivider />
+
+                {/* Primary CTA */}
+                <SetGoalDialog key={goals.length} />
+
+                <PageToolbarDivider />
+
+                {/* Utility */}
                 <Button appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
                     <Settings data-slot="icon" /> Raids Settings
                 </Button>
@@ -450,7 +454,7 @@ export const Goals = () => {
 
                 <PageToolbarDivider />
 
-                {/* Destructive — pushed right */}
+                {/* Destructive */}
                 <Button appearance="outline" intent="danger" size="small" onPress={onDeleteAll}>
                     <Trash2 data-slot="icon" /> Delete All
                 </Button>
@@ -605,7 +609,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(310px,1fr))] gap-3">
                                 {sortedUpgrades.map(goal => {
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
 
@@ -678,7 +682,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(310px,1fr))] gap-3">
                                 {sortedShards.map(goal => {
                                     const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                     return (
@@ -742,7 +746,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(310px,1fr))] gap-3">
                                 {sortedAbilities.map(goal => {
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                     return (

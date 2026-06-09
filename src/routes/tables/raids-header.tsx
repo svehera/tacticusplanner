@@ -33,6 +33,14 @@ export const RaidsHeader: React.FC<Props> = ({
     return (
         <>
             <div className="flex flex-wrap items-center gap-3">
+                {/* Navigation */}
+                <LinkButton appearance="outline" size="small" href={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
+                    <Link2 data-slot="icon" />
+                    Go to Goals
+                </LinkButton>
+
+                <Separator orientation="vertical" className="mx-1 h-6" />
+
                 {/* Primary config */}
                 <Button intent="primary" size="small" onPress={() => setOpenSettings(true)}>
                     <Settings data-slot="icon" />
@@ -71,14 +79,6 @@ export const RaidsHeader: React.FC<Props> = ({
                     <RotateCcw data-slot="icon" />
                     Reset day
                 </Button>
-
-                <Separator orientation="vertical" className="mx-1 h-6" />
-
-                {/* Navigation */}
-                <LinkButton appearance="outline" size="small" href={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
-                    <Link2 data-slot="icon" />
-                    Go to Goals
-                </LinkButton>
             </div>
 
             <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
