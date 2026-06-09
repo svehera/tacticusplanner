@@ -90,7 +90,7 @@ export const LeTokenCard: React.FC<CardProps> = ({
                     <div className="flex flex-wrap items-start gap-5 md:items-center">
                         <SyncButton
                             showText={false}
-                            variant="text"
+                            appearance="plain"
                             className="-mt-1 h-auto !min-h-[auto] !min-w-[auto] self-center !p-0 text-xs leading-5 [&_.MuiButton-startIcon]:!m-0 [&_.MuiSvgIcon-root]:align-middle [&_.MuiSvgIcon-root]:[font-size:1.25rem]"
                         />
                         <button

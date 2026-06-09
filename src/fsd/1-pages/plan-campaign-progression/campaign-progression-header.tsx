@@ -34,7 +34,7 @@ export const CampaignProgressionHeader: React.FC<Props> = ({ activeGoalsAction }
                     </div>
                     <div className="flex flex-wrap items-center gap-2">
                         {activeGoalsAction}
-                        <SyncButton showText={true} variant="contained" />
+                        <SyncButton showText={true} />
                     </div>
                 </div>
             </div>
