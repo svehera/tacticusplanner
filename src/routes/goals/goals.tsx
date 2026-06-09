@@ -603,7 +603,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(310px,1fr))] gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
                                 {sortedUpgrades.map(goal => {
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
 
@@ -676,7 +676,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(310px,1fr))] gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
                                 {sortedShards.map(goal => {
                                     const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                     return (
@@ -740,7 +740,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(310px,1fr))] gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
                                 {sortedAbilities.map(goal => {
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                     return (
