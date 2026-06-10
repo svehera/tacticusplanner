@@ -7,7 +7,7 @@ import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { parseErrorState, parseUnits } from './guild-roster-snapshots.helpers';
 import { getGuildMemberRosterApi, getGuildMembersApi, GuildTab, MemberState } from './guild-roster-snapshots.models';
-import { OverridesTab } from './overrides-tab';
+import { MembersTab } from './members-tab';
 import { RosterSnapshotsTab } from './roster-snapshots-tab';
 import { RostersTab } from './rosters-tab';
 
@@ -150,7 +150,7 @@ export const GuildRosterSnapshots = () => {
                 <Tabs value={activeTab} onChange={(_, value: GuildTab) => setActiveTab(value)}>
                     <Tab label="Rosters" value="rosters" />
                     <Tab label="Roster Snapshots" value="roster-snapshots" />
-                    <Tab label="Overrides" value="overrides" />
+                    <Tab label="Members" value="members" />
                 </Tabs>
 
                 <div>
@@ -158,7 +158,7 @@ export const GuildRosterSnapshots = () => {
                     {activeTab === 'roster-snapshots' && (
                         <RosterSnapshotsTab members={members} memberStates={memberStates} onLoadMembers={loadMembers} />
                     )}
-                    {activeTab === 'overrides' && <OverridesTab />}
+                    {activeTab === 'members' && <MembersTab />}
                 </div>
             </div>
         </UnitPortraitAssetsProvider>
