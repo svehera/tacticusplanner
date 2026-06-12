@@ -194,7 +194,7 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                         <Button size="medium" variant="text" onClick={handleToggle}>
                             <Grid2x2Check className="size-5 md:size-6" />
                         </Button>
-                        <SyncButton showText={false} variant={'text'} />
+                        <SyncButton showText={false} appearance="plain" />
                     </div>
                     <div className="w-full flex-col">
                         <div className="mb-1 flex w-full flex-row">

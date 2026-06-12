@@ -44,9 +44,20 @@ export const Sidebar = () => {
 
     const activeSegment = location.pathname.split('/').at(-1) ?? '';
 
+    const isRouteActive = (route: string) => {
+        if (!route.includes('?')) return route.split('/').at(-1) === activeSegment;
+        const [routePath, routeQuery] = route.split('?');
+        if (routePath.split('/').at(-1) !== activeSegment) return false;
+        const routeParameters = new URLSearchParams(routeQuery);
+        const currentParameters = new URLSearchParams(location.search);
+        for (const [key, value] of routeParameters) {
+            if (currentParameters.get(key) !== value) return false;
+        }
+        return true;
+    };
+
     const isItemActive = (item: MenuItemTP): boolean =>
-        (!!item.routeWeb && item.routeWeb.split('/').at(-1) === activeSegment) ||
-        item.subMenu.some(sub => sub.routeWeb.split('/').at(-1) === activeSegment);
+        (!!item.routeWeb && isRouteActive(item.routeWeb)) || item.subMenu.some(sub => isRouteActive(sub.routeWeb));
 
     const toggleCollapsed = () => {
         const next = !collapsed;
@@ -69,7 +80,7 @@ export const Sidebar = () => {
         'border-l-transparent bg-transparent text-[var(--soft-fg)] font-medium hover:bg-[var(--primary)]/[.08] hover:text-[var(--fg)]';
 
     const subBase =
-        'w-full block text-left pl-9 pr-2 py-1.5 rounded-[7px] border-none cursor-pointer whitespace-nowrap text-[12px] border-l-2';
+        'w-full flex items-center text-left pl-4 pr-2 py-1.5 gap-2 rounded-[7px] border-none cursor-pointer whitespace-nowrap text-[12px] border-l-2';
     const subActiveClass = 'border-l-[var(--primary)] bg-[var(--primary)]/[.18] text-[var(--fg)] font-semibold';
     const subInactiveClass =
         'border-l-transparent bg-transparent text-[var(--soft-fg)] font-normal hover:bg-[var(--primary)]/[.08] hover:text-[var(--fg)]';
@@ -112,7 +123,7 @@ export const Sidebar = () => {
                 </div>
 
                 {/* Nav */}
-                <nav className="flex-1 overflow-x-hidden overflow-y-auto p-2">
+                <nav className={`flex-1 overflow-x-hidden overflow-y-auto p-2 ${collapsed ? 'scrollbar-hide' : ''}`}>
                     {NAV_SECTIONS.map(({ key, items }) => (
                         <div key={key} className="mt-2.5">
                             {collapsed ? (
@@ -155,7 +166,18 @@ export const Sidebar = () => {
                                                         navigate(item.routeWeb);
                                                     }}
                                                     className={`${itemBase} ${active ? itemActiveClass : itemInactiveClass}`}>
-                                                    <span className="flex flex-shrink-0 text-[18px]">{item.icon}</span>
+                                                    {collapsed && (isGroup || item.subMenu.length > 0) ? (
+                                                        <span className="relative flex flex-shrink-0 text-[18px]">
+                                                            {item.icon}
+                                                            <ExpandMoreIcon
+                                                                className={`absolute -right-2 -bottom-2 !text-[13px] transition-transform duration-200 ${expanded ? 'rotate-180' : ''}`}
+                                                            />
+                                                        </span>
+                                                    ) : (
+                                                        <span className="flex flex-shrink-0 text-[18px]">
+                                                            {item.icon}
+                                                        </span>
+                                                    )}
                                                     {!collapsed && (
                                                         <>
                                                             <span className="flex-1">{item.label}</span>
@@ -170,21 +192,28 @@ export const Sidebar = () => {
                                                 </button>
                                             </Tooltip>
 
-                                            {!collapsed && item.subMenu.length > 0 && (
+                                            {item.subMenu.length > 0 && (
                                                 <Collapse in={expanded} timeout="auto" unmountOnExit>
                                                     {item.subMenu.map(sub => {
-                                                        const subActive =
-                                                            sub.routeWeb.split('/').at(-1) === activeSegment;
+                                                        const subActive = isRouteActive(sub.routeWeb);
                                                         return (
-                                                            <button
+                                                            <Tooltip
                                                                 key={sub.label}
-                                                                onClick={() => {
-                                                                    trackSidebarNavigation(sub.routeWeb);
-                                                                    navigate(sub.routeWeb);
-                                                                }}
-                                                                className={`${subBase} ${subActive ? subActiveClass : subInactiveClass}`}>
-                                                                {sub.label}
-                                                            </button>
+                                                                title={collapsed ? sub.label : ''}
+                                                                placement="right"
+                                                                enterDelay={200}>
+                                                                <button
+                                                                    onClick={() => {
+                                                                        trackSidebarNavigation(sub.routeWeb);
+                                                                        navigate(sub.routeWeb);
+                                                                    }}
+                                                                    className={`${collapsed ? itemBase : subBase} ${subActive ? subActiveClass : subInactiveClass}`}>
+                                                                    <span className="flex flex-shrink-0 text-[18px]">
+                                                                        {sub.icon}
+                                                                    </span>
+                                                                    {!collapsed && <span>{sub.label}</span>}
+                                                                </button>
+                                                            </Tooltip>
                                                         );
                                                     })}
                                                 </Collapse>
