@@ -1,6 +1,6 @@
 import { Dialog, DialogActions, DialogTitle } from '@mui/material';
 import MuiButton from '@mui/material/Button';
-import { Trash2, X } from 'lucide-react';
+import { AlertTriangle, Trash2, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getTacticusGuildData, obfuscateUserId, TacticusGuildMember, TacticusGuildRole } from '@/fsd/5-shared/lib';
@@ -9,6 +9,7 @@ import { buildCsv, formatTimeAgo, parseCsvText } from './guild-roster-snapshots.
 import {
     API_KEY_PATTERN,
     getGuildOverridesApi,
+    MemberState,
     OverrideRow,
     OverridesLoadState,
     PlayerOverride,
@@ -47,10 +48,10 @@ function roleBadgeClass(role: TacticusGuildRole): string {
             return 'bg-(--primary)/15 text-(--primary) border border-(--primary)/30';
         }
         case TacticusGuildRole.CO_LEADER: {
-            return 'bg-emerald-100 text-emerald-700 border border-emerald-200 dark:bg-emerald-900/30 dark:text-emerald-400 dark:border-emerald-700';
+            return 'bg-(--success)/15 text-(--success) border border-(--success)/30';
         }
         case TacticusGuildRole.OFFICER: {
-            return 'bg-amber-100 text-amber-700 border border-amber-200 dark:bg-amber-900/30 dark:text-amber-400 dark:border-amber-700';
+            return 'bg-(--warning)/15 text-(--warning) border border-(--warning)/30';
         }
         default: {
             return 'bg-(--soft) text-(--soft-fg) border border-(--border)';
@@ -80,7 +81,9 @@ function rowsDiffer(current: OverrideRow[], saved: OverrideRow[]): boolean {
 const inputCls =
     'w-full rounded border border-(--input-border) bg-(--bg) px-2 py-1 text-sm text-(--fg) focus:border-(--primary) focus:outline-none focus:ring-1 focus:ring-(--ring)';
 const invalidInputCls =
-    'w-full rounded border border-red-400 bg-(--bg) px-2 py-1 text-sm text-(--fg) focus:outline-none focus:ring-1 focus:ring-red-400/50 dark:border-red-600';
+    'w-full rounded border border-(--danger) bg-(--bg) px-2 py-1 text-sm text-(--fg) focus:outline-none focus:ring-1 focus:ring-(--danger)/50';
+const warningInputCls =
+    'w-full rounded border border-(--warning) bg-(--bg) px-2 py-1 text-sm text-(--fg) focus:outline-none focus:ring-1 focus:ring-(--warning)/50';
 
 // Matching grid column template used for both header and data rows.
 const COLS = 'grid-cols-[minmax(8rem,1fr)_14rem_7rem_3.5rem_6.5rem_minmax(8rem,1.5fr)_2rem]';
@@ -89,7 +92,12 @@ const COLS = 'grid-cols-[minmax(8rem,1fr)_14rem_7rem_3.5rem_6.5rem_minmax(8rem,1
 // Component
 // ---------------------------------------------------------------------------
 
-export const MembersTab = () => {
+interface MembersTabProps {
+    memberStates: Map<string, MemberState>;
+    rostersLoaded: boolean;
+}
+
+export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => {
     const [guildMembers, setGuildMembers] = useState<TacticusGuildMember[]>(() => cache?.guildMembers ?? []);
     const [loadState, setLoadState] = useState<OverridesLoadState>(() =>
         cache === undefined ? { status: 'loading' } : { status: 'loaded', sequenceNumber: cache.sequenceNumber }
@@ -342,6 +350,16 @@ export const MembersTab = () => {
                 {csvImportStatus && <p className="text-xs text-(--soft-fg)">{csvImportStatus}</p>}
                 {saveError && <p className="text-sm text-(--danger)">{saveError}</p>}
 
+                {!rostersLoaded && (
+                    <div className="flex items-center gap-2 rounded-lg border border-(--warning)/50 bg-(--warning)/10 px-3 py-2 text-sm text-(--warning)">
+                        <AlertTriangle className="size-4 shrink-0" />
+                        <span>
+                            Load the <strong>Rosters</strong> tab to see which players are already sharing their name
+                            and API key — overrides entered for those players will be highlighted.
+                        </span>
+                    </div>
+                )}
+
                 {/* Member grid */}
                 <div className="overflow-x-auto rounded-xl border border-(--border)">
                     <div className="min-w-[780px]">
@@ -375,6 +393,23 @@ export const MembersTab = () => {
                                 const apiKeyInvalid = apiKey.length > 0 && !API_KEY_PATTERN.test(apiKey);
                                 const canClear = name !== '' || apiKey !== '';
 
+                                const memberState = memberStates.get(member.userId);
+                                const hasVolunteeredName =
+                                    memberState?.status === 'name-only' || memberState?.status === 'success';
+                                const hasVolunteeredApiKey = memberState?.status === 'success';
+                                const volunteeredName =
+                                    hasVolunteeredName && memberState && 'playerName' in memberState
+                                        ? memberState.playerName
+                                        : undefined;
+
+                                const nameInputCls = name !== '' && hasVolunteeredName ? warningInputCls : inputCls;
+                                const apiKeyInputCls =
+                                    apiKey !== '' && hasVolunteeredApiKey
+                                        ? warningInputCls
+                                        : apiKeyInvalid
+                                          ? invalidInputCls
+                                          : inputCls;
+
                                 return (
                                     <div
                                         key={member.userId}
@@ -383,11 +418,16 @@ export const MembersTab = () => {
                                             type="text"
                                             value={name}
                                             maxLength={40}
-                                            placeholder="—"
+                                            placeholder={volunteeredName ? `${volunteeredName} (shared)` : '—'}
+                                            title={
+                                                name !== '' && hasVolunteeredName
+                                                    ? 'This player is already sharing their name'
+                                                    : undefined
+                                            }
                                             onChange={event_ =>
                                                 updateOverride(member.userId, 'name', event_.target.value)
                                             }
-                                            className={inputCls}
+                                            className={nameInputCls}
                                         />
                                         <span
                                             title={obfuscateUserId(member.userId)}
@@ -405,11 +445,16 @@ export const MembersTab = () => {
                                         <input
                                             type="text"
                                             value={apiKey}
-                                            placeholder="—"
+                                            placeholder={hasVolunteeredApiKey ? '(shared)' : '—'}
+                                            title={
+                                                apiKey !== '' && hasVolunteeredApiKey
+                                                    ? 'This player is already sharing their API key'
+                                                    : undefined
+                                            }
                                             onChange={event_ =>
                                                 updateOverride(member.userId, 'apiKey', event_.target.value)
                                             }
-                                            className={apiKeyInvalid ? invalidInputCls : inputCls}
+                                            className={apiKeyInputCls}
                                         />
                                         <button
                                             onClick={() => clearOverride(member.userId)}

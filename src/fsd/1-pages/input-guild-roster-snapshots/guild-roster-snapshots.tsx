@@ -158,7 +158,9 @@ export const GuildRosterSnapshots = () => {
                     {activeTab === 'roster-snapshots' && (
                         <RosterSnapshotsTab members={members} memberStates={memberStates} onLoadMembers={loadMembers} />
                     )}
-                    {activeTab === 'members' && <MembersTab />}
+                    {activeTab === 'members' && (
+                        <MembersTab memberStates={memberStates} rostersLoaded={hasLoadedOnce} />
+                    )}
                 </div>
             </div>
         </UnitPortraitAssetsProvider>
