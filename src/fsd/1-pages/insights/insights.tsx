@@ -23,10 +23,40 @@ import { TeamGraph } from '@/fsd/3-features/characters/components/team-graph';
 import { isCharactersView } from '@/fsd/3-features/characters/functions/is-characters-view';
 import { isFactionsView } from '@/fsd/3-features/characters/functions/is-factions-view';
 import { useGetInsights } from '@/fsd/3-features/insights/insights.endpoint';
+import { IDailyStat } from '@/fsd/3-features/insights/insights.models';
 import { StatLineChart } from '@/fsd/3-features/insights/stat-line-chart';
 import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-features/view-settings';
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
+
+const DailyStatsGrid = ({ dailyStats }: { dailyStats: IDailyStat[] }) => (
+    <div className="my-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
+        <StatLineChart
+            title="Registered Users"
+            dailyStats={dailyStats}
+            accessor={s => s.registeredUsers}
+            color="#3b82f6"
+        />
+        <StatLineChart
+            title="Tacticus Integrations"
+            dailyStats={dailyStats}
+            accessor={s => s.tacticusIntegrations}
+            color="#8b5cf6"
+        />
+        <StatLineChart
+            title="Active Last 7 Days"
+            dailyStats={dailyStats}
+            accessor={s => s.activeLast7Days}
+            color="#10b981"
+        />
+        <StatLineChart
+            title="Active Last 30 Days"
+            dailyStats={dailyStats}
+            accessor={s => s.activeLast30Days}
+            color="#f59e0b"
+        />
+    </div>
+);
 
 export const Insights = () => {
     const { viewPreferences } = useContext(StoreContext);
@@ -60,34 +90,7 @@ export const Insights = () => {
                 <p>
                     Active users last 7 days: <b>{data.activeLast7Days}</b>{' '}
                 </p>
-                {data.dailyStats && data.dailyStats.length > 0 && (
-                    <div className="my-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                        <StatLineChart
-                            title="Registered Users"
-                            dailyStats={data.dailyStats}
-                            accessor={s => s.registeredUsers}
-                            color="#3b82f6"
-                        />
-                        <StatLineChart
-                            title="Tacticus Integrations"
-                            dailyStats={data.dailyStats}
-                            accessor={s => s.tacticusIntegrations}
-                            color="#8b5cf6"
-                        />
-                        <StatLineChart
-                            title="Active Last 7 Days"
-                            dailyStats={data.dailyStats}
-                            accessor={s => s.activeLast7Days}
-                            color="#10b981"
-                        />
-                        <StatLineChart
-                            title="Active Last 30 Days"
-                            dailyStats={data.dailyStats}
-                            accessor={s => s.activeLast30Days}
-                            color="#f59e0b"
-                        />
-                    </div>
-                )}
+                {data.dailyStats && data.dailyStats.length > 0 && <DailyStatsGrid dailyStats={data.dailyStats} />}
                 <p className="text-center">Averaged roster data is missing. Something went wrong</p>
             </Box>
         );
@@ -126,34 +129,7 @@ export const Insights = () => {
                 Active users last 7 days: <b>{data.activeLast7Days}</b>
             </p>
 
-            {data.dailyStats && data.dailyStats.length > 0 && (
-                <div className="my-4 grid grid-cols-1 gap-6 sm:grid-cols-2">
-                    <StatLineChart
-                        title="Registered Users"
-                        dailyStats={data.dailyStats}
-                        accessor={s => s.registeredUsers}
-                        color="#3b82f6"
-                    />
-                    <StatLineChart
-                        title="Tacticus Integrations"
-                        dailyStats={data.dailyStats}
-                        accessor={s => s.tacticusIntegrations}
-                        color="#8b5cf6"
-                    />
-                    <StatLineChart
-                        title="Active Last 7 Days"
-                        dailyStats={data.dailyStats}
-                        accessor={s => s.activeLast7Days}
-                        color="#10b981"
-                    />
-                    <StatLineChart
-                        title="Active Last 30 Days"
-                        dailyStats={data.dailyStats}
-                        accessor={s => s.activeLast30Days}
-                        color="#f59e0b"
-                    />
-                </div>
-            )}
+            {data.dailyStats && data.dailyStats.length > 0 && <DailyStatsGrid dailyStats={data.dailyStats} />}
 
             <p className="text-center">
                 Averaged roster data. Last updated on{' '}
