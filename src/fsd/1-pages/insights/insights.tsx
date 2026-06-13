@@ -35,25 +35,25 @@ const DailyStatsGrid = ({ dailyStats }: { dailyStats: IDailyStat[] }) => (
             title="Registered Users"
             dailyStats={dailyStats}
             accessor={s => s.registeredUsers}
-            color="#3b82f6"
+            colorToken="--chart-1"
         />
         <StatLineChart
             title="Tacticus Integrations"
             dailyStats={dailyStats}
             accessor={s => s.tacticusIntegrations}
-            color="#8b5cf6"
+            colorToken="--chart-2"
         />
         <StatLineChart
             title="Active Last 7 Days"
             dailyStats={dailyStats}
             accessor={s => s.activeLast7Days}
-            color="#10b981"
+            colorToken="--chart-3"
         />
         <StatLineChart
             title="Active Last 30 Days"
             dailyStats={dailyStats}
             accessor={s => s.activeLast30Days}
-            color="#f59e0b"
+            colorToken="--chart-4"
         />
     </div>
 );

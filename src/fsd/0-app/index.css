@@ -146,9 +146,9 @@
 
         /* ── Charts ────────────────────────────────── */
         --chart-1: var(--color-blue-700);
-        --chart-2: var(--color-blue-600);
-        --chart-3: var(--color-blue-500);
-        --chart-4: var(--color-blue-400);
+        --chart-2: var(--color-violet-600);
+        --chart-3: var(--color-emerald-600);
+        --chart-4: var(--color-amber-500);
         --chart-5: var(--color-blue-300);
 
         /* ── Radius ────────────────────────────────── */
@@ -277,9 +277,9 @@
 
         /* ── Charts ────────────────────────────────── */
         --chart-1: var(--color-blue-500);
-        --chart-2: var(--color-blue-400);
-        --chart-3: var(--color-blue-300);
-        --chart-4: var(--color-blue-200);
+        --chart-2: var(--color-violet-400);
+        --chart-3: var(--color-emerald-500);
+        --chart-4: var(--color-amber-400);
         --chart-5: var(--color-blue-100);
 
         /* ── Domain ────────────────────────────────── */
