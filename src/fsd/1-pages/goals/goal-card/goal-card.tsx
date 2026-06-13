@@ -127,7 +127,7 @@ export const GoalCard: React.FC<Props> = ({
 
     return (
         <div
-            className={`flex min-h-[200px] w-[350px] flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors ${stripeClass}`}
+            className={`flex min-h-[200px] min-w-0 flex-col overflow-hidden rounded-xl border border-(--card-border) text-(--card-fg) shadow-sm transition-colors ${stripeClass}`}
             style={cardBackgroundStyle}>
             {/* Header: 3-column grid — [#n + icon] | name + date | actions */}
             <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 border-b border-(--card-border) px-4 py-3">

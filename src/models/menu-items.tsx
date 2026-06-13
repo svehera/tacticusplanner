@@ -1,4 +1,7 @@
-﻿import BuildIcon from '@mui/icons-material/Build';
+﻿import ArchiveIcon from '@mui/icons-material/Archive';
+import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
+import BuildIcon from '@mui/icons-material/Build';
+import CastleIcon from '@mui/icons-material/Castle';
 import ContactEmergencyIcon from '@mui/icons-material/ContactEmergency';
 import EventIcon from '@mui/icons-material/Event';
 import EventRepeatIcon from '@mui/icons-material/EventRepeat';
@@ -117,13 +120,13 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['goals'],
     menuItemById['dailyRaids'],
     menuItemById['teams2'],
-    new MenuItemTP('Guild War', menuItemById['warDefense2'].icon, '', '', '', [
+    new MenuItemTP('Guild War', <CastleIcon />, '', '', '', [
         menuItemById['warOffense2'],
         menuItemById['warDefense2'],
         menuItemById['zones'],
     ]),
-    new MenuItemTP('LRE', <TableChartIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
-    new MenuItemTP('LRE Archive', <TableChartIcon />, '', '', '', inactiveLreMenuItems),
+    new MenuItemTP('LRE', <AutoAwesomeIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
+    new MenuItemTP('LRE Archive', <ArchiveIcon />, '', '', '', inactiveLreMenuItems),
     menuItemById['armageddon'],
     menuItemById['campaignProgression'],
     menuItemById['quests'],

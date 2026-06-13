@@ -1,5 +1,5 @@
 import { Tab, Tabs } from '@mui/material';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useAuth } from '@/fsd/5-shared/model';
 import { Button, DebugJson } from '@/fsd/5-shared/ui';
@@ -7,9 +7,14 @@ import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { parseErrorState, parseUnits } from './guild-roster-snapshots.helpers';
 import { getGuildMemberRosterApi, getGuildMembersApi, GuildTab, MemberState } from './guild-roster-snapshots.models';
-import { OverridesTab } from './overrides-tab';
+import { MembersTab } from './members-tab';
 import { RosterSnapshotsTab } from './roster-snapshots-tab';
 import { RostersTab } from './rosters-tab';
+
+// Module-level cache — persists across navigations within a session
+let cachedMembers: string[] | undefined;
+let cachedMemberStates: Map<string, MemberState> = new Map();
+let cachedHasLoadedOnce = false;
 
 const NoKeyMessage = () => (
     <div className="flex flex-col items-center justify-center px-8 py-16 text-center">
@@ -30,13 +35,28 @@ const NoKeyMessage = () => (
 export const GuildRosterSnapshots = () => {
     const { userInfo } = useAuth();
     const hasGuildApiKey = !!userInfo?.tacticusGuildApiKey;
+    const guildApiKey = userInfo?.tacticusGuildApiKey ?? '';
+    const previousKeyReference = useRef<string | undefined>(undefined);
 
-    const [members, setMembers] = useState<string[] | undefined>();
-    const [memberStates, setMemberStates] = useState<Map<string, MemberState>>(new Map());
+    const [members, setMembers] = useState<string[] | undefined>(cachedMembers);
+    const [memberStates, setMemberStates] = useState<Map<string, MemberState>>(cachedMemberStates);
     const [isLoading, setIsLoading] = useState(false);
-    const [hasLoadedOnce, setHasLoadedOnce] = useState(false);
+    const [hasLoadedOnce, setHasLoadedOnce] = useState(cachedHasLoadedOnce);
     const [topLevelError, setTopLevelError] = useState<string | undefined>();
     const [activeTab, setActiveTab] = useState<GuildTab>('rosters');
+
+    // Reset cache when the guild API key changes (e.g. user switches accounts)
+    useEffect(() => {
+        const previous = previousKeyReference.current;
+        previousKeyReference.current = guildApiKey;
+        if (previous === undefined || previous === guildApiKey) return;
+        cachedMembers = undefined;
+        cachedMemberStates = new Map();
+        cachedHasLoadedOnce = false;
+        setMembers(undefined);
+        setMemberStates(new Map());
+        setHasLoadedOnce(false);
+    }, [guildApiKey]);
 
     if (!hasGuildApiKey) {
         return <NoKeyMessage />;
@@ -54,10 +74,14 @@ export const GuildRosterSnapshots = () => {
         }
 
         const ids = data ?? [];
+        cachedMembers = ids;
         setMembers(ids);
-        setMemberStates(new Map(ids.map(id => [id, { status: 'loading' } as MemberState])));
+        const initialStates = new Map(ids.map(id => [id, { status: 'loading' } as MemberState]));
+        cachedMemberStates = initialStates;
+        setMemberStates(initialStates);
 
         if (ids.length === 0) {
+            cachedHasLoadedOnce = true;
             setHasLoadedOnce(true);
             setIsLoading(false);
             return;
@@ -80,10 +104,15 @@ export const GuildRosterSnapshots = () => {
                     state = { status: 'not-shared' };
                 }
 
-                setMemberStates(previous => new Map(previous).set(id, state));
+                setMemberStates(previous => {
+                    const next = new Map(previous).set(id, state);
+                    cachedMemberStates = next;
+                    return next;
+                });
 
                 done++;
                 if (done === ids.length) {
+                    cachedHasLoadedOnce = true;
                     setHasLoadedOnce(true);
                     setIsLoading(false);
                 }
@@ -121,7 +150,7 @@ export const GuildRosterSnapshots = () => {
                 <Tabs value={activeTab} onChange={(_, value: GuildTab) => setActiveTab(value)}>
                     <Tab label="Rosters" value="rosters" />
                     <Tab label="Roster Snapshots" value="roster-snapshots" />
-                    <Tab label="Overrides" value="overrides" />
+                    <Tab label="Members" value="members" />
                 </Tabs>
 
                 <div>
@@ -129,7 +158,9 @@ export const GuildRosterSnapshots = () => {
                     {activeTab === 'roster-snapshots' && (
                         <RosterSnapshotsTab members={members} memberStates={memberStates} onLoadMembers={loadMembers} />
                     )}
-                    {activeTab === 'overrides' && <OverridesTab members={members} />}
+                    {activeTab === 'members' && (
+                        <MembersTab memberStates={memberStates} rostersLoaded={hasLoadedOnce} />
+                    )}
                 </div>
             </div>
         </UnitPortraitAssetsProvider>

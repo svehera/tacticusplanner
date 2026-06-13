@@ -4,6 +4,23 @@
  */
 
 export interface paths {
+    '/guild': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns the guild data for the authenticated user, fetched live from the Tacticus API using the user's stored guild API key. */
+        get: operations['getGuild'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/guild/raid/seasons': {
         parameters: {
             query?: never;
@@ -158,6 +175,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/users/tacticusApiKey': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        /** Stores or updates the authenticated user's Tacticus API keys and sharing preferences. */
+        put: operations['updateTacticusApiKey'];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/guild/member/sharedLeaderboards': {
         parameters: {
             query?: never;
@@ -175,10 +209,81 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/raid/token_usage': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns per-season token and bomb counts for all guild members across all aggregated historical seasons. Triggers backfill if needed. */
+        get: operations['getGuildTokenUsage'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/member/token_usage': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns the calling member's own per-season token and bomb counts across all aggregated historical seasons. */
+        get: operations['getMemberGuildTokenUsage'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
 }
 export type webhooks = Record<string, never>;
 export interface components {
     schemas: {
+        SetTacticusApiKeyRequest: {
+            /** @description Personal Tacticus API key. Omit or send empty to clear. */
+            apiKey?: string;
+            /** @description Guild API key. Omit or send empty to clear. */
+            guildApiKey?: string;
+            /** @description Player's Tacticus user ID. Omit or send empty to clear. */
+            tacticusUserId?: string;
+            /** @description 5-character uppercase alphanumeric guild tag. Ignored when guildApiKey is provided (tag is fetched from the Tacticus API instead). */
+            guildTag?: string;
+            shareInGameNameWithGuild?: boolean;
+            shareRosterDataWithGuild?: boolean;
+            shareGuildMemberPerformance?: boolean;
+            /** @description Tags of other guilds whose raid data should be merged into shared leaderboards. **Absent** (field omitted) = leave existing tags unchanged. **Empty array** (`[]`) = clear all combined tags. **Non-empty array** = replace combined tags with the supplied list. Only meaningful when the user holds a guild API key. */
+            combinedGuildTags?: string[];
+        };
+        /** @enum {string} */
+        GuildRole: 'MEMBER' | 'OFFICER' | 'CO_LEADER' | 'LEADER';
+        GuildMember: {
+            /** Format: uuid */
+            userId: string;
+            role: components['schemas']['GuildRole'];
+            level: number;
+            /** Format: int64 */
+            lastActivityOn?: number | null;
+        };
+        Guild: {
+            /** Format: uuid */
+            guildId: string;
+            guildTag: string;
+            name: string;
+            level: number;
+            members: components['schemas']['GuildMember'][];
+            guildRaidSeasons: number[];
+        };
+        GuildResponse: {
+            guild: components['schemas']['Guild'];
+        };
         GuildApiError: {
             code: string;
             message: string;
@@ -399,6 +504,23 @@ export interface components {
                 [key: string]: number;
             };
         };
+        PlayerTokenUsage: {
+            /** @description Tacticus user ID (GUID string) */
+            userId?: string;
+            /** @description Total Battle-type hits (prime hits + boss hits + killing blows) */
+            tokens?: number;
+            /** @description Total Bomb-type hits */
+            bombs?: number;
+        };
+        SeasonTokenUsage: {
+            season?: number;
+            players?: components['schemas']['PlayerTokenUsage'][];
+        };
+        GuildTokenUsageResponse: {
+            guildTag?: string;
+            /** @description One entry per aggregated season, newest first. For the member endpoint, each season's players list is filtered to the requesting member only. */
+            seasons?: components['schemas']['SeasonTokenUsage'][];
+        };
     };
     responses: {
         /** @description Missing or invalid JWT */
@@ -436,6 +558,35 @@ export interface components {
 }
 export type $defs = Record<string, never>;
 export interface operations {
+    getGuild: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GuildResponse'];
+                };
+            };
+            400: components['responses']['TacticusApiError'];
+            401: components['responses']['Unauthorized'];
+            /** @description No guild API key stored for the user */
+            404: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+        };
+    };
     getGuildRaidSeasons: {
         parameters: {
             query?: never;
@@ -724,6 +875,46 @@ export interface operations {
             502: components['responses']['TacticusApiError'];
         };
     };
+    updateTacticusApiKey: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                'application/json': components['schemas']['SetTacticusApiKeyRequest'];
+            };
+        };
+        responses: {
+            /** @description OK — keys saved, player data returned */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        /** @description Raw player response from the Tacticus API */
+                        player?: {
+                            [key: string]: unknown;
+                        };
+                        combinedGuildTags?: string[] | null;
+                        okString?: string;
+                    };
+                };
+            };
+            /** @description No content — apiKey was empty, keys cleared */
+            204: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content?: never;
+            };
+            400: components['responses']['TacticusApiError'];
+            401: components['responses']['Unauthorized'];
+        };
+    };
     getMemberSharedLeaderboards: {
         parameters: {
             query?: {
@@ -743,6 +934,54 @@ export interface operations {
                 };
                 content: {
                     'application/json': components['schemas']['SharedLeaderboardsResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getGuildTokenUsage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GuildTokenUsageResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getMemberGuildTokenUsage: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GuildTokenUsageResponse'];
                 };
             };
             401: components['responses']['Unauthorized'];

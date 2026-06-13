@@ -45,6 +45,43 @@ import {
 
 const SHOW_ALL = RosterSnapshotShowVariableSettings.Always;
 
+// Module-level cache — persists across navigations within a session
+const cache = {
+    snapshotMeta: undefined as RosterSnapshotInfo[] | undefined,
+    atCapacity: false,
+    maxSnapshots: 0,
+    snapshotDetailCache: new Map<string, RosterSnapshotDetail>(),
+    sequenceNumber: 0,
+    sequenceNumberFetched: false,
+    metaFetched: false,
+};
+
+// Writes must happen in module-level functions so the React compiler doesn't
+// flag them as side effects inside a component or hook.
+function cacheSetMeta(snapshots: RosterSnapshotInfo[], atCapacity: boolean, maxSnapshots: number) {
+    cache.snapshotMeta = snapshots;
+    cache.atCapacity = atCapacity;
+    cache.maxSnapshots = maxSnapshots;
+    cache.metaFetched = true;
+}
+function cacheSetDetailCache(map: Map<string, RosterSnapshotDetail>) {
+    cache.snapshotDetailCache = map;
+}
+function cacheSetSequenceNumber(n: number) {
+    cache.sequenceNumber = n;
+}
+function cacheMarkSequenceNumberFetched() {
+    cache.sequenceNumberFetched = true;
+}
+function cacheSetAfterDelete(
+    snapshotMeta: RosterSnapshotInfo[] | undefined,
+    snapshotDetailCache: Map<string, RosterSnapshotDetail>
+) {
+    cache.snapshotMeta = snapshotMeta;
+    cache.snapshotDetailCache = snapshotDetailCache;
+    cache.atCapacity = false;
+}
+
 // ---------------------------------------------------------------------------
 // Component
 // ---------------------------------------------------------------------------
@@ -57,19 +94,21 @@ interface RosterSnapshotsTabProps {
 
 export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: RosterSnapshotsTabProps) => {
     // ---- metadata state ----
-    const [snapshotMeta, setSnapshotMeta] = useState<RosterSnapshotInfo[] | undefined>();
-    const [atCapacity, setAtCapacity] = useState(false);
-    const [maxSnapshots, setMaxSnapshots] = useState(0);
+    const [snapshotMeta, setSnapshotMeta] = useState<RosterSnapshotInfo[] | undefined>(cache.snapshotMeta);
+    const [atCapacity, setAtCapacity] = useState(cache.atCapacity);
+    const [maxSnapshots, setMaxSnapshots] = useState(cache.maxSnapshots);
     const [isLoadingMeta, setIsLoadingMeta] = useState(false);
     const [metaError, setMetaError] = useState<string | undefined>();
 
     // ---- detail cache state ----
-    const [snapshotDetailCache, setSnapshotDetailCache] = useState<Map<string, RosterSnapshotDetail>>(new Map());
+    const [snapshotDetailCache, setSnapshotDetailCache] = useState<Map<string, RosterSnapshotDetail>>(
+        cache.snapshotDetailCache
+    );
     const [isLoadingDetails, setIsLoadingDetails] = useState(false);
 
     // ---- sequence number for saves (start at 0; updated after each successful save) ----
-    const [sequenceNumber, setSequenceNumber] = useState(0);
-    const [sequenceNumberFetched, setSequenceNumberFetched] = useState(false);
+    const [sequenceNumber, setSequenceNumber] = useState(cache.sequenceNumber);
+    const [sequenceNumberFetched, setSequenceNumberFetched] = useState(cache.sequenceNumberFetched);
 
     // ---- comparison state ----
     const [leftSnapshotId, setLeftSnapshotId] = useState<string | undefined>();
@@ -102,6 +141,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         if (error || !data) {
             setMetaError(typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to load snapshots'));
         } else {
+            cacheSetMeta(data.snapshots, data.atCapacity, data.maxSnapshots);
             setSnapshotMeta(data.snapshots);
             setAtCapacity(data.atCapacity);
             setMaxSnapshots(data.maxSnapshots);
@@ -110,6 +150,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     }, []);
 
     useEffect(() => {
+        if (cache.metaFetched) return;
         void loadMeta();
     }, [loadMeta]);
 
@@ -123,14 +164,13 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             if (unloaded.length === 0) return;
             setIsLoadingDetails(true);
             const results = await Promise.all(unloaded.map(s => getGuildRosterSnapshotDetailApi(s.snapshotId)));
-            setSnapshotDetailCache(previous => {
-                const next = new Map(previous);
-                for (const [index, result] of results.entries()) {
-                    const id = unloaded[index]?.snapshotId;
-                    if (id && result.data) next.set(id, result.data);
-                }
-                return next;
-            });
+            const next = new Map(snapshotDetailCache);
+            for (const [index, result] of results.entries()) {
+                const id = unloaded[index]?.snapshotId;
+                if (id && result.data) next.set(id, result.data);
+            }
+            cacheSetDetailCache(next);
+            setSnapshotDetailCache(next);
             setIsLoadingDetails(false);
         },
         [snapshotDetailCache]
@@ -305,17 +345,30 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         return results;
     }, [selectedUserId, leftIndex, rightIndexOrCurrent, memberHistoryMap, memberStates]);
 
+    const selectedUnitIds = useMemo(
+        () => getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames),
+        [raidTeams, selectedRaidTeamNames]
+    );
+
     const filteredDiffEntries = useMemo((): DiffEntry[] => {
-        const unitIds = getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames);
-        if (unitIds.size === 0) return diffEntries;
-        return diffEntries.filter(({ char, mow }) => (char && unitIds.has(char.id)) || (mow && unitIds.has(mow.id)));
-    }, [diffEntries, raidTeams, selectedRaidTeamNames]);
+        if (selectedUnitIds.size === 0) return diffEntries;
+        return diffEntries.filter(
+            ({ char, mow }) => (char && selectedUnitIds.has(char.id)) || (mow && selectedUnitIds.has(mow.id))
+        );
+    }, [diffEntries, selectedUnitIds]);
 
     // No-history fallback: show current roster for selected member
     const isNoHistoryMode = snapshotMeta !== undefined && snapshotMeta.length === 0;
     const selectedMemberState = selectedUserId === undefined ? undefined : memberStates.get(selectedUserId);
     const currentUnits =
         isNoHistoryMode && selectedMemberState?.status === 'success' ? selectedMemberState.parsed.units : undefined;
+
+    const filteredNonDiffEntries = useMemo(() => {
+        if (selectedUnitIds.size === 0) return currentUnits;
+        return currentUnits?.filter(u =>
+            u.char ? selectedUnitIds.has(u.char.id) : u.mow ? selectedUnitIds.has(u.mow.id) : false
+        );
+    }, [currentUnits, selectedUnitIds]);
 
     const apiKeyErrorIds = members?.filter(id => memberStates.get(id)?.status === 'error') ?? [];
 
@@ -330,9 +383,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         if (!sequenceNumberFetched) {
             const { data } = await getGuildRosterHistoryApi();
             if (data?.sequenceNumber !== undefined) {
+                cacheSetSequenceNumber(data.sequenceNumber);
                 setSequenceNumber(data.sequenceNumber);
+                cacheMarkSequenceNumberFetched();
+                setSequenceNumberFetched(true);
             }
-            setSequenceNumberFetched(true);
         }
         setSaveDialogOpen(true);
     };
@@ -353,7 +408,10 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             return;
         }
 
-        if (data?.sequenceNumber !== undefined) setSequenceNumber(data.sequenceNumber);
+        if (data?.sequenceNumber !== undefined) {
+            cacheSetSequenceNumber(data.sequenceNumber);
+            setSequenceNumber(data.sequenceNumber);
+        }
         setIsSaving(false);
         setSaveDialogOpen(false);
         // Reload metadata to pick up the new snapshot (and its server-assigned snapshotId).
@@ -388,12 +446,12 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         }
 
         // Remove from local state
-        setSnapshotMeta(previous => previous?.filter(s => s.snapshotId !== selectedSnapshotToDelete));
-        setSnapshotDetailCache(previous => {
-            const next = new Map(previous);
-            next.delete(selectedSnapshotToDelete);
-            return next;
-        });
+        const newMeta = snapshotMeta?.filter(s => s.snapshotId !== selectedSnapshotToDelete);
+        const newDetailCache = new Map(snapshotDetailCache);
+        newDetailCache.delete(selectedSnapshotToDelete);
+        cacheSetAfterDelete(newMeta, newDetailCache);
+        setSnapshotMeta(newMeta);
+        setSnapshotDetailCache(newDetailCache);
         setAtCapacity(false);
 
         // Reset comparison selections that referenced the deleted snapshot
@@ -666,9 +724,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 })()}
 
             {/* No-history fallback: show current roster for selected member */}
-            {currentUnits !== undefined && (
+            {filteredNonDiffEntries !== undefined && (
                 <div className="flex flex-wrap gap-2">
-                    {currentUnits.map(({ char, mow }) =>
+                    {/* Similar to the diff case, we need to filter currentUnits to show only characters and mows
+                    from the selected raid teams (if any; if nothing selected, we show everything). */}
+                    {filteredNonDiffEntries.map(({ char, mow }) =>
                         char ? (
                             <RosterSnapshotsUnit
                                 key={char.id}

@@ -1,4 +1,8 @@
-import { useState } from 'react';
+/* eslint-disable import-x/no-internal-modules */
+/* eslint-disable boundaries/element-types */
+import { useContext, useMemo, useState } from 'react';
+
+import { StoreContext } from '@/reducers/store.provider';
 
 import { isLikelyUserId, obfuscateUserId } from '@/fsd/5-shared/lib';
 
@@ -6,7 +10,10 @@ import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settin
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
 
+import { getUnitIdsFromTeamNames } from '@/fsd/1-pages/plan-teams2/team-filter.utils';
+
 import { MemberState } from './guild-roster-snapshots.models';
+import { RaidTeamFilterDropdown } from './raid-team-filter-dropdown';
 
 const SHOW_ALL = RosterSnapshotShowVariableSettings.Always;
 
@@ -17,6 +24,33 @@ interface RostersTabProps {
 
 export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
     const [selectedId, setSelectedId] = useState<string | undefined>();
+    const [selectedRaidTeamNames, setSelectedRaidTeamNames] = useState<string[]>([]);
+
+    const { teams2 } = useContext(StoreContext);
+
+    const raidTeams = useMemo(() => teams2.filter(t => t.raid), [teams2]);
+
+    const raidTeamFilterOptions = useMemo(
+        () => raidTeams.map(t => ({ name: t.name, isSelected: selectedRaidTeamNames.includes(t.name) })),
+        [raidTeams, selectedRaidTeamNames]
+    );
+
+    const toggleRaidTeam = (teamName: string) => {
+        setSelectedRaidTeamNames(current => {
+            const next = new Set(current);
+            if (next.has(teamName)) {
+                next.delete(teamName);
+            } else {
+                next.add(teamName);
+            }
+            return [...next];
+        });
+    };
+
+    const selectedUnitIds = useMemo(
+        () => getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames),
+        [raidTeams, selectedRaidTeamNames]
+    );
 
     if (members === undefined) {
         return (
@@ -96,59 +130,70 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
 
             {successes.length > 0 && (
                 <section className="flex flex-col gap-4">
-                    <div className="flex items-center gap-2">
-                        <label
-                            htmlFor="roster-select"
-                            className="text-sm font-semibold text-gray-700 dark:text-gray-300">
-                            View roster:
-                        </label>
-                        <select
-                            id="roster-select"
-                            value={selectedId ?? ''}
-                            onChange={event_ => setSelectedId(event_.target.value || undefined)}
-                            className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100">
-                            <option value="">— select a player —</option>
-                            {successes.map(id => {
-                                const state = memberStates.get(id);
-                                const name = state?.status === 'success' ? state.playerName : id;
-                                return (
-                                    <option key={id} value={id}>
-                                        {name}
-                                    </option>
-                                );
-                            })}
-                        </select>
+                    <div className="flex flex-wrap items-center gap-4">
+                        <div className="flex items-center gap-2">
+                            <label
+                                htmlFor="roster-select"
+                                className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                                View roster:
+                            </label>
+                            <select
+                                id="roster-select"
+                                value={selectedId ?? ''}
+                                onChange={event_ => setSelectedId(event_.target.value || undefined)}
+                                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100">
+                                <option value="">— select a player —</option>
+                                {successes.map(id => {
+                                    const state = memberStates.get(id);
+                                    const name = state?.status === 'success' ? state.playerName : id;
+                                    return (
+                                        <option key={id} value={id}>
+                                            {name}
+                                        </option>
+                                    );
+                                })}
+                            </select>
+                        </div>
+                        {raidTeams.length > 0 && (
+                            <RaidTeamFilterDropdown teams={raidTeamFilterOptions} onToggleTeam={toggleRaidTeam} />
+                        )}
                     </div>
 
                     {selectedRoster && (
                         <div className="flex flex-wrap gap-2">
-                            {selectedRoster.parsed.units.map(({ char, mow }) =>
-                                char ? (
-                                    <RosterSnapshotsUnit
-                                        key={char.id}
-                                        char={char}
-                                        showShards={SHOW_ALL}
-                                        showMythicShards={SHOW_ALL}
-                                        showXpLevel={SHOW_ALL}
-                                        showAbilities={SHOW_ALL}
-                                        showEquipment={SHOW_ALL}
-                                        showTooltip
-                                        isEnabled
-                                    />
-                                ) : mow ? (
-                                    <RosterSnapshotsUnit
-                                        key={mow.id}
-                                        mow={mow}
-                                        showShards={SHOW_ALL}
-                                        showMythicShards={SHOW_ALL}
-                                        showXpLevel={SHOW_ALL}
-                                        showAbilities={SHOW_ALL}
-                                        showEquipment={SHOW_ALL}
-                                        showTooltip
-                                        isEnabled
-                                    />
-                                ) : undefined
-                            )}
+                            {selectedRoster.parsed.units
+                                .filter(({ char, mow }) =>
+                                    selectedUnitIds.size === 0
+                                        ? true
+                                        : (char && selectedUnitIds.has(char.id)) || (mow && selectedUnitIds.has(mow.id))
+                                )
+                                .map(({ char, mow }) =>
+                                    char ? (
+                                        <RosterSnapshotsUnit
+                                            key={char.id}
+                                            char={char}
+                                            showShards={SHOW_ALL}
+                                            showMythicShards={SHOW_ALL}
+                                            showXpLevel={SHOW_ALL}
+                                            showAbilities={SHOW_ALL}
+                                            showEquipment={SHOW_ALL}
+                                            showTooltip
+                                            isEnabled
+                                        />
+                                    ) : mow ? (
+                                        <RosterSnapshotsUnit
+                                            key={mow.id}
+                                            mow={mow}
+                                            showShards={SHOW_ALL}
+                                            showMythicShards={SHOW_ALL}
+                                            showXpLevel={SHOW_ALL}
+                                            showAbilities={SHOW_ALL}
+                                            showEquipment={SHOW_ALL}
+                                            showTooltip
+                                            isEnabled
+                                        />
+                                    ) : undefined
+                                )}
                         </div>
                     )}
                 </section>

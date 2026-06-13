@@ -404,33 +404,31 @@ export const Goals = () => {
     return (
         <div className="space-y-8 py-6">
             <PageToolbar>
-                {/* Primary CTA */}
-                <SetGoalDialog key={goals.length} />
-
-                <PageToolbarDivider />
-
-                {/* Navigation / utility */}
+                {/* Navigation */}
                 <LinkButton
                     appearance="outline"
                     size="small"
                     href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <Link2 data-slot="icon" /> Go to Raids
                 </LinkButton>
+
+                <PageToolbarDivider />
+
+                {/* Primary CTA + utility */}
+                <SetGoalDialog key={goals.length} />
                 <Button appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
                     <Settings data-slot="icon" /> Raids Settings
                 </Button>
-                {hasSync && <SyncButton showText={!isMobile} variant="outlined" />}
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
 
+                {hasSync && <SyncButton showText={true} appearance="outline" />}
                 <PageToolbarDivider />
 
                 {/* Counter */}
                 <span className="text-sm text-(--soft-fg)">
                     <span className="font-medium text-(--fg)">Slots</span> {goals.length}/{goalsLimit}
                 </span>
-
-                <PageToolbarDivider />
 
                 {/* View options */}
                 <Switch isSelected={viewPreferences.goalsTableView} onChange={updateView}>
@@ -450,7 +448,7 @@ export const Goals = () => {
 
                 <PageToolbarDivider />
 
-                {/* Destructive — pushed right */}
+                {/* Destructive */}
                 <Button appearance="outline" intent="danger" size="small" onPress={onDeleteAll}>
                     <Trash2 data-slot="icon" /> Delete All
                 </Button>
@@ -605,7 +603,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
                                 {sortedUpgrades.map(goal => {
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
 
@@ -678,7 +676,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
                                 {sortedShards.map(goal => {
                                     const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                     return (
@@ -742,7 +740,7 @@ export const Goals = () => {
                     </AccordionHeader>
                     <AccordionBody>
                         {!viewPreferences.goalsTableView && (
-                            <div className="flex flex-wrap gap-3">
+                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
                                 {sortedAbilities.map(goal => {
                                     const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
                                     return (

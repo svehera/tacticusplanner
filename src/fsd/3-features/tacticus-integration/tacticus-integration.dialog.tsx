@@ -12,7 +12,7 @@ import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
-import { GUILD_TAG_LENGTH, isValidGuildTag, sameGuildTags } from './guild-sharing';
+import { GUILD_TAG_LENGTH, isValidGuildTag } from './guild-sharing';
 import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 interface Props extends DialogProps {
@@ -117,53 +117,62 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     const { syncWithTacticus } = useSyncWithTacticus();
 
     const [apiKey, setApiKey] = useState<string>(tacticusApiKey);
-    const [currentApiKey, setCurrentApiKey] = useState<string>(tacticusApiKey);
+    const [currentApiKey] = useState<string>(tacticusApiKey);
     const [guildApiKey, setGuildApiKey] = useState<string>(tacticusGuildApiKey);
-    const [currentGuildApiKey, setCurrentGuildApiKey] = useState<string>(tacticusGuildApiKey);
+    const [currentGuildApiKey] = useState<string>(tacticusGuildApiKey);
     const [userId, setUserId] = useState<string>(tacticusUserId);
-    const [currentUserId, setCurrentUserId] = useState<string>(tacticusUserId);
+    const [currentUserId] = useState<string>(tacticusUserId);
     const [currentShareInGameName, setCurrentShareInGameName] = useState<boolean>(shareInGameName ?? false);
-    const [savedShareInGameName, setSavedShareInGameName] = useState<boolean>(shareInGameName ?? false);
+    const [savedShareInGameName] = useState<boolean>(shareInGameName ?? false);
     const [currentShareRosterData, setCurrentShareRosterData] = useState<boolean>(shareRosterData ?? false);
-    const [savedShareRosterData, setSavedShareRosterData] = useState<boolean>(shareRosterData ?? false);
+    const [savedShareRosterData] = useState<boolean>(shareRosterData ?? false);
     const [shareGuildMemberPerformance, setShareGuildMemberPerformance] = useState<boolean>(
         shareGuildMemberPerformanceProperty ?? false
     );
-    const [savedShareGuildMemberPerformance, setSavedShareGuildMemberPerformance] = useState<boolean>(
-        shareGuildMemberPerformanceProperty ?? false
-    );
+    const [savedShareGuildMemberPerformance] = useState<boolean>(shareGuildMemberPerformanceProperty ?? false);
     const [combinedTags, setCombinedTags] = useState<string[]>(combinedGuildTags ?? []);
-    const [savedCombinedTags, setSavedCombinedTags] = useState<string[]>(combinedGuildTags ?? []);
+    // Only send combinedGuildTags to the backend when the user has touched the tag UI this session.
+    // This prevents a new guild leader (with no local tags) from wiping tags another leader set.
+    const [combinedTagsDirty, setCombinedTagsDirty] = useState(false);
     const [guildTag, setGuildTag] = useState<string>(guildTagProperty ?? '');
-    const [savedGuildTag, setSavedGuildTag] = useState<string>(guildTagProperty ?? '');
+    const [savedGuildTag] = useState<string>(guildTagProperty ?? '');
 
     const trimmedGuildTag = guildTag.trim();
     const guildTagInvalid = trimmedGuildTag.length > 0 && !isValidGuildTag(trimmedGuildTag);
 
-    async function syncWithTacticusApi() {
-        onClose();
-        await syncWithTacticus();
-    }
+    const isDirty =
+        apiKey !== currentApiKey ||
+        guildApiKey !== currentGuildApiKey ||
+        userId !== currentUserId ||
+        currentShareInGameName !== savedShareInGameName ||
+        currentShareRosterData !== savedShareRosterData ||
+        shareGuildMemberPerformance !== savedShareGuildMemberPerformance ||
+        combinedTagsDirty ||
+        guildTag !== savedGuildTag;
 
-    async function updateApiKey() {
+    async function updateApiKey(): Promise<boolean> {
         loader.startLoading('Updating settings. Please wait...');
         try {
             const response = await updateTacticusApiKey(apiKey, guildApiKey, userId, {
                 shareInGameName: currentShareInGameName,
                 shareRosterData: currentShareRosterData,
                 shareGuildMemberPerformance,
-                combinedGuildTags: combinedTags,
+                // Only send combinedGuildTags when the user has explicitly changed them;
+                // omitting it tells the backend to leave whatever value is already stored.
+                combinedGuildTags: combinedTagsDirty ? combinedTags : undefined,
                 guildTag: trimmedGuildTag,
             });
 
             if (!response.data && tacticusApiKey !== undefined && tacticusApiKey.length > 0) {
                 enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
-                return;
+                return false;
             }
 
             // Server returns the canonicalized combinedGuildTags — use that as the new source of truth.
             const serverCombinedTags = response.data?.combinedGuildTags ?? [];
 
+            // Update auth immediately; no need to reset intra-dialog saved-state since the
+            // dialog always closes after a successful update (re-opens from fresh props).
             auth.setUserInfo({
                 ...auth.userInfo,
                 tacticusApiKey: apiKey,
@@ -175,26 +184,27 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 combinedGuildTags: serverCombinedTags.length > 0 ? serverCombinedTags : undefined,
                 guildTag: trimmedGuildTag,
             });
-            setCurrentApiKey(apiKey);
-            setCurrentGuildApiKey(guildApiKey);
-            setCurrentUserId(userId);
-            setSavedShareInGameName(currentShareInGameName);
-            setSavedShareRosterData(currentShareRosterData);
-            setSavedShareGuildMemberPerformance(shareGuildMemberPerformance);
-            setCombinedTags(serverCombinedTags);
-            setSavedCombinedTags(serverCombinedTags);
-            setGuildTag(trimmedGuildTag);
-            setSavedGuildTag(trimmedGuildTag);
 
             enqueueSnackbar('Settings updated', { variant: 'success' });
+            return true;
         } catch (error) {
             console.error(error);
             const parsedError =
                 typeof error === 'string' || error instanceof Error || error === undefined ? error : String(error);
             enqueueSnackbar(buildErrorMessage(parsedError), { variant: 'error' });
+            return false;
         } finally {
             loader.endLoading();
         }
+    }
+
+    async function handleMainAction() {
+        if (isDirty) {
+            const success = await updateApiKey();
+            if (!success) return;
+        }
+        onClose();
+        await syncWithTacticus();
     }
 
     return (
@@ -327,7 +337,13 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                         member)
                                     </span>
                                 </label>
-                                <GuildTagListInput tags={combinedTags} onChange={setCombinedTags} />
+                                <GuildTagListInput
+                                    tags={combinedTags}
+                                    onChange={newTags => {
+                                        setCombinedTags(newTags);
+                                        setCombinedTagsDirty(true);
+                                    }}
+                                />
                             </div>
                         )}
                         {!guildApiKey && userId && (
@@ -344,22 +360,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                 }
                             />
                         )}
-                        <Button
-                            intent="primary"
-                            isDisabled={
-                                guildTagInvalid ||
-                                (apiKey === currentApiKey &&
-                                    guildApiKey === currentGuildApiKey &&
-                                    userId === currentUserId &&
-                                    currentShareInGameName === savedShareInGameName &&
-                                    currentShareRosterData === savedShareRosterData &&
-                                    shareGuildMemberPerformance === savedShareGuildMemberPerformance &&
-                                    sameGuildTags(combinedTags, savedCombinedTags) &&
-                                    guildTag === savedGuildTag)
-                            }
-                            onPress={updateApiKey}>
-                            Update
-                        </Button>
                     </div>
                     <br />
                 </Modal.Body>
@@ -367,8 +367,11 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                     <Button intent="secondary" onPress={onClose}>
                         Cancel
                     </Button>
-                    <Button intent="primary" onPress={syncWithTacticusApi} isDisabled={!currentApiKey}>
-                        Sync
+                    <Button
+                        intent="primary"
+                        onPress={handleMainAction}
+                        isDisabled={guildTagInvalid || (!isDirty && !currentApiKey)}>
+                        {isDirty ? 'Update & Sync' : 'Sync'}
                     </Button>
                 </Modal.Footer>
             </Modal.Content>
