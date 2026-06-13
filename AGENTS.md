@@ -1,3 +1,76 @@
+# Agent Guidance
+
+This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
+
+## Commands
+
+```bash
+npm start              # dev server at http://localhost:3000
+npm run start-local    # dev server in dev-local mode
+npm test               # run all tests once
+npm run test:watch     # run tests in watch mode
+npx vitest run path/to/file.spec.ts  # run a single test file
+npm run lint           # eslint with autofix
+npm run format         # prettier write
+npm run tsc            # type-check without emit
+npm run build          # production build
+```
+
+CI (`npm run build-ci`) runs format-check, lint, build, and tests in sequence.
+
+## Architecture
+
+### Feature-Sliced Design (FSD)
+
+New code goes in `src/fsd/` under numbered layers; lower numbers import from higher:
+
+- `0-app/` — routing, providers, top-level shell
+- `1-pages/` — page components (route targets)
+- `2-widgets/` — composite UI blocks reused across pages
+- `3-features/` — feature logic (goals, upgrades, planning…)
+- `4-entities/` — domain entities (character, mow, lre, faction…)
+- `5-shared/` — shared UI, hooks, utilities, API layer
+
+Files outside `src/fsd/` (`src/models/`, `src/reducers/`, `src/services/`, `src/routes/`) predate the migration and are still in heavy use. Importing them from inside FSD layers trips two lint rules; add these disables at the top of any FSD file that does so:
+
+```tsx
+/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+```
+
+### Global state
+
+Reducers live in `src/reducers/`. Access global state via:
+
+```tsx
+import { useContext } from 'react';
+import { StoreContext, DispatchContext } from 'src/reducers/store.provider';
+```
+
+`IGlobalState` in `src/models/interfaces.ts` is the authoritative shape.
+
+### API layer
+
+All backend calls go through `makeApiCall` from `@/fsd/5-shared/api`. It wraps axios and always returns `{ data, error }` — never throws.
+
+```ts
+const { data, error } = await makeApiCall<ResponseType>('GET', 'some/endpoint');
+```
+
+API function definitions live alongside their feature (e.g., `guild-roster-snapshots.models.ts` for guild endpoints). The guild API key is stored in `userInfo.tacticusGuildApiKey` via `useAuth()` from `@/fsd/5-shared/model`.
+
+### UI conventions
+
+See [CONVENTIONS.md](CONVENTIONS.md) for the full reference: design tokens, shared components (`@/fsd/5-shared/ui`), layout patterns, and the FSD boundary rules. Key points:
+
+- Use CSS custom property tokens (`bg-(--primary)`, `text-(--fg)`) not raw Tailwind colours
+- System uses `zinc` grey family — never `gray`, `slate`, or `neutral`
+- Dark mode is class-based (`.dark` on `<html>`); tokens flip automatically
+- Shared `Button` uses `onPress`, not `onClick` (react-aria)
+- For dialogs containing dropdowns, use `PortalDialog` not `Modal` (focus trap blocks portaled selects)
+
+---
+
 - When reporting information to me, be extremely concise and sacrifice grammar for the sake of conciseness.
 - IMPORTANT: Prefer retrieval-led reasoning over pre-training-led reasoning.
     - [Code Review](.agent-skills/code-review/SKILL.md)

@@ -69,3 +69,23 @@ export const getMemberSharedLeaderboardsApi = (season?: number) =>
         'GET',
         season == undefined ? 'guild/member/sharedLeaderboards' : `guild/member/sharedLeaderboards?season=${season}`
     );
+
+export interface PlayerTokenUsage {
+    userId?: string;
+    tokens?: number;
+    bombs?: number;
+}
+
+export interface SeasonTokenUsage {
+    season?: number;
+    players?: PlayerTokenUsage[];
+}
+
+export interface GuildTokenUsageResponse {
+    guildTag?: string;
+    seasons?: SeasonTokenUsage[];
+}
+
+export const getGuildTokenUsageApi = () => makeApiCall<GuildTokenUsageResponse>('GET', 'guild/raid/token_usage');
+
+export const getMemberTokenUsageApi = () => makeApiCall<GuildTokenUsageResponse>('GET', 'guild/member/token_usage');

@@ -18,14 +18,17 @@ import {
     type CurrentSeasonRaidApiResponse,
     type GuildPerformanceIndexApiResponse,
     type GuildRaidSeasonsResponse,
+    type GuildTokenUsageResponse,
     type HistoricalSeasonApiResponse,
     getGuildPerformanceIndexApi,
     getGuildRaidSeasonApi,
     getGuildRaidSeasonsApi,
+    getGuildTokenUsageApi,
     getMemberCurrentRaidSeasonApi,
     getMemberPerformanceIndexApi,
     getMemberRaidSeasonApi,
     getMemberSharedLeaderboardsApi,
+    getMemberTokenUsageApi,
 } from './guild-performance.api';
 import { LOADING, type GuildMemberName, type GuildTokenEntry, type LoadingOrData } from './guild-performance.types';
 import { buildAvgDamageMap, getAllGuildPlayers } from './guild-performance.utils';
@@ -37,6 +40,7 @@ import { buildAvgDamageMap, getAllGuildPlayers } from './guild-performance.utils
 let cachedCurrent: TacticusGuildRaidResponse | undefined;
 let cachedSeasonList: GuildRaidSeasonsResponse | undefined;
 let cachedPerformanceIndex: GuildPerformanceIndexApiResponse | undefined;
+let cachedTokenUsageData: GuildTokenUsageResponse | undefined;
 // Map<seasonNumber, GuildSeasonHistoryEntry> — populated on-demand per season
 let cachedSeasonDataMap: Map<number, GuildSeasonHistoryEntry> = new Map();
 let cachedSharedLeaderboards: SharedLeaderboardsResponse | undefined;
@@ -103,6 +107,7 @@ export function useGuildPerformance() {
     const [rawNames, setRawNames] = useState<GuildMemberName[] | undefined>(cachedRawNames);
     const [tokens, setTokens] = useState<GuildTokenEntry[] | typeof LOADING>(cachedTokens ?? LOADING);
     const [tokenError, setTokenError] = useState<string | undefined>();
+    const [tokenUsageData, setTokenUsageData] = useState<GuildTokenUsageResponse | undefined>(cachedTokenUsageData);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [isLoadingHistoricalSeason, setIsLoadingHistoricalSeason] = useState(false);
 
@@ -120,6 +125,7 @@ export function useGuildPerformance() {
         cachedRawNames = undefined;
         cachedTokens = undefined;
         cachedPerformanceIndex = undefined;
+        cachedTokenUsageData = undefined;
         cachedFetched = false;
         setCurrent(LOADING);
         setSeasonList(undefined);
@@ -132,6 +138,7 @@ export function useGuildPerformance() {
         setTokens(LOADING);
         setTokenError(undefined);
         setPerformanceIndex(undefined);
+        setTokenUsageData(undefined);
     }, [authIdentity]);
 
     const currentData = current === LOADING ? undefined : current;
@@ -189,11 +196,14 @@ export function useGuildPerformance() {
                 if (isMember) {
                     // --- Member path ---
                     // Fetch current season, PI (historical list), and leaderboards in parallel.
-                    const [currentSeasonResponse, piResponse, sharedLbResponse] = await Promise.all([
-                        getMemberCurrentRaidSeasonApi(),
-                        getMemberPerformanceIndexApi(),
-                        getMemberSharedLeaderboardsApi(),
-                    ]);
+                    const [currentSeasonResponse, piResponse, sharedLbResponse, tokenUsageResponse] = await Promise.all(
+                        [
+                            getMemberCurrentRaidSeasonApi(),
+                            getMemberPerformanceIndexApi(),
+                            getMemberSharedLeaderboardsApi(),
+                            getMemberTokenUsageApi(),
+                        ]
+                    );
 
                     if (piResponse.data) {
                         cachedPerformanceIndex = piResponse.data;
@@ -246,6 +256,11 @@ export function useGuildPerformance() {
                     setTokens([]);
                     setTokenError(undefined);
 
+                    if (tokenUsageResponse.data) {
+                        cachedTokenUsageData = tokenUsageResponse.data;
+                        setTokenUsageData(cachedTokenUsageData);
+                    }
+
                     const parsedMemberLb =
                         sharedLbResponse.data === undefined
                             ? undefined
@@ -261,6 +276,7 @@ export function useGuildPerformance() {
                         sharedLbResponse,
                         guildResponse,
                         piResponse,
+                        tokenUsageResponse,
                     ] = await Promise.all([
                         getGuildRaidSeasonsApi(),
                         makeApiCall<GuildMemberName[]>('GET', 'guild/members/names'),
@@ -268,6 +284,7 @@ export function useGuildPerformance() {
                         makeApiCall<unknown>('GET', 'guild/sharedLeaderboards'),
                         getTacticusGuildData(),
                         getGuildPerformanceIndexApi(),
+                        getGuildTokenUsageApi(),
                     ]);
 
                     if (seasonsResponse.data) {
@@ -334,6 +351,11 @@ export function useGuildPerformance() {
                         cachedPerformanceIndex = piResponse.data;
                         setPerformanceIndex(cachedPerformanceIndex);
                     }
+
+                    if (tokenUsageResponse.data) {
+                        cachedTokenUsageData = tokenUsageResponse.data;
+                        setTokenUsageData(cachedTokenUsageData);
+                    }
                 }
 
                 cachedFetched = true;
@@ -393,6 +415,7 @@ export function useGuildPerformance() {
         allPlayers,
         avgDamageMap,
         performanceIndex,
+        tokenUsageData,
         fetchData,
         fetchSeasonData,
         refreshSharedLeaderboards,

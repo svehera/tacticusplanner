@@ -54,7 +54,7 @@ export type OverridesLoadState =
     | { status: 'error'; message: string }
     | { status: 'loaded'; sequenceNumber: number };
 
-export type GuildTab = 'rosters' | 'roster-snapshots' | 'overrides';
+export type GuildTab = 'rosters' | 'roster-snapshots' | 'members';
 
 export const API_KEY_PATTERN = /^[a-zA-Z0-9-]*$/;
 

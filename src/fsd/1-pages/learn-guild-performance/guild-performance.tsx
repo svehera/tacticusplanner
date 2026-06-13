@@ -12,8 +12,17 @@ import { LeaderboardTab } from './tabs/leaderboards-tab';
 import { LoopsTab } from './tabs/loops-tab';
 import { OverviewTab } from './tabs/overview-tab';
 import { PerformanceTab } from './tabs/performance-tab';
+import { TokenUsageTab } from './tabs/token-usage-tab';
 
-const TAB_IDS = ['overview', 'damage', 'leaderboards', 'loops', 'performance', 'historical-performance'] as const;
+const TAB_IDS = [
+    'overview',
+    'damage',
+    'leaderboards',
+    'loops',
+    'token-usage',
+    'performance',
+    'historical-performance',
+] as const;
 type TabId = (typeof TAB_IDS)[number];
 
 const TAB_LABELS: Record<TabId, string> = {
@@ -21,6 +30,7 @@ const TAB_LABELS: Record<TabId, string> = {
     damage: 'Damage',
     leaderboards: 'Leaderboard',
     loops: 'Loops',
+    'token-usage': 'Token Usage',
     performance: 'Performance',
     'historical-performance': 'Historical Performance',
 };
@@ -101,6 +111,7 @@ export const GuildPerformance = () => {
         allPlayers,
         avgDamageMap,
         performanceIndex,
+        tokenUsageData,
         fetchData,
         fetchSeasonData,
         refreshSharedLeaderboards,
@@ -255,6 +266,14 @@ export const GuildPerformance = () => {
                             currentData={currentData}
                             seasonHistory={seasonHistory}
                             selectedSeason={selectedSeason}
+                        />
+                    </div>
+                    <div className={activeTab === 'token-usage' ? undefined : 'hidden'}>
+                        <TokenUsageTab
+                            tokenUsageData={tokenUsageData}
+                            currentData={currentData}
+                            names={names}
+                            selectedPlayerId={selectedPlayerId}
                         />
                     </div>
                     <div className={activeTab === 'performance' ? undefined : 'hidden'}>

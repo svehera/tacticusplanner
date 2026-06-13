@@ -162,6 +162,29 @@ export function parseCsvText(text: string): { imported: OverrideRow[]; discarded
     return { imported, discarded };
 }
 
+/**
+ * Formats a lastActivityOn value (ISO string, unix seconds, or unix ms) as a
+ * human-readable relative time string: "Xm ago" / "Xh ago" / "Xd ago".
+ */
+export function formatTimeAgo(lastActivityOn: string | undefined): string {
+    if (!lastActivityOn) return '—';
+    const numeric = Number(lastActivityOn);
+    let ms: number;
+    if (!Number.isNaN(numeric) && numeric > 0) {
+        ms = numeric < 1e12 ? numeric * 1000 : numeric;
+    } else {
+        ms = Date.parse(lastActivityOn);
+    }
+    if (Number.isNaN(ms)) return '—';
+    const diffMs = Math.max(0, Date.now() - ms);
+    const minutes = Math.floor(diffMs / 60_000);
+    if (minutes < 1) return 'just now';
+    if (minutes < 60) return `${minutes}m ago`;
+    const hours = Math.floor(minutes / 60);
+    if (hours < 24) return `${hours}h ago`;
+    return `${Math.floor(hours / 24)}d ago`;
+}
+
 export function buildCsv(rows: OverrideRow[]): string {
     const header = 'userId,name,apiKey';
     const csvRows = rows.map(row =>
