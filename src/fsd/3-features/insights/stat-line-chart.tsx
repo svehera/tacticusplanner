@@ -1,3 +1,4 @@
+import { useTheme } from '@mui/material';
 import { ResponsiveLine } from '@nivo/line';
 import { type PartialTheme } from '@nivo/theming';
 import { useMemo } from 'react';
@@ -19,10 +20,15 @@ interface StatLineChartProps {
     title: string;
     dailyStats: IDailyStat[];
     accessor: (stat: IDailyStat) => number;
-    color: string;
+    /** CSS custom property name (e.g. '--chart-1') resolved at render time for SVG fill/stroke. */
+    colorToken: string;
 }
 
-export const StatLineChart = ({ title, dailyStats, accessor, color }: StatLineChartProps) => {
+export const StatLineChart = ({ title, dailyStats, accessor, colorToken }: StatLineChartProps) => {
+    // useTheme() triggers a re-render on palette change, so getComputedStyle re-resolves the token.
+    useTheme();
+    const color = getComputedStyle(document.documentElement).getPropertyValue(colorToken).trim();
+
     const chartData = useMemo(
         () => [
             {
