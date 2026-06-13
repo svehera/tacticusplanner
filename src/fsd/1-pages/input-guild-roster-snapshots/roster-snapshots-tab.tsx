@@ -385,9 +385,9 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             if (data?.sequenceNumber !== undefined) {
                 cacheSetSequenceNumber(data.sequenceNumber);
                 setSequenceNumber(data.sequenceNumber);
+                cacheMarkSequenceNumberFetched();
+                setSequenceNumberFetched(true);
             }
-            cacheMarkSequenceNumberFetched();
-            setSequenceNumberFetched(true);
         }
         setSaveDialogOpen(true);
     };
