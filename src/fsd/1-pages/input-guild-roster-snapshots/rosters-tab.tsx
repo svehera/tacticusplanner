@@ -132,16 +132,14 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
                 <section className="flex flex-col gap-4">
                     <div className="flex flex-wrap items-center gap-4">
                         <div className="flex items-center gap-2">
-                            <label
-                                htmlFor="roster-select"
-                                className="text-sm font-semibold text-gray-700 dark:text-gray-300">
+                            <label htmlFor="roster-select" className="text-sm font-semibold text-(--fg)">
                                 View roster:
                             </label>
                             <select
                                 id="roster-select"
                                 value={selectedId ?? ''}
                                 onChange={event_ => setSelectedId(event_.target.value || undefined)}
-                                className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100">
+                                className="rounded border border-(--border) bg-(--bg) px-2 py-1 text-sm text-(--fg)">
                                 <option value="">— select a player —</option>
                                 {successes.map(id => {
                                     const state = memberStates.get(id);
