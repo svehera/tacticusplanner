@@ -92,7 +92,7 @@ export const TokenUsageTab = ({ tokenUsageData, currentData, names, selectedPlay
                                     cachedColorMode = mode;
                                     setColorMode(mode);
                                 }}
-                                className="accent-blue-600"
+                                className="accent-(--primary)"
                             />
                             {mode === 'gradient' ? 'Gradient' : 'Thresholds'}
                         </label>
