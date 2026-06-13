@@ -4,6 +4,15 @@ import { IPersonalCharacterData2 } from 'src/models/interfaces';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IMowDatabase } from '@/fsd/3-features/characters/characters.models';
 
+export interface IDailyStat {
+    date: string;
+    registeredUsers: number;
+    tacticusIntegrations: number;
+    activeLast7Days: number;
+    activeLast30Days: number;
+    createdAt: string;
+}
+
 export interface IInsightsResponse {
     activeLast7Days: number;
     activeLast30Days: number;
@@ -12,4 +21,5 @@ export interface IInsightsResponse {
     averageRosterDataCreationTime: Date;
     userData: IPersonalCharacterData2[];
     mows: IMowDatabase[];
+    dailyStats?: IDailyStat[];
 }
