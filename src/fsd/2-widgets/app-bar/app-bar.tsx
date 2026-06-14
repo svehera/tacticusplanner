@@ -175,7 +175,18 @@ export const TopAppBar: React.FC<Props> = ({ headerTitle, seenAppVersion, onClos
                         {meta.section && (
                             <span className="text-[13px] tracking-[.04em] text-(--soft-fg)">{meta.section}&nbsp;/</span>
                         )}
-                        <h1 className="m-0 text-lg font-bold tracking-[-0.01em] text-(--fg)">{meta.title}</h1>
+                        {meta.subtitle ? (
+                            <>
+                                <span className="text-[13px] tracking-[.04em] text-(--soft-fg)">
+                                    {meta.title}&nbsp;/
+                                </span>
+                                <h1 className="m-0 text-lg font-bold tracking-[-0.01em] text-(--fg)">
+                                    {meta.subtitle}
+                                </h1>
+                            </>
+                        ) : (
+                            <h1 className="m-0 text-lg font-bold tracking-[-0.01em] text-(--fg)">{meta.title}</h1>
+                        )}
                         {meta.description && (
                             <LazyTooltip title={meta.description}>
                                 <button className="inline-flex h-5 w-5 cursor-pointer items-center justify-center rounded-md border border-transparent bg-transparent text-(--soft-fg) transition hover:text-(--fg)">

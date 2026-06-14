@@ -6,7 +6,7 @@ export const onslaughtLazyRoute: RouteObject = {
         section: 'My Game',
         title: 'Onslaught',
         description:
-            'Set your current sector and tier for each alliance. These values are used to estimate shards earned per onslaught token when computing ascension goal timelines.',
+            'Log your current sector and tier per alliance to estimate shard income across ascension goal timelines.',
     },
     async lazy() {
         const { Onslaught } = await import('./onslaught');
