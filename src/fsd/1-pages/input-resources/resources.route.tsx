@@ -5,7 +5,7 @@ export const resourcesLazyRoute: RouteObject = {
     handle: {
         section: 'My Game',
         title: 'Resources',
-        description: 'Log your daily gold, gems, and other currency income to inform planning.',
+        description: 'Overview of your gold, gems, and other currency income sources.',
     },
     async lazy() {
         const { Resources } = await import('./resources');
