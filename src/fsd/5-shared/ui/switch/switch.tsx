@@ -20,7 +20,7 @@ const switchStyles = tv({
             'group-data-focus-visible/switch:ring-offset-2 group-data-focus-visible/switch:ring-offset-(--bg)',
         ],
         thumb: [
-            'pointer-events-none block h-4 w-4 translate-x-0 rounded-full bg-white shadow-sm transition-transform',
+            'pointer-events-none block h-4 w-4 translate-x-0 rounded-full bg-(--fg) shadow-sm transition-transform',
             'group-data-selected/switch:translate-x-4',
         ],
         label: 'select-none text-sm text-(--fg)',

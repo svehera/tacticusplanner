@@ -218,27 +218,27 @@
 
         /* ── Page ─────────────────────────────────── */
         --bg: var(--color-zinc-900);
-        --fg: var(--color-zinc-100);
+        --fg: var(--color-zinc-300);
         --border: var(--color-zinc-700);
         --input-border: var(--color-zinc-600);
-        --ring: var(--color-blue-500);
+        --ring: var(--color-sky-600);
 
         /* ── Card ─────────────────────────────────── */
         --card: var(--color-zinc-900);
-        --card-fg: var(--color-zinc-100);
+        --card-fg: var(--color-zinc-300);
         --card-border: var(--color-zinc-700);
 
         /* ── Sidebar ──────────────────────────────── */
         --sidebar: var(--color-zinc-950);
-        --sidebar-fg: var(--color-zinc-100);
+        --sidebar-fg: var(--color-zinc-300);
 
         /* ── Overlay (popups, menus, dialogs) ─────── */
         --overlay: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-700));
-        --overlay-fg: var(--color-zinc-100);
+        --overlay-fg: var(--color-zinc-300);
 
         /* ── Neutral (hover fills, badges, headers) ── */
         --neutral: var(--color-zinc-800);
-        --neutral-fg: var(--color-zinc-100);
+        --neutral-fg: var(--color-zinc-300);
 
         /* ── Soft (de-emphasized text areas) ──────── */
         --soft: color-mix(in oklab, var(--color-zinc-800) 60%, var(--color-zinc-900));
@@ -249,18 +249,18 @@
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-800);
-        --data-surface-fg: var(--color-zinc-100);
+        --data-surface-fg: var(--color-zinc-300);
         --data-surface-border: var(--color-zinc-700);
 
         /* ── Brand / intent ───────────────────────── */
-        --primary: var(--color-blue-500);
-        --primary-fg: var(--color-white);
+        --primary: var(--color-sky-600);
+        --primary-fg: var(--color-zinc-950);
 
         --accent: var(--color-amber-600);
         --accent-fg: var(--color-zinc-950);
 
-        --success: var(--color-emerald-500);
-        --success-fg: var(--color-white);
+        --success: var(--color-emerald-600);
+        --success-fg: var(--color-zinc-950);
 
         --warning: var(--color-amber-400);
         --warning-fg: var(--color-amber-950);
@@ -272,8 +272,8 @@
         --secondary: var(--color-zinc-700);
         --secondary-fg: var(--color-zinc-100);
 
-        --danger: var(--color-red-600);
-        --danger-fg: var(--color-red-50);
+        --danger: oklch(0.6 0.16 20);
+        --danger-fg: var(--color-zinc-950);
 
         /* ── Charts ────────────────────────────────── */
         --chart-1: var(--color-blue-500);
