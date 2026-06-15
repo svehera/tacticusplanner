@@ -75,6 +75,10 @@
     --color-danger: var(--danger);
     --color-danger-fg: var(--danger-fg);
 
+    --color-success-accent: var(--success-accent);
+    --color-warning-accent: var(--warning-accent);
+    --color-danger-accent: var(--danger-accent);
+
     /* ── Charts ────────────────────────────────── */
     --color-chart-1: var(--chart-1);
     --color-chart-2: var(--chart-2);
