@@ -78,17 +78,19 @@ const TileB = ({ campaign, value, isActiveGoal, onSet }: TileBProps) => {
                 ) : (
                     <DifficultyChip difficulty={campaign.difficulty} compact />
                 )}
-                {cleared && (
-                    <span className="text-[13px] font-black text-(--success)" title="Cleared">
-                        ✓
-                    </span>
-                )}
-                {isActiveGoal && !cleared && (
-                    <span
-                        className="inline-block size-[7px] rounded-full bg-(--primary) shadow-[0_0_0_2px_var(--card),0_0_0_3px_var(--primary)]"
-                        title="Linked to active goal"
-                    />
-                )}
+                <div className="flex size-4 shrink-0 items-center justify-center">
+                    {cleared && (
+                        <span className="text-[13px] font-black text-(--success)" title="Cleared">
+                            ✓
+                        </span>
+                    )}
+                    {isActiveGoal && !cleared && (
+                        <span
+                            className="inline-block size-[7px] rounded-full bg-(--primary) shadow-[0_0_0_2px_var(--card),0_0_0_3px_var(--primary)]"
+                            title="Linked to active goal"
+                        />
+                    )}
+                </div>
             </div>
 
             {/* progress bar + value */}
