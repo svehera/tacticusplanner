@@ -4,7 +4,8 @@ export const guildWarZonesLazyRoute: RouteObject = {
     path: 'plan/guildWar/zones',
     handle: {
         section: 'Plan',
-        title: 'Guild War Zones',
+        title: 'Guild War',
+        subtitle: 'Zones',
         description: "Map out your guild's full zone layout for the ongoing war.",
     },
     async lazy() {

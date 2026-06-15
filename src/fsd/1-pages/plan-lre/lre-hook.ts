@@ -6,6 +6,7 @@ import { LegendaryEventDefaultPage } from '@/models/interfaces';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { useQueryState } from '@/fsd/5-shared/lib';
+import { usePageMetaOverride } from '@/fsd/5-shared/ui';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -26,6 +27,19 @@ export const useLre = () => {
                 ? (LegendaryEventEnum[initQueryParameter as keyof typeof LegendaryEventEnum] as LegendaryEventEnum)
                 : LegendaryEventEnum.Mephiston,
         value => LegendaryEventEnum[value]
+    );
+
+    const lreChar = CharactersService.getLreCharacter(legendaryEventId);
+    usePageMetaOverride(
+        lreChar
+            ? {
+                  section: 'Plan',
+                  title: 'LRE',
+                  subtitle: lreChar.name,
+                  description:
+                      'Build teams for each track of the current Legendary Release Event and track your score, chest, and shard progress.',
+              }
+            : undefined
     );
 
     const isEventActive = useMemo(() => {
@@ -78,14 +92,13 @@ export const useLre = () => {
     const changeTab = (_: React.SyntheticEvent, value: LreSection) => setSection(value);
 
     useEffect(() => {
-        const lreChar = CharactersService.getLreCharacter(legendaryEventId);
         if (lreChar) {
-            const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar!.snowprintId);
+            const relatedLre = LegendaryEventService.getEventByCharacterSnowprintId(lreChar.snowprintId);
             const nextDate = relatedLre?.nextEventDate ?? 'TBA';
             setHeaderTitle(
                 !relatedLre || relatedLre.finished
                     ? `${lreChar.name} (Finished)`
-                    : `${lreChar.name} ${relatedLre!.eventStage}/3 (${nextDate})`
+                    : `${lreChar.name} ${relatedLre.eventStage}/3 (${nextDate})`
             );
         }
     }, [characters, legendaryEventId]);

@@ -4,7 +4,8 @@ export const warDefense2Route: RouteObject = {
     path: 'plan/wardefense2',
     handle: {
         section: 'Plan',
-        title: 'War Defense',
+        title: 'Guild War',
+        subtitle: 'Defense',
         description: 'Assign characters to your guild war defense zones.',
     },
     async lazy() {

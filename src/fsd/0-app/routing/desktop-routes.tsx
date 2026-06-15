@@ -88,7 +88,12 @@ export const globalPlanRoutes: RouteObject[] = [
     lreLazyRoute,
     {
         path: 'plan/leMasterTable',
-        handle: { section: 'Plan', title: 'LE Master Table' },
+        handle: {
+            section: 'Plan',
+            title: 'LE Master Table',
+            description:
+                'Cross-event overview of all Legendary Release Events with point thresholds and character picks.',
+        },
         async lazy() {
             const { MasterTable } = await import('@/fsd/1-pages/plan-lre/master-table');
             return { Component: MasterTable };
