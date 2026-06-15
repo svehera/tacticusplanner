@@ -405,10 +405,7 @@ export const Goals = () => {
         <div className="space-y-8 py-6">
             <PageToolbar>
                 {/* Navigation */}
-                <LinkButton
-                    appearance="outline"
-                    size="small"
-                    href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
+                <LinkButton size="small" href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
                     <Link2 data-slot="icon" /> Go to Raids
                 </LinkButton>
 
@@ -416,13 +413,13 @@ export const Goals = () => {
 
                 {/* Primary CTA + utility */}
                 <SetGoalDialog key={goals.length} />
-                <Button appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
+                <Button intent="secondary" appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
                     <Settings data-slot="icon" /> Raids Settings
                 </Button>
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
 
-                {hasSync && <SyncButton showText={true} appearance="outline" />}
+                {hasSync && <SyncButton intent="secondary" showText={true} appearance="outline" />}
                 <PageToolbarDivider />
 
                 {/* Counter */}
@@ -434,9 +431,9 @@ export const Goals = () => {
                 <Switch isSelected={viewPreferences.goalsTableView} onChange={updateView}>
                     <span className="flex items-center gap-1">
                         {viewPreferences.goalsTableView ? (
-                            <Rows3 className="size-5 text-(--primary)" />
+                            <Rows3 className="size-5 text-(--soft-fg)" />
                         ) : (
-                            <Grid2x2 className="size-5 text-(--primary)" />
+                            <Grid2x2 className="size-5 text-(--soft-fg)" />
                         )}{' '}
                         view
                     </span>

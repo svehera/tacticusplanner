@@ -789,7 +789,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button intent="secondary" onPress={closeSaveDialog}>
+                    <Button intent="secondary" appearance="plain" onPress={closeSaveDialog}>
                         Cancel
                     </Button>
                     <Button intent="primary" isDisabled={!isNameValid || isSaving} onPress={handleSaveSnapshot}>
@@ -826,7 +826,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button intent="secondary" onPress={closeDeleteDialog}>
+                    <Button intent="secondary" appearance="plain" onPress={closeDeleteDialog}>
                         Cancel
                     </Button>
                     <Button

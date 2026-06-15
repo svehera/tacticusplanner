@@ -552,7 +552,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 </PortalDialog.Body>
 
                 <PortalDialog.Footer>
-                    <Button appearance="outline" onPress={() => handleClose()}>
+                    <Button intent="secondary" appearance="plain" onPress={() => handleClose()}>
                         Cancel
                     </Button>
                     <Button

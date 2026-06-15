@@ -128,7 +128,7 @@
         --accent: var(--color-amber-600);
         --accent-fg: var(--color-zinc-950);
 
-        --success: var(--color-emerald-600);
+        --success: var(--color-emerald-700);
         --success-fg: var(--color-white);
 
         --warning: var(--color-amber-400);
@@ -142,7 +142,11 @@
         --secondary-fg: var(--color-zinc-950);
 
         --danger: var(--color-red-600);
-        --danger-fg: var(--color-red-50);
+        --danger-fg: var(--color-white);
+
+        --success-accent: var(--color-emerald-800);
+        --warning-accent: var(--color-amber-800);
+        --danger-accent: var(--color-red-700);
 
         /* ── Charts ────────────────────────────────── */
         --chart-1: var(--color-blue-700);
@@ -253,7 +257,7 @@
         --data-surface-border: var(--color-zinc-700);
 
         /* ── Brand / intent ───────────────────────── */
-        --primary: var(--color-sky-600);
+        --primary: var(--color-sky-500);
         --primary-fg: var(--color-zinc-950);
 
         --accent: var(--color-amber-600);
@@ -274,6 +278,10 @@
 
         --danger: oklch(0.6 0.16 20);
         --danger-fg: var(--color-zinc-950);
+
+        --success-accent: var(--color-emerald-400);
+        --warning-accent: var(--color-warning);
+        --danger-accent: var(--color-red-400);
 
         /* ── Charts ────────────────────────────────── */
         --chart-1: var(--color-blue-500);

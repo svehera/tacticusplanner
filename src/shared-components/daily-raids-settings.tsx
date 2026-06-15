@@ -296,12 +296,10 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
             </PortalDialog.Body>
 
             <PortalDialog.Footer>
-                <Button appearance="outline" onPress={close}>
+                <Button intent="secondary" appearance="plain" onPress={close}>
                     Cancel
                 </Button>
-                <Button intent="success" onPress={saveChanges}>
-                    Save changes
-                </Button>
+                <Button onPress={saveChanges}>Save changes</Button>
             </PortalDialog.Footer>
         </PortalDialog>
     );

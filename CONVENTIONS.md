@@ -61,7 +61,7 @@ Pick by the foreground you need on top:
 
 | Token            | Light     | Dark      | Use for                                                               |
 | ---------------- | --------- | --------- | --------------------------------------------------------------------- |
-| `--primary`      | blue-700  | blue-500  | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
+| `--primary`      | blue-700  | sky-500   | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
 | `--primary-fg`   | white     | white     | Text on primary background                                            |
 | `--secondary`    | zinc-200  | zinc-700  | Subdued/neutral button fills, outline/plain hover surfaces            |
 | `--secondary-fg` | zinc-950  | zinc-100  | Text on secondary background, icon-button text in both themes         |
@@ -305,6 +305,22 @@ The rank classes (`.stone1`–`.adamantine3`) and rarity classes (`.common`–`.
 Import from `@/fsd/5-shared/ui`:
 
 - `Button` — intents: primary/secondary/success/warning/danger; appearances: solid/outline/plain; sizes: extra-small/small/medium/large/square-petite; shapes: square (default, rounded-lg)/circle (rounded-full). Uses `onPress`, not `onClick` (react-aria). Outline/plain appearances show a state-layer overlay on hover/press and use the intent's accent colour for text (`--btn-accent`). For icon-only buttons use `size="square-petite" appearance="plain"`.
+
+  **Button hierarchy** — match appearance to visual weight:
+
+  | Level | Props | When to use |
+  |-------|-------|-------------|
+  | Primary | `intent="primary"` (default solid) | The single main action — one per dialog/form |
+  | Secondary | `intent="secondary" appearance="outline"` | Supporting action that isn't the main CTA |
+  | Tertiary | `intent="secondary" appearance="plain"` | Cancel, dismiss, low-stakes navigation |
+
+  Rules:
+  - **Dialogs and forms:** one solid button — the single action the user came to complete. Two solids in a dialog create ambiguity about what to click.
+  - **Toolbars:** up to two solids are allowed when they represent genuinely distinct action types — e.g. a navigation link (`LinkButton` solid) and a creation action (`Button` solid) can coexist because they answer different user intents. All other toolbar buttons are `intent="secondary" appearance="outline"`.
+  - `intent="secondary" appearance="solid"` (secondary solid) is banned — a grey fill next to a primary fill forces the user to decode hierarchy by colour alone.
+  - Cancel/dismiss is always `appearance="plain"`.
+  - **Toolbar semantic colours:** use `intent="secondary" appearance="outline"` for all low-stakes actions. Reserve `intent="danger" appearance="outline"` for the single destructive action. Never mix `success`, `warning`, and `danger` in the same toolbar — `danger` only, for the one irreversible action.
+  - Outside of toolbars, use semantic intents (`danger`, `success`, `warning`) only when the outcome meaningfully differs from a neutral action (e.g. permanent delete, confirmed save-to-server).
 - `LinkButton` — same API as `Button` (intent, appearance, size, shape) but renders a React Aria `<Link>` (`<a>`) instead of `<button>`. Import from `@/fsd/5-shared/ui/link`. Use for navigation buttons that look like buttons but route via links (e.g. "Go to Goals", "Go to Raids"). Defaults to `intent="primary"`.
 - `ButtonPill` — pill-shaped toggle button
 - `TextField` — label, description, prefix, suffix, isDisabled, isInvalid, errorMessage, isPending, isRevealable, type
@@ -661,7 +677,7 @@ import { PortalDialog, Button } from '@/fsd/5-shared/ui';
     <PortalDialog.Header>Title</PortalDialog.Header>
     <PortalDialog.Body>{/* form fields, shared Select, ComboBox, etc. */}</PortalDialog.Body>
     <PortalDialog.Footer>
-        <Button appearance="outline" onPress={onClose}>
+        <Button appearance="plain" intent="secondary" onPress={onClose}>
             Cancel
         </Button>
         <Button onPress={onSave}>Save</Button>
