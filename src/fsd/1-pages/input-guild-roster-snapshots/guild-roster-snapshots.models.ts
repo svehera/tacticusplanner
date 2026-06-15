@@ -108,45 +108,75 @@ export interface GuildRosterHistoryResponse {
     snapshots: GuildRosterSnapshot[];
 }
 
-export const getGuildRosterHistoryApi = () => makeApiCall<GuildRosterHistoryResponse>('GET', 'guild/roster/history');
-
-export const postGuildRosterSnapshotApi = (sequenceNumber: number, snapshot: GuildRosterSnapshot) =>
-    makeApiCall<{ sequenceNumber: number }>('PUT', 'guild/roster/history', { sequenceNumber, snapshot });
-
-export const deleteGuildRosterSnapshotApi = (name: string) =>
-    makeApiCall<GuildRosterHistoryResponse>('DELETE', `guild/roster/deleteHistory?name=${encodeURIComponent(name)}`);
-
 // ---------------------------------------------------------------------------
-// New per-row endpoints (GuildRosterSnapshots table)
+// GET /guild/roster/snapshots
 // ---------------------------------------------------------------------------
+
+export interface CurrentRosterMember {
+    userId: string;
+    playerName: string;
+}
 
 export interface RosterSnapshotInfo {
     snapshotId: string;
     name: string;
     createdAt: string;
+    /** User IDs of players who have a chain entry for this snapshot. */
+    memberIds: string[];
 }
 
 export interface GuildRosterSnapshotsMetaResponse {
     snapshots: RosterSnapshotInfo[];
     atCapacity: boolean;
     maxSnapshots: number;
-}
-
-export interface RosterSnapshotDetail {
-    snapshotId: string;
-    name: string;
-    createdAt: string;
-    members: Array<{ userId: string } & Record<string, unknown>>;
+    currentRosterMembers: CurrentRosterMember[];
+    /** Added in backend addendum; optional until schema is regenerated. */
+    sequenceNumber?: number;
 }
 
 export const getGuildRosterSnapshotsMetaApi = () =>
     makeApiCall<GuildRosterSnapshotsMetaResponse>('GET', 'guild/roster/snapshots');
 
-export const getGuildRosterSnapshotDetailApi = (snapshotId: string) =>
-    makeApiCall<RosterSnapshotDetail>('GET', `guild/roster/snapshot/${encodeURIComponent(snapshotId)}`);
+// ---------------------------------------------------------------------------
+// DELETE /guild/roster/snapshot/{snapshotId}
+// ---------------------------------------------------------------------------
 
 export const deleteGuildRosterSnapshotByIdApi = (snapshotId: string) =>
     makeApiCall<{ snapshotId: string; deleted: boolean }>(
         'DELETE',
         `guild/roster/snapshot/${encodeURIComponent(snapshotId)}`
     );
+
+// ---------------------------------------------------------------------------
+// GET /guild/roster/player-chain
+// ---------------------------------------------------------------------------
+
+export interface PlayerRosterChainEntry {
+    snapshotId: string;
+    name: string;
+    createdAt: string;
+    /** chain[0] has full chars/mows; subsequent entries have charDiffs/mowDiffs. */
+    memberData?: GuildRosterSnapshotMember;
+}
+
+export interface PlayerRosterChainResponse {
+    userId: string;
+    chain: PlayerRosterChainEntry[];
+}
+
+export const getGuildRosterPlayerChainApi = (userId: string) =>
+    makeApiCall<PlayerRosterChainResponse>('GET', `guild/roster/player-chain?userId=${encodeURIComponent(userId)}`);
+
+// ---------------------------------------------------------------------------
+// POST /guild/roster/migrate
+// ---------------------------------------------------------------------------
+
+export const postGuildRosterMigrateApi = () =>
+    makeApiCall<{ migrated: number; skipped: number }>('POST', 'guild/roster/migrate');
+
+// ---------------------------------------------------------------------------
+// PUT /guild/roster/history  (write path — unchanged format)
+// ---------------------------------------------------------------------------
+
+export const postGuildRosterSnapshotApi = (sequenceNumber: number, snapshot: GuildRosterSnapshot) =>
+    makeApiCall<{ sequenceNumber: number }>('PUT', 'guild/roster/history', { sequenceNumber, snapshot });

@@ -20,23 +20,21 @@ import { RosterSnapshotsService } from '../input-roster-snapshots/roster-snapsho
 import { RosterSnapshotsUnitDiffDetailed } from '../input-roster-snapshots/roster-snapshots-unit-diff-detailed';
 
 import {
-    GuildRosterHistoryResponse,
-    GuildRosterSnapshotMember,
+    CurrentRosterMember,
     MemberState,
-    RosterSnapshotDetail,
+    PlayerRosterChainResponse,
     RosterSnapshotInfo,
     deleteGuildRosterSnapshotByIdApi,
-    getGuildRosterHistoryApi,
-    getGuildRosterSnapshotDetailApi,
+    getGuildRosterPlayerChainApi,
     getGuildRosterSnapshotsMetaApi,
+    postGuildRosterMigrateApi,
     postGuildRosterSnapshotApi,
 } from './guild-roster-snapshots.models';
 import { RaidTeamFilterDropdown } from './raid-team-filter-dropdown';
 import {
     DiffEntry,
-    buildMemberHistoryMap,
     buildNewSnapshot,
-    getMemberRosterAtIndex,
+    getRosterAtSnapshot,
     getPlayerName,
     makeDefaultSnapshotName,
     snapshotCharPower,
@@ -45,42 +43,77 @@ import {
 
 const SHOW_ALL = RosterSnapshotShowVariableSettings.Always;
 
+// ---------------------------------------------------------------------------
 // Module-level cache — persists across navigations within a session
+// ---------------------------------------------------------------------------
+
 const cache = {
     snapshotMeta: undefined as RosterSnapshotInfo[] | undefined,
     atCapacity: false,
     maxSnapshots: 0,
-    snapshotDetailCache: new Map<string, RosterSnapshotDetail>(),
     sequenceNumber: 0,
-    sequenceNumberFetched: false,
+    currentRosterMembers: [] as CurrentRosterMember[],
+    playerChainCache: new Map<string, PlayerRosterChainResponse>(),
     metaFetched: false,
 };
 
-// Writes must happen in module-level functions so the React compiler doesn't
-// flag them as side effects inside a component or hook.
-function cacheSetMeta(snapshots: RosterSnapshotInfo[], atCapacity: boolean, maxSnapshots: number) {
+function cacheSetMeta(
+    snapshots: RosterSnapshotInfo[],
+    atCapacity: boolean,
+    maxSnapshots: number,
+    sequenceNumber: number,
+    currentRosterMembers: CurrentRosterMember[]
+) {
     cache.snapshotMeta = snapshots;
     cache.atCapacity = atCapacity;
     cache.maxSnapshots = maxSnapshots;
+    cache.sequenceNumber = sequenceNumber;
+    cache.currentRosterMembers = currentRosterMembers;
     cache.metaFetched = true;
 }
-function cacheSetDetailCache(map: Map<string, RosterSnapshotDetail>) {
-    cache.snapshotDetailCache = map;
+
+function cacheSetPlayerChainCache(map: Map<string, PlayerRosterChainResponse>) {
+    cache.playerChainCache = map;
 }
+
 function cacheSetSequenceNumber(n: number) {
     cache.sequenceNumber = n;
 }
-function cacheMarkSequenceNumberFetched() {
-    cache.sequenceNumberFetched = true;
-}
+
 function cacheSetAfterDelete(
     snapshotMeta: RosterSnapshotInfo[] | undefined,
-    snapshotDetailCache: Map<string, RosterSnapshotDetail>
+    playerChainCache: Map<string, PlayerRosterChainResponse>
 ) {
     cache.snapshotMeta = snapshotMeta;
-    cache.snapshotDetailCache = snapshotDetailCache;
+    cache.playerChainCache = playerChainCache;
     cache.atCapacity = false;
 }
+
+// ---------------------------------------------------------------------------
+// Retry helper
+// ---------------------------------------------------------------------------
+
+async function fetchWithRetry<T>(
+    function_: () => Promise<{ data: T | null; error: unknown }>,
+    maxAttempts = 3
+): Promise<{ data: T | null; error: unknown }> {
+    // eslint-disable-next-line unicorn/no-null
+    let lastResult: { data: T | null; error: unknown } = { data: null, error: 'Not started' };
+    for (let attempt = 0; attempt < maxAttempts; attempt++) {
+        if (attempt > 0) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * 2 ** (attempt - 1)));
+        }
+        lastResult = await function_();
+        if (!lastResult.error && lastResult.data !== null) return lastResult;
+    }
+    return lastResult;
+}
+
+// ---------------------------------------------------------------------------
+// Save dialog state
+// ---------------------------------------------------------------------------
+
+type SaveStage = 'closed' | 'naming' | 'fetching' | 'computing' | 'saving' | 'error';
 
 // ---------------------------------------------------------------------------
 // Component
@@ -97,18 +130,16 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const [snapshotMeta, setSnapshotMeta] = useState<RosterSnapshotInfo[] | undefined>(cache.snapshotMeta);
     const [atCapacity, setAtCapacity] = useState(cache.atCapacity);
     const [maxSnapshots, setMaxSnapshots] = useState(cache.maxSnapshots);
+    const [sequenceNumber, setSequenceNumber] = useState(cache.sequenceNumber);
+    const [currentRosterMembers, setCurrentRosterMembers] = useState<CurrentRosterMember[]>(cache.currentRosterMembers);
     const [isLoadingMeta, setIsLoadingMeta] = useState(false);
     const [metaError, setMetaError] = useState<string | undefined>();
 
-    // ---- detail cache state ----
-    const [snapshotDetailCache, setSnapshotDetailCache] = useState<Map<string, RosterSnapshotDetail>>(
-        cache.snapshotDetailCache
+    // ---- player chain cache ----
+    const [playerChainCache, setPlayerChainCache] = useState<Map<string, PlayerRosterChainResponse>>(
+        cache.playerChainCache
     );
-    const [isLoadingDetails, setIsLoadingDetails] = useState(false);
-
-    // ---- sequence number for saves (start at 0; updated after each successful save) ----
-    const [sequenceNumber, setSequenceNumber] = useState(cache.sequenceNumber);
-    const [sequenceNumberFetched, setSequenceNumberFetched] = useState(cache.sequenceNumberFetched);
+    const [isLoadingChain, setIsLoadingChain] = useState(false);
 
     // ---- comparison state ----
     const [leftSnapshotId, setLeftSnapshotId] = useState<string | undefined>();
@@ -116,11 +147,18 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
     const [selectedRaidTeamNames, setSelectedRaidTeamNames] = useState<string[]>([]);
 
-    // ---- save dialog ----
-    const [saveDialogOpen, setSaveDialogOpen] = useState(false);
+    // ---- migration state ----
+    const [isMigrating, setIsMigrating] = useState(false);
+    const [migrateError, setMigrateError] = useState<string | undefined>();
+
+    // ---- save dialog state ----
+    const [saveStage, setSaveStage] = useState<SaveStage>('closed');
     const [snapshotName, setSnapshotName] = useState('');
-    const [isSaving, setIsSaving] = useState(false);
     const [saveError, setSaveError] = useState<string | undefined>();
+    const [chainLoadProgress, setChainLoadProgress] = useState<{ loaded: number; total: number }>({
+        loaded: 0,
+        total: 0,
+    });
 
     // ---- delete dialog ----
     const [deleteDialogOpen, setDeleteDialogOpen] = useState(false);
@@ -131,7 +169,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const { teams2 } = useContext(StoreContext);
 
     // ---------------------------------------------------------------------------
-    // Metadata load (auto on mount + manual refresh)
+    // Metadata load
     // ---------------------------------------------------------------------------
 
     const loadMeta = useCallback(async () => {
@@ -141,10 +179,13 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         if (error || !data) {
             setMetaError(typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to load snapshots'));
         } else {
-            cacheSetMeta(data.snapshots, data.atCapacity, data.maxSnapshots);
+            const seq = data.sequenceNumber ?? 0;
+            cacheSetMeta(data.snapshots, data.atCapacity, data.maxSnapshots, seq, data.currentRosterMembers);
             setSnapshotMeta(data.snapshots);
             setAtCapacity(data.atCapacity);
             setMaxSnapshots(data.maxSnapshots);
+            setSequenceNumber(seq);
+            setCurrentRosterMembers(data.currentRosterMembers);
         }
         setIsLoadingMeta(false);
     }, []);
@@ -155,107 +196,83 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     }, [loadMeta]);
 
     // ---------------------------------------------------------------------------
-    // On-demand detail loading (loads ALL snapshot details at once for delta decoding)
+    // Per-player chain load (diff view)
     // ---------------------------------------------------------------------------
 
-    const loadAllDetails = useCallback(
-        async (meta: RosterSnapshotInfo[]) => {
-            const unloaded = meta.filter(s => !snapshotDetailCache.has(s.snapshotId));
-            if (unloaded.length === 0) return;
-            setIsLoadingDetails(true);
-            const results = await Promise.all(unloaded.map(s => getGuildRosterSnapshotDetailApi(s.snapshotId)));
-            const next = new Map(snapshotDetailCache);
-            for (const [index, result] of results.entries()) {
-                const id = unloaded[index]?.snapshotId;
-                if (id && result.data) next.set(id, result.data);
+    const loadPlayerChain = useCallback(
+        async (userId: string) => {
+            if (playerChainCache.has(userId)) return;
+            setIsLoadingChain(true);
+            const result = await fetchWithRetry(() => getGuildRosterPlayerChainApi(userId));
+            if (result.data) {
+                const next = new Map(playerChainCache);
+                next.set(userId, result.data);
+                cacheSetPlayerChainCache(next);
+                setPlayerChainCache(next);
             }
-            cacheSetDetailCache(next);
-            setSnapshotDetailCache(next);
-            setIsLoadingDetails(false);
+            setIsLoadingChain(false);
         },
-        [snapshotDetailCache]
+        [playerChainCache]
     );
+
+    // ---------------------------------------------------------------------------
+    // Migration
+    // ---------------------------------------------------------------------------
+
+    const handleMigrate = async () => {
+        setIsMigrating(true);
+        setMigrateError(undefined);
+        const { error } = await postGuildRosterMigrateApi();
+        if (error) {
+            setMigrateError(typeof error === 'string' ? error : ((error as Error)?.message ?? 'Migration failed'));
+        } else {
+            await loadMeta();
+        }
+        setIsMigrating(false);
+    };
 
     // ---------------------------------------------------------------------------
     // Derived data
     // ---------------------------------------------------------------------------
 
-    // Snapshots in chronological order (oldest first — required for delta decoding)
     const sortedMeta = useMemo(
         () => [...(snapshotMeta ?? [])].toSorted((a, b) => a.createdAt.localeCompare(b.createdAt)),
         [snapshotMeta]
     );
 
-    // Reconstruct GuildRosterHistoryResponse from cached details (for buildMemberHistoryMap)
-    const effectiveHistory = useMemo((): GuildRosterHistoryResponse => {
-        const snapshots = sortedMeta
-            .filter(meta => snapshotDetailCache.has(meta.snapshotId))
-            .map(meta => ({
-                name: meta.name,
-                members: snapshotDetailCache.get(meta.snapshotId)!.members as GuildRosterSnapshotMember[],
-            }));
-        return { sequenceNumber, snapshots };
-    }, [sortedMeta, snapshotDetailCache, sequenceNumber]);
-
-    const memberHistoryMap = useMemo(() => buildMemberHistoryMap(effectiveHistory), [effectiveHistory]);
-
-    // Subset of sortedMeta that have details loaded — mirrors effectiveHistory.snapshots index-for-index.
-    const filteredMeta = useMemo(
-        () => sortedMeta.filter(meta => snapshotDetailCache.has(meta.snapshotId)),
-        [sortedMeta, snapshotDetailCache]
+    const needsMigration = useMemo(
+        () => (snapshotMeta?.length ?? 0) > 0 && snapshotMeta!.every(s => s.memberIds.length === 0),
+        [snapshotMeta]
     );
 
-    // Convert snapshotId → index in filteredMeta (= index in effectiveHistory / memberHistoryMap)
-    const leftIndex = useMemo(
-        () => (leftSnapshotId === undefined ? undefined : filteredMeta.findIndex(m => m.snapshotId === leftSnapshotId)),
-        [leftSnapshotId, filteredMeta]
-    );
-
-    const rightIndexOrCurrent = useMemo((): number | 'current' | undefined => {
-        if (rightSnapshotId === undefined) return undefined;
-        if (rightSnapshotId === 'current') return 'current';
-        const index = filteredMeta.findIndex(m => m.snapshotId === rightSnapshotId);
-        return index === -1 ? undefined : index;
-    }, [rightSnapshotId, filteredMeta]);
-
-    // Save dialog: existing snapshot names for duplicate detection
     const existingNames = useMemo(() => new Set(sortedMeta.map(s => s.name)), [sortedMeta]);
     const trimmedName = snapshotName.trim();
     const isDuplicateName = existingNames.has(trimmedName);
     const isNameValid = trimmedName.length > 0 && !isDuplicateName;
     const approachingLimit = maxSnapshots > 0 && (snapshotMeta?.length ?? 0) === maxSnapshots - 1;
 
-    // "To" dropdown options: snapshots NEWER than left selection + "Current Rosters"
+    // "To" dropdown: all other snapshots + "Current Rosters"
     const rightOptions = useMemo((): Array<{ value: string | 'current'; label: string }> => {
         if (leftSnapshotId === undefined) return [];
-        const leftSortedIndex = sortedMeta.findIndex(m => m.snapshotId === leftSnapshotId);
-        if (leftSortedIndex === -1) return [];
-        const options: Array<{ value: string | 'current'; label: string }> = [];
-        for (let index = leftSortedIndex + 1; index < sortedMeta.length; index++) {
-            options.push({ value: sortedMeta[index]!.snapshotId, label: sortedMeta[index]!.name });
-        }
-        const membersLoadedLabel = members === undefined ? 'Current Rosters (loading…)' : 'Current Rosters';
-        options.push({ value: 'current', label: membersLoadedLabel });
+        const options: Array<{ value: string | 'current'; label: string }> = sortedMeta
+            .filter(s => s.snapshotId !== leftSnapshotId)
+            .map(s => ({ value: s.snapshotId, label: s.name }));
+        const currentLabel = members === undefined ? 'Current Rosters (loading…)' : 'Current Rosters';
+        options.push({ value: 'current', label: currentLabel });
         return options;
     }, [leftSnapshotId, sortedMeta, members]);
 
-    // Players eligible for the Player dropdown
-    const membersInComparison = useMemo((): Array<{ userId: string; isNew: boolean }> => {
-        if (leftIndex === undefined || rightIndexOrCurrent === undefined) return [];
-        const result: Array<{ userId: string; isNew: boolean }> = [];
-        for (const userId of memberHistoryMap.keys()) {
-            const memberHistory = memberHistoryMap.get(userId);
-            if (!memberHistory) continue;
-            const hasRight =
-                rightIndexOrCurrent === 'current'
-                    ? memberStates.get(userId)?.status === 'success'
-                    : getMemberRosterAtIndex(memberHistory, rightIndexOrCurrent) !== undefined;
-            if (!hasRight) continue;
-            const hasLeft = getMemberRosterAtIndex(memberHistory, leftIndex) !== undefined;
-            result.push({ userId, isNew: !hasLeft });
-        }
-        return result;
-    }, [leftIndex, rightIndexOrCurrent, memberHistoryMap, memberStates]);
+    // Players eligible for comparison: strict intersection of both sides' memberIds
+    const membersInComparison = useMemo((): string[] => {
+        if (leftSnapshotId === undefined || rightSnapshotId === undefined) return [];
+        const fromIds = new Set(sortedMeta.find(s => s.snapshotId === leftSnapshotId)?.memberIds);
+        if (fromIds.size === 0) return [];
+        const toIds =
+            rightSnapshotId === 'current'
+                ? new Set(currentRosterMembers.map(m => m.userId))
+                : new Set(sortedMeta.find(s => s.snapshotId === rightSnapshotId)?.memberIds);
+        return [...fromIds].filter(id => toIds.has(id));
+    }, [leftSnapshotId, rightSnapshotId, sortedMeta, currentRosterMembers]);
 
     const raidTeams = useMemo(() => teams2.filter(t => t.raid), [teams2]);
 
@@ -277,12 +294,14 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     };
 
     const diffEntries = useMemo((): DiffEntry[] => {
-        if (selectedUserId === undefined || leftIndex === undefined || rightIndexOrCurrent === undefined) return [];
-        const memberHistory = memberHistoryMap.get(selectedUserId);
-        if (!memberHistory) return [];
+        if (!selectedUserId || !leftSnapshotId || !rightSnapshotId) return [];
+        const chainResp = playerChainCache.get(selectedUserId);
+        if (!chainResp) return []; // still loading
+
+        const leftRoster = getRosterAtSnapshot(chainResp.chain, leftSnapshotId);
 
         let rightRoster: IRosterSnapshot | undefined;
-        if (rightIndexOrCurrent === 'current') {
+        if (rightSnapshotId === 'current') {
             const state = memberStates.get(selectedUserId);
             if (state?.status !== 'success') return [];
             rightRoster = {
@@ -292,12 +311,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 mows: state.parsed.units.flatMap(u => (u.mow ? [u.mow] : [])),
             };
         } else {
-            rightRoster = getMemberRosterAtIndex(memberHistory, rightIndexOrCurrent);
+            rightRoster = getRosterAtSnapshot(chainResp.chain, rightSnapshotId);
         }
-        if (!rightRoster) return [];
 
+        if (!rightRoster) return [];
         const fixedRight = RosterSnapshotsService.fixSnapshot(rightRoster);
-        const leftRoster = getMemberRosterAtIndex(memberHistory, leftIndex);
 
         if (!leftRoster) {
             return [
@@ -343,7 +361,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             });
         }
         return results;
-    }, [selectedUserId, leftIndex, rightIndexOrCurrent, memberHistoryMap, memberStates]);
+    }, [selectedUserId, leftSnapshotId, rightSnapshotId, playerChainCache, memberStates]);
 
     const selectedUnitIds = useMemo(
         () => getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames),
@@ -357,12 +375,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         );
     }, [diffEntries, selectedUnitIds]);
 
-    // No-history fallback: show current roster for selected member
+    // No-snapshot mode: view a single player's current roster
     const isNoHistoryMode = snapshotMeta !== undefined && snapshotMeta.length === 0;
     const selectedMemberState = selectedUserId === undefined ? undefined : memberStates.get(selectedUserId);
     const currentUnits =
         isNoHistoryMode && selectedMemberState?.status === 'success' ? selectedMemberState.parsed.units : undefined;
-
     const filteredNonDiffEntries = useMemo(() => {
         if (selectedUnitIds.size === 0) return currentUnits;
         return currentUnits?.filter(u =>
@@ -373,38 +390,88 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const apiKeyErrorIds = members?.filter(id => memberStates.get(id)?.status === 'error') ?? [];
 
     // ---------------------------------------------------------------------------
+    // Selection handlers
+    // ---------------------------------------------------------------------------
+
+    const handleLeftSnapshotSelect = (snapshotId: string) => {
+        setLeftSnapshotId(snapshotId);
+        setRightSnapshotId(undefined);
+        setSelectedUserId(undefined);
+        if (members === undefined) void onLoadMembers();
+    };
+
+    const handlePlayerSelect = (userId: string | undefined) => {
+        setSelectedUserId(userId);
+        if (userId) void loadPlayerChain(userId);
+    };
+
+    // ---------------------------------------------------------------------------
     // Save dialog handlers
     // ---------------------------------------------------------------------------
 
-    const openSaveDialog = async () => {
+    const openSaveDialog = () => {
         setSnapshotName(makeDefaultSnapshotName());
         setSaveError(undefined);
-        // Lazily fetch the sequence number from the old endpoint on the first save of the session.
-        if (!sequenceNumberFetched) {
-            const { data } = await getGuildRosterHistoryApi();
-            if (data?.sequenceNumber !== undefined) {
-                cacheSetSequenceNumber(data.sequenceNumber);
-                setSequenceNumber(data.sequenceNumber);
-                cacheMarkSequenceNumberFetched();
-                setSequenceNumberFetched(true);
-            }
-        }
-        setSaveDialogOpen(true);
+        setSaveStage('naming');
+        // Start loading member rosters in the background so they're ready when Save is confirmed.
+        if (members === undefined) void onLoadMembers();
     };
 
-    const closeSaveDialog = () => setSaveDialogOpen(false);
+    const closeSaveDialog = () => setSaveStage('closed');
 
     const handleSaveSnapshot = async () => {
         if (!isNameValid) return;
-        setIsSaving(true);
-        setSaveError(undefined);
 
-        const newSnapshot = buildNewSnapshot(trimmedName, memberStates, memberHistoryMap);
+        // Step 1: determine which chains need fetching
+        const latestSnapshot = sortedMeta.at(-1);
+        const latestSnapshotId = latestSnapshot?.snapshotId;
+        const latestMemberIds = latestSnapshot?.memberIds ?? [];
+        const uncached = latestMemberIds.filter(id => !playerChainCache.has(id));
+
+        // Step 2: fetch missing chains with retry
+        setSaveStage('fetching');
+        setChainLoadProgress({ loaded: 0, total: uncached.length });
+
+        const nextCache = new Map(playerChainCache);
+        for (const [index, userId] of uncached.entries()) {
+            const result = await fetchWithRetry(() => getGuildRosterPlayerChainApi(userId));
+            if (result.error || !result.data) {
+                // Persist whatever was loaded so far before surfacing the error
+                cacheSetPlayerChainCache(nextCache);
+                setPlayerChainCache(nextCache);
+                setSaveError(
+                    `Failed to load roster history for ${isLikelyUserId(userId) ? obfuscateUserId(userId) : userId}. ` +
+                        `${index} / ${uncached.length} histories were loaded and cached — ` +
+                        `try again to resume.`
+                );
+                setSaveStage('error');
+                return;
+            }
+            nextCache.set(userId, result.data);
+            setChainLoadProgress({ loaded: index + 1, total: uncached.length });
+        }
+
+        // Persist the full updated cache
+        cacheSetPlayerChainCache(nextCache);
+        setPlayerChainCache(nextCache);
+
+        // Step 3: compute diffs
+        setSaveStage('computing');
+        const newSnapshot = buildNewSnapshot(trimmedName, memberStates, nextCache, latestSnapshotId);
+
+        // Step 4: POST
+        setSaveStage('saving');
         const { data, error } = await postGuildRosterSnapshotApi(sequenceNumber, newSnapshot);
 
         if (error) {
-            setSaveError(typeof error === 'string' ? error : ((error as Error).message ?? 'Failed to save snapshot'));
-            setIsSaving(false);
+            const message = typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to save');
+            const isSequenceConflict = message.toLowerCase().includes('sequence');
+            setSaveError(
+                isSequenceConflict
+                    ? 'Another guild member saved a snapshot while you were working. Please refresh and try again.'
+                    : message
+            );
+            setSaveStage('error');
             return;
         }
 
@@ -412,9 +479,8 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             cacheSetSequenceNumber(data.sequenceNumber);
             setSequenceNumber(data.sequenceNumber);
         }
-        setIsSaving(false);
-        setSaveDialogOpen(false);
-        // Reload metadata to pick up the new snapshot (and its server-assigned snapshotId).
+
+        setSaveStage('closed');
         await loadMeta();
     };
 
@@ -445,16 +511,14 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             return;
         }
 
-        // Remove from local state
         const newMeta = snapshotMeta?.filter(s => s.snapshotId !== selectedSnapshotToDelete);
-        const newDetailCache = new Map(snapshotDetailCache);
-        newDetailCache.delete(selectedSnapshotToDelete);
-        cacheSetAfterDelete(newMeta, newDetailCache);
+        // Invalidate the entire chain cache — server has pruned chain entries for this snapshot
+        const emptyChainCache = new Map<string, PlayerRosterChainResponse>();
+        cacheSetAfterDelete(newMeta, emptyChainCache);
         setSnapshotMeta(newMeta);
-        setSnapshotDetailCache(newDetailCache);
+        setPlayerChainCache(emptyChainCache);
         setAtCapacity(false);
 
-        // Reset comparison selections that referenced the deleted snapshot
         if (leftSnapshotId === selectedSnapshotToDelete) {
             setLeftSnapshotId(undefined);
             setRightSnapshotId(undefined);
@@ -469,28 +533,145 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     };
 
     // ---------------------------------------------------------------------------
-    // Selection handler: when user picks a "From" snapshot, load all details
+    // Styles
     // ---------------------------------------------------------------------------
 
-    const handleLeftSnapshotSelect = (snapshotId: string) => {
-        setLeftSnapshotId(snapshotId);
-        setRightSnapshotId(undefined);
-        setSelectedUserId(undefined);
-        if (snapshotMeta) {
-            void loadAllDetails(snapshotMeta);
-            if (members === undefined) void onLoadMembers();
+    const selectClass = 'rounded border border-(--border) bg-(--bg) px-2 py-1 text-sm text-(--fg)';
+    const labelClass = 'text-sm font-semibold text-(--fg)';
+    const canSave =
+        snapshotMeta !== undefined &&
+        !isLoadingMeta &&
+        !atCapacity &&
+        (members !== undefined || currentRosterMembers.length > 0);
+    const canDelete = snapshotMeta !== undefined && snapshotMeta.length > 0 && !isLoadingMeta;
+
+    // ---------------------------------------------------------------------------
+    // Save dialog content helper
+    // ---------------------------------------------------------------------------
+
+    const renderSaveDialogContent = () => {
+        switch (saveStage) {
+            case 'naming': {
+                const latestMemberCount = sortedMeta.at(-1)?.memberIds.length ?? 0;
+                const uncachedCount = (sortedMeta.at(-1)?.memberIds ?? []).filter(
+                    id => !playerChainCache.has(id)
+                ).length;
+                return (
+                    <>
+                        <DialogTitle>Save Snapshot</DialogTitle>
+                        <DialogContent>
+                            <div className="flex flex-col gap-4 pt-2">
+                                {approachingLimit && (
+                                    <p className="text-sm text-amber-600 dark:text-amber-400">
+                                        You have {snapshotMeta?.length ?? 0}/{maxSnapshots} snapshots. This is the last
+                                        slot available.
+                                    </p>
+                                )}
+                                <div className="flex flex-col gap-1">
+                                    <label htmlFor="snapshot-name-input" className={labelClass}>
+                                        Snapshot Name
+                                    </label>
+                                    <input
+                                        id="snapshot-name-input"
+                                        type="text"
+                                        value={snapshotName}
+                                        onChange={event_ => setSnapshotName(event_.target.value)}
+                                        className="rounded border border-(--input-border) bg-(--bg) px-3 py-1.5 text-sm text-(--fg) focus:border-(--primary) focus:outline-none"
+                                        autoFocus
+                                    />
+                                    {isDuplicateName && (
+                                        <p className="text-danger text-xs">A snapshot with this name already exists.</p>
+                                    )}
+                                </div>
+                                {latestMemberCount > 0 && uncachedCount > 0 && (
+                                    <p className="rounded border border-(--border) bg-(--soft) px-3 py-2 text-sm text-(--fg)">
+                                        Saving will fetch roster history for <strong>{uncachedCount}</strong> player
+                                        {uncachedCount === 1 ? '' : 's'} to compute diffs. This may take a few seconds.
+                                    </p>
+                                )}
+                            </div>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button intent="secondary" onPress={closeSaveDialog}>
+                                Cancel
+                            </Button>
+                            <Button intent="primary" isDisabled={!isNameValid} onPress={handleSaveSnapshot}>
+                                Save
+                            </Button>
+                        </DialogActions>
+                    </>
+                );
+            }
+
+            case 'fetching': {
+                return (
+                    <>
+                        <DialogTitle>Save Snapshot</DialogTitle>
+                        <DialogContent>
+                            <div className="flex flex-col items-center gap-3 py-4">
+                                <span className="inline-block size-6 animate-spin rounded-full border-4 border-(--border) border-t-(--primary)" />
+                                <p className="text-sm text-(--fg)">
+                                    Loading roster histories ({chainLoadProgress.loaded} / {chainLoadProgress.total})…
+                                </p>
+                            </div>
+                        </DialogContent>
+                    </>
+                );
+            }
+
+            case 'computing': {
+                return (
+                    <>
+                        <DialogTitle>Save Snapshot</DialogTitle>
+                        <DialogContent>
+                            <div className="flex flex-col items-center gap-3 py-4">
+                                <span className="inline-block size-6 animate-spin rounded-full border-4 border-(--border) border-t-(--primary)" />
+                                <p className="text-sm text-(--fg)">Computing diffs…</p>
+                            </div>
+                        </DialogContent>
+                    </>
+                );
+            }
+
+            case 'saving': {
+                return (
+                    <>
+                        <DialogTitle>Save Snapshot</DialogTitle>
+                        <DialogContent>
+                            <div className="flex flex-col items-center gap-3 py-4">
+                                <span className="inline-block size-6 animate-spin rounded-full border-4 border-(--border) border-t-(--primary)" />
+                                <p className="text-sm text-(--fg)">Saving…</p>
+                            </div>
+                        </DialogContent>
+                    </>
+                );
+            }
+
+            case 'error': {
+                return (
+                    <>
+                        <DialogTitle>Save Snapshot</DialogTitle>
+                        <DialogContent>
+                            <p className="text-danger pt-2 text-sm">{saveError}</p>
+                        </DialogContent>
+                        <DialogActions>
+                            <Button intent="secondary" onPress={closeSaveDialog}>
+                                Close
+                            </Button>
+                        </DialogActions>
+                    </>
+                );
+            }
+
+            default: {
+                return;
+            }
         }
     };
 
     // ---------------------------------------------------------------------------
-    // Styles
+    // Render
     // ---------------------------------------------------------------------------
-
-    const selectClass =
-        'rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100';
-    const labelClass = 'text-sm font-semibold text-gray-700 dark:text-gray-300';
-    const canSave = snapshotMeta !== undefined && !isLoadingMeta && !atCapacity && members !== undefined;
-    const canDelete = snapshotMeta !== undefined && snapshotMeta.length > 0 && !isLoadingMeta;
 
     return (
         <div className="flex flex-col gap-4">
@@ -505,12 +686,12 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 <Button intent="danger" isDisabled={!canDelete} onPress={openDeleteDialog}>
                     Delete Snapshot
                 </Button>
-                {(isLoadingMeta || isLoadingDetails) && (
-                    <span className="inline-block size-4 animate-spin rounded-full border-2 border-gray-400 border-t-transparent" />
+                {isLoadingMeta && (
+                    <span className="inline-block size-4 animate-spin rounded-full border-2 border-(--border) border-t-(--primary)" />
                 )}
             </div>
 
-            {metaError && <p className="text-sm text-red-600 dark:text-red-400">{metaError}</p>}
+            {metaError && <p className="text-danger text-sm">{metaError}</p>}
 
             {atCapacity && (
                 <p className="text-sm text-amber-600 dark:text-amber-400">
@@ -518,22 +699,36 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 </p>
             )}
 
+            {/* Migration banner */}
+            {needsMigration && (
+                <div className="flex items-center gap-3 rounded border border-(--border) bg-(--soft) px-3 py-2">
+                    <p className="flex-1 text-sm text-(--fg)">
+                        This guild has existing snapshots that need to be migrated to the new format before the diff
+                        view is available.
+                    </p>
+                    <Button intent="primary" isDisabled={isMigrating} onPress={handleMigrate}>
+                        {isMigrating ? (
+                            <span className="flex items-center gap-2">
+                                <span className="inline-block size-4 animate-spin rounded-full border-2 border-white/40 border-t-white" />
+                                Migrating…
+                            </span>
+                        ) : (
+                            'Migrate Data'
+                        )}
+                    </Button>
+                    {migrateError && <p className="text-danger text-sm">{migrateError}</p>}
+                </div>
+            )}
+
             <DebugJson label="guild/roster/snapshots (meta)" value={snapshotMeta ?? 'loading…'} />
-            <DebugJson
-                label="guild/roster/snapshots (cached details)"
-                value={Object.fromEntries(snapshotDetailCache)}
-            />
+            <DebugJson label="guild/roster/player-chain (cache)" value={Object.fromEntries(playerChainCache)} />
 
             {apiKeyErrorIds.length > 0 && (
                 <section className="flex flex-col gap-2">
-                    <h2 className="text-sm font-semibold text-red-600 dark:text-red-400">
-                        API key errors ({apiKeyErrorIds.length})
-                    </h2>
+                    <h2 className="text-danger text-sm font-semibold">API key errors ({apiKeyErrorIds.length})</h2>
                     <ul className="flex flex-wrap gap-2">
                         {apiKeyErrorIds.map(id => (
-                            <li
-                                key={id}
-                                className="rounded bg-red-100 px-2 py-0.5 font-mono text-xs text-red-700 dark:bg-red-900/50 dark:text-red-300">
+                            <li key={id} className="bg-danger/10 text-danger rounded px-2 py-0.5 font-mono text-xs">
                                 {isLikelyUserId(id) ? obfuscateUserId(id) : id}
                             </li>
                         ))}
@@ -542,20 +737,64 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             )}
 
             {snapshotMeta === undefined && !isLoadingMeta && (
-                <p className="text-sm text-gray-500 dark:text-gray-400">Loading snapshot list…</p>
+                <p className="text-sm text-(--soft-fg)">Loading snapshot list…</p>
             )}
 
             {/* Snapshot comparison dropdowns */}
             {snapshotMeta !== undefined && (
                 <div className="relative flex flex-wrap items-center gap-4">
-                    {/* Spinner overlay while details are loading */}
-                    {isLoadingDetails && (
-                        <div className="absolute inset-0 z-10 flex items-center justify-center rounded bg-white/60 dark:bg-gray-900/60">
-                            <span className="inline-block size-6 animate-spin rounded-full border-4 border-gray-400 border-t-transparent" />
+                    {/* Chain loading spinner */}
+                    {isLoadingChain && (
+                        <div className="absolute inset-0 z-10 flex items-center justify-center rounded bg-(--bg)/60">
+                            <span className="inline-block size-6 animate-spin rounded-full border-4 border-(--border) border-t-(--primary)" />
                         </div>
                     )}
 
-                    {sortedMeta.length > 0 && (
+                    {sortedMeta.length === 0 && (
+                        <>
+                            <div className="flex items-center gap-2">
+                                <label htmlFor="left-snapshot-select" className={labelClass}>
+                                    From:
+                                </label>
+                                <select id="left-snapshot-select" disabled className={`${selectClass} opacity-50`}>
+                                    <option>— no snapshots yet —</option>
+                                </select>
+                            </div>
+                            <div className="flex items-center gap-2">
+                                <label htmlFor="right-snapshot-select" className={labelClass}>
+                                    To:
+                                </label>
+                                <select id="right-snapshot-select" disabled className={`${selectClass} opacity-50`}>
+                                    <option value="current">Current Rosters</option>
+                                </select>
+                            </div>
+                            {currentRosterMembers.length > 0 && (
+                                <div className="flex items-center gap-2">
+                                    <label htmlFor="current-member-select" className={labelClass}>
+                                        Player:
+                                    </label>
+                                    <select
+                                        id="current-member-select"
+                                        value={selectedUserId ?? ''}
+                                        onChange={event_ => {
+                                            const id = event_.target.value || undefined;
+                                            setSelectedUserId(id);
+                                            if (id && members === undefined) void onLoadMembers();
+                                        }}
+                                        className={selectClass}>
+                                        <option value="">— select a player —</option>
+                                        {currentRosterMembers.map(m => (
+                                            <option key={m.userId} value={m.userId}>
+                                                {m.playerName}
+                                            </option>
+                                        ))}
+                                    </select>
+                                </div>
+                            )}
+                        </>
+                    )}
+
+                    {sortedMeta.length > 0 && !needsMigration && (
                         <>
                             <div className="flex items-center gap-2">
                                 <label htmlFor="left-snapshot-select" className={labelClass}>
@@ -615,28 +854,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                         <RaidTeamFilterDropdown teams={raidTeamFilterOptions} onToggleTeam={toggleRaidTeam} />
                     )}
 
-                    {sortedMeta.length === 0 && members !== undefined && (
-                        <div className="flex items-center gap-2">
-                            <label htmlFor="current-member-select" className={labelClass}>
-                                Player:
-                            </label>
-                            <select
-                                id="current-member-select"
-                                value={selectedUserId ?? ''}
-                                onChange={event_ => setSelectedUserId(event_.target.value || undefined)}
-                                className={selectClass}>
-                                <option value="">— select a player —</option>
-                                {members
-                                    .filter(id => memberStates.get(id)?.status === 'success')
-                                    .map(id => (
-                                        <option key={id} value={id}>
-                                            {getPlayerName(id, memberStates)}
-                                        </option>
-                                    ))}
-                            </select>
-                        </div>
-                    )}
-
+                    {/* Comparison mode: player picker from intersection */}
                     {membersInComparison.length > 0 && (
                         <div className="flex items-center gap-2">
                             <label htmlFor="history-member-select" className={labelClass}>
@@ -645,27 +863,18 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                             <select
                                 id="history-member-select"
                                 value={selectedUserId ?? ''}
-                                onChange={event_ => setSelectedUserId(event_.target.value || undefined)}
+                                onChange={event_ => handlePlayerSelect(event_.target.value || undefined)}
                                 className={selectClass}>
                                 <option value="">— select a player —</option>
-                                {membersInComparison.map(({ userId, isNew }) => (
+                                {membersInComparison.map(userId => (
                                     <option key={userId} value={userId}>
-                                        {getPlayerName(userId, memberStates)}
-                                        {isNew ? ' (new)' : ''}
+                                        {getPlayerName(userId, memberStates, currentRosterMembers)}
                                     </option>
                                 ))}
                             </select>
                         </div>
                     )}
                 </div>
-            )}
-
-            {isNoHistoryMode && (
-                <p className="text-sm text-gray-500 dark:text-gray-400">
-                    {members === undefined
-                        ? 'No roster snapshots yet. Load members above to view current rosters.'
-                        : 'No roster snapshots yet. Save a snapshot to enable roster comparison.'}
-                </p>
             )}
 
             {/* Diff view */}
@@ -723,79 +932,56 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                     );
                 })()}
 
-            {/* No-history fallback: show current roster for selected member */}
+            {/* No-snapshot mode: loading indicator */}
+            {isNoHistoryMode && selectedUserId !== undefined && selectedMemberState?.status === 'loading' && (
+                <div className="flex items-center gap-2 text-sm text-(--soft-fg)">
+                    <span className="inline-block size-4 animate-spin rounded-full border-2 border-(--border) border-t-(--primary)" />
+                    Loading roster…
+                </div>
+            )}
+
+            {/* No-snapshot mode: current roster for selected player */}
             {filteredNonDiffEntries !== undefined && (
                 <div className="flex flex-wrap gap-2">
-                    {/* Similar to the diff case, we need to filter currentUnits to show only characters and mows
-                    from the selected raid teams (if any; if nothing selected, we show everything). */}
-                    {filteredNonDiffEntries.map(({ char, mow }) =>
-                        char ? (
-                            <RosterSnapshotsUnit
-                                key={char.id}
-                                char={char}
-                                showShards={SHOW_ALL}
-                                showMythicShards={SHOW_ALL}
-                                showXpLevel={SHOW_ALL}
-                                showAbilities={SHOW_ALL}
-                                showEquipment={SHOW_ALL}
-                                showTooltip
-                                isEnabled
-                            />
-                        ) : mow ? (
-                            <RosterSnapshotsUnit
-                                key={mow.id}
-                                mow={mow}
-                                showShards={SHOW_ALL}
-                                showMythicShards={SHOW_ALL}
-                                showXpLevel={SHOW_ALL}
-                                showAbilities={SHOW_ALL}
-                                showEquipment={SHOW_ALL}
-                                showTooltip
-                                isEnabled
-                            />
-                        ) : undefined
-                    )}
+                    {filteredNonDiffEntries
+                        .toSorted((a, b) => b.power - a.power)
+                        .map(({ char, mow }) =>
+                            char ? (
+                                <RosterSnapshotsUnit
+                                    key={char.id}
+                                    char={char}
+                                    showShards={SHOW_ALL}
+                                    showMythicShards={SHOW_ALL}
+                                    showXpLevel={SHOW_ALL}
+                                    showAbilities={SHOW_ALL}
+                                    showEquipment={SHOW_ALL}
+                                    showTooltip
+                                    isEnabled
+                                />
+                            ) : mow ? (
+                                <RosterSnapshotsUnit
+                                    key={mow.id}
+                                    mow={mow}
+                                    showShards={SHOW_ALL}
+                                    showMythicShards={SHOW_ALL}
+                                    showXpLevel={SHOW_ALL}
+                                    showAbilities={SHOW_ALL}
+                                    showEquipment={SHOW_ALL}
+                                    showTooltip
+                                    isEnabled
+                                />
+                            ) : undefined
+                        )}
                 </div>
             )}
 
             {/* Save Snapshot dialog */}
-            <Dialog open={saveDialogOpen} onClose={closeSaveDialog} maxWidth="sm" fullWidth>
-                <DialogTitle>Save Snapshot</DialogTitle>
-                <DialogContent>
-                    <div className="flex flex-col gap-4 pt-2">
-                        {approachingLimit && (
-                            <p className="text-sm text-amber-600 dark:text-amber-400">
-                                You have {snapshotMeta?.length ?? 0}/{maxSnapshots} snapshots. This is the last slot
-                                available.
-                            </p>
-                        )}
-                        <div className="flex flex-col gap-1">
-                            <label htmlFor="snapshot-name-input" className={labelClass}>
-                                Snapshot Name
-                            </label>
-                            <input
-                                id="snapshot-name-input"
-                                type="text"
-                                value={snapshotName}
-                                onChange={event_ => setSnapshotName(event_.target.value)}
-                                className="rounded border border-gray-300 px-3 py-1.5 text-sm focus:border-blue-500 focus:outline-none dark:border-gray-600 dark:bg-gray-900 dark:text-gray-100"
-                                autoFocus
-                            />
-                            {isDuplicateName && (
-                                <p className="text-xs text-red-500">A snapshot with this name already exists.</p>
-                            )}
-                        </div>
-                        {saveError && <p className="text-sm text-red-600 dark:text-red-400">{saveError}</p>}
-                    </div>
-                </DialogContent>
-                <DialogActions>
-                    <Button intent="secondary" onPress={closeSaveDialog}>
-                        Cancel
-                    </Button>
-                    <Button intent="primary" isDisabled={!isNameValid || isSaving} onPress={handleSaveSnapshot}>
-                        {isSaving ? 'Saving…' : 'Save'}
-                    </Button>
-                </DialogActions>
+            <Dialog
+                open={saveStage !== 'closed'}
+                onClose={saveStage === 'naming' ? closeSaveDialog : undefined}
+                maxWidth="sm"
+                fullWidth>
+                {renderSaveDialogContent()}
             </Dialog>
 
             {/* Delete Snapshot dialog */}
@@ -803,10 +989,8 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 <DialogTitle>Delete Snapshot</DialogTitle>
                 <DialogContent>
                     <div className="flex flex-col gap-3 pt-2">
-                        <p className="text-sm text-gray-600 dark:text-gray-400">
-                            Select a snapshot to permanently delete:
-                        </p>
-                        <div className="max-h-64 overflow-y-auto rounded border border-gray-200 dark:border-gray-700">
+                        <p className="text-sm text-(--soft-fg)">Select a snapshot to permanently delete:</p>
+                        <div className="max-h-64 overflow-y-auto rounded border border-(--border)">
                             {sortedMeta.map(snapshot => (
                                 <button
                                     key={snapshot.snapshotId}
@@ -815,14 +999,14 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                                     className={[
                                         'w-full px-3 py-2 text-left text-sm transition-colors',
                                         selectedSnapshotToDelete === snapshot.snapshotId
-                                            ? 'bg-blue-50 font-medium text-blue-700 dark:bg-blue-950 dark:text-blue-300'
-                                            : 'hover:bg-gray-50 dark:hover:bg-gray-800',
+                                            ? 'bg-(--primary)/10 font-medium text-(--primary)'
+                                            : 'hover:bg-(--neutral)',
                                     ].join(' ')}>
                                     {snapshot.name}
                                 </button>
                             ))}
                         </div>
-                        {deleteError && <p className="text-sm text-red-600 dark:text-red-400">{deleteError}</p>}
+                        {deleteError && <p className="text-danger text-sm">{deleteError}</p>}
                     </div>
                 </DialogContent>
                 <DialogActions>
