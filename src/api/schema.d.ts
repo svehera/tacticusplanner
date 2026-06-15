@@ -55,6 +55,23 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/roster/member': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns live unit roster for a single guild member, resolved via PlayerOverrides or PlayerGuildData. */
+        get: operations['getGuildRosterMember'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/guild/roster/snapshots': {
         parameters: {
             query?: never;
@@ -62,7 +79,7 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Lists roster snapshot metadata (no member data). Includes atCapacity flag so the frontend can disable the add-snapshot button. */
+        /** Lists snapshot metadata with per-snapshot player ID lists and current-roster members. One call drives the entire diff-UI from/to/player picker — no subsequent calls needed until the leader selects a player. */
         get: operations['getGuildRosterSnapshots'];
         put?: never;
         post?: never;
@@ -79,12 +96,46 @@ export interface paths {
             path?: never;
             cookie?: never;
         };
-        /** Returns a single roster snapshot with its full member list, filtered to current guild members. */
+        /** Returns snapshot metadata only (id, name, createdAt). Character data is no longer returned here — use GET /guild/roster/player-chain?userId={id} instead. */
         get: operations['getGuildRosterSnapshot'];
         put?: never;
         post?: never;
-        /** Deletes a roster snapshot by its ID. */
+        /** Deletes a roster snapshot by its ID, including all GuildSnapshotPlayerIndex entries and removes the entry from each player's GuildPlayerRosterChain. */
         delete: operations['deleteGuildRosterSnapshot'];
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/roster/player-chain': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns the full per-player delta chain for a single guild member, oldest entry first. The base entry (index 0) contains the player's full character list; each subsequent entry is a delta relative to the previous. Call this once after the leader selects a player in the diff UI — the client applies the chain client-side to reconstruct state at any two snapshots. */
+        get: operations['getGuildRosterPlayerChain'];
+        put?: never;
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/roster/migrate': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** One-time idempotent migration. Reads existing GuildRosterSnapshot.Members blobs and populates GuildSnapshotPlayerIndex and GuildPlayerRosterChain for any snapshot not yet migrated. Safe to call multiple times. The leader should trigger this once from the roster snapshots page. */
+        post: operations['postGuildRosterMigrate'];
+        delete?: never;
         options?: never;
         head?: never;
         patch?: never;
@@ -455,6 +506,8 @@ export interface components {
             snapshots: components['schemas']['RosterSnapshotInfo'][];
             atCapacity: boolean;
             maxSnapshots: number;
+            /** @description Guild members who currently have a shared API key (via PlayerGuildData opt-in or PlayerOverrides). These are the players selectable when 'current rosters' is the 'to' point. */
+            currentRosterMembers: components['schemas']['CurrentRosterMember'][];
         };
         RosterSnapshotInfo: {
             /** Format: uuid */
@@ -462,20 +515,40 @@ export interface components {
             name: string;
             /** Format: date-time */
             createdAt: string;
+            /** @description User IDs of players who have a chain entry for this snapshot. Populated from GuildSnapshotPlayerIndex — no character data read. */
+            memberIds: string[];
         };
-        RosterSnapshotDetail: {
+        CurrentRosterMember: {
+            userId: string;
+            playerName: string;
+        };
+        /** @description Snapshot metadata only. Character data is accessed via GET /guild/roster/player-chain. */
+        RosterSnapshotMeta: {
             /** Format: uuid */
             snapshotId: string;
             name: string;
             /** Format: date-time */
             createdAt: string;
-            members: components['schemas']['RosterSnapshotMember'][];
         };
-        /** @description Core userId plus any extra properties stored via JsonExtensionData */
+        /** @description Core userId plus any extra properties stored via JsonExtensionData (delta fields vary by client implementation). */
         RosterSnapshotMember: {
             userId: string;
         } & {
             [key: string]: unknown;
+        };
+        /** @description One entry in a player's delta chain. Index 0 is the base (full character list); subsequent entries are deltas relative to the previous entry. SnapshotId/name/createdAt mirror the parent GuildRosterSnapshot row. */
+        PlayerRosterChainEntry: {
+            /** Format: uuid */
+            snapshotId: string;
+            name: string;
+            /** Format: date-time */
+            createdAt: string;
+            memberData?: components['schemas']['RosterSnapshotMember'];
+        };
+        PlayerRosterChainResponse: {
+            userId: string;
+            /** @description Chain entries in chronological order (oldest/base first). Empty array if no snapshots exist for this player. */
+            chain: components['schemas']['PlayerRosterChainEntry'][];
         };
         SeasonPlayerPerformanceIndex: {
             /** @description Null when the caller is a keyless member (only their own entry is returned). */
@@ -520,6 +593,30 @@ export interface components {
             guildTag?: string;
             /** @description One entry per aggregated season, newest first. For the member endpoint, each season's players list is filtered to the requesting member only. */
             seasons?: components['schemas']['SeasonTokenUsage'][];
+        };
+        /** @description Wall-clock durations (milliseconds) for each I/O phase of the request. All values are end-to-end wall time inclusive of connection-pool wait, network RTT, query execution, and EF materialization. */
+        GuildRosterMemberTimings: {
+            /** @description Total handler wall time. */
+            totalMs: number;
+            /** @description GuildRequestHelper.GetGuildAsync — JWT validation, SQL user-row lookup, and Tacticus guild API call (skipped on cache hit). */
+            getGuildMs: number;
+            /** @description SQL query for the GuildData row (used to resolve PlayerOverrides). */
+            sqlGuildDataMs: number;
+            /** @description SQL query for the PlayerGuildData row. Null when the override path was taken instead. */
+            sqlPlayerDataMs?: number | null;
+            /** @description Tacticus API call to fetch the player's live unit roster. */
+            tacticusPlayerApiMs: number;
+        };
+        GuildRosterMemberResponse: {
+            /**
+             * @description How the member's API key was resolved: 'override' = via PlayerOverrides on GuildData, 'tacticusApi' = via PlayerGuildData opt-in.
+             * @enum {string}
+             */
+            source: 'override' | 'tacticusApi';
+            playerName: string;
+            /** @description Live unit roster as returned by the Tacticus API. */
+            units: Record<string, never>[];
+            timings: components['schemas']['GuildRosterMemberTimings'];
         };
     };
     responses: {
@@ -640,6 +737,34 @@ export interface operations {
             502: components['responses']['TacticusApiError'];
         };
     };
+    getGuildRosterMember: {
+        parameters: {
+            query: {
+                /** @description Tacticus user ID of the guild member to fetch. */
+                userId: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GuildRosterMemberResponse'];
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
     getGuildRosterSnapshots: {
         parameters: {
             query?: never;
@@ -679,7 +804,7 @@ export interface operations {
                     [name: string]: unknown;
                 };
                 content: {
-                    'application/json': components['schemas']['RosterSnapshotDetail'];
+                    'application/json': components['schemas']['RosterSnapshotMeta'];
                 };
             };
             401: components['responses']['Unauthorized'];
@@ -713,6 +838,60 @@ export interface operations {
             };
             401: components['responses']['Unauthorized'];
             404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getGuildRosterPlayerChain: {
+        parameters: {
+            query: {
+                /** @description Tacticus user ID of the guild member. */
+                userId: string;
+            };
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['PlayerRosterChainResponse'];
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    postGuildRosterMigrate: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description Migration result */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        /** @description Number of snapshots whose data was migrated into the new tables. */
+                        migrated: number;
+                        /** @description Number of snapshots already present in GuildSnapshotPlayerIndex (idempotency — not re-processed). */
+                        skipped: number;
+                    };
+                };
+            };
+            401: components['responses']['Unauthorized'];
             502: components['responses']['TacticusApiError'];
         };
     };
