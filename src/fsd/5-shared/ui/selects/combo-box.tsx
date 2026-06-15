@@ -69,7 +69,7 @@ export const ComboBox = <T,>({
                         disabled={disabled}
                     />
 
-                    <ComboboxButton className="absolute inset-y-0 right-0 flex items-center pr-2">
+                    <ComboboxButton tabIndex={-1} className="absolute inset-y-0 right-0 flex items-center pr-2">
                         <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
                     </ComboboxButton>
 

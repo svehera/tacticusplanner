@@ -117,7 +117,7 @@ export const ComboBoxMulti = <T,>({
                                         <X className="h-3.5 w-3.5" />
                                     </span>
                                 )}
-                                <ComboboxButton className="flex items-center">
+                                <ComboboxButton tabIndex={-1} className="flex items-center">
                                     <ChevronsUpDown className="h-4 w-4 text-(--soft-fg)" />
                                 </ComboboxButton>
                             </div>
