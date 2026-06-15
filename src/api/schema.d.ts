@@ -55,6 +55,27 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/roster/history': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /**
+         * DEPRECATED. Returns the legacy roster snapshot list (GuildData.RosterData blob) plus sequenceNumber. Used by the old save-snapshot flow. Replace with GET /guild/roster/snapshots, which now includes sequenceNumber and the per-snapshot memberIds needed for the new diff UI. Will be removed once the CUT-AWAY write path is dropped.
+         * @deprecated
+         */
+        get: operations['getGuildRosterHistory'];
+        /** Saves a new roster snapshot. sequenceNumber must match the value returned by GET /guild/roster/snapshots. Now also writes to GuildSnapshotPlayerIndex and GuildPlayerRosterChain — no protocol change required from the client. */
+        put: operations['putGuildRosterHistory'];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/guild/roster/member': {
         parameters: {
             query?: never;
@@ -508,6 +529,8 @@ export interface components {
             maxSnapshots: number;
             /** @description Guild members who currently have a shared API key (via PlayerGuildData opt-in or PlayerOverrides). These are the players selectable when 'current rosters' is the 'to' point. */
             currentRosterMembers: components['schemas']['CurrentRosterMember'][];
+            /** @description Current RosterSequenceNumber from GuildData. Must be sent back unmodified as sequenceNumber in PUT /guild/roster/history when saving a new snapshot. */
+            sequenceNumber: number;
         };
         RosterSnapshotInfo: {
             /** Format: uuid */
@@ -734,6 +757,69 @@ export interface operations {
             };
             401: components['responses']['Unauthorized'];
             404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getGuildRosterHistory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        sequenceNumber: number;
+                        snapshots: components['schemas']['RosterSnapshotMember'][];
+                    };
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    putGuildRosterHistory: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                'application/json': {
+                    /** @description Must match the sequenceNumber from GET /guild/roster/snapshots. */
+                    sequenceNumber: number;
+                    snapshot: {
+                        name: string;
+                        /** @description Full member list for the base snapshot; delta-only entries for subsequent snapshots. */
+                        members: components['schemas']['RosterSnapshotMember'][];
+                    };
+                };
+            };
+        };
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        /** @description Updated sequence number after save. */
+                        sequenceNumber: number;
+                    };
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
             502: components['responses']['TacticusApiError'];
         };
     };
