@@ -130,8 +130,6 @@ export interface GuildRosterSnapshotsMetaResponse {
     atCapacity: boolean;
     maxSnapshots: number;
     currentRosterMembers: CurrentRosterMember[];
-    /** Added in backend addendum; optional until schema is regenerated. */
-    sequenceNumber?: number;
 }
 
 export const getGuildRosterSnapshotsMetaApi = () =>
@@ -175,8 +173,8 @@ export const postGuildRosterMigrateApi = () =>
     makeApiCall<{ migrated: number; skipped: number }>('POST', 'guild/roster/migrate');
 
 // ---------------------------------------------------------------------------
-// PUT /guild/roster/history  (write path — unchanged format)
+// PUT /guild/roster/history
 // ---------------------------------------------------------------------------
 
-export const postGuildRosterSnapshotApi = (sequenceNumber: number, snapshot: GuildRosterSnapshot) =>
-    makeApiCall<{ sequenceNumber: number }>('PUT', 'guild/roster/history', { sequenceNumber, snapshot });
+export const postGuildRosterSnapshotApi = (snapshot: GuildRosterSnapshot) =>
+    makeApiCall<{ snapshotId: string }>('PUT', 'guild/roster/history', { snapshot });
