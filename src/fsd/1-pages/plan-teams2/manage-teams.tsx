@@ -418,14 +418,14 @@ export const ManageTeams = () => {
                 <RosterSnapshotsMagnificationSlider zoom={zoom} setZoom={setZoom} />
                 <LazyTooltip title={teams.length >= MAX_TEAMS ? `Maximum of ${MAX_TEAMS} teams reached` : undefined}>
                     <Button intent="primary" onPress={onAdd} isDisabled={teams.length >= MAX_TEAMS}>
-                        <Plus className="size-4" data-slot="icon" />
+                        <Plus data-slot="icon" />
                         Add New Team
                     </Button>
                 </LazyTooltip>
                 {legacyTeams.length > 0 && teams.length < MAX_TEAMS && (
                     <>
                         <Button appearance="outline" intent="success" onPress={onImport}>
-                            <Users2 className="size-4" data-slot="icon" />
+                            <Users2 data-slot="icon" />
                             Import Legacy Team
                         </Button>
 
@@ -501,7 +501,7 @@ export const ManageTeams = () => {
                                 <div className="flex gap-1">
                                     <LazyTooltip title="Edit Team">
                                         <Button size="square-petite" appearance="plain" onPress={() => onEdit(team)}>
-                                            <Pencil className="size-4" data-slot="icon" />
+                                            <Pencil data-slot="icon" />
                                         </Button>
                                     </LazyTooltip>
                                     <LazyTooltip title="Delete Team">
@@ -510,7 +510,7 @@ export const ManageTeams = () => {
                                             appearance="plain"
                                             intent="danger"
                                             onPress={() => onDelete(team)}>
-                                            <Trash2 className="size-4" data-slot="icon" />
+                                            <Trash2 data-slot="icon" />
                                         </Button>
                                     </LazyTooltip>
                                 </div>

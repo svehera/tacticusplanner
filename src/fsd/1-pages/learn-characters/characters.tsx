@@ -373,9 +373,9 @@ export const LearnCharacters = () => {
                         className="flex flex-1 items-center justify-end gap-3"
                         onClick={event_ => event_.stopPropagation()}>
                         <Button
-                            appearance="outline"
+                            appearance="plain"
                             intent="warning"
-                            size="extra-small"
+                            size="small"
                             isDisabled={!hasAnyFilter}
                             onPress={resetFilters}>
                             Clear

@@ -92,14 +92,14 @@ export const ComboBoxMulti = <T,>({
                     <div
                         className={cn(
                             triggerDisabled(triggerMulti, disabled),
-                            'flex-col items-stretch gap-1.5 pr-3',
+                            'flex-col items-stretch justify-center gap-1.5 pr-3',
                             'focus-within:ring-2 focus-within:ring-(--ring)'
                         )}>
                         {value.length > 0 && displayRenderValue(value)}
 
                         <div className="flex items-center gap-1">
                             <ComboboxInput
-                                className="flex-1 bg-transparent text-sm outline-none placeholder:text-(--soft-fg)"
+                                className="flex-1 bg-transparent outline-none placeholder:text-(--soft-fg)"
                                 onChange={event_ => setQuery(event_.target.value)}
                                 placeholder={value.length === 0 ? placeholder : 'Type to filter…'}
                                 disabled={disabled}

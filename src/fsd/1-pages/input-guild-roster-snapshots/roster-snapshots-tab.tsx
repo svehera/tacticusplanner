@@ -1010,7 +1010,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                     </div>
                 </DialogContent>
                 <DialogActions>
-                    <Button intent="secondary" onPress={closeDeleteDialog}>
+                    <Button intent="secondary" appearance="plain" onPress={closeDeleteDialog}>
                         Cancel
                     </Button>
                     <Button

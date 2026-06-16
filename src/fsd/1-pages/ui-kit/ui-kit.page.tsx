@@ -25,7 +25,9 @@ import {
     Mail,
     Megaphone,
     Menu,
+    Pencil,
     RefreshCw,
+    RotateCcw,
     Search,
     Settings,
     Trash2,
@@ -51,6 +53,7 @@ import { Badge } from '@/fsd/5-shared/ui/badge';
 import { Card, CardContent, CardFooter, CardHeader, CardTitle } from '@/fsd/5-shared/ui/card';
 import { MiscIcon, RarityIcon, RankIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { TextField } from '@/fsd/5-shared/ui/input/text-field';
+import { LinkButton } from '@/fsd/5-shared/ui/link';
 import { Loader } from '@/fsd/5-shared/ui/loader';
 import { Dialog } from '@/fsd/5-shared/ui/modal/dialog';
 import { Modal } from '@/fsd/5-shared/ui/modal/modal';
@@ -2225,6 +2228,23 @@ export const UiKitPage = () => {
                         </Button>
                     </Row>
                 </Group>
+                <Group label="Hierarchy pattern (use this in dialogs & forms)">
+                    <Row>
+                        <Button intent="primary">Save</Button>
+                        <Button intent="secondary" appearance="outline">
+                            Preview
+                        </Button>
+                        <Button intent="secondary" appearance="plain">
+                            Cancel
+                        </Button>
+                    </Row>
+                    <Row>
+                        <Button intent="danger">Delete</Button>
+                        <Button intent="secondary" appearance="plain">
+                            Cancel
+                        </Button>
+                    </Row>
+                </Group>
                 <Group label="Sizes">
                     <Row className="items-end">
                         <Button size="extra-small">XS</Button>
@@ -2261,65 +2281,84 @@ export const UiKitPage = () => {
                 </Group>
                 <Group label="Goal card actions">
                     <Row>
-                        <Button size="square-petite" appearance="plain" intent="secondary">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            className="[--btn-accent:var(--soft-fg)]"
+                            aria-label="Increase Goal Priority">
                             <ArrowUp data-slot="icon" />
                         </Button>
-                        <Button size="square-petite" appearance="plain" intent="secondary">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            className="[--btn-accent:var(--soft-fg)]"
+                            aria-label="Edit Goal">
+                            <Pencil data-slot="icon" />
+                        </Button>
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            className="[--btn-accent:var(--soft-fg)]"
+                            aria-label="Decrease Goal Priority">
                             <ArrowDown data-slot="icon" />
                         </Button>
-                        <Button size="square-petite" appearance="plain" intent="secondary">
-                            <Edit data-slot="icon" />
-                        </Button>
-                        <Button size="square-petite" appearance="plain" intent="danger">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            className="[--btn-accent:var(--soft-fg)] data-hovered:[--btn-accent:var(--danger)]"
+                            aria-label="Delete Goal">
                             <Trash2 data-slot="icon" />
-                        </Button>
-                        <Separator orientation="vertical" className="h-8" />
-                        <Button size="small" intent="success" appearance="outline">
-                            <CheckCircle2 data-slot="icon" />
-                            Active
-                        </Button>
-                        <Button size="small" intent="danger" appearance="outline">
-                            <X data-slot="icon" />
-                            Inactive
-                        </Button>
-                        <Separator orientation="vertical" className="h-8" />
-                        <Button size="small" intent="secondary" appearance="outline">
-                            <Link2 data-slot="icon" />
-                            Go to Raids Table
                         </Button>
                     </Row>
                 </Group>
-                <Group label="Goals / Raids header">
+                <Group label="Goals toolbar (two solids — nav + create)">
                     <Row>
-                        <Button size="small" intent="primary">
+                        <LinkButton size="small" href="/plan/dailyRaids">
                             <Link2 data-slot="icon" />
-                            Go to Goals
-                        </Button>
-                        <Button size="small" intent="secondary" appearance="outline">
+                            Go to Raids
+                        </LinkButton>
+                        <Button size="small">Set Goal</Button>
+                        <Button intent="secondary" appearance="outline" size="small">
                             <Settings data-slot="icon" />
                             Raids Settings
                         </Button>
-                        <Button size="small" intent="primary">
+                        <Button intent="secondary" appearance="outline" size="small">
                             <RefreshCw data-slot="icon" />
                             Sync
                         </Button>
-                        <Button size="small" intent="success">
-                            <RefreshCw data-slot="icon" />
-                            Refresh
-                        </Button>
-                        <Button size="small" intent="danger">
-                            <X data-slot="icon" />
-                            Reset day
-                        </Button>
-                        <Button size="small" intent="danger">
+                        <Button appearance="outline" size="small" intent="danger">
                             <Trash2 data-slot="icon" />
-                            Delete all
+                            Delete All
                         </Button>
                     </Row>
                 </Group>
-                <Group label="LRE dialogs">
+                <Group label="Raids toolbar (solid = cross-page nav)">
                     <Row>
-                        <Button size="small" intent="primary" appearance="plain">
+                        <LinkButton size="small" href="/plan/goals">
+                            <Link2 data-slot="icon" />
+                            Go to Goals
+                        </LinkButton>
+                        <Button intent="secondary" appearance="outline" size="small">
+                            <Settings data-slot="icon" />
+                            Raids Settings
+                        </Button>
+                        <Button intent="secondary" appearance="outline" size="small">
+                            <RefreshCw data-slot="icon" />
+                            Sync
+                        </Button>
+                        <Button intent="secondary" appearance="outline" size="small">
+                            <RefreshCw data-slot="icon" />
+                            Refresh
+                        </Button>
+                        <Button appearance="outline" size="small" intent="danger">
+                            <RotateCcw data-slot="icon" />
+                            Reset day
+                        </Button>
+                    </Row>
+                </Group>
+                <Group label="LRE dialogs (migration target)">
+                    <Row>
+                        <Button size="small" intent="primary">
                             Save
                         </Button>
                         <Button size="small" intent="secondary" appearance="plain">
@@ -2331,7 +2370,7 @@ export const UiKitPage = () => {
                         <Button size="small" intent="secondary" appearance="plain">
                             Clear all
                         </Button>
-                        <Button size="small" intent="primary" appearance="plain">
+                        <Button size="small" intent="secondary" appearance="outline">
                             Add top 5
                         </Button>
                     </Row>
