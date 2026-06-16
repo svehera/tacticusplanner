@@ -51,7 +51,6 @@ const cache = {
     snapshotMeta: undefined as RosterSnapshotInfo[] | undefined,
     atCapacity: false,
     maxSnapshots: 0,
-    sequenceNumber: 0,
     currentRosterMembers: [] as CurrentRosterMember[],
     playerChainCache: new Map<string, PlayerRosterChainResponse>(),
     metaFetched: false,
@@ -61,23 +60,17 @@ function cacheSetMeta(
     snapshots: RosterSnapshotInfo[],
     atCapacity: boolean,
     maxSnapshots: number,
-    sequenceNumber: number,
     currentRosterMembers: CurrentRosterMember[]
 ) {
     cache.snapshotMeta = snapshots;
     cache.atCapacity = atCapacity;
     cache.maxSnapshots = maxSnapshots;
-    cache.sequenceNumber = sequenceNumber;
     cache.currentRosterMembers = currentRosterMembers;
     cache.metaFetched = true;
 }
 
 function cacheSetPlayerChainCache(map: Map<string, PlayerRosterChainResponse>) {
     cache.playerChainCache = map;
-}
-
-function cacheSetSequenceNumber(n: number) {
-    cache.sequenceNumber = n;
 }
 
 function cacheSetAfterDelete(
@@ -130,7 +123,6 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const [snapshotMeta, setSnapshotMeta] = useState<RosterSnapshotInfo[] | undefined>(cache.snapshotMeta);
     const [atCapacity, setAtCapacity] = useState(cache.atCapacity);
     const [maxSnapshots, setMaxSnapshots] = useState(cache.maxSnapshots);
-    const [sequenceNumber, setSequenceNumber] = useState(cache.sequenceNumber);
     const [currentRosterMembers, setCurrentRosterMembers] = useState<CurrentRosterMember[]>(cache.currentRosterMembers);
     const [isLoadingMeta, setIsLoadingMeta] = useState(false);
     const [metaError, setMetaError] = useState<string | undefined>();
@@ -179,12 +171,10 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         if (error || !data) {
             setMetaError(typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to load snapshots'));
         } else {
-            const seq = data.sequenceNumber ?? 0;
-            cacheSetMeta(data.snapshots, data.atCapacity, data.maxSnapshots, seq, data.currentRosterMembers);
+            cacheSetMeta(data.snapshots, data.atCapacity, data.maxSnapshots, data.currentRosterMembers);
             setSnapshotMeta(data.snapshots);
             setAtCapacity(data.atCapacity);
             setMaxSnapshots(data.maxSnapshots);
-            setSequenceNumber(seq);
             setCurrentRosterMembers(data.currentRosterMembers);
         }
         setIsLoadingMeta(false);
@@ -461,23 +451,13 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
 
         // Step 4: POST
         setSaveStage('saving');
-        const { data, error } = await postGuildRosterSnapshotApi(sequenceNumber, newSnapshot);
+        const { error } = await postGuildRosterSnapshotApi(newSnapshot);
 
         if (error) {
             const message = typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to save');
-            const isSequenceConflict = message.toLowerCase().includes('sequence');
-            setSaveError(
-                isSequenceConflict
-                    ? 'Another guild member saved a snapshot while you were working. Please refresh and try again.'
-                    : message
-            );
+            setSaveError(message);
             setSaveStage('error');
             return;
-        }
-
-        if (data?.sequenceNumber !== undefined) {
-            cacheSetSequenceNumber(data.sequenceNumber);
-            setSequenceNumber(data.sequenceNumber);
         }
 
         setSaveStage('closed');

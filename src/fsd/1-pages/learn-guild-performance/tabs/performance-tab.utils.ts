@@ -627,8 +627,10 @@ export interface UnitRow {
     guildMax: number;
     avgDiffPct: number;
     maxDiffPct: number;
-    /** All damage values dealt by the selected player against this unit (for distribution view). */
-    playerHits: number[];
+    /** Non-kill damage values dealt by the selected player against this unit. */
+    playerNonKillHits: number[];
+    /** Kill-blow damage values. Empty array when excludeKills=true. */
+    playerKillHits: number[];
 }
 
 export function buildPlayerView(
@@ -670,21 +672,21 @@ export function buildPlayerView(
         }
         const parentBossMaxHp = isBoss ? unitMaxHp : (bossHpByPrefix.get(bossPrefix) ?? unitMaxHp);
 
-        // Player hits — always kill-inclusive (the distribution & max should show every real hit)
-        const playerHitsAll: number[] = [];
-        const playerHitsAvg: number[] = [];
+        const playerKillHits: number[] = [];
+        const playerNonKillHits: number[] = [];
         for (const entry of groupEntries) {
             if (entry.userId !== userId) continue;
-            playerHitsAll.push(entry.damageDealt);
-            if (!excludeKills || notKill(entry)) playerHitsAvg.push(entry.damageDealt);
+            if (notKill(entry)) playerNonKillHits.push(entry.damageDealt);
+            else playerKillHits.push(entry.damageDealt);
         }
-        if (playerHitsAll.length === 0) continue;
+        if (playerKillHits.length === 0 && playerNonKillHits.length === 0) continue;
+        if (excludeKills && playerNonKillHits.length === 0) continue;
 
-        const guildAvgSource = excludeKills ? groupEntries.filter(entry => notKill(entry)) : groupEntries;
-        const guildAvgStats = aggregate(guildAvgSource.map(entry => entry.damageDealt));
-        const guildMaxStats = aggregate(groupEntries.map(entry => entry.damageDealt));
-        const playerAvgStats = aggregate(playerHitsAvg);
-        const playerMaxStats = aggregate(playerHitsAll);
+        const playerHitsForStats = excludeKills ? playerNonKillHits : [...playerNonKillHits, ...playerKillHits];
+        const guildSource = excludeKills ? groupEntries.filter(entry => notKill(entry)) : groupEntries;
+        const guildStats = aggregate(guildSource.map(entry => entry.damageDealt));
+        const playerAvgStats = aggregate(playerHitsForStats);
+        const playerMaxStats = aggregate(playerHitsForStats);
 
         rows.push({
             unitKey: key,
@@ -698,13 +700,12 @@ export function buildPlayerView(
             parentBossMaxHp,
             avg: playerAvgStats.avg,
             max: playerMaxStats.max,
-            guildAvg: guildAvgStats.avg,
-            guildMax: guildMaxStats.max,
-            avgDiffPct:
-                guildAvgStats.avg > 0 ? ((playerAvgStats.avg - guildAvgStats.avg) / guildAvgStats.avg) * 100 : 0,
-            maxDiffPct:
-                guildMaxStats.max > 0 ? ((playerMaxStats.max - guildMaxStats.max) / guildMaxStats.max) * 100 : 0,
-            playerHits: playerHitsAll,
+            guildAvg: guildStats.avg,
+            guildMax: guildStats.max,
+            avgDiffPct: guildStats.avg > 0 ? ((playerAvgStats.avg - guildStats.avg) / guildStats.avg) * 100 : 0,
+            maxDiffPct: guildStats.max > 0 ? ((playerMaxStats.max - guildStats.max) / guildStats.max) * 100 : 0,
+            playerNonKillHits,
+            playerKillHits: excludeKills ? [] : playerKillHits,
         });
     }
 
@@ -748,9 +749,9 @@ export function buildPlayerViewFromSummary(
         const bossPrefix = getBossPrefix(enemyId);
 
         if (excludeKills && player.nonKillHits.length === 0) continue;
-        const playerAvgSource = excludeKills ? player.nonKillHits : playerHitsAll;
-        const playerAvgStats = aggregate(playerAvgSource);
-        const playerMaxStats = aggregate(playerHitsAll);
+        const playerHitsForStats = excludeKills ? player.nonKillHits : playerHitsAll;
+        const playerAvgStats = aggregate(playerHitsForStats);
+        const playerMaxStats = aggregate(playerHitsForStats);
         const guildAvg = excludeKills ? entry.guildAverageDamageWithoutKills : entry.guildAverageDamage;
         const guildMax = entry.guildMaxDamage;
 
@@ -770,7 +771,8 @@ export function buildPlayerViewFromSummary(
             guildMax,
             avgDiffPct: guildAvg > 0 ? ((playerAvgStats.avg - guildAvg) / guildAvg) * 100 : 0,
             maxDiffPct: guildMax > 0 ? ((playerMaxStats.max - guildMax) / guildMax) * 100 : 0,
-            playerHits: playerHitsAll,
+            playerNonKillHits: player.nonKillHits,
+            playerKillHits: excludeKills ? [] : player.killHits,
         });
     }
 

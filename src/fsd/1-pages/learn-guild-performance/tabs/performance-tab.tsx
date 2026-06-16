@@ -193,15 +193,31 @@ function CenteredBar({ value, maxAbs }: { value: number; maxAbs: number }) {
     );
 }
 
-function DistributionRow({ hits, maxValue }: { hits: number[]; maxValue: number }) {
+function DistributionRow({
+    nonKillHits,
+    killHits,
+    maxValue,
+}: {
+    nonKillHits: number[];
+    killHits: number[];
+    maxValue: number;
+}) {
     return (
         <div className="relative h-4 w-full rounded-sm bg-gray-100 dark:bg-gray-800">
-            {hits.map((hit, index) => (
+            {nonKillHits.map((hit, index) => (
                 <div
-                    key={index}
+                    key={`nk-${index}`}
                     className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500 opacity-60"
                     style={{ left: maxValue > 0 ? `${(hit / maxValue) * 100}%` : '0%' }}
                     title={hit.toLocaleString()}
+                />
+            ))}
+            {killHits.map((hit, index) => (
+                <div
+                    key={`k-${index}`}
+                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500 opacity-60"
+                    style={{ left: maxValue > 0 ? `${(hit / maxValue) * 100}%` : '0%' }}
+                    title={`${hit.toLocaleString()} (kill)`}
                 />
             ))}
         </div>
@@ -213,9 +229,20 @@ function DistributionRow({ hits, maxValue }: { hits: number[]; maxValue: number 
  * the largest deviation in either direction (avg→0 below, or avg→playerMax above)
  * sets the half-width, so distance from centre is proportional to actual gap.
  */
-function CenteredDistributionRow({ hits, center }: { hits: number[]; center: number }) {
+function CenteredDistributionRow({
+    nonKillHits,
+    killHits,
+    center,
+}: {
+    nonKillHits: number[];
+    killHits: number[];
+    center: number;
+}) {
     let maxHit = 0;
-    for (const hit of hits) {
+    for (const hit of nonKillHits) {
+        if (hit > maxHit) maxHit = hit;
+    }
+    for (const hit of killHits) {
         if (hit > maxHit) maxHit = hit;
     }
     const maxDeviation = Math.max(center, maxHit - center);
@@ -230,12 +257,20 @@ function CenteredDistributionRow({ hits, center }: { hits: number[]; center: num
                 className="absolute inset-y-0 left-1/2 w-0.5 bg-amber-500"
                 title={`Guild avg: ${center.toLocaleString()}`}
             />
-            {hits.map((hit, index) => (
+            {nonKillHits.map((hit, index) => (
                 <div
-                    key={index}
+                    key={`nk-${index}`}
                     className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500 opacity-60"
                     style={{ left: `${posOf(hit)}%` }}
                     title={hit.toLocaleString()}
+                />
+            ))}
+            {killHits.map((hit, index) => (
+                <div
+                    key={`k-${index}`}
+                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500 opacity-60"
+                    style={{ left: `${posOf(hit)}%` }}
+                    title={`${hit.toLocaleString()} (kill)`}
                 />
             ))}
         </div>
@@ -658,8 +693,14 @@ function UnitDistributionTable({ rows }: { rows: UnitRow[] }) {
                         className="grid grid-cols-[10rem_3.5rem_1fr_3rem] items-center gap-2 text-xs">
                         <UnitLabel row={row} />
                         <span className="text-right text-gray-500 tabular-nums">{formatNumber(row.guildMax)}</span>
-                        <DistributionRow hits={row.playerHits} maxValue={row.guildMax} />
-                        <span className="text-right text-gray-500 tabular-nums">{row.playerHits.length}</span>
+                        <DistributionRow
+                            nonKillHits={row.playerNonKillHits}
+                            killHits={row.playerKillHits}
+                            maxValue={row.guildMax}
+                        />
+                        <span className="text-right text-gray-500 tabular-nums">
+                            {row.playerNonKillHits.length + row.playerKillHits.length}
+                        </span>
                     </div>
                 ))}
             </div>
@@ -682,8 +723,14 @@ function UnitDistributionVsAvgTable({ rows }: { rows: UnitRow[] }) {
                         className="grid grid-cols-[10rem_3.5rem_1fr_3rem] items-center gap-2 text-xs">
                         <UnitLabel row={row} />
                         <span className="text-right text-gray-500 tabular-nums">{formatNumber(row.guildAvg)}</span>
-                        <CenteredDistributionRow hits={row.playerHits} center={row.guildAvg} />
-                        <span className="text-right text-gray-500 tabular-nums">{row.playerHits.length}</span>
+                        <CenteredDistributionRow
+                            nonKillHits={row.playerNonKillHits}
+                            killHits={row.playerKillHits}
+                            center={row.guildAvg}
+                        />
+                        <span className="text-right text-gray-500 tabular-nums">
+                            {row.playerNonKillHits.length + row.playerKillHits.length}
+                        </span>
                     </div>
                 ))}
             </div>
