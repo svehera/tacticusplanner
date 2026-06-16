@@ -67,7 +67,7 @@ export interface paths {
          * @deprecated
          */
         get: operations['getGuildRosterHistory'];
-        /** Saves a new roster snapshot. sequenceNumber must match the value returned by GET /guild/roster/snapshots. Now also writes to GuildSnapshotPlayerIndex and GuildPlayerRosterChain — no protocol change required from the client. */
+        /** Saves a new roster snapshot. No longer writes to GuildData.RosterData or validates sequenceNumber — sequenceNumber in the request body is accepted but ignored. Response now returns snapshotId (UUID) instead of sequenceNumber. Max 10 snapshots per guild; duplicate names are rejected. */
         put: operations['putGuildRosterHistory'];
         post?: never;
         delete?: never;
@@ -795,11 +795,10 @@ export interface operations {
         requestBody: {
             content: {
                 'application/json': {
-                    /** @description Must match the sequenceNumber from GET /guild/roster/snapshots. */
-                    sequenceNumber: number;
+                    /** @description Ignored. Retained for backwards compatibility; may be omitted. */
+                    sequenceNumber?: number;
                     snapshot: {
                         name: string;
-                        /** @description Full member list for the base snapshot; delta-only entries for subsequent snapshots. */
                         members: components['schemas']['RosterSnapshotMember'][];
                     };
                 };
@@ -813,8 +812,11 @@ export interface operations {
                 };
                 content: {
                     'application/json': {
-                        /** @description Updated sequence number after save. */
-                        sequenceNumber: number;
+                        /**
+                         * Format: uuid
+                         * @description ID of the newly created snapshot.
+                         */
+                        snapshotId: string;
                     };
                 };
             };

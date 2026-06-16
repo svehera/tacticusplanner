@@ -7,4 +7,4 @@ export interface PageMetaContextValue {
     value?: PageMeta;
 }
 
-export const PageMetaContext = createContext<PageMetaContextValue>(undefined!);
+export const PageMetaContext = createContext<PageMetaContextValue>({ set: () => {} });
