@@ -40,7 +40,7 @@ export const GoalColorCodingToggle: React.FC<ColorCodingToggleProps> = ({ curren
 
     return (
         <AccessibleTooltip title={tooltipText}>
-            <Button onPress={handleClick} size="small" appearance="outline">
+            <Button intent="secondary" onPress={handleClick} size="small" appearance="outline">
                 {buttonLabel}
             </Button>
         </AccessibleTooltip>

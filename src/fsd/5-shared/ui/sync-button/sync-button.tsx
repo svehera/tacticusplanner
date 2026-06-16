@@ -9,6 +9,7 @@ import { useSyncWithTacticus } from '@/fsd/3-features/tacticus-integration/use-s
 interface SyncButtonProps {
     showText: boolean;
     appearance?: 'solid' | 'outline' | 'plain';
+    intent?: 'primary' | 'secondary' | 'success' | 'warning' | 'danger';
     className?: string;
     iconButton?: boolean;
     onAfterSync?: () => void;
@@ -17,6 +18,7 @@ interface SyncButtonProps {
 const SyncButton: React.FC<SyncButtonProps> = ({
     showText,
     appearance = 'solid',
+    intent = 'primary',
     className,
     iconButton,
     onAfterSync,
@@ -45,7 +47,7 @@ const SyncButton: React.FC<SyncButtonProps> = ({
     return (
         <Button
             size="small"
-            intent="primary"
+            intent={intent}
             appearance={appearance}
             aria-label="Sync with Tacticus"
             className={className}

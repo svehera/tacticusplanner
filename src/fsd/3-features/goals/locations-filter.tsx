@@ -157,7 +157,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
     return (
         <>
             <div className="relative inline-flex">
-                <Button size="square-petite" appearance="outline" onPress={handleClick}>
+                <Button intent="secondary" size="square-petite" appearance="outline" onPress={handleClick}>
                     <SlidersHorizontal data-slot="icon" />
                 </Button>
                 {filtersCount > 0 && (
@@ -304,15 +304,13 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     </div>
                 </PortalDialog.Body>
                 <PortalDialog.Footer>
-                    <Button appearance="outline" onPress={handleClose}>
+                    <Button intent="secondary" appearance="plain" onPress={handleClose}>
                         Close
                     </Button>
                     <Button appearance="outline" intent="danger" onPress={resetFilters}>
                         Reset
                     </Button>
-                    <Button appearance="outline" intent="success" onPress={saveChanges}>
-                        Apply
-                    </Button>
+                    <Button onPress={saveChanges}>Apply</Button>
                 </PortalDialog.Footer>
             </PortalDialog>
         </>

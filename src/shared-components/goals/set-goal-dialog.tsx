@@ -90,12 +90,13 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
     const disableNewGoals = useMemo(() => goals.length === goalsLimit, [goals.length]);
     const triggerReference = useRef<HTMLButtonElement | null>(null);
+    const dialogWasOpen = useRef(false);
 
-    // Return focus to the trigger button when the dialog closes
     useEffect(() => {
-        if (!openDialog) {
+        if (dialogWasOpen.current && !openDialog) {
             triggerReference.current?.focus();
         }
+        dialogWasOpen.current = openDialog;
     }, [openDialog]);
 
     const handleClose = (goal?: IPersonalGoal | undefined): void => {
@@ -551,7 +552,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 </PortalDialog.Body>
 
                 <PortalDialog.Footer>
-                    <Button appearance="outline" onPress={() => handleClose()}>
+                    <Button intent="secondary" appearance="plain" onPress={() => handleClose()}>
                         Cancel
                     </Button>
                     <Button

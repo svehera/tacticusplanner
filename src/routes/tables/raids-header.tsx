@@ -4,7 +4,7 @@ import { isMobile } from 'react-device-detect';
 
 import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
 
-import { Button, Separator } from '@/fsd/5-shared/ui';
+import { Button, PageToolbar, PageToolbarDivider } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { LinkButton } from '@/fsd/5-shared/ui/link';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
@@ -33,17 +33,17 @@ export const RaidsHeader: React.FC<Props> = ({
 
     return (
         <>
-            <div className="flex flex-wrap items-center gap-3">
+            <PageToolbar>
                 {/* Navigation */}
-                <LinkButton appearance="outline" size="small" href={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
+                <LinkButton size="small" href={isMobile ? '/mobile/plan/goals' : '/plan/goals'}>
                     <Link2 data-slot="icon" />
                     Go to Goals
                 </LinkButton>
 
-                <Separator orientation="vertical" className="mx-1 h-6" />
+                <PageToolbarDivider />
 
                 {/* Primary config */}
-                <Button intent="primary" size="small" onPress={() => setOpenSettings(true)}>
+                <Button intent="secondary" appearance="outline" size="small" onPress={() => setOpenSettings(true)}>
                     <Settings data-slot="icon" />
                     Raids Settings
                 </Button>
@@ -53,14 +53,16 @@ export const RaidsHeader: React.FC<Props> = ({
                     {actualDailyEnergy}
                 </span>
 
-                <Separator orientation="vertical" className="mx-1 h-6" />
+                <PageToolbarDivider />
 
                 {/* State actions */}
-                {hasSync && <SyncButton showText={true} appearance="outline" onAfterSync={onAfterSync} />}
+                {hasSync && (
+                    <SyncButton intent="secondary" showText={true} appearance="outline" onAfterSync={onAfterSync} />
+                )}
                 <Button
+                    intent="secondary"
                     appearance="outline"
                     size="small"
-                    intent="success"
                     isDisabled={refreshDisabled}
                     onPress={refreshHandle}>
                     <RefreshCw data-slot="icon" />
@@ -75,7 +77,7 @@ export const RaidsHeader: React.FC<Props> = ({
                     <RotateCcw data-slot="icon" />
                     Reset day
                 </Button>
-            </div>
+            </PageToolbar>
 
             <DailyRaidsSettings open={openSettings} close={() => setOpenSettings(false)} />
         </>

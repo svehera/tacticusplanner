@@ -104,6 +104,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
     return (
         <>
             <Button
+                intent="secondary"
                 appearance="outline"
                 size="small"
                 isDisabled={!goals?.length}
@@ -159,14 +160,15 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
 
                 <PortalDialog.Footer>
                     <Button
-                        appearance="outline"
+                        intent="secondary"
+                        appearance="plain"
                         onPress={() => {
                             setCurrentGoalsSelect(goals);
                             setOpenGoals(false);
                         }}>
                         Cancel
                     </Button>
-                    <Button intent="success" isDisabled={!hasChanges} onPress={handleSaveChanges}>
+                    <Button isDisabled={!hasChanges} onPress={handleSaveChanges}>
                         Save changes
                     </Button>
                 </PortalDialog.Footer>
