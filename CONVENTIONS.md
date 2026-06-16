@@ -315,12 +315,12 @@ Import from `@/fsd/5-shared/ui`:
     | Tertiary  | `intent="secondary" appearance="plain"`   | Cancel, dismiss, low-stakes navigation       |
 
     Rules:
-  - **Dialogs and forms:** one solid button — the single action the user came to complete. Two solids in a dialog create ambiguity about what to click.
-  - **Toolbars:** up to two solids are allowed when they represent genuinely distinct action types — e.g. a navigation link (`LinkButton` solid) and a creation action (`Button` solid) can coexist because they answer different user intents. All other toolbar buttons are `intent="secondary" appearance="outline"`.
-  - `intent="secondary" appearance="solid"` (secondary solid) is banned — a grey fill next to a primary fill forces the user to decode hierarchy by colour alone.
-  - Cancel/dismiss is always `appearance="plain"`.
-  - **Toolbar semantic colours:** use `intent="secondary" appearance="outline"` for all low-stakes actions. Reserve `intent="danger" appearance="outline"` for the single destructive action. Never mix `success`, `warning`, and `danger` in the same toolbar — `danger` only, for the one irreversible action.
-  - Outside of toolbars, use semantic intents (`danger`, `success`, `warning`) only when the outcome meaningfully differs from a neutral action (e.g. permanent delete, confirmed save-to-server).
+    - **Dialogs and forms:** one solid button — the single action the user came to complete. Two solids in a dialog create ambiguity about what to click.
+    - **Toolbars:** up to two solids are allowed when they represent genuinely distinct action types — e.g. a navigation link (`LinkButton` solid) and a creation action (`Button` solid) can coexist because they answer different user intents. All other toolbar buttons are `intent="secondary" appearance="outline"`.
+    - `intent="secondary" appearance="solid"` (secondary solid) is banned — a grey fill next to a primary fill forces the user to decode hierarchy by colour alone.
+    - Cancel/dismiss is always `appearance="plain"`.
+    - **Toolbar semantic colours:** use `intent="secondary" appearance="outline"` for all low-stakes actions. Reserve `intent="danger" appearance="outline"` for the single destructive action. Never mix `success`, `warning`, and `danger` in the same toolbar — `danger` only, for the one irreversible action.
+    - Outside of toolbars, use semantic intents (`danger`, `success`, `warning`) only when the outcome meaningfully differs from a neutral action (e.g. permanent delete, confirmed save-to-server).
 
 - `LinkButton` — same API as `Button` (intent, appearance, size, shape) but renders a React Aria `<Link>` (`<a>`) instead of `<button>`. Import from `@/fsd/5-shared/ui/link`. Use for navigation buttons that look like buttons but route via links (e.g. "Go to Goals", "Go to Raids"). Defaults to `intent="primary"`.
 - `ButtonPill` — pill-shaped toggle button
@@ -359,8 +359,8 @@ Import from `@/fsd/5-shared/ui/selects`:
 Import from `@/fsd/5-shared/ui/icons`:
 
 - `RarityIcon`, `RankIcon`, `StarsIcon`, `FactionImage`, `MiscIcon`, `UnitShardIcon`, `BmcIcon`, `TraitImage`, `ComponentImage`
-  - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
-  - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
+    - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
+    - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
 
 ---
 
