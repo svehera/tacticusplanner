@@ -309,7 +309,7 @@ Import from `@/fsd/5-shared/ui`:
   **Button hierarchy** — match appearance to visual weight:
 
   | Level | Props | When to use |
-  |-------|-------|-------------|
+  | ----- | ----- | ----------- |
   | Primary | `intent="primary"` (default solid) | The single main action — one per dialog/form |
   | Secondary | `intent="secondary" appearance="outline"` | Supporting action that isn't the main CTA |
   | Tertiary | `intent="secondary" appearance="plain"` | Cancel, dismiss, low-stakes navigation |
@@ -358,8 +358,8 @@ Import from `@/fsd/5-shared/ui/selects`:
 Import from `@/fsd/5-shared/ui/icons`:
 
 - `RarityIcon`, `RankIcon`, `StarsIcon`, `FactionImage`, `MiscIcon`, `UnitShardIcon`, `BmcIcon`, `TraitImage`, `ComponentImage`
-    - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
-    - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
+  - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
+  - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
 
 ---
 
@@ -367,7 +367,7 @@ Import from `@/fsd/5-shared/ui/icons`:
 
 The desktop shell (`desktop-app.tsx`) wraps every page:
 
-```
+```text
 ┌─────────────────────────────────────────────────────────────┐
 │  Sidebar  │  TopAppBar (full remaining width, ~48px tall)   │
 │  248px    ├─────────────────────────────────────────────────┤

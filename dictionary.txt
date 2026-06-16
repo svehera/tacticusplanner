@@ -92,6 +92,7 @@ checkmarks
 chromey
 clazz
 coeff
+colour
 colum
 cooldown
 cordddyyy
@@ -328,6 +329,7 @@ oathsworn
 octarian
 octarius
 oklab
+oklch
 olog
 ophydian
 ordnancebattery
