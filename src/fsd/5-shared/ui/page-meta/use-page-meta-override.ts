@@ -11,9 +11,10 @@ export function usePageMetaOverride(meta?: PageMeta) {
     const { set } = useContext(PageMetaContext);
     const section = meta?.section;
     const title = meta?.title;
+    const subtitle = meta?.subtitle;
     const description = meta?.description;
     useEffect(() => {
-        set(title === undefined ? undefined : { section, title, description });
+        set(title === undefined ? undefined : { section, title, subtitle, description });
         return () => set(undefined);
-    }, [set, section, title, description]);
+    }, [set, section, title, subtitle, description]);
 }

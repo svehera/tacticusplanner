@@ -19,7 +19,7 @@ export const AddToHomeScreen: React.FC<Props> = ({ link, dismiss }) => {
             <LinkButton href={link} target="_blank">
                 How?
             </LinkButton>
-            <Button intent="secondary" onPress={dismiss}>
+            <Button intent="secondary" appearance="plain" onPress={dismiss}>
                 <XIcon />
             </Button>
         </div>

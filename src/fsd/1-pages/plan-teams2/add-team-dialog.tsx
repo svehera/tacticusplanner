@@ -227,7 +227,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                 </div>
                 <div className="flex-2"></div>
                 <Button appearance="plain" size="square-petite" onPress={onCancel}>
-                    <X className="size-5" data-slot="icon" />
+                    <X data-slot="icon" />
                 </Button>
             </div>
 

@@ -33,9 +33,7 @@ The production environment is hosted at: [https://tacticusplanner.app/](https://
 
 ## Conventions
 
-- Use [TailwindCSS](https://tailwindcss.com/) for styling all new code
-- Use [AG Grid](https://www.ag-grid.com/) for data grids
-- Use [Material UI](https://mui.com/) for other components
+See [CONVENTIONS.md](./CONVENTIONS.md) for the full UI conventions reference — design tokens, shared components, layout patterns, and button usage rules.
 
 ## Significant Pain Points
 
@@ -50,15 +48,13 @@ Right now there's a split between styling solutions:
 
 There are also multiple different component libraries:
 
-- [Material UI](https://mui.com/) that incorporates behaviour and a design system.
+- [Material UI](https://mui.com/) — legacy, being phased out
 - [Nivo](https://nivo.rocks/) for dataviz components
-- [React Aria Components](https://react-spectrum.adobe.com/react-aria/components.html) that are primarily behaviour (a.k.a. headless UI)
+- [React Aria Components](https://react-spectrum.adobe.com/react-aria/components.html) — headless UI
 - [Lucide React](https://lucide.dev/guide/packages/lucide-react) for icons
 - [AG Grid](https://www.ag-grid.com/) for data grids
 
-We have listed the preferred options in the [conventions section](#conventions) but there's a fair amount of code that doesn't currently comply with them.
-At some point we should start moving the older code to follow the current conventions.
-This will make both the UI and the code more consistent.
+There is a fair amount of existing code that predates [CONVENTIONS.md](./CONVENTIONS.md) — follow the conventions in new code and migrate old code when you're already touching a file.
 
 #### TailwindCSS Migration: Inline Styles to TailwindCSS
 

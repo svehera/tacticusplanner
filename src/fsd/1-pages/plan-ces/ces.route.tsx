@@ -4,8 +4,8 @@ export const cesRoute: RouteObject = {
     path: 'plan/ces',
     handle: {
         section: 'Plan',
-        title: 'CES',
-        description: 'Track your progress and rewards across Champion Extermination Squad events.',
+        title: 'Campaign Events',
+        description: 'Plan your character selections and track rewards across Campaign Events.',
     },
     async lazy() {
         const { CEs } = await import('./ces');

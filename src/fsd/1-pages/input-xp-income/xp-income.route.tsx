@@ -5,7 +5,7 @@ export const xpIncomeLazyRoute: RouteObject = {
     handle: {
         section: 'My Game',
         title: 'XP Income',
-        description: 'Pick your codex rarity, then tell us how many you earn per day.',
+        description: 'Log your daily codex income to project character XP gain and level-up timelines.',
     },
     async lazy() {
         const { XpIncome } = await import('./xp-income');

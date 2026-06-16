@@ -9,17 +9,13 @@ import { IRosterSnapshot, IRosterSnapshotDiff, ISnapshotUnitDiff } from '../inpu
 import { RosterSnapshotsService } from '../input-roster-snapshots/roster-snapshots-service';
 
 import {
-    GuildRosterHistoryResponse,
-    GuildRosterSnapshot,
+    CurrentRosterMember,
     GuildRosterSnapshotMember,
     GuildUnitDiff,
     MemberState,
+    PlayerRosterChainEntry,
+    PlayerRosterChainResponse,
 } from './guild-roster-snapshots.models';
-
-export interface MemberHistoryEntry {
-    globalIndex: number;
-    resolvedRoster: IRosterSnapshot;
-}
 
 export interface DiffEntry {
     char?: ISnapshotCharacter;
@@ -29,72 +25,51 @@ export interface DiffEntry {
     power: number;
 }
 
-export function buildMemberHistoryMap(
-    history: GuildRosterHistoryResponse | undefined
-): Map<string, MemberHistoryEntry[]> {
-    const map = new Map<string, MemberHistoryEntry[]>();
-    if (!history) return map;
+// ---------------------------------------------------------------------------
+// Chain reconstruction
+// ---------------------------------------------------------------------------
 
-    const currentBase = new Map<string, IRosterSnapshot>();
+/**
+ * Reconstructs a player's roster state at a given snapshot by walking their
+ * chain from the base entry (index 0) forward, applying deltas in order.
+ * Returns undefined if the player has no entry for that snapshotId.
+ */
+export function getRosterAtSnapshot(chain: PlayerRosterChainEntry[], snapshotId: string): IRosterSnapshot | undefined {
+    let current: IRosterSnapshot | undefined;
 
-    for (let globalIndex = 0; globalIndex < history.snapshots.length; globalIndex++) {
-        const snapshot = history.snapshots[globalIndex];
-        for (const member of snapshot.members ?? []) {
-            if (member.chars !== undefined) {
-                const resolvedRoster: IRosterSnapshot = {
-                    name: snapshot.name,
-                    dateMillisUtc: 0,
-                    chars: member.chars,
-                    mows: member.mows ?? [],
-                };
-                currentBase.set(member.userId, resolvedRoster);
-                const entries = map.get(member.userId) ?? [];
-                entries.push({ globalIndex, resolvedRoster });
-                map.set(member.userId, entries);
-            } else if (member.charDiffs !== undefined || member.mowDiffs !== undefined) {
-                const base = currentBase.get(member.userId);
-                if (!base) continue;
-
-                const diffObject: IRosterSnapshotDiff = {
-                    name: snapshot.name,
-                    dateMillisUtc: 0,
-                    // GuildUnitDiff is structurally identical to ISnapshotUnitDiff
-                    charDiffs: (member.charDiffs ?? []) as ISnapshotUnitDiff[],
-                    mowDiffs: (member.mowDiffs ?? []) as ISnapshotUnitDiff[],
-                };
-                const resolvedRoster = RosterSnapshotsService.resolveSnapshotDiff(base, diffObject);
-                currentBase.set(member.userId, resolvedRoster);
-                const entries = map.get(member.userId) ?? [];
-                entries.push({ globalIndex, resolvedRoster });
-                map.set(member.userId, entries);
-            }
+    for (const entry of chain) {
+        const member = entry.memberData as GuildRosterSnapshotMember | undefined;
+        if (!member) {
+            if (entry.snapshotId === snapshotId) return current;
+            continue;
         }
-    }
 
-    return map;
-}
-
-/** Returns the member's last known resolved roster at or before targetIndex. */
-export function getMemberRosterAtIndex(
-    memberHistory: MemberHistoryEntry[],
-    targetIndex: number
-): IRosterSnapshot | undefined {
-    let result: IRosterSnapshot | undefined;
-    for (const entry of memberHistory) {
-        if (entry.globalIndex <= targetIndex) {
-            result = entry.resolvedRoster;
+        if (member.chars !== undefined) {
+            current = {
+                name: entry.name,
+                dateMillisUtc: new Date(entry.createdAt).getTime(),
+                chars: member.chars,
+                mows: member.mows ?? [],
+            };
+        } else if (current && (member.charDiffs !== undefined || member.mowDiffs !== undefined)) {
+            const diff: IRosterSnapshotDiff = {
+                name: entry.name,
+                dateMillisUtc: new Date(entry.createdAt).getTime(),
+                charDiffs: (member.charDiffs ?? []) as ISnapshotUnitDiff[],
+                mowDiffs: (member.mowDiffs ?? []) as ISnapshotUnitDiff[],
+            };
+            current = RosterSnapshotsService.resolveSnapshotDiff(current, diff);
         }
+
+        if (entry.snapshotId === snapshotId) return current;
     }
-    return result;
+
+    return undefined;
 }
 
-export function getPlayerName(userId: string, memberStates: Map<string, MemberState>): string {
-    const state = memberStates.get(userId);
-    if (state?.status === 'success' || state?.status === 'name-only') {
-        return state.playerName;
-    }
-    return userId;
-}
+// ---------------------------------------------------------------------------
+// Save snapshot construction
+// ---------------------------------------------------------------------------
 
 function charToFullDiff(char: ISnapshotCharacter): GuildUnitDiff {
     return {
@@ -129,12 +104,17 @@ function mowToFullDiff(mow: ISnapshotMachineOfWar): GuildUnitDiff {
     };
 }
 
-/** Builds the new snapshot entry from current member rosters, diffing against the most recent history. */
+/**
+ * Builds the new snapshot payload to POST. Uses each player's cached chain to
+ * diff against their last known state; falls back to full-base when the player
+ * has no history in the chain cache.
+ */
 export function buildNewSnapshot(
     name: string,
     memberStates: Map<string, MemberState>,
-    memberHistoryMap: Map<string, MemberHistoryEntry[]>
-): GuildRosterSnapshot {
+    playerChainCache: Map<string, PlayerRosterChainResponse>,
+    latestSnapshotId: string | undefined
+): { name: string; members: GuildRosterSnapshotMember[] } {
     const members: GuildRosterSnapshotMember[] = [];
 
     for (const [userId, state] of memberStates) {
@@ -142,69 +122,70 @@ export function buildNewSnapshot(
 
         const currentChars = state.parsed.units.flatMap(u => (u.char ? [u.char] : []));
         const currentMows = state.parsed.units.flatMap(u => (u.mow ? [u.mow] : []));
-        const memberHistory = memberHistoryMap.get(userId);
 
-        if (!memberHistory || memberHistory.length === 0) {
+        const chain = playerChainCache.get(userId);
+        const latestRoster = latestSnapshotId && chain ? getRosterAtSnapshot(chain.chain, latestSnapshotId) : undefined;
+
+        if (!latestRoster) {
             members.push({ userId, chars: currentChars, mows: currentMows });
-        } else {
-            const latestRoster = RosterSnapshotsService.fixSnapshot(memberHistory.at(-1)!.resolvedRoster);
-            const charDiffs: GuildUnitDiff[] = [];
-            const mowDiffs: GuildUnitDiff[] = [];
+            continue;
+        }
 
-            for (const currentChar of currentChars) {
-                const baseChar = latestRoster.chars.find(c => c.id === currentChar.id);
-                if (baseChar) {
-                    const diff = RosterSnapshotsService.diffCharacter(baseChar, currentChar) as GuildUnitDiff;
-                    if (Object.keys(diff).length > 1) charDiffs.push(diff);
-                } else {
-                    charDiffs.push(charToFullDiff(currentChar));
-                }
-            }
+        const fixedLatest = RosterSnapshotsService.fixSnapshot(latestRoster);
+        const charDiffs: GuildUnitDiff[] = [];
+        const mowDiffs: GuildUnitDiff[] = [];
 
-            for (const currentMow of currentMows) {
-                const baseMow = latestRoster.mows.find(m => m.id === currentMow.id);
-                if (baseMow) {
-                    const diff = RosterSnapshotsService.diffMachineOfWar(baseMow, currentMow) as GuildUnitDiff;
-                    if (Object.keys(diff).length > 1) mowDiffs.push(diff);
-                } else {
-                    mowDiffs.push(mowToFullDiff(currentMow));
-                }
+        for (const currentChar of currentChars) {
+            const baseChar = fixedLatest.chars.find(c => c.id === currentChar.id);
+            if (baseChar) {
+                const diff = RosterSnapshotsService.diffCharacter(baseChar, currentChar) as GuildUnitDiff;
+                if (Object.keys(diff).length > 1) charDiffs.push(diff);
+            } else {
+                charDiffs.push(charToFullDiff(currentChar));
             }
+        }
 
-            if (charDiffs.length > 0 || mowDiffs.length > 0) {
-                members.push({ userId, charDiffs, mowDiffs });
+        for (const currentMow of currentMows) {
+            const baseMow = fixedLatest.mows.find(m => m.id === currentMow.id);
+            if (baseMow) {
+                const diff = RosterSnapshotsService.diffMachineOfWar(baseMow, currentMow) as GuildUnitDiff;
+                if (Object.keys(diff).length > 1) mowDiffs.push(diff);
+            } else {
+                mowDiffs.push(mowToFullDiff(currentMow));
             }
+        }
+
+        if (charDiffs.length > 0 || mowDiffs.length > 0) {
+            members.push({ userId, charDiffs, mowDiffs });
         }
     }
 
     return { name, members };
 }
 
-/**
- * Removes the oldest snapshot and migrates the new oldest (formerly second-oldest) to full base
- * data so it no longer relies on the deleted entry as its diff base.
- */
-export function applyCapTrimming(history: GuildRosterHistoryResponse): GuildRosterHistoryResponse {
-    const memberMap = buildMemberHistoryMap(history);
-    const migratedMembers: GuildRosterSnapshotMember[] = [];
+// ---------------------------------------------------------------------------
+// Name helpers
+// ---------------------------------------------------------------------------
 
-    for (const [userId, memberEntries] of memberMap) {
-        const roster = getMemberRosterAtIndex(memberEntries, 1);
-        if (roster) {
-            migratedMembers.push({ userId, chars: roster.chars, mows: roster.mows });
-        }
-    }
-
-    const trimmed = history.snapshots.slice(1);
-    return {
-        ...history,
-        snapshots: [{ ...trimmed[0], members: migratedMembers }, ...trimmed.slice(1)],
-    };
+export function getPlayerName(
+    userId: string,
+    memberStates: Map<string, MemberState>,
+    currentRosterMembers: CurrentRosterMember[]
+): string {
+    const state = memberStates.get(userId);
+    if (state?.status === 'success' || state?.status === 'name-only') return state.playerName;
+    const member = currentRosterMembers.find(m => m.userId === userId);
+    if (member) return member.playerName;
+    return userId;
 }
 
 export function makeDefaultSnapshotName(): string {
     return `${new Date().toISOString().slice(0, 19).replace('T', ' ')} UTC`;
 }
+
+// ---------------------------------------------------------------------------
+// Power helpers (unchanged)
+// ---------------------------------------------------------------------------
 
 export function snapshotCharPower(char: ISnapshotCharacter): number {
     return CharactersPowerService.getCharacterPower({

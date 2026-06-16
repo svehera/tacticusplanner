@@ -364,7 +364,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                     <br />
                 </Modal.Body>
                 <Modal.Footer>
-                    <Button intent="secondary" onPress={onClose}>
+                    <Button intent="secondary" appearance="plain" onPress={onClose}>
                         Cancel
                     </Button>
                     <Button

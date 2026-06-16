@@ -5,7 +5,8 @@ export const lreLazyRoute: RouteObject = {
     handle: {
         section: 'Plan',
         title: 'LRE',
-        description: 'Plan your Long Range Escalation node picks and track expected rewards.',
+        description:
+            'Build teams for each track of the current Legendary Release Event and track your score, chest, and shard progress.',
     },
     async lazy() {
         const { Lre } = await import('./lre');
