@@ -250,8 +250,10 @@ function BossGroupSection({ group }: { group: BossGroup }) {
             <div className="order-1 2xl:order-2">
                 <LeaderboardCard unitId={group.bossUnitId} rarity={group.rarity} entries={group.bossEntries} />
             </div>
-            {/* Left prime: second on narrow, left on wide */}
-            {leftPrime !== undefined && (
+            {/* Left prime: second on narrow, left on wide; spacer keeps boss centered when absent */}
+            {leftPrime === undefined ? (
+                <div className="hidden 2xl:order-1 2xl:block 2xl:w-[28rem]" />
+            ) : (
                 <div className="order-2 2xl:order-1">
                     <LeaderboardCard unitId={leftPrime.unitId} rarity={group.rarity} entries={leftPrime.entries} />
                 </div>
