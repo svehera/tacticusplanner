@@ -14,13 +14,13 @@ In Tailwind, use `bg-(--primary)`, `text-(--fg)`, `border-(--border)`, etc. For 
 
 ### Foundational tokens
 
-| Token            | Light         | Dark          | Use for                         |
-| ---------------- | ------------- | ------------- | ------------------------------- |
-| `--bg`           | white         | zinc-900      | Page background                 |
-| `--fg`           | zinc-950      | zinc-100      | Primary text                    |
-| `--border`       | zinc-200      | zinc-700      | Card borders, dividers          |
-| `--input-border` | zinc-300      | zinc-700      | Input borders, switch off-track |
-| `--ring`         | indigo (0.45) | indigo (0.60) | Focus rings                     |
+| Token            | Light    | Dark     | Use for                         |
+| ---------------- | -------- | -------- | ------------------------------- |
+| `--bg`           | white    | zinc-900 | Page background                 |
+| `--fg`           | zinc-950 | zinc-300 | Primary text                    |
+| `--border`       | zinc-200 | zinc-700 | Card borders, dividers          |
+| `--input-border` | zinc-300 | zinc-600 | Input borders, switch off-track |
+| `--ring`         | blue-700 | sky-600  | Focus rings                     |
 
 ### Surface tokens
 
@@ -28,18 +28,18 @@ The surface tokens have a subtle semantic structure worth knowing — values may
 
 | Token                   | Light    | Dark     | Use for                                              |
 | ----------------------- | -------- | -------- | ---------------------------------------------------- |
-| `--card`                | white    | zinc-800 | Card surface (persistent, in the flow)               |
-| `--card-border`         | zinc-200 | zinc-700 | Card border                                          |
-| `--card-fg`             | zinc-950 | zinc-50  | Text/elements on card surface                        |
+| `--card`                | white    | zinc-900 | Card surface (persistent, in the flow)               |
+| `--card-border`         | zinc-300 | zinc-700 | Card border                                          |
+| `--card-fg`             | zinc-950 | zinc-300 | Text/elements on card surface                        |
 | `--overlay`             | white    | zinc-800 | Dropdown/popover surface (transient, floating above) |
-| `--overlay-fg`          | zinc-950 | zinc-100 | Text on overlay surface                              |
+| `--overlay-fg`          | zinc-950 | zinc-300 | Text on overlay surface                              |
 | `--sidebar`             | zinc-50  | zinc-950 | Sidebar background                                   |
-| `--sidebar-fg`          | zinc-950 | zinc-50  | Text in sidebar                                      |
+| `--sidebar-fg`          | zinc-950 | zinc-300 | Text in sidebar                                      |
 | `--data-surface`        | zinc-50  | zinc-800 | AG Grid / data table background                      |
-| `--data-surface-fg`     | zinc-950 | zinc-100 | Text on data surface                                 |
-| `--data-surface-border` | zinc-200 | zinc-700 | Borders inside data tables                           |
+| `--data-surface-fg`     | zinc-950 | zinc-300 | Text on data surface                                 |
+| `--data-surface-border` | zinc-300 | zinc-700 | Borders inside data tables                           |
 
-`--card` and `--overlay` are intentionally separate even though they have identical values today — overlays may pick up a subtle elevation tint later. Use the one that matches semantic intent, not whichever happens to be in the nearest file.
+`--card` and `--overlay` are intentionally separate — in dark mode `--overlay` is slightly lighter than `--card` (zinc-900) to give floating surfaces a subtle elevation. Use the one that matches semantic intent, not whichever happens to be in the nearest file.
 
 ### Neutral fill tokens
 
@@ -50,7 +50,7 @@ The surface tokens have a subtle semantic structure worth knowing — values may
 | `--soft`       | zinc-100 | zinc-800 | `--soft-fg`    | Subtle fills behind de-emphasized text (captions, labels, metadata) |
 | `--soft-fg`    | zinc-600 | zinc-400 | —              | De-emphasized text (captions, helper text)                          |
 | `--neutral`    | zinc-100 | zinc-800 | `--neutral-fg` | Hover backgrounds, subtle fills under primary text                  |
-| `--neutral-fg` | zinc-950 | zinc-100 | —              | Full-contrast text on a neutral surface                             |
+| `--neutral-fg` | zinc-950 | zinc-300 | —              | Full-contrast text on a neutral surface                             |
 
 Pick by the foreground you need on top:
 
@@ -62,7 +62,7 @@ Pick by the foreground you need on top:
 | Token            | Light     | Dark      | Use for                                                               |
 | ---------------- | --------- | --------- | --------------------------------------------------------------------- |
 | `--primary`      | blue-700  | sky-500   | CTAs, active state, accent. Shifts lighter in dark mode for contrast. |
-| `--primary-fg`   | white     | white     | Text on primary background                                            |
+| `--primary-fg`   | white     | zinc-950  | Text on primary background                                            |
 | `--secondary`    | zinc-200  | zinc-700  | Subdued/neutral button fills, outline/plain hover surfaces            |
 | `--secondary-fg` | zinc-950  | zinc-100  | Text on secondary background, icon-button text in both themes         |
 | `--accent`       | amber-600 | amber-600 | Decorative accent (amber)                                             |
@@ -86,14 +86,14 @@ Pick by the foreground you need on top:
 
 ### Semantic state tokens
 
-| Token          | Light       | Dark        | Pair with      | Use for                                                                                                 |
-| -------------- | ----------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------------- |
-| `--success`    | emerald-600 | emerald-500 | `--success-fg` | Success states. Shifts one step lighter in dark mode for contrast on zinc-800.                          |
-| `--success-fg` | white       | white       | —              | Text on success background                                                                              |
-| `--warning`    | amber-400   | amber-400   | `--warning-fg` | Warning states. No dark-mode shift — amber-400 is already high-lightness.                               |
-| `--warning-fg` | amber-950   | amber-950   | —              | Text on warning background                                                                              |
-| `--danger`     | red-600     | red-600     | `--danger-fg`  | Error / destructive states. No dark-mode shift — mostly used as badge background with --danger-fg text. |
-| `--danger-fg`  | red-50      | red-50      | —              | Text on danger background                                                                               |
+| Token          | Light       | Dark        | Pair with      | Use for                                                                                           |
+| -------------- | ----------- | ----------- | -------------- | ------------------------------------------------------------------------------------------------- |
+| `--success`    | emerald-700 | emerald-600 | `--success-fg` | Success states. Shifts one step lighter in dark mode for contrast on zinc-900.                    |
+| `--success-fg` | white       | zinc-950    | —              | Text on success background                                                                        |
+| `--warning`    | amber-400   | amber-400   | `--warning-fg` | Warning states. No dark-mode shift — amber-400 is already high-lightness.                         |
+| `--warning-fg` | amber-950   | amber-950   | —              | Text on warning background                                                                        |
+| `--danger`     | red-600     | oklch muted | `--danger-fg`  | Error / destructive states. Dark mode uses a desaturated oklch value for readability on zinc-900. |
+| `--danger-fg`  | white       | zinc-950    | —              | Text on danger background                                                                         |
 
 Common patterns for semantic state tokens:
 
@@ -306,21 +306,22 @@ Import from `@/fsd/5-shared/ui`:
 
 - `Button` — intents: primary/secondary/success/warning/danger; appearances: solid/outline/plain; sizes: extra-small/small/medium/large/square-petite; shapes: square (default, rounded-lg)/circle (rounded-full). Uses `onPress`, not `onClick` (react-aria). Outline/plain appearances show a state-layer overlay on hover/press and use the intent's accent colour for text (`--btn-accent`). For icon-only buttons use `size="square-petite" appearance="plain"`.
 
-  **Button hierarchy** — match appearance to visual weight:
+    **Button hierarchy** — match appearance to visual weight:
 
-  | Level | Props | When to use |
-  | ----- | ----- | ----------- |
-  | Primary | `intent="primary"` (default solid) | The single main action — one per dialog/form |
-  | Secondary | `intent="secondary" appearance="outline"` | Supporting action that isn't the main CTA |
-  | Tertiary | `intent="secondary" appearance="plain"` | Cancel, dismiss, low-stakes navigation |
+    | Level     | Props                                     | When to use                                  |
+    | --------- | ----------------------------------------- | -------------------------------------------- |
+    | Primary   | `intent="primary"` (default solid)        | The single main action — one per dialog/form |
+    | Secondary | `intent="secondary" appearance="outline"` | Supporting action that isn't the main CTA    |
+    | Tertiary  | `intent="secondary" appearance="plain"`   | Cancel, dismiss, low-stakes navigation       |
 
-  Rules:
-  - **Dialogs and forms:** one solid button — the single action the user came to complete. Two solids in a dialog create ambiguity about what to click.
-  - **Toolbars:** up to two solids are allowed when they represent genuinely distinct action types — e.g. a navigation link (`LinkButton` solid) and a creation action (`Button` solid) can coexist because they answer different user intents. All other toolbar buttons are `intent="secondary" appearance="outline"`.
-  - `intent="secondary" appearance="solid"` (secondary solid) is banned — a grey fill next to a primary fill forces the user to decode hierarchy by colour alone.
-  - Cancel/dismiss is always `appearance="plain"`.
-  - **Toolbar semantic colours:** use `intent="secondary" appearance="outline"` for all low-stakes actions. Reserve `intent="danger" appearance="outline"` for the single destructive action. Never mix `success`, `warning`, and `danger` in the same toolbar — `danger` only, for the one irreversible action.
-  - Outside of toolbars, use semantic intents (`danger`, `success`, `warning`) only when the outcome meaningfully differs from a neutral action (e.g. permanent delete, confirmed save-to-server).
+    Rules:
+    - **Dialogs and forms:** one solid button — the single action the user came to complete. Two solids in a dialog create ambiguity about what to click.
+    - **Toolbars:** up to two solids are allowed when they represent genuinely distinct action types — e.g. a navigation link (`LinkButton` solid) and a creation action (`Button` solid) can coexist because they answer different user intents. All other toolbar buttons are `intent="secondary" appearance="outline"`.
+    - `intent="secondary" appearance="solid"` (secondary solid) is banned — a grey fill next to a primary fill forces the user to decode hierarchy by colour alone.
+    - Cancel/dismiss is always `appearance="plain"`.
+    - **Toolbar semantic colours:** use `intent="secondary" appearance="outline"` for all low-stakes actions. Reserve `intent="danger" appearance="outline"` for the single destructive action. Never mix `success`, `warning`, and `danger` in the same toolbar — `danger` only, for the one irreversible action.
+    - Outside of toolbars, use semantic intents (`danger`, `success`, `warning`) only when the outcome meaningfully differs from a neutral action (e.g. permanent delete, confirmed save-to-server).
+
 - `LinkButton` — same API as `Button` (intent, appearance, size, shape) but renders a React Aria `<Link>` (`<a>`) instead of `<button>`. Import from `@/fsd/5-shared/ui/link`. Use for navigation buttons that look like buttons but route via links (e.g. "Go to Goals", "Go to Raids"). Defaults to `intent="primary"`.
 - `ButtonPill` — pill-shaped toggle button
 - `TextField` — label, description, prefix, suffix, isDisabled, isInvalid, errorMessage, isPending, isRevealable, type
@@ -358,8 +359,8 @@ Import from `@/fsd/5-shared/ui/selects`:
 Import from `@/fsd/5-shared/ui/icons`:
 
 - `RarityIcon`, `RankIcon`, `StarsIcon`, `FactionImage`, `MiscIcon`, `UnitShardIcon`, `BmcIcon`, `TraitImage`, `ComponentImage`
-  - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
-  - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
+    - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
+    - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
 
 ---
 
