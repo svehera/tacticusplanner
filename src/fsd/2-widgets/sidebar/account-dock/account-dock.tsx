@@ -26,6 +26,7 @@ import { OverrideDataDialog } from 'src/shared-components/user-menu/override-dat
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 import { RestoreBackupDialog } from 'src/shared-components/user-menu/restore-backup-dialog';
 
+import { toDesktopPath, toMobilePath } from '@/fsd/5-shared/lib';
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { Switch } from '@/fsd/5-shared/ui';
@@ -226,26 +227,28 @@ export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
+        const destination = toDesktopPath(location.pathname);
         trackEvent('nav_menu_select', {
             feature: 'navigation',
             action: 'switch_view',
-            destination_path: '/home',
+            destination_path: destination,
             source: 'account_dock',
             authenticated: isAuthenticated,
         });
-        navigate('/home');
+        navigate({ pathname: destination, search: location.search });
     };
 
     const navigateToMobileView = () => {
         localStorage.setItem('preferredView', 'mobile');
+        const destination = toMobilePath(location.pathname);
         trackEvent('nav_menu_select', {
             feature: 'navigation',
             action: 'switch_view',
-            destination_path: '/mobile/home',
+            destination_path: destination,
             source: 'account_dock',
             authenticated: isAuthenticated,
         });
-        navigate('/mobile/home');
+        navigate({ pathname: destination, search: location.search });
     };
 
     const navigateToReviewTeams = () => {

@@ -4,6 +4,7 @@ import { Outlet, useLocation, useNavigate, useSearchParams } from 'react-router-
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
+import { toMobilePath } from '@/fsd/5-shared/lib';
 import { trackPageView } from '@/fsd/5-shared/monitoring';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
 import { PageMetaProvider } from '@/fsd/5-shared/ui/page-meta';
@@ -24,9 +25,11 @@ const DesktopApp = () => {
     useEffect(() => {
         const redirect = searchParams.get('redirect');
 
-        // Redirect to mobile view if on mobile device and preferred view is not set to desktop
+        // Redirect to mobile view if on mobile device and preferred view is not set to desktop.
+        // Preserve the current path and query string so deep links (e.g. shared rosters) open in
+        // the mobile shell with their params intact instead of being dropped at the home page.
         if (isMobile && !redirect && (!preferredView || preferredView === 'mobile')) {
-            navigate('/mobile/home');
+            navigate({ pathname: toMobilePath(location.pathname), search: location.search });
             return;
         }
 

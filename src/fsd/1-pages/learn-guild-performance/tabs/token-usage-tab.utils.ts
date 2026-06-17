@@ -68,13 +68,11 @@ export function computeSeasonTokenStats(
     seasons: number[],
     playerIds: string[],
     lookup: PlayerSeasonLookup,
-    currentSeasonNumber: number | undefined,
     colorMode: 'gradient' | 'threshold'
 ): Map<number, { min: number; max: number }> {
     const seasonTokenStats = new Map<number, { min: number; max: number }>();
     if (colorMode === 'gradient') {
         for (const season of seasons) {
-            if (season === currentSeasonNumber) continue;
             const values = playerIds.flatMap(userId => {
                 const tokenValue = lookup.get(userId)?.get(season)?.tokens;
                 return tokenValue == undefined ? [] : [tokenValue];

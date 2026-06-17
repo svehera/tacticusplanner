@@ -451,11 +451,23 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
 
         // Step 4: POST
         setSaveStage('saving');
-        const { error } = await postGuildRosterSnapshotApi(newSnapshot);
+        const { data: saveData, error } = await postGuildRosterSnapshotApi(newSnapshot);
 
         if (error) {
             const message = typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to save');
             setSaveError(message);
+            setSaveStage('error');
+            return;
+        }
+
+        if (saveData === undefined) {
+            setSaveError('Request was canceled or returned no data.');
+            setSaveStage('error');
+            return;
+        }
+
+        if (saveData.status === 'TIMED_OUT') {
+            setSaveError('The server timed out while saving the snapshot. Please try again.');
             setSaveStage('error');
             return;
         }
