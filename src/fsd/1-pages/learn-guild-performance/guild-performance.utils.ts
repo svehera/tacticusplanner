@@ -74,6 +74,16 @@ export const bossPortraitMap: Record<string, string> = {
     GuildBoss12Boss1DarkaLion: 'snowprint_assets/characters/ui_image_portrait_guild_lion_01.png',
 };
 
+/** Full portrait keyed by GuildBoss{N} prefix — first entry per prefix from bossPortraitMap. */
+export const bossPrefixPortraitMap: Record<string, string> = (() => {
+    const map: Record<string, string> = {};
+    for (const unitId of Object.keys(bossPortraitMap)) {
+        const prefix = /^(GuildBoss\d+)/.exec(unitId)?.[1];
+        if (prefix !== undefined && map[prefix] === undefined) map[prefix] = unitId;
+    }
+    return map;
+})();
+
 // ---------------------------------------------------------------------------
 // Damage colour coding
 // ---------------------------------------------------------------------------
@@ -150,32 +160,6 @@ export function buildLoopCountMaps(entries: TacticusGuildRaidEntry[]): LoopCount
         }
     }
     return { loopRaidNumber, loopBombNumber };
-}
-
-// ---------------------------------------------------------------------------
-// Current boss detection
-// ---------------------------------------------------------------------------
-
-/**
- * Returns the most-recent main boss entry from `entries`.
- * If the latest entry is a SideBoss/prime, finds the boss sharing the same
- * GuildBoss{N} prefix.
- */
-export function getCurrentBossEntry(entries: TacticusGuildRaidEntry[]): TacticusGuildRaidEntry | undefined {
-    if (entries.length === 0) return undefined;
-    const sorted = [...entries].toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0));
-    const mostRecent = sorted[0]!;
-    if (mostRecent.encounterType === TacticusEncounterType.Boss) return mostRecent;
-
-    // SideBoss/prime: match by GuildBoss{N} prefix
-    const prefix = /^(GuildBoss\d+)/.exec(mostRecent.unitId)?.[1];
-    if (prefix) {
-        const match = sorted.find(
-            entry => entry.encounterType === TacticusEncounterType.Boss && entry.unitId.startsWith(prefix)
-        );
-        if (match) return match;
-    }
-    return sorted.find(entry => entry.encounterType === TacticusEncounterType.Boss);
 }
 
 // ---------------------------------------------------------------------------
@@ -364,4 +348,185 @@ export function computeDefaultRaritiesFromRarities(rarities: Rarity[]): Rarity[]
 /** {@link computeDefaultRaritiesFromRarities} over the rarities present in `entries`. */
 export function computeDefaultRarities(entries: TacticusGuildRaidEntry[]): Rarity[] {
     return computeDefaultRaritiesFromRarities(entries.map(entry => entry.rarity));
+}
+
+// ---------------------------------------------------------------------------
+// Boss display resolution for the Overview tab
+// ---------------------------------------------------------------------------
+
+export type BossDisplayHp =
+    | { kind: 'actual'; remaining: number; max: number }
+    | { kind: 'full'; max: number }
+    | { kind: 'fullUnknown' };
+
+export interface BossDisplay {
+    /** unitId to look up the portrait. */
+    unitId: string;
+    displayName: string;
+    hp: BossDisplayHp;
+    /** True when we're showing the upcoming boss rather than the one that just died. */
+    isNextBoss?: boolean;
+}
+
+interface SeasonLMBossInfo {
+    bossPrefix: string;
+    rarity: Rarity;
+    set: number;
+    unitId: string;
+    maxHp: number;
+}
+
+/**
+ * Ordered list of unique (bossPrefix, rarity) pairs for Legendary/Mythic bosses seen in
+ * `entries`. Sorted Legendary-first by set number, then Mythic by set number — matching the
+ * in-game loop sequence: L1 → L2 → … → Ln → M1 → … → Mm → L1.
+ */
+function buildSeasonLMBossList(entries: TacticusGuildRaidEntry[]): SeasonLMBossInfo[] {
+    const seen = new Map<string, SeasonLMBossInfo>();
+    for (const entry of entries) {
+        if (entry.encounterType !== TacticusEncounterType.Boss) continue;
+        if (entry.rarity < Rarity.Legendary) continue;
+        const prefix = getBossPrefix(entry.unitId);
+        const key = `${prefix}:${entry.rarity}`;
+        if (!seen.has(key)) {
+            seen.set(key, {
+                bossPrefix: prefix,
+                rarity: entry.rarity,
+                set: entry.set,
+                unitId: entry.unitId,
+                maxHp: entry.maxHp,
+            });
+        }
+    }
+    return [...seen.values()].toSorted((a, b) => {
+        if (a.rarity !== b.rarity) {
+            // Legendary (4) before Mythic (5)
+            return a.rarity - b.rarity;
+        }
+        return a.set - b.set;
+    });
+}
+
+/**
+ * Resolves what to show in the "Current Boss" card on the Overview tab.
+ *
+ * For Epic-or-lower bosses: always show the boss as-is (even at HP 0).
+ * For Legendary/Mythic bosses at HP 0:
+ *   - If a new encounter has started but only primes have been hit, show the new boss.
+ *     Display "HP Full" (unknown max) if we've never seen that boss before, or the known
+ *     max HP if we have a previous entry for it.
+ *   - If nothing has happened since the boss died and the guild has looped (kill count > 1),
+ *     show the next boss in the season sequence at full HP.
+ *   - Otherwise show the dead boss at HP 0.
+ */
+export function resolveBossDisplay(entries: TacticusGuildRaidEntry[]): BossDisplay | undefined {
+    if (entries.length === 0) return undefined;
+
+    const nameFor = (unitId: string): string => bossPrefixDisplayNames[getBossPrefix(unitId)] ?? unitId;
+
+    const sorted = [...entries].toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0));
+
+    const latestBoss = sorted.find(entry => entry.encounterType === TacticusEncounterType.Boss);
+    if (!latestBoss) return undefined;
+
+    // Epic or lower: show as-is (current behaviour, no next-boss logic).
+    if (latestBoss.rarity < Rarity.Legendary) {
+        return {
+            unitId: latestBoss.unitId,
+            displayName: nameFor(latestBoss.unitId),
+            hp: { kind: 'actual', remaining: latestBoss.remainingHp, max: latestBoss.maxHp },
+        };
+    }
+
+    // L/M boss still alive: show normally.
+    if (latestBoss.remainingHp > 0) {
+        return {
+            unitId: latestBoss.unitId,
+            displayName: nameFor(latestBoss.unitId),
+            hp: { kind: 'actual', remaining: latestBoss.remainingHp, max: latestBoss.maxHp },
+        };
+    }
+
+    // L/M boss is dead.
+    const deadPrefix = getBossPrefix(latestBoss.unitId);
+    const deadTime = latestBoss.completedOn ?? 0;
+
+    const killCount = entries.filter(
+        entry =>
+            entry.encounterType === TacticusEncounterType.Boss &&
+            getBossPrefix(entry.unitId) === deadPrefix &&
+            entry.rarity === latestBoss.rarity &&
+            entry.remainingHp === 0
+    ).length;
+
+    // Any SideBoss entries recorded after the boss kill?
+    const postKillPrimes = sorted.filter(
+        entry => entry.encounterType === TacticusEncounterType.SideBoss && (entry.completedOn ?? 0) > deadTime
+    );
+
+    if (postKillPrimes.length > 0) {
+        const latestPrime = postKillPrimes[0]!;
+        const newPrefix = getBossPrefix(latestPrime.unitId);
+
+        // Guard: same prefix + first kill → likely a trailing prime from the just-completed
+        // encounter recorded slightly after the boss kill. Treat as "nothing happened since."
+        const isNewEncounter = !(newPrefix === deadPrefix && killCount === 1);
+
+        if (isNewEncounter) {
+            const newRarity = latestPrime.rarity;
+            const existingBossEntry = entries.find(
+                entry =>
+                    entry.encounterType === TacticusEncounterType.Boss &&
+                    getBossPrefix(entry.unitId) === newPrefix &&
+                    entry.rarity === newRarity
+            );
+            if (existingBossEntry) {
+                return {
+                    unitId: existingBossEntry.unitId,
+                    displayName: nameFor(existingBossEntry.unitId),
+                    hp: { kind: 'full', max: existingBossEntry.maxHp },
+                    isNextBoss: true,
+                };
+            }
+            // No prior boss entry for this prefix — use a prefix-based portrait unitId.
+            const portraitUnitId = bossPrefixPortraitMap[newPrefix] ?? latestPrime.unitId;
+            return {
+                unitId: portraitUnitId,
+                displayName: bossPrefixDisplayNames[newPrefix] ?? newPrefix,
+                hp: { kind: 'fullUnknown' },
+                isNextBoss: true,
+            };
+        }
+    }
+
+    // Nothing meaningful happened since the boss died.
+    if (killCount > 1) {
+        // Guild has looped — show the next boss in the season sequence.
+        const seasonList = buildSeasonLMBossList(entries);
+        const index = seasonList.findIndex(b => b.bossPrefix === deadPrefix && b.rarity === latestBoss.rarity);
+        if (index !== -1) {
+            const nextInfo = seasonList[(index + 1) % seasonList.length]!;
+            const nextEntry = entries.find(
+                entry =>
+                    entry.encounterType === TacticusEncounterType.Boss &&
+                    getBossPrefix(entry.unitId) === nextInfo.bossPrefix &&
+                    entry.rarity === nextInfo.rarity
+            );
+            if (nextEntry) {
+                return {
+                    unitId: nextEntry.unitId,
+                    displayName: nameFor(nextEntry.unitId),
+                    hp: { kind: 'full', max: nextEntry.maxHp },
+                    isNextBoss: true,
+                };
+            }
+        }
+    }
+
+    // Not looped (or fallback): show the dead boss at HP 0.
+    return {
+        unitId: latestBoss.unitId,
+        displayName: nameFor(latestBoss.unitId),
+        hp: { kind: 'actual', remaining: 0, max: latestBoss.maxHp },
+    };
 }

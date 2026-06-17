@@ -5,22 +5,36 @@ import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import type { GuildTokenEntry } from '../guild-performance.types';
 import {
-    getCurrentBossEntry,
     bossPortraitMap,
     formatTime,
     sortTokenEntries,
     sortBombEntries,
+    resolveBossDisplay,
+    type BossDisplayHp,
 } from '../guild-performance.utils';
 
-const HpBar = ({ remainingHp, maxHp }: { remainingHp: number; maxHp: number }) => {
-    const pct = maxHp > 0 ? (remainingHp / maxHp) * 100 : 0;
+const HpBar = ({ hp }: { hp: BossDisplayHp }) => {
+    if (hp.kind === 'fullUnknown') {
+        return <span className="text-sm font-medium text-gray-500">HP Full</span>;
+    }
+    if (hp.kind === 'full') {
+        return (
+            <div className="flex flex-col gap-0.5">
+                <div className="h-3 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
+                    <div className="h-full bg-red-500 dark:bg-red-400" style={{ width: '100%' }} />
+                </div>
+                <span className="text-xs text-gray-500 tabular-nums">HP Full / {hp.max.toLocaleString()}</span>
+            </div>
+        );
+    }
+    const pct = hp.max > 0 ? (hp.remaining / hp.max) * 100 : 0;
     return (
         <div className="flex flex-col gap-0.5">
             <div className="h-3 w-full overflow-hidden rounded-full bg-gray-200 dark:bg-gray-700">
                 <div className="h-full bg-red-500 transition-all dark:bg-red-400" style={{ width: `${pct}%` }} />
             </div>
             <span className="text-xs text-gray-500 tabular-nums">
-                {remainingHp.toLocaleString()} / {maxHp.toLocaleString()}
+                {hp.remaining.toLocaleString()} / {hp.max.toLocaleString()}
             </span>
         </div>
     );
@@ -30,26 +44,31 @@ const CurrentBoss = ({ data }: { data: TacticusGuildRaidResponse | undefined }) 
     if (data === undefined) return <p className="text-sm text-gray-500">Loading…</p>;
 
     const entries = data.entries ?? [];
-    const boss = getCurrentBossEntry(entries);
-    if (!boss) return <p className="text-sm text-gray-500">No boss data yet.</p>;
+    const display = resolveBossDisplay(entries);
+    if (!display) return <p className="text-sm text-gray-500">No boss data yet.</p>;
 
-    const portrait = bossPortraitMap[boss.unitId];
+    const portrait = bossPortraitMap[display.unitId];
     return (
         <div className="flex items-start gap-4">
             {portrait ? (
                 <img
                     src={getImageUrl(portrait)}
-                    alt={boss.unitId}
+                    alt={display.displayName}
                     className="w-48 shrink-0 rounded-lg object-cover shadow"
                 />
             ) : (
                 <div className="flex h-48 w-48 shrink-0 items-center justify-center rounded-lg bg-gray-200 text-xs text-gray-500 dark:bg-gray-700">
-                    {boss.unitId}
+                    {display.displayName}
                 </div>
             )}
             <div className="flex flex-col gap-2 pt-1">
-                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">{boss.unitId}</p>
-                <HpBar remainingHp={boss.remainingHp} maxHp={boss.maxHp} />
+                {display.isNextBoss && (
+                    <p className="text-xs font-medium tracking-wide text-gray-400 uppercase dark:text-gray-500">
+                        Next boss
+                    </p>
+                )}
+                <p className="text-sm font-semibold text-gray-700 dark:text-gray-200">{display.displayName}</p>
+                <HpBar hp={display.hp} />
             </div>
         </div>
     );
