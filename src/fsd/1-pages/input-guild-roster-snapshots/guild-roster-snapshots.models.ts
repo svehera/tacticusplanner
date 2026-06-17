@@ -176,5 +176,12 @@ export const postGuildRosterMigrateApi = () =>
 // PUT /guild/roster/history
 // ---------------------------------------------------------------------------
 
+export interface GuildRosterSnapshotSaveResponse {
+    status: 'OK' | 'TIMED_OUT';
+    snapshotId?: string;
+    timings: { phase: string; ms: number }[];
+    totalMs: number;
+}
+
 export const postGuildRosterSnapshotApi = (snapshot: GuildRosterSnapshot) =>
-    makeApiCall<{ snapshotId: string }>('PUT', 'guild/roster/history', { snapshot });
+    makeApiCall<GuildRosterSnapshotSaveResponse>('PUT', 'guild/roster/history', { snapshot });
