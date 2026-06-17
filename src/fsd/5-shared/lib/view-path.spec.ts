@@ -51,6 +51,11 @@ describe('toDesktopPath', () => {
     it('keeps section subpaths that do have a desktop counterpart', () => {
         expect(toDesktopPath('/mobile/input/inventory')).toBe('/input/inventory');
     });
+
+    it('only strips /mobile at a path boundary, leaving lookalike paths untouched', () => {
+        expect(toDesktopPath('/mobilehome')).toBe('/mobilehome');
+        expect(toDesktopPath('/mobile-roster')).toBe('/mobile-roster');
+    });
 });
 
 describe('round-trip', () => {
