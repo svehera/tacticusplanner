@@ -48,7 +48,7 @@ export const TokenUsageTab = ({ tokenUsageData, currentData, names, selectedPlay
     }
 
     const isDark = document.documentElement.classList.contains('dark');
-    const seasonTokenStats = computeSeasonTokenStats(seasons, playerIds, lookup, currentSeasonNumber, colorMode);
+    const seasonTokenStats = computeSeasonTokenStats(seasons, playerIds, lookup, colorMode);
 
     const headerCell =
         'border border-(--border) bg-(--soft) px-2 py-1 text-center text-xs font-semibold uppercase text-(--soft-fg)';
@@ -59,7 +59,6 @@ export const TokenUsageTab = ({ tokenUsageData, currentData, names, selectedPlay
     const absentCell = `${dataCell} bg-black text-white`;
 
     const getTokenCellProps = (tokens: number, season: number): { className: string; style?: CSSProperties } => {
-        if (season === currentSeasonNumber) return { className: presentCell };
         if (colorMode === 'gradient') {
             const stats = seasonTokenStats.get(season);
             const ratio =
@@ -69,6 +68,7 @@ export const TokenUsageTab = ({ tokenUsageData, currentData, names, selectedPlay
                 style: { backgroundColor: gradientColor(ratio, isDark) },
             };
         }
+        if (season === currentSeasonNumber) return { className: presentCell };
         if (tokens >= highThreshold) return { className: `${dataCell} bg-(--success)/20 text-(--fg)` };
         if (tokens >= lowThreshold) return { className: `${dataCell} bg-(--warning)/30 text-(--fg)` };
         return { className: `${dataCell} bg-(--danger)/20 text-(--fg)` };
