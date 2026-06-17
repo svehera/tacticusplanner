@@ -50,6 +50,8 @@ export const unitRoundIconMap: Record<string, string> = {
     GuildBoss10Boss1AdmecBelisarius: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_belisarius_01.png',
     // Boss 11 – Riptide
     GuildBoss11Boss1TauRiptide: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_riptide_01.png',
+    // Boss 12 - The Lion
+    GuildBoss12Boss1DarkaLion: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_lion_01.png',
 };
 
 /** Full (non-round) portraits for main boss unitIds, used in the Overview tab. */
@@ -69,6 +71,7 @@ export const bossPortraitMap: Record<string, string> = {
     GuildBoss9Boss1ThousMagnus: 'snowprint_assets/characters/ui_image_portrait_guild_magnus_01.png',
     GuildBoss10Boss1AdmecBelisarius: 'snowprint_assets/characters/ui_image_portrait_guild_belisarius_01.png',
     GuildBoss11Boss1TauRiptide: 'snowprint_assets/characters/ui_image_portrait_guild_riptide_01.png',
+    GuildBoss12Boss1DarkaLion: 'snowprint_assets/characters/ui_image_portrait_guild_lion_01.png',
 };
 
 // ---------------------------------------------------------------------------
@@ -241,6 +244,7 @@ export const bossPrefixDisplayNames: Record<string, string> = {
     GuildBoss9: 'Magnus',
     GuildBoss10: 'Belisarius Cawl',
     GuildBoss11: 'Riptide',
+    GuildBoss12: 'Lion',
 };
 
 /**
