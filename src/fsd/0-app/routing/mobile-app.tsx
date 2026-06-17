@@ -10,6 +10,7 @@ import { menuItemById } from 'src/models/menu-items';
 import { trackEvent, trackPageView } from '@/fsd/5-shared/monitoring';
 import { FlexBox, Conditional } from '@/fsd/5-shared/ui';
 import { useTitle } from '@/fsd/5-shared/ui/contexts';
+import { PageMetaProvider } from '@/fsd/5-shared/ui/page-meta';
 
 const trackBottomNavigation = (destinationPath: string) => {
     trackEvent('nav_menu_select', {
@@ -55,56 +56,60 @@ const MobileApp = () => {
     }, [location.pathname]);
 
     return (
-        <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
-            <Conditional condition={!!title}>
-                <FlexBox onClick={() => navigate('/mobile/home')} className="cursor-pointer">
-                    <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
-                    <Typography className="cursor-pointer" variant={'h5'} component="div">
-                        {title}
-                    </Typography>
-                </FlexBox>
-            </Conditional>
+        <PageMetaProvider>
+            <Box sx={{ margin: 'auto', padding: 1, paddingBottom: 7 }}>
+                <Conditional condition={!!title}>
+                    <FlexBox onClick={() => navigate('/mobile/home')} className="cursor-pointer">
+                        <img src="/android-chrome-192x192.png" height="50px" width="50px" alt="logo" />
+                        <Typography className="cursor-pointer" variant={'h5'} component="div">
+                            {title}
+                        </Typography>
+                    </FlexBox>
+                </Conditional>
 
-            <div className="mt-2.5">
-                <Outlet />
-            </div>
-            <Paper sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }} elevation={3}>
-                <BottomNavigation showLabels value={value}>
-                    <BottomNavigationAction
-                        value={0}
-                        component={Link}
-                        to={'./'}
-                        label="Home"
-                        icon={<Home />}
-                        onClick={() => trackBottomNavigation('/mobile/home')}
-                    />
-                    <BottomNavigationAction
-                        value={1}
-                        component={Link}
-                        to={'./input'}
-                        label="Input"
-                        icon={<Input />}
-                        onClick={() => trackBottomNavigation('/mobile/input')}
-                    />
-                    <BottomNavigationAction
-                        value={2}
-                        component={Link}
-                        to={'./plan'}
-                        label="Plan"
-                        icon={<Plan />}
-                        onClick={() => trackBottomNavigation('/mobile/plan')}
-                    />
-                    <BottomNavigationAction
-                        value={3}
-                        component={Link}
-                        to={'./learn'}
-                        label="Learn"
-                        icon={<Learn />}
-                        onClick={() => trackBottomNavigation('/mobile/learn')}
-                    />
-                </BottomNavigation>
-            </Paper>
-        </Box>
+                <div className="mt-2.5">
+                    <Outlet />
+                </div>
+                <Paper
+                    sx={{ position: 'fixed', bottom: 0, left: 0, right: 0, margin: 'auto', zIndex: 100 }}
+                    elevation={3}>
+                    <BottomNavigation showLabels value={value}>
+                        <BottomNavigationAction
+                            value={0}
+                            component={Link}
+                            to={'./'}
+                            label="Home"
+                            icon={<Home />}
+                            onClick={() => trackBottomNavigation('/mobile/home')}
+                        />
+                        <BottomNavigationAction
+                            value={1}
+                            component={Link}
+                            to={'./input'}
+                            label="Input"
+                            icon={<Input />}
+                            onClick={() => trackBottomNavigation('/mobile/input')}
+                        />
+                        <BottomNavigationAction
+                            value={2}
+                            component={Link}
+                            to={'./plan'}
+                            label="Plan"
+                            icon={<Plan />}
+                            onClick={() => trackBottomNavigation('/mobile/plan')}
+                        />
+                        <BottomNavigationAction
+                            value={3}
+                            component={Link}
+                            to={'./learn'}
+                            label="Learn"
+                            icon={<Learn />}
+                            onClick={() => trackBottomNavigation('/mobile/learn')}
+                        />
+                    </BottomNavigation>
+                </Paper>
+            </Box>
+        </PageMetaProvider>
     );
 };
 
