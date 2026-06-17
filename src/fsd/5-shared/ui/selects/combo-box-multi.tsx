@@ -97,9 +97,9 @@ export const ComboBoxMulti = <T,>({
                         )}>
                         {value.length > 0 && displayRenderValue(value)}
 
-                        <div className="flex items-center gap-1">
+                        <div className="flex min-w-0 items-center gap-1">
                             <ComboboxInput
-                                className="flex-1 bg-transparent outline-none placeholder:text-(--soft-fg)"
+                                className="min-w-0 flex-1 bg-transparent outline-none placeholder:text-(--soft-fg)"
                                 onChange={event_ => setQuery(event_.target.value)}
                                 placeholder={value.length === 0 ? placeholder : 'Type to filter…'}
                                 disabled={disabled}
