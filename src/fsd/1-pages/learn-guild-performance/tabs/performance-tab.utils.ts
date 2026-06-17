@@ -719,10 +719,10 @@ export function buildPlayerView(
 
 /**
  * Per-unit rows for one player in a historical season, reconstructed from the aggregate's raw boss
- * hit arrays (`bossPerformance`). Mirrors {@link buildPlayerView}: avg respects `excludeKills`,
- * while max and the hit distribution stay kill-inclusive. Covers bosses + primes the player hit, at
- * the season's top-2 rarities. The aggregate has no `set`, so rows sort by the GuildBoss{N} rotation
- * order (which matches `set` within a rarity).
+ * hit arrays (`bossPerformance`). Mirrors {@link buildPlayerView}: both avg and max respect
+ * `excludeKills` (they share the same filtered hit array). Covers bosses + primes the player hit,
+ * at the season's top-2 rarities. The aggregate has no `set`, so rows sort by the GuildBoss{N}
+ * rotation order (which matches `set` within a rarity).
  */
 export function buildPlayerViewFromSummary(
     summary: GuildSeasonSummary,
