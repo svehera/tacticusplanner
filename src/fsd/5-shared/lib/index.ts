@@ -14,3 +14,4 @@ export * from './array-utils';
 export * from './tacticus-api';
 export { normalizeSearchText } from './normalize-search-text';
 export { isLikelyUserId, obfuscateUserId } from './user-id-utils';
+export { toDesktopPath, toMobilePath } from './view-path';
