@@ -21,6 +21,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { convertData, PersonalDataLocalStorage } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 
+import { toDesktopPath, toMobilePath } from '@/fsd/5-shared/lib';
 import { useAuth, UserRole } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { Switch, usePopUpControls } from '@/fsd/5-shared/ui';
@@ -84,26 +85,28 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
 
     const navigateToDesktopView = () => {
         localStorage.setItem('preferredView', 'desktop');
+        const destination = toDesktopPath(location.pathname);
         trackEvent('nav_menu_select', {
             feature: 'navigation',
             action: 'switch_view',
-            destination_path: '/home',
+            destination_path: destination,
             source: 'user_menu',
             authenticated: isAuthenticated,
         });
-        navigate('/home');
+        navigate({ pathname: destination, search: location.search });
     };
 
     const navigateToMobileView = () => {
         localStorage.setItem('preferredView', 'mobile');
+        const destination = toMobilePath(location.pathname);
         trackEvent('nav_menu_select', {
             feature: 'navigation',
             action: 'switch_view',
-            destination_path: '/mobile/home',
+            destination_path: destination,
             source: 'user_menu',
             authenticated: isAuthenticated,
         });
-        navigate('/mobile/home');
+        navigate({ pathname: destination, search: location.search });
     };
 
     const navigateToReviewTeams = () => {
