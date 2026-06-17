@@ -67,7 +67,7 @@ export interface paths {
          * @deprecated
          */
         get: operations['getGuildRosterHistory'];
-        /** Saves a new roster snapshot. No longer writes to GuildData.RosterData or validates sequenceNumber — sequenceNumber in the request body is accepted but ignored. Response now returns snapshotId (UUID) instead of sequenceNumber. Max 10 snapshots per guild; duplicate names are rejected. */
+        /** Saves a new roster snapshot. Always returns 200 — check status field for 'OK' vs 'TIMED_OUT' (30-second hard limit). Response includes per-phase timing for diagnostics. sequenceNumber in the request body is accepted but ignored. */
         put: operations['putGuildRosterHistory'];
         post?: never;
         delete?: never;
@@ -805,7 +805,7 @@ export interface operations {
             };
         };
         responses: {
-            /** @description OK */
+            /** @description Always returned (even on timeout — check status field). */
             200: {
                 headers: {
                     [name: string]: unknown;
@@ -813,10 +813,22 @@ export interface operations {
                 content: {
                     'application/json': {
                         /**
-                         * Format: uuid
-                         * @description ID of the newly created snapshot.
+                         * @description 'OK' means the snapshot was saved. 'TIMED_OUT' means the operation exceeded 30 seconds and was aborted — the snapshot was NOT saved.
+                         * @enum {string}
                          */
-                        snapshotId: string;
+                        status: 'OK' | 'TIMED_OUT';
+                        /**
+                         * Format: uuid
+                         * @description ID of the newly created snapshot. Present only when status is 'OK'.
+                         */
+                        snapshotId?: string;
+                        /** @description Per-phase durations for diagnostics. Phases: getGuild, parseBody, countCheck, nameCheck, chainLoad, chainProcess, saveChanges. On TIMED_OUT only completed phases appear. */
+                        timings: {
+                            phase: string;
+                            ms: number;
+                        }[];
+                        /** @description Total elapsed milliseconds at response time. */
+                        totalMs: number;
                     };
                 };
             };

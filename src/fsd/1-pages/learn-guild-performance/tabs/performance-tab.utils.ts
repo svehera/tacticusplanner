@@ -753,7 +753,7 @@ export function buildPlayerViewFromSummary(
         const playerAvgStats = aggregate(playerHitsForStats);
         const playerMaxStats = aggregate(playerHitsForStats);
         const guildAvg = excludeKills ? entry.guildAverageDamageWithoutKills : entry.guildAverageDamage;
-        const guildMax = entry.guildMaxDamage;
+        const guildMax = excludeKills ? entry.guildMaxDamageWithoutKills : entry.guildMaxDamage;
 
         rows.push({
             unitKey: `${enemyId}:${rarity}:${encounterIndex}`,

@@ -207,7 +207,7 @@ function DistributionRow({
             {nonKillHits.map((hit, index) => (
                 <div
                     key={`nk-${index}`}
-                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500 opacity-60"
+                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--primary) opacity-60"
                     style={{ left: maxValue > 0 ? `${(hit / maxValue) * 100}%` : '0%' }}
                     title={hit.toLocaleString()}
                 />
@@ -215,7 +215,7 @@ function DistributionRow({
             {killHits.map((hit, index) => (
                 <div
                     key={`k-${index}`}
-                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500 opacity-60"
+                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--danger) opacity-60"
                     style={{ left: maxValue > 0 ? `${(hit / maxValue) * 100}%` : '0%' }}
                     title={`${hit.toLocaleString()} (kill)`}
                 />
@@ -260,7 +260,7 @@ function CenteredDistributionRow({
             {nonKillHits.map((hit, index) => (
                 <div
                     key={`nk-${index}`}
-                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-blue-500 opacity-60"
+                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--primary) opacity-60"
                     style={{ left: `${posOf(hit)}%` }}
                     title={hit.toLocaleString()}
                 />
@@ -268,7 +268,7 @@ function CenteredDistributionRow({
             {killHits.map((hit, index) => (
                 <div
                     key={`k-${index}`}
-                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-red-500 opacity-60"
+                    className="absolute top-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full bg-(--danger) opacity-60"
                     style={{ left: `${posOf(hit)}%` }}
                     title={`${hit.toLocaleString()} (kill)`}
                 />
