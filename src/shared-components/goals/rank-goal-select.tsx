@@ -63,9 +63,11 @@ export const RankGoalSelect: React.FC<Props> = ({
     }, [allowedValues, startingRank, rank]);
 
     const handleRankChange = (value: number) => {
-        const newApplied = isAdamantine(value) ? form.appliedUpgrades : 0;
-        onChange(value, form.point5, newApplied);
-        setForm(current => ({ ...current, rank: value, appliedUpgrades: newApplied }));
+        const adamantine = isAdamantine(value);
+        const newApplied = adamantine ? form.appliedUpgrades : 0;
+        const newPoint5 = adamantine ? false : form.point5;
+        onChange(value, newPoint5, newApplied);
+        setForm(current => ({ ...current, rank: value, point5: newPoint5, appliedUpgrades: newApplied }));
     };
 
     const handlePoint5Change = (checked: boolean) => {
@@ -79,9 +81,16 @@ export const RankGoalSelect: React.FC<Props> = ({
     };
 
     const handleStartRankChange = (value: number) => {
-        const newApplied = isAdamantine(value) ? form.startingAppliedUpgrades : 0;
-        onStartChange(value, form.startingPoint5, newApplied);
-        setForm(current => ({ ...current, startingRank: value, startingAppliedUpgrades: newApplied }));
+        const adamantine = isAdamantine(value);
+        const newApplied = adamantine ? form.startingAppliedUpgrades : 0;
+        const newPoint5 = adamantine ? false : form.startingPoint5;
+        onStartChange(value, newPoint5, newApplied);
+        setForm(current => ({
+            ...current,
+            startingRank: value,
+            startingPoint5: newPoint5,
+            startingAppliedUpgrades: newApplied,
+        }));
     };
 
     const handleStartPoint5Change = (checked: boolean) => {
