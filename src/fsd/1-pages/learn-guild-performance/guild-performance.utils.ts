@@ -332,7 +332,7 @@ export function mergeSeasonSummaries(
     return [...bySeason.values()].toSorted((a, b) => a.season - b.season);
 }
 
-/** Dedupes and sorts GuildBoss{N} prefixes numerically (GuildBoss1, GuildBoss2, …, GuildBoss11). */
+/** Dedupes and sorts GuildBoss{N} prefixes numerically (GuildBoss1, GuildBoss2, …, GuildBoss12). */
 export function sortBossPrefixes(prefixes: Iterable<string>): string[] {
     return [...new Set(prefixes)].toSorted((a, b) => {
         const na = Number.parseInt(/GuildBoss(\d+)/.exec(a)?.[1] ?? '0', 10);
@@ -343,7 +343,7 @@ export function sortBossPrefixes(prefixes: Iterable<string>): string[] {
 
 /**
  * Returns unique GuildBoss{N} prefixes present in `entries`, sorted
- * numerically (GuildBoss1, GuildBoss2, …, GuildBoss11).
+ * numerically (GuildBoss1, GuildBoss2, …, GuildBoss12).
  */
 export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[]): string[] {
     return sortBossPrefixes(entries.map(entry => getBossPrefix(entry.unitId)));
