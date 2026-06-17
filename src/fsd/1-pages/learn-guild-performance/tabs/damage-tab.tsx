@@ -407,8 +407,27 @@ function formatCompactNumber(n: number): string {
     return n.toString();
 }
 
-function buildPlayerSummaryText(entries: TacticusGuildRaidEntry[], names: Map<string, string>): string {
+function buildPlayerSummaryText(
+    entries: TacticusGuildRaidEntry[],
+    names: Map<string, string>,
+    knownPlayerIds: string[]
+): string {
     const byPlayer = new Map<string, PlayerSummaryStats>();
+    for (const userId of knownPlayerIds) {
+        byPlayer.set(userId, {
+            userId,
+            displayName: resolvePlayerName(userId, names),
+            tokens: 0,
+            bombs: 0,
+            primeHits: 0,
+            bossKills: 0,
+            totalDamage: 0,
+            maxDamage: 0,
+            maxTargetUnitId: '',
+            maxTargetRarity: Rarity.Common,
+            maxTargetIsBoss: true,
+        });
+    }
     for (const entry of entries) {
         let stats = byPlayer.get(entry.userId);
         if (stats === undefined) {
@@ -514,7 +533,12 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): string {
             formatCompactNumber(stats.bossKills).padEnd(8).slice(0, 15),
             formatCompactNumber(stats.totalDamage).padEnd(8).slice(0, 15),
             formatCompactNumber(stats.maxDamage).padEnd(8).slice(0, 15),
-            unitDisplayName(stats.maxTargetUnitId, stats.maxTargetRarity, stats.maxTargetIsBoss).padEnd(8).slice(0, 15),
+            (stats.maxDamage > 0
+                ? unitDisplayName(stats.maxTargetUnitId, stats.maxTargetRarity, stats.maxTargetIsBoss)
+                : '—'
+            )
+                .padEnd(8)
+                .slice(0, 15),
         ].join(separator);
     });
     return [header, ...lines].join('\n');
@@ -681,7 +705,11 @@ export const DamageTab = ({
         if (historySummary) {
             return buildPlayerSummaryTextFromSummary(historySummary, names, selectedPlayerId);
         }
-        return buildPlayerSummaryText(selectedPlayerId === undefined ? allSeasonEntries : filteredEntries, names);
+        return buildPlayerSummaryText(
+            selectedPlayerId === undefined ? allSeasonEntries : filteredEntries,
+            names,
+            selectedPlayerId === undefined ? [...names.keys()] : [selectedPlayerId]
+        );
     }, [historySummary, selectedPlayerId, allSeasonEntries, filteredEntries, names]);
 
     const handleRarityChange = (rarities: Rarity[]) => {
