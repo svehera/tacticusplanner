@@ -36,11 +36,16 @@ function formatCompactNumber(n: number): string {
     return n.toString();
 }
 
+export interface PlayerSummaryContent {
+    text: string;
+    html: string;
+}
+
 export function buildPlayerSummaryText(
     entries: TacticusGuildRaidEntry[],
     names: Map<string, string>,
     knownPlayerIds: string[]
-): string {
+): PlayerSummaryContent {
     const byPlayer = new Map<string, PlayerSummaryStats>();
     for (const userId of knownPlayerIds) {
         byPlayer.set(userId, {
@@ -107,7 +112,7 @@ export function buildPlayerSummaryTextFromSummary(
     summary: GuildSeasonSummary,
     names: Map<string, string>,
     playerId?: string
-): string {
+): PlayerSummaryContent {
     const playerData =
         playerId === undefined
             ? summary.damageSummary.textData.playerData
@@ -131,18 +136,23 @@ export function buildPlayerSummaryTextFromSummary(
     return formatPlayerSummaryRows(statsList);
 }
 
-/** Renders the per-player stats as a copyable, fixed-width TSV (sorted by display name). */
-function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): string {
-    if (statsList.length === 0) return '';
+function maxTargetLabel(stats: PlayerSummaryStats): string {
+    return stats.maxDamage > 0
+        ? unitDisplayName(stats.maxTargetUnitId, stats.maxTargetRarity, stats.maxTargetIsBoss)
+        : '—';
+}
+
+/** Renders the per-player stats as a copyable TSV + HTML table (sorted by display name). */
+function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): PlayerSummaryContent {
+    if (statsList.length === 0) return { text: '', html: '' };
 
     const rows = statsList.toSorted((a, b) => {
         const cmp = a.displayName.localeCompare(b.displayName);
         return cmp === 0 ? a.userId.localeCompare(b.userId) : cmp;
     });
 
-    const separator = '\t';
-    const header = [
-        'Player  ',
+    const headerCells = [
+        'Player',
         'Tokens',
         'Bombs',
         'Prime Hits',
@@ -150,8 +160,10 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): string {
         'Total Damage',
         'Max Damage',
         'Max Target',
-    ].join(separator);
-    const lines = rows.map(stats => {
+    ];
+    const separator = '\t';
+    const textHeader = headerCells.join(separator);
+    const textLines = rows.map(stats => {
         const displayName =
             stats.displayName.length > 15 ? stats.displayName.slice(0, 15) : stats.displayName.padEnd(8);
         return [
@@ -162,13 +174,27 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): string {
             formatCompactNumber(stats.bossKills).padEnd(8).slice(0, 15),
             formatCompactNumber(stats.totalDamage).padEnd(8).slice(0, 15),
             formatCompactNumber(stats.maxDamage).padEnd(8).slice(0, 15),
-            (stats.maxDamage > 0
-                ? unitDisplayName(stats.maxTargetUnitId, stats.maxTargetRarity, stats.maxTargetIsBoss)
-                : '—'
-            )
-                .padEnd(8)
-                .slice(0, 15),
+            maxTargetLabel(stats),
         ].join(separator);
     });
-    return [header, ...lines].join('\n');
+
+    const ths = headerCells.map(h => `<th>${h}</th>`).join('');
+    const trs = rows
+        .map(stats => {
+            const cells = [
+                stats.displayName,
+                stats.tokens,
+                stats.bombs,
+                formatCompactNumber(stats.primeHits),
+                formatCompactNumber(stats.bossKills),
+                formatCompactNumber(stats.totalDamage),
+                formatCompactNumber(stats.maxDamage),
+                maxTargetLabel(stats),
+            ];
+            return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
+        })
+        .join('');
+    const html = `<table><thead><tr>${ths}</tr></thead><tbody>${trs}</tbody></table>`;
+
+    return { text: [textHeader, ...textLines].join('\n'), html };
 }
