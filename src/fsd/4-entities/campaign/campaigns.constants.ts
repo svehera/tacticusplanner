@@ -432,6 +432,7 @@ const campaignEvents: Set<CampaignGroupType> = new Set([
     CampaignGroupType.tauCE,
     CampaignGroupType.deathGuardCE,
     CampaignGroupType.sistersCE,
+    CampaignGroupType.darkAngelsCE,
 ]);
 
 export const campaignEventsLocations: Campaign[] = campaignsList

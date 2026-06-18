@@ -10,6 +10,8 @@ const LocationDetails = lazy(() => import('./location-details').then(m => ({ def
 const CHALLENGE_CAMPAIGNS = new Set([
     Campaign.AMSC,
     Campaign.AMEC,
+    Campaign.DASC,
+    Campaign.DAEC,
     Campaign.DGSC,
     Campaign.DGEC,
     Campaign.TSC,
