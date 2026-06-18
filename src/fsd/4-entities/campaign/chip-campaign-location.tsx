@@ -129,6 +129,8 @@ export const ChipCampaignLocation: React.FC<Props> = ({
             Campaign.TAEC,
             Campaign.ASSC,
             Campaign.ASEC,
+            Campaign.DASC,
+            Campaign.DAEC,
         ];
         if (challengeCampaigns.includes(location.campaign)) {
             return location.nodeNumber + 'B';

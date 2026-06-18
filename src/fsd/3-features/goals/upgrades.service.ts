@@ -2643,7 +2643,9 @@ export class UpgradesService {
             case Campaign.TAEC:
             case Campaign.TASC:
             case Campaign.DGEC:
-            case Campaign.DGSC: {
+            case Campaign.DGSC:
+            case Campaign.DAEC:
+            case Campaign.DASC: {
                 if (nodeNumber === 3) {
                     nodeNumber = 1;
                 } else if (nodeNumber === 13) {
