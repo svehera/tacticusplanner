@@ -181,33 +181,33 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                                 Enemies
                             </span>
                             {renderUnitsFilter('enemies', currentFilter.enemiesAlliance, currentFilter.enemiesFactions)}
-                            <div className="flex items-end gap-3">
-                                <ComboBox<string>
-                                    className="w-[110px] shrink-0"
-                                    options={enemiesCountOptions}
-                                    value={currentFilter.enemiesMinCount?.toString() ?? undefined}
-                                    onChange={value =>
-                                        setCurrentFilter({
-                                            ...currentFilter,
-                                            enemiesMinCount: value ? +value : undefined,
-                                        })
-                                    }
-                                    displayValue={v => v ?? ''}
-                                    label="Min Enemy"
-                                />
-                                <ComboBox<string>
-                                    className="w-[110px] shrink-0"
-                                    options={enemiesCountOptions}
-                                    value={currentFilter.enemiesMaxCount?.toString() ?? undefined}
-                                    onChange={value =>
-                                        setCurrentFilter({
-                                            ...currentFilter,
-                                            enemiesMaxCount: value ? +value : undefined,
-                                        })
-                                    }
-                                    displayValue={v => v ?? ''}
-                                    label="Max Enemy"
-                                />
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-end">
+                                <div className="flex w-full gap-3">
+                                    <ComboBox<string>
+                                        options={enemiesCountOptions}
+                                        value={currentFilter.enemiesMinCount?.toString() ?? undefined}
+                                        onChange={value =>
+                                            setCurrentFilter({
+                                                ...currentFilter,
+                                                enemiesMinCount: value ? +value : undefined,
+                                            })
+                                        }
+                                        displayValue={v => v ?? ''}
+                                        label="Min Enemy"
+                                    />
+                                    <ComboBox<string>
+                                        options={enemiesCountOptions}
+                                        value={currentFilter.enemiesMaxCount?.toString() ?? undefined}
+                                        onChange={value =>
+                                            setCurrentFilter({
+                                                ...currentFilter,
+                                                enemiesMaxCount: value ? +value : undefined,
+                                            })
+                                        }
+                                        displayValue={v => v ?? ''}
+                                        label="Max Enemy"
+                                    />
+                                </div>
 
                                 <MultipleSelectCheckmarks
                                     placeholder="Enemy Types"
@@ -224,7 +224,7 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                             <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
                                 Locations
                             </span>
-                            <div className="flex items-center gap-3">
+                            <div className="flex flex-col gap-3 sm:flex-row sm:items-center">
                                 <MultipleSelectCheckmarks
                                     placeholder="Types"
                                     selectedValues={

@@ -44,6 +44,7 @@ const PortalDialogRoot = ({
     children,
 }: PortalDialogProps) => {
     const dialogReference = useRef<HTMLDivElement>(null);
+    const pointerDownOnBackdrop = useRef(false);
 
     useScrollLock(open);
 
@@ -59,8 +60,13 @@ const PortalDialogRoot = ({
     return createPortal(
         <div
             className="fixed inset-0 z-40 flex items-start justify-center overflow-auto bg-black/50 py-8"
+            onPointerDown={event_ => {
+                pointerDownOnBackdrop.current = event_.target === event_.currentTarget;
+            }}
             onClick={event_ => {
-                if (event_.target === event_.currentTarget) onClose();
+                // Only close when the press both started and ended on the backdrop.
+                // Prevents closing when a drag (e.g. selecting in a dropdown) is released outside the dialog.
+                if (event_.target === event_.currentTarget && pointerDownOnBackdrop.current) onClose();
             }}>
             <PortalDialogContext.Provider value={{ onClose }}>
                 <div
