@@ -918,7 +918,7 @@ export const Armageddon = () => {
                 </Modal.Content>
             </Modal>
 
-            {purchasedDialogKey !== null && cart[purchasedDialogKey ?? ''] && (
+            {purchasedDialogKey !== undefined && cart[purchasedDialogKey ?? ''] && (
                 <PurchasedQtyModal
                     key={purchasedDialogKey}
                     isOpen={true}

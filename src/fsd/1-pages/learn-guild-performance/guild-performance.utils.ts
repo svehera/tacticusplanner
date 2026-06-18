@@ -182,7 +182,7 @@ export function sortTokenEntries(entries: GuildTokenEntryWithDisplay[]): GuildTo
 
         const aNext = a.nextTokenAtUtc ?? 0;
         const bNext = b.nextTokenAtUtc ?? 0;
-        if (bNext !== aNext) return bNext - aNext;
+        if (aNext !== bNext) return aNext - bNext;
 
         return a.displayName.localeCompare(b.displayName);
     });
