@@ -56,9 +56,6 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
     compactRaidLocations = true,
     showPlannedRaidLocationsOnly = false,
 }) => {
-    if (upgradeEstimate.id.startsWith('upgDmgC003')) {
-        console.trace(upgradeEstimate.raidLocations);
-    }
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
 
