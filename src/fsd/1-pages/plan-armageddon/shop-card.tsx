@@ -41,12 +41,15 @@ export function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                 tabIndex={isFree ? undefined : 0}
                 onClick={handleCardClick}
                 onKeyDown={event_ => {
-                    if (event_.key === 'Enter' || event_.key === ' ') handleCardClick();
+                    if (event_.key === 'Enter' || event_.key === ' ') {
+                        event_.preventDefault();
+                        handleCardClick();
+                    }
                 }}
-                className={`relative flex flex-col items-center gap-1.5 rounded-xl border p-3 transition-all ${isFree ? 'border-(--border) bg-(--overlay)' : 'cursor-pointer border-(--border) bg-(--overlay) hover:scale-[1.04] hover:border-blue-500 hover:shadow-md active:scale-[0.98]'} ${cartQty > 0 ? 'ring-2 ring-blue-500/60' : ''}`}>
+                className={`relative flex flex-col items-center gap-1.5 rounded-xl border p-3 transition-all ${isFree ? 'border-(--border) bg-(--overlay)' : 'cursor-pointer border-(--border) bg-(--overlay) hover:scale-[1.04] hover:border-(--primary) hover:shadow-md active:scale-[0.98]'} ${cartQty > 0 ? 'ring-2 ring-(--primary)/60' : ''}`}>
                 {/* Cart badge */}
                 {cartQty > 0 && (
-                    <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-blue-600 px-1 text-[10px] font-bold text-white">
+                    <span className="absolute -top-1 -right-1 flex h-5 min-w-5 items-center justify-center rounded-full bg-(--primary) px-1 text-[10px] font-bold text-(--primary-fg)">
                         {cartQty}
                     </span>
                 )}
@@ -60,12 +63,12 @@ export function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                 )}
                 {/* Cost / free badge */}
                 {isFree ? (
-                    <span className="rounded bg-green-500/20 px-1.5 py-0.5 text-[10px] font-medium text-green-400">
+                    <span className="rounded bg-(--success)/20 px-1.5 py-0.5 text-[10px] font-medium text-(--success)">
                         Free
                     </span>
                 ) : (
                     <div className="flex items-center gap-0.5">
-                        <span className="text-[11px] font-semibold text-amber-400">{cost}</span>
+                        <span className="text-[11px] font-semibold text-(--accent)">{cost}</span>
                         <MiscIcon icon="armageddonCurrency" width={12} height={12} />
                     </div>
                 )}
@@ -99,7 +102,7 @@ export function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                                     {maxQty !== undefined && <span className="text-(--soft-fg)"> / {maxQty}</span>}
                                 </span>
                                 <div className="flex items-center gap-1">
-                                    <span className="text-sm font-semibold text-amber-400">{sliderValue * cost}</span>
+                                    <span className="text-sm font-semibold text-(--accent)">{sliderValue * cost}</span>
                                     <MiscIcon icon="armageddonCurrency" width={14} height={14} />
                                 </div>
                             </div>
@@ -109,7 +112,7 @@ export function ShopCard({ slot, cartQty, onSetQty }: ShopCardProps) {
                                 max={sliderMax}
                                 value={sliderValue}
                                 onChange={event_ => setSliderValue(Number(event_.currentTarget.value))}
-                                className="w-full accent-blue-500"
+                                className="w-full accent-(--primary)"
                             />
                         </div>
                     </Modal.Body>

@@ -486,7 +486,7 @@ export const Armageddon = () => {
             <div className="flex flex-wrap items-end gap-4 rounded-xl border border-(--border) bg-(--overlay) p-4">
                 {/* Player Level */}
                 <div className="flex flex-col gap-0.5">
-                    <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Power Level</span>
+                    <span className="text-sm font-medium text-(--fg)">Power Level</span>
                     {playerMetadata.powerLevel === undefined ? (
                         <AccessibleTooltip title="Power level is retrieved from the Tacticus API. Sync to load your power level.">
                             <span>
@@ -520,7 +520,7 @@ export const Armageddon = () => {
 
                 {/* Week */}
                 <div className="flex flex-col gap-1">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Week</label>
+                    <label className="text-sm font-medium text-(--fg)">Week</label>
                     <div className="flex gap-1">
                         {([1, 2, 3] as const).map(w => (
                             <button
@@ -528,8 +528,8 @@ export const Armageddon = () => {
                                 onClick={() => setWeek(w)}
                                 className={`rounded-lg px-4 py-2 text-sm font-semibold transition-colors ${
                                     week === w
-                                        ? 'bg-blue-600 text-white'
-                                        : 'border border-(--border) bg-(--overlay) hover:border-blue-500'
+                                        ? 'bg-(--primary) text-(--primary-fg)'
+                                        : 'border border-(--border) bg-(--overlay) hover:border-(--primary)'
                                 }`}>
                                 Week {w}
                             </button>
@@ -539,7 +539,7 @@ export const Armageddon = () => {
 
                 {/* Day */}
                 <div className="flex flex-col gap-1">
-                    <label className="text-sm font-medium text-gray-700 dark:text-gray-300">Day</label>
+                    <label className="text-sm font-medium text-(--fg)">Day</label>
                     <div className="flex flex-wrap gap-1">
                         {DAYS.map(d => (
                             <button
@@ -547,8 +547,8 @@ export const Armageddon = () => {
                                 onClick={() => setDay(d)}
                                 className={`flex flex-col items-center rounded-lg px-3 py-2 text-xs font-semibold transition-colors ${
                                     day === d
-                                        ? 'bg-blue-600 text-white'
-                                        : 'border border-(--border) bg-(--overlay) hover:border-blue-500'
+                                        ? 'bg-(--primary) text-(--primary-fg)'
+                                        : 'border border-(--border) bg-(--overlay) hover:border-(--primary)'
                                 }`}>
                                 <span>{DAY_LABELS[d].slice(0, 3)}</span>
                                 <span className="text-[10px] font-normal tabular-nums opacity-70">

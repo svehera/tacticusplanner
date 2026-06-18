@@ -43,8 +43,8 @@ export function ShoppingList({ cart, onSetQty, onResetWeek }: ShoppingListProps)
                         onClick={() => setSortByDay(previous => !previous)}
                         className={`flex items-center gap-1.5 rounded-lg border px-3 py-1.5 text-xs font-medium transition-colors ${
                             sortByDay
-                                ? 'border-blue-500 bg-blue-500/15 text-blue-400'
-                                : 'border-(--border) bg-(--overlay) text-(--soft-fg) hover:border-blue-500'
+                                ? 'border-(--primary) bg-(--primary)/15 text-(--primary)'
+                                : 'border-(--border) bg-(--overlay) text-(--soft-fg) hover:border-(--primary)'
                         }`}>
                         Sort by {sortByDay ? 'day' : 'item type'}
                     </button>

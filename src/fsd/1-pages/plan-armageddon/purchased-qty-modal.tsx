@@ -56,7 +56,7 @@ export function PurchasedQtyModal({
                             max={entry.quantity}
                             value={sliderValue}
                             onChange={event => setSliderValue(Number(event.currentTarget.value))}
-                            className="w-full accent-blue-500"
+                            className="w-full accent-(--primary)"
                         />
                     </div>
                 </Modal.Body>
