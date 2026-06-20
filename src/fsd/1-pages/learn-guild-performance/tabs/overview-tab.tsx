@@ -256,6 +256,7 @@ export const OverviewTab = ({
 }) => {
     const [selectedComp, setSelectedComp] = useState<RaidComp | undefined>();
     const hasAnyComps = raidCompsMap !== undefined && raidCompsMap.size > 0;
+    const effectiveSelectedComp = hasAnyComps ? selectedComp : undefined;
 
     return (
         <div className="flex flex-col gap-8">
@@ -272,7 +273,7 @@ export const OverviewTab = ({
             <div className="flex flex-wrap gap-8">
                 <section className="flex flex-col gap-3">
                     <h2 className="text-base font-semibold">Raid Tokens</h2>
-                    {hasAnyComps && <CompFilterBar selected={selectedComp} onSelect={setSelectedComp} />}
+                    {hasAnyComps && <CompFilterBar selected={effectiveSelectedComp} onSelect={setSelectedComp} />}
                     {tokenData === undefined ? (
                         tokenError ? (
                             <p className="text-sm text-red-500">{tokenError}</p>
@@ -284,7 +285,7 @@ export const OverviewTab = ({
                             entries={tokenData}
                             names={names}
                             raidCompsMap={raidCompsMap}
-                            selectedComp={selectedComp}
+                            selectedComp={effectiveSelectedComp}
                         />
                     )}
                 </section>

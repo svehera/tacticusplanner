@@ -32,6 +32,7 @@ import {
 import {
     buildPlayerSummaryText,
     buildPlayerSummaryTextFromSummary,
+    copyToClipboard,
     type PlayerSummaryContent,
 } from './damage-tab.utils';
 
@@ -397,15 +398,9 @@ function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }
                         onClick={event => {
                             event.preventDefault();
                             const { text, html } = content;
-                            const promise = navigator.clipboard.write
-                                ? navigator.clipboard.write([
-                                      new ClipboardItem({
-                                          'text/plain': new Blob([text], { type: 'text/plain' }),
-                                          'text/html': new Blob([html], { type: 'text/html' }),
-                                      }),
-                                  ])
-                                : navigator.clipboard.writeText(text);
-                            promise.then(() => enqueueSnackbar('Copied', { variant: 'success' }));
+                            copyToClipboard(text, html)
+                                .then(() => enqueueSnackbar('Copied', { variant: 'success' }))
+                                .catch(() => {});
                         }}
                         className="rounded p-0.5 hover:bg-yellow-200 dark:hover:bg-yellow-800">
                         <ContentCopyIcon fontSize="inherit" />

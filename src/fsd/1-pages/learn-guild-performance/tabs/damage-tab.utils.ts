@@ -136,6 +136,21 @@ export function buildPlayerSummaryTextFromSummary(
     return formatPlayerSummaryRows(statsList);
 }
 
+export async function copyToClipboard(text: string, html: string): Promise<void> {
+    await (typeof navigator.clipboard.write === 'function' && typeof ClipboardItem !== 'undefined'
+        ? navigator.clipboard.write([
+              new ClipboardItem({
+                  'text/plain': new Blob([text], { type: 'text/plain' }),
+                  'text/html': new Blob([html], { type: 'text/html' }),
+              }),
+          ])
+        : navigator.clipboard.writeText(text));
+}
+
+function escapeHtml(s: string): string {
+    return s.replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;');
+}
+
 function maxTargetLabel(stats: PlayerSummaryStats): string {
     return stats.maxDamage > 0
         ? unitDisplayName(stats.maxTargetUnitId, stats.maxTargetRarity, stats.maxTargetIsBoss)
@@ -182,14 +197,14 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): PlayerSummary
     const trs = rows
         .map(stats => {
             const cells = [
-                stats.displayName,
+                escapeHtml(stats.displayName),
                 stats.tokens,
                 stats.bombs,
                 formatCompactNumber(stats.primeHits),
                 formatCompactNumber(stats.bossKills),
                 formatCompactNumber(stats.totalDamage),
                 formatCompactNumber(stats.maxDamage),
-                maxTargetLabel(stats),
+                escapeHtml(maxTargetLabel(stats)),
             ];
             return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;
         })

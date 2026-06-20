@@ -661,7 +661,7 @@ export interface components {
             /** @description Personal Tacticus API key injected by the leader so keyless members' rosters can be fetched. */
             apiKey?: string | null;
             /** @description Raid faction tags assigned to this member by the guild leader. */
-            guildRaidTags?: components['schemas']['GuildRaidTag'][] | null;
+            raidTeams?: components['schemas']['GuildRaidTag'][] | null;
         };
         GetMemberOverridesResponse: {
             /** @description Monotonically increasing write counter. Send this back unmodified in PUT requests. */

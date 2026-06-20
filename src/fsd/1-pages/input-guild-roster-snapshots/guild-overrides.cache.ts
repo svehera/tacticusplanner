@@ -30,12 +30,15 @@ export function getGuildOverridesCached(): Promise<{
 }> {
     if (cached !== undefined) return Promise.resolve({ data: cached, error: undefined });
     if (inflight !== undefined) return inflight;
-    inflight = getGuildOverridesApi().then(result => {
-        inflight = undefined;
-        if (result.data) cached = result.data;
+    const promise = getGuildOverridesApi().then(result => {
+        if (inflight === promise) {
+            inflight = undefined;
+            if (result.data) cached = result.data;
+        }
         return result;
     });
-    return inflight;
+    inflight = promise;
+    return promise;
 }
 
 export async function putGuildOverridesCached(
