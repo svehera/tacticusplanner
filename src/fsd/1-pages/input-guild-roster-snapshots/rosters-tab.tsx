@@ -5,15 +5,22 @@ import { useContext, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { isLikelyUserId, obfuscateUserId } from '@/fsd/5-shared/lib';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
 
-import { getUnitIdsFromTeamNames } from '@/fsd/1-pages/plan-teams2/team-filter.utils';
+import { RosterFilterDropdown } from '@/fsd/1-pages/input-roster-snapshots/roster-filter-dropdown';
 
-import { MemberState } from './guild-roster-snapshots.models';
-import { RaidTeamFilterDropdown } from './raid-team-filter-dropdown';
+import { ALL_RAID_COMPS, MemberState, type RaidComp } from './guild-roster-snapshots.models';
+import { getRaidCompIconProps } from './raid-comp-icon';
+import {
+    customTeamCategories,
+    filterAndSortUnits,
+    mergedCategories,
+    standardCompCategories,
+} from './rosters-tab.utils';
 
 const SHOW_ALL = RosterSnapshotShowVariableSettings.Always;
 
@@ -22,8 +29,28 @@ interface RostersTabProps {
     memberStates: Map<string, MemberState>;
 }
 
+const StandardCompBar = ({ selected, onToggle }: { selected: RaidComp[]; onToggle: (comp: RaidComp) => void }) => (
+    <div className="flex flex-wrap gap-1">
+        {ALL_RAID_COMPS.map(comp => {
+            const { icon, name } = getRaidCompIconProps(comp);
+            const isActive = selected.includes(comp);
+            return (
+                <button
+                    key={comp}
+                    type="button"
+                    title={comp}
+                    onClick={() => onToggle(comp)}
+                    className={`rounded ring-2 transition-all ${isActive ? 'ring-(--primary) grayscale-0' : 'opacity-60 ring-transparent grayscale hover:opacity-90'}`}>
+                    <UnitShardIcon icon={icon} name={name} width={28} height={28} />
+                </button>
+            );
+        })}
+    </div>
+);
+
 export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
     const [selectedId, setSelectedId] = useState<string | undefined>();
+    const [selectedComps, setSelectedComps] = useState<RaidComp[]>([]);
     const [selectedRaidTeamNames, setSelectedRaidTeamNames] = useState<string[]>([]);
 
     const { teams2 } = useContext(StoreContext);
@@ -34,6 +61,18 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
         () => raidTeams.map(t => ({ name: t.name, isSelected: selectedRaidTeamNames.includes(t.name) })),
         [raidTeams, selectedRaidTeamNames]
     );
+
+    const toggleComp = (comp: RaidComp) => {
+        setSelectedComps(current => {
+            const next = new Set(current);
+            if (next.has(comp)) {
+                next.delete(comp);
+            } else {
+                next.add(comp);
+            }
+            return [...next] as RaidComp[];
+        });
+    };
 
     const toggleRaidTeam = (teamName: string) => {
         setSelectedRaidTeamNames(current => {
@@ -47,10 +86,24 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
         });
     };
 
-    const selectedUnitIds = useMemo(
-        () => getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames),
-        [raidTeams, selectedRaidTeamNames]
+    const hasFilter = selectedComps.length > 0 || selectedRaidTeamNames.length > 0;
+
+    const categories = useMemo(
+        () =>
+            mergedCategories(
+                standardCompCategories(selectedComps),
+                customTeamCategories(raidTeams, selectedRaidTeamNames)
+            ),
+        [selectedComps, raidTeams, selectedRaidTeamNames]
     );
+
+    const selectedState = selectedId ? memberStates.get(selectedId) : undefined;
+    const selectedRoster = selectedState?.status === 'success' ? selectedState : undefined;
+
+    const displayUnits = useMemo(() => {
+        if (!selectedRoster) return [];
+        return hasFilter ? filterAndSortUnits(selectedRoster.parsed.units, categories) : selectedRoster.parsed.units;
+    }, [selectedRoster, hasFilter, categories]);
 
     if (members === undefined) {
         return (
@@ -63,9 +116,6 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
     const nameOnly = members.filter(id => memberStates.get(id)?.status === 'name-only');
     const successes = members.filter(id => memberStates.get(id)?.status === 'success');
     const loadingCount = members.filter(id => memberStates.get(id)?.status === 'loading').length;
-
-    const selectedState = selectedId ? memberStates.get(selectedId) : undefined;
-    const selectedRoster = selectedState?.status === 'success' ? selectedState : undefined;
 
     return (
         <div className="flex flex-col gap-6">
@@ -152,46 +202,57 @@ export const RostersTab = ({ members, memberStates }: RostersTabProps) => {
                                 })}
                             </select>
                         </div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3">
+                        <span className="text-sm font-semibold text-(--fg)">Filter by team:</span>
+                        <StandardCompBar selected={selectedComps} onToggle={toggleComp} />
                         {raidTeams.length > 0 && (
-                            <RaidTeamFilterDropdown teams={raidTeamFilterOptions} onToggleTeam={toggleRaidTeam} />
+                            <RosterFilterDropdown
+                                summaryLabel={
+                                    selectedRaidTeamNames.length === 0
+                                        ? 'Custom Raid Teams'
+                                        : `${selectedRaidTeamNames.length} custom team${selectedRaidTeamNames.length === 1 ? '' : 's'}`
+                                }
+                                teams={raidTeamFilterOptions}
+                                teamTypes={[]}
+                                legendaryEvents={[]}
+                                onToggleTeam={toggleRaidTeam}
+                                onToggleTeamType={() => {}}
+                                onToggleLegendaryTrack={() => {}}
+                            />
                         )}
                     </div>
 
                     {selectedRoster && (
                         <div className="flex flex-wrap gap-2">
-                            {selectedRoster.parsed.units
-                                .filter(({ char, mow }) =>
-                                    selectedUnitIds.size === 0
-                                        ? true
-                                        : (char && selectedUnitIds.has(char.id)) || (mow && selectedUnitIds.has(mow.id))
-                                )
-                                .map(({ char, mow }) =>
-                                    char ? (
-                                        <RosterSnapshotsUnit
-                                            key={char.id}
-                                            char={char}
-                                            showShards={SHOW_ALL}
-                                            showMythicShards={SHOW_ALL}
-                                            showXpLevel={SHOW_ALL}
-                                            showAbilities={SHOW_ALL}
-                                            showEquipment={SHOW_ALL}
-                                            showTooltip
-                                            isEnabled
-                                        />
-                                    ) : mow ? (
-                                        <RosterSnapshotsUnit
-                                            key={mow.id}
-                                            mow={mow}
-                                            showShards={SHOW_ALL}
-                                            showMythicShards={SHOW_ALL}
-                                            showXpLevel={SHOW_ALL}
-                                            showAbilities={SHOW_ALL}
-                                            showEquipment={SHOW_ALL}
-                                            showTooltip
-                                            isEnabled
-                                        />
-                                    ) : undefined
-                                )}
+                            {displayUnits.map(({ char, mow }) =>
+                                char ? (
+                                    <RosterSnapshotsUnit
+                                        key={char.id}
+                                        char={char}
+                                        showShards={SHOW_ALL}
+                                        showMythicShards={SHOW_ALL}
+                                        showXpLevel={SHOW_ALL}
+                                        showAbilities={SHOW_ALL}
+                                        showEquipment={SHOW_ALL}
+                                        showTooltip
+                                        isEnabled
+                                    />
+                                ) : mow ? (
+                                    <RosterSnapshotsUnit
+                                        key={mow.id}
+                                        mow={mow}
+                                        showShards={SHOW_ALL}
+                                        showMythicShards={SHOW_ALL}
+                                        showXpLevel={SHOW_ALL}
+                                        showAbilities={SHOW_ALL}
+                                        showEquipment={SHOW_ALL}
+                                        showTooltip
+                                        isEnabled
+                                    />
+                                ) : undefined
+                            )}
                         </div>
                     )}
                 </section>

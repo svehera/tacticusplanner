@@ -298,6 +298,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/members/overrides': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns the per-player override list (names, API keys, and guild-raid tags) and the current sequence number. Requires a guild API key. */
+        get: operations['getGuildMemberOverrides'];
+        /** Replaces the per-player override list. Use sequenceNumber from the GET response to guard against concurrent writes. */
+        put: operations['putGuildMemberOverrides'];
+        post?: never;
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/guild/member/token_usage': {
         parameters: {
             query?: never;
@@ -629,6 +647,32 @@ export interface components {
             sqlPlayerDataMs?: number | null;
             /** @description Tacticus API call to fetch the player's live unit roster. */
             tacticusPlayerApiMs: number;
+        };
+        /**
+         * @description Raid faction tag that can be assigned to a guild member.
+         * @enum {string}
+         */
+        GuildRaidTag: 'AdMech' | 'Battlesuits' | 'Custodes' | 'Laviscus' | 'Multi-Hit' | 'Neuro' | "Z'Kar";
+        PlayerOverride: {
+            /** @description Tacticus user ID of the guild member this override applies to. */
+            userId: string;
+            /** @description Display name override for the member. */
+            name: string;
+            /** @description Personal Tacticus API key injected by the leader so keyless members' rosters can be fetched. */
+            apiKey?: string | null;
+            /** @description Raid faction tags assigned to this member by the guild leader. */
+            raidTeams?: components['schemas']['GuildRaidTag'][] | null;
+        };
+        GetMemberOverridesResponse: {
+            /** @description Monotonically increasing write counter. Send this back unmodified in PUT requests. */
+            sequenceNumber: number;
+            overrides?: components['schemas']['PlayerOverride'][] | null;
+        };
+        PutMemberOverridesRequest: {
+            /** @description Must match the sequenceNumber from the last GET. Returns 409 on mismatch. */
+            sequenceNumber: number;
+            /** @description Full replacement list. Send null or omit to clear all overrides. */
+            overrides?: components['schemas']['PlayerOverride'][] | null;
         };
         GuildRosterMemberResponse: {
             /**
@@ -1242,6 +1286,68 @@ export interface operations {
             401: components['responses']['Unauthorized'];
             403: components['responses']['ApiError'];
             404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getGuildMemberOverrides: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GetMemberOverridesResponse'];
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    putGuildMemberOverrides: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                'application/json': components['schemas']['PutMemberOverridesRequest'];
+            };
+        };
+        responses: {
+            /** @description OK — returns the new sequence number after the write */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        sequenceNumber: number;
+                    };
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
+            403: components['responses']['ApiError'];
+            /** @description Sequence number mismatch — another write happened since your GET */
+            409: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': components['schemas']['GuildApiError'];
+                };
+            };
             502: components['responses']['TacticusApiError'];
         };
     };
