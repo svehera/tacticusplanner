@@ -115,6 +115,7 @@ const RaidCompToggle = ({ active, onToggle }: { active: RaidComp[]; onToggle: (c
                     key={comp}
                     type="button"
                     title={comp}
+                    aria-pressed={isActive}
                     onClick={() => onToggle(comp)}
                     className={`rounded transition-all ${isActive ? 'grayscale-0' : 'opacity-60 grayscale hover:opacity-90'}`}>
                     <UnitShardIcon icon={icon} name={name} width={22} height={22} />

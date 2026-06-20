@@ -402,7 +402,7 @@ function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }
                                 .then(() => enqueueSnackbar('Copied', { variant: 'success' }))
                                 .catch(() => {});
                         }}
-                        className="rounded p-0.5 hover:bg-yellow-200 dark:hover:bg-yellow-800">
+                        className="rounded p-0.5 hover:bg-(--accent)/20">
                         <ContentCopyIcon fontSize="inherit" />
                     </button>
                 </span>
