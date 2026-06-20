@@ -1,15 +1,25 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+/* eslint-disable boundaries/element-types -- cross-page import for shared guild data */
+import { useState } from 'react';
+
 import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import type { TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 import { getImageUrl } from '@/fsd/5-shared/ui';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+
+import {
+    ALL_RAID_COMPS,
+    type RaidComp,
+} from '@/fsd/1-pages/input-guild-roster-snapshots/guild-roster-snapshots.models';
+import { getRaidCompIconProps } from '@/fsd/1-pages/input-guild-roster-snapshots/raid-comp-icon';
 
 import type { GuildTokenEntry } from '../guild-performance.types';
 import {
     bossPortraitMap,
     formatTime,
-    sortTokenEntries,
-    sortBombEntries,
     resolveBossDisplay,
+    sortBombEntries,
+    sortTokenEntries,
     type BossDisplayHp,
 } from '../guild-performance.utils';
 
@@ -74,21 +84,65 @@ const CurrentBoss = ({ data }: { data: TacticusGuildRaidResponse | undefined }) 
     );
 };
 
-const TokenTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map<string, string> }) => {
-    const rows = entries.map(entry => ({
+const CompFilterBar = ({
+    selected,
+    onSelect,
+}: {
+    selected: RaidComp | undefined;
+    onSelect: (comp: RaidComp | undefined) => void;
+}) => (
+    <div className="flex flex-wrap gap-1">
+        {ALL_RAID_COMPS.map(comp => {
+            const { icon, name } = getRaidCompIconProps(comp);
+            const isActive = selected === comp;
+            return (
+                <button
+                    key={comp}
+                    type="button"
+                    title={comp}
+                    onClick={() => onSelect(isActive ? undefined : comp)}
+                    className={`rounded ring-2 transition-all ${isActive ? 'ring-(--primary) grayscale-0' : 'opacity-60 ring-transparent grayscale hover:opacity-90'}`}>
+                    <UnitShardIcon icon={icon} name={name} width={28} height={28} />
+                </button>
+            );
+        })}
+    </div>
+);
+
+const TokenTable = ({
+    entries,
+    names,
+    raidCompsMap,
+    selectedComp,
+}: {
+    entries: GuildTokenEntry[];
+    names: Map<string, string>;
+    raidCompsMap: Map<string, RaidComp[]> | undefined;
+    selectedComp: RaidComp | undefined;
+}) => {
+    const displayRows = entries.map(entry => ({
         userId: entry.userId,
         displayName: names.get(entry.userId) ?? entry.name ?? obfuscateUserId(entry.userId),
         tokens: entry.tokens,
         nextTokenAtUtc: entry.nextTokenAtUtc,
         bombAvailableAtUtc: entry.bombAvailableAtUtc,
     }));
-    const sorted = sortTokenEntries(rows);
+    const filtered =
+        selectedComp === undefined
+            ? displayRows
+            : displayRows.filter(r => (raidCompsMap?.get(r.userId) ?? []).includes(selectedComp));
+    const sorted = sortTokenEntries(filtered).map(r => ({
+        ...r,
+        comps: raidCompsMap?.get(r.userId) ?? [],
+    }));
+    const showComps = raidCompsMap !== undefined;
 
     return (
         <table className="min-w-0 text-sm">
             <thead>
                 <tr className="text-left text-xs font-semibold text-gray-500 uppercase">
                     <th className="pr-4 pb-1">Player</th>
+                    {showComps && <th className="pr-4 pb-1">Teams</th>}
                     <th className="pr-4 pb-1 text-right">Tokens</th>
                     <th className="pb-1">Next Token At</th>
                 </tr>
@@ -99,6 +153,25 @@ const TokenTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map
                         <td className="py-0.5 pr-4 font-medium" title={row.userId}>
                             {row.displayName}
                         </td>
+                        {showComps && (
+                            <td className="py-0.5 pr-4">
+                                <div className="flex flex-wrap gap-0.5">
+                                    {row.comps.map(comp => {
+                                        const { icon, name } = getRaidCompIconProps(comp);
+                                        return (
+                                            <UnitShardIcon
+                                                key={comp}
+                                                icon={icon}
+                                                name={name}
+                                                tooltip={comp}
+                                                width={20}
+                                                height={20}
+                                            />
+                                        );
+                                    })}
+                                </div>
+                            </td>
+                        )}
                         <td className="py-0.5 pr-4 text-right tabular-nums">
                             {row.tokens == undefined ? '—' : row.tokens}
                         </td>
@@ -172,13 +245,19 @@ export const OverviewTab = ({
     tokenData,
     tokenError,
     guildInfo,
+    raidCompsMap,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     names: Map<string, string>;
     tokenData: GuildTokenEntry[] | undefined;
     tokenError: string | undefined;
     guildInfo?: { tag: string; name: string };
+    raidCompsMap?: Map<string, RaidComp[]>;
 }) => {
+    const [selectedComp, setSelectedComp] = useState<RaidComp | undefined>();
+    const hasAnyComps = raidCompsMap !== undefined && raidCompsMap.size > 0;
+    const effectiveSelectedComp = hasAnyComps ? selectedComp : undefined;
+
     return (
         <div className="flex flex-col gap-8">
             <section className="flex flex-col gap-3">
@@ -194,6 +273,7 @@ export const OverviewTab = ({
             <div className="flex flex-wrap gap-8">
                 <section className="flex flex-col gap-3">
                     <h2 className="text-base font-semibold">Raid Tokens</h2>
+                    {hasAnyComps && <CompFilterBar selected={effectiveSelectedComp} onSelect={setSelectedComp} />}
                     {tokenData === undefined ? (
                         tokenError ? (
                             <p className="text-sm text-red-500">{tokenError}</p>
@@ -201,7 +281,12 @@ export const OverviewTab = ({
                             <p className="text-sm text-gray-500">Loading…</p>
                         )
                     ) : (
-                        <TokenTable entries={tokenData} names={names} />
+                        <TokenTable
+                            entries={tokenData}
+                            names={names}
+                            raidCompsMap={raidCompsMap}
+                            selectedComp={effectiveSelectedComp}
+                        />
                     )}
                 </section>
 

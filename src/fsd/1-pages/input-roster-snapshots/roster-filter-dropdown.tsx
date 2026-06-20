@@ -48,7 +48,7 @@ interface RosterFilterDropdownProps {
     teams: RosterFilterTeamOption[];
     teamTypes: RosterFilterTeamTypeOption[];
     legendaryEvents: RosterFilterLegendaryEventOption[];
-    renderTeamIcons: (teamName: string) => ReactNode;
+    renderTeamIcons?: (teamName: string) => ReactNode;
     onToggleTeam: (teamName: string) => void;
     onToggleTeamType: (token: string) => void;
     onToggleLegendaryTrack: (token: string) => void;
@@ -134,133 +134,141 @@ export const RosterFilterDropdown = ({
                         maxHeight: '72vh',
                     },
                 }}>
-                {(['teams', 'teamTypes', 'legendaryEvents'] as SectionId[]).map(sectionId => {
-                    const isSectionExpanded = expandedSection === sectionId;
-                    const selectedCount = getSectionCount(sectionId);
+                {(['teams', 'teamTypes', 'legendaryEvents'] as SectionId[])
+                    .filter(sectionId => {
+                        if (sectionId === 'teams') return teams.length > 0;
+                        if (sectionId === 'teamTypes') return teamTypes.length > 0;
+                        return legendaryEvents.length > 0;
+                    })
+                    .map(sectionId => {
+                        const isSectionExpanded = expandedSection === sectionId;
+                        const selectedCount = getSectionCount(sectionId);
 
-                    return (
-                        <div key={sectionId}>
-                            <MenuItem onClick={() => toggleSection(sectionId)}>
-                                <ListItemIcon>
-                                    {isSectionExpanded ? (
-                                        <ExpandMore fontSize="small" />
-                                    ) : (
-                                        <ChevronRight fontSize="small" />
-                                    )}
-                                </ListItemIcon>
-                                <ListItemText
-                                    primary={sectionTitleMap[sectionId]}
-                                    secondary={selectedCount > 0 ? `${selectedCount} selected` : undefined}
-                                />
-                            </MenuItem>
-                            <Collapse in={isSectionExpanded} timeout="auto" unmountOnExit>
-                                {sectionId === 'teams' &&
-                                    teams.map(team => (
-                                        <MenuItem
-                                            key={team.name}
-                                            dense
-                                            onClick={() => onToggleTeam(team.name)}
-                                            className="pl-10">
-                                            <ListItemIcon>
-                                                <Checkbox
-                                                    edge="start"
-                                                    checked={team.isSelected}
-                                                    tabIndex={-1}
-                                                    disableRipple
-                                                />
-                                            </ListItemIcon>
-                                            <div className="flex w-full flex-col">
-                                                <ListItemText primary={team.name} />
-                                                <div className="mt-1">{renderTeamIcons(team.name)}</div>
-                                            </div>
-                                        </MenuItem>
-                                    ))}
-
-                                {sectionId === 'teamTypes' &&
-                                    teamTypes.map(option => (
-                                        <MenuItem
-                                            key={option.token}
-                                            dense
-                                            onClick={() => onToggleTeamType(option.token)}
-                                            disabled={option.disabled}
-                                            className="pl-10">
-                                            <ListItemIcon>
-                                                <Checkbox
-                                                    edge="start"
-                                                    checked={option.isSelected}
-                                                    tabIndex={-1}
-                                                    disableRipple
-                                                    disabled={option.disabled}
-                                                />
-                                            </ListItemIcon>
-                                            <ListItemText primary={option.label} />
-                                        </MenuItem>
-                                    ))}
-
-                                {sectionId === 'legendaryEvents' &&
-                                    legendaryEvents.map(event => {
-                                        const eventKey = String(event.id);
-                                        const isEventExpanded = expandedLegendaryEvent === eventKey;
-                                        const selectedTracks = event.tracks.filter(track => track.isSelected).length;
-                                        const hasTracks = event.tracks.length > 0;
-
-                                        return (
-                                            <Fragment key={eventKey}>
-                                                <MenuItem
-                                                    dense
-                                                    onClick={() => hasTracks && toggleLegendaryEvent(event.id)}
-                                                    disabled={!hasTracks}
-                                                    className="pl-10">
-                                                    <ListItemIcon>
-                                                        {hasTracks ? (
-                                                            isEventExpanded ? (
-                                                                <ExpandMore fontSize="small" />
-                                                            ) : (
-                                                                <ChevronRight fontSize="small" />
-                                                            )
-                                                        ) : undefined}
-                                                    </ListItemIcon>
-                                                    <ListItemText
-                                                        primary={event.label}
-                                                        secondary={
-                                                            selectedTracks > 0
-                                                                ? `${selectedTracks} selected`
-                                                                : undefined
-                                                        }
+                        return (
+                            <div key={sectionId}>
+                                <MenuItem onClick={() => toggleSection(sectionId)}>
+                                    <ListItemIcon>
+                                        {isSectionExpanded ? (
+                                            <ExpandMore fontSize="small" />
+                                        ) : (
+                                            <ChevronRight fontSize="small" />
+                                        )}
+                                    </ListItemIcon>
+                                    <ListItemText
+                                        primary={sectionTitleMap[sectionId]}
+                                        secondary={selectedCount > 0 ? `${selectedCount} selected` : undefined}
+                                    />
+                                </MenuItem>
+                                <Collapse in={isSectionExpanded} timeout="auto" unmountOnExit>
+                                    {sectionId === 'teams' &&
+                                        teams.map(team => (
+                                            <MenuItem
+                                                key={team.name}
+                                                dense
+                                                onClick={() => onToggleTeam(team.name)}
+                                                className="pl-10">
+                                                <ListItemIcon>
+                                                    <Checkbox
+                                                        edge="start"
+                                                        checked={team.isSelected}
+                                                        tabIndex={-1}
+                                                        disableRipple
                                                     />
-                                                    {event.icon ? (
-                                                        <UnitShardIcon icon={event.icon} height={24} width={24} />
-                                                    ) : undefined}
-                                                </MenuItem>
-                                                <Collapse in={isEventExpanded} timeout="auto" unmountOnExit>
-                                                    {event.tracks.map(track => (
-                                                        <MenuItem
-                                                            key={track.token}
-                                                            dense
-                                                            onClick={() => onToggleLegendaryTrack(track.token)}
-                                                            disabled={track.disabled}
-                                                            className="pl-16">
-                                                            <ListItemIcon>
-                                                                <Checkbox
-                                                                    edge="start"
-                                                                    checked={track.isSelected}
-                                                                    tabIndex={-1}
-                                                                    disableRipple
-                                                                    disabled={track.disabled}
-                                                                />
-                                                            </ListItemIcon>
-                                                            <ListItemText primary={track.label} />
-                                                        </MenuItem>
-                                                    ))}
-                                                </Collapse>
-                                            </Fragment>
-                                        );
-                                    })}
-                            </Collapse>
-                            <Divider />
-                        </div>
-                    );
-                })}
+                                                </ListItemIcon>
+                                                <div className="flex w-full flex-col">
+                                                    <ListItemText primary={team.name} />
+                                                    <div className="mt-1">{renderTeamIcons?.(team.name)}</div>
+                                                </div>
+                                            </MenuItem>
+                                        ))}
+
+                                    {sectionId === 'teamTypes' &&
+                                        teamTypes.map(option => (
+                                            <MenuItem
+                                                key={option.token}
+                                                dense
+                                                onClick={() => onToggleTeamType(option.token)}
+                                                disabled={option.disabled}
+                                                className="pl-10">
+                                                <ListItemIcon>
+                                                    <Checkbox
+                                                        edge="start"
+                                                        checked={option.isSelected}
+                                                        tabIndex={-1}
+                                                        disableRipple
+                                                        disabled={option.disabled}
+                                                    />
+                                                </ListItemIcon>
+                                                <ListItemText primary={option.label} />
+                                            </MenuItem>
+                                        ))}
+
+                                    {sectionId === 'legendaryEvents' &&
+                                        legendaryEvents.map(event => {
+                                            const eventKey = String(event.id);
+                                            const isEventExpanded = expandedLegendaryEvent === eventKey;
+                                            const selectedTracks = event.tracks.filter(
+                                                track => track.isSelected
+                                            ).length;
+                                            const hasTracks = event.tracks.length > 0;
+
+                                            return (
+                                                <Fragment key={eventKey}>
+                                                    <MenuItem
+                                                        dense
+                                                        onClick={() => hasTracks && toggleLegendaryEvent(event.id)}
+                                                        disabled={!hasTracks}
+                                                        className="pl-10">
+                                                        <ListItemIcon>
+                                                            {hasTracks ? (
+                                                                isEventExpanded ? (
+                                                                    <ExpandMore fontSize="small" />
+                                                                ) : (
+                                                                    <ChevronRight fontSize="small" />
+                                                                )
+                                                            ) : undefined}
+                                                        </ListItemIcon>
+                                                        <ListItemText
+                                                            primary={event.label}
+                                                            secondary={
+                                                                selectedTracks > 0
+                                                                    ? `${selectedTracks} selected`
+                                                                    : undefined
+                                                            }
+                                                        />
+                                                        {event.icon ? (
+                                                            <UnitShardIcon icon={event.icon} height={24} width={24} />
+                                                        ) : undefined}
+                                                    </MenuItem>
+                                                    <Collapse in={isEventExpanded} timeout="auto" unmountOnExit>
+                                                        {event.tracks.map(track => (
+                                                            <MenuItem
+                                                                key={track.token}
+                                                                dense
+                                                                onClick={() => onToggleLegendaryTrack(track.token)}
+                                                                disabled={track.disabled}
+                                                                className="pl-16">
+                                                                <ListItemIcon>
+                                                                    <Checkbox
+                                                                        edge="start"
+                                                                        checked={track.isSelected}
+                                                                        tabIndex={-1}
+                                                                        disableRipple
+                                                                        disabled={track.disabled}
+                                                                    />
+                                                                </ListItemIcon>
+                                                                <ListItemText primary={track.label} />
+                                                            </MenuItem>
+                                                        ))}
+                                                    </Collapse>
+                                                </Fragment>
+                                            );
+                                        })}
+                                </Collapse>
+                                <Divider />
+                            </div>
+                        );
+                    })}
                 <div className="px-3 py-2">
                     <Typography variant="caption" color="text.secondary">
                         Tip: expand a section, then tap options to toggle filters.

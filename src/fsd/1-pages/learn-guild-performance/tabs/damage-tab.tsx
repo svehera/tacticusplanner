@@ -29,7 +29,12 @@ import {
     unitRoundIconMap,
 } from '../guild-performance.utils';
 
-import { buildPlayerSummaryText, buildPlayerSummaryTextFromSummary } from './damage-tab.utils';
+import {
+    buildPlayerSummaryText,
+    buildPlayerSummaryTextFromSummary,
+    copyToClipboard,
+    type PlayerSummaryContent,
+} from './damage-tab.utils';
 
 // ---------------------------------------------------------------------------
 // Filter sub-components
@@ -378,8 +383,8 @@ function StatHeader({ hidePlayer }: { hidePlayer: boolean }) {
     );
 }
 
-function PlayerSummaryTextSection({ text }: { text: string }) {
-    if (text === '') return <></>;
+function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }) {
+    if (content.text === '') return <></>;
     return (
         <details className="max-w-4xl rounded border border-gray-200 dark:border-gray-700">
             <summary className="cursor-pointer px-3 py-2 text-base font-semibold select-none">
@@ -392,15 +397,16 @@ function PlayerSummaryTextSection({ text }: { text: string }) {
                         title="Copy to clipboard"
                         onClick={event => {
                             event.preventDefault();
-                            navigator.clipboard
-                                .writeText(text)
-                                .then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
+                            const { text, html } = content;
+                            copyToClipboard(text, html)
+                                .then(() => enqueueSnackbar('Copied', { variant: 'success' }))
+                                .catch(() => {});
                         }}
-                        className="rounded p-0.5 hover:bg-yellow-200 dark:hover:bg-yellow-800">
+                        className="rounded p-0.5 hover:bg-(--accent)/20">
                         <ContentCopyIcon fontSize="inherit" />
                     </button>
                 </span>
-                <pre className="max-h-96 overflow-auto font-mono text-xs whitespace-pre">{text}</pre>
+                <pre className="max-h-96 overflow-auto font-mono text-xs whitespace-pre">{content.text}</pre>
             </div>
         </details>
     );
@@ -535,7 +541,7 @@ export const DamageTab = ({
         return buildBossRarityStats(filteredEntries, names);
     }, [historySummary, selectedPlayerId, filteredEntries, names]);
 
-    const summaryText = useMemo(() => {
+    const summaryContent = useMemo(() => {
         if (historySummary) {
             return buildPlayerSummaryTextFromSummary(historySummary, names, selectedPlayerId);
         }
@@ -565,7 +571,7 @@ export const DamageTab = ({
                 </div>
             )}
             <BossRarityStatsTable rows={bossRows} hidePlayer={selectedPlayerId !== undefined} />
-            <PlayerSummaryTextSection text={summaryText} />
+            <PlayerSummaryTextSection content={summaryContent} />
             {!isHistorical && (
                 <RaidTable
                     data={currentData}
