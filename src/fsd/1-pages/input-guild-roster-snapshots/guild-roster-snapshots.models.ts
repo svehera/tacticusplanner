@@ -15,10 +15,123 @@ export interface GuildApiError {
     data?: { playerName?: string };
 }
 
+export type RaidComp = 'AdMech' | 'Battlesuits' | 'Custodes' | 'Laviscus' | 'Multi-Hit' | 'Neuro' | "Z'Kar";
+
+export const ALL_RAID_COMPS: RaidComp[] = [
+    'AdMech',
+    'Battlesuits',
+    'Custodes',
+    'Laviscus',
+    'Multi-Hit',
+    'Neuro',
+    "Z'Kar",
+];
+
+/** snowprintId for characters; snowprintId for the Z'Kar MoW. */
+export const RAID_COMP_SNOWPRINT_ID: Record<RaidComp, string> = {
+    AdMech: 'admecRuststalker',
+    Battlesuits: 'tauCrisis',
+    Custodes: 'custoBladeChampion',
+    Laviscus: 'emperExultant',
+    'Multi-Hit': 'spaceBlackmane',
+    Neuro: 'tyranNeurothrope',
+    "Z'Kar": 'thousDaemonPrince',
+};
+
+export const RAID_COMP_IS_MOW: Record<RaidComp, boolean> = {
+    AdMech: false,
+    Battlesuits: false,
+    Custodes: false,
+    Laviscus: false,
+    'Multi-Hit': false,
+    Neuro: false,
+    "Z'Kar": true,
+};
+
+export interface RaidCompMembers {
+    coreIds: string[];
+    flexIds: string[];
+    mowIds: string[];
+}
+
+export const RAID_COMP_MEMBERS: Record<RaidComp, RaidCompMembers> = {
+    AdMech: {
+        coreIds: ['admecRuststalker', 'admecMarshall', 'admecManipulus'],
+        flexIds: [
+            'admecDominus',
+            'orksWarboss',
+            'tauMarksman',
+            'tauCrisis',
+            'eldarAutarch',
+            'votanMemnyr',
+            'custoAtlacoya',
+            'templHelbrecht',
+        ],
+        mowIds: ['ultraDreadnought', 'tyranBiovore', 'deathCrawler'],
+    },
+    Battlesuits: {
+        coreIds: ['tauCrisis', 'tauFarsight', 'admecManipulus'],
+        flexIds: ['tauDarkstrider', 'tauShadowsun', 'eldarFarseer'],
+        mowIds: ['tauBroadside', 'tyranBiovore', 'deathCrawler'],
+    },
+    Custodes: {
+        coreIds: ['custoBladeChampion', 'custoTrajann', 'worldKharn'],
+        flexIds: [
+            'spaceBlackmane',
+            'bloodDante',
+            'bloodMephiston',
+            'blackAbaddon',
+            'custoAtlacoya',
+            'templHelbrecht',
+            'custoVexilusPraetor',
+        ],
+        mowIds: ['deathCrawler', 'tyranBiovore'],
+    },
+    Laviscus: {
+        coreIds: ['emperExultant'],
+        flexIds: [
+            'custoBladeChampion',
+            'custoTrajann',
+            'worldKharn',
+            'orksWarboss',
+            'worldExecutions',
+            'templHelbrecht',
+            'custoAtlacoya',
+            'custoVexilusPraetor',
+            'admecDominus',
+        ],
+        mowIds: ['tyranBiovore', 'deathCrawler'],
+    },
+    'Multi-Hit': {
+        coreIds: ['spaceBlackmane', 'tauAunShi', 'eldarFarseer'],
+        flexIds: [
+            'ultraCalgar',
+            'templHelbrecht',
+            'ultraInceptorSgt',
+            'darkaCompanion',
+            'darkaAsmodai',
+            'eldarMauganRa',
+            'worldKharn',
+        ],
+        mowIds: ['tyranBiovore', 'deathCrawler'],
+    },
+    Neuro: {
+        coreIds: ['tyranNeurothrope', 'thousInfernalMaster', 'thousTzaangor'],
+        flexIds: ['thousAhriman', 'genesMagus', 'adeptCanoness', 'templHelbrecht', 'custoAtlacoya', 'bloodMephiston'],
+        mowIds: ['adeptExorcist'],
+    },
+    "Z'Kar": {
+        coreIds: ['tyranNeurothrope', 'thousInfernalMaster'],
+        flexIds: ['thousAhriman', 'blackPossession', 'blackAbaddon', 'bloodMephiston', 'thousSorcerer'],
+        mowIds: ['thousDaemonPrince'],
+    },
+};
+
 export interface PlayerOverride {
     userId: string;
-    name: string;
+    name?: string;
     apiKey?: string;
+    raidTeams?: RaidComp[];
 }
 
 export interface GuildOverridesResponse {
@@ -30,6 +143,7 @@ export interface OverrideRow {
     userId: string;
     name: string;
     apiKey: string;
+    raidComps: RaidComp[];
 }
 
 export interface ParsedUnit {

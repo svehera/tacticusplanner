@@ -1,4 +1,4 @@
-/* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+/* eslint-disable import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { makeApiCall } from '@/fsd/5-shared/api';
@@ -13,6 +13,12 @@ import {
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
+
+import {
+    getGuildOverridesCached,
+    invalidateGuildOverridesCache,
+} from '../input-guild-roster-snapshots/guild-overrides.cache';
+import { type RaidComp } from '../input-guild-roster-snapshots/guild-roster-snapshots.models';
 
 import {
     type CurrentSeasonRaidApiResponse,
@@ -48,6 +54,7 @@ let cachedGuildInfo: { tag: string; name: string } | undefined;
 let cachedNames: Map<string, string> | undefined;
 let cachedRawNames: GuildMemberName[] | undefined;
 let cachedTokens: GuildTokenEntry[] | undefined;
+let cachedRaidCompsMap: Map<string, RaidComp[]> | undefined;
 /** Gates the one-shot auto-fetch (the cache vars above can legitimately stay undefined for members). */
 let cachedFetched = false;
 
@@ -108,6 +115,7 @@ export function useGuildPerformance() {
     const [tokens, setTokens] = useState<GuildTokenEntry[] | typeof LOADING>(cachedTokens ?? LOADING);
     const [tokenError, setTokenError] = useState<string | undefined>();
     const [tokenUsageData, setTokenUsageData] = useState<GuildTokenUsageResponse | undefined>(cachedTokenUsageData);
+    const [raidCompsMap, setRaidCompsMap] = useState<Map<string, RaidComp[]> | undefined>(cachedRaidCompsMap);
     const [isRefreshing, setIsRefreshing] = useState(false);
     const [isLoadingHistoricalSeason, setIsLoadingHistoricalSeason] = useState(false);
 
@@ -126,6 +134,8 @@ export function useGuildPerformance() {
         cachedTokens = undefined;
         cachedPerformanceIndex = undefined;
         cachedTokenUsageData = undefined;
+        cachedRaidCompsMap = undefined;
+        invalidateGuildOverridesCache();
         cachedFetched = false;
         setCurrent(LOADING);
         setSeasonList(undefined);
@@ -139,6 +149,7 @@ export function useGuildPerformance() {
         setTokenError(undefined);
         setPerformanceIndex(undefined);
         setTokenUsageData(undefined);
+        setRaidCompsMap(undefined);
     }, [authIdentity]);
 
     const currentData = current === LOADING ? undefined : current;
@@ -277,6 +288,7 @@ export function useGuildPerformance() {
                         guildResponse,
                         piResponse,
                         tokenUsageResponse,
+                        overridesResponse,
                     ] = await Promise.all([
                         getGuildRaidSeasonsApi(),
                         makeApiCall<GuildMemberName[]>('GET', 'guild/members/names'),
@@ -285,6 +297,7 @@ export function useGuildPerformance() {
                         getTacticusGuildData(),
                         getGuildPerformanceIndexApi(),
                         getGuildTokenUsageApi(),
+                        getGuildOverridesCached(),
                     ]);
 
                     if (seasonsResponse.data) {
@@ -315,6 +328,10 @@ export function useGuildPerformance() {
                     const nameMap = new Map<string, string>();
                     for (const member of namesResponse.data ?? []) {
                         if (member.name) nameMap.set(member.userId, member.name);
+                    }
+                    // Override names take precedence over shared names, field by field.
+                    for (const override of overridesResponse.data?.overrides ?? []) {
+                        if (override.name) nameMap.set(override.userId, override.name);
                     }
                     cachedRawNames = namesResponse.data;
                     setRawNames(namesResponse.data);
@@ -356,6 +373,15 @@ export function useGuildPerformance() {
                         cachedTokenUsageData = tokenUsageResponse.data;
                         setTokenUsageData(cachedTokenUsageData);
                     }
+
+                    const compsMap = new Map<string, RaidComp[]>();
+                    for (const override of overridesResponse.data?.overrides ?? []) {
+                        if (override.raidTeams && override.raidTeams.length > 0) {
+                            compsMap.set(override.userId, override.raidTeams);
+                        }
+                    }
+                    cachedRaidCompsMap = compsMap;
+                    setRaidCompsMap(compsMap);
                 }
 
                 cachedFetched = true;
@@ -416,6 +442,7 @@ export function useGuildPerformance() {
         avgDamageMap,
         performanceIndex,
         tokenUsageData,
+        raidCompsMap,
         fetchData,
         fetchSeasonData,
         refreshSharedLeaderboards,

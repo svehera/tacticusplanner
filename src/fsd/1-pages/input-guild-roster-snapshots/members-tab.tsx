@@ -4,17 +4,24 @@ import { AlertTriangle, Trash2, X } from 'lucide-react';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { getTacticusGuildData, obfuscateUserId, TacticusGuildMember, TacticusGuildRole } from '@/fsd/5-shared/lib';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import {
+    getGuildOverridesCached,
+    invalidateGuildOverridesCache,
+    putGuildOverridesCached,
+} from './guild-overrides.cache';
 import { buildCsv, formatTimeAgo, parseCsvText } from './guild-roster-snapshots.helpers';
 import {
+    ALL_RAID_COMPS,
     API_KEY_PATTERN,
-    getGuildOverridesApi,
     MemberState,
     OverrideRow,
     OverridesLoadState,
     PlayerOverride,
-    putGuildOverridesApi,
+    type RaidComp,
 } from './guild-roster-snapshots.models';
+import { getRaidCompIconProps } from './raid-comp-icon';
 
 // ---------------------------------------------------------------------------
 // Module-level session cache — survives page navigations
@@ -59,17 +66,23 @@ function roleBadgeClass(role: TacticusGuildRole): string {
     }
 }
 
-/** Returns true if the current rows differ (by trimmed name/apiKey) from the saved rows. */
+/** Returns true if the current rows differ from the saved rows. */
 function rowsDiffer(current: OverrideRow[], saved: OverrideRow[]): boolean {
     const toMap = (array: OverrideRow[]) =>
-        new Map(array.map(r => [r.userId, { name: r.name.trim(), apiKey: r.apiKey.trim() }]));
+        new Map(
+            array.map(r => [
+                r.userId,
+                { name: r.name.trim(), apiKey: r.apiKey.trim(), raidComps: [...r.raidComps].toSorted() },
+            ])
+        );
     const currentMap = toMap(current);
     const savedMap = toMap(saved);
     const allIds = new Set([...currentMap.keys(), ...savedMap.keys()]);
     for (const id of allIds) {
-        const c = currentMap.get(id) ?? { name: '', apiKey: '' };
-        const s = savedMap.get(id) ?? { name: '', apiKey: '' };
+        const c = currentMap.get(id) ?? { name: '', apiKey: '', raidComps: [] };
+        const s = savedMap.get(id) ?? { name: '', apiKey: '', raidComps: [] };
         if (c.name !== s.name || c.apiKey !== s.apiKey) return true;
+        if (c.raidComps.join(',') !== s.raidComps.join(',')) return true;
     }
     return false;
 }
@@ -85,8 +98,31 @@ const invalidInputCls =
 const warningInputCls =
     'w-full rounded border border-(--warning) bg-(--bg) px-2 py-1 text-sm text-(--fg) focus:outline-none focus:ring-1 focus:ring-(--warning)/50';
 
-// Matching grid column template used for both header and data rows.
-const COLS = 'grid-cols-[minmax(8rem,1fr)_14rem_7rem_3.5rem_6.5rem_minmax(8rem,1.5fr)_2rem]';
+// Name | UserID | Role | Comps | Level | LastActive | APIKey | ClearBtn
+const COLS = 'grid-cols-[minmax(8rem,1fr)_14rem_7rem_10.5rem_3.5rem_6.5rem_minmax(8rem,1.5fr)_2rem]';
+
+// ---------------------------------------------------------------------------
+// RaidCompToggle — row of 7 comp icons, all always visible, active/dimmed
+// ---------------------------------------------------------------------------
+
+const RaidCompToggle = ({ active, onToggle }: { active: RaidComp[]; onToggle: (comp: RaidComp) => void }) => (
+    <div className="flex flex-wrap gap-0.5">
+        {ALL_RAID_COMPS.map(comp => {
+            const { icon, name } = getRaidCompIconProps(comp);
+            const isActive = active.includes(comp);
+            return (
+                <button
+                    key={comp}
+                    type="button"
+                    title={comp}
+                    onClick={() => onToggle(comp)}
+                    className={`rounded transition-all ${isActive ? 'grayscale-0' : 'opacity-60 grayscale hover:opacity-90'}`}>
+                    <UnitShardIcon icon={icon} name={name} width={22} height={22} />
+                </button>
+            );
+        })}
+    </div>
+);
 
 // ---------------------------------------------------------------------------
 // Component
@@ -122,7 +158,7 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
         setLoadState({ status: 'loading' });
         setCsvImportStatus(undefined);
 
-        void Promise.all([getTacticusGuildData(), getGuildOverridesApi()]).then(([guildResult, overridesResult]) => {
+        void Promise.all([getTacticusGuildData(), getGuildOverridesCached()]).then(([guildResult, overridesResult]) => {
             if (guildResult.error) {
                 const message =
                     typeof guildResult.error === 'string'
@@ -143,7 +179,12 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
             const members = guildResult.data?.guild.members ?? [];
             const overrides = overridesResult.data?.overrides ?? [];
             const seqNumber = overridesResult.data?.sequenceNumber ?? 0;
-            const loadedRows = overrides.map(o => ({ userId: o.userId, name: o.name, apiKey: o.apiKey ?? '' }));
+            const loadedRows = overrides.map(o => ({
+                userId: o.userId,
+                name: o.name ?? '',
+                apiKey: o.apiKey ?? '',
+                raidComps: o.raidTeams ?? [],
+            }));
 
             writeCache({ guildMembers: members, savedRows: loadedRows, sequenceNumber: seqNumber });
             setGuildMembers(members);
@@ -185,13 +226,31 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
             }
             return [
                 ...previous,
-                { userId, name: field === 'name' ? value : '', apiKey: field === 'apiKey' ? value : '' },
+                { userId, name: field === 'name' ? value : '', apiKey: field === 'apiKey' ? value : '', raidComps: [] },
             ];
         });
     };
 
+    const toggleRaidComp = (userId: string, comp: RaidComp) => {
+        setRows(previous => {
+            const index = previous.findIndex(r => r.userId === userId);
+            if (index !== -1) {
+                const row = previous[index];
+                const next = [...previous];
+                const comps = row.raidComps.includes(comp)
+                    ? row.raidComps.filter(c => c !== comp)
+                    : [...row.raidComps, comp];
+                next[index] = { ...row, raidComps: comps };
+                return next;
+            }
+            return [...previous, { userId, name: '', apiKey: '', raidComps: [comp] }];
+        });
+    };
+
     const clearOverride = (userId: string) => {
-        setRows(previous => previous.map(r => (r.userId === userId ? { ...r, name: '', apiKey: '' } : r)));
+        setRows(previous =>
+            previous.map(r => (r.userId === userId ? { ...r, name: '', apiKey: '', raidComps: [] } : r))
+        );
     };
 
     const removeFormerMember = (userId: string) => {
@@ -204,7 +263,9 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
 
     const applyImport = (text: string) => {
         const { imported, discarded } = parseCsvText(text);
-        setRows(imported);
+        // Preserve existing raidComps when re-importing CSV (CSV doesn't carry comp data)
+        const existingComps = new Map(rows.map(r => [r.userId, r.raidComps]));
+        setRows(imported.map(r => ({ ...r, raidComps: existingComps.get(r.userId) ?? [] })));
         if (discarded.length === 0) {
             setCsvImportStatus(`Imported ${imported.length} row${imported.length === 1 ? '' : 's'}.`);
         } else {
@@ -249,14 +310,15 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
         setSaveError(undefined);
 
         const overrides: PlayerOverride[] = rows
-            .filter(r => r.name.trim() !== '' || r.apiKey.trim() !== '')
+            .filter(r => r.name.trim() !== '' || r.apiKey.trim() !== '' || r.raidComps.length > 0)
             .map(r => ({
                 userId: r.userId,
-                name: r.name.trim(),
+                ...(r.name.trim() ? { name: r.name.trim() } : {}),
                 ...(r.apiKey.trim() ? { apiKey: r.apiKey.trim() } : {}),
+                ...(r.raidComps.length > 0 ? { raidTeams: r.raidComps } : {}),
             }));
 
-        const { data, error } = await putGuildOverridesApi(loadState.sequenceNumber, overrides);
+        const { data, error } = await putGuildOverridesCached(loadState.sequenceNumber, overrides);
         if (error) {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             const code = (error as any)?.response?.data?.code as string | undefined;
@@ -282,6 +344,7 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
     const handleRefresh = () => {
         setStaleDialogOpen(false);
         writeCache();
+        invalidateGuildOverridesCache();
         fetchAll();
     };
 
@@ -362,7 +425,7 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
 
                 {/* Member grid */}
                 <div className="overflow-x-auto rounded-xl border border-(--border)">
-                    <div className="min-w-[780px]">
+                    <div className="min-w-[900px]">
                         {/* Header */}
                         <div className={`grid ${COLS} gap-x-3 border-b border-(--border) bg-(--soft) px-3 py-2`}>
                             <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Name</span>
@@ -370,6 +433,7 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
                                 User ID
                             </span>
                             <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Role</span>
+                            <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Comps</span>
                             <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Lvl</span>
                             <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
                                 Last Active
@@ -390,8 +454,9 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
                                 const override = overridesByUserId.get(member.userId);
                                 const name = override?.name ?? '';
                                 const apiKey = override?.apiKey ?? '';
+                                const raidComps = override?.raidComps ?? [];
                                 const apiKeyInvalid = apiKey.length > 0 && !API_KEY_PATTERN.test(apiKey);
-                                const canClear = name !== '' || apiKey !== '';
+                                const canClear = name !== '' || apiKey !== '' || raidComps.length > 0;
 
                                 const memberState = memberStates.get(member.userId);
                                 const hasVolunteeredName =
@@ -438,6 +503,10 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
                                             className={`inline-flex items-center justify-center rounded-full px-2 py-0.5 text-xs font-medium ${roleBadgeClass(member.role)}`}>
                                             {ROLE_LABELS[member.role]}
                                         </span>
+                                        <RaidCompToggle
+                                            active={raidComps}
+                                            onToggle={comp => toggleRaidComp(member.userId, comp)}
+                                        />
                                         <span className="text-sm text-(--fg) tabular-nums">{member.level}</span>
                                         <span className="text-xs text-(--soft-fg)">
                                             {formatTimeAgo(member.lastActivityOn)}
@@ -460,7 +529,7 @@ export const MembersTab = ({ memberStates, rostersLoaded }: MembersTabProps) => 
                                             onClick={() => clearOverride(member.userId)}
                                             disabled={!canClear}
                                             className="rounded p-0.5 text-(--soft-fg) transition-colors hover:bg-(--danger)/10 hover:text-(--danger) disabled:cursor-not-allowed disabled:opacity-30"
-                                            aria-label="Clear name and API key">
+                                            aria-label="Clear name, API key, and comps">
                                             <X className="size-3.5" />
                                         </button>
                                     </div>

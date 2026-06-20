@@ -156,7 +156,7 @@ export function parseCsvText(text: string): { imported: OverrideRow[]; discarded
             continue;
         }
 
-        imported.push({ userId, name, apiKey });
+        imported.push({ userId, name, apiKey, raidComps: [] });
     }
 
     return { imported, discarded };

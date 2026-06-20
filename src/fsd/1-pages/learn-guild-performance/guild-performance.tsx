@@ -112,6 +112,7 @@ export const GuildPerformance = () => {
         avgDamageMap,
         performanceIndex,
         tokenUsageData,
+        raidCompsMap,
         fetchData,
         fetchSeasonData,
         refreshSharedLeaderboards,
@@ -238,6 +239,7 @@ export const GuildPerformance = () => {
                                 tokenData={tokenData}
                                 tokenError={tokenError}
                                 guildInfo={guildInfo}
+                                raidCompsMap={raidCompsMap}
                             />
                         </div>
                     )}
