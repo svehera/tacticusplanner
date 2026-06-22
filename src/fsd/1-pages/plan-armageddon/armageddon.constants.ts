@@ -58,9 +58,8 @@ export const ALL_EVENT_DATES = Array.from({ length: 21 }, (_, index) => ({
     day: DAYS[index % 7],
 }));
 
-export const PL_HIGH = 25;
-export const PL_MEDIUM = 15;
-// < PL_MEDIUM → low
+export const PL_MEDIUM = 20;
+// < PL_MEDIUM → low; >= PL_MEDIUM without blue-star unit → medium; >= PL_MEDIUM with blue-star unit → high
 
 // "Max legendary" = first blue star or higher (includes mythic)
 export const MAX_LEGENDARY_THRESHOLD = RarityStars.OneBlueStar;

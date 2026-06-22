@@ -6,7 +6,7 @@ import { JSX, useCallback, useContext, useEffect, useMemo, useRef, useState } fr
 import { IDailyRaidsFarmOrder } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { useAuth } from '@/fsd/5-shared/model';
+import { RarityStars, useAuth } from '@/fsd/5-shared/model';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 import { Modal } from '@/fsd/5-shared/ui/modal';
@@ -25,7 +25,6 @@ import {
     DAY_LABELS,
     MAX_LEGENDARY_THRESHOLD,
     MYTHIC_UNCRAFTABLE_UPGRADES,
-    PL_HIGH,
     PL_MEDIUM,
     TODAY_DEFAULT_INDEX,
     TODAY_EVENT_INDEX,
@@ -274,7 +273,13 @@ export const Armageddon = () => {
         [cart, dispatch]
     );
 
-    const tier = plTier(pl);
+    const hasBlueStarUnit = useMemo(
+        () =>
+            characters.some(c => c.stars >= RarityStars.OneBlueStar) ||
+            resolvedMows.some(m => m.stars >= RarityStars.OneBlueStar),
+        [characters, resolvedMows]
+    );
+    const tier = plTier(pl, hasBlueStarUnit);
 
     const resolveLockId = useCallback(
         (lockId: string): boolean => {
@@ -421,6 +426,7 @@ export const Armageddon = () => {
                 effectiveCartTotalsByType,
                 neededXp,
                 pl,
+                hasBlueStarUnit,
                 mythicMissingByUpgradeId,
                 totalGold,
                 neededShardsByType,
@@ -434,6 +440,7 @@ export const Armageddon = () => {
             effectiveCartTotalsByType,
             neededXp,
             pl,
+            hasBlueStarUnit,
             mythicMissingByUpgradeId,
             totalGold,
             neededShardsByType,
@@ -508,9 +515,9 @@ export const Armageddon = () => {
                                 <span>
                                     Low: P.L. &lt;{PL_MEDIUM}
                                     <br />
-                                    Medium: P.L. {PL_MEDIUM}–{PL_HIGH - 1}
+                                    Medium: P.L. ≥{PL_MEDIUM}, no blue-star unit
                                     <br />
-                                    High: P.L. ≥{PL_HIGH}
+                                    High: P.L. ≥{PL_MEDIUM} with a blue-star unit
                                 </span>
                             }>
                             <Info className="size-3.5 cursor-help" />

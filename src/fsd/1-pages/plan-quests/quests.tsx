@@ -4,6 +4,7 @@ import { useContext, useMemo, useState } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
 
+import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { Button } from '@/fsd/5-shared/ui';
@@ -53,6 +54,101 @@ const trackQuestPlanUpdate = (action: string) => {
         feature: 'quests',
         action,
     });
+};
+
+type Objective = { ObjectiveType: string; ObjectiveTarget?: string | number };
+
+const ObjectiveChip = ({ objective }: { objective: Objective }) => {
+    const { ObjectiveType, ObjectiveTarget } = objective;
+
+    if (ObjectiveType === 'DamageType' || ObjectiveType === 'NotDamageType') {
+        const icon = snowprintIcons[`damage${ObjectiveTarget as string}`];
+        const isNot = ObjectiveType === 'NotDamageType';
+        return (
+            <div
+                title={`${isNot ? 'No ' : ''}${ObjectiveTarget as string} damage`}
+                className={`flex items-center gap-0.5 rounded border px-1 py-0.5 ${isNot ? 'border-red-500/50 bg-red-500/10' : 'border-green-500/50 bg-green-500/10'}`}>
+                {isNot && <span className="text-xs font-bold text-red-400">✕</span>}
+                {icon && (
+                    <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
+                )}
+            </div>
+        );
+    }
+
+    if (ObjectiveType === 'UseNoSummons') {
+        const icon = snowprintIcons.traitSummon;
+        return (
+            <div
+                title="No summons"
+                className="flex items-center gap-0.5 rounded border border-red-500/50 bg-red-500/10 px-1 py-0.5">
+                <span className="text-xs font-bold text-red-400">✕</span>
+                <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
+            </div>
+        );
+    }
+
+    if (ObjectiveType === 'HasRangedAttack' || ObjectiveType === 'HasNoRangedAttack') {
+        const icon = snowprintIcons.rangedAttack;
+        const isNot = ObjectiveType === 'HasNoRangedAttack';
+        return (
+            <div
+                title={isNot ? 'No ranged attack' : 'Ranged attack'}
+                className={`flex items-center gap-0.5 rounded border px-1 py-0.5 ${isNot ? 'border-red-500/50 bg-red-500/10' : 'border-green-500/50 bg-green-500/10'}`}>
+                {isNot && <span className="text-xs font-bold text-red-400">✕</span>}
+                <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
+            </div>
+        );
+    }
+
+    if (ObjectiveType === 'Trait' || ObjectiveType === 'NotTrait') {
+        const traitName = ObjectiveTarget as string;
+        const icon = snowprintIcons[`trait${traitName}`];
+        const isNot = ObjectiveType === 'NotTrait';
+        if (icon) {
+            return (
+                <div
+                    title={`${isNot ? 'No ' : ''}${traitName}`}
+                    className={`flex items-center gap-0.5 rounded border px-1 py-0.5 ${isNot ? 'border-red-500/50 bg-red-500/10' : 'border-green-500/50 bg-green-500/10'}`}>
+                    {isNot && <span className="text-xs font-bold text-red-400">✕</span>}
+                    <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
+                </div>
+            );
+        }
+    }
+
+    let label: string;
+    switch (ObjectiveType) {
+        case 'NoDamageTakenByAnyHero': {
+            label = 'No damage taken';
+            break;
+        }
+        case 'MaxHits': {
+            label = `≤${ObjectiveTarget} hits`;
+            break;
+        }
+        case 'MinHits': {
+            label = `≥${ObjectiveTarget} hits`;
+            break;
+        }
+        case 'NotTrait': {
+            label = `No ${ObjectiveTarget as string}`;
+            break;
+        }
+        case 'Trait': {
+            label = String(ObjectiveTarget);
+            break;
+        }
+        default: {
+            label = ObjectiveType;
+        }
+    }
+
+    return (
+        <div className="rounded border border-(--card-border) bg-(--soft) px-1.5 py-0.5 text-xs text-(--soft-fg)">
+            {label}
+        </div>
+    );
 };
 
 export const Quests = () => {
@@ -191,6 +287,13 @@ export const Quests = () => {
                                                         <span className="min-w-[70px] text-sm font-medium">
                                                             Battle {battle.battleNr}
                                                         </span>
+                                                        {battle.objectives.length > 0 && (
+                                                            <div className="flex flex-wrap gap-1">
+                                                                {battle.objectives.map((objective, index) => (
+                                                                    <ObjectiveChip key={index} objective={objective} />
+                                                                ))}
+                                                            </div>
+                                                        )}
                                                         <div className="flex items-center gap-2 rounded-md bg-(--soft) px-2 py-1">
                                                             <UpgradeImage
                                                                 material={battle.loot.reward.upgradeId}
