@@ -10,14 +10,7 @@ import { EquipmentIcon } from '@/fsd/4-entities/equipment/ui';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import {
-    DAYS,
-    EVENT_START_UTC,
-    ICON_SIZE,
-    MYTHIC_UNCRAFTABLE_UPGRADES,
-    PL_HIGH,
-    PL_MEDIUM,
-} from './armageddon.constants';
+import { DAYS, EVENT_START_UTC, ICON_SIZE, MYTHIC_UNCRAFTABLE_UPGRADES, PL_MEDIUM } from './armageddon.constants';
 import type { Day } from './armageddon.constants';
 import type { CoverageRow } from './armageddon.types';
 
@@ -38,8 +31,8 @@ export function cronMatchesDay(cronSchedule: string, day: Day): boolean {
     return dowField.split(',').includes(day);
 }
 
-export function plTier(pl: number): 'high' | 'medium' | 'low' {
-    if (pl >= PL_HIGH) return 'high';
+export function plTier(pl: number, hasBlueStarUnit: boolean): 'high' | 'medium' | 'low' {
+    if (pl >= PL_MEDIUM && hasBlueStarUnit) return 'high';
     if (pl >= PL_MEDIUM) return 'medium';
     return 'low';
 }
@@ -254,6 +247,7 @@ interface ComputeCoverageRowsParameters {
     effectiveCartTotalsByType: Record<string, number>;
     neededXp: number;
     pl: number;
+    hasBlueStarUnit: boolean;
     mythicMissingByUpgradeId: Record<string, number>;
     totalGold: number;
     neededShardsByType: Record<string, number>;
@@ -268,6 +262,7 @@ export function computeCoverageRows({
     effectiveCartTotalsByType,
     neededXp,
     pl,
+    hasBlueStarUnit,
     mythicMissingByUpgradeId,
     totalGold,
     neededShardsByType,
@@ -316,7 +311,7 @@ export function computeCoverageRows({
             label: 'Grimoires (Mythic XP Books)',
         },
     };
-    const currentTier = plTier(pl);
+    const currentTier = plTier(pl, hasBlueStarUnit);
     const xpBook = tierToXpBook[currentTier];
     const xpBookValue = XP_BOOK_VALUE[xpBook.rarity];
     const neededBooks = Math.ceil(neededXp / xpBookValue);
