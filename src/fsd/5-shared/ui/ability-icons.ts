@@ -253,6 +253,7 @@ import RealityUnboundIcon from '@/assets/images/snowprint_assets/abilities/ui_ic
 import ReanimationBeamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReanimationBeam.png';
 import ReanimationProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReanimationProtocols.png';
 import ReapingScytheIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReapingScythe.png';
+import RedRampageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RedRampage.png';
 import RedThirstIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RedThirst.png';
 import RefusalToBeOutdoneIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RefusalToBeOutdone.png';
 import ReinforcedHiveNodeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReinforcedHiveNode.png';
@@ -267,6 +268,7 @@ import RitesOfRestorationIcon from '@/assets/images/snowprint_assets/abilities/u
 import SagaOfTheWarriorBornIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SagaOfTheWarriorBorn.png';
 import SanctorumMissileIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SanctorumMissile.png';
 import SanguinaryPriestIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SanguinaryPriest.png';
+import SavageEchoesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SavageEchoes.png';
 import SavageKillerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SavageKiller.png';
 import SaviorProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SaviorProtocols.png';
 import ScarabHiveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ScarabHive.png';
@@ -287,6 +289,7 @@ import SlashingDiveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon
 import SmashaEadIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SmashaEad.png';
 import SolarAtomizerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SolarAtomizer.png';
 import SorcerousFacadeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SorcerousFacade.png';
+import SpecialIssueCombiMeltaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpecialIssueCombiMelta.png';
 import SpiritLeechIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpiritLeech.png';
 import SpiritualLeaderIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpiritualLeader.png';
 import SplitIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Split.png';
@@ -296,6 +299,7 @@ import SquigHoundIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_a
 import SquigLaunchasIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SquigLaunchas.png';
 import SquigMineIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SquigMine.png';
 import StandVigilIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StandVigil.png';
+import SternguardFocusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SternguardFocus.png';
 import StikkbombIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Stikkbomb.png';
 import StormboyzStrikeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StormboyzStrike.png';
 import StormcallerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Stormcaller.png';
@@ -613,6 +617,7 @@ export const abilityIcons: Record<string, IconData> = {
     ReanimationBeam: { file: ReanimationBeamIcon, name: 'Reanimation Beam' },
     ReanimationProtocols: { file: ReanimationProtocolsIcon, name: 'Reanimation Protocols' },
     ReapingScythe: { file: ReapingScytheIcon, name: 'Reaping Scythe' },
+    RedRampage: { file: RedRampageIcon, name: 'Red Rampage' },
     RedThirst: { file: RedThirstIcon, name: 'Red Thirst' },
     RefusalToBeOutdone: { file: RefusalToBeOutdoneIcon, name: 'Refusal to be Outdone' },
     ReinforcedHiveNode: { file: ReinforcedHiveNodeIcon, name: 'Reinforced Hive Node' },
@@ -627,6 +632,7 @@ export const abilityIcons: Record<string, IconData> = {
     SagaOfTheWarriorBorn: { file: SagaOfTheWarriorBornIcon, name: 'Saga of the Warrior Born' },
     SanctorumMissile: { file: SanctorumMissileIcon, name: 'Sanctorum Missile' },
     SanguinaryPriest: { file: SanguinaryPriestIcon, name: 'Sanguinary Priest' },
+    SavageEchoes: { file: SavageEchoesIcon, name: 'Savage Echoes' },
     SavageKiller: { file: SavageKillerIcon, name: 'Savage Killer' },
     SaviorProtocols: { file: SaviorProtocolsIcon, name: 'Saviour Protocols' },
     ScarabHive: { file: ScarabHiveIcon, name: 'Scarab Hive' },
@@ -647,6 +653,7 @@ export const abilityIcons: Record<string, IconData> = {
     SmashaEad: { file: SmashaEadIcon, name: "Smasha 'Ead" },
     SolarAtomizer: { file: SolarAtomizerIcon, name: 'Solar Atomizer' },
     SorcerousFacade: { file: SorcerousFacadeIcon, name: 'Sorcerous Facade' },
+    SpecialIssueCombiMelta: { file: SpecialIssueCombiMeltaIcon, name: 'Special-Issue Combi-Melta' },
     SpiritLeech: { file: SpiritLeechIcon, name: 'Spirit Leech' },
     SpiritualLeader: { file: SpiritualLeaderIcon, name: 'Spiritual Leader' },
     Split: { file: SplitIcon, name: 'Split' },
@@ -656,6 +663,7 @@ export const abilityIcons: Record<string, IconData> = {
     SquigLaunchas: { file: SquigLaunchasIcon, name: 'Squig Launchas' },
     SquigMine: { file: SquigMineIcon, name: 'Squig Mine' },
     StandVigil: { file: StandVigilIcon, name: 'Stand Vigil' },
+    SternguardFocus: { file: SternguardFocusIcon, name: 'Fire Discipline' },
     Stikkbomb: { file: StikkbombIcon, name: 'Stikkbomb' },
     StormOfFlensingBlades: { file: StormOfFlensingBladesIcon, name: 'Storm of Flensing Blades' },
     StormOfWrath: { file: StormOfWrathIcon, name: 'Storm Of Wrath' },
