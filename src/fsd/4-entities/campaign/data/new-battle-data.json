@@ -24940,7 +24940,7 @@
             ],
             "potential": [
                 {
-                    "id": "upgDmgE005",
+                    "id": "upgHpE017",
                     "chance_numerator": 1,
                     "chance_denominator": 4,
                     "effective_rate": 0.4
@@ -72764,14 +72764,14 @@
                 }
             ]
         },
-        "enemyPower": 5894,
+        "enemyPower": 6682,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["DarkAngels"],
-        "enemiesTotal": 7,
+        "enemiesTotal": 8,
         "enemiesTypes": ["Asmodai", "Deathwing Knight", "Infiltrator"],
         "rawEnemyTypes": [
             { "id": "darkaNpc1Infiltrator:11", "count": 5 },
-            { "id": "darkaNpc3Terminator:10", "count": 1 },
+            { "id": "darkaNpc3Terminator:10", "count": 2 },
             { "id": "darkaNpcAsmodai:8", "count": 1 }
         ],
         "detailedEnemyTypes": [
@@ -72785,7 +72785,7 @@
             {
                 "id": "darkaNpc3Terminator",
                 "name": "Deathwing Knight",
-                "count": 1,
+                "count": 2,
                 "stars": 6,
                 "rank": "Bronze 1"
             },
@@ -73150,13 +73150,13 @@
                 }
             ]
         },
-        "enemyPower": 29122,
+        "enemyPower": 29587,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
-        "enemiesTotal": 9,
+        "enemiesTotal": 10,
         "enemiesTypes": ["Cadian Lascannon Team", "Deathwing Knight", "Hellblaster"],
         "rawEnemyTypes": [
-            { "id": "astraNpc2Lascannon:15", "count": 2 },
+            { "id": "astraNpc2Lascannon:15", "count": 3 },
             { "id": "darkaNpc2Hellblaster:16", "count": 5 },
             { "id": "darkaNpc3Terminator:15", "count": 2 }
         ],
@@ -73164,7 +73164,7 @@
             {
                 "id": "astraNpc2Lascannon",
                 "name": "Cadian Lascannon Team",
-                "count": 2,
+                "count": 3,
                 "stars": 7,
                 "rank": "Silver 1"
             },
@@ -73451,7 +73451,7 @@
         "campaignType": "Extremis",
         "energyCost": 6,
         "nodeNumber": 3,
-        "slots": 4,
+        "slots": 5,
         "requiredCharacterSnowprintIds": ["necroDestroyer", "necroSpyder", "necroPlasmancer"],
         "rewards": {
             "guaranteed": [
@@ -74008,13 +74008,13 @@
                 }
             ]
         },
-        "enemyPower": 148866,
+        "enemyPower": 165542,
         "enemiesAlliances": ["Imperial"],
         "enemiesFactions": ["AstraMilitarum", "DarkAngels"],
-        "enemiesTotal": 8,
+        "enemiesTotal": 9,
         "enemiesTypes": ["Cadian Mortar Team", "Cadian Vox-caster", "Infiltrator"],
         "rawEnemyTypes": [
-            { "id": "astraNpc3Voxcaster:24", "count": 2 },
+            { "id": "astraNpc3Voxcaster:24", "count": 3 },
             { "id": "astraNpc4Mortar:21", "count": 2 },
             { "id": "darkaNpc1Infiltrator:24", "count": 4 }
         ],
@@ -74022,7 +74022,7 @@
             {
                 "id": "astraNpc3Voxcaster",
                 "name": "Cadian Vox-caster",
-                "count": 2,
+                "count": 3,
                 "stars": 11,
                 "rank": "Gold 2"
             },

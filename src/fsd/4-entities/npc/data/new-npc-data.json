@@ -25432,80 +25432,6 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_terminator_01.png"
     },
     {
-        "id": "blackObliterator_LHE",
-        "Name": "Volk",
-        "Faction": "BlackLegion",
-        "Alliance": "Chaos",
-        "Melee Damage": "Power",
-        "Melee Hits": 4,
-        "Ranged Damage": "HeavyRound",
-        "Ranged Hits": 6,
-        "Distance": 3,
-        "Movement": 2,
-        "Traits": ["LetTheGalaxyBurn", "BigTarget", "Daemon", "HeavyWeapon", "SuppressiveFire"],
-        "Stats": [
-            {
-                "AbilityLevel": 8,
-                "Damage": 26,
-                "Armor": 35,
-                "Health": 409,
-                "ProgressionIndex": 2,
-                "Rank": 3,
-                "Stars": 2
-            },
-            {
-                "AbilityLevel": 17,
-                "Damage": 59,
-                "Armor": 77,
-                "Health": 946,
-                "ProgressionIndex": 5,
-                "Rank": 6,
-                "Stars": 4
-            },
-            {
-                "AbilityLevel": 26,
-                "Damage": 131,
-                "Armor": 175,
-                "Health": 2086,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
-            },
-            {
-                "AbilityLevel": 35,
-                "Damage": 289,
-                "Armor": 384,
-                "Health": 4636,
-                "ProgressionIndex": 11,
-                "Rank": 12,
-                "Stars": 8
-            },
-            {
-                "AbilityLevel": 50,
-                "Damage": 1036,
-                "Armor": 1381,
-                "Health": 16530,
-                "ProgressionIndex": 15,
-                "Rank": 17,
-                "Stars": 11
-            },
-            {
-                "AbilityLevel": 65,
-                "Damage": 1572,
-                "Armor": 2097,
-                "Health": 25098,
-                "ProgressionIndex": 19,
-                "Rank": 20,
-                "Stars": 14
-            }
-        ],
-        "Active Ability Damage": ["HeavyRound"],
-        "Passive Ability Damage": ["Flame", "HeavyRound", "Melta"],
-        "Active Abilities": ["FrenziedFiring"],
-        "Passive Abilities": ["FleshmetalGuns"],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_black_obliterator_01.png"
-    },
-    {
         "id": "bloodNpc1Intercessor",
         "Name": "Jump Pack Intercessor",
         "Faction": "BloodAngels",
@@ -25925,6 +25851,77 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_blood_intercessor_02.png"
     },
     {
+        "id": "bloodTerminator_LHE",
+        "Name": "Cezare",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Melee Damage": "Power",
+        "Melee Hits": 4,
+        "Movement": 2,
+        "Traits": ["TeleportStrike", "TerminatorArmour", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 53,
+                "Armor": 76,
+                "Health": 297,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 123,
+                "Armor": 175,
+                "Health": 679,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 276,
+                "Armor": 392,
+                "Health": 1524,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 609,
+                "Armor": 866,
+                "Health": 3365,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2185,
+                "Armor": 3105,
+                "Health": 12073,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 3318,
+                "Armor": 4715,
+                "Health": 18334,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Active Ability Damage": ["Eviscerate"],
+        "Passive Ability Damage": ["Power"],
+        "Active Abilities": ["SavageEchoes"],
+        "Passive Abilities": ["RedRampage"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_terminator_01.png"
+    },
+    {
         "id": "darkaBossAsmodaiLHE",
         "Name": "Asmodai",
         "Faction": "DarkAngels",
@@ -26003,6 +26000,15 @@
                 "ProgressionIndex": 8,
                 "Rank": 9,
                 "Stars": 6
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 1508,
+                "Armor": 2639,
+                "Health": 11312,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
             }
         ],
         "Active Ability Damage": ["Power"],
@@ -26031,6 +26037,15 @@
                 "ProgressionIndex": 5,
                 "Rank": 6,
                 "Stars": 4
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 6284,
+                "Armor": 2514,
+                "Health": 8798,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
             }
         ],
         "Active Ability Damage": ["Plasma"],
@@ -26091,6 +26106,34 @@
         "Active Abilities": ["InstrumentsOfVengeance", "MartialExemplar", "TheLionsWrath"],
         "Passive Abilities": ["BossEndFightUndefeated", "Fealty", "PrimarchOfTheFirstLegion", "TheEmperorsShield"],
         "Icon": "snowprint_assets/characters/ui_image_portrait_guild_lion_01.png"
+    },
+    {
+        "id": "darkaBossSternguardLHE",
+        "Name": "Ramus",
+        "Faction": "DarkAngels",
+        "Alliance": "Imperial",
+        "Melee Damage": "Melta",
+        "Melee Hits": 1,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 1,
+        "Distance": 3,
+        "Movement": 3,
+        "Traits": ["Overwatch"],
+        "Stats": [
+            {
+                "AbilityLevel": 26,
+                "Damage": 484,
+                "Armor": 254,
+                "Health": 1028,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            }
+        ],
+        "Passive Ability Damage": ["Bolter"],
+        "Active Abilities": ["SternguardFocus"],
+        "Passive Abilities": ["SpecialIssueCombiMelta"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_darka_sternguard_01.png"
     },
     {
         "id": "darkaBossTerminatorLHE",
@@ -27395,7 +27438,7 @@
         "Melee Damage": "",
         "Melee Hits": 0,
         "Movement": 2,
-        "Traits": ["Immune"],
+        "Traits": ["Immune", "PermaDeath"],
         "Stats": [
             {
                 "AbilityLevel": 1,
@@ -35126,76 +35169,6 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_aelda_wraithguard_01.png"
     },
     {
-        "id": "emperExultant_LHE",
-        "Name": "Laviscus",
-        "Faction": "EmperorsChildren",
-        "Alliance": "Chaos",
-        "Melee Damage": "Power",
-        "Melee Hits": 1,
-        "Movement": 3,
-        "Traits": ["ThrillSeekers", "CrushingStrike"],
-        "Stats": [
-            {
-                "AbilityLevel": 8,
-                "Damage": 114,
-                "Armor": 59,
-                "Health": 255,
-                "ProgressionIndex": 2,
-                "Rank": 3,
-                "Stars": 2
-            },
-            {
-                "AbilityLevel": 17,
-                "Damage": 259,
-                "Armor": 136,
-                "Health": 583,
-                "ProgressionIndex": 5,
-                "Rank": 6,
-                "Stars": 4
-            },
-            {
-                "AbilityLevel": 26,
-                "Damage": 580,
-                "Armor": 305,
-                "Health": 1306,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
-            },
-            {
-                "AbilityLevel": 35,
-                "Damage": 1281,
-                "Armor": 674,
-                "Health": 2884,
-                "ProgressionIndex": 11,
-                "Rank": 12,
-                "Stars": 8
-            },
-            {
-                "AbilityLevel": 50,
-                "Damage": 4599,
-                "Armor": 2414,
-                "Health": 10350,
-                "ProgressionIndex": 15,
-                "Rank": 17,
-                "Stars": 11
-            },
-            {
-                "AbilityLevel": 65,
-                "Damage": 6984,
-                "Armor": 3666,
-                "Health": 15713,
-                "ProgressionIndex": 19,
-                "Rank": 20,
-                "Stars": 14
-            }
-        ],
-        "Active Ability Damage": ["Power"],
-        "Active Abilities": ["EuphoricStrikes"],
-        "Passive Abilities": ["RefusalToBeOutdone"],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_emper_exultant_01.png"
-    },
-    {
         "id": "genesBossBiophagus",
         "Name": "Hollan",
         "Faction": "Genestealers",
@@ -38517,6 +38490,78 @@
         "Active Abilities": ["AdaptiveStrategy"],
         "Passive Abilities": ["RelentlessMarch"],
         "Icon": "snowprint_assets/characters/ui_image_portrait_necro_warden_01.png"
+    },
+    {
+        "id": "necroChronomancer_LHE",
+        "Name": "Thothmek",
+        "Faction": "Necrons",
+        "Alliance": "Xenos",
+        "Melee Damage": "Physical",
+        "Melee Hits": 1,
+        "Ranged Damage": "Energy",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Movement": 3,
+        "Traits": ["LivingMetal", "Mechanical", "Flying", "SuppressiveFire"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 102,
+                "Armor": 50,
+                "Health": 212,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 234,
+                "Armor": 116,
+                "Health": 486,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 522,
+                "Armor": 261,
+                "Health": 1089,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 1153,
+                "Armor": 577,
+                "Health": 2404,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 4140,
+                "Armor": 2069,
+                "Health": 8623,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 6287,
+                "Armor": 3142,
+                "Health": 13095,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Active Abilities": ["Chronometron"],
+        "Passive Abilities": ["TimesplinterMantle"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_necro_chronomancer_01.png"
     },
     {
         "id": "necroNpc1TutWarrior",
@@ -48959,6 +49004,79 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_01.png"
     },
     {
+        "id": "spaceStormcaller_LHE",
+        "Name": "Njal",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Melee Damage": "Psychic",
+        "Melee Hits": 3,
+        "Ranged Damage": "Psychic",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Movement": 2,
+        "Traits": ["Psyker", "TerminatorArmour", "Unstoppable"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 23,
+                "Armor": 73,
+                "Health": 226,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 52,
+                "Armor": 168,
+                "Health": 517,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 115,
+                "Armor": 378,
+                "Health": 1162,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 257,
+                "Armor": 834,
+                "Health": 2564,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 920,
+                "Armor": 2989,
+                "Health": 9201,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 1397,
+                "Armor": 4539,
+                "Health": 13968,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Active Ability Damage": ["Psychic"],
+        "Active Abilities": ["Stormcaller"],
+        "Passive Abilities": ["LordOfTempests"],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_njal_01.png"
+    },
+    {
         "id": "tauBossAunShi",
         "Name": "Aun'Shi",
         "Faction": "Tau",
@@ -49120,12 +49238,12 @@
         "Stats": [
             {
                 "AbilityLevel": 35,
-                "Damage": 347,
-                "Armor": 427,
-                "Health": 2270,
-                "ProgressionIndex": 11,
+                "Damage": 366,
+                "Armor": 451,
+                "Health": 2396,
+                "ProgressionIndex": 13,
                 "Rank": 12,
-                "Stars": 8
+                "Stars": 9
             },
             {
                 "AbilityLevel": 32,
@@ -49907,22 +50025,22 @@
         "Traits": ["CloseCombatWeakness", "Camouflage"],
         "Stats": [
             {
-                "AbilityLevel": 11,
-                "Damage": 128,
-                "Armor": 51,
-                "Health": 208,
-                "ProgressionIndex": 4,
-                "Rank": 4,
-                "Stars": 3
+                "AbilityLevel": 8,
+                "Damage": 94,
+                "Armor": 38,
+                "Health": 153,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
             },
             {
-                "AbilityLevel": 5,
-                "Damage": 69,
-                "Armor": 28,
-                "Health": 112,
-                "ProgressionIndex": 1,
-                "Rank": 2,
-                "Stars": 1
+                "AbilityLevel": 17,
+                "Damage": 216,
+                "Armor": 86,
+                "Health": 350,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
             },
             {
                 "AbilityLevel": 55,
@@ -67449,7 +67567,7 @@
         "Melee Damage": "",
         "Melee Hits": 0,
         "Movement": 1,
-        "Traits": ["InstinctiveBehaviour", "Flying"],
+        "Traits": ["InstinctiveBehaviour", "Flying", "PermaDeath"],
         "Stats": [
             {
                 "AbilityLevel": 1,
@@ -73607,75 +73725,6 @@
         "Active Abilities": ["AugmentedAssault"],
         "Passive Abilities": ["FuryFromTheDelve"],
         "Icon": "snowprint_assets/characters/ui_image_portrait_votan_beserk_01.png"
-    },
-    {
-        "id": "votanMemnyr_LHE",
-        "Name": "Ammuk",
-        "Faction": "LeaguesOfVotann",
-        "Alliance": "Xenos",
-        "Melee Damage": "Physical",
-        "Melee Hits": 1,
-        "Movement": 2,
-        "Traits": ["PrioritisedEfficiency", "Mechanical"],
-        "Stats": [
-            {
-                "AbilityLevel": 8,
-                "Damage": 71,
-                "Armor": 62,
-                "Health": 311,
-                "ProgressionIndex": 2,
-                "Rank": 3,
-                "Stars": 2
-            },
-            {
-                "AbilityLevel": 17,
-                "Damage": 161,
-                "Armor": 143,
-                "Health": 721,
-                "ProgressionIndex": 5,
-                "Rank": 6,
-                "Stars": 4
-            },
-            {
-                "AbilityLevel": 26,
-                "Damage": 363,
-                "Armor": 319,
-                "Health": 1578,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
-            },
-            {
-                "AbilityLevel": 35,
-                "Damage": 801,
-                "Armor": 704,
-                "Health": 3515,
-                "ProgressionIndex": 11,
-                "Rank": 12,
-                "Stars": 8
-            },
-            {
-                "AbilityLevel": 50,
-                "Damage": 2875,
-                "Armor": 2530,
-                "Health": 12506,
-                "ProgressionIndex": 15,
-                "Rank": 17,
-                "Stars": 11
-            },
-            {
-                "AbilityLevel": 65,
-                "Damage": 4366,
-                "Armor": 3842,
-                "Health": 18987,
-                "ProgressionIndex": 19,
-                "Rank": 20,
-                "Stars": 14
-            }
-        ],
-        "Active Abilities": ["IronkinSteeljack"],
-        "Passive Abilities": ["PredictiveGuidance"],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_votan_memnyr_01.png"
     },
     {
         "id": "votanNpc1Ecog",
