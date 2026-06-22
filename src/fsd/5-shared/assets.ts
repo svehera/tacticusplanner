@@ -159,6 +159,64 @@ import movement from '@/assets/images/snowprint_assets/stat_icons/ui_icon_moveme
 import hitsIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
+import traitTwoManTeam from '@/assets/images/snowprint_assets/traits/ui_icon_trait_2_man_team_01.png';
+import traitActOfFaith from '@/assets/images/snowprint_assets/traits/ui_icon_trait_act_of_faith_01.png';
+import traitAmbush from '@/assets/images/snowprint_assets/traits/ui_icon_trait_ambush_01.png';
+import traitBattleFatigue from '@/assets/images/snowprint_assets/traits/ui_icon_trait_battle_fatigue_01.png';
+import traitBeastSlayer from '@/assets/images/snowprint_assets/traits/ui_icon_trait_beast_slayer_01.png';
+import traitBeastSnagga from '@/assets/images/snowprint_assets/traits/ui_icon_trait_beast_snagga_01.png';
+import traitBigTarget from '@/assets/images/snowprint_assets/traits/ui_icon_trait_big_target_01.png';
+import traitBlessingOfKhorne from '@/assets/images/snowprint_assets/traits/ui_icon_trait_blessing_of_khorne_01.png';
+import traitBossAdjutant from '@/assets/images/snowprint_assets/traits/ui_icon_trait_boss_adjutant_01.png';
+import traitBurnedByLight from '@/assets/images/snowprint_assets/traits/ui_icon_trait_burnedbylight_01.png';
+import traitCamouflage from '@/assets/images/snowprint_assets/traits/ui_icon_trait_camouflage_01.png';
+import traitCombatWeakness from '@/assets/images/snowprint_assets/traits/ui_icon_trait_combat_weakness_01.png';
+import traitContagions from '@/assets/images/snowprint_assets/traits/ui_icon_trait_contagions_01.png';
+import traitCrushingStrike from '@/assets/images/snowprint_assets/traits/ui_icon_trait_crushing_strike_01.png';
+import traitDaemonic from '@/assets/images/snowprint_assets/traits/ui_icon_trait_daemonic_01.png';
+import traitDakka from '@/assets/images/snowprint_assets/traits/ui_icon_trait_dakka_01.png';
+import traitDiminutive from '@/assets/images/snowprint_assets/traits/ui_icon_trait_diminuitive_01.png';
+import traitEmplacement from '@/assets/images/snowprint_assets/traits/ui_icon_trait_emplacement_01.png';
+import traitExplodes from '@/assets/images/snowprint_assets/traits/ui_icon_trait_explodes_01.png';
+import traitFalseEmperor from '@/assets/images/snowprint_assets/traits/ui_icon_trait_false_emperor_01.png';
+import traitFlying from '@/assets/images/snowprint_assets/traits/ui_icon_trait_flying_01.png';
+import traitHealer from '@/assets/images/snowprint_assets/traits/ui_icon_trait_healer_01.png';
+import traitHeavyWeapon from '@/assets/images/snowprint_assets/traits/ui_icon_trait_heavy_weapon_01.png';
+import traitImmune from '@/assets/images/snowprint_assets/traits/ui_icon_trait_immune_01.png';
+import traitImpervious from '@/assets/images/snowprint_assets/traits/ui_icon_trait_impervious_01.png';
+import traitIndirectFire from '@/assets/images/snowprint_assets/traits/ui_icon_trait_indirect_fire_01.png';
+import traitInfiltrate from '@/assets/images/snowprint_assets/traits/ui_icon_trait_infiltrate_01.png';
+import traitInstinctiveBehaviour from '@/assets/images/snowprint_assets/traits/ui_icon_trait_instinctive_behaviour_01.png';
+import traitLetTheGalaxyBurn from '@/assets/images/snowprint_assets/traits/ui_icon_trait_let_the_galaxy_burn_01.png';
+import traitLivingMetall from '@/assets/images/snowprint_assets/traits/ui_icon_trait_livingmetall_01.png';
+import traitMartialKatah from '@/assets/images/snowprint_assets/traits/ui_icon_trait_martial_katah_01.png';
+import traitMechanic from '@/assets/images/snowprint_assets/traits/ui_icon_trait_mechanic_01.png';
+import traitMechanical from '@/assets/images/snowprint_assets/traits/ui_icon_trait_mechanical_01.png';
+import traitMkGravis from '@/assets/images/snowprint_assets/traits/ui_icon_trait_mk_gravis_01.png';
+import traitMounted from '@/assets/images/snowprint_assets/traits/ui_icon_trait_mounted_01.png';
+import traitNetworkedTargeting from '@/assets/images/snowprint_assets/traits/ui_icon_trait_networked_targeting_01.png';
+import traitObject from '@/assets/images/snowprint_assets/traits/ui_icon_trait_object_01.png';
+import traitOnlyInDeath from '@/assets/images/snowprint_assets/traits/ui_icon_trait_only_in_death_01.png';
+import traitOverwatch from '@/assets/images/snowprint_assets/traits/ui_icon_trait_overwatch_01.png';
+import traitParry from '@/assets/images/snowprint_assets/traits/ui_icon_trait_parry_01.png';
+import traitPsychic from '@/assets/images/snowprint_assets/traits/ui_icon_trait_psychic_01.png';
+import traitPutridExplosion from '@/assets/images/snowprint_assets/traits/ui_icon_trait_putrid_explosion_01.png';
+import traitRangedSpecialist from '@/assets/images/snowprint_assets/traits/ui_icon_trait_ranged_specialist_01.png';
+import traitRapidAssault from '@/assets/images/snowprint_assets/traits/ui_icon_trait_rapid_assault_01.png';
+import traitResilient from '@/assets/images/snowprint_assets/traits/ui_icon_trait_resilient_01.png';
+import traitShadowInTheWarp from '@/assets/images/snowprint_assets/traits/ui_icon_trait_shadow_in_the_warp_01.png';
+import traitSteppable from '@/assets/images/snowprint_assets/traits/ui_icon_trait_steppable_01.png';
+import traitSummon from '@/assets/images/snowprint_assets/traits/ui_icon_trait_summon_01.png';
+import traitSuppressiveFire from '@/assets/images/snowprint_assets/traits/ui_icon_trait_supressive_fire_01.png';
+import traitSwarm from '@/assets/images/snowprint_assets/traits/ui_icon_trait_swarm_01.png';
+import traitSynapse from '@/assets/images/snowprint_assets/traits/ui_icon_trait_synapse_01.png';
+import traitTeleportStrike from '@/assets/images/snowprint_assets/traits/ui_icon_trait_teleport_strike_01.png';
+import traitTerminatorArmour from '@/assets/images/snowprint_assets/traits/ui_icon_trait_terminator_amour_01.png';
+import traitTerrifying from '@/assets/images/snowprint_assets/traits/ui_icon_trait_terrifying_01.png';
+import traitThrillSeekers from '@/assets/images/snowprint_assets/traits/ui_icon_trait_thrill_seekers_01.png';
+import traitUnknown from '@/assets/images/snowprint_assets/traits/ui_icon_trait_unknown_01.png';
+import traitVehicle from '@/assets/images/snowprint_assets/traits/ui_icon_trait_vehicle_01.png';
+import traitWeaversOfFate from '@/assets/images/snowprint_assets/traits/ui_icon_trait_weavers_of_fate_01.png';
 
 interface SnowprintIcon {
     file: string;
@@ -608,4 +666,62 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     imperialOnslaughtMarker: { file: imperialOnslaught, label: 'Imperial Onslaught' },
     xenosOnslaughtMarker: { file: xenosOnslaught, label: 'Xenos Onslaught' },
     chaosOnslaughtMarker: { file: chaosOnslaught, label: 'Chaos Onslaught' },
+    traitTwoManTeam: { file: traitTwoManTeam, label: '2-Man Team' },
+    traitActOfFaith: { file: traitActOfFaith, label: 'Act of Faith' },
+    traitAmbush: { file: traitAmbush, label: 'Ambush' },
+    traitBattleFatigue: { file: traitBattleFatigue, label: 'Battle Fatigue' },
+    traitBeastSlayer: { file: traitBeastSlayer, label: 'Beast Slayer' },
+    traitBeastSnagga: { file: traitBeastSnagga, label: 'Beast Snagga' },
+    traitBigTarget: { file: traitBigTarget, label: 'Big Target' },
+    traitBlessingOfKhorne: { file: traitBlessingOfKhorne, label: 'Blessing of Khorne' },
+    traitBossAdjutant: { file: traitBossAdjutant, label: 'Boss Adjutant' },
+    traitBurnedByLight: { file: traitBurnedByLight, label: 'Burned by Light' },
+    traitCamouflage: { file: traitCamouflage, label: 'Camouflage' },
+    traitCombatWeakness: { file: traitCombatWeakness, label: 'Combat Weakness' },
+    traitContagions: { file: traitContagions, label: 'Contagions' },
+    traitCrushingStrike: { file: traitCrushingStrike, label: 'Crushing Strike' },
+    traitDaemonic: { file: traitDaemonic, label: 'Daemonic' },
+    traitDakka: { file: traitDakka, label: 'Dakka' },
+    traitDiminutive: { file: traitDiminutive, label: 'Diminutive' },
+    traitEmplacement: { file: traitEmplacement, label: 'Emplacement' },
+    traitExplodes: { file: traitExplodes, label: 'Explodes' },
+    traitFalseEmperor: { file: traitFalseEmperor, label: 'False Emperor' },
+    traitFlying: { file: traitFlying, label: 'Flying' },
+    traitHealer: { file: traitHealer, label: 'Healer' },
+    traitHeavyWeapon: { file: traitHeavyWeapon, label: 'Heavy Weapon' },
+    traitImmune: { file: traitImmune, label: 'Immune' },
+    traitImpervious: { file: traitImpervious, label: 'Impervious' },
+    traitIndirectFire: { file: traitIndirectFire, label: 'Indirect Fire' },
+    traitInfiltrate: { file: traitInfiltrate, label: 'Infiltrate' },
+    traitInstinctiveBehaviour: { file: traitInstinctiveBehaviour, label: 'Instinctive Behaviour' },
+    traitLetTheGalaxyBurn: { file: traitLetTheGalaxyBurn, label: 'Let the Galaxy Burn' },
+    traitLivingMetall: { file: traitLivingMetall, label: 'Living Metal' },
+    traitMartialKatah: { file: traitMartialKatah, label: 'Martial Katah' },
+    traitMechanic: { file: traitMechanic, label: 'Mechanic' },
+    traitMechanical: { file: traitMechanical, label: 'Mechanical' },
+    traitMkGravis: { file: traitMkGravis, label: 'MK Gravis' },
+    traitMounted: { file: traitMounted, label: 'Mounted' },
+    traitNetworkedTargeting: { file: traitNetworkedTargeting, label: 'Networked Targeting' },
+    traitObject: { file: traitObject, label: 'Object' },
+    traitOnlyInDeath: { file: traitOnlyInDeath, label: 'Only in Death' },
+    traitOverwatch: { file: traitOverwatch, label: 'Overwatch' },
+    traitParry: { file: traitParry, label: 'Parry' },
+    traitPsychic: { file: traitPsychic, label: 'Psychic' },
+    traitPutridExplosion: { file: traitPutridExplosion, label: 'Putrid Explosion' },
+    traitRangedSpecialist: { file: traitRangedSpecialist, label: 'Ranged Specialist' },
+    traitRapidAssault: { file: traitRapidAssault, label: 'Rapid Assault' },
+    traitResilient: { file: traitResilient, label: 'Resilient' },
+    traitShadowInTheWarp: { file: traitShadowInTheWarp, label: 'Shadow in the Warp' },
+    traitSteppable: { file: traitSteppable, label: 'Steppable' },
+    traitSummon: { file: traitSummon, label: 'Summon' },
+    traitSuppressiveFire: { file: traitSuppressiveFire, label: 'Suppressive Fire' },
+    traitSwarm: { file: traitSwarm, label: 'Swarm' },
+    traitSynapse: { file: traitSynapse, label: 'Synapse' },
+    traitTeleportStrike: { file: traitTeleportStrike, label: 'Teleport Strike' },
+    traitTerminatorArmour: { file: traitTerminatorArmour, label: 'Terminator Armour' },
+    traitTerrifying: { file: traitTerrifying, label: 'Terrifying' },
+    traitThrillSeekers: { file: traitThrillSeekers, label: 'Thrill Seekers' },
+    traitUnknown: { file: traitUnknown, label: 'Unknown' },
+    traitVehicle: { file: traitVehicle, label: 'Vehicle' },
+    traitWeaversOfFate: { file: traitWeaversOfFate, label: 'Weavers of Fate' },
 };
