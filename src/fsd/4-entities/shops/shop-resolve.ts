@@ -2,6 +2,22 @@ import type { ResolvedShopItem, ShopData, ShopDayOfWeek, ShopProduct } from './s
 
 export const DOW_MAP: ShopDayOfWeek[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
+const BP_SEASON_40_START_MS = Date.UTC(2026, 5, 29); // 2026-06-29T00:00:00Z
+const BP_SEASON_DURATION_MS = 35 * 86_400_000; // exactly 5 weeks
+
+export function bpSeasonStartMs(season: number): number {
+    return BP_SEASON_40_START_MS + (season - 40) * BP_SEASON_DURATION_MS;
+}
+
+export function lockIsActive(lockId: string | undefined, nowMs = Date.now()): boolean {
+    if (!lockId) return true;
+    const until = /^lock_valid_until_bp_season_(\d+)_start$/.exec(lockId);
+    if (until) return nowMs < bpSeasonStartMs(Number(until[1]));
+    const after = /^lock_valid_after_bp_season_(\d+)_start$/.exec(lockId);
+    if (after) return nowMs >= bpSeasonStartMs(Number(after[1]));
+    return false;
+}
+
 export function todayDow(): ShopDayOfWeek {
     return DOW_MAP[new Date().getUTCDay()];
 }
@@ -30,10 +46,11 @@ export function resolveShopForDay(shop: ShopData, day: ShopDayOfWeek, userPL: nu
     const result: ResolvedShopItem[] = [];
 
     for (const slot of shop.products) {
-        const matching = slot.filter(v => cronMatchesDay(v.cronSchedule, day) && productMatchesPl(v, userPL));
+        const matching = slot.filter(
+            v => cronMatchesDay(v.cronSchedule, day) && productMatchesPl(v, userPL) && lockIsActive(v.conditions.lockId)
+        );
         if (matching.length === 0) continue;
 
-        // Group by reward type to collapse same-reward variants (e.g. lockId variants that differ only by season).
         const byRewardType = new Map<string, ShopProduct[]>();
         for (const product of matching) {
             const { type } = parseReward(product.reward);
@@ -51,12 +68,14 @@ export function resolveShopForDay(shop: ShopData, day: ShopDayOfWeek, userPL: nu
         for (const [type, variants] of byRewardType) {
             const first = variants[0];
             const { qty } = parseReward(first.reward);
+            const freeOfferType = first.freeOffer ? parseReward(first.freeOffer).type : undefined;
             result.push({
                 rewardType: type,
                 rewardQty: qty,
                 costAmount: first.cost.amount,
                 maxPerDay: first.maxPurchases === undefined ? 1 : Number.parseInt(first.maxPurchases, 10),
                 isGuaranteed,
+                freeOfferType,
             });
         }
     }

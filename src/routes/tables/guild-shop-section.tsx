@@ -55,7 +55,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required }) => {
             <div className="flex w-full flex-row items-start gap-2">
                 <div className="flex w-12 shrink-0 flex-col items-center gap-1">
                     <div className="mt-1 flex h-10 w-10 items-center justify-center">{icon}</div>
-                    <span className="mt-1 text-sm font-bold text-red-400">
+                    <span className="mt-1 text-sm font-bold text-(--danger)">
                         {Math.min(Math.floor(acquired), required)}/{required}
                     </span>
                 </div>
@@ -64,7 +64,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required }) => {
                         <h4 className="truncate text-xs font-normal">{name}</h4>
                         {!item.isGuaranteed && (
                             <AccessibleTooltip title="May or may not appear today — this slot is random">
-                                <Shuffle className="shrink-0 text-amber-400" size={13} aria-label="Random" />
+                                <Shuffle className="shrink-0 text-(--warning)" size={13} aria-label="Random" />
                             </AccessibleTooltip>
                         )}
                     </div>

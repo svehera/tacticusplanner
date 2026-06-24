@@ -45,7 +45,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name }) => {
             <div className="flex w-full flex-row items-start gap-2">
                 <div className="flex w-12 shrink-0 flex-col items-center gap-1">
                     <div className="mt-1 flex h-10 w-10 items-center justify-center">{icon}</div>
-                    <span className="mt-1 text-sm font-bold text-red-400">
+                    <span className="mt-1 text-sm font-bold text-(--danger)">
                         {displayAcquired}/{required}
                     </span>
                 </div>
@@ -54,7 +54,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name }) => {
                         <h4 className="truncate text-xs font-normal">{name}</h4>
                         {!item.isGuaranteed && (
                             <AccessibleTooltip title="May or may not appear today — this slot is random">
-                                <Shuffle className="shrink-0 text-amber-400" size={13} aria-label="Random" />
+                                <Shuffle className="shrink-0 text-(--warning)" size={13} aria-label="Random" />
                             </AccessibleTooltip>
                         )}
                     </div>
@@ -126,7 +126,11 @@ export const WarShopSection: FC<Props> = ({
             todayItems.filter(item => {
                 if (item.rewardType.startsWith('shards_')) {
                     const c = shardsCountsMap.get(item.rewardType);
-                    return c !== undefined && c.acquired < c.required;
+                    const needsShard = c !== undefined && c.acquired < c.required;
+                    const needsMowViaBundl =
+                        item.freeOfferType === 'draft_machinesOfWarTokens' &&
+                        Object.values(componentsByAlliance).some(ca => ca.acquired < ca.required);
+                    return needsShard || needsMowViaBundl;
                 }
                 if (item.rewardType === 'draft_machinesOfWarTokens') {
                     return Object.values(componentsByAlliance).some(c => c.acquired < c.required);
@@ -149,6 +153,21 @@ export const WarShopSection: FC<Props> = ({
             <div className="flex flex-wrap items-start justify-center gap-2">
                 {visibleItems.map(item => {
                     if (item.rewardType.startsWith('shards_')) {
+                        const shardCounts = shardsCountsMap.get(item.rewardType);
+                        const needsShard = shardCounts !== undefined && shardCounts.acquired < shardCounts.required;
+                        if (!needsShard && item.freeOfferType === 'draft_machinesOfWarTokens') {
+                            return (Object.values(Alliance) as Alliance[])
+                                .filter(a => componentsByAlliance[a].acquired < componentsByAlliance[a].required)
+                                .map(a => (
+                                    <ShopItemCard
+                                        key={`${item.rewardType}-${a}`}
+                                        item={item}
+                                        counts={componentsByAlliance[a]}
+                                        icon={<ComponentImage alliance={a} size="medium" />}
+                                        name={`${a} Components`}
+                                    />
+                                ));
+                        }
                         const charId = item.rewardType.slice(7);
                         const unit = CharactersService.getUnit(charId) ?? MowsService.resolveToStatic(charId);
                         const icon = unit ? (
@@ -165,7 +184,7 @@ export const WarShopSection: FC<Props> = ({
                             <ShopItemCard
                                 key={item.rewardType}
                                 item={item}
-                                counts={shardsCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 }}
+                                counts={shardCounts ?? { acquired: 0, required: 0 }}
                                 icon={icon}
                                 name={unit?.name ?? charId}
                             />

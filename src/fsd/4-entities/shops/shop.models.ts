@@ -22,6 +22,7 @@ export interface ResolvedShopItem {
     costAmount: number;
     maxPerDay: number;
     isGuaranteed: boolean;
+    freeOfferType?: string;
 }
 
 export type ShopDayOfWeek = 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN';
