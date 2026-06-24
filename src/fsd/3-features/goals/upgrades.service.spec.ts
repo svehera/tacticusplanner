@@ -4689,3 +4689,77 @@ describe('UpgradesService.canRaidMaterial – shard goal blocked regression', ()
         expect(result).toBe(true);
     });
 });
+
+const buildSettingsForCountByUnit = (overrides: Partial<IEstimatedRanksSettings> = {}) =>
+    createSettings({ campaignsProgress: createAllCampaignsProgress(), ...overrides });
+
+describe('UpgradesService.getUpgradesEstimatedDays – countByUnitId aggregation', () => {
+    it('single ascend goal: shard estimate has countByUnitId with one entry matching requiredCount', () => {
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === 'votanBeserk')!;
+        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar });
+        const goal = createAscendGoal({
+            goalId: 'goal-votan-countbyunit-single',
+            unitId: character.snowprintId,
+            unitName: baseChar.shortName ?? baseChar.name,
+            unitIcon: baseChar.icon ?? '',
+            unitRoundIcon: baseChar.roundIcon ?? '',
+            rarityStart: Rarity.Rare,
+            starsStart: RarityStars.RedOneStar,
+            rarityEnd: Rarity.Epic,
+            starsEnd: RarityStars.RedOneStar,
+            onslaughtShards: 6.5,
+        });
+
+        const result = UpgradesService.getUpgradesEstimatedDays(buildSettingsForCountByUnit(), [character], [], goal);
+
+        const shardMat = [...result.inProgressMaterials, ...result.blockedMaterials].find(
+            m => m.snowprintId === `shards_${character.snowprintId}`
+        );
+
+        expect(shardMat).toBeDefined();
+        expect(shardMat!.countByUnitId).toEqual({ [character.snowprintId]: shardMat!.requiredCount });
+    });
+
+    it('two rank-up goals for the same unit: shared material countByUnitId aggregates both goals under one unit key', () => {
+        const kharn = CharactersService.getUnit('worldKharn')!;
+        const character = createCharacter(kharn);
+
+        const goalA = createRankGoal(kharn, {
+            goalId: 'goal-kharn-s1-g1-countbyunit',
+            unitId: kharn.snowprintId,
+            unitName: kharn.shortName ?? kharn.name,
+            unitIcon: kharn.icon ?? '',
+            unitRoundIcon: kharn.roundIcon ?? '',
+            unitAlliance: kharn.alliance ?? Alliance.Chaos,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Gold1,
+        });
+
+        const goalB = createRankGoal(kharn, {
+            goalId: 'goal-kharn-g1-d1-countbyunit',
+            unitId: kharn.snowprintId,
+            unitName: kharn.shortName ?? kharn.name,
+            unitIcon: kharn.icon ?? '',
+            unitRoundIcon: kharn.roundIcon ?? '',
+            unitAlliance: kharn.alliance ?? Alliance.Chaos,
+            rankStart: Rank.Gold1,
+            rankEnd: Rank.Diamond1,
+        });
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettingsForCountByUnit(),
+            [character],
+            [],
+            goalA,
+            goalB
+        );
+
+        const allMats = [...result.inProgressMaterials, ...result.blockedMaterials];
+        const sharedMats = allMats.filter(m => m.relatedGoals.length >= 2);
+
+        expect(sharedMats.length).toBeGreaterThan(0);
+        for (const mat of sharedMats) {
+            expect(mat.countByUnitId).toEqual({ [kharn.snowprintId]: mat.requiredCount });
+        }
+    });
+});
