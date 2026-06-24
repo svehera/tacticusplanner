@@ -1,5 +1,5 @@
 ﻿import { sum } from 'lodash';
-import { FC, lazy, Suspense } from 'react';
+import { FC, lazy, ReactNode, Suspense } from 'react';
 
 import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
@@ -13,11 +13,13 @@ const RaidUpgradeMaterialCard = lazy(() =>
 interface Props {
     raids: IUpgradeRaid[];
     bonusRaids: IUpgradeRaid[];
+    guildShopSection?: ReactNode;
+    warShopSection?: ReactNode;
 }
 
 const isShardRaid = (raid: IUpgradeRaid) => raid.rarity === 'Shard' || raid.rarity === 'Mythic Shard';
 
-export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
+export const TodayRaids: FC<Props> = ({ raids, bonusRaids, guildShopSection, warShopSection }) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));
@@ -72,6 +74,8 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids }) => {
                             ))}
                         </div>
                     </Suspense>
+                    {guildShopSection}
+                    {warShopSection}
                 </AccordionBody>
             </Accordion>
             <Accordion>

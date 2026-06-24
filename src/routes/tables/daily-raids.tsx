@@ -1,20 +1,23 @@
-﻿import { cloneDeep } from 'lodash';
+import { cloneDeep, sum } from 'lodash';
 import { lazy, Suspense, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
+import { PersonalGoalType } from 'src/models/enums';
 import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { GuildShopSection } from 'src/routes/tables/guild-shop-section';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { TodayRaids } from 'src/routes/tables/today-raids';
+import { WarShopSection } from 'src/routes/tables/war-shop-section';
 
-import { useAuth } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, useAuth } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { IEstimatedUpgrades, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { ICharacterUpgradeMow, IEstimatedUpgrades, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -51,6 +54,7 @@ export const DailyRaids = () => {
         dailyRaidsPreferences,
         inventory,
         onslaughtPreferences,
+        playerMetadata,
     } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
@@ -183,6 +187,43 @@ export const DailyRaids = () => {
         upgradeMaterialGoals,
     ]);
 
+    const mowCounts = useMemo(() => {
+        const componentsByAlliance: Record<Alliance, { acquired: number; required: number }> = {
+            [Alliance.Imperial]: { acquired: inventory.components[Alliance.Imperial] ?? 0, required: 0 },
+            [Alliance.Xenos]: { acquired: inventory.components[Alliance.Xenos] ?? 0, required: 0 },
+            [Alliance.Chaos]: { acquired: inventory.components[Alliance.Chaos] ?? 0, required: 0 },
+        };
+        const forgeBadgeCounts: Record<Rarity, { acquired: number; required: number }> = {
+            [Rarity.Common]: { acquired: inventory.forgeBadges[Rarity.Common] ?? 0, required: 0 },
+            [Rarity.Uncommon]: { acquired: inventory.forgeBadges[Rarity.Uncommon] ?? 0, required: 0 },
+            [Rarity.Rare]: { acquired: inventory.forgeBadges[Rarity.Rare] ?? 0, required: 0 },
+            [Rarity.Epic]: { acquired: inventory.forgeBadges[Rarity.Epic] ?? 0, required: 0 },
+            [Rarity.Legendary]: { acquired: inventory.forgeBadges[Rarity.Legendary] ?? 0, required: 0 },
+            [Rarity.Mythic]: { acquired: inventory.forgeBadges[Rarity.Mythic] ?? 0, required: 0 },
+        };
+
+        const mowGoals = upgradeRankOrMowGoals.filter(
+            g => g.type === PersonalGoalType.MowAbilities
+        ) as ICharacterUpgradeMow[];
+
+        for (const goal of mowGoals) {
+            const allMaterials = MowsService.getMaterialsList(goal.unitId, goal.unitName, goal.unitAlliance);
+            const filtered = [];
+            for (let index = goal.primaryStart - 1; index < goal.primaryEnd - 1; index++) {
+                if (allMaterials[index]) filtered.push(allMaterials[index]);
+            }
+            for (let index = goal.secondaryStart - 1; index < goal.secondaryEnd - 1; index++) {
+                if (allMaterials[index]) filtered.push(allMaterials[index]);
+            }
+            componentsByAlliance[goal.unitAlliance].required += sum(filtered.map(m => m.components));
+            for (const m of filtered) {
+                forgeBadgeCounts[m.rarity].required += m.forgeBadges;
+            }
+        }
+
+        return { componentsByAlliance, forgeBadgeCounts };
+    }, [upgradeRankOrMowGoals, inventory.components, inventory.forgeBadges]);
+
     return (
         <div className="space-y-8 py-6">
             <RaidsHeader
@@ -215,6 +256,22 @@ export const DailyRaids = () => {
                         infiniteEstimatedRanks.upgradesRaids[0],
                         estimatedRanks.upgradesRaids[0]
                     )}
+                    guildShopSection={
+                        <GuildShopSection
+                            inProgressMaterials={estimatedRanks.inProgressMaterials}
+                            blockedMaterials={estimatedRanks.blockedMaterials}
+                            userPL={playerMetadata.powerLevel ?? 1}
+                        />
+                    }
+                    warShopSection={
+                        <WarShopSection
+                            inProgressMaterials={estimatedRanks.inProgressMaterials}
+                            blockedMaterials={estimatedRanks.blockedMaterials}
+                            componentsByAlliance={mowCounts.componentsByAlliance}
+                            forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                            userPL={playerMetadata.powerLevel ?? 1}
+                        />
+                    }
                 />
             )}
         </div>
