@@ -15,6 +15,7 @@ import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
+import { armageddonData } from '@/fsd/4-entities/shops';
 
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService as GoalUpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -40,7 +41,6 @@ import {
     plTier,
     rewardInfo,
 } from './armageddon.utils';
-import armageddonData from './data/armageddon.json';
 import { PurchasedQtyModal } from './purchased-qty-modal';
 import { ShopCard } from './shop-card';
 import { ShoppingList } from './shopping-list';

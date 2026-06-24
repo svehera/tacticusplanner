@@ -308,6 +308,7 @@ export const RaidsPlan: React.FC<Props> = ({
                                     updateInventory={updateInventory}
                                     inventory={upgrades}
                                     showAdditionalInfo={false}
+                                    showPerCharacterNeeded={true}
                                 />
                             </div>
                         </div>

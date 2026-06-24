@@ -1,0 +1,601 @@
+{
+    "displayLocation": "guildMerchant",
+    "refreshCost": {
+        "resourceType": "gems",
+        "amount": 50
+    },
+    "refreshWithAdWatch": true,
+    "allowedRefreshesPerDay": 1,
+    "products": [
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarFarseer:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackPossession:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksWarboss:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON,THU *",
+                "reward": "shards_spaceWulfen:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "reward": "shards_spaceHound:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_spaceRockfist:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_darkaHellblaster:5",
+                "maxPurchases": "4",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON,THU *",
+                "reward": "shards_worldJakhal:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "reward": "shards_genesBiophagus:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_genesPrimus:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "reward": "shards_bloodIntercessor:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_bloodDeathCompany:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_worldTerminator:5",
+                "maxPurchases": "4",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON,THU *",
+                "reward": "shards_genesMagus:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "reward": "shards_astraYarrick:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_adeptCanoness:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_adeptHospitaller:5",
+                "maxPurchases": "4",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_genesPrimus:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_36_start"
+                },
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_genesBiophagus:5",
+                "maxPurchases": "4",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_ascensionOrbsMythic",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 2700
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_ascensionOrbsLegendary:2",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 2400
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_ascensionOrbsEpic:3",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 1485
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_ascensionOrbsRare:4",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 840
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_ascensionOrbsUncommon:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "maxPowerLevel": 10
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "gold:1000",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 50
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 11,
+                    "maxPowerLevel": 20
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "gold:3000",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 125
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 21,
+                    "maxPowerLevel": 30
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "gold:10000",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 375
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 31,
+                    "maxPowerLevel": 40
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "gold:30000",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 1000
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "gold:50000",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 1500
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "upgArmL202",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * WED *",
+                "reward": "upgArmL001",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * FRI *",
+                "reward": "upgArmL203",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "upgArmL204",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE *",
+                "reward": "upgDmgL001",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU *",
+                "reward": "upgDmgL003",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SAT *",
+                "reward": "upgDmgL204",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "upgDmgL202",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 450
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * WED,SAT,SUN *",
+                "reward": "upgHpM001",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU,SAT,SUN *",
+                "reward": "upgHpM002",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * FRI,SAT,SUN *",
+                "reward": "upgHpM003",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE,SAT,SUN *",
+                "reward": "upgHpM004",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 900
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "maxPowerLevel": 10
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "xpUncommon:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 15
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 11,
+                    "maxPowerLevel": 15
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "xpRare:4",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 50
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 16,
+                    "maxPowerLevel": 20
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "xpEpic:3",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 180
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 21,
+                    "maxPowerLevel": 40
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "xpLegendary:2",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,THU,FRI,SAT *",
+                "reward": "xpMythic",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 1500
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41
+                },
+                "cronSchedule": "0 0 0 ? * WED,SUN *",
+                "reward": "xpMythic",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 1500
+                }
+            }
+        ]
+    ]
+}

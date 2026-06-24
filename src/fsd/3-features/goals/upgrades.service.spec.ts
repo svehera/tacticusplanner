@@ -323,6 +323,7 @@ const buildUpgrade = (locations: ICampaignBattleComposed[]): ICombinedUpgrade =>
     ...FsdUpgradesService.baseUpgradesData.upgHpC015,
     requiredCount: 1,
     countByGoalId: {},
+    goalToUnit: {},
     relatedCharacters: [],
     relatedGoals: [],
     locations,
@@ -863,6 +864,7 @@ function buildShardsMat(unitId: string, goalId: string, isMythic: boolean): ICom
         crafted: false,
         stat: 'Shard',
         countByGoalId: { [goalId]: 20 },
+        goalToUnit: { [goalId]: unitId },
         requiredCount: 20,
         relatedCharacters: [unitId],
         relatedGoals: [goalId],
@@ -3466,6 +3468,7 @@ describe('UpgradesService.populateLocationsData', () => {
             ...FsdUpgradesService.baseUpgradesData.upgHpC015,
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
             locations: [locationHighEnergy, locationLowEnergy, locationLocked],
@@ -3500,6 +3503,7 @@ describe('UpgradesService.populateLocationsData', () => {
             ...FsdUpgradesService.baseUpgradesData.upgHpC015,
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
             locations: [locationA, locationB, locationLocked],
@@ -3534,6 +3538,7 @@ describe('UpgradesService.populateLocationsData', () => {
             ...FsdUpgradesService.baseUpgradesData.upgHpC015,
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
             locations: [locationNormal, locationElite, locationLocked],
@@ -3576,6 +3581,7 @@ describe('UpgradesService.populateLocationsData', () => {
             stat: 'Shard',
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
         };
@@ -3613,6 +3619,7 @@ describe('UpgradesService.populateLocationsData', () => {
             stat: 'Shard',
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
         };
@@ -3651,6 +3658,7 @@ describe('UpgradesService.populateLocationsData', () => {
             stat: 'Shard',
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
         };
@@ -3689,6 +3697,7 @@ describe('UpgradesService.populateLocationsData', () => {
             stat: 'Shard',
             requiredCount: 1,
             countByGoalId: {},
+            goalToUnit: {},
             relatedCharacters: [],
             relatedGoals: [],
         };
@@ -3877,6 +3886,7 @@ describe('UpgradesService.calculateDaysToCompleteMaterial', () => {
         ...FsdUpgradesService.baseUpgradesData[upgradeId],
         requiredCount: 0,
         countByGoalId: {},
+        goalToUnit: {},
         relatedCharacters: [],
         relatedGoals: [],
         locations: [],
@@ -4102,6 +4112,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
         ...FsdUpgradesService.baseUpgradesData[upgradeId],
         requiredCount: 0,
         countByGoalId: {},
+        goalToUnit: {},
         relatedCharacters: [],
         relatedGoals: [],
         locations: [],
@@ -4350,6 +4361,7 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
         ...FsdUpgradesService.baseUpgradesData[upgradeId],
         requiredCount: 5,
         countByGoalId: { [goal.goalId]: 5 },
+        goalToUnit: { [goal.goalId]: '' },
         relatedCharacters: [],
         relatedGoals: [goal.goalId],
         locations: [location],
@@ -4587,6 +4599,7 @@ describe('UpgradesService.canRaidMaterial – shard goal blocked regression', ()
         crafted: false,
         stat: 'Shard',
         countByGoalId: { [goalId]: 10 },
+        goalToUnit: { [goalId]: unitId },
         requiredCount: 10,
         relatedCharacters: [unitId],
         relatedGoals: [goalId],
@@ -4602,6 +4615,7 @@ describe('UpgradesService.canRaidMaterial – shard goal blocked regression', ()
         crafted: false,
         stat: 'Shard',
         countByGoalId: { [goalId]: 5 },
+        goalToUnit: { [goalId]: unitId },
         requiredCount: 5,
         relatedCharacters: [unitId],
         relatedGoals: [goalId],
@@ -4673,5 +4687,79 @@ describe('UpgradesService.canRaidMaterial – shard goal blocked regression', ()
 
         const result = UpgradesService.canRaidMaterial(makeMythicShardsmat(goalId), [character], [], [goal]);
         expect(result).toBe(true);
+    });
+});
+
+const buildSettingsForCountByUnit = (overrides: Partial<IEstimatedRanksSettings> = {}) =>
+    createSettings({ campaignsProgress: createAllCampaignsProgress(), ...overrides });
+
+describe('UpgradesService.getUpgradesEstimatedDays – countByUnitId aggregation', () => {
+    it('single ascend goal: shard estimate has countByUnitId with one entry matching requiredCount', () => {
+        const baseChar = CharactersService.charactersData.find(c => c.snowprintId === 'votanBeserk')!;
+        const character = createCharacter(baseChar, { rarity: Rarity.Rare, stars: RarityStars.RedOneStar });
+        const goal = createAscendGoal({
+            goalId: 'goal-votan-countbyunit-single',
+            unitId: character.snowprintId,
+            unitName: baseChar.shortName ?? baseChar.name,
+            unitIcon: baseChar.icon ?? '',
+            unitRoundIcon: baseChar.roundIcon ?? '',
+            rarityStart: Rarity.Rare,
+            starsStart: RarityStars.RedOneStar,
+            rarityEnd: Rarity.Epic,
+            starsEnd: RarityStars.RedOneStar,
+            onslaughtShards: 6.5,
+        });
+
+        const result = UpgradesService.getUpgradesEstimatedDays(buildSettingsForCountByUnit(), [character], [], goal);
+
+        const shardMat = [...result.inProgressMaterials, ...result.blockedMaterials].find(
+            m => m.snowprintId === `shards_${character.snowprintId}`
+        );
+
+        expect(shardMat).toBeDefined();
+        expect(shardMat!.countByUnitId).toEqual({ [character.snowprintId]: shardMat!.requiredCount });
+    });
+
+    it('two rank-up goals for the same unit: shared material countByUnitId aggregates both goals under one unit key', () => {
+        const kharn = CharactersService.getUnit('worldKharn')!;
+        const character = createCharacter(kharn);
+
+        const goalA = createRankGoal(kharn, {
+            goalId: 'goal-kharn-s1-g1-countbyunit',
+            unitId: kharn.snowprintId,
+            unitName: kharn.shortName ?? kharn.name,
+            unitIcon: kharn.icon ?? '',
+            unitRoundIcon: kharn.roundIcon ?? '',
+            unitAlliance: kharn.alliance ?? Alliance.Chaos,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Gold1,
+        });
+
+        const goalB = createRankGoal(kharn, {
+            goalId: 'goal-kharn-g1-d1-countbyunit',
+            unitId: kharn.snowprintId,
+            unitName: kharn.shortName ?? kharn.name,
+            unitIcon: kharn.icon ?? '',
+            unitRoundIcon: kharn.roundIcon ?? '',
+            unitAlliance: kharn.alliance ?? Alliance.Chaos,
+            rankStart: Rank.Gold1,
+            rankEnd: Rank.Diamond1,
+        });
+
+        const result = UpgradesService.getUpgradesEstimatedDays(
+            buildSettingsForCountByUnit(),
+            [character],
+            [],
+            goalA,
+            goalB
+        );
+
+        const allMats = [...result.inProgressMaterials, ...result.blockedMaterials];
+        const sharedMats = allMats.filter(m => m.relatedGoals.length >= 2);
+
+        expect(sharedMats.length).toBeGreaterThan(0);
+        for (const mat of sharedMats) {
+            expect(mat.countByUnitId).toEqual({ [kharn.snowprintId]: mat.requiredCount });
+        }
     });
 });

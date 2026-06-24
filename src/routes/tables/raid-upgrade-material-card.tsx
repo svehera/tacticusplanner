@@ -17,6 +17,7 @@ const MaterialEstimatesRow = lazy(() => import('./material-estimates-row'));
 interface Props {
     showRelatedCharacters?: boolean;
     showAdditionalInfo?: boolean;
+    showPerCharacterNeeded?: boolean;
     maxLocations?: number;
     upgradeEstimate: ICharacterUpgradeEstimate;
     widthClass?: string;
@@ -50,6 +51,7 @@ const hasRaidLocations = (
 export const RaidUpgradeMaterialCard: FC<Props> = ({
     showRelatedCharacters = true,
     showAdditionalInfo = true,
+    showPerCharacterNeeded = false,
     maxLocations,
     upgradeEstimate,
     widthClass = 'w-76',
@@ -157,24 +159,61 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
                             {name ?? upgradeEstimate.snowprintId}
                         </h4>
                     </div>
-                    {showRelatedCharacters && upgradeEstimate.relatedCharacters.length > 0 && (
-                        <div
-                            className={`flex flex-row items-center gap-1 ${
-                                noSuggestedRaidsRemaining ? 'opacity-70' : ''
-                            }`}>
-                            {upgradeEstimate.relatedCharacters.map(id => (
-                                <UnitShardIcon
-                                    key={id}
-                                    icon={
-                                        CharactersService.getUnit(id)?.roundIcon ??
-                                        mows2Data.mows.find(m => id === m.name)?.roundIcon ??
-                                        id
-                                    }
-                                    height={characterIconHeight}
-                                    width={characterIconHeight}
-                                />
-                            ))}
+                    {showPerCharacterNeeded && upgradeEstimate.countByUnitId ? (
+                        <div className={`flex flex-wrap gap-1 ${noSuggestedRaidsRemaining ? 'opacity-70' : ''}`}>
+                            {Object.entries(upgradeEstimate.countByUnitId).map(([unitId, count]) => {
+                                if (unitId !== '') {
+                                    const unitIcon =
+                                        CharactersService.getUnit(unitId)?.roundIcon ??
+                                        mowMap.get(unitId)?.roundIcon ??
+                                        unitId;
+                                    return (
+                                        <span
+                                            key={unitId}
+                                            className="flex items-center gap-1 rounded-full border border-[var(--card-border)] px-1.5 py-0.5 text-xs">
+                                            <UnitShardIcon icon={unitIcon} height={20} width={20} />
+                                            <span>×{count}</span>
+                                        </span>
+                                    );
+                                }
+                                return (
+                                    <span
+                                        key="material-goal"
+                                        className="flex items-center gap-1 rounded-full border border-[var(--card-border)] px-1.5 py-0.5 text-xs">
+                                        <UpgradeImage
+                                            material={upgradeEstimate.label}
+                                            iconPath={upgradeEstimate.iconPath}
+                                            rarity={RarityMapper.rarityToRarityString(
+                                                mapUpgradeRarity(upgradeEstimate.rarity)
+                                            )}
+                                            size={20}
+                                        />
+                                        <span>×{count}</span>
+                                    </span>
+                                );
+                            })}
                         </div>
+                    ) : (
+                        showRelatedCharacters &&
+                        upgradeEstimate.relatedCharacters.length > 0 && (
+                            <div
+                                className={`flex flex-row items-center gap-1 ${
+                                    noSuggestedRaidsRemaining ? 'opacity-70' : ''
+                                }`}>
+                                {upgradeEstimate.relatedCharacters.map(id => (
+                                    <UnitShardIcon
+                                        key={id}
+                                        icon={
+                                            CharactersService.getUnit(id)?.roundIcon ??
+                                            mows2Data.mows.find(m => id === m.name)?.roundIcon ??
+                                            id
+                                        }
+                                        height={characterIconHeight}
+                                        width={characterIconHeight}
+                                    />
+                                ))}
+                            </div>
+                        )
                     )}
                     <div className={`flex flex-1 items-start ${noSuggestedRaidsRemaining ? 'opacity-75' : ''}`}>
                         <RaidLocations

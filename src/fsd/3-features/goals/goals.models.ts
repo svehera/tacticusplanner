@@ -232,6 +232,7 @@ interface ICharacterUpgradeRankEstimate {
 
 export interface ICombinedUpgrade extends IBaseUpgrade {
     countByGoalId: Record<string, number>;
+    goalToUnit: Record<string, string>;
     requiredCount: number;
     relatedCharacters: string[];
     relatedGoals: string[];
@@ -247,6 +248,8 @@ export interface ICharacterUpgradeEstimate extends IBaseUpgrade {
     requiredCount: number;
     relatedCharacters: string[];
     relatedGoals: string[];
+    /** unitId → total required count. Empty-string key aggregates all material-only goals. */
+    countByUnitId?: Record<string, number>;
 
     isBlocked: boolean;
     isFinished: boolean;
