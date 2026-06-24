@@ -148,6 +148,8 @@ import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_
 import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
+import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
+import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
 import mythicSalvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_mythic_salvage.png';
 import salvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_salvage.png';
 import chaosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_chaos.png';
@@ -724,4 +726,6 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     traitUnknown: { file: traitUnknown, label: 'Unknown' },
     traitVehicle: { file: traitVehicle, label: 'Vehicle' },
     traitWeaversOfFate: { file: traitWeaversOfFate, label: 'Weavers of Fate' },
+    warCredits: { file: warCredits, label: 'War Credits' },
+    guildCredits: { file: guildCredits, label: 'Guild Credits' },
 };

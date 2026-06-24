@@ -1,11 +1,13 @@
-﻿import { cloneDeep } from 'lodash';
+import { cloneDeep } from 'lodash';
 import { lazy, Suspense, useContext, useEffect, useMemo, useState } from 'react';
 import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { GuildShopSection } from 'src/routes/tables/guild-shop-section';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { TodayRaids } from 'src/routes/tables/today-raids';
+import { WarShopSection } from 'src/routes/tables/war-shop-section';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
@@ -18,6 +20,8 @@ import { IEstimatedUpgrades, TypedGoalSelect } from '@/fsd/3-features/goals/goal
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+
+import { computeMowCounts } from './daily-raids.helpers';
 
 const RaidsPlan = lazy(() => import('src/routes/tables/raids-plan').then(m => ({ default: m.RaidsPlan })));
 
@@ -51,6 +55,7 @@ export const DailyRaids = () => {
         dailyRaidsPreferences,
         inventory,
         onslaughtPreferences,
+        playerMetadata,
     } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
@@ -183,6 +188,11 @@ export const DailyRaids = () => {
         upgradeMaterialGoals,
     ]);
 
+    const mowCounts = useMemo(
+        () => computeMowCounts(upgradeRankOrMowGoals, inventory.components, inventory.forgeBadges),
+        [upgradeRankOrMowGoals, inventory.components, inventory.forgeBadges]
+    );
+
     return (
         <div className="space-y-8 py-6">
             <RaidsHeader
@@ -215,6 +225,22 @@ export const DailyRaids = () => {
                         infiniteEstimatedRanks.upgradesRaids[0],
                         estimatedRanks.upgradesRaids[0]
                     )}
+                    guildShopSection={
+                        <GuildShopSection
+                            inProgressMaterials={estimatedRanks.inProgressMaterials}
+                            blockedMaterials={estimatedRanks.blockedMaterials}
+                            userPL={playerMetadata.powerLevel ?? 1}
+                        />
+                    }
+                    warShopSection={
+                        <WarShopSection
+                            inProgressMaterials={estimatedRanks.inProgressMaterials}
+                            blockedMaterials={estimatedRanks.blockedMaterials}
+                            componentsByAlliance={mowCounts.componentsByAlliance}
+                            forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                            userPL={playerMetadata.powerLevel ?? 1}
+                        />
+                    }
                 />
             )}
         </div>

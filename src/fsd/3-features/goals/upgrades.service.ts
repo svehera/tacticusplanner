@@ -555,6 +555,7 @@ export class UpgradesService {
         return {
             ...upgrade,
             countByGoalId: { ...upgrade.countByGoalId },
+            goalToUnit: { ...upgrade.goalToUnit },
             relatedCharacters: [...upgrade.relatedCharacters],
             relatedGoals: [...upgrade.relatedGoals],
             locations: [...upgrade.locations.map(x => ({ ...x }))],
@@ -2515,11 +2516,28 @@ export class UpgradesService {
         requiredCount: number,
         acquiredCount: number
     ): ICharacterUpgradeEstimate {
-        const { id, snowprintId, label, rarity, iconPath, locations, relatedCharacters, relatedGoals } = upgrade;
+        const {
+            id,
+            snowprintId,
+            label,
+            rarity,
+            iconPath,
+            locations,
+            relatedCharacters,
+            relatedGoals,
+            countByGoalId,
+            goalToUnit,
+        } = upgrade;
 
         const selectedLocations = locations.filter(x => x.isSuggested);
 
         const leftCount = Math.max(requiredCount - acquiredCount, 0);
+
+        const countByUnitId: Record<string, number> = {};
+        for (const [goalId, count] of Object.entries(countByGoalId)) {
+            const unitId = goalToUnit?.[goalId] ?? '';
+            countByUnitId[unitId] = (countByUnitId[unitId] ?? 0) + count;
+        }
 
         const estimate: ICharacterUpgradeEstimate = {
             id,
@@ -2532,6 +2550,7 @@ export class UpgradesService {
             requiredCount,
             relatedCharacters,
             relatedGoals,
+            countByUnitId,
             daysTotal: 0,
             raidsTotal: 0,
             energyTotal: 0,
@@ -2608,6 +2627,7 @@ export class UpgradesService {
                     ...FsdUpgradesService.baseUpgradesData[upgradeId],
                     requiredCount: 0,
                     countByGoalId: {},
+                    goalToUnit: {},
                     relatedCharacters: [],
                     relatedGoals: [],
                 };
@@ -2615,6 +2635,7 @@ export class UpgradesService {
                 combinedUpgrade.requiredCount += upgradeCount;
                 combinedUpgrade.countByGoalId[character.goalId] =
                     (combinedUpgrade.countByGoalId[character.goalId] ?? 0) + upgradeCount;
+                combinedUpgrade.goalToUnit[character.goalId] = character.unitId;
                 if (!combinedUpgrade.relatedCharacters.includes(character.unitId)) {
                     combinedUpgrade.relatedCharacters.push(character.unitId);
                 }

@@ -1,0 +1,575 @@
+{
+    "displayLocation": "guildWarsShopMerchant",
+    "refreshCost": {
+        "resourceType": "gems",
+        "amount": 50
+    },
+    "refreshWithAdWatch": true,
+    "allowedRefreshesPerDay": 1,
+    "products": [
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_spaceStormcaller:5",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_deathRotbone:5",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_darkaAsmodai:5",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_ultraTitus:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_astraDreir:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "shards_spaceStormcaller:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE *",
+                "reward": "shards_deathRotbone:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED *",
+                "reward": "shards_darkaAsmodai:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU *",
+                "reward": "shards_ultraTitus:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * FRI,SAT *",
+                "reward": "shards_genesKelermorph:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * FRI *",
+                "reward": "shards_genesKelermorph:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_custoBladeChampion:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoBladeChampion:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraDreir:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraDreir:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperExultant:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_tauAunShi:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_worldKharn:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_spaceBlackmane:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_bloodMephiston:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * MON,THU *",
+                "reward": "shards_tauAunShi:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "shards_tauAunShi:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "reward": "shards_worldKharn:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * THU,SAT *",
+                "reward": "shards_bloodMephiston:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_spaceBlackmane:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * WED *",
+                "reward": "shards_spaceBlackmane:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesPatriarch:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodMephiston:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_after_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodDante:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_valid_until_bp_season_39_start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesPatriarch:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensMythic:3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 6175
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensLegendary:3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3085
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensEpic:3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1545
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensRare:3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 770
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensUncommon:3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 385
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensCommon:3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 195
+                }
+            }
+        ],
+        [
+            {
+                "weight": 3,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON,SAT,SUN *",
+                "reward": "itemAscensionResource_Mythic",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1230
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE,SAT,SUN *",
+                "reward": "itemAscensionResource_Legendary",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 615
+                }
+            },
+            {
+                "weight": 2,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * WED,SAT,SUN *",
+                "reward": "itemAscensionResource_Epic",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 310
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU,SAT,SUN *",
+                "reward": "itemAscensionResource_Rare",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 155
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * FRI,SAT,SUN *",
+                "reward": "itemAscensionResource_Uncommon",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 50
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "maxPowerLevel": 10
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 40
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 11,
+                    "maxPowerLevel": 20
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:30",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 120
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 21,
+                    "maxPowerLevel": 30
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:100",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 410
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 31,
+                    "maxPowerLevel": 40
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:300",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1230
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:1000",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 4100
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_machinesOfWarTokens:10",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 515
+                }
+            }
+        ]
+    ]
+}
