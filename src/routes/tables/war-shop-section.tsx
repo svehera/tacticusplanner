@@ -2,7 +2,7 @@ import { Shuffle } from 'lucide-react';
 import { FC, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
-import { Alliance, Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { Alliance, Rarity, RarityString } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { ComponentImage, ForgeBadgeImage, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -12,14 +12,13 @@ import { WarShopService, ResolvedShopItem } from '@/fsd/4-entities/shops';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
-const FORGE_BADGE_PREFIX = 'itemAscensionResource_';
-const ICON_SIZE = 40;
+import {
+    filterWarShopItemsByGoalNeed,
+    filterWarShopItemsByType,
+    parseForgeBadgeRarity,
+} from './war-shop-section.helpers';
 
-function parseForgeBadgeRarity(rewardType: string): Rarity | undefined {
-    if (!rewardType.startsWith(FORGE_BADGE_PREFIX)) return undefined;
-    const rarityString = rewardType.slice(FORGE_BADGE_PREFIX.length) as RarityString;
-    return RarityMapper.stringToNumber[rarityString];
-}
+const ICON_SIZE = 40;
 
 interface Counts {
     acquired: number;
@@ -97,13 +96,7 @@ export const WarShopSection: FC<Props> = ({
     const today = WarShopService.getTodayDow();
 
     const todayItems = useMemo(
-        () =>
-            WarShopService.resolveForDay(today, userPL).filter(
-                item =>
-                    item.rewardType.startsWith('shards_') ||
-                    item.rewardType === 'draft_machinesOfWarTokens' ||
-                    item.rewardType.startsWith(FORGE_BADGE_PREFIX)
-            ),
+        () => filterWarShopItemsByType(WarShopService.resolveForDay(today, userPL)),
         [today, userPL]
     );
 
@@ -122,24 +115,7 @@ export const WarShopSection: FC<Props> = ({
     }, [inProgressMaterials, blockedMaterials]);
 
     const visibleItems = useMemo(
-        () =>
-            todayItems.filter(item => {
-                if (item.rewardType.startsWith('shards_')) {
-                    const c = shardsCountsMap.get(item.rewardType);
-                    const needsShard = c !== undefined && c.acquired < c.required;
-                    const needsMowViaBundl =
-                        item.freeOfferType === 'draft_machinesOfWarTokens' &&
-                        Object.values(componentsByAlliance).some(ca => ca.acquired < ca.required);
-                    return needsShard || needsMowViaBundl;
-                }
-                if (item.rewardType === 'draft_machinesOfWarTokens') {
-                    return Object.values(componentsByAlliance).some(c => c.acquired < c.required);
-                }
-                const rarity = parseForgeBadgeRarity(item.rewardType);
-                if (rarity === undefined) return false;
-                const c = forgeBadgeCounts[rarity];
-                return c.acquired < c.required;
-            }),
+        () => filterWarShopItemsByGoalNeed(todayItems, shardsCountsMap, componentsByAlliance, forgeBadgeCounts),
         [todayItems, shardsCountsMap, componentsByAlliance, forgeBadgeCounts]
     );
 
