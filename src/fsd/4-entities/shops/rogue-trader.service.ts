@@ -11,16 +11,19 @@ const ROGUE_TRADER = rogueTraderJson as ShopData;
 // it from making the slot appear non-guaranteed on its scheduled days.
 const RELEVANT_REWARDS = new Set(['itemAscensionResource_Mythic', 'upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
 
-const penultimateSlot = ROGUE_TRADER.products
-    .at(-2)!
-    .filter(p => RELEVANT_REWARDS.has(parseReward(p.reward).type))
-    .map(p => ({ ...p, conditions: {} }));
+const penultimateSlot =
+    ROGUE_TRADER.products !== undefined && ROGUE_TRADER.products.length > 2
+        ? ROGUE_TRADER.products
+              .at(-2)!
+              .filter(p => RELEVANT_REWARDS.has(parseReward(p.reward).type))
+              .map(p => ({ ...p, conditions: {} }))
+        : undefined;
 
 const ROGUE_TRADER_PENULTIMATE: ShopData = {
     displayLocation: 'rogueTraderPenultimate',
     refreshWithAdWatch: false,
     allowedRefreshesPerDay: 0,
-    products: [penultimateSlot],
+    products: penultimateSlot ? [penultimateSlot] : [],
 };
 
 export const RogueTraderService = {
