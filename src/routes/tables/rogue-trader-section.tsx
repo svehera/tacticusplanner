@@ -6,14 +6,13 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui';
 import { ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService } from '@/fsd/4-entities/character';
-import { MowsService } from '@/fsd/4-entities/mow';
 import { RogueTraderService, ResolvedShopItem } from '@/fsd/4-entities/shops';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { NeededByEntry } from './daily-raids.helpers';
+import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
 
 const MYTHIC_MAT_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
 const MYTHIC_FORGE_BADGE = 'itemAscensionResource_Mythic';
@@ -22,23 +21,6 @@ const ICON_SIZE = 40;
 interface Counts {
     acquired: number;
     required: number;
-}
-
-function resolveUnitName(unitId: string): string {
-    return CharactersService.getUnit(unitId)?.shortName ?? MowsService.resolveToStatic(unitId)?.name ?? unitId;
-}
-
-function buildNeededByTooltip(neededBy: NeededByEntry[]) {
-    if (neededBy.length === 0) return;
-    return (
-        <div className="text-xs leading-relaxed">
-            {neededBy.map((entry, index) => (
-                <div key={index}>
-                    {entry.name} {entry.count}x
-                </div>
-            ))}
-        </div>
-    );
 }
 
 interface ShopItemCardProps {

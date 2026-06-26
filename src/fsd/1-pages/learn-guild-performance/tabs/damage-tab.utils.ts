@@ -194,6 +194,7 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): PlayerSummary
     });
 
     const ths = headerCells.map(h => `<th>${h}</th>`).join('');
+    // HTML uses raw numbers (better for spreadsheet paste); text path uses formatCompactNumber for readability.
     const trs = rows
         .map(stats => {
             const cells = [

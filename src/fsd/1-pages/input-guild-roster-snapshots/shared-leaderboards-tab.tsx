@@ -156,26 +156,26 @@ export function SharedLeaderboardsTab() {
                     onClick={handleRefresh}
                     disabled={isLoading || isSaving}
                     title="Refresh"
-                    className="flex size-7 items-center justify-center rounded border border-zinc-300 text-sm disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-600">
+                    className="flex size-7 items-center justify-center rounded border border-(--input-border) text-sm disabled:cursor-not-allowed disabled:opacity-40">
                     ⟳
                 </button>
                 {isLoading && <Spinner />}
             </div>
 
-            {error && <p className="text-sm text-red-600 dark:text-red-400">{error}</p>}
+            {error && <p className="text-sm text-(--danger)">{error}</p>}
 
             {!isLoading && committed !== undefined && (
                 <>
                     <table className="w-full max-w-sm border-collapse text-sm">
                         <thead>
-                            <tr className="border-b border-zinc-300 dark:border-zinc-600">
+                            <tr className="border-b border-(--input-border)">
                                 <th className="py-1 text-left font-semibold">Guild Tag</th>
                                 <th className="w-10" />
                             </tr>
                         </thead>
                         <tbody>
                             {allRows.map(({ tag, state }) => (
-                                <tr key={tag} className="border-b border-zinc-200 dark:border-zinc-700">
+                                <tr key={tag} className="border-b border-(--border)">
                                     <td className="py-1.5">
                                         <span
                                             className={
@@ -211,7 +211,7 @@ export function SharedLeaderboardsTab() {
                                                         ? handleRemovePendingAdd(tag)
                                                         : handleRemoveCommitted(tag)
                                                 }
-                                                className="flex size-6 items-center justify-center rounded text-zinc-400 hover:bg-red-50 hover:text-red-600 dark:hover:bg-red-950 dark:hover:text-red-400">
+                                                className="flex size-6 items-center justify-center rounded text-zinc-400 hover:bg-(--danger)/10 hover:text-(--danger)">
                                                 ×
                                             </button>
                                         )}
@@ -234,17 +234,15 @@ export function SharedLeaderboardsTab() {
                                                 handleAddDraft();
                                             }
                                         }}
-                                        className="w-32 rounded border border-zinc-300 bg-white px-2 py-1 text-sm dark:border-zinc-600 dark:bg-zinc-900"
+                                        className="w-32 rounded border border-(--input-border) bg-(--card) px-2 py-1 text-sm"
                                     />
                                     {draftInvalid && (
-                                        <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">
+                                        <p className="mt-0.5 text-xs text-(--danger)">
                                             Must be exactly {GUILD_TAG_LENGTH} alphanumeric characters.
                                         </p>
                                     )}
                                     {draftDuplicate && (
-                                        <p className="mt-0.5 text-xs text-red-600 dark:text-red-400">
-                                            Already in list.
-                                        </p>
+                                        <p className="mt-0.5 text-xs text-(--danger)">Already in list.</p>
                                     )}
                                 </td>
                                 <td className="py-1.5 text-center">
@@ -253,7 +251,7 @@ export function SharedLeaderboardsTab() {
                                         aria-label="Add guild tag"
                                         onClick={handleAddDraft}
                                         disabled={!canAddTag(draft, committed, pending)}
-                                        className="flex size-6 items-center justify-center rounded border border-zinc-300 text-base leading-none disabled:cursor-not-allowed disabled:opacity-40 dark:border-zinc-600">
+                                        className="flex size-6 items-center justify-center rounded border border-(--input-border) text-base leading-none disabled:cursor-not-allowed disabled:opacity-40">
                                         +
                                     </button>
                                 </td>
@@ -262,9 +260,9 @@ export function SharedLeaderboardsTab() {
                     </table>
 
                     {isPendingDirty && (
-                        <div className="max-w-sm rounded border border-zinc-300 bg-zinc-50 px-3 py-2 text-sm dark:border-zinc-600 dark:bg-zinc-800">
+                        <div className="max-w-sm rounded border border-(--input-border) bg-zinc-50 px-3 py-2 text-sm dark:bg-zinc-800">
                             <p className="mb-1 font-semibold text-zinc-700 dark:text-zinc-300">Pending changes:</p>
-                            <ul className="list-inside list-disc space-y-0.5 text-zinc-600 dark:text-zinc-400">
+                            <ul className="list-inside list-disc space-y-0.5 text-(--soft-fg)">
                                 {pendingSummary.map(line => (
                                     <li key={line}>{line}</li>
                                 ))}

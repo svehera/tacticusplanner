@@ -14,26 +14,10 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { NeededByEntry } from './daily-raids.helpers';
+import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
 
 const MYTHIC_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
 const ICON_SIZE = 40;
-
-function resolveUnitName(unitId: string): string {
-    return CharactersService.getUnit(unitId)?.shortName ?? MowsService.resolveToStatic(unitId)?.name ?? unitId;
-}
-
-function buildNeededByTooltip(neededBy: NeededByEntry[]) {
-    if (neededBy.length === 0) return;
-    return (
-        <div className="text-xs leading-relaxed">
-            {neededBy.map((entry, index) => (
-                <div key={index}>
-                    {entry.name} {entry.count}x
-                </div>
-            ))}
-        </div>
-    );
-}
 
 interface ShopItemCardProps {
     item: ResolvedShopItem;

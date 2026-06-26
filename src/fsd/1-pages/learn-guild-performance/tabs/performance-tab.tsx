@@ -527,7 +527,7 @@ function PerUnitRow({ bucket }: { bucket: UnitPlayerBuckets }) {
 
 function ColorBandLegend() {
     return (
-        <p className="text-xs text-gray-500">
+        <p className="text-xs text-zinc-500">
             <span className="font-medium text-emerald-500">Green</span>: ≥ +20% of guild avg ·{' '}
             <span className="font-medium text-amber-500">Amber</span>: within ±20% ·{' '}
             <span className="font-medium text-red-500">Red</span>: &lt; −20%
@@ -556,7 +556,7 @@ function PlayerBossBreakdownTable({
             {mode === 'efficiency' && (
                 <>
                     <ColorBandLegend />
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-zinc-500">
                         Sorted green-first, then amber, then red. Unhit units hidden.
                     </p>
                     <div className="flex flex-col gap-1">
@@ -569,7 +569,7 @@ function PlayerBossBreakdownTable({
             {mode === 'encounter' && (
                 <>
                     <ColorBandLegend />
-                    <p className="text-xs text-gray-500">
+                    <p className="text-xs text-zinc-500">
                         Ascending rarity/set. Within a set: left prime → right prime → boss. Grey = no hits.
                     </p>
                     <div className="flex flex-col gap-1">
@@ -582,8 +582,8 @@ function PlayerBossBreakdownTable({
             {mode === 'per-unit' && (
                 <>
                     <ColorBandLegend />
-                    <p className="text-xs text-gray-500">One row per boss/prime, descending rarity/set.</p>
-                    <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-semibold text-gray-500 uppercase">
+                    <p className="text-xs text-zinc-500">One row per boss/prime, descending rarity/set.</p>
+                    <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-semibold text-zinc-500 uppercase">
                         <span>Unit</span>
                         <span className="text-emerald-500">≥ +20%</span>
                         <span className="text-amber-500">±20%</span>
