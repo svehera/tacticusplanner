@@ -200,10 +200,10 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): PlayerSummary
                 escapeHtml(stats.displayName),
                 stats.tokens,
                 stats.bombs,
-                formatCompactNumber(stats.primeHits),
-                formatCompactNumber(stats.bossKills),
-                formatCompactNumber(stats.totalDamage),
-                formatCompactNumber(stats.maxDamage),
+                stats.primeHits,
+                stats.bossKills,
+                stats.totalDamage,
+                stats.maxDamage,
                 escapeHtml(maxTargetLabel(stats)),
             ];
             return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;

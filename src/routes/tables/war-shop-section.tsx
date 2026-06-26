@@ -3,7 +3,7 @@ import { FC, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Alliance, Rarity, RarityString } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui';
 import { ComponentImage, ForgeBadgeImage, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -12,11 +12,29 @@ import { WarShopService, ResolvedShopItem } from '@/fsd/4-entities/shops';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
+import { NeededByEntry } from './daily-raids.helpers';
 import {
     filterWarShopItemsByGoalNeed,
     filterWarShopItemsByType,
     parseForgeBadgeRarity,
 } from './war-shop-section.helpers';
+
+function resolveUnitName(unitId: string): string {
+    return CharactersService.getUnit(unitId)?.shortName ?? MowsService.resolveToStatic(unitId)?.name ?? unitId;
+}
+
+function buildNeededByTooltip(neededBy: NeededByEntry[]) {
+    if (neededBy.length === 0) return;
+    return (
+        <div className="text-xs leading-relaxed">
+            {neededBy.map((entry, index) => (
+                <div key={index}>
+                    {entry.name} {entry.count}x
+                </div>
+            ))}
+        </div>
+    );
+}
 
 const ICON_SIZE = 40;
 
@@ -30,16 +48,18 @@ interface ShopItemCardProps {
     counts: Counts;
     icon: React.ReactNode;
     name: string;
+    neededBy: NeededByEntry[];
 }
 
-const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name }) => {
+const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name, neededBy }) => {
     const { acquired, required } = counts;
     const displayAcquired = Math.min(Math.floor(acquired), required);
 
     const availableText =
         item.maxPerDay === 1 ? `1×${item.rewardQty} available` : `Up to ${item.maxPerDay}×${item.rewardQty} available`;
 
-    return (
+    const tooltip = buildNeededByTooltip(neededBy);
+    const card = (
         <div className="flex w-52 flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
             <div className="flex w-full flex-row items-start gap-2">
                 <div className="flex w-12 shrink-0 flex-col items-center gap-1">
@@ -76,6 +96,9 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name }) => {
             </div>
         </div>
     );
+
+    if (!tooltip) return card;
+    return <LazyTooltip title={tooltip}>{card}</LazyTooltip>;
 };
 
 interface Props {
@@ -83,6 +106,8 @@ interface Props {
     blockedMaterials: ICharacterUpgradeEstimate[];
     componentsByAlliance: Record<Alliance, Counts>;
     forgeBadgeCounts: Record<Rarity, Counts>;
+    componentNeededBy: Record<Alliance, NeededByEntry[]>;
+    forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]>;
     userPL: number;
 }
 
@@ -91,6 +116,8 @@ export const WarShopSection: FC<Props> = ({
     blockedMaterials,
     componentsByAlliance,
     forgeBadgeCounts,
+    componentNeededBy,
+    forgeBadgeNeededBy,
     userPL,
 }) => {
     const today = WarShopService.getTodayDow();
@@ -110,6 +137,20 @@ export const WarShopSection: FC<Props> = ({
                 acquired: previous.acquired + mat.acquiredCount,
                 required: previous.required + mat.requiredCount,
             });
+        }
+        return map;
+    }, [inProgressMaterials, blockedMaterials]);
+
+    const shardsNeededByMap = useMemo(() => {
+        const map = new Map<string, NeededByEntry[]>();
+        for (const mat of [...inProgressMaterials, ...blockedMaterials]) {
+            if (!mat.snowprintId.startsWith('shards_')) continue;
+            const entries = map.get(mat.snowprintId) ?? [];
+            for (const [unitId, count] of Object.entries(mat.countByUnitId ?? {})) {
+                if (!unitId) continue;
+                entries.push({ name: resolveUnitName(unitId), count });
+            }
+            map.set(mat.snowprintId, entries);
         }
         return map;
     }, [inProgressMaterials, blockedMaterials]);
@@ -141,6 +182,7 @@ export const WarShopSection: FC<Props> = ({
                                         counts={componentsByAlliance[a]}
                                         icon={<ComponentImage alliance={a} size="medium" />}
                                         name={`${a} Components`}
+                                        neededBy={componentNeededBy[a]}
                                     />
                                 ));
                         }
@@ -163,6 +205,7 @@ export const WarShopSection: FC<Props> = ({
                                 counts={shardCounts ?? { acquired: 0, required: 0 }}
                                 icon={icon}
                                 name={unit?.name ?? charId}
+                                neededBy={shardsNeededByMap.get(item.rewardType) ?? []}
                             />
                         );
                     }
@@ -177,6 +220,7 @@ export const WarShopSection: FC<Props> = ({
                                     counts={componentsByAlliance[a]}
                                     icon={<ComponentImage alliance={a} size="medium" />}
                                     name={`${a} Components`}
+                                    neededBy={componentNeededBy[a]}
                                 />
                             ));
                     }
@@ -191,6 +235,7 @@ export const WarShopSection: FC<Props> = ({
                             counts={forgeBadgeCounts[rarity]}
                             icon={<ForgeBadgeImage rarity={rarity} size="medium" />}
                             name={`${rarityLabel} Forge Badge`}
+                            neededBy={forgeBadgeNeededBy[rarity]}
                         />
                     );
                 })}
