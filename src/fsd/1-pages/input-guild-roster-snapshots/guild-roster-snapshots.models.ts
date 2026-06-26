@@ -168,7 +168,7 @@ export type OverridesLoadState =
     | { status: 'error'; message: string }
     | { status: 'loaded'; sequenceNumber: number };
 
-export type GuildTab = 'rosters' | 'roster-snapshots' | 'members';
+export type GuildTab = 'rosters' | 'roster-snapshots' | 'members' | 'shared-leaderboards';
 
 export const API_KEY_PATTERN = /^[a-zA-Z0-9-]*$/;
 
@@ -299,3 +299,16 @@ export interface GuildRosterSnapshotSaveResponse {
 
 export const postGuildRosterSnapshotApi = (snapshot: GuildRosterSnapshot) =>
     makeApiCall<GuildRosterSnapshotSaveResponse>('PUT', 'guild/roster/history', { snapshot });
+
+// ---------------------------------------------------------------------------
+// GET/POST /guild/combinedGuildTags
+// ---------------------------------------------------------------------------
+
+export const getCombinedGuildTagsApi = () =>
+    makeApiCall<{ combinedGuildTags?: string[] }>('GET', 'guild/combinedGuildTags');
+
+export const addCombinedGuildTagsApi = (tags: string[]) =>
+    makeApiCall<{ combinedGuildTags?: string[] }>('POST', 'guild/combinedGuildTags', { guildTags: tags });
+
+export const deleteCombinedGuildTagsApi = (tags: string[]) =>
+    makeApiCall<{ combinedGuildTags?: string[] }>('POST', 'guild/combinedGuildTags/delete', { guildTags: tags });

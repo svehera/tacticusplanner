@@ -10,6 +10,7 @@ import { getGuildMemberRosterApi, getGuildMembersApi, GuildTab, MemberState } fr
 import { MembersTab } from './members-tab';
 import { RosterSnapshotsTab } from './roster-snapshots-tab';
 import { RostersTab } from './rosters-tab';
+import { SharedLeaderboardsTab } from './shared-leaderboards-tab';
 
 // Module-level cache — persists across navigations within a session
 let cachedMembers: string[] | undefined;
@@ -151,6 +152,7 @@ export const GuildRosterSnapshots = () => {
                     <Tab label="Rosters" value="rosters" />
                     <Tab label="Roster Snapshots" value="roster-snapshots" />
                     <Tab label="Members" value="members" />
+                    <Tab label="Shared Leaderboards" value="shared-leaderboards" />
                 </Tabs>
 
                 <div>
@@ -161,6 +163,7 @@ export const GuildRosterSnapshots = () => {
                     {activeTab === 'members' && (
                         <MembersTab memberStates={memberStates} rostersLoaded={hasLoadedOnce} />
                     )}
+                    {activeTab === 'shared-leaderboards' && <SharedLeaderboardsTab />}
                 </div>
             </div>
         </UnitPortraitAssetsProvider>

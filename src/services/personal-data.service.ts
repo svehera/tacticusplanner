@@ -302,6 +302,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
     return {
         ...v1Data,
         leTeams: migrateLreTeams(v1Data.leTeams ?? defaultData.leTeams),
+        viewPreferences: {
+            ...defaultData.viewPreferences,
+            ...v1Data.viewPreferences,
+        },
         inventory: {
             ...defaultData.inventory,
             ...v1Data.inventory,

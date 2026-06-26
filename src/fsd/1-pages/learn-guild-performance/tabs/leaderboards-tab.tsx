@@ -1,5 +1,7 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { useEffect, useMemo, useState } from 'react';
+import { useContext, useEffect, useMemo, useState } from 'react';
+
+import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import {
     type GuildSeasonHistoryResponse,
@@ -349,8 +351,14 @@ export const LeaderboardTab = ({
     const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
 
     // --- leaderboard sizes ---
-    const [bossTopN, setBossTopN] = useState(5);
-    const [primeTopN, setPrimeTopN] = useState(3);
+    const { viewPreferences } = useContext(StoreContext);
+    const { viewPreferences: dispatchViewPreferences } = useContext(DispatchContext);
+    const bossTopN = viewPreferences.leaderboardBossTopN;
+    const primeTopN = viewPreferences.leaderboardPrimeTopN;
+    const setBossTopN = (v: number) =>
+        dispatchViewPreferences({ type: 'Update', setting: 'leaderboardBossTopN', value: v });
+    const setPrimeTopN = (v: number) =>
+        dispatchViewPreferences({ type: 'Update', setting: 'leaderboardPrimeTopN', value: v });
 
     // --- guild filter (shared leaderboards) ---
     // Only applies when the shared leaderboard season matches the selected season.

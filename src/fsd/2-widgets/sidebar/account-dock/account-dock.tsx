@@ -266,7 +266,6 @@ export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
             shareInGameName: userInfo.shareInGameName ?? false,
             shareRosterData: userInfo.shareRosterData ?? false,
             shareGuildMemberPerformance: userInfo.shareGuildMemberPerformance ?? false,
-            combinedGuildTags: userInfo.combinedGuildTags ?? [],
             guildTag: userInfo.guildTag ?? '',
             onClose: () => {},
         });
