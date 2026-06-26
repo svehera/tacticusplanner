@@ -247,6 +247,41 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/combinedGuildTags': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns the list of combined guild tags stored for the authenticated user's guild. */
+        get: operations['listCombinedGuildTags'];
+        put?: never;
+        /** Atomically appends and deduplicates the supplied guild tags into the guild's combined tag list. Returns the new full list. */
+        post: operations['addCombinedGuildTags'];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
+    '/guild/combinedGuildTags/delete': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        get?: never;
+        put?: never;
+        /** Atomically removes the supplied guild tags from the guild's combined tag list. Returns the new full list. */
+        post: operations['deleteCombinedGuildTags'];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/users/tacticusApiKey': {
         parameters: {
             query?: never;
@@ -349,8 +384,10 @@ export interface components {
             shareInGameNameWithGuild?: boolean;
             shareRosterDataWithGuild?: boolean;
             shareGuildMemberPerformance?: boolean;
-            /** @description Tags of other guilds whose raid data should be merged into shared leaderboards. **Absent** (field omitted) = leave existing tags unchanged. **Empty array** (`[]`) = clear all combined tags. **Non-empty array** = replace combined tags with the supplied list. Only meaningful when the user holds a guild API key. */
-            combinedGuildTags?: string[];
+        };
+        CombinedGuildTagsRequest: {
+            /** @description Guild tags to add or remove. */
+            guildTags: string[];
         };
         /** @enum {string} */
         GuildRole: 'MEMBER' | 'OFFICER' | 'CO_LEADER' | 'LEADER';
@@ -1198,6 +1235,91 @@ export interface operations {
             502: components['responses']['TacticusApiError'];
         };
     };
+    listCombinedGuildTags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        combinedGuildTags?: string[];
+                    };
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    addCombinedGuildTags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                'application/json': components['schemas']['CombinedGuildTagsRequest'];
+            };
+        };
+        responses: {
+            /** @description OK — returns the updated combined tag list */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        combinedGuildTags?: string[];
+                    };
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    deleteCombinedGuildTags: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                'application/json': components['schemas']['CombinedGuildTagsRequest'];
+            };
+        };
+        responses: {
+            /** @description OK — returns the updated combined tag list */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        combinedGuildTags?: string[];
+                    };
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
     updateTacticusApiKey: {
         parameters: {
             query?: never;
@@ -1222,7 +1344,6 @@ export interface operations {
                         player?: {
                             [key: string]: unknown;
                         };
-                        combinedGuildTags?: string[] | null;
                         okString?: string;
                     };
                 };

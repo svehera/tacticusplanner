@@ -260,6 +260,8 @@ export const defaultData: IPersonalData2 = {
         lreTileShowUnitRelic: true,
         tokenomicsTableView: true,
         apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress', 'raidedLocations'],
+        leaderboardBossTopN: 5,
+        leaderboardPrimeTopN: 3,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,

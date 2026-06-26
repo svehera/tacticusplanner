@@ -382,7 +382,7 @@ function PlayerMaxVsGuildTable({ title, rows, guildMax }: { title: string; rows:
 
 function bgForUnit(unit: PlayerBossUnit): string {
     if (unit.hits === 0) return 'bg-gray-400 opacity-60';
-    if (unit.ratio >= 1) return 'bg-emerald-500';
+    if (unit.ratio >= 1.2) return 'bg-emerald-500';
     if (unit.ratio >= 0.8) return 'bg-amber-500';
     return 'bg-red-500';
 }
@@ -402,9 +402,9 @@ function BreakdownUnitChip({ unit }: { unit: PlayerBossUnit }) {
     );
 }
 
-/** 0 = green (≥ guild avg), 1 = amber (within -20%), 2 = red. */
+/** 0 = green (≥ guild avg +20%), 1 = amber (within ±20%), 2 = red (< −20%). */
 function efficiencyCategory(unit: PlayerBossUnit): number {
-    if (unit.ratio >= 1) return 0;
+    if (unit.ratio >= 1.2) return 0;
     if (unit.ratio >= 0.8) return 1;
     return 2;
 }
@@ -525,6 +525,16 @@ function PerUnitRow({ bucket }: { bucket: UnitPlayerBuckets }) {
     );
 }
 
+function ColorBandLegend() {
+    return (
+        <p className="text-xs text-zinc-500">
+            <span className="font-medium text-emerald-500">Green</span>: ≥ +20% of guild avg ·{' '}
+            <span className="font-medium text-amber-500">Amber</span>: within ±20% ·{' '}
+            <span className="font-medium text-red-500">Red</span>: &lt; −20%
+        </p>
+    );
+}
+
 function PlayerBossBreakdownTable({
     breakdowns,
     buckets,
@@ -545,9 +555,9 @@ function PlayerBossBreakdownTable({
             </div>
             {mode === 'efficiency' && (
                 <>
-                    <p className="text-xs text-gray-500">
-                        Greens (≥ guild avg) first, then ambers (≥ -20%), then reds. Units the player has not hit are
-                        hidden.
+                    <ColorBandLegend />
+                    <p className="text-xs text-zinc-500">
+                        Sorted green-first, then amber, then red. Unhit units hidden.
                     </p>
                     <div className="flex flex-col gap-1">
                         {breakdowns.map(breakdown => (
@@ -558,7 +568,8 @@ function PlayerBossBreakdownTable({
             )}
             {mode === 'encounter' && (
                 <>
-                    <p className="text-xs text-gray-500">
+                    <ColorBandLegend />
+                    <p className="text-xs text-zinc-500">
                         Ascending rarity/set. Within a set: left prime → right prime → boss. Grey = no hits.
                     </p>
                     <div className="flex flex-col gap-1">
@@ -570,15 +581,13 @@ function PlayerBossBreakdownTable({
             )}
             {mode === 'per-unit' && (
                 <>
-                    <p className="text-xs text-gray-500">
-                        One row per boss/prime, descending rarity/set. Columns: ≥ +20% (green), within ±20% (amber),
-                        &lt; -20% (red).
-                    </p>
-                    <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-semibold text-gray-500 uppercase">
+                    <ColorBandLegend />
+                    <p className="text-xs text-zinc-500">One row per boss/prime, descending rarity/set.</p>
+                    <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-semibold text-zinc-500 uppercase">
                         <span>Unit</span>
                         <span className="text-emerald-500">≥ +20%</span>
                         <span className="text-amber-500">±20%</span>
-                        <span className="text-red-500">&lt; -20%</span>
+                        <span className="text-red-500">&lt; −20%</span>
                     </div>
                     <div className="flex flex-col">
                         {buckets.map(bucket => (

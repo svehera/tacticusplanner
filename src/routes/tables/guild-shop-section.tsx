@@ -3,7 +3,7 @@ import { FC, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -13,6 +13,9 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
+import { NeededByEntry } from './daily-raids.helpers';
+import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
+
 const MYTHIC_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
 const ICON_SIZE = 40;
 
@@ -20,9 +23,10 @@ interface ShopItemCardProps {
     item: ResolvedShopItem;
     acquired: number;
     required: number;
+    neededBy: NeededByEntry[];
 }
 
-const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required }) => {
+const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededBy }) => {
     const charId = item.rewardType.startsWith('shards_') ? item.rewardType.slice(7) : undefined;
     const unit = charId ? (CharactersService.getUnit(charId) ?? MowsService.resolveToStatic(charId)) : undefined;
 
@@ -50,7 +54,8 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required }) => {
     const availableText =
         item.maxPerDay === 1 ? `1×${item.rewardQty} available` : `Up to ${item.maxPerDay}×${item.rewardQty} available`;
 
-    return (
+    const tooltip = buildNeededByTooltip(neededBy);
+    const card = (
         <div className="flex w-52 flex-col rounded-lg border border-(--card-border) bg-(--card) p-3 text-(--card-fg) shadow-lg">
             <div className="flex w-full flex-row items-start gap-2">
                 <div className="flex w-12 shrink-0 flex-col items-center gap-1">
@@ -87,6 +92,9 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required }) => {
             </div>
         </div>
     );
+
+    if (!tooltip) return card;
+    return <LazyTooltip title={tooltip}>{card}</LazyTooltip>;
 };
 
 interface Props {
@@ -120,6 +128,21 @@ export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMateri
         return map;
     }, [inProgressMaterials, blockedMaterials]);
 
+    const neededByMap = useMemo(() => {
+        const map = new Map<string, NeededByEntry[]>();
+        for (const mat of [...inProgressMaterials, ...blockedMaterials]) {
+            const key = mat.snowprintId;
+            if (!key.startsWith('shards_') && !MYTHIC_IDS.has(key)) continue;
+            const entries = map.get(key) ?? [];
+            for (const [unitId, count] of Object.entries(mat.countByUnitId ?? {})) {
+                if (!unitId) continue;
+                entries.push({ name: resolveUnitName(unitId), count });
+            }
+            map.set(key, entries);
+        }
+        return map;
+    }, [inProgressMaterials, blockedMaterials]);
+
     const visibleItems = useMemo(
         () =>
             todayItems.filter(item => {
@@ -143,6 +166,7 @@ export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMateri
                         item={item}
                         acquired={countsMap.get(item.rewardType)?.acquired ?? 0}
                         required={countsMap.get(item.rewardType)?.required ?? 0}
+                        neededBy={neededByMap.get(item.rewardType) ?? []}
                     />
                 ))}
             </div>

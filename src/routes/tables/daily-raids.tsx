@@ -239,6 +239,8 @@ export const DailyRaids = () => {
                             blockedMaterials={estimatedRanks.blockedMaterials}
                             componentsByAlliance={mowCounts.componentsByAlliance}
                             forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                            componentNeededBy={mowCounts.componentNeededBy}
+                            forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
                             userPL={playerMetadata.powerLevel ?? 1}
                         />
                     }
@@ -247,6 +249,7 @@ export const DailyRaids = () => {
                             inProgressMaterials={estimatedRanks.inProgressMaterials}
                             blockedMaterials={estimatedRanks.blockedMaterials}
                             forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                            forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
                         />
                     }
                 />
