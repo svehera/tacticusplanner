@@ -6,6 +6,7 @@ import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { GuildShopSection } from 'src/routes/tables/guild-shop-section';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
+import { RogueTraderSection } from 'src/routes/tables/rogue-trader-section';
 import { TodayRaids } from 'src/routes/tables/today-raids';
 import { WarShopSection } from 'src/routes/tables/war-shop-section';
 
@@ -238,7 +239,17 @@ export const DailyRaids = () => {
                             blockedMaterials={estimatedRanks.blockedMaterials}
                             componentsByAlliance={mowCounts.componentsByAlliance}
                             forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                            componentNeededBy={mowCounts.componentNeededBy}
+                            forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
                             userPL={playerMetadata.powerLevel ?? 1}
+                        />
+                    }
+                    rogueTraderSection={
+                        <RogueTraderSection
+                            inProgressMaterials={estimatedRanks.inProgressMaterials}
+                            blockedMaterials={estimatedRanks.blockedMaterials}
+                            forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                            forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
                         />
                     }
                 />

@@ -15,11 +15,12 @@ interface Props {
     bonusRaids: IUpgradeRaid[];
     guildShopSection?: ReactNode;
     warShopSection?: ReactNode;
+    rogueTraderSection?: ReactNode;
 }
 
 const isShardRaid = (raid: IUpgradeRaid) => raid.rarity === 'Shard' || raid.rarity === 'Mythic Shard';
 
-export const TodayRaids: FC<Props> = ({ raids, bonusRaids, guildShopSection, warShopSection }) => {
+export const TodayRaids: FC<Props> = ({ raids, bonusRaids, guildShopSection, warShopSection, rogueTraderSection }) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));
@@ -76,6 +77,7 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids, guildShopSection, war
                     </Suspense>
                     {guildShopSection}
                     {warShopSection}
+                    {rogueTraderSection}
                 </AccordionBody>
             </Accordion>
             <Accordion>

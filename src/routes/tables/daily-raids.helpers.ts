@@ -13,6 +13,11 @@ interface Counts {
     required: number;
 }
 
+export interface NeededByEntry {
+    name: string;
+    count: number;
+}
+
 export function computeMowCounts(
     upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
     components: Record<Alliance, number>,
@@ -20,6 +25,8 @@ export function computeMowCounts(
 ): {
     componentsByAlliance: Record<Alliance, Counts>;
     forgeBadgeCounts: Record<Rarity, Counts>;
+    componentNeededBy: Record<Alliance, NeededByEntry[]>;
+    forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]>;
 } {
     const componentsByAlliance: Record<Alliance, Counts> = {
         [Alliance.Imperial]: { acquired: components[Alliance.Imperial] ?? 0, required: 0 },
@@ -33,6 +40,19 @@ export function computeMowCounts(
         [Rarity.Epic]: { acquired: forgeBadges[Rarity.Epic] ?? 0, required: 0 },
         [Rarity.Legendary]: { acquired: forgeBadges[Rarity.Legendary] ?? 0, required: 0 },
         [Rarity.Mythic]: { acquired: forgeBadges[Rarity.Mythic] ?? 0, required: 0 },
+    };
+    const componentNeededBy: Record<Alliance, NeededByEntry[]> = {
+        [Alliance.Imperial]: [],
+        [Alliance.Xenos]: [],
+        [Alliance.Chaos]: [],
+    };
+    const forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]> = {
+        [Rarity.Common]: [],
+        [Rarity.Uncommon]: [],
+        [Rarity.Rare]: [],
+        [Rarity.Epic]: [],
+        [Rarity.Legendary]: [],
+        [Rarity.Mythic]: [],
     };
 
     const mowGoals = upgradeRankOrMowGoals.filter(
@@ -48,11 +68,28 @@ export function computeMowCounts(
         for (let index = goal.secondaryStart - 1; index < goal.secondaryEnd - 1; index++) {
             if (allMaterials[index]) filtered.push(allMaterials[index]);
         }
-        componentsByAlliance[goal.unitAlliance].required += sum(filtered.map(m => m.components));
+        const componentCount = sum(filtered.map(m => m.components));
+        componentsByAlliance[goal.unitAlliance].required += componentCount;
+        if (componentCount > 0) {
+            const existing = componentNeededBy[goal.unitAlliance].find(entry => entry.name === goal.unitName);
+            if (existing) {
+                existing.count += componentCount;
+            } else {
+                componentNeededBy[goal.unitAlliance].push({ name: goal.unitName, count: componentCount });
+            }
+        }
         for (const m of filtered) {
             forgeBadgeCounts[m.rarity].required += m.forgeBadges;
+            if (m.forgeBadges > 0) {
+                const existing = forgeBadgeNeededBy[m.rarity].find(entry => entry.name === goal.unitName);
+                if (existing) {
+                    existing.count += m.forgeBadges;
+                } else {
+                    forgeBadgeNeededBy[m.rarity].push({ name: goal.unitName, count: m.forgeBadges });
+                }
+            }
         }
     }
 
-    return { componentsByAlliance, forgeBadgeCounts };
+    return { componentsByAlliance, forgeBadgeCounts, componentNeededBy, forgeBadgeNeededBy };
 }

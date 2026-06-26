@@ -2,7 +2,7 @@ import type { ResolvedShopItem, ShopData, ShopDayOfWeek, ShopProduct } from './s
 
 export const DOW_MAP: ShopDayOfWeek[] = ['SUN', 'MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT'];
 
-const BP_SEASON_40_START_MS = Date.UTC(2026, 5, 29); // 2026-06-29T00:00:00Z
+const BP_SEASON_40_START_MS = Date.UTC(2026, 7, 2); // 2026-08-02T00:00:00Z
 const BP_SEASON_DURATION_MS = 35 * 86_400_000; // exactly 5 weeks
 
 export function bpSeasonStartMs(season: number): number {

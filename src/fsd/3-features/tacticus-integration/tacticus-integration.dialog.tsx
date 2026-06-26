@@ -12,7 +12,7 @@ import { useLoader } from '@/fsd/5-shared/ui/contexts';
 import { TextField } from '@/fsd/5-shared/ui/input';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 
-import { GUILD_TAG_LENGTH, isValidGuildTag } from './guild-sharing';
+import { isValidGuildTag, GUILD_TAG_LENGTH } from './guild-sharing';
 import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 interface Props extends DialogProps {
@@ -22,6 +22,7 @@ interface Props extends DialogProps {
     shareInGameName?: boolean;
     shareRosterData?: boolean;
     shareGuildMemberPerformance?: boolean;
+    /** @deprecated Combined guild tags are now managed in the Shared Leaderboards tab. Ignored. */
     combinedGuildTags?: string[];
     guildTag?: string;
 }
@@ -30,74 +31,6 @@ function buildErrorMessage(error: string | Error | undefined): string {
     const baseMessage = 'Failed to update settings';
     const detail = typeof error === 'string' ? error : error?.message;
     return detail ? `${baseMessage}: ${detail}` : baseMessage;
-}
-
-/** Add-and-chip list input for guild tags (each exactly 5 alphanumeric chars). */
-function GuildTagListInput({ tags, onChange }: { tags: string[]; onChange: (tags: string[]) => void }) {
-    const [draft, setDraft] = useState('');
-    const trimmed = draft.trim();
-    const isDuplicate = tags.includes(trimmed);
-    const canAdd = isValidGuildTag(trimmed) && !isDuplicate;
-
-    const addTag = () => {
-        if (!canAdd) return;
-        onChange([...tags, trimmed]);
-        setDraft('');
-    };
-
-    return (
-        <div className="flex w-full flex-col gap-1">
-            <span className="text-sm font-semibold">Share leaderboards with these guilds</span>
-            <div className="flex items-center gap-2">
-                <input
-                    type="text"
-                    value={draft}
-                    maxLength={GUILD_TAG_LENGTH}
-                    placeholder="Guild tag"
-                    onChange={event => setDraft(event.target.value)}
-                    onKeyDown={event => {
-                        if (event.key === 'Enter') {
-                            event.preventDefault();
-                            addTag();
-                        }
-                    }}
-                    className="w-32 rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
-                />
-                <button
-                    type="button"
-                    aria-label="Add guild tag"
-                    onClick={addTag}
-                    disabled={!canAdd}
-                    className="flex size-7 items-center justify-center rounded border border-gray-300 text-lg leading-none disabled:cursor-not-allowed disabled:opacity-40 dark:border-gray-600">
-                    +
-                </button>
-            </div>
-            {trimmed.length > 0 && !isValidGuildTag(trimmed) && (
-                <p className="text-xs text-red-600 dark:text-red-400">
-                    Guild tag must be exactly {GUILD_TAG_LENGTH} alphanumeric characters.
-                </p>
-            )}
-            {isDuplicate && <p className="text-xs text-red-600 dark:text-red-400">That guild tag is already added.</p>}
-            {tags.length > 0 && (
-                <div className="flex flex-wrap gap-1 pt-1">
-                    {tags.map(tag => (
-                        <span
-                            key={tag}
-                            className="flex items-center gap-1 rounded-full border border-gray-300 px-2 py-0.5 text-xs dark:border-gray-600">
-                            {tag}
-                            <button
-                                type="button"
-                                aria-label={`Remove ${tag}`}
-                                onClick={() => onChange(tags.filter(existing => existing !== tag))}
-                                className="text-gray-500 hover:text-red-600 dark:hover:text-red-400">
-                                ×
-                            </button>
-                        </span>
-                    ))}
-                </div>
-            )}
-        </div>
-    );
 }
 
 export const TacticusIntegrationDialog: React.FC<Props> = ({
@@ -109,7 +42,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     shareInGameName,
     shareRosterData,
     shareGuildMemberPerformance: shareGuildMemberPerformanceProperty,
-    combinedGuildTags,
     guildTag: guildTagProperty,
 }) => {
     const loader = useLoader();
@@ -130,10 +62,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         shareGuildMemberPerformanceProperty ?? false
     );
     const [savedShareGuildMemberPerformance] = useState<boolean>(shareGuildMemberPerformanceProperty ?? false);
-    const [combinedTags, setCombinedTags] = useState<string[]>(combinedGuildTags ?? []);
-    // Only send combinedGuildTags to the backend when the user has touched the tag UI this session.
-    // This prevents a new guild leader (with no local tags) from wiping tags another leader set.
-    const [combinedTagsDirty, setCombinedTagsDirty] = useState(false);
     const [guildTag, setGuildTag] = useState<string>(guildTagProperty ?? '');
     const [savedGuildTag] = useState<string>(guildTagProperty ?? '');
 
@@ -147,7 +75,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         currentShareInGameName !== savedShareInGameName ||
         currentShareRosterData !== savedShareRosterData ||
         shareGuildMemberPerformance !== savedShareGuildMemberPerformance ||
-        combinedTagsDirty ||
         guildTag !== savedGuildTag;
 
     async function updateApiKey(): Promise<boolean> {
@@ -157,9 +84,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 shareInGameName: currentShareInGameName,
                 shareRosterData: currentShareRosterData,
                 shareGuildMemberPerformance,
-                // Only send combinedGuildTags when the user has explicitly changed them;
-                // omitting it tells the backend to leave whatever value is already stored.
-                combinedGuildTags: combinedTagsDirty ? combinedTags : undefined,
                 guildTag: trimmedGuildTag,
             });
 
@@ -168,11 +92,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 return false;
             }
 
-            // Server returns the canonicalized combinedGuildTags — use that as the new source of truth.
-            const serverCombinedTags = response.data?.combinedGuildTags ?? [];
-
-            // Update auth immediately; no need to reset intra-dialog saved-state since the
-            // dialog always closes after a successful update (re-opens from fresh props).
             auth.setUserInfo({
                 ...auth.userInfo,
                 tacticusApiKey: apiKey,
@@ -181,7 +100,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 shareInGameName: currentShareInGameName,
                 shareRosterData: currentShareRosterData,
                 shareGuildMemberPerformance,
-                combinedGuildTags: serverCombinedTags.length > 0 ? serverCombinedTags : undefined,
                 guildTag: trimmedGuildTag,
             });
 
@@ -337,13 +255,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                                         member)
                                     </span>
                                 </label>
-                                <GuildTagListInput
-                                    tags={combinedTags}
-                                    onChange={newTags => {
-                                        setCombinedTags(newTags);
-                                        setCombinedTagsDirty(true);
-                                    }}
-                                />
                             </div>
                         )}
                         {!guildApiKey && userId && (

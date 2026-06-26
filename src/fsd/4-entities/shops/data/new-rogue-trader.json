@@ -1,0 +1,4051 @@
+{
+    "displayLocation": "elderShopMerchant",
+    "refreshCost": {
+        "resourceType": "gems",
+        "amount": 50
+    },
+    "refreshWithAdWatch": false,
+    "allowedRefreshesPerDay": 1,
+    "products": [
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_custoTrajann"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoTrajann:10",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 40
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_custoTrajann_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoTrajann:5",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 100
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_bloodDante"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodDante:10",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 40
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_bloodDante_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodDante:5",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 100
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_featured_slot_1"
+                },
+                "cronSchedule": "0 0 0 ? * MON,FRI *",
+                "reward": "R_Crit_SabreOfSacrifice",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_One_Time",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_featured_slot_2"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,SAT *",
+                "reward": "R_Booster_Block_PhoenixGem",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_One_Time",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_featured_slot_3"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SUN *",
+                "reward": "R_Crit_DawnBlade",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_One_Time",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU *",
+                "reward": "mythicDust:55",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 50
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_replace_slot_1"
+                },
+                "cronSchedule": "0 0 0 ? * MON,FRI *",
+                "reward": "mythicDust:75",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_replace_slot_2"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,SAT *",
+                "reward": "mythicDust:75",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_replace_slot_3"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SUN *",
+                "reward": "mythicDust:75",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 70
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraTigurius"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraTigurius:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraEliminatorSgt"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraEliminatorSgt:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraInceptorSgt"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraInceptorSgt:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraApothecary"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraApothecary:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraCalgar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraCalgar:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraTitus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraTitus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_ultraDreadnought"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_ultraDreadnought:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_templSwordBrother"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_templSwordBrother:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_templAggressor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_templAggressor:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_templAncient"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_templAncient:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_templChampion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_templChampion:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_templHelbrecht"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_templHelbrecht:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_spaceWulfen"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_spaceWulfen:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_spaceHound"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_spaceHound:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_spaceRockfist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_spaceRockfist:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_spaceStormcaller"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_spaceStormcaller:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_spaceBlackmane"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_spaceBlackmane:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_spaceWolfPriest"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_spaceWolfPriest:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaHellblaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaHellblaster:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaTerminator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaCompanion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaCompanion:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaAsmodai"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaAsmodai:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaAzrael"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaAzrael:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaSternguard"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaSternguard:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_darkaStormSpeeder"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaStormSpeeder:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_bloodIntercessor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodIntercessor:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_bloodDeathCompany"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodDeathCompany:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_bloodSanguinary"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodSanguinary:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_bloodMephiston"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodMephiston:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_bloodDante"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodDante:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_bloodTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodTerminator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astarCyrus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astarCyrus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraTigurius"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraTigurius:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraEliminatorSgt"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraEliminatorSgt:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraInceptorSgt"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraInceptorSgt:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraApothecary"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraApothecary:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraCalgar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraCalgar:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraTitus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraTitus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_ultraDreadnought"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_ultraDreadnought:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_templSwordBrother"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_templSwordBrother:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_templAggressor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_templAggressor:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_templAncient"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_templAncient:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_templChampion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_templChampion:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_templHelbrecht"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_templHelbrecht:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_spaceWulfen"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_spaceWulfen:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_spaceHound"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_spaceHound:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_spaceRockfist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_spaceRockfist:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_spaceStormcaller"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_spaceStormcaller:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_spaceBlackmane"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_spaceBlackmane:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_spaceWolfPriest"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_spaceWolfPriest:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaHellblaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaHellblaster:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaTerminator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaCompanion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaCompanion:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaAsmodai"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaAsmodai:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaAzrael"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaAzrael:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaSternguard"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaSternguard:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_darkaStormSpeeder"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_darkaStormSpeeder:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_bloodIntercessor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodIntercessor:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_bloodDeathCompany"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodDeathCompany:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_bloodSanguinary"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodSanguinary:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_bloodMephiston"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodMephiston:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_bloodDante"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodDante:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_bloodTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_bloodTerminator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astarCyrus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astarCyrus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "xpMythic",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 57
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_slot_1"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Vitarus",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_slot_1"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_slot_2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_TalonOfHorus",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_slot_2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_slot_3"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Maugetar",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_slot_3"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_RelicBoltPistol"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_RelicBoltPistol",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_RelicBoltPistol"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_RelicPowerFist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_RelicPowerFist",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_RelicPowerFist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_MawClawsOfThyrax"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_MawClawsOfThyrax",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_MawClawsOfThyrax"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_Dw02AdvancedBurstCannon"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Dw02AdvancedBurstCannon",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_Dw02AdvancedBurstCannon"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_KardiocoreGalvanus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_KardiocoreGalvanus",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_KardiocoreGalvanus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_AmuletOfTheVoidwyrm"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_AmuletOfTheVoidwyrm",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_AmuletOfTheVoidwyrm"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_BookOfFate"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_BookOfFate",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_BookOfFate"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_TalismanOfRage"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_TalismanOfRage",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_TalismanOfRage"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_NetherRealmCasket"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_NetherRealmCasket",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_NetherRealmCasket"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_IntoxicatingElixir"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_IntoxicatingElixir",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_IntoxicatingElixir"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_OrbsOfDecay"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_OrbsOfDecay",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_OrbsOfDecay"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_RelicOfLostCadia"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Defensive_RelicOfLostCadia",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_RelicOfLostCadia"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_SupaCyborkBody"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Defensive_SupaCyborkBody",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_SupaCyborkBody"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 20,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_DaemonfleshPlate"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Block_DaemonfleshPlate",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 285
+                }
+            },
+            {
+                "weight": 120,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_DaemonfleshPlate"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_TheArdentBlade"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_TheArdentBlade",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_TheArdentBlade"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_Dw02AdvancedBurstCannon"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Dw02AdvancedBurstCannon",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_Dw02AdvancedBurstCannon"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_NornCrown"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Block_NornCrown",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_NornCrown"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_ParagonSpear"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_ParagonSpear",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_ParagonSpear"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_BladeOfTheAncestors"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_BladeOfTheAncestors",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_BladeOfTheAncestors"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_WyrdmakersHelm"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_WyrdmakersHelm",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_WyrdmakersHelm"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_VolummsMasterArtifice"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_VolummsMasterArtifice",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_VolummsMasterArtifice"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_MonsterSlayerOfCaliban"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_MonsterSlayerOfCaliban",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_MonsterSlayerOfCaliban"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_Lakrimae"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Lakrimae",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_Lakrimae"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_adeptRetributor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_adeptRetributor:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_adeptHospitaller"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_adeptHospitaller:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_adeptMorvenn"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_adeptMorvenn:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_adeptCanoness"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_adeptCanoness:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_adeptCelestine"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_adeptCelestine:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_adeptExorcist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_adeptExorcist:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraPrimarisPsy"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraPrimarisPsy:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraYarrick"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraYarrick:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraBullgryn"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraBullgryn:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraOrdnance"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraOrdnance:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraCreed"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraCreed:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraDreir"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraDreir:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astraOrdnanceBattery"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astraOrdnanceBattery:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_admecDominus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_admecDominus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_admecManipulus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_admecManipulus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_admecMarshall"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_admecMarshall:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_admecRuststalker"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_admecRuststalker:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_admecDestroyer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_admecDestroyer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_custoVexilusPraetor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoVexilusPraetor:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_custoAtlacoya"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoAtlacoya:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_custoKyrus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoKyrus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_custoBladeChampion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoBladeChampion:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_custoTrajann"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoTrajann:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_adeptRetributor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_adeptRetributor:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_adeptHospitaller"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_adeptHospitaller:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_adeptMorvenn"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_adeptMorvenn:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_adeptCanoness"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_adeptCanoness:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_adeptCelestine"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_adeptCelestine:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_adeptExorcist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_adeptExorcist:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraPrimarisPsy"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraPrimarisPsy:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraYarrick"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraYarrick:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraBullgryn"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraBullgryn:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraOrdnance"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraOrdnance:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraCreed"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraCreed:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraDreir"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraDreir:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astraOrdnanceBattery"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astraOrdnanceBattery:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_admecDominus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_admecDominus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_admecManipulus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_admecManipulus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_admecMarshall"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_admecMarshall:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_admecRuststalker"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_admecRuststalker:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_admecDestroyer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_admecDestroyer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_custoVexilusPraetor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoVexilusPraetor:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_custoAtlacoya"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoAtlacoya:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_custoKyrus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoKyrus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_custoBladeChampion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoBladeChampion:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_custoTrajann"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoTrajann:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_abilityTokensMythic",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 30
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M002",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M005",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M006",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M007",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M008",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M009",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M010",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Crit_M011",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Crit_M001",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Crit_M002",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Crit_M003",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Crit_M004",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Crit_M005",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Crit_M006",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Defensive_M003",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Defensive_M005",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Defensive_M006",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Block_M003",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "I_Booster_Block_M002",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 145
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_blackTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackTerminator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_blackObliterator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackObliterator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_blackPossession"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackPossession:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_blackHaarken"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackHaarken:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_blackAbaddon"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackAbaddon:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_blackForgefiend"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_blackForgefiend:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_deathTyphus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_deathTyphus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_deathBlightlord"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_deathBlightlord:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_deathRotbone"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_deathRotbone:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_deathPutrifier"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_deathPutrifier:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_deathBlightbringer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_deathBlightbringer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_deathCrawler"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_deathCrawler:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousTzaangor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousTzaangor:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousTerminator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousInfernalMaster:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousSorcerer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousSorcerer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousAhriman"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousAhriman:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousDaemonPrince"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousDaemonPrince:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_worldTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_worldTerminator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_worldJakhal"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_worldJakhal:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_worldEightbound"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_worldEightbound:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_worldExecutions"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_worldExecutions:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_worldKharn"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_worldKharn:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_emperNoiseMarine"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperNoiseMarine:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_emperFlawlessBlade"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperFlawlessBlade:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_emperKakophonist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperKakophonist:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_emperExultant"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperExultant:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_emperLucius"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperLucius:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_blackTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_blackTerminator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_blackObliterator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_blackObliterator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_blackPossession"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_blackPossession:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_blackHaarken"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_blackHaarken:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_blackAbaddon"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_blackAbaddon:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_blackForgefiend"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_blackForgefiend:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_deathTyphus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_deathTyphus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_deathBlightlord"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_deathBlightlord:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_deathRotbone"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_deathRotbone:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_deathPutrifier"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_deathPutrifier:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_deathBlightbringer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_deathBlightbringer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_deathCrawler"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_deathCrawler:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousTzaangor"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousTzaangor:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousTerminator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousInfernalMaster:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousSorcerer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousSorcerer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousAhriman"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousAhriman:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousDaemonPrince"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousDaemonPrince:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_worldTerminator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_worldTerminator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_worldJakhal"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_worldJakhal:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_worldEightbound"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_worldEightbound:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_worldExecutions"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_worldExecutions:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_worldKharn"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_worldKharn:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_emperNoiseMarine"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_emperNoiseMarine:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_emperFlawlessBlade"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_emperFlawlessBlade:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_emperKakophonist"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_emperKakophonist:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_emperExultant"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_emperExultant:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_emperLucius"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_emperLucius:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "draft_ascensionOrbsMythic",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 100
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_not_during_se_april2026_or_below_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,THU,SAT *",
+                "reward": "itemAscensionResource_Mythic",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 27
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_not_during_se_april2026_or_below_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "upgHpM001",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 35
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_not_during_se_april2026_or_below_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * WED *",
+                "reward": "upgHpM002",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 35
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_not_during_se_april2026_or_below_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * FRI *",
+                "reward": "upgHpM003",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 35
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_not_during_se_april2026_or_below_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "upgHpM004",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 35
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_during_se_april2026_and_max_legendary_thousInfernalMaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousInfernalMaster:9",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Discount_50",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 90
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroWarden"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroWarden:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroDestroyer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroDestroyer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroSpyder"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroSpyder:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroPlasmancer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroPlasmancer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroOverlord"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroOverlord:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroChronomancer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroChronomancer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_necroReanimator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_necroReanimator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksRuntherd"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksRuntherd:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksBigMek"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksBigMek:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksKillaKan"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksKillaKan:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksNob"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksNob:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksWarboss"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksWarboss:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksRukkatrukk"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksRukkatrukk:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_eldarRanger"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarRanger:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_eldarAutarch"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarAutarch:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_eldarFarseer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarFarseer:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_eldarMauganRa"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarMauganRa:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_eldarJainZar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarJainZar:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauMarksman"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauMarksman:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauCrisis"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauCrisis:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauDarkstrider"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauDarkstrider:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauAunShi"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauAunShi:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauShadowsun"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauShadowsun:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauFarsight"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauFarsight:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tauBroadside"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tauBroadside:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tyranNeurothrope"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tyranNeurothrope:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tyranTyrantGuard"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tyranTyrantGuard:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tyranWingedPrime"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tyranWingedPrime:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tyranDeathleaper"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tyranDeathleaper:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tyranParasite"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tyranParasite:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_tyranBiovore"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_tyranBiovore:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_genesBiophagus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesBiophagus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_genesMagus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesMagus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_genesPrimus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesPrimus:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_genesKelermorph"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesKelermorph:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_genesPatriarch"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_genesPatriarch:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_votanIronmaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_votanIronmaster:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_votanBeserk"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_votanBeserk:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_votanMemnyr"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_votanMemnyr:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_votanUthar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_votanUthar:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroWarden"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroWarden:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroDestroyer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroDestroyer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroSpyder"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroSpyder:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroPlasmancer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroPlasmancer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroOverlord"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroOverlord:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroChronomancer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroChronomancer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_necroReanimator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_necroReanimator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksRuntherd"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksRuntherd:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksBigMek"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksBigMek:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksKillaKan"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksKillaKan:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksNob"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksNob:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksWarboss"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksWarboss:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksRukkatrukk"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksRukkatrukk:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_eldarRanger"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarRanger:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_eldarAutarch"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarAutarch:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_eldarFarseer"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarFarseer:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_eldarMauganRa"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarMauganRa:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_eldarJainZar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarJainZar:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauMarksman"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauMarksman:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauCrisis"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauCrisis:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauDarkstrider"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauDarkstrider:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauAunShi"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauAunShi:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauShadowsun"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauShadowsun:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauFarsight"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauFarsight:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tauBroadside"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tauBroadside:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tyranNeurothrope"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tyranNeurothrope:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tyranTyrantGuard"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tyranTyrantGuard:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tyranWingedPrime"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tyranWingedPrime:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tyranDeathleaper"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tyranDeathleaper:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tyranParasite"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tyranParasite:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_tyranBiovore"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_tyranBiovore:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_genesBiophagus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_genesBiophagus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_genesMagus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_genesMagus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_genesPrimus"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_genesPrimus:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_genesKelermorph"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_genesKelermorph:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_genesPatriarch"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_genesPatriarch:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_votanIronmaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_votanIronmaster:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_votanBeserk"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_votanBeserk:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_votanMemnyr"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_votanMemnyr:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_votanUthar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_votanUthar:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            }
+        ]
+    ]
+}

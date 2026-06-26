@@ -194,16 +194,17 @@ function formatPlayerSummaryRows(statsList: PlayerSummaryStats[]): PlayerSummary
     });
 
     const ths = headerCells.map(h => `<th>${h}</th>`).join('');
+    // HTML uses raw numbers (better for spreadsheet paste); text path uses formatCompactNumber for readability.
     const trs = rows
         .map(stats => {
             const cells = [
                 escapeHtml(stats.displayName),
                 stats.tokens,
                 stats.bombs,
-                formatCompactNumber(stats.primeHits),
-                formatCompactNumber(stats.bossKills),
-                formatCompactNumber(stats.totalDamage),
-                formatCompactNumber(stats.maxDamage),
+                stats.primeHits,
+                stats.bossKills,
+                stats.totalDamage,
+                stats.maxDamage,
                 escapeHtml(maxTargetLabel(stats)),
             ];
             return `<tr>${cells.map(c => `<td>${c}</td>`).join('')}</tr>`;

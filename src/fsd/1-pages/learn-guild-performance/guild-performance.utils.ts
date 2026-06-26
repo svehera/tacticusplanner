@@ -93,9 +93,8 @@ export function getDamageColorClass(entry: TacticusGuildRaidEntry, avgDamage: nu
     if (entry.remainingHp === 0) return 'text-gray-400 dark:text-gray-500';
     if (avgDamage === undefined || avgDamage === 0) return 'text-green-700 dark:text-green-400';
     const ratio = entry.damageDealt / avgDamage;
-    if (ratio > 1.2) return 'animate-[shimmer-green_1.5s_ease-in-out_infinite]';
-    if (ratio >= 0.8) return 'text-green-700 dark:text-green-400';
-    if (ratio >= 0.75) return 'text-yellow-600 dark:text-yellow-400';
+    if (ratio >= 1.2) return 'animate-[shimmer-green_1.5s_ease-in-out_infinite]';
+    if (ratio >= 0.8) return 'text-yellow-600 dark:text-yellow-400';
     return 'text-red-600 dark:text-red-400';
 }
 

@@ -4,11 +4,9 @@ import { FC, useMemo } from 'react';
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui';
-import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService } from '@/fsd/4-entities/character';
-import { MowsService } from '@/fsd/4-entities/mow';
-import { GuildShopService, ResolvedShopItem } from '@/fsd/4-entities/shops';
+import { RogueTraderService, ResolvedShopItem } from '@/fsd/4-entities/shops';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
@@ -16,8 +14,14 @@ import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 import { NeededByEntry } from './daily-raids.helpers';
 import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
 
-const MYTHIC_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
+const MYTHIC_MAT_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
+const MYTHIC_FORGE_BADGE = 'itemAscensionResource_Mythic';
 const ICON_SIZE = 40;
+
+interface Counts {
+    acquired: number;
+    required: number;
+}
 
 interface ShopItemCardProps {
     item: ResolvedShopItem;
@@ -27,30 +31,26 @@ interface ShopItemCardProps {
 }
 
 const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededBy }) => {
-    const charId = item.rewardType.startsWith('shards_') ? item.rewardType.slice(7) : undefined;
-    const unit = charId ? (CharactersService.getUnit(charId) ?? MowsService.resolveToStatic(charId)) : undefined;
-
-    const upgradeData = MYTHIC_IDS.has(item.rewardType)
+    const upgradeData = MYTHIC_MAT_IDS.has(item.rewardType)
         ? UpgradesService.recipeExpandedUpgradeData[item.rewardType]
         : undefined;
 
-    const icon = charId ? (
-        unit ? (
-            <UnitShardIcon icon={unit.roundIcon} name={unit.name} height={ICON_SIZE} width={ICON_SIZE} />
-        ) : (
-            <UnitShardIcon icon="" name={item.rewardType} height={ICON_SIZE} width={ICON_SIZE} />
-        )
-    ) : upgradeData ? (
-        <UpgradeImage
-            material={upgradeData.label}
-            iconPath={upgradeData.iconPath}
-            rarity={RarityMapper.rarityToRarityString(Rarity.Mythic)}
-            size={ICON_SIZE}
-        />
-    ) : undefined;
+    const icon =
+        item.rewardType === MYTHIC_FORGE_BADGE ? (
+            <ForgeBadgeImage rarity={Rarity.Mythic} size="medium" />
+        ) : upgradeData ? (
+            <UpgradeImage
+                material={upgradeData.label}
+                iconPath={upgradeData.iconPath}
+                rarity={RarityMapper.rarityToRarityString(Rarity.Mythic)}
+                size={ICON_SIZE}
+            />
+        ) : undefined;
 
-    const name = charId ? (unit?.name ?? charId) : (upgradeData?.label ?? item.rewardType);
+    const name =
+        item.rewardType === MYTHIC_FORGE_BADGE ? 'Mythic Forge Badge' : (upgradeData?.label ?? item.rewardType);
 
+    const displayAcquired = Math.min(Math.floor(acquired), required);
     const availableText =
         item.maxPerDay === 1 ? `1×${item.rewardQty} available` : `Up to ${item.maxPerDay}×${item.rewardQty} available`;
 
@@ -61,7 +61,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                 <div className="flex w-12 shrink-0 flex-col items-center gap-1">
                     <div className="mt-1 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span className="mt-1 text-sm font-bold text-(--danger)">
-                        {Math.min(Math.floor(acquired), required)}/{required}
+                        {displayAcquired}/{required}
                     </span>
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col gap-1.5">
@@ -77,8 +77,8 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                         {availableText}
                         <br />
                         <img
-                            src={snowprintIcons.guildCredits.file}
-                            alt="gc"
+                            src={snowprintIcons.archeotech.file}
+                            alt="archeotech"
                             className="inline-block"
                             height={14}
                             width={14}
@@ -86,7 +86,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                         {item.costAmount.toLocaleString()} each
                     </p>
                     <span className="w-fit rounded bg-(--soft-bg) px-1.5 py-0.5 text-[10px] text-(--soft-fg)">
-                        Guild Shop
+                        Rogue Trader
                     </span>
                 </div>
             </div>
@@ -100,27 +100,32 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
 interface Props {
     inProgressMaterials: ICharacterUpgradeEstimate[];
     blockedMaterials: ICharacterUpgradeEstimate[];
-    userPL: number;
+    forgeBadgeCounts: Record<Rarity, Counts>;
+    forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]>;
 }
 
-export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMaterials, userPL }) => {
-    const today = GuildShopService.getTodayDow();
+export const RogueTraderSection: FC<Props> = ({
+    inProgressMaterials,
+    blockedMaterials,
+    forgeBadgeCounts,
+    forgeBadgeNeededBy,
+}) => {
+    const today = RogueTraderService.getTodayDow();
 
     const todayItems = useMemo(
         () =>
-            GuildShopService.resolveForDay(today, userPL).filter(
-                item => item.rewardType.startsWith('shards_') || MYTHIC_IDS.has(item.rewardType)
+            RogueTraderService.resolvePenultimateForDay(today).filter(
+                item => item.rewardType === MYTHIC_FORGE_BADGE || MYTHIC_MAT_IDS.has(item.rewardType)
             ),
-        [today, userPL]
+        [today]
     );
 
     const countsMap = useMemo(() => {
-        const map = new Map<string, { acquired: number; required: number }>();
+        const map = new Map<string, Counts>();
         for (const mat of [...inProgressMaterials, ...blockedMaterials]) {
-            const key = mat.snowprintId;
-            if (!key.startsWith('shards_') && !MYTHIC_IDS.has(key)) continue;
-            const previous = map.get(key) ?? { acquired: 0, required: 0 };
-            map.set(key, {
+            if (!MYTHIC_MAT_IDS.has(mat.snowprintId)) continue;
+            const previous = map.get(mat.snowprintId) ?? { acquired: 0, required: 0 };
+            map.set(mat.snowprintId, {
                 acquired: previous.acquired + mat.acquiredCount,
                 required: previous.required + mat.requiredCount,
             });
@@ -131,14 +136,13 @@ export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMateri
     const neededByMap = useMemo(() => {
         const map = new Map<string, NeededByEntry[]>();
         for (const mat of [...inProgressMaterials, ...blockedMaterials]) {
-            const key = mat.snowprintId;
-            if (!key.startsWith('shards_') && !MYTHIC_IDS.has(key)) continue;
-            const entries = map.get(key) ?? [];
+            if (!MYTHIC_MAT_IDS.has(mat.snowprintId)) continue;
+            const entries = map.get(mat.snowprintId) ?? [];
             for (const [unitId, count] of Object.entries(mat.countByUnitId ?? {})) {
                 if (!unitId) continue;
                 entries.push({ name: resolveUnitName(unitId), count });
             }
-            map.set(key, entries);
+            map.set(mat.snowprintId, entries);
         }
         return map;
     }, [inProgressMaterials, blockedMaterials]);
@@ -146,10 +150,14 @@ export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMateri
     const visibleItems = useMemo(
         () =>
             todayItems.filter(item => {
+                if (item.rewardType === MYTHIC_FORGE_BADGE) {
+                    const c = forgeBadgeCounts[Rarity.Mythic];
+                    return c.acquired < c.required;
+                }
                 const c = countsMap.get(item.rewardType);
                 return c !== undefined && c.acquired < c.required;
             }),
-        [todayItems, countsMap]
+        [todayItems, forgeBadgeCounts, countsMap]
     );
 
     if (visibleItems.length === 0) return;
@@ -157,18 +165,28 @@ export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMateri
     return (
         <div className="mt-4 border-t border-(--card-border) pt-3">
             <p className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                Available in Guild Shop today
+                Available in Rogue Trader today
             </p>
             <div className="flex flex-wrap items-start justify-center gap-2">
-                {visibleItems.map(item => (
-                    <ShopItemCard
-                        key={item.rewardType}
-                        item={item}
-                        acquired={countsMap.get(item.rewardType)?.acquired ?? 0}
-                        required={countsMap.get(item.rewardType)?.required ?? 0}
-                        neededBy={neededByMap.get(item.rewardType) ?? []}
-                    />
-                ))}
+                {visibleItems.map(item => {
+                    const c =
+                        item.rewardType === MYTHIC_FORGE_BADGE
+                            ? forgeBadgeCounts[Rarity.Mythic]
+                            : (countsMap.get(item.rewardType) ?? { acquired: 0, required: 0 });
+                    const neededBy =
+                        item.rewardType === MYTHIC_FORGE_BADGE
+                            ? forgeBadgeNeededBy[Rarity.Mythic]
+                            : (neededByMap.get(item.rewardType) ?? []);
+                    return (
+                        <ShopItemCard
+                            key={item.rewardType}
+                            item={item}
+                            acquired={c.acquired}
+                            required={c.required}
+                            neededBy={neededBy}
+                        />
+                    );
+                })}
             </div>
         </div>
     );

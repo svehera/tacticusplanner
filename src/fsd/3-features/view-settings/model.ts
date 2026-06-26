@@ -38,6 +38,8 @@ export interface IViewPreferences
     showHseWarning: boolean;
     apiIntegrationSyncOptions: string[];
     tokenomicsTableView: boolean;
+    leaderboardBossTopN: number;
+    leaderboardPrimeTopN: number;
 }
 
 interface IWyoViewSettings {
