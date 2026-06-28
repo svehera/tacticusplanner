@@ -53,28 +53,19 @@ interface Props {
     currentRank: Rank;
     stars: RarityStars;
     maxRank: Rank;
-    maxStars: RarityStars;
 }
 
-export const CharacterStatGrowthChart = ({
-    baseDamage,
-    baseHealth,
-    baseArmor,
-    currentRank,
-    stars,
-    maxRank,
-    maxStars,
-}: Props) => {
+export const CharacterStatGrowthChart = ({ baseDamage, baseHealth, baseArmor, currentRank, stars, maxRank }: Props) => {
     const ranks = useMemo(() => getEnumValues(Rank).filter(r => r >= Rank.Stone1 && r <= maxRank), [maxRank]);
 
     const yMax = useMemo(
         () =>
             Math.max(
-                calculateStat(baseHealth, maxRank, maxStars),
-                calculateStat(baseDamage, maxRank, maxStars),
-                calculateStat(baseArmor, maxRank, maxStars)
+                calculateStat(baseHealth, maxRank, stars),
+                calculateStat(baseDamage, maxRank, stars),
+                calculateStat(baseArmor, maxRank, stars)
             ),
-        [baseDamage, baseHealth, baseArmor, maxRank, maxStars]
+        [baseDamage, baseHealth, baseArmor, maxRank, stars]
     );
 
     const chartData = useMemo(

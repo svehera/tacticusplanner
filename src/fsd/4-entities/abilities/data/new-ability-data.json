@@ -1496,7 +1496,7 @@
         "id": "Nightshroud",
         "text": {
             "name": "Nightshroud",
-            "currentLevelDescription": "All friendly units starting their turn adjacent to <style=\"Faction_AstraMilitarum\">Sibyll Devine</style> gain <style=Buff_Infiltrate\">Infiltrate</style> for that turn and take <style=\"Stat_Damage\">-{[dmgReduction]} Damage</style> from each hit in their and the next enemy turn.",
+            "currentLevelDescription": "All friendly units starting their turn adjacent to <style=\"Faction_AstraMilitarum\">Sibyll Devine</style> gain <style=\"Buff_Infiltrate\">Infiltrate</style> for that turn and take <style=\"Stat_Damage\">-{[dmgReduction]} Damage</style> from each hit in their and the next enemy turn.",
             "nextLevelDescription": "They now take <style=\"Stat_Damage\">-{[dmgReduction]} Damage</style>."
         },
         "variables": {
@@ -8642,7 +8642,7 @@
         "id": "HammerOfWrath",
         "text": {
             "name": "Hammer of Wrath",
-            "currentLevelDescription": "If <style=\"Faction_BloodAngels\">Mataneo</style> has not moved, he gains <style=Buff_Infiltrate\">Infiltrate</style> until the end of this turn, <style=\"Charging\">charges</style> an enemy target that has a free adjacent hex within movement range {[range]}, dealing <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Power\">{[minDmg]}-{[maxDmg]} Power Damage</style> to the target and <style=\"Stat_Hits\">{[nrOfHits_2]}x</style> <style=\"DMG_Physical\">{[minDmg_2]}-{[maxDmg_2]} Physical Damage</style> to all enemies adjacent to it. If Mataneo is at or below <style=\"Stat_Health\">{[healthPct]}% Health</style>, doubles the damage dealt by this ability.\n\n{[S/AbilityDamageExplanation]}",
+            "currentLevelDescription": "If <style=\"Faction_BloodAngels\">Mataneo</style> has not moved, he gains <style=\"Buff_Infiltrate\">Infiltrate</style> until the end of this turn, <style=\"Charging\">charges</style> an enemy target that has a free adjacent hex within movement range {[range]}, dealing <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Power\">{[minDmg]}-{[maxDmg]} Power Damage</style> to the target and <style=\"Stat_Hits\">{[nrOfHits_2]}x</style> <style=\"DMG_Physical\">{[minDmg_2]}-{[maxDmg_2]} Physical Damage</style> to all enemies adjacent to it. If Mataneo is at or below <style=\"Stat_Health\">{[healthPct]}% Health</style>, doubles the damage dealt by this ability.\n\n{[S/AbilityDamageExplanation]}",
             "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Power\">{[minDmg]}-{[maxDmg]} Power Damage</style> to the initial target and <style=\"Stat_Hits\">{[nrOfHits_2]}x</style> <style=\"DMG_Physical\">{[minDmg_2]}-{[maxDmg_2]} Physical Damage</style> to all enemies adjacent to it."
         },
         "attackRangeType": "melee",
@@ -8845,7 +8845,7 @@
         "id": "LightOfSanguinius",
         "text": {
             "name": "Light of Sanguinius",
-            "currentLevelDescription": "If <style=\"Faction_BloodAngels\">Dante</style> has not moved, he gains <style=Buff_Infiltrate\">Infiltrate</style> until the end of this turn, then <style=\"Charging\">charges</style> an enemy target that has a free adjacent hex within movement range {[range]} and deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Melta\">{[minDmg]}-{[maxDmg]} Melta Damage</style> to it. The target and enemy units surrounding it deal <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style> for {[nrOfRounds]} round. This effect is doubled if they attack friendly units that are at or below <style=\"Stat_Health\">{[healthPct]}% Health</style>.",
+            "currentLevelDescription": "If <style=\"Faction_BloodAngels\">Dante</style> has not moved, he gains <style=\"Buff_Infiltrate\">Infiltrate</style> until the end of this turn, then <style=\"Charging\">charges</style> an enemy target that has a free adjacent hex within movement range {[range]} and deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Melta\">{[minDmg]}-{[maxDmg]} Melta Damage</style> to it. The target and enemy units surrounding it deal <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style> for {[nrOfRounds]} round. This effect is doubled if they attack friendly units that are at or below <style=\"Stat_Health\">{[healthPct]}% Health</style>.",
             "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Melta\">{[minDmg]}-{[maxDmg]} Melta Damage</style> and affected enemies deal <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style>."
         },
         "attackRangeType": "melee",
@@ -9202,7 +9202,7 @@
         "id": "SpiritualLeader",
         "text": {
             "name": "Spiritual Leader",
-            "currentLevelDescription": "After moving, places a <style=\"Decoy\">decoy</style> on an empty adjacent hex. Then, if there are 2 or more decoys adjacent to <Style=\"Faction_Genestealers\">Xybia</style>, summons a <style=\"Summon\"><style=\"Faction_Genestealers\">Neophyte Hybrid</style></style> on one adjacent decoy. If <Style=\"Faction_Genestealers\">Xybia</style> does not move, then this ability triggers at the end of her turn.\n\nNeophyte Hybrid stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "currentLevelDescription": "After moving, places a <style=\"Decoy\">decoy</style> on an empty adjacent hex. Then, if there are 2 or more decoys adjacent to <style=\"Faction_Genestealers\">Xybia</style>, summons a <style=\"Summon\"><style=\"Faction_Genestealers\">Neophyte Hybrid</style></style> on one adjacent decoy. If <style=\"Faction_Genestealers\">Xybia</style> does not move, then this ability triggers at the end of her turn.\n\nNeophyte Hybrid stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
             "nextLevelDescription": "Neophyte Hybrid stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
         },
         "variables": {
@@ -12435,7 +12435,7 @@
         "id": "PinpointCounterOffensive",
         "text": {
             "name": "Pinpoint Counter Offensive",
-            "currentLevelDescription": "<style=\"Faction_Tau\">Re'vas</style> can use her active ability {[maxNrOfActivations]} times per Battle. Additionally, she takes <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style> from all attacks, but loses <style=\"Stat_Health\">{[hp]} Health</style> each time she is attacked by a unit with either the <style=\"Infiltrate\">Infiltrate</style> or <style=\"Terminator_Armor\">Terminator Armour</style> traits, or by a unit that has <style=Buff_Infiltrate\">Infiltrate</style> from an ability.",
+            "currentLevelDescription": "<style=\"Faction_Tau\">Re'vas</style> can use her active ability {[maxNrOfActivations]} times per Battle. Additionally, she takes <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style> from all attacks, but loses <style=\"Stat_Health\">{[hp]} Health</style> each time she is attacked by a unit with either the <style=\"Infiltrate\">Infiltrate</style> or <style=\"Terminator_Armor\">Terminator Armour</style> traits, or by a unit that has <style=\"Buff_Infiltrate\">Infiltrate</style> from an ability.",
             "nextLevelDescription": ""
         },
         "variables": {
@@ -13215,7 +13215,7 @@
         "id": "LeadingTheCharge",
         "text": {
             "name": "Leading the Charge",
-            "currentLevelDescription": "If <style=\"Faction_AstraMilitarum\">Dreir</style> has not moved, he gains <style=Buff_Infiltrate\">Infiltrate</style> until the end of this turn and <style=\"Charging\">charges</style> an enemy target that has a free adjacent hex within movement range {[range]}, dealing <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Power\">{[minDmg]}-{[maxDmg]} Power Damage</style> to it. Then, summons up to <style=\"Stat\">{[nrOfSummons]}</style> <style=\"Summon\"><style=\"Faction_AstraMilitarum\">Death Riders</style></style> in free adjacent hexes that can immediately attack enemies in range. All attacks triggered by this ability have <style=\"Piercing_Ratio\">+{[extraPierceRatio]}% pierce ratio</style> for each friendly unit that has been defeated this battle. \n\nDeath Rider stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "currentLevelDescription": "If <style=\"Faction_AstraMilitarum\">Dreir</style> has not moved, he gains <style=\"Buff_Infiltrate\">Infiltrate</style> until the end of this turn and <style=\"Charging\">charges</style> an enemy target that has a free adjacent hex within movement range {[range]}, dealing <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Power\">{[minDmg]}-{[maxDmg]} Power Damage</style> to it. Then, summons up to <style=\"Stat\">{[nrOfSummons]}</style> <style=\"Summon\"><style=\"Faction_AstraMilitarum\">Death Riders</style></style> in free adjacent hexes that can immediately attack enemies in range. All attacks triggered by this ability have <style=\"Piercing_Ratio\">+{[extraPierceRatio]}% pierce ratio</style> for each friendly unit that has been defeated this battle. \n\nDeath Rider stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
             "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Power\">{[minDmg]}-{[maxDmg]} Power Damage</style>, summons up to <style=\"Stat\">{[nrOfSummons]}</style> <style=\"Summon\"><style=\"Faction_AstraMilitarum\">Death Riders</style></style> and attacks have <style=\"Piercing_Ratio\">+{[extraPierceRatio]}% pierce ratio</style>.\n\nDeath Rider stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
         },
         "attackRangeType": "melee",

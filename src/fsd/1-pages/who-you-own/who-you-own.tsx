@@ -3,7 +3,7 @@
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
@@ -34,7 +34,6 @@ import { CharacterDetailsPage } from './character-details-page';
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
-    const navigate = useNavigate();
     const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
@@ -93,6 +92,10 @@ export const WhoYouOwn = () => {
     );
 
     const characterId = searchParams.get('character');
+    const selectedChar = useMemo(
+        () => (characterId ? resolvedCharacters.find(c => c.snowprintId === characterId) : undefined),
+        [characterId, resolvedCharacters]
+    );
     const currentCharIndex = useMemo(
         () => (characterId ? characterUnits.findIndex(u => u.snowprintId === characterId) : -1),
         [characterId, characterUnits]
@@ -160,23 +163,20 @@ export const WhoYouOwn = () => {
     const sharedUser = searchParams.get('username');
     const shareToken = searchParams.get('shareToken');
     if (sharedUser && shareToken) {
-        navigate(`/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
-        return <></>;
+        const destination = new URLSearchParams({ username: sharedUser, shareToken });
+        return <Navigate replace to={`/sharedRoster?${destination}`} />;
     }
 
     // Character details page — replaces the old dialog
-    if (characterId) {
-        const selectedChar = currentCharIndex >= 0 ? characterUnits[currentCharIndex] : undefined;
-        if (selectedChar) {
-            return (
-                <CharacterDetailsPage
-                    key={selectedChar.snowprintId}
-                    char={selectedChar}
-                    prevChar={characterUnits[currentCharIndex - 1]}
-                    nextChar={characterUnits[currentCharIndex + 1]}
-                />
-            );
-        }
+    if (characterId && selectedChar) {
+        return (
+            <CharacterDetailsPage
+                key={selectedChar.snowprintId}
+                char={selectedChar}
+                prevChar={characterUnits[currentCharIndex - 1]}
+                nextChar={characterUnits[currentCharIndex + 1]}
+            />
+        );
     }
 
     return (

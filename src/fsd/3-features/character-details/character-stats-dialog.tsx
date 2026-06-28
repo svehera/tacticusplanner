@@ -86,7 +86,7 @@ const AttackRow = ({ attack, type }: { attack: AttackProfile; type: 'melee' | 'r
             ) : (
                 <div className="relative flex h-7 w-7 shrink-0 items-center justify-center">
                     <img src={tacticusIcons.rangedAttack.file} alt="Range" className="absolute inset-0 h-full w-full" />
-                    <span className="relative z-10 text-xs font-bold text-white">{attack.range}</span>
+                    <span className="relative z-10 text-xs font-bold text-(--ability-range-text)">{attack.range}</span>
                 </div>
             )}
             {damageTypeIcon && <img src={damageTypeIcon.file} alt={attack.damageType} className="h-8 w-8 shrink-0" />}
@@ -209,7 +209,6 @@ export const CharacterStatsDialog = ({ char, open, onClose }: Props) => {
                         currentRank={rank}
                         stars={stars}
                         maxRank={maxRank}
-                        maxStars={maxStars}
                     />
                 </div>
 
@@ -254,9 +253,7 @@ export const CharacterStatsDialog = ({ char, open, onClose }: Props) => {
                                         ))}
                                     </select>
                                     {ability && (
-                                        <div
-                                            className="mt-1 w-full rounded-md p-2"
-                                            style={{ backgroundColor: '#06111e' }}>
+                                        <div className="mt-1 w-full rounded-md bg-(--ability-panel) p-2">
                                             <AbilityText
                                                 text={ability.text.currentLevelDescription}
                                                 level={level}
@@ -269,8 +266,8 @@ export const CharacterStatsDialog = ({ char, open, onClose }: Props) => {
                                             />
                                             {ability.text.nextLevelDescription && (
                                                 <>
-                                                    <div className="my-1.5 border-t border-blue-800" />
-                                                    <span className="text-xs font-semibold text-blue-400">
+                                                    <div className="my-1.5 border-t border-(--ability-panel-divider)" />
+                                                    <span className="text-xs font-semibold text-(--ability-panel-next-level)">
                                                         Next Level
                                                     </span>
                                                     <AbilityText

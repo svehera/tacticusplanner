@@ -27,7 +27,7 @@ describe('ability DamageProfileTypeStyle requires damageProfile constant', () =>
             expect(
                 ability.constants?.damageProfile,
                 `Ability "${ability.text.name}" uses {[DamageProfileTypeStyle]} but is missing constants.damageProfile`
-            ).toBeDefined();
+            ).toBeTruthy();
         });
     }
 });

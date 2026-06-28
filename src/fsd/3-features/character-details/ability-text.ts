@@ -248,7 +248,7 @@ export function getStyleSpec(styleName: string): StyleSpec | undefined {
         };
     }
     if (styleName === 'MoW') {
-        return { color: ABILITY_COLORS.purple, icon: tacticusIcons.mow?.file, iconAlt: 'MoW' };
+        return { color: ABILITY_COLORS.purple, icon: snowprintIcons.mow?.file, iconAlt: 'MoW' };
     }
     if (styleName === 'Object2') {
         return { color: ABILITY_COLORS.purple, underline: true };
@@ -362,6 +362,7 @@ export function parseAbilityText(text: string): AstNode[] {
             const children = stack.pop()!;
             const style = styleStack.pop()!;
             const node: StyledNode = { type: 'styled', ...style, children };
+            if (stack.length === 0) throw new Error('Unmatched </style> tag in "' + text + '" at index ' + lastIndex);
             stack.at(-1)!.push(node);
         } else if ('open' in token) {
             styleStack.push({ styleName: token.open!, isDynamic: token.isDynamic ?? false });

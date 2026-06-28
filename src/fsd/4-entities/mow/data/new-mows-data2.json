@@ -1,0 +1,90 @@
+[
+    {
+        "id": "ultraDreadnought",
+        "name": "Galatian",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
+        "abilities": ["DutyEternal", "MacroPlasmaIncinerator"],
+        "mythicAbilities": ["WisdomOfTheAncients"]
+    },
+    {
+        "id": "adeptExorcist",
+        "name": "Exorcist",
+        "faction": "Sisterhood",
+        "alliance": "Imperial",
+        "abilities": ["ThriceBlessedConflagration", "DevastatingRefrain"],
+        "mythicAbilities": ["ShieldOfFaith"]
+    },
+    {
+        "id": "necroReanimator",
+        "name": "Reanimator",
+        "faction": "Necrons",
+        "alliance": "Xenos",
+        "abilities": ["ReanimationBeam", "NanoscarabRepairProtocols"],
+        "mythicAbilities": ["GuardianConstruct"]
+    },
+    {
+        "id": "astraOrdnanceBattery",
+        "name": "Malleus Rocket Launcher",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
+        "abilities": ["MalleusRocketLauncher", "ForwardSpotter"],
+        "mythicAbilities": ["OnMyPosition"]
+    },
+    {
+        "id": "blackForgefiend",
+        "name": "Forgefiend",
+        "faction": "BlackLegion",
+        "alliance": "Chaos",
+        "abilities": ["HadesAutocannons", "DaemonicOrdnance"],
+        "mythicAbilities": ["ContemptuousDisregard"]
+    },
+    {
+        "id": "deathCrawler",
+        "name": "Plagueburst Crawler",
+        "faction": "DeathGuard",
+        "alliance": "Chaos",
+        "abilities": ["EntropyCannons", "PlagueburstMortar"],
+        "mythicAbilities": ["BlightedLand"]
+    },
+    {
+        "id": "orksRukkatrukk",
+        "name": "Rukkatrukk",
+        "faction": "Orks",
+        "alliance": "Xenos",
+        "abilities": ["SquigLaunchas", "SquigMine"],
+        "mythicAbilities": ["MoreGitzOverEre"]
+    },
+    {
+        "id": "tauBroadside",
+        "name": "Tson'ji",
+        "faction": "Tau",
+        "alliance": "Xenos",
+        "abilities": ["HeavyRailRifle", "TwinSmartMissileSystem"],
+        "mythicAbilities": ["ElectrochaffBackups"]
+    },
+    {
+        "id": "thousDaemonPrince",
+        "name": "Z'Kar",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
+        "abilities": ["AetherStride", "InfernalCannon"],
+        "mythicAbilities": ["CabalOfSorcerers"]
+    },
+    {
+        "id": "darkaStormSpeeder",
+        "name": "Storm Speeder",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
+        "abilities": ["DeathOnTheWind", "Hailstrike"],
+        "mythicAbilities": ["MastersOfManoeuvre"]
+    },
+    {
+        "id": "tyranBiovore",
+        "name": "Biovore",
+        "faction": "Tyranids",
+        "alliance": "Xenos",
+        "abilities": ["BioMinefield", "SporeMineLauncher"],
+        "mythicAbilities": ["HyperCorrosiveAcid"]
+    }
+]

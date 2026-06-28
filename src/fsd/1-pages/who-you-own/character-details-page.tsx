@@ -77,7 +77,7 @@ const AttackRow = ({ attack, type }: { attack: AttackProfile; type: 'melee' | 'r
             ) : (
                 <div className="relative flex h-7 w-7 shrink-0 items-center justify-center">
                     <img src={tacticusIcons.rangedAttack.file} alt="Range" className="absolute inset-0 h-full w-full" />
-                    <span className="relative z-10 text-xs font-bold text-white">{attack.range}</span>
+                    <span className="relative z-10 text-xs font-bold text-(--ability-range-text)">{attack.range}</span>
                 </div>
             )}
             {damageTypeIcon && <img src={damageTypeIcon.file} alt={attack.damageType} className="h-8 w-8 shrink-0" />}
@@ -139,7 +139,12 @@ export const CharacterDetailsPage = ({ char, prevChar, nextChar }: Props) => {
         [entry, activeLevel, passiveLevel]
     );
 
-    const goToChar = (c: ICharacter2) => setSearchParameters({ character: c.snowprintId });
+    const goToChar = (c: ICharacter2) =>
+        setSearchParameters(previous => {
+            const next = new URLSearchParams(previous);
+            next.set('character', c.snowprintId);
+            return next;
+        });
     const closeDetails = () =>
         setSearchParameters(previous => {
             const next = new URLSearchParams(previous);
@@ -251,7 +256,6 @@ export const CharacterDetailsPage = ({ char, prevChar, nextChar }: Props) => {
                     currentRank={rank}
                     stars={stars}
                     maxRank={maxRank}
-                    maxStars={maxStars}
                 />
             </div>
 
@@ -336,7 +340,7 @@ export const CharacterDetailsPage = ({ char, prevChar, nextChar }: Props) => {
                                     ))}
                                 </select>
                                 {ability && (
-                                    <div className="-mx-4 mt-1" style={{ backgroundColor: '#06111e' }}>
+                                    <div className="-mx-4 mt-1 bg-(--ability-panel)">
                                         <div className="px-4 py-2">
                                             <AbilityText
                                                 text={ability.text.currentLevelDescription}
@@ -350,8 +354,8 @@ export const CharacterDetailsPage = ({ char, prevChar, nextChar }: Props) => {
                                             />
                                             {ability.text.nextLevelDescription && (
                                                 <>
-                                                    <div className="my-1.5 border-t border-blue-800" />
-                                                    <span className="text-xs font-semibold text-blue-400">
+                                                    <div className="my-1.5 border-t border-(--ability-panel-divider)" />
+                                                    <span className="text-xs font-semibold text-(--ability-panel-next-level)">
                                                         Next Level
                                                     </span>
                                                     <AbilityText

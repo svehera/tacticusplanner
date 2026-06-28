@@ -126,6 +126,30 @@ describe('resolveVariable', () => {
     });
 });
 
+// ── Full parse sweep: all ability descriptions must parse without throwing ─────
+
+describe('parseAbilityText parses all ability descriptions', () => {
+    const failures: string[] = [];
+
+    for (const ability of abilityData) {
+        for (const [field, text] of [
+            ['currentLevelDescription', ability.text.currentLevelDescription],
+            ['nextLevelDescription', ability.text.nextLevelDescription],
+        ] as const) {
+            if (!text) continue;
+            try {
+                parseAbilityText(text);
+            } catch (error) {
+                failures.push(`${ability.id}.${field}: ${(error as Error).message.slice(0, 120)}`);
+            }
+        }
+    }
+
+    it('has no parse failures', () => {
+        expect(failures, failures.join('\n')).toHaveLength(0);
+    });
+});
+
 // ── Style spec coverage (all styles used in data resolve without throwing) ────
 
 describe('getStyleSpec does not throw for any style used in ability data', () => {
@@ -139,8 +163,8 @@ describe('getStyleSpec does not throw for any style used in ability data', () =>
     }
 
     for (const style of allStyles) {
-        it(`getStyleSpec("${style}") does not throw`, () => {
-            expect(() => getStyleSpec(style)).not.toThrow();
+        it(`getStyleSpec("${style}") returns a defined spec`, () => {
+            expect(getStyleSpec(style)).toBeDefined();
         });
     }
 });
