@@ -1,4 +1,4 @@
-﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
@@ -29,17 +29,19 @@ import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-feature
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
+import { CharacterDetailsPage } from './character-details-page';
+
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const navigate = useNavigate();
+    const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
+
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const resolvedCharacters = useMemo(
         () => FsdCharactersService.resolveStoredCharacters(charactersDefault),
         [charactersDefault]
     );
-    const dispatch = useContext(DispatchContext);
-    const navigate = useNavigate();
-
-    const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
 
     const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: viewPreferences.wyoFilter,
@@ -50,47 +52,51 @@ export const WhoYouOwn = () => {
     const [editedInventory, setEditedInventory] = useState<Record<string, number>>({});
     const [editedMow, setEditedMow] = useState<IMow2>();
 
-    const [searchParams] = useSearchParams();
-
-    const sharedUser = searchParams.get('username');
-    const shareToken = searchParams.get('shareToken');
-
-    const hasShareParameters = !!sharedUser && !!shareToken;
-
-    if (hasShareParameters) {
-        navigate(`/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
-        return <></>;
-    }
+    const [searchParams, setSearchParameters] = useSearchParams();
 
     const factionsView = isFactionsView(viewControls.orderBy);
     const charactersView = isCharactersView(viewControls.orderBy);
 
-    const charactersFiltered = useMemo(() => {
-        return CharactersService.filterUnits(
-            [...resolvedCharacters, ...resolvedMows],
-            viewControls.filterBy,
-            nameFilter
-        );
-    }, [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]);
+    const charactersFiltered = useMemo(
+        () =>
+            CharactersService.filterUnits([...resolvedCharacters, ...resolvedMows], viewControls.filterBy, nameFilter),
+        [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]
+    );
 
-    const factions = useMemo(() => {
-        return CharactersService.orderByFaction(
-            charactersFiltered,
-            viewControls.orderBy,
-            viewPreferences.showBsValue,
-            viewPreferences.showPower
-        );
-    }, [charactersFiltered, viewControls.orderBy, viewPreferences.showBsValue, viewPreferences.showPower]);
+    const factions = useMemo(
+        () =>
+            CharactersService.orderByFaction(
+                charactersFiltered,
+                viewControls.orderBy,
+                viewPreferences.showBsValue,
+                viewPreferences.showPower
+            ),
+        [charactersFiltered, viewControls.orderBy, viewPreferences.showBsValue, viewPreferences.showPower]
+    );
 
     const totalPower = useMemo(() => sum(factions.map(faction => faction.power)), [factions]);
     const totalValue = useMemo(() => sum(factions.map(faction => faction.bsValue)), [factions]);
 
-    const units = useMemo(() => {
-        return CharactersService.orderUnits(
-            factions.flatMap(f => f.units),
-            viewControls.orderBy
-        );
-    }, [factions, viewControls.orderBy]);
+    const units = useMemo(
+        () =>
+            CharactersService.orderUnits(
+                factions.flatMap(f => f.units),
+                viewControls.orderBy
+            ),
+        [factions, viewControls.orderBy]
+    );
+
+    // Characters only (no MoWs) for the details page nav list, preserving roster order
+    const characterUnits = useMemo(
+        () => units.filter((u): u is ICharacter2 => u.unitType === UnitType.character),
+        [units]
+    );
+
+    const characterId = searchParams.get('character');
+    const currentCharIndex = useMemo(
+        () => (characterId ? characterUnits.findIndex(u => u.snowprintId === characterId) : -1),
+        [characterId, characterUnits]
+    );
 
     const updatePreferences = useCallback(
         (value: ICharactersViewControls) => {
@@ -118,7 +124,6 @@ export const WhoYouOwn = () => {
             setEditedCharacter(unit);
             setEditedMow(undefined);
         }
-
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
             setEditedCharacter(undefined);
@@ -142,6 +147,38 @@ export const WhoYouOwn = () => {
         setEditedMow(undefined);
     }, []);
 
+    const handleCharacterClick = useCallback(
+        (unit: IUnit) => {
+            if (unit.unitType !== UnitType.character) return;
+            setSearchParameters({ character: unit.snowprintId });
+        },
+        [setSearchParameters]
+    );
+
+    // ── Early returns (all hooks above this line) ──────────────────────────────
+
+    const sharedUser = searchParams.get('username');
+    const shareToken = searchParams.get('shareToken');
+    if (sharedUser && shareToken) {
+        navigate(`/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
+        return <></>;
+    }
+
+    // Character details page — replaces the old dialog
+    if (characterId) {
+        const selectedChar = currentCharIndex >= 0 ? characterUnits[currentCharIndex] : undefined;
+        if (selectedChar) {
+            return (
+                <CharacterDetailsPage
+                    key={selectedChar.snowprintId}
+                    char={selectedChar}
+                    prevChar={characterUnits[currentCharIndex - 1]}
+                    nextChar={characterUnits[currentCharIndex + 1]}
+                />
+            );
+        }
+    }
+
     return (
         <Box className="m-auto">
             <RosterSnapshotsAssetsProvider>
@@ -153,13 +190,13 @@ export const WhoYouOwn = () => {
                     <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
                     <div className="min-h-[10px]" />
 
-                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={() => {}} />}
+                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={handleCharacterClick} />}
 
                     {charactersView && (
                         <CharactersGrid
                             characters={units}
-                            onAvailableCharacterClick={() => {}}
-                            onLockedCharacterClick={() => {}}
+                            onAvailableCharacterClick={handleCharacterClick}
+                            onLockedCharacterClick={handleCharacterClick}
                         />
                     )}
 
