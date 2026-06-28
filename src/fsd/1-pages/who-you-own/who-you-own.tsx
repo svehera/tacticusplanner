@@ -29,7 +29,7 @@ import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-feature
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
-import { CharacterDetailsPage } from './character-details-page';
+import { UnitDetailsPage } from './unit-details-page';
 
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
@@ -85,20 +85,14 @@ export const WhoYouOwn = () => {
         [factions, viewControls.orderBy]
     );
 
-    // Characters only (no MoWs) for the details page nav list, preserving roster order
-    const characterUnits = useMemo(
-        () => units.filter((u): u is ICharacter2 => u.unitType === UnitType.character),
-        [units]
+    const unitId = searchParams.get('unit');
+    const selectedUnit = useMemo(
+        () => (unitId ? units.find(u => u.snowprintId === unitId) : undefined),
+        [unitId, units]
     );
-
-    const characterId = searchParams.get('character');
-    const selectedChar = useMemo(
-        () => (characterId ? resolvedCharacters.find(c => c.snowprintId === characterId) : undefined),
-        [characterId, resolvedCharacters]
-    );
-    const currentCharIndex = useMemo(
-        () => (characterId ? characterUnits.findIndex(u => u.snowprintId === characterId) : -1),
-        [characterId, characterUnits]
+    const currentUnitIndex = useMemo(
+        () => (unitId ? units.findIndex(u => u.snowprintId === unitId) : -1),
+        [unitId, units]
     );
 
     const updatePreferences = useCallback(
@@ -150,11 +144,18 @@ export const WhoYouOwn = () => {
         setEditedMow(undefined);
     }, []);
 
-    const handleCharacterClick = useCallback(
-        (unit: IUnit) => {
-            if (unit.unitType !== UnitType.character) return;
-            setSearchParameters({ character: unit.snowprintId });
-        },
+    const handleUnitClick = useCallback(
+        (unit: IUnit) => setSearchParameters({ unit: unit.snowprintId }),
+        [setSearchParameters]
+    );
+
+    const closeDetails = useCallback(
+        () =>
+            setSearchParameters(previous => {
+                const next = new URLSearchParams(previous);
+                next.delete('unit');
+                return next;
+            }),
         [setSearchParameters]
     );
 
@@ -167,14 +168,15 @@ export const WhoYouOwn = () => {
         return <Navigate replace to={`/sharedRoster?${destination}`} />;
     }
 
-    // Character details page — replaces the old dialog
-    if (characterId && selectedChar) {
+    if (unitId && selectedUnit) {
         return (
-            <CharacterDetailsPage
-                key={selectedChar.snowprintId}
-                char={selectedChar}
-                prevChar={characterUnits[currentCharIndex - 1]}
-                nextChar={characterUnits[currentCharIndex + 1]}
+            <UnitDetailsPage
+                key={selectedUnit.snowprintId}
+                unit={selectedUnit}
+                prevUnit={units[currentUnitIndex - 1]}
+                nextUnit={units[currentUnitIndex + 1]}
+                onNavigate={handleUnitClick}
+                onClose={closeDetails}
             />
         );
     }
@@ -190,13 +192,13 @@ export const WhoYouOwn = () => {
                     <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
                     <div className="min-h-[10px]" />
 
-                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={handleCharacterClick} />}
+                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={handleUnitClick} />}
 
                     {charactersView && (
                         <CharactersGrid
                             characters={units}
-                            onAvailableCharacterClick={handleCharacterClick}
-                            onLockedCharacterClick={handleCharacterClick}
+                            onAvailableCharacterClick={handleUnitClick}
+                            onLockedCharacterClick={handleUnitClick}
                         />
                     )}
 

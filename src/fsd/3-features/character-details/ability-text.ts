@@ -295,7 +295,34 @@ export function getStyleSpec(styleName: string): StyleSpec | undefined {
         return { gradient: 'linear-gradient(to bottom, #f97316, #dc2626)' };
     }
 
+    if (styleName === '__italic__') return { italic: true };
+
     return undefined;
+}
+
+// ── i2p (integer-to-plural) preprocessing ────────────────────────────────────
+
+const I2P_PLURAL_MARKER = '[i2p_Plural]';
+const I2P_ONE_MARKER = '[i2p_One]';
+
+/** Resolve [i2p_Plural]/[i2p_One] sections by checking the first variable value. */
+export function resolveI2p(text: string, level: number, variables: Record<string, (string | number)[]>): string {
+    const pluralIndex = text.indexOf(I2P_PLURAL_MARKER);
+    if (pluralIndex === -1) return text;
+    const oneIndex = text.indexOf(I2P_ONE_MARKER);
+    if (oneIndex === -1) return text;
+
+    const prefix = text.slice(0, pluralIndex);
+    const pluralContent = text.slice(pluralIndex + I2P_PLURAL_MARKER.length, oneIndex);
+    const oneContent = text.slice(oneIndex + I2P_ONE_MARKER.length);
+
+    const variableMatch = /\{\[(\w+)\]\}/.exec(text);
+    if (!variableMatch) return prefix + pluralContent;
+
+    const variableName = variableMatch[1];
+    const values = variables[variableName];
+    const valueAtLevel = Number(values?.[Math.min(level - 1, (values?.length ?? 1) - 1)] ?? 1);
+    return prefix + (valueAtLevel === 1 ? oneContent : pluralContent);
 }
 
 // ── AST ───────────────────────────────────────────────────────────────────────
@@ -320,10 +347,11 @@ export type AstNode = TextNode | VariableNode | StyledNode;
 
 // ── Parser ────────────────────────────────────────────────────────────────────
 
-const TOKEN_RE = /(<style="[^"]*">|<style=\{[^}]+\}>|<\/style>|\{[^}]+\})/g;
+const TOKEN_RE = /(<style="[^"]*">|<style=\{[^}]+\}>|<\/style>|<i>|<\/i>|\{[^}]+\})/g;
 
 function parseToken(raw: string): { open?: string; isDynamic?: boolean } | { close: true } | { variable: string } {
-    if (raw === '</style>') return { close: true };
+    if (raw === '</style>' || raw === '</i>') return { close: true };
+    if (raw === '<i>') return { open: '__italic__' };
     const openQuoted = /^<style="([^"]*)">\s*$/.exec(raw);
     if (openQuoted) return { open: openQuoted[1] };
     const openDynamic = /^<style=\{([^}]+)\}>\s*$/.exec(raw);

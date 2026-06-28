@@ -7,7 +7,7 @@ import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import abilityDataJson from '@/fsd/4-entities/abilities/data/new-ability-data.json';
 
-import { getStyleSpec, parseAbilityText, resolveVariable } from './ability-text';
+import { getStyleSpec, parseAbilityText, resolveI2p, resolveVariable } from './ability-text';
 import type { AbilityContext, StyledNode } from './ability-text';
 
 interface AbilityEntry {
@@ -123,6 +123,30 @@ describe('resolveVariable', () => {
         const epicContext = { ...context, rarity: Rarity.Epic };
         // dmg is not in scaledVariableNames
         expect(resolveVariable({ type: 'var', name: 'dmg', splitIndex: 0 }, epicContext)).toBe('100');
+    });
+});
+
+// ── i2p resolution ────────────────────────────────────────────────────────────
+
+describe('resolveI2p', () => {
+    const variables = { extraHits: [1, 1, 2, 2, 3] };
+    const pluralText = '[i2p_Plural]scores {[extraHits]} hits[i2p_One]scores {[extraHits]} hit';
+
+    it('picks singular section when value = 1', () => {
+        expect(resolveI2p(pluralText, 1, variables)).toBe('scores {[extraHits]} hit');
+    });
+
+    it('picks plural section when value = 2', () => {
+        expect(resolveI2p(pluralText, 3, variables)).toBe('scores {[extraHits]} hits');
+    });
+
+    it('returns text unchanged when no i2p markers', () => {
+        expect(resolveI2p('plain text', 1, variables)).toBe('plain text');
+    });
+
+    it('preserves prefix before first marker', () => {
+        const withPrefix = 'intro. [i2p_Plural]{[extraHits]} hits[i2p_One]{[extraHits]} hit';
+        expect(resolveI2p(withPrefix, 1, variables)).toBe('intro. {[extraHits]} hit');
     });
 });
 

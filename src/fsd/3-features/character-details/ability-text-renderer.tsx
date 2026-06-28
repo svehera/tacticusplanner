@@ -9,6 +9,7 @@ import {
     getStyleSpec,
     parseAbilityText,
     resolveDynamicStyle,
+    resolveI2p,
     resolveVariable,
 } from './ability-text';
 
@@ -101,7 +102,7 @@ export const AbilityText = ({
     unitName,
     factionId,
 }: Props) => {
-    const ast = useMemo(() => parseAbilityText(text), [text]);
+    const ast = useMemo(() => parseAbilityText(resolveI2p(text, level, variables)), [text, level, variables]);
     const scaledSet = useMemo(() => new Set(scaledVariableNames), [scaledVariableNames]);
     const context: AbilityContext = {
         level,
