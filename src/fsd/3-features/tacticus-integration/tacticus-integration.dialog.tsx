@@ -234,7 +234,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                         <div className="flex w-[80%] flex-col gap-y-1">
                             <FieldLabelWithInfo
                                 label="Tacticus User ID"
-                                info="You can find it at the bottom of the in-game user settings screen."
+                                info="Used to identify your account in the Guild Raid data. You can find it at the bottom of the in-game user settings screen."
                             />
                             <TextField
                                 aria-label="Tacticus User ID"
