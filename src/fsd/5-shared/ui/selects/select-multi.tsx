@@ -4,7 +4,15 @@ import { type ReactNode } from 'react';
 
 import { cn } from '@/fsd/5-shared/lib';
 
-import { checkIconClass, labelClass, optionClassName, panel, triggerDisabled, triggerMulti } from './select-styles';
+import {
+    checkIconClass,
+    labelClass,
+    optionClassName,
+    panel,
+    panelAnchor,
+    triggerDisabled,
+    triggerMulti,
+} from './select-styles';
 
 export interface SelectMultiProps<T> {
     options: T[];
@@ -72,7 +80,7 @@ export const SelectMulti = <T,>({
                         </div>
                     </ListboxButton>
 
-                    <ListboxOptions transition anchor="bottom start" className={panel}>
+                    <ListboxOptions transition anchor={panelAnchor} className={panel}>
                         {options.map((option, index) => (
                             <ListboxOption key={index} value={option} className={optionClassName}>
                                 {({ selected }) => (
