@@ -1,4 +1,4 @@
-import { FC, Suspense, lazy } from 'react';
+import { FC, Suspense, lazy, useState } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 import { RarityMapper } from '@/fsd/5-shared/model/mappers/rarity.mapper';
@@ -26,6 +26,8 @@ interface Props {
 }
 
 const mowMap = new Map(mows2Data.mows.map(m => [m.snowprintId, m]));
+
+const MAX_RELATED_CHARACTER_ICONS = 7;
 
 const mapUpgradeRarity = (rarity: Rarity | 'Shard' | 'Mythic Shard'): Rarity => {
     return typeof rarity === 'number' ? rarity : Rarity.Common;
@@ -58,6 +60,8 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
     compactRaidLocations = true,
     showPlannedRaidLocationsOnly = false,
 }) => {
+    const [showAllRelated, setShowAllRelated] = useState(false);
+
     const isShard = upgradeEstimate.rarity === 'Shard';
     const isMythicShard = upgradeEstimate.rarity === 'Mythic Shard';
 
@@ -125,6 +129,11 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
     const isSufficient = upgradeEstimate.acquiredCount >= upgradeEstimate.requiredCount;
     const flooredAcquiredCount = Math.min(Math.floor(upgradeEstimate.acquiredCount), upgradeEstimate.requiredCount);
     const characterIconHeight = 24;
+
+    const relatedCharacters = upgradeEstimate.relatedCharacters;
+    // Show up to MAX icons; once we'd exceed it, drop to MAX-1 icons to make room for the +N badge.
+    const relatedHasOverflow = relatedCharacters.length > MAX_RELATED_CHARACTER_ICONS;
+    const collapsedRelatedCount = relatedHasOverflow ? MAX_RELATED_CHARACTER_ICONS - 1 : relatedCharacters.length;
 
     return (
         <div
@@ -197,10 +206,13 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
                         showRelatedCharacters &&
                         upgradeEstimate.relatedCharacters.length > 0 && (
                             <div
-                                className={`flex flex-row items-center gap-1 ${
+                                className={`flex flex-row flex-wrap items-center gap-1 ${
                                     noSuggestedRaidsRemaining ? 'opacity-70' : ''
                                 }`}>
-                                {upgradeEstimate.relatedCharacters.map(id => (
+                                {(showAllRelated
+                                    ? relatedCharacters
+                                    : relatedCharacters.slice(0, collapsedRelatedCount)
+                                ).map(id => (
                                     <UnitShardIcon
                                         key={id}
                                         icon={
@@ -212,6 +224,15 @@ export const RaidUpgradeMaterialCard: FC<Props> = ({
                                         width={characterIconHeight}
                                     />
                                 ))}
+                                {relatedHasOverflow && (
+                                    <button
+                                        type="button"
+                                        onClick={() => setShowAllRelated(previous => !previous)}
+                                        className="border-muted-fg/40 flex shrink-0 cursor-pointer items-center justify-center rounded-full border bg-(--neutral) text-[11px] leading-none font-bold text-(--fg) shadow-sm transition-colors transition-transform duration-75 hover:bg-(--accent) hover:text-(--accent-fg) focus-visible:ring-2 focus-visible:ring-(--accent)/40 focus-visible:outline-none active:scale-95"
+                                        style={{ height: characterIconHeight, minWidth: characterIconHeight }}>
+                                        {showAllRelated ? '−' : `+${relatedCharacters.length - collapsedRelatedCount}`}
+                                    </button>
+                                )}
                             </div>
                         )
                     )}
