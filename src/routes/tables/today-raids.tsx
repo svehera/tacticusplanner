@@ -16,11 +16,19 @@ interface Props {
     guildShopSection?: ReactNode;
     warShopSection?: ReactNode;
     rogueTraderSection?: ReactNode;
+    onOpenSettings?: () => void;
 }
 
 const isShardRaid = (raid: IUpgradeRaid) => raid.rarity === 'Shard' || raid.rarity === 'Mythic Shard';
 
-export const TodayRaids: FC<Props> = ({ raids, bonusRaids, guildShopSection, warShopSection, rogueTraderSection }) => {
+export const TodayRaids: FC<Props> = ({
+    raids,
+    bonusRaids,
+    guildShopSection,
+    warShopSection,
+    rogueTraderSection,
+    onOpenSettings,
+}) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
     const energySpent = sum(locs.map(loc => loc.raidsAlreadyPerformed * loc.energyCost));
     const raidsCount = sum(locs.map(loc => loc.raidsAlreadyPerformed));
@@ -75,6 +83,16 @@ export const TodayRaids: FC<Props> = ({ raids, bonusRaids, guildShopSection, war
                             ))}
                         </div>
                     </Suspense>
+                    <p className="w-full text-center text-xs text-(--soft-fg)">
+                        Manage visibility of the daily shops in{' '}
+                        {onOpenSettings ? (
+                            <button className="underline hover:text-(--fg)" onClick={onOpenSettings}>
+                                Raid Settings
+                            </button>
+                        ) : (
+                            'Raid Settings'
+                        )}
+                    </p>
                     {guildShopSection}
                     {warShopSection}
                     {rogueTraderSection}

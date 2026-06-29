@@ -9,6 +9,7 @@ import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RogueTraderSection } from 'src/routes/tables/rogue-trader-section';
 import { TodayRaids } from 'src/routes/tables/today-raids';
 import { WarShopSection } from 'src/routes/tables/war-shop-section';
+import DailyRaidsSettings from 'src/shared-components/daily-raids-settings';
 
 import { useAuth } from '@/fsd/5-shared/model';
 
@@ -57,11 +58,13 @@ export const DailyRaids = () => {
         inventory,
         onslaughtPreferences,
         playerMetadata,
+        viewPreferences,
     } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(storeMows), [storeMows]);
 
     const [hasChanges, setHasChanges] = useState<boolean>(false);
+    const [raidSettingsOpen, setRaidSettingsOpen] = useState(false);
     const upgrades = useMemo(
         () => addShardsToUpgrades(inventory.upgrades, storeCharacters, resolvedMows),
         [inventory.upgrades, storeCharacters, resolvedMows]
@@ -203,10 +206,13 @@ export const DailyRaids = () => {
                 refreshDisabled={!hasChanges}
                 refreshHandle={refresh}
                 resetDisabled={!dailyRaids.raidedLocations?.length}
-                resetHandler={resetDay}>
+                resetHandler={resetDay}
+                onOpenSettings={() => setRaidSettingsOpen(true)}>
                 <ActiveGoalsDialog units={units} goals={allGoals} onGoalsSelectChange={handleGoalsSelectionChange} />
                 <LocationsFilter filter={dailyRaids.filters} filtersChange={saveFilterChanges} />
             </RaidsHeader>
+
+            <DailyRaidsSettings open={raidSettingsOpen} close={() => setRaidSettingsOpen(false)} />
 
             <Suspense fallback={undefined}>
                 <RaidsPlan
@@ -226,31 +232,38 @@ export const DailyRaids = () => {
                         infiniteEstimatedRanks.upgradesRaids[0],
                         estimatedRanks.upgradesRaids[0]
                     )}
+                    onOpenSettings={() => setRaidSettingsOpen(true)}
                     guildShopSection={
-                        <GuildShopSection
-                            inProgressMaterials={estimatedRanks.inProgressMaterials}
-                            blockedMaterials={estimatedRanks.blockedMaterials}
-                            userPL={playerMetadata.powerLevel ?? 1}
-                        />
+                        (viewPreferences.showGuildShop ?? true) ? (
+                            <GuildShopSection
+                                inProgressMaterials={estimatedRanks.inProgressMaterials}
+                                blockedMaterials={estimatedRanks.blockedMaterials}
+                                userPL={playerMetadata.powerLevel ?? 1}
+                            />
+                        ) : undefined
                     }
                     warShopSection={
-                        <WarShopSection
-                            inProgressMaterials={estimatedRanks.inProgressMaterials}
-                            blockedMaterials={estimatedRanks.blockedMaterials}
-                            componentsByAlliance={mowCounts.componentsByAlliance}
-                            forgeBadgeCounts={mowCounts.forgeBadgeCounts}
-                            componentNeededBy={mowCounts.componentNeededBy}
-                            forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
-                            userPL={playerMetadata.powerLevel ?? 1}
-                        />
+                        (viewPreferences.showWarShop ?? true) ? (
+                            <WarShopSection
+                                inProgressMaterials={estimatedRanks.inProgressMaterials}
+                                blockedMaterials={estimatedRanks.blockedMaterials}
+                                componentsByAlliance={mowCounts.componentsByAlliance}
+                                forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                                componentNeededBy={mowCounts.componentNeededBy}
+                                forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
+                                userPL={playerMetadata.powerLevel ?? 1}
+                            />
+                        ) : undefined
                     }
                     rogueTraderSection={
-                        <RogueTraderSection
-                            inProgressMaterials={estimatedRanks.inProgressMaterials}
-                            blockedMaterials={estimatedRanks.blockedMaterials}
-                            forgeBadgeCounts={mowCounts.forgeBadgeCounts}
-                            forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
-                        />
+                        (viewPreferences.showRogueTrader ?? true) ? (
+                            <RogueTraderSection
+                                inProgressMaterials={estimatedRanks.inProgressMaterials}
+                                blockedMaterials={estimatedRanks.blockedMaterials}
+                                forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                                forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
+                            />
+                        ) : undefined
                     }
                 />
             )}
