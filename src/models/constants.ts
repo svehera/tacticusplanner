@@ -262,6 +262,9 @@ export const defaultData: IPersonalData2 = {
         apiIntegrationSyncOptions: ['roster', 'inventory', 'campaignProgress', 'raidedLocations'],
         leaderboardBossTopN: 5,
         leaderboardPrimeTopN: 3,
+        showGuildShop: true,
+        showWarShop: true,
+        showRogueTrader: true,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
