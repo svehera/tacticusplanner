@@ -64,8 +64,17 @@ function goalTypeLabel(type: PersonalGoalType): string {
 
 export function GoalsSection() {
     const navigate = useNavigate();
-    const { goals, characters, mows, campaignsProgress, inventory, dailyRaids, dailyRaidsPreferences, gameModeTokens } =
-        useContext(StoreContext);
+    const {
+        goals,
+        characters,
+        mows,
+        campaignsProgress,
+        inventory,
+        dailyRaids,
+        dailyRaidsPreferences,
+        gameModeTokens,
+        onslaughtPreferences,
+    } = useContext(StoreContext);
 
     const goalsMenuItem = menuItemById['goals'];
 
@@ -81,8 +90,8 @@ export function GoalsSection() {
     );
 
     const { shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(
-        () => GoalsService.prepareGoals(goals, units, false),
-        [goals, units]
+        () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
+        [goals, units, onslaughtPreferences]
     );
 
     const estimatedUpgradesTotal = useMemo(
@@ -95,6 +104,7 @@ export function GoalsSection() {
                     upgrades: inventory.upgrades,
                     completedLocations: dailyRaids.raidedLocations,
                     onslaughtTokensToday,
+                    onslaughtPreferences,
                 },
                 resolvedCharacters,
                 resolvedMows,
@@ -107,6 +117,7 @@ export function GoalsSection() {
             inventory.upgrades,
             dailyRaids.raidedLocations,
             onslaughtTokensToday,
+            onslaughtPreferences,
             resolvedCharacters,
             resolvedMows,
             upgradeMaterialGoals,
