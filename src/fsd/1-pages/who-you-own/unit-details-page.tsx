@@ -12,12 +12,7 @@ import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 import { RankIcon } from '@/fsd/5-shared/ui/icons/rank.icon';
 import { traitIcons } from '@/fsd/5-shared/ui/trait-icons';
 
-import abilityDataJson from '@/fsd/4-entities/abilities/data/new-ability-data.json';
-import characterData2Json from '@/fsd/4-entities/character/data/new-character-data2.json';
-import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
-import type { IEquipment } from '@/fsd/4-entities/equipment';
-import mowsData2Json from '@/fsd/4-entities/mow/data/new-mows-data2.json';
-import traitsDataJson from '@/fsd/4-entities/traits/data/new-traits-data.json';
+import { EquipmentIcon } from '@/fsd/4-entities/equipment';
 import { getTraitVariables } from '@/fsd/4-entities/traits/trait-variables';
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
@@ -26,87 +21,15 @@ import { AbilityText } from '@/fsd/3-features/character-details/ability-text-ren
 import { AbilityVariablesChart } from '@/fsd/3-features/character-details/ability-variables-chart';
 import { CharacterStatGrowthChart } from '@/fsd/3-features/character-details/character-stat-growth-chart';
 
-// ── Static data ───────────────────────────────────────────────────────────────
-
-interface AbilityEntry {
-    id: string;
-    text: { name: string; currentLevelDescription: string; nextLevelDescription: string };
-    variables: Record<string, (string | number)[]>;
-    constants?: Record<string, string>;
-    variablesAffectedByRarityBonus?: string[];
-}
-
-const abilityById = new Map((abilityDataJson as unknown as AbilityEntry[]).map(a => [a.id, a]));
-
-interface CharEntry {
-    id: string;
-    movement: number;
-    activeAbilityId: string;
-    passiveAbilityIds: string;
-    traits: string[];
-    initialStats: { damage: number; armor: number; health: number };
-    meleeAttack: { hitCount: number; damageType: string };
-    rangedAttack?: { hitCount: number; damageType: string; range?: number };
-}
-
-const charDataById = new Map(
-    (
-        characterData2Json as unknown as Array<{
-            id: string;
-            movement: number;
-            activeAbilityId: string;
-            passiveAbilityIds: string;
-            traits?: string[];
-            initialStats: { damage: number; armor: number; health: number };
-            meleeAttack: { hitCount: number; pierce: string };
-            rangedAttack?: { hitCount: number; pierce: string; range?: number };
-        }>
-    ).map(c => [
-        c.id,
-        {
-            id: c.id,
-            movement: c.movement,
-            activeAbilityId: c.activeAbilityId,
-            passiveAbilityIds: c.passiveAbilityIds,
-            traits: c.traits ?? [],
-            initialStats: c.initialStats,
-            meleeAttack: { hitCount: c.meleeAttack.hitCount, damageType: c.meleeAttack.pierce },
-            rangedAttack: c.rangedAttack
-                ? { hitCount: c.rangedAttack.hitCount, damageType: c.rangedAttack.pierce, range: c.rangedAttack.range }
-                : undefined,
-        } satisfies CharEntry,
-    ])
-);
-
-interface MowEntry {
-    id: string;
-    abilities: string[];
-    mythicAbilities: string[];
-}
-
-const mowDataById = new Map((mowsData2Json as unknown as MowEntry[]).map(m => [m.id, m]));
-
-interface TraitEntry {
-    id: string;
-    name: string;
-    styledName: string;
-    description: string;
-}
-
-const traitById = new Map((traitsDataJson as unknown as TraitEntry[]).map(t => [t.id, t]));
-
-const relicByUnit = new Map<string, IEquipment>();
-for (const equipment of EquipmentService.equipmentData) {
-    if (equipment.isRelic) {
-        for (const unitId of equipment.allowedUnits) {
-            relicByUnit.set(unitId, equipment);
-        }
-    }
-}
-
-const MYTHIC_STAR_VALUES = getEnumValues(RarityStars).filter(
-    x => x >= RarityStars.OneBlueStar && x <= RarityStars.MythicWings
-);
+import {
+    abilityById,
+    charDataById,
+    type CharEntry,
+    MYTHIC_STAR_VALUES,
+    mowDataById,
+    relicByUnit,
+    traitById,
+} from './unit-details-page.data';
 
 // ── Sub-components ────────────────────────────────────────────────────────────
 
@@ -436,7 +359,7 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                                 if (!trait) return;
                                 const traitVariables = getTraitVariables(traitId);
                                 return (
-                                    <div key={traitId} className="rounded-md bg-zinc-100 p-3 dark:bg-zinc-800">
+                                    <div key={traitId} className="rounded-md bg-(--neutral) p-3">
                                         <div className="mb-1 flex items-center gap-2">
                                             {traitIcons[traitId] && (
                                                 <img
@@ -445,7 +368,7 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                                                     className="h-7 w-7 shrink-0"
                                                 />
                                             )}
-                                            <span className="text-sm font-semibold">
+                                            <div className="text-sm font-semibold">
                                                 <AbilityText
                                                     text={trait.styledName}
                                                     level={1}
@@ -456,7 +379,7 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                                                     unitName={unit.name}
                                                     factionId={unit.faction}
                                                 />
-                                            </span>
+                                            </div>
                                         </div>
                                         <div className="text-xs text-(--fg)">
                                             <AbilityText

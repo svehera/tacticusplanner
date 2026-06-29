@@ -86,9 +86,13 @@ export const WhoYouOwn = () => {
     );
 
     const unitId = searchParams.get('unit');
+    const allUnits = useMemo(
+        () => [...resolvedCharacters, ...resolvedMows] as IUnit[],
+        [resolvedCharacters, resolvedMows]
+    );
     const selectedUnit = useMemo(
-        () => (unitId ? units.find(u => u.snowprintId === unitId) : undefined),
-        [unitId, units]
+        () => (unitId ? allUnits.find(u => u.snowprintId === unitId) : undefined),
+        [unitId, allUnits]
     );
     const currentUnitIndex = useMemo(
         () => (unitId ? units.findIndex(u => u.snowprintId === unitId) : -1),
@@ -173,8 +177,8 @@ export const WhoYouOwn = () => {
             <UnitDetailsPage
                 key={selectedUnit.snowprintId}
                 unit={selectedUnit}
-                prevUnit={units[currentUnitIndex - 1]}
-                nextUnit={units[currentUnitIndex + 1]}
+                prevUnit={currentUnitIndex > 0 ? units[currentUnitIndex - 1] : undefined}
+                nextUnit={currentUnitIndex >= 0 ? units[currentUnitIndex + 1] : undefined}
                 onNavigate={handleUnitClick}
                 onClose={closeDetails}
             />
