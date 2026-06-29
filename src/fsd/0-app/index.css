@@ -219,6 +219,12 @@
         --diff-event-std: oklch(0.6 0.18 320);
         --diff-event-ext: oklch(0.55 0.2 20);
         --diff-event-chal: oklch(0.55 0.2 340);
+
+        /* ── Ability panel (Tacticus in-game tooltip style) ─── */
+        --ability-panel: #06111e;
+        --ability-panel-divider: #1e40af;
+        --ability-panel-next-level: #60a5fa;
+        --ability-range-text: #ffffff;
     }
 
     .dark {

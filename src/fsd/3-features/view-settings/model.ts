@@ -38,6 +38,9 @@ export interface IViewPreferences
     showHseWarning: boolean;
     apiIntegrationSyncOptions: string[];
     tokenomicsTableView: boolean;
+    showGuildShop?: boolean;
+    showWarShop?: boolean;
+    showRogueTrader?: boolean;
     leaderboardBossTopN: number;
     leaderboardPrimeTopN: number;
 }

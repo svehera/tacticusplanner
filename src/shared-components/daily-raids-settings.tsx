@@ -1,5 +1,5 @@
 import { Info } from 'lucide-react';
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback, useContext, useState } from 'react';
 
 import { DailyRaidsStrategy } from 'src/models/enums';
 import { DailyRaidsCustomLocations } from 'src/shared-components/daily-raids-custom-locations';
@@ -124,8 +124,13 @@ interface Props {
 
 const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     const dispatch = useContext(DispatchContext);
-    const { dailyRaidsPreferences } = useContext(StoreContext);
+    const { dailyRaidsPreferences, viewPreferences } = useContext(StoreContext);
     const [dailyRaidsPreferencesForm, setDailyRaidsPreferencesForm] = React.useState(dailyRaidsPreferences);
+    const [shopVisibility, setShopVisibility] = useState({
+        showGuildShop: viewPreferences.showGuildShop ?? true,
+        showWarShop: viewPreferences.showWarShop ?? true,
+        showRogueTrader: viewPreferences.showRogueTrader ?? true,
+    });
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
         return index === -1 ? 2 : index;
@@ -137,6 +142,16 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
     React.useEffect(() => {
         setDailyRaidsPreferencesForm(dailyRaidsPreferences);
     }, [dailyRaidsPreferences]);
+
+    React.useEffect(() => {
+        if (open) {
+            setShopVisibility({
+                showGuildShop: viewPreferences.showGuildShop ?? true,
+                showWarShop: viewPreferences.showWarShop ?? true,
+                showRogueTrader: viewPreferences.showRogueTrader ?? true,
+            });
+        }
+    }, [open, viewPreferences]);
 
     const updatePreferences = useCallback((value: IDailyRaidsFarmOrder) => {
         setDailyRaidsPreferencesForm(current => ({
@@ -153,6 +168,9 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
 
     const saveChanges = () => {
         dispatch.dailyRaidsPreferences({ type: 'Set', value: dailyRaidsPreferencesForm });
+        dispatch.viewPreferences({ type: 'Update', setting: 'showGuildShop', value: shopVisibility.showGuildShop });
+        dispatch.viewPreferences({ type: 'Update', setting: 'showWarShop', value: shopVisibility.showWarShop });
+        dispatch.viewPreferences({ type: 'Update', setting: 'showRogueTrader', value: shopVisibility.showRogueTrader });
         close();
     };
 
@@ -293,6 +311,32 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                         }}
                     />
                 )}
+
+                {/* Shop visibility */}
+                <fieldset>
+                    <legend className="mb-2 text-sm font-semibold text-(--fg)">Shop visibility:</legend>
+                    <div className="flex flex-col gap-2 ps-2">
+                        <Switch
+                            isSelected={shopVisibility.showGuildShop}
+                            onChange={checked =>
+                                setShopVisibility(current => ({ ...current, showGuildShop: checked }))
+                            }>
+                            Guild Shop
+                        </Switch>
+                        <Switch
+                            isSelected={shopVisibility.showWarShop}
+                            onChange={checked => setShopVisibility(current => ({ ...current, showWarShop: checked }))}>
+                            War Shop
+                        </Switch>
+                        <Switch
+                            isSelected={shopVisibility.showRogueTrader}
+                            onChange={checked =>
+                                setShopVisibility(current => ({ ...current, showRogueTrader: checked }))
+                            }>
+                            Rogue Trader
+                        </Switch>
+                    </div>
+                </fieldset>
             </PortalDialog.Body>
 
             <PortalDialog.Footer>
