@@ -5,7 +5,7 @@ import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 
 import { PersonalGoalType } from 'src/models/enums';
-import { IPersonalGoal } from 'src/models/interfaces';
+import { IDailyRaidsFarmOrder, IPersonalGoal } from 'src/models/interfaces';
 import { menuItemById } from 'src/models/menu-items';
 import { StoreContext } from 'src/reducers/store.provider';
 
@@ -115,6 +115,8 @@ export function GoalsSection() {
         ]
     );
 
+    const isGoalPriority = dailyRaidsPreferences?.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
+
     const goalsEstimates = useMemo(
         () =>
             GoalsService.buildGoalEstimates(
@@ -123,7 +125,8 @@ export function GoalsSection() {
                 upgradeMaterialGoals,
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
-                resolvedCharacters
+                resolvedCharacters,
+                isGoalPriority
             ),
         [
             estimatedUpgradesTotal,
@@ -132,6 +135,7 @@ export function GoalsSection() {
             upgradeRankOrMowGoals,
             upgradeAbilities,
             resolvedCharacters,
+            isGoalPriority,
         ]
     );
 
