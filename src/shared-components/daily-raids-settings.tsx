@@ -143,6 +143,16 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         setDailyRaidsPreferencesForm(dailyRaidsPreferences);
     }, [dailyRaidsPreferences]);
 
+    React.useEffect(() => {
+        if (open) {
+            setShopVisibility({
+                showGuildShop: viewPreferences.showGuildShop ?? true,
+                showWarShop: viewPreferences.showWarShop ?? true,
+                showRogueTrader: viewPreferences.showRogueTrader ?? true,
+            });
+        }
+    }, [open, viewPreferences]);
+
     const updatePreferences = useCallback((value: IDailyRaidsFarmOrder) => {
         setDailyRaidsPreferencesForm(current => ({
             ...current,
