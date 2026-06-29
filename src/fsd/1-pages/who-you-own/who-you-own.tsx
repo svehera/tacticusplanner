@@ -1,9 +1,9 @@
-﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
 import { useCallback, useContext, useMemo, useState } from 'react';
-import { useNavigate, useSearchParams } from 'react-router-dom';
+import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
@@ -29,17 +29,18 @@ import { CharactersViewControls, ICharactersViewControls } from '@/fsd/3-feature
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 
+import { UnitDetailsPage } from './unit-details-page';
+
 export const WhoYouOwn = () => {
     const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
+    const dispatch = useContext(DispatchContext);
+    const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
+
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const resolvedCharacters = useMemo(
         () => FsdCharactersService.resolveStoredCharacters(charactersDefault),
         [charactersDefault]
     );
-    const dispatch = useContext(DispatchContext);
-    const navigate = useNavigate();
-
-    const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
 
     const [viewControls, setViewControls] = useState<ICharactersViewControls>({
         filterBy: viewPreferences.wyoFilter,
@@ -50,47 +51,53 @@ export const WhoYouOwn = () => {
     const [editedInventory, setEditedInventory] = useState<Record<string, number>>({});
     const [editedMow, setEditedMow] = useState<IMow2>();
 
-    const [searchParams] = useSearchParams();
-
-    const sharedUser = searchParams.get('username');
-    const shareToken = searchParams.get('shareToken');
-
-    const hasShareParameters = !!sharedUser && !!shareToken;
-
-    if (hasShareParameters) {
-        navigate(`/sharedRoster?username=${sharedUser}&shareToken=${shareToken}`);
-        return <></>;
-    }
+    const [searchParams, setSearchParameters] = useSearchParams();
 
     const factionsView = isFactionsView(viewControls.orderBy);
     const charactersView = isCharactersView(viewControls.orderBy);
 
-    const charactersFiltered = useMemo(() => {
-        return CharactersService.filterUnits(
-            [...resolvedCharacters, ...resolvedMows],
-            viewControls.filterBy,
-            nameFilter
-        );
-    }, [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]);
+    const charactersFiltered = useMemo(
+        () =>
+            CharactersService.filterUnits([...resolvedCharacters, ...resolvedMows], viewControls.filterBy, nameFilter),
+        [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]
+    );
 
-    const factions = useMemo(() => {
-        return CharactersService.orderByFaction(
-            charactersFiltered,
-            viewControls.orderBy,
-            viewPreferences.showBsValue,
-            viewPreferences.showPower
-        );
-    }, [charactersFiltered, viewControls.orderBy, viewPreferences.showBsValue, viewPreferences.showPower]);
+    const factions = useMemo(
+        () =>
+            CharactersService.orderByFaction(
+                charactersFiltered,
+                viewControls.orderBy,
+                viewPreferences.showBsValue,
+                viewPreferences.showPower
+            ),
+        [charactersFiltered, viewControls.orderBy, viewPreferences.showBsValue, viewPreferences.showPower]
+    );
 
     const totalPower = useMemo(() => sum(factions.map(faction => faction.power)), [factions]);
     const totalValue = useMemo(() => sum(factions.map(faction => faction.bsValue)), [factions]);
 
-    const units = useMemo(() => {
-        return CharactersService.orderUnits(
-            factions.flatMap(f => f.units),
-            viewControls.orderBy
-        );
-    }, [factions, viewControls.orderBy]);
+    const units = useMemo(
+        () =>
+            CharactersService.orderUnits(
+                factions.flatMap(f => f.units),
+                viewControls.orderBy
+            ),
+        [factions, viewControls.orderBy]
+    );
+
+    const unitId = searchParams.get('unit');
+    const allUnits = useMemo(
+        () => [...resolvedCharacters, ...resolvedMows] as IUnit[],
+        [resolvedCharacters, resolvedMows]
+    );
+    const selectedUnit = useMemo(
+        () => (unitId ? allUnits.find(u => u.snowprintId === unitId) : undefined),
+        [unitId, allUnits]
+    );
+    const currentUnitIndex = useMemo(
+        () => (unitId ? units.findIndex(u => u.snowprintId === unitId) : -1),
+        [unitId, units]
+    );
 
     const updatePreferences = useCallback(
         (value: ICharactersViewControls) => {
@@ -118,7 +125,6 @@ export const WhoYouOwn = () => {
             setEditedCharacter(unit);
             setEditedMow(undefined);
         }
-
         if (unit.unitType === UnitType.mow) {
             setEditedMow(unit);
             setEditedCharacter(undefined);
@@ -142,6 +148,43 @@ export const WhoYouOwn = () => {
         setEditedMow(undefined);
     }, []);
 
+    const handleUnitClick = useCallback(
+        (unit: IUnit) => setSearchParameters({ unit: unit.snowprintId }),
+        [setSearchParameters]
+    );
+
+    const closeDetails = useCallback(
+        () =>
+            setSearchParameters(previous => {
+                const next = new URLSearchParams(previous);
+                next.delete('unit');
+                return next;
+            }),
+        [setSearchParameters]
+    );
+
+    // ── Early returns (all hooks above this line) ──────────────────────────────
+
+    const sharedUser = searchParams.get('username');
+    const shareToken = searchParams.get('shareToken');
+    if (sharedUser && shareToken) {
+        const destination = new URLSearchParams({ username: sharedUser, shareToken });
+        return <Navigate replace to={`/sharedRoster?${destination}`} />;
+    }
+
+    if (unitId && selectedUnit) {
+        return (
+            <UnitDetailsPage
+                key={selectedUnit.snowprintId}
+                unit={selectedUnit}
+                prevUnit={currentUnitIndex > 0 ? units[currentUnitIndex - 1] : undefined}
+                nextUnit={currentUnitIndex >= 0 ? units[currentUnitIndex + 1] : undefined}
+                onNavigate={handleUnitClick}
+                onClose={closeDetails}
+            />
+        );
+    }
+
     return (
         <Box className="m-auto">
             <RosterSnapshotsAssetsProvider>
@@ -153,13 +196,13 @@ export const WhoYouOwn = () => {
                     <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
                     <div className="min-h-[10px]" />
 
-                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={() => {}} />}
+                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={handleUnitClick} />}
 
                     {charactersView && (
                         <CharactersGrid
                             characters={units}
-                            onAvailableCharacterClick={() => {}}
-                            onLockedCharacterClick={() => {}}
+                            onAvailableCharacterClick={handleUnitClick}
+                            onLockedCharacterClick={handleUnitClick}
                         />
                     )}
 

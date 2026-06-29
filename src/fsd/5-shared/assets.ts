@@ -1,4 +1,7 @@
 /* eslint-disable import-x/no-internal-modules */
+import allianceChaos from '@/assets/images/snowprint_assets/alliances/alliance_chaos.png';
+import allianceImperial from '@/assets/images/snowprint_assets/alliances/alliance_imperial.png';
+import allianceXenos from '@/assets/images/snowprint_assets/alliances/alliance_xenos.png';
 import commonBook from '@/assets/images/snowprint_assets/books/ui_icon_consumable_xp_book_0.png';
 import uncommonBook from '@/assets/images/snowprint_assets/books/ui_icon_consumable_xp_book_1.png';
 import rareBook from '@/assets/images/snowprint_assets/books/ui_icon_consumable_xp_book_2.png';
@@ -29,6 +32,23 @@ import damageProjectile from '@/assets/images/snowprint_assets/damage_icons/ui_i
 import damagePsychic from '@/assets/images/snowprint_assets/damage_icons/ui_icon_damage_profile2_Psychic.png';
 import damagePulse from '@/assets/images/snowprint_assets/damage_icons/ui_icon_damage_profile2_Pulse.png';
 import damageToxic from '@/assets/images/snowprint_assets/damage_icons/ui_icon_damage_profile2_Toxic.png';
+import effectAnnihilator from '@/assets/images/snowprint_assets/effects/annihilator_effect.png';
+import effectAstartesBanner from '@/assets/images/snowprint_assets/effects/astartesBanner_effect.png';
+import effectBuff from '@/assets/images/snowprint_assets/effects/buff_effect.png';
+import effectEarlyWarning from '@/assets/images/snowprint_assets/effects/earlyWarning_effect.png';
+import effectInfiltrate from '@/assets/images/snowprint_assets/effects/infiltrate_effect.png';
+import effectMachineVengeance from '@/assets/images/snowprint_assets/effects/machine_vengeance_effect.png';
+import effectMarkerlight from '@/assets/images/snowprint_assets/effects/markerlight_effect.png';
+import effectMartialSuperiority from '@/assets/images/snowprint_assets/effects/martialSuperiority_effect.png';
+import effectNeuroparasite from '@/assets/images/snowprint_assets/effects/neuroparasite_effect.png';
+import effectOverwatching from '@/assets/images/snowprint_assets/effects/overwatching_effect.png';
+import effectPinned from '@/assets/images/snowprint_assets/effects/pinned_effect.png';
+import effectProphets from '@/assets/images/snowprint_assets/effects/prophets_effect.png';
+import effectRevealed from '@/assets/images/snowprint_assets/effects/revealed_effect.png';
+import effectShield from '@/assets/images/snowprint_assets/effects/shield_effect.png';
+import effectStunned from '@/assets/images/snowprint_assets/effects/stunned_effect.png';
+import effectSynapse from '@/assets/images/snowprint_assets/effects/synapse_effect.png';
+import effectTaunted from '@/assets/images/snowprint_assets/effects/taunted_effect.png';
 import commonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_common.png';
 import epicFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_epic.png';
 import legendaryFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_legendary.png';
@@ -41,6 +61,9 @@ import mowUncommonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_fr
 import mythicFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_mythic.png';
 import rareFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_rare.png';
 import uncommonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_uncommon.png';
+import character from '@/assets/images/snowprint_assets/misc/character.png';
+import overkill from '@/assets/images/snowprint_assets/misc/overkill.png';
+import piercingDamage from '@/assets/images/snowprint_assets/misc/piercing_dmg.png';
 import commonEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_common.png';
 import epicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_epic.png';
 import legendaryEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_legendary.png';
@@ -52,6 +75,7 @@ import bombToken from '@/assets/images/snowprint_assets/misc/ui_icon_bomb.png';
 import shardIcon from '@/assets/images/snowprint_assets/misc/ui_icon_character_shard_empty.png';
 import mythicShardIcon from '@/assets/images/snowprint_assets/misc/ui_icon_character_shard_mythic_empty.png';
 import checkmark from '@/assets/images/snowprint_assets/misc/ui_icon_checkmark_default.png';
+import mow from '@/assets/images/snowprint_assets/misc/ui_icon_rank_mow_01.png';
 import blessedReqOrder from '@/assets/images/snowprint_assets/misc/ui_icon_resource_blessed_req_order.png';
 import coin from '@/assets/images/snowprint_assets/misc/ui_icon_resource_coin.png';
 import eventCurrencyHalloween2025Icon from '@/assets/images/snowprint_assets/misc/ui_icon_resource_event_currency_halloween_25.png';
@@ -147,10 +171,12 @@ import xenosOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascensi
 import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
 import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
+import coins from '@/assets/images/snowprint_assets/resources/ui_icon_resource_coin_large.png';
 import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
+import mowAmmo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_machines_of_war_ammo_large.png';
 import mythicSalvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_mythic_salvage.png';
 import salvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_salvage.png';
 import chaosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_chaos.png';
@@ -162,6 +188,17 @@ import movement from '@/assets/images/snowprint_assets/stat_icons/ui_icon_moveme
 import hitsIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
+import tileBarbwire from '@/assets/images/snowprint_assets/tile_effects/tile_barbwire.png';
+import tileBrokenIce from '@/assets/images/snowprint_assets/tile_effects/tile_broken_ice.png';
+import tileContaminated from '@/assets/images/snowprint_assets/tile_effects/tile_contaminated.png';
+import tileDespoiledGround from '@/assets/images/snowprint_assets/tile_effects/tile_despoiled_ground.png';
+import tileElevation from '@/assets/images/snowprint_assets/tile_effects/tile_elevation.png';
+import tileFire from '@/assets/images/snowprint_assets/tile_effects/tile_fire.png';
+import tileGrass from '@/assets/images/snowprint_assets/tile_effects/tile_grass.png';
+import tileIc from '@/assets/images/snowprint_assets/tile_effects/tile_ic.png';
+import tileIce from '@/assets/images/snowprint_assets/tile_effects/tile_ice.png';
+import tileNormal from '@/assets/images/snowprint_assets/tile_effects/tile_normal.png';
+import tileTrench from '@/assets/images/snowprint_assets/tile_effects/tile_trench.png';
 import traitTwoManTeam from '@/assets/images/snowprint_assets/traits/ui_icon_trait_2_man_team_01.png';
 import traitActOfFaith from '@/assets/images/snowprint_assets/traits/ui_icon_trait_act_of_faith_01.png';
 import traitAmbush from '@/assets/images/snowprint_assets/traits/ui_icon_trait_ambush_01.png';
@@ -178,6 +215,7 @@ import traitContagions from '@/assets/images/snowprint_assets/traits/ui_icon_tra
 import traitCrushingStrike from '@/assets/images/snowprint_assets/traits/ui_icon_trait_crushing_strike_01.png';
 import traitDaemonic from '@/assets/images/snowprint_assets/traits/ui_icon_trait_daemonic_01.png';
 import traitDakka from '@/assets/images/snowprint_assets/traits/ui_icon_trait_dakka_01.png';
+import traitDecoy from '@/assets/images/snowprint_assets/traits/ui_icon_trait_decoy.png';
 import traitDiminutive from '@/assets/images/snowprint_assets/traits/ui_icon_trait_diminuitive_01.png';
 import traitEmplacement from '@/assets/images/snowprint_assets/traits/ui_icon_trait_emplacement_01.png';
 import traitExplodes from '@/assets/images/snowprint_assets/traits/ui_icon_trait_explodes_01.png';
@@ -202,6 +240,7 @@ import traitObject from '@/assets/images/snowprint_assets/traits/ui_icon_trait_o
 import traitOnlyInDeath from '@/assets/images/snowprint_assets/traits/ui_icon_trait_only_in_death_01.png';
 import traitOverwatch from '@/assets/images/snowprint_assets/traits/ui_icon_trait_overwatch_01.png';
 import traitParry from '@/assets/images/snowprint_assets/traits/ui_icon_trait_parry_01.png';
+import traitPrioritisedEfficiency from '@/assets/images/snowprint_assets/traits/ui_icon_trait_prioritised_efficiency_01.png';
 import traitPsychic from '@/assets/images/snowprint_assets/traits/ui_icon_trait_psychic_01.png';
 import traitPutridExplosion from '@/assets/images/snowprint_assets/traits/ui_icon_trait_putrid_explosion_01.png';
 import traitRangedSpecialist from '@/assets/images/snowprint_assets/traits/ui_icon_trait_ranged_specialist_01.png';
@@ -227,6 +266,146 @@ interface SnowprintIcon {
 }
 
 export const snowprintIcons: Record<string, SnowprintIcon> = {
+    character: {
+        file: character,
+        label: 'Character',
+    },
+    overkill: {
+        file: overkill,
+        label: 'Overkill',
+    },
+    piercingDamage: {
+        file: piercingDamage,
+        label: 'Piercing Damage',
+    },
+    mow: {
+        file: mow,
+        label: 'Machines of War',
+    },
+    tileBarbwire: {
+        file: tileBarbwire,
+        label: 'Barbwire Tile',
+    },
+    tileBrokenIce: {
+        file: tileBrokenIce,
+        label: 'Broken Ice Tile',
+    },
+    tileContaminated: {
+        file: tileContaminated,
+        label: 'Contaminated Tile',
+    },
+    tileDespoiledGround: {
+        file: tileDespoiledGround,
+        label: 'Despoiled Ground Tile',
+    },
+    tileElevation: {
+        file: tileElevation,
+        label: 'Elevation Tile',
+    },
+    tileFire: {
+        file: tileFire,
+        label: 'Fire Tile',
+    },
+    tileIc: {
+        file: tileIc,
+        label: 'Ic Tile',
+    },
+    tileIce: {
+        file: tileIce,
+        label: 'Ice Tile',
+    },
+    tileGrass: {
+        file: tileGrass,
+        label: 'Grass Tile',
+    },
+    tileNormal: {
+        file: tileNormal,
+        label: 'Normal Tile',
+    },
+    tileTrench: {
+        file: tileTrench,
+        label: 'Trench Tile',
+    },
+    effectAnnihilator: {
+        file: effectAnnihilator,
+        label: 'Annihilator Effect',
+    },
+    effectAstartesBanner: {
+        file: effectAstartesBanner,
+        label: 'Astartes Banner Effect',
+    },
+    effectBuff: {
+        file: effectBuff,
+        label: 'Buff Effect',
+    },
+    effectEarlyWarning: {
+        file: effectEarlyWarning,
+        label: 'Early Warning Effect',
+    },
+    effectInfiltrate: {
+        file: effectInfiltrate,
+        label: 'Infiltrate Effect',
+    },
+    effectMarkerlight: {
+        file: effectMarkerlight,
+        label: 'Markerlight Effect',
+    },
+    effectMartialSuperiority: {
+        file: effectMartialSuperiority,
+        label: 'Martial Superiority Effect',
+    },
+    effectMachineVengeance: {
+        file: effectMachineVengeance,
+        label: 'Machine Vengeance Effect',
+    },
+    effectNeuroparasite: {
+        file: effectNeuroparasite,
+        label: 'Neuroparasite Effect',
+    },
+    effectOverwatching: {
+        file: effectOverwatching,
+        label: 'Overwatching Effect',
+    },
+    effectPinned: {
+        file: effectPinned,
+        label: 'Pinned Effect',
+    },
+    effectProphets: {
+        file: effectProphets,
+        label: 'Prophets Effect',
+    },
+    effectRevealed: {
+        file: effectRevealed,
+        label: 'Revealed Effect',
+    },
+    effectShield: {
+        file: effectShield,
+        label: 'Shield Effect',
+    },
+    effectStunned: {
+        file: effectStunned,
+        label: 'Stunned Effect',
+    },
+    effectSynapse: {
+        file: effectSynapse,
+        label: 'Synapse Effect',
+    },
+    effectTaunted: {
+        file: effectTaunted,
+        label: 'Taunted Effect',
+    },
+    allianceChaos: {
+        file: allianceChaos,
+        label: 'Chaos Alliance',
+    },
+    allianceImperial: {
+        file: allianceImperial,
+        label: 'Imperial Alliance',
+    },
+    allianceXenos: {
+        file: allianceXenos,
+        label: 'Xenos Alliance',
+    },
     checkmark: {
         file: checkmark,
         label: 'Checkmark',
@@ -599,6 +778,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: salvage,
         label: 'Salvage',
     },
+    mowAmmo: {
+        file: mowAmmo,
+        label: 'Machines of War Ammo',
+    },
     mythicSalvage: {
         file: mythicSalvage,
         label: 'Mythic Salvage',
@@ -685,6 +868,7 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     traitCrushingStrike: { file: traitCrushingStrike, label: 'Crushing Strike' },
     traitDaemonic: { file: traitDaemonic, label: 'Daemonic' },
     traitDakka: { file: traitDakka, label: 'Dakka' },
+    traitDecoy: { file: traitDecoy, label: 'Decoy' },
     traitDiminutive: { file: traitDiminutive, label: 'Diminutive' },
     traitEmplacement: { file: traitEmplacement, label: 'Emplacement' },
     traitExplodes: { file: traitExplodes, label: 'Explodes' },
@@ -709,6 +893,7 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     traitOnlyInDeath: { file: traitOnlyInDeath, label: 'Only in Death' },
     traitOverwatch: { file: traitOverwatch, label: 'Overwatch' },
     traitParry: { file: traitParry, label: 'Parry' },
+    traitPrioritisedEfficiency: { file: traitPrioritisedEfficiency, label: 'Prioritised Efficiency' },
     traitPsychic: { file: traitPsychic, label: 'Psychic' },
     traitPutridExplosion: { file: traitPutridExplosion, label: 'Putrid Explosion' },
     traitRangedSpecialist: { file: traitRangedSpecialist, label: 'Ranged Specialist' },
@@ -730,4 +915,5 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     warCredits: { file: warCredits, label: 'War Credits' },
     guildCredits: { file: guildCredits, label: 'Guild Credits' },
     archeotech: { file: archeotech, label: 'Archeotech' },
+    coins: { file: coins, label: 'Coins' },
 };
