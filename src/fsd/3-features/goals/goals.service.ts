@@ -543,17 +543,20 @@ export class GoalsService {
             }
 
             if (g.type === PersonalGoalType.UpgradeRank) {
+                const rankStart = Math.max(g.startingRank ?? unit.rank, unit.rank);
+                const rankEnd = g.targetRank!;
+                // Diamond3+ ranks use the appliedUpgrades (partial target) system, not the .5 flag.
+                // Clear any stale point5 so goals saved before the rank changed don't keep a phantom .5.
                 const result: ICharacterUpgradeRankGoal = {
                     type: PersonalGoalType.UpgradeRank,
-                    rankStart: Math.max(g.startingRank ?? unit.rank, unit.rank),
-                    rankEnd: g.targetRank!,
-                    rankPoint5: g.rankPoint5!,
-                    rankStartPoint5: g.startingRankPoint5 ?? false,
+                    rankStart,
+                    rankEnd,
+                    rankPoint5: rankEnd >= Rank.Diamond3 ? false : g.rankPoint5!,
+                    rankStartPoint5: rankStart >= Rank.Diamond3 ? false : (g.startingRankPoint5 ?? false),
                     rankAppliedUpgrades: g.rankAppliedUpgrades ?? 0,
                     rankStartAppliedUpgrades: g.startingRankAppliedUpgrades ?? 0,
                     upgradesRarity: g.upgradesRarity ?? [],
-                    appliedUpgrades:
-                        Math.max(g.startingRank ?? unit.rank, unit.rank) === unit.rank ? unit.upgrades : [],
+                    appliedUpgrades: rankStart === unit.rank ? unit.upgrades : [],
                     level: unit.level,
                     xp: unit.xp,
                     rarity: unit.rarity,
