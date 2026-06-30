@@ -69,6 +69,12 @@ export const CharactersViewControls = ({
             case CharactersFilterBy.CanAscend: {
                 return 'Can Ascend';
             }
+            case CharactersFilterBy.CanPromote: {
+                return 'Can Promote';
+            }
+            case CharactersFilterBy.CanAscendPromote: {
+                return 'Can Ascend/Promote';
+            }
             case CharactersFilterBy.NeedToLevel: {
                 return 'Need to Level';
             }
