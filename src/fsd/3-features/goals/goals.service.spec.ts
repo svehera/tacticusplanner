@@ -125,6 +125,76 @@ describe('Goal service', () => {
             expect(result).toEqual(expectedResult);
         });
 
+        it('clears point5 for Diamond3+ ranks (they use the appliedUpgrades partial-target system)', () => {
+            // Reported bug: a goal set to D2.5 then bumped to D3 stayed "D3.5" with no way to clear it.
+            // Diamond3+ ranks don't use the .5 flag, so a stale point5 must be dropped on conversion.
+            const characterMock: ICharacter2 = {
+                unitType: UnitType.character,
+                id: 'spaceBlackmane',
+                snowprintId: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
+                alliance: Alliance.Imperial,
+                icon: 'path',
+                rank: Rank.Diamond3,
+                upgrades: [] as string[],
+                level: 51,
+                xp: 124,
+                rarity: Rarity.Legendary,
+            } as ICharacter2;
+
+            const goalMock: IPersonalGoal = {
+                id: '124124',
+                character: 'spaceBlackmane',
+                type: PersonalGoalType.UpgradeRank,
+                priority: 1,
+                dailyRaids: false,
+                startingRank: Rank.Diamond3,
+                targetRank: Rank.Adamantine1,
+                rankPoint5: true,
+                startingRankPoint5: true,
+            };
+
+            const result = GoalsService.convertToTypedGoal(goalMock, characterMock) as ICharacterUpgradeRankGoal;
+
+            expect(result.rankPoint5).toBe(false);
+            expect(result.rankStartPoint5).toBe(false);
+        });
+
+        it('preserves point5 for pre-Diamond3 ranks', () => {
+            const characterMock: ICharacter2 = {
+                unitType: UnitType.character,
+                id: 'spaceBlackmane',
+                snowprintId: 'spaceBlackmane',
+                name: 'Ragnar Blackmane',
+                shortName: 'Ragnar',
+                alliance: Alliance.Imperial,
+                icon: 'path',
+                rank: Rank.Bronze1,
+                upgrades: [] as string[],
+                level: 51,
+                xp: 124,
+                rarity: Rarity.Rare,
+            } as ICharacter2;
+
+            const goalMock: IPersonalGoal = {
+                id: '124124',
+                character: 'spaceBlackmane',
+                type: PersonalGoalType.UpgradeRank,
+                priority: 1,
+                dailyRaids: false,
+                startingRank: Rank.Bronze1,
+                targetRank: Rank.Silver1,
+                rankPoint5: true,
+                startingRankPoint5: true,
+            };
+
+            const result = GoalsService.convertToTypedGoal(goalMock, characterMock) as ICharacterUpgradeRankGoal;
+
+            expect(result.rankPoint5).toBe(true);
+            expect(result.rankStartPoint5).toBe(true);
+        });
+
         it('should convert to Unlock object', () => {
             const characterMock: ICharacter2 = {
                 unitType: UnitType.character,
