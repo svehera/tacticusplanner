@@ -261,7 +261,13 @@ export class CampaignsService {
             return false;
         }
 
-        if (upgradesRarity.length > 0 && materialRarity != undefined && !upgradesRarity.includes(materialRarity)) {
+        if (
+            upgradesRarity.length > 0 &&
+            materialRarity != undefined &&
+            materialRarity !== 'Shard' &&
+            materialRarity !== 'Mythic Shard' &&
+            !upgradesRarity.includes(materialRarity)
+        ) {
             return false;
         }
 
