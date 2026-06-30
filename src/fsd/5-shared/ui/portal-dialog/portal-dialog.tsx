@@ -59,7 +59,7 @@ const PortalDialogRoot = ({
 
     return createPortal(
         <div
-            className="fixed inset-0 z-40 flex items-start justify-center overflow-auto bg-black/50 py-8"
+            className="fixed inset-0 z-[200] flex items-start justify-center overflow-auto bg-black/50 py-8"
             onPointerDown={event_ => {
                 pointerDownOnBackdrop.current = event_.target === event_.currentTarget;
             }}
