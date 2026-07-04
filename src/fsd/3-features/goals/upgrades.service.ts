@@ -2309,36 +2309,12 @@ export class UpgradesService {
         preFarmGoal: IPreFarmMaterialForGoalsGoal,
         allGoals: ReadonlyArray<TypedGoalSelect>
     ): number {
-        const upgradeData = FsdUpgradesService.baseUpgradesData[preFarmGoal.upgradeMaterialId];
         let total = 0;
         for (const goalId of preFarmGoal.goalIds) {
             const goal = allGoals.find(g => g.goalId === goalId);
             if (!goal || !goal.include) continue;
-            let upgradeRanks: IUnitUpgradeRank[] | undefined;
-            if (goal.type === PersonalGoalType.UpgradeRank) {
-                upgradeRanks = CharacterUpgradesService.getCharacterUpgradeRank(goal);
-            } else if (goal.type === PersonalGoalType.MowAbilities) {
-                upgradeRanks = this.getMowUpgradeRank(goal);
-            } else {
-                continue;
-            }
-            // Use empty inventory so we get the raw (pre-inventory) demand.
-            const rawMaterials = this.getBaseUpgradesTotal({}, upgradeRanks, undefined, {});
-            const count = rawMaterials[preFarmGoal.upgradeMaterialId] ?? 0;
-            if (count === 0) continue;
-
-            if (
-                'upgradesRarity' in goal &&
-                goal.upgradesRarity &&
-                goal.upgradesRarity.length > 0 &&
-                upgradeData &&
-                upgradeData.rarity !== 'Shard' &&
-                upgradeData.rarity !== 'Mythic Shard' &&
-                !goal.upgradesRarity.includes(upgradeData.rarity as Rarity)
-            )
-                continue;
-
-            total += count;
+            if (goal.type !== PersonalGoalType.UpgradeRank && goal.type !== PersonalGoalType.MowAbilities) continue;
+            total += this.computeRawMaterialCountForGoal(preFarmGoal.upgradeMaterialId, goal);
         }
         return total;
     }

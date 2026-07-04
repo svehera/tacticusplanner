@@ -18,7 +18,7 @@ import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { CharacterRaidGoalSelect, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect, TypedGoalSelect, isUnitlessMaterialGoal } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
@@ -60,7 +60,7 @@ function getNameAndIconForMaterialGoal(goal: IUpgradeMaterialGoal): { name: stri
 }
 
 function getNameAndIcon(goal: TypedGoalSelect): { name: string; icon: string } {
-    if (goal.type === PersonalGoalType.UpgradeMaterial || goal.type === PersonalGoalType.PreFarmMaterialForGoals) {
+    if (isUnitlessMaterialGoal(goal)) {
         if (goal.type === PersonalGoalType.UpgradeMaterial) return getNameAndIconForMaterialGoal(goal);
         const material = FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId);
         return { name: material?.label ?? goal.upgradeMaterialId, icon: material?.icon ?? '' };

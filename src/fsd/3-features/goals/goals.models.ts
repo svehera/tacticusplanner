@@ -46,6 +46,13 @@ export type CharacterRaidGoalSelect =
 
 export type TypedGoalSelect = CharacterRaidGoalSelect | IUpgradeMaterialGoal | IPreFarmMaterialForGoalsGoal;
 
+/** Returns true for goals that have no associated unit (material-farming and pre-farm goals). */
+export function isUnitlessMaterialGoal(
+    goal: TypedGoalSelect
+): goal is IUpgradeMaterialGoal | IPreFarmMaterialForGoalsGoal {
+    return goal.type === PersonalGoalType.UpgradeMaterial || goal.type === PersonalGoalType.PreFarmMaterialForGoals;
+}
+
 /**
  * Personal goal payload for upgrading a character's abilities.
  *

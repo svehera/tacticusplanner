@@ -2,6 +2,7 @@ import { Pause, Play } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { Rank } from '@/fsd/5-shared/model';
+import { Button } from '@/fsd/5-shared/ui';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { PersonalGoalType } from '@/fsd/4-entities/goal';
@@ -110,9 +111,13 @@ export const PreFarmGoalSelector: React.FC<Props> = ({ materialId, allGoals, sel
         <div className="flex flex-col gap-1">
             <div className="flex items-center justify-between">
                 <label className="text-sm font-medium text-(--soft-fg)">Goals that require this material</label>
-                <button type="button" onClick={toggleAll} className="text-xs text-(--primary) hover:underline">
+                <Button
+                    appearance="plain"
+                    size="extra-small"
+                    onPress={toggleAll}
+                    className="text-xs text-(--primary) hover:underline">
                     {allSelected ? 'Deselect all' : 'Select all'}
-                </button>
+                </Button>
             </div>
             <div className="flex flex-col gap-1 rounded-lg border border-(--border) p-2">
                 {eligibleGoals.map(goal => {

@@ -9,7 +9,7 @@ import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { Button, PortalDialog } from '@/fsd/5-shared/ui';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
-import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { TypedGoalSelect, isUnitlessMaterialGoal } from '@/fsd/3-features/goals/goals.models';
 import { RaidsGoal } from '@/fsd/3-features/goals/raids-goal';
 
 interface Props {
@@ -54,19 +54,11 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         const goalToEdit = goals.find(x => x.goalId === goalId);
         if (!goalToEdit) return;
 
-        const unitId =
-            goalToEdit.type === PersonalGoalType.UpgradeMaterial ||
-            goalToEdit.type === PersonalGoalType.PreFarmMaterialForGoals
-                ? undefined
-                : goalToEdit.unitId;
+        const unitId = isUnitlessMaterialGoal(goalToEdit) ? undefined : goalToEdit.unitId;
         const characterToEdit =
             unitId === undefined ? undefined : units.find(x => x.id === unitId || x.snowprintId === unitId);
 
-        if (
-            goalToEdit.type === PersonalGoalType.UpgradeMaterial ||
-            goalToEdit.type === PersonalGoalType.PreFarmMaterialForGoals ||
-            characterToEdit
-        ) {
+        if (isUnitlessMaterialGoal(goalToEdit) || characterToEdit) {
             setEditGoal(goalToEdit);
             setEditUnit(characterToEdit);
         }
