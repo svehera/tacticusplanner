@@ -18,13 +18,28 @@ export function triggerDisabled(base: string, disabled?: boolean): string {
 
 // ─── dropdown panel ──────────────────────────────────────────────────────────
 
-// Panel with anchor positioning (used by Select/SelectMulti Listbox)
+// Panel with anchor positioning (used by Select/SelectMulti Listbox).
+// Portals to the body floating layer, so its z-index is global — it must sit
+// above the dialog overlay (z-200) and the mobile bottom nav (z-100).
+// Gap (offset from trigger) and padding (minimum space from the viewport edge)
+// are passed via the ListboxOptions `anchor` prop, not here — floating-ui then
+// accounts for them in its collision math so a downward-opening dropdown never
+// ends flush against the bottom (under the fixed mobile nav / iOS home-indicator),
+// which made the last option hard to tap. No `mt-*` margin: an untracked margin
+// would push the panel past what floating-ui measured.
 export const panel = [
-    'z-50 mt-2 max-h-[min(60vh,24rem)] w-[var(--button-width)]',
+    'z-[1000] max-h-[min(60vh,24rem)] w-[var(--button-width)]',
     'overflow-y-auto overscroll-contain rounded-lg border border-(--border)',
     'bg-(--overlay) py-1 shadow-xl',
     'transition duration-100 ease-in data-leave:opacity-0',
 ].join(' ');
+
+// Anchor config for the floating (portaled) Listbox panel. `gap` is the offset
+// from the trigger; `padding` is the minimum space kept from every viewport
+// edge, so a downward-opening dropdown stops short of the bottom instead of
+// sitting under the fixed mobile nav / iOS home-indicator (last option was hard
+// to tap). Shared so Select and SelectMulti stay in sync.
+export const panelAnchor = { to: 'bottom start', gap: 8, padding: 24 } as const;
 
 // Panel with absolute positioning (used by ComboBox/ComboBoxMulti)
 export const panelAbsolute = [

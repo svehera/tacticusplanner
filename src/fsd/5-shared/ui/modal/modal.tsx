@@ -6,7 +6,7 @@ import { Dialog } from './dialog';
 
 const modalOverlayStyles = tv({
     base: [
-        'fixed top-0 left-0 isolate z-50 h-(--visual-viewport-height) w-full',
+        'fixed top-0 left-0 isolate z-[200] h-(--visual-viewport-height) w-full',
         'flex items-end justify-end bg-black/50 text-center sm:items-center sm:justify-center',
         '[--visual-viewport-vertical-padding:16px] sm:[--visual-viewport-vertical-padding:32px]',
     ],

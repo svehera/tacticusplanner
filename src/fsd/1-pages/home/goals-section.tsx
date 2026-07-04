@@ -5,7 +5,7 @@ import { isMobile } from 'react-device-detect';
 import { useNavigate } from 'react-router-dom';
 
 import { PersonalGoalType } from 'src/models/enums';
-import { IPersonalGoal } from 'src/models/interfaces';
+import { IDailyRaidsFarmOrder, IPersonalGoal } from 'src/models/interfaces';
 import { menuItemById } from 'src/models/menu-items';
 import { StoreContext } from 'src/reducers/store.provider';
 
@@ -20,6 +20,7 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
+/** Builds the short progress description line shown under a goal (e.g. rank transition, target stars, "Unlock"). */
 function describeGoal(goal: IPersonalGoal, currentRank?: Rank): string {
     switch (goal.type) {
         case PersonalGoalType.UpgradeRank: {
@@ -41,6 +42,7 @@ function describeGoal(goal: IPersonalGoal, currentRank?: Rank): string {
     }
 }
 
+/** Maps a goal type to its short badge label (Rank, Ascend, Unlock, Abilities). */
 function goalTypeLabel(type: PersonalGoalType): string {
     switch (type) {
         case PersonalGoalType.UpgradeRank: {
@@ -62,10 +64,24 @@ function goalTypeLabel(type: PersonalGoalType): string {
     }
 }
 
+/**
+ * Homepage card summarizing the user's top goals with per-goal estimates (energy, tokens, ETA)
+ * and completed/blocked status. Blocked status is computed with the same goal-priority awareness
+ * as the dedicated goals page.
+ */
 export function GoalsSection() {
     const navigate = useNavigate();
-    const { goals, characters, mows, campaignsProgress, inventory, dailyRaids, dailyRaidsPreferences, gameModeTokens } =
-        useContext(StoreContext);
+    const {
+        goals,
+        characters,
+        mows,
+        campaignsProgress,
+        inventory,
+        dailyRaids,
+        dailyRaidsPreferences,
+        gameModeTokens,
+        onslaughtPreferences,
+    } = useContext(StoreContext);
 
     const goalsMenuItem = menuItemById['goals'];
 
@@ -81,8 +97,8 @@ export function GoalsSection() {
     );
 
     const { shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(
-        () => GoalsService.prepareGoals(goals, units, false),
-        [goals, units]
+        () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
+        [goals, units, onslaughtPreferences]
     );
 
     const estimatedUpgradesTotal = useMemo(
@@ -95,6 +111,7 @@ export function GoalsSection() {
                     upgrades: inventory.upgrades,
                     completedLocations: dailyRaids.raidedLocations,
                     onslaughtTokensToday,
+                    onslaughtPreferences,
                 },
                 resolvedCharacters,
                 resolvedMows,
@@ -107,6 +124,7 @@ export function GoalsSection() {
             inventory.upgrades,
             dailyRaids.raidedLocations,
             onslaughtTokensToday,
+            onslaughtPreferences,
             resolvedCharacters,
             resolvedMows,
             upgradeMaterialGoals,
@@ -114,6 +132,8 @@ export function GoalsSection() {
             shardsGoals,
         ]
     );
+
+    const isGoalPriority = dailyRaidsPreferences?.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
 
     const goalsEstimates = useMemo(
         () =>
@@ -123,7 +143,8 @@ export function GoalsSection() {
                 upgradeMaterialGoals,
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
-                resolvedCharacters
+                resolvedCharacters,
+                isGoalPriority
             ),
         [
             estimatedUpgradesTotal,
@@ -132,6 +153,7 @@ export function GoalsSection() {
             upgradeRankOrMowGoals,
             upgradeAbilities,
             resolvedCharacters,
+            isGoalPriority,
         ]
     );
 

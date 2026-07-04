@@ -8,19 +8,20 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { RankSelect, Select } from '@/fsd/5-shared/ui/selects';
 import { Switch } from '@/fsd/5-shared/ui/switch';
 
-const ADAMANTINE_PARTIAL_COUNT = 5; // 5 intermediate XP levels before full rank-up
+const MYTHIC_PARTIAL_COUNT = 5; // 5 intermediate XP levels before full rank-up
 
-function isAdamantine(rank: Rank): boolean {
+/** Diamond3+ ranks use the Mythic partial-upgrade system instead of the .5 flag. */
+function isMythicUpgrade(rank: Rank): boolean {
     return rank >= Rank.Diamond3;
 }
 
 /** Returns the XP level label for D3+ partial option N (1–5) at the given rank. */
-function adamantineLevelLabel(rank: Rank, n: number): string {
+function mythicLevelLabel(rank: Rank, n: number): string {
     const baseLevel = rankToLevel[rank as Rank] ?? 0;
     return `Level ${baseLevel + n - 1}`;
 }
 
-const ADAMANTINE_OPTIONS = [0, ...Array.from({ length: ADAMANTINE_PARTIAL_COUNT }, (_, index) => index + 1)];
+const MYTHIC_OPTIONS = [0, ...Array.from({ length: MYTHIC_PARTIAL_COUNT }, (_, index) => index + 1)];
 
 interface Props {
     allowedValues: Rank[];
@@ -63,9 +64,11 @@ export const RankGoalSelect: React.FC<Props> = ({
     }, [allowedValues, startingRank, rank]);
 
     const handleRankChange = (value: number) => {
-        const newApplied = isAdamantine(value) ? form.appliedUpgrades : 0;
-        onChange(value, form.point5, newApplied);
-        setForm(current => ({ ...current, rank: value, appliedUpgrades: newApplied }));
+        const mythic = isMythicUpgrade(value);
+        const newApplied = mythic ? form.appliedUpgrades : 0;
+        const newPoint5 = mythic ? false : form.point5;
+        onChange(value, newPoint5, newApplied);
+        setForm(current => ({ ...current, rank: value, point5: newPoint5, appliedUpgrades: newApplied }));
     };
 
     const handlePoint5Change = (checked: boolean) => {
@@ -79,9 +82,16 @@ export const RankGoalSelect: React.FC<Props> = ({
     };
 
     const handleStartRankChange = (value: number) => {
-        const newApplied = isAdamantine(value) ? form.startingAppliedUpgrades : 0;
-        onStartChange(value, form.startingPoint5, newApplied);
-        setForm(current => ({ ...current, startingRank: value, startingAppliedUpgrades: newApplied }));
+        const mythic = isMythicUpgrade(value);
+        const newApplied = mythic ? form.startingAppliedUpgrades : 0;
+        const newPoint5 = mythic ? false : form.startingPoint5;
+        onStartChange(value, newPoint5, newApplied);
+        setForm(current => ({
+            ...current,
+            startingRank: value,
+            startingPoint5: newPoint5,
+            startingAppliedUpgrades: newApplied,
+        }));
     };
 
     const handleStartPoint5Change = (checked: boolean) => {
@@ -104,15 +114,15 @@ export const RankGoalSelect: React.FC<Props> = ({
             />
 
             <div className="flex items-center gap-2">
-                {isAdamantine(form.startingRank) ? (
+                {isMythicUpgrade(form.startingRank) ? (
                     <div className="flex-1">
                         <Select<number>
                             label="Upgrades done"
-                            options={ADAMANTINE_OPTIONS}
+                            options={MYTHIC_OPTIONS}
                             value={form.startingAppliedUpgrades}
                             onChange={handleStartAppliedUpgradesChange}
                             renderOption={n =>
-                                n === 0 ? 'None' : `${n} of 6 — ${adamantineLevelLabel(form.startingRank, n)}`
+                                n === 0 ? 'None' : `${n} of 6 — ${mythicLevelLabel(form.startingRank, n)}`
                             }
                         />
                     </div>
@@ -134,15 +144,15 @@ export const RankGoalSelect: React.FC<Props> = ({
             />
 
             <div className="flex items-center gap-2">
-                {isAdamantine(form.rank) ? (
+                {isMythicUpgrade(form.rank) ? (
                     <div className="flex-1">
                         <Select<number>
                             label="Partial target"
-                            options={ADAMANTINE_OPTIONS}
+                            options={MYTHIC_OPTIONS}
                             value={form.appliedUpgrades}
                             onChange={handleAppliedUpgradesChange}
                             renderOption={n =>
-                                n === 0 ? 'None (full rank)' : `${n} of 6 — ${adamantineLevelLabel(form.rank, n)}`
+                                n === 0 ? 'None (full rank)' : `${n} of 6 — ${mythicLevelLabel(form.rank, n)}`
                             }
                         />
                     </div>
@@ -153,8 +163,8 @@ export const RankGoalSelect: React.FC<Props> = ({
                 )}
                 <AccessibleTooltip
                     title={
-                        isAdamantine(form.rank)
-                            ? 'Each Adamantine upgrade unlocks at a successive XP level. Select how many to include in this goal beyond the target rank-up.'
+                        isMythicUpgrade(form.rank)
+                            ? 'Each Mythic upgrade unlocks at a successive XP level. Select how many to include in this goal beyond the target rank-up.'
                             : 'When you reach a target upgrade rank, you are immediately able to apply the top row of three upgrades.\r\nIf you toggle on this switch then these upgrades will be included in your daily raids plan.'
                     }>
                     <Info className="size-5 text-(--primary)" />

@@ -10,6 +10,7 @@ import {
     labelClass,
     optionClassName,
     panel,
+    panelAnchor,
     triggerDisabled,
     triggerSingle,
 } from './select-styles';
@@ -63,7 +64,7 @@ export const Select = <T,>({
                         </span>
                     </ListboxButton>
 
-                    <ListboxOptions transition anchor="bottom start" className={panel}>
+                    <ListboxOptions transition anchor={panelAnchor} className={panel}>
                         {options.map((option, index) => (
                             <ListboxOption key={index} value={option} className={optionClassName}>
                                 {({ selected }) => (
