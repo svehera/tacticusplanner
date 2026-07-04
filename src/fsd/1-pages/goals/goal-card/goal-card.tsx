@@ -21,6 +21,7 @@ import { GoalCardActions } from './actions';
 import { GoalCardAscend } from './ascend';
 import { GoalCardCharacterAbilities } from './character-abilities';
 import { GoalCardMowAbilities } from './mow-abilities';
+import { GoalCardPreFarmMaterial } from './pre-farm-material';
 import { GoalCardUnlock } from './unlock';
 import { GoalCardUpgradeMaterial } from './upgrade-material';
 import { GoalCardUpgradeRank } from './upgrade-rank';
@@ -29,7 +30,8 @@ import { GoalCardUpgradeRank } from './upgrade-rank';
 const showRaidsButton = (goal: TypedGoalSelect): boolean =>
     goal.type === PersonalGoalType.UpgradeRank ||
     goal.type === PersonalGoalType.MowAbilities ||
-    goal.type === PersonalGoalType.UpgradeMaterial;
+    goal.type === PersonalGoalType.UpgradeMaterial ||
+    goal.type === PersonalGoalType.PreFarmMaterialForGoals;
 
 interface Props {
     goal: TypedGoalSelect;
@@ -98,6 +100,9 @@ export const GoalCard: React.FC<Props> = ({
             case PersonalGoalType.UpgradeMaterial: {
                 return <GoalCardUpgradeMaterial goalEstimate={goalEstimate} calendarDate={calendarDate} />;
             }
+            case PersonalGoalType.PreFarmMaterialForGoals: {
+                return <GoalCardPreFarmMaterial goalEstimate={goalEstimate} calendarDate={calendarDate} />;
+            }
         }
     };
 
@@ -121,7 +126,7 @@ export const GoalCard: React.FC<Props> = ({
             };
 
     const material =
-        goal.type === PersonalGoalType.UpgradeMaterial
+        goal.type === PersonalGoalType.UpgradeMaterial || goal.type === PersonalGoalType.PreFarmMaterialForGoals
             ? UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)
             : undefined;
 
@@ -133,7 +138,8 @@ export const GoalCard: React.FC<Props> = ({
             <div className="grid grid-cols-[auto_1fr_auto] items-center gap-x-3 border-b border-(--card-border) px-4 py-3">
                 <div className="flex items-center gap-1">
                     <span className="text-[1.35rem] leading-none font-semibold text-(--soft-fg)">#{goal.priority}</span>
-                    {goal.type === PersonalGoalType.UpgradeMaterial && (
+                    {(goal.type === PersonalGoalType.UpgradeMaterial ||
+                        goal.type === PersonalGoalType.PreFarmMaterialForGoals) && (
                         <UpgradeImage
                             material={goal.upgradeMaterialId}
                             iconPath={material?.icon ?? ''}
@@ -141,16 +147,20 @@ export const GoalCard: React.FC<Props> = ({
                             size={40}
                         />
                     )}
-                    {goal.type !== PersonalGoalType.UpgradeMaterial && (
-                        <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
-                    )}
+                    {goal.type !== PersonalGoalType.UpgradeMaterial &&
+                        goal.type !== PersonalGoalType.PreFarmMaterialForGoals && (
+                            <UnitShardIcon icon={goal.unitRoundIcon} height={40} />
+                        )}
                 </div>
                 <div className="flex min-w-0 flex-col">
                     <span className="text-[1.05rem] leading-snug font-semibold text-(--fg)">
-                        {goal.type === PersonalGoalType.UpgradeMaterial && (
+                        {(goal.type === PersonalGoalType.UpgradeMaterial ||
+                            goal.type === PersonalGoalType.PreFarmMaterialForGoals) && (
                             <span>{UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.material}</span>
                         )}
-                        {goal.type !== PersonalGoalType.UpgradeMaterial && (goal.unitName ?? goal.unitId)}
+                        {goal.type !== PersonalGoalType.UpgradeMaterial &&
+                            goal.type !== PersonalGoalType.PreFarmMaterialForGoals &&
+                            (goal.unitName ?? goal.unitId)}
                     </span>
                     {calendarDate && <span className="text-xs text-(--soft-fg)">{calendarDate}</span>}
                 </div>
@@ -203,7 +213,8 @@ export const GoalCard: React.FC<Props> = ({
                             {showRaidsButton(goal) && (
                                 <GoToRaidsButton
                                     unitId={
-                                        goal.type === PersonalGoalType.UpgradeMaterial
+                                        goal.type === PersonalGoalType.UpgradeMaterial ||
+                                        goal.type === PersonalGoalType.PreFarmMaterialForGoals
                                             ? goal.upgradeMaterialId
                                             : goal.unitId
                                     }

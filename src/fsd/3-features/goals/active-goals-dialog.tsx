@@ -54,11 +54,19 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         const goalToEdit = goals.find(x => x.goalId === goalId);
         if (!goalToEdit) return;
 
-        const unitId = goalToEdit.type === PersonalGoalType.UpgradeMaterial ? undefined : goalToEdit.unitId;
+        const unitId =
+            goalToEdit.type === PersonalGoalType.UpgradeMaterial ||
+            goalToEdit.type === PersonalGoalType.PreFarmMaterialForGoals
+                ? undefined
+                : goalToEdit.unitId;
         const characterToEdit =
             unitId === undefined ? undefined : units.find(x => x.id === unitId || x.snowprintId === unitId);
 
-        if (goalToEdit.type === PersonalGoalType.UpgradeMaterial || characterToEdit) {
+        if (
+            goalToEdit.type === PersonalGoalType.UpgradeMaterial ||
+            goalToEdit.type === PersonalGoalType.PreFarmMaterialForGoals ||
+            characterToEdit
+        ) {
             setEditGoal(goalToEdit);
             setEditUnit(characterToEdit);
         }
@@ -76,6 +84,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
         return currentSelected !== initialSelected;
     }, [currentGoalsSelect, goals]);
 
+    const preFarmGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.PreFarmMaterialForGoals);
     const upgradeMaterialGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeMaterial);
     const upgradeRankGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.UpgradeRank);
     const upgradeMowGoals = currentGoalsSelect.filter(x => x.type === PersonalGoalType.MowAbilities);
@@ -155,6 +164,7 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
                         {ascendGoals.length > 0 && renderGoalsGroup('Ascend/Promote', ascendGoals)}
                         {unlockGoals.length > 0 && renderGoalsGroup('Unlock', unlockGoals)}
                         {upgradeMaterialGoals.length > 0 && renderGoalsGroup('Upgrade Material', upgradeMaterialGoals)}
+                        {preFarmGoals.length > 0 && renderGoalsGroup('Pre-farm Material', preFarmGoals)}
                     </div>
                 </PortalDialog.Body>
 
@@ -175,11 +185,14 @@ export const ActiveGoalsDialog: React.FC<Props> = ({ goals, units, onGoalsSelect
             </PortalDialog>
 
             {editGoal !== undefined &&
-                (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (
+                (editUnit !== undefined ||
+                    editGoal.type === PersonalGoalType.UpgradeMaterial ||
+                    editGoal.type === PersonalGoalType.PreFarmMaterialForGoals) && (
                     <EditGoalDialog
                         isOpen={true}
                         goal={editGoal}
                         unit={editUnit}
+                        allGoals={goals}
                         onClose={() => {
                             setEditGoal(undefined);
                         }}

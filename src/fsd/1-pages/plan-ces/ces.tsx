@@ -60,7 +60,11 @@ function getNameAndIconForMaterialGoal(goal: IUpgradeMaterialGoal): { name: stri
 }
 
 function getNameAndIcon(goal: TypedGoalSelect): { name: string; icon: string } {
-    if (goal.type === PersonalGoalType.UpgradeMaterial) return getNameAndIconForMaterialGoal(goal);
+    if (goal.type === PersonalGoalType.UpgradeMaterial || goal.type === PersonalGoalType.PreFarmMaterialForGoals) {
+        if (goal.type === PersonalGoalType.UpgradeMaterial) return getNameAndIconForMaterialGoal(goal);
+        const material = FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId);
+        return { name: material?.label ?? goal.upgradeMaterialId, icon: material?.icon ?? '' };
+    }
     return getNameAndIconForCharGoal(goal);
 }
 
@@ -84,7 +88,7 @@ export const CEs = () => {
 
     const [showAllBattles, setShowAllBattles] = useState(false);
 
-    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(
+    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, preFarmGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false),
         [goals, units]
     );
@@ -98,6 +102,7 @@ export const CEs = () => {
         () => upgradeRankOrMowGoals.filter(x => x.include),
         [upgradeRankOrMowGoals]
     );
+    const includedPreFarmGoals = useMemo(() => preFarmGoals.filter(x => x.include), [preFarmGoals]);
 
     const handleGoalsSelectionChange = useCallback(
         (selection: TypedGoalSelect[]) => {
@@ -127,7 +132,12 @@ export const CEs = () => {
             },
             chars,
             mows,
-            ...[includedUpgradeMaterialGoals, includedUpgradeRankOrMowGoals, includedShardsGoals].flat()
+            ...[
+                includedPreFarmGoals,
+                includedUpgradeMaterialGoals,
+                includedUpgradeRankOrMowGoals,
+                includedShardsGoals,
+            ].flat()
         );
     }, [
         dailyRaidsPreferences,
@@ -137,6 +147,7 @@ export const CEs = () => {
         onslaughtTokensToday,
         chars,
         mows,
+        includedPreFarmGoals,
         includedUpgradeMaterialGoals,
         includedUpgradeRankOrMowGoals,
         includedShardsGoals,

@@ -18,7 +18,7 @@ import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } fro
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { ICharacter2, IUnitShards } from '@/fsd/4-entities/character/model';
-import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
+import { IPreFarmMaterialForGoalsGoal, IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { IMow2, mows2Data, MowsService } from '@/fsd/4-entities/mow';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 import {
@@ -41,6 +41,7 @@ import {
     IUnitUpgrade,
     IUpgradeRaid,
     IUpgradesRaidsDay,
+    TypedGoalSelect,
 } from '@/fsd/3-features/goals/goals.models';
 
 import { getOnslaughtRewardMidpoint } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
@@ -125,6 +126,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         Map<string, number>
     >();
@@ -142,6 +144,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >
     ): Map<string, number> {
         const cached = this.goalPriorityByIdCache.get(goals);
@@ -178,6 +181,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         cache: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
     ): void {
@@ -305,19 +309,23 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >
     ): IEstimatedUpgrades {
         performance.mark('getUpgradesEstimatedDays-start');
         const inventoryUpgrades = this.canonicalizeInventoryUpgrades(settings.upgrades, chars, mows);
 
-        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, chars, mows, goals);
+        const isGoalPriorityMode = settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
+        const goalsForUpgrades = goals;
+
+        const unitsUpgrades = this.getUpgrades(inventoryUpgrades, chars, mows, goalsForUpgrades);
 
         const combinedBaseMaterials = this.combineBaseMaterials(unitsUpgrades);
 
         this.populateLocationsData(combinedBaseMaterials, settings);
 
         this.removeLocationsForOnslaughtOnlyGoals(
-            goals,
+            goalsForUpgrades,
             Object.values(combinedBaseMaterials).flatMap(x => x.locations)
         );
 
@@ -332,13 +340,13 @@ export class UpgradesService {
             }
         >();
 
-        this.precomputeHigherPriorityNeeds(combinedBaseMaterials, goals, remainingNeededCache);
+        this.precomputeHigherPriorityNeeds(combinedBaseMaterials, goalsForUpgrades, remainingNeededCache);
 
         const { upgradesRaids, remainingMats } = this.generateDailyRaidsList(
             settings,
             chars,
             mows,
-            goals,
+            goalsForUpgrades,
             combinedBaseMaterials,
             inventoryUpgrades,
             remainingNeededCache
@@ -368,9 +376,9 @@ export class UpgradesService {
             };
         });
 
-        const isGoalPriority = settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.goalPriority;
+        const isGoalPriority = isGoalPriorityMode;
         const goalPriorityEstimates = isGoalPriority
-            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goals, chars, mows)
+            ? this.getGoalPriorityEstimates(combinedBaseMaterials, inventoryUpgrades, goalsForUpgrades, chars, mows)
             : undefined;
 
         const finishedMaterials = isGoalPriority
@@ -450,6 +458,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >
     ): boolean {
         if (!mat.id.startsWith('shards_') && !mat.id.startsWith('mythicShards_')) {
@@ -458,12 +467,15 @@ export class UpgradesService {
             // We have shard goals but no place to farm them, check for onslaught.
             const rawGoal = goals.find(goal => mat.relatedGoals.find(relatedGoal => goal.goalId === relatedGoal));
             if (rawGoal === undefined) return false;
-            if (rawGoal.type === PersonalGoalType.UpgradeMaterial) {
+            if (
+                rawGoal.type === PersonalGoalType.UpgradeMaterial ||
+                rawGoal.type === PersonalGoalType.PreFarmMaterialForGoals
+            ) {
                 return mat.locations.some(loc => loc.isSuggested);
             }
             const goal = rawGoal as Exclude<
                 ICharacterUpgradeRankGoal | ICharacterUpgradeMow | ICharacterAscendGoal | ICharacterUnlockGoal,
-                IUpgradeMaterialGoal
+                IUpgradeMaterialGoal | IPreFarmMaterialForGoalsGoal
             >;
             if (goal === undefined || goal.type === PersonalGoalType.Unlock) {
                 // we either don't have a goal, or we have an unlock goal that we can't farm, so the goal is blocked.
@@ -569,6 +581,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         locs: ICampaignBattleComposed[]
     ): void {
@@ -630,6 +643,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventoryUpgrades: Record<string, number>,
@@ -757,6 +771,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
@@ -857,6 +872,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         remainingMats: Record<string, ICombinedUpgrade>
     ): Map<string, GoalPriorityLocationsState> | undefined {
@@ -911,6 +927,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         remainingNeededCache: Map<
             string,
@@ -1026,7 +1043,10 @@ export class UpgradesService {
                 for (const loc of sortedCandidateLocs) {
                     if (energy < minEnergy) break;
                     const raidKey = `${loc.rewards.potential[0].id}::${goal.goalId}`;
-                    const unitId = goal.type === PersonalGoalType.UpgradeMaterial ? '' : goal.unitId;
+                    const isUnitless =
+                        goal.type === PersonalGoalType.UpgradeMaterial ||
+                        goal.type === PersonalGoalType.PreFarmMaterialForGoals;
+                    const unitId = isUnitless ? '' : goal.unitId;
                     energy = this.raidLocation(
                         day,
                         energy,
@@ -1072,6 +1092,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         goalId: string | undefined,
         options: { raidKey?: string; goal?: { goalId: string; unitId: string } } | undefined,
@@ -1211,6 +1232,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         goalId: string | undefined,
         options: { raidKey?: string; goal?: { goalId: string; unitId: string } } | undefined,
@@ -1300,6 +1322,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         goalId: string | undefined,
         cache?: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
@@ -1372,6 +1395,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         cache?: Map<string, { neededByHigherPriorityGoals: number; stillNeededForGoal: number; totalRemaining: number }>
     ): string | undefined {
@@ -1421,6 +1445,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         highestPriorityGoalId?: string,
         cache: Map<
@@ -1459,6 +1484,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
@@ -1547,6 +1573,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         combinedBaseMaterials: Record<string, ICombinedUpgrade>,
         inventory: Record<string, number>,
@@ -2247,6 +2274,76 @@ export class UpgradesService {
     }
 
     /**
+    /** Returns how many of `materialId` a single rank-up or MoW goal requires, ignoring inventory. */
+    public static computeRawMaterialCountForGoal(
+        materialId: string,
+        goal: ICharacterUpgradeRankGoal | ICharacterUpgradeMow
+    ): number {
+        const upgradeRanks =
+            goal.type === PersonalGoalType.UpgradeRank
+                ? CharacterUpgradesService.getCharacterUpgradeRank(goal)
+                : this.getMowUpgradeRank(goal);
+        const rawMaterials = this.getBaseUpgradesTotal({}, upgradeRanks, undefined, {});
+        const count = rawMaterials[materialId] ?? 0;
+        if (count === 0) return 0;
+
+        if (goal.upgradesRarity && goal.upgradesRarity.length > 0) {
+            const upgradeData = FsdUpgradesService.baseUpgradesData[materialId];
+            if (
+                upgradeData &&
+                upgradeData.rarity !== 'Shard' &&
+                upgradeData.rarity !== 'Mythic Shard' &&
+                !goal.upgradesRarity.includes(upgradeData.rarity as Rarity)
+            )
+                return 0;
+        }
+
+        return count;
+    }
+
+    /**
+     * Sums the raw (inventory-independent) count of a specific material across all active rank-up/MoW
+     * goals referenced by a pre-farm goal. Used to compute how much to farm for that pre-farm goal.
+     */
+    public static computeRawDemandForPreFarmGoal(
+        preFarmGoal: IPreFarmMaterialForGoalsGoal,
+        allGoals: ReadonlyArray<TypedGoalSelect>
+    ): number {
+        const upgradeData = FsdUpgradesService.baseUpgradesData[preFarmGoal.upgradeMaterialId];
+        let total = 0;
+        for (const goalId of preFarmGoal.goalIds) {
+            const goal = allGoals.find(g => g.goalId === goalId);
+            if (!goal || !goal.include) continue;
+            let upgradeRanks: IUnitUpgradeRank[] | undefined;
+            if (goal.type === PersonalGoalType.UpgradeRank) {
+                upgradeRanks = CharacterUpgradesService.getCharacterUpgradeRank(goal);
+            } else if (goal.type === PersonalGoalType.MowAbilities) {
+                upgradeRanks = this.getMowUpgradeRank(goal);
+            } else {
+                continue;
+            }
+            // Use empty inventory so we get the raw (pre-inventory) demand.
+            const rawMaterials = this.getBaseUpgradesTotal({}, upgradeRanks, undefined, {});
+            const count = rawMaterials[preFarmGoal.upgradeMaterialId] ?? 0;
+            if (count === 0) continue;
+
+            if (
+                'upgradesRarity' in goal &&
+                goal.upgradesRarity &&
+                goal.upgradesRarity.length > 0 &&
+                upgradeData &&
+                upgradeData.rarity !== 'Shard' &&
+                upgradeData.rarity !== 'Mythic Shard' &&
+                !goal.upgradesRarity.includes(upgradeData.rarity as Rarity)
+            )
+                continue;
+
+            total += count;
+        }
+        return total;
+    }
+
+    /**
      * Computes and returns a list of unit upgrades, one per goal, based on the provided inventory and goal definitions.
      *
      * This method processes each goal, determines the required upgrade ranks, filters upgrades by rarity if specified,
@@ -2269,11 +2366,48 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >
     ): IUnitUpgrade[] {
         const result: IUnitUpgrade[] = [];
         const clonedUpgrades = { ...inventoryUpgrades };
+
+        // Pre-pass: for each active pre-farm goal, record which material it covers for each active referenced goal.
+        // This prevents the referenced rank-up/MoW goals from double-counting those materials.
+        const materialCoveredByPreFarm = new Map<string, Set<string>>(); // referencedGoalId → Set<materialId>
         for (const goal of goals) {
+            if (goal.type !== PersonalGoalType.PreFarmMaterialForGoals || !goal.include) continue;
+            for (const referencedGoalId of goal.goalIds) {
+                const referencedGoal = goals.find(g => g.goalId === referencedGoalId);
+                if (!referencedGoal?.include) continue;
+                const covered = materialCoveredByPreFarm.get(referencedGoalId) ?? new Set<string>();
+                covered.add(goal.upgradeMaterialId);
+                materialCoveredByPreFarm.set(referencedGoalId, covered);
+            }
+        }
+
+        for (const goal of goals) {
+            // Pre-farm goals: compute raw demand from all active referenced goals, inject farmed amount
+            // back into clonedUpgrades so subsequent goals see it as available inventory.
+            if (goal.type === PersonalGoalType.PreFarmMaterialForGoals) {
+                if (!goal.include) continue;
+                const rawDemand = this.computeRawDemandForPreFarmGoal(goal, goals);
+                const materialLabel = FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.label ?? '';
+                result.push({
+                    goalId: goal.goalId,
+                    unitId: '',
+                    label: materialLabel,
+                    upgradeMaterials: {},
+                    upgradeRanks: [],
+                    upgradeShards: undefined,
+                    baseUpgradesTotal: { [goal.upgradeMaterialId]: rawDemand },
+                    relatedUpgrades: [],
+                });
+                // Inject the total demand into clonedUpgrades: subsequent goals see the pre-farmed amount.
+                clonedUpgrades[goal.upgradeMaterialId] = (clonedUpgrades[goal.upgradeMaterialId] ?? 0) + rawDemand;
+                continue;
+            }
+
             const upgradeMaterials = (() => {
                 if (goal.type !== PersonalGoalType.UpgradeMaterial) return {};
                 return { [goal.upgradeMaterialId]: goal.quantity };
@@ -2310,6 +2444,14 @@ export class UpgradesService {
                 clonedUpgrades
             );
 
+            // Remove materials already managed by an active pre-farm goal for this goal.
+            const coveredMaterials = materialCoveredByPreFarm.get(goal.goalId);
+            if (coveredMaterials) {
+                for (const materialId of coveredMaterials) {
+                    delete baseUpgradesTotal[materialId];
+                }
+            }
+
             if ('upgradesRarity' in goal && goal.upgradesRarity && goal.upgradesRarity.length > 0) {
                 // remove upgrades that do not match to selected rarities
                 for (const upgradeId in baseUpgradesTotal) {
@@ -2338,13 +2480,13 @@ export class UpgradesService {
                 return result;
             });
 
+            const isUnitlessGoal = goal.type === PersonalGoalType.UpgradeMaterial;
             result.push({
                 goalId: goal.goalId,
-                unitId: goal.type === PersonalGoalType.UpgradeMaterial ? '' : goal.unitId,
-                label:
-                    goal.type === PersonalGoalType.UpgradeMaterial
-                        ? (FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.label ?? '')
-                        : goal.unitName,
+                unitId: isUnitlessGoal ? '' : goal.unitId,
+                label: isUnitlessGoal
+                    ? (FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId)?.label ?? '')
+                    : goal.unitName,
                 upgradeMaterials,
                 upgradeRanks,
                 upgradeShards,
@@ -2429,6 +2571,7 @@ export class UpgradesService {
             | ICharacterAscendGoal
             | ICharacterUnlockGoal
             | IUpgradeMaterialGoal
+            | IPreFarmMaterialForGoalsGoal
         >,
         chars: ICharacter2[],
         mows: IMow2[]
@@ -2453,7 +2596,11 @@ export class UpgradesService {
                     requiredCount,
                     countByGoalId: { [goal.goalId]: requiredCount },
                     relatedGoals: [goal.goalId],
-                    relatedCharacters: goal.type === PersonalGoalType.UpgradeMaterial ? [] : [goal.unitId],
+                    relatedCharacters:
+                        goal.type === PersonalGoalType.UpgradeMaterial ||
+                        goal.type === PersonalGoalType.PreFarmMaterialForGoals
+                            ? []
+                            : [goal.unitId],
                 };
 
                 const estimate = this.getUpgradeEstimate(perGoalUpgrade, requiredCount, acquiredCount);

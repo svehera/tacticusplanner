@@ -199,10 +199,8 @@ const GoalCardShowcase = () => {
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const units = useMemo(() => [...resolvedChars, ...resolvedMows], [resolvedChars, resolvedMows]);
 
-    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals } = useMemo(
-        () => GoalsService.prepareGoals(goals, units, false),
-        [goals, units]
-    );
+    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals, preFarmGoals } =
+        useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
 
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
@@ -246,7 +244,9 @@ const GoalCardShowcase = () => {
                 upgradeMaterialGoals,
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
-                resolvedChars
+                resolvedChars,
+                undefined,
+                preFarmGoals
             ),
         [
             estimatedUpgradesTotal,
@@ -255,6 +255,7 @@ const GoalCardShowcase = () => {
             upgradeRankOrMowGoals,
             upgradeAbilities,
             resolvedChars,
+            preFarmGoals,
         ]
     );
 
@@ -1242,7 +1243,8 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                     data.type === PersonalGoalType.MowAbilities ||
                     data.type === PersonalGoalType.UpgradeMaterial;
                 const raidsUnitId =
-                    data.type === PersonalGoalType.UpgradeMaterial
+                    data.type === PersonalGoalType.UpgradeMaterial ||
+                    data.type === PersonalGoalType.PreFarmMaterialForGoals
                         ? (data.upgradeMaterialId ?? data.goalId)
                         : data.unitId;
                 const isActive = data.include !== false;
@@ -1292,7 +1294,10 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             valueGetter: params => {
                 const data = params.data;
                 if (!data) return '';
-                return data.type === PersonalGoalType.UpgradeMaterial ? data.upgradeMaterialId : data.unitName;
+                return data.type === PersonalGoalType.UpgradeMaterial ||
+                    data.type === PersonalGoalType.PreFarmMaterialForGoals
+                    ? data.upgradeMaterialId
+                    : data.unitName;
             },
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
@@ -1300,7 +1305,10 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                 let portrait: React.ReactNode;
                 let name: string;
                 let subline: string;
-                if (data.type === PersonalGoalType.UpgradeMaterial) {
+                if (
+                    data.type === PersonalGoalType.UpgradeMaterial ||
+                    data.type === PersonalGoalType.PreFarmMaterialForGoals
+                ) {
                     const mat = UpgradeEntityService.getUpgradeMaterial(data.upgradeMaterialId);
                     portrait = mat ? (
                         <UpgradeImage
@@ -1312,7 +1320,7 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
                         />
                     ) : undefined;
                     name = mat?.label ?? '';
-                    subline = 'Material';
+                    subline = data.type === PersonalGoalType.PreFarmMaterialForGoals ? 'Pre-farm' : 'Material';
                 } else {
                     portrait = (
                         <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
@@ -1703,7 +1711,12 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
                 const est = goalsEstimates.find(x => x.goalId === data?.goalId);
-                if (!data || !est?.orbsEstimate || data.type === PersonalGoalType.UpgradeMaterial) {
+                if (
+                    !data ||
+                    !est?.orbsEstimate ||
+                    data.type === PersonalGoalType.UpgradeMaterial ||
+                    data.type === PersonalGoalType.PreFarmMaterialForGoals
+                ) {
                     return (
                         <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
                             —
@@ -1923,8 +1936,15 @@ const GoalsTableShowcase = () => {
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const units = useMemo(() => [...resolvedChars, ...resolvedMows], [resolvedChars, resolvedMows]);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals } =
-        useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
+    const {
+        allGoals,
+        shardsGoals,
+        upgradeRankOrMowGoals,
+        upgradeMaterialGoals,
+        upgradeAbilities,
+        ascendGoals,
+        preFarmGoals,
+    } = useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
 
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
@@ -1968,7 +1988,9 @@ const GoalsTableShowcase = () => {
                 upgradeMaterialGoals,
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
-                resolvedChars
+                resolvedChars,
+                undefined,
+                preFarmGoals
             ),
         [
             estimatedUpgradesTotal,
@@ -1977,6 +1999,7 @@ const GoalsTableShowcase = () => {
             upgradeRankOrMowGoals,
             upgradeAbilities,
             resolvedChars,
+            preFarmGoals,
         ]
     );
 

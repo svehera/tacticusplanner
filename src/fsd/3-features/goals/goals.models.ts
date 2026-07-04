@@ -19,7 +19,7 @@ import {
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
 } from '@/fsd/4-entities/goal';
-import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
+import { IPreFarmMaterialForGoalsGoal, IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 import {
@@ -44,7 +44,7 @@ export type CharacterRaidGoalSelect =
     | ICharacterUpgradeMow
     | ICharacterUpgradeAbilities;
 
-export type TypedGoalSelect = CharacterRaidGoalSelect | IUpgradeMaterialGoal;
+export type TypedGoalSelect = CharacterRaidGoalSelect | IUpgradeMaterialGoal | IPreFarmMaterialForGoalsGoal;
 
 /**
  * Personal goal payload for upgrading a character's abilities.

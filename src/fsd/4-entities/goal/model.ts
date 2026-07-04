@@ -37,6 +37,12 @@ export interface IUpgradeMaterialGoal extends IGenericGoal {
     quantity: number;
 }
 
+export interface IPreFarmMaterialForGoalsGoal extends IGenericGoal {
+    type: PersonalGoalType.PreFarmMaterialForGoals;
+    upgradeMaterialId: string;
+    goalIds: string[];
+}
+
 export interface ICharacterUpgradeMow extends ICharacterRaidGoalSelectBase {
     type: PersonalGoalType.MowAbilities;
 

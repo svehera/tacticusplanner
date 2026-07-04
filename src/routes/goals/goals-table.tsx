@@ -451,7 +451,10 @@ export const GoalsTable: React.FC<Props> = ({
                 cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                     const { data } = params;
                     if (data) {
-                        if (data.type === PersonalGoalType.UpgradeMaterial) {
+                        if (
+                            data.type === PersonalGoalType.UpgradeMaterial ||
+                            data.type === PersonalGoalType.PreFarmMaterialForGoals
+                        ) {
                             const mat = UpgradesService.getUpgradeMaterial(data.upgradeMaterialId);
                             if (mat !== undefined) {
                                 return (

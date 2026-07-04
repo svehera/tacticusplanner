@@ -70,7 +70,7 @@ export const DailyRaids = () => {
         [inventory.upgrades, storeCharacters, resolvedMows]
     );
     const units = useMemo(() => [...storeCharacters, ...resolvedMows], [storeCharacters, resolvedMows]);
-    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(() => {
+    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, preFarmGoals } = useMemo(() => {
         return GoalsService.prepareGoals(goals, units, true, onslaughtPreferences);
     }, [goals, units, onslaughtPreferences]);
 
@@ -138,6 +138,7 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
+            ...preFarmGoals,
             ...upgradeMaterialGoals,
             ...upgradeRankOrMowGoals,
             ...shardsGoals
@@ -155,6 +156,7 @@ export const DailyRaids = () => {
         campaignsProgress,
         gameModeTokens,
         upgradeMaterialGoals,
+        preFarmGoals,
         onslaughtPreferences,
     ]);
 
@@ -172,6 +174,7 @@ export const DailyRaids = () => {
             },
             resolvedCharacters,
             resolvedMows,
+            ...preFarmGoals,
             ...upgradeMaterialGoals,
             ...upgradeRankOrMowGoals,
             ...shardsGoals
@@ -190,6 +193,7 @@ export const DailyRaids = () => {
         gameModeTokens,
         onslaughtPreferences,
         upgradeMaterialGoals,
+        preFarmGoals,
     ]);
 
     const mowCounts = useMemo(
