@@ -19,7 +19,7 @@ import {
     ICharacterUpgradeMow,
     ICharacterUpgradeRankGoal,
 } from '@/fsd/4-entities/goal';
-import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
+import { IPreFarmMaterialForGoalsGoal, IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { IBaseUpgrade } from '@/fsd/4-entities/upgrade';
 
 import {
@@ -44,7 +44,14 @@ export type CharacterRaidGoalSelect =
     | ICharacterUpgradeMow
     | ICharacterUpgradeAbilities;
 
-export type TypedGoalSelect = CharacterRaidGoalSelect | IUpgradeMaterialGoal;
+export type TypedGoalSelect = CharacterRaidGoalSelect | IUpgradeMaterialGoal | IPreFarmMaterialForGoalsGoal;
+
+/** Returns true for goals that have no associated unit (material-farming and pre-farm goals). */
+export function isUnitlessMaterialGoal(
+    goal: TypedGoalSelect
+): goal is IUpgradeMaterialGoal | IPreFarmMaterialForGoalsGoal {
+    return goal.type === PersonalGoalType.UpgradeMaterial || goal.type === PersonalGoalType.PreFarmMaterialForGoals;
+}
 
 /**
  * Personal goal payload for upgrading a character's abilities.

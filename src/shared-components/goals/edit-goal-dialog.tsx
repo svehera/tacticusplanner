@@ -29,15 +29,21 @@ import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characte
 import { ICharacterAscendGoal, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
+import { PreFarmGoalSelector } from './pre-farm-goal-selector';
+
+const GOAL_EDIT_TITLE: Partial<Record<PersonalGoalType, string>> = {
+    [PersonalGoalType.PreFarmMaterialForGoals]: 'Pre-Farm Goal',
+};
 
 interface Props {
     isOpen: boolean;
     goal: TypedGoalSelect;
     unit: IUnit | undefined;
+    allGoals?: TypedGoalSelect[];
     onClose?: (goal?: TypedGoalSelect) => void;
 }
 
-export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit }) => {
+export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, allGoals }) => {
     const { goals, campaignsProgress, inventory, onslaughtPreferences } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
 
@@ -52,6 +58,11 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
             if (updatedGoal.type === PersonalGoalType.UpgradeMaterial) {
                 const material = UpgradesService.getUpgradeMaterial(updatedGoal.upgradeMaterialId);
                 enqueueSnackbar(`Goal for ${material?.material ?? 'unknown material'} was updated`, {
+                    variant: 'success',
+                });
+            } else if (updatedGoal.type === PersonalGoalType.PreFarmMaterialForGoals) {
+                const material = UpgradesService.getUpgradeMaterial(updatedGoal.upgradeMaterialId);
+                enqueueSnackbar(`Pre-farm goal for ${material?.material ?? 'material'} was updated`, {
                     variant: 'success',
                 });
             } else {
@@ -116,7 +127,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         .map(x => x.id);
 
     const material =
-        form.type === PersonalGoalType.UpgradeMaterial
+        form.type === PersonalGoalType.UpgradeMaterial || form.type === PersonalGoalType.PreFarmMaterialForGoals
             ? UpgradesService.getUpgradeMaterial(form.upgradeMaterialId)
             : undefined;
 
@@ -124,14 +135,18 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
         <PortalDialog open={openDialog} onClose={() => handleClose()} aria-label="Edit goal">
             <PortalDialog.Header>
                 <div className="flex items-center gap-2">
-                    <span>Edit {PersonalGoalType[goal.type]} Goal</span>
-                    {goal.type === PersonalGoalType.UpgradeMaterial ? (
-                        <UpgradeImage
-                            material={material?.snowprintId ?? ''}
-                            iconPath={material?.icon ?? ''}
-                            size={40}
-                            rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
-                        />
+                    <span>Edit {GOAL_EDIT_TITLE[goal.type] ?? PersonalGoalType[goal.type]} Goal</span>
+                    {goal.type === PersonalGoalType.UpgradeMaterial ||
+                    goal.type === PersonalGoalType.PreFarmMaterialForGoals ? (
+                        <div className="flex items-center gap-2">
+                            <UpgradeImage
+                                material={material?.snowprintId ?? ''}
+                                iconPath={material?.icon ?? ''}
+                                size={40}
+                                rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
+                            />
+                            <span className="text-sm font-normal text-(--soft-fg)">{material?.material}</span>
+                        </div>
                     ) : (
                         <UnitShardIcon icon={goal.unitRoundIcon} />
                     )}
@@ -397,6 +412,15 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit })
                                     quantity: Math.max(1, quantity),
                                 }));
                             }}
+                        />
+                    )}
+
+                    {form.type === PersonalGoalType.PreFarmMaterialForGoals && allGoals && (
+                        <PreFarmGoalSelector
+                            materialId={form.upgradeMaterialId}
+                            allGoals={allGoals}
+                            selectedGoalIds={form.goalIds}
+                            onChange={goalIds => setForm(current => ({ ...current, goalIds }))}
                         />
                     )}
 
