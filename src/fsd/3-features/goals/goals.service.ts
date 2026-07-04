@@ -10,7 +10,7 @@ import { Alliance, Rank, Rarity, RarityStars, XP_BOOK_VALUE, XP_BOOK_ORDER } fro
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
-import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
+import { IPreFarmMaterialForGoalsGoal, IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
 import { IMow2, IMowLevelMaterials, MowsService } from '@/fsd/4-entities/mow';
 import { OrbAscensionCalculator } from '@/fsd/4-entities/unit/unit-ascension.service';
 import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
@@ -109,11 +109,12 @@ export class GoalsService {
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>,
         upgradeAbilities: Array<ICharacterUpgradeAbilities>,
         characters: ICharacter2[],
-        isGoalPriority: boolean = false
+        isGoalPriority: boolean = false,
+        preFarmGoals: IPreFarmMaterialForGoalsGoal[] = []
     ): IGoalEstimate[] {
         const result: IGoalEstimate[] = [];
 
-        for (const goal of [shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals].flat()) {
+        for (const goal of [shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, preFarmGoals].flat()) {
             const estimate: IGoalEstimate = {
                 goalId: goal.goalId,
                 energyTotal: 0,
@@ -224,7 +225,7 @@ export class GoalsService {
             if (blockedEntries.length === 0) {
                 estimate.blocked = false;
             } else if (isGoalPriority) {
-                const allGoals = [...shardsGoals, ...upgradeMaterialGoals, ...upgradeRankOrMowGoals];
+                const allGoals = [...shardsGoals, ...upgradeMaterialGoals, ...upgradeRankOrMowGoals, ...preFarmGoals];
                 const goalPriorityMap = new Map(allGoals.map(g => [g.goalId, g.priority]));
 
                 estimate.blocked = blockedEntries.some(blockedEntry => {
@@ -305,6 +306,7 @@ export class GoalsService {
         shardsGoals: Array<ICharacterUnlockGoal | ICharacterAscendGoal>;
         upgradeRankOrMowGoals: Array<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>;
         upgradeMaterialGoals: IUpgradeMaterialGoal[];
+        preFarmGoals: IPreFarmMaterialForGoalsGoal[];
         upgradeAbilities: Array<ICharacterUpgradeAbilities>;
         ascendGoals: Array<ICharacterAscendGoal>;
     } {
@@ -318,7 +320,10 @@ export class GoalsService {
                         x.snowprintId === (resolvedChar?.snowprintId ?? '') ||
                         x.snowprintId === (resolvedMow?.snowprintId ?? '')
                 );
-                if (g.type === PersonalGoalType.UpgradeMaterial) {
+                if (
+                    g.type === PersonalGoalType.UpgradeMaterial ||
+                    g.type === PersonalGoalType.PreFarmMaterialForGoals
+                ) {
                     return this.convertToTypedGoal(g);
                 } else if (
                     ![
@@ -347,7 +352,13 @@ export class GoalsService {
             [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(x.type)
         ) as Array<ICharacterUpgradeRankGoal>;
 
-        const upgradeMaterialGoals = selectedGoals.filter(x => x.type === PersonalGoalType.UpgradeMaterial);
+        const upgradeMaterialGoals = selectedGoals.filter(
+            x => x.type === PersonalGoalType.UpgradeMaterial
+        ) as IUpgradeMaterialGoal[];
+
+        const preFarmGoals = selectedGoals.filter(
+            x => x.type === PersonalGoalType.PreFarmMaterialForGoals
+        ) as IPreFarmMaterialForGoalsGoal[];
 
         const upgradeAbilities = selectedGoals.filter(x =>
             [PersonalGoalType.CharacterAbilities].includes(x.type)
@@ -362,6 +373,7 @@ export class GoalsService {
             shardsGoals,
             upgradeRankOrMowGoals,
             upgradeMaterialGoals,
+            preFarmGoals,
             upgradeAbilities,
             ascendGoals,
         };
@@ -383,6 +395,19 @@ export class GoalsService {
                 quantity: g.upgradeMaterialQuantity,
                 notes: g.notes,
             } as IUpgradeMaterialGoal;
+        }
+
+        if (g.type === PersonalGoalType.PreFarmMaterialForGoals) {
+            if (!g.upgradeMaterialId) return;
+            return {
+                type: PersonalGoalType.PreFarmMaterialForGoals,
+                priority: g.priority,
+                goalId: g.id,
+                include: g.dailyRaids,
+                upgradeMaterialId: g.upgradeMaterialId,
+                goalIds: g.preFarmGoalIds ?? [],
+                notes: g.notes ?? '',
+            } as IPreFarmMaterialForGoalsGoal;
         }
 
         if (!unit) {
@@ -636,6 +661,13 @@ export class GoalsService {
                     ...base,
                     upgradeMaterialId: goal.upgradeMaterialId,
                     upgradeMaterialQuantity: goal.quantity,
+                };
+            }
+            case PersonalGoalType.PreFarmMaterialForGoals: {
+                return {
+                    ...base,
+                    upgradeMaterialId: goal.upgradeMaterialId,
+                    preFarmGoalIds: goal.goalIds,
                 };
             }
             default: {

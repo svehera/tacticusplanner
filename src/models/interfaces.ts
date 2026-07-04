@@ -408,6 +408,9 @@ export interface IPersonalGoal {
     // farm specifc upgrade material
     upgradeMaterialId?: string;
     upgradeMaterialQuantity?: number;
+
+    // pre-farm material for goals
+    preFarmGoalIds?: string[];
 }
 
 export interface IEstimatedRanksSettings {

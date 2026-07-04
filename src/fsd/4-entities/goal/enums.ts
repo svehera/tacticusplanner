@@ -5,6 +5,7 @@ export enum PersonalGoalType {
     MowAbilities = 4,
     CharacterAbilities = 5,
     UpgradeMaterial = 6,
+    PreFarmMaterialForGoals = 7,
 }
 
 export enum CampaignsLocationsUsage {

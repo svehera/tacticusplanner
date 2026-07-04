@@ -12,7 +12,7 @@ import { RankIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/u
 
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { TypedGoalSelect, isUnitlessMaterialGoal } from '@/fsd/3-features/goals/goals.models';
 
 interface Props {
     goal: TypedGoalSelect;
@@ -21,12 +21,11 @@ interface Props {
 }
 
 export const RaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit }) => {
-    const material =
-        goal.type === PersonalGoalType.UpgradeMaterial
-            ? UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId ?? '')
-            : undefined;
+    const material = isUnitlessMaterialGoal(goal)
+        ? UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId ?? '')
+        : undefined;
 
-    const tooltopText = goal.type === PersonalGoalType.UpgradeMaterial ? material?.label : goal.unitName;
+    const tooltopText = isUnitlessMaterialGoal(goal) ? material?.label : goal.unitName;
 
     const getGoalInfo = (goal: TypedGoalSelect) => {
         switch (goal.type) {
@@ -117,6 +116,13 @@ export const RaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit })
                     </AccessibleTooltip>
                 );
             }
+            case PersonalGoalType.PreFarmMaterialForGoals: {
+                return (
+                    <AccessibleTooltip title={'Pre-farm material goal'}>
+                        <span>{material?.label ?? ''}</span>
+                    </AccessibleTooltip>
+                );
+            }
         }
     };
 
@@ -130,15 +136,15 @@ export const RaidsGoal: React.FC<Props> = ({ goal, onSelectChange, onGoalEdit })
                     </IconButton>
                     <AccessibleTooltip title={tooltopText}>
                         <div>
-                            {goal.type === PersonalGoalType.UpgradeMaterial && (
+                            {isUnitlessMaterialGoal(goal) && (
                                 <UpgradeImage
-                                    material={material!.snowprintId}
-                                    iconPath={material!.icon!}
+                                    material={material?.snowprintId ?? ''}
+                                    iconPath={material?.icon ?? ''}
                                     rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
                                     size={40}
                                 />
                             )}
-                            {goal.type !== PersonalGoalType.UpgradeMaterial && (
+                            {!isUnitlessMaterialGoal(goal) && (
                                 <UnitShardIcon icon={goal.unitRoundIcon} name={goal.unitName} />
                             )}
                         </div>

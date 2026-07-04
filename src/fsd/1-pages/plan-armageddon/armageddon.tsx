@@ -126,10 +126,8 @@ export const Armageddon = () => {
     }, [resolvedMows]);
 
     // ── goals estimation pipeline (for missing-resources coverage) ────────────
-    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals } = useMemo(
-        () => GoalsService.prepareGoals(goals, units, false),
-        [goals, units]
-    );
+    const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, upgradeAbilities, ascendGoals, preFarmGoals } =
+        useMemo(() => GoalsService.prepareGoals(goals, units, false), [goals, units]);
 
     const onslaughtTokensToday = useMemo(
         () => GoalUpgradesService.computeOnslaughtTokensToday(gameModeTokens),
@@ -176,7 +174,8 @@ export const Armageddon = () => {
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
                 characters,
-                isGoalPriority
+                isGoalPriority,
+                preFarmGoals
             ),
         [
             estimatedUpgradesTotal,
@@ -186,6 +185,7 @@ export const Armageddon = () => {
             upgradeAbilities,
             characters,
             isGoalPriority,
+            preFarmGoals,
         ]
     );
 

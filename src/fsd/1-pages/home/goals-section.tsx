@@ -96,7 +96,7 @@ export function GoalsSection() {
         [gameModeTokens]
     );
 
-    const { shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(
+    const { shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, upgradeAbilities, preFarmGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
         [goals, units, onslaughtPreferences]
     );
@@ -144,7 +144,8 @@ export function GoalsSection() {
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
                 resolvedCharacters,
-                isGoalPriority
+                isGoalPriority,
+                preFarmGoals
             ),
         [
             estimatedUpgradesTotal,
@@ -154,6 +155,7 @@ export function GoalsSection() {
             upgradeAbilities,
             resolvedCharacters,
             isGoalPriority,
+            preFarmGoals,
         ]
     );
 
