@@ -389,6 +389,8 @@ export interface IPersonalGoal {
     rankAppliedUpgrades?: number; // 1-5: Adamantine+ upgrades to include at target rank (replaces point5)
     upgradesRarity?: Rarity[];
     // ascend
+    startingRarity?: Rarity;
+    startingStars?: RarityStars;
     targetRarity?: Rarity;
     targetStars?: RarityStars;
     shardsPerToken?: number;
