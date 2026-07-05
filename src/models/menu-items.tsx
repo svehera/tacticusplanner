@@ -11,6 +11,7 @@ import ListIcon from '@mui/icons-material/List';
 import MapIcon from '@mui/icons-material/Map';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
@@ -101,6 +102,7 @@ export const menuItemById = {
     xpIncome: xpIncomeMenuItem,
     quests: questsMenuItem,
     ces: cesMenuItem,
+    productCalendar: new MenuItemTP('Product Calendar', <ShoppingCartIcon />, '/learn/productCalendar'),
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -183,6 +185,7 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['guildPerformance'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
+    menuItemById['productCalendar'],
 ];
 
 export const librarySubMenu: MenuItemTP[] = [
@@ -194,6 +197,7 @@ export const librarySubMenu: MenuItemTP[] = [
         menuItemById['upgrades'],
         new MenuItemTP('Equipment Lookup', <ListIcon />, '/learn/equipment'),
         menuItemById['campaigns'],
+        menuItemById['productCalendar'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],

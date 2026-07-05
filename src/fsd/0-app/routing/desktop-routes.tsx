@@ -26,6 +26,7 @@ import { questsRoute } from '@/fsd/1-pages/plan-quests/quests.route';
 import { teams2Route } from '@/fsd/1-pages/plan-teams2/teams2.route';
 import { warDefense2Route } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.route';
 import { warOffense2Route } from '@/fsd/1-pages/plan-war-offense2/war-offense2.route';
+import { productCalendarLazyRoute } from '@/fsd/1-pages/product-calendar/product-calendar.route';
 import { sharedRosterRoute } from '@/fsd/1-pages/shared-roster/shared-roster.route';
 import { wyoLazyRoute } from '@/fsd/1-pages/who-you-own/who-you-own.route';
 
@@ -209,6 +210,7 @@ export const globalLearnRoutes: RouteObject[] = [
     mowLookupDesktopLazyRoute,
     guidesLazyRoute,
     guildApiLazyRoute,
+    productCalendarLazyRoute,
 ];
 
 export const appRoutes: () => RouteObject[] = () => [
