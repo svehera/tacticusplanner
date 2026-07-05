@@ -445,13 +445,19 @@ export class GoalsService {
             }
 
             if (g.type === PersonalGoalType.Ascend) {
+                const rarityStart = Math.max(g.startingRarity ?? unit.rarity, unit.rarity) as Rarity;
+                const starsStart: RarityStars =
+                    rarityStart === unit.rarity
+                        ? (Math.max(g.startingStars ?? unit.stars, unit.stars) as RarityStars)
+                        : (g.startingStars ?? rarityToStars[rarityStart]);
+                const useActualProgress = rarityStart === unit.rarity && starsStart === unit.stars;
                 const result: ICharacterAscendGoal = {
                     type: PersonalGoalType.Ascend,
-                    rarityStart: unit.rarity,
+                    rarityStart,
                     rarityEnd: g.targetRarity!,
-                    shards: unit.shards,
-                    mythicShards: unit.mythicShards ?? 0,
-                    starsStart: unit.stars,
+                    shards: useActualProgress ? unit.shards : 0,
+                    mythicShards: useActualProgress ? (unit.mythicShards ?? 0) : 0,
+                    starsStart,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
                     onslaughtShards:
                         (g.shardsPerToken || undefined) ??
@@ -511,13 +517,19 @@ export class GoalsService {
                               onslaughtPreferences
                           )
                         : 0;
+                const rarityStart = Math.max(g.startingRarity ?? unit.rarity, unit.rarity) as Rarity;
+                const starsStart: RarityStars =
+                    rarityStart === unit.rarity
+                        ? (Math.max(g.startingStars ?? unit.stars, unit.stars) as RarityStars)
+                        : (g.startingStars ?? rarityToStars[rarityStart]);
+                const useActualProgress = rarityStart === unit.rarity && starsStart === unit.stars;
                 const result: ICharacterAscendGoal = {
                     type: PersonalGoalType.Ascend,
-                    rarityStart: unit.rarity,
+                    rarityStart,
                     rarityEnd: g.targetRarity!,
-                    shards: unit.shards,
-                    mythicShards: unit.mythicShards ?? 0,
-                    starsStart: unit.stars,
+                    shards: useActualProgress ? unit.shards : 0,
+                    mythicShards: useActualProgress ? (unit.mythicShards ?? 0) : 0,
+                    starsStart,
                     starsEnd: targetStars,
                     onslaughtShards:
                         (g.shardsPerToken || undefined) ??
@@ -630,6 +642,8 @@ export class GoalsService {
                 return {
                     ...base,
                     character: goal.unitId,
+                    startingRarity: goal.rarityStart,
+                    startingStars: goal.starsStart,
                     targetRarity: goal.rarityEnd,
                     targetStars: goal.starsEnd,
                     campaignsUsage: goal.campaignsUsage,
