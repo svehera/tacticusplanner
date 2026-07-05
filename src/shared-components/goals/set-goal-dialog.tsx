@@ -58,6 +58,8 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     type: PersonalGoalType.UpgradeRank,
     startingRank: Rank.Stone1,
     startingRankPoint5: false,
+    startingRarity: Rarity.Common,
+    startingStars: RarityStars.None,
     targetRarity: Rarity.Common,
     targetRank: Rank.Stone1,
     targetStars: RarityStars.None,
@@ -242,6 +244,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (isCharacter(value)) {
             setForm(current => ({
                 ...current,
+                startingRarity: value.rarity,
+                startingStars: value.stars,
                 targetRank: value.rank,
                 targetStars: value.stars,
                 targetRarity: value.rarity,
@@ -253,6 +257,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (isMow(value)) {
             setForm(current => ({
                 ...current,
+                startingRarity: value.rarity,
+                startingStars: value.stars,
                 firstAbilityLevel: value.primaryAbilityLevel,
                 secondAbilityLevel: value.secondaryAbilityLevel,
             }));
@@ -280,7 +286,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
         if (form.type === PersonalGoalType.Ascend) {
             if (unit === undefined) return true;
-            return unit.rarity === form.targetRarity && unit.stars === form.targetStars;
+            const effectiveStartRarity = form.startingRarity ?? unit.rarity;
+            const effectiveStartStars = form.startingStars ?? unit.stars;
+            return effectiveStartRarity === form.targetRarity && effectiveStartStars === form.targetStars;
         }
 
         if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {
@@ -504,6 +512,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             targetRarity={form.targetRarity!}
                             currentStars={unit.stars}
                             targetStars={form.targetStars!}
+                            startingRarity={form.startingRarity ?? unit.rarity}
+                            startingStars={form.startingStars ?? unit.stars}
                             possibleLocations={possibleLocations}
                             unlockedLocations={unlockedLocations}
                             campaignsUsage={form.campaignsUsage!}

@@ -2218,11 +2218,9 @@ export class UpgradesService {
         }
         const locked = char ? char.rank === Rank.Locked : !mow?.unlocked;
         if (locked) return this.getTotalShardsNeededForGoal(chars, mows, goal);
-        const rarity = unit.rarity ?? Rarity.Common;
-        const stars = unit.stars ?? RarityStars.None;
         const totalShardsNeeded = this.getTotalShardsNeededForGoal(chars, mows, goal);
-        const shardsForCurrentRarityAndStars = SHARDS_AT_RARITY_AND_STARS[rarity]?.[stars] ?? 0;
-        return Math.max(totalShardsNeeded - shardsForCurrentRarityAndStars, 0);
+        const shardsForGoalStart = SHARDS_AT_RARITY_AND_STARS[goal.rarityStart]?.[goal.starsStart] ?? 0;
+        return Math.max(totalShardsNeeded - shardsForGoalStart, 0);
     }
 
     /**
@@ -2246,12 +2244,10 @@ export class UpgradesService {
         if (!unit) return 0;
         const locked = char ? char.rank === Rank.Locked : !mow?.unlocked;
         if (locked) return this.getTotalMythicShardsNeededForGoal(goal);
-        const rarity = unit.rarity ?? Rarity.Common;
-        const stars = unit.stars ?? RarityStars.None;
-        if (rarity < Rarity.Mythic) return this.getTotalMythicShardsNeededForGoal(goal);
+        if (goal.rarityStart < Rarity.Mythic) return this.getTotalMythicShardsNeededForGoal(goal);
         const totalShardsNeeded = this.getTotalMythicShardsNeededForGoal(goal);
-        const shardsForCurrentRarityAndStars = MYTHIC_SHARDS_AT_RARITY_AND_STARS[stars] ?? 0;
-        return Math.max(totalShardsNeeded - shardsForCurrentRarityAndStars, 0);
+        const shardsForGoalStart = MYTHIC_SHARDS_AT_RARITY_AND_STARS[goal.starsStart] ?? 0;
+        return Math.max(totalShardsNeeded - shardsForGoalStart, 0);
     }
 
     public static getShardsForGoal(
