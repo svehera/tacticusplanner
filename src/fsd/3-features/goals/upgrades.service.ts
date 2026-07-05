@@ -1753,6 +1753,12 @@ export class UpgradesService {
         mows: IMow2[],
         goal: ICharacterAscendGoal
     ): number {
+        const char = characters.find(x => x.snowprintId === goal.unitId);
+        const mow = mows.find(x => x.snowprintId === goal.unitId);
+        const unit = char ?? mow;
+        if (unit && (unit.rarity > goal.rarityEnd || (unit.rarity === goal.rarityEnd && unit.stars >= goal.starsEnd))) {
+            return 0;
+        }
         const shardData = this.getShardsForGoal(characters, mows, goal);
         const canRegular = this.canOnslaughtCharacterForRegularShards(goal.unitId, characters, mows, goal, inventory);
         const canMythic = this.canOnslaughtCharacterForMythicShards(goal.unitId, characters, mows, goal, inventory);
@@ -2175,24 +2181,20 @@ export class UpgradesService {
 
     /** Returns the number of incremental shards this unit has over its current rarity and stars. */
     private static getIncrementalShards(
-        chars: ICharacter2[],
-        mows: IMow2[],
+        _chars: ICharacter2[],
+        _mows: IMow2[],
         goal: ICharacterAscendGoal | ICharacterUnlockGoal
     ): number {
-        const unit = chars.find(x => x.snowprintId === goal.unitId) ?? mows.find(x => x.snowprintId === goal.unitId);
-        if (!unit) return 0;
-        return unit.shards;
+        return goal.shards;
     }
 
     /** Returns the number of incremental mythic shards this unit has over its current rarity and stars. */
     private static getIncrementalMythicShards(
-        chars: ICharacter2[],
-        mows: IMow2[],
+        _chars: ICharacter2[],
+        _mows: IMow2[],
         goal: ICharacterAscendGoal | ICharacterUnlockGoal
     ): number {
-        const unit = chars.find(x => x.snowprintId === goal.unitId) ?? mows.find(x => x.snowprintId === goal.unitId);
-        if (!unit) return 0;
-        return unit.mythicShards;
+        return goal.mythicShards;
     }
 
     /**

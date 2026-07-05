@@ -288,7 +288,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             if (unit === undefined) return true;
             const effectiveStartRarity = form.startingRarity ?? unit.rarity;
             const effectiveStartStars = form.startingStars ?? unit.stars;
-            return effectiveStartRarity === form.targetRarity && effectiveStartStars === form.targetStars;
+            return (
+                effectiveStartRarity > form.targetRarity! ||
+                (effectiveStartRarity === form.targetRarity && effectiveStartStars >= form.targetStars!)
+            );
         }
 
         if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {

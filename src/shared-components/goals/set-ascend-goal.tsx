@@ -58,14 +58,14 @@ export const SetAscendGoal: React.FC<Props> = ({
     }, [startingRarity, currentRarity, currentStars]);
 
     const targetRarityValues = useMemo(() => {
-        return getEnumValues(Rarity).filter(x => x >= currentRarity);
-    }, [currentRarity]);
+        return getEnumValues(Rarity).filter(x => x >= startingRarity);
+    }, [startingRarity]);
 
     const starsEntries = useMemo(() => {
-        const minStars = rarityToStars[targetRarity];
+        const minStars = targetRarity === startingRarity ? startingStars : rarityToStars[targetRarity];
         const maxStars = rarityToMaxStars[targetRarity];
         return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
-    }, [currentStars, targetRarity]);
+    }, [startingRarity, startingStars, targetRarity]);
 
     const shardRangeLabel = useMemo(() => {
         if (!alliance) return;
@@ -125,7 +125,8 @@ export const SetAscendGoal: React.FC<Props> = ({
                     value={targetRarity}
                     valueChanges={value => {
                         onChange('targetRarity', value);
-                        onChange('targetStars', rarityToStars[value as Rarity]);
+                        const minStars = value === startingRarity ? startingStars : rarityToStars[value as Rarity];
+                        onChange('targetStars', minStars);
                     }}
                 />
 
