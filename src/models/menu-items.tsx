@@ -11,6 +11,7 @@ import ListIcon from '@mui/icons-material/List';
 import MapIcon from '@mui/icons-material/Map';
 import MilitaryTechIcon from '@mui/icons-material/MilitaryTech';
 import PersonIcon from '@mui/icons-material/Person';
+import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import SmartToyIcon from '@mui/icons-material/SmartToy';
 import TableChartIcon from '@mui/icons-material/TableChart';
 import TrackChangesIcon from '@mui/icons-material/TrackChanges';
@@ -22,6 +23,8 @@ import { faqMenuItem } from '@/fsd/1-pages/faq/faq.menu-item';
 import { guidesMenuItem } from '@/fsd/1-pages/guides/guides-menu.item';
 import { guildMenuItem } from '@/fsd/1-pages/guild/guild.menu-item';
 import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
+import { guildBossListMenuItem } from '@/fsd/1-pages/guild-boss-list';
+import { guildBossReferenceMenuItem } from '@/fsd/1-pages/guild-boss-reference';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
 import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
@@ -96,11 +99,14 @@ export const menuItemById = {
     guild: guildMenuItem,
     guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
+    guildBossList: guildBossListMenuItem,
+    guildBossReference: guildBossReferenceMenuItem,
     guildPerformance: guildPerformanceMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
     quests: questsMenuItem,
     ces: cesMenuItem,
+    productCalendar: new MenuItemTP('Product Calendar', <ShoppingCartIcon />, '/learn/productCalendar'),
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -159,6 +165,8 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['learnEquipment'],
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
+    menuItemById['guildBossList'],
+    menuItemById['guildBossReference'],
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
@@ -171,6 +179,8 @@ export const learnSubMenu: MenuItemTP[] = [
     new MenuItemTP('Tacticus', <TableChartIcon />, '', '', '', [
         menuItemById['rankLookup'],
         menuItemById['mowLookup'],
+        menuItemById['guildBossList'],
+        menuItemById['guildBossReference'],
         menuItemById['characters'],
         menuItemById['npcs'],
         menuItemById['upgrades'],
@@ -183,17 +193,21 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['guildPerformance'],
     menuItemById['guildApi'],
     menuItemById['guildInsights'],
+    menuItemById['productCalendar'],
 ];
 
 export const librarySubMenu: MenuItemTP[] = [
     new MenuItemTP('Lookups', <TableChartIcon />, '', '', '', [
         menuItemById['rankLookup'],
         menuItemById['mowLookup'],
+        menuItemById['guildBossList'],
+        menuItemById['guildBossReference'],
         menuItemById['characters'],
         menuItemById['npcs'],
         menuItemById['upgrades'],
         new MenuItemTP('Equipment Lookup', <ListIcon />, '/learn/equipment'),
         menuItemById['campaigns'],
+        menuItemById['productCalendar'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],

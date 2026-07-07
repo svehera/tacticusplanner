@@ -8,6 +8,10 @@ export interface INpcStats {
     progressionIndex: number;
     rank: Rank;
     rarityStars: RarityStars;
+    critChance?: number;
+    critDamage?: number;
+    blockChance?: number;
+    blockDamage?: number;
 }
 
 export interface INpcData {
@@ -20,6 +24,10 @@ export interface INpcData {
     rangeDamage?: string;
     rangeHits?: number;
     rangeDistance?: number;
+    /** All melee weapons, when a unit can have more than one (e.g. guild boss enemies). */
+    meleeAttacks?: { damageType: string; hits: number }[];
+    /** All ranged weapons, when a unit can have more than one (e.g. guild boss enemies). */
+    rangedAttacks?: { damageType: string; hits: number; range?: number }[];
     movement: number;
     traits: string[];
     icon: string;

@@ -15,6 +15,7 @@ interface Props {
     char?: ISnapshotCharacter;
     mow?: ISnapshotMachineOfWar;
     isEnabled: boolean;
+    customPortraitUrl?: string;
 }
 
 export const RosterSnapshotsUnit = ({
@@ -27,6 +28,7 @@ export const RosterSnapshotsUnit = ({
     mow,
     showTooltip,
     isEnabled,
+    customPortraitUrl,
 }: Props) => {
     const staticChar = char ? CharactersService.resolveCharacter(char.id) : undefined;
     const staticMow = mow ? MowsService.resolveToStatic(mow.id) : undefined;
@@ -34,7 +36,7 @@ export const RosterSnapshotsUnit = ({
     return (
         <div className="flex h-[200px] w-[110px] overflow-hidden rounded-xl border border-(--card-border) bg-(--card) shadow-sm transition-[border-color,box-shadow] duration-150 hover:border-(--primary)/50 hover:shadow-md">
             <div className="relative flex h-full w-full flex-shrink-0 items-center justify-center p-1">
-                {char !== undefined && staticChar !== undefined && (
+                {char !== undefined && (staticChar !== undefined || customPortraitUrl !== undefined) && (
                     <UnitPortrait
                         showShards={showShards}
                         showMythicShards={showMythicShards}
@@ -44,6 +46,7 @@ export const RosterSnapshotsUnit = ({
                         showAbilities={showAbilities}
                         char={char}
                         charData={staticChar}
+                        customPortraitUrl={customPortraitUrl}
                         isDisabled={!isEnabled}
                     />
                 )}

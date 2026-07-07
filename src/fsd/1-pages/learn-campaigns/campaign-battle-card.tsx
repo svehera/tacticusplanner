@@ -9,10 +9,8 @@ import { MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CampaignLocation } from '@/fsd/4-entities/campaign';
 import { CharactersService } from '@/fsd/4-entities/character';
+import { NpcDetailModal } from '@/fsd/4-entities/npc';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
-
-// eslint-disable-next-line boundaries/element-types
-import { NpcDetailModal } from '../learn-npcs';
 
 import { CampaignBattleEnemies } from './campaign-battle-enemies';
 import { ResolvedEnemyData } from './models';

@@ -44,6 +44,7 @@ interface Props {
     mow?: ISnapshotMachineOfWar;
     mowData?: IMowStatic2;
     isDisabled?: boolean;
+    customPortraitUrl?: string;
 }
 
 const CircularBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
@@ -91,6 +92,7 @@ export const UnitPortrait = ({
     mow,
     mowData,
     isDisabled,
+    customPortraitUrl,
 }: Props) => {
     const { frame, rankIcon, starIcon, shardIcon, mythicShardIcon } = useUnitPortraitAssets(
         char !== undefined,
@@ -98,7 +100,7 @@ export const UnitPortrait = ({
         char?.rank ?? undefined,
         char?.stars ?? mow?.stars ?? 0
     );
-    const charIcon = getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
+    const charIcon = customPortraitUrl ?? getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
     const rank = getRank(char?.rank ?? 0);
     const isLocked = rank === Rank.Locked && (mow === undefined || mow.locked);
 
