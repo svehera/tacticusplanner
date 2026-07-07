@@ -1,6 +1,6 @@
 import { useSearchParams } from 'react-router-dom';
 
-import { getSeasonConfig, getSeasonIds } from '@/fsd/4-entities/guild_boss';
+import { getSeasonConfig, getSeasonIds, getSortedTiers } from '@/fsd/4-entities/guild_boss';
 
 import { SeasonSelector, TierRow } from '@/fsd/3-features/guild-boss-reference';
 
@@ -23,16 +23,9 @@ export function GuildBossReference() {
             </div>
             {config ? (
                 <div className="flex flex-col gap-6">
-                    {config.tiers
-                        .toSorted((a, b) => b.tier - a.tier)
-                        .map(tierData => (
-                            <TierRow
-                                key={tierData.tier}
-                                tier={tierData.tier}
-                                sets={tierData.sets}
-                                seasonId={seasonId}
-                            />
-                        ))}
+                    {getSortedTiers(config).map(tierData => (
+                        <TierRow key={tierData.tier} tier={tierData.tier} sets={tierData.sets} seasonId={seasonId} />
+                    ))}
                 </div>
             ) : (
                 <p className="text-(--fg-muted)">Season config not found.</p>

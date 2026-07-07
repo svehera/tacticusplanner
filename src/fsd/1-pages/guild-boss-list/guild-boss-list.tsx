@@ -1,6 +1,6 @@
 import { useNavigate } from 'react-router-dom';
 
-import { getImageUrl } from '@/fsd/5-shared/ui/get-image-url';
+import { getImageUrl } from '@/fsd/5-shared/ui';
 
 import {
     bossPortraitMap,

@@ -8,23 +8,15 @@ import { NpcService } from '@/fsd/4-entities/npc/npc-service';
 import guildBossRaw from './data/guild_boss.json';
 import { npcUnitRoundIconMap, unitRoundIconMap } from './guild-boss-portraits';
 import type {
+    GuildBossData,
     GuildBossEncounter,
-    GuildBossModifierDefinition,
     GuildBossSeasonConfig,
     GuildBossStats,
     GuildBossUnitSet,
     GuildBossWeapon,
 } from './guild-boss.model';
 
-// The JSON is cast here; `as unknown as GuildBossData` avoids importing the full type
-// in a runtime import that TypeScript would widen anyway.
-export const guildBossData = guildBossRaw as unknown as {
-    guildBossSeasonConfigRotation: string[];
-    unitSets: Record<string, GuildBossUnitSet>;
-    guildBossSeasonDataConfigsGDTO: Record<string, GuildBossSeasonConfig>;
-    modifiers: Record<string, GuildBossModifierDefinition>;
-    primarchs: string[];
-};
+export const guildBossData = guildBossRaw as unknown as GuildBossData;
 
 export function getSeasonIds(): string[] {
     return guildBossData.guildBossSeasonConfigRotation;
@@ -32,6 +24,11 @@ export function getSeasonIds(): string[] {
 
 export function getSeasonConfig(seasonId: string): GuildBossSeasonConfig | undefined {
     return guildBossData.guildBossSeasonDataConfigsGDTO[seasonId];
+}
+
+/** Tiers in descending rarity order (highest tier first), for display. */
+export function getSortedTiers(config: GuildBossSeasonConfig): GuildBossSeasonConfig['tiers'] {
+    return config.tiers.toSorted((a, b) => b.tier - a.tier);
 }
 
 /** Strips the `:N` suffix to get the key used in unitSets. */
@@ -52,10 +49,15 @@ export function getUnitSet(rawUnitId: string): GuildBossUnitSet | undefined {
     return guildBossData.unitSets[getUnitSetId(rawUnitId)];
 }
 
+/** Clamps `index` into the valid `[0, length - 1]` range for a non-empty array. */
+export function clampStatsIndex(length: number, index: number): number {
+    return Math.max(0, Math.min(index, length - 1));
+}
+
 /** Returns the stats entry at the given 0-based array index, clamped to valid range. */
 export function getStatsAtIndex(unitSet: GuildBossUnitSet, index: number): GuildBossStats {
-    const clamped = Math.max(0, Math.min(index, unitSet.stats.length - 1));
-    return unitSet.stats[clamped];
+    if (unitSet.stats.length === 0) throw new Error('Unit set has no stats entries');
+    return unitSet.stats[clampStatsIndex(unitSet.stats.length, index)];
 }
 
 /** The `:N` suffix in encounter unitIds is 1-based. This converts to a 0-based array index. */

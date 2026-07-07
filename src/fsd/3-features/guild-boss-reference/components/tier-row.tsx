@@ -13,12 +13,12 @@ interface TierRowProps {
 }
 
 const RARITY_COLOURS: Record<number, string> = {
-    0: 'text-stone-400 border-stone-600', // Common — dark brownish-gray
-    1: 'text-amber-600 border-amber-700', // Uncommon — bronze/brown
-    2: 'text-zinc-300 border-zinc-400', // Rare — silver
-    3: 'text-yellow-500 border-yellow-600', // Epic — gold accent
-    4: 'text-cyan-400 border-cyan-500', // Legendary — ice blue/cyan
-    5: 'text-orange-400 border-orange-500', // Mythic — orange-red
+    0: 'text-(--rarity-common) border-(--rarity-common)',
+    1: 'text-(--rarity-uncommon) border-(--rarity-uncommon)',
+    2: 'text-(--rarity-rare) border-(--rarity-rare)',
+    3: 'text-(--rarity-epic) border-(--rarity-epic)',
+    4: 'text-(--rarity-legendary) border-(--rarity-legendary)',
+    5: 'text-(--rarity-mythic) border-(--rarity-mythic)',
 };
 
 const RARITY_NAMES = [

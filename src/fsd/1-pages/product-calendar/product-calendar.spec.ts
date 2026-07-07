@@ -1,19 +1,11 @@
 import { describe, expect, it } from 'vitest';
 
+import type { IProductCalendar } from '@/fsd/4-entities/calendars';
+
 import { isKnownCalendarRewardType } from './product-calendar.models';
 
-interface CalendarOffer {
-    rewards: string[];
-}
-interface CalendarDay {
-    offers: CalendarOffer[];
-}
-interface ProductCalendar {
-    days: CalendarDay[];
-}
-
 // Eagerly import every calendar JSON — new files are picked up automatically.
-const calendarModules = import.meta.glob<{ default: ProductCalendar }>('../../4-entities/calendars/data/*.json', {
+const calendarModules = import.meta.glob<{ default: IProductCalendar }>('../../4-entities/calendars/data/*.json', {
     eager: true,
 });
 
@@ -22,7 +14,7 @@ function rewardType(reward: string): string {
     return colonIndex === -1 ? reward : reward.slice(0, colonIndex);
 }
 
-function collectRewardTypes(calendars: ProductCalendar[]): Set<string> {
+function collectRewardTypes(calendars: IProductCalendar[]): Set<string> {
     const types = new Set<string>();
     for (const calendar of calendars) {
         for (const day of calendar.days) {

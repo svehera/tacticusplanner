@@ -50,6 +50,21 @@ export class NpcService {
         return npc ?? undefined;
     }
 
+    /** Resolves an NPC's melee attacks, preferring the multi-weapon `meleeAttacks` array when present
+     *  (guild-boss field enemies can have more than one), falling back to the single legacy field. */
+    public static resolveMeleeAttacks(npc: INpcData): { damageType: string; hits: number }[] {
+        if (npc.meleeAttacks) return npc.meleeAttacks;
+        return npc.meleeDamage ? [{ damageType: npc.meleeDamage, hits: npc.meleeHits ?? 0 }] : [];
+    }
+
+    /** Same as `resolveMeleeAttacks`, for ranged attacks. */
+    public static resolveRangedAttacks(npc: INpcData): { damageType: string; hits: number; range?: number }[] {
+        if (npc.rangedAttacks) return npc.rangedAttacks;
+        return npc.rangeDamage
+            ? [{ damageType: npc.rangeDamage, hits: npc.rangeHits ?? 0, range: npc.rangeDistance }]
+            : [];
+    }
+
     /** @returns the pierce ratio for the specified damage type, or -1 if the type is invalid. */
     public static getPierce(damageType: DamageType): number {
         switch (damageType) {

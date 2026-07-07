@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import blueStar from 'src/assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
 import mythicWings from 'src/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
@@ -39,6 +39,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars, customPortraitUr
     const starSize = 45;
     const fifthStarSize = 52;
     const [portraitFailed, setPortraitFailed] = useState(false);
+    useEffect(() => setPortraitFailed(false), [id, customPortraitUrl]);
 
     const getNpcPortrait = () => {
         const imageUrl = customPortraitUrl ?? getImageUrl(NpcService.getNpcById(id)?.icon ?? '');

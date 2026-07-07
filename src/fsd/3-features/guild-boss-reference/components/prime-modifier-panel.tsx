@@ -1,18 +1,18 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { useMemo } from 'react';
-
 import { cn } from '@/fsd/5-shared/lib';
 import type { Rarity } from '@/fsd/5-shared/model';
 import { Select } from '@/fsd/5-shared/ui/selects/select';
 
 import {
+    buildModifierHpLostOptions,
     describeModifier,
     formatAbilityName,
     getModifierIcon,
     getModifierPortraitUrl,
     getModifierTitle,
     guildBossData,
+    sortModifiersByHpLost,
     type GuildBossEncounterModifier,
 } from '@/fsd/4-entities/guild_boss';
 
@@ -41,17 +41,11 @@ export function PrimeModifierPanel({
     selectedHpLost,
     onChange,
 }: PrimeModifierPanelProps) {
-    const sortedModifiers = useMemo(
-        () => encounterModifiers.toSorted((a, b) => a.hpLost - b.hpLost),
-        [encounterModifiers]
-    );
-
-    const modifierByHpLost = useMemo(() => new Map(sortedModifiers.map(m => [m.hpLost, m])), [sortedModifiers]);
-
-    const options = useMemo(() => [0, ...sortedModifiers.map(m => m.hpLost)], [sortedModifiers]);
+    const sortedModifiers = sortModifiersByHpLost(encounterModifiers);
+    const options = buildModifierHpLostOptions(sortedModifiers);
 
     const renderModifierRow = (hpLost: number) => {
-        const encounterModifier = modifierByHpLost.get(hpLost);
+        const encounterModifier = sortedModifiers.find(m => m.hpLost === hpLost);
         if (!encounterModifier) {
             return (
                 <div className="w-full py-1">

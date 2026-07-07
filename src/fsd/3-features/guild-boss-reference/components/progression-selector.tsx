@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
-import { Rank, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 import { RankIcon } from '@/fsd/5-shared/ui/icons/rank.icon';
 import { StarsIcon } from '@/fsd/5-shared/ui/icons/stars.icon';
@@ -22,7 +22,7 @@ export function ProgressionSelector({ unitSet, value, onChange }: ProgressionSel
                     const count = (rarityCounts.get(stat.BaseRarity) ?? 0) + 1;
                     rarityCounts.set(stat.BaseRarity, count);
                     const label = `${stat.BaseRarity} ${count}`;
-                    const rarity = RarityMapper.stringToRarity(stat.BaseRarity) ?? 0;
+                    const rarity = RarityMapper.stringToRarity(stat.BaseRarity) ?? Rarity.Common;
                     const rank = (stat.Rank + 1) as Rank;
                     const stars = stat.StarLevel as RarityStars;
                     const isSelected = value === index;

@@ -168,6 +168,16 @@ export function getModifierIcon(
     return undefined;
 }
 
+/** Sorts an encounter's modifiers ascending by `hpLost` (the order they activate in as HP drops). */
+export function sortModifiersByHpLost(encounterModifiers: GuildBossEncounterModifier[]): GuildBossEncounterModifier[] {
+    return encounterModifiers.toSorted((a, b) => a.hpLost - b.hpLost);
+}
+
+/** Builds the dropdown's `hpLost` option list: 0 (full HP) plus every threshold in the (already-sorted) list. */
+export function buildModifierHpLostOptions(sortedModifiers: GuildBossEncounterModifier[]): number[] {
+    return [0, ...sortedModifiers.map(m => m.hpLost)];
+}
+
 /**
  * Rescales an encounter's authored `hpLost` thresholds to whatever total HP is currently displayed.
  * Every encounter's raw `hpLost` values are an exact `i/N` fraction of the total HP baseline they were

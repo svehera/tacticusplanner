@@ -30,14 +30,8 @@ export function BattlefieldEnemies({ enemyIds, title = 'Field Enemies' }: Battle
                             key={`${rawEnemyId}-${index}`}
                             onClick={() => setSelectedEnemy({ npc, stats })}
                             className="flex flex-col items-center gap-1 rounded-md transition-colors hover:bg-(--neutral)">
-                            <div style={{ width: 121, height: 154, overflow: 'hidden' }}>
-                                <div
-                                    style={{
-                                        transform: 'scale(0.5)',
-                                        transformOrigin: 'top left',
-                                        width: 242,
-                                        height: 307,
-                                    }}>
+                            <div className="h-[154px] w-[121px] overflow-hidden">
+                                <div className="h-[307px] w-[242px] origin-top-left scale-50">
                                     <NpcPortrait
                                         id={npc.snowprintId}
                                         rank={stats.rank as Rank}

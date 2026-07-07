@@ -5,13 +5,10 @@ interface SeasonSelectorProps {
     onChange: (seasonId: string) => void;
 }
 
-const SEASON_LABELS: Record<string, string> = {
-    guild_boss_season_config_1: 'Season 1',
-    guild_boss_season_config_2: 'Season 2',
-    guild_boss_season_config_3: 'Season 3',
-    guild_boss_season_config_4: 'Season 4',
-    guild_boss_season_config_5: 'Season 5',
-};
+function formatSeasonLabel(id: string): string {
+    const match = /(\d+)$/.exec(id);
+    return match ? `Season ${match[1]}` : id;
+}
 
 export function SeasonSelector({ value, onChange }: SeasonSelectorProps) {
     const ids = getSeasonIds();
@@ -22,7 +19,7 @@ export function SeasonSelector({ value, onChange }: SeasonSelectorProps) {
             className="rounded border border-(--border) bg-(--bg-secondary) px-3 py-1.5 text-sm text-(--fg) focus:outline-2 focus:outline-(--primary)">
             {ids.map(id => (
                 <option key={id} value={id}>
-                    {SEASON_LABELS[id] ?? id}
+                    {formatSeasonLabel(id)}
                 </option>
             ))}
         </select>

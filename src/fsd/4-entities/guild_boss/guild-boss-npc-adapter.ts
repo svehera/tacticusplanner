@@ -6,6 +6,7 @@ import { INpcData, NpcService, INpcStats } from '@/fsd/4-entities/npc';
 
 import type { GuildBossStats, GuildBossUnitSet } from './guild-boss.model';
 import {
+    clampStatsIndex,
     encounterStatsIndex,
     getUnitDisplayName,
     getUnitSet,
@@ -97,7 +98,7 @@ export function resolveFieldEnemyNpcData(
     if (!unitSet) return undefined;
 
     const npc = toNpcData(unitSetId, unitSet);
-    const index = Math.max(0, Math.min(encounterStatsIndex(rawEnemyId), npc.stats.length - 1));
+    const index = clampStatsIndex(unitSet.stats.length, encounterStatsIndex(rawEnemyId));
     const rarity = RarityMapper.stringToRarity(unitSet.stats[index].BaseRarity) ?? Rarity.Common;
     return { npc, stats: npc.stats[index], rarity };
 }
