@@ -23,6 +23,8 @@ import { faqMenuItem } from '@/fsd/1-pages/faq/faq.menu-item';
 import { guidesMenuItem } from '@/fsd/1-pages/guides/guides-menu.item';
 import { guildMenuItem } from '@/fsd/1-pages/guild/guild.menu-item';
 import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
+import { guildBossListMenuItem } from '@/fsd/1-pages/guild-boss-list';
+import { guildBossReferenceMenuItem } from '@/fsd/1-pages/guild-boss-reference';
 import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
 import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
@@ -97,6 +99,8 @@ export const menuItemById = {
     guild: guildMenuItem,
     guildApi: guildApiMenuItem,
     guildInsights: guildInsightsMenuItem,
+    guildBossList: guildBossListMenuItem,
+    guildBossReference: guildBossReferenceMenuItem,
     guildPerformance: guildPerformanceMenuItem,
     guides: guidesMenuItem,
     xpIncome: xpIncomeMenuItem,
@@ -161,6 +165,8 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['learnEquipment'],
     menuItemById['rankLookup'],
     menuItemById['mowLookup'],
+    menuItemById['guildBossList'],
+    menuItemById['guildBossReference'],
     menuItemById['campaigns'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
@@ -173,6 +179,8 @@ export const learnSubMenu: MenuItemTP[] = [
     new MenuItemTP('Tacticus', <TableChartIcon />, '', '', '', [
         menuItemById['rankLookup'],
         menuItemById['mowLookup'],
+        menuItemById['guildBossList'],
+        menuItemById['guildBossReference'],
         menuItemById['characters'],
         menuItemById['npcs'],
         menuItemById['upgrades'],
@@ -192,6 +200,8 @@ export const librarySubMenu: MenuItemTP[] = [
     new MenuItemTP('Lookups', <TableChartIcon />, '', '', '', [
         menuItemById['rankLookup'],
         menuItemById['mowLookup'],
+        menuItemById['guildBossList'],
+        menuItemById['guildBossReference'],
         menuItemById['characters'],
         menuItemById['npcs'],
         menuItemById['upgrades'],

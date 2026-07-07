@@ -5,8 +5,7 @@ import { type GuildSeasonHistoryResponse, type TacticusGuildRaidResponse } from 
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
-
-import { unitRoundIconMap } from '../guild-performance.utils';
+import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
 
 import {
     buildBossLoopRows,

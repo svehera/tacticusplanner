@@ -1,0 +1,56 @@
+export type {
+    GuildBossEncounterType,
+    GuildBossStats,
+    GuildBossWeapon,
+    GuildBossUnitSet,
+    GuildBossModifierDefinition,
+    GuildBossEncounterModifier,
+    GuildBossEncounter,
+    GuildBossSet,
+    GuildBossTier,
+    GuildBossSeasonConfig,
+    GuildBossData,
+} from './guild-boss.model';
+export { bossPortraitMap, npcUnitRoundIconMap, unitRoundIconMap, bossPrefixPortraitMap } from './guild-boss-portraits';
+export {
+    describeModifier,
+    getModifierIcon,
+    getModifierPortraitUrl,
+    getModifierTitle,
+    getActiveModifierDefinitions,
+    scaleModifierHpLost,
+    computeStatAdjustments,
+    applyStatAdjustment,
+    computeAbilityVariableAdjustments,
+    applyAbilityAdjustments,
+    applyAbilityConstantAdjustments,
+    getUnitRemovals,
+    applyUnitRemovals,
+} from './guild-boss-modifiers';
+export type { StatAdjustments, AbilityAdjustments } from './guild-boss-modifiers';
+export {
+    getSeasonIds,
+    getSeasonConfig,
+    getUnitSetId,
+    getProgressionIndexFromUnitId,
+    getUnitSet,
+    getStatsAtIndex,
+    encounterStatsIndex,
+    getTierRarity,
+    isRangedWeapon,
+    formatAbilityName,
+    getFieldEnemies,
+    getSetPrimeEncounters,
+    findEncounterLocation,
+    getUnitDisplayName,
+    guildBossData,
+    resolvePrimeDisplayName,
+    resolvePrimePortraitPath,
+    resolvePrimeRegularPortraitPath,
+    resolveNpcUnitPortraitPath,
+    resolveNpcUnitFullPortraitPath,
+    getBossUnitSetIds,
+    getPrimeUnitSetIds,
+} from './guild-boss.service';
+export type { EncounterLocation } from './guild-boss.service';
+export { resolveFieldEnemyNpcData } from './guild-boss-npc-adapter';

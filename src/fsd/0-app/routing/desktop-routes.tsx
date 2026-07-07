@@ -4,6 +4,9 @@ import { faqLazyRoute } from '@/fsd/1-pages/faq/faq.route';
 import { guidesLazyRoute } from '@/fsd/1-pages/guides/guides.route';
 import { guildLazyRoute } from '@/fsd/1-pages/guild/guild.route';
 import { guildApiLazyRoute } from '@/fsd/1-pages/guild-api/guild-api.route';
+import { guildBossDetailLazyRoute } from '@/fsd/1-pages/guild-boss-detail/guild-boss-detail.route';
+import { guildBossListLazyRoute } from '@/fsd/1-pages/guild-boss-list';
+import { guildBossReferenceLazyRoute } from '@/fsd/1-pages/guild-boss-reference';
 import { guildInsightsLazyRoute } from '@/fsd/1-pages/guild-insights/guild-insights.route';
 import { guildWarZonesLazyRoute } from '@/fsd/1-pages/guild-war-layout/guild-war-zones.route';
 import { equipmentLazyRoute } from '@/fsd/1-pages/input-equipment/equipment.route';
@@ -208,6 +211,9 @@ export const globalLearnRoutes: RouteObject[] = [
     guildPerformanceLazyRoute,
     guildInsightsLazyRoute,
     mowLookupDesktopLazyRoute,
+    guildBossListLazyRoute,
+    guildBossReferenceLazyRoute,
+    guildBossDetailLazyRoute,
     guidesLazyRoute,
     guildApiLazyRoute,
     productCalendarLazyRoute,

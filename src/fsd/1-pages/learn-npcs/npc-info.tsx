@@ -5,9 +5,7 @@ import { filterMap } from '@/fsd/5-shared/lib';
 import { FactionId } from '@/fsd/5-shared/model';
 
 import { FactionSelect } from '@/fsd/4-entities/faction';
-import { INpcData, NpcSelect, NpcService, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
-
-import { NpcStats } from './npc-stats';
+import { INpcData, NpcSelect, NpcService, NpcStats, ProgressionIndexSelect } from '@/fsd/4-entities/npc';
 
 export const NpcInfo: React.FC = () => {
     const [faction, setFaction] = useState<FactionId>('Necrons');

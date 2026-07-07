@@ -7,6 +7,8 @@ import type { TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api'
 import { getImageUrl } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
+import { bossPortraitMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
+
 import {
     ALL_RAID_COMPS,
     type RaidComp,
@@ -15,7 +17,6 @@ import { getRaidCompIconProps } from '@/fsd/1-pages/input-guild-roster-snapshots
 
 import type { GuildTokenEntry } from '../guild-performance.types';
 import {
-    bossPortraitMap,
     formatTime,
     resolveBossDisplay,
     sortBombEntries,

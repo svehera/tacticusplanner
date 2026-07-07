@@ -26,6 +26,8 @@ export interface SelectProps<T> {
     placeholder?: string;
     className?: string;
     triggerClassName?: string;
+    /** Overrides the open panel's size (it defaults to the trigger's width) — for options with rich/wide content. */
+    panelClassName?: string;
     disabled?: boolean;
 }
 
@@ -40,6 +42,7 @@ export const Select = <T,>({
     placeholder,
     className,
     triggerClassName,
+    panelClassName,
     disabled,
 }: SelectProps<T>) => {
     const displayValue = renderValue ?? renderOption;
@@ -64,7 +67,7 @@ export const Select = <T,>({
                         </span>
                     </ListboxButton>
 
-                    <ListboxOptions transition anchor={panelAnchor} className={panel}>
+                    <ListboxOptions transition anchor={panelAnchor} className={cn(panel, panelClassName)}>
                         {options.map((option, index) => (
                             <ListboxOption key={index} value={option} className={optionClassName}>
                                 {({ selected }) => (
