@@ -8,7 +8,7 @@ import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 import abilityDataJson from '@/fsd/4-entities/abilities/data/new-ability-data.json';
 
 import { getStyleSpec, parseAbilityText, resolveI2p, resolveVariable } from './ability-text';
-import type { AbilityContext, StyledNode } from './ability-text';
+import type { AbilityContext, AstNode, StyledNode, VariableNode } from './ability-text';
 
 interface AbilityEntry {
     id: string;
@@ -216,4 +216,49 @@ describe('stat style icons exist in tacticusIcons or snowprintIcons', () => {
             expect(icon, `Missing icon key "${iconKey}" for ${style}`).toBeDefined();
         });
     }
+});
+
+// ── Every variable referenced in ability text resolves against that ability's own data ────
+
+function collectVariableNodes(nodes: AstNode[], out: VariableNode[]): void {
+    for (const node of nodes) {
+        if (node.type === 'var') out.push(node);
+        else if (node.type === 'styled') collectVariableNodes(node.children, out);
+    }
+}
+
+describe('every variable referenced in ability text is accounted for', () => {
+    const failures: string[] = [];
+
+    for (const ability of abilityData) {
+        const context: AbilityContext = {
+            level: 1,
+            variables: ability.variables,
+            constants: ability.constants ?? {},
+            scaledVariableNames: new Set(),
+            rarity: Rarity.Common,
+            unitName: 'Test',
+            factionId: 'Test',
+        };
+
+        for (const [field, text] of [
+            ['currentLevelDescription', ability.text.currentLevelDescription],
+            ['nextLevelDescription', ability.text.nextLevelDescription],
+        ] as const) {
+            if (!text) continue;
+            const nodes: VariableNode[] = [];
+            collectVariableNodes(parseAbilityText(text), nodes);
+            for (const node of nodes) {
+                if (node.isUnitName || !node.name) continue;
+                const resolved = resolveVariable(node, context);
+                if (resolved === `{${node.name}}`) {
+                    failures.push(`${ability.id}.${field}: {${node.name}}`);
+                }
+            }
+        }
+    }
+
+    it('has no unresolved variable references', () => {
+        expect(failures, failures.join('\n')).toHaveLength(0);
+    });
 });

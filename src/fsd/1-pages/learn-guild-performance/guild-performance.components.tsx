@@ -11,9 +11,10 @@ import {
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
-import { buildLoopCountMaps, getDamageColorClass, unitRoundIconMap } from './guild-performance.utils';
+import { buildLoopCountMaps, getDamageColorClass } from './guild-performance.utils';
 
 // ---------------------------------------------------------------------------
 // Season / Player selects (shared across tabs, owned by the page)

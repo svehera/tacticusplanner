@@ -49,6 +49,7 @@ import effectShield from '@/assets/images/snowprint_assets/effects/shield_effect
 import effectStunned from '@/assets/images/snowprint_assets/effects/stunned_effect.png';
 import effectSynapse from '@/assets/images/snowprint_assets/effects/synapse_effect.png';
 import effectTaunted from '@/assets/images/snowprint_assets/effects/taunted_effect.png';
+import itemUnknown from '@/assets/images/snowprint_assets/equipment/ui_icon_item_unknown.png';
 import commonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_common.png';
 import epicFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_epic.png';
 import legendaryFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_legendary.png';
@@ -168,9 +169,22 @@ import mythicOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascens
 import rareOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_rare.png';
 import uncommonOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_uncommon.png';
 import xenosOrb from '@/assets/images/snowprint_assets/resources/ui_hero_ascension_orbs_xenos.png';
+import draftAbilityBadgesCommon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensCommon.png';
+import draftAbilityBadgesEpic from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensEpic.png';
+import draftAbilityBadgesLegendary from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensLegendary.png';
+import draftAbilityBadgesMythic from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensMythic.png';
+import draftAbilityBadgesRare from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensRare.png';
+import draftAbilityBadgesUncommon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_abilityTokensUncommon.png';
+import draftOrbsEpic from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsEpic.png';
+import draftOrbsLegendary from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsLegendary.png';
+import draftOrbsMythic from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsMythic.png';
+import draftOrbsRare from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsRare.png';
+import draftOrbsUncommon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsUncommon.png';
+import draftMachinesOfWarComponents from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_machinesOfWarToken.png';
 import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
 import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
+import blackstone from '@/assets/images/snowprint_assets/resources/ui_icon_resource_blackstone.png';
 import coins from '@/assets/images/snowprint_assets/resources/ui_icon_resource_coin_large.png';
 import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
@@ -179,6 +193,7 @@ import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resou
 import mowAmmo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_machines_of_war_ammo_large.png';
 import mythicSalvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_mythic_salvage.png';
 import salvage from '@/assets/images/snowprint_assets/resources/ui_icon_resource_salvage.png';
+import energy from '@/assets/images/snowprint_assets/resources/ui_icon_resource_stamina_large.png';
 import chaosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_chaos.png';
 import imperialComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_imperial.png';
 import xenosComponent from '@/assets/images/snowprint_assets/resources/ui_machines_of_war_tokens_xenos.png';
@@ -259,6 +274,12 @@ import traitThrillSeekers from '@/assets/images/snowprint_assets/traits/ui_icon_
 import traitUnknown from '@/assets/images/snowprint_assets/traits/ui_icon_trait_unknown_01.png';
 import traitVehicle from '@/assets/images/snowprint_assets/traits/ui_icon_trait_vehicle_01.png';
 import traitWeaversOfFate from '@/assets/images/snowprint_assets/traits/ui_icon_trait_weavers_of_fate_01.png';
+import upgradeCommon from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_common.png';
+import upgradeEpic from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_epic.png';
+import upgradeLegendary from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_legendary.png';
+import upgradeMythic from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_mythic.png';
+import upgradeRare from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_rare.png';
+import upgradeUncommon from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_uncommon.png';
 
 interface SnowprintIcon {
     file: string;
@@ -266,6 +287,86 @@ interface SnowprintIcon {
 }
 
 export const snowprintIcons: Record<string, SnowprintIcon> = {
+    upgradeCommon: {
+        file: upgradeCommon,
+        label: 'Upgrade (Common)',
+    },
+    upgradeEpic: {
+        file: upgradeEpic,
+        label: 'Upgrade (Epic)',
+    },
+    upgradeLegendary: {
+        file: upgradeLegendary,
+        label: 'Upgrade (Legendary)',
+    },
+    upgradeMythic: {
+        file: upgradeMythic,
+        label: 'Upgrade (Mythic)',
+    },
+    upgradeRare: {
+        file: upgradeRare,
+        label: 'Upgrade (Rare)',
+    },
+    upgradeUncommon: {
+        file: upgradeUncommon,
+        label: 'Upgrade (Uncommon)',
+    },
+    energy: {
+        file: energy,
+        label: 'Energy',
+    },
+    blackstone: {
+        file: blackstone,
+        label: 'Blackstone',
+    },
+    draftAbilityBadgesCommon: {
+        file: draftAbilityBadgesCommon,
+        label: 'Draft Ability Badge (Common)',
+    },
+    draftAbilityBadgesEpic: {
+        file: draftAbilityBadgesEpic,
+        label: 'Draft Ability Badge (Epic)',
+    },
+    draftAbilityBadgesLegendary: {
+        file: draftAbilityBadgesLegendary,
+        label: 'Draft Ability Badge (Legendary)',
+    },
+    draftAbilityBadgesMythic: {
+        file: draftAbilityBadgesMythic,
+        label: 'Draft Ability Badge (Mythic)',
+    },
+    draftAbilityBadgesRare: {
+        file: draftAbilityBadgesRare,
+        label: 'Draft Ability Badge (Rare)',
+    },
+    draftAbilityBadgesUncommon: {
+        file: draftAbilityBadgesUncommon,
+        label: 'Draft Ability Badge (Uncommon)',
+    },
+    draftOrbsEpic: {
+        file: draftOrbsEpic,
+        label: 'Draft Ascension Orb (Epic)',
+    },
+    draftOrbsLegendary: {
+        file: draftOrbsLegendary,
+        label: 'Draft Ascension Orb (Legendary)',
+    },
+    draftOrbsMythic: {
+        file: draftOrbsMythic,
+        label: 'Draft Ascension Orb (Mythic)',
+    },
+    draftOrbsRare: {
+        file: draftOrbsRare,
+        label: 'Draft Ascension Orb (Rare)',
+    },
+    draftOrbsUncommon: {
+        file: draftOrbsUncommon,
+        label: 'Draft Ascension Orb (Uncommon)',
+    },
+    draftMachinesOfWarComponents: {
+        file: draftMachinesOfWarComponents,
+        label: 'Draft Machines of War Component',
+    },
     character: {
         file: character,
         label: 'Character',
@@ -557,6 +658,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     chaosComponent: {
         file: chaosComponent,
         label: 'Chaos Component',
+    },
+    itemUnknown: {
+        file: itemUnknown,
+        label: 'Unknown Item',
     },
     commonEquipmentFrame: {
         file: commonEquipmentFrame,

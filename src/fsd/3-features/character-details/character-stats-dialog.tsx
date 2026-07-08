@@ -5,7 +5,7 @@ import { useState } from 'react';
 import { getEnumValues } from '@/fsd/5-shared/lib';
 import { calculateStat } from '@/fsd/5-shared/lib/stat-calculator';
 import { Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
-import { getImageUrl, PortalDialog, RankSelect, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
+import { AttackProfileRow, getImageUrl, PortalDialog, RankSelect, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
@@ -76,28 +76,13 @@ interface Props {
     onClose: () => void;
 }
 
-const AttackRow = ({ attack, type }: { attack: AttackProfile; type: 'melee' | 'ranged' }) => {
-    const damageTypeIcon = tacticusIcons[`damage${attack.damageType}`];
-
-    return (
-        <div className="flex items-center gap-2">
-            {type === 'melee' ? (
-                <img src={tacticusIcons.meleeAttack.file} alt="Melee" className="h-7 w-7 shrink-0" />
-            ) : (
-                <div className="relative flex h-7 w-7 shrink-0 items-center justify-center">
-                    <img src={tacticusIcons.rangedAttack.file} alt="Range" className="absolute inset-0 h-full w-full" />
-                    <span className="relative z-10 text-xs font-bold text-(--ability-range-text)">{attack.range}</span>
-                </div>
-            )}
-            {damageTypeIcon && <img src={damageTypeIcon.file} alt={attack.damageType} className="h-8 w-8 shrink-0" />}
-            <span className="flex-1 text-sm font-bold tracking-wide text-(--fg)">
-                {attack.damageType.toUpperCase()}
-            </span>
-            <img src={tacticusIcons.hitsIcon.file} alt="Hits" className="h-5 w-5 shrink-0" />
-            <span className="w-4 text-right text-sm font-semibold text-(--fg)">{attack.hitCount}</span>
-        </div>
-    );
-};
+const AttackRow = ({ attack, type }: { attack: AttackProfile; type: 'melee' | 'ranged' }) => (
+    <AttackProfileRow
+        hits={attack.hitCount}
+        damageType={attack.damageType}
+        range={type === 'ranged' ? attack.range : undefined}
+    />
+);
 
 export const CharacterStatsDialog = ({ char, open, onClose }: Props) => {
     const [rarity, setRarity] = useState<Rarity>(char.rarity);

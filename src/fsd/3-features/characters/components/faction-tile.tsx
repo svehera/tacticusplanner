@@ -92,7 +92,7 @@ export const FactionsTile = ({
                         <div
                             key={unit.snowprintId}
                             onClick={() => onCharacterClick?.(unit)}
-                            className="shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                            className="shrink-0 cursor-pointer rounded-md transition-shadow duration-200 hover:ring-2 hover:ring-(--primary)"
                             title={`Select ${unit.name || 'Unit'}`}>
                             <RosterSnapshotCharacter
                                 char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}

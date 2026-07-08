@@ -13,6 +13,7 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
+import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
 
 import { CompIcons } from '../guild-performance.components';
 import {
@@ -22,7 +23,6 @@ import {
     getAvailableBossPrefixes,
     getBossPrefix,
     sortBossPrefixes,
-    unitRoundIconMap,
 } from '../guild-performance.utils';
 
 import {

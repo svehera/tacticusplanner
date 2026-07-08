@@ -1,19 +1,25 @@
 /* eslint-disable import-x/no-internal-modules */
 import AberrantHypermorphIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AberrantHypermorph.png';
+import AblativePlatingIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AblativePlating.png';
 import AdaptiveStrategyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AdaptiveStrategy.png';
+import AdaptiveToxinsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AdaptiveToxins.png';
 import AdrenalGlandsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AdrenalGlands.png';
+import AdrenalSurgeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AdrenalSurge.png';
 import AetherStrideIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AetherStride.png';
 import AggressiveOnslaughtIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AggressiveOnslaught.png';
 import AllIsDustIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AllIsDust.png';
 import AlphaWarriorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AlphaWarrior.png';
 import AncestralFortuneIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AncestralFortune.png';
+import AnnihilatorBeamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AnnihilatorBeam.png';
 import AnvilShieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AnvilShield.png';
 import ArcaneShieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArcaneShield.png';
 import ArchContaminatorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArchContaminator.png';
 import ArcScourgeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArcScourge.png';
 import ArmoriumCherubIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArmoriumCherub.png';
+import ArmouredMightIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArmouredMight.png';
 import ArmourOfShriekingSoulsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ArmourofShriekingSouls.png';
 import AstartesBannerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AstartesBanner.png';
+import ATemptingTrapIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ATemptingTrap.png';
 import AttemptedPossessionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AttemptedPossession.png';
 import AugmentedAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AugmentedAssault.png';
 import AvalancheOfMuscleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_AvalancheOfMuscle.png';
@@ -21,19 +27,30 @@ import BarbedOvipositorIcon from '@/assets/images/snowprint_assets/abilities/ui_
 import BasiliskBarrageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BasiliskBarrage.png';
 import BattleFocusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BattleFocus.png';
 import BeaconOfRageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BeaconOfRage.png';
+import BigBadaBoomReworkedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BigBadaBoomReworked.png';
+import BioBarrageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BioBarrage.png';
 import BioMinefieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BioMinefield.png';
 import BlackRageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BlackRage.png';
+import BladeOfMagnusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BladeOfMagnus.png';
 import BlightGrenadesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BlightGrenades.png';
+import BlisteringAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BlisteringAssault.png';
 import BloodChaliceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BloodChalice.png';
+import BloodRunsAngerRisesWarCallsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BloodRunsAngerRisesWarCalls.png';
 import BloodyFuryIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BloodyFury.png';
 import BoltstormIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Boltstorm.png';
+import BookOfFateIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BookOfFate.png';
+import BossAdjutantIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BossAdjutant.png';
 import BounceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Bounce.png';
 import BrazierOfHolyFireIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BrazierOfHolyFire.png';
+import BreathOfSilenceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BreathOfSilence.png';
 import BringerOfDespairIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BringerOfDespair.png';
+import BroodProgenitorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_BroodProgenitor.png';
 import BurrowersIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Burrowers.png';
 import CalibaniteGreatswordIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CalibaniteGreatsword.png';
 import CallInReinforcementsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CallInReinforcements.png';
 import CallRipperSwarmsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CallRipperSwarms.png';
+import CallRipperSwarms2Icon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CallRipperSwarms2.png';
+import CallRipperSwarms3Icon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CallRipperSwarms3.png';
 import CamoCloakIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CamoCloak.png';
 import CatalystIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Catalyst.png';
 import ChampionOfTheFeastIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ChampionOfTheFeast.png';
@@ -52,14 +69,17 @@ import CultDemagogueIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import CursedOfTheWalkingPoxIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CursedOfTheWalkingPox.png';
 import CursedPlagueBellIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CursedPlagueBell.png';
 import CyclicIonBlasterIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CyclicIonBlaster.png';
+import DaBossIsWatchinIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DaBossIsWatchin.png';
 import DaemonicOrdnanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DaemonicOrdnance.png';
 import DaemonicPatronsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DaemonicPatrons.png';
+import DaGreatWaaaghIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DaGreatWaaagh.png';
 import DakkaDakkaDakkaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DakkaDakkaDakka.png';
 import DaRevolushunIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DaRevolushun.png';
 import DarkTalonStrikeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DarkTalonStrike.png';
 import DaughterOfTheAbyssIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DaughteroftheAbyss.png';
 import DeathFromAboveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DeathFromAbove.png';
 import DeathOnTheWindIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DeathOnTheWind.png';
+import DeathScreamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DeathScream.png';
 import DeathwingIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Deathwing.png';
 import DecoysAndMisdirectionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DecoysAndMisdirection.png';
 import DefenderOfTheGreaterGoodIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_DefenderOfTheGreaterGood.png';
@@ -83,6 +103,7 @@ import ElectroShockIcon from '@/assets/images/snowprint_assets/abilities/ui_icon
 import EmbodiedProphecyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EmbodiedProphecy.png';
 import EnmityForTheUnworthyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EnmityForTheUnworthy.png';
 import EntropyCannonsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EntropyCannons.png';
+import EreWeGoIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EreWeGo.png';
 import EuphoricStrikesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EuphoricStrikes.png';
 import ExcruciatingFrequenciesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ExcruciatingFrequencies.png';
 import ExecutionerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Executioner.png';
@@ -97,6 +118,7 @@ import FealtyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_abili
 import FearedInterrogatorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FearedInterrogator.png';
 import FearOfTheUnseenIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FearOfTheUnseen.png';
 import FeederTendrilsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FeederTendrils.png';
+import FieldsOfFireIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FieldsOfFire.png';
 import FightingRetreatIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FightingRetreat.png';
 import FireAndRepositionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FireAndReposition.png';
 import FireOfAbsolutionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FireOfAbsolution.png';
@@ -120,6 +142,7 @@ import FuryFromTheDelveIcon from '@/assets/images/snowprint_assets/abilities/ui_
 import FuryOfTheAncientsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_FuryOfTheAncients.png';
 import GalvanicFieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GalvanicField.png';
 import GauntletsOfUltramarIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GauntletsOfUltramar.png';
+import GazeOfMagnusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GazeOfMagnus.png';
 import GeminaeSuperiaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GeminaeSuperia.png';
 import GetEmRuntzIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GetEmRuntz.png';
 import GrapnelLauncherIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GrapnelLauncher.png';
@@ -129,6 +152,7 @@ import GrimEfficiencyIcon from '@/assets/images/snowprint_assets/abilities/ui_ic
 import GrimRetributionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GrimRetribution.png';
 import GrotTankIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GrotTank.png';
 import GuardianOrganismIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GuardianOrganism.png';
+import GunnersKillOnSightIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_GunnersKillOnSight.png';
 import HadesAutocannonsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HadesAutocannons.png';
 import HailOfLivingAmmunitionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HailOfLivingAmmunition.png';
 import HailstrikeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Hailstrike.png';
@@ -153,8 +177,12 @@ import HostOfPlaguesIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import HungeringSwarmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HungeringSwarm.png';
 import HuntersBeyondDeathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HuntersBeyondDeath.png';
 import HuntersInstinctsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HuntersInstincts.png';
+import HuntTheFallenIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HuntTheFallen.png';
+import HyperAggressionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HyperAggression.png';
 import HypermorphIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Hypermorph.png';
 import HypersensoryAbilitiesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_HypersensoryAbilities.png';
+import IllusionsOfTzeentchIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_IllusionsOfTzeentch.png';
+import ImpossibleFormIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ImpossibleForm.png';
 import IncendiaryShellsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_IncendiaryShells.png';
 import IncursionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Incursion.png';
 import InescapableAccuracyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InescapableAccuracy.png';
@@ -163,11 +191,13 @@ import InfernalCannonIcon from '@/assets/images/snowprint_assets/abilities/ui_ic
 import InfernalPactsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InfernalPacts.png';
 import InspiredToGreatnessIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InspiredToGreatness.png';
 import InstrumentsOfVengeanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InstrumentsOfVengeance.png';
+import IntegratedCircuitsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_IntegratedCircuits.png';
 import InvocationOfMachineVengeanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_InvocationOfMachineVengeance.png';
 import IronkinSteeljackIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_IronkinSteeljack.png';
 import ItItchesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ItItches.png';
 import ItsGonnaBlowIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ItsGonnaBlow.png';
 import JakhalStimmsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_JakhalStimms.png';
+import KardiocoreGalvanusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_KardiocoreGalvanus.png';
 import KillMaimBurnIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_KillMaimBurn.png';
 import KissOfDeathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_KissOfDeath.png';
 import KustomForceFieldReworkedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_KustomForceFieldReworked.png';
@@ -175,9 +205,11 @@ import LashOfTormentIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import LeadingTheChargeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LeadingTheCharge.png';
 import LegacyOfCombatIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LegacyOfCombat.png';
 import LegendaryCommanderIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LegendaryCommander.png';
+import LethalMiasmaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LethalMiasma.png';
 import LightImUpIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LightImUp.png';
 import LightOfSanguiniusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LightOfSanguinius.png';
 import LionHelmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LionHelm.png';
+import LivingBatteringRamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LivingBatteringRam.png';
 import LivingLightningIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LivingLightning.png';
 import Loki_SwoopingHawkIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Loki_SwoopingHawk.png';
 import LordOfTempestsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LordOfTempests.png';
@@ -188,13 +220,16 @@ import MartialApotheosisIcon from '@/assets/images/snowprint_assets/abilities/ui
 import MartialExemplarIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MartialExemplar.png';
 import MartialInspirationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MartialInspiration.png';
 import MartialSuperiorityIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MartialSuperiority.png';
+import MassiveScythingTalonsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MassiveScythingTalons.png';
 import MasterAnnihilatorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MasterAnnihilator.png';
 import MasterOfTheTutelariesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MasterOfTheTutelaries.png';
 import MaugetarIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Maugetar.png';
+import MawClawsofThyraxIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MawClawsOfThyrax.png';
 import MedicusMinistorumIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MedicusMinistorum.png';
 import MightFromBelowIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MightFromBelow.png';
 import MindControlIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MindControl.png';
 import MischiefMakersIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MischiefMakers.png';
+import MoltenFormIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MoltenForm.png';
 import MomentShackleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MomentShackle.png';
 import MortarionsPlagueWindIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MortarionsPlagueWind.png';
 import MortisRoundIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MortisRound.png';
@@ -202,26 +237,37 @@ import MultiThreatEliminatorIcon from '@/assets/images/snowprint_assets/abilitie
 import MultiTrackerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MultiTracker.png';
 import MurderousSwingIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MurderousSwing.png';
 import MV71SniperDroneSquadIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MV71SniperDroneSquad.png';
+import MyWillBeDoneIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MyWillBeDone.png';
 import NanoscarabRepairProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NanoscarabRepairProtocols.png';
 import NartheciumIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Narthecium.png';
+import NeedsMoreDakkaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NeedsMoreDakka.png';
+import NetherRealmCasketIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NetherrealmCasket.png';
 import NeuroparasiteIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Neuroparasite.png';
 import NightshroudIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Nightshroud.png';
+import NoctilithBeaconsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NoctilithBeacons.png';
 import NoHidingFromTheWatchersIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NoHidingFromTheWatchers.png';
 import NovaBoostIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NovaBoost.png';
 import NovaChargeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NovaCharge.png';
 import NovaShieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_NovaShield.png';
+import ObeisanceGeneratorsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ObeisanceGenerators.png';
 import ObsessiveAnnunciationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ObsessiveAnnunciation.png';
 import OiWatchItIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OiWatchIt.png';
 import OmnissiahsBlessingIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OmnissiahsBlessing.png';
 import OptimizedGaitIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OptimizedGait.png';
+import OrbsOfDecayIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OrbsOfDecay.png';
 import OverwhelmingWrathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OverwhelmingWrath.png';
 import PathOfCommandIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PathOfCommand.png';
+import PhaeronOfTheBladesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PhaeronOfTheBlades.png';
+import PhaeronOfTheStarsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PhaeronOfTheStars.png';
+import PhantasmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Phantasm.png';
 import PileInIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PileIn.png';
+import PinpointCounterOffensiveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PinpointCounterOffensive.png';
 import PlagueburstMortarIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PlagueburstMortar.png';
 import PlagueWindIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PlagueWind.png';
 import PlasmaCannonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PlasmaCannon.png';
 import PlasmaGrenadeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PlasmaGrenade.png';
 import PossessionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Possession.png';
+import PoundThemToDustIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PoundThemToDust.png';
 import PowerTripIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PowerTrip.png';
 import PowerUp_ArmorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PowerUp_Armor.png';
 import PowerUp_BombIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PowerUp_Bomb.png';
@@ -240,6 +286,10 @@ import PrecisionShotIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import PredictiveGuidanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PredictiveGuidance.png';
 import PrehensilePincerTailIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PrehensilePincerTail.png';
 import PrimarchOfTheFirstLegionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PrimarchOfTheFirstLegion.png';
+import PriorityReclamationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PriorityReclamation.png';
+import ProperKillyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ProperKilly.png';
+import ProphetOfGorkAndMorkIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ProphetOfGorkAndMork.png';
+import PsychicDominionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicDominion.png';
 import PsychicFortressIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicFortress.png';
 import PsychicMaelstromIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicMaelstrom.png';
 import PsychicStalkIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicStalk.png';
@@ -247,20 +297,25 @@ import PurgeResponseIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import PyreblasterIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Pyreblaster.png';
 import RadBombardmentIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RadBombardment.png';
 import RadSaturationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RadSaturation.png';
+import RadZoneCorpsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RadZoneCorps.png';
 import RamshackleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Ramshackle.png';
 import RapidFireIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RapidFire.png';
 import RealityUnboundIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RealityUnbound.png';
 import ReanimationBeamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReanimationBeam.png';
 import ReanimationProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReanimationProtocols.png';
 import ReapingScytheIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReapingScythe.png';
+import RedemptionOfTheRisenIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RedemptionOfTheRisen.png';
 import RedRampageIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RedRampage.png';
 import RedThirstIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RedThirst.png';
 import RefusalToBeOutdoneIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RefusalToBeOutdone.png';
 import ReinforcedHiveNodeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReinforcedHiveNode.png';
+import ReinforcementsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Reinforcements.png';
 import RelentlessMarchIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelentlessMarch.png';
+import RelicOfLostCadiaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelicOfLostCadia.png';
 import ResurrectionOrbIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ResurrectionOrb.png';
 import RevealIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Reveal.png';
 import RevitalizingMalignancyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RevitalizingMalignancy.png';
+import RevoltinglyResilientIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RevoltinglyResilient.png';
 import RighteousRepugnanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RighteousRepugnance.png';
 import RitesOfBattleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RitesOfBattle.png';
 import RitesOfMorkaiIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RitesOfMorkai.png';
@@ -273,6 +328,8 @@ import SavageKillerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon
 import SaviorProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SaviorProtocols.png';
 import ScarabHiveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ScarabHive.png';
 import ScarabSummonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ScarabSummon.png';
+import ScreamerInvocationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ScreamerInvocation.png';
+import ScytheOfDustIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ScytheOfDust.png';
 import ScythingTalonsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ScythingTalons.png';
 import SeekerMissileFrequencyLockIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SeekerMissileFrequencyLock.png';
 import SelfRepairMechanismReworkedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SelfRepairMechanismReworked.png';
@@ -289,6 +346,10 @@ import SlashingDiveIcon from '@/assets/images/snowprint_assets/abilities/ui_icon
 import SmashaEadIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SmashaEad.png';
 import SolarAtomizerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SolarAtomizer.png';
 import SorcerousFacadeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SorcerousFacade.png';
+import SoulHungerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SoulHunger.png';
+import SpawnTermagantsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpawnTermagants.png';
+import SpawnTermagants2Icon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpawnTermagants2.png';
+import SpawnTermagants3Icon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpawnTermagants3.png';
 import SpecialIssueCombiMeltaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpecialIssueCombiMelta.png';
 import SpiritLeechIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpiritLeech.png';
 import SpiritualLeaderIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SpiritualLeader.png';
@@ -298,6 +359,7 @@ import SpotterReworkedIcon from '@/assets/images/snowprint_assets/abilities/ui_i
 import SquigHoundIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SquigHound.png';
 import SquigLaunchasIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SquigLaunchas.png';
 import SquigMineIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SquigMine.png';
+import StaffOfStarsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StaffOfStars.png';
 import StandVigilIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StandVigil.png';
 import SternguardFocusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SternguardFocus.png';
 import StikkbombIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Stikkbomb.png';
@@ -309,33 +371,46 @@ import StranglethornCannonIcon from '@/assets/images/snowprint_assets/abilities/
 import StrikeFromTheShadowsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StrikeFromTheShadows.png';
 import StructuralAnalyserIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_StructuralAnalyser.png';
 import SummaryExecutionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SummaryExecution.png';
+import SupaCyborkBodyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SupaCyborkBody.png';
 import SuperchargeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Supercharge.png';
 import SupremeCommanderIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SupremeCommander.png';
 import SwornProtectorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SwornProtector.png';
+import SynapticBacklashIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SynapticBacklash.png';
 import SynapticImperativeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SynapticImperative.png';
 import SynapticInsightIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SynapticInsight.png';
 import SynapticLinchpinIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_SynapticLinchpin.png';
 import TacticalPrecisionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TacticalPrecision.png';
 import TaintedNartheciumIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TaintedNarthecium.png';
 import TalonsOfTheEmperorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TalonsoftheEmperor.png';
+import TargetingProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TargetingProtocols.png';
 import TargetLockIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TargetLock.png';
 import TerrifyingCrescendoIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TerrifyingCrescendo.png';
 import TerrorsLamentIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TerrorsLament.png';
 import TheBetrayerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheBetrayer.png';
+import TheBloodyHandedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheBloodyHanded.png';
 import TheEmperorsShieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheEmperorsShield.png';
 import TheLanternIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheLantern.png';
 import TheLionsWrathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheLionsWrath.png';
 import TheQuickeningIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheQuickening.png';
+import TheWailingDoomStrikesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheWailingDoomStrikes.png';
+import TheWailingDoomSweepsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheWailingDoomSweeps.png';
+import TheWildHostIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheWildHost.png';
+import TheWrathfulDeadIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheWrathfulDead.png';
+import TheWrathOfKhaineUnleashedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheWrathOfKhaineUnleashed.png';
 import ThriceBlessedConflagrationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ThriceBlessedConflagration.png';
 import ThunderousAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ThunderousAssault.png';
 import TimeFluxIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TimeFlux.png';
 import TimesplinterMantleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TimesplinterMantle.png';
 import ToughToKillIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ToughToKill.png';
+import TreasonOfTzeentchIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TreasonOfTzeentch.png';
 import TrophyTakerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TrophyTaker.png';
 import TunnelingHorrorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TunnelingHorror.png';
 import TwinSmartMissileSystemIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TwinSmartMissileSystem.png';
 import TwistedScienceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TwistedScience.png';
+import TzeentchsFirestormIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TzeentchsFirestorm.png';
 import UnbreakableDutyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_UnbreakableDuty.png';
+import UnbridledCarnageReworkedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_UnbridledCarnageReworked.png';
+import UnparalleledFerocityIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_UnparalleledFerocity.png';
 import UnstoppableFerocityIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_UnstoppableFerocity.png';
 import UnstoppableMomentumReworkedIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_UnstoppableMomentumReworked.png';
 import UnwaveringSentinelIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_UnwaveringSentinel.png';
@@ -346,12 +421,15 @@ import VigilanceEternalIcon from '@/assets/images/snowprint_assets/abilities/ui_
 import VisionsOfHeresyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VisionsOfHeresy.png';
 import VolatileIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Volatile.png';
 import VoltagheistFieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VoltagheistField.png';
+import VulnerableToFlameAndBlastIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VulnerableToFlameAndBlast.png';
+import VulnerableToMeleeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VulnerableToMelee.png';
 import WaaaghIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Waaagh.png';
 import WallOfMirrorsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WallOfMirrors.png';
 import WarConstructIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WarConstruct.png';
 import WarHowlIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WarHowl.png';
 import WatchedOverIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WatchedOver.png';
 import WayOfTheShortBladeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WayOfTheShortBlade.png';
+import WeakerRearArmourIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WeakerRearArmour.png';
 import WhipcoilBodyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WhipcoilBody.png';
 import WireweaveNetIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WireweaveNet.png';
 import WraithcannonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Wraithcannon.png';
@@ -389,6 +467,11 @@ export const abilityIcons: Record<string, IconData> = {
     BlackRage: { file: BlackRageIcon, name: 'Black Rage' },
     BlightGrenades: { file: BlightGrenadesIcon, name: 'Blight Grenades' },
     BloodChalice: { file: BloodChaliceIcon, name: 'Blood Chalice' },
+    BloodRunsAngerRisesWarCalls: { file: BloodRunsAngerRisesWarCallsIcon, name: 'Blood Runs, Anger Rises, War Calls' },
+    BloodRunsAngerRisesWarCallsReworked: {
+        file: BloodRunsAngerRisesWarCallsIcon,
+        name: 'Blood Runs, Anger Rises, War Calls',
+    },
     BloodyFury: { file: BloodyFuryIcon, name: 'Bloody Fury' },
     Boltstorm: { file: BoltstormIcon, name: 'Boltstorm' },
     Bounce: { file: BounceIcon, name: 'Bounce' },
@@ -425,6 +508,7 @@ export const abilityIcons: Record<string, IconData> = {
     DeathFromAbove: { file: DeathFromAboveIcon, name: 'Death From Above' },
     DeathOnTheWind: { file: DeathOnTheWindIcon, name: 'Death on the Wind' },
     Deathwing: { file: DeathwingIcon, name: 'Deathwing' },
+    DeathwingKnight: { file: DeathwingIcon, name: 'Deathwing' },
     DecoysAndMisdirection: { file: DecoysAndMisdirectionIcon, name: 'Decoys and Misdirection' },
     DefendTheDivineWork: { file: DefendTheDivineWorkIcon, name: 'Defend The Divine Work' },
     DefenderOfTheGreaterGood: { file: DefenderOfTheGreaterGoodIcon, name: 'Defender of the Greater Good' },
@@ -720,4 +804,82 @@ export const abilityIcons: Record<string, IconData> = {
     WireweaveNet: { file: WireweaveNetIcon, name: 'Wireweave Net' },
     Wraithcannon: { file: WraithcannonIcon, name: 'Wraithcannon' },
     WrathfulDevotion: { file: WrathfulDevotionIcon, name: 'Wrathful Devotion' },
+    ATemptingTrap: { file: ATemptingTrapIcon, name: 'A Tempting Trap' },
+    AblativePlating: { file: AblativePlatingIcon, name: 'Ablative Plating' },
+    AdaptiveToxins: { file: AdaptiveToxinsIcon, name: 'Adaptive Toxins' },
+    AdrenalSurge: { file: AdrenalSurgeIcon, name: 'Adrenal Surge' },
+    AnnihilatorBeam: { file: AnnihilatorBeamIcon, name: 'Annihilator Beam' },
+    ArmouredMight: { file: ArmouredMightIcon, name: 'Armoured Might' },
+    BigBadaBoomReworked: { file: BigBadaBoomReworkedIcon, name: 'Big Boom' },
+    BioBarrage: { file: BioBarrageIcon, name: 'Bio Barrage' },
+    BladeOfMagnus: { file: BladeOfMagnusIcon, name: 'Blade of Magnus' },
+    BlisteringAssault: { file: BlisteringAssaultIcon, name: 'Blistering Assault' },
+    BookOfFate: { file: BookOfFateIcon, name: 'Book of Fate' },
+    BossAdjutant: { file: BossAdjutantIcon, name: 'Boss Adjutant' },
+    BreathOfSilence: { file: BreathOfSilenceIcon, name: 'Breath of Silence' },
+    BroodProgenitor: { file: BroodProgenitorIcon, name: 'Brood Progenitor' },
+    CallRipperSwarms2: { file: CallRipperSwarms2Icon, name: 'Call Ripper Swarms' },
+    CallRipperSwarms3: { file: CallRipperSwarms3Icon, name: 'Call Ripper Swarms' },
+    DaBossIsWatchin: { file: DaBossIsWatchinIcon, name: "Da Boss Is Watchin'" },
+    DaGreatWaaagh: { file: DaGreatWaaaghIcon, name: 'Da Great Waaagh!' },
+    DeathScream: { file: DeathScreamIcon, name: 'Death Scream' },
+    EreWeGo: { file: EreWeGoIcon, name: "'Ere We Go!" },
+    FieldsOfFire: { file: FieldsOfFireIcon, name: 'Fields of Fire' },
+    GazeOfMagnus: { file: GazeOfMagnusIcon, name: 'Gaze of Magnus' },
+    GunnersKillOnSight: { file: GunnersKillOnSightIcon, name: 'Gunners, Kill on Sight!' },
+    HuntTheFallen: { file: HuntTheFallenIcon, name: 'Hunt the Fallen' },
+    HyperAggression: { file: HyperAggressionIcon, name: 'Hyper-Aggression' },
+    IllusionsOfTzeentch: { file: IllusionsOfTzeentchIcon, name: 'Illusions of Tzeentch' },
+    ImpossibleForm: { file: ImpossibleFormIcon, name: 'Impossible Form' },
+    IntegratedCircuits: { file: IntegratedCircuitsIcon, name: 'Integrated Circuits' },
+    KardiocoreGalvanus: { file: KardiocoreGalvanusIcon, name: 'Kardiocore Galvanus' },
+    LethalMiasma: { file: LethalMiasmaIcon, name: 'Lethal Miasma' },
+    LivingBatteringRam: { file: LivingBatteringRamIcon, name: 'Living Battering Ram' },
+    MassiveScythingTalons: { file: MassiveScythingTalonsIcon, name: 'Massive Scything Talons' },
+    MawClawsofThyrax: { file: MawClawsofThyraxIcon, name: 'Maw-Claws of Thyrax' },
+    MoltenForm: { file: MoltenFormIcon, name: 'Molten Form' },
+    MyWillBeDone: { file: MyWillBeDoneIcon, name: 'My Will Be Done' },
+    NeedsMoreDakka: { file: NeedsMoreDakkaIcon, name: 'Needs More Dakka!' },
+    NetherRealmCasket: { file: NetherRealmCasketIcon, name: 'Nether-Realm Casket' },
+    NoctilithBeacons: { file: NoctilithBeaconsIcon, name: 'Noctilith Beacons' },
+    ObeisanceGenerators: { file: ObeisanceGeneratorsIcon, name: 'Obeisance Generators' },
+    OrbsOfDecay: { file: OrbsOfDecayIcon, name: 'Orbs of Decay' },
+    PhaeronOfTheBlades: { file: PhaeronOfTheBladesIcon, name: 'Phaeron of the Blades' },
+    PhaeronOfTheStars: { file: PhaeronOfTheStarsIcon, name: 'Phaeron of the Stars' },
+    Phantasm: { file: PhantasmIcon, name: 'Phantasm' },
+    PinpointCounterOffensive: { file: PinpointCounterOffensiveIcon, name: 'Pinpoint Counter Offensive' },
+    PoundThemToDust: { file: PoundThemToDustIcon, name: 'Pound Them to Dust!' },
+    PriorityReclamation: { file: PriorityReclamationIcon, name: 'Priority Reclamation' },
+    ProperKilly: { file: ProperKillyIcon, name: 'Proper Killy' },
+    ProphetOfGorkAndMork: { file: ProphetOfGorkAndMorkIcon, name: 'Prophet of Gork and Mork' },
+    PsychicDominion: { file: PsychicDominionIcon, name: 'Psychic Dominion' },
+    RadZoneCorps: { file: RadZoneCorpsIcon, name: 'Rad-Zone Corps' },
+    RedemptionOfTheRisen: { file: RedemptionOfTheRisenIcon, name: 'Redemption of the Risen' },
+    Reinforcements: { file: ReinforcementsIcon, name: 'Reinforcements!' },
+    RelicOfLostCadia: { file: RelicOfLostCadiaIcon, name: 'Relic of Lost Cadia' },
+    RevoltinglyResilient: { file: RevoltinglyResilientIcon, name: 'Revoltingly Resilient' },
+    ScreamerInvocation: { file: ScreamerInvocationIcon, name: 'Screamer Invocation' },
+    ScytheOfDust: { file: ScytheOfDustIcon, name: 'Scythe of Dust' },
+    SoulHunger: { file: SoulHungerIcon, name: 'Soul Hunger' },
+    SpawnTermagants: { file: SpawnTermagantsIcon, name: 'Spawn Termagants' },
+    SpawnTermagants2: { file: SpawnTermagants2Icon, name: 'Spawn Termagants' },
+    SpawnTermagants3: { file: SpawnTermagants3Icon, name: 'Spawn Termagants' },
+    StaffOfStars: { file: StaffOfStarsIcon, name: 'Staff of Stars' },
+    SupaCyborkBody: { file: SupaCyborkBodyIcon, name: 'Supa-Cybork Body' },
+    SynapticBacklash: { file: SynapticBacklashIcon, name: 'Synaptic Backlash' },
+    TargetingProtocols: { file: TargetingProtocolsIcon, name: 'Targeting Protocols' },
+    TheBloodyHanded: { file: TheBloodyHandedIcon, name: 'The Bloody Handed' },
+    TheWailingDoomStrikes: { file: TheWailingDoomStrikesIcon, name: 'The Wailing Doom Strikes' },
+    TheWailingDoomSweeps: { file: TheWailingDoomSweepsIcon, name: 'The Wailing Doom Sweeps' },
+    TheWildHost: { file: TheWildHostIcon, name: 'The Wild Host' },
+    TheWrathOfKhaineUnleashed: { file: TheWrathOfKhaineUnleashedIcon, name: 'The Wrath of Khaine Unleashed' },
+    TheWrathOfKhaineUnleashedReworked: { file: TheWrathOfKhaineUnleashedIcon, name: 'The Wrath of Khaine Unleashed' },
+    TheWrathfulDead: { file: TheWrathfulDeadIcon, name: 'The Wrathful Dead' },
+    TreasonOfTzeentch: { file: TreasonOfTzeentchIcon, name: 'Treason of Tzeentch' },
+    TzeentchsFirestorm: { file: TzeentchsFirestormIcon, name: "Tzeentch's Firestorm" },
+    UnbridledCarnageReworked: { file: UnbridledCarnageReworkedIcon, name: 'Clusta Bomma Precishun Strike' },
+    UnparalleledFerocity: { file: UnparalleledFerocityIcon, name: 'Unparalleled Ferocity' },
+    VulnerableToFlameAndBlast: { file: VulnerableToFlameAndBlastIcon, name: 'Vulnerable to Flame and Blast' },
+    VulnerableToMelee: { file: VulnerableToMeleeIcon, name: 'Vulnerable to Melee' },
+    WeakerRearArmour: { file: WeakerRearArmourIcon, name: 'Weaker Rear Armour' },
 };

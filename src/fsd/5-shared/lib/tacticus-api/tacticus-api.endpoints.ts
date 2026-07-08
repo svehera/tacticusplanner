@@ -9,8 +9,6 @@ export const getTacticusGuildRaidData = () => makeApiCall<TacticusGuildRaidRespo
 export interface UpdateTacticusApiKeyOptions {
     shareInGameName?: boolean;
     shareRosterData?: boolean;
-    /** Guild-leader opt-in: privately share each guild member's performance data with that member only. */
-    shareGuildMemberPerformance?: boolean;
     /** This player's own guild tag (5 alphanumeric chars), used when no guild API key is provided. */
     guildTag?: string;
 }
@@ -31,7 +29,6 @@ export const updateTacticusApiKey = (
         tacticusUserId,
         shareInGameNameWithGuild: options.shareInGameName,
         shareRosterDataWithGuild: options.shareRosterData,
-        shareGuildMemberPerformance: options.shareGuildMemberPerformance,
         guildTag: options.guildTag,
     });
 };

@@ -40,3 +40,4 @@ export { PageToolbar, PageToolbarSpacer, PageToolbarDivider } from './page-toolb
 export { PageMetaProvider, usePageMetaOverride } from './page-meta';
 export type { PageMeta } from './page-meta';
 export { DebugJson } from './debug-json';
+export { AttackProfileRow } from './attack-profile-row';
