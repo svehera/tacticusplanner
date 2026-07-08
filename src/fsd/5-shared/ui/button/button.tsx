@@ -9,9 +9,9 @@ import { buttonStyles } from './button-styles';
 
 interface ButtonProps extends ButtonPrimitiveProps {
     intent?: 'primary' | 'secondary' | 'success' | 'danger' | 'warning';
-    size?: 'medium' | 'large' | 'square-petite' | 'extra-small' | 'small';
+    size?: 'medium' | 'large' | 'square-petite' | 'extra-small' | 'small' | 'unstyled';
     shape?: 'square' | 'circle';
-    appearance?: 'solid' | 'outline' | 'plain';
+    appearance?: 'solid' | 'outline' | 'plain' | 'unstyled';
     ref?: React.Ref<HTMLButtonElement>;
 }
 

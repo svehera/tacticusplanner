@@ -17,6 +17,7 @@ export {
     getModifierIcon,
     getModifierPortraitUrl,
     getModifierTitle,
+    resolveModifierDisplay,
     getActiveModifierDefinitions,
     sortModifiersByHpLost,
     buildModifierHpLostOptions,
@@ -29,7 +30,7 @@ export {
     getUnitRemovals,
     applyUnitRemovals,
 } from './guild-boss-modifiers';
-export type { StatAdjustments, AbilityAdjustments } from './guild-boss-modifiers';
+export type { StatAdjustments, AbilityAdjustments, ModifierDisplay } from './guild-boss-modifiers';
 export {
     getSeasonIds,
     getSeasonConfig,
@@ -46,6 +47,10 @@ export {
     getFieldEnemies,
     getSetPrimeEncounters,
     findEncounterLocation,
+    findPositionByTierSet,
+    findPositionByBossUnitSetId,
+    getNextEncounterPosition,
+    getEncountersAtPosition,
     getUnitDisplayName,
     guildBossData,
     resolvePrimeDisplayName,
@@ -56,5 +61,5 @@ export {
     getBossUnitSetIds,
     getPrimeUnitSetIds,
 } from './guild-boss.service';
-export type { EncounterLocation } from './guild-boss.service';
+export type { EncounterLocation, EncounterPosition } from './guild-boss.service';
 export { resolveFieldEnemyNpcData } from './guild-boss-npc-adapter';

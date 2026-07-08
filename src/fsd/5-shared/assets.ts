@@ -274,6 +274,12 @@ import traitThrillSeekers from '@/assets/images/snowprint_assets/traits/ui_icon_
 import traitUnknown from '@/assets/images/snowprint_assets/traits/ui_icon_trait_unknown_01.png';
 import traitVehicle from '@/assets/images/snowprint_assets/traits/ui_icon_trait_vehicle_01.png';
 import traitWeaversOfFate from '@/assets/images/snowprint_assets/traits/ui_icon_trait_weavers_of_fate_01.png';
+import upgradeCommon from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_common.png';
+import upgradeEpic from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_epic.png';
+import upgradeLegendary from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_legendary.png';
+import upgradeMythic from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_mythic.png';
+import upgradeRare from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_rare.png';
+import upgradeUncommon from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_uncommon.png';
 
 interface SnowprintIcon {
     file: string;
@@ -281,6 +287,30 @@ interface SnowprintIcon {
 }
 
 export const snowprintIcons: Record<string, SnowprintIcon> = {
+    upgradeCommon: {
+        file: upgradeCommon,
+        label: 'Upgrade (Common)',
+    },
+    upgradeEpic: {
+        file: upgradeEpic,
+        label: 'Upgrade (Epic)',
+    },
+    upgradeLegendary: {
+        file: upgradeLegendary,
+        label: 'Upgrade (Legendary)',
+    },
+    upgradeMythic: {
+        file: upgradeMythic,
+        label: 'Upgrade (Mythic)',
+    },
+    upgradeRare: {
+        file: upgradeRare,
+        label: 'Upgrade (Rare)',
+    },
+    upgradeUncommon: {
+        file: upgradeUncommon,
+        label: 'Upgrade (Uncommon)',
+    },
     energy: {
         file: energy,
         label: 'Energy',

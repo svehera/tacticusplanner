@@ -51,6 +51,10 @@
     /* ── Hairline (quieter than border) ──────── */
     --color-hairline: var(--hairline);
 
+    /* ── Muted foreground / tertiary surface ──── */
+    --color-fg-muted: var(--fg-muted);
+    --color-bg-tertiary: var(--bg-tertiary);
+
     /* ── Data surface ─────────────────────────── */
     --color-data-surface: var(--data-surface);
     --color-data-surface-fg: var(--data-surface-fg);
@@ -119,6 +123,10 @@
 
         /* ── Hairline ─────────────────────────────── */
         --hairline: color-mix(in srgb, var(--border) 45%, transparent);
+
+        /* ── Muted foreground / tertiary surface ──── */
+        --fg-muted: var(--color-zinc-500);
+        --bg-tertiary: var(--color-zinc-200);
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-50);
@@ -260,6 +268,10 @@
 
         /* ── Hairline ─────────────────────────────── */
         --hairline: color-mix(in srgb, var(--border) 45%, transparent);
+
+        /* ── Muted foreground / tertiary surface ──── */
+        --fg-muted: var(--color-zinc-400);
+        --bg-tertiary: var(--color-zinc-700);
 
         /* ── Data surface (grids, tables) ─────────── */
         --data-surface: var(--color-zinc-800);
