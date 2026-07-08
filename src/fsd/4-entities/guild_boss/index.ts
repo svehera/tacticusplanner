@@ -17,6 +17,7 @@ export {
     getModifierIcon,
     getModifierPortraitUrl,
     getModifierTitle,
+    resolveModifierDisplay,
     getActiveModifierDefinitions,
     sortModifiersByHpLost,
     buildModifierHpLostOptions,
@@ -29,7 +30,7 @@ export {
     getUnitRemovals,
     applyUnitRemovals,
 } from './guild-boss-modifiers';
-export type { StatAdjustments, AbilityAdjustments } from './guild-boss-modifiers';
+export type { StatAdjustments, AbilityAdjustments, ModifierDisplay } from './guild-boss-modifiers';
 export {
     getSeasonIds,
     getSeasonConfig,

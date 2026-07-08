@@ -6,14 +6,9 @@ import { obfuscateUserId } from '@/fsd/5-shared/lib';
 import type { TacticusGuildRaidResponse } from '@/fsd/5-shared/lib/tacticus-api';
 import { RarityMapper, type Rarity } from '@/fsd/5-shared/model';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import type { ISnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
-import {
-    formatAbilityName,
-    getModifierIcon,
-    getModifierPortraitUrl,
-    getModifierTitle,
-    guildBossData,
-} from '@/fsd/4-entities/guild_boss';
+import { resolveModifierDisplay } from '@/fsd/4-entities/guild_boss';
 import { NpcPortrait } from '@/fsd/4-entities/npc';
 
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
@@ -38,20 +33,20 @@ const HpBar = ({ hp }: { hp: BossDisplayHp }) => {
     if (hp.kind === 'fullUnknown') {
         return (
             <div className="flex flex-col gap-0.5">
-                <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-                    <div className="h-full w-full bg-red-500 dark:bg-red-400" />
+                <div className="h-3 w-full overflow-hidden rounded-full bg-(--border)">
+                    <div className="h-full w-full bg-(--danger)" />
                 </div>
-                <span className="text-xs text-zinc-500 tabular-nums">Full HP</span>
+                <span className="text-xs text-(--fg-muted) tabular-nums">Full HP</span>
             </div>
         );
     }
     if (hp.kind === 'full') {
         return (
             <div className="flex flex-col gap-0.5">
-                <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-                    <div className="h-full w-full bg-red-500 dark:bg-red-400" />
+                <div className="h-3 w-full overflow-hidden rounded-full bg-(--border)">
+                    <div className="h-full w-full bg-(--danger)" />
                 </div>
-                <span className="text-xs text-zinc-500 tabular-nums">
+                <span className="text-xs text-(--fg-muted) tabular-nums">
                     {hp.max.toLocaleString()} / {hp.max.toLocaleString()} HP Remaining
                 </span>
             </div>
@@ -60,58 +55,77 @@ const HpBar = ({ hp }: { hp: BossDisplayHp }) => {
     const pct = hp.max > 0 ? (hp.remaining / hp.max) * 100 : 0;
     return (
         <div className="flex flex-col gap-0.5">
-            <div className="h-3 w-full overflow-hidden rounded-full bg-zinc-200 dark:bg-zinc-700">
-                <div className="h-full bg-red-500 transition-all dark:bg-red-400" style={{ width: `${pct}%` }} />
+            <div className="h-3 w-full overflow-hidden rounded-full bg-(--border)">
+                <div className="h-full bg-(--danger) transition-all" style={{ width: `${pct}%` }} />
             </div>
-            <span className="text-xs text-zinc-500 tabular-nums">
+            <span className="text-xs text-(--fg-muted) tabular-nums">
                 {hp.remaining.toLocaleString()} / {hp.max.toLocaleString()} HP Remaining
             </span>
         </div>
     );
 };
 
+const EncounterPortrait = ({
+    fakeChar,
+    portraitUrl,
+    displayName,
+    imgClassName,
+    placeholderClassName,
+}: {
+    fakeChar?: ISnapshotCharacter;
+    portraitUrl?: string;
+    displayName: string;
+    imgClassName: string;
+    placeholderClassName: string;
+}) => {
+    if (fakeChar) {
+        return (
+            <div className="h-[154px] w-[121px] overflow-hidden">
+                <div className="h-[307px] w-[242px] origin-top-left scale-50">
+                    <NpcPortrait
+                        id={fakeChar.id}
+                        rank={fakeChar.rank}
+                        stars={fakeChar.stars}
+                        customPortraitUrl={portraitUrl}
+                        rarity={fakeChar.rarity}
+                    />
+                </div>
+            </div>
+        );
+    }
+    if (portraitUrl) {
+        return <img src={portraitUrl} alt={displayName} className={imgClassName} />;
+    }
+    return <div className={placeholderClassName}>{displayName}</div>;
+};
+
 const PrimePanel = ({ prime, rarity }: { prime: PrimeDisplay; rarity: Rarity }) => {
     return (
         <div className="flex w-56 shrink-0 flex-col items-center gap-2 text-center">
-            {prime.fakeChar ? (
-                <div className="h-[154px] w-[121px] overflow-hidden">
-                    <div className="h-[307px] w-[242px] origin-top-left scale-50">
-                        <NpcPortrait
-                            id={prime.fakeChar.id}
-                            rank={prime.fakeChar.rank}
-                            stars={prime.fakeChar.stars}
-                            customPortraitUrl={prime.portraitUrl}
-                            rarity={prime.fakeChar.rarity}
-                        />
-                    </div>
-                </div>
-            ) : prime.portraitUrl ? (
-                <img src={prime.portraitUrl} alt={prime.displayName} className="size-14 rounded object-cover" />
-            ) : (
-                <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-zinc-200 text-[10px] text-zinc-500 dark:bg-zinc-700">
-                    {prime.displayName}
-                </div>
-            )}
-            <p className="text-sm font-medium text-zinc-700 dark:text-zinc-200">{prime.displayName}</p>
+            <EncounterPortrait
+                fakeChar={prime.fakeChar}
+                portraitUrl={prime.portraitUrl}
+                displayName={prime.displayName}
+                imgClassName="size-14 rounded object-cover"
+                placeholderClassName="flex h-14 w-14 shrink-0 items-center justify-center rounded bg-(--bg-tertiary) text-[10px] text-(--fg-muted)"
+            />
+            <p className="text-sm font-medium text-(--fg)">{prime.displayName}</p>
             <div className="w-full max-w-56">
                 <HpBar hp={prime.hp} />
             </div>
             {prime.modifierProgress && (
-                <div className="flex w-full max-w-56 flex-col items-center gap-1.5 text-xs text-zinc-500 dark:text-zinc-400">
+                <div className="flex w-full max-w-56 flex-col items-center gap-1.5 text-xs text-(--fg-muted)">
                     <span className="tabular-nums">
                         {prime.modifierProgress.modifiersHit} / {prime.modifierProgress.totalModifiers} modifiers hit
                     </span>
                     {prime.modifierProgress.nextTarget &&
                         (() => {
                             const { modifierKey, remainingHp, description } = prime.modifierProgress.nextTarget;
-                            const modifierDefinition = guildBossData.modifiers[modifierKey];
-                            const title = modifierDefinition
-                                ? getModifierTitle(modifierDefinition)
-                                : formatAbilityName(modifierKey);
-                            const portraitIconUrl = modifierDefinition
-                                ? getModifierPortraitUrl(modifierDefinition)
-                                : undefined;
-                            const abilityIcons = modifierDefinition ? getModifierIcon(modifierDefinition) : undefined;
+                            const {
+                                title,
+                                portraitUrl: portraitIconUrl,
+                                abilityIcons,
+                            } = resolveModifierDisplay(modifierKey);
                             return (
                                 <div className="w-full rounded-md bg-(--ability-panel) p-2 text-left">
                                     <div className="flex items-start gap-2">
@@ -156,18 +170,18 @@ const PrimePanel = ({ prime, rarity }: { prime: PrimeDisplay; rarity: Rarity }) 
 };
 
 const CurrentBoss = ({ data }: { data: TacticusGuildRaidResponse | undefined }) => {
-    if (data === undefined) return <p className="text-sm text-zinc-500">Loading…</p>;
+    if (data === undefined) return <p className="text-sm text-(--fg-muted)">Loading…</p>;
 
     const entries = data.entries ?? [];
     const display = resolveBossOverviewDisplay(entries, data.seasonConfigId);
-    if (!display) return <p className="text-sm text-zinc-500">No boss data yet.</p>;
+    if (!display) return <p className="text-sm text-(--fg-muted)">No boss data yet.</p>;
 
     const rarityName = RarityMapper.rarityToRarityString(display.rarity);
     const tierLabel = `${rarityName} ${display.tierSetIndex + 1}`;
 
     return (
         <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-1.5 text-sm font-semibold text-zinc-600 dark:text-zinc-300">
+            <div className="flex items-center gap-1.5 text-sm font-semibold text-(--fg)">
                 <RarityIcon rarity={display.rarity} />
                 <span>{tierLabel}</span>
             </div>
@@ -178,35 +192,17 @@ const CurrentBoss = ({ data }: { data: TacticusGuildRaidResponse | undefined }) 
                     </div>
                 )}
                 <div className="flex flex-col items-center gap-2">
-                    {display.boss.fakeChar ? (
-                        <div className="h-[154px] w-[121px] overflow-hidden">
-                            <div className="h-[307px] w-[242px] origin-top-left scale-50">
-                                <NpcPortrait
-                                    id={display.boss.fakeChar.id}
-                                    rank={display.boss.fakeChar.rank}
-                                    stars={display.boss.fakeChar.stars}
-                                    customPortraitUrl={display.boss.portraitUrl}
-                                    rarity={display.boss.fakeChar.rarity}
-                                />
-                            </div>
-                        </div>
-                    ) : display.boss.portraitUrl ? (
-                        <img
-                            src={display.boss.portraitUrl}
-                            alt={display.boss.displayName}
-                            className="w-28 shrink-0 rounded-lg object-cover shadow"
-                        />
-                    ) : (
-                        <div className="flex h-48 w-28 shrink-0 items-center justify-center rounded-lg bg-zinc-200 text-xs text-zinc-500 dark:bg-zinc-700">
-                            {display.boss.displayName}
-                        </div>
-                    )}
+                    <EncounterPortrait
+                        fakeChar={display.boss.fakeChar}
+                        portraitUrl={display.boss.portraitUrl}
+                        displayName={display.boss.displayName}
+                        imgClassName="w-28 shrink-0 rounded-lg object-cover shadow"
+                        placeholderClassName="flex h-48 w-28 shrink-0 items-center justify-center rounded-lg bg-(--bg-tertiary) text-xs text-(--fg-muted)"
+                    />
                     {display.isNextBoss && (
-                        <p className="text-xs font-medium tracking-wide text-zinc-400 uppercase dark:text-zinc-500">
-                            Next boss
-                        </p>
+                        <p className="text-xs font-medium tracking-wide text-(--fg-muted) uppercase">Next boss</p>
                     )}
-                    <p className="text-sm font-semibold text-zinc-700 dark:text-zinc-200">{display.boss.displayName}</p>
+                    <p className="text-sm font-semibold text-(--fg)">{display.boss.displayName}</p>
                     <div className="w-full max-w-48">
                         <HpBar hp={display.boss.hp} />
                     </div>
@@ -277,14 +273,14 @@ const TokenTable = ({
     return (
         <table className="min-w-0 text-sm">
             <thead>
-                <tr className="text-left text-xs font-semibold text-gray-500 uppercase">
+                <tr className="text-left text-xs font-semibold text-(--fg-muted) uppercase">
                     <th className="pr-4 pb-1">Player</th>
                     {showComps && <th className="pr-4 pb-1">Teams</th>}
                     <th className="pr-4 pb-1 text-right">Tokens</th>
                     <th className="pb-1">Next Token At</th>
                 </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+            <tbody className="divide-y divide-(--hairline)">
                 {sorted.map(row => (
                     <tr key={row.userId}>
                         <td className="py-0.5 pr-4 font-medium" title={row.userId}>
@@ -312,7 +308,7 @@ const TokenTable = ({
                         <td className="py-0.5 pr-4 text-right tabular-nums">
                             {row.tokens == undefined ? '—' : row.tokens}
                         </td>
-                        <td className="py-0.5 text-gray-500 tabular-nums">
+                        <td className="py-0.5 text-(--fg-muted) tabular-nums">
                             {row.nextTokenAtUtc == undefined
                                 ? row.tokens == undefined
                                     ? '—'
@@ -339,13 +335,13 @@ const BombTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map<
     return (
         <table className="min-w-0 text-sm">
             <thead>
-                <tr className="text-left text-xs font-semibold text-gray-500 uppercase">
+                <tr className="text-left text-xs font-semibold text-(--fg-muted) uppercase">
                     <th className="pr-4 pb-1">Player</th>
                     <th className="pr-4 pb-1">Bomb</th>
                     <th className="pb-1">Available At</th>
                 </tr>
             </thead>
-            <tbody className="divide-y divide-gray-100 dark:divide-gray-800">
+            <tbody className="divide-y divide-(--hairline)">
                 {sorted.map(row => {
                     const hasData = row.tokens != undefined;
                     const hasBomb = hasData && row.bombAvailableAtUtc == undefined;
@@ -357,15 +353,15 @@ const BombTable = ({ entries, names }: { entries: GuildTokenEntry[]; names: Map<
                             <td className="py-0.5 pr-4">
                                 {hasData ? (
                                     hasBomb ? (
-                                        <span className="font-semibold text-green-600 dark:text-green-400">Yes</span>
+                                        <span className="font-semibold text-(--success)">Yes</span>
                                     ) : (
-                                        <span className="text-red-500 dark:text-red-400">No</span>
+                                        <span className="text-(--danger)">No</span>
                                     )
                                 ) : (
-                                    <span className="text-gray-400">—</span>
+                                    <span className="text-(--fg-muted)">—</span>
                                 )}
                             </td>
-                            <td className="py-0.5 text-gray-500 tabular-nums">
+                            <td className="py-0.5 text-(--fg-muted) tabular-nums">
                                 {row.bombAvailableAtUtc == undefined ? '—' : formatTime(row.bombAvailableAtUtc)}
                             </td>
                         </tr>
@@ -400,7 +396,7 @@ export const OverviewTab = ({
             <section className="flex flex-col gap-3">
                 <h2 className="text-base font-semibold">Current Boss</h2>
                 {guildInfo && (
-                    <p className="text-sm text-gray-600 dark:text-gray-400">
+                    <p className="text-sm text-(--fg-muted)">
                         <span className="font-mono font-semibold">[{guildInfo.tag}]</span> {guildInfo.name}
                     </p>
                 )}
@@ -413,9 +409,9 @@ export const OverviewTab = ({
                     {hasAnyComps && <CompFilterBar selected={effectiveSelectedComp} onSelect={setSelectedComp} />}
                     {tokenData === undefined ? (
                         tokenError ? (
-                            <p className="text-sm text-red-500">{tokenError}</p>
+                            <p className="text-sm text-(--danger)">{tokenError}</p>
                         ) : (
-                            <p className="text-sm text-gray-500">Loading…</p>
+                            <p className="text-sm text-(--fg-muted)">Loading…</p>
                         )
                     ) : (
                         <TokenTable
@@ -431,9 +427,9 @@ export const OverviewTab = ({
                     <h2 className="text-base font-semibold">Bombs</h2>
                     {tokenData === undefined ? (
                         tokenError ? (
-                            <p className="text-sm text-red-500">{tokenError}</p>
+                            <p className="text-sm text-(--danger)">{tokenError}</p>
                         ) : (
-                            <p className="text-sm text-gray-500">Loading…</p>
+                            <p className="text-sm text-(--fg-muted)">Loading…</p>
                         )
                     ) : (
                         <BombTable entries={tokenData} names={names} />

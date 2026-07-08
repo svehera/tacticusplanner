@@ -460,10 +460,18 @@ export function resolveBossOverviewDisplay(
     const sorted = [...entries].toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0));
     const latestBoss = sorted.find(entry => entry.encounterType === TacticusEncounterType.Boss);
 
+    // The moment the current boss/primes became active: the most recent time any boss died.
+    // Everything after this point belongs to the current position — including a still-alive boss's
+    // earlier prime kills — while anything before it is stale (a prior boss, or an earlier
+    // Legendary/Mythic loop through the same unitId).
+    const lastBossKill = sorted.find(
+        entry => entry.encounterType === TacticusEncounterType.Boss && entry.remainingHp === 0
+    );
+    const openedAfter = lastBossKill?.completedOn;
+
     let position: EncounterPosition;
     let bossHp: BossDisplayHp;
     let isNextBoss = false;
-    let openedAfter: number | undefined;
 
     if (!latestBoss) {
         position = { tierIndex: 0, setIndex: 0 };
@@ -472,10 +480,8 @@ export function resolveBossOverviewDisplay(
         const unitSetId = getUnitSetId(latestBoss.unitId);
         position = findPositionByBossUnitSetId(config, unitSetId, latestBoss.rarity) ?? { tierIndex: 0, setIndex: 0 };
         bossHp = { kind: 'actual', remaining: latestBoss.remainingHp, max: latestBoss.maxHp };
-        openedAfter = latestBoss.startedOn;
     } else {
         isNextBoss = true;
-        openedAfter = latestBoss.completedOn ?? 0;
         const unitSetId = getUnitSetId(latestBoss.unitId);
         const deadPosition = findPositionByBossUnitSetId(config, unitSetId, latestBoss.rarity);
         position = getNextEncounterPosition(config, deadPosition);

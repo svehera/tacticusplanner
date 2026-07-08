@@ -1,7 +1,12 @@
 import { describe, expect, it } from 'vitest';
 
 import type { GuildBossEncounter, GuildBossSeasonConfig, GuildBossSet, GuildBossTier } from './guild-boss.model';
-import { findPositionByTierSet, getEncountersAtPosition, getNextEncounterPosition } from './guild-boss.service';
+import {
+    findPositionByBossUnitSetId,
+    findPositionByTierSet,
+    getEncountersAtPosition,
+    getNextEncounterPosition,
+} from './guild-boss.service';
 
 function makeEncounters(tier: number, set: number): GuildBossEncounter[] {
     return [
@@ -83,6 +88,24 @@ describe('findPositionByTierSet', () => {
     it('returns undefined for an unknown tier or set', () => {
         expect(findPositionByTierSet(config, 9, 0)).toBeUndefined();
         expect(findPositionByTierSet(config, 0, 99)).toBeUndefined();
+    });
+});
+
+describe('findPositionByBossUnitSetId', () => {
+    it('finds a boss position by unitSetId when the rarity filter matches its tier', () => {
+        expect(findPositionByBossUnitSetId(config, 'Boss3_2', 3)).toEqual({ tierIndex: 3, setIndex: 2 });
+    });
+
+    it('finds a boss position by unitSetId with no rarity filter', () => {
+        expect(findPositionByBossUnitSetId(config, 'Boss3_2')).toEqual({ tierIndex: 3, setIndex: 2 });
+    });
+
+    it('returns undefined when the rarity filter excludes the matching tier', () => {
+        expect(findPositionByBossUnitSetId(config, 'Boss3_2', 4)).toBeUndefined();
+    });
+
+    it('returns undefined for an unknown unitSetId', () => {
+        expect(findPositionByBossUnitSetId(config, 'BossUnknown_99')).toBeUndefined();
     });
 });
 

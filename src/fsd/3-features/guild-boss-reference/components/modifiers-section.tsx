@@ -3,15 +3,7 @@
 import { cn } from '@/fsd/5-shared/lib';
 import type { Rarity } from '@/fsd/5-shared/model';
 
-import {
-    describeModifier,
-    formatAbilityName,
-    getModifierIcon,
-    getModifierPortraitUrl,
-    getModifierTitle,
-    guildBossData,
-    type GuildBossEncounterModifier,
-} from '@/fsd/4-entities/guild_boss';
+import { resolveModifierDisplay, type GuildBossEncounterModifier } from '@/fsd/4-entities/guild_boss';
 
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
 
@@ -29,15 +21,9 @@ export function ModifiersSection({ modifiers, totalHp, rarity }: ModifiersSectio
             <h3 className="mb-2 text-sm font-semibold tracking-wide text-(--fg-muted) uppercase">Modifiers</h3>
             <div className="flex flex-col gap-2">
                 {modifiers.map((encounterModifier, index) => {
-                    const modifierDefinition = guildBossData.modifiers[encounterModifier.modifier];
-                    const description = modifierDefinition
-                        ? describeModifier(modifierDefinition)
-                        : formatAbilityName(encounterModifier.modifier);
-                    const portraitUrl = modifierDefinition ? getModifierPortraitUrl(modifierDefinition) : undefined;
-                    const abilityIcons = modifierDefinition ? getModifierIcon(modifierDefinition) : undefined;
-                    const title = modifierDefinition
-                        ? getModifierTitle(modifierDefinition)
-                        : formatAbilityName(encounterModifier.modifier);
+                    const { title, description, portraitUrl, abilityIcons } = resolveModifierDisplay(
+                        encounterModifier.modifier
+                    );
                     const hpRemaining = totalHp - encounterModifier.hpLost;
                     const isInactive = hpRemaining <= 0;
 

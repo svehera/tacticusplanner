@@ -168,6 +168,29 @@ export function getModifierIcon(
     return undefined;
 }
 
+export interface ModifierDisplay {
+    title: string;
+    description: string;
+    portraitUrl?: string;
+    abilityIcons?: { file: string; name: string }[];
+}
+
+/** Resolves the title/description/portrait/icon to show for a modifier key, falling back to a
+ *  formatted version of the raw key when the modifier definition itself can't be found. */
+export function resolveModifierDisplay(modifierKey: string): ModifierDisplay {
+    const modifierDefinition = guildBossData.modifiers[modifierKey];
+    if (!modifierDefinition) {
+        const fallback = formatAbilityName(modifierKey);
+        return { title: fallback, description: fallback };
+    }
+    return {
+        title: getModifierTitle(modifierDefinition),
+        description: describeModifier(modifierDefinition),
+        portraitUrl: getModifierPortraitUrl(modifierDefinition),
+        abilityIcons: getModifierIcon(modifierDefinition),
+    };
+}
+
 /** Sorts an encounter's modifiers ascending by `hpLost` (the order they activate in as HP drops). */
 export function sortModifiersByHpLost(encounterModifiers: GuildBossEncounterModifier[]): GuildBossEncounterModifier[] {
     return encounterModifiers.toSorted((a, b) => a.hpLost - b.hpLost);

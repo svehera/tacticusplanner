@@ -65,8 +65,6 @@ function UnknownItemIcon({ rarity, size = ICON_SIZE }: { rarity: string; size?: 
 
 function UnknownUpgradeMaterialIcon({ rarity, size = ICON_SIZE }: { rarity: string; size?: number }) {
     const icon = tacticusIcons[`upgrade${rarity}` as keyof typeof tacticusIcons];
-    console.log(`upgrade${rarity}`);
-    console.log('icon:', icon);
     return (
         <div className="relative shrink-0" style={{ width: size, height: size }}>
             <img

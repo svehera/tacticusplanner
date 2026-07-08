@@ -139,6 +139,9 @@ export function findPositionByBossUnitSetId(
     return undefined;
 }
 
+/** The tier value the Legendary/Mythic boss rotation loops back to once the season's climb is exhausted. */
+const LOOP_RESTART_RARITY = Rarity.Legendary;
+
 /**
  * Computes the next encounter position after `current` clears. With no `current` (no clears yet this
  * season), returns the season's first set. Advances within a tier, then across tiers, then loops from
@@ -157,7 +160,7 @@ export function getNextEncounterPosition(
     if (current.tierIndex + 1 < config.tiers.length) {
         return { tierIndex: current.tierIndex + 1, setIndex: 0 };
     }
-    const legendaryTierIndex = config.tiers.findIndex(t => t.tier === 4);
+    const legendaryTierIndex = config.tiers.findIndex(t => t.tier === LOOP_RESTART_RARITY);
     return { tierIndex: legendaryTierIndex === -1 ? 0 : legendaryTierIndex, setIndex: 0 };
 }
 

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui/get-image-url';
@@ -96,6 +96,14 @@ export function useGuildBossDetail(searchParams: URLSearchParams): GuildBossDeta
     const [statIndex, setStatIndex] = useState(defaultStatIndex);
     const [leftHpLost, setLeftHpLost] = useState(0);
     const [rightHpLost, setRightHpLost] = useState(0);
+
+    // Resets unit-specific selections when navigating to a different boss/prime, since this page
+    // re-renders the same component instance on a `rawUnitId` query-param change rather than remounting.
+    useEffect(() => {
+        setStatIndex(encounterStatsIndex(rawUnitId));
+        setLeftHpLost(0);
+        setRightHpLost(0);
+    }, [rawUnitId]);
 
     if (!unitSet) {
         return { found: false };
