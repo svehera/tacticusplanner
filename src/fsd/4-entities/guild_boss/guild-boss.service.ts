@@ -97,6 +97,81 @@ export interface EncounterLocation {
     encounterIndex: number;
 }
 
+export interface EncounterPosition {
+    tierIndex: number;
+    setIndex: number;
+}
+
+/** Resolves the array position of a tier/set field-value pair (does not assume array index === field value). */
+export function findPositionByTierSet(
+    config: GuildBossSeasonConfig,
+    tier: number,
+    set: number
+): EncounterPosition | undefined {
+    const tierIndex = config.tiers.findIndex(t => t.tier === tier);
+    if (tierIndex === -1) return undefined;
+    const setIndex = config.tiers[tierIndex].sets.findIndex(s => s.set === set);
+    if (setIndex === -1) return undefined;
+    return { tierIndex, setIndex };
+}
+
+/**
+ * Finds the position of a boss encounter by its unitSetId, optionally filtered by rarity
+ * (matching `tier.tier === rarity`). Use this instead of `findPositionByTierSet` when the
+ * caller has the API `rarity` field (0-5) but not the raw game `tier` field, since the API
+ * `tier` field does not match the config's `tier` field.
+ */
+export function findPositionByBossUnitSetId(
+    config: GuildBossSeasonConfig,
+    unitSetId: string,
+    rarity?: number
+): EncounterPosition | undefined {
+    for (const [tierIndex, tier] of config.tiers.entries()) {
+        if (rarity !== undefined && tier.tier !== rarity) continue;
+        for (const [setIndex, set] of tier.sets.entries()) {
+            for (const enc of set.encounters) {
+                if (enc.guildBossEncounterType === 'Boss' && getUnitSetId(enc.unitId) === unitSetId) {
+                    return { tierIndex, setIndex };
+                }
+            }
+        }
+    }
+    return undefined;
+}
+
+/**
+ * Computes the next encounter position after `current` clears. With no `current` (no clears yet this
+ * season), returns the season's first set. Advances within a tier, then across tiers, then loops from
+ * the last tier (Mythic) back to the first Legendary set once the season's climb is exhausted.
+ */
+export function getNextEncounterPosition(
+    config: GuildBossSeasonConfig,
+    current?: EncounterPosition
+): EncounterPosition {
+    if (!current) return { tierIndex: 0, setIndex: 0 };
+
+    const tier = config.tiers[current.tierIndex];
+    if (current.setIndex + 1 < tier.sets.length) {
+        return { tierIndex: current.tierIndex, setIndex: current.setIndex + 1 };
+    }
+    if (current.tierIndex + 1 < config.tiers.length) {
+        return { tierIndex: current.tierIndex + 1, setIndex: 0 };
+    }
+    const legendaryTierIndex = config.tiers.findIndex(t => t.tier === 4);
+    return { tierIndex: legendaryTierIndex === -1 ? 0 : legendaryTierIndex, setIndex: 0 };
+}
+
+/** Returns the boss + two primes (`getSetPrimeEncounters`-ordered) at a season-config position. */
+export function getEncountersAtPosition(
+    config: GuildBossSeasonConfig,
+    position: EncounterPosition
+): { boss?: GuildBossEncounter; leftPrime?: GuildBossEncounter; rightPrime?: GuildBossEncounter } {
+    const encounters = config.tiers[position.tierIndex]?.sets[position.setIndex]?.encounters ?? [];
+    const boss = encounters.find(enc => enc.guildBossEncounterType === 'Boss');
+    const [leftPrime, rightPrime] = getSetPrimeEncounters(encounters);
+    return { boss, leftPrime, rightPrime };
+}
+
 /**
  * Best-effort: the first encounter (in season-rotation order) whose unitId matches this unitSetId.
  * Not unique — the same boss can appear in multiple season/tier/set slots. `tier`/`set` are array

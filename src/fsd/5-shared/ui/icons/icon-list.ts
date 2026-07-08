@@ -197,6 +197,12 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     allianceXenos: snowprintIcons.allianceXenos,
     stamina: snowprintIcons.energy,
     itemUnknown: snowprintIcons.itemUnknown,
+    upgradeCommon: snowprintIcons.upgradeCommon,
+    upgradeUncommon: snowprintIcons.upgradeUncommon,
+    upgradeRare: snowprintIcons.upgradeRare,
+    upgradeEpic: snowprintIcons.upgradeEpic,
+    upgradeLegendary: snowprintIcons.upgradeLegendary,
+    upgradeMythic: snowprintIcons.upgradeMythic,
 };
 
 export const starsIcons = {

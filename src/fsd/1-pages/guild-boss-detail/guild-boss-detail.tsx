@@ -1,41 +1,26 @@
 /* eslint-disable import-x/no-internal-modules */
-import { useState } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-import { Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
+import { Rarity } from '@/fsd/5-shared/model';
 import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { AttackProfileRow } from '@/fsd/5-shared/ui/attack-profile-row';
+import { Button } from '@/fsd/5-shared/ui/button';
 import { getImageUrl } from '@/fsd/5-shared/ui/get-image-url';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 import { traitIcons } from '@/fsd/5-shared/ui/trait-icons';
-import { ISnapshotCharacter, UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
+import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
 
 import abilityDataJson from '@/fsd/4-entities/abilities/data/new-ability-data.json';
 import {
     applyAbilityAdjustments,
     applyAbilityConstantAdjustments,
     applyStatAdjustment,
-    applyUnitRemovals,
-    bossPortraitMap,
     computeAbilityVariableAdjustments,
-    computeStatAdjustments,
-    encounterStatsIndex,
-    findEncounterLocation,
-    getActiveModifierDefinitions,
-    getFieldEnemies,
-    getSeasonConfig,
-    getSetPrimeEncounters,
-    getStatsAtIndex,
-    getTierRarity,
     getUnitDisplayName,
-    getUnitRemovals,
-    getUnitSet,
     getUnitSetId,
     isRangedWeapon,
     resolvePrimeDisplayName,
     resolvePrimePortraitPath,
-    resolvePrimeRegularPortraitPath,
-    scaleModifierHpLost,
 } from '@/fsd/4-entities/guild_boss';
 import type { GuildBossModifierDefinition, GuildBossWeapon } from '@/fsd/4-entities/guild_boss';
 import traitsDataJson from '@/fsd/4-entities/traits/data/new-traits-data.json';
@@ -51,6 +36,8 @@ import {
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
 import { RosterSnapshotsUnit } from '@/fsd/2-widgets/roster-snapshots-unit';
+
+import { useGuildBossDetail } from './use-guild-boss-detail';
 
 interface AbilityEntry {
     id: string;
@@ -151,103 +138,61 @@ const BossAbilityPanel = ({
 export function GuildBossDetail() {
     const [searchParams] = useSearchParams();
     const navigate = useNavigate();
+    const result = useGuildBossDetail(searchParams);
 
-    const rawUnitId = searchParams.get('unit') ?? '';
-    const unitSetId = getUnitSetId(rawUnitId);
-    const explicitSeasonId = searchParams.get('season');
-    const location = explicitSeasonId
-        ? {
-              seasonId: explicitSeasonId,
-              tier: Number(searchParams.get('tier') ?? '0'),
-              set: Number(searchParams.get('set') ?? '0'),
-              encounterIndex: Number(searchParams.get('encounter') ?? '0'),
-          }
-        : findEncounterLocation(unitSetId);
-    const seasonId = location?.seasonId ?? '';
-    const tier = location?.tier ?? 0;
-    const set = location?.set ?? 0;
-    const encounterIndex = location?.encounterIndex ?? 0;
-
-    const unitSet = getUnitSet(rawUnitId);
-    const config = getSeasonConfig(seasonId);
-    const setEncounters = config?.tiers[tier]?.sets[set]?.encounters ?? [];
-    const encounter = setEncounters[encounterIndex];
-    const [leftPrimeEnc, rightPrimeEnc] = getSetPrimeEncounters(setEncounters);
-
-    const defaultStatIndex = encounterStatsIndex(rawUnitId);
-    const [statIndex, setStatIndex] = useState(defaultStatIndex);
-    const [leftHpLost, setLeftHpLost] = useState(0);
-    const [rightHpLost, setRightHpLost] = useState(0);
-
-    if (!unitSet) {
+    if (!result.found) {
         return (
             <div className="p-6">
-                <button
-                    type="button"
-                    onClick={() => navigate(-1)}
+                <Button
+                    appearance="unstyled"
+                    size="unstyled"
+                    onPress={() => navigate(-1)}
                     className="mb-4 text-sm text-(--primary) hover:underline">
                     ← Back
-                </button>
+                </Button>
                 <p className="text-(--fg-muted)">Boss not found.</p>
             </div>
         );
     }
 
-    const isBoss = !/(?:MiniBoss|Minion)\d/.test(unitSetId);
-    const portraitPath = isBoss
-        ? (bossPortraitMap[unitSetId] ?? resolvePrimePortraitPath(unitSetId))
-        : (resolvePrimeRegularPortraitPath(unitSetId, unitSet.questUnitId) ?? resolvePrimePortraitPath(unitSetId));
-    const portraitUrl = portraitPath ? getImageUrl(portraitPath) : undefined;
-    const displayName = getUnitDisplayName(unitSetId);
-    const stats = getStatsAtIndex(unitSet, statIndex);
-    const rarity = RarityMapper.stringToRarity(stats.BaseRarity) ?? getTierRarity(tier);
-
-    const leftPrimeUnitSet = leftPrimeEnc ? getUnitSet(leftPrimeEnc.unitId) : undefined;
-    const rightPrimeUnitSet = rightPrimeEnc ? getUnitSet(rightPrimeEnc.unitId) : undefined;
-    const leftPrimeTotalHp = leftPrimeUnitSet ? getStatsAtIndex(leftPrimeUnitSet, statIndex).Health : 0;
-    const rightPrimeTotalHp = rightPrimeUnitSet ? getStatsAtIndex(rightPrimeUnitSet, statIndex).Health : 0;
-    const leftScaledModifiers = scaleModifierHpLost(leftPrimeEnc?.modifiers ?? [], leftPrimeTotalHp);
-    const rightScaledModifiers = scaleModifierHpLost(rightPrimeEnc?.modifiers ?? [], rightPrimeTotalHp);
-
-    const leftActiveDefs = getActiveModifierDefinitions(leftScaledModifiers, leftHpLost);
-    const rightActiveDefs = getActiveModifierDefinitions(rightScaledModifiers, rightHpLost);
-    const activeModifierDefs = isBoss ? [...leftActiveDefs, ...rightActiveDefs] : [];
-    const statAdjustments = computeStatAdjustments(activeModifierDefs);
-
-    // A prime's unitAmountDecrease modifiers remove reinforcements from the boss's own board, not from
-    // that prime's own board — each board's own enemies are otherwise shown exactly as authored.
-    const ownFieldEnemies = encounter
-        ? applyUnitRemovals(getFieldEnemies(encounter), getUnitRemovals(activeModifierDefs))
-        : [];
-
-    const fakeChar: ISnapshotCharacter = {
-        id: 'boss',
-        rank: (stats.Rank + 1) as Rank,
+    const {
+        isBoss,
+        portraitUrl,
+        displayName,
+        unitSet,
+        stats,
         rarity,
-        stars: stats.StarLevel as RarityStars,
-        shards: 0,
-        mythicShards: 0,
-        activeAbilityLevel: stats.AbilityLevel,
-        passiveAbilityLevel: stats.AbilityLevel,
-        xpLevel: 0,
-    };
-
-    const HIDDEN_ABILITY_IDS = new Set(['GuildBossRunAway']);
-
-    const allAbilities = [
-        ...(unitSet.activeAbilities ?? []).map(id => ({ id, label: 'Active Ability' })),
-        ...(unitSet.passiveAbilities ?? []).map(id => ({ id, label: 'Passive Ability' })),
-        ...(unitSet.relicAbilities ?? []).map(id => ({ id, label: 'Relic Ability' })),
-    ].filter(({ id }) => !HIDDEN_ABILITY_IDS.has(id));
+        statIndex,
+        setStatIndex,
+        leftPrimeEnc,
+        rightPrimeEnc,
+        leftPrimeUnitSet,
+        rightPrimeUnitSet,
+        leftPrimeTotalHp,
+        rightPrimeTotalHp,
+        leftScaledModifiers,
+        rightScaledModifiers,
+        leftHpLost,
+        setLeftHpLost,
+        rightHpLost,
+        setRightHpLost,
+        activeModifierDefs,
+        statAdjustments,
+        ownFieldEnemies,
+        fakeChar,
+        allAbilities,
+        ownScaledModifiers,
+    } = result;
 
     return (
         <div className="flex flex-col gap-6 p-6">
-            <button
-                type="button"
-                onClick={() => navigate(-1)}
+            <Button
+                appearance="unstyled"
+                size="unstyled"
+                onPress={() => navigate(-1)}
                 className="self-start text-sm text-(--primary) hover:underline">
                 ← Back
-            </button>
+            </Button>
 
             {/* Three-column layout */}
             <div className="grid grid-cols-1 gap-6 lg:grid-cols-[auto_1fr_1fr]">
@@ -445,11 +390,7 @@ export function GuildBossDetail() {
                     })}
                 </div>
             ) : (
-                <ModifiersSection
-                    modifiers={scaleModifierHpLost(encounter?.modifiers ?? [], stats.Health)}
-                    totalHp={stats.Health}
-                    rarity={rarity}
-                />
+                <ModifiersSection modifiers={ownScaledModifiers} totalHp={stats.Health} rarity={rarity} />
             )}
 
             {/* Abilities */}

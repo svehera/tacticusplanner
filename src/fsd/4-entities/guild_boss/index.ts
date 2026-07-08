@@ -46,6 +46,10 @@ export {
     getFieldEnemies,
     getSetPrimeEncounters,
     findEncounterLocation,
+    findPositionByTierSet,
+    findPositionByBossUnitSetId,
+    getNextEncounterPosition,
+    getEncountersAtPosition,
     getUnitDisplayName,
     guildBossData,
     resolvePrimeDisplayName,
@@ -56,5 +60,5 @@ export {
     getBossUnitSetIds,
     getPrimeUnitSetIds,
 } from './guild-boss.service';
-export type { EncounterLocation } from './guild-boss.service';
+export type { EncounterLocation, EncounterPosition } from './guild-boss.service';
 export { resolveFieldEnemyNpcData } from './guild-boss-npc-adapter';

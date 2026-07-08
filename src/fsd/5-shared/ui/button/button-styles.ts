@@ -69,6 +69,8 @@ export const buttonStyles = tv({
                 'data-hovered:text-(--btn-accent) data-hovered:after:opacity-[0.20]',
                 'data-pressed:text-(--btn-accent) data-pressed:after:opacity-[0.30]',
             ],
+            // No chrome at all — for subtle inline link/row interactions that supply their own styling.
+            unstyled: 'border-0 bg-transparent p-0 font-normal text-inherit',
         },
         size: {
             'extra-small': 'h-8 px-[calc(var(--spacing)*2.7)] text-xs/4 lg:text-[0.800rem]/4',
@@ -76,6 +78,7 @@ export const buttonStyles = tv({
             medium: 'h-10 px-4 text-base sm:text-sm/6',
             large: 'h-11 px-4.5 text-base *:data-[slot=icon]:mx-[-1.5px] sm:*:data-[slot=icon]:size-5 lg:text-base/7',
             'square-petite': 'size-9 shrink-0',
+            unstyled: '',
         },
         shape: {
             square: 'rounded-lg [--btn-radius:var(--radius-lg)]',
