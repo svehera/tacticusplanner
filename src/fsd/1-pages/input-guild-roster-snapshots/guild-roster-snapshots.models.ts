@@ -312,3 +312,12 @@ export const addCombinedGuildTagsApi = (tags: string[]) =>
 
 export const deleteCombinedGuildTagsApi = (tags: string[]) =>
     makeApiCall<{ combinedGuildTags?: string[] }>('POST', 'guild/combinedGuildTags/delete', { guildTags: tags });
+
+// ---------------------------------------------------------------------------
+// GET/POST /guild/share
+// ---------------------------------------------------------------------------
+
+export const getGuildShareApi = () => makeApiCall<{ shareGuildMemberPerformance?: boolean }>('GET', 'guild/share');
+
+export const setGuildShareApi = (shareGuildMemberPerformance: boolean) =>
+    makeApiCall<{ shareGuildMemberPerformance?: boolean }>('POST', 'guild/share', { shareGuildMemberPerformance });

@@ -282,6 +282,24 @@ export interface paths {
         patch?: never;
         trace?: never;
     };
+    '/guild/share': {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        /** Returns whether the authenticated user's guild has member performance sharing enabled. */
+        get: operations['getGuildShare'];
+        put?: never;
+        /** Sets whether the guild has member performance sharing enabled. Requires a stored guild API key (leader/co-leader). */
+        post: operations['setGuildShare'];
+        delete?: never;
+        options?: never;
+        head?: never;
+        patch?: never;
+        trace?: never;
+    };
     '/users/tacticusApiKey': {
         parameters: {
             query?: never;
@@ -383,7 +401,10 @@ export interface components {
             guildTag?: string;
             shareInGameNameWithGuild?: boolean;
             shareRosterDataWithGuild?: boolean;
-            shareGuildMemberPerformance?: boolean;
+        };
+        SetGuildShareRequest: {
+            /** @description Whether to privately share each guild member's performance data with that member. Guild-wide; requires a working guild API key to set. */
+            shareGuildMemberPerformance: boolean;
         };
         CombinedGuildTagsRequest: {
             /** @description Guild tags to add or remove. */
@@ -1311,6 +1332,61 @@ export interface operations {
                 content: {
                     'application/json': {
                         combinedGuildTags?: string[];
+                    };
+                };
+            };
+            400: components['responses']['ApiError'];
+            401: components['responses']['Unauthorized'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    getGuildShare: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody?: never;
+        responses: {
+            /** @description OK */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        shareGuildMemberPerformance?: boolean;
+                    };
+                };
+            };
+            401: components['responses']['Unauthorized'];
+            404: components['responses']['ApiError'];
+            502: components['responses']['TacticusApiError'];
+        };
+    };
+    setGuildShare: {
+        parameters: {
+            query?: never;
+            header?: never;
+            path?: never;
+            cookie?: never;
+        };
+        requestBody: {
+            content: {
+                'application/json': components['schemas']['SetGuildShareRequest'];
+            };
+        };
+        responses: {
+            /** @description OK — returns the updated value */
+            200: {
+                headers: {
+                    [name: string]: unknown;
+                };
+                content: {
+                    'application/json': {
+                        shareGuildMemberPerformance?: boolean;
                     };
                 };
             };

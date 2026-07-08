@@ -6,13 +6,16 @@ export interface CheckboxProps {
     onChange: (checked: boolean) => void;
     children?: React.ReactNode;
     className?: string;
+    disabled?: boolean;
 }
 
-export const Checkbox = ({ checked, onChange, children, className = '' }: CheckboxProps) => (
-    <label className={`flex cursor-pointer items-center gap-2 ${className}`}>
+export const Checkbox = ({ checked, onChange, children, className = '', disabled = false }: CheckboxProps) => (
+    <label
+        className={`flex items-center gap-2 ${disabled ? 'cursor-not-allowed opacity-60' : 'cursor-pointer'} ${className}`}>
         <input
             type="checkbox"
             checked={checked}
+            disabled={disabled}
             onChange={event => onChange(event.target.checked)}
             className="sr-only"
         />
