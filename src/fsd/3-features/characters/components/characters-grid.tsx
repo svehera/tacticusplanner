@@ -38,7 +38,7 @@ export const CharactersGrid = ({
                 <div
                     key={unit.snowprintId}
                     onClick={() => onAvailableCharacterClick?.(unit)}
-                    className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                    className="flex-shrink-0 cursor-pointer rounded-md transition-shadow duration-200 hover:ring-2 hover:ring-(--primary)"
                     title={`Select ${unit.name || 'Unit'}`}>
                     <RosterSnapshotCharacter
                         key={unit.snowprintId}
@@ -86,7 +86,7 @@ export const CharactersGrid = ({
                 <div
                     key={unit.snowprintId}
                     onClick={() => onLockedCharacterClick?.(unit)}
-                    className="flex-shrink-0 cursor-pointer transition-all duration-200 hover:scale-[1.03] hover:brightness-110 active:scale-95"
+                    className="flex-shrink-0 cursor-pointer rounded-md transition-shadow duration-200 hover:ring-2 hover:ring-(--primary)"
                     title={`Select ${unit.name || 'Unit'}`}>
                     <RosterSnapshotCharacter
                         key={unit.snowprintId}
