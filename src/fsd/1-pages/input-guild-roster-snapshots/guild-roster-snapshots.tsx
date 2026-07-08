@@ -157,7 +157,7 @@ export const GuildRosterSnapshots = () => {
                     <Tab label="Rosters" value="rosters" />
                     <Tab label="Roster Snapshots" value="roster-snapshots" />
                     <Tab label="Members" value="members" />
-                    <Tab label="Shared Leaderboards" value="shared-leaderboards" />
+                    <Tab label="Settings" value="shared-leaderboards" />
                 </Tabs>
 
                 <div>

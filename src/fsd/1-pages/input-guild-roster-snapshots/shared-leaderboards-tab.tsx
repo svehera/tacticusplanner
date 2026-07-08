@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Button } from '@/fsd/5-shared/ui';
+import { Button, Checkbox, DebugJson } from '@/fsd/5-shared/ui';
 
 import { isValidGuildTag, GUILD_TAG_LENGTH } from '@/fsd/3-features/tacticus-integration/guild-sharing';
 
@@ -10,6 +10,8 @@ import {
     addCombinedGuildTagsApi,
     deleteCombinedGuildTagsApi,
     getCombinedGuildTagsApi,
+    getGuildShareApi,
+    setGuildShareApi,
 } from './guild-roster-snapshots.models';
 import {
     canAddTag,
@@ -44,6 +46,43 @@ export function SharedLeaderboardsTab() {
 
     const hasFetched = useRef(false);
     const isSavingReference = useRef(false);
+
+    const [shareGuildMemberPerformance, setShareGuildMemberPerformanceState] = useState<boolean | undefined>();
+    const [isShareLoading, setIsShareLoading] = useState(true);
+    const [isShareSaving, setIsShareSaving] = useState(false);
+    const [shareError, setShareError] = useState<string | undefined>();
+
+    useEffect(() => {
+        let cancelled = false;
+        (async () => {
+            const { data, error: apiError } = await getGuildShareApi();
+            if (cancelled) return;
+            setIsShareLoading(false);
+            if (apiError) {
+                setShareError(typeof apiError === 'string' ? apiError : (apiError.message ?? 'Failed to load setting'));
+                return;
+            }
+            setShareGuildMemberPerformanceState(data?.shareGuildMemberPerformance ?? false);
+        })();
+        return () => {
+            cancelled = true;
+        };
+    }, []);
+
+    const handleShareToggle = async (checked: boolean) => {
+        const previous = shareGuildMemberPerformance;
+        setShareGuildMemberPerformanceState(checked);
+        setIsShareSaving(true);
+        setShareError(undefined);
+        const { data, error: apiError } = await setGuildShareApi(checked);
+        setIsShareSaving(false);
+        if (apiError) {
+            setShareError(typeof apiError === 'string' ? apiError : (apiError.message ?? 'Failed to save setting'));
+            setShareGuildMemberPerformanceState(previous);
+            return;
+        }
+        setShareGuildMemberPerformanceState(data?.shareGuildMemberPerformance ?? checked);
+    };
 
     const fetchTags = useCallback(async (force = false) => {
         if (!force && hasFetched.current) return;
@@ -148,6 +187,16 @@ export function SharedLeaderboardsTab() {
 
     return (
         <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-2">
+                <Checkbox
+                    checked={shareGuildMemberPerformance ?? false}
+                    onChange={handleShareToggle}
+                    disabled={isShareLoading || isShareSaving}>
+                    Privately share each guild member&apos;s performance data (visible only to that member)
+                </Checkbox>
+                {shareError && <p className="text-sm text-(--danger)">{shareError}</p>}
+            </div>
+
             <div className="flex items-center gap-3">
                 <span className="text-base font-semibold">Shared Leaderboard Guilds</span>
                 <button
@@ -277,6 +326,9 @@ export function SharedLeaderboardsTab() {
                     </div>
                 </>
             )}
+
+            <DebugJson label="guild/combinedGuildTags" value={committed ?? 'loading…'} />
+            <DebugJson label="guild/share" value={shareGuildMemberPerformance ?? 'loading…'} />
         </div>
     );
 }
