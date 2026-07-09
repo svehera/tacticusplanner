@@ -240,7 +240,11 @@ export function findEncounterLocation(unitSetId: string, progressionIndex?: numb
         const position = findPositionByUnitSetId(config, unitSetId, progressionIndex);
         if (!position) continue;
         const encounters = config.tiers[position.tierIndex]?.sets[position.setIndex]?.encounters ?? [];
-        const enc = encounters.find(candidate => getUnitSetId(candidate.unitId) === unitSetId);
+        const enc = encounters.find(
+            candidate =>
+                getUnitSetId(candidate.unitId) === unitSetId &&
+                (progressionIndex === undefined || getProgressionIndexFromUnitId(candidate.unitId) === progressionIndex)
+        );
         if (!enc) continue;
         return { seasonId, tier: position.tierIndex, set: position.setIndex, encounterIndex: enc.encounterIndex };
     }
