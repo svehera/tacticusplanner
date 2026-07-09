@@ -107,9 +107,12 @@ export function useGuildBossDetail(searchParams: URLSearchParams): GuildBossDeta
     // Exact progression-index match — every real encounter's row should show its own
     // real field enemies; only rows with no encounter at all fall back to "Unknown".
     const exactLocation = findEncounterLocation(unitSetId, statIndex + 1);
-    // Lenient rarity-based fallback so Prime Modifiers still shows something reasonable
-    // even when this exact row has no matching encounter.
-    const location = exactLocation ?? findEncounterLocationByRarity(unitSetId, rarity);
+    // Lenient fallbacks so Prime Modifiers still shows something reasonable even when
+    // this exact row has no matching encounter: try the same rarity first, then fall
+    // back to any known encounter at all (e.g. Lion has no Common/Uncommon/Rare fights,
+    // but should still show its Epic primes rather than nothing on those rows).
+    const location =
+        exactLocation ?? findEncounterLocationByRarity(unitSetId, rarity) ?? findEncounterLocation(unitSetId);
 
     const seasonConfig = location ? getSeasonConfig(location.seasonId) : undefined;
     const setEncounters = location ? (seasonConfig?.tiers[location.tier]?.sets[location.set]?.encounters ?? []) : [];
