@@ -10,12 +10,13 @@ import {
     computeStatAdjustments,
     encounterStatsIndex,
     findEncounterLocation,
+    findEncounterLocationByRarity,
     getActiveModifierDefinitions,
     getFieldEnemies,
+    getKnownEncounterAvailability,
     getSeasonConfig,
     getSetPrimeEncounters,
     getStatsAtIndex,
-    getTierRarity,
     getUnitDisplayName,
     getUnitRemovals,
     getUnitSet,
@@ -25,6 +26,7 @@ import {
     scaleModifierHpLost,
 } from '@/fsd/4-entities/guild_boss';
 import type {
+    EncounterAvailability,
     GuildBossEncounter,
     GuildBossEncounterModifier,
     GuildBossModifierDefinition,
@@ -58,6 +60,8 @@ export interface GuildBossDetailViewModel {
     activeModifierDefs: GuildBossModifierDefinition[];
     statAdjustments: StatAdjustments;
     encounter: GuildBossEncounter | undefined;
+    /** Known (rarity, set) positions for this unit, populated only when `encounter` is undefined. */
+    knownEncounterAvailability: EncounterAvailability[];
     /** This unit's own modifiers (non-boss units only — primes are the only encounters with modifiers). */
     ownScaledModifiers: GuildBossEncounterModifier[];
     ownFieldEnemies: string[];
@@ -72,25 +76,7 @@ const HIDDEN_ABILITY_IDS = new Set(['GuildBossRunAway']);
 export function useGuildBossDetail(searchParams: URLSearchParams): GuildBossDetailResult {
     const rawUnitId = searchParams.get('unit') ?? '';
     const unitSetId = getUnitSetId(rawUnitId);
-    const explicitSeasonId = searchParams.get('season');
-    const location = explicitSeasonId
-        ? {
-              seasonId: explicitSeasonId,
-              tier: Number(searchParams.get('tier') ?? '0'),
-              set: Number(searchParams.get('set') ?? '0'),
-              encounterIndex: Number(searchParams.get('encounter') ?? '0'),
-          }
-        : findEncounterLocation(unitSetId);
-    const seasonId = location?.seasonId ?? '';
-    const tier = location?.tier ?? 0;
-    const set = location?.set ?? 0;
-    const encounterIndex = location?.encounterIndex ?? 0;
-
     const unitSet = getUnitSet(rawUnitId);
-    const config = getSeasonConfig(seasonId);
-    const setEncounters = config?.tiers[tier]?.sets[set]?.encounters ?? [];
-    const encounter = setEncounters[encounterIndex];
-    const [leftPrimeEnc, rightPrimeEnc] = getSetPrimeEncounters(setEncounters);
 
     const defaultStatIndex = encounterStatsIndex(rawUnitId);
     const [statIndex, setStatIndex] = useState(defaultStatIndex);
@@ -116,7 +102,20 @@ export function useGuildBossDetail(searchParams: URLSearchParams): GuildBossDeta
     const portraitUrl = portraitPath ? getImageUrl(portraitPath) : undefined;
     const displayName = getUnitDisplayName(unitSetId);
     const stats = getStatsAtIndex(unitSet, statIndex);
-    const rarity = RarityMapper.stringToRarity(stats.BaseRarity) ?? getTierRarity(tier);
+    const rarity = RarityMapper.stringToRarity(stats.BaseRarity) ?? Rarity.Common;
+
+    // Exact progression-index match — every real encounter's row should show its own
+    // real field enemies; only rows with no encounter at all fall back to "Unknown".
+    const exactLocation = findEncounterLocation(unitSetId, statIndex + 1);
+    // Lenient rarity-based fallback so Prime Modifiers still shows something reasonable
+    // even when this exact row has no matching encounter.
+    const location = exactLocation ?? findEncounterLocationByRarity(unitSetId, rarity);
+
+    const seasonConfig = location ? getSeasonConfig(location.seasonId) : undefined;
+    const setEncounters = location ? (seasonConfig?.tiers[location.tier]?.sets[location.set]?.encounters ?? []) : [];
+    const encounter = exactLocation ? setEncounters[exactLocation.encounterIndex] : undefined;
+    const knownEncounterAvailability = encounter ? [] : getKnownEncounterAvailability(unitSetId);
+    const [leftPrimeEnc, rightPrimeEnc] = getSetPrimeEncounters(setEncounters);
 
     const leftPrimeUnitSet = leftPrimeEnc ? getUnitSet(leftPrimeEnc.unitId) : undefined;
     const rightPrimeUnitSet = rightPrimeEnc ? getUnitSet(rightPrimeEnc.unitId) : undefined;
@@ -181,6 +180,7 @@ export function useGuildBossDetail(searchParams: URLSearchParams): GuildBossDeta
         activeModifierDefs,
         statAdjustments,
         encounter,
+        knownEncounterAvailability,
         ownScaledModifiers,
         ownFieldEnemies,
         fakeChar,

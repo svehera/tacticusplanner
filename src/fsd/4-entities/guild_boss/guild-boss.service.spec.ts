@@ -2,9 +2,16 @@ import { describe, expect, it } from 'vitest';
 
 import type { GuildBossEncounter, GuildBossSeasonConfig, GuildBossSet, GuildBossTier } from './guild-boss.model';
 import {
+    findEncounterLocation,
+    findEncounterLocationByRarity,
     findPositionByBossUnitSetId,
     findPositionByTierSet,
+    findPositionByUnitSetId,
+    findPositionByUnitSetIdAndRarity,
+    getBossUnitSetIds,
     getEncountersAtPosition,
+    getKnownEncounterAvailability,
+    getMaxKnownProgressionIndex,
     getNextEncounterPosition,
 } from './guild-boss.service';
 
@@ -115,5 +122,200 @@ describe('getEncountersAtPosition', () => {
         expect(boss?.unitId).toBe('Boss2_1');
         expect(leftPrime?.unitId).toBe('Left2_1');
         expect(rightPrime?.unitId).toBe('Right2_1');
+    });
+});
+
+describe('findPositionByUnitSetId', () => {
+    it('finds any encounter type (not just Boss) by unitSetId', () => {
+        expect(findPositionByUnitSetId(config, 'Left2_1')).toEqual({ tierIndex: 2, setIndex: 1 });
+    });
+
+    it('respects the progression-index filter', () => {
+        // makeEncounters gives unitIds with no `:N` suffix, so getProgressionIndexFromUnitId defaults to 1.
+        expect(findPositionByUnitSetId(config, 'Left2_1', 1)).toEqual({ tierIndex: 2, setIndex: 1 });
+        expect(findPositionByUnitSetId(config, 'Left2_1', 2)).toBeUndefined();
+    });
+
+    it('returns undefined for an unknown unitSetId', () => {
+        expect(findPositionByUnitSetId(config, 'Unknown_99')).toBeUndefined();
+    });
+
+    it('disambiguates two sets at the same rarity by their exact progression index', () => {
+        const multiSetConfig: GuildBossSeasonConfig = {
+            guildBossSeasonConfigId: 'multi',
+            tiers: [
+                {
+                    tier: 4,
+                    sets: [
+                        {
+                            set: 0,
+                            chestId: 'c',
+                            guildXp: 1,
+                            encounters: [
+                                {
+                                    encounterIndex: 0,
+                                    guildBossEncounterType: 'Boss',
+                                    boardId: 'b',
+                                    maxNrOfTurns: 5,
+                                    unitId: 'Lion:20',
+                                },
+                            ],
+                        },
+                        {
+                            set: 1,
+                            chestId: 'c',
+                            guildXp: 1,
+                            encounters: [
+                                {
+                                    encounterIndex: 0,
+                                    guildBossEncounterType: 'Boss',
+                                    boardId: 'b',
+                                    maxNrOfTurns: 5,
+                                    unitId: 'Lion:21',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        };
+
+        expect(findPositionByUnitSetId(multiSetConfig, 'Lion', 20)).toEqual({ tierIndex: 0, setIndex: 0 });
+        expect(findPositionByUnitSetId(multiSetConfig, 'Lion', 21)).toEqual({ tierIndex: 0, setIndex: 1 });
+        expect(findPositionByUnitSetId(multiSetConfig, 'Lion', 22)).toBeUndefined();
+    });
+});
+
+describe('findPositionByUnitSetIdAndRarity', () => {
+    it('finds any encounter type (not just Boss) by unitSetId', () => {
+        expect(findPositionByUnitSetIdAndRarity(config, 'Left2_1')).toEqual({ tierIndex: 2, setIndex: 1 });
+    });
+
+    it('respects the rarity filter', () => {
+        expect(findPositionByUnitSetIdAndRarity(config, 'Left2_1', 2)).toEqual({ tierIndex: 2, setIndex: 1 });
+        expect(findPositionByUnitSetIdAndRarity(config, 'Left2_1', 3)).toBeUndefined();
+    });
+
+    it('returns undefined for an unknown unitSetId', () => {
+        expect(findPositionByUnitSetIdAndRarity(config, 'Unknown_99')).toBeUndefined();
+    });
+
+    it('is lenient across multiple sets at the same rarity — returns the first found, not an exact match', () => {
+        const multiSetConfig: GuildBossSeasonConfig = {
+            guildBossSeasonConfigId: 'multi',
+            tiers: [
+                {
+                    tier: 4,
+                    sets: [
+                        {
+                            set: 0,
+                            chestId: 'c',
+                            guildXp: 1,
+                            encounters: [
+                                {
+                                    encounterIndex: 0,
+                                    guildBossEncounterType: 'Boss',
+                                    boardId: 'b',
+                                    maxNrOfTurns: 5,
+                                    unitId: 'Lion:20',
+                                },
+                            ],
+                        },
+                        {
+                            set: 1,
+                            chestId: 'c',
+                            guildXp: 1,
+                            encounters: [
+                                {
+                                    encounterIndex: 0,
+                                    guildBossEncounterType: 'Boss',
+                                    boardId: 'b',
+                                    maxNrOfTurns: 5,
+                                    unitId: 'Lion:21',
+                                },
+                            ],
+                        },
+                    ],
+                },
+            ],
+        };
+
+        expect(findPositionByUnitSetIdAndRarity(multiSetConfig, 'Lion', 4)).toEqual({ tierIndex: 0, setIndex: 0 });
+    });
+});
+
+describe('findEncounterLocationByRarity (real data)', () => {
+    it('finds a real boss at one of its known rarities', () => {
+        const [unitSetId] = getBossUnitSetIds();
+        const availability = getKnownEncounterAvailability(unitSetId);
+        expect(availability.length).toBeGreaterThan(0);
+        expect(findEncounterLocationByRarity(unitSetId, availability[0].rarity)).toBeDefined();
+    });
+
+    it('returns undefined for a rarity the boss never occupies', () => {
+        const [unitSetId] = getBossUnitSetIds();
+        const occupiedRarities = new Set(getKnownEncounterAvailability(unitSetId).map(a => a.rarity));
+        const missingRarity = [0, 1, 2, 3, 4, 5].find(r => !occupiedRarities.has(r));
+        if (missingRarity !== undefined) {
+            expect(findEncounterLocationByRarity(unitSetId, missingRarity)).toBeUndefined();
+        }
+    });
+
+    it('returns undefined for a completely unknown unitSetId', () => {
+        expect(findEncounterLocationByRarity('TotallyNotARealUnitSetId')).toBeUndefined();
+    });
+});
+
+describe('findEncounterLocation (real data)', () => {
+    it('finds a real boss using its exact known progression index', () => {
+        const [unitSetId] = getBossUnitSetIds();
+        const progressionIndex = getMaxKnownProgressionIndex(unitSetId);
+        expect(findEncounterLocation(unitSetId, progressionIndex)).toBeDefined();
+    });
+
+    it('returns undefined for a progression index with no matching encounter', () => {
+        const [unitSetId] = getBossUnitSetIds();
+        const progressionIndex = getMaxKnownProgressionIndex(unitSetId);
+        expect(findEncounterLocation(unitSetId, progressionIndex + 1000)).toBeUndefined();
+    });
+
+    it('returns undefined for a completely unknown unitSetId', () => {
+        expect(findEncounterLocation('TotallyNotARealUnitSetId')).toBeUndefined();
+    });
+});
+
+describe('getMaxKnownProgressionIndex (real data)', () => {
+    it('returns the highest known real progression index for a specific boss', () => {
+        expect(getMaxKnownProgressionIndex('GuildBoss12Boss1DarkaLion')).toBe(23);
+    });
+
+    it('falls back to 1 for a unit with no known encounters', () => {
+        expect(getMaxKnownProgressionIndex('TotallyNotARealUnitSetId')).toBe(1);
+    });
+});
+
+describe('getKnownEncounterAvailability (real data)', () => {
+    it('returns a deduped list sorted by rarity then set for a real boss', () => {
+        const [unitSetId] = getBossUnitSetIds();
+        const availability = getKnownEncounterAvailability(unitSetId);
+        expect(availability.length).toBeGreaterThan(0);
+        const sorted = availability.toSorted((a, b) => a.rarity - b.rarity || a.set - b.set);
+        expect(availability).toEqual(sorted);
+        const keys = availability.map(a => `${a.rarity}:${a.set}`);
+        expect(new Set(keys).size).toBe(keys.length);
+    });
+
+    it('returns an empty array for an unknown unitSetId', () => {
+        expect(getKnownEncounterAvailability('TotallyNotARealUnitSetId')).toEqual([]);
+    });
+
+    it('includes the exact progression index for each known position', () => {
+        const availability = getKnownEncounterAvailability('GuildBoss12Boss1DarkaLion');
+        expect(availability).toEqual([
+            { rarity: 3, set: 4, progressionIndex: 17 },
+            { rarity: 4, set: 3, progressionIndex: 21 },
+            { rarity: 4, set: 4, progressionIndex: 22 },
+            { rarity: 5, set: 0, progressionIndex: 23 },
+        ]);
     });
 });

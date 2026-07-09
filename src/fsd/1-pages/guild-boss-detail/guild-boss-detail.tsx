@@ -6,6 +6,7 @@ import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { AttackProfileRow } from '@/fsd/5-shared/ui/attack-profile-row';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { getImageUrl } from '@/fsd/5-shared/ui/get-image-url';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 import { traitIcons } from '@/fsd/5-shared/ui/trait-icons';
 import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
@@ -178,6 +179,8 @@ export function GuildBossDetail() {
         setRightHpLost,
         activeModifierDefs,
         statAdjustments,
+        encounter,
+        knownEncounterAvailability,
         ownFieldEnemies,
         fakeChar,
         allAbilities,
@@ -343,7 +346,35 @@ export function GuildBossDetail() {
             </div>
 
             {/* Field enemies */}
-            <BattlefieldEnemies enemyIds={ownFieldEnemies} title="Boss Field Enemies" />
+            {encounter ? (
+                <BattlefieldEnemies enemyIds={ownFieldEnemies} title="Boss Field Enemies" />
+            ) : (
+                <div className="flex flex-col gap-2">
+                    <h2 className="text-base font-semibold text-(--fg)">Boss Field Enemies</h2>
+                    <p className="text-sm text-(--fg-muted)">
+                        {knownEncounterAvailability.length > 0 ? (
+                            <>
+                                Unknown: Only the following are available:{' '}
+                                {knownEncounterAvailability.map(
+                                    ({ rarity: availableRarity, set, progressionIndex }, index) => (
+                                        <button
+                                            type="button"
+                                            key={`${availableRarity}-${set}`}
+                                            onClick={() => setStatIndex(progressionIndex - 1)}
+                                            className="mr-1 inline-flex items-center gap-1 text-(--primary) hover:underline">
+                                            <RarityIcon rarity={availableRarity} />
+                                            {set + 1}
+                                            {index < knownEncounterAvailability.length - 1 ? ',' : ''}
+                                        </button>
+                                    )
+                                )}
+                            </>
+                        ) : (
+                            'Unknown: No encounter data available for this unit.'
+                        )}
+                    </p>
+                </div>
+            )}
 
             {/* Modifiers */}
             {isBoss ? (
