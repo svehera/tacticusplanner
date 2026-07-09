@@ -5,16 +5,15 @@ import { getImageUrl } from '@/fsd/5-shared/ui';
 import {
     bossPortraitMap,
     getBossUnitSetIds,
+    getMaxKnownProgressionIndex,
     getPrimeUnitSetIds,
     getUnitDisplayName,
-    guildBossData,
     resolvePrimeDisplayName,
     resolvePrimePortraitPath,
 } from '@/fsd/4-entities/guild_boss';
 
 function maxProgressionUnitId(unitSetId: string): string {
-    const count = guildBossData.unitSets[unitSetId]?.stats.length ?? 1;
-    return `${unitSetId}:${count}`;
+    return `${unitSetId}:${getMaxKnownProgressionIndex(unitSetId)}`;
 }
 
 export function GuildBossList() {
