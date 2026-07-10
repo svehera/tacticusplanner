@@ -139,6 +139,58 @@ export function findPositionByBossUnitSetId(
     return undefined;
 }
 
+/**
+ * Like `findPositionByBossUnitSetId`, but matches any encounter type (needed for
+ * Primes/Minions, whose `unitId` never has `guildBossEncounterType === 'Boss'`) and
+ * filters by the exact 1-based progression index baked into the encounter's own
+ * `unitId` suffix, not by rarity — the same rarity can span multiple distinct sets for
+ * one boss, so only an exact progression-index match uniquely identifies which specific
+ * encounter a given stats row refers to.
+ */
+export function findPositionByUnitSetId(
+    config: GuildBossSeasonConfig,
+    unitSetId: string,
+    progressionIndex?: number
+): EncounterPosition | undefined {
+    for (const [tierIndex, tier] of config.tiers.entries()) {
+        for (const [setIndex, set] of tier.sets.entries()) {
+            for (const enc of set.encounters) {
+                if (getUnitSetId(enc.unitId) !== unitSetId) continue;
+                if (progressionIndex !== undefined && getProgressionIndexFromUnitId(enc.unitId) !== progressionIndex) {
+                    continue;
+                }
+                return { tierIndex, setIndex };
+            }
+        }
+    }
+    return undefined;
+}
+
+/**
+ * Like `findPositionByUnitSetId`, but filters by rarity (`tier.tier === rarity`) instead
+ * of exact progression index, and matches any encounter type (needed for Primes/Minions).
+ * Not unique — a boss can occupy multiple sets at the same rarity, so this is a
+ * best-effort "closest known" lookup, not a precise one. Used only as a lenient fallback
+ * for Prime Modifiers when no exact encounter exists for the selected row.
+ */
+export function findPositionByUnitSetIdAndRarity(
+    config: GuildBossSeasonConfig,
+    unitSetId: string,
+    rarity?: number
+): EncounterPosition | undefined {
+    for (const [tierIndex, tier] of config.tiers.entries()) {
+        if (rarity !== undefined && tier.tier !== rarity) continue;
+        for (const [setIndex, set] of tier.sets.entries()) {
+            for (const enc of set.encounters) {
+                if (getUnitSetId(enc.unitId) === unitSetId) {
+                    return { tierIndex, setIndex };
+                }
+            }
+        }
+    }
+    return undefined;
+}
+
 /** The tier value the Legendary/Mythic boss rotation loops back to once the season's climb is exhausted. */
 const LOOP_RESTART_RARITY = Rarity.Legendary;
 
@@ -176,25 +228,99 @@ export function getEncountersAtPosition(
 }
 
 /**
- * Best-effort: the first encounter (in season-rotation order) whose unitId matches this unitSetId.
- * Not unique — the same boss can appear in multiple season/tier/set slots. `tier`/`set` are array
- * indices into `GuildBossSeasonConfig.tiers`/`GuildBossTier.sets`, matching how callers already index them.
+ * Best-effort: the first encounter (in season-rotation order) whose unitId matches this unitSetId,
+ * optionally filtered to an exact 1-based progression index (the encounter's own `:N` suffix). Not
+ * unique — the same boss can appear in multiple season/tier/set slots. `tier`/`set` are array indices
+ * into `GuildBossSeasonConfig.tiers`/`GuildBossTier.sets`, matching how callers already index them.
  */
-export function findEncounterLocation(unitSetId: string): EncounterLocation | undefined {
+export function findEncounterLocation(unitSetId: string, progressionIndex?: number): EncounterLocation | undefined {
     for (const seasonId of getSeasonIds()) {
-        const config = guildBossData.guildBossSeasonDataConfigsGDTO[seasonId];
+        const config = getSeasonConfig(seasonId);
         if (!config) continue;
-        for (const [tier, tierEntry] of config.tiers.entries()) {
-            for (const [set, setEntry] of tierEntry.sets.entries()) {
+        const position = findPositionByUnitSetId(config, unitSetId, progressionIndex);
+        if (!position) continue;
+        const encounters = config.tiers[position.tierIndex]?.sets[position.setIndex]?.encounters ?? [];
+        const enc = encounters.find(
+            candidate =>
+                getUnitSetId(candidate.unitId) === unitSetId &&
+                (progressionIndex === undefined || getProgressionIndexFromUnitId(candidate.unitId) === progressionIndex)
+        );
+        if (!enc) continue;
+        return { seasonId, tier: position.tierIndex, set: position.setIndex, encounterIndex: enc.encounterIndex };
+    }
+    return undefined;
+}
+
+/** Rarity-filtered counterpart to `findEncounterLocation` — see `findPositionByUnitSetIdAndRarity`. */
+export function findEncounterLocationByRarity(unitSetId: string, rarity?: number): EncounterLocation | undefined {
+    for (const seasonId of getSeasonIds()) {
+        const config = getSeasonConfig(seasonId);
+        if (!config) continue;
+        const position = findPositionByUnitSetIdAndRarity(config, unitSetId, rarity);
+        if (!position) continue;
+        const encounters = config.tiers[position.tierIndex]?.sets[position.setIndex]?.encounters ?? [];
+        const enc = encounters.find(candidate => getUnitSetId(candidate.unitId) === unitSetId);
+        if (!enc) continue;
+        return { seasonId, tier: position.tierIndex, set: position.setIndex, encounterIndex: enc.encounterIndex };
+    }
+    return undefined;
+}
+
+export interface EncounterAvailability {
+    rarity: Rarity;
+    /** 0-based field value (`GuildBossSet.set`); display as `set + 1` for a 1-based label. */
+    set: number;
+    /** 1-based progression index (the encounter's own `:N` suffix) — pass `progressionIndex - 1`
+     *  to the Progression selector's `setStatIndex` to jump straight to this exact encounter. */
+    progressionIndex: number;
+}
+
+/** Every distinct (rarity, set) position this unitSetId is known to occupy, across all seasons. */
+export function getKnownEncounterAvailability(unitSetId: string): EncounterAvailability[] {
+    const seen = new Set<string>();
+    const results: EncounterAvailability[] = [];
+    for (const seasonId of getSeasonIds()) {
+        const config = getSeasonConfig(seasonId);
+        if (!config) continue;
+        for (const tierEntry of config.tiers) {
+            for (const setEntry of tierEntry.sets) {
+                const enc = setEntry.encounters.find(candidate => getUnitSetId(candidate.unitId) === unitSetId);
+                if (!enc) continue;
+                const key = `${tierEntry.tier}:${setEntry.set}`;
+                if (seen.has(key)) continue;
+                seen.add(key);
+                results.push({
+                    rarity: tierEntry.tier as Rarity,
+                    set: setEntry.set,
+                    progressionIndex: getProgressionIndexFromUnitId(enc.unitId),
+                });
+            }
+        }
+    }
+    return results.toSorted((a, b) => a.rarity - b.rarity || a.set - b.set);
+}
+
+/**
+ * Highest 1-based progression index among this unit's real known encounters (its own `:N`
+ * suffix), for use as a default when no specific encounter is known yet (e.g. the flat
+ * catalog). Falls back to the full stats-table length if nothing is known.
+ */
+export function getMaxKnownProgressionIndex(unitSetId: string): number {
+    let max: number | undefined;
+    for (const seasonId of getSeasonIds()) {
+        const config = getSeasonConfig(seasonId);
+        if (!config) continue;
+        for (const tierEntry of config.tiers) {
+            for (const setEntry of tierEntry.sets) {
                 for (const enc of setEntry.encounters) {
-                    if (getUnitSetId(enc.unitId) === unitSetId) {
-                        return { seasonId, tier, set, encounterIndex: enc.encounterIndex };
-                    }
+                    if (getUnitSetId(enc.unitId) !== unitSetId) continue;
+                    const index = getProgressionIndexFromUnitId(enc.unitId);
+                    if (max === undefined || index > max) max = index;
                 }
             }
         }
     }
-    return undefined;
+    return max ?? guildBossData.unitSets[unitSetId]?.stats.length ?? 1;
 }
 
 const PRIME_ID_RE = /(?:MiniBoss|Minion)\d+(.+)/;
