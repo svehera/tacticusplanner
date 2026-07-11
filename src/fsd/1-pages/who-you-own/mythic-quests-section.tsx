@@ -138,6 +138,12 @@ export const MythicQuestsSection = ({ characterId, rarity, unitName, factionId }
 
     return (
         <div className="mt-6 border-t border-(--border) pt-4">
+            {characterId === 'worldKharn' && Date.now() < Date.UTC(2026, 6, 18) && (
+                <div className="mb-3 rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-base font-semibold text-amber-400">
+                    {'In-Game code, valid until July 18th: '}
+                    <span className="font-mono tracking-wide">PLANNERJULY</span>
+                </div>
+            )}
             <h3 className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">Mythic Quests</h3>
             <div className="mt-3 flex flex-col gap-4">
                 {quests.map((quest, index) => (
