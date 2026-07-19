@@ -11,7 +11,7 @@ interface Props {
     blocks: StatBlock[];
 }
 
-/** Two side-by-side soft-filled blocks showing an uppercase label over a `start → end` value. */
+/** Two side-by-side soft-filled blocks — an uppercase label and a `start → end` value on one row. */
 export const StatBlockPair: React.FC<Props> = ({ blocks }) => {
     if (blocks.length === 0) return;
 
@@ -20,11 +20,11 @@ export const StatBlockPair: React.FC<Props> = ({ blocks }) => {
             {blocks.map(block => (
                 <div
                     key={block.label}
-                    className="flex flex-1 flex-col items-center gap-1 rounded-lg bg-(--soft) px-1 py-1.5">
+                    className="flex flex-1 items-center justify-between gap-1.5 rounded-lg bg-(--soft) px-2 py-1">
                     <span className="text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
                         {block.label}
                     </span>
-                    <span className="flex items-center gap-1 text-[15px] font-bold text-(--fg) tabular-nums">
+                    <span className="flex items-center gap-1 text-sm font-bold text-(--fg) tabular-nums">
                         {block.start}
                         <ArrowRight className="size-3.5 text-(--soft-fg)" />
                         <span className="text-(--primary)">{block.end}</span>

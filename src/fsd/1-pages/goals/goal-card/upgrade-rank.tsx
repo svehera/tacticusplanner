@@ -32,7 +32,7 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, bookR
     const xpPct = Math.min(100, Math.round(((applied ?? 0) / Math.max(1, required ?? 0)) * 100));
 
     return (
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-1 flex-col justify-center gap-2.5">
             <ProgressionRow
                 from={<RankEmblem rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} role="Current rank" />}
                 to={<RankEmblem rank={goal.rankEnd} rankPoint5={goal.rankPoint5} role="Target rank" />}
@@ -57,44 +57,49 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, bookR
             />
 
             {hasBooks && (
-                <div className="flex items-center gap-2 border-t border-(--card-border) pt-2.5">
-                    <MiscIcon icon={bookIcon} width={18} height={18} />
-                    <span className="shrink-0 text-xs font-bold text-(--fg) tabular-nums">
-                        {applied} / {required}
-                    </span>
-                    <div
-                        role="progressbar"
-                        aria-label={`${Rarity[bookRarity]} XP Books`}
-                        aria-valuenow={xpPct}
-                        aria-valuemin={0}
-                        aria-valuemax={100}
-                        className="h-2 min-w-[30px] flex-1 overflow-hidden rounded-full bg-(--fg)/12">
+                <div className="border-t border-(--card-border) pt-2.5">
+                    <div className="flex min-h-[28px] items-center gap-2">
+                        <MiscIcon icon={bookIcon} width={18} height={18} />
+                        <span className="shrink-0 text-xs font-bold text-(--fg) tabular-nums">
+                            {applied} / {required}
+                        </span>
                         <div
-                            className="h-full origin-left bg-(--primary) transition-transform duration-500 motion-reduce:transition-none"
-                            style={{ transform: `scaleX(${xpPct / 100})` }}
-                        />
-                    </div>
-                    {xpEstimate && (
-                        <>
-                            <span aria-hidden className="h-3 w-px shrink-0 bg-(--card-border)" />
-                            <span className="shrink-0 text-xs whitespace-nowrap text-(--soft-fg) tabular-nums">
-                                Lv <span className="font-bold text-(--fg)">{xpEstimate.currentLevel}</span>→
-                                <span className="font-bold text-(--fg)">{xpEstimate.targetLevel}</span>
-                            </span>
-                        </>
-                    )}
-                    {goalEstimate.xpDaysLeft !== undefined && (
-                        <>
-                            <span aria-hidden className="h-3 w-px shrink-0 bg-(--card-border)" />
-                            <AccessibleTooltip
-                                title={`${Math.ceil(goalEstimate.xpDaysLeft)} days — estimated from your XP Income settings${xpIsDriver ? ' (this is what gates completion)' : ''}`}>
-                                <span className="inline-flex shrink-0 items-center gap-0.5 text-xs text-(--soft-fg) tabular-nums">
-                                    <Calendar className="size-3.5" aria-hidden />
-                                    <span className="font-bold text-(--fg)">{Math.ceil(goalEstimate.xpDaysLeft)}</span>d
+                            role="progressbar"
+                            aria-label={`${Rarity[bookRarity]} XP Books`}
+                            aria-valuenow={xpPct}
+                            aria-valuemin={0}
+                            aria-valuemax={100}
+                            className="h-2 min-w-[30px] flex-1 overflow-hidden rounded-full bg-(--fg)/12">
+                            <div
+                                className="h-full origin-left bg-(--primary) transition-transform duration-500 motion-reduce:transition-none"
+                                style={{ transform: `scaleX(${xpPct / 100})` }}
+                            />
+                        </div>
+                        {xpEstimate && (
+                            <>
+                                <span aria-hidden className="h-3 w-px shrink-0 bg-(--card-border)" />
+                                <span className="shrink-0 text-xs whitespace-nowrap text-(--soft-fg) tabular-nums">
+                                    Lv <span className="font-bold text-(--fg)">{xpEstimate.currentLevel}</span>→
+                                    <span className="font-bold text-(--fg)">{xpEstimate.targetLevel}</span>
                                 </span>
-                            </AccessibleTooltip>
-                        </>
-                    )}
+                            </>
+                        )}
+                        {goalEstimate.xpDaysLeft !== undefined && (
+                            <>
+                                <span aria-hidden className="h-3 w-px shrink-0 bg-(--card-border)" />
+                                <AccessibleTooltip
+                                    title={`${Math.ceil(goalEstimate.xpDaysLeft)} days — estimated from your XP Income settings${xpIsDriver ? ' (this is what gates completion)' : ''}`}>
+                                    <span className="inline-flex shrink-0 items-center gap-0.5 text-xs text-(--soft-fg) tabular-nums">
+                                        <Calendar className="size-3.5" aria-hidden />
+                                        <span className="font-bold text-(--fg)">
+                                            {Math.ceil(goalEstimate.xpDaysLeft)}
+                                        </span>
+                                        d
+                                    </span>
+                                </AccessibleTooltip>
+                            </>
+                        )}
+                    </div>
                 </div>
             )}
         </div>
