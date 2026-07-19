@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Rank, Rarity } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { LazyTooltip } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -34,10 +34,10 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, bookR
                 trailing={
                     goal.upgradesRarity.length > 0 && goal.upgradesRarity.length < 6 ? (
                         <LazyTooltip
-                            title={`Filtered upgrade materials: ${goal.upgradesRarity.map(rarity => Rarity[rarity]).join(', ')}`}>
+                            title={`Filtered upgrade materials: ${goal.upgradesRarity.map(rarity => RarityMapper.rarityToRarityString(rarity)).join(', ')}`}>
                             <span
                                 role="img"
-                                aria-label={`Filtered upgrade materials: ${goal.upgradesRarity.map(rarity => Rarity[rarity]).join(', ')}`}
+                                aria-label={`Filtered upgrade materials: ${goal.upgradesRarity.map(rarity => RarityMapper.rarityToRarityString(rarity)).join(', ')}`}
                                 className="flex items-center gap-0.5 [&>img]:h-[18px] [&>img]:w-auto">
                                 {goal.upgradesRarity.map(rarity => (
                                     <RarityIcon key={rarity} rarity={rarity} />

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { LazyTooltip, ProgressBar } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -47,14 +47,14 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters
             ) : (
                 <ProgressionRow
                     from={
-                        <LazyTooltip title={`Current rarity: ${Rarity[goal.rarityStart]}`}>
+                        <LazyTooltip title={`Current rarity: ${RarityMapper.rarityToRarityString(goal.rarityStart)}`}>
                             <span className="inline-flex">
                                 <RarityIcon rarity={goal.rarityStart} />
                             </span>
                         </LazyTooltip>
                     }
                     to={
-                        <LazyTooltip title={`Target rarity: ${Rarity[goal.rarityEnd]}`}>
+                        <LazyTooltip title={`Target rarity: ${RarityMapper.rarityToRarityString(goal.rarityEnd)}`}>
                             <span className="inline-flex">
                                 <RarityIcon rarity={goal.rarityEnd} />
                             </span>
@@ -63,7 +63,7 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters
                     trailing={!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                     days={days}
                     energy={goalEstimate.energyTotal}
-                    ariaLabel={`${Rarity[goal.rarityStart]} to ${Rarity[goal.rarityEnd]}`}
+                    ariaLabel={`${RarityMapper.rarityToRarityString(goal.rarityStart)} to ${RarityMapper.rarityToRarityString(goal.rarityEnd)}`}
                 />
             )}
 

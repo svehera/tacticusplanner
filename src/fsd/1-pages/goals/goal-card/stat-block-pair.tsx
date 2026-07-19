@@ -26,7 +26,7 @@ export const StatBlockPair: React.FC<Props> = ({ blocks }) => {
                     </span>
                     <span className="flex items-center gap-1 text-sm font-bold text-(--fg) tabular-nums">
                         {block.start}
-                        <ArrowRight className="size-3.5 text-(--soft-fg)" />
+                        <ArrowRight className="size-3.5 text-(--soft-fg)" aria-hidden />
                         <span className="text-(--primary)">{block.end}</span>
                     </span>
                 </div>

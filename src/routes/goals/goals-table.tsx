@@ -26,7 +26,7 @@ import {
     Play,
     Trash2,
 } from 'lucide-react';
-import React, { useCallback, useEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -119,21 +119,24 @@ export const GoalsTable: React.FC<Props> = ({
     // so the grip is disabled/dimmed then; the arrows still reorder in priority space (see prioCol).
     const sortActiveReference = useRef(false);
     const goalsColorCodingReference = useRef(goalsColorCoding);
-    goalsColorCodingReference.current = goalsColorCoding;
     const onToggleIncludeReference = useRef(onToggleInclude);
-    onToggleIncludeReference.current = onToggleInclude;
     const menuItemSelectReference = useRef(menuItemSelect);
-    menuItemSelectReference.current = menuItemSelect;
     const onReorderReference = useRef(onReorder);
-    onReorderReference.current = onReorder;
     const rowsReference = useRef(rows);
-    rowsReference.current = rows;
     // Map keyed by goalId for O(1) lookups in cell renderers.
     const estimateMapReference = useRef<Map<string, IGoalEstimate>>(new Map());
-    estimateMapReference.current = new Map(estimate.map(est => [est.goalId, est]));
     // Priority-order index per goalId (rows are priority-sorted) — O(1) lookup for the reorder arrows.
     const priorityIndexReference = useRef<Map<string, number>>(new Map());
-    priorityIndexReference.current = new Map(rows.map((row, index) => [row.goalId, index]));
+
+    useLayoutEffect(() => {
+        goalsColorCodingReference.current = goalsColorCoding;
+        onToggleIncludeReference.current = onToggleInclude;
+        menuItemSelectReference.current = menuItemSelect;
+        onReorderReference.current = onReorder;
+        rowsReference.current = rows;
+        estimateMapReference.current = new Map(estimate.map(est => [est.goalId, est]));
+        priorityIndexReference.current = new Map(rows.map((row, index) => [row.goalId, index]));
+    }, [estimate, goalsColorCoding, menuItemSelect, onReorder, onToggleInclude, rows]);
 
     // Redraw rows (not columns) when estimates OR the colour-coding mode change, so cell content,
     // row classes and row styles (getRowStyle reads the colour-mode ref) stay current without

@@ -1,7 +1,7 @@
 import { Calendar } from 'lucide-react';
 import React from 'react';
 
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -22,7 +22,8 @@ export const XpBooksRow: React.FC<Props> = ({ goalEstimate, bookRarity }) => {
     const applied = goalEstimate.xpBooksApplied;
     const required = goalEstimate.xpBooksRequired;
     if (applied === undefined || required === undefined || required === 0) return;
-    const bookIcon = bookRarity === undefined ? undefined : ((Rarity[bookRarity].toLowerCase() + 'Book') as never);
+    const rarityLabel = bookRarity === undefined ? undefined : RarityMapper.rarityToRarityString(bookRarity);
+    const bookIcon = rarityLabel === undefined ? undefined : ((rarityLabel.toLowerCase() + 'Book') as never);
     // XP income is the bottleneck when it finishes later than the material farm.
     const xpIsDriver = (goalEstimate.xpDaysLeft ?? 0) > goalEstimate.daysLeft;
     const xpPct = Math.min(100, Math.round((applied / Math.max(1, required)) * 100));
@@ -35,7 +36,7 @@ export const XpBooksRow: React.FC<Props> = ({ goalEstimate, bookRarity }) => {
             </span>
             <div
                 role="progressbar"
-                aria-label={bookRarity === undefined ? 'XP Books' : `${Rarity[bookRarity]} XP Books`}
+                aria-label={rarityLabel === undefined ? 'XP Books' : `${rarityLabel} XP Books`}
                 aria-valuenow={xpPct}
                 aria-valuemin={0}
                 aria-valuemax={100}
