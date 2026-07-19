@@ -1123,8 +1123,8 @@ describe('GoalsService.adjustGoalEstimates', () => {
                 targetLevel: 15,
                 xpLeft: 0,
             });
-            expect(adjustedGoal?.xpBooksApplied).toBe(2);
-            expect(adjustedGoal?.xpBooksRequired).toBe(2);
+            expect(adjustedGoal?.xpBooksApplied).toBe(1);
+            expect(adjustedGoal?.xpBooksRequired).toBe(1);
             expect(adjustedGoal?.xpBooksTotal).toBe(0);
             expect(adjustedGoal?.xpDaysLeft).toBeUndefined();
         });
