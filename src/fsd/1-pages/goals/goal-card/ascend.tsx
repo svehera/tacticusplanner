@@ -31,13 +31,11 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters
 
     const orbItems = buildOrbItems(goalEstimate, goal.unitAlliance);
 
-    const hasResources =
-        orbItems.length > 0 ||
-        shardsData.totalIncrementalShardsNeeded > 0 ||
-        shardsData.totalIncrementalMythicShardsNeeded > 0;
+    const hasShards = shardsData.totalIncrementalShardsNeeded > 0 || shardsData.totalIncrementalMythicShardsNeeded > 0;
+    const hasResources = orbItems.length > 0 || hasShards;
 
     return (
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-1 flex-col gap-2.5">
             {isSameRarity ? (
                 <ProgressionRow
                     from={<StarsIcon stars={goal.starsStart} />}
@@ -70,25 +68,29 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters
             )}
 
             {hasResources && (
-                <div className="flex flex-col gap-2.5 border-t border-(--card-border) pt-2.5">
-                    <ResourceCostRow items={orbItems} />
-                    {shardsData.totalIncrementalShardsNeeded > 0 && (
-                        <ProgressBar
-                            value={shardsData.incrementalShardsAcquired}
-                            max={shardsData.totalIncrementalShardsNeeded}
-                            intent="success"
-                            label="Shards"
-                            valueLabel={`${shardsData.incrementalShardsAcquired} / ${shardsData.totalIncrementalShardsNeeded}`}
-                        />
-                    )}
-                    {shardsData.totalIncrementalMythicShardsNeeded > 0 && (
-                        <ProgressBar
-                            value={shardsData.incrementalMythicShardsAcquired}
-                            max={shardsData.totalIncrementalMythicShardsNeeded}
-                            intent="success"
-                            label="Mythic Shards"
-                            valueLabel={`${shardsData.incrementalMythicShardsAcquired} / ${shardsData.totalIncrementalMythicShardsNeeded}`}
-                        />
+                <div className="flex flex-1 flex-col gap-2.5 border-t border-(--card-border) pt-2.5">
+                    {orbItems.length > 0 && <ResourceCostRow items={orbItems} />}
+                    {hasShards && (
+                        <div className="mt-auto flex flex-col gap-2.5">
+                            {shardsData.totalIncrementalShardsNeeded > 0 && (
+                                <ProgressBar
+                                    value={shardsData.incrementalShardsAcquired}
+                                    max={shardsData.totalIncrementalShardsNeeded}
+                                    intent="success"
+                                    label="Shards"
+                                    valueLabel={`${shardsData.incrementalShardsAcquired} / ${shardsData.totalIncrementalShardsNeeded}`}
+                                />
+                            )}
+                            {shardsData.totalIncrementalMythicShardsNeeded > 0 && (
+                                <ProgressBar
+                                    value={shardsData.incrementalMythicShardsAcquired}
+                                    max={shardsData.totalIncrementalMythicShardsNeeded}
+                                    intent="success"
+                                    label="Mythic Shards"
+                                    valueLabel={`${shardsData.incrementalMythicShardsAcquired} / ${shardsData.totalIncrementalMythicShardsNeeded}`}
+                                />
+                            )}
+                        </div>
                     )}
                 </div>
             )}

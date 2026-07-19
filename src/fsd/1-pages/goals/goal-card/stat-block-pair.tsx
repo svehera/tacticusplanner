@@ -16,7 +16,7 @@ export const StatBlockPair: React.FC<Props> = ({ blocks }) => {
     if (blocks.length === 0) return;
 
     return (
-        <div className="flex gap-1.5">
+        <div className="flex flex-wrap gap-1.5">
             {blocks.map(block => (
                 <div
                     key={block.label}

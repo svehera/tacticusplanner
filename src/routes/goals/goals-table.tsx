@@ -13,7 +13,6 @@ import {
 import { AgGridReact } from 'ag-grid-react';
 import {
     ArrowDown,
-    ArrowRight,
     ArrowUp,
     BadgeCheck,
     Calendar,
@@ -49,6 +48,8 @@ import {
     ProgressionRow,
     RankEmblem,
     ResourceCostRow,
+    StatBlockPair,
+    XpBooksRow,
     buildAbilityCostItems,
     buildMowCostItems,
     buildOrbItems,
@@ -535,21 +536,6 @@ export const GoalsTable: React.FC<Props> = ({
             ) : undefined;
         };
 
-        // Compact `label start → end` lines — a table-dense alternative to the card's boxed StatBlockPair.
-        const statLines = (blocks: Array<{ label: string; start: number; end: number }>) =>
-            blocks.length === 0 ? undefined : (
-                <div className="flex flex-col gap-0.5 text-xs leading-tight">
-                    {blocks.map(block => (
-                        <div key={block.label} className="flex items-center gap-1 tabular-nums">
-                            <span className="text-(--soft-fg)">{block.label}</span>
-                            <span className="font-bold text-(--fg)">{block.start}</span>
-                            <ArrowRight className="size-3 shrink-0 text-(--soft-fg)" />
-                            <span className="font-bold text-(--primary)">{block.end}</span>
-                        </div>
-                    ))}
-                </div>
-            );
-
         // ── Variant: rank (UpgradeRank + MowAbilities + UpgradeMaterial) ─────
         const rankGoalCol: ColDef<TypedGoalSelect> = {
             headerName: 'Goal',
@@ -595,7 +581,9 @@ export const GoalsTable: React.FC<Props> = ({
                         const showRarityFilter = data.upgradesRarity.length > 0 && data.upgradesRarity.length < 6;
                         content = (
                             <div className="flex items-center gap-1.5">
-                                <div className="min-w-0">{statLines(blocks)}</div>
+                                <div className="min-w-0 flex-1">
+                                    <StatBlockPair blocks={blocks} />
+                                </div>
                                 {showRarityFilter && (
                                     <span className="flex shrink-0 items-center gap-0.5 [&>img]:h-4 [&>img]:w-auto">
                                         {data.upgradesRarity.map(rarity => (
@@ -616,7 +604,7 @@ export const GoalsTable: React.FC<Props> = ({
                     // No default
                 }
                 return (
-                    <div className="flex h-full min-w-0 items-center gap-1.5 py-2 leading-normal">
+                    <div className="flex h-full min-w-0 items-center gap-1.5 py-1 leading-normal">
                         <div className="min-w-0 flex-1">{content}</div>
                         {completedMark(data.goalId)}
                     </div>
@@ -636,50 +624,10 @@ export const GoalsTable: React.FC<Props> = ({
                 if (data.type === PersonalGoalType.UpgradeRank) {
                     const applied = est?.xpBooksApplied;
                     const required = est?.xpBooksRequired;
-                    if (applied === undefined || required === undefined || required === 0) return emptyCell;
-                    const bookRarity = est?.xpEstimate?.bookRarity;
-                    const bookIcon =
-                        bookRarity === undefined ? undefined : ((Rarity[bookRarity].toLowerCase() + 'Book') as never);
-                    // XP income is the bottleneck when it finishes later than the material farm.
-                    const xpIsDriver = (est?.xpDaysLeft ?? 0) > (est?.daysLeft ?? 0);
+                    if (!est || applied === undefined || required === undefined || required === 0) return emptyCell;
                     return (
                         <div className="flex h-full w-full flex-col justify-center py-1">
-                            <ProgressBar
-                                value={applied}
-                                max={required}
-                                intent="primary"
-                                ariaLabel="XP Books"
-                                label={
-                                    <span className="inline-flex items-center gap-1">
-                                        {bookIcon && <MiscIcon icon={bookIcon} width={20} height={20} />}
-                                        XP Books
-                                    </span>
-                                }
-                                valueLabel={`${applied} / ${required}`}
-                                subLeft={
-                                    est?.xpDaysLeft === undefined ? undefined : (
-                                        <span
-                                            className={`inline-flex items-center gap-1 ${xpIsDriver ? 'text-(--primary)' : 'text-(--soft-fg)'}`}>
-                                            <Calendar className="size-3.5" aria-hidden />
-                                            <span
-                                                className={`font-bold ${xpIsDriver ? 'text-(--primary)' : 'text-(--fg)'}`}>
-                                                {Math.ceil(est.xpDaysLeft)}
-                                            </span>
-                                            d
-                                        </span>
-                                    )
-                                }
-                                subRight={
-                                    est?.xpEstimate ? (
-                                        <>
-                                            Lv{' '}
-                                            <span className="font-bold text-(--fg)">{est.xpEstimate.currentLevel}</span>{' '}
-                                            →{' '}
-                                            <span className="font-bold text-(--fg)">{est.xpEstimate.targetLevel}</span>
-                                        </>
-                                    ) : undefined
-                                }
-                            />
+                            <XpBooksRow goalEstimate={est} bookRarity={est.xpEstimate?.bookRarity} />
                         </div>
                     );
                 }
@@ -777,7 +725,7 @@ export const GoalsTable: React.FC<Props> = ({
                     content = <span className="text-xs text-(--soft-fg)">Unlock</span>;
                 }
                 return (
-                    <div className="flex h-full min-w-0 items-center gap-1.5 py-2 leading-normal">
+                    <div className="flex h-full min-w-0 items-center gap-1.5 py-1 leading-normal">
                         <div className="min-w-0 flex-1">{content}</div>
                         {completedMark(data.goalId)}
                     </div>
@@ -880,8 +828,10 @@ export const GoalsTable: React.FC<Props> = ({
                 if (data.passiveEnd > data.passiveStart)
                     blocks.push({ label: 'Passive', start: data.passiveStart, end: data.passiveEnd });
                 return (
-                    <div className="flex h-full min-w-0 items-center gap-1.5 py-2 leading-normal">
-                        <div className="min-w-0 flex-1">{statLines(blocks)}</div>
+                    <div className="flex h-full min-w-0 items-center gap-1.5 py-1 leading-normal">
+                        <div className="min-w-0 flex-1">
+                            <StatBlockPair blocks={blocks} />
+                        </div>
                         {completedMark(data.goalId)}
                     </div>
                 );

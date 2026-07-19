@@ -22,13 +22,14 @@ export const GoalCardUnlock: React.FC<Props> = ({ goal, goalEstimate }) => {
     const hasEstimate = days !== undefined || goalEstimate.energyTotal > 0;
 
     return (
-        <div className="flex flex-col gap-2.5">
+        <div className="flex flex-1 flex-col gap-2.5">
             {hasEstimate && (
                 <div className="flex min-h-[30px] items-center justify-end">
                     <GoalEstimateChips days={days} energy={goalEstimate.energyTotal} />
                 </div>
             )}
-            <div className={hasEstimate ? 'border-t border-(--card-border) pt-2.5' : ''}>
+            <div
+                className={`flex flex-1 flex-col justify-end ${hasEstimate ? 'border-t border-(--card-border) pt-2.5' : ''}`}>
                 <ProgressBar
                     value={goal.shards}
                     max={targetShards}
