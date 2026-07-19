@@ -141,7 +141,21 @@ export const GoalCard: React.FC<Props> = ({
                 };
             }
             case PersonalGoalType.PreFarmMaterialForGoals: {
-                return <GoalCardPreFarmMaterial goalEstimate={goalEstimate} calendarDate={calendarDate} />;
+                const material = UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId);
+                return {
+                    portrait: (
+                        <UpgradeImage
+                            material={goal.upgradeMaterialId}
+                            iconPath={material?.icon ?? ''}
+                            rarity={RarityMapper.stringToRarityString(material?.rarity ?? '')}
+                            size={40}
+                        />
+                    ),
+                    title: material?.material ?? goal.upgradeMaterialId,
+                    body: <GoalCardPreFarmMaterial goalEstimate={goalEstimate} calendarDate={calendarDate} />,
+                    showRaids: true,
+                    raidsTargetId: goal.upgradeMaterialId,
+                };
             }
         }
     })();

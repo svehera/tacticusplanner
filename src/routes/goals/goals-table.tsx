@@ -275,7 +275,7 @@ export const GoalsTable: React.FC<Props> = ({
             valueGetter: params => {
                 const data = params.data;
                 if (!data) return '';
-                return data.type === PersonalGoalType.UpgradeMaterial ? data.upgradeMaterialId : data.unitName;
+                return 'unitName' in data ? data.unitName : data.upgradeMaterialId;
             },
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
@@ -283,7 +283,12 @@ export const GoalsTable: React.FC<Props> = ({
                 let portrait: React.ReactNode;
                 let name: string;
                 let subline = '';
-                if (data.type === PersonalGoalType.UpgradeMaterial) {
+                if ('unitName' in data) {
+                    portrait = (
+                        <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
+                    );
+                    name = data.unitName ?? '';
+                } else {
                     const mat = UpgradesService.getUpgradeMaterial(data.upgradeMaterialId);
                     portrait = mat ? (
                         <UpgradeImage
@@ -295,12 +300,7 @@ export const GoalsTable: React.FC<Props> = ({
                         />
                     ) : undefined;
                     name = mat?.label ?? '';
-                    subline = 'Material';
-                } else {
-                    portrait = (
-                        <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
-                    );
-                    name = data.unitName ?? '';
+                    subline = data.type === PersonalGoalType.PreFarmMaterialForGoals ? 'Pre-farm material' : 'Material';
                 }
                 return (
                     <div className="flex h-full min-w-0 items-center gap-2.5 leading-normal">
@@ -790,7 +790,7 @@ export const GoalsTable: React.FC<Props> = ({
             sortable: false,
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
-                if (!data || data.type === PersonalGoalType.UpgradeMaterial) return emptyCell;
+                if (!data || !('unitAlliance' in data)) return emptyCell;
                 const est = estimateMapReference.current.get(data.goalId);
                 if (!est?.orbsEstimate) return emptyCell;
                 const items = buildOrbItems(est, data.unitAlliance, false);
