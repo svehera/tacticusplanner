@@ -287,13 +287,6 @@ export const Equipment = () => {
 
     return (
         <div className="space-y-8 py-6">
-            {onlyRelics && Date.now() < Date.UTC(2026, 4, 20, 23, 59, 59) && (
-                <div className="rounded-xl border border-amber-500/40 bg-amber-500/10 px-4 py-3 text-base font-semibold text-amber-400">
-                    {'In-Game code, valid until May 20th: '}
-                    <span className="font-mono tracking-wide">AHRIRELICWHEN</span>
-                </div>
-            )}
-
             {/* Filters */}
             <div className="rounded-xl border border-(--border) bg-(--overlay)">
                 <div className="flex items-center gap-4 border-b border-(--border) px-4 py-2.5">

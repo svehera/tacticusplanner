@@ -8,81 +8,33 @@ import {
     type TacticusGuildRaidEntry,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { obfuscateUserId } from '@/fsd/5-shared/lib/user-id-utils';
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
+import { getImageUrl } from '@/fsd/5-shared/ui';
+import type { ISnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
-// ---------------------------------------------------------------------------
-// Icon maps — derived from src/assets/visual_mapping/visuals.csv
-// ---------------------------------------------------------------------------
-
-/** Round portraits for each boss / prime / minion unitId. */
-export const unitRoundIconMap: Record<string, string> = {
-    // Boss 1 – Tervigon (portrait only, no RoundPortrait available)
-    GuildBoss1Boss1TyranTervigonLeviathan: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_01.png',
-    GuildBoss1Boss2TyranTervigonKronos: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_02.png',
-    GuildBoss1Boss3TyranTervigonGorgon: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_03.png',
-    GuildBoss1MiniBoss1TyranWarriorLeviathan: 'snowprint_assets/characters/ui_image_RoundPortrait_tyran_warrior_01.png',
-    GuildBoss1MiniBoss2TyranWarriorKronos: 'snowprint_assets/characters/ui_image_RoundPortrait_tyran_warrior_02.png',
-    GuildBoss1MiniBoss3TyranWarriorGorgon: 'snowprint_assets/characters/ui_image_RoundPortrait_tyran_warrior_03.png',
-    // Boss 2 – Hive Tyrant
-    GuildBoss2Boss1TyranHiveTyrantLeviathan: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_tyrant_01.png',
-    GuildBoss2Boss2TyranHiveTyrantKronos: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_tyrant_02.png',
-    GuildBoss2Boss3TyranHiveTyrantGorgon: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_tyrant_03.png',
-    // Boss 3 – Silent King + Minions
-    GuildBoss3Boss1NecroSilentKing: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_silentking_01.png',
-    GuildBoss3Minion1NecroMesophet: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_mesophet_01.png',
-    GuildBoss3Minion2NecroHapthatra: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_hapthatra_01.png',
-    GuildBoss3Minion3NecroMenhir: 'snowprint_assets/characters/ui_image_RoundPortrait_necro_menhir_01.png',
-    // Boss 4 – Ghazghkull
-    GuildBoss4Boss1OrksGhazghkull: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_ghazghkull_01.png',
-    // Boss 5 – Mortarion + Minion
-    GuildBoss5Boss1DeathMortarion: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_mortarion_01.png',
-    GuildBoss5Minion1DeathBlightlord: 'snowprint_assets/characters/ui_image_RoundPortrait_death_blightlord_01.png',
-    // Boss 6 – Screamer-killer
-    GuildBoss6Boss1TyranScreamerKiller:
-        'snowprint_assets/characters/ui_image_RoundPortrait_guild_screamerkiller_01.png',
-    // Boss 7 – Rogaldorn
-    GuildBoss7Boss1AstraRogaldorn: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_rogaldorn_01.png',
-    // Boss 8 – Avatar of Khaine
-    GuildBoss8Boss1EldarAvatar: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_avatar_01.png',
-    // Boss 9 – Magnus
-    GuildBoss9Boss1ThousMagnus: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_magnus_01.png',
-    // Boss 10 – Belisarius Cawl
-    GuildBoss10Boss1AdmecBelisarius: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_belisarius_01.png',
-    // Boss 11 – Riptide
-    GuildBoss11Boss1TauRiptide: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_riptide_01.png',
-    // Boss 12 - The Lion
-    GuildBoss12Boss1DarkaLion: 'snowprint_assets/characters/ui_image_RoundPortrait_guild_lion_01.png',
-};
-
-/** Full (non-round) portraits for main boss unitIds, used in the Overview tab. */
-export const bossPortraitMap: Record<string, string> = {
-    GuildBoss1Boss1TyranTervigonLeviathan: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_01.png',
-    GuildBoss1Boss2TyranTervigonKronos: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_02.png',
-    GuildBoss1Boss3TyranTervigonGorgon: 'snowprint_assets/characters/ui_image_portrait_guild_tervigon_03.png',
-    GuildBoss2Boss1TyranHiveTyrantLeviathan: 'snowprint_assets/characters/ui_image_portrait_guild_tyrant_01.png',
-    GuildBoss2Boss2TyranHiveTyrantKronos: 'snowprint_assets/characters/ui_image_portrait_guild_tyrant_02.png',
-    GuildBoss2Boss3TyranHiveTyrantGorgon: 'snowprint_assets/characters/ui_image_portrait_guild_tyrant_03.png',
-    GuildBoss3Boss1NecroSilentKing: 'snowprint_assets/characters/ui_image_portrait_necro_silentking_01.png',
-    GuildBoss4Boss1OrksGhazghkull: 'snowprint_assets/characters/ui_image_portrait_guild_ghazghkull_01.png',
-    GuildBoss5Boss1DeathMortarion: 'snowprint_assets/characters/ui_image_portrait_guild_mortarion_01.png',
-    GuildBoss6Boss1TyranScreamerKiller: 'snowprint_assets/characters/ui_image_portrait_guild_screamerkiller_01.png',
-    GuildBoss7Boss1AstraRogaldorn: 'snowprint_assets/characters/ui_image_portrait_guild_rogaldorn_01.png',
-    GuildBoss8Boss1EldarAvatar: 'snowprint_assets/characters/ui_image_portrait_guild_avatar_01.png',
-    GuildBoss9Boss1ThousMagnus: 'snowprint_assets/characters/ui_image_portrait_guild_magnus_01.png',
-    GuildBoss10Boss1AdmecBelisarius: 'snowprint_assets/characters/ui_image_portrait_guild_belisarius_01.png',
-    GuildBoss11Boss1TauRiptide: 'snowprint_assets/characters/ui_image_portrait_guild_riptide_01.png',
-    GuildBoss12Boss1DarkaLion: 'snowprint_assets/characters/ui_image_portrait_guild_lion_01.png',
-};
-
-/** Full portrait keyed by GuildBoss{N} prefix — first entry per prefix from bossPortraitMap. */
-export const bossPrefixPortraitMap: Record<string, string> = (() => {
-    const map: Record<string, string> = {};
-    for (const unitId of Object.keys(bossPortraitMap)) {
-        const prefix = /^(GuildBoss\d+)/.exec(unitId)?.[1];
-        if (prefix !== undefined && map[prefix] === undefined) map[prefix] = unitId;
-    }
-    return map;
-})();
+import {
+    bossPortraitMap,
+    describeModifier,
+    encounterStatsIndex,
+    getEncountersAtPosition,
+    getNextEncounterPosition,
+    findPositionByBossUnitSetId,
+    getSeasonConfig,
+    getStatsAtIndex,
+    getTierRarity,
+    getUnitDisplayName,
+    getUnitSet,
+    getUnitSetId,
+    guildBossData,
+    resolvePrimeDisplayName,
+    resolvePrimeRegularPortraitPath,
+    scaleModifierHpLost,
+    sortModifiersByHpLost,
+    type EncounterPosition,
+    type GuildBossEncounter,
+    type GuildBossEncounterModifier,
+} from '@/fsd/4-entities/guild_boss';
+import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
 
 // ---------------------------------------------------------------------------
 // Damage colour coding
@@ -350,7 +302,7 @@ export function computeDefaultRarities(entries: TacticusGuildRaidEntry[]): Rarit
 }
 
 // ---------------------------------------------------------------------------
-// Boss display resolution for the Overview tab
+// Boss/prime display resolution for the Overview tab
 // ---------------------------------------------------------------------------
 
 export type BossDisplayHp =
@@ -358,174 +310,227 @@ export type BossDisplayHp =
     | { kind: 'full'; max: number }
     | { kind: 'fullUnknown' };
 
-export interface BossDisplay {
+export interface EncounterDisplay {
     /** unitId to look up the portrait. */
     unitId: string;
     displayName: string;
     hp: BossDisplayHp;
+    fakeChar?: ISnapshotCharacter;
+    portraitUrl?: string;
+}
+
+export interface PrimeModifierProgress {
+    totalModifiers: number;
+    modifiersHit: number;
+    nextTarget?: { remainingHp: number; description: string; modifierKey: string };
+}
+
+export interface PrimeDisplay extends EncounterDisplay {
+    modifierProgress?: PrimeModifierProgress;
+}
+
+export interface BossOverviewDisplay {
+    boss: EncounterDisplay;
+    leftPrime?: PrimeDisplay;
+    rightPrime?: PrimeDisplay;
     /** True when we're showing the upcoming boss rather than the one that just died. */
-    isNextBoss?: boolean;
-}
-
-interface SeasonLMBossInfo {
-    bossPrefix: string;
+    isNextBoss: boolean;
+    /** Shared by the boss and both primes, since they're all the same tier's encounter. */
     rarity: Rarity;
-    set: number;
-    unitId: string;
-    maxHp: number;
+    /** 0-based index of this set within its rarity tier; display as setIndex + 1 for a 1-based label. */
+    tierSetIndex: number;
 }
 
-/**
- * Ordered list of unique (bossPrefix, rarity) pairs for Legendary/Mythic bosses seen in
- * `entries`. Sorted Legendary-first by set number, then Mythic by set number — matching the
- * in-game loop sequence: L1 → L2 → … → Ln → M1 → … → Mm → L1.
- */
-function buildSeasonLMBossList(entries: TacticusGuildRaidEntry[]): SeasonLMBossInfo[] {
-    const seen = new Map<string, SeasonLMBossInfo>();
-    for (const entry of entries) {
-        if (entry.encounterType !== TacticusEncounterType.Boss) continue;
-        if (entry.rarity < Rarity.Legendary) continue;
-        const prefix = getBossPrefix(entry.unitId);
-        const key = `${prefix}:${entry.rarity}`;
-        if (!seen.has(key)) {
-            seen.set(key, {
-                bossPrefix: prefix,
-                rarity: entry.rarity,
-                set: entry.set,
-                unitId: entry.unitId,
-                maxHp: entry.maxHp,
-            });
-        }
-    }
-    return [...seen.values()].toSorted((a, b) => {
-        if (a.rarity !== b.rarity) {
-            // Legendary (4) before Mythic (5)
-            return a.rarity - b.rarity;
-        }
-        return a.set - b.set;
-    });
-}
-
-/**
- * Resolves what to show in the "Current Boss" card on the Overview tab.
- *
- * For Epic-or-lower bosses: always show the boss as-is (even at HP 0).
- * For Legendary/Mythic bosses at HP 0:
- *   - If a new encounter has started but only primes have been hit, show the new boss.
- *     Display "HP Full" (unknown max) if we've never seen that boss before, or the known
- *     max HP if we have a previous entry for it.
- *   - If nothing has happened since the boss died and the guild has looped (kill count > 1),
- *     show the next boss in the season sequence at full HP.
- *   - Otherwise show the dead boss at HP 0.
- */
-export function resolveBossDisplay(entries: TacticusGuildRaidEntry[]): BossDisplay | undefined {
-    if (entries.length === 0) return undefined;
-
-    const nameFor = (unitId: string): string => bossPrefixDisplayNames[getBossPrefix(unitId)] ?? unitId;
-
-    const sorted = [...entries].toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0));
-
-    const latestBoss = sorted.find(entry => entry.encounterType === TacticusEncounterType.Boss);
-    if (!latestBoss) return undefined;
-
-    // Epic or lower: show as-is (current behaviour, no next-boss logic).
-    if (latestBoss.rarity < Rarity.Legendary) {
-        return {
-            unitId: latestBoss.unitId,
-            displayName: nameFor(latestBoss.unitId),
-            hp: { kind: 'actual', remaining: latestBoss.remainingHp, max: latestBoss.maxHp },
-        };
-    }
-
-    // L/M boss still alive: show normally.
-    if (latestBoss.remainingHp > 0) {
-        return {
-            unitId: latestBoss.unitId,
-            displayName: nameFor(latestBoss.unitId),
-            hp: { kind: 'actual', remaining: latestBoss.remainingHp, max: latestBoss.maxHp },
-        };
-    }
-
-    // L/M boss is dead.
-    const deadPrefix = getBossPrefix(latestBoss.unitId);
-    const deadTime = latestBoss.completedOn ?? 0;
-
-    const killCount = entries.filter(
-        entry =>
-            entry.encounterType === TacticusEncounterType.Boss &&
-            getBossPrefix(entry.unitId) === deadPrefix &&
-            entry.rarity === latestBoss.rarity &&
-            entry.remainingHp === 0
-    ).length;
-
-    // Any SideBoss entries recorded after the boss kill?
-    const postKillPrimes = sorted.filter(
-        entry => entry.encounterType === TacticusEncounterType.SideBoss && (entry.completedOn ?? 0) > deadTime
+/** Newest entry matching `unitId`, optionally restricted to strictly after `openedAfter`. */
+function latestMatchingEntry(
+    entries: TacticusGuildRaidEntry[],
+    unitId: string,
+    openedAfter: number | undefined
+): TacticusGuildRaidEntry | undefined {
+    const matches = entries.filter(
+        entry => entry.unitId === unitId && (openedAfter === undefined || (entry.completedOn ?? 0) > openedAfter)
     );
+    return matches.toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0))[0];
+}
 
-    if (postKillPrimes.length > 0) {
-        const latestPrime = postKillPrimes[0]!;
-        const newPrefix = getBossPrefix(latestPrime.unitId);
+/**
+ * HP for a boss we've just advanced to (the previous boss just died). Any match here can only be
+ * a stale record from an earlier Legendary/Mythic loop around this exact `unitId` — a fresher hit
+ * on this boss would itself have been the globally-latest boss entry, so it's shown at full HP
+ * rather than mistaken for "still dead this lap."
+ */
+function resolveAdvancedBossHp(entries: TacticusGuildRaidEntry[], unitId: string, openedAfter: number): BossDisplayHp {
+    const latest = latestMatchingEntry(entries, unitId, openedAfter);
+    return latest ? { kind: 'full', max: latest.maxHp } : { kind: 'fullUnknown' };
+}
 
-        // Guard: same prefix + first kill → likely a trailing prime from the just-completed
-        // encounter recorded slightly after the boss kill. Treat as "nothing happened since."
-        const isNewEncounter = !(newPrefix === deadPrefix && killCount === 1);
+/** Upgrades an unresolved `'fullUnknown'` HP to `'full'` using the unit's static max HP from
+ *  game data, when raid history has no record to derive HP from. Leaves other kinds as-is. */
+function withKnownMax(hp: BossDisplayHp, knownMax: number | undefined): BossDisplayHp {
+    if (hp.kind !== 'fullUnknown' || knownMax === undefined) return hp;
+    return { kind: 'full', max: knownMax };
+}
 
-        if (isNewEncounter) {
-            const newRarity = latestPrime.rarity;
-            const existingBossEntry = entries.find(
-                entry =>
-                    entry.encounterType === TacticusEncounterType.Boss &&
-                    getBossPrefix(entry.unitId) === newPrefix &&
-                    entry.rarity === newRarity
-            );
-            if (existingBossEntry) {
-                return {
-                    unitId: existingBossEntry.unitId,
-                    displayName: nameFor(existingBossEntry.unitId),
-                    hp: { kind: 'full', max: existingBossEntry.maxHp },
-                    isNextBoss: true,
-                };
-            }
-            // No prior boss entry for this prefix — use a prefix-based portrait unitId.
-            const portraitUnitId = bossPrefixPortraitMap[newPrefix] ?? latestPrime.unitId;
-            return {
-                unitId: portraitUnitId,
-                displayName: bossPrefixDisplayNames[newPrefix] ?? newPrefix,
-                hp: { kind: 'fullUnknown' },
-                isNextBoss: true,
+/** HP for a prime, which can be hit or killed independently of its boss's own state. */
+function resolvePrimeHp(
+    entries: TacticusGuildRaidEntry[],
+    unitId: string,
+    openedAfter: number | undefined
+): BossDisplayHp {
+    const latest = latestMatchingEntry(entries, unitId, openedAfter);
+    return latest ? { kind: 'actual', remaining: latest.remainingHp, max: latest.maxHp } : { kind: 'fullUnknown' };
+}
+
+/** Modifier hit-progress for a prime with known total HP; omitted when HP (and thus scaling) is unknown. */
+function resolveModifierProgress(
+    modifiers: GuildBossEncounterModifier[] | undefined,
+    hp: BossDisplayHp
+): PrimeModifierProgress | undefined {
+    if (!modifiers || modifiers.length === 0 || hp.kind === 'fullUnknown') return undefined;
+
+    const max = hp.max;
+    const hpLost = hp.kind === 'full' ? 0 : max - hp.remaining;
+    const scaled = sortModifiersByHpLost(scaleModifierHpLost(modifiers, max));
+    const modifiersHit = scaled.filter(m => m.hpLost <= hpLost).length;
+    const nextModifierEntry = scaled.find(m => m.hpLost > hpLost);
+
+    let nextTarget: { remainingHp: number; description: string; modifierKey: string } | undefined;
+    if (nextModifierEntry) {
+        const modifierDefinition = guildBossData.modifiers[nextModifierEntry.modifier];
+        if (modifierDefinition) {
+            nextTarget = {
+                remainingHp: max - nextModifierEntry.hpLost,
+                description: describeModifier(modifierDefinition),
+                modifierKey: nextModifierEntry.modifier,
             };
         }
     }
 
-    // Nothing meaningful happened since the boss died.
-    if (killCount > 1) {
-        // Guild has looped — show the next boss in the season sequence.
-        const seasonList = buildSeasonLMBossList(entries);
-        const index = seasonList.findIndex(b => b.bossPrefix === deadPrefix && b.rarity === latestBoss.rarity);
-        if (index !== -1) {
-            const nextInfo = seasonList[(index + 1) % seasonList.length]!;
-            const nextEntry = entries.find(
-                entry =>
-                    entry.encounterType === TacticusEncounterType.Boss &&
-                    getBossPrefix(entry.unitId) === nextInfo.bossPrefix &&
-                    entry.rarity === nextInfo.rarity
-            );
-            if (nextEntry) {
-                return {
-                    unitId: nextEntry.unitId,
-                    displayName: nameFor(nextEntry.unitId),
-                    hp: { kind: 'full', max: nextEntry.maxHp },
-                    isNextBoss: true,
-                };
-            }
-        }
+    return { totalModifiers: scaled.length, modifiersHit, nextTarget };
+}
+
+function resolvePrimeDisplay(
+    entries: TacticusGuildRaidEntry[],
+    encounter: GuildBossEncounter | undefined,
+    openedAfter: number | undefined
+): PrimeDisplay | undefined {
+    if (!encounter) return undefined;
+    const unitSetId = getUnitSetId(encounter.unitId);
+    const unitSet = getUnitSet(encounter.unitId);
+    const statsIndex = encounterStatsIndex(encounter.unitId);
+    const stats = unitSet ? getStatsAtIndex(unitSet, statsIndex) : undefined;
+    const hp = withKnownMax(resolvePrimeHp(entries, unitSetId, openedAfter), stats?.Health);
+    const portraitPath = resolvePrimeRegularPortraitPath(unitSetId, unitSet?.questUnitId);
+    const fakeChar: ISnapshotCharacter | undefined = stats
+        ? {
+              id: unitSetId,
+              rank: (stats.Rank + 1) as Rank,
+              rarity: RarityMapper.stringToRarity(stats.BaseRarity) ?? Rarity.Common,
+              stars: stats.StarLevel as RarityStars,
+              shards: 0,
+              mythicShards: 0,
+              activeAbilityLevel: stats.AbilityLevel,
+              passiveAbilityLevel: stats.AbilityLevel,
+              xpLevel: 0,
+          }
+        : undefined;
+    return {
+        unitId: unitSetId,
+        displayName: resolvePrimeDisplayName(unitSetId) ?? getUnitDisplayName(unitSetId),
+        hp,
+        modifierProgress: resolveModifierProgress(encounter.modifiers, hp),
+        fakeChar,
+        portraitUrl: portraitPath ? getImageUrl(portraitPath) : undefined,
+    };
+}
+
+/**
+ * Resolves what to show in the boss/prime panel on the Overview tab, using the season config to
+ * deterministically compute "what's next" instead of guessing from damage history. This means a
+ * boss/prime with zero recorded hits still displays correctly (at full HP) rather than the
+ * previous boss being shown frozen at 0 HP.
+ */
+export function resolveBossOverviewDisplay(
+    entries: TacticusGuildRaidEntry[],
+    seasonConfigId: string
+): BossOverviewDisplay | undefined {
+    const config = getSeasonConfig(seasonConfigId);
+    if (!config) return undefined;
+
+    const sorted = [...entries].toSorted((a, b) => (b.completedOn ?? 0) - (a.completedOn ?? 0));
+    const latestBoss = sorted.find(entry => entry.encounterType === TacticusEncounterType.Boss);
+
+    // The moment the current boss/primes became active: the most recent time any boss died.
+    // Everything after this point belongs to the current position — including a still-alive boss's
+    // earlier prime kills — while anything before it is stale (a prior boss, or an earlier
+    // Legendary/Mythic loop through the same unitId).
+    const lastBossKill = sorted.find(
+        entry => entry.encounterType === TacticusEncounterType.Boss && entry.remainingHp === 0
+    );
+    const openedAfter = lastBossKill?.completedOn;
+
+    let position: EncounterPosition;
+    let bossHp: BossDisplayHp;
+    let isNextBoss = false;
+
+    if (!latestBoss) {
+        position = { tierIndex: 0, setIndex: 0 };
+        bossHp = { kind: 'fullUnknown' };
+    } else if (latestBoss.remainingHp > 0) {
+        const unitSetId = getUnitSetId(latestBoss.unitId);
+        position = findPositionByBossUnitSetId(config, unitSetId, latestBoss.rarity) ?? { tierIndex: 0, setIndex: 0 };
+        bossHp = { kind: 'actual', remaining: latestBoss.remainingHp, max: latestBoss.maxHp };
+    } else {
+        isNextBoss = true;
+        const unitSetId = getUnitSetId(latestBoss.unitId);
+        const deadPosition = findPositionByBossUnitSetId(config, unitSetId, latestBoss.rarity);
+        position = getNextEncounterPosition(config, deadPosition);
+        bossHp = { kind: 'fullUnknown' }; // refined below once the new boss's unitId is known
     }
 
-    // Not looped (or fallback): show the dead boss at HP 0.
+    const { boss, leftPrime, rightPrime } = getEncountersAtPosition(config, position);
+    if (!boss) return undefined;
+
+    if (isNextBoss) {
+        bossHp = resolveAdvancedBossHp(entries, getUnitSetId(boss.unitId), openedAfter ?? 0);
+    }
+
+    const bossUnitSetId = getUnitSetId(boss.unitId);
+    const bossUnitSet = getUnitSet(boss.unitId);
+    const bossStatsIndex = encounterStatsIndex(boss.unitId);
+    const bossStats = bossUnitSet ? getStatsAtIndex(bossUnitSet, bossStatsIndex) : undefined;
+    bossHp = withKnownMax(bossHp, bossStats?.Health);
+    const tierRarity = getTierRarity(config.tiers[position.tierIndex].tier);
+    const bossRarity = (bossStats ? RarityMapper.stringToRarity(bossStats.BaseRarity) : undefined) ?? tierRarity;
+    const bossPortraitPath = bossPortraitMap[bossUnitSetId];
+    const bossFakeChar: ISnapshotCharacter | undefined = bossStats
+        ? {
+              id: bossUnitSetId,
+              rank: (bossStats.Rank + 1) as Rank,
+              rarity: bossRarity,
+              stars: bossStats.StarLevel as RarityStars,
+              shards: 0,
+              mythicShards: 0,
+              activeAbilityLevel: bossStats.AbilityLevel,
+              passiveAbilityLevel: bossStats.AbilityLevel,
+              xpLevel: 0,
+          }
+        : undefined;
+
+    const bossDisplay: EncounterDisplay = {
+        unitId: bossUnitSetId,
+        displayName: bossPrefixDisplayNames[getBossPrefix(bossUnitSetId)] ?? getUnitDisplayName(bossUnitSetId),
+        hp: bossHp,
+        fakeChar: bossFakeChar,
+        portraitUrl: bossPortraitPath ? getImageUrl(bossPortraitPath) : undefined,
+    };
+
     return {
-        unitId: latestBoss.unitId,
-        displayName: nameFor(latestBoss.unitId),
-        hp: { kind: 'actual', remaining: 0, max: latestBoss.maxHp },
+        boss: bossDisplay,
+        leftPrime: resolvePrimeDisplay(entries, leftPrime, openedAfter),
+        rightPrime: resolvePrimeDisplay(entries, rightPrime, openedAfter),
+        isNextBoss,
+        rarity: tierRarity,
+        tierSetIndex: position.setIndex,
     };
 }

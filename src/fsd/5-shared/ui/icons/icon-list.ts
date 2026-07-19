@@ -1,6 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
 import armourIcon from '@/assets/images/icons/armour.webp';
-import blackstoneIcon from '@/assets/images/icons/blackstone.png';
 import blockIcon from '@/assets/images/icons/block.png';
 import chanceIcon from '@/assets/images/icons/chance.png';
 import critDamageIcon from '@/assets/images/icons/crit_dmg.png';
@@ -64,10 +63,7 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
         file: energyIcon,
         label: 'Energy',
     },
-    blackstone: {
-        file: blackstoneIcon,
-        label: 'Blackstone',
-    },
+    blackstone: snowprintIcons.blackstone,
     deployment: {
         file: deploymentIcon,
         label: '',
@@ -184,6 +180,29 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     armageddonCurrency: snowprintIcons.armageddonCurrency,
     salvage: snowprintIcons.salvage,
     mythicSalvage: snowprintIcons.mythicSalvage,
+    draftAbilityBadgesCommon: snowprintIcons.draftAbilityBadgesCommon,
+    draftAbilityBadgesUncommon: snowprintIcons.draftAbilityBadgesUncommon,
+    draftAbilityBadgesRare: snowprintIcons.draftAbilityBadgesRare,
+    draftAbilityBadgesEpic: snowprintIcons.draftAbilityBadgesEpic,
+    draftAbilityBadgesLegendary: snowprintIcons.draftAbilityBadgesLegendary,
+    draftAbilityBadgesMythic: snowprintIcons.draftAbilityBadgesMythic,
+    draftOrbsUncommon: snowprintIcons.draftOrbsUncommon,
+    draftOrbsRare: snowprintIcons.draftOrbsRare,
+    draftOrbsEpic: snowprintIcons.draftOrbsEpic,
+    draftOrbsLegendary: snowprintIcons.draftOrbsLegendary,
+    draftOrbsMythic: snowprintIcons.draftOrbsMythic,
+    draftMachinesOfWarComponents: snowprintIcons.draftMachinesOfWarComponents,
+    allianceImperial: snowprintIcons.allianceImperial,
+    allianceChaos: snowprintIcons.allianceChaos,
+    allianceXenos: snowprintIcons.allianceXenos,
+    stamina: snowprintIcons.energy,
+    itemUnknown: snowprintIcons.itemUnknown,
+    upgradeCommon: snowprintIcons.upgradeCommon,
+    upgradeUncommon: snowprintIcons.upgradeUncommon,
+    upgradeRare: snowprintIcons.upgradeRare,
+    upgradeEpic: snowprintIcons.upgradeEpic,
+    upgradeLegendary: snowprintIcons.upgradeLegendary,
+    upgradeMythic: snowprintIcons.upgradeMythic,
 };
 
 export const starsIcons = {

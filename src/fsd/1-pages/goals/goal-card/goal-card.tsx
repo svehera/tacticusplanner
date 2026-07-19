@@ -23,6 +23,7 @@ import { GoalCardAscend } from './ascend';
 import { GoalCardCharacterAbilities } from './character-abilities';
 import { GoalCardMetaLine } from './meta-line';
 import { GoalCardMowAbilities } from './mow-abilities';
+import { GoalCardPreFarmMaterial } from './pre-farm-material';
 import { GoalCardUnlock } from './unlock';
 import { GoalCardUpgradeMaterial } from './upgrade-material';
 import { GoalCardUpgradeRank } from './upgrade-rank';
@@ -138,6 +139,9 @@ export const GoalCard: React.FC<Props> = ({
                     showRaids: true,
                     raidsTargetId: goal.upgradeMaterialId,
                 };
+            }
+            case PersonalGoalType.PreFarmMaterialForGoals: {
+                return <GoalCardPreFarmMaterial goalEstimate={goalEstimate} calendarDate={calendarDate} />;
             }
         }
     })();

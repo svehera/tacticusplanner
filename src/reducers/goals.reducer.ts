@@ -67,7 +67,14 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             }));
         }
         case 'Delete': {
-            return state.filter(x => x.id !== action.goalId).map((x, index) => ({ ...x, priority: index + 1 }));
+            const deletedId = action.goalId;
+            return state
+                .filter(x => x.id !== deletedId)
+                .map((x, index) => ({
+                    ...x,
+                    priority: index + 1,
+                    ...(x.preFarmGoalIds ? { preFarmGoalIds: x.preFarmGoalIds.filter(id => id !== deletedId) } : {}),
+                }));
         }
         case 'DeleteAll': {
             return [];

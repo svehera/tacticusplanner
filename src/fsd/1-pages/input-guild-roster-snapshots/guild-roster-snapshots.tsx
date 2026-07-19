@@ -148,11 +148,16 @@ export const GuildRosterSnapshots = () => {
                     )}
                 />
 
-                <Tabs value={activeTab} onChange={(_, value: GuildTab) => setActiveTab(value)}>
+                <Tabs
+                    value={activeTab}
+                    onChange={(_, value: GuildTab) => setActiveTab(value)}
+                    variant="scrollable"
+                    scrollButtons="auto"
+                    allowScrollButtonsMobile>
                     <Tab label="Rosters" value="rosters" />
                     <Tab label="Roster Snapshots" value="roster-snapshots" />
                     <Tab label="Members" value="members" />
-                    <Tab label="Shared Leaderboards" value="shared-leaderboards" />
+                    <Tab label="Settings" value="shared-leaderboards" />
                 </Tabs>
 
                 <div>

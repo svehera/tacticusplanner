@@ -226,7 +226,6 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
             tacticusGuildApiKey: userInfo.tacticusGuildApiKey,
             shareInGameName: userInfo.shareInGameName ?? false,
             shareRosterData: userInfo.shareRosterData ?? false,
-            shareGuildMemberPerformance: userInfo.shareGuildMemberPerformance ?? false,
             guildTag: userInfo.guildTag ?? '',
             onClose: () => {},
         });

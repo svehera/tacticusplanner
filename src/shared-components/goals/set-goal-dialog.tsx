@@ -28,6 +28,9 @@ import { IMaterial, UpgradeMaterialAutocomplete, UpgradesService } from '@/fsd/4
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
 import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
+
+import { PreFarmGoalSelector } from './pre-farm-goal-selector';
 
 const GOAL_TYPE_OPTIONS = [
     PersonalGoalType.UpgradeRank,
@@ -36,6 +39,7 @@ const GOAL_TYPE_OPTIONS = [
     PersonalGoalType.MowAbilities,
     PersonalGoalType.CharacterAbilities,
     PersonalGoalType.UpgradeMaterial,
+    PersonalGoalType.PreFarmMaterialForGoals,
 ];
 
 const GOAL_TYPE_LABELS: Record<number, string> = {
@@ -45,6 +49,7 @@ const GOAL_TYPE_LABELS: Record<number, string> = {
     [PersonalGoalType.MowAbilities]: 'MoW Abilities',
     [PersonalGoalType.CharacterAbilities]: 'Character Abilities',
     [PersonalGoalType.UpgradeMaterial]: 'Specific Upgrade Material',
+    [PersonalGoalType.PreFarmMaterialForGoals]: 'Pre-farm Material for Goals',
 };
 
 const getDefaultForm = (priority: number): IPersonalGoal => ({
@@ -53,6 +58,8 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     type: PersonalGoalType.UpgradeRank,
     startingRank: Rank.Stone1,
     startingRankPoint5: false,
+    startingRarity: Rarity.Common,
+    startingStars: RarityStars.None,
     targetRarity: Rarity.Common,
     targetRank: Rank.Stone1,
     targetStars: RarityStars.None,
@@ -64,12 +71,18 @@ const getDefaultForm = (priority: number): IPersonalGoal => ({
     upgradesRarity: [],
     upgradeMaterialId: undefined,
     upgradeMaterialQuantity: 0,
+    preFarmGoalIds: [],
 });
 
 export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) => void }) => {
     const { characters, mows, goals, campaignsProgress, onslaughtPreferences } = useContext(StoreContext);
 
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
+
+    const allTypedGoals = useMemo(
+        () => GoalsService.prepareGoals(goals, [...characters, ...resolvedMows], false).allGoals,
+        [goals, characters, resolvedMows]
+    );
 
     const allAvailableMaterials = useMemo(
         () =>
@@ -109,6 +122,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                     {
                         variant: 'success',
                     }
+                );
+            } else if (goal.type === PersonalGoalType.PreFarmMaterialForGoals) {
+                enqueueSnackbar(
+                    `Pre-farm goal for ${UpgradesService.getUpgradeMaterial(goal.upgradeMaterialId ?? '(none)')?.material ?? 'material'} is added`,
+                    { variant: 'success' }
                 );
             } else {
                 const character = characters.find(c => c.snowprintId === goal.character);
@@ -209,7 +227,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
             (newGoalType !== PersonalGoalType.Unlock && form.type === PersonalGoalType.Unlock) ||
             (newGoalType === PersonalGoalType.MowAbilities && form.type !== PersonalGoalType.MowAbilities) ||
             (newGoalType !== PersonalGoalType.MowAbilities && form.type === PersonalGoalType.MowAbilities) ||
-            newGoalType === PersonalGoalType.UpgradeMaterial
+            newGoalType === PersonalGoalType.UpgradeMaterial ||
+            newGoalType === PersonalGoalType.PreFarmMaterialForGoals ||
+            form.type === PersonalGoalType.PreFarmMaterialForGoals
         ) {
             setUnit(undefined);
         }
@@ -224,6 +244,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (isCharacter(value)) {
             setForm(current => ({
                 ...current,
+                startingRarity: value.rarity,
+                startingStars: value.stars,
                 targetRank: value.rank,
                 targetStars: value.stars,
                 targetRarity: value.rarity,
@@ -235,6 +257,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         if (isMow(value)) {
             setForm(current => ({
                 ...current,
+                startingRarity: value.rarity,
+                startingStars: value.stars,
                 firstAbilityLevel: value.primaryAbilityLevel,
                 secondAbilityLevel: value.secondaryAbilityLevel,
             }));
@@ -242,7 +266,9 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     };
 
     const isDisabled = () => {
-        if (unit === undefined && form.type !== PersonalGoalType.UpgradeMaterial) return true;
+        const noUnitRequired =
+            form.type === PersonalGoalType.UpgradeMaterial || form.type === PersonalGoalType.PreFarmMaterialForGoals;
+        if (unit === undefined && !noUnitRequired) return true;
 
         if (form.type === PersonalGoalType.UpgradeRank && isCharacter(unit)) {
             const startingRank = (form.startingRank ?? unit.rank ?? Rank.Stone1) as number;
@@ -260,7 +286,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
 
         if (form.type === PersonalGoalType.Ascend) {
             if (unit === undefined) return true;
-            return unit.rarity === form.targetRarity && unit.stars === form.targetStars;
+            const effectiveStartRarity = form.startingRarity ?? unit.rarity;
+            const effectiveStartStars = form.startingStars ?? unit.stars;
+            return (
+                effectiveStartRarity > form.targetRarity! ||
+                (effectiveStartRarity === form.targetRarity && effectiveStartStars >= form.targetStars!)
+            );
         }
 
         if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {
@@ -283,6 +314,10 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 form.upgradeMaterialQuantity === undefined ||
                 form.upgradeMaterialQuantity <= 0
             );
+        }
+
+        if (form.type === PersonalGoalType.PreFarmMaterialForGoals) {
+            return !form.upgradeMaterialId;
         }
 
         return false;
@@ -340,7 +375,11 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         />
                     </div>
 
-                    <Conditional condition={form.type !== PersonalGoalType.UpgradeMaterial}>
+                    <Conditional
+                        condition={
+                            form.type !== PersonalGoalType.UpgradeMaterial &&
+                            form.type !== PersonalGoalType.PreFarmMaterialForGoals
+                        }>
                         <UnitsAutocomplete
                             // eslint-disable-next-line unicorn/no-null -- Autocomplete requires null
                             unit={unit ?? null}
@@ -476,6 +515,8 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             targetRarity={form.targetRarity!}
                             currentStars={unit.stars}
                             targetStars={form.targetStars!}
+                            startingRarity={form.startingRarity ?? unit.rarity}
+                            startingStars={form.startingStars ?? unit.stars}
                             possibleLocations={possibleLocations}
                             unlockedLocations={unlockedLocations}
                             campaignsUsage={form.campaignsUsage!}
@@ -517,6 +558,33 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                             <Conditional
                                 condition={!form.upgradeMaterialId || (form.upgradeMaterialQuantity ?? 0) <= 0}>
                                 <div className="text-sm text-(--danger)">Please select material and quantity</div>
+                            </Conditional>
+                        </div>
+                    )}
+
+                    {form.type === PersonalGoalType.PreFarmMaterialForGoals && (
+                        <div className="flex flex-col gap-4">
+                            <UpgradeMaterialAutocomplete
+                                value={UpgradesService.getUpgradeMaterial(form.upgradeMaterialId ?? '(none)')}
+                                options={allAvailableMaterials}
+                                onChange={material =>
+                                    setForm(current => ({
+                                        ...current,
+                                        upgradeMaterialId: material?.snowprintId,
+                                        preFarmGoalIds: [],
+                                    }))
+                                }
+                            />
+                            {form.upgradeMaterialId && (
+                                <PreFarmGoalSelector
+                                    materialId={form.upgradeMaterialId}
+                                    allGoals={allTypedGoals}
+                                    selectedGoalIds={form.preFarmGoalIds ?? []}
+                                    onChange={preFarmGoalIds => setForm(current => ({ ...current, preFarmGoalIds }))}
+                                />
+                            )}
+                            <Conditional condition={!form.upgradeMaterialId}>
+                                <div className="text-sm text-(--danger)">Please select a material</div>
                             </Conditional>
                         </div>
                     )}

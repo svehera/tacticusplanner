@@ -21,6 +21,8 @@ interface Props {
     targetRarity: Rarity;
     currentStars: RarityStars;
     targetStars: RarityStars;
+    startingRarity: Rarity;
+    startingStars: RarityStars;
     possibleLocations: ICampaignBattleComposed[];
     unlockedLocations: string[];
     campaignsUsage: CampaignsLocationsUsage;
@@ -38,20 +40,32 @@ export const SetAscendGoal: React.FC<Props> = ({
     targetRarity,
     currentStars,
     currentRarity,
+    startingRarity,
+    startingStars,
     farmType,
     alliance,
     onslaughtPreferences = defaultOnslaughtPreferences,
     onChange,
 }) => {
-    const rarityValues = useMemo(() => {
+    const startingRarityValues = useMemo(() => {
         return getEnumValues(Rarity).filter(x => x >= currentRarity);
     }, [currentRarity]);
 
+    const startingStarsEntries = useMemo(() => {
+        const minStars = startingRarity === currentRarity ? currentStars : rarityToStars[startingRarity];
+        const maxStars = rarityToMaxStars[startingRarity];
+        return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
+    }, [startingRarity, currentRarity, currentStars]);
+
+    const targetRarityValues = useMemo(() => {
+        return getEnumValues(Rarity).filter(x => x >= startingRarity);
+    }, [startingRarity]);
+
     const starsEntries = useMemo(() => {
-        const minStars = rarityToStars[targetRarity];
+        const minStars = targetRarity === startingRarity ? startingStars : rarityToStars[targetRarity];
         const maxStars = rarityToMaxStars[targetRarity];
         return getEnumValues(RarityStars).filter(x => x >= minStars && x <= maxStars);
-    }, [currentStars, targetRarity]);
+    }, [startingRarity, startingStars, targetRarity]);
 
     const shardRangeLabel = useMemo(() => {
         if (!alliance) return;
@@ -81,12 +95,38 @@ export const SetAscendGoal: React.FC<Props> = ({
         <>
             <div className="flex items-center gap-3">
                 <RaritySelect
+                    label={'Starting Rarity'}
+                    rarityValues={startingRarityValues}
+                    value={startingRarity}
+                    valueChanges={value => {
+                        onChange('startingRarity', value);
+                        const minStars = value === currentRarity ? currentStars : rarityToStars[value as Rarity];
+                        onChange('startingStars', minStars);
+                        // If the new starting rarity exceeds the current target, advance the target too
+                        if (value > targetRarity) {
+                            onChange('targetRarity', value);
+                            onChange('targetStars', rarityToStars[value as Rarity]);
+                        }
+                    }}
+                />
+
+                <StarsSelect
+                    label={'Starting Stars'}
+                    starsValues={startingStarsEntries}
+                    value={startingStars}
+                    valueChanges={value => onChange('startingStars', value)}
+                />
+            </div>
+
+            <div className="flex items-center gap-3">
+                <RaritySelect
                     label={'Target Rarity'}
-                    rarityValues={rarityValues}
+                    rarityValues={targetRarityValues}
                     value={targetRarity}
                     valueChanges={value => {
                         onChange('targetRarity', value);
-                        onChange('targetStars', rarityToStars[value as Rarity]);
+                        const minStars = value === startingRarity ? startingStars : rarityToStars[value as Rarity];
+                        onChange('targetStars', minStars);
                     }}
                 />
 

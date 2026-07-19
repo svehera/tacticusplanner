@@ -21,6 +21,7 @@ import { AbilityText } from '@/fsd/3-features/character-details/ability-text-ren
 import { AbilityVariablesChart } from '@/fsd/3-features/character-details/ability-variables-chart';
 import { CharacterStatGrowthChart } from '@/fsd/3-features/character-details/character-stat-growth-chart';
 
+import { MythicQuestsSection } from './mythic-quests-section';
 import {
     abilityById,
     charDataById,
@@ -617,6 +618,15 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                     </>
                 )}
             </div>
+
+            {char && charEntry && (
+                <MythicQuestsSection
+                    characterId={char.snowprintId}
+                    rarity={rarity}
+                    unitName={unit.name}
+                    factionId={unit.faction}
+                />
+            )}
         </div>
     );
 };

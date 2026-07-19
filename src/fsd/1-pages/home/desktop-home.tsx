@@ -37,7 +37,7 @@ export const DesktopHome = () => {
     };
 
     const calendarUrls: { current?: string; next?: string } = {
-        current: getImageUrl('calendar/calendar_139.webp'),
+        current: getImageUrl('calendar/calendar_140.webp'),
     };
 
     const announcements = () => {

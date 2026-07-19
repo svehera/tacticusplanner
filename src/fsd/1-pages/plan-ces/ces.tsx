@@ -18,7 +18,7 @@ import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
-import { CharacterRaidGoalSelect, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { CharacterRaidGoalSelect, TypedGoalSelect, isUnitlessMaterialGoal } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
@@ -60,7 +60,11 @@ function getNameAndIconForMaterialGoal(goal: IUpgradeMaterialGoal): { name: stri
 }
 
 function getNameAndIcon(goal: TypedGoalSelect): { name: string; icon: string } {
-    if (goal.type === PersonalGoalType.UpgradeMaterial) return getNameAndIconForMaterialGoal(goal);
+    if (isUnitlessMaterialGoal(goal)) {
+        if (goal.type === PersonalGoalType.UpgradeMaterial) return getNameAndIconForMaterialGoal(goal);
+        const material = FsdUpgradesService.getUpgradeMaterial(goal.upgradeMaterialId);
+        return { name: material?.label ?? goal.upgradeMaterialId, icon: material?.icon ?? '' };
+    }
     return getNameAndIconForCharGoal(goal);
 }
 
@@ -84,7 +88,7 @@ export const CEs = () => {
 
     const [showAllBattles, setShowAllBattles] = useState(false);
 
-    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals } = useMemo(
+    const { allGoals, shardsGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, preFarmGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false),
         [goals, units]
     );
@@ -98,6 +102,7 @@ export const CEs = () => {
         () => upgradeRankOrMowGoals.filter(x => x.include),
         [upgradeRankOrMowGoals]
     );
+    const includedPreFarmGoals = useMemo(() => preFarmGoals.filter(x => x.include), [preFarmGoals]);
 
     const handleGoalsSelectionChange = useCallback(
         (selection: TypedGoalSelect[]) => {
@@ -127,7 +132,12 @@ export const CEs = () => {
             },
             chars,
             mows,
-            ...[includedUpgradeMaterialGoals, includedUpgradeRankOrMowGoals, includedShardsGoals].flat()
+            ...[
+                includedPreFarmGoals,
+                includedUpgradeMaterialGoals,
+                includedUpgradeRankOrMowGoals,
+                includedShardsGoals,
+            ].flat()
         );
     }, [
         dailyRaidsPreferences,
@@ -137,6 +147,7 @@ export const CEs = () => {
         onslaughtTokensToday,
         chars,
         mows,
+        includedPreFarmGoals,
         includedUpgradeMaterialGoals,
         includedUpgradeRankOrMowGoals,
         includedShardsGoals,

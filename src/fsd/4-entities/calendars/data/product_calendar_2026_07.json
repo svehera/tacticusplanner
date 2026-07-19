@@ -1,0 +1,1145 @@
+{
+    "calendar": "calendar_seasonal_event_july_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Special Delivery",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["specialSummoningToken"]
+                },
+                {
+                    "variant": "L1_AL50_SHD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["gold:2032500", "abilityTokensMythic:15", "abilityTokensLegendary:10"]
+                },
+                {
+                    "variant": "L1_AL35_SHD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "gold:935000",
+                        "abilityTokensLegendary:25",
+                        "abilityTokensLegendary:25",
+                        "abilityTokensEpic:25",
+                        "abilityTokensEpic:25"
+                    ]
+                },
+                {
+                    "variant": "L1_AL26_SHD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "gold:179000",
+                        "abilityTokensRare:28",
+                        "abilityTokensRare:18",
+                        "abilityTokensRare:18",
+                        "abilityTokensUncommon:40",
+                        "abilityTokensUncommon:28",
+                        "abilityTokensUncommon:28",
+                        "abilityTokensCommon:44",
+                        "abilityTokensCommon:30",
+                        "abilityTokensCommon:30"
+                    ]
+                },
+                {
+                    "variant": "L1_AL1_SHD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "gold:75000",
+                        "abilityTokensUncommon:60",
+                        "abilityTokensUncommon:40",
+                        "abilityTokensUncommon:40",
+                        "abilityTokensCommon:68",
+                        "abilityTokensCommon:50",
+                        "abilityTokensCommon:50"
+                    ]
+                },
+                {
+                    "variant": "L1_AL50_HD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["gold:1219500", "abilityTokensMythic:9", "abilityTokensLegendary:6"]
+                },
+                {
+                    "variant": "L1_AL35_HD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "gold:561000",
+                        "abilityTokensLegendary:15",
+                        "abilityTokensLegendary:15",
+                        "abilityTokensEpic:15",
+                        "abilityTokensEpic:15"
+                    ]
+                },
+                {
+                    "variant": "L1_AL26_HD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "gold:89300",
+                        "abilityTokensRare:24",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:36",
+                        "abilityTokensUncommon:36",
+                        "abilityTokensCommon:39",
+                        "abilityTokensCommon:39"
+                    ]
+                },
+                {
+                    "variant": "L1_AL1_HD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "gold:43000",
+                        "abilityTokensUncommon:32",
+                        "abilityTokensUncommon:24",
+                        "abilityTokensUncommon:24",
+                        "abilityTokensCommon:40",
+                        "abilityTokensCommon:28",
+                        "abilityTokensCommon:28"
+                    ]
+                },
+                {
+                    "variant": "L1_AL50_MD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["gold:813000", "abilityTokensMythic:6", "abilityTokensLegendary:4"]
+                },
+                {
+                    "variant": "L1_AL35_MD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "gold:374000",
+                        "abilityTokensLegendary:10",
+                        "abilityTokensLegendary:10",
+                        "abilityTokensEpic:10",
+                        "abilityTokensEpic:10"
+                    ]
+                },
+                {
+                    "variant": "L1_AL26_MD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "gold:89300",
+                        "abilityTokensRare:16",
+                        "abilityTokensRare:16",
+                        "abilityTokensUncommon:24",
+                        "abilityTokensUncommon:24",
+                        "abilityTokensCommon:26",
+                        "abilityTokensCommon:26"
+                    ]
+                },
+                {
+                    "variant": "L1_AL1_MD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": [
+                        "gold:21200",
+                        "abilityTokensUncommon:20",
+                        "abilityTokensUncommon:20",
+                        "abilityTokensCommon:24",
+                        "abilityTokensCommon:24"
+                    ]
+                },
+                {
+                    "variant": "L1_AL50_LD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["gold:406500", "abilityTokensMythic:3", "abilityTokensLegendary:2"]
+                },
+                {
+                    "variant": "L1_AL35_LD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["gold:187000", "abilityTokensLegendary:10", "abilityTokensEpic:10"]
+                },
+                {
+                    "variant": "L1_AL26_LD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "gold:44650",
+                        "abilityTokensRare:8",
+                        "abilityTokensRare:8",
+                        "abilityTokensUncommon:12",
+                        "abilityTokensUncommon:12",
+                        "abilityTokensCommon:13",
+                        "abilityTokensCommon:13"
+                    ]
+                },
+                {
+                    "variant": "L1_AL1_LD",
+                    "title": "Amplified Ability Power",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": [
+                        "gold:10600",
+                        "abilityTokensUncommon:10",
+                        "abilityTokensUncommon:10",
+                        "abilityTokensCommon:12",
+                        "abilityTokensCommon:12"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "For the Emperor!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["ShardsImperial:60", "ShardsImperial:60", "ShardsImperial:40", "ShardsImperial:40"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:8",
+                        "draft_ascensionOrbsMythic:8",
+                        "draft_ascensionOrbsLegendary:8",
+                        "draft_ascensionOrbsLegendary:8"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:18",
+                        "draft_ascensionOrbsLegendary:18",
+                        "draft_ascensionOrbsEpic:18",
+                        "draft_ascensionOrbsEpic:18",
+                        "draft_ascensionOrbsRare:6"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:18",
+                        "draft_ascensionOrbsLegendary:18",
+                        "draft_ascensionOrbsEpic:18",
+                        "draft_ascensionOrbsEpic:18",
+                        "draft_ascensionOrbsRare:6"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:14",
+                        "draft_ascensionOrbsEpic:14",
+                        "draft_ascensionOrbsRare:14",
+                        "draft_ascensionOrbsRare:14",
+                        "draft_ascensionOrbsUncommon:12"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "For the Emperor!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["ShardsImperial:45", "ShardsImperial:45", "ShardsImperial:30", "ShardsImperial:30"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:6",
+                        "draft_ascensionOrbsMythic:6",
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsLegendary:6"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_ascensionOrbsEpic:12",
+                        "draft_ascensionOrbsEpic:12",
+                        "draft_ascensionOrbsRare:6"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_ascensionOrbsEpic:12",
+                        "draft_ascensionOrbsEpic:12",
+                        "draft_ascensionOrbsRare:6"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:21",
+                        "draft_ascensionOrbsRare:15",
+                        "draft_ascensionOrbsUncommon:11"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "For the Emperor!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["ShardsImperial:30", "ShardsImperial:30", "ShardsImperial:20", "ShardsImperial:20"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:4",
+                        "draft_ascensionOrbsMythic:4",
+                        "draft_ascensionOrbsLegendary:4",
+                        "draft_ascensionOrbsLegendary:4"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsEpic:7",
+                        "draft_ascensionOrbsEpic:7",
+                        "draft_ascensionOrbsRare:4"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsEpic:7",
+                        "draft_ascensionOrbsEpic:7",
+                        "draft_ascensionOrbsRare:4"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "For the Emperor!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["ShardsImperial:15", "ShardsImperial:15", "ShardsImperial:10", "ShardsImperial:10"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:2",
+                        "draft_ascensionOrbsMythic:2",
+                        "draft_ascensionOrbsLegendary:2",
+                        "draft_ascensionOrbsLegendary:2"
+                    ]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsEpic:3",
+                        "draft_ascensionOrbsEpic:3",
+                        "draft_ascensionOrbsRare:3"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsEpic:3",
+                        "draft_ascensionOrbsEpic:3",
+                        "draft_ascensionOrbsRare:3"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Choose your rewards!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:6",
+                        "draft_ascensionOrbsRare:4",
+                        "draft_ascensionOrbsUncommon:4"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "M2_SHD",
+                    "title": "Steady Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["specialSummoningToken:12", "summoningToken:16"]
+                },
+                {
+                    "variant": "XL1_M_SHD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:14",
+                        "draft_machinesOfWarTokens:140",
+                        "draft_abilityTokensMythic:14"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_SHD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_machinesOfWarTokens:70",
+                        "draft_abilityTokensLegendary:28"
+                    ]
+                },
+                {
+                    "variant": "XL1_E_SHD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_ascensionOrbsLegendary:14",
+                        "draft_machinesOfWarTokens:70",
+                        "draft_abilityTokensEpic:28",
+                        "draft_abilityTokensEpic:28"
+                    ]
+                },
+                {
+                    "variant": "M2_HD",
+                    "title": "Steady Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["specialSummoningToken:9", "summoningToken:12"]
+                },
+                {
+                    "variant": "XL1_M_HD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:12",
+                        "draft_machinesOfWarTokens:120",
+                        "draft_abilityTokensMythic:12"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_HD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:24",
+                        "draft_machinesOfWarTokens:60",
+                        "draft_abilityTokensLegendary:24"
+                    ]
+                },
+                {
+                    "variant": "XL1_E_HD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:12",
+                        "draft_ascensionOrbsLegendary:12",
+                        "draft_machinesOfWarTokens:60",
+                        "draft_abilityTokensEpic:24",
+                        "draft_abilityTokensEpic:24"
+                    ]
+                },
+                {
+                    "variant": "M2_MD",
+                    "title": "Steady Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["specialSummoningToken:6", "summoningToken:8"]
+                },
+                {
+                    "variant": "XL1_M_MD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:9",
+                        "draft_machinesOfWarTokens:90",
+                        "draft_abilityTokensMythic:9"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_MD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:18",
+                        "draft_machinesOfWarTokens:45",
+                        "draft_abilityTokensLegendary:18"
+                    ]
+                },
+                {
+                    "variant": "XL1_E_MD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:18",
+                        "draft_machinesOfWarTokens:45",
+                        "draft_abilityTokensEpic:36"
+                    ]
+                },
+                {
+                    "variant": "M2_LD",
+                    "title": "Steady Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["specialSummoningToken:3", "summoningToken:4"]
+                },
+                {
+                    "variant": "XL1_M_LD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:5",
+                        "draft_machinesOfWarTokens:50",
+                        "draft_abilityTokensMythic:5"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_LD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_machinesOfWarTokens:25",
+                        "draft_abilityTokensLegendary:10"
+                    ]
+                },
+                {
+                    "variant": "XL1_E_LD",
+                    "title": "Advanced Progression",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_machinesOfWarTokens:25",
+                        "draft_abilityTokensEpic:20"
+                    ]
+                },
+                {
+                    "variant": "XL1_fallback",
+                    "title": "Advanced Progression",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:10",
+                        "draft_abilityTokensEpic:20",
+                        "draft_abilityTokensRare:20",
+                        "draft_abilityTokensUncommon:20",
+                        "draft_abilityTokensCommon:20"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "L3_SHD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["summoningToken:30", "gems:2500"]
+                },
+                {
+                    "variant": "XS4_SHD",
+                    "title": "Press the Attack!",
+                    "banner": "Play more!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["stamina:1920", "raidTicket:320"]
+                },
+                {
+                    "variant": "L3_HD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["summoningToken:27", "gems:2250"]
+                },
+                {
+                    "variant": "XS4_HD",
+                    "title": "Press the Attack!",
+                    "banner": "Play more!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["stamina:1200", "raidTicket:200"]
+                },
+                {
+                    "variant": "L3_MD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["summoningToken:21", "gems:1750"]
+                },
+                {
+                    "variant": "XS4_MD",
+                    "title": "Press the Attack!",
+                    "banner": "Play more!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": ["stamina:720", "raidTicket:120"]
+                },
+                {
+                    "variant": "L3_LD",
+                    "title": "Orders for Deployment",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["summoningToken:12", "gems:1000"]
+                },
+                {
+                    "variant": "XS4_LD",
+                    "title": "Press the Attack!",
+                    "banner": "Play more!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": ["stamina:240", "raidTicket:40"]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "M4_SHD",
+                    "title": "Diverse Recruits",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["ShardsLegendary:140", "ShardsIfUnlocked:140", "ShardsAll:140"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "mythicDust:1000",
+                        "gems:2000",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "stamina_treasureBeach:4"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "dust:2800",
+                        "gems:1900",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "stamina_treasureBeach:4"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "dust:800",
+                        "gems:1100",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "stamina_treasureBeach:4"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "dust:320",
+                        "gems:800",
+                        "itemsRare:4",
+                        "itemsUncommon:4",
+                        "itemsCommon:4",
+                        "stamina_treasureBeach:4"
+                    ]
+                },
+                {
+                    "variant": "M4_HD",
+                    "title": "Diverse Recruits",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["ShardsLegendary:120", "ShardsIfUnlocked:120", "ShardsAll:120"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "mythicDust:750",
+                        "gems:1500",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "stamina_treasureBeach:3"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "dust:1250",
+                        "gems:900",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "stamina_treasureBeach:3"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": [
+                        "dust:420",
+                        "gems:600",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "stamina_treasureBeach:3"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "dust:320",
+                        "gems:800",
+                        "itemsRare:4",
+                        "itemsUncommon:4",
+                        "itemsCommon:4",
+                        "stamina_treasureBeach:4"
+                    ]
+                },
+                {
+                    "variant": "M4_MD",
+                    "title": "Diverse Recruits",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["ShardsLegendary:60", "ShardsIfUnlocked:60", "ShardsAll:60"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "mythicDust:500",
+                        "gems:1000",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "stamina_treasureBeach:2"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "dust:830",
+                        "gems:600",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "stamina_treasureBeach:2"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["dust:280", "gems:400", "itemsEpic:2", "itemsEpic:2", "stamina_treasureBeach:2"]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": [
+                        "dust:160",
+                        "gems:400",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsCommon:2",
+                        "stamina_treasureBeach:2"
+                    ]
+                },
+                {
+                    "variant": "M4_LD",
+                    "title": "Diverse Recruits",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["ShardsLegendary:40", "ShardsIfUnlocked:40", "ShardsAll:40"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["mythicDust:250", "gems:500", "itemsMythic:1", "stamina_treasureBeach:1"]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["dust:415", "gems:300", "itemsLegendary:1", "stamina_treasureBeach:1"]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": ["dust:140", "gems:200", "itemsEpic:2", "stamina_treasureBeach:1"]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Tools of the Trade",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": [
+                        "dust:80",
+                        "gems:200",
+                        "itemsRare:1",
+                        "itemsUncommon:1",
+                        "itemsCommon:1",
+                        "stamina_treasureBeach:1"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Chaos Undivided!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["ShardsChaos:60", "ShardsChaos:60", "ShardsChaos:40", "ShardsChaos:40"]
+                },
+                {
+                    "variant": "M3_M_SHD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["xpMythic:16", "xpLegendary:16", "gold:40000"]
+                },
+                {
+                    "variant": "M3_CUREL_SHD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["xpLegendary:40", "xpEpic:40", "gold:20000"]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Chaos Undivided!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["ShardsChaos:45", "ShardsChaos:45", "ShardsChaos:30", "ShardsChaos:30"]
+                },
+                {
+                    "variant": "M3_M_HD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["xpMythic:10", "xpLegendary:10", "gold:25000"]
+                },
+                {
+                    "variant": "M3_CUREL_HD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["xpLegendary:30", "xpEpic:30", "gold:15000"]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Chaos Undivided!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["ShardsChaos:30", "ShardsChaos:30", "ShardsChaos:20", "ShardsChaos:20"]
+                },
+                {
+                    "variant": "M3_M_MD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["xpMythic:8", "xpLegendary:8", "gold:20000"]
+                },
+                {
+                    "variant": "M3_CUREL_MD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["xpLegendary:20", "xpEpic:20", "gold:10000"]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Chaos Undivided!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["ShardsChaos:15", "ShardsChaos:15", "ShardsChaos:10", "ShardsChaos:10"]
+                },
+                {
+                    "variant": "M3_M_LD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["xpMythic:4", "xpLegendary:4", "gold:10000"]
+                },
+                {
+                    "variant": "M3_CUREL_LD",
+                    "title": "Battle Plans",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["xpLegendary:10", "xpEpic:10", "gold:5000"]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Special Delivery",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["stamina:30", "raidTicket:5"]
+                },
+                {
+                    "variant": "L2_SHD",
+                    "title": "Elite Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["specialSummoningToken:40"]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "Elite Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["specialSummoningToken:30"]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "Elite Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["specialSummoningToken:20"]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "Elite Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["specialSummoningToken:10"]
+                }
+            ]
+        }
+    ]
+}

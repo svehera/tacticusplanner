@@ -420,6 +420,9 @@ export const RARITY_FACTOR: Record<Rarity, number> = {
 
 // ── Variable resolver ─────────────────────────────────────────────────────────
 
+/** Matches `DamageProfileType`, `DamageProfileType_2`, `DamageProfileTypeStyle`, `DamageProfileTypeStyle_2`, etc. */
+const DAMAGE_PROFILE_TYPE_RE = /^DamageProfileType(Style)?(_\d+)?$/;
+
 export interface AbilityContext {
     level: number;
     variables: Record<string, (string | number)[]>;
@@ -432,12 +435,19 @@ export interface AbilityContext {
     factionId: string;
 }
 
+/** Some generated ability data has trailing whitespace in variable/constant keys; tolerate it. */
+function lookupTrimmed<T>(record: Record<string, T>, name: string): T | undefined {
+    if (record[name] !== undefined) return record[name];
+    const match = Object.keys(record).find(key => key.trim() === name);
+    return match === undefined ? undefined : record[match];
+}
+
 export function resolveVariable(node: VariableNode, context: AbilityContext): string | undefined {
     if (node.isUnitName) return context.unitName;
     if (!node.name) return undefined; // S/key → skip
 
     // Constants are never scaled
-    const constantValue = context.constants[node.name];
+    const constantValue = lookupTrimmed(context.constants, node.name);
     if (constantValue !== undefined) {
         if (node.splitIndex !== undefined) {
             return String(constantValue).split(',')[node.splitIndex] ?? '';
@@ -445,7 +455,18 @@ export function resolveVariable(node: VariableNode, context: AbilityContext): st
         return constantValue;
     }
 
-    const array = context.variables[node.name];
+    // Compute DamageProfileType(_N) from the damageProfile(_N) constant when not explicitly set
+    const damageProfileTypeMatch = DAMAGE_PROFILE_TYPE_RE.exec(node.name);
+    if (damageProfileTypeMatch && !damageProfileTypeMatch[1]) {
+        const suffix = damageProfileTypeMatch[2] ?? '';
+        const profile = lookupTrimmed(context.constants, `damageProfile${suffix}`);
+        if (profile) {
+            const words = profile.replaceAll(/([a-z])([A-Z])/g, '$1 $2').replaceAll(/([A-Z]+)([A-Z][a-z])/g, '$1 $2');
+            return words.endsWith('Damage') ? words : `${words} Damage`;
+        }
+    }
+
+    const array = lookupTrimmed(context.variables, node.name);
     if (!array) return `{${node.name}}`;
     const rawValue = array[context.level - 1] ?? array.at(-1);
     const string_ = String(rawValue);
@@ -462,14 +483,16 @@ export function resolveVariable(node: VariableNode, context: AbilityContext): st
     return part;
 }
 
-/** Resolve dynamic style variable (DamageProfileTypeStyle) → actual style name */
+/** Resolve dynamic style variable (DamageProfileTypeStyle(_N)) → actual style name */
 export function resolveDynamicStyle(variableContent: string, constants: Record<string, string>): string {
-    // varContent is "[DamageProfileTypeStyle]"
+    // varContent is "[DamageProfileTypeStyle]" or "[DamageProfileTypeStyle_2]"
     const nameMatch = /^\[([^\]]+)\]$/.exec(variableContent);
     const variableName = nameMatch?.[1] ?? variableContent;
-    if (variableName === 'DamageProfileTypeStyle') {
-        const profile = constants.damageProfile;
+    const damageProfileStyleMatch = DAMAGE_PROFILE_TYPE_RE.exec(variableName);
+    if (damageProfileStyleMatch && damageProfileStyleMatch[1]) {
+        const suffix = damageProfileStyleMatch[2] ?? '';
+        const profile = lookupTrimmed(constants, `damageProfile${suffix}`);
         return profile ? `DMG_${profile}` : 'DMG_Unknown';
     }
-    return constants[variableName] ?? variableName;
+    return lookupTrimmed(constants, variableName) ?? variableName;
 }

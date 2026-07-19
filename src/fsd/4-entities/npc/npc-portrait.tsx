@@ -1,14 +1,15 @@
 /* eslint-disable import-x/no-internal-modules */
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
 import blueStar from 'src/assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
 import mythicWings from 'src/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
 import redStar from 'src/assets/images/stars/red star small.png';
 import goldStar from 'src/assets/images/stars/star small.png';
 
-import { RarityStars, Rank } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper, RarityStars, Rank } from '@/fsd/5-shared/model';
 import { getImageUrl } from '@/fsd/5-shared/ui';
 import { RankIcon } from '@/fsd/5-shared/ui/icons';
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import { NpcService } from './npc-service';
 
@@ -16,6 +17,9 @@ interface Props {
     id: string;
     rank: Rank;
     stars: RarityStars;
+    customPortraitUrl?: string;
+    /** When provided, overlays a rarity-colored frame around the portrait, matching character portraits. */
+    rarity?: Rarity;
 }
 
 /**
@@ -28,16 +32,54 @@ interface Props {
  *          rank ribbon sticks out to the left as much as 15 pixels, and to the
  *          bottom as much as 7 pixels.
  */
-export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
+export const NpcPortrait: React.FC<Props> = ({ id, rank, stars, customPortraitUrl, rarity }) => {
     // All coordinates here are relative to the top-left corner (0, 0).
     const frameWidth = 202;
     const frameHeight = 267;
     const starSize = 45;
     const fifthStarSize = 52;
+    const [portraitFailed, setPortraitFailed] = useState(false);
+    useEffect(() => setPortraitFailed(false), [id, customPortraitUrl]);
 
     const getNpcPortrait = () => {
-        const imageUrl = getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
-        return <img src={imageUrl} width={frameWidth} height={frameHeight} className="absolute top-0 left-0 z-0" />;
+        const imageUrl = customPortraitUrl ?? getImageUrl(NpcService.getNpcById(id)?.icon ?? '');
+        if (portraitFailed) {
+            return (
+                <div
+                    className="absolute top-0 left-0 z-0 flex items-center justify-center bg-(--bg-tertiary) text-xs text-(--fg-muted)"
+                    style={{ width: frameWidth, height: frameHeight }}>
+                    ?
+                </div>
+            );
+        }
+        return (
+            <img
+                src={imageUrl}
+                width={frameWidth}
+                height={frameHeight}
+                className="absolute top-0 left-0 z-0"
+                onError={() => setPortraitFailed(true)}
+            />
+        );
+    };
+
+    const getRarityFrame = () => {
+        if (rarity === undefined) return;
+        const rarityString = RarityMapper.rarityToRarityString(rarity).toLowerCase();
+        const frameUrl = tacticusIcons[`${rarityString}Frame`]?.file ?? tacticusIcons.commonFrame.file;
+        const overhang = 6;
+        return (
+            <img
+                src={frameUrl}
+                className="pointer-events-none absolute z-1"
+                style={{
+                    top: -overhang,
+                    left: -overhang,
+                    width: frameWidth + overhang * 2,
+                    height: frameHeight + overhang * 2,
+                }}
+            />
+        );
     };
 
     const getMythicWings = () => {
@@ -130,6 +172,7 @@ export const NpcPortrait: React.FC<Props> = ({ id, rank, stars }) => {
         <div style={{ width: frameWidth + 40, height: frameHeight + 40 }}>
             <div className="relative top-5 left-5">
                 {getNpcPortrait()}
+                {getRarityFrame()}
                 {getStars()}
                 {getRank()}
             </div>

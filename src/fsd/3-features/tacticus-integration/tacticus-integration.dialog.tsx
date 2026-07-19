@@ -41,7 +41,6 @@ interface Props extends DialogProps {
     tacticusGuildApiKey: string;
     shareInGameName?: boolean;
     shareRosterData?: boolean;
-    shareGuildMemberPerformance?: boolean;
     /** @deprecated Combined guild tags are now managed in the Shared Leaderboards tab. Ignored. */
     combinedGuildTags?: string[];
     guildTag?: string;
@@ -61,7 +60,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     tacticusGuildApiKey,
     shareInGameName,
     shareRosterData,
-    shareGuildMemberPerformance: shareGuildMemberPerformanceProperty,
     guildTag: guildTagProperty,
 }) => {
     const loader = useLoader();
@@ -78,10 +76,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
     const [savedShareInGameName] = useState<boolean>(shareInGameName ?? false);
     const [currentShareRosterData, setCurrentShareRosterData] = useState<boolean>(shareRosterData ?? false);
     const [savedShareRosterData] = useState<boolean>(shareRosterData ?? false);
-    const [shareGuildMemberPerformance, setShareGuildMemberPerformance] = useState<boolean>(
-        shareGuildMemberPerformanceProperty ?? false
-    );
-    const [savedShareGuildMemberPerformance] = useState<boolean>(shareGuildMemberPerformanceProperty ?? false);
     const [guildTag, setGuildTag] = useState<string>(guildTagProperty ?? '');
     const [savedGuildTag] = useState<string>(guildTagProperty ?? '');
 
@@ -104,7 +98,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         userId !== currentUserId ||
         currentShareInGameName !== savedShareInGameName ||
         currentShareRosterData !== savedShareRosterData ||
-        shareGuildMemberPerformance !== savedShareGuildMemberPerformance ||
         guildTag !== savedGuildTag;
 
     async function updateApiKey(): Promise<boolean> {
@@ -113,7 +106,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
             const response = await updateTacticusApiKey(trimmedApiKey, trimmedGuildApiKey, trimmedUserId, {
                 shareInGameName: currentShareInGameName,
                 shareRosterData: currentShareRosterData,
-                shareGuildMemberPerformance,
                 guildTag: trimmedGuildTag,
             });
 
@@ -129,7 +121,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 tacticusUserId: trimmedUserId,
                 shareInGameName: currentShareInGameName,
                 shareRosterData: currentShareRosterData,
-                shareGuildMemberPerformance,
                 guildTag: trimmedGuildTag,
             });
 
@@ -285,22 +276,6 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                             </div>
                         )}
 
-                        {guildApiKey && (
-                            <div className="flex w-[80%] flex-col gap-3">
-                                <label className="flex cursor-pointer items-start gap-3">
-                                    <input
-                                        type="checkbox"
-                                        className="mt-0.5 size-4 shrink-0 cursor-pointer accent-(--primary)"
-                                        checked={shareGuildMemberPerformance}
-                                        onChange={event => setShareGuildMemberPerformance(event.target.checked)}
-                                    />
-                                    <span className="text-sm">
-                                        Privately share each guild member&apos;s performance data (visible only to that
-                                        member)
-                                    </span>
-                                </label>
-                            </div>
-                        )}
                         {!guildApiKey && userId && (
                             <div className="flex w-[80%] flex-col gap-y-1">
                                 <FieldLabelWithInfo

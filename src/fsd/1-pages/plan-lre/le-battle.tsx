@@ -1,9 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 
-import { INpcData, INpcStats, NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
-
-// eslint-disable-next-line boundaries/element-types
-import { NpcDetailModal } from '@/fsd/1-pages/learn-npcs';
+import { INpcData, INpcStats, NpcDetailModal, NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 import { ILeBattle, ILeWave } from './le-battle.service';
 
@@ -114,9 +111,9 @@ interface LeBattleProps {
 }
 
 export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
-    const [selectedEnemy, setSelectedEnemy] = React.useState<ResolvedEnemyData>();
+    const [selectedEnemy, setSelectedEnemy] = useState<ResolvedEnemyData>();
 
-    const [isMapVisible, setIsMapVisible] = React.useState<boolean>(false);
+    const [isMapVisible, setIsMapVisible] = useState<boolean>(false);
 
     // Handler to open modal
     const handleEnemyClick = (data: ResolvedEnemyData) => {

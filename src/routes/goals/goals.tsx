@@ -121,15 +121,22 @@ export const Goals = () => {
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
 
-    const { allGoals, shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, ascendGoals, upgradeAbilities } =
-        useMemo(
-            () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
-            [goals, units, onslaughtPreferences]
-        );
+    const {
+        allGoals,
+        shardsGoals,
+        upgradeRankOrMowGoals,
+        upgradeMaterialGoals,
+        preFarmGoals,
+        ascendGoals,
+        upgradeAbilities,
+    } = useMemo(
+        () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
+        [goals, units, onslaughtPreferences]
+    );
 
     // Add these sorts to ensure the UI matches the global priority order
     const sortedShards = shardsGoals.toSorted((a, b) => a.priority - b.priority);
-    const sortedUpgrades = [upgradeMaterialGoals, upgradeRankOrMowGoals]
+    const sortedUpgrades = [preFarmGoals, upgradeMaterialGoals, upgradeRankOrMowGoals]
         .flat()
         .toSorted((a, b) => a.priority - b.priority);
     const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
@@ -185,7 +192,7 @@ export const Goals = () => {
         },
         characters,
         resolvedMows,
-        ...[upgradeMaterialGoals, upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
+        ...[preFarmGoals, upgradeMaterialGoals, upgradeRankOrMowGoals, shardsGoals].flat().filter(x => x.include)
     );
 
     const energyAlreadySpent = useMemo(() => {
@@ -263,12 +270,18 @@ export const Goals = () => {
         if (item === 'edit') {
             const goal = allGoals.find(x => x.goalId === goalId);
             const relatedUnit =
-                goal?.type === PersonalGoalType.UpgradeMaterial
+                goal?.type === PersonalGoalType.UpgradeMaterial ||
+                goal?.type === PersonalGoalType.PreFarmMaterialForGoals
                     ? undefined
                     : [...characters, ...resolvedMows].find(
                           x => x.snowprintId === goal?.unitId || x.id === goal?.unitId
                       );
-            if (goal && (goal.type === PersonalGoalType.UpgradeMaterial || relatedUnit !== undefined)) {
+            if (
+                goal &&
+                (goal.type === PersonalGoalType.UpgradeMaterial ||
+                    goal.type === PersonalGoalType.PreFarmMaterialForGoals ||
+                    relatedUnit !== undefined)
+            ) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
             }
@@ -305,7 +318,8 @@ export const Goals = () => {
                 upgradeRankOrMowGoals,
                 upgradeAbilities,
                 characters,
-                isGoalPriority
+                isGoalPriority,
+                preFarmGoals
             ),
         [
             estimatedUpgradesTotal,
@@ -315,6 +329,7 @@ export const Goals = () => {
             upgradeAbilities,
             characters,
             isGoalPriority,
+            preFarmGoals,
         ]
     );
 
@@ -361,6 +376,20 @@ export const Goals = () => {
                 ...merged,
                 ...aggregated,
                 goalId: first.goalId,
+            };
+        }
+
+        // For pre-farm goals, compute raw demand from active referenced goals.
+        if (goal?.type === PersonalGoalType.PreFarmMaterialForGoals) {
+            const matId = goal.upgradeMaterialId;
+            const held = inventory.upgrades[matId] ?? 0;
+            const rawDemand = UpgradesService.computeRawDemandForPreFarmGoal(goal, allGoals);
+            first.materialQuantityInfo = {
+                held,
+                totalNeeded: rawDemand,
+                thisGoalQuantity: rawDemand,
+                isGoalPriority,
+                coveredByInventory: isGoalPriority ? Math.min(held, rawDemand) : undefined,
             };
         }
 
@@ -715,11 +744,14 @@ export const Goals = () => {
                 />
             )}
             {editGoal !== undefined &&
-                (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (
+                (editUnit !== undefined ||
+                    editGoal.type === PersonalGoalType.UpgradeMaterial ||
+                    editGoal.type === PersonalGoalType.PreFarmMaterialForGoals) && (
                     <EditGoalDialog
                         isOpen={true}
                         goal={editGoal}
                         unit={editUnit}
+                        allGoals={allGoals}
                         onClose={() => {
                             setEditGoal(undefined);
                         }}
