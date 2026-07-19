@@ -957,18 +957,20 @@ export class GoalsService {
         goal.xpBooksRequired = Math.floor(remainingXp / XP_BOOK_VALUE[xpBookRarityToUse]);
         const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
         goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        goal.xpDaysLeft = undefined;
 
         let newAccrual = xpBooksAccrual;
 
         goal.xpBooksTotal = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        currentEstimate.bookRarity = xpBookRarityToUse;
         if (xpNeeded === 0) {
-            goal.xpEstimate = undefined;
-            goal.xpEstimateAbilities = undefined;
+            currentEstimate.books = 0;
+            currentEstimate.gold = 0;
+            currentEstimate.xpLeft = 0;
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
         currentEstimate.books = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
-        currentEstimate.bookRarity = xpBookRarityToUse;
         currentEstimate.xpLeft = xpNeeded;
 
         if (xpIncomeState.manualCodicesPerDay > 0) {
