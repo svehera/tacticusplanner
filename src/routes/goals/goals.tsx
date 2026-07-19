@@ -1,5 +1,5 @@
 ﻿import { cloneDeep, sum } from 'lodash';
-import { Grid2x2, Link2, Rows3, Settings, Trash2 } from 'lucide-react';
+import { Grid2x2, Link2, Rows3, Settings, Target, Trash2 } from 'lucide-react';
 import { useCallback, useContext, useMemo, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 
@@ -9,7 +9,7 @@ import DailyRaidsSettings from '@/shared-components/daily-raids-settings';
 import { goalsLimit } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
-import { GoalsTable } from 'src/routes/goals/goals-table';
+import { GoalSection } from 'src/routes/goals/goal-section';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
@@ -33,10 +33,7 @@ import { IGoalEstimate, TypedGoalSelect } from '@/fsd/3-features/goals/goals.mod
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
-import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
-
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
-import { GoalService } from './goal-service';
 
 const MYTHIC_UNCRAFTABLE_UPGRADES = [
     {
@@ -106,6 +103,8 @@ export const Goals = () => {
     const [openSettings, setOpenSettings] = useState<boolean>(false);
     const [resourcesExpanded, setResourcesExpanded] = useState(false);
     const [sectionsExpanded, setSectionsExpanded] = useState({ upgrades: true, shards: true, abilities: true });
+    // Polite screen-reader announcements for drag-reorder and include toggles.
+    const [announcement, setAnnouncement] = useState('');
 
     const updateColorCodingMode = useCallback(
         (newMode: GoalColorMode) => {
@@ -134,6 +133,38 @@ export const Goals = () => {
         .flat()
         .toSorted((a, b) => a.priority - b.priority);
     const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
+
+    /**
+     * Reorders one section by drag. Preserves that section's set of priority numbers and reassigns
+     * them to the new visual order (mirrors the ui-kit table's applyPriorities), then persists the
+     * full goal list so global ordering outside the section stays stable.
+     */
+    const handleReorder = (orderedGoalIds: string[], movedId: string): void => {
+        const idSet = new Set(orderedGoalIds);
+        const sectionPriorities = goals
+            .filter(g => idSet.has(g.id))
+            .map(g => g.priority)
+            .toSorted((a, b) => a - b);
+        const newPriorityById = new Map<string, number>();
+        for (const [index, id] of orderedGoalIds.entries()) newPriorityById.set(id, sectionPriorities[index]);
+        const next = goals.map(g => (newPriorityById.has(g.id) ? { ...g, priority: newPriorityById.get(g.id)! } : g));
+        dispatch.goals({ type: 'Set', value: next });
+        setAnnouncement(`Goal moved to priority ${newPriorityById.get(movedId)}.`);
+    };
+
+    /** Toggles a goal's daily-raids inclusion and announces the change politely. */
+    const handleToggleInclude = (goal: TypedGoalSelect): void => {
+        const newInclude = !goal.include;
+        dispatch.goals({ type: 'UpdateDailyRaids', value: [{ goalId: goal.goalId, include: newInclude }] });
+        const label = 'unitName' in goal ? (goal.unitName ?? goal.unitId) : 'Goal';
+        setAnnouncement(`${label} ${newInclude ? 'included in' : 'excluded from'} daily raids.`);
+    };
+
+    /** goalId-based include toggle so cards and the table share one code path (and the announcement). */
+    const handleToggleIncludeById = (goalId: string): void => {
+        const goal = allGoals.find(g => g.goalId === goalId);
+        if (goal) handleToggleInclude(goal);
+    };
 
     const onslaughtTokensToday = useMemo(
         () => UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
@@ -403,6 +434,9 @@ export const Goals = () => {
 
     return (
         <div className="space-y-8 py-6">
+            <div aria-live="polite" className="sr-only" role="status">
+                {announcement}
+            </div>
             <PageToolbar>
                 {/* Navigation */}
                 <LinkButton size="small" href={isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids'}>
@@ -450,140 +484,165 @@ export const Goals = () => {
                     <Trash2 data-slot="icon" /> Delete All
                 </Button>
             </PageToolbar>
-            <div className="w-full max-w-[1100px]">
-                <Accordion expanded={resourcesExpanded} onToggle={setResourcesExpanded}>
-                    <AccordionHeader>
-                        <div className="flex w-full flex-wrap items-center gap-2 pr-2">
-                            <span className="text-sm font-semibold text-(--fg)">Total Resources Missing</span>
-                            <span className="ml-auto flex flex-wrap items-center gap-2">
-                                <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
-                                    <span className="font-medium">Energy:</span>{' '}
-                                    <span>{estimatedUpgradesTotal.energyTotal - energyAlreadySpent}</span>
+            {goals.length === 0 && (
+                <div className="flex flex-col items-center gap-3 rounded-xl border border-(--card-border) bg-(--card) py-14 text-center">
+                    <Target className="size-10 text-(--soft-fg)" />
+                    <div className="space-y-1">
+                        <p className="text-base font-semibold text-(--fg)">No goals yet</p>
+                        <p className="mx-auto max-w-sm text-sm text-(--soft-fg)">
+                            Set a goal to see the resources, energy and days it takes to reach it.
+                        </p>
+                    </div>
+                    <SetGoalDialog key={`empty-${goals.length}`} />
+                </div>
+            )}
+            {goals.length > 0 && (
+                <div className="w-full max-w-[1100px]">
+                    <Accordion expanded={resourcesExpanded} onToggle={setResourcesExpanded}>
+                        <AccordionHeader>
+                            <div className="flex w-full flex-wrap items-center gap-2 pr-2">
+                                <span className="text-sm font-semibold text-(--fg)">Total Resources Missing</span>
+                                <span className="ml-auto flex flex-wrap items-center gap-2">
+                                    <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
+                                        <span className="font-medium">Energy:</span>{' '}
+                                        <span>{estimatedUpgradesTotal.energyTotal - energyAlreadySpent}</span>
+                                    </span>
+                                    <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
+                                        <span className="font-medium">XP:</span>{' '}
+                                        <span>{formatCompactValue(adjustedGoalsEstimates.neededXp)}</span>
+                                    </span>
                                 </span>
-                                <span className="rounded-full border border-(--card-border) bg-(--neutral) px-2 py-0.5 text-xs text-(--fg)">
-                                    <span className="font-medium">XP:</span>{' '}
-                                    <span>{formatCompactValue(adjustedGoalsEstimates.neededXp)}</span>
-                                </span>
-                            </span>
-                        </div>
-                    </AccordionHeader>
-
-                    <AccordionBody>
-                        <div className="grid grid-cols-1 gap-3">
-                            <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        Energy
-                                    </div>
-                                    <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        <MiscIcon icon={'energy'} height={35} width={35} />
-                                        <b className="text-2xl text-(--fg)">
-                                            {estimatedUpgradesTotal.energyTotal - energyAlreadySpent}
-                                        </b>
-                                    </div>
-                                </div>
-
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        XP Books
-                                    </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
-                                    </div>
-                                </div>
                             </div>
+                        </AccordionHeader>
 
-                            <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        Badges
+                        <AccordionBody>
+                            <div className="grid grid-cols-1 gap-3">
+                                <div className="grid grid-cols-1 gap-3 xl:grid-cols-[300px_1fr]">
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            Energy
+                                        </div>
+                                        <div className="flex items-center gap-x-4 rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            <MiscIcon icon={'energy'} height={35} width={35} />
+                                            <b className="text-2xl text-(--fg)">
+                                                {estimatedUpgradesTotal.energyTotal - energyAlreadySpent}
+                                            </b>
+                                        </div>
                                     </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                            <div key={alliance} className="mb-2 flex items-center last:mb-0">
-                                                <BadgesTotal
-                                                    badges={adjustedGoalsEstimates.neededBadges[alliance]}
-                                                    alliance={alliance}
-                                                    size={'medium'}
-                                                />
-                                            </div>
-                                        ))}
+
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            XP Books
+                                        </div>
+                                        <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            <XpBooksTotal xp={adjustedGoalsEstimates.neededXp} size={'medium'} />
+                                        </div>
                                     </div>
                                 </div>
 
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        Orbs
-                                    </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
-                                            <div key={alliance} className="mb-2 flex items-center last:mb-0">
-                                                <OrbsTotal
-                                                    orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
-                                                    alliance={alliance}
-                                                    size={35}
-                                                />
-                                            </div>
-                                        ))}
-                                    </div>
-                                </div>
-
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        Forge Badges
-                                    </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        <ForgeBadgesTotal
-                                            badges={adjustedGoalsEstimates.neededForgeBadges}
-                                            size={'medium'}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        MoW Components
-                                    </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        <MoWComponentsTotal
-                                            components={adjustedGoalsEstimates.neededComponents}
-                                            size={'medium'}
-                                        />
-                                    </div>
-                                </div>
-
-                                <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                    <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                                        Mythic Upgrade Materials
-                                    </div>
-                                    <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
-                                        <div className="flex flex-wrap gap-1">
-                                            {MYTHIC_UNCRAFTABLE_UPGRADES.map(upg => (
-                                                <div key={upg.id} className="flex flex-col items-center">
-                                                    <UpgradeImage
-                                                        material={upg.material}
-                                                        iconPath={upg.icon}
-                                                        rarity={RarityMapper.rarityToRarityString(Rarity.Mythic)}
-                                                        size={45}
+                                <div className="grid grid-cols-1 gap-3 xl:grid-cols-2">
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            Badges
+                                        </div>
+                                        <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                                <div key={alliance} className="mb-2 flex items-center last:mb-0">
+                                                    <BadgesTotal
+                                                        badges={adjustedGoalsEstimates.neededBadges[alliance]}
+                                                        alliance={alliance}
+                                                        size={'medium'}
                                                     />
-                                                    <span className="mt-1 text-sm font-semibold">
-                                                        {mythicMissingByUpgradeId[upg.id] ?? 0}
-                                                    </span>
                                                 </div>
                                             ))}
                                         </div>
                                     </div>
+
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            Orbs
+                                        </div>
+                                        <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            {[Alliance.Imperial, Alliance.Xenos, Alliance.Chaos].map(alliance => (
+                                                <div key={alliance} className="mb-2 flex items-center last:mb-0">
+                                                    <OrbsTotal
+                                                        orbs={adjustedGoalsEstimates.neededOrbs[alliance]}
+                                                        alliance={alliance}
+                                                        size={35}
+                                                    />
+                                                </div>
+                                            ))}
+                                        </div>
+                                    </div>
+
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            Forge Badges
+                                        </div>
+                                        <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            <ForgeBadgesTotal
+                                                badges={adjustedGoalsEstimates.neededForgeBadges}
+                                                size={'medium'}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            MoW Components
+                                        </div>
+                                        <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            <MoWComponentsTotal
+                                                components={adjustedGoalsEstimates.neededComponents}
+                                                size={'medium'}
+                                            />
+                                        </div>
+                                    </div>
+
+                                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                        <div className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
+                                            Mythic Upgrade Materials
+                                        </div>
+                                        <div className="overflow-x-auto rounded-lg border border-(--border) bg-(--neutral) p-3 shadow-sm ring-1 ring-(--border)/50">
+                                            <div className="flex flex-wrap gap-1">
+                                                {MYTHIC_UNCRAFTABLE_UPGRADES.map(upg => (
+                                                    <div key={upg.id} className="flex flex-col items-center">
+                                                        <UpgradeImage
+                                                            material={upg.material}
+                                                            iconPath={upg.icon}
+                                                            rarity={RarityMapper.rarityToRarityString(Rarity.Mythic)}
+                                                            size={45}
+                                                        />
+                                                        <span className="mt-1 text-sm font-semibold">
+                                                            {mythicMissingByUpgradeId[upg.id] ?? 0}
+                                                        </span>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </AccordionBody>
-                </Accordion>
-            </div>
+                        </AccordionBody>
+                    </Accordion>
+                </div>
+            )}
             {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
-                <Accordion
+                <GoalSection
                     expanded={sectionsExpanded.upgrades}
-                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}>
-                    <AccordionHeader>
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
+                    tableView={viewPreferences.goalsTableView}
+                    items={sortedUpgrades}
+                    variant="rank"
+                    estimates={mergedGoalEstimates}
+                    colorMode={viewPreferences.goalColorMode}
+                    bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
+                    characters={characters}
+                    mows={resolvedMows as IMow2[]}
+                    onReorder={handleReorder}
+                    onMenuItemSelect={handleMenuItemSelect}
+                    onToggleInclude={handleToggleIncludeById}
+                    header={
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Upgrade rank/MoW (<b>{estimatedUpgradesTotal.upgradesRaids.length}</b> Days |
@@ -597,67 +656,25 @@ export const Goals = () => {
                                 <MiscIcon icon={'energy'} height={15} width={15} />)
                             </span>
                         </div>
-                    </AccordionHeader>
-                    <AccordionBody>
-                        {!viewPreferences.goalsTableView && (
-                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
-                                {sortedUpgrades.map(goal => {
-                                    const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
-
-                                    return (
-                                        <GoalCard
-                                            key={goal.goalId}
-                                            goal={goal}
-                                            goalEstimate={finalEstimate} // Use the consolidated estimate
-                                            bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
-                                            menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                            onToggleInclude={() =>
-                                                dispatch.goals({
-                                                    type: 'UpdateDailyRaids',
-                                                    value: [{ goalId: goal.goalId, include: !goal.include }],
-                                                })
-                                            }
-                                            // Use finalEstimate for consistent color coding
-                                            bgColor={GoalService.getBackgroundColor(
-                                                viewPreferences.goalColorMode,
-                                                finalEstimate
-                                            )}
-                                            characters={characters}
-                                            mows={resolvedMows as IMow2[]}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        )}
-
-                        {viewPreferences.goalsTableView && (
-                            <GoalsTable
-                                rows={sortedUpgrades}
-                                allGoals={allGoals} // Pass the global flattened list here
-                                estimate={mergedGoalEstimates} // Pass the merged estimates to the table
-                                menuItemSelect={handleMenuItemSelect}
-                                goalsColorCoding={viewPreferences.goalColorMode}
-                                onToggleInclude={goalId =>
-                                    dispatch.goals({
-                                        type: 'UpdateDailyRaids',
-                                        value: [
-                                            {
-                                                goalId,
-                                                include: !allGoals.find(g => g.goalId === goalId)?.include,
-                                            },
-                                        ],
-                                    })
-                                }
-                            />
-                        )}
-                    </AccordionBody>
-                </Accordion>
+                    }
+                />
             )}
             {shardsGoals.length > 0 && (
-                <Accordion
+                <GoalSection
                     expanded={sectionsExpanded.shards}
-                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}>
-                    <AccordionHeader>
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, shards: expanded }))}
+                    tableView={viewPreferences.goalsTableView}
+                    items={sortedShards}
+                    variant="ascend"
+                    estimates={mergedGoalEstimates}
+                    colorMode={viewPreferences.goalColorMode}
+                    bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
+                    characters={characters}
+                    mows={resolvedMows as IMow2[]}
+                    onReorder={handleReorder}
+                    onMenuItemSelect={handleMenuItemSelect}
+                    onToggleInclude={handleToggleIncludeById}
+                    header={
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Ascend/Promote/Unlock (<b>{shardRaidSummary.daysTotal}</b> Days |
@@ -670,123 +687,32 @@ export const Goals = () => {
                                 <b>{shardOnslaughtTokensTotal}</b> Tokens)
                             </span>
                         </div>
-                    </AccordionHeader>
-                    <AccordionBody>
-                        {!viewPreferences.goalsTableView && (
-                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
-                                {sortedShards.map(goal => {
-                                    const estimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
-                                    return (
-                                        <GoalCard
-                                            characters={characters}
-                                            mows={resolvedMows as IMow2[]}
-                                            key={goal.goalId}
-                                            goal={goal}
-                                            goalEstimate={estimate}
-                                            bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
-                                            menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                            onToggleInclude={() =>
-                                                dispatch.goals({
-                                                    type: 'UpdateDailyRaids',
-                                                    value: [{ goalId: goal.goalId, include: !goal.include }],
-                                                })
-                                            }
-                                            bgColor={GoalService.getBackgroundColor(
-                                                viewPreferences.goalColorMode,
-                                                estimate
-                                            )}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        )}
-
-                        {viewPreferences.goalsTableView && (
-                            <GoalsTable
-                                rows={sortedShards}
-                                allGoals={allGoals} // Pass the global flattened list here
-                                estimate={mergedGoalEstimates}
-                                menuItemSelect={handleMenuItemSelect}
-                                goalsColorCoding={viewPreferences.goalColorMode}
-                                onToggleInclude={goalId =>
-                                    dispatch.goals({
-                                        type: 'UpdateDailyRaids',
-                                        value: [
-                                            {
-                                                goalId,
-                                                include: !allGoals.find(g => g.goalId === goalId)?.include,
-                                            },
-                                        ],
-                                    })
-                                }
-                            />
-                        )}
-                    </AccordionBody>
-                </Accordion>
+                    }
+                />
             )}
             {upgradeAbilities.length > 0 && (
-                <Accordion
+                <GoalSection
                     expanded={sectionsExpanded.abilities}
-                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}>
-                    <AccordionHeader>
+                    onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, abilities: expanded }))}
+                    tableView={viewPreferences.goalsTableView}
+                    items={sortedAbilities}
+                    variant="abilities"
+                    estimates={mergedGoalEstimates}
+                    colorMode={viewPreferences.goalColorMode}
+                    bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
+                    characters={characters}
+                    mows={resolvedMows as IMow2[]}
+                    onReorder={handleReorder}
+                    onMenuItemSelect={handleMenuItemSelect}
+                    onToggleInclude={handleToggleIncludeById}
+                    header={
                         <div className="flex flex-wrap items-center gap-2 text-xl">
                             <span>
                                 Character Abilities (<b>{numberToThousandsString(totalGoldAbilities)}</b> Gold)
                             </span>
                         </div>
-                    </AccordionHeader>
-                    <AccordionBody>
-                        {!viewPreferences.goalsTableView && (
-                            <div className="grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3">
-                                {sortedAbilities.map(goal => {
-                                    const finalEstimate = mergedGoalEstimates.find(x => x.goalId === goal.goalId);
-                                    return (
-                                        <GoalCard
-                                            key={goal.goalId}
-                                            goal={goal}
-                                            goalEstimate={finalEstimate}
-                                            characters={characters}
-                                            mows={resolvedMows as IMow2[]}
-                                            bookRarity={xpIncome.defaultCodexToUse ?? Rarity.Legendary}
-                                            menuItemSelect={item => handleMenuItemSelect(goal.goalId, item)}
-                                            onToggleInclude={() =>
-                                                dispatch.goals({
-                                                    type: 'UpdateDailyRaids',
-                                                    value: [{ goalId: goal.goalId, include: !goal.include }],
-                                                })
-                                            }
-                                            bgColor={GoalService.getBackgroundColor(
-                                                viewPreferences.goalColorMode,
-                                                finalEstimate
-                                            )}
-                                        />
-                                    );
-                                })}
-                            </div>
-                        )}
-
-                        {viewPreferences.goalsTableView && (
-                            <GoalsTable
-                                rows={sortedAbilities}
-                                allGoals={allGoals.filter(g => g.type !== PersonalGoalType.UpgradeMaterial)}
-                                estimate={mergedGoalEstimates}
-                                menuItemSelect={handleMenuItemSelect}
-                                goalsColorCoding={viewPreferences.goalColorMode}
-                                onToggleInclude={goalId =>
-                                    dispatch.goals({
-                                        type: 'UpdateDailyRaids',
-                                        value: [
-                                            {
-                                                goalId,
-                                                include: !allGoals.find(g => g.goalId === goalId)?.include,
-                                            },
-                                        ],
-                                    })
-                                }
-                            />
-                        )}
-                    </AccordionBody>
-                </Accordion>
+                    }
+                />
             )}
             {editGoal !== undefined &&
                 (editUnit !== undefined || editGoal.type === PersonalGoalType.UpgradeMaterial) && (

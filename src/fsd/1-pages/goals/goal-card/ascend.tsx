@@ -1,101 +1,97 @@
-/* eslint-disable import-x/no-internal-modules */
-import { sum } from 'lodash';
-import { ArrowRight } from 'lucide-react';
 import React from 'react';
 
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { LazyTooltip, ProgressBar } from '@/fsd/5-shared/ui';
 import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignImage } from '@/fsd/4-entities/campaign';
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterAscendGoal } from '@/fsd/4-entities/goal';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
-import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
-import { IGoalEstimate, UpgradesService } from '@/fsd/3-features/goals';
+import { getDoneByDays, IGoalEstimate, UpgradesService } from '@/fsd/3-features/goals';
 
-import { GoalEstimateRow } from './estimate-row';
+import { ProgressionRow } from './progression-row';
+import { ResourceCostRow } from './resource-cost-row';
+import { buildOrbItems } from './resource-items';
 
 interface Props {
     goal: ICharacterAscendGoal;
     goalEstimate: IGoalEstimate;
-    calendarDate: string | undefined;
     characters: ICharacter2[];
     mows: IMow2[];
 }
 
-/** Renders the body of an Ascend goal card, showing rarity/stars progression and shard costs. */
-export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, calendarDate, characters, mows }) => {
+/** Body of an Ascend goal card: rarity/stars progression, orb costs, and shard progress. */
+export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters, mows }) => {
     const isSameRarity = goal.rarityStart === goal.rarityEnd;
-    const minStars = RarityMapper.toStars[goal.rarityEnd];
-    const isMinStars = minStars === goal.starsEnd;
+    const isMinStars = RarityMapper.toStars[goal.rarityEnd] === goal.starsEnd;
     const shardsData = UpgradesService.getShardsForGoal(characters, mows, goal);
-    const noOrbs: Record<Rarity, number> = {
-        [Rarity.Common]: 0,
-        [Rarity.Uncommon]: 0,
-        [Rarity.Rare]: 0,
-        [Rarity.Epic]: 0,
-        [Rarity.Legendary]: 0,
-        [Rarity.Mythic]: 0,
-    };
+    const doneBy = getDoneByDays(goalEstimate);
+    const days = doneBy > 0 ? Math.ceil(doneBy) : undefined;
+
+    const orbItems = buildOrbItems(goalEstimate, goal.unitAlliance);
+
+    const hasResources =
+        orbItems.length > 0 ||
+        shardsData.totalIncrementalShardsNeeded > 0 ||
+        shardsData.totalIncrementalMythicShardsNeeded > 0;
 
     return (
-        <div className="flex flex-col gap-2">
-            <div className="flex-box gap5">
-                {!isSameRarity && (
-                    <>
-                        <RarityIcon rarity={goal.rarityStart} /> <ArrowRight className="size-4" />
-                        <RarityIcon rarity={goal.rarityEnd} />
-                        {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
-                    </>
-                )}
-                {isSameRarity && (
-                    <>
-                        <StarsIcon stars={goal.starsStart} /> <ArrowRight className="size-4" />
-                        <StarsIcon stars={goal.starsEnd} />
-                    </>
-                )}
-            </div>
-            {sum(Object.entries(goalEstimate.orbsEstimate?.orbs ?? noOrbs).map(([_, orbCount]) => orbCount)) > 0 && (
-                <div>
-                    <OrbsTotal alliance={goal.unitAlliance} orbs={goalEstimate.orbsEstimate?.orbs ?? noOrbs} />
-                </div>
+        <div className="flex flex-col gap-2.5">
+            {isSameRarity ? (
+                <ProgressionRow
+                    from={<StarsIcon stars={goal.starsStart} />}
+                    to={<StarsIcon stars={goal.starsEnd} />}
+                    days={days}
+                    energy={goalEstimate.energyTotal}
+                    ariaLabel="Ascension stars progression"
+                />
+            ) : (
+                <ProgressionRow
+                    from={
+                        <LazyTooltip title={`Current rarity: ${Rarity[goal.rarityStart]}`}>
+                            <span className="inline-flex">
+                                <RarityIcon rarity={goal.rarityStart} />
+                            </span>
+                        </LazyTooltip>
+                    }
+                    to={
+                        <LazyTooltip title={`Target rarity: ${Rarity[goal.rarityEnd]}`}>
+                            <span className="inline-flex">
+                                <RarityIcon rarity={goal.rarityEnd} />
+                            </span>
+                        </LazyTooltip>
+                    }
+                    trailing={!isMinStars && <StarsIcon stars={goal.starsEnd} />}
+                    days={days}
+                    energy={goalEstimate.energyTotal}
+                    ariaLabel={`${Rarity[goal.rarityStart]} to ${Rarity[goal.rarityEnd]}`}
+                />
             )}
 
-            {shardsData.totalIncrementalShardsNeeded > 0 && (
-                <div>
-                    <b>
-                        {shardsData.incrementalShardsAcquired} of {shardsData.totalIncrementalShardsNeeded}
-                    </b>{' '}
-                    Shards
+            {hasResources && (
+                <div className="flex flex-col gap-2.5 border-t border-(--card-border) pt-2.5">
+                    <ResourceCostRow items={orbItems} />
+                    {shardsData.totalIncrementalShardsNeeded > 0 && (
+                        <ProgressBar
+                            value={shardsData.incrementalShardsAcquired}
+                            max={shardsData.totalIncrementalShardsNeeded}
+                            intent="success"
+                            label="Shards"
+                            valueLabel={`${shardsData.incrementalShardsAcquired} / ${shardsData.totalIncrementalShardsNeeded}`}
+                        />
+                    )}
+                    {shardsData.totalIncrementalMythicShardsNeeded > 0 && (
+                        <ProgressBar
+                            value={shardsData.incrementalMythicShardsAcquired}
+                            max={shardsData.totalIncrementalMythicShardsNeeded}
+                            intent="success"
+                            label="Mythic Shards"
+                            valueLabel={`${shardsData.incrementalMythicShardsAcquired} / ${shardsData.totalIncrementalMythicShardsNeeded}`}
+                        />
+                    )}
                 </div>
             )}
-            {shardsData.totalIncrementalMythicShardsNeeded > 0 && (
-                <div>
-                    <b>
-                        {shardsData.incrementalMythicShardsAcquired} of {shardsData.totalIncrementalMythicShardsNeeded}
-                    </b>{' '}
-                    Mythic Shards
-                </div>
-            )}
-
-            <div className="flex-box wrap gap-2">
-                {goalEstimate.included && (
-                    <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft ?? 0}
-                        calendarDate={calendarDate}
-                        energyTotal={goalEstimate.energyTotal}
-                    />
-                )}
-                {!!goalEstimate.oTokensTotal && (
-                    <AccessibleTooltip title={`${goalEstimate.oTokensTotal} Onslaught tokens`}>
-                        <div className="flex-box gap-[3px]">
-                            <CampaignImage campaign={'Onslaught'} size={18} /> {goalEstimate.oTokensTotal}
-                        </div>
-                    </AccessibleTooltip>
-                )}
-            </div>
         </div>
     );
 };

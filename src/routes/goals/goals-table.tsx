@@ -6,103 +6,141 @@ import {
     GridReadyEvent,
     ICellRendererParams,
     RowClassParams,
+    RowDragEndEvent,
     RowStyle,
-    ValueGetterParams,
+    SortChangedEvent,
 } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { ArrowDown, ArrowRight, ArrowUp, BadgeCheck, Link2, Lock, Pause, Pencil, Play, Trash2 } from 'lucide-react';
-import React, { useCallback, useContext, useEffect, useMemo, useRef } from 'react';
+import {
+    ArrowDown,
+    ArrowRight,
+    ArrowUp,
+    BadgeCheck,
+    Calendar,
+    CheckCircle2,
+    GripVertical,
+    Hourglass,
+    Link2,
+    Lock,
+    Pause,
+    Pencil,
+    Play,
+    Trash2,
+} from 'lucide-react';
+import React, { useCallback, useEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { DispatchContext } from 'src/reducers/store.provider';
 import { getEstimatedDate } from 'src/shared-logic/functions';
 
-import { RarityMapper } from '@/fsd/5-shared/model';
-import { Button } from '@/fsd/5-shared/ui';
-import { RarityIcon, StarsIcon, RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
+import { numberToThousandsString } from '@/fsd/5-shared/lib';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { AccessibleTooltip, Button, ProgressBar } from '@/fsd/5-shared/ui';
+import { MiscIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters/components/character-abilities-total';
-import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
-import {
-    ICharacterUpgradeMow,
-    ICharacterUpgradeRankGoal,
-    IGoalEstimate,
-    TypedGoalSelect,
-} from '@/fsd/3-features/goals/goals.models';
+import { getDoneByDays, getMaterialBar, isGoalReached } from '@/fsd/3-features/goals';
+import { IGoalEstimate, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
-import { XpTooltip } from '@/fsd/3-features/goals/xp-tooltip';
 
-import { MowMaterialsTotal } from '@/fsd/1-pages/learn-mow/mow-materials-total';
+import {
+    ProgressionRow,
+    RankEmblem,
+    ResourceCostRow,
+    buildAbilityCostItems,
+    buildMowCostItems,
+    buildOrbItems,
+    doneByTooltip,
+} from '@/fsd/1-pages/goals/goal-card';
 
 import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
+
+const GRID_MODULES = [AllCommunityModule];
+const GRID_DEFAULT_COL_DEF = { suppressMovable: true, sortable: true, wrapText: true };
+const ROW_HEIGHT = 68;
 
 const STATUS_COL_ID = 'status';
 const STATUS_COL_DEFAULT_WIDTH = 62;
 const STATUS_COL_TEXT_THRESHOLD = 110;
 
-// Defined outside the component so ag-grid never receives new references on re-render.
-// New references on defaultColDef or modules cause ag-grid to re-initialize columns,
-// which resets user-resized column widths.
-const GRID_MODULES = [AllCommunityModule];
-const GRID_DEFAULT_COL_DEF = { suppressMovable: true, sortable: true, wrapText: true };
+/** Which column set the table renders. Mirrors the three goal accordion sections. */
+export type GoalsTableVariant = 'rank' | 'ascend' | 'abilities';
 
 interface Props {
-    rows: TypedGoalSelect[]; // The filtered subset (e.g., just Abilities)
-    allGoals: TypedGoalSelect[]; // The full list for global priority checks
+    rows: TypedGoalSelect[]; // The filtered subset for one section (already priority-sorted)
     estimate: IGoalEstimate[];
+    variant: GoalsTableVariant;
     goalsColorCoding: GoalColorMode;
     menuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
     onToggleInclude?: (goalId: string) => void;
+    /** Section-scoped reorder — same contract as the card grid (new order of ids + which id moved). */
+    onReorder: (orderedIds: string[], movedId: string) => void;
 }
+
+const emptyCell = <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">—</div>;
+
+/** Right-aligned `value + icon` numeric cell (em-dash when empty). Shared by the numeric columns. */
+const numericCell = (
+    value: number | undefined,
+    icon?: React.ReactNode,
+    format: (n: number) => string = n => n.toLocaleString()
+) => (
+    <div className="flex h-full w-full items-center justify-end gap-1.5 text-sm leading-normal tabular-nums">
+        {value ? (
+            <>
+                {format(value)}
+                {icon}
+            </>
+        ) : (
+            <span className="text-(--soft-fg) opacity-50">—</span>
+        )}
+    </div>
+);
 
 export const GoalsTable: React.FC<Props> = ({
     rows,
-    allGoals,
     estimate,
+    variant,
     goalsColorCoding,
     menuItemSelect,
     onToggleInclude,
+    onReorder,
 }) => {
-    const dispatch = useContext(DispatchContext);
-
-    // All frequently-changing values live in refs so columnDefs can have
-    // empty deps and never recompute — which would reset user-resized column widths.
-    const statusColWidthReference = useRef(STATUS_COL_DEFAULT_WIDTH);
+    // All frequently-changing values live in refs so columnDefs can have stable deps and never
+    // recompute — which would reset user-resized column widths.
     const gridApiReference = useRef<GridApi | null>(null);
-    // Persists all user-resized column widths so they survive ag-grid's
-    // internal reset that happens when rowData changes.
     const savedWidthsReference = useRef<Record<string, number>>({});
+    const statusColWidthReference = useRef(STATUS_COL_DEFAULT_WIDTH);
+    // True while any column sort is active. Managed row-drag is suppressed by ag-grid under a sort,
+    // so the grip is disabled/dimmed then; the arrows still reorder in priority space (see prioCol).
+    const sortActiveReference = useRef(false);
     const goalsColorCodingReference = useRef(goalsColorCoding);
     goalsColorCodingReference.current = goalsColorCoding;
     const onToggleIncludeReference = useRef(onToggleInclude);
     onToggleIncludeReference.current = onToggleInclude;
-    // Map keyed by goalId for O(1) lookups in cell renderers.
-    // Using .find() here would be O(n) × 9 renderers × N rows = O(N²) per render.
-    const estimateMapReference = useRef<Map<string, IGoalEstimate>>(new Map());
-    estimateMapReference.current = new Map(estimate.map(est => [est.goalId, est]));
-    const orderedAllGoalsReference = useRef<typeof allGoals>([]);
     const menuItemSelectReference = useRef(menuItemSelect);
     menuItemSelectReference.current = menuItemSelect;
-    const dispatchReference = useRef(dispatch);
-    dispatchReference.current = dispatch;
-    // rowsRef lets columnDefs (empty deps) read the initial row types for hide logic.
-    // Goal types never change mid-session so the initial values stay correct.
+    const onReorderReference = useRef(onReorder);
+    onReorderReference.current = onReorder;
     const rowsReference = useRef(rows);
+    rowsReference.current = rows;
+    // Map keyed by goalId for O(1) lookups in cell renderers.
+    const estimateMapReference = useRef<Map<string, IGoalEstimate>>(new Map());
+    estimateMapReference.current = new Map(estimate.map(est => [est.goalId, est]));
+    // Priority-order index per goalId (rows are priority-sorted) — O(1) lookup for the reorder arrows.
+    const priorityIndexReference = useRef<Map<string, number>>(new Map());
+    priorityIndexReference.current = new Map(rows.map((row, index) => [row.goalId, index]));
 
-    orderedAllGoalsReference.current = useMemo(() => allGoals.toSorted((a, b) => a.priority - b.priority), [allGoals]);
-
-    // Refresh all cells when estimate changes so date/status columns stay current
-    // without needing estimate in columnDefs deps.
+    // Redraw rows (not columns) when estimates OR the colour-coding mode change, so cell content,
+    // row classes and row styles (getRowStyle reads the colour-mode ref) stay current without
+    // recomputing columnDefs (which would reset resized widths).
     useEffect(() => {
-        gridApiReference.current?.refreshCells({ force: true });
-    }, [estimate]);
+        gridApiReference.current?.redrawRows();
+    }, [estimate, goalsColorCoding]);
 
     const handleGridReady = useCallback((event_: GridReadyEvent) => {
         gridApiReference.current = event_.api;
@@ -112,7 +150,6 @@ export const GoalsTable: React.FC<Props> = ({
         if (!event_.finished || !event_.column) return;
         const colId = event_.column.getColId();
         const width = event_.column.getActualWidth();
-        // Save every resized column so we can restore after rowData changes.
         savedWidthsReference.current[colId] = width;
         if (colId === STATUS_COL_ID) {
             statusColWidthReference.current = width;
@@ -126,574 +163,815 @@ export const GoalsTable: React.FC<Props> = ({
         gridApiReference.current?.applyColumnState({
             state: Object.entries(saved).map(([colId, width]) => ({ colId, width })),
         });
-        // If the status column was resized, sync the ref and refresh cells
-        // so the text label reflects the restored width.
         if (saved[STATUS_COL_ID] !== undefined) {
             statusColWidthReference.current = saved[STATUS_COL_ID];
             gridApiReference.current?.refreshCells({ force: true, columns: [STATUS_COL_ID] });
         }
     }, []);
 
-    const getGoalInfo = (goal: TypedGoalSelect, goalEstimate: IGoalEstimate) => {
-        switch (goal.type) {
-            case PersonalGoalType.Ascend: {
-                const isSameRarity = goal.rarityStart === goal.rarityEnd;
-                const minStars = RarityMapper.toStars[goal.rarityEnd];
-                const isMinStars = minStars === goal.starsEnd;
-
-                const targetShards = ShardsService.getTargetShards(goal);
-                const targetMythicShards = ShardsService.getTargetMythicShards(goal);
-                return (
-                    <div>
-                        <div className="flex items-center justify-between">
-                            <div className="flex flex-col">
-                                <div className="flex items-center gap-1">
-                                    {!isSameRarity && (
-                                        <>
-                                            <RarityIcon rarity={goal.rarityStart} /> <ArrowRight className="size-4" />
-                                            <RarityIcon rarity={goal.rarityEnd} />
-                                            {!isMinStars && <StarsIcon stars={goal.starsEnd} />}
-                                        </>
-                                    )}
-
-                                    {isSameRarity && (
-                                        <>
-                                            <StarsIcon stars={goal.starsStart} /> <ArrowRight className="size-4" />
-                                            <StarsIcon stars={goal.starsEnd} />
-                                        </>
-                                    )}
-                                </div>
-
-                                <div>
-                                    {targetShards > 0 && (
-                                        <div>
-                                            <b>
-                                                {goal.shards} of {targetShards}
-                                            </b>{' '}
-                                            Shards
-                                        </div>
-                                    )}
-                                    {targetMythicShards > 0 && (
-                                        <div>
-                                            <b>
-                                                {goal.mythicShards} of {targetMythicShards}
-                                            </b>{' '}
-                                            Mythic Shards
-                                        </div>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                        {goalEstimate.orbsEstimate &&
-                            !!Object.values(goalEstimate.orbsEstimate.orbs).some(x => x > 0) && (
-                                <div className="py-2.5">
-                                    <OrbsTotal
-                                        size={25}
-                                        alliance={goalEstimate.orbsEstimate.alliance}
-                                        orbs={goalEstimate.orbsEstimate.orbs}
-                                        displayOrbs={Object.fromEntries(
-                                            Object.entries(goalEstimate.orbsEstimate.orbs).filter(([, v]) => v > 0)
-                                        )}
-                                    />
-                                </div>
-                            )}
-                    </div>
-                );
-            }
-
-            case PersonalGoalType.UpgradeRank: {
-                return (
-                    <div>
-                        <div className="flex items-center justify-between">
-                            <div className="flex items-center gap-[3px]">
-                                <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} />{' '}
-                                <ArrowRight className="size-4" />
-                                <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                                {goal.upgradesRarity.length > 0 && (
-                                    <div className="flex items-center gap-[3px]">
-                                        {goal.upgradesRarity.map(x => (
-                                            <RarityIcon key={x} rarity={x} />
-                                        ))}
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        {goalEstimate.xpBooksApplied !== undefined &&
-                            goalEstimate.xpBooksRequired !== undefined &&
-                            goalEstimate.xpBooksRequired > 0 && (
-                                <>
-                                    <div className="flex flex-row">
-                                        <div className="mr-0.5">
-                                            XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
-                                            {goalEstimate.xpBooksRequired} (
-                                            {Math.round(
-                                                (goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100
-                                            )}
-                                            %)
-                                        </div>
-                                        {goalEstimate.xpEstimate && <XpTooltip {...goalEstimate.xpEstimate} />}
-                                    </div>
-                                </>
-                            )}
-                    </div>
-                );
-            }
-
-            case PersonalGoalType.UpgradeMaterial: {
-                return (
-                    <div className="flex items-center justify-between">
-                        <div className="flex items-center gap-[3px]">{goal.quantity}</div>
-                    </div>
-                );
-            }
-
-            case PersonalGoalType.MowAbilities: {
-                const hasPrimaryGoal = goal.primaryEnd > goal.primaryStart;
-                const hasSecondaryGoal = goal.secondaryEnd > goal.secondaryStart;
-                return (
-                    <div>
-                        <div className="flex items-center justify-between gap-2.5">
-                            <div className="flex flex-col items-start">
-                                {hasPrimaryGoal && (
-                                    <div className="flex items-center gap-[3px]">
-                                        <span>Primary:</span> <b>{goal.primaryStart}</b>{' '}
-                                        <ArrowRight className="size-4" />
-                                        <b>{goal.primaryEnd}</b>
-                                    </div>
-                                )}
-
-                                {hasSecondaryGoal && (
-                                    <div className="flex items-center gap-[3px]">
-                                        <span>Secondary:</span> <b>{goal.secondaryStart}</b>{' '}
-                                        <ArrowRight className="size-4" />
-                                        <b>{goal.secondaryEnd}</b>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        {goal.upgradesRarity.length > 0 && (
-                            <div className="flex items-center gap-[3px]">
-                                <ArrowRight className="size-4" />
-                                {goal.upgradesRarity.map(x => (
-                                    <RarityIcon key={x} rarity={x} />
-                                ))}
-                            </div>
-                        )}
-                        {goalEstimate.mowEstimate && (
-                            <div className="px-0 py-2.5">
-                                <MowMaterialsTotal
-                                    size="small"
-                                    mowAlliance={goal.unitAlliance}
-                                    total={goalEstimate.mowEstimate}
-                                />
-                            </div>
-                        )}
-                    </div>
-                );
-            }
-            case PersonalGoalType.CharacterAbilities: {
-                const hasActiveGoal = goal.activeEnd > goal.activeStart;
-                const hasPassiveGoal = goal.passiveEnd > goal.passiveStart;
-                return (
-                    <div>
-                        <div className="flex items-center gap-2.5">
-                            <div className="flex flex-col items-start">
-                                {hasActiveGoal && (
-                                    <div className="flex items-center gap-[3px]">
-                                        <span>Active:</span> <b>{goal.activeStart}</b> <ArrowRight className="size-4" />
-                                        <b>{goal.activeEnd}</b>
-                                    </div>
-                                )}
-
-                                {hasPassiveGoal && (
-                                    <div className="flex items-center gap-[3px]">
-                                        <span>Passive:</span> <b>{goal.passiveStart}</b>{' '}
-                                        <ArrowRight className="size-4" />
-                                        <b>{goal.passiveEnd}</b>
-                                    </div>
-                                )}
-                            </div>
-                        </div>
-                        {goalEstimate.xpBooksApplied !== undefined &&
-                            goalEstimate.xpBooksRequired !== undefined &&
-                            goalEstimate.xpBooksRequired > 0 && (
-                                <div>
-                                    XP Books Applied {goalEstimate.xpBooksApplied} / Required{' '}
-                                    {goalEstimate.xpBooksRequired} (
-                                    {Math.round((goalEstimate.xpBooksApplied / goalEstimate.xpBooksRequired!) * 100)}
-                                    %)
-                                </div>
-                            )}
-                        {goalEstimate.abilitiesEstimate && (
-                            <div className="flex items-center gap-[3px]">
-                                <CharacterAbilitiesTotal {...goalEstimate.abilitiesEstimate} />
-                            </div>
-                        )}
-                    </div>
-                );
-            }
-            case PersonalGoalType.Unlock: {
-                const targetShards = charsUnlockShards[goal.rarity];
-
-                return (
-                    <div>
-                        <div className="flex items-center justify-between">
-                            <div>
-                                <b>
-                                    {goal.shards} of {targetShards}
-                                </b>{' '}
-                                Shards
-                            </div>
-                        </div>
-                    </div>
-                );
-            }
-        }
-    };
-    // columnDefs has empty deps so it NEVER recomputes — all changing values are
-    // read from refs inside cell renderers, and refreshCells() is called externally
-    // when data changes. This prevents ag-grid from resetting user-resized column widths.
-    // hide values use rowsRef.current (captured at mount); goal types never change mid-session.
-    const columnDefs = useMemo<Array<ColDef<TypedGoalSelect>>>(() => {
-        const initialRows = rowsReference.current;
-        const isCharAbilities = initialRows.every(r => r.type === PersonalGoalType.CharacterAbilities);
-        const hasAscend = initialRows.some(r => r.type === PersonalGoalType.Ascend);
-        const hasUpgrades = initialRows.some(r =>
-            [PersonalGoalType.UpgradeRank, PersonalGoalType.MowAbilities].includes(r.type)
+    /** Moves the row at fromIndex to toIndex within this section and persists the reorder. */
+    const moveRow = useCallback((fromIndex: number, toIndex: number) => {
+        const ordered = [...rowsReference.current];
+        if (toIndex < 0 || toIndex >= ordered.length) return;
+        const [moved] = ordered.splice(fromIndex, 1);
+        ordered.splice(toIndex, 0, moved);
+        onReorderReference.current(
+            ordered.map(row => row.goalId),
+            moved.goalId
         );
-        return [
-            {
-                field: 'priority',
-                width: 110,
-                maxWidth: 110,
-                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const { data } = params;
-                    if (!data) return;
+    }, []);
 
-                    const ordered = orderedAllGoalsReference.current;
-                    const globalIndex = ordered.findIndex(x => x.goalId === data.goalId);
+    const handleRowDragEnd = useCallback((event_: RowDragEndEvent<TypedGoalSelect>) => {
+        // Under an active sort the post-sort node order isn't the user's intended manual order, so
+        // never persist it (ag-grid also suppresses managed drag while sorted — this is a guard).
+        if (sortActiveReference.current) return;
+        const orderedIds: string[] = [];
+        event_.api.forEachNodeAfterFilterAndSort(node => {
+            if (node.data) orderedIds.push(node.data.goalId);
+        });
+        const movedId = event_.node.data?.goalId;
+        if (movedId) onReorderReference.current(orderedIds, movedId);
+    }, []);
 
-                    const moveUp = () => {
-                        if (globalIndex <= 0) return;
-                        const neighbor = ordered[globalIndex - 1];
-                        dispatchReference.current.goals({
-                            type: 'Swap',
-                            goalId: data.goalId,
-                            neighborId: neighbor.goalId,
-                        });
-                    };
+    const handleSortChanged = useCallback((event_: SortChangedEvent) => {
+        sortActiveReference.current = event_.api.getColumnState().some(column => !!column.sort);
+        // Re-render the grip so its enabled/dimmed state matches the new sort state.
+        event_.api.refreshCells({ force: true });
+    }, []);
 
-                    const moveDown = () => {
-                        if (globalIndex >= ordered.length - 1) return;
-                        const neighbor = ordered[globalIndex + 1];
-                        dispatchReference.current.goals({
-                            type: 'Swap',
-                            goalId: data.goalId,
-                            neighborId: neighbor.goalId,
-                        });
-                    };
-                    return (
-                        <div className="flex h-full items-center justify-center gap-1">
-                            <span className="text-sm font-semibold text-(--soft-fg)">#{data.priority}</span>
-                            <Button
-                                size="square-petite"
-                                appearance="plain"
-                                className="!size-7 [--btn-accent:var(--soft-fg)]"
-                                aria-label="Increase Priority"
-                                onPress={moveUp}>
-                                <ArrowUp data-slot="icon" />
-                            </Button>
-                            <Button
-                                size="square-petite"
-                                appearance="plain"
-                                className="!size-7 [--btn-accent:var(--soft-fg)]"
-                                aria-label="Decrease Priority"
-                                onPress={moveDown}>
-                                <ArrowDown data-slot="icon" />
-                            </Button>
+    // columnDefs recomputes only when the variant changes (stable per mounted table). All changing
+    // values are read from refs inside renderers, and redrawRows() is called when data changes.
+    const columnDefs = useMemo<Array<ColDef<TypedGoalSelect>>>(() => {
+        // ── Shared columns ──────────────────────────────────────────────────
+        const dragGripCol: ColDef<TypedGoalSelect> = {
+            headerName: '',
+            width: 36,
+            maxWidth: 36,
+            // Drag only reorders in priority order, which only matches the view when unsorted.
+            rowDrag: () => !sortActiveReference.current,
+            sortable: false,
+            suppressNavigable: true,
+            cellRenderer: () =>
+                sortActiveReference.current ? (
+                    <div
+                        title="Clear the column sort to drag rows. Use the priority arrows to reorder while sorted."
+                        className="flex h-full cursor-not-allowed items-center justify-center text-(--soft-fg) opacity-20">
+                        <GripVertical className="size-4" />
+                    </div>
+                ) : (
+                    <div className="flex h-full cursor-grab items-center justify-center text-(--soft-fg) opacity-40 transition-opacity duration-150 hover:opacity-80 active:cursor-grabbing">
+                        <GripVertical className="size-4" />
+                    </div>
+                ),
+        };
+
+        const prioCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Priority',
+            width: 96,
+            maxWidth: 96,
+            valueGetter: params => params.data?.priority ?? 0,
+            cellClass: 'prio-cell',
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                if (!params.data) return;
+                // Index in PRIORITY order (rows are always priority-sorted), not the display index —
+                // so the arrows reorder the clicked goal correctly even under a column sort. O(1) via
+                // the prebuilt map so redraws don't re-scan the section per row.
+                const index = priorityIndexReference.current.get(params.data.goalId) ?? 0;
+                const total = priorityIndexReference.current.size;
+                return (
+                    <div className="flex h-full w-full">
+                        <div className="flex flex-1 items-center px-3">
+                            <span className="min-w-[20px] text-center text-sm font-medium text-(--soft-fg) tabular-nums">
+                                {params.data.priority}
+                            </span>
                         </div>
-                    );
-                },
-            },
-            {
-                headerName: 'Actions',
-                width: 96,
-                maxWidth: 96,
-                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const { data } = params;
-                    if (data) {
-                        return (
-                            <div className="flex h-full items-center justify-center">
-                                <Button
-                                    size="square-petite"
-                                    appearance="plain"
-                                    className="[--btn-accent:var(--soft-fg)]"
-                                    aria-label="Edit Goal"
-                                    onPress={() => menuItemSelectReference.current(data.goalId, 'edit')}>
-                                    <Pencil data-slot="icon" />
-                                </Button>
-                                <Button
-                                    size="square-petite"
-                                    appearance="plain"
-                                    className="[--btn-accent:var(--soft-fg)] data-hovered:[--btn-accent:var(--danger)]"
-                                    aria-label="Delete Goal"
-                                    onPress={() => menuItemSelectReference.current(data.goalId, 'delete')}>
-                                    <Trash2 data-slot="icon" />
-                                </Button>
-                            </div>
-                        );
-                    }
-                },
-            },
-            {
-                field: 'unitIcon',
-                headerName: 'Unit',
-                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const { data } = params;
-                    if (data) {
-                        if (data.type === PersonalGoalType.UpgradeMaterial) {
-                            const mat = UpgradesService.getUpgradeMaterial(data.upgradeMaterialId);
-                            if (mat !== undefined) {
-                                return (
-                                    <UpgradeImage
-                                        material={mat.snowprintId}
-                                        iconPath={mat.icon ?? ''}
-                                        size={30}
-                                        rarity={RarityMapper.stringToRarityString(mat.rarity)}
-                                        tooltip={mat?.label ?? ''}
-                                    />
-                                );
-                            }
-                            return '(unknown material goal)';
-                        }
-                        return (
-                            <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
-                        );
-                    }
-                },
-                sortable: false,
-                maxWidth: 60,
-            },
-            {
-                colId: STATUS_COL_ID,
-                headerName: 'Status',
-                sortable: false,
-                resizable: true,
-                width: STATUS_COL_DEFAULT_WIDTH,
-                minWidth: STATUS_COL_DEFAULT_WIDTH,
-                cellStyle: { padding: 0, overflow: 'hidden' },
-                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const { data } = params;
-                    if (!data) return;
-
-                    const goalEstimate = estimateMapReference.current.get(data.goalId);
-                    const isReached = !!goalEstimate?.completed && !goalEstimate?.blocked;
-                    const isBlocked = !!goalEstimate?.blocked;
-                    const showText = statusColWidthReference.current >= STATUS_COL_TEXT_THRESHOLD;
-
-                    if (isReached) {
-                        return (
-                            <AccessibleTooltip title="Goal is complete.">
-                                <div
-                                    className="flex h-full w-full items-center justify-center gap-1.5 text-(--success)"
-                                    tabIndex={0}>
-                                    <BadgeCheck className="size-4 shrink-0" />
-                                    {showText && <span className="truncate text-sm font-medium">Reached</span>}
-                                </div>
-                            </AccessibleTooltip>
-                        );
-                    }
-
-                    if (isBlocked) {
-                        return (
-                            <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
-                                <button
-                                    type="button"
-                                    className={[
-                                        'flex h-full w-full cursor-pointer items-center justify-center gap-1.5',
-                                        'border-0 bg-transparent transition-colors',
-                                        'focus-visible:ring-2 focus-visible:ring-(--warning) focus-visible:outline-none focus-visible:ring-inset',
-                                        'text-(--warning) hover:bg-(--warning)/10',
-                                    ].join(' ')}
-                                    aria-label="Locked"
-                                    onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
-                                    <Lock className="size-4 shrink-0" />
-                                    {showText && <span className="truncate text-sm font-medium">Locked</span>}
-                                </button>
-                            </AccessibleTooltip>
-                        );
-                    }
-
-                    if (!onToggleIncludeReference.current) return;
-
-                    const isIncluded = !!data.include;
-
-                    return (
-                        <AccessibleTooltip
-                            title={
-                                isIncluded
-                                    ? 'Included in daily raids. Click to pause.'
-                                    : 'Excluded from daily raids. Click to include.'
-                            }>
+                        <div className="flex w-10 flex-col border-l border-(--border)">
                             <button
                                 type="button"
-                                className={[
-                                    'flex h-full w-full cursor-pointer items-center justify-center gap-1.5',
-                                    'border-0 bg-transparent transition-colors',
-                                    'focus-visible:ring-2 focus-visible:ring-(--primary) focus-visible:outline-none focus-visible:ring-inset',
-                                    isIncluded
-                                        ? 'text-(--primary) hover:bg-(--primary)/10'
-                                        : 'text-(--soft-fg) hover:bg-(--overlay)',
-                                ].join(' ')}
-                                aria-label={isIncluded ? 'In Progress' : 'Paused'}
-                                onClick={() => onToggleIncludeReference.current!(data.goalId)}>
-                                {isIncluded ? (
-                                    <Play className="size-4 shrink-0" />
-                                ) : (
-                                    <Pause className="size-4 shrink-0" />
-                                )}
-                                {showText && (
-                                    <span className="truncate text-sm font-medium">
-                                        {isIncluded ? 'In Progress' : 'Paused'}
-                                    </span>
-                                )}
+                                title="Move Up"
+                                disabled={index <= 0}
+                                onClick={() => moveRow(index, index - 1)}
+                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                <ArrowUp className="size-3" />
+                            </button>
+                            <button
+                                type="button"
+                                title="Move Down"
+                                disabled={index >= total - 1}
+                                onClick={() => moveRow(index, index + 1)}
+                                className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
+                                <ArrowDown className="size-3" />
+                            </button>
+                        </div>
+                    </div>
+                );
+            },
+        };
+
+        const characterCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Character',
+            flex: 2,
+            minWidth: 180,
+            valueGetter: params => {
+                const data = params.data;
+                if (!data) return '';
+                return data.type === PersonalGoalType.UpgradeMaterial ? data.upgradeMaterialId : data.unitName;
+            },
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return;
+                let portrait: React.ReactNode;
+                let name: string;
+                let subline = '';
+                if (data.type === PersonalGoalType.UpgradeMaterial) {
+                    const mat = UpgradesService.getUpgradeMaterial(data.upgradeMaterialId);
+                    portrait = mat ? (
+                        <UpgradeImage
+                            material={mat.snowprintId}
+                            iconPath={mat.icon ?? ''}
+                            size={30}
+                            rarity={RarityMapper.stringToRarityString(mat.rarity)}
+                            tooltip={mat.label ?? ''}
+                        />
+                    ) : undefined;
+                    name = mat?.label ?? '';
+                    subline = 'Material';
+                } else {
+                    portrait = (
+                        <UnitShardIcon icon={data.unitRoundIcon} height={30} width={30} tooltip={data.unitName} />
+                    );
+                    name = data.unitName ?? '';
+                }
+                return (
+                    <div className="flex h-full min-w-0 items-center gap-2.5 leading-normal">
+                        <div className="shrink-0">{portrait}</div>
+                        <div className="flex min-w-0 flex-col leading-tight">
+                            <span className="truncate text-sm font-medium text-(--fg)">{name}</span>
+                            {subline && <span className="truncate text-xs text-(--soft-fg)">{subline}</span>}
+                        </div>
+                    </div>
+                );
+            },
+        };
+
+        const daysCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Total days',
+            width: 108,
+            minWidth: 96,
+            headerClass: 'ag-right-aligned-header',
+            valueGetter: params => estimateMapReference.current.get(params.data?.goalId ?? '')?.daysTotal ?? 0,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) =>
+                numericCell(
+                    estimateMapReference.current.get(params.data?.goalId ?? '')?.daysTotal,
+                    <Hourglass className="size-3.5 shrink-0 text-(--soft-fg)" />
+                ),
+        };
+
+        const doneByCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Done By',
+            flex: 1,
+            minWidth: 110,
+            valueGetter: params => {
+                const est = estimateMapReference.current.get(params.data?.goalId ?? '');
+                if (!est) return;
+                const days = getDoneByDays(est);
+                return days > 0 ? days : undefined;
+            },
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const est = estimateMapReference.current.get(params.data?.goalId ?? '');
+                const daysLeft = est ? getDoneByDays(est) : 0;
+                if (!est || !daysLeft) return emptyCell;
+                const rounded = Math.ceil(daysLeft);
+                return (
+                    <AccessibleTooltip title={doneByTooltip(est)}>
+                        <div className="flex h-full min-w-0 flex-col justify-center gap-0.5 leading-normal">
+                            <span className="flex items-center gap-1 text-sm font-medium text-(--fg)">
+                                <Calendar className="size-[18px] shrink-0 text-(--soft-fg)" />
+                                {getEstimatedDate(rounded)}
+                            </span>
+                            <span className="text-xs text-(--soft-fg)">in {rounded} days</span>
+                        </div>
+                    </AccessibleTooltip>
+                );
+            },
+        };
+
+        const energyCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Energy',
+            width: 92,
+            maxWidth: 92,
+            headerClass: 'ag-right-aligned-header',
+            valueGetter: params => estimateMapReference.current.get(params.data?.goalId ?? '')?.energyTotal ?? 0,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) =>
+                numericCell(
+                    estimateMapReference.current.get(params.data?.goalId ?? '')?.energyTotal,
+                    <MiscIcon icon="energy" width={14} height={14} />
+                ),
+        };
+
+        // Status column — restored from the original table: Reached / Locked / In Progress / Paused,
+        // icon-only until the column is widened past the text threshold. Also the include toggle.
+        const statusCol: ColDef<TypedGoalSelect> = {
+            colId: STATUS_COL_ID,
+            headerName: 'Status',
+            sortable: false,
+            resizable: true,
+            width: STATUS_COL_DEFAULT_WIDTH,
+            minWidth: STATUS_COL_DEFAULT_WIDTH,
+            cellStyle: { padding: 0, overflow: 'hidden' },
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return;
+                const goalEstimate = estimateMapReference.current.get(data.goalId);
+                const isReached = isGoalReached(goalEstimate);
+                const isBlocked = !!goalEstimate?.blocked;
+                const showText = statusColWidthReference.current >= STATUS_COL_TEXT_THRESHOLD;
+
+                if (isReached) {
+                    return (
+                        <AccessibleTooltip title="Goal is complete.">
+                            <div
+                                className="flex h-full w-full items-center justify-center gap-1.5 text-(--success)"
+                                tabIndex={0}>
+                                <BadgeCheck className="size-4 shrink-0" />
+                                {showText && <span className="truncate text-sm font-medium">Reached</span>}
+                            </div>
+                        </AccessibleTooltip>
+                    );
+                }
+
+                if (isBlocked) {
+                    return (
+                        <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
+                            <button
+                                type="button"
+                                className="flex h-full w-full cursor-pointer items-center justify-center gap-1.5 border-0 bg-transparent text-(--warning) transition-colors hover:bg-(--warning)/10 focus-visible:ring-2 focus-visible:ring-(--warning) focus-visible:outline-none focus-visible:ring-inset"
+                                aria-label="Locked"
+                                onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                <Lock className="size-4 shrink-0" />
+                                {showText && <span className="truncate text-sm font-medium">Locked</span>}
                             </button>
                         </AccessibleTooltip>
                     );
-                },
-            },
-            {
-                headerName: 'Details',
-                autoHeight: true,
-                width: 300,
-                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const { data } = params;
-                    const goalEstimate = data ? estimateMapReference.current.get(data.goalId) : undefined;
-                    if (data && goalEstimate) {
-                        return getGoalInfo(data, goalEstimate);
-                    }
-                },
-            },
-            {
-                headerName: 'Estimated Date',
-                valueGetter: (params: ValueGetterParams<TypedGoalSelect>) => {
-                    const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
-                    if (
-                        !goalEstimate ||
-                        (goalEstimate.daysLeft === undefined && goalEstimate.xpDaysLeft === undefined)
-                    ) {
-                        return '';
-                    }
-                    const { daysLeft, xpDaysLeft } = goalEstimate;
-                    const materialDate = daysLeft === undefined ? undefined : getEstimatedDate(daysLeft);
-                    const xpDate = xpDaysLeft === undefined ? undefined : getEstimatedDate(xpDaysLeft);
-                    if (materialDate && xpDate) return `${materialDate} (XP by ${xpDate})`;
-                    if (materialDate) return materialDate;
-                    if (xpDate) return `XP by ${xpDate}`;
-                    return '';
-                },
-                cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                    const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
-                    if (!goalEstimate) return;
-                    const { daysLeft, xpDaysLeft } = goalEstimate;
-                    return (
-                        <div className="flex flex-col gap-0.5 py-1">
-                            {daysLeft !== undefined && (
-                                <AccessibleTooltip
-                                    title={`${daysLeft} days for materials. Estimated date ${getEstimatedDate(daysLeft)}`}>
-                                    <div className="flex items-center gap-[3px] leading-tight">
-                                        <span className="text-sm">{getEstimatedDate(daysLeft)}</span>
-                                    </div>
-                                </AccessibleTooltip>
+                }
+
+                if (!onToggleIncludeReference.current) return;
+
+                const isIncluded = !!data.include;
+                return (
+                    <AccessibleTooltip
+                        title={
+                            isIncluded
+                                ? 'Included in daily raids. Click to pause.'
+                                : 'Excluded from daily raids. Click to include.'
+                        }>
+                        <button
+                            type="button"
+                            className={`flex h-full w-full cursor-pointer items-center justify-center gap-1.5 border-0 bg-transparent transition-colors focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset ${
+                                isIncluded
+                                    ? 'text-(--primary) hover:bg-(--primary)/10 focus-visible:ring-(--primary)'
+                                    : 'text-(--soft-fg) hover:bg-(--overlay) focus-visible:ring-(--primary)'
+                            }`}
+                            aria-label={isIncluded ? 'In Progress' : 'Paused'}
+                            onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                            {isIncluded ? <Play className="size-4 shrink-0" /> : <Pause className="size-4 shrink-0" />}
+                            {showText && (
+                                <span className="truncate text-sm font-medium">
+                                    {isIncluded ? 'In Progress' : 'Paused'}
+                                </span>
                             )}
-                            {xpDaysLeft !== undefined && (
-                                <AccessibleTooltip
-                                    title={`${Math.ceil(xpDaysLeft)} days for XP. Estimated date ${getEstimatedDate(xpDaysLeft)}`}>
-                                    <div className="flex items-center gap-[3px] leading-tight">
-                                        <span className="text-sm">{`XP: ${getEstimatedDate(xpDaysLeft)}`}</span>
-                                    </div>
-                                </AccessibleTooltip>
-                            )}
-                        </div>
-                    );
-                },
-                width: 170,
-                autoHeight: true,
+                        </button>
+                    </AccessibleTooltip>
+                );
             },
-            {
-                colId: 'days-left',
-                headerName: 'Days left',
-                hide: isCharAbilities,
-                valueGetter: params =>
-                    params.data ? estimateMapReference.current.get(params.data.goalId)?.daysLeft : undefined,
-                maxWidth: 110,
+        };
+
+        // Utility buttons — Edit / Delete, restored to their original placement next to priority.
+        const actionsCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Actions',
+            width: 96,
+            maxWidth: 96,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return;
+                return (
+                    <div className="flex h-full items-center justify-center">
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            className="[--btn-accent:var(--soft-fg)]"
+                            aria-label="Edit Goal"
+                            onPress={() => menuItemSelectReference.current(data.goalId, 'edit')}>
+                            <Pencil data-slot="icon" />
+                        </Button>
+                        <Button
+                            size="square-petite"
+                            appearance="plain"
+                            className="[--btn-accent:var(--soft-fg)] data-hovered:[--btn-accent:var(--danger)]"
+                            aria-label="Delete Goal"
+                            onPress={() => menuItemSelectReference.current(data.goalId, 'delete')}>
+                            <Trash2 data-slot="icon" />
+                        </Button>
+                    </div>
+                );
             },
-            {
-                colId: 'days-total',
-                headerName: 'Days total',
-                hide: isCharAbilities,
-                valueGetter: params =>
-                    params.data ? estimateMapReference.current.get(params.data.goalId)?.daysTotal : undefined,
-                maxWidth: 110,
-            },
-            {
-                colId: 'energy',
-                headerName: 'Energy',
-                hide: isCharAbilities,
-                valueGetter: params =>
-                    params.data ? estimateMapReference.current.get(params.data.goalId)?.energyTotal : undefined,
-                maxWidth: 110,
-            },
-            {
-                colId: 'onslaught-tokens',
-                headerName: 'Onslaught tokens',
-                hide: !hasAscend,
-                valueGetter: params =>
-                    params.data ? estimateMapReference.current.get(params.data.goalId)?.oTokensTotal : undefined,
-                maxWidth: 140,
-            },
-            {
-                colId: 'upgrades',
-                headerName: 'Upgrades',
-                hide: !hasUpgrades,
-                width: 140,
-                cellStyle: { padding: 0, overflow: 'hidden' },
-                cellRenderer: (params: ICellRendererParams<ICharacterUpgradeRankGoal | ICharacterUpgradeMow>) => {
-                    const { data } = params;
-                    if (!data) return;
-                    if (data.type !== PersonalGoalType.UpgradeRank && data.type !== PersonalGoalType.MowAbilities)
-                        return;
-                    const goalEstimate = estimateMapReference.current.get(data.goalId);
-                    const isReached = !!goalEstimate?.completed && !goalEstimate?.blocked;
-                    const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
-                    if (isReached) {
-                        return (
-                            <span className="flex h-full w-full cursor-not-allowed items-center justify-center gap-2 text-(--primary) opacity-50">
-                                <Link2 className="size-4 shrink-0" />
-                                Go to Raids
-                            </span>
-                        );
-                    }
+        };
+
+        // Go to Raids — restored from the original table; shown for rank/MoW goals only.
+        const upgradesCol: ColDef<TypedGoalSelect> = {
+            colId: 'upgrades',
+            headerName: 'Upgrades',
+            sortable: false,
+            width: 140,
+            cellStyle: { padding: 0, overflow: 'hidden' },
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return;
+                if (data.type !== PersonalGoalType.UpgradeRank && data.type !== PersonalGoalType.MowAbilities) return;
+                const goalEstimate = estimateMapReference.current.get(data.goalId);
+                const isReached = isGoalReached(goalEstimate);
+                const linkBase = isMobile ? '/mobile/plan/dailyRaids' : '/plan/dailyRaids';
+                if (isReached) {
                     return (
-                        <Link
-                            to={`${linkBase}?charSnowprintId=${encodeURIComponent(data.unitId)}`}
-                            className="flex h-full w-full items-center justify-center gap-2 text-(--primary) no-underline hover:bg-(--primary)/10">
+                        <span className="flex h-full w-full cursor-not-allowed items-center justify-center gap-2 text-(--primary) opacity-50">
                             <Link2 className="size-4 shrink-0" />
                             Go to Raids
-                        </Link>
+                        </span>
                     );
-                },
+                }
+                return (
+                    <Link
+                        to={`${linkBase}?charSnowprintId=${encodeURIComponent(data.unitId)}`}
+                        className="flex h-full w-full items-center justify-center gap-2 text-(--primary) no-underline hover:bg-(--primary)/10">
+                        <Link2 className="size-4 shrink-0" />
+                        Go to Raids
+                    </Link>
+                );
             },
-            {
-                field: 'notes',
+        };
+
+        const notesCol: ColDef<TypedGoalSelect> = {
+            field: 'notes',
+            headerName: 'Notes',
+            flex: 1,
+            minWidth: 120,
+            maxWidth: 220,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const notes = params.data?.notes ?? '';
+                return (
+                    <div
+                        className="flex h-full items-center truncate text-xs leading-normal text-(--soft-fg)"
+                        title={notes}>
+                        {notes}
+                    </div>
+                );
             },
+        };
+
+        const completedMark = (goalId: string | undefined) => {
+            const est = goalId ? estimateMapReference.current.get(goalId) : undefined;
+            return isGoalReached(est) ? (
+                <CheckCircle2 className="size-3.5 shrink-0 text-(--success)" aria-label="Completed" />
+            ) : undefined;
+        };
+
+        // Compact `label start → end` lines — a table-dense alternative to the card's boxed StatBlockPair.
+        const statLines = (blocks: Array<{ label: string; start: number; end: number }>) =>
+            blocks.length === 0 ? undefined : (
+                <div className="flex flex-col gap-0.5 text-xs leading-tight">
+                    {blocks.map(block => (
+                        <div key={block.label} className="flex items-center gap-1 tabular-nums">
+                            <span className="text-(--soft-fg)">{block.label}</span>
+                            <span className="font-bold text-(--fg)">{block.start}</span>
+                            <ArrowRight className="size-3 shrink-0 text-(--soft-fg)" />
+                            <span className="font-bold text-(--primary)">{block.end}</span>
+                        </div>
+                    ))}
+                </div>
+            );
+
+        // ── Variant: rank (UpgradeRank + MowAbilities + UpgradeMaterial) ─────
+        const rankGoalCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Goal',
+            flex: 1.5,
+            minWidth: 150,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return;
+                let content: React.ReactNode;
+                switch (data.type) {
+                    case PersonalGoalType.UpgradeRank: {
+                        content = (
+                            <ProgressionRow
+                                from={
+                                    <RankEmblem
+                                        rank={data.rankStart}
+                                        rankPoint5={data.rankStartPoint5}
+                                        role="Current rank"
+                                    />
+                                }
+                                to={<RankEmblem rank={data.rankEnd} rankPoint5={data.rankPoint5} role="Target rank" />}
+                                trailing={
+                                    data.upgradesRarity.length > 0 && data.upgradesRarity.length < 6 ? (
+                                        <span className="flex items-center gap-0.5 [&>img]:h-[18px] [&>img]:w-auto">
+                                            {data.upgradesRarity.map(rarity => (
+                                                <RarityIcon key={rarity} rarity={rarity} />
+                                            ))}
+                                        </span>
+                                    ) : undefined
+                                }
+                            />
+                        );
+
+                        break;
+                    }
+                    case PersonalGoalType.MowAbilities: {
+                        const blocks = [];
+                        if (data.primaryEnd > data.primaryStart)
+                            blocks.push({ label: 'Primary', start: data.primaryStart, end: data.primaryEnd });
+                        if (data.secondaryEnd > data.secondaryStart)
+                            blocks.push({ label: 'Secondary', start: data.secondaryStart, end: data.secondaryEnd });
+                        const showRarityFilter = data.upgradesRarity.length > 0 && data.upgradesRarity.length < 6;
+                        content = (
+                            <div className="flex items-center gap-1.5">
+                                <div className="min-w-0">{statLines(blocks)}</div>
+                                {showRarityFilter && (
+                                    <span className="flex shrink-0 items-center gap-0.5 [&>img]:h-4 [&>img]:w-auto">
+                                        {data.upgradesRarity.map(rarity => (
+                                            <RarityIcon key={rarity} rarity={rarity} />
+                                        ))}
+                                    </span>
+                                )}
+                            </div>
+                        );
+
+                        break;
+                    }
+                    case PersonalGoalType.UpgradeMaterial: {
+                        content = <span className="text-sm font-medium tabular-nums">{data.quantity}×</span>;
+
+                        break;
+                    }
+                    // No default
+                }
+                return (
+                    <div className="flex h-full min-w-0 items-center gap-1.5 py-2 leading-normal">
+                        <div className="min-w-0 flex-1">{content}</div>
+                        {completedMark(data.goalId)}
+                    </div>
+                );
+            },
+        };
+
+        const rankProgressCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Progress',
+            flex: 1.5,
+            minWidth: 150,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return emptyCell;
+                const est = estimateMapReference.current.get(data.goalId);
+                if (data.type === PersonalGoalType.UpgradeRank) {
+                    const applied = est?.xpBooksApplied;
+                    const required = est?.xpBooksRequired;
+                    if (applied === undefined || required === undefined || required === 0) return emptyCell;
+                    const bookRarity = est?.xpEstimate?.bookRarity;
+                    const bookIcon =
+                        bookRarity === undefined ? undefined : ((Rarity[bookRarity].toLowerCase() + 'Book') as never);
+                    // XP income is the bottleneck when it finishes later than the material farm.
+                    const xpIsDriver = (est?.xpDaysLeft ?? 0) > (est?.daysLeft ?? 0);
+                    return (
+                        <div className="flex h-full w-full flex-col justify-center py-1">
+                            <ProgressBar
+                                value={applied}
+                                max={required}
+                                intent="primary"
+                                ariaLabel="XP Books"
+                                label={
+                                    <span className="inline-flex items-center gap-1">
+                                        {bookIcon && <MiscIcon icon={bookIcon} width={20} height={20} />}
+                                        XP Books
+                                    </span>
+                                }
+                                valueLabel={`${applied} / ${required}`}
+                                subLeft={
+                                    est?.xpDaysLeft === undefined ? undefined : (
+                                        <span
+                                            className={`inline-flex items-center gap-1 ${xpIsDriver ? 'text-(--primary)' : 'text-(--soft-fg)'}`}>
+                                            <Calendar className="size-3.5" aria-hidden />
+                                            <span
+                                                className={`font-bold ${xpIsDriver ? 'text-(--primary)' : 'text-(--fg)'}`}>
+                                                {Math.ceil(est.xpDaysLeft)}
+                                            </span>
+                                            d
+                                        </span>
+                                    )
+                                }
+                                subRight={
+                                    est?.xpEstimate ? (
+                                        <>
+                                            Lv{' '}
+                                            <span className="font-bold text-(--fg)">{est.xpEstimate.currentLevel}</span>{' '}
+                                            →{' '}
+                                            <span className="font-bold text-(--fg)">{est.xpEstimate.targetLevel}</span>
+                                        </>
+                                    ) : undefined
+                                }
+                            />
+                        </div>
+                    );
+                }
+                if (data.type === PersonalGoalType.MowAbilities) {
+                    const targetShards = ShardsService.getTargetShardsForMow(data);
+                    const costItems = buildMowCostItems(est?.mowEstimate, data.unitAlliance, false);
+                    if (targetShards <= 0 && costItems.length === 0) return emptyCell;
+                    return (
+                        <div className="flex h-full w-full flex-col justify-center gap-1 py-2">
+                            {targetShards > 0 && (
+                                <span className="text-xs text-(--soft-fg)">
+                                    Shards{' '}
+                                    <span className="font-bold text-(--fg) tabular-nums">
+                                        {data.shards} / {targetShards}
+                                    </span>
+                                </span>
+                            )}
+                            <ResourceCostRow items={costItems} />
+                        </div>
+                    );
+                }
+                if (data.type === PersonalGoalType.UpgradeMaterial) {
+                    const info = est?.materialQuantityInfo;
+                    if (!info) return emptyCell;
+                    const bar = getMaterialBar(info);
+                    return (
+                        <div className="flex h-full w-full flex-col justify-center py-2">
+                            <ProgressBar
+                                value={bar.value}
+                                max={bar.max}
+                                intent="success"
+                                label={bar.label}
+                                valueLabel={bar.valueLabel}
+                            />
+                        </div>
+                    );
+                }
+                return emptyCell;
+            },
+        };
+
+        const rankGoldCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Gold',
+            width: 96,
+            maxWidth: 96,
+            headerClass: 'ag-right-aligned-header',
+            valueGetter: params => {
+                const est = estimateMapReference.current.get(params.data?.goalId ?? '');
+                return params.data?.type === PersonalGoalType.UpgradeRank
+                    ? (est?.xpEstimate?.gold ?? 0)
+                    : params.data?.type === PersonalGoalType.MowAbilities
+                      ? (est?.mowEstimate?.gold ?? 0)
+                      : 0;
+            },
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const est = estimateMapReference.current.get(params.data?.goalId ?? '');
+                const gold =
+                    params.data?.type === PersonalGoalType.UpgradeRank
+                        ? est?.xpEstimate?.gold
+                        : params.data?.type === PersonalGoalType.MowAbilities
+                          ? est?.mowEstimate?.gold
+                          : undefined;
+                return numericCell(gold, <MiscIcon icon="coin" width={24} height={24} />, numberToThousandsString);
+            },
+        };
+
+        // ── Variant: ascend (Ascend + Unlock) ────────────────────────────────
+        const ascendGoalCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Goal',
+            flex: 1.5,
+            minWidth: 150,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return;
+                let content: React.ReactNode;
+                if (data.type === PersonalGoalType.Ascend) {
+                    const isSameRarity = data.rarityStart === data.rarityEnd;
+                    const isMinStars = RarityMapper.toStars[data.rarityEnd] === data.starsEnd;
+                    content = isSameRarity ? (
+                        <ProgressionRow
+                            from={<StarsIcon stars={data.starsStart} />}
+                            to={<StarsIcon stars={data.starsEnd} />}
+                            ariaLabel="Ascension stars progression"
+                        />
+                    ) : (
+                        <ProgressionRow
+                            from={<RarityIcon rarity={data.rarityStart} />}
+                            to={<RarityIcon rarity={data.rarityEnd} />}
+                            trailing={!isMinStars && <StarsIcon stars={data.starsEnd} />}
+                            ariaLabel="Ascension rarity progression"
+                        />
+                    );
+                } else if (data.type === PersonalGoalType.Unlock) {
+                    content = <span className="text-xs text-(--soft-fg)">Unlock</span>;
+                }
+                return (
+                    <div className="flex h-full min-w-0 items-center gap-1.5 py-2 leading-normal">
+                        <div className="min-w-0 flex-1">{content}</div>
+                        {completedMark(data.goalId)}
+                    </div>
+                );
+            },
+        };
+
+        const ascendProgressCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Progress',
+            flex: 1.5,
+            minWidth: 150,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data) return emptyCell;
+                // Collect every applicable shard bar so a goal needing both regular and mythic shards
+                // shows both (mirrors the Ascend card body, which renders both).
+                const bars: Array<{ key: string; label: string; value: number; max: number }> = [];
+                if (data.type === PersonalGoalType.Ascend) {
+                    const targetShards = ShardsService.getTargetShards(data);
+                    const targetMythicShards = ShardsService.getTargetMythicShards(data);
+                    if (targetShards > 0)
+                        bars.push({ key: 'shards', label: 'Shards', value: data.shards, max: targetShards });
+                    if (targetMythicShards > 0)
+                        bars.push({
+                            key: 'mythic',
+                            label: 'Mythic',
+                            value: data.mythicShards,
+                            max: targetMythicShards,
+                        });
+                } else if (data.type === PersonalGoalType.Unlock) {
+                    bars.push({
+                        key: 'shards',
+                        label: 'Shards',
+                        value: data.shards,
+                        max: charsUnlockShards[data.rarity],
+                    });
+                }
+                if (bars.length === 0) return emptyCell;
+                return (
+                    <div
+                        className={`flex h-full w-full flex-col justify-center ${bars.length > 1 ? 'gap-0.5 py-0.5' : 'py-1'}`}>
+                        {bars.map(bar => (
+                            <ProgressBar
+                                key={bar.key}
+                                value={bar.value}
+                                max={bar.max}
+                                intent="success"
+                                label={bar.label}
+                                valueLabel={`${bar.value} / ${bar.max}`}
+                            />
+                        ))}
+                    </div>
+                );
+            },
+        };
+
+        const orbsCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Orbs',
+            flex: 1.25,
+            minWidth: 120,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data || data.type === PersonalGoalType.UpgradeMaterial) return emptyCell;
+                const est = estimateMapReference.current.get(data.goalId);
+                if (!est?.orbsEstimate) return emptyCell;
+                const items = buildOrbItems(est, data.unitAlliance, false);
+                if (items.length === 0) return emptyCell;
+                return (
+                    <div className="flex h-full w-full flex-col justify-center py-2">
+                        <ResourceCostRow items={items} />
+                    </div>
+                );
+            },
+        };
+
+        const tokensCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Tokens',
+            width: 92,
+            maxWidth: 92,
+            headerClass: 'ag-right-aligned-header',
+            valueGetter: params => estimateMapReference.current.get(params.data?.goalId ?? '')?.oTokensTotal ?? 0,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) =>
+                numericCell(estimateMapReference.current.get(params.data?.goalId ?? '')?.oTokensTotal),
+        };
+
+        // ── Variant: abilities (CharacterAbilities) ──────────────────────────
+        const abilitiesGoalCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Goal',
+            flex: 1.5,
+            minWidth: 160,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const { data } = params;
+                if (!data || data.type !== PersonalGoalType.CharacterAbilities) return;
+                const blocks = [];
+                if (data.activeEnd > data.activeStart)
+                    blocks.push({ label: 'Active', start: data.activeStart, end: data.activeEnd });
+                if (data.passiveEnd > data.passiveStart)
+                    blocks.push({ label: 'Passive', start: data.passiveStart, end: data.passiveEnd });
+                return (
+                    <div className="flex h-full min-w-0 items-center gap-1.5 py-2 leading-normal">
+                        <div className="min-w-0 flex-1">{statLines(blocks)}</div>
+                        {completedMark(data.goalId)}
+                    </div>
+                );
+            },
+        };
+
+        const badgesCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Badges',
+            flex: 1.5,
+            minWidth: 140,
+            sortable: false,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const est = estimateMapReference.current.get(params.data?.goalId ?? '');
+                const items = buildAbilityCostItems(est?.abilitiesEstimate, false);
+                if (items.length === 0) return emptyCell;
+                return (
+                    <div className="flex h-full w-full flex-col justify-center py-2">
+                        <ResourceCostRow items={items} />
+                    </div>
+                );
+            },
+        };
+
+        const abilitiesBooksCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Books',
+            flex: 1,
+            minWidth: 120,
+            valueGetter: params => estimateMapReference.current.get(params.data?.goalId ?? '')?.xpBooksTotal ?? 0,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
+                const est = estimateMapReference.current.get(params.data?.goalId ?? '');
+                if (!est || est.xpBooksTotal === 0) return emptyCell;
+                const xpEst = est.xpEstimateAbilities ?? est.xpEstimate;
+                const bookIcon =
+                    xpEst?.bookRarity === undefined
+                        ? undefined
+                        : ((Rarity[xpEst.bookRarity].toLowerCase() + 'Book') as never);
+                const levelRange = xpEst ? `Lv ${xpEst.currentLevel} → ${xpEst.targetLevel}` : undefined;
+                return (
+                    <div className="flex h-full min-w-0 flex-col justify-center gap-0.5 py-2 leading-normal">
+                        <span className="flex items-center gap-1.5 text-sm font-medium text-(--fg) tabular-nums">
+                            {est.xpBooksTotal.toLocaleString()}
+                            {bookIcon && <MiscIcon icon={bookIcon} width={20} height={20} />}
+                        </span>
+                        {levelRange && <span className="text-xs text-(--soft-fg)">{levelRange}</span>}
+                    </div>
+                );
+            },
+        };
+
+        const abilitiesGoldCol: ColDef<TypedGoalSelect> = {
+            headerName: 'Gold',
+            width: 96,
+            maxWidth: 96,
+            headerClass: 'ag-right-aligned-header',
+            valueGetter: params =>
+                estimateMapReference.current.get(params.data?.goalId ?? '')?.abilitiesEstimate?.gold ?? 0,
+            cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) =>
+                numericCell(
+                    estimateMapReference.current.get(params.data?.goalId ?? '')?.abilitiesEstimate?.gold,
+                    <MiscIcon icon="coin" width={20} height={20} />,
+                    numberToThousandsString
+                ),
+        };
+
+        const variantCols =
+            variant === 'rank'
+                ? [rankGoalCol, rankProgressCol, energyCol, rankGoldCol]
+                : variant === 'ascend'
+                  ? [ascendGoalCol, ascendProgressCol, orbsCol, energyCol, tokensCol]
+                  : [abilitiesGoalCol, badgesCol, abilitiesBooksCol, abilitiesGoldCol];
+
+        return [
+            dragGripCol,
+            prioCol,
+            actionsCol,
+            characterCol,
+            statusCol,
+            ...variantCols,
+            daysCol,
+            doneByCol,
+            ...(variant === 'rank' ? [upgradesCol] : []),
+            notesCol,
         ];
-    }, []); // empty deps — all values read from refs; column widths are never reset
+    }, [variant, moveRow]);
 
     const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>): RowStyle | undefined => {
         const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
 
-        if (goalEstimate?.completed && !goalEstimate?.blocked) {
+        if (isGoalReached(goalEstimate)) {
             return {
                 background: 'color-mix(in srgb, var(--success) 20%, transparent)',
                 borderLeft: '3px solid var(--success)',
@@ -707,27 +985,28 @@ export const GoalsTable: React.FC<Props> = ({
             background: colorBg,
             borderLeft: `3px solid ${borderColor}`,
         };
-    }, []); // all values read from refs — stable reference, no column resets
-
-    const baseRowHeight = rows.some(row => [PersonalGoalType.CharacterAbilities].includes(row.type)) ? 90 : 60;
+    }, []);
 
     return (
         <div
-            className="ag-theme-material density-compact min-h-[150px] w-full"
-            style={{
-                height: baseRowHeight + rows.length * baseRowHeight,
-            }}>
+            className="ag-theme-material density-compact w-full"
+            style={{ height: Math.max(150, 48 + rows.length * ROW_HEIGHT) }}>
             <AgGridReact
                 modules={GRID_MODULES}
                 theme="legacy"
                 defaultColDef={GRID_DEFAULT_COL_DEF}
-                rowHeight={60}
+                rowHeight={ROW_HEIGHT}
                 columnDefs={columnDefs}
                 rowData={rows}
+                getRowId={params => params.data.goalId}
                 getRowStyle={getRowStyle}
+                rowDragManaged={true}
+                animateRows={true}
                 onGridReady={handleGridReady}
                 onColumnResized={handleColumnResized}
                 onRowDataUpdated={handleRowDataUpdated}
+                onRowDragEnd={handleRowDragEnd}
+                onSortChanged={handleSortChanged}
             />
         </div>
     );
