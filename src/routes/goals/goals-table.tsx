@@ -33,9 +33,8 @@ import { Link } from 'react-router-dom';
 
 import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
-import { getEstimatedDate } from 'src/shared-logic/functions';
 
-import { numberToThousandsString } from '@/fsd/5-shared/lib';
+import { getEstimatedDateShort, numberToThousandsString } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Button, ProgressBar } from '@/fsd/5-shared/ui';
 import { MiscIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -347,7 +346,7 @@ export const GoalsTable: React.FC<Props> = ({
                         <div className="flex h-full min-w-0 flex-col justify-center gap-0.5 leading-normal">
                             <span className="flex items-center gap-1 text-sm font-medium text-(--fg)">
                                 <Calendar className="size-[18px] shrink-0 text-(--soft-fg)" />
-                                {getEstimatedDate(rounded)}
+                                {getEstimatedDateShort(rounded)}
                             </span>
                             <span className="text-xs text-(--soft-fg)">in {rounded} days</span>
                         </div>

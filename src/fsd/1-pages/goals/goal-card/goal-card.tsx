@@ -5,7 +5,7 @@ import React, { useMemo } from 'react';
 import { GoToRaidsButton } from 'src/routes/goals/raids-button';
 import type { GoalDragHandle } from 'src/routes/goals/sortable-goal-grid';
 
-import { getEstimatedDate } from '@/fsd/5-shared/lib';
+import { getEstimatedDateShort } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, buttonStyles } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
@@ -71,7 +71,7 @@ export const GoalCard: React.FC<Props> = ({
     };
     // Done-by = the later of material and XP days, matching the table's "Done By" column.
     const doneByDays = passed ? Math.ceil(getDoneByDays(passed)) : 0;
-    const calendarDate = useMemo(() => (passed ? getEstimatedDate(doneByDays) : undefined), [passed, doneByDays]);
+    const calendarDate = useMemo(() => (passed ? getEstimatedDateShort(doneByDays) : undefined), [passed, doneByDays]);
 
     const parts: GoalCardParts = ((): GoalCardParts => {
         switch (goal.type) {
@@ -215,7 +215,11 @@ export const GoalCard: React.FC<Props> = ({
                 <span className="flex-none">{parts.portrait}</span>
                 <div className="flex min-w-0 flex-1 flex-col">
                     <span className="truncate text-[15px] font-bold text-(--fg)">{parts.title}</span>
-                    <GoalCardMetaLine calendarDate={calendarDate} daysLeft={doneByDays} estimate={passed} />
+                    <GoalCardMetaLine
+                        calendarDate={isReached ? undefined : calendarDate}
+                        daysLeft={doneByDays}
+                        estimate={passed}
+                    />
                 </div>
                 <div className="shrink-0">
                     <GoalCardActions menuItemSelect={menuItemSelect} />
