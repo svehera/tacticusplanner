@@ -47,6 +47,8 @@ import {
     ILegendaryEventSettings,
     IGameModeTokensState,
 } from '../models/interfaces';
+import { LegacyArmageddonState, migrateShopEventsState } from '../reducers/migrations';
+import { ShopEventsState } from '../reducers/shop-events.reducer';
 
 export class PersonalDataLocalStorage {
     private readonly storePrefix = 'tp-';
@@ -130,28 +132,10 @@ export class PersonalDataLocalStorage {
                     ...defaultData.gameModeTokens,
                     ...(this.getItem<IGameModeTokensState>('gameModeTokens') ?? defaultData.gameModeTokens),
                 },
-                armageddon: (() => {
-                    const stored = this.getItem<Record<string, unknown>>('armageddon');
-                    const base = {
-                        ...defaultData.armageddon,
-                        ...(stored ?? defaultData.armageddon),
-                    } as typeof defaultData.armageddon & { cart?: unknown };
-                    // Migrate legacy 'cart' field (JSON string from old version) to structuredCart
-                    if ('cart' in base) {
-                        const legacyCart = base.cart;
-                        const isEmpty = !base.structuredCart || Object.keys(base.structuredCart).length === 0;
-                        if (isEmpty && typeof legacyCart === 'string') {
-                            try {
-                                base.structuredCart = JSON.parse(legacyCart);
-                            } catch {
-                                base.structuredCart = {};
-                            }
-                        }
-                        delete (base as unknown as Record<string, unknown>).cart;
-                        this.setItem('armageddon', base);
-                    }
-                    return base;
-                })(),
+                shopEvents: migrateShopEventsState(
+                    { ...defaultData.shopEvents, ...this.getItem<ShopEventsState>('shopEvents') },
+                    this.getItem<LegacyArmageddonState>('armageddon' as keyof IPersonalData2)
+                ),
                 playerMetadata: {
                     ...defaultData.playerMetadata,
                     ...this.getItem<typeof defaultData.playerMetadata>('playerMetadata'),
@@ -295,7 +279,7 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             warOffense2: defaultData.warOffense2,
             rosterSnapshots: defaultData.rosterSnapshots,
             gameModeTokens: defaultData.gameModeTokens,
-            armageddon: defaultData.armageddon,
+            shopEvents: defaultData.shopEvents,
         };
     }
 
@@ -314,26 +298,10 @@ export const convertData = (v1Data: IPersonalData | IPersonalData2): IPersonalDa
             ...defaultData.gameModeTokens,
             ...v1Data.gameModeTokens,
         },
-        armageddon: (() => {
-            const base = {
-                ...defaultData.armageddon,
-                ...v1Data.armageddon,
-            } as typeof defaultData.armageddon & { cart?: unknown };
-            // Migrate legacy 'cart' field (JSON string from old version) to structuredCart
-            if ('cart' in base) {
-                const legacyCart = base.cart;
-                const isEmpty = !base.structuredCart || Object.keys(base.structuredCart).length === 0;
-                if (isEmpty && typeof legacyCart === 'string') {
-                    try {
-                        base.structuredCart = JSON.parse(legacyCart);
-                    } catch {
-                        base.structuredCart = {};
-                    }
-                }
-                delete (base as unknown as Record<string, unknown>).cart;
-            }
-            return base;
-        })(),
+        shopEvents: migrateShopEventsState(
+            v1Data.shopEvents,
+            (v1Data as unknown as { armageddon?: LegacyArmageddonState }).armageddon
+        ),
     };
 };
 

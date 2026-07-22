@@ -1,0 +1,494 @@
+{
+    "eventName": "faction_boost_space_wolves",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_boost_space_wolves_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_space_wolves_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_space_wolves",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_space_wolves_Interstitial_Description",
+                "eventId": "faction_boost_space_wolves_tier_high",
+                "rewardProgressId": "hse_faction_boost_space_wolves_tier_high",
+                "theme": "faction_boost_space_wolves",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 50,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_high_bundle",
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_high_playmore",
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_SpaceWolves",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "upgDmgE031C"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "upgHpE031C"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "I_Crit_L002"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "upgArmE031C"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "upgDmgL031C"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "upgDmgL015C"
+                },
+                {
+                    "requiredProgress": 350,
+                    "chestRewardId": "upgArmL031C"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "upgArmL010C"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 550,
+                    "chestRewardId": "upgHpL031C"
+                },
+                {
+                    "requiredProgress": 625,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 725,
+                    "chestRewardId": "I_Crit_M002"
+                },
+                {
+                    "requiredProgress": 850,
+                    "chestRewardId": "abilityTokenMythic_Imperial:3"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "R_Booster_Crit_WyrdmakersHelm"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "abilityTokenMythic_Imperial",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "descriptions": [
+                "<i>Faction Boost: Space Wolves</i> is here",
+                "Earn points by battling with the Space Wolves and claim exclusive rewards!",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_FactionBoostSpaceWolves\">{[POINTS]} Space Wolves points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostSpaceWolves\">+{[POINTS]} Space Wolves point</style> when the unit who defeats the enemy is a <style=\"FactionIcon_SpaceWolves\">Space Wolf</style>."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_boost_space_wolves_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_space_wolves_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_space_wolves",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_space_wolves_Interstitial_Description",
+                "eventId": "faction_boost_space_wolves_tier_mid",
+                "rewardProgressId": "hse_faction_boost_space_wolves_tier_mid",
+                "theme": "faction_boost_space_wolves",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 30,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_mid_bundle",
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_mid_playmore",
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_SpaceWolves",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "I_Crit_R002"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "upgDmgE031C"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "upgArmE031C"
+                },
+                {
+                    "requiredProgress": 160,
+                    "chestRewardId": "upgHpE031C"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "upgDmgL031C"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "upgDmgL015C"
+                },
+                {
+                    "requiredProgress": 280,
+                    "chestRewardId": "upgArmL031C"
+                },
+                {
+                    "requiredProgress": 320,
+                    "chestRewardId": "upgArmL010C"
+                },
+                {
+                    "requiredProgress": 420,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 460,
+                    "chestRewardId": "upgHpL031C"
+                },
+                {
+                    "requiredProgress": 520,
+                    "chestRewardId": "gold:25000"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "I_Crit_L002"
+                },
+                {
+                    "requiredProgress": 700,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:3"
+                },
+                {
+                    "requiredProgress": 850,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "abilityTokenLegendary_Imperial",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "descriptions": [
+                "<i>Faction Boost: Space Wolves</i> is here",
+                "Earn points by battling with the Space Wolves and claim exclusive rewards!",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_FactionBoostSpaceWolves\">{[POINTS]} Space Wolves points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostSpaceWolves\">+{[POINTS]} Space Wolves point</style> when the unit who defeats the enemy is a <style=\"FactionIcon_SpaceWolves\">Space Wolf</style>."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_boost_space_wolves_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_space_wolves_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_space_wolves",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_space_wolves_Interstitial_Description",
+                "eventId": "faction_boost_space_wolves_tier_low",
+                "rewardProgressId": "hse_faction_boost_space_wolves_tier_low",
+                "theme": "faction_boost_space_wolves",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_low_bundle",
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_low_playmore",
+                    "offer_homescreen_event_faction_boost_space_wolves_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_SpaceWolves",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "I_Crit_C002"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "upgDmgU018C"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "upgDmgR13C"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "upgArmU003C"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "upgDmgU015C"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "upgArmR003C"
+                },
+                {
+                    "requiredProgress": 210,
+                    "chestRewardId": "upgHpR003C"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "upgDmgR031"
+                },
+                {
+                    "requiredProgress": 340,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 370,
+                    "chestRewardId": "upgDmgU015C"
+                },
+                {
+                    "requiredProgress": 415,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 475,
+                    "chestRewardId": "I_Crit_E002"
+                },
+                {
+                    "requiredProgress": 550,
+                    "chestRewardId": "abilityTokenEpic_Imperial:3"
+                },
+                {
+                    "requiredProgress": 700,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "abilityTokenEpic_Imperial",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "descriptions": [
+                "<i>Faction Boost: Space Wolves</i> is here",
+                "Earn points by battling with the Space Wolves and claim exclusive rewards!",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_FactionBoostSpaceWolves\">{[POINTS]} Space Wolves points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostSpaceWolves\">+{[POINTS]} Space Wolves point</style> when the unit who defeats the enemy is a <style=\"FactionIcon_SpaceWolves\">Space Wolf</style>."
+            ]
+        }
+    }
+}

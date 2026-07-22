@@ -448,7 +448,7 @@ export const defaultData: IPersonalData2 = {
     },
     rosterSnapshots: { base: undefined, diffs: [] },
     gameModeTokens: {},
-    armageddon: { powerLevel: 1, week: 1, day: 'MON', structuredCart: {}, purchased: {} },
+    shopEvents: {},
     playerMetadata: { playerName: undefined, powerLevel: undefined },
     onslaughtPreferences: defaultOnslaughtPreferences,
 };

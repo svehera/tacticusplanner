@@ -1,0 +1,494 @@
+{
+    "eventName": "squig_smash",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "squig_smash_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_squig_smash_Interstitial_Header",
+                "visualId": "homescreenevent_squig_smash",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_squig_smash_Interstitial_Description",
+                "eventId": "squig_smash_tier_high",
+                "rewardProgressId": "hse_squig_smash_tier_high",
+                "theme": "squig_smash",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 150,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_squig_smash_tier_high_bundle",
+                    "offer_homescreen_event_squig_smash_tier_high_playmore"
+                ],
+                "modifiers": [
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvSquigSmash",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "unitId": "orksNpc7Squig",
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": [
+                                "PvP",
+                                "TreasureBeach",
+                                "Waves",
+                                "SyncPVP",
+                                "MachinesOfWarEvent",
+                                "GuildWars",
+                                "LinearHeroEvent",
+                                "Survival",
+                                "LegendaryEvent"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 1,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "unitId": "orksNpc7Squig",
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["MachinesOfWarEvent"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 55,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 110,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 165,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 220,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 275,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 350,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 425,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 575,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 650,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 745,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 840,
+                    "chestRewardId": "mythicDust:150"
+                },
+                {
+                    "requiredProgress": 935,
+                    "chestRewardId": "mythicDust:150"
+                },
+                {
+                    "requiredProgress": 1030,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 1125,
+                    "chestRewardId": "mythicDust:250"
+                },
+                {
+                    "requiredProgress": 1240,
+                    "chestRewardId": "mythicDust:350"
+                },
+                {
+                    "requiredProgress": 1355,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 1470,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 1585,
+                    "chestRewardId": "mythicDust:350"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Squig Smash</i> is here",
+                "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
+                "During this event, Arena, Onslaught and Salvage Run battles start with {[nrOfSummons]} enemy Squigs and spawn {[nrOfSummons_2]} additional Squigs whenever a new enemy wave spawns.",
+                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "squig_smash_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_squig_smash_Interstitial_Header",
+                "visualId": "homescreenevent_squig_smash",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_squig_smash_Interstitial_Description",
+                "eventId": "squig_smash_tier_mid",
+                "rewardProgressId": "hse_squig_smash_tier_mid",
+                "theme": "squig_smash",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 75,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_squig_smash_tier_mid_bundle",
+                    "offer_homescreen_event_squig_smash_tier_mid_playmore"
+                ],
+                "modifiers": [
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvSquigSmash",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "unitId": "orksNpc7Squig",
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": [
+                                "PvP",
+                                "TreasureBeach",
+                                "Waves",
+                                "SyncPVP",
+                                "MachinesOfWarEvent",
+                                "GuildWars",
+                                "LinearHeroEvent",
+                                "Survival",
+                                "LegendaryEvent"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 1,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "unitId": "orksNpc7Squig",
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["MachinesOfWarEvent"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 45,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 135,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 225,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 285,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 345,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 405,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 465,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 525,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 610,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 695,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 780,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 865,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 950,
+                    "chestRewardId": "dust:2000"
+                },
+                {
+                    "requiredProgress": 1060,
+                    "chestRewardId": "dust:3000"
+                },
+                {
+                    "requiredProgress": 1170,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 1280,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 1390,
+                    "chestRewardId": "dust:3000"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Squig Smash</i> is here",
+                "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
+                "During this event, Arena, Onslaught and Salvage Run battles start with {[nrOfSummons]} enemy Squigs and spawn {[nrOfSummons_2]} additional Squigs whenever a new enemy wave spawns.",
+                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "squig_smash_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_squig_smash_Interstitial_Header",
+                "visualId": "homescreenevent_squig_smash",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_squig_smash_Interstitial_Description",
+                "eventId": "squig_smash_tier_low",
+                "rewardProgressId": "hse_squig_smash_tier_low",
+                "theme": "squig_smash",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 35,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_squig_smash_tier_low_bundle",
+                    "offer_homescreen_event_squig_smash_tier_low_playmore"
+                ],
+                "modifiers": [
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvSquigSmash",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "unitId": "orksNpc7Squig",
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": [
+                                "PvP",
+                                "TreasureBeach",
+                                "Waves",
+                                "SyncPVP",
+                                "MachinesOfWarEvent",
+                                "GuildWars",
+                                "LinearHeroEvent",
+                                "Survival",
+                                "LegendaryEvent"
+                            ]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 1,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "unitId": "orksNpc7Squig",
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["MachinesOfWarEvent"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 190,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 230,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 270,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 310,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 350,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 405,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 460,
+                    "chestRewardId": "dust:750"
+                },
+                {
+                    "requiredProgress": 515,
+                    "chestRewardId": "dust:750"
+                },
+                {
+                    "requiredProgress": 570,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 625,
+                    "chestRewardId": "dust:1000"
+                },
+                {
+                    "requiredProgress": 705,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 785,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                },
+                {
+                    "requiredProgress": 865,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 945,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Squig Smash</i> is here",
+                "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
+                "During this event, Arena, Onslaught and Salvage Run battles start with {[nrOfSummons]} enemy Squigs and spawn {[nrOfSummons_2]} additional Squigs whenever a new enemy wave spawns.",
+                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        }
+    }
+}

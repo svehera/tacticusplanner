@@ -1,0 +1,533 @@
+{
+    "eventName": "machine_hunt",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "machine_hunt_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_machine_hunt_Interstitial_Header",
+                "visualId": "homescreenevent_machine_hunt",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_machine_hunt_Interstitial_Description",
+                "eventId": "machine_hunt_tier_high",
+                "rewardProgressId": "hse_machine_hunt_tier_high",
+                "theme": "machine_hunt",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_machine_hunt_tier_high_bundle",
+                    "offer_homescreen_event_machine_hunt_tier_high_playmore",
+                    "offer_homescreen_event_machine_hunt_tier_high_booster"
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent", "MachinesOfWarEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 450,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 900,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 1350,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 1800,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 2250,
+                    "chestRewardId": "dust:150"
+                },
+                {
+                    "requiredProgress": 2850,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 3450,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 4050,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 4650,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 5250,
+                    "chestRewardId": "dust:500"
+                },
+                {
+                    "requiredProgress": 6000,
+                    "chestRewardId": "mythicDust:150"
+                },
+                {
+                    "requiredProgress": 6750,
+                    "chestRewardId": "mythicDust:150"
+                },
+                {
+                    "requiredProgress": 7500,
+                    "chestRewardId": "mythicDust:150"
+                },
+                {
+                    "requiredProgress": 8300,
+                    "chestRewardId": "mythicDust:250"
+                },
+                {
+                    "requiredProgress": 9100,
+                    "chestRewardId": "mythicDust:250"
+                },
+                {
+                    "requiredProgress": 10000,
+                    "chestRewardId": "mythicDust:350"
+                },
+                {
+                    "requiredProgress": 10900,
+                    "chestRewardId": "mythicDust:350"
+                },
+                {
+                    "requiredProgress": 11850,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 12950,
+                    "chestRewardId": "mythicDust:600"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "dust:500",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Machine Hunt</i> is here",
+                "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
+                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in any game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "machine_hunt_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_machine_hunt_Interstitial_Header",
+                "visualId": "homescreenevent_machine_hunt",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_machine_hunt_Interstitial_Description",
+                "eventId": "machine_hunt_tier_mid",
+                "rewardProgressId": "hse_machine_hunt_tier_mid",
+                "theme": "machine_hunt",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 6,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_machine_hunt_tier_mid_bundle",
+                    "offer_homescreen_event_machine_hunt_tier_mid_playmore",
+                    "offer_homescreen_event_machine_hunt_tier_mid_booster"
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent", "MachinesOfWarEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 350,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 700,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 1050,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 1400,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 1750,
+                    "chestRewardId": "dust:100"
+                },
+                {
+                    "requiredProgress": 2200,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 2650,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 3100,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 3550,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 4000,
+                    "chestRewardId": "dust:400"
+                },
+                {
+                    "requiredProgress": 4600,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 5200,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 5800,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 6500,
+                    "chestRewardId": "dust:2000"
+                },
+                {
+                    "requiredProgress": 7200,
+                    "chestRewardId": "dust:2000"
+                },
+                {
+                    "requiredProgress": 8000,
+                    "chestRewardId": "dust:3000"
+                },
+                {
+                    "requiredProgress": 8800,
+                    "chestRewardId": "dust:3000"
+                },
+                {
+                    "requiredProgress": 9750,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 10750,
+                    "chestRewardId": "dust:5000"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "dust:500",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Machine Hunt</i> is here",
+                "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
+                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in any game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "machine_hunt_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_machine_hunt_Interstitial_Header",
+                "visualId": "homescreenevent_machine_hunt",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_machine_hunt_Interstitial_Description",
+                "eventId": "machine_hunt_tier_low",
+                "rewardProgressId": "hse_machine_hunt_tier_low",
+                "theme": "machine_hunt",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 2,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_machine_hunt_tier_low_bundle",
+                    "offer_homescreen_event_machine_hunt_tier_low_playmore",
+                    "offer_homescreen_event_machine_hunt_tier_low_booster"
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent", "MachinesOfWarEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Mechanical"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 225,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 450,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 675,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 900,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 1125,
+                    "chestRewardId": "dust:50"
+                },
+                {
+                    "requiredProgress": 1425,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 1725,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 2025,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 2325,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 2625,
+                    "chestRewardId": "dust:200"
+                },
+                {
+                    "requiredProgress": 3025,
+                    "chestRewardId": "dust:750"
+                },
+                {
+                    "requiredProgress": 3425,
+                    "chestRewardId": "dust:750"
+                },
+                {
+                    "requiredProgress": 3825,
+                    "chestRewardId": "dust:750"
+                },
+                {
+                    "requiredProgress": 4275,
+                    "chestRewardId": "dust:1000"
+                },
+                {
+                    "requiredProgress": 4725,
+                    "chestRewardId": "dust:1000"
+                },
+                {
+                    "requiredProgress": 5225,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 5725,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 6325,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 6825,
+                    "chestRewardId": "dust:1500"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "dust:300",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Machine Hunt</i> is here",
+                "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
+                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in any game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        }
+    }
+}

@@ -1,9 +1,11 @@
 /* eslint-disable import-x/no-internal-modules */
 import { Alliance, RarityMapper, RarityString } from '@/fsd/5-shared/model';
+import { resolveSimpleRewardIcon } from '@/fsd/5-shared/ui/icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import type { IProductCalendar, IProductCalendarDay, IProductCalendarOffer } from '@/fsd/4-entities/calendars';
 import { EquipmentService } from '@/fsd/4-entities/equipment';
+import { getShopCurrencyIconKey, getShopCurrencyLabel } from '@/fsd/4-entities/shops';
 
 const MONTH_NAMES: Record<string, string> = {
     january: 'January',
@@ -79,10 +81,11 @@ export function equipmentItemRarity(itemId: string): string | undefined {
     return RARITY_LETTER_MAP[letter];
 }
 
-// Returns the rarity string for upgrade material IDs like "upgArmR026" or "upgHpL106".
+// Returns the rarity string for upgrade material IDs like "upgArmR026", "upgHpL106", or the
+// "crafted" variant "upgHpL213C" (trailing "C").
 // Returns undefined if the ID doesn't match the expected pattern.
 export function upgradeMaterialRarity(itemId: string): string | undefined {
-    const match = itemId.match(/^upg[A-Z][a-z]+([URELMC])\d+$/);
+    const match = itemId.match(/^upg[A-Z][a-z]+([URELMC])\d+C?$/);
     if (!match) return undefined;
     return RARITY_LETTER_MAP[match[1] ?? ''];
 }
@@ -94,7 +97,8 @@ export type CalendarRewardIcon =
     | { kind: 'unknownItem'; rarity: string }
     | { kind: 'unknownUpgradeMaterial'; rarity: string }
     | { kind: 'xpBook'; rarity: string }
-    | { kind: 'text'; text: string };
+    | { kind: 'text'; text: string }
+    | { kind: 'avatarText'; text: string };
 
 export interface CalendarRewardInfo {
     icon: CalendarRewardIcon;
@@ -115,12 +119,10 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
         qty,
     });
 
-    if (type === 'gold') return misc('coin', 'Gold');
-    if (type === 'dust') return misc('salvage', 'Salvage');
-    if (type === 'mythicDust') return misc('mythicSalvage', 'Mythic Salvage');
-    if (type === 'summoningToken') return misc('reqOrder', 'Req Scroll');
-    if (type === 'specialSummoningToken') return misc('blessedReqOrder', 'Blessed Req Scroll');
-    if (type === 'stamina') return misc('stamina', 'Energy');
+    const simple = resolveSimpleRewardIcon(type);
+    if (simple) return misc(simple.iconKey, simple.label);
+
+    if (type.toLowerCase() === 'stamina') return misc('stamina', 'Energy'); // raw game data is inconsistently cased ("Stamina" vs "stamina")
     if (type === 'stamina_treasureBeach') return misc('salvageRunToken', 'Salvage Run Tokens');
     if (type === 'stamina_waves') return misc('onslaughtToken', 'Onslaught Tokens');
     if (type === 'gems') return misc('blackstone', 'Blackstone');
@@ -131,25 +133,11 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
     if (type === 'ShardsXenos') return misc('allianceXenos', 'Xenos Shards');
     if (type.startsWith('Shards')) return misc('shard', 'Shards');
 
-    const draftBadgeMatch = /^draft_abilityTokens(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
-    if (draftBadgeMatch) {
-        const rarity = draftBadgeMatch[1] as RarityString;
-        const iconKey = `draftAbilityBadges${rarity}` as keyof typeof tacticusIcons;
-        return misc(iconKey, `${rarity} Badge (Pick One)`);
-    }
-
     const badgeMatch = /^abilityTokens(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
     if (badgeMatch) {
         const rarity = badgeMatch[1] as RarityString;
         const iconKey = `draftAbilityBadges${rarity}` as keyof typeof tacticusIcons;
         return misc(iconKey, `${rarity} Badge`);
-    }
-
-    const draftOrbMatch = /^draft_ascensionOrbs(Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
-    if (draftOrbMatch) {
-        const rarity = draftOrbMatch[1] as RarityString;
-        const iconKey = `draftOrbs${rarity}` as keyof typeof tacticusIcons;
-        return misc(iconKey, `${rarity} Orb (Pick One)`);
     }
 
     const orbMatch = /^ascensionOrbs(Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
@@ -162,19 +150,22 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
         };
     }
 
-    const xpMatch = /^xp(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
-    if (xpMatch) {
-        return misc(`${xpMatch[1].toLowerCase()}Book` as keyof typeof tacticusIcons, `XP Book (${xpMatch[1]})`);
-    }
-
     const itemsMatch = /^items(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
     if (itemsMatch) {
         return { icon: { kind: 'unknownItem', rarity: itemsMatch[1] }, label: `${itemsMatch[1]} Item`, qty };
     }
 
-    if (type === 'draft_machinesOfWarTokens') return misc('draftMachinesOfWarComponents', 'MoW Component (Pick One)');
     if (type === 'machinesOfWarAmmo') return misc('mow', 'MoW Ammo');
-    if (type === 'seasonalEventCurrencyJune2026') return misc('armageddonCurrency', 'Event Currency');
+    const shopCurrencyIcon = getShopCurrencyIconKey(type);
+    if (shopCurrencyIcon) return misc(shopCurrencyIcon, getShopCurrencyLabel(type));
+
+    // ── avatar (no dedicated art yet): show a friendly text label, not the raw id ───
+    const avatarMatch = !type.startsWith('avatarFrame_') && /^avatar_(.+?)(?:_\d+)?$/.exec(type);
+    if (avatarMatch) {
+        const words = avatarMatch[1].split('_').map(word => word[0].toUpperCase() + word.slice(1));
+        const text = `${words.join(' ')} Avatar`;
+        return { icon: { kind: 'avatarText', text }, label: text, qty };
+    }
 
     const heroOrbMatch = /^heroAscensionOrb(Uncommon|Rare|Epic|Legendary|Mythic)_(Imperial|Chaos|Xenos)$/.exec(type);
     if (heroOrbMatch) {

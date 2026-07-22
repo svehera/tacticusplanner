@@ -100,7 +100,8 @@ export interface ILreBattleProgress {
 /**
  * Represents the progress of a single requirement for a Legendary Release Event (LRE) battle.
  * @property id - The unique identifier for the requirement.
- * @property iconId - The identifier for the icon associated with the requirement.
+ * @property objectiveType - The type of restriction this requirement represents (drives icon rendering), e.g. "Trait"/"NotTrait"/"DamageType".
+ * @property objectiveTarget - The target of the restriction (e.g. a Trait/DamageType/FactionId string), paired with `objectiveType`.
  * @property name - The display name of the requirement.
  * @property points - The number of points awarded upon completion of the requirement.
  * @property status - The current completion status of the requirement, represented by the `RequirementStatus` enum. This is the preferred property for tracking status.
@@ -111,7 +112,8 @@ export interface ILreBattleProgress {
  */
 export interface ILreBattleRequirementsProgress {
     id: string;
-    iconId: string;
+    objectiveType?: string;
+    objectiveTarget?: string;
     name: string;
     points: number;
     status?: RequirementStatus; // New: RequirementStatus enum value (0-4)
@@ -124,7 +126,8 @@ export interface ILreBattleRequirementsProgress {
 /**
  * Represents the requirements for a Legendary Release Event (LRE).
  * @property id - The unique identifier for the requirement.
- * @property iconId - The identifier for the requirement's icon.
+ * @property objectiveType - The type of restriction this requirement represents (drives icon rendering), e.g. "Trait"/"NotTrait"/"DamageType".
+ * @property objectiveTarget - The target of the restriction (e.g. a Trait/DamageType/FactionId string), paired with `objectiveType`.
  * @property name - The display name of the requirement.
  * @property pointsPerBattle - The number of points awarded per battle for this requirement.
  * @property totalPoints - The total points for this requirement across all battles in the track.
@@ -134,7 +137,8 @@ export interface ILreBattleRequirementsProgress {
  */
 export interface ILreRequirements {
     id: string;
-    iconId: string;
+    objectiveType?: string;
+    objectiveTarget?: string;
     name: string;
     pointsPerBattle: number;
     totalPoints: number;

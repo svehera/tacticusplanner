@@ -1,10 +1,8 @@
-/* eslint-disable import-x/no-internal-modules */
-import rogueTraderJson from './data/new-rogue-trader.json';
+import { rogueTraderData } from './data';
 import { parseReward, resolveShopForDay, todayDow } from './shop-resolve';
 import type { ResolvedShopItem, ShopData, ShopDayOfWeek } from './shop.models';
 
-// @ts-expect-error FIXME: Caused by transition to const JSON imports
-const ROGUE_TRADER = rogueTraderJson as ShopData;
+const ROGUE_TRADER = rogueTraderData as unknown as ShopData;
 
 // Only the forge badge and mythic upgrade material variants are relevant.
 // The event-only mythicShards variant in this slot is excluded to prevent

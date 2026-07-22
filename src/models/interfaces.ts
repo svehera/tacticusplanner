@@ -1,12 +1,12 @@
 ﻿import React from 'react';
 
-import { ArmageddonAction, ArmageddonState } from '@/reducers/armageddon.reducer';
 import { GameModeTokensAction } from '@/reducers/game-mode-tokens-reducer';
 import { GuildAction } from '@/reducers/guild-reducer';
 import { GuildWarAction } from '@/reducers/guild-war-reducer';
 import { LeSettingsAction } from '@/reducers/le-settings.reducer';
 import { PlayerMetadataAction, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
 import { RosterSnapshotsAction } from '@/reducers/roster-snapshots-reducer';
+import { ShopEventsAction, ShopEventsState } from '@/reducers/shop-events.reducer';
 import { Teams2Action } from '@/reducers/teams2.reducer';
 import { WarDefense2Action } from '@/reducers/war-defense2.reducer';
 import { XpIncomeAction } from '@/reducers/xp-income-reducer';
@@ -103,7 +103,7 @@ export interface IGlobalState {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
-    armageddon: ArmageddonState;
+    shopEvents: ShopEventsState;
     playerMetadata: PlayerMetadataState;
     onslaughtPreferences: IOnslaughtPreferences;
 
@@ -138,7 +138,7 @@ export interface IDispatchContext {
     xpUse: React.Dispatch<XpUseAction>;
     rosterSnapshots: React.Dispatch<RosterSnapshotsAction>;
     gameModeTokens: React.Dispatch<GameModeTokensAction>;
-    armageddon: React.Dispatch<ArmageddonAction>;
+    shopEvents: React.Dispatch<ShopEventsAction>;
     playerMetadata: React.Dispatch<PlayerMetadataAction>;
     onslaughtPreferences: React.Dispatch<OnslaughtPreferencesAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
@@ -172,7 +172,7 @@ export interface IPersonalData2 {
     xpUse: XpUseState;
     rosterSnapshots: IRosterSnapshotsState;
     gameModeTokens: IGameModeTokensState;
-    armageddon: ArmageddonState;
+    shopEvents: ShopEventsState;
     playerMetadata: PlayerMetadataState;
     onslaughtPreferences?: IOnslaughtPreferences;
 }
@@ -190,7 +190,7 @@ export interface IGameModeTokensState {
     tokens?: TacticusTokensState;
 }
 
-export type { IArmageddonCartEntry, IArmageddonCart } from '@/reducers/armageddon.reducer';
+export type { IShopEventCartEntry, IShopEventCart } from '@/reducers/shop-events.reducer';
 
 export interface IGuild {
     members: IGuildMember[];

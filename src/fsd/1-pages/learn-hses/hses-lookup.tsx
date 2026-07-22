@@ -1,0 +1,137 @@
+/* eslint-disable import-x/no-internal-modules */
+import { Infinity as InfinityIcon, Info } from 'lucide-react';
+import { useContext, useMemo, useState } from 'react';
+
+import { StoreContext } from '@/reducers/store.provider';
+
+import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
+
+import { CharactersService } from '@/fsd/4-entities/character';
+import { homescreenEvents, HseIcon, humanizeEventName, resolveHseTier } from '@/fsd/4-entities/homescreen_events';
+import { MowsService } from '@/fsd/4-entities/mow';
+import { MAX_LEGENDARY_THRESHOLD, PL_MEDIUM } from '@/fsd/4-entities/shops';
+
+import { hseRewardInfo, hseTierKeyForRoster, REWARD_ICON_SIZE } from './hses-lookup.utils';
+
+const sortedEvents = homescreenEvents
+    .map(event => ({ event, displayName: humanizeEventName(event.eventName) }))
+    .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+
+export const HsesLookup = () => {
+    const { characters: unresolvedCharacters, mows, playerMetadata } = useContext(StoreContext);
+
+    const [selectedEventName, setSelectedEventName] = useState(sortedEvents[0]?.event.eventName ?? '');
+
+    const pl = playerMetadata.powerLevel ?? 1;
+
+    const hasBlueStarUnit = useMemo(() => {
+        const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
+        const resolvedMows = MowsService.resolveAllFromStorage(mows);
+        return (
+            characters.some(c => c.stars >= MAX_LEGENDARY_THRESHOLD) ||
+            resolvedMows.some(m => m.stars >= MAX_LEGENDARY_THRESHOLD)
+        );
+    }, [unresolvedCharacters, mows]);
+
+    const tierKeyForRoster = hseTierKeyForRoster(pl, hasBlueStarUnit);
+
+    const selectedEvent = useMemo(
+        () => homescreenEvents.find(event => event.eventName === selectedEventName),
+        [selectedEventName]
+    );
+
+    const resolvedTier = selectedEvent ? resolveHseTier(selectedEvent, tierKeyForRoster) : undefined;
+    const rewards = resolvedTier?.tier.tieredProgressRewards ?? [];
+    const isSingleTierEvent = selectedEvent ? Object.keys(selectedEvent.tiers).length === 1 : false;
+
+    return (
+        <div className="flex flex-col gap-6 p-4">
+            <div className="flex flex-wrap items-end gap-4 rounded-xl border border-(--border) bg-(--overlay) p-4">
+                <div className="flex flex-col gap-1">
+                    <label htmlFor="hse-select" className="text-sm font-medium text-(--fg)">
+                        Home-Screen Event
+                    </label>
+                    <select
+                        id="hse-select"
+                        value={selectedEventName}
+                        onChange={event_ => setSelectedEventName(event_.currentTarget.value)}
+                        className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-1.5 text-sm text-(--fg)">
+                        {sortedEvents.map(({ event, displayName }) => (
+                            <option key={event.eventName} value={event.eventName}>
+                                {displayName}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+
+                {!isSingleTierEvent && (
+                    <div className="flex flex-col gap-0.5">
+                        <span className="text-sm font-medium text-(--fg)">Power Level</span>
+                        <p className="text-sm font-semibold tabular-nums">{pl}</p>
+                        <p className="mt-1 flex items-center gap-1 text-xs text-(--soft-fg)">
+                            <span>
+                                {'Your tier: '}
+                                <span className="font-semibold text-amber-400 capitalize">
+                                    {resolvedTier?.key ?? tierKeyForRoster}
+                                </span>
+                            </span>
+                            <AccessibleTooltip
+                                title={
+                                    <span>
+                                        Low: P.L. &lt;{PL_MEDIUM}
+                                        <br />
+                                        Mid: P.L. ≥{PL_MEDIUM}, no blue-star unit
+                                        <br />
+                                        High: P.L. ≥{PL_MEDIUM} with a blue-star (or higher) unit
+                                    </span>
+                                }>
+                                <Info className="size-3.5 cursor-help" />
+                            </AccessibleTooltip>
+                        </p>
+                    </div>
+                )}
+            </div>
+
+            {selectedEvent && (
+                <div className="flex items-center gap-3">
+                    <HseIcon eventName={selectedEvent.eventName} className="size-8 text-(--soft-fg)" />
+                    <h1 className="text-xl font-bold">{humanizeEventName(selectedEvent.eventName)}</h1>
+                </div>
+            )}
+
+            {rewards.length === 0 ? (
+                <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--soft-fg)">
+                    No reward data available for this event/tier.
+                </div>
+            ) : (
+                <div className="grid grid-cols-5 gap-3">
+                    {rewards.map((reward, index) => {
+                        const { icon, label, qty } = hseRewardInfo(reward.chestRewardId);
+                        const isLast = index === rewards.length - 1;
+                        return (
+                            <div
+                                key={index}
+                                title={label}
+                                className="relative flex flex-col items-center gap-1.5 rounded-xl border border-(--border) bg-(--overlay) p-3">
+                                {isLast && reward.endless && (
+                                    <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-(--primary) text-(--primary-fg)">
+                                        <InfinityIcon className="size-3.5" />
+                                    </span>
+                                )}
+                                <div
+                                    className="flex items-center justify-center"
+                                    style={{ height: REWARD_ICON_SIZE, width: REWARD_ICON_SIZE }}>
+                                    {icon}
+                                </div>
+                                <span className="text-xs font-bold text-(--soft-fg) tabular-nums">×{qty}</span>
+                                <span className="rounded bg-(--soft) px-1.5 py-0.5 text-[11px] font-semibold text-amber-400 tabular-nums">
+                                    {reward.requiredProgress.toLocaleString()} pts
+                                </span>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+        </div>
+    );
+};

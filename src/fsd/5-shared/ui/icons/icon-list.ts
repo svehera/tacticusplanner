@@ -8,6 +8,8 @@ import damageIcon from '@/assets/images/icons/dmg.webp';
 import energyIcon from '@/assets/images/icons/energy.png';
 import healthIcon from '@/assets/images/icons/health.webp';
 import hitsIcon from '@/assets/images/icons/hits.webp';
+import lreDefeatAllIcon from '@/assets/images/icons/lre-defeat-all.png';
+import lreScoreIcon from '@/assets/images/icons/lre-score.png';
 import meleeIcon from '@/assets/images/icons/melee.png';
 import mowIcon from '@/assets/images/icons/mow.png';
 import powerIcon from '@/assets/images/icons/power.png';
@@ -15,6 +17,9 @@ import rangedIcon from '@/assets/images/icons/ranged.png';
 import redStar from '@/assets/images/icons/red star small.png';
 import goldStar from '@/assets/images/icons/star small.png';
 import warTokenIcon from '@/assets/images/icons/warToken.png';
+import statHitIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_hit_01.png';
+import statMeleeAttackIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
+import statRangedAttackIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
 import archeoTechIcon from '@/assets/images/upgrades/archeotech bionics.png';
 
 /* eslint-enable import-x/no-internal-modules */
@@ -87,6 +92,26 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     hits: {
         file: hitsIcon,
         label: 'Hits',
+    },
+    statHits: {
+        file: statHitIcon,
+        label: 'Hits',
+    },
+    statRangedAttack: {
+        file: statRangedAttackIcon,
+        label: 'Ranged',
+    },
+    statMeleeAttack: {
+        file: statMeleeAttackIcon,
+        label: 'Melee',
+    },
+    lreScore: {
+        file: lreScoreIcon,
+        label: 'Score',
+    },
+    lreDefeatAll: {
+        file: lreDefeatAllIcon,
+        label: 'Defeat All',
     },
     survivalCurrencyHalloween2025: snowprintIcons.eventCurrencyHalloween2025Icon,
     checkmark: snowprintIcons.checkmark,
@@ -178,6 +203,16 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     bloodAngelsReq: snowprintIcons.bloodAngelsReq,
     orksReq: snowprintIcons.orksReq,
     armageddonCurrency: snowprintIcons.armageddonCurrency,
+    seasonalEventCurrencyAugust2026: snowprintIcons.seasonalEventCurrencyAugust2026,
+    seasonalEventCurrencyMay2026: snowprintIcons.seasonalEventCurrencyMay2026,
+    crusadeBomb: snowprintIcons.crusadeBomb,
+    crusadeIntel: snowprintIcons.crusadeIntel,
+    crusadeNpc: snowprintIcons.crusadeNpc,
+    crusadeCurrency: snowprintIcons.crusadeCurrency,
+    seasonalEventAugust2026AvatarFrame: snowprintIcons.seasonalEventAugust2026AvatarFrame,
+    guildCredits: snowprintIcons.guildCredits,
+    warCredits: snowprintIcons.warCredits,
+    archeotech: snowprintIcons.archeotech,
     salvage: snowprintIcons.salvage,
     mythicSalvage: snowprintIcons.mythicSalvage,
     draftAbilityBadgesCommon: snowprintIcons.draftAbilityBadgesCommon,

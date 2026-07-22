@@ -65,6 +65,7 @@ import uncommonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame
 import character from '@/assets/images/snowprint_assets/misc/character.png';
 import overkill from '@/assets/images/snowprint_assets/misc/overkill.png';
 import piercingDamage from '@/assets/images/snowprint_assets/misc/piercing_dmg.png';
+import seasonalEventAugust2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_august_2026.png';
 import commonEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_common.png';
 import epicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_epic.png';
 import legendaryEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_legendary.png';
@@ -186,8 +187,14 @@ import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_r
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
 import blackstone from '@/assets/images/snowprint_assets/resources/ui_icon_resource_blackstone.png';
 import coins from '@/assets/images/snowprint_assets/resources/ui_icon_resource_coin_large.png';
+import crusadeBomb from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_bomb_large.png';
+import crusadeCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_currency_large.png';
+import crusadeIntel from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_intel_large.png';
+import crusadeNpc from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_npc_large.png';
 import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png';
+import seasonalEventCurrencyAugust2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_august_2026.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
+import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
 import mowAmmo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_machines_of_war_ammo_large.png';
@@ -287,6 +294,34 @@ interface SnowprintIcon {
 }
 
 export const snowprintIcons: Record<string, SnowprintIcon> = {
+    seasonalEventAugust2026AvatarFrame: {
+        file: seasonalEventAugust2026AvatarFrame,
+        label: 'Seasonal Event (August 2026) Avatar Frame',
+    },
+    crusadeBomb: {
+        file: crusadeBomb,
+        label: 'Crusade Bomb',
+    },
+    crusadeCurrency: {
+        file: crusadeCurrency,
+        label: 'Crusade Currency',
+    },
+    crusadeIntel: {
+        file: crusadeIntel,
+        label: 'Crusade Intel',
+    },
+    crusadeNpc: {
+        file: crusadeNpc,
+        label: 'Crusade NPC',
+    },
+    seasonalEventCurrencyAugust2026: {
+        file: seasonalEventCurrencyAugust2026,
+        label: 'Seasonal Event Currency (August 2026)',
+    },
+    seasonalEventCurrencyMay2026: {
+        file: seasonalEventCurrencyMay2026,
+        label: 'Seasonal Event Currency (May 2026)',
+    },
     upgradeCommon: {
         file: upgradeCommon,
         label: 'Upgrade (Common)',

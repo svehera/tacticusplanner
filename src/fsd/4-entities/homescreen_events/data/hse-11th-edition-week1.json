@@ -1,0 +1,332 @@
+{
+    "eventName": "hse_11th_edition_week1",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week1_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week1_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week1",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week1_Interstitial_Description",
+                "eventId": "hse_11th_edition_week1_tier_high",
+                "rewardProgressId": "hse_11th_edition_week1_tier_high",
+                "theme": "hse_11th_edition_week1",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 100,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week1_tier_high_bundle",
+                    "offer_homescreen_event_11th_edition_week1_tier_high_playmore",
+                    "offer_homescreen_event_11th_edition_week1_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week1_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week1_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 15,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 45,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "xpMythic:2"
+                },
+                {
+                    "requiredProgress": 125,
+                    "chestRewardId": "xpMythic:2"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "xpMythic:2"
+                },
+                {
+                    "requiredProgress": 175,
+                    "chestRewardId": "xpMythic:2"
+                },
+                {
+                    "requiredProgress": 225,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "xpLegendary",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>The Outer Walls</i> is here",
+                "Earn points by battling in Salvage Run and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Salvage Run.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Outer Walls point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Salvage Run."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week1_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week1_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week1",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week1_Interstitial_Description",
+                "eventId": "hse_11th_edition_week1_tier_mid",
+                "rewardProgressId": "hse_11th_edition_week1_tier_mid",
+                "theme": "hse_11th_edition_week1",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 60,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week1_tier_mid_bundle",
+                    "offer_homescreen_event_11th_edition_week1_tier_mid_playmore",
+                    "offer_homescreen_event_11th_edition_week1_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week1_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week1_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 10,
+                    "chestRewardId": "xpLegendary:2"
+                },
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "xpLegendary:2"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "xpLegendary:2"
+                },
+                {
+                    "requiredProgress": 55,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "xpLegendary:3"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "xpLegendary:3"
+                },
+                {
+                    "requiredProgress": 130,
+                    "chestRewardId": "xpLegendary:3"
+                },
+                {
+                    "requiredProgress": 165,
+                    "chestRewardId": "xpLegendary:3"
+                },
+                {
+                    "requiredProgress": 215,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "xpLegendary",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>The Outer Walls</i> is here",
+                "Earn points by battling in Salvage Run and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Salvage Run.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Outer Walls point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Salvage Run."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week1_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week1_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week1",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week1_Interstitial_Description",
+                "eventId": "hse_11th_edition_week1_tier_low",
+                "rewardProgressId": "hse_11th_edition_week1_tier_low",
+                "theme": "hse_11th_edition_week1",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 20,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week1_tier_low_bundle",
+                    "offer_homescreen_event_11th_edition_week1_tier_low_playmore",
+                    "offer_homescreen_event_11th_edition_week1_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week1_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week1_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 15,
+                    "chestRewardId": "xpUncommon"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "xpUncommon"
+                },
+                {
+                    "requiredProgress": 45,
+                    "chestRewardId": "xpUncommon"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "xpRare"
+                },
+                {
+                    "requiredProgress": 130,
+                    "chestRewardId": "xpRare"
+                },
+                {
+                    "requiredProgress": 165,
+                    "chestRewardId": "xpRare:2"
+                },
+                {
+                    "requiredProgress": 205,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 255,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "xpEpic",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>The Outer Walls</i> is here",
+                "Earn points by battling in Salvage Run and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Salvage Run.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Outer Walls point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Salvage Run."
+            ]
+        }
+    }
+}

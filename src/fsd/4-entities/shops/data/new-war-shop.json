@@ -35,7 +35,7 @@
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "freeOffer": "draft_machinesOfWarTokens:10",
-                "reward": "shards_darkaAsmodai:5",
+                "reward": "shards_genesKelermorph:5",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 900
@@ -46,7 +46,7 @@
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "freeOffer": "draft_machinesOfWarTokens:10",
-                "reward": "shards_ultraTitus:10",
+                "reward": "shards_ultraTitus:5",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 900
@@ -57,7 +57,18 @@
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "freeOffer": "draft_machinesOfWarTokens:10",
-                "reward": "shards_astraDreir:10",
+                "reward": "shards_genesKelermorph:5",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_ultraTitus:5",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 900
@@ -85,11 +96,9 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED *",
-                "reward": "shards_darkaAsmodai:10",
+                "reward": "shards_genesKelermorph:10",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 1800
@@ -107,21 +116,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
-                },
-                "cronSchedule": "0 0 0 ? * FRI,SAT *",
-                "reward": "shards_genesKelermorph:10",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 1800
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * FRI *",
                 "reward": "shards_genesKelermorph:10",
                 "cost": {
@@ -131,11 +126,9 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
-                "cronSchedule": "0 0 0 ? * WED,SAT *",
-                "reward": "shards_custoBladeChampion:10",
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SAT *",
+                "reward": "shards_ultraTitus:10",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 1800
@@ -145,21 +138,7 @@
         [
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_custoBladeChampion:10",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 1800
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_astraDreir:10",
                 "cost": {
@@ -171,21 +150,7 @@
         [
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_astraDreir:10",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 1800
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_emperExultant:10",
                 "cost": {
@@ -230,9 +195,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "reward": "shards_bloodMephiston:5",
                 "maxPurchases": "2",
@@ -244,20 +207,19 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_current"
                 },
-                "cronSchedule": "0 0 0 ? * MON,THU *",
-                "reward": "shards_tauAunShi:20",
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_genesPatriarch:5",
+                "maxPurchases": "2",
                 "cost": {
                     "type": "guildWarCurrency",
-                    "amount": 3600
+                    "amount": 900
                 }
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * MON *",
                 "reward": "shards_tauAunShi:20",
                 "cost": {
@@ -268,7 +230,37 @@
             {
                 "weight": 1,
                 "conditions": {},
-                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "cronSchedule": "0 0 0 ? * TUE *",
+                "reward": "shards_worldKharn:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * WED *",
+                "reward": "shards_spaceBlackmane:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU *",
+                "reward": "shards_bloodMephiston:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * FRI *",
                 "reward": "shards_worldKharn:20",
                 "cost": {
                     "type": "guildWarCurrency",
@@ -278,9 +270,9 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_last"
                 },
-                "cronSchedule": "0 0 0 ? * THU,SAT *",
+                "cronSchedule": "0 0 0 ? * SAT *",
                 "reward": "shards_bloodMephiston:20",
                 "cost": {
                     "type": "guildWarCurrency",
@@ -290,22 +282,10 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_current"
                 },
-                "cronSchedule": "0 0 0 ? * WED,SAT *",
-                "reward": "shards_spaceBlackmane:20",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 3600
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
-                },
-                "cronSchedule": "0 0 0 ? * WED *",
-                "reward": "shards_spaceBlackmane:20",
+                "cronSchedule": "0 0 0 ? * SAT *",
+                "reward": "shards_genesPatriarch:20",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 3600
@@ -316,7 +296,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_last"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_genesPatriarch:20",
@@ -328,10 +308,10 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_current"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_bloodMephiston:20",
+                "reward": "shards_bloodDante:20",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 3600
@@ -342,7 +322,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_after_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_last"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_bloodDante:20",
@@ -354,10 +334,10 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_valid_until_bp_season_39_start"
+                    "lockId": "lock_daily_deals_character_rotation_current"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_genesPatriarch:20",
+                "reward": "shards_custoTrajann:20",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 3600

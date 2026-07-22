@@ -1,0 +1,677 @@
+{
+    "eventName": "warp_surge",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "warp_surge_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_warp_surge_Interstitial_Header",
+                "visualId": "homescreenevent_warp_surge",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_warp_surge_Interstitial_Description",
+                "eventId": "warp_surge_tier_high",
+                "rewardProgressId": "hse_warp_surge_tier_high",
+                "theme": "warp_surge",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_warp_surge_tier_high_bundle",
+                    "offer_homescreen_event_warp_surge_tier_high_playmore",
+                    "offer_homescreen_event_warp_surge_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_warp_surge_Description",
+                        "modifiers": {
+                            "Common": 250,
+                            "Uncommon": 300,
+                            "Rare": 350,
+                            "Epic": 400,
+                            "Legendary": 450,
+                            "Mythic": 500
+                        },
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvAllyAndEnemyNpcs:WarpSurge",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:WarpSurge",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 25,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 25,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 750,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 1250,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 1500,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 2500,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 3000,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 3600,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 4300,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 5100,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 6000,
+                    "chestRewardId": "itemsChaosMythic"
+                },
+                {
+                    "requiredProgress": 7000,
+                    "chestRewardId": "R_Block_DaemonfleshPlate"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "itemsChaosLegendary",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Warp Surge</i> is here",
+                "Defeat <style=\"Aliance_Chaos\">Chaos</style> units, gain <style=\"HSE_Points_WarpSurge\">Warp Surge Points</style> and claim exclusive rewards!",
+                "During the event, <style=\"Aliance_Chaos\">Chaos</style> characters earn more XP from Arena battles based on their rarity:\n<nobr><style=Rarity_Common>Common: {[MODIFIER_Common]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Uncommon>Uncommon: {[MODIFIER_Uncommon]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Rare>Rare: {[MODIFIER_Rare]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Epic>Epic: {[MODIFIER_Epic]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Legendary>Legendary: {[MODIFIER_Legendary]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Mythic>Mythic: {[MODIFIER_Mythic]}x XP</style></nobr>",
+                "Arena battles also start with {[nrOfUnits]} random <style=\"Daemon\">Daemons</style> on each side.",
+                "All <style=\"Aliance_Chaos\">Chaos</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_WarpSurge\">{[POINTS]} Warp Surge Points</style> for each enemy <style=\"Aliance_Chaos\">Chaos</style> unit that you defeat, except <style=\"Summon\">Summons</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "warp_surge_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_warp_surge_Interstitial_Header",
+                "visualId": "homescreenevent_warp_surge",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_warp_surge_Interstitial_Description",
+                "eventId": "warp_surge_tier_mid",
+                "rewardProgressId": "hse_warp_surge_tier_mid",
+                "theme": "warp_surge",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_warp_surge_tier_mid_bundle",
+                    "offer_homescreen_event_warp_surge_tier_mid_playmore",
+                    "offer_homescreen_event_warp_surge_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_warp_surge_Description",
+                        "modifiers": {
+                            "Common": 250,
+                            "Uncommon": 300,
+                            "Rare": 350,
+                            "Epic": 400,
+                            "Legendary": 450,
+                            "Mythic": 500
+                        },
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvAllyAndEnemyNpcs:WarpSurge",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:WarpSurge",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 25,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 25,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 800,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 1200,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 1700,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 2250,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 2850,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 3500,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 4200,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 4950,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 5750,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 6650,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 900,
+                    "chestRewardId": "itemsChaosEpic",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Warp Surge</i> is here",
+                "Defeat <style=\"Aliance_Chaos\">Chaos</style> units, gain <style=\"HSE_Points_WarpSurge\">Warp Surge Points</style> and claim exclusive rewards!",
+                "During the event, <style=\"Aliance_Chaos\">Chaos</style> characters earn more XP from Arena battles based on their rarity:\n<nobr><style=Rarity_Common>Common: {[MODIFIER_Common]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Uncommon>Uncommon: {[MODIFIER_Uncommon]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Rare>Rare: {[MODIFIER_Rare]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Epic>Epic: {[MODIFIER_Epic]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Legendary>Legendary: {[MODIFIER_Legendary]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Mythic>Mythic: {[MODIFIER_Mythic]}x XP</style></nobr>",
+                "Arena battles also start with {[nrOfUnits]} random <style=\"Daemon\">Daemons</style> on each side.",
+                "All <style=\"Aliance_Chaos\">Chaos</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_WarpSurge\">{[POINTS]} Warp Surge Points</style> for each enemy <style=\"Aliance_Chaos\">Chaos</style> unit that you defeat, except <style=\"Summon\">Summons</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "warp_surge_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_warp_surge_Interstitial_Header",
+                "visualId": "homescreenevent_warp_surge",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_warp_surge_Interstitial_Description",
+                "eventId": "warp_surge_tier_low",
+                "rewardProgressId": "hse_warp_surge_tier_low",
+                "theme": "warp_surge",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_warp_surge_tier_low_bundle",
+                    "offer_homescreen_event_warp_surge_tier_low_playmore",
+                    "offer_homescreen_event_warp_surge_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_warp_surge_Description",
+                        "modifiers": {
+                            "Common": 250,
+                            "Uncommon": 300,
+                            "Rare": 350,
+                            "Epic": 400,
+                            "Legendary": 450,
+                            "Mythic": 500
+                        },
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvAllyAndEnemyNpcs:WarpSurge",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:WarpSurge",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 25,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_warp_surge_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 25,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Campaign", "MirrorCampaign", "CampaignEvent"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Chaos"],
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "itemsChaosUncommon"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "itemsChaosUncommon"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "itemsChaosUncommon"
+                },
+                {
+                    "requiredProgress": 800,
+                    "chestRewardId": "itemsChaosUncommon"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "itemsChaosUncommon"
+                },
+                {
+                    "requiredProgress": 1200,
+                    "chestRewardId": "itemsChaosUncommon"
+                },
+                {
+                    "requiredProgress": 1650,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 2150,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 2700,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 3300,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 3950,
+                    "chestRewardId": "itemsChaosRare"
+                },
+                {
+                    "requiredProgress": 4650,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 5400,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 6200,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 800,
+                    "chestRewardId": "itemsChaosRare",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Warp Surge</i> is here",
+                "Defeat <style=\"Aliance_Chaos\">Chaos</style> units, gain <style=\"HSE_Points_WarpSurge\">Warp Surge Points</style> and claim exclusive rewards!",
+                "During the event, <style=\"Aliance_Chaos\">Chaos</style> characters earn more XP from Arena battles based on their rarity:\n<nobr><style=Rarity_Common>Common: {[MODIFIER_Common]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Uncommon>Uncommon: {[MODIFIER_Uncommon]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Rare>Rare: {[MODIFIER_Rare]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Epic>Epic: {[MODIFIER_Epic]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Legendary>Legendary: {[MODIFIER_Legendary]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Mythic>Mythic: {[MODIFIER_Mythic]}x XP</style></nobr>",
+                "Arena battles also start with {[nrOfUnits]} random <style=\"Daemon\">Daemons</style> on each side.",
+                "All <style=\"Aliance_Chaos\">Chaos</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_WarpSurge\">{[POINTS]} Warp Surge Points</style> for each enemy <style=\"Aliance_Chaos\">Chaos</style> unit that you defeat, except <style=\"Summon\">Summons</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        }
+    }
+}

@@ -4,9 +4,7 @@ import React from 'react';
 
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 
-import { LreRequirementImage } from '@/fsd/4-entities/lre';
-
-import { ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
+import { ILegendaryEventTrackRequirement, RestrictionIcon } from '@/fsd/3-features/lre';
 
 interface Props {
     checked: boolean;
@@ -42,7 +40,10 @@ export const TrackRequirementCheck: React.FC<Props> = ({ restriction, checked, p
                     badgeContent={checked ? <Check fontSize="small" /> : undefined}>
                     <span style={{ width: 40 }}>{restriction.points}</span>
                 </Badge>
-                <LreRequirementImage iconId={restriction.iconId ?? ''} />
+                <RestrictionIcon
+                    objectiveType={restriction.objectiveType}
+                    objectiveTarget={restriction.objectiveTarget}
+                />
                 <span>{progress}</span>
                 <span style={{ fontSize: 10, maxHeight: 10 }}>{restriction.name}</span>
             </div>

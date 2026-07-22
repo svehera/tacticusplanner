@@ -1,0 +1,332 @@
+{
+    "eventName": "hse_11th_edition_week2",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week2_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week2",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Description",
+                "eventId": "hse_11th_edition_week2_tier_high",
+                "rewardProgressId": "hse_11th_edition_week2_tier_high",
+                "theme": "hse_11th_edition_week2",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 100,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week2_tier_high_bundle",
+                    "offer_homescreen_event_11th_edition_week2_tier_high_playmore",
+                    "offer_homescreen_event_11th_edition_week2_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "gold:75000"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 280,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "gold:125000"
+                },
+                {
+                    "requiredProgress": 460,
+                    "chestRewardId": "gold:150000"
+                },
+                {
+                    "requiredProgress": 580,
+                    "chestRewardId": "gold:200000"
+                },
+                {
+                    "requiredProgress": 720,
+                    "chestRewardId": "gold:300000"
+                },
+                {
+                    "requiredProgress": 880,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:100000",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>The Inner Hab District</i> is here",
+                "Earn points by battling in Onslaught and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Onslaught.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Inner Hab District points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Onslaught."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week2_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week2",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Description",
+                "eventId": "hse_11th_edition_week2_tier_mid",
+                "rewardProgressId": "hse_11th_edition_week2_tier_mid",
+                "theme": "hse_11th_edition_week2",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 60,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week2_tier_mid_bundle",
+                    "offer_homescreen_event_11th_edition_week2_tier_mid_playmore",
+                    "offer_homescreen_event_11th_edition_week2_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "gold:20000"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:30000"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 330,
+                    "chestRewardId": "gold:60000"
+                },
+                {
+                    "requiredProgress": 430,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 550,
+                    "chestRewardId": "gold:200000"
+                },
+                {
+                    "requiredProgress": 690,
+                    "chestRewardId": "gold:300000"
+                },
+                {
+                    "requiredProgress": 850,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:60000",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>The Inner Hab District</i> is here",
+                "Earn points by battling in Onslaught and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Onslaught.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Inner Hab District points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Onslaught."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week2_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week2",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Description",
+                "eventId": "hse_11th_edition_week2_tier_low",
+                "rewardProgressId": "hse_11th_edition_week2_tier_low",
+                "theme": "hse_11th_edition_week2",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 20,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week2_tier_low_bundle",
+                    "offer_homescreen_event_11th_edition_week2_tier_low_playmore",
+                    "offer_homescreen_event_11th_edition_week2_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 35,
+                    "chestRewardId": "gold:1000"
+                },
+                {
+                    "requiredProgress": 70,
+                    "chestRewardId": "gold:2000"
+                },
+                {
+                    "requiredProgress": 105,
+                    "chestRewardId": "gold:3500"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 540,
+                    "chestRewardId": "gold:20000"
+                },
+                {
+                    "requiredProgress": 790,
+                    "chestRewardId": "gold:35000"
+                },
+                {
+                    "requiredProgress": 1140,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "gold:10000",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>The Inner Hab District</i> is here",
+                "Earn points by battling in Onslaught and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Onslaught.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Inner Hab District points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Onslaught."
+            ]
+        }
+    }
+}

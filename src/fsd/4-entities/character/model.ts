@@ -116,6 +116,33 @@ export interface UnitDataRaw {
     lre?: ILreCharacterStaticData;
 }
 
+interface ICharacterAttackProfile {
+    hitCount: number;
+    pierce: string;
+    range?: number;
+}
+
+/** Raw shape of `new-character-data2.json`: per-character combat/ability profile, distinct from `UnitDataRaw`. */
+export interface ICharacterCombatProfile {
+    id: string;
+    name: string;
+    movement: number;
+    activeAbilityId: string;
+    passiveAbilityIds: string;
+    traits: string[];
+    itemSlots: string[];
+    relicSlot: number;
+    initialStats: {
+        damage: number;
+        armor: number;
+        health: number;
+        initialProgressionIndex: number;
+    };
+    statIncreases: number[][];
+    meleeAttack: ICharacterAttackProfile;
+    rangedAttack?: ICharacterAttackProfile;
+}
+
 export interface ICharacterData {
     unitType: UnitType.character;
     id: string;

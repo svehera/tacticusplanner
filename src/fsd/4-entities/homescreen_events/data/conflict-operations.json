@@ -1,0 +1,69 @@
+{
+    "eventName": "conflict_operations",
+    "tiers": {
+        "default": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "conflict_operations",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_conflict_operations_Interstitial_Header",
+                "visualId": "homescreenevent_conflict_operations",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_conflict_operations_Interstitial_Description",
+                "eventId": "conflict_operations",
+                "rewardProgressId": "hse_conflict_operations",
+                "theme": "conflict_operations",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 0,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "trackers": [
+                    {
+                        "type": "dispatchExpedition",
+                        "scope": "global",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_dispatchExpedition_conflict_operations_Description",
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 20
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 1250000,
+                    "chestRewardId": "crusadeNpc:100"
+                },
+                {
+                    "requiredProgress": 2750000,
+                    "chestRewardId": "crusadeNpc:100"
+                },
+                {
+                    "requiredProgress": 4500000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 6500000,
+                    "chestRewardId": "crusadeNpc:100"
+                },
+                {
+                    "requiredProgress": 500000,
+                    "chestRewardId": "crusadeNpc:25",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "descriptions": [
+                "<i>Conflict Operations</i> is here",
+                "Global event: all players contribute to it together!",
+                "<style=\"HSE_Points_conflict_operations\">+{[POINTS]} Conflict Operations points</style> for each dispatched Operation"
+            ]
+        }
+    }
+}

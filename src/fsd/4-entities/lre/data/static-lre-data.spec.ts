@@ -8,7 +8,7 @@ import { getLre } from '@/fsd/3-features/lre/get-lre';
 import { LegendaryEventBase } from '@/fsd/3-features/lre/model/base.le';
 import { LETrack } from '@/fsd/3-features/lre/model/base.le.track';
 
-import { allLegendaryEvents } from './index';
+import { allLegendaryEvents, newFormatLegendaryEventData } from './index';
 
 describe('Legendary Events Data Integrity', () => {
     for (const event of allLegendaryEvents) {
@@ -41,6 +41,16 @@ describe('Legendary Events Data Integrity', () => {
                         expect((requirement.objectiveTarget ?? '').length).toBeGreaterThan(0);
                     }
                 }
+            }
+        });
+    }
+    for (const [id, trackData] of Object.entries(newFormatLegendaryEventData)) {
+        it(`Generic event ${id} builds one restriction per bonusObjective, and none are 'Acing'`, () => {
+            const event = getLre(Number(id), [] as ICharacter2[]) as LegendaryEventBase;
+            for (const section of ['alpha', 'beta', 'gamma'] as const) {
+                const track = event[section] as LETrack;
+                expect(track.unitsRestrictions.length).toBe(trackData[section].bonusObjectives.length);
+                expect(track.unitsRestrictions.some(r => r.objectiveType === 'Acing')).toBe(false);
             }
         });
     }

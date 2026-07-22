@@ -1,45 +1,73 @@
-import { createSafeGetter, mutableCopy } from '@/fsd/5-shared/lib';
-import { Alliance, DamageType } from '@/fsd/5-shared/model';
+import { mutableCopy } from '@/fsd/5-shared/lib';
+import { Alliance, DamageType, FactionId } from '@/fsd/5-shared/model';
 
 import { npcData } from './data';
-import { INpcData, INpcRawStats, INpcStats } from './model';
+import { INpcData, INpcStats } from './model';
 
-const safeGet = createSafeGetter<typeof npcData>();
+interface INpcRawLoose {
+    id: string;
+    Name: string;
+    Faction?: string;
+    Alliance?: string;
+    'Melee Damage': string;
+    'Melee Hits': number;
+    'Ranged Damage'?: string;
+    'Ranged Hits'?: number;
+    Distance?: number;
+    Movement?: number;
+    Traits: string[];
+    Icon: string;
+    'Active Abilities'?: string[];
+    'Passive Abilities'?: string[];
+    'Active Ability Damage'?: string[];
+    'Passive Ability Damage'?: string[];
+    Stats: Array<{
+        AbilityLevel: number;
+        Damage?: number;
+        Armor?: number;
+        Health?: number;
+        ProgressionIndex: number;
+        Rank?: number;
+        Stars: number;
+    }>;
+}
 
 export class NpcService {
     static readonly npcDataFull: INpcData[] = this.convertNpcData();
 
     private static convertNpcData(): INpcData[] {
-        return npcData.map(npc => {
+        // `npcData`'s per-entry type is a huge discriminated union (~490 distinct literal shapes,
+        // since it's a const JSON import). Relating that union against many individual property
+        // accesses (or a generic safe-getter call per property) is expensive enough to crash tsc's
+        // type checker, so cast once per entry to a loose/optional shape up front instead - some NPC
+        // variants (e.g. loot objects) omit fields like Faction/Alliance/Movement/Damage entirely.
+        return (npcData as unknown as INpcRawLoose[]).map(npc => {
             return {
                 snowprintId: npc.id,
                 name: npc.Name,
-                faction: npc.Faction || undefined, // source data has empty string for some NPCs (e.g. loot objects)
-                alliance: npc.Alliance ? (npc.Alliance as Alliance) : undefined,
+                faction: (npc.Faction as FactionId | undefined) || undefined,
+                alliance: (npc.Alliance as Alliance | undefined) || undefined,
                 meleeDamage: npc['Melee Damage'],
                 meleeHits: npc['Melee Hits'],
-                rangeDamage: safeGet(npc, 'Ranged Damage'),
-                rangeHits: safeGet(npc, 'Ranged Hits'),
-                rangeDistance: safeGet(npc, 'Distance'),
-                movement: npc.Movement,
+                rangeDamage: npc['Ranged Damage'],
+                rangeHits: npc['Ranged Hits'],
+                rangeDistance: npc.Distance,
+                movement: npc.Movement ?? 0,
                 traits: mutableCopy(npc.Traits),
                 icon: npc.Icon,
-                activeAbilities: mutableCopy(safeGet(npc, 'Active Abilities') ?? []),
-                passiveAbilities: mutableCopy(safeGet(npc, 'Passive Abilities') ?? []),
-                activeAbilityDamage: mutableCopy(safeGet(npc, 'Active Ability Damage') ?? []),
-                passiveAbilityDamage: mutableCopy(safeGet(npc, 'Passive Ability Damage') ?? []),
-                stats: npc.Stats.map(
-                    (stat: INpcRawStats) =>
-                        ({
-                            abilityLevel: stat.AbilityLevel,
-                            damage: stat.Damage,
-                            armor: stat.Armor,
-                            health: stat.Health,
-                            progressionIndex: stat.ProgressionIndex,
-                            rank: stat.Rank + 1,
-                            rarityStars: stat.Stars,
-                        }) as INpcStats
-                ),
+                activeAbilities: mutableCopy(npc['Active Abilities'] ?? []),
+                passiveAbilities: mutableCopy(npc['Passive Abilities'] ?? []),
+                activeAbilityDamage: mutableCopy(npc['Active Ability Damage'] ?? []),
+                passiveAbilityDamage: mutableCopy(npc['Passive Ability Damage'] ?? []),
+                stats: npc.Stats.map(stat => ({
+                    abilityLevel: stat.AbilityLevel,
+                    damage: stat.Damage ?? 0,
+                    armor: stat.Armor ?? 0,
+                    health: stat.Health ?? 0,
+                    progressionIndex: stat.ProgressionIndex,
+                    rank: (stat.Rank ?? -1) + 1,
+                    rarityStars: stat.Stars,
+                })) as INpcStats[],
             };
         });
     }

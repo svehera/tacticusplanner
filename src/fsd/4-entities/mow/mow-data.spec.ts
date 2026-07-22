@@ -1,13 +1,9 @@
-/* eslint-disable import-x/no-internal-modules */
 import { describe, expect, it } from 'vitest';
 
-import mowData2Json from './data/new-mow-data.json';
-import mowsData2Json from './data/new-mows-data2.json';
+import { mows2Data, mowsData2 } from './data';
 
-const idsInMowData = new Set(
-    (mowData2Json as unknown as { mows: Array<{ snowprintId: string }> }).mows.map(m => m.snowprintId)
-);
-const idsInMowsData2 = new Set((mowsData2Json as unknown as Array<{ id: string }>).map(m => m.id));
+const idsInMowData = new Set(mows2Data.mows.map(m => m.snowprintId));
+const idsInMowsData2 = new Set(mowsData2.map(m => m.id));
 
 describe('MoW data file consistency', () => {
     it('new-mow-data.json contains no IDs missing from new-mows-data2.json', () => {

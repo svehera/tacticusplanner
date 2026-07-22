@@ -1,0 +1,76 @@
+{
+    "eventName": "global_hse_11th_edition_week3_blood_angels",
+    "tiers": {
+        "default": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "global_hse_11th_edition_week3_blood_angels",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_11th_edition_blood_angels_Interstitial_Header",
+                "visualId": "homescreenevent_global_hse_11th_edition_blood_angels",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_11th_edition_blood_angels_Interstitial_Description",
+                "eventId": "global_hse_11th_edition_week3_blood_angels",
+                "rewardProgressId": "global_hse_11th_edition_week3_blood_angels",
+                "theme": "global_hse_11th_edition_blood_angels",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 0,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "global",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_global_week3_blood_angels_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 7500000,
+                    "chestRewardId": "ShardsBloodAngels:25"
+                },
+                {
+                    "requiredProgress": 15000000,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 22500000,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 30000000,
+                    "chestRewardId": "eventSummoningToken_BloodAngels"
+                },
+                {
+                    "requiredProgress": 3000000,
+                    "chestRewardId": "ShardsBloodAngels:10",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Operation Imperator</i> is here",
+                "Global event: all players contribute to it together!",
+                "<style=\"HSE_Points_11thEdition_global_BloodAngels\">+{[POINTS]} Operation Imperator points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) defeated by a <style=\"Faction_BloodAngels\">Blood Angel</style> in Arena."
+            ]
+        }
+    }
+}

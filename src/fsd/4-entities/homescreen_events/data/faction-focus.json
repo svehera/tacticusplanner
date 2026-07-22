@@ -1,0 +1,497 @@
+{
+    "eventName": "faction_focus",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_focus_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_focus_Interstitial_Header",
+                "visualId": "homescreenevent_faction_focus",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_focus_Interstitial_Description",
+                "eventId": "faction_focus_tier_high",
+                "rewardProgressId": "hse_faction_focus_tier_high",
+                "theme": "faction_focus",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 50,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_focus_tier_high_bundle",
+                    "offer_homescreen_event_faction_focus_tier_high_playmore",
+                    "offer_homescreen_event_faction_focus_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves", "SyncPVP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "deployedUnitsOfFactionMajority",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_deployedUnitsOfFactionMajority_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "SyncPVP"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "deployedUnitsOfFactionMajority",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_deployedUnitsOfFactionMajority_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach", "Waves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "fullLineUpOfFaction",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_fullLineUpOfFaction_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "SyncPVP"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "fullLineUpOfFaction",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_fullLineUpOfFaction_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach", "Waves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 35,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 70,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 105,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 140,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 235,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 270,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 305,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 405,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 465,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 525,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 625,
+                    "chestRewardId": "gold:250000"
+                },
+                {
+                    "requiredProgress": 685,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 835,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "gold:100000",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Faction Focus</i> is here",
+                "Earn points by battling with your chosen faction and claim exclusive rewards!",
+                "Characters gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Tournament Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_FactionFocus\">{[POINTS]} Faction Focus points</style> for each deployed character from the faction with the most characters in your lineup.",
+                "You gain <style=\"HSE_Points_FactionFocus\">{[POINTS]} Faction Focus points</style> if your entire lineup belongs to one faction.\n\nSee <link=\"tooltip:HomeScreenEvents/Tooltip_unit_xp_faction_focus\"><style=\"KEY\">additional details</style></link>."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_focus_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_focus_Interstitial_Header",
+                "visualId": "homescreenevent_faction_focus",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_focus_Interstitial_Description",
+                "eventId": "faction_focus_tier_mid",
+                "rewardProgressId": "hse_faction_focus_tier_mid",
+                "theme": "faction_focus",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 30,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_focus_tier_mid_bundle",
+                    "offer_homescreen_event_faction_focus_tier_mid_playmore",
+                    "offer_homescreen_event_faction_focus_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves", "SyncPVP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "deployedUnitsOfFactionMajority",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_deployedUnitsOfFactionMajority_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "SyncPVP"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "deployedUnitsOfFactionMajority",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_deployedUnitsOfFactionMajority_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach", "Waves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "fullLineUpOfFaction",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_fullLineUpOfFaction_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "SyncPVP"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "fullLineUpOfFaction",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_fullLineUpOfFaction_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach", "Waves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 25,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "gold:15000"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "gold:20000"
+                },
+                {
+                    "requiredProgress": 140,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 165,
+                    "chestRewardId": "gold:25000"
+                },
+                {
+                    "requiredProgress": 190,
+                    "chestRewardId": "gold:30000"
+                },
+                {
+                    "requiredProgress": 215,
+                    "chestRewardId": "gold:35000"
+                },
+                {
+                    "requiredProgress": 295,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 335,
+                    "chestRewardId": "gold:80000"
+                },
+                {
+                    "requiredProgress": 375,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 445,
+                    "chestRewardId": "gold:250000"
+                },
+                {
+                    "requiredProgress": 485,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 610,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "gold:60000",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Faction Focus</i> is here",
+                "Earn points by battling with your chosen faction and claim exclusive rewards!",
+                "Characters gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Tournament Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_FactionFocus\">{[POINTS]} Faction Focus points</style> for each deployed character from the faction with the most characters in your lineup.",
+                "You gain <style=\"HSE_Points_FactionFocus\">{[POINTS]} Faction Focus points</style> if your entire lineup belongs to one faction.\n\nSee <link=\"tooltip:HomeScreenEvents/Tooltip_unit_xp_faction_focus\"><style=\"KEY\">additional details</style></link>."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_focus_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_focus_Interstitial_Header",
+                "visualId": "homescreenevent_faction_focus",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_focus_Interstitial_Description",
+                "eventId": "faction_focus_tier_low",
+                "rewardProgressId": "hse_faction_focus_tier_low",
+                "theme": "faction_focus",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_focus_tier_low_bundle",
+                    "offer_homescreen_event_faction_focus_tier_low_playmore",
+                    "offer_homescreen_event_faction_focus_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves", "SyncPVP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "deployedUnitsOfFactionMajority",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_deployedUnitsOfFactionMajority_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "SyncPVP"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "deployedUnitsOfFactionMajority",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_deployedUnitsOfFactionMajority_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach", "Waves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "fullLineUpOfFaction",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_fullLineUpOfFaction_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "SyncPVP"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "fullLineUpOfFaction",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_fullLineUpOfFaction_faction_focus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["TreasureBeach", "Waves"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "gold:1000"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "gold:1500"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "gold:2000"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "gold:2500"
+                },
+                {
+                    "requiredProgress": 110,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 130,
+                    "chestRewardId": "gold:3000"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:4000"
+                },
+                {
+                    "requiredProgress": 170,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 230,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 280,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 320,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 370,
+                    "chestRewardId": "gold:15000"
+                },
+                {
+                    "requiredProgress": 450,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "gold:10000",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Faction Focus</i> is here",
+                "Earn points by battling with your chosen faction and claim exclusive rewards!",
+                "Characters gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Tournament Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_FactionFocus\">{[POINTS]} Faction Focus points</style> for each deployed character from the faction with the most characters in your lineup.",
+                "You gain <style=\"HSE_Points_FactionFocus\">{[POINTS]} Faction Focus points</style> if your entire lineup belongs to one faction.\n\nSee <link=\"tooltip:HomeScreenEvents/Tooltip_unit_xp_faction_focus\"><style=\"KEY\">additional details</style></link>."
+            ]
+        }
+    }
+}

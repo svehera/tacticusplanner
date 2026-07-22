@@ -1,0 +1,515 @@
+{
+    "eventName": "rarity_training_rush",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "rarity_training_rush_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Header",
+                "visualId": "homescreenevent_training_rush",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Description",
+                "eventId": "rarity_training_rush_tier_high",
+                "rewardProgressId": "hse_rarity_training_rush_august_2026_tier_high",
+                "theme": "training_rush",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 3,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_rarity_training_rush_tier_high_bundle",
+                    "offer_homescreen_event_rarity_training_rush_tier_high_playmore",
+                    "offer_homescreen_event_rarity_training_rush_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_by_rarity_Description",
+                        "modifiers": {
+                            "Common": 250,
+                            "Uncommon": 300,
+                            "Rare": 350,
+                            "Epic": 400,
+                            "Legendary": 450,
+                            "Mythic": 500
+                        },
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_training_rush_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_training_rush_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 1500,
+                    "chestRewardId": "xpLegendary"
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chestRewardId": "gold:15000"
+                },
+                {
+                    "requiredProgress": 2500,
+                    "chestRewardId": "xpLegendary"
+                },
+                {
+                    "requiredProgress": 3000,
+                    "chestRewardId": "gold:20000"
+                },
+                {
+                    "requiredProgress": 5000,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 7000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 9000,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 11000,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 13500,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 17000,
+                    "chestRewardId": "gold:75000"
+                },
+                {
+                    "requiredProgress": 21500,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 26500,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 33000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 1500,
+                    "chestRewardId": "xpLegendary",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "Earn 3x <style=\"STAT\">XP</style> during <i>Training Rush</i>",
+                "Defeat units, gain <style=\"HSE_Points_TrainingRush\">Training Points</style> and claim exclusive rewards!",
+                "During the event, characters earn more XP from every battle based on their rarity, ignoring battle rarity caps:\n\n<nobr><style=Rarity_Common>Common: {[MODIFIER_Common]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Uncommon>Uncommon: {[MODIFIER_Uncommon]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Rare>Rare: {[MODIFIER_Rare]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Epic>Epic: {[MODIFIER_Epic]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Legendary>Legendary: {[MODIFIER_Legendary]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Mythic>Mythic: {[MODIFIER_Mythic]}x XP</style></nobr>",
+                "You gain <style=\"HSE_Points_TrainingRush\">{[POINTS]} Training Points</style> for each enemy unit that you defeat, except <style=\"Summon\">Summons</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "rarity_training_rush_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Header",
+                "visualId": "homescreenevent_training_rush",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Description",
+                "eventId": "rarity_training_rush_tier_mid",
+                "rewardProgressId": "hse_rarity_training_rush_august_2026_tier_mid",
+                "theme": "training_rush",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 2,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_rarity_training_rush_tier_mid_bundle",
+                    "offer_homescreen_event_rarity_training_rush_tier_mid_playmore",
+                    "offer_homescreen_event_rarity_training_rush_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_by_rarity_Description",
+                        "modifiers": {
+                            "Common": 250,
+                            "Uncommon": 300,
+                            "Rare": 350,
+                            "Epic": 400,
+                            "Legendary": 450,
+                            "Mythic": 500
+                        },
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_training_rush_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_training_rush_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 1500,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chestRewardId": "gold:7500"
+                },
+                {
+                    "requiredProgress": 2500,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 3000,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 5000,
+                    "chestRewardId": "xpLegendary"
+                },
+                {
+                    "requiredProgress": 7000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 9000,
+                    "chestRewardId": "xpLegendary"
+                },
+                {
+                    "requiredProgress": 11000,
+                    "chestRewardId": "gold:15000"
+                },
+                {
+                    "requiredProgress": 12500,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 15500,
+                    "chestRewardId": "gold:35000"
+                },
+                {
+                    "requiredProgress": 19000,
+                    "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 24000,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 30500,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 1500,
+                    "chestRewardId": "xpLegendary",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "Earn 3x <style=\"STAT\">XP</style> during <i>Training Rush</i>",
+                "Defeat units, gain <style=\"HSE_Points_TrainingRush\">Training Points</style> and claim exclusive rewards!",
+                "During the event, characters earn more XP from every battle based on their rarity, ignoring battle rarity caps:\n\n<nobr><style=Rarity_Common>Common: {[MODIFIER_Common]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Uncommon>Uncommon: {[MODIFIER_Uncommon]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Rare>Rare: {[MODIFIER_Rare]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Epic>Epic: {[MODIFIER_Epic]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Legendary>Legendary: {[MODIFIER_Legendary]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Mythic>Mythic: {[MODIFIER_Mythic]}x XP</style></nobr>",
+                "You gain <style=\"HSE_Points_TrainingRush\">{[POINTS]} Training Points</style> for each enemy unit that you defeat, except <style=\"Summon\">Summons</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "rarity_training_rush_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Header",
+                "visualId": "homescreenevent_training_rush",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Description",
+                "eventId": "rarity_training_rush_tier_low",
+                "rewardProgressId": "hse_rarity_training_rush_august_2026_tier_low",
+                "theme": "training_rush",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 1,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_rarity_training_rush_tier_low_bundle",
+                    "offer_homescreen_event_rarity_training_rush_tier_low_playmore",
+                    "offer_homescreen_event_rarity_training_rush_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_by_rarity_Description",
+                        "modifiers": {
+                            "Common": 250,
+                            "Uncommon": 300,
+                            "Rare": 350,
+                            "Epic": 400,
+                            "Legendary": 450,
+                            "Mythic": 500
+                        },
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_training_rush_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 5,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_training_rush_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 3,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    },
+                    {
+                        "type": "raidBattles",
+                        "scope": "personal",
+                        "points": 5,
+                        "pointsBasedOnEnemiesInBattle": true,
+                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "xpUncommon:2"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "gold:1000"
+                },
+                {
+                    "requiredProgress": 1500,
+                    "chestRewardId": "xpRare"
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chestRewardId": "gold:1500"
+                },
+                {
+                    "requiredProgress": 2500,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 4000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 5500,
+                    "chestRewardId": "xpRare"
+                },
+                {
+                    "requiredProgress": 6500,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 8500,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 10500,
+                    "chestRewardId": "gold:7500"
+                },
+                {
+                    "requiredProgress": 13000,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 16500,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 20000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "xpEpic",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "Earn 3x <style=\"STAT\">XP</style> during <i>Training Rush</i>",
+                "Defeat units, gain <style=\"HSE_Points_TrainingRush\">Training Points</style> and claim exclusive rewards!",
+                "During the event, characters earn more XP from every battle based on their rarity, ignoring battle rarity caps:\n\n<nobr><style=Rarity_Common>Common: {[MODIFIER_Common]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Uncommon>Uncommon: {[MODIFIER_Uncommon]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Rare>Rare: {[MODIFIER_Rare]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Epic>Epic: {[MODIFIER_Epic]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Legendary>Legendary: {[MODIFIER_Legendary]}x XP</style></nobr> <nobr><voffset=0.3em>.</voffset> <style=Rarity_Mythic>Mythic: {[MODIFIER_Mythic]}x XP</style></nobr>",
+                "You gain <style=\"HSE_Points_TrainingRush\">{[POINTS]} Training Points</style> for each enemy unit that you defeat, except <style=\"Summon\">Summons</style>.",
+                "Raiding a battle counts as having defeated all enemies."
+            ]
+        }
+    }
+}

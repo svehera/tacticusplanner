@@ -1,5 +1,26 @@
 import { allLegendaryEvents } from './data';
 
+export interface IPointsMilestone {
+    milestone: number;
+    cumulativePoints: number;
+    engramPayout: number;
+}
+
+export interface IChestMilestone {
+    chestLevel: number;
+    engramCost: number;
+}
+
+export interface ILEProgression {
+    unlock: number;
+    fourStars: number;
+    fiveStars: number;
+    blueStar: number;
+    // Absent on the oldest events, datamined before Mythic rarity existed.
+    mythic?: number;
+    twoBlueStars?: number;
+}
+
 // TODO: We cannot replace this yet because it is extended by ILegendaryEvent
 //      Extending an interface requires a static type, not a derived one.
 export interface ILegendaryEventStatic {
@@ -28,9 +49,7 @@ export interface ILegendaryEventStatic {
     progression: ILEProgression;
 }
 
-// TODO: Work towards deriving this type from allLegendaryEvents data instead
-//      of manually keeping it in sync.
-// a.k.a. "Have the data tell us its own type instead of us telling the data what type it is."
+// Confirms every entry in allLegendaryEvents structurally satisfies ILegendaryEventStatic.
 allLegendaryEvents satisfies readonly ILegendaryEventStatic[];
 
 // TODO: We cannot replace this yet because it is extended by ILegendaryEventTrack
@@ -41,13 +60,7 @@ export interface ILegendaryEventTrackStatic {
     battlesPoints: readonly number[];
     enemies: {
         label: string;
-        link: string;
     };
 }
-
-type ActualLegendaryEvents = (typeof allLegendaryEvents)[number];
-export type ILEProgression = ActualLegendaryEvents['progression'];
-export type IPointsMilestone = ActualLegendaryEvents['pointsMilestones'][number];
-export type IChestMilestone = ActualLegendaryEvents['chestsMilestones'][number];
 
 export type LreTrackId = 'alpha' | 'beta' | 'gamma';

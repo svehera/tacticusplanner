@@ -1,0 +1,1452 @@
+{
+    "displayLocation": "crusadeShopMerchant",
+    "refreshCost": {
+        "resourceType": "gems",
+        "amount": 50
+    },
+    "refreshWithAdWatch": true,
+    "allowedRefreshesPerDay": 1,
+    "products": [
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarLhykhis",
+                "maxPurchases": "15",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoBladeChampion",
+                "maxPurchases": "15",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperNoiseMarine",
+                "maxPurchases": "15",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_PhasalSubjugator",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 5355
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Helspear",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 5355
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_BookOfFate",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 3570
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsCommon_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 15
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsCommon_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 15
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsCommon_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 15
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsCommon_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 15
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_relic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_mythic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsLegendary_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 715
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_legendary_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsEpic_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_epic_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsRare_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 70
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_rare_item"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsUncommon_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 30
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_fallback"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsCommon_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 15
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "upgDmgL202",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT,SUN *",
+                "reward": "upgHpM001",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * THU,SAT,SUN *",
+                "reward": "upgHpM002",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * FRI,SAT,SUN *",
+                "reward": "upgHpM003",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,SAT,SUN *",
+                "reward": "upgHpM004",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL100",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL101",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL102",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL103",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL104",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL105",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL106",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL107",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL108",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL109",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL111",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL112",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL113",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL114",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL115",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL116",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL117",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL118",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL119",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,WED,THU,FRI,SAT,SUN *",
+                "reward": "upgHpL099",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:50",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 570
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Legendary",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 170
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Epic",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 85
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Mythic",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 345
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Legendary",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 170
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Epic",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 85
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Rare",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 45
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemAscensionResource_Uncommon",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 15
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * MON *",
+                "reward": "upgArmL202",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * WED *",
+                "reward": "upgArmL001",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * FRI *",
+                "reward": "upgArmL203",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "upgArmL204",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * TUE *",
+                "reward": "upgDmgL001",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * THU *",
+                "reward": "upgDmgL003",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SAT *",
+                "reward": "upgDmgL204",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:500",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 570
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "maxPowerLevel": 30
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI *",
+                "reward": "gold:10000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 165
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 31,
+                    "maxPowerLevel": 40
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI *",
+                "reward": "gold:15000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 215
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41,
+                    "maxPowerLevel": 50
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI *",
+                "reward": "gold:25000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 290
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 51,
+                    "maxPowerLevel": 60
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI *",
+                "reward": "gold:50000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 61,
+                    "maxPowerLevel": 70
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI *",
+                "reward": "gold:75000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 535
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 71
+                },
+                "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI *",
+                "reward": "gold:100000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 570
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "maxPowerLevel": 30
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:10000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 55
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 31,
+                    "maxPowerLevel": 40
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:15000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 85
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41,
+                    "maxPowerLevel": 50
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:25000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 270
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 51,
+                    "maxPowerLevel": 60
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:50000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 535
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 61,
+                    "maxPowerLevel": 70
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:75000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 805
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 71
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:100000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1070
+                }
+            }
+        ]
+    ]
+}

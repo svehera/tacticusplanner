@@ -2,13 +2,12 @@
 /* eslint-disable boundaries/element-types */
 import { describe, expect, it } from 'vitest';
 
-import characterData from '@/fsd/4-entities/character/data/new-character-data2.json';
+import { charactersData2 } from '@/fsd/4-entities/character';
 import traitsData from '@/fsd/4-entities/traits/data/new-traits-data.json';
 
 import { TRAIT_VARIABLE_MAP } from './trait-variables';
 
 type TraitEntry = { id: string; description: string };
-type CharEntry = { traits?: string[] };
 
 const VAR_RE = /\{\[(\w+)\]\}/g;
 
@@ -30,7 +29,7 @@ describe('trait-variables', () => {
         const excluded = new Set(['Hero']);
         const traitIds = new Set((traitsData as unknown as TraitEntry[]).map(t => t.id));
         const missing = new Set<string>();
-        for (const char of characterData as unknown as CharEntry[]) {
+        for (const char of charactersData2) {
             for (const traitId of char.traits ?? []) {
                 if (!traitIds.has(traitId) && !excluded.has(traitId)) missing.add(traitId);
             }

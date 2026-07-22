@@ -147,6 +147,9 @@ function renderRewardIcon(icon: CalendarRewardIcon): React.ReactNode {
         case 'text': {
             return <span className="text-xs break-all text-(--soft-fg)">{icon.text}</span>;
         }
+        case 'avatarText': {
+            return <span className="text-xs text-(--soft-fg)">{icon.text}</span>;
+        }
     }
 }
 

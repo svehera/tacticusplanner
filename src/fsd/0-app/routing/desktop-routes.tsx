@@ -19,13 +19,14 @@ import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { guildPerformanceLazyRoute } from '@/fsd/1-pages/learn-guild-performance';
+import { hsesLookupLazyRoute } from '@/fsd/1-pages/learn-hses';
 import { mowLookupDesktopLazyRoute } from '@/fsd/1-pages/learn-mow';
-import { armageddonLazyRoute } from '@/fsd/1-pages/plan-armageddon/armageddon.route';
 import { bulkGoalCreatorRoute } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.route';
 import { campaignProgressionLazyRoute } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesRoute } from '@/fsd/1-pages/plan-ces/ces.route';
 import { lreLazyRoute } from '@/fsd/1-pages/plan-lre';
 import { questsRoute } from '@/fsd/1-pages/plan-quests/quests.route';
+import { shopEventsLazyRoutes } from '@/fsd/1-pages/plan-shop-events/shop-events.route';
 import { teams2Route } from '@/fsd/1-pages/plan-teams2/teams2.route';
 import { warDefense2Route } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.route';
 import { warOffense2Route } from '@/fsd/1-pages/plan-war-offense2/war-offense2.route';
@@ -103,7 +104,7 @@ export const globalPlanRoutes: RouteObject[] = [
             return { Component: MasterTable };
         },
     },
-    armageddonLazyRoute,
+    ...shopEventsLazyRoutes,
     campaignProgressionLazyRoute,
     questsRoute,
     cesRoute,
@@ -210,6 +211,7 @@ export const globalLearnRoutes: RouteObject[] = [
     insightsLazyRoute,
     guildPerformanceLazyRoute,
     guildInsightsLazyRoute,
+    hsesLookupLazyRoute,
     mowLookupDesktopLazyRoute,
     guildBossListLazyRoute,
     guildBossReferenceLazyRoute,
