@@ -27,22 +27,6 @@ export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
     // Use optional chaining just in case the key isn't found
     const allianceSource = tacticusIcons[allianceKey]?.file;
     const raritySource = tacticusIcons[rarityKey]?.file;
-    // 2. Conditional Vertical Positioning
-    let translateYStyle: React.CSSProperties = { transform: 'translateY(0%)' }; // Default: perfect center (-translate-y-1/2)
-
-    if (rarity === Rarity.Mythic) {
-        // We want the image to move down by 5% of the *parent's* height.
-        // The base position is -50%. To move down 5% more, the new position is -50% + 5% of the parent's height.
-        // Since the image is absolutely positioned, we can use a CSS calc function or adjust the translateY.
-        // Let's use CSS calc for precision (or we can just guess a good number based on visual testing).
-
-        // Simpler visual adjustment (e.g., move down by 2px regardless of size)
-        // For a 5% shift *relative to the parent size*, we need to adjust the translate property itself.
-
-        // Base: translateY(-50%) to center.
-        // New: translateY(calc(-50% + 5%)) moves it down 5% relative to the parent's height.
-        translateYStyle = { transform: 'translateY(calc(15%))' };
-    }
     // Styles for the main container to set its size and background rarity image
     const containerStyle: React.CSSProperties = {
         width: `${size}px`,
@@ -65,12 +49,7 @@ export const OrbIcon: React.FC<OrbIconProps> = ({ alliance, rarity, size }) => {
             {' '}
             {/* Add rounded-full if the final orb is round */}
             {/* Alliance Layer (Foreground) */}
-            <img
-                src={allianceSource}
-                alt={`${alliance} alliance foreground`}
-                className={allianceImageClasses}
-                style={translateYStyle}
-            />
+            <img src={allianceSource} alt={`${alliance} alliance foreground`} className={allianceImageClasses} />
         </div>
     );
 };

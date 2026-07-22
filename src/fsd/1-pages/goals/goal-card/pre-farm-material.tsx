@@ -2,15 +2,15 @@ import React from 'react';
 
 import { IGoalEstimate } from '@/fsd/3-features/goals';
 
-import { GoalEstimateRow } from './estimate-row';
+import { GoalEstimateChips } from './estimate-chips';
 
 interface Props {
     goalEstimate: IGoalEstimate;
     calendarDate?: string;
 }
-
-export const GoalCardPreFarmMaterial: React.FC<Props> = ({ goalEstimate, calendarDate }) => {
+export const GoalCardPreFarmMaterial: React.FC<Props> = ({ goalEstimate }) => {
     const info = goalEstimate.materialQuantityInfo;
+    const days = (goalEstimate.daysLeft ?? 0) > 0 ? Math.ceil(goalEstimate.daysLeft ?? 0) : undefined;
 
     const quantityLabel = info ? `${info.held}/${info.thisGoalQuantity}` : undefined;
 
@@ -21,11 +21,7 @@ export const GoalCardPreFarmMaterial: React.FC<Props> = ({ goalEstimate, calenda
             )}
             {goalEstimate.included && (
                 <div className="flex-box wrap gap-2">
-                    <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft ?? 0}
-                        calendarDate={calendarDate}
-                        energyTotal={goalEstimate.energyTotal}
-                    />
+                    <GoalEstimateChips days={days} energy={goalEstimate.energyTotal} />
                 </div>
             )}
         </div>
