@@ -6,6 +6,7 @@ import { StoreContext } from '@/reducers/store.provider';
 
 import { formatPrice } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
+import { TieredRewardCell, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-reward-grid';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -136,33 +137,23 @@ export const HsesLookup = () => {
                     No reward data available for this event/tier.
                 </div>
             ) : (
-                <div className="grid grid-cols-5 gap-3">
-                    {rewards.map((reward, index) => {
+                <TieredRewardGrid
+                    cells={rewards.map((reward, index): TieredRewardCell => {
                         const { icon, label, qty } = hseRewardInfo(reward.chestRewardId);
                         const isLast = index === rewards.length - 1;
-                        return (
-                            <div
-                                key={index}
-                                title={label}
-                                className="relative flex flex-col items-center gap-1.5 rounded-xl border border-(--border) bg-(--overlay) p-3">
-                                {isLast && reward.endless && (
-                                    <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-(--primary) text-(--primary-fg)">
-                                        <InfinityIcon className="size-3.5" />
-                                    </span>
-                                )}
-                                <div
-                                    className="flex items-center justify-center"
-                                    style={{ height: REWARD_ICON_SIZE, width: REWARD_ICON_SIZE }}>
-                                    {icon}
-                                </div>
-                                <span className="text-xs font-bold text-(--soft-fg) tabular-nums">×{qty}</span>
-                                <span className="rounded bg-(--soft) px-1.5 py-0.5 text-[11px] font-semibold text-amber-400 tabular-nums">
-                                    {reward.requiredProgress.toLocaleString()} pts
+                        return {
+                            key: index,
+                            title: label,
+                            badge: isLast && reward.endless && (
+                                <span className="absolute -top-1.5 -right-1.5 flex size-5 items-center justify-center rounded-full bg-(--primary) text-(--primary-fg)">
+                                    <InfinityIcon className="size-3.5" />
                                 </span>
-                            </div>
-                        );
+                            ),
+                            rewards: [{ icon, qty }],
+                            costLabel: `${reward.requiredProgress.toLocaleString()} pts`,
+                        };
                     })}
-                </div>
+                />
             )}
 
             {offers.length > 0 && (

@@ -11,13 +11,14 @@ import {
     tacticusIcons,
     UnknownItemImage,
 } from '@/fsd/5-shared/ui/icons';
+import { TIERED_REWARD_ICON_SIZE } from '@/fsd/5-shared/ui/tiered-reward-grid';
 
 import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { EquipmentIcon } from '@/fsd/4-entities/equipment/ui';
 import { getShopCurrencyIconKey, getShopCurrencyLabel, parseReward, plTier } from '@/fsd/4-entities/shops';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-export const REWARD_ICON_SIZE = 40;
+export const REWARD_ICON_SIZE = TIERED_REWARD_ICON_SIZE;
 
 const FACTION_LABEL_BY_SHARD_TYPE: Record<string, string> = {
     All: 'Any Faction',

@@ -17,11 +17,16 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     stamina: { iconKey: 'stamina', label: 'Energy' },
     stamina_waves: { iconKey: 'onslaughtToken', label: 'Onslaught Tokens' },
     stamina_treasureBeach: { iconKey: 'salvageRunToken', label: 'Salvage Run Tokens' },
+    stamina_survival: { iconKey: 'survivalToken', label: 'Survival Tokens' },
     gems: { iconKey: 'blackstone', label: 'Blackstone' },
     raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
     avatarFrame_frameAugust2026: {
         iconKey: 'seasonalEventAugust2026AvatarFrame',
         label: 'Seasonal Event (August 2026) Avatar Frame',
+    },
+    playerProfileTheme_may_2026: {
+        iconKey: 'playerProfileThemeMay2026',
+        label: 'Seasonal Event (May 2026) Profile Theme',
     },
     draft_machinesOfWarTokens: { iconKey: 'draftMachinesOfWarComponents', label: 'MoW Component (Pick One)' },
 };

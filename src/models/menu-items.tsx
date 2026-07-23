@@ -45,6 +45,7 @@ import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
 import { shopEventsMenuItem } from '@/fsd/1-pages/plan-shop-events/shop-events.menu-item';
+import { survivalMenuItem } from '@/fsd/1-pages/plan-survival/survival.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
 import { warDefense2MenuItem } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.menu-item';
 import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
@@ -109,6 +110,7 @@ export const menuItemById = {
     quests: questsMenuItem,
     ces: cesMenuItem,
     productCalendar: new MenuItemTP('Product Calendar', <ShoppingCartIcon />, '/learn/productCalendar'),
+    survival: survivalMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -141,6 +143,7 @@ export const planSubMenuWeb: MenuItemTP[] = [
     menuItemById['ces'],
     menuItemById['hses'],
     menuItemById['bulkGoalCreator'],
+    menuItemById['survival'],
 ];
 
 export const planSubMenu: MenuItemTP[] = [
@@ -157,6 +160,7 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['campaignProgression'],
     menuItemById['hses'],
     menuItemById['bulkGoalCreator'],
+    menuItemById['survival'],
 ];
 
 export const learnSubMenuMobile: MenuItemTP[] = [

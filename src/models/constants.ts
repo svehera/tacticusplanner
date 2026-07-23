@@ -451,6 +451,7 @@ export const defaultData: IPersonalData2 = {
     shopEvents: {},
     playerMetadata: { playerName: undefined, powerLevel: undefined },
     onslaughtPreferences: defaultOnslaughtPreferences,
+    survivalTeams: {},
 };
 
 export const goalsLimit = 100;

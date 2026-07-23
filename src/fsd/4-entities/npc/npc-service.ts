@@ -1,5 +1,5 @@
 import { mutableCopy } from '@/fsd/5-shared/lib';
-import { Alliance, DamageType, FactionId } from '@/fsd/5-shared/model';
+import { Alliance, DamageType, FactionId, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 
 import { npcData } from './data';
 import { INpcData, INpcStats } from './model';
@@ -76,6 +76,23 @@ export class NpcService {
     public static getNpcById(id: string): INpcData | undefined {
         const npc = this.npcDataFull.find(npc => npc.snowprintId === id);
         return npc ?? undefined;
+    }
+
+    /**
+     * NPC stats rows carry a `rarityStars` value straight from datamined JSON (same 0-14 range as
+     * character `RarityStars`) but no `Rarity` field of their own — unlike guild-boss encounter
+     * stats, which have a dedicated `BaseRarity` field. This derives the equivalent `Rarity` bracket
+     * by walking the same `RarityMapper.toMaxStars` ranges the rest of the app already uses in the
+     * opposite direction (rarity -> star range).
+     */
+    public static resolveRarityFromStars(stars: RarityStars): Rarity {
+        const rarities = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
+        for (const rarity of rarities) {
+            if (stars <= RarityMapper.toMaxStars[rarity]) {
+                return rarity;
+            }
+        }
+        return Rarity.Mythic;
     }
 
     /** Resolves an NPC's melee attacks, preferring the multi-weapon `meleeAttacks` array when present

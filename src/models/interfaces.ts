@@ -48,6 +48,7 @@ import { LeProgressAction } from '../reducers/le-progress.reducer';
 import { LeSelectedTeamsAction } from '../reducers/le-selected-teams.reducer';
 import { OnslaughtPreferencesAction } from '../reducers/onslaught-preferences.reducer';
 import { SelectedTeamsOrderingAction } from '../reducers/selected-teams-order.reducer';
+import { SurvivalTeamsAction } from '../reducers/survival.reducer';
 import { ViewPreferencesAction } from '../reducers/view-settings.reducer';
 import { WarOffense2Action } from '../reducers/war-offense2.reducer';
 
@@ -106,6 +107,7 @@ export interface IGlobalState {
     shopEvents: ShopEventsState;
     playerMetadata: PlayerMetadataState;
     onslaughtPreferences: IOnslaughtPreferences;
+    survivalTeams: Record<string, string[]>;
 
     /**
      * Local-only version marker for in-memory and localStorage state.
@@ -141,6 +143,7 @@ export interface IDispatchContext {
     shopEvents: React.Dispatch<ShopEventsAction>;
     playerMetadata: React.Dispatch<PlayerMetadataAction>;
     onslaughtPreferences: React.Dispatch<OnslaughtPreferencesAction>;
+    survivalTeams: React.Dispatch<SurvivalTeamsAction>;
     seenAppVersion: React.Dispatch<React.SetStateAction<string | undefined>>;
     setStore: (data: IGlobalState, modified: boolean, reset: boolean) => void;
 }
@@ -175,6 +178,7 @@ export interface IPersonalData2 {
     shopEvents: ShopEventsState;
     playerMetadata: PlayerMetadataState;
     onslaughtPreferences?: IOnslaughtPreferences;
+    survivalTeams?: Record<string, string[]>;
 }
 export interface TacticusTokensState {
     /** This field exists so that the "nextTokenInSeconds" has a starting point. */

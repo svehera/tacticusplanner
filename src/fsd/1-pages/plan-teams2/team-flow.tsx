@@ -1,12 +1,11 @@
-/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { ICharacter2 } from '@/models/interfaces';
+
+import { UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
-
-import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
 
 import { Teams2Service } from './teams2.service';
 

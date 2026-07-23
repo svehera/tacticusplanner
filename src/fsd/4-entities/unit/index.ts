@@ -3,3 +3,4 @@ export type { IUnit } from './model';
 export { CharactersValueService } from './characters-value.service';
 export { CharactersPowerService } from './characters-power.service';
 export { StatsCalculatorService } from './stats-calculator.service';
+export { convertCharacterToSnapshot, convertMowToSnapshot } from './unit-snapshot.converter';

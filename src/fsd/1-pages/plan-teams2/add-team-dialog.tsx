@@ -12,10 +12,10 @@ import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
+import { CharacterSelectGrid, MowSelectGrid } from '@/fsd/2-widgets/unit-select-grid';
+
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
 
-import { CharacterGrid } from './character-grid';
-import { MowGrid } from './mow-grid';
 import { TeamFlow } from './team-flow';
 import { Teams2Service } from './teams2.service';
 import { UnitFilter } from './unit-filter';
@@ -400,7 +400,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                     }`}
                     style={{ '--mow-width': `${mowWidth}px` } as React.CSSProperties}>
                     <div className="min-w-0 flex-1 rounded-lg border border-(--card-border) bg-(--card) p-4">
-                        <CharacterGrid
+                        <CharacterSelectGrid
                             characters={filteredChars}
                             onCharacterSelect={onAddChar}
                             showHeader={true}
@@ -430,7 +430,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                     </div>
 
                     <div className="w-full flex-shrink-0 rounded-lg border border-(--card-border) bg-(--card) p-4 xl:w-[var(--mow-width)]">
-                        <MowGrid
+                        <MowSelectGrid
                             mows={filteredMows}
                             onMowSelect={onAddMow}
                             showHeader={true}

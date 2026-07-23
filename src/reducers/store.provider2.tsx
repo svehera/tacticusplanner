@@ -36,6 +36,7 @@ import { leSettingsReducer } from './le-settings.reducer';
 import { rosterSnapshotsActionReducer } from './roster-snapshots-reducer';
 import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
 import { DispatchContext, StoreContext } from './store.provider';
+import { survivalTeamsReducer } from './survival.reducer';
 import { setUserDataApi, getUserDataApi } from './user.endpoints';
 import { viewPreferencesReducer } from './view-settings.reducer';
 import { xpIncomeActionReducer } from './xp-income-reducer';
@@ -69,6 +70,7 @@ type DispatchScope = keyof Pick<
     | 'onslaughtPreferences'
     | 'leSelectedTeams'
     | 'leProgress'
+    | 'survivalTeams'
 >;
 
 function getActionRecord(action: unknown): Record<string, unknown> | undefined {
@@ -169,6 +171,8 @@ function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated
         }
     } else if (scope === 'teams2' && actionType === 'Set') {
         trackEvent('team_update', { ...commonParameters, feature: 'teams2' });
+    } else if (scope === 'survivalTeams' && actionType === 'SetTeam') {
+        trackEvent('team_update', { ...commonParameters, feature: 'survival' });
     } else if ((scope === 'warDefense2' || scope === 'warOffense2') && actionType === 'Set') {
         trackEvent('guild_war_team_update', { ...commonParameters, feature: scope });
     } else if (scope === 'guildWar') {
@@ -266,6 +270,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [leSelectedTeams, dispatchLeSelectedTeams] = useReducer(leSelectedTeamsReducer, globalState.leSelectedTeams);
     const [leProgress, dispatchLeProgress] = useReducer(leProgressReducer, globalState.leProgress);
     const [leSettings, dispatchLeSettings] = useReducer(leSettingsReducer, globalState.leSettings);
+    const [survivalTeams, dispatchSurvivalTeams] = useReducer(survivalTeamsReducer, globalState.survivalTeams);
 
     const [campaignsProgress, dispatchCampaignsProgress] = useReducer(
         campaignsProgressReducer,
@@ -402,6 +407,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             shopEvents: wrapDispatch('shopEvents', dispatchShopEvents),
             playerMetadata: wrapDispatch(undefined, dispatchPlayerMetadata),
             onslaughtPreferences: wrapDispatch('onslaughtPreferences', dispatchOnslaughtPreferences),
+            survivalTeams: wrapDispatch('survivalTeams', dispatchSurvivalTeams),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 // Only update if incoming version is newer
                 setGlobalState(current => {
@@ -434,6 +440,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatchShopEvents({ type: 'Set', value: data.shopEvents });
                         dispatchPlayerMetadata({ type: 'Set', value: data.playerMetadata });
                         dispatchOnslaughtPreferences({ type: 'Set', value: data.onslaughtPreferences });
+                        dispatchSurvivalTeams({ type: 'Set', value: data.survivalTeams });
                         if (modified) {
                             setModified(true);
                             setModifiedDate(data.modifiedDate);
@@ -471,6 +478,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchShopEvents,
             dispatchPlayerMetadata,
             dispatchOnslaughtPreferences,
+            dispatchSurvivalTeams,
             isAuthenticated,
             setGlobalState,
         ]
@@ -513,6 +521,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             shopEvents,
             playerMetadata,
             onslaughtPreferences,
+            survivalTeams,
             __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
@@ -551,6 +560,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         rosterSnapshots,
         seenAppVersion,
         selectedTeamOrder,
+        survivalTeams,
         teams,
         teams2,
         viewPreferences,

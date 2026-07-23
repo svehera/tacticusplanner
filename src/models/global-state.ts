@@ -74,6 +74,7 @@ export class GlobalState implements IGlobalState {
     readonly shopEvents: ShopEventsState;
     readonly playerMetadata: PlayerMetadataState;
     readonly onslaughtPreferences: IOnslaughtPreferences;
+    readonly survivalTeams: Record<string, string[]>;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -113,6 +114,7 @@ export class GlobalState implements IGlobalState {
         );
         this.playerMetadata = personalData.playerMetadata ?? defaultPlayerMetadataState;
         this.onslaughtPreferences = personalData.onslaughtPreferences ?? defaultOnslaughtPreferences;
+        this.survivalTeams = personalData.survivalTeams ?? {};
     }
 
     static initCharacters(
@@ -366,6 +368,7 @@ export class GlobalState implements IGlobalState {
             teams2: value.teams2,
             warDefense2: value.warDefense2,
             warOffense2: value.warOffense2,
+            survivalTeams: value.survivalTeams,
         };
     }
 

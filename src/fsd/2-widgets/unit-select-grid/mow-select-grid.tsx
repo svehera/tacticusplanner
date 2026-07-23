@@ -1,15 +1,11 @@
-/* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { UnitPortrait } from '@/fsd/5-shared/ui/unit-portrait';
 
-import { IMow2 } from '@/fsd/4-entities/mow/@x/unit';
+import { IMow2 } from '@/fsd/4-entities/mow';
+import { convertMowToSnapshot } from '@/fsd/4-entities/unit';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
-
-import { RosterSnapshotCharacter } from '../input-roster-snapshots/roster-snapshot-character';
-
-import { Teams2Service } from './teams2.service';
 
 interface Props {
     mows: IMow2[];
@@ -19,7 +15,7 @@ interface Props {
     deployedUnitIds?: string[];
 }
 
-export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, deployedUnitIds }: Props) => {
+export const MowSelectGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, deployedUnitIds }: Props) => {
     return (
         <div>
             {showHeader && (
@@ -35,7 +31,7 @@ export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, 
                             onClick={() => onMowSelect(mow.snowprintId)}
                             className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
                             title={`Select ${mow.name || 'Machine of War'}`}>
-                            <RosterSnapshotCharacter
+                            <UnitPortrait
                                 key={mow.snowprintId}
                                 showMythicShards={RosterSnapshotShowVariableSettings.Never}
                                 showShards={RosterSnapshotShowVariableSettings.Never}
@@ -47,7 +43,7 @@ export const MowGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, 
                                 }
                                 showEquipment={RosterSnapshotShowVariableSettings.Never}
                                 showTooltip={true}
-                                mow={Teams2Service.convertMow(mow)}
+                                mow={convertMowToSnapshot(mow)}
                                 mowData={mow}
                                 isDisabled={!mow.unlocked}
                             />
