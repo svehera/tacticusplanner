@@ -6,6 +6,7 @@ export type {
     HomescreenEventData,
     HomescreenEventGameModeRestrictions,
     HomescreenEventModifier,
+    HomescreenEventOffer,
     HomescreenEventReward,
     HomescreenEventTier,
     HomescreenEventTierKey,

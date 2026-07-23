@@ -32,6 +32,18 @@ const SUMMONING_TOKEN_ICON_BY_FACTION: Record<string, keyof typeof tacticusIcons
     Orks: 'orksReq',
 };
 
+const OFFER_TITLE_BY_KIND: Record<string, string> = {
+    bundle: 'Bundle',
+    playmore: 'Play More',
+    booster: 'Booster',
+};
+
+/** Offer JSON has no human-readable title — derive one from the offerId's trailing "kind" segment. */
+export function hseOfferTitle(offerId: string): string {
+    const kind = offerId.split('_').at(-1) ?? offerId;
+    return OFFER_TITLE_BY_KIND[kind] ?? kind;
+}
+
 /** Maps `plTier`'s 'medium' to the 'mid' tier key used by the HSE JSON data. */
 export function hseTierKeyForRoster(pl: number, hasBlueStarUnit: boolean): 'high' | 'mid' | 'low' {
     const tier = plTier(pl, hasBlueStarUnit);
@@ -184,4 +196,23 @@ export function hseRewardInfo(chestRewardId: string): {
         qty,
         resolved: false,
     };
+}
+
+/**
+ * Resolves a reward from an offer's `rewards[]` list (same `type:qty` string format as
+ * `chestRewardId`). Event-points rewards (`tieredRewardPoints_{event}_tier_{tier}` and the
+ * "pick which sub-event to credit" variant `draft_HSE_{event}_tier_{tier}`) are shown as plain
+ * text ("100x Event Points") with no icon; everything else is resolved via `hseRewardInfo`.
+ */
+export function hseOfferRewardInfo(rewardString: string): {
+    icon?: JSX.Element;
+    label: string;
+    qty: number;
+    resolved: boolean;
+} {
+    const { type, qty } = parseReward(rewardString);
+    if (type.startsWith('tieredRewardPoints_') || type.startsWith('draft_HSE_')) {
+        return { label: 'Event Points', qty, resolved: true };
+    }
+    return hseRewardInfo(rewardString);
 }

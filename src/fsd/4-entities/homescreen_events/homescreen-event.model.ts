@@ -38,11 +38,23 @@ export interface HomescreenEventLiveEventConfig {
     trackers?: HomescreenEventTracker[];
 }
 
+export interface HomescreenEventOffer {
+    offer: {
+        maxPurchases?: number;
+    };
+    realMoneyProduct: {
+        /** Price in cents. */
+        price: number;
+        rewards: string[];
+    };
+}
+
 export interface HomescreenEventTier {
     tieredProgressRewards: HomescreenEventReward[];
     descriptions?: string[];
     liveEventConfig?: HomescreenEventLiveEventConfig;
     abilities?: Record<string, HomescreenEventAbilityDefinition>;
+    offers?: Record<string, HomescreenEventOffer>;
 }
 
 /** `default` is used by events that don't split rewards into a high/mid/low power-level tier. */

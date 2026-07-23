@@ -9,6 +9,7 @@ export { useFitGridOnWindowResize } from './resize-grid';
 export { getCompletionRateColor } from './get-completion-color';
 export { createSafeGetter, mutableCopy } from './type-helpers';
 export { getEstimatedDate } from './get-estimated-date';
+export { formatPrice } from './format-price';
 export { getFactionPray } from './get-faction-pray';
 export * from './array-utils';
 export * from './tacticus-api';

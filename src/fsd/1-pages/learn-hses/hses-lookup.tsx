@@ -4,6 +4,7 @@ import { useContext, useMemo, useState } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
 
+import { formatPrice } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
@@ -15,7 +16,13 @@ import { MAX_LEGENDARY_THRESHOLD, PL_MEDIUM } from '@/fsd/4-entities/shops';
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
 import { resolveHseDescriptionLines } from '@/fsd/3-features/homescreen-events/hse-description-resolver';
 
-import { hseRewardInfo, hseTierKeyForRoster, REWARD_ICON_SIZE } from './hses-lookup.utils';
+import {
+    hseOfferRewardInfo,
+    hseOfferTitle,
+    hseRewardInfo,
+    hseTierKeyForRoster,
+    REWARD_ICON_SIZE,
+} from './hses-lookup.utils';
 
 const sortedEvents = homescreenEvents
     .map(event => ({ event, displayName: getHseDisplayName(event) }))
@@ -47,6 +54,7 @@ export const HsesLookup = () => {
     const resolvedTier = selectedEvent ? resolveHseTier(selectedEvent, tierKeyForRoster) : undefined;
     const rewards = resolvedTier?.tier.tieredProgressRewards ?? [];
     const descriptionLines = resolvedTier ? resolveHseDescriptionLines(resolvedTier.tier) : [];
+    const offers = Object.entries(resolvedTier?.tier.offers ?? {});
     const isSingleTierEvent = selectedEvent ? Object.keys(selectedEvent.tiers).length === 1 : false;
 
     return (
@@ -154,6 +162,51 @@ export const HsesLookup = () => {
                             </div>
                         );
                     })}
+                </div>
+            )}
+
+            {offers.length > 0 && (
+                <div className="flex flex-col gap-3">
+                    <h2 className="text-sm font-semibold tracking-wide text-(--soft-fg) uppercase">Offers</h2>
+                    <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+                        {offers.map(([offerId, offer]) => (
+                            <div
+                                key={offerId}
+                                className="flex flex-col gap-2 rounded-xl border border-(--border) bg-(--overlay) p-4">
+                                <div className="flex items-center justify-between gap-2">
+                                    <span className="font-semibold text-(--fg)">{hseOfferTitle(offerId)}</span>
+                                    <span className="font-semibold text-amber-400 tabular-nums">
+                                        {formatPrice(offer.realMoneyProduct.price, false)}
+                                    </span>
+                                </div>
+                                <div className="flex flex-col gap-1.5 rounded-lg bg-(--soft) p-2.5">
+                                    {offer.offer.maxPurchases !== undefined && (
+                                        <span className="text-xs text-(--soft-fg)">
+                                            ×{offer.offer.maxPurchases} available
+                                        </span>
+                                    )}
+                                    {offer.realMoneyProduct.rewards.map((reward, index) => {
+                                        const { icon, label, qty } = hseOfferRewardInfo(reward);
+                                        return (
+                                            <div key={index} className="flex items-center gap-2">
+                                                {icon && (
+                                                    <div
+                                                        className="flex shrink-0 items-center justify-center"
+                                                        style={{ height: REWARD_ICON_SIZE, width: REWARD_ICON_SIZE }}>
+                                                        {icon}
+                                                    </div>
+                                                )}
+                                                <span className="text-sm text-(--fg)">
+                                                    <span className="mr-1 font-semibold tabular-nums">×{qty}</span>
+                                                    {label}
+                                                </span>
+                                            </div>
+                                        );
+                                    })}
+                                </div>
+                            </div>
+                        ))}
+                    </div>
                 </div>
             )}
         </div>

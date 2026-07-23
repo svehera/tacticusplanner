@@ -43,11 +43,6 @@ export function calendarDisplayName(calendarId: string): string {
     return calendarId;
 }
 
-export function formatPrice(priceCents: number, free: boolean): string {
-    if (free) return 'FREE';
-    return `$${Math.ceil(priceCents / 100)}`;
-}
-
 export function titlesInOrder(calendar: IProductCalendar): string[] {
     const seen = new Set<string>();
     const result: string[] = [];
@@ -123,10 +118,6 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
     if (simple) return misc(simple.iconKey, simple.label);
 
     if (type.toLowerCase() === 'stamina') return misc('stamina', 'Energy'); // raw game data is inconsistently cased ("Stamina" vs "stamina")
-    if (type === 'stamina_treasureBeach') return misc('salvageRunToken', 'Salvage Run Tokens');
-    if (type === 'stamina_waves') return misc('onslaughtToken', 'Onslaught Tokens');
-    if (type === 'gems') return misc('blackstone', 'Blackstone');
-    if (type === 'raidTicket') return misc('raidTicket', 'Raid Ticket');
 
     if (type === 'ShardsImperial') return misc('allianceImperial', 'Imperial Shards');
     if (type === 'ShardsChaos') return misc('allianceChaos', 'Chaos Shards');

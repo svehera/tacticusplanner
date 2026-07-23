@@ -3,6 +3,7 @@ import { useState } from 'react';
 
 import { getImageUrl } from '@/shared-logic/functions';
 
+import { formatPrice } from '@/fsd/5-shared/lib';
 import { Accordion, AccordionBody, AccordionHeader } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { MiscIcon, OrbIcon, UnknownItemImage } from '@/fsd/5-shared/ui/icons';
@@ -13,7 +14,6 @@ import type { IProductCalendar, IProductCalendarOffer } from '@/fsd/4-entities/c
 import {
     calendarDisplayName,
     calendarRewardInfo,
-    formatPrice,
     offersForDayByTitle,
     titlesInOrder,
     type CalendarRewardIcon,

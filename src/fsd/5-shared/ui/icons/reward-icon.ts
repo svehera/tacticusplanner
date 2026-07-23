@@ -14,7 +14,11 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     crusadeBomb: { iconKey: 'crusadeBomb', label: 'Crusade Bomb' },
     crusadeNpc: { iconKey: 'crusadeNpc', label: 'Crusade NPC' },
     intel: { iconKey: 'crusadeIntel', label: 'Crusade Intel' },
-    stamina: { iconKey: 'stamina', label: 'Stamina' },
+    stamina: { iconKey: 'stamina', label: 'Energy' },
+    stamina_waves: { iconKey: 'onslaughtToken', label: 'Onslaught Tokens' },
+    stamina_treasureBeach: { iconKey: 'salvageRunToken', label: 'Salvage Run Tokens' },
+    gems: { iconKey: 'blackstone', label: 'Blackstone' },
+    raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
     avatarFrame_frameAugust2026: {
         iconKey: 'seasonalEventAugust2026AvatarFrame',
         label: 'Seasonal Event (August 2026) Avatar Frame',

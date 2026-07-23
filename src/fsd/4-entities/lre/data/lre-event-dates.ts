@@ -20,8 +20,8 @@ export const lreEventDates: Record<number, ILreEventDates> = {
     },
     [LegendaryEventEnum.Lucius]: {
         finished: false,
-        nextEventDate: 'February 01, 2026',
-        nextEventDateUtc: 'Sun, 01 February 2026 00:00:00 GMT',
+        nextEventDate: 'July 26, 2026',
+        nextEventDateUtc: 'Sun, 26 July 2026 00:00:00 GMT',
     },
     [LegendaryEventEnum.Farsight]: {
         finished: false,
@@ -33,5 +33,9 @@ export const lreEventDates: Record<number, ILreEventDates> = {
         nextEventDate: 'March 08, 2026',
         nextEventDateUtc: 'Sun, 08 March 2026 00:00:00 GMT',
     },
-    [LegendaryEventEnum.Lysander]: { finished: false },
+    [LegendaryEventEnum.Lysander]: {
+        finished: false,
+        nextEventDate: 'August 30, 2026',
+        nextEventDateUtc: 'Sun, 30 August 2026 00:00:00 GMT',
+    },
 };
