@@ -192,8 +192,11 @@ import crusadeCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_
 import crusadeIntel from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_intel_large.png';
 import crusadeNpc from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_npc_large.png';
 import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png';
+import seasonalEventCurrencyApril2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_april_2026.png';
 import seasonalEventCurrencyAugust2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_august_2026.png';
+import seasonalEventCurrencyHolidays2025 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_holiday_25.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
+import seasonalEventCurrencyMarch2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_march_2026.png';
 import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
@@ -314,9 +317,21 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: crusadeNpc,
         label: 'Crusade NPC',
     },
+    seasonalEventCurrencyApril2026: {
+        file: seasonalEventCurrencyApril2026,
+        label: 'Seasonal Event Currency (April 2026)',
+    },
     seasonalEventCurrencyAugust2026: {
         file: seasonalEventCurrencyAugust2026,
         label: 'Seasonal Event Currency (August 2026)',
+    },
+    seasonalEventCurrencyHolidays2025: {
+        file: seasonalEventCurrencyHolidays2025,
+        label: 'Seasonal Event Currency (Holidays 2025)',
+    },
+    seasonalEventCurrencyMarch2026: {
+        file: seasonalEventCurrencyMarch2026,
+        label: 'Seasonal Event Currency (March 2026)',
     },
     seasonalEventCurrencyMay2026: {
         file: seasonalEventCurrencyMay2026,

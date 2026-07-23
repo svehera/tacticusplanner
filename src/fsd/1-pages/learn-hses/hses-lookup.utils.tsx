@@ -2,7 +2,15 @@
 import { JSX } from 'react';
 
 import { Alliance, Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
-import { BadgeImage, ForgeBadgeImage, MiscIcon, OrbIcon, resolveSimpleRewardIcon } from '@/fsd/5-shared/ui/icons';
+import {
+    BadgeImage,
+    ForgeBadgeImage,
+    MiscIcon,
+    OrbIcon,
+    resolveSimpleRewardIcon,
+    tacticusIcons,
+    UnknownItemImage,
+} from '@/fsd/5-shared/ui/icons';
 
 import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { EquipmentIcon } from '@/fsd/4-entities/equipment/ui';
@@ -19,13 +27,23 @@ const FACTION_LABEL_BY_SHARD_TYPE: Record<string, string> = {
     Orks: 'Orks',
 };
 
+const SUMMONING_TOKEN_ICON_BY_FACTION: Record<string, keyof typeof tacticusIcons> = {
+    BloodAngels: 'bloodAngelsReq',
+    Orks: 'orksReq',
+};
+
 /** Maps `plTier`'s 'medium' to the 'mid' tier key used by the HSE JSON data. */
 export function hseTierKeyForRoster(pl: number, hasBlueStarUnit: boolean): 'high' | 'mid' | 'low' {
     const tier = plTier(pl, hasBlueStarUnit);
     return tier === 'medium' ? 'mid' : tier;
 }
 
-export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label: string; qty: number } {
+export function hseRewardInfo(chestRewardId: string): {
+    icon: JSX.Element;
+    label: string;
+    qty: number;
+    resolved: boolean;
+} {
     const { type, qty } = parseReward(chestRewardId);
 
     // ── faction shards: Shards{Faction} ──────────────────────────────────────
@@ -36,6 +54,7 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
             icon: <MiscIcon icon="shard" width={REWARD_ICON_SIZE} height={REWARD_ICON_SIZE} />,
             label: `${faction} Shards`,
             qty,
+            resolved: true,
         };
     }
 
@@ -46,7 +65,22 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
             icon: <MiscIcon icon={currencyIconKey} width={REWARD_ICON_SIZE} height={REWARD_ICON_SIZE} />,
             label: getShopCurrencyLabel(type),
             qty,
+            resolved: true,
         };
+    }
+
+    // ── event summoning tokens: eventSummoningToken_{Faction} ────────────────
+    if (type.startsWith('eventSummoningToken_')) {
+        const faction = type.replace('eventSummoningToken_', '');
+        const iconKey = SUMMONING_TOKEN_ICON_BY_FACTION[faction];
+        if (iconKey) {
+            return {
+                icon: <MiscIcon icon={iconKey} width={REWARD_ICON_SIZE} height={REWARD_ICON_SIZE} />,
+                label: `${faction} Req Scroll`,
+                qty,
+                resolved: true,
+            };
+        }
     }
 
     // ── simple named resources (shared across Shop Events, product calendar, HSEs) ─
@@ -56,6 +90,7 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
             icon: <MiscIcon icon={simple.iconKey} width={REWARD_ICON_SIZE} height={REWARD_ICON_SIZE} />,
             label: simple.label,
             qty,
+            resolved: true,
         };
     }
 
@@ -68,6 +103,7 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
             icon: <BadgeImage alliance={alliance} rarity={rarity} size="medium" />,
             label: `${rarity} ${alliance} Badge`,
             qty,
+            resolved: true,
         };
     }
 
@@ -80,6 +116,7 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
             icon: <OrbIcon alliance={alliance} rarity={rarity} size={REWARD_ICON_SIZE} />,
             label: `${orbMatch[1]} ${alliance} Orb`,
             qty,
+            resolved: true,
         };
     }
 
@@ -91,6 +128,19 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
             icon: <ForgeBadgeImage rarity={rarity} />,
             label: `${forgeMatch[1]} Forge Badge`,
             qty,
+            resolved: true,
+        };
+    }
+
+    // ── generic rarity-only items: items{Rarity} / itemsChaos{Rarity} ────────
+    const itemsMatch = /^items(?:Chaos)?(Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
+    if (itemsMatch) {
+        const rarity = itemsMatch[1];
+        return {
+            icon: <UnknownItemImage rarity={rarity} size={REWARD_ICON_SIZE} />,
+            label: `${rarity} Item`,
+            qty,
+            resolved: true,
         };
     }
 
@@ -109,6 +159,7 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
                 ),
                 label: upgradeData.label,
                 qty,
+                resolved: true,
             };
         }
     }
@@ -121,6 +172,7 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
                 icon: <EquipmentIcon equipment={equip} height={REWARD_ICON_SIZE} width={REWARD_ICON_SIZE} />,
                 label: equip.name,
                 qty,
+                resolved: true,
             };
         }
     }
@@ -130,5 +182,6 @@ export function hseRewardInfo(chestRewardId: string): { icon: JSX.Element; label
         icon: <span className="text-center text-[10px] leading-tight break-all text-(--soft-fg)">{type}</span>,
         label: type,
         qty,
+        resolved: false,
     };
 }

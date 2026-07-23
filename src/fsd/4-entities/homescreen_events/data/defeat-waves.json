@@ -105,6 +105,89 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_defeat_waves_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_high_bundle_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_defeat_waves_tier_high:80",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_defeat_waves_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_high_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_defeat_waves_tier_high:40",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:350",
+                            "stamina:300",
+                            "raidTicket:50"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_defeat_waves_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
+                        "price": 499,
+                        "mercadoId": "offer_00499",
+                        "rewards": ["tieredRewardPoints_defeat_waves_tier_high:30", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Against the Tide</i> is here",
                 "Gain points for each enemy wave you defeat and claim exclusive rewards!",
@@ -215,6 +298,89 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_defeat_waves_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_mid_bundle_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_defeat_waves_tier_mid:80",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_defeat_waves_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_mid_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_defeat_waves_tier_mid:40",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:350",
+                            "stamina:300",
+                            "raidTicket:50"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_defeat_waves_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
+                        "price": 499,
+                        "mercadoId": "offer_00499",
+                        "rewards": ["tieredRewardPoints_defeat_waves_tier_mid:30", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Against the Tide</i> is here",
                 "Gain points for each enemy wave you defeat and claim exclusive rewards!",
@@ -325,6 +491,89 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_defeat_waves_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_low_bundle_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_defeat_waves_tier_low:80",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_defeat_waves_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_low_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_defeat_waves_tier_low:40",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:350",
+                            "stamina:300",
+                            "raidTicket:50"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_defeat_waves_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_defeat_waves_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_defeat_waves_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
+                        "price": 499,
+                        "mercadoId": "offer_00499",
+                        "rewards": ["tieredRewardPoints_defeat_waves_tier_low:30", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Against the Tide</i> is here",
                 "Gain points for each enemy wave you defeat and claim exclusive rewards!",

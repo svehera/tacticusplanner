@@ -215,6 +215,203 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvAllyAndEnemyNpcs:WarpSurge": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {
+                            "spawnHp": [
+                                39, 47, 55, 62, 70, 79, 88, 97, 106, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196,
+                                205, 217, 234, 269, 305, 340, 376, 411, 447, 482, 518, 553, 589, 624, 659, 695, 730,
+                                766, 801, 837, 887, 957, 1031, 1110, 1198, 1359, 1519, 1679, 1840, 2000, 2160, 2184,
+                                2213, 2243, 2282, 2321, 2360, 2399, 2447, 2496, 2545, 2603, 2662, 2720, 2779, 2837
+                            ],
+                            "spawnDmg": [
+                                25, 30, 35, 40, 45, 51, 57, 62, 68, 74, 80, 85, 91, 97, 103, 108, 114, 120, 126, 131,
+                                139, 150, 173, 195, 218, 241, 264, 286, 309, 332, 355, 377, 400, 423, 446, 468, 491,
+                                514, 537, 569, 614, 661, 712, 768, 871, 974, 1077, 1179, 1282, 1385, 1400, 1419, 1438,
+                                1463, 1488, 1513, 1538, 1569, 1600, 1631, 1669, 1706, 1744, 1781, 1819
+                            ],
+                            "spawnHp_2": [
+                                36, 43, 50, 58, 65, 73, 81, 90, 98, 106, 114, 123, 131, 139, 148, 156, 164, 172, 181,
+                                189, 200, 216, 248, 281, 314, 347, 379, 412, 445, 478, 510, 543, 576, 609, 642, 674,
+                                707, 740, 773, 819, 883, 951, 1025, 1106, 1254, 1402, 1550, 1698, 1846, 1994, 2016,
+                                2043, 2070, 2106, 2142, 2178, 2214, 2259, 2304, 2349, 2403, 2457, 2511, 2565, 2619
+                            ],
+                            "spawnDmg_2": [
+                                9, 11, 13, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 50, 54,
+                                62, 70, 78, 87, 95, 103, 111, 119, 128, 136, 144, 152, 160, 169, 177, 185, 193, 205,
+                                221, 238, 256, 277, 314, 351, 388, 425, 462, 499, 504, 511, 518, 527, 536, 545, 554,
+                                565, 576, 587, 601, 614, 628, 641, 655
+                            ],
+                            "spawnArmor_2": [
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0
+                            ],
+                            "spawnHp_3": [
+                                21, 25, 29, 34, 38, 43, 47, 52, 57, 62, 67, 72, 76, 81, 86, 91, 96, 101, 105, 110, 117,
+                                126, 145, 164, 183, 202, 221, 240, 260, 279, 298, 317, 336, 355, 374, 393, 412, 432,
+                                451, 478, 515, 555, 598, 645, 732, 818, 904, 991, 1077, 1163, 1176, 1192, 1208, 1229,
+                                1250, 1271, 1292, 1318, 1344, 1370, 1402, 1433, 1465, 1496, 1528
+                            ],
+                            "spawnDmg_3": [
+                                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100,
+                                108, 124, 141, 157, 173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370,
+                                386, 409, 442, 476, 512, 553, 627, 701, 775, 849, 923, 997, 1008, 1022, 1035, 1053,
+                                1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+                            ],
+                            "spawnHp_4": [
+                                45, 54, 63, 72, 81, 91, 102, 112, 122, 133, 143, 153, 164, 174, 185, 195, 205, 216, 226,
+                                236, 250, 270, 311, 351, 392, 433, 474, 515, 556, 597, 638, 679, 720, 761, 802, 843,
+                                884, 925, 966, 1023, 1104, 1189, 1281, 1383, 1568, 1753, 1938, 2123, 2308, 2493, 2520,
+                                2554, 2588, 2633, 2678, 2723, 2768, 2824, 2880, 2936, 3004, 3071, 3139, 3206, 3274
+                            ],
+                            "spawnDmg_4": [
+                                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100,
+                                108, 124, 141, 157, 173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370,
+                                386, 409, 442, 476, 512, 553, 627, 701, 775, 849, 923, 997, 1008, 1022, 1035, 1053,
+                                1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+                            ],
+                            "spawnArmor_4": [
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0
+                            ]
+                        },
+                        "constants": {
+                            "nrOfUnits": "2",
+                            "nrOfUnits_2": "2",
+                            "nrOfUnitIds": "4",
+                            "unitId": "blackSmnBloodletterHSE",
+                            "unitId_2": "thousSmnPinkHorrorHSE",
+                            "unitId_3": "thousSmnBlueHorrorHSE",
+                            "unitId_4": "thousSmnScreamerHSE"
+                        },
+                        "variablesAffectedByRarityBonus": [
+                            "spawnHp",
+                            "spawnDmg",
+                            "spawnArmor",
+                            "spawnCritDmg",
+                            "spawnBlockDmg",
+                            "spawnHp_2",
+                            "spawnDmg_2",
+                            "spawnArmor_2",
+                            "spawnCritDmg_2",
+                            "spawnBlockDmg_2",
+                            "spawnHp_3",
+                            "spawnDmg_3",
+                            "spawnArmor_3",
+                            "spawnCritDmg_3",
+                            "spawnBlockDmg_3",
+                            "spawnHp_4",
+                            "spawnDmg_4",
+                            "spawnArmor_4",
+                            "spawnCritDmg_4",
+                            "spawnBlockDmg_4"
+                        ]
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                },
+                "EnvStatBoost:WarpSurge": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "Chaos",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_warp_surge_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_warp_surge_tier_high:350",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_warp_surge_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_high_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_warp_surge_tier_high:300",
+                            "stamina:600",
+                            "raidTicket:100",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_warp_surge_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": ["tieredRewardPoints_warp_surge_tier_high:550", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Warp Surge</i> is here",
                 "Defeat <style=\"Aliance_Chaos\">Chaos</style> units, gain <style=\"HSE_Points_WarpSurge\">Warp Surge Points</style> and claim exclusive rewards!",
@@ -439,6 +636,203 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvAllyAndEnemyNpcs:WarpSurge": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {
+                            "spawnHp": [
+                                39, 47, 55, 62, 70, 79, 88, 97, 106, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196,
+                                205, 217, 234, 269, 305, 340, 376, 411, 447, 482, 518, 553, 589, 624, 659, 695, 730,
+                                766, 801, 837, 887, 957, 1031, 1110, 1198, 1359, 1519, 1679, 1840, 2000, 2160, 2184,
+                                2213, 2243, 2282, 2321, 2360, 2399, 2447, 2496, 2545, 2603, 2662, 2720, 2779, 2837
+                            ],
+                            "spawnDmg": [
+                                25, 30, 35, 40, 45, 51, 57, 62, 68, 74, 80, 85, 91, 97, 103, 108, 114, 120, 126, 131,
+                                139, 150, 173, 195, 218, 241, 264, 286, 309, 332, 355, 377, 400, 423, 446, 468, 491,
+                                514, 537, 569, 614, 661, 712, 768, 871, 974, 1077, 1179, 1282, 1385, 1400, 1419, 1438,
+                                1463, 1488, 1513, 1538, 1569, 1600, 1631, 1669, 1706, 1744, 1781, 1819
+                            ],
+                            "spawnHp_2": [
+                                36, 43, 50, 58, 65, 73, 81, 90, 98, 106, 114, 123, 131, 139, 148, 156, 164, 172, 181,
+                                189, 200, 216, 248, 281, 314, 347, 379, 412, 445, 478, 510, 543, 576, 609, 642, 674,
+                                707, 740, 773, 819, 883, 951, 1025, 1106, 1254, 1402, 1550, 1698, 1846, 1994, 2016,
+                                2043, 2070, 2106, 2142, 2178, 2214, 2259, 2304, 2349, 2403, 2457, 2511, 2565, 2619
+                            ],
+                            "spawnDmg_2": [
+                                9, 11, 13, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 50, 54,
+                                62, 70, 78, 87, 95, 103, 111, 119, 128, 136, 144, 152, 160, 169, 177, 185, 193, 205,
+                                221, 238, 256, 277, 314, 351, 388, 425, 462, 499, 504, 511, 518, 527, 536, 545, 554,
+                                565, 576, 587, 601, 614, 628, 641, 655
+                            ],
+                            "spawnArmor_2": [
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0
+                            ],
+                            "spawnHp_3": [
+                                21, 25, 29, 34, 38, 43, 47, 52, 57, 62, 67, 72, 76, 81, 86, 91, 96, 101, 105, 110, 117,
+                                126, 145, 164, 183, 202, 221, 240, 260, 279, 298, 317, 336, 355, 374, 393, 412, 432,
+                                451, 478, 515, 555, 598, 645, 732, 818, 904, 991, 1077, 1163, 1176, 1192, 1208, 1229,
+                                1250, 1271, 1292, 1318, 1344, 1370, 1402, 1433, 1465, 1496, 1528
+                            ],
+                            "spawnDmg_3": [
+                                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100,
+                                108, 124, 141, 157, 173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370,
+                                386, 409, 442, 476, 512, 553, 627, 701, 775, 849, 923, 997, 1008, 1022, 1035, 1053,
+                                1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+                            ],
+                            "spawnHp_4": [
+                                45, 54, 63, 72, 81, 91, 102, 112, 122, 133, 143, 153, 164, 174, 185, 195, 205, 216, 226,
+                                236, 250, 270, 311, 351, 392, 433, 474, 515, 556, 597, 638, 679, 720, 761, 802, 843,
+                                884, 925, 966, 1023, 1104, 1189, 1281, 1383, 1568, 1753, 1938, 2123, 2308, 2493, 2520,
+                                2554, 2588, 2633, 2678, 2723, 2768, 2824, 2880, 2936, 3004, 3071, 3139, 3206, 3274
+                            ],
+                            "spawnDmg_4": [
+                                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100,
+                                108, 124, 141, 157, 173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370,
+                                386, 409, 442, 476, 512, 553, 627, 701, 775, 849, 923, 997, 1008, 1022, 1035, 1053,
+                                1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+                            ],
+                            "spawnArmor_4": [
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0
+                            ]
+                        },
+                        "constants": {
+                            "nrOfUnits": "2",
+                            "nrOfUnits_2": "2",
+                            "nrOfUnitIds": "4",
+                            "unitId": "blackSmnBloodletterHSE",
+                            "unitId_2": "thousSmnPinkHorrorHSE",
+                            "unitId_3": "thousSmnBlueHorrorHSE",
+                            "unitId_4": "thousSmnScreamerHSE"
+                        },
+                        "variablesAffectedByRarityBonus": [
+                            "spawnHp",
+                            "spawnDmg",
+                            "spawnArmor",
+                            "spawnCritDmg",
+                            "spawnBlockDmg",
+                            "spawnHp_2",
+                            "spawnDmg_2",
+                            "spawnArmor_2",
+                            "spawnCritDmg_2",
+                            "spawnBlockDmg_2",
+                            "spawnHp_3",
+                            "spawnDmg_3",
+                            "spawnArmor_3",
+                            "spawnCritDmg_3",
+                            "spawnBlockDmg_3",
+                            "spawnHp_4",
+                            "spawnDmg_4",
+                            "spawnArmor_4",
+                            "spawnCritDmg_4",
+                            "spawnBlockDmg_4"
+                        ]
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                },
+                "EnvStatBoost:WarpSurge": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "Chaos",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_warp_surge_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_warp_surge_tier_mid:350",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_warp_surge_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_mid_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_warp_surge_tier_mid:300",
+                            "stamina:600",
+                            "raidTicket:100",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_warp_surge_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00399",
+                        "price": 399,
+                        "mercadoId": "offer_00399",
+                        "rewards": ["tieredRewardPoints_warp_surge_tier_mid:450", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Warp Surge</i> is here",
                 "Defeat <style=\"Aliance_Chaos\">Chaos</style> units, gain <style=\"HSE_Points_WarpSurge\">Warp Surge Points</style> and claim exclusive rewards!",
@@ -663,6 +1057,203 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvAllyAndEnemyNpcs:WarpSurge": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {
+                            "spawnHp": [
+                                39, 47, 55, 62, 70, 79, 88, 97, 106, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196,
+                                205, 217, 234, 269, 305, 340, 376, 411, 447, 482, 518, 553, 589, 624, 659, 695, 730,
+                                766, 801, 837, 887, 957, 1031, 1110, 1198, 1359, 1519, 1679, 1840, 2000, 2160, 2184,
+                                2213, 2243, 2282, 2321, 2360, 2399, 2447, 2496, 2545, 2603, 2662, 2720, 2779, 2837
+                            ],
+                            "spawnDmg": [
+                                25, 30, 35, 40, 45, 51, 57, 62, 68, 74, 80, 85, 91, 97, 103, 108, 114, 120, 126, 131,
+                                139, 150, 173, 195, 218, 241, 264, 286, 309, 332, 355, 377, 400, 423, 446, 468, 491,
+                                514, 537, 569, 614, 661, 712, 768, 871, 974, 1077, 1179, 1282, 1385, 1400, 1419, 1438,
+                                1463, 1488, 1513, 1538, 1569, 1600, 1631, 1669, 1706, 1744, 1781, 1819
+                            ],
+                            "spawnHp_2": [
+                                36, 43, 50, 58, 65, 73, 81, 90, 98, 106, 114, 123, 131, 139, 148, 156, 164, 172, 181,
+                                189, 200, 216, 248, 281, 314, 347, 379, 412, 445, 478, 510, 543, 576, 609, 642, 674,
+                                707, 740, 773, 819, 883, 951, 1025, 1106, 1254, 1402, 1550, 1698, 1846, 1994, 2016,
+                                2043, 2070, 2106, 2142, 2178, 2214, 2259, 2304, 2349, 2403, 2457, 2511, 2565, 2619
+                            ],
+                            "spawnDmg_2": [
+                                9, 11, 13, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 50, 54,
+                                62, 70, 78, 87, 95, 103, 111, 119, 128, 136, 144, 152, 160, 169, 177, 185, 193, 205,
+                                221, 238, 256, 277, 314, 351, 388, 425, 462, 499, 504, 511, 518, 527, 536, 545, 554,
+                                565, 576, 587, 601, 614, 628, 641, 655
+                            ],
+                            "spawnArmor_2": [
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0
+                            ],
+                            "spawnHp_3": [
+                                21, 25, 29, 34, 38, 43, 47, 52, 57, 62, 67, 72, 76, 81, 86, 91, 96, 101, 105, 110, 117,
+                                126, 145, 164, 183, 202, 221, 240, 260, 279, 298, 317, 336, 355, 374, 393, 412, 432,
+                                451, 478, 515, 555, 598, 645, 732, 818, 904, 991, 1077, 1163, 1176, 1192, 1208, 1229,
+                                1250, 1271, 1292, 1318, 1344, 1370, 1402, 1433, 1465, 1496, 1528
+                            ],
+                            "spawnDmg_3": [
+                                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100,
+                                108, 124, 141, 157, 173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370,
+                                386, 409, 442, 476, 512, 553, 627, 701, 775, 849, 923, 997, 1008, 1022, 1035, 1053,
+                                1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+                            ],
+                            "spawnHp_4": [
+                                45, 54, 63, 72, 81, 91, 102, 112, 122, 133, 143, 153, 164, 174, 185, 195, 205, 216, 226,
+                                236, 250, 270, 311, 351, 392, 433, 474, 515, 556, 597, 638, 679, 720, 761, 802, 843,
+                                884, 925, 966, 1023, 1104, 1189, 1281, 1383, 1568, 1753, 1938, 2123, 2308, 2493, 2520,
+                                2554, 2588, 2633, 2678, 2723, 2768, 2824, 2880, 2936, 3004, 3071, 3139, 3206, 3274
+                            ],
+                            "spawnDmg_4": [
+                                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100,
+                                108, 124, 141, 157, 173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370,
+                                386, 409, 442, 476, 512, 553, 627, 701, 775, 849, 923, 997, 1008, 1022, 1035, 1053,
+                                1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+                            ],
+                            "spawnArmor_4": [
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                                0, 0, 0, 0, 0, 0, 0
+                            ]
+                        },
+                        "constants": {
+                            "nrOfUnits": "2",
+                            "nrOfUnits_2": "2",
+                            "nrOfUnitIds": "4",
+                            "unitId": "blackSmnBloodletterHSE",
+                            "unitId_2": "thousSmnPinkHorrorHSE",
+                            "unitId_3": "thousSmnBlueHorrorHSE",
+                            "unitId_4": "thousSmnScreamerHSE"
+                        },
+                        "variablesAffectedByRarityBonus": [
+                            "spawnHp",
+                            "spawnDmg",
+                            "spawnArmor",
+                            "spawnCritDmg",
+                            "spawnBlockDmg",
+                            "spawnHp_2",
+                            "spawnDmg_2",
+                            "spawnArmor_2",
+                            "spawnCritDmg_2",
+                            "spawnBlockDmg_2",
+                            "spawnHp_3",
+                            "spawnDmg_3",
+                            "spawnArmor_3",
+                            "spawnCritDmg_3",
+                            "spawnBlockDmg_3",
+                            "spawnHp_4",
+                            "spawnDmg_4",
+                            "spawnArmor_4",
+                            "spawnCritDmg_4",
+                            "spawnBlockDmg_4"
+                        ]
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                },
+                "EnvStatBoost:WarpSurge": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "Chaos",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_warp_surge_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_warp_surge_tier_low:350",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_warp_surge_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_low_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_warp_surge_tier_low:300",
+                            "stamina:600",
+                            "raidTicket:100",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_warp_surge_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_warp_surge_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_warp_surge_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00299",
+                        "price": 299,
+                        "mercadoId": "offer_00299",
+                        "rewards": ["tieredRewardPoints_warp_surge_tier_low:400", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Warp Surge</i> is here",
                 "Defeat <style=\"Aliance_Chaos\">Chaos</style> units, gain <style=\"HSE_Points_WarpSurge\">Warp Surge Points</style> and claim exclusive rewards!",

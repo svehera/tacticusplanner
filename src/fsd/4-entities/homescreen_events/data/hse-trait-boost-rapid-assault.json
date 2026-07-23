@@ -154,6 +154,106 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvStatBoost:TraitBoost_RapidAssault": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "RapidAssault",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_trait_boost_rapidassault_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_high:125",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:500"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_high:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_hse_trait_boost_rapid_assault_tier_high:150", "gems:1000"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Rapid Assault Boost</i> is here",
                 "Earn points by battling with Rapid Assault units and claim exclusive rewards!",
@@ -315,6 +415,106 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvStatBoost:TraitBoost_RapidAssault": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "RapidAssault",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_trait_boost_rapidassault_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_mid:75",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_mid:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_hse_trait_boost_rapid_assault_tier_mid:150", "gems:1000"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Rapid Assault Boost</i> is here",
                 "Earn points by battling with Rapid Assault units and claim exclusive rewards!",
@@ -476,6 +676,106 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvStatBoost:TraitBoost_RapidAssault": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "RapidAssault",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_trait_boost_rapidassault_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_low:75",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_low:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": ["tieredRewardPoints_hse_trait_boost_rapid_assault_tier_low:100", "gems:400"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Rapid Assault Boost</i> is here",
                 "Earn points by battling with Rapid Assault units and claim exclusive rewards!",

@@ -110,6 +110,64 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_high:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_high:25",
+                            "summoningToken:5",
+                            "specialSummoningToken:5"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_emperor_dark_gods_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_high:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_high:25",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>For the Emperor!</i> is here",
                 "Cleanse the heretics to gain <style=\"HSE_Points_ForTheEmperor\">Imperial points</style> and claim exclusive rewards!",
@@ -225,6 +283,64 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_mid:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_mid:25",
+                            "summoningToken:5",
+                            "specialSummoningToken:5"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_emperor_dark_gods_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_mid:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_mid:25",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>For the Emperor!</i> is here",
                 "Cleanse the heretics to gain <style=\"HSE_Points_ForTheEmperor\">Imperial points</style> and claim exclusive rewards!",
@@ -340,6 +456,64 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_low:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_low:25",
+                            "summoningToken:5",
+                            "specialSummoningToken:5"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_emperor_dark_gods_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_low:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_low:25",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>For the Emperor!</i> is here",
                 "Cleanse the heretics to gain <style=\"HSE_Points_ForTheEmperor\">Imperial points</style> and claim exclusive rewards!",

@@ -4,17 +4,21 @@ import { useContext, useMemo, useState } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
 
+import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { homescreenEvents, HseIcon, humanizeEventName, resolveHseTier } from '@/fsd/4-entities/homescreen_events';
+import { getHseDisplayName, homescreenEvents, HseIcon, resolveHseTier } from '@/fsd/4-entities/homescreen_events';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { MAX_LEGENDARY_THRESHOLD, PL_MEDIUM } from '@/fsd/4-entities/shops';
+
+import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
+import { resolveHseDescriptionLines } from '@/fsd/3-features/homescreen-events/hse-description-resolver';
 
 import { hseRewardInfo, hseTierKeyForRoster, REWARD_ICON_SIZE } from './hses-lookup.utils';
 
 const sortedEvents = homescreenEvents
-    .map(event => ({ event, displayName: humanizeEventName(event.eventName) }))
+    .map(event => ({ event, displayName: getHseDisplayName(event) }))
     .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
 
 export const HsesLookup = () => {
@@ -42,6 +46,7 @@ export const HsesLookup = () => {
 
     const resolvedTier = selectedEvent ? resolveHseTier(selectedEvent, tierKeyForRoster) : undefined;
     const rewards = resolvedTier?.tier.tieredProgressRewards ?? [];
+    const descriptionLines = resolvedTier ? resolveHseDescriptionLines(resolvedTier.tier) : [];
     const isSingleTierEvent = selectedEvent ? Object.keys(selectedEvent.tiers).length === 1 : false;
 
     return (
@@ -95,7 +100,26 @@ export const HsesLookup = () => {
             {selectedEvent && (
                 <div className="flex items-center gap-3">
                     <HseIcon eventName={selectedEvent.eventName} className="size-8 text-(--soft-fg)" />
-                    <h1 className="text-xl font-bold">{humanizeEventName(selectedEvent.eventName)}</h1>
+                    <h1 className="text-xl font-bold">{getHseDisplayName(selectedEvent)}</h1>
+                </div>
+            )}
+
+            {descriptionLines.length > 0 && (
+                <div className="flex flex-col gap-2 rounded-xl border border-(--border) bg-(--overlay) p-4 text-sm text-(--fg)">
+                    {descriptionLines.map((line, index) => (
+                        <div key={index} className={index === 0 ? 'text-base font-semibold' : undefined}>
+                            <AbilityText
+                                text={line.text}
+                                level={1}
+                                variables={line.variables}
+                                constants={line.constants}
+                                scaledVariableNames={[]}
+                                rarity={Rarity.Common}
+                                unitName=""
+                                factionId=""
+                            />
+                        </div>
+                    ))}
                 </div>
             )}
 

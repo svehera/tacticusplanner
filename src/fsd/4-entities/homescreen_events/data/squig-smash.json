@@ -156,6 +156,101 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvSquigSmash": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {
+                            "summonHp": [
+                                65, 78, 91, 104, 117, 132, 147, 162, 177, 192, 207, 222, 237, 252, 267, 281, 296, 311,
+                                326, 341, 361, 389, 449, 508, 567, 626, 685, 744, 803, 863, 922, 981, 1040, 1099, 1158,
+                                1217, 1277, 1336, 1395, 1478, 1595, 1718, 1851, 1997, 2265, 2532, 2799, 3066, 3333,
+                                3600, 3640, 3689, 3738, 3803, 3868, 3933, 3998, 4079, 4160, 4241, 4339, 4436, 4534,
+                                4631, 4729
+                            ],
+                            "summonDmg": [
+                                24, 29, 34, 38, 43, 49, 54, 60, 65, 71, 76, 82, 87, 93, 98, 104, 109, 115, 120, 126,
+                                133, 144, 166, 187, 209, 231, 253, 275, 297, 318, 340, 362, 384, 406, 428, 450, 471,
+                                493, 515, 546, 589, 634, 683, 738, 836, 935, 1033, 1132, 1231, 1330, 1344, 1362, 1380,
+                                1404, 1428, 1452, 1476, 1506, 1536, 1566, 1602, 1638, 1674, 1710, 1746
+                            ],
+                            "summonArmor": [
+                                15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90,
+                                104, 117, 131, 144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322,
+                                341, 368, 396, 427, 461, 523, 584, 646, 708, 769, 831, 840, 851, 863, 878, 893, 908,
+                                923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
+                            ]
+                        },
+                        "constants": {
+                            "nrOfSummons": "5",
+                            "nrOfSummons_2": "3",
+                            "unitId": "orksNpc7Squig"
+                        },
+                        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_squig_smash_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_squig_smash_tier_high:85",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_squig_smash_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_squig_smash_tier_high:55",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:100"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Squig Smash</i> is here",
                 "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
@@ -319,6 +414,101 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvSquigSmash": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {
+                            "summonHp": [
+                                65, 78, 91, 104, 117, 132, 147, 162, 177, 192, 207, 222, 237, 252, 267, 281, 296, 311,
+                                326, 341, 361, 389, 449, 508, 567, 626, 685, 744, 803, 863, 922, 981, 1040, 1099, 1158,
+                                1217, 1277, 1336, 1395, 1478, 1595, 1718, 1851, 1997, 2265, 2532, 2799, 3066, 3333,
+                                3600, 3640, 3689, 3738, 3803, 3868, 3933, 3998, 4079, 4160, 4241, 4339, 4436, 4534,
+                                4631, 4729
+                            ],
+                            "summonDmg": [
+                                24, 29, 34, 38, 43, 49, 54, 60, 65, 71, 76, 82, 87, 93, 98, 104, 109, 115, 120, 126,
+                                133, 144, 166, 187, 209, 231, 253, 275, 297, 318, 340, 362, 384, 406, 428, 450, 471,
+                                493, 515, 546, 589, 634, 683, 738, 836, 935, 1033, 1132, 1231, 1330, 1344, 1362, 1380,
+                                1404, 1428, 1452, 1476, 1506, 1536, 1566, 1602, 1638, 1674, 1710, 1746
+                            ],
+                            "summonArmor": [
+                                15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90,
+                                104, 117, 131, 144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322,
+                                341, 368, 396, 427, 461, 523, 584, 646, 708, 769, 831, 840, 851, 863, 878, 893, 908,
+                                923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
+                            ]
+                        },
+                        "constants": {
+                            "nrOfSummons": "5",
+                            "nrOfSummons_2": "3",
+                            "unitId": "orksNpc7Squig"
+                        },
+                        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_squig_smash_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_squig_smash_tier_mid:85",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_squig_smash_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_squig_smash_tier_mid:55",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:100"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Squig Smash</i> is here",
                 "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
@@ -482,6 +672,101 @@
                     "endless": true
                 }
             ],
+            "abilities": {
+                "EnvSquigSmash": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {
+                            "summonHp": [
+                                65, 78, 91, 104, 117, 132, 147, 162, 177, 192, 207, 222, 237, 252, 267, 281, 296, 311,
+                                326, 341, 361, 389, 449, 508, 567, 626, 685, 744, 803, 863, 922, 981, 1040, 1099, 1158,
+                                1217, 1277, 1336, 1395, 1478, 1595, 1718, 1851, 1997, 2265, 2532, 2799, 3066, 3333,
+                                3600, 3640, 3689, 3738, 3803, 3868, 3933, 3998, 4079, 4160, 4241, 4339, 4436, 4534,
+                                4631, 4729
+                            ],
+                            "summonDmg": [
+                                24, 29, 34, 38, 43, 49, 54, 60, 65, 71, 76, 82, 87, 93, 98, 104, 109, 115, 120, 126,
+                                133, 144, 166, 187, 209, 231, 253, 275, 297, 318, 340, 362, 384, 406, 428, 450, 471,
+                                493, 515, 546, 589, 634, 683, 738, 836, 935, 1033, 1132, 1231, 1330, 1344, 1362, 1380,
+                                1404, 1428, 1452, 1476, 1506, 1536, 1566, 1602, 1638, 1674, 1710, 1746
+                            ],
+                            "summonArmor": [
+                                15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90,
+                                104, 117, 131, 144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322,
+                                341, 368, 396, 427, 461, 523, 584, 646, 708, 769, 831, 840, 851, 863, 878, 893, 908,
+                                923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
+                            ]
+                        },
+                        "constants": {
+                            "nrOfSummons": "5",
+                            "nrOfSummons_2": "3",
+                            "unitId": "orksNpc7Squig"
+                        },
+                        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_squig_smash_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_squig_smash_tier_low:85",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_squig_smash_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_squig_smash_tier_low:55",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:100"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Squig Smash</i> is here",
                 "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",

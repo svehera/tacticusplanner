@@ -8,6 +8,7 @@ export { UnitShardIcon } from './unit-shard.icon';
 export { BadgeImage } from './badge-image';
 export { ComponentImage } from './component-image';
 export { ForgeBadgeImage } from './forge-badge-image';
+export { UnknownItemImage } from './unknown-item-image';
 export { pooEmoji, starEmoji } from './emojis';
 export { TraitImage } from './trait-image';
 export { DamageTypeImage } from './damage-type-image';

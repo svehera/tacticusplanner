@@ -163,6 +163,91 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_rarity_training_rush_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_rarity_training_rush_tier_high:1000",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200",
+                            "xpLegendary:5",
+                            "gold:5000"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_rarity_training_rush_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_high_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_rarity_training_rush_tier_high:800",
+                            "stamina:600",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:1",
+                            "raidTicket:100",
+                            "gems:100"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_rarity_training_rush_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00399",
+                        "price": 399,
+                        "mercadoId": "offer_00399",
+                        "rewards": ["tieredRewardPoints_rarity_training_rush_tier_high:500", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "Earn 3x <style=\"STAT\">XP</style> during <i>Training Rush</i>",
                 "Defeat units, gain <style=\"HSE_Points_TrainingRush\">Training Points</style> and claim exclusive rewards!",
@@ -333,6 +418,91 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_rarity_training_rush_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_rarity_training_rush_tier_mid:1000",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200",
+                            "xpLegendary:5",
+                            "gold:5000"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_rarity_training_rush_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_mid_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_rarity_training_rush_tier_mid:800",
+                            "stamina:600",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:1",
+                            "raidTicket:100",
+                            "gems:100"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_rarity_training_rush_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00399",
+                        "price": 399,
+                        "mercadoId": "offer_00399",
+                        "rewards": ["tieredRewardPoints_rarity_training_rush_tier_mid:500", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "Earn 3x <style=\"STAT\">XP</style> during <i>Training Rush</i>",
                 "Defeat units, gain <style=\"HSE_Points_TrainingRush\">Training Points</style> and claim exclusive rewards!",
@@ -503,6 +673,91 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_rarity_training_rush_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_rarity_training_rush_tier_low:1000",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200",
+                            "xpLegendary:5",
+                            "gold:5000"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_rarity_training_rush_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_low_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_rarity_training_rush_tier_low:800",
+                            "stamina:600",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:1",
+                            "raidTicket:100",
+                            "gems:100"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_rarity_training_rush_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_rarity_training_rush_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_rarity_training_rush_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00399",
+                        "price": 399,
+                        "mercadoId": "offer_00399",
+                        "rewards": ["tieredRewardPoints_rarity_training_rush_tier_low:500", "gems:500"]
+                    }
+                }
+            },
             "descriptions": [
                 "Earn 3x <style=\"STAT\">XP</style> during <i>Training Rush</i>",
                 "Defeat units, gain <style=\"HSE_Points_TrainingRush\">Training Points</style> and claim exclusive rewards!",

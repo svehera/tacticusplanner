@@ -170,6 +170,87 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_machine_hunt_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_high_bundle_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_high:750",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_machine_hunt_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_high_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_high:500",
+                            "stamina:600",
+                            "raidTicket:100",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_machine_hunt_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01599",
+                        "price": 1599,
+                        "mercadoId": "offer_01599",
+                        "rewards": ["tieredRewardPoints_machine_hunt_tier_high:1000", "itemsMythic", "mythicDust:120"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Machine Hunt</i> is here",
                 "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
@@ -346,6 +427,87 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_machine_hunt_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_mid_bundle_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_mid:750",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_machine_hunt_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_mid_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_mid:500",
+                            "stamina:600",
+                            "raidTicket:100",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_machine_hunt_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01599",
+                        "price": 1599,
+                        "mercadoId": "offer_01599",
+                        "rewards": ["tieredRewardPoints_machine_hunt_tier_mid:1000", "itemsLegendary", "dust:2000"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Machine Hunt</i> is here",
                 "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
@@ -522,6 +684,92 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_machine_hunt_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_low_bundle_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01599",
+                        "price": 1599,
+                        "mercadoId": "offer_01599",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_low:500",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_machine_hunt_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_low_playmore_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_low:350",
+                            "stamina:300",
+                            "raidTicket:50",
+                            "stamina_treasureBeach"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_machine_hunt_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_machine_hunt_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_machine_hunt_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_machine_hunt_tier_low:1000",
+                            "itemsEpic",
+                            "dust:750",
+                            "itemsRare"
+                        ]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>Machine Hunt</i> is here",
                 "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",

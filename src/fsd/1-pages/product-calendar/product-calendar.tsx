@@ -5,7 +5,7 @@ import { getImageUrl } from '@/shared-logic/functions';
 
 import { Accordion, AccordionBody, AccordionHeader } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
-import { MiscIcon, OrbIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, OrbIcon, UnknownItemImage } from '@/fsd/5-shared/ui/icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import type { IProductCalendar, IProductCalendarOffer } from '@/fsd/4-entities/calendars';
@@ -28,40 +28,6 @@ const calendarModules = import.meta.glob<{ default: IProductCalendar }>('../../4
 const ALL_CALENDARS: IProductCalendar[] = Object.entries(calendarModules)
     .toSorted(([pathA], [pathB]) => pathB.localeCompare(pathA))
     .map(([, module_]) => module_.default as unknown as IProductCalendar);
-
-function UnknownItemIcon({ rarity, size = ICON_SIZE }: { rarity: string; size?: number }) {
-    const isRelic = rarity === 'Relic';
-    const baseFrameKey = `${isRelic ? 'mythic' : rarity.toLowerCase()}EquipmentFrame` as keyof typeof tacticusIcons;
-    const baseFrame = tacticusIcons[baseFrameKey];
-    const relicFrame = isRelic ? tacticusIcons.relicEquipmentFrame : undefined;
-    const item = tacticusIcons.itemUnknown;
-    return (
-        <div className="relative shrink-0" style={{ width: size, height: size }}>
-            <img
-                src={item?.file}
-                alt=""
-                className="pointer-events-none absolute inset-0 m-auto object-contain"
-                style={{ width: size * 0.7, height: size * 0.7 }}
-            />
-            {baseFrame && (
-                <img
-                    src={baseFrame.file}
-                    alt=""
-                    className="pointer-events-none absolute inset-0 m-auto object-contain"
-                    style={{ width: size, height: size }}
-                />
-            )}
-            {relicFrame && (
-                <img
-                    src={relicFrame.file}
-                    alt=""
-                    className="pointer-events-none absolute inset-0 m-auto object-contain"
-                    style={{ width: size, height: size }}
-                />
-            )}
-        </div>
-    );
-}
 
 function UnknownUpgradeMaterialIcon({ rarity, size = ICON_SIZE }: { rarity: string; size?: number }) {
     const icon = tacticusIcons[`upgrade${rarity}` as keyof typeof tacticusIcons];
@@ -125,7 +91,7 @@ function renderRewardIcon(icon: CalendarRewardIcon): React.ReactNode {
             const xpBookIconKey = `${icon.rarity.toLowerCase()}Book` as keyof typeof tacticusIcons;
             const xpBookIcon = tacticusIcons[xpBookIconKey];
             if (!xpBookIcon) {
-                return <UnknownItemIcon rarity={icon.rarity} />;
+                return <UnknownItemImage rarity={icon.rarity} size={ICON_SIZE} />;
             }
             return (
                 <div className="relative shrink-0" style={{ width: ICON_SIZE, height: ICON_SIZE }}>
@@ -139,7 +105,7 @@ function renderRewardIcon(icon: CalendarRewardIcon): React.ReactNode {
             );
         }
         case 'unknownItem': {
-            return <UnknownItemIcon rarity={icon.rarity} />;
+            return <UnknownItemImage rarity={icon.rarity} size={ICON_SIZE} />;
         }
         case 'unknownUpgradeMaterial': {
             return <UnknownUpgradeMaterialIcon rarity={icon.rarity} size={50} />;

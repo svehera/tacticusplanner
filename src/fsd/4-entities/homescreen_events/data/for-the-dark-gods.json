@@ -107,6 +107,31 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01599",
+                        "price": 1599,
+                        "mercadoId": "offer_01599",
+                        "rewards": ["draft_HSE_emperor_dark_gods_tier_high:100", "draft_abilityTokensLegendary:5"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>For the Dark Gods!</i> is here",
                 "Spread corruption through war to earn <style=\"HSE_Points_ForTheDarkGods\">Chaos points</style> and claim unholy rewards!",
@@ -219,6 +244,31 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["draft_HSE_emperor_dark_gods_tier_mid:100", "draft_abilityTokensEpic:10"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>For the Dark Gods!</i> is here",
                 "Spread corruption through war to earn <style=\"HSE_Points_ForTheDarkGods\">Chaos points</style> and claim unholy rewards!",
@@ -331,6 +381,31 @@
                     "endless": true
                 }
             ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": ["draft_HSE_emperor_dark_gods_tier_low:100", "draft_abilityTokensRare:10"]
+                    }
+                }
+            },
             "descriptions": [
                 "<i>For the Dark Gods!</i> is here",
                 "Spread corruption through war to earn <style=\"HSE_Points_ForTheDarkGods\">Chaos points</style> and claim unholy rewards!",
