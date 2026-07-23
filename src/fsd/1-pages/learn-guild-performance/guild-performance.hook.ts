@@ -280,6 +280,16 @@ export function useGuildPerformance() {
                     setSharedLeaderboards(cachedSharedLeaderboards);
                 } else {
                     // --- Keyholder path ---
+                    // Fire everything at once. The current-season raid fetch only depends on the
+                    // season list, so chain it off that promise to overlap it with the other calls
+                    // instead of waiting for the whole batch to resolve first.
+                    const seasonsPromise = getGuildRaidSeasonsApi();
+                    const seasonRaidPromise = seasonsPromise.then(response => {
+                        const seasonNumber = response.data?.currentSeason;
+                        return seasonNumber == undefined
+                            ? undefined
+                            : getGuildRaidSeasonApi(seasonNumber, forceRefreshAfter);
+                    });
                     const [
                         seasonsResponse,
                         namesResponse,
@@ -289,8 +299,9 @@ export function useGuildPerformance() {
                         piResponse,
                         tokenUsageResponse,
                         overridesResponse,
+                        seasonResponse,
                     ] = await Promise.all([
-                        getGuildRaidSeasonsApi(),
+                        seasonsPromise,
                         makeApiCall<GuildMemberName[]>('GET', 'guild/members/names'),
                         makeApiCall<GuildTokenEntry[]>('GET', 'guild/tokens'),
                         makeApiCall<unknown>('GET', 'guild/sharedLeaderboards'),
@@ -298,6 +309,7 @@ export function useGuildPerformance() {
                         getGuildPerformanceIndexApi(),
                         getGuildTokenUsageApi(),
                         getGuildOverridesCached(),
+                        seasonRaidPromise,
                     ]);
 
                     if (seasonsResponse.data) {
@@ -305,23 +317,19 @@ export function useGuildPerformance() {
                         setSeasonList(cachedSeasonList);
                     }
 
-                    const currentSeasonNumber = seasonsResponse.data?.currentSeason;
-                    if (currentSeasonNumber != undefined) {
-                        const seasonResponse = await getGuildRaidSeasonApi(currentSeasonNumber, forceRefreshAfter);
-                        if (seasonResponse.data) {
-                            if (isCurrentSeasonResponse(seasonResponse.data)) {
-                                const raw = seasonResponse.data.raidResponse as unknown as
-                                    | TacticusGuildRaidResponse
-                                    | undefined;
-                                if (raw) {
-                                    cachedCurrent = raw;
-                                    setCurrent(raw);
-                                }
-                            } else {
-                                const entry = mapHistoricalApiResponse(seasonResponse.data);
-                                cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(entry.season, entry);
-                                setSeasonDataMap(new Map(cachedSeasonDataMap));
+                    if (seasonResponse?.data) {
+                        if (isCurrentSeasonResponse(seasonResponse.data)) {
+                            const raw = seasonResponse.data.raidResponse as unknown as
+                                | TacticusGuildRaidResponse
+                                | undefined;
+                            if (raw) {
+                                cachedCurrent = raw;
+                                setCurrent(raw);
                             }
+                        } else {
+                            const entry = mapHistoricalApiResponse(seasonResponse.data);
+                            cachedSeasonDataMap = new Map(cachedSeasonDataMap).set(entry.season, entry);
+                            setSeasonDataMap(new Map(cachedSeasonDataMap));
                         }
                     }
 

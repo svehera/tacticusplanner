@@ -3,11 +3,13 @@ import { enqueueSnackbar } from 'notistack';
 
 export const DebugJson = ({ label, value }: { label: string; value: unknown }) => {
     const debugEnabled = localStorage.getItem('debugMode') === 'true';
+    // Serialize only when debug mode is on — this can be a large payload and would otherwise run
+    // on every render even while the panel is hidden.
+    if (!debugEnabled) return <></>;
     const text = JSON.stringify(value, undefined, 2);
     const handleCopy = () => {
         navigator.clipboard.writeText(text).then(_ => enqueueSnackbar('Copied', { variant: 'success' }));
     };
-    if (!debugEnabled) return <></>;
     return (
         <details className="rounded border border-yellow-300 bg-yellow-50 dark:border-yellow-700 dark:bg-yellow-950">
             <summary className="flex cursor-pointer items-center gap-2 px-3 py-1 text-xs font-semibold text-yellow-800 dark:text-yellow-200">

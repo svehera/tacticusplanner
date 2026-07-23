@@ -40,6 +40,7 @@ export const HistoricalPerformanceTab = ({
     names,
     selectedPlayerId,
     ownUserId,
+    isLoading = false,
 }: {
     /** Raw current-season raid data — used to compute the live season's PI on the fly. */
     currentData: TacticusGuildRaidResponse | undefined;
@@ -49,6 +50,9 @@ export const HistoricalPerformanceTab = ({
     selectedPlayerId: string | undefined;
     /** The caller's own userId — used to resolve null-playerId rows for keyless members. */
     ownUserId?: string;
+    /** True while the performance-index is still being fetched — avoids flashing a near-empty
+     *  chart (current season only) before the historical seasons arrive. */
+    isLoading?: boolean;
 }) => {
     const isDark = useTheme().palette.mode === 'dark';
     const chartTheme = useMemo(() => chartThemeFor(isDark), [isDark]);
@@ -95,6 +99,13 @@ export const HistoricalPerformanceTab = ({
     const firstSeason = allSeasons[0];
     const lastSeason = allSeasons.at(-1);
 
+    if (isLoading) {
+        return (
+            <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
+                Loading…
+            </div>
+        );
+    }
     if (allEntries.length === 0) {
         return <p className="text-sm text-gray-500">No season history available yet.</p>;
     }
