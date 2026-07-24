@@ -16,6 +16,7 @@ interface Props {
     guildShopSection?: ReactNode;
     warShopSection?: ReactNode;
     rogueTraderSection?: ReactNode;
+    crusadeShopSection?: ReactNode;
     onOpenSettings?: () => void;
 }
 
@@ -27,6 +28,7 @@ export const TodayRaids: FC<Props> = ({
     guildShopSection,
     warShopSection,
     rogueTraderSection,
+    crusadeShopSection,
     onOpenSettings,
 }) => {
     const locs = raids.flatMap(raid => raid.raidLocations);
@@ -96,6 +98,7 @@ export const TodayRaids: FC<Props> = ({
                     {guildShopSection}
                     {warShopSection}
                     {rogueTraderSection}
+                    {crusadeShopSection}
                 </AccordionBody>
             </Accordion>
             <Accordion>

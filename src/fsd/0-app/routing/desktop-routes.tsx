@@ -17,6 +17,7 @@ import { resourcesLazyRoute } from '@/fsd/1-pages/input-resources/resources.rout
 import { rosterSnapshotsLazyRoute } from '@/fsd/1-pages/input-roster-snapshots';
 import { xpIncomeLazyRoute } from '@/fsd/1-pages/input-xp-income/xp-income.route';
 import { insightsLazyRoute } from '@/fsd/1-pages/insights/insights.route';
+import { dailyShopsLookupLazyRoute } from '@/fsd/1-pages/learn-daily-shops';
 import { dirtyDozenLazyRoute } from '@/fsd/1-pages/learn-dirty-dozen';
 import { guildPerformanceLazyRoute } from '@/fsd/1-pages/learn-guild-performance';
 import { hsesLookupLazyRoute } from '@/fsd/1-pages/learn-hses';
@@ -214,6 +215,7 @@ export const globalLearnRoutes: RouteObject[] = [
     guildPerformanceLazyRoute,
     guildInsightsLazyRoute,
     hsesLookupLazyRoute,
+    dailyShopsLookupLazyRoute,
     mowLookupDesktopLazyRoute,
     guildBossListLazyRoute,
     guildBossReferenceLazyRoute,

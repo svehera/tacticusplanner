@@ -1,23 +1,21 @@
 import { FC, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
-import { Alliance, Rarity, RarityString } from '@/fsd/5-shared/model';
+import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui';
-import { ComponentImage, ForgeBadgeImage, MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { ForgeBadgeImage, MiscIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
-import { WarShopService, ResolvedShopItem } from '@/fsd/4-entities/shops';
+import { CrusadeShopService, ResolvedShopItem } from '@/fsd/4-entities/shops';
+import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
+import { filterCrusadeShopItemsByType } from './crusade-shop-section.helpers';
 import { NeededByEntry } from './daily-raids.helpers';
 import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
-import {
-    filterWarShopItemsByGoalNeed,
-    filterWarShopItemsByType,
-    parseForgeBadgeRarity,
-} from './war-shop-section.helpers';
+import { parseForgeBadgeRarity } from './war-shop-section.helpers';
 
 const ICON_SIZE = 40;
 
@@ -64,8 +62,8 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name, neededB
                         {availableText}
                         <br />
                         <img
-                            src={snowprintIcons.warCredits.file}
-                            alt="gwc"
+                            src={snowprintIcons.crusadeCurrency.file}
+                            alt="crusade currency"
                             className="inline-block"
                             height={14}
                             width={14}
@@ -73,7 +71,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name, neededB
                         {item.costAmount.toLocaleString()} each
                     </p>
                     <span className="w-fit rounded bg-(--soft-bg) px-1.5 py-0.5 text-[10px] text-(--soft-fg)">
-                        War Shop
+                        Crusade Shop
                     </span>
                 </div>
             </div>
@@ -87,27 +85,25 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, counts, icon, name, neededB
 interface Props {
     inProgressMaterials: ICharacterUpgradeEstimate[];
     blockedMaterials: ICharacterUpgradeEstimate[];
-    componentsByAlliance: Record<Alliance, Counts>;
     forgeBadgeCounts: Record<Rarity, Counts>;
-    componentNeededBy: Record<Alliance, NeededByEntry[]>;
     forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]>;
     userPL: number;
+    hasBlueStarUnit: boolean;
 }
 
-export const WarShopSection: FC<Props> = ({
+export const CrusadeShopSection: FC<Props> = ({
     inProgressMaterials,
     blockedMaterials,
-    componentsByAlliance,
     forgeBadgeCounts,
-    componentNeededBy,
     forgeBadgeNeededBy,
     userPL,
+    hasBlueStarUnit,
 }) => {
-    const today = WarShopService.getTodayDow();
+    const today = CrusadeShopService.getTodayDow();
 
     const todayItems = useMemo(
-        () => filterWarShopItemsByType(WarShopService.resolveForDay(today, userPL)),
-        [today, userPL]
+        () => filterCrusadeShopItemsByType(CrusadeShopService.resolveForDay(today, userPL, hasBlueStarUnit)),
+        [today, userPL, hasBlueStarUnit]
     );
 
     const shardsCountsMap = useMemo(() => {
@@ -138,9 +134,51 @@ export const WarShopSection: FC<Props> = ({
         return map;
     }, [inProgressMaterials, blockedMaterials]);
 
+    const materialCountsMap = useMemo(() => {
+        const map = new Map<string, Counts>();
+        for (const mat of [...inProgressMaterials, ...blockedMaterials]) {
+            const key = mat.snowprintId;
+            if (!UpgradesService.recipeExpandedUpgradeData[key]) continue;
+            const previous = map.get(key) ?? { acquired: 0, required: 0 };
+            map.set(key, {
+                acquired: previous.acquired + mat.acquiredCount,
+                required: previous.required + mat.requiredCount,
+            });
+        }
+        return map;
+    }, [inProgressMaterials, blockedMaterials]);
+
+    const materialNeededByMap = useMemo(() => {
+        const map = new Map<string, NeededByEntry[]>();
+        for (const mat of [...inProgressMaterials, ...blockedMaterials]) {
+            const key = mat.snowprintId;
+            if (!UpgradesService.recipeExpandedUpgradeData[key]) continue;
+            const entries = map.get(key) ?? [];
+            for (const [unitId, count] of Object.entries(mat.countByUnitId ?? {})) {
+                if (!unitId) continue;
+                entries.push({ name: resolveUnitName(unitId), count });
+            }
+            map.set(key, entries);
+        }
+        return map;
+    }, [inProgressMaterials, blockedMaterials]);
+
     const visibleItems = useMemo(
-        () => filterWarShopItemsByGoalNeed(todayItems, shardsCountsMap, componentsByAlliance, forgeBadgeCounts),
-        [todayItems, shardsCountsMap, componentsByAlliance, forgeBadgeCounts]
+        () =>
+            todayItems.filter(item => {
+                if (item.rewardType.startsWith('shards_')) {
+                    const c = shardsCountsMap.get(item.rewardType);
+                    return c !== undefined && c.acquired < c.required;
+                }
+                const badgeRarity = parseForgeBadgeRarity(item.rewardType);
+                if (badgeRarity !== undefined) {
+                    const c = forgeBadgeCounts[badgeRarity];
+                    return c.acquired < c.required;
+                }
+                const c = materialCountsMap.get(item.rewardType);
+                return c !== undefined && c.acquired < c.required;
+            }),
+        [todayItems, shardsCountsMap, forgeBadgeCounts, materialCountsMap]
     );
 
     if (visibleItems.length === 0) return;
@@ -148,27 +186,12 @@ export const WarShopSection: FC<Props> = ({
     return (
         <div className="mt-4 border-t border-(--card-border) pt-3">
             <p className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                Available in War Shop today
+                Available in Crusade Shop today
             </p>
             <div className="flex flex-wrap items-start justify-center gap-2">
                 {visibleItems.map(item => {
                     if (item.rewardType.startsWith('shards_')) {
-                        const shardCounts = shardsCountsMap.get(item.rewardType);
-                        const needsShard = shardCounts !== undefined && shardCounts.acquired < shardCounts.required;
-                        if (!needsShard && item.freeOfferType === 'draft_machinesOfWarTokens') {
-                            return (Object.values(Alliance) as Alliance[])
-                                .filter(a => componentsByAlliance[a].acquired < componentsByAlliance[a].required)
-                                .map(a => (
-                                    <ShopItemCard
-                                        key={`${item.rewardType}-${a}`}
-                                        item={item}
-                                        counts={componentsByAlliance[a]}
-                                        icon={<ComponentImage alliance={a} size="medium" />}
-                                        name={`${a} Components`}
-                                        neededBy={componentNeededBy[a]}
-                                    />
-                                ));
-                        }
+                        const shardCounts = shardsCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 };
                         const charId = item.rewardType.slice(7);
                         const unit = CharactersService.getUnit(charId) ?? MowsService.resolveToStatic(charId);
                         const icon = unit ? (
@@ -185,7 +208,7 @@ export const WarShopSection: FC<Props> = ({
                             <ShopItemCard
                                 key={item.rewardType}
                                 item={item}
-                                counts={shardCounts ?? { acquired: 0, required: 0 }}
+                                counts={shardCounts}
                                 icon={icon}
                                 name={unit?.name ?? charId}
                                 neededBy={shardsNeededByMap.get(item.rewardType) ?? []}
@@ -193,32 +216,38 @@ export const WarShopSection: FC<Props> = ({
                         );
                     }
 
-                    if (item.rewardType === 'draft_machinesOfWarTokens') {
-                        return (Object.values(Alliance) as Alliance[])
-                            .filter(a => componentsByAlliance[a].acquired < componentsByAlliance[a].required)
-                            .map(a => (
-                                <ShopItemCard
-                                    key={`${item.rewardType}-${a}`}
-                                    item={item}
-                                    counts={componentsByAlliance[a]}
-                                    icon={<ComponentImage alliance={a} size="medium" />}
-                                    name={`${a} Components`}
-                                    neededBy={componentNeededBy[a]}
-                                />
-                            ));
+                    const badgeRarity = parseForgeBadgeRarity(item.rewardType);
+                    if (badgeRarity !== undefined) {
+                        const rarityLabel = RarityMapper.rarityToRarityString(badgeRarity);
+                        return (
+                            <ShopItemCard
+                                key={item.rewardType}
+                                item={item}
+                                counts={forgeBadgeCounts[badgeRarity]}
+                                icon={<ForgeBadgeImage rarity={badgeRarity} size="medium" />}
+                                name={`${rarityLabel} Forge Badge`}
+                                neededBy={forgeBadgeNeededBy[badgeRarity]}
+                            />
+                        );
                     }
 
-                    const rarity = parseForgeBadgeRarity(item.rewardType);
-                    if (rarity === undefined) return;
-                    const rarityLabel = RarityString[rarity as unknown as keyof typeof RarityString] ?? 'Forge Badge';
+                    const upgradeData = UpgradesService.recipeExpandedUpgradeData[item.rewardType];
+                    const materialRarity = typeof upgradeData.rarity === 'number' ? upgradeData.rarity : Rarity.Common;
                     return (
                         <ShopItemCard
                             key={item.rewardType}
                             item={item}
-                            counts={forgeBadgeCounts[rarity]}
-                            icon={<ForgeBadgeImage rarity={rarity} size="medium" />}
-                            name={`${rarityLabel} Forge Badge`}
-                            neededBy={forgeBadgeNeededBy[rarity]}
+                            counts={materialCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 }}
+                            icon={
+                                <UpgradeImage
+                                    material={upgradeData.label}
+                                    iconPath={upgradeData.iconPath}
+                                    rarity={RarityMapper.rarityToRarityString(materialRarity)}
+                                    size={ICON_SIZE}
+                                />
+                            }
+                            name={upgradeData.label}
+                            neededBy={materialNeededByMap.get(item.rewardType) ?? []}
                         />
                     );
                 })}

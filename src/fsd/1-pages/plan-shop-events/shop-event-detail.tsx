@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules */
 import { cloneDeep } from 'lodash';
-import { ArrowLeft, Check, ChevronDown, Info, SlidersHorizontal, TriangleAlert } from 'lucide-react';
+import { ArrowLeft, Check, ChevronDown, Info, Search, SlidersHorizontal, TriangleAlert } from 'lucide-react';
 import { Fragment, JSX, useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 
@@ -8,44 +8,40 @@ import { IDailyRaidsFarmOrder } from '@/models/interfaces';
 import { defaultShopEventPurchaseState } from '@/reducers/shop-events.reducer';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { useAuth } from '@/fsd/5-shared/model';
+import { Rank, useAuth } from '@/fsd/5-shared/model';
+import { PortalDialog, Switch } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
-import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { MowsService } from '@/fsd/4-entities/mow';
+import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import {
     computeShopLockContext,
     cronMatchesDay,
     eventProductMatches,
     getShopCurrencyIconKey,
-    MAX_LEGENDARY_THRESHOLD,
+    hasBlueStarUnit,
     MYTHIC_UNCRAFTABLE_UPGRADES,
     PL_MEDIUM,
     plTier,
     ShopProduct,
     shopEvents,
 } from '@/fsd/4-entities/shops';
+import { IUnit, UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService as GoalUpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 
 import { PurchasedQtyModal } from './purchased-qty-modal';
 import { ShopCard } from './shop-card';
 import { DAYS, DAY_LABELS } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
 import type { CartEntry, CartRecord, ResolvedSlot } from './shop-events.types';
-import {
-    buildEventDateIndex,
-    cartKey,
-    computeCoverageRows,
-    formatGold,
-    getEventDate,
-    rewardInfo,
-} from './shop-events.utils';
+import { buildEventDateIndex, cartKey, computeCoverageRows, formatGold, getEventDate } from './shop-events.utils';
 import { ShoppingList } from './shopping-list';
 
 export const ShopEventDetail = () => {
@@ -88,6 +84,10 @@ export const ShopEventDetail = () => {
     const [coverageExpanded, setCoverageExpanded] = useState(false);
     const [purchasedExpanded, setPurchasedExpanded] = useState(false);
     const [dailyPurchasesExpanded, setDailyPurchasesExpanded] = useState(false);
+    const [searchOpen, setSearchOpen] = useState(false);
+    // eslint-disable-next-line unicorn/no-null -- autocomplete requires null for empty state
+    const [searchUnit, setSearchUnit] = useState<IUnit | null>(null);
+    const [detailsEnabled, setDetailsEnabled] = useState(false);
 
     const dateIndex = useMemo(() => (event ? buildEventDateIndex(event) : undefined), [event]);
     const [selectedDateIndex, setSelectedDateIndex] = useState(dateIndex?.defaultIndex ?? 0);
@@ -126,6 +126,14 @@ export const ShopEventDetail = () => {
     );
     const resolvedMows = useMemo(() => MowsService.resolveAllFromStorage(mows), [mows]);
     const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
+
+    // Every character/MoW in the game (locked ones included), for the shard-search feature below —
+    // unlike `characters`/`units` above, this isn't limited to what the user already owns.
+    const allCharacters = useMemo(
+        () => CharactersService.resolveAllCharacters(unresolvedCharacters),
+        [unresolvedCharacters]
+    );
+    const allUnits = useMemo<IUnit[]>(() => [...allCharacters, ...resolvedMows], [allCharacters, resolvedMows]);
 
     const mowRosterUnits = useMemo(
         () =>
@@ -290,10 +298,8 @@ export const ShopEventDetail = () => {
         () => computeShopLockContext(pl, characters, mowRosterUnits),
         [pl, characters, mowRosterUnits]
     );
-    const hasBlueStarUnit =
-        characters.some(c => c.stars >= MAX_LEGENDARY_THRESHOLD) ||
-        mowRosterUnits.some(m => m.stars >= MAX_LEGENDARY_THRESHOLD);
-    const tier = plTier(pl, hasBlueStarUnit);
+    const rosterHasBlueStarUnit = hasBlueStarUnit([...characters, ...mowRosterUnits]);
+    const tier = plTier(pl, rosterHasBlueStarUnit);
 
     const matchesConditions = useCallback(
         (product: ShopProduct): boolean => eventProductMatches(product, pl, lockContext),
@@ -400,7 +406,7 @@ export const ShopEventDetail = () => {
                 effectiveCartTotalsByType,
                 neededXp,
                 pl,
-                hasBlueStarUnit,
+                hasBlueStarUnit: rosterHasBlueStarUnit,
                 mythicMissingByUpgradeId,
                 totalGold,
                 neededShardsByType,
@@ -414,7 +420,7 @@ export const ShopEventDetail = () => {
             effectiveCartTotalsByType,
             neededXp,
             pl,
-            hasBlueStarUnit,
+            rosterHasBlueStarUnit,
             mythicMissingByUpgradeId,
             totalGold,
             neededShardsByType,
@@ -446,6 +452,74 @@ export const ShopEventDetail = () => {
             })
             .filter((s): s is ResolvedSlot => s !== undefined);
     }, [day, weekData, matchesConditions]);
+
+    // ── "Details" toggle: current rarity/stars/shards for a slot's character/MoW, if any ────────
+    const resolveUnitShardDetails = useCallback(
+        (rewardString: string): JSX.Element | undefined => {
+            const [type] = rewardString.split(':');
+            const isMythic = type.startsWith('mythicShards_');
+            if (!isMythic && !type.startsWith('shards_')) return undefined;
+
+            const unitId = type.slice(isMythic ? 'mythicShards_'.length : 'shards_'.length);
+            const unit = allUnits.find(u => u.snowprintId === unitId);
+            if (!unit) return undefined;
+
+            const isCharacter = 'rank' in unit;
+            const locked = isCharacter ? unit.rank === Rank.Locked : !(unit as IMow2).unlocked;
+
+            return (
+                <div className="mt-1 flex w-full flex-col gap-1 rounded-md bg-(--soft) px-2 py-1 text-[11px] text-(--soft-fg)">
+                    <div className="flex items-center justify-center gap-1.5">
+                        <RarityIcon rarity={unit.rarity} />
+                        {locked ? (
+                            <span className="font-semibold text-red-400">Locked</span>
+                        ) : (
+                            <StarsIcon stars={unit.stars} />
+                        )}
+                    </div>
+                    <div className="flex items-center justify-between gap-2">
+                        <span className="flex items-center gap-1">
+                            <MiscIcon icon="shard" width={14} height={14} />
+                            <span className="font-semibold text-(--fg)">{unit.shards}</span>
+                        </span>
+                        <span className="flex items-center gap-1">
+                            <span className="font-semibold text-(--fg)">{unit.mythicShards}</span>
+                            <MiscIcon icon="mythicShard" width={14} height={14} />
+                        </span>
+                    </div>
+                </div>
+            );
+        },
+        [allUnits]
+    );
+
+    // ── shard-availability search (magnifying glass) ─────────────────────────────────────────────
+    const renderShardAvailability = (rewardType: string, label: string) => {
+        const weekMap = allWeekDayAvailability.get(rewardType);
+        return (
+            <div className="flex flex-col gap-1.5">
+                <span className="text-sm font-semibold text-(--fg)">{label}</span>
+                {!weekMap || weekMap.size === 0 ? (
+                    <span className="text-sm text-(--soft-fg)">Not available in this event.</span>
+                ) : (
+                    <div className="flex flex-wrap items-center gap-1.5">
+                        {[...weekMap.entries()]
+                            .toSorted(([a], [b]) => a - b)
+                            .map(([w, days]) => (
+                                <span
+                                    key={w}
+                                    className="flex items-center gap-1 rounded-full border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs">
+                                    <span className="font-semibold">W{w}</span>
+                                    <span className="text-(--soft-fg)">
+                                        {[...days].map(d => DAY_LABELS[d].slice(0, 3)).join(', ')}
+                                    </span>
+                                </span>
+                            ))}
+                    </div>
+                )}
+            </div>
+        );
+    };
 
     if (!event) {
         return (
@@ -858,6 +932,43 @@ export const ShopEventDetail = () => {
                 </div>
             )}
 
+            {/* Shard search + details toggle */}
+            <div className="flex flex-wrap items-center justify-between gap-2">
+                <AccessibleTooltip title="Find which weeks/days a character or MoW's shards are available">
+                    <button
+                        onClick={() => setSearchOpen(true)}
+                        aria-label="Find shard availability"
+                        className="flex size-9 items-center justify-center rounded-lg border border-(--border) bg-(--overlay) text-(--soft-fg) transition-colors hover:border-(--primary) hover:text-(--primary)">
+                        <Search className="size-4" />
+                    </button>
+                </AccessibleTooltip>
+                <Switch isSelected={detailsEnabled} onChange={setDetailsEnabled}>
+                    Details
+                </Switch>
+            </div>
+
+            <PortalDialog
+                open={searchOpen}
+                onClose={() => setSearchOpen(false)}
+                aria-label="Find shard availability"
+                size="sm">
+                <PortalDialog.Header>Find shard availability</PortalDialog.Header>
+                <PortalDialog.Body>
+                    <UnitsAutocomplete<IUnit>
+                        options={allUnits}
+                        unit={searchUnit}
+                        onUnitChange={setSearchUnit}
+                        label="Character or MoW"
+                    />
+                    {searchUnit && (
+                        <div className="flex flex-col gap-3">
+                            {renderShardAvailability(`shards_${searchUnit.snowprintId}`, 'Shards')}
+                            {renderShardAvailability(`mythicShards_${searchUnit.snowprintId}`, 'Mythic Shards')}
+                        </div>
+                    )}
+                </PortalDialog.Body>
+            </PortalDialog>
+
             {/* Shop grid */}
             {resolvedSlots.length === 0 ? (
                 <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--soft-fg)">
@@ -878,6 +989,7 @@ export const ShopEventDetail = () => {
                                 slot={slot}
                                 cartQty={cartQty}
                                 currencyIconKey={currencyIconKey}
+                                details={detailsEnabled ? resolveUnitShardDetails(slot.rewardString) : undefined}
                                 onSetQty={qty =>
                                     setCartQty(key, qty, {
                                         week,

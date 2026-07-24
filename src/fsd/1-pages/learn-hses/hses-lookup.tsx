@@ -12,7 +12,7 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { getHseDisplayName, homescreenEvents, HseIcon, resolveHseTier } from '@/fsd/4-entities/homescreen_events';
 import { MowsService } from '@/fsd/4-entities/mow';
-import { MAX_LEGENDARY_THRESHOLD, PL_MEDIUM } from '@/fsd/4-entities/shops';
+import { hasBlueStarUnit, PL_MEDIUM } from '@/fsd/4-entities/shops';
 
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
 import { resolveHseDescriptionLines } from '@/fsd/3-features/homescreen-events/hse-description-resolver';
@@ -36,16 +36,13 @@ export const HsesLookup = () => {
 
     const pl = playerMetadata.powerLevel ?? 1;
 
-    const hasBlueStarUnit = useMemo(() => {
+    const rosterHasBlueStarUnit = useMemo(() => {
         const characters = CharactersService.resolveStoredCharacters(unresolvedCharacters);
         const resolvedMows = MowsService.resolveAllFromStorage(mows);
-        return (
-            characters.some(c => c.stars >= MAX_LEGENDARY_THRESHOLD) ||
-            resolvedMows.some(m => m.stars >= MAX_LEGENDARY_THRESHOLD)
-        );
+        return hasBlueStarUnit([...characters, ...resolvedMows]);
     }, [unresolvedCharacters, mows]);
 
-    const tierKeyForRoster = hseTierKeyForRoster(pl, hasBlueStarUnit);
+    const tierKeyForRoster = hseTierKeyForRoster(pl, rosterHasBlueStarUnit);
 
     const selectedEvent = useMemo(
         () => homescreenEvents.find(event => event.eventName === selectedEventName),

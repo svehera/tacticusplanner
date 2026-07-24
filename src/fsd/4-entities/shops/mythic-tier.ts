@@ -43,19 +43,23 @@ interface RosterUnit {
 }
 
 /**
+ * True if the roster owns at least one character or MoW at Legendary rarity with a blue star or
+ * higher, or at Mythic rarity (both share the `OneBlueStar` floor, so a single stars threshold
+ * check covers both cases).
+ */
+export function hasBlueStarUnit(units: RosterUnit[]): boolean {
+    return units.some(u => u.stars >= MAX_LEGENDARY_THRESHOLD);
+}
+
+/**
  * Builds the roster/PL context used by `resolveEventLockId`/`eventProductMatches` to gate mythic
- * shop content: only shown once PL >= 20 and the player owns at least one character or MoW at
- * Legendary rarity with a blue star or higher, or at Mythic rarity (both share the `OneBlueStar`
- * floor, so a single stars threshold check covers both cases).
+ * shop content: only shown once PL >= 20 and the player owns a blue-star-or-above unit.
  */
 export function computeShopLockContext(pl: number, characters: RosterUnit[], mows: RosterUnit[]): ShopLockContext {
-    const hasBlueStarUnit =
-        characters.some(c => c.stars >= MAX_LEGENDARY_THRESHOLD) || mows.some(m => m.stars >= MAX_LEGENDARY_THRESHOLD);
-
     const starsByUnitId: Record<string, number> = {};
     for (const unit of [...characters, ...mows]) {
         starsByUnitId[unit.snowprintId] = unit.stars;
     }
 
-    return { tier: plTier(pl, hasBlueStarUnit), starsByUnitId };
+    return { tier: plTier(pl, hasBlueStarUnit([...characters, ...mows])), starsByUnitId };
 }

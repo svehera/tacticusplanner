@@ -35,6 +35,7 @@ import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-
 import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
 import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-item';
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
+import { dailyShopsLookupMenuItem } from '@/fsd/1-pages/learn-daily-shops';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { guildPerformanceMenuItem } from '@/fsd/1-pages/learn-guild-performance';
 import { hsesLookupMenuItem } from '@/fsd/1-pages/learn-hses';
@@ -84,6 +85,7 @@ export const menuItemById = {
     campaigns: new MenuItemTP('Campaigns', <MapIcon />, '/learn/campaigns'),
     hses: new MenuItemTP('Home-Screen Events', <EventIcon />, '/plan/hse'),
     hsesLookup: hsesLookupMenuItem,
+    dailyShopsLookup: dailyShopsLookupMenuItem,
     bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
@@ -175,6 +177,7 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['guildBossReference'],
     menuItemById['campaigns'],
     menuItemById['hsesLookup'],
+    menuItemById['dailyShopsLookup'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildPerformance'],
@@ -194,6 +197,7 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
         menuItemById['hsesLookup'],
+        menuItemById['dailyShopsLookup'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],
@@ -217,6 +221,7 @@ export const librarySubMenu: MenuItemTP[] = [
         menuItemById['campaigns'],
         menuItemById['productCalendar'],
         menuItemById['hsesLookup'],
+        menuItemById['dailyShopsLookup'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],

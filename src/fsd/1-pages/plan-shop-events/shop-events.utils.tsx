@@ -1,28 +1,10 @@
-/* eslint-disable import-x/no-internal-modules */
-import { JSX } from 'react';
-
 import { Alliance, Rarity, RarityMapper, RarityString, XP_BOOK_VALUE } from '@/fsd/5-shared/model';
-import {
-    BadgeImage,
-    ForgeBadgeImage,
-    MiscIcon,
-    OrbIcon,
-    resolveSimpleRewardIcon,
-    UnitShardIcon,
-} from '@/fsd/5-shared/ui/icons';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService } from '@/fsd/4-entities/character';
-import { EquipmentService } from '@/fsd/4-entities/equipment';
-import { EquipmentIcon } from '@/fsd/4-entities/equipment/ui';
-import { MowsService } from '@/fsd/4-entities/mow';
-import {
-    getShopCurrencyIconKey,
-    getShopCurrencyLabel,
-    MYTHIC_UNCRAFTABLE_UPGRADES,
-    plTier,
-    ShopEventData,
-} from '@/fsd/4-entities/shops';
-import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
+import { MYTHIC_UNCRAFTABLE_UPGRADES, plTier, ShopEventData } from '@/fsd/4-entities/shops';
+import { UpgradeImage } from '@/fsd/4-entities/upgrade';
+
+import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 
 import { DAYS, ICON_SIZE } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
@@ -70,143 +52,6 @@ export function buildEventDateIndex(event: ShopEventData): EventDateIndex {
 
 export function cartKey(week: number, slotIndex: number, day: Day): string {
     return `${week}-${slotIndex}-${day}`;
-}
-
-export function rewardInfo(reward: string): { icon: JSX.Element; label: string; qty: number | undefined } {
-    const [type, qtyString] = reward.split(':');
-    const qty = qtyString === undefined ? undefined : Number.parseInt(qtyString, 10);
-
-    // ── character shards ──────────────────────────────────────────────────────
-    if (type.startsWith('shards_') || type.startsWith('mythicShards_')) {
-        const isMythic = type.startsWith('mythicShards_');
-        const charId = type.replace(isMythic ? 'mythicShards_' : 'shards_', '');
-        const char = CharactersService.charactersBySnowprintId[charId];
-        const mow = char ? undefined : MowsService.resolveToStatic(charId);
-        const unit = char ?? mow;
-        return {
-            icon: unit ? (
-                <UnitShardIcon
-                    icon={unit.roundIcon}
-                    name={unit.name}
-                    mythic={isMythic}
-                    height={ICON_SIZE}
-                    width={ICON_SIZE}
-                />
-            ) : (
-                <MiscIcon icon={isMythic ? 'mythicShard' : 'shard'} width={ICON_SIZE} height={ICON_SIZE} />
-            ),
-            label: unit
-                ? `${unit.name} ${isMythic ? 'Mythic Shards' : 'Shards'}`
-                : isMythic
-                  ? 'Mythic Shards'
-                  : 'Shards',
-            qty,
-        };
-    }
-
-    // ── shop event currencies (any registered cost.type) ────────────────────
-    const currencyIconKey = getShopCurrencyIconKey(type);
-    if (currencyIconKey) {
-        return {
-            icon: <MiscIcon icon={currencyIconKey} width={ICON_SIZE} height={ICON_SIZE} />,
-            label: getShopCurrencyLabel(type),
-            qty,
-        };
-    }
-
-    // ── simple named resources (shared across Shop Events and product calendar) ─
-    const simple = resolveSimpleRewardIcon(type);
-    if (simple) {
-        return {
-            icon: <MiscIcon icon={simple.iconKey} width={ICON_SIZE} height={ICON_SIZE} />,
-            label: simple.label,
-            qty,
-        };
-    }
-
-    // ── event summoning tokens ────────────────────────────────────────────────
-    if (type.startsWith('eventSummoningToken_')) {
-        const faction = type.replace('eventSummoningToken_', '');
-        const factionIconMap: Record<string, string> = {
-            BloodAngels: 'bloodAngelsReq',
-            Orks: 'orksReq',
-        };
-        const iconKey = factionIconMap[faction] ?? 'legendaryEventToken';
-        return {
-            icon: <MiscIcon icon={iconKey} width={ICON_SIZE} height={ICON_SIZE} />,
-            label: `${faction} Req Scroll`,
-            qty,
-        };
-    }
-
-    // ── ability badges: abilityToken{Rarity}_{Alliance} ──────────────────────
-    const badgeMatch = type.match(/^abilityToken(Common|Uncommon|Rare|Epic|Legendary|Mythic)_(Imperial|Xenos|Chaos)$/);
-    if (badgeMatch) {
-        const rarity = badgeMatch[1] as RarityString;
-        const alliance = badgeMatch[2] as Alliance;
-        return {
-            icon: <BadgeImage alliance={alliance} rarity={rarity} size="medium" />,
-            label: `${rarity} ${alliance} Badge`,
-            qty,
-        };
-    }
-
-    // ── ascension orbs: heroAscensionOrb{Rarity}_{Alliance} ──────────────────
-    const orbMatch = type.match(/^heroAscensionOrb(Uncommon|Rare|Epic|Legendary|Mythic)_(Imperial|Xenos|Chaos)$/);
-    if (orbMatch) {
-        const rarity = RarityMapper.stringToNumber[orbMatch[1] as RarityString];
-        const alliance = orbMatch[2] as Alliance;
-        return {
-            icon: <OrbIcon alliance={alliance} rarity={rarity} size={ICON_SIZE} />,
-            label: `${orbMatch[1]} ${alliance} Orb`,
-            qty,
-        };
-    }
-
-    // ── forge badges: itemAscensionResource_{Rarity} ─────────────────────────
-    const forgeMatch = type.match(/^itemAscensionResource_(Uncommon|Rare|Epic|Legendary|Mythic)$/);
-    if (forgeMatch) {
-        const rarity = RarityMapper.stringToNumber[forgeMatch[1] as RarityString];
-        return {
-            icon: <ForgeBadgeImage rarity={rarity} />,
-            label: `${forgeMatch[1]} Forge Badge`,
-            qty,
-        };
-    }
-
-    // ── upgrade materials: upg* ───────────────────────────────────────────────
-    if (type.startsWith('upg')) {
-        const upgradeData = UpgradesService.recipeExpandedUpgradeData[type];
-        if (upgradeData) {
-            return {
-                icon: (
-                    <UpgradeImage
-                        material={upgradeData.label}
-                        iconPath={upgradeData.iconPath}
-                        rarity={RarityMapper.rarityToRarityString(upgradeData.rarity as Rarity)}
-                        size={ICON_SIZE}
-                    />
-                ),
-                label: upgradeData.label,
-                qty,
-            };
-        }
-    }
-
-    // ── equipment / relics: I_* or R_* ───────────────────────────────────────
-    if (type.startsWith('I_') || type.startsWith('R_')) {
-        const equip = EquipmentService.equipmentData.find(item => item.id === type);
-        if (equip) {
-            return {
-                icon: <EquipmentIcon equipment={equip} height={ICON_SIZE} width={ICON_SIZE} />,
-                label: equip.name,
-                qty,
-            };
-        }
-    }
-
-    // ── fallback ──────────────────────────────────────────────────────────────
-    return { icon: <span className="text-xs break-all text-(--soft-fg)">{type}</span>, label: type, qty };
 }
 
 export function getNeededForRewardType(

@@ -25,6 +25,11 @@ export interface ResolvedShopItem {
     freeOfferType?: string;
 }
 
+/** One shop slot's resolved reward options for a given day — `items.length > 1` means the slot is random. */
+export interface ResolvedShopSlot {
+    items: ResolvedShopItem[];
+}
+
 export type ShopDayOfWeek = 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN';
 
 export interface ShopEventWeek {

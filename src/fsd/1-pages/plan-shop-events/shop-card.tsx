@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { JSX, useState } from 'react';
 
 import { Button } from '@/fsd/5-shared/ui/button';
 import { MiscIcon, tacticusIcons } from '@/fsd/5-shared/ui/icons';
@@ -11,9 +11,11 @@ interface ShopCardProps {
     cartQty: number;
     currencyIconKey: keyof typeof tacticusIcons;
     onSetQty: (qty: number) => void;
+    /** Rendered when the "Details" toggle is on and this slot's reward is a character/MoW shard. */
+    details?: JSX.Element;
 }
 
-export function ShopCard({ slot, cartQty, currencyIconKey, onSetQty }: ShopCardProps) {
+export function ShopCard({ slot, cartQty, currencyIconKey, onSetQty, details }: ShopCardProps) {
     const { label, qty: qtyPerPack, icon, isFree, cost, product } = slot;
     const maxQty = product.maxPurchases === undefined ? undefined : Number.parseInt(product.maxPurchases, 10);
     const remaining = maxQty === undefined ? undefined : maxQty - cartQty;
@@ -77,6 +79,8 @@ export function ShopCard({ slot, cartQty, currencyIconKey, onSetQty }: ShopCardP
                 {remaining !== undefined && !isFree && (
                     <span className="text-[10px] text-(--soft-fg)">{remaining} left</span>
                 )}
+                {/* Character/MoW details (shown when the "Details" toggle is on) */}
+                {details && <div onClick={event_ => event_.stopPropagation()}>{details}</div>}
             </div>
 
             {/* Quantity dialog */}

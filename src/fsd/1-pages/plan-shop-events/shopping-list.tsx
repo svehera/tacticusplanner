@@ -4,9 +4,10 @@ import { JSX, useMemo, useState } from 'react';
 import { Button } from '@/fsd/5-shared/ui/button';
 import { MiscIcon, tacticusIcons } from '@/fsd/5-shared/ui/icons';
 
+import { rewardInfo } from '@/fsd/3-features/shop-rewards';
+
 import { DAYS, DAY_LABELS } from './shop-events.constants';
 import type { CartRecord } from './shop-events.types';
-import { rewardInfo } from './shop-events.utils';
 
 interface ShoppingListProps {
     cart: CartRecord;
