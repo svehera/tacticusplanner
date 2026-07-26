@@ -1085,6 +1085,49 @@ describe('GoalsService.adjustGoalEstimates', () => {
             // The inactive goal must NOT consume the held books — the active goal should be fully covered
             expect(result.neededXp).toBe(0);
         });
+
+        it('keeps XP row metadata when held books fully cover an included goal', () => {
+            const goalId = 'goal-active-xp-covered';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 2,
+                    bookRarity: Rarity.Legendary,
+                    gold: 1000,
+                    currentLevel: 10,
+                    targetLevel: 15,
+                    xpLeft: 20_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+            const inventory = makeEmptyInventory();
+            inventory.xpBooks[Rarity.Legendary] = 2;
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                { ...noXpUse, useLegendary: true },
+                [],
+                [],
+                noXpIncome
+            );
+
+            const adjustedGoal = result.goalEstimates.find(goalEstimate => goalEstimate.goalId === goalId);
+
+            expect(adjustedGoal?.xpEstimate).toMatchObject({
+                bookRarity: Rarity.Legendary,
+                books: 0,
+                gold: 0,
+                currentLevel: 10,
+                targetLevel: 15,
+                xpLeft: 0,
+            });
+            expect(adjustedGoal?.xpBooksApplied).toBe(1);
+            expect(adjustedGoal?.xpBooksRequired).toBe(1);
+            expect(adjustedGoal?.xpBooksTotal).toBe(0);
+            expect(adjustedGoal?.xpDaysLeft).toBeUndefined();
+        });
     });
 
     describe('included goal with xpEstimate', () => {

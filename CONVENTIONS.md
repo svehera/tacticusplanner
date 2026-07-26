@@ -362,6 +362,13 @@ Import from `@/fsd/5-shared/ui/icons`:
     - `TraitImage` — `trait: Trait`, optional `width`/`height` (default 25). Uses snowprint trait assets with an internal override map for irregular filenames.
     - `ComponentImage` — `alliance: Alliance`, `size?: 'small' | 'medium'`. Renders the alliance MOW component icon (Imperial/Chaos/Xenos).
 
+### Time-estimate icon vocabulary
+
+When showing time on goals, keep the glyph tied to the meaning so the two never blur:
+
+- **`Calendar`** (lucide) — a **date or countdown**: completion date ("Done By"), days-until-done chips.
+- **`Hourglass`** (lucide) — a **duration / effort**: "Total days" (how much farming from scratch), not a deadline.
+
 ---
 
 ## Page layout context

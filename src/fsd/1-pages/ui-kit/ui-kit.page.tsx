@@ -80,7 +80,7 @@ import { UpgradeImage, UpgradesService as UpgradeEntityService } from '@/fsd/4-e
 
 import { CharacterAbilitiesTotal } from '@/fsd/3-features/characters';
 import { OrbsTotal } from '@/fsd/3-features/characters/components/orbs-total';
-import { MowMaterialsTotal } from '@/fsd/3-features/goals';
+import { getDoneByDays, MowMaterialsTotal } from '@/fsd/3-features/goals';
 import { type IGoalEstimate, type TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
@@ -1370,16 +1370,12 @@ const GoalsSectionGrid = ({ rows, variant, goalsEstimates, densityClass, rowHeig
             valueGetter: params => {
                 const est = goalsEstimates.find(x => x.goalId === params.data?.goalId);
                 if (!est) return;
-                return est.daysLeft > 0 ? est.daysLeft : (est.xpDaysLeft ?? 0) > 0 ? est.xpDaysLeft : undefined;
+                const days = getDoneByDays(est);
+                return days > 0 ? days : undefined;
             },
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const est = goalsEstimates.find(x => x.goalId === params.data?.goalId);
-                const daysLeft =
-                    est && est.daysLeft > 0
-                        ? est.daysLeft
-                        : est && est.xpDaysLeft !== undefined && est.xpDaysLeft > 0
-                          ? est.xpDaysLeft
-                          : undefined;
+                const daysLeft = est ? getDoneByDays(est) : 0;
                 if (!daysLeft) {
                     return (
                         <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">
