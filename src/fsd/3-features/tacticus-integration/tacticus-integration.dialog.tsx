@@ -109,7 +109,7 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
                 guildTag: trimmedGuildTag,
             });
 
-            if (!response.data && tacticusApiKey !== undefined && tacticusApiKey.length > 0) {
+            if (response.error) {
                 enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
                 return false;
             }
