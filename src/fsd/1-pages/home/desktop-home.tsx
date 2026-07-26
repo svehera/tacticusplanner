@@ -19,12 +19,17 @@ import { LreSection } from './lre-section';
 import { dismissHomeQuestionnaire, homeQuestionnaireLink, isHomeQuestionnaireDismissed } from './questionnaire-banner';
 import { useBmcWidget } from './use-bmc-widget';
 
+// Toggle to re-enable the home questionnaire banner.
+const questionnaireBannerEnabled = false;
+
 export const DesktopHome = () => {
     useBmcWidget();
     const { userInfo } = useAuth();
     const { leProgress, characters } = useContext(StoreContext);
     const nextLeMenuItem = LegendaryEventService.getActiveEvent();
-    const [showQuestionnaireBanner, setShowQuestionnaireBanner] = useState(() => !isHomeQuestionnaireDismissed());
+    const [showQuestionnaireBanner, setShowQuestionnaireBanner] = useState(
+        () => questionnaireBannerEnabled && !isHomeQuestionnaireDismissed()
+    );
 
     const hideQuestionnaireBanner = () => {
         dismissHomeQuestionnaire();

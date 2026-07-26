@@ -1,83 +1,61 @@
-import { ArrowRight, Calendar } from 'lucide-react';
 import React from 'react';
 
-import { getEstimatedDate } from '@/fsd/5-shared/lib';
-import { Rarity } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
-import { RankIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { Rank, Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { LazyTooltip } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
-import { IGoalEstimate, XpTotal } from '@/fsd/3-features/goals';
+import { IGoalEstimate } from '@/fsd/3-features/goals';
 
-import { XpGoalProgressBar } from '../xp-book-progress-bar';
-
-import { GoalEstimateRow } from './estimate-row';
+import { ProgressionRow } from './progression-row';
+import { RankEmblem } from './rank-emblem';
+import { XpBooksRow } from './xp-books-row';
 
 interface Props {
     goal: ICharacterUpgradeRankGoal;
     goalEstimate: IGoalEstimate;
-    calendarDate?: string;
     bookRarity: Rarity;
 }
 
-/** Renders the body of an UpgradeRank goal card, showing rank range, upgrade rarities, and energy/XP estimates. */
-export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, calendarDate, bookRarity }) => {
-    const { xpEstimate } = goalEstimate;
-    const xpIncomeNotSet =
-        goalEstimate.xpDaysLeft === undefined &&
-        (goalEstimate.xpBooksApplied ?? 0) < (goalEstimate.xpBooksRequired ?? 0);
+/** Body of an UpgradeRank goal card: rank progression (raid days) over an XP-book row (XP days). */
+export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, bookRarity }) => {
+    const applied = goalEstimate.xpBooksApplied;
+    const required = goalEstimate.xpBooksRequired;
+    const hasBooks = applied !== undefined && required !== undefined && required > 0;
+    // Top row shows days spent on raids (materials); the XP row below shows the XP-income days.
+    const raidDays = goalEstimate.daysLeft > 0 ? Math.ceil(goalEstimate.daysLeft) : undefined;
 
     return (
-        <div className="flex flex-col gap-2">
-            <div className="flex-box gap-[3px]">
-                <RankIcon rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} /> <ArrowRight className="size-4" />
-                <RankIcon rank={goal.rankEnd} rankPoint5={goal.rankPoint5} />
-                {goal.upgradesRarity.length > 0 && (
-                    <div className="flex-box gap-[3px]">
-                        {goal.upgradesRarity.map(x => (
-                            <RarityIcon key={x} rarity={x} />
-                        ))}
-                    </div>
-                )}
-            </div>
+        <div className="flex flex-1 flex-col justify-center gap-2.5">
+            <ProgressionRow
+                from={<RankEmblem rank={goal.rankStart} rankPoint5={goal.rankStartPoint5} role="Current rank" />}
+                to={<RankEmblem rank={goal.rankEnd} rankPoint5={goal.rankPoint5} role="Target rank" />}
+                trailing={
+                    goal.upgradesRarity.length > 0 && goal.upgradesRarity.length < 6 ? (
+                        <LazyTooltip
+                            title={`Filtered upgrade materials: ${goal.upgradesRarity.map(rarity => RarityMapper.rarityToRarityString(rarity)).join(', ')}`}>
+                            <span
+                                role="img"
+                                aria-label={`Filtered upgrade materials: ${goal.upgradesRarity.map(rarity => RarityMapper.rarityToRarityString(rarity)).join(', ')}`}
+                                className="flex items-center gap-0.5 [&>img]:h-[18px] [&>img]:w-auto">
+                                {goal.upgradesRarity.map(rarity => (
+                                    <RarityIcon key={rarity} rarity={rarity} />
+                                ))}
+                            </span>
+                        </LazyTooltip>
+                    ) : undefined
+                }
+                days={raidDays}
+                energy={goalEstimate.energyTotal}
+                ariaLabel={`${Rank[goal.rankStart].replace(/(\d)$/, ' $1')} to ${Rank[goal.rankEnd].replace(/(\d)$/, ' $1')}`}
+            />
 
-            {goalEstimate.included && (
-                <div className="flex-box wrap gap-2">
-                    <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft ?? 0}
-                        calendarDate={calendarDate}
-                        energyTotal={goalEstimate.energyTotal}
-                    />
+            {hasBooks && (
+                <div className="border-t border-(--card-border) pt-2.5">
+                    <XpBooksRow goalEstimate={goalEstimate} bookRarity={bookRarity} />
                 </div>
             )}
-
-            {(goalEstimate.xpDaysLeft !== undefined ||
-                goalEstimate.xpBooksApplied !== undefined ||
-                goalEstimate.xpBooksRequired !== undefined) && (
-                <div className="flex-box wrap gap-2">
-                    <AccessibleTooltip
-                        title={
-                            xpIncomeNotSet
-                                ? 'XP Income not set'
-                                : `${Math.ceil(goalEstimate.xpDaysLeft ?? 0)} days. Estimated date ${getEstimatedDate(goalEstimate.xpDaysLeft ?? 0)}`
-                        }>
-                        <div className="flex-box gap-[3px] text-(--soft-fg)">
-                            <Calendar className="size-4" />
-                            {Math.ceil(goalEstimate.xpDaysLeft ?? 0)}
-                        </div>
-                    </AccessibleTooltip>
-                    {goalEstimate.xpBooksApplied !== undefined && goalEstimate.xpBooksRequired !== undefined && (
-                        <XpGoalProgressBar
-                            applied={goalEstimate.xpBooksApplied ?? 0}
-                            required={goalEstimate.xpBooksRequired ?? 0}
-                            bookRarity={bookRarity}
-                        />
-                    )}
-                </div>
-            )}
-
-            {xpIncomeNotSet && xpEstimate && <XpTotal {...xpEstimate} />}
         </div>
     );
 };

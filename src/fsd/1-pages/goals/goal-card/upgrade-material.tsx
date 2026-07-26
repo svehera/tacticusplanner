@@ -1,35 +1,38 @@
 import React from 'react';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals';
+import { ProgressBar } from '@/fsd/5-shared/ui';
 
-import { GoalEstimateRow } from './estimate-row';
+import { getDoneByDays, getMaterialBar, IGoalEstimate } from '@/fsd/3-features/goals';
+
+import { GoalEstimateChips } from './estimate-chips';
 
 interface Props {
     goalEstimate: IGoalEstimate;
-    calendarDate?: string;
 }
 
-/** Renders the body of an UpgradeMaterial goal card, showing quantity info and an energy/date estimate. */
-export const GoalCardUpgradeMaterial: React.FC<Props> = ({ goalEstimate, calendarDate }) => {
+/** Body of an UpgradeMaterial goal card: held-vs-needed progress plus days/energy estimate. */
+export const GoalCardUpgradeMaterial: React.FC<Props> = ({ goalEstimate }) => {
     const info = goalEstimate.materialQuantityInfo;
-
-    const quantityLabel = info
-        ? info.isGoalPriority
-            ? `${info.coveredByInventory ?? 0}/${info.thisGoalQuantity} (${info.held}/${info.totalNeeded})`
-            : `${info.held}/${info.totalNeeded} (${info.thisGoalQuantity})`
-        : undefined;
+    const doneBy = getDoneByDays(goalEstimate);
+    const days = doneBy > 0 ? Math.ceil(doneBy) : undefined;
+    const bar = info ? getMaterialBar(info) : undefined;
+    const hasEstimate = days !== undefined || goalEstimate.energyTotal > 0;
 
     return (
-        <div className="flex flex-col gap-2">
-            {quantityLabel !== undefined && (
-                <div className="text-sm font-medium text-(--fg) tabular-nums">{quantityLabel}</div>
+        <div className="flex flex-col gap-2.5">
+            {hasEstimate && (
+                <div className="flex min-h-[30px] items-center justify-end">
+                    <GoalEstimateChips days={days} energy={goalEstimate.energyTotal} />
+                </div>
             )}
-            {goalEstimate.included && (
-                <div className="flex-box wrap gap-2">
-                    <GoalEstimateRow
-                        daysLeft={goalEstimate.daysLeft ?? 0}
-                        calendarDate={calendarDate}
-                        energyTotal={goalEstimate.energyTotal}
+            {bar && (
+                <div className={hasEstimate ? 'border-t border-(--card-border) pt-2.5' : ''}>
+                    <ProgressBar
+                        value={bar.value}
+                        max={bar.max}
+                        intent="success"
+                        label={bar.label}
+                        valueLabel={bar.valueLabel}
                     />
                 </div>
             )}

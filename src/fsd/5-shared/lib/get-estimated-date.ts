@@ -37,3 +37,14 @@ export const getEstimatedDate = (days: number | undefined): string => {
     date.setDate(date.getDate() + Math.ceil(days) - 1);
     return formatDateWithOrdinal(date);
 };
+
+/**
+ * Compact `30 Sep` form for tight spots (e.g. card headers, dense table cells). The full ordinal
+ * date from {@link getEstimatedDate} is kept for tooltips and roomier surfaces.
+ */
+export const getEstimatedDateShort = (days: number | undefined): string => {
+    if (days === undefined || !Number.isFinite(days) || days <= 0) return '';
+    const date = new Date();
+    date.setDate(date.getDate() + Math.ceil(days) - 1);
+    return `${date.getDate()} ${date.toLocaleString('en', { month: 'short' })}`;
+};
