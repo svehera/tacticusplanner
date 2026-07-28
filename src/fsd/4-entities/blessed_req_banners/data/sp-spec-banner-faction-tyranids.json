@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_Tyranids",
+    "title": "<style=\"FactionIcon_Tyranids\">Tyranids</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"FactionIcon_Tyranids\">Tyranids</style>, including their Machine of War!",
+    "featuredUnits": [
+        "tyranParasite",
+        "tyranDeathleaper",
+        "tyranNeurothrope",
+        "tyranWingedPrime",
+        "tyranTyrantGuard",
+        "tyranBiovore"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

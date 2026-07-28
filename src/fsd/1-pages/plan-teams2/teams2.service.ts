@@ -2,10 +2,9 @@
 import { ICharacter2 } from '@/models/interfaces';
 
 import { FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { ISnapshotCharacter, ISnapshotMachineOfWar } from '@/fsd/5-shared/ui/unit-portrait';
 
-import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { IMow2 } from '@/fsd/4-entities/mow';
+import { convertCharacterToSnapshot, convertMowToSnapshot } from '@/fsd/4-entities/unit';
 
 const maxRankForRarity: Record<Rarity, Rank> = {
     [Rarity.Common]: Rank.Iron1,
@@ -70,38 +69,9 @@ export class Teams2Service {
         return true;
     }
 
-    public static convertCharacter(charData: ICharacter2): ISnapshotCharacter {
-        return {
-            id: charData.snowprintId,
-            activeAbilityLevel: charData.activeAbilityLevel ?? 0,
-            passiveAbilityLevel: charData.passiveAbilityLevel ?? 0,
-            rarity: charData.rarity,
-            rank: charData.rank,
-            xpLevel: charData.level ?? 0,
-            stars: charData.stars ?? 0,
-            shards: 0,
-            mythicShards: 0,
-            equip0: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[0]?.id),
-            equip1: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[1]?.id),
-            equip2: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[2]?.id),
-            equip0Level: charData.equipment?.[0]?.level ?? 0,
-            equip1Level: charData.equipment?.[1]?.level ?? 0,
-            equip2Level: charData.equipment?.[2]?.level ?? 0,
-        };
-    }
+    public static convertCharacter = convertCharacterToSnapshot;
 
-    public static convertMow(mowData: IMow2): ISnapshotMachineOfWar {
-        return {
-            id: mowData.snowprintId,
-            primaryAbilityLevel: mowData.primaryAbilityLevel ?? 0,
-            secondaryAbilityLevel: mowData.secondaryAbilityLevel ?? 0,
-            rarity: mowData.rarity,
-            stars: mowData.stars ?? 0,
-            shards: 0,
-            mythicShards: 0,
-            locked: false,
-        };
-    }
+    public static convertMow = convertMowToSnapshot;
 
     public static passesMowFilter(
         m: IMow2,

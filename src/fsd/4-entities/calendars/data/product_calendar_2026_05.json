@@ -1,0 +1,1111 @@
+{
+    "calendar": "calendar_seasonal_event_may_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "What the Emperor Provides",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyMay2026:80", "specialSummoningToken:1"]
+                },
+                {
+                    "variant": "XS3_M_SHD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:40",
+                        "xpMythic:2",
+                        "xpLegendary:5",
+                        "xpEpic:4",
+                        "gold:8300"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_SHD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:40",
+                        "xpLegendary:11",
+                        "xpEpic:17",
+                        "xpRare:25",
+                        "gold:10950"
+                    ]
+                },
+                {
+                    "variant": "XS3_M_HD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:30",
+                        "xpMythic:2",
+                        "xpLegendary:1",
+                        "xpEpic:4",
+                        "gold:5750"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_HD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:30",
+                        "xpLegendary:8",
+                        "xpEpic:14",
+                        "xpRare:18",
+                        "gold:8000"
+                    ]
+                },
+                {
+                    "variant": "XS3_M_MD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:25",
+                        "xpMythic:1",
+                        "xpLegendary:4",
+                        "xpEpic:4",
+                        "gold:5350"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_MD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:25",
+                        "xpLegendary:7",
+                        "xpEpic:10",
+                        "xpRare:15",
+                        "gold:6650"
+                    ]
+                },
+                {
+                    "variant": "XS3_M_LD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": ["seasonalEventCurrencyMay2026:15", "xpLegendary:5", "xpEpic:4", "gold:3550"]
+                },
+                {
+                    "variant": "XS3_CUREL_LD",
+                    "title": "Ever In His Name",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": ["seasonalEventCurrencyMay2026:15", "xpLegendary:4", "xpEpic:7", "xpRare:9", "gold:4000"]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Do Not Fall, Brothers",
+                    "banner": "Boost your progress!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyMay2026:100", "summoningToken:12", "stamina_waves:4"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:225",
+                        "heroAscensionOrbMythic_Imperial:9",
+                        "heroAscensionOrbLegendary_Imperial:9"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:225",
+                        "heroAscensionOrbLegendary_Imperial:18",
+                        "heroAscensionOrbEpic_Imperial:18",
+                        "heroAscensionOrbRare_Imperial:18"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:225",
+                        "heroAscensionOrbLegendary_Imperial:18",
+                        "heroAscensionOrbEpic_Imperial:18",
+                        "heroAscensionOrbRare_Imperial:18"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:225",
+                        "heroAscensionOrbLegendary_Imperial:9",
+                        "heroAscensionOrbEpic_Imperial:36",
+                        "heroAscensionOrbRare_Imperial:27",
+                        "heroAscensionOrbUncommon_Imperial:9"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Do Not Fall, Brothers",
+                    "banner": "Boost your progress!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyMay2026:75", "summoningToken:9", "stamina_waves:3"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:175",
+                        "heroAscensionOrbMythic_Imperial:7",
+                        "heroAscensionOrbLegendary_Imperial:7"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:175",
+                        "heroAscensionOrbLegendary_Imperial:14",
+                        "heroAscensionOrbEpic_Imperial:14",
+                        "heroAscensionOrbRare_Imperial:14"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:175",
+                        "heroAscensionOrbLegendary_Imperial:14",
+                        "heroAscensionOrbEpic_Imperial:14",
+                        "heroAscensionOrbRare_Imperial:14"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:175",
+                        "heroAscensionOrbLegendary_Imperial:7",
+                        "heroAscensionOrbEpic_Imperial:28",
+                        "heroAscensionOrbRare_Imperial:21",
+                        "heroAscensionOrbUncommon_Imperial:7"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Do Not Fall, Brothers",
+                    "banner": "Boost your progress!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyMay2026:50", "summoningToken:6", "stamina_waves:2"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:125",
+                        "heroAscensionOrbMythic_Imperial:5",
+                        "heroAscensionOrbLegendary_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:125",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "heroAscensionOrbEpic_Imperial:10",
+                        "heroAscensionOrbRare_Imperial:10"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:125",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "heroAscensionOrbEpic_Imperial:10",
+                        "heroAscensionOrbRare_Imperial:10"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:125",
+                        "heroAscensionOrbLegendary_Imperial:5",
+                        "heroAscensionOrbEpic_Imperial:20",
+                        "heroAscensionOrbRare_Imperial:15",
+                        "heroAscensionOrbUncommon_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Do Not Fall, Brothers",
+                    "banner": "Boost your progress!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyMay2026:25", "summoningToken:3", "stamina_waves:1"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:75",
+                        "heroAscensionOrbMythic_Imperial:3",
+                        "heroAscensionOrbLegendary_Imperial:3"
+                    ]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:75",
+                        "heroAscensionOrbLegendary_Imperial:6",
+                        "heroAscensionOrbEpic_Imperial:6",
+                        "heroAscensionOrbRare_Imperial:6"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:75",
+                        "heroAscensionOrbLegendary_Imperial:6",
+                        "heroAscensionOrbEpic_Imperial:6",
+                        "heroAscensionOrbRare_Imperial:6"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "On Your Feet, Brothers",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:75",
+                        "heroAscensionOrbLegendary_Imperial:3",
+                        "heroAscensionOrbEpic_Imperial:12",
+                        "heroAscensionOrbRare_Imperial:9",
+                        "heroAscensionOrbUncommon_Imperial:3"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "M2_M_SHD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:120",
+                        "mythicDust:420",
+                        "dust:600",
+                        "itemAscensionResource_Mythic:3",
+                        "itemAscensionResource_Legendary:6"
+                    ]
+                },
+                {
+                    "variant": "M2_L_SHD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:120",
+                        "mythicDust:420",
+                        "dust:600",
+                        "itemAscensionResource_Mythic:3",
+                        "itemAscensionResource_Legendary:6"
+                    ]
+                },
+                {
+                    "variant": "M2_CURE_SHD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:120",
+                        "dust:4800",
+                        "itemAscensionResource_Legendary:6",
+                        "itemAscensionResource_Epic:6",
+                        "itemAscensionResource_Rare:9",
+                        "itemAscensionResource_Uncommon:9"
+                    ]
+                },
+                {
+                    "variant": "XL1_SHD",
+                    "title": "Time to Emerge",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": ["seasonalEventCurrencyMay2026:420", "summoningToken:56"]
+                },
+                {
+                    "variant": "M2_M_HD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:100",
+                        "mythicDust:350",
+                        "dust:500",
+                        "itemAscensionResource_Mythic:3",
+                        "itemAscensionResource_Legendary:4"
+                    ]
+                },
+                {
+                    "variant": "M2_L_HD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:100",
+                        "mythicDust:350",
+                        "dust:500",
+                        "itemAscensionResource_Mythic:3",
+                        "itemAscensionResource_Legendary:4"
+                    ]
+                },
+                {
+                    "variant": "M2_CURE_HD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:100",
+                        "dust:4000",
+                        "itemAscensionResource_Legendary:5",
+                        "itemAscensionResource_Epic:5",
+                        "itemAscensionResource_Rare:8",
+                        "itemAscensionResource_Uncommon:8"
+                    ]
+                },
+                {
+                    "variant": "XL1_HD",
+                    "title": "Time to Emerge",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["seasonalEventCurrencyMay2026:270", "summoningToken:36"]
+                },
+                {
+                    "variant": "M2_M_MD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:80",
+                        "mythicDust:280",
+                        "dust:400",
+                        "itemAscensionResource_Mythic:2",
+                        "itemAscensionResource_Legendary:4"
+                    ]
+                },
+                {
+                    "variant": "M2_L_MD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:80",
+                        "mythicDust:280",
+                        "dust:400",
+                        "itemAscensionResource_Mythic:2",
+                        "itemAscensionResource_Legendary:4"
+                    ]
+                },
+                {
+                    "variant": "M2_CURE_MD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:80",
+                        "dust:3200",
+                        "itemAscensionResource_Legendary:4",
+                        "itemAscensionResource_Epic:4",
+                        "itemAscensionResource_Rare:6",
+                        "itemAscensionResource_Uncommon:6"
+                    ]
+                },
+                {
+                    "variant": "XL1_MD",
+                    "title": "Time to Emerge",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["seasonalEventCurrencyMay2026:270", "summoningToken:36"]
+                },
+                {
+                    "variant": "M2_M_LD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:40",
+                        "mythicDust:140",
+                        "dust:200",
+                        "itemAscensionResource_Mythic:1",
+                        "itemAscensionResource_Legendary:2"
+                    ]
+                },
+                {
+                    "variant": "M2_L_LD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:40",
+                        "mythicDust:140",
+                        "dust:200",
+                        "itemAscensionResource_Mythic:1",
+                        "itemAscensionResource_Legendary:2"
+                    ]
+                },
+                {
+                    "variant": "M2_CURE_LD",
+                    "title": "Weapons at the Ready",
+                    "banner": "Forge and Craft",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:40",
+                        "dust:1600",
+                        "itemAscensionResource_Legendary:2",
+                        "itemAscensionResource_Epic:2",
+                        "itemAscensionResource_Rare:3",
+                        "itemAscensionResource_Uncommon:3"
+                    ]
+                },
+                {
+                    "variant": "XL1_LD",
+                    "title": "Time to Emerge",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencyMay2026:150", "summoningToken:20"]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "L1_SHD",
+                    "title": "Be Vigilant",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyMay2026:200", "xpLegendary:24", "gold:800000"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "No Rest for the Warriors",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:120",
+                        "ShardsIfUnlocked:135",
+                        "ShardsIfUnlocked:135",
+                        "Stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Be Vigilant",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyMay2026:150", "xpLegendary:18", "gold:600000"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "No Rest for the Warriors",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:80",
+                        "ShardsIfUnlocked:90",
+                        "ShardsIfUnlocked:90",
+                        "Stamina:150",
+                        "raidTicket:25"
+                    ]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Be Vigilant",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyMay2026:100", "xpLegendary:12", "gold:400000"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "No Rest for the Warriors",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:70",
+                        "ShardsIfUnlocked:80",
+                        "ShardsIfUnlocked:80",
+                        "Stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Be Vigilant",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyMay2026:50", "xpLegendary:6", "gold:200000"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "No Rest for the Warriors",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:35",
+                        "ShardsIfUnlocked:40",
+                        "ShardsIfUnlocked:40",
+                        "Stamina:60",
+                        "raidTicket:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "M4_SHD",
+                    "title": "Reporting for Duty",
+                    "banner": "Boost your lineup!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:210",
+                        "summoningToken:7",
+                        "specialSummoningToken:7",
+                        "ShardsAll:140"
+                    ]
+                },
+                {
+                    "variant": "L4_M_SHD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:250",
+                        "summoningToken:9",
+                        "gems:900",
+                        "abilityTokenLegendary_Imperial:11",
+                        "heroAscensionOrbLegendary_Imperial:11",
+                        "xpMythic:6",
+                        "upgHpL213C:1",
+                        "upgDmgL213C:1",
+                        "upgArmL213C:1"
+                    ]
+                },
+                {
+                    "variant": "L4_L_SHD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:250",
+                        "summoningToken:9",
+                        "gems:900",
+                        "abilityTokenLegendary_Imperial:11",
+                        "heroAscensionOrbLegendary_Imperial:11",
+                        "xpMythic:6",
+                        "upgHpL213C:1",
+                        "upgDmgL213C:1",
+                        "upgArmL213C:1"
+                    ]
+                },
+                {
+                    "variant": "M4_HD",
+                    "title": "Reporting for Duty",
+                    "banner": "Boost your lineup!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:180",
+                        "summoningToken:6",
+                        "specialSummoningToken:6",
+                        "ShardsAll:120"
+                    ]
+                },
+                {
+                    "variant": "L4_M_HD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:200",
+                        "summoningToken:9",
+                        "gems:750",
+                        "abilityTokenLegendary_Imperial:10",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "xpMythic:5",
+                        "upgHpL120C:1",
+                        "upgDmgL120C:1",
+                        "upgArmL120C:1",
+                        "upgHpL100:7"
+                    ]
+                },
+                {
+                    "variant": "L4_L_HD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:200",
+                        "summoningToken:9",
+                        "gems:750",
+                        "abilityTokenLegendary_Imperial:10",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "xpMythic:5",
+                        "upgHpL120C:1",
+                        "upgDmgL120C:1",
+                        "upgArmL120C:1",
+                        "upgHpL100:7"
+                    ]
+                },
+                {
+                    "variant": "M4_MD",
+                    "title": "Reporting for Duty",
+                    "banner": "Boost your lineup!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:150",
+                        "summoningToken:5",
+                        "specialSummoningToken:5",
+                        "ShardsAll:100"
+                    ]
+                },
+                {
+                    "variant": "L4_M_MD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:160",
+                        "summoningToken:8",
+                        "gems:600",
+                        "abilityTokenLegendary_Imperial:8",
+                        "heroAscensionOrbLegendary_Imperial:8",
+                        "xpMythic:4",
+                        "upgHpL020C:2",
+                        "upgDmgL004C:2",
+                        "upgArmL011C:2",
+                        "upgHpL100:7"
+                    ]
+                },
+                {
+                    "variant": "L4_L_MD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:160",
+                        "summoningToken:8",
+                        "gems:600",
+                        "abilityTokenLegendary_Imperial:8",
+                        "heroAscensionOrbLegendary_Imperial:8",
+                        "xpMythic:4",
+                        "upgHpL020C:2",
+                        "upgDmgL004C:2",
+                        "upgArmL011C:2",
+                        "upgHpL100:7"
+                    ]
+                },
+                {
+                    "variant": "M4_LD",
+                    "title": "Reporting for Duty",
+                    "banner": "Boost your lineup!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:60",
+                        "summoningToken:2",
+                        "specialSummoningToken:2",
+                        "ShardsAll:40"
+                    ]
+                },
+                {
+                    "variant": "L4_M_LD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:100",
+                        "summoningToken:5",
+                        "gems:375",
+                        "abilityTokenLegendary_Imperial:5",
+                        "heroAscensionOrbLegendary_Imperial:5",
+                        "xpMythic:3",
+                        "upgHpL020C:1",
+                        "upgDmgL004C:1",
+                        "upgArmL011C:1",
+                        "upgHpL100:6"
+                    ]
+                },
+                {
+                    "variant": "L4_L_LD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:100",
+                        "summoningToken:5",
+                        "gems:375",
+                        "abilityTokenLegendary_Imperial:5",
+                        "heroAscensionOrbLegendary_Imperial:5",
+                        "xpMythic:3",
+                        "upgHpL020C:1",
+                        "upgDmgL004C:1",
+                        "upgArmL011C:1",
+                        "upgHpL100:6"
+                    ]
+                },
+                {
+                    "variant": "L4_F_LD",
+                    "title": "Ready to Serve the Chapter",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:100",
+                        "summoningToken:5",
+                        "gems:375",
+                        "abilityTokenLegendary_Imperial:5",
+                        "heroAscensionOrbLegendary_Imperial:5",
+                        "xpLegendary:15",
+                        "upgHpE020C:3",
+                        "upgDmgE020C:3",
+                        "upgArmE020C:3",
+                        "upgHpR017C:3",
+                        "upgDmgR015C:3",
+                        "upgArmR013C:3"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Strike",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyMay2026:50", "ShardsAll:120", "stamina:120", "raidTicket:20"]
+                },
+                {
+                    "variant": "M3_SHD",
+                    "title": "Strike Hard",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:220",
+                        "specialSummoningToken:20",
+                        "stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Strike",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": ["seasonalEventCurrencyMay2026:45", "ShardsAll:108", "stamina:108", "raidTicket:18"]
+                },
+                {
+                    "variant": "M3_HD",
+                    "title": "Strike Hard",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:165",
+                        "specialSummoningToken:15",
+                        "stamina:180",
+                        "raidTicket:30"
+                    ]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Strike",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyMay2026:35", "ShardsAll:84", "stamina:84", "raidTicket:14"]
+                },
+                {
+                    "variant": "M3_MD",
+                    "title": "Strike Hard",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:110",
+                        "specialSummoningToken:10",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Strike",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["seasonalEventCurrencyMay2026:20", "ShardsAll:48", "stamina:48", "raidTicket:8"]
+                },
+                {
+                    "variant": "M3_LD",
+                    "title": "Strike Hard",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:55",
+                        "specialSummoningToken:5",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "What the Emperor Provides",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyMay2026:80", "stamina:60", "raidTicket:10", "gems:50"]
+                },
+                {
+                    "variant": "L2_M_SHD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:225",
+                        "abilityTokenMythic_Imperial:9",
+                        "abilityTokenLegendary_Imperial:18",
+                        "gold:450000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_SHD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:225",
+                        "abilityTokenLegendary_Imperial:9",
+                        "abilityTokenEpic_Imperial:18",
+                        "abilityTokenRare_Imperial:18",
+                        "abilityTokenUncommon_Imperial:36",
+                        "abilityTokenCommon_Imperial:45",
+                        "gold:450000"
+                    ]
+                },
+                {
+                    "variant": "L2_M_HD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:200",
+                        "abilityTokenMythic_Imperial:8",
+                        "abilityTokenLegendary_Imperial:16",
+                        "gold:400000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_HD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:200",
+                        "abilityTokenLegendary_Imperial:8",
+                        "abilityTokenEpic_Imperial:16",
+                        "abilityTokenRare_Imperial:16",
+                        "abilityTokenUncommon_Imperial:32",
+                        "abilityTokenCommon_Imperial:0",
+                        "gold:400000"
+                    ]
+                },
+                {
+                    "variant": "L2_M_MD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:150",
+                        "abilityTokenMythic_Imperial:6",
+                        "abilityTokenLegendary_Imperial:12",
+                        "gold:300000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_MD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:150",
+                        "abilityTokenLegendary_Imperial:6",
+                        "abilityTokenEpic_Imperial:12",
+                        "abilityTokenRare_Imperial:12",
+                        "abilityTokenUncommon_Imperial:24",
+                        "abilityTokenCommon_Imperial:30",
+                        "gold:300000"
+                    ]
+                },
+                {
+                    "variant": "L2_M_LD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:75",
+                        "abilityTokenMythic_Imperial:3",
+                        "abilityTokenLegendary_Imperial:6",
+                        "gold:150000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_LD",
+                    "title": "Greater Strength",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyMay2026:75",
+                        "abilityTokenLegendary_Imperial:3",
+                        "abilityTokenEpic_Imperial:6",
+                        "abilityTokenRare_Imperial:6",
+                        "abilityTokenUncommon_Imperial:12",
+                        "abilityTokenCommon_Imperial:15",
+                        "gold:150000"
+                    ]
+                }
+            ]
+        }
+    ]
+}

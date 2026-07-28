@@ -40,7 +40,7 @@ type AnalyticsEventName =
     | 'lre_progress_update'
     | 'quest_plan_update'
     | 'campaign_event_filter_change'
-    | 'armageddon_shop_update'
+    | 'shop_event_update'
     | 'search'
     | 'guide_open'
     | 'external_link_click';

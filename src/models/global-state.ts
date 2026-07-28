@@ -1,12 +1,13 @@
-﻿import { ArmageddonState } from '@/reducers/armageddon.reducer';
-import { migrateArmageddonState } from '@/reducers/migrations';
+﻿import { LegacyArmageddonState, migrateShopEventsState } from '@/reducers/migrations';
 import { defaultPlayerMetadataState, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
+import { ShopEventsState } from '@/reducers/shop-events.reducer';
 
 import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow, IMow2, IMowDatabase, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
+import { shopEvents as shopEventsRegistry } from '@/fsd/4-entities/shops';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 import { UpgradesService } from '@/fsd/4-entities/upgrade';
 
@@ -70,9 +71,10 @@ export class GlobalState implements IGlobalState {
     readonly rosterSnapshots: IRosterSnapshotsState;
     readonly mows: Array<IMow | IMow2>;
     readonly gameModeTokens: IGameModeTokensState;
-    readonly armageddon: ArmageddonState;
+    readonly shopEvents: ShopEventsState;
     readonly playerMetadata: PlayerMetadataState;
     readonly onslaughtPreferences: IOnslaughtPreferences;
+    readonly survivalTeams: Record<string, string[]>;
     constructor(personalData: IPersonalData2) {
         this.viewPreferences = personalData.viewPreferences ?? defaultData.viewPreferences;
         this.autoTeamsPreferences = personalData.autoTeamsPreferences ?? defaultData.autoTeamsPreferences;
@@ -106,9 +108,13 @@ export class GlobalState implements IGlobalState {
         this.xpUse = personalData.xpUse ?? defaultData.xpUse;
         this.rosterSnapshots = personalData.rosterSnapshots ?? defaultData.rosterSnapshots;
         this.gameModeTokens = personalData.gameModeTokens ?? defaultData.gameModeTokens;
-        this.armageddon = migrateArmageddonState(personalData.armageddon);
+        this.shopEvents = migrateShopEventsState(
+            personalData.shopEvents,
+            (personalData as unknown as { armageddon?: LegacyArmageddonState }).armageddon
+        );
         this.playerMetadata = personalData.playerMetadata ?? defaultPlayerMetadataState;
         this.onslaughtPreferences = personalData.onslaughtPreferences ?? defaultOnslaughtPreferences;
+        this.survivalTeams = personalData.survivalTeams ?? {};
     }
 
     static initCharacters(
@@ -355,14 +361,25 @@ export class GlobalState implements IGlobalState {
             xpUse: value.xpUse,
             rosterSnapshots: value.rosterSnapshots,
             gameModeTokens: value.gameModeTokens,
-            armageddon: value.armageddon,
+            shopEvents: GlobalState.pruneShopEvents(value.shopEvents),
             playerMetadata: value.playerMetadata,
             onslaughtPreferences: value.onslaughtPreferences,
             teams: value.teams,
             teams2: value.teams2,
             warDefense2: value.warDefense2,
             warOffense2: value.warOffense2,
+            survivalTeams: value.survivalTeams,
         };
+    }
+
+    /** Drops persisted shop-event purchase data for any event id no longer in the shop-events registry. */
+    private static pruneShopEvents(shopEvents: ShopEventsState): ShopEventsState {
+        const knownEventIds = new Set(shopEventsRegistry.map(event => event.id));
+        const pruned: ShopEventsState = {};
+        for (const [eventId, state] of Object.entries(shopEvents)) {
+            if (knownEventIds.has(eventId)) pruned[eventId] = state;
+        }
+        return pruned;
     }
 
     private static toStoredDailyRaids(dailyRaids: IDailyRaids): IDailyRaidsStored {

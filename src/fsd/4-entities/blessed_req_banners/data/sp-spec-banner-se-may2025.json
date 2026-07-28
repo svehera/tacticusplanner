@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_SE_May2025",
+    "title": "Survival Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[SeasonalEvents/name_may_2025]}</i> Survival event!",
+    "featuredUnits": [
+        "adeptMorvenn",
+        "ultraTitus",
+        "admecManipulus",
+        "admecMarshall",
+        "admecDestroyer",
+        "astraPrimarisPsy"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

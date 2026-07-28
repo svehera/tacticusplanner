@@ -106,35 +106,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_36_start"
-                },
-                "cronSchedule": "0 0 0 ? * TUE,FRI *",
-                "reward": "shards_genesBiophagus:5",
-                "maxPurchases": "2",
-                "cost": {
-                    "type": "guildCredits",
-                    "amount": 525
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_36_start"
-                },
-                "cronSchedule": "0 0 0 ? * WED,SAT *",
-                "reward": "shards_genesPrimus:5",
-                "maxPurchases": "2",
-                "cost": {
-                    "type": "guildCredits",
-                    "amount": 525
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_36_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * TUE,FRI *",
                 "reward": "shards_bloodIntercessor:5",
                 "maxPurchases": "2",
@@ -145,9 +117,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_36_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED,SAT *",
                 "reward": "shards_bloodDeathCompany:5",
                 "maxPurchases": "2",
@@ -193,35 +163,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_36_start"
-                },
-                "cronSchedule": "0 0 0 ? * WED,SAT *",
-                "reward": "shards_adeptCanoness:5",
-                "maxPurchases": "2",
-                "cost": {
-                    "type": "guildCredits",
-                    "amount": 525
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_until_bp_season_36_start"
-                },
-                "cronSchedule": "0 0 0 ? * SUN *",
-                "reward": "shards_adeptHospitaller:5",
-                "maxPurchases": "4",
-                "cost": {
-                    "type": "guildCredits",
-                    "amount": 525
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_36_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED,SAT *",
                 "reward": "shards_genesPrimus:5",
                 "maxPurchases": "2",
@@ -232,9 +174,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_valid_after_bp_season_36_start"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "reward": "shards_genesBiophagus:5",
                 "maxPurchases": "4",

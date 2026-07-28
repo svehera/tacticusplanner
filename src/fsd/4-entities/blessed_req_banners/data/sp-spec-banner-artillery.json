@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Artillery",
+    "title": "Artillery Requisition",
+    "tagline": "Blast your enemies from afar with this mix of characters and <style=\"MoW\">Machines of War</style>!",
+    "featuredUnits": ["astraOrdnanceBattery", "adeptExorcist", "deathCrawler", "astraOrdnance", "adeptMorvenn"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_DeathGuard",
+    "title": "<style=\"FactionIcon_DeathGuard\">Death Guard</style> Requisition",
+    "tagline": "Higher drop chances for all <style=\"FactionIcon_DeathGuard\">Death Guard</style> units, including their Machine of War!",
+    "featuredUnits": [
+        "deathTyphus",
+        "deathRotbone",
+        "deathPutrifier",
+        "deathBlightbringer",
+        "deathBlightlord",
+        "deathCrawler"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

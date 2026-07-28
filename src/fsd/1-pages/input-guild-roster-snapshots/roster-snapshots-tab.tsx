@@ -235,6 +235,10 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         [snapshotMeta]
     );
 
+    // Members still in the guild — used to skip history fetches for departed (emeritus) players,
+    // since the backend rejects player-chain lookups for anyone no longer a member.
+    const currentMemberIds = useMemo(() => new Set(members ?? memberStates.keys()), [members, memberStates]);
+
     const existingNames = useMemo(() => new Set(sortedMeta.map(s => s.name)), [sortedMeta]);
     const trimmedName = snapshotName.trim();
     const isDuplicateName = existingNames.has(trimmedName);
@@ -416,7 +420,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         const latestSnapshot = sortedMeta.at(-1);
         const latestSnapshotId = latestSnapshot?.snapshotId;
         const latestMemberIds = latestSnapshot?.memberIds ?? [];
-        const uncached = latestMemberIds.filter(id => !playerChainCache.has(id));
+        const uncached = latestMemberIds.filter(id => currentMemberIds.has(id) && !playerChainCache.has(id));
 
         // Step 2: fetch missing chains with retry
         setSaveStage('fetching');
@@ -546,7 +550,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
             case 'naming': {
                 const latestMemberCount = sortedMeta.at(-1)?.memberIds.length ?? 0;
                 const uncachedCount = (sortedMeta.at(-1)?.memberIds ?? []).filter(
-                    id => !playerChainCache.has(id)
+                    id => currentMemberIds.has(id) && !playerChainCache.has(id)
                 ).length;
                 return (
                     <>

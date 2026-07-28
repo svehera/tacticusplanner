@@ -3,35 +3,31 @@ import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import {
     AunShiLegendaryEvent,
-    TrajannLegendaryEvent,
-    DanteLegendaryEvent,
-    FarsightLegendaryEvent,
+    GenericLegendaryEvent,
     KharnLegendaryEvent,
     MephistonLegendaryEvent,
     PatermineLegendaryEvent,
     RagnarLegendaryEvent,
     ShadowSunLegendaryEvent,
     VitruviusLegendaryEvent,
-    LuciusLegendaryEvent,
-    UtharLegendaryEvent,
 } from './model';
 
+const GENERIC_EVENT_IDS: ReadonlySet<LegendaryEventEnum> = new Set([
+    LegendaryEventEnum.Dante,
+    LegendaryEventEnum.Trajann,
+    LegendaryEventEnum.Lucius,
+    LegendaryEventEnum.Farsight,
+    LegendaryEventEnum.Uthar,
+    LegendaryEventEnum.Lysander,
+]);
+
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
+    if (GENERIC_EVENT_IDS.has(id)) {
+        return new GenericLegendaryEvent(characters, id);
+    }
     switch (id) {
         case LegendaryEventEnum.AunShi: {
             return new AunShiLegendaryEvent(characters);
-        }
-        case LegendaryEventEnum.Lucius: {
-            return new LuciusLegendaryEvent(characters);
-        }
-        case LegendaryEventEnum.Trajann: {
-            return new TrajannLegendaryEvent(characters);
-        }
-        case LegendaryEventEnum.Dante: {
-            return new DanteLegendaryEvent(characters);
-        }
-        case LegendaryEventEnum.Farsight: {
-            return new FarsightLegendaryEvent(characters);
         }
         case LegendaryEventEnum.Kharn: {
             return new KharnLegendaryEvent(characters);
@@ -50,9 +46,6 @@ export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {
         }
         case LegendaryEventEnum.Vitruvius: {
             return new VitruviusLegendaryEvent(characters);
-        }
-        case LegendaryEventEnum.Uthar: {
-            return new UtharLegendaryEvent(characters);
         }
         default: {
             return new ShadowSunLegendaryEvent(characters);

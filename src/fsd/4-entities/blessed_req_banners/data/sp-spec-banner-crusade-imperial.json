@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Crusade_Imperial",
+    "title": "Crusade Requisition",
+    "tagline": "Support the Crusade and conquer the stars with these <style=\"Aliance_Imperial\">Imperial</style> units!",
+    "featuredUnits": [
+        "adeptRetributor",
+        "darkaHellblaster",
+        "templAggressor",
+        "admecMarshall",
+        "ultraCalgar",
+        "astraOrdnanceBattery"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

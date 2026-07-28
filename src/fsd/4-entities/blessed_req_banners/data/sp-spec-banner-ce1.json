@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_CE1",
+    "title": "Blight and Blood Requisition",
+    "tagline": "The featured units will give you the upper hand against <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in this season's special events!",
+    "featuredUnits": [
+        "deathTyphus",
+        "deathRotbone",
+        "deathBlightbringer",
+        "worldEightbound",
+        "worldTerminator",
+        "worldJakhal"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

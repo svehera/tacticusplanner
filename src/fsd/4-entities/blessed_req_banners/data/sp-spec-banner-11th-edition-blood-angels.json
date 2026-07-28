@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_11thEdition_BloodAngels",
+    "title": "Armageddon Requisition: <style=\"FactionIcon_BloodAngels\">Blood Angels</style>",
+    "tagline": "Massive boost to <style=\"FactionIcon_BloodAngels\">Blood Angel</style> drop chances, with top rewards guaranteed even faster!",
+    "featuredUnits": ["bloodDante", "bloodMephiston", "bloodSanguinary", "bloodDeathCompany", "bloodIntercessor"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

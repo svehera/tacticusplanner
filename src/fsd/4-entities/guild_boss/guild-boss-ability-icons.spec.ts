@@ -4,7 +4,7 @@ import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 
 import { guildBossData } from './guild-boss.service';
 
-// These 4 abilities have no image asset in the repository at all
+// This ability has no image asset in the repository at all.
 const KNOWN_MISSING_ASSETS = new Set(['GuildBossRunAway']);
 
 function getAllBossAbilityIds(): Set<string> {

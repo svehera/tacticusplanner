@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_LEG_worldKharn",
+    "title": "Khârn Squad Requisition",
+    "tagline": "Get the best characters for the upcoming <i>{[HRE/name_LEG_WorldEaters]}</i> event, featuring <style=\"Faction_WorldEaters\">Khârn</style>",
+    "featuredUnits": ["eldarMauganRa", "worldJakhal", "tauCrisis", "eldarRanger", "necroDestroyer", "adeptRetributor"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

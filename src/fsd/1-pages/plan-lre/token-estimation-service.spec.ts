@@ -20,7 +20,6 @@ import { TokenEstimationService, TokenUse, milestonesAndPoints } from './token-e
 function createRequirementsProgress(reqs: ILreRequirements[]): ILreBattleRequirementsProgress[] {
     return reqs.map(requirement => ({
         id: requirement.id,
-        iconId: requirement.id,
         name: requirement.id,
         points: requirement.pointsPerBattle,
         completed: false,
@@ -40,7 +39,6 @@ function createBattleProgress(index: number, reqs: ILreRequirements[]): ILreBatt
 function createRequirement(id: string, pointsPerBattle: number): ILreRequirements {
     return {
         id: id,
-        iconId: 'unused',
         name: id,
         totalPoints: 0,
         pointsPerBattle: pointsPerBattle,
@@ -278,7 +276,6 @@ describe('TokenEstimationService', () => {
             lastToken.restrictionsCleared = [
                 {
                     id: 'Pierce',
-                    iconId: 'Pierce',
                     name: 'Pierce',
                     pointsPerBattle: 60,
                     totalPoints: 0,

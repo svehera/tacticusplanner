@@ -12,6 +12,8 @@ import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
+import { CharacterSelectGrid, MowSelectGrid } from '@/fsd/2-widgets/unit-select-grid';
+
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
 
 import {
@@ -485,7 +487,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                     }`}
                     style={{ '--mow-width': `${mowWidth}px` } as React.CSSProperties}>
                     <div className="min-w-0 flex-1 rounded-lg border border-(--card-border) bg-(--card) p-4">
-                        <CharacterGrid
+                        <CharacterSelectGrid
                             characters={filteredChars}
                             onCharacterSelect={onAddChar}
                             showHeader={true}

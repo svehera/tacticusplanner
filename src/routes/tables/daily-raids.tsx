@@ -4,6 +4,7 @@ import { useLocation, useSearchParams } from 'react-router-dom';
 
 import { ICampaignsFilters } from 'src/models/interfaces';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
+import { CrusadeShopSection } from 'src/routes/tables/crusade-shop-section';
 import { GuildShopSection } from 'src/routes/tables/guild-shop-section';
 import { RaidsHeader } from 'src/routes/tables/raids-header';
 import { RogueTraderSection } from 'src/routes/tables/rogue-trader-section';
@@ -15,6 +16,7 @@ import { useAuth } from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { MowsService } from '@/fsd/4-entities/mow';
+import { hasBlueStarUnit } from '@/fsd/4-entities/shops';
 
 import { IUnit } from '@/fsd/3-features/characters/characters.models';
 import { ActiveGoalsDialog } from '@/fsd/3-features/goals/active-goals-dialog';
@@ -201,6 +203,11 @@ export const DailyRaids = () => {
         [upgradeRankOrMowGoals, inventory.components, inventory.forgeBadges]
     );
 
+    const hasBlueStar = useMemo(
+        () => hasBlueStarUnit([...resolvedCharacters, ...resolvedMows]),
+        [resolvedCharacters, resolvedMows]
+    );
+
     return (
         <div className="space-y-8 py-6">
             <RaidsHeader
@@ -266,6 +273,18 @@ export const DailyRaids = () => {
                                 blockedMaterials={estimatedRanks.blockedMaterials}
                                 forgeBadgeCounts={mowCounts.forgeBadgeCounts}
                                 forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
+                            />
+                        ) : undefined
+                    }
+                    crusadeShopSection={
+                        (viewPreferences.showCrusadeShop ?? true) ? (
+                            <CrusadeShopSection
+                                inProgressMaterials={estimatedRanks.inProgressMaterials}
+                                blockedMaterials={estimatedRanks.blockedMaterials}
+                                forgeBadgeCounts={mowCounts.forgeBadgeCounts}
+                                forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
+                                userPL={playerMetadata.powerLevel ?? 1}
+                                hasBlueStarUnit={hasBlueStar}
                             />
                         ) : undefined
                     }

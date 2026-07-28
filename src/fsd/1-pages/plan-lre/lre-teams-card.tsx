@@ -1,4 +1,3 @@
-import InfoIcon from '@mui/icons-material/Info';
 import { Card, CardContent, CardHeader } from '@mui/material';
 import React, { useContext, useMemo } from 'react';
 
@@ -76,9 +75,6 @@ export const LreTeamsCard: React.FC<Props> = ({
                 subheader={
                     <div className="flex-box gap5">
                         <span style={{ fontStyle: 'italic', fontSize: '1rem' }}> vs {track.enemies.label}</span>
-                        <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
-                            <InfoIcon color={'primary'} />
-                        </a>
                     </div>
                 }
             />

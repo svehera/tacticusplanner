@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_MoW_thousDaemonPrince",
+    "title": "Daemon Prince Requisition",
+    "tagline": "Gain the upper hand in the upcoming <style=\"FactionIcon_ThousandSons\">Z'Kar</style> Incursion!",
+    "featuredUnits": [
+        "tauAunShi",
+        "orksWarboss",
+        "necroPlasmancer",
+        "tyranTyrantGuard",
+        "genesBiophagus",
+        "necroWarden"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

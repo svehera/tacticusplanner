@@ -347,7 +347,7 @@ export type AstNode = TextNode | VariableNode | StyledNode;
 
 // ── Parser ────────────────────────────────────────────────────────────────────
 
-const TOKEN_RE = /(<style="[^"]*">|<style=\{[^}]+\}>|<\/style>|<i>|<\/i>|\{[^}]+\})/g;
+const TOKEN_RE = /(<style="[^"]*">|<style=\{[^}]+\}>|<style=[^"{}<>]+>|<\/style>|<i>|<\/i>|\{[^}]+\})/g;
 
 function parseToken(raw: string): { open?: string; isDynamic?: boolean } | { close: true } | { variable: string } {
     if (raw === '</style>' || raw === '</i>') return { close: true };
@@ -356,6 +356,8 @@ function parseToken(raw: string): { open?: string; isDynamic?: boolean } | { clo
     if (openQuoted) return { open: openQuoted[1] };
     const openDynamic = /^<style=\{([^}]+)\}>\s*$/.exec(raw);
     if (openDynamic) return { open: openDynamic[1], isDynamic: true };
+    const openBare = /^<style=([^"{}<>]+)>\s*$/.exec(raw);
+    if (openBare) return { open: openBare[1] };
     const variableMatch = /^\{([^}]+)\}$/.exec(raw);
     if (variableMatch) return { variable: variableMatch[1] };
     return { variable: raw };

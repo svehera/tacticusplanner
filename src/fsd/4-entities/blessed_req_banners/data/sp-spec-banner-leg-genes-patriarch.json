@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_genesPatriarch",
+    "title": "The Patermine Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_Genestealers]}</i> event, featuring <style=\"FactionIcon_Genestealers\">The Patermine</style>",
+    "featuredUnits": [
+        "tauAunShi",
+        "tyranParasite",
+        "tyranNeurothrope",
+        "eldarAutarch",
+        "tyranTyrantGuard",
+        "necroWarden"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

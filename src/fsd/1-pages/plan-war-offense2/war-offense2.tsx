@@ -13,11 +13,11 @@ import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
+import { CharacterSelectGrid, MowSelectGrid } from '@/fsd/2-widgets/unit-select-grid';
+
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
-import { CharacterGrid } from '../plan-teams2/character-grid';
 import { ITeam2 } from '../plan-teams2/models';
-import { MowGrid } from '../plan-teams2/mow-grid';
 import { TeamFlow } from '../plan-teams2/team-flow';
 import { Teams2Service } from '../plan-teams2/teams2.service';
 
@@ -361,7 +361,7 @@ export const WarOffense2 = () => {
                         </div>
                     </summary>
                     <div className="mt-4">
-                        <CharacterGrid
+                        <CharacterSelectGrid
                             characters={deployableCharacters.map(char =>
                                 Teams2Service.capCharacterAtRarity(char, rarityCap)
                             )}
@@ -371,7 +371,7 @@ export const WarOffense2 = () => {
                             zoom={zoom}
                             showHeader={true}
                         />
-                        <MowGrid
+                        <MowSelectGrid
                             mows={deployableMows.map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}
                             onMowSelect={mowId => stageMow(mows.find(mow => mow.snowprintId === mowId)!)}
                             zoom={zoom}
@@ -388,7 +388,7 @@ export const WarOffense2 = () => {
                         </div>
                     </summary>
                     <div className="mt-4">
-                        <CharacterGrid
+                        <CharacterSelectGrid
                             characters={characters
                                 .filter(char => deployedCharacters.includes(char.snowprintId))
                                 .map(char => Teams2Service.capCharacterAtRarity(char, rarityCap))}
@@ -396,7 +396,7 @@ export const WarOffense2 = () => {
                             showHeader={true}
                             zoom={zoom}
                         />
-                        <MowGrid
+                        <MowSelectGrid
                             mows={mows
                                 .filter(mow => deployedMows.includes(mow.snowprintId))
                                 .map(mow => Teams2Service.capMowAtRarity(mow, rarityCap))}

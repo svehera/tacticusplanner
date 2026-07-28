@@ -1,10 +1,9 @@
-import { Shuffle } from 'lucide-react';
 import { FC, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui';
-import { ForgeBadgeImage } from '@/fsd/5-shared/ui/icons';
+import { ForgeBadgeImage, MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RogueTraderService, ResolvedShopItem } from '@/fsd/4-entities/shops';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
@@ -69,7 +68,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                         <h4 className="truncate text-xs font-normal">{name}</h4>
                         {!item.isGuaranteed && (
                             <AccessibleTooltip title="May or may not appear today — this slot is random">
-                                <Shuffle className="shrink-0 text-(--warning)" size={13} aria-label="Random" />
+                                <MiscIcon icon="chance" className="shrink-0" height={13} width={13} />
                             </AccessibleTooltip>
                         )}
                     </div>

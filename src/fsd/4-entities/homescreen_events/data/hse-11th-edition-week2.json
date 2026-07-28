@@ -1,0 +1,581 @@
+{
+    "eventName": "hse_11th_edition_week2",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week2_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week2",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Description",
+                "eventId": "hse_11th_edition_week2_tier_high",
+                "rewardProgressId": "hse_11th_edition_week2_tier_high",
+                "theme": "hse_11th_edition_week2",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 100,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week2_tier_high_bundle",
+                    "offer_homescreen_event_11th_edition_week2_tier_high_playmore",
+                    "offer_homescreen_event_11th_edition_week2_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "gold:50000"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "gold:75000"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 280,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "gold:125000"
+                },
+                {
+                    "requiredProgress": 460,
+                    "chestRewardId": "gold:150000"
+                },
+                {
+                    "requiredProgress": 580,
+                    "chestRewardId": "gold:200000"
+                },
+                {
+                    "requiredProgress": 720,
+                    "chestRewardId": "gold:300000"
+                },
+                {
+                    "requiredProgress": 880,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:100000",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_11th_edition_week2_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
+                        "rewards": [
+                            "tieredRewardPoints_hse_11th_edition_week2_tier_high:100",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:500"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_11th_edition_week2_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_11th_edition_week2_tier_high:40",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_11th_edition_week2_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_hse_11th_edition_week2_tier_high:200", "gems:1000"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>The Inner Hab District</i> is here",
+                "Earn points by battling in Onslaught and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Onslaught.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Inner Hab District points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Onslaught."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week2_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week2",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Description",
+                "eventId": "hse_11th_edition_week2_tier_mid",
+                "rewardProgressId": "hse_11th_edition_week2_tier_mid",
+                "theme": "hse_11th_edition_week2",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 60,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week2_tier_mid_bundle",
+                    "offer_homescreen_event_11th_edition_week2_tier_mid_playmore",
+                    "offer_homescreen_event_11th_edition_week2_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "gold:20000"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:30000"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 330,
+                    "chestRewardId": "gold:60000"
+                },
+                {
+                    "requiredProgress": 430,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 550,
+                    "chestRewardId": "gold:200000"
+                },
+                {
+                    "requiredProgress": 690,
+                    "chestRewardId": "gold:300000"
+                },
+                {
+                    "requiredProgress": 850,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "gold:60000",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_11th_edition_week2_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_11th_edition_week2_tier_mid:100",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_11th_edition_week2_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_11th_edition_week2_tier_mid:40",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_11th_edition_week2_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_hse_11th_edition_week2_tier_mid:200", "gems:1000"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>The Inner Hab District</i> is here",
+                "Earn points by battling in Onslaught and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Onslaught.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Inner Hab District points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Onslaught."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_11th_edition_week2_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Header",
+                "visualId": "homescreenevent_hse_11th_edition_week2",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_hse_11th_edition_week2_Interstitial_Description",
+                "eventId": "hse_11th_edition_week2_tier_low",
+                "rewardProgressId": "hse_11th_edition_week2_tier_low",
+                "theme": "hse_11th_edition_week2",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 20,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_11th_edition_week2_tier_low_bundle",
+                    "offer_homescreen_event_11th_edition_week2_tier_low_playmore",
+                    "offer_homescreen_event_11th_edition_week2_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BloodAngels", "Orks"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_week2_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 35,
+                    "chestRewardId": "gold:1000"
+                },
+                {
+                    "requiredProgress": 70,
+                    "chestRewardId": "gold:2000"
+                },
+                {
+                    "requiredProgress": 105,
+                    "chestRewardId": "gold:3500"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:20"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 540,
+                    "chestRewardId": "gold:20000"
+                },
+                {
+                    "requiredProgress": 790,
+                    "chestRewardId": "gold:35000"
+                },
+                {
+                    "requiredProgress": 1140,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 250,
+                    "chestRewardId": "gold:10000",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_11th_edition_week2_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_11th_edition_week2_tier_low:100",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_11th_edition_week2_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_11th_edition_week2_tier_low:40",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_11th_edition_week2_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_11th_edition_week2_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_11th_edition_week2_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": ["tieredRewardPoints_hse_11th_edition_week2_tier_low:200", "gems:400"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>The Inner Hab District</i> is here",
+                "Earn points by battling in Onslaught and claim exclusive rewards!",
+                "<style=\"Faction_BloodAngels\">Blood Angels</style> and <style=\"Faction_Orks\">Orks</style> gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Onslaught.",
+                "You gain <style=\"HSE_Points_11thEdition_personal\">{[POINTS]} Inner Hab District points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat in Onslaught."
+            ]
+        }
+    }
+}

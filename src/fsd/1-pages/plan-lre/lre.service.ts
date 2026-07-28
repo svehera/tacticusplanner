@@ -68,7 +68,7 @@ export class LreService {
                     name: 'Killscore',
                     pointsPerBattle: 0,
                     completed: false,
-                    iconId: 'score',
+                    objectiveType: 'KillScore',
                     totalPoints: sum(track.battlesPoints),
                 },
                 {
@@ -76,7 +76,7 @@ export class LreService {
                     name: 'High Score',
                     pointsPerBattle: 0,
                     completed: false,
-                    iconId: 'score',
+                    objectiveType: 'HighScore',
                     totalPoints: sum(track.battlesPoints),
                 },
                 {
@@ -84,7 +84,7 @@ export class LreService {
                     name: 'Defeat All',
                     pointsPerBattle: track.killPoints,
                     completed: false,
-                    iconId: '_defeatAll',
+                    objectiveType: 'DefeatAll',
                     totalPoints: track.battlesPoints.length * track.killPoints,
                 },
                 ...orderBy(track.unitsRestrictions, 'index').map(x => ({
@@ -94,7 +94,8 @@ export class LreService {
                     completed: trackBattlesRequirementsDto
                         .filter(r => r.id === x.name)
                         .every(r => r.state === ProgressState.completed),
-                    iconId: x.iconId ?? '',
+                    objectiveType: x.objectiveType,
+                    objectiveTarget: x.objectiveTarget,
                     totalPoints: track.battlesPoints.length * x.points,
                 })),
             ];
@@ -108,7 +109,8 @@ export class LreService {
 
                     return {
                         id: requirement.id,
-                        iconId: requirement.iconId,
+                        objectiveType: requirement.objectiveType,
+                        objectiveTarget: requirement.objectiveTarget,
                         name: requirement.name,
                         points: flexPointsCategories.has(requirement.id as LrePointsCategoryId)
                             ? points

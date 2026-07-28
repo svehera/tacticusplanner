@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
+import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { patermine as staticData } from '@/fsd/4-entities/lre';
@@ -26,7 +26,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 95,
                     units: filter(noOrks).byDamageType(DamageType.Physical),
                     selected: false,
-                    iconId: 'physical',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     index: 0,
                 },
                 {
@@ -34,7 +35,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 65,
                     units: filter(noOrks).byAttackType('meleeOnly'),
                     selected: true,
-                    iconId: 'melee',
+                    objectiveType: 'HasNoRangedAttack',
+                    objectiveTarget: '',
                     index: 1,
                 },
                 {
@@ -42,14 +44,16 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 30,
                     units: filter(noOrks).byMaxHits(4),
                     selected: true,
-                    iconId: 'hits',
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '4',
                     index: 2,
                 },
                 {
                     name: 'Mechanical',
                     points: 85,
                     units: filter(noOrks).isMechanical(),
-                    iconId: 'mech',
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Mechanical',
                     index: 3,
                 },
                 {
@@ -57,7 +61,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 100,
                     units: filter(noOrks).byDamageType(DamageType.Bolter),
                     selected: false,
-                    iconId: 'bolter',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Bolter',
                     index: 4,
                 },
             ],
@@ -77,14 +82,16 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 95,
                     units: filter(noImperial).byDamageType(DamageType.Power),
                     selected: false,
-                    iconId: 'power',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     index: 0,
                 },
                 {
                     name: 'Flying',
                     points: 95,
                     units: filter(noImperial).byTrait(Trait.Flying),
-                    iconId: 'flying',
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Flying',
                     index: 1,
                 },
                 {
@@ -92,7 +99,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 45,
                     units: filter(noImperial).byNoSummons(),
                     selected: true,
-                    iconId: 'no_summons',
+                    objectiveType: 'NoSummons',
+                    objectiveTarget: '',
                     index: 2,
                 },
                 {
@@ -100,7 +108,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 70,
                     units: filter(noImperial).byAttackType('meleeOnly'),
                     selected: true,
-                    iconId: 'melee',
+                    objectiveType: 'HasNoRangedAttack',
+                    objectiveTarget: '',
                     index: 3,
                 },
                 {
@@ -108,7 +117,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 70,
                     units: filter(noImperial).byMaxHits(2),
                     selected: false,
-                    iconId: 'hits',
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '2',
                     index: 4,
                 },
             ],
@@ -128,7 +138,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 110,
                     units: filter(noChaos).byDamageType(DamageType.Piercing),
                     selected: false,
-                    iconId: 'piercing',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Piercing',
                     index: 0,
                 },
                 {
@@ -136,7 +147,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 30,
                     units: filter(noChaos).byTrait(Trait.Overwatch, true),
                     selected: true,
-                    iconId: 'no_overwatch',
+                    objectiveType: 'NotTrait',
+                    objectiveTarget: 'Overwatch',
                     index: 1,
                 },
                 {
@@ -144,7 +156,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 40,
                     units: filter(noChaos).byTrait(Trait.FinalJustice, true),
                     selected: true,
-                    iconId: 'no_finalVengeance',
+                    objectiveType: 'NotTrait',
+                    objectiveTarget: 'FinalJustice',
                     index: 2,
                 },
                 {
@@ -152,7 +165,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 100,
                     units: filter(noChaos).byMinHits(4),
                     selected: false,
-                    iconId: 'hits',
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '4',
                     index: 3,
                 },
                 {
@@ -160,7 +174,8 @@ export class PatermineLegendaryEvent extends LegendaryEventBase {
                     points: 95,
                     units: filter(noChaos).byDamageType(DamageType.Power),
                     selected: false,
-                    iconId: 'power',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     index: 4,
                 },
             ],

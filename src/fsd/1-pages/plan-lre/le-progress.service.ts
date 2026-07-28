@@ -191,10 +191,8 @@ export class LeProgressService {
         const shardsFor4Stars = shardsForUnlock + progression.fourStars;
         const shardsFor5Stars = shardsFor4Stars + progression.fiveStars;
         const shardsForBlueStar = shardsFor5Stars + progression.blueStar;
-        // TODO: Make a helper function for getting optional properties from a union type
-        const shardsForMythic = shardsForBlueStar + ('mythic' in progression ? progression.mythic : Infinity);
-        const shardsForTwoBlueStars =
-            shardsForMythic + ('twoBlueStars' in progression ? progression.twoBlueStars : Infinity);
+        const shardsForMythic = shardsForBlueStar + (progression.mythic ?? Infinity);
+        const shardsForTwoBlueStars = shardsForMythic + (progression.twoBlueStars ?? Infinity);
 
         return [
             { threshold: shardsForUnlock, name: 'unlock' },

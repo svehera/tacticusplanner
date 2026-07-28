@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_MoW_adeptExorcist",
+    "title": "Exorcist Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>Incursion</i> featuring the <style=\"Faction_Sisterhood\">Exorcist</style>",
+    "featuredUnits": [
+        "eldarMauganRa",
+        "tyranDeathleaper",
+        "eldarFarseer",
+        "genesMagus",
+        "genesBiophagus",
+        "necroWarden"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

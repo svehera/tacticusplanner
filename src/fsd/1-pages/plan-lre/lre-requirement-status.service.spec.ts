@@ -15,7 +15,6 @@ function createRequirementProgress(
 ): ILreBattleRequirementsProgress {
     return {
         id,
-        iconId: id,
         name: id,
         points: 100,
         completed,

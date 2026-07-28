@@ -65,6 +65,7 @@ import uncommonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame
 import character from '@/assets/images/snowprint_assets/misc/character.png';
 import overkill from '@/assets/images/snowprint_assets/misc/overkill.png';
 import piercingDamage from '@/assets/images/snowprint_assets/misc/piercing_dmg.png';
+import seasonalEventAugust2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_august_2026.png';
 import commonEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_common.png';
 import epicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_epic.png';
 import legendaryEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_legendary.png';
@@ -89,6 +90,7 @@ import legendaryEventToken from '@/assets/images/snowprint_assets/misc/ui_icon_r
 import onslaughtToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_onslaught.png';
 import salvageRunToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_salvage_run.png';
 import survivalToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_survival.png';
+import playerProfileThemeMay2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_may_2026.png';
 import chaosOnslaught from '@/assets/images/snowprint_assets/onslaught/chaos.png';
 import imperialOnslaught from '@/assets/images/snowprint_assets/onslaught/imperial.png';
 import onslaughtAdamantine1 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_1.png';
@@ -155,6 +157,18 @@ import onslaughtRankStone2 from '@/assets/images/snowprint_assets/onslaught/ui_o
 import onslaughtRankStone3 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_stone_3.png';
 import onslaughtRankStone4 from '@/assets/images/snowprint_assets/onslaught/ui_onslaught_button_rank_stone_4.png';
 import xenosOnslaught from '@/assets/images/snowprint_assets/onslaught/xenos.png';
+import powupArmor from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_armor_01.png';
+import powupBomb from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_bomb_01.png';
+import powupDamage from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_damage_01.png';
+import powupHealing from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_healing_01.png';
+import powupHealth from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_health_01.png';
+import powupHeroSpawn from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_heroSpawn_01.png';
+import powupHits from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_hits_01.png';
+import powupMeleeHits from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_meleehits_01.png';
+import powupReactivateAbility from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reactivateability_01.png';
+import powupReinforcement from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reinforcement_01.png';
+import powupReinforcementShield from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reinforcementshield_01.png';
+import powupResurrect from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_resurrect_01.png';
 import commonForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_common.png';
 import epicForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_epic.png';
 import legendaryForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_legendary.png';
@@ -186,8 +200,17 @@ import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_r
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
 import blackstone from '@/assets/images/snowprint_assets/resources/ui_icon_resource_blackstone.png';
 import coins from '@/assets/images/snowprint_assets/resources/ui_icon_resource_coin_large.png';
+import crusadeBomb from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_bomb_large.png';
+import crusadeCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_currency_large.png';
+import crusadeIntel from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_intel_large.png';
+import crusadeNpc from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_npc_large.png';
 import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png';
+import seasonalEventCurrencyApril2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_april_2026.png';
+import seasonalEventCurrencyAugust2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_august_2026.png';
+import seasonalEventCurrencyHolidays2025 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_holiday_25.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
+import seasonalEventCurrencyMarch2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_march_2026.png';
+import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
 import mowAmmo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_machines_of_war_ammo_large.png';
@@ -287,6 +310,46 @@ interface SnowprintIcon {
 }
 
 export const snowprintIcons: Record<string, SnowprintIcon> = {
+    seasonalEventAugust2026AvatarFrame: {
+        file: seasonalEventAugust2026AvatarFrame,
+        label: 'Seasonal Event (August 2026) Avatar Frame',
+    },
+    crusadeBomb: {
+        file: crusadeBomb,
+        label: 'Crusade Bomb',
+    },
+    crusadeCurrency: {
+        file: crusadeCurrency,
+        label: 'Crusade Currency',
+    },
+    crusadeIntel: {
+        file: crusadeIntel,
+        label: 'Crusade Intel',
+    },
+    crusadeNpc: {
+        file: crusadeNpc,
+        label: 'Crusade NPC',
+    },
+    seasonalEventCurrencyApril2026: {
+        file: seasonalEventCurrencyApril2026,
+        label: 'Seasonal Event Currency (April 2026)',
+    },
+    seasonalEventCurrencyAugust2026: {
+        file: seasonalEventCurrencyAugust2026,
+        label: 'Seasonal Event Currency (August 2026)',
+    },
+    seasonalEventCurrencyHolidays2025: {
+        file: seasonalEventCurrencyHolidays2025,
+        label: 'Seasonal Event Currency (Holidays 2025)',
+    },
+    seasonalEventCurrencyMarch2026: {
+        file: seasonalEventCurrencyMarch2026,
+        label: 'Seasonal Event Currency (March 2026)',
+    },
+    seasonalEventCurrencyMay2026: {
+        file: seasonalEventCurrencyMay2026,
+        label: 'Seasonal Event Currency (May 2026)',
+    },
     upgradeCommon: {
         file: upgradeCommon,
         label: 'Upgrade (Common)',
@@ -550,6 +613,58 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     survivalToken: {
         file: survivalToken,
         label: 'Survival Token',
+    },
+    playerProfileThemeMay2026: {
+        file: playerProfileThemeMay2026,
+        label: 'Seasonal Event (May 2026) Profile Theme',
+    },
+    powupArmor: {
+        file: powupArmor,
+        label: 'Armor Power-up',
+    },
+    powupBomb: {
+        file: powupBomb,
+        label: 'Bomb Power-up',
+    },
+    powupDamage: {
+        file: powupDamage,
+        label: 'Damage Power-up',
+    },
+    powupHealing: {
+        file: powupHealing,
+        label: 'Healing Power-up',
+    },
+    powupHealth: {
+        file: powupHealth,
+        label: 'Health Power-up',
+    },
+    powupHeroSpawn: {
+        file: powupHeroSpawn,
+        label: 'Reinforcement Power-up',
+    },
+    powupHits: {
+        file: powupHits,
+        label: 'Hits Power-up',
+    },
+    powupMeleeHits: {
+        file: powupMeleeHits,
+        label: 'Melee Hits Power-up',
+    },
+    powupReactivateAbility: {
+        file: powupReactivateAbility,
+        label: 'Reactivate Ability Power-up',
+    },
+    powupReinforcement: {
+        file: powupReinforcement,
+        label: 'Reinforcement Power-up',
+    },
+    powupReinforcementShield: {
+        file: powupReinforcementShield,
+        label: 'Reinforcement Shield Power-up',
+    },
+    powupResurrect: {
+        file: powupResurrect,
+        label: 'Resurrect Power-up',
     },
     guildRaidToken: {
         file: guildRaidToken,

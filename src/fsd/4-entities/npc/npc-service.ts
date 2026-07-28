@@ -1,45 +1,73 @@
-import { createSafeGetter, mutableCopy } from '@/fsd/5-shared/lib';
-import { Alliance, DamageType } from '@/fsd/5-shared/model';
+import { mutableCopy } from '@/fsd/5-shared/lib';
+import { Alliance, DamageType, FactionId, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 
 import { npcData } from './data';
-import { INpcData, INpcRawStats, INpcStats } from './model';
+import { INpcData, INpcStats } from './model';
 
-const safeGet = createSafeGetter<typeof npcData>();
+interface INpcRawLoose {
+    id: string;
+    Name: string;
+    Faction?: string;
+    Alliance?: string;
+    'Melee Damage': string;
+    'Melee Hits': number;
+    'Ranged Damage'?: string;
+    'Ranged Hits'?: number;
+    Distance?: number;
+    Movement?: number;
+    Traits: string[];
+    Icon: string;
+    'Active Abilities'?: string[];
+    'Passive Abilities'?: string[];
+    'Active Ability Damage'?: string[];
+    'Passive Ability Damage'?: string[];
+    Stats: Array<{
+        AbilityLevel: number;
+        Damage?: number;
+        Armor?: number;
+        Health?: number;
+        ProgressionIndex: number;
+        Rank?: number;
+        Stars: number;
+    }>;
+}
 
 export class NpcService {
     static readonly npcDataFull: INpcData[] = this.convertNpcData();
 
     private static convertNpcData(): INpcData[] {
-        return npcData.map(npc => {
+        // `npcData`'s per-entry type is a huge discriminated union (~490 distinct literal shapes,
+        // since it's a const JSON import). Relating that union against many individual property
+        // accesses (or a generic safe-getter call per property) is expensive enough to crash tsc's
+        // type checker, so cast once per entry to a loose/optional shape up front instead - some NPC
+        // variants (e.g. loot objects) omit fields like Faction/Alliance/Movement/Damage entirely.
+        return (npcData as unknown as INpcRawLoose[]).map(npc => {
             return {
                 snowprintId: npc.id,
                 name: npc.Name,
-                faction: npc.Faction || undefined, // source data has empty string for some NPCs (e.g. loot objects)
-                alliance: npc.Alliance ? (npc.Alliance as Alliance) : undefined,
+                faction: (npc.Faction as FactionId | undefined) || undefined,
+                alliance: (npc.Alliance as Alliance | undefined) || undefined,
                 meleeDamage: npc['Melee Damage'],
                 meleeHits: npc['Melee Hits'],
-                rangeDamage: safeGet(npc, 'Ranged Damage'),
-                rangeHits: safeGet(npc, 'Ranged Hits'),
-                rangeDistance: safeGet(npc, 'Distance'),
-                movement: npc.Movement,
+                rangeDamage: npc['Ranged Damage'],
+                rangeHits: npc['Ranged Hits'],
+                rangeDistance: npc.Distance,
+                movement: npc.Movement ?? 0,
                 traits: mutableCopy(npc.Traits),
                 icon: npc.Icon,
-                activeAbilities: mutableCopy(safeGet(npc, 'Active Abilities') ?? []),
-                passiveAbilities: mutableCopy(safeGet(npc, 'Passive Abilities') ?? []),
-                activeAbilityDamage: mutableCopy(safeGet(npc, 'Active Ability Damage') ?? []),
-                passiveAbilityDamage: mutableCopy(safeGet(npc, 'Passive Ability Damage') ?? []),
-                stats: npc.Stats.map(
-                    (stat: INpcRawStats) =>
-                        ({
-                            abilityLevel: stat.AbilityLevel,
-                            damage: stat.Damage,
-                            armor: stat.Armor,
-                            health: stat.Health,
-                            progressionIndex: stat.ProgressionIndex,
-                            rank: stat.Rank + 1,
-                            rarityStars: stat.Stars,
-                        }) as INpcStats
-                ),
+                activeAbilities: mutableCopy(npc['Active Abilities'] ?? []),
+                passiveAbilities: mutableCopy(npc['Passive Abilities'] ?? []),
+                activeAbilityDamage: mutableCopy(npc['Active Ability Damage'] ?? []),
+                passiveAbilityDamage: mutableCopy(npc['Passive Ability Damage'] ?? []),
+                stats: npc.Stats.map(stat => ({
+                    abilityLevel: stat.AbilityLevel,
+                    damage: stat.Damage ?? 0,
+                    armor: stat.Armor ?? 0,
+                    health: stat.Health ?? 0,
+                    progressionIndex: stat.ProgressionIndex,
+                    rank: (stat.Rank ?? -1) + 1,
+                    rarityStars: stat.Stars,
+                })) as INpcStats[],
             };
         });
     }
@@ -48,6 +76,23 @@ export class NpcService {
     public static getNpcById(id: string): INpcData | undefined {
         const npc = this.npcDataFull.find(npc => npc.snowprintId === id);
         return npc ?? undefined;
+    }
+
+    /**
+     * NPC stats rows carry a `rarityStars` value straight from datamined JSON (same 0-14 range as
+     * character `RarityStars`) but no `Rarity` field of their own — unlike guild-boss encounter
+     * stats, which have a dedicated `BaseRarity` field. This derives the equivalent `Rarity` bracket
+     * by walking the same `RarityMapper.toMaxStars` ranges the rest of the app already uses in the
+     * opposite direction (rarity -> star range).
+     */
+    public static resolveRarityFromStars(stars: RarityStars): Rarity {
+        const rarities = [Rarity.Common, Rarity.Uncommon, Rarity.Rare, Rarity.Epic, Rarity.Legendary, Rarity.Mythic];
+        for (const rarity of rarities) {
+            if (stars <= RarityMapper.toMaxStars[rarity]) {
+                return rarity;
+            }
+        }
+        return Rarity.Mythic;
     }
 
     /** Resolves an NPC's melee attacks, preferring the multi-weapon `meleeAttacks` array when present

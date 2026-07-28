@@ -1,7 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import AddIcon from '@mui/icons-material/Add';
-import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
 import Divider from '@mui/material/Divider';
@@ -12,6 +11,7 @@ import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
+import { ArrowRight } from 'lucide-react';
 import { Fragment, type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
@@ -21,12 +21,14 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
-import { RankIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
+import { AbilitiesChangeText, AscendChangeArrow, RankChangeArrow } from '@/fsd/4-entities/goal';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
+import { GoalSummaryTable } from '@/fsd/3-features/goals';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
@@ -286,23 +288,6 @@ export const BulkGoalCreator = () => {
             change: ReactNode;
         }> = [];
 
-        const getFilterIcons = (rarities: Rarity[]) => (
-            <span className="flex items-center gap-1 rounded bg-slate-200 px-1.5 py-0.5 dark:bg-slate-700">
-                {rarities.map(rarity => (
-                    <RarityIcon key={rarity} rarity={rarity} />
-                ))}
-            </span>
-        );
-
-        const getRankChange = (start: RankStep, end: RankStep, filterRarities?: Rarity[]) => (
-            <div className="flex items-center gap-2">
-                <RankIcon rank={start.rank} rankPoint5={start.point5} />
-                <ArrowForwardIcon fontSize="small" />
-                <RankIcon rank={end.rank} rankPoint5={end.point5} />
-                {!!filterRarities?.length && getFilterIcons(filterRarities)}
-            </div>
-        );
-
         const pushRankGoal = (
             unitName: string,
             unitIcon: string,
@@ -317,7 +302,7 @@ export const BulkGoalCreator = () => {
                 unitIcon,
                 unitIndex,
                 rankSubOrder: getRankGoalSubOrder(filterRarities),
-                change: getRankChange(start, end, filterRarities),
+                change: <RankChangeArrow start={start} end={end} filterRarities={filterRarities} />,
             });
         };
 
@@ -342,7 +327,7 @@ export const BulkGoalCreator = () => {
                     change: (
                         <div className="flex items-center gap-2">
                             <span>Locked</span>
-                            <ArrowForwardIcon fontSize="small" />
+                            <ArrowRight className="size-4" />
                             <RankIcon rank={Rank.Stone1} />
                         </div>
                     ),
@@ -368,13 +353,12 @@ export const BulkGoalCreator = () => {
                     unitIndex: index,
                     rankSubOrder: 2,
                     change: (
-                        <div className="flex items-center gap-2">
-                            <RarityIcon rarity={unit.rarity} />
-                            <StarsIcon stars={unit.stars as RarityStars} />
-                            <ArrowForwardIcon fontSize="small" />
-                            <RarityIcon rarity={entry.rarity} />
-                            <StarsIcon stars={entry.stars as RarityStars} />
-                        </div>
+                        <AscendChangeArrow
+                            startRarity={unit.rarity}
+                            startStars={unit.stars as RarityStars}
+                            endRarity={entry.rarity}
+                            endStars={entry.stars as RarityStars}
+                        />
                     ),
                 });
             }
@@ -409,23 +393,22 @@ export const BulkGoalCreator = () => {
             const currentActive = 'activeAbilityLevel' in unit ? unit.activeAbilityLevel : unit.primaryAbilityLevel;
             const currentPassive =
                 'passiveAbilityLevel' in unit ? unit.passiveAbilityLevel : unit.secondaryAbilityLevel;
-            const activeLabel = isMow ? 'Primary' : 'Active';
-            const passiveLabel = isMow ? 'Secondary' : 'Passive';
-            const abilityParts: string[] = [];
-            if (entry.activeAbilityLevel > currentActive) {
-                abilityParts.push(`${activeLabel}: ${currentActive}→${entry.activeAbilityLevel}`);
-            }
-            if (entry.passiveAbilityLevel > currentPassive) {
-                abilityParts.push(`${passiveLabel}: ${currentPassive}→${entry.passiveAbilityLevel}`);
-            }
-            if (abilityParts.length > 0) {
+            if (entry.activeAbilityLevel > currentActive || entry.passiveAbilityLevel > currentPassive) {
                 rows.push({
                     category: 'Abilities',
                     unitName,
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
-                    change: <span>{abilityParts.join(', ')}</span>,
+                    change: (
+                        <AbilitiesChangeText
+                            startActive={currentActive}
+                            endActive={entry.activeAbilityLevel}
+                            startPassive={currentPassive}
+                            endPassive={entry.passiveAbilityLevel}
+                            isMow={isMow}
+                        />
+                    ),
                 });
             }
         }
@@ -720,42 +703,15 @@ export const BulkGoalCreator = () => {
                                 new: {plannedGoals.length}, total: {goals.length + plannedGoals.length}.
                             </div>
                         )}
-                        <table className="w-full text-sm">
-                            <thead>
-                                <tr className="border-b border-gray-300 text-left text-xs font-semibold text-gray-500 uppercase dark:border-gray-600 dark:text-gray-400">
-                                    <th className="pr-4 pb-2">Unit</th>
-                                    <th className="pr-4 pb-2">Goal</th>
-                                    <th className="pb-2">Change</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {goalSummaryRows.map((row, rowIndex) => (
-                                    <tr key={rowIndex} className="border-b border-gray-100 dark:border-gray-800">
-                                        <td className="py-1.5 pr-4 font-medium">
-                                            <div className="flex items-center gap-2">
-                                                <UnitShardIcon icon={row.unitIcon} height={24} width={24} />
-                                                <span>{row.unitName}</span>
-                                            </div>
-                                        </td>
-                                        <td className="py-1.5 pr-4">
-                                            <span
-                                                className={`inline-block rounded px-1.5 py-0.5 text-xs font-semibold ${
-                                                    row.category === 'Unlock'
-                                                        ? 'bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300'
-                                                        : row.category === 'Ascend'
-                                                          ? 'bg-purple-100 text-purple-800 dark:bg-purple-900/30 dark:text-purple-300'
-                                                          : row.category === 'Rank'
-                                                            ? 'bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300'
-                                                            : 'bg-orange-100 text-orange-800 dark:bg-orange-900/30 dark:text-orange-300'
-                                                }`}>
-                                                {row.category}
-                                            </span>
-                                        </td>
-                                        <td className="py-1.5 text-gray-600 dark:text-gray-400">{row.change}</td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                        <GoalSummaryTable
+                            rows={goalSummaryRows.map((row, rowIndex) => ({
+                                key: rowIndex,
+                                unitIcon: row.unitIcon,
+                                unitName: row.unitName,
+                                category: row.category,
+                                change: row.change,
+                            }))}
+                        />
                         <div className="mt-4">
                             {wouldExceedGoalsLimit ? (
                                 <Tooltip title="The total of new and old goals would exceed the maximum allowed.">

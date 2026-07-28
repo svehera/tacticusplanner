@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Trait_Terrifying",
+    "title": "Terrifying Requisition",
+    "tagline": "Higher drop chances for these <style=\"Terrifying\">Terrifying</style> characters!",
+    "featuredUnits": [
+        "spaceWolfPriest",
+        "worldEightbound",
+        "custoAtlacoya",
+        "spaceHound",
+        "tyranDeathleaper",
+        "eldarMauganRa"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

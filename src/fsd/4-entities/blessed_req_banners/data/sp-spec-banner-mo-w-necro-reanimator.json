@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_MoW_necroReanimator",
+    "title": "Reanimator Incursion Requisition",
+    "tagline": "Gain the upper hand in the upcoming <style=\"FactionIcon_Necrons\">Reanimator</style> Incursion!",
+    "featuredUnits": [
+        "thousTzaangor",
+        "thousTerminator",
+        "thousInfernalMaster",
+        "deathRotbone",
+        "deathTyphus",
+        "deathPutrifier"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 12
+    }
+}

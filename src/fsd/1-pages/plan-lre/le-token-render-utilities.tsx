@@ -5,8 +5,8 @@ import { UnitShardIcon } from '@/fsd/5-shared/ui/icons/unit-shard.icon';
 // eslint-disable-next-line boundaries/element-types
 import { CharactersService } from '@/fsd/4-entities/character/@x/npc';
 import { LreTrackId } from '@/fsd/4-entities/lre';
-import { LreRequirementImage } from '@/fsd/4-entities/lre/lre-requirement-image';
 
+import { RestrictionIcon } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { LreRequirementStatusService } from './lre-requirement-status.service';
@@ -37,8 +37,9 @@ export const renderRestrictions = (
                 <div
                     key={`${restrict.id}-${index}`}
                     className={`rounded border-2 p-0.5 ${STATUS_BORDER_SOLID_CLASSES[status]}`}>
-                    <LreRequirementImage
-                        iconId={restrict.iconId}
+                    <RestrictionIcon
+                        objectiveType={restrict.objectiveType}
+                        objectiveTarget={restrict.objectiveTarget}
                         tooltip={`${restrict.name} - ${restrict.pointsPerBattle}`}
                         sizePx={sizePx ?? 25}
                     />

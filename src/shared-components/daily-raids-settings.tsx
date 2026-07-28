@@ -130,6 +130,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         showGuildShop: viewPreferences.showGuildShop ?? true,
         showWarShop: viewPreferences.showWarShop ?? true,
         showRogueTrader: viewPreferences.showRogueTrader ?? true,
+        showCrusadeShop: viewPreferences.showCrusadeShop ?? true,
     });
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
@@ -149,6 +150,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                 showGuildShop: viewPreferences.showGuildShop ?? true,
                 showWarShop: viewPreferences.showWarShop ?? true,
                 showRogueTrader: viewPreferences.showRogueTrader ?? true,
+                showCrusadeShop: viewPreferences.showCrusadeShop ?? true,
             });
         }
     }, [open, viewPreferences]);
@@ -171,6 +173,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         dispatch.viewPreferences({ type: 'Update', setting: 'showGuildShop', value: shopVisibility.showGuildShop });
         dispatch.viewPreferences({ type: 'Update', setting: 'showWarShop', value: shopVisibility.showWarShop });
         dispatch.viewPreferences({ type: 'Update', setting: 'showRogueTrader', value: shopVisibility.showRogueTrader });
+        dispatch.viewPreferences({ type: 'Update', setting: 'showCrusadeShop', value: shopVisibility.showCrusadeShop });
         close();
     };
 
@@ -334,6 +337,13 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                                 setShopVisibility(current => ({ ...current, showRogueTrader: checked }))
                             }>
                             Rogue Trader
+                        </Switch>
+                        <Switch
+                            isSelected={shopVisibility.showCrusadeShop}
+                            onChange={checked =>
+                                setShopVisibility(current => ({ ...current, showCrusadeShop: checked }))
+                            }>
+                            Crusade Shop
                         </Switch>
                     </div>
                 </fieldset>
