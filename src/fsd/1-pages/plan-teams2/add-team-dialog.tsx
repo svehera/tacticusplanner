@@ -185,7 +185,7 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId))
-        .filter(c => !campaignFactions || campaignFactions.includes(c.faction))
+        .filter(c => !campaignFactions?.length || campaignFactions.includes(c.faction))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
