@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_LEG_tauFarsight",
+    "title": "Farsight Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_Tau]}</i> event, featuring <style=\"FactionIcon_Tau\">Commander Farsight</style>",
+    "featuredUnits": ["tauShadowsun", "custoKyrus", "genesPrimus", "tyranParasite", "tauCrisis", "astraPrimarisPsy"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,8 +1,12 @@
-﻿import { Trait } from '@/fsd/5-shared/model';
+import { useEffect, useState } from 'react';
+
+import { Trait } from '@/fsd/5-shared/model';
 
 import { getImageUrl } from '../get-image-url';
 
-/** Maps Trait label → snowprint asset filename (only irregular names need entries). */
+/** Maps Trait label → snowprint asset filename, for the handful of traits whose asset
+ * filename doesn't match the label (typos/renames on Snowprint's side). Only consulted
+ * as a fallback if the "correctly" named file 404s, so this self-heals if they ever fix it. */
 const traitFileOverrides: Partial<Record<Trait, string>> = {
     [Trait.BeastSnagga]: 'ui_icon_trait_beast_slayer_01.png',
     [Trait.BlessingsOfKhorne]: 'ui_icon_trait_blessing_of_khorne_01.png',
@@ -24,15 +28,17 @@ const traitFileOverrides: Partial<Record<Trait, string>> = {
     [Trait.GetStuckIn]: 'ui_icon_trait_unknown_01.png',
 };
 
-function getTraitIconFilename(trait: Trait): string {
-    if (traitFileOverrides[trait]) return traitFileOverrides[trait];
-    // Default: convert label to snake_case → ui_icon_trait_{snake}_01.png
+function defaultTraitIconFilename(trait: Trait): string {
     const snake = trait.toLowerCase().replaceAll(/\s+/g, '_');
     return `ui_icon_trait_${snake}_01.png`;
 }
 
 export const TraitImage = ({ trait, width, height }: { trait: Trait; width?: number; height?: number }) => {
-    const filename = getTraitIconFilename(trait);
+    const override = traitFileOverrides[trait];
+    const [useOverride, setUseOverride] = useState(false);
+    useEffect(() => setUseOverride(false), [trait]);
+
+    const filename = useOverride && override ? override : defaultTraitIconFilename(trait);
     const image = getImageUrl(`snowprint_assets/traits/${filename}`);
 
     return (
@@ -42,6 +48,9 @@ export const TraitImage = ({ trait, width, height }: { trait: Trait; width?: num
             style={{ maxWidth: width ?? 25, maxHeight: height ?? 25 }}
             src={image}
             alt={trait}
+            onError={() => {
+                if (override && !useOverride) setUseOverride(true);
+            }}
         />
     );
 };

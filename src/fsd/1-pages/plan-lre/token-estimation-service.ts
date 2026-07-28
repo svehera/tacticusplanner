@@ -565,7 +565,8 @@ export class TokenEstimationService {
             if (team.restrictionsIds.includes(requirement.id) || completionRequirementIds.has(requirement.id)) {
                 clearedRestrictions.push({
                     id: requirement.id,
-                    iconId: requirement.iconId,
+                    objectiveType: requirement.objectiveType,
+                    objectiveTarget: requirement.objectiveTarget,
                     name: requirement.name,
                     pointsPerBattle: requirement.points,
                     totalPoints: 0,

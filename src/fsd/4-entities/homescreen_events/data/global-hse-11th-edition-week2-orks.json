@@ -1,0 +1,76 @@
+{
+    "eventName": "global_hse_11th_edition_week2_orks",
+    "tiers": {
+        "default": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "global_hse_11th_edition_week2_orks",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_11th_edition_orks_Interstitial_Header",
+                "visualId": "homescreenevent_global_hse_11th_edition_orks",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_11th_edition_orks_Interstitial_Description",
+                "eventId": "global_hse_11th_edition_week2_orks",
+                "rewardProgressId": "global_hse_11th_edition_week2_orks",
+                "theme": "global_hse_11th_edition_orks",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 0,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "global",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_11th_edition_global_week2_orks_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["Orks"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 6500000,
+                    "chestRewardId": "ShardsOrks:25"
+                },
+                {
+                    "requiredProgress": 13000000,
+                    "chestRewardId": "stamina:100"
+                },
+                {
+                    "requiredProgress": 19500000,
+                    "chestRewardId": "seasonalEventCurrencyJune2026:40"
+                },
+                {
+                    "requiredProgress": 26000000,
+                    "chestRewardId": "eventSummoningToken_Orks"
+                },
+                {
+                    "requiredProgress": 2600000,
+                    "chestRewardId": "ShardsOrks:10",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>WAAAGH!</i> is here",
+                "Global event: all players contribute to it together!",
+                "<style=\"HSE_Points_11thEdition_global_Orks\">+{[POINTS]} WAAAGH! points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) defeated by an <style=\"Faction_Orks\">Ork</style> in Onslaught."
+            ]
+        }
+    }
+}

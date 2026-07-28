@@ -1,10 +1,8 @@
-/* eslint-disable import-x/no-internal-modules */
-import warShopJson from './data/new-war-shop.json';
+import { warShopData } from './data';
 import { resolveShopForDay, todayDow } from './shop-resolve';
 import type { ResolvedShopItem, ShopData, ShopDayOfWeek } from './shop.models';
 
-// @ts-expect-error FIXME: Caused by transition to const JSON imports
-const WAR_SHOP = warShopJson as ShopData;
+const WAR_SHOP = warShopData as unknown as ShopData;
 
 export const WarShopService = {
     getTodayDow(): ShopDayOfWeek {

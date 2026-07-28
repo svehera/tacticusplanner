@@ -4324,7 +4324,7 @@ describe('UpgradesService.tagLocationsWithGoalPriorityAndDaysToCompletion', () =
 
         expect(tagged?.priority).toBe(undefined);
         expect(tagged?.highestPriorityGoalId).toBeUndefined();
-        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(8);
+        expect(Math.ceil(tagged?.daysToComplete ?? 0)).toBe(7);
     });
 
     it('omits goal and priority when ordering by total materials', () => {

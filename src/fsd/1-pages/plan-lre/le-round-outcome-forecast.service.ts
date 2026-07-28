@@ -89,7 +89,7 @@ export class LeRoundOutcomeForecastService {
             },
         ];
 
-        if ('mythic' in model.progression) {
+        if (model.progression.mythic !== undefined) {
             milestones.push({
                 label: 'Mythic 1★',
                 incrementalShards: model.progression.mythic,
@@ -98,7 +98,7 @@ export class LeRoundOutcomeForecastService {
             });
         }
 
-        if ('twoBlueStars' in model.progression) {
+        if (model.progression.twoBlueStars !== undefined) {
             milestones.push({
                 label: 'Blue 2★',
                 incrementalShards: model.progression.twoBlueStars,

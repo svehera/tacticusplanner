@@ -11,9 +11,9 @@ import { trackEvent } from '@/fsd/5-shared/monitoring';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 
-import { armageddonMenuItem } from '@/fsd/1-pages/plan-armageddon/armageddon.menu-item';
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
+import { shopEventsMenuItem } from '@/fsd/1-pages/plan-shop-events/shop-events.menu-item';
 
 import { MobileCategoryCard } from '../components/mobile-category-card';
 import { MobileNavCard } from '../components/mobile-nav-card';
@@ -47,7 +47,7 @@ export const PlanRoutes = () => {
                         questsMenuItem,
                         cesMenuItem,
                         hsesMenuItem,
-                        armageddonMenuItem,
+                        shopEventsMenuItem,
                         bulkGoalCreatorMenuItem,
                     ].map(menuItem => (
                         <MobileNavCard

@@ -1,0 +1,71 @@
+{
+    "id": "5",
+    "unitSnowprintId": "spaceBlackmane",
+    "name": "Ragnar",
+    "theme": "SpaceWolves",
+    "eventStage": 3,
+    "heroEventMaxRuns": 3,
+    "unlockableHero": {
+        "heroId": "spaceBlackmane",
+        "baseRarity": "Legendary",
+        "maxRarity": "Mythic",
+        "visualId": "herorelease_space_blackmane"
+    },
+    "lanes": {
+        "alpha": {
+            "factionId": "Orks"
+        },
+        "beta": {
+            "factionId": "ThousandSons"
+        },
+        "gamma": {
+            "factionId": "BlackTemplars"
+        }
+    },
+    "stamina": {
+        "max": 12,
+        "start": 6,
+        "regenAmount": 1,
+        "regenTimeSeconds": 10800,
+        "maxDailyRefreshAttempts": 1
+    },
+    "finalConversion": {
+        "goldPerLegCurrency": 25,
+        "shardsPerLegShard": 1
+    },
+    "ohSoCloseOffer": {
+        "unlock": {
+            "base": 500,
+            "multiplier": 100
+        },
+        "ascension": {
+            "base": 500,
+            "multiplier": 50
+        },
+        "rewardCurrency": "legendaryEventShards",
+        "lockType": "legendary"
+    },
+    "pointsMilestones": [],
+    "chests": [],
+    "shardsPerChest": 0,
+    "progression": {
+        "unlock": 400,
+        "fourStars": 120,
+        "fiveStars": 180,
+        "blueStar": 200,
+        "twoBlueStars": 150,
+        "mythic": 250
+    },
+    "quests": {
+        "regular": [],
+        "premium": []
+    },
+    "globalUnlockRequirement": {
+        "PowerLevel": 9
+    },
+    "descriptions": [
+        "{[G_HRE_NAME]}",
+        "Defeat waves of enemies to Unlock and Promote the featured Character!",
+        "The {[G_HRE_NAME]} takes place over {[AMOUNT]} days. Amass {[G_HRE_SCORE_POINTS_WITH_ICON]} to ultimately Unlock and Promote the featured Character.\n\nReach {[G_HRE_SCORE_POINTS_WITH_ICON]} milestones to earn {[G_HRE_CURRENCIES_WITH_ICON]} and open event crates containing {[G_HRE_SHARDS_WITH_ICON]} and other rewards.\n\nEach Character's event will come back a number of times and you retain your amassed {[G_HRE_SCORE_POINTS_WITH_ICON]} and progress between events featuring that same Character.\n\nHave fun!"
+    ]
+}

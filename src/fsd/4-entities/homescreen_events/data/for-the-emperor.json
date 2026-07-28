@@ -1,0 +1,524 @@
+{
+    "eventName": "for_the_emperor",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "for_the_emperor_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_emperor_Interstitial_Header",
+                "visualId": "homescreenevent_for_the_emperor",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_emperor_Interstitial_Description",
+                "eventId": "for_the_emperor_tier_high",
+                "rewardProgressId": "hse_for_the_emperor_tier_high",
+                "theme": "for_the_emperor",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 50,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_emperor_dark_gods_tier_high_bundle",
+                    "offer_homescreen_event_emperor_dark_gods_tier_high_playmore"
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_for_the_emperor_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Imperial", "Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:2"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "ShardsImperial:20"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "heroAscensionOrbLegendary_Imperial:2"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:3"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "ShardsImperial:30"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "heroAscensionOrbLegendary_Imperial:3"
+                },
+                {
+                    "requiredProgress": 230,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 260,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 290,
+                    "chestRewardId": "heroAscensionOrbLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "R_Crit_RelicBoltPistol"
+                },
+                {
+                    "requiredProgress": 420,
+                    "chestRewardId": "abilityTokenMythic_Imperial:2"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "heroAscensionOrbMythic_Imperial:2"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "ShardsImperial:25"
+                },
+                {
+                    "requiredProgress": 725,
+                    "chestRewardId": "heroAscensionOrbMythic_Imperial:3"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "abilityTokenMythic_Imperial",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_high:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_high:25",
+                            "summoningToken:5",
+                            "specialSummoningToken:5"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_emperor_dark_gods_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_high:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_high:25",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>For the Emperor!</i> is here",
+                "Cleanse the heretics to gain <style=\"HSE_Points_ForTheEmperor\">Imperial points</style> and claim exclusive rewards!",
+                "You gain <style=\"HSE_Points_ForTheEmperor\">{[POINTS]} Imperial point</style> for each <style=\"Aliance_Chaos\">Chaos</style> and <style=\"Aliance_Xenos\">Xenos</style> enemy (except <style=\"Summon\">Summons</style>) that you defeat with your <style=\"Aliance_Imperial\">Imperial</style> <style=\"Character\">characters</style> in this game mode. Enemies defeated by <style=\"MoW\">Machines of War</style> or by <style=\"Effect_Fire\">Fire</style> do not count."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "for_the_emperor_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_emperor_Interstitial_Header",
+                "visualId": "homescreenevent_for_the_emperor",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_emperor_Interstitial_Description",
+                "eventId": "for_the_emperor_tier_mid",
+                "rewardProgressId": "hse_for_the_emperor_tier_mid",
+                "theme": "for_the_emperor",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 30,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_emperor_dark_gods_tier_mid_bundle",
+                    "offer_homescreen_event_emperor_dark_gods_tier_mid_playmore"
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_for_the_emperor_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Imperial", "Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 25,
+                    "chestRewardId": "abilityTokenRare_Imperial:5"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "ShardsImperial:20"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "heroAscensionOrbRare_Imperial:5"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "abilityTokenEpic_Imperial:10"
+                },
+                {
+                    "requiredProgress": 125,
+                    "chestRewardId": "ShardsImperial:25"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "heroAscensionOrbEpic_Imperial:5"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 230,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 260,
+                    "chestRewardId": "heroAscensionOrbLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 330,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 390,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 470,
+                    "chestRewardId": "heroAscensionOrbLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 570,
+                    "chestRewardId": "ShardsImperial:30"
+                },
+                {
+                    "requiredProgress": 695,
+                    "chestRewardId": "heroAscensionOrbLegendary_Imperial:5"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:2",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_mid:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_mid:25",
+                            "summoningToken:5",
+                            "specialSummoningToken:5"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_emperor_dark_gods_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_mid:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_mid:25",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>For the Emperor!</i> is here",
+                "Cleanse the heretics to gain <style=\"HSE_Points_ForTheEmperor\">Imperial points</style> and claim exclusive rewards!",
+                "You gain <style=\"HSE_Points_ForTheEmperor\">{[POINTS]} Imperial point</style> for each <style=\"Aliance_Chaos\">Chaos</style> and <style=\"Aliance_Xenos\">Xenos</style> enemy (except <style=\"Summon\">Summons</style>) that you defeat with your <style=\"Aliance_Imperial\">Imperial</style> <style=\"Character\">characters</style> in this game mode. Enemies defeated by <style=\"MoW\">Machines of War</style> or by <style=\"Effect_Fire\">Fire</style> do not count."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "for_the_emperor_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_emperor_Interstitial_Header",
+                "visualId": "homescreenevent_for_the_emperor",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_emperor_Interstitial_Description",
+                "eventId": "for_the_emperor_tier_low",
+                "rewardProgressId": "hse_for_the_emperor_tier_low",
+                "theme": "for_the_emperor",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_emperor_dark_gods_tier_low_bundle",
+                    "offer_homescreen_event_emperor_dark_gods_tier_low_playmore"
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_for_the_emperor_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Imperial", "Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "abilityTokenCommon_Imperial:5"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "ShardsImperial:20"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "heroAscensionOrbUncommon_Imperial:5"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "ShardsImperial:25"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "abilityTokenUncommon_Imperial:5"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "ShardsImperial:30"
+                },
+                {
+                    "requiredProgress": 160,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 185,
+                    "chestRewardId": "heroAscensionOrbRare_Imperial:5"
+                },
+                {
+                    "requiredProgress": 210,
+                    "chestRewardId": "abilityTokenRare_Imperial:10"
+                },
+                {
+                    "requiredProgress": 260,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "ShardsImperial:35"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "heroAscensionOrbEpic_Imperial:5"
+                },
+                {
+                    "requiredProgress": 440,
+                    "chestRewardId": "ShardsImperial:40"
+                },
+                {
+                    "requiredProgress": 540,
+                    "chestRewardId": "abilityTokenEpic_Imperial:10"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "ShardsImperial:25",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_low:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_low:25",
+                            "summoningToken:5",
+                            "specialSummoningToken:5"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_emperor_dark_gods_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_for_the_emperor_tier_low:25",
+                            "tieredRewardPoints_for_the_dark_gods_tier_low:25",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>For the Emperor!</i> is here",
+                "Cleanse the heretics to gain <style=\"HSE_Points_ForTheEmperor\">Imperial points</style> and claim exclusive rewards!",
+                "You gain <style=\"HSE_Points_ForTheEmperor\">{[POINTS]} Imperial point</style> for each <style=\"Aliance_Chaos\">Chaos</style> and <style=\"Aliance_Xenos\">Xenos</style> enemy (except <style=\"Summon\">Summons</style>) that you defeat with your <style=\"Aliance_Imperial\">Imperial</style> <style=\"Character\">characters</style> in this game mode. Enemies defeated by <style=\"MoW\">Machines of War</style> or by <style=\"Effect_Fire\">Fire</style> do not count."
+            ]
+        }
+    }
+}

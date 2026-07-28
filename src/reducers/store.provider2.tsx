@@ -3,12 +3,12 @@ import { isEqual } from 'lodash';
 import { enqueueSnackbar } from 'notistack';
 import React, { useCallback, useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
-import { armageddonReducer } from '@/reducers/armageddon.reducer';
 import { gameModeTokensActionReducer } from '@/reducers/game-mode-tokens-reducer';
 import { guildReducer } from '@/reducers/guild-reducer';
 import { guildWarReducer } from '@/reducers/guild-war-reducer';
 import { onslaughtPreferencesReducer } from '@/reducers/onslaught-preferences.reducer';
 import { playerMetadataReducer } from '@/reducers/player-metadata.reducer';
+import { shopEventsReducer } from '@/reducers/shop-events.reducer';
 import { mowsReducer } from 'src/reducers/mows.reducer';
 import { teamsReducer } from 'src/reducers/teams.reducer';
 import { teams2Reducer } from 'src/reducers/teams2.reducer';
@@ -36,6 +36,7 @@ import { leSettingsReducer } from './le-settings.reducer';
 import { rosterSnapshotsActionReducer } from './roster-snapshots-reducer';
 import { selectedTeamsOrderReducer } from './selected-teams-order.reducer';
 import { DispatchContext, StoreContext } from './store.provider';
+import { survivalTeamsReducer } from './survival.reducer';
 import { setUserDataApi, getUserDataApi } from './user.endpoints';
 import { viewPreferencesReducer } from './view-settings.reducer';
 import { xpIncomeActionReducer } from './xp-income-reducer';
@@ -65,10 +66,11 @@ type DispatchScope = keyof Pick<
     | 'xpIncome'
     | 'xpUse'
     | 'rosterSnapshots'
-    | 'armageddon'
+    | 'shopEvents'
     | 'onslaughtPreferences'
     | 'leSelectedTeams'
     | 'leProgress'
+    | 'survivalTeams'
 >;
 
 function getActionRecord(action: unknown): Record<string, unknown> | undefined {
@@ -169,6 +171,8 @@ function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated
         }
     } else if (scope === 'teams2' && actionType === 'Set') {
         trackEvent('team_update', { ...commonParameters, feature: 'teams2' });
+    } else if (scope === 'survivalTeams' && actionType === 'SetTeam') {
+        trackEvent('team_update', { ...commonParameters, feature: 'survival' });
     } else if ((scope === 'warDefense2' || scope === 'warOffense2') && actionType === 'Set') {
         trackEvent('guild_war_team_update', { ...commonParameters, feature: scope });
     } else if (scope === 'guildWar') {
@@ -202,8 +206,8 @@ function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated
         }
     } else if (scope === 'leProgress' && actionType === 'Update') {
         trackEvent('lre_progress_update', { ...commonParameters, feature: 'lre' });
-    } else if (scope === 'armageddon' && actionType !== 'Set') {
-        trackEvent('armageddon_shop_update', { ...commonParameters, feature: 'armageddon' });
+    } else if (scope === 'shopEvents' && actionType !== 'Set') {
+        trackEvent('shop_event_update', { ...commonParameters, feature: 'shop_events' });
     }
 }
 
@@ -242,7 +246,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         gameModeTokensActionReducer,
         globalState.gameModeTokens
     );
-    const [armageddon, dispatchArmageddon] = useReducer(armageddonReducer, globalState.armageddon);
+    const [shopEvents, dispatchShopEvents] = useReducer(shopEventsReducer, globalState.shopEvents);
     const [playerMetadata, dispatchPlayerMetadata] = useReducer(playerMetadataReducer, globalState.playerMetadata);
     const [onslaughtPreferences, dispatchOnslaughtPreferences] = useReducer(
         onslaughtPreferencesReducer,
@@ -266,6 +270,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
     const [leSelectedTeams, dispatchLeSelectedTeams] = useReducer(leSelectedTeamsReducer, globalState.leSelectedTeams);
     const [leProgress, dispatchLeProgress] = useReducer(leProgressReducer, globalState.leProgress);
     const [leSettings, dispatchLeSettings] = useReducer(leSettingsReducer, globalState.leSettings);
+    const [survivalTeams, dispatchSurvivalTeams] = useReducer(survivalTeamsReducer, globalState.survivalTeams);
 
     const [campaignsProgress, dispatchCampaignsProgress] = useReducer(
         campaignsProgressReducer,
@@ -399,9 +404,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse: wrapDispatch('xpUse', dispatchXpUse),
             rosterSnapshots: wrapDispatch('rosterSnapshots', dispatchRosterSnapshots),
             gameModeTokens: wrapDispatch(undefined, dispatchGameModeTokens),
-            armageddon: wrapDispatch('armageddon', dispatchArmageddon),
+            shopEvents: wrapDispatch('shopEvents', dispatchShopEvents),
             playerMetadata: wrapDispatch(undefined, dispatchPlayerMetadata),
             onslaughtPreferences: wrapDispatch('onslaughtPreferences', dispatchOnslaughtPreferences),
+            survivalTeams: wrapDispatch('survivalTeams', dispatchSurvivalTeams),
             setStore: (data: IGlobalState, modified: boolean, reset = false) => {
                 // Only update if incoming version is newer
                 setGlobalState(current => {
@@ -431,9 +437,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
                         dispatchXpUse({ type: 'Set', value: data.xpUse });
                         dispatchRosterSnapshots({ type: 'Set', value: data.rosterSnapshots });
                         dispatchGameModeTokens({ type: 'Set', value: data.gameModeTokens });
-                        dispatchArmageddon({ type: 'Set', value: data.armageddon });
+                        dispatchShopEvents({ type: 'Set', value: data.shopEvents });
                         dispatchPlayerMetadata({ type: 'Set', value: data.playerMetadata });
                         dispatchOnslaughtPreferences({ type: 'Set', value: data.onslaughtPreferences });
+                        dispatchSurvivalTeams({ type: 'Set', value: data.survivalTeams });
                         if (modified) {
                             setModified(true);
                             setModifiedDate(data.modifiedDate);
@@ -468,9 +475,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             dispatchXpUse,
             dispatchRosterSnapshots,
             dispatchGameModeTokens,
-            dispatchArmageddon,
+            dispatchShopEvents,
             dispatchPlayerMetadata,
             dispatchOnslaughtPreferences,
+            dispatchSurvivalTeams,
             isAuthenticated,
             setGlobalState,
         ]
@@ -510,9 +518,10 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
             xpUse,
             rosterSnapshots,
             gameModeTokens,
-            armageddon,
+            shopEvents,
             playerMetadata,
             onslaughtPreferences,
+            survivalTeams,
             __localVersion: nextVersion,
         };
         const storeValue = GlobalState.toStore(newValue);
@@ -533,7 +542,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         dailyRaidsPreferences,
         gameModeTokens,
         goals,
-        armageddon,
+        shopEvents,
         playerMetadata,
         onslaughtPreferences,
         guild,
@@ -551,6 +560,7 @@ export const StoreProvider = ({ children }: React.PropsWithChildren) => {
         rosterSnapshots,
         seenAppVersion,
         selectedTeamOrder,
+        survivalTeams,
         teams,
         teams2,
         viewPreferences,

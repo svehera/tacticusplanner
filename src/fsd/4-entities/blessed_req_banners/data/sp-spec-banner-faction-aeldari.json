@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_Aeldari",
+    "title": "<style=\"FactionIcon_Aeldari\">Aeldari</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"FactionIcon_Aeldari\">Aeldari</style>!",
+    "featuredUnits": ["eldarJainZar", "eldarMauganRa", "eldarFarseer", "eldarAutarch", "eldarRanger"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

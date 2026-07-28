@@ -1,0 +1,671 @@
+{
+    "eventName": "arsenal_of_war",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "arsenal_of_war_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_arsenal_of_war_Interstitial_Header",
+                "visualId": "homescreenevent_arsenal_of_war",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_arsenal_of_war_Interstitial_Description",
+                "eventId": "arsenal_of_war_tier_high",
+                "rewardProgressId": "hse_arsenal_of_war_tier_high",
+                "theme": "arsenal_of_war",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 100,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_arsenal_of_war_tier_high_bundle",
+                    "offer_homescreen_event_arsenal_of_war_tier_high_playmore",
+                    "offer_homescreen_event_arsenal_of_war_tier_high_booster"
+                ],
+                "trackers": [
+                    {
+                        "type": "donateUpgradeToGuildMember",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_donateUpgradeToGuildMember_arsenal_of_war_Description",
+                        "gameModeRestrictions": {},
+                        "pointsByRarity": {
+                            "Common": 2,
+                            "Uncommon": 5,
+                            "Rare": 10
+                        }
+                    },
+                    {
+                        "type": "donateIntelToGuildProject",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_donateIntelToGuildProject_arsenal_of_war_Description",
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 800,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 1200,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 1600,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 2500,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 3000,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 3500,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 4000,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 4500,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 5100,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 5700,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 6300,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 6900,
+                    "chestRewardId": "crusadeBomb:100"
+                },
+                {
+                    "requiredProgress": 7500,
+                    "chestRewardId": "crusadeBomb:100"
+                },
+                {
+                    "requiredProgress": 8300,
+                    "chestRewardId": "crusadeBomb:100"
+                },
+                {
+                    "requiredProgress": 9100,
+                    "chestRewardId": "crusadeBomb:100"
+                },
+                {
+                    "requiredProgress": 9900,
+                    "chestRewardId": "crusadeBomb:100"
+                },
+                {
+                    "requiredProgress": 10700,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "crusadeBomb:50",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_arsenal_of_war_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
+                        "rewards": [
+                            "tieredRewardPoints_arsenal_of_war_tier_high:1000",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:500"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_arsenal_of_war_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_arsenal_of_war_tier_high:800",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_arsenal_of_war_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_high:2000", "gems:1000"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Arsenal of War</i> is here",
+                "Earn points by donating Intel in Guild Projects or Upgrades to your guildmates!",
+                "Donate upgrades to guild members to earn <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style>: +{[POINTS_Common]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Common\">Common</style> upgrade, +{[POINTS_Uncommon]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Uncommon\">Uncommon</style> upgrade, and +{[POINTS_Rare]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Rare\">Rare</style> upgrade donated.",
+                "<style=\"HSE_Points_arsenal_of_war\">+{[POINTS]} Arsenal of War points</style> for each Intel unit donated to a Guild Project"
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "arsenal_of_war_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_arsenal_of_war_Interstitial_Header",
+                "visualId": "homescreenevent_arsenal_of_war",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_arsenal_of_war_Interstitial_Description",
+                "eventId": "arsenal_of_war_tier_mid",
+                "rewardProgressId": "hse_arsenal_of_war_tier_mid",
+                "theme": "arsenal_of_war",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 60,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_arsenal_of_war_tier_mid_bundle",
+                    "offer_homescreen_event_arsenal_of_war_tier_mid_playmore",
+                    "offer_homescreen_event_arsenal_of_war_tier_mid_booster"
+                ],
+                "trackers": [
+                    {
+                        "type": "donateUpgradeToGuildMember",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_donateUpgradeToGuildMember_arsenal_of_war_Description",
+                        "gameModeRestrictions": {},
+                        "pointsByRarity": {
+                            "Common": 2,
+                            "Uncommon": 5,
+                            "Rare": 10
+                        }
+                    },
+                    {
+                        "type": "donateIntelToGuildProject",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_donateIntelToGuildProject_arsenal_of_war_Description",
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 800,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 1300,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 1600,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 1900,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 2200,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 2500,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 2900,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 3300,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 3700,
+                    "chestRewardId": "crusadeBomb:30"
+                },
+                {
+                    "requiredProgress": 4100,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 4500,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 5100,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 5700,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 6300,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 6900,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "crusadeBomb:30",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_arsenal_of_war_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_arsenal_of_war_tier_mid:700",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_arsenal_of_war_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_arsenal_of_war_tier_mid:700",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_arsenal_of_war_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_mid:2000", "gems:850"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Arsenal of War</i> is here",
+                "Earn points by donating Intel in Guild Projects or Upgrades to your guildmates!",
+                "Donate upgrades to guild members to earn <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style>: +{[POINTS_Common]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Common\">Common</style> upgrade, +{[POINTS_Uncommon]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Uncommon\">Uncommon</style> upgrade, and +{[POINTS_Rare]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Rare\">Rare</style> upgrade donated.",
+                "<style=\"HSE_Points_arsenal_of_war\">+{[POINTS]} Arsenal of War points</style> for each Intel unit donated to a Guild Project"
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "arsenal_of_war_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_arsenal_of_war_Interstitial_Header",
+                "visualId": "homescreenevent_arsenal_of_war",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_arsenal_of_war_Interstitial_Description",
+                "eventId": "arsenal_of_war_tier_low",
+                "rewardProgressId": "hse_arsenal_of_war_tier_low",
+                "theme": "arsenal_of_war",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 20,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_arsenal_of_war_tier_low_bundle",
+                    "offer_homescreen_event_arsenal_of_war_tier_low_playmore",
+                    "offer_homescreen_event_arsenal_of_war_tier_low_booster"
+                ],
+                "trackers": [
+                    {
+                        "type": "donateUpgradeToGuildMember",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_donateUpgradeToGuildMember_arsenal_of_war_Description",
+                        "gameModeRestrictions": {},
+                        "pointsByRarity": {
+                            "Common": 2,
+                            "Uncommon": 5,
+                            "Rare": 10
+                        }
+                    },
+                    {
+                        "type": "donateIntelToGuildProject",
+                        "scope": "personal",
+                        "points": 3,
+                        "locaKey": "HomeScreenEvents/Tracker_donateIntelToGuildProject_arsenal_of_war_Description",
+                        "gameModeRestrictions": {}
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 35,
+                    "chestRewardId": "draft_abilityTokensCommon:1"
+                },
+                {
+                    "requiredProgress": 70,
+                    "chestRewardId": "draft_abilityTokensCommon:1"
+                },
+                {
+                    "requiredProgress": 105,
+                    "chestRewardId": "draft_abilityTokensCommon:2"
+                },
+                {
+                    "requiredProgress": 140,
+                    "chestRewardId": "draft_abilityTokensCommon:3"
+                },
+                {
+                    "requiredProgress": 175,
+                    "chestRewardId": "draft_abilityTokensUncommon:1"
+                },
+                {
+                    "requiredProgress": 245,
+                    "chestRewardId": "draft_ascensionOrbsUncommon:1"
+                },
+                {
+                    "requiredProgress": 315,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 385,
+                    "chestRewardId": "draft_abilityTokensUncommon:1"
+                },
+                {
+                    "requiredProgress": 455,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 525,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 630,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 735,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 840,
+                    "chestRewardId": "draft_ascensionOrbsRare:1"
+                },
+                {
+                    "requiredProgress": 945,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 1050,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 1190,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 1330,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 1470,
+                    "chestRewardId": "draft_abilityTokensEpic:1"
+                },
+                {
+                    "requiredProgress": 1610,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 70,
+                    "chestRewardId": "draft_abilityTokensRare:1",
+                    "endless": true,
+                    "endlessCap": 200
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_arsenal_of_war_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_arsenal_of_war_tier_low:200",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:250"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_arsenal_of_war_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_arsenal_of_war_tier_low:250",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_arsenal_of_war_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_arsenal_of_war_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_arsenal_of_war_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_low:250", "gems:400"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Arsenal of War</i> is here",
+                "Earn points by donating Intel in Guild Projects or Upgrades to your guildmates!",
+                "Donate upgrades to guild members to earn <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style>: +{[POINTS_Common]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Common\">Common</style> upgrade, +{[POINTS_Uncommon]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Uncommon\">Uncommon</style> upgrade, and +{[POINTS_Rare]} <style=\"HSE_Points_arsenal_of_war\">Arsenal of War points</style> per <style=\"Rarity_Rare\">Rare</style> upgrade donated.",
+                "<style=\"HSE_Points_arsenal_of_war\">+{[POINTS]} Arsenal of War points</style> for each Intel unit donated to a Guild Project"
+            ]
+        }
+    }
+}

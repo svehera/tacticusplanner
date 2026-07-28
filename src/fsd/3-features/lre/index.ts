@@ -1,3 +1,4 @@
+/* eslint-disable import-x/no-internal-modules */
 export { getLre } from './get-lre';
 export type {
     ILegendaryEvent,
@@ -9,3 +10,4 @@ export type {
     IRequirementProgress,
 } from './lre.model';
 export { RequirementStatus } from './lre.model';
+export { RestrictionIcon } from './model/restriction-icon';

@@ -286,7 +286,7 @@ describe('findEncounterLocation (real data)', () => {
 
 describe('getMaxKnownProgressionIndex (real data)', () => {
     it('returns the highest known real progression index for a specific boss', () => {
-        expect(getMaxKnownProgressionIndex('GuildBoss12Boss1DarkaLion')).toBe(23);
+        expect(getMaxKnownProgressionIndex('GuildBoss12Boss1DarkaLion')).toBe(25);
     });
 
     it('falls back to 1 for a unit with no known encounters', () => {
@@ -312,10 +312,10 @@ describe('getKnownEncounterAvailability (real data)', () => {
     it('includes the exact progression index for each known position', () => {
         const availability = getKnownEncounterAvailability('GuildBoss12Boss1DarkaLion');
         expect(availability).toEqual([
-            { rarity: 3, set: 4, progressionIndex: 17 },
-            { rarity: 4, set: 3, progressionIndex: 21 },
             { rarity: 4, set: 4, progressionIndex: 22 },
             { rarity: 5, set: 0, progressionIndex: 23 },
+            { rarity: 5, set: 1, progressionIndex: 24 },
+            { rarity: 5, set: 2, progressionIndex: 25 },
         ]);
     });
 });

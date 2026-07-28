@@ -10,11 +10,14 @@ import {
     Trait,
     DamageType,
     Rarity,
+    Rank,
+    RarityStars,
 } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
 import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
+import { CharacterBias } from './bias.enum';
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
 
@@ -219,6 +222,38 @@ export class CharactersService {
                 return { ...x, ...staticChar };
             })
             .filter(x => x !== undefined) as ICharacter2[];
+    }
+
+    /**
+     * @returns Every character in the game as `ICharacter2`. Characters not present in
+     * `charactersFromStorage` are added as locked placeholders (initial rarity, no stars, no
+     * shards) — mirrors `MowsService.resolveAllFromStorage`.
+     */
+    public static resolveAllCharacters(charactersFromStorage: ICharacter2[]): ICharacter2[] {
+        const resolved = this.resolveStoredCharacters(charactersFromStorage);
+        const resolvedSnowprintIds = new Set(resolved.map(c => c.snowprintId));
+
+        const lockedPlaceholders: ICharacter2[] = [];
+        for (const staticChar of this.charactersData) {
+            if (resolvedSnowprintIds.has(staticChar.snowprintId)) continue;
+            lockedPlaceholders.push({
+                ...staticChar,
+                rank: Rank.Locked,
+                rarity: staticChar.initialRarity,
+                stars: RarityStars.None,
+                level: 1,
+                xp: 0,
+                bias: CharacterBias.None,
+                upgrades: [],
+                activeAbilityLevel: 1,
+                passiveAbilityLevel: 1,
+                shards: 0,
+                mythicShards: 0,
+                equipment: [],
+            } as ICharacter2);
+        }
+
+        return [...resolved, ...lockedPlaceholders];
     }
 
     static isAtLeast3DaysBefore(releaseDate: Date): boolean {

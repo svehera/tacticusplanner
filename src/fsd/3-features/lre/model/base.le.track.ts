@@ -16,7 +16,6 @@ export class LETrack implements ILegendaryEventTrack {
     battlesPoints: readonly number[];
     enemies: {
         label: string;
-        link: string;
     };
 
     constructor(

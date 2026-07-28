@@ -10,8 +10,7 @@ import { abilityIcons } from '@/fsd/5-shared/ui/ability-icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import abilityDataJson from '@/fsd/4-entities/abilities/data/new-ability-data.json';
-import { ICharacter2 } from '@/fsd/4-entities/character';
-import characterData2Json from '@/fsd/4-entities/character/data/new-character-data2.json';
+import { charactersData2, ICharacter2 } from '@/fsd/4-entities/character';
 
 import { AbilityText } from './ability-text-renderer';
 import { AbilityVariablesChart } from './ability-variables-chart';
@@ -37,17 +36,7 @@ interface CharData2Entry {
     rangedAttack?: AttackProfile;
 }
 
-const characterData2 = (
-    characterData2Json as unknown as Array<{
-        id: string;
-        movement: number;
-        activeAbilityId: string;
-        passiveAbilityIds: string;
-        initialStats: { damage: number; armor: number; health: number };
-        meleeAttack: { hitCount: number; pierce: string };
-        rangedAttack?: { hitCount: number; pierce: string; range?: number };
-    }>
-).map(c => ({
+const characterData2 = charactersData2.map(c => ({
     id: c.id,
     movement: c.movement,
     activeAbilityId: c.activeAbilityId,

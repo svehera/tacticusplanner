@@ -5,9 +5,10 @@ import React from 'react';
 
 import { ICharacter2 } from 'src/models/interfaces';
 
+import { UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
+
 import { unsetCharacter } from '@/fsd/3-features/characters/characters.constants';
 
-import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';

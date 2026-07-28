@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_SE_April2026",
+    "title": "Dust and Destiny Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[SeasonalEvents/name_april_2026]}</i> Survival event!",
+    "featuredUnits": [
+        "thousAhriman",
+        "deathRotbone",
+        "deathBlightbringer",
+        "emperFlawlessBlade",
+        "emperNoiseMarine",
+        "thousDaemonPrince"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

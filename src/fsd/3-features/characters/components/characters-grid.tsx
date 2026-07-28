@@ -6,11 +6,11 @@ import { isMobile } from 'react-device-detect';
 
 import { UnitType } from '@/fsd/5-shared/model';
 import { Conditional } from '@/fsd/5-shared/ui';
+import { UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { IUnit } from '@/fsd/4-entities/unit';
 import { isUnlocked } from '@/fsd/4-entities/unit/units.functions';
 
-import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';

@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_MythicEventSupport",
+    "title": "Mythic Celebration Requisition",
+    "tagline": "Higher drop chances for the most popular units in the game! Possible drops include {[G_SE_EVENT_CURRENCIES_WITH_ICON]}.",
+    "featuredUnits": [
+        "spaceBlackmane",
+        "eldarFarseer",
+        "admecMarshall",
+        "thousInfernalMaster",
+        "admecRuststalker",
+        "ultraDreadnought"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

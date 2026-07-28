@@ -7,10 +7,11 @@ import { isMobile } from 'react-device-detect';
 
 import { ICharacter2 } from 'src/models/interfaces';
 
+import { UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
+
 import { IMow2, IUnit } from '@/fsd/3-features/characters/characters.models';
 import { EmptyTile } from '@/fsd/3-features/characters/components/empty-tile';
 
-import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';

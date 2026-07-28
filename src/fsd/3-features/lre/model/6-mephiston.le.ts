@@ -1,4 +1,4 @@
-﻿import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
+import { Alliance, DamageType, Trait } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { mephiston as staticData } from '@/fsd/4-entities/lre';
@@ -26,7 +26,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 90,
                     units: filter(noImperial).byDamageType(DamageType.Power),
                     selected: false,
-                    iconId: 'power',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     index: 0,
                 },
                 {
@@ -34,7 +35,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 65,
                     units: filter(noImperial).byAttackType('meleeOnly'),
                     selected: true,
-                    iconId: 'melee',
+                    objectiveType: 'HasNoRangedAttack',
+                    objectiveTarget: '',
                     index: 1,
                 },
                 {
@@ -42,14 +44,16 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 40,
                     units: filter(noImperial).byMinHits(2),
                     selected: true,
-                    iconId: 'hits',
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '2',
                     index: 2,
                 },
                 {
                     name: 'Flying',
                     points: 85,
                     units: filter(noImperial).byTrait(Trait.Flying),
-                    iconId: 'flying',
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Flying',
                     index: 3,
                 },
                 {
@@ -57,7 +61,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 95,
                     units: filter(noImperial).byDamageType(DamageType.Psychic),
                     selected: false,
-                    iconId: 'psychic',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Psychic',
                     index: 4,
                 },
             ],
@@ -77,14 +82,16 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 90,
                     units: filter(noChaos).byDamageType(DamageType.Physical),
                     selected: false,
-                    iconId: 'physical',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Physical',
                     index: 0,
                 },
                 {
                     name: 'Mechanical',
                     points: 95,
                     units: filter(noChaos).isMechanical(),
-                    iconId: 'mech',
+                    objectiveType: 'Trait',
+                    objectiveTarget: 'Mechanical',
                     index: 1,
                 },
                 {
@@ -92,7 +99,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 25,
                     units: filter(noChaos).byTrait(Trait.BigTarget, true),
                     selected: true,
-                    iconId: 'no_bigTarget',
+                    objectiveType: 'NotTrait',
+                    objectiveTarget: 'BigTarget',
                     index: 2,
                 },
                 {
@@ -100,7 +108,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 60,
                     units: filter(noChaos).byMinHits(3),
                     selected: true,
-                    iconId: 'hits',
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '3',
                     index: 3,
                 },
                 {
@@ -108,7 +117,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 105,
                     units: filter(noChaos).byDamageType(DamageType.Piercing),
                     selected: false,
-                    iconId: 'piercing',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Piercing',
                     index: 4,
                 },
             ],
@@ -128,14 +138,16 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 85,
                     units: filter(imperialOnly).byDamageType(DamageType.Power),
                     selected: false,
-                    iconId: 'power',
+                    objectiveType: 'DamageType',
+                    objectiveTarget: 'Power',
                     index: 0,
                 },
                 {
                     name: 'Ranged',
                     points: 85,
                     units: filter(imperialOnly).byAttackType('rangeOnly'),
-                    iconId: 'ranged',
+                    objectiveType: 'HasRangedAttack',
+                    objectiveTarget: '',
                     index: 1,
                 },
                 {
@@ -143,7 +155,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 35,
                     units: filter(imperialOnly).isNotMechanical(),
                     selected: false,
-                    iconId: 'no_mech',
+                    objectiveType: 'NotTrait',
+                    objectiveTarget: 'Mechanical',
                     index: 2,
                 },
                 {
@@ -151,7 +164,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 85,
                     units: filter(imperialOnly).byMaxHits(2),
                     selected: false,
-                    iconId: 'hits',
+                    objectiveType: 'MaxHits',
+                    objectiveTarget: '2',
                     index: 3,
                 },
                 {
@@ -159,7 +173,8 @@ export class MephistonLegendaryEvent extends LegendaryEventBase {
                     points: 85,
                     units: filter(imperialOnly).byMinHits(3),
                     selected: false,
-                    iconId: 'hits',
+                    objectiveType: 'MinHits',
+                    objectiveTarget: '3',
                     index: 4,
                 },
             ],

@@ -7,13 +7,13 @@ import { numberToThousandsString, numberToThousandsStringOld } from '@/fsd/5-sha
 import { Rank, UnitType } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Conditional } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { FactionImage } from '@/fsd/4-entities/faction';
 import { IUnit } from '@/fsd/4-entities/unit';
 
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 
-import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';

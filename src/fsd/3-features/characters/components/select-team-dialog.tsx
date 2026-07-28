@@ -11,6 +11,7 @@ import { getEnumValues } from 'src/shared-logic/functions';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { FlexBox, Conditional, RaritySelect } from '@/fsd/5-shared/ui';
+import { UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersViewContext } from '@/fsd/3-features/characters/characters-view.context';
 import { unsetCharacter } from '@/fsd/3-features/characters/characters.constants';
@@ -18,7 +19,6 @@ import { ICharacter2, IUnit } from '@/fsd/3-features/characters/characters.model
 import { CharactersService } from '@/fsd/3-features/characters/characters.service';
 import { CharactersGrid } from '@/fsd/3-features/characters/components/characters-grid';
 
-import { RosterSnapshotCharacter } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshot-character';
 import { RosterSnapshotsAssetsProvider } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-assets-provider';
 import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots-service';
 

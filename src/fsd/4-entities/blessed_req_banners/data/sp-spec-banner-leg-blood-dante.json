@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_bloodDante",
+    "title": "Dante Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_BloodAngels]}</i> event, featuring <style=\"Faction_BloodAngels\">Dante</style>",
+    "featuredUnits": [
+        "deathTyphus",
+        "templChampion",
+        "bloodSanguinary",
+        "bloodIntercessor",
+        "bloodDeathCompany",
+        "orksBigMek"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

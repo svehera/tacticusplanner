@@ -3,25 +3,10 @@ import { describe, expect, it } from 'vitest';
 
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
-import characterData2Json from '@/fsd/4-entities/character/data/new-character-data2.json';
-
-interface AttackProfile {
-    hitCount: number;
-    pierce: string;
-    range?: number;
-}
-
-interface CharData2Entry {
-    id: string;
-    name: string;
-    meleeAttack: AttackProfile;
-    rangedAttack?: AttackProfile;
-}
-
-const characterData2 = characterData2Json as unknown as CharData2Entry[];
+import { charactersData2 } from '@/fsd/4-entities/character';
 
 const pierceTypeToCharacters = new Map<string, string[]>();
-for (const char of characterData2) {
+for (const char of charactersData2) {
     for (const pierce of [char.meleeAttack.pierce, char.rangedAttack?.pierce].filter(Boolean) as string[]) {
         if (!pierceTypeToCharacters.has(pierce)) {
             pierceTypeToCharacters.set(pierce, []);

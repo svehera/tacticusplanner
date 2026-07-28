@@ -47,7 +47,6 @@ export interface ILegendaryEventTrack extends ILegendaryEventTrackStatic {
 export interface ILegendaryEventTrackRequirement {
     id?: string;
     hide?: boolean;
-    iconId?: string;
     index?: number;
     name: string;
     points: number;

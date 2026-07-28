@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_SpaceWolves",
+    "title": "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> Requisition",
+    "tagline": "Higher drop chances for all <style=\"FactionIcon_SpaceWolves\">Space Wolves</style>. For Russ and the Allfather!",
+    "featuredUnits": ["spaceBlackmane", "spaceStormcaller", "spaceRockfist", "spaceHound", "spaceWulfen"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

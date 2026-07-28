@@ -10,3 +10,5 @@ export { getMaterialBar } from './material-progress';
 export { UpgradesService } from './upgrades.service';
 export { ShardsService } from './shards.service';
 export { MowMaterialsTotal } from './mow-materials-total';
+export { GoalSummaryTable } from './goal-summary-table';
+export type { GoalSummaryRow } from './goal-summary-table';

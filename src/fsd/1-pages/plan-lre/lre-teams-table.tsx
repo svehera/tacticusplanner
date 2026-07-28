@@ -1,4 +1,3 @@
-import InfoIcon from '@mui/icons-material/Info';
 import Button from '@mui/material/Button';
 import {
     AllCommunityModule,
@@ -217,9 +216,6 @@ export const LreTeamsTable: React.FC<Props> = ({
                     <span className="text-base font-bold">{track.name}</span>
                     <div className="flex-box gap5">
                         <span className="text-base italic"> vs {track.enemies.label}</span>
-                        <a href={track.enemies.link} target={'_blank'} rel="noreferrer">
-                            <InfoIcon color={'primary'} />
-                        </a>
                     </div>
                 </div>
                 {restrictions.length > 0 && (

@@ -11,11 +11,13 @@ import { Rarity } from '@/fsd/5-shared/model';
 import { resolveBossOverviewDisplay } from './guild-performance.utils';
 
 // Real season config / unitIds (guild_boss_season_config_5, tier 5 = Mythic, set 0) so
-// resolveBossOverviewDisplay's season-config lookups resolve against actual game data.
+// resolveBossOverviewDisplay's season-config lookups resolve against actual game data. The
+// Mythic-tier boss rotation moves over time (see extract_guild_boss.ts's season-calibration
+// comment) - these must be whichever boss currently occupies tier 5/set 0 in the live data.
 const SEASON_CONFIG_ID = 'guild_boss_season_config_5';
-const BOSS_UNIT_ID = 'GuildBoss10Boss1AdmecBelisarius';
-const LEFT_PRIME_UNIT_ID = 'GuildBoss10MiniBoss1AdmecMarshall';
-const RIGHT_PRIME_UNIT_ID = 'GuildBoss10MiniBoss2AdmecManipulus';
+const BOSS_UNIT_ID = 'GuildBoss9Boss1ThousMagnus';
+const LEFT_PRIME_UNIT_ID = 'GuildBoss9MiniBoss1ThousSorcerer';
+const RIGHT_PRIME_UNIT_ID = 'GuildBoss9MiniBoss2ThousInfernalMaster';
 const PREVIOUS_BOSS_UNIT_ID = 'SomeEarlierPositionBoss';
 
 function makeEntry(

@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_MoW_astraOrdnanceBattery",
+    "title": "Malleus Rocket Launcher Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>Incursion</i> featuring the <style=\"Faction_AstraMilitarum\">Malleus Rocket Launcher</style>",
+    "featuredUnits": ["orksBigMek", "necroSpyder", "tauMarksman", "necroPlasmancer", "tyranParasite", "eldarJainZar"],
+    "unlockRequirement": {
+        "PowerLevel": 12
+    }
+}

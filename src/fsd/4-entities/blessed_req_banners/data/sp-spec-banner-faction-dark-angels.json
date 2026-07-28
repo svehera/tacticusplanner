@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_DarkAngels",
+    "title": "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> Requisition",
+    "tagline": "Higher drop chances for these <style=\"FactionIcon_DarkAngels\">Dark Angels</style>!",
+    "featuredUnits": [
+        "darkaAzrael",
+        "darkaAsmodai",
+        "darkaTerminator",
+        "darkaHellblaster",
+        "darkaCompanion",
+        "darkaStormSpeeder"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

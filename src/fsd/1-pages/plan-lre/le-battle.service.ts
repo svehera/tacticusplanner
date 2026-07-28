@@ -1,8 +1,7 @@
 import { mutableCopy } from '@/fsd/5-shared/lib';
 
-import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, rawLreBattleData } from '@/fsd/4-entities/lre';
 
-import battleData from './new-le-battle-data.json';
 import { TokenDisplay } from './token-estimation-service';
 
 export interface ILeWave {
@@ -39,29 +38,15 @@ export interface ILeBattles {
 }
 
 export class LeBattleService {
-    public static readonly battles = mutableCopy(battleData.legendaryEvents) satisfies ILeBattles[];
+    public static readonly battles = mutableCopy(rawLreBattleData.legendaryEvents) satisfies ILeBattles[];
 
     /**
      * @returns the battle set for the given character released via legendary events. SP tends to
      * remove old LEs from the game, so you should assume this only works for currently running LEs.
+     * Works for any event as long as its id has a matching entry in new-le-battle-data.json.
      */
     public static getBattleSetForCharacter(characterId: LegendaryEventEnum): ILeBattles | undefined {
-        if (characterId === LegendaryEventEnum.Trajann) {
-            return this.battles.find(battle => battle.id === '11');
-        }
-        if (characterId === LegendaryEventEnum.Lucius) {
-            return this.battles.find(battle => battle.id === '12');
-        }
-        if (characterId === LegendaryEventEnum.Dante) {
-            return this.battles.find(battle => battle.id === '10');
-        }
-        if (characterId === LegendaryEventEnum.Farsight) {
-            return this.battles.find(battle => battle.id === '13');
-        }
-        if (characterId === LegendaryEventEnum.Uthar) {
-            return this.battles.find(battle => battle.id === '14');
-        }
-        return undefined;
+        return this.battles.find(battle => battle.id === String(characterId));
     }
 
     public static getBattleFromToken(token: TokenDisplay, battles: ILeBattles | undefined): ILeBattle | undefined {

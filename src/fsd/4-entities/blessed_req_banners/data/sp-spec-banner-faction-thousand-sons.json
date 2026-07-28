@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_ThousandSons",
+    "title": "<style=\"FactionIcon_ThousandSons\">Thousand Sons</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"FactionIcon_ThousandSons\">Thousand Sons</style>!",
+    "featuredUnits": [
+        "thousAhriman",
+        "thousSorcerer",
+        "thousInfernalMaster",
+        "thousTerminator",
+        "thousTzaangor",
+        "thousDaemonPrince"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

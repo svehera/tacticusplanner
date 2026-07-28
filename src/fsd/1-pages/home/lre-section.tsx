@@ -11,9 +11,9 @@ import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { ILegendaryEventStatic, LegendaryEventEnum, LreRequirementImage } from '@/fsd/4-entities/lre';
+import { ILegendaryEventStatic, LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
-import { getLre } from '@/fsd/3-features/lre';
+import { getLre, RestrictionIcon } from '@/fsd/3-features/lre';
 import { ILreProgressDto } from '@/fsd/3-features/lre-progress';
 
 import { LreService } from '@/fsd/1-pages/plan-lre/lre.service';
@@ -74,7 +74,8 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                 stats: lre[trackId].unitsRestrictions.map(requirement => ({
                     id: requirement.id ?? requirement.name,
                     name: requirement.name,
-                    iconId: requirement.iconId,
+                    objectiveType: requirement.objectiveType,
+                    objectiveTarget: requirement.objectiveTarget,
                     completed: track
                         ? track.battles.filter(b =>
                               b.requirementsProgress.some(r => r.id === requirement.name && r.completed)
@@ -184,13 +185,17 @@ export function LreSection({ nextEvent, leProgress, characters }: LreSectionProp
                                             {stats.map(stat => {
                                                 const pct =
                                                     totalBattles > 0 ? (stat.completed / totalBattles) * 100 : 0;
-                                                return stat.iconId ? (
+                                                return stat.objectiveType ? (
                                                     <AccessibleTooltip
                                                         key={stat.id}
                                                         title={`${stat.name}: ${stat.completed}/${totalBattles}`}>
                                                         <div className="flex flex-col gap-0.5">
                                                             <div className="flex items-center gap-1">
-                                                                <LreRequirementImage iconId={stat.iconId} sizePx={22} />
+                                                                <RestrictionIcon
+                                                                    objectiveType={stat.objectiveType}
+                                                                    objectiveTarget={stat.objectiveTarget}
+                                                                    sizePx={22}
+                                                                />
                                                                 <span className="text-[9px] leading-none text-(--soft-fg)">
                                                                     {stat.completed}/{totalBattles}
                                                                 </span>
