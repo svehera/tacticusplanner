@@ -7,13 +7,19 @@ import React, { useCallback, useEffect, useState } from 'react';
 import { ICharacter2 } from '@/models/interfaces';
 
 import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
-import { AccessibleTooltip, Button } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Button, Select } from '@/fsd/5-shared/ui';
 import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
 
+import {
+    campaignStorylineLabel,
+    campaignStorylineOptions,
+    campaignStorylineUsableFactionIds,
+    campaignStorylineUsableFactions,
+} from './campaign.constants';
 import { CharacterGrid } from './character-grid';
 import { MowGrid } from './mow-grid';
 import { TeamFlow } from './team-flow';
@@ -61,12 +67,16 @@ interface Props {
     guildRaidSelected: boolean;
     tournamentArenaSelected: boolean;
     hordeModeSelected: boolean;
+    campaignSelected: boolean;
+    campaignStoryline: string | undefined;
     teamName: string;
     onWarOffenseChanged: (offense: boolean) => void;
     onWarDefenseChanged: (defense: boolean) => void;
     onGuildRaidChanged: (guildRaid: boolean) => void;
     onTournamentArenaChanged: (tournamentArena: boolean) => void;
     onHordeModeChanged: (hordeMode: boolean) => void;
+    onCampaignChanged: (campaign: boolean) => void;
+    onCampaignStorylineChanged: (storyline: string | undefined) => void;
     onTeamNameChanged: (teamName: string) => void;
     onNotesChanged: (notes: string) => void;
     onCancel: () => void;
@@ -115,12 +125,16 @@ export const AddTeamDialog: React.FC<Props> = ({
     guildRaidSelected: guildRaid,
     tournamentArenaSelected: tournamentArena,
     hordeModeSelected,
+    campaignSelected,
+    campaignStoryline,
     teamName,
     onWarOffenseChanged,
     onWarDefenseChanged,
     onGuildRaidChanged,
     onTournamentArenaChanged,
     onHordeModeChanged,
+    onCampaignChanged,
+    onCampaignStorylineChanged,
     onTeamNameChanged,
     onNotesChanged,
 }: Props) => {
@@ -165,8 +179,13 @@ export const AddTeamDialog: React.FC<Props> = ({
         (a, b) => a.localeCompare(b)
     );
 
+    // When a campaign is selected, only its usable factions can be fielded.
+    const campaignFactions =
+        campaignSelected && campaignStoryline ? campaignStorylineUsableFactionIds(campaignStoryline) : undefined;
+
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId))
+        .filter(c => !campaignFactions || campaignFactions.includes(c.faction))
         .filter(c =>
             Teams2Service.passesCharacterFilter(
                 c,
@@ -198,6 +217,12 @@ export const AddTeamDialog: React.FC<Props> = ({
             return b.rarity - a.rarity;
         })
         .map(a => Teams2Service.capMowAtRarity(a, rarityCap));
+
+    // Campaign is exclusive with the other modes: while one side is selected, the other
+    // side's checkboxes are disabled (an already-checked box can still be unchecked).
+    const otherModeSelected = warOffense || warDefense || guildRaid || tournamentArena || hordeModeSelected;
+    const campaignDisabled = otherModeSelected && !campaignSelected;
+    const exclusivityMessage = "Campaign teams can't be combined with other modes.";
 
     return (
         <div className="relative isolate flex w-full flex-col rounded-xl border border-(--border) bg-(--overlay) shadow-2xl">
@@ -291,66 +316,122 @@ export const AddTeamDialog: React.FC<Props> = ({
                         <div className="flex flex-wrap items-center gap-6">
                             <div className="flex flex-wrap items-center gap-6">
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
-                                    <AccessibleTooltip title={warDisallowedMessage ?? ''}>
+                                    <AccessibleTooltip
+                                        title={
+                                            warDisallowedMessage ??
+                                            (campaignSelected && !warOffense ? exclusivityMessage : '')
+                                        }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={!warDisallowedMessage && warOffense}
-                                                disabled={!!warDisallowedMessage}
+                                                disabled={!!warDisallowedMessage || (campaignSelected && !warOffense)}
                                                 onChange={() => onWarOffenseChanged(!warOffense)}
-                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring)"
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
                                             <span>War Offense</span>
                                         </div>
                                     </AccessibleTooltip>
                                 </label>
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
-                                    <AccessibleTooltip title={warDisallowedMessage ?? ''}>
+                                    <AccessibleTooltip
+                                        title={
+                                            warDisallowedMessage ??
+                                            (campaignSelected && !warDefense ? exclusivityMessage : '')
+                                        }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={!warDisallowedMessage && warDefense}
-                                                disabled={!!warDisallowedMessage}
+                                                disabled={!!warDisallowedMessage || (campaignSelected && !warDefense)}
                                                 onChange={() => onWarDefenseChanged(!warDefense)}
-                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring)"
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
                                             <span>War Defense</span>
                                         </div>
                                     </AccessibleTooltip>
                                 </label>
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
-                                    <input
-                                        type="checkbox"
-                                        checked={guildRaid}
-                                        onChange={() => onGuildRaidChanged(!guildRaid)}
-                                        className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring)"
-                                    />
-                                    <span>Guild Raid</span>
+                                    <AccessibleTooltip title={campaignSelected && !guildRaid ? exclusivityMessage : ''}>
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="checkbox"
+                                                checked={guildRaid}
+                                                disabled={campaignSelected && !guildRaid}
+                                                onChange={() => onGuildRaidChanged(!guildRaid)}
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
+                                            />
+                                            <span>Guild Raid</span>
+                                        </div>
+                                    </AccessibleTooltip>
                                 </label>
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
-                                    <AccessibleTooltip title={tournamentArenaDisallowedMessage ?? ''}>
+                                    <AccessibleTooltip
+                                        title={
+                                            tournamentArenaDisallowedMessage ??
+                                            (campaignSelected && !tournamentArena ? exclusivityMessage : '')
+                                        }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={!tournamentArenaDisallowedMessage && tournamentArena}
-                                                disabled={!!tournamentArenaDisallowedMessage}
+                                                disabled={
+                                                    !!tournamentArenaDisallowedMessage ||
+                                                    (campaignSelected && !tournamentArena)
+                                                }
                                                 onChange={() => onTournamentArenaChanged(!tournamentArena)}
-                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring)"
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
                                             <span>Tournament Arena</span>
                                         </div>
                                     </AccessibleTooltip>
                                 </label>
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
-                                    <input
-                                        type="checkbox"
-                                        checked={hordeModeSelected}
-                                        onChange={() => onHordeModeChanged(!hordeModeSelected)}
-                                        className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring)"
-                                    />
-                                    <span>Horde Mode</span>
+                                    <AccessibleTooltip
+                                        title={campaignSelected && !hordeModeSelected ? exclusivityMessage : ''}>
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="checkbox"
+                                                checked={hordeModeSelected}
+                                                disabled={campaignSelected && !hordeModeSelected}
+                                                onChange={() => onHordeModeChanged(!hordeModeSelected)}
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
+                                            />
+                                            <span>Horde Mode</span>
+                                        </div>
+                                    </AccessibleTooltip>
+                                </label>
+                                <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
+                                    <AccessibleTooltip title={campaignDisabled ? exclusivityMessage : ''}>
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="checkbox"
+                                                checked={campaignSelected}
+                                                disabled={campaignDisabled}
+                                                onChange={() => onCampaignChanged(!campaignSelected)}
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
+                                            />
+                                            <span>Campaign</span>
+                                        </div>
+                                    </AccessibleTooltip>
                                 </label>
                             </div>
+                            {campaignSelected && (
+                                <div className="min-w-[220px]">
+                                    <Select<string | undefined>
+                                        options={[undefined, ...campaignStorylineOptions.map(option => option.value)]}
+                                        value={campaignStoryline}
+                                        onChange={onCampaignStorylineChanged}
+                                        renderOption={value => (value ? campaignStorylineLabel(value) : 'None')}
+                                        placeholder="Select a campaign..."
+                                    />
+                                    {campaignStoryline && (
+                                        <p className="mt-1 text-xs text-(--soft-fg)">
+                                            Usable: {campaignStorylineUsableFactions(campaignStoryline) ?? 'unknown'}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
                         </div>
 
                         <div>
@@ -380,11 +461,15 @@ export const AddTeamDialog: React.FC<Props> = ({
                                     .map(x => chars.find(char => (char.snowprintId ?? '') === x))
                                     .filter(x => x !== undefined) ?? []
                             ).map(char => Teams2Service.capCharacterAtRarity(char!, rarityCap))}
-                            mows={(
-                                selectedMows
-                                    .map(id => mows.find(mow => (mow.snowprintId ?? '') === id))
-                                    .filter(x => x !== undefined) ?? []
-                            ).map(mow => Teams2Service.capMowAtRarity(mow!, rarityCap))}
+                            mows={
+                                campaignSelected
+                                    ? []
+                                    : (
+                                          selectedMows
+                                              .map(id => mows.find(mow => (mow.snowprintId ?? '') === id))
+                                              .filter(x => x !== undefined) ?? []
+                                      ).map(mow => Teams2Service.capMowAtRarity(mow!, rarityCap))
+                            }
                             flexIndex={flexIndex}
                             onCharClicked={onCharClicked}
                             onMowClicked={onMowClicked}
@@ -409,35 +494,45 @@ export const AddTeamDialog: React.FC<Props> = ({
                         />
                     </div>
 
-                    <div
-                        onMouseDown={startResizing}
-                        className={`relative z-10 hidden w-4 flex-shrink-0 cursor-col-resize xl:flex ${isDragging ? 'bg-(--primary)/10' : 'hover:bg-(--primary)/5'} group transition-colors`}>
-                        <div
-                            className={`mx-auto h-full w-[1px] ${isDragging ? 'bg-blue-500' : 'bg-(--border) group-hover:bg-blue-400'}`}
-                        />
-                        <div className="pointer-events-none absolute top-24 left-1/2 flex -translate-x-1/2 justify-center">
+                    {!campaignSelected && (
+                        <>
                             <div
-                                className={`pointer-events-auto flex h-16 w-6 flex-col items-center justify-center gap-1 rounded-l-md border-y border-l shadow-md transition-all duration-200 ${
-                                    isDragging
-                                        ? 'border-blue-600 bg-blue-500'
-                                        : 'border-(--card-border) bg-(--card) group-hover:border-blue-500'
-                                }`}>
-                                <div className={`h-[1px] w-3 ${isDragging ? 'bg-blue-100' : 'bg-(--border)'}`} />
-                                <div className={`h-[1px] w-3 ${isDragging ? 'bg-blue-100' : 'bg-(--border)'}`} />
-                                <div className={`h-[1px] w-3 ${isDragging ? 'bg-blue-100' : 'bg-(--border)'}`} />
+                                onMouseDown={startResizing}
+                                className={`relative z-10 hidden w-4 flex-shrink-0 cursor-col-resize xl:flex ${isDragging ? 'bg-(--primary)/10' : 'hover:bg-(--primary)/5'} group transition-colors`}>
+                                <div
+                                    className={`mx-auto h-full w-[1px] ${isDragging ? 'bg-blue-500' : 'bg-(--border) group-hover:bg-blue-400'}`}
+                                />
+                                <div className="pointer-events-none absolute top-24 left-1/2 flex -translate-x-1/2 justify-center">
+                                    <div
+                                        className={`pointer-events-auto flex h-16 w-6 flex-col items-center justify-center gap-1 rounded-l-md border-y border-l shadow-md transition-all duration-200 ${
+                                            isDragging
+                                                ? 'border-blue-600 bg-blue-500'
+                                                : 'border-(--card-border) bg-(--card) group-hover:border-blue-500'
+                                        }`}>
+                                        <div
+                                            className={`h-[1px] w-3 ${isDragging ? 'bg-blue-100' : 'bg-(--border)'}`}
+                                        />
+                                        <div
+                                            className={`h-[1px] w-3 ${isDragging ? 'bg-blue-100' : 'bg-(--border)'}`}
+                                        />
+                                        <div
+                                            className={`h-[1px] w-3 ${isDragging ? 'bg-blue-100' : 'bg-(--border)'}`}
+                                        />
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                    </div>
 
-                    <div className="w-full flex-shrink-0 rounded-lg border border-(--card-border) bg-(--card) p-4 xl:w-[var(--mow-width)]">
-                        <MowGrid
-                            mows={filteredMows}
-                            onMowSelect={onAddMow}
-                            showHeader={true}
-                            zoom={zoom}
-                            deployedUnitIds={deployedMowIds}
-                        />
-                    </div>
+                            <div className="w-full flex-shrink-0 rounded-lg border border-(--card-border) bg-(--card) p-4 xl:w-[var(--mow-width)]">
+                                <MowGrid
+                                    mows={filteredMows}
+                                    onMowSelect={onAddMow}
+                                    showHeader={true}
+                                    zoom={zoom}
+                                    deployedUnitIds={deployedMowIds}
+                                />
+                            </div>
+                        </>
+                    )}
                 </div>
             </div>
         </div>

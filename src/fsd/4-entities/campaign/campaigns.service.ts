@@ -136,7 +136,10 @@ export class CampaignsService {
             const { enemies, allies } = this.getEnemiesAndAllies(battle.campaign as Campaign);
             enemies.factions = enemies.factions.filter(faction => isString(faction));
             allies.factions = allies.factions.filter(faction => isString(faction));
-            if (enemies.factions.length === 0) {
+            if (
+                enemies.factions.length === 0 &&
+                ![Campaign.DAS, Campaign.DASC, Campaign.DAE, Campaign.DAEC].includes(battle.campaign as Campaign)
+            ) {
                 console.warn(
                     'no enemy factions found, check in getEnemiesAndAllies to make sure the campaign is correctly configured.',
                     battle.campaign,
@@ -501,6 +504,23 @@ export class CampaignsService {
                     allies: {
                         alliance: Alliance.Chaos,
                         factions: ['WorldEaters', 'BlackLegion'],
+                    },
+                };
+            }
+            case Campaign.DAS:
+            case Campaign.DASC:
+            case Campaign.DAE:
+            case Campaign.DAEC: {
+                // Dark Angels CE enemies are NPCs (no playable faction), so they are left
+                // empty and are not filtered. Only Necrons are usable (allies).
+                return {
+                    enemies: {
+                        alliance: Alliance.Xenos,
+                        factions: [],
+                    },
+                    allies: {
+                        alliance: Alliance.Xenos,
+                        factions: ['Necrons'],
                     },
                 };
             }
