@@ -22,8 +22,6 @@ import {
     campaignStorylineUsableFactionIds,
     campaignStorylineUsableFactions,
 } from './campaign.constants';
-import { CharacterGrid } from './character-grid';
-import { MowGrid } from './mow-grid';
 import { TeamFlow } from './team-flow';
 import { Teams2Service } from './teams2.service';
 import { UnitFilter } from './unit-filter';
@@ -525,7 +523,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                             </div>
 
                             <div className="w-full flex-shrink-0 rounded-lg border border-(--card-border) bg-(--card) p-4 xl:w-[var(--mow-width)]">
-                                <MowGrid
+                                <MowSelectGrid
                                     mows={filteredMows}
                                     onMowSelect={onAddMow}
                                     showHeader={true}
