@@ -54,6 +54,11 @@ export function cartKey(week: number, slotIndex: number, day: Day): string {
     return `${week}-${slotIndex}-${day}`;
 }
 
+/** A draft item can be claimed as any single alliance's variant, so the total needed is the sum of every alliance's deficit. */
+function sumAcrossAlliances(needed: Record<Alliance, Record<Rarity, number>>, rarity: Rarity): number {
+    return Object.values(Alliance).reduce((total, alliance) => total + (needed[alliance]?.[rarity] ?? 0), 0);
+}
+
 export function getNeededForRewardType(
     type: string,
     neededBadges: Record<Alliance, Record<Rarity, number>>,
@@ -69,6 +74,16 @@ export function getNeededForRewardType(
     if (orbMatch) {
         const rarity = RarityMapper.stringToNumber[orbMatch[1] as RarityString];
         return neededOrbs[orbMatch[2] as Alliance]?.[rarity] ?? 0;
+    }
+    const draftBadgeMatch = type.match(/^draft_abilityTokens(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/);
+    if (draftBadgeMatch) {
+        const rarity = RarityMapper.stringToNumber[draftBadgeMatch[1] as RarityString];
+        return sumAcrossAlliances(neededBadges, rarity);
+    }
+    const draftOrbMatch = type.match(/^draft_ascensionOrbs(Uncommon|Rare|Epic|Legendary|Mythic)$/);
+    if (draftOrbMatch) {
+        const rarity = RarityMapper.stringToNumber[draftOrbMatch[1] as RarityString];
+        return sumAcrossAlliances(neededOrbs, rarity);
     }
     const forgeMatch = type.match(/^itemAscensionResource_(Uncommon|Rare|Epic|Legendary|Mythic)$/);
     if (forgeMatch) {
@@ -172,14 +187,10 @@ export function computeCoverageRows({
     const xpBook = tierToXpBook[currentTier];
     const xpBookValue = XP_BOOK_VALUE[xpBook.rarity];
     const neededBooks = Math.ceil(neededXp / xpBookValue);
-    if (neededBooks > 0) {
-        const xpWeekDayMap = new Map<number, Set<Day>>();
-        const weekMap = allWeekDayAvailability.get(xpBook.type);
-        if (weekMap) {
-            for (const [w, days] of weekMap) {
-                xpWeekDayMap.set(w, new Set(days));
-            }
-        }
+    const xpBookWeekMap = allWeekDayAvailability.get(xpBook.type);
+    if (neededBooks > 0 && xpBookWeekMap) {
+        // only show if purchasable in the shop
+        const xpWeekDayMap = new Map<number, Set<Day>>(xpBookWeekMap);
         const xpBookXpValues: Record<string, number> = {
             xpRare: XP_BOOK_VALUE[Rarity.Rare],
             xpLegendary: XP_BOOK_VALUE[Rarity.Legendary],
@@ -218,13 +229,12 @@ export function computeCoverageRows({
     for (const upg of MYTHIC_UNCRAFTABLE_UPGRADES) {
         const needed = mythicMissingByUpgradeId[upg.id] ?? 0;
         if (needed === 0) continue;
-        const cartTotal = effectiveCartTotalsByType[upg.id] ?? 0;
         const weekDayMap = allWeekDayAvailability.get(upg.id);
-        const availability = weekDayMap
-            ? [...weekDayMap.entries()]
-                  .toSorted(([a], [b]) => a - b)
-                  .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }))
-            : [];
+        if (!weekDayMap) continue; // only show if purchasable in the shop
+        const cartTotal = effectiveCartTotalsByType[upg.id] ?? 0;
+        const availability = [...weekDayMap.entries()]
+            .toSorted(([a], [b]) => a - b)
+            .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }));
         const upgRemaining = Math.max(0, needed - cartTotal);
         const upgCheapest = cheapestOptionByType.get(upg.id);
         const upgEstimatedCost =
@@ -251,14 +261,13 @@ export function computeCoverageRows({
     }
 
     // ── Gold ──────────────────────────────────────────────────────────────────
-    if (totalGold > 0) {
+    const goldWeekDayMap = allWeekDayAvailability.get('gold');
+    if (totalGold > 0 && goldWeekDayMap) {
+        // only show if purchasable in the shop
         const cartGold = effectiveCartTotalsByType['gold'] ?? 0;
-        const goldWeekDayMap = allWeekDayAvailability.get('gold');
-        const goldAvailability = goldWeekDayMap
-            ? [...goldWeekDayMap.entries()]
-                  .toSorted(([a], [b]) => a - b)
-                  .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }))
-            : [];
+        const goldAvailability = [...goldWeekDayMap.entries()]
+            .toSorted(([a], [b]) => a - b)
+            .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }));
         const goldRemaining = Math.max(0, totalGold - cartGold);
         const goldCheapest = cheapestOptionByType.get('gold');
         const goldEstimatedCost =
