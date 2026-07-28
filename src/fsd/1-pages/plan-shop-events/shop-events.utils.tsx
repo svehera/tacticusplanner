@@ -10,8 +10,19 @@ import { DAYS, ICON_SIZE } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
 import type { CoverageRow } from './shop-events.types';
 
+/**
+ * The 7-day weekday sequence for an event, starting at the actual UTC weekday of `event.startUtc`
+ * (e.g. a Wednesday-start event yields `['WED','THU',...,'MON','TUE']`). Position `i` in this array
+ * is "day `i` of any week of this event" - shop events don't necessarily start on a Monday, so this
+ * replaces the fixed `DAYS` order wherever day-of-week needs to line up with real calendar dates.
+ */
+export function getEventDayOrder(event: ShopEventData): Day[] {
+    const mondayBasedStart = (new Date(event.startUtc).getUTCDay() + 6) % 7; // Mon=0..Sun=6
+    return Array.from({ length: 7 }, (_, index) => DAYS[(mondayBasedStart + index) % 7]);
+}
+
 export function getEventDate(event: ShopEventData, week: number, day: Day): string {
-    const dayIndex = DAYS.indexOf(day);
+    const dayIndex = getEventDayOrder(event).indexOf(day);
     const offsetMs = ((week - 1) * 7 + dayIndex) * 86_400_000;
     const d = new Date(event.startUtc + offsetMs);
     const month = d.toLocaleString('en-US', { month: 'long', timeZone: 'UTC' });
@@ -34,10 +45,11 @@ export interface EventDateIndex {
 
 /** Builds the full day-by-day index for an event, derived from its start date and week count. */
 export function buildEventDateIndex(event: ShopEventData): EventDateIndex {
+    const dayOrder = getEventDayOrder(event);
     const totalDays = event.weeks.length * 7;
     const allDates: EventDateIndexEntry[] = Array.from({ length: totalDays }, (_, index) => ({
         week: Math.floor(index / 7) + 1,
-        day: DAYS[index % 7],
+        day: dayOrder[index % 7],
     }));
 
     const now = new Date();
@@ -112,6 +124,7 @@ export function coverageRowSortPriority(rewardType: string): number {
 }
 
 interface ComputeCoverageRowsParameters {
+    dayOrder: Day[];
     allWeekDayAvailability: Map<string, Map<number, Set<Day>>>;
     neededBadges: Record<Alliance, Record<Rarity, number>>;
     neededOrbs: Record<Alliance, Record<Rarity, number>>;
@@ -127,6 +140,7 @@ interface ComputeCoverageRowsParameters {
 }
 
 export function computeCoverageRows({
+    dayOrder,
     allWeekDayAvailability,
     neededBadges,
     neededOrbs,
@@ -153,7 +167,7 @@ export function computeCoverageRows({
             .toSorted(([a], [b]) => a - b)
             .map(([w, daysSet]) => ({
                 week: w,
-                days: DAYS.filter(d => daysSet.has(d)),
+                days: dayOrder.filter(d => daysSet.has(d)),
             }));
         const { icon, label } = rewardInfo(typePrefix);
         const remaining = Math.max(0, needed - cartTotal);
@@ -205,7 +219,7 @@ export function computeCoverageRows({
             .toSorted(([a], [b]) => a - b)
             .map(([w, daysSet]) => ({
                 week: w,
-                days: DAYS.filter(d => daysSet.has(d)),
+                days: dayOrder.filter(d => daysSet.has(d)),
             }));
         const xpRemaining = Math.max(0, neededBooks - cartBooks);
         const xpCheapest = cheapestOptionByType.get(xpBook.type);
@@ -234,7 +248,7 @@ export function computeCoverageRows({
         const cartTotal = effectiveCartTotalsByType[upg.id] ?? 0;
         const availability = [...weekDayMap.entries()]
             .toSorted(([a], [b]) => a - b)
-            .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }));
+            .map(([w, daysSet]) => ({ week: w, days: dayOrder.filter(d => daysSet.has(d)) }));
         const upgRemaining = Math.max(0, needed - cartTotal);
         const upgCheapest = cheapestOptionByType.get(upg.id);
         const upgEstimatedCost =
@@ -267,7 +281,7 @@ export function computeCoverageRows({
         const cartGold = effectiveCartTotalsByType['gold'] ?? 0;
         const goldAvailability = [...goldWeekDayMap.entries()]
             .toSorted(([a], [b]) => a - b)
-            .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }));
+            .map(([w, daysSet]) => ({ week: w, days: dayOrder.filter(d => daysSet.has(d)) }));
         const goldRemaining = Math.max(0, totalGold - cartGold);
         const goldCheapest = cheapestOptionByType.get('gold');
         const goldEstimatedCost =
@@ -295,7 +309,7 @@ export function computeCoverageRows({
         const cartTotal = effectiveCartTotalsByType[shardType] ?? 0;
         const availability = [...weekDayMap.entries()]
             .toSorted(([a], [b]) => a - b)
-            .map(([w, daysSet]) => ({ week: w, days: DAYS.filter(d => daysSet.has(d)) }));
+            .map(([w, daysSet]) => ({ week: w, days: dayOrder.filter(d => daysSet.has(d)) }));
         const shardRemaining = Math.max(0, needed - cartTotal);
         const shardCheapest = cheapestOptionByType.get(shardType);
         const shardEstimatedCost =

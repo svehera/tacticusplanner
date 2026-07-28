@@ -41,7 +41,14 @@ import { ShopCard } from './shop-card';
 import { DAYS, DAY_LABELS } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
 import type { CartEntry, CartRecord, ResolvedSlot } from './shop-events.types';
-import { buildEventDateIndex, cartKey, computeCoverageRows, formatGold, getEventDate } from './shop-events.utils';
+import {
+    buildEventDateIndex,
+    cartKey,
+    computeCoverageRows,
+    formatGold,
+    getEventDate,
+    getEventDayOrder,
+} from './shop-events.utils';
 import { ShoppingList } from './shopping-list';
 
 export const ShopEventDetail = () => {
@@ -67,8 +74,10 @@ export const ShopEventDetail = () => {
     const { userInfo } = useAuth();
     const hasSync = !!userInfo.tacticusApiKey;
 
+    const dayOrder = useMemo(() => (event ? getEventDayOrder(event) : [...DAYS]), [event]);
+
     const [week, setWeek] = useState(1);
-    const [day, setDay] = useState<Day>('MON');
+    const [day, setDay] = useState<Day>(dayOrder[0]);
     const pl = playerMetadata.powerLevel ?? 1;
 
     const eventState = event
@@ -94,6 +103,7 @@ export const ShopEventDetail = () => {
 
     useEffect(() => {
         if (dateIndex) setSelectedDateIndex(dateIndex.defaultIndex);
+        setDay(dayOrder[0]);
     }, [event?.id]); // eslint-disable-line react-hooks/exhaustive-deps
 
     const hasPurchased = useMemo(() => Object.values(purchased).some(q => q > 0), [purchased]);
@@ -316,7 +326,7 @@ export const ShopEventDetail = () => {
         for (let w = 1; w <= weekCount; w++) {
             const wd = event.weeks[w - 1];
             for (const slot of wd.products) {
-                for (const d of DAYS) {
+                for (const d of dayOrder) {
                     const match = slot.find(p => cronMatchesDay(p.cronSchedule, d) && matchesConditions(p));
                     if (!match) continue;
                     const isFree = match.freeOffer !== undefined;
@@ -330,7 +340,7 @@ export const ShopEventDetail = () => {
             }
         }
         return map;
-    }, [event, weekCount, matchesConditions]);
+    }, [event, weekCount, matchesConditions, dayOrder]);
 
     const effectiveCartTotalsByType = useMemo(() => {
         const totals: Record<string, number> = {};
@@ -380,7 +390,7 @@ export const ShopEventDetail = () => {
         for (let w = 1; w <= weekCount; w++) {
             const wd = event.weeks[w - 1];
             for (const slot of wd.products) {
-                for (const d of DAYS) {
+                for (const d of dayOrder) {
                     const match = slot.find(p => cronMatchesDay(p.cronSchedule, d) && matchesConditions(p));
                     if (!match || match.freeOffer !== undefined) continue;
                     const [typePrefix, qtyString] = match.reward.split(':');
@@ -394,11 +404,12 @@ export const ShopEventDetail = () => {
             }
         }
         return map;
-    }, [event, weekCount, matchesConditions]);
+    }, [event, weekCount, matchesConditions, dayOrder]);
 
     const coverageRows = useMemo(
         () =>
             computeCoverageRows({
+                dayOrder,
                 allWeekDayAvailability,
                 neededBadges,
                 neededOrbs,
@@ -413,6 +424,7 @@ export const ShopEventDetail = () => {
                 cheapestOptionByType,
             }),
         [
+            dayOrder,
             allWeekDayAvailability,
             neededBadges,
             neededOrbs,
@@ -618,7 +630,7 @@ export const ShopEventDetail = () => {
                 <div className="flex flex-col gap-1">
                     <label className="text-sm font-medium text-(--fg)">Day</label>
                     <div className="flex flex-wrap gap-1">
-                        {DAYS.map(d => (
+                        {dayOrder.map(d => (
                             <button
                                 key={d}
                                 onClick={() => setDay(d)}
@@ -1012,6 +1024,7 @@ export const ShopEventDetail = () => {
                 cart={cart}
                 weekCount={weekCount}
                 currencyIconKey={currencyIconKey}
+                dayOrder={dayOrder}
                 onSetQty={(key, qty) => setCartQty(key, qty)}
                 onResetWeek={setConfirmResetWeek}
             />
