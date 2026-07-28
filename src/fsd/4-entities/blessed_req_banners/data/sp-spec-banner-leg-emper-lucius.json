@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_emperLucius",
+    "title": "Lucius Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_EmperorsChildren]}</i> event, featuring <style=\"Faction_EmperorsChildren\">Lucius</style>",
+    "featuredUnits": [
+        "eldarRanger",
+        "spaceWulfen",
+        "bloodDeathCompany",
+        "blackHaarken",
+        "tauDarkstrider",
+        "genesPatriarch"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

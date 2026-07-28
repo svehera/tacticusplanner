@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_HeroesOfTheImperium",
+    "title": "Heroes of the Imperium Requisition",
+    "tagline": "Higher drop chances for these famous Loyalist warriors!",
+    "featuredUnits": [
+        "ultraTigurius",
+        "astraYarrick",
+        "spaceRockfist",
+        "astraDreir",
+        "spaceStormcaller",
+        "ultraCalgar"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

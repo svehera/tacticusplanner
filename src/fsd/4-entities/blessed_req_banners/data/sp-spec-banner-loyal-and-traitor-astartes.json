@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LoyalAndTraitorAstartes",
+    "title": "Loyal and Traitor Astartes Requisition",
+    "tagline": "Show your allegiance to the Emperor or to the Dark Gods with these characters!",
+    "featuredUnits": [
+        "blackTerminator",
+        "spaceWulfen",
+        "deathPutrifier",
+        "darkaAsmodai",
+        "worldKharn",
+        "templHelbrecht"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

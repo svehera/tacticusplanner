@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_BlackTemplars",
+    "title": "<style=\"FactionIcon_BlackTemplars\">Black Templars</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"FactionIcon_BlackTemplars\">Black Templars</style>!",
+    "featuredUnits": ["templHelbrecht", "templChampion", "templAncient", "templAggressor", "templSwordBrother"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

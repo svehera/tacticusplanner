@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_Sisterhood",
+    "title": "<style=\"FactionIcon_Sisterhood\">Adepta Sororitas</style> Requisition",
+    "tagline": "Higher drop chances for all <style=\"FactionIcon_Sisterhood\">Adepta Sororitas</style>, including their Machine of War!",
+    "featuredUnits": [
+        "adeptCelestine",
+        "adeptMorvenn",
+        "adeptHospitaller",
+        "adeptCanoness",
+        "adeptRetributor",
+        "adeptExorcist"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

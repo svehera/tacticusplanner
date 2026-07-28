@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_11thEdition_Orks",
+    "title": "Armageddon Requisition: <style=\"FactionIcon_Orks\">Orks</style>",
+    "tagline": "Massive boost to <style=\"FactionIcon_Orks\">Ork</style> drop chances, with top rewards guaranteed even faster!",
+    "featuredUnits": ["orksWarboss", "orksNob", "orksRuntherd", "orksKillaKan", "orksBigMek", "orksRukkatrukk"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_bloodMephiston",
+    "title": "Mephiston Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_BloodAngels]}</i> event, featuring <style=\"Faction_BloodAngels\">Mephiston</style>",
+    "featuredUnits": [
+        "templHelbrecht",
+        "necroOverlord",
+        "tyranNeurothrope",
+        "templAggressor",
+        "blackTerminator",
+        "thousTzaangor"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Summoners",
+    "title": "Summoner Requisition",
+    "tagline": "Get ready to <style=\"Summon\">Summon</style> with these units!",
+    "featuredUnits": ["astraCreed", "necroOverlord", "tyranWingedPrime", "genesPrimus", "tauMarksman", "tyranBiovore"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

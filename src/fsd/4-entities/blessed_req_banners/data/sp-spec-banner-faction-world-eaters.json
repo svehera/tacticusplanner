@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_WorldEaters",
+    "title": "<style=\"FactionIcon_WorldEaters\">World Eaters</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"FactionIcon_WorldEaters\">World Eaters</style>!",
+    "featuredUnits": ["worldKharn", "worldExecutions", "worldEightbound", "worldJakhal", "worldTerminator"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

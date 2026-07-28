@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_MoW_orksRukkatrukk",
+    "title": "Rukkatrukk Incursion Requisition",
+    "tagline": "Gain the upper hand in the upcoming Rukkatrukk Incursion!",
+    "featuredUnits": [
+        "ultraCalgar",
+        "templChampion",
+        "templAncient",
+        "darkaHellblaster",
+        "spaceWulfen",
+        "ultraInceptorSgt"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 12
+    }
+}

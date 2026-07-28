@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_Tau",
+    "title": "{[UnitDetails/FactionIcon_Stylized_Tau]} Requisition",
+    "tagline": "Higher drop chances for all <style=\"FactionIcon_Tau\">T'au Empire</style> units, including their Machine of War!",
+    "featuredUnits": ["tauAunShi", "tauShadowsun", "tauDarkstrider", "tauCrisis", "tauMarksman", "tauBroadside"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

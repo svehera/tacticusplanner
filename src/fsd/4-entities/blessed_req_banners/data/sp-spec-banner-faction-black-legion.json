@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_BlackLegion",
+    "title": "<style=\"FactionIcon_BlackLegion\">Black Legion</style> Requisition",
+    "tagline": "Higher drop chances for the whole <style=\"FactionIcon_BlackLegion\">Black Legion</style>, including their Machine of War!",
+    "featuredUnits": [
+        "blackAbaddon",
+        "blackHaarken",
+        "blackObliterator",
+        "blackPossession",
+        "blackTerminator",
+        "blackForgefiend"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_Necrons",
+    "title": "<style=\"FactionIcon_Necrons\">Necrons</style> Requisition",
+    "tagline": "Higher drop chances for all these <style=\"FactionIcon_Necrons\">Necrons</style>!",
+    "featuredUnits": [
+        "necroOverlord",
+        "necroPlasmancer",
+        "necroSpyder",
+        "necroDestroyer",
+        "necroWarden",
+        "necroChronomancer"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}
