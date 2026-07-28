@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_SE_Halloween2025",
+    "title": "Survival Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[SeasonalEvents/name_halloween_2025]}</i> Survival event!",
+    "featuredUnits": [
+        "bloodMephiston",
+        "darkaAzrael",
+        "darkaCompanion",
+        "bloodSanguinary",
+        "bloodIntercessor",
+        "templSwordBrother"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

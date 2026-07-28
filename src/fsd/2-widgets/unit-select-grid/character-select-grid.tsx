@@ -1,0 +1,67 @@
+/* eslint-disable import-x/no-internal-modules */
+import { ICharacter2 } from '@/models/interfaces';
+
+import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { UnitPortrait } from '@/fsd/5-shared/ui/unit-portrait';
+
+import { convertCharacterToSnapshot } from '@/fsd/4-entities/unit';
+
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+interface Props {
+    characters: ICharacter2[];
+    zoom: number;
+    onCharacterSelect: (id: string) => void;
+    showHeader: boolean;
+    deployedUnitIds?: string[];
+}
+
+export const CharacterSelectGrid: React.FC<Props> = ({
+    characters,
+    zoom,
+    onCharacterSelect,
+    showHeader,
+    deployedUnitIds,
+}: Props) => {
+    return (
+        <div>
+            {showHeader && (
+                <div className="mb-4 flex justify-between">
+                    <h3 className="font-bold">Characters</h3>
+                    <span className="text-xs text-(--soft-fg)">Showing {characters.length} units</span>
+                </div>
+            )}
+            <div className="flex flex-wrap gap-4">
+                {characters.map(char => (
+                    <div key={char.snowprintId} className="relative" style={{ zoom }}>
+                        <div
+                            onClick={() => onCharacterSelect(char.snowprintId)}
+                            className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
+                            title={`Select ${char.name || 'Character'}`}>
+                            <UnitPortrait
+                                key={char.snowprintId}
+                                showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                                showShards={RosterSnapshotShowVariableSettings.Never}
+                                showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                showAbilities={RosterSnapshotShowVariableSettings.Always}
+                                showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                showTooltip={true}
+                                char={convertCharacterToSnapshot(char)}
+                                charData={char}
+                                isDisabled={char.rank === Rank.Locked}
+                            />
+                        </div>
+                        {deployedUnitIds?.includes(char.snowprintId) && (
+                            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                                <div className="rounded-full bg-(--fg)/70 p-1 shadow-lg ring-1 ring-(--border)/50">
+                                    <MiscIcon icon="deployment" width={36} height={36} />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};

@@ -178,6 +178,9 @@
                 280, 284, 288, 293, 298, 303, 308, 314, 320, 326, 334, 341, 349, 356, 364
             ]
         },
+        "constants": {
+            "unitId": "ultraSmnInceptor"
+        },
         "variablesAffectedByRarityBonus": ["extraDmg"]
     },
     {
@@ -424,8 +427,8 @@
         "id": "ResurrectionOrb",
         "text": {
             "name": "Resurrection Orb",
-            "currentLevelDescription": "In a free adjacent hex, summons 1 <style=\"Summon\"><style=\"Faction_Necrons\">Necron Warrior</style></style> for each round that has started. Summons 1 more <style=\"Summon\"><style=\"Faction_Necrons\">Necron Warrior</style></style> for each friendly unit with the trait <style=\"Living_Metal\">Living Metal</style> that was defeated in this battle.\n\nNecron Warrior’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
-            "nextLevelDescription": "Necron Warrior’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
+            "currentLevelDescription": "Resurrects a random friendly <style=\"Mechanical\">Mechanical</style> <style=\"Character\">character</style> in a free adjacent hex and additionally summons <style=\"Summon\"><style=\"Faction_Necrons\">Necron Warriors</style></style> in free adjacent hexes. Summons one Necron Warrior for each round that has passed and for each friendly <style=\"Mechanical\">Mechanical</style> unit that was defeated in this battle, up to a maximum of {[maxSummons]} Necron Warriors. Units are resurrected and summoned with <style=\"Stat_Health\">{[hpPct]}% Health</style>.\n\nNecron Warrior’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "nextLevelDescription": "Units now have <style=\"Stat_Health\">{[hpPct]}% Health</style>.\n\nNecron Warrior’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
         },
         "variables": {
             "summonHp": [
@@ -444,12 +447,45 @@
                 15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90, 104, 117, 131,
                 144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322, 341, 368, 396, 427, 461, 523, 584,
                 646, 708, 769, 831, 840, 851, 863, 878, 893, 908, 923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
+            ],
+            "hpPct": [
+                60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 70, 70, 70, 70, 70, 70, 70, 70, 70,
+                70, 70, 70, 70, 70, 70, 70, 70, 70, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80,
+                80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80
             ]
         },
         "constants": {
-            "unitId": "necroSmnWarrior"
+            "unitId": "necroSmnWarrior",
+            "maxSummons": "5"
         },
         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+    },
+    {
+        "id": "MyWillBeDoneOverlord",
+        "text": {
+            "name": "My Will Be Done",
+            "currentLevelDescription": "At the end of <style=\"Faction_Necrons\">Anuphet's</style> turn, a friendly adjacent <style=\"Mechanical\">Mechanical</style> unit performs a <style=\"NormalAttack\">normal attack</style> against a target in range, using <style=\"Stat\">{[dmgPct]}%</style> of its own <style=\"Stat_Damage\">Damage stat</style> to a maximum of <style=\"Stat_Damage\">{[maxDmg]} Damage</style>. If no attack was performed this way, Anuphet gains <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> until the end of his next turn.",
+            "nextLevelDescription": "The attack now uses <style=\"Stat\">{[dmgPct]}%</style> of the <style=\"Stat_Damage\">Damage stat</style> to a maximum of <style=\"Stat_Damage\">{[maxDmg]} Damage</style> and <style=\"Faction_Necrons\">Anuphet</style> now gains <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>."
+        },
+        "variables": {
+            "dmgPct": [
+                80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 90, 90, 90, 90, 90, 90, 90, 90, 90,
+                90, 90, 90, 90, 90, 90, 90, 90, 90, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100,
+                100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100
+            ],
+            "maxDmg": [
+                60, 72, 84, 96, 108, 122, 136, 149, 163, 177, 191, 205, 218, 232, 246, 260, 274, 287, 301, 315, 334,
+                359, 414, 469, 523, 578, 632, 687, 742, 796, 851, 905, 960, 1015, 1069, 1124, 1178, 1233, 1288, 1364,
+                1472, 1586, 1708, 1844, 2090, 2337, 2584, 2830, 3077, 3324, 3360, 3405, 3450, 3510, 3570, 3630, 3690,
+                3765, 3840, 3915, 4005, 4095, 4185, 4275, 4365
+            ],
+            "extraDmg": [
+                9, 11, 13, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 50, 54, 62, 70, 78, 87,
+                95, 103, 111, 119, 128, 136, 144, 152, 160, 169, 177, 185, 193, 205, 221, 238, 256, 277, 314, 351, 388,
+                425, 462, 499, 504, 511, 518, 527, 536, 545, 554, 565, 576, 587, 601, 614, 628, 641, 655
+            ]
+        },
+        "variablesAffectedByRarityBonus": ["maxDmg", "extraDmg"]
     },
     {
         "id": "StormOfFlensingBlades",
@@ -618,9 +654,9 @@
     {
         "id": "MartialApotheosis",
         "text": {
-            "name": "Martial Apotheosis",
-            "currentLevelDescription": "At the start of its turn, Anuphet deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Energy\">{[minDmg]}-{[maxDmg]} Energy Damage</style> to a random adjacent enemy.",
-            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Energy\">{[minDmg]}-{[maxDmg]} Energy Damage</style>."
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
         },
         "attackRangeType": "melee",
         "variables": {
@@ -3890,6 +3926,60 @@
         "variablesAffectedByRarityBonus": ["dmgReduction"]
     },
     {
+        "id": "EmpyricAmbush",
+        "text": {
+            "name": "Empyric Ambush",
+            "currentLevelDescription": "<style=\"Faction_Aeldari\">Lhykhis</style> moves adjacent to an enemy unit on the battlefield that has a free adjacent hex and deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to it. Until the end of this turn, attacks against the target of <i>Empyric Ambush</i> made by other friendly <style=\"Character\">characters</style> that are <style=\"Faction_Aeldari\">Aeldari</style> or traversed {[movement]} or more hexes this turn have <style=\"Stat\">+{[extraCritChance]}% Crit Chance</style> and deal <style=\"Stat_CritDamage\">{[extraCritDmg]} Crit Damage</style>.\n\nWhen Lhykhis defeats an enemy with a <style=\"NormalAttack\">normal melee attack</style>, and <i>Empyric Ambush</i> has already been used, then <i>Empyric Ambush</i> can be used again in this battle.\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} round</style>. ",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> and eligible attacks have <style=\"Stat\">+{[extraCritChance]}% Crit Chance</style> and deal <style=\"Stat_CritDamage\">{[extraCritDmg]} Crit Damage</style>."
+        },
+        "attackRangeType": "melee",
+        "variables": {
+            "minDmg": [
+                7, 8, 10, 11, 13, 14, 16, 17, 19, 21, 22, 24, 25, 27, 29, 30, 32, 34, 35, 37, 39, 42, 48, 55, 61, 67,
+                74, 80, 87, 93, 99, 106, 112, 118, 125, 131, 137, 144, 150, 159, 172, 185, 199, 215, 244, 273, 301, 330,
+                359, 388, 392, 397, 403, 410, 417, 424, 431, 439, 448, 457, 467, 478, 488, 499, 509
+            ],
+            "maxDmg": [
+                10, 12, 14, 16, 18, 20, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48, 50, 53, 56, 60, 69, 78, 87, 96,
+                105, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196, 206, 215, 227, 245, 264, 285, 307, 348, 390, 431,
+                472, 513, 554, 560, 568, 575, 585, 595, 605, 615, 628, 640, 653, 668, 683, 698, 713, 728
+            ],
+            "extraCritChance": [
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
+                25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25
+            ],
+            "extraCritDmg": [
+                10, 12, 14, 16, 18, 20, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48, 50, 53, 56, 60, 69, 78, 87, 96,
+                105, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196, 206, 215, 227, 245, 264, 285, 307, 348, 390, 431,
+                472, 513, 554, 560, 568, 575, 585, 595, 605, 615, 628, 640, 653, 668, 683, 698, 713, 728
+            ]
+        },
+        "constants": {
+            "nrOfHits": "8",
+            "damageProfile": "Eviscerate",
+            "movement": "4",
+            "initialCooldownTurns": "1"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg", "extraCritDmg"]
+    },
+    {
+        "id": "WhisperingWeb",
+        "text": {
+            "name": "Whispering Web",
+            "currentLevelDescription": "When <style=\"Faction_Aeldari\">Lhykhis</style> performs a <style=\"NormalAttack\">normal ranged attack</style> against an enemy, that enemy is affected by <i>Whispering Web</i> until Lhykhis is defeated or performs a <style=\"NormalAttack\">normal ranged attack</style> against a different unit. When a friendly <style=\"Character\">character</style> attacks an affected enemy, each <style=\"Stat_Hits\">hit</style> in the same attack deals <style=\"Stat_Damage\">+{[extraDmg]} more Damage</style> than the previous hit.",
+            "nextLevelDescription": "Each <style=\"Stat_Hits\">hit</style> now deals <style=\"Stat_Damage\">+{[extraDmg]} more Damage</style> than the previous hit."
+        },
+        "variables": {
+            "extraDmg": [
+                4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 26, 30, 34, 38, 42, 46,
+                50, 54, 58, 62, 66, 70, 74, 78, 82, 86, 90, 94, 100, 108, 116, 125, 135, 153, 171, 189, 208, 226, 244,
+                246, 250, 253, 257, 262, 266, 271, 276, 282, 287, 294, 300, 307, 314, 320
+            ]
+        },
+        "variablesAffectedByRarityBonus": ["extraDmg"]
+    },
+    {
         "id": "ScythingTalons",
         "text": {
             "name": "Scything Talons",
@@ -3998,7 +4088,7 @@
     {
         "id": "MyWillBeDone",
         "text": {
-            "name": "My Will Be Done",
+            "name": "Voice of the Triarch",
             "currentLevelDescription": "Immediately trigger one attack by each friendly <style=\"Faction_Necrons\">Necron</style> unit on the battlefield from their current hex and as long as they have a target in range.",
             "nextLevelDescription": ""
         },
@@ -5571,6 +5661,63 @@
         "variablesAffectedByRarityBonus": ["maxDmg", "extraDmg"]
     },
     {
+        "id": "HeavyWarpFlamer",
+        "text": {
+            "name": "Heavy Warpflamer",
+            "currentLevelDescription": "Deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to an enemy within range {[range]}. Adds <style=\"Stat_Hits\">+1 hit</style> for each attack with <style=\"DMG_Psychic\">Psychic Damage</style> that friendly units have performed this turn. Cannot exceed <style=\"Stat_Hits\">{[maxNrOfHits]} hits</style>. If this attack defeats the target, any leftover hits are scored against enemies adjacent to the target and within range {[range]}, prioritising kills.",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style>."
+        },
+        "attackRangeType": "ranged",
+        "variables": {
+            "minDmg": [
+                27, 32, 38, 43, 49, 55, 61, 67, 73, 80, 86, 92, 98, 104, 111, 117, 123, 129, 136, 142, 150, 162, 186,
+                211, 235, 260, 285, 309, 334, 358, 383, 407, 432, 457, 481, 506, 530, 555, 579, 614, 663, 714, 769, 830,
+                941, 1052, 1163, 1274, 1385, 1496, 1512, 1532, 1553, 1580, 1607, 1634, 1661, 1694, 1728, 1762, 1802,
+                1843, 1883, 1924, 1964
+            ],
+            "maxDmg": [
+                36, 43, 50, 58, 65, 73, 81, 90, 98, 106, 114, 123, 131, 139, 148, 156, 164, 172, 181, 189, 200, 216,
+                248, 281, 314, 347, 379, 412, 445, 478, 510, 543, 576, 609, 642, 674, 707, 740, 773, 819, 883, 951,
+                1025, 1106, 1254, 1402, 1550, 1698, 1846, 1994, 2016, 2043, 2070, 2106, 2142, 2178, 2214, 2259, 2304,
+                2349, 2403, 2457, 2511, 2565, 2619
+            ]
+        },
+        "constants": {
+            "nrOfHits": "4",
+            "damageProfile": "Flame",
+            "range": "2",
+            "damageProfile_2": "Psychic",
+            "maxNrOfHits": "9"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
+    },
+    {
+        "id": "PropheticSentinel",
+        "text": {
+            "name": "Prophetic Sentinel",
+            "currentLevelDescription": "Adjacent friendly <style=\"Aliance_Chaos\">Chaos</style> units have <style=\"Stat_Armor\">+{[extraArmor]} Armour</style>. Adjacent friendly <style=\"Psyker\">Psykers</style> have <style=\"Stat_Chance\">+{[blockChance]}% Block chance</style> and block <style=\"Stat_Block\">+{[blockDmg]} Damage</style>. At the end of its turn, if the <style=\"Faction_ThousandSons\">Sekhetar Robot</style> is adjacent to a friendly Psyker, it starts <style=\"Buff_Overwatching\">Overwatching</style>, even if it attacked during its turn.",
+            "nextLevelDescription": "Adjacent friendly <style=\"Aliance_Chaos\">Chaos</style> units now have <style=\"Stat_Armor\">+{[extraArmor]} Armour</style>. Adjacent friendly <style=\"Psyker\">Psykers</style> now have <style=\"Stat_Chance\">+{[blockChance]}% Block chance</style> and block <style=\"Stat_Block\">+{[blockDmg]} Damage</style>."
+        },
+        "variables": {
+            "extraArmor": [
+                9, 11, 13, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 50, 54, 62, 70, 78, 87,
+                95, 103, 111, 119, 128, 136, 144, 152, 160, 169, 177, 185, 193, 205, 221, 238, 256, 277, 314, 351, 388,
+                425, 462, 499, 504, 511, 518, 527, 536, 545, 554, 565, 576, 587, 601, 614, 628, 641, 655
+            ],
+            "blockChance": [
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 15, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25,
+                25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25, 25
+            ],
+            "blockDmg": [
+                9, 11, 13, 14, 16, 18, 20, 22, 24, 27, 29, 31, 33, 35, 37, 39, 41, 43, 45, 47, 50, 54, 62, 70, 78, 87,
+                95, 103, 111, 119, 128, 136, 144, 152, 160, 169, 177, 185, 193, 205, 221, 238, 256, 277, 314, 351, 388,
+                425, 462, 499, 504, 511, 518, 527, 536, 545, 554, 565, 576, 587, 601, 614, 628, 641, 655
+            ]
+        },
+        "variablesAffectedByRarityBonus": ["extraArmor", "blockDmg"]
+    },
+    {
         "id": "TzeentchsFirestorm",
         "text": {
             "name": "Tzeentch's Firestorm",
@@ -7088,7 +7235,7 @@
         "id": "FearOfTheUnseen",
         "text": {
             "name": "Fear of the Unseen",
-            "currentLevelDescription": "If the <style=\"Faction_Tyranids\">Deathleaper</style> has not moved this turn and is not in <style=\"Teleport_Strike_short\">Deep Strike</style>, all enemies within {[range]} hexes get <style=\"Debuff_Pinned\">Suppressed</style> and trigger <style=\"Battle_Fatigue\">Battle Fatigue</style>, if they have it. The <style=\"Faction_Tyranids\">Deathleaper</style> vanishes and cannot be targeted or damaged for 1 round. In its next turn, its attacks deal an additional <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Direct\">{[minDmg]}-{[maxDmg]} Direct Damage</style> and it can move to any free hex on the battlefield that is either within <style=\"Synapse\">Synapse</style> range, has <style=\"Tile_Grass\">Tall Grass</style> or is not adjacent to an enemy.",
+            "currentLevelDescription": "Can only be used if the <style=\"Faction_Tyranids\">Deathleaper</style> has not moved this turn. All enemies within {[range]} hexes get <style=\"Debuff_Pinned\">Suppressed</style> and trigger <style=\"Battle_Fatigue\">Battle Fatigue</style>, if they have it. The <style=\"Faction_Tyranids\">Deathleaper</style> vanishes and cannot be targeted or damaged for 1 round. In its next turn it can move to any free hex on the battlefield that is either within <style=\"Synapse\">Synapse</style> range, has <style=\"Tile_Grass\">Tall Grass</style> or is not adjacent to an enemy and its attacks deal an additional <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Direct\">{[minDmg]}-{[maxDmg]} Direct Damage</style>.\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} round</style>. ",
             "nextLevelDescription": "Now deals an additional <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Direct\">{[minDmg]}-{[maxDmg]} Direct Damage</style>."
         },
         "variables": {
@@ -7106,7 +7253,8 @@
         "constants": {
             "damageProfile": "DirectDamage",
             "nrOfHits": "3",
-            "range": "2"
+            "range": "2",
+            "initialCooldownTurns": "1"
         },
         "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
     },
@@ -10590,6 +10738,37 @@
         }
     },
     {
+        "id": "EnhancementSummon:Inceptor",
+        "text": {
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
+        },
+        "variables": {
+            "summonHp": [
+                48, 58, 67, 77, 86, 97, 108, 120, 157, 170, 183, 196, 210, 223, 236, 249, 263, 322, 337, 353, 374, 403,
+                464, 525, 586, 647, 809, 879, 949, 1019, 1089, 1159, 1229, 1299, 1369, 1618, 1697, 1776, 1854, 1965,
+                2120, 2284, 2460, 2655, 3010, 3365, 3720, 4075, 4431, 4786, 5376, 5448, 5520, 5616, 5712, 5808, 5904,
+                6024, 6144, 6264, 6408, 6552, 6696, 6840, 6984
+            ],
+            "summonDmg": [
+                8, 10, 11, 13, 14, 16, 18, 20, 26, 28, 31, 33, 35, 37, 39, 42, 44, 54, 56, 59, 62, 67, 77, 87, 98, 108,
+                135, 147, 158, 170, 182, 193, 205, 216, 228, 270, 283, 296, 309, 327, 353, 381, 410, 443, 502, 561, 620,
+                679, 738, 798, 896, 908, 920, 936, 952, 968, 984, 1004, 1024, 1044, 1068, 1092, 1116, 1140, 1164
+            ],
+            "summonArmor": [
+                12, 14, 17, 19, 22, 24, 27, 30, 39, 42, 46, 49, 52, 56, 59, 62, 66, 80, 84, 88, 93, 101, 116, 131, 146,
+                162, 202, 220, 237, 255, 272, 290, 307, 325, 342, 405, 424, 444, 464, 491, 530, 571, 615, 664, 753, 841,
+                930, 1019, 1108, 1196, 1344, 1362, 1380, 1404, 1428, 1452, 1476, 1506, 1536, 1566, 1602, 1638, 1674,
+                1710, 1746
+            ]
+        },
+        "constants": {
+            "nrOfSummons": "1",
+            "unitId": "ultraNpc1Inceptor"
+        }
+    },
+    {
         "id": "EnhancementPierceBoost",
         "text": {
             "name": "",
@@ -11944,6 +12123,21 @@
         }
     },
     {
+        "id": "EnvStatBoost:TraitBoost_TerminatorArmour",
+        "text": {
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
+        },
+        "variables": {},
+        "constants": {
+            "trait": "TerminatorArmour",
+            "dmgPct": "20",
+            "healthPct": "20",
+            "armorPct": "20"
+        }
+    },
+    {
         "id": "EnvStrategicBuff:Killzone",
         "text": {
             "name": "",
@@ -12575,6 +12769,9 @@
         },
         "variables": {
             "extraDmg": [880, 928, 975, 1023, 1070, 1118, 1165, 1213, 1260, 1308]
+        },
+        "constants": {
+            "affectedUnitId": "thousSmnDaemonPrince"
         }
     },
     {
@@ -12926,6 +13123,34 @@
         "variables": {
             "hp": [1765, 1860, 1956, 2051, 2146, 2241, 2337, 2432, 2527, 2622],
             "extraDmg": [490, 516, 543, 569, 596, 622, 649, 675, 702, 728]
+        }
+    },
+    {
+        "id": "PhasalSubjugator",
+        "text": {
+            "name": "Phasal Subjugator",
+            "currentLevelDescription": "After moving, if there is no friendly <style=\"Summon\"><style=\"Faction_Necrons\">Necron Warrior</style></style> on the battlefield, <style=\"Faction_Necrons\">Anuphet</style> summons a Necron Warrior in a free adjacent hex. If Anuphet does not move, this ability triggers at the end of his turn. After <i>My Will Be Done</i> triggers, it triggers a second time, but only a friendly adjacent Necron Warrior that was not affected by it this turn can perform an attack. The Necron Warriors have <style=\"Stat_Health\">{[summonHp]} Health</style>, <style=\"Stat_Damage\">{[summonDmg]} Damage</style> and <style=\"Stat_Armor\">{[summonArmor]} Armour</style>.",
+            "nextLevelDescription": "Necron Warrior stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
+        },
+        "variables": {
+            "summonHp": [5875, 6192, 6509, 6826, 7143, 7461, 7778, 8095, 8412, 8729],
+            "summonDmg": [1960, 2066, 2172, 2277, 2383, 2489, 2595, 2701, 2806, 2912],
+            "summonArmor": [1470, 1549, 1629, 1708, 1787, 1867, 1946, 2025, 2105, 2184]
+        },
+        "constants": {
+            "unitId": "necroSmnWarrior"
+        }
+    },
+    {
+        "id": "Helspear",
+        "text": {
+            "name": "Helspear",
+            "currentLevelDescription": "<i>Herald of the Apocalypse</i> always adds <style=\"Tile_DespoiledGround\">Despoiled Ground</style> to the hexes of affected enemies, and the next attack against affected enemies also ignores <style=\"Stat_Armor\">{[armorIgnored]} Armour</style>. After <i>Herald of the Apocalypse</i> has been used and <style=\"Faction_BlackLegion\">Haarken</style> defeats <style=\"STAT\">{[nrOfUnits]}</style> enemy units, he can use the ability again.",
+            "nextLevelDescription": "Now ignores <style=\"Stat_Armor\">{[armorIgnored]} Armour</style> and after defeating <style=\"STAT\">{[nrOfUnits]}</style> units, the ability can be used again."
+        },
+        "variables": {
+            "armorIgnored": [685, 722, 759, 796, 833, 870, 907, 944, 981, 1018],
+            "nrOfUnits": [8, 8, 7, 7, 6, 6, 5, 5, 4, 4]
         }
     },
     {
@@ -13781,6 +14006,74 @@
         "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
     },
     {
+        "id": "MassDriverAccelerator",
+        "text": {
+            "name": "Mass Driver Accelerator",
+            "currentLevelDescription": "Can only be used if <style=\"Faction_LeaguesOfVotann\">Kîmm</style> has not moved. She and all friendly adjacent units have <style=\"Stat_Movement\">+{[extraMovement]} Movement</style> until the end of this turn. Kîmm then charges a targeted enemy unit within movement range, dealing <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Direct\">{[minDmg]}-{[maxDmg]} Direct Damage</style> to the target and <style=\"Stat_Hits\">{[nrOfHits_2]}x</style> <style=\"DMG_Physical\">{[minDmg_2]}-{[maxDmg_2]} Physical Damage</style> to all enemies adjacent to the target.",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style=\"DMG_Direct\">{[minDmg]}-{[maxDmg]} Direct Damage</style> to the target and <style=\"Stat_Hits\">{[nrOfHits_2]}x</style> <style=\"DMG_Physical\">{[minDmg_2]}-{[maxDmg_2]} Physical Damage</style> to all enemies adjacent to the target."
+        },
+        "attackRangeType": "melee",
+        "variables": {
+            "minDmg": [
+                32, 38, 45, 51, 58, 65, 72, 80, 87, 94, 102, 109, 116, 124, 131, 139, 146, 153, 161, 168, 178, 192, 221,
+                250, 279, 308, 337, 366, 396, 425, 454, 483, 512, 541, 570, 599, 628, 658, 687, 728, 785, 846, 911, 983,
+                1115, 1246, 1378, 1509, 1641, 1773, 1792, 1816, 1840, 1872, 1904, 1936, 1968, 2008, 2048, 2088, 2136,
+                2184, 2232, 2280, 2328
+            ],
+            "maxDmg": [
+                40, 48, 56, 64, 72, 81, 90, 100, 109, 118, 127, 136, 146, 155, 164, 173, 182, 192, 201, 210, 222, 240,
+                276, 312, 349, 385, 422, 458, 494, 531, 567, 604, 640, 676, 713, 749, 786, 822, 858, 910, 982, 1057,
+                1139, 1229, 1394, 1558, 1722, 1887, 2051, 2216, 2240, 2270, 2300, 2340, 2380, 2420, 2460, 2510, 2560,
+                2610, 2670, 2730, 2790, 2850, 2910
+            ],
+            "minDmg_2": [
+                32, 38, 45, 51, 58, 65, 72, 80, 87, 94, 102, 109, 116, 124, 131, 139, 146, 153, 161, 168, 178, 192, 221,
+                250, 279, 308, 337, 366, 396, 425, 454, 483, 512, 541, 570, 599, 628, 658, 687, 728, 785, 846, 911, 983,
+                1115, 1246, 1378, 1509, 1641, 1773, 1792, 1816, 1840, 1872, 1904, 1936, 1968, 2008, 2048, 2088, 2136,
+                2184, 2232, 2280, 2328
+            ],
+            "maxDmg_2": [
+                40, 48, 56, 64, 72, 81, 90, 100, 109, 118, 127, 136, 146, 155, 164, 173, 182, 192, 201, 210, 222, 240,
+                276, 312, 349, 385, 422, 458, 494, 531, 567, 604, 640, 676, 713, 749, 786, 822, 858, 910, 982, 1057,
+                1139, 1229, 1394, 1558, 1722, 1887, 2051, 2216, 2240, 2270, 2300, 2340, 2380, 2420, 2460, 2510, 2560,
+                2610, 2670, 2730, 2790, 2850, 2910
+            ]
+        },
+        "constants": {
+            "extraMovement": "1",
+            "nrOfHits": "1",
+            "damageProfile": "DirectDamage",
+            "nrOfHits_2": "1",
+            "damageProfile_2": "Physical"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg", "minDmg_2", "maxDmg_2"]
+    },
+    {
+        "id": "ModifiedExoarmour",
+        "text": {
+            "name": "Modified Exoarmour",
+            "currentLevelDescription": "Attacks against <style=\"Faction_LeaguesOfVotann\">Kîmm</style> have <style=\"Piercing_Ratio\">-{[extraPierceRatio]}% pierce ratio</style>, except attacks that deal <style=\"DMG_Psychic\">Psychic Damage</style> or <style=\"DMG_Direct\">Direct Damage</style>, to a minimum of 1% Pierce Ratio. Kîmm's melee attacks deal <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> for each hex she traversed this turn.",
+            "nextLevelDescription": "Affected attacks now have <style=\"Piercing_Ratio\">-{[extraPierceRatio]}% pierce ratio</style> and <style=\"Faction_LeaguesOfVotann\">Kîmm</style> now deals <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>."
+        },
+        "variables": {
+            "extraPierceRatio": [
+                10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 10, 15, 15, 15, 15, 15, 15, 15, 15, 15,
+                15, 15, 15, 15, 15, 15, 15, 15, 15, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20,
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20
+            ],
+            "extraDmg": [
+                5, 6, 7, 8, 9, 10, 11, 12, 14, 15, 16, 17, 18, 19, 21, 22, 23, 24, 25, 26, 28, 30, 35, 39, 44, 48, 53,
+                57, 62, 66, 71, 75, 80, 85, 89, 94, 98, 103, 107, 114, 123, 132, 142, 154, 174, 195, 215, 236, 256, 277,
+                280, 284, 288, 293, 298, 303, 308, 314, 320, 326, 334, 341, 349, 356, 364
+            ]
+        },
+        "constants": {
+            "damageProfile": "Psychic",
+            "damageProfile_2": "DirectDamage"
+        },
+        "variablesAffectedByRarityBonus": ["extraDmg"]
+    },
+    {
         "id": "StrikeFromTheShadows",
         "text": {
             "name": "Strike from the Shadows",
@@ -13894,6 +14187,58 @@
             "damageProfile_2": "Energy"
         },
         "variablesAffectedByRarityBonus": ["minDmg", "maxDmg", "minDmg_2", "maxDmg_2"]
+    },
+    {
+        "id": "TitanhammerSquad",
+        "text": {
+            "name": "Titanhammer Squad",
+            "currentLevelDescription": "Marks a free hex on the battlefield that is not adjacent to an enemy unit. <style=\"Faction_AdeptusAstartes\">Lysander</style> and all friendly <style=\"Terminator_Armor\">Terminator Armour</style> units within {[range]} hexes of Lysander are <style=\"Healing\">healed</style> for <style=\"Stat_Health\">{[hpToHeal]} Health</style> and block an additional <style=\"Stat_Block\">+{[blockDmg]} Damage</style> until the beginning of their next turn. If they have not moved in this turn, they can also move on or adjacent to the hex marked by this ability. Using <i>Titanhammer Squad</i> does not end Lysander's turn.\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} round</style>. ",
+            "nextLevelDescription": "Affected units are now <style=\"Healing\">healed</style> for <style=\"Stat_Health\">{[hpToHeal]} Health</style> and block an additional <style=\"Stat_Block\">+{[blockDmg]} Damage</style>."
+        },
+        "variables": {
+            "hpToHeal": [
+                75, 90, 105, 120, 135, 152, 170, 187, 204, 221, 239, 256, 273, 290, 308, 325, 342, 359, 377, 394, 417,
+                449, 518, 586, 654, 722, 791, 859, 927, 995, 1064, 1132, 1200, 1268, 1337, 1405, 1473, 1541, 1610, 1706,
+                1841, 1982, 2135, 2305, 2613, 2921, 3230, 3538, 3846, 4154, 4200, 4256, 4313, 4388, 4463, 4538, 4613,
+                4706, 4800, 4894, 5006, 5119, 5231, 5344, 5456
+            ],
+            "blockDmg": [
+                10, 12, 14, 16, 18, 20, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48, 50, 53, 56, 60, 69, 78, 87, 96,
+                105, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196, 206, 215, 227, 245, 264, 285, 307, 348, 390, 431,
+                472, 513, 554, 560, 568, 575, 585, 595, 605, 615, 628, 640, 653, 668, 683, 698, 713, 728
+            ]
+        },
+        "constants": {
+            "range": "2",
+            "initialCooldownTurns": "1"
+        },
+        "variablesAffectedByRarityBonus": ["hpToHeal", "blockDmg"]
+    },
+    {
+        "id": "IconOfObstinacy",
+        "text": {
+            "name": "Icon of Obstinacy",
+            "currentLevelDescription": "<style=\"Faction_AdeptusAstartes\">Lysander</style> and all friendly adjacent <style=\"Terminator_Armor\">Terminator Armour</style> units deal <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>. When they end their turn without attacking, they also have <style=\"Stat_Armor\">+{[extraArmor]} Armour</style> until the beginning of their next turn. The additional <style=\"Stat_Damage\">Damage</style> and <style=\"Stat_Armor\">Armour</style> are further increased by <style=\"STAT\">{[chance]}%</style> of the affected unit's current <style=\"Stat_Damage\">Block Damage</style> value.",
+            "nextLevelDescription": "Affected units now deal <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>, have <style=\"Stat_Armor\">+{[extraArmor]} Armour</style> and these values are now increased by <style=\"STAT\">{[chance]}%</style> of the affected unit's current <style=\"Stat_Damage\">Block Damage</style> value."
+        },
+        "variables": {
+            "extraDmg": [
+                4, 5, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 15, 16, 17, 18, 19, 20, 21, 22, 24, 28, 31, 35, 39, 42, 46,
+                49, 53, 57, 60, 64, 68, 71, 75, 79, 82, 86, 91, 98, 106, 114, 123, 139, 156, 172, 189, 205, 222, 224,
+                227, 230, 234, 238, 242, 246, 251, 256, 261, 267, 273, 279, 285, 291
+            ],
+            "extraArmor": [
+                4, 5, 6, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 16, 17, 18, 19, 20, 21, 22, 24, 28, 31, 35, 39, 42, 46,
+                49, 53, 57, 60, 64, 68, 71, 75, 79, 82, 86, 91, 98, 106, 114, 123, 139, 156, 172, 189, 205, 222, 224,
+                227, 230, 234, 238, 242, 246, 251, 256, 261, 267, 273, 279, 285, 291
+            ],
+            "chance": [
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 25, 25, 25, 25, 25, 25, 25, 25, 25,
+                25, 25, 25, 25, 25, 25, 25, 25, 25, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+                30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30
+            ]
+        },
+        "variablesAffectedByRarityBonus": ["extraDmg", "extraArmor"]
     },
     {
         "id": "DeathOnTheWind",

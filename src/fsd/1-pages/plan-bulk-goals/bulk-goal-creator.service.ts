@@ -4,10 +4,10 @@ import { IPersonalGoal } from 'src/models/interfaces';
 
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
+import type { GoalCategory, RankStep } from '@/fsd/4-entities/goal';
 import { IUnit } from '@/fsd/4-entities/unit';
 
-export type GoalCategory = 'Unlock' | 'Ascend' | 'Rank' | 'Abilities';
-export type RankStep = { rank: Rank; point5: boolean };
+export type { GoalCategory, RankStep } from '@/fsd/4-entities/goal';
 export type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
 type GoalOrder = 'character' | 'type';
 

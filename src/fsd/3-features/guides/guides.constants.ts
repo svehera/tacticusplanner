@@ -5,6 +5,7 @@ import { IMenuOption } from '@/models/menu-option';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { ICharacter2 } from 'src/models/interfaces';
 
+import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { mows2Data } from '@/fsd/4-entities/mow';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
@@ -22,7 +23,7 @@ import { MephistonLegendaryEvent } from '@/fsd/3-features/lre/model/6-mephiston.
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { PatermineLegendaryEvent } from '@/fsd/3-features/lre/model/7-patermine.le';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { DanteLegendaryEvent } from '@/fsd/3-features/lre/model/8-dante.le';
+import { GenericLegendaryEvent } from '@/fsd/3-features/lre/model/generic.le';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { allModes, gameModesForGuides } from '@/fsd/3-features/teams/teams.constants';
 // eslint-disable-next-line import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
@@ -73,7 +74,7 @@ export const getLre = (character: LreCharacter, characters: ICharacter2[] = []):
             return new PatermineLegendaryEvent(characters);
         }
         case LreCharacter.dante: {
-            return new DanteLegendaryEvent(characters);
+            return new GenericLegendaryEvent(characters, LegendaryEventEnum.Dante);
         }
     }
 };

@@ -1,6 +1,144 @@
 {
     "mows": [
         {
+            "snowprintId": "ultraDreadnought",
+            "name": "Galatian",
+            "faction": "Ultramarines",
+            "alliance": "Imperial",
+            "icon": "snowprint_assets/characters/ui_image_portrait_ultra_dreadnought_01.png",
+            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_dreadnought_01.png",
+            "primaryAbility": {
+                "name": "DutyEternal",
+                "recipes": [
+                    ["upgHpC002", "upgDmgC001", "upgArmC001"],
+                    ["upgHpC014", "upgDmgC012", "upgArmC013"],
+                    ["upgHpC004", "upgHpC002", "upgHpC014"],
+                    ["upgDmgC011", "upgDmgC001", "upgDmgC012"],
+                    ["upgArmC002", "upgArmC001", "upgArmC013"],
+                    ["upgHpC002", "upgHpC014", "upgHpC004"],
+                    ["upgDmgC001", "upgDmgC012", "upgDmgC011"],
+                    ["upgArmC001", "upgArmC013", "upgArmC002"],
+                    ["upgHpC014", "upgHpC004", "upgHpU006"],
+                    ["upgDmgC012", "upgDmgC011", "upgDmgU011"],
+                    ["upgArmC013", "upgArmC002", "upgArmU001"],
+                    ["upgHpC004", "upgHpU014", "upgHpU004C"],
+                    ["upgDmgC011", "upgDmgU009", "upgDmgU001C"],
+                    ["upgArmC002", "upgArmU001", "upgArmU010C"],
+                    ["upgHpU014", "upgHpU006", "upgHpU004C"],
+                    ["upgDmgU009", "upgDmgU011", "upgDmgU015C"],
+                    ["upgArmU009", "upgArmU005", "upgArmU010C"],
+                    ["upgHpU006", "upgHpU014", "upgHpR019"],
+                    ["upgDmgU011", "upgDmgU009", "upgDmgR007"],
+                    ["upgArmU005", "upgArmU001", "upgArmR015"],
+                    ["upgHpU014", "upgHpR019", "upgHpR004C"],
+                    ["upgDmgU009", "upgDmgU005", "upgDmgR001C"],
+                    ["upgArmU009", "upgArmR015", "upgArmR003C"],
+                    ["upgHpR019", "upgHpR005", "upgHpR012C"],
+                    ["upgDmgU005", "upgDmgR006", "upgDmgR004C"],
+                    ["upgArmR015", "upgArmR005", "upgArmR001C"],
+                    ["upgHpR005", "upgDmgR006", "upgHpE003"],
+                    ["upgDmgR006", "upgArmR005", "upgDmgE001"],
+                    ["upgArmR005", "upgHpR018", "upgArmE010"],
+                    ["upgHpR018", "upgHpE003", "upgHpR016C"],
+                    ["upgDmgR006", "upgDmgE001", "upgDmgE007C"],
+                    ["upgArmR005", "upgArmE010", "upgArmE013"],
+                    ["upgHpE003", "upgHpE012", "upgHpE002C"],
+                    ["upgDmgE001", "upgDmgE004", "upgDmgE007C"],
+                    ["upgArmE010", "upgArmE013", "upgArmE004C"],
+                    ["upgHpE003", "upgHpE012", "upgHpL100"],
+                    ["upgDmgE001", "upgDmgE004", "upgDmgL001"],
+                    ["upgArmE010", "upgArmE013", "upgArmL001"],
+                    ["upgHpE012", "upgHpL100", "upgHpL009C"],
+                    ["upgDmgE004", "upgHpL100", "upgDmgL006C"],
+                    ["upgArmE013", "upgHpL100", "upgArmL004C"],
+                    ["upgHpE012", "upgHpL100", "upgHpL001C"],
+                    ["upgDmgE004", "upgHpL100", "upgDmgL007C"],
+                    ["upgArmE013", "upgHpL100", "upgArmL010C"],
+                    ["upgHpL100", "upgDmgL001", "upgHpL120C"],
+                    ["upgDmgL001", "upgArmL001", "upgDmgL004C"],
+                    ["upgArmL001", "upgDmgL001", "upgArmL006C"],
+                    ["upgHpL100", "upgArmL001", "upgHpL017C"],
+                    ["upgDmgL001", "upgHpL100", "upgDmgL012C"],
+                    ["upgArmL001", "upgHpL100", "upgArmL004C"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgHpL100"],
+                    ["upgHpM004", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM001", "upgArmL001", "upgHpL100"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL004C"],
+                    ["upgHpM001", "upgHpL100", "upgArmL004C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL004C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL100", "upgDmgL214C"]
+                ]
+            },
+            "secondaryAbility": {
+                "name": "MacroPlasmaIncinerator",
+                "recipes": [
+                    ["upgHpC002", "upgDmgC013", "upgArmC001"],
+                    ["upgHpC014", "upgDmgC012", "upgArmC013"],
+                    ["upgHpC004", "upgHpC002", "upgHpC014"],
+                    ["upgDmgC011", "upgDmgC013", "upgDmgC012"],
+                    ["upgArmC002", "upgArmC001", "upgArmC013"],
+                    ["upgHpC002", "upgHpC014", "upgHpC004"],
+                    ["upgDmgC013", "upgDmgC012", "upgDmgC011"],
+                    ["upgArmC001", "upgArmC013", "upgArmC002"],
+                    ["upgHpC014", "upgHpC004", "upgHpU006"],
+                    ["upgDmgC012", "upgDmgC011", "upgDmgU011"],
+                    ["upgArmC013", "upgArmC002", "upgArmU001"],
+                    ["upgHpC004", "upgHpU014", "upgHpU004C"],
+                    ["upgDmgC011", "upgDmgU009", "upgDmgU018C"],
+                    ["upgArmC002", "upgArmU001", "upgArmU010C"],
+                    ["upgHpU014", "upgHpU006", "upgHpU004C"],
+                    ["upgDmgU009", "upgDmgU011", "upgDmgU015C"],
+                    ["upgArmU009", "upgArmU005", "upgArmU010C"],
+                    ["upgHpU006", "upgHpU014", "upgHpR019"],
+                    ["upgDmgU011", "upgDmgU009", "upgDmgR007"],
+                    ["upgArmU005", "upgArmU001", "upgArmR015"],
+                    ["upgHpU014", "upgHpR019", "upgHpR004C"],
+                    ["upgDmgU009", "upgDmgU005", "upgDmgR13C"],
+                    ["upgArmU009", "upgArmR015", "upgArmR003C"],
+                    ["upgHpR019", "upgHpR005", "upgHpR012C"],
+                    ["upgDmgU005", "upgDmgR006", "upgDmgR004C"],
+                    ["upgArmR015", "upgArmR005", "upgArmR001C"],
+                    ["upgHpR005", "upgDmgR006", "upgHpE003"],
+                    ["upgDmgR006", "upgArmR005", "upgDmgE001"],
+                    ["upgArmR005", "upgHpR018", "upgArmE010"],
+                    ["upgHpR018", "upgHpE003", "upgHpR016C"],
+                    ["upgDmgR006", "upgDmgE001", "upgDmgE007C"],
+                    ["upgArmR005", "upgArmE010", "upgArmE013"],
+                    ["upgHpE003", "upgHpE012", "upgHpE001C"],
+                    ["upgDmgE001", "upgDmgE004", "upgDmgE007C"],
+                    ["upgArmE010", "upgArmE013", "upgArmE001C"],
+                    ["upgHpE003", "upgHpE012", "upgHpL100"],
+                    ["upgDmgE001", "upgDmgE004", "upgDmgL001"],
+                    ["upgArmE010", "upgArmE013", "upgArmL001"],
+                    ["upgHpE012", "upgHpL100", "upgHpL120C"],
+                    ["upgDmgE004", "upgHpL100", "upgDmgL004C"],
+                    ["upgArmE013", "upgHpL100", "upgArmL006C"],
+                    ["upgHpE012", "upgHpL100", "upgHpL002C"],
+                    ["upgDmgE004", "upgHpL100", "upgDmgL015C"],
+                    ["upgArmE013", "upgHpL100", "upgArmL004C"],
+                    ["upgHpL100", "upgDmgL001", "upgHpL120C"],
+                    ["upgDmgL001", "upgArmL001", "upgDmgL120C"],
+                    ["upgArmL001", "upgDmgL001", "upgArmL120C"],
+                    ["upgHpL100", "upgArmL001", "upgHpL214C"],
+                    ["upgDmgL001", "upgHpL100", "upgDmgL214C"],
+                    ["upgArmL001", "upgHpL100", "upgArmL214C"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgHpL100"],
+                    ["upgHpM004", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM001", "upgArmL001", "upgHpL100"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL012C"],
+                    ["upgHpM001", "upgHpL100", "upgDmgL012C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL004C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL100", "upgDmgL214C"]
+                ]
+            }
+        },
+        {
             "snowprintId": "adeptExorcist",
             "name": "Exorcist",
             "faction": "Sisterhood",
@@ -135,6 +273,144 @@
                     ["upgHpM003", "upgDmgL001", "upgDmgL022C"],
                     ["upgHpM001", "upgArmL001", "upgHpL214C"],
                     ["upgHpM003", "upgHpL102", "upgDmgL214C"]
+                ]
+            }
+        },
+        {
+            "snowprintId": "necroReanimator",
+            "name": "Reanimator",
+            "faction": "Necrons",
+            "alliance": "Xenos",
+            "icon": "snowprint_assets/characters/ui_image_portrait_necro_reanimator_01.png",
+            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_reanimator_01.png",
+            "primaryAbility": {
+                "name": "ReanimationBeam",
+                "recipes": [
+                    ["upgHpC009", "upgDmgC007", "upgArmC005"],
+                    ["upgHpC014", "upgDmgC010", "upgArmC012"],
+                    ["upgHpC002", "upgHpC009", "upgHpC014"],
+                    ["upgDmgC015", "upgDmgC007", "upgDmgC010"],
+                    ["upgArmC012", "upgArmC005", "upgArmC011"],
+                    ["upgHpC009", "upgHpC014", "upgHpC002"],
+                    ["upgDmgC007", "upgDmgC010", "upgDmgC015"],
+                    ["upgArmC005", "upgArmC011", "upgArmC012"],
+                    ["upgHpC014", "upgHpC002", "upgHpU007"],
+                    ["upgDmgC010", "upgDmgC015", "upgDmgU004"],
+                    ["upgArmC011", "upgArmC012", "upgArmU006"],
+                    ["upgHpC002", "upgHpU014", "upgHpU010C"],
+                    ["upgDmgC015", "upgDmgU010", "upgDmgU007C"],
+                    ["upgArmC012", "upgArmU006", "upgArmU004C"],
+                    ["upgHpU014", "upgHpU007", "upgHpU010C"],
+                    ["upgDmgU010", "upgDmgU004", "upgDmgU017C"],
+                    ["upgArmU014", "upgArmU002", "upgArmU004C"],
+                    ["upgHpU007", "upgHpU014", "upgHpR011"],
+                    ["upgDmgU004", "upgDmgU010", "upgDmgR009"],
+                    ["upgArmU002", "upgArmU006", "upgArmR030"],
+                    ["upgHpU014", "upgHpR011", "upgHpR009C"],
+                    ["upgDmgU010", "upgDmgR009", "upgDmgR008C"],
+                    ["upgArmU014", "upgArmR030", "upgArmR008C"],
+                    ["upgHpR011", "upgHpR014", "upgHpR012C"],
+                    ["upgDmgR009", "upgDmgR006", "upgDmgR010C"],
+                    ["upgArmR030", "upgArmR010", "upgArmR002C"],
+                    ["upgHpR014", "upgDmgR006", "upgHpE017"],
+                    ["upgDmgR006", "upgArmR010", "upgDmgE004"],
+                    ["upgArmR006", "upgHpR014", "upgArmE010"],
+                    ["upgHpR014", "upgDmgE004", "upgHpE009C"],
+                    ["upgDmgR006", "upgArmE008", "upgDmgE030C"],
+                    ["upgArmR006", "upgHpE017", "upgArmE030C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpE004C"],
+                    ["upgDmgE004", "upgArmE008", "upgDmgE006C"],
+                    ["upgArmE010", "upgHpE015", "upgArmE003C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpL010"],
+                    ["upgDmgE004", "upgArmE008", "upgDmgL204"],
+                    ["upgArmE010", "upgHpE015", "upgArmL203"],
+                    ["upgHpE015", "upgHpL010", "upgHpL008C"],
+                    ["upgDmgE004", "upgHpL010", "upgDmgL030C"],
+                    ["upgArmE010", "upgHpL010", "upgArmL030C"],
+                    ["upgHpE015", "upgHpL010", "upgHpL014C"],
+                    ["upgDmgE004", "upgHpL010", "upgDmgL017C"],
+                    ["upgArmE008", "upgHpL010", "upgArmL008C"],
+                    ["upgHpL010", "upgDmgL204", "upgHpL007C"],
+                    ["upgDmgL204", "upgArmL203", "upgDmgL130C"],
+                    ["upgArmL203", "upgDmgL204", "upgArmL130C"],
+                    ["upgHpL010", "upgArmL203", "upgHpL017C"],
+                    ["upgDmgL204", "upgHpL010", "upgDmgL005C"],
+                    ["upgArmL203", "upgHpL010", "upgArmL008C"],
+                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
+                    ["upgHpM003", "upgArmL203", "upgHpL010"],
+                    ["upgHpM003", "upgDmgL204", "upgHpL010"],
+                    ["upgHpM004", "upgArmL203", "upgHpL010"],
+                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
+                    ["upgHpM003", "upgArmL203", "upgDmgL030C"],
+                    ["upgHpM004", "upgHpL010", "upgArmL030C"],
+                    ["upgHpM003", "upgDmgL204", "upgDmgL030C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM003", "upgHpL010", "upgDmgL214C"]
+                ]
+            },
+            "secondaryAbility": {
+                "name": "NanoscarabRepairProtocols",
+                "recipes": [
+                    ["upgHpC009", "upgDmgC007", "upgArmC005"],
+                    ["upgHpC014", "upgDmgC010", "upgArmC012"],
+                    ["upgHpC002", "upgHpC009", "upgHpC014"],
+                    ["upgDmgC015", "upgDmgC007", "upgDmgC010"],
+                    ["upgArmC012", "upgArmC005", "upgArmC011"],
+                    ["upgHpC009", "upgHpC014", "upgHpC002"],
+                    ["upgDmgC007", "upgDmgC010", "upgDmgC015"],
+                    ["upgArmC005", "upgArmC011", "upgArmC012"],
+                    ["upgHpC014", "upgHpC002", "upgHpU007"],
+                    ["upgDmgC010", "upgDmgC015", "upgDmgU004"],
+                    ["upgArmC011", "upgArmC012", "upgArmU006"],
+                    ["upgHpC002", "upgHpU014", "upgHpU010C"],
+                    ["upgDmgC015", "upgDmgU010", "upgDmgU007C"],
+                    ["upgArmC012", "upgArmU006", "upgArmU004C"],
+                    ["upgHpU014", "upgHpU007", "upgHpU010C"],
+                    ["upgDmgU010", "upgDmgU004", "upgDmgU017C"],
+                    ["upgArmU014", "upgArmU002", "upgArmU004C"],
+                    ["upgHpU007", "upgHpU014", "upgHpR011"],
+                    ["upgDmgU004", "upgDmgU010", "upgDmgR009"],
+                    ["upgArmU002", "upgArmU006", "upgArmR030"],
+                    ["upgHpU014", "upgHpR011", "upgHpR009C"],
+                    ["upgDmgU010", "upgDmgR009", "upgDmgR008C"],
+                    ["upgArmU014", "upgArmR030", "upgArmR008C"],
+                    ["upgHpR011", "upgHpR014", "upgHpR012C"],
+                    ["upgDmgR009", "upgDmgR006", "upgDmgR010C"],
+                    ["upgArmR030", "upgArmR010", "upgArmR002C"],
+                    ["upgHpR014", "upgDmgR006", "upgHpE017"],
+                    ["upgDmgR006", "upgArmR010", "upgDmgE004"],
+                    ["upgArmR006", "upgHpR014", "upgArmE010"],
+                    ["upgHpR014", "upgDmgE004", "upgHpE009C"],
+                    ["upgDmgR006", "upgArmE008", "upgDmgE030C"],
+                    ["upgArmR006", "upgHpE017", "upgArmE030C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpE004C"],
+                    ["upgDmgE004", "upgArmE008", "upgDmgE006C"],
+                    ["upgArmE010", "upgHpE015", "upgArmE003C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpL010"],
+                    ["upgDmgE004", "upgArmE008", "upgDmgL204"],
+                    ["upgArmE010", "upgHpE015", "upgArmL203"],
+                    ["upgHpE015", "upgHpL010", "upgHpL008C"],
+                    ["upgDmgE004", "upgHpL010", "upgDmgL030C"],
+                    ["upgArmE010", "upgHpL010", "upgArmL030C"],
+                    ["upgHpE015", "upgHpL010", "upgHpL014C"],
+                    ["upgDmgE004", "upgHpL010", "upgDmgL017C"],
+                    ["upgArmE008", "upgHpL010", "upgArmL008C"],
+                    ["upgHpL010", "upgDmgL204", "upgHpL007C"],
+                    ["upgDmgL204", "upgArmL203", "upgDmgL130C"],
+                    ["upgArmL203", "upgDmgL204", "upgArmL130C"],
+                    ["upgHpL010", "upgArmL203", "upgHpL214C"],
+                    ["upgDmgL204", "upgHpL010", "upgDmgL214C"],
+                    ["upgArmL203", "upgHpL010", "upgArmL214C"],
+                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
+                    ["upgHpM003", "upgArmL203", "upgHpL010"],
+                    ["upgHpM003", "upgDmgL204", "upgHpL010"],
+                    ["upgHpM004", "upgArmL203", "upgHpL010"],
+                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
+                    ["upgHpM003", "upgArmL203", "upgArmL030C"],
+                    ["upgHpM004", "upgHpL010", "upgArmL030C"],
+                    ["upgHpM003", "upgDmgL204", "upgDmgL030C"],
+                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
+                    ["upgHpM003", "upgHpL010", "upgDmgL214C"]
                 ]
             }
         },
@@ -415,144 +691,6 @@
             }
         },
         {
-            "snowprintId": "darkaStormSpeeder",
-            "name": "Storm Speeder",
-            "faction": "DarkAngels",
-            "alliance": "Imperial",
-            "icon": "snowprint_assets/characters/ui_image_portrait_darka_stormspeeder_01.png",
-            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_stormspeeder_01.png",
-            "primaryAbility": {
-                "name": "DeathOnTheWind",
-                "recipes": [
-                    ["upgHpC015", "upgDmgC001", "upgArmC002"],
-                    ["upgHpC014", "upgDmgC009", "upgArmC013"],
-                    ["upgHpC004", "upgHpC015", "upgHpC014"],
-                    ["upgDmgC011", "upgDmgC001", "upgDmgC009"],
-                    ["upgArmC013", "upgArmC002", "upgArmC001"],
-                    ["upgHpC015", "upgHpC014", "upgHpC004"],
-                    ["upgDmgC001", "upgDmgC009", "upgDmgC011"],
-                    ["upgArmC002", "upgArmC001", "upgArmC013"],
-                    ["upgHpC014", "upgHpC004", "upgHpU006"],
-                    ["upgDmgC009", "upgDmgC011", "upgDmgU011"],
-                    ["upgArmC001", "upgArmC013", "upgArmU005"],
-                    ["upgHpC004", "upgHpU014", "upgHpU018C"],
-                    ["upgDmgC011", "upgDmgU012", "upgDmgU001C"],
-                    ["upgArmC013", "upgArmU005", "upgArmU010C"],
-                    ["upgHpU014", "upgHpU006", "upgHpU018C"],
-                    ["upgDmgU012", "upgDmgU011", "upgDmgU015C"],
-                    ["upgArmU001", "upgArmU009", "upgArmU010C"],
-                    ["upgHpU006", "upgHpU014", "upgHpR032"],
-                    ["upgDmgU011", "upgDmgU012", "upgDmgR032"],
-                    ["upgArmU009", "upgArmU005", "upgArmR032"],
-                    ["upgHpU014", "upgHpR032", "upgHpR013C"],
-                    ["upgDmgU012", "upgDmgR032", "upgDmgR001C"],
-                    ["upgArmU001", "upgArmR032", "upgArmR012C"],
-                    ["upgHpR032", "upgHpR005", "upgHpR012C"],
-                    ["upgDmgR032", "upgDmgR005", "upgDmgR011C"],
-                    ["upgArmR032", "upgArmR015", "upgArmR003C"],
-                    ["upgHpR005", "upgDmgR005", "upgHpE017"],
-                    ["upgDmgR005", "upgArmR015", "upgDmgE001"],
-                    ["upgArmR005", "upgHpR018", "upgArmE010"],
-                    ["upgHpR018", "upgDmgE001", "upgHpE032C"],
-                    ["upgDmgR005", "upgArmE013", "upgDmgE032C"],
-                    ["upgArmR005", "upgHpE017", "upgArmE032C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpE007C"],
-                    ["upgDmgE001", "upgArmE013", "upgDmgE008C"],
-                    ["upgArmE010", "upgHpE017", "upgArmE004C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpL112"],
-                    ["upgDmgE001", "upgArmE013", "upgDmgL001"],
-                    ["upgArmE010", "upgHpE017", "upgArmL001"],
-                    ["upgHpE017", "upgHpL112", "upgHpL032C"],
-                    ["upgDmgE004", "upgHpL112", "upgDmgL032C"],
-                    ["upgArmE010", "upgHpL112", "upgArmL032C"],
-                    ["upgHpE017", "upgHpL112", "upgHpL002C"],
-                    ["upgDmgE004", "upgHpL112", "upgDmgL015C"],
-                    ["upgArmE013", "upgHpL112", "upgArmL006C"],
-                    ["upgHpL112", "upgDmgL001", "upgHpL132C"],
-                    ["upgDmgL001", "upgArmL001", "upgDmgL132C"],
-                    ["upgArmL001", "upgDmgL001", "upgArmL132C"],
-                    ["upgHpL112", "upgArmL001", "upgHpL017C"],
-                    ["upgDmgL001", "upgHpL112", "upgDmgL006C"],
-                    ["upgArmL001", "upgHpL112", "upgArmL006C"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
-                    ["upgHpM004", "upgArmL001", "upgHpL112"],
-                    ["upgHpM004", "upgDmgL001", "upgHpL112"],
-                    ["upgHpM001", "upgArmL001", "upgHpL112"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
-                    ["upgHpM004", "upgArmL001", "upgDmgL032C"],
-                    ["upgHpM001", "upgHpL112", "upgArmL032C"],
-                    ["upgHpM004", "upgDmgL001", "upgDmgL032C"],
-                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
-                    ["upgHpM004", "upgHpL112", "upgDmgL214C"]
-                ]
-            },
-            "secondaryAbility": {
-                "name": "Hailstrike",
-                "recipes": [
-                    ["upgHpC015", "upgDmgC001", "upgArmC002"],
-                    ["upgHpC014", "upgDmgC009", "upgArmC013"],
-                    ["upgHpC004", "upgHpC015", "upgHpC014"],
-                    ["upgDmgC011", "upgDmgC001", "upgDmgC009"],
-                    ["upgArmC013", "upgArmC002", "upgArmC001"],
-                    ["upgHpC015", "upgHpC014", "upgHpC004"],
-                    ["upgDmgC001", "upgDmgC009", "upgDmgC011"],
-                    ["upgArmC002", "upgArmC001", "upgArmC013"],
-                    ["upgHpC014", "upgHpC004", "upgHpU006"],
-                    ["upgDmgC009", "upgDmgC011", "upgDmgU011"],
-                    ["upgArmC001", "upgArmC013", "upgArmU005"],
-                    ["upgHpC004", "upgHpU014", "upgHpU018C"],
-                    ["upgDmgC011", "upgDmgU012", "upgDmgU001C"],
-                    ["upgArmC013", "upgArmU005", "upgArmU010C"],
-                    ["upgHpU014", "upgHpU006", "upgHpU018C"],
-                    ["upgDmgU012", "upgDmgU011", "upgDmgU015C"],
-                    ["upgArmU001", "upgArmU009", "upgArmU010C"],
-                    ["upgHpU006", "upgHpU014", "upgHpR032"],
-                    ["upgDmgU011", "upgDmgU012", "upgDmgR032"],
-                    ["upgArmU009", "upgArmU005", "upgArmR032"],
-                    ["upgHpU014", "upgHpR032", "upgHpR013C"],
-                    ["upgDmgU012", "upgDmgR032", "upgDmgR001C"],
-                    ["upgArmU001", "upgArmR032", "upgArmR012C"],
-                    ["upgHpR032", "upgHpR005", "upgHpR012C"],
-                    ["upgDmgR032", "upgDmgR005", "upgDmgR011C"],
-                    ["upgArmR032", "upgArmR015", "upgArmR003C"],
-                    ["upgHpR005", "upgDmgR005", "upgHpE017"],
-                    ["upgDmgR005", "upgArmR015", "upgDmgE001"],
-                    ["upgArmR005", "upgHpR018", "upgArmE010"],
-                    ["upgHpR018", "upgDmgE001", "upgHpE032C"],
-                    ["upgDmgR005", "upgArmE013", "upgDmgE032C"],
-                    ["upgArmR005", "upgHpE017", "upgArmE032C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpE007C"],
-                    ["upgDmgE001", "upgArmE013", "upgDmgE008C"],
-                    ["upgArmE010", "upgHpE017", "upgArmE004C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpL112"],
-                    ["upgDmgE001", "upgArmE013", "upgDmgL001"],
-                    ["upgArmE010", "upgHpE017", "upgArmL001"],
-                    ["upgHpE017", "upgHpL112", "upgHpL032C"],
-                    ["upgDmgE004", "upgHpL112", "upgDmgL032C"],
-                    ["upgArmE010", "upgHpL112", "upgArmL032C"],
-                    ["upgHpE017", "upgHpL112", "upgHpL002C"],
-                    ["upgDmgE004", "upgHpL112", "upgDmgL015C"],
-                    ["upgArmE013", "upgHpL112", "upgArmL006C"],
-                    ["upgHpL112", "upgDmgL001", "upgHpL132C"],
-                    ["upgDmgL001", "upgArmL001", "upgDmgL132C"],
-                    ["upgArmL001", "upgDmgL001", "upgArmL132C"],
-                    ["upgHpL112", "upgArmL001", "upgHpL214C"],
-                    ["upgDmgL001", "upgHpL112", "upgDmgL214C"],
-                    ["upgArmL001", "upgHpL112", "upgArmL214C"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
-                    ["upgHpM004", "upgArmL001", "upgHpL112"],
-                    ["upgHpM004", "upgDmgL001", "upgHpL112"],
-                    ["upgHpM001", "upgArmL001", "upgHpL112"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
-                    ["upgHpM004", "upgArmL001", "upgArmL032C"],
-                    ["upgHpM001", "upgHpL112", "upgArmL032C"],
-                    ["upgHpM004", "upgDmgL001", "upgDmgL032C"],
-                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
-                    ["upgHpM004", "upgHpL112", "upgDmgL214C"]
-                ]
-            }
-        },
-        {
             "snowprintId": "deathCrawler",
             "name": "Plagueburst Crawler",
             "faction": "DeathGuard",
@@ -687,144 +825,6 @@
                     ["upgHpM002", "upgDmgL202", "upgDmgL024C"],
                     ["upgHpM004", "upgArmL203", "upgHpL214C"],
                     ["upgHpM002", "upgHpL104", "upgDmgL214C"]
-                ]
-            }
-        },
-        {
-            "snowprintId": "necroReanimator",
-            "name": "Reanimator",
-            "faction": "Necrons",
-            "alliance": "Xenos",
-            "icon": "snowprint_assets/characters/ui_image_portrait_necro_reanimator_01.png",
-            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_reanimator_01.png",
-            "primaryAbility": {
-                "name": "ReanimationBeam",
-                "recipes": [
-                    ["upgHpC009", "upgDmgC007", "upgArmC005"],
-                    ["upgHpC014", "upgDmgC010", "upgArmC012"],
-                    ["upgHpC002", "upgHpC009", "upgHpC014"],
-                    ["upgDmgC015", "upgDmgC007", "upgDmgC010"],
-                    ["upgArmC012", "upgArmC005", "upgArmC011"],
-                    ["upgHpC009", "upgHpC014", "upgHpC002"],
-                    ["upgDmgC007", "upgDmgC010", "upgDmgC015"],
-                    ["upgArmC005", "upgArmC011", "upgArmC012"],
-                    ["upgHpC014", "upgHpC002", "upgHpU007"],
-                    ["upgDmgC010", "upgDmgC015", "upgDmgU004"],
-                    ["upgArmC011", "upgArmC012", "upgArmU006"],
-                    ["upgHpC002", "upgHpU014", "upgHpU010C"],
-                    ["upgDmgC015", "upgDmgU010", "upgDmgU007C"],
-                    ["upgArmC012", "upgArmU006", "upgArmU004C"],
-                    ["upgHpU014", "upgHpU007", "upgHpU010C"],
-                    ["upgDmgU010", "upgDmgU004", "upgDmgU017C"],
-                    ["upgArmU014", "upgArmU002", "upgArmU004C"],
-                    ["upgHpU007", "upgHpU014", "upgHpR011"],
-                    ["upgDmgU004", "upgDmgU010", "upgDmgR009"],
-                    ["upgArmU002", "upgArmU006", "upgArmR030"],
-                    ["upgHpU014", "upgHpR011", "upgHpR009C"],
-                    ["upgDmgU010", "upgDmgR009", "upgDmgR008C"],
-                    ["upgArmU014", "upgArmR030", "upgArmR008C"],
-                    ["upgHpR011", "upgHpR014", "upgHpR012C"],
-                    ["upgDmgR009", "upgDmgR006", "upgDmgR010C"],
-                    ["upgArmR030", "upgArmR010", "upgArmR002C"],
-                    ["upgHpR014", "upgDmgR006", "upgHpE017"],
-                    ["upgDmgR006", "upgArmR010", "upgDmgE004"],
-                    ["upgArmR006", "upgHpR014", "upgArmE010"],
-                    ["upgHpR014", "upgDmgE004", "upgHpE009C"],
-                    ["upgDmgR006", "upgArmE008", "upgDmgE030C"],
-                    ["upgArmR006", "upgHpE017", "upgArmE030C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpE004C"],
-                    ["upgDmgE004", "upgArmE008", "upgDmgE006C"],
-                    ["upgArmE010", "upgHpE015", "upgArmE003C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpL010"],
-                    ["upgDmgE004", "upgArmE008", "upgDmgL204"],
-                    ["upgArmE010", "upgHpE015", "upgArmL203"],
-                    ["upgHpE015", "upgHpL010", "upgHpL008C"],
-                    ["upgDmgE004", "upgHpL010", "upgDmgL030C"],
-                    ["upgArmE010", "upgHpL010", "upgArmL030C"],
-                    ["upgHpE015", "upgHpL010", "upgHpL014C"],
-                    ["upgDmgE004", "upgHpL010", "upgDmgL017C"],
-                    ["upgArmE008", "upgHpL010", "upgArmL008C"],
-                    ["upgHpL010", "upgDmgL204", "upgHpL007C"],
-                    ["upgDmgL204", "upgArmL203", "upgDmgL130C"],
-                    ["upgArmL203", "upgDmgL204", "upgArmL130C"],
-                    ["upgHpL010", "upgArmL203", "upgHpL017C"],
-                    ["upgDmgL204", "upgHpL010", "upgDmgL005C"],
-                    ["upgArmL203", "upgHpL010", "upgArmL008C"],
-                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
-                    ["upgHpM003", "upgArmL203", "upgHpL010"],
-                    ["upgHpM003", "upgDmgL204", "upgHpL010"],
-                    ["upgHpM004", "upgArmL203", "upgHpL010"],
-                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
-                    ["upgHpM003", "upgArmL203", "upgDmgL030C"],
-                    ["upgHpM004", "upgHpL010", "upgArmL030C"],
-                    ["upgHpM003", "upgDmgL204", "upgDmgL030C"],
-                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
-                    ["upgHpM003", "upgHpL010", "upgDmgL214C"]
-                ]
-            },
-            "secondaryAbility": {
-                "name": "NanoscarabRepairProtocols",
-                "recipes": [
-                    ["upgHpC009", "upgDmgC007", "upgArmC005"],
-                    ["upgHpC014", "upgDmgC010", "upgArmC012"],
-                    ["upgHpC002", "upgHpC009", "upgHpC014"],
-                    ["upgDmgC015", "upgDmgC007", "upgDmgC010"],
-                    ["upgArmC012", "upgArmC005", "upgArmC011"],
-                    ["upgHpC009", "upgHpC014", "upgHpC002"],
-                    ["upgDmgC007", "upgDmgC010", "upgDmgC015"],
-                    ["upgArmC005", "upgArmC011", "upgArmC012"],
-                    ["upgHpC014", "upgHpC002", "upgHpU007"],
-                    ["upgDmgC010", "upgDmgC015", "upgDmgU004"],
-                    ["upgArmC011", "upgArmC012", "upgArmU006"],
-                    ["upgHpC002", "upgHpU014", "upgHpU010C"],
-                    ["upgDmgC015", "upgDmgU010", "upgDmgU007C"],
-                    ["upgArmC012", "upgArmU006", "upgArmU004C"],
-                    ["upgHpU014", "upgHpU007", "upgHpU010C"],
-                    ["upgDmgU010", "upgDmgU004", "upgDmgU017C"],
-                    ["upgArmU014", "upgArmU002", "upgArmU004C"],
-                    ["upgHpU007", "upgHpU014", "upgHpR011"],
-                    ["upgDmgU004", "upgDmgU010", "upgDmgR009"],
-                    ["upgArmU002", "upgArmU006", "upgArmR030"],
-                    ["upgHpU014", "upgHpR011", "upgHpR009C"],
-                    ["upgDmgU010", "upgDmgR009", "upgDmgR008C"],
-                    ["upgArmU014", "upgArmR030", "upgArmR008C"],
-                    ["upgHpR011", "upgHpR014", "upgHpR012C"],
-                    ["upgDmgR009", "upgDmgR006", "upgDmgR010C"],
-                    ["upgArmR030", "upgArmR010", "upgArmR002C"],
-                    ["upgHpR014", "upgDmgR006", "upgHpE017"],
-                    ["upgDmgR006", "upgArmR010", "upgDmgE004"],
-                    ["upgArmR006", "upgHpR014", "upgArmE010"],
-                    ["upgHpR014", "upgDmgE004", "upgHpE009C"],
-                    ["upgDmgR006", "upgArmE008", "upgDmgE030C"],
-                    ["upgArmR006", "upgHpE017", "upgArmE030C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpE004C"],
-                    ["upgDmgE004", "upgArmE008", "upgDmgE006C"],
-                    ["upgArmE010", "upgHpE015", "upgArmE003C"],
-                    ["upgHpE017", "upgDmgE004", "upgHpL010"],
-                    ["upgDmgE004", "upgArmE008", "upgDmgL204"],
-                    ["upgArmE010", "upgHpE015", "upgArmL203"],
-                    ["upgHpE015", "upgHpL010", "upgHpL008C"],
-                    ["upgDmgE004", "upgHpL010", "upgDmgL030C"],
-                    ["upgArmE010", "upgHpL010", "upgArmL030C"],
-                    ["upgHpE015", "upgHpL010", "upgHpL014C"],
-                    ["upgDmgE004", "upgHpL010", "upgDmgL017C"],
-                    ["upgArmE008", "upgHpL010", "upgArmL008C"],
-                    ["upgHpL010", "upgDmgL204", "upgHpL007C"],
-                    ["upgDmgL204", "upgArmL203", "upgDmgL130C"],
-                    ["upgArmL203", "upgDmgL204", "upgArmL130C"],
-                    ["upgHpL010", "upgArmL203", "upgHpL214C"],
-                    ["upgDmgL204", "upgHpL010", "upgDmgL214C"],
-                    ["upgArmL203", "upgHpL010", "upgArmL214C"],
-                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
-                    ["upgHpM003", "upgArmL203", "upgHpL010"],
-                    ["upgHpM003", "upgDmgL204", "upgHpL010"],
-                    ["upgHpM004", "upgArmL203", "upgHpL010"],
-                    ["upgHpM004", "upgDmgL204", "upgHpL010"],
-                    ["upgHpM003", "upgArmL203", "upgArmL030C"],
-                    ["upgHpM004", "upgHpL010", "upgArmL030C"],
-                    ["upgHpM003", "upgDmgL204", "upgDmgL030C"],
-                    ["upgHpM004", "upgArmL203", "upgHpL214C"],
-                    ["upgHpM003", "upgHpL010", "upgDmgL214C"]
                 ]
             }
         },
@@ -1243,6 +1243,144 @@
             }
         },
         {
+            "snowprintId": "darkaStormSpeeder",
+            "name": "Storm Speeder",
+            "faction": "DarkAngels",
+            "alliance": "Imperial",
+            "icon": "snowprint_assets/characters/ui_image_portrait_darka_stormspeeder_01.png",
+            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_stormspeeder_01.png",
+            "primaryAbility": {
+                "name": "DeathOnTheWind",
+                "recipes": [
+                    ["upgHpC015", "upgDmgC001", "upgArmC002"],
+                    ["upgHpC014", "upgDmgC009", "upgArmC013"],
+                    ["upgHpC004", "upgHpC015", "upgHpC014"],
+                    ["upgDmgC011", "upgDmgC001", "upgDmgC009"],
+                    ["upgArmC013", "upgArmC002", "upgArmC001"],
+                    ["upgHpC015", "upgHpC014", "upgHpC004"],
+                    ["upgDmgC001", "upgDmgC009", "upgDmgC011"],
+                    ["upgArmC002", "upgArmC001", "upgArmC013"],
+                    ["upgHpC014", "upgHpC004", "upgHpU006"],
+                    ["upgDmgC009", "upgDmgC011", "upgDmgU011"],
+                    ["upgArmC001", "upgArmC013", "upgArmU005"],
+                    ["upgHpC004", "upgHpU014", "upgHpU018C"],
+                    ["upgDmgC011", "upgDmgU012", "upgDmgU001C"],
+                    ["upgArmC013", "upgArmU005", "upgArmU010C"],
+                    ["upgHpU014", "upgHpU006", "upgHpU018C"],
+                    ["upgDmgU012", "upgDmgU011", "upgDmgU015C"],
+                    ["upgArmU001", "upgArmU009", "upgArmU010C"],
+                    ["upgHpU006", "upgHpU014", "upgHpR032"],
+                    ["upgDmgU011", "upgDmgU012", "upgDmgR032"],
+                    ["upgArmU009", "upgArmU005", "upgArmR032"],
+                    ["upgHpU014", "upgHpR032", "upgHpR013C"],
+                    ["upgDmgU012", "upgDmgR032", "upgDmgR001C"],
+                    ["upgArmU001", "upgArmR032", "upgArmR012C"],
+                    ["upgHpR032", "upgHpR005", "upgHpR012C"],
+                    ["upgDmgR032", "upgDmgR005", "upgDmgR011C"],
+                    ["upgArmR032", "upgArmR015", "upgArmR003C"],
+                    ["upgHpR005", "upgDmgR005", "upgHpE017"],
+                    ["upgDmgR005", "upgArmR015", "upgDmgE001"],
+                    ["upgArmR005", "upgHpR018", "upgArmE010"],
+                    ["upgHpR018", "upgDmgE001", "upgHpE032C"],
+                    ["upgDmgR005", "upgArmE013", "upgDmgE032C"],
+                    ["upgArmR005", "upgHpE017", "upgArmE032C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpE007C"],
+                    ["upgDmgE001", "upgArmE013", "upgDmgE008C"],
+                    ["upgArmE010", "upgHpE017", "upgArmE004C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpL112"],
+                    ["upgDmgE001", "upgArmE013", "upgDmgL001"],
+                    ["upgArmE010", "upgHpE017", "upgArmL001"],
+                    ["upgHpE017", "upgHpL112", "upgHpL032C"],
+                    ["upgDmgE004", "upgHpL112", "upgDmgL032C"],
+                    ["upgArmE010", "upgHpL112", "upgArmL032C"],
+                    ["upgHpE017", "upgHpL112", "upgHpL002C"],
+                    ["upgDmgE004", "upgHpL112", "upgDmgL015C"],
+                    ["upgArmE013", "upgHpL112", "upgArmL006C"],
+                    ["upgHpL112", "upgDmgL001", "upgHpL132C"],
+                    ["upgDmgL001", "upgArmL001", "upgDmgL132C"],
+                    ["upgArmL001", "upgDmgL001", "upgArmL132C"],
+                    ["upgHpL112", "upgArmL001", "upgHpL017C"],
+                    ["upgDmgL001", "upgHpL112", "upgDmgL006C"],
+                    ["upgArmL001", "upgHpL112", "upgArmL006C"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM004", "upgArmL001", "upgHpL112"],
+                    ["upgHpM004", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM001", "upgArmL001", "upgHpL112"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM004", "upgArmL001", "upgDmgL032C"],
+                    ["upgHpM001", "upgHpL112", "upgArmL032C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL032C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL112", "upgDmgL214C"]
+                ]
+            },
+            "secondaryAbility": {
+                "name": "Hailstrike",
+                "recipes": [
+                    ["upgHpC015", "upgDmgC001", "upgArmC002"],
+                    ["upgHpC014", "upgDmgC009", "upgArmC013"],
+                    ["upgHpC004", "upgHpC015", "upgHpC014"],
+                    ["upgDmgC011", "upgDmgC001", "upgDmgC009"],
+                    ["upgArmC013", "upgArmC002", "upgArmC001"],
+                    ["upgHpC015", "upgHpC014", "upgHpC004"],
+                    ["upgDmgC001", "upgDmgC009", "upgDmgC011"],
+                    ["upgArmC002", "upgArmC001", "upgArmC013"],
+                    ["upgHpC014", "upgHpC004", "upgHpU006"],
+                    ["upgDmgC009", "upgDmgC011", "upgDmgU011"],
+                    ["upgArmC001", "upgArmC013", "upgArmU005"],
+                    ["upgHpC004", "upgHpU014", "upgHpU018C"],
+                    ["upgDmgC011", "upgDmgU012", "upgDmgU001C"],
+                    ["upgArmC013", "upgArmU005", "upgArmU010C"],
+                    ["upgHpU014", "upgHpU006", "upgHpU018C"],
+                    ["upgDmgU012", "upgDmgU011", "upgDmgU015C"],
+                    ["upgArmU001", "upgArmU009", "upgArmU010C"],
+                    ["upgHpU006", "upgHpU014", "upgHpR032"],
+                    ["upgDmgU011", "upgDmgU012", "upgDmgR032"],
+                    ["upgArmU009", "upgArmU005", "upgArmR032"],
+                    ["upgHpU014", "upgHpR032", "upgHpR013C"],
+                    ["upgDmgU012", "upgDmgR032", "upgDmgR001C"],
+                    ["upgArmU001", "upgArmR032", "upgArmR012C"],
+                    ["upgHpR032", "upgHpR005", "upgHpR012C"],
+                    ["upgDmgR032", "upgDmgR005", "upgDmgR011C"],
+                    ["upgArmR032", "upgArmR015", "upgArmR003C"],
+                    ["upgHpR005", "upgDmgR005", "upgHpE017"],
+                    ["upgDmgR005", "upgArmR015", "upgDmgE001"],
+                    ["upgArmR005", "upgHpR018", "upgArmE010"],
+                    ["upgHpR018", "upgDmgE001", "upgHpE032C"],
+                    ["upgDmgR005", "upgArmE013", "upgDmgE032C"],
+                    ["upgArmR005", "upgHpE017", "upgArmE032C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpE007C"],
+                    ["upgDmgE001", "upgArmE013", "upgDmgE008C"],
+                    ["upgArmE010", "upgHpE017", "upgArmE004C"],
+                    ["upgHpE017", "upgDmgE004", "upgHpL112"],
+                    ["upgDmgE001", "upgArmE013", "upgDmgL001"],
+                    ["upgArmE010", "upgHpE017", "upgArmL001"],
+                    ["upgHpE017", "upgHpL112", "upgHpL032C"],
+                    ["upgDmgE004", "upgHpL112", "upgDmgL032C"],
+                    ["upgArmE010", "upgHpL112", "upgArmL032C"],
+                    ["upgHpE017", "upgHpL112", "upgHpL002C"],
+                    ["upgDmgE004", "upgHpL112", "upgDmgL015C"],
+                    ["upgArmE013", "upgHpL112", "upgArmL006C"],
+                    ["upgHpL112", "upgDmgL001", "upgHpL132C"],
+                    ["upgDmgL001", "upgArmL001", "upgDmgL132C"],
+                    ["upgArmL001", "upgDmgL001", "upgArmL132C"],
+                    ["upgHpL112", "upgArmL001", "upgHpL214C"],
+                    ["upgDmgL001", "upgHpL112", "upgDmgL214C"],
+                    ["upgArmL001", "upgHpL112", "upgArmL214C"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM004", "upgArmL001", "upgHpL112"],
+                    ["upgHpM004", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM001", "upgArmL001", "upgHpL112"],
+                    ["upgHpM001", "upgDmgL001", "upgHpL112"],
+                    ["upgHpM004", "upgArmL001", "upgArmL032C"],
+                    ["upgHpM001", "upgHpL112", "upgArmL032C"],
+                    ["upgHpM004", "upgDmgL001", "upgDmgL032C"],
+                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
+                    ["upgHpM004", "upgHpL112", "upgDmgL214C"]
+                ]
+            }
+        },
+        {
             "snowprintId": "tyranBiovore",
             "name": "Biovore",
             "faction": "Tyranids",
@@ -1379,552 +1517,747 @@
                     ["upgHpM004", "upgHpL113", "upgDmgL211C"]
                 ]
             }
-        },
-        {
-            "snowprintId": "ultraDreadnought",
-            "name": "Galatian",
-            "faction": "Ultramarines",
-            "alliance": "Imperial",
-            "icon": "snowprint_assets/characters/ui_image_portrait_ultra_dreadnought_01.png",
-            "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_dreadnought_01.png",
-            "primaryAbility": {
-                "name": "DutyEternal",
-                "recipes": [
-                    ["upgHpC002", "upgDmgC001", "upgArmC001"],
-                    ["upgHpC014", "upgDmgC012", "upgArmC013"],
-                    ["upgHpC004", "upgHpC002", "upgHpC014"],
-                    ["upgDmgC011", "upgDmgC001", "upgDmgC012"],
-                    ["upgArmC002", "upgArmC001", "upgArmC013"],
-                    ["upgHpC002", "upgHpC014", "upgHpC004"],
-                    ["upgDmgC001", "upgDmgC012", "upgDmgC011"],
-                    ["upgArmC001", "upgArmC013", "upgArmC002"],
-                    ["upgHpC014", "upgHpC004", "upgHpU006"],
-                    ["upgDmgC012", "upgDmgC011", "upgDmgU011"],
-                    ["upgArmC013", "upgArmC002", "upgArmU001"],
-                    ["upgHpC004", "upgHpU014", "upgHpU004C"],
-                    ["upgDmgC011", "upgDmgU009", "upgDmgU001C"],
-                    ["upgArmC002", "upgArmU001", "upgArmU010C"],
-                    ["upgHpU014", "upgHpU006", "upgHpU004C"],
-                    ["upgDmgU009", "upgDmgU011", "upgDmgU015C"],
-                    ["upgArmU009", "upgArmU005", "upgArmU010C"],
-                    ["upgHpU006", "upgHpU014", "upgHpR019"],
-                    ["upgDmgU011", "upgDmgU009", "upgDmgE005"],
-                    ["upgArmU005", "upgArmU001", "upgArmR015"],
-                    ["upgHpU014", "upgHpR019", "upgHpR004C"],
-                    ["upgDmgU009", "upgDmgU005", "upgDmgR001C"],
-                    ["upgArmU009", "upgArmR015", "upgArmR003C"],
-                    ["upgHpR019", "upgHpR005", "upgHpR012C"],
-                    ["upgDmgU005", "upgDmgR006", "upgDmgR004C"],
-                    ["upgArmR015", "upgArmR005", "upgArmR001C"],
-                    ["upgHpR005", "upgDmgR006", "upgHpE003"],
-                    ["upgDmgR006", "upgArmR005", "upgDmgE001"],
-                    ["upgArmR005", "upgHpR018", "upgArmE010"],
-                    ["upgHpR018", "upgHpE003", "upgHpR016C"],
-                    ["upgDmgR006", "upgDmgE001", "upgDmgE007C"],
-                    ["upgArmR005", "upgArmE010", "upgArmE013"],
-                    ["upgHpE003", "upgHpE012", "upgHpE002C"],
-                    ["upgDmgE001", "upgDmgE004", "upgDmgE007C"],
-                    ["upgArmE010", "upgArmE013", "upgArmE004C"],
-                    ["upgHpE003", "upgHpE012", "upgHpL100"],
-                    ["upgDmgE001", "upgDmgE004", "upgDmgL001"],
-                    ["upgArmE010", "upgArmE013", "upgArmL001"],
-                    ["upgHpE012", "upgHpL100", "upgHpL009C"],
-                    ["upgDmgE004", "upgHpL100", "upgDmgL006C"],
-                    ["upgArmE013", "upgHpL100", "upgArmL004C"],
-                    ["upgHpE012", "upgHpL100", "upgHpL001C"],
-                    ["upgDmgE004", "upgHpL100", "upgDmgL007C"],
-                    ["upgArmE013", "upgHpL100", "upgArmL010C"],
-                    ["upgHpL100", "upgDmgL001", "upgHpL120C"],
-                    ["upgDmgL001", "upgArmL001", "upgDmgL004C"],
-                    ["upgArmL001", "upgDmgL001", "upgArmL006C"],
-                    ["upgHpL100", "upgArmL001", "upgHpL017C"],
-                    ["upgDmgL001", "upgHpL100", "upgDmgL012C"],
-                    ["upgArmL001", "upgHpL100", "upgArmL004C"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
-                    ["upgHpM004", "upgArmL001", "upgHpL100"],
-                    ["upgHpM004", "upgDmgL001", "upgHpL100"],
-                    ["upgHpM001", "upgArmL001", "upgHpL100"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
-                    ["upgHpM004", "upgArmL001", "upgDmgL004C"],
-                    ["upgHpM001", "upgHpL100", "upgArmL004C"],
-                    ["upgHpM004", "upgDmgL001", "upgDmgL004C"],
-                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
-                    ["upgHpM004", "upgHpL100", "upgDmgL214C"]
-                ]
-            },
-            "secondaryAbility": {
-                "name": "MacroPlasmaIncinerator",
-                "recipes": [
-                    ["upgHpC002", "upgDmgC013", "upgArmC001"],
-                    ["upgHpC014", "upgDmgC012", "upgArmC013"],
-                    ["upgHpC004", "upgHpC002", "upgHpC014"],
-                    ["upgDmgC011", "upgDmgC013", "upgDmgC012"],
-                    ["upgArmC002", "upgArmC001", "upgArmC013"],
-                    ["upgHpC002", "upgHpC014", "upgHpC004"],
-                    ["upgDmgC013", "upgDmgC012", "upgDmgC011"],
-                    ["upgArmC001", "upgArmC013", "upgArmC002"],
-                    ["upgHpC014", "upgHpC004", "upgHpU006"],
-                    ["upgDmgC012", "upgDmgC011", "upgDmgU011"],
-                    ["upgArmC013", "upgArmC002", "upgArmU001"],
-                    ["upgHpC004", "upgHpU014", "upgHpU004C"],
-                    ["upgDmgC011", "upgDmgU009", "upgDmgU018C"],
-                    ["upgArmC002", "upgArmU001", "upgArmU010C"],
-                    ["upgHpU014", "upgHpU006", "upgHpU004C"],
-                    ["upgDmgU009", "upgDmgU011", "upgDmgU015C"],
-                    ["upgArmU009", "upgArmU005", "upgArmU010C"],
-                    ["upgHpU006", "upgHpU014", "upgHpR019"],
-                    ["upgDmgU011", "upgDmgU009", "upgDmgE005"],
-                    ["upgArmU005", "upgArmU001", "upgArmR015"],
-                    ["upgHpU014", "upgHpR019", "upgHpR004C"],
-                    ["upgDmgU009", "upgDmgU005", "upgDmgR13C"],
-                    ["upgArmU009", "upgArmR015", "upgArmR003C"],
-                    ["upgHpR019", "upgHpR005", "upgHpR012C"],
-                    ["upgDmgU005", "upgDmgR006", "upgDmgR004C"],
-                    ["upgArmR015", "upgArmR005", "upgArmR001C"],
-                    ["upgHpR005", "upgDmgR006", "upgHpE003"],
-                    ["upgDmgR006", "upgArmR005", "upgDmgE001"],
-                    ["upgArmR005", "upgHpR018", "upgArmE010"],
-                    ["upgHpR018", "upgHpE003", "upgHpR016C"],
-                    ["upgDmgR006", "upgDmgE001", "upgDmgE007C"],
-                    ["upgArmR005", "upgArmE010", "upgArmE013"],
-                    ["upgHpE003", "upgHpE012", "upgHpE001C"],
-                    ["upgDmgE001", "upgDmgE004", "upgDmgE007C"],
-                    ["upgArmE010", "upgArmE013", "upgArmE001C"],
-                    ["upgHpE003", "upgHpE012", "upgHpL100"],
-                    ["upgDmgE001", "upgDmgE004", "upgDmgL001"],
-                    ["upgArmE010", "upgArmE013", "upgArmL001"],
-                    ["upgHpE012", "upgHpL100", "upgHpL120C"],
-                    ["upgDmgE004", "upgHpL100", "upgDmgL004C"],
-                    ["upgArmE013", "upgHpL100", "upgArmL006C"],
-                    ["upgHpE012", "upgHpL100", "upgHpL002C"],
-                    ["upgDmgE004", "upgHpL100", "upgDmgL015C"],
-                    ["upgArmE013", "upgHpL100", "upgArmL004C"],
-                    ["upgHpL100", "upgDmgL001", "upgHpL120C"],
-                    ["upgDmgL001", "upgArmL001", "upgDmgL120C"],
-                    ["upgArmL001", "upgDmgL001", "upgArmL120C"],
-                    ["upgHpL100", "upgArmL001", "upgHpL214C"],
-                    ["upgDmgL001", "upgHpL100", "upgDmgL214C"],
-                    ["upgArmL001", "upgHpL100", "upgArmL214C"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
-                    ["upgHpM004", "upgArmL001", "upgHpL100"],
-                    ["upgHpM004", "upgDmgL001", "upgHpL100"],
-                    ["upgHpM001", "upgArmL001", "upgHpL100"],
-                    ["upgHpM001", "upgDmgL001", "upgHpL100"],
-                    ["upgHpM004", "upgArmL001", "upgDmgL012C"],
-                    ["upgHpM001", "upgHpL100", "upgDmgL012C"],
-                    ["upgHpM004", "upgDmgL001", "upgDmgL004C"],
-                    ["upgHpM001", "upgArmL001", "upgHpL214C"],
-                    ["upgHpM004", "upgHpL100", "upgDmgL214C"]
-                ]
-            }
         }
     ],
     "upgradeCosts": [
         {
             "gold": 15,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 1
+            "components": 1,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 30,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 1
+            "components": 1,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 60,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 1
+            "components": 1,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 90,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 1
+            "components": 1,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 120,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 2
+            "components": 2,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 180,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 2
+            "components": 2,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 240,
             "salvage": 5,
-            "badges": { "rarity": "Common", "amount": 1 },
-            "components": 3
+            "components": 3,
+            "badges": {
+                "rarity": "Common",
+                "amount": 1
+            }
         },
         {
             "gold": 300,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 3
+            "components": 3,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 360,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 3
+            "components": 3,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 420,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 3
+            "components": 3,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 480,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 4
+            "components": 4,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 540,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 4
+            "components": 4,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 600,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 5
+            "components": 5,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 750,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 5
+            "components": 5,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 900,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 5
+            "components": 5,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 1050,
             "salvage": 0,
-            "badges": { "rarity": "Uncommon", "amount": 1 },
-            "forgeBadges": { "rarity": " Uncommon", "amount": 1 },
-            "components": 5
+            "components": 5,
+            "badges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Uncommon",
+                "amount": 1
+            }
         },
         {
             "gold": 1200,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 6
+            "components": 6,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 1500,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 6
+            "components": 6,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 1800,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 6
+            "components": 6,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 2100,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 7
+            "components": 7,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 2400,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 7
+            "components": 7,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 2700,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 8
+            "components": 8,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 3000,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 8
+            "components": 8,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 3300,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 9
+            "components": 9,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 3600,
             "salvage": 0,
-            "badges": { "rarity": "Rare", "amount": 1 },
-            "forgeBadges": { "rarity": " Rare", "amount": 1 },
-            "components": 10
+            "components": 10,
+            "badges": {
+                "rarity": "Rare",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Rare",
+                "amount": 1
+            }
         },
         {
             "gold": 3900,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 11
+            "components": 11,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 4200,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 12
+            "components": 12,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 4500,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 13
+            "components": 13,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 4800,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 14
+            "components": 14,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 5100,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 15
+            "components": 15,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 5400,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 16
+            "components": 16,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 5700,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 17
+            "components": 17,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 6000,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 18
+            "components": 18,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 6600,
             "salvage": 0,
-            "badges": { "rarity": "Epic", "amount": 1 },
-            "forgeBadges": { "rarity": " Epic", "amount": 1 },
-            "components": 19
+            "components": 19,
+            "badges": {
+                "rarity": "Epic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Epic",
+                "amount": 1
+            }
         },
         {
             "gold": 7200,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 1 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 1 },
-            "components": 20
+            "components": 20,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 1
+            }
         },
         {
             "gold": 7800,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 1 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 1 },
-            "components": 21
+            "components": 21,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 1
+            }
         },
         {
             "gold": 8400,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 1 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 1 },
-            "components": 22
+            "components": 22,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 1
+            }
         },
         {
             "gold": 9000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 1 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 1 },
-            "components": 23
+            "components": 23,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 1
+            }
         },
         {
             "gold": 9600,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 1 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 1 },
-            "components": 24
+            "components": 24,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 1
+            }
         },
         {
             "gold": 10800,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 1 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 1 },
-            "components": 26
+            "components": 26,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 1
+            }
         },
         {
             "gold": 12000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 2 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 2 },
-            "components": 28
+            "components": 28,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 2
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 2
+            }
         },
         {
             "gold": 13500,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 3 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 3 },
-            "components": 30
+            "components": 30,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 3
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 3
+            }
         },
         {
             "gold": 15000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 4 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 4 },
-            "components": 32
+            "components": 32,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 4
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 4
+            }
         },
         {
             "gold": 18000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 5 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 5 },
-            "components": 34
+            "components": 34,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 5
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 5
+            }
         },
         {
             "gold": 24000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 6 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 6 },
-            "components": 36
+            "components": 36,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 6
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 6
+            }
         },
         {
             "gold": 30000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 7 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 7 },
-            "components": 39
+            "components": 39,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 7
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 7
+            }
         },
         {
             "gold": 45000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 8 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 8 },
-            "components": 42
+            "components": 42,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 8
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 8
+            }
         },
         {
             "gold": 60000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 9 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 9 },
-            "components": 46
+            "components": 46,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 9
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 9
+            }
         },
         {
             "gold": 75000,
             "salvage": 0,
-            "badges": { "rarity": "Legendary", "amount": 10 },
-            "forgeBadges": { "rarity": " Legendary", "amount": 10 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Legendary",
+                "amount": 10
+            },
+            "forgeBadges": {
+                "rarity": "Legendary",
+                "amount": 10
+            }
         },
         {
             "gold": 80000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 1 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 1
+            }
         },
         {
             "gold": 85000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 1 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 1
+            }
         },
         {
             "gold": 90000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 1 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 1
+            }
         },
         {
             "gold": 95000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 1 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 1
+            }
         },
         {
             "gold": 100000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 1 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 1
+            }
         },
         {
             "gold": 105000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 1 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 1 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 1
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 1
+            }
         },
         {
             "gold": 110000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 2 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 2 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 2
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 2
+            }
         },
         {
             "gold": 115000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 3 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 3 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 3
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 3
+            }
         },
         {
             "gold": 120000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 4 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 4 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 4
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 4
+            }
         },
         {
             "gold": 125000,
             "salvage": 0,
-            "badges": { "rarity": "Mythic", "amount": 5 },
-            "forgeBadges": { "rarity": " Mythic", "amount": 5 },
-            "components": 50
+            "components": 50,
+            "badges": {
+                "rarity": "Mythic",
+                "amount": 5
+            },
+            "forgeBadges": {
+                "rarity": "Mythic",
+                "amount": 5
+            }
         }
     ]
 }

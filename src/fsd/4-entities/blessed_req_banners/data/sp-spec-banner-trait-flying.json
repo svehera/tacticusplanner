@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Trait_Flying",
+    "title": "Flying Requisition",
+    "tagline": "Higher drop chances for these <style=\"Flying\">Flying</style> characters!",
+    "featuredUnits": [
+        "adeptCelestine",
+        "blackHaarken",
+        "tyranWingedPrime",
+        "eldarAutarch",
+        "ultraInceptorSgt",
+        "tauCrisis"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

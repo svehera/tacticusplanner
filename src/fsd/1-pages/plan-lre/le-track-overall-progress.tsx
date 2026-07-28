@@ -8,9 +8,9 @@ import { getCompletionRateColor } from '@/fsd/5-shared/lib';
 import { Accordion, AccordionHeader, AccordionBody, AccessibleTooltip, ConfirmationDialog } from '@/fsd/5-shared/ui';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
 
-import { LegendaryEventEnum, LreRequirementImage, LreTrackId } from '@/fsd/4-entities/lre';
+import { LegendaryEventEnum, LreTrackId } from '@/fsd/4-entities/lre';
 
-import { RequirementStatus, ILreTeam } from '@/fsd/3-features/lre';
+import { RequirementStatus, ILreTeam, RestrictionIcon } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
 import { LreTrackBattleSummary } from './le-track-battle';
@@ -176,7 +176,10 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                         <span className="min-w-20 font-bold">
                             {getRequirementProgressPoints(requirement.id)}/{requirement.totalPoints}
                         </span>
-                        <LreRequirementImage iconId={requirement.iconId} />
+                        <RestrictionIcon
+                            objectiveType={requirement.objectiveType}
+                            objectiveTarget={requirement.objectiveTarget}
+                        />
                         <span className="min-w-[25px] p-1 md:p-1.5">{requirement.pointsPerBattle || 'x'}</span>
                         <span>{requirement.name}</span>
                     </div>
@@ -212,8 +215,9 @@ export const LreTrackOverallProgress: React.FC<Props> = ({
                                         <div
                                             key={requirement.id}
                                             className={`flex items-center justify-center ${index === firstRestrictionIndex ? 'ml-4' : ''}`}>
-                                            <LreRequirementImage
-                                                iconId={requirement.iconId}
+                                            <RestrictionIcon
+                                                objectiveType={requirement.objectiveType}
+                                                objectiveTarget={requirement.objectiveTarget}
                                                 tooltip={getRestrictionTooltip(requirement)}
                                                 sizePx={isMobile ? 25 : 30}
                                             />

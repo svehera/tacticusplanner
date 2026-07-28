@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_AdeptusMechanicus",
+    "title": "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>!",
+    "featuredUnits": ["admecDominus", "admecManipulus", "admecMarshall", "admecRuststalker", "admecDestroyer"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

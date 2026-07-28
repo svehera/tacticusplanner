@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_votanUthar",
+    "title": "Ûthar Squad Requisition",
+    "tagline": "Get the best characters for the upcoming <i>{[HRE/name_LEG_LeaguesOfVotann]}</i> event, featuring <style=\"Faction_LeaguesOfVotann\">Ûthar</style>",
+    "featuredUnits": [
+        "adeptMorvenn",
+        "orksWarboss",
+        "deathPutrifier",
+        "custoVexilusPraetor",
+        "ultraApothecary",
+        "thousTerminator"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

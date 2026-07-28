@@ -1,0 +1,63 @@
+/* eslint-disable import-x/no-internal-modules */
+import { MiscIcon } from '@/fsd/5-shared/ui/icons';
+import { UnitPortrait } from '@/fsd/5-shared/ui/unit-portrait';
+
+import { IMow2 } from '@/fsd/4-entities/mow';
+import { convertMowToSnapshot } from '@/fsd/4-entities/unit';
+
+import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+interface Props {
+    mows: IMow2[];
+    zoom: number;
+    onMowSelect: (id: string) => void;
+    showHeader: boolean;
+    deployedUnitIds?: string[];
+}
+
+export const MowSelectGrid: React.FC<Props> = ({ mows, zoom, onMowSelect, showHeader, deployedUnitIds }: Props) => {
+    return (
+        <div>
+            {showHeader && (
+                <div className="mb-4 flex justify-between">
+                    <h3 className="font-bold">Machines of War</h3>
+                    <span className="text-xs text-(--soft-fg)">Showing {mows.length} units</span>
+                </div>
+            )}
+            <div className="flex flex-wrap gap-4">
+                {mows.map(mow => (
+                    <div key={mow.snowprintId} className="relative" style={{ zoom }}>
+                        <div
+                            onClick={() => onMowSelect(mow.snowprintId)}
+                            className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95"
+                            title={`Select ${mow.name || 'Machine of War'}`}>
+                            <UnitPortrait
+                                key={mow.snowprintId}
+                                showMythicShards={RosterSnapshotShowVariableSettings.Never}
+                                showShards={RosterSnapshotShowVariableSettings.Never}
+                                showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                showAbilities={
+                                    mow.unlocked
+                                        ? RosterSnapshotShowVariableSettings.Always
+                                        : RosterSnapshotShowVariableSettings.Never
+                                }
+                                showEquipment={RosterSnapshotShowVariableSettings.Never}
+                                showTooltip={true}
+                                mow={convertMowToSnapshot(mow)}
+                                mowData={mow}
+                                isDisabled={!mow.unlocked}
+                            />
+                        </div>
+                        {deployedUnitIds?.includes(mow.snowprintId) && (
+                            <div className="pointer-events-none absolute inset-0 flex items-center justify-center">
+                                <div className="rounded-full bg-(--fg)/70 p-1 shadow-lg ring-1 ring-(--border)/50">
+                                    <MiscIcon icon="deployment" width={50} height={50} />
+                                </div>
+                            </div>
+                        )}
+                    </div>
+                ))}
+            </div>
+        </div>
+    );
+};

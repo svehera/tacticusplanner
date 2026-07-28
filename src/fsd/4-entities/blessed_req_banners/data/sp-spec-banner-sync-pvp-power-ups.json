@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_SyncPvp_PowerUps",
+    "title": "Tournament Arena Requisition",
+    "tagline": "Higher drop chances for some of the most effective units in Tournament Arena!",
+    "featuredUnits": [
+        "adeptRetributor",
+        "tauCrisis",
+        "blackObliterator",
+        "genesKelermorph",
+        "tauShadowsun",
+        "orksRukkatrukk"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

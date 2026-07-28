@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_astarLysander",
+    "title": "Lysander Squad Requisition",
+    "tagline": "Get the best characters for the upcoming <i>{[HRE/name_LEG_AdeptusAstartes]}</i> event, featuring <style=\"Faction_AdeptusAstartes\">Lysander</style>",
+    "featuredUnits": [
+        "orksBigMek",
+        "emperNoiseMarine",
+        "astraOrdnance",
+        "votanIronmaster",
+        "templChampion",
+        "spaceBlackmane"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

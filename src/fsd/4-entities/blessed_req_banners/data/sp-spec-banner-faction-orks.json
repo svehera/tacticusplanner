@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_Orks",
+    "title": "<style=\"FactionIcon_Orks\">Orks</style> Requisition",
+    "tagline": "Higha drop chances fer all <style=\"FactionIcon_Orks\">Orks</style>, including their Machine of War! WAAAAGH!",
+    "featuredUnits": ["orksWarboss", "orksNob", "orksRuntherd", "orksBigMek", "orksKillaKan", "orksRukkatrukk"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

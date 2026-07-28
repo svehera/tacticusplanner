@@ -6,4 +6,7 @@ export type {
     ICharacterAscendGoal,
     ICharacterRaidGoalSelectBase,
     IPreFarmMaterialForGoalsGoal,
+    GoalCategory,
+    RankStep,
 } from './model';
+export { RankChangeArrow, AscendChangeArrow, AbilitiesChangeText } from './ui';

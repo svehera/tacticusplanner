@@ -1,0 +1,785 @@
+{
+    "eventName": "faction_boost_adeptus_mechanicus",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_boost_adeptus_mechanicus_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_adeptus_mechanicus_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_adeptus_mechanicus",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_adeptus_mechanicus_Interstitial_Description",
+                "eventId": "faction_boost_adeptus_mechanicus_tier_high",
+                "rewardProgressId": "hse_faction_boost_adeptus_mechanicus_tier_high",
+                "theme": "faction_boost_adeptus_mechanicus",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 50,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_bundle",
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_playmore",
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AdeptusMechanicus"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_AdeptusMechanicus",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AdeptusMechanicus"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "upgHpE034C"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "I_Crit_L002"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "upgDmgL034C"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "upgDmgL015C"
+                },
+                {
+                    "requiredProgress": 700,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 800,
+                    "chestRewardId": "upgArmL010C"
+                },
+                {
+                    "requiredProgress": 1000,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 1100,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 1250,
+                    "chestRewardId": "abilityTokenMythic_Imperial:3"
+                },
+                {
+                    "requiredProgress": 1450,
+                    "chestRewardId": "I_Crit_M002"
+                },
+                {
+                    "requiredProgress": 1700,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:25"
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chestRewardId": "R_Booster_Crit_KardiocoreGalvanus"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:2",
+                    "endless": true
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:FactionBoost_AdeptusMechanicus": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "factionId": "AdeptusMechanicus",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
+                        "rewards": [
+                            "tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_high:125",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:500"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00899",
+                        "price": 899,
+                        "mercadoId": "offer_00899",
+                        "rewards": [
+                            "tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_high:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:350"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_high:150", "gems:1000"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Faction Boost: Adeptus Mechanicus</i> is here",
+                "Earn points by battling with the Adeptus Mechanicus and claim exclusive rewards!",
+                "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the unit who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_boost_adeptus_mechanicus_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_adeptus_mechanicus_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_adeptus_mechanicus",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_adeptus_mechanicus_Interstitial_Description",
+                "eventId": "faction_boost_adeptus_mechanicus_tier_mid",
+                "rewardProgressId": "hse_faction_boost_adeptus_mechanicus_tier_mid",
+                "theme": "faction_boost_adeptus_mechanicus",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 30,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_bundle",
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_playmore",
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AdeptusMechanicus"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_AdeptusMechanicus",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AdeptusMechanicus"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 160,
+                    "chestRewardId": "upgDmgE034C"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "upgArmE034C"
+                },
+                {
+                    "requiredProgress": 320,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 400,
+                    "chestRewardId": "upgDmgL034C"
+                },
+                {
+                    "requiredProgress": 480,
+                    "chestRewardId": "upgDmgL015C"
+                },
+                {
+                    "requiredProgress": 560,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 640,
+                    "chestRewardId": "upgArmL010C"
+                },
+                {
+                    "requiredProgress": 790,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 870,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 990,
+                    "chestRewardId": "gold:25000"
+                },
+                {
+                    "requiredProgress": 1150,
+                    "chestRewardId": "abilityTokenLegendary_Imperial:3"
+                },
+                {
+                    "requiredProgress": 1330,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:25"
+                },
+                {
+                    "requiredProgress": 1530,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "abilityTokenLegendary_Imperial",
+                    "endless": true
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:FactionBoost_AdeptusMechanicus": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "factionId": "AdeptusMechanicus",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_mid:75",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_mid:75",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": ["tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_mid:100", "gems:800"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Faction Boost: Adeptus Mechanicus</i> is here",
+                "Earn points by battling with the Adeptus Mechanicus and claim exclusive rewards!",
+                "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the unit who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "faction_boost_adeptus_mechanicus_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_adeptus_mechanicus_Interstitial_Header",
+                "visualId": "homescreenevent_faction_boost_adeptus_mechanicus",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_faction_boost_adeptus_mechanicus_Interstitial_Description",
+                "eventId": "faction_boost_adeptus_mechanicus_tier_low",
+                "rewardProgressId": "hse_faction_boost_adeptus_mechanicus_tier_low",
+                "theme": "faction_boost_adeptus_mechanicus",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_bundle",
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_playmore",
+                    "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 200,
+                        "percentageModifier": true,
+                        "sameFactionBonus": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AdeptusMechanicus"]
+                        }
+                    },
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:FactionBoost_AdeptusMechanicus",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 2,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Imperial"],
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits2_faction_boost_adeptus_mechanicus_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AdeptusMechanicus"]
+                        },
+                        "playerTraitRestrictions": {
+                            "disallowed": ["MachineOfWar"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "upgDmgU018C"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "upgDmgR13C"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "upgDmgU015C"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "upgArmR001C"
+                },
+                {
+                    "requiredProgress": 420,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 480,
+                    "chestRewardId": "upgDmgR034"
+                },
+                {
+                    "requiredProgress": 630,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 710,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:20"
+                },
+                {
+                    "requiredProgress": 830,
+                    "chestRewardId": "gold:5000"
+                },
+                {
+                    "requiredProgress": 990,
+                    "chestRewardId": "abilityTokenEpic_Imperial:3"
+                },
+                {
+                    "requiredProgress": 1170,
+                    "chestRewardId": "seasonalEventCurrencyMarch2026:25"
+                },
+                {
+                    "requiredProgress": 1370,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "abilityTokenEpic_Imperial",
+                    "endless": true
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:FactionBoost_AdeptusMechanicus": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "factionId": "AdeptusMechanicus",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_low:75",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": [
+                            "tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_low:75",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_faction_boost_adeptus_mechanicus_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": ["tieredRewardPoints_faction_boost_adeptus_mechanicus_tier_low:100", "gems:400"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Faction Boost: Adeptus Mechanicus</i> is here",
+                "Earn points by battling with the Adeptus Mechanicus and claim exclusive rewards!",
+                "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the unit who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
+            ]
+        }
+    }
+}

@@ -84,3 +84,12 @@ export interface ICharacterAscendGoal extends ICharacterRaidGoalSelectBase {
     mythicCampaignsUsage: CampaignsLocationsUsage;
     farmType: ShardFarmType;
 }
+
+/** Broad kind of change a goal represents, used to group/label goals in summary tables. */
+export type GoalCategory = 'Unlock' | 'Ascend' | 'Rank' | 'Abilities';
+
+/** A rank + whether it's the ".5" (partial upgrades applied) variant of that rank. */
+export interface RankStep {
+    rank: Rank;
+    point5: boolean;
+}

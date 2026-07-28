@@ -35,15 +35,18 @@ import { resourcesMenuItem } from '@/fsd/1-pages/input-resources/resources.menu-
 import { rosterSnapshotsMenuItem } from '@/fsd/1-pages/input-roster-snapshots/roster-snapshots.menu-item';
 import { xpIncomeMenuItem } from '@/fsd/1-pages/input-xp-income/xp-income.menu-item';
 import { insightsMenuItem } from '@/fsd/1-pages/insights/insights.menu-item';
+import { dailyShopsLookupMenuItem } from '@/fsd/1-pages/learn-daily-shops';
 import { dirtyDozenMenuItem } from '@/fsd/1-pages/learn-dirty-dozen';
 import { guildPerformanceMenuItem } from '@/fsd/1-pages/learn-guild-performance';
+import { hsesLookupMenuItem } from '@/fsd/1-pages/learn-hses';
 import { mowLookupMenuItem } from '@/fsd/1-pages/learn-mow';
-import { armageddonMenuItem } from '@/fsd/1-pages/plan-armageddon/armageddon.menu-item';
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
 import { cesMenuItem } from '@/fsd/1-pages/plan-ces/ces.menu-item';
 import { activeLreMenuItems, inactiveLreMenuItems } from '@/fsd/1-pages/plan-lre';
 import { questsMenuItem } from '@/fsd/1-pages/plan-quests/quests.menu-item';
+import { shopEventsMenuItem } from '@/fsd/1-pages/plan-shop-events/shop-events.menu-item';
+import { survivalMenuItem } from '@/fsd/1-pages/plan-survival/survival.menu-item';
 import { teams2MenuItem } from '@/fsd/1-pages/plan-teams2/teams2.menu-item';
 import { warDefense2MenuItem } from '@/fsd/1-pages/plan-war-defense-2/war-defense2.menu-item';
 import { warOffense2MenuItem } from '@/fsd/1-pages/plan-war-offense2/war-offense2.menu-item';
@@ -81,10 +84,12 @@ export const menuItemById = {
     mowLookup: mowLookupMenuItem,
     campaigns: new MenuItemTP('Campaigns', <MapIcon />, '/learn/campaigns'),
     hses: new MenuItemTP('Home-Screen Events', <EventIcon />, '/plan/hse'),
+    hsesLookup: hsesLookupMenuItem,
+    dailyShopsLookup: dailyShopsLookupMenuItem,
     bulkGoalCreator: bulkGoalCreatorMenuItem,
     dirtyDozen: dirtyDozenMenuItem,
     insights: insightsMenuItem,
-    armageddon: armageddonMenuItem,
+    shopEvents: shopEventsMenuItem,
     campaignProgression: campaignProgressionMenuItem,
     rosterSnapshots: rosterSnapshotsMenuItem,
     guildRosterSnapshots: guildRosterSnapshotsMenuItem,
@@ -107,6 +112,7 @@ export const menuItemById = {
     quests: questsMenuItem,
     ces: cesMenuItem,
     productCalendar: new MenuItemTP('Product Calendar', <ShoppingCartIcon />, '/learn/productCalendar'),
+    survival: survivalMenuItem,
 };
 
 export const inputSubMenu: MenuItemTP[] = [
@@ -133,12 +139,13 @@ export const planSubMenuWeb: MenuItemTP[] = [
     ]),
     new MenuItemTP('LRE', <AutoAwesomeIcon />, '', '', '', [menuItemById['leMasterTable'], ...activeLreMenuItems]),
     new MenuItemTP('LRE Archive', <ArchiveIcon />, '', '', '', inactiveLreMenuItems),
-    menuItemById['armageddon'],
+    menuItemById['shopEvents'],
     menuItemById['campaignProgression'],
     menuItemById['quests'],
     menuItemById['ces'],
     menuItemById['hses'],
     menuItemById['bulkGoalCreator'],
+    menuItemById['survival'],
 ];
 
 export const planSubMenu: MenuItemTP[] = [
@@ -150,11 +157,12 @@ export const planSubMenu: MenuItemTP[] = [
     menuItemById['zones'],
     menuItemById['leMasterTable'],
     ...activeLreMenuItems,
-    menuItemById['armageddon'],
+    menuItemById['shopEvents'],
     menuItemById['quests'],
     menuItemById['campaignProgression'],
     menuItemById['hses'],
     menuItemById['bulkGoalCreator'],
+    menuItemById['survival'],
 ];
 
 export const learnSubMenuMobile: MenuItemTP[] = [
@@ -168,6 +176,8 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['guildBossList'],
     menuItemById['guildBossReference'],
     menuItemById['campaigns'],
+    menuItemById['hsesLookup'],
+    menuItemById['dailyShopsLookup'],
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildPerformance'],
@@ -186,6 +196,8 @@ export const learnSubMenu: MenuItemTP[] = [
         menuItemById['upgrades'],
         menuItemById['learnEquipment'],
         menuItemById['campaigns'],
+        menuItemById['hsesLookup'],
+        menuItemById['dailyShopsLookup'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],
@@ -208,6 +220,8 @@ export const librarySubMenu: MenuItemTP[] = [
         new MenuItemTP('Equipment Lookup', <ListIcon />, '/learn/equipment'),
         menuItemById['campaigns'],
         menuItemById['productCalendar'],
+        menuItemById['hsesLookup'],
+        menuItemById['dailyShopsLookup'],
     ]),
     menuItemById['guides'],
     menuItemById['dirtyDozen'],

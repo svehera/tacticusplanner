@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Faction_Ultramarines",
+    "title": "Warhammer Day Requisition",
+    "tagline": "Celebrating <style=\"KEY_not_underscored\">Warhammer Day</style> with higher drop chances for the featured <style=\"FactionIcon_Ultramarines\">Ultramarines</style>!",
+    "featuredUnits": [
+        "ultraCalgar",
+        "ultraTitus",
+        "ultraTigurius",
+        "ultraInceptorSgt",
+        "ultraApothecary",
+        "ultraDreadnought"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

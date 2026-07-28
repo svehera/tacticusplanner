@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_HealerAndMechanics",
+    "title": "Healers & Mechanics Requisition",
+    "tagline": "Higher drop chances for all these <style=\"Healer\">Healers</style> and <style=\"Mechanic\">Mechanics</style>!",
+    "featuredUnits": [
+        "admecDominus",
+        "deathRotbone",
+        "bloodSanguinary",
+        "admecManipulus",
+        "genesBiophagus",
+        "orksBigMek"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,33 +1,45 @@
-import { ArmageddonState, defaultArmageddonState, IArmageddonCart } from '@/reducers/armageddon.reducer';
+import { defaultShopEventsState, IShopEventCart, ShopEventsState } from '@/reducers/shop-events.reducer';
 
-/** Migrates legacy exported data that stored a JSON-serialised cart under the `cart` key. */
-export function migrateArmageddonState(state: ArmageddonState | undefined): ArmageddonState {
-    if (state === undefined) return defaultArmageddonState;
+/** Shape of the retired top-level `armageddon` slice, kept only for one-time migration. */
+export interface LegacyArmageddonState {
+    cart?: string; // legacy serialized JSON
+    structuredCart?: IShopEventCart;
+    purchased?: Record<string, number>;
+}
 
-    let structuredCart: IArmageddonCart = (state.structuredCart ?? {}) as IArmageddonCart;
+/**
+ * Migrates any existing user's legacy top-level `armageddon` cart/purchased data (from before shop
+ * events were generalized) into `shopEvents['armageddon']`. One-time, best-effort: if the new
+ * `shopEvents.armageddon` bucket already has data, the legacy data is ignored.
+ */
+export function migrateShopEventsState(
+    shopEvents: ShopEventsState | undefined,
+    legacyArmageddon: LegacyArmageddonState | undefined
+): ShopEventsState {
+    const state: ShopEventsState = { ...(shopEvents ?? defaultShopEventsState) };
 
-    if (
-        state.cart !== undefined &&
-        (state.structuredCart === undefined || Object.keys(state.structuredCart).length === 0)
-    ) {
-        try {
-            structuredCart = JSON.parse(state.cart) as IArmageddonCart;
-        } catch (error) {
-            console.error('[migrateArmageddonState] Failed to parse legacy cart JSON:', state.cart, error);
-            structuredCart = {};
+    const hasMigratedArmageddonData = Object.keys(state.armageddon?.structuredCart ?? {}).length > 0;
+    if (legacyArmageddon !== undefined && !hasMigratedArmageddonData) {
+        let structuredCart: IShopEventCart = legacyArmageddon.structuredCart ?? {};
+
+        if (legacyArmageddon.cart !== undefined && Object.keys(structuredCart).length === 0) {
+            try {
+                structuredCart = JSON.parse(legacyArmageddon.cart) as IShopEventCart;
+            } catch (error) {
+                console.error(
+                    '[migrateShopEventsState] Failed to parse legacy armageddon cart JSON:',
+                    legacyArmageddon.cart,
+                    error
+                );
+                structuredCart = {};
+            }
+        }
+
+        const purchased = legacyArmageddon.purchased ?? {};
+        if (Object.keys(structuredCart).length > 0 || Object.keys(purchased).length > 0) {
+            state.armageddon = { structuredCart, purchased };
         }
     }
 
-    return {
-        powerLevel: typeof state.powerLevel === 'number' ? state.powerLevel : defaultArmageddonState.powerLevel,
-        week: ([1, 2, 3] as const).includes(state.week as 1 | 2 | 3)
-            ? (state.week as 1 | 2 | 3)
-            : defaultArmageddonState.week,
-        day: typeof state.day === 'string' ? state.day : defaultArmageddonState.day,
-        structuredCart,
-        purchased: (typeof state.purchased === 'object' && state.purchased !== null ? state.purchased : {}) as Record<
-            string,
-            number
-        >,
-    };
+    return state;
 }

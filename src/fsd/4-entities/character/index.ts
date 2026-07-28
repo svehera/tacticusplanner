@@ -1,6 +1,13 @@
 export * from './ui';
-export { rankUpData } from './data';
-export type { ICharacter2, ICharacterData, ICharLegendaryEvent, IRankLookup, IUnitUpgradeRank } from './model';
+export { charactersData2, rankUpData } from './data';
+export type {
+    ICharacter2,
+    ICharacterCombatProfile,
+    ICharacterData,
+    ICharLegendaryEvent,
+    IRankLookup,
+    IUnitUpgradeRank,
+} from './model';
 export { CharacterBias } from './bias.enum';
 export { CharacterUpgradesService } from './character-upgrades.service';
 export { CharactersService } from './characters.service';

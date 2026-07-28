@@ -1,0 +1,1236 @@
+{
+    "id": "10",
+    "unitSnowprintId": "bloodDante",
+    "name": "Dante",
+    "theme": "BloodAngels",
+    "eventStage": 3,
+    "heroEventMaxRuns": 3,
+    "unlockableHero": {
+        "heroId": "bloodDante",
+        "baseRarity": "Legendary",
+        "maxRarity": "Mythic",
+        "visualId": "herorelease_blood_dante"
+    },
+    "lanes": {
+        "alpha": {
+            "factionId": "Necrons"
+        },
+        "beta": {
+            "factionId": "BlackLegion"
+        },
+        "gamma": {
+            "factionId": "AstraMilitarum"
+        }
+    },
+    "stamina": {
+        "max": 12,
+        "start": 6,
+        "regenAmount": 1,
+        "regenTimeSeconds": 10800,
+        "maxDailyRefreshAttempts": 1
+    },
+    "finalConversion": {
+        "goldPerLegCurrency": 25,
+        "legShardsPerMythicShard": 25,
+        "shardsPerLegShard": 1,
+        "minProgressionIndexToUseMythicConversion": 15
+    },
+    "ohSoCloseOffer": {
+        "unlock": {
+            "base": 500,
+            "multiplier": 100
+        },
+        "ascension": {
+            "base": 500,
+            "multiplier": 50
+        },
+        "rewardCurrency": "legendaryEventShards",
+        "lockType": "legendary"
+    },
+    "pointsMilestones": [
+        {
+            "requiredProgress": 100,
+            "chestRewardId": "legendaryEventCurrency:25"
+        },
+        {
+            "requiredProgress": 250,
+            "chestRewardId": "legendaryEventCurrency:30"
+        },
+        {
+            "requiredProgress": 500,
+            "chestRewardId": "legendaryEventCurrency:35"
+        },
+        {
+            "requiredProgress": 1000,
+            "chestRewardId": "legendaryEventCurrency:40"
+        },
+        {
+            "requiredProgress": 1500,
+            "chestRewardId": "legendaryEventCurrency:45"
+        },
+        {
+            "requiredProgress": 2000,
+            "chestRewardId": "legendaryEventCurrency:50"
+        },
+        {
+            "requiredProgress": 2500,
+            "chestRewardId": "legendaryEventCurrency:55"
+        },
+        {
+            "requiredProgress": 3000,
+            "chestRewardId": "legendaryEventCurrency:60"
+        },
+        {
+            "requiredProgress": 3500,
+            "chestRewardId": "legendaryEventCurrency:65"
+        },
+        {
+            "requiredProgress": 4000,
+            "chestRewardId": "legendaryEventCurrency:70"
+        },
+        {
+            "requiredProgress": 4500,
+            "chestRewardId": "legendaryEventCurrency:75"
+        },
+        {
+            "requiredProgress": 5000,
+            "chestRewardId": "legendaryEventCurrency:80"
+        },
+        {
+            "requiredProgress": 5500,
+            "chestRewardId": "legendaryEventCurrency:85"
+        },
+        {
+            "requiredProgress": 6000,
+            "chestRewardId": "legendaryEventCurrency:90"
+        },
+        {
+            "requiredProgress": 6500,
+            "chestRewardId": "legendaryEventCurrency:95"
+        },
+        {
+            "requiredProgress": 7000,
+            "chestRewardId": "legendaryEventCurrency:100"
+        },
+        {
+            "requiredProgress": 7500,
+            "chestRewardId": "legendaryEventCurrency:110"
+        },
+        {
+            "requiredProgress": 8000,
+            "chestRewardId": "legendaryEventCurrency:120"
+        },
+        {
+            "requiredProgress": 8500,
+            "chestRewardId": "legendaryEventCurrency:140"
+        },
+        {
+            "requiredProgress": 9000,
+            "chestRewardId": "legendaryEventCurrency:160"
+        },
+        {
+            "requiredProgress": 9500,
+            "chestRewardId": "legendaryEventCurrency:180"
+        },
+        {
+            "requiredProgress": 10000,
+            "chestRewardId": "legendaryEventCurrency:200"
+        },
+        {
+            "requiredProgress": 10500,
+            "chestRewardId": "legendaryEventCurrency:220"
+        },
+        {
+            "requiredProgress": 11000,
+            "chestRewardId": "legendaryEventCurrency:240"
+        },
+        {
+            "requiredProgress": 11500,
+            "chestRewardId": "legendaryEventCurrency:260"
+        },
+        {
+            "requiredProgress": 12000,
+            "chestRewardId": "legendaryEventCurrency:280"
+        },
+        {
+            "requiredProgress": 12500,
+            "chestRewardId": "legendaryEventCurrency:300"
+        },
+        {
+            "requiredProgress": 13000,
+            "chestRewardId": "legendaryEventCurrency:310"
+        },
+        {
+            "requiredProgress": 13500,
+            "chestRewardId": "legendaryEventCurrency:320"
+        },
+        {
+            "requiredProgress": 14000,
+            "chestRewardId": "legendaryEventCurrency:330"
+        },
+        {
+            "requiredProgress": 14250,
+            "chestRewardId": "legendaryEventCurrency:340"
+        },
+        {
+            "requiredProgress": 14500,
+            "chestRewardId": "legendaryEventCurrency:350"
+        },
+        {
+            "requiredProgress": 14750,
+            "chestRewardId": "legendaryEventCurrency:355"
+        },
+        {
+            "requiredProgress": 15000,
+            "chestRewardId": "legendaryEventCurrency:360"
+        },
+        {
+            "requiredProgress": 15250,
+            "chestRewardId": "legendaryEventCurrency:365"
+        },
+        {
+            "requiredProgress": 15500,
+            "chestRewardId": "legendaryEventCurrency:370"
+        },
+        {
+            "requiredProgress": 15750,
+            "chestRewardId": "legendaryEventCurrency:380"
+        },
+        {
+            "requiredProgress": 16000,
+            "chestRewardId": "legendaryEventCurrency:390"
+        },
+        {
+            "requiredProgress": 16250,
+            "chestRewardId": "legendaryEventCurrency:400"
+        },
+        {
+            "requiredProgress": 16500,
+            "chestRewardId": "legendaryEventCurrency:410"
+        },
+        {
+            "requiredProgress": 16750,
+            "chestRewardId": "legendaryEventCurrency:420"
+        },
+        {
+            "requiredProgress": 17000,
+            "chestRewardId": "legendaryEventCurrency:430"
+        },
+        {
+            "requiredProgress": 17250,
+            "chestRewardId": "legendaryEventCurrency:440"
+        },
+        {
+            "requiredProgress": 17500,
+            "chestRewardId": "legendaryEventCurrency:450"
+        },
+        {
+            "requiredProgress": 17750,
+            "chestRewardId": "legendaryEventCurrency:460"
+        },
+        {
+            "requiredProgress": 18000,
+            "chestRewardId": "legendaryEventCurrency:470"
+        },
+        {
+            "requiredProgress": 18250,
+            "chestRewardId": "legendaryEventCurrency:480"
+        },
+        {
+            "requiredProgress": 18500,
+            "chestRewardId": "legendaryEventCurrency:490"
+        },
+        {
+            "requiredProgress": 18750,
+            "chestRewardId": "legendaryEventCurrency:500"
+        },
+        {
+            "requiredProgress": 19000,
+            "chestRewardId": "legendaryEventCurrency:510"
+        },
+        {
+            "requiredProgress": 19250,
+            "chestRewardId": "legendaryEventCurrency:520"
+        },
+        {
+            "requiredProgress": 19500,
+            "chestRewardId": "legendaryEventCurrency:530"
+        },
+        {
+            "requiredProgress": 19750,
+            "chestRewardId": "legendaryEventCurrency:540"
+        },
+        {
+            "requiredProgress": 20000,
+            "chestRewardId": "legendaryEventCurrency:550"
+        },
+        {
+            "requiredProgress": 20250,
+            "chestRewardId": "legendaryEventCurrency:560"
+        },
+        {
+            "requiredProgress": 20500,
+            "chestRewardId": "legendaryEventCurrency:570"
+        },
+        {
+            "requiredProgress": 20750,
+            "chestRewardId": "legendaryEventCurrency:580"
+        },
+        {
+            "requiredProgress": 21000,
+            "chestRewardId": "legendaryEventCurrency:590"
+        },
+        {
+            "requiredProgress": 21250,
+            "chestRewardId": "legendaryEventCurrency:600"
+        },
+        {
+            "requiredProgress": 21500,
+            "chestRewardId": "legendaryEventCurrency:605"
+        },
+        {
+            "requiredProgress": 21750,
+            "chestRewardId": "legendaryEventCurrency:610"
+        },
+        {
+            "requiredProgress": 22000,
+            "chestRewardId": "legendaryEventCurrency:615"
+        },
+        {
+            "requiredProgress": 22250,
+            "chestRewardId": "legendaryEventCurrency:620"
+        },
+        {
+            "requiredProgress": 22500,
+            "chestRewardId": "legendaryEventCurrency:625"
+        },
+        {
+            "requiredProgress": 22750,
+            "chestRewardId": "legendaryEventCurrency:630"
+        },
+        {
+            "requiredProgress": 23000,
+            "chestRewardId": "legendaryEventCurrency:635"
+        },
+        {
+            "requiredProgress": 23250,
+            "chestRewardId": "legendaryEventCurrency:640"
+        },
+        {
+            "requiredProgress": 23500,
+            "chestRewardId": "legendaryEventCurrency:645"
+        },
+        {
+            "requiredProgress": 23750,
+            "chestRewardId": "legendaryEventCurrency:650"
+        },
+        {
+            "requiredProgress": 24000,
+            "chestRewardId": "legendaryEventCurrency:655"
+        },
+        {
+            "requiredProgress": 24250,
+            "chestRewardId": "legendaryEventCurrency:660"
+        },
+        {
+            "requiredProgress": 24500,
+            "chestRewardId": "legendaryEventCurrency:665"
+        },
+        {
+            "requiredProgress": 24750,
+            "chestRewardId": "legendaryEventCurrency:670"
+        },
+        {
+            "requiredProgress": 25000,
+            "chestRewardId": "legendaryEventCurrency:675"
+        },
+        {
+            "requiredProgress": 25250,
+            "chestRewardId": "legendaryEventCurrency:680"
+        },
+        {
+            "requiredProgress": 25500,
+            "chestRewardId": "legendaryEventCurrency:685"
+        },
+        {
+            "requiredProgress": 25750,
+            "chestRewardId": "legendaryEventCurrency:690"
+        },
+        {
+            "requiredProgress": 26000,
+            "chestRewardId": "legendaryEventCurrency:695"
+        },
+        {
+            "requiredProgress": 26250,
+            "chestRewardId": "legendaryEventCurrency:700"
+        },
+        {
+            "requiredProgress": 26500,
+            "chestRewardId": "legendaryEventCurrency:705"
+        },
+        {
+            "requiredProgress": 26750,
+            "chestRewardId": "legendaryEventCurrency:710"
+        },
+        {
+            "requiredProgress": 27000,
+            "chestRewardId": "legendaryEventCurrency:715"
+        }
+    ],
+    "chests": [
+        {
+            "level": 1,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 60
+            },
+            "rewards": ["gold:500-550", "legendaryEventShards:25", "xpEpic", "abilityTokenCommon_Imperial:5"]
+        },
+        {
+            "level": 2,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 80
+            },
+            "rewards": ["gold:550-605", "legendaryEventShards:25", "xpEpic", "abilityTokenCommon_Imperial:5"]
+        },
+        {
+            "level": 3,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 100
+            },
+            "rewards": ["gold:600-660", "legendaryEventShards:25", "xpEpic", "abilityTokenCommon_Imperial:5"]
+        },
+        {
+            "level": 4,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 120
+            },
+            "rewards": ["gold:650-715", "legendaryEventShards:25", "xpEpic", "abilityTokenCommon_Imperial:5"]
+        },
+        {
+            "level": 5,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 140
+            },
+            "rewards": [
+                "gold:700-770",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokenCommon_Imperial:5",
+                "heroAscensionOrbEpic_Imperial"
+            ]
+        },
+        {
+            "level": 6,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 160
+            },
+            "rewards": ["gold:750-825", "legendaryEventShards:25", "xpEpic", "abilityTokenUncommon_Imperial:3"]
+        },
+        {
+            "level": 7,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 180
+            },
+            "rewards": ["gold:800-880", "legendaryEventShards:25", "xpEpic", "abilityTokenUncommon_Imperial:3"]
+        },
+        {
+            "level": 8,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 200
+            },
+            "rewards": ["gold:850-935", "legendaryEventShards:25", "xpEpic", "abilityTokenUncommon_Imperial:3"]
+        },
+        {
+            "level": 9,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 220
+            },
+            "rewards": ["gold:900-990", "legendaryEventShards:25", "xpEpic", "abilityTokenUncommon_Imperial:3"]
+        },
+        {
+            "level": 10,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 240
+            },
+            "rewards": [
+                "gold:950-1045",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 11,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 260
+            },
+            "rewards": [
+                "gold:1000-1100",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary"
+            ]
+        },
+        {
+            "level": 12,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 280
+            },
+            "rewards": [
+                "gold:1050-1155",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary"
+            ]
+        },
+        {
+            "level": 13,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 300
+            },
+            "rewards": [
+                "gold:1100-1210",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary"
+            ]
+        },
+        {
+            "level": 14,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 320
+            },
+            "rewards": [
+                "gold:1150-1265",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary"
+            ]
+        },
+        {
+            "level": 15,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 340
+            },
+            "rewards": [
+                "gold:1200-1320",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 16,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 350
+            },
+            "rewards": [
+                "gold:1250-1375",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary"
+            ]
+        },
+        {
+            "level": 17,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 360
+            },
+            "rewards": [
+                "gold:1300-1430",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialUncommonToLegendary"
+            ]
+        },
+        {
+            "level": 18,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 370
+            },
+            "rewards": ["gold:1350-1485", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialRareToLegendary"]
+        },
+        {
+            "level": 19,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 380
+            },
+            "rewards": ["gold:1400-1540", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialRareToLegendary"]
+        },
+        {
+            "level": 20,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 390
+            },
+            "rewards": [
+                "gold:1450-1595",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialRareToLegendary",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 21,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1500-1650", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialRareToLegendary"]
+        },
+        {
+            "level": 22,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1550-1705", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialRareToLegendary"]
+        },
+        {
+            "level": 23,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1600-1760", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialRareToLegendary"]
+        },
+        {
+            "level": 24,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1650-1815", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialRareToLegendary"]
+        },
+        {
+            "level": 25,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": [
+                "gold:1700-1870",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialEpicToLegendary",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 26,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1750-1925", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialEpicToLegendary"]
+        },
+        {
+            "level": 27,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1800-1980", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialEpicToLegendary"]
+        },
+        {
+            "level": 28,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1850-2035", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialEpicToLegendary"]
+        },
+        {
+            "level": 29,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:1900-2090", "legendaryEventShards:25", "xpEpic", "abilityTokensImperialEpicToLegendary"]
+        },
+        {
+            "level": 30,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": [
+                "gold:1950-2145",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokensImperialEpicToLegendary",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 31,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:2000-2200", "legendaryEventShards:25", "xpEpic", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 32,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:2050-2255", "legendaryEventShards:25", "xpEpic", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 33,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:2100-2310", "legendaryEventShards:25", "xpEpic", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 34,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:2150-2365", "legendaryEventShards:25", "xpEpic", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 35,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": ["gold:2200-2420", "legendaryEventShards:25", "xpEpic", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 36,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 400
+            },
+            "rewards": [
+                "gold:2250-2475",
+                "legendaryEventShards:25",
+                "xpEpic",
+                "abilityTokenLegendary_Imperial",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 37,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 800
+            },
+            "rewards": ["gold:2300-2530", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial:2"]
+        },
+        {
+            "level": 38,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 900
+            },
+            "rewards": ["gold:2350-2585", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial:2"]
+        },
+        {
+            "level": 39,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1000
+            },
+            "rewards": ["gold:2400-2640", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial:2"]
+        },
+        {
+            "level": 40,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1100
+            },
+            "rewards": [
+                "gold:2450-2695",
+                "legendaryEventShards:25",
+                "xpLegendary",
+                "abilityTokenLegendary_Imperial",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 41,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1200
+            },
+            "rewards": ["gold:2500-2750", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial:2"]
+        },
+        {
+            "level": 42,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1300
+            },
+            "rewards": ["gold:2550-2805", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial:2"]
+        },
+        {
+            "level": 43,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1400
+            },
+            "rewards": ["gold:2600-2860", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial:2"]
+        },
+        {
+            "level": 44,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": [
+                "gold:2650-2915",
+                "legendaryEventShards:25",
+                "xpLegendary",
+                "abilityTokenLegendary_Imperial",
+                "heroAscensionOrbLegendary_Imperial"
+            ]
+        },
+        {
+            "level": 45,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:2700-2970", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 46,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:2750-3025", "legendaryEventShards:25", "xpLegendary", "abilityTokenLegendary_Imperial"]
+        },
+        {
+            "level": 47,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:2800-3080", "legendaryEventShards:25", "xpMythic", "abilityTokenMythic_Imperial"]
+        },
+        {
+            "level": 48,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:2850-3135", "legendaryEventShards:25", "xpMythic", "abilityTokenMythic_Imperial"]
+        },
+        {
+            "level": 49,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": [
+                "gold:2900-3190",
+                "legendaryEventShards:25",
+                "xpMythic",
+                "abilityTokenMythic_Imperial",
+                "heroAscensionOrbMythic_Imperial"
+            ]
+        },
+        {
+            "level": 50,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:2950-3245", "legendaryEventShards:25", "xpMythic", "abilityTokenMythic_Imperial"]
+        },
+        {
+            "level": 51,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:3000-3300", "legendaryEventShards:25", "xpMythic", "abilityTokenMythic_Imperial"]
+        },
+        {
+            "level": 52,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:3050-3355", "legendaryEventShards:25", "xpMythic", "abilityTokenMythic_Imperial"]
+        },
+        {
+            "level": 53,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:3100-3410", "xpMythic", "abilityTokenMythic_Imperial", "heroAscensionOrbMythic_Imperial"]
+        },
+        {
+            "level": 54,
+            "cost": {
+                "type": "legendaryEventCurrency",
+                "amount": 1500
+            },
+            "rewards": ["gold:3150-3465", "xpMythic", "abilityTokenMythic_Imperial", "heroAscensionOrbMythic_Imperial"]
+        }
+    ],
+    "shardsPerChest": 25,
+    "progression": {
+        "unlock": 400,
+        "fourStars": 120,
+        "fiveStars": 180,
+        "blueStar": 200,
+        "twoBlueStars": 150,
+        "mythic": 250
+    },
+    "quests": {
+        "regular": [
+            {
+                "name": "leg_dante_01",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "DefeatWaves",
+                        "target": 5,
+                        "locaKey": "DefeatWaves_description"
+                    },
+                    {
+                        "name": "DealDamage",
+                        "target": 1000,
+                        "locaKey": "DealDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_02",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFaction",
+                        "target": 30,
+                        "locaKey": "SlayEnemiesOfFaction_description",
+                        "taskParameters": {
+                            "factionId": "Necrons"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_03",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFaction",
+                        "target": 75,
+                        "locaKey": "SlayEnemiesOfFaction_description",
+                        "taskParameters": {
+                            "factionId": "BlackLegion"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_04",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFaction",
+                        "target": 100,
+                        "locaKey": "SlayEnemiesOfFaction_description",
+                        "taskParameters": {
+                            "factionId": "AstraMilitarum"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_05",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "UseAbilityWithFactionTrait",
+                        "target": 15,
+                        "locaKey": "UseAbilityWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    },
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 10000,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_06",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "UseAbilityWithFactionTrait",
+                        "target": 20,
+                        "locaKey": "UseAbilityWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 15000,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_07",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "UseAbilityWithFactionTrait",
+                        "target": 25,
+                        "locaKey": "UseAbilityWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    },
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 20000,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_08",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "DefeatWaves",
+                        "target": 15,
+                        "locaKey": "DefeatWaves_description"
+                    },
+                    {
+                        "name": "DealDamageOfProfileType",
+                        "target": 25000,
+                        "locaKey": "DealDamageOfProfileType_Plasma_description",
+                        "taskParameters": {
+                            "damageProfileType": "Plasma"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_09",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "DefeatWaves",
+                        "target": 15,
+                        "locaKey": "DefeatWaves_description"
+                    },
+                    {
+                        "name": "DealDamageOfProfileType",
+                        "target": 25000,
+                        "locaKey": "DealDamageOfProfileType_Chain_description",
+                        "taskParameters": {
+                            "damageProfileType": "Chain"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_10",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "DefeatWaves",
+                        "target": 15,
+                        "locaKey": "DefeatWaves_description"
+                    },
+                    {
+                        "name": "DealDamageOfProfileType",
+                        "target": 25000,
+                        "locaKey": "DealDamageOfProfileType_Flame_description",
+                        "taskParameters": {
+                            "damageProfileType": "Flame"
+                        }
+                    }
+                ]
+            }
+        ],
+        "premium": [
+            {
+                "name": "leg_dante_premium_01",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "WinBattlesWithoutUsingSummons",
+                        "target": 1,
+                        "locaKey": "WinBattlesWithoutUsingSummons_description"
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_02",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 30,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_03",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 75,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_04",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 100,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_05",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "WinBattlesWithoutTrait",
+                        "target": 5,
+                        "locaKey": "WinBattlesWithoutTrait_description",
+                        "taskParameters": {
+                            "trait": "HeavyWeapon"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_06",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "WinBattlesWithoutTrait",
+                        "target": 5,
+                        "locaKey": "WinBattlesWithoutTrait_description",
+                        "taskParameters": {
+                            "trait": "Terrifying"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_07",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "WinBattlesWithoutTrait",
+                        "target": 5,
+                        "locaKey": "WinBattlesWithoutTrait_description",
+                        "taskParameters": {
+                            "trait": "Infiltrate"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_08",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithDamageProfile",
+                        "target": 75,
+                        "locaKey": "SlayEnemiesWithDamageProfile_description",
+                        "taskParameters": {
+                            "damageProfileType": "Plasma"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_09",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithDamageProfile",
+                        "target": 75,
+                        "locaKey": "SlayEnemiesWithDamageProfile_description",
+                        "taskParameters": {
+                            "damageProfileType": "Chain"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "leg_dante_premium_10",
+                "rewards": ["legendaryEventCurrency:25"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithDamageProfile",
+                        "target": 75,
+                        "locaKey": "SlayEnemiesWithDamageProfile_description",
+                        "taskParameters": {
+                            "damageProfileType": "Flame"
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+    "globalUnlockRequirement": {
+        "PowerLevel": 9
+    },
+    "descriptions": [
+        "{[G_HRE_NAME]}",
+        "Defeat waves of enemies to Unlock and Promote the featured Character!",
+        "The {[G_HRE_NAME]} takes place over {[AMOUNT]} days. Amass {[G_HRE_SCORE_POINTS_WITH_ICON]} to ultimately Unlock and Promote the featured Character.\n\nReach {[G_HRE_SCORE_POINTS_WITH_ICON]} milestones to earn {[G_HRE_CURRENCIES_WITH_ICON]} and open event crates containing {[G_HRE_SHARDS_WITH_ICON]} and other rewards.\n\nEach Character's event will come back a number of times and you retain your amassed {[G_HRE_SCORE_POINTS_WITH_ICON]} and progress between events featuring that same Character.\n\nHave fun!"
+    ]
+}

@@ -1,0 +1,788 @@
+{
+    "eventName": "hse_trait_boost_rapid_assault",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_trait_boost_rapid_assault_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_rapid_assault_Interstitial_Header",
+                "visualId": "homescreenevent_trait_boost_rapid_assault",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_rapid_assault_Interstitial_Description",
+                "eventId": "hse_trait_boost_rapid_assault_tier_high",
+                "rewardProgressId": "hse_trait_boost_flying_tier_high",
+                "theme": "trait_boost_rapid_assault",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 100,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_high_bundle",
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_high_playmore",
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_high_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:TraitBoost_RapidAssault",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_trait_boost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["RapidAssault"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_trait_boost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["RapidAssault"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "draft_abilityTokensRare:2"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "draft_abilityTokensEpic"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "draft_abilityTokensRare:3"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "draft_abilityTokensEpic:2"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 210,
+                    "chestRewardId": "draft_abilityTokensRare:4"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "draft_abilityTokensEpic:3"
+                },
+                {
+                    "requiredProgress": 270,
+                    "chestRewardId": "draft_abilityTokensLegendary:2"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "draft_abilityTokensRare:5"
+                },
+                {
+                    "requiredProgress": 340,
+                    "chestRewardId": "draft_abilityTokensEpic:4"
+                },
+                {
+                    "requiredProgress": 380,
+                    "chestRewardId": "draft_abilityTokensLegendary:3"
+                },
+                {
+                    "requiredProgress": 420,
+                    "chestRewardId": "draft_abilityTokensRare:6"
+                },
+                {
+                    "requiredProgress": 460,
+                    "chestRewardId": "draft_abilityTokensEpic:5"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "draft_abilityTokensLegendary:4"
+                },
+                {
+                    "requiredProgress": 540,
+                    "chestRewardId": "draft_abilityTokensMythic"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 640,
+                    "chestRewardId": "draft_abilityTokensLegendary:5"
+                },
+                {
+                    "requiredProgress": 680,
+                    "chestRewardId": "draft_abilityTokensMythic:2"
+                },
+                {
+                    "requiredProgress": 25,
+                    "chestRewardId": "draft_abilityTokensLegendary:2",
+                    "endless": true
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:TraitBoost_RapidAssault": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "RapidAssault",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_trait_boost_rapidassault_tier_high_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_high_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_high_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_high:125",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:500"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_high_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_high_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_high_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_high:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_hse_trait_boost_rapid_assault_tier_high:150", "gems:1000"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Rapid Assault Boost</i> is here",
+                "Earn points by battling with Rapid Assault units and claim exclusive rewards!",
+                "<style=\"RapidAssault\">Rapid Assault</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "<style=\"RapidAssault\">Rapid Assault</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_TraitBoostRapidAssault\">{[POINTS]} Rapid Assault Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"RapidAssault\">Rapid Assault</style> unit in Arena, Onslaught, and Salvage Run."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_trait_boost_rapid_assault_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_rapid_assault_Interstitial_Header",
+                "visualId": "homescreenevent_trait_boost_rapid_assault",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_rapid_assault_Interstitial_Description",
+                "eventId": "hse_trait_boost_rapid_assault_tier_mid",
+                "rewardProgressId": "hse_trait_boost_flying_tier_mid",
+                "theme": "trait_boost_rapid_assault",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 60,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_mid_bundle",
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_mid_playmore",
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_mid_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:TraitBoost_RapidAssault",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_trait_boost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["RapidAssault"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_trait_boost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["RapidAssault"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "draft_abilityTokensRare:2"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "draft_abilityTokensEpic"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "draft_abilityTokensUncommon:4"
+                },
+                {
+                    "requiredProgress": 125,
+                    "chestRewardId": "draft_abilityTokensRare:3"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "draft_abilityTokensEpic:2"
+                },
+                {
+                    "requiredProgress": 175,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "draft_abilityTokensUncommon:5"
+                },
+                {
+                    "requiredProgress": 225,
+                    "chestRewardId": "draft_abilityTokensRare:4"
+                },
+                {
+                    "requiredProgress": 265,
+                    "chestRewardId": "draft_abilityTokensEpic:3"
+                },
+                {
+                    "requiredProgress": 305,
+                    "chestRewardId": "draft_abilityTokensLegendary:2"
+                },
+                {
+                    "requiredProgress": 345,
+                    "chestRewardId": "draft_abilityTokensUncommon:6"
+                },
+                {
+                    "requiredProgress": 385,
+                    "chestRewardId": "draft_abilityTokensRare:5"
+                },
+                {
+                    "requiredProgress": 425,
+                    "chestRewardId": "draft_abilityTokensEpic:4"
+                },
+                {
+                    "requiredProgress": 465,
+                    "chestRewardId": "draft_abilityTokensLegendary:3"
+                },
+                {
+                    "requiredProgress": 525,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 565,
+                    "chestRewardId": "draft_abilityTokensLegendary:4"
+                },
+                {
+                    "requiredProgress": 605,
+                    "chestRewardId": "draft_abilityTokensLegendary:5"
+                },
+                {
+                    "requiredProgress": 25,
+                    "chestRewardId": "draft_abilityTokensLegendary:2",
+                    "endless": true
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:TraitBoost_RapidAssault": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "RapidAssault",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_trait_boost_rapidassault_tier_mid_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_mid_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_mid_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_mid:75",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_mid_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_mid_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_mid_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_mid:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_hse_trait_boost_rapid_assault_tier_mid:150", "gems:1000"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Rapid Assault Boost</i> is here",
+                "Earn points by battling with Rapid Assault units and claim exclusive rewards!",
+                "<style=\"RapidAssault\">Rapid Assault</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "<style=\"RapidAssault\">Rapid Assault</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_TraitBoostRapidAssault\">{[POINTS]} Rapid Assault Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"RapidAssault\">Rapid Assault</style> unit in Arena, Onslaught, and Salvage Run."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "hse_trait_boost_rapid_assault_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_rapid_assault_Interstitial_Header",
+                "visualId": "homescreenevent_trait_boost_rapid_assault",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_rapid_assault_Interstitial_Description",
+                "eventId": "hse_trait_boost_rapid_assault_tier_low",
+                "rewardProgressId": "hse_trait_boost_flying_tier_low",
+                "theme": "trait_boost_rapid_assault",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 20,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": [
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_low_bundle",
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_low_playmore",
+                    "offer_homescreen_event_trait_boost_rapidassault_tier_low_booster"
+                ],
+                "modifiers": [
+                    {
+                        "type": "battleEnvironmentAbility",
+                        "abilityId": "EnvStatBoost:TraitBoost_RapidAssault",
+                        "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_trait_boost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["RapidAssault"]
+                        }
+                    }
+                ],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_trait_boost_rapid_assault_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["RapidAssault"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 10,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensCommon:2"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "draft_abilityTokensCommon:2"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "draft_abilityTokensUncommon"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "draft_abilityTokensCommon:3"
+                },
+                {
+                    "requiredProgress": 65,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "draft_abilityTokensRare"
+                },
+                {
+                    "requiredProgress": 95,
+                    "chestRewardId": "draft_abilityTokensCommon:4"
+                },
+                {
+                    "requiredProgress": 110,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 125,
+                    "chestRewardId": "draft_abilityTokensRare:2"
+                },
+                {
+                    "requiredProgress": 145,
+                    "chestRewardId": "draft_abilityTokensEpic"
+                },
+                {
+                    "requiredProgress": 165,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 185,
+                    "chestRewardId": "draft_abilityTokensCommon:5"
+                },
+                {
+                    "requiredProgress": 205,
+                    "chestRewardId": "draft_abilityTokensUncommon:4"
+                },
+                {
+                    "requiredProgress": 225,
+                    "chestRewardId": "draft_abilityTokensRare:3"
+                },
+                {
+                    "requiredProgress": 245,
+                    "chestRewardId": "draft_abilityTokensEpic:2"
+                },
+                {
+                    "requiredProgress": 305,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 325,
+                    "chestRewardId": "draft_abilityTokensRare:4"
+                },
+                {
+                    "requiredProgress": 345,
+                    "chestRewardId": "draft_abilityTokensEpic:3"
+                },
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensRare:2",
+                    "endless": true
+                }
+            ],
+            "abilities": {
+                "EnvStatBoost:TraitBoost_RapidAssault": {
+                    "ability": {
+                        "upgrades": null,
+                        "variables": {},
+                        "constants": {
+                            "trait": "RapidAssault",
+                            "dmgPct": "20",
+                            "healthPct": "20",
+                            "armorPct": "20"
+                        }
+                    },
+                    "powerModifier": {
+                        "baseMultiplier": 100
+                    }
+                }
+            },
+            "offers": {
+                "offer_homescreen_event_trait_boost_rapidassault_tier_low_bundle": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_low_bundle",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_low_bundle"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                        "price": 1999,
+                        "mercadoId": "offer_01999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_low:75",
+                            "summoningToken:5",
+                            "specialSummoningToken:5",
+                            "gems:200"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_low_playmore": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_low_playmore",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_low_playmore"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": [
+                            "tieredRewardPoints_hse_trait_boost_rapid_assault_tier_low:80",
+                            "stamina_waves:2",
+                            "stamina_treasureBeach:2",
+                            "stamina:120",
+                            "raidTicket:20",
+                            "gems:300"
+                        ]
+                    }
+                },
+                "offer_homescreen_event_trait_boost_rapidassault_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_trait_boost_rapidassault_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_rapidassault_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
+                        "price": 599,
+                        "mercadoId": "offer_00599",
+                        "rewards": ["tieredRewardPoints_hse_trait_boost_rapid_assault_tier_low:100", "gems:400"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>Rapid Assault Boost</i> is here",
+                "Earn points by battling with Rapid Assault units and claim exclusive rewards!",
+                "<style=\"RapidAssault\">Rapid Assault</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "<style=\"RapidAssault\">Rapid Assault</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
+                "You gain <style=\"HSE_Points_TraitBoostRapidAssault\">{[POINTS]} Rapid Assault Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"RapidAssault\">Rapid Assault</style> unit in Arena, Onslaught, and Salvage Run."
+            ]
+        }
+    }
+}

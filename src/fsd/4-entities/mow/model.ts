@@ -50,6 +50,16 @@ export interface IMowsAndUpgradeCosts {
     upgradeCosts: IMowUpgradeCosts[];
 }
 
+/** Raw shape of `new-mows-data2.json`: basic MoW identity plus ability id lists. */
+export interface IMowStatic3 {
+    id: string;
+    name: string;
+    faction: FactionId;
+    alliance: string;
+    abilities: string[];
+    mythicAbilities: string[];
+}
+
 export interface IMowDatabase {
     id: string;
     unlocked: boolean;

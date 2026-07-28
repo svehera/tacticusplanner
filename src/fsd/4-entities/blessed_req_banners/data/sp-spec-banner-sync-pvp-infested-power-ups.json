@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_SyncPvp_InfestedPowerUps",
+    "title": "Tournament Arena Requisition",
+    "tagline": "Higher drop chances for some of the most effective units in Tournament Arena!",
+    "featuredUnits": [
+        "adeptCelestine",
+        "genesKelermorph",
+        "deathPutrifier",
+        "bloodIntercessor",
+        "templSwordBrother",
+        "blackForgefiend"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_SE_Holidays2025",
+    "title": "Da Red Gobbo Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[SeasonalEvents/name_holidays_2025]}</i> Survival event!",
+    "featuredUnits": ["genesPatriarch", "tyranParasite", "orksRuntherd", "genesMagus", "tauMarksman", "necroDestroyer"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

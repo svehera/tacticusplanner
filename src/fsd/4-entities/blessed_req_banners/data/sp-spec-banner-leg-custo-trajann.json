@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_custoTrajann",
+    "title": "Trajann Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_Custodes]}</i> event, featuring <style=\"Faction_Custodes\">Trajann</style>",
+    "featuredUnits": [
+        "deathTyphus",
+        "deathRotbone",
+        "spaceHound",
+        "bloodDeathCompany",
+        "tyranTyrantGuard",
+        "blackTerminator"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

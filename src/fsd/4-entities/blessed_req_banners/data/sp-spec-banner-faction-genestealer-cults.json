@@ -1,0 +1,9 @@
+{
+    "id": "sp_spec_banner_Faction_GenestealerCults",
+    "title": "<style=\"Faction_Genestealers\">Genestealer Cults</style> Requisition",
+    "tagline": "Higher drop chances for all the <style=\"Faction_Genestealers\">Genestealer Cults</style> units!",
+    "featuredUnits": ["genesBiophagus", "genesMagus", "genesPrimus", "genesKelermorph", "genesPatriarch"],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

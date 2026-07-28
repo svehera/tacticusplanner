@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Trait_BigTarget",
+    "title": "Big Target Requisition",
+    "tagline": "Higher drop chances for these <style=\"Big_Target\">Big Target</style> characters!",
+    "featuredUnits": [
+        "astraBullgryn",
+        "tyranTyrantGuard",
+        "custoVexilusPraetor",
+        "blackObliterator",
+        "orksWarboss",
+        "adeptMorvenn"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

@@ -1,0 +1,2087 @@
+{
+    "calendar": "calendar_seasonal_event_august_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["gems:75", "stamina:60", "raidTicket:10"]
+                },
+                {
+                    "variant": "L2_SHD",
+                    "title": "Anniversary Committee",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:430", "summoningToken:20"]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "Anniversary Committee",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:345", "summoningToken:16"]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "Anniversary Committee",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:260", "summoningToken:12"]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "Anniversary Committee",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:130", "summoningToken:6"]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:240", "xpMythic:3", "xpLegendary:9", "gold:10500"]
+                },
+                {
+                    "variant": "XL3_M_SHD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 8999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:840",
+                        "ascensionOrbsMythic:18",
+                        "ascensionOrbsLegendary:9"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "xpMythic:2", "xpLegendary:6", "gold:7000"]
+                },
+                {
+                    "variant": "XL3_M_HD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:745",
+                        "ascensionOrbsMythic:16",
+                        "ascensionOrbsLegendary:8"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "xpLegendary:10", "xpEpic:20", "gold:8000"]
+                },
+                {
+                    "variant": "XL3_M_MD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:500",
+                        "ascensionOrbsMythic:12",
+                        "ascensionOrbsLegendary:6"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "xpLegendary:2",
+                        "xpEpic:20",
+                        "xpRare:25",
+                        "gold:5250"
+                    ]
+                },
+                {
+                    "variant": "XL3_M_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:250",
+                        "ascensionOrbsMythic:6",
+                        "ascensionOrbsLegendary:3"
+                    ]
+                },
+                {
+                    "variant": "XL3_F_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:250",
+                        "ascensionOrbsLegendary:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsUncommon:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyAugust2026:10", "specialSummoningToken:1"]
+                },
+                {
+                    "variant": "M3_M_SHD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:350",
+                        "mythicDust:210",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "gold:210000"
+                    ]
+                },
+                {
+                    "variant": "M3_L_SHD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:350",
+                        "dust:2800",
+                        "itemsLegendary:3",
+                        "itemsLegendary:2",
+                        "itemsEpic:3",
+                        "itemsEpic:2",
+                        "gold:28000"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_SHD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:350",
+                        "dust:4000",
+                        "itemsEpic:4",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:4",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:4",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "gold:40000"
+                    ]
+                },
+                {
+                    "variant": "M3_M_HD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:210", "mythicDust:140", "itemsMythic:1", "gold:140000"]
+                },
+                {
+                    "variant": "M3_L_HD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:210",
+                        "dust:1680",
+                        "itemsLegendary:2",
+                        "itemsLegendary:1",
+                        "itemsEpic:2",
+                        "itemsEpic:1",
+                        "gold:16800"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_HD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:210",
+                        "dust:2400",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "gold:24000"
+                    ]
+                },
+                {
+                    "variant": "M3_M_MD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "mythicDust:65", "itemsMythic:1", "gold:70000"]
+                },
+                {
+                    "variant": "M3_L_MD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:140",
+                        "dust:1120",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "itemsEpic:1",
+                        "gold:11200"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_MD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:140",
+                        "dust:1600",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsUncommon:2",
+                        "gold:16000"
+                    ]
+                },
+                {
+                    "variant": "M3_M_LD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["seasonalEventCurrencyAugust2026:70", "mythicDust:70", "gold:75000"]
+                },
+                {
+                    "variant": "M3_L_LD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "dust:560",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "gold:5600"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_LD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "dust:800",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "gold:8000"
+                    ]
+                },
+                {
+                    "variant": "M3_CU_LD",
+                    "title": "Anniversary Regalia",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "dust:800",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3",
+                        "gold:8000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "L2_AL50_SHD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:390",
+                        "gold:600000",
+                        "abilityTokensMythic:6",
+                        "abilityTokensLegendary:6"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_SHD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:390",
+                        "gold:600000",
+                        "abilityTokensLegendary:5",
+                        "abilityTokensLegendary:5",
+                        "abilityTokensLegendary:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_SHD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:390",
+                        "gold:468000",
+                        "abilityTokensEpic:15",
+                        "abilityTokensEpic:15",
+                        "abilityTokensRare:20",
+                        "abilityTokensRare:20"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_SHD",
+                    "title": "Anniversary Components",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:700",
+                        "machinesOfWarToken_Imperial:300",
+                        "machinesOfWarToken_Chaos:300",
+                        "machinesOfWarToken_Xenos:300"
+                    ]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:700", "summoningToken:30"]
+                },
+                {
+                    "variant": "L2_AL50_HD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "gold:400000",
+                        "abilityTokensMythic:4",
+                        "abilityTokensLegendary:4"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_HD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "gold:400000",
+                        "abilityTokensLegendary:5",
+                        "abilityTokensLegendary:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_HD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "gold:312000",
+                        "abilityTokensEpic:20",
+                        "abilityTokensRare:26"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_HD",
+                    "title": "Anniversary Components",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:350",
+                        "machinesOfWarToken_Imperial:150",
+                        "machinesOfWarToken_Chaos:150",
+                        "machinesOfWarToken_Xenos:150"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:350", "summoningToken:15"]
+                },
+                {
+                    "variant": "L2_AL50_MD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "gold:400000",
+                        "abilityTokensMythic:4",
+                        "abilityTokensLegendary:4"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_MD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "gold:400000",
+                        "abilityTokensLegendary:5",
+                        "abilityTokensLegendary:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_MD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "gold:312000",
+                        "abilityTokensEpic:20",
+                        "abilityTokensRare:26"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_MD",
+                    "title": "Anniversary Components",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:140",
+                        "machinesOfWarToken_Imperial:60",
+                        "machinesOfWarToken_Chaos:60",
+                        "machinesOfWarToken_Xenos:60"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "summoningToken:6"]
+                },
+                {
+                    "variant": "L2_AL50_LD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:130",
+                        "gold:200000",
+                        "abilityTokensMythic:2",
+                        "abilityTokensLegendary:2"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_LD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:130", "gold:200000", "abilityTokensLegendary:5"]
+                },
+                {
+                    "variant": "L2_AL26_LD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:130",
+                        "gold:156000",
+                        "abilityTokensEpic:10",
+                        "abilityTokensRare:13"
+                    ]
+                },
+                {
+                    "variant": "L2_F_LD",
+                    "title": "Anniversary Abilities",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:130",
+                        "gold:72000",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:24",
+                        "abilityTokensUncommon:24",
+                        "abilityTokensCommon:24",
+                        "abilityTokensCommon:24"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_LD",
+                    "title": "Anniversary Components",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "machinesOfWarToken_Imperial:30",
+                        "machinesOfWarToken_Chaos:30",
+                        "machinesOfWarToken_Xenos:30"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyAugust2026:70", "summoningToken:3"]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["crusadeCurrency:50", "stamina:60", "raidTicket:10"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:360",
+                        "ascensionOrbsMythic:4",
+                        "abilityTokensMythic:4",
+                        "gold:500000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:360",
+                        "ascensionOrbsLegendary:8",
+                        "abilityTokensLegendary:20",
+                        "gold:200000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:360",
+                        "ascensionOrbsLegendary:4",
+                        "ascensionOrbsEpic:12",
+                        "abilityTokensEpic:16",
+                        "abilityTokensEpic:16",
+                        "gold:120000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:360",
+                        "ascensionOrbsEpic:8",
+                        "ascensionOrbsRare:20",
+                        "ascensionOrbsRare:20",
+                        "abilityTokensRare:32",
+                        "abilityTokensUncommon:40",
+                        "gold:68000"
+                    ]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:270",
+                        "ascensionOrbsMythic:3",
+                        "abilityTokensMythic:3",
+                        "gold:375000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:270",
+                        "ascensionOrbsLegendary:6",
+                        "abilityTokensLegendary:15",
+                        "gold:150000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:270",
+                        "ascensionOrbsLegendary:3",
+                        "ascensionOrbsEpic:9",
+                        "abilityTokensEpic:24",
+                        "gold:90000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:270",
+                        "ascensionOrbsEpic:6",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsRare:15",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:30",
+                        "gold:51000"
+                    ]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:180",
+                        "ascensionOrbsMythic:2",
+                        "abilityTokensMythic:2",
+                        "gold:250000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:180",
+                        "ascensionOrbsLegendary:4",
+                        "abilityTokensLegendary:10",
+                        "gold:100000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:180",
+                        "ascensionOrbsLegendary:2",
+                        "ascensionOrbsEpic:6",
+                        "abilityTokensEpic:16",
+                        "gold:60000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:180",
+                        "ascensionOrbsEpic:4",
+                        "ascensionOrbsRare:20",
+                        "abilityTokensRare:16",
+                        "abilityTokensUncommon:20",
+                        "gold:34000"
+                    ]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:90",
+                        "ascensionOrbsMythic:1",
+                        "abilityTokensMythic:1",
+                        "gold:125000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:90",
+                        "ascensionOrbsLegendary:2",
+                        "abilityTokensLegendary:5",
+                        "gold:50000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:90",
+                        "ascensionOrbsLegendary:1",
+                        "ascensionOrbsEpic:3",
+                        "abilityTokensEpic:8",
+                        "gold:30000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Anniversary Advancement",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:90",
+                        "ascensionOrbsEpic:2",
+                        "ascensionOrbsRare:10",
+                        "abilityTokensRare:8",
+                        "abilityTokensUncommon:10",
+                        "gold:17000"
+                    ]
+                },
+                {
+                    "variant": "free_alt",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["gems:50", "stamina:60", "raidTicket:10"]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "S4_M_SHD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "ascensionOrbsMythic:8"]
+                },
+                {
+                    "variant": "S4_L_SHD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "ascensionOrbsLegendary:16"]
+                },
+                {
+                    "variant": "S4_E_SHD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:160",
+                        "ascensionOrbsLegendary:10",
+                        "ascensionOrbsEpic:5",
+                        "ascensionOrbsEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_R_SHD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:160",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:20",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsUncommon:20"
+                    ]
+                },
+                {
+                    "variant": "L2_SHD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:520", "xpMythic:12", "xpLegendary:21", "gold:34500"]
+                },
+                {
+                    "variant": "S4_M_HD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:120", "ascensionOrbsMythic:6"]
+                },
+                {
+                    "variant": "S4_L_HD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:120", "ascensionOrbsLegendary:12"]
+                },
+                {
+                    "variant": "S4_E_HD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:120",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_R_HD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:120",
+                        "ascensionOrbsEpic:15",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsUncommon:15"
+                    ]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:390",
+                        "xpMythic:10",
+                        "xpLegendary:9",
+                        "xpEpic:8",
+                        "gold:25700"
+                    ]
+                },
+                {
+                    "variant": "S4_M_MD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:80", "ascensionOrbsMythic:4"]
+                },
+                {
+                    "variant": "S4_L_MD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:80", "ascensionOrbsLegendary:8"]
+                },
+                {
+                    "variant": "S4_E_MD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:80", "ascensionOrbsEpic:10", "ascensionOrbsEpic:10"]
+                },
+                {
+                    "variant": "S4_R_MD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:80",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:260",
+                        "xpMythic:3",
+                        "xpLegendary:20",
+                        "xpEpic:20",
+                        "xpRare:35",
+                        "gold:20700"
+                    ]
+                },
+                {
+                    "variant": "S4_M_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:40", "ascensionOrbsMythic:2"]
+                },
+                {
+                    "variant": "S4_L_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:40", "ascensionOrbsLegendary:4"]
+                },
+                {
+                    "variant": "S4_E_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:40", "ascensionOrbsEpic:5", "ascensionOrbsEpic:5"]
+                },
+                {
+                    "variant": "S4_R_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:40",
+                        "ascensionOrbsEpic:5",
+                        "ascensionOrbsRare:5",
+                        "ascensionOrbsRare:5",
+                        "ascensionOrbsUncommon:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CU_LD",
+                    "title": "Anniversary Ascensions",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:40",
+                        "ascensionOrbsUncommon:15",
+                        "ascensionOrbsUncommon:15",
+                        "ascensionOrbsUncommon:15",
+                        "ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "Anniversary Experiences",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:130",
+                        "xpLegendary:15",
+                        "xpEpic:20",
+                        "xpRare:30",
+                        "gold:12000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["gems:150", "stamina_treasureBeach:1"]
+                },
+                {
+                    "variant": "S4_M_SHD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:80",
+                        "upgradesMythic:4",
+                        "upgradesMythic:4",
+                        "upgradesLegendary:6",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_SHD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:80",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesUncommon:36",
+                        "upgradesCommon:36"
+                    ]
+                },
+                {
+                    "variant": "S4_M_HD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:60",
+                        "upgradesMythic:3",
+                        "upgradesMythic:3",
+                        "upgradesLegendary:9",
+                        "upgradesEpic:10",
+                        "upgradesEpic:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_HD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:60",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:5",
+                        "upgradesEpic:10",
+                        "upgradesEpic:5",
+                        "upgradesRare:9",
+                        "upgradesRare:9",
+                        "upgradesRare:9",
+                        "upgradesUncommon:27",
+                        "upgradesCommon:27"
+                    ]
+                },
+                {
+                    "variant": "S4_M_MD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:40",
+                        "upgradesMythic:4",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_MD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:40",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:18",
+                        "upgradesUncommon:18",
+                        "upgradesCommon:18"
+                    ]
+                },
+                {
+                    "variant": "S4_M_LD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:20",
+                        "upgradesMythic:2",
+                        "upgradesLegendary:3",
+                        "upgradesEpic:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_LD",
+                    "title": "Anniversary Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:20",
+                        "upgradesLegendary:5",
+                        "upgradesEpic:5",
+                        "upgradesRare:9",
+                        "upgradesUncommon:9",
+                        "upgradesCommon:9"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 8,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Anniversary Plans",
+                    "banner": "Latest Intel!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:300", "intel:1100", "stamina:300", "raidTicket:50"]
+                },
+                {
+                    "variant": "XL1_SHD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:630", "summoningToken:28"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Anniversary Plans",
+                    "banner": "Latest Intel!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:240", "intel:880", "stamina:240", "raidTicket:40"]
+                },
+                {
+                    "variant": "XL1_HD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:540", "summoningToken:24"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Anniversary Plans",
+                    "banner": "Latest Intel!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:180", "intel:660", "stamina:180", "raidTicket:30"]
+                },
+                {
+                    "variant": "XL1_MD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:405", "summoningToken:18"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Anniversary Plans",
+                    "banner": "Latest Intel!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:60", "intel:220", "stamina:60", "raidTicket:10"]
+                },
+                {
+                    "variant": "XL1_LD",
+                    "title": "Anniversary Guests",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:225", "summoningToken:10"]
+                },
+                {
+                    "variant": "M1_SHD_alt",
+                    "title": "Anniversary Plans",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:300",
+                        "xpLegendary:7",
+                        "gold:3500",
+                        "stamina:300",
+                        "raidTicket:50"
+                    ]
+                },
+                {
+                    "variant": "M1_HD_alt",
+                    "title": "Anniversary Plans",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "xpLegendary:5",
+                        "gold:2500",
+                        "stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "M1_MD_alt",
+                    "title": "Anniversary Plans",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:180",
+                        "xpLegendary:4",
+                        "gold:2000",
+                        "stamina:180",
+                        "raidTicket:30"
+                    ]
+                },
+                {
+                    "variant": "M1_LD_alt",
+                    "title": "Anniversary Plans",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:60",
+                        "xpEpic:6",
+                        "gold:900",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 9,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["stamina_waves:1", "crusadeCurrency:50"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Anniversary Security",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:240", "crusadeNpc:480", "stamina:224", "raidTicket:37"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Anniversary Security",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "crusadeNpc:320", "stamina:150", "raidTicket:25"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Anniversary Security",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "crusadeNpc:280", "stamina:132", "raidTicket:22"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Anniversary Security",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyAugust2026:70", "crusadeNpc:140", "stamina:66", "raidTicket:11"]
+                },
+                {
+                    "variant": "free_alt",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["stamina_waves:1", "gems:100"]
+                },
+                {
+                    "variant": "M1_SHD_alt",
+                    "title": "Anniversary Security",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:240", "ShardsAll:120", "stamina:224", "raidTicket:37"]
+                },
+                {
+                    "variant": "M1_HD_alt",
+                    "title": "Anniversary Security",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "ShardsAll:80", "stamina:150", "raidTicket:25"]
+                },
+                {
+                    "variant": "M1_MD_alt",
+                    "title": "Anniversary Security",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "ShardsAll:70", "stamina:132", "raidTicket:22"]
+                },
+                {
+                    "variant": "M1_LD_alt",
+                    "title": "Anniversary Security",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyAugust2026:70", "ShardsAll:35", "stamina:66", "raidTicket:11"]
+                }
+            ]
+        },
+        {
+            "day": 10,
+            "offers": [
+                {
+                    "variant": "L1_SHD",
+                    "title": "Anniversary Shopping",
+                    "banner": "Crusade Credits!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:500", "crusadeCurrency:2000", "gems:2500"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Anniversary Entertainment",
+                    "banner": "Ordnance Resupply!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "crusadeBomb:140",
+                        "stamina:480",
+                        "raidTicket:105"
+                    ]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Anniversary Shopping",
+                    "banner": "Crusade Credits!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:400", "crusadeCurrency:1600", "gems:2000"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Anniversary Entertainment",
+                    "banner": "Ordnance Resupply!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "crusadeBomb:90", "stamina:320", "raidTicket:70"]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Anniversary Shopping",
+                    "banner": "Crusade Credits!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:300", "crusadeCurrency:1200", "gems:1500"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Anniversary Entertainment",
+                    "banner": "Ordnance Resupply!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "crusadeBomb:80", "stamina:280", "raidTicket:56"]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Anniversary Shopping",
+                    "banner": "Crusade Credits!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:100", "crusadeCurrency:400", "gems:500"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Anniversary Entertainment",
+                    "banner": "Ordnance Resupply!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyAugust2026:70", "crusadeBomb:40", "stamina:140", "raidTicket:28"]
+                },
+                {
+                    "variant": "L1_SHD_alt",
+                    "title": "Anniversary Shopping",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:500", "gems:3900"]
+                },
+                {
+                    "variant": "L1_HD_alt",
+                    "title": "Anniversary Shopping",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:400", "gems:3120"]
+                },
+                {
+                    "variant": "L1_MD_alt",
+                    "title": "Anniversary Shopping",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:300", "gems:2340"]
+                },
+                {
+                    "variant": "L1_LD_alt",
+                    "title": "Anniversary Shopping",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:100", "gems:780"]
+                },
+                {
+                    "variant": "M1_SHD_alt",
+                    "title": "Anniversary Entertainment",
+                    "banner": "More Energy!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "stamina_treasureBeach:4",
+                        "stamina:480",
+                        "raidTicket:105"
+                    ]
+                },
+                {
+                    "variant": "M1_HD_alt",
+                    "title": "Anniversary Entertainment",
+                    "banner": "More Energy!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:160",
+                        "stamina_treasureBeach:3",
+                        "stamina:320",
+                        "raidTicket:70"
+                    ]
+                },
+                {
+                    "variant": "M1_MD_alt",
+                    "title": "Anniversary Entertainment",
+                    "banner": "More Energy!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:140",
+                        "stamina_treasureBeach:2",
+                        "stamina:280",
+                        "raidTicket:56"
+                    ]
+                },
+                {
+                    "variant": "M1_LD_alt",
+                    "title": "Anniversary Entertainment",
+                    "banner": "More Energy!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "stamina_treasureBeach:1",
+                        "stamina:140",
+                        "raidTicket:28"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 11,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": [
+                        "avatarFrame_frameAugust2026:1",
+                        "crusadeCurrency:150",
+                        "summoningToken:1",
+                        "specialSummoningToken:1"
+                    ]
+                },
+                {
+                    "variant": "free_alt",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": [
+                        "avatarFrame_frameAugust2026:1",
+                        "gems:150",
+                        "summoningToken:1",
+                        "specialSummoningToken:1"
+                    ]
+                },
+                {
+                    "variant": "anniversary",
+                    "title": "4th Anniversary Day!",
+                    "banner": "Happy Anniversary!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:100",
+                        "avatar_august_2026_01:1",
+                        "specialSummoningToken:10",
+                        "xpLegendary:10",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 12,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Anniversary Afterparty",
+                    "banner": "Battle Tokens!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:100",
+                        "stamina:480",
+                        "raidTicket:80",
+                        "stamina_waves:4"
+                    ]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:240", "xpMythic:3", "xpLegendary:9", "gold:10500"]
+                },
+                {
+                    "variant": "M1_CUREL_SHD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:280", "xpEpic:20", "xpRare:20", "gold:4000"]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Anniversary Afterparty",
+                    "banner": "Battle Tokens!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:75", "stamina:360", "raidTicket:60", "stamina_waves:3"]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:160", "xpMythic:2", "xpLegendary:6", "gold:7000"]
+                },
+                {
+                    "variant": "M1_CUREL_HD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyAugust2026:210", "xpEpic:15", "xpRare:15", "gold:3000"]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Anniversary Afterparty",
+                    "banner": "Battle Tokens!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:50", "stamina:240", "raidTicket:40", "stamina_waves:2"]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "xpLegendary:10", "xpEpic:20", "gold:8000"]
+                },
+                {
+                    "variant": "M1_CUREL_MD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyAugust2026:140", "xpEpic:10", "xpRare:10", "gold:2000"]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Anniversary Afterparty",
+                    "banner": "Battle Tokens!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:25", "stamina:120", "raidTicket:20", "stamina_waves:1"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:70",
+                        "xpLegendary:2",
+                        "xpEpic:20",
+                        "xpRare:25",
+                        "gold:5250"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "Anniversary Party Favors",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyAugust2026:70", "xpEpic:5", "xpRare:5", "gold:1000"]
+                }
+            ]
+        },
+        {
+            "day": 13,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Anniversary Gifts!",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyAugust2026:10", "specialSummoningToken:1"]
+                },
+                {
+                    "variant": "M4_M_SHD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:320",
+                        "mythicDust:480",
+                        "stamina_treasureBeach:4",
+                        "stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "M4_CUREL_SHD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:320",
+                        "dust:4800",
+                        "stamina_treasureBeach:4",
+                        "stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "M4_M_HD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "mythicDust:360",
+                        "stamina_treasureBeach:3",
+                        "stamina:180",
+                        "raidTicket:30"
+                    ]
+                },
+                {
+                    "variant": "M4_CUREL_HD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "dust:3600",
+                        "stamina_treasureBeach:3",
+                        "stamina:180",
+                        "raidTicket:30"
+                    ]
+                },
+                {
+                    "variant": "M4_M_MD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:160",
+                        "mythicDust:240",
+                        "stamina_treasureBeach:2",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "M4_CUREL_MD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:160",
+                        "dust:2400",
+                        "stamina_treasureBeach:2",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "M4_M_LD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:80",
+                        "mythicDust:120",
+                        "stamina_treasureBeach:1",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                },
+                {
+                    "variant": "M4_CUREL_LD",
+                    "title": "Anniversary Cleanup",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:80",
+                        "dust:1200",
+                        "stamina_treasureBeach:1",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 14,
+            "offers": [
+                {
+                    "variant": "M4_M_SHD",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:280", "intel:3500", "specialSummoningToken:7"]
+                },
+                {
+                    "variant": "L1_SHD",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Valuable Resources!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:480",
+                        "crusadeBomb:720",
+                        "crusadeNpc:720",
+                        "stamina:600",
+                        "raidTicket:100"
+                    ]
+                },
+                {
+                    "variant": "M4_M_HD",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:240", "intel:3000", "specialSummoningToken:6"]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Valuable Resources!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:360",
+                        "crusadeBomb:540",
+                        "crusadeNpc:540",
+                        "stamina:450",
+                        "raidTicket:75"
+                    ]
+                },
+                {
+                    "variant": "M4_M_MD",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencyAugust2026:200", "intel:2500", "specialSummoningToken:5"]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Valuable Resources!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "crusadeBomb:360",
+                        "crusadeNpc:360",
+                        "stamina:300",
+                        "raidTicket:50"
+                    ]
+                },
+                {
+                    "variant": "M4_M_LD",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyAugust2026:80", "intel:1000", "specialSummoningToken:2"]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Valuable Resources!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:120",
+                        "crusadeBomb:180",
+                        "crusadeNpc:180",
+                        "stamina:150",
+                        "raidTicket:25"
+                    ]
+                },
+                {
+                    "variant": "M4_SHD_alt",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:280",
+                        "specialSummoningToken:7",
+                        "xpLegendary:15",
+                        "xpEpic:30",
+                        "gold:12000"
+                    ]
+                },
+                {
+                    "variant": "M4_HD_alt",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "specialSummoningToken:6",
+                        "xpLegendary:12",
+                        "xpEpic:30",
+                        "gold:10500"
+                    ]
+                },
+                {
+                    "variant": "M4_MD_alt",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:200",
+                        "specialSummoningToken:5",
+                        "xpLegendary:10",
+                        "xpEpic:25",
+                        "gold:8750"
+                    ]
+                },
+                {
+                    "variant": "M4_LD_alt",
+                    "title": "Next Anniversary Planning",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:80",
+                        "specialSummoningToken:2",
+                        "xpLegendary:2",
+                        "xpEpic:20",
+                        "gold:4000"
+                    ]
+                },
+                {
+                    "variant": "L1_SHD_alt",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:480",
+                        "summoningToken:20",
+                        "stamina:600",
+                        "raidTicket:100"
+                    ]
+                },
+                {
+                    "variant": "L1_HD_alt",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:360",
+                        "summoningToken:15",
+                        "stamina:450",
+                        "raidTicket:75"
+                    ]
+                },
+                {
+                    "variant": "L1_MD_alt",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:240",
+                        "summoningToken:10",
+                        "stamina:300",
+                        "raidTicket:50"
+                    ]
+                },
+                {
+                    "variant": "L1_F_LD_alt",
+                    "title": "Next Anniversary Preparation",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyAugust2026:120",
+                        "summoningToken:5",
+                        "stamina:150",
+                        "raidTicket:25"
+                    ]
+                }
+            ]
+        }
+    ]
+}

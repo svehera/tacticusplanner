@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_CommunityChoice",
+    "title": "Community Choice Requisition",
+    "tagline": "Higher drop chances for the most voted units in the \"Who Shall Be Blessed?\" community survey!",
+    "featuredUnits": [
+        "bloodDante",
+        "ultraTitus",
+        "adeptHospitaller",
+        "bloodDeathCompany",
+        "ultraInceptorSgt",
+        "tyranBiovore"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

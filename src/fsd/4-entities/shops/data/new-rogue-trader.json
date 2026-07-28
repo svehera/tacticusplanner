@@ -11,7 +11,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_elder_shop_custoTrajann"
+                    "lockId": "lock_elder_shop_leg_featured_currently"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_custoTrajann:10",
@@ -24,7 +24,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_elder_shop_custoTrajann_mythic"
+                    "lockId": "lock_elder_shop_leg_featured_currently_mythic"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicShards_custoTrajann:5",
@@ -37,10 +37,10 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_elder_shop_bloodDante"
+                    "lockId": "lock_elder_shop_leg_featured_next"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_bloodDante:10",
+                "reward": "shards_emperLucius:10",
                 "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
                 "cost": {
                     "type": "elderShopCurrency",
@@ -50,10 +50,10 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_elder_shop_bloodDante_mythic"
+                    "lockId": "lock_elder_shop_leg_featured_next_mythic"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicShards_bloodDante:5",
+                "reward": "mythicShards_emperLucius:5",
                 "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
                 "cost": {
                     "type": "elderShopCurrency",
@@ -68,7 +68,7 @@
                     "lockId": "lock_elder_shop_relic_featured_slot_1"
                 },
                 "cronSchedule": "0 0 0 ? * MON,FRI *",
-                "reward": "R_Crit_SabreOfSacrifice",
+                "reward": "R_Crit_Vitarus",
                 "bannerTextKey": "Offers/SpecialOffer_Banner_One_Time",
                 "cost": {
                     "type": "elderShopCurrency",
@@ -534,6 +534,18 @@
                 }
             },
             {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astarLysander"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astarLysander:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
                 "weight": 3,
                 "conditions": {
                     "lockId": "lock_max_legendary_ultraTigurius"
@@ -916,6 +928,18 @@
                     "type": "elderShopCurrency",
                     "amount": 60
                 }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astarLysander"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astarLysander:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
             }
         ],
         [
@@ -944,10 +968,10 @@
             {
                 "weight": 10,
                 "conditions": {
-                    "lockId": "lock_elder_shop_relic_rotation_random_slot_1"
+                    "lockId": "lock_elder_shop_relic_rotation_random_1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "R_Crit_Vitarus",
+                "reward": "R_Crit_SabreOfSacrifice",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 430
@@ -956,7 +980,7 @@
             {
                 "weight": 60,
                 "conditions": {
-                    "lockId": "lock_elder_shop_relic_rotation_random_slot_1"
+                    "lockId": "lock_elder_shop_relic_rotation_random_1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicDust:125",
@@ -968,7 +992,7 @@
             {
                 "weight": 10,
                 "conditions": {
-                    "lockId": "lock_elder_shop_relic_rotation_random_slot_2"
+                    "lockId": "lock_elder_shop_relic_rotation_random_2"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "R_Crit_TalonOfHorus",
@@ -980,7 +1004,7 @@
             {
                 "weight": 60,
                 "conditions": {
-                    "lockId": "lock_elder_shop_relic_rotation_random_slot_2"
+                    "lockId": "lock_elder_shop_relic_rotation_random_2"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicDust:125",
@@ -992,7 +1016,7 @@
             {
                 "weight": 10,
                 "conditions": {
-                    "lockId": "lock_elder_shop_relic_rotation_random_slot_3"
+                    "lockId": "lock_elder_shop_relic_rotation_random_3"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "R_Crit_Maugetar",
@@ -1004,7 +1028,79 @@
             {
                 "weight": 60,
                 "conditions": {
-                    "lockId": "lock_elder_shop_relic_rotation_random_slot_3"
+                    "lockId": "lock_elder_shop_relic_rotation_random_3"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_4"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Crit_ChaliceOfBaal",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_4"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_5"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Lakrimae",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_5"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicDust:125",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 115
+                }
+            },
+            {
+                "weight": 10,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_6"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_HeadwoppasKillchoppa",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 430
+                }
+            },
+            {
+                "weight": 60,
+                "conditions": {
+                    "lockId": "lock_elder_shop_relic_rotation_random_6"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicDust:125",
@@ -1533,30 +1629,6 @@
                 "weight": 60,
                 "conditions": {
                     "lockId": "lock_elder_shop_relic_MonsterSlayerOfCaliban"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicDust:125",
-                "cost": {
-                    "type": "elderShopCurrency",
-                    "amount": 115
-                }
-            },
-            {
-                "weight": 10,
-                "conditions": {
-                    "lockId": "lock_elder_shop_relic_Lakrimae"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "R_Crit_Lakrimae",
-                "cost": {
-                    "type": "elderShopCurrency",
-                    "amount": 430
-                }
-            },
-            {
-                "weight": 60,
-                "conditions": {
-                    "lockId": "lock_elder_shop_relic_Lakrimae"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicDust:125",
@@ -2532,6 +2604,18 @@
             {
                 "weight": 1,
                 "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_thousSekhetar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousSekhetar:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
                     "lockId": "lock_hero_not_maxed_out_thousDaemonPrince"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
@@ -2860,6 +2944,18 @@
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicShards_thousAhriman:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_thousSekhetar"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousSekhetar:3",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 60
@@ -3305,6 +3401,18 @@
             {
                 "weight": 1,
                 "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_eldarLhykhis"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_eldarLhykhis:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
                     "lockId": "lock_hero_not_maxed_out_tauMarksman"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
@@ -3521,18 +3629,6 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_hero_not_maxed_out_votanIronmaster"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_votanIronmaster:5",
-                "cost": {
-                    "type": "elderShopCurrency",
-                    "amount": 20
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
                     "lockId": "lock_hero_not_maxed_out_votanBeserk"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
@@ -3545,10 +3641,34 @@
             {
                 "weight": 1,
                 "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_votanIronmaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_votanIronmaster:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
                     "lockId": "lock_hero_not_maxed_out_votanMemnyr"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_votanMemnyr:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_votanChampion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_votanChampion:5",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 20
@@ -3785,6 +3905,18 @@
             {
                 "weight": 3,
                 "conditions": {
+                    "lockId": "lock_max_legendary_eldarLhykhis"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarLhykhis:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
                     "lockId": "lock_max_legendary_tauMarksman"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
@@ -4001,18 +4133,6 @@
             {
                 "weight": 3,
                 "conditions": {
-                    "lockId": "lock_max_legendary_votanIronmaster"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicShards_votanIronmaster:3",
-                "cost": {
-                    "type": "elderShopCurrency",
-                    "amount": 60
-                }
-            },
-            {
-                "weight": 3,
-                "conditions": {
                     "lockId": "lock_max_legendary_votanBeserk"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
@@ -4025,10 +4145,34 @@
             {
                 "weight": 3,
                 "conditions": {
+                    "lockId": "lock_max_legendary_votanIronmaster"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_votanIronmaster:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
                     "lockId": "lock_max_legendary_votanMemnyr"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicShards_votanMemnyr:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_votanChampion"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_votanChampion:3",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 60

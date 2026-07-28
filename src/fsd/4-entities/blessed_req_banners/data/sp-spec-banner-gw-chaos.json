@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_GW_Chaos",
+    "title": "Heretic Guild War Requisition",
+    "tagline": "Higher drop chances for these battle-proven units. Get ready for Guild War!",
+    "featuredUnits": [
+        "emperNoiseMarine",
+        "deathBlightlord",
+        "blackObliterator",
+        "thousSorcerer",
+        "blackAbaddon",
+        "deathCrawler"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 15
+    }
+}

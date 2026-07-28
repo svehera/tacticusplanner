@@ -1,0 +1,416 @@
+{
+    "eventName": "for_the_dark_gods",
+    "tiers": {
+        "high": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "for_the_dark_gods_tier_high",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_dark_gods_Interstitial_Header",
+                "visualId": "homescreenevent_for_the_dark_gods",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_dark_gods_Interstitial_Description",
+                "eventId": "for_the_dark_gods_tier_high",
+                "rewardProgressId": "hse_for_the_dark_gods_tier_high",
+                "theme": "for_the_dark_gods",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 50,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": ["offer_homescreen_event_emperor_dark_gods_tier_high_booster"],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_for_the_dark_gods_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Chaos", "Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Chaos"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "abilityTokenLegendary_Chaos:2"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "ShardsChaos:20"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "heroAscensionOrbLegendary_Chaos:2"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "abilityTokenLegendary_Chaos:3"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "ShardsChaos:30"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "heroAscensionOrbLegendary_Chaos:3"
+                },
+                {
+                    "requiredProgress": 230,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 260,
+                    "chestRewardId": "abilityTokenLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 290,
+                    "chestRewardId": "heroAscensionOrbLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "R_Booster_Crit_IntoxicatingElixir"
+                },
+                {
+                    "requiredProgress": 420,
+                    "chestRewardId": "abilityTokenMythic_Chaos:2"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "heroAscensionOrbMythic_Chaos:2"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "ShardsChaos:25"
+                },
+                {
+                    "requiredProgress": 725,
+                    "chestRewardId": "heroAscensionOrbMythic_Chaos:3"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "abilityTokenMythic_Chaos",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_high_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01599",
+                        "price": 1599,
+                        "mercadoId": "offer_01599",
+                        "rewards": ["draft_HSE_emperor_dark_gods_tier_high:100", "draft_abilityTokensLegendary:5"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>For the Dark Gods!</i> is here",
+                "Spread corruption through war to earn <style=\"HSE_Points_ForTheDarkGods\">Chaos points</style> and claim unholy rewards!",
+                "You gain <style=\"HSE_Points_ForTheDarkGods\">{[POINTS]} Chaos point</style> for each <style=\"Aliance_Imperial\">Imperial</style> and <style=\"Aliance_Xenos\">Xenos</style> enemy (except <style=\"Summon\">Summons</style>) that you defeat with your <style=\"Aliance_Chaos\">Chaos</style> <style=\"Character\">characters</style> in this game mode. Enemies defeated by <style=\"MoW\">Machines of War</style> or by hex effects do not count."
+            ]
+        },
+        "mid": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "for_the_dark_gods_tier_mid",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_dark_gods_Interstitial_Header",
+                "visualId": "homescreenevent_for_the_dark_gods",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_dark_gods_Interstitial_Description",
+                "eventId": "for_the_dark_gods_tier_mid",
+                "rewardProgressId": "hse_for_the_dark_gods_tier_mid",
+                "theme": "for_the_dark_gods",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 30,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": ["offer_homescreen_event_emperor_dark_gods_tier_mid_booster"],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_for_the_dark_gods_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Chaos", "Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Chaos"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 25,
+                    "chestRewardId": "abilityTokenRare_Chaos:5"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "ShardsChaos:20"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "heroAscensionOrbRare_Chaos:5"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "abilityTokenEpic_Chaos:10"
+                },
+                {
+                    "requiredProgress": 125,
+                    "chestRewardId": "ShardsChaos:25"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "heroAscensionOrbEpic_Chaos:5"
+                },
+                {
+                    "requiredProgress": 200,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 230,
+                    "chestRewardId": "abilityTokenLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 260,
+                    "chestRewardId": "heroAscensionOrbLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 330,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 390,
+                    "chestRewardId": "abilityTokenLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 470,
+                    "chestRewardId": "heroAscensionOrbLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 570,
+                    "chestRewardId": "ShardsChaos:30"
+                },
+                {
+                    "requiredProgress": 695,
+                    "chestRewardId": "heroAscensionOrbLegendary_Chaos:5"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "abilityTokenLegendary_Chaos:2",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_mid_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["draft_HSE_emperor_dark_gods_tier_mid:100", "draft_abilityTokensEpic:10"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>For the Dark Gods!</i> is here",
+                "Spread corruption through war to earn <style=\"HSE_Points_ForTheDarkGods\">Chaos points</style> and claim unholy rewards!",
+                "You gain <style=\"HSE_Points_ForTheDarkGods\">{[POINTS]} Chaos point</style> for each <style=\"Aliance_Imperial\">Imperial</style> and <style=\"Aliance_Xenos\">Xenos</style> enemy (except <style=\"Summon\">Summons</style>) that you defeat with your <style=\"Aliance_Chaos\">Chaos</style> <style=\"Character\">characters</style> in this game mode. Enemies defeated by <style=\"MoW\">Machines of War</style> or by hex effects do not count."
+            ]
+        },
+        "low": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "for_the_dark_gods_tier_low",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_dark_gods_Interstitial_Header",
+                "visualId": "homescreenevent_for_the_dark_gods",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_for_the_dark_gods_Interstitial_Description",
+                "eventId": "for_the_dark_gods_tier_low",
+                "rewardProgressId": "hse_for_the_dark_gods_tier_low",
+                "theme": "for_the_dark_gods",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 10,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "initialOfferIds": ["offer_homescreen_event_emperor_dark_gods_tier_low_booster"],
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_for_the_dark_gods_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Chaos", "Summon", "Steppable"]
+                        },
+                        "playerTraitRestrictions": {
+                            "allowed": ["Chaos"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "abilityTokenCommon_Chaos:5"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "ShardsChaos:20"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "heroAscensionOrbUncommon_Chaos:5"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "ShardsChaos:25"
+                },
+                {
+                    "requiredProgress": 100,
+                    "chestRewardId": "abilityTokenUncommon_Chaos:5"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "ShardsChaos:30"
+                },
+                {
+                    "requiredProgress": 160,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 185,
+                    "chestRewardId": "heroAscensionOrbRare_Chaos:5"
+                },
+                {
+                    "requiredProgress": 210,
+                    "chestRewardId": "abilityTokenRare_Chaos:10"
+                },
+                {
+                    "requiredProgress": 260,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "ShardsChaos:35"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "heroAscensionOrbEpic_Chaos:5"
+                },
+                {
+                    "requiredProgress": 440,
+                    "chestRewardId": "ShardsChaos:40"
+                },
+                {
+                    "requiredProgress": 540,
+                    "chestRewardId": "abilityTokenEpic_Chaos:10"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "ShardsChaos:25",
+                    "endless": true
+                }
+            ],
+            "offers": {
+                "offer_homescreen_event_emperor_dark_gods_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_emperor_dark_gods_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 2000,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_emperor_dark_gods_tier_low_booster"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
+                        "rewards": ["draft_HSE_emperor_dark_gods_tier_low:100", "draft_abilityTokensRare:10"]
+                    }
+                }
+            },
+            "descriptions": [
+                "<i>For the Dark Gods!</i> is here",
+                "Spread corruption through war to earn <style=\"HSE_Points_ForTheDarkGods\">Chaos points</style> and claim unholy rewards!",
+                "You gain <style=\"HSE_Points_ForTheDarkGods\">{[POINTS]} Chaos point</style> for each <style=\"Aliance_Imperial\">Imperial</style> and <style=\"Aliance_Xenos\">Xenos</style> enemy (except <style=\"Summon\">Summons</style>) that you defeat with your <style=\"Aliance_Chaos\">Chaos</style> <style=\"Character\">characters</style> in this game mode. Enemies defeated by <style=\"MoW\">Machines of War</style> or by hex effects do not count."
+            ]
+        }
+    }
+}

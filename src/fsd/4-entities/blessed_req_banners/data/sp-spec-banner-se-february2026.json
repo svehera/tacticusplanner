@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_SE_February2026",
+    "title": "Survival Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[SeasonalEvents/name_february_2026]}</i> Survival event!",
+    "featuredUnits": [
+        "adeptMorvenn",
+        "ultraTitus",
+        "custoAtlacoya",
+        "custoVexilusPraetor",
+        "ultraApothecary",
+        "astraOrdnanceBattery"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}
