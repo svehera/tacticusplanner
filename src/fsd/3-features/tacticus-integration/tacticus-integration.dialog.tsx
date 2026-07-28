@@ -1,12 +1,9 @@
 import { Info } from 'lucide-react';
-import { enqueueSnackbar } from 'notistack';
 import React, { useState } from 'react';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { DialogProps } from '@/models/dialog.props';
 
-// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
-import { updateTacticusApiKey } from '@/fsd/5-shared/lib/tacticus-api';
 import { useAuth } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
@@ -16,6 +13,7 @@ import { Modal } from '@/fsd/5-shared/ui/modal';
 
 import { isValidTacticusUuid } from './credentials';
 import { isValidGuildTag, GUILD_TAG_LENGTH } from './guild-sharing';
+import { updateTacticusSettings } from './update-tacticus-settings';
 import { useSyncWithTacticus } from './use-sync-with-tacticus';
 
 const UUID_EXAMPLE = 'a1b2c3d4-e5f6-1a7b-2c9d-0e1f2a3b4c5d';
@@ -44,12 +42,6 @@ interface Props extends DialogProps {
     /** @deprecated Combined guild tags are now managed in the Shared Leaderboards tab. Ignored. */
     combinedGuildTags?: string[];
     guildTag?: string;
-}
-
-function buildErrorMessage(error: string | Error | undefined): string {
-    const baseMessage = 'Failed to update settings';
-    const detail = typeof error === 'string' ? error : error?.message;
-    return detail ? `${baseMessage}: ${detail}` : baseMessage;
 }
 
 export const TacticusIntegrationDialog: React.FC<Props> = ({
@@ -101,40 +93,16 @@ export const TacticusIntegrationDialog: React.FC<Props> = ({
         guildTag !== savedGuildTag;
 
     async function updateApiKey(): Promise<boolean> {
-        loader.startLoading('Updating settings. Please wait…');
-        try {
-            const response = await updateTacticusApiKey(trimmedApiKey, trimmedGuildApiKey, trimmedUserId, {
-                shareInGameName: currentShareInGameName,
-                shareRosterData: currentShareRosterData,
-                guildTag: trimmedGuildTag,
-            });
-
-            if (!response.data && tacticusApiKey !== undefined && tacticusApiKey.length > 0) {
-                enqueueSnackbar(buildErrorMessage(response.error), { variant: 'error' });
-                return false;
-            }
-
-            auth.setUserInfo({
-                ...auth.userInfo,
-                tacticusApiKey: trimmedApiKey,
-                tacticusGuildApiKey: trimmedGuildApiKey,
-                tacticusUserId: trimmedUserId,
-                shareInGameName: currentShareInGameName,
-                shareRosterData: currentShareRosterData,
-                guildTag: trimmedGuildTag,
-            });
-
-            enqueueSnackbar('Settings updated', { variant: 'success' });
-            return true;
-        } catch (error) {
-            console.error(error);
-            const parsedError =
-                typeof error === 'string' || error instanceof Error || error === undefined ? error : String(error);
-            enqueueSnackbar(buildErrorMessage(parsedError), { variant: 'error' });
-            return false;
-        } finally {
-            loader.endLoading();
-        }
+        return updateTacticusSettings({
+            apiKey: trimmedApiKey,
+            guildApiKey: trimmedGuildApiKey,
+            userId: trimmedUserId,
+            shareInGameName: currentShareInGameName,
+            shareRosterData: currentShareRosterData,
+            guildTag: trimmedGuildTag,
+            loader,
+            auth,
+        });
     }
 
     async function handleMainAction() {
