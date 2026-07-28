@@ -41065,7 +41065,7 @@
                 "Stars": 0
             }
         ],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_reactivateAbility_01.png",
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_reactivateability_01.png",
         "Passive Abilities": ["PowerUp_ReactivateAbility"]
     },
     {
@@ -41101,7 +41101,7 @@
                 "Stars": 0
             }
         ],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_reinforcementShield_01.png",
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_reinforcementshield_01.png",
         "Passive Abilities": ["PowerUp_ReinforcementShield"]
     },
     {
