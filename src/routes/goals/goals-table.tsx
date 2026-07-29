@@ -121,9 +121,8 @@ export const GoalsTable: React.FC<Props> = ({
     const gridApiReference = useRef<GridApi | null>(null);
     const savedWidthsReference = useRef<Record<string, number>>({});
     const statusColWidthReference = useRef(STATUS_COL_DEFAULT_WIDTH);
-    // True while any column sort is active. Managed row-drag is suppressed by ag-grid under a sort,
-    // so the grip is disabled/dimmed then; the arrows still work, since they move the goal in global
-    // priority space rather than in display order (see prioCol).
+    // True while any column sort is active — ag-grid suppresses managed row-drag then, so the grip
+    // is dimmed. The arrows still work: they move in global priority space, not display order.
     const sortActiveReference = useRef(false);
     const goalsColorCodingReference = useRef(goalsColorCoding);
     const onToggleIncludeReference = useRef(onToggleInclude);
@@ -232,9 +231,7 @@ export const GoalsTable: React.FC<Props> = ({
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const { data } = params;
                 if (!data) return;
-                // Priority is GLOBAL (1..totalGoals across every section), so the arrows are live
-                // whenever a neighbour exists anywhere in that range — the goal one step up may sit
-                // in a different accordion section, which is a legitimate move.
+                // Priority is GLOBAL (1..totalGoals), so a neighbour in another section still counts.
                 const { priority } = data;
                 const total = totalGoalsReference.current;
                 return (

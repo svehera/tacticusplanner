@@ -61,8 +61,7 @@ export const GoalSection: React.FC<Props> = ({
     onMenuItemSelect,
     onToggleInclude,
 }) => {
-    // Keyed lookup so cards don't scan the estimate list on every render — dnd-kit re-renders every
-    // sortable in the section on each reorder transition.
+    // Keyed lookup — cards would otherwise scan the estimate list once each, per render.
     const estimateById = useMemo(() => new Map(estimates.map(estimate => [estimate.goalId, estimate])), [estimates]);
 
     return (

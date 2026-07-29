@@ -17,7 +17,7 @@ const press = (element: HTMLElement) => {
 const upButton = () => screen.getByRole('button', { name: 'Increase Goal Priority' });
 const downButton = () => screen.getByRole('button', { name: 'Decrease Goal Priority' });
 
-/** Renders with a goal in the middle of its section, so both arrows are live unless overridden. */
+/** Both arrows live unless overridden. */
 const renderActions = (props: Partial<React.ComponentProps<typeof GoalCardActions>> = {}) => {
     const onMove = vi.fn();
     const menuItemSelect = vi.fn();
@@ -72,8 +72,6 @@ describe('GoalCardActions priority arrows', () => {
     });
 
     it('disables an arrow whose direction is not supplied', () => {
-        // A caller that omits the position flags gets disabled arrows rather than dead-looking live
-        // ones — see GoalSection, which always passes both.
         renderActions({ canMoveUp: undefined, canMoveDown: undefined });
 
         expect(upButton()).toBeDisabled();

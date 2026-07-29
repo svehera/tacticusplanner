@@ -142,10 +142,7 @@ export const Goals = () => {
         .toSorted((a, b) => a.priority - b.priority);
     const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
 
-    /**
-     * Reorders one section. The reducer rewrites the section's goals into the array slots they
-     * already occupy, so goals in the other sections keep their global positions.
-     */
+    /** Drag reorder within one section; the other sections keep their global positions. */
     const handleReorder = (orderedGoalIds: string[], movedId: string): void => {
         dispatch.goals({ type: 'Reorder', orderedIds: orderedGoalIds });
         setAnnouncement(
@@ -153,11 +150,7 @@ export const Goals = () => {
         );
     };
 
-    /**
-     * Moves a goal one position in the GLOBAL priority order. Priority numbers are global, so the
-     * neighbour one step away may sit in a different accordion section — the arrows can cross that
-     * boundary even though drag reorder cannot.
-     */
+    /** Arrow move in the GLOBAL priority order — unlike drag, this can cross a section boundary. */
     const handleMove = (goalId: string, delta: number): void => {
         const reordered = moveGoalInOrder(
             goals.map(g => g.id),

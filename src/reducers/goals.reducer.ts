@@ -5,17 +5,13 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { IPersonalGoal, SetStateAction } from '../models/interfaces';
 
-/**
- * Goal ordering lives in the array order, not in the `priority` field — every branch below returns
- * through `normalizeGoalOrder` so the two can never disagree. See `goal-order.ts` for why.
- */
 export type GoalsAction =
     | {
           type: 'Update';
           goal: TypedGoalSelect;
       }
     | {
-          /** Ids of one section's goals in their new order. Goals outside the set keep their slots. */
+          /** The reordered goals in their new order. Goals not listed keep their array slots. */
           type: 'Reorder';
           orderedIds: string[];
       }
@@ -42,9 +38,8 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             return normalizeGoalOrder(action.value);
         }
         case 'Reorder': {
-            // Works in array-slot space: the section's goals are rewritten into the slots they
-            // already occupy, so goals outside the section keep their exact positions and no
-            // assumption is made about the current array being priority-sorted.
+            // Rewrites the listed goals into the slots they already occupy, so everything else keeps
+            // its position and no assumption is made about the array being priority-sorted.
             const idSet = new Set(action.orderedIds);
             const slots: number[] = [];
             for (const [index, goal] of state.entries()) {

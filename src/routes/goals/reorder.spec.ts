@@ -2,8 +2,7 @@ import { describe, expect, it } from 'vitest';
 
 import { moveGoalInOrder } from './reorder';
 
-// The global goal order, interleaving two accordion sections the way the goals page does — the
-// arrows move a goal one step in THIS list, so a move can cross a section boundary.
+// Global order, interleaving two accordion sections the way the goals page does.
 const ORDER = ['ascend-1', 'upgrade-2', 'upgrade-3', 'ascend-4'];
 
 describe('moveGoalInOrder', () => {

@@ -36,9 +36,8 @@ interface SortableItemProps<T> {
     renderCard: (item: T, dragHandle: GoalDragHandle) => React.ReactNode;
 }
 
-// Not memoised on purpose: dnd-kit re-renders every sortable on each reorder transition via the
-// useSortable context subscription, which React.memo cannot block. The cost that mattered was the
-// per-card estimate lookup, which GoalSection now does through a keyed map.
+// Deliberately not memoised: dnd-kit re-renders every sortable through the useSortable context
+// subscription, which React.memo cannot block.
 const SortableGoalCard = <T extends { goalId: string }>({ item, renderCard }: SortableItemProps<T>) => {
     const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } = useSortable({
         id: item.goalId,
@@ -72,27 +71,25 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
         useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
     );
     const [activeId, setActiveId] = useState<UniqueIdentifier | undefined>();
-    // Grid cards are stretched to the row height by `h-full`, which resolves to `auto` inside the
-    // overlay — pin both dimensions so the dragged card doesn't collapse to its content height.
+    // `h-full` resolves to `auto` inside the overlay, so pin both dimensions or the card collapses.
     const [activeSize, setActiveSize] = useState<{ width: number; height: number } | undefined>();
 
-    // `items` comes back through the global store, which commits in a POST-PAINT effect — so the
-    // reordered list arrives a render after the drop, and the grid would otherwise paint the old
-    // order first and visibly jump. Holding the dropped order locally paints it immediately, and
-    // also lets dnd-kit's drop animation land on the slot the card was actually dropped into.
+    // `items` returns through the global store, which commits in a POST-PAINT effect — so without
+    // this the grid paints the pre-drop order first and visibly jumps.
     const [dropOrder, setDropOrder] = useState<string[]>();
 
-    const propertyIdsKey = items.map(item => item.goalId).join('|');
-    // Release the optimistic order once the store catches up, or the section changes underneath us.
+    // Keyed on id CONTENT: the goals page rebuilds these arrays with .toSorted() every render, so an
+    // identity-keyed effect would clear the order immediately.
+    const itemIdsKey = items.map(item => item.goalId).join('|');
     useEffect(() => {
         setDropOrder(undefined);
-    }, [propertyIdsKey]);
+    }, [itemIdsKey]);
 
     const orderedItems = useMemo(() => {
         if (!dropOrder) return items;
         const byId = new Map(items.map(item => [item.goalId, item]));
         const reordered = filterMap(dropOrder, id => byId.get(id));
-        // Fall back to the props order if the section membership changed while we held a drop order.
+        // Section membership changed while we held a drop order — defer to props.
         return reordered.length === items.length ? reordered : items;
     }, [items, dropOrder]);
 
