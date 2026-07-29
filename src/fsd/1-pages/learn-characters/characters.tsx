@@ -21,7 +21,7 @@ import {
     Separator,
     StarsSelect,
 } from '@/fsd/5-shared/ui';
-import { MiscIcon, ComponentImage, TraitImage } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, AllianceImage, TraitImage } from '@/fsd/5-shared/ui/icons';
 import { Select, SelectMulti } from '@/fsd/5-shared/ui/selects';
 import { Switch } from '@/fsd/5-shared/ui/switch';
 
@@ -525,14 +525,14 @@ export const LearnCharacters = () => {
                                 placeholder="All alliances"
                                 renderOption={a => (
                                     <div className="flex items-center gap-2">
-                                        <ComponentImage alliance={a as Alliance} size="small" />
+                                        <AllianceImage alliance={a as Alliance} size={20} />
                                         <span>{a}</span>
                                     </div>
                                 )}
                                 renderValue={selected => (
                                     <div className="flex flex-wrap items-center gap-1">
                                         {selected.map(a => (
-                                            <ComponentImage key={a} alliance={a as Alliance} size="small" />
+                                            <AllianceImage key={a} alliance={a as Alliance} size={18} />
                                         ))}
                                     </div>
                                 )}
