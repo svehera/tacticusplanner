@@ -53,6 +53,12 @@ const storylineToCampaign: Record<string, Campaign> = {
 };
 
 /**
+ * The Campaign whose icon represents a storyline. Every storyline maps to a campaign that
+ * has an icon asset, so this doubles as the icon key. Returns undefined when unknown.
+ */
+export const campaignStorylineIcon = (storyline: string): Campaign | undefined => storylineToCampaign[storyline];
+
+/**
  * A short, human-readable hint of which factions are usable in a storyline, derived
  * from the campaign's allied factions. Standard campaigns allow a whole alliance, so
  * the alliance name is shown instead of every faction. Returns undefined when unknown.
