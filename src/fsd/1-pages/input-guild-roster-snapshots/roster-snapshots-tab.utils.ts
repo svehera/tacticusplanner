@@ -33,11 +33,15 @@ export interface DiffEntry {
  * Reconstructs a player's roster state at a given snapshot by walking their
  * chain from the base entry (index 0) forward, applying deltas in order.
  * Returns undefined if the player has no entry for that snapshotId.
+ *
+ * The chain isn't guaranteed to arrive in chronological order (same as the
+ * snapshot metadata list), so it's sorted here before walking it.
  */
 export function getRosterAtSnapshot(chain: PlayerRosterChainEntry[], snapshotId: string): IRosterSnapshot | undefined {
+    const orderedChain = [...chain].toSorted((a, b) => a.createdAt.localeCompare(b.createdAt));
     let current: IRosterSnapshot | undefined;
 
-    for (const entry of chain) {
+    for (const entry of orderedChain) {
         const member = entry.memberData as GuildRosterSnapshotMember | undefined;
         if (!member) {
             if (entry.snapshotId === snapshotId) return current;

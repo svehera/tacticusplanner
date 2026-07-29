@@ -25,8 +25,11 @@ export enum RosterSnapshotDiffStyle {
 export interface IViewPreferences
     extends ILreViewSettings, ILreTileSettings, IWyoViewSettings, IRosterSnapshotsViewSettings {
     // autoTeams: boolean;
-    wyoFilter: CharactersFilterBy;
+    // A CharactersFilterBy enum value, or a team name (from StoreContext.teams2) to filter by.
+    wyoFilter: CharactersFilterBy | string;
     wyoOrder: CharactersOrderBy;
+    // A CharactersFilterBy enum value, or a team name (from StoreContext.teams2) to filter by.
+    sharedRosterFilter: CharactersFilterBy | string;
     craftableItemsInInventory: boolean;
     inventoryShowAlphabet: boolean;
     inventoryShowPlusMinus: boolean;
@@ -89,5 +92,6 @@ interface IRosterSnapshotsViewSettings {
 
 export interface ICharactersViewControls {
     orderBy: CharactersOrderBy;
-    filterBy: CharactersFilterBy;
+    // A CharactersFilterBy enum value, or a team name to filter by.
+    filterBy: CharactersFilterBy | string;
 }

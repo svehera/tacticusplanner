@@ -5,6 +5,7 @@ export { MiscIcon } from './misc.icon';
 export { RarityIcon } from './rarity.icon';
 export { StarsIcon } from './stars.icon';
 export { UnitShardIcon } from './unit-shard.icon';
+export { AllianceImage } from './alliance-image';
 export { BadgeImage } from './badge-image';
 export { ComponentImage } from './component-image';
 export { ForgeBadgeImage } from './forge-badge-image';

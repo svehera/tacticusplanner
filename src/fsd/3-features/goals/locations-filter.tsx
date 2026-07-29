@@ -7,7 +7,7 @@ import factionsData from 'src/data/factions.json';
 import { factionLookup } from '@/fsd/5-shared/lib';
 import { Alliance, FactionId, Rarity } from '@/fsd/5-shared/model';
 import { Button, PortalDialog, MultipleSelectCheckmarks } from '@/fsd/5-shared/ui';
-import { ComponentImage, RarityIcon } from '@/fsd/5-shared/ui/icons';
+import { AllianceImage, RarityIcon } from '@/fsd/5-shared/ui/icons';
 import { ComboBox, SelectMulti } from '@/fsd/5-shared/ui/selects';
 
 import { CampaignsService, CampaignType, ICampaignsFilters } from '@/fsd/4-entities/campaign';
@@ -112,14 +112,14 @@ export const LocationsFilter: React.FC<Props> = ({ filter, filtersChange }) => {
                     placeholder="All alliances"
                     renderOption={a => (
                         <div className="flex items-center gap-2">
-                            <ComponentImage alliance={a} size="small" />
+                            <AllianceImage alliance={a} size={20} />
                             <span>{a}</span>
                         </div>
                     )}
                     renderValue={selected => (
                         <div className="flex flex-wrap items-center gap-1">
                             {selected.map(a => (
-                                <ComponentImage key={a} alliance={a} size="small" />
+                                <AllianceImage key={a} alliance={a} size={18} />
                             ))}
                         </div>
                     )}

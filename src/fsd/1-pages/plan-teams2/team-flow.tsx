@@ -42,9 +42,9 @@ export const TeamFlow: React.FC<Props> = ({
                         onClick={() => onCharClicked(char)}
                         className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                         <RosterSnapshotCharacter
-                            showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                            showShards={RosterSnapshotShowVariableSettings.Never}
-                            showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                            showMythicShards={RosterSnapshotShowVariableSettings.Always}
+                            showShards={RosterSnapshotShowVariableSettings.Always}
+                            showXpLevel={RosterSnapshotShowVariableSettings.Always}
                             showAbilities={RosterSnapshotShowVariableSettings.Always}
                             showEquipment={showEquipment}
                             showTooltip={false}
@@ -64,9 +64,9 @@ export const TeamFlow: React.FC<Props> = ({
                                 onClick={() => onCharClicked(char)}
                                 className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                                 <RosterSnapshotCharacter
-                                    showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                                    showShards={RosterSnapshotShowVariableSettings.Never}
-                                    showXpLevel={RosterSnapshotShowVariableSettings.Never}
+                                    showMythicShards={RosterSnapshotShowVariableSettings.Always}
+                                    showShards={RosterSnapshotShowVariableSettings.Always}
+                                    showXpLevel={RosterSnapshotShowVariableSettings.Always}
                                     showAbilities={RosterSnapshotShowVariableSettings.Always}
                                     showEquipment={showEquipment}
                                     showTooltip={false}
@@ -90,8 +90,8 @@ export const TeamFlow: React.FC<Props> = ({
                                 onClick={() => onMowClicked(mow)}
                                 className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                                 <RosterSnapshotCharacter
-                                    showMythicShards={RosterSnapshotShowVariableSettings.Never}
-                                    showShards={RosterSnapshotShowVariableSettings.Never}
+                                    showMythicShards={RosterSnapshotShowVariableSettings.Always}
+                                    showShards={RosterSnapshotShowVariableSettings.Always}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     showAbilities={
                                         disabledUnits?.includes(mow.snowprintId)
