@@ -10,6 +10,7 @@ import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Button, Select } from '@/fsd/5-shared/ui';
 import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
+import { CampaignImage } from '@/fsd/4-entities/campaign';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { CharacterSelectGrid, MowSelectGrid } from '@/fsd/2-widgets/unit-select-grid';
@@ -17,6 +18,7 @@ import { CharacterSelectGrid, MowSelectGrid } from '@/fsd/2-widgets/unit-select-
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
 
 import {
+    campaignStorylineIcon,
     campaignStorylineLabel,
     campaignStorylineOptions,
     campaignStorylineUsableFactionIds,
@@ -422,7 +424,22 @@ export const AddTeamDialog: React.FC<Props> = ({
                                         options={[undefined, ...campaignStorylineOptions.map(option => option.value)]}
                                         value={campaignStoryline}
                                         onChange={onCampaignStorylineChanged}
-                                        renderOption={value => (value ? campaignStorylineLabel(value) : 'None')}
+                                        renderOption={value =>
+                                            value ? (
+                                                <div className="flex items-center gap-2">
+                                                    {!!campaignStorylineIcon(value) && (
+                                                        <CampaignImage
+                                                            campaign={campaignStorylineIcon(value)!}
+                                                            size={24}
+                                                            showTooltip={false}
+                                                        />
+                                                    )}
+                                                    <span>{campaignStorylineLabel(value)}</span>
+                                                </div>
+                                            ) : (
+                                                'None'
+                                            )
+                                        }
                                         placeholder="Select a campaign..."
                                     />
                                     {campaignStoryline && (
