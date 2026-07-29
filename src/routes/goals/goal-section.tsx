@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
 import { Accordion, AccordionBody, AccordionHeader } from '@/fsd/5-shared/ui';
@@ -32,8 +32,13 @@ interface Props {
     bookRarity: Rarity;
     characters: ICharacter2[];
     mows: IMow2[];
+    /** Section-scoped drag reorder — ids of this section's goals in their new order. */
     onReorder: (orderedIds: string[], movedId: string) => void;
-    onMenuItemSelect: (goalId: string, item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
+    /** Priority-arrow move by one position in the GLOBAL order; may cross a section boundary. */
+    onMove: (goalId: string, delta: number) => void;
+    /** Total goal count across all sections — the upper bound of the global priority range. */
+    totalGoals: number;
+    onMenuItemSelect: (goalId: string, item: 'edit' | 'delete') => void;
     onToggleInclude: (goalId: string) => void;
 }
 
@@ -51,45 +56,55 @@ export const GoalSection: React.FC<Props> = ({
     characters,
     mows,
     onReorder,
+    onMove,
+    totalGoals,
     onMenuItemSelect,
     onToggleInclude,
-}) => (
-    <Accordion expanded={expanded} onToggle={onToggle}>
-        <AccordionHeader>{header}</AccordionHeader>
-        <AccordionBody>
-            {tableView ? (
-                <GoalsTable
-                    variant={variant}
-                    rows={items}
-                    estimate={estimates}
-                    goalsColorCoding={colorMode}
-                    menuItemSelect={onMenuItemSelect}
-                    onToggleInclude={onToggleInclude}
-                    onReorder={onReorder}
-                />
-            ) : (
-                <SortableGoalGrid
-                    items={items}
-                    onReorder={onReorder}
-                    className={GRID_CLASS}
-                    renderCard={(goal, dragHandle) => {
-                        const estimate = estimates.find(x => x.goalId === goal.goalId);
-                        return (
+}) => {
+    // Keyed lookup so cards don't scan the estimate list on every render — dnd-kit re-renders every
+    // sortable in the section on each reorder transition.
+    const estimateById = useMemo(() => new Map(estimates.map(estimate => [estimate.goalId, estimate])), [estimates]);
+
+    return (
+        <Accordion expanded={expanded} onToggle={onToggle}>
+            <AccordionHeader>{header}</AccordionHeader>
+            <AccordionBody>
+                {tableView ? (
+                    <GoalsTable
+                        variant={variant}
+                        rows={items}
+                        estimate={estimates}
+                        goalsColorCoding={colorMode}
+                        menuItemSelect={onMenuItemSelect}
+                        onToggleInclude={onToggleInclude}
+                        onReorder={onReorder}
+                        onMove={onMove}
+                        totalGoals={totalGoals}
+                    />
+                ) : (
+                    <SortableGoalGrid
+                        items={items}
+                        onReorder={onReorder}
+                        className={GRID_CLASS}
+                        renderCard={(goal, dragHandle) => (
                             <GoalCard
                                 goal={goal}
-                                goalEstimate={estimate}
+                                goalEstimate={estimateById.get(goal.goalId)}
                                 bookRarity={bookRarity}
                                 characters={characters}
                                 mows={mows}
                                 menuItemSelect={item => onMenuItemSelect(goal.goalId, item)}
                                 onToggleInclude={() => onToggleInclude(goal.goalId)}
-                                bgColor={GoalService.getBackgroundColor(colorMode, estimate)}
+                                bgColor={GoalService.getBackgroundColor(colorMode, estimateById.get(goal.goalId))}
                                 dragHandle={dragHandle}
+                                onMove={delta => onMove(goal.goalId, delta)}
+                                canMoveUp={goal.priority > 1}
+                                canMoveDown={goal.priority < totalGoals}
                             />
-                        );
-                    }}
-                />
-            )}
-        </AccordionBody>
-    </Accordion>
-);
+                        )}
+                    />
+                )}
+            </AccordionBody>
+        </Accordion>
+    );
+};

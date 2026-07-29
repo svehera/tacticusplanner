@@ -15,6 +15,17 @@ export const filterMap = <Element, Output>(
 };
 
 /**
+ * Returns a copy of `array` with the element at `fromIndex` moved to `toIndex`.
+ * Both indices are assumed to be in range — callers guard their own bounds.
+ */
+export const moveItem = <T>(array: readonly T[], fromIndex: number, toIndex: number): T[] => {
+    const result = [...array];
+    const [moved] = result.splice(fromIndex, 1);
+    result.splice(toIndex, 0, moved);
+    return result;
+};
+
+/**
  * Converts an array into an object keyed by the specified property.
  * If multiple elements share the same key value, the last one wins.
  */

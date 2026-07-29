@@ -6,6 +6,7 @@ import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-share
 
 import { CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { normalizeGoalOrder } from '@/fsd/4-entities/goal';
 import { IMow, IMow2, IMowDatabase, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { shopEvents as shopEventsRegistry } from '@/fsd/4-entities/shops';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
@@ -88,9 +89,11 @@ export class GlobalState implements IGlobalState {
         this.characters = GlobalState.initCharacters(chars);
         this.mows = GlobalState.initMows(personalData.mows);
 
-        this.goals = personalData.goals.map((goal, index) => {
+        // Array order is the source of truth for goal ordering; `priority` is derived from it here
+        // and re-derived on every write by goalsReducer. See normalizeGoalOrder.
+        this.goals = normalizeGoalOrder(personalData.goals).map(goal => {
             const relatedChar = this.characters.find(x => x.name === goal.character);
-            return { ...goal, priority: index + 1, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
+            return { ...goal, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
         });
 
         this.modifiedDate = personalData.modifiedDate;

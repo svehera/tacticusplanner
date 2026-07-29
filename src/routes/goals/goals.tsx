@@ -34,6 +34,7 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
+import { moveGoalInOrder } from './reorder';
 
 const MYTHIC_UNCRAFTABLE_UPGRADES = [
     {
@@ -142,21 +143,30 @@ export const Goals = () => {
     const sortedAbilities = upgradeAbilities.toSorted((a, b) => a.priority - b.priority);
 
     /**
-     * Reorders one section by drag. Preserves that section's set of priority numbers and reassigns
-     * them to the new visual order (mirrors the ui-kit table's applyPriorities), then persists the
-     * full goal list so global ordering outside the section stays stable.
+     * Reorders one section. The reducer rewrites the section's goals into the array slots they
+     * already occupy, so goals in the other sections keep their global positions.
      */
     const handleReorder = (orderedGoalIds: string[], movedId: string): void => {
-        const idSet = new Set(orderedGoalIds);
-        const sectionPriorities = goals
-            .filter(g => idSet.has(g.id))
-            .map(g => g.priority)
-            .toSorted((a, b) => a - b);
-        const newPriorityById = new Map<string, number>();
-        for (const [index, id] of orderedGoalIds.entries()) newPriorityById.set(id, sectionPriorities[index]);
-        const next = goals.map(g => (newPriorityById.has(g.id) ? { ...g, priority: newPriorityById.get(g.id)! } : g));
-        dispatch.goals({ type: 'Set', value: next });
-        setAnnouncement(`Goal moved to priority ${newPriorityById.get(movedId)}.`);
+        dispatch.goals({ type: 'Reorder', orderedIds: orderedGoalIds });
+        setAnnouncement(
+            `Goal moved to position ${orderedGoalIds.indexOf(movedId) + 1} of ${orderedGoalIds.length} in its section.`
+        );
+    };
+
+    /**
+     * Moves a goal one position in the GLOBAL priority order. Priority numbers are global, so the
+     * neighbour one step away may sit in a different accordion section — the arrows can cross that
+     * boundary even though drag reorder cannot.
+     */
+    const handleMove = (goalId: string, delta: number): void => {
+        const reordered = moveGoalInOrder(
+            goals.map(g => g.id),
+            goalId,
+            delta
+        );
+        if (!reordered) return;
+        dispatch.goals({ type: 'Reorder', orderedIds: reordered });
+        setAnnouncement(`Goal moved to priority ${reordered.indexOf(goalId) + 1}.`);
     };
 
     /** Toggles a goal's daily-raids inclusion and announces the change politely. */
@@ -261,8 +271,7 @@ export const Goals = () => {
         dispatch.viewPreferences({ type: 'Update', setting: 'goalsTableView', value: tableView });
     };
 
-    const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => {
-        const currentGoals = goals.toSorted((a, b) => a.priority - b.priority);
+    const handleMenuItemSelect = (goalId: string, item: 'edit' | 'delete') => {
         if (item === 'delete' && confirm('Are you sure? The goal will be permanently deleted!')) {
             removeGoal(goalId);
         }
@@ -284,26 +293,6 @@ export const Goals = () => {
             ) {
                 setEditUnit(relatedUnit);
                 setEditGoal(goal);
-            }
-        }
-
-        if (item === 'moveUp' || item === 'moveDown') {
-            const isUp = item === 'moveUp';
-
-            // Find current position in the flattened list
-            const currentIndex = currentGoals.findIndex(x => x.id === goalId);
-            const targetIndex = isUp ? currentIndex - 1 : currentIndex + 1;
-
-            // 2. Boundary Check
-            if (targetIndex >= 0 && targetIndex < currentGoals.length) {
-                const neighbor = currentGoals[targetIndex];
-
-                // 3. Dispatch atomic swap
-                dispatch.goals({
-                    type: 'Swap',
-                    goalId: goalId,
-                    neighborId: neighbor.id,
-                });
             }
         }
     };
@@ -656,7 +645,7 @@ export const Goals = () => {
                     </Accordion>
                 </div>
             )}
-            {upgradeRankOrMowGoals.length + upgradeMaterialGoals.length > 0 && (
+            {sortedUpgrades.length > 0 && (
                 <GoalSection
                     expanded={sectionsExpanded.upgrades}
                     onToggle={expanded => setSectionsExpanded(previous => ({ ...previous, upgrades: expanded }))}
@@ -669,6 +658,8 @@ export const Goals = () => {
                     characters={characters}
                     mows={resolvedMows as IMow2[]}
                     onReorder={handleReorder}
+                    onMove={handleMove}
+                    totalGoals={goals.length}
                     onMenuItemSelect={handleMenuItemSelect}
                     onToggleInclude={handleToggleIncludeById}
                     header={
@@ -701,6 +692,8 @@ export const Goals = () => {
                     characters={characters}
                     mows={resolvedMows as IMow2[]}
                     onReorder={handleReorder}
+                    onMove={handleMove}
+                    totalGoals={goals.length}
                     onMenuItemSelect={handleMenuItemSelect}
                     onToggleInclude={handleToggleIncludeById}
                     header={
@@ -732,6 +725,8 @@ export const Goals = () => {
                     characters={characters}
                     mows={resolvedMows as IMow2[]}
                     onReorder={handleReorder}
+                    onMove={handleMove}
+                    totalGoals={goals.length}
                     onMenuItemSelect={handleMenuItemSelect}
                     onToggleInclude={handleToggleIncludeById}
                     header={

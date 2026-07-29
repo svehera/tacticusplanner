@@ -66,5 +66,7 @@ describe('every shop slot can be displayed', () => {
 
         expect(seen.size).toBeGreaterThan(0);
         expect(failures, `Reward types that failed to render a real icon:\n${failures.join('\n')}`).toHaveLength(0);
-    });
+        // Renders every reward type of every shop/day — ~2s alone, but enough slower under a full
+        // parallel suite run to trip the 5s default. Explicit headroom so it isn't load-dependent.
+    }, 20_000);
 });

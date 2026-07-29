@@ -18,7 +18,9 @@ import {
     useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+
+import { filterMap } from '@/fsd/5-shared/lib';
 
 type SortableReturn = ReturnType<typeof useSortable>;
 
@@ -34,6 +36,9 @@ interface SortableItemProps<T> {
     renderCard: (item: T, dragHandle: GoalDragHandle) => React.ReactNode;
 }
 
+// Not memoised on purpose: dnd-kit re-renders every sortable on each reorder transition via the
+// useSortable context subscription, which React.memo cannot block. The cost that mattered was the
+// per-card estimate lookup, which GoalSection now does through a keyed map.
 const SortableGoalCard = <T extends { goalId: string }>({ item, renderCard }: SortableItemProps<T>) => {
     const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } = useSortable({
         id: item.goalId,
@@ -67,14 +72,37 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
         useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
     );
     const [activeId, setActiveId] = useState<UniqueIdentifier | undefined>();
-    const [activeWidth, setActiveWidth] = useState<number>();
+    // Grid cards are stretched to the row height by `h-full`, which resolves to `auto` inside the
+    // overlay — pin both dimensions so the dragged card doesn't collapse to its content height.
+    const [activeSize, setActiveSize] = useState<{ width: number; height: number } | undefined>();
 
-    const ids = items.map(item => item.goalId);
-    const activeItem = items.find(item => item.goalId === activeId);
+    // `items` comes back through the global store, which commits in a POST-PAINT effect — so the
+    // reordered list arrives a render after the drop, and the grid would otherwise paint the old
+    // order first and visibly jump. Holding the dropped order locally paints it immediately, and
+    // also lets dnd-kit's drop animation land on the slot the card was actually dropped into.
+    const [dropOrder, setDropOrder] = useState<string[]>();
+
+    const propertyIdsKey = items.map(item => item.goalId).join('|');
+    // Release the optimistic order once the store catches up, or the section changes underneath us.
+    useEffect(() => {
+        setDropOrder(undefined);
+    }, [propertyIdsKey]);
+
+    const orderedItems = useMemo(() => {
+        if (!dropOrder) return items;
+        const byId = new Map(items.map(item => [item.goalId, item]));
+        const reordered = filterMap(dropOrder, id => byId.get(id));
+        // Fall back to the props order if the section membership changed while we held a drop order.
+        return reordered.length === items.length ? reordered : items;
+    }, [items, dropOrder]);
+
+    const ids = orderedItems.map(item => item.goalId);
+    const activeItem = orderedItems.find(item => item.goalId === activeId);
 
     const handleStart = (event: DragStartEvent) => {
         setActiveId(event.active.id);
-        setActiveWidth(event.active.rect.current.initial?.width);
+        const rect = event.active.rect.current.initial;
+        setActiveSize(rect ? { width: rect.width, height: rect.height } : undefined);
     };
     const handleEnd = (event: DragEndEvent) => {
         const { active, over } = event;
@@ -82,7 +110,9 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
             const oldIndex = ids.indexOf(active.id as string);
             const newIndex = ids.indexOf(over.id as string);
             if (oldIndex !== -1 && newIndex !== -1) {
-                onReorder(arrayMove(ids, oldIndex, newIndex), active.id as string);
+                const next = arrayMove(ids, oldIndex, newIndex);
+                setDropOrder(next);
+                onReorder(next, active.id as string);
             }
         }
         setActiveId(undefined);
@@ -97,13 +127,13 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
             onDragCancel={() => setActiveId(undefined)}>
             <SortableContext items={ids} strategy={rectSortingStrategy}>
                 <div className={className}>
-                    {items.map(item => (
+                    {orderedItems.map(item => (
                         <SortableGoalCard key={item.goalId} item={item} renderCard={renderCard} />
                     ))}
                 </div>
             </SortableContext>
             <DragOverlay>
-                {activeItem ? <div style={{ width: activeWidth }}>{renderCard(activeItem, {})}</div> : undefined}
+                {activeItem ? <div style={activeSize}>{renderCard(activeItem, {})}</div> : undefined}
             </DragOverlay>
         </DndContext>
     );

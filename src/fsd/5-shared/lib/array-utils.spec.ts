@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { arrayToKeyedObject, filterMap } from './array-utils';
+import { arrayToKeyedObject, filterMap, moveItem } from './array-utils';
 
 describe('filterMap', () => {
     describe('mapping behavior', () => {
@@ -86,6 +86,55 @@ describe('filterMap', () => {
             const result = filterMap(input, x => (x === 2 ? null : x));
             // eslint-disable-next-line unicorn/no-null
             expect(result).toEqual([1, null, 3]);
+        });
+    });
+});
+
+describe('moveItem', () => {
+    describe('basic behavior', () => {
+        it('moves an element forward', () => {
+            expect(moveItem(['a', 'b', 'c', 'd'], 0, 2)).toEqual(['b', 'c', 'a', 'd']);
+        });
+
+        it('moves an element backward', () => {
+            expect(moveItem(['a', 'b', 'c', 'd'], 3, 1)).toEqual(['a', 'd', 'b', 'c']);
+        });
+
+        it('moves an element by one position', () => {
+            expect(moveItem(['a', 'b', 'c'], 1, 0)).toEqual(['b', 'a', 'c']);
+        });
+
+        it('moves the first element to last', () => {
+            expect(moveItem(['a', 'b', 'c'], 0, 2)).toEqual(['b', 'c', 'a']);
+        });
+
+        it('moves the last element to first', () => {
+            expect(moveItem(['a', 'b', 'c'], 2, 0)).toEqual(['c', 'a', 'b']);
+        });
+
+        it('preserves element identity rather than cloning', () => {
+            const first = { id: 'a' };
+            const second = { id: 'b' };
+            const result = moveItem([first, second], 1, 0);
+            expect(result[0]).toBe(second);
+            expect(result[1]).toBe(first);
+        });
+    });
+
+    describe('edge cases', () => {
+        it('returns an equal array when the indices are the same', () => {
+            expect(moveItem(['a', 'b', 'c'], 1, 1)).toEqual(['a', 'b', 'c']);
+        });
+
+        it('returns a copy rather than mutating the input', () => {
+            const input = ['a', 'b', 'c'];
+            const result = moveItem(input, 0, 2);
+            expect(input).toEqual(['a', 'b', 'c']);
+            expect(result).not.toBe(input);
+        });
+
+        it('returns an equal array for a single-element array', () => {
+            expect(moveItem(['a'], 0, 0)).toEqual(['a']);
         });
     });
 });
