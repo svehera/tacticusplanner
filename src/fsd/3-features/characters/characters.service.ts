@@ -27,6 +27,9 @@ import { isCharacter, isMow, isUnlocked } from '@/fsd/4-entities/unit/units.func
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { rarityCaps } from '@/fsd/3-features/characters/characters.constants';
 
+// eslint-disable-next-line boundaries/element-types, import-x/no-internal-modules -- FSD boundary: team model lives under a page
+import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
+
 import { IFaction } from './characters.models';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { blueStarReady } from './functions/blue-star-ready';
@@ -44,7 +47,12 @@ import { needToAscendCharacter } from './functions/need-to-ascend';
 import { needToLevelCharacter } from './functions/need-to-level';
 
 export class CharactersService {
-    static filterUnits(characters: IUnit[], filterBy: CharactersFilterBy, nameFilter?: string): IUnit[] {
+    static filterUnits(
+        characters: IUnit[],
+        filterBy: CharactersFilterBy | string,
+        nameFilter?: string,
+        teams: ITeam2[] = []
+    ): IUnit[] {
         const filteredCharactersByName = nameFilter
             ? characters.filter(
                   x =>
@@ -52,6 +60,12 @@ export class CharactersService {
                       ('shortName' in x && x.shortName?.toLowerCase().includes(nameFilter.toLowerCase()))
               )
             : characters;
+
+        if (typeof filterBy === 'string') {
+            const team = teams.find(x => x.name === filterBy);
+            const teamUnitIds = new Set([...(team?.chars ?? []), ...(team?.mows ?? [])]);
+            return filteredCharactersByName.filter(character => teamUnitIds.has(character.snowprintId));
+        }
 
         switch (filterBy) {
             case CharactersFilterBy.NeedToAscend: {

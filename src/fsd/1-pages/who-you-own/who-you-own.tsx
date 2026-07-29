@@ -2,14 +2,14 @@
 /* eslint-disable import-x/no-internal-modules */
 import Box from '@mui/material/Box';
 import { sum } from 'lodash';
-import { useCallback, useContext, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
 import { Navigate, useSearchParams } from 'react-router-dom';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { useAuth, UnitType } from '@/fsd/5-shared/model';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
+import { CharactersFilterBy, ICharacter2 } from '@/fsd/4-entities/character';
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
@@ -32,7 +32,7 @@ import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-
 import { UnitDetailsPage } from './unit-details-page';
 
 export const WhoYouOwn = () => {
-    const { characters: charactersDefault, mows, viewPreferences, inventory } = useContext(StoreContext);
+    const { characters: charactersDefault, mows, viewPreferences, inventory, teams2 } = useContext(StoreContext);
     const dispatch = useContext(DispatchContext);
     const { token: isLoggedIn, shareToken: isRosterShared } = useAuth();
 
@@ -58,9 +58,21 @@ export const WhoYouOwn = () => {
 
     const charactersFiltered = useMemo(
         () =>
-            CharactersService.filterUnits([...resolvedCharacters, ...resolvedMows], viewControls.filterBy, nameFilter),
-        [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters]
+            CharactersService.filterUnits(
+                [...resolvedCharacters, ...resolvedMows],
+                viewControls.filterBy,
+                nameFilter,
+                teams2
+            ),
+        [viewControls.filterBy, nameFilter, resolvedMows, resolvedCharacters, teams2]
     );
+
+    useEffect(() => {
+        if (typeof viewControls.filterBy === 'string' && !teams2.some(team => team.name === viewControls.filterBy)) {
+            setViewControls(current => ({ ...current, filterBy: CharactersFilterBy.None }));
+            dispatch.viewPreferences({ type: 'Update', setting: 'wyoFilter', value: CharactersFilterBy.None });
+        }
+    }, [teams2, viewControls.filterBy, dispatch]);
 
     const factions = useMemo(
         () =>
@@ -193,7 +205,11 @@ export const WhoYouOwn = () => {
                         {!!isLoggedIn && <ShareRoster isRosterShared={!!isRosterShared} />}
                         <TeamGraph units={charactersFiltered} />
                     </RosterHeader>
-                    <CharactersViewControls viewControls={viewControls} viewControlsChanges={updatePreferences} />
+                    <CharactersViewControls
+                        viewControls={viewControls}
+                        viewControlsChanges={updatePreferences}
+                        teams={teams2}
+                    />
                     <div className="min-h-[10px]" />
 
                     {factionsView && <FactionsGrid factions={factions} onCharacterClick={handleUnitClick} />}

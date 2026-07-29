@@ -222,6 +222,7 @@ export const defaultData: IPersonalData2 = {
         craftableItemsInInventory: false,
         wyoFilter: CharactersFilterBy.None,
         wyoOrder: CharactersOrderBy.Faction,
+        sharedRosterFilter: CharactersFilterBy.None,
         showShardsInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
         showMythicShardsInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
         showXpLevelInRosterSnapshots: RosterSnapshotShowVariableSettings.Always,
