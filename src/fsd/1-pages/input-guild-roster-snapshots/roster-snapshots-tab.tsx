@@ -8,6 +8,7 @@ import { StoreContext } from '@/reducers/store.provider';
 import { isLikelyUserId, obfuscateUserId } from '@/fsd/5-shared/lib';
 import { DebugJson } from '@/fsd/5-shared/ui';
 import { Button } from '@/fsd/5-shared/ui/button';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings';
 
@@ -20,9 +21,11 @@ import { RosterSnapshotsService } from '../input-roster-snapshots/roster-snapsho
 import { RosterSnapshotsUnitDiffDetailed } from '../input-roster-snapshots/roster-snapshots-unit-diff-detailed';
 
 import {
+    ALL_RAID_COMPS,
     CurrentRosterMember,
     MemberState,
     PlayerRosterChainResponse,
+    RaidComp,
     RosterSnapshotInfo,
     deleteGuildRosterSnapshotByIdApi,
     getGuildRosterPlayerChainApi,
@@ -30,6 +33,7 @@ import {
     postGuildRosterMigrateApi,
     postGuildRosterSnapshotApi,
 } from './guild-roster-snapshots.models';
+import { getRaidCompIconProps } from './raid-comp-icon';
 import { RaidTeamFilterDropdown } from './raid-team-filter-dropdown';
 import {
     DiffEntry,
@@ -40,8 +44,28 @@ import {
     snapshotCharPower,
     snapshotMowPower,
 } from './roster-snapshots-tab.utils';
+import { standardCompCategories } from './rosters-tab.utils';
 
 const SHOW_ALL = RosterSnapshotShowVariableSettings.Always;
+
+const StandardCompBar = ({ selected, onToggle }: { selected: RaidComp[]; onToggle: (comp: RaidComp) => void }) => (
+    <div className="flex flex-wrap gap-1">
+        {ALL_RAID_COMPS.map(comp => {
+            const { icon, name } = getRaidCompIconProps(comp);
+            const isActive = selected.includes(comp);
+            return (
+                <button
+                    key={comp}
+                    type="button"
+                    title={comp}
+                    onClick={() => onToggle(comp)}
+                    className={`rounded ring-2 transition-all ${isActive ? 'ring-(--primary) grayscale-0' : 'opacity-60 ring-transparent grayscale hover:opacity-90'}`}>
+                    <UnitShardIcon icon={icon} name={name} width={28} height={28} />
+                </button>
+            );
+        })}
+    </div>
+);
 
 // ---------------------------------------------------------------------------
 // Module-level cache — persists across navigations within a session
@@ -137,6 +161,7 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
     const [leftSnapshotId, setLeftSnapshotId] = useState<string | undefined>();
     const [rightSnapshotId, setRightSnapshotId] = useState<string | 'current' | undefined>();
     const [selectedUserId, setSelectedUserId] = useState<string | undefined>();
+    const [selectedComps, setSelectedComps] = useState<RaidComp[]>([]);
     const [selectedRaidTeamNames, setSelectedRaidTeamNames] = useState<string[]>([]);
 
     // ---- migration state ----
@@ -171,11 +196,23 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         if (error || !data) {
             setMetaError(typeof error === 'string' ? error : ((error as Error)?.message ?? 'Failed to load snapshots'));
         } else {
+            // A player's cached chain only covers snapshots that existed when it was fetched. If a
+            // new snapshot has shown up since (this user saved one, or another member's save was
+            // just picked up), previously cached chains are stale and must be refetched.
+            const previousIds = new Set((cache.snapshotMeta ?? []).map(s => s.snapshotId));
+            const hasNewSnapshot = data.snapshots.some(s => !previousIds.has(s.snapshotId));
+
             cacheSetMeta(data.snapshots, data.atCapacity, data.maxSnapshots, data.currentRosterMembers);
             setSnapshotMeta(data.snapshots);
             setAtCapacity(data.atCapacity);
             setMaxSnapshots(data.maxSnapshots);
             setCurrentRosterMembers(data.currentRosterMembers);
+
+            if (hasNewSnapshot) {
+                const emptyChainCache = new Map<string, PlayerRosterChainResponse>();
+                cacheSetPlayerChainCache(emptyChainCache);
+                setPlayerChainCache(emptyChainCache);
+            }
         }
         setIsLoadingMeta(false);
     }, []);
@@ -256,17 +293,23 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         return options;
     }, [leftSnapshotId, sortedMeta, members]);
 
+    const getMemberIdsFor = useCallback(
+        (snapshotId: string | 'current' | undefined): string[] => {
+            if (snapshotId === undefined) return [];
+            if (snapshotId === 'current') return currentRosterMembers.map(m => m.userId);
+            return sortedMeta.find(s => s.snapshotId === snapshotId)?.memberIds ?? [];
+        },
+        [sortedMeta, currentRosterMembers]
+    );
+
     // Players eligible for comparison: strict intersection of both sides' memberIds
     const membersInComparison = useMemo((): string[] => {
         if (leftSnapshotId === undefined || rightSnapshotId === undefined) return [];
-        const fromIds = new Set(sortedMeta.find(s => s.snapshotId === leftSnapshotId)?.memberIds);
+        const fromIds = new Set(getMemberIdsFor(leftSnapshotId));
         if (fromIds.size === 0) return [];
-        const toIds =
-            rightSnapshotId === 'current'
-                ? new Set(currentRosterMembers.map(m => m.userId))
-                : new Set(sortedMeta.find(s => s.snapshotId === rightSnapshotId)?.memberIds);
+        const toIds = new Set(getMemberIdsFor(rightSnapshotId));
         return [...fromIds].filter(id => toIds.has(id));
-    }, [leftSnapshotId, rightSnapshotId, sortedMeta, currentRosterMembers]);
+    }, [leftSnapshotId, rightSnapshotId, getMemberIdsFor]);
 
     const raidTeams = useMemo(() => teams2.filter(t => t.raid), [teams2]);
 
@@ -284,6 +327,18 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                 next.add(teamName);
             }
             return [...next];
+        });
+    };
+
+    const toggleComp = (comp: RaidComp) => {
+        setSelectedComps(current => {
+            const next = new Set(current);
+            if (next.has(comp)) {
+                next.delete(comp);
+            } else {
+                next.add(comp);
+            }
+            return [...next] as RaidComp[];
         });
     };
 
@@ -357,10 +412,11 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         return results;
     }, [selectedUserId, leftSnapshotId, rightSnapshotId, playerChainCache, memberStates]);
 
-    const selectedUnitIds = useMemo(
-        () => getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames),
-        [raidTeams, selectedRaidTeamNames]
-    );
+    const selectedUnitIds = useMemo(() => {
+        const standardIds = standardCompCategories(selectedComps);
+        const customIds = getUnitIdsFromTeamNames(raidTeams, selectedRaidTeamNames);
+        return new Set([...standardIds.coreIds, ...standardIds.flexIds, ...standardIds.mowIds, ...customIds]);
+    }, [selectedComps, raidTeams, selectedRaidTeamNames]);
 
     const filteredDiffEntries = useMemo((): DiffEntry[] => {
         if (selectedUnitIds.size === 0) return diffEntries;
@@ -829,10 +885,15 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                                     value={rightSnapshotId ?? ''}
                                     onChange={event_ => {
                                         const value = event_.target.value;
-                                        setRightSnapshotId(
-                                            value === '' ? undefined : value === 'current' ? 'current' : value
-                                        );
-                                        setSelectedUserId(undefined);
+                                        const nextRightSnapshotId =
+                                            value === '' ? undefined : value === 'current' ? 'current' : value;
+                                        setRightSnapshotId(nextRightSnapshotId);
+                                        if (
+                                            selectedUserId &&
+                                            !getMemberIdsFor(nextRightSnapshotId).includes(selectedUserId)
+                                        ) {
+                                            setSelectedUserId(undefined);
+                                        }
                                     }}
                                     className={`${selectClass} disabled:opacity-50`}>
                                     <option value="">— select a snapshot —</option>
@@ -845,6 +906,8 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
                             </div>
                         </>
                     )}
+
+                    <StandardCompBar selected={selectedComps} onToggle={toggleComp} />
 
                     {raidTeams.length > 0 && (
                         <RaidTeamFilterDropdown teams={raidTeamFilterOptions} onToggleTeam={toggleRaidTeam} />
