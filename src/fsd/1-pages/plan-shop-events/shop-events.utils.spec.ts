@@ -4,6 +4,7 @@ import { Alliance, Rarity } from '@/fsd/5-shared/model';
 
 import { MYTHIC_UNCRAFTABLE_UPGRADES } from '@/fsd/4-entities/shops';
 
+import { DAYS } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
 import { computeCoverageRows, getNeededForRewardType } from './shop-events.utils';
 
@@ -80,6 +81,7 @@ function availabilityOf(...types: string[]): Map<string, Map<number, Set<Day>>> 
 }
 
 const baseCoverageParameters = {
+    dayOrder: [...DAYS],
     allWeekDayAvailability: new Map<string, Map<number, Set<Day>>>(),
     neededBadges: alliancesOf({}),
     neededOrbs: alliancesOf({}),
@@ -146,5 +148,17 @@ describe('computeCoverageRows', () => {
         });
 
         expect(rows.find(r => r.rewardType === upgradeId)?.needed).toBe(3);
+    });
+
+    it('orders availability days according to the injected dayOrder, not calendar Monday-first order', () => {
+        const wedFirstDayOrder: Day[] = ['WED', 'THU', 'FRI', 'SAT', 'SUN', 'MON', 'TUE'];
+        const rows = computeCoverageRows({
+            ...baseCoverageParameters,
+            dayOrder: wedFirstDayOrder,
+            totalGold: 1000,
+            allWeekDayAvailability: new Map([['gold', new Map([[1, new Set<Day>(['MON', 'WED'])]])]]),
+        });
+
+        expect(rows.find(r => r.rewardType === 'gold')?.availability).toEqual([{ week: 1, days: ['WED', 'MON'] }]);
     });
 });

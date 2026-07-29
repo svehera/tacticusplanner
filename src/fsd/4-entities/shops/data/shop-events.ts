@@ -15,8 +15,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyJune2026',
         startUtc: Date.UTC(2026, 5, 22),
         earningsInfographic: [
-            { label: 'F2P per week', amount: '1,050 – 1,100' },
-            { label: 'Bonus shipment', amount: '+900' },
+            { label: 'F2P per week', amount: 'ca. 1,000' },
+            { label: 'Bonus shipment', amount: 'ca. +900 per week' },
         ],
     },
     August2026: {
@@ -25,8 +25,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyAugust2026',
         startUtc: Date.UTC(2026, 7, 5),
         earningsInfographic: [
-            { label: 'F2P per week', amount: '750 – 850' },
-            { label: 'Bonus shipment', amount: '+1000' },
+            { label: 'F2P per week', amount: 'ca. 750' },
+            { label: 'Bonus shipment', amount: 'ca. +1,000 per week' },
         ],
     },
 };

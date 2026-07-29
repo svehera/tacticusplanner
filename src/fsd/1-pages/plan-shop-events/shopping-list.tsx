@@ -6,18 +6,20 @@ import { MiscIcon, tacticusIcons } from '@/fsd/5-shared/ui/icons';
 
 import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 
-import { DAYS, DAY_LABELS } from './shop-events.constants';
+import { DAY_LABELS } from './shop-events.constants';
+import type { Day } from './shop-events.constants';
 import type { CartRecord } from './shop-events.types';
 
 interface ShoppingListProps {
     cart: CartRecord;
     weekCount: number;
     currencyIconKey: keyof typeof tacticusIcons;
+    dayOrder: Day[];
     onSetQty: (key: string, qty: number) => void;
     onResetWeek: (w: number) => void;
 }
 
-export function ShoppingList({ cart, weekCount, currencyIconKey, onSetQty, onResetWeek }: ShoppingListProps) {
+export function ShoppingList({ cart, weekCount, currencyIconKey, dayOrder, onSetQty, onResetWeek }: ShoppingListProps) {
     const weekNumbers = useMemo(() => Array.from({ length: weekCount }, (_, index) => index + 1), [weekCount]);
     const [sortByDay, setSortByDay] = useState(false);
     const [expandedWeeks, setExpandedWeeks] = useState<Set<number>>(new Set());
@@ -63,7 +65,7 @@ export function ShoppingList({ cart, weekCount, currencyIconKey, onSetQty, onRes
                 const rawEntries = Object.entries(cart).filter(([, cartEntry]) => cartEntry.week === w);
                 const entries = rawEntries.toSorted(([, a], [, b]) =>
                     sortByDay
-                        ? DAYS.indexOf(a.day) - DAYS.indexOf(b.day) || a.label.localeCompare(b.label)
+                        ? dayOrder.indexOf(a.day) - dayOrder.indexOf(b.day) || a.label.localeCompare(b.label)
                         : a.label.localeCompare(b.label)
                 );
                 if (rawEntries.length === 0) return;

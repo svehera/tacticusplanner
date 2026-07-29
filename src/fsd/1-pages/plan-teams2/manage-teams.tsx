@@ -1,7 +1,7 @@
 /* eslint-disable import-x/order */
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy } from 'lucide-react';
+import { Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy, Map } from 'lucide-react';
 import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
@@ -18,6 +18,7 @@ import { CharactersService } from '@/fsd/4-entities/character/@x/unit';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 import { AddTeamDialog } from './add-team-dialog';
+import { campaignStorylineCoreCharacters, campaignStorylineLabel } from './campaign.constants';
 import { ITeam2 } from './models';
 import { TeamFlow } from './team-flow';
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
@@ -57,7 +58,7 @@ enum SaveTeamMode {
     MODE_EDIT,
 }
 
-type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde';
+type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde' | 'campaign';
 
 type TeamTypeOption = { value: TeamTypeKey | undefined; label: string };
 
@@ -68,6 +69,7 @@ const TEAM_TYPE_OPTIONS: TeamTypeOption[] = [
     { value: 'raid', label: 'Guild Raid' },
     { value: 'ta', label: 'Tournament Arena' },
     { value: 'horde', label: 'Horde' },
+    { value: 'campaign', label: 'Campaign' },
 ];
 
 export const ManageTeams = () => {
@@ -103,6 +105,8 @@ export const ManageTeams = () => {
     const [guildRaidSelected, setGuildRaidSelected] = useState<boolean>(false);
     const [tournamentArenaSelected, setTournamentArenaSelected] = useState<boolean>(false);
     const [hordeModeSelected, setHordeModeSelected] = useState<boolean>(false);
+    const [campaignSelected, setCampaignSelected] = useState<boolean>(false);
+    const [campaignStoryline, setCampaignStoryline] = useState<string | undefined>();
     const [teamName, setTeamName] = useState<string>('');
     const [resolvedChars, setResolvedChars] = useState<ICharacter2[]>([]);
     const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
@@ -129,7 +133,8 @@ export const ManageTeams = () => {
                         (warDefenseSelected && !!team.warDefense) ||
                         (guildRaidSelected && !!team.raid) ||
                         (tournamentArenaSelected && !!team.ta) ||
-                        (hordeModeSelected && !!team.horde)) &&
+                        (hordeModeSelected && !!team.horde) ||
+                        (campaignSelected && !!team.campaign)) &&
                     !(saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam && team.name === editingTeam.name)
             ),
         [
@@ -141,6 +146,7 @@ export const ManageTeams = () => {
             guildRaidSelected,
             tournamentArenaSelected,
             hordeModeSelected,
+            campaignSelected,
         ]
     );
 
@@ -196,6 +202,7 @@ export const ManageTeams = () => {
         if (
             !guildRaidSelected &&
             !hordeModeSelected &&
+            !campaignSelected &&
             (!teamSizeRestrictedModesEnabled ||
                 (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected))
         ) {
@@ -212,6 +219,7 @@ export const ManageTeams = () => {
         guildRaidSelected,
         tournamentArenaSelected,
         hordeModeSelected,
+        campaignSelected,
         notes,
         selectedChars,
         selectedMows,
@@ -255,6 +263,8 @@ export const ManageTeams = () => {
         setGuildRaidSelected(false);
         setTournamentArenaSelected(false);
         setHordeModeSelected(false);
+        setCampaignSelected(false);
+        setCampaignStoryline(undefined);
         setSaveTeamMode(SaveTeamMode.MODE_ADD);
     };
 
@@ -272,6 +282,8 @@ export const ManageTeams = () => {
         setGuildRaidSelected(!!team.raid);
         setTournamentArenaSelected(!!team.ta);
         setHordeModeSelected(!!team.horde);
+        setCampaignSelected(!!team.campaign);
+        setCampaignStoryline(team.campaignStoryline);
         setRarityCap(Rarity.Mythic);
     };
 
@@ -295,6 +307,8 @@ export const ManageTeams = () => {
                 raid: guildRaidSelected ? true : undefined,
                 ta: tournamentArenaSelected ? true : undefined,
                 horde: hordeModeSelected ? true : undefined,
+                campaign: campaignSelected ? true : undefined,
+                campaignStoryline: campaignSelected ? campaignStoryline : undefined,
                 notes,
                 flexIndex,
             };
@@ -312,6 +326,8 @@ export const ManageTeams = () => {
                 raid: guildRaidSelected ? true : undefined,
                 ta: tournamentArenaSelected ? true : undefined,
                 horde: hordeModeSelected ? true : undefined,
+                campaign: campaignSelected ? true : undefined,
+                campaignStoryline: campaignSelected ? campaignStoryline : undefined,
                 notes: notes,
             };
             dispatch.teams2({ type: 'Set', value: [...teams, newTeam] });
@@ -350,6 +366,27 @@ export const ManageTeams = () => {
 
     const onMowClicked = (mow: IMow2) => {
         setSelectedMows(selectedMows.filter(id => id !== (mow.snowprintId ?? '')));
+    };
+
+    const onCampaignStorylineChanged = (storyline: string | undefined) => {
+        setCampaignStoryline(storyline);
+        // Picking a campaign replaces the lineup with its three required core characters.
+        if (storyline) {
+            setSelectedChars(campaignStorylineCoreCharacters(storyline));
+            setFlexIndex(undefined);
+        }
+    };
+
+    // Campaign is exclusive with the other modes (the conflicting checkboxes are disabled
+    // in the dialog). Campaign teams don't use MoWs, so selecting it clears them; unchecking
+    // it clears the storyline.
+    const onCampaignChanged = (value: boolean) => {
+        setCampaignSelected(value);
+        if (value) {
+            setSelectedMows([]);
+        } else {
+            setCampaignStoryline(undefined);
+        }
     };
 
     if (addTeamDialogOpen) {
@@ -394,12 +431,16 @@ export const ManageTeams = () => {
                 guildRaidSelected={guildRaidSelected}
                 tournamentArenaSelected={tournamentArenaSelected}
                 hordeModeSelected={hordeModeSelected}
+                campaignSelected={campaignSelected}
+                campaignStoryline={campaignStoryline}
                 teamName={teamName}
                 onWarOffenseChanged={setWarOffenseSelected}
                 onWarDefenseChanged={setWarDefenseSelected}
                 onGuildRaidChanged={setGuildRaidSelected}
                 onTournamentArenaChanged={setTournamentArenaSelected}
                 onHordeModeChanged={setHordeModeSelected}
+                onCampaignChanged={onCampaignChanged}
+                onCampaignStorylineChanged={onCampaignStorylineChanged}
                 onTeamNameChanged={setTeamName}
                 onNotesChanged={setNotes}
                 onCancel={() => setAddTeamDialogOpen(false)}
@@ -547,7 +588,19 @@ export const ManageTeams = () => {
                                 {!!team.horde && (
                                     <MetadataChip icon={<Users2 className="size-3" />} label="Horde" color="error" />
                                 )}
+                                {!!team.campaign && (
+                                    <MetadataChip icon={<Map className="size-3" />} label="Campaign" color="info" />
+                                )}
                             </div>
+                            {!!team.campaign && !!team.campaignStoryline && (
+                                <div className="mb-4 flex flex-wrap gap-2">
+                                    <MetadataChip
+                                        icon={<Map className="size-3" />}
+                                        label={campaignStorylineLabel(team.campaignStoryline)}
+                                        color="secondary"
+                                    />
+                                </div>
+                            )}
                             {team.notes && team.notes.trim().length > 0 && (
                                 <div className="mb-4">
                                     <span className="font-mono text-xs tracking-wider text-(--soft-fg) uppercase">

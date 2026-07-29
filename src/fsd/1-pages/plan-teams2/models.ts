@@ -17,6 +17,10 @@ export interface ITeam2 {
     ta?: boolean;
     // If the team is viable in horde mode.
     horde?: boolean;
+    // If the team is viable for campaign battles.
+    campaign?: boolean;
+    // The campaign storyline this team targets (a value from campaignStorylineOptions).
+    campaignStoryline?: string;
     // Any user-provided notes.
     notes?: string;
 }
