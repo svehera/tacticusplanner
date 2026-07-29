@@ -8,7 +8,15 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import { Rarity, Alliance, DamageType, Trait, Rank, getTraitStringFromLabel } from '@/fsd/5-shared/model';
+import {
+    Rarity,
+    Alliance,
+    DamageType,
+    Trait,
+    Rank,
+    getTraitStringFromLabel,
+    allianceFromString,
+} from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
 import {
     Accordion,
@@ -73,7 +81,7 @@ export const LearnCharacters = () => {
         distance: number | '';
         damageTypes: DamageType[];
         traits: string[];
-        alliance: string[];
+        alliance: Alliance[];
     };
 
     const [filter, setFilter] = useState<Filter>({
@@ -97,7 +105,12 @@ export const LearnCharacters = () => {
         const movement = searchParams.get('movement');
         const distance = searchParams.get('distance');
         const traits = searchParams.getAll('trait');
-        const alliance = searchParams.getAll('alliance');
+        // Query params are user-supplied, so drop anything that isn't a real alliance rather
+        // than letting it through as a filter value that matches nothing and has no icon.
+        const alliance = searchParams
+            .getAll('alliance')
+            .map(value => allianceFromString(value))
+            .filter((value): value is Alliance => value !== undefined);
         const newFilter: Filter = {
             name: name ?? '',
             minHits: minHits ? Number(minHits) : '',
@@ -517,7 +530,7 @@ export const LearnCharacters = () => {
                         </div>
 
                         <div className="min-w-[200px] flex-1">
-                            <SelectMulti<string>
+                            <SelectMulti<Alliance>
                                 options={Object.values(Alliance)}
                                 value={filter.alliance}
                                 onChange={v => handleFilterChange('alliance', v)}
@@ -525,14 +538,14 @@ export const LearnCharacters = () => {
                                 placeholder="All alliances"
                                 renderOption={a => (
                                     <div className="flex items-center gap-2">
-                                        <AllianceImage alliance={a as Alliance} size={20} />
+                                        <AllianceImage alliance={a} size={20} />
                                         <span>{a}</span>
                                     </div>
                                 )}
                                 renderValue={selected => (
                                     <div className="flex flex-wrap items-center gap-1">
                                         {selected.map(a => (
-                                            <AllianceImage key={a} alliance={a as Alliance} size={18} />
+                                            <AllianceImage key={a} alliance={a} size={18} />
                                         ))}
                                     </div>
                                 )}
