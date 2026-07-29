@@ -85,12 +85,12 @@ const AbilityPanel = ({
     const scaledVariableNames = disableScaling ? [] : (ability?.variablesAffectedByRarityBonus ?? []);
 
     return (
-        <div className="flex flex-col gap-1">
+        <div className="flex w-full max-w-xl min-w-0 flex-1 flex-col gap-1 sm:min-w-80">
             <span className="text-xs text-(--soft-fg)">{label}</span>
             {ability ? (
-                <div className="-mx-4 bg-(--ability-panel)">
-                    {/* Description text — full width */}
-                    <div className="px-4 py-2">
+                <div className="rounded-md bg-(--ability-panel)">
+                    {/* Description text */}
+                    <div className="px-3 py-2">
                         <AbilityText
                             text={ability.text.currentLevelDescription}
                             level={level}
@@ -122,7 +122,7 @@ const AbilityPanel = ({
                     </div>
                     {/* Icon + level control on LEFT, chart on RIGHT */}
                     <div className="flex items-start">
-                        <div className="flex w-32 shrink-0 flex-col items-center gap-1 px-4 pb-2">
+                        <div className="flex w-28 shrink-0 flex-col items-center gap-1 px-3 pb-2">
                             {icon ? (
                                 <img src={icon.file} alt={icon.name} title={icon.name} className="h-12 w-12" />
                             ) : (
@@ -143,7 +143,7 @@ const AbilityPanel = ({
                                 </select>
                             )}
                         </div>
-                        <div className="min-w-0 flex-1">
+                        <div className="min-w-0 flex-1 pr-3 pb-2">
                             <AbilityVariablesChart
                                 variables={ability.variables}
                                 scaledVariableNames={scaledVariableNames}
@@ -401,20 +401,6 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                 </div>
             )}
 
-            {/* ── Character: stat growth chart (desktop only) ────────────────── */}
-            {char && charEntry && (
-                <div className="-mx-4 mt-4 hidden border-t border-(--border) pt-3 lg:block">
-                    <CharacterStatGrowthChart
-                        baseDamage={charEntry.initialStats.damage}
-                        baseHealth={charEntry.initialStats.health}
-                        baseArmor={charEntry.initialStats.armor}
-                        currentRank={rank}
-                        stars={stars}
-                        maxRank={maxRank}
-                    />
-                </div>
-            )}
-
             {/* ── Character: stats by rank table (mobile only) ───────────────── */}
             {char && charEntry && (
                 <details className="mt-4 border-t border-(--border) pt-3 lg:hidden">
@@ -552,7 +538,22 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
             )}
 
             {/* ── Abilities ─────────────────────────────────────────────────── */}
-            <div className="mt-6 flex flex-col gap-6 border-t border-(--border) pt-4">
+            <div className="mt-6 flex flex-wrap gap-6 border-t border-(--border) pt-4">
+                {char && charEntry && (
+                    <div className="hidden w-full max-w-xl min-w-80 flex-1 flex-col gap-1 lg:flex">
+                        <span className="text-xs text-(--soft-fg)">Stats by Rank</span>
+                        <div className="rounded-md bg-(--ability-panel) p-2">
+                            <CharacterStatGrowthChart
+                                baseDamage={charEntry.initialStats.damage}
+                                baseHealth={charEntry.initialStats.health}
+                                baseArmor={charEntry.initialStats.armor}
+                                currentRank={rank}
+                                stars={stars}
+                                maxRank={maxRank}
+                            />
+                        </div>
+                    </div>
+                )}
                 {char && charEntry && (
                     <>
                         <AbilityPanel
