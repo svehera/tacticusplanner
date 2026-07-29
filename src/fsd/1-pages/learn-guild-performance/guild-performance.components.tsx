@@ -8,6 +8,7 @@ import {
     type TacticusGuildRaidEntry,
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
+import { Select } from '@/fsd/5-shared/ui';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
@@ -25,59 +26,69 @@ export const SeasonSelect = ({
     value,
     onChange,
     seasonStatusLabel,
+    disabled,
 }: {
     seasons: number[];
     value: number | undefined;
     onChange: (season: number) => void;
     /** Optional label appended to an option, e.g. "not aggregated" or "error". */
     seasonStatusLabel?: (season: number) => string | undefined;
+    /** Shown greyed-out on tabs that ignore the season selection. */
+    disabled?: boolean;
 }) => (
     <label className="flex flex-col gap-0.5 text-xs">
         <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Season</span>
-        <select
-            value={value ?? ''}
-            onChange={event => {
-                onChange(Number(event.target.value));
-            }}
-            className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-            {seasons.map(season => {
+        <Select<number>
+            options={seasons}
+            value={value as number}
+            onChange={onChange}
+            disabled={disabled}
+            placeholder="Season"
+            className="w-40"
+            renderValue={season => <span>Season {season}</span>}
+            renderOption={season => {
                 const statusLabel = seasonStatusLabel?.(season);
-                return (
-                    <option key={season} value={season}>
-                        {statusLabel ? `Season ${season} (${statusLabel})` : `Season ${season}`}
-                    </option>
-                );
-            })}
-        </select>
+                return <span>{statusLabel ? `Season ${season} (${statusLabel})` : `Season ${season}`}</span>;
+            }}
+        />
     </label>
 );
+
+/** Sentinel option representing "no player filter"; empty userId maps back to `undefined`. */
+const ALL_PLAYERS_OPTION = { userId: '', displayName: 'All players' };
 
 export const PlayerSelect = ({
     players,
     value,
     onChange,
+    disabled,
 }: {
     players: { userId: string; displayName: string }[];
     value: string | undefined;
     onChange: (userId: string | undefined) => void;
-}) => (
-    <label className="flex flex-col gap-0.5 text-xs">
-        <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Player</span>
-        <select
-            value={value ?? ''}
-            onChange={event => {
-                onChange(event.target.value === '' ? undefined : event.target.value);
-            }}
-            className="rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900">
-            <option value="">All players</option>
-            {players.map(player => (
-                <option key={player.userId} value={player.userId}>
-                    {player.displayName}
-                </option>
-            ))}
-        </select>
-    </label>
-);
+    /** Shown greyed-out on tabs that ignore the player selection. */
+    disabled?: boolean;
+}) => {
+    const options = [ALL_PLAYERS_OPTION, ...players];
+    const selected = options.find(player => player.userId === (value ?? '')) ?? ALL_PLAYERS_OPTION;
+    return (
+        <label className="flex flex-col gap-0.5 text-xs">
+            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Player</span>
+            <Select
+                options={options}
+                value={selected}
+                by={(a, z) => a.userId === z.userId}
+                onChange={player => {
+                    onChange(player.userId === '' ? undefined : player.userId);
+                }}
+                disabled={disabled}
+                className="w-56"
+                renderValue={player => <span className="truncate">{player.displayName}</span>}
+                renderOption={player => <span>{player.displayName}</span>}
+            />
+        </label>
+    );
+};
 
 // ---------------------------------------------------------------------------
 // NoKeyMessage
