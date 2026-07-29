@@ -85,7 +85,7 @@ const AbilityPanel = ({
     const scaledVariableNames = disableScaling ? [] : (ability?.variablesAffectedByRarityBonus ?? []);
 
     return (
-        <div className="flex w-full max-w-xl min-w-80 flex-1 flex-col gap-1">
+        <div className="flex w-full max-w-xl min-w-0 flex-1 flex-col gap-1 sm:min-w-80">
             <span className="text-xs text-(--soft-fg)">{label}</span>
             {ability ? (
                 <div className="rounded-md bg-(--ability-panel)">

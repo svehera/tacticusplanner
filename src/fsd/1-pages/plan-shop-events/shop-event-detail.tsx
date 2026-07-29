@@ -40,15 +40,9 @@ import { PurchasedQtyModal } from './purchased-qty-modal';
 import { ShopCard } from './shop-card';
 import { DAYS, DAY_LABELS } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
+import { buildEventDateIndex, getEventDate, getEventDayOrder } from './shop-events.dates';
 import type { CartEntry, CartRecord, ResolvedSlot } from './shop-events.types';
-import {
-    buildEventDateIndex,
-    cartKey,
-    computeCoverageRows,
-    formatGold,
-    getEventDate,
-    getEventDayOrder,
-} from './shop-events.utils';
+import { cartKey, computeCoverageRows, formatGold } from './shop-events.utils';
 import { ShoppingList } from './shopping-list';
 
 export const ShopEventDetail = () => {

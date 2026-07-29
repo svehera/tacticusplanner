@@ -5,7 +5,7 @@ import { MiscIcon } from '@/fsd/5-shared/ui/icons';
 
 import { getShopCurrencyIconKey, shopEvents } from '@/fsd/4-entities/shops';
 
-import { getEventDate } from './shop-events.utils';
+import { getEventDate, getEventDayOrder } from './shop-events.dates';
 
 export const ShopEventsList = () => {
     usePageMetaOverride({
@@ -23,9 +23,10 @@ export const ShopEventsList = () => {
                     const totalDays = event.weeks.length * 7;
                     const endUtc = event.startUtc + totalDays * 86_400_000;
                     const hasEnded = Date.now() > endUtc;
-                    const startLabel = getEventDate(event, 1, 'MON');
+                    const dayOrder = getEventDayOrder(event);
+                    const startLabel = getEventDate(event, 1, dayOrder[0]);
                     const endWeek = event.weeks.length;
-                    const endLabel = getEventDate(event, endWeek, 'SUN');
+                    const endLabel = getEventDate(event, endWeek, dayOrder[6]);
 
                     return (
                         <Link
