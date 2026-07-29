@@ -1,4 +1,6 @@
-﻿import { FormControl, MenuItem, Select } from '@mui/material';
+﻿/* eslint-disable boundaries/element-types */
+/* eslint-disable import-x/no-internal-modules */
+import { FormControl, MenuItem, Select } from '@mui/material';
 import InputLabel from '@mui/material/InputLabel';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
@@ -6,21 +8,28 @@ import { FlexBox } from '@/fsd/5-shared/ui';
 
 import { CharactersFilterBy, CharactersOrderBy } from '@/fsd/4-entities/character';
 
+import { ITeam2 } from '@/fsd/1-pages/plan-teams2/models';
+
 import { ICharactersViewControls } from './model';
 import { ViewSettings } from './view-settings';
 
 export const CharactersViewControls = ({
     viewControls,
     viewControlsChanges,
+    teams,
 }: {
     viewControls: ICharactersViewControls;
     viewControlsChanges: (viewControls: ICharactersViewControls) => void;
+    teams?: ITeam2[];
 }) => {
-    const updatePreferences = (setting: keyof ICharactersViewControls, value: number) => {
+    const updatePreferences = (setting: keyof ICharactersViewControls, value: number | string) => {
         viewControlsChanges({ ...viewControls, [setting]: value });
     };
 
-    const filterEntries: number[] = getEnumValues(CharactersFilterBy);
+    const filterEntries: Array<number | string> = [
+        ...getEnumValues(CharactersFilterBy),
+        ...(teams ?? []).map(team => team.name),
+    ];
     const orderEntries: number[] = getEnumValues(CharactersOrderBy);
 
     const orderToString = (order: CharactersOrderBy): string => {
@@ -61,7 +70,10 @@ export const CharactersViewControls = ({
         }
     };
 
-    const filterToString = (filter: CharactersFilterBy): string => {
+    const filterToString = (filter: CharactersFilterBy | string): string => {
+        if (typeof filter === 'string') {
+            return filter;
+        }
         switch (filter) {
             case CharactersFilterBy.NeedToAscend: {
                 return 'Need to Ascend';
@@ -96,16 +108,16 @@ export const CharactersViewControls = ({
         }
     };
 
-    const getSelectControl = (
+    const getSelectControl = <T extends number | string>(
         label: string,
-        value: number,
+        value: T,
         name: keyof ICharactersViewControls,
-        entries: Array<number>,
-        getName: (value: number) => string
+        entries: Array<T>,
+        getName: (value: T) => string
     ) => (
         <FormControl className="w-1/2 max-w-[200px]">
             <InputLabel>{label}</InputLabel>
-            <Select label={name} value={value} onChange={event => updatePreferences(name, +event.target.value)}>
+            <Select label={name} value={value} onChange={event => updatePreferences(name, event.target.value as T)}>
                 {entries.map(value => (
                     <MenuItem key={value} value={value}>
                         {getName(value)}

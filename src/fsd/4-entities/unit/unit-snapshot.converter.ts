@@ -14,8 +14,8 @@ export function convertCharacterToSnapshot(charData: ICharacter2): ISnapshotChar
         rank: charData.rank,
         xpLevel: charData.level ?? 0,
         stars: charData.stars ?? 0,
-        shards: 0,
-        mythicShards: 0,
+        shards: charData.shards ?? 0,
+        mythicShards: charData.mythicShards ?? 0,
         equip0: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[0]?.id),
         equip1: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[1]?.id),
         equip2: EquipmentService.equipmentData.find(equip => equip.id === charData.equipment?.[2]?.id),
@@ -33,8 +33,8 @@ export function convertMowToSnapshot(mowData: IMow2): ISnapshotMachineOfWar {
         secondaryAbilityLevel: mowData.secondaryAbilityLevel ?? 0,
         rarity: mowData.rarity,
         stars: mowData.stars ?? 0,
-        shards: 0,
-        mythicShards: 0,
+        shards: mowData.shards ?? 0,
+        mythicShards: mowData.mythicShards ?? 0,
         locked: false,
     };
 }
