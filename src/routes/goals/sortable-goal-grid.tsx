@@ -18,7 +18,9 @@ import {
     useSortable,
 } from '@dnd-kit/sortable';
 import { CSS } from '@dnd-kit/utilities';
-import React, { useState } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
+
+import { filterMap } from '@/fsd/5-shared/lib';
 
 type SortableReturn = ReturnType<typeof useSortable>;
 
@@ -34,6 +36,8 @@ interface SortableItemProps<T> {
     renderCard: (item: T, dragHandle: GoalDragHandle) => React.ReactNode;
 }
 
+// Deliberately not memoised: dnd-kit re-renders every sortable through the useSortable context
+// subscription, which React.memo cannot block.
 const SortableGoalCard = <T extends { goalId: string }>({ item, renderCard }: SortableItemProps<T>) => {
     const { attributes, listeners, setNodeRef, setActivatorNodeRef, transform, transition, isDragging } = useSortable({
         id: item.goalId,
@@ -67,14 +71,35 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
         useSensor(KeyboardSensor, { coordinateGetter: sortableKeyboardCoordinates })
     );
     const [activeId, setActiveId] = useState<UniqueIdentifier | undefined>();
-    const [activeWidth, setActiveWidth] = useState<number>();
+    // `h-full` resolves to `auto` inside the overlay, so pin both dimensions or the card collapses.
+    const [activeSize, setActiveSize] = useState<{ width: number; height: number } | undefined>();
 
-    const ids = items.map(item => item.goalId);
-    const activeItem = items.find(item => item.goalId === activeId);
+    // `items` returns through the global store, which commits in a POST-PAINT effect — so without
+    // this the grid paints the pre-drop order first and visibly jumps.
+    const [dropOrder, setDropOrder] = useState<string[]>();
+
+    // Keyed on id CONTENT: the goals page rebuilds these arrays with .toSorted() every render, so an
+    // identity-keyed effect would clear the order immediately.
+    const itemIdsKey = items.map(item => item.goalId).join('|');
+    useEffect(() => {
+        setDropOrder(undefined);
+    }, [itemIdsKey]);
+
+    const orderedItems = useMemo(() => {
+        if (!dropOrder) return items;
+        const byId = new Map(items.map(item => [item.goalId, item]));
+        const reordered = filterMap(dropOrder, id => byId.get(id));
+        // Section membership changed while we held a drop order — defer to props.
+        return reordered.length === items.length ? reordered : items;
+    }, [items, dropOrder]);
+
+    const ids = orderedItems.map(item => item.goalId);
+    const activeItem = orderedItems.find(item => item.goalId === activeId);
 
     const handleStart = (event: DragStartEvent) => {
         setActiveId(event.active.id);
-        setActiveWidth(event.active.rect.current.initial?.width);
+        const rect = event.active.rect.current.initial;
+        setActiveSize(rect ? { width: rect.width, height: rect.height } : undefined);
     };
     const handleEnd = (event: DragEndEvent) => {
         const { active, over } = event;
@@ -82,7 +107,9 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
             const oldIndex = ids.indexOf(active.id as string);
             const newIndex = ids.indexOf(over.id as string);
             if (oldIndex !== -1 && newIndex !== -1) {
-                onReorder(arrayMove(ids, oldIndex, newIndex), active.id as string);
+                const next = arrayMove(ids, oldIndex, newIndex);
+                setDropOrder(next);
+                onReorder(next, active.id as string);
             }
         }
         setActiveId(undefined);
@@ -97,13 +124,13 @@ export const SortableGoalGrid = <T extends { goalId: string }>({
             onDragCancel={() => setActiveId(undefined)}>
             <SortableContext items={ids} strategy={rectSortingStrategy}>
                 <div className={className}>
-                    {items.map(item => (
+                    {orderedItems.map(item => (
                         <SortableGoalCard key={item.goalId} item={item} renderCard={renderCard} />
                     ))}
                 </div>
             </SortableContext>
             <DragOverlay>
-                {activeItem ? <div style={{ width: activeWidth }}>{renderCard(activeItem, {})}</div> : undefined}
+                {activeItem ? <div style={activeSize}>{renderCard(activeItem, {})}</div> : undefined}
             </DragOverlay>
         </DndContext>
     );
