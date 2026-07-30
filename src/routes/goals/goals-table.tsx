@@ -79,6 +79,10 @@ interface Props {
     onToggleInclude?: (goalId: string) => void;
     /** Section-scoped reorder — same contract as the card grid (new order of ids + which id moved). */
     onReorder: (orderedIds: string[], movedId: string) => void;
+    /** Priority-arrow move by one position in the GLOBAL order; may cross a section boundary. */
+    onMove: (goalId: string, delta: number) => void;
+    /** Total goal count across all sections — the upper bound of the global priority range. */
+    totalGoals: number;
 }
 
 const emptyCell = <div className="flex h-full items-center text-sm leading-normal text-(--soft-fg) opacity-50">—</div>;
@@ -109,34 +113,35 @@ export const GoalsTable: React.FC<Props> = ({
     menuItemSelect,
     onToggleInclude,
     onReorder,
+    onMove,
+    totalGoals,
 }) => {
     // All frequently-changing values live in refs so columnDefs can have stable deps and never
     // recompute — which would reset user-resized column widths.
     const gridApiReference = useRef<GridApi | null>(null);
     const savedWidthsReference = useRef<Record<string, number>>({});
     const statusColWidthReference = useRef(STATUS_COL_DEFAULT_WIDTH);
-    // True while any column sort is active. Managed row-drag is suppressed by ag-grid under a sort,
-    // so the grip is disabled/dimmed then; the arrows still reorder in priority space (see prioCol).
+    // True while any column sort is active — ag-grid suppresses managed row-drag then, so the grip
+    // is dimmed. The arrows still work: they move in global priority space, not display order.
     const sortActiveReference = useRef(false);
     const goalsColorCodingReference = useRef(goalsColorCoding);
     const onToggleIncludeReference = useRef(onToggleInclude);
     const menuItemSelectReference = useRef(menuItemSelect);
     const onReorderReference = useRef(onReorder);
-    const rowsReference = useRef(rows);
+    const onMoveReference = useRef(onMove);
+    const totalGoalsReference = useRef(totalGoals);
     // Map keyed by goalId for O(1) lookups in cell renderers.
     const estimateMapReference = useRef<Map<string, IGoalEstimate>>(new Map());
-    // Priority-order index per goalId (rows are priority-sorted) — O(1) lookup for the reorder arrows.
-    const priorityIndexReference = useRef<Map<string, number>>(new Map());
 
     useLayoutEffect(() => {
         goalsColorCodingReference.current = goalsColorCoding;
         onToggleIncludeReference.current = onToggleInclude;
         menuItemSelectReference.current = menuItemSelect;
         onReorderReference.current = onReorder;
-        rowsReference.current = rows;
+        onMoveReference.current = onMove;
+        totalGoalsReference.current = totalGoals;
         estimateMapReference.current = new Map(estimate.map(est => [est.goalId, est]));
-        priorityIndexReference.current = new Map(rows.map((row, index) => [row.goalId, index]));
-    }, [estimate, goalsColorCoding, menuItemSelect, onReorder, onToggleInclude, rows]);
+    }, [estimate, goalsColorCoding, menuItemSelect, onMove, onReorder, onToggleInclude, rows, totalGoals]);
 
     // Redraw rows (not columns) when estimates OR the colour-coding mode change, so cell content,
     // row classes and row styles (getRowStyle reads the colour-mode ref) stay current without
@@ -172,18 +177,6 @@ export const GoalsTable: React.FC<Props> = ({
         }
     }, []);
 
-    /** Moves the row at fromIndex to toIndex within this section and persists the reorder. */
-    const moveRow = useCallback((fromIndex: number, toIndex: number) => {
-        const ordered = [...rowsReference.current];
-        if (toIndex < 0 || toIndex >= ordered.length) return;
-        const [moved] = ordered.splice(fromIndex, 1);
-        ordered.splice(toIndex, 0, moved);
-        onReorderReference.current(
-            ordered.map(row => row.goalId),
-            moved.goalId
-        );
-    }, []);
-
     const handleRowDragEnd = useCallback((event_: RowDragEndEvent<TypedGoalSelect>) => {
         // Under an active sort the post-sort node order isn't the user's intended manual order, so
         // never persist it (ag-grid also suppresses managed drag while sorted — this is a guard).
@@ -198,8 +191,9 @@ export const GoalsTable: React.FC<Props> = ({
 
     const handleSortChanged = useCallback((event_: SortChangedEvent) => {
         sortActiveReference.current = event_.api.getColumnState().some(column => !!column.sort);
-        // Re-render the grip so its enabled/dimmed state matches the new sort state.
-        event_.api.refreshCells({ force: true });
+        // Full row redraw (not refreshCells) so both the grip's dimmed state and the `rowDrag`
+        // callback are re-evaluated — rowDrag is read when the cell is built, not on a cell refresh.
+        event_.api.redrawRows();
     }, []);
 
     // columnDefs recomputes only when the variant changes (stable per mounted table). All changing
@@ -235,33 +229,32 @@ export const GoalsTable: React.FC<Props> = ({
             valueGetter: params => params.data?.priority ?? 0,
             cellClass: 'prio-cell',
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
-                if (!params.data) return;
-                // Index in PRIORITY order (rows are always priority-sorted), not the display index —
-                // so the arrows reorder the clicked goal correctly even under a column sort. O(1) via
-                // the prebuilt map so redraws don't re-scan the section per row.
-                const index = priorityIndexReference.current.get(params.data.goalId) ?? 0;
-                const total = priorityIndexReference.current.size;
+                const { data } = params;
+                if (!data) return;
+                // Priority is GLOBAL (1..totalGoals), so a neighbour in another section still counts.
+                const { priority } = data;
+                const total = totalGoalsReference.current;
                 return (
                     <div className="flex h-full w-full">
                         <div className="flex flex-1 items-center px-3">
                             <span className="min-w-[20px] text-center text-sm font-medium text-(--soft-fg) tabular-nums">
-                                {params.data.priority}
+                                {priority}
                             </span>
                         </div>
                         <div className="flex w-10 flex-col border-l border-(--border)">
                             <button
                                 type="button"
                                 title="Move Up"
-                                disabled={index <= 0}
-                                onClick={() => moveRow(index, index - 1)}
+                                disabled={priority <= 1}
+                                onClick={() => onMoveReference.current(data.goalId, -1)}
                                 className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
                                 <ArrowUp className="size-3" />
                             </button>
                             <button
                                 type="button"
                                 title="Move Down"
-                                disabled={index >= total - 1}
-                                onClick={() => moveRow(index, index + 1)}
+                                disabled={priority >= total}
+                                onClick={() => onMoveReference.current(data.goalId, 1)}
                                 className="flex w-full flex-1 cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:bg-(--primary)/15 hover:text-(--primary) disabled:cursor-not-allowed disabled:opacity-25">
                                 <ArrowDown className="size-3" />
                             </button>
@@ -918,7 +911,7 @@ export const GoalsTable: React.FC<Props> = ({
             ...(variant === 'rank' ? [upgradesCol] : []),
             notesCol,
         ];
-    }, [variant, moveRow]);
+    }, [variant]);
 
     const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>): RowStyle | undefined => {
         const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;

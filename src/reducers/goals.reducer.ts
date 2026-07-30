@@ -1,4 +1,6 @@
-﻿import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+﻿import { normalizeGoalOrder } from '@/fsd/4-entities/goal';
+
+import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { IPersonalGoal, SetStateAction } from '../models/interfaces';
@@ -9,9 +11,9 @@ export type GoalsAction =
           goal: TypedGoalSelect;
       }
     | {
-          type: 'Swap';
-          goalId: string;
-          neighborId: string;
+          /** The reordered goals in their new order. Goals not listed keep their array slots. */
+          type: 'Reorder';
+          orderedIds: string[];
       }
     | {
           type: 'Add';
@@ -33,23 +35,27 @@ export type GoalsAction =
 export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
     switch (action.type) {
         case 'Set': {
-            return action.value;
+            return normalizeGoalOrder(action.value);
         }
-        case 'Swap': {
-            const { goalId, neighborId } = action;
-            const newState = state.toSorted((a, b) => a.priority - b.priority);
-
-            const indexA = newState.findIndex(x => x.id === goalId);
-            const indexB = newState.findIndex(x => x.id === neighborId);
-
-            if (indexA !== -1 && indexB !== -1) {
-                // Swap them in the array
-                [newState[indexA], newState[indexB]] = [newState[indexB], newState[indexA]];
-
-                // Re-index priorities 1..N
-                return newState.map((g, index) => ({ ...g, priority: index + 1 }));
+        case 'Reorder': {
+            // Rewrites the listed goals into the slots they already occupy, so everything else keeps
+            // its position and no assumption is made about the array being priority-sorted.
+            const idSet = new Set(action.orderedIds);
+            const slots: number[] = [];
+            for (const [index, goal] of state.entries()) {
+                if (idSet.has(goal.id)) slots.push(index);
             }
-            return state;
+            // Unknown or duplicated ids would drop goals — refuse the whole operation instead.
+            if (slots.length !== action.orderedIds.length) {
+                return state;
+            }
+
+            const byId = new Map(state.map(goal => [goal.id, goal]));
+            const newState = [...state];
+            for (const [position, slot] of slots.entries()) {
+                newState[slot] = byId.get(action.orderedIds[position])!;
+            }
+            return normalizeGoalOrder(newState);
         }
         case 'Add': {
             if (state.some(x => x.id === action.goal.id)) {
@@ -60,21 +66,16 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const targetIndex = Math.max(0, Math.min(action.goal.priority - 1, newState.length));
             newState.splice(targetIndex, 0, action.goal);
 
-            // Return a new array with re-indexed priorities to ensure reactivity
-            return newState.map((x, index) => ({
-                ...x,
-                priority: index + 1,
-            }));
+            return normalizeGoalOrder(newState);
         }
         case 'Delete': {
             const deletedId = action.goalId;
-            return state
+            const remaining = state
                 .filter(x => x.id !== deletedId)
-                .map((x, index) => ({
-                    ...x,
-                    priority: index + 1,
-                    ...(x.preFarmGoalIds ? { preFarmGoalIds: x.preFarmGoalIds.filter(id => id !== deletedId) } : {}),
-                }));
+                .map(x =>
+                    x.preFarmGoalIds ? { ...x, preFarmGoalIds: x.preFarmGoalIds.filter(id => id !== deletedId) } : x
+                );
+            return normalizeGoalOrder(remaining);
         }
         case 'DeleteAll': {
             return [];
@@ -104,7 +105,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
 
             const finalGoals = [...otherGoals.slice(0, targetIndex), goalWithUpdates, ...otherGoals.slice(targetIndex)];
 
-            return finalGoals.map((g, index) => ({ ...g, priority: index + 1 }));
+            return normalizeGoalOrder(finalGoals);
         }
         case 'UpdateDailyRaids': {
             const { value } = action;

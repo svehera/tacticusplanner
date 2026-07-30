@@ -4,13 +4,17 @@ import React from 'react';
 import { Button } from '@/fsd/5-shared/ui';
 
 interface Props {
-    menuItemSelect?: (item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
+    menuItemSelect?: (item: 'edit' | 'delete') => void;
+    /** Moves the goal by one position within its section. Negative is up. */
+    onMove?: (delta: number) => void;
+    canMoveUp?: boolean;
+    canMoveDown?: boolean;
 }
 
 const actionButton = '[--btn-accent:var(--soft-fg)]';
 
 /** Renders the edit/delete/priority action buttons for a goal card header as a compact 2×2 grid. */
-export const GoalCardActions: React.FC<Props> = ({ menuItemSelect }) => {
+export const GoalCardActions: React.FC<Props> = ({ menuItemSelect, onMove, canMoveUp, canMoveDown }) => {
     if (!menuItemSelect) return;
     return (
         <div className="grid grid-cols-2 gap-0.5 text-(--soft-fg)">
@@ -19,7 +23,8 @@ export const GoalCardActions: React.FC<Props> = ({ menuItemSelect }) => {
                 appearance="plain"
                 className={actionButton}
                 aria-label="Increase Goal Priority"
-                onPress={() => menuItemSelect('moveUp')}>
+                isDisabled={!canMoveUp}
+                onPress={() => onMove?.(-1)}>
                 <ArrowUp data-slot="icon" />
             </Button>
             <Button
@@ -35,7 +40,8 @@ export const GoalCardActions: React.FC<Props> = ({ menuItemSelect }) => {
                 appearance="plain"
                 className={actionButton}
                 aria-label="Decrease Goal Priority"
-                onPress={() => menuItemSelect('moveDown')}>
+                isDisabled={!canMoveDown}
+                onPress={() => onMove?.(1)}>
                 <ArrowDown data-slot="icon" />
             </Button>
             <Button
