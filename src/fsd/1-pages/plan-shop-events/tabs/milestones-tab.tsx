@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-import { TieredRewardCell, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-reward-grid';
+import { buildProgressRewardCells, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-reward-grid';
 
 import { getShopCurrencyIconKey, getShopCurrencyLabel, ShopEventWeek } from '@/fsd/4-entities/shops';
 
@@ -16,34 +16,18 @@ export const MilestonesTab: React.FC<Props> = ({ week, currencyType }) => {
     const currencyIconKey = getShopCurrencyIconKey(currencyType);
     const currencyLabel = getShopCurrencyLabel(currencyType);
 
-    const milestoneCells: TieredRewardCell[] = (week.milestoneRewards ?? []).map((milestone, index) => {
-        const rewardIds = milestone.reward
-            ? [milestone.reward]
-            : (milestone.chest?.flatMap(bundle => bundle.rewards) ?? []);
-        const resolved = rewardIds.map(id => rewardInfo(id));
-        return {
-            key: index,
-            title: resolved.length === 1 ? resolved[0].label : undefined,
-            rewards: resolved.map(({ icon, qty }) => ({ icon, qty: qty ?? 1 })),
-            costLabel: `${milestone.requiredProgress.toLocaleString()} pts`,
-        };
-    });
+    const milestoneCells = buildProgressRewardCells(
+        week.milestoneRewards ?? [],
+        rewardInfo,
+        milestone => `${milestone.requiredProgress.toLocaleString()} pts`
+    );
 
-    const chestCells: TieredRewardCell[] = (week.progressChests ?? []).map((entry, index) => {
-        const rewardIds = entry.chest.flatMap(bundle => bundle.rewards);
-        const resolved = rewardIds.map(id => rewardInfo(id));
-        return {
-            key: index,
-            title: resolved.length === 1 ? resolved[0].label : undefined,
-            rewards: resolved.map(({ icon, qty }) => ({ icon, qty: qty ?? 1 })),
-            costLabel: (
-                <span className="flex items-center gap-1">
-                    {currencyIconKey && <MiscIcon icon={currencyIconKey} width={14} height={14} />}
-                    {entry.requiredProgress.toLocaleString()}
-                </span>
-            ),
-        };
-    });
+    const chestCells = buildProgressRewardCells(week.progressChests ?? [], rewardInfo, entry => (
+        <span className="flex items-center gap-1">
+            {currencyIconKey && <MiscIcon icon={currencyIconKey} width={14} height={14} />}
+            {entry.requiredProgress.toLocaleString()}
+        </span>
+    ));
 
     if (milestoneCells.length === 0 && chestCells.length === 0) {
         return (

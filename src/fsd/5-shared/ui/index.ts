@@ -11,6 +11,7 @@ export { AccessibleTooltip, LazyTooltip } from './tooltip';
 export { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from './constants';
 export { ConfirmationDialog } from './confirmation-dialog';
 export { ButtonPill } from './button-pill';
+export { TabBar } from './tab-bar';
 
 export * from './selects';
 

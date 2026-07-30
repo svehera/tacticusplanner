@@ -14,6 +14,7 @@ import { Button } from '@/fsd/5-shared/ui/button';
 import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { Modal } from '@/fsd/5-shared/ui/modal';
 import { SyncButton } from '@/fsd/5-shared/ui/sync-button';
+import { TabBar } from '@/fsd/5-shared/ui/tab-bar';
 import { AccessibleTooltip, LazyTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -55,25 +56,6 @@ const TAB_LABELS: Record<TabId, string> = {
     milestones: 'Milestones & Rewards',
     missions: 'Missions',
 };
-
-const TabBar = ({ active, onChange }: { active: TabId; onChange: (tab: TabId) => void }) => (
-    <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700">
-        {TAB_IDS.map(id => (
-            <button
-                key={id}
-                type="button"
-                onClick={() => onChange(id)}
-                className={[
-                    'px-4 py-2 text-sm font-medium transition-colors',
-                    active === id
-                        ? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-                        : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100',
-                ].join(' ')}>
-                {TAB_LABELS[id]}
-            </button>
-        ))}
-    </div>
-);
 
 export const ShopEventDetail = () => {
     const { eventId } = useParams<{ eventId: string }>();
@@ -674,7 +656,7 @@ export const ShopEventDetail = () => {
                 </div>
             </div>
 
-            <TabBar active={activeTab} onChange={setActiveTab} />
+            <TabBar tabs={TAB_IDS} labels={TAB_LABELS} active={activeTab} onChange={setActiveTab} />
 
             <div className={activeTab === 'milestones' ? undefined : 'hidden'}>
                 {weekData && <MilestonesTab week={weekData} currencyType={event.currencyType} />}
