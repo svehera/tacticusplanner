@@ -17,16 +17,18 @@ import {
 
 import { EnemiesTab } from './tabs/enemies-tab';
 import { MilestonesTab } from './tabs/milestones-tab';
+import { MissionsTab } from './tabs/missions-tab';
 import { OffersTab } from './tabs/offers-tab';
 import { TeamTab } from './tabs/team-tab';
 
-const TAB_IDS = ['team', 'enemies', 'milestones', 'offers'] as const;
+const TAB_IDS = ['team', 'enemies', 'milestones', 'missions', 'offers'] as const;
 type TabId = (typeof TAB_IDS)[number];
 
 const TAB_LABELS: Record<TabId, string> = {
     team: 'Team',
     enemies: 'Enemies',
     milestones: 'Milestones & Rewards',
+    missions: 'Missions',
     offers: 'Offers',
 };
 
@@ -120,6 +122,9 @@ export const Survival = () => {
                 </div>
                 <div className={activeTab === 'milestones' ? undefined : 'hidden'}>
                     <MilestonesTab event={selectedEvent} />
+                </div>
+                <div className={activeTab === 'missions' ? undefined : 'hidden'}>
+                    <MissionsTab event={selectedEvent} />
                 </div>
                 <div className={activeTab === 'offers' ? undefined : 'hidden'}>
                     <OffersTab event={selectedEvent} />

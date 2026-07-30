@@ -44,6 +44,36 @@ import { buildEventDateIndex, getEventDate, getEventDayOrder } from './shop-even
 import type { CartEntry, CartRecord, ResolvedSlot } from './shop-events.types';
 import { cartKey, computeCoverageRows, formatGold } from './shop-events.utils';
 import { ShoppingList } from './shopping-list';
+import { MilestonesTab } from './tabs/milestones-tab';
+import { MissionsTab } from './tabs/missions-tab';
+
+const TAB_IDS = ['shop', 'milestones', 'missions'] as const;
+type TabId = (typeof TAB_IDS)[number];
+
+const TAB_LABELS: Record<TabId, string> = {
+    shop: 'Shop',
+    milestones: 'Milestones & Rewards',
+    missions: 'Missions',
+};
+
+const TabBar = ({ active, onChange }: { active: TabId; onChange: (tab: TabId) => void }) => (
+    <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700">
+        {TAB_IDS.map(id => (
+            <button
+                key={id}
+                type="button"
+                onClick={() => onChange(id)}
+                className={[
+                    'px-4 py-2 text-sm font-medium transition-colors',
+                    active === id
+                        ? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
+                        : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100',
+                ].join(' ')}>
+                {TAB_LABELS[id]}
+            </button>
+        ))}
+    </div>
+);
 
 export const ShopEventDetail = () => {
     const { eventId } = useParams<{ eventId: string }>();
@@ -72,6 +102,7 @@ export const ShopEventDetail = () => {
 
     const [week, setWeek] = useState(1);
     const [day, setDay] = useState<Day>(dayOrder[0]);
+    const [activeTab, setActiveTab] = useState<TabId>('shop');
     const pl = playerMetadata.powerLevel ?? 1;
 
     const eventState = event
@@ -643,423 +674,443 @@ export const ShopEventDetail = () => {
                 </div>
             </div>
 
-            {/* Daily Purchases */}
-            {dateIndex &&
-                (() => {
-                    const { week: selWeek, day: selDay } = dateIndex.allDates[selectedDateIndex];
-                    const dayEntries = Object.entries(cart).filter(
-                        ([, entry]) => entry.week === selWeek && entry.day === selDay
-                    );
-                    const dayTotal = dayEntries.reduce((s, [, entry]) => s + entry.quantity * entry.costPerUnit, 0);
-                    const dateLabel = `${DAY_LABELS[selDay]}, ${getEventDate(event, selWeek, selDay)}`;
-                    return (
-                        <div className="rounded-xl border border-(--border) bg-(--overlay)">
-                            <button
-                                onClick={() => setDailyPurchasesExpanded(previous => !previous)}
-                                className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
-                                <div className="flex items-center gap-2">
-                                    <span className="font-semibold">Daily Purchases</span>
-                                    <select
-                                        value={selectedDateIndex}
-                                        onClick={event_ => event_.stopPropagation()}
-                                        onChange={event_ => setSelectedDateIndex(Number(event_.currentTarget.value))}
-                                        className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs text-(--fg)">
-                                        {dateIndex.allDates.map(({ week: w, day: d }, index) => (
-                                            <option key={index} value={index}>
-                                                {`Week ${w} · ${DAY_LABELS[d].slice(0, 3)} ${getEventDate(event, w, d)}${index === dateIndex.todayIndex ? ' (Today)' : ''}`}
-                                            </option>
-                                        ))}
-                                    </select>
-                                </div>
-                                <ChevronDown
-                                    className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
-                                        dailyPurchasesExpanded ? 'rotate-180' : ''
-                                    }`}
-                                />
-                            </button>
+            <TabBar active={activeTab} onChange={setActiveTab} />
 
-                            {dailyPurchasesExpanded && (
-                                <div className="flex flex-col gap-3 border-t border-(--border) p-4">
-                                    {dayEntries.length === 0 ? (
-                                        <p className="text-sm text-(--soft-fg)">
-                                            No purchases planned for {dateLabel}.
-                                        </p>
-                                    ) : (
-                                        <>
-                                            <div className="flex flex-col gap-2">
-                                                {dayEntries.map(([key, entry]) => {
-                                                    const { icon } = rewardInfo(entry.rewardString);
-                                                    const lineTotal = entry.quantity * entry.costPerUnit;
-                                                    const purchasedQty = purchased[key] ?? 0;
-                                                    const isFullyPurchased = purchasedQty >= entry.quantity;
-                                                    return (
-                                                        <div
-                                                            key={key}
-                                                            className={`flex items-center gap-2 rounded-lg bg-(--soft) p-2 ${
-                                                                isFullyPurchased ? 'opacity-60' : ''
-                                                            }`}>
-                                                            <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
-                                                                {icon}
-                                                            </div>
-                                                            <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                                                                <span
-                                                                    className={`truncate text-sm font-medium ${
-                                                                        isFullyPurchased ? 'line-through' : ''
-                                                                    }`}>
-                                                                    {entry.label}
-                                                                </span>
-                                                                <div className="flex flex-wrap items-center gap-1.5">
-                                                                    {entry.qtyPerPack > 1 && (
-                                                                        <span className="text-xs text-(--soft-fg)">
-                                                                            ×{entry.qtyPerPack} each
-                                                                        </span>
-                                                                    )}
-                                                                    {purchasedQty > 0 && (
-                                                                        <span
-                                                                            className={`text-xs font-medium ${
-                                                                                isFullyPurchased
-                                                                                    ? 'text-green-400'
-                                                                                    : 'text-amber-400'
-                                                                            }`}>
-                                                                            purchased {purchasedQty}/{entry.quantity}
-                                                                        </span>
-                                                                    )}
-                                                                </div>
-                                                            </div>
-                                                            <div className="flex shrink-0 items-center gap-1">
-                                                                <AccessibleTooltip
-                                                                    title={
-                                                                        isFullyPurchased
-                                                                            ? 'Clear purchase'
-                                                                            : 'Mark full quantity as purchased'
-                                                                    }>
-                                                                    <button
-                                                                        onClick={() =>
-                                                                            setPurchasedQty(
-                                                                                key,
-                                                                                isFullyPurchased ? 0 : entry.quantity
-                                                                            )
-                                                                        }
-                                                                        className={`flex size-7 items-center justify-center rounded-md border transition-colors ${
-                                                                            isFullyPurchased
-                                                                                ? 'border-green-500 bg-green-500/20 text-green-400'
-                                                                                : 'border-(--border) hover:border-green-500 hover:text-green-400'
-                                                                        }`}>
-                                                                        <Check className="size-3.5" />
-                                                                    </button>
-                                                                </AccessibleTooltip>
-                                                                <AccessibleTooltip title="Mark partial quantity as purchased">
-                                                                    <button
-                                                                        onClick={() => setPurchasedDialogKey(key)}
-                                                                        className="flex size-7 items-center justify-center rounded-md border border-(--border) transition-colors hover:border-blue-500 hover:text-blue-400">
-                                                                        <SlidersHorizontal className="size-3.5" />
-                                                                    </button>
-                                                                </AccessibleTooltip>
-                                                            </div>
-                                                            <div className="flex shrink-0 items-center gap-1">
-                                                                <span className="text-xs font-semibold text-amber-400 tabular-nums">
-                                                                    {lineTotal.toLocaleString()}
-                                                                </span>
-                                                                <MiscIcon
-                                                                    icon={currencyIconKey}
-                                                                    width={12}
-                                                                    height={12}
-                                                                />
-                                                            </div>
-                                                        </div>
-                                                    );
-                                                })}
-                                            </div>
-                                            <div className="flex items-center justify-end gap-1 border-t border-(--border) pt-2 text-sm">
-                                                <span className="text-(--soft-fg)">Day total:</span>
-                                                <span className="font-semibold text-amber-400 tabular-nums">
-                                                    {dayTotal.toLocaleString()}
-                                                </span>
-                                                <MiscIcon icon={currencyIconKey} width={14} height={14} />
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            )}
-                        </div>
-                    );
-                })()}
-
-            {/* Purchased items summary */}
-            {purchasedItemsByType.length > 0 && (
-                <div className="rounded-xl border border-(--border) bg-(--overlay)">
-                    <button
-                        onClick={() => setPurchasedExpanded(previous => !previous)}
-                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
-                        <div className="flex items-center gap-2">
-                            <span className="font-semibold">Purchased Items</span>
-                            <span className="rounded-full bg-(--neutral) px-2 py-0.5 text-xs text-(--soft-fg)">
-                                {purchasedItemsByType.length === 1 ? '1 type' : `${purchasedItemsByType.length} types`}
-                            </span>
-                        </div>
-                        <ChevronDown
-                            className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
-                                purchasedExpanded ? 'rotate-180' : ''
-                            }`}
-                        />
-                    </button>
-                    {purchasedExpanded && (
-                        <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-(--border) p-4">
-                            {purchasedItemsByType.map(([type, info]) => (
-                                <div key={type} className="flex items-center gap-2">
-                                    <div className="flex h-8 w-8 shrink-0 items-center justify-center">{info.icon}</div>
-                                    <div className="flex flex-col leading-tight">
-                                        <span className="text-xs font-medium">{info.label}</span>
-                                        <span className="text-xs font-semibold text-green-400 tabular-nums">
-                                            ×{info.total.toLocaleString()}
-                                        </span>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {/* Missing resources coverage */}
-            {coverageRows.length > 0 && (
-                <div className="rounded-xl border border-(--border) bg-(--overlay)">
-                    <button
-                        onClick={() => setCoverageExpanded(previous => !previous)}
-                        className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
-                        <div className="flex items-center gap-2">
-                            <span className="font-semibold">Missing Resources</span>
-                            <span className="rounded-full bg-(--neutral) px-2 py-0.5 text-xs text-(--soft-fg)">
-                                {coverageRows.length === 1 ? '1 type' : `${coverageRows.length} types`}
-                            </span>
-                            {coverageRows.some(r => r.remaining > 0) && (
-                                <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-xs text-red-400">
-                                    {coverageRows.filter(r => r.remaining > 0).length} unmet
-                                </span>
-                            )}
-                        </div>
-                        <ChevronDown
-                            className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
-                                coverageExpanded ? 'rotate-180' : ''
-                            }`}
-                        />
-                    </button>
-
-                    {coverageExpanded && (
-                        <div className="flex flex-col gap-2 border-t border-(--border) p-4">
-                            {coverageRows.map(row => (
-                                <div
-                                    key={row.rewardType}
-                                    className="flex flex-col gap-2 rounded-lg border border-(--border) bg-(--soft) p-3 sm:flex-row sm:flex-wrap sm:items-start">
-                                    {/* Icon + label */}
-                                    <div className="flex shrink-0 items-center gap-2 sm:w-52">
-                                        <div className="flex h-8 w-8 items-center justify-center">{row.icon}</div>
-                                        <span className="text-sm leading-tight font-medium">{row.label}</span>
-                                    </div>
-
-                                    {/* Counts */}
-                                    <div className="flex shrink-0 items-center gap-3 text-sm">
-                                        <span className="flex items-center gap-1 text-(--soft-fg)">
-                                            Need{' '}
-                                            <span className="font-semibold text-amber-400">
-                                                {row.rewardType === 'gold'
-                                                    ? formatGold(row.needed)
-                                                    : row.needed.toLocaleString()}
-                                            </span>
-                                            {row.note && (
-                                                <LazyTooltip title={row.note}>
-                                                    <TriangleAlert className="size-3.5 cursor-help text-amber-400" />
-                                                </LazyTooltip>
-                                            )}
-                                        </span>
-                                        {row.cartTotal > 0 && (
-                                            <span className="text-(--soft-fg)">
-                                                Cart{' '}
-                                                <span className="font-semibold text-green-400">
-                                                    +
-                                                    {row.rewardType === 'gold'
-                                                        ? formatGold(row.cartTotal)
-                                                        : row.cartTotal.toLocaleString()}
-                                                </span>
-                                            </span>
-                                        )}
-                                        <span
-                                            className={`font-semibold ${
-                                                row.remaining === 0 ? 'text-green-400' : 'text-red-400'
-                                            }`}>
-                                            {row.remaining === 0
-                                                ? '✓ Covered'
-                                                : `${row.rewardType === 'gold' ? formatGold(row.remaining) : row.remaining.toLocaleString()} remaining`}
-                                        </span>
-                                        {row.remaining > 0 && row.estimatedCost !== undefined && (
-                                            <span className="flex items-center gap-0.5 text-xs text-(--soft-fg)">
-                                                ≈
-                                                <span className="font-semibold text-amber-400 tabular-nums">
-                                                    {row.estimatedCost.toLocaleString()}
-                                                </span>
-                                                <MiscIcon icon={currencyIconKey} width={11} height={11} />
-                                            </span>
-                                        )}
-                                    </div>
-
-                                    {/* Availability chips */}
-                                    <div className="flex flex-wrap items-center gap-1.5">
-                                        {row.availability.map(({ week: w, days }) => (
-                                            <span
-                                                key={w}
-                                                className="flex items-center gap-1 rounded-full border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs">
-                                                <span className="font-semibold">W{w}</span>
-                                                <span className="text-(--soft-fg)">
-                                                    {days.map(d => DAY_LABELS[d].slice(0, 3)).join(', ')}
-                                                </span>
-                                            </span>
-                                        ))}
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    )}
-                </div>
-            )}
-
-            {/* Currency earnings infographic */}
-            {event.earningsInfographic && event.earningsInfographic.length > 0 && (
-                <div className="flex flex-wrap gap-3 rounded-xl border border-(--border) bg-(--overlay) px-4 py-3 text-sm">
-                    {event.earningsInfographic.map((line, index) => (
-                        <Fragment key={line.label}>
-                            {index > 0 && <span className="text-(--soft-fg) select-none">·</span>}
-                            <div className="flex items-center gap-1.5">
-                                <MiscIcon icon={currencyIconKey} width={16} height={16} />
-                                <span className="text-(--soft-fg)">{line.label}:</span>
-                                <span className="font-semibold text-amber-400">{line.amount}</span>
-                            </div>
-                        </Fragment>
-                    ))}
-                </div>
-            )}
-
-            {/* Shard search + details toggle */}
-            <div className="flex flex-wrap items-center justify-between gap-2">
-                <AccessibleTooltip title="Find which weeks/days a character or MoW's shards are available">
-                    <button
-                        onClick={() => setSearchOpen(true)}
-                        aria-label="Find shard availability"
-                        className="flex size-9 items-center justify-center rounded-lg border border-(--border) bg-(--overlay) text-(--soft-fg) transition-colors hover:border-(--primary) hover:text-(--primary)">
-                        <Search className="size-4" />
-                    </button>
-                </AccessibleTooltip>
-                <Switch isSelected={detailsEnabled} onChange={setDetailsEnabled}>
-                    Details
-                </Switch>
+            <div className={activeTab === 'milestones' ? undefined : 'hidden'}>
+                {weekData && <MilestonesTab week={weekData} currencyType={event.currencyType} />}
+            </div>
+            <div className={activeTab === 'missions' ? undefined : 'hidden'}>
+                <MissionsTab missions={weekData?.missions} />
             </div>
 
-            <PortalDialog
-                open={searchOpen}
-                onClose={() => setSearchOpen(false)}
-                aria-label="Find shard availability"
-                size="sm">
-                <PortalDialog.Header>Find shard availability</PortalDialog.Header>
-                <PortalDialog.Body>
-                    <UnitsAutocomplete<IUnit>
-                        options={allUnits}
-                        unit={searchUnit}
-                        onUnitChange={setSearchUnit}
-                        label="Character or MoW"
-                    />
-                    {searchUnit && (
-                        <div className="flex flex-col gap-3">
-                            {renderShardAvailability(`shards_${searchUnit.snowprintId}`, 'Shards')}
-                            {renderShardAvailability(`mythicShards_${searchUnit.snowprintId}`, 'Mythic Shards')}
-                        </div>
-                    )}
-                </PortalDialog.Body>
-            </PortalDialog>
-
-            {/* Shop grid */}
-            {resolvedSlots.length === 0 ? (
-                <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--soft-fg)">
-                    No offers available for the selected week / day / player level.
-                </div>
-            ) : (
-                <div className="grid grid-cols-3 gap-2">
-                    {resolvedSlots.map((slot, index) => {
-                        const key = cartKey(week, slot.slotIndex, day);
-                        const cartQty = cart[key]?.quantity ?? 0;
-                        const maxQty =
-                            slot.product.maxPurchases === undefined
-                                ? undefined
-                                : Number.parseInt(slot.product.maxPurchases, 10);
-                        return (
-                            <ShopCard
-                                key={index}
-                                slot={slot}
-                                cartQty={cartQty}
-                                currencyIconKey={currencyIconKey}
-                                details={detailsEnabled ? resolveUnitShardDetails(slot.rewardString) : undefined}
-                                onSetQty={qty =>
-                                    setCartQty(key, qty, {
-                                        week,
-                                        slotIndex: slot.slotIndex,
-                                        day,
-                                        label: slot.label,
-                                        rewardString: slot.rewardString,
-                                        costPerUnit: slot.cost,
-                                        maxQty,
-                                        qtyPerPack: slot.qty ?? 1,
-                                    })
-                                }
-                            />
+            <div className={`flex flex-col gap-6 ${activeTab === 'shop' ? '' : 'hidden'}`}>
+                {/* Daily Purchases */}
+                {dateIndex &&
+                    (() => {
+                        const { week: selWeek, day: selDay } = dateIndex.allDates[selectedDateIndex];
+                        const dayEntries = Object.entries(cart).filter(
+                            ([, entry]) => entry.week === selWeek && entry.day === selDay
                         );
-                    })}
+                        const dayTotal = dayEntries.reduce((s, [, entry]) => s + entry.quantity * entry.costPerUnit, 0);
+                        const dateLabel = `${DAY_LABELS[selDay]}, ${getEventDate(event, selWeek, selDay)}`;
+                        return (
+                            <div className="rounded-xl border border-(--border) bg-(--overlay)">
+                                <button
+                                    onClick={() => setDailyPurchasesExpanded(previous => !previous)}
+                                    className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
+                                    <div className="flex items-center gap-2">
+                                        <span className="font-semibold">Daily Purchases</span>
+                                        <select
+                                            value={selectedDateIndex}
+                                            onClick={event_ => event_.stopPropagation()}
+                                            onChange={event_ =>
+                                                setSelectedDateIndex(Number(event_.currentTarget.value))
+                                            }
+                                            className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs text-(--fg)">
+                                            {dateIndex.allDates.map(({ week: w, day: d }, index) => (
+                                                <option key={index} value={index}>
+                                                    {`Week ${w} · ${DAY_LABELS[d].slice(0, 3)} ${getEventDate(event, w, d)}${index === dateIndex.todayIndex ? ' (Today)' : ''}`}
+                                                </option>
+                                            ))}
+                                        </select>
+                                    </div>
+                                    <ChevronDown
+                                        className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
+                                            dailyPurchasesExpanded ? 'rotate-180' : ''
+                                        }`}
+                                    />
+                                </button>
+
+                                {dailyPurchasesExpanded && (
+                                    <div className="flex flex-col gap-3 border-t border-(--border) p-4">
+                                        {dayEntries.length === 0 ? (
+                                            <p className="text-sm text-(--soft-fg)">
+                                                No purchases planned for {dateLabel}.
+                                            </p>
+                                        ) : (
+                                            <>
+                                                <div className="flex flex-col gap-2">
+                                                    {dayEntries.map(([key, entry]) => {
+                                                        const { icon } = rewardInfo(entry.rewardString);
+                                                        const lineTotal = entry.quantity * entry.costPerUnit;
+                                                        const purchasedQty = purchased[key] ?? 0;
+                                                        const isFullyPurchased = purchasedQty >= entry.quantity;
+                                                        return (
+                                                            <div
+                                                                key={key}
+                                                                className={`flex items-center gap-2 rounded-lg bg-(--soft) p-2 ${
+                                                                    isFullyPurchased ? 'opacity-60' : ''
+                                                                }`}>
+                                                                <div className="flex h-[45px] w-[45px] shrink-0 items-center justify-center">
+                                                                    {icon}
+                                                                </div>
+                                                                <div className="flex min-w-0 flex-1 flex-col gap-0.5">
+                                                                    <span
+                                                                        className={`truncate text-sm font-medium ${
+                                                                            isFullyPurchased ? 'line-through' : ''
+                                                                        }`}>
+                                                                        {entry.label}
+                                                                    </span>
+                                                                    <div className="flex flex-wrap items-center gap-1.5">
+                                                                        {entry.qtyPerPack > 1 && (
+                                                                            <span className="text-xs text-(--soft-fg)">
+                                                                                ×{entry.qtyPerPack} each
+                                                                            </span>
+                                                                        )}
+                                                                        {purchasedQty > 0 && (
+                                                                            <span
+                                                                                className={`text-xs font-medium ${
+                                                                                    isFullyPurchased
+                                                                                        ? 'text-green-400'
+                                                                                        : 'text-amber-400'
+                                                                                }`}>
+                                                                                purchased {purchasedQty}/
+                                                                                {entry.quantity}
+                                                                            </span>
+                                                                        )}
+                                                                    </div>
+                                                                </div>
+                                                                <div className="flex shrink-0 items-center gap-1">
+                                                                    <AccessibleTooltip
+                                                                        title={
+                                                                            isFullyPurchased
+                                                                                ? 'Clear purchase'
+                                                                                : 'Mark full quantity as purchased'
+                                                                        }>
+                                                                        <button
+                                                                            onClick={() =>
+                                                                                setPurchasedQty(
+                                                                                    key,
+                                                                                    isFullyPurchased
+                                                                                        ? 0
+                                                                                        : entry.quantity
+                                                                                )
+                                                                            }
+                                                                            className={`flex size-7 items-center justify-center rounded-md border transition-colors ${
+                                                                                isFullyPurchased
+                                                                                    ? 'border-green-500 bg-green-500/20 text-green-400'
+                                                                                    : 'border-(--border) hover:border-green-500 hover:text-green-400'
+                                                                            }`}>
+                                                                            <Check className="size-3.5" />
+                                                                        </button>
+                                                                    </AccessibleTooltip>
+                                                                    <AccessibleTooltip title="Mark partial quantity as purchased">
+                                                                        <button
+                                                                            onClick={() => setPurchasedDialogKey(key)}
+                                                                            className="flex size-7 items-center justify-center rounded-md border border-(--border) transition-colors hover:border-blue-500 hover:text-blue-400">
+                                                                            <SlidersHorizontal className="size-3.5" />
+                                                                        </button>
+                                                                    </AccessibleTooltip>
+                                                                </div>
+                                                                <div className="flex shrink-0 items-center gap-1">
+                                                                    <span className="text-xs font-semibold text-amber-400 tabular-nums">
+                                                                        {lineTotal.toLocaleString()}
+                                                                    </span>
+                                                                    <MiscIcon
+                                                                        icon={currencyIconKey}
+                                                                        width={12}
+                                                                        height={12}
+                                                                    />
+                                                                </div>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </div>
+                                                <div className="flex items-center justify-end gap-1 border-t border-(--border) pt-2 text-sm">
+                                                    <span className="text-(--soft-fg)">Day total:</span>
+                                                    <span className="font-semibold text-amber-400 tabular-nums">
+                                                        {dayTotal.toLocaleString()}
+                                                    </span>
+                                                    <MiscIcon icon={currencyIconKey} width={14} height={14} />
+                                                </div>
+                                            </>
+                                        )}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })()}
+
+                {/* Purchased items summary */}
+                {purchasedItemsByType.length > 0 && (
+                    <div className="rounded-xl border border-(--border) bg-(--overlay)">
+                        <button
+                            onClick={() => setPurchasedExpanded(previous => !previous)}
+                            className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
+                            <div className="flex items-center gap-2">
+                                <span className="font-semibold">Purchased Items</span>
+                                <span className="rounded-full bg-(--neutral) px-2 py-0.5 text-xs text-(--soft-fg)">
+                                    {purchasedItemsByType.length === 1
+                                        ? '1 type'
+                                        : `${purchasedItemsByType.length} types`}
+                                </span>
+                            </div>
+                            <ChevronDown
+                                className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
+                                    purchasedExpanded ? 'rotate-180' : ''
+                                }`}
+                            />
+                        </button>
+                        {purchasedExpanded && (
+                            <div className="flex flex-wrap gap-x-6 gap-y-2 border-t border-(--border) p-4">
+                                {purchasedItemsByType.map(([type, info]) => (
+                                    <div key={type} className="flex items-center gap-2">
+                                        <div className="flex h-8 w-8 shrink-0 items-center justify-center">
+                                            {info.icon}
+                                        </div>
+                                        <div className="flex flex-col leading-tight">
+                                            <span className="text-xs font-medium">{info.label}</span>
+                                            <span className="text-xs font-semibold text-green-400 tabular-nums">
+                                                ×{info.total.toLocaleString()}
+                                            </span>
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Missing resources coverage */}
+                {coverageRows.length > 0 && (
+                    <div className="rounded-xl border border-(--border) bg-(--overlay)">
+                        <button
+                            onClick={() => setCoverageExpanded(previous => !previous)}
+                            className="flex w-full items-center justify-between rounded-xl px-4 py-3 transition-colors hover:bg-(--soft)">
+                            <div className="flex items-center gap-2">
+                                <span className="font-semibold">Missing Resources</span>
+                                <span className="rounded-full bg-(--neutral) px-2 py-0.5 text-xs text-(--soft-fg)">
+                                    {coverageRows.length === 1 ? '1 type' : `${coverageRows.length} types`}
+                                </span>
+                                {coverageRows.some(r => r.remaining > 0) && (
+                                    <span className="rounded-full bg-red-500/20 px-2 py-0.5 text-xs text-red-400">
+                                        {coverageRows.filter(r => r.remaining > 0).length} unmet
+                                    </span>
+                                )}
+                            </div>
+                            <ChevronDown
+                                className={`size-4 text-(--soft-fg) transition-transform duration-200 ${
+                                    coverageExpanded ? 'rotate-180' : ''
+                                }`}
+                            />
+                        </button>
+
+                        {coverageExpanded && (
+                            <div className="flex flex-col gap-2 border-t border-(--border) p-4">
+                                {coverageRows.map(row => (
+                                    <div
+                                        key={row.rewardType}
+                                        className="flex flex-col gap-2 rounded-lg border border-(--border) bg-(--soft) p-3 sm:flex-row sm:flex-wrap sm:items-start">
+                                        {/* Icon + label */}
+                                        <div className="flex shrink-0 items-center gap-2 sm:w-52">
+                                            <div className="flex h-8 w-8 items-center justify-center">{row.icon}</div>
+                                            <span className="text-sm leading-tight font-medium">{row.label}</span>
+                                        </div>
+
+                                        {/* Counts */}
+                                        <div className="flex shrink-0 items-center gap-3 text-sm">
+                                            <span className="flex items-center gap-1 text-(--soft-fg)">
+                                                Need{' '}
+                                                <span className="font-semibold text-amber-400">
+                                                    {row.rewardType === 'gold'
+                                                        ? formatGold(row.needed)
+                                                        : row.needed.toLocaleString()}
+                                                </span>
+                                                {row.note && (
+                                                    <LazyTooltip title={row.note}>
+                                                        <TriangleAlert className="size-3.5 cursor-help text-amber-400" />
+                                                    </LazyTooltip>
+                                                )}
+                                            </span>
+                                            {row.cartTotal > 0 && (
+                                                <span className="text-(--soft-fg)">
+                                                    Cart{' '}
+                                                    <span className="font-semibold text-green-400">
+                                                        +
+                                                        {row.rewardType === 'gold'
+                                                            ? formatGold(row.cartTotal)
+                                                            : row.cartTotal.toLocaleString()}
+                                                    </span>
+                                                </span>
+                                            )}
+                                            <span
+                                                className={`font-semibold ${
+                                                    row.remaining === 0 ? 'text-green-400' : 'text-red-400'
+                                                }`}>
+                                                {row.remaining === 0
+                                                    ? '✓ Covered'
+                                                    : `${row.rewardType === 'gold' ? formatGold(row.remaining) : row.remaining.toLocaleString()} remaining`}
+                                            </span>
+                                            {row.remaining > 0 && row.estimatedCost !== undefined && (
+                                                <span className="flex items-center gap-0.5 text-xs text-(--soft-fg)">
+                                                    ≈
+                                                    <span className="font-semibold text-amber-400 tabular-nums">
+                                                        {row.estimatedCost.toLocaleString()}
+                                                    </span>
+                                                    <MiscIcon icon={currencyIconKey} width={11} height={11} />
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        {/* Availability chips */}
+                                        <div className="flex flex-wrap items-center gap-1.5">
+                                            {row.availability.map(({ week: w, days }) => (
+                                                <span
+                                                    key={w}
+                                                    className="flex items-center gap-1 rounded-full border border-(--border) bg-(--overlay) px-2 py-0.5 text-xs">
+                                                    <span className="font-semibold">W{w}</span>
+                                                    <span className="text-(--soft-fg)">
+                                                        {days.map(d => DAY_LABELS[d].slice(0, 3)).join(', ')}
+                                                    </span>
+                                                </span>
+                                            ))}
+                                        </div>
+                                    </div>
+                                ))}
+                            </div>
+                        )}
+                    </div>
+                )}
+
+                {/* Currency earnings infographic */}
+                {event.earningsInfographic && event.earningsInfographic.length > 0 && (
+                    <div className="flex flex-wrap gap-3 rounded-xl border border-(--border) bg-(--overlay) px-4 py-3 text-sm">
+                        {event.earningsInfographic.map((line, index) => (
+                            <Fragment key={line.label}>
+                                {index > 0 && <span className="text-(--soft-fg) select-none">·</span>}
+                                <div className="flex items-center gap-1.5">
+                                    <MiscIcon icon={currencyIconKey} width={16} height={16} />
+                                    <span className="text-(--soft-fg)">{line.label}:</span>
+                                    <span className="font-semibold text-amber-400">{line.amount}</span>
+                                </div>
+                            </Fragment>
+                        ))}
+                    </div>
+                )}
+
+                {/* Shard search + details toggle */}
+                <div className="flex flex-wrap items-center justify-between gap-2">
+                    <AccessibleTooltip title="Find which weeks/days a character or MoW's shards are available">
+                        <button
+                            onClick={() => setSearchOpen(true)}
+                            aria-label="Find shard availability"
+                            className="flex size-9 items-center justify-center rounded-lg border border-(--border) bg-(--overlay) text-(--soft-fg) transition-colors hover:border-(--primary) hover:text-(--primary)">
+                            <Search className="size-4" />
+                        </button>
+                    </AccessibleTooltip>
+                    <Switch isSelected={detailsEnabled} onChange={setDetailsEnabled}>
+                        Details
+                    </Switch>
                 </div>
-            )}
 
-            <ShoppingList
-                cart={cart}
-                weekCount={weekCount}
-                currencyIconKey={currencyIconKey}
-                dayOrder={dayOrder}
-                onSetQty={(key, qty) => setCartQty(key, qty)}
-                onResetWeek={setConfirmResetWeek}
-            />
+                <PortalDialog
+                    open={searchOpen}
+                    onClose={() => setSearchOpen(false)}
+                    aria-label="Find shard availability"
+                    size="sm">
+                    <PortalDialog.Header>Find shard availability</PortalDialog.Header>
+                    <PortalDialog.Body>
+                        <UnitsAutocomplete<IUnit>
+                            options={allUnits}
+                            unit={searchUnit}
+                            onUnitChange={setSearchUnit}
+                            label="Character or MoW"
+                        />
+                        {searchUnit && (
+                            <div className="flex flex-col gap-3">
+                                {renderShardAvailability(`shards_${searchUnit.snowprintId}`, 'Shards')}
+                                {renderShardAvailability(`mythicShards_${searchUnit.snowprintId}`, 'Mythic Shards')}
+                            </div>
+                        )}
+                    </PortalDialog.Body>
+                </PortalDialog>
 
-            <Modal
-                isOpen={confirmResetWeek !== undefined}
-                onOpenChange={open => {
-                    if (!open) setConfirmResetWeek(undefined);
-                }}>
-                <Modal.Content size="sm">
-                    <Modal.Header>
-                        <Modal.Title>Reset Week {confirmResetWeek}?</Modal.Title>
-                        <Modal.Description>
-                            This will remove all Week {confirmResetWeek} purchases from your shopping list.
-                        </Modal.Description>
-                    </Modal.Header>
-                    <Modal.Footer>
-                        <Button appearance="outline" onPress={() => setConfirmResetWeek(undefined)}>
-                            Cancel
-                        </Button>
-                        <Button intent="danger" onPress={() => resetWeek(confirmResetWeek!)}>
-                            Reset
-                        </Button>
-                    </Modal.Footer>
-                </Modal.Content>
-            </Modal>
+                {/* Shop grid */}
+                {resolvedSlots.length === 0 ? (
+                    <div className="rounded-xl border border-(--border) bg-(--overlay) p-8 text-center text-(--soft-fg)">
+                        No offers available for the selected week / day / player level.
+                    </div>
+                ) : (
+                    <div className="grid grid-cols-3 gap-2">
+                        {resolvedSlots.map((slot, index) => {
+                            const key = cartKey(week, slot.slotIndex, day);
+                            const cartQty = cart[key]?.quantity ?? 0;
+                            const maxQty =
+                                slot.product.maxPurchases === undefined
+                                    ? undefined
+                                    : Number.parseInt(slot.product.maxPurchases, 10);
+                            return (
+                                <ShopCard
+                                    key={index}
+                                    slot={slot}
+                                    cartQty={cartQty}
+                                    currencyIconKey={currencyIconKey}
+                                    details={detailsEnabled ? resolveUnitShardDetails(slot.rewardString) : undefined}
+                                    onSetQty={qty =>
+                                        setCartQty(key, qty, {
+                                            week,
+                                            slotIndex: slot.slotIndex,
+                                            day,
+                                            label: slot.label,
+                                            rewardString: slot.rewardString,
+                                            costPerUnit: slot.cost,
+                                            maxQty,
+                                            qtyPerPack: slot.qty ?? 1,
+                                        })
+                                    }
+                                />
+                            );
+                        })}
+                    </div>
+                )}
 
-            {purchasedDialogKey !== undefined && cart[purchasedDialogKey ?? ''] && (
-                <PurchasedQtyModal
-                    key={purchasedDialogKey}
-                    isOpen={true}
-                    entry={cart[purchasedDialogKey ?? '']!}
-                    icon={rewardInfo(cart[purchasedDialogKey ?? '']!.rewardString).icon}
-                    initialPurchased={purchased[purchasedDialogKey ?? ''] ?? 0}
-                    onConfirm={qty => {
-                        setPurchasedQty(purchasedDialogKey ?? '', qty);
-                        setPurchasedDialogKey(undefined);
-                    }}
-                    onClose={() => setPurchasedDialogKey(undefined)}
+                <ShoppingList
+                    cart={cart}
+                    weekCount={weekCount}
+                    currencyIconKey={currencyIconKey}
+                    dayOrder={dayOrder}
+                    onSetQty={(key, qty) => setCartQty(key, qty)}
+                    onResetWeek={setConfirmResetWeek}
                 />
-            )}
+
+                <Modal
+                    isOpen={confirmResetWeek !== undefined}
+                    onOpenChange={open => {
+                        if (!open) setConfirmResetWeek(undefined);
+                    }}>
+                    <Modal.Content size="sm">
+                        <Modal.Header>
+                            <Modal.Title>Reset Week {confirmResetWeek}?</Modal.Title>
+                            <Modal.Description>
+                                This will remove all Week {confirmResetWeek} purchases from your shopping list.
+                            </Modal.Description>
+                        </Modal.Header>
+                        <Modal.Footer>
+                            <Button appearance="outline" onPress={() => setConfirmResetWeek(undefined)}>
+                                Cancel
+                            </Button>
+                            <Button intent="danger" onPress={() => resetWeek(confirmResetWeek!)}>
+                                Reset
+                            </Button>
+                        </Modal.Footer>
+                    </Modal.Content>
+                </Modal>
+
+                {purchasedDialogKey !== undefined && cart[purchasedDialogKey ?? ''] && (
+                    <PurchasedQtyModal
+                        key={purchasedDialogKey}
+                        isOpen={true}
+                        entry={cart[purchasedDialogKey ?? '']!}
+                        icon={rewardInfo(cart[purchasedDialogKey ?? '']!.rewardString).icon}
+                        initialPurchased={purchased[purchasedDialogKey ?? ''] ?? 0}
+                        onConfirm={qty => {
+                            setPurchasedQty(purchasedDialogKey ?? '', qty);
+                            setPurchasedDialogKey(undefined);
+                        }}
+                        onClose={() => setPurchasedDialogKey(undefined)}
+                    />
+                )}
+            </div>
         </div>
     );
 };

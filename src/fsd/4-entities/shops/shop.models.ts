@@ -34,11 +34,46 @@ export type ShopDayOfWeek = 'MON' | 'TUE' | 'WED' | 'THU' | 'FRI' | 'SAT' | 'SUN
 
 export interface ShopEventWeek {
     products: ShopProduct[][];
+    milestoneRewards?: ShopEventMilestoneReward[];
+    progressChests?: ShopEventProgressChest[];
+    missions?: IEventMissions;
 }
 
 export interface ShopEventEarningsLine {
     label: string;
     amount: string;
+}
+
+export interface ShopEventMilestoneReward {
+    requiredProgress: number;
+    reward?: string;
+    chest?: { type?: string; rewards: string[] }[];
+}
+
+export interface ShopEventProgressChest {
+    requiredProgress: number;
+    chest: { type?: string; rewards: string[] }[];
+}
+
+export interface IMissionTask {
+    name: string;
+    target: number;
+    locaKey: string;
+    /** Scalar params (`factionId`, `trait`, ...) are strings; `gameModes` is the one list-valued param. */
+    taskParameters?: Record<string, string | string[]>;
+}
+
+export interface IMissionChain {
+    name: string;
+    rewards: string[];
+    tasks: IMissionTask[];
+}
+
+export interface IEventMissions {
+    daily: IMissionChain[];
+    free: IMissionChain[];
+    premium: IMissionChain[];
+    battlePass: IMissionChain[];
 }
 
 export interface ShopEventData {

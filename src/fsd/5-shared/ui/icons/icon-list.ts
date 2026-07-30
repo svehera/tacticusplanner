@@ -2,6 +2,7 @@
 import armourIcon from '@/assets/images/icons/armour.webp';
 import blockIcon from '@/assets/images/icons/block.png';
 import chanceIcon from '@/assets/images/icons/chance.png';
+import critIcon from '@/assets/images/icons/crit_damage.png';
 import critDamageIcon from '@/assets/images/icons/crit_dmg.png';
 import deploymentIcon from '@/assets/images/icons/deployment.png';
 import damageIcon from '@/assets/images/icons/dmg.webp';
@@ -47,6 +48,10 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     chance: {
         file: chanceIcon,
         label: 'Chance',
+    },
+    crit: {
+        file: critIcon,
+        label: 'Critical Hit',
     },
     critDamage: {
         file: critDamageIcon,
@@ -117,9 +122,13 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     checkmark: snowprintIcons.checkmark,
     legendaryEventToken: snowprintIcons.legendaryEventToken,
     onslaughtToken: snowprintIcons.onslaughtToken,
+    mowAmmo: snowprintIcons.mowAmmo,
+    battlepassPoints: snowprintIcons.battlepassPoints,
+    eventPoints: snowprintIcons.eventPoints,
     salvageRunToken: snowprintIcons.salvageRunToken,
     arenaToken: snowprintIcons.arenaToken,
     survivalToken: snowprintIcons.survivalToken,
+    survivalStatBoost: snowprintIcons.survivalStatBoost,
     playerProfileThemeMay2026: snowprintIcons.playerProfileThemeMay2026,
     powupArmor: snowprintIcons.powupArmor,
     powupBomb: snowprintIcons.powupBomb,

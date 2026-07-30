@@ -1,4 +1,11 @@
-import type { ShopEventData, ShopEventEarningsLine, ShopProduct } from './shop.models';
+import type {
+    IEventMissions,
+    ShopEventData,
+    ShopEventEarningsLine,
+    ShopEventMilestoneReward,
+    ShopEventProgressChest,
+    ShopProduct,
+} from './shop.models';
 
 export interface ShopEventMeta {
     id: string;
@@ -16,6 +23,9 @@ export interface SeasonalEventRawSlot {
 export interface SeasonalEventRawWeek {
     week: number;
     slots: SeasonalEventRawSlot[];
+    milestoneRewards?: ShopEventMilestoneReward[];
+    progressChests?: ShopEventProgressChest[];
+    missions?: IEventMissions;
 }
 
 export interface SeasonalEventRaw {
@@ -31,6 +41,9 @@ export function adaptSeasonalEventJson(meta: ShopEventMeta, raw: SeasonalEventRa
         ...meta,
         weeks: sortedWeeks.map(week => ({
             products: [...week.slots].toSorted((a, b) => a.slot - b.slot).map(slot => slot.variants),
+            milestoneRewards: week.milestoneRewards,
+            progressChests: week.progressChests,
+            missions: week.missions,
         })),
     };
 }

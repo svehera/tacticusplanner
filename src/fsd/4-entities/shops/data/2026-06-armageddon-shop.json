@@ -1579,7 +1579,898 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "milestoneRewards": [
+                {
+                    "requiredProgress": 100,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 210,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 330,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 460,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 600,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 760,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 940,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1140,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1360,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1600,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1860,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2140,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2440,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2790,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 3170,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 3580,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 4020,
+                    "reward": "specialSummoningToken:1"
+                },
+                {
+                    "requiredProgress": 4500,
+                    "reward": "stamina:100"
+                }
+            ],
+            "progressChests": [
+                {
+                    "requiredProgress": 50,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:600-660", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 100,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:800-880", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 150,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1000-1100", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 200,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1500-1650", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 250,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:2000-2200", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 300,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:3000-3300", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 350,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:4500-4950", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 410,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:6500-7150", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 480,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:8000-8800", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 560,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:10000-11000", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 650,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:12000-13200", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 750,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:14000-15400", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 860,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:16000-17600", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 980,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:18000-19800", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1110,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:20000-22000", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1250,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:22500-24750", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1400,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:25000-27500", "ShardsOrks:4-6", "ShardsBloodAngels:4-6"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1575,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:30000-33000", "ShardsOrks:7-8", "ShardsBloodAngels:7-8"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1775,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:40000-44000", "ShardsOrks:8-12", "ShardsBloodAngels:8-12"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:50000-55000", "ShardsOrks:10-15", "ShardsBloodAngels:10-15"]
+                        }
+                    ]
+                }
+            ],
+            "missions": {
+                "daily": [
+                    {
+                        "name": "june_2026_week1_daily_01",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "TraverseHexes",
+                                "target": 150,
+                                "locaKey": "TraverseHexes_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_daily_02",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithRangedAttacks",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesWithRangedAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_daily_03",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "DefeatWaves",
+                                "target": 25,
+                                "locaKey": "DefeatWaves_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_daily_04",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "PlayBattlesInGameMode",
+                                "target": 5,
+                                "locaKey": "PlayBattlesInGameMode_description",
+                                "taskParameters": {
+                                    "gameMode": "LinearHeroEvent"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_daily_05",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "Summon",
+                                "target": 25,
+                                "locaKey": "Summon_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_daily_06",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "ScoreCrits",
+                                "target": 20,
+                                "locaKey": "ScoreCrits_description"
+                            }
+                        ]
+                    }
+                ],
+                "free": [
+                    {
+                        "name": "june_2026_week1_free_1_chain_01",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 7500,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_02",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 12000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_03",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 15000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_04",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 18000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_05",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 21000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_06",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 24000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_07",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 27000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_08",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 30000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_09",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 33000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_10",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 36000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_11",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 40000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_12",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 45000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_13",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 50000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_14",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 55000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_15",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 60000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_16",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 65000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_17",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 75000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_18",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 85000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_19",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 95000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_free_1_chain_20",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 105000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    }
+                ],
+                "premium": [
+                    {
+                        "name": "june_2026_week1_premium_chain_01",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 45,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_02",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 60,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_03",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 75,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_04",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 90,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_05",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 105,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_06",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 120,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_07",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 135,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_08",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 150,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_09",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 165,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week1_premium_chain_10",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 180,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    }
+                ],
+                "battlePass": [
+                    {
+                        "name": "bp_se_june_2026_week1_daily_s_block_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "ScoreBlocks",
+                                "target": 5,
+                                "locaKey": "ScoreBlocks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_m_slay_of_imp_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFactionTrait",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesOfFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Imperial"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_l_deal_dmg_power_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "DealDamageOfProfileType",
+                                "target": 7000,
+                                "locaKey": "DealDamageOfProfileType_Power_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Power"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_s_use_ability_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "UseAbility",
+                                "target": 20,
+                                "locaKey": "UseAbility_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_m_slay_of_xen_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFactionTrait",
+                                "target": 75,
+                                "locaKey": "SlayEnemiesOfFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Xenos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_l_deal_dmg_blast_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "DealDamageOfProfileType",
+                                "target": 7000,
+                                "locaKey": "DealDamageOfProfileType_Blast_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Blast"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_s_slay_with_ranged_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithRangedAttacks",
+                                "target": 40,
+                                "locaKey": "SlayEnemiesWithRangedAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_m_bp_c_2nd_lhe_win_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithHero",
+                                "target": 8,
+                                "locaKey": "WinBattlesWithHero_description",
+                                "taskParameters": {
+                                    "heroId": "astraYarrick"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_l_slay_with_imp_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithFactionTrait",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Imperial"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_s_bp_c_2nd_lhe_dmg_type_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "DealDamageOfProfileType",
+                                "target": 2500,
+                                "locaKey": "DealDamageOfProfileType_Bolter_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Bolter"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_m_bp_c_2nd_lhe_use_ability_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "UseAbilityWithFaction",
+                                "target": 15,
+                                "locaKey": "UseAbilityWithFaction_description",
+                                "taskParameters": {
+                                    "factionId": "AstraMilitarum"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_l_bp_c_2nd_lhe_slay_of_faction_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFaction",
+                                "target": 60,
+                                "locaKey": "SlayEnemiesOfFaction_description",
+                                "taskParameters": {
+                                    "factionId": "Orks"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_s_bp_c_2nd_lhe_trait_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithTrait",
+                                "target": 5,
+                                "locaKey": "SlayEnemiesWithTrait_description",
+                                "taskParameters": {
+                                    "trait": "Resilient"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_m_bp_c_2nd_lhe_slay_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithFaction",
+                                "target": 30,
+                                "locaKey": "SlayEnemiesWithFaction_description",
+                                "taskParameters": {
+                                    "factionId": "AstraMilitarum"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_l_use_ability_with_imp_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "UseAbilityWithFactionTrait",
+                                "target": 40,
+                                "locaKey": "UseAbilityWithFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Imperial"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_s_slay_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 50,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week1_daily_l_deal_dmg_flame_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "DealDamageOfProfileType",
+                                "target": 7000,
+                                "locaKey": "DealDamageOfProfileType_Flame_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Flame"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "week": 2,
@@ -4793,7 +5684,903 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "milestoneRewards": [
+                {
+                    "requiredProgress": 100,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 210,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 330,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 460,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 600,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 760,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 940,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1140,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1360,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1600,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1860,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2140,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2440,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2790,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 3170,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 3580,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 4020,
+                    "reward": "specialSummoningToken:1"
+                },
+                {
+                    "requiredProgress": 4500,
+                    "reward": "stamina:100"
+                }
+            ],
+            "progressChests": [
+                {
+                    "requiredProgress": 50,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:600-660", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 100,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:800-880", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 150,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1000-1100", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 200,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1500-1650", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 250,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:2000-2200", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 300,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:3000-3300", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 350,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:4500-4950", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 410,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:6500-7150", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 480,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:8000-8800", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 560,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:10000-11000", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 650,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:12000-13200", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 750,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:14000-15400", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 860,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:16000-17600", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 980,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:18000-19800", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1110,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:20000-22000", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1250,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:22500-24750", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1400,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:25000-27500", "ShardsOrks:4-6", "ShardsBloodAngels:4-6"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1575,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:30000-33000", "ShardsOrks:7-8", "ShardsBloodAngels:7-8"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1775,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:40000-44000", "ShardsOrks:8-12", "ShardsBloodAngels:8-12"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:50000-55000", "ShardsOrks:10-15", "ShardsBloodAngels:10-15"]
+                        }
+                    ]
+                }
+            ],
+            "missions": {
+                "daily": [
+                    {
+                        "name": "june_2026_week2_daily_01",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "ApplyUpgrades",
+                                "target": 5,
+                                "locaKey": "ApplyUpgrades_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_daily_02",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithMeleeAttacks",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesWithMeleeAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_daily_03",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "Overkill",
+                                "target": 25,
+                                "locaKey": "Overkill_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_daily_04",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "PlayBattlesInGameMode",
+                                "target": 4,
+                                "locaKey": "PlayBattlesInGameMode_description",
+                                "taskParameters": {
+                                    "gameMode": "SyncPVP"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_daily_05",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "AttackUnitsInGameModes",
+                                "target": 150,
+                                "locaKey": "AttackUnitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["AllCampaigns"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_daily_06",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "UpgradeAbility",
+                                "target": 3,
+                                "locaKey": "UpgradeAbility_description"
+                            }
+                        ]
+                    }
+                ],
+                "free": [
+                    {
+                        "name": "june_2026_week2_free_1_chain_01",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 7500,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_02",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 12000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_03",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 15000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_04",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 18000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_05",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 21000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_06",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 24000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_07",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 27000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_08",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 30000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_09",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 33000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_10",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 36000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_11",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 40000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_12",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 45000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_13",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 50000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_14",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 55000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_15",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 60000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_16",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 65000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_17",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 75000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_18",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 85000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_19",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 95000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_free_1_chain_20",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 105000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    }
+                ],
+                "premium": [
+                    {
+                        "name": "june_2026_week2_premium_chain_01",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 45,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_02",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 60,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_03",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 75,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_04",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 90,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_05",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 105,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_06",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 120,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_07",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 135,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_08",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 150,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_09",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 165,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week2_premium_chain_10",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 180,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    }
+                ],
+                "battlePass": [
+                    {
+                        "name": "bp_se_june_2026_week2_daily_s_block_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "ScoreBlocks",
+                                "target": 5,
+                                "locaKey": "ScoreBlocks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_m_slay_with_xen_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithFactionTrait",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesWithFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Xenos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_l_win_without_dmg_psychic_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithoutDamageProfile",
+                                "target": 12,
+                                "locaKey": "WinBattlesWithoutDamageProfile_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Psychic"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_s_use_ability_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "UseAbility",
+                                "target": 20,
+                                "locaKey": "UseAbility_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_m_slay_of_cha_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFactionTrait",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesOfFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Chaos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_l_slay_with_bolter_damage_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithDamageProfile",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithDamageProfile_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Bolter"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_s_slay_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 50,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_m_crits_sync_pvp_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "ScoreCritsInGameModes",
+                                "target": 20,
+                                "locaKey": "ScoreCritsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["SyncPVP", "PvP", "Waves"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_l_slay_with_ranged_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithRangedAttacks",
+                                "target": 100,
+                                "locaKey": "SlayEnemiesWithRangedAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_s_spend_energy_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SpendStamina",
+                                "target": 90,
+                                "locaKey": "SpendStamina_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_m_campaign_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "WinCampaignBattles",
+                                "target": 30,
+                                "locaKey": "WinCampaignBattles_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_l_slay_with_trait_heavyweapon_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithTrait",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithTrait_description",
+                                "taskParameters": {
+                                    "trait": "HeavyWeapon"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_s_damage_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "DealDamage",
+                                "target": 3000,
+                                "locaKey": "DealDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_m_hits_sync_pvp_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "ScoreHitsInGameModes",
+                                "target": 120,
+                                "locaKey": "ScoreHitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["SyncPVP", "PvP", "Waves"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_l_slay_of_imp_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFactionTrait",
+                                "target": 70,
+                                "locaKey": "SlayEnemiesOfFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Imperial"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_s_crits_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "ScoreCrits",
+                                "target": 5,
+                                "locaKey": "ScoreCrits_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_m_damage_sync_pvp_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "DealDamageInGameModes",
+                                "target": 6000,
+                                "locaKey": "DealDamageInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["SyncPVP", "PvP", "Waves"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week2_daily_l_slay_with_psychic_damage_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithDamageProfile",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithDamageProfile_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Psychic"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
         },
         {
             "week": 3,
@@ -8055,7 +9842,894 @@
                         }
                     ]
                 }
-            ]
+            ],
+            "milestoneRewards": [
+                {
+                    "requiredProgress": 100,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 210,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 330,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 460,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 600,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 760,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 940,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1140,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1360,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1600,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 1860,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2140,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2440,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 2790,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 3170,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 3580,
+                    "reward": "seasonalEventCurrencyJune2026:50"
+                },
+                {
+                    "requiredProgress": 4020,
+                    "reward": "specialSummoningToken:1"
+                },
+                {
+                    "requiredProgress": 4500,
+                    "reward": "stamina:100"
+                }
+            ],
+            "progressChests": [
+                {
+                    "requiredProgress": 50,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:600-660", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 100,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:800-880", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 150,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1000-1100", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 200,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1500-1650", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 250,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:2000-2200", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 300,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:3000-3300", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 350,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:4500-4950", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 410,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:6500-7150", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 480,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:8000-8800", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 560,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:10000-11000", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 650,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:12000-13200", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 750,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:14000-15400", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 860,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:16000-17600", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 980,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:18000-19800", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1110,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:20000-22000", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1250,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:22500-24750", "ShardsOrks:2-3", "ShardsBloodAngels:2-3"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1400,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:25000-27500", "ShardsOrks:4-6", "ShardsBloodAngels:4-6"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1575,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:30000-33000", "ShardsOrks:7-8", "ShardsBloodAngels:7-8"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1775,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:40000-44000", "ShardsOrks:8-12", "ShardsBloodAngels:8-12"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 2000,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": [
+                                "gold:50000-55000",
+                                "ShardsOrks:10-15",
+                                "ShardsBloodAngels:10-15",
+                                "playerProfileTheme_june_2026"
+                            ]
+                        }
+                    ]
+                }
+            ],
+            "missions": {
+                "daily": [
+                    {
+                        "name": "june_2026_week3_daily_01",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "UseAbility",
+                                "target": 20,
+                                "locaKey": "UseAbility_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_daily_02",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesFromHigherElevation",
+                                "target": 15,
+                                "locaKey": "SlayEnemiesFromHigherElevation_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_daily_03",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "AttackUnitsInGameModes",
+                                "target": 20,
+                                "locaKey": "AttackUnitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["PvP"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_daily_04",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "PlayBattlesInGameMode",
+                                "target": 5,
+                                "locaKey": "PlayBattlesInGameMode_description",
+                                "taskParameters": {
+                                    "gameMode": "LinearHeroEvent"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_daily_05",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "DefeatWaves",
+                                "target": 20,
+                                "locaKey": "DefeatWaves_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_daily_06",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "Overkill",
+                                "target": 50,
+                                "locaKey": "Overkill_description"
+                            }
+                        ]
+                    }
+                ],
+                "free": [
+                    {
+                        "name": "june_2026_week3_free_1_chain_01",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 7500,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_02",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 12000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_03",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 15000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_04",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 18000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_05",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 21000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_06",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 24000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_07",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 27000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_08",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 30000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_09",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 33000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_10",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 36000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_11",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 40000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_12",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 45000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_13",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 50000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_14",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 55000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_15",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 60000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_16",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 65000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_17",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 75000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_18",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 85000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_19",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 95000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_free_1_chain_20",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 105000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    }
+                ],
+                "premium": [
+                    {
+                        "name": "june_2026_week3_premium_chain_01",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 45,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_02",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 60,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_03",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 75,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_04",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 90,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_05",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 105,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_06",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 120,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_07",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 135,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_08",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 150,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_09",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 165,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "june_2026_week3_premium_chain_10",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyJune2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 180,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    }
+                ],
+                "battlePass": [
+                    {
+                        "name": "bp_se_june_2026_week3_daily_s_traverse_hexes_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "TraverseHexes",
+                                "target": 200,
+                                "locaKey": "TraverseHexes_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_m_campaign_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "WinCampaignBattles",
+                                "target": 30,
+                                "locaKey": "WinCampaignBattles_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_l_use_ability_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "UseAbility",
+                                "target": 50,
+                                "locaKey": "UseAbility_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_s_deal_ability_dmg_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 3000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_m_attack_ce_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "AttackUnitsInGameModes",
+                                "target": 50,
+                                "locaKey": "AttackUnitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["CampaignEvent", "PvP", "Waves"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_l_slay_with_ranged_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithRangedAttacks",
+                                "target": 100,
+                                "locaKey": "SlayEnemiesWithRangedAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_s_win_with_xen_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithFactionTraitLineup",
+                                "target": 5,
+                                "locaKey": "WinBattlesWithFactionTraitLineup_description",
+                                "taskParameters": {
+                                    "factionTrait": "Xenos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_m_bp_d_1st_lhe_win_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithHero",
+                                "target": 8,
+                                "locaKey": "WinBattlesWithHero_description",
+                                "taskParameters": {
+                                    "heroId": "necroChronomancer"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_l_bp_d_1st_lhe_slay_with_alliance_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithFactionTrait",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Xenos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_s_slay_of_xen_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFactionTrait",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesOfFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Xenos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_m_bp_d_1st_lhe_use_ability_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "UseAbilityWithFaction",
+                                "target": 15,
+                                "locaKey": "UseAbilityWithFaction_description",
+                                "taskParameters": {
+                                    "factionId": "Necrons"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_l_bp_d_1st_lhe_slay_of_faction_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesOfFaction",
+                                "target": 60,
+                                "locaKey": "SlayEnemiesOfFaction_description",
+                                "taskParameters": {
+                                    "factionId": "DarkAngels"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_s_slay_with_ranged_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithRangedAttacks",
+                                "target": 40,
+                                "locaKey": "SlayEnemiesWithRangedAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_m_bp_d_1st_lhe_slay_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithFaction",
+                                "target": 30,
+                                "locaKey": "SlayEnemiesWithFaction_description",
+                                "taskParameters": {
+                                    "factionId": "Necrons"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_l_bp_d_1st_lhe_use_ability_with_alliance_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "UseAbilityWithFactionTrait",
+                                "target": 40,
+                                "locaKey": "UseAbilityWithFactionTrait_description",
+                                "taskParameters": {
+                                    "factionTrait": "Xenos"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_s_damage_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "DealDamage",
+                                "target": 3000,
+                                "locaKey": "DealDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_june_2026_week3_daily_l_slay_from_higher_elevation_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesFromHigherElevation",
+                                "target": 35,
+                                "locaKey": "SlayEnemiesFromHigherElevation_description"
+                            }
+                        ]
+                    }
+                ]
+            }
         }
     ]
 }

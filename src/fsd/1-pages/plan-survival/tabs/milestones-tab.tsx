@@ -11,13 +11,16 @@ interface Props {
 }
 
 export const MilestonesTab: React.FC<Props> = ({ event }) => {
-    const milestoneCells: TieredRewardCell[] = event.milestoneRewards.map((reward, index) => {
-        const { icon, label, qty } = survivalRewardInfo(reward.chestRewardId);
+    const milestoneCells: TieredRewardCell[] = event.milestoneRewards.map((milestone, index) => {
+        const rewardIds = milestone.reward
+            ? [milestone.reward]
+            : (milestone.chest?.flatMap(bundle => bundle.rewards) ?? []);
+        const resolved = rewardIds.map(rewardId => survivalRewardInfo(rewardId));
         return {
             key: index,
-            title: label,
-            rewards: [{ icon, qty }],
-            costLabel: `${reward.requiredProgress.toLocaleString()} pts`,
+            title: resolved.length === 1 ? resolved[0].label : undefined,
+            rewards: resolved.map(({ icon, qty }) => ({ icon, qty })),
+            costLabel: `${milestone.requiredProgress.toLocaleString()} pts`,
         };
     });
 

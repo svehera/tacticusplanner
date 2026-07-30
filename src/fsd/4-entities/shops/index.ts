@@ -23,11 +23,16 @@ export {
     plTier,
 } from './mythic-tier';
 export type {
+    IEventMissions,
+    IMissionChain,
+    IMissionTask,
     ResolvedShopItem,
     ResolvedShopSlot,
     ShopData,
     ShopDayOfWeek,
     ShopEventData,
+    ShopEventMilestoneReward,
+    ShopEventProgressChest,
     ShopEventWeek,
     ShopProduct,
 } from './shop.models';

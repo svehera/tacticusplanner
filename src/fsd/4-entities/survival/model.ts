@@ -1,3 +1,5 @@
+import type { IEventMissions } from '@/fsd/4-entities/shops/@x/survival';
+
 export interface ISurvivalWave {
     round: number;
     power: number;
@@ -21,8 +23,13 @@ export interface ISurvivalBattle {
 
 export interface ISurvivalMilestoneReward {
     requiredProgress: number;
-    chestRewardId: string;
-    endless?: boolean;
+    reward?: string;
+    chest?: { type?: string; rewards: string[] }[];
+}
+
+export interface ISurvivalPoints {
+    rarityCapMilestones: Record<string, string>;
+    medalRewards: Record<string, string>;
 }
 
 export interface ISurvivalChestCost {
@@ -65,6 +72,8 @@ export interface ISurvivalEvent {
     survival: ISurvivalConfig;
     battle: ISurvivalBattle;
     milestoneRewards: ISurvivalMilestoneReward[];
+    survivalPoints: ISurvivalPoints;
     chests: ISurvivalChest[];
     offers: Record<string, ISurvivalOffer>;
+    missions: IEventMissions;
 }
