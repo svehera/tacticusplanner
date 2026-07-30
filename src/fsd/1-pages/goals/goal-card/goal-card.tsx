@@ -40,7 +40,7 @@ interface GoalCardParts {
 interface Props {
     goal: TypedGoalSelect;
     goalEstimate?: IGoalEstimate;
-    menuItemSelect?: (item: 'edit' | 'delete' | 'moveUp' | 'moveDown') => void;
+    menuItemSelect?: (item: 'edit' | 'delete') => void;
     onToggleInclude?: () => void;
     bgColor: string;
     characters: ICharacter2[];
@@ -48,6 +48,10 @@ interface Props {
     bookRarity: Rarity;
     /** When provided, renders a drag grip in the header wired to the dnd-kit sortable activator. */
     dragHandle?: GoalDragHandle;
+    /** Moves the goal by one position within its section. Negative is up. */
+    onMove?: (delta: number) => void;
+    canMoveUp?: boolean;
+    canMoveDown?: boolean;
 }
 
 /** Renders a full goal card: header, type-specific body, notes, and status/raids footer. */
@@ -61,6 +65,9 @@ export const GoalCard: React.FC<Props> = ({
     mows,
     bookRarity,
     dragHandle,
+    onMove,
+    canMoveUp,
+    canMoveDown,
 }: Props) => {
     const goalEstimate: IGoalEstimate = passed ?? {
         goalId: goal.goalId,
@@ -240,7 +247,12 @@ export const GoalCard: React.FC<Props> = ({
                     />
                 </div>
                 <div className="shrink-0">
-                    <GoalCardActions menuItemSelect={menuItemSelect} />
+                    <GoalCardActions
+                        menuItemSelect={menuItemSelect}
+                        onMove={onMove}
+                        canMoveUp={canMoveUp}
+                        canMoveDown={canMoveDown}
+                    />
                 </div>
             </div>
 
