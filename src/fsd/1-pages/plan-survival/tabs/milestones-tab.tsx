@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
-import { TieredRewardCell, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-reward-grid';
+import { buildProgressRewardCells, TieredRewardCell, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-reward-grid';
 
 import { getShopCurrencyIconKey, getShopCurrencyLabel } from '@/fsd/4-entities/shops';
 import { ISurvivalEvent, survivalRewardInfo } from '@/fsd/4-entities/survival';
@@ -11,15 +11,11 @@ interface Props {
 }
 
 export const MilestonesTab: React.FC<Props> = ({ event }) => {
-    const milestoneCells: TieredRewardCell[] = event.milestoneRewards.map((reward, index) => {
-        const { icon, label, qty } = survivalRewardInfo(reward.chestRewardId);
-        return {
-            key: index,
-            title: label,
-            rewards: [{ icon, qty }],
-            costLabel: `${reward.requiredProgress.toLocaleString()} pts`,
-        };
-    });
+    const milestoneCells = buildProgressRewardCells(
+        event.milestoneRewards,
+        survivalRewardInfo,
+        milestone => `${milestone.requiredProgress.toLocaleString()} pts`
+    );
 
     const currencyIconKey = getShopCurrencyIconKey(event.resourceId);
     const currencyLabel = getShopCurrencyLabel(event.resourceId);

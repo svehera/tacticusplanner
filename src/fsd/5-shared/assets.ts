@@ -90,6 +90,7 @@ import legendaryEventToken from '@/assets/images/snowprint_assets/misc/ui_icon_r
 import onslaughtToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_onslaught.png';
 import salvageRunToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_salvage_run.png';
 import survivalToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_survival.png';
+import survivalStatBoost from '@/assets/images/snowprint_assets/misc/ui_icon_survival_boost_stats.png';
 import playerProfileThemeMay2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_may_2026.png';
 import chaosOnslaught from '@/assets/images/snowprint_assets/onslaught/chaos.png';
 import imperialOnslaught from '@/assets/images/snowprint_assets/onslaught/imperial.png';
@@ -198,6 +199,7 @@ import draftMachinesOfWarComponents from '@/assets/images/snowprint_assets/resou
 import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
 import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
+import battlepassPoints from '@/assets/images/snowprint_assets/resources/ui_icon_resource_battlepass_xp.png';
 import blackstone from '@/assets/images/snowprint_assets/resources/ui_icon_resource_blackstone.png';
 import coins from '@/assets/images/snowprint_assets/resources/ui_icon_resource_coin_large.png';
 import crusadeBomb from '@/assets/images/snowprint_assets/resources/ui_icon_resource_crusade_bomb_large.png';
@@ -211,6 +213,7 @@ import seasonalEventCurrencyHolidays2025 from '@/assets/images/snowprint_assets/
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
 import seasonalEventCurrencyMarch2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_march_2026.png';
 import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
+import eventPoints from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_points_seasonalevent.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
 import mowAmmo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_machines_of_war_ammo_large.png';
@@ -614,6 +617,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: survivalToken,
         label: 'Survival Token',
     },
+    survivalStatBoost: {
+        file: survivalStatBoost,
+        label: 'Survival Stat Boost',
+    },
     playerProfileThemeMay2026: {
         file: playerProfileThemeMay2026,
         label: 'Seasonal Event (May 2026) Profile Theme',
@@ -1001,6 +1008,14 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     mowAmmo: {
         file: mowAmmo,
         label: 'Machines of War Ammo',
+    },
+    battlepassPoints: {
+        file: battlepassPoints,
+        label: 'Battlepass Points',
+    },
+    eventPoints: {
+        file: eventPoints,
+        label: 'Event Point',
     },
     mythicSalvage: {
         file: mythicSalvage,

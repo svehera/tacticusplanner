@@ -4,6 +4,7 @@ import { useContext, useMemo, useState } from 'react';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
 import { Select } from '@/fsd/5-shared/ui/selects';
+import { TabBar } from '@/fsd/5-shared/ui/tab-bar';
 import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -17,37 +18,20 @@ import {
 
 import { EnemiesTab } from './tabs/enemies-tab';
 import { MilestonesTab } from './tabs/milestones-tab';
+import { MissionsTab } from './tabs/missions-tab';
 import { OffersTab } from './tabs/offers-tab';
 import { TeamTab } from './tabs/team-tab';
 
-const TAB_IDS = ['team', 'enemies', 'milestones', 'offers'] as const;
+const TAB_IDS = ['team', 'enemies', 'milestones', 'missions', 'offers'] as const;
 type TabId = (typeof TAB_IDS)[number];
 
 const TAB_LABELS: Record<TabId, string> = {
     team: 'Team',
     enemies: 'Enemies',
     milestones: 'Milestones & Rewards',
+    missions: 'Missions',
     offers: 'Offers',
 };
-
-const TabBar = ({ active, onChange }: { active: TabId; onChange: (tab: TabId) => void }) => (
-    <div className="flex gap-1 border-b border-gray-200 dark:border-gray-700">
-        {TAB_IDS.map(id => (
-            <button
-                key={id}
-                type="button"
-                onClick={() => onChange(id)}
-                className={[
-                    'px-4 py-2 text-sm font-medium transition-colors',
-                    active === id
-                        ? 'border-b-2 border-blue-600 text-blue-600 dark:border-blue-400 dark:text-blue-400'
-                        : 'text-gray-600 hover:text-gray-900 dark:text-gray-400 dark:hover:text-gray-100',
-                ].join(' ')}>
-                {TAB_LABELS[id]}
-            </button>
-        ))}
-    </div>
-);
 
 export const Survival = () => {
     const { characters: unresolvedCharacters, mows: unresolvedMows, survivalTeams, goals } = useContext(StoreContext);
@@ -103,7 +87,7 @@ export const Survival = () => {
                     />
                 </div>
 
-                <TabBar active={activeTab} onChange={setActiveTab} />
+                <TabBar tabs={TAB_IDS} labels={TAB_LABELS} active={activeTab} onChange={setActiveTab} />
 
                 <div className={activeTab === 'team' ? undefined : 'hidden'}>
                     <TeamTab
@@ -120,6 +104,9 @@ export const Survival = () => {
                 </div>
                 <div className={activeTab === 'milestones' ? undefined : 'hidden'}>
                     <MilestonesTab event={selectedEvent} />
+                </div>
+                <div className={activeTab === 'missions' ? undefined : 'hidden'}>
+                    <MissionsTab event={selectedEvent} />
                 </div>
                 <div className={activeTab === 'offers' ? undefined : 'hidden'}>
                     <OffersTab event={selectedEvent} />
