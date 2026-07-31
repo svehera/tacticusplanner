@@ -18,6 +18,11 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     stamina_waves: { iconKey: 'onslaughtToken', label: 'Onslaught Tokens' },
     stamina_treasureBeach: { iconKey: 'salvageRunToken', label: 'Salvage Run Tokens' },
     stamina_survival: { iconKey: 'survivalToken', label: 'Survival Tokens' },
+    machinesOfWarAmmo: { iconKey: 'mowAmmo', label: 'Munitions' },
+    xp_battlepass: { iconKey: 'battlepassPoints', label: 'Battlepass Points' },
+    xp_seasonal: { iconKey: 'eventPoints', label: 'Event Point' },
+    survivalBoost_stats: { iconKey: 'survivalStatBoost', label: '' },
+    ShardsAll: { iconKey: 'shard', label: 'Shards' },
     gems: { iconKey: 'blackstone', label: 'Blackstone' },
     raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
     avatarFrame_frameAugust2026: {

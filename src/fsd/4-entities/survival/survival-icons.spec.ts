@@ -17,7 +17,7 @@ const DATA_DIR = path.join(path.dirname(fileURLToPath(import.meta.url)), 'data')
 
 interface RawSurvivalEvent {
     resourceId?: string;
-    milestoneRewards?: Array<{ chestRewardId: string }>;
+    milestoneRewards?: Array<{ reward?: string; chest?: Array<{ rewards: string[] }> }>;
     chests?: Array<{ cost: { type: string }; rewards: string[] }>;
     battle?: { waves?: Array<{ army?: string[]; armyAfterCompletion?: string[] }> };
     offers?: Record<string, { realMoneyProduct: { rewards: string[] } }>;
@@ -40,7 +40,12 @@ describe('survival icon completeness', () => {
         const missing: string[] = [];
         for (const event of events) {
             for (const milestone of event.milestoneRewards ?? []) {
-                if (!survivalRewardInfo(milestone.chestRewardId).resolved) missing.push(milestone.chestRewardId);
+                if (milestone.reward && !survivalRewardInfo(milestone.reward).resolved) missing.push(milestone.reward);
+                for (const bundle of milestone.chest ?? []) {
+                    for (const rewardId of bundle.rewards) {
+                        if (!survivalRewardInfo(rewardId).resolved) missing.push(rewardId);
+                    }
+                }
             }
             for (const chest of event.chests ?? []) {
                 for (const rewardId of chest.rewards) {

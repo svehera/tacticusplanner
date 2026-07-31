@@ -110,6 +110,7 @@ const TRAIT_STYLE_TO_ICON: Record<string, string> = {
     Psyker: 'traitPsychic',
     RangedSpecialist: 'traitRangedSpecialist',
     RapidAssault: 'traitRapidAssault',
+    Resilient: 'traitResilient',
     Steppable: 'traitSteppable',
     Summon: 'traitSummon',
     Suppressive_Fire: 'traitSuppressiveFire',
@@ -126,6 +127,7 @@ const STAT_STYLE_TO_ICON: Record<string, string> = {
     Stat_Armor: 'armour',
     Stat_Block: 'block',
     Stat_Chance: 'chance',
+    Stat_Crit: 'crit',
     Stat_CritChance: 'chance',
     Stat_CritDamage: 'critDamage',
     Stat_Damage: 'damage',
@@ -226,6 +228,18 @@ export function getStyleSpec(styleName: string): StyleSpec | undefined {
     }
     if (styleName === 'Resource_MachinesOfWarAmmo') {
         return { color: ABILITY_COLORS.buff, icon: snowprintIcons.mowAmmo?.file, iconAlt: 'MoW Ammo' };
+    }
+    if (styleName === 'Resource_Stamina') {
+        return { color: ABILITY_COLORS.buff, icon: snowprintIcons.energy?.file, iconAlt: 'Energy' };
+    }
+    if (styleName === 'Resource_SurvivalToken') {
+        return { color: ABILITY_COLORS.buff, icon: snowprintIcons.survivalToken?.file, iconAlt: 'Survival' };
+    }
+    if (styleName === 'Resource_ArenaToken') {
+        return { color: ABILITY_COLORS.buff, icon: snowprintIcons.arenaToken?.file, iconAlt: 'Arena' };
+    }
+    if (styleName === 'Resource_OnslaughtToken') {
+        return { color: ABILITY_COLORS.buff, icon: snowprintIcons.onslaughtToken?.file, iconAlt: 'Onslaught' };
     }
 
     // ── Traits ────────────────────────────────────────────────────────────────

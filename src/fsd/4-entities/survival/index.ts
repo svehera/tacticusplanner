@@ -19,4 +19,5 @@ export type {
     ISurvivalChestCost,
     ISurvivalOffer,
     ISurvivalRealMoneyProduct,
+    ISurvivalPoints,
 } from './model';
