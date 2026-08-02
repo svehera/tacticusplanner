@@ -32,6 +32,7 @@ export interface ICampaignBattleComposed {
     isPassFilter?: boolean;
     isCompleted?: boolean;
     isStarted?: boolean;
+    isElite?: boolean;
 }
 
 export interface IRewards {
