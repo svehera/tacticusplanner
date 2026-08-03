@@ -6,7 +6,15 @@ import { rankToLevel, rarityToStars } from 'src/models/constants';
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IInventory, IPersonalGoal } from 'src/models/interfaces';
 
-import { Alliance, Rank, Rarity, RarityStars, XP_BOOK_VALUE, XP_BOOK_ORDER } from '@/fsd/5-shared/model';
+import {
+    Alliance,
+    Rank,
+    Rarity,
+    RarityStars,
+    XP_BOOK_VALUE,
+    XP_BOOK_ORDER,
+    pickXpBookRarity,
+} from '@/fsd/5-shared/model';
 
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacter2 } from '@/fsd/4-entities/character/model';
@@ -954,15 +962,19 @@ export class GoalsService {
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
-        goal.xpBooksRequired = Math.floor(remainingXp / XP_BOOK_VALUE[xpBookRarityToUse]);
+        const displayRarity = pickXpBookRarity(remainingXp, xpBookRarityToUse);
+        const displayBookValue = XP_BOOK_VALUE[displayRarity];
+        // Codices are indivisible, so every XP→book conversion rounds UP.
+        goal.xpBooksRequired = Math.ceil(remainingXp / displayBookValue);
+        goal.xpRequiredTotal = remainingXp;
         const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
-        goal.xpBooksApplied = goal.xpBooksRequired - Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        goal.xpBooksApplied = goal.xpBooksRequired - Math.ceil(xpNeeded / displayBookValue);
         goal.xpDaysLeft = undefined;
 
         let newAccrual = xpBooksAccrual;
 
-        goal.xpBooksTotal = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
-        currentEstimate.bookRarity = xpBookRarityToUse;
+        goal.xpBooksTotal = Math.ceil(xpNeeded / displayBookValue);
+        currentEstimate.bookRarity = displayRarity;
         if (xpNeeded === 0) {
             currentEstimate.books = 0;
             currentEstimate.gold = 0;
@@ -970,10 +982,12 @@ export class GoalsService {
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
 
-        currentEstimate.books = Math.floor(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
+        currentEstimate.books = Math.ceil(xpNeeded / displayBookValue);
         currentEstimate.xpLeft = xpNeeded;
 
         if (xpIncomeState.manualCodicesPerDay > 0) {
+            // Accrual stays in the PREFERRED codex — income is earned in those, not in whatever
+            // rarity the meter happens to display.
             const booksToAccrue = Math.ceil(xpNeeded / XP_BOOK_VALUE[xpBookRarityToUse]);
             newAccrual = this.processGoalAccrual(booksToAccrue, xpBooksAccrual, xpIncomeState.manualCodicesPerDay);
             goal.xpDaysLeft = Math.ceil((newAccrual.accruedDate.getTime() - today.getTime()) / 86_400_000);
