@@ -96,8 +96,22 @@ describe('GoalCardCharacterAbilities XP books row', () => {
         );
     });
 
-    it('renders no XP-book row when the character is already at the target level', () => {
+    // A character already at the target ability level produces exactly this estimate: getLegendaryTomesCount
+    // returns undefined, so _adjustGoalXp bails before assigning any book counts.
+    it('renders no XP-book row when the estimate carries no XP-book data', () => {
         render(<GoalCardCharacterAbilities goal={goal} bookRarity={Rarity.Legendary} goalEstimate={estimate()} />);
+
+        expect(screen.queryByRole('progressbar', { name: /XP Books/ })).toBeNull();
+    });
+
+    it('renders no XP-book row when the goal needs zero books', () => {
+        render(
+            <GoalCardCharacterAbilities
+                goal={goal}
+                bookRarity={Rarity.Legendary}
+                goalEstimate={estimate({ xpBooksApplied: 0, xpBooksRequired: 0 })}
+            />
+        );
 
         expect(screen.queryByRole('progressbar', { name: /XP Books/ })).toBeNull();
     });
