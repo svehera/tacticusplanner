@@ -6,7 +6,7 @@ import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
-import { IGoalEstimate } from '@/fsd/3-features/goals';
+import { hasXpBooks, IGoalEstimate } from '@/fsd/3-features/goals';
 
 import { ProgressionRow } from './progression-row';
 import { RankEmblem } from './rank-emblem';
@@ -20,9 +20,7 @@ interface Props {
 
 /** Body of an UpgradeRank goal card: rank progression (raid days) over an XP-book row (XP days). */
 export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, bookRarity }) => {
-    const applied = goalEstimate.xpBooksApplied;
-    const required = goalEstimate.xpBooksRequired;
-    const hasBooks = applied !== undefined && required !== undefined && required > 0;
+    const hasBooks = hasXpBooks(goalEstimate);
     // Top row shows days spent on raids (materials); the XP row below shows the XP-income days.
     const raidDays = goalEstimate.daysLeft > 0 ? Math.ceil(goalEstimate.daysLeft) : undefined;
 

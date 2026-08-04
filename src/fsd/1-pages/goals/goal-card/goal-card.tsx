@@ -116,7 +116,9 @@ export const GoalCard: React.FC<Props> = ({
                 return {
                     portrait: <UnitShardIcon icon={goal.unitRoundIcon} height={40} />,
                     title: goal.unitName ?? goal.unitId,
-                    body: <GoalCardCharacterAbilities goal={goal} goalEstimate={goalEstimate} />,
+                    body: (
+                        <GoalCardCharacterAbilities goal={goal} goalEstimate={goalEstimate} bookRarity={bookRarity} />
+                    ),
                     showRaids: false,
                     raidsTargetId: goal.unitId,
                 };
