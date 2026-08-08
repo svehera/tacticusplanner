@@ -94,6 +94,16 @@ describe('per-prime final HP', () => {
         expect(loop.rightFinalRemainingHp).toBe(250);
     });
 
+    it('breaks a same-second tie by the lower HP, whatever order the API sent', () => {
+        // `completedOn` has second granularity and the response is not promised to be chronological,
+        // so the killing blow can share its timestamp with an earlier hit and arrive after it.
+        const at = START + 5 * DAY;
+        const loop = onlyLoop([boss({ remainingHp: 0, completedOn: at }), boss({ remainingHp: 900, completedOn: at })]);
+
+        expect(loop.finalRemainingHp).toBe(0);
+        expect(bossOutcome(loop)).toBe('kill');
+    });
+
     it('counts a bomb that lands the killing blow', () => {
         const loop = onlyLoop([
             boss(),

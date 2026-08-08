@@ -69,6 +69,11 @@ function compareByFightOrder(a: BossLoopRow, b: BossLoopRow): number {
  * reduce HP and can land the kill.
  *
  * Absent from the map means no attack was recorded, which is not the same as "survived".
+ *
+ * `completedOn` has second granularity, so two hits on one target can share a timestamp and the API
+ * does not promise chronological order. HP only falls within a loop, so a tie is broken by the lower
+ * `remainingHp` — otherwise a killing blow sharing its second with an earlier hit could be dropped
+ * and the boss reported as still standing.
  */
 function finalHpByLoop(
     targetEntries: TacticusGuildRaidEntry[],
@@ -79,7 +84,11 @@ function finalHpByLoop(
         const loopNumber = entryLoop.get(entry) ?? 1;
         const completedOn = entry.completedOn ?? 0;
         const current = latest.get(loopNumber);
-        if (current === undefined || completedOn > current.completedOn) {
+        const isLater =
+            current === undefined ||
+            completedOn > current.completedOn ||
+            (completedOn === current.completedOn && entry.remainingHp < current.hp);
+        if (isLater) {
             latest.set(loopNumber, { hp: entry.remainingHp, completedOn });
         }
     }

@@ -7,7 +7,13 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { bossPrefixDisplayNames, resolvePlayerName, tierLabel, unitDisplayLabel } from '../guild-performance.utils';
+import {
+    avgDamageKey,
+    bossPrefixDisplayNames,
+    resolvePlayerName,
+    tierLabel,
+    unitDisplayLabel,
+} from '../guild-performance.utils';
 
 export interface PlayerSummaryStats {
     userId: string;
@@ -405,7 +411,7 @@ export function buildHitRows(
     loopBombNumber: Map<TacticusGuildRaidEntry, number>
 ): HitRow[] {
     return entries.map(entry => {
-        const avgDamage = avgDamageMap.get(`${entry.unitId}:${entry.rarity}`);
+        const avgDamage = avgDamageMap.get(avgDamageKey(entry.unitId, entry.rarity, entry.encounterIndex));
         return {
             entry,
             bossName: unitDisplayLabel(entry.unitId),

@@ -51,18 +51,27 @@ import {
     filterHitEntries,
     hasHitFilters,
     type HitFilterState,
-    type HitSlotFilter,
     type PlayerSummaryContent,
 } from './damage-tab.utils';
 
 /**
- * The three axes AG Grid Community cannot express as a column filter — it has text, number and date
+ * The axes AG Grid Community cannot express as a column filter — it has text, number and date
  * filters but no set (checkbox) filter, so anything categorical needs a control of its own.
  *
  * Rarity and Boss stay as the icon toggles above, because they also drive the season-summary tables,
  * not just the grid.
+ *
+ * Generic per group rather than one array of loose strings: without it the two groups collapse to a
+ * common `string`, and setting state needed a cast that accepted a slot value for the hit-type axis
+ * just as happily.
  */
-const HIT_FILTER_GROUPS = [
+interface HitFilterGroup<K extends keyof HitFilterState> {
+    key: K;
+    label: string;
+    options: { value: HitFilterState[K]; label: string }[];
+}
+
+const HIT_FILTER_GROUPS: [HitFilterGroup<'damage'>, HitFilterGroup<'slot'>] = [
     {
         key: 'damage' as const,
         label: 'Hit type',
@@ -358,7 +367,9 @@ function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }
                         const { text, html } = content;
                         copyToClipboard(text, html)
                             .then(() => enqueueSnackbar('Copied', { variant: 'success' }))
-                            .catch(() => {});
+                            // Firefox and denied permissions reject the write. Swallowing that left
+                            // the button looking inert with no way to tell success from failure.
+                            .catch(() => enqueueSnackbar('Could not copy to clipboard', { variant: 'error' }));
                     }}
                     className="ml-auto inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-(--border) px-2 py-0.5 text-[11px] font-semibold text-(--soft-fg) hover:border-(--primary)/50 hover:bg-(--primary)/10 hover:text-(--primary)">
                     <Copy className="size-3" />
@@ -605,11 +616,9 @@ export const DamageTab = ({
                     />
                     {HIT_FILTER_GROUPS.map(group => (
                         <FilterGroup key={group.key} label={group.label}>
-                            <Segmented<string>
+                            <Segmented
                                 value={hitFilters[group.key]}
-                                onChange={next =>
-                                    setHitFilters(current => ({ ...current, [group.key]: next as HitSlotFilter }))
-                                }
+                                onChange={next => setHitFilters(current => ({ ...current, [group.key]: next }))}
                                 options={group.options}
                             />
                         </FilterGroup>

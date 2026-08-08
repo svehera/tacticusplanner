@@ -67,16 +67,24 @@ export function getDamageColorClass(entry: TacticusGuildRaidEntry, avgDamage: nu
 // Average damage map
 // ---------------------------------------------------------------------------
 
+/** Lookup key for {@link buildAvgDamageMap}. Exported so consumers cannot drift from the builder. */
+export function avgDamageKey(unitId: string, rarity: number, encounterIndex: number): string {
+    return `${unitId}:${rarity}:${encounterIndex}`;
+}
+
 /**
- * Builds a map of `unitId:rarity` → average raid-token damage, excluding
- * entries that killed the boss/prime (remainingHp === 0) and bomb entries.
+ * Average raid-token damage per encounter slot, excluding killing blows (`remainingHp === 0`, capped
+ * by what was left rather than by the player) and bombs (they spend no token).
  */
 export function buildAvgDamageMap(entries: TacticusGuildRaidEntry[]): Map<string, number> {
     const statsMap = new Map<string, { sum: number; count: number }>();
     for (const entry of entries) {
         if (entry.damageType === TacticusDamageType.Bomb) continue;
         if (entry.remainingHp === 0) continue;
-        const key = `${entry.unitId}:${entry.rarity}`;
+        // Keyed by slot as well, matching the summary tables: Silent King's twin minions share a
+        // unitId but are separate encounters, and averaging them together compares each hit against
+        // a baseline drawn half from a target it was never aimed at.
+        const key = avgDamageKey(entry.unitId, entry.rarity, entry.encounterIndex);
         const existing = statsMap.get(key) ?? { sum: 0, count: 0 };
         existing.sum += entry.damageDealt;
         existing.count++;

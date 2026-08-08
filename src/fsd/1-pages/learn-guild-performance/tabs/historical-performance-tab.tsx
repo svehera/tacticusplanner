@@ -135,16 +135,16 @@ export const HistoricalPerformanceTab = ({
         <TableCard ref={chart.ref}>
             <TableCardHeader>
                 <span className="text-[13px] font-extrabold text-(--fg)">Performance index by season</span>
-                <span className="ml-auto">
-                    <CaptureButton onCapture={chart.onCapture} isCapturing={chart.isCapturing} />
-                </span>
                 <span className="text-[11px] text-(--soft-fg)">
                     Bosses only, excluding kills · 1.00 = guild average
                 </span>
+                {/* One `ml-auto`, on the group. Two of them split the row twice, which pushed the
+                    capture button in between the title and the note that explains it. */}
                 <div className="ml-auto flex flex-wrap items-center gap-3 text-[11px] text-(--soft-fg)">
                     <LegendLine className="border-(--primary)" label="Selected" />
                     <LegendLine className="border-(--chart-5)" label={`${lines.length - 1} others`} />
                     <LegendLine className="border-(--accent)" dashed label="Guild avg" />
+                    <CaptureButton onCapture={chart.onCapture} isCapturing={chart.isCapturing} />
                 </div>
             </TableCardHeader>
             <div className="h-[420px] p-2">
