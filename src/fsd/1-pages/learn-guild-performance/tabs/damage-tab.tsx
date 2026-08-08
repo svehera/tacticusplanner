@@ -1,8 +1,9 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import ContentCopyIcon from '@mui/icons-material/ContentCopy';
+import { ChevronDown, Copy } from 'lucide-react';
 import { enqueueSnackbar } from 'notistack';
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useId, useMemo, useState } from 'react';
 
+import { copyToClipboard, useCaptureElement } from '@/fsd/5-shared/lib';
 import {
     TacticusDamageType,
     TacticusEncounterType,
@@ -13,120 +14,76 @@ import {
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { Button, Segmented } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService } from '@/fsd/4-entities/character/characters.service';
-import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
 import { MowsService } from '@/fsd/4-entities/mow/mows.service';
 
-import { CompIcons, RaidTable } from '../guild-performance.components';
 import {
-    bossPrefixDisplayNames,
-    bossPrefixRoundIconMap,
+    CaptureButton,
+    ColumnHeader,
+    CompIcons,
+    EncounterIcon,
+    FilterBar,
+    FilterGroup,
+    PrefixFilter,
+    RarityFilter,
+    ScrollX,
+    SectionHeader,
+    TableCard,
+    type ColumnLabel,
+} from '../guild-performance.components';
+import { ROW } from '../guild-performance.styles';
+import {
+    bossIconFor,
     computeDefaultRarities,
     getAvailableBossPrefixes,
     getBossOrder,
+    getBossPrefix,
     resolvePlayerName,
 } from '../guild-performance.utils';
 
+import { HitGrid } from './damage-hit-grid';
 import {
     buildPlayerSummaryText,
     buildPlayerSummaryTextFromSummary,
-    copyToClipboard,
+    DEFAULT_HIT_FILTERS,
+    filterHitEntries,
+    hasHitFilters,
+    type HitFilterState,
+    type HitSlotFilter,
     type PlayerSummaryContent,
 } from './damage-tab.utils';
 
-// ---------------------------------------------------------------------------
-// Filter sub-components
-// ---------------------------------------------------------------------------
-
-const ALL_RARITIES: Rarity[] = [
-    Rarity.Common,
-    Rarity.Uncommon,
-    Rarity.Rare,
-    Rarity.Epic,
-    Rarity.Legendary,
-    Rarity.Mythic,
+/**
+ * The three axes AG Grid Community cannot express as a column filter — it has text, number and date
+ * filters but no set (checkbox) filter, so anything categorical needs a control of its own.
+ *
+ * Rarity and Boss stay as the icon toggles above, because they also drive the season-summary tables,
+ * not just the grid.
+ */
+const HIT_FILTER_GROUPS = [
+    {
+        key: 'damage' as const,
+        label: 'Hit type',
+        options: [
+            { value: 'all', label: 'All' },
+            { value: 'battle', label: 'Battle' },
+            { value: 'bomb', label: 'Bomb' },
+        ],
+    },
+    {
+        // The two primes are separate targets, so each gets its own option rather than one "prime".
+        key: 'slot' as const,
+        label: 'Slot',
+        options: [
+            { value: 'all', label: 'All' },
+            { value: 'boss', label: 'Boss' },
+            { value: 'left', label: 'Left' },
+            { value: 'right', label: 'Right' },
+        ],
+    },
 ];
-
-function RarityFilterGroup({ selected, onChange }: { selected: Rarity[]; onChange: (rarities: Rarity[]) => void }) {
-    const toggle = (r: Rarity) => {
-        if (selected.includes(r) && selected.length === 1) return;
-        onChange(selected.includes(r) ? selected.filter(x => x !== r) : [...selected, r]);
-    };
-    return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Rarity</span>
-            <div className="flex gap-1">
-                {ALL_RARITIES.map(r => (
-                    <button
-                        key={r}
-                        type="button"
-                        title={Rarity[r]}
-                        onClick={() => {
-                            toggle(r);
-                        }}
-                        className={[
-                            'rounded border p-0.5 transition-colors',
-                            selected.includes(r)
-                                ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                        ].join(' ')}>
-                        <RarityIcon rarity={r} />
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-}
-
-function BossFilterGroup({
-    available,
-    selected,
-    onChange,
-}: {
-    available: string[];
-    selected: string[];
-    onChange: (prefixes: string[]) => void;
-}) {
-    if (available.length === 0) return <></>;
-    const toggle = (prefix: string) => {
-        if (selected.includes(prefix) && selected.length === 1) return;
-        onChange(selected.includes(prefix) ? selected.filter(p => p !== prefix) : [...selected, prefix]);
-    };
-    return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Boss</span>
-            <div className="flex flex-wrap gap-1">
-                {available.map(prefix => {
-                    const icon = bossPrefixRoundIconMap[prefix];
-                    const name = bossPrefixDisplayNames[prefix] ?? prefix;
-                    return (
-                        <button
-                            key={prefix}
-                            type="button"
-                            title={name}
-                            onClick={() => {
-                                toggle(prefix);
-                            }}
-                            className={[
-                                'rounded border p-0.5 transition-colors',
-                                selected.includes(prefix)
-                                    ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                    : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                            ].join(' ')}>
-                            {icon === undefined ? (
-                                <span className="px-1">{name}</span>
-                            ) : (
-                                <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
-                            )}
-                        </button>
-                    );
-                })}
-            </div>
-        </div>
-    );
-}
 
 // ---------------------------------------------------------------------------
 // Boss/rarity season summary
@@ -321,94 +278,161 @@ function buildPlayerBossRarityStatsFromSummary(
         .toSorted(compareSummaryStatRows);
 }
 
-function StatBossIcon({ unitId }: { unitId: string }) {
-    const mappedIcon = unitRoundIconMap[unitId];
-    if (mappedIcon !== undefined)
-        return <UnitShardIcon icon={mappedIcon} name={unitId} tooltip={unitId} width={28} height={28} />;
-    const match = /(?:MiniBoss|Minion)\d+(.+)/.exec(unitId);
-    if (match) {
-        const id = match[1].charAt(0).toLowerCase() + match[1].slice(1);
-        const character = CharactersService.getUnit(id);
-        if (character)
-            return (
-                <UnitShardIcon
-                    icon={character.roundIcon ?? ''}
-                    name={character.name}
-                    tooltip={character.name}
-                    width={28}
-                    height={28}
-                />
-            );
-    }
-    return <span className="text-xs text-gray-500">{unitId}</span>;
-}
+/**
+ * With a player selected the Best-player column is dropped, so the template loses a track too.
+ *
+ * The comp track is 150px, matching `HIT_COLS`: a full comp is five heroes plus a machine of war,
+ * so six 22px icons and five 2px gaps — 142px. At the 130px it used to be, the last portrait was
+ * clipped by `CompIcons`' own `overflow-hidden`.
+ */
+const statCols = (hidePlayer: boolean) =>
+    hidePlayer ? 'grid-cols-[34px_26px_92px_100px_150px]' : 'grid-cols-[34px_26px_92px_100px_1fr_150px]';
+
+/**
+ * One label per *readable* column, as in `HIT_LABELS`. The first two tracks are a 34px portrait and
+ * a 26px rarity icon; neither holds a word at 12px bold `tracking-widest` ("RARITY" alone is ~55px),
+ * so they share one "Boss" label spanning both (70px including the gap). Every other label fits its
+ * track outright and must not be abbreviated.
+ */
+const statLabels = (hidePlayer: boolean): ColumnLabel[] => [
+    { text: 'Boss', span: 2 },
+    { text: 'Avg dmg', align: 'right' },
+    { text: 'Max dmg', align: 'right' },
+    ...(hidePlayer ? [] : (['Best player'] as ColumnLabel[])),
+    'Winning comp',
+];
 
 function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hidePlayer: boolean }) {
-    const cols = hidePlayer ? 'grid-cols-[24px_20px_6rem_6rem_auto]' : 'grid-cols-[24px_20px_6rem_6rem_1fr_auto]';
     const id = row.maxPlayerName;
     return (
-        <div
-            className={`grid ${cols} items-center gap-x-2 rounded border border-gray-200 bg-white px-2 py-1 text-sm dark:border-gray-700 dark:bg-gray-900`}>
-            <span className="flex items-center justify-center">
-                <StatBossIcon unitId={row.unitId} />
+        <div role="row" className={`grid ${statCols(hidePlayer)} ${ROW}`}>
+            <span role="cell" className="flex items-center justify-center">
+                <EncounterIcon unitId={row.unitId} />
             </span>
-            <span className="flex items-center justify-center">
+            <span role="cell" className="flex items-center justify-center">
                 <RarityIcon rarity={row.rarity} />
             </span>
-            <span className="text-right text-gray-500 tabular-nums dark:text-gray-400">
+            <span role="cell" className="text-right text-(--soft-fg) tabular-nums">
                 {row.avgDamage > 0 ? row.avgDamage.toLocaleString() : '—'}
             </span>
-            <span className="text-right font-semibold tabular-nums">{row.maxDamage.toLocaleString()}</span>
+            <span role="cell" className="text-right font-extrabold text-(--fg) tabular-nums">
+                {row.maxDamage.toLocaleString()}
+            </span>
             {!hidePlayer && (
-                <span className="min-w-0 truncate" title={id}>
+                <span role="cell" className="min-w-0 truncate font-semibold" title={id}>
                     {id}
                 </span>
             )}
-            <CompIcons comp={row.comp} />
-        </div>
-    );
-}
-
-function StatHeader({ hidePlayer }: { hidePlayer: boolean }) {
-    const cols = hidePlayer ? 'grid-cols-[24px_20px_6rem_6rem_auto]' : 'grid-cols-[24px_20px_6rem_6rem_1fr_auto]';
-    return (
-        <div className={`grid ${cols} gap-x-2 px-2 text-xs font-semibold text-gray-500 uppercase`}>
-            <span>Boss</span>
-            <span />
-            <span className="text-right">Avg Dmg</span>
-            <span className="text-right">Max Dmg</span>
-            {!hidePlayer && <span>Best Player</span>}
-            <span>Comp</span>
+            <span role="cell" className="min-w-0">
+                <CompIcons comp={row.comp} />
+            </span>
         </div>
     );
 }
 
 function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }) {
+    const [isOpen, setIsOpen] = useState(false);
     if (content.text === '') return <></>;
     return (
-        <details className="max-w-4xl rounded border border-gray-200 dark:border-gray-700">
-            <summary className="cursor-pointer px-3 py-2 text-base font-semibold select-none">
-                Season Summary — Text
-            </summary>
-            <div className="border-t border-gray-200 px-3 py-2 dark:border-gray-700">
-                <span className="items-right flex justify-end">
-                    <button
-                        type="button"
-                        title="Copy to clipboard"
-                        onClick={event => {
-                            event.preventDefault();
-                            const { text, html } = content;
-                            copyToClipboard(text, html)
-                                .then(() => enqueueSnackbar('Copied', { variant: 'success' }))
-                                .catch(() => {});
-                        }}
-                        className="rounded p-0.5 hover:bg-(--accent)/20">
-                        <ContentCopyIcon fontSize="inherit" />
-                    </button>
-                </span>
-                <pre className="max-h-96 overflow-auto font-mono text-xs whitespace-pre">{content.text}</pre>
+        <div className="overflow-hidden rounded-xl border border-(--border)">
+            {/* One bar carrying the disclosure, the hint and the copy action — previously the copy
+                button was hidden inside the expanded body. */}
+            <div className="flex items-center gap-2.5 bg-(--soft) px-3 py-2">
+                <button
+                    type="button"
+                    onClick={() => {
+                        setIsOpen(open => !open);
+                    }}
+                    className="flex cursor-pointer items-center gap-1.5 text-sm font-extrabold text-(--fg)">
+                    <ChevronDown className={`size-4 transition-transform ${isOpen ? '' : '-rotate-90'}`} />
+                    Season summary — text
+                </button>
+                <span className="text-xs text-(--soft-fg)">paste into Discord</span>
+                <button
+                    type="button"
+                    title="Copy to clipboard"
+                    onClick={() => {
+                        const { text, html } = content;
+                        copyToClipboard(text, html)
+                            .then(() => enqueueSnackbar('Copied', { variant: 'success' }))
+                            .catch(() => {});
+                    }}
+                    className="ml-auto inline-flex cursor-pointer items-center gap-1.5 rounded-md border border-(--border) px-2 py-0.5 text-[11px] font-semibold text-(--soft-fg) hover:border-(--primary)/50 hover:bg-(--primary)/10 hover:text-(--primary)">
+                    <Copy className="size-3" />
+                    Copy
+                </button>
             </div>
-        </details>
+            {isOpen && (
+                <div className="border-t border-(--border) px-3 py-2">
+                    <pre className="max-h-96 overflow-auto font-mono text-xs whitespace-pre">{content.text}</pre>
+                </div>
+            )}
+        </div>
+    );
+}
+
+/**
+ * One summary table, capturable as a PNG. The capture ref sits on the whole `<section>` so the
+ * exported image carries its own title; the button marks itself ignored so it doesn't appear in
+ * its own screenshot.
+ */
+function StatsTableSection({
+    title,
+    rows,
+    hidePlayer,
+    captureName,
+}: {
+    title: string;
+    rows: BossRarityStatEntry[];
+    hidePlayer: boolean;
+    captureName: string;
+}) {
+    const [isOpen, setIsOpen] = useState(true);
+    const bodyId = useId();
+    const { ref, capture, isCapturing } = useCaptureElement<HTMLElement>(captureName);
+
+    const onCapture = () => {
+        void capture().then(outcome => {
+            if (outcome === 'clipboard') enqueueSnackbar('Image copied', { variant: 'success' });
+            else if (outcome === 'download') enqueueSnackbar('Image downloaded', { variant: 'success' });
+            else enqueueSnackbar('Could not capture the image', { variant: 'error' });
+        });
+    };
+
+    return (
+        <section ref={ref} className="flex flex-col gap-2">
+            <SectionHeader
+                title={title}
+                isOpen={isOpen}
+                onToggle={() => setIsOpen(open => !open)}
+                bodyId={bodyId}
+                meta={
+                    <span className="flex items-center gap-2.5">
+                        {rows.length} encounters
+                        {/* Nothing to capture while collapsed — the image would be the header alone. */}
+                        {isOpen && <CaptureButton onCapture={onCapture} isCapturing={isCapturing} />}
+                    </span>
+                }
+            />
+            {isOpen && (
+                <TableCard id={bodyId}>
+                    {/* 640, not 620: the fixed tracks plus padding and gaps come to 472px, leaving the
+                        Best-player `1fr` 168px — enough for its own header at 12px bold uppercase. */}
+                    <ScrollX minWidth={640}>
+                        <div role="table" aria-label={title}>
+                            <ColumnHeader cols={statCols(hidePlayer)} labels={statLabels(hidePlayer)} />
+                            {rows.map(row => (
+                                <BossRarityStatRow
+                                    key={`${row.unitId}:${row.rarity}:${row.encounterIndex}`}
+                                    row={row}
+                                    hidePlayer={hidePlayer}
+                                />
+                            ))}
+                        </div>
+                    </ScrollX>
+                </TableCard>
+            )}
+        </section>
     );
 }
 
@@ -419,36 +443,22 @@ function BossRarityStatsTable({ rows, hidePlayer }: { rows: BossRarityStatEntry[
     const primeRows = rows.filter(row => row.encounterType !== TacticusEncounterType.Boss);
 
     return (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-3.5">
             {bossRows.length > 0 && (
-                <section className="flex max-w-4xl flex-col gap-2">
-                    <h2 className="text-base font-semibold">Season Summary — Bosses</h2>
-                    <StatHeader hidePlayer={hidePlayer} />
-                    <div className="flex flex-col gap-1">
-                        {bossRows.map(row => (
-                            <BossRarityStatRow
-                                key={`${row.unitId}:${row.rarity}:${row.encounterIndex}`}
-                                row={row}
-                                hidePlayer={hidePlayer}
-                            />
-                        ))}
-                    </div>
-                </section>
+                <StatsTableSection
+                    title="Season summary — bosses"
+                    rows={bossRows}
+                    hidePlayer={hidePlayer}
+                    captureName="guild-performance-bosses"
+                />
             )}
             {primeRows.length > 0 && (
-                <section className="flex max-w-4xl flex-col gap-2">
-                    <h2 className="text-base font-semibold">Season Summary — Primes</h2>
-                    <StatHeader hidePlayer={hidePlayer} />
-                    <div className="flex flex-col gap-1">
-                        {primeRows.map(row => (
-                            <BossRarityStatRow
-                                key={`${row.unitId}:${row.rarity}:${row.encounterIndex}`}
-                                row={row}
-                                hidePlayer={hidePlayer}
-                            />
-                        ))}
-                    </div>
-                </section>
+                <StatsTableSection
+                    title="Season summary — primes"
+                    rows={primeRows}
+                    hidePlayer={hidePlayer}
+                    captureName="guild-performance-primes"
+                />
             )}
         </div>
     );
@@ -494,6 +504,11 @@ export const DamageTab = ({
 
     // --- rarity ---
     const defaultRarities = useMemo(() => computeDefaultRarities(allSeasonEntries), [allSeasonEntries]);
+    /** Only the rarities this season actually contains get an option. */
+    const availableRarities = useMemo(
+        () => [...new Set(allSeasonEntries.map(entry => entry.rarity))].toSorted((a, b) => a - b),
+        [allSeasonEntries]
+    );
     const [rarityOverride, setRarityOverride] = useState<Rarity[] | undefined>();
     const selectedRarities = rarityOverride ?? defaultRarities;
 
@@ -524,7 +539,10 @@ export const DamageTab = ({
                 .filter(
                     entry =>
                         effectiveBossPrefixes.length === 0 ||
-                        effectiveBossPrefixes.some(prefix => entry.unitId.startsWith(prefix))
+                        // Exact prefix, not `startsWith`: "GuildBoss1" is a string prefix of
+                        // GuildBoss10/11/12, so selecting one boss silently admitted four. Every
+                        // other tab already compares this way.
+                        effectiveBossPrefixes.includes(getBossPrefix(entry.unitId))
                 ),
         [rarityFilteredEntries, selectedPlayerId, effectiveBossPrefixes]
     );
@@ -552,33 +570,79 @@ export const DamageTab = ({
         );
     }, [historySummary, selectedPlayerId, allSeasonEntries, filteredEntries, names]);
 
+    const [hitFilters, setHitFilters] = useState<HitFilterState>(DEFAULT_HIT_FILTERS);
+
+    // The grid gets a further-narrowed set: the icon filters above also scope the summary tables, so
+    // they stay separate from the three hit-only axes.
+    const gridEntries = useMemo(() => filterHitEntries(filteredEntries, hitFilters), [filteredEntries, hitFilters]);
+
     const handleRarityChange = (rarities: Rarity[]) => {
+        // An empty rarity set would blank every table on the tab, so the last one cannot be removed.
+        if (rarities.length === 0) return;
         setRarityOverride(rarities);
         setSelectedBossPrefixes(undefined);
     };
 
     return (
-        <div className="flex flex-col gap-4">
-            {/* Rarity/Boss filters and the per-hit raid table need per-hit data, so they are live-only. */}
+        <div className="flex flex-col gap-3.5">
+            {/* Rarity/Boss filters and the per-hit grid need per-hit data, so they are live-only. */}
             {!isHistorical && (
-                <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                    <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
-                    <BossFilterGroup
+                <FilterBar>
+                    <RarityFilter
+                        selected={selectedRarities}
+                        onChange={handleRarityChange}
+                        available={availableRarities}
+                    />
+                    <PrefixFilter
+                        label="Boss"
                         available={availableBossPrefixes}
                         selected={effectiveBossPrefixes}
                         onChange={setSelectedBossPrefixes}
+                        iconFor={bossIconFor}
                     />
-                </div>
+                    {HIT_FILTER_GROUPS.map(group => (
+                        <FilterGroup key={group.key} label={group.label}>
+                            <Segmented<string>
+                                value={hitFilters[group.key]}
+                                onChange={next =>
+                                    setHitFilters(current => ({ ...current, [group.key]: next as HitSlotFilter }))
+                                }
+                                options={group.options}
+                            />
+                        </FilterGroup>
+                    ))}
+                    <span className="ml-auto flex items-center gap-2.5 text-xs text-(--soft-fg)">
+                        {/* Two scopes, so two counts: the hit toggles narrow only the log, while the
+                            rarity/boss toggles above also drive the summary tables. Reporting only the
+                            pre-toggle figure claimed 559 hits above a grid showing 40. */}
+                        <span>
+                            {gridEntries.length === filteredEntries.length
+                                ? `${filteredEntries.length} hits`
+                                : `${gridEntries.length} of ${filteredEntries.length} hits`}
+                            {' · '}
+                            {bossRows.length} encounters (bombs excluded)
+                        </span>
+                        {hasHitFilters(hitFilters) && (
+                            <Button
+                                appearance="plain"
+                                intent="primary"
+                                size="extra-small"
+                                onPress={() => setHitFilters(DEFAULT_HIT_FILTERS)}>
+                                Clear
+                            </Button>
+                        )}
+                    </span>
+                </FilterBar>
             )}
             <BossRarityStatsTable rows={bossRows} hidePlayer={selectedPlayerId !== undefined} />
             <PlayerSummaryTextSection content={summaryContent} />
             {!isHistorical && (
-                <RaidTable
+                <HitGrid
                     data={currentData}
                     names={names}
-                    label={`Season ${selectedSeason ?? '…'}`}
+                    label="Every hit"
                     avgDamageMap={avgDamageMap}
-                    displayEntries={filteredEntries}
+                    displayEntries={gridEntries}
                 />
             )}
         </div>

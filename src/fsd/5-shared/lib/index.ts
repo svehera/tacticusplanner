@@ -1,4 +1,11 @@
 export { cn } from './classes';
+export { copyToClipboard } from './copy-to-clipboard';
+export {
+    useCaptureElement,
+    CAPTURE_EXPAND_ATTRIBUTE,
+    CAPTURE_IGNORE_ATTRIBUTE,
+    type CaptureOutcome,
+} from './use-capture-element';
 export { factionLookup } from './factions.service';
 export { useMediaQuery } from './use-media-query';
 export { getEnumValues } from './get-enum-value';

@@ -8,12 +8,31 @@ import {
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
-import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { Segmented, Switch } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
 import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
 
-import { bossPrefixDisplayNames, bossPrefixRoundIconMap, computeDefaultRarities } from '../guild-performance.utils';
+import {
+    CaptureButton,
+    CardGrid,
+    EncounterIcon,
+    FilterBar,
+    FilterGroup,
+    PrefixFilter,
+    RarityFilter,
+    TableCard,
+    TableCardHeader,
+} from '../guild-performance.components';
+import { captureFileName, useSectionCapture } from '../guild-performance.hook';
+import {
+    bossIconFor,
+    bossPrefixDisplayNames,
+    computeDefaultRarities,
+    getAvailableBossPrefixes,
+    unitDisplayLabel,
+} from '../guild-performance.utils';
 
 import {
     buildGuildPerformanceIndexRows,
@@ -23,7 +42,6 @@ import {
     buildPlayerViewFromSummary,
     buildUnitPlayerBuckets,
     filterPerformanceEntries,
-    getAvailableBossPrefixes,
     getAvailablePrimeUnitIds,
     type PlayerBossBreakdown,
     type PlayerBossUnit,
@@ -33,142 +51,8 @@ import {
 } from './performance-tab.utils';
 
 // ---------------------------------------------------------------------------
-// Filter sub-components
-// ---------------------------------------------------------------------------
-
-const ALL_RARITIES: Rarity[] = [
-    Rarity.Common,
-    Rarity.Uncommon,
-    Rarity.Rare,
-    Rarity.Epic,
-    Rarity.Legendary,
-    Rarity.Mythic,
-];
-
-function RarityFilterGroup({ selected, onChange }: { selected: Rarity[]; onChange: (rarities: Rarity[]) => void }) {
-    const toggle = (rarity: Rarity) => {
-        if (selected.includes(rarity) && selected.length === 1) return;
-        onChange(selected.includes(rarity) ? selected.filter(x => x !== rarity) : [...selected, rarity]);
-    };
-    return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Rarity</span>
-            <div className="flex gap-1">
-                {ALL_RARITIES.map(rarity => (
-                    <button
-                        key={rarity}
-                        type="button"
-                        title={Rarity[rarity]}
-                        onClick={() => {
-                            toggle(rarity);
-                        }}
-                        className={[
-                            'rounded border p-0.5 transition-colors',
-                            selected.includes(rarity)
-                                ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                        ].join(' ')}>
-                        <RarityIcon rarity={rarity} />
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-}
-
-function PrefixFilterGroup({
-    label,
-    available,
-    selected,
-    onChange,
-    iconFor,
-}: {
-    label: string;
-    available: string[];
-    selected: string[];
-    onChange: (prefixes: string[]) => void;
-    iconFor: (prefix: string) => { icon: string | undefined; name: string };
-}) {
-    if (available.length === 0) return <></>;
-    const toggle = (prefix: string) => {
-        onChange(selected.includes(prefix) ? selected.filter(p => p !== prefix) : [...selected, prefix]);
-    };
-    return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">{label}</span>
-            <div className="flex flex-wrap gap-1">
-                {available.map(prefix => {
-                    const { icon, name } = iconFor(prefix);
-                    return (
-                        <button
-                            key={prefix}
-                            type="button"
-                            title={name}
-                            onClick={() => {
-                                toggle(prefix);
-                            }}
-                            className={[
-                                'rounded border p-0.5 transition-colors',
-                                selected.includes(prefix)
-                                    ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                    : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                            ].join(' ')}>
-                            {icon === undefined ? (
-                                <span className="px-1">{name}</span>
-                            ) : (
-                                <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
-                            )}
-                        </button>
-                    );
-                })}
-            </div>
-        </div>
-    );
-}
-
-function ExcludeKillsCheckbox({ value, onChange }: { value: boolean; onChange: (v: boolean) => void }) {
-    return (
-        <label className="flex cursor-pointer items-center gap-1.5 text-xs">
-            <input
-                type="checkbox"
-                checked={value}
-                onChange={event => {
-                    onChange(event.target.checked);
-                }}
-                className="h-4 w-4"
-            />
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Exclude kills</span>
-        </label>
-    );
-}
-
-// ---------------------------------------------------------------------------
 // Visuals
 // ---------------------------------------------------------------------------
-
-function EncounterIcon({ unitId, size = 24 }: { unitId: string; size?: number }) {
-    const mappedIcon = unitRoundIconMap[unitId];
-    if (mappedIcon !== undefined) {
-        return <UnitShardIcon icon={mappedIcon} name={unitId} tooltip={unitId} width={size} height={size} />;
-    }
-    const match = /(?:MiniBoss|Minion)\d+(.+)/.exec(unitId);
-    if (match) {
-        const id = match[1].charAt(0).toLowerCase() + match[1].slice(1);
-        const character = CharactersService.getUnit(id);
-        if (character) {
-            return (
-                <UnitShardIcon
-                    icon={character.roundIcon ?? ''}
-                    name={character.name}
-                    tooltip={character.name}
-                    width={size}
-                    height={size}
-                />
-            );
-        }
-    }
-    return <span className="text-xs text-gray-500">{unitId.slice(-6)}</span>;
-}
 
 const formatPct = (value: number): string => `${value >= 0 ? '+' : ''}${value.toFixed(1)}%`;
 
@@ -179,10 +63,10 @@ function CenteredBar({ value, maxAbs }: { value: number; maxAbs: number }) {
     const widthPct = maxAbs > 0 ? (Math.abs(value) / maxAbs) * 50 : 0;
     const isPositive = value >= 0;
     return (
-        <div className="relative h-3 w-full overflow-hidden rounded-sm bg-gray-100 dark:bg-gray-800">
-            <div className="absolute inset-y-0 left-1/2 w-px bg-gray-400 dark:bg-gray-500" />
+        <div className="relative h-3 w-full overflow-hidden rounded-sm bg-(--fg)/12">
+            <div className="absolute inset-y-0 left-1/2 w-px bg-(--fg)/35" />
             <div
-                className={`absolute inset-y-0 ${isPositive ? 'left-1/2 bg-emerald-500' : 'right-1/2 bg-red-500'}`}
+                className={`absolute inset-y-0 ${isPositive ? 'left-1/2 bg-(--success)' : 'right-1/2 bg-(--danger)'}`}
                 style={{ width: `${widthPct}%` }}
             />
         </div>
@@ -199,7 +83,7 @@ function DistributionRow({
     maxValue: number;
 }) {
     return (
-        <div className="relative h-4 w-full rounded-sm bg-gray-100 dark:bg-gray-800">
+        <div className="relative h-4 w-full rounded-sm bg-(--fg)/12">
             {nonKillHits.map((hit, index) => (
                 <div
                     key={`nk-${index}`}
@@ -248,9 +132,9 @@ function CenteredDistributionRow({
         return Math.max(0, Math.min(100, raw));
     };
     return (
-        <div className="relative h-4 w-full rounded-sm bg-gray-100 dark:bg-gray-800">
+        <div className="relative h-4 w-full rounded-sm bg-(--fg)/12">
             <div
-                className="absolute inset-y-0 left-1/2 w-0.5 bg-amber-500"
+                className="absolute inset-y-0 left-1/2 w-0.5 bg-(--accent)"
                 title={`Guild avg: ${center.toLocaleString()}`}
             />
             {nonKillHits.map((hit, index) => (
@@ -279,6 +163,49 @@ function CenteredDistributionRow({
 
 type DiffKey = 'avgDiffPct' | 'maxDiffPct' | 'totalDiffPct' | 'performanceDiffPct' | 'equivalentDiffPct';
 type ValueKey = 'avg' | 'max' | 'total' | 'performanceIndex' | 'equivalentHits';
+
+/** Dense row: name · bar · signed diff · raw value. */
+const DIFF_ROW =
+    'grid grid-cols-[118px_1fr_52px_56px] items-center gap-[9px] px-2.5 py-px text-xs even:bg-(--neutral)/50 hover:bg-(--primary)/10';
+
+/**
+ * Card header carrying the title, the baseline beside it and the subtitle beneath — all three were
+ * previously crammed into an <h2> and a following paragraph.
+ *
+ * `min-h-14` reserves the subtitle line whether or not there is a subtitle. These cards sit side by
+ * side in a `CardGrid`, and only three of the five pass one, so without the reservation two headers
+ * were a line shorter than their neighbours and every row in those tables sat higher than the rows
+ * beside it. Content stays top-aligned rather than centred, so the titles share a baseline across
+ * the row too.
+ */
+const DiffCardHeader = ({
+    title,
+    baseline,
+    subtitle,
+    onCapture,
+    isCapturing = false,
+}: {
+    title: string;
+    baseline: string;
+    subtitle?: string;
+    onCapture?: () => void;
+    isCapturing?: boolean;
+}) => (
+    <div className="min-h-14 border-b border-(--border) bg-(--soft) px-3 py-2">
+        {/* The button sits outside the wrapping title row so a long title + baseline can never push
+            it onto a line of its own. */}
+        <div className="flex items-start gap-2">
+            <div className="flex min-w-0 flex-1 flex-col">
+                <div className="flex flex-wrap items-baseline gap-2">
+                    <span className="text-[13px] font-extrabold text-(--fg)">{title}</span>
+                    <span className="text-[11px] text-(--soft-fg)">{baseline}</span>
+                </div>
+                {subtitle !== undefined && <p className="mt-0.5 text-[11px] text-(--soft-fg)">{subtitle}</p>}
+            </div>
+            {onCapture !== undefined && <CaptureButton onCapture={onCapture} isCapturing={isCapturing} />}
+        </div>
+    </div>
+);
 
 function PlayerComparisonTable({
     title,
@@ -309,90 +236,113 @@ function PlayerComparisonTable({
         return max;
     }, [sorted, diffKey]);
 
+    // Before the early return: hooks cannot be called conditionally.
+    const { ref, onCapture, isCapturing } = useSectionCapture(captureFileName('performance', title));
+
     if (sorted.length === 0) return <></>;
 
     const fmt = formatValue ?? formatNumber;
     return (
-        <section className="flex max-w-3xl flex-col gap-2">
-            <h2 className="text-base font-semibold">
-                {title}{' '}
-                <span className="text-xs font-normal text-gray-500">
-                    {baselineLabel}: {fmt(guildValue)}
-                </span>
-            </h2>
-            {subtitle !== undefined && <p className="-mt-1 text-xs text-gray-500">{subtitle}</p>}
-            <div className="flex flex-col gap-0.5">
+        <TableCard ref={ref}>
+            <DiffCardHeader
+                title={title}
+                baseline={`${baselineLabel}: ${fmt(guildValue)}`}
+                subtitle={subtitle}
+                onCapture={onCapture}
+                isCapturing={isCapturing}
+            />
+            <div role="table" aria-label={title} className="flex flex-col py-0.5">
                 {sorted.map(row => (
-                    <div key={row.userId} className="grid grid-cols-[8rem_1fr_4rem_4rem] items-center gap-2 text-xs">
-                        <span className="truncate" title={row.displayName}>
+                    <div role="row" key={row.userId} className={DIFF_ROW}>
+                        <span role="cell" className="truncate" title={row.displayName}>
                             {row.displayName}
                         </span>
-                        <CenteredBar value={row[diffKey]} maxAbs={maxAbs} />
+                        {/* The bar is a picture of the percentage printed beside it, so it is not a
+                            cell of its own. */}
+                        <span aria-hidden="true">
+                            <CenteredBar value={row[diffKey]} maxAbs={maxAbs} />
+                        </span>
                         <span
+                            role="cell"
                             className={`text-right tabular-nums ${
-                                row[diffKey] >= 0 ? 'text-emerald-500' : 'text-red-500'
+                                row[diffKey] >= 0 ? 'text-(--success)' : 'text-(--danger)'
                             }`}>
                             {formatPct(row[diffKey])}
                         </span>
-                        <span className="text-right text-gray-500 tabular-nums">{fmt(row[valueKey])}</span>
+                        <span role="cell" className="text-right text-(--soft-fg) tabular-nums">
+                            {fmt(row[valueKey])}
+                        </span>
                     </div>
                 ))}
             </div>
-        </section>
+        </TableCard>
     );
 }
 
 function PlayerMaxVsGuildTable({ title, rows, guildMax }: { title: string; rows: PlayerRow[]; guildMax: number }) {
     const sorted = useMemo(() => rows.toSorted((a, b) => b.max - a.max), [rows]);
+    const { ref, onCapture, isCapturing } = useSectionCapture(captureFileName('performance', title));
+
     if (sorted.length === 0) return <></>;
     return (
-        <section className="flex max-w-3xl flex-col gap-2">
-            <h2 className="text-base font-semibold">
-                {title} <span className="text-xs font-normal text-gray-500">Guild: {formatNumber(guildMax)}</span>
-            </h2>
-            <div className="flex flex-col gap-0.5">
+        <TableCard ref={ref}>
+            <DiffCardHeader
+                title={title}
+                baseline={`Guild max: ${formatNumber(guildMax)}`}
+                onCapture={onCapture}
+                isCapturing={isCapturing}
+            />
+            <div className="flex flex-col py-0.5">
                 {sorted.map(row => {
                     const widthPct = guildMax > 0 ? (row.max / guildMax) * 100 : 0;
                     return (
-                        <div
-                            key={row.userId}
-                            className="grid grid-cols-[8rem_1fr_4rem_4rem] items-center gap-2 text-xs">
+                        <div key={row.userId} className={DIFF_ROW}>
                             <span className="truncate" title={row.displayName}>
                                 {row.displayName}
                             </span>
-                            <div className="relative h-3 w-full overflow-hidden rounded-sm bg-gray-100 dark:bg-gray-800">
+                            <div className="relative h-3 w-full overflow-hidden rounded-sm bg-(--fg)/12">
                                 <div
-                                    className="absolute inset-y-0 left-0 bg-blue-400"
+                                    className="absolute inset-y-0 left-0 bg-(--primary)"
                                     style={{ width: `${widthPct}%` }}
                                 />
                             </div>
-                            <span className="text-right text-gray-500 tabular-nums">{widthPct.toFixed(0)}%</span>
-                            <span className="text-right text-gray-500 tabular-nums">{formatNumber(row.max)}</span>
+                            {/* A proportion of the guild best, not a diff — so it stays muted
+                                rather than picking up the green/red of the diff tables. */}
+                            <span className="text-right text-(--soft-fg) tabular-nums">{widthPct.toFixed(0)}%</span>
+                            <span className="text-right text-(--soft-fg) tabular-nums">{formatNumber(row.max)}</span>
                         </div>
                     );
                 })}
             </div>
-        </section>
+        </TableCard>
     );
 }
 
 function bgForUnit(unit: PlayerBossUnit): string {
-    if (unit.hits === 0) return 'bg-gray-400 opacity-60';
-    if (unit.ratio >= 1.2) return 'bg-emerald-500';
-    if (unit.ratio >= 0.8) return 'bg-amber-500';
-    return 'bg-red-500';
+    if (unit.hits === 0) return 'bg-(--fg)/25';
+    if (unit.ratio >= 1.2) return 'bg-(--success)';
+    if (unit.ratio >= 0.8) return 'bg-(--warning)';
+    return 'bg-(--danger)';
 }
 
 function BreakdownUnitChip({ unit }: { unit: PlayerBossUnit }) {
     const label = `${unit.isBoss ? 'Boss' : 'Prime'} ${Rarity[unit.rarity]}`;
-    const tooltip =
+    const detail =
         unit.hits === 0
-            ? `${label} — no hits`
-            : `${label} — player ${formatNumber(unit.playerAvg)} vs guild ${formatNumber(unit.guildAvg)} (${(unit.ratio * 100).toFixed(0)}%)`;
+            ? 'no hits'
+            : `player ${formatNumber(unit.playerAvg)} vs guild ${formatNumber(unit.guildAvg)} (${(unit.ratio * 100).toFixed(0)}%)`;
+
+    // One tooltip, not two. The chip used to carry a native `title` while the portrait inside it
+    // rendered its own MUI tooltip, so a hover fired both. The rich text wins and absorbs the unit
+    // name the portrait's tooltip was supplying.
     return (
-        <span className={`inline-flex shrink-0 rounded-full p-0.5 ${bgForUnit(unit)}`} title={tooltip}>
-            <span className="inline-flex rounded-full bg-white p-0.5 dark:bg-gray-900">
-                <EncounterIcon unitId={unit.unitId} size={20} />
+        <span className={`inline-flex shrink-0 rounded-full p-0.5 ${bgForUnit(unit)}`}>
+            <span className="inline-flex rounded-full bg-(--card) p-0.5">
+                <EncounterIcon
+                    unitId={unit.unitId}
+                    size={20}
+                    tooltip={`${unitDisplayLabel(unit.unitId)} — ${label}, ${detail}`}
+                />
             </span>
         </span>
     );
@@ -407,34 +357,18 @@ function efficiencyCategory(unit: PlayerBossUnit): number {
 
 type BreakdownMode = 'efficiency' | 'encounter' | 'per-unit';
 
-const BREAKDOWN_MODES: Array<{ id: BreakdownMode; label: string }> = [
-    { id: 'efficiency', label: 'By token efficiency' },
-    { id: 'encounter', label: 'By encounter order' },
-    { id: 'per-unit', label: 'Per boss/prime' },
+const BREAKDOWN_MODES: Array<{ value: BreakdownMode; label: string }> = [
+    { value: 'efficiency', label: 'By token efficiency' },
+    { value: 'encounter', label: 'By encounter order' },
+    { value: 'per-unit', label: 'Per boss/prime' },
 ];
 
-function ModeToggle({ mode, onChange }: { mode: BreakdownMode; onChange: (m: BreakdownMode) => void }) {
-    return (
-        <div className="flex gap-1 rounded border border-gray-200 p-0.5 text-xs dark:border-gray-700">
-            {BREAKDOWN_MODES.map(option => (
-                <button
-                    key={option.id}
-                    type="button"
-                    onClick={() => {
-                        onChange(option.id);
-                    }}
-                    className={[
-                        'rounded px-2 py-1 transition-colors',
-                        mode === option.id
-                            ? 'bg-blue-600 text-white dark:bg-blue-500'
-                            : 'text-gray-600 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800',
-                    ].join(' ')}>
-                    {option.label}
-                </button>
-            ))}
-        </div>
-    );
-}
+/** What each mode sorts by, shown once in the card header instead of per-mode paragraphs. */
+const BREAKDOWN_HINTS: Record<BreakdownMode, string> = {
+    efficiency: 'Green first, then amber, then red. Unhit units hidden.',
+    encounter: 'Ascending rarity/set. Within a set: left prime → right prime → boss. Grey = no hits.',
+    'per-unit': 'One row per boss/prime, descending rarity/set.',
+};
 
 function PlayerRowEfficiency({ breakdown }: { breakdown: PlayerBossBreakdown }) {
     const units = breakdown.units
@@ -447,7 +381,7 @@ function PlayerRowEfficiency({ breakdown }: { breakdown: PlayerBossBreakdown }) 
         });
     if (units.length === 0) return <></>;
     return (
-        <div className="grid grid-cols-[8rem_1fr] items-center gap-2 text-xs">
+        <div className="grid grid-cols-[8rem_1fr] items-center gap-2 px-2.5 py-0.5 text-xs even:bg-(--neutral)/50 hover:bg-(--primary)/10">
             <span className="truncate" title={breakdown.displayName}>
                 {breakdown.displayName}
             </span>
@@ -471,7 +405,7 @@ function PlayerRowEncounter({ breakdown }: { breakdown: PlayerBossBreakdown }) {
         return ai - bi;
     });
     return (
-        <div className="grid grid-cols-[8rem_1fr] items-center gap-2 text-xs">
+        <div className="grid grid-cols-[8rem_1fr] items-center gap-2 px-2.5 py-0.5 text-xs even:bg-(--neutral)/50 hover:bg-(--primary)/10">
             <span className="truncate" title={breakdown.displayName}>
                 {breakdown.displayName}
             </span>
@@ -491,7 +425,7 @@ function PlayerNameList({
     players: { userId: string; displayName: string; ratio: number }[];
     colorClass: string;
 }) {
-    if (players.length === 0) return <span className="text-gray-400">—</span>;
+    if (players.length === 0) return <span className="text-(--soft-fg)">—</span>;
     return (
         <div className="flex flex-wrap gap-x-2 gap-y-0.5">
             {players.map(player => (
@@ -508,26 +442,16 @@ function PlayerNameList({
 
 function PerUnitRow({ bucket }: { bucket: UnitPlayerBuckets }) {
     return (
-        <div className="grid grid-cols-[8rem_1fr_1fr_1fr] items-start gap-2 border-t border-gray-100 py-1 text-xs dark:border-gray-800">
+        <div className="grid grid-cols-[8rem_1fr_1fr_1fr] items-start gap-2 px-2.5 py-1 text-xs even:bg-(--neutral)/50 hover:bg-(--primary)/10">
             <span className="flex items-center gap-1.5">
                 <EncounterIcon unitId={bucket.unitId} size={22} />
                 <RarityIcon rarity={bucket.rarity} />
-                <span className="text-gray-500 dark:text-gray-400">{bucket.isBoss ? 'Boss' : 'Prime'}</span>
+                <span className="text-(--soft-fg)">{bucket.isBoss ? 'Boss' : 'Prime'}</span>
             </span>
-            <PlayerNameList players={bucket.greenPlayers} colorClass="text-emerald-500" />
-            <PlayerNameList players={bucket.yellowPlayers} colorClass="text-amber-500" />
-            <PlayerNameList players={bucket.redPlayers} colorClass="text-red-500" />
+            <PlayerNameList players={bucket.greenPlayers} colorClass="text-(--success)" />
+            <PlayerNameList players={bucket.yellowPlayers} colorClass="text-(--warning)" />
+            <PlayerNameList players={bucket.redPlayers} colorClass="text-(--danger)" />
         </div>
-    );
-}
-
-function ColorBandLegend() {
-    return (
-        <p className="text-xs text-zinc-500">
-            <span className="font-medium text-emerald-500">Green</span>: ≥ +20% of guild avg ·{' '}
-            <span className="font-medium text-amber-500">Amber</span>: within ±20% ·{' '}
-            <span className="font-medium text-red-500">Red</span>: &lt; −20%
-        </p>
     );
 }
 
@@ -542,57 +466,46 @@ function PlayerBossBreakdownTable({
     mode: BreakdownMode;
     onModeChange: (m: BreakdownMode) => void;
 }) {
+    const { ref, onCapture, isCapturing } = useSectionCapture(captureFileName('performance', 'boss-breakdown'));
+
     if (breakdowns.length === 0) return <></>;
     return (
-        <section className="flex max-w-4xl flex-col gap-2">
-            <div className="flex flex-wrap items-baseline justify-between gap-2">
-                <h2 className="text-base font-semibold">Per-player boss breakdown</h2>
-                <ModeToggle mode={mode} onChange={onModeChange} />
-            </div>
-            {mode === 'efficiency' && (
-                <>
-                    <ColorBandLegend />
-                    <p className="text-xs text-zinc-500">
-                        Sorted green-first, then amber, then red. Unhit units hidden.
-                    </p>
-                    <div className="flex flex-col gap-1">
-                        {breakdowns.map(breakdown => (
-                            <PlayerRowEfficiency key={breakdown.userId} breakdown={breakdown} />
-                        ))}
-                    </div>
-                </>
-            )}
-            {mode === 'encounter' && (
-                <>
-                    <ColorBandLegend />
-                    <p className="text-xs text-zinc-500">
-                        Ascending rarity/set. Within a set: left prime → right prime → boss. Grey = no hits.
-                    </p>
-                    <div className="flex flex-col gap-1">
-                        {breakdowns.map(breakdown => (
-                            <PlayerRowEncounter key={breakdown.userId} breakdown={breakdown} />
-                        ))}
-                    </div>
-                </>
-            )}
-            {mode === 'per-unit' && (
-                <>
-                    <ColorBandLegend />
-                    <p className="text-xs text-zinc-500">One row per boss/prime, descending rarity/set.</p>
-                    <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-semibold text-zinc-500 uppercase">
-                        <span>Unit</span>
-                        <span className="text-emerald-500">≥ +20%</span>
-                        <span className="text-amber-500">±20%</span>
-                        <span className="text-red-500">&lt; −20%</span>
-                    </div>
-                    <div className="flex flex-col">
+        <TableCard ref={ref}>
+            <TableCardHeader>
+                <span className="text-[13px] font-extrabold text-(--fg)">Per-player boss breakdown</span>
+                {/* One colour-band note, in the header — it was previously repeated verbatim in all
+                    three mode branches. */}
+                <span className="text-[11px] text-(--soft-fg)">
+                    <span className="font-semibold text-(--success)">Green</span> ≥ +20% of guild avg ·{' '}
+                    <span className="font-semibold text-(--warning)">Amber</span> within ±20% ·{' '}
+                    <span className="font-semibold text-(--danger)">Red</span> &lt; −20%
+                </span>
+                <div className="ml-auto flex items-center gap-2">
+                    <Segmented<BreakdownMode> value={mode} onChange={onModeChange} options={BREAKDOWN_MODES} />
+                    <CaptureButton onCapture={onCapture} isCapturing={isCapturing} />
+                </div>
+            </TableCardHeader>
+            <div className="flex flex-col gap-1 px-3 py-2">
+                <p className="text-[11px] text-(--soft-fg)">{BREAKDOWN_HINTS[mode]}</p>
+                {mode === 'efficiency' &&
+                    breakdowns.map(breakdown => <PlayerRowEfficiency key={breakdown.userId} breakdown={breakdown} />)}
+                {mode === 'encounter' &&
+                    breakdowns.map(breakdown => <PlayerRowEncounter key={breakdown.userId} breakdown={breakdown} />)}
+                {mode === 'per-unit' && (
+                    <>
+                        <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
+                            <span>Unit</span>
+                            <span className="text-(--success)">≥ +20%</span>
+                            <span className="text-(--warning)">±20%</span>
+                            <span className="text-(--danger)">&lt; −20%</span>
+                        </div>
                         {buckets.map(bucket => (
                             <PerUnitRow key={bucket.unitKey} bucket={bucket} />
                         ))}
-                    </div>
-                </>
-            )}
-        </section>
+                    </>
+                )}
+            </div>
+        </TableCard>
     );
 }
 
@@ -605,7 +518,7 @@ function UnitLabel({ row }: { row: UnitRow }) {
         <span className="flex min-w-0 items-center gap-1.5">
             <EncounterIcon unitId={row.unitId} size={20} />
             <RarityIcon rarity={row.rarity} />
-            <span className="truncate text-gray-500 dark:text-gray-400" title={bossPrefixDisplayNames[row.bossPrefix]}>
+            <span className="truncate text-(--soft-fg)" title={bossPrefixDisplayNames[row.bossPrefix]}>
                 {row.isBoss ? '' : '↳ '}
                 {bossPrefixDisplayNames[row.bossPrefix] ?? row.bossPrefix}
             </span>
@@ -636,7 +549,7 @@ function UnitComparisonTable({
     if (rows.length === 0) return <></>;
 
     return (
-        <section className="flex max-w-3xl flex-col gap-2">
+        <section className="flex flex-col gap-2">
             <h2 className="text-base font-semibold">{title}</h2>
             <div className="flex flex-col gap-0.5">
                 {rows.map(row => (
@@ -645,11 +558,11 @@ function UnitComparisonTable({
                         <CenteredBar value={row[diffKey]} maxAbs={maxAbs} />
                         <span
                             className={`text-right tabular-nums ${
-                                row[diffKey] >= 0 ? 'text-emerald-500' : 'text-red-500'
+                                row[diffKey] >= 0 ? 'text-(--success)' : 'text-(--danger)'
                             }`}>
                             {formatPct(row[diffKey])}
                         </span>
-                        <span className="text-right text-gray-500 tabular-nums">{formatNumber(row[valueKey])}</span>
+                        <span className="text-right text-(--soft-fg) tabular-nums">{formatNumber(row[valueKey])}</span>
                     </div>
                 ))}
             </div>
@@ -660,7 +573,7 @@ function UnitComparisonTable({
 function UnitMaxVsGuildTable({ title, rows }: { title: string; rows: UnitRow[] }) {
     if (rows.length === 0) return <></>;
     return (
-        <section className="flex max-w-3xl flex-col gap-2">
+        <section className="flex flex-col gap-2">
             <h2 className="text-base font-semibold">{title}</h2>
             <div className="flex flex-col gap-0.5">
                 {rows.map(row => {
@@ -670,14 +583,14 @@ function UnitMaxVsGuildTable({ title, rows }: { title: string; rows: UnitRow[] }
                             key={row.unitKey}
                             className="grid grid-cols-[10rem_1fr_4rem_4rem] items-center gap-2 text-xs">
                             <UnitLabel row={row} />
-                            <div className="relative h-3 w-full overflow-hidden rounded-sm bg-gray-100 dark:bg-gray-800">
+                            <div className="relative h-3 w-full overflow-hidden rounded-sm bg-(--fg)/12">
                                 <div
-                                    className="absolute inset-y-0 left-0 bg-blue-400"
+                                    className="absolute inset-y-0 left-0 bg-(--primary)"
                                     style={{ width: `${widthPct}%` }}
                                 />
                             </div>
-                            <span className="text-right text-gray-500 tabular-nums">{widthPct.toFixed(0)}%</span>
-                            <span className="text-right text-gray-500 tabular-nums">{formatNumber(row.max)}</span>
+                            <span className="text-right text-(--soft-fg) tabular-nums">{widthPct.toFixed(0)}%</span>
+                            <span className="text-right text-(--soft-fg) tabular-nums">{formatNumber(row.max)}</span>
                         </div>
                     );
                 })}
@@ -689,7 +602,7 @@ function UnitMaxVsGuildTable({ title, rows }: { title: string; rows: UnitRow[] }
 function UnitDistributionTable({ rows }: { rows: UnitRow[] }) {
     if (rows.length === 0) return <></>;
     return (
-        <section className="flex max-w-3xl flex-col gap-2">
+        <section className="flex flex-col gap-2">
             <h2 className="text-base font-semibold">Hit distribution (per row: 0 → guild max for that boss)</h2>
             <div className="flex flex-col gap-0.5">
                 {rows.map(row => (
@@ -697,13 +610,13 @@ function UnitDistributionTable({ rows }: { rows: UnitRow[] }) {
                         key={row.unitKey}
                         className="grid grid-cols-[10rem_3.5rem_1fr_3rem] items-center gap-2 text-xs">
                         <UnitLabel row={row} />
-                        <span className="text-right text-gray-500 tabular-nums">{formatNumber(row.guildMax)}</span>
+                        <span className="text-right text-(--soft-fg) tabular-nums">{formatNumber(row.guildMax)}</span>
                         <DistributionRow
                             nonKillHits={row.playerNonKillHits}
                             killHits={row.playerKillHits}
                             maxValue={row.guildMax}
                         />
-                        <span className="text-right text-gray-500 tabular-nums">
+                        <span className="text-right text-(--soft-fg) tabular-nums">
                             {row.playerNonKillHits.length + row.playerKillHits.length}
                         </span>
                     </div>
@@ -716,10 +629,10 @@ function UnitDistributionTable({ rows }: { rows: UnitRow[] }) {
 function UnitDistributionVsAvgTable({ rows }: { rows: UnitRow[] }) {
     if (rows.length === 0) return <></>;
     return (
-        <section className="flex max-w-3xl flex-col gap-2">
+        <section className="flex flex-col gap-2">
             <h2 className="text-base font-semibold">
                 Hit distribution vs guild average{' '}
-                <span className="text-xs font-normal text-gray-500">(amber line = guild avg, centred)</span>
+                <span className="text-xs font-normal text-(--soft-fg)">(amber line = guild avg, centred)</span>
             </h2>
             <div className="flex flex-col gap-0.5">
                 {rows.map(row => (
@@ -727,13 +640,13 @@ function UnitDistributionVsAvgTable({ rows }: { rows: UnitRow[] }) {
                         key={row.unitKey}
                         className="grid grid-cols-[10rem_3.5rem_1fr_3rem] items-center gap-2 text-xs">
                         <UnitLabel row={row} />
-                        <span className="text-right text-gray-500 tabular-nums">{formatNumber(row.guildAvg)}</span>
+                        <span className="text-right text-(--soft-fg) tabular-nums">{formatNumber(row.guildAvg)}</span>
                         <CenteredDistributionRow
                             nonKillHits={row.playerNonKillHits}
                             killHits={row.playerKillHits}
                             center={row.guildAvg}
                         />
-                        <span className="text-right text-gray-500 tabular-nums">
+                        <span className="text-right text-(--soft-fg) tabular-nums">
                             {row.playerNonKillHits.length + row.playerKillHits.length}
                         </span>
                     </div>
@@ -742,11 +655,6 @@ function UnitDistributionVsAvgTable({ rows }: { rows: UnitRow[] }) {
         </section>
     );
 }
-
-const bossIconFor = (prefix: string) => ({
-    icon: bossPrefixRoundIconMap[prefix],
-    name: bossPrefixDisplayNames[prefix] ?? prefix,
-});
 
 // ---------------------------------------------------------------------------
 // PerformanceTab
@@ -868,40 +776,42 @@ export const PerformanceTab = ({
     const unitPlayerBuckets = useMemo(() => buildUnitPlayerBuckets(playerBreakdowns), [playerBreakdowns]);
     const [breakdownMode, setBreakdownMode] = useState<BreakdownMode>('efficiency');
 
+    /** A prime's own name — `unitDisplayLabel` resolves the prime before the boss family, so the
+     *  mapped-icon path no longer labels every prime with its boss's name. */
     const primeIconFor = (unitId: string) => {
+        const name = unitDisplayLabel(unitId);
         const direct = unitRoundIconMap[unitId];
-        if (direct !== undefined) {
-            const familyName = bossPrefixDisplayNames[/^(GuildBoss\d+)/.exec(unitId)?.[1] ?? ''] ?? unitId;
-            return { icon: direct, name: familyName };
-        }
+        if (direct !== undefined) return { icon: direct, name };
         const match = /(?:MiniBoss|Minion)\d+(.+)/.exec(unitId);
         if (match) {
             const id = match[1].charAt(0).toLowerCase() + match[1].slice(1);
             const character = CharactersService.getUnit(id);
             if (character?.roundIcon !== undefined && character.roundIcon !== '') {
-                return { icon: character.roundIcon, name: character.name };
+                return { icon: character.roundIcon, name };
             }
         }
-        return { icon: undefined, name: unitId.replace(/^GuildBoss\d+(MiniBoss|Minion)\d+/, '') };
+        return { icon: undefined, name };
     };
 
     if (currentData === undefined && seasonHistory === undefined) {
-        return <p className="text-sm text-gray-500">Loading…</p>;
+        return <p className="text-sm text-(--soft-fg)">Loading…</p>;
     }
 
     if (isHistorical) {
         // Rarity/Boss/Prime filters need per-hit data, so they're live-only. Historical supports the
         // full-guild Performance Index (no player) and the four per-player graphs (player selected).
         return (
-            <div className="flex flex-col gap-4">
+            <div className="flex flex-col gap-3.5">
                 {selectedPlayerId !== undefined && (
-                    <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                        <ExcludeKillsCheckbox value={excludeKills} onChange={setExcludeKills} />
-                    </div>
+                    <FilterBar>
+                        <FilterGroup label="Exclude kills">
+                            <Switch isSelected={excludeKills} onChange={setExcludeKills} />
+                        </FilterGroup>
+                    </FilterBar>
                 )}
                 {selectedPlayerId === undefined ? (
                     historyPerformanceRows.length === 0 ? (
-                        <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
+                        <div className="flex items-center justify-center rounded-xl border border-(--border) bg-(--soft) py-12 text-sm text-(--soft-fg)">
                             No boss performance recorded for this season.
                         </div>
                     ) : (
@@ -917,7 +827,7 @@ export const PerformanceTab = ({
                         />
                     )
                 ) : historyPlayerView.length === 0 ? (
-                    <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
+                    <div className="flex items-center justify-center rounded-xl border border-(--border) bg-(--soft) py-12 text-sm text-(--soft-fg)">
                         No boss/prime data recorded for this player this season.
                     </div>
                 ) : (
@@ -942,73 +852,85 @@ export const PerformanceTab = ({
 
     return (
         <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
-                <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
-                <PrefixFilterGroup
+            <FilterBar>
+                <RarityFilter selected={selectedRarities} onChange={handleRarityChange} />
+                <PrefixFilter
                     label="Bosses"
                     available={availableBossPrefixes}
                     selected={effectiveBossPrefixes}
                     onChange={setSelectedBossPrefixes}
                     iconFor={bossIconFor}
+                    allowEmpty
                 />
-                <PrefixFilterGroup
+                <PrefixFilter
                     label="Primes"
                     available={availablePrimeUnitIds}
                     selected={effectivePrimeUnitIds}
                     onChange={setSelectedPrimeUnitIds}
                     iconFor={primeIconFor}
+                    allowEmpty
                 />
-                <ExcludeKillsCheckbox value={excludeKills} onChange={setExcludeKills} />
-            </div>
+                <FilterGroup label="Exclude kills">
+                    <Switch isSelected={excludeKills} onChange={setExcludeKills} />
+                </FilterGroup>
+                <span className="ml-auto text-xs text-(--soft-fg)">
+                    {guildView.rows.length} players · {guildView.totalHits} non-kill hits
+                </span>
+            </FilterBar>
 
             {filteredEntries.length === 0 ? (
-                <div className="flex items-center justify-center rounded border border-gray-200 bg-gray-50 py-12 text-sm text-gray-500 dark:border-gray-700 dark:bg-gray-900">
+                <div className="flex items-center justify-center rounded-xl border border-(--border) bg-(--soft) py-12 text-sm text-(--soft-fg)">
                     No entries match the current filters.
                 </div>
             ) : selectedPlayerId === undefined ? (
-                <div className="flex flex-col gap-6">
-                    <PlayerComparisonTable
-                        title="Performance Index"
-                        subtitle="Weighted average hit/token vs guild avg/token."
-                        baselineLabel="Baseline"
-                        rows={guildView.rows}
-                        diffKey="performanceDiffPct"
-                        valueKey="performanceIndex"
-                        guildValue={1}
-                        formatValue={value => value.toFixed(2)}
-                    />
-                    <PlayerComparisonTable
-                        title="Average damage vs guild"
-                        baselineLabel="Guild avg"
-                        rows={guildView.rows}
-                        diffKey="avgDiffPct"
-                        valueKey="avg"
-                        guildValue={guildView.guildAvg}
-                    />
-                    <PlayerComparisonTable
-                        title="Total damage vs fair share"
-                        subtitle="Raw total damage normalized by per-player fair share."
-                        baselineLabel={`Fair share (guild ${formatNumber(guildView.guildTotal)})`}
-                        rows={guildView.rows}
-                        diffKey="totalDiffPct"
-                        valueKey="total"
-                        guildValue={guildView.fairShare}
-                    />
-                    <PlayerComparisonTable
-                        title="Equivalent guild-average hits"
-                        subtitle="Weighted total contribution."
-                        baselineLabel={`Fair share (${guildView.totalHits} hits)`}
-                        rows={guildView.rows}
-                        diffKey="equivalentDiffPct"
-                        valueKey="equivalentHits"
-                        guildValue={guildView.fairShareHits}
-                        formatValue={value => value.toFixed(1)}
-                    />
-                    <PlayerMaxVsGuildTable
-                        title="Max damage (% of guild max)"
-                        rows={guildView.rows}
-                        guildMax={guildView.guildMax}
-                    />
+                <div className="flex flex-col gap-3.5">
+                    {/* Two-up so Performance Index and Average damage are comparable without
+                        scrolling — these five were previously five full screens in one column. */}
+                    <CardGrid min={430} gap="gap-3.5">
+                        <PlayerComparisonTable
+                            title="Performance Index"
+                            subtitle="Weighted average hit/token vs guild avg/token."
+                            baselineLabel="Baseline"
+                            rows={guildView.rows}
+                            diffKey="performanceDiffPct"
+                            valueKey="performanceIndex"
+                            guildValue={1}
+                            formatValue={value => value.toFixed(2)}
+                        />
+                        <PlayerComparisonTable
+                            title="Average damage vs guild"
+                            baselineLabel="Guild avg"
+                            rows={guildView.rows}
+                            diffKey="avgDiffPct"
+                            valueKey="avg"
+                            guildValue={guildView.guildAvg}
+                        />
+                        <PlayerComparisonTable
+                            title="Total damage vs fair share"
+                            subtitle="Raw total damage normalized by per-player fair share."
+                            baselineLabel={`Fair share (guild ${formatNumber(guildView.guildTotal)})`}
+                            rows={guildView.rows}
+                            diffKey="totalDiffPct"
+                            valueKey="total"
+                            guildValue={guildView.fairShare}
+                        />
+                        <PlayerComparisonTable
+                            title="Equivalent guild-average hits"
+                            subtitle="Weighted total contribution."
+                            baselineLabel={`Fair share (${guildView.totalHits} hits)`}
+                            rows={guildView.rows}
+                            diffKey="equivalentDiffPct"
+                            valueKey="equivalentHits"
+                            guildValue={guildView.fairShareHits}
+                            formatValue={value => value.toFixed(1)}
+                        />
+                        <PlayerMaxVsGuildTable
+                            title="Max damage (% of guild max)"
+                            rows={guildView.rows}
+                            guildMax={guildView.guildMax}
+                        />
+                    </CardGrid>
+                    {/* Full width: the chip rows are wide and the per-unit mode has four columns. */}
                     <PlayerBossBreakdownTable
                         breakdowns={playerBreakdowns}
                         buckets={unitPlayerBuckets}
