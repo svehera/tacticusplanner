@@ -493,7 +493,7 @@ function PlayerBossBreakdownTable({
                     breakdowns.map(breakdown => <PlayerRowEncounter key={breakdown.userId} breakdown={breakdown} />)}
                 {mode === 'per-unit' && (
                     <>
-                        <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
+                        <div className="grid grid-cols-[8rem_1fr_1fr_1fr] gap-2 px-2.5 text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
                             <span>Unit</span>
                             <span className="text-(--success)">≥ +20%</span>
                             <span className="text-(--warning)">±20%</span>
@@ -518,7 +518,9 @@ function UnitLabel({ row }: { row: UnitRow }) {
         <span className="flex min-w-0 items-center gap-1.5">
             <EncounterIcon unitId={row.unitId} size={20} />
             <RarityIcon rarity={row.rarity} />
-            <span className="truncate text-(--soft-fg)" title={bossPrefixDisplayNames[row.bossPrefix]}>
+            <span
+                className="truncate text-(--soft-fg)"
+                title={bossPrefixDisplayNames[row.bossPrefix] ?? row.bossPrefix}>
                 {row.isBoss ? '' : '↳ '}
                 {bossPrefixDisplayNames[row.bossPrefix] ?? row.bossPrefix}
             </span>

@@ -788,7 +788,12 @@ export interface LoopSummary {
     leastEfficient: { tier: string; bossName: string; value: number } | undefined;
     /** Encounters (loop × boss) where at least one prime went un-attacked. */
     primesSkipped: number;
-    /** A rung whose primes were skipped on every loop that reached it — a standing habit, not a slip. */
+    /**
+     * A rung where at least one prime went un-attacked on *every* loop that reached it — a standing
+     * habit, not a slip. Deliberately not "both primes": a guild that clears the right prime every
+     * loop and never touches the left one has exactly the habit this is meant to surface, and the
+     * same "at least one" reading as {@link LoopSummary.primesSkipped}.
+     */
     alwaysSkippedTier: string;
 }
 

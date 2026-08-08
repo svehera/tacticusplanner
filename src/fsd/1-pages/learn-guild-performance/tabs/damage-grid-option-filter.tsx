@@ -3,6 +3,8 @@ import type { IDoesFilterPassParams } from 'ag-grid-community';
 import { useGridFilter, type CustomFilterProps } from 'ag-grid-react';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 
+import { Button } from '@/fsd/5-shared/ui';
+
 import { optionFilterPasses } from './damage-tab.utils';
 
 /**
@@ -41,7 +43,13 @@ export const OptionFilter = ({
             const value = getValue(node);
             if (typeof value === 'string' && value !== '') seen.add(value);
         });
-        setOptions([...seen].toSorted((a, b) => a.localeCompare(b)));
+        const next = [...seen].toSorted((a, b) => a.localeCompare(b));
+        // Publish only a genuinely different list. AG Grid does not promise a stable `getValue`
+        // identity, and this runs from an effect that depends on it — setting a fresh array every
+        // time would re-render, hand back a new `getValue`, and run the effect again forever.
+        setOptions(current =>
+            current.length === next.length && current.every((value, index) => value === next[index]) ? current : next
+        );
     }, [api, getValue]);
 
     // Row data arrives after mount and changes with the season, so the option list is rebuilt on
@@ -75,12 +83,14 @@ export const OptionFilter = ({
 
     return (
         <div className="flex max-h-64 min-w-44 flex-col gap-1 overflow-y-auto p-2">
-            <button
-                type="button"
-                onClick={() => onModelChange(allSelected ? [] : null)}
-                className="mb-1 cursor-pointer self-start text-[11px] font-semibold text-(--primary) hover:underline">
+            <Button
+                appearance="plain"
+                intent="primary"
+                size="extra-small"
+                className="mb-1 self-start"
+                onPress={() => onModelChange(allSelected ? [] : null)}>
                 {allSelected ? 'Clear all' : 'Select all'}
-            </button>
+            </Button>
             {options.map(option => (
                 <label key={option} className="flex cursor-pointer items-center gap-2 text-xs text-(--fg)">
                     <input

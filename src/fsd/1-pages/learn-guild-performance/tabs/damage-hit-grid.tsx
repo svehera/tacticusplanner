@@ -149,7 +149,12 @@ const COLUMNS: ColDef<HitRow>[] = [
         field: 'damage',
         width: 120,
         filter: 'agNumberColumnFilter',
-        cellClass: params => [numberCell, getDamageColorClass(params.data!.entry, params.data!.avgDamage)].join(' '),
+        // `data` is absent while the grid is loading or showing no-rows, and `cellClass` runs then
+        // too — every renderer in this file guards for the same reason.
+        cellClass: params =>
+            params.data === undefined
+                ? numberCell
+                : [numberCell, getDamageColorClass(params.data.entry, params.data.avgDamage)].join(' '),
         valueFormatter: ({ value }) => (typeof value === 'number' ? value.toLocaleString() : '—'),
     },
     {

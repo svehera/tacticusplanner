@@ -235,10 +235,19 @@ export const TokenUsageTab = ({ tokenUsageData, currentData, names, selectedPlay
                     {colorMode === 'threshold' ? (
                         <>
                             <LegendSwatch className="bg-(--success)/45" label={`${highThreshold}+`} />
-                            <LegendSwatch
-                                className="bg-(--warning)/50"
-                                label={`${lowThreshold}–${highThreshold - 1}`}
-                            />
+                            {/* Both steppers can land on the same number, which leaves no amber band
+                                at all — `tokens >= highThreshold` already claims it. Listing it then
+                                printed an inverted range like "23–22" for a colour nothing uses. */}
+                            {lowThreshold < highThreshold && (
+                                <LegendSwatch
+                                    className="bg-(--warning)/50"
+                                    label={
+                                        lowThreshold === highThreshold - 1
+                                            ? String(lowThreshold)
+                                            : `${lowThreshold}–${highThreshold - 1}`
+                                    }
+                                />
+                            )}
                             <LegendSwatch className="bg-(--danger)/40" label={`under ${lowThreshold}`} />
                         </>
                     ) : (

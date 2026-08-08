@@ -332,6 +332,7 @@ function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hide
 
 function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }) {
     const [isOpen, setIsOpen] = useState(false);
+    const bodyId = useId();
     if (content.text === '') return <></>;
     return (
         <div className="overflow-hidden rounded-xl border border-(--border)">
@@ -343,6 +344,8 @@ function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }
                     onClick={() => {
                         setIsOpen(open => !open);
                     }}
+                    aria-expanded={isOpen}
+                    aria-controls={bodyId}
                     className="flex cursor-pointer items-center gap-1.5 text-sm font-extrabold text-(--fg)">
                     <ChevronDown className={`size-4 transition-transform ${isOpen ? '' : '-rotate-90'}`} />
                     Season summary — text
@@ -363,7 +366,7 @@ function PlayerSummaryTextSection({ content }: { content: PlayerSummaryContent }
                 </button>
             </div>
             {isOpen && (
-                <div className="border-t border-(--border) px-3 py-2">
+                <div id={bodyId} className="border-t border-(--border) px-3 py-2">
                     <pre className="max-h-96 overflow-auto font-mono text-xs whitespace-pre">{content.text}</pre>
                 </div>
             )}

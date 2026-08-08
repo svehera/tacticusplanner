@@ -35,7 +35,20 @@ const ENTER_DELAY_MS = 700;
 const TouchTooltip: FC<Props> = ({ title, children }) => {
     const [open, setOpen] = useState(false);
     const close = useCallback(() => setOpen(false), []);
-    const toggle = useCallback(() => setOpen(value => !value), []);
+
+    /**
+     * The tap handler goes on the child, not on `Tooltip`. MUI does forward its own extra props to
+     * the cloned child, but as `{ ...other, ...children.props }` — so a child that already has an
+     * `onClick` (a button, a filter chip) silently wins and the tooltip never opens on tap.
+     * Composing here keeps both.
+     */
+    const childProps = children.props as HTMLAttributes<HTMLElement>;
+    const trigger = cloneElement(children, {
+        onClick: (event: MouseEvent<HTMLElement>) => {
+            childProps.onClick?.(event);
+            setOpen(value => !value);
+        },
+    } as Partial<HTMLAttributes<HTMLElement>>);
 
     return (
         <ClickAwayListener onClickAway={close} mouseEvent="onMouseUp">
@@ -48,9 +61,8 @@ const TouchTooltip: FC<Props> = ({ title, children }) => {
                 disableFocusListener
                 disableHoverListener
                 disableTouchListener
-                onClick={toggle}
                 title={title}>
-                {children}
+                {trigger}
             </Tooltip>
         </ClickAwayListener>
     );
