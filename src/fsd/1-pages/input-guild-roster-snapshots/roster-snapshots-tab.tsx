@@ -1,7 +1,7 @@
 /* eslint-disable import-x/no-internal-modules */
 /* eslint-disable boundaries/element-types */
 import { Dialog, DialogActions, DialogContent, DialogTitle } from '@mui/material';
-import { useCallback, useContext, useEffect, useMemo, useState } from 'react';
+import { useCallback, useContext, useEffect, useMemo, useRef, useState } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
 
@@ -271,6 +271,21 @@ export const RosterSnapshotsTab = ({ members, memberStates, onLoadMembers }: Ros
         () => (snapshotMeta?.length ?? 0) > 0 && snapshotMeta!.every(s => s.memberIds.length === 0),
         [snapshotMeta]
     );
+
+    // Land on "newest snapshot vs current rosters" once the metadata arrives, mirroring what
+    // handleLeftSnapshotSelect does — including the member load that "Current Rosters" depends on.
+    // Guarded by a ref so clearing either dropdown afterwards sticks.
+    const hasAutoSelected = useRef(false);
+    useEffect(() => {
+        if (hasAutoSelected.current || needsMigration) return;
+        const newest = sortedMeta.at(-1);
+        if (!newest) return;
+
+        hasAutoSelected.current = true;
+        setLeftSnapshotId(newest.snapshotId);
+        setRightSnapshotId('current');
+        if (members === undefined) void onLoadMembers();
+    }, [sortedMeta, needsMigration, members, onLoadMembers]);
 
     // Members still in the guild — used to skip history fetches for departed (emeritus) players,
     // since the backend rejects player-chain lookups for anyone no longer a member.
