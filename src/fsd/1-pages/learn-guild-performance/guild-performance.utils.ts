@@ -235,8 +235,8 @@ const RARITY_CODE: Record<Rarity, string> = {
 
 /**
  * The difficulty tier label — `M1`, `L5` — where the digit is the 1-based `set` index within the
- * rarity. This is how the game names a rung of the boss ladder, and the Overview panel, the
- * Leaderboard band pill, the Discord summary and the Loops ladder all have to agree on it.
+ * rarity. This is how the game names a boss on the ladder, and the Overview panel, the Leaderboard
+ * band pill, the Discord summary and the Loops board all have to agree on it.
  *
  * Older aggregates omit `set`, in which case this degrades to the bare rarity letter (`M`) rather
  * than inventing a tier number.
@@ -428,7 +428,7 @@ function latestMatchingEntry(
  * HP for a boss we've just advanced to (the previous boss just died). Any match here can only be
  * a stale record from an earlier Legendary/Mythic loop around this exact `unitId` — a fresher hit
  * on this boss would itself have been the globally-latest boss entry, so it's shown at full HP
- * rather than mistaken for "still dead this lap."
+ * rather than mistaken for "still dead this loop."
  */
 function resolveAdvancedBossHp(entries: TacticusGuildRaidEntry[], unitId: string, openedAfter: number): BossDisplayHp {
     const latest = latestMatchingEntry(entries, unitId, openedAfter);

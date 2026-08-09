@@ -12,21 +12,24 @@ import { tierLabel } from '../guild-performance.utils';
 
 import {
     bossOutcome,
+    buildBossDetail,
     buildBossLoopRows,
+    buildLoopBoard,
     buildLoopLadder,
     buildLoopSummary,
     buildMetricView,
-    cellDisplayValue,
     efficiencyOf,
     primeOutcome,
     resolveLadderPrimes,
+    type BarScale,
     type BossLoopRow,
+    type LoopMetric,
     type LoopTokenCounts,
 } from './loops-tab.utils';
 
-// Rungs must use *distinct* GuildBoss families: `buildBossLoopRows` groups by `prefix:rarity`, so two
+// Bosses must use *distinct* GuildBoss families: `buildBossLoopRows` groups by `prefix:rarity`, so two
 // sets of the same family in one rarity would collapse into a single column. Real ladders never do
-// that — each rung is a different boss. (Across rarities they can repeat, which is fine.)
+// that — every slot is a different family. (Across rarities they can repeat, which is fine.)
 const L1_BOSS = 'GuildBoss7Boss1AstraRogaldorn';
 const L1_LEFT = 'GuildBoss7MiniBoss1AstraPrimarisPsy';
 const L1_RIGHT = 'GuildBoss7MiniBoss2AstraOrdnance';
@@ -192,7 +195,7 @@ describe('outcome derivation', () => {
     it('treats a prime absent from the export as skipped, not as a missing slot', () => {
         // Every boss has exactly two primes, so nothing in the export means nobody hit it. Suppressing
         // this would hide the single most interesting thing the tab can show: a standing habit of
-        // skipping a rung's primes.
+        // skipping a boss's primes.
         const ladder = buildLoopLadder(buildBossLoopRows([boss({ remainingHp: 0 })]), tierOf, NOW);
         const cell = ladder.rows[0].cells[0]!;
 
@@ -224,7 +227,7 @@ describe('resolveLadderPrimes', () => {
 });
 
 describe('ladder ordering', () => {
-    it('returns rungs in ascending fight order', () => {
+    it('returns bosses in ascending fight order', () => {
         const rows = buildBossLoopRows([
             boss({ unitId: M1_BOSS, rarity: Rarity.Mythic, set: 0, remainingHp: 0 }),
             boss({ unitId: L2_BOSS, rarity: Rarity.Legendary, set: 1, remainingHp: 0 }),
@@ -236,7 +239,7 @@ describe('ladder ordering', () => {
     });
 });
 
-/** Loop 1 clears both rungs; loop 2 reaches only the first and leaves its boss alive. */
+/** Loop 1 clears both bosses; loop 2 reaches only the first and leaves its boss alive. */
 const ladderEntries = () => [
     boss({ set: 0, remainingHp: 0, completedOn: START + DAY }),
     leftPrime({ set: 0, remainingHp: 0, completedOn: START + DAY }),
@@ -245,14 +248,14 @@ const ladderEntries = () => [
     boss({ set: 0, remainingHp: 700, completedOn: START + 8 * DAY }),
 ];
 
-/** Two rungs of different sizes, so efficiency has something to normalise. */
+/** Two bosses of different sizes, so efficiency has something to normalise. */
 const metricEntries = () => [
     boss({ set: 0, remainingHp: 0, maxHp: 20_000_000, userId: 'a' }),
     leftPrime({ set: 0, remainingHp: 0, userId: 'b' }),
     boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, userId: 'a' }),
 ];
 
-/** A big cheap rung and a small expensive one, plus an unfinished loop. */
+/** A big cheap boss and a small expensive one, plus an unfinished loop. */
 const summaryEntries = () => [
     boss({ set: 0, remainingHp: 0, maxHp: 30_000_000, completedOn: START + DAY }),
     boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, completedOn: START + 3 * DAY }),
@@ -268,7 +271,7 @@ const summaryOf = () => {
 };
 
 describe('buildLoopLadder', () => {
-    it('pivots to one row per loop and one column per rung', () => {
+    it('pivots to one row per loop and one column per boss', () => {
         const ladder = buildLoopLadder(buildBossLoopRows(ladderEntries()), tierOf, NOW);
 
         expect(ladder.ladder).toHaveLength(2);
@@ -276,7 +279,7 @@ describe('buildLoopLadder', () => {
         expect(ladder.hasOutcomeData).toBe(true);
     });
 
-    it('marks the unfinished loop running and leaves unreached rungs undefined', () => {
+    it('marks the unfinished loop running and leaves unreached bosses undefined', () => {
         const [loop1, loop2] = buildLoopLadder(buildBossLoopRows(ladderEntries()), tierOf, NOW).rows;
 
         expect(loop1.isRunning).toBe(false);
@@ -307,18 +310,17 @@ describe('buildLoopLadder', () => {
 });
 
 describe('metric view', () => {
-    it('shows boss tokens in the cell but aggregates all three', () => {
+    it('aggregates the whole encounter, not just the boss', () => {
         const built = metricLadder();
-        const cell = built.rows[0].cells[0]!;
 
-        expect(cellDisplayValue('tokens', cell, built.ladder[0])).toBe(1); // boss only
-        expect(cell.loop.total).toBe(2); // boss + left prime
-        expect(buildMetricView(built, 'tokens').loopValues[0]).toBe(3); // whole loop
+        expect(built.rows[0].cells[0]!.loop.boss).toBe(1);
+        expect(built.rows[0].cells[0]!.loop.total).toBe(2); // boss + left prime
+        expect(buildMetricView(built, 'tokens').loopValues[0]).toBe(3); // whole loop, both bosses
     });
 
     it('normalises efficiency by boss HP, so the bigger boss is not automatically the worst', () => {
         const built = metricLadder();
-        // Rung L1: 2 tokens on a 20M boss = 1.0 per 10M. Rung L2: 1 token on a 10M boss = 1.0.
+        // Boss L1: 2 tokens on a 20M boss = 1.0 per 10M. Boss L2: 1 token on a 10M boss = 1.0.
         expect(efficiencyOf(built.rows[0].cells[0]!.loop, built.ladder[0].bossMaxHp)).toBeCloseTo(1, 5);
         expect(efficiencyOf(built.rows[0].cells[1]!.loop, built.ladder[1].bossMaxHp)).toBeCloseTo(1, 5);
     });
@@ -338,7 +340,7 @@ describe('metric view', () => {
         const built = metricLadder();
 
         expect(buildMetricView(built, 'tokens').columns[0].seasonValue).toBe(2);
-        // Two distinct members hit rung L1, so its peak is 2 rather than a sum across loops.
+        // Two distinct members hit boss L1, so its peak is 2 rather than a sum across loops.
         expect(buildMetricView(built, 'players').columns[0].seasonValue).toBe(2);
     });
 });
@@ -361,7 +363,7 @@ function historicalLoop(loopNumber: number, boss: number): LoopTokenCounts {
     };
 }
 
-/** Rung L1 reached on both loops, rung L2 only on the first — the season ended part-way round. */
+/** Boss L1 reached on both loops, boss L2 only on the first — the season ended part-way round. */
 const historicalRows = (): BossLoopRow[] => [
     {
         bossPrefix: 'GuildBoss7',
@@ -401,13 +403,13 @@ describe('buildLoopSummary', () => {
         expect(summaryOf().summary.nowAt).toBe('L1');
     });
 
-    it('picks the costliest rung per unit of HP, not the biggest boss', () => {
+    it('picks the costliest boss per unit of HP, not the biggest boss', () => {
         // L1 is the 30M boss at 1 token (0.33/10M); L2 is 10M at 1 token (1.0/10M). L2 is worse
         // despite being a third of the size.
         expect(summaryOf().summary.leastEfficient?.tier).toBe('L2');
     });
 
-    it('names a rung whose primes were skipped on every loop', () => {
+    it('names a boss whose primes were skipped on every loop', () => {
         expect(summaryOf().summary.alwaysSkippedTier).toBe('L1');
     });
 
@@ -419,7 +421,7 @@ describe('buildLoopSummary', () => {
 
     it('leaves out the loop a past season ended mid-way through', () => {
         // A historical season carries no HP, so nothing is ever "running" — completeness has to come
-        // from whether every rung was reached. Loop 2 stopped at the first rung and must not be
+        // from whether every boss was reached. Loop 2 stopped at the first boss and must not be
         // averaged in as if the guild had finished it.
         const built = buildLoopLadder(historicalRows(), tierOf, NOW);
 
@@ -427,5 +429,188 @@ describe('buildLoopSummary', () => {
         expect(built.rows.map(row => row.isComplete)).toEqual([true, false]);
         expect(buildLoopSummary(built, tierOf, bossNameOf).loopsCompleted).toBe(1);
         expect(buildLoopSummary(built, tierOf, bossNameOf).tokensPerLoop).toBe(built.rows[0].total);
+    });
+});
+
+/**
+ * A cheap boss that moves (1 → 2) beside an expensive one that does not (4), and a second loop that
+ * stops before reaching the expensive boss. Per-boss scaling, gaps and outcomes all need this shape.
+ */
+const boardEntries = () => [
+    boss({ set: 0, remainingHp: 0 }), // loop 1 · L1 · 1 token · killed
+    boss({ unitId: L2_BOSS, set: 1, remainingHp: 700 }),
+    boss({ unitId: L2_BOSS, set: 1, remainingHp: 500 }),
+    boss({ unitId: L2_BOSS, set: 1, remainingHp: 200 }),
+    boss({ unitId: L2_BOSS, set: 1, remainingHp: 0 }), // loop 1 · L2 · 4 tokens · killed
+    boss({ set: 0, remainingHp: 500 }), // set drops back to 0 → loop 2
+    boss({ set: 0, remainingHp: 300 }), // loop 2 · L1 · 2 tokens · still alive
+];
+
+const boardOf = (metric: LoopMetric = 'tokens', scale: BarScale = 'boss') => {
+    const ladder = buildLoopLadder(buildBossLoopRows(boardEntries()), tierOf, NOW);
+    return { ladder, board: buildLoopBoard(ladder, buildMetricView(ladder, metric), scale) };
+};
+
+describe('buildLoopBoard', () => {
+    it('scales each boss to its own busiest loop, never to the board', () => {
+        const [cheap, expensive] = boardOf().board.bosses;
+
+        expect(cheap.bars.map(bar => bar.value)).toEqual([1, 2]);
+        // Scaled to the board's max of 4, this boss's own doubling would read 25% → 50% and the whole
+        // row would look like a flat stub next to the expensive one. That was the original complaint.
+        expect(cheap.bars.map(bar => bar.percent)).toEqual([50, 100]);
+        expect(expensive.bars[0].percent).toBe(100);
+    });
+
+    it('leaves a gap where a loop never reached the boss', () => {
+        const { board } = boardOf();
+        const [, expensive] = board.bosses;
+
+        // Every loop keeps a slot, so a boss's bars stay aligned under the loop columns.
+        expect(board.loops.map(loop => loop.loopNumber)).toEqual([1, 2]);
+        expect(expensive.bars).toHaveLength(2);
+        expect(expensive.bars[1].value).toBeUndefined();
+        expect(expensive.bars[1].percent).toBe(0);
+        expect(expensive.bars[1].outcome).toBeUndefined();
+        expect(expensive.reached).toBe(1);
+    });
+
+    it('carries the boss outcome, so a boss still standing can be marked', () => {
+        expect(boardOf().board.bosses[0].bars.map(bar => bar.outcome)).toEqual(['kill', 'alive']);
+    });
+
+    it('follows the metric switcher rather than fixing on tokens', () => {
+        expect(boardOf('tokens').board.bosses[0].bars.map(bar => bar.value)).toEqual([1, 2]);
+        // One member did all of it, so the same two loops read 1 and 1 under Players.
+        expect(boardOf('players').board.bosses[0].bars.map(bar => bar.value)).toEqual([1, 1]);
+    });
+
+    it('leaves a genuine zero at zero rather than lifting it to the visibility floor', () => {
+        const { board } = boardOf('bombs');
+
+        expect(board.bosses[0].bars.map(bar => bar.value)).toEqual([0, 0]);
+        expect(board.bosses[0].bars.map(bar => bar.percent)).toEqual([0, 0]);
+    });
+
+    it('keeps a real but tiny value visible', () => {
+        // 1 against 40 is 2.5% of the track — under a pixel at any sane row width, so it is floored.
+        const rows: BossLoopRow[] = [{ ...historicalRows()[0], loops: [historicalLoop(1, 40), historicalLoop(2, 1)] }];
+        const ladder = buildLoopLadder(rows, tierOf, NOW);
+        const { percent } = buildLoopBoard(ladder, buildMetricView(ladder, 'tokens'), 'boss').bosses[0].bars[1];
+
+        expect(percent).toBeGreaterThan((1 / 40) * 100);
+        expect(percent).toBeLessThan(15);
+    });
+});
+
+describe('buildBossDetail', () => {
+    it('totals one boss across every loop that reached it', () => {
+        const { ladder } = boardOf();
+        const detail = buildBossDetail(ladder, 0);
+
+        expect(detail.reached).toBe(2);
+        expect(detail.bossTotal).toBe(3); // 1 + 2
+        expect(detail.total).toBe(3); // no primes were fought on this boss
+        expect(detail.kills).toBe(1); // loop 2 left it standing
+        expect(detail.rangeLabel).toBe('1–2 per loop');
+    });
+
+    it('keeps one entry per loop, so the dialog matches the board it opened from', () => {
+        const { ladder } = boardOf();
+        const detail = buildBossDetail(ladder, 1);
+
+        expect(detail.loops).toHaveLength(ladder.rows.length);
+        expect(detail.loops[1].cell).toBeUndefined();
+        expect(detail.loops[1].percent).toBe(0);
+        expect(detail.reached).toBe(1);
+    });
+
+    it('peaks members rather than summing them', () => {
+        const detail = buildBossDetail(boardOf().ladder, 0);
+
+        // The same member hit this boss on both loops. A sum would report two people.
+        expect(detail.reached).toBe(2);
+        expect(detail.peakPlayers).toBe(1);
+    });
+
+    it('reports a past season as carrying no outcomes', () => {
+        const detail = buildBossDetail(buildLoopLadder(historicalRows(), tierOf, NOW), 0);
+
+        expect(detail.hasOutcomeData).toBe(false);
+        expect(detail.total).toBe(7); // 3 + 4
+        expect(detail.rangeLabel).toBe('3–4 per loop');
+    });
+});
+
+describe('board bar segments', () => {
+    it('splits the fill into left prime, boss and right prime', () => {
+        // 2 boss + 1 left + 1 right = 4 tokens → 25 / 50 / 25.
+        const ladder = buildLoopLadder(
+            buildBossLoopRows([
+                boss({ set: 0 }),
+                boss({ set: 0, remainingHp: 0 }),
+                leftPrime({ set: 0, remainingHp: 0 }),
+                rightPrime({ set: 0, remainingHp: 0 }),
+            ]),
+            tierOf,
+            NOW
+        );
+        const { segments } = buildLoopBoard(ladder, buildMetricView(ladder, 'tokens'), 'boss').bosses[0].bars[0];
+
+        expect(segments).toEqual({ left: 25, boss: 50, right: 25 });
+    });
+
+    it('sums the three segments to the whole fill wherever anything was spent', () => {
+        const { board } = boardOf();
+
+        for (const boss of board.bosses) {
+            for (const bar of boss.bars) {
+                if (bar.segments === undefined) continue;
+                expect(bar.segments.left + bar.segments.boss + bar.segments.right).toBeCloseTo(100, 10);
+            }
+        }
+    });
+
+    it('leaves an unreached loop with nothing to split', () => {
+        const [, expensive] = boardOf().board.bosses;
+
+        expect(expensive.bars[1].segments).toBeUndefined();
+    });
+
+    it('splits on tokens regardless of the selected metric, since the view decides whether to draw it', () => {
+        // The composition is a fact about the encounter, not a reading of the metric, so it is always
+        // computed — `BoardBarCell` is what withholds it outside Tokens.
+        expect(boardOf('players').board.bosses[0].bars[0].segments).toEqual({ left: 0, boss: 100, right: 0 });
+    });
+});
+
+describe('bar scale switch', () => {
+    it('measures each boss against itself in per-boss mode', () => {
+        const [cheap] = boardOf().board.bosses;
+
+        // L1 costs 1 then 2; its own busiest loop is 2, so the heavier loop fills the track.
+        expect(cheap.bars.map(bar => bar.percent)).toEqual([50, 100]);
+    });
+
+    it('measures every boss against the whole board when asked', () => {
+        const ladder = buildLoopLadder(buildBossLoopRows(boardEntries()), tierOf, NOW);
+        const view = buildMetricView(ladder, 'tokens');
+        const [cheap, expensive] = buildLoopBoard(ladder, view, 'board').bosses;
+
+        // Board max is L2's 4. L1's 1 and 2 now read against that, not against its own 2.
+        expect(cheap.bars.map(bar => bar.percent)).toEqual([25, 50]);
+        // The boss holding the board max still fills its track, so the two scales agree there.
+        expect(expensive.bars[0].percent).toBe(100);
+    });
+
+    it('leaves an unreached loop empty under either scale', () => {
+        const ladder = buildLoopLadder(buildBossLoopRows(boardEntries()), tierOf, NOW);
+        const view = buildMetricView(ladder, 'tokens');
+
+        for (const scale of ['boss', 'board'] as const) {
+            const [, expensive] = buildLoopBoard(ladder, view, scale).bosses;
+            expect(expensive.bars[1].value).toBeUndefined();
+            expect(expensive.bars[1].percent).toBe(0);
+        }
     });
 });
