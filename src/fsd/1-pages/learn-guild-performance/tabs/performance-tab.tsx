@@ -481,7 +481,12 @@ function PlayerBossBreakdownTable({
                     <span className="font-semibold text-(--danger)">Red</span> &lt; −20%
                 </span>
                 <div className="ml-auto flex items-center gap-2">
-                    <Segmented<BreakdownMode> value={mode} onChange={onModeChange} options={BREAKDOWN_MODES} />
+                    <Segmented<BreakdownMode>
+                        label="Breakdown"
+                        value={mode}
+                        onChange={onModeChange}
+                        options={BREAKDOWN_MODES}
+                    />
                     <CaptureButton onCapture={onCapture} isCapturing={isCapturing} />
                 </div>
             </TableCardHeader>

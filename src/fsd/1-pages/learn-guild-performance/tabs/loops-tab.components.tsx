@@ -38,6 +38,7 @@ import {
 /** 10px, not 7px: below that a 2px ring and a 1px dashed ring are the same smudge and only colour reads. */
 const DOT_BASE = 'inline-flex h-2.5 w-2.5 shrink-0 items-center justify-center rounded-full text-[8px] leading-none';
 
+/** One class set per outcome. Shape carries the meaning; colour only reinforces it. */
 const DOT_STATE: Record<Outcome, string> = {
     kill: 'bg-(--success) font-extrabold text-(--success-fg)',
     alive: 'border-2 border-(--warning)',
@@ -51,8 +52,10 @@ export const Dot = ({ outcome, title }: { outcome: Outcome; title?: string }) =>
     </span>
 );
 
+/** Which of a boss's two optional side bosses a value belongs to. */
 type PrimeSide = 'left' | 'right';
 
+/** Single letter per side, so a value reads without consulting the legend. */
 const PRIME_MARKER: Record<PrimeSide, string> = { left: 'L', right: 'R' };
 
 /**
@@ -97,6 +100,7 @@ export const PrimeValue = ({
 // the board it needs no inline geometry at all.
 // ---------------------------------------------------------------------------
 
+/** Hover text for one loop's bar: the whole encounter in words, whatever the switcher is showing. */
 const barTitle = (bar: BoardBar, column: BossLoopRow, metric: LoopMetric, hasOutcomeData: boolean): string => {
     if (bar.cell === undefined || bar.value === undefined) return `Loop ${bar.loopNumber}: not reached`;
     if (metric !== 'tokens') {
@@ -130,6 +134,7 @@ const barTitle = (bar: BoardBar, column: BossLoopRow, metric: LoopMetric, hasOut
  */
 const bossBarFill = (isStanding: boolean) => (isStanding ? 'bg-(--warning-accent)' : 'bg-(--fg)/55');
 
+/** {@link bossBarFill} for a bar, reading the standing/dead state off its own outcome. */
 const bossFill = (bar: BoardBar) => bossBarFill(bar.outcome === 'alive');
 
 /**
@@ -144,6 +149,7 @@ const drawnSegments = (segments: BoardSegments, bossClassName: string) =>
         { key: 'right', width: segments.right, className: 'bg-(--chart-1)' },
     ].filter(segment => segment.width > 0);
 
+/** The card header's accessible name: the season figure, the loops behind it, and what opening it does. */
 const bossAriaLabel = (
     boss: BoardBoss,
     tier: string,
@@ -345,6 +351,7 @@ const CardLoopRow = ({
     );
 };
 
+/** One boss: a clickable header, a bar per loop on a shared baseline, and the season figures. */
 const BossCard = ({
     boss,
     column,
@@ -413,6 +420,7 @@ const BossCard = ({
     </TableCard>
 );
 
+/** The tab's main view — every boss as a small multiple, so trends read side by side. */
 export const SeasonCards = ({
     board,
     ladder,
@@ -469,6 +477,7 @@ export const SeasonCards = ({
 // Boss dialog — one ladder column, in full
 // ---------------------------------------------------------------------------
 
+/** The loop's number in the dialog, chipped and badged while that loop is still running. */
 const LoopBadge = ({ loop }: { loop: BossLoopDetail }) => (
     <span className="flex flex-col items-center gap-1">
         <span
@@ -485,6 +494,7 @@ const LoopBadge = ({ loop }: { loop: BossLoopDetail }) => (
     </span>
 );
 
+/** One loop of the open boss, in full: boss spend and bar, both primes, HP, bombs, members, efficiency. */
 const LoopDetailRow = ({ loop, detail }: { loop: BossLoopDetail; detail: BossDetail }) => {
     const { cell } = loop;
     const { column, hasOutcomeData } = detail;
@@ -557,6 +567,7 @@ const LoopDetailRow = ({ loop, detail }: { loop: BossLoopDetail; detail: BossDet
     );
 };
 
+/** One ladder column in full, always framed in tokens — see the section note above {@link BossDetail}. */
 export const BossDialog = ({
     detail,
     tier,

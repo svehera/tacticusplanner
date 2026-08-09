@@ -23,6 +23,7 @@ import { buildHitRows, type HitRow } from './damage-tab.utils';
 // Cell renderers
 // ---------------------------------------------------------------------------
 
+/** Boss or prime portrait, its rarity and its tier label. */
 const TargetCell = ({ data }: ICellRendererParams<HitRow>) => {
     if (!data) return <></>;
     // The raid/bomb token icon moved out to its own sortable Type column.
@@ -35,6 +36,7 @@ const TargetCell = ({ data }: ICellRendererParams<HitRow>) => {
     );
 };
 
+/** Raid token or bomb — its own sortable column rather than an icon buried in the target cell. */
 const TypeCell = ({ data }: ICellRendererParams<HitRow>) => {
     if (!data) return <></>;
     return (
@@ -50,6 +52,7 @@ const TypeCell = ({ data }: ICellRendererParams<HitRow>) => {
     );
 };
 
+/** The heroes and machine of war taken into the hit. */
 const CompCell = ({ data }: ICellRendererParams<HitRow>) => {
     if (!data) return <></>;
     const comp = [
@@ -86,6 +89,7 @@ const HpCell = ({ data }: ICellRendererParams<HitRow>) => {
 // Column definitions
 // ---------------------------------------------------------------------------
 
+/** Right-aligned tabular figures, so magnitudes line up down a column. */
 const numberCell = 'text-right tabular-nums';
 
 /**
@@ -113,6 +117,7 @@ const formatTime = ({ value }: ValueFormatterParams<HitRow, number>) =>
           })
         : '—';
 
+/** Column definitions. Widths are explicit and nothing flexes — see the note in {@link HitGrid}. */
 const COLUMNS: ColDef<HitRow>[] = [
     {
         // No column flexes: a flexed column absorbs every spare pixel on its own, so the slack is

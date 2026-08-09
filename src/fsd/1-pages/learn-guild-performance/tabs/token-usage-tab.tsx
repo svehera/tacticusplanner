@@ -192,6 +192,7 @@ export const TokenUsageTab = ({ tokenUsageData, currentData, names, selectedPlay
             <FilterBar>
                 <FilterGroup label="Colour by">
                     <Segmented<ColorMode>
+                        label="Colour by"
                         value={colorMode}
                         onChange={mode => {
                             cachedColorMode = mode;

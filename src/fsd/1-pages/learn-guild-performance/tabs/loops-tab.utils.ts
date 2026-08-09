@@ -195,6 +195,11 @@ export function buildBossLoopRows(entries: TacticusGuildRaidEntry[]): BossLoopRo
         // minions work here too — same unitId, different index.
         const primeUnitByEncIndex = new Map<number, string>();
         for (const entry of primeEntries) {
+            // A boss has exactly two primes, so a further index is anomalous data rather than a third
+            // slot. Filtering here and not just at the lookups is what keeps `hasPrimes` honest: it
+            // reads this map's size, and an unsupported index alone would have claimed primes exist
+            // while both slots stayed undefined.
+            if (entry.encounterIndex !== LEFT_PRIME_INDEX && entry.encounterIndex !== RIGHT_PRIME_INDEX) continue;
             if (!primeUnitByEncIndex.has(entry.encounterIndex)) {
                 primeUnitByEncIndex.set(entry.encounterIndex, entry.unitId);
             }

@@ -617,6 +617,7 @@ export const DamageTab = ({
                     {HIT_FILTER_GROUPS.map(group => (
                         <FilterGroup key={group.key} label={group.label}>
                             <Segmented
+                                label={group.label}
                                 value={hitFilters[group.key]}
                                 onChange={next => setHitFilters(current => ({ ...current, [group.key]: next }))}
                                 options={group.options}

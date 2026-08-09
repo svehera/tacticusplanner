@@ -26,13 +26,20 @@ import {
     type LoopSummary,
 } from './loops-tab.utils';
 
+/** `L1` / `M3` — the rung's short name, injected into the utils so they stay presentation-free. */
 const tierOf = (row: BossLoopRow) => tierLabel(row.rarity, row.set);
+
+/** The boss's display name, e.g. `Magnus` rather than `GuildBoss9Boss1ThousMagnus`. */
 const bossNameOf = (row: BossLoopRow) => unitDisplayLabel(row.bossUnitId);
+
+/** Identifies a ladder column across rebuilds. Both builders group rows on exactly this pair. */
+const bossKeyOf = (row: BossLoopRow) => `${row.bossPrefix}:${row.rarity}`;
 
 // ---------------------------------------------------------------------------
 // Legend — one bar holding the metric switcher and the colour key
 // ---------------------------------------------------------------------------
 
+/** One key entry: a swatch or dot beside what it means. */
 const LegendItem = ({ swatch, children }: { swatch: ReactNode; children: ReactNode }) => (
     <span className="flex items-center gap-1.5 text-xs text-(--soft-fg)">
         {swatch}
@@ -62,11 +69,13 @@ const SCALE_OPTIONS: { value: BarScale; label: string }[] = [
     { value: 'boss', label: 'Per boss' },
 ];
 
+/** What each scale answers, spelled out — the label alone doesn't say what a bar length means. */
 const SCALE_EXPLANATION: Record<BarScale, string> = {
     boss: 'Each card against its own busiest loop — shows whether that boss is getting cheaper.',
     board: 'Every bar against the busiest loop anywhere — lengths compare between cards.',
 };
 
+/** The tab's control bar: metric switcher, bar scale, and the key to the bar segments and dots. */
 const Legend = ({
     metric,
     onMetric,
@@ -87,6 +96,7 @@ const Legend = ({
         <div className="overflow-hidden rounded-xl border border-(--border) bg-(--overlay)">
             <div className="flex flex-wrap items-center gap-3 border-b border-(--border) px-4 py-2.5">
                 <Segmented
+                    label="Metric"
                     options={available.map(entry => ({ value: entry.value, label: entry.label }))}
                     value={metric}
                     onChange={onMetric}
@@ -103,7 +113,7 @@ const Legend = ({
                     means, which is a different question from what the number counts. */}
                 <span className="flex items-center gap-2">
                     <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">Bar scale</span>
-                    <Segmented options={SCALE_OPTIONS} value={scale} onChange={onScale} />
+                    <Segmented label="Bar scale" options={SCALE_OPTIONS} value={scale} onChange={onScale} />
                 </span>
                 <span className="text-xs text-(--soft-fg)">{SCALE_EXPLANATION[scale]}</span>
                 {/* Keys the board's split bar. Tokens only — the other three metrics draw one solid
@@ -146,6 +156,7 @@ const skippedCaption = (summary: LoopSummary): string => {
     return 'Every boss met at reduced strength';
 };
 
+/** The season's verdict in four tiles. Fixed, not driven by the switcher — see the section note. */
 const SummaryTiles = ({ summary, hasOutcomeData }: { summary: LoopSummary; hasOutcomeData: boolean }) => {
     const capture = useSectionCapture<HTMLElement>(captureFileName('guild-loops-summary'));
     const pace = summary.daysPerLoop === undefined ? undefined : `${summary.daysPerLoop.toFixed(1)} days per loop`;
@@ -213,7 +224,8 @@ const EmptyState = ({ children }: { children: ReactNode }) => (
     </div>
 );
 
-export const LoopsTab = ({
+export /** Loops tab: how many tokens each rung of the boss ladder cost, loop by loop. */
+const LoopsTab = ({
     currentData,
     seasonHistory,
     selectedSeason,
@@ -228,8 +240,13 @@ export const LoopsTab = ({
      *  in every card, so the grid reads as one chart rather than as several unrelated ones. Switch to
      *  per boss to give a cheap boss's own trend the full width of its card. */
     const [scale, setScale] = useState<BarScale>('board');
-    /** Ladder column index of the boss shown in the detail dialog. */
-    const [openBoss, setOpenBoss] = useState<number>();
+    /**
+     * The boss whose dialog is open, held as `bossPrefix:rarity` rather than as a column index.
+     * Both builders group on exactly that pair, so it is unique within a ladder and stable across
+     * one. An index is neither: changing season swaps the ladder underneath a held index, which
+     * still resolves — to a different boss — so the dialog silently retitled itself.
+     */
+    const [openBossKey, setOpenBossKey] = useState<string>();
 
     // A historical season reads per-loop counts straight from the aggregate; the live season derives
     // them from raw per-hit entries.
@@ -267,13 +284,12 @@ export const LoopsTab = ({
     const view = useMemo(() => buildMetricView(ladder, effectiveMetric), [ladder, effectiveMetric]);
     const board = useMemo(() => buildLoopBoard(ladder, view, scale), [ladder, view, scale]);
 
-    // Bounds-checked rather than cleared on season change: switching season swaps the ladder under a
-    // held index, and an out-of-range one would otherwise open a dialog on a boss that isn't there.
-    const bossDetail = useMemo(
-        () =>
-            openBoss === undefined || openBoss >= ladder.ladder.length ? undefined : buildBossDetail(ladder, openBoss),
-        [ladder, openBoss]
-    );
+    // Derived, not cleared by an effect: a key that no longer names a boss in this ladder simply
+    // resolves to no dialog, which covers the season swap and a shrinking ladder alike.
+    const bossDetail = useMemo(() => {
+        const index = ladder.ladder.findIndex(row => bossKeyOf(row) === openBossKey);
+        return index === -1 ? undefined : buildBossDetail(ladder, index);
+    }, [ladder, openBossKey]);
 
     if (currentData === undefined && seasonHistory === undefined) {
         return <p className="text-sm text-(--soft-fg)">Loading…</p>;
@@ -310,7 +326,7 @@ export const LoopsTab = ({
                 hasOutcomeData={ladder.hasOutcomeData}
                 tierOf={tierOf}
                 bossNameOf={bossNameOf}
-                onOpenBoss={setOpenBoss}
+                onOpenBoss={columnIndex => setOpenBossKey(bossKeyOf(ladder.ladder[columnIndex]))}
             />
             <SummaryTiles summary={summary} hasOutcomeData={ladder.hasOutcomeData} />
             {bossDetail !== undefined && (
@@ -318,7 +334,7 @@ export const LoopsTab = ({
                     detail={bossDetail}
                     tier={tierOf(bossDetail.column)}
                     bossName={bossNameOf(bossDetail.column)}
-                    onClose={() => setOpenBoss(undefined)}
+                    onClose={() => setOpenBossKey(undefined)}
                 />
             )}
         </div>
