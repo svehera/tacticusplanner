@@ -8,7 +8,7 @@ import { CaptureButton, CardGrid, ReadinessTile, SectionHeader } from '../guild-
 import { captureFileName, useSectionCapture } from '../guild-performance.hook';
 import { tierLabel, unitDisplayLabel } from '../guild-performance.utils';
 
-import { BossDialog, Dot, SeasonBoard } from './loops-tab.components';
+import { BossDialog, Dot, SeasonCards } from './loops-tab.components';
 import {
     buildBossDetail,
     buildBossLoopRows,
@@ -50,21 +50,21 @@ const BarSwatch = ({ className }: { className: string }) => (
 );
 
 /**
- * Both labels name a scope, and both complete the "Bar scale" label into a phrase — "Bar scale:
- * whole board", "Bar scale: per boss".
+ * Both labels name a scope, and both complete the "Bar scale" label into a phrase — "Bar scale: all
+ * bosses", "Bar scale: per boss". The default sits first.
  *
- * Not "This boss": nothing is selected on a board of eight rows, so "this" points at nothing. Not
+ * Not "This boss": nothing is selected in a grid of cards, so "this" points at nothing. Not
  * "relative"/"absolute" either — that is the right distinction in the wrong vocabulary, and would
  * send the reader to the explanation before the control meant anything.
  */
 const SCALE_OPTIONS: { value: BarScale; label: string }[] = [
-    { value: 'board', label: 'Whole board' },
+    { value: 'board', label: 'All bosses' },
     { value: 'boss', label: 'Per boss' },
 ];
 
 const SCALE_EXPLANATION: Record<BarScale, string> = {
-    board: 'Every bar against the busiest loop on the board — lengths compare between bosses.',
-    boss: 'Each boss against its own busiest loop — shows whether that boss is getting cheaper.',
+    boss: 'Each card against its own busiest loop — shows whether that boss is getting cheaper.',
+    board: 'Every bar against the busiest loop anywhere — lengths compare between cards.',
 };
 
 const Legend = ({
@@ -224,8 +224,9 @@ export const LoopsTab = ({
     selectedSeason: number | undefined;
 }) => {
     const [metric, setMetric] = useState<LoopMetric>('tokens');
-    /** Board-wide by default: one scale is the only setting where bar lengths mean the same thing
-     *  in every row, so the board reads as one chart rather than eight unrelated ones. */
+    /** All bosses by default: one scale is the only setting where a bar length means the same thing
+     *  in every card, so the grid reads as one chart rather than as several unrelated ones. Switch to
+     *  per boss to give a cheap boss's own trend the full width of its card. */
     const [scale, setScale] = useState<BarScale>('board');
     /** Ladder column index of the boss shown in the detail dialog. */
     const [openBoss, setOpenBoss] = useState<number>();
@@ -299,10 +300,10 @@ export const LoopsTab = ({
                 scale={scale}
                 onScale={setScale}
             />
-            {/* The board is the tab. A boss's full breakdown — prime outcomes, remaining HP, bombs,
-                members — lives in the dialog it opens, which is what the ladder matrix used to spend
-                a second full-width table saying. */}
-            <SeasonBoard
+            {/* One card per boss, its loops stacked on a shared baseline so a season's trend is a
+                shape rather than numbers to subtract. A boss's full breakdown — prime outcomes,
+                remaining HP, bombs, members — lives in the dialog its header opens. */}
+            <SeasonCards
                 board={board}
                 ladder={ladder.ladder}
                 metric={view.metric}

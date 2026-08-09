@@ -794,7 +794,7 @@ function rangeLabelFor(min: number | undefined, max: number | undefined, isFlat:
 /** A non-zero value never renders as an empty track — below this it reads as a sliver, not nothing. */
 const MIN_VISIBLE_PERCENT = 6;
 
-function barPercent(value: number | undefined, max: number): number {
+export function barPercent(value: number | undefined, max: number): number {
     if (value === undefined || value <= 0 || max <= 0) return 0;
     return Math.max((value / max) * 100, MIN_VISIBLE_PERCENT);
 }
@@ -812,6 +812,8 @@ export interface BoardSegments {
 
 export interface BoardBar {
     loopNumber: number;
+    /** Marks the loop in flight, so a card row can chip its own number without consulting the axis. */
+    isRunning: boolean;
     /** Undefined where the loop never reached this boss, which is not the same as spending nothing. */
     value: number | undefined;
     /** Share of this boss's own busiest loop, 0–100. */
@@ -872,8 +874,9 @@ export interface LoopBoard {
 }
 
 /**
- * `Cleared in 5.2d` / `Day 2.1 · at L3` in a 56px column fits neither. The boss is the row here, so
- * "at L3" is already on screen, and the running loop is marked on its number rather than spelled out.
+ * `Cleared in 5.2d` / `Day 2.1 · at L3` are both too long for a card row's trailing slot. The boss is
+ * the card here, so "at L3" is already on screen, and the running loop is marked on its number rather
+ * than spelled out.
  */
 function boardPaceLabel(row: LadderRow): string {
     if (row.durationDays === undefined) return '';
@@ -884,10 +887,10 @@ function boardPaceLabel(row: LadderRow): string {
 /**
  * What a bar's length is measured against.
  *
- * `boss` answers "are we getting better at this boss" — each row runs its own scale, so a boss whose
+ * `boss` answers "are we getting better at this boss" — each card runs its own scale, so a boss whose
  * cost never moves reads flat and one that swings reads as a swing, whatever the boss beside it
  * costs. `board` answers "which boss eats the season" — one scale everywhere, so bar lengths are
- * comparable between rows but a cheap boss is compressed to a stub.
+ * comparable between cards but a cheap boss is compressed to a stub.
  *
  * Neither is a superset of the other, which is why it is a switch rather than a default.
  */
@@ -918,6 +921,7 @@ export function buildLoopBoard(ladder: LoopLadder, view: MetricView, scale: BarS
                 const value = cell === undefined ? undefined : cellAggregateValue(view.metric, cell, column);
                 return {
                     loopNumber: row.loopNumber,
+                    isRunning: row.isRunning,
                     value,
                     percent: barPercent(value, max),
                     outcome: cell === undefined || !ladder.hasOutcomeData ? undefined : cell.boss,

@@ -6,7 +6,6 @@ import {
     CardGrid,
     EncounterIcon,
     ReadinessTile,
-    ScrollX,
     SectionHeader,
     TableCard,
 } from '../guild-performance.components';
@@ -21,7 +20,6 @@ import {
     OUTCOME_WORD,
     primeName,
     primeTitle,
-    seasonLabel,
     type BoardBar,
     type BoardBoss,
     type BoardSegments,
@@ -92,24 +90,12 @@ export const PrimeValue = ({
 );
 
 // ---------------------------------------------------------------------------
-// Season board
+// Season cards — one card per boss, its loops stacked on a shared baseline
 //
-// Geometry is an inline style for the same reason the matrix's is: the loop count is a runtime value
-// and Tailwind's JIT cannot generate `grid-cols-[184px_repeat(5,...)_104px]`. Geometry inline is
-// fine; colour never is.
+// A grid rather than one wide table: the trend a guild reads a season by is per boss, and only a
+// shared left edge makes it a shape instead of a subtraction. The card template is static, so unlike
+// the board it needs no inline geometry at all.
 // ---------------------------------------------------------------------------
-
-const BOARD_LEAD = 176;
-/** Wide enough that a three-segment gauge still separates at the board's narrowest. */
-const BAR_MIN = 56;
-const BOARD_TRAIL = 96;
-
-const boardTemplate = (loops: number) => `${BOARD_LEAD}px repeat(${loops}, minmax(${BAR_MIN}px, 1fr)) ${BOARD_TRAIL}px`;
-
-const boardMinWidth = (loops: number) => BOARD_LEAD + loops * BAR_MIN + BOARD_TRAIL;
-
-const gridRule = 'border-l border-(--hairline)';
-const microHeader = 'px-2.5 py-1.5 text-xs font-bold tracking-widest text-(--soft-fg) uppercase';
 
 const barTitle = (bar: BoardBar, column: BossLoopRow, metric: LoopMetric, hasOutcomeData: boolean): string => {
     if (bar.cell === undefined || bar.value === undefined) return `Loop ${bar.loopNumber}: not reached`;
@@ -118,8 +104,8 @@ const barTitle = (bar: BoardBar, column: BossLoopRow, metric: LoopMetric, hasOut
         const outcome = bar.outcome === undefined ? '' : ` · boss ${OUTCOME_WORD[bar.outcome]}`;
         return `Loop ${bar.loopNumber}: ${formatMetricValue(bar.value, metric)} ${label}${outcome}`;
     }
-    // The old card printed remaining HP beside every loop. It stays off the row — a number per bar is
-    // exactly the scanning the board exists to remove — but it belongs on the hover.
+    // The row's own detail line already carries most of this; the hover repeats it in words so the
+    // whole encounter reads without decoding `L 4 R 6`.
     const { finalRemainingHp } = bar.cell.loop;
     const hp =
         hasOutcomeData && finalRemainingHp !== undefined && finalRemainingHp > 0
@@ -172,8 +158,8 @@ const bossAriaLabel = (
 };
 
 /**
- * Holds what the row no longer prints: the range, the prime totals and the kill count. The dialog
- * shows all three properly; this is so a desktop reader doesn't have to open it for a passing look.
+ * The card's season figures in one string, for the header's hover. The footer prints them too; this
+ * is so the header — the click target — says what opening it would tell you.
  */
 const bossSummary = (
     boss: BoardBoss,
@@ -194,13 +180,59 @@ const bossSummary = (
  *
  * The handout rejects that split *inside a matrix cell*, and its reasoning is a measurement: at the
  * ~40px a cell allows, each segment lands at 8–20px, and a prime capped at 9 tokens against a boss
- * ceiling of 47 is an invisible sliver every time. A board track is several times a cell's width, so
- * the objection does not carry across — the split is legible here in a way it never was in a cell.
+ * ceiling of 47 is an invisible sliver every time. A card's bar runs the card's full width, so the
+ * objection does not carry across — the split is legible here in a way it never was in a cell.
  *
  * Only Tokens splits. Efficiency, Players and Bombs are per-encounter figures with no left/right
  * component, so segmenting them would draw one number three times.
  */
-const BoardBarCell = ({
+const BarFill = ({
+    percent,
+    segments,
+    bossClassName,
+    split,
+}: {
+    percent: number;
+    segments: BoardSegments | undefined;
+    bossClassName: string;
+    split: boolean;
+}) => (
+    // Square, not `rounded-sm`: at 10px tall the radius is most of the bar, and a rounded gauge reads
+    // as a pill rather than an instrument. SNIPPETS § Bars for the track — `--fg/12`, never
+    // `--neutral`, which equals the card surface in dark mode.
+    <span className="h-2.5 w-full overflow-hidden bg-(--fg)/12">
+        <span className="flex h-full transition-all duration-200" style={{ width: `${percent}%` }}>
+            {split && segments !== undefined ? (
+                // Only the parts actually spent, so a skipped prime contributes no segment — and the
+                // divider goes on the *leading* edge of every segment after the first, so a zero-width
+                // part can never leave a stray 1px line at either end.
+                drawnSegments(segments, bossClassName).map((segment, index) => (
+                    <span
+                        key={segment.key}
+                        className={`h-full ${segment.className} ${index === 0 ? '' : 'border-l border-(--card)'}`}
+                        style={{ width: `${segment.width}%` }}
+                    />
+                ))
+            ) : (
+                <span className={`h-full w-full ${bossClassName}`} />
+            )}
+        </span>
+    </span>
+);
+
+/**
+ * One loop: a bar line, then a detail line.
+ *
+ * Every bar shares one baseline and they stack in loop order, which is what makes a trend a *shape*.
+ * Give each loop its own track and its own left edge instead — as a wide matrix must — and telling
+ * loop 1 from loop 6 means reading the two numbers and subtracting.
+ *
+ * Two lines rather than one because a five-up card is ~317px, which fits a bar and its figure and
+ * nothing else. The second line is what a one-line row had to push into the dialog: the outcome, both
+ * primes, remaining HP, bombs and members. Bars stay evenly spaced, so the staircase reads the same —
+ * with more room per bar, not less.
+ */
+const CardLoopRow = ({
     bar,
     column,
     metric,
@@ -210,51 +242,114 @@ const BoardBarCell = ({
     column: BossLoopRow;
     metric: LoopMetric;
     hasOutcomeData: boolean;
-}) => (
-    // Twin rail: the reading sits above its gauge, both on the same track. Printing the figure means
-    // a value no longer depends on a hover, which is the only way it was reachable on a phone.
-    <span
-        className={`flex flex-col justify-center gap-1 px-1.5 py-1.5 ${gridRule}`}
-        title={barTitle(bar, column, metric, hasOutcomeData)}>
-        <span
-            className={`text-center text-xs font-bold tabular-nums ${
-                bar.value === undefined ? 'text-(--soft-fg) opacity-45' : 'text-(--fg)'
-            }`}>
-            {bar.value === undefined ? '·' : formatMetricValue(bar.value, metric)}
-        </span>
-        {/* Square, not `rounded-sm`: at 10px tall the radius is most of the bar, and a rounded gauge
-            reads as a pill rather than an instrument. SNIPPETS § Bars for the track — `--fg/12`,
-            never `--neutral`, which equals the card surface in dark mode. */}
-        <span className="h-2.5 w-full overflow-hidden bg-(--fg)/12">
-            {/* Two levels, as the old card had: the outer width is this loop's share of the boss's
-                busiest loop, and the segments inside are what that spend was made of. The only change
-                is that the outer scale is per boss rather than board-wide. */}
-            <span className="flex h-full transition-all duration-200" style={{ width: `${bar.percent}%` }}>
-                {metric === 'tokens' && bar.segments !== undefined ? (
-                    // Only the parts that were actually spent, so a skipped prime contributes no
-                    // segment — and the divider goes on the *leading* edge of every segment after the
-                    // first, so a zero-width part can never leave a stray 1px line at either end.
-                    drawnSegments(bar.segments, bossFill(bar)).map((segment, index) => (
-                        <span
-                            key={segment.key}
-                            className={`h-full ${segment.className} ${index === 0 ? '' : 'border-l border-(--card)'}`}
-                            style={{ width: `${segment.width}%` }}
-                        />
-                    ))
-                ) : (
-                    <span className={`h-full w-full ${bossFill(bar)}`} />
-                )}
-            </span>
-        </span>
-    </span>
-);
+}) => {
+    const { cell } = bar;
+    // A fact the bar already encodes must not be repeated beneath it — `12 bombs` under a bomb bar
+    // reads as two different numbers until you check. Primes are token counts whatever the switcher
+    // says, so under any other metric they would be mistaken for that metric's value.
+    const showPrimes = metric === 'tokens';
+    const showBombs = metric !== 'bombs' && hasOutcomeData && (cell?.loop.bombs ?? 0) > 0;
+    const showPlayers = metric !== 'players' && hasOutcomeData && (cell?.loop.players ?? 0) > 0;
+    const showHp =
+        hasOutcomeData && cell !== undefined && cell.boss !== 'kill' && cell.loop.finalRemainingHp !== undefined;
+    // Past seasons carry no outcome data at all, so under a non-token metric there is nothing to put
+    // on the second line. Collapsing it then is safe: every row in the card collapses together, so the
+    // bars stay evenly spaced and the staircase is unaffected.
+    const hasDetail =
+        cell === undefined ||
+        (hasOutcomeData && metric === 'tokens') ||
+        showPrimes ||
+        showBombs ||
+        showPlayers ||
+        showHp;
 
-const BoardRow = ({
+    return (
+        <div className={`px-3 py-1.5 ${ROW_ZEBRA}`} title={barTitle(bar, column, metric, hasOutcomeData)}>
+            <div className="grid grid-cols-[20px_minmax(0,1fr)_34px] items-center gap-2">
+                {/* The running loop is marked on its own number — a filled chip, since a 20px track
+                    has no room to spell out a `Now` badge. */}
+                <span
+                    className={`text-center text-[11px] font-bold tabular-nums ${
+                        bar.isRunning ? 'rounded bg-(--primary) text-(--primary-fg)' : 'text-(--soft-fg)'
+                    }`}>
+                    {bar.loopNumber}
+                </span>
+                <BarFill
+                    percent={bar.percent}
+                    segments={bar.segments}
+                    bossClassName={bossFill(bar)}
+                    split={metric === 'tokens'}
+                />
+                <span
+                    className={`text-right text-xs font-bold tabular-nums ${
+                        bar.value === undefined ? 'text-(--soft-fg) opacity-45' : 'text-(--fg)'
+                    }`}>
+                    {bar.value === undefined ? '·' : formatMetricValue(bar.value, metric)}
+                </span>
+            </div>
+            {/* Indented to the bar's own track, so the detail reads as belonging to the bar above it
+                rather than as a row of its own. A loop that never got this far still gets a line, so
+                a gap in the staircase stays visible instead of closing up. */}
+            {hasDetail && (
+                <div className="mt-0.5 ml-[28px] flex flex-wrap items-center gap-x-2 gap-y-0.5 text-[11px] text-(--soft-fg)">
+                    {cell === undefined ? (
+                        <span>not reached</span>
+                    ) : (
+                        <>
+                            {hasOutcomeData && <Dot outcome={cell.boss} title={`Boss ${OUTCOME_WORD[cell.boss]}`} />}
+                            {showPrimes && (
+                                <>
+                                    <PrimeValue
+                                        side="left"
+                                        tokens={cell.loop.left}
+                                        outcome={cell.left}
+                                        title={primeTitle(column.leftPrimeUnitId, 'left', cell.left, cell.loop.left)}
+                                        hasOutcomeData={hasOutcomeData}
+                                    />
+                                    <PrimeValue
+                                        side="right"
+                                        tokens={cell.loop.right}
+                                        outcome={cell.right}
+                                        title={primeTitle(
+                                            column.rightPrimeUnitId,
+                                            'right',
+                                            cell.right,
+                                            cell.loop.right
+                                        )}
+                                        hasOutcomeData={hasOutcomeData}
+                                    />
+                                </>
+                            )}
+                            {showHp && (
+                                <span className="text-(--warning) tabular-nums">
+                                    {compactNumber(cell.loop.finalRemainingHp!)} HP left
+                                </span>
+                            )}
+                            {showBombs && (
+                                <span className="tabular-nums">
+                                    {cell.loop.bombs} bomb{cell.loop.bombs === 1 ? '' : 's'}
+                                </span>
+                            )}
+                            {/* Spelled out, and worded exactly as the dialog does — an abbreviation
+                                here saves ~20px and costs the reader a guess. */}
+                            {showPlayers && (
+                                <span className="tabular-nums">
+                                    {cell.loop.players} member{cell.loop.players === 1 ? '' : 's'}
+                                </span>
+                            )}
+                        </>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
+const BossCard = ({
     boss,
     column,
     tier,
     bossName,
-    loops,
     metric,
     hasOutcomeData,
     onOpen,
@@ -263,57 +358,62 @@ const BoardRow = ({
     column: BossLoopRow;
     tier: string;
     bossName: string;
-    loops: number;
     metric: LoopMetric;
     hasOutcomeData: boolean;
     onOpen: () => void;
 }) => (
-    // A real button, so Tab reaches it and Enter/Space opens it without re-implementing either. It is
-    // also the grid, which keeps every cell on the same tracks as the header above.
-    <button
-        type="button"
-        aria-haspopup="dialog"
-        aria-label={bossAriaLabel(boss, tier, bossName, metric, hasOutcomeData)}
-        title={bossSummary(boss, tier, bossName, metric, hasOutcomeData)}
-        onClick={onOpen}
-        style={{ gridTemplateColumns: boardTemplate(loops) }}
-        // `min-h-11` is the 44px touch minimum: the row is the only way into the breakdown on a
-        // phone. Zebra rather than per-row hairlines, matching `ROW_ZEBRA` — on a table wide enough
-        // to scroll, a stripe tracks a boss across the scroll where a border cannot.
-        className={`grid min-h-11 w-full cursor-pointer items-stretch text-left focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-(--ring) ${ROW_ZEBRA}`}>
-        {/* One line. The chevron is gone — the whole row is the target, so it was decoration — and so
-            is the rarity icon, which only restated the `L`/`M` the tier code already carries. */}
-        <span className="flex items-center gap-2 px-2.5 py-1.5">
+    <TableCard>
+        {/* The header is the control, not the whole card: the rows below hold selectable numbers, and
+            a click target wrapping them would fight text selection on every drag. */}
+        <button
+            type="button"
+            aria-haspopup="dialog"
+            aria-label={bossAriaLabel(boss, tier, bossName, metric, hasOutcomeData)}
+            title={bossSummary(boss, tier, bossName, metric, hasOutcomeData)}
+            onClick={onOpen}
+            className="flex w-full cursor-pointer items-center gap-2 border-b border-(--border) bg-(--soft) px-3 py-2 text-left hover:bg-(--primary)/10 focus-visible:outline-2 focus-visible:-outline-offset-2 focus-visible:outline-(--ring)">
             <EncounterIcon unitId={column.bossUnitId} size={20} />
             <span className="text-xs font-extrabold text-(--fg) tabular-nums">{tier}</span>
             <span className="min-w-0 truncate text-xs text-(--fg)">{bossName}</span>
             {column.bossMaxHp > 0 && (
-                <span className="ml-auto shrink-0 text-[10px] text-(--soft-fg) tabular-nums">
+                <span className="shrink-0 text-[10px] text-(--soft-fg) tabular-nums">
                     {compactNumber(column.bossMaxHp)}
                 </span>
             )}
-        </span>
-        {boss.bars.map(bar => (
-            <BoardBarCell
-                key={bar.loopNumber}
-                bar={bar}
-                column={column}
-                metric={metric}
-                hasOutcomeData={hasOutcomeData}
-            />
-        ))}
-        {/* One figure. The range label, the L/R totals and the kill count all moved to this row's
-            `title` and the dialog — with the per-loop figures and gauges both on screen, "flat at 42"
-            is something you can see rather than something that needs saying. */}
-        <span className={`flex items-center justify-end px-2.5 py-1.5 ${gridRule}`}>
-            <span className="text-sm font-extrabold text-(--fg) tabular-nums">
+            <span className="ml-auto shrink-0 text-sm font-extrabold text-(--fg) tabular-nums">
                 {formatMetricValue(boss.seasonValue, metric)}
             </span>
-        </span>
-    </button>
+        </button>
+        <div className="py-1">
+            {boss.bars.map(bar => (
+                <CardLoopRow
+                    key={bar.loopNumber}
+                    bar={bar}
+                    column={column}
+                    metric={metric}
+                    hasOutcomeData={hasOutcomeData}
+                />
+            ))}
+        </div>
+        {/* The season figures the rows no longer each restate. `rangeLabel` is the trend in words,
+            which a staircase shows but cannot name. */}
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-(--hairline) px-3 py-1.5 text-[11px] text-(--soft-fg)">
+            {boss.rangeLabel !== '' && <span className="tabular-nums">{boss.rangeLabel}</span>}
+            {metric === 'tokens' && (
+                <span className="tabular-nums">
+                    L {boss.leftTotal} · R {boss.rightTotal}
+                </span>
+            )}
+            {hasOutcomeData && (
+                <span className={`tabular-nums ${boss.kills === boss.reached ? '' : 'text-(--warning)'}`}>
+                    {boss.kills} of {boss.reached} killed
+                </span>
+            )}
+        </div>
+    </TableCard>
 );
 
-export const SeasonBoard = ({
+export const SeasonCards = ({
     board,
     ladder,
     metric,
@@ -323,7 +423,7 @@ export const SeasonBoard = ({
     onOpenBoss,
 }: {
     board: LoopBoard;
-    /** Column axis, so a boss can name its own boss — `BoardBoss` carries only the index. */
+    /** Column axis, so a card can name its own boss — `BoardBoss` carries only the index. */
     ladder: BossLoopRow[];
     metric: LoopMetric;
     hasOutcomeData: boolean;
@@ -332,82 +432,35 @@ export const SeasonBoard = ({
     /** Column index of the boss to open in the detail dialog. */
     onOpenBoss: (columnIndex: number) => void;
 }) => {
-    const capture = useSectionCapture(captureFileName('guild-loops-board'));
-    const loops = board.loops.length;
+    const capture = useSectionCapture<HTMLDivElement>(captureFileName('guild-loops-board'));
 
     return (
         <section className="flex flex-col gap-2">
             <SectionHeader
                 title="Season at a glance"
-                note="One bar per loop. Select a boss for the full breakdown."
+                note="One bar per loop, oldest first. Select a boss for the full breakdown."
                 meta={<CaptureButton onCapture={capture.onCapture} isCapturing={capture.isCapturing} />}
             />
-            <TableCard ref={capture.ref}>
-                <ScrollX minWidth={boardMinWidth(loops)}>
-                    <div
-                        style={{ gridTemplateColumns: boardTemplate(loops) }}
-                        className="grid border-b border-(--border) bg-(--soft)">
-                        {/* `self-end` throughout: the season label wraps to two lines in its column,
-                            and without it the loop numbers would float against the top of a taller
-                            row instead of sitting on one baseline with the labels. */}
-                        <span className={`${microHeader} self-end`}>Boss</span>
-                        {board.loops.map(loop => (
-                            <span
-                                key={loop.loopNumber}
-                                className={`flex flex-col items-center gap-0.5 self-end px-1 py-1.5 ${gridRule}`}>
-                                {/* The running loop is marked on its own number — a filled chip where
-                                    the matrix spelled out a `Now` badge it had the width for. */}
-                                <span
-                                    className={`text-xs font-bold tabular-nums ${
-                                        loop.isRunning
-                                            ? 'rounded bg-(--primary) px-1.5 text-(--primary-fg)'
-                                            : 'text-(--soft-fg)'
-                                    }`}>
-                                    {loop.loopNumber}
-                                </span>
-                                {loop.paceLabel !== '' && (
-                                    <span className="text-[10px] text-(--soft-fg) tabular-nums">{loop.paceLabel}</span>
-                                )}
-                            </span>
-                        ))}
-                        {/* A season roll-up per boss, not a per-loop value, so it takes the season
-                            wording rather than the `Loop …` heading the footer uses. */}
-                        <span className={`${microHeader} ${gridRule} self-end text-right`}>{seasonLabel(metric)}</span>
-                    </div>
-                    {board.bosses.map(boss => (
-                        <BoardRow
-                            key={boss.columnIndex}
-                            boss={boss}
-                            column={ladder[boss.columnIndex]}
-                            tier={tierOf(ladder[boss.columnIndex])}
-                            bossName={bossNameOf(ladder[boss.columnIndex])}
-                            loops={loops}
-                            metric={metric}
-                            hasOutcomeData={hasOutcomeData}
-                            onOpen={() => onOpenBoss(boss.columnIndex)}
-                        />
-                    ))}
-                    {/* The loop axis's own summary. Without it the board answers "how did this boss
-                        go" but nothing answers "what did this loop cost", which is the question the
-                        loop number at the top of each column implies. */}
-                    <div
-                        style={{ gridTemplateColumns: boardTemplate(loops) }}
-                        className="grid items-center border-t border-(--border) bg-(--soft)">
-                        <span className={microHeader}>{metricDefinition(metric).totalLabel}</span>
-                        {board.loops.map(loop => (
-                            <span
-                                key={loop.loopNumber}
-                                className={`px-1 py-1.5 text-center text-xs font-extrabold text-(--fg) tabular-nums ${gridRule}`}>
-                                {formatMetricValue(loop.value, metric)}
-                            </span>
-                        ))}
-                        <span
-                            className={`px-2.5 py-1.5 text-right text-sm font-extrabold text-(--fg) tabular-nums ${gridRule}`}>
-                            {formatMetricValue(board.grandValue, metric)}
-                        </span>
-                    </div>
-                </ScrollX>
-            </TableCard>
+            {/* 300px floor, not 430. A boss ladder is five rungs, and five is the count an auto-fit
+                grid handles worst: only one or five columns divide it without leaving a hole, and a
+                430px floor gives three columns at 1920 — so row two held two cards and a 536px gap.
+                At 300 the same screen fits all five on one row in either sidebar state, and a phone
+                still collapses to one column via the `min(…,100%)`. Cards stay equal width at every
+                size, which the All-bosses scale needs: same value, same bar length, any card. */}
+            <CardGrid ref={capture.ref} min={300}>
+                {board.bosses.map(boss => (
+                    <BossCard
+                        key={boss.columnIndex}
+                        boss={boss}
+                        column={ladder[boss.columnIndex]}
+                        tier={tierOf(ladder[boss.columnIndex])}
+                        bossName={bossNameOf(ladder[boss.columnIndex])}
+                        metric={metric}
+                        hasOutcomeData={hasOutcomeData}
+                        onOpen={() => onOpenBoss(boss.columnIndex)}
+                    />
+                ))}
+            </CardGrid>
         </section>
     );
 };

@@ -304,6 +304,8 @@ export const ScrollX = ({ minWidth, children }: { minWidth: number; children: Re
 const CARD_GRID_COLS = {
     148: 'grid-cols-[repeat(auto-fit,minmax(min(148px,100%),1fr))]',
     255: 'grid-cols-[repeat(auto-fit,minmax(min(255px,100%),1fr))]',
+    /** Five-up at 1920 in either sidebar state — see {@link SeasonCards}. */
+    300: 'grid-cols-[repeat(auto-fit,minmax(min(300px,100%),1fr))]',
     320: 'grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))]',
     430: 'grid-cols-[repeat(auto-fit,minmax(min(430px,100%),1fr))]',
 } as const;
