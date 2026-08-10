@@ -607,6 +607,8 @@ export function primeEffectFor(cells: LadderCell[]): PrimeEffect | undefined {
     const killedBoss: number[] = [];
     const unkilledBoss: number[] = [];
     for (const cell of cells) {
+        // Still running: its boss cost keeps climbing, so it isn't a final figure to compare with.
+        if (cell.boss !== 'kill') continue;
         (cell.left === 'kill' || cell.right === 'kill' ? killedBoss : unkilledBoss).push(cell.loop.boss);
     }
     if (killedBoss.length < PRIME_EFFECT_MIN_SAMPLE || unkilledBoss.length < PRIME_EFFECT_MIN_SAMPLE) {

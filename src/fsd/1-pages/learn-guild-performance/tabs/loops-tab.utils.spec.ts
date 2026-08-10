@@ -19,12 +19,15 @@ import {
     buildLoopSummary,
     buildMetricView,
     efficiencyOf,
+    primeEffectFor,
     primeOutcome,
     resolveLadderPrimes,
     type BarScale,
     type BossLoopRow,
+    type LadderCell,
     type LoopMetric,
     type LoopTokenCounts,
+    type Outcome,
 } from './loops-tab.utils';
 
 // Bosses must use *distinct* GuildBoss families: `buildBossLoopRows` groups by `prefix:rarity`, so two
@@ -203,6 +206,34 @@ describe('outcome derivation', () => {
         expect(cell.left).toBe('skip');
         expect(cell.right).toBe('skip');
         expect(buildLoopSummary(ladder, tierOf, bossNameOf).primesSkipped).toBe(1);
+    });
+});
+
+const finalCell = (bossTokens: number, left: Outcome): LadderCell => ({
+    loop: { boss: bossTokens } as LoopTokenCounts,
+    boss: 'kill',
+    left,
+    right: 'skip',
+});
+
+describe('primeEffectFor', () => {
+    it('ignores the still-running loop, whose boss cost is not final yet', () => {
+        const finalized: LadderCell[] = [
+            finalCell(10, 'kill'),
+            finalCell(10, 'kill'),
+            finalCell(10, 'skip'),
+            finalCell(10, 'skip'),
+        ];
+        // Cheap only because the fight isn't over — folded into the killed group unfiltered, its 1
+        // token would drop that mean to 7, clearing the 15% threshold against the finalized 10 and
+        // reporting a false "lower".
+        const withRunningLoop: LadderCell[] = [
+            ...finalized,
+            { loop: { boss: 1 } as LoopTokenCounts, boss: 'alive', left: 'kill', right: 'skip' },
+        ];
+
+        expect(primeEffectFor(finalized)?.effect).toBe('none');
+        expect(primeEffectFor(withRunningLoop)).toEqual(primeEffectFor(finalized));
     });
 });
 
