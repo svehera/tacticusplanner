@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
@@ -13,6 +13,8 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { NeededByEntry } from './daily-raids.helpers';
+import { ShopAvailabilityGroups } from './shop-availability-groups';
+import { groupByAvailability } from './shop-availability.helpers';
 import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
 
 const MYTHIC_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
@@ -100,9 +102,10 @@ interface Props {
     inProgressMaterials: ICharacterUpgradeEstimate[];
     blockedMaterials: ICharacterUpgradeEstimate[];
     userPL: number;
+    hideRandomDeals: boolean;
 }
 
-export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMaterials, userPL }) => {
+export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMaterials, userPL, hideRandomDeals }) => {
     const today = GuildShopService.getTodayDow();
 
     const todayItems = useMemo(
@@ -151,24 +154,27 @@ export const GuildShopSection: FC<Props> = ({ inProgressMaterials, blockedMateri
         [todayItems, countsMap]
     );
 
-    if (visibleItems.length === 0) return;
+    const renderItem = (item: ResolvedShopItem): ReactNode => (
+        <ShopItemCard
+            key={item.rewardType}
+            item={item}
+            acquired={countsMap.get(item.rewardType)?.acquired ?? 0}
+            required={countsMap.get(item.rewardType)?.required ?? 0}
+            neededBy={neededByMap.get(item.rewardType) ?? []}
+        />
+    );
+
+    const { guaranteed, possible } = useMemo(
+        () => groupByAvailability(visibleItems, hideRandomDeals),
+        [visibleItems, hideRandomDeals]
+    );
 
     return (
-        <div className="mt-4 border-t border-(--card-border) pt-3">
-            <p className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                Available in Guild Shop today
-            </p>
-            <div className="flex flex-wrap items-start justify-center gap-2">
-                {visibleItems.map(item => (
-                    <ShopItemCard
-                        key={item.rewardType}
-                        item={item}
-                        acquired={countsMap.get(item.rewardType)?.acquired ?? 0}
-                        required={countsMap.get(item.rewardType)?.required ?? 0}
-                        neededBy={neededByMap.get(item.rewardType) ?? []}
-                    />
-                ))}
-            </div>
-        </div>
+        <ShopAvailabilityGroups
+            shopName="Guild Shop"
+            guaranteed={guaranteed}
+            possible={possible}
+            renderItem={renderItem}
+        />
     );
 };
