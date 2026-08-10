@@ -630,11 +630,14 @@ export const RosterSnapshots = () => {
     const [isTakeSnapshotDialogOpen, setIsTakeSnapshotDialogOpen] = useState(false);
     const [currentTimeMillis, setCurrentTimeMillis] = useState<number>(Date.now());
     const [isManageDialogOpen, setIsManageDialogOpen] = useState(false);
-    const [leftIndex, setLeftIndex] = useState<number>(rosterSnapshots.diffs.length - 1);
-    const [rightIndex, setRightIndex] = useState<number>(rosterSnapshots.diffs.length);
-    const [liveSnapshotIndices, setLiveSnapshotIndices] = useState<number[]>(
-        RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots)
+    const liveSnapshotIndices = useMemo(
+        () => RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots),
+        [rosterSnapshots]
     );
+    // Both indices address `liveSnapshotIndices`, where the slot one past the end means "Current Roster".
+    const [leftIndex, setLeftIndex] = useState<number>(Math.max(0, liveSnapshotIndices.length - 1));
+    const [rightIndex, setRightIndex] = useState<number>(liveSnapshotIndices.length);
+    const [knownSnapshotCount, setKnownSnapshotCount] = useState<number>(liveSnapshotIndices.length);
     const [diffStyleSetting, setDiffStyleSetting] = useState<RosterSnapshotDiffStyle>(
         viewPreferences.rosterSnapshotsDiffStyle
     );
@@ -665,6 +668,18 @@ export const RosterSnapshots = () => {
     const [selectedCategoryTokens, setSelectedCategoryTokens] = useState<string[]>([]);
     const [selectedLeOptionTokens, setSelectedLeOptionTokens] = useState<string[]>([]);
     const [zoom, setZoom] = useState<number>(1);
+
+    // Snapshots load asynchronously, and taking one appends to the list. In both cases the useful
+    // default is "newest snapshot vs Current Roster", but only while the right side still points at
+    // Current — an explicit snapshot-to-snapshot comparison has to survive the list changing.
+    if (knownSnapshotCount !== liveSnapshotIndices.length) {
+        const wasComparingToCurrent = knownSnapshotCount === 0 || rightIndex >= knownSnapshotCount;
+        setKnownSnapshotCount(liveSnapshotIndices.length);
+        if (wasComparingToCurrent) {
+            setLeftIndex(Math.max(0, liveSnapshotIndices.length - 1));
+            setRightIndex(liveSnapshotIndices.length);
+        }
+    }
 
     const teamsByCategory = useMemo(() => {
         return TEAM_CATEGORY_OPTIONS.map(option => ({
@@ -1057,7 +1072,6 @@ export const RosterSnapshots = () => {
     ]);
 
     useEffect(() => {
-        setLiveSnapshotIndices(RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots));
         setDiffStyleSetting(viewPreferences.rosterSnapshotsDiffStyle);
         setShowShardsSetting(viewPreferences.showShardsInRosterSnapshots);
         setShowMythicShardsSetting(viewPreferences.showMythicShardsInRosterSnapshots);
@@ -1067,7 +1081,7 @@ export const RosterSnapshots = () => {
         setShowXpLevelDiffsSetting(viewPreferences.showXpLevelInDiffs);
         setShowEquipmentSetting(viewPreferences.showEquipmentInRosterSnapshots);
         setShowEquipmentDiffsSetting(viewPreferences.showEquipmentInDiffs);
-    }, [rosterSnapshots, viewPreferences]);
+    }, [viewPreferences]);
 
     const takeSnapshot = () => {
         setCurrentTimeMillis(Date.now());

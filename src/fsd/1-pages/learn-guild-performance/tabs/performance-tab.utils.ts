@@ -43,30 +43,10 @@ export function filterPerformanceEntries(
     });
 }
 
-/** Unique boss prefixes (main boss only) present in `entries` at the selected rarities,
- *  sorted ascending by (rarity, set) of each family's earliest occurrence within the selected rarities. */
-export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[], rarities: Set<Rarity>): string[] {
-    const firstOccurrence = new Map<string, { rarity: Rarity; set: number }>();
-    for (const entry of entries) {
-        if (!rarities.has(entry.rarity)) continue;
-        if (!isMainBoss(entry)) continue;
-        const prefix = getBossPrefix(entry.unitId);
-        const current = firstOccurrence.get(prefix);
-        if (
-            current === undefined ||
-            entry.rarity < current.rarity ||
-            (entry.rarity === current.rarity && entry.set < current.set)
-        ) {
-            firstOccurrence.set(prefix, { rarity: entry.rarity, set: entry.set });
-        }
-    }
-    return [...firstOccurrence.entries()]
-        .toSorted(([, a], [, b]) => {
-            if (a.rarity !== b.rarity) return a.rarity - b.rarity;
-            return a.set - b.set;
-        })
-        .map(([prefix]) => prefix);
-}
+// The boss-prefix ordering that used to live here is now `getAvailableBossPrefixes` in
+// guild-performance.utils.ts. It was a second function with the same name and a different
+// ordering to the one Damage and Leaderboard used, so the same-looking filter ordered two
+// different ways on adjacent tabs. This tab's encounter-order version became the shared one.
 
 /** Unique prime unitIds present in `entries` at the selected rarities, sorted ascending
  *  by (rarity, set, encounterIndex) of each unitId's first occurrence. */

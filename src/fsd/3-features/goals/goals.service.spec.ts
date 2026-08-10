@@ -1123,10 +1123,77 @@ describe('GoalsService.adjustGoalEstimates', () => {
                 targetLevel: 15,
                 xpLeft: 0,
             });
-            expect(adjustedGoal?.xpBooksApplied).toBe(1);
-            expect(adjustedGoal?.xpBooksRequired).toBe(1);
+            // 20 000 XP takes 2 Legendary codices (12 500 each); one falls short, so it rounds up.
+            expect(adjustedGoal?.xpBooksApplied).toBe(2);
+            expect(adjustedGoal?.xpBooksRequired).toBe(2);
             expect(adjustedGoal?.xpBooksTotal).toBe(0);
             expect(adjustedGoal?.xpDaysLeft).toBeUndefined();
+        });
+
+        it('steps down to the largest codex that fits when the preferred one overshoots', () => {
+            const goalId = 'goal-sub-one-book';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 1,
+                    bookRarity: Rarity.Legendary,
+                    gold: 500,
+                    currentLevel: 10,
+                    targetLevel: 11,
+                    // Under one Legendary codex (12 500); Epic (2500) is the largest that fits → 4.
+                    xpLeft: 8000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                makeEmptyInventory(),
+                { ...noXpUse, useLegendary: true },
+                [],
+                [],
+                noXpIncome
+            );
+
+            const adjustedGoal = result.goalEstimates.find(goalEstimate => goalEstimate.goalId === goalId);
+
+            expect(adjustedGoal?.xpEstimate?.bookRarity).toBe(Rarity.Epic);
+            expect(adjustedGoal?.xpBooksRequired).toBe(4);
+            expect(adjustedGoal?.xpBooksApplied).toBe(0);
+            expect(adjustedGoal?.xpBooksTotal).toBe(4);
+            expect(result.neededXp).toBe(8000);
+        });
+
+        it('keeps the preferred codex when the goal owes at least one of them', () => {
+            const goalId = 'goal-preferred-codex';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 2,
+                    bookRarity: Rarity.Legendary,
+                    gold: 1000,
+                    currentLevel: 10,
+                    targetLevel: 15,
+                    xpLeft: 20_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                makeEmptyInventory(),
+                { ...noXpUse, useLegendary: true },
+                [],
+                [],
+                noXpIncome
+            );
+
+            const adjustedGoal = result.goalEstimates.find(goalEstimate => goalEstimate.goalId === goalId);
+
+            expect(adjustedGoal?.xpEstimate?.bookRarity).toBe(Rarity.Legendary);
+            expect(adjustedGoal?.xpBooksRequired).toBe(2);
         });
     });
 

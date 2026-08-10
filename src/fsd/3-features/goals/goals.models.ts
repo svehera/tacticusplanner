@@ -127,6 +127,8 @@ export interface IGoalEstimate {
     orbsEstimate?: ICharacterAscendOrbsTotal;
     xpBooksApplied?: number;
     xpBooksRequired?: number;
+    /** Total XP owed before held books were applied — `xpEstimate.xpLeft` keeps only the remainder. */
+    xpRequiredTotal?: number;
     materialQuantityInfo?: IMaterialQuantityInfo;
 
     /** If the goal is already done and no further raiding/onslaught is required. */

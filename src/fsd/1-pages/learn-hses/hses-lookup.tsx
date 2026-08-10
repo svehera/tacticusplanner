@@ -29,6 +29,9 @@ const sortedEvents = homescreenEvents
     .map(event => ({ event, displayName: getHseDisplayName(event) }))
     .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
 
+// TODO(remove after 2026-08-17): temporary Arsenal of War promo banner — delete this const and its usage below.
+const ARSENAL_OF_WAR_PROMO_EXPIRY = new Date('2026-08-17T23:59:00');
+
 export const HsesLookup = () => {
     const { characters: unresolvedCharacters, mows, playerMetadata } = useContext(StoreContext);
 
@@ -107,6 +110,12 @@ export const HsesLookup = () => {
                 <div className="flex items-center gap-3">
                     <HseIcon eventName={selectedEvent.eventName} className="size-8 text-(--soft-fg)" />
                     <h1 className="text-xl font-bold">{getHseDisplayName(selectedEvent)}</h1>
+                </div>
+            )}
+
+            {selectedEvent?.eventName === 'arsenal_of_war' && Date.now() < ARSENAL_OF_WAR_PROMO_EXPIRY.getTime() && (
+                <div className="rounded-xl border border-(--primary) bg-(--primary)/10 p-3 text-sm font-medium text-(--fg)">
+                    In-game code: PLANNER50LARGE. Valid until August 17th, 2026
                 </div>
             )}
 

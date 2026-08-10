@@ -5,7 +5,7 @@ export type {
     IMowMaterialsTotal,
 } from './goals.models';
 export { isGoalReached } from './goal-status';
-export { getDoneByDays } from './estimate-days';
+export { getDoneByDays, hasXpBooks } from './estimate-days';
 export { getMaterialBar } from './material-progress';
 export { UpgradesService } from './upgrades.service';
 export { ShardsService } from './shards.service';

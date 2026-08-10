@@ -2936,11 +2936,18 @@ export class UpgradesService {
                 for (const location of ignoredLocations) location.isSuggested = false;
             }
 
+            for (const location of combinedUpgrade.locations) {
+                location.isElite = location.campaignType === CampaignType.Elite;
+            }
             combinedUpgrade.locations = orderBy(
                 combinedUpgrade.locations,
-                ['isSelected', 'energyPerItem', 'nodeNumber'],
-                ['desc', 'asc', 'desc']
+                ['isSuggested', 'energyPerItem', 'isElite', 'nodeNumber'],
+                ['desc', 'asc', 'desc', 'desc']
             );
+
+            for (const loc of combinedUpgrade.locations) {
+                delete loc.isElite;
+            }
         }
     }
 

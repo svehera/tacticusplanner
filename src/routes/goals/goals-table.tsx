@@ -40,7 +40,7 @@ import { MiscIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/u
 
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
-import { getDoneByDays, getMaterialBar, isGoalReached } from '@/fsd/3-features/goals';
+import { getDoneByDays, getMaterialBar, hasXpBooks, isGoalReached } from '@/fsd/3-features/goals';
 import { IGoalEstimate, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { ShardsService } from '@/fsd/3-features/goals/shards.service';
 
@@ -618,9 +618,7 @@ export const GoalsTable: React.FC<Props> = ({
                 if (!data) return emptyCell;
                 const est = estimateMapReference.current.get(data.goalId);
                 if (data.type === PersonalGoalType.UpgradeRank) {
-                    const applied = est?.xpBooksApplied;
-                    const required = est?.xpBooksRequired;
-                    if (!est || applied === undefined || required === undefined || required === 0) return emptyCell;
+                    if (!est || !hasXpBooks(est)) return emptyCell;
                     return (
                         <div className="flex h-full w-full flex-col justify-center py-1">
                             <XpBooksRow goalEstimate={est} bookRarity={est.xpEstimate?.bookRarity} />

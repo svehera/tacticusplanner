@@ -10,19 +10,9 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
-import { CharactersService } from '@/fsd/4-entities/character/characters.service';
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { bossPrefixDisplayNames, getBossPrefix, resolvePlayerName } from '../guild-performance.utils';
-
-export const ALL_RARITIES: Rarity[] = [
-    Rarity.Common,
-    Rarity.Uncommon,
-    Rarity.Rare,
-    Rarity.Epic,
-    Rarity.Legendary,
-    Rarity.Mythic,
-];
+import { getBossPrefix, resolvePlayerName } from '../guild-performance.utils';
 
 export interface LeaderboardEntry {
     /** Undefined when anonymized (another member in a keyless member's view). */
@@ -299,28 +289,4 @@ export function mergeSharedEntries(
 
         return { ...group, bossEntries, primeSlots };
     });
-}
-
-/**
- * Given a GuildBoss unit ID, returns the best display name:
- * - For main bosses: uses the boss family name from bossPrefixDisplayNames
- * - For primes/minions: extracts the last two CamelCase words (the snowprint ID),
- *   looks up the character, and returns their shortName if found, otherwise the
- *   last-two-words string, otherwise the raw unitId.
- */
-export function unitDisplayLabel(unitId: string): string {
-    const bossPrefix = /^(GuildBoss\d+)/.exec(unitId)?.[1];
-
-    const primeMatch = /(?:MiniBoss|Minion)\d+(.+)/.exec(unitId);
-    if (primeMatch) {
-        const tail = primeMatch[1];
-        const snowprintId = tail.charAt(0).toLowerCase() + tail.slice(1);
-        const character = CharactersService.getUnit(snowprintId);
-        if (character) return character.shortName;
-        return tail.split(/(?=[A-Z])/).join(' ');
-    }
-
-    if (bossPrefix !== undefined) return bossPrefixDisplayNames[bossPrefix] ?? unitId;
-
-    return unitId;
 }
