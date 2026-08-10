@@ -54,9 +54,13 @@ export const Select = <T,>({
             <Listbox value={value} onChange={onChange} by={by} disabled={disabled}>
                 <div className="relative">
                     <ListboxButton className={cn(triggerDisabled(triggerSingle, disabled), triggerClassName)}>
-                        <div className="flex items-center gap-2">
+                        {/* `min-w-0`: a flex item's automatic minimum size is its content, so
+                            without this a value longer than the trigger pushes straight through the
+                            border and under the chevron instead of shrinking. A `truncate` child can
+                            then ellipsise; anything else simply clips at the padding. */}
+                        <div className="flex min-w-0 items-center gap-2">
                             {value == undefined ? (
-                                <span className="text-(--soft-fg)">{placeholder}</span>
+                                <span className="truncate text-(--soft-fg)">{placeholder}</span>
                             ) : (
                                 displayValue(value)
                             )}

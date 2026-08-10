@@ -1,8 +1,10 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import { enqueueSnackbar } from 'notistack';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
+import { useCaptureElement } from '@/fsd/5-shared/lib';
 import {
     type GuildSeasonHistoryResponse,
     type SharedLeaderboardsResponse,
@@ -10,115 +12,42 @@ import {
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { Button } from '@/fsd/5-shared/ui';
+import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService } from '@/fsd/4-entities/character/characters.service';
-import { unitRoundIconMap } from '@/fsd/4-entities/guild_boss/guild-boss-portraits';
-
-import { CompIcons } from '../guild-performance.components';
 import {
+    CaptureButton,
+    CardGrid,
+    CompIcons,
+    EncounterIcon,
+    FilterBar,
+    FilterGroup,
+    PrefixFilter,
+    RarityFilter,
+    SectionHeader,
+    Stepper,
+    TableCard,
+    TableCardHeader,
+} from '../guild-performance.components';
+import {
+    bossIconFor,
     bossPrefixDisplayNames,
-    bossPrefixRoundIconMap,
     computeDefaultRaritiesFromRarities,
     getAvailableBossPrefixes,
     getBossPrefix,
-    sortBossPrefixes,
+    orderBossPrefixesByEncounter,
+    unitDisplayLabel,
 } from '../guild-performance.utils';
 
 import {
-    ALL_RARITIES,
     buildGuildOptions,
     buildLeaderboardGroups,
     buildLeaderboardGroupsFromSummary,
     mergeSharedEntries,
-    unitDisplayLabel,
     type BossGroup,
     type GuildOption,
     type LeaderboardEntry,
 } from './leaderboards-tab.utils';
-
-// ---------------------------------------------------------------------------
-// Filter sub-components
-// ---------------------------------------------------------------------------
-
-function RarityFilterGroup({ selected, onChange }: { selected: Rarity[]; onChange: (rarities: Rarity[]) => void }) {
-    const toggle = (r: Rarity) => {
-        if (selected.includes(r) && selected.length === 1) return;
-        onChange(selected.includes(r) ? selected.filter(x => x !== r) : [...selected, r]);
-    };
-    return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Rarity</span>
-            <div className="flex gap-1">
-                {ALL_RARITIES.map(r => (
-                    <button
-                        key={r}
-                        type="button"
-                        title={Rarity[r]}
-                        onClick={() => {
-                            toggle(r);
-                        }}
-                        className={[
-                            'rounded border p-0.5 transition-colors',
-                            selected.includes(r)
-                                ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                        ].join(' ')}>
-                        <RarityIcon rarity={r} />
-                    </button>
-                ))}
-            </div>
-        </div>
-    );
-}
-
-function BossFilterGroup({
-    available,
-    selected,
-    onChange,
-}: {
-    available: string[];
-    selected: string[];
-    onChange: (prefixes: string[]) => void;
-}) {
-    if (available.length === 0) return <></>;
-    const toggle = (prefix: string) => {
-        if (selected.includes(prefix) && selected.length === 1) return;
-        onChange(selected.includes(prefix) ? selected.filter(p => p !== prefix) : [...selected, prefix]);
-    };
-    return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Boss</span>
-            <div className="flex flex-wrap gap-1">
-                {available.map(prefix => {
-                    const icon = bossPrefixRoundIconMap[prefix];
-                    const name = bossPrefixDisplayNames[prefix] ?? prefix;
-                    return (
-                        <button
-                            key={prefix}
-                            type="button"
-                            title={name}
-                            onClick={() => {
-                                toggle(prefix);
-                            }}
-                            className={[
-                                'rounded border p-0.5 transition-colors',
-                                selected.includes(prefix)
-                                    ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                    : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                            ].join(' ')}>
-                            {icon === undefined ? (
-                                <span className="px-1">{name}</span>
-                            ) : (
-                                <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
-                            )}
-                        </button>
-                    );
-                })}
-            </div>
-        </div>
-    );
-}
 
 function GuildFilterGroup({
     guilds,
@@ -130,151 +59,172 @@ function GuildFilterGroup({
     onChange: (tags: Set<string>) => void;
 }) {
     return (
-        <div className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">Other Guilds</span>
-            <div className="flex flex-wrap gap-1">
-                {guilds.map(guild => {
-                    const isSelected = selected.has(guild.guildTag);
-                    return (
-                        <button
-                            key={guild.guildTag}
-                            type="button"
-                            onClick={() => {
-                                const next = new Set(selected);
-                                if (next.has(guild.guildTag)) next.delete(guild.guildTag);
-                                else next.add(guild.guildTag);
-                                onChange(next);
-                            }}
-                            className={[
-                                'rounded border px-2 py-0.5 transition-colors',
-                                isSelected
-                                    ? 'border-blue-500 bg-blue-50 dark:border-blue-400 dark:bg-blue-950'
-                                    : 'border-gray-200 bg-white hover:border-gray-400 dark:border-gray-700 dark:bg-gray-900',
-                            ].join(' ')}>
-                            {guild.displayName}
-                        </button>
-                    );
-                })}
-            </div>
-        </div>
+        <FilterGroup label="Other guilds">
+            {guilds.map(guild => {
+                const isSelected = selected.has(guild.guildTag);
+                return (
+                    <button
+                        key={guild.guildTag}
+                        type="button"
+                        onClick={() => {
+                            const next = new Set(selected);
+                            if (next.has(guild.guildTag)) next.delete(guild.guildTag);
+                            else next.add(guild.guildTag);
+                            onChange(next);
+                        }}
+                        className={[
+                            'cursor-pointer rounded-full border px-2.5 py-0.5 text-[11.5px] transition-colors',
+                            isSelected
+                                ? 'border-(--primary) bg-(--primary)/15 font-semibold text-(--fg)'
+                                : 'border-(--border) text-(--soft-fg) hover:border-(--primary)/45 hover:text-(--fg)',
+                        ].join(' ')}>
+                        {guild.displayName}
+                    </button>
+                );
+            })}
+        </FilterGroup>
     );
 }
 
-function NumberInput({ label, value, onChange }: { label: string; value: number; onChange: (v: number) => void }) {
+/** Replaces the emoji medals — the top three get progressively weaker accent fills. */
+function RankBadge({ rank }: { rank: number }) {
+    const fill =
+        rank === 1
+            ? 'bg-(--primary) text-(--primary-fg)'
+            : rank === 2
+              ? 'bg-(--fg)/22 text-(--fg)'
+              : rank === 3
+                ? 'bg-(--primary)/25 text-(--fg)'
+                : 'text-(--soft-fg)';
     return (
-        <label className="flex flex-col gap-0.5 text-xs">
-            <span className="font-semibold text-gray-500 uppercase dark:text-gray-400">{label}</span>
-            <input
-                type="number"
-                min={1}
-                max={10}
-                value={value}
-                onChange={event => {
-                    const v = Math.max(1, Math.min(10, Number.parseInt(event.target.value, 10) || 1));
-                    onChange(v);
-                }}
-                className="w-16 rounded border border-gray-300 bg-white px-2 py-1 text-sm dark:border-gray-600 dark:bg-gray-900"
+        <span
+            className={`inline-flex size-[19px] items-center justify-center rounded-md text-[10.5px] font-extrabold tabular-nums ${fill}`}>
+            {rank}
+        </span>
+    );
+}
+
+function LeaderboardRow({ rank, entry, topDamage }: { rank: number; entry: LeaderboardEntry; topDamage: number }) {
+    const barWidth = topDamage > 0 ? (entry.damage / topDamage) * 100 : 0;
+    return (
+        <div
+            role="row"
+            className="relative grid grid-cols-[22px_minmax(0,1fr)_auto_68px] items-center gap-x-1.5 px-2 py-1 text-sm even:bg-(--neutral)/50 hover:bg-(--primary)/10">
+            {/* Damage read as a bar behind the row, so relative standing is visible without
+                comparing numerals. Content cells sit above it via `relative`. `aria-hidden`: it
+                restates the damage figure in the last cell, and it is not a cell of its own. */}
+            <span
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-y-0 left-0 bg-(--primary)/10"
+                style={{ width: `${barWidth}%` }}
             />
-        </label>
-    );
-}
-
-function MedalBadge({ rank }: { rank: number }) {
-    if (rank === 1) return <span className="text-base leading-none">🥇</span>;
-    if (rank === 2) return <span className="text-base leading-none">🥈</span>;
-    if (rank === 3) return <span className="text-base leading-none">🥉</span>;
-    return <span className="w-5 text-center text-xs text-gray-500 tabular-nums">{rank}</span>;
-}
-
-function UnitIcon({ unitId }: { unitId: string }) {
-    const mappedIcon = unitRoundIconMap[unitId];
-    if (mappedIcon !== undefined)
-        return <UnitShardIcon icon={mappedIcon} name={unitId} tooltip={unitId} width={28} height={28} />;
-    const match = /(?:MiniBoss|Minion)\d+(.+)/.exec(unitId);
-    if (match) {
-        const id = match[1].charAt(0).toLowerCase() + match[1].slice(1);
-        const character = CharactersService.getUnit(id);
-        if (character)
-            return (
-                <UnitShardIcon
-                    icon={character.roundIcon ?? ''}
-                    name={character.name}
-                    tooltip={character.name}
-                    width={28}
-                    height={28}
-                />
-            );
-    }
-    return <span className="text-xs text-gray-500">{unitId}</span>;
-}
-
-function LeaderboardRow({ rank, entry }: { rank: number; entry: LeaderboardEntry }) {
-    return (
-        <div className="grid grid-cols-[1.5rem_minmax(0,8rem)_auto_4.5rem] items-center gap-x-1.5 px-2 py-1 text-sm even:bg-gray-50 dark:even:bg-gray-800/40">
-            <span className="flex items-center justify-center">
-                <MedalBadge rank={rank} />
+            <span role="cell" className="relative flex items-center justify-center">
+                <RankBadge rank={rank} />
             </span>
-            <span className="min-w-0 truncate font-medium" title={entry.userId}>
+            <span role="cell" className="relative min-w-0 truncate font-medium" title={entry.userId}>
                 {entry.displayName}
             </span>
-            <CompIcons comp={entry.comp} size={20} />
-            <span className="text-right font-semibold tabular-nums">{entry.damage.toLocaleString()}</span>
+            <span role="cell" className="relative min-w-0">
+                <CompIcons comp={entry.comp} size={20} />
+            </span>
+            <span role="cell" className="relative text-right font-bold tabular-nums">
+                {entry.damage.toLocaleString()}
+            </span>
         </div>
     );
 }
 
-function LeaderboardCard({ unitId, rarity, entries }: { unitId: string; rarity: Rarity; entries: LeaderboardEntry[] }) {
+function LeaderboardCard({
+    unitId,
+    rarity,
+    entries,
+    kind,
+}: {
+    unitId: string;
+    rarity: Rarity;
+    entries: LeaderboardEntry[];
+    kind: 'Boss' | 'Prime';
+}) {
     if (entries.length === 0) return <></>;
     const displayName = unitDisplayLabel(unitId);
+    const topEntry = entries[0];
     return (
-        <div className="w-[28rem] shrink-0 overflow-hidden rounded border border-gray-200 bg-white dark:border-gray-700 dark:bg-gray-900">
-            <div className="flex items-center gap-2 border-b border-gray-200 bg-gray-50 px-2 py-1.5 dark:border-gray-700 dark:bg-gray-800">
-                <UnitIcon unitId={unitId} />
+        <TableCard>
+            <TableCardHeader className="gap-2 px-2 py-1.5">
+                <EncounterIcon unitId={unitId} />
                 <RarityIcon rarity={rarity} />
-                <span className="text-sm font-semibold">{displayName}</span>
-            </div>
-            <div className="flex flex-col divide-y divide-gray-100 dark:divide-gray-800">
+                <span className="text-sm font-extrabold text-(--fg)">{displayName}</span>
+                <span className="text-[10px] tracking-[.08em] text-(--soft-fg) uppercase">{kind}</span>
+                <span className="ml-auto text-xs text-(--soft-fg)">top {entries.length}</span>
+            </TableCardHeader>
+            <div role="table" aria-label={`${displayName} — ${kind}, top ${entries.length}`}>
                 {entries.map((entry, index) => (
-                    <LeaderboardRow key={index} rank={index + 1} entry={entry} />
+                    <LeaderboardRow key={index} rank={index + 1} entry={entry} topDamage={topEntry.damage} />
                 ))}
             </div>
-        </div>
+        </TableCard>
     );
 }
 
 function BossGroupSection({ group }: { group: BossGroup }) {
-    const leftPrime = group.primeSlots[0];
-    const rightPrime = group.primeSlots[1];
-    const extraPrimes = group.primeSlots.slice(2);
+    // The band is the capture unit, not the individual card: boss plus both primes in one image is
+    // what's worth sharing, and the header supplies the boss name and tier so it reads standalone.
+    const bossName = bossPrefixDisplayNames[group.bossPrefix] ?? group.bossPrefix;
+    const tier = `${RarityMapper.rarityToRarityString(group.rarity)} ${group.set + 1}`;
+    const { ref, capture, isCapturing } = useCaptureElement<HTMLElement>(
+        `leaderboard-${bossName.toLowerCase().replaceAll(/[^a-z0-9]+/g, '-')}-${tier.toLowerCase().replaceAll(' ', '')}`
+    );
+
+    const onCapture = () => {
+        void capture().then(outcome => {
+            if (outcome === 'clipboard') enqueueSnackbar('Image copied', { variant: 'success' });
+            else if (outcome === 'download') enqueueSnackbar('Image downloaded', { variant: 'success' });
+            else enqueueSnackbar('Could not capture the image', { variant: 'error' });
+        });
+    };
+
+    // Left prime, boss, right prime — the encounter's own left-to-right order. The auto-fit grid
+    // handles the responsive collapse, replacing the old order-* / 2xl: juggling and the fixed
+    // 28rem card width that left dead space on a wide screen.
+    //
+    // The header carries no stats meta: it previously restated the two top-N steppers from the
+    // filter bar on every band, and its "N hits" counted displayed rows — already capped by those
+    // steppers — so it reported the settings back rather than anything about the guild. Each card
+    // header carries its own "top N", scoped to the board it describes.
     return (
-        <div className="flex flex-col gap-3 2xl:flex-row 2xl:items-start">
-            {/* Boss: first on narrow, center on wide */}
-            <div className="order-1 2xl:order-2">
-                <LeaderboardCard unitId={group.bossUnitId} rarity={group.rarity} entries={group.bossEntries} />
-            </div>
-            {/* Left prime: second on narrow, left on wide; spacer keeps boss centered when absent */}
-            {leftPrime === undefined ? (
-                <div className="hidden 2xl:order-1 2xl:block 2xl:w-[28rem]" />
-            ) : (
-                <div className="order-2 2xl:order-1">
-                    <LeaderboardCard unitId={leftPrime.unitId} rarity={group.rarity} entries={leftPrime.entries} />
-                </div>
-            )}
-            {/* Right prime: third on narrow, right on wide */}
-            {rightPrime !== undefined && (
-                <div className="order-3 2xl:order-3">
-                    <LeaderboardCard unitId={rightPrime.unitId} rarity={group.rarity} entries={rightPrime.entries} />
-                </div>
-            )}
-            {extraPrimes.map(prime => (
+        <section ref={ref} className="flex flex-col gap-2.5">
+            <SectionHeader
+                title={bossName}
+                icon={<RarityIcon rarity={group.rarity} />}
+                note={<span className="rounded-full border border-(--border) px-2 py-0.5 text-[10.5px]">{tier}</span>}
+                meta={<CaptureButton onCapture={onCapture} isCapturing={isCapturing} />}
+            />
+            <CardGrid min={320} gap="gap-2.5">
+                {group.primeSlots[0] !== undefined && (
+                    <LeaderboardCard
+                        unitId={group.primeSlots[0].unitId}
+                        rarity={group.rarity}
+                        entries={group.primeSlots[0].entries}
+                        kind="Prime"
+                    />
+                )}
                 <LeaderboardCard
-                    key={`${prime.unitId}:${prime.encounterIndex}`}
-                    unitId={prime.unitId}
+                    unitId={group.bossUnitId}
                     rarity={group.rarity}
-                    entries={prime.entries}
+                    entries={group.bossEntries}
+                    kind="Boss"
                 />
-            ))}
-        </div>
+                {group.primeSlots.slice(1).map(prime => (
+                    <LeaderboardCard
+                        key={`${prime.unitId}:${prime.encounterIndex}`}
+                        unitId={prime.unitId}
+                        rarity={group.rarity}
+                        entries={prime.entries}
+                        kind="Prime"
+                    />
+                ))}
+            </CardGrid>
+        </section>
     );
 }
 
@@ -338,11 +288,17 @@ export const LeaderboardTab = ({
 
     // --- boss ---
     const availableBossPrefixes = useMemo(() => {
+        // Historical aggregates carry rarity and set on each board's enemyInfo, so the same
+        // encounter ordering as the live path is available here too.
         if (historySummary) {
-            return sortBossPrefixes(
+            return orderBossPrefixesByEncounter(
                 historySummary.leaderboards
                     .filter(board => selectedRarities.includes(RarityMapper.stringToNumber[board.enemyInfo.rarity]))
-                    .map(board => getBossPrefix(board.enemyInfo.enemyId))
+                    .map(board => ({
+                        prefix: getBossPrefix(board.enemyInfo.enemyId),
+                        rarity: RarityMapper.stringToNumber[board.enemyInfo.rarity],
+                        set: board.enemyInfo.set,
+                    }))
             );
         }
         return getAvailableBossPrefixes(rarityFilteredEntries);
@@ -422,9 +378,50 @@ export const LeaderboardTab = ({
         selectedGuildTags,
     ]);
 
+    // "Clear" returns the filters to their computed defaults, not to empty — an empty rarity or
+    // boss set would blank the tab.
+    const hasFilters = rarityOverride !== undefined || selectedBossPrefixes !== undefined || selectedGuildTags.size > 0;
+    const clearFilters = () => {
+        setRarityOverride(undefined);
+        setSelectedBossPrefixes(undefined);
+        setSelectedGuildTags(new Set());
+    };
+
     return (
-        <div className="flex flex-col gap-4">
-            <div className="flex flex-wrap items-end gap-4 border-b border-gray-200 pb-3 dark:border-gray-700">
+        <div className="flex flex-col gap-3.5">
+            <FilterBar
+                header={
+                    <>
+                        <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">
+                            Filters
+                        </span>
+                        <span className="text-xs text-(--soft-fg)">
+                            Season {selectedSeason ?? '…'} · {groups.length} boards
+                        </span>
+                        <div className="flex flex-1 items-center justify-end gap-3">
+                            {onRefreshSharedLeaderboards && localStorage.getItem('debugMode') === 'true' && (
+                                <Button
+                                    appearance="outline"
+                                    intent="secondary"
+                                    size="extra-small"
+                                    isDisabled={isRefreshingShared}
+                                    onPress={() => {
+                                        void handleRefreshShared();
+                                    }}>
+                                    {isRefreshingShared ? 'Refreshing…' : 'Refresh Shared'}
+                                </Button>
+                            )}
+                            <Button
+                                appearance="plain"
+                                intent="primary"
+                                size="extra-small"
+                                isDisabled={!hasFilters}
+                                onPress={clearFilters}>
+                                Clear
+                            </Button>
+                        </div>
+                    </>
+                }>
                 {guildOptions.length > 0 && (
                     <GuildFilterGroup
                         guilds={guildOptions}
@@ -432,35 +429,35 @@ export const LeaderboardTab = ({
                         onChange={setSelectedGuildTags}
                     />
                 )}
-                <RarityFilterGroup selected={selectedRarities} onChange={handleRarityChange} />
-                <BossFilterGroup
+                <RarityFilter selected={selectedRarities} onChange={handleRarityChange} />
+                <PrefixFilter
+                    label="Boss"
                     available={availableBossPrefixes}
                     selected={effectiveBossPrefixes}
                     onChange={setSelectedBossPrefixes}
+                    iconFor={bossIconFor}
                 />
                 {/* Historical leaderboards are pre-capped at top-5 server-side, so top-N is live-only. */}
                 {!isHistorical && (
                     <>
-                        <NumberInput label="Boss top N" value={bossTopN} onChange={setBossTopN} />
-                        <NumberInput label="Prime top N" value={primeTopN} onChange={setPrimeTopN} />
+                        <FilterGroup label="Boss top N">
+                            <Stepper value={bossTopN} min={1} max={10} onChange={setBossTopN} />
+                        </FilterGroup>
+                        {/* Primes floor at 0 so a band can be reduced to its boss board alone; both
+                            group builders drop prime slots with no entries, so the cards simply
+                            disappear. Bosses keep a floor of 1 — at 0 a band would render empty. */}
+                        <FilterGroup label="Prime top N">
+                            <Stepper value={primeTopN} min={0} max={10} onChange={setPrimeTopN} />
+                        </FilterGroup>
                     </>
                 )}
-                {onRefreshSharedLeaderboards && localStorage.getItem('debugMode') === 'true' && (
-                    <button
-                        type="button"
-                        onClick={() => {
-                            void handleRefreshShared();
-                        }}
-                        disabled={isRefreshingShared}
-                        className="rounded border border-gray-300 bg-white px-3 py-1 text-xs font-medium text-gray-700 transition-colors hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-200 dark:hover:bg-gray-700">
-                        {isRefreshingShared ? 'Refreshing…' : 'Refresh Shared'}
-                    </button>
-                )}
-            </div>
+            </FilterBar>
             {groups.length === 0 ? (
-                <p className="text-sm text-gray-400">No data for selected filters.</p>
+                <div className="flex items-center justify-center rounded-xl border border-(--border) bg-(--soft) py-12 text-sm text-(--soft-fg)">
+                    No data for selected filters.
+                </div>
             ) : (
-                <div className="flex flex-col gap-8">
+                <div className="flex flex-col gap-6">
                     {groups.map(group => (
                         <BossGroupSection key={`${group.bossPrefix}:${group.rarity}`} group={group} />
                     ))}

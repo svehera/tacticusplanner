@@ -1,7 +1,9 @@
 /* eslint-disable import-x/no-internal-modules, boundaries/element-types -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import { enqueueSnackbar } from 'notistack';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
 import { makeApiCall } from '@/fsd/5-shared/api';
+import { useCaptureElement } from '@/fsd/5-shared/lib';
 import {
     TacticusDamageType,
     getTacticusGuildData,
@@ -455,4 +457,39 @@ export function useGuildPerformance() {
         fetchSeasonData,
         refreshSharedLeaderboards,
     };
+}
+
+// ---------------------------------------------------------------------------
+// Section capture
+// ---------------------------------------------------------------------------
+
+/**
+ * `useCaptureElement` plus this page's snackbar reporting, so a section only has to say where its
+ * ref goes and what the file should be called.
+ *
+ * The three-outcome snackbar block was already duplicated in the Damage and Leaderboard tabs; the
+ * Performance tab needs it four more times, which is well past the point of extracting it. Those two
+ * earlier copies can migrate to this hook whenever they are next touched.
+ */
+export function useSectionCapture<T extends HTMLElement = HTMLDivElement>(fileName: string) {
+    const { ref, capture, isCapturing } = useCaptureElement<T>(fileName);
+
+    const onCapture = useCallback(() => {
+        void capture().then(outcome => {
+            if (outcome === 'clipboard') enqueueSnackbar('Image copied', { variant: 'success' });
+            else if (outcome === 'download') enqueueSnackbar('Image downloaded', { variant: 'success' });
+            else enqueueSnackbar('Could not capture the image', { variant: 'error' });
+        });
+    }, [capture]);
+
+    return { ref, onCapture, isCapturing };
+}
+
+/** Slugifies a section title into a safe, readable download filename. */
+export function captureFileName(...parts: string[]): string {
+    return parts
+        .join('-')
+        .toLowerCase()
+        .replaceAll(/[^a-z0-9]+/g, '-')
+        .replaceAll(/^-|-$/g, '');
 }

@@ -8,7 +8,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { resolveBossOverviewDisplay } from './guild-performance.utils';
+import { resolveBossOverviewDisplay, unitDisplayLabel } from './guild-performance.utils';
 
 // Real season config / unitIds (guild_boss_season_config_5, tier 5 = Mythic, set 0) so
 // resolveBossOverviewDisplay's season-config lookups resolve against actual game data. The
@@ -126,5 +126,28 @@ describe('resolveBossOverviewDisplay', () => {
 
         expect(display?.isNextBoss).toBe(false);
         expect(display?.boss.hp.kind).not.toBe('actual');
+    });
+});
+
+describe('unitDisplayLabel', () => {
+    it('names a boss after its family', () => {
+        expect(unitDisplayLabel(BOSS_UNIT_ID)).toBe('Magnus');
+    });
+
+    it('names a prime after itself, not after the boss it flanks', () => {
+        // Regression: every prime used to be labelled with its boss family name, so both of
+        // Magnus's primes read "Magnus" in tooltips and filter buttons.
+        for (const primeUnitId of [LEFT_PRIME_UNIT_ID, RIGHT_PRIME_UNIT_ID]) {
+            const label = unitDisplayLabel(primeUnitId);
+            expect(label).not.toBe('Magnus');
+            expect(label).not.toBe(primeUnitId);
+        }
+        expect(unitDisplayLabel(LEFT_PRIME_UNIT_ID)).not.toBe(unitDisplayLabel(RIGHT_PRIME_UNIT_ID));
+    });
+
+    it('never leaks a raw unitId for a known encounter', () => {
+        for (const unitId of [BOSS_UNIT_ID, LEFT_PRIME_UNIT_ID, RIGHT_PRIME_UNIT_ID]) {
+            expect(unitDisplayLabel(unitId)).not.toContain('GuildBoss');
+        }
     });
 });
