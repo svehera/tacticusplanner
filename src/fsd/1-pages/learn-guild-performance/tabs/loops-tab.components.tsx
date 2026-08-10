@@ -18,6 +18,7 @@ import {
     formatMetricValue,
     metricDefinition,
     OUTCOME_WORD,
+    primeEffectCaption,
     primeName,
     primeTitle,
     type BoardBar,
@@ -302,7 +303,10 @@ const CardLoopRow = ({
                         <span>not reached</span>
                     ) : (
                         <>
-                            {hasOutcomeData && <Dot outcome={cell.boss} title={`Boss ${OUTCOME_WORD[cell.boss]}`} />}
+                            {/* Kill is implied by having reached this boss; only "still alive" is news. */}
+                            {hasOutcomeData && cell.boss === 'alive' && (
+                                <Dot outcome={cell.boss} title={`Boss ${OUTCOME_WORD[cell.boss]}`} />
+                            )}
                             {showPrimes && (
                                 <>
                                     <PrimeValue
@@ -369,7 +373,11 @@ const BossCard = ({
     hasOutcomeData: boolean;
     onOpen: () => void;
 }) => (
-    <TableCard>
+    // `flex flex-col`: with the grid stretching every card in a row to the same height, the extra
+    // room has to go somewhere. It goes to the loop list (`flex-1`) rather than the header or
+    // footer, so those two sit at the same height on every card and only the list — already the
+    // part that varies bar to bar — absorbs the difference.
+    <TableCard className="flex flex-col">
         {/* The header is the control, not the whole card: the rows below hold selectable numbers, and
             a click target wrapping them would fight text selection on every drag. */}
         <button
@@ -391,7 +399,7 @@ const BossCard = ({
                 {formatMetricValue(boss.seasonValue, metric)}
             </span>
         </button>
-        <div className="py-1">
+        <div className="flex-1 py-1">
             {boss.bars.map(bar => (
                 <CardLoopRow
                     key={bar.loopNumber}
@@ -402,8 +410,6 @@ const BossCard = ({
                 />
             ))}
         </div>
-        {/* The season figures the rows no longer each restate. `rangeLabel` is the trend in words,
-            which a staircase shows but cannot name. */}
         <div className="flex flex-wrap items-center gap-x-3 gap-y-1 border-t border-(--hairline) px-3 py-1.5 text-[11px] text-(--soft-fg)">
             {boss.rangeLabel !== '' && <span className="tabular-nums">{boss.rangeLabel}</span>}
             {metric === 'tokens' && (
@@ -411,12 +417,12 @@ const BossCard = ({
                     L {boss.leftTotal} · R {boss.rightTotal}
                 </span>
             )}
-            {hasOutcomeData && (
-                <span className={`tabular-nums ${boss.kills === boss.reached ? '' : 'text-(--warning)'}`}>
-                    {boss.kills} of {boss.reached} killed
-                </span>
-            )}
         </div>
+        {boss.primeEffect !== undefined && (
+            <div className="border-t border-(--hairline) px-3 py-1 text-[11px] text-(--soft-fg)">
+                {primeEffectCaption(boss.primeEffect)}
+            </div>
+        )}
     </TableCard>
 );
 
@@ -455,7 +461,7 @@ export const SeasonCards = ({
                 At 300 the same screen fits all five on one row in either sidebar state, and a phone
                 still collapses to one column via the `min(…,100%)`. Cards stay equal width at every
                 size, which the All-bosses scale needs: same value, same bar length, any card. */}
-            <CardGrid ref={capture.ref} min={300}>
+            <CardGrid ref={capture.ref} min={300} align="stretch">
                 {board.bosses.map(boss => (
                     <BossCard
                         key={boss.columnIndex}
@@ -516,7 +522,10 @@ const LoopDetailRow = ({ loop, detail }: { loop: BossLoopDetail; detail: BossDet
                                 style={{ width: `${loop.percent}%` }}
                             />
                         </span>
-                        {hasOutcomeData && <Dot outcome={cell.boss} title={`Boss ${OUTCOME_WORD[cell.boss]}`} />}
+                        {/* Kill implied, never shown — see the matching card-row comment above. */}
+                        {hasOutcomeData && cell.boss === 'alive' && (
+                            <Dot outcome={cell.boss} title={`Boss ${OUTCOME_WORD[cell.boss]}`} />
+                        )}
                         {loop.paceLabel !== '' && (
                             <span className="shrink-0 text-xs text-(--soft-fg)">{loop.paceLabel}</span>
                         )}
@@ -652,6 +661,9 @@ export const BossDialog = ({
                     <p className="text-xs text-(--soft-fg)">
                         Kill and prime outcomes aren&apos;t stored for past seasons — token counts only.
                     </p>
+                )}
+                {detail.primeEffect !== undefined && (
+                    <p className="text-xs text-(--soft-fg)">{primeEffectCaption(detail.primeEffect)}</p>
                 )}
             </PortalDialog.Body>
         </PortalDialog>

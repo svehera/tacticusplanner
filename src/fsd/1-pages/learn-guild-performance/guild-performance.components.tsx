@@ -313,16 +313,21 @@ const CARD_GRID_COLS = {
 export const CardGrid = ({
     min = 430,
     gap = 'gap-3',
+    align = 'start',
     children,
     ref,
 }: {
     min?: keyof typeof CARD_GRID_COLS;
     gap?: string;
+    /** `stretch` matches every card in a row to the tallest one; `start` (default) sizes to content. */
+    align?: 'start' | 'stretch';
     children: ReactNode;
     /** Forwarded so a tile group can be handed to {@link useCaptureElement}. */
     ref?: React.Ref<HTMLDivElement>;
 }) => (
-    <div ref={ref} className={cn('grid items-start', gap, CARD_GRID_COLS[min])}>
+    <div
+        ref={ref}
+        className={cn('grid', align === 'start' ? 'items-start' : 'items-stretch', gap, CARD_GRID_COLS[min])}>
         {children}
     </div>
 );
