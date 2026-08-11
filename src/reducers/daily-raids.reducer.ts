@@ -106,7 +106,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                             raidsToPerform: 0,
                             energySpent: battle.attemptsUsed * campaignComposed.energyCost,
                             farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
-                            isShardsLocation: false,
+                            isShardsLocation:
+                                campaignComposed.rarity === 'Shard' || campaignComposed.rarity === 'Mythic Shard',
                             isCompleted: battle.attemptsLeft < battle.attemptsUsed,
                         });
                     }
@@ -137,7 +138,8 @@ export const dailyRaidsReducer = (state: IDailyRaids, action: DailyRaidsAction):
                             raidsToPerform: 0,
                             energySpent: battle.attemptsUsed * campaignComposed.energyCost,
                             farmedItems: battle.attemptsUsed * campaignComposed.dropRate,
-                            isShardsLocation: false,
+                            isShardsLocation:
+                                campaignComposed.rarity === 'Shard' || campaignComposed.rarity === 'Mythic Shard',
                             isCompleted: battle.attemptsLeft < battle.attemptsUsed,
                         });
                     }
