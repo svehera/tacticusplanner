@@ -586,6 +586,59 @@ function paceLabelFor({
 }
 
 // ---------------------------------------------------------------------------
+// Prime effect — does killing a prime actually lower what the boss itself costs, for this guild
+// ---------------------------------------------------------------------------
+
+/** Below this fraction cheaper, a killed-loop boss cost reads as noise, not an effect. */
+const PRIME_EFFECT_THRESHOLD = 0.15;
+/** Minimum loops needed in each group — else one fluke loop decides the verdict. */
+const PRIME_EFFECT_MIN_SAMPLE = 2;
+
+const mean = (values: number[]): number => values.reduce((sum, value) => sum + value, 0) / values.length;
+
+export interface PrimeEffect {
+    effect: 'lower' | 'none';
+    killedMean: number;
+    unkilledMean: number;
+}
+
+/** Compares a boss's own token cost between loops where a prime died and loops where neither did. */
+export function primeEffectFor(cells: LadderCell[]): PrimeEffect | undefined {
+    const killedBoss: number[] = [];
+    const unkilledBoss: number[] = [];
+    for (const cell of cells) {
+        // Still running: its boss cost keeps climbing, so it isn't a final figure to compare with.
+        if (cell.boss !== 'kill') continue;
+        (cell.left === 'kill' || cell.right === 'kill' ? killedBoss : unkilledBoss).push(cell.loop.boss);
+    }
+    if (killedBoss.length < PRIME_EFFECT_MIN_SAMPLE || unkilledBoss.length < PRIME_EFFECT_MIN_SAMPLE) {
+        return undefined;
+    }
+
+    const killedMean = mean(killedBoss);
+    const unkilledMean = mean(unkilledBoss);
+    const effect = unkilledMean > 0 && killedMean <= unkilledMean * (1 - PRIME_EFFECT_THRESHOLD) ? 'lower' : 'none';
+    return { effect, killedMean, unkilledMean };
+}
+
+/** {@link primeEffectFor} for every ladder column. Every entry is undefined for a season with no outcome data. */
+export function buildPrimeEffects(ladder: LoopLadder): (PrimeEffect | undefined)[] {
+    if (!ladder.hasOutcomeData) return Array.from<PrimeEffect | undefined>({ length: ladder.ladder.length });
+    return ladder.ladder.map((_, index) => {
+        const cells = ladder.rows.map(row => row.cells[index]).filter((cell): cell is LadderCell => cell !== undefined);
+        return primeEffectFor(cells);
+    });
+}
+
+/** The card/dialog caption for one boss's {@link PrimeEffect}. */
+export function primeEffectCaption(result: PrimeEffect | undefined): string | undefined {
+    if (result === undefined) return undefined;
+    return result.effect === 'lower'
+        ? `Prime kills cut boss cost: ${result.killedMean.toFixed(1)} vs ${result.unkilledMean.toFixed(1)} tokens/loop`
+        : 'Prime kills showed no clear effect on boss cost';
+}
+
+// ---------------------------------------------------------------------------
 // Metric switcher
 // ---------------------------------------------------------------------------
 
@@ -730,31 +783,41 @@ export function buildMetricView(ladder: LoopLadder, metric: LoopMetric): MetricV
 
     const columns: ColumnSeries[] = ladder.ladder.map((column, index) => {
         const values: number[] = [];
+        // Range and L/R totals are season-verdict numbers, so both skip the still-running boss's
+        // partial spend — only "final" loops count (killed, or all of them for a past season).
+        const finalValues: number[] = [];
         let kills = 0;
-        let leftTotal = 0;
-        let rightTotal = 0;
+        let finalLeftTotal = 0;
+        let finalRightTotal = 0;
         for (const row of ladder.rows) {
             const cell = row.cells[index];
             if (cell === undefined) continue;
             const value = cellAggregateValue(metric, cell, column);
             if (value !== undefined) values.push(value);
             if (cell.boss === 'kill') kills++;
-            leftTotal += cell.loop.left;
-            rightTotal += cell.loop.right;
+            const isFinal = !ladder.hasOutcomeData || cell.boss === 'kill';
+            if (isFinal) {
+                if (value !== undefined) finalValues.push(value);
+                finalLeftTotal += cell.loop.left;
+                finalRightTotal += cell.loop.right;
+            }
         }
+        // `min`/`max` stay unfiltered: they scale the bars, and the running loop's bar must still fit.
         const min = values.length > 0 ? Math.min(...values) : undefined;
         const max = values.length > 0 ? Math.max(...values) : undefined;
-        const isFlat = min !== undefined && max !== undefined && min === max;
+        const finalMin = finalValues.length > 0 ? Math.min(...finalValues) : undefined;
+        const finalMax = finalValues.length > 0 ? Math.max(...finalValues) : undefined;
+        const isFlat = finalMin !== undefined && finalMax !== undefined && finalMin === finalMax;
         return {
             values,
             seasonValue: rollUp(values, definition.aggregate),
             min,
             max,
             isFlat,
-            rangeLabel: rangeLabelFor(min, max, isFlat, metric),
+            rangeLabel: rangeLabelFor(finalMin, finalMax, isFlat, metric, finalValues.length),
             kills,
-            leftTotal,
-            rightTotal,
+            leftTotal: finalLeftTotal,
+            rightTotal: finalRightTotal,
         };
     });
 
@@ -777,8 +840,15 @@ export function buildMetricView(ladder: LoopLadder, metric: LoopMetric): MetricV
     };
 }
 
-function rangeLabelFor(min: number | undefined, max: number | undefined, isFlat: boolean, metric: LoopMetric): string {
-    if (min === undefined || max === undefined) return '';
+/** `count < 2` guards "flat at X" — one data point isn't a trend. */
+function rangeLabelFor(
+    min: number | undefined,
+    max: number | undefined,
+    isFlat: boolean,
+    metric: LoopMetric,
+    count: number
+): string {
+    if (min === undefined || max === undefined || count < 2) return '';
     if (isFlat) return `flat at ${formatMetric(min, metric)}`;
     return `${formatMetric(min, metric)}–${formatMetric(max, metric)} per loop`;
 }
@@ -859,6 +929,8 @@ export interface BoardBoss {
     rangeLabel: string;
     leftTotal: number;
     rightTotal: number;
+    /** Undefined when there's nothing to compare — see {@link primeEffectFor}. */
+    primeEffect: PrimeEffect | undefined;
 }
 
 export interface BoardLoop {
@@ -909,6 +981,8 @@ export type BarScale = 'boss' | 'board';
 export function buildLoopBoard(ladder: LoopLadder, view: MetricView, scale: BarScale): LoopBoard {
     // The busiest single loop anywhere on the board, for the shared scale.
     const boardMax = Math.max(0, ...view.columns.map(series => series.max ?? 0));
+    // Metric-independent, so computed once rather than per metric.
+    const primeEffects = buildPrimeEffects(ladder);
 
     return {
         loops: ladder.rows.map((row, index) => ({
@@ -946,6 +1020,7 @@ export function buildLoopBoard(ladder: LoopLadder, view: MetricView, scale: BarS
                 rangeLabel: series.rangeLabel,
                 leftTotal: series.leftTotal,
                 rightTotal: series.rightTotal,
+                primeEffect: primeEffects[index],
             };
         }),
     };
@@ -989,6 +1064,8 @@ export interface BossDetail {
     /** Range of encounter totals across the loops that reached this boss. */
     rangeLabel: string;
     hasOutcomeData: boolean;
+    /** Undefined when there's nothing to compare — see {@link primeEffectFor}. */
+    primeEffect: PrimeEffect | undefined;
 }
 
 export function buildBossDetail(ladder: LoopLadder, columnIndex: number): BossDetail {
@@ -1050,8 +1127,9 @@ export function buildBossDetail(ladder: LoopLadder, columnIndex: number): BossDe
         kills,
         reached: reachedCells.length,
         efficiencyMean: rollUp(efficiencies, 'mean'),
-        rangeLabel: rangeLabelFor(min, max, min === max, 'tokens'),
+        rangeLabel: rangeLabelFor(min, max, min === max, 'tokens', encounterTotals.length),
         hasOutcomeData: ladder.hasOutcomeData,
+        primeEffect: ladder.hasOutcomeData ? primeEffectFor(reachedCells) : undefined,
     };
 }
 
@@ -1140,8 +1218,7 @@ export function buildLoopSummary(
 
     const runningRow = ladder.rows.find(row => row.isRunning);
 
-    // Efficiency over completed loops only: a partial loop has spent tokens without a kill to show
-    // for them, which would make its boss look worse than it is.
+    // Completed loops only, and at least two — one loop is no data point to average.
     let leastEfficient: LoopSummary['leastEfficient'] = undefined;
     for (const [index, column] of ladder.ladder.entries()) {
         const values: number[] = [];
@@ -1151,6 +1228,7 @@ export function buildLoopSummary(
             const value = efficiencyOf(cell.loop, column.bossMaxHp);
             if (value !== undefined) values.push(value);
         }
+        if (values.length < 2) continue;
         const mean = rollUp(values, 'mean');
         if (mean === undefined) continue;
         if (leastEfficient === undefined || mean > leastEfficient.value) {
@@ -1165,12 +1243,13 @@ export function buildLoopSummary(
         }
     }
 
+    // At least two loops reaching the boss — "skipped every loop" needs more than one loop.
     let alwaysSkippedTier = '';
     for (const [index, column] of ladder.ladder.entries()) {
         const reached = ladder.rows
             .map(row => row.cells[index])
             .filter((cell): cell is LadderCell => cell !== undefined);
-        if (reached.length === 0) continue;
+        if (reached.length < 2) continue;
         if (reached.every(cell => cell.left === 'skip' || cell.right === 'skip')) {
             alwaysSkippedTier = tierOf(column);
             break;
