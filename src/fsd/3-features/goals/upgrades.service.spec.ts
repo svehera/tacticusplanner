@@ -2413,6 +2413,36 @@ describe('UpgradesService.handleFirstDayCompletedRaids', () => {
         expect(raidA.raidsTotal).toBe(4);
         expect(raidB.raidsTotal).toBe(2);
     });
+
+    it('recognizes an already-raided shard location instead of dropping it (regression for the isShardsLocation exclusion bug)', () => {
+        const shardBattle = Object.values(CampaignsService.campaignsComposed).find(
+            battle => battle.rarity === 'Shard' || battle.rarity === 'Mythic Shard'
+        )!;
+        expect(shardBattle).toBeDefined();
+        const rewardId = CampaignsService.getRepeatableReward(shardBattle.rewards);
+
+        // Mirrors what restoreDailyRaids produces for a synced shard node after a reload.
+        const completedShardLocation: IItemRaidLocation = {
+            ...createCompletedLocation(shardBattle, 2),
+            isShardsLocation: true,
+        };
+
+        const settings = buildSettings([completedShardLocation], { [rewardId]: 0 });
+
+        const day: IUpgradesRaidsDay = {
+            raids: [],
+            energyTotal: 0,
+            raidsTotal: 0,
+            onslaughtTokens: 0,
+        };
+        UpgradesService.handleFirstDayCompletedRaids(day, settings, {});
+
+        const shardRaid = day.raids.find(raid => raid.id.includes(rewardId));
+        expect(shardRaid).toBeDefined();
+        expect(shardRaid?.raidLocations[0].raidsAlreadyPerformed).toBe(2);
+        expect(shardRaid?.raidsTotal).toBe(2);
+        expect(day.raidsTotal).toBe(2);
+    });
 });
 
 describe('UpgradesService.getOnslaughtTokensForGoal', () => {
