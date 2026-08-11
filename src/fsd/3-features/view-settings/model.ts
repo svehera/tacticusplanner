@@ -45,6 +45,7 @@ export interface IViewPreferences
     showWarShop?: boolean;
     showRogueTrader?: boolean;
     showCrusadeShop?: boolean;
+    hideRandomShopDeals?: boolean;
     leaderboardBossTopN: number;
     leaderboardPrimeTopN: number;
 }

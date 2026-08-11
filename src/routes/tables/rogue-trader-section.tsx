@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
@@ -11,6 +11,8 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { NeededByEntry } from './daily-raids.helpers';
+import { ShopAvailabilityGroups } from './shop-availability-groups';
+import { groupByAvailability } from './shop-availability.helpers';
 import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
 
 const MYTHIC_MAT_IDS = new Set(['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004']);
@@ -101,6 +103,7 @@ interface Props {
     blockedMaterials: ICharacterUpgradeEstimate[];
     forgeBadgeCounts: Record<Rarity, Counts>;
     forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]>;
+    hideRandomDeals: boolean;
 }
 
 export const RogueTraderSection: FC<Props> = ({
@@ -108,6 +111,7 @@ export const RogueTraderSection: FC<Props> = ({
     blockedMaterials,
     forgeBadgeCounts,
     forgeBadgeNeededBy,
+    hideRandomDeals,
 }) => {
     const today = RogueTraderService.getTodayDow();
 
@@ -159,34 +163,37 @@ export const RogueTraderSection: FC<Props> = ({
         [todayItems, forgeBadgeCounts, countsMap]
     );
 
-    if (visibleItems.length === 0) return;
+    const renderItem = (item: ResolvedShopItem): ReactNode => {
+        const c =
+            item.rewardType === MYTHIC_FORGE_BADGE
+                ? forgeBadgeCounts[Rarity.Mythic]
+                : (countsMap.get(item.rewardType) ?? { acquired: 0, required: 0 });
+        const neededBy =
+            item.rewardType === MYTHIC_FORGE_BADGE
+                ? forgeBadgeNeededBy[Rarity.Mythic]
+                : (neededByMap.get(item.rewardType) ?? []);
+        return (
+            <ShopItemCard
+                key={item.rewardType}
+                item={item}
+                acquired={c.acquired}
+                required={c.required}
+                neededBy={neededBy}
+            />
+        );
+    };
+
+    const { guaranteed, possible } = useMemo(
+        () => groupByAvailability(visibleItems, hideRandomDeals),
+        [visibleItems, hideRandomDeals]
+    );
 
     return (
-        <div className="mt-4 border-t border-(--card-border) pt-3">
-            <p className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                Available in Rogue Trader today
-            </p>
-            <div className="flex flex-wrap items-start justify-center gap-2">
-                {visibleItems.map(item => {
-                    const c =
-                        item.rewardType === MYTHIC_FORGE_BADGE
-                            ? forgeBadgeCounts[Rarity.Mythic]
-                            : (countsMap.get(item.rewardType) ?? { acquired: 0, required: 0 });
-                    const neededBy =
-                        item.rewardType === MYTHIC_FORGE_BADGE
-                            ? forgeBadgeNeededBy[Rarity.Mythic]
-                            : (neededByMap.get(item.rewardType) ?? []);
-                    return (
-                        <ShopItemCard
-                            key={item.rewardType}
-                            item={item}
-                            acquired={c.acquired}
-                            required={c.required}
-                            neededBy={neededBy}
-                        />
-                    );
-                })}
-            </div>
-        </div>
+        <ShopAvailabilityGroups
+            shopName="Rogue Trader"
+            guaranteed={guaranteed}
+            possible={possible}
+            renderItem={renderItem}
+        />
     );
 };

@@ -266,6 +266,7 @@ export const defaultData: IPersonalData2 = {
         showGuildShop: true,
         showWarShop: true,
         showRogueTrader: true,
+        hideRandomShopDeals: false,
     },
     dailyRaidsPreferences: {
         dailyEnergy: 288,
