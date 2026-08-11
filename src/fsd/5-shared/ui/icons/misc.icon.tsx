@@ -14,7 +14,7 @@ interface MiscIconProps extends Omit<ImgHTMLAttributes<HTMLImageElement>, 'src' 
  * passing clicks through to their parent unchanged.
  */
 export const MiscIcon = forwardRef<HTMLImageElement, MiscIconProps>(function MiscIcon(
-    { icon, width = 30, height = 30, className = '', style = {}, onClick, ...rest },
+    { icon, width = 30, height = 30, className = '', style = {}, onClick, onKeyDown, ...rest },
     reference
 ) {
     const details = tacticusIcons[icon] ?? { file: '', label: icon };
@@ -33,6 +33,13 @@ export const MiscIcon = forwardRef<HTMLImageElement, MiscIconProps>(function Mis
             height={height > 0 ? height : undefined}
             alt={details.label}
             onClick={onClick}
+            onKeyDown={event => {
+                onKeyDown?.(event);
+                if (!event.defaultPrevented && (event.key === 'Enter' || event.key === ' ')) {
+                    event.preventDefault();
+                    event.currentTarget.click();
+                }
+            }}
             {...(onClick ? { role: 'button', tabIndex: 0 } : {})}
             {...rest}
         />
