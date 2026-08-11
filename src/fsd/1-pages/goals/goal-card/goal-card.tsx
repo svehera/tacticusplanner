@@ -7,7 +7,7 @@ import type { GoalDragHandle } from 'src/routes/goals/sortable-goal-grid';
 
 import { getEstimatedDateShort } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { AccessibleTooltip, buttonStyles } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -178,46 +178,87 @@ export const GoalCard: React.FC<Props> = ({
           ? { backgroundColor: 'var(--card)' }
           : { backgroundColor: 'var(--card)', backgroundImage: `linear-gradient(${bgColor}, ${bgColor})` };
 
+    // min-w keeps the button from shifting when Active/Paused toggles between differently-sized labels, and keeps
+    // all four states the same width. h-10 (not content-driven padding) matches GoToRaidsButton's own height so the
+    // footer row — and the whole card — isn't shorter on goal types where that sibling is absent (e.g. Ascend).
+    const statusPillClassName =
+        'inline-flex h-10 min-w-[160px] items-center justify-between gap-2 rounded-full bg-(--soft) pr-1 pl-3';
+    // 44x44 tap target (mobile minimum) pulled toward the pill's h-10 with a negative margin. Always neutral —
+    // it's the next action, not the current state.
+    const statusActionButtonClassName =
+        'flex size-11 shrink-0 -my-[2px] -mr-2 items-center justify-center rounded-full bg-(--secondary) text-(--secondary-fg) transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none';
+
     const renderStatusPill = () => {
         if (isReached) {
+            const isIncluded = !!goal.include;
+            const actionLabel = isIncluded ? 'Pause' : 'Resume';
             return (
-                <span
-                    className={`${buttonStyles({ appearance: 'plain', intent: 'success', size: 'medium', shape: 'circle' })} bg-(--success)/15`}>
-                    <BadgeCheck className="size-4" />
-                    Reached
-                </span>
+                <div className={statusPillClassName}>
+                    <span className="flex items-center gap-2 text-[13px] font-semibold text-(--success)">
+                        <BadgeCheck className="size-3.5" />
+                        Reached
+                    </span>
+                    {onToggleInclude && (
+                        <AccessibleTooltip title={actionLabel}>
+                            <button
+                                type="button"
+                                onClick={onToggleInclude}
+                                aria-label={actionLabel}
+                                className={statusActionButtonClassName}>
+                                {isIncluded ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+                            </button>
+                        </AccessibleTooltip>
+                    )}
+                </div>
             );
         }
         if (isBlocked) {
+            const isIncluded = !!goal.include;
+            const actionLabel = isIncluded ? 'Pause' : 'Resume';
             return (
                 <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
-                    {onToggleInclude ? (
-                        <button
-                            type="button"
-                            onClick={onToggleInclude}
-                            className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15 hover:after:opacity-[0.15] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none`}>
-                            <Lock className="size-4" />
-                            Locked
-                        </button>
-                    ) : (
-                        <span
-                            className={`${buttonStyles({ appearance: 'plain', intent: 'warning', size: 'medium', shape: 'circle' })} bg-(--warning)/15`}>
-                            <Lock className="size-4" />
+                    <div tabIndex={0} className={statusPillClassName}>
+                        <span className="flex items-center gap-2 text-[13px] font-semibold text-(--warning)">
+                            <Lock className="size-3.5" />
                             Locked
                         </span>
-                    )}
+                        {onToggleInclude && (
+                            <AccessibleTooltip title={actionLabel}>
+                                <button
+                                    type="button"
+                                    onClick={onToggleInclude}
+                                    aria-label={actionLabel}
+                                    className={statusActionButtonClassName}>
+                                    {isIncluded ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+                                </button>
+                            </AccessibleTooltip>
+                        )}
+                    </div>
                 </AccessibleTooltip>
             );
         }
         if (!onToggleInclude) return;
+        const statusLabel = goal.include ? 'In Progress' : 'Paused';
+        const actionLabel = goal.include ? 'Pause' : 'Resume';
         return (
-            <button
-                type="button"
-                onClick={onToggleInclude}
-                className={`${buttonStyles({ appearance: 'plain', intent: goal.include ? 'primary' : 'secondary', size: 'medium', shape: 'circle' })} ${goal.include ? 'bg-(--primary)/15' : 'bg-(--soft-fg)/10'} hover:after:opacity-[0.15] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none`}>
-                {goal.include ? <Play className="size-4" /> : <Pause className="size-4" />}
-                {goal.include ? 'In Progress' : 'Paused'}
-            </button>
+            <div className={statusPillClassName}>
+                <span
+                    className={`flex items-center gap-2 text-[13px] font-semibold ${goal.include ? 'text-(--primary)' : 'text-(--soft-fg)'}`}>
+                    <span aria-hidden="true" className="flex size-3.5 shrink-0 items-center justify-center">
+                        <span className={`size-2 rounded-full ${goal.include ? 'bg-(--primary)' : 'bg-(--soft-fg)'}`} />
+                    </span>
+                    {statusLabel}
+                </span>
+                <AccessibleTooltip title={actionLabel}>
+                    <button
+                        type="button"
+                        onClick={onToggleInclude}
+                        aria-label={actionLabel}
+                        className={statusActionButtonClassName}>
+                        {goal.include ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+                    </button>
+                </AccessibleTooltip>
+            </div>
         );
     };
 
