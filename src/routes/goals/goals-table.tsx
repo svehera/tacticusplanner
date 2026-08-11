@@ -409,23 +409,29 @@ export const GoalsTable: React.FC<Props> = ({
                                             <span className="truncate text-[13px] font-semibold">Reached</span>
                                         )}
                                     </span>
-                                    <AccessibleTooltip title={actionLabel}>
-                                        <button
-                                            type="button"
-                                            className={statusActionButtonClassName}
-                                            aria-label={actionLabel}
-                                            onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
-                                            {isIncluded ? (
-                                                <Pause
-                                                    className="size-3.5 shrink-0"
-                                                    fill="currentColor"
-                                                    stroke="none"
-                                                />
-                                            ) : (
-                                                <Play className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
-                                            )}
-                                        </button>
-                                    </AccessibleTooltip>
+                                    {onToggleIncludeReference.current && (
+                                        <AccessibleTooltip title={actionLabel}>
+                                            <button
+                                                type="button"
+                                                className={statusActionButtonClassName}
+                                                aria-label={actionLabel}
+                                                onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                                {isIncluded ? (
+                                                    <Pause
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                ) : (
+                                                    <Play
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                )}
+                                            </button>
+                                        </AccessibleTooltip>
+                                    )}
                                 </div>
                             </div>
                         </AccessibleTooltip>
@@ -443,23 +449,29 @@ export const GoalsTable: React.FC<Props> = ({
                                         <Lock className="size-3.5 shrink-0" />
                                         {showText && <span className="truncate text-[13px] font-semibold">Locked</span>}
                                     </span>
-                                    <AccessibleTooltip title={actionLabel}>
-                                        <button
-                                            type="button"
-                                            className={statusActionButtonClassName}
-                                            aria-label={actionLabel}
-                                            onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
-                                            {isIncluded ? (
-                                                <Pause
-                                                    className="size-3.5 shrink-0"
-                                                    fill="currentColor"
-                                                    stroke="none"
-                                                />
-                                            ) : (
-                                                <Play className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
-                                            )}
-                                        </button>
-                                    </AccessibleTooltip>
+                                    {onToggleIncludeReference.current && (
+                                        <AccessibleTooltip title={actionLabel}>
+                                            <button
+                                                type="button"
+                                                className={statusActionButtonClassName}
+                                                aria-label={actionLabel}
+                                                onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                                {isIncluded ? (
+                                                    <Pause
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                ) : (
+                                                    <Play
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                )}
+                                            </button>
+                                        </AccessibleTooltip>
+                                    )}
                                 </div>
                             </div>
                         </AccessibleTooltip>
