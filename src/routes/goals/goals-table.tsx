@@ -373,9 +373,9 @@ export const GoalsTable: React.FC<Props> = ({
         // label is showing — icon-only mode is already a fixed width regardless of state.
         const statusChipWithLabelClassName = `${statusChipClassName} min-w-[160px] justify-between`;
         // 44x44 tap target (mobile minimum), square (not circular like the card's) to sit flush in the rectangular chip.
-        // Always neutral — it's the next action, not the current state.
+        // Always neutral — it's the next action, not the current state. Hover shade: see goal-card.tsx's comment.
         const statusActionButtonClassName =
-            'flex size-11 shrink-0 items-center justify-center rounded-md bg-(--secondary) text-(--secondary-fg) transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none';
+            'flex size-11 shrink-0 items-center justify-center rounded-md bg-(--secondary) text-(--secondary-fg) transition-colors hover:bg-[color-mix(in_oklab,var(--secondary)_85%,black_15%)] dark:hover:bg-[color-mix(in_oklab,var(--secondary)_90%,white_10%)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none';
 
         // Status column — restored from the original table: Reached / Locked / In Progress / Paused,
         // icon-only until the column is widened past the text threshold. Also the include toggle.
@@ -416,9 +416,13 @@ export const GoalsTable: React.FC<Props> = ({
                                             aria-label={actionLabel}
                                             onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
                                             {isIncluded ? (
-                                                <Pause className="size-3.5 shrink-0" />
+                                                <Pause
+                                                    className="size-3.5 shrink-0"
+                                                    fill="currentColor"
+                                                    stroke="none"
+                                                />
                                             ) : (
-                                                <Play className="size-3.5 shrink-0" />
+                                                <Play className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
                                             )}
                                         </button>
                                     </AccessibleTooltip>
@@ -446,9 +450,13 @@ export const GoalsTable: React.FC<Props> = ({
                                             aria-label={actionLabel}
                                             onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
                                             {isIncluded ? (
-                                                <Pause className="size-3.5 shrink-0" />
+                                                <Pause
+                                                    className="size-3.5 shrink-0"
+                                                    fill="currentColor"
+                                                    stroke="none"
+                                                />
                                             ) : (
-                                                <Play className="size-3.5 shrink-0" />
+                                                <Play className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
                                             )}
                                         </button>
                                     </AccessibleTooltip>
@@ -488,9 +496,9 @@ export const GoalsTable: React.FC<Props> = ({
                                     aria-label={actionLabel}
                                     onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
                                     {isIncluded ? (
-                                        <Pause className="size-3.5 shrink-0" />
+                                        <Pause className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
                                     ) : (
-                                        <Play className="size-3.5 shrink-0" />
+                                        <Play className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
                                     )}
                                 </button>
                             </AccessibleTooltip>

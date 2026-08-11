@@ -185,8 +185,11 @@ export const GoalCard: React.FC<Props> = ({
         'inline-flex h-10 min-w-[160px] items-center justify-between gap-2 rounded-full bg-(--soft) pr-1 pl-3';
     // 44x44 tap target (mobile minimum) pulled toward the pill's h-10 with a negative margin. Always neutral —
     // it's the next action, not the current state.
+    // Hover is --secondary itself, mixed with black/white — the exact formula buttonStyles() uses for its own
+    // secondary-intent hover — so it's derived from the token (stays in sync if --secondary ever changes), not a
+    // separately hardcoded palette shade.
     const statusActionButtonClassName =
-        'flex size-11 shrink-0 -my-[2px] -mr-2 items-center justify-center rounded-full bg-(--secondary) text-(--secondary-fg) transition-opacity hover:opacity-90 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none';
+        'flex size-11 shrink-0 -my-[2px] -mr-2 items-center justify-center rounded-full bg-(--secondary) text-(--secondary-fg) transition-colors hover:bg-[color-mix(in_oklab,var(--secondary)_85%,black_15%)] dark:hover:bg-[color-mix(in_oklab,var(--secondary)_90%,white_10%)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none';
 
     const renderStatusPill = () => {
         if (isReached) {
@@ -205,7 +208,11 @@ export const GoalCard: React.FC<Props> = ({
                                 onClick={onToggleInclude}
                                 aria-label={actionLabel}
                                 className={statusActionButtonClassName}>
-                                {isIncluded ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+                                {isIncluded ? (
+                                    <Pause className="size-3.5" fill="currentColor" stroke="none" />
+                                ) : (
+                                    <Play className="size-3.5" fill="currentColor" stroke="none" />
+                                )}
                             </button>
                         </AccessibleTooltip>
                     )}
@@ -229,7 +236,11 @@ export const GoalCard: React.FC<Props> = ({
                                     onClick={onToggleInclude}
                                     aria-label={actionLabel}
                                     className={statusActionButtonClassName}>
-                                    {isIncluded ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+                                    {isIncluded ? (
+                                        <Pause className="size-3.5" fill="currentColor" stroke="none" />
+                                    ) : (
+                                        <Play className="size-3.5" fill="currentColor" stroke="none" />
+                                    )}
                                 </button>
                             </AccessibleTooltip>
                         )}
@@ -255,7 +266,11 @@ export const GoalCard: React.FC<Props> = ({
                         onClick={onToggleInclude}
                         aria-label={actionLabel}
                         className={statusActionButtonClassName}>
-                        {goal.include ? <Pause className="size-3.5" /> : <Play className="size-3.5" />}
+                        {goal.include ? (
+                            <Pause className="size-3.5" fill="currentColor" stroke="none" />
+                        ) : (
+                            <Play className="size-3.5" fill="currentColor" stroke="none" />
+                        )}
                     </button>
                 </AccessibleTooltip>
             </div>
