@@ -64,8 +64,10 @@ const GRID_DEFAULT_COL_DEF = { suppressMovable: true, sortable: true, wrapText: 
 const ROW_HEIGHT = 68;
 
 const STATUS_COL_ID = 'status';
-const STATUS_COL_DEFAULT_WIDTH = 62;
-const STATUS_COL_TEXT_THRESHOLD = 110;
+// Fits the status chip (dot/icon + 44px action button) in icon-only mode without clipping.
+const STATUS_COL_DEFAULT_WIDTH = 80;
+// Minimum column width before the chip's text label fits without clipping — matches the card's pill width.
+const STATUS_COL_TEXT_THRESHOLD = 160;
 
 /** Which column set the table renders. Mirrors the three goal accordion sections. */
 export type GoalsTableVariant = 'rank' | 'ascend' | 'abilities';
@@ -365,6 +367,16 @@ export const GoalsTable: React.FC<Props> = ({
                 ),
         };
 
+        // Rounded-lg tile rather than the card's rounded-full pill — the table variant of the status chip.
+        const statusChipClassName = 'flex items-center gap-1.5 rounded-lg bg-(--soft) py-0.5 pr-0.5 pl-2.5';
+        // Matches the card's pill width, so the button doesn't shift when the label toggles. Only applied once the
+        // label is showing — icon-only mode is already a fixed width regardless of state.
+        const statusChipWithLabelClassName = `${statusChipClassName} min-w-[160px] justify-between`;
+        // 44x44 tap target (mobile minimum), square (not circular like the card's) to sit flush in the rectangular chip.
+        // Always neutral — it's the next action, not the current state. Hover shade: see goal-card.tsx's comment.
+        const statusActionButtonClassName =
+            'flex size-11 shrink-0 items-center justify-center rounded-md bg-(--secondary) text-(--secondary-fg) transition-colors hover:bg-[color-mix(in_oklab,var(--secondary)_85%,black_15%)] dark:hover:bg-[color-mix(in_oklab,var(--secondary)_90%,white_10%)] focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:outline-none';
+
         // Status column — restored from the original table: Reached / Locked / In Progress / Paused,
         // icon-only until the column is widened past the text threshold. Also the include toggle.
         const statusCol: ColDef<TypedGoalSelect> = {
@@ -382,31 +394,86 @@ export const GoalsTable: React.FC<Props> = ({
                 const isReached = isGoalReached(goalEstimate);
                 const isBlocked = !!goalEstimate?.blocked;
                 const showText = statusColWidthReference.current >= STATUS_COL_TEXT_THRESHOLD;
+                const chipClassName = showText ? statusChipWithLabelClassName : statusChipClassName;
 
                 if (isReached) {
+                    const isIncluded = !!data.include;
+                    const actionLabel = isIncluded ? 'Pause' : 'Resume';
                     return (
                         <AccessibleTooltip title="Goal is complete.">
-                            <div
-                                className="flex h-full w-full items-center justify-center gap-1.5 text-(--success)"
-                                tabIndex={0}>
-                                <BadgeCheck className="size-4 shrink-0" />
-                                {showText && <span className="truncate text-sm font-medium">Reached</span>}
+                            <div className="flex h-full w-full items-center justify-center" tabIndex={0}>
+                                <div className={chipClassName}>
+                                    <span className="flex items-center gap-1.5 text-(--success)">
+                                        <BadgeCheck className="size-3.5 shrink-0" />
+                                        {showText && (
+                                            <span className="truncate text-[13px] font-semibold">Reached</span>
+                                        )}
+                                    </span>
+                                    {onToggleIncludeReference.current && (
+                                        <AccessibleTooltip title={actionLabel}>
+                                            <button
+                                                type="button"
+                                                className={statusActionButtonClassName}
+                                                aria-label={actionLabel}
+                                                onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                                {isIncluded ? (
+                                                    <Pause
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                ) : (
+                                                    <Play
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                )}
+                                            </button>
+                                        </AccessibleTooltip>
+                                    )}
+                                </div>
                             </div>
                         </AccessibleTooltip>
                     );
                 }
 
                 if (isBlocked) {
+                    const isIncluded = !!data.include;
+                    const actionLabel = isIncluded ? 'Pause' : 'Resume';
                     return (
                         <AccessibleTooltip title="Goal is blocked because required farm nodes are not accessible. See Plan > Daily Raids > Raids Plan > Blocked Upgrades for details.">
-                            <button
-                                type="button"
-                                className="flex h-full w-full cursor-pointer items-center justify-center gap-1.5 border-0 bg-transparent text-(--warning) transition-colors hover:bg-(--warning)/10 focus-visible:ring-2 focus-visible:ring-(--warning) focus-visible:outline-none focus-visible:ring-inset"
-                                aria-label="Locked"
-                                onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
-                                <Lock className="size-4 shrink-0" />
-                                {showText && <span className="truncate text-sm font-medium">Locked</span>}
-                            </button>
+                            <div className="flex h-full w-full items-center justify-center" tabIndex={0}>
+                                <div className={chipClassName}>
+                                    <span className="flex items-center gap-1.5 text-(--warning)">
+                                        <Lock className="size-3.5 shrink-0" />
+                                        {showText && <span className="truncate text-[13px] font-semibold">Locked</span>}
+                                    </span>
+                                    {onToggleIncludeReference.current && (
+                                        <AccessibleTooltip title={actionLabel}>
+                                            <button
+                                                type="button"
+                                                className={statusActionButtonClassName}
+                                                aria-label={actionLabel}
+                                                onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                                {isIncluded ? (
+                                                    <Pause
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                ) : (
+                                                    <Play
+                                                        className="size-3.5 shrink-0"
+                                                        fill="currentColor"
+                                                        stroke="none"
+                                                    />
+                                                )}
+                                            </button>
+                                        </AccessibleTooltip>
+                                    )}
+                                </div>
+                            </div>
                         </AccessibleTooltip>
                     );
                 }
@@ -414,30 +481,41 @@ export const GoalsTable: React.FC<Props> = ({
                 if (!onToggleIncludeReference.current) return;
 
                 const isIncluded = !!data.include;
+                const statusLabel = isIncluded ? 'In Progress' : 'Paused';
+                const actionLabel = isIncluded ? 'Pause' : 'Resume';
                 return (
-                    <AccessibleTooltip
-                        title={
-                            isIncluded
-                                ? 'Included in daily raids. Click to pause.'
-                                : 'Excluded from daily raids. Click to include.'
-                        }>
-                        <button
-                            type="button"
-                            className={`flex h-full w-full cursor-pointer items-center justify-center gap-1.5 border-0 bg-transparent transition-colors focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-inset ${
-                                isIncluded
-                                    ? 'text-(--primary) hover:bg-(--primary)/10 focus-visible:ring-(--primary)'
-                                    : 'text-(--soft-fg) hover:bg-(--overlay) focus-visible:ring-(--primary)'
-                            }`}
-                            aria-label={isIncluded ? 'In Progress' : 'Paused'}
-                            onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
-                            {isIncluded ? <Play className="size-4 shrink-0" /> : <Pause className="size-4 shrink-0" />}
-                            {showText && (
-                                <span className="truncate text-sm font-medium">
-                                    {isIncluded ? 'In Progress' : 'Paused'}
+                    <div className="flex h-full w-full items-center justify-center">
+                        <div className={chipClassName}>
+                            <span className="flex items-center gap-1.5">
+                                <span
+                                    className="flex size-3.5 shrink-0 items-center justify-center"
+                                    title={showText ? undefined : statusLabel}>
+                                    <span
+                                        className={`size-2 rounded-full ${isIncluded ? 'bg-(--primary)' : 'bg-(--soft-fg)'}`}
+                                    />
                                 </span>
-                            )}
-                        </button>
-                    </AccessibleTooltip>
+                                {showText && (
+                                    <span
+                                        className={`truncate text-[13px] font-semibold ${isIncluded ? 'text-(--primary)' : 'text-(--soft-fg)'}`}>
+                                        {statusLabel}
+                                    </span>
+                                )}
+                            </span>
+                            <AccessibleTooltip title={actionLabel}>
+                                <button
+                                    type="button"
+                                    className={statusActionButtonClassName}
+                                    aria-label={actionLabel}
+                                    onClick={() => onToggleIncludeReference.current?.(data.goalId)}>
+                                    {isIncluded ? (
+                                        <Pause className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
+                                    ) : (
+                                        <Play className="size-3.5 shrink-0" fill="currentColor" stroke="none" />
+                                    )}
+                                </button>
+                            </AccessibleTooltip>
+                        </div>
+                    </div>
                 );
             },
         };
