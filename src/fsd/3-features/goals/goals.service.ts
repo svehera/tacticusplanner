@@ -467,26 +467,22 @@ export class GoalsService {
                     mythicShards: useActualProgress ? (unit.mythicShards ?? 0) : 0,
                     starsStart,
                     starsEnd: g.targetStars ?? rarityToStars[g.targetRarity!],
-                    onslaughtShards:
-                        (g.shardsPerToken || undefined) ??
-                        (unit.alliance
-                            ? getOnslaughtMidpointForCharacter(
-                                  unit.rarity,
-                                  unit.stars,
-                                  unit.alliance as Alliance,
-                                  onslaughtPreferences
-                              )
-                            : 0),
-                    onslaughtMythicShards:
-                        (g.mythicShardsPerToken || undefined) ??
-                        (unit.alliance
-                            ? getOnslaughtMidpointForCharacter(
-                                  Math.max(unit.rarity, Rarity.Legendary) as Rarity,
-                                  Math.max(unit.stars, RarityStars.OneBlueStar) as RarityStars,
-                                  unit.alliance as Alliance,
-                                  onslaughtPreferences
-                              )
-                            : 1),
+                    onslaughtShards: unit.alliance
+                        ? getOnslaughtMidpointForCharacter(
+                              unit.rarity,
+                              unit.stars,
+                              unit.alliance as Alliance,
+                              onslaughtPreferences
+                          )
+                        : 0,
+                    onslaughtMythicShards: unit.alliance
+                        ? getOnslaughtMidpointForCharacter(
+                              Math.max(unit.rarity, Rarity.Legendary) as Rarity,
+                              Math.max(unit.stars, RarityStars.OneBlueStar) as RarityStars,
+                              unit.alliance as Alliance,
+                              onslaughtPreferences
+                          )
+                        : 1,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
@@ -539,17 +535,10 @@ export class GoalsService {
                     mythicShards: useActualProgress ? (unit.mythicShards ?? 0) : 0,
                     starsStart,
                     starsEnd: targetStars,
-                    onslaughtShards:
-                        (g.shardsPerToken || undefined) ??
-                        (unit.alliance
-                            ? getOnslaughtMidpointForCharacter(
-                                  unit.rarity,
-                                  unit.stars,
-                                  unit.alliance,
-                                  onslaughtPreferences
-                              )
-                            : 0),
-                    onslaughtMythicShards: (g.mythicShardsPerToken || undefined) ?? defaultMythicShards,
+                    onslaughtShards: unit.alliance
+                        ? getOnslaughtMidpointForCharacter(unit.rarity, unit.stars, unit.alliance, onslaughtPreferences)
+                        : 0,
+                    onslaughtMythicShards: defaultMythicShards,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
@@ -656,8 +645,6 @@ export class GoalsService {
                     targetStars: goal.starsEnd,
                     campaignsUsage: goal.campaignsUsage,
                     mythicCampaignsUsage: goal.mythicCampaignsUsage,
-                    shardsPerToken: goal.onslaughtShards,
-                    mythicShardsPerToken: goal.onslaughtMythicShards,
                     shardFarmType: goal.farmType,
                 };
             }

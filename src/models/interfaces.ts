@@ -397,8 +397,6 @@ export interface IPersonalGoal {
     startingStars?: RarityStars;
     targetRarity?: Rarity;
     targetStars?: RarityStars;
-    shardsPerToken?: number;
-    mythicShardsPerToken?: number;
     manuallyFarmXp?: boolean;
     shardFarmType?: ShardFarmType;
 
