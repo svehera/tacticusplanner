@@ -482,7 +482,7 @@ export class GoalsService {
                               unit.alliance as Alliance,
                               onslaughtPreferences
                           )
-                        : 1,
+                        : 0,
                     campaignsUsage: g.campaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     mythicCampaignsUsage: g.mythicCampaignsUsage ?? CampaignsLocationsUsage.LeastEnergy,
                     farmType: g.shardFarmType ?? 'both',
