@@ -19,12 +19,15 @@ import {
     buildLoopSummary,
     buildMetricView,
     efficiencyOf,
+    primeEffectFor,
     primeOutcome,
     resolveLadderPrimes,
     type BarScale,
     type BossLoopRow,
+    type LadderCell,
     type LoopMetric,
     type LoopTokenCounts,
+    type Outcome,
 } from './loops-tab.utils';
 
 // Bosses must use *distinct* GuildBoss families: `buildBossLoopRows` groups by `prefix:rarity`, so two
@@ -206,6 +209,34 @@ describe('outcome derivation', () => {
     });
 });
 
+const finalCell = (bossTokens: number, left: Outcome): LadderCell => ({
+    loop: { boss: bossTokens } as LoopTokenCounts,
+    boss: 'kill',
+    left,
+    right: 'skip',
+});
+
+describe('primeEffectFor', () => {
+    it('ignores the still-running loop, whose boss cost is not final yet', () => {
+        const finalized: LadderCell[] = [
+            finalCell(10, 'kill'),
+            finalCell(10, 'kill'),
+            finalCell(10, 'skip'),
+            finalCell(10, 'skip'),
+        ];
+        // Cheap only because the fight isn't over — folded into the killed group unfiltered, its 1
+        // token would drop that mean to 7, clearing the 15% threshold against the finalized 10 and
+        // reporting a false "lower".
+        const withRunningLoop: LadderCell[] = [
+            ...finalized,
+            { loop: { boss: 1 } as LoopTokenCounts, boss: 'alive', left: 'kill', right: 'skip' },
+        ];
+
+        expect(primeEffectFor(finalized)?.effect).toBe('none');
+        expect(primeEffectFor(withRunningLoop)).toEqual(primeEffectFor(finalized));
+    });
+});
+
 describe('resolveLadderPrimes', () => {
     it('names primes the export never mentioned, from the season config', () => {
         const rows = buildBossLoopRows([boss({ unitId: M1_BOSS, rarity: Rarity.Mythic, set: 0, remainingHp: 0 })]);
@@ -255,10 +286,18 @@ const metricEntries = () => [
     boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, userId: 'a' }),
 ];
 
-/** A big cheap boss and a small expensive one, plus an unfinished loop. */
+/**
+ * A big cheap boss and a small expensive one, cleared identically on two full loops, plus a third,
+ * unfinished loop. Two completed loops (not one) so `leastEfficient` has an actual pair of samples
+ * per boss to compare rather than crowning a verdict off a single data point.
+ */
 const summaryEntries = () => [
     boss({ set: 0, remainingHp: 0, maxHp: 30_000_000, completedOn: START + DAY }),
-    boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, completedOn: START + 3 * DAY }),
+    boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, completedOn: START + 2 * DAY }),
+    // set drops back to 0 → loop 2, cleared the same way
+    boss({ set: 0, remainingHp: 0, maxHp: 30_000_000, completedOn: START + 3 * DAY }),
+    boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, completedOn: START + 4 * DAY }),
+    // loop 3 — still running, only the cheap boss reached so far
     boss({ set: 0, remainingHp: 700, completedOn: START + 8 * DAY }),
 ];
 
@@ -329,11 +368,29 @@ describe('metric view', () => {
         expect(efficiencyOf({ total: 5 } as LoopTokenCounts, 0)).toBeUndefined();
     });
 
-    it('calls a single-valued column flat and says so in words', () => {
-        const view = buildMetricView(metricLadder(), 'tokens');
+    it('calls a column flat once two loops repeat the same cost, and says so in words', () => {
+        // A single loop is excluded on purpose: one data point calling itself "flat" overclaims a
+        // trend from a sample of one. Two loops costing the same is the smallest real repeat.
+        const flatEntries = [
+            boss({ set: 0, remainingHp: 0, maxHp: 20_000_000, completedOn: START + DAY }),
+            leftPrime({ set: 0, remainingHp: 0, completedOn: START + DAY }),
+            boss({ unitId: L2_BOSS, set: 1, remainingHp: 0, maxHp: 10_000_000, completedOn: START + 2 * DAY }),
+            // set drops back to 0 → a new loop, L1 costing the same again
+            boss({ set: 0, remainingHp: 0, maxHp: 20_000_000, completedOn: START + 3 * DAY }),
+            leftPrime({ set: 0, remainingHp: 0, completedOn: START + 3 * DAY }),
+        ];
+        const view = buildMetricView(buildLoopLadder(buildBossLoopRows(flatEntries), tierOf, NOW), 'tokens');
 
         expect(view.columns[0].isFlat).toBe(true);
         expect(view.columns[0].rangeLabel).toBe('flat at 2');
+    });
+
+    it('gives a single-loop column no range label at all', () => {
+        // Same shape as the flat case above but with only the first loop — nothing to range over yet.
+        const view = buildMetricView(metricLadder(), 'tokens');
+
+        expect(view.columns[0].isFlat).toBe(true);
+        expect(view.columns[0].rangeLabel).toBe('');
     });
 
     it('sums tokens but peaks players', () => {

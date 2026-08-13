@@ -291,4 +291,22 @@ describe('dailyRaids.reducer - Campaign Event mapping', () => {
         const hasBase = next.raidedLocations.some(x => x.campaign === 'Indomitus Mirror Elite' && x.nodeNumber === 6);
         expect(hasBase).toBe(true);
     });
+
+    it('marks a shard-farming legacy node as isShardsLocation after sync', () => {
+        const initialState = createInitialState();
+
+        const progress: TacticusCampaignProgress = {
+            id: 'campaign3', // maps to Campaign.O (Octarius)
+            name: 'Octarius',
+            type: 'Normal',
+            // O15 rewards character shards, fully consumed for the day
+            battles: [{ battleIndex: 14, attemptsLeft: 0, attemptsUsed: 1 }],
+        };
+
+        const next = dailyRaidsReducer(initialState, { type: 'SyncWithTacticus', progress: [progress] });
+
+        const shardLocation = next.raidedLocations.find(x => x.campaign === 'Octarius' && x.nodeNumber === 15);
+        expect(shardLocation?.isShardsLocation).toBe(true);
+        expect(shardLocation?.isCompleted).toBe(true);
+    });
 });

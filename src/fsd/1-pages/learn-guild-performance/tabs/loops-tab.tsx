@@ -147,13 +147,12 @@ const Legend = ({
 // Summary tiles — fixed, not driven by the metric switcher. They are the season verdict.
 // ---------------------------------------------------------------------------
 
-/** A boss skipped on every single loop is a standing habit worth naming, not a one-off. */
-const skippedCaption = (summary: LoopSummary): string => {
+/** Names the boss whose primes are skipped every loop — a habit the tile's value alone doesn't say. */
+const skippedCaption = (summary: LoopSummary): string | undefined => {
     if (summary.alwaysSkippedTier !== '') {
-        return `${summary.alwaysSkippedTier} skipped every loop — deliberate, or forgotten?`;
+        return `${summary.alwaysSkippedTier} skipped every loop — full strength every time`;
     }
-    if (summary.primesSkipped > 0) return 'Skipping primes saves tokens but leaves the boss at full strength';
-    return 'Every boss met at reduced strength';
+    return undefined;
 };
 
 /** The season's verdict in four tiles. Fixed, not driven by the switcher — see the section note. */
@@ -176,7 +175,7 @@ const SummaryTiles = ({ summary, hasOutcomeData }: { summary: LoopSummary; hasOu
                 title="Season summary"
                 meta={<CaptureButton onCapture={capture.onCapture} isCapturing={capture.isCapturing} />}
             />
-            <CardGrid min={255} gap="gap-2.5">
+            <CardGrid min={255} gap="gap-2.5" align="stretch">
                 <ReadinessTile
                     label="Loops completed"
                     value={String(summary.loopsCompleted)}

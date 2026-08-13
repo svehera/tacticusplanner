@@ -1,4 +1,4 @@
-import { FC, useMemo } from 'react';
+import { FC, ReactNode, useMemo } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
@@ -14,6 +14,8 @@ import { ICharacterUpgradeEstimate } from '@/fsd/3-features/goals/goals.models';
 
 import { filterCrusadeShopItemsByType } from './crusade-shop-section.helpers';
 import { NeededByEntry } from './daily-raids.helpers';
+import { ShopAvailabilityGroups } from './shop-availability-groups';
+import { groupByAvailability } from './shop-availability.helpers';
 import { buildNeededByTooltip, resolveUnitName } from './shop-tooltip.helpers';
 import { parseForgeBadgeRarity } from './war-shop-section.helpers';
 
@@ -89,6 +91,7 @@ interface Props {
     forgeBadgeNeededBy: Record<Rarity, NeededByEntry[]>;
     userPL: number;
     hasBlueStarUnit: boolean;
+    hideRandomDeals: boolean;
 }
 
 export const CrusadeShopSection: FC<Props> = ({
@@ -98,6 +101,7 @@ export const CrusadeShopSection: FC<Props> = ({
     forgeBadgeNeededBy,
     userPL,
     hasBlueStarUnit,
+    hideRandomDeals,
 }) => {
     const today = CrusadeShopService.getTodayDow();
 
@@ -181,77 +185,75 @@ export const CrusadeShopSection: FC<Props> = ({
         [todayItems, shardsCountsMap, forgeBadgeCounts, materialCountsMap]
     );
 
-    if (visibleItems.length === 0) return;
+    const renderItem = (item: ResolvedShopItem): ReactNode => {
+        if (item.rewardType.startsWith('shards_')) {
+            const shardCounts = shardsCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 };
+            const charId = item.rewardType.slice(7);
+            const unit = CharactersService.getUnit(charId) ?? MowsService.resolveToStatic(charId);
+            const icon = unit ? (
+                <UnitShardIcon icon={unit.roundIcon} name={unit.name} height={ICON_SIZE} width={ICON_SIZE} />
+            ) : (
+                <UnitShardIcon icon="" name={item.rewardType} height={ICON_SIZE} width={ICON_SIZE} />
+            );
+            return (
+                <ShopItemCard
+                    key={item.rewardType}
+                    item={item}
+                    counts={shardCounts}
+                    icon={icon}
+                    name={unit?.name ?? charId}
+                    neededBy={shardsNeededByMap.get(item.rewardType) ?? []}
+                />
+            );
+        }
+
+        const badgeRarity = parseForgeBadgeRarity(item.rewardType);
+        if (badgeRarity !== undefined) {
+            const rarityLabel = RarityMapper.rarityToRarityString(badgeRarity);
+            return (
+                <ShopItemCard
+                    key={item.rewardType}
+                    item={item}
+                    counts={forgeBadgeCounts[badgeRarity]}
+                    icon={<ForgeBadgeImage rarity={badgeRarity} size="medium" />}
+                    name={`${rarityLabel} Forge Badge`}
+                    neededBy={forgeBadgeNeededBy[badgeRarity]}
+                />
+            );
+        }
+
+        const upgradeData = UpgradesService.recipeExpandedUpgradeData[item.rewardType];
+        const materialRarity = typeof upgradeData.rarity === 'number' ? upgradeData.rarity : Rarity.Common;
+        return (
+            <ShopItemCard
+                key={item.rewardType}
+                item={item}
+                counts={materialCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 }}
+                icon={
+                    <UpgradeImage
+                        material={upgradeData.label}
+                        iconPath={upgradeData.iconPath}
+                        rarity={RarityMapper.rarityToRarityString(materialRarity)}
+                        size={ICON_SIZE}
+                    />
+                }
+                name={upgradeData.label}
+                neededBy={materialNeededByMap.get(item.rewardType) ?? []}
+            />
+        );
+    };
+
+    const { guaranteed, possible } = useMemo(
+        () => groupByAvailability(visibleItems, hideRandomDeals),
+        [visibleItems, hideRandomDeals]
+    );
 
     return (
-        <div className="mt-4 border-t border-(--card-border) pt-3">
-            <p className="mb-2 text-xs font-semibold tracking-wide text-(--soft-fg) uppercase">
-                Available in Crusade Shop today
-            </p>
-            <div className="flex flex-wrap items-start justify-center gap-2">
-                {visibleItems.map(item => {
-                    if (item.rewardType.startsWith('shards_')) {
-                        const shardCounts = shardsCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 };
-                        const charId = item.rewardType.slice(7);
-                        const unit = CharactersService.getUnit(charId) ?? MowsService.resolveToStatic(charId);
-                        const icon = unit ? (
-                            <UnitShardIcon
-                                icon={unit.roundIcon}
-                                name={unit.name}
-                                height={ICON_SIZE}
-                                width={ICON_SIZE}
-                            />
-                        ) : (
-                            <UnitShardIcon icon="" name={item.rewardType} height={ICON_SIZE} width={ICON_SIZE} />
-                        );
-                        return (
-                            <ShopItemCard
-                                key={item.rewardType}
-                                item={item}
-                                counts={shardCounts}
-                                icon={icon}
-                                name={unit?.name ?? charId}
-                                neededBy={shardsNeededByMap.get(item.rewardType) ?? []}
-                            />
-                        );
-                    }
-
-                    const badgeRarity = parseForgeBadgeRarity(item.rewardType);
-                    if (badgeRarity !== undefined) {
-                        const rarityLabel = RarityMapper.rarityToRarityString(badgeRarity);
-                        return (
-                            <ShopItemCard
-                                key={item.rewardType}
-                                item={item}
-                                counts={forgeBadgeCounts[badgeRarity]}
-                                icon={<ForgeBadgeImage rarity={badgeRarity} size="medium" />}
-                                name={`${rarityLabel} Forge Badge`}
-                                neededBy={forgeBadgeNeededBy[badgeRarity]}
-                            />
-                        );
-                    }
-
-                    const upgradeData = UpgradesService.recipeExpandedUpgradeData[item.rewardType];
-                    const materialRarity = typeof upgradeData.rarity === 'number' ? upgradeData.rarity : Rarity.Common;
-                    return (
-                        <ShopItemCard
-                            key={item.rewardType}
-                            item={item}
-                            counts={materialCountsMap.get(item.rewardType) ?? { acquired: 0, required: 0 }}
-                            icon={
-                                <UpgradeImage
-                                    material={upgradeData.label}
-                                    iconPath={upgradeData.iconPath}
-                                    rarity={RarityMapper.rarityToRarityString(materialRarity)}
-                                    size={ICON_SIZE}
-                                />
-                            }
-                            name={upgradeData.label}
-                            neededBy={materialNeededByMap.get(item.rewardType) ?? []}
-                        />
-                    );
-                })}
-            </div>
-        </div>
+        <ShopAvailabilityGroups
+            shopName="Crusade Shop"
+            guaranteed={guaranteed}
+            possible={possible}
+            renderItem={renderItem}
+        />
     );
 };

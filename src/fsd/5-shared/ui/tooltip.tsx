@@ -119,14 +119,39 @@ export const LazyTooltip: FC<{ title: ReactNode; children: ReactElement<HTMLAttr
     );
 };
 
+/**
+ * Desktop path is a controlled `Tooltip` so a real click also opens/closes it, not just hover/focus
+ * — `isMobile` is a UA sniff and can miss touch-capable devices that land here instead of
+ * `TouchTooltip`, which otherwise had no click fallback at all.
+ */
 export const AccessibleTooltip: FC<Props> = ({ children, title }) => {
+    const [open, setOpen] = useState(false);
+    const close = useCallback(() => setOpen(false), []);
+
     if (isMobile) {
         return <TouchTooltip title={title}>{children}</TouchTooltip>;
     }
 
+    const childProps = children.props as HTMLAttributes<HTMLElement>;
+    const trigger = cloneElement(children, {
+        onClick: (event: MouseEvent<HTMLElement>) => {
+            childProps.onClick?.(event);
+            setOpen(value => !value);
+        },
+    } as Partial<HTMLAttributes<HTMLElement>>);
+
     return (
-        <Tooltip placement="top" title={title} arrow enterDelay={ENTER_DELAY_MS}>
-            {children}
-        </Tooltip>
+        <ClickAwayListener onClickAway={close} mouseEvent="onMouseUp">
+            <Tooltip
+                placement="top"
+                title={title}
+                arrow
+                enterDelay={ENTER_DELAY_MS}
+                open={open}
+                onOpen={() => setOpen(true)}
+                onClose={close}>
+                {trigger}
+            </Tooltip>
+        </ClickAwayListener>
     );
 };
