@@ -4667,7 +4667,7 @@
             ],
             "progressChests": [
                 {
-                    "requiredProgress": 30,
+                    "requiredProgress": 50,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4676,7 +4676,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 65,
+                    "requiredProgress": 100,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4685,7 +4685,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 105,
+                    "requiredProgress": 150,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4694,7 +4694,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 150,
+                    "requiredProgress": 200,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4703,7 +4703,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 200,
+                    "requiredProgress": 250,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4712,7 +4712,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 255,
+                    "requiredProgress": 300,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4721,7 +4721,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 315,
+                    "requiredProgress": 350,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4730,7 +4730,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 380,
+                    "requiredProgress": 410,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4739,7 +4739,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 450,
+                    "requiredProgress": 480,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4748,7 +4748,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 525,
+                    "requiredProgress": 560,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4757,7 +4757,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 605,
+                    "requiredProgress": 650,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4766,7 +4766,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 690,
+                    "requiredProgress": 750,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4775,7 +4775,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 780,
+                    "requiredProgress": 860,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4784,7 +4784,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 875,
+                    "requiredProgress": 980,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4793,7 +4793,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 975,
+                    "requiredProgress": 1110,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4802,7 +4802,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1085,
+                    "requiredProgress": 1250,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4811,7 +4811,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1215,
+                    "requiredProgress": 1400,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4820,7 +4820,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1375,
+                    "requiredProgress": 1575,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4829,7 +4829,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1595,
+                    "requiredProgress": 1775,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -4838,7 +4838,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1845,
+                    "requiredProgress": 2000,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10251,7 +10251,7 @@
             ],
             "progressChests": [
                 {
-                    "requiredProgress": 30,
+                    "requiredProgress": 50,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10260,7 +10260,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 65,
+                    "requiredProgress": 100,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10269,7 +10269,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 105,
+                    "requiredProgress": 150,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10278,7 +10278,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 150,
+                    "requiredProgress": 200,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10287,7 +10287,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 200,
+                    "requiredProgress": 250,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10296,7 +10296,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 255,
+                    "requiredProgress": 300,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10305,7 +10305,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 315,
+                    "requiredProgress": 350,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10314,7 +10314,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 380,
+                    "requiredProgress": 410,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10323,7 +10323,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 450,
+                    "requiredProgress": 480,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10332,7 +10332,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 525,
+                    "requiredProgress": 560,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10341,7 +10341,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 605,
+                    "requiredProgress": 650,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10350,7 +10350,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 690,
+                    "requiredProgress": 750,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10359,7 +10359,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 780,
+                    "requiredProgress": 860,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10368,7 +10368,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 875,
+                    "requiredProgress": 980,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10377,7 +10377,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 975,
+                    "requiredProgress": 1110,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10386,7 +10386,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1085,
+                    "requiredProgress": 1250,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10395,7 +10395,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1215,
+                    "requiredProgress": 1400,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10404,7 +10404,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1375,
+                    "requiredProgress": 1575,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10413,7 +10413,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1595,
+                    "requiredProgress": 1775,
                     "chest": [
                         {
                             "type": "Seasonal",
@@ -10422,7 +10422,7 @@
                     ]
                 },
                 {
-                    "requiredProgress": 1845,
+                    "requiredProgress": 2000,
                     "chest": [
                         {
                             "type": "Seasonal",
