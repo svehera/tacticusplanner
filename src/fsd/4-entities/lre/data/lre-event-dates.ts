@@ -19,7 +19,7 @@ export const lreEventDates: Record<number, ILreEventDates> = {
         nextEventDateUtc: 'Sun, 17 May 2026 00:00:00 GMT',
     },
     [LegendaryEventEnum.Lucius]: {
-        finished: false,
+        finished: true,
         nextEventDate: 'July 26, 2026',
         nextEventDateUtc: 'Sun, 26 July 2026 00:00:00 GMT',
     },
