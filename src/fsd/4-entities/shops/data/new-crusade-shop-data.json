@@ -10,9 +10,7 @@
         [
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_crusade_shop_eldarLhykhis_shards_regular"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_eldarLhykhis",
                 "maxPurchases": "15",
@@ -21,27 +19,12 @@
                     "type": "crusadeCurrency",
                     "amount": 50
                 }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_crusade_shop_eldarLhykhis_shards_mythic"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicShards_eldarLhykhis:3",
-                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 750
-                }
             }
         ],
         [
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_below_max_legendary_custoBladeChampion"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_custoBladeChampion",
                 "maxPurchases": "15",
@@ -49,70 +32,18 @@
                     "type": "crusadeCurrency",
                     "amount": 50
                 }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_not_unlocked_custoBladeChampion"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_custoBladeChampion",
-                "maxPurchases": "15",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 50
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_max_legendary_custoBladeChampion"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicShards_custoBladeChampion:3",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 750
-                }
             }
         ],
         [
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_below_max_legendary_emperNoiseMarine"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_emperNoiseMarine",
                 "maxPurchases": "15",
                 "cost": {
                     "type": "crusadeCurrency",
                     "amount": 50
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_not_unlocked_emperNoiseMarine"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_emperNoiseMarine",
-                "maxPurchases": "15",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 50
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_max_legendary_emperNoiseMarine"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicShards_emperNoiseMarine:3",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 750
                 }
             }
         ],
@@ -1431,27 +1362,89 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_owns_unit_at_mythic"
+                    "maxPowerLevel": 30
                 },
                 "cronSchedule": "0 0 0 ? * SAT,SUN *",
-                "reward": "xpMythic",
-                "maxPurchases": "2",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:10000",
+                "maxPurchases": "5",
                 "cost": {
                     "type": "crusadeCurrency",
-                    "amount": 715
+                    "amount": 55
                 }
             },
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
+                    "minPowerLevel": 31,
+                    "maxPowerLevel": 40
                 },
                 "cronSchedule": "0 0 0 ? * SAT,SUN *",
-                "reward": "xpLegendary:3",
-                "maxPurchases": "3",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:15000",
+                "maxPurchases": "5",
                 "cost": {
                     "type": "crusadeCurrency",
-                    "amount": 430
+                    "amount": 85
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 41,
+                    "maxPowerLevel": 50
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:25000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 270
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 51,
+                    "maxPowerLevel": 60
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:50000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 535
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 61,
+                    "maxPowerLevel": 70
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:75000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 805
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "minPowerLevel": 71
+                },
+                "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                "freeOffer": "crusadeCurrency:5",
+                "reward": "gold:100000",
+                "maxPurchases": "5",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1070
                 }
             }
         ]

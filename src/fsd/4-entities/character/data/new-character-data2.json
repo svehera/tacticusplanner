@@ -2,6 +2,8 @@
     {
         "id": "ultraTigurius",
         "name": "Tigurius",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "StormOfWrath",
         "passiveAbilityIds": "PsychicFortress",
@@ -49,6 +51,8 @@
     {
         "id": "ultraEliminatorSgt",
         "name": "Certus",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "MortisRound",
         "passiveAbilityIds": "CamoCloak",
@@ -96,6 +100,8 @@
     {
         "id": "ultraInceptorSgt",
         "name": "Bellator",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
         "movement": 4,
         "activeAbilityId": "DeathFromAbove",
         "passiveAbilityIds": "ShockAssault",
@@ -138,6 +144,8 @@
     {
         "id": "ultraApothecary",
         "name": "Incisus",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "CombatRestoratives",
         "passiveAbilityIds": "Narthecium",
@@ -180,6 +188,8 @@
     {
         "id": "ultraCalgar",
         "name": "Calgar",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "GauntletsOfUltramar",
         "passiveAbilityIds": "RitesOfBattle",
@@ -222,6 +232,8 @@
     {
         "id": "ultraTitus",
         "name": "Titus",
+        "faction": "Ultramarines",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "TacticalPrecision",
         "passiveAbilityIds": "FuelledByFury",
@@ -264,6 +276,8 @@
     {
         "id": "adeptRetributor",
         "name": "Vindicta",
+        "faction": "Sisterhood",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "ArmoriumCherub",
         "passiveAbilityIds": "FireOfAbsolution",
@@ -311,6 +325,8 @@
     {
         "id": "adeptHospitaller",
         "name": "Isabella",
+        "faction": "Sisterhood",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "RitesOfRestoration",
         "passiveAbilityIds": "MedicusMinistorum",
@@ -353,6 +369,8 @@
     {
         "id": "adeptMorvenn",
         "name": "Morvenn Vahl",
+        "faction": "Sisterhood",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "SanctorumMissile",
         "passiveAbilityIds": "RighteousRepugnance",
@@ -400,6 +418,8 @@
     {
         "id": "adeptCanoness",
         "name": "Roswitha",
+        "faction": "Sisterhood",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "BrazierOfHolyFire",
         "passiveAbilityIds": "CondemnorStake",
@@ -447,6 +467,8 @@
     {
         "id": "adeptCelestine",
         "name": "Celestine",
+        "faction": "Sisterhood",
+        "alliance": "Imperial",
         "movement": 4,
         "activeAbilityId": "SkyStrike",
         "passiveAbilityIds": "GeminaeSuperia",
@@ -489,6 +511,8 @@
     {
         "id": "necroWarden",
         "name": "Makhotep",
+        "faction": "Necrons",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "AdaptiveStrategy",
         "passiveAbilityIds": "RelentlessMarch",
@@ -536,6 +560,8 @@
     {
         "id": "necroDestroyer",
         "name": "Imospekh",
+        "faction": "Necrons",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "MultiThreatEliminator",
         "passiveAbilityIds": "InescapableDeath",
@@ -583,6 +609,8 @@
     {
         "id": "necroSpyder",
         "name": "Aleph-Null",
+        "faction": "Necrons",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "ScarabHive",
         "passiveAbilityIds": "FabricatorClawArray",
@@ -625,6 +653,8 @@
     {
         "id": "necroPlasmancer",
         "name": "Thutmose",
+        "faction": "Necrons",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "HarbingerOfDestruction",
         "passiveAbilityIds": "LivingLightning",
@@ -672,6 +702,8 @@
     {
         "id": "necroOverlord",
         "name": "Anuphet",
+        "faction": "Necrons",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "ResurrectionOrb",
         "passiveAbilityIds": "MyWillBeDoneOverlord",
@@ -719,6 +751,8 @@
     {
         "id": "necroChronomancer",
         "name": "Thothmek",
+        "faction": "Necrons",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "Chronometron",
         "passiveAbilityIds": "TimesplinterMantle",
@@ -766,6 +800,8 @@
     {
         "id": "astraPrimarisPsy",
         "name": "Sibyll",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "PsychicMaelstrom",
         "passiveAbilityIds": "Nightshroud",
@@ -813,6 +849,8 @@
     {
         "id": "astraYarrick",
         "name": "Yarrick",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "SendInTheNextWave",
         "passiveAbilityIds": "SummaryExecution",
@@ -860,6 +898,8 @@
     {
         "id": "astraBullgryn",
         "name": "Kut",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "FragBomb",
         "passiveAbilityIds": "AvalancheOfMuscle",
@@ -902,6 +942,8 @@
     {
         "id": "astraOrdnance",
         "name": "Thaddeus",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "BasiliskBarrage",
         "passiveAbilityIds": "SpotterReworked",
@@ -949,6 +991,8 @@
     {
         "id": "astraCreed",
         "name": "Creed",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "SupremeCommander",
         "passiveAbilityIds": "SwornProtector",
@@ -991,6 +1035,8 @@
     {
         "id": "astraDreir",
         "name": "Dreir",
+        "faction": "AstraMilitarum",
+        "alliance": "Imperial",
         "movement": 4,
         "activeAbilityId": "LeadingTheCharge",
         "passiveAbilityIds": "ToughToKill",
@@ -1033,6 +1079,8 @@
     {
         "id": "blackTerminator",
         "name": "Angrax",
+        "faction": "BlackLegion",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "BringerOfDespair",
         "passiveAbilityIds": "HatefulAssault",
@@ -1075,6 +1123,8 @@
     {
         "id": "blackObliterator",
         "name": "Volk",
+        "faction": "BlackLegion",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "FrenziedFiring",
         "passiveAbilityIds": "FleshmetalGuns",
@@ -1122,6 +1172,8 @@
     {
         "id": "blackPossession",
         "name": "Archimatos",
+        "faction": "BlackLegion",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "Incursion",
         "passiveAbilityIds": "Possession",
@@ -1169,6 +1221,8 @@
     {
         "id": "blackHaarken",
         "name": "Haarken",
+        "faction": "BlackLegion",
+        "alliance": "Chaos",
         "movement": 4,
         "activeAbilityId": "HeraldOfTheApocalypse",
         "passiveAbilityIds": "HeadClaimer",
@@ -1211,6 +1265,8 @@
     {
         "id": "blackAbaddon",
         "name": "Abaddon",
+        "faction": "BlackLegion",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "Drachnyen",
         "passiveAbilityIds": "FirstAmongTraitors",
@@ -1258,6 +1314,8 @@
     {
         "id": "deathTyphus",
         "name": "Typhus",
+        "faction": "DeathGuard",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "PlagueWind",
         "passiveAbilityIds": "DestroyerHive",
@@ -1305,6 +1363,8 @@
     {
         "id": "deathBlightlord",
         "name": "Maladus",
+        "faction": "DeathGuard",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "FlailSwing",
         "passiveAbilityIds": "HazeOfCorruption",
@@ -1347,6 +1407,8 @@
     {
         "id": "deathRotbone",
         "name": "Nauseous",
+        "faction": "DeathGuard",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "RevitalizingMalignancy",
         "passiveAbilityIds": "TaintedNarthecium",
@@ -1389,6 +1451,8 @@
     {
         "id": "deathPutrifier",
         "name": "Pestillian",
+        "faction": "DeathGuard",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "FoulInfusion",
         "passiveAbilityIds": "ExplosiveMaladies",
@@ -1431,6 +1495,8 @@
     {
         "id": "deathBlightbringer",
         "name": "Corrodius",
+        "faction": "DeathGuard",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "Poxwalkers",
         "passiveAbilityIds": "CursedPlagueBell",
@@ -1473,6 +1539,8 @@
     {
         "id": "orksRuntherd",
         "name": "Snotflogga",
+        "faction": "Orks",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "GetEmRuntz",
         "passiveAbilityIds": "SquigHound",
@@ -1515,6 +1583,8 @@
     {
         "id": "orksBigMek",
         "name": "Gibbascrapz",
+        "faction": "Orks",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "GrotTank",
         "passiveAbilityIds": "KustomForceFieldReworked",
@@ -1557,6 +1627,8 @@
     {
         "id": "orksKillaKan",
         "name": "Snappawrecka",
+        "faction": "Orks",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "DakkaDakkaDakka",
         "passiveAbilityIds": "PowerTrip",
@@ -1604,6 +1676,8 @@
     {
         "id": "orksNob",
         "name": "Tanksmasha",
+        "faction": "Orks",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "UnstoppableMomentumReworked",
         "passiveAbilityIds": "SmashaEad",
@@ -1646,6 +1720,8 @@
     {
         "id": "orksWarboss",
         "name": "Gulgortz",
+        "faction": "Orks",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "Waaagh",
         "passiveAbilityIds": "LightImUp",
@@ -1693,6 +1769,8 @@
     {
         "id": "templSwordBrother",
         "name": "Godswyl",
+        "faction": "BlackTemplars",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "ThunderousAssault",
         "passiveAbilityIds": "ChampionOfTheFeast",
@@ -1735,6 +1813,8 @@
     {
         "id": "templAggressor",
         "name": "Burchard",
+        "faction": "BlackTemplars",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "FragstormGrenadeLauncher",
         "passiveAbilityIds": "Boltstorm",
@@ -1782,6 +1862,8 @@
     {
         "id": "templAncient",
         "name": "Thoread",
+        "faction": "BlackTemplars",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "UnbreakableDuty",
         "passiveAbilityIds": "AstartesBanner",
@@ -1824,6 +1906,8 @@
     {
         "id": "templChampion",
         "name": "Jaeger",
+        "faction": "BlackTemplars",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "HolyDuel",
         "passiveAbilityIds": "MartialSuperiority",
@@ -1866,6 +1950,8 @@
     {
         "id": "templHelbrecht",
         "name": "Helbrecht",
+        "faction": "BlackTemplars",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "CrusadeOfWrath",
         "passiveAbilityIds": "DestroyTheWitch",
@@ -1913,6 +1999,8 @@
     {
         "id": "eldarRanger",
         "name": "Calandis",
+        "faction": "Aeldari",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "FireAndReposition",
         "passiveAbilityIds": "WireweaveNet",
@@ -1960,6 +2048,8 @@
     {
         "id": "eldarAutarch",
         "name": "Aethana",
+        "faction": "Aeldari",
+        "alliance": "Xenos",
         "movement": 5,
         "activeAbilityId": "Loki_SwoopingHawk",
         "passiveAbilityIds": "PathOfCommand",
@@ -2002,6 +2092,8 @@
     {
         "id": "eldarFarseer",
         "name": "Eldryon",
+        "faction": "Aeldari",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "Executioner",
         "passiveAbilityIds": "Doom",
@@ -2049,6 +2141,8 @@
     {
         "id": "eldarMauganRa",
         "name": "Maugan Ra",
+        "faction": "Aeldari",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "HarvesterOfSouls",
         "passiveAbilityIds": "InescapableAccuracy",
@@ -2096,6 +2190,8 @@
     {
         "id": "eldarJainZar",
         "name": "Jain Zar",
+        "faction": "Aeldari",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "SilentDeath",
         "passiveAbilityIds": "TerrorsLament",
@@ -2138,6 +2234,8 @@
     {
         "id": "eldarLhykhis",
         "name": "Lhykhis",
+        "faction": "Aeldari",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "EmpyricAmbush",
         "passiveAbilityIds": "WhisperingWeb",
@@ -2185,6 +2283,8 @@
     {
         "id": "tauMarksman",
         "name": "Sho'syl",
+        "faction": "Tau",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "SeekerMissileFrequencyLock",
         "passiveAbilityIds": "MV71SniperDroneSquad",
@@ -2232,6 +2332,8 @@
     {
         "id": "tauCrisis",
         "name": "Re'vas",
+        "faction": "Tau",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "EarlyWarningOverride",
         "passiveAbilityIds": "CyclicIonBlaster",
@@ -2279,6 +2381,8 @@
     {
         "id": "tauDarkstrider",
         "name": "Darkstrider",
+        "faction": "Tau",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "FightingRetreat",
         "passiveAbilityIds": "StructuralAnalyser",
@@ -2326,6 +2430,8 @@
     {
         "id": "tauAunShi",
         "name": "Aun'Shi",
+        "faction": "Tau",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "InspiredToGreatness",
         "passiveAbilityIds": "SereneUnifier",
@@ -2368,6 +2474,8 @@
     {
         "id": "tauShadowsun",
         "name": "Shadowsun",
+        "faction": "Tau",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "ExemplarOfTheKauyon",
         "passiveAbilityIds": "DefenderOfTheGreaterGood",
@@ -2415,6 +2523,8 @@
     {
         "id": "tauFarsight",
         "name": "Farsight",
+        "faction": "Tau",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "ExemplarOfTheMontka",
         "passiveAbilityIds": "WayOfTheShortBlade",
@@ -2462,6 +2572,8 @@
     {
         "id": "spaceWulfen",
         "name": "Ulf",
+        "faction": "SpaceWolves",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "GreatFrostAxe",
         "passiveAbilityIds": "SavageKiller",
@@ -2504,6 +2616,8 @@
     {
         "id": "spaceHound",
         "name": "Tjark",
+        "faction": "SpaceWolves",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "GrapnelLauncher",
         "passiveAbilityIds": "HuntersBeyondDeath",
@@ -2546,6 +2660,8 @@
     {
         "id": "spaceRockfist",
         "name": "Arjac",
+        "faction": "SpaceWolves",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "Foehammer",
         "passiveAbilityIds": "AnvilShield",
@@ -2588,6 +2704,8 @@
     {
         "id": "spaceStormcaller",
         "name": "Njal",
+        "faction": "SpaceWolves",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "Stormcaller",
         "passiveAbilityIds": "LordOfTempests",
@@ -2635,6 +2753,8 @@
     {
         "id": "spaceBlackmane",
         "name": "Ragnar",
+        "faction": "SpaceWolves",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "WarHowl",
         "passiveAbilityIds": "SagaOfTheWarriorBorn",
@@ -2677,6 +2797,8 @@
     {
         "id": "spaceWolfPriest",
         "name": "Baldr",
+        "faction": "SpaceWolves",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "RitesOfMorkai",
         "passiveAbilityIds": "HealingBalms",
@@ -2719,6 +2841,8 @@
     {
         "id": "thousTzaangor",
         "name": "Yazaghor",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
         "movement": 4,
         "activeAbilityId": "SorcerousFacade",
         "passiveAbilityIds": "RealityUnbound",
@@ -2766,6 +2890,8 @@
     {
         "id": "thousTerminator",
         "name": "Toth",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "HellfyreMissileRack",
         "passiveAbilityIds": "TimeFlux",
@@ -2813,6 +2939,8 @@
     {
         "id": "thousInfernalMaster",
         "name": "Abraxas",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "MasterOfTheTutelaries",
         "passiveAbilityIds": "InfernalPacts",
@@ -2860,6 +2988,8 @@
     {
         "id": "thousSorcerer",
         "name": "Thaumachus",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "AttemptedPossession",
         "passiveAbilityIds": "ArcaneShield",
@@ -2907,6 +3037,8 @@
     {
         "id": "thousAhriman",
         "name": "Ahriman",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "Doombolt",
         "passiveAbilityIds": "PsychicStalk",
@@ -2954,6 +3086,8 @@
     {
         "id": "thousSekhetar",
         "name": "Sekhetar Robot",
+        "faction": "ThousandSons",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "HeavyWarpFlamer",
         "passiveAbilityIds": "PropheticSentinel",
@@ -3001,6 +3135,8 @@
     {
         "id": "darkaHellblaster",
         "name": "Sarquael",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "Supercharge",
         "passiveAbilityIds": "GrimRetribution",
@@ -3048,6 +3184,8 @@
     {
         "id": "darkaTerminator",
         "name": "Baraqiel",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "PlasmaCannon",
         "passiveAbilityIds": "Deathwing",
@@ -3090,6 +3228,8 @@
     {
         "id": "darkaCompanion",
         "name": "Forcas",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "CalibaniteGreatsword",
         "passiveAbilityIds": "EnmityForTheUnworthy",
@@ -3132,6 +3272,8 @@
     {
         "id": "darkaAsmodai",
         "name": "Asmodai",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "ExemplarOfHate",
         "passiveAbilityIds": "FearedInterrogator",
@@ -3174,6 +3316,8 @@
     {
         "id": "darkaAzrael",
         "name": "Azrael",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "DarkTalonStrike",
         "passiveAbilityIds": "LionHelm",
@@ -3221,6 +3365,8 @@
     {
         "id": "darkaSternguard",
         "name": "Ramus",
+        "faction": "DarkAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "SternguardFocus",
         "passiveAbilityIds": "SpecialIssueCombiMelta",
@@ -3268,6 +3414,8 @@
     {
         "id": "tyranNeurothrope",
         "name": "Neurothrope",
+        "faction": "Tyranids",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "SpiritLeech",
         "passiveAbilityIds": "Neuroparasite",
@@ -3315,6 +3463,8 @@
     {
         "id": "tyranTyrantGuard",
         "name": "Tyrant Guard",
+        "faction": "Tyranids",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "CrushingClaws",
         "passiveAbilityIds": "GuardianOrganism",
@@ -3357,6 +3507,8 @@
     {
         "id": "tyranWingedPrime",
         "name": "Winged Prime",
+        "faction": "Tyranids",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "AlphaWarrior",
         "passiveAbilityIds": "SynapticLinchpin",
@@ -3399,6 +3551,8 @@
     {
         "id": "tyranDeathleaper",
         "name": "Deathleaper",
+        "faction": "Tyranids",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "FearOfTheUnseen",
         "passiveAbilityIds": "FeederTendrils",
@@ -3441,6 +3595,8 @@
     {
         "id": "tyranParasite",
         "name": "Parasite of Mortrex",
+        "faction": "Tyranids",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "ItItches",
         "passiveAbilityIds": "BarbedOvipositor",
@@ -3483,6 +3639,8 @@
     {
         "id": "admecDominus",
         "name": "Vitruvius",
+        "faction": "AdeptusMechanicus",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "RadBombardment",
         "passiveAbilityIds": "MasterAnnihilator",
@@ -3530,6 +3688,8 @@
     {
         "id": "admecManipulus",
         "name": "Actus",
+        "faction": "AdeptusMechanicus",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "DefendTheDivineWork",
         "passiveAbilityIds": "GalvanicField",
@@ -3577,6 +3737,8 @@
     {
         "id": "admecMarshall",
         "name": "Tan Gi'da",
+        "faction": "AdeptusMechanicus",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "DoctrinaImperatives",
         "passiveAbilityIds": "ControlEdict",
@@ -3624,6 +3786,8 @@
     {
         "id": "admecRuststalker",
         "name": "Exitor-Rho",
+        "faction": "AdeptusMechanicus",
+        "alliance": "Imperial",
         "movement": 4,
         "activeAbilityId": "CordClaw",
         "passiveAbilityIds": "OptimizedGait",
@@ -3666,6 +3830,8 @@
     {
         "id": "admecDestroyer",
         "name": "Sy-gex",
+        "faction": "AdeptusMechanicus",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "SentinelDirectives",
         "passiveAbilityIds": "HeavyGravCannon",
@@ -3713,6 +3879,8 @@
     {
         "id": "worldTerminator",
         "name": "Wrask",
+        "faction": "WorldEaters",
+        "alliance": "Chaos",
         "movement": 2,
         "activeAbilityId": "BloodyFury",
         "passiveAbilityIds": "WrathfulDevotion",
@@ -3755,6 +3923,8 @@
     {
         "id": "worldJakhal",
         "name": "Macer",
+        "faction": "WorldEaters",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "JakhalStimms",
         "passiveAbilityIds": "Skullsmasher",
@@ -3797,6 +3967,8 @@
     {
         "id": "worldEightbound",
         "name": "Azkor",
+        "faction": "WorldEaters",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "OverwhelmingWrath",
         "passiveAbilityIds": "BeaconOfRage",
@@ -3839,6 +4011,8 @@
     {
         "id": "worldExecutions",
         "name": "Tarvakh",
+        "faction": "WorldEaters",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "MurderousSwing",
         "passiveAbilityIds": "TrophyTaker",
@@ -3881,6 +4055,8 @@
     {
         "id": "worldKharn",
         "name": "Kharn",
+        "faction": "WorldEaters",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "KillMaimBurn",
         "passiveAbilityIds": "TheBetrayer",
@@ -3923,6 +4099,8 @@
     {
         "id": "bloodIntercessor",
         "name": "Mataneo",
+        "faction": "BloodAngels",
+        "alliance": "Imperial",
         "movement": 4,
         "activeAbilityId": "HammerOfWrath",
         "passiveAbilityIds": "AggressiveOnslaught",
@@ -3965,6 +4143,8 @@
     {
         "id": "bloodDeathCompany",
         "name": "Lucien",
+        "faction": "BloodAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "BlackRage",
         "passiveAbilityIds": "VisionsOfHeresy",
@@ -4012,6 +4192,8 @@
     {
         "id": "bloodSanguinary",
         "name": "Nicodemus",
+        "faction": "BloodAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "BloodChalice",
         "passiveAbilityIds": "SanguinaryPriest",
@@ -4054,6 +4236,8 @@
     {
         "id": "bloodMephiston",
         "name": "Mephiston",
+        "faction": "BloodAngels",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "TheQuickening",
         "passiveAbilityIds": "FuryOfTheAncients",
@@ -4101,6 +4285,8 @@
     {
         "id": "bloodDante",
         "name": "Dante",
+        "faction": "BloodAngels",
+        "alliance": "Imperial",
         "movement": 4,
         "activeAbilityId": "LightOfSanguinius",
         "passiveAbilityIds": "LordOfTheHost",
@@ -4143,6 +4329,8 @@
     {
         "id": "bloodTerminator",
         "name": "Cezare",
+        "faction": "BloodAngels",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "SavageEchoes",
         "passiveAbilityIds": "RedRampage",
@@ -4185,6 +4373,8 @@
     {
         "id": "genesBiophagus",
         "name": "Hollan",
+        "faction": "Genestealers",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "AberrantHypermorph",
         "passiveAbilityIds": "TwistedScience",
@@ -4227,6 +4417,8 @@
     {
         "id": "genesMagus",
         "name": "Xybia",
+        "faction": "Genestealers",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "MindControl",
         "passiveAbilityIds": "SpiritualLeader",
@@ -4274,6 +4466,8 @@
     {
         "id": "genesPrimus",
         "name": "Isaak",
+        "faction": "Genestealers",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "CultDemagogue",
         "passiveAbilityIds": "DecoysAndMisdirection",
@@ -4321,6 +4515,8 @@
     {
         "id": "genesKelermorph",
         "name": "Judh",
+        "faction": "Genestealers",
+        "alliance": "Xenos",
         "movement": 3,
         "activeAbilityId": "HeroicFusillade",
         "passiveAbilityIds": "HypersensoryAbilities",
@@ -4368,6 +4564,8 @@
     {
         "id": "genesPatriarch",
         "name": "The Patermine",
+        "faction": "Genestealers",
+        "alliance": "Xenos",
         "movement": 4,
         "activeAbilityId": "MightFromBelow",
         "passiveAbilityIds": "CosmicHorror",
@@ -4410,6 +4608,8 @@
     {
         "id": "custoVexilusPraetor",
         "name": "Aesoth",
+        "faction": "Custodes",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "VexillaMagnifica",
         "passiveAbilityIds": "StandVigil",
@@ -4452,6 +4652,8 @@
     {
         "id": "custoAtlacoya",
         "name": "Atlacoya",
+        "faction": "Custodes",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "TalonsOfTheEmperor",
         "passiveAbilityIds": "DaughterOfTheAbyss",
@@ -4494,6 +4696,8 @@
     {
         "id": "custoKyrus",
         "name": "Tyrith",
+        "faction": "Custodes",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "VigilanceEternal",
         "passiveAbilityIds": "UnwaveringSentinel",
@@ -4541,6 +4745,8 @@
     {
         "id": "custoBladeChampion",
         "name": "Kariyan",
+        "faction": "Custodes",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "MartialInspiration",
         "passiveAbilityIds": "LegacyOfCombat",
@@ -4583,6 +4789,8 @@
     {
         "id": "custoTrajann",
         "name": "Trajann",
+        "faction": "Custodes",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "MomentShackle",
         "passiveAbilityIds": "LegendaryCommander",
@@ -4625,6 +4833,8 @@
     {
         "id": "emperNoiseMarine",
         "name": "Shiron",
+        "faction": "EmperorsChildren",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "ExcruciatingFrequencies",
         "passiveAbilityIds": "TerrifyingCrescendo",
@@ -4672,6 +4882,8 @@
     {
         "id": "emperFlawlessBlade",
         "name": "Hascule",
+        "faction": "EmperorsChildren",
+        "alliance": "Chaos",
         "movement": 4,
         "activeAbilityId": "DaemonicPatrons",
         "passiveAbilityIds": "EcstaticSlaughter",
@@ -4714,6 +4926,8 @@
     {
         "id": "emperKakophonist",
         "name": "Adamatar",
+        "faction": "EmperorsChildren",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "DoomSiren",
         "passiveAbilityIds": "ObsessiveAnnunciation",
@@ -4756,6 +4970,8 @@
     {
         "id": "emperExultant",
         "name": "Laviscus",
+        "faction": "EmperorsChildren",
+        "alliance": "Chaos",
         "movement": 3,
         "activeAbilityId": "EuphoricStrikes",
         "passiveAbilityIds": "RefusalToBeOutdone",
@@ -4798,6 +5014,8 @@
     {
         "id": "emperLucius",
         "name": "Lucius",
+        "faction": "EmperorsChildren",
+        "alliance": "Chaos",
         "movement": 4,
         "activeAbilityId": "LashOfTorment",
         "passiveAbilityIds": "ArmourOfShriekingSouls",
@@ -4840,6 +5058,8 @@
     {
         "id": "votanBeserk",
         "name": "Havyr",
+        "faction": "LeaguesOfVotann",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "AugmentedAssault",
         "passiveAbilityIds": "FuryFromTheDelve",
@@ -4882,6 +5102,8 @@
     {
         "id": "votanIronmaster",
         "name": "Vynn",
+        "faction": "LeaguesOfVotann",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "GravitonRifle",
         "passiveAbilityIds": "EcogSupport",
@@ -4924,6 +5146,8 @@
     {
         "id": "votanMemnyr",
         "name": "Ammuk",
+        "faction": "LeaguesOfVotann",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "IronkinSteeljack",
         "passiveAbilityIds": "PredictiveGuidance",
@@ -4966,6 +5190,8 @@
     {
         "id": "votanChampion",
         "name": "Kimm",
+        "faction": "LeaguesOfVotann",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "MassDriverAccelerator",
         "passiveAbilityIds": "ModifiedExoarmour",
@@ -5013,6 +5239,8 @@
     {
         "id": "votanUthar",
         "name": "Uthar",
+        "faction": "LeaguesOfVotann",
+        "alliance": "Xenos",
         "movement": 2,
         "activeAbilityId": "AncestralFortune",
         "passiveAbilityIds": "GrimEfficiency",
@@ -5060,6 +5288,8 @@
     {
         "id": "astarCyrus",
         "name": "Cyrus",
+        "faction": "AdeptusAstartes",
+        "alliance": "Imperial",
         "movement": 3,
         "activeAbilityId": "StrikeFromTheShadows",
         "passiveAbilityIds": "HaywireMine",
@@ -5107,6 +5337,8 @@
     {
         "id": "astarLysander",
         "name": "Lysander",
+        "faction": "AdeptusAstartes",
+        "alliance": "Imperial",
         "movement": 2,
         "activeAbilityId": "TitanhammerSquad",
         "passiveAbilityIds": "IconOfObstinacy",
