@@ -147,6 +147,12 @@ export const HsesLookup = () => {
                     cells={rewards.map((reward, index): TieredRewardCell => {
                         const { icon, label, qty } = hseRewardInfo(reward.chestRewardId);
                         const isLast = index === rewards.length - 1;
+                        // tieredProgressRewards.requiredProgress is a cumulative total for every
+                        // non-endless entry; the trailing endless entry is already the per-repeat delta.
+                        const previousCumulativeProgress = index === 0 ? 0 : rewards[index - 1].requiredProgress;
+                        const incrementalProgress = reward.endless
+                            ? reward.requiredProgress
+                            : reward.requiredProgress - previousCumulativeProgress;
                         return {
                             key: index,
                             title: label,
@@ -156,7 +162,7 @@ export const HsesLookup = () => {
                                 </span>
                             ),
                             rewards: [{ icon, qty }],
-                            costLabel: `${reward.requiredProgress.toLocaleString()} pts`,
+                            costLabel: `${incrementalProgress.toLocaleString()} pts`,
                         };
                     })}
                 />

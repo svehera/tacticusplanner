@@ -150,7 +150,7 @@ export function DailyRaidsSection() {
                     campaignsProgress,
                     preferences: dailyRaidsPreferences,
                     upgrades: inventory.upgrades,
-                    completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
+                    completedLocations: dailyRaids.raidedLocations,
                     filters: dailyRaids.filters,
                     onslaughtTokensToday,
                     onslaughtPreferences,

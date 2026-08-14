@@ -133,7 +133,7 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
+                completedLocations: dailyRaids.raidedLocations,
                 filters: dailyRaids.filters,
                 onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
                 onslaughtPreferences,
@@ -169,7 +169,7 @@ export const DailyRaids = () => {
                 campaignsProgress: campaignsProgress,
                 preferences: dailyRaidsPreferences,
                 upgrades: upgrades,
-                completedLocations: dailyRaids.raidedLocations.filter(x => !x.isShardsLocation),
+                completedLocations: dailyRaids.raidedLocations,
                 filters: dailyRaids.filters,
                 onslaughtTokensToday: UpgradesService.computeOnslaughtTokensToday(gameModeTokens),
                 onslaughtPreferences,
@@ -250,6 +250,7 @@ export const DailyRaids = () => {
                                 inProgressMaterials={estimatedRanks.inProgressMaterials}
                                 blockedMaterials={estimatedRanks.blockedMaterials}
                                 userPL={playerMetadata.powerLevel ?? 1}
+                                hideRandomDeals={viewPreferences.hideRandomShopDeals ?? false}
                             />
                         ) : undefined
                     }
@@ -263,6 +264,7 @@ export const DailyRaids = () => {
                                 componentNeededBy={mowCounts.componentNeededBy}
                                 forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
                                 userPL={playerMetadata.powerLevel ?? 1}
+                                hideRandomDeals={viewPreferences.hideRandomShopDeals ?? false}
                             />
                         ) : undefined
                     }
@@ -273,6 +275,7 @@ export const DailyRaids = () => {
                                 blockedMaterials={estimatedRanks.blockedMaterials}
                                 forgeBadgeCounts={mowCounts.forgeBadgeCounts}
                                 forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
+                                hideRandomDeals={viewPreferences.hideRandomShopDeals ?? false}
                             />
                         ) : undefined
                     }
@@ -285,6 +288,7 @@ export const DailyRaids = () => {
                                 forgeBadgeNeededBy={mowCounts.forgeBadgeNeededBy}
                                 userPL={playerMetadata.powerLevel ?? 1}
                                 hasBlueStarUnit={hasBlueStar}
+                                hideRandomDeals={viewPreferences.hideRandomShopDeals ?? false}
                             />
                         ) : undefined
                     }

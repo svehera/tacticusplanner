@@ -131,6 +131,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         showWarShop: viewPreferences.showWarShop ?? true,
         showRogueTrader: viewPreferences.showRogueTrader ?? true,
         showCrusadeShop: viewPreferences.showCrusadeShop ?? true,
+        hideRandomShopDeals: viewPreferences.hideRandomShopDeals ?? false,
     });
     const [dailyEnergy, setDailyEnergy] = React.useState(() => {
         const index = energyMarks.findIndex(x => x.value === dailyRaidsPreferences.dailyEnergy);
@@ -151,6 +152,7 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                 showWarShop: viewPreferences.showWarShop ?? true,
                 showRogueTrader: viewPreferences.showRogueTrader ?? true,
                 showCrusadeShop: viewPreferences.showCrusadeShop ?? true,
+                hideRandomShopDeals: viewPreferences.hideRandomShopDeals ?? false,
             });
         }
     }, [open, viewPreferences]);
@@ -174,6 +176,11 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
         dispatch.viewPreferences({ type: 'Update', setting: 'showWarShop', value: shopVisibility.showWarShop });
         dispatch.viewPreferences({ type: 'Update', setting: 'showRogueTrader', value: shopVisibility.showRogueTrader });
         dispatch.viewPreferences({ type: 'Update', setting: 'showCrusadeShop', value: shopVisibility.showCrusadeShop });
+        dispatch.viewPreferences({
+            type: 'Update',
+            setting: 'hideRandomShopDeals',
+            value: shopVisibility.hideRandomShopDeals,
+        });
         close();
     };
 
@@ -345,6 +352,19 @@ const DailyRaidsSettings: React.FC<Props> = ({ close, open }) => {
                             }>
                             Crusade Shop
                         </Switch>
+                        <div className="my-1 border-t border-(--card-border)" />
+                        <div className="flex items-center gap-1">
+                            <Switch
+                                isSelected={shopVisibility.hideRandomShopDeals}
+                                onChange={checked =>
+                                    setShopVisibility(current => ({ ...current, hideRandomShopDeals: checked }))
+                                }>
+                                Hide non-guaranteed items
+                            </Switch>
+                            <AccessibleTooltip title="Some shop slots can roll one of several different rewards — only one will actually appear in-game. When enabled, items that aren't guaranteed to show up today are hidden instead of shown separately.">
+                                <Info className="size-4 text-(--primary)" />
+                            </AccessibleTooltip>
+                        </div>
                     </div>
                 </fieldset>
             </PortalDialog.Body>
