@@ -26,16 +26,21 @@
         </style>
         <script>
             (function () {
+                var stored = null;
                 try {
-                    var stored = localStorage.getItem('tp-theme');
-                    var isDark =
-                        stored === 'DARK' ||
-                        (stored !== 'LIGHT' && matchMedia('(prefers-color-scheme: dark)').matches);
-                    if (isDark) {
-                        document.documentElement.classList.add('dark');
-                        document.documentElement.dataset.agThemeMode = 'dark';
-                    }
+                    stored = localStorage.getItem('tp-theme');
                 } catch (e) {}
+                var isDark;
+                try {
+                    isDark =
+                        stored === 'DARK' || (stored !== 'LIGHT' && matchMedia('(prefers-color-scheme: dark)').matches);
+                } catch (e) {
+                    isDark = stored === 'DARK';
+                }
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.dataset.agThemeMode = 'dark';
+                }
             })();
         </script>
 
