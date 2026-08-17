@@ -225,6 +225,8 @@ New tokens go in `src/fsd/0-app/index.css`:
 | `bg-(--card-fg)/60` as a progress fill                       | Pick a semantic fill: `bg-(--primary)` or the relevant domain token                                                                          |
 | `hover:bg-(--neutral)` on buttons inside cards/tables        | `--neutral` = card surface in dark mode — invisible hover. Use `hover:bg-(--primary)/15` (neutral) or `hover:bg-(--danger)/10` (destructive) |
 
+**Exception:** `index.html`'s pre-CSS theme bootstrap script may hardcode hex (tokens aren't loaded yet). Keep it mirroring `--bg`/`--fg`.
+
 ### Shade-picking guide
 
 **Tokens for identity. Tailwind for variation.** If changing the colour would change what the app _is_ (brand, intent, semantic meaning), it's a token. If it's just picking a lighter or darker shade of something that already has a token, use Tailwind's scale with explicit `dark:` variants.
