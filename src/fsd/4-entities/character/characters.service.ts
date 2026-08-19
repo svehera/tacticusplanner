@@ -12,6 +12,7 @@ import {
     Rarity,
     Rank,
     RarityStars,
+    getTraitStringFromLabel,
 } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line boundaries/element-types
@@ -20,6 +21,23 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 import { CharacterBias } from './bias.enum';
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
+
+/**
+ * Roster-filter fields shared between every screen that lets a user narrow down a character
+ * list by combat properties (e.g. `/learn/characters` and the team builder's unit filter).
+ */
+export interface IRosterFilterCriteria {
+    attackType?: string; // '', 'melee', 'range'
+    minHits?: number | '';
+    maxHits?: number | '';
+    movement?: number | '';
+    minRange?: number | '';
+    maxRange?: number | '';
+    damageTypes?: DamageType[];
+    /** `Trait` LABEL values, e.g. `Trait.LivingMetal === 'Living Metal'`. */
+    traits?: Trait[];
+    alliance?: Alliance[];
+}
 
 const equipmentTypeMapping = {
     Crit: Equipment.Crit,
@@ -308,5 +326,104 @@ export class CharactersService {
             lowered === character.shortName.toLowerCase() ||
             lowered === character.fullName.toLowerCase()
         );
+    }
+
+    /**
+     * Checks every roster-filter dimension in {@link IRosterFilterCriteria} against a single
+     * character. Shared by every screen that filters a character list by combat properties.
+     */
+    public static passesRosterFilter(character: ICharacter2, criteria: IRosterFilterCriteria): boolean {
+        return (
+            this.passesAttackTypeFilter(character, criteria.attackType) &&
+            this.passesHitsFilter(character, criteria.minHits, criteria.maxHits) &&
+            this.passesMovementFilter(character, criteria.movement) &&
+            this.passesRangeFilter(character, criteria.minRange, criteria.maxRange) &&
+            this.passesDamageTypesFilter(character, criteria.damageTypes) &&
+            this.passesTraitsFilter(character, criteria.traits) &&
+            this.passesAllianceFilter(character.alliance, criteria.alliance)
+        );
+    }
+
+    /** Standalone (not folded into `passesRosterFilter`) because MoWs need alliance filtering without the character-only dimensions. */
+    public static passesAllianceFilter(unitAlliance: Alliance | string, alliances?: Alliance[]): boolean {
+        if (!alliances || alliances.length === 0) return true;
+        return alliances.includes(unitAlliance as Alliance);
+    }
+
+    /**
+     * Filters by trait label. `Mechanical` is special-cased to also match characters tagged
+     * `LivingMetal`, since some "mechanical" units are stored under that key instead.
+     */
+    public static passesTraitsFilter(character: ICharacter2, traits?: Trait[]): boolean {
+        if (!traits || traits.length === 0) return true;
+
+        const characterTraitKeys = (character.traits ?? []) as unknown as string[];
+        return traits.every(label => {
+            const key = getTraitStringFromLabel(label);
+            if (!key) return false;
+            if (key !== 'Mechanical') return characterTraitKeys.includes(key);
+            return characterTraitKeys.includes('Mechanical') || characterTraitKeys.includes('LivingMetal');
+        });
+    }
+
+    private static passesAttackTypeFilter(character: ICharacter2, attackType?: string): boolean {
+        if (attackType === 'melee') return !character.rangeHits;
+        if (attackType === 'range') return !!character.rangeHits;
+        return true;
+    }
+
+    private static passesHitsFilter(character: ICharacter2, minHits?: number | '', maxHits?: number | ''): boolean {
+        const hits = character.rangeHits ?? character.meleeHits ?? 0;
+        if (minHits && hits < minHits) return false;
+        if (maxHits && hits > maxHits) return false;
+        return true;
+    }
+
+    private static passesMovementFilter(character: ICharacter2, movement?: number | ''): boolean {
+        if (!movement) return true;
+        return character.movement === movement;
+    }
+
+    /** Characters with no ranged attack (no `rangeDistance`) never match once either bound is set. */
+    private static passesRangeFilter(character: ICharacter2, minRange?: number | '', maxRange?: number | ''): boolean {
+        if (!minRange && !maxRange) return true;
+        if (!character.rangeDistance) return false;
+        if (minRange && character.rangeDistance < minRange) return false;
+        if (maxRange && character.rangeDistance > maxRange) return false;
+        return true;
+    }
+
+    private static passesDamageTypesFilter(character: ICharacter2, damageTypes?: DamageType[]): boolean {
+        if (!damageTypes || damageTypes.length === 0) return true;
+        return damageTypes.every(type => character.damageTypes.all.includes(type));
+    }
+
+    public static getHitsOptions(characters: ICharacter2[]): number[] {
+        return uniq(characters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1])).toSorted((a, b) => a - b);
+    }
+
+    public static getMovementOptions(characters: ICharacter2[]): number[] {
+        return uniq(characters.map(x => x.movement)).toSorted((a, b) => a - b);
+    }
+
+    public static getRangeOptions(characters: ICharacter2[]): number[] {
+        return uniq(characters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1)).toSorted((a, b) => a - b);
+    }
+
+    public static getDamageTypesOptions(characters: ICharacter2[]): DamageType[] {
+        return uniq(characters.flatMap(x => x.damageTypes.all));
+    }
+
+    /** Returns the `Trait` labels present on the roster (not the raw storage keys). */
+    public static getTraitsOptions(characters: ICharacter2[]): Trait[] {
+        const activeTraitKeys = new Set<string>();
+        for (const c of characters) {
+            if (c.traits) for (const t of c.traits) activeTraitKeys.add(t as unknown as string);
+        }
+
+        return Object.values(Trait).filter(label => {
+            const key = getTraitStringFromLabel(label);
+            return !!key && activeTraitKeys.has(key);
+        });
     }
 }

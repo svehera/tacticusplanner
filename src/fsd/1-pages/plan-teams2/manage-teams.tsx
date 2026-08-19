@@ -8,7 +8,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { ICharacter2 } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
-import { FactionId } from '@/fsd/5-shared/model';
+import { Alliance, DamageType, FactionId, Trait } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
@@ -86,6 +86,15 @@ export const ManageTeams = () => {
     const [maxRarity, setMaxRarity] = useState<Rarity>(Rarity.Mythic);
     const [rarityCap, setRarityCap] = useState<Rarity>(Rarity.Mythic);
     const [factions, setFactions] = useState<FactionId[]>([]);
+    const [traits, setTraits] = useState<Trait[]>([]);
+    const [alliance, setAlliance] = useState<Alliance[]>([]);
+    const [attackType, setAttackType] = useState<string>('');
+    const [minHits, setMinHits] = useState<number | ''>('');
+    const [maxHits, setMaxHits] = useState<number | ''>('');
+    const [movement, setMovement] = useState<number | ''>('');
+    const [minRange, setMinRange] = useState<number | ''>('');
+    const [maxRange, setMaxRange] = useState<number | ''>('');
+    const [damageTypes, setDamageTypes] = useState<DamageType[]>([]);
     const [allowLockedUnits, setAllowLockedUnits] = useState<boolean>(true);
     const [searchText, setSearchText] = useState<string>('');
     const [selectedChars, setSelectedChars] = useState<string[]>([]);
@@ -223,6 +232,10 @@ export const ManageTeams = () => {
         notes,
         selectedChars,
         selectedMows,
+        flexIndex,
+        saveTeamMode,
+        editingTeam?.name,
+        teams,
     ]);
 
     const onAdd = () => {
@@ -405,6 +418,15 @@ export const ManageTeams = () => {
                 minRank={minRank}
                 maxRank={maxRank}
                 factions={factions}
+                traits={traits}
+                alliance={alliance}
+                attackType={attackType}
+                minHits={minHits}
+                maxHits={maxHits}
+                movement={movement}
+                minRange={minRange}
+                maxRange={maxRange}
+                damageTypes={damageTypes}
                 notes={notes}
                 zoom={zoom}
                 setZoom={setZoom}
@@ -419,6 +441,15 @@ export const ManageTeams = () => {
                 onMinRankChange={setMinRank}
                 onMaxRankChange={setMaxRank}
                 onFactionsChange={setFactions}
+                onTraitsChange={setTraits}
+                onAllianceChange={setAlliance}
+                onAttackTypeChange={setAttackType}
+                onMinHitsChange={setMinHits}
+                onMaxHitsChange={setMaxHits}
+                onMovementChange={setMovement}
+                onMinRangeChange={setMinRange}
+                onMaxRangeChange={setMaxRange}
+                onDamageTypesChange={setDamageTypes}
                 onRarityCapChanged={setRarityCap}
                 deployedCharIds={deployedCharIds}
                 deployedMowIds={deployedMowIds}

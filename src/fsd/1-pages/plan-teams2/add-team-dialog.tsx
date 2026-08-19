@@ -4,13 +4,12 @@ import { uniq } from 'lodash';
 import { X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 
-import { ICharacter2 } from '@/models/interfaces';
-
-import { FactionId, Rank, Rarity } from '@/fsd/5-shared/model';
+import { Alliance, DamageType, FactionId, Rank, Rarity, Trait } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Button, Select } from '@/fsd/5-shared/ui';
 import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { CampaignImage } from '@/fsd/4-entities/campaign';
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2 } from '@/fsd/4-entities/mow';
 
 import { CharacterSelectGrid, MowSelectGrid } from '@/fsd/2-widgets/unit-select-grid';
@@ -24,6 +23,7 @@ import {
     campaignStorylineUsableFactionIds,
     campaignStorylineUsableFactions,
 } from './campaign.constants';
+import { IUnitFilterCriteria } from './models';
 import { TeamFlow } from './team-flow';
 import { Teams2Service } from './teams2.service';
 import { UnitFilter } from './unit-filter';
@@ -42,6 +42,15 @@ interface Props {
     minRank: Rank;
     maxRank: Rank;
     factions: FactionId[];
+    traits: Trait[];
+    alliance: Alliance[];
+    attackType: string;
+    minHits: number | '';
+    maxHits: number | '';
+    movement: number | '';
+    minRange: number | '';
+    maxRange: number | '';
+    damageTypes: DamageType[];
     notes: string;
     zoom: number;
     setZoom: (value: number) => void;
@@ -56,6 +65,15 @@ interface Props {
     onMinRankChange: (rank: Rank) => void;
     onMaxRankChange: (rank: Rank) => void;
     onFactionsChange: (factions: FactionId[]) => void;
+    onTraitsChange: (traits: Trait[]) => void;
+    onAllianceChange: (alliance: Alliance[]) => void;
+    onAttackTypeChange: (attackType: string) => void;
+    onMinHitsChange: (hits: number | '') => void;
+    onMaxHitsChange: (hits: number | '') => void;
+    onMovementChange: (movement: number | '') => void;
+    onMinRangeChange: (range: number | '') => void;
+    onMaxRangeChange: (range: number | '') => void;
+    onDamageTypesChange: (damageTypes: DamageType[]) => void;
     onRarityCapChanged: (rarity: Rarity) => void;
     deployedCharIds: string[];
     deployedMowIds: string[];
@@ -97,6 +115,15 @@ export const AddTeamDialog: React.FC<Props> = ({
     minRank,
     maxRank,
     factions,
+    traits,
+    alliance,
+    attackType,
+    minHits,
+    maxHits,
+    movement,
+    minRange,
+    maxRange,
+    damageTypes,
     notes,
     zoom,
     rarityCap,
@@ -112,6 +139,15 @@ export const AddTeamDialog: React.FC<Props> = ({
     onMinRankChange,
     onMaxRankChange,
     onFactionsChange,
+    onTraitsChange,
+    onAllianceChange,
+    onAttackTypeChange,
+    onMinHitsChange,
+    onMaxHitsChange,
+    onMovementChange,
+    onMinRangeChange,
+    onMaxRangeChange,
+    onDamageTypesChange,
     onRarityCapChanged,
     deployedCharIds,
     deployedMowIds,
@@ -181,6 +217,31 @@ export const AddTeamDialog: React.FC<Props> = ({
         (a, b) => a.localeCompare(b)
     );
 
+    const allTraits: Trait[] = CharactersService.getTraitsOptions(chars);
+    const hitsOptions = CharactersService.getHitsOptions(chars);
+    const movementOptions = CharactersService.getMovementOptions(chars);
+    const rangeOptions = CharactersService.getRangeOptions(chars);
+    const damageTypesOptions = CharactersService.getDamageTypesOptions(chars);
+
+    const filterCriteria: IUnitFilterCriteria = {
+        allowLockedUnits,
+        minRank,
+        maxRank,
+        minRarity,
+        maxRarity,
+        factions,
+        traits,
+        alliance,
+        attackType,
+        minHits,
+        maxHits,
+        movement,
+        minRange,
+        maxRange,
+        damageTypes,
+        searchText,
+    };
+
     // When a campaign is selected, only its usable factions can be fielded.
     const campaignFactions =
         campaignSelected && campaignStoryline ? campaignStorylineUsableFactionIds(campaignStoryline) : undefined;
@@ -188,18 +249,7 @@ export const AddTeamDialog: React.FC<Props> = ({
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId))
         .filter(c => !campaignFactions?.length || campaignFactions.includes(c.faction))
-        .filter(c =>
-            Teams2Service.passesCharacterFilter(
-                c,
-                allowLockedUnits,
-                minRank,
-                maxRank,
-                minRarity,
-                maxRarity,
-                factions,
-                searchText
-            )
-        )
+        .filter(c => Teams2Service.passesCharacterFilter(c, filterCriteria))
         .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
             const powerA = Math.pow(a.activeAbilityLevel ?? 0, 2) + Math.pow(a.passiveAbilityLevel ?? 0, 2);
@@ -211,7 +261,7 @@ export const AddTeamDialog: React.FC<Props> = ({
 
     const filteredMows = mows
         .filter(mow => !selectedMows.includes(mow.snowprintId))
-        .filter(mow => Teams2Service.passesMowFilter(mow, allowLockedUnits, minRarity, maxRarity, factions, searchText))
+        .filter(mow => Teams2Service.passesMowFilter(mow, filterCriteria))
         .toSorted((a, b) => {
             const powerA = Math.pow(a.primaryAbilityLevel ?? 0, 2) + Math.pow(a.secondaryAbilityLevel ?? 0, 2);
             const powerB = Math.pow(b.primaryAbilityLevel ?? 0, 2) + Math.pow(b.secondaryAbilityLevel ?? 0, 2);
@@ -261,32 +311,53 @@ export const AddTeamDialog: React.FC<Props> = ({
             <div className="flex flex-col gap-6 p-6">
                 {/* UNIT FILTER SECTION */}
                 <section className="rounded-lg border border-(--border) bg-(--card) shadow-inner">
-                    <details className="group p-2 transition-all group-open:p-6">
+                    <details className="group space-y-6 p-6">
                         <summary className="cursor-pointer list-none text-lg font-semibold outline-none focus:text-(--primary)">
                             <div className="flex items-center justify-between">
                                 <span>Unit Filter</span>
                                 <span className="transition group-open:rotate-180">▼</span>
                             </div>
                         </summary>
-                        <div className="mt-4 space-y-6">
-                            <UnitFilter
-                                allowLockedUnits={allowLockedUnits}
-                                searchText={searchText}
-                                minRarity={minRarity}
-                                maxRarity={maxRarity}
-                                minRank={minRank}
-                                maxRank={maxRank}
-                                factions={factions}
-                                allFactions={allFactions}
-                                onAllowLockedUnitsChange={onAllowLockedUnitsChange}
-                                onSearchTextChange={onSearchTextChange}
-                                onMinRarityChange={onMinRarityChange}
-                                onMaxRarityChange={onMaxRarityChange}
-                                onMinRankChange={onMinRankChange}
-                                onMaxRankChange={onMaxRankChange}
-                                onFactionsChange={onFactionsChange}
-                            />
-                        </div>
+                        <UnitFilter
+                            allowLockedUnits={allowLockedUnits}
+                            searchText={searchText}
+                            minRarity={minRarity}
+                            maxRarity={maxRarity}
+                            minRank={minRank}
+                            maxRank={maxRank}
+                            factions={factions}
+                            allFactions={allFactions}
+                            traits={traits}
+                            allTraits={allTraits}
+                            alliance={alliance}
+                            attackType={attackType}
+                            minHits={minHits}
+                            maxHits={maxHits}
+                            hitsOptions={hitsOptions}
+                            movement={movement}
+                            movementOptions={movementOptions}
+                            minRange={minRange}
+                            maxRange={maxRange}
+                            rangeOptions={rangeOptions}
+                            damageTypes={damageTypes}
+                            damageTypesOptions={damageTypesOptions}
+                            onAllowLockedUnitsChange={onAllowLockedUnitsChange}
+                            onSearchTextChange={onSearchTextChange}
+                            onMinRarityChange={onMinRarityChange}
+                            onMaxRarityChange={onMaxRarityChange}
+                            onMinRankChange={onMinRankChange}
+                            onMaxRankChange={onMaxRankChange}
+                            onFactionsChange={onFactionsChange}
+                            onTraitsChange={onTraitsChange}
+                            onAllianceChange={onAllianceChange}
+                            onAttackTypeChange={onAttackTypeChange}
+                            onMinHitsChange={onMinHitsChange}
+                            onMaxHitsChange={onMaxHitsChange}
+                            onMovementChange={onMovementChange}
+                            onMinRangeChange={onMinRangeChange}
+                            onMaxRangeChange={onMaxRangeChange}
+                            onDamageTypesChange={onDamageTypesChange}
+                        />
                     </details>
                 </section>
 
