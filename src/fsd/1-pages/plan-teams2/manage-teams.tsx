@@ -1,7 +1,7 @@
 /* eslint-disable import-x/order */
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy, Map } from 'lucide-react';
+import { Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy, Map, Rocket } from 'lucide-react';
 import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
@@ -58,7 +58,7 @@ enum SaveTeamMode {
     MODE_EDIT,
 }
 
-type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde' | 'campaign';
+type TeamTypeKey = 'warOffense' | 'warDefense' | 'raid' | 'ta' | 'horde' | 'campaign' | 'incursion';
 
 type TeamTypeOption = { value: TeamTypeKey | undefined; label: string };
 
@@ -70,6 +70,7 @@ const TEAM_TYPE_OPTIONS: TeamTypeOption[] = [
     { value: 'ta', label: 'Tournament Arena' },
     { value: 'horde', label: 'Horde' },
     { value: 'campaign', label: 'Campaign' },
+    { value: 'incursion', label: 'Incursion' },
 ];
 
 export const ManageTeams = () => {
@@ -116,6 +117,8 @@ export const ManageTeams = () => {
     const [hordeModeSelected, setHordeModeSelected] = useState<boolean>(false);
     const [campaignSelected, setCampaignSelected] = useState<boolean>(false);
     const [campaignStoryline, setCampaignStoryline] = useState<string | undefined>();
+    const [incursionSelected, setIncursionSelected] = useState<boolean>(false);
+    const [incursionMows, setIncursionMows] = useState<string[]>([]);
     const [teamName, setTeamName] = useState<string>('');
     const [resolvedChars, setResolvedChars] = useState<ICharacter2[]>([]);
     const [resolvedMows, setResolvedMows] = useState<IMow2[]>([]);
@@ -143,7 +146,8 @@ export const ManageTeams = () => {
                         (guildRaidSelected && !!team.raid) ||
                         (tournamentArenaSelected && !!team.ta) ||
                         (hordeModeSelected && !!team.horde) ||
-                        (campaignSelected && !!team.campaign)) &&
+                        (campaignSelected && !!team.campaign) ||
+                        (incursionSelected && !!team.incursion)) &&
                     !(saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam && team.name === editingTeam.name)
             ),
         [
@@ -156,6 +160,7 @@ export const ManageTeams = () => {
             tournamentArenaSelected,
             hordeModeSelected,
             campaignSelected,
+            incursionSelected,
         ]
     );
 
@@ -212,6 +217,7 @@ export const ManageTeams = () => {
             !guildRaidSelected &&
             !hordeModeSelected &&
             !campaignSelected &&
+            !incursionSelected &&
             (!teamSizeRestrictedModesEnabled ||
                 (!warOffenseSelected && !warDefenseSelected && !tournamentArenaSelected))
         ) {
@@ -229,6 +235,7 @@ export const ManageTeams = () => {
         tournamentArenaSelected,
         hordeModeSelected,
         campaignSelected,
+        incursionSelected,
         notes,
         selectedChars,
         selectedMows,
@@ -278,6 +285,8 @@ export const ManageTeams = () => {
         setHordeModeSelected(false);
         setCampaignSelected(false);
         setCampaignStoryline(undefined);
+        setIncursionSelected(false);
+        setIncursionMows([]);
         setSaveTeamMode(SaveTeamMode.MODE_ADD);
     };
 
@@ -297,6 +306,8 @@ export const ManageTeams = () => {
         setHordeModeSelected(!!team.horde);
         setCampaignSelected(!!team.campaign);
         setCampaignStoryline(team.campaignStoryline);
+        setIncursionSelected(!!team.incursion);
+        setIncursionMows(team.incursionMows ?? []);
         setRarityCap(Rarity.Mythic);
     };
 
@@ -322,6 +333,8 @@ export const ManageTeams = () => {
                 horde: hordeModeSelected ? true : undefined,
                 campaign: campaignSelected ? true : undefined,
                 campaignStoryline: campaignSelected ? campaignStoryline : undefined,
+                incursion: incursionSelected ? true : undefined,
+                incursionMows: incursionSelected && incursionMows.length > 0 ? incursionMows : undefined,
                 notes,
                 flexIndex,
             };
@@ -341,6 +354,8 @@ export const ManageTeams = () => {
                 horde: hordeModeSelected ? true : undefined,
                 campaign: campaignSelected ? true : undefined,
                 campaignStoryline: campaignSelected ? campaignStoryline : undefined,
+                incursion: incursionSelected ? true : undefined,
+                incursionMows: incursionSelected && incursionMows.length > 0 ? incursionMows : undefined,
                 notes: notes,
             };
             dispatch.teams2({ type: 'Set', value: [...teams, newTeam] });
@@ -399,6 +414,22 @@ export const ManageTeams = () => {
             setSelectedMows([]);
         } else {
             setCampaignStoryline(undefined);
+        }
+    };
+
+    const onIncursionMowsChanged = (mowIds: string[]) => {
+        setIncursionMows(mowIds);
+        // Alliance restriction changed — a previously picked roster may no longer be valid.
+        setSelectedChars([]);
+        setFlexIndex(undefined);
+    };
+
+    const onIncursionChanged = (value: boolean) => {
+        setIncursionSelected(value);
+        if (value) {
+            setSelectedMows([]);
+        } else {
+            setIncursionMows([]);
         }
     };
 
@@ -464,6 +495,8 @@ export const ManageTeams = () => {
                 hordeModeSelected={hordeModeSelected}
                 campaignSelected={campaignSelected}
                 campaignStoryline={campaignStoryline}
+                incursionSelected={incursionSelected}
+                incursionMows={incursionMows}
                 teamName={teamName}
                 onWarOffenseChanged={setWarOffenseSelected}
                 onWarDefenseChanged={setWarDefenseSelected}
@@ -472,6 +505,8 @@ export const ManageTeams = () => {
                 onHordeModeChanged={setHordeModeSelected}
                 onCampaignChanged={onCampaignChanged}
                 onCampaignStorylineChanged={onCampaignStorylineChanged}
+                onIncursionChanged={onIncursionChanged}
+                onIncursionMowsChanged={onIncursionMowsChanged}
                 onTeamNameChanged={setTeamName}
                 onNotesChanged={setNotes}
                 onCancel={() => setAddTeamDialogOpen(false)}
@@ -622,6 +657,9 @@ export const ManageTeams = () => {
                                 {!!team.campaign && (
                                     <MetadataChip icon={<Map className="size-3" />} label="Campaign" color="info" />
                                 )}
+                                {!!team.incursion && (
+                                    <MetadataChip icon={<Rocket className="size-3" />} label="Incursion" color="info" />
+                                )}
                             </div>
                             {!!team.campaign && !!team.campaignStoryline && (
                                 <div className="mb-4 flex flex-wrap gap-2">
@@ -630,6 +668,18 @@ export const ManageTeams = () => {
                                         label={campaignStorylineLabel(team.campaignStoryline)}
                                         color="secondary"
                                     />
+                                </div>
+                            )}
+                            {!!team.incursion && !!team.incursionMows?.length && (
+                                <div className="mb-4 flex flex-wrap gap-2">
+                                    {team.incursionMows.map(mowId => (
+                                        <MetadataChip
+                                            key={mowId}
+                                            icon={<Rocket className="size-3" />}
+                                            label={resolvedMows.find(m => m.snowprintId === mowId)?.name ?? mowId}
+                                            color="secondary"
+                                        />
+                                    ))}
                                 </div>
                             )}
                             {team.notes && team.notes.trim().length > 0 && (

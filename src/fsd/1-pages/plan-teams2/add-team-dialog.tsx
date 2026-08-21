@@ -5,7 +5,8 @@ import { X } from 'lucide-react';
 import React, { useCallback, useEffect, useState } from 'react';
 
 import { Alliance, DamageType, FactionId, Rank, Rarity, Trait } from '@/fsd/5-shared/model';
-import { AccessibleTooltip, Button, Select } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, Button, Select, SelectMulti } from '@/fsd/5-shared/ui';
+import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 import { RaritySelect } from '@/fsd/5-shared/ui/selects';
 
 import { CampaignImage } from '@/fsd/4-entities/campaign';
@@ -23,6 +24,7 @@ import {
     campaignStorylineUsableFactionIds,
     campaignStorylineUsableFactions,
 } from './campaign.constants';
+import { incursionMowDeployableAlliance } from './incursion.constants';
 import { IUnitFilterCriteria } from './models';
 import { TeamFlow } from './team-flow';
 import { Teams2Service } from './teams2.service';
@@ -89,6 +91,8 @@ interface Props {
     hordeModeSelected: boolean;
     campaignSelected: boolean;
     campaignStoryline: string | undefined;
+    incursionSelected: boolean;
+    incursionMows: string[];
     teamName: string;
     onWarOffenseChanged: (offense: boolean) => void;
     onWarDefenseChanged: (defense: boolean) => void;
@@ -97,6 +101,8 @@ interface Props {
     onHordeModeChanged: (hordeMode: boolean) => void;
     onCampaignChanged: (campaign: boolean) => void;
     onCampaignStorylineChanged: (storyline: string | undefined) => void;
+    onIncursionChanged: (incursion: boolean) => void;
+    onIncursionMowsChanged: (mowIds: string[]) => void;
     onTeamNameChanged: (teamName: string) => void;
     onNotesChanged: (notes: string) => void;
     onCancel: () => void;
@@ -165,6 +171,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     hordeModeSelected,
     campaignSelected,
     campaignStoryline,
+    incursionSelected,
+    incursionMows,
     teamName,
     onWarOffenseChanged,
     onWarDefenseChanged,
@@ -173,6 +181,8 @@ export const AddTeamDialog: React.FC<Props> = ({
     onHordeModeChanged,
     onCampaignChanged,
     onCampaignStorylineChanged,
+    onIncursionChanged,
+    onIncursionMowsChanged,
     onTeamNameChanged,
     onNotesChanged,
 }: Props) => {
@@ -246,9 +256,24 @@ export const AddTeamDialog: React.FC<Props> = ({
     const campaignFactions =
         campaignSelected && campaignStoryline ? campaignStorylineUsableFactionIds(campaignStoryline) : undefined;
 
+    // Union, not intersection: a roster can serve several Incursions sharing an alliance at once.
+    const incursionAlliances = incursionSelected
+        ? uniq(incursionMows.map(id => incursionMowDeployableAlliance(id)).filter(a => a !== undefined))
+        : [];
+
+    // Narrow the dropdown to MoWs sharing an already-selected alliance, so every pick stays compatible.
+    const incursionMowOptions =
+        incursionAlliances.length === 0
+            ? mows
+            : mows.filter(m => {
+                  const alliance = incursionMowDeployableAlliance(m.snowprintId);
+                  return alliance !== undefined && incursionAlliances.includes(alliance);
+              });
+
     const filteredChars = chars
         .filter(c => !selectedChars.includes(c.snowprintId))
         .filter(c => !campaignFactions?.length || campaignFactions.includes(c.faction))
+        .filter(c => CharactersService.passesAllianceFilter(c.alliance, incursionAlliances))
         .filter(c => Teams2Service.passesCharacterFilter(c, filterCriteria))
         .toSorted((a, b) => {
             if (b.rank !== a.rank) return b.rank - a.rank;
@@ -270,11 +295,11 @@ export const AddTeamDialog: React.FC<Props> = ({
         })
         .map(a => Teams2Service.capMowAtRarity(a, rarityCap));
 
-    // Campaign is exclusive with the other modes: while one side is selected, the other
-    // side's checkboxes are disabled (an already-checked box can still be unchecked).
+    // Campaign and Incursion are exclusive with the other modes and each other.
     const otherModeSelected = warOffense || warDefense || guildRaid || tournamentArena || hordeModeSelected;
-    const campaignDisabled = otherModeSelected && !campaignSelected;
-    const exclusivityMessage = "Campaign teams can't be combined with other modes.";
+    const campaignDisabled = (otherModeSelected || incursionSelected) && !campaignSelected;
+    const incursionDisabled = (otherModeSelected || campaignSelected) && !incursionSelected;
+    const exclusivityMessage = "Campaign and Incursion teams can't be combined with other modes.";
 
     return (
         <div className="relative isolate flex w-full flex-col rounded-xl border border-(--border) bg-(--overlay) shadow-2xl">
@@ -386,19 +411,25 @@ export const AddTeamDialog: React.FC<Props> = ({
                             />
                         </div>
 
-                        <div className="flex flex-wrap items-center gap-6">
+                        {/* min-h-16 reserves room for the absolutely-positioned "Usable:" hint below. */}
+                        <div className="flex min-h-16 flex-wrap items-center gap-6">
                             <div className="flex flex-wrap items-center gap-6">
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
                                     <AccessibleTooltip
                                         title={
                                             warDisallowedMessage ??
-                                            (campaignSelected && !warOffense ? exclusivityMessage : '')
+                                            ((campaignSelected || incursionSelected) && !warOffense
+                                                ? exclusivityMessage
+                                                : '')
                                         }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={!warDisallowedMessage && warOffense}
-                                                disabled={!!warDisallowedMessage || (campaignSelected && !warOffense)}
+                                                disabled={
+                                                    !!warDisallowedMessage ||
+                                                    ((campaignSelected || incursionSelected) && !warOffense)
+                                                }
                                                 onChange={() => onWarOffenseChanged(!warOffense)}
                                                 className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
@@ -410,13 +441,18 @@ export const AddTeamDialog: React.FC<Props> = ({
                                     <AccessibleTooltip
                                         title={
                                             warDisallowedMessage ??
-                                            (campaignSelected && !warDefense ? exclusivityMessage : '')
+                                            ((campaignSelected || incursionSelected) && !warDefense
+                                                ? exclusivityMessage
+                                                : '')
                                         }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={!warDisallowedMessage && warDefense}
-                                                disabled={!!warDisallowedMessage || (campaignSelected && !warDefense)}
+                                                disabled={
+                                                    !!warDisallowedMessage ||
+                                                    ((campaignSelected || incursionSelected) && !warDefense)
+                                                }
                                                 onChange={() => onWarDefenseChanged(!warDefense)}
                                                 className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
@@ -425,12 +461,17 @@ export const AddTeamDialog: React.FC<Props> = ({
                                     </AccessibleTooltip>
                                 </label>
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
-                                    <AccessibleTooltip title={campaignSelected && !guildRaid ? exclusivityMessage : ''}>
+                                    <AccessibleTooltip
+                                        title={
+                                            (campaignSelected || incursionSelected) && !guildRaid
+                                                ? exclusivityMessage
+                                                : ''
+                                        }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={guildRaid}
-                                                disabled={campaignSelected && !guildRaid}
+                                                disabled={(campaignSelected || incursionSelected) && !guildRaid}
                                                 onChange={() => onGuildRaidChanged(!guildRaid)}
                                                 className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
@@ -442,7 +483,9 @@ export const AddTeamDialog: React.FC<Props> = ({
                                     <AccessibleTooltip
                                         title={
                                             tournamentArenaDisallowedMessage ??
-                                            (campaignSelected && !tournamentArena ? exclusivityMessage : '')
+                                            ((campaignSelected || incursionSelected) && !tournamentArena
+                                                ? exclusivityMessage
+                                                : '')
                                         }>
                                         <div className="flex items-center gap-2">
                                             <input
@@ -450,7 +493,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                                                 checked={!tournamentArenaDisallowedMessage && tournamentArena}
                                                 disabled={
                                                     !!tournamentArenaDisallowedMessage ||
-                                                    (campaignSelected && !tournamentArena)
+                                                    ((campaignSelected || incursionSelected) && !tournamentArena)
                                                 }
                                                 onChange={() => onTournamentArenaChanged(!tournamentArena)}
                                                 className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
@@ -461,12 +504,16 @@ export const AddTeamDialog: React.FC<Props> = ({
                                 </label>
                                 <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
                                     <AccessibleTooltip
-                                        title={campaignSelected && !hordeModeSelected ? exclusivityMessage : ''}>
+                                        title={
+                                            (campaignSelected || incursionSelected) && !hordeModeSelected
+                                                ? exclusivityMessage
+                                                : ''
+                                        }>
                                         <div className="flex items-center gap-2">
                                             <input
                                                 type="checkbox"
                                                 checked={hordeModeSelected}
-                                                disabled={campaignSelected && !hordeModeSelected}
+                                                disabled={(campaignSelected || incursionSelected) && !hordeModeSelected}
                                                 onChange={() => onHordeModeChanged(!hordeModeSelected)}
                                                 className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
                                             />
@@ -488,9 +535,25 @@ export const AddTeamDialog: React.FC<Props> = ({
                                         </div>
                                     </AccessibleTooltip>
                                 </label>
+                                <label className="flex cursor-pointer items-center gap-2 text-(--soft-fg)">
+                                    <AccessibleTooltip title={incursionDisabled ? exclusivityMessage : ''}>
+                                        <div className="flex items-center gap-2">
+                                            <input
+                                                type="checkbox"
+                                                checked={incursionSelected}
+                                                disabled={incursionDisabled}
+                                                onChange={() => onIncursionChanged(!incursionSelected)}
+                                                className="h-4 w-4 rounded border-(--input-border) text-(--primary) focus:ring-(--ring) disabled:cursor-not-allowed disabled:opacity-50"
+                                            />
+                                            <span>Incursion</span>
+                                        </div>
+                                    </AccessibleTooltip>
+                                </label>
                             </div>
                             {campaignSelected && (
-                                <div className="min-w-[220px]">
+                                // Fixed width (not min-w) and relative (for the absolute hint below)
+                                // keep this column from reflowing the row as its value changes.
+                                <div className="relative w-64 shrink-0">
                                     <Select<string | undefined>
                                         options={[undefined, ...campaignStorylineOptions.map(option => option.value)]}
                                         value={campaignStoryline}
@@ -514,8 +577,45 @@ export const AddTeamDialog: React.FC<Props> = ({
                                         placeholder="Select a campaign..."
                                     />
                                     {campaignStoryline && (
-                                        <p className="mt-1 text-xs text-(--soft-fg)">
+                                        // absolute: keeps this line out of flow so it can't reflow the row.
+                                        <p className="absolute top-full left-0 mt-1 text-xs text-(--soft-fg)">
                                             Usable: {campaignStorylineUsableFactions(campaignStoryline) ?? 'unknown'}
+                                        </p>
+                                    )}
+                                </div>
+                            )}
+                            {incursionSelected && (
+                                <div className="relative w-64 shrink-0">
+                                    <SelectMulti<string>
+                                        options={incursionMowOptions.map(m => m.snowprintId)}
+                                        value={incursionMows}
+                                        onChange={onIncursionMowsChanged}
+                                        placeholder="Select MoWs..."
+                                        renderOption={id => {
+                                            const mow = mows.find(m => m.snowprintId === id);
+                                            return mow ? (
+                                                <div className="flex items-center gap-2">
+                                                    <UnitShardIcon icon={mow.roundIcon} height={24} />
+                                                    <span>{mow.name}</span>
+                                                </div>
+                                            ) : (
+                                                id
+                                            );
+                                        }}
+                                        renderValue={selected => (
+                                            <div className="flex flex-wrap items-center gap-1">
+                                                {selected.map(id => {
+                                                    const mow = mows.find(m => m.snowprintId === id);
+                                                    return mow ? (
+                                                        <UnitShardIcon key={id} icon={mow.roundIcon} height={18} />
+                                                    ) : undefined;
+                                                })}
+                                            </div>
+                                        )}
+                                    />
+                                    {incursionAlliances.length > 0 && (
+                                        <p className="absolute top-full left-0 mt-1 text-xs text-(--soft-fg)">
+                                            Usable: {incursionAlliances.join(', ')} alliance
                                         </p>
                                     )}
                                 </div>
@@ -582,7 +682,7 @@ export const AddTeamDialog: React.FC<Props> = ({
                         />
                     </div>
 
-                    {!campaignSelected && (
+                    {!campaignSelected && !incursionSelected && (
                         <>
                             <div
                                 onMouseDown={startResizing}

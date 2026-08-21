@@ -48,6 +48,10 @@ export interface ITeam2 {
     campaign?: boolean;
     // The campaign storyline this team targets (a value from campaignStorylineOptions).
     campaignStoryline?: string;
+    // If the team is viable for Incursion.
+    incursion?: boolean;
+    // The snowprintIds of the MoWs this Incursion team is built around.
+    incursionMows?: string[];
     // Any user-provided notes.
     notes?: string;
 }
