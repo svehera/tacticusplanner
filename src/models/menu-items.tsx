@@ -21,11 +21,8 @@ import React from 'react';
 
 import { faqMenuItem } from '@/fsd/1-pages/faq/faq.menu-item';
 import { guidesMenuItem } from '@/fsd/1-pages/guides/guides-menu.item';
-import { guildMenuItem } from '@/fsd/1-pages/guild/guild.menu-item';
-import { guildApiMenuItem } from '@/fsd/1-pages/guild-api/guild-api.menu-item';
 import { guildBossListMenuItem } from '@/fsd/1-pages/guild-boss-list';
 import { guildBossReferenceMenuItem } from '@/fsd/1-pages/guild-boss-reference';
-import { guildInsightsMenuItem } from '@/fsd/1-pages/guild-insights/guild-insights.menu-item';
 import { guildWarZonesMenuItem } from '@/fsd/1-pages/guild-war-layout/guild-war-zones-menu.item';
 import { equipmentMenuItem } from '@/fsd/1-pages/input-equipment/equipment.menu-item';
 import { guildRosterSnapshotsMenuItem } from '@/fsd/1-pages/input-guild-roster-snapshots/guild-roster-snapshots.menu-item';
@@ -101,9 +98,6 @@ export const menuItemById = {
     ty: new MenuItemTP('Thank You', <VolunteerActivismIcon />, '/ty', 'Thank You Page'),
     faq: faqMenuItem,
     zones: guildWarZonesMenuItem,
-    guild: guildMenuItem,
-    guildApi: guildApiMenuItem,
-    guildInsights: guildInsightsMenuItem,
     guildBossList: guildBossListMenuItem,
     guildBossReference: guildBossReferenceMenuItem,
     guildPerformance: guildPerformanceMenuItem,
@@ -125,7 +119,6 @@ export const inputSubMenu: MenuItemTP[] = [
     menuItemById['xpIncome'],
     menuItemById['resources'],
     menuItemById['equipment'],
-    menuItemById['guild'],
 ];
 
 export const planSubMenuWeb: MenuItemTP[] = [
@@ -181,8 +174,6 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildPerformance'],
-    menuItemById['guildApi'],
-    menuItemById['guildInsights'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
@@ -203,8 +194,6 @@ export const learnSubMenu: MenuItemTP[] = [
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildPerformance'],
-    menuItemById['guildApi'],
-    menuItemById['guildInsights'],
     menuItemById['productCalendar'],
 ];
 
@@ -227,8 +216,6 @@ export const librarySubMenu: MenuItemTP[] = [
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildPerformance'],
-    menuItemById['guildApi'],
-    menuItemById['guildInsights'],
 ];
 
 export const NAV_SECTIONS = [
