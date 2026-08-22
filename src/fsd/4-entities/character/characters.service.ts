@@ -6,7 +6,6 @@ import {
     RarityMapper,
     RarityString,
     Alliance,
-    Equipment,
     Trait,
     DamageType,
     Rarity,
@@ -20,15 +19,6 @@ import { ILegendaryEventStatic, LegendaryEventEnum, LegendaryEventService } from
 import { CharacterBias } from './bias.enum';
 import { charactersData } from './data';
 import { UnitDataRaw, ICharacterData, ICharLegendaryEvents, ILreCharacterStaticData, ICharacter2 } from './model';
-
-const equipmentTypeMapping = {
-    Crit: Equipment.Crit,
-    Block: Equipment.Block,
-    'Crit Booster': Equipment.CritBooster,
-    'Block Booster': Equipment.BlockBooster,
-    Defensive: Equipment.Defensive,
-    Defense: Equipment.Defensive,
-} as const;
 
 export class CharactersService {
     // eslint-disable-next-line unicorn/consistent-function-scoping
@@ -173,14 +163,6 @@ export class CharactersService {
         unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
 
         return unitData;
-    }
-
-    public static parseEquipmentType(equip: string): Equipment | undefined {
-        // ToDo: consider using `Zod.enum` for this kind of parsing/validation
-        // Ref: https://zod.dev/api#enum
-        const equipmentType = equipmentTypeMapping[equip as keyof typeof equipmentTypeMapping];
-        if (!equipmentType) return undefined;
-        return equipmentType;
     }
 
     static canonicalName(identifier: string): string {

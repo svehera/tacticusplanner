@@ -70,11 +70,7 @@ export class EquipmentService {
         if (data.allowedUnits.length > 0) return data.allowedUnits;
         return CharactersService.charactersData
             .filter(char => data.allowedFactions.includes(char.faction))
-            .filter(char =>
-                [char.equipment1, char.equipment2, char.equipment3].includes(
-                    CharactersService.parseEquipmentType(data.type) || ''
-                )
-            )
+            .filter(char => [char.equipment1, char.equipment2, char.equipment3].includes(data.type))
             .map(char => char.snowprintId);
     }
 
