@@ -1,6 +1,6 @@
 ﻿import { Alliance, DamageType, Trait, FactionId } from '@/fsd/5-shared/model';
 
-import { ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacter2, characterDealsDamageType } from '@/fsd/4-entities/character';
 
 export const filter = (characters: ICharacter2[]) => ({
     byAlliance: (alliance: Alliance, not = false) =>
@@ -9,9 +9,10 @@ export const filter = (characters: ICharacter2[]) => ({
         return characters.filter(char => (not ? char.faction !== faction : char.faction === faction));
     },
     byDamageType: (damageType: DamageType, not = false) =>
-        characters.filter(char =>
-            not ? char.damageTypes.all.every(type => type !== damageType) : char.damageTypes.all.includes(damageType)
-        ),
+        characters.filter(char => {
+            const dealsDamageType = characterDealsDamageType(char, damageType);
+            return not ? !dealsDamageType : dealsDamageType;
+        }),
     byTrait: (trait: Trait, not = false) =>
         characters.filter(char =>
             not
