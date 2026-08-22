@@ -98,6 +98,12 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
     const [openDialog, setOpenDialog] = React.useState(false);
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
     const [unit, setUnit] = React.useState<IUnit>();
+    const [mowFieldsBlank, setMowFieldsBlank] = React.useState({
+        primaryStart: false,
+        primaryEnd: false,
+        secondaryStart: false,
+        secondaryEnd: false,
+    });
 
     const [form, setForm] = useState<IPersonalGoal>(() => getDefaultForm(goals.length + 1));
 
@@ -259,10 +265,28 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 ...current,
                 startingRarity: value.rarity,
                 startingStars: value.stars,
+                startingFirstAbilityLevel: value.primaryAbilityLevel,
+                startingSecondAbilityLevel: value.secondaryAbilityLevel,
                 firstAbilityLevel: value.primaryAbilityLevel,
                 secondAbilityLevel: value.secondaryAbilityLevel,
             }));
+            setMowFieldsBlank({
+                primaryStart: false,
+                primaryEnd: false,
+                secondaryStart: false,
+                secondaryEnd: false,
+            });
         }
+    };
+
+    const getMowGoalError = (): string | undefined => {
+        if (Object.values(mowFieldsBlank).some(Boolean)) return 'Please enter a valid end goal';
+        return GoalsService.getMowGoalValidationError(
+            form.startingFirstAbilityLevel,
+            form.firstAbilityLevel,
+            form.startingSecondAbilityLevel,
+            form.secondAbilityLevel
+        );
     };
 
     const isDisabled = () => {
@@ -295,10 +319,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
         }
 
         if (form.type === PersonalGoalType.MowAbilities && isMow(unit)) {
-            return (
-                (form.firstAbilityLevel ?? 0) <= unit.primaryAbilityLevel &&
-                (form.secondAbilityLevel ?? 0) <= unit.secondaryAbilityLevel
-            );
+            return !!getMowGoalError();
         }
 
         if (form.type === PersonalGoalType.CharacterAbilities && isCharacter(unit)) {
@@ -436,6 +457,23 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                         <>
                             <div className="flex gap-3">
                                 <NumberInput
+                                    key={unit.id + 'primaryStart'}
+                                    fullWidth
+                                    label="Primary current level"
+                                    min={unit.primaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
+                                    value={form.startingFirstAbilityLevel!}
+                                    valueChange={startingFirstAbilityLevel => {
+                                        setForm(current => ({
+                                            ...current,
+                                            startingFirstAbilityLevel,
+                                        }));
+                                    }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, primaryStart: isEmpty }))
+                                    }
+                                />
+                                <NumberInput
                                     key={unit.id + 'primary'}
                                     fullWidth
                                     label="Primary target level"
@@ -448,6 +486,28 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                             firstAbilityLevel: primaryAbilityLevel,
                                         }));
                                     }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, primaryEnd: isEmpty }))
+                                    }
+                                />
+                            </div>
+                            <div className="flex gap-3">
+                                <NumberInput
+                                    key={unit.id + 'secondaryStart'}
+                                    fullWidth
+                                    label="Secondary current level"
+                                    min={unit.secondaryAbilityLevel}
+                                    max={CharactersAbilitiesService.getMaximumAbilityLevel()}
+                                    value={form.startingSecondAbilityLevel!}
+                                    valueChange={startingSecondAbilityLevel => {
+                                        setForm(current => ({
+                                            ...current,
+                                            startingSecondAbilityLevel,
+                                        }));
+                                    }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, secondaryStart: isEmpty }))
+                                    }
                                 />
                                 <NumberInput
                                     key={unit.id + 'secondary'}
@@ -462,8 +522,14 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                                             secondAbilityLevel: secondaryAbilityLevel,
                                         }));
                                     }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, secondaryEnd: isEmpty }))
+                                    }
                                 />
                             </div>
+
+                            {getMowGoalError() && <div className="text-sm text-(--danger)">{getMowGoalError()}</div>}
+
                             <UpgradesRaritySelect
                                 upgradesRarity={form.upgradesRarity ?? []}
                                 upgradesRarityChange={values => {

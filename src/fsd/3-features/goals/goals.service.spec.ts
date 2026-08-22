@@ -9,6 +9,7 @@ import { Alliance, Rank, Rarity, RarityStars, UnitType } from '@/fsd/5-shared/mo
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
+import { IMow2 } from '@/fsd/4-entities/mow';
 
 import {
     ICharacterAscendGoal,
@@ -292,6 +293,80 @@ describe('Goal service', () => {
             const result = GoalsService.convertToTypedGoal(goalMock, characterMock);
 
             expect(result).toEqual(expectedResult);
+        });
+
+        describe('MoW ability goal starting level', () => {
+            const mowMock: IMow2 = {
+                unitType: UnitType.mow,
+                snowprintId: 'tyranBiovore',
+                name: 'Biovore',
+                icon: '',
+                roundIcon: '',
+                alliance: Alliance.Xenos,
+                rarity: Rarity.Common,
+                stars: RarityStars.None,
+                shards: 0,
+                mythicShards: 0,
+                primaryAbilityLevel: 35,
+                secondaryAbilityLevel: 35,
+            } as IMow2;
+
+            it('defaults the starting level to the MoW current level when not persisted', () => {
+                const goalMock: IPersonalGoal = {
+                    id: 'goal-1',
+                    character: 'tyranBiovore',
+                    type: PersonalGoalType.MowAbilities,
+                    priority: 1,
+                    dailyRaids: true,
+                    firstAbilityLevel: 50,
+                    secondAbilityLevel: 50,
+                };
+
+                const result = GoalsService.convertToTypedGoal(goalMock, mowMock) as ICharacterUpgradeMow;
+
+                expect(result.primaryStart).toBe(35);
+                expect(result.secondaryStart).toBe(35);
+            });
+
+            it('raises a stale persisted starting level (display-only) up to the MoW current level', () => {
+                const goalMock: IPersonalGoal = {
+                    id: 'goal-2',
+                    character: 'tyranBiovore',
+                    type: PersonalGoalType.MowAbilities,
+                    priority: 1,
+                    dailyRaids: true,
+                    startingFirstAbilityLevel: 10,
+                    startingSecondAbilityLevel: 10,
+                    firstAbilityLevel: 50,
+                    secondAbilityLevel: 50,
+                };
+
+                const result = GoalsService.convertToTypedGoal(goalMock, mowMock) as ICharacterUpgradeMow;
+
+                expect(result.primaryStart).toBe(35);
+                expect(result.secondaryStart).toBe(35);
+            });
+
+            it('honors a persisted starting level that is at or above the MoW current level', () => {
+                const goalMock: IPersonalGoal = {
+                    id: 'goal-3',
+                    character: 'tyranBiovore',
+                    type: PersonalGoalType.MowAbilities,
+                    priority: 1,
+                    dailyRaids: true,
+                    startingFirstAbilityLevel: 35,
+                    startingSecondAbilityLevel: 35,
+                    firstAbilityLevel: 50,
+                    secondAbilityLevel: 50,
+                };
+
+                const result = GoalsService.convertToTypedGoal(goalMock, mowMock) as ICharacterUpgradeMow;
+
+                expect(result.primaryStart).toBe(35);
+                expect(result.primaryEnd).toBe(50);
+                expect(result.secondaryStart).toBe(35);
+                expect(result.secondaryEnd).toBe(50);
+            });
         });
 
         describe('cross-boundary Ascend (character below OneBlueStar targeting Mythic)', () => {

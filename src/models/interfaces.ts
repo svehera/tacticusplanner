@@ -406,6 +406,8 @@ export interface IPersonalGoal {
 
     // upgrade mow
     unitId?: string;
+    startingFirstAbilityLevel?: number;
+    startingSecondAbilityLevel?: number;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
 

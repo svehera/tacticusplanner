@@ -1755,6 +1755,45 @@ describe('UpgradesService.getUpgrades', () => {
         expect(actualRare).toBe(expectedRare);
         expect(actualLegendary).toBe(expectedLegendary);
     });
+
+    it('does not double-count materials across two sequential MoW ability goals', () => {
+        const biovore = mows2Data.mows.find(mow => mow.snowprintId === 'tyranBiovore') as IMow2;
+        const mow = createMow(biovore);
+
+        const makeGoal = (goalId: string, primaryStart: number, primaryEnd: number): ICharacterUpgradeMow => ({
+            priority: 1,
+            include: true,
+            goalId,
+            unitId: biovore.snowprintId,
+            unitName: biovore.name,
+            unitIcon: biovore.icon,
+            unitRoundIcon: biovore.roundIcon,
+            unitAlliance: Alliance.Xenos,
+            notes: '',
+            type: PersonalGoalType.MowAbilities,
+            primaryStart,
+            primaryEnd,
+            secondaryStart: 1,
+            secondaryEnd: 1,
+            upgradesRarity: [],
+            shards: 0,
+            stars: RarityStars.None,
+            rarity: Rarity.Common,
+        });
+
+        const incrementalGoals = [makeGoal('goal-1-to-35', 1, 35), makeGoal('goal-35-to-50', 35, 50)];
+        const singleGoal = [makeGoal('goal-1-to-50', 1, 50)];
+
+        const toRequiredCounts = (upgrades: ReturnType<typeof UpgradesService.getUpgrades>) =>
+            Object.fromEntries(
+                Object.entries(UpgradesService.combineBaseMaterials(upgrades)).map(([id, u]) => [id, u.requiredCount])
+            );
+
+        const incrementalTotals = toRequiredCounts(UpgradesService.getUpgrades({}, [], [mow], incrementalGoals));
+        const singleGoalTotals = toRequiredCounts(UpgradesService.getUpgrades({}, [], [mow], singleGoal));
+
+        expect(incrementalTotals).toEqual(singleGoalTotals);
+    });
 });
 
 describe('UpgradesService.getUpgradesEstimatedDays', () => {
