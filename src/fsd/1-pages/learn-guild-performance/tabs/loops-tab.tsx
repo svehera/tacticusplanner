@@ -20,6 +20,7 @@ import {
     LOOP_METRICS,
     metricDefinition,
     resolveLadderPrimes,
+    restrictToCurrentLoopRange,
     type BarScale,
     type BossLoopRow,
     type LoopMetric,
@@ -259,13 +260,16 @@ const LoopsTab = ({
 
     // Both builders already return fight order, so the ladder axis is the array as-is. The season
     // config then names any prime the export never mentioned, i.e. one skipped on every loop.
+    // `restrictToCurrentLoopRange` then drops Legendary 1-3: the loop now restarts at L4, not L1.
     const rows = useMemo(
         () =>
-            resolveLadderPrimes(
-                historySummary
-                    ? buildBossLoopRowsFromSummary(historySummary)
-                    : buildBossLoopRows(currentData?.entries ?? []),
-                currentData?.seasonConfigId
+            restrictToCurrentLoopRange(
+                resolveLadderPrimes(
+                    historySummary
+                        ? buildBossLoopRowsFromSummary(historySummary)
+                        : buildBossLoopRows(currentData?.entries ?? []),
+                    currentData?.seasonConfigId
+                )
             ),
         [historySummary, currentData]
     );

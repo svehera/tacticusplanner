@@ -22,6 +22,7 @@ import {
     primeEffectFor,
     primeOutcome,
     resolveLadderPrimes,
+    restrictToCurrentLoopRange,
     type BarScale,
     type BossLoopRow,
     type LadderCell,
@@ -669,5 +670,37 @@ describe('bar scale switch', () => {
             expect(expensive.bars[1].value).toBeUndefined();
             expect(expensive.bars[1].percent).toBe(0);
         }
+    });
+});
+
+/** Minimal row — only `rarity`/`set` matter to `restrictToCurrentLoopRange`. */
+const rowAt = (rarity: Rarity, set: number): BossLoopRow => ({
+    bossPrefix: `GuildBossFake${rarity}-${set}`,
+    rarity,
+    set,
+    bossUnitId: 'fake',
+    bossMaxHp: 1000,
+    leftPrimeUnitId: undefined,
+    rightPrimeUnitId: undefined,
+    hasPrimes: false,
+    loops: [],
+});
+
+describe('restrictToCurrentLoopRange', () => {
+    it('drops Legendary rows below set 3 (L1-L3), keeps L4/L5 and every Mythic row', () => {
+        const rows = [
+            rowAt(Rarity.Legendary, 0), // L1
+            rowAt(Rarity.Legendary, 1), // L2
+            rowAt(Rarity.Legendary, 2), // L3
+            rowAt(Rarity.Legendary, 3), // L4
+            rowAt(Rarity.Legendary, 4), // L5
+            rowAt(Rarity.Mythic, 0), // M1
+            rowAt(Rarity.Mythic, 1), // M2
+            rowAt(Rarity.Mythic, 2), // M3
+        ];
+
+        const kept = restrictToCurrentLoopRange(rows).map(row => tierLabel(row.rarity, row.set));
+
+        expect(kept).toEqual(['L4', 'L5', 'M1', 'M2', 'M3']);
     });
 });
