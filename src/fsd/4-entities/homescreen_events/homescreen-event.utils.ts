@@ -1,6 +1,6 @@
-import { parseReward } from '@/fsd/4-entities/shops/@x/homescreen-events';
+import { parseReward, plTier } from '@/fsd/4-entities/shops/@x/homescreen-events';
 
-import { hseModeOverrides } from './data';
+import { hseModeOverrides, hseRaidPointsOverrides } from './data';
 import type {
     HomescreenEventData,
     HomescreenEventGameModeRestrictions,
@@ -60,6 +60,22 @@ export function resolveHseTier(
     if (fallback) return { key: 'default', tier: fallback };
 
     return undefined;
+}
+
+/** Maps a roster's power level / blue-star status to the HSE tier-key vocabulary ('mid', not `plTier`'s 'medium'). */
+export function getHseTierKeyForRoster(pl: number, hasBlueStarUnit: boolean): HomescreenEventTierKey {
+    const tier = plTier(pl, hasBlueStarUnit);
+    return tier === 'medium' ? 'mid' : tier;
+}
+
+/**
+ * True if this resolved tier has a `killUnits` tracker, or a manual override — i.e. it earns
+ * points via campaign-battle raiding at all. Deliberately mirrors `getGenericHsePoints` in
+ * upgrades.service.ts at a coarser grain (existence check only, no per-battle scoring).
+ */
+export function hseEarnsRaidPoints(tier: HomescreenEventTier, eventName: string): boolean {
+    const hasKillUnitsTracker = tier.liveEventConfig?.trackers?.some(t => t.type === 'killUnits') ?? false;
+    return hasKillUnitsTracker || Boolean(hseRaidPointsOverrides[eventName]);
 }
 
 /**

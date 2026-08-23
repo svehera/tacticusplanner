@@ -2,7 +2,9 @@ export { homescreenEvents } from './homescreen-events.data';
 export {
     getHseDisplayName,
     getHseModesConfig,
+    getHseTierKeyForRoster,
     getOfferEventPoints,
+    hseEarnsRaidPoints,
     humanizeEventName,
     matchesRestriction,
     resolveHseMilestones,

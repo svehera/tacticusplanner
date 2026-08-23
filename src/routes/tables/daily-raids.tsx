@@ -24,6 +24,7 @@ import { IEstimatedUpgrades, TypedGoalSelect } from '@/fsd/3-features/goals/goal
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { LocationsFilter } from '@/fsd/3-features/goals/locations-filter';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
+import { HseScheduleBanner } from '@/fsd/3-features/homescreen-events/hse-schedule-banner';
 
 import { computeMowCounts } from './daily-raids.helpers';
 
@@ -210,6 +211,7 @@ export const DailyRaids = () => {
 
     return (
         <div className="space-y-8 py-6">
+            <HseScheduleBanner />
             <RaidsHeader
                 hasSync={hasSync}
                 onAfterSync={() => setHasChanges(false)}

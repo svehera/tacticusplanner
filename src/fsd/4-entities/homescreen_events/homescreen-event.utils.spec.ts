@@ -4,7 +4,9 @@ import type { HomescreenEventReward } from './homescreen-event.model';
 import {
     getHseDisplayName,
     getHseModesConfig,
+    getHseTierKeyForRoster,
     getOfferEventPoints,
+    hseEarnsRaidPoints,
     humanizeEventName,
     matchesRestriction,
     resolveHseMilestones,
@@ -184,5 +186,25 @@ describe('tallyHseRewards', () => {
 
     it('returns an empty tally when no milestone has been reached', () => {
         expect(tallyHseRewards(rewards, resolveHseMilestones(rewards, 0))).toEqual({});
+    });
+});
+
+describe('getHseTierKeyForRoster', () => {
+    it('maps plTier\'s "medium" to the HSE "mid" tier key, and passes "high"/"low" through unchanged', () => {
+        expect(getHseTierKeyForRoster(1, false)).toBe('low');
+        expect(getHseTierKeyForRoster(20, false)).toBe('mid');
+        expect(getHseTierKeyForRoster(20, true)).toBe('high');
+    });
+});
+
+describe('hseEarnsRaidPoints', () => {
+    it('is true for an event with a killUnits tracker', () => {
+        const resolved = resolveHseTier(findEvent('machine_hunt'), 'high');
+        expect(hseEarnsRaidPoints(resolved!.tier, 'machine_hunt')).toBe(true);
+    });
+
+    it('is false for an event with no killUnits tracker and no override', () => {
+        const resolved = resolveHseTier(findEvent('arsenal_of_war'), 'high');
+        expect(hseEarnsRaidPoints(resolved!.tier, 'arsenal_of_war')).toBe(false);
     });
 });

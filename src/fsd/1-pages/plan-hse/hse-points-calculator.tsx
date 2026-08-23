@@ -18,22 +18,17 @@ import {
     getHseRemainingDays,
     getHseSchedule,
     getHseScheduleStatus,
+    getHseTierKeyForRoster,
     getOfferEventPoints,
     homescreenEvents,
     HomescreenEventOffer,
-    hseRaidPointsOverrides,
+    hseEarnsRaidPoints,
     resolveHseMilestones,
     resolveHseTier,
     tallyHseRewards,
 } from '@/fsd/4-entities/homescreen_events';
 import { MowsService } from '@/fsd/4-entities/mow';
-import {
-    getShopCurrencyIconKey,
-    getShopCurrencyLabel,
-    hasBlueStarUnit,
-    parseReward,
-    plTier,
-} from '@/fsd/4-entities/shops';
+import { getShopCurrencyIconKey, getShopCurrencyLabel, hasBlueStarUnit, parseReward } from '@/fsd/4-entities/shops';
 
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
@@ -194,10 +189,7 @@ export const HsePointsCalculator = () => {
 
     const pl = playerMetadata.powerLevel ?? 1;
     const rosterHasBlueStarUnit = useMemo(() => hasBlueStarUnit(units), [units]);
-    const tierKey = useMemo(() => {
-        const tier = plTier(pl, rosterHasBlueStarUnit);
-        return tier === 'medium' ? 'mid' : tier;
-    }, [pl, rosterHasBlueStarUnit]);
+    const tierKey = useMemo(() => getHseTierKeyForRoster(pl, rosterHasBlueStarUnit), [pl, rosterHasBlueStarUnit]);
 
     const resolvedTier = selectedOption ? resolveHseTier(selectedOption.event, tierKey) : undefined;
 
@@ -273,11 +265,10 @@ export const HsePointsCalculator = () => {
         [dailyRaids]
     );
 
-    const raidsAvailable = useMemo(() => {
-        if (!resolvedTier) return false;
-        const hasKillUnitsTracker = resolvedTier.tier.liveEventConfig?.trackers?.some(t => t.type === 'killUnits');
-        return Boolean(hasKillUnitsTracker) || Boolean(hseRaidPointsOverrides[selectedEventName]);
-    }, [resolvedTier, selectedEventName]);
+    const raidsAvailable = useMemo(
+        () => (resolvedTier ? hseEarnsRaidPoints(resolvedTier.tier, selectedEventName) : false),
+        [resolvedTier, selectedEventName]
+    );
 
     const { shardsGoals, upgradeRankOrMowGoals, upgradeMaterialGoals, preFarmGoals } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false, onslaughtPreferences),
