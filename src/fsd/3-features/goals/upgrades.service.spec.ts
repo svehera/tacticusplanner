@@ -4654,6 +4654,181 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
     });
 });
 
+const withEnemies = (locationId: string, enemyId: string, count: number): ICampaignBattleComposed =>
+    ({
+        ...CampaignsService.campaignsComposed[locationId],
+        detailedEnemyTypes: [{ id: enemyId, count }],
+    }) as ICampaignBattleComposed;
+
+describe('UpgradesService.getGenericHsePoints', () => {
+    it('scores Mechanical-trait kills for the real machine_hunt event, at the Elite multiplier for Elite battles', () => {
+        const normal = withEnemies('O40', 'necroNpc1Warrior', 4);
+        const elite = withEnemies('OE30', 'necroNpc1Warrior', 4);
+
+        expect(UpgradesService.getGenericHsePoints(normal, 'machine_hunt', 'high')).toBe(4 * 3);
+        expect(UpgradesService.getGenericHsePoints(elite, 'machine_hunt', 'high')).toBe(4 * 5);
+    });
+
+    it('distinguishes MirrorCampaign (3 pts) from MirrorEliteCampaign (5 pts) battles', () => {
+        const mirror = withEnemies('OM30', 'necroNpc1Warrior', 2);
+        const mirrorElite = withEnemies('OME30', 'necroNpc1Warrior', 2);
+
+        expect(UpgradesService.getGenericHsePoints(mirror, 'machine_hunt', 'high')).toBe(2 * 3);
+        expect(UpgradesService.getGenericHsePoints(mirrorElite, 'machine_hunt', 'high')).toBe(2 * 5);
+    });
+
+    it('matches Chaos-alliance enemies for warp_surge even without a literal "Chaos" trait', () => {
+        const battle = withEnemies('O40', 'blackBossTerminator', 2);
+
+        expect(UpgradesService.getGenericHsePoints(battle, 'warp_surge', 'high')).toBeGreaterThan(0);
+    });
+
+    it('matches Tyranids-faction enemies for kill_tyranids via factionRestrictions', () => {
+        const battle = withEnemies('O40', 'tyranNpc1Hormagaunt', 3);
+
+        expect(UpgradesService.getGenericHsePoints(battle, 'kill_tyranids', 'high')).toBeGreaterThan(0);
+    });
+
+    it('returns undefined (not 0) for events with no killUnits tracker and no override', () => {
+        const battle = withEnemies('O40', 'necroNpc1Warrior', 4);
+
+        expect(UpgradesService.getGenericHsePoints(battle, 'arsenal_of_war', 'high')).toBeUndefined();
+    });
+
+    it('returns undefined for Onslaught battles regardless of event, to avoid double-counting with the manual onslaught mode input', () => {
+        const onslaught = {
+            ...CampaignsService.campaignsComposed['O40'],
+            campaignType: CampaignType.Onslaught,
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+
+        expect(UpgradesService.getGenericHsePoints(onslaught, 'machine_hunt', 'high')).toBeUndefined();
+    });
+});
+
+describe('UpgradesService.sortLocationsForRaiding (customHseEventName)', () => {
+    const baseChar = CharactersService.charactersData[0];
+    const goal = createRankGoal(baseChar, { goalId: 'goal-generic-hse', priority: 1 });
+
+    const buildCombinedUpgradeForLocation = (
+        upgradeId: string,
+        location: ICampaignBattleComposed
+    ): ICombinedUpgrade => ({
+        ...FsdUpgradesService.baseUpgradesData[upgradeId],
+        requiredCount: 5,
+        countByGoalId: { [goal.goalId]: 5 },
+        goalToUnit: { [goal.goalId]: '' },
+        relatedCharacters: [],
+        relatedGoals: [goal.goalId],
+        locations: [location],
+    });
+
+    it('sorts real machine_hunt battles by generically-derived hsePoints, Elite/MirrorElite first', () => {
+        const locNormal = {
+            ...CampaignsService.campaignsComposed['O40'],
+            isSuggested: true,
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+        const locElite = {
+            ...CampaignsService.campaignsComposed['OE30'],
+            isSuggested: true,
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+
+        const combinedBaseMaterials = {
+            [locNormal.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locNormal.rewards.potential[0].id,
+                locNormal
+            ),
+            [locElite.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locElite.rewards.potential[0].id,
+                locElite
+            ),
+        };
+
+        const settings = createSettings({
+            preferences: {
+                ...createSettings().preferences,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                    customHseEventName: 'machine_hunt',
+                    customHseTier: 'high',
+                },
+            },
+        });
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locNormal, locElite],
+            [goal],
+            combinedBaseMaterials,
+            {},
+            settings
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual([locElite.id, locNormal.id]);
+    });
+});
+
+describe('UpgradesService.scoreRaidsForHse', () => {
+    it('sums generic HSE points across raid days, scaled by raidsToPerform', () => {
+        const location = {
+            ...CampaignsService.campaignsComposed['OE30'],
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+
+        const days = [
+            {
+                energyTotal: 0,
+                raidsTotal: 0,
+                onslaughtTokens: 1,
+                raids: [
+                    {
+                        raidLocations: [{ ...location, raidsToPerform: 2, raidsAlreadyPerformed: 0 }],
+                    },
+                ],
+            },
+        ] as unknown as IUpgradesRaidsDay[];
+
+        // 4 enemies * 5 pts (Elite) * 2 raids = 40
+        expect(UpgradesService.scoreRaidsForHse(days, 'machine_hunt', 'high')).toBe(40);
+    });
+});
+
+describe('UpgradesService.estimateMaxHsePointsRaids', () => {
+    it('only scores unlocked battles', () => {
+        const noneUnlocked = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 0])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
+
+        const { totalPoints } = UpgradesService.estimateMaxHsePointsRaids('machine_hunt', 'high', 1, 999, noneUnlocked);
+
+        expect(totalPoints).toBe(0);
+    });
+
+    it('scores points once campaigns are unlocked and energy is available', () => {
+        const allUnlocked = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 999])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
+
+        const { totalPoints, totalEnergySpent } = UpgradesService.estimateMaxHsePointsRaids(
+            'machine_hunt',
+            'high',
+            1,
+            999,
+            allUnlocked
+        );
+
+        expect(totalPoints).toBeGreaterThan(0);
+        expect(totalEnergySpent).toBeGreaterThan(0);
+        expect(totalEnergySpent).toBeLessThanOrEqual(999);
+    });
+});
+
 describe('UpgradesService.canRaidMaterial – shard goal blocked regression', () => {
     const unitId = 'votanBeserk';
     const baseChar = CharactersService.charactersData.find(c => c.snowprintId === unitId)!;

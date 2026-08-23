@@ -14,12 +14,26 @@ import { getEnumValues } from '@/fsd/5-shared/lib';
 import { TacticusUpgrade } from '@/fsd/5-shared/lib/tacticus-api/tacticus-api.models';
 import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { CampaignsService, CampaignType, Campaign, ICampaignBattleComposed } from '@/fsd/4-entities/campaign';
+import {
+    CampaignsService,
+    CampaignType,
+    Campaign,
+    ICampaignBattleComposed,
+    ICampaignsProgress,
+} from '@/fsd/4-entities/campaign';
 import { campaignEventsLocations, campaignsByGroup } from '@/fsd/4-entities/campaign/campaigns.constants';
 import { CharactersService, CharacterUpgradesService, IUnitUpgradeRank } from '@/fsd/4-entities/character';
 import { ICharacter2, IUnitShards } from '@/fsd/4-entities/character/model';
 import { IPreFarmMaterialForGoalsGoal, IUpgradeMaterialGoal } from '@/fsd/4-entities/goal/model';
+import {
+    homescreenEvents,
+    HomescreenEventTierKey,
+    hseRaidPointsOverrides,
+    matchesRestriction,
+    resolveHseTier,
+} from '@/fsd/4-entities/homescreen_events';
 import { IMow2, mows2Data, MowsService } from '@/fsd/4-entities/mow';
+import { INpcData } from '@/fsd/4-entities/npc';
 import { NpcService } from '@/fsd/4-entities/npc/@x/unit';
 import {
     IBaseUpgrade,
@@ -665,7 +679,7 @@ export class UpgradesService {
         this.handleFirstDayCompletedRaids(day, settings, combinedBaseMaterials);
         let energy = settings.dailyEnergy - day.energyTotal;
         let days = 0;
-        const MAX_DAYS = 1000;
+        const MAX_DAYS = settings.hseMaxDays ?? 1000;
         const blockedMats: Record<string, ICombinedUpgrade> = {};
         const newRemainignMats: Record<string, ICombinedUpgrade> = {};
         for (const key in remainingMats) {
@@ -781,7 +795,9 @@ export class UpgradesService {
         >
     ): void {
         const hse = settings.preferences.farmPreferences?.homeScreenEvent;
-        if (hse === undefined || hse === IDailyRaidsHomeScreenEvent.none) return;
+        const customHseEventName = settings.preferences.farmPreferences?.customHseEventName;
+        const customHseTier = settings.preferences.farmPreferences?.customHseTier;
+        if ((hse === undefined || hse === IDailyRaidsHomeScreenEvent.none) && customHseEventName === undefined) return;
 
         // eslint-disable-next-line unicorn/consistent-function-scoping -- don't extract static methods
         const hsePointsPerUnit = (campaignType: CampaignType): number => {
@@ -790,6 +806,12 @@ export class UpgradesService {
         };
 
         const getHsePoints = (loc: ICampaignBattleComposed): number => {
+            if (customHseEventName) {
+                return (
+                    (this.getGenericHsePoints(loc, customHseEventName, customHseTier ?? 'default') ?? 0) /
+                    loc.energyCost
+                );
+            }
             switch (hse) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     return (this.getNonSummonTyranidCount(loc) * hsePointsPerUnit(loc.campaignType)) / loc.energyCost;
@@ -862,6 +884,17 @@ export class UpgradesService {
         );
         day.energyTotal = sum(day.raids.map(raid => raid.energyTotal));
         day.raidsTotal = sum(day.raids.map(raid => raid.raidsTotal));
+        if (customHseEventName) {
+            day.hsePointsTotal = sum(
+                day.raids.flatMap(raid =>
+                    raid.raidLocations.map(
+                        loc =>
+                            (this.getGenericHsePoints(loc, customHseEventName, customHseTier ?? 'default') ?? 0) *
+                            loc.raidsToPerform
+                    )
+                )
+            );
+        }
     }
 
     private static precomputeGoalPriorityLocations(
@@ -1603,9 +1636,12 @@ export class UpgradesService {
             }
             return 0;
         });
+        const customHseEventName = settings.preferences.farmPreferences?.customHseEventName;
+        const customHseTier = settings.preferences.farmPreferences?.customHseTier;
         if (
-            settings.preferences.farmPreferences?.homeScreenEvent === undefined ||
-            settings.preferences.farmPreferences?.homeScreenEvent === IDailyRaidsHomeScreenEvent.none
+            (settings.preferences.farmPreferences?.homeScreenEvent === undefined ||
+                settings.preferences.farmPreferences?.homeScreenEvent === IDailyRaidsHomeScreenEvent.none) &&
+            customHseEventName === undefined
         ) {
             // If we don't have a homescreen event, then we're done, locations are sorted in raiding order.
             return taggedLocs.map(x => x.loc);
@@ -1624,6 +1660,15 @@ export class UpgradesService {
                 settings.preferences.farmPreferences?.order === IDailyRaidsFarmOrder.totalMaterials
                     ? ([hsePointsDirection, 'desc'] as const)
                     : (['asc', hsePointsDirection, 'desc'] as const);
+            if (customHseEventName) {
+                taggedLocs = taggedLocs.map(x => ({
+                    ...x,
+                    hsePoints:
+                        (this.getGenericHsePoints(x.loc, customHseEventName, customHseTier ?? 'default') ?? 0) /
+                        x.loc.energyCost,
+                }));
+                return orderBy(taggedLocs, orderingFields, orderingDirections).map(x => x.loc);
+            }
             switch (settings.preferences.farmPreferences.homeScreenEvent) {
                 case IDailyRaidsHomeScreenEvent.purgeOrder: {
                     taggedLocs = taggedLocs.map(x => ({
@@ -2804,52 +2849,167 @@ export class UpgradesService {
         return nodeNumber;
     }
 
-    /** @returns the number of non-summon enemies you'll face in the battle. */
-    private static getNonSummonEnemyCount(battle: ICampaignBattleComposed): number {
+    /** @returns the number of non-summon enemies matching `predicate` you'll face in the battle. */
+    private static getNonSummonCountMatching(
+        battle: ICampaignBattleComposed,
+        predicate: (npc: INpcData) => boolean
+    ): number {
         let returnValue = 0;
         for (const enemy of battle.detailedEnemyTypes ?? []) {
             const npc = NpcService.getNpcById(enemy.id);
-            if (npc && !npc.traits.includes('Summon')) {
+            if (npc && !npc.traits.includes('Summon') && predicate(npc)) {
                 returnValue += enemy.count;
             }
         }
         return returnValue;
+    }
+
+    /** @returns the number of non-summon enemies you'll face in the battle. */
+    private static getNonSummonEnemyCount(battle: ICampaignBattleComposed): number {
+        return this.getNonSummonCountMatching(battle, () => true);
     }
 
     /** @returns the number of non-summon tyranids you'll face in the battle. */
     private static getNonSummonTyranidCount(battle: ICampaignBattleComposed): number {
-        let returnValue = 0;
-        for (const enemy of battle.detailedEnemyTypes ?? []) {
-            const npc = NpcService.getNpcById(enemy.id);
-            if (npc && npc.faction === 'Tyranids' && !npc.traits.includes('Summon')) {
-                returnValue += enemy.count;
-            }
-        }
-        return returnValue;
+        return this.getNonSummonCountMatching(battle, npc => npc.faction === 'Tyranids');
     }
 
     /** @returns the number of non-summon chaos enemies you'll face in the battle. */
     private static getNonSummonChaosEnemyCount(battle: ICampaignBattleComposed): number {
-        let returnValue = 0;
-        for (const enemy of battle.detailedEnemyTypes ?? []) {
-            const npc = NpcService.getNpcById(enemy.id);
-            if (npc && npc.alliance === Alliance.Chaos && !npc.traits.includes('Summon')) {
-                returnValue += enemy.count;
-            }
-        }
-        return returnValue;
+        return this.getNonSummonCountMatching(battle, npc => npc.alliance === Alliance.Chaos);
     }
 
-    /** @returns the number of non-summon chaos enemies you'll face in the battle. */
+    /** @returns the number of non-summon mechanical enemies you'll face in the battle. */
     private static getNonSummonMechanicalEnemyCount(battle: ICampaignBattleComposed): number {
-        let returnValue = 0;
-        for (const enemy of battle.detailedEnemyTypes ?? []) {
-            const npc = NpcService.getNpcById(enemy.id);
-            if (npc && npc.traits.includes('Mechanical') && !npc.traits.includes('Summon')) {
-                returnValue += enemy.count;
+        return this.getNonSummonCountMatching(battle, npc => npc.traits.includes('Mechanical'));
+    }
+
+    /**
+     * Maps a campaign battle to the `gameModeRestrictions` vocabulary string used by HSE tracker
+     * data. There is no separate "MirrorElite" `CampaignType` — an elite-mirror battle is still
+     * `CampaignType.Elite`, distinguished only by "Mirror" appearing in its `campaign` id (e.g.
+     * `Campaign.IME = 'Indomitus Mirror Elite'`) — so the Mirror check applies only to the Elite
+     * branch; `Normal`/`Mirror` are already distinct `CampaignType` values.
+     */
+    private static getBattleGameModeId(battle: ICampaignBattleComposed): string {
+        switch (battle.campaignType) {
+            case CampaignType.Elite: {
+                const isMirror = String(battle.campaign).includes('Mirror');
+                return isMirror ? 'MirrorEliteCampaign' : 'EliteCampaign';
+            }
+            case CampaignType.Normal: {
+                return 'Campaign';
+            }
+            case CampaignType.Mirror: {
+                return 'MirrorCampaign';
+            }
+            case CampaignType.Standard:
+            case CampaignType.Extremis: {
+                return 'CampaignEvent';
+            }
+            default: {
+                return String(battle.campaignType);
             }
         }
-        return returnValue;
+    }
+
+    /**
+     * Auto-derives raw (not per-energy) HSE points earnable from a single campaign battle, based
+     * on the event's `killUnits` trackers for the resolved tier. Scoped to campaign battles only —
+     * Onslaught/Arena/Salvage-Run/Tournament-Arena points are captured exclusively by the HSE
+     * points calculator's manual mode inputs, never here, to avoid double-counting. Returns
+     * `undefined` when the event/tier has no `killUnits` tracker and no override, so callers can
+     * distinguish "0 points from this battle" from "this HSE doesn't earn points via raiding".
+     */
+    public static getGenericHsePoints(
+        loc: ICampaignBattleComposed,
+        hseEventName: string,
+        tier: HomescreenEventTierKey
+    ): number | undefined {
+        const override = hseRaidPointsOverrides[hseEventName];
+        if (override) return override(loc, tier);
+
+        if (loc.campaignType === CampaignType.Onslaught) return undefined;
+
+        const event = homescreenEvents.find(x => x.eventName === hseEventName);
+        if (!event) return undefined;
+        const resolved = resolveHseTier(event, tier);
+        const trackers = resolved?.tier.liveEventConfig?.trackers?.filter(t => t.type === 'killUnits');
+        if (!trackers || trackers.length === 0) return undefined;
+
+        const modeId = this.getBattleGameModeId(loc);
+        let points = 0;
+        for (const tracker of trackers) {
+            if (!matchesRestriction(tracker.gameModeRestrictions, tag => tag === modeId)) continue;
+            const matchingCount = this.getNonSummonCountMatching(loc, npc => {
+                const traitOk = matchesRestriction(
+                    tracker.traitRestrictions,
+                    tag => npc.traits.includes(tag) || npc.alliance === tag
+                );
+                const factionOk = matchesRestriction(tracker.factionRestrictions, tag => npc.faction === tag);
+                return traitOk && factionOk;
+            });
+            points += matchingCount * (tracker.points ?? 0);
+        }
+        return points;
+    }
+
+    /**
+     * Read-only post-hoc scoring of already-planned raid days for a given real HSE, independent
+     * of whatever sorting logic actually picked those raids. Used by the "current raid settings"
+     * strategy in the plan-hse points calculator.
+     */
+    public static scoreRaidsForHse(
+        days: IUpgradesRaidsDay[],
+        hseEventName: string,
+        tier: HomescreenEventTierKey
+    ): number {
+        return sum(
+            days.flatMap(day =>
+                day.raids.flatMap(raid =>
+                    raid.raidLocations.map(
+                        loc => (this.getGenericHsePoints(loc, hseEventName, tier) ?? 0) * loc.raidsToPerform
+                    )
+                )
+            )
+        );
+    }
+
+    /**
+     * Greedily spends `dailyEnergyPerDay` energy each day (for `days` days, with
+     * `energyAlreadySpentToday` subtracted from the first day) on whichever unlocked campaign
+     * battle gives the most HSE points per energy for `hseEventName`, ignoring goals/materials
+     * entirely. Used by the "maximize HSE points" strategy in the plan-hse points calculator.
+     */
+    public static estimateMaxHsePointsRaids(
+        hseEventName: string,
+        tier: HomescreenEventTierKey,
+        days: number,
+        dailyEnergyPerDay: number,
+        campaignsProgress: ICampaignsProgress,
+        energyAlreadySpentToday = 0
+    ): { totalPoints: number; totalEnergySpent: number } {
+        const allBattles = Object.values(CampaignsService.campaignsGrouped).flat();
+        const scored = allBattles
+            .filter(loc => this.mapNodeNumber(loc.campaign, loc.nodeNumber) <= (campaignsProgress[loc.campaign] ?? 0))
+            .map(loc => ({ loc, points: this.getGenericHsePoints(loc, hseEventName, tier) }))
+            .filter((x): x is { loc: ICampaignBattleComposed; points: number } => (x.points ?? 0) > 0)
+            .toSorted((a, b) => b.points / b.loc.energyCost - a.points / a.loc.energyCost);
+
+        let totalPoints = 0;
+        let totalEnergySpent = 0;
+        for (let day = 0; day < days; day++) {
+            let energy = day === 0 ? Math.max(0, dailyEnergyPerDay - energyAlreadySpentToday) : dailyEnergyPerDay;
+            for (const { loc, points } of scored) {
+                if (energy < loc.energyCost) continue;
+                const attempts = Math.min(loc.dailyBattleCount, Math.floor(energy / loc.energyCost));
+                if (attempts <= 0) continue;
+                totalPoints += points * attempts;
+                totalEnergySpent += loc.energyCost * attempts;
+                energy -= loc.energyCost * attempts;
+            }
+        }
+        return { totalPoints, totalEnergySpent };
     }
 
     /**
