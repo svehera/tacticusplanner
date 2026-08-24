@@ -335,7 +335,7 @@ export class CharactersService {
     public static passesRosterFilter(character: ICharacter2, criteria: IRosterFilterCriteria): boolean {
         return (
             this.passesAttackTypeFilter(character, criteria.attackType) &&
-            this.passesHitsFilter(character, criteria.minHits, criteria.maxHits) &&
+            this.passesHitsFilter(character, criteria.minHits, criteria.maxHits, criteria.attackType) &&
             this.passesMovementFilter(character, criteria.movement) &&
             this.passesRangeFilter(character, criteria.minRange, criteria.maxRange) &&
             this.passesDamageTypesFilter(character, criteria.damageTypes) &&
@@ -372,11 +372,24 @@ export class CharactersService {
         return true;
     }
 
-    private static passesHitsFilter(character: ICharacter2, minHits?: number | '', maxHits?: number | ''): boolean {
-        const hits = character.rangeHits ?? character.meleeHits ?? 0;
-        if (minHits && hits < minHits) return false;
-        if (maxHits && hits > maxHits) return false;
-        return true;
+    /**
+     * A hybrid unit carries both `meleeHits` and `rangeHits` — which one is "the" hit count
+     * depends on which attack type is selected, so match against both when neither is picked.
+     */
+    private static passesHitsFilter(
+        character: ICharacter2,
+        minHits?: number | '',
+        maxHits?: number | '',
+        attackType?: string
+    ): boolean {
+        if (!minHits && !maxHits) return true;
+
+        const inRange = (hits: number) => (!minHits || hits >= minHits) && (!maxHits || hits <= maxHits);
+
+        if (attackType === 'melee') return inRange(character.meleeHits);
+        if (attackType === 'range') return character.rangeHits != undefined && inRange(character.rangeHits);
+
+        return inRange(character.meleeHits) || (character.rangeHits != undefined && inRange(character.rangeHits));
     }
 
     private static passesMovementFilter(character: ICharacter2, movement?: number | ''): boolean {
@@ -399,7 +412,9 @@ export class CharactersService {
     }
 
     public static getHitsOptions(characters: ICharacter2[]): number[] {
-        return uniq(characters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1])).toSorted((a, b) => a - b);
+        return uniq(
+            characters.flatMap(x => [x.meleeHits, x.rangeHits]).filter((hits): hits is number => hits != undefined)
+        ).toSorted((a, b) => a - b);
     }
 
     public static getMovementOptions(characters: ICharacter2[]): number[] {

@@ -101,7 +101,7 @@ export const LearnCharacters = () => {
         // Query params are user-supplied, so drop anything that isn't a real trait/alliance
         // rather than letting it through as a filter value that matches nothing and has no icon.
         const traits = searchParams
-            .getAll('trait')
+            .getAll('traits')
             .filter((value): value is Trait => Object.values(Trait).includes(value as Trait));
         const alliance = searchParams
             .getAll('alliance')

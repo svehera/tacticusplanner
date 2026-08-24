@@ -82,5 +82,39 @@ describe('CharactersService', () => {
                 })
             ).toBe(false);
         });
+
+        it('matches a hybrid unit by melee hits when no attack type is selected', () => {
+            // 5 melee hits, 1 ranged hit — filtering by "5 hits" with no attack type picked should
+            // still find it, since the hits dropdown offers 5 as an option for this unit.
+            const character = makeCharacter({ meleeHits: 5, rangeHits: 1 });
+
+            expect(CharactersService.passesRosterFilter(character, { minHits: 5, maxHits: 5 })).toBe(true);
+        });
+
+        it('matches a hybrid unit by ranged hits when range attack type is selected', () => {
+            const character = makeCharacter({ meleeHits: 5, rangeHits: 1 });
+
+            expect(
+                CharactersService.passesRosterFilter(character, { attackType: 'range', minHits: 1, maxHits: 1 })
+            ).toBe(true);
+            expect(
+                CharactersService.passesRosterFilter(character, { attackType: 'range', minHits: 5, maxHits: 5 })
+            ).toBe(false);
+        });
+    });
+
+    describe('getHitsOptions', () => {
+        it('only offers hit counts that are actually present on the roster', () => {
+            // A melee-only character (no rangeHits) must not inject a phantom "1" option.
+            const characters = [makeCharacter({ meleeHits: 3, rangeHits: undefined })];
+
+            expect(CharactersService.getHitsOptions(characters)).toEqual([3]);
+        });
+
+        it('includes both melee and ranged hit values for a hybrid unit', () => {
+            const characters = [makeCharacter({ meleeHits: 5, rangeHits: 1 })];
+
+            expect(CharactersService.getHitsOptions(characters)).toEqual([1, 5]);
+        });
     });
 });
