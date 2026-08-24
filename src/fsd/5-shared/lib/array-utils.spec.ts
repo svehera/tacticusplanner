@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { arrayToKeyedObject, filterMap, moveItem } from './array-utils';
+import { arrayToKeyedObject, filterMap, moveInOrder, moveItem, normalizeOrder } from './array-utils';
 
 describe('filterMap', () => {
     describe('mapping behavior', () => {
@@ -135,6 +135,82 @@ describe('moveItem', () => {
 
         it('returns an equal array for a single-element array', () => {
             expect(moveItem(['a'], 0, 0)).toEqual(['a']);
+        });
+    });
+});
+
+describe('normalizeOrder', () => {
+    it('assigns priority from array position, 1-based', () => {
+        const result = normalizeOrder([{ priority: 99 }, { priority: 1 }, { priority: 50 }]);
+        expect(result.map(x => x.priority)).toEqual([1, 2, 3]);
+    });
+
+    it('preserves other fields', () => {
+        const result = normalizeOrder([{ priority: 5, name: 'a' }]);
+        expect(result).toEqual([{ priority: 1, name: 'a' }]);
+    });
+
+    it('returns an empty array when given an empty array', () => {
+        expect(normalizeOrder([])).toEqual([]);
+    });
+
+    it('does not mutate the input', () => {
+        const input = [{ priority: 5 }];
+        normalizeOrder(input);
+        expect(input).toEqual([{ priority: 5 }]);
+    });
+});
+
+describe('moveInOrder', () => {
+    // Global order, interleaving two accordion sections the way the goals page does.
+    const ORDER = ['ascend-1', 'upgrade-2', 'upgrade-3', 'ascend-4'];
+
+    describe('moving up', () => {
+        it('swaps the item with the one above it', () => {
+            expect(moveInOrder(ORDER, 'upgrade-3', -1)).toEqual(['ascend-1', 'upgrade-3', 'upgrade-2', 'ascend-4']);
+        });
+
+        it('moves an item past a neighbour from another section', () => {
+            expect(moveInOrder(ORDER, 'upgrade-2', -1)).toEqual(['upgrade-2', 'ascend-1', 'upgrade-3', 'ascend-4']);
+        });
+
+        it('returns undefined only for the globally first item', () => {
+            expect(moveInOrder(ORDER, 'ascend-1', -1)).toBeUndefined();
+        });
+    });
+
+    describe('moving down', () => {
+        it('swaps the item with the one below it', () => {
+            expect(moveInOrder(ORDER, 'upgrade-2', 1)).toEqual(['ascend-1', 'upgrade-3', 'upgrade-2', 'ascend-4']);
+        });
+
+        it('returns undefined only for the globally last item', () => {
+            expect(moveInOrder(ORDER, 'ascend-4', 1)).toBeUndefined();
+        });
+    });
+
+    describe('edge cases', () => {
+        it('returns undefined when the item is not in the list', () => {
+            expect(moveInOrder(ORDER, 'not-here', 1)).toBeUndefined();
+        });
+
+        it('returns undefined for a single-item list in either direction', () => {
+            expect(moveInOrder(['only'], 'only', -1)).toBeUndefined();
+            expect(moveInOrder(['only'], 'only', 1)).toBeUndefined();
+        });
+
+        it('returns undefined when a multi-step move would overshoot the end', () => {
+            expect(moveInOrder(ORDER, 'upgrade-3', 2)).toBeUndefined();
+        });
+
+        it('supports multi-step moves that stay in range', () => {
+            expect(moveInOrder(ORDER, 'ascend-1', 3)).toEqual(['upgrade-2', 'upgrade-3', 'ascend-4', 'ascend-1']);
+        });
+
+        it('does not mutate the list', () => {
+            const order = ['a', 'b', 'c'];
+            moveInOrder(order, 'a', 1);
+            expect(order).toEqual(['a', 'b', 'c']);
         });
     });
 });

@@ -28,6 +28,8 @@ export interface IUnitFilterCriteria {
 export interface ITeam2 {
     // The name of the team.
     name: string;
+    // Display/sort order, 1-based. Re-derived by normalizeOrder after every mutation.
+    priority: number;
     // The snowpring ID of the characters.
     chars: string[];
     // If there are flex characters, the first flex character appears at chars[flexIndex].

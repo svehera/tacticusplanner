@@ -1,57 +1,34 @@
 /* eslint-disable import-x/order */
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy, Map, Rocket } from 'lucide-react';
+import { verticalListSortingStrategy } from '@dnd-kit/sortable';
+import { Plus, Users2 } from 'lucide-react';
 import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
 import { ICharacter2 } from '@/models/interfaces';
 import { DispatchContext, StoreContext } from '@/reducers/store.provider';
 
+import { moveInOrder } from '@/fsd/5-shared/lib';
 import { Alliance, DamageType, FactionId, Trait } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
-import { Button, LazyTooltip, PortalDialog, Select } from '@/fsd/5-shared/ui';
+import { Button, LazyTooltip, PortalDialog, Select, SortableList } from '@/fsd/5-shared/ui';
 
 import { CharactersService } from '@/fsd/4-entities/character/@x/unit';
 import { IMow2, MowsService } from '@/fsd/4-entities/mow';
 
 import { AddTeamDialog } from './add-team-dialog';
-import { campaignStorylineCoreCharacters, campaignStorylineLabel } from './campaign.constants';
+import { campaignStorylineCoreCharacters } from './campaign.constants';
 import { ITeam2 } from './models';
-import { TeamFlow } from './team-flow';
+import { TeamCard } from './team-card';
 import { RosterSnapshotsMagnificationSlider } from '../input-roster-snapshots/roster-snapshots-magnification-slider';
 import { isMobile } from 'react-device-detect';
 import { IPersonalTeam } from '@/fsd/3-features/teams/teams.models';
 
 // Somewhat arbitrary, but please consult with the planner maintainer before increasing.
 const MAX_TEAMS = 20;
-
-// Internal helper for metadata styling
-const CHIP_CLASSES: Record<string, string> = {
-    warning: 'border-amber-400/50 bg-amber-400/10 text-amber-700 dark:text-amber-400',
-    info: 'border-blue-500/50 bg-blue-500/10 text-blue-700 dark:text-blue-400',
-    secondary: 'border-(--border) bg-(--soft) text-(--soft-fg)',
-    success: 'border-emerald-500/50 bg-emerald-500/10 text-emerald-700 dark:text-emerald-400',
-    error: 'border-red-500/50 bg-red-500/10 text-red-700 dark:text-red-400',
-};
-
-const MetadataChip = ({
-    icon,
-    label,
-    color = 'secondary',
-}: {
-    icon: React.ReactElement;
-    label: string;
-    color: string;
-}) => (
-    <span
-        className={`inline-flex items-center gap-1 rounded-full border px-2.5 py-0.5 text-[0.65rem] font-bold uppercase ${CHIP_CLASSES[color] ?? CHIP_CLASSES.secondary}`}>
-        {icon}
-        {label}
-    </span>
-);
 
 enum SaveTeamMode {
     MODE_ADD,
@@ -319,6 +296,19 @@ export const ManageTeams = () => {
         }
     };
 
+    // Drag reorder, scoped to whatever's currently visible under the Team Type filter.
+    const handleReorder = (orderedNames: string[]) => {
+        dispatch.teams2({ type: 'Reorder', orderedNames });
+    };
+
+    // Arrow-button move, applied against the global order (not just the filtered view).
+    const handleMove = (teamName: string, delta: number) => {
+        const orderedNames = teams.map(t => t.name);
+        const nextOrder = moveInOrder(orderedNames, teamName, delta);
+        if (!nextOrder) return;
+        dispatch.teams2({ type: 'Reorder', orderedNames: nextOrder });
+    };
+
     const onSave = () => {
         if (saveTeamMode === SaveTeamMode.MODE_EDIT && editingTeam) {
             const updatedTeam: ITeam2 = {
@@ -344,6 +334,9 @@ export const ManageTeams = () => {
         } else {
             const newTeam: ITeam2 = {
                 name: teamName.trim(),
+                // Placeholder — normalizeOrder (run by the reducer's 'Set' case) re-derives this from
+                // array position, landing the new team at the end.
+                priority: teams.length + 1,
                 chars: selectedChars,
                 flexIndex: flexIndex,
                 mows: selectedMows,
@@ -590,146 +583,27 @@ export const ManageTeams = () => {
                     />
                 </div>
             </div>
-            <div className="flex flex-col gap-4">
-                {teams
-                    .filter(team => !selectedTeamType || Boolean(team[selectedTeamType]))
-                    .map(team => (
-                        <div
-                            key={team.name}
-                            className="rounded-xl border border-(--card-border) bg-(--card) p-4 transition-colors">
-                            <div className="mb-4 flex items-start justify-between">
-                                <div>
-                                    <span className="font-mono text-xs tracking-wider text-(--soft-fg) uppercase">
-                                        Team Configuration
-                                    </span>
-                                    <h3 className="text-(--card-fg)">{team.name}</h3>
-                                </div>
-
-                                <div className="flex gap-1">
-                                    <LazyTooltip title="Edit Team">
-                                        <Button size="square-petite" appearance="plain" onPress={() => onEdit(team)}>
-                                            <Pencil data-slot="icon" />
-                                        </Button>
-                                    </LazyTooltip>
-                                    <LazyTooltip title="Delete Team">
-                                        <Button
-                                            size="square-petite"
-                                            appearance="plain"
-                                            intent="danger"
-                                            onPress={() => onDelete(team)}>
-                                            <Trash2 data-slot="icon" />
-                                        </Button>
-                                    </LazyTooltip>
-                                </div>
-                            </div>
-                            <div className="mb-4 flex flex-wrap gap-2">
-                                {!!team.warOffense && (
-                                    <MetadataChip
-                                        icon={<Swords className="size-3" />}
-                                        label="War Offense"
-                                        color="warning"
-                                    />
-                                )}
-                                {!!team.warDefense && (
-                                    <MetadataChip
-                                        icon={<Shield className="size-3" />}
-                                        label="War Defense"
-                                        color="info"
-                                    />
-                                )}
-                                {!!team.raid && (
-                                    <MetadataChip
-                                        icon={<Users className="size-3" />}
-                                        label="Guild Raid"
-                                        color="secondary"
-                                    />
-                                )}
-                                {!!team.ta && (
-                                    <MetadataChip
-                                        icon={<Trophy className="size-3" />}
-                                        label="Tournament"
-                                        color="success"
-                                    />
-                                )}
-                                {!!team.horde && (
-                                    <MetadataChip icon={<Users2 className="size-3" />} label="Horde" color="error" />
-                                )}
-                                {!!team.campaign && (
-                                    <MetadataChip icon={<Map className="size-3" />} label="Campaign" color="info" />
-                                )}
-                                {!!team.incursion && (
-                                    <MetadataChip icon={<Rocket className="size-3" />} label="Incursion" color="info" />
-                                )}
-                            </div>
-                            {!!team.campaign && !!team.campaignStoryline && (
-                                <div className="mb-4 flex flex-wrap gap-2">
-                                    <MetadataChip
-                                        icon={<Map className="size-3" />}
-                                        label={campaignStorylineLabel(team.campaignStoryline)}
-                                        color="secondary"
-                                    />
-                                </div>
-                            )}
-                            {!!team.incursion && !!team.incursionMows?.length && (
-                                <div className="mb-4 flex flex-wrap gap-2">
-                                    {team.incursionMows.map(mowId => (
-                                        <MetadataChip
-                                            key={mowId}
-                                            icon={<Rocket className="size-3" />}
-                                            label={resolvedMows.find(m => m.snowprintId === mowId)?.name ?? mowId}
-                                            color="secondary"
-                                        />
-                                    ))}
-                                </div>
-                            )}
-                            {team.notes && team.notes.trim().length > 0 && (
-                                <div className="mb-4">
-                                    <span className="font-mono text-xs tracking-wider text-(--soft-fg) uppercase">
-                                        Notes
-                                    </span>
-                                    <div className="mt-2 rounded border border-(--card-border) bg-(--soft) p-3">
-                                        <p className="text-sm whitespace-pre-wrap text-(--fg)">{team.notes}</p>
-                                    </div>
-                                </div>
-                            )}
-                            <div className="rounded-lg bg-(--soft) p-3">
-                                <TeamFlow
-                                    chars={
-                                        team.chars
-                                            .filter(id => resolvedChars.some(x => x.snowprintId === id))
-                                            .map(id => resolvedChars.find(x => x.snowprintId === id)!)
-                                            .filter(x => x !== undefined) ?? []
-                                    }
-                                    mows={
-                                        team.mows
-                                            ?.filter(id => resolvedMows.some(x => x.snowprintId === id))
-                                            .map(id => resolvedMows.find(x => x.snowprintId === id)!)
-                                            .filter(x => x !== undefined) ?? []
-                                    }
-                                    flexIndex={team.flexIndex}
-                                    onCharClicked={() => {}}
-                                    onMowClicked={() => {}}
-                                    zoom={zoom}
-                                    disabledUnits={[
-                                        ...team.chars.map(
-                                            char =>
-                                                resolvedChars.find(
-                                                    x => x.snowprintId === char && x.rank === Rank.Locked
-                                                )?.snowprintId
-                                        ),
-                                        ...(team.mows?.map(
-                                            mow =>
-                                                resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)
-                                                    ?.snowprintId
-                                        ) ?? []),
-                                    ]
-                                        .flatMap(id => (id ? [id] : []))
-                                        .filter(id => id !== undefined)}
-                                />
-                            </div>
-                        </div>
-                    ))}
-            </div>
+            <SortableList
+                items={teams.filter(team => !selectedTeamType || Boolean(team[selectedTeamType]))}
+                getId={team => team.name}
+                onReorder={handleReorder}
+                strategy={verticalListSortingStrategy}
+                className="flex flex-col gap-4"
+                renderItem={(team, dragHandle) => (
+                    <TeamCard
+                        team={team}
+                        resolvedChars={resolvedChars}
+                        resolvedMows={resolvedMows}
+                        zoom={zoom}
+                        dragHandle={dragHandle}
+                        onMove={delta => handleMove(team.name, delta)}
+                        canMoveUp={team.priority > 1}
+                        canMoveDown={team.priority < teams.length}
+                        onEdit={() => onEdit(team)}
+                        onDelete={() => onDelete(team)}
+                    />
+                )}
+            />
         </div>
     );
 };

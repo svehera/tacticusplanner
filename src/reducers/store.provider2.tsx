@@ -169,7 +169,7 @@ function trackDispatchEvent(scope: DispatchScope, action: unknown, authenticated
             }
             // No default
         }
-    } else if (scope === 'teams2' && actionType === 'Set') {
+    } else if (scope === 'teams2' && (actionType === 'Set' || actionType === 'Reorder')) {
         trackEvent('team_update', { ...commonParameters, feature: 'teams2' });
     } else if (scope === 'survivalTeams' && actionType === 'SetTeam') {
         trackEvent('team_update', { ...commonParameters, feature: 'survival' });

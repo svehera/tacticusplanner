@@ -1,7 +1,8 @@
+import { rectSortingStrategy } from '@dnd-kit/sortable';
 import React, { useMemo } from 'react';
 
 import { Rarity } from '@/fsd/5-shared/model';
-import { Accordion, AccordionBody, AccordionHeader } from '@/fsd/5-shared/ui';
+import { Accordion, AccordionBody, AccordionHeader, SortableList } from '@/fsd/5-shared/ui';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2 } from '@/fsd/4-entities/mow';
@@ -13,7 +14,6 @@ import { GoalCard } from '@/fsd/1-pages/goals/goal-card';
 import { GoalColorMode } from './goal-color-coding-toggle';
 import { GoalService } from './goal-service';
 import { GoalsTable, GoalsTableVariant } from './goals-table';
-import { SortableGoalGrid } from './sortable-goal-grid';
 
 const GRID_CLASS = 'grid [grid-template-columns:repeat(auto-fill,minmax(min(310px,100%),1fr))] gap-3';
 
@@ -81,11 +81,13 @@ export const GoalSection: React.FC<Props> = ({
                         totalGoals={totalGoals}
                     />
                 ) : (
-                    <SortableGoalGrid
+                    <SortableList
                         items={items}
+                        getId={goal => goal.goalId}
                         onReorder={onReorder}
+                        strategy={rectSortingStrategy}
                         className={GRID_CLASS}
-                        renderCard={(goal, dragHandle) => (
+                        renderItem={(goal, dragHandle) => (
                             <GoalCard
                                 goal={goal}
                                 goalEstimate={estimateById.get(goal.goalId)}
