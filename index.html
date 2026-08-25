@@ -13,6 +13,37 @@
         <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
         <meta name="theme-color" content="rgb(18, 18, 18)" media="(prefers-color-scheme: dark)" />
 
+        <!--
+      Prevents dark-mode FOUC on reload: sets .dark + bg/fg before index.css loads.
+      Keep localStorage key ('tp-theme') in sync with theme.provider.tsx, and these
+      hex values in sync with --color-zinc-900/--color-zinc-300 in index.css.
+    -->
+        <style>
+            html.dark {
+                background-color: #18181b;
+                color: #d4d4d8;
+            }
+        </style>
+        <script>
+            (function () {
+                var stored = null;
+                try {
+                    stored = localStorage.getItem('tp-theme');
+                } catch (e) {}
+                var isDark;
+                try {
+                    isDark =
+                        stored === 'DARK' || (stored !== 'LIGHT' && matchMedia('(prefers-color-scheme: dark)').matches);
+                } catch (e) {
+                    isDark = stored === 'DARK';
+                }
+                if (isDark) {
+                    document.documentElement.classList.add('dark');
+                    document.documentElement.dataset.agThemeMode = 'dark';
+                }
+            })();
+        </script>
+
         <!--        Preconnect-->
         <link rel="preconnect" href="https://www.googletagmanager.com" />
         <link rel="preconnect" href="https://tacticucplannerstorage.blob.core.windows.net" />

@@ -1,4 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
+import { CheckCheck } from 'lucide-react';
 import { useEffect, useMemo, useState } from 'react';
 
 import {
@@ -26,6 +27,7 @@ import {
     TableCardHeader,
 } from '../guild-performance.components';
 import { captureFileName, useSectionCapture } from '../guild-performance.hook';
+import { roundIconToggleClass } from '../guild-performance.styles';
 import {
     bossIconFor,
     bossPrefixDisplayNames,
@@ -722,6 +724,9 @@ export const PerformanceTab = ({
     const [selectedPrimeUnitIds, setSelectedPrimeUnitIds] = useState<string[] | undefined>();
     const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
     const effectivePrimeUnitIds = useMemo(() => selectedPrimeUnitIds ?? [], [selectedPrimeUnitIds]);
+    const isAllPrimesSelected =
+        availablePrimeUnitIds.length > 0 && effectivePrimeUnitIds.length === availablePrimeUnitIds.length;
+    const toggleAllPrimes = () => setSelectedPrimeUnitIds(isAllPrimesSelected ? [] : availablePrimeUnitIds);
 
     // --- exclude kills ---
     const [excludeKills, setExcludeKills] = useState(true);
@@ -869,6 +874,16 @@ export const PerformanceTab = ({
                     iconFor={bossIconFor}
                     allowEmpty
                 />
+                {availablePrimeUnitIds.length > 0 && (
+                    <button
+                        type="button"
+                        title={isAllPrimesSelected ? 'Deselect all primes' : 'Select all primes'}
+                        aria-label={isAllPrimesSelected ? 'Deselect all primes' : 'Select all primes'}
+                        onClick={toggleAllPrimes}
+                        className={roundIconToggleClass(isAllPrimesSelected)}>
+                        <CheckCheck className="size-6" />
+                    </button>
+                )}
                 <PrefixFilter
                     label="Primes"
                     available={availablePrimeUnitIds}

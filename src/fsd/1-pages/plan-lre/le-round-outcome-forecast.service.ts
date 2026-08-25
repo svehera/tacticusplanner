@@ -36,6 +36,7 @@ interface LeForecastRoundResult {
     shardsNeededForNextMilestone: number;
     ohSoCloseEligible: boolean;
     ohSoCloseShardCost: number;
+    ohSoCloseBlackstoneCost: number;
     boughtOhSoCloseShards: number;
 }
 
@@ -54,6 +55,18 @@ export class LeRoundOutcomeForecastService {
     public static readonly BONUS_DELIVERY_EXTRA_CURRENCY = 15;
     public static readonly CURRENCY_BUNDLE_CURRENCY = 300;
     public static readonly OH_SO_CLOSE_MAX_SHARDS = 75;
+    public static readonly OH_SO_CLOSE_BASE_COST = 500;
+    public static readonly OH_SO_CLOSE_UNLOCK_COST_PER_SHARD = 100;
+    public static readonly OH_SO_CLOSE_PROMOTION_COST_PER_SHARD = 50;
+
+    /** Blackstone cost of the "Oh, So Close!" offer for a given shard gap — the in-game price is
+     *  500 + 100/shard to close an Unlock gap, or 500 + 50/shard for any later promotion gap. */
+    public static getOhSoCloseBlackstoneCost(missingShards: number, isUnlock: boolean): number {
+        const perShardCost = isUnlock
+            ? this.OH_SO_CLOSE_UNLOCK_COST_PER_SHARD
+            : this.OH_SO_CLOSE_PROMOTION_COST_PER_SHARD;
+        return this.OH_SO_CLOSE_BASE_COST + perShardCost * missingShards;
+    }
 
     /** Clamps a mission count to the valid range [0, 10]. */
     public static clampMissionCount(value: number): number {
@@ -323,6 +336,7 @@ export class LeRoundOutcomeForecastService {
                     shardsNeededForNextMilestone: 0,
                     ohSoCloseEligible: false,
                     ohSoCloseShardCost: 0,
+                    ohSoCloseBlackstoneCost: 0,
                     boughtOhSoCloseShards: 0,
                 };
             }
@@ -398,6 +412,9 @@ export class LeRoundOutcomeForecastService {
                 nextMilestoneIndex < ascensionMilestones.length &&
                 shardsNeededForNextMilestone > 0 &&
                 shardsNeededForNextMilestone <= this.OH_SO_CLOSE_MAX_SHARDS;
+            const ohSoCloseBlackstoneCost = ohSoCloseEligible
+                ? this.getOhSoCloseBlackstoneCost(shardsNeededForNextMilestone, nextMilestoneIndex === 0)
+                : 0;
 
             let boughtOhSoCloseShards = 0;
             if (config.buyOhSoCloseShards && ohSoCloseEligible) {
@@ -437,6 +454,7 @@ export class LeRoundOutcomeForecastService {
                 shardsNeededForNextMilestone: remainingShardsForNextMilestone,
                 ohSoCloseEligible,
                 ohSoCloseShardCost: shardsNeededForNextMilestone,
+                ohSoCloseBlackstoneCost,
                 boughtOhSoCloseShards,
             };
         });

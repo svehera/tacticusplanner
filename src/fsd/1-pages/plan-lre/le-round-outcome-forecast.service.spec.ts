@@ -191,5 +191,47 @@ describe('le-round-outcome-forecast.service', () => {
         expect(round3.endingShards).toBe(0);
         expect(round3.nextMilestone).toBe('Red 4★');
         expect(round3.shardsNeededForNextMilestone).toBe(120);
+        // Unlock gap of 70 shards: 500 base + 100/shard.
+        expect(round3.ohSoCloseBlackstoneCost).toBe(500 + 100 * 70);
+    });
+
+    it('prices the Oh, So Close offer at 500 + 50/shard for a promotion gap (not an Unlock gap)', () => {
+        const event = createLegendaryEvent();
+        const model = createModel();
+        const progress: EventProgress = {
+            ...createOhSoCloseProgress(),
+            currentStars: RarityStars.RedThreeStars,
+            currentShards: 50, // fourStars threshold is 120 -> 70 shards missing, within the 75 limit
+        };
+        const roundConfigs = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(
+            model,
+            event,
+            new Date('2026-04-01T00:00:00.000Z').getTime()
+        ).map(config => (config.round === 3 ? { ...config, buyOhSoCloseShards: false } : config));
+
+        const round3 = LeRoundOutcomeForecastService.computeLeRoundForecasts({
+            legendaryEvent: event,
+            model,
+            currentProgress: progress,
+            tokenIncrements: [],
+            roundConfigs,
+            nowMillis: new Date('2026-04-01T00:00:00.000Z').getTime(),
+        })[2];
+
+        expect(round3.ohSoCloseEligible).toBe(true);
+        expect(round3.shardsNeededForNextMilestone).toBe(70);
+        expect(round3.ohSoCloseBlackstoneCost).toBe(500 + 50 * 70);
+    });
+});
+
+describe('LeRoundOutcomeForecastService.getOhSoCloseBlackstoneCost', () => {
+    it('prices an Unlock gap at 500 base + 100/shard', () => {
+        expect(LeRoundOutcomeForecastService.getOhSoCloseBlackstoneCost(10, true)).toBe(500 + 100 * 10);
+        expect(LeRoundOutcomeForecastService.getOhSoCloseBlackstoneCost(0, true)).toBe(500);
+    });
+
+    it('prices a promotion gap at 500 base + 50/shard', () => {
+        expect(LeRoundOutcomeForecastService.getOhSoCloseBlackstoneCost(10, false)).toBe(500 + 50 * 10);
+        expect(LeRoundOutcomeForecastService.getOhSoCloseBlackstoneCost(0, false)).toBe(500);
     });
 });

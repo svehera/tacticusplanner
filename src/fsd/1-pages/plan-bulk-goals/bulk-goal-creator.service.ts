@@ -10,6 +10,7 @@ import { IUnit } from '@/fsd/4-entities/unit';
 export type { GoalCategory, RankStep } from '@/fsd/4-entities/goal';
 export type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
 type GoalOrder = 'character' | 'type';
+export type CharacterPriorityMode = 'character' | 'tier';
 
 export type BulkUnitEntry = {
     unit: IUnit | undefined;
@@ -41,13 +42,39 @@ export const getRankGoalSubOrder = (filterRarities?: Rarity[]): number => {
     return 2;
 };
 
+/**
+ * Numeric tier key for "Priority by Tier" sorting: how far along the rank/rarity/level ladder a
+ * goal's target sits, independent of which character it belongs to. `* 100` keeps rarity strictly
+ * dominant over star count (`RarityStars` tops out well under 100). Unlock has no tier of its own —
+ * it's a single on/off transition — so it always sorts as 0 (falls back to character order).
+ */
+export const getTierValue = (
+    category: GoalCategory,
+    target: { rank?: RankStep; rarity?: Rarity; stars?: RarityStars; abilityLevel?: number }
+): number => {
+    switch (category) {
+        case 'Rank': {
+            return target.rank ? rankStepValue(target.rank) : 0;
+        }
+        case 'Ascend': {
+            return (target.rarity ?? 0) * 100 + (target.stars ?? 0);
+        }
+        case 'Abilities': {
+            return target.abilityLevel ?? 0;
+        }
+        case 'Unlock': {
+            return 0;
+        }
+    }
+};
+
 const rankValues = Object.values(Rank)
     .filter((rank): rank is Rank => typeof rank === 'number')
     .toSorted((first, second) => first - second);
 
 const D2_5: RankStep = { rank: Rank.Diamond2, point5: true };
 
-const rankStepValue = (step: RankStep): number => step.rank + (step.point5 ? 0.5 : 0);
+export const rankStepValue = (step: RankStep): number => step.rank + (step.point5 ? 0.5 : 0);
 const rankStepAtLeast = (first: RankStep, second: RankStep): RankStep =>
     rankStepValue(first) >= rankStepValue(second) ? first : second;
 
@@ -185,13 +212,23 @@ export const getBulkRankGoalPlans = ({
     return plans;
 };
 
+const itemTierTarget = (item: PlannedGoalItem): Parameters<typeof getTierValue>[1] => ({
+    rank:
+        item.goal.targetRank === undefined ? undefined : { rank: item.goal.targetRank, point5: !!item.goal.rankPoint5 },
+    rarity: item.goal.targetRarity,
+    stars: item.goal.targetStars,
+    abilityLevel: Math.max(item.goal.firstAbilityLevel ?? 0, item.goal.secondAbilityLevel ?? 0),
+});
+
 export const buildBulkPlannedGoals = ({
     bulkUnits,
     goalOrder,
+    characterPriorityMode,
     createId,
 }: {
     bulkUnits: BulkUnitEntry[];
     goalOrder: GoalOrder;
+    characterPriorityMode: CharacterPriorityMode;
     createId: () => string;
 }) => {
     const items: PlannedGoalItem[] = [];
@@ -309,7 +346,16 @@ export const buildBulkPlannedGoals = ({
         return 2;
     };
 
-    if (goalOrder === 'type') {
+    if (goalOrder === 'type' && characterPriorityMode === 'tier') {
+        items.sort((a, b) => {
+            const categoryDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
+            if (categoryDiff !== 0) return categoryDiff;
+            const tierDiff = getTierValue(a.category, itemTierTarget(a)) - getTierValue(b.category, itemTierTarget(b));
+            if (tierDiff !== 0) return tierDiff;
+            if (a.unitIndex !== b.unitIndex) return a.unitIndex - b.unitIndex;
+            return a.rankSubOrder - b.rankSubOrder;
+        });
+    } else if (goalOrder === 'type') {
         items.sort((a, b) => {
             const categoryDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
             if (categoryDiff !== 0) return categoryDiff;

@@ -208,6 +208,8 @@ export interface IUpgradesRaidsDay {
     energyTotal: number;
     raidsTotal: number;
     onslaughtTokens: number;
+    /** Sum of HSE points earned this day; only populated when `customHseEventName` was set on the settings used to produce this day (see `postProcessRaidsForHse`). */
+    hsePointsTotal?: number;
 }
 
 export interface IUpgradeRaid extends ICharacterUpgradeEstimate {

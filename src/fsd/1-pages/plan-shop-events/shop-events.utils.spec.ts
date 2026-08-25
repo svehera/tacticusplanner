@@ -19,7 +19,17 @@ function alliancesOf(
     } as Record<Alliance, Record<Rarity, number>>;
 }
 
+function componentsOf(record: Partial<Record<Alliance, number>>): Record<Alliance, number> {
+    return {
+        [Alliance.Imperial]: 0,
+        [Alliance.Xenos]: 0,
+        [Alliance.Chaos]: 0,
+        ...record,
+    } as Record<Alliance, number>;
+}
+
 const noForgeBadgesNeeded = {} as Record<Rarity, number>;
+const noComponentsNeeded = componentsOf({});
 
 describe('getNeededForRewardType', () => {
     it('resolves alliance-specific orb types against that alliance only', () => {
@@ -33,42 +43,52 @@ describe('getNeededForRewardType', () => {
                 'heroAscensionOrbLegendary_Imperial',
                 alliancesOf({}),
                 neededOrbs,
-                noForgeBadgesNeeded
+                noForgeBadgesNeeded,
+                noComponentsNeeded
             )
         ).toBe(5);
     });
 
-    it('sums draft orb types across every alliance', () => {
-        const neededOrbs = alliancesOf({
-            [Alliance.Imperial]: { [Rarity.Legendary]: 5 },
-            [Alliance.Xenos]: { [Rarity.Legendary]: 3 },
-            [Alliance.Chaos]: { [Rarity.Legendary]: 2 },
-        });
+    it('resolves alliance-specific MoW component types against that alliance only', () => {
+        const neededComponents = componentsOf({ [Alliance.Xenos]: 7 });
 
         expect(
-            getNeededForRewardType('draft_ascensionOrbsLegendary', alliancesOf({}), neededOrbs, noForgeBadgesNeeded)
-        ).toBe(10);
+            getNeededForRewardType(
+                'mowComponent_Xenos',
+                alliancesOf({}),
+                alliancesOf({}),
+                noForgeBadgesNeeded,
+                neededComponents
+            )
+        ).toBe(7);
+        expect(
+            getNeededForRewardType(
+                'mowComponent_Imperial',
+                alliancesOf({}),
+                alliancesOf({}),
+                noForgeBadgesNeeded,
+                neededComponents
+            )
+        ).toBe(0);
     });
 
-    it('sums draft badge types across every alliance', () => {
-        const neededBadges = alliancesOf({
-            [Alliance.Imperial]: { [Rarity.Rare]: 4 },
-            [Alliance.Xenos]: { [Rarity.Rare]: 1 },
-        });
-
+    it('returns 0 for a raw draft type — draft resolution happens in computeCoverageRows, not here', () => {
+        const neededOrbs = alliancesOf({ [Alliance.Imperial]: { [Rarity.Legendary]: 5 } });
         expect(
-            getNeededForRewardType('draft_abilityTokensRare', neededBadges, alliancesOf({}), noForgeBadgesNeeded)
-        ).toBe(5);
-    });
-
-    it('returns 0 for a draft type with no outstanding need in any alliance', () => {
-        expect(
-            getNeededForRewardType('draft_ascensionOrbsMythic', alliancesOf({}), alliancesOf({}), noForgeBadgesNeeded)
+            getNeededForRewardType(
+                'draft_ascensionOrbsLegendary',
+                alliancesOf({}),
+                neededOrbs,
+                noForgeBadgesNeeded,
+                noComponentsNeeded
+            )
         ).toBe(0);
     });
 
     it('returns 0 for an unrecognized reward type', () => {
-        expect(getNeededForRewardType('gold', alliancesOf({}), alliancesOf({}), noForgeBadgesNeeded)).toBe(0);
+        expect(
+            getNeededForRewardType('gold', alliancesOf({}), alliancesOf({}), noForgeBadgesNeeded, noComponentsNeeded)
+        ).toBe(0);
     });
 });
 
@@ -86,6 +106,7 @@ const baseCoverageParameters = {
     neededBadges: alliancesOf({}),
     neededOrbs: alliancesOf({}),
     neededForgeBadges: noForgeBadgesNeeded,
+    neededComponents: noComponentsNeeded,
     effectiveCartTotalsByType: {},
     neededXp: 0,
     pl: 0,
@@ -160,5 +181,57 @@ describe('computeCoverageRows', () => {
         });
 
         expect(rows.find(r => r.rewardType === 'gold')?.availability).toEqual([{ week: 1, days: ['WED', 'MON'] }]);
+    });
+
+    it('splits a draft orb type into 3 alliance-specific rows, each tracking its own deficit', () => {
+        const neededOrbs = alliancesOf({
+            [Alliance.Imperial]: { [Rarity.Legendary]: 5 },
+            [Alliance.Xenos]: { [Rarity.Legendary]: 3 },
+            // Chaos has no deficit — should not produce a row at all.
+        });
+        const rows = computeCoverageRows({
+            ...baseCoverageParameters,
+            neededOrbs,
+            allWeekDayAvailability: availabilityOf('draft_ascensionOrbsLegendary'),
+        });
+
+        const draftRows = rows.filter(r => r.rewardType.startsWith('heroAscensionOrbLegendary_'));
+        expect(draftRows).toHaveLength(2);
+        expect(draftRows.find(r => r.rewardType === 'heroAscensionOrbLegendary_Imperial')?.needed).toBe(5);
+        expect(draftRows.find(r => r.rewardType === 'heroAscensionOrbLegendary_Xenos')?.needed).toBe(3);
+        expect(draftRows.find(r => r.rewardType === 'heroAscensionOrbLegendary_Chaos')).toBeUndefined();
+    });
+
+    it("a purchase tagged for one alliance only reduces that alliance's remaining, not another's", () => {
+        const neededOrbs = alliancesOf({
+            [Alliance.Imperial]: { [Rarity.Legendary]: 5 },
+            [Alliance.Xenos]: { [Rarity.Legendary]: 5 },
+        });
+        const rows = computeCoverageRows({
+            ...baseCoverageParameters,
+            neededOrbs,
+            allWeekDayAvailability: availabilityOf('draft_ascensionOrbsLegendary'),
+            // 5 units bought and tagged as Imperial — should fully cover Imperial's deficit but leave
+            // Xenos's deficit untouched, unlike the old aggregate-sum behavior this replaces.
+            effectiveCartTotalsByType: { heroAscensionOrbLegendary_Imperial: 5 },
+        });
+
+        const imperial = rows.find(r => r.rewardType === 'heroAscensionOrbLegendary_Imperial');
+        const xenos = rows.find(r => r.rewardType === 'heroAscensionOrbLegendary_Xenos');
+        expect(imperial?.remaining).toBe(0);
+        expect(xenos?.remaining).toBe(5);
+    });
+
+    it('splits a draft MoW-token type into 3 alliance-specific mowComponent rows', () => {
+        const neededComponents = componentsOf({ [Alliance.Chaos]: 12 });
+        const rows = computeCoverageRows({
+            ...baseCoverageParameters,
+            neededComponents,
+            allWeekDayAvailability: availabilityOf('draft_machinesOfWarTokens'),
+        });
+
+        expect(rows.find(r => r.rewardType === 'mowComponent_Chaos')?.needed).toBe(12);
+        expect(rows.find(r => r.rewardType === 'mowComponent_Imperial')).toBeUndefined();
+        expect(rows.find(r => r.rewardType === 'mowComponent_Xenos')).toBeUndefined();
     });
 });

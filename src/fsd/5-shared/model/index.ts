@@ -6,3 +6,4 @@ export { Theme, useTheme } from './theme';
 export type { DynamicProps } from './units';
 export * from './enums';
 export * from './mappers';
+export { getPierceRatio } from './pierce-ratio';

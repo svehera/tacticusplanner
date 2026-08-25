@@ -20,10 +20,20 @@ export interface HomescreenEventModifier {
 }
 
 export interface HomescreenEventTracker {
+    /**
+     * e.g. "killUnits", "raidBattles" (a duplicate description of killUnits, always co-occurring
+     * with it), "defeatWaves", "deployedUnitsOfFactionMajority", "fullLineUpOfFaction",
+     * "donateUpgradeToGuildMember", "donateIntelToGuildProject", "dispatchExpedition".
+     */
+    type?: string;
     points?: number;
     pointsByRarity?: Record<string, number>;
     locaKey?: string;
     gameModeRestrictions?: HomescreenEventGameModeRestrictions;
+    /** Matched against an enemy's `traits` OR `alliance` (e.g. "Mechanical", "Summon", "Chaos", "Imperial"). */
+    traitRestrictions?: HomescreenEventGameModeRestrictions;
+    /** Matched against an enemy's `faction` (e.g. "Tyranids"). */
+    factionRestrictions?: HomescreenEventGameModeRestrictions;
 }
 
 export interface HomescreenEventAbilityDefinition {
@@ -63,4 +73,30 @@ export type HomescreenEventTierKey = 'high' | 'mid' | 'low' | 'default';
 export interface HomescreenEventData {
     eventName: string;
     tiers: Partial<Record<HomescreenEventTierKey, HomescreenEventTier>>;
+}
+
+/** Wave/kill-based modes: points come from clearing waves or killing enemies, so the natural input unit varies per event. */
+export type HseWaveBasedMode = 'onslaught' | 'salvageRun' | 'survival' | 'legendaryEvent' | 'incursion';
+/** Flat modes: match-based, no natural "wave"/"kill" unit in the tracker data. */
+export type HseFlatMode = 'arena' | 'tournamentArena';
+
+export interface HseWaveModeConfig {
+    enabled: boolean;
+    /** 'waves' when driven by a `defeatWaves` tracker (points-per-wave, exact); 'kills' when driven by a `killUnits` or `raidBattles` tracker (points-per-kill, used as an approximation of points-per-wave). Undefined when `!enabled`. */
+    unit?: 'waves' | 'kills';
+    pointsPerUnit?: number;
+}
+
+export interface HseFlatModeConfig {
+    enabled: boolean;
+}
+
+export interface HseModesConfig {
+    onslaught: HseWaveModeConfig;
+    salvageRun: HseWaveModeConfig;
+    survival: HseWaveModeConfig;
+    legendaryEvent: HseWaveModeConfig;
+    incursion: HseWaveModeConfig;
+    arena: HseFlatModeConfig;
+    tournamentArena: HseFlatModeConfig;
 }

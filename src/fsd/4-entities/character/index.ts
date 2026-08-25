@@ -9,6 +9,7 @@ export type {
     IUnitUpgradeRank,
 } from './model';
 export { CharacterBias } from './bias.enum';
+export { characterDealsDamageType } from './damage-profile-exclusions';
 export { CharacterUpgradesService } from './character-upgrades.service';
 export { CharactersService } from './characters.service';
 export { CharactersFilterBy } from './characters-filter-by.enum';

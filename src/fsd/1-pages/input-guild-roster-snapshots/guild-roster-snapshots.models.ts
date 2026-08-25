@@ -65,14 +65,18 @@ export const RAID_COMP_MEMBERS: Record<RaidComp, RaidCompMembers> = {
             'eldarAutarch',
             'votanMemnyr',
             'custoAtlacoya',
+            'custoTrajann',
             'templHelbrecht',
+            'necroSpyder',
+            'necroOverlord',
+            'necroReanimator',
         ],
         mowIds: ['ultraDreadnought', 'tyranBiovore', 'deathCrawler'],
     },
     Battlesuits: {
         coreIds: ['tauCrisis', 'tauFarsight', 'admecManipulus'],
-        flexIds: ['tauDarkstrider', 'tauShadowsun', 'eldarFarseer'],
-        mowIds: ['tauBroadside', 'tyranBiovore', 'deathCrawler'],
+        flexIds: ['tauDarkstrider', 'tauShadowsun', 'eldarFarseer', 'eldarLhykhis'],
+        mowIds: ['tauBroadside', 'tyranBiovore', 'deathCrawler', 'necroReanimator'],
     },
     Custodes: {
         coreIds: ['custoBladeChampion', 'custoTrajann', 'worldKharn'],
@@ -99,6 +103,8 @@ export const RAID_COMP_MEMBERS: Record<RaidComp, RaidCompMembers> = {
             'custoAtlacoya',
             'custoVexilusPraetor',
             'admecDominus',
+            'adeptCanoness',
+            'worldExecutions',
         ],
         mowIds: ['tyranBiovore', 'deathCrawler'],
     },
@@ -116,13 +122,31 @@ export const RAID_COMP_MEMBERS: Record<RaidComp, RaidCompMembers> = {
         mowIds: ['tyranBiovore', 'deathCrawler'],
     },
     Neuro: {
-        coreIds: ['tyranNeurothrope', 'thousInfernalMaster', 'thousTzaangor'],
-        flexIds: ['thousAhriman', 'genesMagus', 'adeptCanoness', 'templHelbrecht', 'custoAtlacoya', 'bloodMephiston'],
+        coreIds: ['tyranNeurothrope'],
+        flexIds: [
+            'thousInfernalMaster',
+            'thousTzaangor',
+            'blackPossession',
+            'thousAhriman',
+            'genesMagus',
+            'adeptCanoness',
+            'templHelbrecht',
+            'custoAtlacoya',
+            'bloodMephiston',
+        ],
         mowIds: ['adeptExorcist'],
     },
     "Z'Kar": {
-        coreIds: ['tyranNeurothrope', 'thousInfernalMaster'],
-        flexIds: ['thousAhriman', 'blackPossession', 'blackAbaddon', 'bloodMephiston', 'thousSorcerer'],
+        coreIds: ['tyranNeurothrope'],
+        flexIds: [
+            'thousAhriman',
+            'thousInfernalMaster',
+            'thousTzaangor',
+            'blackPossession',
+            'blackAbaddon',
+            'bloodMephiston',
+            'thousSorcerer',
+        ],
         mowIds: ['thousDaemonPrince'],
     },
 };
@@ -168,7 +192,7 @@ export type OverridesLoadState =
     | { status: 'error'; message: string }
     | { status: 'loaded'; sequenceNumber: number };
 
-export type GuildTab = 'rosters' | 'roster-snapshots' | 'members' | 'shared-leaderboards';
+export type GuildTab = 'rosters' | 'roster-snapshots' | 'members' | 'shared-leaderboards' | 'filter';
 
 export const API_KEY_PATTERN = /^[a-zA-Z0-9-]*$/;
 

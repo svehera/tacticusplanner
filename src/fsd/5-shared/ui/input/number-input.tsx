@@ -6,6 +6,7 @@ interface Props {
     label: string;
     value: number;
     valueChange: (v: number) => void;
+    onEmptyChange?: (isEmpty: boolean) => void;
     fullWidth?: boolean;
     disabled?: boolean;
     max?: number;
@@ -18,6 +19,7 @@ export const NumberInput: React.FC<Props> = ({
     label,
     value,
     valueChange,
+    onEmptyChange,
     fullWidth = false,
     disabled = false,
     max = 60,
@@ -38,8 +40,14 @@ export const NumberInput: React.FC<Props> = ({
                 type="number"
                 value={inputValue}
                 onChange={event => {
-                    setInputValue(event.target.value);
-                    const newValue = Number(event.target.value);
+                    const raw = event.target.value;
+                    setInputValue(raw);
+                    if (raw.trim() === '') {
+                        onEmptyChange?.(true);
+                        return;
+                    }
+                    onEmptyChange?.(false);
+                    const newValue = Number(raw);
                     if (!Number.isNaN(newValue)) {
                         valueChange(Math.min(Math.max(newValue, min), max));
                     }

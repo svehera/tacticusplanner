@@ -1,5 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import AddIcon from '@mui/icons-material/Add';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
@@ -11,16 +12,17 @@ import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, SlidersHorizontal } from 'lucide-react';
 import { Fragment, type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
-import { goalsLimit, rankToRarity, rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
+import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
+import { Switch, buttonStyles } from '@/fsd/5-shared/ui';
 import { RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
@@ -31,6 +33,13 @@ import { IUnit } from '@/fsd/4-entities/unit';
 import { GoalSummaryTable } from '@/fsd/3-features/goals';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
+import {
+    ABILITY_MAX_BY_RARITY,
+    ALL_RANK_VALUES,
+    ALL_STAR_VALUES,
+    enforceUnitThresholdMinimums,
+} from '@/fsd/2-widgets/unit-threshold-picker';
+
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 import { ITeam2 } from '../plan-teams2/models';
 import { TeamFlow } from '../plan-teams2/team-flow';
@@ -40,6 +49,8 @@ import {
     buildBulkPlannedGoals,
     getBulkRankGoalPlans,
     getRankGoalSubOrder,
+    getTierValue,
+    type CharacterPriorityMode,
     type GoalCategory,
     type IncrementalGoalMode,
     type RankStep,
@@ -58,53 +69,32 @@ const createBulkUnitEntry = () => ({
     incrementalGoalMode: 'milestones' as IncrementalGoalMode,
 });
 
-const rankValues = Object.values(Rank)
-    .filter((rank): rank is Rank => typeof rank === 'number')
-    .toSorted((first, second) => first - second);
-
-const allStarValues = Object.values(RarityStars)
-    .filter((s): s is RarityStars => typeof s === 'number')
-    .toSorted((a, b) => a - b);
+const rankValues = ALL_RANK_VALUES;
+const allStarValues = ALL_STAR_VALUES;
 
 type GoalInsertPriorityMode = 'highest' | 'lowest';
 
 const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Rank: 2, Abilities: 3 };
 
-const abilityMaxByRarity: Record<Rarity, number> = {
-    [Rarity.Common]: 8,
-    [Rarity.Uncommon]: 17,
-    [Rarity.Rare]: 26,
-    [Rarity.Epic]: 35,
-    [Rarity.Legendary]: 50,
-    [Rarity.Mythic]: 60,
-};
+const toVisibility = (shown: boolean): RosterSnapshotShowVariableSettings =>
+    shown ? RosterSnapshotShowVariableSettings.Always : RosterSnapshotShowVariableSettings.Never;
 
-const enforceMinimums = (entry: {
-    unit: IUnit | undefined;
-    rank: Rank;
-    rarity: Rarity;
-    stars: number;
-    activeAbilityLevel: number;
-    passiveAbilityLevel: number;
-    unlockMow: boolean;
-    preFarmLegendaryMythic: boolean;
-    useIncrementalGoals: boolean;
-    incrementalGoalMode: IncrementalGoalMode;
-}) => {
-    const minimumRarity = rankToRarity[entry.rank] ?? Rarity.Common;
-    const rarity = Math.max(entry.rarity, minimumRarity) as Rarity;
-    const minStars = rarityToStars[rarity] ?? RarityStars.None;
-    const maxStars = rarityToMaxStars[rarity] ?? RarityStars.MythicWings;
-    const maxAbility = abilityMaxByRarity[rarity] ?? 60;
+const abilityMaxByRarity = ABILITY_MAX_BY_RARITY;
 
-    return {
-        ...entry,
-        rarity,
-        stars: Math.min(Math.max(entry.stars, minStars), maxStars),
-        activeAbilityLevel: Math.min(Math.max(entry.activeAbilityLevel, 1), maxAbility),
-        passiveAbilityLevel: Math.min(Math.max(entry.passiveAbilityLevel, 1), maxAbility),
-    };
-};
+const enforceMinimums = <
+    T extends {
+        rank: Rank;
+        rarity: Rarity;
+        stars: number;
+        activeAbilityLevel: number;
+        passiveAbilityLevel: number;
+    },
+>(
+    entry: T
+): T => ({
+    ...entry,
+    ...enforceUnitThresholdMinimums(entry),
+});
 
 const getBulkUnitEntryFromUnit = (unit: IUnit | undefined) => {
     if (!unit) {
@@ -155,7 +145,14 @@ export const BulkGoalCreator = () => {
     >([]);
 
     const [goalOrder, setGoalOrder] = useState<'character' | 'type'>('character');
+    const [characterPriorityMode, setCharacterPriorityMode] = useState<CharacterPriorityMode>('character');
     const [goalInsertPriorityMode, setGoalInsertPriorityMode] = useState<GoalInsertPriorityMode>('lowest');
+    const [previewViewOptions, setPreviewViewOptions] = useState({
+        showShards: true,
+        showMythicShards: true,
+        showXpLevel: true,
+        showEquipment: false,
+    });
 
     const addBulkUnitUpdater = useCallback(() => {
         setBulkUnits(previous => [...previous, createBulkUnitEntry()]);
@@ -285,6 +282,7 @@ export const BulkGoalCreator = () => {
             unitIcon: string;
             unitIndex: number;
             rankSubOrder: number;
+            tierValue: number;
             change: ReactNode;
         }> = [];
 
@@ -302,6 +300,7 @@ export const BulkGoalCreator = () => {
                 unitIcon,
                 unitIndex,
                 rankSubOrder: getRankGoalSubOrder(filterRarities),
+                tierValue: getTierValue('Rank', { rank: end }),
                 change: <RankChangeArrow start={start} end={end} filterRarities={filterRarities} />,
             });
         };
@@ -324,6 +323,7 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Unlock', {}),
                     change: (
                         <div className="flex items-center gap-2">
                             <span>Locked</span>
@@ -340,6 +340,7 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Unlock', {}),
                     change: <span>Unlock MoW</span>,
                 });
             }
@@ -352,6 +353,7 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Ascend', { rarity: entry.rarity, stars: entry.stars as RarityStars }),
                     change: (
                         <AscendChangeArrow
                             startRarity={unit.rarity}
@@ -400,6 +402,9 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Abilities', {
+                        abilityLevel: Math.max(entry.activeAbilityLevel, entry.passiveAbilityLevel),
+                    }),
                     change: (
                         <AbilitiesChangeText
                             startActive={currentActive}
@@ -413,7 +418,16 @@ export const BulkGoalCreator = () => {
             }
         }
 
-        if (goalOrder === 'type') {
+        if (goalOrder === 'type' && characterPriorityMode === 'tier') {
+            rows.sort((a, b) => {
+                const catDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
+                if (catDiff !== 0) return catDiff;
+                const tierDiff = a.tierValue - b.tierValue;
+                if (tierDiff !== 0) return tierDiff;
+                if (a.unitIndex !== b.unitIndex) return a.unitIndex - b.unitIndex;
+                return a.rankSubOrder - b.rankSubOrder;
+            });
+        } else if (goalOrder === 'type') {
             rows.sort((a, b) => {
                 const catDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
                 if (catDiff !== 0) return catDiff;
@@ -442,11 +456,11 @@ export const BulkGoalCreator = () => {
         }
 
         return rows;
-    }, [bulkUnits, goalOrder]);
+    }, [bulkUnits, goalOrder, characterPriorityMode]);
 
     const plannedGoals = useMemo(
-        () => buildBulkPlannedGoals({ bulkUnits, goalOrder, createId: v4 }),
-        [bulkUnits, goalOrder]
+        () => buildBulkPlannedGoals({ bulkUnits, goalOrder, characterPriorityMode, createId: v4 }),
+        [bulkUnits, goalOrder, characterPriorityMode]
     );
 
     const currentLowestPriority = Math.max(0, ...goals.map(goal => goal.priority));
@@ -664,11 +678,58 @@ export const BulkGoalCreator = () => {
                 </div>
                 {bulkTeamCharacters.length > 0 && (
                     <div className="mt-4">
-                        <div className="mb-2 text-sm font-semibold">Preview:</div>
+                        <div className="mb-2 flex items-center justify-between">
+                            <span className="text-sm font-semibold">Preview:</span>
+                            <Popover className="relative">
+                                <PopoverButton
+                                    className={buttonStyles({
+                                        appearance: 'outline',
+                                        intent: 'secondary',
+                                        size: 'small',
+                                    })}>
+                                    View <SlidersHorizontal className="ml-1 size-4" />
+                                </PopoverButton>
+                                <PopoverPanel
+                                    anchor="bottom end"
+                                    className="z-50 mt-1 flex w-[220px] flex-col gap-2 rounded-xl border border-(--border) bg-(--overlay) p-4 shadow-xl">
+                                    <Switch
+                                        isSelected={previewViewOptions.showShards}
+                                        onChange={showShards =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showShards }))
+                                        }>
+                                        Shards
+                                    </Switch>
+                                    <Switch
+                                        isSelected={previewViewOptions.showMythicShards}
+                                        onChange={showMythicShards =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showMythicShards }))
+                                        }>
+                                        Mythic Shards
+                                    </Switch>
+                                    <Switch
+                                        isSelected={previewViewOptions.showXpLevel}
+                                        onChange={showXpLevel =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showXpLevel }))
+                                        }>
+                                        XP Level
+                                    </Switch>
+                                    <Switch
+                                        isSelected={previewViewOptions.showEquipment}
+                                        onChange={showEquipment =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showEquipment }))
+                                        }>
+                                        Equipment
+                                    </Switch>
+                                </PopoverPanel>
+                            </Popover>
+                        </div>
                         <TeamFlow
                             chars={bulkTeamCharacters}
                             mows={bulkTeamMows}
-                            showEquipment={RosterSnapshotShowVariableSettings.Never}
+                            showShards={toVisibility(previewViewOptions.showShards)}
+                            showMythicShards={toVisibility(previewViewOptions.showMythicShards)}
+                            showXpLevel={toVisibility(previewViewOptions.showXpLevel)}
+                            showEquipment={toVisibility(previewViewOptions.showEquipment)}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                         />
@@ -687,6 +748,16 @@ export const BulkGoalCreator = () => {
                                     <ToggleButton value="character">Character Order</ToggleButton>
                                     <ToggleButton value="type">Type Order</ToggleButton>
                                 </ToggleButtonGroup>
+                                {goalOrder === 'type' && (
+                                    <ToggleButtonGroup
+                                        size="small"
+                                        exclusive
+                                        value={characterPriorityMode}
+                                        onChange={(_, value) => value && setCharacterPriorityMode(value)}>
+                                        <ToggleButton value="character">Priority by Character</ToggleButton>
+                                        <ToggleButton value="tier">Priority by Tier</ToggleButton>
+                                    </ToggleButtonGroup>
+                                )}
                                 <ToggleButtonGroup
                                     size="small"
                                     exclusive
