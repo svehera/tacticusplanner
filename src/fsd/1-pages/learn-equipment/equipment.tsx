@@ -7,14 +7,18 @@ import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { EquipmentIcon, EquipmentService, EquipmentTypeIcon, IEquipment } from '@/fsd/4-entities/equipment';
-// eslint-disable-next-line import-x/no-internal-modules
-import { EquipmentBoost } from '@/fsd/4-entities/equipment/ui/equipment-boost';
+import {
+    EquipmentIcon,
+    EquipmentLevelBoost,
+    EquipmentService,
+    EquipmentTypeIcon,
+    IEquipment,
+} from '@/fsd/4-entities/equipment';
 
 export const Equipment = () => {
     const gridReference = useRef<AgGridReact<IEquipment>>(null);
     const [nameFilter, setNameFilter] = useState<string>('');
-    const [showCharacters, setShowCharacters] = useState<boolean>(false);
+    const [showCharacters, setShowCharacters] = useState<boolean>(true);
     const rows = useMemo(
         (): IEquipment[] =>
             EquipmentService.equipmentData.filter(
@@ -85,33 +89,11 @@ export const Equipment = () => {
             },
             {
                 headerName: 'Boost by Level',
-                minWidth: 100,
+                minWidth: 160,
                 flex: 1,
                 cellRenderer: (params: ICellRendererParams<IEquipment>) => {
-                    const returnValue = [];
-                    const equipment: IEquipment = params.data!;
-                    for (let index = 0; index < equipment.levels.length; ++index) {
-                        returnValue.push(
-                            <div key={`${params.data?.id}-${index}`}>
-                                <table>
-                                    <tbody>
-                                        <tr>
-                                            <td>Level: {index + 1}</td>
-                                            <td>
-                                                <EquipmentBoost
-                                                    type={equipment.type}
-                                                    stats={equipment.levels[index].stats}
-                                                    width={30}
-                                                    height={30}
-                                                />
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-                            </div>
-                        );
-                    }
-                    return <div>{returnValue}</div>;
+                    const equipment = params.data;
+                    return equipment ? <EquipmentLevelBoost equipment={equipment} /> : '';
                 },
             },
             {

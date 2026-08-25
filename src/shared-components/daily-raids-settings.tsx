@@ -113,6 +113,7 @@ const farmOrderOptions = [
 
 const locationStrategyOptions = [
     { value: DailyRaidsStrategy.leastEnergy, label: 'Least energy' },
+    { value: DailyRaidsStrategy.leastEnergyFewestTickets, label: 'Least energy, fewest raid tickets' },
     { value: DailyRaidsStrategy.allLocations, label: 'All locations' },
     { value: DailyRaidsStrategy.custom, label: 'Custom' },
 ];

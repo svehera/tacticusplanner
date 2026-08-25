@@ -242,7 +242,6 @@ export const defaultData: IPersonalData2 = {
         inventoryShowAlphabet: true,
         inventoryShowPlusMinus: true,
         goalsTableView: false,
-        campaignsTableView: false,
         goalColorMode: 'None',
         raidsTableView: false,
         includeExhaustedBattlesInHse: true,

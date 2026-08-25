@@ -989,6 +989,92 @@ describe('UpgradesService.planDayRaiding', () => {
         expect(boonRaid).toBeDefined();
         expect(raidLocationIds).toEqual(expect.arrayContaining(boonLocations));
     });
+
+    it('does not let a Necrons-only filter promote a less-efficient Least Energy fallback that starves Indomitus Elite', () => {
+        // Real data: `upgArmR030` drops from both I74 (Indomitus, Necron enemies, energyCost 6, 50%
+        // potential drop -> energyPerItem 12) and IME04 (Indomitus Mirror Elite -- Necron-character
+        // content whose on-screen enemies are the mirrored Imperial faction, energyCost 10 but a
+        // *guaranteed* drop -> energyPerItem 10, cheaper). Least Energy should always prefer IME04;
+        // a Necrons-only enemy filter excludes IME04 (its enemies aren't Necron) and must not then
+        // promote I74 as a "fallback" -- I74 was never the cheapest choice, so the material should end
+        // up with zero suggested locations, not a substitute that competes with Indomitus Elite for
+        // the day's Machine Hunt-sorted energy budget.
+        const upgradeIdA = 'upgArmR030';
+        const upgradeIdB = 'upgDmgU010'; // Indomitus Elite's own real reward.
+        const baseUpgradeA = FsdUpgradesService.baseUpgradesData[upgradeIdA];
+        const baseUpgradeB = FsdUpgradesService.baseUpgradesData[upgradeIdB];
+        const baseCharA = CharactersService.charactersData[0];
+        const baseCharB = CharactersService.charactersData[1];
+        const goalA = createRankGoal(baseCharA, { goalId: 'goal-a' });
+        const goalB = createRankGoal(baseCharB, { goalId: 'goal-b' });
+
+        const locI74 = { ...CampaignsService.campaignsComposed['I74'] } as ICampaignBattleComposed;
+        const locIME04 = { ...CampaignsService.campaignsComposed['IME04'] } as ICampaignBattleComposed;
+        const locIndomitusElite = { ...CampaignsService.campaignsComposed['IE01'] } as ICampaignBattleComposed;
+
+        const buildRemainingMats = (): Record<string, ICombinedUpgrade> => ({
+            [upgradeIdA]: {
+                ...baseUpgradeA,
+                requiredCount: 1,
+                countByGoalId: { [goalA.goalId]: 1 },
+                relatedCharacters: [goalA.unitId],
+                relatedGoals: [goalA.goalId],
+                locations: [{ ...locI74 }, { ...locIME04 }],
+            } as ICombinedUpgrade,
+            [upgradeIdB]: {
+                ...baseUpgradeB,
+                requiredCount: 1,
+                countByGoalId: { [goalB.goalId]: 1 },
+                relatedCharacters: [goalB.unitId],
+                relatedGoals: [goalB.goalId],
+                locations: [{ ...locIndomitusElite }],
+            } as ICombinedUpgrade,
+        });
+
+        const baseSettings = createSettings({
+            dailyEnergy: 16,
+            campaignsProgress: createAllCampaignsProgress(),
+            preferences: {
+                ...createSettings().preferences,
+                dailyEnergy: 16,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.machineHunt,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+        });
+
+        // Baseline: no location filter. IME04 (cheaper) is the only suggested source; I74 is not.
+        const unfilteredMats = buildRemainingMats();
+        UpgradesService.populateLocationsData(unfilteredMats, { ...baseSettings, filters: createFilters() });
+        const unfilteredLocationsA = unfilteredMats[upgradeIdA].locations;
+        expect(unfilteredLocationsA.find(l => l.id === locIME04.id)?.isSuggested).toBe(true);
+        expect(unfilteredLocationsA.find(l => l.id === locI74.id)?.isSuggested).toBe(false);
+
+        // Necrons-only filter: IME04 is excluded (its enemies aren't Necron) -- I74 must NOT be
+        // promoted as a substitute; the material should have zero suggested locations.
+        const filteredMats = buildRemainingMats();
+        UpgradesService.populateLocationsData(filteredMats, {
+            ...baseSettings,
+            filters: createFilters({ enemiesFactions: ['Necrons'] }),
+        });
+        const filteredLocationsA = filteredMats[upgradeIdA].locations;
+        expect(filteredLocationsA.find(l => l.id === locIME04.id)?.isSuggested).toBe(false);
+        expect(filteredLocationsA.find(l => l.id === locI74.id)?.isSuggested).toBe(false);
+
+        // Indomitus Elite's own candidacy is unaffected either way -- it still gets raided.
+        const raidsIndomitusElite = (mats: Record<string, ICombinedUpgrade>): boolean => {
+            const locs = Object.values(mats)
+                .flatMap(mat => mat.locations)
+                .filter(loc => loc.isSuggested);
+            const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+            UpgradesService.planDayRaiding(day, baseSettings, baseSettings.dailyEnergy, locs, mats, {}, [goalA, goalB]);
+            return day.raids.some(raid => raid.raidLocations.some(loc => loc.id === locIndomitusElite.id));
+        };
+        expect(raidsIndomitusElite(unfilteredMats)).toBe(true);
+        expect(raidsIndomitusElite(filteredMats)).toBe(true);
+    });
 });
 
 describe('UpgradesService.addRaidForLocation (daily caps)', () => {
@@ -1754,6 +1840,45 @@ describe('UpgradesService.getUpgrades', () => {
 
         expect(actualRare).toBe(expectedRare);
         expect(actualLegendary).toBe(expectedLegendary);
+    });
+
+    it('does not double-count materials across two sequential MoW ability goals', () => {
+        const biovore = mows2Data.mows.find(mow => mow.snowprintId === 'tyranBiovore') as IMow2;
+        const mow = createMow(biovore);
+
+        const makeGoal = (goalId: string, primaryStart: number, primaryEnd: number): ICharacterUpgradeMow => ({
+            priority: 1,
+            include: true,
+            goalId,
+            unitId: biovore.snowprintId,
+            unitName: biovore.name,
+            unitIcon: biovore.icon,
+            unitRoundIcon: biovore.roundIcon,
+            unitAlliance: Alliance.Xenos,
+            notes: '',
+            type: PersonalGoalType.MowAbilities,
+            primaryStart,
+            primaryEnd,
+            secondaryStart: 1,
+            secondaryEnd: 1,
+            upgradesRarity: [],
+            shards: 0,
+            stars: RarityStars.None,
+            rarity: Rarity.Common,
+        });
+
+        const incrementalGoals = [makeGoal('goal-1-to-35', 1, 35), makeGoal('goal-35-to-50', 35, 50)];
+        const singleGoal = [makeGoal('goal-1-to-50', 1, 50)];
+
+        const toRequiredCounts = (upgrades: ReturnType<typeof UpgradesService.getUpgrades>) =>
+            Object.fromEntries(
+                Object.entries(UpgradesService.combineBaseMaterials(upgrades)).map(([id, u]) => [id, u.requiredCount])
+            );
+
+        const incrementalTotals = toRequiredCounts(UpgradesService.getUpgrades({}, [], [mow], incrementalGoals));
+        const singleGoalTotals = toRequiredCounts(UpgradesService.getUpgrades({}, [], [mow], singleGoal));
+
+        expect(incrementalTotals).toEqual(singleGoalTotals);
     });
 });
 
@@ -3524,6 +3649,81 @@ describe('UpgradesService.populateLocationsData', () => {
         expect(locationLocked.isSuggested).toBe(false);
     });
 
+    it('keeps only the highest-energy-cost location among those tied for least energy', () => {
+        const locationFewerTickets = { ...CampaignsService.campaignsComposed['FoC05'], energyCost: 12 };
+        const locationMoreTickets = { ...CampaignsService.campaignsComposed['OME26'], energyCost: 6 };
+        const locationWorseEnergy = { ...CampaignsService.campaignsComposed['O01'] };
+        const locationLocked = { ...CampaignsService.campaignsComposed['SH08'] };
+        locationFewerTickets.energyPerItem = 10;
+        locationMoreTickets.energyPerItem = 10;
+        locationWorseEnergy.energyPerItem = 15;
+
+        const combinedUpgrade: ICombinedUpgrade = {
+            ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+            requiredCount: 1,
+            countByGoalId: {},
+            goalToUnit: {},
+            relatedCharacters: [],
+            relatedGoals: [],
+            locations: [locationFewerTickets, locationMoreTickets, locationWorseEnergy, locationLocked],
+        };
+
+        const settings = createSettings({
+            campaignsProgress: {
+                [Campaign.FoC]: 5,
+                [Campaign.OME]: 26,
+                [Campaign.O]: 1,
+                [Campaign.SH]: 5,
+            } as IEstimatedRanksSettings['campaignsProgress'],
+            preferences: {
+                ...createSettings().preferences,
+                farmStrategy: DailyRaidsStrategy.leastEnergyFewestTickets,
+            },
+        });
+
+        UpgradesService.populateLocationsData({ [combinedUpgrade.id]: combinedUpgrade }, settings);
+
+        expect(locationFewerTickets.isSuggested).toBe(true);
+        expect(locationMoreTickets.isSuggested).toBe(false);
+        expect(locationWorseEnergy.isSuggested).toBe(false);
+        expect(locationLocked.isSuggested).toBe(false);
+    });
+
+    it('degrades to plain least-energy behavior when nothing is tied', () => {
+        const locationHighEnergy = { ...CampaignsService.campaignsComposed['FoC05'] };
+        const locationLowEnergy = { ...CampaignsService.campaignsComposed['OME26'] };
+        const locationLocked = { ...CampaignsService.campaignsComposed['SH08'] };
+
+        const combinedUpgrade: ICombinedUpgrade = {
+            ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+            requiredCount: 1,
+            countByGoalId: {},
+            goalToUnit: {},
+            relatedCharacters: [],
+            relatedGoals: [],
+            locations: [locationHighEnergy, locationLowEnergy, locationLocked],
+        };
+
+        const settings = createSettings({
+            completedLocations: [createCompletedLocation(locationLowEnergy)],
+            campaignsProgress: {
+                [Campaign.FoC]: 5,
+                [Campaign.OME]: 26,
+                [Campaign.SH]: 5,
+            } as IEstimatedRanksSettings['campaignsProgress'],
+            preferences: {
+                ...createSettings().preferences,
+                farmStrategy: DailyRaidsStrategy.leastEnergyFewestTickets,
+            },
+        });
+
+        UpgradesService.populateLocationsData({ [combinedUpgrade.id]: combinedUpgrade }, settings);
+
+        expect(locationLowEnergy.isSuggested).toBe(true);
+        expect(locationHighEnergy.isSuggested).toBe(false);
+        expect(locationLocked.isSuggested).toBe(false);
+    });
+
     it('keeps all unlocked locations suggested for least-time strategy', () => {
         const locationA = { ...CampaignsService.campaignsComposed['FoC05'] };
         const locationB = { ...CampaignsService.campaignsComposed['O01'] };
@@ -4612,6 +4812,181 @@ describe('UpgradesService.sortLocationsForRaiding', () => {
         );
 
         expect(sorted.map(loc => loc.id)).toEqual(['Indomitus23', 'Indomitus37', 'Indomitus Elite5']);
+    });
+});
+
+const withEnemies = (locationId: string, enemyId: string, count: number): ICampaignBattleComposed =>
+    ({
+        ...CampaignsService.campaignsComposed[locationId],
+        detailedEnemyTypes: [{ id: enemyId, count }],
+    }) as ICampaignBattleComposed;
+
+describe('UpgradesService.getGenericHsePoints', () => {
+    it('scores Mechanical-trait kills for the real machine_hunt event, at the Elite multiplier for Elite battles', () => {
+        const normal = withEnemies('O40', 'necroNpc1Warrior', 4);
+        const elite = withEnemies('OE30', 'necroNpc1Warrior', 4);
+
+        expect(UpgradesService.getGenericHsePoints(normal, 'machine_hunt', 'high')).toBe(4 * 3);
+        expect(UpgradesService.getGenericHsePoints(elite, 'machine_hunt', 'high')).toBe(4 * 5);
+    });
+
+    it('distinguishes MirrorCampaign (3 pts) from MirrorEliteCampaign (5 pts) battles', () => {
+        const mirror = withEnemies('OM30', 'necroNpc1Warrior', 2);
+        const mirrorElite = withEnemies('OME30', 'necroNpc1Warrior', 2);
+
+        expect(UpgradesService.getGenericHsePoints(mirror, 'machine_hunt', 'high')).toBe(2 * 3);
+        expect(UpgradesService.getGenericHsePoints(mirrorElite, 'machine_hunt', 'high')).toBe(2 * 5);
+    });
+
+    it('matches Chaos-alliance enemies for warp_surge even without a literal "Chaos" trait', () => {
+        const battle = withEnemies('O40', 'blackBossTerminator', 2);
+
+        expect(UpgradesService.getGenericHsePoints(battle, 'warp_surge', 'high')).toBeGreaterThan(0);
+    });
+
+    it('matches Tyranids-faction enemies for kill_tyranids via factionRestrictions', () => {
+        const battle = withEnemies('O40', 'tyranNpc1Hormagaunt', 3);
+
+        expect(UpgradesService.getGenericHsePoints(battle, 'kill_tyranids', 'high')).toBeGreaterThan(0);
+    });
+
+    it('returns undefined (not 0) for events with no killUnits tracker and no override', () => {
+        const battle = withEnemies('O40', 'necroNpc1Warrior', 4);
+
+        expect(UpgradesService.getGenericHsePoints(battle, 'arsenal_of_war', 'high')).toBeUndefined();
+    });
+
+    it('returns undefined for Onslaught battles regardless of event, to avoid double-counting with the manual onslaught mode input', () => {
+        const onslaught = {
+            ...CampaignsService.campaignsComposed['O40'],
+            campaignType: CampaignType.Onslaught,
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+
+        expect(UpgradesService.getGenericHsePoints(onslaught, 'machine_hunt', 'high')).toBeUndefined();
+    });
+});
+
+describe('UpgradesService.sortLocationsForRaiding (customHseEventName)', () => {
+    const baseChar = CharactersService.charactersData[0];
+    const goal = createRankGoal(baseChar, { goalId: 'goal-generic-hse', priority: 1 });
+
+    const buildCombinedUpgradeForLocation = (
+        upgradeId: string,
+        location: ICampaignBattleComposed
+    ): ICombinedUpgrade => ({
+        ...FsdUpgradesService.baseUpgradesData[upgradeId],
+        requiredCount: 5,
+        countByGoalId: { [goal.goalId]: 5 },
+        goalToUnit: { [goal.goalId]: '' },
+        relatedCharacters: [],
+        relatedGoals: [goal.goalId],
+        locations: [location],
+    });
+
+    it('sorts real machine_hunt battles by generically-derived hsePoints, Elite/MirrorElite first', () => {
+        const locNormal = {
+            ...CampaignsService.campaignsComposed['O40'],
+            isSuggested: true,
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+        const locElite = {
+            ...CampaignsService.campaignsComposed['OE30'],
+            isSuggested: true,
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+
+        const combinedBaseMaterials = {
+            [locNormal.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locNormal.rewards.potential[0].id,
+                locNormal
+            ),
+            [locElite.rewards.potential[0].id]: buildCombinedUpgradeForLocation(
+                locElite.rewards.potential[0].id,
+                locElite
+            ),
+        };
+
+        const settings = createSettings({
+            preferences: {
+                ...createSettings().preferences,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.none,
+                    customHseEventName: 'machine_hunt',
+                    customHseTier: 'high',
+                },
+            },
+        });
+
+        const sorted = UpgradesService.sortLocationsForRaiding(
+            [locNormal, locElite],
+            [goal],
+            combinedBaseMaterials,
+            {},
+            settings
+        );
+
+        expect(sorted.map(loc => loc.id)).toEqual([locElite.id, locNormal.id]);
+    });
+});
+
+describe('UpgradesService.scoreRaidsForHse', () => {
+    it('sums generic HSE points across raid days, scaled by raidsToPerform', () => {
+        const location = {
+            ...CampaignsService.campaignsComposed['OE30'],
+            detailedEnemyTypes: [{ id: 'necroNpc1Warrior', count: 4 }],
+        } as ICampaignBattleComposed;
+
+        const days = [
+            {
+                energyTotal: 0,
+                raidsTotal: 0,
+                onslaughtTokens: 1,
+                raids: [
+                    {
+                        raidLocations: [{ ...location, raidsToPerform: 2, raidsAlreadyPerformed: 0 }],
+                    },
+                ],
+            },
+        ] as unknown as IUpgradesRaidsDay[];
+
+        // 4 enemies * 5 pts (Elite) * 2 raids = 40
+        expect(UpgradesService.scoreRaidsForHse(days, 'machine_hunt', 'high')).toBe(40);
+    });
+});
+
+describe('UpgradesService.estimateMaxHsePointsRaids', () => {
+    it('only scores unlocked battles', () => {
+        const noneUnlocked = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 0])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
+
+        const { totalPoints } = UpgradesService.estimateMaxHsePointsRaids('machine_hunt', 'high', 1, 999, noneUnlocked);
+
+        expect(totalPoints).toBe(0);
+    });
+
+    it('scores points once campaigns are unlocked and energy is available', () => {
+        const allUnlocked = Object.fromEntries(
+            Object.values(Campaign)
+                .filter((value): value is Campaign => typeof value === 'string')
+                .map(campaign => [campaign, 999])
+        ) as IEstimatedRanksSettings['campaignsProgress'];
+
+        const { totalPoints, totalEnergySpent } = UpgradesService.estimateMaxHsePointsRaids(
+            'machine_hunt',
+            'high',
+            1,
+            999,
+            allUnlocked
+        );
+
+        expect(totalPoints).toBeGreaterThan(0);
+        expect(totalEnergySpent).toBeGreaterThan(0);
+        expect(totalEnergySpent).toBeLessThanOrEqual(999);
     });
 });
 

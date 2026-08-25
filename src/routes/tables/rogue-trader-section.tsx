@@ -52,6 +52,8 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
         item.rewardType === MYTHIC_FORGE_BADGE ? 'Mythic Forge Badge' : (upgradeData?.label ?? item.rewardType);
 
     const displayAcquired = Math.min(Math.floor(acquired), required);
+    const remaining = required - displayAcquired;
+    const totalCost = remaining > 0 ? Math.ceil(remaining / item.rewardQty) * item.costAmount : 0;
     const availableText =
         item.maxPerDay === 1 ? `1×${item.rewardQty} available` : `Up to ${item.maxPerDay}×${item.rewardQty} available`;
 
@@ -85,6 +87,20 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                             width={14}
                         />{' '}
                         {item.costAmount.toLocaleString()} each
+                        {remaining > 0 && (
+                            <>
+                                <br />
+                                Total:{' '}
+                                <img
+                                    src={snowprintIcons.archeotech.file}
+                                    alt="archeotech"
+                                    className="inline-block"
+                                    height={14}
+                                    width={14}
+                                />{' '}
+                                {totalCost.toLocaleString()}
+                            </>
+                        )}
                     </p>
                     <span className="w-fit rounded bg-(--soft-bg) px-1.5 py-0.5 text-[10px] text-(--soft-fg)">
                         Rogue Trader

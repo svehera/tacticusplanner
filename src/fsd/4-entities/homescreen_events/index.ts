@@ -1,6 +1,28 @@
 export { homescreenEvents } from './homescreen-events.data';
-export { getHseDisplayName, humanizeEventName, resolveHseTier } from './homescreen-event.utils';
+export {
+    getHseDisplayName,
+    getHseModesConfig,
+    getHseTierKeyForRoster,
+    getOfferEventPoints,
+    hseEarnsRaidPoints,
+    humanizeEventName,
+    matchesRestriction,
+    resolveHseMilestones,
+    resolveHseTier,
+    tallyHseRewards,
+} from './homescreen-event.utils';
 export { HseIcon } from './ui';
+export {
+    getHseDurationDays,
+    getHseRemainingDays,
+    getHseSchedule,
+    getHseScheduleStatus,
+    hseModeOverrides,
+    hseRaidPointsOverrides,
+    hseSchedules,
+} from './data';
+export type { HseMilestoneResult } from './homescreen-event.utils';
+export type { HseRaidPointsOverride, HseSchedule, HseScheduleStatus } from './data';
 export type {
     HomescreenEventAbilityDefinition,
     HomescreenEventData,
@@ -11,4 +33,9 @@ export type {
     HomescreenEventTier,
     HomescreenEventTierKey,
     HomescreenEventTracker,
+    HseFlatMode,
+    HseFlatModeConfig,
+    HseModesConfig,
+    HseWaveBasedMode,
+    HseWaveModeConfig,
 } from './homescreen-event.model';

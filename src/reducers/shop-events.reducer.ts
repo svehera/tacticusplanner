@@ -1,5 +1,7 @@
 import type { SetStateAction } from '@/models/interfaces';
 
+import type { Alliance } from '@/fsd/5-shared/model';
+
 import type { ShopDayOfWeek } from '@/fsd/4-entities/shops';
 
 export interface IShopEventCartEntry {
@@ -12,6 +14,8 @@ export interface IShopEventCartEntry {
     costPerUnit: number;
     maxQty: number | undefined;
     qtyPerPack: number;
+    /** Which alliance's variant was chosen, for a `draft_*` reward — unset for non-draft entries. */
+    draftAlliance?: Alliance;
 }
 
 export type IShopEventCart = Record<string, IShopEventCartEntry>;

@@ -1,212 +1,19 @@
-﻿import GridViewIcon from '@mui/icons-material/GridView';
-import TableRowsIcon from '@mui/icons-material/TableRows';
-import { FormControl, FormControlLabel, MenuItem, Select, Switch } from '@mui/material';
-import InputLabel from '@mui/material/InputLabel';
-import { AllCommunityModule, ColDef, ICellRendererParams, ValueGetterParams } from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
 import { uniq } from 'lodash';
-import { useContext, useMemo, useRef, useState } from 'react';
-import { isMobile } from 'react-device-detect';
+import { ReactNode, useMemo } from 'react';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { DispatchContext, StoreContext } from '@/reducers/store.provider';
+import { useQueryState } from '@/fsd/5-shared/lib';
+import { Select } from '@/fsd/5-shared/ui';
 
-import { factionLookup, useQueryState } from '@/fsd/5-shared/lib';
-import { RarityMapper } from '@/fsd/5-shared/model';
-import { RarityIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
+import { Campaign, CampaignLocation, CampaignsService } from '@/fsd/4-entities/campaign';
 
-import { Campaign, ICampaignBattleComposed, CampaignLocation, CampaignsService } from '@/fsd/4-entities/campaign';
-// eslint-disable-next-line import-x/no-internal-modules
-import { IRewards } from '@/fsd/4-entities/campaign/model';
-import { CharactersService } from '@/fsd/4-entities/character';
-import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
-
-import { CampaignBattle } from './campaign-battle';
+import { AllowedFactions } from './allowed-factions';
 import { CampaignBattleCard } from './campaign-battle-card';
-import { CampaignBattleEnemies } from './campaign-battle-enemies';
 
-/**
- * @returns The ID of the upgrade material (or shards) rewarded when completing this battle.
- */
-const getReward = (rewards: IRewards): string => {
-    // Elite battles give a guaranteed material, so return that.
-    for (const reward of rewards.guaranteed) {
-        if (reward.id === 'gold') continue;
-        return reward.id;
-    }
-    // Otherwise, return the first potential reward that is not gold.
-    for (const reward of rewards.potential) {
-        if (reward.id === 'gold') continue;
-        return reward.id;
-    }
-    return '';
-};
+const CampaignCardGrid = ({ children }: { children: ReactNode }) => (
+    <div className="grid grid-cols-[repeat(auto-fit,minmax(min(320px,100%),1fr))] items-start gap-3">{children}</div>
+);
 
 export const Campaigns = () => {
-    const gridReference = useRef<AgGridReact<ICampaignBattleComposed>>(null);
-    const { viewPreferences } = useContext(StoreContext);
-    const dispatch = useContext(DispatchContext);
-
-    const [mobileColumnDefs] = useState<Array<ColDef>>([
-        {
-            headerName: 'Battle',
-            pinned: true,
-            maxWidth: 100,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const location = params.data;
-                if (location) {
-                    return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
-                }
-            },
-        },
-        {
-            headerName: 'Details',
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const location = params.data;
-                if (location) {
-                    return <CampaignBattle key={location.id} battle={location} scale={0.5} />;
-                }
-            },
-        },
-    ]);
-
-    const [columnDefs] = useState<Array<ColDef>>([
-        {
-            headerName: 'Battle',
-            pinned: true,
-            maxWidth: 100,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const location = params.data;
-                if (location) {
-                    return <CampaignLocation key={location.id} location={location} short={true} unlocked={true} />;
-                }
-            },
-        },
-        {
-            field: 'energyCost',
-            headerName: 'Energy Cost',
-            maxWidth: 120,
-        },
-        {
-            field: 'dailyBattleCount',
-            headerName: 'Battles Count',
-            maxWidth: 120,
-        },
-        {
-            field: 'dropRate',
-            headerName: 'Drop Rate',
-            maxWidth: 120,
-        },
-        {
-            field: 'rarityEnum',
-            headerName: 'Rarity',
-            maxWidth: 80,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const { rarityEnum, dropRate } = params.data ?? {};
-                if (typeof rarityEnum === 'number' && rarityEnum >= 0) {
-                    return <RarityIcon rarity={rarityEnum} />;
-                } else if (dropRate) {
-                    return 'Shard';
-                }
-            },
-        },
-        {
-            field: 'reward',
-            headerName: 'Reward',
-            minWidth: 170,
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                const { rewards } = params.data ?? {};
-                if (!rewards) return;
-                const reward = getReward(rewards);
-                const upgrade = UpgradesService.getUpgrade(reward);
-                if (!upgrade) return reward;
-                if (upgrade.rarity === 'Shard' || upgrade.rarity === 'Mythic Shard') {
-                    const char = CharactersService.getUnit(reward.slice(Math.max(0, reward.indexOf('_') + 1)));
-                    if (!char) return reward;
-                    return (
-                        <UnitShardIcon name={reward} icon={char.roundIcon} mythic={upgrade.rarity === 'Mythic Shard'} />
-                    );
-                }
-
-                return (
-                    <UpgradeImage
-                        material={upgrade.label}
-                        iconPath={upgrade.iconPath}
-                        rarity={RarityMapper.rarityToRarityString(upgrade.rarity)}
-                    />
-                );
-            },
-        },
-        {
-            field: 'slots',
-            headerName: 'Slots',
-            maxWidth: 80,
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
-                return battle?.slots ?? 5;
-            },
-        },
-        {
-            field: 'enemiesTotal',
-            headerName: 'Enemies total',
-            maxWidth: 120,
-        },
-        {
-            headerName: 'Enemies Factions',
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
-                if (battle) {
-                    return battle.enemiesFactions.map(x => factionLookup[x].name);
-                }
-            },
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                return (
-                    <ul className="m-0 pl-5">
-                        {(params.value as string[]).map(x => (
-                            <li key={x}>{x}</li>
-                        ))}
-                    </ul>
-                );
-            },
-        },
-        {
-            headerName: 'Enemies Types',
-            valueGetter: (params: ValueGetterParams<ICampaignBattleComposed>) => {
-                const battle = params.data;
-                if (battle) {
-                    return battle.enemiesTypes;
-                }
-            },
-            cellRenderer: (params: ICellRendererParams<ICampaignBattleComposed>) => {
-                if (!params.data) {
-                    return <></>;
-                }
-                const battle = params.data;
-                if (!battle.detailedEnemyTypes?.length)
-                    return (
-                        <ul className="m-0 pl-5">
-                            {(params.value as string[]).map(x => (
-                                <li key={x}>{x}</li>
-                            ))}
-                        </ul>
-                    );
-                return (
-                    <center>
-                        <div className="relative">
-                            <CampaignBattleEnemies
-                                keyPrefix="table"
-                                battleId={battle.id}
-                                enemies={battle.rawEnemyTypes ?? []}
-                                scale={0.2}
-                                onEnemyClick={() => {}}
-                            />
-                        </div>
-                    </center>
-                );
-            },
-        },
-    ]);
-
     const [campaign, setCampaign] = useQueryState(
         'campaign',
         initQueryParameter => initQueryParameter ?? Campaign.I,
@@ -217,80 +24,58 @@ export const Campaigns = () => {
 
     const rows = useMemo(() => CampaignsService.campaignsGrouped[campaign], [campaign]);
 
+    const { allies } = useMemo(() => CampaignsService.getEnemiesAndAllies(campaign as Campaign), [campaign]);
+
     const threeSlotsNodes = uniq(rows.filter(x => x.slots === 3));
 
-    const updateView = (tableView: boolean): void => {
-        dispatch.viewPreferences({ type: 'Update', setting: 'campaignsTableView', value: tableView });
-    };
-
     return (
-        <div>
+        <div className="space-y-8 py-6">
             <div>
-                <table>
-                    <thead></thead>
-                </table>
+                <h2>Campaigns</h2>
+                <p className="text-sm text-(--soft-fg)">Battle rewards, enemies, and allowed factions per campaign.</p>
             </div>
-            <div className="flex-box gap10 wrap">
-                <FormControl className="m-5 w-[250px]">
-                    <InputLabel>Campaign</InputLabel>
-                    <Select
-                        label={'Campaign'}
-                        value={campaign}
-                        onChange={event => setCampaign(event.target.value as Campaign)}>
-                        {campaignsOptions.map(value => (
-                            <MenuItem key={value} value={value}>
-                                {value} ({CampaignsService.campaignsGrouped[value].length})
-                            </MenuItem>
-                        ))}
-                    </Select>
-                </FormControl>
 
-                <FormControlLabel
-                    control={
-                        <Switch
-                            checked={viewPreferences.campaignsTableView ?? true}
-                            onChange={event => updateView(event.target.checked)}
+            <div className="overflow-hidden rounded-xl border border-(--border) bg-(--overlay)">
+                <div className="flex flex-wrap items-end gap-4 px-3 py-2.5">
+                    <div className="flex flex-col gap-1.5">
+                        <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">
+                            Campaign
+                        </span>
+                        <Select
+                            options={campaignsOptions}
+                            value={campaign}
+                            onChange={setCampaign}
+                            className="w-full md:w-64"
+                            renderOption={value => (
+                                <span>
+                                    {value} ({CampaignsService.campaignsGrouped[value].length})
+                                </span>
+                            )}
                         />
-                    }
-                    label={
-                        <div className="flex-box gap5">
-                            {viewPreferences.campaignsTableView ? (
-                                <TableRowsIcon color="primary" />
-                            ) : (
-                                <GridViewIcon color="primary" />
-                            )}{' '}
-                            view
-                        </div>
-                    }
-                />
-
-                {threeSlotsNodes.length > 0 && (
-                    <div className="flex-box gap10 wrap">
-                        <span className="font-bold"> 3 Slots nodes:</span>
-                        {threeSlotsNodes.map(x => (
-                            <CampaignLocation key={x.id} location={x} unlocked={true} short={true} />
-                        ))}
                     </div>
-                )}
+                </div>
+
+                <div className="flex flex-col gap-3 border-t border-(--border) px-3 py-2.5">
+                    <AllowedFactions alliance={allies.alliance} factions={allies.factions} />
+
+                    {threeSlotsNodes.length > 0 && (
+                        <div className="flex flex-wrap items-center gap-2">
+                            <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">
+                                3 Slots Nodes
+                            </span>
+                            {threeSlotsNodes.map(x => (
+                                <CampaignLocation key={x.id} location={x} unlocked={true} short={true} />
+                            ))}
+                        </div>
+                    )}
+                </div>
             </div>
-            {viewPreferences.campaignsTableView ? (
-                <div className="ag-theme-material density-compact h-[calc(100vh-220px)] w-full">
-                    <AgGridReact
-                        modules={[AllCommunityModule]}
-                        theme="legacy"
-                        ref={gridReference}
-                        suppressCellFocus={true}
-                        defaultColDef={{ resizable: true, sortable: true, autoHeight: true }}
-                        columnDefs={isMobile ? mobileColumnDefs : columnDefs}
-                        rowData={rows}></AgGridReact>
-                </div>
-            ) : (
-                <div className="flex flex-wrap gap-3">
-                    {rows.map(x => (
-                        <CampaignBattleCard key={x.id} battle={x} />
-                    ))}
-                </div>
-            )}
+
+            <CampaignCardGrid>
+                {rows.map(x => (
+                    <CampaignBattleCard key={x.id} battle={x} />
+                ))}
+            </CampaignCardGrid>
         </div>
     );
 };

@@ -35,7 +35,6 @@ export interface IViewPreferences
     inventoryShowPlusMinus: boolean;
     goalsTableView: boolean;
     goalColorMode: GoalColorMode;
-    campaignsTableView: boolean;
     raidsTableView: boolean;
     includeExhaustedBattlesInHse: boolean;
     showHseWarning: boolean;

@@ -11,6 +11,7 @@ export enum DailyRaidsStrategy {
     leastTime,
     allLocations,
     custom,
+    leastEnergyFewestTickets,
 }
 
 // Re-export from FSD entities

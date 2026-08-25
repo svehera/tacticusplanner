@@ -6,9 +6,18 @@ import { MiscIcon, tacticusIcons } from '@/fsd/5-shared/ui/icons';
 
 import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 
+import { resolveDraftAllianceType } from './draft-alliance';
 import { DAY_LABELS } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
-import type { CartRecord } from './shop-events.types';
+import type { CartEntry, CartRecord } from './shop-events.types';
+
+/** The reward type a cart entry actually resolves to — a draft entry with a chosen alliance resolves
+ *  to its real alliance-specific type, matching how `computeCoverageRows` buckets draft rows. */
+function resolveCartEntryType(entry: CartEntry): string {
+    const type = entry.rewardString.split(':')[0];
+    if (!entry.draftAlliance) return type;
+    return resolveDraftAllianceType(type, entry.draftAlliance) ?? type;
+}
 
 interface ShoppingListProps {
     cart: CartRecord;
@@ -77,12 +86,12 @@ export function ShoppingList({ cart, weekCount, currencyIconKey, dayOrder, onSet
                 // Aggregate resource totals per reward type
                 const resourceMap: Record<string, { label: string; icon: JSX.Element; total: number }> = {};
                 for (const [, entry] of entries) {
-                    const key = entry.rewardString.split(':')[0];
+                    const key = resolveCartEntryType(entry);
                     const totalQty = entry.quantity * entry.qtyPerPack;
                     if (resourceMap[key]) {
                         resourceMap[key].total += totalQty;
                     } else {
-                        const info = rewardInfo(entry.rewardString);
+                        const info = rewardInfo(key);
                         resourceMap[key] = { label: info.label, icon: info.icon, total: totalQty };
                     }
                 }
@@ -126,7 +135,8 @@ export function ShoppingList({ cart, weekCount, currencyIconKey, dayOrder, onSet
                         {expandedWeeks.has(w) && (
                             <div className="flex flex-col gap-2 border-t border-(--border) p-4">
                                 {entries.map(([key, entry]) => {
-                                    const { icon } = rewardInfo(entry.rewardString);
+                                    const resolvedType = resolveCartEntryType(entry);
+                                    const { icon, label } = rewardInfo(resolvedType);
                                     const lineTotal = entry.quantity * entry.costPerUnit;
 
                                     return (
@@ -135,7 +145,9 @@ export function ShoppingList({ cart, weekCount, currencyIconKey, dayOrder, onSet
                                                 {icon}
                                             </div>
                                             <div className="flex min-w-0 flex-1 flex-col gap-0.5">
-                                                <span className="truncate text-sm font-medium">{entry.label}</span>
+                                                <span className="truncate text-sm font-medium">
+                                                    {entry.draftAlliance ? label : entry.label}
+                                                </span>
                                                 <span className="text-xs text-(--soft-fg)">
                                                     {DAY_LABELS[entry.day]}
                                                     {entry.qtyPerPack > 1 && (

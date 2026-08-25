@@ -437,11 +437,19 @@ export class GoalsService {
 
             if (g.type === PersonalGoalType.MowAbilities) {
                 const mow = unit as IMow2;
+                const primaryStart = Math.max(
+                    g.startingFirstAbilityLevel ?? mow.primaryAbilityLevel,
+                    mow.primaryAbilityLevel
+                );
+                const secondaryStart = Math.max(
+                    g.startingSecondAbilityLevel ?? mow.secondaryAbilityLevel,
+                    mow.secondaryAbilityLevel
+                );
                 const result: ICharacterUpgradeMow = {
                     type: PersonalGoalType.MowAbilities,
-                    primaryStart: mow.primaryAbilityLevel,
+                    primaryStart,
                     primaryEnd: g.firstAbilityLevel ?? mow.primaryAbilityLevel,
-                    secondaryStart: mow.secondaryAbilityLevel,
+                    secondaryStart,
                     secondaryEnd: g.secondAbilityLevel ?? mow.secondaryAbilityLevel,
                     upgradesRarity: g.upgradesRarity ?? [],
                     rarity: unit.rarity,
@@ -652,6 +660,8 @@ export class GoalsService {
                 return {
                     ...base,
                     character: goal.unitId,
+                    startingFirstAbilityLevel: goal.primaryStart,
+                    startingSecondAbilityLevel: goal.secondaryStart,
                     firstAbilityLevel: goal.primaryEnd,
                     secondAbilityLevel: goal.secondaryEnd,
                     upgradesRarity: goal.upgradesRarity,
@@ -683,6 +693,27 @@ export class GoalsService {
                 return;
             }
         }
+    }
+
+    /** Validation error for a MoW-ability goal's start/end levels, or undefined if valid. */
+    public static getMowGoalValidationError(
+        primaryStart: number | undefined,
+        primaryEnd: number | undefined,
+        secondaryStart: number | undefined,
+        secondaryEnd: number | undefined
+    ): string | undefined {
+        if (
+            primaryStart === undefined ||
+            primaryEnd === undefined ||
+            secondaryStart === undefined ||
+            secondaryEnd === undefined
+        ) {
+            return 'Please enter a valid end goal';
+        }
+        if (primaryEnd <= primaryStart && secondaryEnd <= secondaryStart) {
+            return 'Please enter a valid end goal';
+        }
+        return undefined;
     }
 
     /**

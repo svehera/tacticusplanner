@@ -37,6 +37,7 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService as GoalUpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 
+import { resolveDraftAllianceType } from './draft-alliance';
 import { PurchasedQtyModal } from './purchased-qty-modal';
 import { ShopCard } from './shop-card';
 import { DAYS, DAY_LABELS } from './shop-events.constants';
@@ -56,6 +57,14 @@ const TAB_LABELS: Record<TabId, string> = {
     milestones: 'Milestones & Rewards',
     missions: 'Missions',
 };
+
+/** The reward type a cart entry actually resolves to — a draft entry with a chosen alliance resolves
+ *  to its real alliance-specific type, matching how `computeCoverageRows` buckets draft rows. */
+function resolveCartEntryType(entry: CartEntry): string {
+    const type = entry.rewardString.split(':')[0];
+    if (!entry.draftAlliance) return type;
+    return resolveDraftAllianceType(type, entry.draftAlliance) ?? type;
+}
 
 export const ShopEventDetail = () => {
     const { eventId } = useParams<{ eventId: string }>();
@@ -224,7 +233,7 @@ export const ShopEventDetail = () => {
         ]
     );
 
-    const { neededBadges, neededOrbs, neededForgeBadges, neededXp } = useMemo(
+    const { neededBadges, neededOrbs, neededForgeBadges, neededComponents, neededXp } = useMemo(
         () =>
             GoalsService.adjustGoalEstimates(
                 cloneDeep(goals),
@@ -354,7 +363,7 @@ export const ShopEventDetail = () => {
         for (const [key, entry] of Object.entries(cart)) {
             const unpurchasedQty = Math.max(0, entry.quantity - (purchased[key] ?? 0));
             if (unpurchasedQty === 0) continue;
-            const type = entry.rewardString.split(':')[0];
+            const type = resolveCartEntryType(entry);
             totals[type] = (totals[type] ?? 0) + unpurchasedQty * entry.qtyPerPack;
         }
         return totals;
@@ -378,12 +387,12 @@ export const ShopEventDetail = () => {
             if (purchasedQty <= 0) continue;
             const entry = cart[key];
             if (!entry) continue;
-            const typePrefix = entry.rewardString.split(':')[0];
+            const typePrefix = resolveCartEntryType(entry);
             const totalItems = purchasedQty * entry.qtyPerPack;
             if (map[typePrefix]) {
                 map[typePrefix].total += totalItems;
             } else {
-                const { icon, label } = rewardInfo(entry.rewardString);
+                const { icon, label } = rewardInfo(typePrefix);
                 map[typePrefix] = { label, icon, total: totalItems };
             }
         }
@@ -421,6 +430,7 @@ export const ShopEventDetail = () => {
                 neededBadges,
                 neededOrbs,
                 neededForgeBadges,
+                neededComponents,
                 effectiveCartTotalsByType,
                 neededXp,
                 pl,
@@ -436,6 +446,7 @@ export const ShopEventDetail = () => {
             neededBadges,
             neededOrbs,
             neededForgeBadges,
+            neededComponents,
             effectiveCartTotalsByType,
             neededXp,
             pl,
@@ -713,7 +724,7 @@ export const ShopEventDetail = () => {
                                             <>
                                                 <div className="flex flex-col gap-2">
                                                     {dayEntries.map(([key, entry]) => {
-                                                        const { icon } = rewardInfo(entry.rewardString);
+                                                        const { icon } = rewardInfo(resolveCartEntryType(entry));
                                                         const lineTotal = entry.quantity * entry.costPerUnit;
                                                         const purchasedQty = purchased[key] ?? 0;
                                                         const isFullyPurchased = purchasedQty >= entry.quantity;
@@ -1017,6 +1028,7 @@ export const ShopEventDetail = () => {
                         {resolvedSlots.map((slot, index) => {
                             const key = cartKey(week, slot.slotIndex, day);
                             const cartQty = cart[key]?.quantity ?? 0;
+                            const draftAlliance = cart[key]?.draftAlliance;
                             const maxQty =
                                 slot.product.maxPurchases === undefined
                                     ? undefined
@@ -1026,9 +1038,10 @@ export const ShopEventDetail = () => {
                                     key={index}
                                     slot={slot}
                                     cartQty={cartQty}
+                                    draftAlliance={draftAlliance}
                                     currencyIconKey={currencyIconKey}
                                     details={detailsEnabled ? resolveUnitShardDetails(slot.rewardString) : undefined}
-                                    onSetQty={qty =>
+                                    onConfirm={(qty, alliance) =>
                                         setCartQty(key, qty, {
                                             week,
                                             slotIndex: slot.slotIndex,
@@ -1038,6 +1051,7 @@ export const ShopEventDetail = () => {
                                             costPerUnit: slot.cost,
                                             maxQty,
                                             qtyPerPack: slot.qty ?? 1,
+                                            draftAlliance: alliance,
                                         })
                                     }
                                 />
@@ -1083,7 +1097,7 @@ export const ShopEventDetail = () => {
                         key={purchasedDialogKey}
                         isOpen={true}
                         entry={cart[purchasedDialogKey ?? '']!}
-                        icon={rewardInfo(cart[purchasedDialogKey ?? '']!.rewardString).icon}
+                        icon={rewardInfo(resolveCartEntryType(cart[purchasedDialogKey ?? '']!)).icon}
                         initialPurchased={purchased[purchasedDialogKey ?? ''] ?? 0}
                         onConfirm={qty => {
                             setPurchasedQty(purchasedDialogKey ?? '', qty);

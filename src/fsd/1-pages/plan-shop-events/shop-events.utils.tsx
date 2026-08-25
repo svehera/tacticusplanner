@@ -6,6 +6,7 @@ import { UpgradeImage } from '@/fsd/4-entities/upgrade';
 
 import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 
+import { isDraftRewardType, resolveDraftAllianceType } from './draft-alliance';
 import { ICON_SIZE } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
 import type { CoverageRow } from './shop-events.types';
@@ -14,16 +15,12 @@ export function cartKey(week: number, slotIndex: number, day: Day): string {
     return `${week}-${slotIndex}-${day}`;
 }
 
-/** A draft item can be claimed as any single alliance's variant, so the total needed is the sum of every alliance's deficit. */
-function sumAcrossAlliances(needed: Record<Alliance, Record<Rarity, number>>, rarity: Rarity): number {
-    return Object.values(Alliance).reduce((total, alliance) => total + (needed[alliance]?.[rarity] ?? 0), 0);
-}
-
 export function getNeededForRewardType(
     type: string,
     neededBadges: Record<Alliance, Record<Rarity, number>>,
     neededOrbs: Record<Alliance, Record<Rarity, number>>,
-    neededForgeBadges: Record<Rarity, number>
+    neededForgeBadges: Record<Rarity, number>,
+    neededComponents: Record<Alliance, number>
 ): number {
     const badgeMatch = type.match(/^abilityToken(Common|Uncommon|Rare|Epic|Legendary|Mythic)_(Imperial|Xenos|Chaos)$/);
     if (badgeMatch) {
@@ -35,15 +32,9 @@ export function getNeededForRewardType(
         const rarity = RarityMapper.stringToNumber[orbMatch[1] as RarityString];
         return neededOrbs[orbMatch[2] as Alliance]?.[rarity] ?? 0;
     }
-    const draftBadgeMatch = type.match(/^draft_abilityTokens(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/);
-    if (draftBadgeMatch) {
-        const rarity = RarityMapper.stringToNumber[draftBadgeMatch[1] as RarityString];
-        return sumAcrossAlliances(neededBadges, rarity);
-    }
-    const draftOrbMatch = type.match(/^draft_ascensionOrbs(Uncommon|Rare|Epic|Legendary|Mythic)$/);
-    if (draftOrbMatch) {
-        const rarity = RarityMapper.stringToNumber[draftOrbMatch[1] as RarityString];
-        return sumAcrossAlliances(neededOrbs, rarity);
+    const mowComponentMatch = type.match(/^mowComponent_(Imperial|Xenos|Chaos)$/);
+    if (mowComponentMatch) {
+        return neededComponents[mowComponentMatch[1] as Alliance] ?? 0;
     }
     const forgeMatch = type.match(/^itemAscensionResource_(Uncommon|Rare|Epic|Legendary|Mythic)$/);
     if (forgeMatch) {
@@ -65,6 +56,7 @@ export function coverageRowSortPriority(rewardType: string): number {
     if (rewardType.startsWith('xp')) return 1;
     if (rewardType.startsWith('abilityToken')) return 2;
     if (rewardType.startsWith('heroAscensionOrb')) return 3;
+    if (rewardType.startsWith('mowComponent_')) return 3.5;
     if (rewardType.startsWith('itemAscensionResource_')) return 4;
     if (['upgHpM001', 'upgHpM002', 'upgHpM003', 'upgHpM004'].includes(rewardType)) return 5;
     if (rewardType.startsWith('shards_') || rewardType.startsWith('mythicShards_')) return 6;
@@ -77,6 +69,7 @@ interface ComputeCoverageRowsParameters {
     neededBadges: Record<Alliance, Record<Rarity, number>>;
     neededOrbs: Record<Alliance, Record<Rarity, number>>;
     neededForgeBadges: Record<Rarity, number>;
+    neededComponents: Record<Alliance, number>;
     effectiveCartTotalsByType: Record<string, number>;
     neededXp: number;
     pl: number;
@@ -93,6 +86,7 @@ export function computeCoverageRows({
     neededBadges,
     neededOrbs,
     neededForgeBadges,
+    neededComponents,
     effectiveCartTotalsByType,
     neededXp,
     pl,
@@ -108,18 +102,63 @@ export function computeCoverageRows({
     for (const [typePrefix, weekDayMap] of allWeekDayAvailability) {
         // XP books are merged into a single tier-appropriate row below
         if (XP_BOOK_TYPES.has(typePrefix)) continue;
-        const needed = getNeededForRewardType(typePrefix, neededBadges, neededOrbs, neededForgeBadges);
-        if (needed === 0) continue;
-        const cartTotal = effectiveCartTotalsByType[typePrefix] ?? 0;
+
         const availability = [...weekDayMap.entries()]
             .toSorted(([a], [b]) => a - b)
             .map(([w, daysSet]) => ({
                 week: w,
                 days: dayOrder.filter(d => daysSet.has(d)),
             }));
+        // The shop always sells the draft slot itself, regardless of which alliance gets chosen.
+        const cheapest = cheapestOptionByType.get(typePrefix);
+
+        // A draft slot's real reward is one of 3 alliance-specific resources, each with its own
+        // deficit and its own alliance-tagged cart purchases — a single combined row would let a
+        // surplus in one alliance mask a deficit in another, so each alliance gets its own row.
+        if (isDraftRewardType(typePrefix)) {
+            for (const alliance of [Alliance.Imperial, Alliance.Xenos, Alliance.Chaos]) {
+                const resolvedType = resolveDraftAllianceType(typePrefix, alliance);
+                if (!resolvedType) continue;
+                const needed = getNeededForRewardType(
+                    resolvedType,
+                    neededBadges,
+                    neededOrbs,
+                    neededForgeBadges,
+                    neededComponents
+                );
+                if (needed === 0) continue;
+                const cartTotal = effectiveCartTotalsByType[resolvedType] ?? 0;
+                const { icon, label } = rewardInfo(resolvedType);
+                const remaining = Math.max(0, needed - cartTotal);
+                const estimatedCost =
+                    remaining > 0 && cheapest
+                        ? Math.ceil(remaining / cheapest.qtyPerPack) * cheapest.costPerPack
+                        : undefined;
+                rows.push({
+                    rewardType: resolvedType,
+                    label,
+                    icon,
+                    needed,
+                    cartTotal,
+                    remaining,
+                    availability,
+                    estimatedCost,
+                });
+            }
+            continue;
+        }
+
+        const needed = getNeededForRewardType(
+            typePrefix,
+            neededBadges,
+            neededOrbs,
+            neededForgeBadges,
+            neededComponents
+        );
+        if (needed === 0) continue;
+        const cartTotal = effectiveCartTotalsByType[typePrefix] ?? 0;
         const { icon, label } = rewardInfo(typePrefix);
         const remaining = Math.max(0, needed - cartTotal);
-        const cheapest = cheapestOptionByType.get(typePrefix);
         const estimatedCost =
             remaining > 0 && cheapest ? Math.ceil(remaining / cheapest.qtyPerPack) * cheapest.costPerPack : undefined;
         rows.push({ rewardType: typePrefix, label, icon, needed, cartTotal, remaining, availability, estimatedCost });

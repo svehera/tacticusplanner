@@ -27,6 +27,7 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
 import { CharactersAbilitiesService } from '@/fsd/3-features/characters/characters-abilities.service';
 import { ICharacterAscendGoal, TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
+import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 
 import { IgnoreRankRarity } from './ignore-rank-rarity';
 import { PreFarmGoalSelector } from './pre-farm-goal-selector';
@@ -82,6 +83,25 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, a
     };
 
     const [ignoreRankRarity, setIgnoreRankRarity] = React.useState(false);
+
+    const [mowFieldsBlank, setMowFieldsBlank] = useState({
+        primaryStart: false,
+        primaryEnd: false,
+        secondaryStart: false,
+        secondaryEnd: false,
+    });
+
+    let mowGoalError: string | undefined;
+    if (form.type === PersonalGoalType.MowAbilities) {
+        mowGoalError = Object.values(mowFieldsBlank).some(Boolean)
+            ? 'Please enter a valid end goal'
+            : GoalsService.getMowGoalValidationError(
+                  form.primaryStart,
+                  form.primaryEnd,
+                  form.secondaryStart,
+                  form.secondaryEnd
+              );
+    }
 
     const maxRank = useMemo(() => {
         return ignoreRankRarity ? Rank.Adamantine2 : RarityMapper.toMaxRank[unit?.rarity ?? 0];
@@ -233,6 +253,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, a
                                             primaryStart,
                                         }));
                                     }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, primaryStart: isEmpty }))
+                                    }
                                 />
                                 <NumberInput
                                     fullWidth
@@ -246,6 +269,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, a
                                             primaryEnd,
                                         }));
                                     }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, primaryEnd: isEmpty }))
+                                    }
                                 />
                             </div>
                             <div className="flex gap-3">
@@ -261,6 +287,9 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, a
                                             secondaryStart,
                                         }));
                                     }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, secondaryStart: isEmpty }))
+                                    }
                                 />
                                 <NumberInput
                                     fullWidth
@@ -274,8 +303,13 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, a
                                             secondaryEnd,
                                         }));
                                     }}
+                                    onEmptyChange={isEmpty =>
+                                        setMowFieldsBlank(current => ({ ...current, secondaryEnd: isEmpty }))
+                                    }
                                 />
                             </div>
+
+                            {mowGoalError && <div className="text-sm text-(--danger)">{mowGoalError}</div>}
 
                             <UpgradesRaritySelect
                                 upgradesRarity={form.upgradesRarity ?? []}
@@ -445,7 +479,7 @@ export const EditGoalDialog: React.FC<Props> = ({ isOpen, onClose, goal, unit, a
                 <Button appearance="outline" onPress={() => handleClose()}>
                     Cancel
                 </Button>
-                <Button intent="success" onPress={() => handleClose(form)}>
+                <Button intent="success" isDisabled={!!mowGoalError} onPress={() => handleClose(form)}>
                     Save
                 </Button>
             </PortalDialog.Footer>

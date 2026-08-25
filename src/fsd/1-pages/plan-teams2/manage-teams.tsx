@@ -1,7 +1,7 @@
 /* eslint-disable import-x/order */
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
-import { Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy, Map } from 'lucide-react';
+import { ArrowDown, ArrowUp, Plus, Pencil, Trash2, Users2, Swords, Shield, Users, Trophy, Map } from 'lucide-react';
 import { cloneDeep, uniq } from 'lodash';
 import { useContext, useEffect, useMemo, useState } from 'react';
 
@@ -12,6 +12,7 @@ import { FactionId } from '@/fsd/5-shared/model';
 import { Rank } from '@/fsd/5-shared/model/enums/rank.enum';
 import { Rarity } from '@/fsd/5-shared/model/enums/rarity.enum';
 
+import { moveItem } from '@/fsd/5-shared/lib';
 import { Button, LazyTooltip, PortalDialog, Select } from '@/fsd/5-shared/ui';
 
 import { CharactersService } from '@/fsd/4-entities/character/@x/unit';
@@ -124,6 +125,11 @@ export const ManageTeams = () => {
         setResolvedChars(CharactersService.resolveStoredCharacters(unresolvedCharacters));
         setResolvedMows(MowsService.resolveAllFromStorage(unresolvedMows));
     }, [unresolvedCharacters, unresolvedMows]);
+
+    const visibleTeams = useMemo(
+        () => teams.filter(team => !selectedTeamType || Boolean(team[selectedTeamType])),
+        [teams, selectedTeamType]
+    );
 
     const otherTeamsInSelectedModes = useMemo(
         () =>
@@ -285,6 +291,18 @@ export const ManageTeams = () => {
         setCampaignSelected(!!team.campaign);
         setCampaignStoryline(team.campaignStoryline);
         setRarityCap(Rarity.Mythic);
+    };
+
+    const onMoveTeam = (team: ITeam2, direction: -1 | 1) => {
+        const visibleIndex = visibleTeams.findIndex(t => t.name === team.name);
+        const targetVisible = visibleTeams[visibleIndex + direction];
+        if (visibleIndex === -1 || !targetVisible) return;
+
+        const fromIndex = teams.findIndex(t => t.name === team.name);
+        const toIndex = teams.findIndex(t => t.name === targetVisible.name);
+        if (fromIndex === -1 || toIndex === -1) return;
+
+        dispatch.teams2({ type: 'Set', value: moveItem(teams, fromIndex, toIndex) });
     };
 
     const onDelete = (team: ITeam2) => {
@@ -525,129 +543,138 @@ export const ManageTeams = () => {
                 </div>
             </div>
             <div className="flex flex-col gap-4">
-                {teams
-                    .filter(team => !selectedTeamType || Boolean(team[selectedTeamType]))
-                    .map(team => (
-                        <div
-                            key={team.name}
-                            className="rounded-xl border border-(--card-border) bg-(--card) p-4 transition-colors">
-                            <div className="mb-4 flex items-start justify-between">
+                {visibleTeams.map(team => (
+                    <div
+                        key={team.name}
+                        className="rounded-xl border border-(--card-border) bg-(--card) p-4 transition-colors">
+                        <div className="mb-4 flex items-start justify-between">
+                            <div className="flex items-start gap-2">
+                                <div className="flex flex-col">
+                                    <LazyTooltip title="Move Team Up">
+                                        <Button
+                                            size="square-petite"
+                                            appearance="plain"
+                                            isDisabled={visibleTeams.indexOf(team) === 0}
+                                            onPress={() => onMoveTeam(team, -1)}>
+                                            <ArrowUp data-slot="icon" />
+                                        </Button>
+                                    </LazyTooltip>
+                                    <LazyTooltip title="Move Team Down">
+                                        <Button
+                                            size="square-petite"
+                                            appearance="plain"
+                                            isDisabled={visibleTeams.indexOf(team) === visibleTeams.length - 1}
+                                            onPress={() => onMoveTeam(team, 1)}>
+                                            <ArrowDown data-slot="icon" />
+                                        </Button>
+                                    </LazyTooltip>
+                                </div>
                                 <div>
                                     <span className="font-mono text-xs tracking-wider text-(--soft-fg) uppercase">
                                         Team Configuration
                                     </span>
                                     <h3 className="text-(--card-fg)">{team.name}</h3>
                                 </div>
+                            </div>
 
-                                <div className="flex gap-1">
-                                    <LazyTooltip title="Edit Team">
-                                        <Button size="square-petite" appearance="plain" onPress={() => onEdit(team)}>
-                                            <Pencil data-slot="icon" />
-                                        </Button>
-                                    </LazyTooltip>
-                                    <LazyTooltip title="Delete Team">
-                                        <Button
-                                            size="square-petite"
-                                            appearance="plain"
-                                            intent="danger"
-                                            onPress={() => onDelete(team)}>
-                                            <Trash2 data-slot="icon" />
-                                        </Button>
-                                    </LazyTooltip>
-                                </div>
-                            </div>
-                            <div className="mb-4 flex flex-wrap gap-2">
-                                {!!team.warOffense && (
-                                    <MetadataChip
-                                        icon={<Swords className="size-3" />}
-                                        label="War Offense"
-                                        color="warning"
-                                    />
-                                )}
-                                {!!team.warDefense && (
-                                    <MetadataChip
-                                        icon={<Shield className="size-3" />}
-                                        label="War Defense"
-                                        color="info"
-                                    />
-                                )}
-                                {!!team.raid && (
-                                    <MetadataChip
-                                        icon={<Users className="size-3" />}
-                                        label="Guild Raid"
-                                        color="secondary"
-                                    />
-                                )}
-                                {!!team.ta && (
-                                    <MetadataChip
-                                        icon={<Trophy className="size-3" />}
-                                        label="Tournament"
-                                        color="success"
-                                    />
-                                )}
-                                {!!team.horde && (
-                                    <MetadataChip icon={<Users2 className="size-3" />} label="Horde" color="error" />
-                                )}
-                                {!!team.campaign && (
-                                    <MetadataChip icon={<Map className="size-3" />} label="Campaign" color="info" />
-                                )}
-                            </div>
-                            {!!team.campaign && !!team.campaignStoryline && (
-                                <div className="mb-4 flex flex-wrap gap-2">
-                                    <MetadataChip
-                                        icon={<Map className="size-3" />}
-                                        label={campaignStorylineLabel(team.campaignStoryline)}
-                                        color="secondary"
-                                    />
-                                </div>
-                            )}
-                            {team.notes && team.notes.trim().length > 0 && (
-                                <div className="mb-4">
-                                    <span className="font-mono text-xs tracking-wider text-(--soft-fg) uppercase">
-                                        Notes
-                                    </span>
-                                    <div className="mt-2 rounded border border-(--card-border) bg-(--soft) p-3">
-                                        <p className="text-sm whitespace-pre-wrap text-(--fg)">{team.notes}</p>
-                                    </div>
-                                </div>
-                            )}
-                            <div className="rounded-lg bg-(--soft) p-3">
-                                <TeamFlow
-                                    chars={
-                                        team.chars
-                                            .filter(id => resolvedChars.some(x => x.snowprintId === id))
-                                            .map(id => resolvedChars.find(x => x.snowprintId === id)!)
-                                            .filter(x => x !== undefined) ?? []
-                                    }
-                                    mows={
-                                        team.mows
-                                            ?.filter(id => resolvedMows.some(x => x.snowprintId === id))
-                                            .map(id => resolvedMows.find(x => x.snowprintId === id)!)
-                                            .filter(x => x !== undefined) ?? []
-                                    }
-                                    flexIndex={team.flexIndex}
-                                    onCharClicked={() => {}}
-                                    onMowClicked={() => {}}
-                                    zoom={zoom}
-                                    disabledUnits={[
-                                        ...team.chars.map(
-                                            char =>
-                                                resolvedChars.find(
-                                                    x => x.snowprintId === char && x.rank === Rank.Locked
-                                                )?.snowprintId
-                                        ),
-                                        ...(team.mows?.map(
-                                            mow =>
-                                                resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)
-                                                    ?.snowprintId
-                                        ) ?? []),
-                                    ]
-                                        .flatMap(id => (id ? [id] : []))
-                                        .filter(id => id !== undefined)}
-                                />
+                            <div className="flex gap-1">
+                                <LazyTooltip title="Edit Team">
+                                    <Button size="square-petite" appearance="plain" onPress={() => onEdit(team)}>
+                                        <Pencil data-slot="icon" />
+                                    </Button>
+                                </LazyTooltip>
+                                <LazyTooltip title="Delete Team">
+                                    <Button
+                                        size="square-petite"
+                                        appearance="plain"
+                                        intent="danger"
+                                        onPress={() => onDelete(team)}>
+                                        <Trash2 data-slot="icon" />
+                                    </Button>
+                                </LazyTooltip>
                             </div>
                         </div>
-                    ))}
+                        <div className="mb-4 flex flex-wrap gap-2">
+                            {!!team.warOffense && (
+                                <MetadataChip
+                                    icon={<Swords className="size-3" />}
+                                    label="War Offense"
+                                    color="warning"
+                                />
+                            )}
+                            {!!team.warDefense && (
+                                <MetadataChip icon={<Shield className="size-3" />} label="War Defense" color="info" />
+                            )}
+                            {!!team.raid && (
+                                <MetadataChip
+                                    icon={<Users className="size-3" />}
+                                    label="Guild Raid"
+                                    color="secondary"
+                                />
+                            )}
+                            {!!team.ta && (
+                                <MetadataChip icon={<Trophy className="size-3" />} label="Tournament" color="success" />
+                            )}
+                            {!!team.horde && (
+                                <MetadataChip icon={<Users2 className="size-3" />} label="Horde" color="error" />
+                            )}
+                            {!!team.campaign && (
+                                <MetadataChip icon={<Map className="size-3" />} label="Campaign" color="info" />
+                            )}
+                        </div>
+                        {!!team.campaign && !!team.campaignStoryline && (
+                            <div className="mb-4 flex flex-wrap gap-2">
+                                <MetadataChip
+                                    icon={<Map className="size-3" />}
+                                    label={campaignStorylineLabel(team.campaignStoryline)}
+                                    color="secondary"
+                                />
+                            </div>
+                        )}
+                        {team.notes && team.notes.trim().length > 0 && (
+                            <div className="mb-4">
+                                <span className="font-mono text-xs tracking-wider text-(--soft-fg) uppercase">
+                                    Notes
+                                </span>
+                                <div className="mt-2 rounded border border-(--card-border) bg-(--soft) p-3">
+                                    <p className="text-sm whitespace-pre-wrap text-(--fg)">{team.notes}</p>
+                                </div>
+                            </div>
+                        )}
+                        <div className="rounded-lg bg-(--soft) p-3">
+                            <TeamFlow
+                                chars={
+                                    team.chars
+                                        .filter(id => resolvedChars.some(x => x.snowprintId === id))
+                                        .map(id => resolvedChars.find(x => x.snowprintId === id)!)
+                                        .filter(x => x !== undefined) ?? []
+                                }
+                                mows={
+                                    team.mows
+                                        ?.filter(id => resolvedMows.some(x => x.snowprintId === id))
+                                        .map(id => resolvedMows.find(x => x.snowprintId === id)!)
+                                        .filter(x => x !== undefined) ?? []
+                                }
+                                flexIndex={team.flexIndex}
+                                onCharClicked={() => {}}
+                                onMowClicked={() => {}}
+                                zoom={zoom}
+                                disabledUnits={[
+                                    ...team.chars.map(
+                                        char =>
+                                            resolvedChars.find(x => x.snowprintId === char && x.rank === Rank.Locked)
+                                                ?.snowprintId
+                                    ),
+                                    ...(team.mows?.map(
+                                        mow => resolvedMows.find(x => x.snowprintId === mow && !x.unlocked)?.snowprintId
+                                    ) ?? []),
+                                ]
+                                    .flatMap(id => (id ? [id] : []))
+                                    .filter(id => id !== undefined)}
+                            />
+                        </div>
+                    </div>
+                ))}
             </div>
         </div>
     );

@@ -20,6 +20,7 @@ import { isCharacter, isMow } from '@/fsd/4-entities/unit/units.functions';
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
 import { AbilityVariablesChart } from '@/fsd/3-features/character-details/ability-variables-chart';
 import { CharacterStatGrowthChart } from '@/fsd/3-features/character-details/character-stat-growth-chart';
+import { UnitStatRadarChart } from '@/fsd/3-features/character-details/unit-stat-radar-chart';
 
 import { MythicQuestsSection } from './mythic-quests-section';
 import {
@@ -574,6 +575,10 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                             unitName={unit.name}
                             factionId={unit.faction}
                         />
+                        <div className="flex w-full max-w-[320px] min-w-64 flex-1 flex-col items-center gap-1">
+                            <span className="self-start text-xs text-(--soft-fg)">Stat percentiles</span>
+                            <UnitStatRadarChart snowprintId={char.snowprintId} />
+                        </div>
                     </>
                 )}
                 {mow && mowEntry && (

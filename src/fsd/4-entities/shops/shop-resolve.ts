@@ -11,7 +11,7 @@ const BP_SEASON_40_START_MS = Date.UTC(2026, 7, 2); // 2026-08-02T00:00:00Z
 const BP_SEASON_DURATION_MS = 35 * 86_400_000; // exactly 5 weeks
 
 /** Rogue Trader's featured-legendary rotation boundary: Trajann is featured until this date, then Lucius. */
-const ELDER_SHOP_FEATURED_ROTATION_MS = Date.UTC(2026, 7, 1); // 2026-08-01T00:00:00Z
+const ELDER_SHOP_FEATURED_ROTATION_MS = Date.UTC(2026, 8, 6); // 2026-09-06T00:00:00Z
 
 export function bpSeasonStartMs(season: number): number {
     return BP_SEASON_40_START_MS + (season - 40) * BP_SEASON_DURATION_MS;
