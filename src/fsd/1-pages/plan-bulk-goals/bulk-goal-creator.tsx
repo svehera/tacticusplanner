@@ -16,7 +16,7 @@ import { ArrowRight, SlidersHorizontal } from 'lucide-react';
 import { Fragment, type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
-import { goalsLimit, rankToRarity, rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
+import { goalsLimit, rarityToMaxRank } from 'src/models/constants';
 import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 
 import { filterMap } from '@/fsd/5-shared/lib';
@@ -32,6 +32,13 @@ import { IUnit } from '@/fsd/4-entities/unit';
 
 import { GoalSummaryTable } from '@/fsd/3-features/goals';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
+
+import {
+    ABILITY_MAX_BY_RARITY,
+    ALL_RANK_VALUES,
+    ALL_STAR_VALUES,
+    enforceUnitThresholdMinimums,
+} from '@/fsd/2-widgets/unit-threshold-picker';
 
 import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-snapshots-assets-provider';
 import { ITeam2 } from '../plan-teams2/models';
@@ -62,13 +69,8 @@ const createBulkUnitEntry = () => ({
     incrementalGoalMode: 'milestones' as IncrementalGoalMode,
 });
 
-const rankValues = Object.values(Rank)
-    .filter((rank): rank is Rank => typeof rank === 'number')
-    .toSorted((first, second) => first - second);
-
-const allStarValues = Object.values(RarityStars)
-    .filter((s): s is RarityStars => typeof s === 'number')
-    .toSorted((a, b) => a - b);
+const rankValues = ALL_RANK_VALUES;
+const allStarValues = ALL_STAR_VALUES;
 
 type GoalInsertPriorityMode = 'highest' | 'lowest';
 
@@ -77,41 +79,22 @@ const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Ran
 const toVisibility = (shown: boolean): RosterSnapshotShowVariableSettings =>
     shown ? RosterSnapshotShowVariableSettings.Always : RosterSnapshotShowVariableSettings.Never;
 
-const abilityMaxByRarity: Record<Rarity, number> = {
-    [Rarity.Common]: 8,
-    [Rarity.Uncommon]: 17,
-    [Rarity.Rare]: 26,
-    [Rarity.Epic]: 35,
-    [Rarity.Legendary]: 50,
-    [Rarity.Mythic]: 60,
-};
+const abilityMaxByRarity = ABILITY_MAX_BY_RARITY;
 
-const enforceMinimums = (entry: {
-    unit: IUnit | undefined;
-    rank: Rank;
-    rarity: Rarity;
-    stars: number;
-    activeAbilityLevel: number;
-    passiveAbilityLevel: number;
-    unlockMow: boolean;
-    preFarmLegendaryMythic: boolean;
-    useIncrementalGoals: boolean;
-    incrementalGoalMode: IncrementalGoalMode;
-}) => {
-    const minimumRarity = rankToRarity[entry.rank] ?? Rarity.Common;
-    const rarity = Math.max(entry.rarity, minimumRarity) as Rarity;
-    const minStars = rarityToStars[rarity] ?? RarityStars.None;
-    const maxStars = rarityToMaxStars[rarity] ?? RarityStars.MythicWings;
-    const maxAbility = abilityMaxByRarity[rarity] ?? 60;
-
-    return {
-        ...entry,
-        rarity,
-        stars: Math.min(Math.max(entry.stars, minStars), maxStars),
-        activeAbilityLevel: Math.min(Math.max(entry.activeAbilityLevel, 1), maxAbility),
-        passiveAbilityLevel: Math.min(Math.max(entry.passiveAbilityLevel, 1), maxAbility),
-    };
-};
+const enforceMinimums = <
+    T extends {
+        rank: Rank;
+        rarity: Rarity;
+        stars: number;
+        activeAbilityLevel: number;
+        passiveAbilityLevel: number;
+    },
+>(
+    entry: T
+): T => ({
+    ...entry,
+    ...enforceUnitThresholdMinimums(entry),
+});
 
 const getBulkUnitEntryFromUnit = (unit: IUnit | undefined) => {
     if (!unit) {

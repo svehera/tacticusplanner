@@ -1,4 +1,3 @@
-/* eslint-disable import-x/no-internal-modules */
 import { ArrowDownward, ArrowForward, ArrowUpward, DeleteForever } from '@mui/icons-material';
 import Checkbox from '@mui/material/Checkbox';
 import FormControlLabel from '@mui/material/FormControlLabel';
@@ -6,14 +5,12 @@ import IconButton from '@mui/material/IconButton';
 import MenuItem from '@mui/material/MenuItem';
 import TextField from '@mui/material/TextField';
 
-import { rarityToMaxRank, rarityToMaxStars, rarityToStars } from 'src/models/constants';
-
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
-import { RankSelect, RaritySelect, StarsSelect } from '@/fsd/5-shared/ui';
 import { RankIcon, RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { IUnit } from '@/fsd/4-entities/unit';
-import { UnitsAutocomplete } from '@/fsd/4-entities/unit/ui/units-autocomplete';
+
+import { UnitThresholdPicker } from '@/fsd/2-widgets/unit-threshold-picker';
 
 type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
 
@@ -94,12 +91,6 @@ export const BulkGoalCreatorUnitCard = ({
                     <DeleteForever fontSize="small" />
                 </IconButton>
             </div>
-            <UnitsAutocomplete
-                // eslint-disable-next-line unicorn/no-null -- autocomplete requires null
-                unit={entry.unit ?? null}
-                options={options}
-                onUnitChange={argument => onUnitChange(argument ?? undefined)}
-            />
             {'unlocked' in (entry.unit ?? {}) && !(entry.unit as { unlocked?: boolean }).unlocked && (
                 <FormControlLabel
                     control={
@@ -188,55 +179,23 @@ export const BulkGoalCreatorUnitCard = ({
                     </TextField>
                 )}
             </div>
-            <div className="flex items-end gap-2">
-                <RaritySelect
-                    label="Rarity"
-                    rarityValues={Object.values(Rarity).filter(r => typeof r === 'number') as Rarity[]}
-                    value={entry.rarity}
-                    valueChanges={onRarityChange}
-                    hideText
-                />
-                {(entry.unit === undefined || 'rank' in entry.unit) && (
-                    <RankSelect
-                        label="Rank"
-                        rankValues={rankValues.filter(r => r <= (rarityToMaxRank[entry.rarity] ?? Rank.Adamantine3))}
-                        value={entry.rank}
-                        valueChanges={onRankChange}
-                        hideText
-                    />
-                )}
-                <StarsSelect
-                    label="Stars"
-                    starsValues={allStarValues.filter(
-                        s =>
-                            s >= (rarityToStars[entry.rarity] ?? RarityStars.None) &&
-                            s <= (rarityToMaxStars[entry.rarity] ?? RarityStars.MythicWings)
-                    )}
-                    value={entry.stars}
-                    valueChanges={onStarsChange}
-                    hideText
-                />
-            </div>
-            <div className="flex gap-2">
-                <TextField
-                    label={entry.unit && !('rank' in entry.unit) ? 'Primary Ability' : 'Active Ability'}
-                    type="number"
-                    size="small"
-                    fullWidth
-                    inputProps={{ min: 1, max: 60 }}
-                    value={entry.activeAbilityLevel}
-                    onChange={event => onActiveAbilityLevelChange(Number.parseInt(event.target.value) || 1)}
-                />
-                <TextField
-                    label={entry.unit && !('rank' in entry.unit) ? 'Secondary Ability' : 'Passive Ability'}
-                    type="number"
-                    size="small"
-                    fullWidth
-                    inputProps={{ min: 1, max: 60 }}
-                    value={entry.passiveAbilityLevel}
-                    onChange={event => onPassiveAbilityLevelChange(Number.parseInt(event.target.value) || 1)}
-                />
-            </div>
+            <UnitThresholdPicker
+                unit={entry.unit}
+                options={options}
+                rank={entry.rank}
+                rarity={entry.rarity}
+                stars={entry.stars}
+                activeAbilityLevel={entry.activeAbilityLevel}
+                passiveAbilityLevel={entry.passiveAbilityLevel}
+                rankValues={rankValues}
+                allStarValues={allStarValues}
+                onUnitChange={onUnitChange}
+                onRankChange={onRankChange}
+                onRarityChange={onRarityChange}
+                onStarsChange={onStarsChange}
+                onActiveAbilityLevelChange={onActiveAbilityLevelChange}
+                onPassiveAbilityLevelChange={onPassiveAbilityLevelChange}
+            />
         </div>
     );
 };
