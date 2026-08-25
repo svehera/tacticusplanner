@@ -1,5 +1,6 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
+import { Popover, PopoverButton, PopoverPanel } from '@headlessui/react';
 import AddIcon from '@mui/icons-material/Add';
 import ExpandMore from '@mui/icons-material/ExpandMore';
 import Button from '@mui/material/Button';
@@ -11,7 +12,7 @@ import Paper from '@mui/material/Paper';
 import ToggleButton from '@mui/material/ToggleButton';
 import ToggleButtonGroup from '@mui/material/ToggleButtonGroup';
 import Tooltip from '@mui/material/Tooltip';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, SlidersHorizontal } from 'lucide-react';
 import { Fragment, type ReactNode, useCallback, useContext, useMemo, useState } from 'react';
 import { v4 } from 'uuid';
 
@@ -21,6 +22,7 @@ import { DispatchContext, StoreContext } from 'src/reducers/store.provider';
 import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
+import { Switch, buttonStyles } from '@/fsd/5-shared/ui';
 import { RankIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService as FsdCharactersService } from '@/fsd/4-entities/character/characters.service';
@@ -71,6 +73,9 @@ const allStarValues = Object.values(RarityStars)
 type GoalInsertPriorityMode = 'highest' | 'lowest';
 
 const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Rank: 2, Abilities: 3 };
+
+const toVisibility = (shown: boolean): RosterSnapshotShowVariableSettings =>
+    shown ? RosterSnapshotShowVariableSettings.Always : RosterSnapshotShowVariableSettings.Never;
 
 const abilityMaxByRarity: Record<Rarity, number> = {
     [Rarity.Common]: 8,
@@ -159,6 +164,12 @@ export const BulkGoalCreator = () => {
     const [goalOrder, setGoalOrder] = useState<'character' | 'type'>('character');
     const [characterPriorityMode, setCharacterPriorityMode] = useState<CharacterPriorityMode>('character');
     const [goalInsertPriorityMode, setGoalInsertPriorityMode] = useState<GoalInsertPriorityMode>('lowest');
+    const [previewViewOptions, setPreviewViewOptions] = useState({
+        showShards: true,
+        showMythicShards: true,
+        showXpLevel: true,
+        showEquipment: false,
+    });
 
     const addBulkUnitUpdater = useCallback(() => {
         setBulkUnits(previous => [...previous, createBulkUnitEntry()]);
@@ -684,11 +695,58 @@ export const BulkGoalCreator = () => {
                 </div>
                 {bulkTeamCharacters.length > 0 && (
                     <div className="mt-4">
-                        <div className="mb-2 text-sm font-semibold">Preview:</div>
+                        <div className="mb-2 flex items-center justify-between">
+                            <span className="text-sm font-semibold">Preview:</span>
+                            <Popover className="relative">
+                                <PopoverButton
+                                    className={buttonStyles({
+                                        appearance: 'outline',
+                                        intent: 'secondary',
+                                        size: 'small',
+                                    })}>
+                                    View <SlidersHorizontal className="ml-1 size-4" />
+                                </PopoverButton>
+                                <PopoverPanel
+                                    anchor="bottom end"
+                                    className="z-50 mt-1 flex w-[220px] flex-col gap-2 rounded-xl border border-(--border) bg-(--overlay) p-4 shadow-xl">
+                                    <Switch
+                                        isSelected={previewViewOptions.showShards}
+                                        onChange={showShards =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showShards }))
+                                        }>
+                                        Shards
+                                    </Switch>
+                                    <Switch
+                                        isSelected={previewViewOptions.showMythicShards}
+                                        onChange={showMythicShards =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showMythicShards }))
+                                        }>
+                                        Mythic Shards
+                                    </Switch>
+                                    <Switch
+                                        isSelected={previewViewOptions.showXpLevel}
+                                        onChange={showXpLevel =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showXpLevel }))
+                                        }>
+                                        XP Level
+                                    </Switch>
+                                    <Switch
+                                        isSelected={previewViewOptions.showEquipment}
+                                        onChange={showEquipment =>
+                                            setPreviewViewOptions(previous => ({ ...previous, showEquipment }))
+                                        }>
+                                        Equipment
+                                    </Switch>
+                                </PopoverPanel>
+                            </Popover>
+                        </div>
                         <TeamFlow
                             chars={bulkTeamCharacters}
                             mows={bulkTeamMows}
-                            showEquipment={RosterSnapshotShowVariableSettings.Never}
+                            showShards={toVisibility(previewViewOptions.showShards)}
+                            showMythicShards={toVisibility(previewViewOptions.showMythicShards)}
+                            showXpLevel={toVisibility(previewViewOptions.showXpLevel)}
+                            showEquipment={toVisibility(previewViewOptions.showEquipment)}
                             onCharClicked={() => {}}
                             onMowClicked={() => {}}
                         />

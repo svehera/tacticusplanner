@@ -15,6 +15,9 @@ interface Props {
     disabledUnits?: string[]; // List of character snowprintIds that should be shown as disabled
     flexIndex?: number;
     zoom?: number;
+    showShards?: RosterSnapshotShowVariableSettings;
+    showMythicShards?: RosterSnapshotShowVariableSettings;
+    showXpLevel?: RosterSnapshotShowVariableSettings;
     showEquipment?: RosterSnapshotShowVariableSettings;
     onCharClicked: (char: ICharacter2) => void;
     onMowClicked: (mow: IMow2) => void;
@@ -26,6 +29,9 @@ export const TeamFlow: React.FC<Props> = ({
     disabledUnits,
     flexIndex,
     zoom = 1,
+    showShards = RosterSnapshotShowVariableSettings.Always,
+    showMythicShards = RosterSnapshotShowVariableSettings.Always,
+    showXpLevel = RosterSnapshotShowVariableSettings.Always,
     showEquipment = RosterSnapshotShowVariableSettings.Always,
     onCharClicked,
     onMowClicked,
@@ -42,9 +48,9 @@ export const TeamFlow: React.FC<Props> = ({
                         onClick={() => onCharClicked(char)}
                         className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                         <RosterSnapshotCharacter
-                            showMythicShards={RosterSnapshotShowVariableSettings.Always}
-                            showShards={RosterSnapshotShowVariableSettings.Always}
-                            showXpLevel={RosterSnapshotShowVariableSettings.Always}
+                            showMythicShards={showMythicShards}
+                            showShards={showShards}
+                            showXpLevel={showXpLevel}
                             showAbilities={RosterSnapshotShowVariableSettings.Always}
                             showEquipment={showEquipment}
                             showTooltip={false}
@@ -90,15 +96,15 @@ export const TeamFlow: React.FC<Props> = ({
                                 onClick={() => onMowClicked(mow)}
                                 className="cursor-pointer transition-transform duration-100 hover:brightness-110 active:scale-95">
                                 <RosterSnapshotCharacter
-                                    showMythicShards={RosterSnapshotShowVariableSettings.Always}
-                                    showShards={RosterSnapshotShowVariableSettings.Always}
+                                    showMythicShards={showMythicShards}
+                                    showShards={showShards}
                                     showXpLevel={RosterSnapshotShowVariableSettings.Never}
                                     showAbilities={
                                         disabledUnits?.includes(mow.snowprintId)
                                             ? RosterSnapshotShowVariableSettings.Never
                                             : RosterSnapshotShowVariableSettings.Always
                                     }
-                                    showEquipment={RosterSnapshotShowVariableSettings.Always}
+                                    showEquipment={showEquipment}
                                     showTooltip={false}
                                     mow={Teams2Service.convertMow(mow)}
                                     mowData={mow}
