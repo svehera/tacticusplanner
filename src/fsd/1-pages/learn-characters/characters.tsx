@@ -255,7 +255,7 @@ export const LearnCharacters = () => {
         params.delete('minRange');
         params.delete('maxRange');
         params.delete('damageTypes');
-        params.delete('trait');
+        params.delete('traits');
         params.delete('alliance');
         params.delete('name');
         navigate({ search: params.toString() }, { replace: true });

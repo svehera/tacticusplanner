@@ -20,13 +20,20 @@ export const teams2Reducer = (state: ITeam2[], action: Teams2Action) => {
         case 'Reorder': {
             // Rewrites the listed teams into the slots they already occupy, so everything else keeps
             // its position and no assumption is made about the array being priority-sorted.
+            const nameCounts = new Map<string, number>();
+            for (const team of state) {
+                nameCounts.set(team.name, (nameCounts.get(team.name) ?? 0) + 1);
+            }
             const nameSet = new Set(action.orderedNames);
             const slots: number[] = [];
             for (const [index, team] of state.entries()) {
                 if (nameSet.has(team.name)) slots.push(index);
             }
-            // Unknown or duplicated names would drop teams — refuse the whole operation instead.
-            if (slots.length !== action.orderedNames.length) {
+            // Unknown or duplicated-in-request names would drop teams, and a name that's ambiguous
+            // in `state` (ITeam2 has no unique id) can't be mapped to a specific slot — refuse the
+            // whole operation in every case rather than risk `byName` silently conflating teams.
+            const hasAmbiguousName = action.orderedNames.some(name => (nameCounts.get(name) ?? 0) > 1);
+            if (slots.length !== action.orderedNames.length || hasAmbiguousName) {
                 return state;
             }
 
