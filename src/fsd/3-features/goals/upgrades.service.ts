@@ -3041,8 +3041,6 @@ export class UpgradesService {
 
             for (const location of combinedUpgrade.locations) {
                 const campaignProgress = settings.campaignsProgress[location.campaign];
-                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
-                const isCampaignEventLocationAvailable = currentCampaignEventLocations.includes(location.campaign);
 
                 location.isUnlocked = this.mapNodeNumber(location.campaign, location.nodeNumber) <= campaignProgress;
                 location.isPassFilter =
@@ -3058,24 +3056,24 @@ export class UpgradesService {
                         location.id === completedLocation.id &&
                         completedLocation.dailyBattleCount !== completedLocation.raidsToPerform
                 );
-
-                // location can be suggested for raids only if it is unlocked, passed other filters
-                // and in case it is Campaign Event location user should have specific Campaign Event selected.
-                location.isSuggested =
-                    location.isUnlocked &&
-                    location.isPassFilter &&
-                    (!isCampaignEventLocation || isCampaignEventLocationAvailable);
             }
 
+            // Farming-preference eligibility (Least Energy / Custom campaign types) is decided over
+            // every unlocked, campaign-event-eligible location, ignoring the user's location filters
+            // entirely — a restrictive filter must only ever remove a location the preference already
+            // chose, never cause it to fall back onto a different, less-preferred one (e.g. a
+            // Necron-only enemy filter excluding a cheaper "Mirror" location — Necron-character
+            // content whose on-screen enemies are the mirrored faction — and promoting a pricier
+            // plain-Necron location that was never actually the cheapest choice for that material).
+            let preferredLocations = combinedUpgrade.locations.filter(location => {
+                const isCampaignEventLocation = campaignEventsLocations.includes(location.campaign as Campaign);
+                const isCampaignEventLocationAvailable = currentCampaignEventLocations.includes(location.campaign);
+                return location.isUnlocked && (!isCampaignEventLocation || isCampaignEventLocationAvailable);
+            });
+
             if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastEnergy) {
-                const minEnergyPerItem = Math.min(
-                    ...combinedUpgrade.locations.filter(x => x.isSuggested).map(x => x.energyPerItem)
-                );
-                for (const location of combinedUpgrade.locations) {
-                    if (location.energyPerItem > minEnergyPerItem) {
-                        location.isSuggested = false;
-                    }
-                }
+                const minEnergyPerItem = Math.min(...preferredLocations.map(x => x.energyPerItem));
+                preferredLocations = preferredLocations.filter(x => x.energyPerItem <= minEnergyPerItem);
             } else if (
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings
@@ -3090,10 +3088,12 @@ export class UpgradesService {
                         CampaignType.Extremis,
                     ]
                 );
-                const selectedLocations = combinedUpgrade.locations.filter(x => x.isSuggested);
-                const ignoredLocations = selectedLocations.filter(x => !locationTypes.has(x.campaignType));
+                preferredLocations = preferredLocations.filter(x => locationTypes.has(x.campaignType));
+            }
 
-                for (const location of ignoredLocations) location.isSuggested = false;
+            const preferredLocationsSet = new Set(preferredLocations);
+            for (const location of combinedUpgrade.locations) {
+                location.isSuggested = preferredLocationsSet.has(location) && location.isPassFilter;
             }
 
             for (const location of combinedUpgrade.locations) {

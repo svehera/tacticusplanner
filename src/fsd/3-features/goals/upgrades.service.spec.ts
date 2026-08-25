@@ -989,6 +989,92 @@ describe('UpgradesService.planDayRaiding', () => {
         expect(boonRaid).toBeDefined();
         expect(raidLocationIds).toEqual(expect.arrayContaining(boonLocations));
     });
+
+    it('does not let a Necrons-only filter promote a less-efficient Least Energy fallback that starves Indomitus Elite', () => {
+        // Real data: `upgArmR030` drops from both I74 (Indomitus, Necron enemies, energyCost 6, 50%
+        // potential drop -> energyPerItem 12) and IME04 (Indomitus Mirror Elite -- Necron-character
+        // content whose on-screen enemies are the mirrored Imperial faction, energyCost 10 but a
+        // *guaranteed* drop -> energyPerItem 10, cheaper). Least Energy should always prefer IME04;
+        // a Necrons-only enemy filter excludes IME04 (its enemies aren't Necron) and must not then
+        // promote I74 as a "fallback" -- I74 was never the cheapest choice, so the material should end
+        // up with zero suggested locations, not a substitute that competes with Indomitus Elite for
+        // the day's Machine Hunt-sorted energy budget.
+        const upgradeIdA = 'upgArmR030';
+        const upgradeIdB = 'upgDmgU010'; // Indomitus Elite's own real reward.
+        const baseUpgradeA = FsdUpgradesService.baseUpgradesData[upgradeIdA];
+        const baseUpgradeB = FsdUpgradesService.baseUpgradesData[upgradeIdB];
+        const baseCharA = CharactersService.charactersData[0];
+        const baseCharB = CharactersService.charactersData[1];
+        const goalA = createRankGoal(baseCharA, { goalId: 'goal-a' });
+        const goalB = createRankGoal(baseCharB, { goalId: 'goal-b' });
+
+        const locI74 = { ...CampaignsService.campaignsComposed['I74'] } as ICampaignBattleComposed;
+        const locIME04 = { ...CampaignsService.campaignsComposed['IME04'] } as ICampaignBattleComposed;
+        const locIndomitusElite = { ...CampaignsService.campaignsComposed['IE01'] } as ICampaignBattleComposed;
+
+        const buildRemainingMats = (): Record<string, ICombinedUpgrade> => ({
+            [upgradeIdA]: {
+                ...baseUpgradeA,
+                requiredCount: 1,
+                countByGoalId: { [goalA.goalId]: 1 },
+                relatedCharacters: [goalA.unitId],
+                relatedGoals: [goalA.goalId],
+                locations: [{ ...locI74 }, { ...locIME04 }],
+            } as ICombinedUpgrade,
+            [upgradeIdB]: {
+                ...baseUpgradeB,
+                requiredCount: 1,
+                countByGoalId: { [goalB.goalId]: 1 },
+                relatedCharacters: [goalB.unitId],
+                relatedGoals: [goalB.goalId],
+                locations: [{ ...locIndomitusElite }],
+            } as ICombinedUpgrade,
+        });
+
+        const baseSettings = createSettings({
+            dailyEnergy: 16,
+            campaignsProgress: createAllCampaignsProgress(),
+            preferences: {
+                ...createSettings().preferences,
+                dailyEnergy: 16,
+                farmPreferences: {
+                    order: IDailyRaidsFarmOrder.totalMaterials,
+                    homeScreenEvent: IDailyRaidsHomeScreenEvent.machineHunt,
+                },
+                farmStrategy: DailyRaidsStrategy.leastEnergy,
+            },
+        });
+
+        // Baseline: no location filter. IME04 (cheaper) is the only suggested source; I74 is not.
+        const unfilteredMats = buildRemainingMats();
+        UpgradesService.populateLocationsData(unfilteredMats, { ...baseSettings, filters: createFilters() });
+        const unfilteredLocationsA = unfilteredMats[upgradeIdA].locations;
+        expect(unfilteredLocationsA.find(l => l.id === locIME04.id)?.isSuggested).toBe(true);
+        expect(unfilteredLocationsA.find(l => l.id === locI74.id)?.isSuggested).toBe(false);
+
+        // Necrons-only filter: IME04 is excluded (its enemies aren't Necron) -- I74 must NOT be
+        // promoted as a substitute; the material should have zero suggested locations.
+        const filteredMats = buildRemainingMats();
+        UpgradesService.populateLocationsData(filteredMats, {
+            ...baseSettings,
+            filters: createFilters({ enemiesFactions: ['Necrons'] }),
+        });
+        const filteredLocationsA = filteredMats[upgradeIdA].locations;
+        expect(filteredLocationsA.find(l => l.id === locIME04.id)?.isSuggested).toBe(false);
+        expect(filteredLocationsA.find(l => l.id === locI74.id)?.isSuggested).toBe(false);
+
+        // Indomitus Elite's own candidacy is unaffected either way -- it still gets raided.
+        const raidsIndomitusElite = (mats: Record<string, ICombinedUpgrade>): boolean => {
+            const locs = Object.values(mats)
+                .flatMap(mat => mat.locations)
+                .filter(loc => loc.isSuggested);
+            const day: IUpgradesRaidsDay = { raids: [], energyTotal: 0, raidsTotal: 0, onslaughtTokens: 0 };
+            UpgradesService.planDayRaiding(day, baseSettings, baseSettings.dailyEnergy, locs, mats, {}, [goalA, goalB]);
+            return day.raids.some(raid => raid.raidLocations.some(loc => loc.id === locIndomitusElite.id));
+        };
+        expect(raidsIndomitusElite(unfilteredMats)).toBe(true);
+        expect(raidsIndomitusElite(filteredMats)).toBe(true);
+    });
 });
 
 describe('UpgradesService.addRaidForLocation (daily caps)', () => {
