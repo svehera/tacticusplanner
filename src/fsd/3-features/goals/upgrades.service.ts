@@ -3074,6 +3074,15 @@ export class UpgradesService {
             if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastEnergy) {
                 const minEnergyPerItem = Math.min(...preferredLocations.map(x => x.energyPerItem));
                 preferredLocations = preferredLocations.filter(x => x.energyPerItem <= minEnergyPerItem);
+            } else if (settings.preferences.farmStrategy === DailyRaidsStrategy.leastEnergyFewestTickets) {
+                const minEnergyPerItem = Math.min(...preferredLocations.map(x => x.energyPerItem));
+                const leastEnergyLocations = preferredLocations.filter(x => x.energyPerItem <= minEnergyPerItem);
+                // Among locations tied for least energy, a higher energy cost per battle yields
+                // proportionally more items per battle at the same efficiency -- fewer raids (tickets)
+                // needed for the same total items, since one ticket is spent per battle regardless of
+                // its energy cost.
+                const maxEnergyCost = Math.max(...leastEnergyLocations.map(x => x.energyCost));
+                preferredLocations = leastEnergyLocations.filter(x => x.energyCost >= maxEnergyCost);
             } else if (
                 settings.preferences.farmStrategy === DailyRaidsStrategy.custom &&
                 settings.preferences.customSettings

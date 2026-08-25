@@ -3649,6 +3649,81 @@ describe('UpgradesService.populateLocationsData', () => {
         expect(locationLocked.isSuggested).toBe(false);
     });
 
+    it('keeps only the highest-energy-cost location among those tied for least energy', () => {
+        const locationFewerTickets = { ...CampaignsService.campaignsComposed['FoC05'], energyCost: 12 };
+        const locationMoreTickets = { ...CampaignsService.campaignsComposed['OME26'], energyCost: 6 };
+        const locationWorseEnergy = { ...CampaignsService.campaignsComposed['O01'] };
+        const locationLocked = { ...CampaignsService.campaignsComposed['SH08'] };
+        locationFewerTickets.energyPerItem = 10;
+        locationMoreTickets.energyPerItem = 10;
+        locationWorseEnergy.energyPerItem = 15;
+
+        const combinedUpgrade: ICombinedUpgrade = {
+            ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+            requiredCount: 1,
+            countByGoalId: {},
+            goalToUnit: {},
+            relatedCharacters: [],
+            relatedGoals: [],
+            locations: [locationFewerTickets, locationMoreTickets, locationWorseEnergy, locationLocked],
+        };
+
+        const settings = createSettings({
+            campaignsProgress: {
+                [Campaign.FoC]: 5,
+                [Campaign.OME]: 26,
+                [Campaign.O]: 1,
+                [Campaign.SH]: 5,
+            } as IEstimatedRanksSettings['campaignsProgress'],
+            preferences: {
+                ...createSettings().preferences,
+                farmStrategy: DailyRaidsStrategy.leastEnergyFewestTickets,
+            },
+        });
+
+        UpgradesService.populateLocationsData({ [combinedUpgrade.id]: combinedUpgrade }, settings);
+
+        expect(locationFewerTickets.isSuggested).toBe(true);
+        expect(locationMoreTickets.isSuggested).toBe(false);
+        expect(locationWorseEnergy.isSuggested).toBe(false);
+        expect(locationLocked.isSuggested).toBe(false);
+    });
+
+    it('degrades to plain least-energy behavior when nothing is tied', () => {
+        const locationHighEnergy = { ...CampaignsService.campaignsComposed['FoC05'] };
+        const locationLowEnergy = { ...CampaignsService.campaignsComposed['OME26'] };
+        const locationLocked = { ...CampaignsService.campaignsComposed['SH08'] };
+
+        const combinedUpgrade: ICombinedUpgrade = {
+            ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+            requiredCount: 1,
+            countByGoalId: {},
+            goalToUnit: {},
+            relatedCharacters: [],
+            relatedGoals: [],
+            locations: [locationHighEnergy, locationLowEnergy, locationLocked],
+        };
+
+        const settings = createSettings({
+            completedLocations: [createCompletedLocation(locationLowEnergy)],
+            campaignsProgress: {
+                [Campaign.FoC]: 5,
+                [Campaign.OME]: 26,
+                [Campaign.SH]: 5,
+            } as IEstimatedRanksSettings['campaignsProgress'],
+            preferences: {
+                ...createSettings().preferences,
+                farmStrategy: DailyRaidsStrategy.leastEnergyFewestTickets,
+            },
+        });
+
+        UpgradesService.populateLocationsData({ [combinedUpgrade.id]: combinedUpgrade }, settings);
+
+        expect(locationLowEnergy.isSuggested).toBe(true);
+        expect(locationHighEnergy.isSuggested).toBe(false);
+        expect(locationLocked.isSuggested).toBe(false);
+    });
+
     it('keeps all unlocked locations suggested for least-time strategy', () => {
         const locationA = { ...CampaignsService.campaignsComposed['FoC05'] };
         const locationB = { ...CampaignsService.campaignsComposed['O01'] };
