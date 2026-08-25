@@ -127,6 +127,17 @@ export function rewardInfo(
         };
     }
 
+    // ── MoW components: mowComponent_{Alliance} (internal-only, not a real reward string — see draft-alliance.ts) ──
+    const mowComponentMatch = /^mowComponent_(Imperial|Xenos|Chaos)$/.exec(type);
+    if (mowComponentMatch) {
+        const alliance = mowComponentMatch[1] as Alliance;
+        return {
+            icon: <MiscIcon icon={`${alliance.toLowerCase()}Component`} width={iconSize} height={iconSize} />,
+            label: `${alliance} MoW Component`,
+            qty,
+        };
+    }
+
     // ── forge badges: itemAscensionResource_{Rarity} ─────────────────────────
     const forgeMatch = type.match(/^itemAscensionResource_(Uncommon|Rare|Epic|Legendary|Mythic)$/);
     if (forgeMatch) {
