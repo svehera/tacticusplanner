@@ -26,6 +26,7 @@ export interface IMowStatic2 {
     name: string;
     faction: FactionId;
     alliance: string;
+    deployableAlliance: Alliance;
     icon: string;
     roundIcon: string;
     primaryAbility: IMowStaticAbility;
