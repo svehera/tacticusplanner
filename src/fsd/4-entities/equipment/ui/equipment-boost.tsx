@@ -63,19 +63,17 @@ export const EquipmentBoost = ({
         }
     }
     return (
-        <div>
-            <table>
-                <tbody>
-                    <tr>
-                        <td>
-                            {icon1} {value1}
-                        </td>
-                        <td>
-                            {icon2 === undefined ? '' : icon2} {value2 === undefined ? '' : value2}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div className="flex items-center gap-2 text-xs">
+            {icon1 !== undefined && (
+                <span className="flex items-center gap-0.5">
+                    {icon1} {value1}
+                </span>
+            )}
+            {icon2 !== undefined && (
+                <span className="flex items-center gap-0.5">
+                    {icon2} {value2}
+                </span>
+            )}
         </div>
     );
 };

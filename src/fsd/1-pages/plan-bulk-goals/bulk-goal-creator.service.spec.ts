@@ -31,6 +31,34 @@ const makeCharacterEntry = (overrides: Partial<BulkUnitEntry> = {}): BulkUnitEnt
     ...overrides,
 });
 
+/** A minimal, non-incremental/non-pre-farm entry — one plain Rank or Ascend goal per unit. */
+const makeSimpleEntry = (snowprintId: string, overrides: Partial<BulkUnitEntry> = {}): BulkUnitEntry => ({
+    unit: {
+        snowprintId,
+        rank: Rank.Stone1,
+        rarity: Rarity.Common,
+        stars: RarityStars.OneStar,
+        activeAbilityLevel: 1,
+        passiveAbilityLevel: 1,
+        primaryAbilityLevel: 1,
+        secondaryAbilityLevel: 1,
+        name: snowprintId,
+        shortName: snowprintId,
+        icon: '',
+        roundIcon: '',
+    } as unknown as BulkUnitEntry['unit'],
+    rank: Rank.Stone1,
+    rarity: Rarity.Common,
+    stars: RarityStars.OneStar,
+    activeAbilityLevel: 1,
+    passiveAbilityLevel: 1,
+    unlockMow: false,
+    preFarmLegendaryMythic: false,
+    useIncrementalGoals: false,
+    incrementalGoalMode: 'milestones',
+    ...overrides,
+});
+
 describe('bulk-goal-creator.service', () => {
     it('splits incremental pre-farm core segment across D2.5 instead of overlapping D1->D3 goals', () => {
         const plans = getBulkRankGoalPlans({
@@ -83,6 +111,7 @@ describe('bulk-goal-creator.service', () => {
         const plannedGoals = buildBulkPlannedGoals({
             bulkUnits: [makeCharacterEntry()],
             goalOrder: 'character',
+            characterPriorityMode: 'character',
             createId: () => 'id',
         });
 
@@ -132,5 +161,62 @@ describe('bulk-goal-creator.service', () => {
                 }),
             ])
         );
+    });
+
+    it('tier priority mode groups Rank goals by target rank across characters, ignoring character order', () => {
+        const charA = makeSimpleEntry('charA', { rank: Rank.Diamond1 });
+        const charB = makeSimpleEntry('charB', { rank: Rank.Silver1 });
+
+        const tierGoals = buildBulkPlannedGoals({
+            bulkUnits: [charA, charB],
+            goalOrder: 'type',
+            characterPriorityMode: 'tier',
+            createId: () => 'id',
+        });
+        expect(tierGoals.map(goal => goal.character)).toEqual(['charB', 'charA']);
+
+        const characterOrderGoals = buildBulkPlannedGoals({
+            bulkUnits: [charA, charB],
+            goalOrder: 'type',
+            characterPriorityMode: 'character',
+            createId: () => 'id',
+        });
+        expect(characterOrderGoals.map(goal => goal.character)).toEqual(['charA', 'charB']);
+    });
+
+    it('tier priority mode groups Ascend goals by target rarity, then target stars, then character', () => {
+        const charA = makeSimpleEntry('charA', { rarity: Rarity.Legendary, stars: RarityStars.RedOneStar });
+        const charB = makeSimpleEntry('charB', { rarity: Rarity.Epic, stars: RarityStars.FiveStars });
+        const charC = makeSimpleEntry('charC', { rarity: Rarity.Epic, stars: RarityStars.OneStar });
+
+        const tierGoals = buildBulkPlannedGoals({
+            bulkUnits: [charA, charB, charC],
+            goalOrder: 'type',
+            characterPriorityMode: 'tier',
+            createId: () => 'id',
+        });
+        // Epic before Legendary; within Epic, 1-star target before 5-star target.
+        expect(tierGoals.map(goal => goal.character)).toEqual(['charC', 'charB', 'charA']);
+
+        const characterOrderGoals = buildBulkPlannedGoals({
+            bulkUnits: [charA, charB, charC],
+            goalOrder: 'type',
+            characterPriorityMode: 'character',
+            createId: () => 'id',
+        });
+        expect(characterOrderGoals.map(goal => goal.character)).toEqual(['charA', 'charB', 'charC']);
+    });
+
+    it('tier priority mode groups Abilities goals by max(target active, target passive) level', () => {
+        const charA = makeSimpleEntry('charA', { activeAbilityLevel: 20, passiveAbilityLevel: 1 });
+        const charB = makeSimpleEntry('charB', { activeAbilityLevel: 1, passiveAbilityLevel: 5 });
+
+        const tierGoals = buildBulkPlannedGoals({
+            bulkUnits: [charA, charB],
+            goalOrder: 'type',
+            characterPriorityMode: 'tier',
+            createId: () => 'id',
+        });
+        expect(tierGoals.map(goal => goal.character)).toEqual(['charB', 'charA']);
     });
 });

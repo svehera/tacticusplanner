@@ -16,6 +16,8 @@ import { CharactersService } from '@/fsd/4-entities/character';
 import { NpcService } from '@/fsd/4-entities/npc';
 import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 
+import { HsePointsCalculator } from './hse-points-calculator';
+
 interface HseBattle {
     id: string;
     battle: ICampaignBattleComposed;
@@ -328,11 +330,12 @@ export const HomeScreenEvent = () => {
 
     return (
         <div>
+            <HsePointsCalculator />
             {showHseWarning && (
                 <div className="text-warning-fg bg-warning border-warning mb-2 rounded-md border px-3 py-2">
                     <div className="flex items-start justify-between gap-3">
                         <h1 className="m-0 text-base leading-relaxed font-semibold">
-                            This page is informational only. You most likely want the Daily Raids page instead, where
+                            This section is informational only. You most likely want the Daily Raids page instead, where
                             you can go to settings and tell it to optimize for whichever home-screen event is ongoing,
                             so you make progress on the event without derailing your goals.
                         </h1>

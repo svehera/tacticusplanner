@@ -6,7 +6,6 @@ import {
     RarityMapper,
     RarityString,
     Alliance,
-    Equipment,
     Trait,
     DamageType,
     Rarity,
@@ -191,14 +190,6 @@ export class CharactersService {
         unitData.icon = isReleased ? unitData.icon : 'comingSoon.webp';
 
         return unitData;
-    }
-
-    public static parseEquipmentType(equip: string): Equipment | undefined {
-        // ToDo: consider using `Zod.enum` for this kind of parsing/validation
-        // Ref: https://zod.dev/api#enum
-        const equipmentType = equipmentTypeMapping[equip as keyof typeof equipmentTypeMapping];
-        if (!equipmentType) return undefined;
-        return equipmentType;
     }
 
     static canonicalName(identifier: string): string {

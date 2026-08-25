@@ -26,3 +26,15 @@ export { default as squigSmash } from './squig-smash.json';
 export { default as traitBoostFlying } from './trait-boost-flying.json';
 export { default as traitBoostPsyker } from './trait-boost-psyker.json';
 export { default as warpSurge } from './warp-surge.json';
+
+export {
+    getHseDurationDays,
+    getHseRemainingDays,
+    getHseSchedule,
+    getHseScheduleStatus,
+    hseSchedules,
+} from './hse-schedule';
+export type { HseSchedule, HseScheduleStatus } from './hse-schedule';
+export { hseModeOverrides } from './hse-mode-overrides';
+export { hseRaidPointsOverrides } from './hse-raid-points-overrides';
+export type { HseRaidPointsOverride } from './hse-raid-points-overrides';

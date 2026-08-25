@@ -5,6 +5,7 @@ import { useAuth } from '@/fsd/5-shared/model';
 import { Button, DebugJson } from '@/fsd/5-shared/ui';
 import { UnitPortraitAssetsProvider } from '@/fsd/5-shared/ui/unit-portrait';
 
+import { FilterTab } from './filter-tab';
 import { parseErrorState, parseUnits } from './guild-roster-snapshots.helpers';
 import { getGuildMemberRosterApi, getGuildMembersApi, GuildTab, MemberState } from './guild-roster-snapshots.models';
 import { MembersTab } from './members-tab';
@@ -158,6 +159,7 @@ export const GuildRosterSnapshots = () => {
                     <Tab label="Roster Snapshots" value="roster-snapshots" />
                     <Tab label="Members" value="members" />
                     <Tab label="Settings" value="shared-leaderboards" />
+                    <Tab label="Filter" value="filter" />
                 </Tabs>
 
                 <div>
@@ -169,6 +171,7 @@ export const GuildRosterSnapshots = () => {
                         <MembersTab memberStates={memberStates} rostersLoaded={hasLoadedOnce} />
                     )}
                     {activeTab === 'shared-leaderboards' && <SharedLeaderboardsTab />}
+                    {activeTab === 'filter' && <FilterTab members={members} memberStates={memberStates} />}
                 </div>
             </div>
         </UnitPortraitAssetsProvider>

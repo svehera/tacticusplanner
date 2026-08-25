@@ -64,6 +64,17 @@ function compareByFightOrder(a: BossLoopRow, b: BossLoopRow): number {
 }
 
 /**
+ * Legendary `set` index (0-based) the boss ladder now starts each loop at — the game's loop range
+ * changed from L1→M2 to L4→M3. Hand-set; revisit if the loop range changes again.
+ */
+export const CURRENT_LOOP_MIN_LEGENDARY_SET = 3; // L4
+
+/** Drops Legendary rows below {@link CURRENT_LOOP_MIN_LEGENDARY_SET}; Mythic rows are unchanged. */
+export function restrictToCurrentLoopRange(rows: BossLoopRow[]): BossLoopRow[] {
+    return rows.filter(row => row.rarity !== Rarity.Legendary || row.set >= CURRENT_LOOP_MIN_LEGENDARY_SET);
+}
+
+/**
  * One target's HP at the end of every loop it was attacked in — the `remainingHp` of the
  * chronologically-last attack on it in that loop, so `0` means it died. Bombs are included: they
  * reduce HP and can land the kill.

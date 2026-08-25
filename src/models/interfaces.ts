@@ -19,6 +19,7 @@ import { Alliance, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICampaignsProgress, ICampaignsFilters, CampaignGroupType, CampaignType } from '@/fsd/4-entities/campaign';
 import { CharacterBias, ICharacter2 } from '@/fsd/4-entities/character';
+import { HomescreenEventTierKey } from '@/fsd/4-entities/homescreen_events';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 import { IMow, IMow2, IMowDatabase } from '@/fsd/4-entities/mow';
 
@@ -300,6 +301,14 @@ interface IDailyRaidsFarmPreferences {
     trainingRushPreferences?: ITrainingRushPreferences;
     warpSurgePreferences?: IWarpSurgePreferences;
     machineHuntPreferences?: IMachineHuntPreferences;
+    /**
+     * Used only by the plan-hse points calculator (never set by the Daily Raids Settings dialog).
+     * When set, raid HSE scoring uses the real, JSON-driven HSE (via `getGenericHsePoints`)
+     * instead of the legacy 4-value `homeScreenEvent` enum switch.
+     */
+    customHseEventName?: string;
+    /** Roster power-level tier to resolve `customHseEventName` against; set alongside it. */
+    customHseTier?: HomescreenEventTierKey;
 }
 
 export interface IDailyRaidsPreferences {
@@ -406,6 +415,8 @@ export interface IPersonalGoal {
 
     // upgrade mow
     unitId?: string;
+    startingFirstAbilityLevel?: number;
+    startingSecondAbilityLevel?: number;
     firstAbilityLevel?: number;
     secondAbilityLevel?: number;
 
@@ -426,6 +437,8 @@ export interface IEstimatedRanksSettings {
     upgrades: Record<string, number>;
     onslaughtTokensToday?: number;
     onslaughtPreferences?: IOnslaughtPreferences;
+    /** Caps `generateDailyRaidsList`'s simulated day count. Used by the plan-hse points calculator to bound the simulation to an HSE's remaining/total day span; omitted elsewhere (defaults to the usual 1000-day safety cap). */
+    hseMaxDays?: number;
 }
 
 export interface IInventory {

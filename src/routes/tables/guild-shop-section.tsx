@@ -52,6 +52,10 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
 
     const name = charId ? (unit?.name ?? charId) : (upgradeData?.label ?? item.rewardType);
 
+    const displayAcquired = Math.min(Math.floor(acquired), required);
+    const remaining = required - displayAcquired;
+    const totalCost = remaining > 0 ? Math.ceil(remaining / item.rewardQty) * item.costAmount : 0;
+
     const availableText =
         item.maxPerDay === 1 ? `1×${item.rewardQty} available` : `Up to ${item.maxPerDay}×${item.rewardQty} available`;
 
@@ -62,7 +66,7 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                 <div className="flex w-12 shrink-0 flex-col items-center gap-1">
                     <div className="mt-1 flex h-10 w-10 items-center justify-center">{icon}</div>
                     <span className="mt-1 text-sm font-bold text-(--danger)">
-                        {Math.min(Math.floor(acquired), required)}/{required}
+                        {displayAcquired}/{required}
                     </span>
                 </div>
                 <div className="flex min-w-0 flex-1 flex-col gap-1.5">
@@ -85,6 +89,20 @@ const ShopItemCard: FC<ShopItemCardProps> = ({ item, acquired, required, neededB
                             width={14}
                         />{' '}
                         {item.costAmount.toLocaleString()} each
+                        {remaining > 0 && (
+                            <>
+                                <br />
+                                Total:{' '}
+                                <img
+                                    src={snowprintIcons.guildCredits.file}
+                                    alt="gc"
+                                    className="inline-block"
+                                    height={14}
+                                    width={14}
+                                />{' '}
+                                {totalCost.toLocaleString()}
+                            </>
+                        )}
                     </p>
                     <span className="w-fit rounded bg-(--soft-bg) px-1.5 py-0.5 text-[10px] text-(--soft-fg)">
                         Guild Shop
