@@ -6,7 +6,7 @@ import { useContext, useEffect, useMemo, useState } from 'react';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { Rank, RarityStars } from '@/fsd/5-shared/model';
-import { RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, RarityIcon, StarsIcon } from '@/fsd/5-shared/ui/icons';
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 import { ISnapshotCharacter, UnitPortrait as RosterSnapshotCharacter } from '@/fsd/5-shared/ui/unit-portrait';
 
@@ -241,17 +241,28 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                             </div>
                                         )}
                                         {forecast.ohSoCloseEligible && (
-                                            <FormControlLabel
-                                                label={`Buy Oh, So Close! shards (${forecast.ohSoCloseShardCost})`}
-                                                control={
-                                                    <Switch
-                                                        checked={config.buyOhSoCloseShards}
-                                                        onChange={(_, buyOhSoCloseShards) =>
-                                                            updateRoundConfig(forecast.round, { buyOhSoCloseShards })
-                                                        }
-                                                    />
-                                                }
-                                            />
+                                            <div className="flex flex-col gap-1">
+                                                <FormControlLabel
+                                                    label={`Buy Oh, So Close! shards (${forecast.ohSoCloseShardCost})`}
+                                                    control={
+                                                        <Switch
+                                                            checked={config.buyOhSoCloseShards}
+                                                            onChange={(_, buyOhSoCloseShards) =>
+                                                                updateRoundConfig(forecast.round, {
+                                                                    buyOhSoCloseShards,
+                                                                })
+                                                            }
+                                                        />
+                                                    }
+                                                />
+                                                <div className="flex items-center gap-1 text-xs text-(--soft-fg)">
+                                                    <span>
+                                                        &quot;Oh, So Close!&quot; offer will cost you{' '}
+                                                        {forecast.ohSoCloseBlackstoneCost}
+                                                    </span>
+                                                    <MiscIcon icon={'blackstone'} width={14} height={14} />
+                                                </div>
+                                            </div>
                                         )}
                                     </div>
 
