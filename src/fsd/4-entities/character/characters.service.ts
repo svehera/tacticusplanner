@@ -38,15 +38,6 @@ export interface IRosterFilterCriteria {
     alliance?: Alliance[];
 }
 
-const equipmentTypeMapping = {
-    Crit: Equipment.Crit,
-    Block: Equipment.Block,
-    'Crit Booster': Equipment.CritBooster,
-    'Block Booster': Equipment.BlockBooster,
-    Defensive: Equipment.Defensive,
-    Defense: Equipment.Defensive,
-} as const;
-
 export class CharactersService {
     // eslint-disable-next-line unicorn/consistent-function-scoping
     static readonly charactersData: ICharacterData[] = charactersData.map(character => this.convertUnitData(character));
