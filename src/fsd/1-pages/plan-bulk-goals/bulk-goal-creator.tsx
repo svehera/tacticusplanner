@@ -40,6 +40,8 @@ import {
     buildBulkPlannedGoals,
     getBulkRankGoalPlans,
     getRankGoalSubOrder,
+    getTierValue,
+    type CharacterPriorityMode,
     type GoalCategory,
     type IncrementalGoalMode,
     type RankStep,
@@ -155,6 +157,7 @@ export const BulkGoalCreator = () => {
     >([]);
 
     const [goalOrder, setGoalOrder] = useState<'character' | 'type'>('character');
+    const [characterPriorityMode, setCharacterPriorityMode] = useState<CharacterPriorityMode>('character');
     const [goalInsertPriorityMode, setGoalInsertPriorityMode] = useState<GoalInsertPriorityMode>('lowest');
 
     const addBulkUnitUpdater = useCallback(() => {
@@ -285,6 +288,7 @@ export const BulkGoalCreator = () => {
             unitIcon: string;
             unitIndex: number;
             rankSubOrder: number;
+            tierValue: number;
             change: ReactNode;
         }> = [];
 
@@ -302,6 +306,7 @@ export const BulkGoalCreator = () => {
                 unitIcon,
                 unitIndex,
                 rankSubOrder: getRankGoalSubOrder(filterRarities),
+                tierValue: getTierValue('Rank', { rank: end }),
                 change: <RankChangeArrow start={start} end={end} filterRarities={filterRarities} />,
             });
         };
@@ -324,6 +329,7 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Unlock', {}),
                     change: (
                         <div className="flex items-center gap-2">
                             <span>Locked</span>
@@ -340,6 +346,7 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Unlock', {}),
                     change: <span>Unlock MoW</span>,
                 });
             }
@@ -352,6 +359,7 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Ascend', { rarity: entry.rarity, stars: entry.stars as RarityStars }),
                     change: (
                         <AscendChangeArrow
                             startRarity={unit.rarity}
@@ -400,6 +408,9 @@ export const BulkGoalCreator = () => {
                     unitIcon,
                     unitIndex: index,
                     rankSubOrder: 2,
+                    tierValue: getTierValue('Abilities', {
+                        abilityLevel: Math.max(entry.activeAbilityLevel, entry.passiveAbilityLevel),
+                    }),
                     change: (
                         <AbilitiesChangeText
                             startActive={currentActive}
@@ -413,7 +424,16 @@ export const BulkGoalCreator = () => {
             }
         }
 
-        if (goalOrder === 'type') {
+        if (goalOrder === 'type' && characterPriorityMode === 'tier') {
+            rows.sort((a, b) => {
+                const catDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
+                if (catDiff !== 0) return catDiff;
+                const tierDiff = a.tierValue - b.tierValue;
+                if (tierDiff !== 0) return tierDiff;
+                if (a.unitIndex !== b.unitIndex) return a.unitIndex - b.unitIndex;
+                return a.rankSubOrder - b.rankSubOrder;
+            });
+        } else if (goalOrder === 'type') {
             rows.sort((a, b) => {
                 const catDiff = CATEGORY_ORDER[a.category] - CATEGORY_ORDER[b.category];
                 if (catDiff !== 0) return catDiff;
@@ -442,11 +462,11 @@ export const BulkGoalCreator = () => {
         }
 
         return rows;
-    }, [bulkUnits, goalOrder]);
+    }, [bulkUnits, goalOrder, characterPriorityMode]);
 
     const plannedGoals = useMemo(
-        () => buildBulkPlannedGoals({ bulkUnits, goalOrder, createId: v4 }),
-        [bulkUnits, goalOrder]
+        () => buildBulkPlannedGoals({ bulkUnits, goalOrder, characterPriorityMode, createId: v4 }),
+        [bulkUnits, goalOrder, characterPriorityMode]
     );
 
     const currentLowestPriority = Math.max(0, ...goals.map(goal => goal.priority));
@@ -687,6 +707,16 @@ export const BulkGoalCreator = () => {
                                     <ToggleButton value="character">Character Order</ToggleButton>
                                     <ToggleButton value="type">Type Order</ToggleButton>
                                 </ToggleButtonGroup>
+                                {goalOrder === 'type' && (
+                                    <ToggleButtonGroup
+                                        size="small"
+                                        exclusive
+                                        value={characterPriorityMode}
+                                        onChange={(_, value) => value && setCharacterPriorityMode(value)}>
+                                        <ToggleButton value="character">Priority by Character</ToggleButton>
+                                        <ToggleButton value="tier">Priority by Tier</ToggleButton>
+                                    </ToggleButtonGroup>
+                                )}
                                 <ToggleButtonGroup
                                     size="small"
                                     exclusive
