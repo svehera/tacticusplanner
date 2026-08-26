@@ -16,3 +16,4 @@ export { OnslaughtTierSelect } from './onslaught-tier-select';
 export { RankSelect } from './rank-select';
 export { RaritySelect } from './rarity-select';
 export { StarsSelect } from './stars-select';
+export { TraitSelect } from './trait-select';

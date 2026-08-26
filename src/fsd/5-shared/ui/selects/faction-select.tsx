@@ -11,17 +11,20 @@ export const FactionSelect = ({
     value,
     valueChanges,
     label,
+    ariaLabel,
 }: {
     label: string;
     factionValues: FactionId[];
     value: FactionId[];
     valueChanges: (value: FactionId[]) => void;
+    ariaLabel?: string;
 }) => (
     <SelectMulti
         options={factionValues}
         value={value}
         onChange={valueChanges}
         label={label}
+        ariaLabel={ariaLabel}
         placeholder="Select factions"
         renderOption={faction => (
             <div className="flex items-center gap-3">

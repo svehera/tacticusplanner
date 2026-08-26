@@ -1,10 +1,9 @@
 /* eslint-disable import-x/no-internal-modules */
-/* eslint-disable boundaries/element-types */
 import { cloneDeep, sum } from 'lodash';
 
 import { TacticusLegendaryEventLane, TacticusLegendaryEventProgress } from '@/fsd/5-shared/lib';
 
-import { LegendaryEventEnum } from '@/fsd/4-entities/lre/@x/character';
+import { LegendaryEventEnum, LegendaryEventService } from '@/fsd/4-entities/lre';
 
 import { ILegendaryEventTrack, RequirementStatus } from '@/fsd/3-features/lre';
 import { LegendaryEventBase } from '@/fsd/3-features/lre/model/base.le';
@@ -301,26 +300,7 @@ export class LeProgressService {
 
     /** Maps a unit's snowprintId to the planner internal ID for legendary events. */
     public static mapEventId(charId: string): LegendaryEventEnum | undefined {
-        switch (charId) {
-            case 'bloodDante': {
-                return LegendaryEventEnum.Dante;
-            }
-            case 'custoTrajann': {
-                return LegendaryEventEnum.Trajann;
-            }
-            case 'emperLucius': {
-                return LegendaryEventEnum.Lucius;
-            }
-            case 'tauFarsight': {
-                return LegendaryEventEnum.Farsight;
-            }
-            case 'votanUthar': {
-                return LegendaryEventEnum.Uthar;
-            }
-            default: {
-                return undefined;
-            }
-        }
+        return LegendaryEventService.getEventByCharacterSnowprintId(charId)?.id;
     }
 
     /**

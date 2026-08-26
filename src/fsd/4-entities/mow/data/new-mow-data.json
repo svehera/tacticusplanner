@@ -5,6 +5,7 @@
             "name": "Galatian",
             "faction": "Ultramarines",
             "alliance": "Imperial",
+            "deployableAlliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_ultra_dreadnought_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_ultra_dreadnought_01.png",
             "primaryAbility": {
@@ -143,6 +144,7 @@
             "name": "Exorcist",
             "faction": "Sisterhood",
             "alliance": "Imperial",
+            "deployableAlliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_adept_exorcist_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_adept_exorcist_01.png",
             "primaryAbility": {
@@ -281,6 +283,7 @@
             "name": "Reanimator",
             "faction": "Necrons",
             "alliance": "Xenos",
+            "deployableAlliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_necro_reanimator_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_necro_reanimator_01.png",
             "primaryAbility": {
@@ -419,6 +422,7 @@
             "name": "Malleus Rocket Launcher",
             "faction": "AstraMilitarum",
             "alliance": "Imperial",
+            "deployableAlliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_astra_ordnancebattery_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_astra_ordnancebattery_01.png",
             "primaryAbility": {
@@ -557,6 +561,7 @@
             "name": "Forgefiend",
             "faction": "BlackLegion",
             "alliance": "Chaos",
+            "deployableAlliance": "Imperial",
             "icon": "snowprint_assets/characters/ui_image_portrait_black_forgefiend_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_black_forgefiend_01.png",
             "primaryAbility": {
@@ -695,6 +700,7 @@
             "name": "Plagueburst Crawler",
             "faction": "DeathGuard",
             "alliance": "Chaos",
+            "deployableAlliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_death_crawler_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_death_crawler_01.png",
             "primaryAbility": {
@@ -833,6 +839,7 @@
             "name": "Rukkatrukk",
             "faction": "Orks",
             "alliance": "Xenos",
+            "deployableAlliance": "Imperial",
             "icon": "snowprint_assets/characters/ui_image_portrait_orkss_rukkatruk_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_orkss_rukkatrukk_01.png",
             "primaryAbility": {
@@ -971,6 +978,7 @@
             "name": "Tson'ji",
             "faction": "Tau",
             "alliance": "Xenos",
+            "deployableAlliance": "Imperial",
             "icon": "snowprint_assets/characters/ui_image_portrait_tauta_broadside_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tauta_broadside_01.png",
             "primaryAbility": {
@@ -1109,6 +1117,7 @@
             "name": "Z'Kar",
             "faction": "ThousandSons",
             "alliance": "Chaos",
+            "deployableAlliance": "Xenos",
             "icon": "snowprint_assets/characters/ui_image_portrait_thous_daemonprince_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_thous_daemonprince_01.png",
             "primaryAbility": {
@@ -1247,6 +1256,7 @@
             "name": "Storm Speeder",
             "faction": "DarkAngels",
             "alliance": "Imperial",
+            "deployableAlliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_darka_stormspeeder_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_darka_stormspeeder_01.png",
             "primaryAbility": {
@@ -1385,6 +1395,7 @@
             "name": "Biovore",
             "faction": "Tyranids",
             "alliance": "Xenos",
+            "deployableAlliance": "Chaos",
             "icon": "snowprint_assets/characters/ui_image_portrait_tyran_biovore_01.png",
             "roundIcon": "snowprint_assets/characters/ui_image_RoundPortrait_tyran_biovore_01.png",
             "primaryAbility": {

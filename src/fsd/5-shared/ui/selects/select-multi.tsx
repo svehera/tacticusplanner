@@ -25,6 +25,8 @@ export interface SelectMultiProps<T> {
     placeholder?: string;
     className?: string;
     disabled?: boolean;
+    /** See `Select`'s `ariaLabel` — same purpose, for when the visible label lives outside this component. */
+    ariaLabel?: string;
 }
 
 export const SelectMulti = <T,>({
@@ -38,6 +40,7 @@ export const SelectMulti = <T,>({
     placeholder = 'Select…',
     className,
     disabled,
+    ariaLabel,
 }: SelectMultiProps<T>) => {
     const defaultRenderValue = (items: T[]) => (
         <div className="flex flex-wrap items-center gap-2">
@@ -55,7 +58,9 @@ export const SelectMulti = <T,>({
 
             <Listbox value={value} onChange={onChange} by={by} multiple disabled={disabled}>
                 <div className="relative">
-                    <ListboxButton className={cn(triggerDisabled(triggerMulti, disabled), 'gap-2 pr-3')}>
+                    <ListboxButton
+                        aria-label={ariaLabel}
+                        className={cn(triggerDisabled(triggerMulti, disabled), 'gap-2 pr-3')}>
                         <div className="min-w-0 flex-1">
                             {value.length === 0 ? (
                                 <span className="text-(--soft-fg)">{placeholder}</span>
