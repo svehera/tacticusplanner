@@ -3,11 +3,10 @@ import { BadgeCheck, GripVertical, Lock, Pause, Play } from 'lucide-react';
 import React, { useMemo } from 'react';
 
 import { GoToRaidsButton } from 'src/routes/goals/raids-button';
-import type { GoalDragHandle } from 'src/routes/goals/sortable-goal-grid';
 
 import { getEstimatedDateShort } from '@/fsd/5-shared/lib';
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
-import { AccessibleTooltip } from '@/fsd/5-shared/ui';
+import { AccessibleTooltip, type DragHandleProps } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
@@ -47,7 +46,7 @@ interface Props {
     mows: IMow2[];
     bookRarity: Rarity;
     /** When provided, renders a drag grip in the header wired to the dnd-kit sortable activator. */
-    dragHandle?: GoalDragHandle;
+    dragHandle?: DragHandleProps;
     /** Moves the goal by one position within its section. Negative is up. */
     onMove?: (delta: number) => void;
     canMoveUp?: boolean;

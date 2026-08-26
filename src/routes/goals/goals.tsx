@@ -13,6 +13,7 @@ import { GoalSection } from 'src/routes/goals/goal-section';
 import { EditGoalDialog } from 'src/shared-components/goals/edit-goal-dialog';
 import { SetGoalDialog } from 'src/shared-components/goals/set-goal-dialog';
 
+import { moveInOrder } from '@/fsd/5-shared/lib';
 import { numberToThousandsString } from '@/fsd/5-shared/lib/number-to-thousands-string';
 import { Alliance, Rarity, RarityMapper, useAuth } from '@/fsd/5-shared/model';
 import { Accordion, AccordionHeader, AccordionBody, Button, PageToolbar, PageToolbarDivider } from '@/fsd/5-shared/ui';
@@ -34,7 +35,6 @@ import { GoalsService } from '@/fsd/3-features/goals/goals.service';
 import { UpgradesService } from '@/fsd/3-features/goals/upgrades.service';
 
 import { GoalColorCodingToggle, GoalColorMode } from './goal-color-coding-toggle';
-import { moveGoalInOrder } from './reorder';
 
 const MYTHIC_UNCRAFTABLE_UPGRADES = [
     {
@@ -152,7 +152,7 @@ export const Goals = () => {
 
     /** Arrow move in the GLOBAL priority order — unlike drag, this can cross a section boundary. */
     const handleMove = (goalId: string, delta: number): void => {
-        const reordered = moveGoalInOrder(
+        const reordered = moveInOrder(
             goals.map(g => g.id),
             goalId,
             delta

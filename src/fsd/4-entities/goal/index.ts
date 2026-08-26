@@ -1,5 +1,4 @@
 export { PersonalGoalType, CampaignsLocationsUsage } from './enums';
-export { normalizeGoalOrder } from './goal-order';
 export type {
     ICharacterUpgradeRankGoal,
     ICharacterUpgradeMow,

@@ -12,6 +12,8 @@ export { bmcLink, discordInvitationLink, isTabletOrMobileMediaQuery } from './co
 export { ConfirmationDialog } from './confirmation-dialog';
 export { ButtonPill } from './button-pill';
 export { TabBar } from './tab-bar';
+export { SortableList } from './sortable-list';
+export type { DragHandleProps } from './sortable-list';
 
 export * from './selects';
 

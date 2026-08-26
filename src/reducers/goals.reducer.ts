@@ -1,4 +1,4 @@
-﻿import { normalizeGoalOrder } from '@/fsd/4-entities/goal';
+﻿import { normalizeOrder } from '@/fsd/5-shared/lib';
 
 import { TypedGoalSelect } from '@/fsd/3-features/goals/goals.models';
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
@@ -35,7 +35,7 @@ export type GoalsAction =
 export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
     switch (action.type) {
         case 'Set': {
-            return normalizeGoalOrder(action.value);
+            return normalizeOrder(action.value);
         }
         case 'Reorder': {
             // Rewrites the listed goals into the slots they already occupy, so everything else keeps
@@ -55,7 +55,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             for (const [position, slot] of slots.entries()) {
                 newState[slot] = byId.get(action.orderedIds[position])!;
             }
-            return normalizeGoalOrder(newState);
+            return normalizeOrder(newState);
         }
         case 'Add': {
             if (state.some(x => x.id === action.goal.id)) {
@@ -66,7 +66,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
             const targetIndex = Math.max(0, Math.min(action.goal.priority - 1, newState.length));
             newState.splice(targetIndex, 0, action.goal);
 
-            return normalizeGoalOrder(newState);
+            return normalizeOrder(newState);
         }
         case 'Delete': {
             const deletedId = action.goalId;
@@ -75,7 +75,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
                 .map(x =>
                     x.preFarmGoalIds ? { ...x, preFarmGoalIds: x.preFarmGoalIds.filter(id => id !== deletedId) } : x
                 );
-            return normalizeGoalOrder(remaining);
+            return normalizeOrder(remaining);
         }
         case 'DeleteAll': {
             return [];
@@ -105,7 +105,7 @@ export const goalsReducer = (state: IPersonalGoal[], action: GoalsAction) => {
 
             const finalGoals = [...otherGoals.slice(0, targetIndex), goalWithUpdates, ...otherGoals.slice(targetIndex)];
 
-            return normalizeGoalOrder(finalGoals);
+            return normalizeOrder(finalGoals);
         }
         case 'UpdateDailyRaids': {
             const { value } = action;
