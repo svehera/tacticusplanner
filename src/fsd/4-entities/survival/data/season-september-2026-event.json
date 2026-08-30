@@ -1,89 +1,95 @@
 {
-    "eventName": "season_may_2026_event",
-    "theme": "may_2026",
+    "eventName": "season_september_2026_event",
+    "theme": "september_2026",
     "featuredHero": {
-        "id": "astarCyrus",
-        "name": "Cyrus"
+        "id": "necroChronomancer",
+        "name": "Thothmek"
     },
-    "resourceId": "seasonalEventCurrencyMay2026",
+    "resourceId": "seasonalEventCurrencySeptember2026",
     "tradeInResourceAmountPerPoint": 250,
     "tradeInResourceAmountPerSeasonalCurrency": 150,
     "survival": {
-        "featuredHeroId": "astarCyrus",
+        "featuredHeroId": "necroChronomancer",
         "maxStamina": 5,
         "staminaRegenerationTime": 43201,
         "staminaRegenerationAmount": 1,
         "staminaGrantTokensOnStartPolicy": "None",
         "startStamina": 2,
-        "battleSetId": "survival_may_2026",
+        "battleSetId": "survival_september_2026",
         "pctOfMaxScoreToShowIfNoHighScore": 18,
         "scorePerTurnSkipped": 400,
         "scorePerKill": {
-            "necroNpc2FlayedOne:4": 42,
-            "tyranNpc1Hormagaunt:5": 61,
-            "tyranNpc2RipperSwarm:5": 57,
-            "blackNpc3TraitorGuardsman:6": 78,
-            "blackNpc1Bloodletter:4": 91,
-            "orksNpc1Grot:6": 83,
-            "orksNpc2OrkBoy:8": 112,
-            "thousNpc1PinkHorror:8": 109,
-            "thousNpc2Screamer:8": 117,
-            "genesNpc1Aberrant:10": 121,
-            "genesNpc3Neophyte:13": 119,
-            "genesNpc2Genestealer:13": 129,
-            "eldarNpc1Guardian:13": 167,
-            "eldarNpc2Warlock:13": 175,
-            "eldarBossRangerSurv:1": 852,
-            "tauNpc6Carnivore:13": 187,
-            "tauNpc1FireWarrior:16": 201,
-            "tauNpc5StealthSuit:16": 213,
-            "tauNpcDarkstrider:11": 909,
-            "necroNpc1Warrior:15": 198,
-            "necroNpc3Deathmark:15": 206,
-            "necroNpc4Destroyer:15": 222,
-            "necroBossChronomancerSurv:1": 999,
-            "blackNpc3TraitorGuardsman:20": 219,
-            "blackNpc4Havoc:20": 233,
-            "blackBossPossessionSurv:1": 1007,
-            "blackBossObliteratorSurv:1": 1111,
-            "tyranNpc2RipperSwarm:20": 244,
-            "tyranNpc3Termagant:23": 258,
-            "tyranNpc4Warrior:23": 252,
-            "tyranBossWingedPrimeSurv:1": 1134,
-            "tyranBossDeathleaperSurv:1": 1152,
-            "deathNpc1Poxwalker:27": 252,
-            "deathNpc3Nurglings:27": 258,
-            "deathNpc2PlagueMarine:27": 256,
-            "deathBossTyphusSurv:1": 1254,
-            "orksNpc2OrkBoy:42": 268,
-            "orksNpc3GrotTank:42": 272,
-            "orksNpcWarbossSurv:2": 1326,
-            "orksNpc6Stormboy:42": 288,
-            "eldarNpc1Guardian:33": 273,
-            "eldarNpc4Wraithguard:33": 291,
-            "eldarNpc3Harlequin:33": 279,
-            "eldarBossFarseerSurv:2": 1391,
-            "thousNpc2Screamer:33": 327,
-            "thousNpc3RubricMarine:35": 339,
-            "thousBossTerminatorSurv:1": 1499,
-            "thousBossInfernalMasterSurv:1": 1509,
-            "tauNpc5StealthSuit:40": 352,
-            "tauBossFarsightSurv:1": 1678,
-            "tauNpc3DroneShield:40": 336,
-            "tauNpc2DroneSniper:40": 328,
-            "genesNpc3Neophyte:41": 494,
-            "genesNpc1Aberrant:41": 526,
-            "genesNpc2Genestealer:41": 579,
-            "genesBossMagusSurv:1": 2179,
-            "genesBossKelermorphSurv:1": 2264,
-            "tyranNpc3Termagant:45": 727,
-            "tyranNpc4Warrior:45": 741,
-            "tyranNpc2RipperSwarm:45": 735,
-            "tyranBossNeurothropeSurv:1": 3401,
-            "tyranBossParasiteSurv:1": 3447,
-            "necroNpc1WarriorSurv:3": 1898,
-            "necroNpc4DestroyerSurv:3": 2102,
-            "CLONE_WAVE": 1000
+            "CLONE_WAVE": 1000,
+            "templNpc1Initiate:4": 42,
+            "astraNpc1Guardsman:6": 46,
+            "astraNpc3Voxcaster:6": 48,
+            "astraNpc4Mortar:6": 50,
+            "ultraNpc1Inceptor:7": 64,
+            "ultraNpc2Eliminator:7": 58,
+            "admecNpc1Vanguard:9": 105,
+            "admecNpc2Techpriest:9": 115,
+            "darkaNpc1Infiltrator:10": 148,
+            "darkaNpc2Hellblaster:10": 156,
+            "templNpc4Aggressor:12": 248,
+            "templNpc1Initiate:12": 182,
+            "templNpc2Neophyte:12": 184,
+            "templNpc3InitiatePyreblaster:12": 188,
+            "bloodNpc1Intercessor:16": 211,
+            "bloodBossDeathCompanySurv:1": 555,
+            "bloodBossIntercessorSurv:1": 535,
+            "adeptNpc3Warsuit:18": 267,
+            "adeptNpc1BattleSister:18": 227,
+            "adeptNpc2Zephyrim:18": 247,
+            "ultraNpc4HeavyIntercessor:20": 280,
+            "ultraNpc1Inceptor:20": 240,
+            "ultraBossTiguriusSurv:1": 780,
+            "ultraBossApothecarySurv:1": 760,
+            "ultraBossEliminatorSgtSurv:1": 750,
+            "astraNpc1Guardsman:22": 230,
+            "astraNpc3Voxcaster:22": 238,
+            "astraNpc4Mortar:22": 240,
+            "astarBossCyrusSurv:1": 790,
+            "admecNpc3Electropriest:24": 315,
+            "admecNpc1Vanguard:24": 295,
+            "admecNpc2Techpriest:24": 305,
+            "darkaNpc3Terminator:26": 321,
+            "darkaNpcAzrael:16": 797,
+            "darkaNpcAsmodai:16": 793,
+            "darkaNpcCompanion:16": 799,
+            "darkaNpcSternguard:16": 791,
+            "darkaNpcHellblaster:16": 795,
+            "bloodNpc1Intercessor:28": 303,
+            "bloodBossDanteSurv:1": 801,
+            "bloodBossMephistonSurv:1": 815,
+            "bloodBossSanguinarySurv:1": 797,
+            "adeptNpc3Warsuit:31": 357,
+            "adeptNpc1BattleSister:31": 307,
+            "adeptNpc2Zephyrim:31": 327,
+            "astraNpc5DeathRider:33": 198,
+            "spaceBossBlackmaneSurv:1": 820,
+            "spaceBossHoundSurv:1": 790,
+            "spaceBossWulfenSurv:1": 790,
+            "spaceBossWolfPriestSurv:1": 800,
+            "astraNpc2Lascannon:33": 204,
+            "templNpc1Initiate:36": 196,
+            "templBossAggressorSurv:1": 860,
+            "templBossSwordBrotherSurv:1": 840,
+            "templBossChampionSurv:1": 850,
+            "templBossAncientSurv:1": 830,
+            "templBossHelbrechtSurv:1": 870,
+            "templNpc2Neophyte:36": 202,
+            "templNpc3InitiatePyreblaster:36": 204,
+            "darkaBossTerminatorSurv:1": 1822,
+            "bloodBossTerminatorSurv:1": 1800,
+            "spaceBossRockfistSurv:1": 1782,
+            "spaceBossStormcallerSurv:1": 1778,
+            "astarBossLysanderSurv:1": 1836,
+            "ultraNpc4HeavyIntercessor:45": 488,
+            "ultraBossInceptorSgtSurv:1": 3618,
+            "ultraBossTitusSurv:3": 3680,
+            "ultraBossCalgarSurv:1": 3722,
+            "ultraNpc2Eliminator:45": 398,
+            "bloodNpc1IntercessorSurv:3": 2000
         },
         "rarityCapMilestones": {
             "Uncommon": "xp_seasonal:15",
@@ -114,12 +120,12 @@
             "Rare": 6,
             "Epic": 9
         },
-        "avatarId": "astar_cyrus_01",
+        "avatarId": "votan_champion_01",
         "isMachinesOfWarAllowedInBattle": false,
         "useLastStand": true,
         "lastStandConfig": {
             "strategicMultiplier": 25,
-            "strategicBuff": "EnvStrategicBuff:Killzone"
+            "strategicBuff": "EnvStrategicBuff:PowerMatrix"
         },
         "featuredHeroStatOverrides": {
             "Common": {
@@ -163,266 +169,264 @@
     "battle": {
         "tier": 0,
         "battleNr": 0,
-        "boardId": "survival_13",
-        "power": 60054257326,
+        "boardId": "survival_14",
+        "power": 58875323514,
         "waves": [
             {
                 "round": 1,
-                "power": 534,
+                "power": 440,
                 "army": [
-                    "necroNpc2FlayedOne:4",
-                    "necroNpc2FlayedOne:4",
-                    "necroNpc2FlayedOne:4",
-                    "necroNpc2FlayedOne:4",
-                    "necroNpc2FlayedOne:4",
-                    "necroNpc2FlayedOne:4"
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4",
+                    "templNpc1Initiate:4"
                 ],
-                "armyAfterCompletion": ["powupReinforcement", "powupSummonSpawn_ultraSmnInceptor:1"],
+                "armyAfterCompletion": ["powupMeleeHits", "powupSummonSpawn_necroSmnFlayedOne:1"],
                 "armyScore": 100
             },
             {
                 "round": 3,
-                "power": 352,
+                "power": 527,
                 "army": [
-                    "tyranNpc1Hormagaunt:5",
-                    "tyranNpc1Hormagaunt:5",
-                    "tyranNpc1Hormagaunt:5",
-                    "tyranNpc1Hormagaunt:5",
-                    "tyranNpc1Hormagaunt:5",
-                    "tyranNpc2RipperSwarm:5",
-                    "tyranNpc2RipperSwarm:5"
+                    "astraNpc1Guardsman:6",
+                    "astraNpc1Guardsman:6",
+                    "astraNpc1Guardsman:6",
+                    "astraNpc1Guardsman:6",
+                    "astraNpc3Voxcaster:6",
+                    "astraNpc3Voxcaster:6",
+                    "astraNpc3Voxcaster:6",
+                    "astraNpc4Mortar:6",
+                    "astraNpc4Mortar:6",
+                    "astraNpc4Mortar:6"
                 ],
-                "armyAfterCompletion": ["powupHits", "powupReinforcementShield"],
+                "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
                 "armyScore": 150
             },
             {
                 "round": 5,
-                "power": 358,
+                "power": 1042,
                 "army": [
-                    "blackNpc3TraitorGuardsman:6",
-                    "blackNpc3TraitorGuardsman:6",
-                    "blackNpc3TraitorGuardsman:6",
-                    "blackNpc3TraitorGuardsman:6",
-                    "blackNpc3TraitorGuardsman:6",
-                    "blackNpc1Bloodletter:4",
-                    "blackNpc1Bloodletter:4",
-                    "blackNpc1Bloodletter:4"
+                    "ultraNpc1Inceptor:7",
+                    "ultraNpc1Inceptor:7",
+                    "ultraNpc1Inceptor:7",
+                    "ultraNpc1Inceptor:7",
+                    "ultraNpc1Inceptor:7",
+                    "ultraNpc1Inceptor:7",
+                    "ultraNpc2Eliminator:7",
+                    "ultraNpc2Eliminator:7"
                 ],
-                "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
+                "armyAfterCompletion": ["powupDamage", "powupSummonSpawn_necroSmnWarrior:2"],
                 "armyScore": 150,
                 "rarityUpgradeOnCompletion": "Uncommon"
             },
             {
                 "round": 8,
-                "power": 1490,
+                "power": 2463,
                 "army": [
-                    "orksNpc1Grot:6",
-                    "orksNpc1Grot:6",
-                    "orksNpc1Grot:6",
-                    "orksNpc1Grot:6",
-                    "orksNpc1Grot:6",
-                    "orksNpc2OrkBoy:8",
-                    "orksNpc2OrkBoy:8",
-                    "orksNpc2OrkBoy:8",
-                    "orksNpc2OrkBoy:8",
-                    "orksNpc2OrkBoy:8"
+                    "admecNpc1Vanguard:9",
+                    "admecNpc1Vanguard:9",
+                    "admecNpc1Vanguard:9",
+                    "admecNpc1Vanguard:9",
+                    "admecNpc2Techpriest:9",
+                    "admecNpc2Techpriest:9",
+                    "admecNpc2Techpriest:9"
                 ],
-                "armyAfterCompletion": ["powupHealth", "powupSummonSpawn_templSmnAggressor:2"],
+                "armyAfterCompletion": ["powupArmor", "powupReinforcementShield"],
                 "armyScore": 200
             },
             {
                 "round": 10,
-                "power": 3611,
+                "power": 4171,
                 "army": [
-                    "thousNpc1PinkHorror:8",
-                    "thousNpc1PinkHorror:8",
-                    "thousNpc1PinkHorror:8",
-                    "thousNpc1PinkHorror:8",
-                    "thousNpc2Screamer:8",
-                    "thousNpc2Screamer:8",
-                    "thousNpc2Screamer:8",
-                    "thousNpc2Screamer:8",
-                    "thousNpc2Screamer:8"
+                    "darkaNpc1Infiltrator:10",
+                    "darkaNpc1Infiltrator:10",
+                    "darkaNpc1Infiltrator:10",
+                    "darkaNpc1Infiltrator:10",
+                    "darkaNpc1Infiltrator:10",
+                    "darkaNpc2Hellblaster:10",
+                    "darkaNpc2Hellblaster:10",
+                    "darkaNpc2Hellblaster:10"
                 ],
-                "armyAfterCompletion": ["powupHealing", "powupReactivateAbility"],
+                "armyAfterCompletion": ["powupHits", "powupSummonSpawn_necroSmnDeathmark:3"],
                 "armyScore": 250,
                 "rarityUpgradeOnCompletion": "Rare"
             },
             {
                 "round": 12,
-                "power": 7527,
+                "power": 7965,
                 "army": [
-                    "genesNpc1Aberrant:10",
-                    "genesNpc1Aberrant:10",
-                    "genesNpc1Aberrant:10",
-                    "genesNpc3Neophyte:13",
-                    "genesNpc3Neophyte:13",
-                    "genesNpc2Genestealer:13",
-                    "genesNpc2Genestealer:13",
-                    "genesNpc2Genestealer:13",
-                    "genesNpc2Genestealer:13"
+                    "templNpc4Aggressor:12",
+                    "templNpc1Initiate:12",
+                    "templNpc1Initiate:12",
+                    "templNpc1Initiate:12",
+                    "templNpc2Neophyte:12",
+                    "templNpc2Neophyte:12",
+                    "templNpc3InitiatePyreblaster:12"
                 ],
-                "armyAfterCompletion": ["powupDamage", "powupSummonSpawn_darkaSmnHellblaster:3"],
+                "armyAfterCompletion": ["powupReactivateAbility", "powupReinforcement"],
                 "armyScore": 400
             },
             {
                 "round": 14,
-                "power": 20184,
+                "power": 30588,
                 "army": [
-                    "eldarNpc1Guardian:13",
-                    "eldarNpc1Guardian:13",
-                    "eldarNpc1Guardian:13",
-                    "eldarNpc1Guardian:13",
-                    "eldarNpc1Guardian:13",
-                    "eldarNpc2Warlock:13",
-                    "eldarNpc2Warlock:13",
-                    "eldarNpc2Warlock:13",
-                    "eldarBossRangerSurv:1"
+                    "bloodNpc1Intercessor:16",
+                    "bloodNpc1Intercessor:16",
+                    "bloodNpc1Intercessor:16",
+                    "bloodNpc1Intercessor:16",
+                    "bloodNpc1Intercessor:16",
+                    "bloodBossDeathCompanySurv:1",
+                    "bloodBossIntercessorSurv:1"
                 ],
-                "armyAfterCompletion": ["powupReactivateAbility", "powupReinforcementShield"],
+                "armyAfterCompletion": ["powupReinforcementShield", "powupSummonSpawn_necroSmnSwarm:4"],
                 "armyScore": 450,
                 "rarityUpgradeOnCompletion": "Epic"
             },
             {
                 "round": 16,
-                "power": 34498,
+                "power": 45406,
                 "army": [
-                    "tauNpc6Carnivore:13",
-                    "tauNpc6Carnivore:13",
-                    "tauNpc6Carnivore:13",
-                    "tauNpc6Carnivore:13",
-                    "tauNpc1FireWarrior:16",
-                    "tauNpc1FireWarrior:16",
-                    "tauNpc5StealthSuit:16",
-                    "tauNpc5StealthSuit:16",
-                    "tauNpcDarkstrider:11"
+                    "adeptNpc3Warsuit:18",
+                    "adeptNpc1BattleSister:18",
+                    "adeptNpc1BattleSister:18",
+                    "adeptNpc1BattleSister:18",
+                    "adeptNpc1BattleSister:18",
+                    "adeptNpc2Zephyrim:18",
+                    "adeptNpc2Zephyrim:18",
+                    "adeptNpc2Zephyrim:18",
+                    "adeptNpc2Zephyrim:18"
                 ],
-                "armyAfterCompletion": ["powupMeleeHits", "powupSummonSpawn_darkaSmnTerminator:4"],
+                "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
                 "armyScore": 600
             },
             {
                 "round": 18,
-                "power": 85810,
+                "power": 108262,
                 "army": [
-                    "necroNpc1Warrior:15",
-                    "necroNpc1Warrior:15",
-                    "necroNpc1Warrior:15",
-                    "necroNpc1Warrior:15",
-                    "necroNpc3Deathmark:15",
-                    "necroNpc3Deathmark:15",
-                    "necroNpc4Destroyer:15",
-                    "necroBossChronomancerSurv:1"
+                    "ultraNpc4HeavyIntercessor:20",
+                    "ultraNpc1Inceptor:20",
+                    "ultraNpc1Inceptor:20",
+                    "ultraNpc1Inceptor:20",
+                    "ultraNpc1Inceptor:20",
+                    "ultraBossTiguriusSurv:1",
+                    "ultraBossApothecarySurv:1",
+                    "ultraBossEliminatorSgtSurv:1"
                 ],
-                "armyAfterCompletion": ["powupArmor", "powupReinforcement"],
+                "armyAfterCompletion": ["powupHealth", "powupReactivateAbility"],
                 "armyScore": 600
             },
             {
                 "round": 20,
-                "power": 110167,
+                "power": 115828,
                 "army": [
-                    "blackNpc3TraitorGuardsman:20",
-                    "blackNpc3TraitorGuardsman:20",
-                    "blackNpc3TraitorGuardsman:20",
-                    "blackNpc3TraitorGuardsman:20",
-                    "blackNpc3TraitorGuardsman:20",
-                    "blackNpc3TraitorGuardsman:20",
-                    "blackNpc4Havoc:20",
-                    "blackBossPossessionSurv:1",
-                    "blackBossObliteratorSurv:1"
+                    "astraNpc1Guardsman:22",
+                    "astraNpc1Guardsman:22",
+                    "astraNpc1Guardsman:22",
+                    "astraNpc1Guardsman:22",
+                    "astraNpc1Guardsman:22",
+                    "astarBossCyrusSurv:1",
+                    "astraNpc3Voxcaster:22",
+                    "astraNpc3Voxcaster:22",
+                    "astraNpc4Mortar:22",
+                    "astraNpc4Mortar:22",
+                    "astraNpc4Mortar:22",
+                    "astraNpc4Mortar:22"
                 ],
-                "armyAfterCompletion": ["powupHealing", "powupReactivateAbility"],
+                "armyAfterCompletion": ["powupHealing", "powupSummonSpawn_necroSmnWarrior:5"],
                 "armyScore": 650,
                 "rarityUpgradeOnCompletion": "Legendary"
             },
             {
                 "round": 22,
-                "power": 175807,
+                "power": 197445,
                 "army": [
-                    "tyranNpc2RipperSwarm:20",
-                    "tyranNpc2RipperSwarm:20",
-                    "tyranNpc2RipperSwarm:20",
-                    "tyranNpc2RipperSwarm:20",
-                    "tyranNpc3Termagant:23",
-                    "tyranNpc3Termagant:23",
-                    "tyranNpc3Termagant:23",
-                    "tyranNpc4Warrior:23",
-                    "tyranBossWingedPrimeSurv:1",
-                    "tyranBossDeathleaperSurv:1"
+                    "admecNpc3Electropriest:24",
+                    "admecNpc3Electropriest:24",
+                    "admecNpc3Electropriest:24",
+                    "admecNpc1Vanguard:24",
+                    "admecNpc1Vanguard:24",
+                    "admecNpc2Techpriest:24",
+                    "admecNpc2Techpriest:24"
                 ],
-                "armyAfterCompletion": ["powupHits", "powupSummonSpawn_bloodSmnIntercessor:5"],
+                "armyAfterCompletion": ["powupDamage", "powupReactivateAbility"],
                 "armyScore": 650
             },
             {
                 "round": 24,
-                "power": 487726,
+                "power": 581912,
                 "army": [
-                    "deathNpc1Poxwalker:27",
-                    "deathNpc1Poxwalker:27",
-                    "deathNpc1Poxwalker:27",
-                    "deathNpc1Poxwalker:27",
-                    "deathNpc3Nurglings:27",
-                    "deathNpc3Nurglings:27",
-                    "deathNpc2PlagueMarine:27",
-                    "deathNpc2PlagueMarine:27",
-                    "deathNpc2PlagueMarine:27",
-                    "deathNpc2PlagueMarine:27",
-                    "deathBossTyphusSurv:1"
+                    "darkaNpc3Terminator:26",
+                    "darkaNpcAzrael:16",
+                    "darkaNpcAsmodai:16",
+                    "darkaNpcCompanion:16",
+                    "darkaNpcSternguard:16",
+                    "darkaNpcHellblaster:16"
                 ],
-                "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
+                "armyAfterCompletion": ["powupHealing", "powupSummonSpawn_necroSmnDestroyer:5"],
                 "armyScore": 1000
             },
             {
                 "round": 26,
-                "power": 1335211,
+                "power": 927933,
                 "army": [
-                    "orksNpc2OrkBoy:42",
-                    "orksNpc2OrkBoy:42",
-                    "orksNpc2OrkBoy:42",
-                    "orksNpc3GrotTank:42",
-                    "orksNpc3GrotTank:42",
-                    "orksNpc3GrotTank:42",
-                    "orksNpcWarbossSurv:2",
-                    "orksNpc6Stormboy:42",
-                    "orksNpc6Stormboy:42",
-                    "orksNpc6Stormboy:42",
-                    "orksNpc6Stormboy:42",
-                    "orksNpc6Stormboy:42"
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodNpc1Intercessor:28",
+                    "bloodBossDanteSurv:1",
+                    "bloodBossMephistonSurv:1",
+                    "bloodBossSanguinarySurv:1"
                 ],
-                "armyAfterCompletion": ["powupDamage", "powupReactivateAbility"],
+                "armyAfterCompletion": ["powupHits", "powupReinforcement"],
                 "armyScore": 1000
             },
             {
                 "round": 28,
-                "power": 2240445,
+                "power": 1695827,
                 "army": [
-                    "eldarNpc1Guardian:33",
-                    "eldarNpc1Guardian:33",
-                    "eldarNpc1Guardian:33",
-                    "eldarNpc1Guardian:33",
-                    "eldarNpc4Wraithguard:33",
-                    "eldarNpc3Harlequin:33",
-                    "eldarNpc3Harlequin:33",
-                    "eldarBossFarseerSurv:2"
+                    "adeptNpc3Warsuit:31",
+                    "adeptNpc3Warsuit:31",
+                    "adeptNpc3Warsuit:31",
+                    "adeptNpc3Warsuit:31",
+                    "adeptNpc3Warsuit:31",
+                    "adeptNpc1BattleSister:31",
+                    "adeptNpc1BattleSister:31",
+                    "adeptNpc1BattleSister:31",
+                    "adeptNpc1BattleSister:31",
+                    "adeptNpc2Zephyrim:31",
+                    "adeptNpc2Zephyrim:31",
+                    "adeptNpc2Zephyrim:31"
                 ],
-                "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
+                "armyAfterCompletion": ["powupReactivateAbility", "powupSummonSpawn_necroSmnDeathmark:6"],
                 "armyScore": 1500,
                 "rarityUpgradeOnCompletion": "Mythic"
             },
             {
                 "round": 30,
-                "power": 2810627,
+                "power": 2859967,
                 "army": [
-                    "thousNpc2Screamer:33",
-                    "thousNpc2Screamer:33",
-                    "thousNpc2Screamer:33",
-                    "thousNpc2Screamer:33",
-                    "thousNpc2Screamer:33",
-                    "thousNpc3RubricMarine:35",
-                    "thousNpc3RubricMarine:35",
-                    "thousBossTerminatorSurv:1",
-                    "thousBossInfernalMasterSurv:1"
+                    "astraNpc5DeathRider:33",
+                    "astraNpc5DeathRider:33",
+                    "astraNpc5DeathRider:33",
+                    "astraNpc5DeathRider:33",
+                    "astraNpc5DeathRider:33",
+                    "spaceBossBlackmaneSurv:1",
+                    "spaceBossHoundSurv:1",
+                    "spaceBossWulfenSurv:1",
+                    "spaceBossWolfPriestSurv:1",
+                    "astraNpc2Lascannon:33",
+                    "astraNpc2Lascannon:33",
+                    "astraNpc2Lascannon:33"
                 ],
-                "armyAfterCompletion": ["powupMeleeHits", "powupSummonSpawn_ultraSmnHeavyIntercessor:6"],
+                "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
                 "armyScore": 1500
             },
             {
@@ -430,194 +434,186 @@
                 "power": 0,
                 "isCloneWave": true,
                 "cloneWaveHealthPct": 80,
-                "armyAfterCompletion": ["powupHealing", "powupResurrect"],
+                "armyAfterCompletion": ["powupMeleeHits", "powupResurrect"],
                 "armyScore": 1500
             },
             {
                 "round": 34,
-                "power": 6679347,
+                "power": 5993456,
                 "army": [
-                    "tauNpc5StealthSuit:40",
-                    "tauNpc5StealthSuit:40",
-                    "tauNpc5StealthSuit:40",
-                    "tauBossFarsightSurv:1",
-                    "tauNpc3DroneShield:40",
-                    "tauNpc3DroneShield:40",
-                    "tauNpc2DroneSniper:40",
-                    "tauNpc2DroneSniper:40",
-                    "tauNpc2DroneSniper:40",
-                    "tauNpc2DroneSniper:40",
-                    "tauNpc2DroneSniper:40"
+                    "templNpc1Initiate:36",
+                    "templNpc1Initiate:36",
+                    "templBossAggressorSurv:1",
+                    "templBossSwordBrotherSurv:1",
+                    "templBossChampionSurv:1",
+                    "templBossAncientSurv:1",
+                    "templBossHelbrechtSurv:1",
+                    "templNpc2Neophyte:36",
+                    "templNpc2Neophyte:36",
+                    "templNpc3InitiatePyreblaster:36",
+                    "templNpc3InitiatePyreblaster:36"
                 ],
-                "armyAfterCompletion": ["powupHealing", "powupReactivateAbility"],
+                "armyAfterCompletion": ["powupReactivateAbility", "powupSummonSpawn_necroSmnFlayedOne:6"],
                 "armyScore": 1500
             },
             {
                 "round": 36,
-                "power": 5599839,
+                "power": 6382637,
                 "army": [
-                    "genesNpc3Neophyte:41",
-                    "genesNpc3Neophyte:41",
-                    "genesNpc3Neophyte:41",
-                    "genesNpc1Aberrant:41",
-                    "genesNpc1Aberrant:41",
-                    "genesNpc2Genestealer:41",
-                    "genesNpc2Genestealer:41",
-                    "genesNpc2Genestealer:41",
-                    "genesNpc2Genestealer:41",
-                    "genesBossMagusSurv:1",
-                    "genesBossKelermorphSurv:1"
+                    "darkaBossTerminatorSurv:1",
+                    "bloodBossTerminatorSurv:1",
+                    "spaceBossRockfistSurv:1",
+                    "spaceBossStormcallerSurv:1",
+                    "astarBossLysanderSurv:1"
                 ],
                 "armyAfterCompletion": ["powupHealing", "powupReinforcement"],
                 "armyScore": 1500
             },
             {
                 "round": 38,
-                "power": 12407483,
+                "power": 14138349,
                 "army": [
-                    "tyranNpc3Termagant:45",
-                    "tyranNpc3Termagant:45",
-                    "tyranNpc3Termagant:45",
-                    "tyranNpc4Warrior:45",
-                    "tyranNpc4Warrior:45",
-                    "tyranNpc4Warrior:45",
-                    "tyranNpc4Warrior:45",
-                    "tyranNpc2RipperSwarm:45",
-                    "tyranNpc2RipperSwarm:45",
-                    "tyranNpc2RipperSwarm:45",
-                    "tyranBossNeurothropeSurv:1",
-                    "tyranBossParasiteSurv:1"
+                    "ultraNpc4HeavyIntercessor:45",
+                    "ultraNpc4HeavyIntercessor:45",
+                    "ultraNpc4HeavyIntercessor:45",
+                    "ultraBossInceptorSgtSurv:1",
+                    "ultraBossTitusSurv:3",
+                    "ultraBossCalgarSurv:1",
+                    "ultraNpc2Eliminator:45",
+                    "ultraNpc2Eliminator:45",
+                    "ultraNpc2Eliminator:45",
+                    "ultraNpc2Eliminator:45",
+                    "ultraNpc2Eliminator:45"
                 ],
                 "armyAfterCompletion": ["powupHealing"],
                 "armyScore": 1500
             },
             {
                 "round": 41,
-                "power": 60022256310,
+                "power": 58842229296,
                 "army": [
-                    "necroNpc1WarriorSurv:3",
-                    "necroNpc1WarriorSurv:3",
-                    "necroNpc1WarriorSurv:3",
-                    "necroNpc1WarriorSurv:3",
-                    "necroNpc1WarriorSurv:3",
-                    "necroNpc1WarriorSurv:3",
-                    "necroNpc4DestroyerSurv:3",
-                    "necroNpc4DestroyerSurv:3",
-                    "necroNpc4DestroyerSurv:3",
-                    "necroNpc4DestroyerSurv:3",
-                    "necroNpc4DestroyerSurv:3",
-                    "necroNpc4DestroyerSurv:3"
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3",
+                    "bloodNpc1IntercessorSurv:3"
                 ],
                 "armyScore": 2000
             }
         ],
         "disallowedFactions": [
-            "Necrons",
+            "Ultramarines",
             "Sisterhood",
             "AstraMilitarum",
             "BlackLegion",
             "DeathGuard",
-            "Tyranids",
-            "Orks",
-            "Aeldari",
-            "Tau",
+            "BlackTemplars",
+            "SpaceWolves",
             "ThousandSons",
+            "DarkAngels",
             "AdeptusMechanicus",
             "WorldEaters",
-            "Genestealers",
+            "BloodAngels",
             "Custodes",
             "EmperorsChildren",
-            "LeaguesOfVotann"
+            "AdeptusAstartes"
         ]
     },
     "milestoneRewards": [
         {
             "requiredProgress": 100,
-            "reward": "seasonalEventCurrencyMay2026:30"
+            "reward": "seasonalEventCurrencySeptember2026:30"
         },
         {
             "requiredProgress": 205,
-            "reward": "seasonalEventCurrencyMay2026:40"
+            "reward": "seasonalEventCurrencySeptember2026:40"
         },
         {
             "requiredProgress": 315,
-            "reward": "seasonalEventCurrencyMay2026:55"
+            "reward": "seasonalEventCurrencySeptember2026:55"
         },
         {
             "requiredProgress": 430,
-            "reward": "seasonalEventCurrencyMay2026:60"
+            "reward": "seasonalEventCurrencySeptember2026:60"
         },
         {
             "requiredProgress": 550,
-            "reward": "seasonalEventCurrencyMay2026:65"
+            "reward": "seasonalEventCurrencySeptember2026:65"
         },
         {
             "requiredProgress": 675,
-            "reward": "seasonalEventCurrencyMay2026:70"
+            "reward": "seasonalEventCurrencySeptember2026:70"
         },
         {
             "requiredProgress": 805,
-            "reward": "seasonalEventCurrencyMay2026:75"
+            "reward": "seasonalEventCurrencySeptember2026:75"
         },
         {
             "requiredProgress": 940,
-            "reward": "seasonalEventCurrencyMay2026:80"
+            "reward": "seasonalEventCurrencySeptember2026:80"
         },
         {
             "requiredProgress": 1080,
-            "reward": "seasonalEventCurrencyMay2026:85"
+            "reward": "seasonalEventCurrencySeptember2026:85"
         },
         {
             "requiredProgress": 1225,
-            "reward": "seasonalEventCurrencyMay2026:90"
+            "reward": "seasonalEventCurrencySeptember2026:90"
         },
         {
             "requiredProgress": 1375,
-            "reward": "seasonalEventCurrencyMay2026:95"
+            "reward": "seasonalEventCurrencySeptember2026:95"
         },
         {
             "requiredProgress": 1530,
-            "reward": "seasonalEventCurrencyMay2026:100"
+            "reward": "seasonalEventCurrencySeptember2026:100"
         },
         {
             "requiredProgress": 1690,
-            "reward": "seasonalEventCurrencyMay2026:105"
+            "reward": "seasonalEventCurrencySeptember2026:105"
         },
         {
             "requiredProgress": 1860,
-            "reward": "seasonalEventCurrencyMay2026:110"
+            "reward": "seasonalEventCurrencySeptember2026:110"
         },
         {
             "requiredProgress": 2040,
-            "reward": "seasonalEventCurrencyMay2026:115"
+            "reward": "seasonalEventCurrencySeptember2026:115"
         },
         {
             "requiredProgress": 2240,
-            "reward": "seasonalEventCurrencyMay2026:120"
+            "reward": "seasonalEventCurrencySeptember2026:120"
         },
         {
             "requiredProgress": 2465,
-            "reward": "seasonalEventCurrencyMay2026:125"
+            "reward": "seasonalEventCurrencySeptember2026:125"
         },
         {
             "requiredProgress": 2715,
-            "reward": "seasonalEventCurrencyMay2026:130"
+            "reward": "seasonalEventCurrencySeptember2026:130"
         },
         {
             "requiredProgress": 2990,
-            "reward": "seasonalEventCurrencyMay2026:135"
+            "reward": "seasonalEventCurrencySeptember2026:135"
         },
         {
             "requiredProgress": 3290,
-            "reward": "seasonalEventCurrencyMay2026:140"
+            "reward": "seasonalEventCurrencySeptember2026:140"
         },
         {
             "requiredProgress": 3620,
-            "reward": "seasonalEventCurrencyMay2026:145"
+            "reward": "seasonalEventCurrencySeptember2026:145"
         },
         {
             "requiredProgress": 3980,
-            "reward": "seasonalEventCurrencyMay2026:150"
+            "reward": "seasonalEventCurrencySeptember2026:150"
         },
         {
             "requiredProgress": 4400,
@@ -650,137 +646,137 @@
         {
             "level": 1,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 40
             },
-            "rewards": ["gold:600-660", "shards_astarCyrus:5", "abilityTokenCommon_Imperial:2", "upgDmgC001"]
+            "rewards": ["gold:600-660", "shards_votanChampion:5", "abilityTokenCommon_Xenos:2", "upgDmgC009"]
         },
         {
             "level": 2,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 45
             },
-            "rewards": ["gold:800-880", "shards_astarCyrus:5", "abilityTokenCommon_Imperial:2", "upgHpC002"]
+            "rewards": ["gold:800-880", "shards_votanChampion:5", "abilityTokenCommon_Xenos:2", "upgHpC002"]
         },
         {
             "level": 3,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 50
             },
-            "rewards": ["gold:900-990", "shards_astarCyrus:5", "abilityTokenCommon_Imperial:2", "upgDmgC001"]
+            "rewards": ["gold:900-990", "shards_votanChampion:5", "abilityTokenCommon_Xenos:2", "upgDmgC009"]
         },
         {
             "level": 4,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 55
             },
-            "rewards": ["gold:1000-1100", "shards_astarCyrus:5", "abilityTokenCommon_Imperial:2", "upgHpC015"]
+            "rewards": ["gold:1000-1100", "shards_votanChampion:5", "abilityTokenCommon_Xenos:2", "upgHpC015"]
         },
         {
             "level": 5,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 60
             },
-            "rewards": ["gold:1300-1430", "shards_astarCyrus:5", "abilityTokenCommon_Imperial:2", "upgHpC002"]
+            "rewards": ["gold:1300-1430", "shards_votanChampion:5", "abilityTokenCommon_Xenos:2", "upgHpC002"]
         },
         {
             "level": 6,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 65
             },
-            "rewards": ["gold:1500-1650", "shards_astarCyrus:5", "abilityTokenCommon_Imperial:2", "upgDmgC011"]
+            "rewards": ["gold:1500-1650", "shards_votanChampion:5", "abilityTokenCommon_Xenos:2", "upgDmgC015"]
         },
         {
             "level": 7,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 70
             },
             "rewards": [
                 "gold:1800-1980",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenUncommon_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenUncommon_Xenos",
                 "itemAscensionResource_Uncommon",
-                "upgArmC001"
+                "upgArmC005"
             ]
         },
         {
             "level": 8,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 75
             },
             "rewards": [
                 "gold:2100-2310",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenUncommon_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenUncommon_Xenos",
                 "itemAscensionResource_Uncommon",
-                "upgDmgC011"
+                "upgDmgC015"
             ]
         },
         {
             "level": 9,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 80
             },
             "rewards": [
                 "gold:2500-2750",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenUncommon_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenUncommon_Xenos",
                 "itemAscensionResource_Uncommon",
-                "upgDmgU003"
+                "upgDmgU012"
             ]
         },
         {
             "level": 10,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 85
             },
             "rewards": [
                 "gold:3000-3300",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenUncommon_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenUncommon_Xenos",
                 "itemAscensionResource_Uncommon",
-                "upgHpU002"
+                "upgHpU014"
             ]
         },
         {
             "level": 11,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 90
             },
             "rewards": [
                 "gold:3600-3960",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenUncommon_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenUncommon_Xenos",
                 "itemAscensionResource_Uncommon",
-                "upgArmU001"
+                "upgArmU002"
             ]
         },
         {
             "level": 12,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 95
             },
             "rewards": [
                 "gold:4400-4840",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenUncommon_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenUncommon_Xenos",
                 "itemAscensionResource_Uncommon",
                 "upgHpU017"
             ]
@@ -788,89 +784,89 @@
         {
             "level": 13,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 100
             },
             "rewards": [
                 "gold:5300-5830",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenRare_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenRare_Xenos",
                 "itemAscensionResource_Rare",
-                "upgArmU013"
+                "upgArmU006"
             ]
         },
         {
             "level": 14,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 105
             },
             "rewards": [
                 "gold:6300-6930",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenRare_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenRare_Xenos",
                 "itemAscensionResource_Rare",
-                "upgDmgR005"
+                "upgDmgR003"
             ]
         },
         {
             "level": 15,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 110
             },
             "rewards": [
                 "gold:7500-8250",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenRare_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenRare_Xenos",
                 "itemAscensionResource_Rare",
-                "upgHpR019"
+                "upgHpR014"
             ]
         },
         {
             "level": 16,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 115
             },
             "rewards": [
                 "gold:9000-9900",
-                "shards_astarCyrus:5",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenRare_Imperial",
+                "shards_votanChampion:5",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenRare_Xenos",
                 "itemAscensionResource_Rare",
-                "upgHpR005"
+                "upgHpR040"
             ]
         },
         {
             "level": 17,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 120
             },
             "rewards": [
                 "gold:10800-11880",
-                "shards_astarCyrus:6",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenRare_Imperial",
+                "shards_votanChampion:6",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenRare_Xenos",
                 "itemAscensionResource_Rare",
-                "upgHpR019"
+                "upgHpR014"
             ]
         },
         {
             "level": 18,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 125
             },
             "rewards": [
                 "gold:12500-13750",
-                "shards_astarCyrus:7",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenRare_Imperial",
+                "shards_votanChampion:7",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenRare_Xenos",
                 "itemAscensionResource_Rare",
                 "upgDmgR002"
             ]
@@ -878,172 +874,172 @@
         {
             "level": 19,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 130
             },
             "rewards": [
                 "gold:15000-16500",
-                "shards_astarCyrus:8",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenEpic_Imperial",
+                "shards_votanChampion:8",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenEpic_Xenos",
                 "itemAscensionResource_Epic",
-                "upgDmgE001"
+                "upgDmgE011"
             ]
         },
         {
             "level": 20,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 140
             },
             "rewards": [
                 "gold:17500-19250",
-                "shards_astarCyrus:9",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenEpic_Imperial",
+                "shards_votanChampion:9",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenEpic_Xenos",
                 "itemAscensionResource_Epic",
-                "upgArmE013"
+                "upgArmE010"
             ]
         },
         {
             "level": 21,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 150
             },
             "rewards": [
                 "gold:21500-23650",
-                "shards_astarCyrus:10",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenEpic_Imperial",
+                "shards_votanChampion:10",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenEpic_Xenos",
                 "itemAscensionResource_Epic",
-                "upgHpE017"
+                "upgHpE015"
             ]
         },
         {
             "level": 22,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 160
             },
             "rewards": [
                 "gold:25000-27500",
-                "shards_astarCyrus:11",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenEpic_Imperial",
+                "shards_votanChampion:11",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenEpic_Xenos",
                 "itemAscensionResource_Epic",
-                "upgDmgE001"
+                "upgDmgE011"
             ]
         },
         {
             "level": 23,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 170
             },
             "rewards": [
                 "gold:31500-34650",
-                "shards_astarCyrus:12",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenEpic_Imperial",
+                "shards_votanChampion:12",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenEpic_Xenos",
                 "itemAscensionResource_Epic",
-                "upgArmE013"
+                "upgArmE010"
             ]
         },
         {
             "level": 24,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 180
             },
             "rewards": [
                 "gold:37500-41250",
-                "shards_astarCyrus:13",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenEpic_Imperial",
+                "shards_votanChampion:13",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenEpic_Xenos",
                 "itemAscensionResource_Epic",
-                "upgHpE017"
+                "upgHpE015"
             ]
         },
         {
             "level": 25,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 190
             },
             "rewards": [
                 "gold:45000-49500",
-                "shards_astarCyrus:14",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenLegendary_Imperial",
+                "shards_votanChampion:14",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
                 "itemAscensionResource_Legendary",
-                "upgHpL100:3"
+                "upgHpL099:3"
             ]
         },
         {
             "level": 26,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 205
             },
             "rewards": [
                 "gold:50000-55000",
-                "shards_astarCyrus:15",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenLegendary_Imperial",
+                "shards_votanChampion:15",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
                 "itemAscensionResource_Legendary",
-                "upgHpL100:3",
+                "upgHpL099:3",
                 "upgDmgL001",
-                "upgArmL001"
+                "upgArmL202"
             ]
         },
         {
             "level": 27,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 220
             },
             "rewards": [
                 "gold:62500-68750",
-                "shards_astarCyrus:15",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenLegendary_Imperial",
+                "shards_votanChampion:15",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
                 "itemAscensionResource_Legendary",
-                "upgHpL100:3",
+                "upgHpL099:3",
                 "upgDmgL001",
-                "upgArmL001"
+                "upgArmL202"
             ]
         },
         {
             "level": 28,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 235
             },
             "rewards": [
                 "gold:75000-82500",
-                "shards_astarCyrus:15",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenLegendary_Imperial",
+                "shards_votanChampion:15",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
                 "itemAscensionResource_Legendary",
-                "upgHpL100:3",
+                "upgHpL099:3",
                 "upgDmgL204",
-                "upgArmL001"
+                "upgArmL202"
             ]
         },
         {
             "level": 29,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 255
             },
             "rewards": [
                 "gold:85000-93500",
-                "shards_astarCyrus:15",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenLegendary_Imperial",
+                "shards_votanChampion:15",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
                 "itemAscensionResource_Legendary",
-                "upgHpL120C",
+                "upgHpL140C",
                 "upgDmgL213C",
                 "upgArmL011C"
             ]
@@ -1051,23 +1047,93 @@
         {
             "level": 30,
             "cost": {
-                "type": "seasonalEventCurrencyMay2026",
+                "type": "seasonalEventCurrencySeptember2026",
                 "amount": 280
             },
             "rewards": [
                 "gold:100000-110000",
-                "shards_astarCyrus:20",
-                "abilityTokenCommon_Imperial",
-                "abilityTokenLegendary_Imperial",
+                "shards_votanChampion:20",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
                 "itemAscensionResource_Legendary",
-                "playerProfileTheme_may_2026"
+                "playerProfileTheme_september_2026"
+            ]
+        },
+        {
+            "level": 31,
+            "cost": {
+                "type": "seasonalEventCurrencySeptember2026",
+                "amount": 350
+            },
+            "rewards": [
+                "gold:115000-126500",
+                "shards_votanChampion:25",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
+                "itemAscensionResource_Legendary"
+            ]
+        },
+        {
+            "level": 32,
+            "cost": {
+                "type": "seasonalEventCurrencySeptember2026",
+                "amount": 450
+            },
+            "rewards": [
+                "gold:130000-143000",
+                "shards_votanChampion:30",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
+                "itemAscensionResource_Legendary"
+            ]
+        },
+        {
+            "level": 33,
+            "cost": {
+                "type": "seasonalEventCurrencySeptember2026",
+                "amount": 600
+            },
+            "rewards": [
+                "gold:145000-159500",
+                "shards_votanChampion:35",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
+                "itemAscensionResource_Legendary"
+            ]
+        },
+        {
+            "level": 34,
+            "cost": {
+                "type": "seasonalEventCurrencySeptember2026",
+                "amount": 800
+            },
+            "rewards": [
+                "gold:160000-176000",
+                "shards_votanChampion:40",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
+                "itemAscensionResource_Legendary"
+            ]
+        },
+        {
+            "level": 35,
+            "cost": {
+                "type": "seasonalEventCurrencySeptember2026",
+                "amount": 1000
+            },
+            "rewards": [
+                "gold:185000-203500",
+                "shards_votanChampion:50",
+                "abilityTokenCommon_Xenos",
+                "abilityTokenLegendary_Xenos",
+                "itemAscensionResource_Legendary"
             ]
         }
     ],
     "offers": {
-        "offer_seasonal_event_may_2026_pass": {
+        "offer_seasonal_event_september_2026_pass": {
             "offer": {
-                "offerId": "offer_seasonal_event_may_2026_pass",
+                "offerId": "offer_seasonal_event_september_2026_pass",
                 "conditions": {
                     "needsAssetBundlesDownloaded": true
                 },
@@ -1077,7 +1143,7 @@
                 "originalPriceMercadoId": "",
                 "visualId": "template_offer",
                 "segment": "specialOffer",
-                "realMoneyProductId": "product_seasonal_event_may_2026_pass"
+                "realMoneyProductId": "product_seasonal_event_september_2026_pass"
             },
             "realMoneyProduct": {
                 "category": "Seasonal Offers",
@@ -1085,22 +1151,27 @@
                 "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
                 "price": 999,
                 "mercadoId": "offer_00999",
-                "rewards": ["seasonalEventCurrencyMay2026:200", "seasonalEcBonus:10", "seasonalPremium:1", "gems:1000"]
+                "rewards": [
+                    "seasonalEventCurrencySeptember2026:200",
+                    "seasonalEcBonus:10",
+                    "seasonalPremium:1",
+                    "gems:1000"
+                ]
             }
         },
-        "offer_seasonal_event_may_2026_playmore": {
+        "offer_seasonal_event_september_2026_playmore": {
             "offer": {
-                "offerId": "offer_seasonal_event_may_2026_playmore",
+                "offerId": "offer_seasonal_event_september_2026_playmore",
                 "conditions": {
                     "needsAssetBundlesDownloaded": true
                 },
                 "interstitialPriority": 20000,
                 "interstitialInterval": 86400,
-                "maxPurchases": 1,
+                "maxPurchases": 3,
                 "originalPriceMercadoId": "",
                 "visualId": "template_offer",
                 "segment": "specialOffer",
-                "realMoneyProductId": "product_seasonal_event_may_2026_playmore"
+                "realMoneyProductId": "product_seasonal_event_september_2026_playmore"
             },
             "realMoneyProduct": {
                 "category": "Seasonal Offers",
@@ -1110,8 +1181,8 @@
                 "mercadoId": "offer_01599",
                 "rewards": [
                     "stamina_survival:1",
-                    "stamina_waves:2",
-                    "stamina_treasureBeach:2",
+                    "stamina_waves:1",
+                    "stamina_treasureBeach:1",
                     "specialSummoningToken:5",
                     "stamina:90",
                     "raidTicket:15"
@@ -1122,7 +1193,7 @@
     "missions": {
         "daily": [
             {
-                "name": "may_2026_daily_01",
+                "name": "september_2026_daily_01",
                 "rewards": ["xp_seasonal:70"],
                 "tasks": [
                     {
@@ -1133,7 +1204,7 @@
                 ]
             },
             {
-                "name": "may_2026_daily_02",
+                "name": "september_2026_daily_02",
                 "rewards": ["xp_seasonal:70"],
                 "tasks": [
                     {
@@ -1144,7 +1215,7 @@
                 ]
             },
             {
-                "name": "may_2026_daily_03",
+                "name": "september_2026_daily_03",
                 "rewards": ["xp_seasonal:70"],
                 "tasks": [
                     {
@@ -1152,13 +1223,13 @@
                         "target": 12,
                         "locaKey": "UseAbilityWithFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Imperial"
+                            "factionTrait": "Xenos"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_daily_04",
+                "name": "september_2026_daily_04",
                 "rewards": ["xp_seasonal:70"],
                 "tasks": [
                     {
@@ -1166,13 +1237,13 @@
                         "target": 20,
                         "locaKey": "SlayEnemiesWithFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Imperial"
+                            "factionTrait": "Xenos"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_daily_05",
+                "name": "september_2026_daily_05",
                 "rewards": ["xp_seasonal:70"],
                 "tasks": [
                     {
@@ -1183,7 +1254,7 @@
                 ]
             },
             {
-                "name": "may_2026_daily_06",
+                "name": "september_2026_daily_06",
                 "rewards": ["xp_seasonal:75"],
                 "tasks": [
                     {
@@ -1194,7 +1265,7 @@
                 ]
             },
             {
-                "name": "may_2026_daily_07",
+                "name": "september_2026_daily_07",
                 "rewards": ["xp_seasonal:75"],
                 "tasks": [
                     {
@@ -1207,7 +1278,7 @@
         ],
         "free": [
             {
-                "name": "may_2026_free_1_chain_01",
+                "name": "september_2026_free_1_chain_01",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1221,7 +1292,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_02",
+                "name": "september_2026_free_1_chain_02",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1229,13 +1300,13 @@
                         "target": 50,
                         "locaKey": "SlayEnemiesWithFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Imperial"
+                            "factionTrait": "Xenos"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_03",
+                "name": "september_2026_free_1_chain_03",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1246,7 +1317,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_04",
+                "name": "september_2026_free_1_chain_04",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1257,7 +1328,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_05",
+                "name": "september_2026_free_1_chain_05",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1265,13 +1336,13 @@
                         "target": 75,
                         "locaKey": "SlayEnemiesWithFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Imperial"
+                            "factionTrait": "Xenos"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_06",
+                "name": "september_2026_free_1_chain_06",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1285,7 +1356,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_07",
+                "name": "september_2026_free_1_chain_07",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1296,7 +1367,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_08",
+                "name": "september_2026_free_1_chain_08",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1307,7 +1378,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_09",
+                "name": "september_2026_free_1_chain_09",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1318,7 +1389,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_10",
+                "name": "september_2026_free_1_chain_10",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1337,7 +1408,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_11",
+                "name": "september_2026_free_1_chain_11",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1348,7 +1419,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_12",
+                "name": "september_2026_free_1_chain_12",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1359,7 +1430,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_13",
+                "name": "september_2026_free_1_chain_13",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1370,7 +1441,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_14",
+                "name": "september_2026_free_1_chain_14",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1381,7 +1452,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_15",
+                "name": "september_2026_free_1_chain_15",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1400,7 +1471,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_16",
+                "name": "september_2026_free_1_chain_16",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1408,13 +1479,13 @@
                         "target": 125,
                         "locaKey": "SlayEnemiesWithFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Imperial"
+                            "factionTrait": "Xenos"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_17",
+                "name": "september_2026_free_1_chain_17",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1425,7 +1496,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_18",
+                "name": "september_2026_free_1_chain_18",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1436,7 +1507,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_19",
+                "name": "september_2026_free_1_chain_19",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1447,7 +1518,7 @@
                 ]
             },
             {
-                "name": "may_2026_free_1_chain_20",
+                "name": "september_2026_free_1_chain_20",
                 "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
                 "tasks": [
                     {
@@ -1460,221 +1531,141 @@
         ],
         "premium": [
             {
-                "name": "may_2026_premium_chain_01",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
-                "tasks": [
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 30,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 15,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
-                        }
-                    }
-                ]
-            },
-            {
-                "name": "may_2026_premium_chain_02",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
-                "tasks": [
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 40,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 20,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
-                        }
-                    }
-                ]
-            },
-            {
-                "name": "may_2026_premium_chain_03",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
+                "name": "september_2026_premium_chain_01",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
                 "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
                         "target": 50,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 25,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
+                            "factionTrait": "Imperial"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_premium_chain_04",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
+                "name": "september_2026_premium_chain_02",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
                 "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
                         "target": 60,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 30,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
+                            "factionTrait": "Imperial"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_premium_chain_05",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
+                "name": "september_2026_premium_chain_03",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
                 "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
                         "target": 70,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 35,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
+                            "factionTrait": "Imperial"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_premium_chain_06",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
+                "name": "september_2026_premium_chain_04",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
                 "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
                         "target": 80,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 40,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
+                            "factionTrait": "Imperial"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_premium_chain_07",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
-                "tasks": [
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 90,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 45,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
-                        }
-                    }
-                ]
-            },
-            {
-                "name": "may_2026_premium_chain_08",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
+                "name": "september_2026_premium_chain_05",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
                 "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
                         "target": 100,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 50,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
+                            "factionTrait": "Imperial"
                         }
                     }
                 ]
             },
             {
-                "name": "may_2026_premium_chain_09",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
-                "tasks": [
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 110,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Xenos"
-                        }
-                    },
-                    {
-                        "name": "SlayEnemiesOfFactionTrait",
-                        "target": 55,
-                        "locaKey": "SlayEnemiesOfFactionTrait_description",
-                        "taskParameters": {
-                            "factionTrait": "Chaos"
-                        }
-                    }
-                ]
-            },
-            {
-                "name": "may_2026_premium_chain_10",
-                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyMay2026:50"],
+                "name": "september_2026_premium_chain_06",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
                 "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
                         "target": 120,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Xenos"
+                            "factionTrait": "Imperial"
                         }
-                    },
+                    }
+                ]
+            },
+            {
+                "name": "september_2026_premium_chain_07",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
+                "tasks": [
                     {
                         "name": "SlayEnemiesOfFactionTrait",
-                        "target": 60,
+                        "target": 140,
                         "locaKey": "SlayEnemiesOfFactionTrait_description",
                         "taskParameters": {
-                            "factionTrait": "Chaos"
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "september_2026_premium_chain_08",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 160,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "september_2026_premium_chain_09",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 180,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "september_2026_premium_chain_10",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencySeptember2026:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 200,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
                         }
                     }
                 ]
@@ -1682,10 +1673,10 @@
         ],
         "battlePass": []
     },
-    "chestId": "hre_astar",
+    "chestId": "hre_necrons",
     "ohSoCloseOffer": {
-        "lockType": "season_may_2026_event",
-        "rewardCurrency": "seasonalEventCurrencyMay2026",
+        "lockType": "season_september_2026_event",
+        "rewardCurrency": "seasonalEventCurrencySeptember2026",
         "costPerEventCrate": [
             {
                 "base": 35,
@@ -1801,7 +1792,7 @@
             },
             {
                 "base": 589,
-                "multiplier": 10
+                "multiplier": 25
             },
             {
                 "base": 889,

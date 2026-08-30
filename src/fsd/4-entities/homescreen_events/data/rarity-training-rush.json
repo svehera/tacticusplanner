@@ -15,7 +15,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Description",
                 "eventId": "rarity_training_rush_tier_high",
-                "rewardProgressId": "hse_rarity_training_rush_august_2026_tier_high",
+                "rewardProgressId": "hse_rarity_training_rush_tier_high",
                 "theme": "training_rush",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 3,
@@ -106,59 +106,59 @@
                     "chestRewardId": "gold:10000"
                 },
                 {
-                    "requiredProgress": 1500,
+                    "requiredProgress": 1000,
                     "chestRewardId": "xpLegendary"
                 },
                 {
-                    "requiredProgress": 2000,
+                    "requiredProgress": 1500,
                     "chestRewardId": "gold:15000"
                 },
                 {
-                    "requiredProgress": 2500,
+                    "requiredProgress": 2000,
                     "chestRewardId": "xpLegendary"
                 },
                 {
-                    "requiredProgress": 3000,
+                    "requiredProgress": 2500,
                     "chestRewardId": "gold:20000"
                 },
                 {
-                    "requiredProgress": 5000,
+                    "requiredProgress": 4000,
                     "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 5500,
+                    "chestRewardId": "gold:35000"
                 },
                 {
                     "requiredProgress": 7000,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
-                },
-                {
-                    "requiredProgress": 9000,
                     "chestRewardId": "xpMythic"
                 },
                 {
-                    "requiredProgress": 11000,
+                    "requiredProgress": 8500,
                     "chestRewardId": "gold:50000"
                 },
                 {
-                    "requiredProgress": 13500,
+                    "requiredProgress": 10500,
                     "chestRewardId": "summoningToken"
                 },
                 {
-                    "requiredProgress": 17000,
+                    "requiredProgress": 13500,
                     "chestRewardId": "gold:75000"
                 },
                 {
-                    "requiredProgress": 21500,
+                    "requiredProgress": 17000,
                     "chestRewardId": "xpMythic"
                 },
                 {
-                    "requiredProgress": 26500,
+                    "requiredProgress": 21000,
+                    "chestRewardId": "gold:100000"
+                },
+                {
+                    "requiredProgress": 26000,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 33000,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
-                },
-                {
-                    "requiredProgress": 1500,
+                    "requiredProgress": 1000,
                     "chestRewardId": "xpLegendary",
                     "endless": true
                 }
@@ -270,7 +270,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Description",
                 "eventId": "rarity_training_rush_tier_mid",
-                "rewardProgressId": "hse_rarity_training_rush_august_2026_tier_mid",
+                "rewardProgressId": "hse_rarity_training_rush_tier_mid",
                 "theme": "training_rush",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 2,
@@ -361,59 +361,59 @@
                     "chestRewardId": "gold:5000"
                 },
                 {
-                    "requiredProgress": 1500,
+                    "requiredProgress": 1000,
                     "chestRewardId": "xpEpic"
                 },
                 {
-                    "requiredProgress": 2000,
+                    "requiredProgress": 1500,
                     "chestRewardId": "gold:7500"
                 },
                 {
-                    "requiredProgress": 2500,
+                    "requiredProgress": 2000,
                     "chestRewardId": "xpEpic"
                 },
                 {
-                    "requiredProgress": 3000,
+                    "requiredProgress": 2500,
                     "chestRewardId": "gold:10000"
                 },
                 {
-                    "requiredProgress": 5000,
+                    "requiredProgress": 4000,
                     "chestRewardId": "xpLegendary"
                 },
                 {
-                    "requiredProgress": 7000,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
-                },
-                {
-                    "requiredProgress": 9000,
-                    "chestRewardId": "xpLegendary"
-                },
-                {
-                    "requiredProgress": 11000,
+                    "requiredProgress": 5500,
                     "chestRewardId": "gold:15000"
                 },
                 {
-                    "requiredProgress": 12500,
+                    "requiredProgress": 7000,
+                    "chestRewardId": "xpLegendary"
+                },
+                {
+                    "requiredProgress": 8500,
+                    "chestRewardId": "gold:15000"
+                },
+                {
+                    "requiredProgress": 10000,
                     "chestRewardId": "summoningToken"
                 },
                 {
-                    "requiredProgress": 15500,
+                    "requiredProgress": 12000,
                     "chestRewardId": "gold:35000"
                 },
                 {
-                    "requiredProgress": 19000,
+                    "requiredProgress": 15000,
                     "chestRewardId": "xpMythic"
+                },
+                {
+                    "requiredProgress": 19000,
+                    "chestRewardId": "gold:50000"
                 },
                 {
                     "requiredProgress": 24000,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 30500,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
-                },
-                {
-                    "requiredProgress": 1500,
+                    "requiredProgress": 1000,
                     "chestRewardId": "xpLegendary",
                     "endless": true
                 }
@@ -525,7 +525,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_training_rush_Interstitial_Description",
                 "eventId": "rarity_training_rush_tier_low",
-                "rewardProgressId": "hse_rarity_training_rush_august_2026_tier_low",
+                "rewardProgressId": "hse_rarity_training_rush_tier_low",
                 "theme": "training_rush",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 1,
@@ -612,63 +612,63 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 500,
-                    "chestRewardId": "summoningToken"
+                    "requiredProgress": 300,
+                    "chestRewardId": "gold:500"
                 },
                 {
-                    "requiredProgress": 1000,
+                    "requiredProgress": 600,
                     "chestRewardId": "xpUncommon:2"
                 },
                 {
-                    "requiredProgress": 1000,
+                    "requiredProgress": 900,
                     "chestRewardId": "gold:1000"
                 },
                 {
-                    "requiredProgress": 1500,
+                    "requiredProgress": 1200,
                     "chestRewardId": "xpRare"
                 },
                 {
-                    "requiredProgress": 2000,
+                    "requiredProgress": 1500,
                     "chestRewardId": "gold:1500"
                 },
                 {
-                    "requiredProgress": 2500,
+                    "requiredProgress": 2150,
                     "chestRewardId": "summoningToken"
                 },
                 {
-                    "requiredProgress": 4000,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                    "requiredProgress": 3150,
+                    "chestRewardId": "gold:2500"
                 },
                 {
-                    "requiredProgress": 5500,
+                    "requiredProgress": 4150,
                     "chestRewardId": "xpRare"
                 },
                 {
-                    "requiredProgress": 6500,
+                    "requiredProgress": 5150,
                     "chestRewardId": "gold:5000"
                 },
                 {
-                    "requiredProgress": 8500,
+                    "requiredProgress": 6650,
                     "chestRewardId": "xpEpic"
                 },
                 {
-                    "requiredProgress": 10500,
+                    "requiredProgress": 8400,
                     "chestRewardId": "gold:7500"
                 },
                 {
-                    "requiredProgress": 13000,
+                    "requiredProgress": 10400,
                     "chestRewardId": "xpEpic"
                 },
                 {
-                    "requiredProgress": 16500,
+                    "requiredProgress": 12900,
+                    "chestRewardId": "gold:10000"
+                },
+                {
+                    "requiredProgress": 15900,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 20000,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
-                },
-                {
-                    "requiredProgress": 300,
+                    "requiredProgress": 250,
                     "chestRewardId": "xpEpic",
                     "endless": true
                 }

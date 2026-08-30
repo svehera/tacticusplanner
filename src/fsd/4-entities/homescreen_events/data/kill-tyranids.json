@@ -119,63 +119,63 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 1000,
+                    "requiredProgress": 800,
                     "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 2000,
+                    "requiredProgress": 1600,
                     "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 3000,
+                    "requiredProgress": 2400,
                     "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 4000,
+                    "requiredProgress": 3200,
                     "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 7000,
+                    "requiredProgress": 5200,
                     "chestRewardId": "draft_abilityTokensLegendary:5"
                 },
                 {
-                    "requiredProgress": 9500,
+                    "requiredProgress": 7200,
                     "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 12000,
+                    "requiredProgress": 9200,
                     "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 14500,
+                    "requiredProgress": 11200,
                     "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 17000,
+                    "requiredProgress": 13200,
                     "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 20000,
+                    "requiredProgress": 15450,
                     "chestRewardId": "draft_abilityTokensLegendary:5"
                 },
                 {
-                    "requiredProgress": 23000,
+                    "requiredProgress": 17950,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 25000,
+                    "requiredProgress": 19950,
                     "chestRewardId": "draft_abilityTokensLegendary:2"
                 },
                 {
-                    "requiredProgress": 27500,
+                    "requiredProgress": 21950,
                     "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 32500,
+                    "requiredProgress": 25950,
                     "chestRewardId": "draft_abilityTokensMythic:2"
                 },
                 {
-                    "requiredProgress": 5000,
+                    "requiredProgress": 4000,
                     "chestRewardId": "draft_abilityTokensLegendary:2",
                     "endless": true
                 }
@@ -193,16 +193,16 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_high_bundle_v2"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_high_bundle_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
-                        "price": 1999,
-                        "mercadoId": "offer_01999",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
                         "rewards": [
-                            "tieredRewardPoints_kill_tyranids_tier_high:5000",
+                            "tieredRewardPoints_kill_tyranids_tier_high:4500",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -221,7 +221,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_high_playmore_v2"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_high_playmore_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -230,11 +230,10 @@
                         "price": 999,
                         "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_kill_tyranids_tier_high:1500",
+                            "tieredRewardPoints_kill_tyranids_tier_high:1000",
                             "stamina_waves:2",
                             "stamina:500",
-                            "raidTicket:100",
-                            "gems:250"
+                            "raidTicket:85"
                         ]
                     }
                 },
@@ -250,15 +249,15 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_high_booster"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_high_booster_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
-                        "price": 499,
-                        "mercadoId": "offer_00499",
-                        "rewards": ["tieredRewardPoints_kill_tyranids_tier_high:2000", "gems:500"]
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": ["tieredRewardPoints_kill_tyranids_tier_high:1500", "gems:1000"]
                     }
                 }
             },
@@ -461,7 +460,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_mid_bundle_v2"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_mid_bundle_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -470,7 +469,7 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_kill_tyranids_tier_mid:5000",
+                            "tieredRewardPoints_kill_tyranids_tier_mid:4500",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -489,7 +488,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_mid_playmore_v2"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_mid_playmore_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -498,11 +497,10 @@
                         "price": 999,
                         "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_kill_tyranids_tier_mid:1500",
+                            "tieredRewardPoints_kill_tyranids_tier_mid:1000",
                             "stamina_waves:2",
                             "stamina:500",
-                            "raidTicket:100",
-                            "gems:250"
+                            "raidTicket:85"
                         ]
                     }
                 },
@@ -518,15 +516,15 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_mid_booster"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_mid_booster_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
-                        "price": 499,
-                        "mercadoId": "offer_00499",
-                        "rewards": ["tieredRewardPoints_kill_tyranids_tier_mid:2000", "gems:500"]
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00699",
+                        "price": 699,
+                        "mercadoId": "offer_00699",
+                        "rewards": ["tieredRewardPoints_kill_tyranids_tier_mid:1500", "gems:800"]
                     }
                 }
             },
@@ -729,7 +727,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_low_bundle_v2"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_low_bundle_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -738,7 +736,7 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_kill_tyranids_tier_low:5000",
+                            "tieredRewardPoints_kill_tyranids_tier_low:4500",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -757,7 +755,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_low_playmore_v2"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_low_playmore_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -766,11 +764,10 @@
                         "price": 999,
                         "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_kill_tyranids_tier_low:1500",
+                            "tieredRewardPoints_kill_tyranids_tier_low:1000",
                             "stamina_waves:2",
                             "stamina:500",
-                            "raidTicket:100",
-                            "gems:250"
+                            "raidTicket:85"
                         ]
                     }
                 },
@@ -786,15 +783,15 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_low_booster"
+                        "realMoneyProductId": "product_homescreen_event_kill_tyranids_tier_low_booster_v3"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00499",
-                        "price": 499,
-                        "mercadoId": "offer_00499",
-                        "rewards": ["tieredRewardPoints_kill_tyranids_tier_low:2000", "gems:500"]
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00399",
+                        "price": 399,
+                        "mercadoId": "offer_00399",
+                        "rewards": ["tieredRewardPoints_kill_tyranids_tier_low:1500", "gems:500"]
                     }
                 }
             },

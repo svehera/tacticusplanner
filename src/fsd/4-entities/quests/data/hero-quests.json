@@ -959,15 +959,71 @@
         ]
     },
     {
-        "unitId": "astraYarrick",
-        "allowedFactions": ["AstraMilitarum", "Ultramarines", "Sisterhood", "BlackTemplars", "BloodAngels"],
-        "enemyFactions": ["Orks"],
+        "unitId": "thousSekhetar",
+        "allowedFactions": ["ThousandSons", "BlackLegion", "DeathGuard", "EmperorsChildren"],
+        "enemyFactions": ["Sisterhood"],
         "tiers": [
             {
                 "index": 0,
                 "battles": [
                     {
                         "battleNr": "1",
+                        "lightningVictory": 2,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmC013",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 3
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            },
+                            {
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Resilient",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "2",
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -978,80 +1034,40 @@
                         },
                         "enemies": [
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NoDamageTakenByAnyHero",
-                                "Score": 100
-                            },
-                            {
-                                "ObjectiveType": "DamageType",
-                                "ObjectiveTarget": "Power",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "2",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmC001",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 4
                             }
                         ],
                         "objectives": [
@@ -1063,58 +1079,62 @@
                     },
                     {
                         "battleNr": "3",
-                        "lightningVictory": 3,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgDmgC010",
+                                "upgradeId": "upgArmC002",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "orksBossBigMekLHE",
+                                "name": "adeptBossCanonessLHE",
                                 "progressionIndex": 1
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 5
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 4
                             }
                         ],
                         "objectives": [
@@ -1131,41 +1151,48 @@
                 "battles": [
                     {
                         "battleNr": "4",
-                        "lightningVictory": 3,
+                        "lightningVictory": 1,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpU007",
+                                "upgradeId": "upgArmU009",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 9
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "powupHealing",
+                                "progressionIndex": null
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "DamageType",
-                                "ObjectiveTarget": "Bolter",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Psyker",
                                 "Score": 100
                             },
                             {
-                                "ObjectiveType": "MinHits",
-                                "ObjectiveTarget": 2,
+                                "ObjectiveType": "UseNoSummons",
                                 "Score": 100
                             }
                         ]
@@ -1182,102 +1209,106 @@
                         },
                         "enemies": [
                             {
-                                "name": "orksNpc3GrotTank",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc3GrotTank",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 9
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 9
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 9
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 10
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 10
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 10
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 10
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 8
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotTrait",
-                                "ObjectiveTarget": "Flying",
+                                "ObjectiveType": "NotDamageType",
+                                "ObjectiveTarget": "Eviscerate",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "6",
-                        "lightningVictory": 3,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmU001",
+                                "upgradeId": "upgDmgU019",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "orksBossNobLHE",
+                                "name": "adeptBossHospitallerLHE",
                                 "progressionIndex": 1
                             },
                             {
-                                "name": "orksNpc7Squig",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc7Squig",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc6Stormboy",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc6Stormboy",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 9
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 9
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 9
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 8
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Flame",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Healer",
                                 "Score": 100
                             }
                         ]
@@ -1292,794 +1323,39 @@
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpR007",
+                                "upgradeId": "upgHpR029",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 18
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 18
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 18
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 18
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 18
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 18
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Psychic",
-                                "Score": 100
-                            },
-                            {
-                                "ObjectiveType": "MaxHits",
-                                "ObjectiveTarget": 2,
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "8",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgDmgR025",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 21
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 21
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "DamageType",
-                                "ObjectiveTarget": "Power",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "9",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmR025",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 20
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "HasRangedAttack",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "10",
-                        "lightningVictory": 4,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgHpR005",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 19
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Physical",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "11",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmR006",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksBossKillaKanLHE",
-                                "progressionIndex": 1
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 21
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 21
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 20
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotTrait",
-                                "ObjectiveTarget": "Flying",
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "index": 3,
-                "battles": [
-                    {
-                        "battleNr": "12",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgDmgE011",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "MaxHits",
-                                "ObjectiveTarget": 2,
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "13",
-                        "lightningVictory": 4,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgHpE003",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 29
-                            },
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 28
-                            },
-                            {
-                                "name": "orksNpc7Squig",
-                                "progressionIndex": 28
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "DamageType",
-                                "ObjectiveTarget": "Bolter",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "14",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmE009",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksBossRuntherdLHE",
-                                "progressionIndex": 1
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 34
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 32
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 32
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 32
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 32
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 33
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 33
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 33
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 33
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 33
-                            },
-                            {
-                                "name": "orksNpc1Grot",
-                                "progressionIndex": 33
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "MinHits",
-                                "ObjectiveTarget": 2,
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "index": 4,
-                "battles": [
-                    {
-                        "battleNr": "15",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgHpL105",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 37
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 37
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Blast",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "16",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgDmgL001",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksBossBigMekLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "orksBossKillaKanLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 41
-                            },
-                            {
-                                "name": "orksNpc6Stormboy",
-                                "progressionIndex": 41
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Psychic",
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "index": 5,
-                "battles": [
-                    {
-                        "battleNr": "17",
-                        "lightningVictory": 5,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgHpM004",
-                                "num": 1,
-                                "denom": 6
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "orksBossWarbossLHE",
-                                "progressionIndex": 1
-                            },
-                            {
-                                "name": "orksBossNobLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "orksBossRuntherdLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 45
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 45
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 45
-                            },
-                            {
-                                "name": "orksNpc2OrkBoy",
-                                "progressionIndex": 45
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 45
-                            },
-                            {
-                                "name": "orksNpc3GrotTank",
-                                "progressionIndex": 45
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Flame",
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
-    },
-    {
-        "unitId": "necroChronomancer",
-        "allowedFactions": ["Necrons"],
-        "enemyFactions": ["DarkAngels"],
-        "tiers": [
-            {
-                "index": 0,
-                "battles": [
-                    {
-                        "battleNr": "1",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgHpC009",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 4
-                            },
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 4
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 4
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Gauss",
-                                "Score": 100
-                            },
-                            {
-                                "ObjectiveType": "NoDamageTakenByAnyHero",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "2",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmC005",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 4
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 4
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 4
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "UseNoSummons",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "3",
-                        "lightningVictory": 2,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgDmgC015",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaBossAsmodaiLHE",
-                                "progressionIndex": 1
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 3
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "MaxHits",
-                                "ObjectiveTarget": 3,
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "index": 1,
-                "battles": [
-                    {
-                        "battleNr": "4",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmU006",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 6
-                            },
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 6
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 6
-                            },
-                            {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 6
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 6
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
                             }
                         ],
                         "objectives": [
@@ -2089,226 +1365,119 @@
                                 "Score": 100
                             },
                             {
-                                "ObjectiveType": "NoDamageTakenByAnyHero",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "5",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmU002",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Plasma",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "6",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgDmgU004",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaBossHellblasterLHE",
-                                "progressionIndex": 1
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 10
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotTrait",
-                                "ObjectiveTarget": "Overwatch",
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "index": 2,
-                "battles": [
-                    {
-                        "battleNr": "7",
-                        "lightningVictory": 2,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgHpR011",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 12
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 12
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 12
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 12
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "ObjectiveType": "HasRangedAttack",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "8",
-                        "lightningVictory": 1,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgDmgR009",
+                                "upgradeId": "upgDmgR029",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc3Warsuit",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 13
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 13
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 13
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 12
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "UseNoSummons",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "HeavyWeapon",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "9",
-                        "lightningVictory": 4,
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmR030",
+                                "upgradeId": "upgArmR029",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 12
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc2Lascannon",
+                                "progressionIndex": 13
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Particle",
+                                "ObjectiveType": "NotFaction",
+                                "ObjectiveTarget": "EmperorsChildren",
                                 "Score": 100
                             }
                         ]
@@ -2318,87 +1487,133 @@
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpR014",
+                                "upgradeId": "upgHpR008",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc3Warsuit",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 12
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "SuppressiveFire",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "11",
-                        "lightningVictory": 3,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmR006",
+                                "upgradeId": "upgArmR015",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaBossCompanionLHE",
-                                "progressionIndex": 1
+                                "name": "adeptBossRetributorLHE",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc3Warsuit",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 15
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 15
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "darkaNpc3Terminator",
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 13
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
                                 "progressionIndex": 13
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Flying",
                                 "Score": 100
                             }
                         ]
@@ -2410,56 +1625,68 @@
                 "battles": [
                     {
                         "battleNr": "12",
-                        "lightningVictory": 4,
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmE008",
+                                "upgradeId": "upgDmgE010",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 17
-                            },
-                            {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 17
-                            },
-                            {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc3Warsuit",
                                 "progressionIndex": 18
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 18
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 18
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 18
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 18
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 18
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 18
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 18
                             },
                             {
                                 "name": "astraNpc1Guardsman",
-                                "progressionIndex": 19
+                                "progressionIndex": 18
                             },
                             {
                                 "name": "astraNpc1Guardsman",
-                                "progressionIndex": 19
+                                "progressionIndex": 18
                             },
                             {
                                 "name": "astraNpc1Guardsman",
-                                "progressionIndex": 19
+                                "progressionIndex": 18
                             },
                             {
                                 "name": "astraNpc1Guardsman",
-                                "progressionIndex": 19
+                                "progressionIndex": 18
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "Trait",
-                                "ObjectiveTarget": "Flying",
+                                "ObjectiveType": "DamageType",
+                                "ObjectiveTarget": "Flame",
                                 "Score": 100
                             }
                         ]
@@ -2476,105 +1703,122 @@
                         },
                         "enemies": [
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 20
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 20
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 20
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 19
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "HasRangedAttack",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "TerminatorArmour",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "14",
-                        "lightningVictory": 4,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgDmgE004",
+                                "upgradeId": "upgHpE012",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaBossTerminatorLHE",
+                                "name": "adeptBossCelestineLHE",
                                 "progressionIndex": 1
                             },
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 17
+                                "name": "adeptNpc3Warsuit",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 17
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 20
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 20
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 20
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 20
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 21
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 20
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 21
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "MaxHits",
-                                "ObjectiveTarget": 5,
+                                "ObjectiveType": "NotFaction",
+                                "ObjectiveTarget": "DeathGuard",
                                 "Score": 100
                             }
                         ]
@@ -2586,67 +1830,71 @@
                 "battles": [
                     {
                         "battleNr": "15",
-                        "lightningVictory": 3,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpL010",
+                                "upgradeId": "upgHpL109",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 26
+                                "name": "adeptNpc3Warsuit",
+                                "progressionIndex": 27
                             },
                             {
-                                "name": "darkaNpc3Terminator",
-                                "progressionIndex": 26
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 27
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 28
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 27
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 28
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 27
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 28
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 27
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 27
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 27
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 27
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 27
                             },
                             {
                                 "name": "astraNpc1Guardsman",
-                                "progressionIndex": 28
+                                "progressionIndex": 27
                             },
                             {
                                 "name": "astraNpc1Guardsman",
-                                "progressionIndex": 28
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 28
-                            },
-                            {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 28
+                                "progressionIndex": 27
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "UseNoSummons",
-                                "Score": 100
-                            },
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Gauss",
+                                "ObjectiveType": "DamageType",
+                                "ObjectiveTarget": "Power",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "16",
-                        "lightningVictory": 3,
+                        "lightningVictory": 2,
                         "loot": {
                             "reward": {
                                 "upgradeId": "upgDmgL204",
@@ -2656,27 +1904,43 @@
                         },
                         "enemies": [
                             {
-                                "name": "darkaBossAzraelLHE",
-                                "progressionIndex": 1
+                                "name": "adeptBossMorvennLHE",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 27
+                                "name": "adeptNpc3Warsuit",
+                                "progressionIndex": 28
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
-                                "progressionIndex": 27
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 28
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 27
+                                "name": "adeptNpc2Zephyrim",
+                                "progressionIndex": 28
                             },
                             {
-                                "name": "astraNpc1Guardsman",
-                                "progressionIndex": 30
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 28
                             },
                             {
-                                "name": "astraNpc1Guardsman",
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 28
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 28
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 28
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 28
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
                                 "progressionIndex": 28
                             },
                             {
@@ -2690,8 +1954,8 @@
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Plasma",
+                                "ObjectiveType": "NotFaction",
+                                "ObjectiveTarget": "BlackLegion",
                                 "Score": 100
                             }
                         ]
@@ -2713,46 +1977,58 @@
                         },
                         "enemies": [
                             {
-                                "name": "darkaBossAzraelLHE",
-                                "progressionIndex": 2
+                                "name": "adeptBossCanonessLHE",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "darkaBossHellblasterLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "darkaBossCompanionLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc3Warsuit",
                                 "progressionIndex": 34
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc3Warsuit",
                                 "progressionIndex": 34
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 34
                             },
                             {
-                                "name": "darkaNpc1Infiltrator",
+                                "name": "adeptNpc2Zephyrim",
                                 "progressionIndex": 34
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 36
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 34
                             },
                             {
-                                "name": "darkaNpc2Hellblaster",
-                                "progressionIndex": 36
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 34
+                            },
+                            {
+                                "name": "adeptNpc1BattleSister",
+                                "progressionIndex": 34
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 34
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 34
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 34
+                            },
+                            {
+                                "name": "astraNpc1Guardsman",
+                                "progressionIndex": 34
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "MaxHits",
-                                "ObjectiveTarget": 5,
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Parry",
                                 "Score": 100
                             }
                         ]
@@ -2762,9 +2038,9 @@
         ]
     },
     {
-        "unitId": "spaceStormcaller",
-        "allowedFactions": ["SpaceWolves", "Ultramarines", "BlackTemplars", "AdeptusAstartes"],
-        "enemyFactions": ["Tau"],
+        "unitId": "darkaSternguard",
+        "allowedFactions": ["DarkAngels", "Ultramarines", "Custodes", "AstraMilitarum", "AdeptusAstartes"],
+        "enemyFactions": ["DeathGuard"],
         "tiers": [
             {
                 "index": 0,
@@ -2774,35 +2050,39 @@
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmC002",
+                                "upgradeId": "upgArmC001",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 4
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 2
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 2
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 2
                             }
                         ],
                         "objectives": [
@@ -2819,50 +2099,50 @@
                     },
                     {
                         "battleNr": "2",
-                        "lightningVictory": 2,
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmC001",
+                                "upgradeId": "upgHpC016",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 5
-                            },
-                            {
-                                "name": "tauNpc3DroneShield",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 4
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 4
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             },
                             {
-                                "name": "powupDamage",
-                                "progressionIndex": null
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             }
                         ],
                         "objectives": [
@@ -2877,39 +2157,47 @@
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpC016",
+                                "upgradeId": "upgDmgC001",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauBossMarksmanLHE",
+                                "name": "deathBossPutrifierLHE",
                                 "progressionIndex": 1
                             },
                             {
-                                "name": "tauNpc2DroneSniper",
-                                "progressionIndex": 5
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "tauNpc3DroneShield",
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
                                 "progressionIndex": 3
                             },
                             {
-                                "name": "tauNpc3DroneShield",
-                                "progressionIndex": 5
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 5
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 5
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 5
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
                             }
                         ],
                         "objectives": [
@@ -2936,34 +2224,46 @@
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 7
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 7
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Physical",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Resilient",
                                 "Score": 100
                             },
                             {
@@ -2977,58 +2277,6 @@
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmU005",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 8
-                            },
-                            {
-                                "name": "tauNpc3DroneShield",
-                                "progressionIndex": 8
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Power",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "6",
-                        "lightningVictory": 5,
-                        "loot": {
-                            "reward": {
                                 "upgradeId": "upgDmgU003",
                                 "num": 3,
                                 "denom": 4
@@ -3036,50 +2284,106 @@
                         },
                         "enemies": [
                             {
-                                "name": "tauBossCrisisLHE",
-                                "progressionIndex": 3
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 7
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 7
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc1Poxwalker",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc1Poxwalker",
                                 "progressionIndex": 8
                             },
                             {
-                                "name": "tauNpc3DroneShield",
-                                "progressionIndex": 6
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
                             },
                             {
-                                "name": "tauNpc3DroneShield",
-                                "progressionIndex": 6
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
                             }
                         ],
                         "objectives": [
                             {
                                 "ObjectiveType": "NotTrait",
-                                "ObjectiveTarget": "SuppressiveFire",
+                                "ObjectiveTarget": "Psyker",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "6",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmU002",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "deathBossBlightbringerLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 8
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "Infiltrate",
                                 "Score": 100
                             }
                         ]
@@ -3091,45 +2395,53 @@
                 "battles": [
                     {
                         "battleNr": "7",
-                        "lightningVictory": 3,
+                        "lightningVictory": 4,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpR031",
+                                "upgradeId": "upgHpR032",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 13
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
-                            },
-                            {
-                                "name": "tauNpc3DroneShield",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 12
                             },
                             {
-                                "name": "tauNpc3DroneShield",
-                                "progressionIndex": 12
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 11
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 11
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "MaxHits",
-                                "ObjectiveTarget": 2,
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "HeavyWeapon",
                                 "Score": 100
                             },
                             {
                                 "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Physical",
+                                "ObjectiveTarget": "Psychic",
                                 "Score": 100
                             }
                         ]
@@ -3139,96 +2451,117 @@
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgDmgR031",
+                                "upgradeId": "upgDmgR032",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 11
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 14
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "tauNpc3DroneShield",
-                                "progressionIndex": 15
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "powupReactivateAbility",
-                                "progressionIndex": null
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 12
                             },
                             {
-                                "name": "powupHealing",
-                                "progressionIndex": null
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 12
                             },
                             {
                                 "name": "powupDamage",
-                                "progressionIndex": null
-                            },
-                            {
-                                "name": "powupHealth",
                                 "progressionIndex": null
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "HasRangedAttack",
+                                "ObjectiveType": "DamageType",
+                                "ObjectiveTarget": "Bolter",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "9",
-                        "lightningVictory": 4,
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmR031",
+                                "upgradeId": "upgArmR032",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 15
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 15
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 15
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 15
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 13
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 15
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 12
+                            },
+                            {
+                                "name": "powupDamage",
+                                "progressionIndex": null
                             }
                         ],
                         "objectives": [
                             {
                                 "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Bolter",
+                                "ObjectiveTarget": "Power",
                                 "Score": 100
                             }
                         ]
@@ -3238,156 +2571,47 @@
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgArmR015",
+                                "upgradeId": "upgHpR005",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 13
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 13
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 13
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 13
-                            },
-                            {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 12
-                            },
-                            {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 12
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc2PlagueMarine",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 14
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotTrait",
-                                "ObjectiveTarget": "Overwatch",
-                                "Score": 100
-                            }
-                        ]
-                    },
-                    {
-                        "battleNr": "11",
-                        "lightningVictory": 3,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgArmR005",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "tauBossDarkstriderLHE",
-                                "progressionIndex": 2
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc3Nurglings",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc3Nurglings",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc1Poxwalker",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc1Poxwalker",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc6Carnivore",
+                                "name": "deathNpc1Poxwalker",
                                 "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 15
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 15
-                            },
-                            {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 15
-                            },
-                            {
-                                "name": "powupHits",
-                                "progressionIndex": null
-                            }
-                        ],
-                        "objectives": [
-                            {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Blast",
-                                "Score": 100
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
-                "index": 3,
-                "battles": [
-                    {
-                        "battleNr": "12",
-                        "lightningVictory": 2,
-                        "loot": {
-                            "reward": {
-                                "upgradeId": "upgDmgE010",
-                                "num": 3,
-                                "denom": 4
-                            }
-                        },
-                        "enemies": [
-                            {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 18
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 19
-                            },
-                            {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 19
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
                             }
                         ],
                         "objectives": [
@@ -3399,8 +2623,77 @@
                         ]
                     },
                     {
-                        "battleNr": "13",
+                        "battleNr": "11",
                         "lightningVictory": 4,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmR015",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "deathBossRotboneLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 14
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "FinalJustice",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "index": 3,
+                "battles": [
+                    {
+                        "battleNr": "12",
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
                                 "upgradeId": "upgHpE003",
@@ -3410,45 +2703,53 @@
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc5StealthSuit",
+                                "name": "deathNpc4BlightlordTerminator",
                                 "progressionIndex": 18
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 18
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 16
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 18
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 16
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 20
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 16
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 20
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 16
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 20
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 16
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 20
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 16
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 16
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 16
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Physical",
+                                "ObjectiveType": "MaxHits",
+                                "ObjectiveTarget": 1,
                                 "Score": 100
                             }
                         ]
                     },
                     {
-                        "battleNr": "14",
-                        "lightningVictory": 4,
+                        "battleNr": "13",
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
                                 "upgradeId": "upgHpE017",
@@ -3458,45 +2759,110 @@
                         },
                         "enemies": [
                             {
-                                "name": "tauBossAunShiLHE",
-                                "progressionIndex": 1
+                                "name": "deathNpc4BlightlordTerminator",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 22
+                                "name": "deathNpc4BlightlordTerminator",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 22
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 22
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 22
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 21
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 21
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 21
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 21
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "UseNoSummons",
+                                "ObjectiveType": "NotDamageType",
+                                "ObjectiveTarget": "Plasma",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "14",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmE013",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "deathBossBlightlordLHE",
+                                "progressionIndex": 2
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 19
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 19
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NotFaction",
+                                "ObjectiveTarget": "Ultramarines",
                                 "Score": 100
                             }
                         ]
@@ -3511,121 +2877,129 @@
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpL111",
+                                "upgradeId": "upgHpL112",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 23
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 23
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 25
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 25
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 25
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 25
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 25
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 25
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 26
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 25
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 26
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 26
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 26
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Power",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "MkXGravis",
                                 "Score": 100
                             }
                         ]
                     },
                     {
                         "battleNr": "16",
-                        "lightningVictory": 4,
+                        "lightningVictory": 3,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgDmgL202",
+                                "upgradeId": "upgDmgL001",
                                 "num": 3,
                                 "denom": 4
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauBossShadowsunLHE",
-                                "progressionIndex": 1
+                                "name": "deathBossTyphusLHE",
+                                "progressionIndex": 3
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 28
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 28
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 31
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 31
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 31
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 31
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 32
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 32
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 32
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 32
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 30
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 32
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 30
                             }
                         ],
                         "objectives": [
                             {
-                                "ObjectiveType": "NotDamageType",
-                                "ObjectiveTarget": "Bolter",
+                                "ObjectiveType": "NotTrait",
+                                "ObjectiveTarget": "CrushingStrike",
                                 "Score": 100
                             }
                         ]
@@ -3640,57 +3014,769 @@
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
-                                "upgradeId": "upgHpM003",
+                                "upgradeId": "upgHpM001",
                                 "num": 1,
                                 "denom": 6
                             }
                         },
                         "enemies": [
                             {
-                                "name": "tauBossFarsightLHE",
-                                "progressionIndex": 1
+                                "name": "deathBossTyphusLHE",
+                                "progressionIndex": 4
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
+                                "name": "deathBossPutrifierLHE",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "deathNpc4BlightlordTerminator",
                                 "progressionIndex": 34
                             },
                             {
-                                "name": "tauNpc5StealthSuit",
-                                "progressionIndex": 34
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 34
+                                "name": "deathNpc2PlagueMarine",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 34
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc6Carnivore",
-                                "progressionIndex": 34
+                                "name": "deathNpc3Nurglings",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 35
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 35
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 35
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 33
                             },
                             {
-                                "name": "tauNpc1FireWarrior",
-                                "progressionIndex": 35
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 33
+                            },
+                            {
+                                "name": "deathNpc1Poxwalker",
+                                "progressionIndex": 33
                             }
                         ],
                         "objectives": [
                             {
                                 "ObjectiveType": "NotTrait",
-                                "ObjectiveTarget": "Infiltrate",
+                                "ObjectiveTarget": "BeastSlayer",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "unitId": "astarEradicator",
+        "allowedFactions": ["AdeptusAstartes", "Ultramarines", "Sisterhood", "BloodAngels"],
+        "enemyFactions": ["BlackLegion"],
+        "tiers": [
+            {
+                "index": 0,
+                "battles": [
+                    {
+                        "battleNr": "1",
+                        "lightningVictory": 2,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmC002",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossHaarkenLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 3
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            },
+                            {
+                                "ObjectiveType": "UseNoSummons",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "2",
+                        "lightningVictory": 2,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgDmgC003",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossHaarkenLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 4
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "3",
+                        "lightningVictory": 2,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmC001",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossHaarkenLHE",
+                                "progressionIndex": 2
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 8
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 5
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "index": 1,
+                "battles": [
+                    {
+                        "battleNr": "4",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmU002",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 6
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 6
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 6
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            },
+                            {
+                                "ObjectiveType": "UseNoSummons",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "5",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmU001",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 6
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 6
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "6",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgDmgU003",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossPossessionLHE",
+                                "progressionIndex": 2
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 7
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "index": 2,
+                "battles": [
+                    {
+                        "battleNr": "7",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgDmgR007",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            },
+                            {
+                                "ObjectiveType": "UseNoSummons",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "8",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmR005",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "9",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgHpR021",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "10",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmR006",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "11",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmR015",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossObliteratorLHE",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "index": 3,
+                "battles": [
+                    {
+                        "battleNr": "12",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgHpE003",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc4Havoc",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "13",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmE013",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc4Havoc",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "14",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgDmgE011",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossTerminatorLHE",
+                                "progressionIndex": 4
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "index": 4,
+                "battles": [
+                    {
+                        "battleNr": "15",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgHpL100",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    },
+                    {
+                        "battleNr": "16",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgArmL001",
+                                "num": 3,
+                                "denom": 4
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackBossAbaddonLHE",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
+                                "Score": 100
+                            }
+                        ]
+                    }
+                ]
+            },
+            {
+                "index": 5,
+                "battles": [
+                    {
+                        "battleNr": "17",
+                        "lightningVictory": 3,
+                        "loot": {
+                            "reward": {
+                                "upgradeId": "upgHpM004",
+                                "num": 1,
+                                "denom": 6
+                            }
+                        },
+                        "enemies": [
+                            {
+                                "name": "blackNpc1Bloodletter",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc2Terminator",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc3TraitorGuardsman",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackNpc4Havoc",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc1PinkHorror",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc2Screamer",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "thousNpc3RubricMarine",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackBossTerminatorLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackBossObliteratorLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackBossPossessionLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackBossHaarkenLHE",
+                                "progressionIndex": 1
+                            },
+                            {
+                                "name": "blackBossAbaddonLHE",
+                                "progressionIndex": 1
+                            }
+                        ],
+                        "objectives": [
+                            {
+                                "ObjectiveType": "NoDamageTakenByAnyHero",
                                 "Score": 100
                             }
                         ]

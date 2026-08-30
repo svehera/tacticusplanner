@@ -2341,7 +2341,7 @@
                                 "target": 8,
                                 "locaKey": "WinBattlesWithHero_description",
                                 "taskParameters": {
-                                    "heroId": "astraYarrick"
+                                    "heroId": "votanChampion"
                                 }
                             }
                         ]
@@ -2383,7 +2383,7 @@
                                 "target": 15,
                                 "locaKey": "UseAbilityWithFaction_description",
                                 "taskParameters": {
-                                    "factionId": "AstraMilitarum"
+                                    "factionId": "LeaguesOfVotann"
                                 }
                             }
                         ]
@@ -2411,7 +2411,7 @@
                                 "target": 5,
                                 "locaKey": "SlayEnemiesWithTrait_description",
                                 "taskParameters": {
-                                    "trait": "Resilient"
+                                    "trait": "PrioritisedEfficiency"
                                 }
                             }
                         ]
@@ -2425,7 +2425,7 @@
                                 "target": 30,
                                 "locaKey": "SlayEnemiesWithFaction_description",
                                 "taskParameters": {
-                                    "factionId": "AstraMilitarum"
+                                    "factionId": "LeaguesOfVotann"
                                 }
                             }
                         ]

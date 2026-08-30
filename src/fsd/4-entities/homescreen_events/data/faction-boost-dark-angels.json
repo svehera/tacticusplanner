@@ -258,8 +258,8 @@
                 "Earn points by battling with the Dark Angels and claim exclusive rewards!",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
-                "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the unit who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
+                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the character who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
             ]
         },
         "mid": {
@@ -519,8 +519,8 @@
                 "Earn points by battling with the Dark Angels and claim exclusive rewards!",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
-                "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the unit who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
+                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the character who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
             ]
         },
         "low": {
@@ -780,8 +780,8 @@
                 "Earn points by battling with the Dark Angels and claim exclusive rewards!",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_DarkAngels\">Dark Angels</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
-                "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the unit who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
+                "You gain <style=\"HSE_Points_FactionBoostDarkAngels\">{[POINTS]} Dark Angels points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostDarkAngels\">+{[POINTS]} Dark Angels point</style> when the character who defeats the enemy is a <style=\"FactionIcon_DarkAngels\">Dark Angels</style>."
             ]
         }
     }

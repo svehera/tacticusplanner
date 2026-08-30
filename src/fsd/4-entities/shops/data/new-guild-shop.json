@@ -82,9 +82,24 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "reward": "shards_darkaHellblaster:5",
+                "maxPurchases": "4",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "reward": "shards_spaceWolfPriest:5",
                 "maxPurchases": "4",
                 "cost": {
                     "type": "guildCredits",
@@ -106,7 +121,9 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * TUE,FRI *",
                 "reward": "shards_bloodIntercessor:5",
                 "maxPurchases": "2",
@@ -117,9 +134,37 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                "reward": "shards_worldExecutions:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * WED,SAT *",
                 "reward": "shards_bloodDeathCompany:5",
+                "maxPurchases": "2",
+                "cost": {
+                    "type": "guildCredits",
+                    "amount": 525
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * WED,SAT *",
+                "reward": "shards_worldEightbound:5",
                 "maxPurchases": "2",
                 "cost": {
                     "type": "guildCredits",

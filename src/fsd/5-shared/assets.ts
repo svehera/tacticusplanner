@@ -170,6 +170,7 @@ import powupReactivateAbility from '@/assets/images/snowprint_assets/powerups/ui
 import powupReinforcement from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reinforcement_01.png';
 import powupReinforcementShield from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reinforcementshield_01.png';
 import powupResurrect from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_resurrect_01.png';
+import expeditionSpeedUp from '@/assets/images/snowprint_assets/resources/Resource_ExpeditionSpeedUp.png';
 import commonForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_common.png';
 import epicForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_epic.png';
 import legendaryForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_legendary.png';
@@ -209,10 +210,12 @@ import crusadeNpc from '@/assets/images/snowprint_assets/resources/ui_icon_resou
 import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resource_elder_shop_currency_large.png';
 import seasonalEventCurrencyApril2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_april_2026.png';
 import seasonalEventCurrencyAugust2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_august_2026.png';
+import seasonalEventCurrencyCrescendo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_crescendo_01.png';
 import seasonalEventCurrencyHolidays2025 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_holiday_25.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
 import seasonalEventCurrencyMarch2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_march_2026.png';
 import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
+import seasonalEventCurrencySeptember2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_september_2026.png';
 import eventPoints from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_points_seasonalevent.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
@@ -352,6 +355,14 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     seasonalEventCurrencyMay2026: {
         file: seasonalEventCurrencyMay2026,
         label: 'Seasonal Event Currency (May 2026)',
+    },
+    seasonalEventCurrencySeptember2026: {
+        file: seasonalEventCurrencySeptember2026,
+        label: 'Seasonal Event Currency (September 2026)',
+    },
+    seasonalEventCurrencyCrescendo: {
+        file: seasonalEventCurrencyCrescendo,
+        label: 'Seasonal Event Currency (Crescendo)',
     },
     upgradeCommon: {
         file: upgradeCommon,
@@ -988,6 +999,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     raidTicket: {
         file: raidTicket,
         label: 'Raid Ticket',
+    },
+    expeditionSpeedUp: {
+        file: expeditionSpeedUp,
+        label: 'Expedition Speed Up',
     },
     bloodAngelsReq: {
         file: bloodAngelsReq,

@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_Crusade_Crescendo",
+    "title": "Terminus Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>Terminus</i> Survival event!",
+    "featuredUnits": [
+        "adeptRetributor",
+        "custoKyrus",
+        "adeptHospitaller",
+        "astraYarrick",
+        "admecMarshall",
+        "custoTrajann"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 15
+    }
+}

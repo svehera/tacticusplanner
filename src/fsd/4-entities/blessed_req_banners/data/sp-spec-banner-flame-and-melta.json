@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_FlameAndMelta",
+    "title": "Flame and Melta Requisition",
+    "tagline": "Burn your enemies to cinders with these units that deal <style=\"DMG_Flame\">Flame Damage</style> or <style=\"DMG_Melta\">Melta Damage</style>!",
+    "featuredUnits": [
+        "adeptRetributor",
+        "worldTerminator",
+        "blackObliterator",
+        "bloodDante",
+        "tauShadowsun",
+        "blackForgefiend"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 8
+    }
+}

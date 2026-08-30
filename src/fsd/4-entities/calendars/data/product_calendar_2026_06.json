@@ -2196,7 +2196,6 @@
                 {
                     "variant": "L1_relic_SHD",
                     "title": "The Sanguine Sword",
-                    "banner": "In the Emperor's Name",
                     "free": false,
                     "priceCents": 4499,
                     "rewards": ["seasonalEventCurrencyJune2026:270", "R_Crit_Vitarus:1", "mythicDust:470"]

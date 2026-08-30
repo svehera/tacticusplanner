@@ -54,10 +54,25 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "freeOffer": "draft_machinesOfWarTokens:10",
                 "reward": "shards_genesKelermorph:5",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_astraDreir:5",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 900
@@ -116,9 +131,23 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * FRI *",
                 "reward": "shards_genesKelermorph:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * FRI *",
+                "reward": "shards_astraDreir:10",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 1800
@@ -138,9 +167,23 @@
         [
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_astraDreir:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperExultant:10",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 1800
@@ -150,9 +193,23 @@
         [
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_emperExultant:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astarCyrus:10",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 1800
@@ -195,7 +252,9 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "reward": "shards_bloodMephiston:5",
                 "maxPurchases": "2",
@@ -249,9 +308,23 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                },
                 "cronSchedule": "0 0 0 ? * THU *",
                 "reward": "shards_bloodMephiston:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                },
+                "cronSchedule": "0 0 0 ? * THU *",
+                "reward": "shards_genesPatriarch:20",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 3600
