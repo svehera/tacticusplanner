@@ -207,4 +207,9 @@ describe('hseEarnsRaidPoints', () => {
         const resolved = resolveHseTier(findEvent('arsenal_of_war'), 'high');
         expect(hseEarnsRaidPoints(resolved!.tier, 'arsenal_of_war')).toBe(false);
     });
+
+    it('is false for an event whose killUnits tracker is restricted to non-raid modes (Arena/Onslaught/Salvage Run)', () => {
+        const resolved = resolveHseTier(findEvent('hse_trait_boost_terminator_armour'), 'high');
+        expect(hseEarnsRaidPoints(resolved!.tier, 'hse_trait_boost_terminator_armour')).toBe(false);
+    });
 });

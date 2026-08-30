@@ -68,14 +68,30 @@ export function getHseTierKeyForRoster(pl: number, hasBlueStarUnit: boolean): Ho
     return tier === 'medium' ? 'mid' : tier;
 }
 
+// Mirrors UpgradesService.getBattleGameModeId in upgrades.service.ts — the mode ids a real raid
+// location can resolve to. Kept in sync manually; if that mapping changes, update this too.
+const CAMPAIGN_BATTLE_MODE_IDS = [
+    'Campaign',
+    'MirrorCampaign',
+    'EliteCampaign',
+    'MirrorEliteCampaign',
+    'CampaignEvent',
+];
+
 /**
- * True if this resolved tier has a `killUnits` tracker, or a manual override — i.e. it earns
- * points via campaign-battle raiding at all. Deliberately mirrors `getGenericHsePoints` in
- * upgrades.service.ts at a coarser grain (existence check only, no per-battle scoring).
+ * True if this resolved tier has a `killUnits` tracker whose restrictions actually permit at
+ * least one real campaign-battle mode id, or has a manual override — i.e. it earns points via
+ * campaign-battle raiding at all. A tracker restricted to only PvP/Waves/TreasureBeach/etc.
+ * (Arena/Onslaught/Salvage Run) doesn't count, even though it's still a `killUnits` tracker.
+ * Deliberately mirrors `getGenericHsePoints` in upgrades.service.ts, checking abstractly across
+ * every possible campaign mode id instead of one concrete battle's.
  */
 export function hseEarnsRaidPoints(tier: HomescreenEventTier, eventName: string): boolean {
-    const hasKillUnitsTracker = tier.liveEventConfig?.trackers?.some(t => t.type === 'killUnits') ?? false;
-    return hasKillUnitsTracker || Boolean(hseRaidPointsOverrides[eventName]);
+    const killUnitsTrackers = tier.liveEventConfig?.trackers?.filter(t => t.type === 'killUnits') ?? [];
+    const earnsFromRaiding = killUnitsTrackers.some(tracker =>
+        CAMPAIGN_BATTLE_MODE_IDS.some(modeId => matchesRestriction(tracker.gameModeRestrictions, tag => tag === modeId))
+    );
+    return earnsFromRaiding || Boolean(hseRaidPointsOverrides[eventName]);
 }
 
 /**
