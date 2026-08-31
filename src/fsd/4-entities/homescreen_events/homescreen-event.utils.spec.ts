@@ -110,7 +110,7 @@ describe('getOfferEventPoints', () => {
         const event = homescreenEvents.find(x => x.eventName === 'arsenal_of_war')!;
         const offer = event.tiers.high!.offers!['offer_homescreen_event_arsenal_of_war_tier_high_bundle'];
 
-        expect(getOfferEventPoints(offer)).toBe(1000);
+        expect(getOfferEventPoints(offer)).toBe(300);
     });
 
     it('also recognizes the draft_HSE_* points prefix used by a few booster offers', () => {

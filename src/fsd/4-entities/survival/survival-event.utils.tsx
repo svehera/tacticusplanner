@@ -140,6 +140,18 @@ export function survivalRewardInfo(rewardId: string): {
         };
     }
 
+    // ── September 2026 profile theme: no dedicated art, text-only label ──────
+    if (type === 'playerProfileTheme_september_2026') {
+        return {
+            icon: (
+                <span className="text-center text-[10px] leading-tight break-all text-(--soft-fg)">Sep 2026 Theme</span>
+            ),
+            label: 'Sep 2026 Theme',
+            qty,
+            resolved: true,
+        };
+    }
+
     // ── ability badges: abilityToken{Rarity}_{Alliance} ──────────────────────
     const badgeMatch = /^abilityToken(Common|Uncommon|Rare|Epic|Legendary|Mythic)_(Imperial|Xenos|Chaos)$/.exec(type);
     if (badgeMatch) {
