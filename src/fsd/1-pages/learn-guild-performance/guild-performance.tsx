@@ -328,6 +328,7 @@ export const GuildPerformance = () => {
                                     names={names}
                                     selectedSeason={selectedSeason}
                                     selectedPlayerId={selectedPlayerId}
+                                    canExcludePlayers={hasGuildApiKey}
                                 />
                             </div>
                         )}

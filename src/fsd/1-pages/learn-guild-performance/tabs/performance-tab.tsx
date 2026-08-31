@@ -9,7 +9,7 @@ import {
     type TacticusGuildRaidResponse,
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
-import { Segmented, Switch } from '@/fsd/5-shared/ui';
+import { Segmented, SelectMulti, Switch } from '@/fsd/5-shared/ui';
 import { RarityIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character/characters.service';
@@ -33,6 +33,7 @@ import {
     bossPrefixDisplayNames,
     computeDefaultRarities,
     getAvailableBosses,
+    resolvePlayerName,
     unitDisplayLabel,
 } from '../guild-performance.utils';
 
@@ -676,6 +677,7 @@ export const PerformanceTab = ({
     names,
     selectedSeason,
     selectedPlayerId,
+    canExcludePlayers = false,
 }: {
     currentData: TacticusGuildRaidResponse | undefined;
     seasonHistory?: GuildSeasonHistoryResponse;
@@ -684,6 +686,8 @@ export const PerformanceTab = ({
     selectedSeason: number | undefined;
     /** Page-level sticky player selection. */
     selectedPlayerId: string | undefined;
+    /** Keyholders only: enables the "Exclude players" dropdown on the live season. */
+    canExcludePlayers?: boolean;
 }) => {
     // A historical season currently supports only the full-guild Performance Index (reconstructed
     // from the aggregate); the live season keeps the full per-hit tables and filters.
@@ -735,6 +739,18 @@ export const PerformanceTab = ({
     // --- exclude kills ---
     const [excludeKills, setExcludeKills] = useState(true);
 
+    // --- exclude players (keyholders, live season) — stores the excluded ids so "all checked"
+    // stays correct while the season data is still loading ---
+    const [excludedUserIds, setExcludedUserIds] = useState<string[]>([]);
+    const excludedSet = useMemo(() => new Set(excludedUserIds), [excludedUserIds]);
+    const seasonPlayers = useMemo(() => {
+        const ids = new Set<string>();
+        for (const entry of allSeasonEntries) ids.add(entry.userId);
+        return [...ids]
+            .map(userId => ({ userId, displayName: resolvePlayerName(userId, names) }))
+            .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+    }, [allSeasonEntries, names]);
+
     const historyPlayerView = useMemo(
         () =>
             historySummary && selectedPlayerId !== undefined
@@ -748,6 +764,7 @@ export const PerformanceTab = ({
         setRarityOverride(undefined);
         setSelectedBossPrefixes(undefined);
         setSelectedPrimeUnitIds(undefined);
+        setExcludedUserIds([]);
     }, [selectedSeason]);
 
     const handleRarityChange = (rarities: Rarity[]) => {
@@ -763,8 +780,8 @@ export const PerformanceTab = ({
                 selectedRarities: selectedRaritiesSet,
                 selectedBossKeys: new Set(effectiveBossPrefixes),
                 selectedPrimeUnitIds: new Set(effectivePrimeUnitIds),
-            }),
-        [allSeasonEntries, selectedRaritiesSet, effectiveBossPrefixes, effectivePrimeUnitIds]
+            }).filter(entry => !excludedSet.has(entry.userId)),
+        [allSeasonEntries, selectedRaritiesSet, effectiveBossPrefixes, effectivePrimeUnitIds, excludedSet]
     );
 
     // Breakdown ignores boss/prime selection — only rarity + bombs + excludeKills filter applies.
@@ -774,9 +791,10 @@ export const PerformanceTab = ({
                 if (entry.damageType === TacticusDamageType.Bomb) return false;
                 if (!selectedRaritiesSet.has(entry.rarity)) return false;
                 if (excludeKills && entry.remainingHp === 0) return false;
+                if (excludedSet.has(entry.userId)) return false;
                 return true;
             }),
-        [allSeasonEntries, selectedRaritiesSet, excludeKills]
+        [allSeasonEntries, selectedRaritiesSet, excludeKills, excludedSet]
     );
 
     // --- view data ---
@@ -902,8 +920,38 @@ export const PerformanceTab = ({
                 <FilterGroup label="Exclude kills">
                     <Switch isSelected={excludeKills} onChange={setExcludeKills} />
                 </FilterGroup>
+                {canExcludePlayers && seasonPlayers.length > 1 && (
+                    <FilterGroup label="Exclude players">
+                        <SelectMulti<{ userId: string; displayName: string }>
+                            options={seasonPlayers}
+                            value={seasonPlayers.filter(player => !excludedSet.has(player.userId))}
+                            by={(a, z) => a.userId === z.userId}
+                            onChange={selected => {
+                                // Ignore the built-in "clear all" ✕ — excluding everyone would blank the tab.
+                                if (selected.length === 0) return;
+                                const included = new Set(selected.map(player => player.userId));
+                                setExcludedUserIds(
+                                    seasonPlayers
+                                        .filter(player => !included.has(player.userId))
+                                        .map(player => player.userId)
+                                );
+                            }}
+                            renderOption={player => <span>{player.displayName}</span>}
+                            renderValue={() => (
+                                <span>
+                                    {excludedUserIds.length === 0
+                                        ? 'All players'
+                                        : `${excludedUserIds.length} excluded`}
+                                </span>
+                            )}
+                            ariaLabel="Exclude players from guild performance stats"
+                            className="w-56"
+                        />
+                    </FilterGroup>
+                )}
                 <span className="ml-auto text-xs text-(--soft-fg)">
                     {guildView.rows.length} players · {guildView.totalHits} non-kill hits
+                    {excludedUserIds.length > 0 && ` · ${excludedUserIds.length} excluded`}
                 </span>
             </FilterBar>
 
