@@ -396,6 +396,16 @@ export const RarityFilter = ({
     </FilterGroup>
 );
 
+/** Rarity → the shared `--rarity-*` token, for the ring drawn around a boss/prime portrait. */
+const RARITY_RING_CLASS: Record<Rarity, string> = {
+    [Rarity.Common]: 'ring-(--rarity-common)',
+    [Rarity.Uncommon]: 'ring-(--rarity-uncommon)',
+    [Rarity.Rare]: 'ring-(--rarity-rare)',
+    [Rarity.Epic]: 'ring-(--rarity-epic)',
+    [Rarity.Legendary]: 'ring-(--rarity-legendary)',
+    [Rarity.Mythic]: 'ring-(--rarity-mythic)',
+};
+
 /**
  * Portrait toggles for a list of boss/prime options. Generic over the option type: bosses pass a
  * `BossFilterOption` (keyed by its `key`, distinct per boss slot), primes pass their bare unitId
@@ -409,6 +419,7 @@ export const PrefixFilter = <T,>({
     label,
     available,
     getKey,
+    getRarity,
     selected,
     onChange,
     iconFor,
@@ -417,6 +428,9 @@ export const PrefixFilter = <T,>({
     label: string;
     available: T[];
     getKey: (option: T) => string;
+    /** Draws a rarity-colored ring around the icon when provided (bosses/primes only — omit for
+     *  filters with no rarity concept). */
+    getRarity?: (option: T) => Rarity | undefined;
     selected: string[];
     onChange: (keys: string[]) => void;
     iconFor: (option: T) => { icon: string | undefined; name: string };
@@ -429,6 +443,8 @@ export const PrefixFilter = <T,>({
                 const key = getKey(option);
                 const isActive = selected.includes(key);
                 const { icon, name } = iconFor(option);
+                const rarity = getRarity?.(option);
+                const ringClass = rarity === undefined ? undefined : `rounded-full ring-2 ${RARITY_RING_CLASS[rarity]}`;
                 return (
                     <button
                         key={key}
@@ -442,7 +458,9 @@ export const PrefixFilter = <T,>({
                         {icon === undefined ? (
                             <span className="px-1 text-xs">{name}</span>
                         ) : (
-                            <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
+                            <span className={ringClass}>
+                                <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
+                            </span>
                         )}
                     </button>
                 );
@@ -484,16 +502,6 @@ export const ReadinessTile = ({
         )}
     </div>
 );
-
-/** Rarity → the shared `--rarity-*` token, for the ring drawn around a boss/prime portrait. */
-const RARITY_RING_CLASS: Record<Rarity, string> = {
-    [Rarity.Common]: 'ring-(--rarity-common)',
-    [Rarity.Uncommon]: 'ring-(--rarity-uncommon)',
-    [Rarity.Rare]: 'ring-(--rarity-rare)',
-    [Rarity.Epic]: 'ring-(--rarity-epic)',
-    [Rarity.Legendary]: 'ring-(--rarity-legendary)',
-    [Rarity.Mythic]: 'ring-(--rarity-mythic)',
-};
 
 /**
  * Portrait for a boss or prime, labelled with its display name.

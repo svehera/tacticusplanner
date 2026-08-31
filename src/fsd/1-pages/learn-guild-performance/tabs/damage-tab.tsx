@@ -605,6 +605,7 @@ export const DamageTab = ({
                         label="Boss"
                         available={availableBossPrefixes}
                         getKey={option => option.key}
+                        getRarity={option => option.rarity}
                         selected={effectiveBossPrefixes}
                         onChange={setSelectedBossPrefixes}
                         iconFor={bossIconFor}
