@@ -32,6 +32,7 @@ export const PlanRoutes = () => {
     const questsMenuItem = menuItemById['quests'];
     const cesMenuItem = menuItemById['ces'];
     const hsesMenuItem = menuItemById['hses'];
+    const survivalMenuItem = menuItemById['survival'];
 
     const [selectedRoutes, setSelectedRoutes] = useState<SelectedRoutes>(SelectedRoutes.all);
 
@@ -49,6 +50,7 @@ export const PlanRoutes = () => {
                         hsesMenuItem,
                         shopEventsMenuItem,
                         bulkGoalCreatorMenuItem,
+                        survivalMenuItem,
                     ].map(menuItem => (
                         <MobileNavCard
                             key={menuItem.label}
