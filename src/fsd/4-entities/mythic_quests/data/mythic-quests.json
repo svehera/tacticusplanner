@@ -5660,7 +5660,7 @@
                     "rewards": ["mythicShards_emperLucius:4", "heroAscensionOrbMythic_Chaos:2", "xpMythic:1"],
                     "tasks": [
                         {
-                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_description",
+                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_ArmourOfShriekingSouls_description",
                             "name": "SlayEnemiesWithHeroToUnitEffectInOneBattle",
                             "target": 1,
                             "taskParameters": {
@@ -6856,6 +6856,117 @@
                             "target": 100000,
                             "taskParameters": {
                                 "heroId": "spaceStormcaller"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "characterId": "astarEradicator",
+            "characterName": "Nubari",
+            "quests": [
+                {
+                    "number": 1,
+                    "name": "mythic_astarEradicator_01",
+                    "rewards": ["mythicShards_astarEradicator:4", "heroAscensionOrbMythic_Imperial:2", "xpMythic:1"],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToTraitInOneBattle_description",
+                            "name": "SlayEnemiesWithHeroToTraitInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "trait": "Vehicle",
+                                "heroId": "astarEradicator",
+                                "killAmount": "5"
+                            }
+                        },
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToTraitInOneBattle_description",
+                            "name": "SlayEnemiesWithHeroToTraitInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "trait": "BigTarget",
+                                "heroId": "astarEradicator",
+                                "killAmount": "5"
+                            }
+                        },
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToTraitInOneBattle_description",
+                            "name": "SlayEnemiesWithHeroToTraitInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "trait": "Impervious",
+                                "heroId": "astarEradicator",
+                                "killAmount": "1"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 2,
+                    "name": "mythic_astarEradicator_02",
+                    "rewards": ["mythicShards_astarEradicator:4", "heroAscensionOrbMythic_Imperial:2", "gold:250000"],
+                    "tasks": [
+                        {
+                            "locaKey": "DealDamageWithHeroToUnitEffectInOneTurn_TileEffect_description",
+                            "name": "DealDamageWithHeroToUnitEffectInOneTurn",
+                            "target": 1,
+                            "taskParameters": {
+                                "unitEffect": "Fire",
+                                "heroId": "astarEradicator",
+                                "damageAmount": "15000"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 3,
+                    "name": "mythic_astarEradicator_03",
+                    "rewards": [
+                        "mythicShards_astarEradicator:4",
+                        "heroAscensionOrbMythic_Imperial:2",
+                        "abilityTokenMythic_Imperial:5"
+                    ],
+                    "tasks": [
+                        {
+                            "locaKey": "OverkillWithHero_description",
+                            "name": "OverkillWithHero",
+                            "target": 200,
+                            "taskParameters": {
+                                "heroId": "astarEradicator"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 4,
+                    "name": "mythic_astarEradicator_04",
+                    "rewards": ["mythicShards_astarEradicator:4", "heroAscensionOrbMythic_Imperial:2", "gold:250000"],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_description",
+                            "name": "SlayEnemiesWithHeroToUnitEffectInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "unitEffect": "Stunned",
+                                "heroId": "astarEradicator",
+                                "killAmount": "4"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 5,
+                    "name": "mythic_astarEradicator_05",
+                    "rewards": ["mythicShards_astarEradicator:4", "heroAscensionOrbMythic_Imperial:2", "I_Crit_M002"],
+                    "tasks": [
+                        {
+                            "locaKey": "DealDamageWithHero_description",
+                            "name": "DealDamageWithHero",
+                            "target": 200000,
+                            "taskParameters": {
+                                "heroId": "astarEradicator"
                             }
                         }
                     ]
@@ -9959,13 +10070,12 @@
                     "rewards": ["mythicShards_votanUthar:4", "heroAscensionOrbMythic_Xenos:2", "xpMythic:1"],
                     "tasks": [
                         {
-                            "locaKey": "SlayEnemiesWithHeroWithUnitEffectInOneBattle_UnitEffect_description",
-                            "name": "SlayEnemiesWithHeroWithUnitEffectInOneBattle",
+                            "locaKey": "SlayEnemiesToUnitEffectInOneBattle_description",
+                            "name": "SlayEnemiesToUnitEffectInOneBattle",
                             "target": 1,
                             "taskParameters": {
-                                "unitEffect": "AncestralFortune_ExtraCritChance",
-                                "heroId": "votanUthar",
-                                "killAmount": "6"
+                                "unitEffect": "AncestralFortune_NoHeal",
+                                "killAmount": "3"
                             }
                         }
                     ]
@@ -9976,13 +10086,12 @@
                     "rewards": ["mythicShards_votanUthar:4", "heroAscensionOrbMythic_Xenos:2", "gold:250000"],
                     "tasks": [
                         {
-                            "locaKey": "DealDamageWithHeroWithUnitEffectInOneTurn_UnitEffect_description",
-                            "name": "DealDamageWithHeroWithUnitEffectInOneTurn",
+                            "locaKey": "DealDamageWithHeroInOneTurn_description",
+                            "name": "DealDamageWithHeroInOneTurn",
                             "target": 1,
                             "taskParameters": {
-                                "unitEffect": "AncestralFortune_ExtraCritChance",
                                 "heroId": "votanUthar",
-                                "damageAmount": "10000"
+                                "damageAmount": "12000"
                             }
                         }
                     ]
@@ -11108,6 +11217,12 @@
             "Term": "Quests/DealDamageWithHeroToUnitEffect_UnitEffect_Overwatch_description",
             "Languages": [
                 "Deal {[TARGET_AMOUNT]} Damage to <style=\"Buff_Overwatching\">Overwatching</style> enemies with {[HERO_NAME]}"
+            ]
+        },
+        {
+            "Term": "Quests/SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_ArmourOfShriekingSouls_description",
+            "Languages": [
+                "Defeat {[KILL_AMOUNT]} enemies that have the <i>{[UNIT_EFFECT]}</i> effect with the <i>{[UNIT_EFFECT]}</i> effect in one battle"
             ]
         },
         {

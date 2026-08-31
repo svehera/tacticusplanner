@@ -1,0 +1,1896 @@
+{
+    "eventName": "season_crescendo_01_event",
+    "theme": "crescendo_01",
+    "featuredHero": {
+        "id": "astraDreir",
+        "name": "Dreir"
+    },
+    "resourceId": "seasonalEventCurrencyCrescendo",
+    "tradeInResourceAmountPerPoint": 250,
+    "tradeInResourceAmountPerSeasonalCurrency": 150,
+    "survival": {
+        "featuredHeroId": "astraDreir",
+        "maxStamina": 5,
+        "staminaRegenerationTime": 43201,
+        "staminaRegenerationAmount": 1,
+        "staminaGrantTokensOnStartPolicy": "None",
+        "startStamina": 2,
+        "battleSetId": "survival_crescendo_01",
+        "pctOfMaxScoreToShowIfNoHighScore": 18,
+        "scorePerTurnSkipped": 400,
+        "scorePerKill": {
+            "blackNpc3TraitorGuardsman:6": 8,
+            "blackNpc1Bloodletter:6": 12,
+            "blackNpc3TraitorGuardsman:9": 40,
+            "blackNpc1Bloodletter:7": 61,
+            "blackNpc3TraitorGuardsman:7": 30,
+            "thousNpc1PinkHorror:7": 87,
+            "deathNpc1Poxwalker:12": 121,
+            "deathNpc2PlagueMarine:10": 181,
+            "deathNpc3Nurglings:10": 60,
+            "blackNpc2Terminator:13": 200,
+            "blackNpc1Bloodletter:13": 100,
+            "blackNpc3TraitorGuardsman:13": 67,
+            "thousNpc2Screamer:16": 116,
+            "thousNpc1PinkHorror:16": 232,
+            "deathNpcPutrifier:12": 170,
+            "deathNpc2PlagueMarine:17": 255,
+            "deathNpc3Nurglings:17": 85,
+            "blackBossTerminator:5": 388,
+            "blackNpc1Bloodletter:21": 180,
+            "blackNpc3TraitorGuardsman:25": 129,
+            "thousNpc2Screamer:21": 141,
+            "thousNpcInfernalMaster:13": 282,
+            "thousNpc3RubricMarine:21": 422,
+            "blackNpc3TraitorGuardsman:24": 212,
+            "blackNpc4Havoc:24": 380,
+            "deathNpc3Nurglings:24": 184,
+            "deathNpc2PlagueMarine:24": 368,
+            "deathNpcBlightlord:14": 553,
+            "deathNpcRotbone:14": 553,
+            "thousNpc1PinkHorror:28": 300,
+            "thousNpcAhriman:16": 800,
+            "thousNpcSekhetar:16": 800,
+            "blackNpc1Bloodletter:33": 330,
+            "blackNpc4Havoc:33": 480,
+            "blackNpc3TraitorGuardsman:33": 312,
+            "thousNpc2Screamer:35": 225,
+            "thousNpcTerminator:17": 675,
+            "thousNpc3RubricMarine:35": 675,
+            "deathNpc1Poxwalker:38": 190,
+            "deathNpcBlightbringer:17": 760,
+            "deathNpc2PlagueMarine:38": 570,
+            "deathNpcTyphus:17": 760,
+            "blackNpc1Bloodletter:40": 400,
+            "blackNpcHaarken:18": 870,
+            "blackNpcAbaddon:18": 1087,
+            "blackNpc3TraitorGuardsman:40": 350,
+            "blackNpcObliterator:18": 870,
+            "blackNpc2Terminator:43": 435,
+            "thousNpc1PinkHorror:42": 581,
+            "thousNpcInfernalMaster:18": 1455,
+            "thousNpc3RubricMarine:42": 873,
+            "thousNpcTzaangor:18": 1164,
+            "thousNpcSorcerer:18": 1455,
+            "deathNpc3Nurglings:45": 603,
+            "deathBossBlightlordSurv:1": 1809,
+            "deathBossPutrifierSurv:1": 1809,
+            "deathBossBlightbringerSurv:1": 1809,
+            "deathNpc2PlagueMarine:45": 1206,
+            "deathBossTyphusSurv:2": 1809,
+            "deathBossRotboneSurv:1": 1809,
+            "deathNpc2PlagueMarineSurv:3": 2000,
+            "thousNpc3RubricMarineSurv:3": 2000,
+            "blackNpc4HavocSurv:3": 2000
+        },
+        "rarityCapMilestones": {
+            "Uncommon": "xp_seasonal:45",
+            "Rare": "xp_seasonal:25",
+            "Epic": "xp_seasonal:25",
+            "Legendary": "xp_seasonal:25",
+            "Mythic": "xp_seasonal:15"
+        },
+        "ironMedalReward": "xp_crusadePoints:25",
+        "bronzeMedalReward": "xp_crusadePoints:50",
+        "silverMedalReward": "xp_crusadePoints:75",
+        "goldMedalReward": "xp_crusadePoints:100",
+        "platinumMedalReward": "xp_crusadePoints:125",
+        "diamondMedalReward": "xp_crusadePoints:150",
+        "adamantineMedalReward": "xp_crusadePoints:200",
+        "ironMedalWave": 1,
+        "bronzeMedalWave": 3,
+        "silverMedalWave": 6,
+        "goldMedalWave": 9,
+        "platinumMedalWave": 11,
+        "diamondMedalWave": 13,
+        "adamantineMedalWave": 16,
+        "statBoostPct": 7,
+        "statBoostAffectedStats": ["hp", "dmg"],
+        "battleTutorialId": "tut_seasonal_event_1st_crescendo_battle",
+        "postBattleTutorialId": "tut_seasonal_event_meta_post_battle_survival",
+        "persistentRarityUps": {
+            "Uncommon": 3,
+            "Rare": 6,
+            "Epic": 9
+        },
+        "avatarId": "astar_cyrus_01",
+        "isMachinesOfWarAllowedInBattle": false,
+        "useLastStand": false,
+        "modifiers": [
+            {
+                "type": "battleGlobalActiveAbility",
+                "locaKey": "SOME_LOCA_KEY",
+                "abilities": [
+                    {
+                        "abilityId": "Player_SummonSpawn:astraSmnGuardsman",
+                        "abilityLevel": 8,
+                        "rarityCap": "Common",
+                        "usageCosts": [
+                            "crusadeNpc:1",
+                            "crusadeNpc:2",
+                            "crusadeNpc:3",
+                            "crusadeNpc:4",
+                            "crusadeNpc:5",
+                            "crusadeNpc:6",
+                            "crusadeNpc:7",
+                            "crusadeNpc:8",
+                            "crusadeNpc:9",
+                            "crusadeNpc:10",
+                            "crusadeNpc:11",
+                            "crusadeNpc:12",
+                            "crusadeNpc:13",
+                            "crusadeNpc:14",
+                            "crusadeNpc:15",
+                            "crusadeNpc:16",
+                            "crusadeNpc:17",
+                            "crusadeNpc:18",
+                            "crusadeNpc:19",
+                            "crusadeNpc:20"
+                        ]
+                    },
+                    {
+                        "abilityId": "Player_SummonSpawn:astraSmnGuardsman",
+                        "abilityLevel": 17,
+                        "rarityCap": "Uncommon",
+                        "usageCosts": [
+                            "crusadeNpc:1",
+                            "crusadeNpc:2",
+                            "crusadeNpc:3",
+                            "crusadeNpc:4",
+                            "crusadeNpc:5",
+                            "crusadeNpc:6",
+                            "crusadeNpc:7",
+                            "crusadeNpc:8",
+                            "crusadeNpc:9",
+                            "crusadeNpc:10",
+                            "crusadeNpc:11",
+                            "crusadeNpc:12",
+                            "crusadeNpc:13",
+                            "crusadeNpc:14",
+                            "crusadeNpc:15",
+                            "crusadeNpc:16",
+                            "crusadeNpc:17",
+                            "crusadeNpc:18",
+                            "crusadeNpc:19",
+                            "crusadeNpc:20"
+                        ]
+                    },
+                    {
+                        "abilityId": "Player_SummonSpawn:astraSmnGuardsman",
+                        "abilityLevel": 26,
+                        "rarityCap": "Rare",
+                        "usageCosts": [
+                            "crusadeNpc:1",
+                            "crusadeNpc:2",
+                            "crusadeNpc:3",
+                            "crusadeNpc:4",
+                            "crusadeNpc:5",
+                            "crusadeNpc:6",
+                            "crusadeNpc:7",
+                            "crusadeNpc:8",
+                            "crusadeNpc:9",
+                            "crusadeNpc:10",
+                            "crusadeNpc:11",
+                            "crusadeNpc:12",
+                            "crusadeNpc:13",
+                            "crusadeNpc:14",
+                            "crusadeNpc:15",
+                            "crusadeNpc:16",
+                            "crusadeNpc:17",
+                            "crusadeNpc:18",
+                            "crusadeNpc:19",
+                            "crusadeNpc:20"
+                        ]
+                    },
+                    {
+                        "abilityId": "Player_SummonSpawn:astraSmnGuardsman",
+                        "abilityLevel": 35,
+                        "rarityCap": "Epic",
+                        "usageCosts": [
+                            "crusadeNpc:1",
+                            "crusadeNpc:2",
+                            "crusadeNpc:3",
+                            "crusadeNpc:4",
+                            "crusadeNpc:5",
+                            "crusadeNpc:6",
+                            "crusadeNpc:7",
+                            "crusadeNpc:8",
+                            "crusadeNpc:9",
+                            "crusadeNpc:10",
+                            "crusadeNpc:11",
+                            "crusadeNpc:12",
+                            "crusadeNpc:13",
+                            "crusadeNpc:14",
+                            "crusadeNpc:15",
+                            "crusadeNpc:16",
+                            "crusadeNpc:17",
+                            "crusadeNpc:18",
+                            "crusadeNpc:19",
+                            "crusadeNpc:20"
+                        ]
+                    },
+                    {
+                        "abilityId": "Player_SummonSpawn:astraSmnGuardsman",
+                        "abilityLevel": 50,
+                        "rarityCap": "Legendary",
+                        "usageCosts": [
+                            "crusadeNpc:1",
+                            "crusadeNpc:2",
+                            "crusadeNpc:3",
+                            "crusadeNpc:4",
+                            "crusadeNpc:5",
+                            "crusadeNpc:6",
+                            "crusadeNpc:7",
+                            "crusadeNpc:8",
+                            "crusadeNpc:9",
+                            "crusadeNpc:10",
+                            "crusadeNpc:11",
+                            "crusadeNpc:12",
+                            "crusadeNpc:13",
+                            "crusadeNpc:14",
+                            "crusadeNpc:15",
+                            "crusadeNpc:16",
+                            "crusadeNpc:17",
+                            "crusadeNpc:18",
+                            "crusadeNpc:19",
+                            "crusadeNpc:20"
+                        ]
+                    },
+                    {
+                        "abilityId": "Player_SummonSpawn:astraSmnGuardsman",
+                        "abilityLevel": 65,
+                        "rarityCap": "Mythic",
+                        "usageCosts": [
+                            "crusadeNpc:1",
+                            "crusadeNpc:2",
+                            "crusadeNpc:3",
+                            "crusadeNpc:4",
+                            "crusadeNpc:5",
+                            "crusadeNpc:6",
+                            "crusadeNpc:7",
+                            "crusadeNpc:8",
+                            "crusadeNpc:9",
+                            "crusadeNpc:10",
+                            "crusadeNpc:11",
+                            "crusadeNpc:12",
+                            "crusadeNpc:13",
+                            "crusadeNpc:14",
+                            "crusadeNpc:15",
+                            "crusadeNpc:16",
+                            "crusadeNpc:17",
+                            "crusadeNpc:18",
+                            "crusadeNpc:19",
+                            "crusadeNpc:20"
+                        ]
+                    }
+                ],
+                "gameModeRestrictions": {
+                    "allowed": ["Survival"]
+                }
+            }
+        ],
+        "scoreConversionFactor": 1.7,
+        "featuredHeroStatOverrides": {
+            "Common": {
+                "critChance": 20,
+                "critDmg": 50,
+                "blockChance": 30,
+                "blockDmg": 34
+            },
+            "Uncommon": {
+                "critChance": 30,
+                "critDmg": 95,
+                "blockChance": 35,
+                "blockDmg": 74
+            },
+            "Rare": {
+                "critChance": 38,
+                "critDmg": 252,
+                "blockChance": 35,
+                "blockDmg": 185
+            },
+            "Epic": {
+                "critChance": 39,
+                "critDmg": 811,
+                "blockChance": 35,
+                "blockDmg": 604
+            },
+            "Legendary": {
+                "critChance": 40,
+                "critDmg": 1356,
+                "blockChance": 35,
+                "blockDmg": 1024
+            },
+            "Mythic": {
+                "critChance": 41,
+                "critDmg": 2082,
+                "blockChance": 30,
+                "blockDmg": 1828
+            }
+        }
+    },
+    "battle": {
+        "tier": 0,
+        "battleNr": 0,
+        "boardId": "crescendo_01",
+        "power": 145551555975,
+        "waves": [
+            {
+                "round": 1,
+                "power": 504,
+                "army": [
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc3TraitorGuardsman:6",
+                    "blackNpc1Bloodletter:6",
+                    "blackNpc1Bloodletter:6"
+                ],
+                "armyAfterCompletion": ["powupHits", "powupReinforcement"],
+                "armyScore": 100
+            },
+            {
+                "round": 3,
+                "power": 1488,
+                "army": [
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9",
+                    "blackNpc3TraitorGuardsman:9"
+                ],
+                "armyAfterCompletion": ["powupHealth", "powupReinforcementShield"],
+                "armyScore": 150
+            },
+            {
+                "round": 5,
+                "power": 1132,
+                "army": [
+                    "blackNpc1Bloodletter:7",
+                    "blackNpc1Bloodletter:7",
+                    "blackNpc1Bloodletter:7",
+                    "blackNpc1Bloodletter:7",
+                    "blackNpc1Bloodletter:7",
+                    "blackNpc3TraitorGuardsman:7",
+                    "blackNpc3TraitorGuardsman:7",
+                    "blackNpc3TraitorGuardsman:7",
+                    "blackNpc3TraitorGuardsman:7"
+                ],
+                "armyAfterCompletion": ["powupResurrect", "powupReactivateAbility"],
+                "armyScore": 150,
+                "rarityUpgradeOnCompletion": "Uncommon"
+            },
+            {
+                "round": 8,
+                "power": 3616,
+                "army": [
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7",
+                    "thousNpc1PinkHorror:7"
+                ],
+                "armyAfterCompletion": ["powupReinforcement", "powupMeleeHits"],
+                "armyScore": 200
+            },
+            {
+                "round": 10,
+                "power": 3505,
+                "army": [
+                    "deathNpc1Poxwalker:12",
+                    "deathNpc1Poxwalker:12",
+                    "deathNpc1Poxwalker:12",
+                    "deathNpc1Poxwalker:12",
+                    "deathNpc1Poxwalker:12",
+                    "deathNpc2PlagueMarine:10",
+                    "deathNpc2PlagueMarine:10",
+                    "deathNpc3Nurglings:10"
+                ],
+                "armyAfterCompletion": ["powupBomb", "powupHealing"],
+                "armyScore": 250,
+                "rarityUpgradeOnCompletion": "Rare"
+            },
+            {
+                "round": 12,
+                "power": 13728,
+                "army": [
+                    "blackNpc2Terminator:13",
+                    "blackNpc2Terminator:13",
+                    "blackNpc1Bloodletter:13",
+                    "blackNpc1Bloodletter:13",
+                    "blackNpc1Bloodletter:13",
+                    "blackNpc1Bloodletter:13",
+                    "blackNpc3TraitorGuardsman:13",
+                    "blackNpc3TraitorGuardsman:13",
+                    "blackNpc3TraitorGuardsman:13",
+                    "blackNpc3TraitorGuardsman:13"
+                ],
+                "armyAfterCompletion": ["powupReinforcement", "powupReinforcementShield"],
+                "armyScore": 400
+            },
+            {
+                "round": 14,
+                "power": 40594,
+                "army": [
+                    "thousNpc2Screamer:16",
+                    "thousNpc2Screamer:16",
+                    "thousNpc2Screamer:16",
+                    "thousNpc2Screamer:16",
+                    "thousNpc2Screamer:16",
+                    "thousNpc2Screamer:16",
+                    "thousNpc1PinkHorror:16",
+                    "thousNpc1PinkHorror:16",
+                    "thousNpc1PinkHorror:16",
+                    "thousNpc1PinkHorror:16"
+                ],
+                "armyAfterCompletion": ["powupResurrect", "powupReactivateAbility"],
+                "armyScore": 450,
+                "rarityUpgradeOnCompletion": "Epic"
+            },
+            {
+                "round": 16,
+                "power": 63105,
+                "army": [
+                    "deathNpcPutrifier:12",
+                    "deathNpc2PlagueMarine:17",
+                    "deathNpc2PlagueMarine:17",
+                    "deathNpc2PlagueMarine:17",
+                    "deathNpc2PlagueMarine:17",
+                    "deathNpc2PlagueMarine:17",
+                    "deathNpc3Nurglings:17",
+                    "deathNpc3Nurglings:17",
+                    "deathNpc3Nurglings:17"
+                ],
+                "armyAfterCompletion": ["powupDamage", "powupHealing"],
+                "armyScore": 600
+            },
+            {
+                "round": 18,
+                "power": 109720,
+                "army": [
+                    "blackBossTerminator:5",
+                    "blackNpc1Bloodletter:21",
+                    "blackNpc1Bloodletter:21",
+                    "blackNpc1Bloodletter:21",
+                    "blackNpc1Bloodletter:21",
+                    "blackNpc1Bloodletter:21",
+                    "blackNpc3TraitorGuardsman:25",
+                    "blackNpc3TraitorGuardsman:25",
+                    "blackNpc3TraitorGuardsman:25",
+                    "blackNpc3TraitorGuardsman:25"
+                ],
+                "armyAfterCompletion": ["powupBomb", "powupReinforcement"],
+                "armyScore": 600
+            },
+            {
+                "round": 20,
+                "power": 174644,
+                "army": [
+                    "thousNpc2Screamer:21",
+                    "thousNpc2Screamer:21",
+                    "thousNpc2Screamer:21",
+                    "thousNpc2Screamer:21",
+                    "thousNpc2Screamer:21",
+                    "thousNpcInfernalMaster:13",
+                    "thousNpc3RubricMarine:21",
+                    "thousNpc3RubricMarine:21",
+                    "thousNpc3RubricMarine:21",
+                    "thousNpc3RubricMarine:21"
+                ],
+                "armyAfterCompletion": ["powupArmor", "powupReactivateAbility"],
+                "armyScore": 650,
+                "rarityUpgradeOnCompletion": "Legendary"
+            },
+            {
+                "round": 22,
+                "power": 260235,
+                "army": [
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc4Havoc:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc4Havoc:24",
+                    "blackNpc4Havoc:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc3TraitorGuardsman:24",
+                    "blackNpc3TraitorGuardsman:24"
+                ],
+                "armyAfterCompletion": ["powupHits", "powupReinforcement"],
+                "armyScore": 650
+            },
+            {
+                "round": 24,
+                "power": 472778,
+                "army": [
+                    "deathNpc3Nurglings:24",
+                    "deathNpc3Nurglings:24",
+                    "deathNpc3Nurglings:24",
+                    "deathNpc2PlagueMarine:24",
+                    "deathNpc2PlagueMarine:24",
+                    "deathNpcBlightlord:14",
+                    "deathNpc2PlagueMarine:24",
+                    "deathNpcRotbone:14",
+                    "deathNpc2PlagueMarine:24",
+                    "deathNpc2PlagueMarine:24"
+                ],
+                "armyAfterCompletion": ["powupHealing"],
+                "armyScore": 1000
+            },
+            {
+                "round": 26,
+                "power": 1639489,
+                "army": [
+                    "thousNpc1PinkHorror:28",
+                    "thousNpc1PinkHorror:28",
+                    "thousNpc1PinkHorror:28",
+                    "thousNpc1PinkHorror:28",
+                    "thousNpc1PinkHorror:28",
+                    "thousNpc1PinkHorror:28",
+                    "thousNpcAhriman:16",
+                    "thousNpcSekhetar:16"
+                ],
+                "armyAfterCompletion": ["powupMeleeHits", "powupResurrect"],
+                "armyScore": 1000
+            },
+            {
+                "round": 28,
+                "power": 2212371,
+                "army": [
+                    "blackNpc1Bloodletter:33",
+                    "blackNpc1Bloodletter:33",
+                    "blackNpc4Havoc:33",
+                    "blackNpc4Havoc:33",
+                    "blackNpc1Bloodletter:33",
+                    "blackNpc1Bloodletter:33",
+                    "blackNpc1Bloodletter:33",
+                    "blackNpc1Bloodletter:33",
+                    "blackNpc3TraitorGuardsman:33",
+                    "blackNpc3TraitorGuardsman:33",
+                    "blackNpc3TraitorGuardsman:33",
+                    "blackNpc4Havoc:33"
+                ],
+                "armyAfterCompletion": ["powupBomb", "powupReactivateAbility"],
+                "armyScore": 1500,
+                "rarityUpgradeOnCompletion": "Mythic"
+            },
+            {
+                "round": 30,
+                "power": 3524933,
+                "army": [
+                    "thousNpc2Screamer:35",
+                    "thousNpc2Screamer:35",
+                    "thousNpc2Screamer:35",
+                    "thousNpc2Screamer:35",
+                    "thousNpc2Screamer:35",
+                    "thousNpcTerminator:17",
+                    "thousNpc3RubricMarine:35",
+                    "thousNpc3RubricMarine:35",
+                    "thousNpc3RubricMarine:35",
+                    "thousNpc3RubricMarine:35"
+                ],
+                "armyAfterCompletion": ["powupDamage", "powupReinforcement"],
+                "armyScore": 1500
+            },
+            {
+                "round": 32,
+                "power": 4904030,
+                "army": [
+                    "deathNpc1Poxwalker:38",
+                    "deathNpc1Poxwalker:38",
+                    "deathNpc1Poxwalker:38",
+                    "deathNpc1Poxwalker:38",
+                    "deathNpc1Poxwalker:38",
+                    "deathNpcBlightbringer:17",
+                    "deathNpc2PlagueMarine:38",
+                    "deathNpc2PlagueMarine:38",
+                    "deathNpc2PlagueMarine:38",
+                    "deathNpc2PlagueMarine:38",
+                    "deathNpcTyphus:17"
+                ],
+                "armyAfterCompletion": ["powupHealing"],
+                "armyScore": 1500
+            },
+            {
+                "round": 34,
+                "power": 6433246,
+                "army": [
+                    "blackNpc1Bloodletter:40",
+                    "blackNpc1Bloodletter:40",
+                    "blackNpcHaarken:18",
+                    "blackNpc1Bloodletter:40",
+                    "blackNpc1Bloodletter:40",
+                    "blackNpcAbaddon:18",
+                    "blackNpc3TraitorGuardsman:40",
+                    "blackNpc3TraitorGuardsman:40",
+                    "blackNpc3TraitorGuardsman:40",
+                    "blackNpc3TraitorGuardsman:40",
+                    "blackNpcObliterator:18",
+                    "blackNpc2Terminator:43"
+                ],
+                "armyAfterCompletion": ["powupBomb"],
+                "armyScore": 1500
+            },
+            {
+                "round": 36,
+                "power": 9657681,
+                "army": [
+                    "thousNpc1PinkHorror:42",
+                    "thousNpc1PinkHorror:42",
+                    "thousNpc1PinkHorror:42",
+                    "thousNpc1PinkHorror:42",
+                    "thousNpcInfernalMaster:18",
+                    "thousNpc3RubricMarine:42",
+                    "thousNpc3RubricMarine:42",
+                    "thousNpc3RubricMarine:42",
+                    "thousNpcTzaangor:18",
+                    "thousNpcSorcerer:18"
+                ],
+                "armyAfterCompletion": ["powupHealing"],
+                "armyScore": 1500
+            },
+            {
+                "round": 38,
+                "power": 13991848,
+                "army": [
+                    "deathNpc3Nurglings:45",
+                    "deathNpc3Nurglings:45",
+                    "deathNpc3Nurglings:45",
+                    "deathBossBlightlordSurv:1",
+                    "deathBossPutrifierSurv:1",
+                    "deathBossBlightbringerSurv:1",
+                    "deathNpc2PlagueMarine:45",
+                    "deathNpc2PlagueMarine:45",
+                    "deathBossTyphusSurv:2",
+                    "deathBossRotboneSurv:1",
+                    "deathNpc2PlagueMarine:45"
+                ],
+                "armyAfterCompletion": ["powupBomb"],
+                "armyScore": 1500
+            },
+            {
+                "round": 41,
+                "power": 145508047328,
+                "army": [
+                    "deathNpc2PlagueMarineSurv:3",
+                    "thousNpc3RubricMarineSurv:3",
+                    "blackNpc4HavocSurv:3",
+                    "deathNpc2PlagueMarineSurv:3",
+                    "thousNpc3RubricMarineSurv:3",
+                    "blackNpc4HavocSurv:3",
+                    "deathNpc2PlagueMarineSurv:3",
+                    "thousNpc3RubricMarineSurv:3",
+                    "blackNpc4HavocSurv:3",
+                    "deathNpc2PlagueMarineSurv:3",
+                    "thousNpc3RubricMarineSurv:3",
+                    "blackNpc4HavocSurv:3"
+                ],
+                "armyScore": 2000
+            }
+        ],
+        "disallowedFactions": [
+            "Necrons",
+            "BlackLegion",
+            "DeathGuard",
+            "Tyranids",
+            "Orks",
+            "BlackTemplars",
+            "Aeldari",
+            "Tau",
+            "SpaceWolves",
+            "ThousandSons",
+            "DarkAngels",
+            "WorldEaters",
+            "BloodAngels",
+            "Genestealers",
+            "EmperorsChildren",
+            "LeaguesOfVotann",
+            "AdeptusAstartes"
+        ]
+    },
+    "milestoneRewards": [
+        {
+            "requiredProgress": 100,
+            "reward": "seasonalEventCurrencyCrescendo:30"
+        },
+        {
+            "requiredProgress": 205,
+            "reward": "seasonalEventCurrencyCrescendo:40"
+        },
+        {
+            "requiredProgress": 315,
+            "reward": "seasonalEventCurrencyCrescendo:55"
+        },
+        {
+            "requiredProgress": 430,
+            "reward": "seasonalEventCurrencyCrescendo:60"
+        },
+        {
+            "requiredProgress": 550,
+            "reward": "seasonalEventCurrencyCrescendo:65"
+        },
+        {
+            "requiredProgress": 675,
+            "reward": "seasonalEventCurrencyCrescendo:70"
+        },
+        {
+            "requiredProgress": 805,
+            "reward": "seasonalEventCurrencyCrescendo:75"
+        },
+        {
+            "requiredProgress": 940,
+            "reward": "seasonalEventCurrencyCrescendo:80"
+        },
+        {
+            "requiredProgress": 1080,
+            "reward": "seasonalEventCurrencyCrescendo:85"
+        },
+        {
+            "requiredProgress": 1225,
+            "reward": "seasonalEventCurrencyCrescendo:90"
+        },
+        {
+            "requiredProgress": 1375,
+            "reward": "seasonalEventCurrencyCrescendo:95"
+        },
+        {
+            "requiredProgress": 1530,
+            "reward": "seasonalEventCurrencyCrescendo:100"
+        },
+        {
+            "requiredProgress": 1690,
+            "reward": "seasonalEventCurrencyCrescendo:105"
+        },
+        {
+            "requiredProgress": 1860,
+            "reward": "seasonalEventCurrencyCrescendo:110"
+        },
+        {
+            "requiredProgress": 2040,
+            "reward": "seasonalEventCurrencyCrescendo:115"
+        },
+        {
+            "requiredProgress": 2240,
+            "reward": "seasonalEventCurrencyCrescendo:120"
+        },
+        {
+            "requiredProgress": 2465,
+            "reward": "seasonalEventCurrencyCrescendo:125"
+        },
+        {
+            "requiredProgress": 2715,
+            "reward": "seasonalEventCurrencyCrescendo:130"
+        },
+        {
+            "requiredProgress": 2990,
+            "reward": "seasonalEventCurrencyCrescendo:135"
+        },
+        {
+            "requiredProgress": 3290,
+            "reward": "seasonalEventCurrencyCrescendo:140"
+        },
+        {
+            "requiredProgress": 3620,
+            "reward": "seasonalEventCurrencyCrescendo:145"
+        },
+        {
+            "requiredProgress": 3980,
+            "reward": "seasonalEventCurrencyCrescendo:150"
+        },
+        {
+            "requiredProgress": 4400,
+            "reward": "summoningToken:1"
+        },
+        {
+            "requiredProgress": 5000,
+            "reward": "stamina:100"
+        }
+    ],
+    "survivalPoints": {
+        "rarityCapMilestones": {
+            "Uncommon": "xp_seasonal:45",
+            "Rare": "xp_seasonal:25",
+            "Epic": "xp_seasonal:25",
+            "Legendary": "xp_seasonal:25",
+            "Mythic": "xp_seasonal:15"
+        },
+        "medalRewards": {
+            "ironMedalReward": "xp_crusadePoints:25",
+            "bronzeMedalReward": "xp_crusadePoints:50",
+            "silverMedalReward": "xp_crusadePoints:75",
+            "goldMedalReward": "xp_crusadePoints:100",
+            "platinumMedalReward": "xp_crusadePoints:125",
+            "diamondMedalReward": "xp_crusadePoints:150",
+            "adamantineMedalReward": "xp_crusadePoints:200"
+        }
+    },
+    "chests": [
+        {
+            "level": 1,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 40
+            },
+            "rewards": ["gold:600-660", "xp_crusadePoints:100", "xpEpic:5"]
+        },
+        {
+            "level": 2,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 45
+            },
+            "rewards": ["gold:800-880", "xp_crusadePoints:150", "xpEpic:5"]
+        },
+        {
+            "level": 3,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 50
+            },
+            "rewards": ["gold:900-990", "xp_crusadePoints:200", "xpEpic:5"]
+        },
+        {
+            "level": 4,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 55
+            },
+            "rewards": ["gold:1000-1100", "xp_crusadePoints:250", "xpEpic:5"]
+        },
+        {
+            "level": 5,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 60
+            },
+            "rewards": ["gold:1300-1430", "xp_crusadePoints:300", "xpEpic:5"]
+        },
+        {
+            "level": 6,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 65
+            },
+            "rewards": ["gold:1500-1650", "xp_crusadePoints:350", "xpEpic:5"]
+        },
+        {
+            "level": 7,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 70
+            },
+            "rewards": ["gold:1800-1980", "xp_crusadePoints:400", "xpEpic:5"]
+        },
+        {
+            "level": 8,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 75
+            },
+            "rewards": ["gold:2100-2310", "xp_crusadePoints:450", "xpEpic:5"]
+        },
+        {
+            "level": 9,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 80
+            },
+            "rewards": ["gold:2500-2750", "xp_crusadePoints:500", "xpEpic:5"]
+        },
+        {
+            "level": 10,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 85
+            },
+            "rewards": ["gold:3000-3300", "xp_crusadePoints:550", "xpEpic:10"]
+        },
+        {
+            "level": 11,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 90
+            },
+            "rewards": ["gold:3600-3960", "xp_crusadePoints:650", "xpEpic:10"]
+        },
+        {
+            "level": 12,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 95
+            },
+            "rewards": ["gold:4400-4840", "xp_crusadePoints:750", "xpEpic:10"]
+        },
+        {
+            "level": 13,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 100
+            },
+            "rewards": ["gold:5300-5830", "xp_crusadePoints:850", "xpEpic:10"]
+        },
+        {
+            "level": 14,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 105
+            },
+            "rewards": ["gold:6300-6930", "xp_crusadePoints:950", "xpEpic:10"]
+        },
+        {
+            "level": 15,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 110
+            },
+            "rewards": ["gold:7500-8250", "xp_crusadePoints:1050", "xpLegendary:5"]
+        },
+        {
+            "level": 16,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 115
+            },
+            "rewards": ["gold:9000-9900", "xp_crusadePoints:1150", "xpLegendary:5"]
+        },
+        {
+            "level": 17,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 120
+            },
+            "rewards": ["gold:10800-11880", "xp_crusadePoints:1250", "xpLegendary:5"]
+        },
+        {
+            "level": 18,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 125
+            },
+            "rewards": ["gold:12500-13750", "xp_crusadePoints:1350", "xpLegendary:5"]
+        },
+        {
+            "level": 19,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 130
+            },
+            "rewards": ["gold:15000-16500", "xp_crusadePoints:1450", "xpLegendary:5"]
+        },
+        {
+            "level": 20,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 140
+            },
+            "rewards": ["gold:17500-19250", "xp_crusadePoints:1500", "xpLegendary:5"]
+        },
+        {
+            "level": 21,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 150
+            },
+            "rewards": ["gold:21500-23650", "xp_crusadePoints:1550", "xpLegendary:5"]
+        },
+        {
+            "level": 22,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 160
+            },
+            "rewards": ["gold:25000-27500", "xp_crusadePoints:1600", "xpLegendary:10"]
+        },
+        {
+            "level": 23,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 170
+            },
+            "rewards": ["gold:31500-34650", "xp_crusadePoints:1650", "xpLegendary:10"]
+        },
+        {
+            "level": 24,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 180
+            },
+            "rewards": ["gold:37500-41250", "xp_crusadePoints:1700", "xpLegendary:10"]
+        },
+        {
+            "level": 25,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 190
+            },
+            "rewards": ["gold:45000-49500", "xp_crusadePoints:1750", "xpLegendary:10"]
+        },
+        {
+            "level": 26,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 200
+            },
+            "rewards": ["gold:50000-55000", "xp_crusadePoints:1800", "xpLegendary:10"]
+        },
+        {
+            "level": 27,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 215
+            },
+            "rewards": ["gold:62500-68750", "xp_crusadePoints:1850", "xpLegendary:10"]
+        },
+        {
+            "level": 28,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 230
+            },
+            "rewards": ["gold:75000-82500", "xp_crusadePoints:1900", "xpMythic:2"]
+        },
+        {
+            "level": 29,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 250
+            },
+            "rewards": ["gold:85000-93500", "xp_crusadePoints:1950", "xpMythic:2"]
+        },
+        {
+            "level": 30,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 280
+            },
+            "rewards": ["gold:100000-110000", "xp_crusadePoints:2000", "xpMythic:3"]
+        },
+        {
+            "level": 31,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 320
+            },
+            "rewards": ["gold:50000-55000", "xp_crusadePoints:2050", "xpMythic:3"]
+        },
+        {
+            "level": 32,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 450
+            },
+            "rewards": ["gold:62500-68750", "xp_crusadePoints:2100", "xpMythic:3"]
+        },
+        {
+            "level": 33,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 525
+            },
+            "rewards": ["gold:75000-82500", "xp_crusadePoints:2150", "xpMythic:4"]
+        },
+        {
+            "level": 34,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 700
+            },
+            "rewards": ["gold:85000-93500", "xp_crusadePoints:2200", "xpMythic:5"]
+        },
+        {
+            "level": 35,
+            "cost": {
+                "type": "seasonalEventCurrencyCrescendo",
+                "amount": 800
+            },
+            "rewards": ["gold:100000-110000", "xp_crusadePoints:2250", "xpMythic:5"]
+        }
+    ],
+    "offers": {
+        "offer_seasonal_event_crescendo_01_pass": {
+            "offer": {
+                "offerId": "offer_seasonal_event_crescendo_01_pass",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 17000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_crescendo_01_pass"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                "price": 999,
+                "mercadoId": "offer_00999",
+                "rewards": [
+                    "seasonalEventCurrencyCrescendo:200",
+                    "seasonalEcBonus:10",
+                    "seasonalPremium:1",
+                    "gems:1000"
+                ]
+            }
+        },
+        "offer_seasonal_event_crescendo_01_playmore": {
+            "offer": {
+                "offerId": "offer_seasonal_event_crescendo_01_playmore",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_crescendo_01_playmore"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01599",
+                "price": 1599,
+                "mercadoId": "offer_01599",
+                "rewards": [
+                    "stamina_survival:1",
+                    "stamina_waves:1",
+                    "stamina_treasureBeach:1",
+                    "specialSummoningToken:5",
+                    "stamina:120",
+                    "raidTicket:20"
+                ]
+            }
+        }
+    },
+    "missions": {
+        "daily": [
+            {
+                "name": "crescendo_01_daily_01",
+                "rewards": ["xp_seasonal:70", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemies",
+                        "target": 75,
+                        "locaKey": "SlayEnemies_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_daily_02",
+                "rewards": ["xp_seasonal:70", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesFromHigherElevation",
+                        "target": 15,
+                        "locaKey": "SlayEnemiesFromHigherElevation_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_daily_03",
+                "rewards": ["xp_seasonal:70", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "UseAbilityWithFactionTrait",
+                        "target": 12,
+                        "locaKey": "UseAbilityWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_daily_04",
+                "rewards": ["xp_seasonal:70", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 20,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_daily_05",
+                "rewards": ["xp_seasonal:70", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "Overkill",
+                        "target": 20,
+                        "locaKey": "Overkill_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_daily_06",
+                "rewards": ["xp_seasonal:75", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "TraverseHexes",
+                        "target": 300,
+                        "locaKey": "TraverseHexes_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_daily_07",
+                "rewards": ["xp_seasonal:75", "crusadeNpc:10"],
+                "tasks": [
+                    {
+                        "name": "Summon",
+                        "target": 25,
+                        "locaKey": "Summon_description"
+                    }
+                ]
+            }
+        ],
+        "free": [
+            {
+                "name": "crescendo_01_free_1_chain_01",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "PlayBattlesInGameMode",
+                        "target": 1,
+                        "locaKey": "PlayBattlesInGameMode_description",
+                        "taskParameters": {
+                            "gameMode": "Survival"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_02",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 50,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_03",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DefeatWaves",
+                        "target": 15,
+                        "locaKey": "DefeatWaves_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_04",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "HealHealth",
+                        "target": 5000,
+                        "locaKey": "HealHealth_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_05",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 75,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_06",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "PlayBattlesInGameMode",
+                        "target": 1,
+                        "locaKey": "PlayBattlesInGameMode_description",
+                        "taskParameters": {
+                            "gameMode": "Survival"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_07",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemies",
+                        "target": 100,
+                        "locaKey": "SlayEnemies_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_08",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "HealHealth",
+                        "target": 10000,
+                        "locaKey": "HealHealth_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_09",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 4250,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_10",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealDamage",
+                        "target": 10000,
+                        "locaKey": "DealDamage_description"
+                    },
+                    {
+                        "name": "PlayBattlesInGameMode",
+                        "target": 1,
+                        "locaKey": "PlayBattlesInGameMode_description",
+                        "taskParameters": {
+                            "gameMode": "Survival"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_11",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 12500,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_12",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "Overkill",
+                        "target": 75,
+                        "locaKey": "Overkill_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_13",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 25000,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_14",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "HealHealth",
+                        "target": 15000,
+                        "locaKey": "HealHealth_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_15",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealDamage",
+                        "target": 50000,
+                        "locaKey": "DealDamage_description"
+                    },
+                    {
+                        "name": "PlayBattlesInGameMode",
+                        "target": 1,
+                        "locaKey": "PlayBattlesInGameMode_description",
+                        "taskParameters": {
+                            "gameMode": "Survival"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_16",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesWithFactionTrait",
+                        "target": 125,
+                        "locaKey": "SlayEnemiesWithFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Imperial"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_17",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 63000,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_18",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DefeatWaves",
+                        "target": 15,
+                        "locaKey": "DefeatWaves_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_19",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealAbilityDamage",
+                        "target": 90000,
+                        "locaKey": "DealAbilityDamage_description"
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_free_1_chain_20",
+                "rewards": ["xp_seasonal:76", "survivalBoost_stats"],
+                "tasks": [
+                    {
+                        "name": "DealDamage",
+                        "target": 150000,
+                        "locaKey": "DealDamage_description"
+                    }
+                ]
+            }
+        ],
+        "premium": [
+            {
+                "name": "crescendo_01_premium_chain_01",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 30,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 15,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_02",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 40,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 20,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_03",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 50,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 25,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_04",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 60,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 30,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_05",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 70,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 35,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_06",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 80,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 40,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_07",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 90,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 45,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_08",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 100,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 50,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_09",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 110,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 55,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            },
+            {
+                "name": "crescendo_01_premium_chain_10",
+                "rewards": ["xp_seasonal:100", "seasonalEventCurrencyCrescendo:50"],
+                "tasks": [
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 120,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Xenos"
+                        }
+                    },
+                    {
+                        "name": "SlayEnemiesOfFactionTrait",
+                        "target": 60,
+                        "locaKey": "SlayEnemiesOfFactionTrait_description",
+                        "taskParameters": {
+                            "factionTrait": "Chaos"
+                        }
+                    }
+                ]
+            }
+        ],
+        "battlePass": []
+    },
+    "chestId": "gold",
+    "ohSoCloseOffer": {
+        "lockType": "season_crescendo_01_event",
+        "rewardCurrency": "seasonalEventCurrencyCrescendo",
+        "costPerEventCrate": [
+            {
+                "base": 35,
+                "multiplier": 2
+            },
+            {
+                "base": 35,
+                "multiplier": 2
+            },
+            {
+                "base": 35,
+                "multiplier": 2
+            },
+            {
+                "base": 37,
+                "multiplier": 2
+            },
+            {
+                "base": 37,
+                "multiplier": 2
+            },
+            {
+                "base": 37,
+                "multiplier": 2
+            },
+            {
+                "base": 42,
+                "multiplier": 2
+            },
+            {
+                "base": 42,
+                "multiplier": 2
+            },
+            {
+                "base": 43,
+                "multiplier": 2
+            },
+            {
+                "base": 47,
+                "multiplier": 2
+            },
+            {
+                "base": 48,
+                "multiplier": 2
+            },
+            {
+                "base": 50,
+                "multiplier": 2
+            },
+            {
+                "base": 58,
+                "multiplier": 2
+            },
+            {
+                "base": 62,
+                "multiplier": 2
+            },
+            {
+                "base": 65,
+                "multiplier": 2
+            },
+            {
+                "base": 75,
+                "multiplier": 2
+            },
+            {
+                "base": 80,
+                "multiplier": 3
+            },
+            {
+                "base": 83,
+                "multiplier": 3
+            },
+            {
+                "base": 125,
+                "multiplier": 5
+            },
+            {
+                "base": 140,
+                "multiplier": 5
+            },
+            {
+                "base": 165,
+                "multiplier": 5
+            },
+            {
+                "base": 175,
+                "multiplier": 5
+            },
+            {
+                "base": 195,
+                "multiplier": 5
+            },
+            {
+                "base": 215,
+                "multiplier": 5
+            },
+            {
+                "base": 295,
+                "multiplier": 5
+            },
+            {
+                "base": 335,
+                "multiplier": 5
+            },
+            {
+                "base": 339,
+                "multiplier": 10
+            },
+            {
+                "base": 489,
+                "multiplier": 10
+            },
+            {
+                "base": 589,
+                "multiplier": 10
+            },
+            {
+                "base": 889,
+                "multiplier": 10
+            },
+            {
+                "base": 1500,
+                "multiplier": 5
+            },
+            {
+                "base": 1500,
+                "multiplier": 5
+            },
+            {
+                "base": 1500,
+                "multiplier": 5
+            },
+            {
+                "base": 1500,
+                "multiplier": 5
+            },
+            {
+                "base": 1500,
+                "multiplier": 5
+            }
+        ]
+    },
+    "descriptions": []
+}

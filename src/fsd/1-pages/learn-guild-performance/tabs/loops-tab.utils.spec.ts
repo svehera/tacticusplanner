@@ -8,6 +8,8 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
 
+import { getEncountersAtPosition, getSeasonConfig, getUnitSetId } from '@/fsd/4-entities/guild_boss';
+
 import { tierLabel } from '../guild-performance.utils';
 
 import {
@@ -38,7 +40,15 @@ const L1_BOSS = 'GuildBoss7Boss1AstraRogaldorn';
 const L1_LEFT = 'GuildBoss7MiniBoss1AstraPrimarisPsy';
 const L1_RIGHT = 'GuildBoss7MiniBoss2AstraOrdnance';
 const L2_BOSS = 'GuildBoss8Boss1EldarAvatar';
-const M1_BOSS = 'GuildBoss9Boss1ThousMagnus';
+// M1_BOSS must resolve against the live season config for `resolveLadderPrimes`'s lookup, and the
+// boss rotates between ladder positions over time - derive it from the first Mythic set rather
+// than hardcoding a boss identity that will eventually rotate elsewhere.
+const M1_SEASON_CONFIG_ID = 'guild_boss_season_config_5';
+const m1Config = getSeasonConfig(M1_SEASON_CONFIG_ID)!;
+const m1MythicTierIndex = m1Config.tiers.findIndex(t => t.tier === Rarity.Mythic);
+const M1_BOSS = getUnitSetId(
+    getEncountersAtPosition(m1Config, { tierIndex: m1MythicTierIndex, setIndex: 0 }).boss!.unitId
+);
 
 const DAY = 86_400;
 const START = 1_700_000_000;
@@ -243,7 +253,7 @@ describe('resolveLadderPrimes', () => {
         const rows = buildBossLoopRows([boss({ unitId: M1_BOSS, rarity: Rarity.Mythic, set: 0, remainingHp: 0 })]);
         expect(rows[0].leftPrimeUnitId).toBeUndefined();
 
-        const resolved = resolveLadderPrimes(rows, 'guild_boss_season_config_5');
+        const resolved = resolveLadderPrimes(rows, M1_SEASON_CONFIG_ID);
 
         expect(resolved[0].leftPrimeUnitId).toBeDefined();
         expect(resolved[0].rightPrimeUnitId).toBeDefined();

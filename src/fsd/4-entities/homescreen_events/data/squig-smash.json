@@ -67,6 +67,16 @@
                         "gameModeRestrictions": {
                             "allowed": ["MachinesOfWarEvent"]
                         }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "unitId": "orksNpcHSESquig",
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        }
                     }
                 ],
                 "unlockRequirements": {
@@ -75,84 +85,84 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 55,
-                    "chestRewardId": "dust:150"
+                    "requiredProgress": 10,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "xpEpic"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "itemsImperialEpic"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "itemsImperialEpic"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 65,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "draft_abilityTokensLegendary"
+                },
+                {
+                    "requiredProgress": 95,
+                    "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
                     "requiredProgress": 110,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 165,
-                    "chestRewardId": "dust:150"
+                    "requiredProgress": 130,
+                    "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 220,
-                    "chestRewardId": "dust:150"
+                    "requiredProgress": 150,
+                    "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 275,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "requiredProgress": 170,
+                    "chestRewardId": "draft_abilityTokensLegendary:2"
                 },
                 {
-                    "requiredProgress": 350,
-                    "chestRewardId": "dust:500"
+                    "requiredProgress": 190,
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
-                    "requiredProgress": 425,
-                    "chestRewardId": "dust:500"
+                    "requiredProgress": 210,
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
-                    "requiredProgress": 500,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "requiredProgress": 240,
+                    "chestRewardId": "xpLegendary"
                 },
                 {
-                    "requiredProgress": 575,
-                    "chestRewardId": "dust:500"
+                    "requiredProgress": 270,
+                    "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 650,
-                    "chestRewardId": "dust:500"
+                    "requiredProgress": 310,
+                    "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 745,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "requiredProgress": 360,
+                    "chestRewardId": "draft_abilityTokensMythic"
                 },
                 {
-                    "requiredProgress": 840,
-                    "chestRewardId": "mythicDust:150"
+                    "requiredProgress": 420,
+                    "chestRewardId": "itemsImperialMythic"
                 },
                 {
-                    "requiredProgress": 935,
-                    "chestRewardId": "mythicDust:150"
-                },
-                {
-                    "requiredProgress": 1030,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 1125,
-                    "chestRewardId": "mythicDust:250"
-                },
-                {
-                    "requiredProgress": 1240,
-                    "chestRewardId": "mythicDust:350"
-                },
-                {
-                    "requiredProgress": 1355,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 1470,
-                    "chestRewardId": "specialSummoningToken"
-                },
-                {
-                    "requiredProgress": 1585,
-                    "chestRewardId": "mythicDust:350"
-                },
-                {
-                    "requiredProgress": 100,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20",
+                    "requiredProgress": 50,
+                    "chestRewardId": "itemsImperialLegendary",
                     "endless": true
                 }
             ],
@@ -182,9 +192,9 @@
                             ]
                         },
                         "constants": {
-                            "nrOfSummons": "5",
-                            "nrOfSummons_2": "3",
-                            "unitId": "orksNpc7Squig"
+                            "nrOfSummons": "3",
+                            "nrOfSummons_2": "2",
+                            "unitId": "orksNpcHSESquig"
                         },
                         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
                     },
@@ -206,16 +216,16 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_bundle"
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_bundle_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
-                        "price": 1999,
-                        "mercadoId": "offer_01999",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_02399",
+                        "price": 2399,
+                        "mercadoId": "offer_02399",
                         "rewards": [
-                            "tieredRewardPoints_squig_smash_tier_high:85",
+                            "tieredRewardPoints_squig_smash_tier_high:70",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -234,16 +244,16 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_playmore"
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_playmore_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
-                        "price": 799,
-                        "mercadoId": "offer_00799",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_squig_smash_tier_high:55",
+                            "tieredRewardPoints_squig_smash_tier_high:30",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2",
                             "gems:100"
@@ -325,6 +335,16 @@
                         "gameModeRestrictions": {
                             "allowed": ["MachinesOfWarEvent"]
                         }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "unitId": "orksNpcHSESquig",
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        }
                     }
                 ],
                 "unlockRequirements": {
@@ -333,84 +353,84 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 45,
-                    "chestRewardId": "dust:100"
+                    "requiredProgress": 10,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 30,
+                    "chestRewardId": "draft_abilityTokensRare:2"
+                },
+                {
+                    "requiredProgress": 40,
+                    "chestRewardId": "draft_abilityTokensRare:2"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "itemsImperialRare"
+                },
+                {
+                    "requiredProgress": 60,
+                    "chestRewardId": "itemsImperialRare"
+                },
+                {
+                    "requiredProgress": 70,
+                    "chestRewardId": "xpRare"
+                },
+                {
+                    "requiredProgress": 80,
+                    "chestRewardId": "draft_abilityTokensEpic:2"
                 },
                 {
                     "requiredProgress": 90,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "chestRewardId": "draft_abilityTokensEpic:2"
+                },
+                {
+                    "requiredProgress": 105,
+                    "chestRewardId": "itemsImperialEpic"
+                },
+                {
+                    "requiredProgress": 120,
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 135,
-                    "chestRewardId": "dust:100"
+                    "chestRewardId": "xpEpic"
                 },
                 {
-                    "requiredProgress": 180,
-                    "chestRewardId": "dust:100"
+                    "requiredProgress": 150,
+                    "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 225,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "requiredProgress": 165,
+                    "chestRewardId": "draft_abilityTokensLegendary:2"
+                },
+                {
+                    "requiredProgress": 190,
+                    "chestRewardId": "draft_abilityTokensLegendary:2"
+                },
+                {
+                    "requiredProgress": 215,
+                    "chestRewardId": "draft_abilityTokensLegendary:2"
+                },
+                {
+                    "requiredProgress": 245,
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
                     "requiredProgress": 285,
-                    "chestRewardId": "dust:400"
+                    "chestRewardId": "xpLegendary"
                 },
                 {
-                    "requiredProgress": 345,
-                    "chestRewardId": "dust:400"
+                    "requiredProgress": 335,
+                    "chestRewardId": "xpLegendary:2"
                 },
                 {
-                    "requiredProgress": 405,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 465,
-                    "chestRewardId": "dust:400"
-                },
-                {
-                    "requiredProgress": 525,
-                    "chestRewardId": "dust:400"
-                },
-                {
-                    "requiredProgress": 610,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 695,
-                    "chestRewardId": "dust:1500"
-                },
-                {
-                    "requiredProgress": 780,
-                    "chestRewardId": "dust:1500"
-                },
-                {
-                    "requiredProgress": 865,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 950,
-                    "chestRewardId": "dust:2000"
-                },
-                {
-                    "requiredProgress": 1060,
-                    "chestRewardId": "dust:3000"
-                },
-                {
-                    "requiredProgress": 1170,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 1280,
-                    "chestRewardId": "specialSummoningToken"
-                },
-                {
-                    "requiredProgress": 1390,
-                    "chestRewardId": "dust:3000"
-                },
-                {
-                    "requiredProgress": 100,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20",
+                    "requiredProgress": 50,
+                    "chestRewardId": "itemsImperialEpic",
                     "endless": true
                 }
             ],
@@ -440,9 +460,9 @@
                             ]
                         },
                         "constants": {
-                            "nrOfSummons": "5",
-                            "nrOfSummons_2": "3",
-                            "unitId": "orksNpc7Squig"
+                            "nrOfSummons": "3",
+                            "nrOfSummons_2": "2",
+                            "unitId": "orksNpcHSESquig"
                         },
                         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
                     },
@@ -464,7 +484,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_bundle"
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_bundle_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -473,10 +493,10 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_squig_smash_tier_mid:85",
+                            "tieredRewardPoints_squig_smash_tier_mid:30",
                             "summoningToken:5",
                             "specialSummoningToken:5",
-                            "gems:200"
+                            "gems:100"
                         ]
                     }
                 },
@@ -492,16 +512,16 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_playmore"
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_playmore_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
-                        "price": 799,
-                        "mercadoId": "offer_00799",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_squig_smash_tier_mid:55",
+                            "tieredRewardPoints_squig_smash_tier_mid:30",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2",
                             "gems:100"
@@ -583,6 +603,16 @@
                         "gameModeRestrictions": {
                             "allowed": ["MachinesOfWarEvent"]
                         }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "personal",
+                        "points": 1,
+                        "unitId": "orksNpcHSESquig",
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        }
                     }
                 ],
                 "unlockRequirements": {
@@ -591,84 +621,84 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 30,
-                    "chestRewardId": "dust:50"
+                    "requiredProgress": 5,
+                    "chestRewardId": "draft_abilityTokensCommon"
                 },
                 {
-                    "requiredProgress": 60,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "requiredProgress": 10,
+                    "chestRewardId": "draft_abilityTokensCommon:2"
+                },
+                {
+                    "requiredProgress": 15,
+                    "chestRewardId": "draft_abilityTokensCommon:2"
+                },
+                {
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensCommon:2"
+                },
+                {
+                    "requiredProgress": 25,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 35,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 45,
+                    "chestRewardId": "xpUncommon"
+                },
+                {
+                    "requiredProgress": 55,
+                    "chestRewardId": "itemsImperialUncommon"
+                },
+                {
+                    "requiredProgress": 65,
+                    "chestRewardId": "itemsImperialUncommon"
+                },
+                {
+                    "requiredProgress": 75,
+                    "chestRewardId": "draft_abilityTokensRare:2"
                 },
                 {
                     "requiredProgress": 90,
-                    "chestRewardId": "dust:50"
+                    "chestRewardId": "draft_abilityTokensRare:2"
+                },
+                {
+                    "requiredProgress": 105,
+                    "chestRewardId": "xpRare"
                 },
                 {
                     "requiredProgress": 120,
-                    "chestRewardId": "dust:50"
+                    "chestRewardId": "itemsImperialRare"
+                },
+                {
+                    "requiredProgress": 135,
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 150,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "chestRewardId": "draft_abilityTokensEpic"
                 },
                 {
-                    "requiredProgress": 190,
-                    "chestRewardId": "dust:200"
+                    "requiredProgress": 165,
+                    "chestRewardId": "draft_abilityTokensEpic"
                 },
                 {
-                    "requiredProgress": 230,
-                    "chestRewardId": "dust:200"
+                    "requiredProgress": 185,
+                    "chestRewardId": "draft_abilityTokensEpic"
                 },
                 {
-                    "requiredProgress": 270,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
+                    "requiredProgress": 210,
+                    "chestRewardId": "xpEpic"
                 },
                 {
-                    "requiredProgress": 310,
-                    "chestRewardId": "dust:200"
+                    "requiredProgress": 240,
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
-                    "requiredProgress": 350,
-                    "chestRewardId": "dust:200"
-                },
-                {
-                    "requiredProgress": 405,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 460,
-                    "chestRewardId": "dust:750"
-                },
-                {
-                    "requiredProgress": 515,
-                    "chestRewardId": "dust:750"
-                },
-                {
-                    "requiredProgress": 570,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 625,
-                    "chestRewardId": "dust:1000"
-                },
-                {
-                    "requiredProgress": 705,
-                    "chestRewardId": "dust:1500"
-                },
-                {
-                    "requiredProgress": 785,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20"
-                },
-                {
-                    "requiredProgress": 865,
-                    "chestRewardId": "specialSummoningToken"
-                },
-                {
-                    "requiredProgress": 945,
-                    "chestRewardId": "dust:1500"
-                },
-                {
-                    "requiredProgress": 100,
-                    "chestRewardId": "seasonalEventCurrencyHolidays2025:20",
+                    "requiredProgress": 30,
+                    "chestRewardId": "itemsImperialRare",
                     "endless": true
                 }
             ],
@@ -698,9 +728,9 @@
                             ]
                         },
                         "constants": {
-                            "nrOfSummons": "5",
-                            "nrOfSummons_2": "3",
-                            "unitId": "orksNpc7Squig"
+                            "nrOfSummons": "3",
+                            "nrOfSummons_2": "2",
+                            "unitId": "orksNpcHSESquig"
                         },
                         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
                     },
@@ -722,7 +752,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_bundle"
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_bundle_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -731,10 +761,10 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_squig_smash_tier_low:85",
+                            "tieredRewardPoints_squig_smash_tier_low:30",
                             "summoningToken:5",
                             "specialSummoningToken:5",
-                            "gems:200"
+                            "gems:100"
                         ]
                     }
                 },
@@ -750,16 +780,16 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_playmore"
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_playmore_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
-                        "price": 799,
-                        "mercadoId": "offer_00799",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_squig_smash_tier_low:55",
+                            "tieredRewardPoints_squig_smash_tier_low:30",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2",
                             "gems:100"

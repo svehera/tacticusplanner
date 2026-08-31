@@ -19,7 +19,7 @@ import { UpgradeImage, UpgradesService } from '@/fsd/4-entities/upgrade';
 const DEFAULT_ICON_SIZE = 45;
 
 /** Readable labels for the generic equipment "type" reward pools (`items{Rarity}_{Type}`). */
-const EQUIPMENT_TYPE_LABELS: Record<string, string> = {
+export const EQUIPMENT_TYPE_LABELS: Record<string, string> = {
     I_Crit: 'Critical Chance Item',
     I_Block: 'Block Item',
     I_Defensive: 'Defensive Item',

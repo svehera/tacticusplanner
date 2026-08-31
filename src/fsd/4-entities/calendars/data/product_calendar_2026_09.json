@@ -1,0 +1,974 @@
+{
+    "calendar": "calendar_seasonal_event_september_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "00110000",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencySeptember2026:10", "specialSummoningToken:1"]
+                },
+                {
+                    "variant": "XS3_M_SHD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:60",
+                        "xpMythic:6",
+                        "xpLegendary:9",
+                        "xpEpic:13",
+                        "gold:18450"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_SHD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:40",
+                        "xpLegendary:11",
+                        "xpEpic:17",
+                        "xpRare:25",
+                        "gold:10950"
+                    ]
+                },
+                {
+                    "variant": "XS3_M_HD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:45",
+                        "xpMythic:4",
+                        "xpLegendary:9",
+                        "xpEpic:11",
+                        "gold:14150"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_HD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:30",
+                        "xpLegendary:8",
+                        "xpEpic:14",
+                        "xpRare:18",
+                        "gold:8000"
+                    ]
+                },
+                {
+                    "variant": "XS3_M_MD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:30",
+                        "xpMythic:2",
+                        "xpLegendary:9",
+                        "xpEpic:9",
+                        "gold:9850"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_MD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:25",
+                        "xpLegendary:7",
+                        "xpEpic:10",
+                        "xpRare:15",
+                        "gold:6650"
+                    ]
+                },
+                {
+                    "variant": "XS3_M_LD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:15",
+                        "xpMythic:1",
+                        "xpLegendary:4",
+                        "xpEpic:7",
+                        "gold:5050"
+                    ]
+                },
+                {
+                    "variant": "XS3_CUREL_LD",
+                    "title": "Adaptive Strategy",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:15",
+                        "xpLegendary:4",
+                        "xpEpic:7",
+                        "xpRare:9",
+                        "gold:4000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Eradicate",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:100", "summoningToken:22", "stamina_waves:4"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:250", "heroAscensionOrbMythic_Xenos:20"]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:250",
+                        "heroAscensionOrbLegendary_Xenos:40",
+                        "heroAscensionOrbEpic_Xenos:10",
+                        "heroAscensionOrbRare_Xenos:5"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:250",
+                        "heroAscensionOrbLegendary_Xenos:20",
+                        "heroAscensionOrbEpic_Xenos:40",
+                        "heroAscensionOrbRare_Xenos:40"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:125",
+                        "heroAscensionOrbEpic_Xenos:25",
+                        "heroAscensionOrbRare_Xenos:50",
+                        "heroAscensionOrbUncommon_Xenos:25"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Eradicate",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:75", "summoningToken:11", "stamina_waves:3"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:175", "heroAscensionOrbMythic_Xenos:14"]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:175",
+                        "heroAscensionOrbLegendary_Xenos:28",
+                        "heroAscensionOrbEpic_Xenos:7",
+                        "heroAscensionOrbRare_Xenos:3"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:175",
+                        "heroAscensionOrbLegendary_Xenos:14",
+                        "heroAscensionOrbEpic_Xenos:28",
+                        "heroAscensionOrbRare_Xenos:28"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:100",
+                        "heroAscensionOrbEpic_Xenos:20",
+                        "heroAscensionOrbRare_Xenos:40",
+                        "heroAscensionOrbUncommon_Xenos:20"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Eradicate",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencySeptember2026:50", "summoningToken:8", "stamina_waves:2"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:125", "heroAscensionOrbMythic_Xenos:10"]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:125",
+                        "heroAscensionOrbLegendary_Xenos:20",
+                        "heroAscensionOrbEpic_Xenos:5",
+                        "heroAscensionOrbRare_Xenos:2"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:125",
+                        "heroAscensionOrbLegendary_Xenos:10",
+                        "heroAscensionOrbEpic_Xenos:20",
+                        "heroAscensionOrbRare_Xenos:20"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:75",
+                        "heroAscensionOrbEpic_Xenos:15",
+                        "heroAscensionOrbRare_Xenos:30",
+                        "heroAscensionOrbUncommon_Xenos:15"
+                    ]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Eradicate",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencySeptember2026:25", "summoningToken:4", "stamina_waves:1"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:75", "heroAscensionOrbMythic_Xenos:6"]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:75",
+                        "heroAscensionOrbLegendary_Xenos:12",
+                        "heroAscensionOrbEpic_Xenos:3",
+                        "heroAscensionOrbRare_Xenos:1"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:75",
+                        "heroAscensionOrbLegendary_Xenos:6",
+                        "heroAscensionOrbEpic_Xenos:12",
+                        "heroAscensionOrbRare_Xenos:12"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Annihilate",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:50",
+                        "heroAscensionOrbEpic_Xenos:10",
+                        "heroAscensionOrbRare_Xenos:20",
+                        "heroAscensionOrbUncommon_Xenos:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:120",
+                        "mythicDust:600",
+                        "itemAscensionResource_Mythic:6"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_SHD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:120",
+                        "dust:5100",
+                        "itemAscensionResource_Legendary:6",
+                        "itemAscensionResource_Epic:12",
+                        "itemAscensionResource_Rare:18",
+                        "itemAscensionResource_Uncommon:18"
+                    ]
+                },
+                {
+                    "variant": "XL1_SHD",
+                    "title": "Our Number is Legion",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:420", "summoningToken:56"]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:100",
+                        "mythicDust:500",
+                        "itemAscensionResource_Mythic:5"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_HD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:100",
+                        "dust:4250",
+                        "itemAscensionResource_Legendary:5",
+                        "itemAscensionResource_Epic:10",
+                        "itemAscensionResource_Rare:15",
+                        "itemAscensionResource_Uncommon:15"
+                    ]
+                },
+                {
+                    "variant": "XL1_HD",
+                    "title": "Our Number is Legion",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:360", "summoningToken:48"]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:80",
+                        "mythicDust:400",
+                        "itemAscensionResource_Mythic:4"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_MD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:80",
+                        "dust:3400",
+                        "itemAscensionResource_Legendary:4",
+                        "itemAscensionResource_Epic:8",
+                        "itemAscensionResource_Rare:12",
+                        "itemAscensionResource_Uncommon:12"
+                    ]
+                },
+                {
+                    "variant": "XL1_MD",
+                    "title": "Our Number is Legion",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:270", "summoningToken:36"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:40",
+                        "mythicDust:200",
+                        "itemAscensionResource_Mythic:2"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "Plasmacyte",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:40",
+                        "dust:1700",
+                        "itemAscensionResource_Legendary:2",
+                        "itemAscensionResource_Epic:4",
+                        "itemAscensionResource_Rare:6",
+                        "itemAscensionResource_Uncommon:6"
+                    ]
+                },
+                {
+                    "variant": "XL1_LD",
+                    "title": "Our Number is Legion",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:150", "summoningToken:20"]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "L1_SHD",
+                    "title": "Guardian Protocols",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:280", "xpLegendary:28", "gold:1200000"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Our Name is Death",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:170",
+                        "ShardsIfUnlocked:135",
+                        "ShardsIfUnlocked:135",
+                        "stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Guardian Protocols",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:210", "xpLegendary:21", "gold:500000"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Our Name is Death",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:115",
+                        "ShardsIfUnlocked:90",
+                        "ShardsIfUnlocked:90",
+                        "stamina:150",
+                        "raidTicket:25"
+                    ]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Guardian Protocols",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencySeptember2026:70", "xpLegendary:14", "gold:71000"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Our Name is Death",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:100",
+                        "ShardsIfUnlocked:80",
+                        "ShardsIfUnlocked:80",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Guardian Protocols",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencySeptember2026:35", "xpLegendary:7", "gold:35000"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Our Name is Death",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:50",
+                        "ShardsIfUnlocked:40",
+                        "ShardsIfUnlocked:40",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "M4_SHD",
+                    "title": "Immortal",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:210",
+                        "summoningToken:7",
+                        "specialSummoningToken:7",
+                        "ShardsAll:140"
+                    ]
+                },
+                {
+                    "variant": "L4_LM_SHD",
+                    "title": "Persistent",
+                    "banner": "Necron Upgrades",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:250",
+                        "summoningToken:5",
+                        "gems:1000",
+                        "abilityTokenLegendary_Xenos:15",
+                        "heroAscensionOrbLegendary_Xenos:10",
+                        "xpMythic:8",
+                        "upgHpL214C:1",
+                        "upgDmgL214C:1",
+                        "upgArmL214C:1"
+                    ]
+                },
+                {
+                    "variant": "M4_HD",
+                    "title": "Immortal",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:180",
+                        "summoningToken:6",
+                        "specialSummoningToken:6",
+                        "ShardsAll:120"
+                    ]
+                },
+                {
+                    "variant": "L4_LM_HD",
+                    "title": "Persistent",
+                    "banner": "Necron Upgrades",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:200",
+                        "summoningToken:5",
+                        "gems:1000",
+                        "abilityTokenLegendary_Xenos:12",
+                        "heroAscensionOrbLegendary_Xenos:10",
+                        "xpMythic:6",
+                        "upgHpL007C:3",
+                        "upgDmgL130C:1",
+                        "upgArmL130C:1",
+                        "upgHpL010:7"
+                    ]
+                },
+                {
+                    "variant": "M4_MD",
+                    "title": "Immortal",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:150",
+                        "summoningToken:5",
+                        "specialSummoningToken:5",
+                        "ShardsAll:100"
+                    ]
+                },
+                {
+                    "variant": "L4_LM_MD",
+                    "title": "Persistent",
+                    "banner": "Necron Upgrades",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:160",
+                        "summoningToken:5",
+                        "gems:1000",
+                        "abilityTokenLegendary_Xenos:8",
+                        "heroAscensionOrbLegendary_Xenos:8",
+                        "xpMythic:5",
+                        "upgHpL007C:2",
+                        "upgDmgL030C:2",
+                        "upgArmL030C:2",
+                        "upgHpL010:7"
+                    ]
+                },
+                {
+                    "variant": "M4_LD",
+                    "title": "Immortal",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:60",
+                        "summoningToken:2",
+                        "specialSummoningToken:2",
+                        "ShardsAll:40"
+                    ]
+                },
+                {
+                    "variant": "L4_LM_LD",
+                    "title": "Persistent",
+                    "banner": "Necron Upgrades",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:100",
+                        "summoningToken:5",
+                        "gems:500",
+                        "abilityTokenLegendary_Xenos:6",
+                        "heroAscensionOrbLegendary_Xenos:5",
+                        "xpLegendary:12",
+                        "upgHpL007C:1",
+                        "upgDmgL030C:1",
+                        "upgArmL030C:1",
+                        "upgHpL010:6"
+                    ]
+                },
+                {
+                    "variant": "L4_CURE_LD",
+                    "title": "Persistent",
+                    "banner": "Necron Upgrades",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:100",
+                        "summoningToken:5",
+                        "gems:1000",
+                        "abilityTokenEpic_Xenos:12",
+                        "heroAscensionOrbEpic_Xenos:10",
+                        "xpLegendary:12",
+                        "upgHpE009C:3",
+                        "upgDmgE030C:3",
+                        "upgArmE030C:3",
+                        "upgHpR011:9",
+                        "upgDmgR009:9",
+                        "upgArmR030:9"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Unity",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:50",
+                        "ShardsAll:120",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "M3_SHD",
+                    "title": "Reanimation Protocols",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:220",
+                        "specialSummoningToken:20",
+                        "stamina:240",
+                        "raidTicket:40"
+                    ]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Unity",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:45",
+                        "ShardsAll:108",
+                        "stamina:108",
+                        "raidTicket:18"
+                    ]
+                },
+                {
+                    "variant": "M3_HD",
+                    "title": "Reanimation Protocols",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:165",
+                        "specialSummoningToken:15",
+                        "stamina:180",
+                        "raidTicket:30"
+                    ]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Unity",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencySeptember2026:35", "ShardsAll:84", "stamina:84", "raidTicket:14"]
+                },
+                {
+                    "variant": "M3_MD",
+                    "title": "Reanimation Protocols",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:110",
+                        "specialSummoningToken:10",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Unity",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["seasonalEventCurrencySeptember2026:20", "ShardsAll:48", "stamina:48", "raidTicket:8"]
+                },
+                {
+                    "variant": "M3_LD",
+                    "title": "Reanimation Protocols",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:55",
+                        "specialSummoningToken:5",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "00110000",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencySeptember2026:10", "stamina:60", "raidTicket:10"]
+                },
+                {
+                    "variant": "L2_M_SHD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:225",
+                        "abilityTokenMythic_Xenos:9",
+                        "abilityTokenLegendary_Xenos:18",
+                        "gold:900000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_SHD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:225",
+                        "abilityTokenLegendary_Xenos:9",
+                        "abilityTokenEpic_Xenos:18",
+                        "abilityTokenRare_Xenos:18",
+                        "abilityTokenUncommon_Xenos:36",
+                        "abilityTokenCommon_Xenos:45",
+                        "gold:450000"
+                    ]
+                },
+                {
+                    "variant": "L2_M_HD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:200",
+                        "abilityTokenMythic_Xenos:8",
+                        "abilityTokenLegendary_Xenos:16",
+                        "gold:800000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_HD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:200",
+                        "abilityTokenLegendary_Xenos:8",
+                        "abilityTokenEpic_Xenos:16",
+                        "abilityTokenRare_Xenos:16",
+                        "abilityTokenUncommon_Xenos:32",
+                        "abilityTokenCommon_Xenos:40",
+                        "gold:400000"
+                    ]
+                },
+                {
+                    "variant": "L2_M_MD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:150",
+                        "abilityTokenMythic_Xenos:6",
+                        "abilityTokenLegendary_Xenos:12",
+                        "gold:600000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_MD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:150",
+                        "abilityTokenLegendary_Xenos:6",
+                        "abilityTokenEpic_Xenos:12",
+                        "abilityTokenRare_Xenos:12",
+                        "abilityTokenUncommon_Xenos:24",
+                        "abilityTokenCommon_Xenos:30",
+                        "gold:300000"
+                    ]
+                },
+                {
+                    "variant": "L2_M_LD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:75",
+                        "abilityTokenMythic_Xenos:3",
+                        "abilityTokenLegendary_Xenos:6",
+                        "gold:300000"
+                    ]
+                },
+                {
+                    "variant": "L2_CUREL_LD",
+                    "title": "Undying Legions",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencySeptember2026:75",
+                        "abilityTokenLegendary_Xenos:3",
+                        "abilityTokenEpic_Xenos:6",
+                        "abilityTokenRare_Xenos:6",
+                        "abilityTokenUncommon_Xenos:12",
+                        "abilityTokenCommon_Xenos:15",
+                        "gold:150000"
+                    ]
+                }
+            ]
+        }
+    ]
+}

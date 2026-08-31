@@ -8,16 +8,29 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { resolveBossOverviewDisplay, unitDisplayLabel } from './guild-performance.utils';
+import { getEncountersAtPosition, getSeasonConfig, getUnitSetId } from '@/fsd/4-entities/guild_boss';
 
-// Real season config / unitIds (guild_boss_season_config_5, tier 5 = Mythic, set 0) so
-// resolveBossOverviewDisplay's season-config lookups resolve against actual game data. The
-// Mythic-tier boss rotation moves over time (see extract_guild_boss.ts's season-calibration
-// comment) - these must be whichever boss currently occupies tier 5/set 0 in the live data.
+import {
+    bossIconFor,
+    bossPrefixDisplayNames,
+    getBossPrefix,
+    getBossSlotKey,
+    resolveBossOverviewDisplay,
+    unitDisplayLabel,
+} from './guild-performance.utils';
+
+// Bosses rotate between ladder positions as Snowprint updates the season config, so these are
+// derived from whichever boss/primes occupy the first Mythic set in the live data rather than a
+// hardcoded boss identity - the position is stable, the boss occupying it is not.
 const SEASON_CONFIG_ID = 'guild_boss_season_config_5';
-const BOSS_UNIT_ID = 'GuildBoss9Boss1ThousMagnus';
-const LEFT_PRIME_UNIT_ID = 'GuildBoss9MiniBoss1ThousSorcerer';
-const RIGHT_PRIME_UNIT_ID = 'GuildBoss9MiniBoss2ThousInfernalMaster';
+const config = getSeasonConfig(SEASON_CONFIG_ID)!;
+const mythicTierIndex = config.tiers.findIndex(t => t.tier === Rarity.Mythic);
+const { boss, leftPrime, rightPrime } = getEncountersAtPosition(config, { tierIndex: mythicTierIndex, setIndex: 0 });
+// Raid entries report the stripped unitSetId (no `:N` progression suffix), unlike the season
+// config's own encounter.unitId, so mock TacticusGuildRaidEntry.unitId values must be stripped too.
+const BOSS_UNIT_ID = getUnitSetId(boss!.unitId);
+const LEFT_PRIME_UNIT_ID = getUnitSetId(leftPrime!.unitId);
+const RIGHT_PRIME_UNIT_ID = getUnitSetId(rightPrime!.unitId);
 const PREVIOUS_BOSS_UNIT_ID = 'SomeEarlierPositionBoss';
 
 function makeEntry(
@@ -131,15 +144,16 @@ describe('resolveBossOverviewDisplay', () => {
 
 describe('unitDisplayLabel', () => {
     it('names a boss after its family', () => {
-        expect(unitDisplayLabel(BOSS_UNIT_ID)).toBe('Magnus');
+        expect(unitDisplayLabel(BOSS_UNIT_ID)).toBe(bossPrefixDisplayNames[getBossPrefix(BOSS_UNIT_ID)]);
     });
 
     it('names a prime after itself, not after the boss it flanks', () => {
-        // Regression: every prime used to be labelled with its boss family name, so both of
-        // Magnus's primes read "Magnus" in tooltips and filter buttons.
+        // Regression: every prime used to be labelled with its boss family name, so both primes
+        // read the same as the boss in tooltips and filter buttons.
+        const bossLabel = unitDisplayLabel(BOSS_UNIT_ID);
         for (const primeUnitId of [LEFT_PRIME_UNIT_ID, RIGHT_PRIME_UNIT_ID]) {
             const label = unitDisplayLabel(primeUnitId);
-            expect(label).not.toBe('Magnus');
+            expect(label).not.toBe(bossLabel);
             expect(label).not.toBe(primeUnitId);
         }
         expect(unitDisplayLabel(LEFT_PRIME_UNIT_ID)).not.toBe(unitDisplayLabel(RIGHT_PRIME_UNIT_ID));
@@ -149,5 +163,33 @@ describe('unitDisplayLabel', () => {
         for (const unitId of [BOSS_UNIT_ID, LEFT_PRIME_UNIT_ID, RIGHT_PRIME_UNIT_ID]) {
             expect(unitDisplayLabel(unitId)).not.toContain('GuildBoss');
         }
+    });
+});
+
+describe('bossIconFor', () => {
+    it('resolves a distinct icon per boss variant, even when two variants share a GuildBoss{N} family number', () => {
+        // Regression: this season's two Hive Tyrant reskins (Leviathan and Kronos) used to both
+        // show Leviathan's icon, because the old prefix-keyed icon map always resolved a shared
+        // family prefix to whichever unitId happened to be listed first.
+        const leviathan = bossIconFor({
+            key: getBossSlotKey('GuildBoss2Boss1TyranHiveTyrantLeviathan', Rarity.Legendary, 2),
+            unitId: 'GuildBoss2Boss1TyranHiveTyrantLeviathan',
+            rarity: Rarity.Legendary,
+            set: 2,
+        });
+        const kronos = bossIconFor({
+            key: getBossSlotKey('GuildBoss2Boss2TyranHiveTyrantKronos', Rarity.Legendary, 4),
+            unitId: 'GuildBoss2Boss2TyranHiveTyrantKronos',
+            rarity: Rarity.Legendary,
+            set: 4,
+        });
+
+        expect(leviathan.icon).toBeDefined();
+        expect(kronos.icon).toBeDefined();
+        expect(leviathan.icon).not.toBe(kronos.icon);
+        // Both are still "Hive Tyrant" by family name — only the icon (and rarity/tier label
+        // shown alongside it) needs to disambiguate them.
+        expect(leviathan.name).toBe('Hive Tyrant');
+        expect(kronos.name).toBe('Hive Tyrant');
     });
 });

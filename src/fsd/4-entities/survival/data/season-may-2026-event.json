@@ -164,7 +164,7 @@
         "tier": 0,
         "battleNr": 0,
         "boardId": "survival_13",
-        "power": 60054232690,
+        "power": 60054257326,
         "waves": [
             {
                 "round": 1,
@@ -318,7 +318,7 @@
             },
             {
                 "round": 20,
-                "power": 85531,
+                "power": 110167,
                 "army": [
                     "blackNpc3TraitorGuardsman:20",
                     "blackNpc3TraitorGuardsman:20",

@@ -81,7 +81,7 @@
                     "lockId": "lock_elder_shop_relic_featured_slot_2"
                 },
                 "cronSchedule": "0 0 0 ? * TUE,SAT *",
-                "reward": "R_Booster_Block_PhoenixGem",
+                "reward": "R_Crit_TalonOfHorus",
                 "bannerTextKey": "Offers/SpecialOffer_Banner_One_Time",
                 "cost": {
                     "type": "elderShopCurrency",
@@ -546,6 +546,18 @@
                 }
             },
             {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_astarEradicator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_astarEradicator:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
                 "weight": 3,
                 "conditions": {
                     "lockId": "lock_max_legendary_ultraTigurius"
@@ -940,6 +952,18 @@
                     "type": "elderShopCurrency",
                     "amount": 60
                 }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_astarEradicator"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_astarEradicator:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
             }
         ],
         [
@@ -995,7 +1019,7 @@
                     "lockId": "lock_elder_shop_relic_rotation_random_2"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "R_Crit_TalonOfHorus",
+                "reward": "R_Booster_Block_PhoenixGem",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 430

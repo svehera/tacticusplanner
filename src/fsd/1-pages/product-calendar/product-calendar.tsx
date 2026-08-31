@@ -10,10 +10,12 @@ import { MiscIcon, OrbIcon, UnknownItemImage } from '@/fsd/5-shared/ui/icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import type { IProductCalendar, IProductCalendarOffer } from '@/fsd/4-entities/calendars';
+import { EquipmentTypeRarityIcon } from '@/fsd/4-entities/equipment';
 
 import {
     calendarDisplayName,
     calendarRewardInfo,
+    isBlackstonePricedCalendar,
     offersForDayByTitle,
     titlesInOrder,
     type CalendarRewardIcon,
@@ -87,6 +89,16 @@ function renderRewardIcon(icon: CalendarRewardIcon): React.ReactNode {
         case 'orb': {
             return <OrbIcon alliance={icon.alliance} rarity={icon.rarity} size={ICON_SIZE} />;
         }
+        case 'equipmentTypeRarity': {
+            return (
+                <EquipmentTypeRarityIcon
+                    equipmentType={icon.equipmentType}
+                    rarity={icon.rarity}
+                    width={ICON_SIZE}
+                    height={ICON_SIZE}
+                />
+            );
+        }
         case 'xpBook': {
             const xpBookIconKey = `${icon.rarity.toLowerCase()}Book` as keyof typeof tacticusIcons;
             const xpBookIcon = tacticusIcons[xpBookIconKey];
@@ -138,9 +150,10 @@ interface OfferCardProps {
     offers: IProductCalendarOffer[];
     selectedVariant: string | undefined;
     onSelect: (variant: string | undefined) => void;
+    priceInBlackstone: boolean;
 }
 
-function OfferCard({ title, banner, offers, selectedVariant, onSelect }: OfferCardProps) {
+function OfferCard({ title, banner, offers, selectedVariant, onSelect, priceInBlackstone }: OfferCardProps) {
     function handleClick(variant: string) {
         onSelect(selectedVariant === variant ? undefined : variant);
     }
@@ -167,10 +180,17 @@ function OfferCard({ title, banner, offers, selectedVariant, onSelect }: OfferCa
                                     isSelected ? 'bg-(--primary)/10' : '',
                                 ].join(' ')}>
                                 <span className="text-xs text-(--soft-fg)">({offer.variant})</span>
-                                <span
-                                    className={`text-sm font-medium ${offer.free ? 'text-green-500' : 'text-(--fg)'}`}>
-                                    {formatPrice(offer.priceCents, offer.free)}
-                                </span>
+                                {priceInBlackstone ? (
+                                    <span className="flex items-center gap-1 text-sm font-medium text-(--fg)">
+                                        <MiscIcon icon="blackstone" width={14} height={14} />
+                                        {offer.priceCents.toLocaleString()}
+                                    </span>
+                                ) : (
+                                    <span
+                                        className={`text-sm font-medium ${offer.free ? 'text-green-500' : 'text-(--fg)'}`}>
+                                        {formatPrice(offer.priceCents, offer.free)}
+                                    </span>
+                                )}
                             </Button>
                             {isSelected && (
                                 <div className="border-t border-(--border) bg-(--soft) px-3 py-2">
@@ -195,9 +215,10 @@ interface DaySectionProps {
     allTitles: string[];
     selectedVariant: string | undefined;
     onSelect: (variant: string | undefined) => void;
+    priceInBlackstone: boolean;
 }
 
-function DaySection({ calDay, allTitles, selectedVariant, onSelect }: DaySectionProps) {
+function DaySection({ calDay, allTitles, selectedVariant, onSelect, priceInBlackstone }: DaySectionProps) {
     const byTitle = offersForDayByTitle(calDay);
 
     return (
@@ -218,6 +239,7 @@ function DaySection({ calDay, allTitles, selectedVariant, onSelect }: DaySection
                                 offers={offers}
                                 selectedVariant={selectedVariant}
                                 onSelect={onSelect}
+                                priceInBlackstone={priceInBlackstone}
                             />
                         );
                     })}
@@ -236,6 +258,7 @@ interface CalendarSectionProps {
 function CalendarSection({ calendar, selectedVariant, onSelect }: CalendarSectionProps) {
     const allTitles = titlesInOrder(calendar);
     const displayName = calendarDisplayName(calendar.calendar);
+    const priceInBlackstone = isBlackstonePricedCalendar(calendar.calendar);
 
     return (
         <Accordion>
@@ -255,6 +278,7 @@ function CalendarSection({ calendar, selectedVariant, onSelect }: CalendarSectio
                         allTitles={allTitles}
                         selectedVariant={selectedVariant}
                         onSelect={onSelect}
+                        priceInBlackstone={priceInBlackstone}
                     />
                 ))}
             </AccordionBody>

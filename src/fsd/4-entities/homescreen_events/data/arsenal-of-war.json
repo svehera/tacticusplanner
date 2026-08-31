@@ -35,15 +35,15 @@
                         "locaKey": "HomeScreenEvents/Tracker_donateUpgradeToGuildMember_arsenal_of_war_Description",
                         "gameModeRestrictions": {},
                         "pointsByRarity": {
-                            "Common": 2,
-                            "Uncommon": 5,
-                            "Rare": 10
+                            "Common": 10,
+                            "Uncommon": 25,
+                            "Rare": 50
                         }
                     },
                     {
                         "type": "donateIntelToGuildProject",
                         "scope": "personal",
-                        "points": 3,
+                        "points": 1,
                         "locaKey": "HomeScreenEvents/Tracker_donateIntelToGuildProject_arsenal_of_war_Description",
                         "gameModeRestrictions": {}
                     }
@@ -54,11 +54,35 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 400,
+                    "requiredProgress": 120,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 800,
+                    "requiredProgress": 240,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 360,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 480,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 600,
+                    "chestRewardId": "crusadeCurrency:100"
+                },
+                {
+                    "requiredProgress": 750,
+                    "chestRewardId": "crusadeBomb:50"
+                },
+                {
+                    "requiredProgress": 900,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 1050,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
@@ -66,74 +90,48 @@
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 1600,
+                    "requiredProgress": 1350,
+                    "chestRewardId": "crusadeCurrency:150"
+                },
+                {
+                    "requiredProgress": 1530,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 2000,
+                    "requiredProgress": 1710,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 2500,
+                    "requiredProgress": 1890,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 3000,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
-                },
-                {
-                    "requiredProgress": 3500,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 4000,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 4500,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 5100,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 5700,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 6300,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 6900,
+                    "requiredProgress": 2070,
                     "chestRewardId": "crusadeBomb:100"
                 },
                 {
-                    "requiredProgress": 7500,
+                    "requiredProgress": 2250,
+                    "chestRewardId": "crusadeCurrency:200"
+                },
+                {
+                    "requiredProgress": 2490,
                     "chestRewardId": "crusadeBomb:100"
                 },
                 {
-                    "requiredProgress": 8300,
+                    "requiredProgress": 2730,
                     "chestRewardId": "crusadeBomb:100"
                 },
                 {
-                    "requiredProgress": 9100,
+                    "requiredProgress": 2970,
                     "chestRewardId": "crusadeBomb:100"
                 },
                 {
-                    "requiredProgress": 9900,
-                    "chestRewardId": "crusadeBomb:100"
-                },
-                {
-                    "requiredProgress": 10700,
+                    "requiredProgress": 3210,
                     "chestRewardId": "seasonalEventCurrencyAugust2026:50"
                 },
                 {
-                    "requiredProgress": 400,
-                    "chestRewardId": "crusadeBomb:50",
-                    "endless": true,
-                    "endlessCap": 200
+                    "requiredProgress": 3330,
+                    "chestRewardId": "crusadeBomb:50"
                 }
             ],
             "offers": {
@@ -158,7 +156,7 @@
                         "price": 2399,
                         "mercadoId": "offer_02399",
                         "rewards": [
-                            "tieredRewardPoints_arsenal_of_war_tier_high:1000",
+                            "tieredRewardPoints_arsenal_of_war_tier_high:300",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:500"
@@ -186,7 +184,7 @@
                         "price": 999,
                         "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_arsenal_of_war_tier_high:800",
+                            "tieredRewardPoints_arsenal_of_war_tier_high:240",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2"
                         ]
@@ -212,7 +210,7 @@
                         "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
                         "price": 1399,
                         "mercadoId": "offer_01399",
-                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_high:2000", "gems:1000"]
+                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_high:600", "gems:1000"]
                     }
                 }
             },
@@ -257,15 +255,15 @@
                         "locaKey": "HomeScreenEvents/Tracker_donateUpgradeToGuildMember_arsenal_of_war_Description",
                         "gameModeRestrictions": {},
                         "pointsByRarity": {
-                            "Common": 2,
-                            "Uncommon": 5,
-                            "Rare": 10
+                            "Common": 10,
+                            "Uncommon": 25,
+                            "Rare": 50
                         }
                     },
                     {
                         "type": "donateIntelToGuildProject",
                         "scope": "personal",
-                        "points": 3,
+                        "points": 1,
                         "locaKey": "HomeScreenEvents/Tracker_donateIntelToGuildProject_arsenal_of_war_Description",
                         "gameModeRestrictions": {}
                     }
@@ -276,86 +274,84 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 200,
+                    "requiredProgress": 55,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 400,
+                    "requiredProgress": 110,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 600,
+                    "requiredProgress": 165,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 800,
+                    "requiredProgress": 220,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 1000,
+                    "requiredProgress": 275,
+                    "chestRewardId": "crusadeCurrency:100"
+                },
+                {
+                    "requiredProgress": 355,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 1300,
-                    "chestRewardId": "crusadeBomb:30"
-                },
-                {
-                    "requiredProgress": 1600,
+                    "requiredProgress": 435,
                     "chestRewardId": "seasonalEventCurrencyAugust2026:30"
                 },
                 {
-                    "requiredProgress": 1900,
+                    "requiredProgress": 515,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 2200,
+                    "requiredProgress": 595,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 2500,
+                    "requiredProgress": 675,
+                    "chestRewardId": "crusadeCurrency:150"
+                },
+                {
+                    "requiredProgress": 785,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 2900,
+                    "requiredProgress": 895,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 3300,
+                    "requiredProgress": 1005,
                     "chestRewardId": "crusadeBomb:30"
                 },
                 {
-                    "requiredProgress": 3700,
-                    "chestRewardId": "crusadeBomb:30"
-                },
-                {
-                    "requiredProgress": 4100,
+                    "requiredProgress": 1115,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 4500,
+                    "requiredProgress": 1225,
+                    "chestRewardId": "crusadeCurrency:200"
+                },
+                {
+                    "requiredProgress": 1385,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 5100,
+                    "requiredProgress": 1545,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 5700,
+                    "requiredProgress": 1705,
                     "chestRewardId": "crusadeBomb:50"
                 },
                 {
-                    "requiredProgress": 6300,
-                    "chestRewardId": "crusadeBomb:50"
-                },
-                {
-                    "requiredProgress": 6900,
+                    "requiredProgress": 1865,
                     "chestRewardId": "seasonalEventCurrencyAugust2026:50"
                 },
                 {
-                    "requiredProgress": 300,
-                    "chestRewardId": "crusadeBomb:30",
-                    "endless": true,
-                    "endlessCap": 200
+                    "requiredProgress": 1945,
+                    "chestRewardId": "crusadeBomb:30"
                 }
             ],
             "offers": {
@@ -380,7 +376,7 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_arsenal_of_war_tier_mid:700",
+                            "tieredRewardPoints_arsenal_of_war_tier_mid:200",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -408,7 +404,7 @@
                         "price": 999,
                         "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_arsenal_of_war_tier_mid:700",
+                            "tieredRewardPoints_arsenal_of_war_tier_mid:220",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2"
                         ]
@@ -434,7 +430,7 @@
                         "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
                         "price": 1399,
                         "mercadoId": "offer_01399",
-                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_mid:2000", "gems:850"]
+                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_mid:600", "gems:850"]
                     }
                 }
             },
@@ -479,15 +475,15 @@
                         "locaKey": "HomeScreenEvents/Tracker_donateUpgradeToGuildMember_arsenal_of_war_Description",
                         "gameModeRestrictions": {},
                         "pointsByRarity": {
-                            "Common": 2,
-                            "Uncommon": 5,
-                            "Rare": 10
+                            "Common": 10,
+                            "Uncommon": 25,
+                            "Rare": 50
                         }
                     },
                     {
                         "type": "donateIntelToGuildProject",
                         "scope": "personal",
-                        "points": 3,
+                        "points": 1,
                         "locaKey": "HomeScreenEvents/Tracker_donateIntelToGuildProject_arsenal_of_war_Description",
                         "gameModeRestrictions": {}
                     }
@@ -498,86 +494,84 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 35,
+                    "requiredProgress": 10,
                     "chestRewardId": "draft_abilityTokensCommon:1"
                 },
                 {
-                    "requiredProgress": 70,
+                    "requiredProgress": 20,
                     "chestRewardId": "draft_abilityTokensCommon:1"
                 },
                 {
-                    "requiredProgress": 105,
+                    "requiredProgress": 30,
                     "chestRewardId": "draft_abilityTokensCommon:2"
                 },
                 {
-                    "requiredProgress": 140,
+                    "requiredProgress": 40,
                     "chestRewardId": "draft_abilityTokensCommon:3"
                 },
                 {
-                    "requiredProgress": 175,
+                    "requiredProgress": 50,
                     "chestRewardId": "draft_abilityTokensUncommon:1"
-                },
-                {
-                    "requiredProgress": 245,
-                    "chestRewardId": "draft_ascensionOrbsUncommon:1"
-                },
-                {
-                    "requiredProgress": 315,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
-                },
-                {
-                    "requiredProgress": 385,
-                    "chestRewardId": "draft_abilityTokensUncommon:1"
-                },
-                {
-                    "requiredProgress": 455,
-                    "chestRewardId": "draft_abilityTokensUncommon:2"
-                },
-                {
-                    "requiredProgress": 525,
-                    "chestRewardId": "draft_abilityTokensUncommon:3"
-                },
-                {
-                    "requiredProgress": 630,
-                    "chestRewardId": "draft_abilityTokensRare:1"
-                },
-                {
-                    "requiredProgress": 735,
-                    "chestRewardId": "draft_abilityTokensRare:1"
-                },
-                {
-                    "requiredProgress": 840,
-                    "chestRewardId": "draft_ascensionOrbsRare:1"
-                },
-                {
-                    "requiredProgress": 945,
-                    "chestRewardId": "draft_abilityTokensRare:1"
-                },
-                {
-                    "requiredProgress": 1050,
-                    "chestRewardId": "draft_abilityTokensRare:1"
-                },
-                {
-                    "requiredProgress": 1190,
-                    "chestRewardId": "draft_abilityTokensRare:1"
-                },
-                {
-                    "requiredProgress": 1330,
-                    "chestRewardId": "draft_abilityTokensRare:1"
-                },
-                {
-                    "requiredProgress": 1470,
-                    "chestRewardId": "draft_abilityTokensEpic:1"
-                },
-                {
-                    "requiredProgress": 1610,
-                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
                 },
                 {
                     "requiredProgress": 70,
-                    "chestRewardId": "draft_abilityTokensRare:1",
-                    "endless": true,
-                    "endlessCap": 200
+                    "chestRewardId": "draft_ascensionOrbsUncommon:1"
+                },
+                {
+                    "requiredProgress": 90,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:30"
+                },
+                {
+                    "requiredProgress": 110,
+                    "chestRewardId": "draft_abilityTokensUncommon:1"
+                },
+                {
+                    "requiredProgress": 130,
+                    "chestRewardId": "draft_abilityTokensUncommon:2"
+                },
+                {
+                    "requiredProgress": 150,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 180,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 210,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 240,
+                    "chestRewardId": "draft_ascensionOrbsRare:1"
+                },
+                {
+                    "requiredProgress": 270,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 300,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 330,
+                    "chestRewardId": "draft_abilityTokensRare:1"
+                },
+                {
+                    "requiredProgress": 370,
+                    "chestRewardId": "draft_abilityTokensEpic:1"
+                },
+                {
+                    "requiredProgress": 425,
+                    "chestRewardId": "draft_abilityTokensEpic:1"
+                },
+                {
+                    "requiredProgress": 500,
+                    "chestRewardId": "seasonalEventCurrencyAugust2026:50"
+                },
+                {
+                    "requiredProgress": 550,
+                    "chestRewardId": "draft_abilityTokensRare:1"
                 }
             ],
             "offers": {
@@ -602,7 +596,7 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_arsenal_of_war_tier_low:200",
+                            "tieredRewardPoints_arsenal_of_war_tier_low:60",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:250"
@@ -630,7 +624,7 @@
                         "price": 999,
                         "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_arsenal_of_war_tier_low:250",
+                            "tieredRewardPoints_arsenal_of_war_tier_low:75",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2"
                         ]
@@ -656,7 +650,7 @@
                         "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
                         "price": 599,
                         "mercadoId": "offer_00599",
-                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_low:250", "gems:400"]
+                        "rewards": ["tieredRewardPoints_arsenal_of_war_tier_low:100", "gems:400"]
                     }
                 }
             },

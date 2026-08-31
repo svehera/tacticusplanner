@@ -145,13 +145,14 @@ export function hseRewardInfo(chestRewardId: string): {
         };
     }
 
-    // ── generic rarity-only items: items{Rarity} / itemsChaos{Rarity} ────────
-    const itemsMatch = /^items(?:Chaos)?(Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
+    // ── generic rarity-only items: items{Rarity} / items{Alliance}{Rarity} ───
+    const itemsMatch = /^items(Chaos|Imperial|Xenos)?(Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
     if (itemsMatch) {
-        const rarity = itemsMatch[1];
+        const alliance = itemsMatch[1];
+        const rarity = itemsMatch[2];
         return {
             icon: <UnknownItemImage rarity={rarity} size={REWARD_ICON_SIZE} />,
-            label: `${rarity} Item`,
+            label: alliance ? `${alliance} ${rarity} Item` : `${rarity} Item`,
             qty,
             resolved: true,
         };

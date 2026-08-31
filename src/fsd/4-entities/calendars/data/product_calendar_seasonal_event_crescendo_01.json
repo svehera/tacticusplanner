@@ -1,0 +1,577 @@
+{
+    "calendar": "seasonal_event_crescendo_01",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "M4_M_SHD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:160",
+                        "crusadeNpc:330",
+                        "ShardsImperial:120",
+                        "heroAscensionOrbMythic_Imperial:4"
+                    ]
+                },
+                {
+                    "variant": "M4_L_SHD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:160",
+                        "crusadeNpc:330",
+                        "ShardsImperial:105",
+                        "heroAscensionOrbLegendary_Imperial:10"
+                    ]
+                },
+                {
+                    "variant": "M4_CURE_SHD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:160",
+                        "crusadeNpc:300",
+                        "ShardsImperial:120",
+                        "heroAscensionOrbEpic_Imperial:16",
+                        "heroAscensionOrbRare_Imperial:16"
+                    ]
+                },
+                {
+                    "variant": "M4_M_HD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:120",
+                        "crusadeNpc:248",
+                        "ShardsImperial:90",
+                        "heroAscensionOrbMythic_Imperial:3"
+                    ]
+                },
+                {
+                    "variant": "M4_L_HD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:120",
+                        "crusadeNpc:220",
+                        "ShardsImperial:75",
+                        "heroAscensionOrbLegendary_Imperial:8"
+                    ]
+                },
+                {
+                    "variant": "M4_CURE_HD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:120",
+                        "crusadeNpc:225",
+                        "ShardsImperial:90",
+                        "heroAscensionOrbEpic_Imperial:12",
+                        "heroAscensionOrbRare_Imperial:12"
+                    ]
+                },
+                {
+                    "variant": "M4_M_MD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:80",
+                        "crusadeNpc:165",
+                        "ShardsImperial:60",
+                        "heroAscensionOrbMythic_Imperial:2"
+                    ]
+                },
+                {
+                    "variant": "M4_L_MD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:80",
+                        "crusadeNpc:175",
+                        "ShardsImperial:50",
+                        "heroAscensionOrbLegendary_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "M4_CURE_MD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:80",
+                        "crusadeNpc:150",
+                        "ShardsImperial:60",
+                        "heroAscensionOrbEpic_Imperial:8",
+                        "heroAscensionOrbRare_Imperial:8"
+                    ]
+                },
+                {
+                    "variant": "M4_M_LD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:40",
+                        "crusadeNpc:83",
+                        "ShardsImperial:30",
+                        "heroAscensionOrbMythic_Imperial:1"
+                    ]
+                },
+                {
+                    "variant": "M4_L_LD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:40",
+                        "crusadeNpc:110",
+                        "ShardsImperial:30",
+                        "heroAscensionOrbLegendary_Imperial:2"
+                    ]
+                },
+                {
+                    "variant": "M4_CURE_LD",
+                    "title": "Exalted Tales",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:40",
+                        "crusadeNpc:75",
+                        "ShardsImperial:30",
+                        "heroAscensionOrbEpic_Imperial:4",
+                        "heroAscensionOrbRare_Imperial:4"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Explosive Tales",
+                    "banner": "Crusade Resources!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["seasonalEventCurrencyCrescendo:110", "crusadeNpc:525", "crusadeBomb:525"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Explosive Tales",
+                    "banner": "Crusade Resources!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyCrescendo:75", "crusadeNpc:350", "crusadeBomb:350"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Explosive Tales",
+                    "banner": "Crusade Resources!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyCrescendo:65", "crusadeNpc:305", "crusadeBomb:305"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Explosive Tales",
+                    "banner": "Crusade Resources!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyCrescendo:30", "crusadeNpc:155", "crusadeBomb:155"]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Triumphant Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:110",
+                        "crusadeNpc:150",
+                        "xpMythic:6",
+                        "xpLegendary:10",
+                        "xpEpic:3",
+                        "gold:17450"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Triumphant Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:75",
+                        "crusadeNpc:100",
+                        "xpMythic:4",
+                        "xpLegendary:7",
+                        "gold:11500"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Triumphant Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:65",
+                        "crusadeNpc:88",
+                        "xpLegendary:20",
+                        "xpEpic:18",
+                        "gold:12700"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Triumphant Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:30",
+                        "crusadeNpc:45",
+                        "xpLegendary:11",
+                        "xpEpic:4",
+                        "gold:6100"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "L3_SHD",
+                    "title": "Dire Tales",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyCrescendo:200", "crusadeNpc:2000"]
+                },
+                {
+                    "variant": "L3_HD",
+                    "title": "Dire Tales",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyCrescendo:120", "crusadeNpc:1200"]
+                },
+                {
+                    "variant": "L3_MD",
+                    "title": "Dire Tales",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyCrescendo:80", "crusadeNpc:800"]
+                },
+                {
+                    "variant": "L3_LD",
+                    "title": "Dire Tales",
+                    "banner": "Fresh Forces!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyCrescendo:20", "crusadeNpc:200"]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "XL2_M_SHD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:320",
+                        "crusadeNpc:800",
+                        "heroAscensionOrbMythic_Imperial:8",
+                        "abilityTokenMythic_Imperial:8",
+                        "gold:680000"
+                    ]
+                },
+                {
+                    "variant": "XL2_L_SHD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:320",
+                        "crusadeNpc:800",
+                        "heroAscensionOrbLegendary_Imperial:16",
+                        "abilityTokenLegendary_Imperial:16",
+                        "gold:504000"
+                    ]
+                },
+                {
+                    "variant": "XL2_CURE_SHD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:320",
+                        "crusadeNpc:800",
+                        "heroAscensionOrbLegendary_Imperial:8",
+                        "heroAscensionOrbEpic_Imperial:16",
+                        "abilityTokenEpic_Imperial:32",
+                        "gold:320000"
+                    ]
+                },
+                {
+                    "variant": "XL2_M_HD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:280",
+                        "crusadeNpc:700",
+                        "heroAscensionOrbMythic_Imperial:7",
+                        "abilityTokenMythic_Imperial:7",
+                        "gold:600000"
+                    ]
+                },
+                {
+                    "variant": "XL2_L_HD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:280",
+                        "crusadeNpc:700",
+                        "heroAscensionOrbLegendary_Imperial:14",
+                        "abilityTokenLegendary_Imperial:14",
+                        "gold:441000"
+                    ]
+                },
+                {
+                    "variant": "XL2_CURE_HD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:280",
+                        "crusadeNpc:700",
+                        "heroAscensionOrbLegendary_Imperial:7",
+                        "heroAscensionOrbEpic_Imperial:14",
+                        "abilityTokenEpic_Imperial:28",
+                        "gold:280000"
+                    ]
+                },
+                {
+                    "variant": "XL2_M_MD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:200",
+                        "crusadeNpc:500",
+                        "heroAscensionOrbMythic_Imperial:5",
+                        "abilityTokenMythic_Imperial:5",
+                        "gold:425000"
+                    ]
+                },
+                {
+                    "variant": "XL2_L_MD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:200",
+                        "crusadeNpc:500",
+                        "heroAscensionOrbLegendary_Imperial:10",
+                        "abilityTokenLegendary_Imperial:10",
+                        "gold:315000"
+                    ]
+                },
+                {
+                    "variant": "XL2_CURE_MD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:200",
+                        "crusadeNpc:500",
+                        "heroAscensionOrbLegendary_Imperial:5",
+                        "heroAscensionOrbEpic_Imperial:10",
+                        "abilityTokenEpic_Imperial:20",
+                        "gold:200000"
+                    ]
+                },
+                {
+                    "variant": "XL2_M_LD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:120",
+                        "crusadeNpc:300",
+                        "heroAscensionOrbMythic_Imperial:3",
+                        "abilityTokenMythic_Imperial:3",
+                        "gold:256000"
+                    ]
+                },
+                {
+                    "variant": "XL2_L_LD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:120",
+                        "crusadeNpc:300",
+                        "heroAscensionOrbLegendary_Imperial:6",
+                        "abilityTokenLegendary_Imperial:6",
+                        "gold:189000"
+                    ]
+                },
+                {
+                    "variant": "XL2_CURE_LD",
+                    "title": "Terrifying Tales",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:120",
+                        "crusadeNpc:300",
+                        "heroAscensionOrbLegendary_Imperial:3",
+                        "heroAscensionOrbEpic_Imperial:6",
+                        "abilityTokenEpic_Imperial:12",
+                        "gold:120000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "L4_SHD",
+                    "title": "Grim Tales",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:260",
+                        "crusadeNpc:420",
+                        "specialSummoningToken:12",
+                        "summoningToken:12"
+                    ]
+                },
+                {
+                    "variant": "L4_HD",
+                    "title": "Grim Tales",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:220",
+                        "crusadeNpc:350",
+                        "specialSummoningToken:10",
+                        "summoningToken:10"
+                    ]
+                },
+                {
+                    "variant": "L4_MD",
+                    "title": "Grim Tales",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:175",
+                        "crusadeNpc:280",
+                        "specialSummoningToken:8",
+                        "summoningToken:8"
+                    ]
+                },
+                {
+                    "variant": "L4_LD",
+                    "title": "Grim Tales",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyCrescendo:110",
+                        "crusadeNpc:175",
+                        "specialSummoningToken:5",
+                        "summoningToken:5"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Inspiring Tales",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyCrescendo:90", "crusadeNpc:480", "stamina:600", "raidTicket:100"]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Inspiring Tales",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyCrescendo:68", "crusadeNpc:360", "stamina:450", "raidTicket:75"]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Inspiring Tales",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyCrescendo:45", "crusadeNpc:240", "stamina:300", "raidTicket:50"]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Inspiring Tales",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["seasonalEventCurrencyCrescendo:23", "crusadeNpc:120", "stamina:150", "raidTicket:25"]
+                }
+            ]
+        }
+    ]
+}

@@ -21,10 +21,12 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     machinesOfWarAmmo: { iconKey: 'mowAmmo', label: 'Munitions' },
     xp_battlepass: { iconKey: 'battlepassPoints', label: 'Battlepass Points' },
     xp_seasonal: { iconKey: 'eventPoints', label: 'Event Point' },
+    xp_crusadePoints: { iconKey: 'crusadePoints', label: 'Crusade Points' },
     survivalBoost_stats: { iconKey: 'survivalStatBoost', label: '' },
     ShardsAll: { iconKey: 'shard', label: 'Shards' },
     gems: { iconKey: 'blackstone', label: 'Blackstone' },
     raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
+    expeditionSpeedUp: { iconKey: 'expeditionSpeedUp', label: 'Expedition Speed Up' },
     avatarFrame_frameAugust2026: {
         iconKey: 'seasonalEventAugust2026AvatarFrame',
         label: 'Seasonal Event (August 2026) Avatar Frame',
