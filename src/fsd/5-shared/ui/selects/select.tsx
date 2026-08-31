@@ -29,6 +29,14 @@ export interface SelectProps<T> {
     /** Overrides the open panel's size (it defaults to the trigger's width) — for options with rich/wide content. */
     panelClassName?: string;
     disabled?: boolean;
+    /**
+     * Accessible name for the trigger, for when the visible label lives outside this component
+     * (e.g. an external `<label>` for a field, plus a "Min"/"Max" tag). Must be `aria-label`
+     * (a plain string), not `aria-labelledby`: Headless UI's `ListboxButton` computes and owns
+     * `aria-labelledby` itself via its `Listbox.Label` mechanism, so any `aria-labelledby` passed
+     * in here gets silently overwritten — `aria-label` isn't part of that internal computation.
+     */
+    ariaLabel?: string;
 }
 
 export const Select = <T,>({
@@ -44,6 +52,7 @@ export const Select = <T,>({
     triggerClassName,
     panelClassName,
     disabled,
+    ariaLabel,
 }: SelectProps<T>) => {
     const displayValue = renderValue ?? renderOption;
 
@@ -53,7 +62,9 @@ export const Select = <T,>({
 
             <Listbox value={value} onChange={onChange} by={by} disabled={disabled}>
                 <div className="relative">
-                    <ListboxButton className={cn(triggerDisabled(triggerSingle, disabled), triggerClassName)}>
+                    <ListboxButton
+                        aria-label={ariaLabel}
+                        className={cn(triggerDisabled(triggerSingle, disabled), triggerClassName)}>
                         {/* `min-w-0`: a flex item's automatic minimum size is its content, so
                             without this a value longer than the trigger pushes straight through the
                             border and under the chevron instead of shrinking. A `truncate` child can

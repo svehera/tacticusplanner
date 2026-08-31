@@ -8,7 +8,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { getAvailableBossPrefixes, orderBossPrefixesByEncounter } from './guild-performance.utils';
+import { getAvailableBosses, orderBossesByEncounter } from './guild-performance.utils';
 
 function makeEntry(unitId: string, rarity: Rarity, set: number, isBoss = true): TacticusGuildRaidEntry {
     return {
@@ -44,13 +44,13 @@ describe('boss filter ordering', () => {
             makeEntry('GuildBoss7Boss1AstraRogaldorn', Rarity.Legendary, 0),
         ];
 
-        expect(getAvailableBossPrefixes(entries)).toEqual([
-            'GuildBoss2', // Epic 2  — met first
-            'GuildBoss1', // Epic 3
-            'GuildBoss7', // Legendary 1
-            'GuildBoss9', // Legendary 5
-            'GuildBoss12', // Mythic 1
-            'GuildBoss5', // Mythic 2 — met last
+        expect(getAvailableBosses(entries).map(option => option.unitId)).toEqual([
+            'GuildBoss2Boss1TyranHiveTyrant', // Epic 2  — met first
+            'GuildBoss1Boss1TyranTervigon', // Epic 3
+            'GuildBoss7Boss1AstraRogaldorn', // Legendary 1
+            'GuildBoss9Boss1ThousMagnus', // Legendary 5
+            'GuildBoss12Boss1Lion', // Mythic 1
+            'GuildBoss5Boss1DeathMortarion', // Mythic 2 — met last
         ]);
     });
 
@@ -60,26 +60,78 @@ describe('boss filter ordering', () => {
             makeEntry('GuildBoss7Boss1AstraRogaldorn', Rarity.Legendary, 0),
             makeEntry('GuildBoss5Boss1DeathMortarion', Rarity.Mythic, 0),
         ];
-        const prefixes = getAvailableBossPrefixes(entries, new Set([Rarity.Legendary, Rarity.Mythic]));
-        expect(prefixes).toEqual(['GuildBoss7', 'GuildBoss5']);
+        const options = getAvailableBosses(entries, new Set([Rarity.Legendary, Rarity.Mythic]));
+        expect(options.map(option => option.unitId)).toEqual([
+            'GuildBoss7Boss1AstraRogaldorn',
+            'GuildBoss5Boss1DeathMortarion',
+        ]);
     });
 
     it('keeps a family listed when only its primes were hit, without changing the order', () => {
         // A prime shares its boss's rarity and set, so including primes never reorders anything.
+        // With no boss entry ever seen for its slot, the prime's own unitId is the representative.
         const entries = [
             makeEntry('GuildBoss9MiniBoss1ThousSorcerer', Rarity.Legendary, 4, false),
             makeEntry('GuildBoss7Boss1AstraRogaldorn', Rarity.Legendary, 0),
         ];
-        expect(getAvailableBossPrefixes(entries)).toEqual(['GuildBoss7', 'GuildBoss9']);
+        expect(getAvailableBosses(entries).map(option => option.unitId)).toEqual([
+            'GuildBoss7Boss1AstraRogaldorn',
+            'GuildBoss9MiniBoss1ThousSorcerer',
+        ]);
     });
 
-    it('takes the earliest occurrence when a family appears in more than one tier', () => {
-        // Legendary/Mythic loops revisit the same boss; the filter should place it at first meeting.
+    it('collapses the same boss revisited at the same rarity and set across multiple loop passes', () => {
+        // A loop revisit reuses the exact same (rarity, set) slot — a new loop lap doesn't advance
+        // `set`, so multiple raid-log entries for the same slot must still collapse to one option.
         const occurrences = [
-            { prefix: 'GuildBoss9', rarity: Rarity.Mythic, set: 0 },
-            { prefix: 'GuildBoss9', rarity: Rarity.Legendary, set: 4 },
-            { prefix: 'GuildBoss7', rarity: Rarity.Mythic, set: 1 },
+            { unitId: 'GuildBoss9Boss1ThousMagnus', rarity: Rarity.Mythic, set: 0, encounterIndex: 0 },
+            { unitId: 'GuildBoss9Boss1ThousMagnus', rarity: Rarity.Mythic, set: 0, encounterIndex: 0 },
+            { unitId: 'GuildBoss7Boss1AstraRogaldorn', rarity: Rarity.Mythic, set: 1, encounterIndex: 0 },
         ];
-        expect(orderBossPrefixesByEncounter(occurrences)).toEqual(['GuildBoss9', 'GuildBoss7']);
+        expect(orderBossesByEncounter(occurrences).map(option => option.unitId)).toEqual([
+            'GuildBoss9Boss1ThousMagnus',
+            'GuildBoss7Boss1AstraRogaldorn',
+        ]);
+    });
+
+    it('keeps the same character at two different rarities as two separate slots (e.g. a Legendary and a Mythic Riptide this season)', () => {
+        const occurrences = [
+            { unitId: 'GuildBoss11Boss1TauRiptide', rarity: Rarity.Mythic, set: 4, encounterIndex: 0 },
+            { unitId: 'GuildBoss11Boss1TauRiptide', rarity: Rarity.Legendary, set: 3, encounterIndex: 0 },
+        ];
+        const options = orderBossesByEncounter(occurrences);
+        expect(options).toHaveLength(2);
+        expect(options[0]).toMatchObject({ unitId: 'GuildBoss11Boss1TauRiptide', rarity: Rarity.Legendary });
+        expect(options[1]).toMatchObject({ unitId: 'GuildBoss11Boss1TauRiptide', rarity: Rarity.Mythic });
+        expect(options[0].key).not.toBe(options[1].key);
+    });
+
+    it("keeps two boss variants that share a GuildBoss{N} family number as two separate slots (e.g. this season's two Hive Tyrant reskins)", () => {
+        const occurrences = [
+            { unitId: 'GuildBoss2Boss1TyranHiveTyrantLeviathan', rarity: Rarity.Legendary, set: 2, encounterIndex: 0 },
+            { unitId: 'GuildBoss2Boss2TyranHiveTyrantKronos', rarity: Rarity.Legendary, set: 4, encounterIndex: 0 },
+        ];
+        const options = orderBossesByEncounter(occurrences);
+        expect(options.map(option => option.unitId)).toEqual([
+            'GuildBoss2Boss1TyranHiveTyrantLeviathan',
+            'GuildBoss2Boss2TyranHiveTyrantKronos',
+        ]);
+        expect(options[0].key).not.toBe(options[1].key);
+    });
+
+    it("prefers the boss's own occurrence over a prime's as the slot's representative unitId", () => {
+        // A prime encountered before its boss in the input must not "win" the icon/name lookup.
+        const occurrences = [
+            { unitId: 'GuildBoss2MiniBoss1TyranWarrior', rarity: Rarity.Legendary, set: 2, encounterIndex: 1 },
+            { unitId: 'GuildBoss2Boss1TyranHiveTyrantLeviathan', rarity: Rarity.Legendary, set: 2, encounterIndex: 0 },
+        ];
+        expect(orderBossesByEncounter(occurrences)).toEqual([
+            {
+                key: 'GuildBoss2:4:2',
+                unitId: 'GuildBoss2Boss1TyranHiveTyrantLeviathan',
+                rarity: Rarity.Legendary,
+                set: 2,
+            },
+        ]);
     });
 });

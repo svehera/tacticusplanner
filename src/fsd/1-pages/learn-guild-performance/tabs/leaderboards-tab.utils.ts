@@ -12,7 +12,7 @@ import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { MowsService } from '@/fsd/4-entities/mow';
 
-import { getBossPrefix, resolvePlayerName } from '../guild-performance.utils';
+import { getBossPrefix, getBossSlotKey, resolvePlayerName } from '../guild-performance.utils';
 
 export interface LeaderboardEntry {
     /** Undefined when anonymized (another member in a keyless member's view). */
@@ -88,7 +88,7 @@ export function toLeaderboardEntries(
 
 export function buildLeaderboardGroups(
     entries: TacticusGuildRaidEntry[],
-    selectedBossPrefixes: string[],
+    selectedBossKeys: string[],
     names: Map<string, string>,
     bossTopN: number,
     primeTopN: number
@@ -99,20 +99,20 @@ export function buildLeaderboardGroups(
     for (const entry of entries) {
         if (entry.encounterType !== TacticusEncounterType.Boss) continue;
         if (entry.damageType === TacticusDamageType.Bomb) continue;
-        const bossPrefix = /^(GuildBoss\d+)/.exec(entry.unitId)?.[1] ?? entry.unitId;
-        if (selectedBossPrefixes.length > 0 && !selectedBossPrefixes.includes(bossPrefix)) continue;
-        const key = `${bossPrefix}:${entry.rarity}`;
-        if (!bossSlots.has(key))
-            bossSlots.set(key, { unitId: entry.unitId, set: entry.set, rarity: entry.rarity, bossPrefix });
+        const slotKey = getBossSlotKey(entry.unitId, entry.rarity, entry.set);
+        if (selectedBossKeys.length > 0 && !selectedBossKeys.includes(slotKey)) continue;
+        const bossPrefix = getBossPrefix(entry.unitId);
+        if (!bossSlots.has(slotKey))
+            bossSlots.set(slotKey, { unitId: entry.unitId, set: entry.set, rarity: entry.rarity, bossPrefix });
     }
 
     const primeSlotMap = new Map<string, Map<string, { unitId: string; encounterIndex: number }>>();
     for (const entry of entries) {
         if (entry.encounterType !== TacticusEncounterType.SideBoss) continue;
         if (entry.damageType === TacticusDamageType.Bomb) continue;
-        const bossPrefix = /^(GuildBoss\d+)/.exec(entry.unitId)?.[1] ?? entry.unitId;
-        if (selectedBossPrefixes.length > 0 && !selectedBossPrefixes.includes(bossPrefix)) continue;
-        const groupKey = `${bossPrefix}:${entry.rarity}`;
+        // A prime shares its boss's rarity and set, so this reproduces the boss's own slot key.
+        const groupKey = getBossSlotKey(entry.unitId, entry.rarity, entry.set);
+        if (selectedBossKeys.length > 0 && !selectedBossKeys.includes(groupKey)) continue;
         let group = primeSlotMap.get(groupKey);
         if (group === undefined) {
             group = new Map();
@@ -158,12 +158,13 @@ export function buildLeaderboardGroups(
 /**
  * Reconstructs leaderboard groups from a historical season aggregate. Each leaderboard is already
  * the top-5 single hits for one enemy (boss or prime, top-2 rarities only); we re-group a boss with
- * its primes by GuildBoss{N} prefix + rarity. `bossTopN`/`primeTopN` can only trim the stored five.
+ * its primes by GuildBoss{N} prefix + rarity + set (its slot — a prime shares its boss's exact
+ * rarity and set). `bossTopN`/`primeTopN` can only trim the stored five.
  */
 export function buildLeaderboardGroupsFromSummary(
     summary: GuildSeasonSummary,
     selectedRarities: Rarity[],
-    selectedBossPrefixes: string[],
+    selectedBossKeys: string[],
     names: Map<string, string>,
     bossTopN: number,
     primeTopN: number
@@ -182,13 +183,19 @@ export function buildLeaderboardGroupsFromSummary(
         const { enemyId, rarity: rarityName, encounterIndex, set } = board.enemyInfo;
         const rarity = RarityMapper.stringToNumber[rarityName];
         if (!selectedRarities.includes(rarity)) continue;
-        const bossPrefix = getBossPrefix(enemyId);
-        if (selectedBossPrefixes.length > 0 && !selectedBossPrefixes.includes(bossPrefix)) continue;
+        const key = getBossSlotKey(enemyId, rarity, set);
+        if (selectedBossKeys.length > 0 && !selectedBossKeys.includes(key)) continue;
 
-        const key = `${bossPrefix}:${rarity}`;
         let group = groups.get(key);
         if (group === undefined) {
-            group = { bossPrefix, rarity, set, bossUnitId: '', bossEntries: [], primeSlots: [] };
+            group = {
+                bossPrefix: getBossPrefix(enemyId),
+                rarity,
+                set,
+                bossUnitId: '',
+                bossEntries: [],
+                primeSlots: [],
+            };
             groups.set(key, group);
         }
         const entries = toLeaderboardEntries(board.entries, names);

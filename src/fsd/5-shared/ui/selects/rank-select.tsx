@@ -9,18 +9,21 @@ export const RankSelect = ({
     valueChanges,
     label,
     hideText = false,
+    ariaLabel,
 }: {
     label: string;
     rankValues: number[];
     value: number;
     valueChanges: (value: number) => void;
     hideText?: boolean;
+    ariaLabel?: string;
 }) => (
     <Select
         options={rankValues}
         value={value}
         onChange={valueChanges}
         label={label}
+        ariaLabel={ariaLabel}
         renderOption={rank => (
             <div className="flex items-center gap-2">
                 <RankIcon rank={rank} />

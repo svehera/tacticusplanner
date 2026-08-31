@@ -1,10 +1,10 @@
-/* eslint-disable import-x/no-internal-modules */
-import { ICharacter2 } from '@/models/interfaces';
+import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { FactionId, Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
-
+import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { IMow2 } from '@/fsd/4-entities/mow';
 import { convertCharacterToSnapshot, convertMowToSnapshot } from '@/fsd/4-entities/unit';
+
+import { IUnitFilterCriteria } from './models';
 
 const maxRankForRarity: Record<Rarity, Rank> = {
     [Rarity.Common]: Rank.Iron1,
@@ -34,16 +34,9 @@ const maxStarsForRarity: Record<Rarity, RarityStars> = {
 };
 
 export class Teams2Service {
-    public static passesCharacterFilter(
-        c: ICharacter2,
-        allowLockedUnits: boolean,
-        minRank: Rank,
-        maxRank: Rank,
-        minRarity: Rarity,
-        maxRarity: Rarity,
-        factions: FactionId[],
-        searchText: string
-    ): boolean {
+    public static passesCharacterFilter(c: ICharacter2, filter: IUnitFilterCriteria): boolean {
+        const { allowLockedUnits, minRank, maxRank, minRarity, maxRarity, factions, searchText } = filter;
+
         if (!allowLockedUnits && c.rank === Rank.Locked) {
             return false;
         }
@@ -54,6 +47,9 @@ export class Teams2Service {
             return false;
         }
         if (factions.length > 0 && !factions.includes(c.faction)) {
+            return false;
+        }
+        if (!CharactersService.passesRosterFilter(c, filter)) {
             return false;
         }
         if (searchText.trim() !== '') {
@@ -73,14 +69,9 @@ export class Teams2Service {
 
     public static convertMow = convertMowToSnapshot;
 
-    public static passesMowFilter(
-        m: IMow2,
-        allowLockedUnits: boolean,
-        minRarity: Rarity,
-        maxRarity: Rarity,
-        factions: FactionId[],
-        searchText: string
-    ): boolean {
+    public static passesMowFilter(m: IMow2, filter: IUnitFilterCriteria): boolean {
+        const { allowLockedUnits, minRarity, maxRarity, factions, alliance, searchText } = filter;
+
         if (!allowLockedUnits && !m.unlocked) {
             return false;
         }
@@ -88,6 +79,9 @@ export class Teams2Service {
             return false;
         }
         if (factions.length > 0 && !factions.includes(m.faction)) {
+            return false;
+        }
+        if (!CharactersService.passesAllianceFilter(m.alliance, alliance)) {
             return false;
         }
         if (searchText.trim() !== '') {

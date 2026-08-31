@@ -2,11 +2,11 @@
 import { defaultPlayerMetadataState, PlayerMetadataState } from '@/reducers/player-metadata.reducer';
 import { ShopEventsState } from '@/reducers/shop-events.reducer';
 
+import { normalizeOrder } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, UnitType, RarityStars, RarityMapper } from '@/fsd/5-shared/model';
 
 import { CampaignsService, ICampaignsProgress } from '@/fsd/4-entities/campaign';
 import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
-import { normalizeGoalOrder } from '@/fsd/4-entities/goal';
 import { IMow, IMow2, IMowDatabase, mows2Data, mowsData, MowsService } from '@/fsd/4-entities/mow';
 import { shopEvents as shopEventsRegistry } from '@/fsd/4-entities/shops';
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
@@ -89,7 +89,7 @@ export class GlobalState implements IGlobalState {
         this.characters = GlobalState.initCharacters(chars);
         this.mows = GlobalState.initMows(personalData.mows);
 
-        this.goals = normalizeGoalOrder(personalData.goals).map(goal => {
+        this.goals = normalizeOrder(personalData.goals).map(goal => {
             const relatedChar = this.characters.find(x => x.name === goal.character);
             return { ...goal, currentRank: relatedChar?.rank, currentRarity: relatedChar?.rarity };
         });
@@ -102,7 +102,7 @@ export class GlobalState implements IGlobalState {
         this.guildWar = personalData.guildWar ?? defaultData.guildWar;
         this.guild = personalData.guild ?? defaultData.guild;
         this.teams = personalData.teams ?? defaultData.teams;
-        this.teams2 = personalData.teams2 ?? defaultData.teams2;
+        this.teams2 = normalizeOrder(personalData.teams2 ?? defaultData.teams2);
         this.warDefense2 = personalData.warDefense2 ?? defaultData.warDefense2;
         this.warOffense2 = personalData.warOffense2 ?? defaultData.warOffense2;
         this.xpIncome = personalData.xpIncome ?? defaultData.xpIncome;

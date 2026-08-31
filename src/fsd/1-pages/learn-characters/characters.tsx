@@ -1,6 +1,5 @@
 import { ColDef, IRowNode, AllCommunityModule } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { uniq } from 'lodash';
 import { useCallback, useContext, useMemo, useRef, useState, useEffect } from 'react';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -8,15 +7,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import { StoreContext } from 'src/reducers/store.provider';
 
 import { getEnumValues } from '@/fsd/5-shared/lib';
-import {
-    Rarity,
-    Alliance,
-    DamageType,
-    Trait,
-    Rank,
-    getTraitStringFromLabel,
-    allianceFromString,
-} from '@/fsd/5-shared/model';
+import { Rarity, Alliance, DamageType, Trait, Rank, allianceFromString } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
 import {
     Accordion,
@@ -78,9 +69,10 @@ export const LearnCharacters = () => {
         maxHits: number | '';
         attackType: string;
         movement: number | '';
-        distance: number | '';
+        minRange: number | '';
+        maxRange: number | '';
         damageTypes: DamageType[];
-        traits: string[];
+        traits: Trait[];
         alliance: Alliance[];
     };
 
@@ -90,7 +82,8 @@ export const LearnCharacters = () => {
         maxHits: '',
         attackType: '',
         movement: '',
-        distance: '',
+        minRange: '',
+        maxRange: '',
         damageTypes: [],
         traits: [],
         alliance: [],
@@ -103,10 +96,13 @@ export const LearnCharacters = () => {
         const maxHits = searchParams.get('maxHits');
         const attackType = searchParams.get('attackType');
         const movement = searchParams.get('movement');
-        const distance = searchParams.get('distance');
-        const traits = searchParams.getAll('trait');
-        // Query params are user-supplied, so drop anything that isn't a real alliance rather
-        // than letting it through as a filter value that matches nothing and has no icon.
+        const minRange = searchParams.get('minRange');
+        const maxRange = searchParams.get('maxRange');
+        // Query params are user-supplied, so drop anything that isn't a real trait/alliance
+        // rather than letting it through as a filter value that matches nothing and has no icon.
+        const traits = searchParams
+            .getAll('traits')
+            .filter((value): value is Trait => Object.values(Trait).includes(value as Trait));
         const alliance = searchParams
             .getAll('alliance')
             .map(value => allianceFromString(value))
@@ -117,13 +113,14 @@ export const LearnCharacters = () => {
             maxHits: maxHits ? Number(maxHits) : '',
             attackType: attackType ?? '',
             movement: movement ? Number(movement) : '',
-            distance: distance ? Number(distance) : '',
+            minRange: minRange ? Number(minRange) : '',
+            maxRange: maxRange ? Number(maxRange) : '',
             damageTypes: damageTypes.length > 0 ? damageTypes.map(d => DamageType[d as keyof typeof DamageType]) : [],
             traits: traits,
             alliance: alliance,
         };
         setFilter(newFilter);
-    }, []);
+    }, [searchParams]);
 
     const handleFilterChange = (name: keyof Filter, value: string | boolean | number | string[]) => {
         if (name !== 'name') {
@@ -154,34 +151,11 @@ export const LearnCharacters = () => {
 
     const resolvedCharacters = useMemo(() => CharactersService.resolveStoredCharacters(characters), [characters]);
 
-    const hitsOptions = uniq(resolvedCharacters.flatMap(x => [x.meleeHits, x.rangeHits ?? 1]))
-        .toSorted((a, b) => a - b)
-        .map(x => x.toString());
-
-    const movementOptions = uniq(resolvedCharacters.map(x => x.movement))
-        .toSorted((a, b) => a - b)
-        .map(x => x.toString());
-
-    const distanceOptions = uniq(resolvedCharacters.filter(x => !!x.rangeDistance).map(x => x.rangeDistance ?? 1))
-        .toSorted((a, b) => a - b)
-        .map(x => x.toString());
-
-    const damageTypesOptions = uniq(resolvedCharacters.flatMap(x => x.damageTypes.all)).map(x => x.toString());
-
-    const traitsOptions = useMemo(() => {
-        const activeTraits = new Set<string>();
-
-        for (const c of resolvedCharacters) {
-            if (c.traits) for (const t of c.traits) activeTraits.add(t);
-        }
-
-        return Object.values(Trait).filter(label => {
-            const key = getTraitStringFromLabel(label);
-            if (!key) return false;
-
-            return activeTraits.has(key);
-        });
-    }, [resolvedCharacters]);
+    const hitsOptions = CharactersService.getHitsOptions(resolvedCharacters).map(x => x.toString());
+    const movementOptions = CharactersService.getMovementOptions(resolvedCharacters).map(x => x.toString());
+    const rangeOptions = CharactersService.getRangeOptions(resolvedCharacters).map(x => x.toString());
+    const damageTypesOptions = CharactersService.getDamageTypesOptions(resolvedCharacters).map(x => x.toString());
+    const traitsOptions = useMemo(() => CharactersService.getTraitsOptions(resolvedCharacters), [resolvedCharacters]);
 
     const rows = useMemo(
         () =>
@@ -202,11 +176,13 @@ export const LearnCharacters = () => {
         const hasMinHitsFilter = !!filter.minHits && filter.minHits > 0;
         const hasMaxHitsFilter = !!filter.maxHits && filter.maxHits > 0;
         const hasMovementFilter = !!filter.movement && filter.movement > 0;
-        const hasDistanceFilter = !!filter.distance && filter.distance > 0;
+        const hasMinRangeFilter = !!filter.minRange && filter.minRange > 0;
+        const hasMaxRangeFilter = !!filter.maxRange && filter.maxRange > 0;
         const hasAttackTypeFilter = !!filter.attackType;
         return (
             hasMovementFilter ||
-            hasDistanceFilter ||
+            hasMinRangeFilter ||
+            hasMaxRangeFilter ||
             hasDamageTypeFilter ||
             hasTraitsFilter ||
             hasAllianceFilter ||
@@ -224,12 +200,14 @@ export const LearnCharacters = () => {
         const hasMinHitsFilter = !!filter.minHits && filter.minHits > 0;
         const hasMaxHitsFilter = !!filter.maxHits && filter.maxHits > 0;
         const hasMovementFilter = !!filter.movement && filter.movement > 0;
-        const hasDistanceFilter = !!filter.distance && filter.distance > 0;
+        const hasMinRangeFilter = !!filter.minRange && filter.minRange > 0;
+        const hasMaxRangeFilter = !!filter.maxRange && filter.maxRange > 0;
         const hasAttackTypeFilter = !!filter.attackType;
         return (
             +hasNameFilter +
             +hasMovementFilter +
-            +hasDistanceFilter +
+            +hasMinRangeFilter +
+            +hasMaxRangeFilter +
             +hasDamageTypeFilter +
             +hasTraitsFilter +
             +hasAllianceFilter +
@@ -241,96 +219,8 @@ export const LearnCharacters = () => {
 
     const doesExternalFilterPass = useCallback(
         (node: IRowNode<ICharacter2>) => {
-            const doesDamageTypeFilterPass = () => {
-                if (filter.damageTypes.length === 0) {
-                    return true;
-                }
-                return filter.damageTypes.every(type => node.data?.damageTypes.all.includes(type));
-            };
-
-            const doesTraitsFilterPass = () => {
-                if (filter.traits.length === 0) {
-                    return true;
-                }
-
-                const nodeTraits = (node.data?.traits ?? []) as unknown as string[];
-                return filter.traits.every(label => {
-                    const key = getTraitStringFromLabel(label);
-                    if (!key) return false;
-                    if (key !== 'Mechanical') return nodeTraits.includes(key);
-                    const includesMech = nodeTraits.includes('Mechanical');
-                    const includesLiving = nodeTraits.includes('LivingMetal');
-                    const result = includesMech || includesLiving;
-
-                    return result;
-                });
-            };
-
-            const doesAllianceFilterPass = () => {
-                if (filter.alliance.length === 0) {
-                    return true;
-                }
-                return filter.alliance.some(alliance => node.data?.alliance.includes(alliance));
-            };
-
-            const doesMinHitsFilterPass = () => {
-                if (!filter.minHits) {
-                    return true;
-                }
-                const hits = node.data?.rangeHits ?? node.data?.meleeHits ?? 0;
-
-                return hits >= filter.minHits;
-            };
-
-            const doesMaxHitsFilterPass = () => {
-                if (!filter.maxHits) {
-                    return true;
-                }
-                const hits = node.data?.rangeHits ?? node.data?.meleeHits ?? 0;
-
-                return hits <= filter.maxHits;
-            };
-            const doesMovementFilterPass = () => {
-                if (!filter.movement) {
-                    return true;
-                }
-                return node.data?.movement === filter.movement;
-            };
-
-            const doesDistanceFilterPass = () => {
-                if (!filter.distance) {
-                    return true;
-                }
-                return node.data?.rangeDistance === filter.distance;
-            };
-
-            const doesAttackTypeFilterPass = () => {
-                switch (filter.attackType) {
-                    case 'melee': {
-                        return !node.data?.rangeHits;
-                    }
-                    case 'range': {
-                        return !!node.data?.rangeHits;
-                    }
-                    default: {
-                        return true;
-                    }
-                }
-            };
-
-            if (node.data) {
-                return (
-                    doesDamageTypeFilterPass() &&
-                    doesTraitsFilterPass() &&
-                    doesAllianceFilterPass() &&
-                    doesMinHitsFilterPass() &&
-                    doesMaxHitsFilterPass() &&
-                    doesAttackTypeFilterPass() &&
-                    doesMovementFilterPass() &&
-                    doesDistanceFilterPass()
-                );
-            }
-            return true;
+            if (!node.data) return true;
+            return CharactersService.passesRosterFilter(node.data, filter);
         },
         [filter]
     );
@@ -350,7 +240,8 @@ export const LearnCharacters = () => {
             maxHits: '',
             attackType: '',
             movement: '',
-            distance: '',
+            minRange: '',
+            maxRange: '',
             damageTypes: [],
             traits: [],
             alliance: [],
@@ -361,9 +252,10 @@ export const LearnCharacters = () => {
         params.delete('maxHits');
         params.delete('attackType');
         params.delete('movement');
-        params.delete('distance');
+        params.delete('minRange');
+        params.delete('maxRange');
         params.delete('damageTypes');
-        params.delete('trait');
+        params.delete('traits');
         params.delete('alliance');
         params.delete('name');
         navigate({ search: params.toString() }, { replace: true });
@@ -465,10 +357,21 @@ export const LearnCharacters = () => {
 
                         <div className="min-w-[120px] flex-1">
                             <Select<string>
-                                options={['', ...distanceOptions]}
-                                value={String(filter.distance)}
-                                onChange={v => handleFilterChange('distance', v === '' ? '' : Number(v))}
-                                label="Distance"
+                                options={['', ...rangeOptions]}
+                                value={String(filter.minRange)}
+                                onChange={v => handleFilterChange('minRange', v === '' ? '' : Number(v))}
+                                label="Min Range"
+                                renderOption={renderAnyOption}
+                                renderValue={renderAnyOption}
+                            />
+                        </div>
+
+                        <div className="min-w-[120px] flex-1">
+                            <Select<string>
+                                options={['', ...rangeOptions]}
+                                value={String(filter.maxRange)}
+                                onChange={v => handleFilterChange('maxRange', v === '' ? '' : Number(v))}
+                                label="Max Range"
                                 renderOption={renderAnyOption}
                                 renderValue={renderAnyOption}
                             />
@@ -507,7 +410,7 @@ export const LearnCharacters = () => {
                         </div>
 
                         <div className="min-w-[200px] flex-1">
-                            <SelectMulti<string>
+                            <SelectMulti<Trait>
                                 options={traitsOptions}
                                 value={filter.traits}
                                 onChange={v => handleFilterChange('traits', v)}
@@ -515,14 +418,14 @@ export const LearnCharacters = () => {
                                 placeholder="All traits"
                                 renderOption={t => (
                                     <div className="flex items-center gap-2">
-                                        <TraitImage trait={t as Trait} width={20} height={20} />
+                                        <TraitImage trait={t} width={20} height={20} />
                                         <span>{t}</span>
                                     </div>
                                 )}
                                 renderValue={selected => (
                                     <div className="flex flex-wrap items-center gap-1">
                                         {selected.map(t => (
-                                            <TraitImage key={t} trait={t as Trait} width={18} height={18} />
+                                            <TraitImage key={t} trait={t} width={18} height={18} />
                                         ))}
                                     </div>
                                 )}

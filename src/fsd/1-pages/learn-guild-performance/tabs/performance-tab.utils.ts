@@ -10,11 +10,11 @@ import {
 import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
 
 import { type GuildSeasonPerformanceIndex } from '../guild-performance.api';
-import { computeDefaultRarities, getBossOrder, getBossPrefix } from '../guild-performance.utils';
+import { computeDefaultRarities, getBossOrder, getBossPrefix, getBossSlotKey } from '../guild-performance.utils';
 
 export interface FilterOptions {
     selectedRarities: Set<Rarity>;
-    selectedBossPrefixes: Set<string>;
+    selectedBossKeys: Set<string>;
     /** Selection at the unitId level so each individual prime is independently togglable. */
     selectedPrimeUnitIds: Set<string>;
 }
@@ -25,7 +25,7 @@ function isMainBoss(entry: TacticusGuildRaidEntry): boolean {
 
 /**
  * Applies all performance-tab filters: non-bomb, in selected rarities, in
- * selected boss/prime prefix sets. Kill blows are always included here — the
+ * selected boss slots/prime unitIds. Kill blows are always included here — the
  * view builders apply `excludeKills` only to the average calculation, since the
  * max stat is meant to reflect the highest-ever damage (often a killing blow).
  */
@@ -37,13 +37,13 @@ export function filterPerformanceEntries(
         if (entry.damageType === TacticusDamageType.Bomb) return false;
         if (!options.selectedRarities.has(entry.rarity)) return false;
         if (isMainBoss(entry)) {
-            return options.selectedBossPrefixes.has(getBossPrefix(entry.unitId));
+            return options.selectedBossKeys.has(getBossSlotKey(entry.unitId, entry.rarity, entry.set));
         }
         return options.selectedPrimeUnitIds.has(entry.unitId);
     });
 }
 
-// The boss-prefix ordering that used to live here is now `getAvailableBossPrefixes` in
+// The boss-prefix ordering that used to live here is now `getAvailableBosses` in
 // guild-performance.utils.ts. It was a second function with the same name and a different
 // ordering to the one Damage and Leaderboard used, so the same-looking filter ordered two
 // different ways on adjacent tabs. This tab's encounter-order version became the shared one.

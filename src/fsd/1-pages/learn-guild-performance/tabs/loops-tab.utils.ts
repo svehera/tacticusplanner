@@ -166,13 +166,16 @@ export function buildBossLoopRows(entries: TacticusGuildRaidEntry[]): BossLoopRo
 
     const entryLoop = assignGlobalLoops(legendaryAll);
 
-    // Group by GuildBoss{N} prefix + rarity (includes bombs for icon/prime detection)
+    // Group by GuildBoss{N} prefix + rarity + set — its slot this season (includes bombs for
+    // icon/prime detection). Two boss variants that share a family prefix but occupy different
+    // slots (e.g. two differently-reskinned bosses at different tiers) must not merge, and a
+    // prime always shares its boss's exact rarity and set, so it lands in the same slot.
     type GroupData = { bossEntries: TacticusGuildRaidEntry[]; primeEntries: TacticusGuildRaidEntry[] };
     const groups = new Map<string, GroupData>();
 
     for (const entry of legendaryAll) {
         const prefix = /^(GuildBoss\d+)/.exec(entry.unitId)?.[1] ?? entry.unitId;
-        const key = `${prefix}:${entry.rarity}`;
+        const key = `${prefix}:${entry.rarity}:${entry.set}`;
         let group = groups.get(key);
         if (group === undefined) {
             group = { bossEntries: [], primeEntries: [] };
@@ -188,8 +191,9 @@ export function buildBossLoopRows(entries: TacticusGuildRaidEntry[]): BossLoopRo
     const rows: BossLoopRow[] = [];
 
     for (const [key, { bossEntries, primeEntries }] of groups) {
-        const colonIndex = key.lastIndexOf(':');
-        const bossPrefix = key.slice(0, colonIndex);
+        // key is `${prefix}:${rarity}:${set}` — the prefix (never itself containing ':') is
+        // everything before the first colon.
+        const bossPrefix = key.slice(0, key.indexOf(':'));
 
         const anyEntry = bossEntries[0] ?? primeEntries[0];
         if (anyEntry === undefined) continue;
@@ -329,6 +333,10 @@ export function buildBossLoopRows(entries: TacticusGuildRaidEntry[]): BossLoopRo
  */
 export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossLoopRow[] {
     // Prime unitIds keyed by `${bossPrefix}:${numericRarity}` (same key shape as the loop groups).
+    // Not `set`-qualified: `guildEntries.enemyInfo.set` isn't reliable here (the backend folds it
+    // across loops — see `toSummaryStatEntry`'s handling of the same aggregate in damage-tab.tsx),
+    // so two boss variants sharing a family prefix at the same rarity can't be told apart in this
+    // historical view — a pre-existing limitation of this aggregate, not something this key can fix.
     const primeLookup = new Map<string, { left?: string; right?: string }>();
     for (const entry of summary.damageSummary.guildEntries) {
         const { enemyId, rarity, encounterIndex } = entry.enemyInfo;
@@ -351,6 +359,7 @@ export function buildBossLoopRowsFromSummary(summary: GuildSeasonSummary): BossL
     for (const loop of summary.loops) {
         const rarity = RarityMapper.stringToNumber[loop.enemyInfo.rarity];
         if (rarity < Rarity.Legendary) continue;
+        // Matches primeLookup's key shape (prefix:rarity, no set) so the two stay joinable.
         const key = `${getBossPrefix(loop.enemyInfo.enemyId)}:${rarity}`;
         let group = groups.get(key);
         if (group === undefined) {

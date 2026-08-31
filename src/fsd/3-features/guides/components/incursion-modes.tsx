@@ -6,7 +6,7 @@ import { IMenuOption } from '@/models/menu-option';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { MultipleSelect } from '@/fsd/5-shared/ui/input/multiple-select';
 
-import { mowsData } from '@/fsd/4-entities/mow';
+import { mows2Data } from '@/fsd/4-entities/mow';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { isCharacter } from '@/fsd/4-entities/unit/units.functions';
 
@@ -24,7 +24,7 @@ export const IncursionModes: React.FC<Props> = ({ selectedModes, updateSelection
     const [mow, setMow] = useState<string>(() => {
         return selectedModes[0] ?? '';
     });
-    const relatedMowData = mowsData.find(x => x.id === mow);
+    const relatedMowData = mows2Data.mows.find(x => x.snowprintId === mow);
 
     const allowedUnits = useMemo(() => {
         if (relatedMowData) {
@@ -33,8 +33,8 @@ export const IncursionModes: React.FC<Props> = ({ selectedModes, updateSelection
         return units;
     }, [mow]);
 
-    const options: IMenuOption[] = mowsData.map(m => ({
-        value: m.id,
+    const options: IMenuOption[] = mows2Data.mows.map(m => ({
+        value: m.snowprintId,
         label: `${m.name} (using ${m.deployableAlliance})`,
         selected: false,
     }));
