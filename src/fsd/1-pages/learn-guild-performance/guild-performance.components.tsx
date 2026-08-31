@@ -396,48 +396,71 @@ export const RarityFilter = ({
     </FilterGroup>
 );
 
+/** Rarity → the shared `--rarity-*` token, for the ring drawn around a boss/prime portrait. */
+const RARITY_RING_CLASS: Record<Rarity, string> = {
+    [Rarity.Common]: 'ring-(--rarity-common)',
+    [Rarity.Uncommon]: 'ring-(--rarity-uncommon)',
+    [Rarity.Rare]: 'ring-(--rarity-rare)',
+    [Rarity.Epic]: 'ring-(--rarity-epic)',
+    [Rarity.Legendary]: 'ring-(--rarity-legendary)',
+    [Rarity.Mythic]: 'ring-(--rarity-mythic)',
+};
+
 /**
- * Portrait toggles for a list of boss/prime ids.
+ * Portrait toggles for a list of boss/prime options. Generic over the option type: bosses pass a
+ * `BossFilterOption` (keyed by its `key`, distinct per boss slot), primes pass their bare unitId
+ * string (keyed by itself).
  *
  * `allowEmpty` distinguishes the two behaviours the tabs need: Damage and Leaderboard filter *down*
  * from everything, so emptying the set would blank the tab and the last one is locked. Performance
  * treats primes as an opt-in additive set that legitimately starts and stays empty.
  */
-export const PrefixFilter = ({
+export const PrefixFilter = <T,>({
     label,
     available,
+    getKey,
+    getRarity,
     selected,
     onChange,
     iconFor,
     allowEmpty = false,
 }: {
     label: string;
-    available: string[];
+    available: T[];
+    getKey: (option: T) => string;
+    /** Draws a rarity-colored ring around the icon when provided (bosses/primes only — omit for
+     *  filters with no rarity concept). */
+    getRarity?: (option: T) => Rarity | undefined;
     selected: string[];
-    onChange: (prefixes: string[]) => void;
-    iconFor: (prefix: string) => { icon: string | undefined; name: string };
+    onChange: (keys: string[]) => void;
+    iconFor: (option: T) => { icon: string | undefined; name: string };
     allowEmpty?: boolean;
 }) => {
     if (available.length === 0) return <></>;
     return (
         <FilterGroup label={label}>
-            {available.map(prefix => {
-                const isActive = selected.includes(prefix);
-                const { icon, name } = iconFor(prefix);
+            {available.map(option => {
+                const key = getKey(option);
+                const isActive = selected.includes(key);
+                const { icon, name } = iconFor(option);
+                const rarity = getRarity?.(option);
+                const ringClass = rarity === undefined ? undefined : `rounded-full ring-2 ${RARITY_RING_CLASS[rarity]}`;
                 return (
                     <button
-                        key={prefix}
+                        key={key}
                         type="button"
                         aria-label={name}
                         onClick={() => {
                             if (!allowEmpty && isActive && selected.length === 1) return;
-                            onChange(isActive ? selected.filter(p => p !== prefix) : [...selected, prefix]);
+                            onChange(isActive ? selected.filter(k => k !== key) : [...selected, key]);
                         }}
                         className={roundIconToggleClass(isActive)}>
                         {icon === undefined ? (
                             <span className="px-1 text-xs">{name}</span>
                         ) : (
-                            <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
+                            <span className={ringClass}>
+                                <UnitShardIcon icon={icon} name={name} tooltip={name} width={24} height={24} />
+                            </span>
                         )}
                     </button>
                 );
@@ -492,22 +515,34 @@ export const ReadinessTile = ({
  * `tooltip` overrides the label for callers that need to say more than the name — the Loops ladder
  * uses it to mark a prime as optional. Pass it here rather than wrapping this in a `title` element:
  * a native `title` around a component that already renders a tooltip shows both on one hover.
+ *
+ * `rarity`, when passed, draws a ring around the portrait in that rarity's color — the portrait's
+ * own wreath frame is a fixed asset with no per-rarity art, so this is a CSS ring layered on top of
+ * it rather than a swapped image.
  */
 export const EncounterIcon = ({
     unitId,
     size = 28,
     tooltip,
+    rarity,
 }: {
     unitId: string | undefined;
     size?: number;
     tooltip?: string;
+    rarity?: Rarity;
 }) => {
     if (unitId === undefined) return <div style={{ width: size, height: size }} />;
 
     const label = tooltip ?? unitDisplayLabel(unitId);
+    const ringClass = rarity === undefined ? undefined : `rounded-full ring-2 ${RARITY_RING_CLASS[rarity]}`;
+
     const mappedIcon = unitRoundIconMap[unitId];
     if (mappedIcon !== undefined) {
-        return <UnitShardIcon icon={mappedIcon} name={label} tooltip={label} width={size} height={size} />;
+        return (
+            <span className={ringClass}>
+                <UnitShardIcon icon={mappedIcon} name={label} tooltip={label} width={size} height={size} />
+            </span>
+        );
     }
 
     const match = /(?:MiniBoss|Minion)\d+(.+)/.exec(unitId);
@@ -516,13 +551,15 @@ export const EncounterIcon = ({
         const character = CharactersService.getUnit(id);
         if (character) {
             return (
-                <UnitShardIcon
-                    icon={character.roundIcon ?? ''}
-                    name={character.name}
-                    tooltip={label}
-                    width={size}
-                    height={size}
-                />
+                <span className={ringClass}>
+                    <UnitShardIcon
+                        icon={character.roundIcon ?? ''}
+                        name={character.name}
+                        tooltip={label}
+                        width={size}
+                        height={size}
+                    />
+                </span>
             );
         }
     }

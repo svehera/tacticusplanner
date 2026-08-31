@@ -32,7 +32,7 @@ import {
     bossIconFor,
     bossPrefixDisplayNames,
     computeDefaultRarities,
-    getAvailableBossPrefixes,
+    getAvailableBosses,
     unitDisplayLabel,
 } from '../guild-performance.utils';
 
@@ -344,6 +344,7 @@ function BreakdownUnitChip({ unit }: { unit: PlayerBossUnit }) {
                     unitId={unit.unitId}
                     size={20}
                     tooltip={`${unitDisplayLabel(unit.unitId)} — ${label}, ${detail}`}
+                    rarity={unit.rarity}
                 />
             </span>
         </span>
@@ -446,7 +447,7 @@ function PerUnitRow({ bucket }: { bucket: UnitPlayerBuckets }) {
     return (
         <div className="grid grid-cols-[8rem_1fr_1fr_1fr] items-start gap-2 px-2.5 py-1 text-xs even:bg-(--neutral)/50 hover:bg-(--primary)/10">
             <span className="flex items-center gap-1.5">
-                <EncounterIcon unitId={bucket.unitId} size={22} />
+                <EncounterIcon unitId={bucket.unitId} size={22} rarity={bucket.rarity} />
                 <RarityIcon rarity={bucket.rarity} />
                 <span className="text-(--soft-fg)">{bucket.isBoss ? 'Boss' : 'Prime'}</span>
             </span>
@@ -523,7 +524,7 @@ function PlayerBossBreakdownTable({
 function UnitLabel({ row }: { row: UnitRow }) {
     return (
         <span className="flex min-w-0 items-center gap-1.5">
-            <EncounterIcon unitId={row.unitId} size={20} />
+            <EncounterIcon unitId={row.unitId} size={20} rarity={row.rarity} />
             <RarityIcon rarity={row.rarity} />
             <span
                 className="truncate text-(--soft-fg)"
@@ -713,7 +714,7 @@ export const PerformanceTab = ({
 
     // --- bosses (default = all available, selected) and primes (default = none selected) ---
     const availableBossPrefixes = useMemo(
-        () => getAvailableBossPrefixes(allSeasonEntries, selectedRaritiesSet),
+        () => getAvailableBosses(allSeasonEntries, selectedRaritiesSet),
         [allSeasonEntries, selectedRaritiesSet]
     );
     const availablePrimeUnitIds = useMemo(
@@ -722,7 +723,10 @@ export const PerformanceTab = ({
     );
     const [selectedBossPrefixes, setSelectedBossPrefixes] = useState<string[] | undefined>();
     const [selectedPrimeUnitIds, setSelectedPrimeUnitIds] = useState<string[] | undefined>();
-    const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
+    const effectiveBossPrefixes = useMemo(
+        () => selectedBossPrefixes ?? availableBossPrefixes.map(option => option.key),
+        [selectedBossPrefixes, availableBossPrefixes]
+    );
     const effectivePrimeUnitIds = useMemo(() => selectedPrimeUnitIds ?? [], [selectedPrimeUnitIds]);
     const isAllPrimesSelected =
         availablePrimeUnitIds.length > 0 && effectivePrimeUnitIds.length === availablePrimeUnitIds.length;
@@ -757,7 +761,7 @@ export const PerformanceTab = ({
         () =>
             filterPerformanceEntries(allSeasonEntries, {
                 selectedRarities: selectedRaritiesSet,
-                selectedBossPrefixes: new Set(effectiveBossPrefixes),
+                selectedBossKeys: new Set(effectiveBossPrefixes),
                 selectedPrimeUnitIds: new Set(effectivePrimeUnitIds),
             }),
         [allSeasonEntries, selectedRaritiesSet, effectiveBossPrefixes, effectivePrimeUnitIds]
@@ -869,6 +873,8 @@ export const PerformanceTab = ({
                 <PrefixFilter
                     label="Bosses"
                     available={availableBossPrefixes}
+                    getKey={option => option.key}
+                    getRarity={option => option.rarity}
                     selected={effectiveBossPrefixes}
                     onChange={setSelectedBossPrefixes}
                     iconFor={bossIconFor}
@@ -887,6 +893,7 @@ export const PerformanceTab = ({
                 <PrefixFilter
                     label="Primes"
                     available={availablePrimeUnitIds}
+                    getKey={id => id}
                     selected={effectivePrimeUnitIds}
                     onChange={setSelectedPrimeUnitIds}
                     iconFor={primeIconFor}
