@@ -366,6 +366,7 @@ export const SetGoalDialog = ({ onClose }: { onClose?: (goal?: IPersonalGoal) =>
                 <PortalDialog.Body>
                     <Conditional
                         condition={[
+                            PersonalGoalType.Ascend,
                             PersonalGoalType.UpgradeRank,
                             PersonalGoalType.MowAbilities,
                             PersonalGoalType.CharacterAbilities,
