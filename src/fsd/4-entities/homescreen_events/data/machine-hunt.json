@@ -34,7 +34,7 @@
                         "points": 3,
                         "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
                         "gameModeRestrictions": {
-                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves"]
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves", "LegendaryEvent"]
                         },
                         "traitRestrictions": {
                             "allowed": ["Mechanical"],
@@ -47,7 +47,7 @@
                         "points": 5,
                         "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
                         "gameModeRestrictions": {
-                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign", "LegendaryEvent"]
                         },
                         "traitRestrictions": {
                             "allowed": ["Mechanical"],
@@ -291,7 +291,7 @@
                         "points": 3,
                         "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
                         "gameModeRestrictions": {
-                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves"]
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves", "LegendaryEvent"]
                         },
                         "traitRestrictions": {
                             "allowed": ["Mechanical"],
@@ -304,7 +304,7 @@
                         "points": 5,
                         "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
                         "gameModeRestrictions": {
-                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign", "LegendaryEvent"]
                         },
                         "traitRestrictions": {
                             "allowed": ["Mechanical"],
@@ -548,7 +548,7 @@
                         "points": 3,
                         "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
                         "gameModeRestrictions": {
-                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves"]
+                            "disallowed": ["EliteCampaign", "MirrorEliteCampaign", "Waves", "LegendaryEvent"]
                         },
                         "traitRestrictions": {
                             "allowed": ["Mechanical"],
@@ -561,7 +561,7 @@
                         "points": 5,
                         "locaKey": "HomeScreenEvents/Tracker_killunits_machine_hunt_Description",
                         "gameModeRestrictions": {
-                            "allowed": ["EliteCampaign", "MirrorEliteCampaign"]
+                            "allowed": ["EliteCampaign", "MirrorEliteCampaign", "LegendaryEvent"]
                         },
                         "traitRestrictions": {
                             "allowed": ["Mechanical"],

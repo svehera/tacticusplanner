@@ -2,6 +2,7 @@ import { Copy } from 'lucide-react';
 import { enqueueSnackbar } from 'notistack';
 import { useRef } from 'react';
 
+import { tacticusIcons } from '@/fsd/5-shared/ui/icons';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { buildRadarStats, RadarAxisId } from './unit-stat-radar.utils';
@@ -12,8 +13,10 @@ const CSS_VARS_USED = ['--border', '--fg-muted', '--primary', '--overlay', '--so
 
 interface AxisSpec {
     id: RadarAxisId;
-    /** Short label drawn on the chart itself. */
-    label: string;
+    /** Icon drawn on the chart in place of a text label. */
+    icon: keyof typeof tacticusIcons;
+    /** Plain-text glyph drawn next to the icon, for the vs-0/vs-infinite-armor axes. */
+    symbol?: '0' | '∞';
     /** Full description, used in the hover tooltip and the table fallback below the chart. */
     description: string;
     /** Compass angle, clockwise from north (0deg). */
@@ -22,25 +25,57 @@ interface AxisSpec {
 
 /** N/NE/SE/S/SW/NW, 60deg apart — a pointy-top hexagon, matching the requested axis layout. */
 const AXES: AxisSpec[] = [
-    { id: 'health', label: 'Health', description: 'Health', angleDeg: 0 },
-    { id: 'armor', label: 'Armor', description: 'Armor', angleDeg: 60 },
-    { id: 'meleeVsInfArmor', label: 'Melee ∞', description: 'Melee damage vs infinite armor', angleDeg: 120 },
-    { id: 'meleeVsZeroArmor', label: 'Melee 0', description: 'Melee damage vs 0 armor', angleDeg: 180 },
-    { id: 'rangedVsInfArmor', label: 'Ranged ∞', description: 'Ranged damage vs infinite armor', angleDeg: 240 },
-    { id: 'rangedVsZeroArmor', label: 'Ranged 0', description: 'Ranged damage vs 0 armor', angleDeg: 300 },
+    { id: 'health', icon: 'health', description: 'Health', angleDeg: 0 },
+    { id: 'armor', icon: 'armour', description: 'Armor', angleDeg: 60 },
+    {
+        id: 'meleeVsInfArmor',
+        icon: 'statMeleeAttack',
+        symbol: '∞',
+        description: 'Melee damage vs infinite armor',
+        angleDeg: 120,
+    },
+    {
+        id: 'meleeVsZeroArmor',
+        icon: 'statMeleeAttack',
+        symbol: '0',
+        description: 'Melee damage vs 0 armor',
+        angleDeg: 180,
+    },
+    {
+        id: 'rangedVsInfArmor',
+        icon: 'statRangedAttack',
+        symbol: '∞',
+        description: 'Ranged damage vs infinite armor',
+        angleDeg: 240,
+    },
+    {
+        id: 'rangedVsZeroArmor',
+        icon: 'statRangedAttack',
+        symbol: '0',
+        description: 'Ranged damage vs 0 armor',
+        angleDeg: 300,
+    },
 ];
 
 const GRID_LEVELS = [0.2, 0.4, 0.6, 0.8, 1];
 
-// Generous margin between MAX_RADIUS and the viewBox edge: axis labels ("Ranged 0", "Melee ∞", ...)
-// are anchored at their axis point and grow outward/sideways from it, so the viewBox needs enough
-// room on every side to fit the widest label at any angle, not just the chart's own geometry.
+// Generous margin between MAX_RADIUS and the viewBox edge: axis labels (an icon, optionally
+// followed by a "0"/"∞" glyph) are anchored at their axis point and grow outward/sideways from it,
+// so the viewBox needs enough room on every side to fit the widest label at any angle, not just the
+// chart's own geometry.
 const SIZE = 380;
 const CENTER = SIZE / 2;
 const MAX_RADIUS = 95;
 const LABEL_RADIUS = MAX_RADIUS + 25;
 /** North-axis tick numbers (20/40/.../100) sit just to the right of the axis line, inside the hexagon. */
 const TICK_LABEL_OFFSET_X = 6;
+
+/** Axis-label icon size, and the gap between the icon and its "0"/"∞" symbol, when present. */
+const LABEL_ICON_SIZE = 16;
+const LABEL_ICON_GAP = 3;
+/** A single "0"/"∞" glyph at the label font size — SVG text has no layout engine, so this is a
+ *  fixed estimate rather than a measured width. */
+const LABEL_SYMBOL_WIDTH = 8;
 
 /** Point on the hexagon at `angleDeg` (compass, 0deg = north), `radiusFraction` of the way out. */
 function toPoint(angleDeg: number, radiusFraction: number, radius: number = MAX_RADIUS) {
@@ -59,6 +94,23 @@ function polygonPoints(radiusFraction: number, radius?: number): string {
 function anchorFor(angleDeg: number): 'start' | 'middle' | 'end' {
     if (angleDeg === 0 || angleDeg === 180) return 'middle';
     return angleDeg > 0 && angleDeg < 180 ? 'start' : 'end';
+}
+
+/**
+ * Lays out an axis label's icon (and optional "0"/"∞" symbol next to it) around `(x, y)`, growing
+ * in whichever direction keeps the group's leading/trailing edge pinned to `(x, y)` — the same edge
+ * the plain-text label it replaces used to grow from.
+ */
+function axisLabelLayout(axis: AxisSpec, x: number, y: number) {
+    const anchor = anchorFor(axis.angleDeg);
+    const groupWidth = LABEL_ICON_SIZE + (axis.symbol ? LABEL_ICON_GAP + LABEL_SYMBOL_WIDTH : 0);
+    const iconX = anchor === 'start' ? x : anchor === 'end' ? x - groupWidth : x - groupWidth / 2;
+    return {
+        iconX,
+        iconY: y - LABEL_ICON_SIZE / 2,
+        symbolX: iconX + LABEL_ICON_SIZE + LABEL_ICON_GAP,
+        symbolY: y,
+    };
 }
 
 interface Props {
@@ -207,16 +259,29 @@ export const UnitStatRadarChart = ({ snowprintId }: Props) => {
 
                     {AXES.map(axis => {
                         const { x, y } = toPoint(axis.angleDeg, 1, LABEL_RADIUS);
+                        const { iconX, iconY, symbolX, symbolY } = axisLabelLayout(axis, x, y);
+                        const icon = tacticusIcons[axis.icon];
                         return (
-                            <text
-                                key={axis.id}
-                                x={x}
-                                y={y}
-                                textAnchor={anchorFor(axis.angleDeg)}
-                                dominantBaseline="middle"
-                                style={{ fill: 'var(--soft-fg)', fontSize: 11 }}>
-                                {axis.label}
-                            </text>
+                            <g key={axis.id}>
+                                <image
+                                    href={icon.file}
+                                    x={iconX}
+                                    y={iconY}
+                                    width={LABEL_ICON_SIZE}
+                                    height={LABEL_ICON_SIZE}
+                                    aria-label={icon.label}
+                                />
+                                {axis.symbol && (
+                                    <text
+                                        x={symbolX}
+                                        y={symbolY}
+                                        textAnchor="start"
+                                        dominantBaseline="middle"
+                                        style={{ fill: 'var(--soft-fg)', fontSize: 11 }}>
+                                        {axis.symbol}
+                                    </text>
+                                )}
+                            </g>
                         );
                     })}
                 </svg>

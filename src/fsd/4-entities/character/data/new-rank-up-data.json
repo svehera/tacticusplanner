@@ -2550,5 +2550,27 @@
         "Diamond III": ["upgHpL120C", "upgHpL213C", "upgDmgM213C", "upgDmgL213C", "upgArmM211C", "upgArmL213C"],
         "Adamantine I": ["upgHpM143C", "upgHpL213C", "upgDmgM213C", "upgDmgL213C", "upgArmM213C", "upgArmL213C"],
         "Adamantine II": ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
+    },
+    "astarEradicator": {
+        "Stone I": ["upgHpC015", "upgHpC004", "upgDmgC009", "upgDmgC011", "upgArmC002", "upgArmC012"],
+        "Stone II": ["upgHpC017", "upgHpC015", "upgDmgU012", "upgDmgU015C", "upgArmC012", "upgArmC001"],
+        "Stone III": ["upgHpU017", "upgHpU018C", "upgDmgC007", "upgDmgC004", "upgArmU005", "upgArmU002"],
+        "Iron I": ["upgHpU018C", "upgHpU001", "upgDmgU012", "upgDmgU003", "upgArmU002", "upgArmU010C"],
+        "Iron II": ["upgHpU017", "upgHpR003C", "upgDmgU007C", "upgDmgU011", "upgArmR031", "upgArmU001"],
+        "Iron III": ["upgHpR017C", "upgHpU006", "upgDmgR007", "upgDmgR012C", "upgArmU010C", "upgArmR015"],
+        "Bronze I": ["upgHpR021", "upgHpR005", "upgDmgR008C", "upgDmgR003", "upgArmR003C", "upgArmR008C"],
+        "Bronze II": ["upgHpE021C", "upgHpR013C", "upgDmgR003", "upgDmgE002C", "upgArmR035", "upgArmR001C"],
+        "Bronze III": ["upgHpR005", "upgHpE007C", "upgDmgE020C", "upgDmgR015C", "upgArmE035C", "upgArmE013"],
+        "Silver I": ["upgHpE021C", "upgHpE012", "upgDmgE020C", "upgDmgE003", "upgArmE035C", "upgArmE004C"],
+        "Silver II": ["upgHpL100", "upgHpE002C", "upgDmgL004C", "upgDmgE002C", "upgArmE035C", "upgArmE012C"],
+        "Silver III": ["upgHpE021C", "upgHpL017C", "upgDmgE020C", "upgDmgL015C", "upgArmL001", "upgArmL004C"],
+        "Gold I": ["upgHpL021C", "upgHpL009C", "upgDmgL204", "upgDmgL002C", "upgArmL020C", "upgArmL008C"],
+        "Gold II": ["upgHpL120C", "upgHpL002C", "upgDmgL004C", "upgDmgL015C", "upgArmL020C", "upgArmL010C"],
+        "Gold III": ["upgHpL021C", "upgHpL009C", "upgDmgL120C", "upgDmgL012C", "upgArmL120C", "upgArmL008C"],
+        "Diamond I": ["upgHpL120C", "upgHpL017C", "upgDmgL120C", "upgDmgL006C", "upgArmL120C", "upgArmL004C"],
+        "Diamond II": ["upgHpL120C", "upgHpL213C", "upgDmgL120C", "upgDmgL213C", "upgArmL120C", "upgArmL213C"],
+        "Diamond III": ["upgHpL120C", "upgHpL213C", "upgDmgM214C", "upgDmgL213C", "upgArmM211C", "upgArmL213C"],
+        "Adamantine I": ["upgHpM143C", "upgHpL213C", "upgDmgM214C", "upgDmgL213C", "upgArmM214C", "upgArmL213C"],
+        "Adamantine II": ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
     }
 }

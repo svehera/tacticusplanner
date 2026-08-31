@@ -257,8 +257,8 @@
                 "Earn points by battling with the Adeptus Mechanicus and claim exclusive rewards!",
                 "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
-                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the unit who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
+                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the character who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
             ]
         },
         "mid": {
@@ -517,8 +517,8 @@
                 "Earn points by battling with the Adeptus Mechanicus and claim exclusive rewards!",
                 "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
-                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the unit who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
+                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the character who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
             ]
         },
         "low": {
@@ -777,8 +777,8 @@
                 "Earn points by battling with the Adeptus Mechanicus and claim exclusive rewards!",
                 "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
-                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> unit in Arena, Onslaught, and Salvage Run.",
-                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the unit who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
+                "You gain <style=\"HSE_Points_FactionBoostAdeptusMechanicus\">{[POINTS]} Adeptus Mechanicus points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
+                "<style=\"HSE_Points_FactionBoostAdeptusMechanicus\">+{[POINTS]} Adeptus Mechanicus point</style> when the character who defeats the enemy is an <style=\"FactionIcon_AdeptusMechanicus\">Adeptus Mechanicus</style>."
             ]
         }
     }

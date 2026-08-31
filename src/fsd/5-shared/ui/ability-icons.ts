@@ -54,6 +54,7 @@ import CallRipperSwarms2Icon from '@/assets/images/snowprint_assets/abilities/ui
 import CallRipperSwarms3Icon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CallRipperSwarms3.png';
 import CamoCloakIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CamoCloak.png';
 import CatalystIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Catalyst.png';
+import ChaliceOfBaalIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ChaliceOfBaal.png';
 import ChampionOfTheFeastIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ChampionOfTheFeast.png';
 import ChronometronIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Chronometron.png';
 import CloudOfFliesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CloudOfFlies.png';
@@ -64,6 +65,7 @@ import ControlEdictIcon from '@/assets/images/snowprint_assets/abilities/ui_icon
 import CordClawIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CordClaw.png';
 import CosmicHorrorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CosmicHorror.png';
 import CrazedFocusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CrazedFocus.png';
+import CrucibleOfBattleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CrucibleOfBattle.png';
 import CrusadeOfWrathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CrusadeOfWrath.png';
 import CrushingClawsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CrushingClaws.png';
 import CultDemagogueIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_CultDemagogue.png';
@@ -247,6 +249,7 @@ import MomentShackleIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import MonsterSlayerOfCalibanIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MonsterSlayerOfCaliban.png';
 import MortarionsPlagueWindIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MortarionsPlagueWind.png';
 import MortisRoundIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MortisRound.png';
+import MultiMeltaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MultiMelta.png';
 import MultiThreatEliminatorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MultiThreatEliminator.png';
 import MultiTrackerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MultiTracker.png';
 import MurderousSwingIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_MurderousSwing.png';
@@ -427,6 +430,7 @@ import ThunderousAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui
 import TimeFluxIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TimeFlux.png';
 import TimesplinterMantleIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TimesplinterMantle.png';
 import TitanhammerSquadIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TitanhammerSquad.png';
+import TotalObliterationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TotalObliteration.png';
 import ToughToKillIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ToughToKill.png';
 import TreasonOfTzeentchIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TreasonOfTzeentch.png';
 import TrophyTakerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TrophyTaker.png';
@@ -445,6 +449,7 @@ import VengeanceForTheOmnissiahIcon from '@/assets/images/snowprint_assets/abili
 import VexillaMagnificaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VexillaMagnifica.png';
 import VigilanceEternalIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VigilanceEternal.png';
 import VisionsOfHeresyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VisionsOfHeresy.png';
+import VitarusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Vitarus.png';
 import VolatileIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Volatile.png';
 import VoltagheistFieldIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VoltagheistField.png';
 import VulnerableToFlameAndBlastIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_VulnerableToFlameAndBlast.png';
@@ -461,6 +466,7 @@ import WhisperingWebIcon from '@/assets/images/snowprint_assets/abilities/ui_ico
 import WireweaveNetIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WireweaveNet.png';
 import WraithcannonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Wraithcannon.png';
 import WrathfulDevotionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WrathfulDevotion.png';
+import WyrdmakersHelmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WyrdmakersHelm.png';
 
 interface IconData {
     file: string;
@@ -526,6 +532,7 @@ export const abilityIcons: Record<string, IconData> = {
     CallRipperSwarms3: { file: CallRipperSwarms3Icon, name: 'Call Ripper Swarms' },
     CamoCloak: { file: CamoCloakIcon, name: 'Camo Cloak' },
     Catalyst: { file: CatalystIcon, name: 'Catalyst' },
+    ChaliceOfBaal: { file: ChaliceOfBaalIcon, name: 'Chalice of Baal' },
     ChampionOfTheFeast: { file: ChampionOfTheFeastIcon, name: 'Champion Of The Feast' },
     Chronometron: { file: ChronometronIcon, name: 'Chronometron' },
     CloudOfFlies: { file: CloudOfFliesIcon, name: 'Cloud Of Flies' },
@@ -536,6 +543,7 @@ export const abilityIcons: Record<string, IconData> = {
     CordClaw: { file: CordClawIcon, name: 'Chordclaw' },
     CosmicHorror: { file: CosmicHorrorIcon, name: 'Cosmic Horror' },
     CrazedFocus: { file: CrazedFocusIcon, name: 'Crazed Focus' },
+    CrucibleOfBattle: { file: CrucibleOfBattleIcon, name: 'Crucible of Battle' },
     CrusadeOfWrath: { file: CrusadeOfWrathIcon, name: 'Crusade Of Wrath' },
     CrushingClaws: { file: CrushingClawsIcon, name: 'Crushing Claws' },
     CultDemagogue: { file: CultDemagogueIcon, name: 'Cult Demagogue' },
@@ -720,6 +728,7 @@ export const abilityIcons: Record<string, IconData> = {
     MonsterSlayerOfCaliban: { file: MonsterSlayerOfCalibanIcon, name: 'Monster Slayer of Caliban' },
     MortarionsPlagueWind: { file: MortarionsPlagueWindIcon, name: "Mortarion's Plague Wind" },
     MortisRound: { file: MortisRoundIcon, name: 'Mortis Round' },
+    MultiMelta: { file: MultiMeltaIcon, name: 'Multi-Melta' },
     MultiThreatEliminator: { file: MultiThreatEliminatorIcon, name: 'Multi-Threat Eliminator' },
     MultiTracker: { file: MultiTrackerIcon, name: 'Multi-Target' },
     MurderousSwing: { file: MurderousSwingIcon, name: 'Murderous Swing' },
@@ -902,6 +911,7 @@ export const abilityIcons: Record<string, IconData> = {
     TimeFlux: { file: TimeFluxIcon, name: 'Time Flux' },
     TimesplinterMantle: { file: TimesplinterMantleIcon, name: 'Timesplinter Mantle' },
     TitanhammerSquad: { file: TitanhammerSquadIcon, name: 'Titanhammer Squad' },
+    TotalObliteration: { file: TotalObliterationIcon, name: 'Total Obliteration' },
     ToughToKill: { file: ToughToKillIcon, name: 'Tough to Kill' },
     TreasonOfTzeentch: { file: TreasonOfTzeentchIcon, name: 'Treason of Tzeentch' },
     TrophyTaker: { file: TrophyTakerIcon, name: 'Trophy Taker' },
@@ -920,6 +930,7 @@ export const abilityIcons: Record<string, IconData> = {
     VexillaMagnifica: { file: VexillaMagnificaIcon, name: 'Vexilla Magnifica' },
     VigilanceEternal: { file: VigilanceEternalIcon, name: 'Vigilance Eternal' },
     VisionsOfHeresy: { file: VisionsOfHeresyIcon, name: 'Visions of Heresy' },
+    Vitarus: { file: VitarusIcon, name: 'Vitarus' },
     Volatile: { file: VolatileIcon, name: 'Volatile' },
     VoltagheistField: { file: VoltagheistFieldIcon, name: 'Voltagheist Field' },
     VulnerableToFlameAndBlast: { file: VulnerableToFlameAndBlastIcon, name: 'Vulnerable to Flame and Blast' },
@@ -936,4 +947,5 @@ export const abilityIcons: Record<string, IconData> = {
     WireweaveNet: { file: WireweaveNetIcon, name: 'Wireweave Net' },
     Wraithcannon: { file: WraithcannonIcon, name: 'Wraithcannon' },
     WrathfulDevotion: { file: WrathfulDevotionIcon, name: 'Wrathful Devotion' },
+    WyrdmakersHelm: { file: WyrdmakersHelmIcon, name: "Wyrdmaker's Helm" },
 };

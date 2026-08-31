@@ -4,11 +4,11 @@
     "tagline": "Higher drop chances for all these <style=\"Healer\">Healers</style> and <style=\"Mechanic\">Mechanics</style>!",
     "featuredUnits": [
         "admecDominus",
-        "deathRotbone",
+        "spaceWolfPriest",
         "bloodSanguinary",
         "admecManipulus",
-        "genesBiophagus",
-        "orksBigMek"
+        "necroSpyder",
+        "ultraApothecary"
     ],
     "unlockRequirement": {
         "PowerLevel": 8

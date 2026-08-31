@@ -3,7 +3,7 @@
     "unitSnowprintId": "votanUthar",
     "name": "Uthar",
     "theme": "LeaguesOfVotann",
-    "eventStage": 1,
+    "eventStage": 2,
     "heroEventMaxRuns": 3,
     "unlockableHero": {
         "heroId": "votanUthar",

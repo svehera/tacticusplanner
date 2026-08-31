@@ -32,6 +32,13 @@ export const RARITY_LETTER_MAP: Record<string, string> = {
     M: 'Mythic',
 };
 
+// The "Blackstone Week" calendar reuses the generic `priceCents`/`free` offer schema, but every
+// offer is (incorrectly) flagged `free: true` and `priceCents` actually holds a Blackstone amount,
+// not real-money cents — these offers are purchased with Blackstone, not real money.
+export function isBlackstonePricedCalendar(calendarId: string): boolean {
+    return calendarId === 'calendar_blackstone_week';
+}
+
 // Converts a calendar ID like "calendar_seasonal_event_july_2026" to "July 2026".
 export function calendarDisplayName(calendarId: string): string {
     const parts = calendarId.split('_');
@@ -39,6 +46,12 @@ export function calendarDisplayName(calendarId: string): string {
     const month = parts.at(-2);
     if (year && month && MONTH_NAMES[month]) {
         return `${MONTH_NAMES[month]} ${year}`;
+    }
+    if (calendarId === 'calendar_blackstone_week') {
+        return 'Blackstone Week';
+    }
+    if (calendarId === 'seasonal_event_crescendo_01') {
+        return 'Crescendo 01';
     }
     return calendarId;
 }

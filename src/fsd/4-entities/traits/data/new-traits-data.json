@@ -225,7 +225,7 @@
         "id": "PrioritisedEfficiency",
         "name": "Prioritised Efficiency",
         "styledName": "<style=\"PrioritisedEfficiency\">Prioritised Efficiency</style>",
-        "description": "At the beginning of each turn and until the end of that turn, this unit gains an effect depending on its stance. Whenever a friendly <style=\"Character\">character</style> with <style=\"PrioritisedEfficiency\">Prioritised Efficiency</style> uses an active ability, the stance switches for all friendly units with this trait.\n\nHostile Acquisition: Deals <style=\"Stat_Damage\">+{[extraDmgPct]}% Damage</style> with all attacks and gains <style=\"Stat_Movement\">+1 Movement</style>.\nFortify Takeover: Takes <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style>."
+        "description": "This unit deals <style=\"Stat_Damage\">+{[extraDmgPct]}% Damage</style> with all attacks and takes <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style>. If it traverses 3 or more hexes during its turn, it loses this effect until the start of its next turn."
     },
     {
         "id": "Psyker",
@@ -315,7 +315,7 @@
         "id": "ThrillSeekers",
         "name": "Thrill Seekers",
         "styledName": "<style=\"ThrillSeekers\">Thrill Seekers</style>",
-        "description": "Each turn, when this unit takes <style=\"Stat_Damage\">Damage</style> or targets an enemy with full <style=\"Stat_Health\">Health</style>, it becomes <i>Thrilled</i> for {[nrOfRounds]} round. While <i>Thrilled</i>, its <style=\"Stat_CritChance\">Crit Chance</style> is increased by <style=\"Stat\">+{[extraCritChance]}%</style> and if it defeats an enemy with a <style=\"Stat_CritDamage\">Crit</style>, that enemy is <style=\"Obliterated\">always overkilled</style>."
+        "description": "Each turn, when this unit loses <style=\"Stat_Health\">Health</style> or targets an enemy with full <style=\"Stat_Health\">Health</style>, it becomes <i>Thrilled</i> for {[nrOfRounds]} round. While <i>Thrilled</i>, its <style=\"Stat_CritChance\">Crit Chance</style> is increased by <style=\"Stat\">+{[extraCritChance]}%</style> and if it defeats an enemy with a <style=\"Stat_CritDamage\">Crit</style>, that enemy is <style=\"Obliterated\">always overkilled</style>."
     },
     {
         "id": "TwoManTeam",

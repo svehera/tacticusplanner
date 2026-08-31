@@ -3,11 +3,11 @@
     "title": "Ûthar Squad Requisition",
     "tagline": "Get the best characters for the upcoming <i>{[HRE/name_LEG_LeaguesOfVotann]}</i> event, featuring <style=\"Faction_LeaguesOfVotann\">Ûthar</style>",
     "featuredUnits": [
-        "adeptMorvenn",
+        "deathTyphus",
         "orksWarboss",
-        "deathPutrifier",
-        "custoVexilusPraetor",
-        "ultraApothecary",
+        "thousInfernalMaster",
+        "blackPossession",
+        "tauCrisis",
         "thousTerminator"
     ],
     "unlockRequirement": {

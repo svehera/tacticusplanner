@@ -38,11 +38,11 @@
             "tieredProgressRewards": [
                 {
                     "requiredProgress": 1250000,
-                    "chestRewardId": "crusadeNpc:100"
+                    "chestRewardId": "crusadeCurrency:250"
                 },
                 {
                     "requiredProgress": 2750000,
-                    "chestRewardId": "crusadeNpc:100"
+                    "chestRewardId": "crusadeNpc:125"
                 },
                 {
                     "requiredProgress": 4500000,
@@ -50,7 +50,7 @@
                 },
                 {
                     "requiredProgress": 6500000,
-                    "chestRewardId": "crusadeNpc:100"
+                    "chestRewardId": "crusadeNpc:125"
                 },
                 {
                     "requiredProgress": 500000,

@@ -7311,6 +7311,34 @@
         "Passive Abilities": ["PsychicFortress"]
     },
     {
+        "id": "ultraBossTiguriusSurv",
+        "Name": "Tigurius",
+        "Melee Damage": "Physical",
+        "Melee Hits": 1,
+        "Traits": ["Psyker"],
+        "Stats": [
+            {
+                "AbilityLevel": 32,
+                "Damage": 640,
+                "Armor": 299,
+                "Health": 1386,
+                "ProgressionIndex": 11,
+                "Rank": 11,
+                "Stars": 8
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_tigurius_01.png",
+        "Faction": "Ultramarines",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Psychic",
+        "Ranged Hits": 1,
+        "Distance": 2,
+        "Active Ability Damage": ["Psychic"],
+        "Active Abilities": ["StormOfWrath"],
+        "Passive Abilities": ["PsychicFortress"]
+    },
+    {
         "id": "ultraBossEliminatorSgt",
         "Name": "Certus",
         "Melee Damage": "Physical",
@@ -7443,6 +7471,35 @@
         "Passive Abilities": ["CamoCloak"]
     },
     {
+        "id": "ultraBossEliminatorSgtSurv",
+        "Name": "Certus",
+        "Melee Damage": "Physical",
+        "Melee Hits": 1,
+        "Traits": ["Overwatch", "HeavyWeapon", "Infiltrate"],
+        "Stats": [
+            {
+                "AbilityLevel": 32,
+                "Damage": 1173,
+                "Armor": 384,
+                "Health": 1280,
+                "ProgressionIndex": 11,
+                "Rank": 11,
+                "Stars": 8
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_eliminator_01.png",
+        "Faction": "Ultramarines",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 1,
+        "Distance": 3,
+        "Active Ability Damage": ["HeavyRound"],
+        "Passive Ability Damage": ["Bolter"],
+        "Active Abilities": ["MortisRound"],
+        "Passive Abilities": ["CamoCloak"]
+    },
+    {
         "id": "ultraBossInceptorSgt",
         "Name": "Bellator",
         "Melee Damage": "Bolter",
@@ -7545,6 +7602,30 @@
         "Passive Abilities": ["ShockAssault"]
     },
     {
+        "id": "ultraBossInceptorSgtSurv",
+        "Name": "Bellator",
+        "Melee Damage": "Bolter",
+        "Melee Hits": 6,
+        "Traits": ["Flying", "MkXGravis"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 2149,
+                "Armor": 2794,
+                "Health": 18269,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_inceptor_01.png",
+        "Faction": "Ultramarines",
+        "Alliance": "Imperial",
+        "Movement": 4,
+        "Active Abilities": ["DeathFromAbove"],
+        "Passive Abilities": ["ShockAssault"]
+    },
+    {
         "id": "ultraBossApothecary",
         "Name": "Incisus",
         "Melee Damage": "Piercing",
@@ -7619,6 +7700,30 @@
                 "ProgressionIndex": 15,
                 "Rank": 14,
                 "Stars": 11
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_apothecary_01.png",
+        "Faction": "Ultramarines",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Abilities": ["CombatRestoratives"],
+        "Passive Abilities": ["Narthecium"]
+    },
+    {
+        "id": "ultraBossApothecarySurv",
+        "Name": "Incisus",
+        "Melee Damage": "Piercing",
+        "Melee Hits": 1,
+        "Traits": ["Healer"],
+        "Stats": [
+            {
+                "AbilityLevel": 32,
+                "Damage": 981,
+                "Armor": 469,
+                "Health": 2133,
+                "ProgressionIndex": 11,
+                "Rank": 11,
+                "Stars": 8
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_apothecary_01.png",
@@ -7713,6 +7818,31 @@
                 "ProgressionIndex": 18,
                 "Rank": 18,
                 "Stars": 13
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_calgar_01.png",
+        "Faction": "Ultramarines",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Ability Damage": ["Bolter"],
+        "Active Abilities": ["GauntletsOfUltramar"],
+        "Passive Abilities": ["RitesOfBattle"]
+    },
+    {
+        "id": "ultraBossCalgarSurv",
+        "Name": "Calgar",
+        "Melee Damage": "Power",
+        "Melee Hits": 2,
+        "Traits": ["CrushingStrike", "FinalJustice", "MkXGravis"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 6018,
+                "Armor": 4299,
+                "Health": 20418,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_ultra_calgar_01.png",
@@ -7850,6 +7980,15 @@
                 "Health": 16309,
                 "ProgressionIndex": 19,
                 "Rank": 19,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 5588,
+                "Armor": 4943,
+                "Health": 20418,
+                "ProgressionIndex": 19,
+                "Rank": 20,
                 "Stars": 14
             }
         ],
@@ -9606,6 +9745,474 @@
         "Passive Abilities": ["EmbodiedProphecy"]
     },
     {
+        "id": "adeptNpc3Warsuit",
+        "Name": "Paragon Warsuit",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["ActOfFaith", "Mechanical", "BigTarget"],
+        "Stats": [
+            {
+                "AbilityLevel": 1,
+                "Damage": 20,
+                "Armor": 22,
+                "Health": 100,
+                "ProgressionIndex": 0,
+                "Rank": 0,
+                "Stars": 0
+            },
+            {
+                "AbilityLevel": 3,
+                "Damage": 25,
+                "Armor": 28,
+                "Health": 125,
+                "ProgressionIndex": 0,
+                "Rank": 1,
+                "Stars": 0
+            },
+            {
+                "AbilityLevel": 3,
+                "Damage": 28,
+                "Armor": 31,
+                "Health": 138,
+                "ProgressionIndex": 1,
+                "Rank": 1,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 5,
+                "Damage": 35,
+                "Armor": 39,
+                "Health": 173,
+                "ProgressionIndex": 1,
+                "Rank": 2,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 44,
+                "Armor": 49,
+                "Health": 217,
+                "ProgressionIndex": 1,
+                "Rank": 3,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 48,
+                "Armor": 53,
+                "Health": 237,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 60,
+                "Armor": 66,
+                "Health": 297,
+                "ProgressionIndex": 3,
+                "Rank": 4,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 75,
+                "Armor": 83,
+                "Health": 372,
+                "ProgressionIndex": 3,
+                "Rank": 5,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 81,
+                "Armor": 90,
+                "Health": 403,
+                "ProgressionIndex": 4,
+                "Rank": 5,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 101,
+                "Armor": 113,
+                "Health": 505,
+                "ProgressionIndex": 4,
+                "Rank": 6,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 124,
+                "Armor": 139,
+                "Health": 622,
+                "ProgressionIndex": 8,
+                "Rank": 6,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 155,
+                "Armor": 174,
+                "Health": 779,
+                "ProgressionIndex": 8,
+                "Rank": 7,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 182,
+                "Armor": 204,
+                "Health": 914,
+                "ProgressionIndex": 7,
+                "Rank": 8,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 206,
+                "Armor": 231,
+                "Health": 1036,
+                "ProgressionIndex": 10,
+                "Rank": 8,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 230,
+                "Armor": 258,
+                "Health": 1158,
+                "ProgressionIndex": 13,
+                "Rank": 8,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 258,
+                "Armor": 289,
+                "Health": 1297,
+                "ProgressionIndex": 10,
+                "Rank": 9,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 288,
+                "Armor": 323,
+                "Health": 1450,
+                "ProgressionIndex": 13,
+                "Rank": 9,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 342,
+                "Armor": 383,
+                "Health": 1720,
+                "ProgressionIndex": 11,
+                "Rank": 10,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 361,
+                "Armor": 404,
+                "Health": 1816,
+                "ProgressionIndex": 13,
+                "Rank": 10,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 428,
+                "Armor": 479,
+                "Health": 2154,
+                "ProgressionIndex": 11,
+                "Rank": 11,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 476,
+                "Armor": 532,
+                "Health": 2393,
+                "ProgressionIndex": 14,
+                "Rank": 11,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 596,
+                "Armor": 666,
+                "Health": 2996,
+                "ProgressionIndex": 14,
+                "Rank": 12,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 626,
+                "Armor": 699,
+                "Health": 3146,
+                "ProgressionIndex": 15,
+                "Rank": 12,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 746,
+                "Armor": 833,
+                "Health": 3751,
+                "ProgressionIndex": 14,
+                "Rank": 13,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 783,
+                "Armor": 875,
+                "Health": 3939,
+                "ProgressionIndex": 15,
+                "Rank": 13,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 934,
+                "Armor": 1043,
+                "Health": 4697,
+                "ProgressionIndex": 14,
+                "Rank": 14,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 981,
+                "Armor": 1095,
+                "Health": 4932,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1170,
+                "Armor": 1306,
+                "Health": 5881,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1229,
+                "Armor": 1371,
+                "Health": 6175,
+                "ProgressionIndex": 15,
+                "Rank": 15,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 47,
+                "Damage": 1465,
+                "Armor": 1635,
+                "Health": 7363,
+                "ProgressionIndex": 14,
+                "Rank": 16,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 47,
+                "Damage": 1538,
+                "Armor": 1717,
+                "Health": 7731,
+                "ProgressionIndex": 15,
+                "Rank": 16,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 1834,
+                "Armor": 2047,
+                "Health": 9218,
+                "ProgressionIndex": 14,
+                "Rank": 17,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 1926,
+                "Armor": 2149,
+                "Health": 9679,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 52,
+                "Damage": 2411,
+                "Armor": 2691,
+                "Health": 12118,
+                "ProgressionIndex": 16,
+                "Rank": 18,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 53,
+                "Damage": 2526,
+                "Armor": 2819,
+                "Health": 12695,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 54,
+                "Damage": 2641,
+                "Armor": 2947,
+                "Health": 13272,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 2756,
+                "Armor": 3075,
+                "Health": 13849,
+                "ProgressionIndex": 19,
+                "Rank": 18,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 57,
+                "Damage": 3019,
+                "Armor": 3369,
+                "Health": 15172,
+                "ProgressionIndex": 16,
+                "Rank": 19,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 58,
+                "Damage": 3163,
+                "Armor": 3529,
+                "Health": 15894,
+                "ProgressionIndex": 17,
+                "Rank": 19,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 59,
+                "Damage": 3307,
+                "Armor": 3689,
+                "Health": 16616,
+                "ProgressionIndex": 18,
+                "Rank": 19,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 3451,
+                "Armor": 3849,
+                "Health": 17338,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 62,
+                "Damage": 3781,
+                "Armor": 4217,
+                "Health": 18994,
+                "ProgressionIndex": 16,
+                "Rank": 20,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 63,
+                "Damage": 3961,
+                "Armor": 4418,
+                "Health": 19898,
+                "ProgressionIndex": 17,
+                "Rank": 20,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 64,
+                "Damage": 4141,
+                "Armor": 4619,
+                "Health": 20802,
+                "ProgressionIndex": 18,
+                "Rank": 20,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 4321,
+                "Armor": 4820,
+                "Health": 21706,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_adept_warsuit_01.png",
+        "Faction": "Sisterhood",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Active Ability Damage": ["Melta"],
+        "Active Abilities": ["MultiMelta"]
+    },
+    {
+        "id": "adeptNpc3WarsuitSurv",
+        "Name": "Paragon Warsuit",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["ActOfFaith", "Mechanical", "BigTarget"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 8642,
+                "Armor": 9640,
+                "Health": 43412,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 43210,
+                "Armor": 48200,
+                "Health": 217060,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 216050,
+                "Armor": 241000,
+                "Health": 1085300,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_adept_warsuit_01.png",
+        "Faction": "Sisterhood",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Active Ability Damage": ["Melta"],
+        "Active Abilities": ["MultiMelta"]
+    },
+    {
         "id": "adeptBossRetributor",
         "Name": "Vindicta",
         "Melee Damage": "Physical",
@@ -9678,6 +10285,15 @@
                 "Stars": 2
             },
             {
+                "AbilityLevel": 26,
+                "Damage": 242,
+                "Armor": 218,
+                "Health": 907,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
                 "AbilityLevel": 38,
                 "Damage": 669,
                 "Armor": 602,
@@ -9740,6 +10356,15 @@
         "Traits": ["ActOfFaith", "Healer"],
         "Stats": [
             {
+                "AbilityLevel": 17,
+                "Damage": 108,
+                "Armor": 97,
+                "Health": 458,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
                 "AbilityLevel": 20,
                 "Damage": 145,
                 "Armor": 130,
@@ -9747,15 +10372,6 @@
                 "ProgressionIndex": 7,
                 "Rank": 7,
                 "Stars": 5
-            },
-            {
-                "AbilityLevel": 26,
-                "Damage": 242,
-                "Armor": 218,
-                "Health": 1028,
-                "ProgressionIndex": 8,
-                "Rank": 9,
-                "Stars": 6
             },
             {
                 "AbilityLevel": 26,
@@ -9829,6 +10445,15 @@
                 "Stars": 7
             },
             {
+                "AbilityLevel": 50,
+                "Damage": 2300,
+                "Armor": 2300,
+                "Health": 9104,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
                 "AbilityLevel": 47,
                 "Damage": 2012,
                 "Armor": 2012,
@@ -9886,6 +10511,15 @@
         "Traits": ["ActOfFaith"],
         "Stats": [
             {
+                "AbilityLevel": 8,
+                "Damage": 71,
+                "Armor": 40,
+                "Health": 200,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
                 "AbilityLevel": 20,
                 "Damage": 217,
                 "Armor": 123,
@@ -9902,6 +10536,15 @@
                 "ProgressionIndex": 18,
                 "Rank": 16,
                 "Stars": 13
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 5150,
+                "Armor": 2918,
+                "Health": 14592,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_adept_canoness_01.png",
@@ -10024,6 +10667,15 @@
         "Melee Hits": 3,
         "Traits": ["ActOfFaith", "Flying"],
         "Stats": [
+            {
+                "AbilityLevel": 35,
+                "Damage": 668,
+                "Armor": 534,
+                "Health": 1602,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
             {
                 "AbilityLevel": 50,
                 "Damage": 2396,
@@ -13856,6 +14508,15 @@
                 "Stars": 2
             },
             {
+                "AbilityLevel": 17,
+                "Damage": 86,
+                "Armor": 97,
+                "Health": 431,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
                 "AbilityLevel": 50,
                 "Damage": 1679,
                 "Armor": 1889,
@@ -13910,13 +14571,13 @@
         "Traits": ["LetTheGalaxyBurn", "Psyker"],
         "Stats": [
             {
-                "AbilityLevel": 32,
-                "Damage": 341,
-                "Armor": 384,
-                "Health": 1706,
-                "ProgressionIndex": 11,
-                "Rank": 11,
-                "Stars": 8
+                "AbilityLevel": 35,
+                "Damage": 498,
+                "Armor": 561,
+                "Health": 2492,
+                "ProgressionIndex": 15,
+                "Rank": 12,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_possession_01.png",
@@ -14014,6 +14675,24 @@
         "Traits": ["LetTheGalaxyBurn", "Flying", "Terrifying"],
         "Stats": [
             {
+                "AbilityLevel": 5,
+                "Damage": 19,
+                "Armor": 34,
+                "Health": 164,
+                "ProgressionIndex": 1,
+                "Rank": 2,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 26,
+                "Armor": 47,
+                "Health": 224,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
                 "AbilityLevel": 35,
                 "Damage": 294,
                 "Armor": 534,
@@ -14055,6 +14734,31 @@
                 "ProgressionIndex": 15,
                 "Rank": 15,
                 "Stars": 11
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_black_haarken_01.png",
+        "Faction": "BlackLegion",
+        "Alliance": "Chaos",
+        "Movement": 4,
+        "Active Ability Damage": ["Piercing"],
+        "Active Abilities": ["HeraldOfTheApocalypse"],
+        "Passive Abilities": ["HeadClaimer"]
+    },
+    {
+        "id": "blackBossHaarkenSurv",
+        "Name": "Haarken",
+        "Melee Damage": "Piercing",
+        "Melee Hits": 4,
+        "Traits": ["LetTheGalaxyBurn", "Flying", "Terrifying"],
+        "Stats": [
+            {
+                "AbilityLevel": 35,
+                "Damage": 326,
+                "Armor": 593,
+                "Health": 2818,
+                "ProgressionIndex": 14,
+                "Rank": 12,
+                "Stars": 10
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_black_haarken_01.png",
@@ -14618,6 +15322,15 @@
         "Traits": ["ContagionsOfNurgle", "Resilient", "Psyker", "TerminatorArmour"],
         "Stats": [
             {
+                "AbilityLevel": 35,
+                "Damage": 481,
+                "Armor": 668,
+                "Health": 3204,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
                 "AbilityLevel": 41,
                 "Damage": 879,
                 "Armor": 1221,
@@ -14625,6 +15338,24 @@
                 "ProgressionIndex": 15,
                 "Rank": 14,
                 "Stars": 11
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 1725,
+                "Armor": 2396,
+                "Health": 11499,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 3090,
+                "Armor": 4292,
+                "Health": 20600,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_typhus_01.png",
@@ -14683,6 +15414,15 @@
                 "ProgressionIndex": 15,
                 "Rank": 14,
                 "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 3869,
+                "Armor": 5373,
+                "Health": 25792,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_typhus_01.png",
@@ -14751,6 +15491,32 @@
         "Passive Abilities": ["HazeOfCorruption"]
     },
     {
+        "id": "deathBossBlightlordSurv",
+        "Name": "Maladus",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["ContagionsOfNurgle", "Resilient", "TerminatorArmour"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 5588,
+                "Armor": 7093,
+                "Health": 25792,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_death_blightlord_01.png",
+        "Faction": "DeathGuard",
+        "Alliance": "Chaos",
+        "Movement": 2,
+        "Active Ability Damage": ["Power"],
+        "Passive Ability Damage": ["Toxic"],
+        "Active Abilities": ["FlailSwing"],
+        "Passive Abilities": ["HazeOfCorruption"]
+    },
+    {
         "id": "deathBossBlightlordLHE",
         "Name": "Maladus",
         "Melee Damage": "Power",
@@ -14768,11 +15534,20 @@
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 810,
-                "Armor": 1028,
-                "Health": 3738,
-                "ProgressionIndex": 15,
+                "Damage": 694,
+                "Armor": 881,
+                "Health": 3204,
+                "ProgressionIndex": 11,
                 "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2492,
+                "Armor": 3162,
+                "Health": 11499,
+                "ProgressionIndex": 15,
+                "Rank": 17,
                 "Stars": 11
             }
         ],
@@ -14809,6 +15584,30 @@
                 "ProgressionIndex": 14,
                 "Rank": 11,
                 "Stars": 10
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_death_rotbone_01.png",
+        "Faction": "DeathGuard",
+        "Alliance": "Chaos",
+        "Movement": 2,
+        "Active Abilities": ["RevitalizingMalignancy"],
+        "Passive Abilities": ["TaintedNarthecium"]
+    },
+    {
+        "id": "deathBossRotboneSurv",
+        "Name": "Nauseous",
+        "Melee Damage": "Power",
+        "Melee Hits": 4,
+        "Traits": ["ContagionsOfNurgle", "Resilient", "Healer"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 3009,
+                "Armor": 5803,
+                "Health": 25792,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_rotbone_01.png",
@@ -14877,12 +15676,46 @@
         "Passive Abilities": ["ExplosiveMaladies"]
     },
     {
+        "id": "deathBossPutrifierSurv",
+        "Name": "Pestillian",
+        "Melee Damage": "Toxic",
+        "Melee Hits": 1,
+        "Traits": ["ContagionsOfNurgle", "Resilient", "PutridExplosion"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 8597,
+                "Armor": 5803,
+                "Health": 25792,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_death_putrifier_01.png",
+        "Faction": "DeathGuard",
+        "Alliance": "Chaos",
+        "Movement": 2,
+        "Active Ability Damage": ["Toxic"],
+        "Active Abilities": ["FoulInfusion"],
+        "Passive Abilities": ["ExplosiveMaladies"]
+    },
+    {
         "id": "deathBossPutrifierLHE",
         "Name": "Pestillian",
         "Melee Damage": "Toxic",
         "Melee Hits": 1,
         "Traits": ["ContagionsOfNurgle", "Resilient", "PutridExplosion"],
         "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 94,
+                "Armor": 64,
+                "Health": 283,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
             {
                 "AbilityLevel": 17,
                 "Damage": 216,
@@ -14891,6 +15724,15 @@
                 "ProgressionIndex": 5,
                 "Rank": 6,
                 "Stars": 4
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 6867,
+                "Armor": 4635,
+                "Health": 20600,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_death_putrifier_01.png",
@@ -14935,12 +15777,45 @@
         "Passive Abilities": ["CursedPlagueBell"]
     },
     {
+        "id": "deathBossBlightbringerSurv",
+        "Name": "Corrodius",
+        "Melee Damage": "Plasma",
+        "Melee Hits": 1,
+        "Traits": ["ContagionsOfNurgle", "Resilient"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 8597,
+                "Armor": 5373,
+                "Health": 26866,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_death_blightbringer_01.png",
+        "Faction": "DeathGuard",
+        "Alliance": "Chaos",
+        "Movement": 2,
+        "Active Abilities": ["Poxwalkers"],
+        "Passive Abilities": ["CursedPlagueBell"]
+    },
+    {
         "id": "deathBossBlightbringerLHE",
         "Name": "Corrodius",
         "Melee Damage": "Plasma",
         "Melee Hits": 1,
         "Traits": ["ContagionsOfNurgle", "Resilient"],
         "Stats": [
+            {
+                "AbilityLevel": 17,
+                "Damage": 216,
+                "Armor": 135,
+                "Health": 674,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
             {
                 "AbilityLevel": 35,
                 "Damage": 1009,
@@ -15079,6 +15954,32 @@
                 "ProgressionIndex": 2,
                 "Rank": 3,
                 "Stars": 2
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_templ_brother_01.png",
+        "Faction": "BlackTemplars",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Ability Damage": ["Power"],
+        "Passive Ability Damage": ["Power"],
+        "Active Abilities": ["ThunderousAssault"],
+        "Passive Abilities": ["ChampionOfTheFeast"]
+    },
+    {
+        "id": "templBossSwordBrotherSurv",
+        "Name": "Godswyl",
+        "Melee Damage": "Power",
+        "Melee Hits": 1,
+        "Traits": ["Parry", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 55,
+                "Damage": 7884,
+                "Armor": 3154,
+                "Health": 12483,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_brother_01.png",
@@ -15243,6 +16144,35 @@
         "Passive Abilities": ["Boltstorm"]
     },
     {
+        "id": "templBossAggressorSurv",
+        "Name": "Burchard",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["CrushingStrike", "MkXGravis", "SuppressiveFire"],
+        "Stats": [
+            {
+                "AbilityLevel": 55,
+                "Damage": 2365,
+                "Armor": 2891,
+                "Health": 15768,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_templ_aggressor_01.png",
+        "Faction": "BlackTemplars",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 3,
+        "Distance": 2,
+        "Active Ability Damage": ["Blast"],
+        "Passive Ability Damage": ["Bolter"],
+        "Active Abilities": ["FragstormGrenadeLauncher"],
+        "Passive Abilities": ["Boltstorm"]
+    },
+    {
         "id": "templBossAncient",
         "Name": "Thoread",
         "Melee Damage": "Power",
@@ -15323,6 +16253,30 @@
                 "ProgressionIndex": 7,
                 "Rank": 4,
                 "Stars": 5
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_templ_ancient_01.png",
+        "Faction": "BlackTemplars",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Abilities": ["UnbreakableDuty"],
+        "Passive Abilities": ["AstartesBanner"]
+    },
+    {
+        "id": "templBossAncientSurv",
+        "Name": "Thoread",
+        "Melee Damage": "Power",
+        "Melee Hits": 2,
+        "Traits": ["FinalJustice", "Parry"],
+        "Stats": [
+            {
+                "AbilityLevel": 55,
+                "Damage": 4336,
+                "Armor": 2891,
+                "Health": 13140,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_ancient_01.png",
@@ -15417,20 +16371,20 @@
         "Passive Abilities": ["MartialSuperiority"]
     },
     {
-        "id": "templBossChampion_Surv",
+        "id": "templBossChampionSurv",
         "Name": "Jaeger",
         "Melee Damage": "Power",
         "Melee Hits": 3,
         "Traits": ["FinalJustice", "Parry", "RapidAssault"],
         "Stats": [
             {
-                "AbilityLevel": 32,
-                "Damage": 533,
-                "Armor": 533,
-                "Health": 2346,
-                "ProgressionIndex": 11,
-                "Rank": 11,
-                "Stars": 8
+                "AbilityLevel": 55,
+                "Damage": 3285,
+                "Armor": 3285,
+                "Health": 14454,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_templ_champion_01.png",
@@ -15534,6 +16488,33 @@
                 "Health": 15629,
                 "ProgressionIndex": 18,
                 "Rank": 19,
+                "Stars": 13
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_templ_helbrecht_01.png",
+        "Faction": "BlackTemplars",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 3,
+        "Distance": 2,
+        "Active Abilities": ["CrusadeOfWrath"],
+        "Passive Abilities": ["DestroyTheWitch"]
+    },
+    {
+        "id": "templBossHelbrechtSurv",
+        "Name": "Helbrecht",
+        "Melee Damage": "Power",
+        "Melee Hits": 6,
+        "Traits": ["FinalJustice", "Parry"],
+        "Stats": [
+            {
+                "AbilityLevel": 55,
+                "Damage": 1971,
+                "Armor": 2891,
+                "Health": 12483,
+                "ProgressionIndex": 18,
+                "Rank": 18,
                 "Stars": 13
             }
         ],
@@ -27216,6 +28197,15 @@
                 "ProgressionIndex": 19,
                 "Rank": 14,
                 "Stars": 14
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 603,
+                "Armor": 698,
+                "Health": 3755,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_grot_02.png",
@@ -28709,6 +29699,523 @@
         "Passive Abilities": ["Bounce"]
     },
     {
+        "id": "orksNpcHSESquig",
+        "Name": "Large Squig",
+        "Melee Damage": "Physical",
+        "Melee Hits": 3,
+        "Traits": [],
+        "Stats": [
+            {
+                "AbilityLevel": 1,
+                "Damage": 24,
+                "Armor": 15,
+                "Health": 65,
+                "ProgressionIndex": 0,
+                "Rank": 0,
+                "Stars": 0
+            },
+            {
+                "AbilityLevel": 3,
+                "Damage": 30,
+                "Armor": 19,
+                "Health": 81,
+                "ProgressionIndex": 0,
+                "Rank": 1,
+                "Stars": 0
+            },
+            {
+                "AbilityLevel": 3,
+                "Damage": 33,
+                "Armor": 21,
+                "Health": 89,
+                "ProgressionIndex": 1,
+                "Rank": 1,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 5,
+                "Damage": 41,
+                "Armor": 26,
+                "Health": 111,
+                "ProgressionIndex": 1,
+                "Rank": 2,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 51,
+                "Armor": 33,
+                "Health": 139,
+                "ProgressionIndex": 1,
+                "Rank": 3,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 56,
+                "Armor": 36,
+                "Health": 152,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 70,
+                "Armor": 45,
+                "Health": 190,
+                "ProgressionIndex": 3,
+                "Rank": 4,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 88,
+                "Armor": 56,
+                "Health": 238,
+                "ProgressionIndex": 3,
+                "Rank": 5,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 103,
+                "Armor": 65,
+                "Health": 278,
+                "ProgressionIndex": 5,
+                "Rank": 5,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 110,
+                "Armor": 70,
+                "Health": 298,
+                "ProgressionIndex": 7,
+                "Rank": 5,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 129,
+                "Armor": 82,
+                "Health": 348,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 138,
+                "Armor": 88,
+                "Health": 373,
+                "ProgressionIndex": 7,
+                "Rank": 6,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 161,
+                "Armor": 103,
+                "Health": 436,
+                "ProgressionIndex": 6,
+                "Rank": 7,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 173,
+                "Armor": 110,
+                "Health": 467,
+                "ProgressionIndex": 7,
+                "Rank": 7,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 185,
+                "Armor": 117,
+                "Health": 498,
+                "ProgressionIndex": 8,
+                "Rank": 7,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 197,
+                "Armor": 124,
+                "Health": 529,
+                "ProgressionIndex": 10,
+                "Rank": 7,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 232,
+                "Armor": 146,
+                "Health": 623,
+                "ProgressionIndex": 8,
+                "Rank": 8,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 247,
+                "Armor": 155,
+                "Health": 662,
+                "ProgressionIndex": 10,
+                "Rank": 8,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 262,
+                "Armor": 164,
+                "Health": 701,
+                "ProgressionIndex": 11,
+                "Rank": 8,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 273,
+                "Armor": 171,
+                "Health": 731,
+                "ProgressionIndex": 7,
+                "Rank": 9,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 291,
+                "Armor": 182,
+                "Health": 780,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 309,
+                "Armor": 193,
+                "Health": 829,
+                "ProgressionIndex": 10,
+                "Rank": 9,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 327,
+                "Armor": 204,
+                "Health": 878,
+                "ProgressionIndex": 11,
+                "Rank": 9,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 345,
+                "Armor": 215,
+                "Health": 927,
+                "ProgressionIndex": 13,
+                "Rank": 9,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 364,
+                "Armor": 227,
+                "Health": 977,
+                "ProgressionIndex": 9,
+                "Rank": 10,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 387,
+                "Armor": 241,
+                "Health": 1038,
+                "ProgressionIndex": 10,
+                "Rank": 10,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 410,
+                "Armor": 255,
+                "Health": 1099,
+                "ProgressionIndex": 11,
+                "Rank": 10,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 433,
+                "Armor": 269,
+                "Health": 1160,
+                "ProgressionIndex": 13,
+                "Rank": 10,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 456,
+                "Armor": 283,
+                "Health": 1221,
+                "ProgressionIndex": 14,
+                "Rank": 10,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 485,
+                "Armor": 301,
+                "Health": 1299,
+                "ProgressionIndex": 10,
+                "Rank": 11,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 514,
+                "Armor": 319,
+                "Health": 1375,
+                "ProgressionIndex": 11,
+                "Rank": 11,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 571,
+                "Armor": 354,
+                "Health": 1528,
+                "ProgressionIndex": 14,
+                "Rank": 11,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 715,
+                "Armor": 443,
+                "Health": 1913,
+                "ProgressionIndex": 14,
+                "Rank": 12,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 751,
+                "Armor": 465,
+                "Health": 2009,
+                "ProgressionIndex": 15,
+                "Rank": 12,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 895,
+                "Armor": 554,
+                "Health": 2395,
+                "ProgressionIndex": 14,
+                "Rank": 13,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 940,
+                "Armor": 582,
+                "Health": 2515,
+                "ProgressionIndex": 15,
+                "Rank": 13,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 1121,
+                "Armor": 694,
+                "Health": 2999,
+                "ProgressionIndex": 14,
+                "Rank": 14,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 1177,
+                "Armor": 729,
+                "Health": 3149,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1403,
+                "Armor": 869,
+                "Health": 3755,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1473,
+                "Armor": 912,
+                "Health": 3943,
+                "ProgressionIndex": 15,
+                "Rank": 15,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 47,
+                "Damage": 1756,
+                "Armor": 1087,
+                "Health": 4702,
+                "ProgressionIndex": 14,
+                "Rank": 16,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 47,
+                "Damage": 1844,
+                "Armor": 1141,
+                "Health": 4937,
+                "ProgressionIndex": 15,
+                "Rank": 16,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2199,
+                "Armor": 1361,
+                "Health": 5887,
+                "ProgressionIndex": 14,
+                "Rank": 17,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2309,
+                "Armor": 1429,
+                "Health": 6181,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 52,
+                "Damage": 2891,
+                "Armor": 1789,
+                "Health": 7739,
+                "ProgressionIndex": 16,
+                "Rank": 18,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 53,
+                "Damage": 3029,
+                "Armor": 1874,
+                "Health": 8108,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 54,
+                "Damage": 3167,
+                "Armor": 1959,
+                "Health": 8477,
+                "ProgressionIndex": 18,
+                "Rank": 18,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 3305,
+                "Armor": 2044,
+                "Health": 8846,
+                "ProgressionIndex": 19,
+                "Rank": 18,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 57,
+                "Damage": 3621,
+                "Armor": 2239,
+                "Health": 9691,
+                "ProgressionIndex": 16,
+                "Rank": 19,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 58,
+                "Damage": 3793,
+                "Armor": 2346,
+                "Health": 10152,
+                "ProgressionIndex": 17,
+                "Rank": 19,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 59,
+                "Damage": 3965,
+                "Armor": 2453,
+                "Health": 10613,
+                "ProgressionIndex": 18,
+                "Rank": 19,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 4137,
+                "Armor": 2560,
+                "Health": 11074,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 62,
+                "Damage": 4532,
+                "Armor": 2804,
+                "Health": 12132,
+                "ProgressionIndex": 16,
+                "Rank": 20,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 63,
+                "Damage": 4748,
+                "Armor": 2938,
+                "Health": 12710,
+                "ProgressionIndex": 17,
+                "Rank": 20,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 64,
+                "Damage": 4964,
+                "Armor": 3072,
+                "Health": 13288,
+                "ProgressionIndex": 18,
+                "Rank": 20,
+                "Stars": 13
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 5180,
+                "Armor": 3206,
+                "Health": 13866,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_orkss_squig_01.png",
+        "Faction": "Orks",
+        "Alliance": "Xenos",
+        "Movement": 3
+    },
+    {
         "id": "orksNpc7SquigSurv",
         "Name": "Large Squig",
         "Melee Damage": "Physical",
@@ -29390,6 +30897,14 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "Health": 2942,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_ammobox_01.png",
@@ -29770,6 +31285,14 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "Health": 1716,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_oildrum_01.png"
@@ -30148,6 +31671,14 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "Health": 1494,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_expoildrum_01.png",
@@ -30573,6 +32104,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 505,
+                "Health": 2696,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_imperialcrate_01.png"
@@ -31419,6 +32959,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 894,
+                "Health": 4382,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_poduncommon_01.png"
@@ -31842,6 +33391,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 991,
+                "Health": 5405,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_podrare_01.png"
@@ -32688,6 +34246,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 1181,
+                "Health": 10997,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_podlegendary_01.png"
@@ -33489,6 +35056,14 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "Health": 9736,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_strongbox_01.png"
@@ -33912,6 +35487,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 505,
+                "Health": 2696,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_imperialcrate_01.png"
@@ -34758,6 +36342,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 894,
+                "Health": 4382,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_poduncommon_01.png"
@@ -35181,6 +36774,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 991,
+                "Health": 5405,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_podrare_01.png"
@@ -36027,6 +37629,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 1181,
+                "Health": 10997,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_podlegendary_01.png"
@@ -36828,6 +38439,14 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "Health": 9736,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_strongbox_01.png"
@@ -37251,6 +38870,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 505,
+                "Health": 2696,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_imperialcrate_01.png"
@@ -38097,6 +39725,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 894,
+                "Health": 4382,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_poduncommon_01.png"
@@ -38520,6 +40157,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 991,
+                "Health": 5405,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_podrare_01.png"
@@ -39366,6 +41012,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 1181,
+                "Health": 10997,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_podlegendary_01.png"
@@ -40167,6 +41822,14 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "Health": 9736,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_strongbox_01.png"
@@ -40590,6 +42253,15 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 0,
+                "Armor": 1494,
+                "Health": 2439,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_fancybox_01.png"
@@ -40922,6 +42594,13 @@
                 "ProgressionIndex": 14,
                 "Rank": 14,
                 "Stars": 10
+            },
+            {
+                "AbilityLevel": 41,
+                "Armor": 0,
+                "ProgressionIndex": 15,
+                "Rank": 14,
+                "Stars": 11
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_loots_coincrate_01.png"
@@ -41547,6 +43226,301 @@
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_01.png",
         "Passive Abilities": ["PowerUp_SummonSpawn_darkaSmnTerminator"]
+    },
+    {
+        "id": "powupSummonSpawn_necroSmnWarrior",
+        "Name": "Necron Warrior Power-up",
+        "Melee Damage": "",
+        "Melee Hits": 0,
+        "Traits": ["Steppable", "Invincible", "Immune"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_02_necron.png",
+        "Passive Abilities": ["PowerUp_SummonSpawn_necroSmnWarrior"]
+    },
+    {
+        "id": "powupSummonSpawn_necroSmnFlayedOne",
+        "Name": "Flayed One Power-up",
+        "Melee Damage": "",
+        "Melee Hits": 0,
+        "Traits": ["Steppable", "Invincible", "Immune"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_02_necron.png",
+        "Passive Abilities": ["PowerUp_SummonSpawn_necroSmnFlayedOne"]
+    },
+    {
+        "id": "powupSummonSpawn_necroSmnDeathmark",
+        "Name": "Deathmark Power-up",
+        "Melee Damage": "",
+        "Melee Hits": 0,
+        "Traits": ["Steppable", "Invincible", "Immune"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_02_necron.png",
+        "Passive Abilities": ["PowerUp_SummonSpawn_necroSmnDeathmark"]
+    },
+    {
+        "id": "powupSummonSpawn_necroSmnDestroyer",
+        "Name": "Ophydian Destroyer Power-up",
+        "Melee Damage": "",
+        "Melee Hits": 0,
+        "Traits": ["Steppable", "Invincible", "Immune"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_02_necron.png",
+        "Passive Abilities": ["PowerUp_SummonSpawn_necroSmnDestroyer"]
+    },
+    {
+        "id": "powupSummonSpawn_necroSmnSwarm",
+        "Name": "Scarab Swarm Power-up",
+        "Melee Damage": "",
+        "Melee Hits": 0,
+        "Traits": ["Steppable", "Invincible", "Immune"],
+        "Stats": [
+            {
+                "AbilityLevel": 8,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 5,
+                "Rank": 6,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 0,
+                "Armor": 0,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_powup_heroSpawn_02_necron.png",
+        "Passive Abilities": ["PowerUp_SummonSpawn_necroSmnSwarm"]
     },
     {
         "id": "powupBomb",
@@ -46243,6 +48217,205 @@
         "Passive Abilities": ["EnmityForTheUnworthy"]
     },
     {
+        "id": "darkaNpcSternguard",
+        "Name": "Ramus",
+        "Melee Damage": "Melta",
+        "Melee Hits": 1,
+        "Traits": ["Overwatch"],
+        "Stats": [
+            {
+                "AbilityLevel": 3,
+                "Damage": 55,
+                "Armor": 29,
+                "Health": 117,
+                "ProgressionIndex": 1,
+                "Rank": 1,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 5,
+                "Damage": 69,
+                "Armor": 36,
+                "Health": 147,
+                "ProgressionIndex": 1,
+                "Rank": 2,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 94,
+                "Armor": 49,
+                "Health": 200,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 102,
+                "Armor": 54,
+                "Health": 217,
+                "ProgressionIndex": 4,
+                "Rank": 3,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 128,
+                "Armor": 67,
+                "Health": 272,
+                "ProgressionIndex": 4,
+                "Rank": 4,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 138,
+                "Armor": 72,
+                "Health": 292,
+                "ProgressionIndex": 5,
+                "Rank": 4,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 172,
+                "Armor": 90,
+                "Health": 366,
+                "ProgressionIndex": 6,
+                "Rank": 5,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 231,
+                "Armor": 121,
+                "Health": 491,
+                "ProgressionIndex": 7,
+                "Rank": 6,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 309,
+                "Armor": 162,
+                "Health": 656,
+                "ProgressionIndex": 8,
+                "Rank": 7,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 386,
+                "Armor": 203,
+                "Health": 821,
+                "ProgressionIndex": 9,
+                "Rank": 8,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 514,
+                "Armor": 270,
+                "Health": 1092,
+                "ProgressionIndex": 10,
+                "Rank": 9,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 681,
+                "Armor": 358,
+                "Health": 1448,
+                "ProgressionIndex": 11,
+                "Rank": 10,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 32,
+                "Damage": 900,
+                "Armor": 473,
+                "Health": 1913,
+                "ProgressionIndex": 13,
+                "Rank": 11,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 35,
+                "Damage": 1127,
+                "Armor": 592,
+                "Health": 2396,
+                "ProgressionIndex": 13,
+                "Rank": 12,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 1411,
+                "Armor": 741,
+                "Health": 2999,
+                "ProgressionIndex": 13,
+                "Rank": 13,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 1860,
+                "Armor": 977,
+                "Health": 3953,
+                "ProgressionIndex": 14,
+                "Rank": 14,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 2329,
+                "Armor": 1223,
+                "Health": 4949,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 3833,
+                "Armor": 2012,
+                "Health": 8145,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 5028,
+                "Armor": 2639,
+                "Health": 10684,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 6295,
+                "Armor": 3305,
+                "Health": 13376,
+                "ProgressionIndex": 17,
+                "Rank": 19,
+                "Stars": 12
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_darka_sternguard_01.png",
+        "Faction": "DarkAngels",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 1,
+        "Distance": 3,
+        "Passive Ability Damage": ["Bolter"],
+        "Active Abilities": ["SternguardFocus"],
+        "Passive Abilities": ["SpecialIssueCombiMelta"]
+    },
+    {
         "id": "darkaBossAzraelLHE",
         "Name": "Azrael",
         "Melee Damage": "Power",
@@ -46365,6 +48538,31 @@
                 "ProgressionIndex": 17,
                 "Rank": 18,
                 "Stars": 12
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_darka_terminator_01.png",
+        "Faction": "DarkAngels",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Active Ability Damage": ["Plasma"],
+        "Active Abilities": ["PlasmaCannon"],
+        "Passive Abilities": ["Deathwing"]
+    },
+    {
+        "id": "darkaBossTerminatorSurv",
+        "Name": "Baraqiel",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["TeleportStrike", "CrushingStrike", "HeavyWeapon", "TerminatorArmour"],
+        "Stats": [
+            {
+                "AbilityLevel": 60,
+                "Damage": 3777,
+                "Armor": 4978,
+                "Health": 18884,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
             }
         ],
         "Icon": "snowprint_assets/characters/ui_image_portrait_darka_terminator_01.png",
@@ -46512,11 +48710,11 @@
         "Passive Abilities": ["HaywireMine"]
     },
     {
-        "id": "astraYarrick_LHE",
-        "Name": "Yarrick",
+        "id": "thousSekhetar_LHE",
+        "Name": "Sekhetar Robot",
         "Melee Damage": "Power",
-        "Melee Hits": 3,
-        "Traits": ["Resilient"],
+        "Melee Hits": 2,
+        "Traits": ["WeaverOfFate", "Mechanical", "Camouflage", "Infiltrate", "Overwatch"],
         "Stats": [
             {
                 "AbilityLevel": 8,
@@ -46573,87 +48771,89 @@
                 "Stars": 14
             }
         ],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_astra_yarrick_01.png",
-        "Faction": "AstraMilitarum",
-        "Alliance": "Imperial",
+        "Icon": "snowprint_assets/characters/ui_image_portrait_thous_sekhetar_01.png",
+        "Faction": "ThousandSons",
+        "Alliance": "Chaos",
         "Movement": 3,
-        "Ranged Damage": "Bolter",
+        "Ranged Damage": "HeavyRound",
         "Ranged Hits": 2,
-        "Distance": 2,
-        "Active Abilities": ["SendInTheNextWave"],
-        "Passive Abilities": ["SummaryExecution"]
+        "Distance": 3,
+        "Active Ability Damage": ["Flame"],
+        "Active Abilities": ["HeavyWarpFlamer"],
+        "Passive Abilities": ["PropheticSentinel"]
     },
     {
-        "id": "necroChronomancer_LHE",
-        "Name": "Thothmek",
-        "Melee Damage": "Physical",
+        "id": "darkaSternguard_LHE",
+        "Name": "Ramus",
+        "Melee Damage": "Melta",
         "Melee Hits": 1,
-        "Traits": ["LivingMetal", "Mechanical", "Flying", "SuppressiveFire"],
+        "Traits": ["Overwatch"],
         "Stats": [
             {
                 "AbilityLevel": 8,
-                "Damage": 102,
-                "Armor": 50,
-                "Health": 212,
+                "Damage": 114,
+                "Armor": 59,
+                "Health": 297,
                 "ProgressionIndex": 2,
                 "Rank": 3,
                 "Stars": 2
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 234,
-                "Armor": 116,
-                "Health": 486,
+                "Damage": 259,
+                "Armor": 136,
+                "Health": 688,
                 "ProgressionIndex": 5,
                 "Rank": 6,
                 "Stars": 4
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 522,
-                "Armor": 261,
-                "Health": 1089,
+                "Damage": 580,
+                "Armor": 305,
+                "Health": 1505,
                 "ProgressionIndex": 8,
                 "Rank": 9,
                 "Stars": 6
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 1153,
-                "Armor": 577,
-                "Health": 2404,
+                "Damage": 1281,
+                "Armor": 674,
+                "Health": 3355,
                 "ProgressionIndex": 11,
                 "Rank": 12,
                 "Stars": 8
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 4140,
-                "Armor": 2069,
-                "Health": 8623,
+                "Damage": 4599,
+                "Armor": 2414,
+                "Health": 11931,
                 "ProgressionIndex": 15,
                 "Rank": 17,
                 "Stars": 11
             },
             {
                 "AbilityLevel": 65,
-                "Damage": 6287,
-                "Armor": 3142,
-                "Health": 13095,
+                "Damage": 6984,
+                "Armor": 3666,
+                "Health": 18114,
                 "ProgressionIndex": 19,
                 "Rank": 20,
                 "Stars": 14
             }
         ],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_necro_chronomancer_01.png",
-        "Faction": "Necrons",
-        "Alliance": "Xenos",
+        "Icon": "snowprint_assets/characters/ui_image_portrait_darka_sternguard_01.png",
+        "Faction": "DarkAngels",
+        "Alliance": "Imperial",
         "Movement": 3,
-        "Ranged Damage": "Energy",
-        "Ranged Hits": 2,
-        "Distance": 2,
-        "Active Abilities": ["Chronometron"],
-        "Passive Abilities": ["TimesplinterMantle"]
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 1,
+        "Distance": 3,
+        "Passive Ability Damage": ["Bolter"],
+        "Active Abilities": ["SternguardFocus"],
+        "Passive Abilities": ["SpecialIssueCombiMelta"]
     },
     {
         "id": "bloodTerminator_LHE",
@@ -46727,77 +48927,77 @@
         "Passive Abilities": ["RedRampage"]
     },
     {
-        "id": "spaceStormcaller_LHE",
-        "Name": "Njal",
-        "Melee Damage": "Psychic",
-        "Melee Hits": 3,
-        "Traits": ["Psyker", "TerminatorArmour", "Unstoppable"],
+        "id": "astarEradicator_LHE",
+        "Name": "Nubari",
+        "Melee Damage": "Melta",
+        "Melee Hits": 2,
+        "Traits": ["MkXGravis", "HeavyWeapon"],
         "Stats": [
             {
                 "AbilityLevel": 8,
-                "Damage": 23,
-                "Armor": 73,
-                "Health": 226,
+                "Damage": 68,
+                "Armor": 50,
+                "Health": 311,
                 "ProgressionIndex": 2,
                 "Rank": 3,
                 "Stars": 2
             },
             {
                 "AbilityLevel": 17,
-                "Damage": 52,
-                "Armor": 168,
-                "Health": 517,
+                "Damage": 155,
+                "Armor": 116,
+                "Health": 721,
                 "ProgressionIndex": 5,
                 "Rank": 6,
                 "Stars": 4
             },
             {
                 "AbilityLevel": 26,
-                "Damage": 115,
-                "Armor": 378,
-                "Health": 1162,
+                "Damage": 348,
+                "Armor": 261,
+                "Health": 1578,
                 "ProgressionIndex": 8,
                 "Rank": 9,
                 "Stars": 6
             },
             {
                 "AbilityLevel": 35,
-                "Damage": 257,
-                "Armor": 834,
-                "Health": 2564,
+                "Damage": 769,
+                "Armor": 577,
+                "Health": 3515,
                 "ProgressionIndex": 11,
                 "Rank": 12,
                 "Stars": 8
             },
             {
                 "AbilityLevel": 50,
-                "Damage": 920,
-                "Armor": 2989,
-                "Health": 9201,
+                "Damage": 2759,
+                "Armor": 2069,
+                "Health": 12506,
                 "ProgressionIndex": 15,
                 "Rank": 17,
                 "Stars": 11
             },
             {
                 "AbilityLevel": 65,
-                "Damage": 1397,
-                "Armor": 4539,
-                "Health": 13968,
+                "Damage": 4190,
+                "Armor": 3142,
+                "Health": 18987,
                 "ProgressionIndex": 19,
                 "Rank": 20,
                 "Stars": 14
             }
         ],
-        "Icon": "snowprint_assets/characters/ui_image_portrait_space_njal_01.png",
-        "Faction": "SpaceWolves",
+        "Icon": "snowprint_assets/characters/ui_image_portrait_astar_eradicator_01.png",
+        "Faction": "AdeptusAstartes",
         "Alliance": "Imperial",
         "Movement": 2,
-        "Ranged Damage": "Psychic",
+        "Ranged Damage": "Melta",
         "Ranged Hits": 2,
         "Distance": 2,
-        "Active Ability Damage": ["Psychic"],
-        "Active Abilities": ["Stormcaller"],
-        "Passive Abilities": ["LordOfTempests"]
+        "Active Ability Damage": ["Melta"],
+        "Active Abilities": ["TotalObliteration"],
+        "Passive Abilities": ["CrucibleOfBattle"]
     },
     {
         "id": "blackNpc1Bloodletter",
@@ -48485,6 +50685,50 @@
         "Passive Abilities": ["FiringPosition"]
     },
     {
+        "id": "blackNpc4HavocSurv",
+        "Name": "Havoc",
+        "Melee Damage": "Physical",
+        "Melee Hits": 2,
+        "Traits": ["LetTheGalaxyBurn", "HeavyWeapon", "SuppressiveFire", "Overwatch"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 5806,
+                "Armor": 7918,
+                "Health": 34594,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 29030,
+                "Armor": 39590,
+                "Health": 172970,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 290300,
+                "Armor": 395900,
+                "Health": 1729700,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_black_havoc_01.png",
+        "Faction": "BlackLegion",
+        "Alliance": "Chaos",
+        "Movement": 3,
+        "Ranged Damage": "Projectile",
+        "Ranged Hits": 8,
+        "Distance": 2,
+        "Passive Abilities": ["FiringPosition"]
+    },
+    {
         "id": "deathNpc1Poxwalker",
         "Name": "Poxwalker",
         "Melee Damage": "Physical",
@@ -49311,6 +51555,52 @@
                 "Damage": 4437,
                 "Armor": 4437,
                 "Health": 15117,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_death_plaguemarine_01.png",
+        "Faction": "DeathGuard",
+        "Alliance": "Chaos",
+        "Movement": 2,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Active Ability Damage": ["Toxic"],
+        "Active Abilities": ["BlightGrenades"],
+        "Passive Abilities": ["CloudOfFlies"]
+    },
+    {
+        "id": "deathNpc2PlagueMarineSurv",
+        "Name": "Plague Marine",
+        "Melee Damage": "Physical",
+        "Melee Hits": 2,
+        "Traits": ["ContagionsOfNurgle", "Resilient"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 8874,
+                "Armor": 8874,
+                "Health": 30234,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 44370,
+                "Armor": 44370,
+                "Health": 151170,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 443700,
+                "Armor": 443700,
+                "Health": 1511700,
                 "ProgressionIndex": 19,
                 "Rank": 20,
                 "Stars": 14
@@ -51431,6 +53721,50 @@
         "Passive Abilities": ["AllIsDust"]
     },
     {
+        "id": "thousNpc3RubricMarineSurv",
+        "Name": "Rubric Marine",
+        "Melee Damage": "Physical",
+        "Melee Hits": 2,
+        "Traits": ["WeaverOfFate"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 11480,
+                "Armor": 11480,
+                "Health": 25976,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 57400,
+                "Armor": 57400,
+                "Health": 129880,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 574000,
+                "Armor": 574000,
+                "Health": 1298800,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_thous_rubric_01.png",
+        "Faction": "ThousandSons",
+        "Alliance": "Chaos",
+        "Movement": 3,
+        "Ranged Damage": "Flame",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Passive Abilities": ["AllIsDust"]
+    },
+    {
         "id": "thousNpc4Terminator",
         "Name": "Scarab Occult Terminator",
         "Melee Damage": "Power",
@@ -53477,6 +55811,187 @@
         "Passive Abilities": ["PsychicStalk"]
     },
     {
+        "id": "thousNpcSekhetar",
+        "Name": "Sekhetar Robot",
+        "Melee Damage": "Power",
+        "Melee Hits": 2,
+        "Traits": ["WeaverOfFate", "Mechanical", "Camouflage", "Infiltrate", "Overwatch"],
+        "Stats": [
+            {
+                "AbilityLevel": 3,
+                "Damage": 39,
+                "Armor": 30,
+                "Health": 131,
+                "ProgressionIndex": 1,
+                "Rank": 1,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 5,
+                "Damage": 48,
+                "Armor": 38,
+                "Health": 164,
+                "ProgressionIndex": 1,
+                "Rank": 2,
+                "Stars": 1
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 66,
+                "Armor": 52,
+                "Health": 224,
+                "ProgressionIndex": 2,
+                "Rank": 3,
+                "Stars": 2
+            },
+            {
+                "AbilityLevel": 8,
+                "Damage": 71,
+                "Armor": 56,
+                "Health": 242,
+                "ProgressionIndex": 4,
+                "Rank": 3,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 89,
+                "Armor": 70,
+                "Health": 303,
+                "ProgressionIndex": 4,
+                "Rank": 4,
+                "Stars": 3
+            },
+            {
+                "AbilityLevel": 11,
+                "Damage": 96,
+                "Armor": 76,
+                "Health": 327,
+                "ProgressionIndex": 5,
+                "Rank": 4,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 14,
+                "Damage": 121,
+                "Armor": 95,
+                "Health": 409,
+                "ProgressionIndex": 6,
+                "Rank": 5,
+                "Stars": 4
+            },
+            {
+                "AbilityLevel": 17,
+                "Damage": 162,
+                "Armor": 127,
+                "Health": 549,
+                "ProgressionIndex": 7,
+                "Rank": 6,
+                "Stars": 5
+            },
+            {
+                "AbilityLevel": 20,
+                "Damage": 216,
+                "Armor": 170,
+                "Health": 733,
+                "ProgressionIndex": 8,
+                "Rank": 7,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 23,
+                "Damage": 270,
+                "Armor": 213,
+                "Health": 918,
+                "ProgressionIndex": 9,
+                "Rank": 8,
+                "Stars": 6
+            },
+            {
+                "AbilityLevel": 26,
+                "Damage": 360,
+                "Armor": 283,
+                "Health": 1221,
+                "ProgressionIndex": 10,
+                "Rank": 9,
+                "Stars": 7
+            },
+            {
+                "AbilityLevel": 29,
+                "Damage": 477,
+                "Armor": 375,
+                "Health": 1618,
+                "ProgressionIndex": 11,
+                "Rank": 10,
+                "Stars": 8
+            },
+            {
+                "AbilityLevel": 38,
+                "Damage": 988,
+                "Armor": 776,
+                "Health": 3352,
+                "ProgressionIndex": 13,
+                "Rank": 13,
+                "Stars": 9
+            },
+            {
+                "AbilityLevel": 41,
+                "Damage": 1302,
+                "Armor": 1023,
+                "Health": 4418,
+                "ProgressionIndex": 14,
+                "Rank": 14,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 44,
+                "Damage": 1630,
+                "Armor": 1281,
+                "Health": 5531,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            },
+            {
+                "AbilityLevel": 50,
+                "Damage": 2683,
+                "Armor": 2108,
+                "Health": 9104,
+                "ProgressionIndex": 15,
+                "Rank": 17,
+                "Stars": 11
+            },
+            {
+                "AbilityLevel": 55,
+                "Damage": 3519,
+                "Armor": 2765,
+                "Health": 11941,
+                "ProgressionIndex": 17,
+                "Rank": 18,
+                "Stars": 12
+            },
+            {
+                "AbilityLevel": 60,
+                "Damage": 4406,
+                "Armor": 3462,
+                "Health": 14950,
+                "ProgressionIndex": 17,
+                "Rank": 19,
+                "Stars": 12
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_thous_sekhetar_01.png",
+        "Faction": "ThousandSons",
+        "Alliance": "Chaos",
+        "Movement": 3,
+        "Ranged Damage": "HeavyRound",
+        "Ranged Hits": 2,
+        "Distance": 3,
+        "Active Ability Damage": ["Flame"],
+        "Active Abilities": ["HeavyWarpFlamer"],
+        "Passive Abilities": ["PropheticSentinel"]
+    },
+    {
         "id": "thousNpcMowDaemonPrince",
         "Name": "Z'Kar",
         "Melee Damage": "",
@@ -53739,7 +56254,7 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_thous_daemonprince_01.png",
         "Faction": "ThousandSons",
         "Alliance": "Chaos",
-        "Active Ability Damage": ["Flame", "Psychic"],
+        "Active Ability Damage": ["Flame"],
         "Active Abilities": ["AetherStride", "InfernalCannon"]
     },
     {
@@ -62254,6 +64769,162 @@
         "Active Abilities": ["BioMinefield", "SporeMineLauncher"]
     },
     {
+        "id": "bloodBossIntercessorSurv",
+        "Name": "Mataneo",
+        "Melee Damage": "Plasma",
+        "Melee Hits": 1,
+        "Traits": ["TeleportStrike", "Flying", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 26,
+                "Damage": 484,
+                "Armor": 266,
+                "Health": 1088,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_intercessor_01.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 4,
+        "Active Ability Damage": ["Physical", "Power"],
+        "Active Abilities": ["HammerOfWrath"],
+        "Passive Abilities": ["AggressiveOnslaught"]
+    },
+    {
+        "id": "bloodBossDeathCompanySurv",
+        "Name": "Lucien",
+        "Melee Damage": "Physical",
+        "Melee Hits": 4,
+        "Traits": ["RapidAssault", "Resilient", "Unstoppable"],
+        "Stats": [
+            {
+                "AbilityLevel": 26,
+                "Damage": 363,
+                "Armor": 254,
+                "Health": 1088,
+                "ProgressionIndex": 8,
+                "Rank": 9,
+                "Stars": 6
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_deathcompany_01.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Blast",
+        "Ranged Hits": 3,
+        "Distance": 2,
+        "Passive Ability Damage": ["Bolter"],
+        "Active Abilities": ["BlackRage"],
+        "Passive Abilities": ["VisionsOfHeresy"]
+    },
+    {
+        "id": "bloodBossSanguinarySurv",
+        "Name": "Nicodemus",
+        "Melee Damage": "Chain",
+        "Melee Hits": 3,
+        "Traits": ["Healer", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 44,
+                "Damage": 1339,
+                "Armor": 1339,
+                "Health": 5240,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_sanguinary_01.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Abilities": ["BloodChalice"],
+        "Passive Abilities": ["SanguinaryPriest"]
+    },
+    {
+        "id": "bloodBossMephistonSurv",
+        "Name": "Mephiston",
+        "Melee Damage": "Psychic",
+        "Melee Hits": 3,
+        "Traits": ["Psyker", "RapidAssault", "Terrifying"],
+        "Stats": [
+            {
+                "AbilityLevel": 44,
+                "Damage": 582,
+                "Armor": 1164,
+                "Health": 5531,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_mephiston_01.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Psychic",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Passive Ability Damage": ["Psychic"],
+        "Active Abilities": ["TheQuickening"],
+        "Passive Abilities": ["FuryOfTheAncients"]
+    },
+    {
+        "id": "bloodBossDanteSurv",
+        "Name": "Dante",
+        "Melee Damage": "Piercing",
+        "Melee Hits": 4,
+        "Traits": ["TeleportStrike", "FinalJustice", "Flying", "RapidAssault", "Terrifying"],
+        "Stats": [
+            {
+                "AbilityLevel": 44,
+                "Damage": 640,
+                "Armor": 1339,
+                "Health": 5240,
+                "ProgressionIndex": 14,
+                "Rank": 15,
+                "Stars": 10
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_dante_01.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 4,
+        "Active Ability Damage": ["Melta"],
+        "Active Abilities": ["LightOfSanguinius"],
+        "Passive Abilities": ["LordOfTheHost"]
+    },
+    {
+        "id": "bloodBossTerminatorSurv",
+        "Name": "Cezare",
+        "Melee Damage": "Power",
+        "Melee Hits": 4,
+        "Traits": ["TeleportStrike", "TerminatorArmour", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 60,
+                "Damage": 3262,
+                "Armor": 4635,
+                "Health": 18025,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_terminator_01.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Active Ability Damage": ["Eviscerate"],
+        "Passive Ability Damage": ["Power"],
+        "Active Abilities": ["SavageEchoes"],
+        "Passive Abilities": ["RedRampage"]
+    },
+    {
         "id": "bloodNpc1Intercessor",
         "Name": "Jump Pack Intercessor",
         "Melee Damage": "Chain",
@@ -62661,6 +65332,47 @@
                 "Damage": 3959,
                 "Armor": 3959,
                 "Health": 10731,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_blood_intercessor_02.png",
+        "Faction": "BloodAngels",
+        "Alliance": "Imperial",
+        "Movement": 4,
+        "Passive Abilities": ["RedThirst"]
+    },
+    {
+        "id": "bloodNpc1IntercessorSurv",
+        "Name": "Jump Pack Intercessor",
+        "Melee Damage": "Chain",
+        "Melee Hits": 2,
+        "Traits": ["TeleportStrike", "Flying", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 65,
+                "Damage": 7918,
+                "Armor": 7918,
+                "Health": 21462,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 39590,
+                "Armor": 39590,
+                "Health": 107310,
+                "ProgressionIndex": 19,
+                "Rank": 20,
+                "Stars": 14
+            },
+            {
+                "AbilityLevel": 65,
+                "Damage": 395900,
+                "Armor": 395900,
+                "Health": 1073100,
                 "ProgressionIndex": 19,
                 "Rank": 20,
                 "Stars": 14
@@ -74017,11 +76729,64 @@
         "Icon": "snowprint_assets/characters/ui_image_portrait_votan_steeljack_01.png",
         "Faction": "LeaguesOfVotann",
         "Alliance": "Xenos",
-        "Movement": 2,
+        "Movement": 3,
         "Ranged Damage": "Energy",
         "Ranged Hits": 2,
         "Distance": 2,
         "Passive Abilities": ["PurgeResponse"]
+    },
+    {
+        "id": "astarBossCyrusSurv",
+        "Name": "Cyrus",
+        "Melee Damage": "Bolter",
+        "Melee Hits": 3,
+        "Traits": ["Camouflage", "Infiltrate", "SuppressiveFire"],
+        "Stats": [
+            {
+                "AbilityLevel": 35,
+                "Damage": 748,
+                "Armor": 534,
+                "Health": 2136,
+                "ProgressionIndex": 11,
+                "Rank": 12,
+                "Stars": 8
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_astar_cyrus_01.png",
+        "Faction": "AdeptusAstartes",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Ranged Damage": "Bolter",
+        "Ranged Hits": 3,
+        "Distance": 3,
+        "Active Ability Damage": ["Bolter"],
+        "Passive Ability Damage": ["Blast", "Energy"],
+        "Active Abilities": ["StrikeFromTheShadows"],
+        "Passive Abilities": ["HaywireMine"]
+    },
+    {
+        "id": "astarBossLysanderSurv",
+        "Name": "Lysander",
+        "Melee Damage": "Power",
+        "Melee Hits": 1,
+        "Traits": ["TeleportStrike", "TerminatorArmour", "Resilient", "CrushingStrike"],
+        "Stats": [
+            {
+                "AbilityLevel": 60,
+                "Damage": 8583,
+                "Armor": 4807,
+                "Health": 18884,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_astar_lysander_01.png",
+        "Faction": "AdeptusAstartes",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Active Abilities": ["TitanhammerSquad"],
+        "Passive Abilities": ["IconOfObstinacy"]
     },
     {
         "id": "astarNpc1HaywireMine",
@@ -74041,5 +76806,157 @@
         "Alliance": "Imperial",
         "Passive Ability Damage": ["Blast", "Energy"],
         "Passive Abilities": ["HaywireMineSteppable"]
+    },
+    {
+        "id": "spaceBossWulfenSurv",
+        "Name": "Ulf",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["FinalJustice", "Unstoppable"],
+        "Stats": [
+            {
+                "AbilityLevel": 50,
+                "Damage": 3162,
+                "Armor": 1917,
+                "Health": 8625,
+                "ProgressionIndex": 16,
+                "Rank": 17,
+                "Stars": 11
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_wulfen_01.png",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Ability Damage": ["Piercing"],
+        "Passive Ability Damage": ["Power"],
+        "Active Abilities": ["GreatFrostAxe"],
+        "Passive Abilities": ["SavageKiller"]
+    },
+    {
+        "id": "spaceBossHoundSurv",
+        "Name": "Tjark",
+        "Melee Damage": "Physical",
+        "Melee Hits": 4,
+        "Traits": ["Infiltrate", "Terrifying"],
+        "Stats": [
+            {
+                "AbilityLevel": 50,
+                "Damage": 3066,
+                "Armor": 2204,
+                "Health": 8145,
+                "ProgressionIndex": 16,
+                "Rank": 17,
+                "Stars": 11
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_hound_01.png",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Ability Damage": ["Physical"],
+        "Active Abilities": ["GrapnelLauncher"],
+        "Passive Abilities": ["HuntersBeyondDeath"]
+    },
+    {
+        "id": "spaceBossRockfistSurv",
+        "Name": "Arjac",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["Resilient", "TeleportStrike", "TerminatorArmour", "Unstoppable"],
+        "Stats": [
+            {
+                "AbilityLevel": 60,
+                "Damage": 3948,
+                "Armor": 4463,
+                "Health": 18884,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_arjac_01.png",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Active Ability Damage": ["Power"],
+        "Active Abilities": ["Foehammer"],
+        "Passive Abilities": ["AnvilShield"]
+    },
+    {
+        "id": "spaceBossStormcallerSurv",
+        "Name": "Njal",
+        "Melee Damage": "Psychic",
+        "Melee Hits": 3,
+        "Traits": ["Psyker", "TerminatorArmour", "Unstoppable"],
+        "Stats": [
+            {
+                "AbilityLevel": 60,
+                "Damage": 1373,
+                "Armor": 4463,
+                "Health": 13734,
+                "ProgressionIndex": 19,
+                "Rank": 19,
+                "Stars": 14
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_njal_01.png",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Movement": 2,
+        "Ranged Damage": "Psychic",
+        "Ranged Hits": 2,
+        "Distance": 2,
+        "Active Ability Damage": ["Psychic"],
+        "Active Abilities": ["Stormcaller"],
+        "Passive Abilities": ["LordOfTempests"]
+    },
+    {
+        "id": "spaceBossWolfPriestSurv",
+        "Name": "Baldr",
+        "Melee Damage": "Power",
+        "Melee Hits": 3,
+        "Traits": ["Healer", "FinalJustice", "Terrifying"],
+        "Stats": [
+            {
+                "AbilityLevel": 50,
+                "Damage": 2396,
+                "Armor": 2012,
+                "Health": 8625,
+                "ProgressionIndex": 16,
+                "Rank": 17,
+                "Stars": 11
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_wolfpriest_01.png",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Abilities": ["RitesOfMorkai"],
+        "Passive Abilities": ["HealingBalms"]
+    },
+    {
+        "id": "spaceBossBlackmaneSurv",
+        "Name": "Ragnar",
+        "Melee Damage": "Chain",
+        "Melee Hits": 7,
+        "Traits": ["BeastSlayer", "FinalJustice", "RapidAssault"],
+        "Stats": [
+            {
+                "AbilityLevel": 50,
+                "Damage": 1342,
+                "Armor": 2300,
+                "Health": 9583,
+                "ProgressionIndex": 16,
+                "Rank": 17,
+                "Stars": 11
+            }
+        ],
+        "Icon": "snowprint_assets/characters/ui_image_portrait_space_ragnar_01.png",
+        "Faction": "SpaceWolves",
+        "Alliance": "Imperial",
+        "Movement": 3,
+        "Active Abilities": ["WarHowl"],
+        "Passive Abilities": ["SagaOfTheWarriorBorn"]
     }
 ]

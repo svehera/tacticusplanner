@@ -25,6 +25,7 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     ShardsAll: { iconKey: 'shard', label: 'Shards' },
     gems: { iconKey: 'blackstone', label: 'Blackstone' },
     raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
+    expeditionSpeedUp: { iconKey: 'expeditionSpeedUp', label: 'Expedition Speed Up' },
     avatarFrame_frameAugust2026: {
         iconKey: 'seasonalEventAugust2026AvatarFrame',
         label: 'Seasonal Event (August 2026) Avatar Frame',
