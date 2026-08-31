@@ -10,6 +10,7 @@ import { MiscIcon, OrbIcon, UnknownItemImage } from '@/fsd/5-shared/ui/icons';
 import { tacticusIcons } from '@/fsd/5-shared/ui/icons/icon-list';
 
 import type { IProductCalendar, IProductCalendarOffer } from '@/fsd/4-entities/calendars';
+import { EquipmentTypeRarityIcon } from '@/fsd/4-entities/equipment';
 
 import {
     calendarDisplayName,
@@ -87,6 +88,16 @@ function renderRewardIcon(icon: CalendarRewardIcon): React.ReactNode {
         }
         case 'orb': {
             return <OrbIcon alliance={icon.alliance} rarity={icon.rarity} size={ICON_SIZE} />;
+        }
+        case 'equipmentTypeRarity': {
+            return (
+                <EquipmentTypeRarityIcon
+                    equipmentType={icon.equipmentType}
+                    rarity={icon.rarity}
+                    width={ICON_SIZE}
+                    height={ICON_SIZE}
+                />
+            );
         }
         case 'xpBook': {
             const xpBookIconKey = `${icon.rarity.toLowerCase()}Book` as keyof typeof tacticusIcons;

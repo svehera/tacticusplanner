@@ -13,6 +13,10 @@ import {
     getKnownEncounterAvailability,
     getMaxKnownProgressionIndex,
     getNextEncounterPosition,
+    getProgressionIndexFromUnitId,
+    getSeasonConfig,
+    getSeasonIds,
+    getUnitSetId,
 } from './guild-boss.service';
 
 function makeEncounters(tier: number, set: number): GuildBossEncounter[] {
@@ -310,12 +314,28 @@ describe('getKnownEncounterAvailability (real data)', () => {
     });
 
     it('includes the exact progression index for each known position', () => {
-        const availability = getKnownEncounterAvailability('GuildBoss12Boss1DarkaLion');
-        expect(availability).toEqual([
-            { rarity: 4, set: 4, progressionIndex: 22 },
-            { rarity: 5, set: 0, progressionIndex: 23 },
-            { rarity: 5, set: 1, progressionIndex: 24 },
-            { rarity: 5, set: 2, progressionIndex: 25 },
-        ]);
+        // Bosses rotate between ladder positions as the season config is resynced, so a hardcoded
+        // (rarity, set, progressionIndex) snapshot goes stale. Instead, verify each reported entry
+        // against the real data: some season must have an encounter at that (rarity, set) whose
+        // unitId both resolves to this unitSetId and carries the reported progression index.
+        const [unitSetId] = getBossUnitSetIds();
+        const availability = getKnownEncounterAvailability(unitSetId);
+        expect(availability.length).toBeGreaterThan(0);
+
+        for (const { rarity, set, progressionIndex } of availability) {
+            const matchesSomeSeason = getSeasonIds().some(seasonId => {
+                const config = getSeasonConfig(seasonId);
+                if (!config) return false;
+                const position = findPositionByTierSet(config, rarity, set);
+                if (!position) return false;
+                const encounters = config.tiers[position.tierIndex]?.sets[position.setIndex]?.encounters ?? [];
+                return encounters.some(
+                    enc =>
+                        getUnitSetId(enc.unitId) === unitSetId &&
+                        getProgressionIndexFromUnitId(enc.unitId) === progressionIndex
+                );
+            });
+            expect(matchesSomeSeason).toBe(true);
+        }
     });
 });

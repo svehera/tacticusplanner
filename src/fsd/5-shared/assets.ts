@@ -170,6 +170,7 @@ import powupReactivateAbility from '@/assets/images/snowprint_assets/powerups/ui
 import powupReinforcement from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reinforcement_01.png';
 import powupReinforcementShield from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_reinforcementshield_01.png';
 import powupResurrect from '@/assets/images/snowprint_assets/powerups/ui_image_portrait_powup_resurrect_01.png';
+import crusadePoints from '@/assets/images/snowprint_assets/resources/CrusadePoints.png';
 import expeditionSpeedUp from '@/assets/images/snowprint_assets/resources/Resource_ExpeditionSpeedUp.png';
 import commonForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_common.png';
 import epicForgeBadge from '@/assets/images/snowprint_assets/resources/ui_forge_badges_epic.png';
@@ -335,6 +336,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     crusadeNpc: {
         file: crusadeNpc,
         label: 'Crusade NPC',
+    },
+    crusadePoints: {
+        file: crusadePoints,
+        label: 'Crusade Points',
     },
     seasonalEventCurrencyApril2026: {
         file: seasonalEventCurrencyApril2026,

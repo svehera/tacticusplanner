@@ -7,6 +7,8 @@ import type { IProductCalendar, IProductCalendarDay, IProductCalendarOffer } fro
 import { EquipmentService } from '@/fsd/4-entities/equipment';
 import { getShopCurrencyIconKey, getShopCurrencyLabel } from '@/fsd/4-entities/shops';
 
+import { EQUIPMENT_TYPE_LABELS } from '@/fsd/3-features/shop-rewards';
+
 const MONTH_NAMES: Record<string, string> = {
     january: 'January',
     february: 'February',
@@ -101,6 +103,7 @@ export function upgradeMaterialRarity(itemId: string): string | undefined {
 export type CalendarRewardIcon =
     | { kind: 'misc'; icon: keyof typeof tacticusIcons }
     | { kind: 'equipment'; rarity: string; icon: string }
+    | { kind: 'equipmentTypeRarity'; equipmentType: string; rarity: number }
     | { kind: 'orb'; alliance: Alliance; rarity: number }
     | { kind: 'unknownItem'; rarity: string }
     | { kind: 'unknownUpgradeMaterial'; rarity: string }
@@ -157,6 +160,23 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
     const itemsMatch = /^items(Common|Uncommon|Rare|Epic|Legendary|Mythic)$/.exec(type);
     if (itemsMatch) {
         return { icon: { kind: 'unknownItem', rarity: itemsMatch[1] }, label: `${itemsMatch[1]} Item`, qty };
+    }
+
+    // ── generic equipment reward pools: items{Rarity}_{Type} (e.g. itemsLegendary_I_Block) — same
+    // vocabulary as the Shop Events/daily-shops reward-info resolver; reuse its icon and labels. ──
+    const genericEquipmentMatch = /^items(Common|Uncommon|Rare|Epic|Legendary|Mythic)_(.+)$/.exec(type);
+    if (genericEquipmentMatch) {
+        const rarityString = genericEquipmentMatch[1] as RarityString;
+        const equipmentType = genericEquipmentMatch[2];
+        return {
+            icon: {
+                kind: 'equipmentTypeRarity',
+                equipmentType,
+                rarity: RarityMapper.stringToNumber[rarityString],
+            },
+            label: `${rarityString} ${EQUIPMENT_TYPE_LABELS[equipmentType] ?? equipmentType}`,
+            qty,
+        };
     }
 
     if (type === 'machinesOfWarAmmo') return misc('mow', 'MoW Ammo');
