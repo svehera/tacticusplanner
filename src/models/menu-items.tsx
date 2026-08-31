@@ -174,6 +174,7 @@ export const learnSubMenuMobile: MenuItemTP[] = [
     menuItemById['dirtyDozen'],
     menuItemById['insights'],
     menuItemById['guildPerformance'],
+    menuItemById['productCalendar'],
 ];
 
 export const learnSubMenu: MenuItemTP[] = [
