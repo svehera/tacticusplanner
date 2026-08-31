@@ -86,7 +86,7 @@ const AbilityPanel = ({
     const scaledVariableNames = disableScaling ? [] : (ability?.variablesAffectedByRarityBonus ?? []);
 
     return (
-        <div className="flex w-full max-w-xl min-w-0 flex-1 flex-col gap-1 sm:min-w-80">
+        <div className="flex w-full max-w-xl min-w-0 basis-full flex-col gap-1 lg:min-w-80 lg:flex-1 lg:basis-auto">
             <span className="text-xs text-(--soft-fg)">{label}</span>
             {ability ? (
                 <div className="rounded-md bg-(--ability-panel)">
@@ -575,7 +575,7 @@ export const UnitDetailsPage = ({ unit, prevUnit, nextUnit, onNavigate, onClose 
                             unitName={unit.name}
                             factionId={unit.faction}
                         />
-                        <div className="flex w-full max-w-[320px] min-w-64 flex-1 flex-col items-center gap-1">
+                        <div className="flex w-full basis-full flex-col items-center gap-1 lg:max-w-[320px] lg:min-w-64 lg:flex-1 lg:basis-auto">
                             <span className="self-start text-xs text-(--soft-fg)">Stat percentiles</span>
                             <UnitStatRadarChart snowprintId={char.snowprintId} />
                         </div>
