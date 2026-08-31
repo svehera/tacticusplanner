@@ -29,7 +29,7 @@ const TargetCell = ({ data }: ICellRendererParams<HitRow>) => {
     // The raid/bomb token icon moved out to its own sortable Type column.
     return (
         <span className="flex items-center gap-1.5">
-            <EncounterIcon unitId={data.entry.unitId} size={22} />
+            <EncounterIcon unitId={data.entry.unitId} size={22} rarity={data.entry.rarity} />
             <RarityIcon rarity={data.entry.rarity} />
             <span className="truncate">{data.bossName}</span>
         </span>

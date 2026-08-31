@@ -203,19 +203,6 @@ export const bossPrefixDisplayNames: Record<string, string> = {
     GuildBoss12: 'Lion',
 };
 
-/**
- * Round-portrait icon path for each GuildBoss{N} prefix.
- * Built from unitRoundIconMap by taking the first icon per prefix.
- */
-export const bossPrefixRoundIconMap: Record<string, string> = (() => {
-    const map: Record<string, string> = {};
-    for (const [unitId, icon] of Object.entries(unitRoundIconMap)) {
-        const prefix = /^(GuildBoss\d+)/.exec(unitId)?.[1];
-        if (prefix !== undefined && map[prefix] === undefined) map[prefix] = icon;
-    }
-    return map;
-})();
-
 /** Extracts the `GuildBoss{N}` prefix from any raid entry unitId. */
 export function getBossPrefix(unitId: string): string {
     return /^(GuildBoss\d+)/.exec(unitId)?.[1] ?? unitId;
@@ -245,9 +232,15 @@ export function tierLabel(rarity: Rarity, set?: number): string {
     return `${RARITY_CODE[rarity]}${Number.isFinite(set) ? (set as number) + 1 : ''}`;
 }
 
-/** Round portrait + display name for a `GuildBoss{N}` family prefix, for the boss filter toggles. */
-export function bossIconFor(prefix: string): { icon: string | undefined; name: string } {
-    return { icon: bossPrefixRoundIconMap[prefix], name: bossPrefixDisplayNames[prefix] ?? prefix };
+/** Round portrait + display name for a boss filter option, resolved from its representative unitId
+ *  (see {@link BossFilterOption}) — full-fidelity per character, unlike the old prefix-keyed map
+ *  this replaced, which always resolved a shared family prefix to whichever unitId happened to be
+ *  listed first (e.g. every Hive Tyrant variant showing Leviathan's icon). */
+export function bossIconFor(option: BossFilterOption): { icon: string | undefined; name: string } {
+    return {
+        icon: unitRoundIconMap[option.unitId],
+        name: bossPrefixDisplayNames[getBossPrefix(option.unitId)] ?? option.unitId,
+    };
 }
 
 /**
@@ -318,40 +311,72 @@ export function mergeSeasonSummaries(
 }
 
 /**
- * Orders GuildBoss{N} prefixes by when the guild first met them — ascending rarity, then set.
+ * Unique identity for one boss "slot" in this season's ladder: a specific `GuildBoss{N}` family, at
+ * a specific rarity, at a specific position (`set`) within that rarity. Two boss variants that
+ * happen to share a family number but occupy different slots this season — e.g. this season's two
+ * Hive Tyrant reskins — get different keys; a boss's own primes, which always share its exact
+ * rarity and set, share its key.
+ */
+export function getBossSlotKey(unitId: string, rarity: Rarity, set: number): string {
+    return `${getBossPrefix(unitId)}:${rarity}:${set}`;
+}
+
+export interface BossFilterOption {
+    /** Opaque key from {@link getBossSlotKey} — compare entries against this (via the same
+     *  function) to filter, and pass the option to {@link bossIconFor} for its icon/name. */
+    key: string;
+    /** The slot's own boss unitId when known, otherwise (rarity/set hit only via a prime) one of
+     *  its primes'. */
+    unitId: string;
+    rarity: Rarity;
+    set: number;
+}
+
+/**
+ * One {@link BossFilterOption} per boss slot present in `occurrences`, ascending by rarity then
+ * set — the order the guild actually meets them in this season.
  *
  * This is the single ordering for every boss filter on the page. It replaces sorting by the
  * `GuildBoss{N}` number, which is Snowprint's roster index: it is neither the order bosses appear
  * in a season nor correlated with difficulty, so it produced a sequence that matched nothing on
  * screen. `set` is the position within a rarity tier, so (rarity, set) reconstructs the run.
  *
- * Primes are included when present — they share their boss's rarity and set, so they never change
- * the order, and taking them into account keeps a family listed even if only its primes were hit.
+ * Primes are included when present — they share their boss's rarity and set, so they land in the
+ * same slot as their boss, keeping a family listed even if only its primes were hit. A slot's own
+ * boss occurrence (`encounterIndex` 0) is always preferred as the option's representative unitId
+ * over a prime's, so the filter button's icon is the boss's own whenever it's known.
  */
-export function orderBossPrefixesByEncounter(
-    occurrences: Iterable<{ prefix: string; rarity: Rarity; set: number }>
-): string[] {
-    const firstSeen = new Map<string, { rarity: Rarity; set: number }>();
-    for (const { prefix, rarity, set } of occurrences) {
-        const current = firstSeen.get(prefix);
-        if (current === undefined || rarity < current.rarity || (rarity === current.rarity && set < current.set)) {
-            firstSeen.set(prefix, { rarity, set });
+export function orderBossesByEncounter(
+    occurrences: Iterable<{ unitId: string; rarity: Rarity; set: number; encounterIndex: number }>
+): BossFilterOption[] {
+    const bySlot = new Map<string, BossFilterOption & { isBoss: boolean }>();
+    for (const { unitId, rarity, set, encounterIndex } of occurrences) {
+        const key = getBossSlotKey(unitId, rarity, set);
+        const isBoss = encounterIndex === 0;
+        const current = bySlot.get(key);
+        if (current === undefined || (isBoss && !current.isBoss)) {
+            bySlot.set(key, { key, unitId, rarity, set, isBoss });
         }
     }
-    return [...firstSeen.entries()]
-        .toSorted(([, a], [, b]) => (a.rarity === b.rarity ? a.set - b.set : a.rarity - b.rarity))
-        .map(([prefix]) => prefix);
+    return [...bySlot.values()]
+        .toSorted((a, b) => (a.rarity === b.rarity ? a.set - b.set : a.rarity - b.rarity))
+        .map(({ key, unitId, rarity, set }) => ({ key, unitId, rarity, set }));
 }
 
 /**
- * Unique GuildBoss{N} prefixes present in `entries`, in encounter order.
+ * Boss slots present in `entries`, in encounter order.
  * Pass `rarities` to restrict to a selected subset; omit it when the caller has already filtered.
  */
-export function getAvailableBossPrefixes(entries: TacticusGuildRaidEntry[], rarities?: Set<Rarity>): string[] {
-    return orderBossPrefixesByEncounter(
+export function getAvailableBosses(entries: TacticusGuildRaidEntry[], rarities?: Set<Rarity>): BossFilterOption[] {
+    return orderBossesByEncounter(
         entries
             .filter(entry => rarities === undefined || rarities.has(entry.rarity))
-            .map(entry => ({ prefix: getBossPrefix(entry.unitId), rarity: entry.rarity, set: entry.set }))
+            .map(entry => ({
+                unitId: entry.unitId,
+                rarity: entry.rarity,
+                set: entry.set,
+                encounterIndex: entry.encounterIndex,
+            }))
     );
 }
 

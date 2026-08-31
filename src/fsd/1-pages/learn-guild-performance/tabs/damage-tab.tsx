@@ -37,9 +37,9 @@ import { ROW } from '../guild-performance.styles';
 import {
     bossIconFor,
     computeDefaultRarities,
-    getAvailableBossPrefixes,
+    getAvailableBosses,
     getBossOrder,
-    getBossPrefix,
+    getBossSlotKey,
     resolvePlayerName,
 } from '../guild-performance.utils';
 
@@ -316,7 +316,7 @@ function BossRarityStatRow({ row, hidePlayer }: { row: BossRarityStatEntry; hide
     return (
         <div role="row" className={`grid ${statCols(hidePlayer)} ${ROW}`}>
             <span role="cell" className="flex items-center justify-center">
-                <EncounterIcon unitId={row.unitId} />
+                <EncounterIcon unitId={row.unitId} rarity={row.rarity} />
             </span>
             <span role="cell" className="flex items-center justify-center">
                 <RarityIcon rarity={row.rarity} />
@@ -532,12 +532,9 @@ export const DamageTab = ({
     );
 
     // --- boss ---
-    const availableBossPrefixes = useMemo(
-        () => getAvailableBossPrefixes(rarityFilteredEntries),
-        [rarityFilteredEntries]
-    );
+    const availableBossPrefixes = useMemo(() => getAvailableBosses(rarityFilteredEntries), [rarityFilteredEntries]);
     const [selectedBossPrefixes, setSelectedBossPrefixes] = useState<string[] | undefined>();
-    const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
+    const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes.map(option => option.key);
 
     // Reset the live-season filters when the page-level season changes.
     useEffect(() => {
@@ -553,10 +550,7 @@ export const DamageTab = ({
                 .filter(
                     entry =>
                         effectiveBossPrefixes.length === 0 ||
-                        // Exact prefix, not `startsWith`: "GuildBoss1" is a string prefix of
-                        // GuildBoss10/11/12, so selecting one boss silently admitted four. Every
-                        // other tab already compares this way.
-                        effectiveBossPrefixes.includes(getBossPrefix(entry.unitId))
+                        effectiveBossPrefixes.includes(getBossSlotKey(entry.unitId, entry.rarity, entry.set))
                 ),
         [rarityFilteredEntries, selectedPlayerId, effectiveBossPrefixes]
     );
@@ -610,6 +604,7 @@ export const DamageTab = ({
                     <PrefixFilter
                         label="Boss"
                         available={availableBossPrefixes}
+                        getKey={option => option.key}
                         selected={effectiveBossPrefixes}
                         onChange={setSelectedBossPrefixes}
                         iconFor={bossIconFor}

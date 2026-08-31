@@ -8,7 +8,7 @@ import {
 } from '@/fsd/5-shared/lib/tacticus-api';
 import { Rarity } from '@/fsd/5-shared/model';
 
-import { resolveBossOverviewDisplay, unitDisplayLabel } from './guild-performance.utils';
+import { bossIconFor, getBossSlotKey, resolveBossOverviewDisplay, unitDisplayLabel } from './guild-performance.utils';
 
 // Real season config / unitIds (guild_boss_season_config_5, tier 5 = Mythic, set 0) so
 // resolveBossOverviewDisplay's season-config lookups resolve against actual game data. The
@@ -149,5 +149,33 @@ describe('unitDisplayLabel', () => {
         for (const unitId of [BOSS_UNIT_ID, LEFT_PRIME_UNIT_ID, RIGHT_PRIME_UNIT_ID]) {
             expect(unitDisplayLabel(unitId)).not.toContain('GuildBoss');
         }
+    });
+});
+
+describe('bossIconFor', () => {
+    it('resolves a distinct icon per boss variant, even when two variants share a GuildBoss{N} family number', () => {
+        // Regression: this season's two Hive Tyrant reskins (Leviathan and Kronos) used to both
+        // show Leviathan's icon, because the old prefix-keyed icon map always resolved a shared
+        // family prefix to whichever unitId happened to be listed first.
+        const leviathan = bossIconFor({
+            key: getBossSlotKey('GuildBoss2Boss1TyranHiveTyrantLeviathan', Rarity.Legendary, 2),
+            unitId: 'GuildBoss2Boss1TyranHiveTyrantLeviathan',
+            rarity: Rarity.Legendary,
+            set: 2,
+        });
+        const kronos = bossIconFor({
+            key: getBossSlotKey('GuildBoss2Boss2TyranHiveTyrantKronos', Rarity.Legendary, 4),
+            unitId: 'GuildBoss2Boss2TyranHiveTyrantKronos',
+            rarity: Rarity.Legendary,
+            set: 4,
+        });
+
+        expect(leviathan.icon).toBeDefined();
+        expect(kronos.icon).toBeDefined();
+        expect(leviathan.icon).not.toBe(kronos.icon);
+        // Both are still "Hive Tyrant" by family name — only the icon (and rarity/tier label
+        // shown alongside it) needs to disambiguate them.
+        expect(leviathan.name).toBe('Hive Tyrant');
+        expect(kronos.name).toBe('Hive Tyrant');
     });
 });

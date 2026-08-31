@@ -33,9 +33,8 @@ import {
     bossIconFor,
     bossPrefixDisplayNames,
     computeDefaultRaritiesFromRarities,
-    getAvailableBossPrefixes,
-    getBossPrefix,
-    orderBossPrefixesByEncounter,
+    getAvailableBosses,
+    orderBossesByEncounter,
     unitDisplayLabel,
 } from '../guild-performance.utils';
 
@@ -151,7 +150,7 @@ function LeaderboardCard({
     return (
         <TableCard>
             <TableCardHeader className="gap-2 px-2 py-1.5">
-                <EncounterIcon unitId={unitId} />
+                <EncounterIcon unitId={unitId} rarity={rarity} />
                 <RarityIcon rarity={rarity} />
                 <span className="text-sm font-extrabold text-(--fg)">{displayName}</span>
                 <span className="text-[10px] tracking-[.08em] text-(--soft-fg) uppercase">{kind}</span>
@@ -291,20 +290,21 @@ export const LeaderboardTab = ({
         // Historical aggregates carry rarity and set on each board's enemyInfo, so the same
         // encounter ordering as the live path is available here too.
         if (historySummary) {
-            return orderBossPrefixesByEncounter(
+            return orderBossesByEncounter(
                 historySummary.leaderboards
                     .filter(board => selectedRarities.includes(RarityMapper.stringToNumber[board.enemyInfo.rarity]))
                     .map(board => ({
-                        prefix: getBossPrefix(board.enemyInfo.enemyId),
+                        unitId: board.enemyInfo.enemyId,
                         rarity: RarityMapper.stringToNumber[board.enemyInfo.rarity],
                         set: board.enemyInfo.set,
+                        encounterIndex: board.enemyInfo.encounterIndex,
                     }))
             );
         }
-        return getAvailableBossPrefixes(rarityFilteredEntries);
+        return getAvailableBosses(rarityFilteredEntries);
     }, [historySummary, selectedRarities, rarityFilteredEntries]);
     const [selectedBossPrefixes, setSelectedBossPrefixes] = useState<string[] | undefined>();
-    const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes;
+    const effectiveBossPrefixes = selectedBossPrefixes ?? availableBossPrefixes.map(option => option.key);
 
     // --- leaderboard sizes ---
     const { viewPreferences } = useContext(StoreContext);
@@ -433,6 +433,7 @@ export const LeaderboardTab = ({
                 <PrefixFilter
                     label="Boss"
                     available={availableBossPrefixes}
+                    getKey={option => option.key}
                     selected={effectiveBossPrefixes}
                     onChange={setSelectedBossPrefixes}
                     iconFor={bossIconFor}
