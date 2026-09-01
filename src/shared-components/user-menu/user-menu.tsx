@@ -1,4 +1,5 @@
 import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DownloadIcon from '@mui/icons-material/Download';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import LoginIcon from '@mui/icons-material/Login';
@@ -30,6 +31,7 @@ import { TacticusIntegrationDialog } from '@/fsd/3-features/tacticus-integration
 
 import { LoginUserDialog } from './login-user-dialog';
 import { OverrideDataDialog } from './override-data-dialog';
+import { PurgeUserDataDialog } from './purge-user-data-dialog';
 import { RegisterUserDialog } from './register-user-dialog';
 import { RestoreBackupDialog } from './restore-backup-dialog';
 
@@ -77,6 +79,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
     const [debugMode, setDebugMode] = useState(() => localStorage.getItem('debugMode') === 'true');
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
+    const [showPurgeUserData, setShowPurgeUserData] = useState(false);
     const userMenuControls = usePopUpControls();
     const navigate = useNavigate();
     const location = useLocation();
@@ -266,15 +269,26 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                 anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}>
                 {/* Auth */}
                 {isAuthenticated ? (
-                    <button
-                        className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-none bg-transparent px-2 py-1.5 text-left text-[13px] text-(--danger) transition-colors hover:bg-(--danger)/14 hover:text-red-500 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset dark:hover:text-red-400"
-                        onClick={() => {
-                            logout();
-                            close();
-                        }}>
-                        <LogoutIcon className={iconClass} />
-                        <span>Logout</span>
-                    </button>
+                    <>
+                        <button
+                            className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-none bg-transparent px-2 py-1.5 text-left text-[13px] text-(--danger) transition-colors hover:bg-(--danger)/14 hover:text-red-500 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset dark:hover:text-red-400"
+                            onClick={() => {
+                                logout();
+                                close();
+                            }}>
+                            <LogoutIcon className={iconClass} />
+                            <span>Logout</span>
+                        </button>
+                        <button
+                            className="flex w-full cursor-pointer items-center gap-2.5 rounded-lg border-none bg-transparent px-2 py-1.5 text-left text-[13px] text-(--danger) transition-colors hover:bg-(--danger)/14 hover:text-red-500 focus-visible:ring-2 focus-visible:ring-(--ring) focus-visible:ring-inset dark:hover:text-red-400"
+                            onClick={() => {
+                                setShowPurgeUserData(true);
+                                close();
+                            }}>
+                            <DeleteForeverIcon className={iconClass} />
+                            <span>Delete account</span>
+                        </button>
+                    </>
                 ) : (
                     <>
                         <button
@@ -430,6 +444,7 @@ export const UserMenu = ({ compact = false }: UserMenuProps) => {
                     setShowAdminTools(false);
                 }}
             />
+            <PurgeUserDataDialog isOpen={showPurgeUserData} onClose={() => setShowPurgeUserData(false)} />
         </div>
     );
 };
