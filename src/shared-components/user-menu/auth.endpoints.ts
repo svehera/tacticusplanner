@@ -27,3 +27,6 @@ export const loginUser = async (username: string, password: string) => {
     if (error) throw error;
     return { data, error: undefined };
 };
+
+/** Permanently removes the currently authenticated user's account and owned server data. */
+export const purgeUserData = () => makeApiCall<void>('DELETE', 'users/me');

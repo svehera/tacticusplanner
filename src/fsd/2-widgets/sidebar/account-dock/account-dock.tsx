@@ -1,5 +1,6 @@
 /* eslint-disable import-x/no-internal-modules */
 import { Computer as ComputerIcon, Smartphone as PhoneIcon } from '@mui/icons-material';
+import DeleteForeverIcon from '@mui/icons-material/DeleteForever';
 import DownloadIcon from '@mui/icons-material/Download';
 import GroupWorkIcon from '@mui/icons-material/GroupWork';
 import LoginIcon from '@mui/icons-material/Login';
@@ -23,6 +24,7 @@ import { convertData, PersonalDataLocalStorage } from 'src/services';
 import { AdminToolsDialog } from 'src/shared-components/user-menu/admin-tools-dialog';
 import { LoginUserDialog } from 'src/shared-components/user-menu/login-user-dialog';
 import { OverrideDataDialog } from 'src/shared-components/user-menu/override-data-dialog';
+import { PurgeUserDataDialog } from 'src/shared-components/user-menu/purge-user-data-dialog';
 import { RegisterUserDialog } from 'src/shared-components/user-menu/register-user-dialog';
 import { RestoreBackupDialog } from 'src/shared-components/user-menu/restore-backup-dialog';
 
@@ -115,6 +117,7 @@ export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
     const [showLoginUser, setShowLoginUser] = useState(false);
     const [showRestoreBackup, setShowRestoreBackup] = useState(false);
     const [showOverrideDataWarning, setShowOverrideDataWarning] = useState(false);
+    const [showPurgeUserData, setShowPurgeUserData] = useState(false);
 
     const lastSyncSec = store.gameModeTokens?.tokens?.lastSetAtSecondsUtc;
     const syncMeta = getSyncMeta(lastSyncSec);
@@ -384,16 +387,28 @@ export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
             {/* Auth */}
             <hr className="mx-2 my-1 border-(--border)" />
             {isAuthenticated ? (
-                <button
-                    className={dangerItemClass}
-                    role="menuitem"
-                    onClick={() => {
-                        logout();
-                        closeMenu();
-                    }}>
-                    <LogoutIcon className="flex-shrink-0 !text-[16px]" />
-                    <span>Logout</span>
-                </button>
+                <>
+                    <button
+                        className={dangerItemClass}
+                        role="menuitem"
+                        onClick={() => {
+                            logout();
+                            closeMenu();
+                        }}>
+                        <LogoutIcon className={iconClass} />
+                        <span>Logout</span>
+                    </button>
+                    <button
+                        className={dangerItemClass}
+                        role="menuitem"
+                        onClick={() => {
+                            setShowPurgeUserData(true);
+                            closeMenu();
+                        }}>
+                        <DeleteForeverIcon className={iconClass} />
+                        <span>Delete account</span>
+                    </button>
+                </>
             ) : (
                 <>
                     <button
@@ -521,6 +536,7 @@ export const AccountDock = ({ collapsed = false }: AccountDockProps) => {
                 }}
             />
             <AdminToolsDialog isOpen={showAdminTools} onClose={() => setShowAdminTools(false)} />
+            <PurgeUserDataDialog isOpen={showPurgeUserData} onClose={() => setShowPurgeUserData(false)} />
         </>
     );
 };
