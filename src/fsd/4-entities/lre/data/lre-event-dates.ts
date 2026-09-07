@@ -30,8 +30,8 @@ export const lreEventDates: Record<number, ILreEventDates> = {
     },
     [LegendaryEventEnum.Uthar]: {
         finished: false,
-        nextEventDate: 'March 08, 2026',
-        nextEventDateUtc: 'Sun, 08 March 2026 00:00:00 GMT',
+        nextEventDate: 'October 04, 2026',
+        nextEventDateUtc: 'Sun, 04 October 2026 00:00:00 GMT',
     },
     [LegendaryEventEnum.Lysander]: {
         finished: false,
