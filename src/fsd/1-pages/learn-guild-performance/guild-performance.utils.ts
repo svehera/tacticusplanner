@@ -160,17 +160,48 @@ export function sortTokenEntries(entries: GuildTokenEntryWithDisplay[]): GuildTo
     });
 }
 
-export function sortBombEntries(entries: GuildTokenEntryWithDisplay[]): GuildTokenEntryWithDisplay[] {
-    // "has bomb" (bombAvailableAtUtc null = bomb ready) sorts above "no bomb"
+export type TokenSortColumn = 'tokens' | 'nextToken' | 'bomb' | 'bombReady';
+export type SortDirection = 'asc' | 'desc';
+
+/**
+ * Single-column sort for the roster readiness table. Rows with no readiness data
+ * (`tokens == undefined`) always sink to the bottom regardless of direction; equal values
+ * tie-break by display name A→Z. `?? 0` on the time columns matches `sortTokenEntries`'
+ * treatment of "Full" / "ready now" as zero wait.
+ */
+export function sortTokenEntriesBy(
+    entries: GuildTokenEntryWithDisplay[],
+    column: TokenSortColumn,
+    direction: SortDirection
+): GuildTokenEntryWithDisplay[] {
+    const sign = direction === 'asc' ? 1 : -1;
     return entries.toSorted((a, b) => {
-        const aHas = a.tokens != undefined && a.bombAvailableAtUtc == undefined ? 1 : 0;
-        const bHas = b.tokens != undefined && b.bombAvailableAtUtc == undefined ? 1 : 0;
-        if (bHas !== aHas) return bHas - aHas;
+        const aHas = a.tokens != undefined;
+        const bHas = b.tokens != undefined;
+        if (aHas !== bHas) return aHas ? -1 : 1;
 
-        const aNext = a.bombAvailableAtUtc ?? 0;
-        const bNext = b.bombAvailableAtUtc ?? 0;
-        if (bNext !== aNext) return bNext - aNext;
+        let cmp = 0;
+        switch (column) {
+            case 'tokens': {
+                cmp = (a.tokens ?? 0) - (b.tokens ?? 0);
+                break;
+            }
+            case 'nextToken': {
+                cmp = (a.nextTokenAtUtc ?? 0) - (b.nextTokenAtUtc ?? 0);
+                break;
+            }
+            case 'bombReady': {
+                cmp = (a.bombAvailableAtUtc ?? 0) - (b.bombAvailableAtUtc ?? 0);
+                break;
+            }
+            case 'bomb': {
+                // A null cooldown means the bomb is ready now, which sorts as the higher value.
+                cmp = (a.bombAvailableAtUtc == undefined ? 1 : 0) - (b.bombAvailableAtUtc == undefined ? 1 : 0);
+                break;
+            }
+        }
 
+        if (cmp !== 0) return sign * cmp;
         return a.displayName.localeCompare(b.displayName);
     });
 }

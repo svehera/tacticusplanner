@@ -16,7 +16,9 @@ import {
     getBossPrefix,
     getBossSlotKey,
     resolveBossOverviewDisplay,
+    sortTokenEntriesBy,
     unitDisplayLabel,
+    type GuildTokenEntryWithDisplay,
 } from './guild-performance.utils';
 
 // Bosses rotate between ladder positions as Snowprint updates the season config, so these are
@@ -191,5 +193,76 @@ describe('bossIconFor', () => {
         // shown alongside it) needs to disambiguate them.
         expect(leviathan.name).toBe('Hive Tyrant');
         expect(kronos.name).toBe('Hive Tyrant');
+    });
+});
+
+describe('sortTokenEntriesBy', () => {
+    const ann: GuildTokenEntryWithDisplay = {
+        userId: 'ann',
+        displayName: 'Ann',
+        tokens: 1,
+        nextTokenAtUtc: 300,
+        bombAvailableAtUtc: 900, // bomb on cooldown → "used"
+    };
+    const bob: GuildTokenEntryWithDisplay = {
+        userId: 'bob',
+        displayName: 'Bob',
+        tokens: 3,
+        nextTokenAtUtc: undefined, // "Full"
+        bombAvailableAtUtc: undefined, // bomb ready now
+    };
+    const cid: GuildTokenEntryWithDisplay = {
+        userId: 'cid',
+        displayName: 'Cid',
+        tokens: 1,
+        nextTokenAtUtc: 100,
+        bombAvailableAtUtc: undefined, // bomb ready now
+    };
+    const dan: GuildTokenEntryWithDisplay = {
+        userId: 'dan',
+        displayName: 'Dan',
+        tokens: undefined, // no readiness data at all
+        nextTokenAtUtc: undefined,
+        bombAvailableAtUtc: undefined,
+    };
+    const all = [dan, cid, bob, ann];
+    const order = (column: 'tokens' | 'nextToken' | 'bomb' | 'bombReady', direction: 'asc' | 'desc') =>
+        sortTokenEntriesBy(all, column, direction).map(entry => entry.displayName);
+
+    it('sorts by token count ascending, no-data rows last, ties broken by name A→Z', () => {
+        expect(order('tokens', 'asc')).toEqual(['Ann', 'Cid', 'Bob', 'Dan']);
+    });
+
+    it('sorts by token count descending, no-data rows still last, ties still A→Z', () => {
+        expect(order('tokens', 'desc')).toEqual(['Bob', 'Ann', 'Cid', 'Dan']);
+    });
+
+    it('sorts by next-token time, treating "Full" (undefined) as zero wait', () => {
+        expect(order('nextToken', 'asc')).toEqual(['Bob', 'Cid', 'Ann', 'Dan']);
+        expect(order('nextToken', 'desc')).toEqual(['Ann', 'Cid', 'Bob', 'Dan']);
+    });
+
+    it('sorts by bomb-ready time, treating ready-now (undefined) as zero', () => {
+        expect(order('bombReady', 'asc')).toEqual(['Bob', 'Cid', 'Ann', 'Dan']);
+        expect(order('bombReady', 'desc')).toEqual(['Ann', 'Bob', 'Cid', 'Dan']);
+    });
+
+    it('sorts by bomb readiness — used before ready ascending, ready before used descending', () => {
+        expect(order('bomb', 'asc')).toEqual(['Ann', 'Bob', 'Cid', 'Dan']);
+        expect(order('bomb', 'desc')).toEqual(['Bob', 'Cid', 'Ann', 'Dan']);
+    });
+
+    it('keeps rows with no readiness data at the bottom for every column and direction', () => {
+        for (const column of ['tokens', 'nextToken', 'bomb', 'bombReady'] as const) {
+            for (const direction of ['asc', 'desc'] as const) {
+                expect(order(column, direction).at(-1)).toBe('Dan');
+            }
+        }
+    });
+
+    it('does not mutate its input', () => {
+        const input = [...all];
+        sortTokenEntriesBy(input, 'tokens', 'desc');
+        expect(input).toEqual(all);
     });
 });

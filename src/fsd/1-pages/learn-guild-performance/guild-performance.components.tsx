@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
-import { Camera, ChevronDown, Minus, Plus } from 'lucide-react';
+import { Camera, ChevronDown, ChevronsUpDown, ChevronUp, Minus, Plus } from 'lucide-react';
 import { type ReactNode } from 'react';
 
 import { CAPTURE_EXPAND_ATTRIBUTE, CAPTURE_IGNORE_ATTRIBUTE, cn } from '@/fsd/5-shared/lib';
@@ -240,10 +240,14 @@ export const TableCardHeader = ({ children, className }: { children: ReactNode; 
     </div>
 );
 
-export type ColumnLabel = string | { text: string; align?: 'center' | 'right'; span?: 2 | 3 };
+export type ColumnLabel = string | { text: string; align?: 'center' | 'right'; span?: 2 | 3; sortKey?: string };
+
+export type ColumnSort = { key: string; direction: 'asc' | 'desc' };
 
 /** Literal so Tailwind's JIT can see them; `span` values are constrained to match. */
 const COL_SPAN = { 2: 'col-span-2', 3: 'col-span-3' } as const;
+
+const ARIA_SORT = { asc: 'ascending', desc: 'descending' } as const;
 
 /**
  * Header row for a CSS-grid table. Every table on this page gets one — several had none.
@@ -253,7 +257,19 @@ const COL_SPAN = { 2: 'col-span-2', 3: 'col-span-3' } as const;
  * from a real table has to be restored with roles. Every consumer must therefore sit inside an
  * element with `role="table"`.
  */
-export const ColumnHeader = ({ cols, labels }: { cols: string; labels: ColumnLabel[] }) => (
+export const ColumnHeader = ({
+    cols,
+    labels,
+    sort,
+    onSort,
+}: {
+    cols: string;
+    labels: ColumnLabel[];
+    /** Active sort, when the table is sortable. */
+    sort?: ColumnSort;
+    /** Provided to make columns whose label carries a `sortKey` clickable. */
+    onSort?: (key: string) => void;
+}) => (
     <div
         role="row"
         className={cn(
@@ -263,11 +279,15 @@ export const ColumnHeader = ({ cols, labels }: { cols: string; labels: ColumnLab
             'items-center gap-x-2.5 border-b border-(--border) bg-(--soft) px-2.5 py-1.5 [&>*]:min-w-0'
         )}>
         {labels.map((label, index) => {
-            const { text, align, span } = typeof label === 'string' ? { text: label } : label;
+            const { text, align, span, sortKey } = typeof label === 'string' ? { text: label } : label;
+            const sortable = sortKey !== undefined && onSort !== undefined;
+            const activeDirection = sortable && sort && sort.key === sortKey ? sort.direction : undefined;
+            const ariaSort = sortable ? (activeDirection ? ARIA_SORT[activeDirection] : 'none') : undefined;
             return (
                 <span
                     role="columnheader"
                     key={index}
+                    aria-sort={ariaSort}
                     className={cn(
                         'truncate text-xs font-bold tracking-widest text-(--soft-fg) uppercase',
                         align === 'right' && 'text-right',
@@ -276,7 +296,26 @@ export const ColumnHeader = ({ cols, labels }: { cols: string; labels: ColumnLab
                         // a single label rather than each getting an unreadable, clipped one.
                         span !== undefined && COL_SPAN[span]
                     )}>
-                    {text}
+                    {sortKey !== undefined && onSort !== undefined ? (
+                        <button
+                            type="button"
+                            onClick={() => onSort(sortKey)}
+                            className={cn(
+                                'inline-flex max-w-full cursor-pointer items-center gap-0.5 hover:text-(--fg)',
+                                activeDirection !== undefined && 'text-(--fg)'
+                            )}>
+                            <span className="truncate">{text}</span>
+                            {activeDirection === 'asc' ? (
+                                <ChevronUp className="size-3 shrink-0" aria-hidden />
+                            ) : activeDirection === 'desc' ? (
+                                <ChevronDown className="size-3 shrink-0" aria-hidden />
+                            ) : (
+                                <ChevronsUpDown className="size-3 shrink-0 opacity-40" aria-hidden />
+                            )}
+                        </button>
+                    ) : (
+                        text
+                    )}
                 </span>
             );
         })}
@@ -407,6 +446,15 @@ const RARITY_RING_CLASS: Record<Rarity, string> = {
 };
 
 /**
+ * The rarity ring around a boss/prime portrait. `inline-flex items-center justify-center` is
+ * load-bearing, not decoration: the child (`UnitShardIcon`) is `inline-block`, so without a flex
+ * context this span's box is the line box — taller than wide from the baseline strut — and
+ * `rounded-full` then paints an ellipse with the art sitting high. Same fix as `guild-performance.styles.ts`.
+ */
+const rarityRingClass = (rarity: Rarity) =>
+    `inline-flex items-center justify-center rounded-full ring-2 ${RARITY_RING_CLASS[rarity]}`;
+
+/**
  * Portrait toggles for a list of boss/prime options. Generic over the option type: bosses pass a
  * `BossFilterOption` (keyed by its `key`, distinct per boss slot), primes pass their bare unitId
  * string (keyed by itself).
@@ -444,7 +492,7 @@ export const PrefixFilter = <T,>({
                 const isActive = selected.includes(key);
                 const { icon, name } = iconFor(option);
                 const rarity = getRarity?.(option);
-                const ringClass = rarity === undefined ? undefined : `rounded-full ring-2 ${RARITY_RING_CLASS[rarity]}`;
+                const ringClass = rarity === undefined ? undefined : rarityRingClass(rarity);
                 return (
                     <button
                         key={key}
@@ -534,7 +582,7 @@ export const EncounterIcon = ({
     if (unitId === undefined) return <div style={{ width: size, height: size }} />;
 
     const label = tooltip ?? unitDisplayLabel(unitId);
-    const ringClass = rarity === undefined ? undefined : `rounded-full ring-2 ${RARITY_RING_CLASS[rarity]}`;
+    const ringClass = rarity === undefined ? undefined : rarityRingClass(rarity);
 
     const mappedIcon = unitRoundIconMap[unitId];
     if (mappedIcon !== undefined) {

@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 /* eslint-disable boundaries/element-types -- cross-page import for shared guild data */
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { obfuscateUserId } from '@/fsd/5-shared/lib';
@@ -39,8 +39,10 @@ import {
     formatTime,
     resolveBossOverviewDisplay,
     sortTokenEntries,
+    sortTokenEntriesBy,
     type BossDisplayHp,
     type PrimeDisplay,
+    type TokenSortColumn,
 } from '../guild-performance.utils';
 
 /** `boss` renders a thicker bar than `prime`, so the boss reads as the dominant encounter. */
@@ -273,7 +275,14 @@ const MAX_TOKENS = 3;
  */
 const ROSTER_COLS =
     'grid-cols-[minmax(150px,1.7fr)_minmax(86px,0.9fr)_minmax(92px,1fr)_minmax(74px,0.8fr)_minmax(92px,1fr)_minmax(76px,0.9fr)]';
-const ROSTER_LABELS: ColumnLabel[] = ['Player', 'Tokens', 'Next token', 'Bomb', 'Bomb ready', 'Teams'];
+const ROSTER_LABELS: ColumnLabel[] = [
+    'Player',
+    { text: 'Tokens', sortKey: 'tokens' },
+    { text: 'Next token', sortKey: 'nextToken' },
+    { text: 'Bomb', sortKey: 'bomb' },
+    { text: 'Bomb ready', sortKey: 'bombReady' },
+    'Teams',
+];
 
 /**
  * Three token icons plus `n/3`. Colour is never the only signal — the count is always spelled out.
@@ -319,23 +328,36 @@ const RosterReadinessTable = ({
     raidCompsMap: Map<string, RaidComp[]> | undefined;
     selectedComp: RaidComp | undefined;
 }) => {
-    const rows = entries.map(entry => ({
-        userId: entry.userId,
-        displayName: names.get(entry.userId) ?? entry.name ?? obfuscateUserId(entry.userId),
-        tokens: entry.tokens,
-        nextTokenAtUtc: entry.nextTokenAtUtc,
-        bombAvailableAtUtc: entry.bombAvailableAtUtc,
-    }));
-    const filtered =
-        selectedComp === undefined
-            ? rows
-            : rows.filter(row => (raidCompsMap?.get(row.userId) ?? []).includes(selectedComp));
-    const sorted = sortTokenEntries(filtered);
+    // undefined → the default composite order (`sortTokenEntries`). Clicking a header
+    // cycles asc → desc → back to the default.
+    const [sort, setSort] = useState<{ key: TokenSortColumn; direction: 'asc' | 'desc' } | undefined>();
+    const toggleSort = (key: string) =>
+        setSort(current => {
+            if (current?.key === key) {
+                return current.direction === 'asc' ? { key: current.key, direction: 'desc' } : undefined;
+            }
+            return { key: key as TokenSortColumn, direction: 'asc' };
+        });
+
+    const sorted = useMemo(() => {
+        const rows = entries.map(entry => ({
+            userId: entry.userId,
+            displayName: names.get(entry.userId) ?? entry.name ?? obfuscateUserId(entry.userId),
+            tokens: entry.tokens,
+            nextTokenAtUtc: entry.nextTokenAtUtc,
+            bombAvailableAtUtc: entry.bombAvailableAtUtc,
+        }));
+        const filtered =
+            selectedComp === undefined
+                ? rows
+                : rows.filter(row => (raidCompsMap?.get(row.userId) ?? []).includes(selectedComp));
+        return sort ? sortTokenEntriesBy(filtered, sort.key, sort.direction) : sortTokenEntries(filtered);
+    }, [entries, names, raidCompsMap, selectedComp, sort]);
 
     return (
         <ScrollX minWidth={620}>
             <div role="table" aria-label="Roster readiness">
-                <ColumnHeader cols={ROSTER_COLS} labels={ROSTER_LABELS} />
+                <ColumnHeader cols={ROSTER_COLS} labels={ROSTER_LABELS} sort={sort} onSort={toggleSort} />
                 {sorted.map(row => {
                     const hasData = row.tokens != undefined;
                     // A null bombAvailableAtUtc means the bomb is off cooldown, i.e. ready now.

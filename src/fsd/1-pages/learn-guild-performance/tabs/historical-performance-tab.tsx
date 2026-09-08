@@ -1,6 +1,6 @@
 /* eslint-disable import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure */
 import { useTheme } from '@mui/material';
-import { ResponsiveLine } from '@nivo/line';
+import { ResponsiveLine, type LineCustomSvgLayerProps } from '@nivo/line';
 import { type PartialTheme } from '@nivo/theming';
 import { useMemo, useState } from 'react';
 
@@ -28,6 +28,8 @@ const CHART_THEME: PartialTheme = {
     },
     grid: { line: { stroke: 'var(--hairline)' } },
 };
+
+type ChartSeries = { id: string; data: { x: number; y: number }[] };
 
 const LegendLine = ({ className, dashed, label }: { className: string; dashed?: boolean; label: string }) => (
     <span className="flex items-center gap-1.5">
@@ -106,6 +108,33 @@ export const HistoricalPerformanceTab = ({
     const [hoveredId, setHoveredId] = useState<string | undefined>();
     const activeId = hoveredId ?? selectedPlayerId;
 
+    // Replaces nivo's built-in `lines` layer: paints the active line last (on top) and
+    // thicker, and fades the rest while any line is active.
+    // eslint-disable-next-line react/no-unstable-nested-components -- closes over activeId; mirrors the tooltip layer below
+    const HighlightingLines = ({ series, lineGenerator }: LineCustomSvgLayerProps<ChartSeries>) => {
+        const ordered = series.toSorted(
+            (a, b) => Number(String(a.id) === activeId) - Number(String(b.id) === activeId)
+        );
+        return (
+            <g>
+                {ordered.map(serie => {
+                    const isActive = String(serie.id) === activeId;
+                    const dimmed = activeId !== undefined && !isActive;
+                    return (
+                        <path
+                            key={serie.id}
+                            d={lineGenerator(serie.data.map(d => d.position)) ?? undefined}
+                            fill="none"
+                            stroke={serie.color}
+                            strokeWidth={isActive ? 3 : 1.5}
+                            strokeOpacity={dimmed ? 0.2 : 1}
+                        />
+                    );
+                })}
+            </g>
+        );
+    };
+
     const allSeasons = useMemo(
         () => [...new Set(lines.flatMap(l => l.points.map(p => p.season)))].toSorted((a, b) => a - b),
         [lines]
@@ -156,7 +185,18 @@ export const HistoricalPerformanceTab = ({
                     yScale={{ type: 'linear', min: 0, max: 'auto' }}
                     curve="monotoneX"
                     enablePoints={false}
-                    lineWidth={1.5}
+                    layers={[
+                        'grid',
+                        'markers',
+                        'axes',
+                        'areas',
+                        'crosshair',
+                        HighlightingLines,
+                        'points',
+                        'slices',
+                        'mesh',
+                        'legends',
+                    ]}
                     useMesh
                     colors={(serie: { id: string | number }) =>
                         String(serie.id) === activeId ? activeLineColor : fadedLineColor
