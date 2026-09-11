@@ -15,6 +15,8 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 import { CharactersViewContext } from '../characters-view.context';
+import { CharactersService } from '../characters.service';
+import { getRankUpTarget } from '../functions/ready-to-rank-up';
 
 export const CharactersGrid = ({
     characters,
@@ -22,12 +24,14 @@ export const CharactersGrid = ({
     onAvailableCharacterClick,
     onLockedCharacterClick,
     onlyBlocked,
+    showRankUpTarget,
 }: {
     characters: IUnit[];
     blockedCharacters?: string[];
     onAvailableCharacterClick?: (character: IUnit) => void;
     onLockedCharacterClick?: (character: IUnit) => void;
     onlyBlocked?: boolean;
+    showRankUpTarget?: boolean;
 }) => {
     const viewContext = useContext(CharactersViewContext);
     const unlockedCharacters = characters
@@ -39,7 +43,7 @@ export const CharactersGrid = ({
                     key={unit.snowprintId}
                     onClick={() => onAvailableCharacterClick?.(unit)}
                     className="flex-shrink-0 cursor-pointer rounded-md transition-shadow duration-200 hover:ring-2 hover:ring-(--primary)"
-                    title={`Select ${unit.name || 'Unit'}`}>
+                    title={`Select ${unit.name || 'Unit'} (${CharactersService.getDisplayPower(unit).toLocaleString()} power)`}>
                     <RosterSnapshotCharacter
                         key={unit.snowprintId}
                         char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
@@ -73,6 +77,7 @@ export const CharactersGrid = ({
                         }
                         showTooltip={true}
                         isDisabled={false}
+                        targetRank={showRankUpTarget && isCharacter ? getRankUpTarget(unit) : undefined}
                     />
                 </div>
             );

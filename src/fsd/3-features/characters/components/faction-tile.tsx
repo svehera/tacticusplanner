@@ -18,13 +18,17 @@ import { RosterSnapshotsService } from '@/fsd/1-pages/input-roster-snapshots/ros
 
 import { RosterSnapshotShowVariableSettings } from '../../view-settings/model';
 import { IFaction } from '../characters.models';
+import { CharactersService } from '../characters.service';
+import { getRankUpTarget } from '../functions/ready-to-rank-up';
 
 export const FactionsTile = ({
     faction,
     onCharacterClick,
+    showRankUpTarget,
 }: {
     faction: IFaction;
     onCharacterClick?: (character: IUnit) => void;
+    showRankUpTarget?: boolean;
 }) => {
     const viewContext = useContext(CharactersViewContext);
     const factionPower = numberToThousandsString(faction.power);
@@ -93,7 +97,7 @@ export const FactionsTile = ({
                             key={unit.snowprintId}
                             onClick={() => onCharacterClick?.(unit)}
                             className="shrink-0 cursor-pointer rounded-md transition-shadow duration-200 hover:ring-2 hover:ring-(--primary)"
-                            title={`Select ${unit.name || 'Unit'}`}>
+                            title={`Select ${unit.name || 'Unit'} (${CharactersService.getDisplayPower(unit).toLocaleString()} power)`}>
                             <RosterSnapshotCharacter
                                 char={isCharacter ? RosterSnapshotsService.snapshotCharacter(unit) : undefined}
                                 charData={isCharacter ? unit : undefined}
@@ -126,6 +130,7 @@ export const FactionsTile = ({
                                 }
                                 showTooltip={true}
                                 isDisabled={isCharacter ? unit.rank === Rank.Locked : !unit.unlocked}
+                                targetRank={showRankUpTarget && isCharacter ? getRankUpTarget(unit) : undefined}
                             />
                         </div>
                     );

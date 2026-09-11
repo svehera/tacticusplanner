@@ -2,10 +2,14 @@
 import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IPersonalGoal } from 'src/models/interfaces';
 
+import { filterMap } from '@/fsd/5-shared/lib';
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
+import { ICharacter2 } from '@/fsd/4-entities/character';
 import type { GoalCategory, RankStep } from '@/fsd/4-entities/goal';
 import { IUnit } from '@/fsd/4-entities/unit';
+
+import { getRankUpTarget } from '@/fsd/3-features/characters/functions/ready-to-rank-up';
 
 export type { GoalCategory, RankStep } from '@/fsd/4-entities/goal';
 export type IncrementalGoalMode = 'milestones' | 'full' | 'macro';
@@ -23,6 +27,77 @@ export type BulkUnitEntry = {
     preFarmLegendaryMythic: boolean;
     useIncrementalGoals: boolean;
     incrementalGoalMode: IncrementalGoalMode;
+};
+
+export const createBulkUnitEntry = (): BulkUnitEntry => ({
+    unit: undefined,
+    rank: Rank.Stone1,
+    rarity: Rarity.Common,
+    stars: 1,
+    activeAbilityLevel: 1,
+    passiveAbilityLevel: 1,
+    unlockMow: false,
+    preFarmLegendaryMythic: false,
+    useIncrementalGoals: false,
+    incrementalGoalMode: 'milestones',
+});
+
+export const getBulkUnitEntryFromUnit = (unit: IUnit | undefined): BulkUnitEntry => {
+    if (!unit) {
+        return createBulkUnitEntry();
+    }
+
+    const activeAbilityLevel = 'activeAbilityLevel' in unit ? unit.activeAbilityLevel : unit.primaryAbilityLevel;
+    const passiveAbilityLevel = 'passiveAbilityLevel' in unit ? unit.passiveAbilityLevel : unit.secondaryAbilityLevel;
+    const rank = 'rank' in unit ? unit.rank : Rank.Locked;
+
+    return {
+        unit,
+        rank,
+        rarity: unit.rarity ?? Rarity.Common,
+        stars: unit.stars ?? 1,
+        activeAbilityLevel,
+        passiveAbilityLevel,
+        unlockMow: false,
+        preFarmLegendaryMythic: false,
+        useIncrementalGoals: false,
+        incrementalGoalMode: 'milestones',
+    };
+};
+
+export interface ReadyToRankUpOptions {
+    raiseActiveAbility: boolean;
+    raisePassiveAbility: boolean;
+    minRank: Rank;
+    maxRank: Rank;
+}
+
+/**
+ * Stages one bulk-unit entry per ready-to-rank-up character whose target rank falls within
+ * `[minRank, maxRank]`, sorted descending by target rank. Characters already staged
+ * (`existingUnitIds`) or outside the rank range are skipped entirely.
+ */
+export const buildReadyToRankUpEntries = (
+    characters: ICharacter2[],
+    existingUnitIds: ReadonlySet<string | undefined>,
+    options: ReadyToRankUpOptions
+): BulkUnitEntry[] => {
+    const candidates = filterMap(characters, character => {
+        if (existingUnitIds.has(character.snowprintId)) return;
+        const target = getRankUpTarget(character);
+        if (target === undefined || target < options.minRank || target > options.maxRank) return;
+        return { unit: character, target };
+    }).toSorted((first, second) => second.target - first.target);
+
+    return candidates.map(({ unit, target }) => {
+        const entry = getBulkUnitEntryFromUnit(unit);
+        return {
+            ...entry,
+            rank: target,
+            activeAbilityLevel: options.raiseActiveAbility ? unit.level : entry.activeAbilityLevel,
+            passiveAbilityLevel: options.raisePassiveAbility ? unit.level : entry.passiveAbilityLevel,
+        };
+    });
 };
 
 type PlannedGoalItem = { category: GoalCategory; unitIndex: number; goal: IPersonalGoal; rankSubOrder: number };

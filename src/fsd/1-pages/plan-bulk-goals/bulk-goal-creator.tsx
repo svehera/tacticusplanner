@@ -30,6 +30,7 @@ import { AbilitiesChangeText, AscendChangeArrow, RankChangeArrow } from '@/fsd/4
 import { MowsService } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
 
+import { getRankUpTarget } from '@/fsd/3-features/characters/functions/ready-to-rank-up';
 import { GoalSummaryTable } from '@/fsd/3-features/goals';
 import { RosterSnapshotShowVariableSettings } from '@/fsd/3-features/view-settings/model';
 
@@ -44,30 +45,22 @@ import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-
 import { ITeam2 } from '../plan-teams2/models';
 import { TeamFlow } from '../plan-teams2/team-flow';
 
+import { AddReadyToRankUpDialog } from './add-ready-to-rank-up-dialog';
 import { BulkGoalCreatorUnitCard } from './bulk-goal-creator-unit-card';
 import {
     buildBulkPlannedGoals,
+    buildReadyToRankUpEntries,
+    createBulkUnitEntry,
     getBulkRankGoalPlans,
+    getBulkUnitEntryFromUnit,
     getRankGoalSubOrder,
     getTierValue,
     type CharacterPriorityMode,
     type GoalCategory,
     type IncrementalGoalMode,
     type RankStep,
+    type ReadyToRankUpOptions,
 } from './bulk-goal-creator.service';
-
-const createBulkUnitEntry = () => ({
-    unit: undefined,
-    rank: Rank.Stone1,
-    rarity: Rarity.Common,
-    stars: 1,
-    activeAbilityLevel: 1,
-    passiveAbilityLevel: 1,
-    unlockMow: false,
-    preFarmLegendaryMythic: false,
-    useIncrementalGoals: false,
-    incrementalGoalMode: 'milestones' as IncrementalGoalMode,
-});
 
 const rankValues = ALL_RANK_VALUES;
 const allStarValues = ALL_STAR_VALUES;
@@ -95,29 +88,6 @@ const enforceMinimums = <
     ...entry,
     ...enforceUnitThresholdMinimums(entry),
 });
-
-const getBulkUnitEntryFromUnit = (unit: IUnit | undefined) => {
-    if (!unit) {
-        return createBulkUnitEntry();
-    }
-
-    const activeAbilityLevel = 'activeAbilityLevel' in unit ? unit.activeAbilityLevel : unit.primaryAbilityLevel;
-    const passiveAbilityLevel = 'passiveAbilityLevel' in unit ? unit.passiveAbilityLevel : unit.secondaryAbilityLevel;
-    const rank = 'rank' in unit ? unit.rank : Rank.Locked;
-
-    return {
-        unit,
-        rank,
-        rarity: unit.rarity ?? Rarity.Common,
-        stars: unit.stars ?? 1,
-        activeAbilityLevel,
-        passiveAbilityLevel,
-        unlockMow: false,
-        preFarmLegendaryMythic: false,
-        useIncrementalGoals: false,
-        incrementalGoalMode: 'milestones' as IncrementalGoalMode,
-    };
-};
 
 export const BulkGoalCreator = () => {
     const { characters: charactersDefault, goals, mows, teams2 } = useContext(StoreContext);
@@ -235,6 +205,22 @@ export const BulkGoalCreator = () => {
             }
         },
         [bulkUnits, resolvedCharacters, resolvedMows]
+    );
+
+    const [rankUpDialogOpen, setRankUpDialogOpen] = useState(false);
+
+    const readyToRankUpTargets = useMemo(() => filterMap(resolvedCharacters, getRankUpTarget), [resolvedCharacters]);
+
+    const addReadyToRankUpUnits = useCallback(
+        (options: ReadyToRankUpOptions) => {
+            const existingIds = new Set(bulkUnits.map(entry => entry.unit?.snowprintId));
+            const newEntries = buildReadyToRankUpEntries(resolvedCharacters, existingIds, options);
+
+            if (newEntries.length > 0) {
+                setBulkUnits(previous => [...previous, ...newEntries]);
+            }
+        },
+        [bulkUnits, resolvedCharacters]
     );
 
     const bulkTeamCharacters = useMemo(
@@ -545,6 +531,18 @@ export const BulkGoalCreator = () => {
                             </Menu>
                         </div>
                     )}
+                    {readyToRankUpTargets.length > 0 && (
+                        <div className="mr-4">
+                            <Button
+                                size="small"
+                                variant="outlined"
+                                color="primary"
+                                onClick={() => setRankUpDialogOpen(true)}
+                                sx={{ textTransform: 'none' }}>
+                                Add Ready to Rank Up
+                            </Button>
+                        </div>
+                    )}
                     <div className="mr-4">
                         <Button
                             variant="contained"
@@ -556,6 +554,14 @@ export const BulkGoalCreator = () => {
                         </Button>
                     </div>
                 </div>
+                <AddReadyToRankUpDialog
+                    open={rankUpDialogOpen}
+                    targetRanks={readyToRankUpTargets}
+                    onClose={result => {
+                        setRankUpDialogOpen(false);
+                        if (result) addReadyToRankUpUnits(result);
+                    }}
+                />
                 <div className="mb-4 grid grid-cols-[repeat(auto-fill,minmax(300px,1fr))] gap-4">
                     {bulkUnits.map((entry, index) => (
                         <div key={index}>

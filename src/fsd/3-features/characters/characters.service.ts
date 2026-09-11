@@ -17,6 +17,12 @@ import { CharactersFilterBy } from '@/fsd/4-entities/character/characters-filter
 import { CharactersOrderBy } from '@/fsd/4-entities/character/characters-order-by.enum';
 import { IMow2 } from '@/fsd/4-entities/mow';
 import { IUnit } from '@/fsd/4-entities/unit';
+import {
+    getProjectedRankUpPower,
+    getRosterCharacterPower,
+    getRosterMowPower,
+    // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+} from '@/fsd/4-entities/unit/character-power';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { CharactersPowerService } from '@/fsd/4-entities/unit/characters-power.service';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
@@ -45,6 +51,8 @@ import { filterXenos } from './functions/filter-by-xenos';
 import { needToAscendCharacter } from './functions/need-to-ascend';
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { needToLevelCharacter } from './functions/need-to-level';
+// eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
+import { getRankUpTarget, readyToRankUp } from './functions/ready-to-rank-up';
 
 export class CharactersService {
     static filterUnits(
@@ -92,6 +100,9 @@ export class CharactersService {
             case CharactersFilterBy.MoW: {
                 return filteredCharactersByName.filter(character => isMow(character));
             }
+            case CharactersFilterBy.ReadyToRankUp: {
+                return filteredCharactersByName.filter(character => readyToRankUp(character));
+            }
             case CharactersFilterBy.None: {
                 return filteredCharactersByName;
             }
@@ -106,7 +117,42 @@ export class CharactersService {
         return this.getFaction(unit1) === this.getFaction(unit2);
     }
 
-    static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy): IUnit[] {
+    /**
+     * Current unit power using the accurate GameConfig-based formula (equipment, relics, traits,
+     * MoW ability/mythic-ability power and all) rather than the coarse rank/stars/ability-level
+     * heuristic. If the accurate formula throws (its bundled GameConfig slice predates a unit/item
+     * on the roster), falls back to the heuristic so callers never break.
+     */
+    static getDisplayPower(unit: IUnit): number {
+        try {
+            return isCharacter(unit) ? getRosterCharacterPower(unit) : getRosterMowPower(unit);
+        } catch (error) {
+            console.warn(`Accurate power failed for ${unit.snowprintId}; using heuristic`, error);
+            return CharactersPowerService.getCharacterPower(unit);
+        }
+    }
+
+    /**
+     * Character power for sorting/summing. When `useRankUpTargetPower` is set (the who-you-own
+     * "Ready to Rank Up" filter), characters are scored at the rank they could rank up into rather
+     * than their current rank. MoWs and characters with no rank-up target fall back to their
+     * normal (accurate) power. If the accurate formula throws (its bundled GameConfig slice
+     * predates a unit/item on the roster), fall back to the heuristic so the page still renders.
+     */
+    private static powerForUnit(unit: IUnit, useRankUpTargetPower: boolean): number {
+        if (!useRankUpTargetPower || !isCharacter(unit)) {
+            return CharactersService.getDisplayPower(unit);
+        }
+        try {
+            const target = getRankUpTarget(unit);
+            return target ? getProjectedRankUpPower(unit, target) : getRosterCharacterPower(unit);
+        } catch (error) {
+            console.warn(`Accurate rank-up power failed for ${unit.snowprintId}; using heuristic`, error);
+            return CharactersPowerService.getCharacterPower(unit);
+        }
+    }
+
+    static orderUnits(units: IUnit[], charactersOrderBy: CharactersOrderBy, useRankUpTargetPower = false): IUnit[] {
         switch (charactersOrderBy) {
             case CharactersOrderBy.CharacterValue: {
                 return orderBy(
@@ -117,7 +163,7 @@ export class CharactersService {
             }
             case CharactersOrderBy.CharacterPower: {
                 return orderBy(
-                    units.map(x => ({ ...x, characterPower: CharactersPowerService.getCharacterPower(x) })),
+                    units.map(x => ({ ...x, characterPower: CharactersService.powerForUnit(x, useRankUpTargetPower) })),
                     ['characterPower'],
                     ['desc']
                 );
@@ -196,7 +242,8 @@ export class CharactersService {
         units: IUnit[],
         charactersOrderBy: CharactersOrderBy,
         includeBsValue = true,
-        includePower = true
+        includePower = true,
+        useRankUpTargetPower = false
     ): IFaction[] {
         const factionCharacters = groupBy(units, 'faction');
 
@@ -214,7 +261,7 @@ export class CharactersService {
                         : 0,
                 power:
                     includePower || charactersOrderBy === CharactersOrderBy.FactionPower
-                        ? sum(units.map(character => CharactersPowerService.getCharacterPower(character)))
+                        ? sum(units.map(character => CharactersService.powerForUnit(character, useRankUpTargetPower)))
                         : 0,
                 unlockedCharacters: units.filter(character => isUnlocked(character)).length,
             };

@@ -99,6 +99,9 @@ export const CharactersViewControls = ({
             case CharactersFilterBy.MoW: {
                 return 'MoW only';
             }
+            case CharactersFilterBy.ReadyToRankUp: {
+                return 'Ready to Rank Up';
+            }
             case CharactersFilterBy.None: {
                 return 'None';
             }

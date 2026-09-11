@@ -2,7 +2,7 @@ import { Copy } from 'lucide-react';
 import { enqueueSnackbar } from 'notistack';
 import { useRef } from 'react';
 
-import { tacticusIcons } from '@/fsd/5-shared/ui/icons';
+import { MiscIcon, tacticusIcons } from '@/fsd/5-shared/ui/icons';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { buildRadarStats, RadarAxisId } from './unit-stat-radar.utils';
@@ -290,10 +290,15 @@ export const UnitStatRadarChart = ({ snowprintId }: Props) => {
             <div className="grid grid-cols-2 gap-x-4 gap-y-1 text-xs text-(--soft-fg)">
                 {stats.map(stat => {
                     const axis = AXES.find(candidate => candidate.id === stat.axis);
+                    if (!axis) return;
                     return (
-                        <span key={stat.axis}>
-                            {axis?.description}: <span className="text-(--fg)">{Math.round(stat.percentile)}%</span>
-                        </span>
+                        <AccessibleTooltip key={stat.axis} title={axis.description}>
+                            <span className="flex items-center gap-1">
+                                <MiscIcon icon={axis.icon} width={16} height={16} />
+                                {axis.symbol && <span className="text-(--soft-fg)">{axis.symbol}</span>}
+                                <span className="text-(--fg)">{Math.round(stat.percentile)}%</span>
+                            </span>
+                        </AccessibleTooltip>
                     );
                 })}
             </div>

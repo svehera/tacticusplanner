@@ -45,6 +45,8 @@ interface Props {
     mowData?: IMowStatic2;
     isDisabled?: boolean;
     customPortraitUrl?: string;
+    /** When set, draws a "→ <rank>" rank-up target indicator along the bottom of the portrait. */
+    targetRank?: Rank;
 }
 
 const CircularBadge = ({ val, x, y }: { val: number; x: number; y: number }) => {
@@ -93,12 +95,14 @@ export const UnitPortrait = ({
     mowData,
     isDisabled,
     customPortraitUrl,
+    targetRank,
 }: Props) => {
-    const { frame, rankIcon, starIcon, shardIcon, mythicShardIcon } = useUnitPortraitAssets(
+    const { frame, rankIcon, targetRankIcon, starIcon, shardIcon, mythicShardIcon } = useUnitPortraitAssets(
         char !== undefined,
         char?.rarity ?? mow?.rarity ?? 0,
         char?.rank ?? undefined,
-        char?.stars ?? mow?.stars ?? 0
+        char?.stars ?? mow?.stars ?? 0,
+        targetRank
     );
     const charIcon = customPortraitUrl ?? getImageUrl(charData?.icon ?? mowData?.icon ?? 'default-character-icon.png');
     const rank = getRank(char?.rank ?? 0);
@@ -415,6 +419,17 @@ export const UnitPortrait = ({
                             src={rankIcon[0]?.src}
                             className={`absolute top-[100px] left-[-10px] z-20 h-[40px] w-auto`}
                         />
+                    )}
+                    {targetRankIcon && targetRankIcon[0] && char !== undefined && !isLocked && (
+                        <>
+                            <span className="absolute top-[109px] left-[24px] z-30 text-[22px] leading-none font-bold text-white [text-shadow:0_0_2px_#000,0_0_4px_#000]">
+                                →
+                            </span>
+                            <img
+                                src={targetRankIcon[0]?.src}
+                                className="absolute top-[100px] left-[36px] z-20 h-[40px] w-auto"
+                            />
+                        </>
                     )}
                     {shouldShowAbilities() &&
                         char &&

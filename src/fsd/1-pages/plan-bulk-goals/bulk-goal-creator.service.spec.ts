@@ -2,7 +2,31 @@ import { describe, expect, it } from 'vitest';
 
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
-import { buildBulkPlannedGoals, type BulkUnitEntry, getBulkRankGoalPlans } from './bulk-goal-creator.service';
+import { ICharacter2 } from '@/fsd/4-entities/character';
+
+import {
+    buildBulkPlannedGoals,
+    buildReadyToRankUpEntries,
+    type BulkUnitEntry,
+    getBulkRankGoalPlans,
+} from './bulk-goal-creator.service';
+
+/** A character with just the fields `getRankUpTarget`/`getBulkUnitEntryFromUnit` read. */
+const makeCharacter = (overrides: Partial<ICharacter2> = {}): ICharacter2 =>
+    ({
+        snowprintId: 'test-character',
+        rank: Rank.Stone1,
+        rarity: Rarity.Common,
+        stars: RarityStars.OneStar,
+        level: 1,
+        activeAbilityLevel: 1,
+        passiveAbilityLevel: 1,
+        name: 'Test Character',
+        shortName: 'Test',
+        icon: '',
+        roundIcon: '',
+        ...overrides,
+    }) as unknown as ICharacter2;
 
 const makeCharacterEntry = (overrides: Partial<BulkUnitEntry> = {}): BulkUnitEntry => ({
     unit: {
@@ -218,5 +242,70 @@ describe('bulk-goal-creator.service', () => {
             createId: () => 'id',
         });
         expect(tierGoals.map(goal => goal.character)).toEqual(['charB', 'charA']);
+    });
+});
+
+describe('buildReadyToRankUpEntries', () => {
+    // level 50 -> Diamond3 (rankToLevel), Legendary caps at Diamond3 (RarityMapper.toMaxRank)
+    const highTarget = makeCharacter({
+        snowprintId: 'highTarget',
+        rank: Rank.Gold3,
+        rarity: Rarity.Legendary,
+        level: 50,
+        activeAbilityLevel: 5,
+        passiveAbilityLevel: 5,
+    });
+    // level 26 -> Silver1 (rankToLevel), Rare caps at Silver1 (RarityMapper.toMaxRank)
+    const midTarget = makeCharacter({
+        snowprintId: 'midTarget',
+        rank: Rank.Bronze2,
+        rarity: Rarity.Rare,
+        level: 26,
+    });
+    // level 1 -> Stone1, already at Stone1: no rank above current is reachable yet
+    const notReady = makeCharacter({ snowprintId: 'notReady', rank: Rank.Stone1, rarity: Rarity.Common, level: 1 });
+
+    const defaultOptions = {
+        raiseActiveAbility: false,
+        raisePassiveAbility: false,
+        minRank: Rank.Stone1,
+        maxRank: Rank.Adamantine3,
+    };
+
+    it('stages only ready-to-rank-up characters, sorted descending by target rank', () => {
+        const entries = buildReadyToRankUpEntries([highTarget, midTarget, notReady], new Set(), defaultOptions);
+
+        expect(entries.map(entry => entry.unit?.snowprintId)).toEqual(['highTarget', 'midTarget']);
+        expect(entries[0].rank).toBe(Rank.Diamond3);
+        expect(entries[1].rank).toBe(Rank.Silver1);
+    });
+
+    it('excludes a character whose target rank falls outside the given range', () => {
+        const entries = buildReadyToRankUpEntries([highTarget, midTarget], new Set(), {
+            ...defaultOptions,
+            minRank: Rank.Bronze1,
+            maxRank: Rank.Bronze3,
+        });
+
+        expect(entries).toEqual([]);
+    });
+
+    it('excludes a character already present in existingUnitIds', () => {
+        const entries = buildReadyToRankUpEntries([highTarget, midTarget], new Set(['highTarget']), defaultOptions);
+
+        expect(entries.map(entry => entry.unit?.snowprintId)).toEqual(['midTarget']);
+    });
+
+    it('raises active/passive ability level to the XP level only when the corresponding option is enabled', () => {
+        const [activeOnly] = buildReadyToRankUpEntries([highTarget], new Set(), {
+            ...defaultOptions,
+            raiseActiveAbility: true,
+        });
+        expect(activeOnly.activeAbilityLevel).toBe(50);
+        expect(activeOnly.passiveAbilityLevel).toBe(5);
+
+        const [neither] = buildReadyToRankUpEntries([highTarget], new Set(), defaultOptions);
+        expect(neither.activeAbilityLevel).toBe(5);
+        expect(neither.passiveAbilityLevel).toBe(5);
     });
 });

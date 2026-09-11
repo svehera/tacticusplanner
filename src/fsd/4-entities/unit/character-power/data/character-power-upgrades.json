@@ -1,0 +1,7258 @@
+{
+    "upgHpC001": {
+        "name": "Field Ration",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC002": {
+        "name": "Minor Bionic Enhancement",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC003": {
+        "name": "Lesser Reliquary of Protection",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC004": {
+        "name": "The Iron Phoenix",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC005": {
+        "name": "The Silver Aquila",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC006": {
+        "name": "Standard-Issue Tourniquet",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC007": {
+        "name": "Healing Ointment",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC008": {
+        "name": "Thick Skin",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC009": {
+        "name": "Nano Swarm",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC010": {
+        "name": "Mutation: Warped Muscles",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC013": {
+        "name": "Chip Damage",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC014": {
+        "name": "Wires",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC015": {
+        "name": "Ropes and Chains",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC016": {
+        "name": "Scrolls",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpC017": {
+        "name": "Mission Assignment",
+        "rarity": "Common",
+        "statType": "hp",
+        "gold": 10
+    },
+    "upgHpU001": {
+        "name": "Enriched Rations",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU002": {
+        "name": "Reliquary of Protection",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU003": {
+        "name": "The Silver Scope",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU004C": {
+        "name": "Bionic Enhancement",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgHpC002",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpU005C": {
+        "name": "First Aid Kit",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgHpC007",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpU006": {
+        "name": "The Gold Phoenix",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU007": {
+        "name": "Purifier",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU008": {
+        "name": "The Silver Eagle with Swords",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU009": {
+        "name": "Mutation: Warped Lungs",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU010C": {
+        "name": "Regenerating Nano Swarm",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgHpC009",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpU012": {
+        "name": "Helmet Trophy",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU013": {
+        "name": "Artificial Vertebrae",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU014": {
+        "name": "Reinforced Cables",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU015": {
+        "name": "Satchel",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU016": {
+        "name": "Writings",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU017": {
+        "name": "Mission Objective",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25
+    },
+    "upgHpU018C": {
+        "name": "Holster and Pockets",
+        "rarity": "Uncommon",
+        "statType": "hp",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgHpC015",
+                "amount": 3
+            },
+            {
+                "id": "upgHpC006",
+                "amount": 3
+            }
+        ]
+    },
+    "upgHpR001": {
+        "name": "Repair Tool",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR002": {
+        "name": "Metal Decorative Skull",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR003C": {
+        "name": "Box of Rations",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU001",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR004C": {
+        "name": "Refined Bionics",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU008",
+                "amount": 5
+            },
+            {
+                "id": "upgDmgC010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR005": {
+        "name": "The Phoenix Ascendant",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR006C": {
+        "name": "Medical Supply Crate",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU014",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC006",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR007": {
+        "name": "Zeidos Ribbon",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR008": {
+        "name": "Mutation: Warped Heart",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR009C": {
+        "name": "Otherworldly Nano Swarm",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU006",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC009",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR010": {
+        "name": "Bad Moon Teef",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR011": {
+        "name": "Reconstitution Protocols",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR012C": {
+        "name": "Electromantic Cable Bundle",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU014",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC014",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR013C": {
+        "name": "Utilitarian Belt",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU007",
+                "amount": 5
+            },
+            {
+                "id": "upgHpU018C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpR014": {
+        "name": "Ancient Runes",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR015C": {
+        "name": "Grand Skull Trophy",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU012",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC003",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC013",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpR016C": {
+        "name": "Grandiloquent Litanical",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU016",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC016",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC013",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpR017C": {
+        "name": "Battle Plan",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU017",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC017",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR018": {
+        "name": "Kill Count",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR019": {
+        "name": "Battle Scar",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR020C": {
+        "name": "Sanctified Reliquary of Protection",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgHpU002",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpR043": {
+        "name": "Service Studs",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR021": {
+        "name": "Righteous Candle",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR022": {
+        "name": "Rose of Martyrs",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR023": {
+        "name": "Eye of Horus",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR024": {
+        "name": "Plague Bell",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR027": {
+        "name": "Stimm Injector",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR028": {
+        "name": "Waystone",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR029": {
+        "name": "Tainted Text",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR031": {
+        "name": "Wolf Tail Talisman",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR032": {
+        "name": "Key of Ignorance",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR033": {
+        "name": "Adrenal Glands",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR035": {
+        "name": "Bloodstone Tear",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR036": {
+        "name": "Wyrm-form Sigil",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR037": {
+        "name": "Flawless Terran Gem",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR038": {
+        "name": "Brazen Jaws",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR039": {
+        "name": "Outrageous Padding",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpR040": {
+        "name": "Kindred Weavefield Crest",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgHpE001C": {
+        "name": "Advanced Bionics",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR006",
+                "amount": 6
+            },
+            {
+                "id": "upgHpU004C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpU014",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpE002C": {
+        "name": "Greater Reliquary of Protection",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR005",
+                "amount": 6
+            },
+            {
+                "id": "upgHpU007",
+                "amount": 6
+            },
+            {
+                "id": "upgArmC001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpE003": {
+        "name": "Terminator Honours",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215
+    },
+    "upgHpE004C": {
+        "name": "Necrodermis Nano Scarab Swarm",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR009C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR014",
+                "amount": 4
+            },
+            {
+                "id": "upgArmC005",
+                "amount": 4
+            }
+        ]
+    },
+    "upgHpE005C": {
+        "name": "Nob Teef",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR010",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE006C": {
+        "name": "Exquisite Medical Supplies",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR006C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR003",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC007",
+                "amount": 4
+            }
+        ]
+    },
+    "upgHpE007C": {
+        "name": "Grand Helmet Trophy",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR018",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC014",
+                "amount": 4
+            }
+        ]
+    },
+    "upgHpE008C": {
+        "name": "Mutation: Regenerative Blood",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR008",
+                "amount": 6
+            },
+            {
+                "id": "upgHpU009",
+                "amount": 6
+            },
+            {
+                "id": "upgHpC010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpE009C": {
+        "name": "Resurrection Protocols",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR011",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE011C": {
+        "name": "Royal Phylactery",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR011",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE012": {
+        "name": "Golden Ornamental Skull",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215
+    },
+    "upgHpE013C": {
+        "name": "Exospine",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR015",
+                "amount": 4
+            },
+            {
+                "id": "upgArmC011",
+                "amount": 4
+            }
+        ]
+    },
+    "upgHpE014C": {
+        "name": "Ominous Xenos Glyphs",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR014",
+                "amount": 6
+            },
+            {
+                "id": "upgHpU016",
+                "amount": 6
+            },
+            {
+                "id": "upgDmgC008",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpE015": {
+        "name": "Weathering",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215
+    },
+    "upgHpE017": {
+        "name": "Secret Agenda",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215
+    },
+    "upgHpE020C": {
+        "name": "Honour Markings",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR043",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE021C": {
+        "name": "Lights of Purgation",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR021",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE022C": {
+        "name": "Roses of Sacrifice",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR022",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE025C": {
+        "name": "Epaulettes",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR007",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE023C": {
+        "name": "Warp Touched Eye of Horus",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR023",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE024C": {
+        "name": "Death Bell",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR024",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE027C": {
+        "name": "Advanced Stimm Injector",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR027",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE028C": {
+        "name": "Spirit Stone",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR028",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE029C": {
+        "name": "Malefic Scroll",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR029",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE031C": {
+        "name": "Runic Talisman",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR031",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE032C": {
+        "name": "Key of Knowledge",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR032",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE033C": {
+        "name": "Adaptive Adrenal Glands",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR033",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE034C": {
+        "name": "Servo-Arc Claw",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR001",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE035C": {
+        "name": "Bloodstone Pendant",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR035",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE036C": {
+        "name": "Wyrm-form Icon",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR036",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE037C": {
+        "name": "Flawless Gem Embellishment",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR037",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE038C": {
+        "name": "Blessed Brazen Jaws",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR038",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE039C": {
+        "name": "Outrageous Adornment",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR039",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE040C": {
+        "name": "Champion Weavefield Crest",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR040",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE120C": {
+        "name": "Symbol of the Ultramarines",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR005",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR007",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE121C": {
+        "name": "Symbol of the Black Templars",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR021",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR021",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR021",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE122C": {
+        "name": "Symbol of the Adepta Sororitas",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR022",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR022",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR022",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE123C": {
+        "name": "Symbol of the Black Legion",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR023",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR023",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR023",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE124C": {
+        "name": "Symbol of the Death Guard",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR024",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR024",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR009",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE125C": {
+        "name": "Symbol of the Astra Militarum",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR007",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR025",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR025",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE126C": {
+        "name": "Symbol of the Orks",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR010",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR026",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR026",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE127C": {
+        "name": "Symbol of the T'au Empire",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR027",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR027",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR027",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE128C": {
+        "name": "Symbol of the Aeldari",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR028",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR028",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR028",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE129C": {
+        "name": "Symbol of the Thousand Sons",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR029",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR029",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR029",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE130C": {
+        "name": "Symbol of the Necrons",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR011",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR009",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR030",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE131C": {
+        "name": "Symbol of the Space Wolves",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR031",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR031",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR031",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE132C": {
+        "name": "Symbol of the Dark Angels",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR032",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR032",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR032",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE133C": {
+        "name": "Symbol of the Tyranids",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR033",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR033",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR033",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE134C": {
+        "name": "Symbol of the Adeptus Mechanicus",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR001",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR034",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR034",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE135C": {
+        "name": "Symbol of the Blood Angels",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR035",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR035",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR035",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE136C": {
+        "name": "Symbol of the Genestealer Cults",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR036",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR036",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR036",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE137C": {
+        "name": "Symbol of the Adeptus Custodes",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR037",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR037",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR037",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE138C": {
+        "name": "Symbol of the World Eaters",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR038",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR038",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR038",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE139C": {
+        "name": "Symbol of the Emperor's Children",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR039",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR039",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR039",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE140C": {
+        "name": "Symbol of the Leagues of Votann",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR040",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR040",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR040",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpE143C": {
+        "name": "Symbol of the Adeptus Astartes",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR043",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR007",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgHpL001C": {
+        "name": "Optimal Bionic Enhancement",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE001C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR004C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgU012",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL002C": {
+        "name": "Legendary Reliquary of Protection",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR016C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmU001",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL005C": {
+        "name": "Ancient Nano Scarab Swarm",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE004C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpC009",
+                "amount": 5
+            }
+        ]
+    },
+    "upgHpL006C": {
+        "name": "Shiny Boss Teef",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE005C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL007C": {
+        "name": "Protocol of the Eternal Guardian",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE009C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL008C": {
+        "name": "Phylacterine Hive",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL010",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR009C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE008",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL009C": {
+        "name": "Grandiose Skull Ornament",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE012",
+                "amount": 5
+            },
+            {
+                "id": "upgArmR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL010": {
+        "name": "Engrammatic Entangler",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL011C": {
+        "name": "Tome of Arcane Knowledge",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE010",
+                "amount": 5
+            },
+            {
+                "id": "upgHpR016C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL012C": {
+        "name": "Mutation: Otherworldly Power",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpU009",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL013C": {
+        "name": "Advanced Exospine",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE013C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR006C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmU014",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL014C": {
+        "name": "Portentous Xenos Glyphs",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmU006",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL017C": {
+        "name": "Grand Strategy",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE017",
+                "amount": 5
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR001C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgHpL020C": {
+        "name": "Honorifics of Command",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE020C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL021C": {
+        "name": "Candelabrum of Burning Wrath",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE021C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL022C": {
+        "name": "Roses of the Divine",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE022C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL025C": {
+        "name": "Epaulettes of Renown",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE025C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL023C": {
+        "name": "Infernal Eye of Horus",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE023C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL024C": {
+        "name": "Bell of Despair",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE024C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL027C": {
+        "name": "Auto-Reactive Stimm Injector",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE027C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL028C": {
+        "name": "Resplendent Spirit Stone",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE028C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL029C": {
+        "name": "Athenaean Scroll",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE029C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL031C": {
+        "name": "Talisman of Storms",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE031C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL032C": {
+        "name": "Key of Achrabael",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE032C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL033C": {
+        "name": "Hyper-Adaptive Adrenal Glands",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE033C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL034C": {
+        "name": "Mechadendrite Hive",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE034C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL035C": {
+        "name": "Bloodstone Icon",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE035C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL036C": {
+        "name": "Wyrm-form Banner",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE036C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL037C": {
+        "name": "Flawless Gem Adornment",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE037C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE002C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL038C": {
+        "name": "Exalted Brazen Jaws",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE038C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL039C": {
+        "name": "Outrageous Grimace",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE039C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL040C": {
+        "name": "Ancestor Ward Crest",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE040C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpL100": {
+        "name": "Codex Astartes Page",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL101": {
+        "name": "Bones of the Paragons",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL102": {
+        "name": "Holy Chaplet",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL103": {
+        "name": "Boon of the Dark Gods",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL104": {
+        "name": "Boon of Nurgle",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL105": {
+        "name": "Honourifica Imperialis",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL106": {
+        "name": "Kustom Gubbinz",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL107": {
+        "name": "Engram Neurochip",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL108": {
+        "name": "Runes of Fate",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL109": {
+        "name": "Boon of Tzeentch",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL111": {
+        "name": "Mjod",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL112": {
+        "name": "Stone Guardian Fragment",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL113": {
+        "name": "Synaptic Augmentation",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL114": {
+        "name": "Blessed Cogitator",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL115": {
+        "name": "Blood Vial",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL116": {
+        "name": "Gifts of the Star Children",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL117": {
+        "name": "Arcane Genetic Alchemy",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL118": {
+        "name": "Boon of Khorne",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL119": {
+        "name": "Boon of Slaanesh",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL099": {
+        "name": "Cyberstimm Infusion",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgHpL120C": {
+        "name": "Codex Astartes",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL100",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL121C": {
+        "name": "Tannhauser's Bones",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL101",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR020C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE009",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL122C": {
+        "name": "Simulacrum Sanctorum",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL102",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR020C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL123C": {
+        "name": "Mark of Chaos Undivided",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL103",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL124C": {
+        "name": "Mark of Nurgle",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL104",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE015",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL125C": {
+        "name": "Sash of Honors",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL105",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE012",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL126C": {
+        "name": "Cybork Body Parts",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL106",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR004C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL127C": {
+        "name": "Ta'lissera Bond",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL107",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR006C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE011",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL128C": {
+        "name": "Scriptures of Fate",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL108",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL129C": {
+        "name": "Mark of Tzeentch",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL109",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL131C": {
+        "name": "Personal Saga",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL111",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL132C": {
+        "name": "Perfidious Relic of the Unforgiven",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL112",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE017",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL133C": {
+        "name": "Hypermetabolic Acceleration",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL113",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR006C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL134C": {
+        "name": "Sanctus Canister",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL114",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL135C": {
+        "name": "Icon of the Angel",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL115",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR020C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE012",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL136C": {
+        "name": "Biomorph Adaption",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL116",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR006C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE013",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL137C": {
+        "name": "Defensor Refractor Generator",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL117",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR010C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE008",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL138C": {
+        "name": "Mark of Khorne",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL118",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE012",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL139C": {
+        "name": "Mark of Slaanesh",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL119",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL140C": {
+        "name": "Forgewrought Maintainers Kit",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL099",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgHpL211C": {
+        "name": "Monstrous Constitution",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL003",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL203",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE015",
+                "amount": 8
+            }
+        ]
+    },
+    "upgHpL212C": {
+        "name": "Preternatural Constitution",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL202",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL202",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE017",
+                "amount": 8
+            }
+        ]
+    },
+    "upgHpL213C": {
+        "name": "Superaugmented Constitution",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL001",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL001",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE003",
+                "amount": 8
+            }
+        ]
+    },
+    "upgHpL214C": {
+        "name": "Technocrafted Constitution",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL204",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL204",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE012",
+                "amount": 8
+            }
+        ]
+    },
+    "upgHpM001": {
+        "name": "Imperial Aquila",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000
+    },
+    "upgHpM002": {
+        "name": "Mutant Form",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000
+    },
+    "upgHpM003": {
+        "name": "Ancient Inscription",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000
+    },
+    "upgHpM004": {
+        "name": "Venerable Battle Mark",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000
+    },
+    "upgHpM120C": {
+        "name": "Grand Symbol of the Ultramarines",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL100",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE120C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM121C": {
+        "name": "Grand Symbol of the Black Templars",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL101",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE121C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM122C": {
+        "name": "Grand Symbol of the Adepta Sororitas",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL102",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE122C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM123C": {
+        "name": "Grand Symbol of the Black Legion",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL103",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE123C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM124C": {
+        "name": "Grand Symbol of the Death Guard",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL104",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE124C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM125C": {
+        "name": "Grand Symbol of the Astra Militarum",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL105",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE125C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM126C": {
+        "name": "Grand Symbol of the Orks",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL106",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE126C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM127C": {
+        "name": "Grand Symbol of the T'au Empire",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL107",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE127C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM128C": {
+        "name": "Grand Symbol of the Aeldari",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL108",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE128C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM129C": {
+        "name": "Grand Symbol of the Thousand Sons",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL109",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE129C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM130C": {
+        "name": "Grand Symbol of the Necrons",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL010",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE130C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM131C": {
+        "name": "Grand Symbol of the Space Wolves",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL111",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE131C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM132C": {
+        "name": "Grand Symbol of the Dark Angels",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL112",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE132C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM133C": {
+        "name": "Grand Symbol of the Tyranids",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL113",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE133C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM134C": {
+        "name": "Grand Symbol of the Adeptus Mechanicus",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL114",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE134C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM135C": {
+        "name": "Grand Symbol of the Blood Angels",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL115",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE135C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM136C": {
+        "name": "Grand Symbol of the Genestealer Cults",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL116",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE136C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM137C": {
+        "name": "Grand Symbol of the Adeptus Custodes",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL117",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE137C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM138C": {
+        "name": "Grand Symbol of the World Eaters",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL118",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE138C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM139C": {
+        "name": "Grand Symbol of the Emperor's Children",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL119",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE139C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM140C": {
+        "name": "Grand Symbol of the Leagues of Votann",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL099",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE140C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM143C": {
+        "name": "Grand Symbol of the Adeptus Astartes",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL100",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE143C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgDmgC001": {
+        "name": "Round of Ammo",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC002": {
+        "name": "Frag Grenade",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC003": {
+        "name": "Canister of Chemicals",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC004": {
+        "name": "Can of Promethium",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC005": {
+        "name": "Ballistics Data",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC006": {
+        "name": "Lesser Reliquary of Vengeance",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC007": {
+        "name": "Single Power Pack",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC008": {
+        "name": "Otherworldly Energy",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC009": {
+        "name": "Basic Auxiliary Core",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC010": {
+        "name": "Auspex",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC011": {
+        "name": "Weapon Anointment Oils",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC012": {
+        "name": "Weapon parts",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC013": {
+        "name": "Vox-Caster",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC014": {
+        "name": "Nasty Spikes",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgC015": {
+        "name": "Targeting Link",
+        "rarity": "Common",
+        "statType": "dmg",
+        "gold": 10
+    },
+    "upgDmgU001C": {
+        "name": "Magazine",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgU002C": {
+        "name": "Belt of Frag Grenades",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC002",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgU003": {
+        "name": "Barrel of Promethium",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU004": {
+        "name": "Attack Vector Data-slate",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU005": {
+        "name": "Chapter Reliquary",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU006": {
+        "name": "Marksman's Honour",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU007C": {
+        "name": "Power Pack Bundle",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC007",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgU008C": {
+        "name": "Otherworldly Energy Reservoir",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC008",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgU009": {
+        "name": "Plasma Cell",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU010": {
+        "name": "Fine Micro-Generator",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU011": {
+        "name": "Divinator Class Auspex",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU012": {
+        "name": "Locator Beacon",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU013C": {
+        "name": "Fine Auxiliary Core",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC009",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgU014": {
+        "name": "Combat Stimms",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgU015C": {
+        "name": "Blessed Weapon Oils",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC011",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC003",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgU016C": {
+        "name": "Razor-sharp Spikes",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC014",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC012",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgU017C": {
+        "name": "Targeting Matrix",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC015",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC005",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgU018C": {
+        "name": "Adamantium Blades",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgDmgC012",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC013",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgU019": {
+        "name": "Slicing Claws",
+        "rarity": "Uncommon",
+        "statType": "dmg",
+        "gold": 25
+    },
+    "upgDmgR001C": {
+        "name": "Box of Ammo",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU002",
+                "amount": 5
+            },
+            {
+                "id": "upgDmgC001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgR002": {
+        "name": "Krak Grenade",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR003": {
+        "name": "Tank of Promethium",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR004C": {
+        "name": "Plasma Cell Bundle",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU009",
+                "amount": 5
+            },
+            {
+                "id": "upgDmgC003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgR005": {
+        "name": "Classified Data-slate",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR006": {
+        "name": "Bionic Eye",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR007": {
+        "name": "Bladesman's Honour",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR008C": {
+        "name": "High-capacity Power Pack",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU009",
+                "amount": 5
+            },
+            {
+                "id": "upgDmgC007",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgR009": {
+        "name": "Viridian Energy Tesseract",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR010C": {
+        "name": "Powerful Micro-Generator",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU010",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC012",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC007",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgR011C": {
+        "name": "Powerful Auxiliary Core",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU010",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgC009",
+                "amount": 6
+            },
+            {
+                "id": "upgHpU014",
+                "amount": 3
+            }
+        ]
+    },
+    "upgDmgR012C": {
+        "name": "Advanced Combat Stimms",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU014",
+                "amount": 5
+            },
+            {
+                "id": "upgHpC007",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgR13C": {
+        "name": "Prey-Sight",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU012",
+                "amount": 5
+            },
+            {
+                "id": "upgDmgC010",
+                "amount": 3
+            },
+            {
+                "id": "upgDmgC013",
+                "amount": 3
+            }
+        ]
+    },
+    "upgDmgR14C": {
+        "name": "Supernatural Sight",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU011",
+                "amount": 5
+            },
+            {
+                "id": "upgDmgC008",
+                "amount": 3
+            },
+            {
+                "id": "upgDmgC005",
+                "amount": 3
+            }
+        ]
+    },
+    "upgDmgR015C": {
+        "name": "Sanctified Weapon Oils",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU015C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgU003",
+                "amount": 5
+            }
+        ]
+    },
+    "upgDmgR016C": {
+        "name": "Murderous Spikes",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU016C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgU019",
+                "amount": 5
+            }
+        ]
+    },
+    "upgDmgR017C": {
+        "name": "Ratiocination Targeting",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgDmgU017C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgU004",
+                "amount": 5
+            }
+        ]
+    },
+    "upgDmgR021": {
+        "name": "Chain of Zeal",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR022": {
+        "name": "Hymn of Martyrs",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR025": {
+        "name": "Entrenching Tool",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR023": {
+        "name": "Icon of Vengeance",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR024": {
+        "name": "Sigil of Decay",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR026": {
+        "name": "Iron Jaw",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR027": {
+        "name": "Sensor Suite",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR028": {
+        "name": "Psytronome",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR029": {
+        "name": "Inferno Bolts",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR031": {
+        "name": "Wolf Tooth Necklace",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR032": {
+        "name": "Chapter Pendant",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR033": {
+        "name": "Toxin Sacs",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR034": {
+        "name": "Motive Force Capacitator",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR035": {
+        "name": "Blood Shard Bolt",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR036": {
+        "name": "Proclamation Receiver",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR037": {
+        "name": "Integrated Bolt Feeder",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR038": {
+        "name": "Chainaxe Teeth",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR039": {
+        "name": "Vox Grill Amplifier",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgR040": {
+        "name": "Personal Scanner",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgDmgE001": {
+        "name": "Special Issue Ammo",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgDmgE002C": {
+        "name": "Belt of Krak Grenades",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR002",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC003",
+                "amount": 4
+            }
+        ]
+    },
+    "upgDmgE003": {
+        "name": "Blessed Promethium Canister",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgDmgE004": {
+        "name": "Bionic Neural Pathways",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgDmgE005": {
+        "name": "Greater Reliquary of Vengeance",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgDmgE006C": {
+        "name": "Anointed Micro-Generator",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR010C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR006",
+                "amount": 4
+            },
+            {
+                "id": "upgArmC011",
+                "amount": 4
+            }
+        ]
+    },
+    "upgDmgE007C": {
+        "name": "Plasma Cell Crate",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR004C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR006",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC012",
+                "amount": 4
+            }
+        ]
+    },
+    "upgDmgE008C": {
+        "name": "Anointed Auxiliary Core",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR011C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR003",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC014",
+                "amount": 4
+            }
+        ]
+    },
+    "upgDmgE009C": {
+        "name": "Refined Combat Stimms",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR003",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC006",
+                "amount": 4
+            }
+        ]
+    },
+    "upgDmgE010": {
+        "name": "Warp Locus",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgDmgE011": {
+        "name": "Elaborate Hilt",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgDmgE020C": {
+        "name": "Reliquary of Vengeance",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR007",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE021C": {
+        "name": "Chain of Righteous Zeal",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR021",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE022C": {
+        "name": "Hymn of Sacrifice",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR022",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE025C": {
+        "name": "Veteran's Entrenching Tool",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR025",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE023C": {
+        "name": "Icon of Daemonic Vengeance",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR023",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE024C": {
+        "name": "Sigil of Inevitable Decay",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR024",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE026C": {
+        "name": "Brutal Iron Jaw",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR026",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE027C": {
+        "name": "Advanced Sensor Suite",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR027",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE028C": {
+        "name": "Filigrane Psytronome",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR028",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE029C": {
+        "name": "Ensorcelled Infusion",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR029",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE030C": {
+        "name": "Protocol of the Hungry Void",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR009",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE031C": {
+        "name": "Thunderwolf Tooth Necklace",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR031",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE032C": {
+        "name": "Bolts of Judgement",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR032",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE033C": {
+        "name": "Adaptive Toxin Sacs",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR033",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE034C": {
+        "name": "Enhanced Motive Force Capacitator",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR034",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE035C": {
+        "name": "Quake Bolts",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR035",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE036C": {
+        "name": "Proclamation Caster",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR036",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE037C": {
+        "name": "Embellished Bolt Feeder",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR037",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE038C": {
+        "name": "Blessed Chainaxe Teeth",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR038",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE039C": {
+        "name": "Sonic Greave Amplifier",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR039",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgE040C": {
+        "name": "ECog Scanner",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR040",
+                "amount": 9
+            }
+        ]
+    },
+    "upgDmgL001": {
+        "name": "Master-crafted Ammo",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650
+    },
+    "upgDmgL002C": {
+        "name": "Blessed Promethium Tank",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE003",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR003",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR004C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL003": {
+        "name": "Archeotech Bionics",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650
+    },
+    "upgDmgL004C": {
+        "name": "Legendary Reliquary of Vengeance",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE020C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL005C": {
+        "name": "Optimal Micro-Generator",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE006C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE017",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL006C": {
+        "name": "Optimal Auxiliary Core",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE008C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE010",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL007C": {
+        "name": "Autoloader",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE001",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR002",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR001C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL008C": {
+        "name": "Powered Blade",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE011",
+                "amount": 7
+            },
+            {
+                "id": "upgHpR018",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR010C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL009C": {
+        "name": "Hyperstim",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE004",
+                "amount": 7
+            },
+            {
+                "id": "upgHpR019",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR012C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL010C": {
+        "name": "Psychic Focus",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE010",
+                "amount": 7
+            },
+            {
+                "id": "upgHpR002",
+                "amount": 7
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL012C": {
+        "name": "Plasma Coil",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE007C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgE003",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL015C": {
+        "name": "Digital Weapons",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR13C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL016C": {
+        "name": "Imposing Horns",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL017C": {
+        "name": "Overcapacitator",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgR017C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR008C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL021C": {
+        "name": "Chain of Zealous Wrath",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE021C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL022C": {
+        "name": "Hymn of the Divine",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE022C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL025C": {
+        "name": "Heirloom Entrenching Tool",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE025C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL023C": {
+        "name": "Icon of Infernal Vengeance",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE023C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL024C": {
+        "name": "Sigil of Eternal Decay",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE024C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL026C": {
+        "name": "Ded Brutal Iron Jaw",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE026C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL027C": {
+        "name": "Multi-Spectrum Sensor Suite",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE027C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR017C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL028C": {
+        "name": "Soul-Bonded Psytronome",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE028C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR017C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL029C": {
+        "name": "Warpflame Infusion",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE029C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL030C": {
+        "name": "Extermination Protocols",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE030C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR017C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL031C": {
+        "name": "Kraken Tooth Necklace",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE031C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL032C": {
+        "name": "Bolts of Furious Vengeance",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE032C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL033C": {
+        "name": "Hyper-Adaptive Toxin Sacs",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE033C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL034C": {
+        "name": "Optimal Motive Force Capacitator",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE034C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL035C": {
+        "name": "Decimator Bolts",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE035C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL036C": {
+        "name": "Proclamation Hailer",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE036C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR017C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL037C": {
+        "name": "Adorned Bolt Feeder",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE037C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR015C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL038C": {
+        "name": "Exalted Chainaxe Teeth",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE038C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL039C": {
+        "name": "Siren Amplifier",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE039C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR016C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL040C": {
+        "name": "Panspectral Scanner",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgE040C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgR017C",
+                "amount": 2
+            }
+        ]
+    },
+    "upgDmgL120C": {
+        "name": "Hellfury Bolts",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL100",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR13C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL121C": {
+        "name": "Witchseeker Bolts",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL101",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR13C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL122C": {
+        "name": "Blessed Bolts",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL102",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL125C": {
+        "name": "Medallion Resolute",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL105",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE009",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL123C": {
+        "name": "Daemon Shells",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL103",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL124C": {
+        "name": "Virulent Rounds",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL104",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpE015",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL126C": {
+        "name": "Snazzy Dakka",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL106",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR001C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL127C": {
+        "name": "Target Lock",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL107",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR13C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL128C": {
+        "name": "Scriptures of Battle",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL108",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL129C": {
+        "name": "Boonstone",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL109",
+                "amount": 9
+            },
+            {
+                "id": "upgArmU004C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL130C": {
+        "name": "Molecular Vaporiser",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL010",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR009C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE008",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL131C": {
+        "name": "Frostblade",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL111",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgU018C",
+                "amount": 2
+            },
+            {
+                "id": "upgDmgE011",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL132C": {
+        "name": "Arbiter's Gaze",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL112",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL133C": {
+        "name": "Implant Attack",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL113",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE013",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL134C": {
+        "name": "Prehensile Dataspike",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL114",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL135C": {
+        "name": "Archangel's Shard",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL115",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR016C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE011",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL136C": {
+        "name": "Gene-twisted Muscle",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL116",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmE013",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL137C": {
+        "name": "Panoptispex",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL117",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR13C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL138C": {
+        "name": "Butcher's Nails",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL118",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL139C": {
+        "name": "Amplified Senses",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL119",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL140C": {
+        "name": "Experimental Kin Technology",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL099",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR008C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgE001",
+                "amount": 6
+            }
+        ]
+    },
+    "upgDmgL202": {
+        "name": "Psychic Force Conduit",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650
+    },
+    "upgDmgL204": {
+        "name": "Ancient Power Cell",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650
+    },
+    "upgDmgL211C": {
+        "name": "Monstrous Strength",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL202",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgL003",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgE003",
+                "amount": 8
+            }
+        ]
+    },
+    "upgDmgL212C": {
+        "name": "Preternatural Strength",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL001",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgL202",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgE010",
+                "amount": 8
+            }
+        ]
+    },
+    "upgDmgL213C": {
+        "name": "Superaugmented Strength",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL204",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgL001",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgE011",
+                "amount": 8
+            }
+        ]
+    },
+    "upgDmgL214C": {
+        "name": "Technocrafted Strength",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgDmgL003",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgL204",
+                "amount": 8
+            },
+            {
+                "id": "upgDmgE004",
+                "amount": 8
+            }
+        ]
+    },
+    "upgDmgM211C": {
+        "name": "Arcane Substances",
+        "rarity": "Mythic",
+        "statType": "dmg",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgDmgL202",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgDmgL009C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgDmgM212C": {
+        "name": "Sundering Talons",
+        "rarity": "Mythic",
+        "statType": "dmg",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgDmgL003",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgDmgL008C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgDmgM213C": {
+        "name": "Ancient Weapon Augmentation",
+        "rarity": "Mythic",
+        "statType": "dmg",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgDmgL001",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgDmgL007C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgDmgM214C": {
+        "name": "Ancient Power Source",
+        "rarity": "Mythic",
+        "statType": "dmg",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgDmgL204",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgDmgL010C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmC001": {
+        "name": "Purity Seal",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC002": {
+        "name": "Fine Purity Seal",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC003": {
+        "name": "Pile of Salvage",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC004": {
+        "name": "Adamantium Ore",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC005": {
+        "name": "Sophisticated Material",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC006": {
+        "name": "Rebreather",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC007": {
+        "name": "Mutation: Tough Skin",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC011": {
+        "name": "Filaments",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC012": {
+        "name": "Metal Joints",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmC013": {
+        "name": "Armor Trim",
+        "rarity": "Common",
+        "statType": "fixedArmor",
+        "gold": 10
+    },
+    "upgArmU001": {
+        "name": "Oath Seal",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU002": {
+        "name": "Box of Salvage",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU003C": {
+        "name": "Adamantium Lump",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgArmC004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmU004C": {
+        "name": "Sophisticated Material Ingot",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgArmC005",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmU005": {
+        "name": "Ceramite Lump",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU006": {
+        "name": "Advanced Filaments",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU007": {
+        "name": "Mutation: Scaly Skin",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU008": {
+        "name": "Advanced Rebreather",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU009": {
+        "name": "Blessed Tasset Plate",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU010C": {
+        "name": "Blessed Ceramite",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgArmC002",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmU012": {
+        "name": "Scale-Plates",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU012C": {
+        "name": "Sturdy Pieces",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25,
+        "crafting": [
+            {
+                "id": "upgArmC003",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmU013": {
+        "name": "Cloak",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmU014": {
+        "name": "Mesh Weave",
+        "rarity": "Uncommon",
+        "statType": "fixedArmor",
+        "gold": 25
+    },
+    "upgArmR001C": {
+        "name": "Blessed Purity Seal",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU001",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC001",
+                "amount": 3
+            },
+            {
+                "id": "upgHpC016",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmR002C": {
+        "name": "Sophisticated Material Bar",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU006",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC005",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmR003C": {
+        "name": "Ceramite Bar",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU005",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC002",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmR004C": {
+        "name": "Mutation: Warped Skin",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU007",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC007",
+                "amount": 3
+            },
+            {
+                "id": "upgHpC010",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmR005": {
+        "name": "Artificer Tasset Plate",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR006": {
+        "name": "Crate of Salvage",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR007C": {
+        "name": "Adamantium Bar",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU002",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmR008C": {
+        "name": "Sturdy Parts",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU002",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC012",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmR009": {
+        "name": "Unnatural Vapour Dispenser",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR010": {
+        "name": "Valuable Fabric",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR012C": {
+        "name": "Impressive Armor Trim",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU009",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC013",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC013",
+                "amount": 2
+            }
+        ]
+    },
+    "upgArmR013C": {
+        "name": "Fine Cloak",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU013",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC006",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC015",
+                "amount": 2
+            }
+        ]
+    },
+    "upgArmR014C": {
+        "name": "Mesh Weave Garment",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75,
+        "crafting": [
+            {
+                "id": "upgArmU014",
+                "amount": 5
+            },
+            {
+                "id": "upgArmC011",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC015",
+                "amount": 2
+            }
+        ]
+    },
+    "upgArmR015": {
+        "name": "Subdermal Plating",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR021": {
+        "name": "Blessed Tabard",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR022": {
+        "name": "Blessed Corset Armor",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR025": {
+        "name": "Flak Plates",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR023": {
+        "name": "Blasphemous Armor Trim",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR026": {
+        "name": "'ard Plate",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR027": {
+        "name": "Drone Controller",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR028": {
+        "name": "Wraithbone Plate",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR029": {
+        "name": "Ritual Implements",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR030": {
+        "name": "Reinforced Scale-Plates",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR031": {
+        "name": "Beast Hide",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR032": {
+        "name": "Dark Hood",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR033": {
+        "name": "Reinforced Chitin",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR034": {
+        "name": "Cogwheel Crest",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR035": {
+        "name": "Artisan Plating",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR036": {
+        "name": "Industrial Padding",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR037": {
+        "name": "Auramite Wing",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR038": {
+        "name": "Cadaere Renissum",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR039": {
+        "name": "Lavish Helmet Crest",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmR040": {
+        "name": "Void Armour Plating",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgArmE001C": {
+        "name": "Grand Purity Seal",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR001C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR002",
+                "amount": 4
+            },
+            {
+                "id": "upgArmC002",
+                "amount": 4
+            }
+        ]
+    },
+    "upgArmE002C": {
+        "name": "Adamantium Sheet",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR019",
+                "amount": 6
+            },
+            {
+                "id": "upgArmU003C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgU004",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmE003C": {
+        "name": "Sophisticated Material Sheet",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgDmgR005",
+                "amount": 6
+            },
+            {
+                "id": "upgArmU004C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmU006",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmE004C": {
+        "name": "Ceramite Sheet",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR015",
+                "amount": 6
+            },
+            {
+                "id": "upgArmU010C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmU005",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmE005C": {
+        "name": "Mutation: Metallic Skin",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR004C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR008",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC008",
+                "amount": 4
+            }
+        ]
+    },
+    "upgArmE006C": {
+        "name": "Ancient Tasset Plate",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR005",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC015",
+                "amount": 4
+            }
+        ]
+    },
+    "upgArmE007C": {
+        "name": "Death Shroud",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR009",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE008": {
+        "name": "Hypermaterial Shifter",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215
+    },
+    "upgArmE009": {
+        "name": "Revered Talisman",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215
+    },
+    "upgArmE010": {
+        "name": "Unyielding Rivets",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215
+    },
+    "upgArmE011C": {
+        "name": "Decorated Cloak",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR002",
+                "amount": 4
+            },
+            {
+                "id": "upgHpC015",
+                "amount": 4
+            }
+        ]
+    },
+    "upgArmE012C": {
+        "name": "Sturdy Segments",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR006",
+                "amount": 6
+            },
+            {
+                "id": "upgArmU012C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmU002",
+                "amount": 6
+            }
+        ]
+    },
+    "upgArmE013": {
+        "name": "Duplicate Organ",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215
+    },
+    "upgArmE014C": {
+        "name": "Advanced Mesh Weave Garment",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR014C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR010",
+                "amount": 4
+            },
+            {
+                "id": "upgDmgC015",
+                "amount": 4
+            }
+        ]
+    },
+    "upgArmE020C": {
+        "name": "Layered Ceramite Plating",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE021C": {
+        "name": "Crusader's Tabard",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR021",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE022C": {
+        "name": "Sanctified Corset Armor",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR022",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE025C": {
+        "name": "High-grade Flak Plates",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR025",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE023C": {
+        "name": "Daemonic Armor Trim",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR023",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE026C": {
+        "name": "Ded 'ard Plate",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR026",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE027C": {
+        "name": "Advanced Drone Controller",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR027",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE028C": {
+        "name": "Filigrane Wraithbone Plate",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR028",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE029C": {
+        "name": "Cabalistic Implements",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR029",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE030C": {
+        "name": "Scale-Plate Strand",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR030",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE031C": {
+        "name": "Ice Troll Hide",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR031",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE032C": {
+        "name": "Calibanite Hood",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR032",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE033C": {
+        "name": "Adaptive Chitin Carapace",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR033",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE034C": {
+        "name": "Enhanced Cogwheel Crest",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR034",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE035C": {
+        "name": "Artisan of War Plating",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR035",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE036C": {
+        "name": "Industrial Protection Suit",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR036",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE037C": {
+        "name": "Auramite Wing Embellishment",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR037",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE038C": {
+        "name": "Blessed Cadaere Renissum",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR038",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE039C": {
+        "name": "Lavish Helmet Spike",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR039",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmE040C": {
+        "name": "Exoarmour Plating",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgArmR040",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL001": {
+        "name": "Purity Seal of the Primarch",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650
+    },
+    "upgArmL002C": {
+        "name": "Adamantium Plates",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE002C",
+                "amount": 2
+            },
+            {
+                "id": "upgHpE015",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL003C": {
+        "name": "Sophisticated Material Plates",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE003C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE008",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL004C": {
+        "name": "Ceramite Plates",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE004C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE010",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL005C": {
+        "name": "Mutation: Impervious Skin",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE015",
+                "amount": 5
+            },
+            {
+                "id": "upgArmR004C",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL006C": {
+        "name": "Grand Tasset Plate",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE010",
+                "amount": 5
+            },
+            {
+                "id": "upgArmR012C",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL007C": {
+        "name": "Immaterial Shroud",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE007C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL008": {
+        "name": "Transdimensional Sanctum",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650
+    },
+    "upgArmL008C": {
+        "name": "Sturdy Plates",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE012C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE009",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL009C": {
+        "name": "Mysterious Device",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE008",
+                "amount": 5
+            },
+            {
+                "id": "upgArmR014C",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL010C": {
+        "name": "Seal of the Emperor's Protection",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpE003",
+                "amount": 5
+            },
+            {
+                "id": "upgArmR001C",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL011C": {
+        "name": "Divine Cloak",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE009",
+                "amount": 5
+            },
+            {
+                "id": "upgArmR013C",
+                "amount": 3
+            }
+        ]
+    },
+    "upgArmL020C": {
+        "name": "Adamantine Blast Plating",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE020C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL021C": {
+        "name": "Tabard of Righteous Wrath",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE021C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL022C": {
+        "name": "Holy Corset Armor",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE022C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL025C": {
+        "name": "Artificer Flak Plates",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE025C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE012C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL023C": {
+        "name": "Infernal Armor Trim",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE023C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL026C": {
+        "name": "Ded Shiny 'ard Plate",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE026C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE012C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL027C": {
+        "name": "Sentry AI Drone Controller",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE027C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL028C": {
+        "name": "Soul-Bonded Wraithbone Plate",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE028C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL029C": {
+        "name": "Great Cult Implements",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE029C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL030C": {
+        "name": "Scale-Plate Mantle",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE030C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL031C": {
+        "name": "Ice Wyrm Hide",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE031C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL032C": {
+        "name": "Inner Circle Hood",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE032C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL033C": {
+        "name": "Hyper-Adaptive Chitin Carapace",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE033C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL034C": {
+        "name": "Artificer Cogwheel Crest",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE034C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL035C": {
+        "name": "Angelic Plating",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE035C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL036C": {
+        "name": "Industrial Carapace",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE036C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE012C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL037C": {
+        "name": "Auramite Wing Adornment",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE037C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE001C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL038C": {
+        "name": "Exalted Cadaere Renissum",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE038C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL039C": {
+        "name": "Lavish Helmet Plume",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE039C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL040C": {
+        "name": "Forge Wrought Plating",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmE040C",
+                "amount": 2
+            },
+            {
+                "id": "upgArmE014C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmL120C": {
+        "name": "Adamantine Mantle",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL100",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL121C": {
+        "name": "Octarian Crusade Seal",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL101",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR016C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR003",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL122C": {
+        "name": "Sabbat-Pattern Visor",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL102",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR13C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR006",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL125C": {
+        "name": "Bastion Honour",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL105",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR017C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL123C": {
+        "name": "Black Rune",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL103",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR14C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR014",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL124C": {
+        "name": "Cloud of Flies",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL104",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR009C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR019",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL126C": {
+        "name": "Bosspole",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL106",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR018",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL127C": {
+        "name": "Iridium Plating",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL107",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR002C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL128C": {
+        "name": "Scriptures of Fortune",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL108",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR016C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR010",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL129C": {
+        "name": "Warpweave Robe",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL109",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR014C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR008",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL130C": {
+        "name": "Transdimensional Sanctum",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL010",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR011C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR006",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL131C": {
+        "name": "Runic Tasset Plate",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL111",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR003C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL132C": {
+        "name": "Shroud of Heroes",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL112",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgDmgR005",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL133C": {
+        "name": "Symbiotic Carapace",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL113",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR004C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR008",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL134C": {
+        "name": "Kataphron Armour",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL114",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgArmR015",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL135C": {
+        "name": "Visage of Death",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL115",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR019",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL136C": {
+        "name": "Gene-sire's Reliquant",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL116",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR015C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR002",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL137C": {
+        "name": "Adamantine Thread Cloak",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL117",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR007C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR014",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL138C": {
+        "name": "Collar of Khorne",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL118",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR013C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR018",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL139C": {
+        "name": "Abhorrent Plating",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL119",
+                "amount": 9
+            },
+            {
+                "id": "upgHpR012C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR018",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL140C": {
+        "name": "RAM Shield Technology",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgHpL099",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR008C",
+                "amount": 1
+            },
+            {
+                "id": "upgHpR014",
+                "amount": 9
+            }
+        ]
+    },
+    "upgArmL202": {
+        "name": "Psyk-Conductive Material",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650
+    },
+    "upgArmL203": {
+        "name": "Archeotech Remnant",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650
+    },
+    "upgArmL204": {
+        "name": "Ancient Alloy",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650
+    },
+    "upgArmL211C": {
+        "name": "Monstrous Defences",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmL203",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL202",
+                "amount": 8
+            },
+            {
+                "id": "upgArmE009",
+                "amount": 8
+            }
+        ]
+    },
+    "upgArmL212C": {
+        "name": "Preternatural Defences",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmL202",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL001",
+                "amount": 8
+            },
+            {
+                "id": "upgArmE008",
+                "amount": 8
+            }
+        ]
+    },
+    "upgArmL213C": {
+        "name": "Superaugmented Defences",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmL001",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL204",
+                "amount": 8
+            },
+            {
+                "id": "upgArmE013",
+                "amount": 8
+            }
+        ]
+    },
+    "upgArmL214C": {
+        "name": "Technocrafted Defences",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650,
+        "crafting": [
+            {
+                "id": "upgArmL204",
+                "amount": 8
+            },
+            {
+                "id": "upgArmL203",
+                "amount": 8
+            },
+            {
+                "id": "upgArmE010",
+                "amount": 8
+            }
+        ]
+    },
+    "upgArmM211C": {
+        "name": "Seal of Indomitability",
+        "rarity": "Mythic",
+        "statType": "fixedArmor",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgArmL001",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM001",
+                "amount": 6
+            },
+            {
+                "id": "upgArmL010C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmM212C": {
+        "name": "Mutation: Impenetrable Skin",
+        "rarity": "Mythic",
+        "statType": "fixedArmor",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgArmL202",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgArmL005C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmM213C": {
+        "name": "Magnificient Garment",
+        "rarity": "Mythic",
+        "statType": "fixedArmor",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgArmL204",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM003",
+                "amount": 6
+            },
+            {
+                "id": "upgArmL011C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgArmM214C": {
+        "name": "Warforged Safeguard",
+        "rarity": "Mythic",
+        "statType": "fixedArmor",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgArmL203",
+                "amount": 3
+            },
+            {
+                "id": "upgHpM004",
+                "amount": 6
+            },
+            {
+                "id": "upgArmL006C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpRCS": {
+        "name": "Coming soon",
+        "rarity": "Rare",
+        "statType": "hp",
+        "gold": 75
+    },
+    "upgDmgRCS": {
+        "name": "Coming soon",
+        "rarity": "Rare",
+        "statType": "dmg",
+        "gold": 75
+    },
+    "upgArmRCS": {
+        "name": "Coming soon",
+        "rarity": "Rare",
+        "statType": "fixedArmor",
+        "gold": 75
+    },
+    "upgHpECS": {
+        "name": "Coming soon",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215
+    },
+    "upgDmgECS": {
+        "name": "Coming soon",
+        "rarity": "Epic",
+        "statType": "dmg",
+        "gold": 215
+    },
+    "upgArmECS": {
+        "name": "Coming soon",
+        "rarity": "Epic",
+        "statType": "fixedArmor",
+        "gold": 215
+    },
+    "upgHpCS": {
+        "name": "Coming soon",
+        "rarity": "Legendary",
+        "statType": "hp",
+        "gold": 650
+    },
+    "upgDmgCS": {
+        "name": "Coming soon",
+        "rarity": "Legendary",
+        "statType": "dmg",
+        "gold": 650
+    },
+    "upgArmCS": {
+        "name": "Coming soon",
+        "rarity": "Legendary",
+        "statType": "fixedArmor",
+        "gold": 650
+    }
+}

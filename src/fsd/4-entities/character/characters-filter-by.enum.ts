@@ -8,4 +8,5 @@
     Imperial,
     Xenos,
     MoW,
+    ReadyToRankUp,
 }

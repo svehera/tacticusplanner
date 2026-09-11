@@ -87,7 +87,10 @@ const AbilityPanel = ({
 
     return (
         <div className="flex w-full max-w-xl min-w-0 basis-full flex-col gap-1 lg:min-w-80 lg:flex-1 lg:basis-auto">
-            <span className="text-xs text-(--soft-fg)">{label}</span>
+            <div className="flex items-baseline gap-2">
+                <span className="text-xs text-(--soft-fg)">{label}</span>
+                {ability?.text.name && <span className="text-sm font-semibold text-(--fg)">{ability.text.name}</span>}
+            </div>
             {ability ? (
                 <div className="rounded-md bg-(--ability-panel)">
                     {/* Description text */}

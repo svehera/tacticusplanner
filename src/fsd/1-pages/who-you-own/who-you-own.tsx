@@ -74,15 +74,24 @@ export const WhoYouOwn = () => {
         }
     }, [teams2, viewControls.filterBy, dispatch]);
 
+    const useRankUpPower = viewControls.filterBy === CharactersFilterBy.ReadyToRankUp;
+
     const factions = useMemo(
         () =>
             CharactersService.orderByFaction(
                 charactersFiltered,
                 viewControls.orderBy,
                 viewPreferences.showBsValue,
-                viewPreferences.showPower
+                viewPreferences.showPower,
+                useRankUpPower
             ),
-        [charactersFiltered, viewControls.orderBy, viewPreferences.showBsValue, viewPreferences.showPower]
+        [
+            charactersFiltered,
+            viewControls.orderBy,
+            viewPreferences.showBsValue,
+            viewPreferences.showPower,
+            useRankUpPower,
+        ]
     );
 
     const totalPower = useMemo(() => sum(factions.map(faction => faction.power)), [factions]);
@@ -92,9 +101,10 @@ export const WhoYouOwn = () => {
         () =>
             CharactersService.orderUnits(
                 factions.flatMap(f => f.units),
-                viewControls.orderBy
+                viewControls.orderBy,
+                useRankUpPower
             ),
-        [factions, viewControls.orderBy]
+        [factions, viewControls.orderBy, useRankUpPower]
     );
 
     const unitId = searchParams.get('unit');
@@ -212,13 +222,20 @@ export const WhoYouOwn = () => {
                     />
                     <div className="min-h-[10px]" />
 
-                    {factionsView && <FactionsGrid factions={factions} onCharacterClick={handleUnitClick} />}
+                    {factionsView && (
+                        <FactionsGrid
+                            factions={factions}
+                            onCharacterClick={handleUnitClick}
+                            showRankUpTarget={useRankUpPower}
+                        />
+                    )}
 
                     {charactersView && (
                         <CharactersGrid
                             characters={units}
                             onAvailableCharacterClick={handleUnitClick}
                             onLockedCharacterClick={handleUnitClick}
+                            showRankUpTarget={useRankUpPower}
                         />
                     )}
 
