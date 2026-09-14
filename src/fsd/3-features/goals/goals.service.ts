@@ -78,7 +78,8 @@ export class GoalsService {
         currentGoalPriority: number,
         characters: ICharacter2[]
     ): IXpLevel {
-        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
+        // Only active prior goals count as reached: a paused goal farms nothing, so its XP must be owed here.
+        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId && g.include);
         const character = characters.find(c => c.snowprintId === characterId);
         const returnValue: IXpLevel = {
             currentLevel: Math.max(character?.level ?? 1, 1),
