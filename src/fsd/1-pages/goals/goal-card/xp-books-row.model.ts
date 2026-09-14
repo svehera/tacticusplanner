@@ -25,6 +25,8 @@ export interface XpBooksRowView {
     valueText: string;
     levels?: { current: number; target: number };
     xpDaysLeft?: number;
+    /** Gold to apply the books (held and outstanding). */
+    gold: number;
     /** XP income finishes later than the material farm, so it's what gates completion. */
     xpIsDriver: boolean;
 }
@@ -61,6 +63,7 @@ export const buildXpBooksRowView = (
             : `${applied} of ${required} books`,
         levels: xpEstimate && { current: xpEstimate.currentLevel, target: xpEstimate.targetLevel },
         xpDaysLeft: goalEstimate.xpDaysLeft,
+        gold: xpEstimate?.gold ?? 0,
         xpIsDriver: (goalEstimate.xpDaysLeft ?? 0) > goalEstimate.daysLeft,
     };
 };

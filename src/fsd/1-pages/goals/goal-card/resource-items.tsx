@@ -2,36 +2,64 @@ import { numberToThousandsString } from '@/fsd/5-shared/lib';
 import { Alliance, Rarity } from '@/fsd/5-shared/model';
 import { BadgeImage, ComponentImage, ForgeBadgeImage, MiscIcon, OrbIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CampaignImage } from '@/fsd/4-entities/campaign';
-
 import { IGoalEstimate } from '@/fsd/3-features/goals';
 
 import { ResourceCostItem } from './resource-cost-row';
 
 /**
- * Ascension orb chips (one per rarity in stock demand) plus an onslaught-token chip when the goal
- * consumes tokens. Shared by the Ascend card body and the goals table's Orbs cell.
+ * Chip label for a stocked resource. Once inventory adjustment has run, `remaining` holds only
+ * what's still to farm and `required` the full requirement, so the label reads `have/required` —
+ * otherwise (unadjusted estimate) it's a plain `×N`.
  */
-export const buildOrbItems = (
-    goalEstimate: IGoalEstimate,
-    fallbackAlliance: Alliance,
-    includeTokens = true
-): ResourceCostItem[] => {
+const stockLabel = (required: number, remaining: number, adjusted: boolean): string =>
+    adjusted ? `${required - remaining}/${required}` : `×${remaining}`;
+
+const stockTooltip = (required: number, remaining: number, name: string, adjusted: boolean): string =>
+    adjusted ? `${required - remaining} of ${required} ${name}s in stock` : name;
+
+/**
+ * Ascension orb chips, one per rarity in stock demand. Shared by the Ascend card body and the goals
+ * table's Orbs cell. Onslaught tokens are an estimate chip, not a resource — see GoalEstimateChips.
+ */
+export const buildOrbItems = (goalEstimate: IGoalEstimate, fallbackAlliance: Alliance): ResourceCostItem[] => {
     const orbAlliance = goalEstimate.orbsEstimate?.alliance ?? fallbackAlliance;
-    const items: ResourceCostItem[] = Object.entries(goalEstimate.orbsEstimate?.orbs ?? {})
-        .filter(([, count]) => count > 0)
-        .map(([rarity, count]) => ({
-            key: `orb-${rarity}`,
-            icon: <OrbIcon alliance={orbAlliance} rarity={Number(rarity) as Rarity} size={20} />,
-            label: `×${count}`,
-            tooltip: `${Rarity[Number(rarity) as Rarity]} ascension orb`,
-        }));
-    if (includeTokens && goalEstimate.oTokensTotal) {
+    const orbsRequired = goalEstimate.orbsEstimate?.orbsRequired;
+    const items: ResourceCostItem[] = [];
+    for (const [rarityKey, remaining] of Object.entries(goalEstimate.orbsEstimate?.orbs ?? {})) {
+        const rarity = Number(rarityKey) as Rarity;
+        const required = orbsRequired?.[rarity] ?? remaining;
+        if (required <= 0) continue;
         items.push({
-            key: 'onslaught',
-            icon: <CampaignImage campaign="Onslaught" size={20} />,
-            label: `×${goalEstimate.oTokensTotal}`,
-            tooltip: 'Onslaught tokens',
+            key: `orb-${rarity}`,
+            icon: <OrbIcon alliance={orbAlliance} rarity={rarity} size={20} />,
+            label: stockLabel(required, remaining, orbsRequired !== undefined),
+            tooltip: stockTooltip(required, remaining, `${Rarity[rarity]} ascension orb`, orbsRequired !== undefined),
+        });
+    }
+    return items;
+};
+
+/**
+ * Badge chips for one alliance. Once inventory adjustment has run, `badges` holds only what's still
+ * to farm and `badgesRequired` the full requirement, so the label reads `have/required` — otherwise
+ * (unadjusted estimate) it's a plain `×N`.
+ */
+const buildBadgeItems = (
+    badges: Record<Rarity, number>,
+    badgesRequired: Record<Rarity, number> | undefined,
+    alliance: Alliance
+): ResourceCostItem[] => {
+    const items: ResourceCostItem[] = [];
+    for (const [rarityKey, remaining] of Object.entries(badges)) {
+        const rarity = Number(rarityKey) as Rarity;
+        const required = badgesRequired?.[rarity] ?? remaining;
+        if (required <= 0) continue;
+        const rarityName = Rarity[rarity];
+        items.push({
+            key: `badge-${rarity}`,
+            icon: <BadgeImage alliance={alliance} rarity={rarity} size="small" className="h-5 w-auto" />,
+            label: stockLabel(required, remaining, badgesRequired !== undefined),
+            tooltip: stockTooltip(required, remaining, `${rarityName} ability badge`, badgesRequired !== undefined),
         });
     }
     return items;
@@ -47,37 +75,29 @@ export const buildMowCostItems = (
     includeGold = true
 ): ResourceCostItem[] => {
     if (!mow) return [];
-    const items: ResourceCostItem[] = [];
-    for (const [rarity, count] of Object.entries(mow.badges)) {
-        if (count > 0)
-            items.push({
-                key: `badge-${rarity}`,
-                icon: (
-                    <BadgeImage
-                        alliance={alliance}
-                        rarity={Number(rarity) as Rarity}
-                        size="small"
-                        className="h-5 w-auto"
-                    />
-                ),
-                label: `×${count}`,
-                tooltip: `${Rarity[Number(rarity) as Rarity]} ability badge`,
-            });
+    const items = buildBadgeItems(mow.badges, mow.badgesRequired, alliance);
+    for (const [rarityKey, remaining] of Object.entries(mow.forgeBadges)) {
+        const rarity = Number(rarityKey) as Rarity;
+        const required = mow.forgeBadgesRequired?.[rarity] ?? remaining;
+        if (required <= 0) continue;
+        items.push({
+            key: `forge-${rarity}`,
+            icon: (
+                <span className="inline-flex [&>img]:h-5 [&>img]:w-auto">
+                    <ForgeBadgeImage rarity={rarity} size="small" />
+                </span>
+            ),
+            label: stockLabel(required, remaining, mow.forgeBadgesRequired !== undefined),
+            tooltip: stockTooltip(
+                required,
+                remaining,
+                `${Rarity[rarity]} forge badge`,
+                mow.forgeBadgesRequired !== undefined
+            ),
+        });
     }
-    for (const [rarity, count] of Object.entries(mow.forgeBadges)) {
-        if (count > 0)
-            items.push({
-                key: `forge-${rarity}`,
-                icon: (
-                    <span className="inline-flex [&>img]:h-5 [&>img]:w-auto">
-                        <ForgeBadgeImage rarity={Number(rarity) as Rarity} size="small" />
-                    </span>
-                ),
-                label: `×${count}`,
-                tooltip: `${Rarity[Number(rarity) as Rarity]} forge badge`,
-            });
-    }
-    if (mow.components > 0)
+    const componentsRequired = mow.componentsRequired ?? mow.components;
+    if (componentsRequired > 0)
         items.push({
             key: 'component',
             icon: (
@@ -85,8 +105,13 @@ export const buildMowCostItems = (
                     <ComponentImage alliance={alliance} size="small" />
                 </span>
             ),
-            label: `×${mow.components}`,
-            tooltip: 'MoW Component',
+            label: stockLabel(componentsRequired, mow.components, mow.componentsRequired !== undefined),
+            tooltip: stockTooltip(
+                componentsRequired,
+                mow.components,
+                'MoW Component',
+                mow.componentsRequired !== undefined
+            ),
         });
     if (includeGold && mow.gold > 0)
         items.push({
@@ -107,23 +132,7 @@ export const buildAbilityCostItems = (
     includeGold = true
 ): ResourceCostItem[] => {
     if (!abilities) return [];
-    const items: ResourceCostItem[] = [];
-    for (const [rarity, count] of Object.entries(abilities.badges)) {
-        if (count > 0)
-            items.push({
-                key: `badge-${rarity}`,
-                icon: (
-                    <BadgeImage
-                        alliance={abilities.alliance}
-                        rarity={Number(rarity) as Rarity}
-                        size="small"
-                        className="h-5 w-auto"
-                    />
-                ),
-                label: `×${count}`,
-                tooltip: `${Rarity[Number(rarity) as Rarity]} ability badge`,
-            });
-    }
+    const items = buildBadgeItems(abilities.badges, abilities.badgesRequired, abilities.alliance);
     if (includeGold && abilities.gold > 0)
         items.push({
             key: 'gold',

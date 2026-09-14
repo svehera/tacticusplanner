@@ -1193,7 +1193,8 @@ describe('GoalsService.adjustGoalEstimates', () => {
             expect(adjustedGoal?.xpEstimate).toMatchObject({
                 bookRarity: Rarity.Legendary,
                 books: 0,
-                gold: 0,
+                // Held books still cost gold to apply: 2 Legendary × 500.
+                gold: 1000,
                 currentLevel: 10,
                 targetLevel: 15,
                 xpLeft: 0,
@@ -1203,6 +1204,43 @@ describe('GoalsService.adjustGoalEstimates', () => {
             expect(adjustedGoal?.xpBooksRequired).toBe(2);
             expect(adjustedGoal?.xpBooksTotal).toBe(0);
             expect(adjustedGoal?.xpDaysLeft).toBeUndefined();
+        });
+
+        it('prices gold per book rarity: held books at their own cost, outstanding at the display rarity', () => {
+            const goalId = 'goal-xp-gold';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 4,
+                    bookRarity: Rarity.Legendary,
+                    gold: 2000,
+                    currentLevel: 10,
+                    targetLevel: 15,
+                    xpLeft: 50_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+            const inventory = makeEmptyInventory();
+            // 1 Legendary (12 500) + 5 Epic (2500) cover 25 000; 25 000 XP remains = 2 Legendary.
+            inventory.xpBooks[Rarity.Legendary] = 1;
+            inventory.xpBooks[Rarity.Epic] = 5;
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                { ...noXpUse, useLegendary: true, useEpic: true },
+                [],
+                [],
+                noXpIncome
+            );
+
+            const adjustedGoal = result.goalEstimates.find(goalEstimate => goalEstimate.goalId === goalId);
+
+            // 1 × 500 + 5 × 150 + 2 × 500
+            expect(adjustedGoal?.xpEstimate?.gold).toBe(2250);
+            expect(adjustedGoal?.xpEstimate?.books).toBe(2);
+            expect(result.neededXp).toBe(25_000);
         });
 
         it('steps down to the largest codex that fits when the preferred one overshoots', () => {
