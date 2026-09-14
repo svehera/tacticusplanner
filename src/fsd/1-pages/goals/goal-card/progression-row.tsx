@@ -12,6 +12,8 @@ interface Props {
     days?: number;
     /** Energy cost, right-aligned next to the days. Hidden when 0/undefined. */
     energy?: number;
+    /** Onslaught tokens cost, right-aligned next to the energy. Hidden when 0/undefined. */
+    tokens?: number;
     /**
      * Accessible description of the transition (e.g. "Diamond 2 to Diamond 3"). When set, the
      * emblem/arrow group is announced as one label instead of each icon's raw alt text.
@@ -20,7 +22,7 @@ interface Props {
 }
 
 /** `from → to` row with an arrow separator, optional trailing content, and a right-aligned days/energy estimate. */
-export const ProgressionRow: React.FC<Props> = ({ from, to, trailing, days, energy, ariaLabel }) => (
+export const ProgressionRow: React.FC<Props> = ({ from, to, trailing, days, energy, tokens, ariaLabel }) => (
     <div className="flex min-h-[30px] items-center justify-between gap-2">
         <div
             className="flex min-w-0 items-center gap-1"
@@ -30,6 +32,6 @@ export const ProgressionRow: React.FC<Props> = ({ from, to, trailing, days, ener
             {to}
             {trailing && <div className="ml-1 flex shrink-0 items-center gap-1">{trailing}</div>}
         </div>
-        <GoalEstimateChips days={days} energy={energy} />
+        <GoalEstimateChips days={days} energy={energy} tokens={tokens} />
     </div>
 );

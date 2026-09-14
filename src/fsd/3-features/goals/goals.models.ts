@@ -32,8 +32,13 @@ export interface IMowMaterialsTotal {
     components: number;
     salvage: number;
     gold: number;
+    /** Badges still to farm once held ones are applied (equals `badgesRequired` before adjustment). */
     badges: Record<Rarity, number>;
+    /** Full badge requirement, set once inventory adjustment runs so the UI can show have/required. */
+    badgesRequired?: Record<Rarity, number>;
     forgeBadges: Record<Rarity, number>;
+    forgeBadgesRequired?: Record<Rarity, number>;
+    componentsRequired?: number;
     orbs: Record<Rarity, number>;
 }
 

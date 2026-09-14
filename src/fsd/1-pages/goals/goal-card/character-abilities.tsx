@@ -46,7 +46,7 @@ export const GoalCardCharacterAbilities: React.FC<Props> = ({ goal, goalEstimate
             )}
             {showBooks && (
                 <div className={hasTop || blocks.length > 0 ? 'border-t border-(--card-border) pt-2.5' : ''}>
-                    <XpBooksRow goalEstimate={goalEstimate} bookRarity={bookRarity} />
+                    <XpBooksRow goalEstimate={goalEstimate} bookRarity={bookRarity} showGold />
                 </div>
             )}
         </div>

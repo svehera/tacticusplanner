@@ -42,6 +42,7 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters
                     to={<StarsIcon stars={goal.starsEnd} />}
                     days={days}
                     energy={goalEstimate.energyTotal}
+                    tokens={goalEstimate.oTokensTotal}
                     ariaLabel="Ascension stars progression"
                 />
             ) : (
@@ -63,6 +64,7 @@ export const GoalCardAscend: React.FC<Props> = ({ goal, goalEstimate, characters
                     trailing={!isMinStars && <StarsIcon stars={goal.starsEnd} />}
                     days={days}
                     energy={goalEstimate.energyTotal}
+                    tokens={goalEstimate.oTokensTotal}
                     ariaLabel={`${RarityMapper.rarityToRarityString(goal.rarityStart)} to ${RarityMapper.rarityToRarityString(goal.rarityEnd)}`}
                 />
             )}

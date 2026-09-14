@@ -34,7 +34,7 @@ import { charsUnlockShards } from 'src/models/constants';
 import { PersonalGoalType } from 'src/models/enums';
 
 import { getEstimatedDateShort, numberToThousandsString } from '@/fsd/5-shared/lib';
-import { Rarity, RarityMapper } from '@/fsd/5-shared/model';
+import { RarityMapper } from '@/fsd/5-shared/model';
 import { AccessibleTooltip, Button, ProgressBar } from '@/fsd/5-shared/ui';
 import { MiscIcon, RarityIcon, StarsIcon, UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
@@ -865,7 +865,7 @@ export const GoalsTable: React.FC<Props> = ({
                 if (!data || !('unitAlliance' in data)) return emptyCell;
                 const est = estimateMapReference.current.get(data.goalId);
                 if (!est?.orbsEstimate) return emptyCell;
-                const items = buildOrbItems(est, data.unitAlliance, false);
+                const items = buildOrbItems(est, data.unitAlliance);
                 if (items.length === 0) return emptyCell;
                 return (
                     <div className="flex h-full w-full flex-col justify-center py-2">
@@ -929,40 +929,35 @@ export const GoalsTable: React.FC<Props> = ({
 
         const abilitiesBooksCol: ColDef<TypedGoalSelect> = {
             headerName: 'Books',
-            flex: 1,
-            minWidth: 120,
-            valueGetter: params => estimateMapReference.current.get(params.data?.goalId ?? '')?.xpBooksTotal ?? 0,
+            flex: 1.5,
+            minWidth: 150,
+            sortable: false,
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) => {
                 const est = estimateMapReference.current.get(params.data?.goalId ?? '');
-                if (!est || est.xpBooksTotal === 0) return emptyCell;
-                const xpEst = est.xpEstimateAbilities ?? est.xpEstimate;
-                const bookIcon =
-                    xpEst?.bookRarity === undefined
-                        ? undefined
-                        : ((Rarity[xpEst.bookRarity].toLowerCase() + 'Book') as never);
-                const levelRange = xpEst ? `Lv ${xpEst.currentLevel} → ${xpEst.targetLevel}` : undefined;
+                // applied/required, not the post-inventory remainder — a fully stocked goal still needs its books.
+                if (!est || !hasXpBooks(est)) return emptyCell;
                 return (
-                    <div className="flex h-full min-w-0 flex-col justify-center gap-0.5 py-2 leading-normal">
-                        <span className="flex items-center gap-1.5 text-sm font-medium text-(--fg) tabular-nums">
-                            {est.xpBooksTotal.toLocaleString()}
-                            {bookIcon && <MiscIcon icon={bookIcon} width={20} height={20} />}
-                        </span>
-                        {levelRange && <span className="text-xs text-(--soft-fg)">{levelRange}</span>}
+                    <div className="flex h-full w-full flex-col justify-center py-1">
+                        <XpBooksRow goalEstimate={est} bookRarity={est.xpEstimateAbilities?.bookRarity} />
                     </div>
                 );
             },
         };
 
+        // Ability levelling gold plus the gold to apply the XP books — the same two pots the section header sums.
+        const abilitiesGold = (goalId: string | undefined): number => {
+            const est = estimateMapReference.current.get(goalId ?? '');
+            return (est?.abilitiesEstimate?.gold ?? 0) + (est?.xpEstimateAbilities?.gold ?? 0);
+        };
         const abilitiesGoldCol: ColDef<TypedGoalSelect> = {
             headerName: 'Gold',
             width: 96,
             maxWidth: 96,
             headerClass: 'ag-right-aligned-header',
-            valueGetter: params =>
-                estimateMapReference.current.get(params.data?.goalId ?? '')?.abilitiesEstimate?.gold ?? 0,
+            valueGetter: params => abilitiesGold(params.data?.goalId),
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) =>
                 numericCell(
-                    estimateMapReference.current.get(params.data?.goalId ?? '')?.abilitiesEstimate?.gold,
+                    abilitiesGold(params.data?.goalId),
                     <MiscIcon icon="coin" width={20} height={20} />,
                     numberToThousandsString
                 ),

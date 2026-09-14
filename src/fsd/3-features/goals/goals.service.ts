@@ -11,6 +11,7 @@ import {
     Rank,
     Rarity,
     RarityStars,
+    XP_BOOK_GOLD_COST,
     XP_BOOK_VALUE,
     XP_BOOK_ORDER,
     pickXpBookRarity,
@@ -77,7 +78,8 @@ export class GoalsService {
         currentGoalPriority: number,
         characters: ICharacter2[]
     ): IXpLevel {
-        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId);
+        // Only active prior goals count as reached: a paused goal farms nothing, so its XP must be owed here.
+        const priorGoals = goals.filter(g => g.priority < currentGoalPriority && g.unitId === characterId && g.include);
         const character = characters.find(c => c.snowprintId === characterId);
         const returnValue: IXpLevel = {
             currentLevel: Math.max(character?.level ?? 1, 1),
@@ -845,11 +847,20 @@ export class GoalsService {
         };
     }
 
-    private static adjustNeededXp(xpNeeded: number, heldBooks: Record<Rarity, number>): number {
+    /**
+     * Consumes held books against `xpNeeded`. Returns the XP still uncovered and the gold it costs
+     * to apply the books that were consumed.
+     */
+    private static adjustNeededXp(
+        xpNeeded: number,
+        heldBooks: Record<Rarity, number>
+    ): { xpNeeded: number; goldForHeldBooks: number } {
+        let goldForHeldBooks = 0;
         for (const rarity of XP_BOOK_ORDER) {
             const usable = Math.min(Math.floor(xpNeeded / XP_BOOK_VALUE[rarity]), heldBooks[rarity]);
             heldBooks[rarity] -= usable;
             xpNeeded -= usable * XP_BOOK_VALUE[rarity];
+            goldForHeldBooks += usable * XP_BOOK_GOLD_COST[rarity];
         }
 
         if (xpNeeded > 0) {
@@ -857,11 +868,12 @@ export class GoalsService {
                 while (xpNeeded > 0 && heldBooks[rarity] > 0) {
                     xpNeeded = Math.max(0, xpNeeded - XP_BOOK_VALUE[rarity]);
                     heldBooks[rarity] -= 1;
+                    goldForHeldBooks += XP_BOOK_GOLD_COST[rarity];
                 }
             }
         }
 
-        return xpNeeded;
+        return { xpNeeded, goldForHeldBooks };
     }
 
     private static computeHeldBooks(inventory: IInventory, xpUseState: XpUseState): Record<Rarity, number> {
@@ -985,7 +997,7 @@ export class GoalsService {
         // Codices are indivisible, so every XP→book conversion rounds UP.
         goal.xpBooksRequired = Math.ceil(remainingXp / displayBookValue);
         goal.xpRequiredTotal = remainingXp;
-        const xpNeeded = this.adjustNeededXp(remainingXp, heldBooks);
+        const { xpNeeded, goldForHeldBooks } = this.adjustNeededXp(remainingXp, heldBooks);
         goal.xpBooksApplied = goal.xpBooksRequired - Math.ceil(xpNeeded / displayBookValue);
         goal.xpDaysLeft = undefined;
 
@@ -993,9 +1005,12 @@ export class GoalsService {
 
         goal.xpBooksTotal = Math.ceil(xpNeeded / displayBookValue);
         currentEstimate.bookRarity = displayRarity;
+        // Applying a book costs gold whether it's already held or still to be farmed: held books at
+        // their own rarity's cost, outstanding books at the display rarity.
+        currentEstimate.gold =
+            goldForHeldBooks + Math.ceil(xpNeeded / displayBookValue) * XP_BOOK_GOLD_COST[displayRarity];
         if (xpNeeded === 0) {
             currentEstimate.books = 0;
-            currentEstimate.gold = 0;
             currentEstimate.xpLeft = 0;
             return { xpNeeded: 0, newXpBooksAccrual: xpBooksAccrual };
         }
@@ -1028,19 +1043,25 @@ export class GoalsService {
         ascendGoals: ICharacterAscendGoal[]
     ) {
         if (goal.abilitiesEstimate || goal.mowEstimate) {
-            const badges = goal.mowEstimate?.badges ?? goal.abilitiesEstimate!.badges;
+            const badgeEstimate = goal.mowEstimate ?? goal.abilitiesEstimate!;
+            // Snapshot the full requirement before held badges are subtracted so the UI can show progress.
+            badgeEstimate.badgesRequired ??= { ...badgeEstimate.badges };
+            const badges = badgeEstimate.badges;
             const alliance =
                 goal.abilitiesEstimate?.alliance ?? GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
             this._adjustAllianceRarityItems(badges, alliance, heldBadges, neededBadges);
         }
 
         if (goal.orbsEstimate) {
+            goal.orbsEstimate.orbsRequired ??= { ...goal.orbsEstimate.orbs };
             const orbs = goal.orbsEstimate.orbs;
             const alliance = goal.orbsEstimate.alliance ?? GoalsService.getGoalAlliance(goal.goalId, ascendGoals);
             this._adjustAllianceRarityItems(orbs, alliance, heldOrbs, neededOrbs);
         }
 
         if (goal.mowEstimate) {
+            goal.mowEstimate.forgeBadgesRequired ??= { ...goal.mowEstimate.forgeBadges };
+            goal.mowEstimate.componentsRequired ??= goal.mowEstimate.components;
             this._adjustForgeBadges(goal.mowEstimate, heldForgeBadges, neededForgeBadges);
             const alliance = GoalsService.getGoalAlliance(goal.goalId, upgradeRankOrMowGoals)!;
             this._adjustMowComponents(goal.mowEstimate, alliance, heldComponents, neededComponents);

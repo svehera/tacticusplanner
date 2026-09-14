@@ -1,6 +1,7 @@
 import { Calendar } from 'lucide-react';
 import React from 'react';
 
+import { numberToThousandsString } from '@/fsd/5-shared/lib';
 import { Rarity } from '@/fsd/5-shared/model';
 import { AccessibleTooltip } from '@/fsd/5-shared/ui';
 import { MiscIcon } from '@/fsd/5-shared/ui/icons';
@@ -13,6 +14,8 @@ interface Props {
     goalEstimate: IGoalEstimate;
     /** Fallback codex rarity, used only when the estimate hasn't been assigned one. */
     bookRarity: Rarity | undefined;
+    /** Append the gold needed to apply the books. Off by default — the goals table has its own Gold column. */
+    showGold?: boolean;
 }
 
 /**
@@ -20,7 +23,7 @@ interface Props {
  * chip. Shared by the UpgradeRank/CharacterAbilities card bodies and the goals table so all read
  * identically. Renders nothing when the goal needs no XP books.
  */
-export const XpBooksRow: React.FC<Props> = ({ goalEstimate, bookRarity }) => {
+export const XpBooksRow: React.FC<Props> = ({ goalEstimate, bookRarity, showGold = false }) => {
     const view = buildXpBooksRowView(goalEstimate, bookRarity);
     if (!view) return;
 
@@ -60,6 +63,17 @@ export const XpBooksRow: React.FC<Props> = ({ goalEstimate, bookRarity }) => {
                         <span className="inline-flex shrink-0 items-center gap-0.5 text-xs text-(--soft-fg) tabular-nums">
                             <Calendar className="size-3.5" aria-hidden />
                             <span className="font-bold text-(--fg)">{Math.ceil(view.xpDaysLeft)}</span>d
+                        </span>
+                    </AccessibleTooltip>
+                </>
+            )}
+            {showGold && view.gold > 0 && (
+                <>
+                    <span aria-hidden className="h-3 w-px shrink-0 bg-(--card-border)" />
+                    <AccessibleTooltip title="Gold to apply the XP books">
+                        <span className="inline-flex shrink-0 items-center gap-0.5 text-xs text-(--soft-fg) tabular-nums">
+                            <span className="font-bold text-(--fg)">{numberToThousandsString(view.gold)}</span>
+                            <MiscIcon icon="coin" width={14} height={14} />
                         </span>
                     </AccessibleTooltip>
                 </>
