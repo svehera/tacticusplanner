@@ -944,16 +944,20 @@ export const GoalsTable: React.FC<Props> = ({
             },
         };
 
+        // Ability levelling gold plus the gold to apply the XP books — the same two pots the section header sums.
+        const abilitiesGold = (goalId: string | undefined): number => {
+            const est = estimateMapReference.current.get(goalId ?? '');
+            return (est?.abilitiesEstimate?.gold ?? 0) + (est?.xpEstimateAbilities?.gold ?? 0);
+        };
         const abilitiesGoldCol: ColDef<TypedGoalSelect> = {
             headerName: 'Gold',
             width: 96,
             maxWidth: 96,
             headerClass: 'ag-right-aligned-header',
-            valueGetter: params =>
-                estimateMapReference.current.get(params.data?.goalId ?? '')?.abilitiesEstimate?.gold ?? 0,
+            valueGetter: params => abilitiesGold(params.data?.goalId),
             cellRenderer: (params: ICellRendererParams<TypedGoalSelect>) =>
                 numericCell(
-                    estimateMapReference.current.get(params.data?.goalId ?? '')?.abilitiesEstimate?.gold,
+                    abilitiesGold(params.data?.goalId),
                     <MiscIcon icon="coin" width={20} height={20} />,
                     numberToThousandsString
                 ),
