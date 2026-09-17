@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "갈라티안",
+        "shortName": "갈라티안",
+        "name": "갈라티안",
+        "title": "리뎀터 드레드노트"
+    },
+    "adeptExorcist": {
+        "extraShortName": "엑소시스트",
+        "shortName": "엑소시스트",
+        "name": "엑소시스트",
+        "title": "구축전차"
+    },
+    "necroReanimator": {
+        "extraShortName": "리애니메이터",
+        "shortName": "리애니메이터",
+        "name": "카놉텍 리애니메이터",
+        "title": "카놉텍 구조체"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "맬리어스 로켓 런처",
+        "shortName": "맬리어스 로켓 런처",
+        "name": "맬리어스 로켓 런처",
+        "title": "야포 부대"
+    },
+    "blackForgefiend": {
+        "extraShortName": "포지핀드",
+        "shortName": "포지핀드",
+        "name": "포지핀드",
+        "title": "데몬 엔진"
+    },
+    "deathCrawler": {
+        "extraShortName": "전염병 폭발 크롤러",
+        "shortName": "전염병 폭발 크롤러",
+        "name": "전염병 폭발 크롤러",
+        "title": "데몬 엔진"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "루카트럭",
+        "shortName": "루카트럭",
+        "name": "루카트럭 스퀴그버기",
+        "title": "스피드프릭 트럭"
+    },
+    "tauBroadside": {
+        "extraShortName": "손지",
+        "shortName": "손지",
+        "name": "샤스브레 바이올라 손지",
+        "title": "XV88 브로드사이드 배틀슈트"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "즈카르",
+        "shortName": "즈카르",
+        "name": "아포피타르 즈카르",
+        "title": "젠취의 데몬 프린스"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "스톰 스피더",
+        "shortName": "스톰 스피더",
+        "name": "스톰 스피더 헤일스트라이크",
+        "title": "레이븐윙 타격 제작"
+    },
+    "tyranBiovore": {
+        "extraShortName": "바이오보어",
+        "shortName": "바이오보어",
+        "name": "바이오보어",
+        "title": "포진 유기체"
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "迦拉太",
+        "shortName": "迦拉太",
+        "name": "迦拉太",
+        "title": "救赎者无畏"
+    },
+    "adeptExorcist": {
+        "extraShortName": "驱魔者战车",
+        "shortName": "驱魔者战车",
+        "name": "驱魔者战车",
+        "title": "火炮坦克"
+    },
+    "necroReanimator": {
+        "extraShortName": "重生者",
+        "shortName": "重生者",
+        "name": "墓穴重生者",
+        "title": "墓穴构装体"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "重锤火箭发射器",
+        "shortName": "重锤火箭发射器",
+        "name": "重锤火箭发射器",
+        "title": "野战炮群"
+    },
+    "blackForgefiend": {
+        "extraShortName": "铸造恶魔",
+        "shortName": "铸造恶魔",
+        "name": "铸造恶魔",
+        "title": "恶魔引擎"
+    },
+    "deathCrawler": {
+        "extraShortName": "瘟爆履带战车",
+        "shortName": "瘟爆履带战车",
+        "name": "瘟爆履带战车",
+        "title": "恶魔引擎"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "越野战车",
+        "shortName": "越野战车",
+        "name": "跳跳越野战车",
+        "title": "极速狂飙蛮人卡车"
+    },
+    "tauBroadside": {
+        "extraShortName": "忒颂吉",
+        "shortName": "忒颂吉",
+        "name": "英雄维欧拉·忒颂吉",
+        "title": "XV88 舷炮战斗服"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "扎卡",
+        "shortName": "扎卡",
+        "name": "阿波菲塔尔·扎卡",
+        "title": "奸奇恶魔亲王"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "风暴速攻艇",
+        "shortName": "风暴速攻艇",
+        "name": "冰雹型风暴速攻艇",
+        "title": "鸦翼打击艇"
+    },
+    "tyranBiovore": {
+        "extraShortName": "孢子兽",
+        "shortName": "孢子兽",
+        "name": "孢子兽",
+        "title": "火炮有机体"
+    }
+}

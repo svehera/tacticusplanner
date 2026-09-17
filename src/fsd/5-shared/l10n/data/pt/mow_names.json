@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Galatian",
+        "shortName": "Galatian",
+        "name": "Galatian",
+        "title": "Dreadnought Redentor"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Exorcista",
+        "shortName": "Exorcista",
+        "name": "Exorcista",
+        "title": "Tanque de Artilharia"
+    },
+    "necroReanimator": {
+        "extraShortName": "Reanimador",
+        "shortName": "Reanimador",
+        "name": "Reanimador Canoptek",
+        "title": "Construto de Canoptek"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Lança-foguetes Malleus",
+        "shortName": "Lança-foguetes Malleus",
+        "name": "Lança-foguetes Malleus",
+        "title": "Bateria de Munições de Campo"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Vilforja",
+        "shortName": "Vilforja",
+        "name": "Vilforja",
+        "title": "Máquina Demoníaca"
+    },
+    "deathCrawler": {
+        "extraShortName": "Rastejador de Explosão de Pragas",
+        "shortName": "Rastejador de Explosão de Pragas",
+        "name": "Rastejador de Explosão de Pragas",
+        "title": "Máquina Demoníaca"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Rukkatrukk",
+        "shortName": "Rukkatrukk",
+        "name": "Rukkatrukk Squigbuggy",
+        "title": "Caminhaum Ligeirinhu"
+    },
+    "tauBroadside": {
+        "extraShortName": "Tson'ji",
+        "shortName": "Tson'ji",
+        "name": "Shas'vre Vior'la Tson'ji",
+        "title": "Traje de Batalha de Artilharia XV88"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "Z'Kar",
+        "shortName": "Z'Kar",
+        "name": "Apophitar Z'Kar",
+        "title": "Príncipe Demônio de Tzeentch"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Velocista da Tempestade",
+        "shortName": "Velocista da Tempestade",
+        "name": "Ataque de Granizo do Velocista da Tempestade",
+        "title": "Nave de Ataque Asa-de-corvo"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Bióvoro",
+        "shortName": "Bióvoro",
+        "name": "Bióvoro",
+        "title": "Organismo de Artilharia"
+    }
+}

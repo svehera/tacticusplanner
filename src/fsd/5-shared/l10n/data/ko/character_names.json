@@ -1,0 +1,704 @@
+{
+    "ultraTigurius": {
+        "extraShortName": "티구리우스",
+        "shortName": "바로 티구리우스",
+        "name": "바로 티구리우스",
+        "title": "치프 라이브러리언"
+    },
+    "ultraEliminatorSgt": {
+        "extraShortName": "케르투스",
+        "shortName": "케르투스",
+        "name": "서전트 케르투스",
+        "title": "엘리미네이터 서전트"
+    },
+    "ultraInceptorSgt": {
+        "extraShortName": "벨라토르",
+        "shortName": "벨라토르",
+        "name": "서전트 벨라토르",
+        "title": "인셉터 서전트"
+    },
+    "ultraApothecary": {
+        "extraShortName": "잉키수스",
+        "shortName": "잉키수스",
+        "name": "아포세카리 잉키수스",
+        "title": "아포세카리"
+    },
+    "ultraCalgar": {
+        "extraShortName": "칼가",
+        "shortName": "마니우스 칼가",
+        "name": "마니우스 칼가",
+        "title": "챕터 마스터"
+    },
+    "ultraTitus": {
+        "extraShortName": "타이투스",
+        "shortName": "타이투스",
+        "name": "디메트리안 타이투스",
+        "title": "프라이머리스 대위"
+    },
+    "adeptRetributor": {
+        "extraShortName": "빈딕타",
+        "shortName": "빈딕타",
+        "name": "배틀 시스터 빈딕타",
+        "title": "셀레스티안"
+    },
+    "adeptHospitaller": {
+        "extraShortName": "이사벨라",
+        "shortName": "이사벨라",
+        "name": "이사벨라 마리켄",
+        "title": "호스피탈러"
+    },
+    "adeptMorvenn": {
+        "extraShortName": "모르벤 발",
+        "shortName": "모르벤 발",
+        "name": "모르벤 발",
+        "title": "아뎁타 소로리타스의 대수녀원장"
+    },
+    "adeptCanoness": {
+        "extraShortName": "로즈위타",
+        "shortName": "로즈위타",
+        "name": "로스위타 에스더",
+        "title": "카노네스"
+    },
+    "adeptCelestine": {
+        "extraShortName": "셀레스틴",
+        "shortName": "셀레스틴",
+        "name": "살아있는 성녀 셀레스틴",
+        "title": "살아있는 성녀"
+    },
+    "necroWarden": {
+        "extraShortName": "마코텝",
+        "shortName": "마코텝",
+        "name": "로얄 파수꾼 마코텝",
+        "title": "로얄 파수꾼"
+    },
+    "necroDestroyer": {
+        "extraShortName": "이모스페크",
+        "shortName": "이모스페크",
+        "name": "헥스마크 디스트로이어 이모스페크",
+        "title": "헥스마크 디스트로이어"
+    },
+    "necroSpyder": {
+        "extraShortName": "알레프 널",
+        "shortName": "알레프 널",
+        "name": "카놉텍 스파이더 알레프 널",
+        "title": "카놉텍 스파이더"
+    },
+    "necroPlasmancer": {
+        "extraShortName": "투트모세",
+        "shortName": "투트모세",
+        "name": "플라즈맨서 투트모세",
+        "title": "플라즈맨서"
+    },
+    "necroOverlord": {
+        "extraShortName": "아누페트",
+        "shortName": "아누페트",
+        "name": "오버로드 아누페트",
+        "title": "오버로드"
+    },
+    "necroChronomancer": {
+        "extraShortName": "토스멕",
+        "shortName": "토스멕",
+        "name": "토스멕",
+        "title": "크로노맨서"
+    },
+    "astraPrimarisPsy": {
+        "extraShortName": "시빌",
+        "shortName": "시빌 데바인",
+        "name": "시빌 데바인",
+        "title": "프라이머리스 사이커"
+    },
+    "astraYarrick": {
+        "extraShortName": "야릭",
+        "shortName": "커미사르 야릭",
+        "name": "커미사르 세바스찬 야릭",
+        "title": "로드 커미사르"
+    },
+    "astraBullgryn": {
+        "extraShortName": "커트",
+        "shortName": "커트 스코든",
+        "name": "커트 스코든",
+        "title": "불그린 본헤드"
+    },
+    "astraOrdnance": {
+        "extraShortName": "타데우스",
+        "shortName": "타데우스 노블",
+        "name": "타데우스 노블",
+        "title": "포병지휘관"
+    },
+    "astraCreed": {
+        "extraShortName": "크리드",
+        "shortName": "카스텔란 크리드",
+        "name": "로드 카스텔란 우르사카 E. 크리드",
+        "title": "아스트라 밀리타리움의 로드 제너럴"
+    },
+    "astraDreir": {
+        "extraShortName": "드레이어",
+        "shortName": "대원수 드레이어",
+        "name": "대원수 바난 드레이어",
+        "title": "대원수"
+    },
+    "blackTerminator": {
+        "extraShortName": "앵그락스",
+        "shortName": "앵그락스",
+        "name": "드라크퍼스 앵그락스",
+        "title": "터미네이터 챔피언"
+    },
+    "blackObliterator": {
+        "extraShortName": "폴크",
+        "shortName": "폴크",
+        "name": "워프로 다시 제련된 폴크",
+        "title": "오블리터레이터"
+    },
+    "blackPossession": {
+        "extraShortName": "아르키마토스",
+        "shortName": "아르키마토스",
+        "name": "마스터 아르키마토스",
+        "title": "빙의의 군주"
+    },
+    "blackHaarken": {
+        "extraShortName": "하켄",
+        "shortName": "하켄 월드클레이머",
+        "name": "하켄 월드클레이머",
+        "title": "종말의 전조"
+    },
+    "blackAbaddon": {
+        "extraShortName": "아바돈",
+        "shortName": "약탈자 아바돈",
+        "name": "약탈자 아바돈",
+        "title": "카오스의 워마스터"
+    },
+    "deathTyphus": {
+        "extraShortName": "타이퍼스",
+        "shortName": "타이퍼스",
+        "name": "디스트로이어 하이브의 숙주 타이퍼스",
+        "title": "역병 신의 전령"
+    },
+    "deathBlightlord": {
+        "extraShortName": "말라두스",
+        "shortName": "말라두스",
+        "name": "말라두스 플레모어",
+        "title": "블라이트로드 챔피언"
+    },
+    "deathRotbone": {
+        "extraShortName": "나우세우스",
+        "shortName": "썩은 뼈 나우세우스",
+        "name": "썩은 뼈 나우세우스",
+        "title": "역병 외과 의사"
+    },
+    "deathPutrifier": {
+        "extraShortName": "페스틸리언",
+        "shortName": "페스틸리언",
+        "name": "페스틸리언 위더푸스",
+        "title": "생물학적 부패자"
+    },
+    "deathBlightbringer": {
+        "extraShortName": "코로디우스",
+        "shortName": "코로디우스",
+        "name": "코로디우스 에이치바일",
+        "title": "녹시우스 블라이트브링어"
+    },
+    "orksRuntherd": {
+        "extraShortName": "스놋플로거",
+        "shortName": "스놋플로거",
+        "name": "그럼벌 스놋플로거",
+        "title": "런트허드"
+    },
+    "orksBigMek": {
+        "extraShortName": "기바스크랩즈",
+        "shortName": "기바스크랩즈",
+        "name": "스페줄리스트 기바스크랩즈",
+        "title": "빅 멕"
+    },
+    "orksKillaKan": {
+        "extraShortName": "스내파레카",
+        "shortName": "스내파레카",
+        "name": "스내파레카",
+        "title": "킬라 칸"
+    },
+    "orksNob": {
+        "extraShortName": "탱크스매샤",
+        "shortName": "탱크스매샤",
+        "name": "올록 탱크스매샤",
+        "title": "스매샤 스퀴그에 탄 놉"
+    },
+    "orksWarboss": {
+        "extraShortName": "걸고츠",
+        "shortName": "보스 걸고츠",
+        "name": "걸고츠 불도자",
+        "title": "메가 아머를 입은 워보스"
+    },
+    "templSwordBrother": {
+        "extraShortName": "갓스윌",
+        "shortName": "소드 형제 갓스윌",
+        "name": "소드 형제 페드레우스 갓스윌",
+        "title": "소드 형제"
+    },
+    "templAggressor": {
+        "extraShortName": "버차드",
+        "shortName": "버차드 형제",
+        "name": "레이먼드 버차드 형제",
+        "title": "침입자 사관"
+    },
+    "templAncient": {
+        "extraShortName": "소리드",
+        "shortName": "에인션트 소리드",
+        "name": "기수 캔투스 소리드",
+        "title": "챕터 기수"
+    },
+    "templChampion": {
+        "extraShortName": "예거",
+        "shortName": "예거 형제",
+        "name": "켄릭 예거 형제",
+        "title": "황제의 챔피언"
+    },
+    "templHelbrecht": {
+        "extraShortName": "헬브렉트",
+        "shortName": "하이 마샬 헬브렉트",
+        "name": "하이 마샬 헬브렉트",
+        "title": "블랙 템플러의 하이 마샬"
+    },
+    "eldarRanger": {
+        "extraShortName": "캘란디스",
+        "shortName": "캘란디스",
+        "name": "캘란디스 타와렌",
+        "title": "레인저"
+    },
+    "eldarAutarch": {
+        "extraShortName": "에타나",
+        "shortName": "에타나",
+        "name": "에타나 바란타랄",
+        "title": "아우터크"
+    },
+    "eldarFarseer": {
+        "extraShortName": "엘드리온",
+        "shortName": "엘드리온",
+        "name": "엘드리온 이나두인",
+        "title": "파시어"
+    },
+    "eldarMauganRa": {
+        "extraShortName": "마우간 라",
+        "shortName": "마우간 라",
+        "name": "마우간 라",
+        "title": "다크 리퍼의 피닉스 로드"
+    },
+    "eldarJainZar": {
+        "extraShortName": "제인 자르",
+        "shortName": "제인 자르",
+        "name": "제인 자르",
+        "title": "하울링 밴시의 피닉스 로드"
+    },
+    "eldarLhykhis": {
+        "extraShortName": "라이키스",
+        "shortName": "라이키스",
+        "name": "라이키스",
+        "title": "워프 스파이더의 피닉스 로드"
+    },
+    "tauMarksman": {
+        "extraShortName": "쇼실",
+        "shortName": "쇼실",
+        "name": "샤수이 바이올라 쇼실",
+        "title": "파이어사이트 명사수"
+    },
+    "tauCrisis": {
+        "extraShortName": "레바스",
+        "shortName": "레바스",
+        "name": "샤스브레 바이올라 레바스",
+        "title": "XV8 크라이시스 배틀슈트"
+    },
+    "tauDarkstrider": {
+        "extraShortName": "다크스트라이더",
+        "shortName": "다크스트라이더",
+        "name": "샤슬 타우 미야모토",
+        "title": "서브 커맨더"
+    },
+    "tauAunShi": {
+        "extraShortName": "아운쉬",
+        "shortName": "아운쉬",
+        "name": "아운쉬",
+        "title": "에테리얼"
+    },
+    "tauShadowsun": {
+        "extraShortName": "섀도우선",
+        "shortName": "섀도우선 지휘관",
+        "name": "샤스오 타우 샤셰라",
+        "title": "타우 제국의 슈프림 커맨더"
+    },
+    "tauFarsight": {
+        "extraShortName": "파사이트",
+        "shortName": "파사이트 지휘관",
+        "name": "샤스오 비올라 쇼바 카이스 몬티르",
+        "title": "영웅이자 배반자"
+    },
+    "spaceWulfen": {
+        "extraShortName": "울프",
+        "shortName": "울프",
+        "name": "울프 프로스트하울",
+        "title": "울펜 우두머리"
+    },
+    "spaceHound": {
+        "extraShortName": "차르크",
+        "shortName": "차르크",
+        "name": "차르크 워드슬레이어",
+        "title": "하운드 오브 모르카이 우두머리"
+    },
+    "spaceRockfist": {
+        "extraShortName": "아르약",
+        "shortName": "아르약",
+        "name": "바위주먹 아르약",
+        "title": "위대한 늑대의 챔피언"
+    },
+    "spaceStormcaller": {
+        "extraShortName": "냘",
+        "shortName": "냘",
+        "name": "냘 스톰콜러",
+        "title": "룬의 로드"
+    },
+    "spaceBlackmane": {
+        "extraShortName": "라그나르",
+        "shortName": "라그나르",
+        "name": "라그나르 블랙메인",
+        "title": "블랙메인의 울프 로드"
+    },
+    "spaceWolfPriest": {
+        "extraShortName": "발드르",
+        "shortName": "발드르",
+        "name": "발드르 천둥봉우리",
+        "title": "울프 사제"
+    },
+    "thousTzaangor": {
+        "extraShortName": "야자고르",
+        "shortName": "야자고르",
+        "name": "야자고르 피클페이트",
+        "title": "계몽자 잔고어"
+    },
+    "thousTerminator": {
+        "extraShortName": "토스",
+        "shortName": "토스",
+        "name": "소카르 토스",
+        "title": "스캐럽 오컬트 터미네이터"
+    },
+    "thousInfernalMaster": {
+        "extraShortName": "아브락사스",
+        "shortName": "아브락사스",
+        "name": "아르카자 아브락사스",
+        "title": "지옥의 마스터"
+    },
+    "thousSorcerer": {
+        "extraShortName": "타우마쿠스",
+        "shortName": "타우마쿠스",
+        "name": "카이라타르 타우마쿠스",
+        "title": "고귀한 마법사"
+    },
+    "thousAhriman": {
+        "extraShortName": "아흐리만",
+        "shortName": "아흐리만",
+        "name": "아젝 아흐리만",
+        "title": "루브릭의 설계자"
+    },
+    "thousSekhetar": {
+        "extraShortName": "세케타르 로봇",
+        "shortName": "세케타르 로봇",
+        "name": "세케타르 로봇",
+        "title": "영혼 없는 오토마타"
+    },
+    "darkaHellblaster": {
+        "extraShortName": "사르콰일",
+        "shortName": "사르콰일",
+        "name": "사르콰엘",
+        "title": "헬블라스터 서전트"
+    },
+    "darkaTerminator": {
+        "extraShortName": "바라키엘",
+        "shortName": "바라키엘",
+        "name": "바라키엘",
+        "title": "데스윙 터미네이터"
+    },
+    "darkaCompanion": {
+        "extraShortName": "포르카스",
+        "shortName": "포르카스",
+        "name": "포르카스 오스스원",
+        "title": "이너 서클의 동반자"
+    },
+    "darkaAsmodai": {
+        "extraShortName": "아스모다이",
+        "shortName": "아스모다이",
+        "name": "아스모다이",
+        "title": "회개의 군주"
+    },
+    "darkaAzrael": {
+        "extraShortName": "아즈라엘",
+        "shortName": "아즈라엘",
+        "name": "아즈라엘",
+        "title": "슈프림 그랜드 마스터"
+    },
+    "darkaSternguard": {
+        "extraShortName": "라무스",
+        "shortName": "라무스",
+        "name": "라무스",
+        "title": "베테랑 사관"
+    },
+    "tyranNeurothrope": {
+        "extraShortName": "뉴로스로프",
+        "shortName": "뉴로스로프",
+        "name": "뉴로스로프",
+        "title": "사이킥 유기체"
+    },
+    "tyranTyrantGuard": {
+        "extraShortName": "타이런트 가드",
+        "shortName": "타이런트 가드",
+        "name": "타이런트 가드",
+        "title": "수호자 유기체"
+    },
+    "tyranWingedPrime": {
+        "extraShortName": "윙드 프라임",
+        "shortName": "윙드 프라임",
+        "name": "윙드 타이라니드 프라임",
+        "title": "선봉 전사 유기체"
+    },
+    "tyranDeathleaper": {
+        "extraShortName": "데스리퍼",
+        "shortName": "데스리퍼",
+        "name": "데스리퍼",
+        "title": "선봉 유기체"
+    },
+    "tyranParasite": {
+        "extraShortName": "모트렉스의 기생수",
+        "shortName": "모트렉스의 기생수",
+        "name": "모트렉스의 기생수",
+        "title": "침략자 유기체"
+    },
+    "admecDominus": {
+        "extraShortName": "비트루비우스",
+        "shortName": "비트루비우스",
+        "name": "마고스 도미누스 비트루비우스 탄네크",
+        "title": "기술 사제 도미누스"
+    },
+    "admecManipulus": {
+        "extraShortName": "악투스",
+        "shortName": "악투스",
+        "name": "매니퓰러스 악투스 풀고로수스",
+        "title": "기술 사제 매니퓰러스"
+    },
+    "admecMarshall": {
+        "extraShortName": "탄 기다",
+        "shortName": "탄 기다",
+        "name": "탄 기다",
+        "title": "스키타리 마샬"
+    },
+    "admecRuststalker": {
+        "extraShortName": "엑시터 로",
+        "shortName": "엑시터 로",
+        "name": "엑시터 로-1.15/x",
+        "title": "시카리안 러스트스토커 프린켑스"
+    },
+    "admecDestroyer": {
+        "extraShortName": "사이 젝스",
+        "shortName": "사이 젝스",
+        "name": "사이 젝스-KPH008/15.mk41",
+        "title": "카타프론 디스트로이어"
+    },
+    "worldTerminator": {
+        "extraShortName": "브라스크",
+        "shortName": "브라스크",
+        "name": "도살자 브라스크",
+        "title": "월드 이터 터미네이터"
+    },
+    "worldJakhal": {
+        "extraShortName": "메이서",
+        "shortName": "메이서",
+        "name": "메이서 블러드그린",
+        "title": "자칼 디스아너드"
+    },
+    "worldEightbound": {
+        "extraShortName": "아즈코르",
+        "shortName": "아즈코르",
+        "name": "여덟 겹 아즈코르",
+        "title": "고귀한 에이트바운드"
+    },
+    "worldExecutions": {
+        "extraShortName": "타르바크",
+        "shortName": "타르바크",
+        "name": "처형자 타르바크",
+        "title": "처형의 군주"
+    },
+    "worldKharn": {
+        "extraShortName": "칸",
+        "shortName": "칸",
+        "name": "배신자 칸",
+        "title": "코른의 챔피언"
+    },
+    "bloodIntercessor": {
+        "extraShortName": "마타네오",
+        "shortName": "마타네오",
+        "name": "마타네오",
+        "title": "점프 팩 인터세서 사관"
+    },
+    "bloodDeathCompany": {
+        "extraShortName": "루시엔",
+        "shortName": "루시엔",
+        "name": "루시엔",
+        "title": "데스 컴퍼니 인터세서"
+    },
+    "bloodSanguinary": {
+        "extraShortName": "니코데무스",
+        "shortName": "니코데무스",
+        "name": "니코데무스",
+        "title": "핏빛 사제"
+    },
+    "bloodMephiston": {
+        "extraShortName": "메피스톤",
+        "shortName": "메피스톤",
+        "name": "메피스톤",
+        "title": "죽음의 군주"
+    },
+    "bloodDante": {
+        "extraShortName": "단테",
+        "shortName": "단테",
+        "name": "단테 지휘관",
+        "title": "챕터 마스터"
+    },
+    "bloodTerminator": {
+        "extraShortName": "세자레",
+        "shortName": "세자레",
+        "name": "세자레",
+        "title": "어썰트 터미네이터 사관"
+    },
+    "genesBiophagus": {
+        "extraShortName": "홀란",
+        "shortName": "홀란",
+        "name": "홀란 바움가르트",
+        "title": "바이오파거스"
+    },
+    "genesMagus": {
+        "extraShortName": "지비아",
+        "shortName": "지비아",
+        "name": "지비아 카이저",
+        "title": "마구스"
+    },
+    "genesPrimus": {
+        "extraShortName": "이삭",
+        "shortName": "이삭",
+        "name": "이삭 스타른",
+        "title": "프라이무스"
+    },
+    "genesKelermorph": {
+        "extraShortName": "주드",
+        "shortName": "주드",
+        "name": "주드 라스카",
+        "title": "켈러모프"
+    },
+    "genesPatriarch": {
+        "extraShortName": "성부",
+        "shortName": "성부",
+        "name": "성부",
+        "title": "진스틸러 패트리아크"
+    },
+    "custoVexilusPraetor": {
+        "extraShortName": "아에소스",
+        "shortName": "아에소스",
+        "name": "아에소스 쿼마드라",
+        "title": "벡실러스 프라이토르"
+    },
+    "custoAtlacoya": {
+        "extraShortName": "아틀라코야",
+        "shortName": "아틀라코야",
+        "name": "아틀라코야",
+        "title": "감시자"
+    },
+    "custoKyrus": {
+        "extraShortName": "타이리스",
+        "shortName": "타이리스",
+        "name": "타이리스 시바 키루스",
+        "title": "수호단"
+    },
+    "custoBladeChampion": {
+        "extraShortName": "카리얀",
+        "shortName": "카리얀",
+        "name": "카리얀 헬세이츠",
+        "title": "블레이드 챔피언"
+    },
+    "custoTrajann": {
+        "extraShortName": "트라잔",
+        "shortName": "트라잔",
+        "name": "트라잔 발로리스",
+        "title": "총대장"
+    },
+    "emperNoiseMarine": {
+        "extraShortName": "시론",
+        "shortName": "시론",
+        "name": "우상 숭배자 시론 카페르시",
+        "title": "노이즈 마린"
+    },
+    "emperFlawlessBlade": {
+        "extraShortName": "하스쿨",
+        "shortName": "하스쿨",
+        "name": "실크 블레이드의 손, 하스쿨",
+        "title": "완벽한 블레이드"
+    },
+    "emperKakophonist": {
+        "extraShortName": "아다마타르",
+        "shortName": "아다마타르",
+        "name": "아다마타르 잔다수스, 미러본",
+        "title": "로드 카코포니스트"
+    },
+    "emperExultant": {
+        "extraShortName": "라비스커스",
+        "shortName": "라비스커스",
+        "name": "완벽한 자, 라비스커스 센트릴리온",
+        "title": "로드 엑설턴트"
+    },
+    "emperLucius": {
+        "extraShortName": "루시우스",
+        "shortName": "루시우스",
+        "name": "영원한 자 루시우스",
+        "title": "슬라네쉬의 챔피언"
+    },
+    "votanBeserk": {
+        "extraShortName": "하비르",
+        "shortName": "하비르",
+        "name": "하비르 워스피크",
+        "title": "크토니안 광전사"
+    },
+    "votanIronmaster": {
+        "extraShortName": "빈",
+        "shortName": "빈",
+        "name": "빈 콩글라르",
+        "title": "브로히르 아이언마스터"
+    },
+    "votanMemnyr": {
+        "extraShortName": "암무크",
+        "shortName": "암무크",
+        "name": "암무크의 예리한 눈",
+        "title": "멤니르 전략가"
+    },
+    "votanChampion": {
+        "extraShortName": "킴",
+        "shortName": "킴",
+        "name": "킴 스카르스트렝",
+        "title": "에인히르 챔피언"
+    },
+    "votanUthar": {
+        "extraShortName": "우타르",
+        "shortName": "운명지어진 자 우타르\n",
+        "name": "운명지어진 자 우타르",
+        "title": "하이 칼"
+    },
+    "astarCyrus": {
+        "extraShortName": "사이러스",
+        "shortName": "사이러스",
+        "name": "사이러스",
+        "title": "포보스 갑옷의 사령관"
+    },
+    "astarLysander": {
+        "extraShortName": "라이샌더",
+        "shortName": "라이샌더",
+        "name": "다르나스 라이샌더",
+        "title": "제1중대장"
+    },
+    "astarEradicator": {
+        "extraShortName": "누바리",
+        "shortName": "누바리",
+        "name": "누바리 샬다르",
+        "title": "이레디케이터 서전트"
+    }
+}
