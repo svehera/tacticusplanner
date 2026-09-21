@@ -14,6 +14,7 @@ import { IMow2 } from '@/fsd/4-entities/mow';
 import {
     ICharacterAscendGoal,
     ICharacterUnlockGoal,
+    ICharacterUpgradeAbilities,
     ICharacterUpgradeRankGoal,
     ICharacterUpgradeMow,
     IEstimatedUpgrades,
@@ -628,6 +629,85 @@ describe('Goal service', () => {
             const biovoreEstimate = result.find(est => est.goalId === goalId);
             expect(biovoreEstimate?.blocked).toBe(false);
         });
+
+        describe('XP owed across goals on the same character', () => {
+            const character = {
+                unitType: UnitType.character,
+                id: 'unit-xp',
+                snowprintId: 'unit-xp',
+                name: 'Unit',
+                shortName: 'Unit',
+                alliance: Alliance.Imperial,
+                rank: Rank.Diamond2,
+                level: 40,
+                xp: 0,
+                rarity: Rarity.Legendary,
+            } as ICharacter2;
+
+            const rankGoal = (include: boolean): ICharacterUpgradeRankGoal => ({
+                goalId: 'goal-rank',
+                unitId: character.snowprintId,
+                unitName: character.shortName,
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: character.alliance,
+                priority: 1,
+                include,
+                notes: '',
+                type: PersonalGoalType.UpgradeRank,
+                rankStart: Rank.Diamond2,
+                rankEnd: Rank.Diamond3,
+                rankPoint5: false,
+                rankStartPoint5: false,
+                rankAppliedUpgrades: 0,
+                rankStartAppliedUpgrades: 0,
+                appliedUpgrades: [],
+                level: character.level,
+                xp: character.xp,
+                rarity: character.rarity,
+                manuallyFarmXp: false,
+                upgradesRarity: [],
+            });
+
+            const abilitiesGoal: ICharacterUpgradeAbilities = {
+                goalId: 'goal-abilities',
+                unitId: character.snowprintId,
+                unitName: character.shortName,
+                unitIcon: '',
+                unitRoundIcon: '',
+                unitAlliance: character.alliance,
+                priority: 2,
+                include: true,
+                notes: '',
+                level: character.level,
+                xp: character.xp,
+                type: PersonalGoalType.CharacterAbilities,
+                activeStart: 40,
+                activeEnd: 50,
+                passiveStart: 40,
+                passiveEnd: 40,
+            };
+
+            const abilitiesXp = (include: boolean) =>
+                GoalsService.buildGoalEstimates(
+                    makeEstimatedUpgrades(),
+                    [],
+                    [],
+                    [rankGoal(include)],
+                    [abilitiesGoal],
+                    [character]
+                ).find(estimate => estimate.goalId === abilitiesGoal.goalId)?.xpEstimateAbilities;
+
+            it('treats an active higher-priority rank goal as already at its target level', () => {
+                // The rank goal farms Lv 40→50, so the abilities goal owes nothing on top.
+                expect(abilitiesXp(true)).toBeUndefined();
+            });
+
+            it('owes the XP itself when the higher-priority rank goal is paused', () => {
+                // A paused goal farms nothing — the abilities goal must carry Lv 40→50 or the books go missing.
+                expect(abilitiesXp(false)).toMatchObject({ currentLevel: 40, targetLevel: 50 });
+            });
+        });
     });
 });
 
@@ -1193,7 +1273,8 @@ describe('GoalsService.adjustGoalEstimates', () => {
             expect(adjustedGoal?.xpEstimate).toMatchObject({
                 bookRarity: Rarity.Legendary,
                 books: 0,
-                gold: 0,
+                // Held books still cost gold to apply: 2 Legendary × 500.
+                gold: 1000,
                 currentLevel: 10,
                 targetLevel: 15,
                 xpLeft: 0,
@@ -1203,6 +1284,43 @@ describe('GoalsService.adjustGoalEstimates', () => {
             expect(adjustedGoal?.xpBooksRequired).toBe(2);
             expect(adjustedGoal?.xpBooksTotal).toBe(0);
             expect(adjustedGoal?.xpDaysLeft).toBeUndefined();
+        });
+
+        it('prices gold per book rarity: held books at their own cost, outstanding at the display rarity', () => {
+            const goalId = 'goal-xp-gold';
+            const estimate = makeGoalEstimate(goalId, true, {
+                xpEstimate: {
+                    books: 4,
+                    bookRarity: Rarity.Legendary,
+                    gold: 2000,
+                    currentLevel: 10,
+                    targetLevel: 15,
+                    xpLeft: 50_000,
+                },
+            });
+
+            const goal = makePersonalGoal(goalId, PersonalGoalType.UpgradeRank, 1, true);
+            const inventory = makeEmptyInventory();
+            // 1 Legendary (12 500) + 5 Epic (2500) cover 25 000; 25 000 XP remains = 2 Legendary.
+            inventory.xpBooks[Rarity.Legendary] = 1;
+            inventory.xpBooks[Rarity.Epic] = 5;
+
+            const result = GoalsService.adjustGoalEstimates(
+                [goal],
+                [estimate],
+                inventory,
+                { ...noXpUse, useLegendary: true, useEpic: true },
+                [],
+                [],
+                noXpIncome
+            );
+
+            const adjustedGoal = result.goalEstimates.find(goalEstimate => goalEstimate.goalId === goalId);
+
+            // 1 × 500 + 5 × 150 + 2 × 500
+            expect(adjustedGoal?.xpEstimate?.gold).toBe(2250);
+            expect(adjustedGoal?.xpEstimate?.books).toBe(2);
+            expect(result.neededXp).toBe(25_000);
         });
 
         it('steps down to the largest codex that fits when the preferred one overshoots', () => {

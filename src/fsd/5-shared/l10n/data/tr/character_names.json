@@ -1,0 +1,704 @@
+{
+    "ultraTigurius": {
+        "extraShortName": "Tigurius",
+        "shortName": "Varro Tigurius",
+        "name": "Varro Tigurius",
+        "title": "Baş Kütüphaneci"
+    },
+    "ultraEliminatorSgt": {
+        "extraShortName": "Certus",
+        "shortName": "Certus",
+        "name": "Çavuş Certus",
+        "title": "Yok Edici Çavuş"
+    },
+    "ultraInceptorSgt": {
+        "extraShortName": "Bellator",
+        "shortName": "Bellator",
+        "name": "Çavuş Bellator",
+        "title": "Başlatıcı Çavuş"
+    },
+    "ultraApothecary": {
+        "extraShortName": "Incisus",
+        "shortName": "Incisus",
+        "name": "Eczacı Incisus",
+        "title": "Eczacı"
+    },
+    "ultraCalgar": {
+        "extraShortName": "Calgar",
+        "shortName": "Marneus Calgar",
+        "name": "Marneus Calgar",
+        "title": "Alay Komutanı"
+    },
+    "ultraTitus": {
+        "extraShortName": "Titus",
+        "shortName": "Titus",
+        "name": "Demetrian Titus",
+        "title": "Primaris Teğmeni"
+    },
+    "adeptRetributor": {
+        "extraShortName": "Vindicta",
+        "shortName": "Vindicta",
+        "name": "Savaş Kardeşi Vindicta",
+        "title": "Celestialı"
+    },
+    "adeptHospitaller": {
+        "extraShortName": "Isabella",
+        "shortName": "Isabella",
+        "name": "Isabella Mariken",
+        "title": "Hastane Şövalyesi"
+    },
+    "adeptMorvenn": {
+        "extraShortName": "Morvenn Vahl",
+        "shortName": "Morvenn Vahl",
+        "name": "Morvenn Vahl",
+        "title": "Adepta Sororitas'ın Başrahibesi"
+    },
+    "adeptCanoness": {
+        "extraShortName": "Roswitha",
+        "shortName": "Roswitha",
+        "name": "Roswitha Esther",
+        "title": "Dindariçe"
+    },
+    "adeptCelestine": {
+        "extraShortName": "Celestine",
+        "shortName": "Celestine",
+        "name": "Yaşayan Aziz Celestine",
+        "title": "Yaşayan Aziz"
+    },
+    "necroWarden": {
+        "extraShortName": "Makhotep",
+        "shortName": "Makhotep",
+        "name": "Kraliyet Gardiyanı Makhotep",
+        "title": "Kraliyet Gardiyanı"
+    },
+    "necroDestroyer": {
+        "extraShortName": "Imospekh",
+        "shortName": "Imospekh",
+        "name": "Büyübozan Yok Edici Imospekh",
+        "title": "Büyübozan Yok Edici"
+    },
+    "necroSpyder": {
+        "extraShortName": "Aleph-Null",
+        "shortName": "Aleph-Null",
+        "name": "Canoptek Örümcek Aleph-Null",
+        "title": "Canoptek Örümcek"
+    },
+    "necroPlasmancer": {
+        "extraShortName": "Thutmose",
+        "shortName": "Thutmose",
+        "name": "Plazma Büyücüsü Thutmose",
+        "title": "Plazma Büyücüsü"
+    },
+    "necroOverlord": {
+        "extraShortName": "Anufet",
+        "shortName": "Anufet",
+        "name": "Efendi Anufet",
+        "title": "Efendi"
+    },
+    "necroChronomancer": {
+        "extraShortName": "Thothmek",
+        "shortName": "Thothmek",
+        "name": "Thothmek",
+        "title": "Zaman Büyücüsü"
+    },
+    "astraPrimarisPsy": {
+        "extraShortName": "Sibyll",
+        "shortName": "Sibyll Devine",
+        "name": "Sibyll Devine",
+        "title": "Primaris Psişik"
+    },
+    "astraYarrick": {
+        "extraShortName": "Yarrick",
+        "shortName": "Komiser Yarrick",
+        "name": "Komiser Sebastian Yarrick",
+        "title": "Lort Komiser"
+    },
+    "astraBullgryn": {
+        "extraShortName": "Kut",
+        "shortName": "Kut Skoden",
+        "name": "Kut Skoden",
+        "title": "Bullgryn Mankafa"
+    },
+    "astraOrdnance": {
+        "extraShortName": "Thaddeus",
+        "shortName": "Thaddeus Noble",
+        "name": "Thaddeus Noble",
+        "title": "Mühimmat Ustası"
+    },
+    "astraCreed": {
+        "extraShortName": "Creed",
+        "shortName": "Castellan Creed",
+        "name": "Lort General Ursarkar E. Creed",
+        "title": "Astra Militarum'un Lort Generali"
+    },
+    "astraDreir": {
+        "extraShortName": "Dreir",
+        "shortName": "Mareşal Dreir",
+        "name": "Lort Mareşal Varnan Dreir",
+        "title": "Lort Mareşal"
+    },
+    "blackTerminator": {
+        "extraShortName": "Angrax",
+        "shortName": "Angrax",
+        "name": "Drakfus Angrax",
+        "title": "Terminatör Şampiyon"
+    },
+    "blackObliterator": {
+        "extraShortName": "Volk",
+        "shortName": "Volk",
+        "name": "Öteboyut Tarafından Yeniden İşlenen Volk",
+        "title": "İmha Edici"
+    },
+    "blackPossession": {
+        "extraShortName": "Archimatos",
+        "shortName": "Archimatos",
+        "name": "Usta Archimatos",
+        "title": "Musallat Ustası"
+    },
+    "blackHaarken": {
+        "extraShortName": "Haarken",
+        "shortName": "Haarken Dünyaçökerten",
+        "name": "Haarken Dünyaçökerten",
+        "title": "Kıyametin Elçisi"
+    },
+    "blackAbaddon": {
+        "extraShortName": "Abaddon",
+        "shortName": "Yağmacı Abaddon",
+        "name": "Yağmacı Abaddon",
+        "title": "Kaos Savaş Ustası"
+    },
+    "deathTyphus": {
+        "extraShortName": "Typhus",
+        "shortName": "Typhus",
+        "name": "Yok Edici Kovanının Ev Sahibi Typhus",
+        "title": "Veba Tanrısının Elçisi"
+    },
+    "deathBlightlord": {
+        "extraShortName": "Maladus",
+        "shortName": "Maladus",
+        "name": "Maladus Phlegmore",
+        "title": "Afetlordu Şampiyonu"
+    },
+    "deathRotbone": {
+        "extraShortName": "Nauseous",
+        "shortName": "Nauseous Rotbone",
+        "name": "Nauseous Rotbone",
+        "title": "Veba Cerrahı"
+    },
+    "deathPutrifier": {
+        "extraShortName": "Pestillian",
+        "shortName": "Pestillian",
+        "name": "Pestillian Witherpus",
+        "title": "Biyolojik Çürütücü"
+    },
+    "deathBlightbringer": {
+        "extraShortName": "Corrodius",
+        "shortName": "Corrodius",
+        "name": "Corrodius Achebile",
+        "title": "Zehirleyici Afetgetiren"
+    },
+    "orksRuntherd": {
+        "extraShortName": "Snotflogga",
+        "shortName": "Snotflogga",
+        "name": "Grumbal Snotflogga",
+        "title": "Runtherd"
+    },
+    "orksBigMek": {
+        "extraShortName": "Hurdamanyağı",
+        "shortName": "Hurdamanyağı",
+        "name": "Uzman Hurdamanyağı",
+        "title": "Big Mek"
+    },
+    "orksKillaKan": {
+        "extraShortName": "Kırparçala",
+        "shortName": "Kırparçala",
+        "name": "Kırparçala",
+        "title": "Kila Kan"
+    },
+    "orksNob": {
+        "extraShortName": "Tankezici",
+        "shortName": "Tankezici",
+        "name": "Olog Tankezici",
+        "title": "Ezici Bücür üzerinde Nob"
+    },
+    "orksWarboss": {
+        "extraShortName": "Gulgortz",
+        "shortName": "Elebaşı Gulgortz",
+        "name": "Gulgortz Buldozer",
+        "title": "Mega Zırhlı Savaş Şefi"
+    },
+    "templSwordBrother": {
+        "extraShortName": "Godswyl",
+        "shortName": "Kılıç Kardeşi Godswyl",
+        "name": "Kılıç Kardeşi Fedreus Godswyl",
+        "title": "Kılıç Kardeşi"
+    },
+    "templAggressor": {
+        "extraShortName": "Burchard",
+        "shortName": "Kardeş Burchard",
+        "name": "Kardeş Raimund Burchard",
+        "title": "Düşman Çavuşu"
+    },
+    "templAncient": {
+        "extraShortName": "Thoread",
+        "shortName": "Antik Thoread",
+        "name": "Antik Cantus Thoread",
+        "title": "Alay Atası"
+    },
+    "templChampion": {
+        "extraShortName": "Jaeger",
+        "shortName": "Kardeş Jaeger",
+        "name": "Kardeş Kenric Jaeger",
+        "title": "İmparator'un Şampiyonu"
+    },
+    "templHelbrecht": {
+        "extraShortName": "Helbrecht",
+        "shortName": "Yüksek Mareşal Helbrecht",
+        "name": "Yüksek Mareşal Helbrecht",
+        "title": "Kara Tapınak Şövalyelerinin Yüksek Mareşali"
+    },
+    "eldarRanger": {
+        "extraShortName": "Calandis",
+        "shortName": "Calandis",
+        "name": "Calandis Tawaren",
+        "title": "Kolcu"
+    },
+    "eldarAutarch": {
+        "extraShortName": "Aethana",
+        "shortName": "Aethana",
+        "name": "Aethana Barantharal",
+        "title": "Otark"
+    },
+    "eldarFarseer": {
+        "extraShortName": "Eldryon",
+        "shortName": "Eldryon",
+        "name": "Eldryon Ynaduin",
+        "title": "Kâhin"
+    },
+    "eldarMauganRa": {
+        "extraShortName": "Maugan Ra",
+        "shortName": "Maugan Ra",
+        "name": "Maugan Ra",
+        "title": "Kara Hasatçıların Ankakuşu Lordu"
+    },
+    "eldarJainZar": {
+        "extraShortName": "Jain Zar",
+        "shortName": "Jain Zar",
+        "name": "Jain Zar",
+        "title": "Haykıran Banşilerin Ankakuşu Lordu"
+    },
+    "eldarLhykhis": {
+        "extraShortName": "Lhykhis",
+        "shortName": "Lhykhis",
+        "name": "Lhykhis",
+        "title": "Öteboyut Örümcekleri Ankakuşu Lordu"
+    },
+    "tauMarksman": {
+        "extraShortName": "Sho'syl",
+        "shortName": "Sho'syl",
+        "name": "Shas'ui Vior'la Sho'syl",
+        "title": "Ateş Görüşlü Nişancı"
+    },
+    "tauCrisis": {
+        "extraShortName": "Re'vas",
+        "shortName": "Re'vas",
+        "name": "Shas'vre Vior'la Re'vas",
+        "title": "XV8 Kriz Savaş Kıyafeti"
+    },
+    "tauDarkstrider": {
+        "extraShortName": "Karanlık Yolgezer",
+        "shortName": "Karanlık Yolgezer",
+        "name": "Shas'el T'au Myamoto",
+        "title": "Yardımcı Komutan"
+    },
+    "tauAunShi": {
+        "extraShortName": "Aun'Shi",
+        "shortName": "Aun'Shi",
+        "name": "Aun'Shi",
+        "title": "Ruhani"
+    },
+    "tauShadowsun": {
+        "extraShortName": "Gölgegüneş",
+        "shortName": "Komutan Gölgegüneş",
+        "name": "Shas'o T'au Shaserra",
+        "title": "T'au İmparatorluğu'nun Yüce Komutanı"
+    },
+    "tauFarsight": {
+        "extraShortName": "Farsight",
+        "shortName": "Komutan Farsight",
+        "name": "Shas'o Vior'la Shovah Kais Mont'yr",
+        "title": "Kahraman ve Hain"
+    },
+    "spaceWulfen": {
+        "extraShortName": "Ulf",
+        "shortName": "Ulf",
+        "name": "Ulf Frosthowl",
+        "title": "Wulfen Sürü Lideri"
+    },
+    "spaceHound": {
+        "extraShortName": "Tjark",
+        "shortName": "Tjark",
+        "name": "Tjark Wyrdslayer",
+        "title": "Morkai Tazısı Sürü Lideri"
+    },
+    "spaceRockfist": {
+        "extraShortName": "Arjac",
+        "shortName": "Arjac",
+        "name": "Arjac Rockfist",
+        "title": "Ulu Kurt Şampiyonu"
+    },
+    "spaceStormcaller": {
+        "extraShortName": "Njal",
+        "shortName": "Njal",
+        "name": "Fırtına Çağıran Njal",
+        "title": "Rün Lordu"
+    },
+    "spaceBlackmane": {
+        "extraShortName": "Ragnar",
+        "shortName": "Ragnar",
+        "name": "Ragnar Blackmane",
+        "title": "Blackmane'lerin Kurt Lordu"
+    },
+    "spaceWolfPriest": {
+        "extraShortName": "Baldr",
+        "shortName": "Baldr",
+        "name": "Baldr Yıldırımkaş",
+        "title": "Rahip Kurt"
+    },
+    "thousTzaangor": {
+        "extraShortName": "Yazaghor",
+        "shortName": "Yazaghor",
+        "name": "Yazaghor Ficklefate",
+        "title": "Aydınlanmış Tzaangor"
+    },
+    "thousTerminator": {
+        "extraShortName": "Toth",
+        "shortName": "Toth",
+        "name": "Sokar Toth",
+        "title": "Okült Skarabe Terminatörü"
+    },
+    "thousInfernalMaster": {
+        "extraShortName": "Abraxas",
+        "shortName": "Abraxas",
+        "name": "Arkarzar Abraxas",
+        "title": "Cehennem Ustası"
+    },
+    "thousSorcerer": {
+        "extraShortName": "Thaumachus",
+        "shortName": "Thaumachus",
+        "name": "Kairatar Thaumachus",
+        "title": "Yüce Büyücü"
+    },
+    "thousAhriman": {
+        "extraShortName": "Ahriman",
+        "shortName": "Ahriman",
+        "name": "Ahzek Ahriman",
+        "title": "Kanunun Mimarı"
+    },
+    "thousSekhetar": {
+        "extraShortName": "Sekhetar Robot",
+        "shortName": "Sekhetar Robot",
+        "name": "Sekhetar Robot",
+        "title": "Ruhsuz Otomat"
+    },
+    "darkaHellblaster": {
+        "extraShortName": "Sarquael",
+        "shortName": "Sarquael",
+        "name": "Sarquael",
+        "title": "Cehennem Patlatıcı Çavuş"
+    },
+    "darkaTerminator": {
+        "extraShortName": "Baraqiel",
+        "shortName": "Baraqiel",
+        "name": "Baraqiel",
+        "title": "Ölümkanadı Terminatörü"
+    },
+    "darkaCompanion": {
+        "extraShortName": "Forcas",
+        "shortName": "Forcas",
+        "name": "Yeminli Forcas",
+        "title": "İç Çember Yoldaşı"
+    },
+    "darkaAsmodai": {
+        "extraShortName": "Asmodai",
+        "shortName": "Asmodai",
+        "name": "Asmodai",
+        "title": "Tövbe Ustası"
+    },
+    "darkaAzrael": {
+        "extraShortName": "Azrael",
+        "shortName": "Azrael",
+        "name": "Azrael",
+        "title": "Yüce Başkomutan"
+    },
+    "darkaSternguard": {
+        "extraShortName": "Ramus",
+        "shortName": "Ramus",
+        "name": "Ramus",
+        "title": "Kıdemli Çavuş"
+    },
+    "tyranNeurothrope": {
+        "extraShortName": "Nörotrop",
+        "shortName": "Nörotrop",
+        "name": "Nörotrop",
+        "title": "Psişik Organizma"
+    },
+    "tyranTyrantGuard": {
+        "extraShortName": "Tiran Muhafızı",
+        "shortName": "Tiran Muhafızı",
+        "name": "Tiran Muhafızı",
+        "title": "Muhafız Organizma"
+    },
+    "tyranWingedPrime": {
+        "extraShortName": "Kanatlı Prime",
+        "shortName": "Kanatlı Prime",
+        "name": "Kanatlı Tiranit Prime",
+        "title": "Lider Savaşçı Organizma"
+    },
+    "tyranDeathleaper": {
+        "extraShortName": "Ölüm Meleği",
+        "shortName": "Ölüm Meleği",
+        "name": "Ölüm Meleği",
+        "title": "Öncü Organizma"
+    },
+    "tyranParasite": {
+        "extraShortName": "Mortrex Paraziti",
+        "shortName": "Mortrex Paraziti",
+        "name": "Mortrex Paraziti",
+        "title": "İşgalci Organizma"
+    },
+    "admecDominus": {
+        "extraShortName": "Vitruvius",
+        "shortName": "Vitruvius",
+        "name": "Magos Dominus Vitruvius Thannek",
+        "title": "Teknoloji Rahibi Dominus"
+    },
+    "admecManipulus": {
+        "extraShortName": "Actus",
+        "shortName": "Actus",
+        "name": "Manipulus Actus Fulgorosus",
+        "title": "Teknoloji Rahibi Manipulus"
+    },
+    "admecMarshall": {
+        "extraShortName": "Tan Gi'da",
+        "shortName": "Tan Gi'da",
+        "name": "Tan Gi'da",
+        "title": "Skitarii Mareşal"
+    },
+    "admecRuststalker": {
+        "extraShortName": "Exitor-Rho",
+        "shortName": "Exitor-Rho",
+        "name": "Exitor-Rho-1.15/x",
+        "title": "Sisaryalı Kızıl Avcı Lideri"
+    },
+    "admecDestroyer": {
+        "extraShortName": "Sy-gex",
+        "shortName": "Sy-gex",
+        "name": "Sy-gex-KPH008/15.mk41",
+        "title": "Kataphron Yok Edici"
+    },
+    "worldTerminator": {
+        "extraShortName": "Wrask",
+        "shortName": "Wrask",
+        "name": "Cellat Wrask",
+        "title": "Dünya Yiyenler Terminatörü"
+    },
+    "worldJakhal": {
+        "extraShortName": "Gürzcü",
+        "shortName": "Gürzcü",
+        "name": "Gürzcü Kanlı Tuzak",
+        "title": "Alçak Jakhal"
+    },
+    "worldEightbound": {
+        "extraShortName": "Azkor",
+        "shortName": "Azkor",
+        "name": "Sekizli Azkor",
+        "title": "Yüce Sekizbağlı"
+    },
+    "worldExecutions": {
+        "extraShortName": "Tarvakh",
+        "shortName": "Tarvakh",
+        "name": "Cellat Tarvakh",
+        "title": "İnfaz Ustası"
+    },
+    "worldKharn": {
+        "extraShortName": "Khârn",
+        "shortName": "Khârn",
+        "name": "Hain Khârn",
+        "title": "Khorne'un Şampiyonu"
+    },
+    "bloodIntercessor": {
+        "extraShortName": "Mataneo",
+        "shortName": "Mataneo",
+        "name": "Mataneo",
+        "title": "Sırt Roketli Arabulucu Çavuş"
+    },
+    "bloodDeathCompany": {
+        "extraShortName": "Lucien",
+        "shortName": "Lucien",
+        "name": "Lucien",
+        "title": "Ölüm Kumpanyası Arabulucusu"
+    },
+    "bloodSanguinary": {
+        "extraShortName": "Nicodemus",
+        "shortName": "Nicodemus",
+        "name": "Nicodemus",
+        "title": "Kan Rahibi"
+    },
+    "bloodMephiston": {
+        "extraShortName": "Mephiston",
+        "shortName": "Mephiston",
+        "name": "Mephiston",
+        "title": "Ölüm Efendisi"
+    },
+    "bloodDante": {
+        "extraShortName": "Dante",
+        "shortName": "Dante",
+        "name": "Komutan Dante",
+        "title": "Alay Komutanı"
+    },
+    "bloodTerminator": {
+        "extraShortName": "Cezare",
+        "shortName": "Cezare",
+        "name": "Cezare",
+        "title": "Taarruz Terminatörü Çavuşu"
+    },
+    "genesBiophagus": {
+        "extraShortName": "Hollan",
+        "shortName": "Hollan",
+        "name": "Hollan Baumgart",
+        "title": "Biyoyiyici"
+    },
+    "genesMagus": {
+        "extraShortName": "Xybia",
+        "shortName": "Xybia",
+        "name": "Xandia Kheiser",
+        "title": "Magus"
+    },
+    "genesPrimus": {
+        "extraShortName": "Isaak",
+        "shortName": "Isaak",
+        "name": "Isaak Starn",
+        "title": "Primus"
+    },
+    "genesKelermorph": {
+        "extraShortName": "Judh",
+        "shortName": "Judh",
+        "name": "Judh Laska",
+        "title": "Kelermorf"
+    },
+    "genesPatriarch": {
+        "extraShortName": "Peder Mayını",
+        "shortName": "Peder Mayını",
+        "name": "Peder Mayını",
+        "title": "Gen Hırsızı Patrik"
+    },
+    "custoVexilusPraetor": {
+        "extraShortName": "Aesoth",
+        "shortName": "Aesoth",
+        "name": "Aesoth Koumadra",
+        "title": "Vexilus Praetor"
+    },
+    "custoAtlacoya": {
+        "extraShortName": "Atlacoya",
+        "shortName": "Atlacoya",
+        "name": "Atlacoya",
+        "title": "Gözeten"
+    },
+    "custoKyrus": {
+        "extraShortName": "Tyrith",
+        "shortName": "Tyrith",
+        "name": "Tyrith Shiva Kyrus",
+        "title": "Koruyucu Muhafız"
+    },
+    "custoBladeChampion": {
+        "extraShortName": "Kariyan",
+        "shortName": "Kariyan",
+        "name": "Kariyan Helsates",
+        "title": "Kılıç Şampiyonu"
+    },
+    "custoTrajann": {
+        "extraShortName": "Trajann",
+        "shortName": "Trajann",
+        "name": "Trajann Valoris",
+        "title": "Kaptan General"
+    },
+    "emperNoiseMarine": {
+        "extraShortName": "Shiron",
+        "shortName": "Shiron",
+        "name": "Putperest Shiron Capersi",
+        "title": "Yaygara Piyadesi"
+    },
+    "emperFlawlessBlade": {
+        "extraShortName": "Hascule",
+        "shortName": "Hascule",
+        "name": "İpek Kılıçlı Hascule Thorn",
+        "title": "Kusursuz Kılıç"
+    },
+    "emperKakophonist": {
+        "extraShortName": "Adamatar",
+        "shortName": "Adamatar",
+        "name": "Adamatar Xandassus, Ayna Doğumlu",
+        "title": "Kakofoni Lordu"
+    },
+    "emperExultant": {
+        "extraShortName": "Laviscus",
+        "shortName": "Laviscus",
+        "name": "Kusursuz Şampiyon Laviscus Sentrillion",
+        "title": "Çılgın Coşkunun Lordu"
+    },
+    "emperLucius": {
+        "extraShortName": "Lucius",
+        "shortName": "Lucius",
+        "name": "Ebedi Lucius",
+        "title": "Slaanesh'in Şampiyonu"
+    },
+    "votanBeserk": {
+        "extraShortName": "Hâvyr",
+        "shortName": "Hâvyr",
+        "name": "Hâvyr Wârspeke",
+        "title": "Cthonian Beserk"
+    },
+    "votanIronmaster": {
+        "extraShortName": "Vynn",
+        "shortName": "Vynn",
+        "name": "Vynn Conglahr",
+        "title": "Demir Ustası Brôkhyr"
+    },
+    "votanMemnyr": {
+        "extraShortName": "Âmmuk",
+        "shortName": "Âmmuk",
+        "name": "Âmmuk Keskin Göz",
+        "title": "Memnyr Stratejisti"
+    },
+    "votanChampion": {
+        "extraShortName": "Kîmm",
+        "shortName": "Kîmm",
+        "name": "Kîmm Skârstreng",
+        "title": "Einhyr Şampiyonu"
+    },
+    "votanUthar": {
+        "extraShortName": "Ûthar",
+        "shortName": "Mukadder Ûthar\n",
+        "name": "Mukadder Ûthar",
+        "title": "Yüce Kâhl"
+    },
+    "astarCyrus": {
+        "extraShortName": "Cyrus",
+        "shortName": "Cyrus",
+        "name": "Cyrus",
+        "title": "Phobos Zırhlı Yüzbaşı"
+    },
+    "astarLysander": {
+        "extraShortName": "Lysander",
+        "shortName": "Lysander",
+        "name": "Darnath Lysander",
+        "title": "1. Bölük Komutanı"
+    },
+    "astarEradicator": {
+        "extraShortName": "Nubari",
+        "shortName": "Nubari",
+        "name": "Nubari Shal'Dar",
+        "title": "İmhacı Çavuş"
+    }
+}

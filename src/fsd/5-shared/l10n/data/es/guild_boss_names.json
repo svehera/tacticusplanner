@@ -1,0 +1,590 @@
+{
+    "GuildBoss1Boss1TyranTervigonLeviathan": {
+        "extraShortName": "",
+        "shortName": "Tervigón",
+        "name": "Tervigón (Flota enjambre Leviathan)",
+        "title": "Flota Enjambre Leviathan"
+    },
+    "GuildBoss1Boss2TyranTervigonKronos": {
+        "extraShortName": "",
+        "shortName": "Tervigón",
+        "name": "Tervigón (Flota enjambre Kronos)",
+        "title": "Flota Enjambre Kronos"
+    },
+    "GuildBoss1Boss3TyranTervigonGorgon": {
+        "extraShortName": "",
+        "shortName": "Tervigón",
+        "name": "Tervigón (Flota enjambre Gorgona)",
+        "title": "Flota Enjambre Gorgona"
+    },
+    "GuildBoss1Npc1TyranTermagantLeviathan": {
+        "extraShortName": "",
+        "shortName": "Termagante",
+        "name": "Termagante",
+        "title": ""
+    },
+    "GuildBoss1Npc2TyranTermagantKronos": {
+        "extraShortName": "",
+        "shortName": "Termagante",
+        "name": "Termagante",
+        "title": ""
+    },
+    "GuildBoss1Npc3TyranTermagantGorgon": {
+        "extraShortName": "",
+        "shortName": "Termagante",
+        "name": "Termagante",
+        "title": ""
+    },
+    "GuildBoss2Boss1TyranHiveTyrantLeviathan": {
+        "extraShortName": "",
+        "shortName": "Tirano de enjambre",
+        "name": "Tirano de enjambre (Flota enjambre Leviathan)",
+        "title": "Flota enjambre Leviathan"
+    },
+    "GuildBoss2Boss2TyranHiveTyrantKronos": {
+        "extraShortName": "",
+        "shortName": "Tirano de enjambre",
+        "name": "Tirano de enjambre (Flota enjambre Kronos)",
+        "title": "Flota Enjambre Kronos"
+    },
+    "GuildBoss2Boss3TyranHiveTyrantGorgon": {
+        "extraShortName": "",
+        "shortName": "Tirano de enjambre",
+        "name": "Tirano de enjambre (Flota enjambre Gorgona)",
+        "title": "Flota Enjambre Gorgona"
+    },
+    "GuildBoss2Npc1TyranRipperSwarmLeviathan": {
+        "extraShortName": "",
+        "shortName": "Enjambre devorador",
+        "name": "Enjambre devorador",
+        "title": ""
+    },
+    "GuildBoss2Npc2TyranRipperSwarmKronos": {
+        "extraShortName": "",
+        "shortName": "Enjambre devorador",
+        "name": "Enjambre devorador",
+        "title": ""
+    },
+    "GuildBoss2Npc3TyranRipperSwarmGorgon": {
+        "extraShortName": "",
+        "shortName": "Enjambre devorador",
+        "name": "Enjambre devorador",
+        "title": ""
+    },
+    "GuildBoss1MiniBoss1TyranWarriorLeviathan": {
+        "extraShortName": "",
+        "shortName": "Tyranid Prime",
+        "name": "Tyranid Prime (Leviathan)",
+        "title": "Flota Enjambre Leviathan"
+    },
+    "GuildBoss1MiniBoss2TyranWarriorKronos": {
+        "extraShortName": "",
+        "shortName": "Tyranid Prime",
+        "name": "Tyranid Prime (Kronos)",
+        "title": "Flota Enjambre Kronos"
+    },
+    "GuildBoss1MiniBoss3TyranWarriorGorgon": {
+        "extraShortName": "",
+        "shortName": "Tyranid Prime",
+        "name": "Tyranid Prime (Gorgona)",
+        "title": "Flota Enjambre Gorgona"
+    },
+    "GuildBoss1Npc4TyranHormagauntLeviathan": {
+        "extraShortName": "",
+        "shortName": "Hormagante",
+        "name": "Hormagante",
+        "title": ""
+    },
+    "GuildBoss1Npc5TyranHormagauntKronos": {
+        "extraShortName": "",
+        "shortName": "Hormagante",
+        "name": "Hormagante",
+        "title": ""
+    },
+    "GuildBoss1Npc6TyranHormagauntGorgon": {
+        "extraShortName": "",
+        "shortName": "Hormagante",
+        "name": "Hormagante",
+        "title": ""
+    },
+    "GuildBoss3Boss1NecroSilentKing": {
+        "extraShortName": "",
+        "shortName": "Szarekh",
+        "name": "Szarekh",
+        "title": "El Rey Silencioso"
+    },
+    "GuildBoss3Npc1NecroWarrior": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc2NecroFlayedOne": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc3NecroDeathmark": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc4NecroDestroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc5NecroSwarm": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Minion1NecroMesophet": {
+        "extraShortName": "",
+        "shortName": "Mesophet",
+        "name": "Mesophet de la Mano sombría",
+        "title": "Dinastía Szarekhan"
+    },
+    "GuildBoss3Minion2NecroHapthatra": {
+        "extraShortName": "",
+        "shortName": "Hapthatra",
+        "name": "Hapthatra, el Radiante",
+        "title": "Dinastía Szarekhan"
+    },
+    "GuildBoss3Minion3NecroMenhir": {
+        "extraShortName": "",
+        "shortName": "Menhir triárquico",
+        "name": "Menhir triárquico",
+        "title": "Dinastía Szarekhan"
+    },
+    "GuildBoss3Npc6NecroSmnDeathmark": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Boss1OrksGhazghkull": {
+        "extraShortName": "",
+        "shortName": "Ghazghkull",
+        "name": "Ghazghkull Mag Uruk Thraka",
+        "title": "¡Profeta de Waaagh!"
+    },
+    "GuildBoss4Npc1OrksGrot": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Npc2OrksOrkBoy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Npc3OrksGrotTank": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Npc4OrksStormboy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4MiniBoss1OrksBigMek": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Minion1OrksKillaKan": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4MiniBoss2OrksNob": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Minion2OrksRuntherd": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4LootObjExplOilDrumReworked": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5Boss1DeathMortarion": {
+        "extraShortName": "",
+        "shortName": "Mortarion",
+        "name": "Mortarion, el Señor de la muerte",
+        "title": "Primarca demoníaco de la Guardia de la Muerte"
+    },
+    "GuildBoss5Npc1Poxwalker": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5Npc2PoxwalkerSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5MiniBoss1DeathRotbone": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5Minion1DeathBlightlord": {
+        "extraShortName": "",
+        "shortName": "Exterminador Dominaplagas",
+        "name": "Exterminador Dominaplagas",
+        "title": ""
+    },
+    "GuildBoss5MiniBoss2DeathBlightbringer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss6Boss1TyranScreamerKiller": {
+        "extraShortName": "",
+        "shortName": "Matagritos",
+        "name": "Matagritos",
+        "title": "Organismo de asalto pesado"
+    },
+    "GuildBoss6MiniBoss1TyranNeurothrope": {
+        "extraShortName": "",
+        "shortName": "Neurótropo",
+        "name": "Neurótropo",
+        "title": "Organismo psíquico"
+    },
+    "GuildBoss6MiniBoss2TyranWingedPrime": {
+        "extraShortName": "",
+        "shortName": "Primus Alado",
+        "name": "Tiránido Primus Alado",
+        "title": "Organismo guerrero líder"
+    },
+    "GuildBoss6Npc1TyranHormagaunt": {
+        "extraShortName": "",
+        "shortName": "Hormagante",
+        "name": "Hormagante",
+        "title": ""
+    },
+    "GuildBoss6Npc2TyranRipperSwarm": {
+        "extraShortName": "",
+        "shortName": "Enjambre devorador",
+        "name": "Enjambre devorador",
+        "title": ""
+    },
+    "GuildBoss6Npc3TyranTermagant": {
+        "extraShortName": "",
+        "shortName": "Termagante",
+        "name": "Termagante",
+        "title": ""
+    },
+    "GuildBoss6Npc4TyranWarrior": {
+        "extraShortName": "",
+        "shortName": "Guerrero Tiránido",
+        "name": "Guerrero Tiránido",
+        "title": ""
+    },
+    "GuildBoss6Npc5TyranBarbgaunt": {
+        "extraShortName": "",
+        "shortName": "Espinogante",
+        "name": "Espinogante",
+        "title": ""
+    },
+    "GuildBoss7Boss1AstraRogaldorn": {
+        "extraShortName": "",
+        "shortName": "Rogal Dorn",
+        "name": "Tanque de Batalla Rogal Dorn",
+        "title": "Tanque de Batalla pesado"
+    },
+    "GuildBoss7MiniBoss1AstraPrimarisPsy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7MiniBoss2AstraOrdnance": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc1AstraGuardsman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc2AstraLascannon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc3AstraVoxcaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc4Mortar": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc1AstraGuardsmanSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Boss1EldarAvatar": {
+        "extraShortName": "",
+        "shortName": "Avatar de Khaine",
+        "name": "Avatar de Khaine",
+        "title": "Fragmento del Dios de las Manos sangrientas"
+    },
+    "GuildBoss8MiniBoss1EldarAutarch": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8MiniBoss2EldarFarseer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc1EldarGuardian": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc2EldarWarlock": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc3EldarHarlequin": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc4EldarWraithguard": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc5EldarGuardianSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Boss1ThousMagnus": {
+        "extraShortName": "",
+        "shortName": "Magnus",
+        "name": "Magnus el Rojo",
+        "title": "El Rey Carmesí"
+    },
+    "GuildBoss9MiniBoss1ThousSorcerer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9MiniBoss2ThousInfernalMaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc1ThousPinkHorror": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc2ThousScreamer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc3ThousRubricMarine": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc4ThousTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc5ThousScreamerSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Boss1AdmecBelisarius": {
+        "extraShortName": "",
+        "shortName": "Belisarius Cawl",
+        "name": "Belisarius Cawl",
+        "title": "Archimagos Dominus"
+    },
+    "GuildBoss10MiniBoss1AdmecMarshall": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10MiniBoss2AdmecManipulus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Minion1AdmecRuststalker": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Minion2AdmecDestroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Npc1AdmecTechpriest": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Npc2AdmecElectropriest": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10LootObjArcheotecCrate": {
+        "extraShortName": "",
+        "shortName": "Contenedor de Arqueotecnología",
+        "name": "Contenedor de Arqueotecnología",
+        "title": ""
+    },
+    "GuildBoss11Boss1TauRiptide": {
+        "extraShortName": "",
+        "shortName": "Cataclismo",
+        "name": "Exoarmadura XV104 Cataclismo",
+        "title": "Exoarmadura pesada potenciada por Reactor Nova"
+    },
+    "GuildBoss11MiniBoss1TauMarksman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11MiniBoss2TauCrisis": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc1TauFireWarrior": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc2TauDroneSniper": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc3TauDroneShield": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc4TauStealthSuit": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Boss1DarkaLion": {
+        "extraShortName": "",
+        "shortName": "Lion El'Jonson",
+        "name": "Lion El'Jonson",
+        "title": "Primarca de los Ángeles Oscuros"
+    },
+    "GuildBoss12MiniBoss1DarkaTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12MiniBoss2DarkaCompanion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc1DarkaInfiltrator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc2DarkaHellblaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc3DarkaTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc4DarkaWatcher": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    }
+}

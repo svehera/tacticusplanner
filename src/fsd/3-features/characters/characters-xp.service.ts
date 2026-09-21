@@ -2,14 +2,14 @@
 import xpData from 'src/data/xp.json';
 
 import { mutableCopy } from '@/fsd/5-shared/lib';
-import { Rarity } from '@/fsd/5-shared/model';
+import { Rarity, XP_BOOK_GOLD_COST } from '@/fsd/5-shared/model';
 
 // eslint-disable-next-line import-x/no-internal-modules -- FYI: Ported from `v2` module; doesn't comply with `fsd` structure
 import { IXpEstimate, IXpLevel } from '@/fsd/3-features/characters/characters.models';
 
 export class CharactersXpService {
     static readonly legendaryTomeXp = 12_500 as const;
-    static readonly legendaryTomeApplyCost = 500 as const;
+    static readonly legendaryTomeApplyCost = XP_BOOK_GOLD_COST[Rarity.Legendary];
     static xpLevelThresholds = mutableCopy(xpData.xpLevelThresholds) satisfies IXpLevel[];
 
     static getLegendaryTomesCount(

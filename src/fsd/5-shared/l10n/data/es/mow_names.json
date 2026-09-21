@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Galatian",
+        "shortName": "Galatian",
+        "name": "Galatian",
+        "title": "Dreadnought Redentor"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Exorcista",
+        "shortName": "Exorcista",
+        "name": "Exorcista",
+        "title": "Tanque de artillería"
+    },
+    "necroReanimator": {
+        "extraShortName": "Reanimador",
+        "shortName": "Reanimador",
+        "name": "Reanimador Canóptico",
+        "title": "Construcción canóptica"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Lanzacohetes Malleus",
+        "shortName": "Lanzacohetes Malleus",
+        "name": "Lanzacohetes Malleus",
+        "title": "Batería Artillera de Campaña"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Diablo de la Forja",
+        "shortName": "Diablo de la Forja",
+        "name": "Diablo de la Forja",
+        "title": "Máquina daemon"
+    },
+    "deathCrawler": {
+        "extraShortName": "Reptador Revientaplagas",
+        "shortName": "Reptador Revientaplagas",
+        "name": "Reptador Revientaplagas",
+        "title": "Máquina daemon"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Garrapatoneta",
+        "shortName": "Garrapatoneta",
+        "name": "Garrapatoneta",
+        "title": "Adiktoz a la velozidad"
+    },
+    "tauBroadside": {
+        "extraShortName": "Tson'ji",
+        "shortName": "Tson'ji",
+        "name": "Shas'vre Vior'la Tson'ji",
+        "title": "Exoarmadura XV88 Apocalipsis"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "Z'Kar",
+        "shortName": "Z'Kar",
+        "name": "Apophitar Z'Kar",
+        "title": "Príncipe Daemon de Tzeentch"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Storm Speeder",
+        "shortName": "Storm Speeder",
+        "name": "Storm Speeder Granizador",
+        "title": "Nave de combate de Ala de Cuervo"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Biovoro",
+        "shortName": "Biovoro",
+        "name": "Biovoro",
+        "title": "Organismo de artillería"
+    }
+}

@@ -116,3 +116,53 @@ describe('GoalCardCharacterAbilities XP books row', () => {
         expect(screen.queryByRole('progressbar', { name: /XP Books/ })).toBeNull();
     });
 });
+
+describe('GoalCardCharacterAbilities badges', () => {
+    const noBadges = {
+        [Rarity.Common]: 0,
+        [Rarity.Uncommon]: 0,
+        [Rarity.Rare]: 0,
+        [Rarity.Epic]: 0,
+        [Rarity.Legendary]: 0,
+        [Rarity.Mythic]: 0,
+    };
+
+    // Active goals go through inventory adjustment, which zeroes badges the player already holds. The
+    // chip must still render so a fully stocked goal doesn't look like it needs nothing.
+    it('shows have/required when held badges cover the whole requirement', () => {
+        render(
+            <GoalCardCharacterAbilities
+                goal={goal}
+                bookRarity={Rarity.Legendary}
+                goalEstimate={estimate({
+                    abilitiesEstimate: {
+                        gold: 0,
+                        alliance: Alliance.Imperial,
+                        badges: { ...noBadges, [Rarity.Legendary]: 0 },
+                        badgesRequired: { ...noBadges, [Rarity.Legendary]: 6 },
+                    },
+                })}
+            />
+        );
+
+        expect(screen.getByText('6/6')).toBeTruthy();
+    });
+
+    it('shows a plain count for an unadjusted (paused) estimate', () => {
+        render(
+            <GoalCardCharacterAbilities
+                goal={goal}
+                bookRarity={Rarity.Legendary}
+                goalEstimate={estimate({
+                    abilitiesEstimate: {
+                        gold: 0,
+                        alliance: Alliance.Imperial,
+                        badges: { ...noBadges, [Rarity.Legendary]: 6 },
+                    },
+                })}
+            />
+        );
+
+        expect(screen.getByText('×6')).toBeTruthy();
+    });
+});

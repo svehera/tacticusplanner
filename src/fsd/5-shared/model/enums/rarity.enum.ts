@@ -25,6 +25,16 @@ export const XP_BOOK_VALUE: Record<Rarity, number> = {
     [Rarity.Mythic]: 62_500,
 };
 
+/** Gold paid to apply one XP book of the given rarity. */
+export const XP_BOOK_GOLD_COST: Record<Rarity, number> = {
+    [Rarity.Common]: 5,
+    [Rarity.Uncommon]: 15,
+    [Rarity.Rare]: 50,
+    [Rarity.Epic]: 150,
+    [Rarity.Legendary]: 500,
+    [Rarity.Mythic]: 2000,
+};
+
 export const XP_BOOK_ORDER: Rarity[] = Object.entries(XP_BOOK_VALUE)
     .toSorted(([, a], [, b]) => b - a)
     .map(([key]) => Number(key) as Rarity);

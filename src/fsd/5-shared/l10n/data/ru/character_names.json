@@ -1,0 +1,704 @@
+{
+    "ultraTigurius": {
+        "extraShortName": "Тигурий",
+        "shortName": "Варро Тигурий",
+        "name": "Варро Тигурий",
+        "title": "Старший библиарий"
+    },
+    "ultraEliminatorSgt": {
+        "extraShortName": "Цертус",
+        "shortName": "Цертус",
+        "name": "Сержант Цертус",
+        "title": "Сержант устранителей"
+    },
+    "ultraInceptorSgt": {
+        "extraShortName": "Беллатор",
+        "shortName": "Беллатор",
+        "name": "Сержант Беллатор",
+        "title": "Сержант ударников"
+    },
+    "ultraApothecary": {
+        "extraShortName": "Инцисий",
+        "shortName": "Инцисий",
+        "name": "Апотекарий Инцисий",
+        "title": "Апотекарий"
+    },
+    "ultraCalgar": {
+        "extraShortName": "Калгар",
+        "shortName": "Марней Калгар",
+        "name": "Марней Калгар",
+        "title": "Магистр ордена"
+    },
+    "ultraTitus": {
+        "extraShortName": "Тит",
+        "shortName": "Тит",
+        "name": "Деметриан Тит",
+        "title": "Лейтенант-примарис"
+    },
+    "adeptRetributor": {
+        "extraShortName": "Виндикта",
+        "shortName": "Виндикта",
+        "name": "Боевая сестра Виндикта",
+        "title": "Целестианка"
+    },
+    "adeptHospitaller": {
+        "extraShortName": "Изабелла",
+        "shortName": "Изабелла",
+        "name": "Изабелла Марикен",
+        "title": "Сестра-госпитальер"
+    },
+    "adeptMorvenn": {
+        "extraShortName": "Морвенн Вал",
+        "shortName": "Морвенн Вал",
+        "name": "Морвенн Вал",
+        "title": "Аббатисса Санкторум Адепта Сороритас"
+    },
+    "adeptCanoness": {
+        "extraShortName": "Росвита",
+        "shortName": "Росвита",
+        "name": "Росвита Эстер",
+        "title": "Канонесса"
+    },
+    "adeptCelestine": {
+        "extraShortName": "Целестина",
+        "shortName": "Целестина",
+        "name": "Целестина, живая святая",
+        "title": "Живая святая"
+    },
+    "necroWarden": {
+        "extraShortName": "Макхотеп",
+        "shortName": "Макхотеп",
+        "name": "Царский надзиратель Макхотеп",
+        "title": "Царский надзиратель"
+    },
+    "necroDestroyer": {
+        "extraShortName": "Имоспекх",
+        "shortName": "Имоспекх",
+        "name": "Уничтожитель-гексмарк Имоспекх",
+        "title": "Уничтожитель-гексмарк"
+    },
+    "necroSpyder": {
+        "extraShortName": "Алеп-Нулл",
+        "shortName": "Алеп-Нулл",
+        "name": "Каноптековый паук Алеп-Нулл",
+        "title": "Каноптековый паук"
+    },
+    "necroPlasmancer": {
+        "extraShortName": "Тутмос",
+        "shortName": "Тутмос",
+        "name": "Плазмант Тутмос",
+        "title": "Плазмант"
+    },
+    "necroOverlord": {
+        "extraShortName": "Анупхет",
+        "shortName": "Анупхет",
+        "name": "Владыка Анупхет",
+        "title": "Владыка"
+    },
+    "necroChronomancer": {
+        "extraShortName": "Тотмек",
+        "shortName": "Тотмек",
+        "name": "Тотмек",
+        "title": "Хрономант"
+    },
+    "astraPrimarisPsy": {
+        "extraShortName": "Сибилл",
+        "shortName": "Сибилл Дэвине",
+        "name": "Сибилл Дэвине",
+        "title": "Ясновидец-примарис"
+    },
+    "astraYarrick": {
+        "extraShortName": "Яррик",
+        "shortName": "Комиссар Яррик",
+        "name": "Комиссар Себастьян Яррик",
+        "title": "Лорд-комиссар"
+    },
+    "astraBullgryn": {
+        "extraShortName": "Кут",
+        "shortName": "Кут Скоден",
+        "name": "Кут Скоден",
+        "title": "Башковитый быкогрин"
+    },
+    "astraOrdnance": {
+        "extraShortName": "Таддеус",
+        "shortName": "Таддеус Нобель",
+        "name": "Таддеус Нобель",
+        "title": "Начальник артиллерии"
+    },
+    "astraCreed": {
+        "extraShortName": "Крид",
+        "shortName": "Кастелян Крид",
+        "name": "Лорд-кастелян Урсакар Э. Крид",
+        "title": "Лорд-генерал Астра Милитарум"
+    },
+    "astraDreir": {
+        "extraShortName": "Дреир",
+        "shortName": "Маршал Дреир",
+        "name": "Лорд-маршал Варнан Дреир",
+        "title": "Лорд-маршал"
+    },
+    "blackTerminator": {
+        "extraShortName": "Ангракс",
+        "shortName": "Ангракс",
+        "name": "Дракфус Ангракс",
+        "title": "Терминатор-чемпион"
+    },
+    "blackObliterator": {
+        "extraShortName": "Волк",
+        "shortName": "Волк",
+        "name": "Волк, перекованный варпом",
+        "title": "Облитератор"
+    },
+    "blackPossession": {
+        "extraShortName": "Архиматос",
+        "shortName": "Архиматос",
+        "name": "Мастер Архиматос",
+        "title": "Мастер подчинения"
+    },
+    "blackHaarken": {
+        "extraShortName": "Хааркен",
+        "shortName": "Хааркен Покоритель Миров",
+        "name": "Хааркен Покоритель Миров",
+        "title": "Вестник апокалипсиса"
+    },
+    "blackAbaddon": {
+        "extraShortName": "Абаддон",
+        "shortName": "Абаддон Разоритель",
+        "name": "Абаддон Разоритель",
+        "title": "Магистр войны Хаоса"
+    },
+    "deathTyphus": {
+        "extraShortName": "Тифус",
+        "shortName": "Тифус",
+        "name": "Тифус, хозяин Уничтожающего роя",
+        "title": "Вестник Чумного Бога"
+    },
+    "deathBlightlord": {
+        "extraShortName": "Маладус",
+        "shortName": "Маладус",
+        "name": "Маладус Флегмор",
+        "title": "Чемпион Пагубных Владык"
+    },
+    "deathRotbone": {
+        "extraShortName": "Тошнот",
+        "shortName": "Тошнот Гнилокостный",
+        "name": "Тошнот Гнилокостный",
+        "title": "Чумной хирург"
+    },
+    "deathPutrifier": {
+        "extraShortName": "Пестиллиан",
+        "shortName": "Пестиллиан",
+        "name": "Пестиллиан Смертегной",
+        "title": "Биолог-гноитель"
+    },
+    "deathBlightbringer": {
+        "extraShortName": "Корродий",
+        "shortName": "Корродий",
+        "name": "Корродий Желчеболь",
+        "title": "Вредоносец"
+    },
+    "orksRuntherd": {
+        "extraShortName": "Снотолуп",
+        "shortName": "Снотолуп",
+        "name": "Грумбал Снотолуп",
+        "title": "Погонщик"
+    },
+    "orksBigMek": {
+        "extraShortName": "Гиббасобирала",
+        "shortName": "Гиббасобирала",
+        "name": "Спициалист Гиббасобирала",
+        "title": "Большой мек"
+    },
+    "orksKillaKan": {
+        "extraShortName": "Снаппалом",
+        "shortName": "Снаппалом",
+        "name": "Снаппалом",
+        "title": "Банка-убийца"
+    },
+    "orksNob": {
+        "extraShortName": "Танкобой",
+        "shortName": "Танкобой",
+        "name": "Олог Танкобой",
+        "title": "Ноб на сквиге-ломателе"
+    },
+    "orksWarboss": {
+        "extraShortName": "Гулгорц",
+        "shortName": "Босс Гулгорц",
+        "name": "Гулгорц Бульдозер",
+        "title": "Варбосс в мегаброне"
+    },
+    "templSwordBrother": {
+        "extraShortName": "Годсвиль",
+        "shortName": "Брат Меча Годсвиль",
+        "name": "Брат Меча Федрий Годсвиль",
+        "title": "Брат Меча"
+    },
+    "templAggressor": {
+        "extraShortName": "Бурхард",
+        "shortName": "Брат Бурхард",
+        "name": "Брат Раймунд Бурхард",
+        "title": "Сержант агрессоров"
+    },
+    "templAncient": {
+        "extraShortName": "Тхоред",
+        "shortName": "Знаменосец Тхоред",
+        "name": "Знаменосец Кантий Тхоред",
+        "title": "Знаменосец ордена"
+    },
+    "templChampion": {
+        "extraShortName": "Джагер",
+        "shortName": "Брат Джагер",
+        "name": "Брат Кенрик Джагер",
+        "title": "Чемпион Императора"
+    },
+    "templHelbrecht": {
+        "extraShortName": "Хелбрехт",
+        "shortName": "Верховный маршал Хелбрехт",
+        "name": "Верховный маршал Хелбрехт",
+        "title": "Верховный маршал Черных Храмовников"
+    },
+    "eldarRanger": {
+        "extraShortName": "Каландис",
+        "shortName": "Каландис",
+        "name": "Каландис Таварен",
+        "title": "Егерь"
+    },
+    "eldarAutarch": {
+        "extraShortName": "Этхана",
+        "shortName": "Этхана",
+        "name": "Этхана Барантхарал",
+        "title": "Автарх"
+    },
+    "eldarFarseer": {
+        "extraShortName": "Эльдрион",
+        "shortName": "Эльдрион",
+        "name": "Эльдрион Юнадин",
+        "title": "Ясновидящий"
+    },
+    "eldarMauganRa": {
+        "extraShortName": "Мауган Ра",
+        "shortName": "Мауган Ра",
+        "name": "Мауган Ра",
+        "title": "лорд-феникс Тёмных Жнецов"
+    },
+    "eldarJainZar": {
+        "extraShortName": "Джайн Зар",
+        "shortName": "Джайн Зар",
+        "name": "Джайн Зар",
+        "title": "лорд-феникс Воющих Банши"
+    },
+    "eldarLhykhis": {
+        "extraShortName": "Лихис",
+        "shortName": "Лихис",
+        "name": "Лихис",
+        "title": "Лорд-феникс Варповых Пауков"
+    },
+    "tauMarksman": {
+        "extraShortName": "Шо’сил",
+        "shortName": "Шо’сил",
+        "name": "Шас’уи Виор’ла Шо’сил",
+        "title": "Оператор прицельного устройства"
+    },
+    "tauCrisis": {
+        "extraShortName": "Ре’вас",
+        "shortName": "Ре’вас",
+        "name": "Шас’вре Виор’ла Ре’вас",
+        "title": "Боескафандр XV8 «Кризис»"
+    },
+    "tauDarkstrider": {
+        "extraShortName": "Темный странник",
+        "shortName": "Темный странник",
+        "name": "Шас’эль Т’ау Миямото",
+        "title": "Замкомандующего"
+    },
+    "tauAunShi": {
+        "extraShortName": "Аун’Ши",
+        "shortName": "Аун’Ши",
+        "name": "Аун’Ши",
+        "title": "Эфирный"
+    },
+    "tauShadowsun": {
+        "extraShortName": "Тень Солнца",
+        "shortName": "Командующая Тень Солнца",
+        "name": "Шас’о Т’ау Шасерра",
+        "title": "Верховная главнокомандующая Империи Т’ау"
+    },
+    "tauFarsight": {
+        "extraShortName": "Зоркий Взгляд",
+        "shortName": "Командующий Зоркий Взгляд",
+        "name": "Шас'о Виор'ла Шова Каис Монт'ир",
+        "title": "Герой и предатель"
+    },
+    "spaceWulfen": {
+        "extraShortName": "Ульф",
+        "shortName": "Ульф",
+        "name": "Ульф Морозный Вой",
+        "title": "Вожак стаи вульфенов"
+    },
+    "spaceHound": {
+        "extraShortName": "Тьярк",
+        "shortName": "Тьярк",
+        "name": "Тьярк Чаробой",
+        "title": "Вожак стаи Гончих Моркаи"
+    },
+    "spaceRockfist": {
+        "extraShortName": "Арьяк",
+        "shortName": "Арьяк",
+        "name": "Арьяк Каменный Кулак",
+        "title": "Заступник Великого Волка"
+    },
+    "spaceStormcaller": {
+        "extraShortName": "Ньяль",
+        "shortName": "Ньяль",
+        "name": "Ньяль Призывающий Бурю",
+        "title": "Повелитель рун"
+    },
+    "spaceBlackmane": {
+        "extraShortName": "Рагнар",
+        "shortName": "Рагнар",
+        "name": "Рагнар Черная Грива",
+        "title": "Волчий лорд Черногривых"
+    },
+    "spaceWolfPriest": {
+        "extraShortName": "Бальдр",
+        "shortName": "Бальдр",
+        "name": "Бальдр Громовое Чело",
+        "title": "Волчий жрец"
+    },
+    "thousTzaangor": {
+        "extraShortName": "Язагор",
+        "shortName": "Язагор",
+        "name": "Язагор Переменчивая Судьба",
+        "title": "Просветленный тзаангор"
+    },
+    "thousTerminator": {
+        "extraShortName": "Тот",
+        "shortName": "Тот",
+        "name": "Сокар Тот",
+        "title": "Терминатор Оккультных Скарабеев"
+    },
+    "thousInfernalMaster": {
+        "extraShortName": "Абраксас",
+        "shortName": "Абраксас",
+        "name": "Аркарзар Абраксас",
+        "title": "Инфернальный повелитель"
+    },
+    "thousSorcerer": {
+        "extraShortName": "Таумах",
+        "shortName": "Таумах",
+        "name": "Кайратар Таумах",
+        "title": "Возвышенный колдун"
+    },
+    "thousAhriman": {
+        "extraShortName": "Ариман",
+        "shortName": "Ариман",
+        "name": "Азек Ариман",
+        "title": "Архитектор рубрикантов"
+    },
+    "thousSekhetar": {
+        "extraShortName": "Робот Сехетар",
+        "shortName": "Робот Сехетар",
+        "name": "Робот Сехетар",
+        "title": "Безмолвные автоматы"
+    },
+    "darkaHellblaster": {
+        "extraShortName": "Саркаэль",
+        "shortName": "Саркаэль",
+        "name": "Саркаэль",
+        "title": "Сержант изничтожителей"
+    },
+    "darkaTerminator": {
+        "extraShortName": "Баракиэль",
+        "shortName": "Баракиэль",
+        "name": "Баракиэль",
+        "title": "Терминатор Крыла Смерти"
+    },
+    "darkaCompanion": {
+        "extraShortName": "Форкас",
+        "shortName": "Форкас",
+        "name": "Форкас Давший Клятву",
+        "title": "Соратник Внутреннего круга"
+    },
+    "darkaAsmodai": {
+        "extraShortName": "Асмодей",
+        "shortName": "Асмодей",
+        "name": "Асмодей",
+        "title": "Магистр покаяния"
+    },
+    "darkaAzrael": {
+        "extraShortName": "Азраил",
+        "shortName": "Азраил",
+        "name": "Азраил",
+        "title": "Верховный великий магистр"
+    },
+    "darkaSternguard": {
+        "extraShortName": "Рамус",
+        "shortName": "Рамус",
+        "name": "Рамус",
+        "title": "сержант-ветеран"
+    },
+    "tyranNeurothrope": {
+        "extraShortName": "Нейротроп",
+        "shortName": "Нейротроп",
+        "name": "Нейротроп",
+        "title": "Психический организм"
+    },
+    "tyranTyrantGuard": {
+        "extraShortName": "Страж тирана",
+        "shortName": "Страж тирана",
+        "name": "Страж тирана",
+        "title": "Защитный организм"
+    },
+    "tyranWingedPrime": {
+        "extraShortName": "Крылатый Прайм",
+        "shortName": "Крылатый Прайм",
+        "name": "Крылатый Тиранид-Прайм",
+        "title": "Ведущий организм-воин"
+    },
+    "tyranDeathleaper": {
+        "extraShortName": "Смертохват",
+        "shortName": "Смертохват",
+        "name": "Смертохват",
+        "title": "Ужас авангарда"
+    },
+    "tyranParasite": {
+        "extraShortName": "Паразит Мортрекса",
+        "shortName": "Паразит Мортрекса",
+        "name": "Паразит Мортрекса",
+        "title": "Организм-захватчик"
+    },
+    "admecDominus": {
+        "extraShortName": "Витрувий",
+        "shortName": "Витрувий",
+        "name": "Магос Доминус Витрувий Таннек",
+        "title": "Техножрец-доминус"
+    },
+    "admecManipulus": {
+        "extraShortName": "Актус",
+        "shortName": "Актус",
+        "name": "Манипулус Актус Фульгоросус",
+        "title": "Техножрец-манипулус"
+    },
+    "admecMarshall": {
+        "extraShortName": "Тан Гида",
+        "shortName": "Тан Гида",
+        "name": "Тан Гида",
+        "title": "Маршал скитариев"
+    },
+    "admecRuststalker": {
+        "extraShortName": "Экзитор-Рхо",
+        "shortName": "Экзитор-Рхо",
+        "name": "Экзитор-Рхо-1.15/x",
+        "title": "Принцепс сикарийских ловцов"
+    },
+    "admecDestroyer": {
+        "extraShortName": "Си-гекс",
+        "shortName": "Си-гекс",
+        "name": "Sy-gex-KPH008/15.mk41",
+        "title": "Катафрон-уничтожитель"
+    },
+    "worldTerminator": {
+        "extraShortName": "Враск",
+        "shortName": "Враск",
+        "name": "Враск Мясник",
+        "title": "Терминатор Пожирателей Миров"
+    },
+    "worldJakhal": {
+        "extraShortName": "Мэйсер",
+        "shortName": "Мэйсер",
+        "name": "Мэйсер Кровавая Улыбка",
+        "title": "Обесчещенный шакал"
+    },
+    "worldEightbound": {
+        "extraShortName": "Азкор",
+        "shortName": "Азкор",
+        "name": "Азкор Восьмикратный",
+        "title": "Вознесенный Восьмидержимый"
+    },
+    "worldExecutions": {
+        "extraShortName": "Тарвах",
+        "shortName": "Тарвах",
+        "name": "Тарвах Палач",
+        "title": "Магистр казней"
+    },
+    "worldKharn": {
+        "extraShortName": "Кхарн",
+        "shortName": "Кхарн",
+        "name": "Кхарн Предатель",
+        "title": "Чемпион Кхорна"
+    },
+    "bloodIntercessor": {
+        "extraShortName": "Матанео",
+        "shortName": "Матанео",
+        "name": "Матанео",
+        "title": "Сержант заступников с прыжковым ранцем"
+    },
+    "bloodDeathCompany": {
+        "extraShortName": "Люсьен",
+        "shortName": "Люсьен",
+        "name": "Люсьен",
+        "title": "Заступник роты смерти"
+    },
+    "bloodSanguinary": {
+        "extraShortName": "Никодемус",
+        "shortName": "Никодемус",
+        "name": "Никодемус",
+        "title": "Сангвинарный жрец"
+    },
+    "bloodMephiston": {
+        "extraShortName": "Мефистон",
+        "shortName": "Мефистон",
+        "name": "Мефистон",
+        "title": "Властелин Смерти"
+    },
+    "bloodDante": {
+        "extraShortName": "Данте",
+        "shortName": "Данте",
+        "name": "Командующий Данте",
+        "title": "Магистр капитула"
+    },
+    "bloodTerminator": {
+        "extraShortName": "Чезаре",
+        "shortName": "Чезаре",
+        "name": "Чезаре",
+        "title": "сержант штурмовых терминаторов"
+    },
+    "genesBiophagus": {
+        "extraShortName": "Холлан",
+        "shortName": "Холлан",
+        "name": "Холлан Баумгарт",
+        "title": "Биофагус"
+    },
+    "genesMagus": {
+        "extraShortName": "Зибия",
+        "shortName": "Зибия",
+        "name": "Зибия Кайзер",
+        "title": "Магус"
+    },
+    "genesPrimus": {
+        "extraShortName": "Исаак",
+        "shortName": "Исаак",
+        "name": "Исаак Старн",
+        "title": "Примас"
+    },
+    "genesKelermorph": {
+        "extraShortName": "Джуд",
+        "shortName": "Джуд",
+        "name": "Джуд Ласка",
+        "title": "Келерморф"
+    },
+    "genesPatriarch": {
+        "extraShortName": "Патермайн",
+        "shortName": "Патермайн",
+        "name": "Патермайн",
+        "title": "Патриарх генокрадов"
+    },
+    "custoVexilusPraetor": {
+        "extraShortName": "Эсот",
+        "shortName": "Эсот",
+        "name": "Эсот Кумадра",
+        "title": "Претор-вексилус"
+    },
+    "custoAtlacoya": {
+        "extraShortName": "Атлакоя",
+        "shortName": "Атлакоя",
+        "name": "Атлакоя",
+        "title": "Смотрительница"
+    },
+    "custoKyrus": {
+        "extraShortName": "Тирит",
+        "shortName": "Тирит",
+        "name": "Тирит Шива Кир",
+        "title": "Кустодианский страж"
+    },
+    "custoBladeChampion": {
+        "extraShortName": "Кариан",
+        "shortName": "Кариан",
+        "name": "Кариан Гелсатес",
+        "title": "Чемпион клинка"
+    },
+    "custoTrajann": {
+        "extraShortName": "Траянн",
+        "shortName": "Траянн",
+        "name": "Траянн Валорис",
+        "title": "Капитан-генерал"
+    },
+    "emperNoiseMarine": {
+        "extraShortName": "Широн",
+        "shortName": "Широн",
+        "name": "Широн Каперси, Идолопоклонник",
+        "title": "Шумовой десантник"
+    },
+    "emperFlawlessBlade": {
+        "extraShortName": "Хаскул",
+        "shortName": "Хаскул",
+        "name": "Хаскул Торн из Шелкового Клинка",
+        "title": "Безупречный Клинок"
+    },
+    "emperKakophonist": {
+        "extraShortName": "Адаматар",
+        "shortName": "Адаматар",
+        "name": "Адаматар Ксандасс, Зерцалорожденный",
+        "title": "Лорд-какофонист"
+    },
+    "emperExultant": {
+        "extraShortName": "Лависций",
+        "shortName": "Лависций",
+        "name": "Лависций Сентриллион Идеальный",
+        "title": "Владыка Ликования"
+    },
+    "emperLucius": {
+        "extraShortName": "Люций",
+        "shortName": "Люций",
+        "name": "Люций Вечный",
+        "title": "Чемпион Слаанеш"
+    },
+    "votanBeserk": {
+        "extraShortName": "Хэвюр",
+        "shortName": "Хэвюр",
+        "name": "Хэвюр Военреч",
+        "title": "Хтонийский бесерк"
+    },
+    "votanIronmaster": {
+        "extraShortName": "Винн",
+        "shortName": "Винн",
+        "name": "Винн Конглахр",
+        "title": "Брохир — железный мастер"
+    },
+    "votanMemnyr": {
+        "extraShortName": "Аммук",
+        "shortName": "Аммук",
+        "name": "Аммук Зоркий Глаз",
+        "title": "Стратег Мемнира"
+    },
+    "votanChampion": {
+        "extraShortName": "Кимм",
+        "shortName": "Кимм",
+        "name": "Кимм Скарстренг",
+        "title": "Чемпион Эйнхир"
+    },
+    "votanUthar": {
+        "extraShortName": "Утар",
+        "shortName": "Утар Предначертанный\n",
+        "name": "Утар Предначертанный",
+        "title": "Великий кахл"
+    },
+    "astarCyrus": {
+        "extraShortName": "Цирус",
+        "shortName": "Цирус",
+        "name": "Цирус",
+        "title": "Капитан в доспехе типа «Фобос»"
+    },
+    "astarLysander": {
+        "extraShortName": "Лисандр",
+        "shortName": "Лисандр",
+        "name": "Дарнат Лисандр",
+        "title": "Капитан первой роты"
+    },
+    "astarEradicator": {
+        "extraShortName": "Нубари",
+        "shortName": "Нубари",
+        "name": "Нубари Шал'Дар",
+        "title": "Сержант искоренителей"
+    }
+}

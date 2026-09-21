@@ -1,0 +1,33 @@
+{
+    "ranks": {
+        "0": "Steinrang I",
+        "1": "Steinrang II",
+        "2": "Steinrang III",
+        "3": "Eisenrang I",
+        "4": "Eisenrang II",
+        "5": "Eisenrang III",
+        "6": "Bronzerang I",
+        "7": "Bronzerang II",
+        "8": "Bronzerang III",
+        "9": "Silberrang I",
+        "10": "Silberrang II",
+        "11": "Silberrang III",
+        "12": "Goldrang I",
+        "13": "Goldrang II",
+        "14": "Goldrang III",
+        "15": "Diamantrang I",
+        "16": "Diamantrang II",
+        "17": "Diamantrang III",
+        "18": "Adamantrang I",
+        "19": "Adamantrang II",
+        "20": "Adamantrang III"
+    },
+    "rarities": {
+        "Common": "Gewöhnlich",
+        "Uncommon": "Ungewöhnlich",
+        "Rare": "Selten",
+        "Epic": "Episch",
+        "Legendary": "Legendär",
+        "Mythic": "Mythisch"
+    }
+}

@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "ガラティアン",
+        "shortName": "ガラティアン",
+        "name": "ガラティアン",
+        "title": "リデンプター・ドレッドノート"
+    },
+    "adeptExorcist": {
+        "extraShortName": "エクソシスト",
+        "shortName": "エクソシスト",
+        "name": "エクソシスト",
+        "title": "砲戦車"
+    },
+    "necroReanimator": {
+        "extraShortName": "リアニメイター",
+        "shortName": "リアニメイター",
+        "name": "カノプテック・リアニメイター",
+        "title": "カノプテック・コンストラクト"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "マレウス・ロケットランチャー",
+        "shortName": "マレウス・ロケットランチャー",
+        "name": "マレウス・ロケットランチャー",
+        "title": "フィールド・オードナンス・バッテリー"
+    },
+    "blackForgefiend": {
+        "extraShortName": "フォージフィーンド",
+        "shortName": "フォージフィーンド",
+        "name": "フォージフィーンド",
+        "title": "ディーモンエンジン"
+    },
+    "deathCrawler": {
+        "extraShortName": "プレーグバースト・クロウラー",
+        "shortName": "プレーグバースト・クロウラー",
+        "name": "プレーグバースト・クロウラー",
+        "title": "ディーモンエンジン"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "ラッカトラック",
+        "shortName": "ラッカトラック",
+        "name": "ラッカトラック・スクイッグバギー",
+        "title": "スピードフリーク・トラック"
+    },
+    "tauBroadside": {
+        "extraShortName": "ツォン＝ジ",
+        "shortName": "ツォン＝ジ",
+        "name": "シャス＝ヴレ・ヴィオルラ・ツォン＝ジ",
+        "title": "XV88ブロードサイド・バトルスーツ"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "ズカール",
+        "shortName": "ズカール",
+        "name": "アポフィター・ズカール",
+        "title": "ディーモンプリンス・オヴ・ティーンチ"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "ストームスピーダー",
+        "shortName": "ストームスピーダー",
+        "name": "ストームスピーダー・ヘイルストライク",
+        "title": "レイヴンウィング打撃クラフト"
+    },
+    "tyranBiovore": {
+        "extraShortName": "バイオヴォア",
+        "shortName": "バイオヴォア",
+        "name": "バイオヴォア",
+        "title": "アーティラリー・オーガニズム"
+    }
+}

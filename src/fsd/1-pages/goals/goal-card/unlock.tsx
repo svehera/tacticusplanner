@@ -19,13 +19,17 @@ export const GoalCardUnlock: React.FC<Props> = ({ goal, goalEstimate }) => {
     const targetShards = charsUnlockShards[goal.rarity];
     const doneBy = getDoneByDays(goalEstimate);
     const days = doneBy > 0 ? Math.ceil(doneBy) : undefined;
-    const hasEstimate = days !== undefined || goalEstimate.energyTotal > 0;
+    const hasEstimate = days !== undefined || goalEstimate.energyTotal > 0 || goalEstimate.oTokensTotal > 0;
 
     return (
         <div className="flex flex-1 flex-col gap-2.5">
             {hasEstimate && (
                 <div className="flex min-h-[30px] items-center justify-end">
-                    <GoalEstimateChips days={days} energy={goalEstimate.energyTotal} />
+                    <GoalEstimateChips
+                        days={days}
+                        energy={goalEstimate.energyTotal}
+                        tokens={goalEstimate.oTokensTotal}
+                    />
                 </div>
             )}
             <div

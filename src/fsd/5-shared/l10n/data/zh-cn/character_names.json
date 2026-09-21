@@ -1,0 +1,704 @@
+{
+    "ultraTigurius": {
+        "extraShortName": "泰格瑞斯",
+        "shortName": "瓦罗·泰格瑞斯",
+        "name": "瓦罗·泰格瑞斯",
+        "title": "智库馆长"
+    },
+    "ultraEliminatorSgt": {
+        "extraShortName": "塞图斯",
+        "shortName": "塞图斯",
+        "name": "塞图斯军士",
+        "title": "歼灭者士官"
+    },
+    "ultraInceptorSgt": {
+        "extraShortName": "贝拉托",
+        "shortName": "贝拉托",
+        "name": "贝拉托军士",
+        "title": "先驱者士官"
+    },
+    "ultraApothecary": {
+        "extraShortName": "英西索斯",
+        "shortName": "英西索斯",
+        "name": "药剂师英西索斯",
+        "title": "药剂师"
+    },
+    "ultraCalgar": {
+        "extraShortName": "卡尔加",
+        "shortName": "马涅乌思·卡尔加",
+        "name": "马涅乌思·卡尔加",
+        "title": "战团长"
+    },
+    "ultraTitus": {
+        "extraShortName": "泰图斯",
+        "shortName": "泰图斯",
+        "name": "德梅特里安·泰图斯",
+        "title": "原铸副官"
+    },
+    "adeptRetributor": {
+        "extraShortName": "文迪塔",
+        "shortName": "文迪塔",
+        "name": "战斗修女文迪塔",
+        "title": "洁天使"
+    },
+    "adeptHospitaller": {
+        "extraShortName": "伊莎贝拉",
+        "shortName": "伊莎贝拉",
+        "name": "伊莎贝拉·玛丽肯",
+        "title": "医疗官"
+    },
+    "adeptMorvenn": {
+        "extraShortName": "莫雯·瓦尔",
+        "shortName": "莫雯·瓦尔",
+        "name": "莫雯·瓦尔",
+        "title": "修女会至圣总院长"
+    },
+    "adeptCanoness": {
+        "extraShortName": "罗斯维莎",
+        "shortName": "罗斯维莎",
+        "name": "罗斯维莎·埃丝特",
+        "title": "大修女"
+    },
+    "adeptCelestine": {
+        "extraShortName": "塞莱斯汀",
+        "shortName": "塞莱斯汀",
+        "name": "活圣人塞莱斯汀",
+        "title": "活圣人"
+    },
+    "necroWarden": {
+        "extraShortName": "马克霍特普",
+        "shortName": "马克霍特普",
+        "name": "皇家守望马克霍特普",
+        "title": "皇家守望"
+    },
+    "necroDestroyer": {
+        "extraShortName": "伊莫斯佩克",
+        "shortName": "伊莫斯佩克",
+        "name": "巫印毁灭者伊莫斯佩克",
+        "title": "巫印毁灭者"
+    },
+    "necroSpyder": {
+        "extraShortName": "阿列夫零",
+        "shortName": "阿列夫-零",
+        "name": "墓穴蜘蛛阿列夫-零",
+        "title": "墓穴蜘蛛"
+    },
+    "necroPlasmancer": {
+        "extraShortName": "图特摩斯",
+        "shortName": "图特摩斯",
+        "name": "能量巫师图特摩斯",
+        "title": "能量巫师"
+    },
+    "necroOverlord": {
+        "extraShortName": "阿努费特",
+        "shortName": "阿努费特",
+        "name": "阿努费特霸主",
+        "title": "霸主"
+    },
+    "necroChronomancer": {
+        "extraShortName": "托特梅克",
+        "shortName": "托特梅克",
+        "name": "托特梅克",
+        "title": "时间巫师"
+    },
+    "astraPrimarisPsy": {
+        "extraShortName": "西比尔",
+        "shortName": "西比尔·迪瓦恩",
+        "name": "西比尔·迪瓦恩",
+        "title": "原铸灵能者"
+    },
+    "astraYarrick": {
+        "extraShortName": "雅里克",
+        "shortName": "政委雅里克",
+        "name": "塞巴斯蒂安·亚里克政委",
+        "title": "政委领主"
+    },
+    "astraBullgryn": {
+        "extraShortName": "库特",
+        "shortName": "库特·斯科登",
+        "name": "库特·斯科登",
+        "title": "牛格林大聪明"
+    },
+    "astraOrdnance": {
+        "extraShortName": "撒迪厄斯",
+        "shortName": "撒迪厄斯·诺布尔",
+        "name": "撒迪厄斯·诺布尔",
+        "title": "军械大师"
+    },
+    "astraCreed": {
+        "extraShortName": "克里德",
+        "shortName": "克里德堡主",
+        "name": "乌萨卡·E·克里德大堡主",
+        "title": "星界军领主将军"
+    },
+    "astraDreir": {
+        "extraShortName": "德雷尔",
+        "shortName": "德雷尔元帅",
+        "name": "瓦尔南·德雷尔元帅",
+        "title": "元帅"
+    },
+    "blackTerminator": {
+        "extraShortName": "安格拉克斯",
+        "shortName": "安格拉克斯",
+        "name": "德拉福斯·安格拉克斯",
+        "title": "终结者冠军"
+    },
+    "blackObliterator": {
+        "extraShortName": "沃尔克",
+        "shortName": "沃尔克",
+        "name": "亚空间重铸体，沃尔克",
+        "title": "湮灭者"
+    },
+    "blackPossession": {
+        "extraShortName": "阿奇马托斯",
+        "shortName": "阿奇马托斯",
+        "name": "阿奇马托斯大师",
+        "title": "附魔之主"
+    },
+    "blackHaarken": {
+        "extraShortName": "哈肯",
+        "shortName": "夺星者哈肯",
+        "name": "夺星者哈肯",
+        "title": "末日天启先驱"
+    },
+    "blackAbaddon": {
+        "extraShortName": "阿巴顿",
+        "shortName": "掠夺者阿巴顿",
+        "name": "掠夺者阿巴顿",
+        "title": "混沌战帅"
+    },
+    "deathTyphus": {
+        "extraShortName": "泰弗斯",
+        "shortName": "泰弗斯",
+        "name": "毁灭者蜂巢的宿主，泰弗斯",
+        "title": "瘟疫之神的先驱"
+    },
+    "deathBlightlord": {
+        "extraShortName": "马拉杜斯",
+        "shortName": "马拉杜斯",
+        "name": "马拉杜斯·弗莱格莫尔",
+        "title": "腐毒领主勇士"
+    },
+    "deathRotbone": {
+        "extraShortName": "恶心腐骨",
+        "shortName": "恶心腐骨",
+        "name": "恶心腐骨",
+        "title": "瘟疫军医"
+    },
+    "deathPutrifier": {
+        "extraShortName": "贝斯蒂利亚",
+        "shortName": "贝斯蒂利亚",
+        "name": "贝斯蒂利亚·威瑟普什",
+        "title": "生物腐化者"
+    },
+    "deathBlightbringer": {
+        "extraShortName": "科罗迪乌斯",
+        "shortName": "科罗迪乌斯",
+        "name": "科罗迪乌斯·阿什比勒",
+        "title": "剧毒疫病使者"
+    },
+    "orksRuntherd": {
+        "extraShortName": "鼻涕佬",
+        "shortName": "鼻涕佬",
+        "name": "格鲁巴尔·鼻涕佬",
+        "title": "矮精监军"
+    },
+    "orksBigMek": {
+        "extraShortName": "吉伯斯克拉普斯",
+        "shortName": "吉伯斯克拉普斯",
+        "name": "专家吉伯斯克拉普斯",
+        "title": "大技师"
+    },
+    "orksKillaKan": {
+        "extraShortName": "斯纳帕雷卡",
+        "shortName": "斯纳帕雷卡",
+        "name": "斯纳帕雷卡",
+        "title": "杀人罐"
+    },
+    "orksNob": {
+        "extraShortName": "坦克撞撞",
+        "shortName": "坦克撞撞",
+        "name": "欧洛格·坦克撞撞",
+        "title": "骑冲撞跳跳的强蛮人"
+    },
+    "orksWarboss": {
+        "extraShortName": "古尔戈兹",
+        "shortName": "古尔戈兹老大",
+        "name": "古尔戈兹·推土机",
+        "title": "超重型护甲战争头目"
+    },
+    "templSwordBrother": {
+        "extraShortName": "戈德斯维尔",
+        "shortName": "圣剑兵士戈德斯维尔",
+        "name": "圣剑兵士费德鲁斯·戈德斯维尔",
+        "title": "圣剑兵士"
+    },
+    "templAggressor": {
+        "extraShortName": "伯查德",
+        "shortName": "伯查德修士",
+        "name": "雷蒙德·伯查德修士",
+        "title": "侵略者士官"
+    },
+    "templAncient": {
+        "extraShortName": "索里德",
+        "shortName": "索里德旗手",
+        "name": "坎图斯·索里德旗手",
+        "title": "战团旗手"
+    },
+    "templChampion": {
+        "extraShortName": "耶格",
+        "shortName": "耶格修士",
+        "name": "肯里克·耶格修士",
+        "title": "帝皇勇士"
+    },
+    "templHelbrecht": {
+        "extraShortName": "赫尔布雷彻",
+        "shortName": "至高元帅赫尔布雷彻",
+        "name": "至高元帅赫尔布雷彻",
+        "title": "黑色圣堂至高元帅"
+    },
+    "eldarRanger": {
+        "extraShortName": "卡兰迪斯",
+        "shortName": "卡兰迪斯",
+        "name": "卡兰迪斯·塔瓦伦",
+        "title": "游侠"
+    },
+    "eldarAutarch": {
+        "extraShortName": "艾萨娜",
+        "shortName": "艾萨娜",
+        "name": "艾莎娜·巴兰塔拉尔",
+        "title": "司战"
+    },
+    "eldarFarseer": {
+        "extraShortName": "埃尔德里翁",
+        "shortName": "埃尔德里翁",
+        "name": "埃尔德里翁·伊纳杜因",
+        "title": "先知"
+    },
+    "eldarMauganRa": {
+        "extraShortName": "莫甘·拉",
+        "shortName": "莫甘·拉",
+        "name": "莫甘·拉",
+        "title": "黑暗死神凤凰领主"
+    },
+    "eldarJainZar": {
+        "extraShortName": "寂静风暴",
+        "shortName": "寂静风暴",
+        "name": "寂静风暴",
+        "title": "狂嚎女妖凤凰领主"
+    },
+    "eldarLhykhis": {
+        "extraShortName": "莱吉斯",
+        "shortName": "莱吉斯",
+        "name": "莱吉斯",
+        "title": "次元蜘蛛凤凰领主"
+    },
+    "tauMarksman": {
+        "extraShortName": "绍斯尔",
+        "shortName": "绍斯尔",
+        "name": "老兵维欧拉·绍斯尔",
+        "title": "火视神射手"
+    },
+    "tauCrisis": {
+        "extraShortName": "里瓦斯",
+        "shortName": "里瓦斯",
+        "name": "英雄维欧拉·里瓦斯",
+        "title": "XV8危机战斗服"
+    },
+    "tauDarkstrider": {
+        "extraShortName": "夜行者",
+        "shortName": "夜行者",
+        "name": "钛帝国副指挥官宫本",
+        "title": "副指挥官"
+    },
+    "tauAunShi": {
+        "extraShortName": "铵史",
+        "shortName": "铵史",
+        "name": "铵史",
+        "title": "以太"
+    },
+    "tauShadowsun": {
+        "extraShortName": "影阳",
+        "shortName": "影阳指挥官",
+        "name": "钛帝国指挥官夏瑟拉",
+        "title": "钛帝国至高指挥官"
+    },
+    "tauFarsight": {
+        "extraShortName": "远见",
+        "shortName": "远见指挥官",
+        "name": "夏斯欧 维奥拉 夏瓦 凯斯 蒙特尔",
+        "title": "英雄与叛徒"
+    },
+    "spaceWulfen": {
+        "extraShortName": "乌尔夫",
+        "shortName": "乌尔夫",
+        "name": "霜啸乌尔夫",
+        "title": "狼人狼群领袖"
+    },
+    "spaceHound": {
+        "extraShortName": "提加克",
+        "shortName": "提加克",
+        "name": "命运杀手提加克",
+        "title": "默尔凯狼群领袖的猎犬"
+    },
+    "spaceRockfist": {
+        "extraShortName": "阿贾克",
+        "shortName": "阿贾克",
+        "name": "阿贾克·洛克菲斯特",
+        "title": "巨狼冠军勇士"
+    },
+    "spaceStormcaller": {
+        "extraShortName": "纳吉奥",
+        "shortName": "纳吉奥",
+        "name": "风暴召唤者纳吉奥",
+        "title": "符文领主"
+    },
+    "spaceBlackmane": {
+        "extraShortName": "拉格纳",
+        "shortName": "拉格纳",
+        "name": "拉格纳·黑鬃",
+        "title": "黑鬃家族的野狼领主"
+    },
+    "spaceWolfPriest": {
+        "extraShortName": "巴德尔",
+        "shortName": "巴德尔",
+        "name": "巴德尔·雷霆眉",
+        "title": "野狼祭司"
+    },
+    "thousTzaangor": {
+        "extraShortName": "亚角",
+        "shortName": "亚角",
+        "name": "亚角·幻命",
+        "title": "奸角兽开悟者"
+    },
+    "thousTerminator": {
+        "extraShortName": "托斯",
+        "shortName": "托斯",
+        "name": "索卡尔·托斯",
+        "title": "圣甲虫隐修会终结者"
+    },
+    "thousInfernalMaster": {
+        "extraShortName": "阿坝勒克斯",
+        "shortName": "阿坝勒克斯",
+        "name": "阿卡扎·阿坝勒克斯",
+        "title": "炼狱之主"
+    },
+    "thousSorcerer": {
+        "extraShortName": "塔马库斯",
+        "shortName": "塔马库斯",
+        "name": "凯拉塔尔·塔马库斯",
+        "title": "高阶巫师"
+    },
+    "thousAhriman": {
+        "extraShortName": "阿里曼",
+        "shortName": "阿里曼",
+        "name": "阿哲克·阿里曼",
+        "title": "红字缔造者"
+    },
+    "thousSekhetar": {
+        "extraShortName": "塞克塔机器人",
+        "shortName": "塞克塔机器人",
+        "name": "塞克塔机器人",
+        "title": "无魂傀儡"
+    },
+    "darkaHellblaster": {
+        "extraShortName": "萨奎尔",
+        "shortName": "萨奎尔",
+        "name": "萨奎尔",
+        "title": "地狱轰击者士官"
+    },
+    "darkaTerminator": {
+        "extraShortName": "巴拉基尔",
+        "shortName": "巴拉基尔",
+        "name": "巴拉基尔",
+        "title": "死翼终结者"
+    },
+    "darkaCompanion": {
+        "extraShortName": "弗卡斯",
+        "shortName": "弗卡斯",
+        "name": "弗卡斯·守誓者",
+        "title": "内环伴卫"
+    },
+    "darkaAsmodai": {
+        "extraShortName": "阿斯莫德",
+        "shortName": "阿斯莫德",
+        "name": "阿斯莫德",
+        "title": "悔罪大师"
+    },
+    "darkaAzrael": {
+        "extraShortName": "阿兹瑞尔",
+        "shortName": "阿兹瑞尔",
+        "name": "阿兹瑞尔",
+        "title": "至高大导师"
+    },
+    "darkaSternguard": {
+        "extraShortName": "雷姆斯",
+        "shortName": "雷姆斯",
+        "name": "雷姆斯",
+        "title": "老兵军士"
+    },
+    "tyranNeurothrope": {
+        "extraShortName": "神经元体",
+        "shortName": "神经元体",
+        "name": "神经元体",
+        "title": "灵能有机体"
+    },
+    "tyranTyrantGuard": {
+        "extraShortName": "暴君卫兵",
+        "shortName": "暴君卫兵",
+        "name": "暴君卫兵",
+        "title": "守护者有机体"
+    },
+    "tyranWingedPrime": {
+        "extraShortName": "锋翼精兵",
+        "shortName": "锋翼精兵",
+        "name": "锋翼泰伦精兵",
+        "title": "首席战士有机体"
+    },
+    "tyranDeathleaper": {
+        "extraShortName": "致命跃袭者",
+        "shortName": "致命跃袭者",
+        "name": "致命跃袭者",
+        "title": "先锋有机体"
+    },
+    "tyranParasite": {
+        "extraShortName": "莫泰克斯的寄生者",
+        "shortName": "莫泰克斯的寄生者",
+        "name": "莫泰克斯的寄生者",
+        "title": "入侵者有机体"
+    },
+    "admecDominus": {
+        "extraShortName": "维特鲁威",
+        "shortName": "维特鲁威",
+        "name": "技术祭司主宰者维特鲁威·萨内克",
+        "title": "技术祭司主宰者"
+    },
+    "admecManipulus": {
+        "extraShortName": "阿克特斯",
+        "shortName": "阿克特斯",
+        "name": "操纵者阿克特斯·福戈洛休斯",
+        "title": "技术祭司操纵者"
+    },
+    "admecMarshall": {
+        "extraShortName": "坦吉达",
+        "shortName": "坦吉达",
+        "name": "坦吉达",
+        "title": "护教军元帅"
+    },
+    "admecRuststalker": {
+        "extraShortName": "埃克斯特拉霍",
+        "shortName": "埃克斯特拉霍",
+        "name": "Exitor-Rho-1.15/x",
+        "title": "斯卡里安锈色追踪者队长"
+    },
+    "admecDestroyer": {
+        "extraShortName": "Sy-gex",
+        "shortName": "Sy-gex",
+        "name": "Sy-gex-KPH008/15.mk41",
+        "title": "铁甲奴工毁灭者"
+    },
+    "worldTerminator": {
+        "extraShortName": "拉斯克",
+        "shortName": "拉斯克",
+        "name": "屠夫拉斯克",
+        "title": "吞世终结者"
+    },
+    "worldJakhal": {
+        "extraShortName": "马塞尔",
+        "shortName": "马塞尔",
+        "name": "马塞尔·布拉德格林",
+        "title": "贾卡尔受辱者"
+    },
+    "worldEightbound": {
+        "extraShortName": "阿兹科",
+        "shortName": "阿兹科",
+        "name": "八重者阿兹科",
+        "title": "高阶八缚者"
+    },
+    "worldExecutions": {
+        "extraShortName": "塔瓦赫",
+        "shortName": "塔瓦赫",
+        "name": "刽子手塔瓦赫",
+        "title": "处决大师"
+    },
+    "worldKharn": {
+        "extraShortName": "卡恩",
+        "shortName": "卡恩",
+        "name": "背叛者卡恩",
+        "title": "恐虐的勇士"
+    },
+    "bloodIntercessor": {
+        "extraShortName": "马塔尼奥",
+        "shortName": "马塔尼奥",
+        "name": "马塔尼奥",
+        "title": "跳跃背包仲裁者中士"
+    },
+    "bloodDeathCompany": {
+        "extraShortName": "卢锡恩",
+        "shortName": "卢锡恩",
+        "name": "卢锡恩",
+        "title": "死亡连仲裁者"
+    },
+    "bloodSanguinary": {
+        "extraShortName": "尼科底姆斯 ",
+        "shortName": "尼科底姆斯 ",
+        "name": "尼科底姆斯 ",
+        "title": "圣血祭司"
+    },
+    "bloodMephiston": {
+        "extraShortName": "墨菲斯顿",
+        "shortName": "墨菲斯顿",
+        "name": "墨菲斯顿",
+        "title": "死亡领主"
+    },
+    "bloodDante": {
+        "extraShortName": "但丁",
+        "shortName": "但丁",
+        "name": "但丁指挥官",
+        "title": "战团长"
+    },
+    "bloodTerminator": {
+        "extraShortName": "切萨雷",
+        "shortName": "切萨雷",
+        "name": "切萨雷",
+        "title": "突击终结者士官"
+    },
+    "genesBiophagus": {
+        "extraShortName": "霍兰",
+        "shortName": "霍兰",
+        "name": "霍兰·鲍姆加特",
+        "title": "生物噬菌体"
+    },
+    "genesMagus": {
+        "extraShortName": "赛比亚",
+        "shortName": "赛比亚",
+        "name": "赛比亚·凯泽尔",
+        "title": "教团教主"
+    },
+    "genesPrimus": {
+        "extraShortName": "艾萨克",
+        "shortName": "艾萨克",
+        "name": "艾萨克·斯塔恩",
+        "title": "领军"
+    },
+    "genesKelermorph": {
+        "extraShortName": "茱德",
+        "shortName": "茱德",
+        "name": "茱德·拉斯卡",
+        "title": "凯勒变体"
+    },
+    "genesPatriarch": {
+        "extraShortName": "帕特明",
+        "shortName": "帕特明",
+        "name": "帕特明",
+        "title": "基因窃取者族长"
+    },
+    "custoVexilusPraetor": {
+        "extraShortName": "伊索特",
+        "shortName": "伊索特",
+        "name": "伊索特·科马德拉",
+        "title": "掌旗执政官"
+    },
+    "custoAtlacoya": {
+        "extraShortName": "阿特拉科娅",
+        "shortName": "阿特拉科娅",
+        "name": "阿特拉科娅",
+        "title": "警戒者"
+    },
+    "custoKyrus": {
+        "extraShortName": "提里斯",
+        "shortName": "提里斯",
+        "name": "提里斯·希瓦·凯洛斯",
+        "title": "禁军卫士"
+    },
+    "custoBladeChampion": {
+        "extraShortName": "凯瑞安",
+        "shortName": "凯瑞安",
+        "name": "凯瑞安·海尔塞茨",
+        "title": "利刃勇士"
+    },
+    "custoTrajann": {
+        "extraShortName": "图拉真",
+        "shortName": "图拉真",
+        "name": "图拉真·瓦洛瑞斯",
+        "title": "禁军元帅"
+    },
+    "emperNoiseMarine": {
+        "extraShortName": "希隆",
+        "shortName": "希隆",
+        "name": "铸像师希隆·卡佩西",
+        "title": "噪音战士"
+    },
+    "emperFlawlessBlade": {
+        "extraShortName": "哈斯库尔",
+        "shortName": "哈斯库尔",
+        "name": "哈斯库尔，丝刃之棘",
+        "title": "无瑕之刃"
+    },
+    "emperKakophonist": {
+        "extraShortName": "亚达玛塔",
+        "shortName": "亚达玛塔",
+        "name": "“映生者”亚达玛塔·赞达苏斯",
+        "title": "喧噪领主"
+    },
+    "emperExultant": {
+        "extraShortName": "拉维斯库斯",
+        "shortName": "拉维斯库斯",
+        "name": "完美造物拉维斯库斯·兆哨",
+        "title": "狂喜领主"
+    },
+    "emperLucius": {
+        "extraShortName": "卢修斯",
+        "shortName": "卢修斯",
+        "name": "不朽的卢修斯",
+        "title": "色孽的勇士"
+    },
+    "votanBeserk": {
+        "extraShortName": "哈维尔",
+        "shortName": "哈维尔",
+        "name": "哈维尔·沃斯比克",
+        "title": "克索尼亚狂战士"
+    },
+    "votanIronmaster": {
+        "extraShortName": "维恩",
+        "shortName": "维恩",
+        "name": "维恩·康格拉尔",
+        "title": "布罗基尔钢铁宗师"
+    },
+    "votanMemnyr": {
+        "extraShortName": "阿穆克",
+        "shortName": "阿穆克",
+        "name": "阿穆克锐眼",
+        "title": "梅姆尼尔战术家"
+    },
+    "votanChampion": {
+        "extraShortName": "金姆",
+        "shortName": "金姆",
+        "name": "金姆·斯卡尔斯特伦",
+        "title": "英灵勇士"
+    },
+    "votanUthar": {
+        "extraShortName": "乌萨尔",
+        "shortName": "天命者乌萨尔\n",
+        "name": "天命者乌萨尔",
+        "title": "至高卡赫"
+    },
+    "astarCyrus": {
+        "extraShortName": "赛勒斯",
+        "shortName": "赛勒斯",
+        "name": "赛勒斯",
+        "title": "福波斯装甲队长"
+    },
+    "astarLysander": {
+        "extraShortName": "莱山德",
+        "shortName": "莱山德",
+        "name": "达纳斯·莱山德",
+        "title": "第一连连长"
+    },
+    "astarEradicator": {
+        "extraShortName": "努巴里",
+        "shortName": "努巴里",
+        "name": "努巴里·沙尔达",
+        "title": "根除者士官"
+    }
+}

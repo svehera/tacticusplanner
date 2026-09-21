@@ -64,12 +64,18 @@ export interface ICharacterAbilityLevel {
 export interface ICharacterAbilitiesMaterialsTotal {
     gold: number;
     alliance: Alliance;
+    /** Badges still to farm once held ones are applied (equals `badgesRequired` before adjustment). */
     badges: Record<Rarity, number>;
+    /** Full badge requirement, set once inventory adjustment runs so the UI can show have/required. */
+    badgesRequired?: Record<Rarity, number>;
 }
 
 export interface ICharacterAscendOrbsTotal {
     alliance: Alliance;
+    /** Orbs still to farm once held ones are applied (equals `orbsRequired` before adjustment). */
     orbs: Record<Rarity, number>;
+    /** Full orb requirement, set once inventory adjustment runs so the UI can show have/required. */
+    orbsRequired?: Record<Rarity, number>;
 }
 
 // Re-export types from FSD entities

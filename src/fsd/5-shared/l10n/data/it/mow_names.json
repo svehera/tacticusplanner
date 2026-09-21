@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Galatian",
+        "shortName": "Galatian",
+        "name": "Galatian",
+        "title": "Dreadnought Redemptor"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Exorcist",
+        "shortName": "Exorcist",
+        "name": "Exorcist",
+        "title": "Carro armato di artiglieria"
+    },
+    "necroReanimator": {
+        "extraShortName": "Rianimatore",
+        "shortName": "Rianimatore",
+        "name": "Rianimatore Canoptek",
+        "title": "Costrutto Canoptek"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Lanciarazzi Malleus",
+        "shortName": "Lanciarazzi Malleus",
+        "name": "Lanciarazzi Malleus",
+        "title": "Batteria d'Artiglieria Mobile"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Diavolo della Forgia",
+        "shortName": "Diavolo della Forgia",
+        "name": "Diavolo della Forgia",
+        "title": "Macchina demoniaca"
+    },
+    "deathCrawler": {
+        "extraShortName": "Cingolato Sparamorbi",
+        "shortName": "Cingolato Sparamorbi",
+        "name": "Cingolato Sparamorbi",
+        "title": "Macchina demoniaca"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Fuoriztrada",
+        "shortName": "Fuoriztrada",
+        "name": "Fuoriztrada Squigbuggy",
+        "title": "Kamion degli Zperikolati"
+    },
+    "tauBroadside": {
+        "extraShortName": "Tson'ji",
+        "shortName": "Tson'ji",
+        "name": "Shas'vre Vior'la Tson'ji",
+        "title": "Esoscheletro XV88 Broadside"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "Z'Kar",
+        "shortName": "Z'Kar",
+        "name": "Apophitar Z'Kar",
+        "title": "Principe Demone di Tzeentch"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Storm Speeder",
+        "shortName": "Storm Speeder",
+        "name": "Storm Speeder Hailstrike",
+        "title": "Veicolo d'attacco Ala del Corvo"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Biovora",
+        "shortName": "Biovora",
+        "name": "Biovora",
+        "title": "Organismo di artiglieria"
+    }
+}

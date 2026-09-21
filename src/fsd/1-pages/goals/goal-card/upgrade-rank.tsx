@@ -51,7 +51,7 @@ export const GoalCardUpgradeRank: React.FC<Props> = ({ goal, goalEstimate, bookR
 
             {hasBooks && (
                 <div className="border-t border-(--card-border) pt-2.5">
-                    <XpBooksRow goalEstimate={goalEstimate} bookRarity={bookRarity} />
+                    <XpBooksRow goalEstimate={goalEstimate} bookRarity={bookRarity} showGold />
                 </div>
             )}
         </div>

@@ -16,11 +16,19 @@ import {
     survivalEvents,
 } from '@/fsd/4-entities/survival';
 
+import { getSurvivalEventRank } from './survival-event-order';
 import { EnemiesTab } from './tabs/enemies-tab';
 import { MilestonesTab } from './tabs/milestones-tab';
 import { MissionsTab } from './tabs/missions-tab';
 import { OffersTab } from './tabs/offers-tab';
 import { TeamTab } from './tabs/team-tab';
+
+const EVENT_DISPLAY_NAME_OVERRIDES: Record<string, string> = {
+    season_crescendo_01_event: 'Terminus 01 — Dreir',
+};
+
+const getEventDisplayName = (event: ISurvivalEvent) =>
+    EVENT_DISPLAY_NAME_OVERRIDES[event.eventName] ?? getSurvivalDisplayName(event);
 
 const TAB_IDS = ['team', 'enemies', 'milestones', 'missions', 'offers'] as const;
 type TabId = (typeof TAB_IDS)[number];
@@ -44,7 +52,11 @@ export const Survival = () => {
     const mows = useMemo(() => MowsService.resolveAllFromStorage(unresolvedMows), [unresolvedMows]);
 
     const sortedEvents = useMemo(
-        () => survivalEvents.toSorted((a, b) => getSurvivalDisplayName(a).localeCompare(getSurvivalDisplayName(b))),
+        () =>
+            survivalEvents.toSorted((a, b) => {
+                const rankDiff = getSurvivalEventRank(a) - getSurvivalEventRank(b);
+                return rankDiff === 0 ? getEventDisplayName(a).localeCompare(getEventDisplayName(b)) : rankDiff;
+            }),
         []
     );
 
@@ -81,7 +93,7 @@ export const Survival = () => {
                                     src={getSurvivalDisplayIconUrl(event)}
                                     className="size-6 rounded-full object-cover"
                                 />
-                                <span>{getSurvivalDisplayName(event)}</span>
+                                <span>{getEventDisplayName(event)}</span>
                             </div>
                         )}
                     />

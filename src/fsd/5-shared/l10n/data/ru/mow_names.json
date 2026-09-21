@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Галатиан",
+        "shortName": "Галатиан",
+        "name": "Галатиан",
+        "title": "Дредноут «Редемптор»"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Экзорцист",
+        "shortName": "Экзорцист",
+        "name": "Экзорцист",
+        "title": "Артиллерийский танк"
+    },
+    "necroReanimator": {
+        "extraShortName": "Реаниматор",
+        "shortName": "Реаниматор",
+        "name": "Каноптековый реаниматор",
+        "title": "Каноптековый конструкт"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Ракетницы Маллеуса",
+        "shortName": "Ракетницы Маллеуса",
+        "name": "Ракетницы Маллеуса",
+        "title": "Полевая артиллерийская батарея"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Стальной дьявол",
+        "shortName": "Стальной дьявол",
+        "name": "Стальной дьявол",
+        "title": "Демоническая машина"
+    },
+    "deathCrawler": {
+        "extraShortName": "Чумная самоходка",
+        "shortName": "Чумная самоходка",
+        "name": "Чумная самоходка",
+        "title": "Демоническая машина"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Сквигоход",
+        "shortName": "Сквигоход",
+        "name": "Кормушечный сквигоход",
+        "title": "Тачила скарасных маньяков"
+    },
+    "tauBroadside": {
+        "extraShortName": "Тсон’джи",
+        "shortName": "Тсон’джи",
+        "name": "Шас’вре Виор’ла Тсон’джи",
+        "title": "Бронескафандр XV88 «Залп»"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "З’Кар",
+        "shortName": "З’Кар",
+        "name": "Апофитар З’Кар",
+        "title": "Князь демонов Тзинча"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Шторм-челнок",
+        "shortName": "Шторм-челнок",
+        "name": "Шторм-челнок «Градобой»",
+        "title": "Ударное судно Крыла Ворона"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Биоядный",
+        "shortName": "Биоядный",
+        "name": "Биоядный",
+        "title": "Артиллерийский организм"
+    }
+}

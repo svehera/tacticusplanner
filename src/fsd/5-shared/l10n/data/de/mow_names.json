@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Galatian",
+        "shortName": "Galatian",
+        "name": "Galatian",
+        "title": "Redemptor Dreadnought"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Exorcist",
+        "shortName": "Exorcist",
+        "name": "Exorcist",
+        "title": "Artillerie-Panzer"
+    },
+    "necroReanimator": {
+        "extraShortName": "Reanimator",
+        "shortName": "Reanimator",
+        "name": "Kanoptech-Reanimator",
+        "title": "Kanoptech-Konstrukt"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Malleus-Raketenwerfer",
+        "shortName": "Malleus-Raketenwerfer",
+        "name": "Malleus-Raketenwerfer",
+        "title": "Feldgeschützbatterie"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Schmiedemonstrum",
+        "shortName": "Schmiedemonstrum",
+        "name": "Schmiedemonstrum",
+        "title": "Dämonenmaschine"
+    },
+    "deathCrawler": {
+        "extraShortName": "Seuchenmörserraupe",
+        "shortName": "Seuchenmörserraupe",
+        "name": "Seuchenmörserraupe",
+        "title": "Dämonenmaschine"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Fressbude",
+        "shortName": "Fressbude",
+        "name": "Fressbuden-Squigbuggy",
+        "title": "Tempofreaks-Lasta"
+    },
+    "tauBroadside": {
+        "extraShortName": "Tson'ji",
+        "shortName": "Tson'ji",
+        "name": "Shas'vre Vior'la Tson'ji",
+        "title": "XV88-Breitseite-Kampfanzug"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "Z’Kar",
+        "shortName": "Z’Kar",
+        "name": "Apophitar Z’Kar",
+        "title": "Dämonenprinz des Tzeentch"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Storm Speeder",
+        "shortName": "Storm Speeder",
+        "name": "Storm Speeder Hailstrike",
+        "title": "Ravenwing-Einsatzflugzeug"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Biovore",
+        "shortName": "Biovore",
+        "name": "Biovore",
+        "title": "Artillerie-Organismus"
+    }
+}

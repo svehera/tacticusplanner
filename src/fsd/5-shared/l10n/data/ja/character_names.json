@@ -1,0 +1,704 @@
+{
+    "ultraTigurius": {
+        "extraShortName": "ティグリウス",
+        "shortName": "ヴァロ・ティグリウス",
+        "name": "ヴァロ・ティグリウス",
+        "title": "主席司書官"
+    },
+    "ultraEliminatorSgt": {
+        "extraShortName": "サータス",
+        "shortName": "サータス",
+        "name": "サータス軍曹",
+        "title": "エリミネイター・サージェント"
+    },
+    "ultraInceptorSgt": {
+        "extraShortName": "ベラトール",
+        "shortName": "ベラトール",
+        "name": "ベラトール軍曹",
+        "title": "インセプター・サージェント"
+    },
+    "ultraApothecary": {
+        "extraShortName": "インシサス",
+        "shortName": "インシサス",
+        "name": "アポセカリー・インシサス",
+        "title": "アポセカリー"
+    },
+    "ultraCalgar": {
+        "extraShortName": "カルガー",
+        "shortName": "マルネウス・カルガー",
+        "name": "マルネウス・カルガー",
+        "title": "チャプターマスター"
+    },
+    "ultraTitus": {
+        "extraShortName": "タイタス",
+        "shortName": "タイタス",
+        "name": "デメトリアン・タイタス",
+        "title": "プライマリス・レフテナント"
+    },
+    "adeptRetributor": {
+        "extraShortName": "ヴィンディクタ",
+        "shortName": "ヴィンディクタ",
+        "name": "バトルシスター・ヴィンディクタ",
+        "title": "セレスティン"
+    },
+    "adeptHospitaller": {
+        "extraShortName": "イザベラ",
+        "shortName": "イザベラ",
+        "name": "イザベラ・マリケン",
+        "title": "ホスピタラー"
+    },
+    "adeptMorvenn": {
+        "extraShortName": "モルヴェン・ヴァール",
+        "shortName": "モルヴェン・ヴァール",
+        "name": "モルヴェン・ヴァール",
+        "title": "アデプタ・ソロリタスの神聖大教母"
+    },
+    "adeptCanoness": {
+        "extraShortName": "ロズウィーダ",
+        "shortName": "ロズウィーダ",
+        "name": "ロズウィーダ・エスター",
+        "title": "カノネス"
+    },
+    "adeptCelestine": {
+        "extraShortName": "セレスティン",
+        "shortName": "セレスティン",
+        "name": "生ける聖者セレスティン",
+        "title": "生ける聖者"
+    },
+    "necroWarden": {
+        "extraShortName": "マホテップ",
+        "shortName": "マホテップ",
+        "name": "ロイヤルウォーデン・マホテップ",
+        "title": "ロイヤルウォーデン"
+    },
+    "necroDestroyer": {
+        "extraShortName": "イモスぺク",
+        "shortName": "イモスぺク",
+        "name": "ヘックスマーク・デストロイヤー・イモスぺク",
+        "title": "ヘックスマーク・デストロイヤー"
+    },
+    "necroSpyder": {
+        "extraShortName": "アレフ・ヌル",
+        "shortName": "アレフ・ヌル",
+        "name": "カノプテック・スパイダー・アレフ・ヌル",
+        "title": "カノプテック・スパイダー"
+    },
+    "necroPlasmancer": {
+        "extraShortName": "トゥトモース",
+        "shortName": "トゥトモース",
+        "name": "プラズマンサー・トゥトモース",
+        "title": "プラズマンサー"
+    },
+    "necroOverlord": {
+        "extraShortName": "アヌフェット",
+        "shortName": "アヌフェット",
+        "name": "オーヴァーロード・アヌフェット",
+        "title": "オーヴァーロード"
+    },
+    "necroChronomancer": {
+        "extraShortName": "トスメク",
+        "shortName": "トスメク",
+        "name": "トスメク",
+        "title": "クロノマンサー"
+    },
+    "astraPrimarisPsy": {
+        "extraShortName": "シビル",
+        "shortName": "シビル・ディヴァイン",
+        "name": "シビル・ディヴァイン",
+        "title": "プライマリス・サイカー"
+    },
+    "astraYarrick": {
+        "extraShortName": "ヤーリック",
+        "shortName": "コミッサー・ヤーリック",
+        "name": "コミッサー・セバスチャン・ヤーリック",
+        "title": "ロード・コミッサー"
+    },
+    "astraBullgryn": {
+        "extraShortName": "クト",
+        "shortName": "クト・スコデン",
+        "name": "クト・スコデン",
+        "title": "ブルグリン・ボーンイード"
+    },
+    "astraOrdnance": {
+        "extraShortName": "サディアス",
+        "shortName": "サディアス・ノーブル",
+        "name": "サディアス・ノーブル",
+        "title": "マスター・オヴ・オードナンス"
+    },
+    "astraCreed": {
+        "extraShortName": "クリード",
+        "shortName": "キャステラン・クリード",
+        "name": "ロード・キャステラン・アーサーカー・E・クリード",
+        "title": "アストラ・ミリタルムの大将軍"
+    },
+    "astraDreir": {
+        "extraShortName": "ドライア",
+        "shortName": "総軍将ドライア",
+        "name": "総軍将ヴァーナン・ドライア",
+        "title": "総軍将"
+    },
+    "blackTerminator": {
+        "extraShortName": "アングラックス",
+        "shortName": "アングラックス",
+        "name": "ドラクフス・アングラックス",
+        "title": "ターミネイター・チャンピオン"
+    },
+    "blackObliterator": {
+        "extraShortName": "ヴォルク",
+        "shortName": "ヴォルク",
+        "name": "ヴォルク、〈歪み〉に鍛造された者",
+        "title": "オブリタレイター"
+    },
+    "blackPossession": {
+        "extraShortName": "アルキマトス",
+        "shortName": "アルキマトス",
+        "name": "マスター・アルキマトス",
+        "title": "マスター・オヴ・ポゼッション"
+    },
+    "blackHaarken": {
+        "extraShortName": "ハールケン",
+        "shortName": "ハールケン・ワールドクレイマー",
+        "name": "ハールケン・ワールドクレイマー",
+        "title": "ヘラルド・オブ・アポカリプス"
+    },
+    "blackAbaddon": {
+        "extraShortName": "アバドン",
+        "shortName": "“強奪者”アバドン",
+        "name": "“強奪者”アバドン",
+        "title": "〈渾沌〉の大元帥"
+    },
+    "deathTyphus": {
+        "extraShortName": "ティファウス",
+        "shortName": "ティファウス",
+        "name": "ティファウス、崩壊病原蟲のホスト",
+        "title": "疫病の神の使者"
+    },
+    "deathBlightlord": {
+        "extraShortName": "マラドゥス",
+        "shortName": "マラドゥス",
+        "name": "マラドゥス・フレグモア",
+        "title": "ブライトロード・チャンピオン"
+    },
+    "deathRotbone": {
+        "extraShortName": "ノーシャス",
+        "shortName": "ノーシャス・ロットボーン",
+        "name": "ノーシャス・ロットボーン",
+        "title": "プレーグサージョン"
+    },
+    "deathPutrifier": {
+        "extraShortName": "ペスティリアン",
+        "shortName": "ペスティリアン",
+        "name": "ペスティリアン・ウィザープス",
+        "title": "バイオロガス・ピュートリファイヤー"
+    },
+    "deathBlightbringer": {
+        "extraShortName": "コルディウス",
+        "shortName": "コルディウス",
+        "name": "コルディウス・エイクバイル",
+        "title": "ノクシャス・ブライトブリンガー"
+    },
+    "orksRuntherd": {
+        "extraShortName": "スノットフロッガ",
+        "shortName": "スノットフロッガ",
+        "name": "グランバル・スノットフロッガ",
+        "title": "ラントハード"
+    },
+    "orksBigMek": {
+        "extraShortName": "ジバベクラップ",
+        "shortName": "ジバベクラップ",
+        "name": "ジバベクラップ、ダ・スペツリズモ",
+        "title": "ビッグメク"
+    },
+    "orksKillaKan": {
+        "extraShortName": "スナッパウリカ",
+        "shortName": "スナッパウリカ",
+        "name": "スナッパウリカ",
+        "title": "キラーカン"
+    },
+    "orksNob": {
+        "extraShortName": "タンクスマッシャ",
+        "shortName": "タンクスマッシャ",
+        "name": "オーログ・タンクスマッシャ",
+        "title": "ノブ（スマッシャスクイッグ騎乗）"
+    },
+    "orksWarboss": {
+        "extraShortName": "ガルゴルツ",
+        "shortName": "ボス・ガルゴーツ",
+        "name": "ガルゴーツ・ブルドーザ",
+        "title": "ウォーボス（メガアーマー装備）"
+    },
+    "templSwordBrother": {
+        "extraShortName": "ゴッドスウィル",
+        "shortName": "ソードブラザー・ゴッドスウィル",
+        "name": "ソードブラザー・フェドロス・ゴッドスウィル",
+        "title": "ソードブラザー"
+    },
+    "templAggressor": {
+        "extraShortName": "バーチャード",
+        "shortName": "ブラザー・バーチャード",
+        "name": "ブラザー・ライムンド・バーチャード",
+        "title": "アグレッサー・サージェント"
+    },
+    "templAncient": {
+        "extraShortName": "ソリード",
+        "shortName": "エインシェント・ソリード",
+        "name": "エインシェント・カントス・ソリード",
+        "title": "チャプター・エインシェント"
+    },
+    "templChampion": {
+        "extraShortName": "イェーガー",
+        "shortName": "ブラザー・イェーガー",
+        "name": "ブラザー・ケンリック・イェーガー",
+        "title": "エンペラーズ・チャンピオン"
+    },
+    "templHelbrecht": {
+        "extraShortName": "ヘルブレヒト",
+        "shortName": "大将帥ヘルブレヒト",
+        "name": "大将帥ヘルブレヒト",
+        "title": "ブラックテンプラーの大将帥"
+    },
+    "eldarRanger": {
+        "extraShortName": "カランディス",
+        "shortName": "カランディス",
+        "name": "カランディス・タワレン",
+        "title": "レンジャー"
+    },
+    "eldarAutarch": {
+        "extraShortName": "アサナ",
+        "shortName": "アサナ",
+        "name": "アサナ・バランタール",
+        "title": "アウターク"
+    },
+    "eldarFarseer": {
+        "extraShortName": "エルドリン",
+        "shortName": "エルドリン",
+        "name": "エルドリン・ユナドゥイン",
+        "title": "ファーシーア"
+    },
+    "eldarMauganRa": {
+        "extraShortName": "モウガン・ラー",
+        "shortName": "モウガン・ラー",
+        "name": "モウガン・ラー",
+        "title": "不死鳥の将（フェニックスロード）ダークリーパー"
+    },
+    "eldarJainZar": {
+        "extraShortName": "ジェイン・ザール",
+        "shortName": "ジェイン・ザール",
+        "name": "ジェイン・ザール",
+        "title": "不死鳥の将（フェニックスロード）絶叫"
+    },
+    "eldarLhykhis": {
+        "extraShortName": "ライキス",
+        "shortName": "ライキス",
+        "name": "ライキス",
+        "title": "ワープ・スパイダーの不死鳥の将（フェニックスロード）"
+    },
+    "tauMarksman": {
+        "extraShortName": "ショウ＝シル",
+        "shortName": "ショウ＝シル",
+        "name": "シャス＝ウイ・ヴィオル・ラー・ショウ＝シル",
+        "title": "ファイアサイト・マークスマン"
+    },
+    "tauCrisis": {
+        "extraShortName": "リ＝バス",
+        "shortName": "リ＝バス",
+        "name": "シャス＝ヴレ・ヴィオル・ラー・リ＝バス",
+        "title": "XV8クライシス・バトルスーツ"
+    },
+    "tauDarkstrider": {
+        "extraShortName": "ダークストライダー",
+        "shortName": "ダークストライダー",
+        "name": "シャス=エル・タウ・マイアモト",
+        "title": "副司令"
+    },
+    "tauAunShi": {
+        "extraShortName": "アウン＝スィ",
+        "shortName": "アウン＝スィ",
+        "name": "アウン＝スィ",
+        "title": "エセリアル"
+    },
+    "tauShadowsun": {
+        "extraShortName": "シャドウサン",
+        "shortName": "コマンダー・シャドウサン",
+        "name": "シャス=タウ・シャサーラ",
+        "title": "タウ・エンパイア最高司令"
+    },
+    "tauFarsight": {
+        "extraShortName": "ファーサイト",
+        "shortName": "コマンダー・ファーサイト",
+        "name": "シャス＝ヴレ・ヴィオルラカイス・モント＝イル",
+        "title": "英雄にして反逆者"
+    },
+    "spaceWulfen": {
+        "extraShortName": "ウルフ",
+        "shortName": "ウルフ",
+        "name": "ウルフ・フロストハウル",
+        "title": "ウルフェン・パックリーダー"
+    },
+    "spaceHound": {
+        "extraShortName": "ティヤーク",
+        "shortName": "ティヤーク",
+        "name": "チャルク・ワイルドスレイヤー",
+        "title": "ハウンド・オヴ・モルカイ・パックリーダー"
+    },
+    "spaceRockfist": {
+        "extraShortName": "アラアック",
+        "shortName": "アラアック",
+        "name": "アラアック・ロックフィスト",
+        "title": "大狼の覇者"
+    },
+    "spaceStormcaller": {
+        "extraShortName": "ンジャル",
+        "shortName": "ンジャル",
+        "name": "ンジャル・ストームコーラー",
+        "title": "ロード・オヴ・ルーン"
+    },
+    "spaceBlackmane": {
+        "extraShortName": "ラグナー",
+        "shortName": "ラグナー",
+        "name": "ラグナー・ブラックメイン",
+        "title": "“黒き鬣”のウルフロード"
+    },
+    "spaceWolfPriest": {
+        "extraShortName": "バルドル",
+        "shortName": "バルドル",
+        "name": "バルドル・サンダーブロウ",
+        "title": "ウルフプリースト"
+    },
+    "thousTzaangor": {
+        "extraShortName": "ヤザゴール",
+        "shortName": "ヤザゴール",
+        "name": "ヤザゴール・フィクルフェイト",
+        "title": "ツァーンゴール・エンライテンド"
+    },
+    "thousTerminator": {
+        "extraShortName": "トート",
+        "shortName": "トート",
+        "name": "ソカールトート",
+        "title": "スカラベオカルト・ターミネイター"
+    },
+    "thousInfernalMaster": {
+        "extraShortName": "アブラクサス",
+        "shortName": "アブラクサス",
+        "name": "アルカサル・アブラクサス",
+        "title": "インファーナル・マスター"
+    },
+    "thousSorcerer": {
+        "extraShortName": "サマークス",
+        "shortName": "サマークス",
+        "name": "カイラタール・サマークス",
+        "title": "エグザルテッド・ソーサラー"
+    },
+    "thousAhriman": {
+        "extraShortName": "アーリマン",
+        "shortName": "アーリマン",
+        "name": "アフゼク・アーリマン",
+        "title": "ルブリックの建築家"
+    },
+    "thousSekhetar": {
+        "extraShortName": "セケター・ロボット",
+        "shortName": "セケター・ロボット",
+        "name": "セケター・ロボット",
+        "title": "魂のないオートマタ"
+    },
+    "darkaHellblaster": {
+        "extraShortName": "サルカエル",
+        "shortName": "サルカエル",
+        "name": "サルカエル",
+        "title": "ヘルブラスター・サージェント"
+    },
+    "darkaTerminator": {
+        "extraShortName": "バラキエル",
+        "shortName": "バラキエル",
+        "name": "バラキエル",
+        "title": "デスウィング・ターミネイター"
+    },
+    "darkaCompanion": {
+        "extraShortName": "フォルカス",
+        "shortName": "フォルカス",
+        "name": "フォルカス・オーススウォーン",
+        "title": "インナーサークル・コンパニオン"
+    },
+    "darkaAsmodai": {
+        "extraShortName": "アスモダイ",
+        "shortName": "アスモダイ",
+        "name": "アスモダイ",
+        "title": "改悛の太守"
+    },
+    "darkaAzrael": {
+        "extraShortName": "アズラエル",
+        "shortName": "アズラエル",
+        "name": "アズラエル",
+        "title": "総大守首座"
+    },
+    "darkaSternguard": {
+        "extraShortName": "ラムス",
+        "shortName": "ラムス",
+        "name": "ラムス",
+        "title": "ベテラン・サージェント"
+    },
+    "tyranNeurothrope": {
+        "extraShortName": "ニューロスロープ",
+        "shortName": "ニューロスロープ",
+        "name": "ニューロスロープ",
+        "title": "サイキック・オーガニズム"
+    },
+    "tyranTyrantGuard": {
+        "extraShortName": "タイラントガード",
+        "shortName": "タイラントガード",
+        "name": "タイラントガード",
+        "title": "ガーディアン・オーガニズム"
+    },
+    "tyranWingedPrime": {
+        "extraShortName": "ウィングド・プライム",
+        "shortName": "ウィングド・プライム",
+        "name": "ウィングド・ティラニッド・プライム",
+        "title": "リードウォリアー・オーガニズム"
+    },
+    "tyranDeathleaper": {
+        "extraShortName": "デスリーパー",
+        "shortName": "デスリーパー",
+        "name": "デスリーパー",
+        "title": "ヴァンガード・オーガニズム"
+    },
+    "tyranParasite": {
+        "extraShortName": "モルトレックス寄生体",
+        "shortName": "モルトレックス寄生体",
+        "name": "モルトレックス寄生体",
+        "title": "インベーダー・オーガニズム"
+    },
+    "admecDominus": {
+        "extraShortName": "ウィトルウィウス",
+        "shortName": "ウィトルウィウス",
+        "name": "マゴス・ドミヌス・ウィトルウィウス・サンネック",
+        "title": "テックプリースト・ドミヌス"
+    },
+    "admecManipulus": {
+        "extraShortName": "アクトゥス",
+        "shortName": "アクトゥス",
+        "name": "マニプルス・アクトゥス・フルゴロスス",
+        "title": "テックプリースト・マニプルス"
+    },
+    "admecMarshall": {
+        "extraShortName": "タン・ギダ",
+        "shortName": "タン・ギダ",
+        "name": "タン・ギダ",
+        "title": "スキタリ・マーシャル"
+    },
+    "admecRuststalker": {
+        "extraShortName": "イグジター・ロー",
+        "shortName": "イグジター・ロー",
+        "name": "イグジター＝ロー＝1.15/x",
+        "title": "シカリアン・ラストストーカー・プリンケプス"
+    },
+    "admecDestroyer": {
+        "extraShortName": "サイジェックス",
+        "shortName": "サイジェックス",
+        "name": "サイジェックス-KPH008/15.mk41",
+        "title": "カタフロン・デストロイヤー"
+    },
+    "worldTerminator": {
+        "extraShortName": "ラスク",
+        "shortName": "ラスク",
+        "name": "虐殺者ラスク",
+        "title": "ワールドイーター・ターミネイター"
+    },
+    "worldJakhal": {
+        "extraShortName": "メイサー",
+        "shortName": "メイサー",
+        "name": "メイサー・ブラッドグリン",
+        "title": "不名誉のジャカール"
+    },
+    "worldEightbound": {
+        "extraShortName": "アズコール",
+        "shortName": "アズコール",
+        "name": "八重のアズコール",
+        "title": "エグザルテッド・エイトバウンド"
+    },
+    "worldExecutions": {
+        "extraShortName": "タルヴァク",
+        "shortName": "タルヴァク",
+        "name": "死刑執行人タルヴァク",
+        "title": "マスター・オヴ・エクスキューション"
+    },
+    "worldKharn": {
+        "extraShortName": "カーン",
+        "shortName": "カーン",
+        "name": "裏切者カーン",
+        "title": "コーンの覇者"
+    },
+    "bloodIntercessor": {
+        "extraShortName": "マタネオ",
+        "shortName": "マタネオ",
+        "name": "マタネオ",
+        "title": "ジャンプパック調停軍曹"
+    },
+    "bloodDeathCompany": {
+        "extraShortName": "ルシアン",
+        "shortName": "ルシアン",
+        "name": "ルシアン",
+        "title": "デスカンパニー・インターセッサー"
+    },
+    "bloodSanguinary": {
+        "extraShortName": "ニコデマス",
+        "shortName": "ニコデマス",
+        "name": "ニコデマス",
+        "title": "サングィナリー・プリースト"
+    },
+    "bloodMephiston": {
+        "extraShortName": "メフィストン",
+        "shortName": "メフィストン",
+        "name": "メフィストン",
+        "title": "死の主"
+    },
+    "bloodDante": {
+        "extraShortName": "ダンテ",
+        "shortName": "ダンテ",
+        "name": "コマンダー・ダンテ",
+        "title": "チャプターマスター"
+    },
+    "bloodTerminator": {
+        "extraShortName": "セザレ",
+        "shortName": "セザレ",
+        "name": "セザレ",
+        "title": "強襲滅殺軍曹（アサルト・ターミネイター・サージェント）"
+    },
+    "genesBiophagus": {
+        "extraShortName": "ホラン",
+        "shortName": "ホラン",
+        "name": "ホラン・バウムガルト",
+        "title": "バイオファーガス"
+    },
+    "genesMagus": {
+        "extraShortName": "ズィービア",
+        "shortName": "ズィービア",
+        "name": "ズィービア・ケイサー",
+        "title": "メイガス"
+    },
+    "genesPrimus": {
+        "extraShortName": "イサーク",
+        "shortName": "イサーク",
+        "name": "イサーク・スターン",
+        "title": "プリムス"
+    },
+    "genesKelermorph": {
+        "extraShortName": "ジュダ",
+        "shortName": "ジュダ",
+        "name": "ジュダ・ラスカ",
+        "title": "ケラーモーフ"
+    },
+    "genesPatriarch": {
+        "extraShortName": "我が教父",
+        "shortName": "我が教父",
+        "name": "我が教父",
+        "title": "ジーンスティーラー・パトリアーク"
+    },
+    "custoVexilusPraetor": {
+        "extraShortName": "アエソス",
+        "shortName": "アエソス",
+        "name": "アエソス・コウマドラ",
+        "title": "ヴェクシルス・プラエトール"
+    },
+    "custoAtlacoya": {
+        "extraShortName": "アトラコヤ",
+        "shortName": "アトラコヤ",
+        "name": "アトラコヤ",
+        "title": "ヴィジレイター"
+    },
+    "custoKyrus": {
+        "extraShortName": "タイリス",
+        "shortName": "タイリス",
+        "name": "タイリス・シヴァ・カイルス",
+        "title": "カストーディアン・ガード"
+    },
+    "custoBladeChampion": {
+        "extraShortName": "カリヤン",
+        "shortName": "カリヤン",
+        "name": "カリヤン・ヘルサテス",
+        "title": "ブレードチャンピオン"
+    },
+    "custoTrajann": {
+        "extraShortName": "トラヤン",
+        "shortName": "トラヤン",
+        "name": "トラヤン・ヴァロリス",
+        "title": "近衛大将"
+    },
+    "emperNoiseMarine": {
+        "extraShortName": "シロン",
+        "shortName": "シロン",
+        "name": "シロン・カペルシ、偶像修理者",
+        "title": "ノイズマリーン"
+    },
+    "emperFlawlessBlade": {
+        "extraShortName": "ハスクール",
+        "shortName": "ハスクール",
+        "name": "絹剣の棘ハスクール",
+        "title": "無欠の刃"
+    },
+    "emperKakophonist": {
+        "extraShortName": "アダマタル",
+        "shortName": "アダマタル",
+        "name": "鏡より生まれしアダマタル・ザンダサス",
+        "title": "大王カコフォニスト"
+    },
+    "emperExultant": {
+        "extraShortName": "ラヴィスカス",
+        "shortName": "ラヴィスカス",
+        "name": "完全なるラヴィスカス・セントリオン",
+        "title": "ロード・エグザルタント"
+    },
+    "emperLucius": {
+        "extraShortName": "ルシウス",
+        "shortName": "ルシウス",
+        "name": "“永劫なる”ルシウス",
+        "title": "スラーネッシュの覇者"
+    },
+    "votanBeserk": {
+        "extraShortName": "ハーヴィル",
+        "shortName": "ハーヴィル",
+        "name": "ハーヴィル・ウォースペイク",
+        "title": "クトーニアン・ベセルク"
+    },
+    "votanIronmaster": {
+        "extraShortName": "ヴィン",
+        "shortName": "ヴィン",
+        "name": "ヴィン・コングラール",
+        "title": "ブロキール・アイアンマスター"
+    },
+    "votanMemnyr": {
+        "extraShortName": "アームク",
+        "shortName": "アームク",
+        "name": "アームク・キーンアイ",
+        "title": "メムニル・ストラテジスト"
+    },
+    "votanChampion": {
+        "extraShortName": "キーム",
+        "shortName": "キーム",
+        "name": "キーム・スカーストレング",
+        "title": "エインヒル・チャンピオン"
+    },
+    "votanUthar": {
+        "extraShortName": "ユザール",
+        "shortName": "“定められし者”ユザール\n",
+        "name": "“定められし者”ユザール",
+        "title": "ハイ・カール"
+    },
+    "astarCyrus": {
+        "extraShortName": "サイラス",
+        "shortName": "サイラス",
+        "name": "サイラス",
+        "title": "キャプテン、フォボスアーマー装備"
+    },
+    "astarLysander": {
+        "extraShortName": "ライサンダー",
+        "shortName": "ライサンダー",
+        "name": "ダーナス・ライサンダー",
+        "title": "第一中隊長"
+    },
+    "astarEradicator": {
+        "extraShortName": "ヌバリ",
+        "shortName": "ヌバリ",
+        "name": "ヌバリ・シャルダー",
+        "title": "エラディケイター・サージェント"
+    }
+}

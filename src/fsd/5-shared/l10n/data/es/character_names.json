@@ -1,0 +1,704 @@
+{
+    "ultraTigurius": {
+        "extraShortName": "Tigurius",
+        "shortName": "Varro Tigurius",
+        "name": "Varro Tigurius",
+        "title": "Bibliotecario Jefe"
+    },
+    "ultraEliminatorSgt": {
+        "extraShortName": "Certus",
+        "shortName": "Certus",
+        "name": "Sargento Certus",
+        "title": "Sargento Eliminador"
+    },
+    "ultraInceptorSgt": {
+        "extraShortName": "Bellator",
+        "shortName": "Bellator",
+        "name": "Sargento Bellator",
+        "title": "Sargento Inceptor"
+    },
+    "ultraApothecary": {
+        "extraShortName": "Incisus",
+        "shortName": "Incisus",
+        "name": "Apotecario Incisus",
+        "title": "Apotecario"
+    },
+    "ultraCalgar": {
+        "extraShortName": "Calgar",
+        "shortName": "Marneus Calgar",
+        "name": "Marneus Calgar",
+        "title": "Señor del Capítulo"
+    },
+    "ultraTitus": {
+        "extraShortName": "Titus",
+        "shortName": "Titus",
+        "name": "Demetrian Titus",
+        "title": "Teniente Primaris"
+    },
+    "adeptRetributor": {
+        "extraShortName": "Vindicta",
+        "shortName": "Vindicta",
+        "name": "Hermana de Batalla Vindicta",
+        "title": "Celeste"
+    },
+    "adeptHospitaller": {
+        "extraShortName": "Isabella",
+        "shortName": "Isabella",
+        "name": "Isabella Mariken",
+        "title": "Hospitalaria"
+    },
+    "adeptMorvenn": {
+        "extraShortName": "Morvenn Vahl",
+        "shortName": "Morvenn Vahl",
+        "name": "Morvenn Vahl",
+        "title": "Abadesa Sanctorum de las Adepta Sororitas"
+    },
+    "adeptCanoness": {
+        "extraShortName": "Roswitha",
+        "shortName": "Roswitha",
+        "name": "Roswitha Esther",
+        "title": "Canonesa"
+    },
+    "adeptCelestine": {
+        "extraShortName": "Celestine",
+        "shortName": "Celestine",
+        "name": "Celestine, la Santa Viviente",
+        "title": "Santa Viviente"
+    },
+    "necroWarden": {
+        "extraShortName": "Makhotep",
+        "shortName": "Makhotep",
+        "name": "Guardia real Makhotep",
+        "title": "Guardia real"
+    },
+    "necroDestroyer": {
+        "extraShortName": "Imospekh",
+        "shortName": "Imospekh",
+        "name": "Destructor maldicida Imospekh",
+        "title": "Destructor maldicida"
+    },
+    "necroSpyder": {
+        "extraShortName": "Aleph-Null",
+        "shortName": "Aleph-Null",
+        "name": "Araña canóptica Aleph-Null",
+        "title": "Araña canóptica"
+    },
+    "necroPlasmancer": {
+        "extraShortName": "Thutmose",
+        "shortName": "Thutmose",
+        "name": "Plasmante Thutmose",
+        "title": "Plasmante"
+    },
+    "necroOverlord": {
+        "extraShortName": "Anuphet",
+        "shortName": "Anuphet",
+        "name": "Señor Supremo Anuphet",
+        "title": "Señor Supremo"
+    },
+    "necroChronomancer": {
+        "extraShortName": "Thothmek",
+        "shortName": "Thothmek",
+        "name": "Thothmek",
+        "title": "Cronomante"
+    },
+    "astraPrimarisPsy": {
+        "extraShortName": "Sibyll",
+        "shortName": "Sibyll Devine",
+        "name": "Sibyll Devine",
+        "title": "Psíquico Primaris"
+    },
+    "astraYarrick": {
+        "extraShortName": "Yarrick",
+        "shortName": "Comisario Yarrick",
+        "name": "Comisario Sebastian Yarrick",
+        "title": "Señor Comisario"
+    },
+    "astraBullgryn": {
+        "extraShortName": "Kut",
+        "shortName": "Kut Skoden",
+        "name": "Kut Skoden",
+        "title": "Ogrete toro cabezahueca"
+    },
+    "astraOrdnance": {
+        "extraShortName": "Thaddeus",
+        "shortName": "Thaddeus Noble",
+        "name": "Thaddeus Noble",
+        "title": "Maestro de Artillería"
+    },
+    "astraCreed": {
+        "extraShortName": "Creed",
+        "shortName": "Castellano Creed",
+        "name": "Señor Castellano Ursarkar E. Creed",
+        "title": "Señor General de la Astra Militarum"
+    },
+    "astraDreir": {
+        "extraShortName": "Dreir",
+        "shortName": "Mariscal Dreir",
+        "name": "Señor mariscal Varnan Dreir",
+        "title": "Señor mariscal"
+    },
+    "blackTerminator": {
+        "extraShortName": "Angrax",
+        "shortName": "Angrax",
+        "name": "Drakfus Angrax",
+        "title": "Campeón Exterminador"
+    },
+    "blackObliterator": {
+        "extraShortName": "Volk",
+        "shortName": "Volk",
+        "name": "Volk, reforjado por la Disformidad",
+        "title": "Aniquilador"
+    },
+    "blackPossession": {
+        "extraShortName": "Archimatos",
+        "shortName": "Archimatos",
+        "name": "Maestro Archimatos",
+        "title": "Maestro de la posesión"
+    },
+    "blackHaarken": {
+        "extraShortName": "Haarken",
+        "shortName": "Haarken Reclamamundos",
+        "name": "Haarken Reclamamundos",
+        "title": "Heraldo del apocalipsis"
+    },
+    "blackAbaddon": {
+        "extraShortName": "Abaddon",
+        "shortName": "Abaddon el Saqueador",
+        "name": "Abaddon el Saqueador",
+        "title": "Señor de la Guerra del Caos"
+    },
+    "deathTyphus": {
+        "extraShortName": "Typhus",
+        "shortName": "Typhus",
+        "name": "Typhus, Huésped del Enjambre destructor",
+        "title": "Heraldo del Dios de la Plaga"
+    },
+    "deathBlightlord": {
+        "extraShortName": "Maladus",
+        "shortName": "Maladus",
+        "name": "Maladus Phlegmore",
+        "title": "Campeón Dominaplagas"
+    },
+    "deathRotbone": {
+        "extraShortName": "Nauseous",
+        "shortName": "Nauseous Rotbone",
+        "name": "Nauseous Rotbone",
+        "title": "Cirujano de plaga"
+    },
+    "deathPutrifier": {
+        "extraShortName": "Pestillian",
+        "shortName": "Pestillian",
+        "name": "Pestillian Witherpus",
+        "title": "Biologus putrefacto"
+    },
+    "deathBlightbringer": {
+        "extraShortName": "Corrodius",
+        "shortName": "Corrodius",
+        "name": "Corrodius Achebile",
+        "title": "Portaplagas nocivo"
+    },
+    "orksRuntherd": {
+        "extraShortName": "Snotflogga",
+        "shortName": "Snotflogga",
+        "name": "Grumbal Snotflogga",
+        "title": "Kaporal"
+    },
+    "orksBigMek": {
+        "extraShortName": "Gibbascrapz",
+        "shortName": "Gibbascrapz",
+        "name": "Gibbascrapz, el Ezpezialista",
+        "title": "Gran Mek"
+    },
+    "orksKillaKan": {
+        "extraShortName": "Snappawrecka",
+        "shortName": "Snappawrecka",
+        "name": "Snappawrecka",
+        "title": "Lata Azezina"
+    },
+    "orksNob": {
+        "extraShortName": "Tanksmasha",
+        "shortName": "Tanksmasha",
+        "name": "Olog Tanksmasha",
+        "title": "Noble sobre Garrapatos aplaztante"
+    },
+    "orksWarboss": {
+        "extraShortName": "Gulgortz",
+        "shortName": "Jefe Gulgortz",
+        "name": "Gulgortz Bulldoza",
+        "title": "Kaudillo kon megaarmadura"
+    },
+    "templSwordBrother": {
+        "extraShortName": "Godswyl",
+        "shortName": "Hermano de armas Godswyl",
+        "name": "Hermano de armas Fedreus Godswyl",
+        "title": "Hermano de armas"
+    },
+    "templAggressor": {
+        "extraShortName": "Burchard",
+        "shortName": "Hermano Burchard",
+        "name": "Hermano Raimund Burchard",
+        "title": "Sargento agresor"
+    },
+    "templAncient": {
+        "extraShortName": "Thoread",
+        "shortName": "Thoread Antiguo",
+        "name": "Cantus Thoread Antiguo",
+        "title": "Anciano del Capítulo"
+    },
+    "templChampion": {
+        "extraShortName": "Jaeger",
+        "shortName": "Hermano Jaeger",
+        "name": "Hermano Kenric Jaeger",
+        "title": "El Campeón del Emperador"
+    },
+    "templHelbrecht": {
+        "extraShortName": "Helbrecht",
+        "shortName": "Gran mariscal Helbrecht",
+        "name": "Gran mariscal Helbrecht",
+        "title": "Gran mariscal de los Templarios Negros"
+    },
+    "eldarRanger": {
+        "extraShortName": "Calandis",
+        "shortName": "Calandis",
+        "name": "Calandis Tawaren",
+        "title": "Rastreador"
+    },
+    "eldarAutarch": {
+        "extraShortName": "Aethana",
+        "shortName": "Aethana",
+        "name": "Aethana Barantharal",
+        "title": "Autarca"
+    },
+    "eldarFarseer": {
+        "extraShortName": "Eldryon",
+        "shortName": "Eldryon",
+        "name": "Eldryon Ynaduin",
+        "title": "Vidente"
+    },
+    "eldarMauganRa": {
+        "extraShortName": "Maugan Ra",
+        "shortName": "Maugan Ra",
+        "name": "Maugan Ra",
+        "title": "Señor Fénix de los Segadores Siniestros"
+    },
+    "eldarJainZar": {
+        "extraShortName": "Jain Zar",
+        "shortName": "Jain Zar",
+        "name": "Jain Zar",
+        "title": "Señora Fénix de los Espectros Aullantes"
+    },
+    "eldarLhykhis": {
+        "extraShortName": "Lhykhis",
+        "shortName": "Lhykhis",
+        "name": "Lhykhis",
+        "title": "Señora Fénix de las Arañas de Disformidad"
+    },
+    "tauMarksman": {
+        "extraShortName": "Sho'syl",
+        "shortName": "Sho'syl",
+        "name": "Shas'ui Vior'la Sho'syl",
+        "title": "Tirador supervisor"
+    },
+    "tauCrisis": {
+        "extraShortName": "Re'vas",
+        "shortName": "Re'vas",
+        "name": "Shas'vre Vior'la Re'vas",
+        "title": "Traje de batalla XV8 Crisis"
+    },
+    "tauDarkstrider": {
+        "extraShortName": "Caminante oscuro",
+        "shortName": "Caminante oscuro",
+        "name": "Shas'el T'au Myamoto",
+        "title": "Subcomandante"
+    },
+    "tauAunShi": {
+        "extraShortName": "Aun'Shi",
+        "shortName": "Aun'Shi",
+        "name": "Aun'Shi",
+        "title": "Etéreo"
+    },
+    "tauShadowsun": {
+        "extraShortName": "Sombra Solar",
+        "shortName": "Comandante Shadowsun",
+        "name": "Shas'o T'au Shaserra",
+        "title": "Suprema comandante del Imperio T'au"
+    },
+    "tauFarsight": {
+        "extraShortName": "Visionario",
+        "shortName": "Comandante Visionario",
+        "name": "Shas'o Vior'la Shovah Kais Mont'yr",
+        "title": "Héroe y traidor"
+    },
+    "spaceWulfen": {
+        "extraShortName": "Ulf",
+        "shortName": "Ulf",
+        "name": "Ulf Aullido glacial",
+        "title": "Jefe de la manada Wulfen"
+    },
+    "spaceHound": {
+        "extraShortName": "Tjark",
+        "shortName": "Tjark",
+        "name": "Tjark Wyrdslayer",
+        "title": "Jefe de la manada Sabueso de Morkai"
+    },
+    "spaceRockfist": {
+        "extraShortName": "Arjac",
+        "shortName": "Arjac",
+        "name": "Arjac Puñoroca",
+        "title": "Campeón del Gran Lobo"
+    },
+    "spaceStormcaller": {
+        "extraShortName": "Njal",
+        "shortName": "Njal",
+        "name": "Njal Invocatormentas",
+        "title": "Señor de las runas"
+    },
+    "spaceBlackmane": {
+        "extraShortName": "Ragnar",
+        "shortName": "Ragnar",
+        "name": "Ragnar Blackmane",
+        "title": "El Señor Lobo de los Melenasnegras"
+    },
+    "spaceWolfPriest": {
+        "extraShortName": "Baldr",
+        "shortName": "Baldr",
+        "name": "Baldr Thunderbrow",
+        "title": "Sacerdote lobo"
+    },
+    "thousTzaangor": {
+        "extraShortName": "Yazaghor",
+        "shortName": "Yazaghor",
+        "name": "Yazaghor Destino voluble",
+        "title": "Tzaangor Iluminado"
+    },
+    "thousTerminator": {
+        "extraShortName": "Toth",
+        "shortName": "Toth",
+        "name": "Sokar Toth",
+        "title": "Exterminador Escarabajo oculto"
+    },
+    "thousInfernalMaster": {
+        "extraShortName": "Abraxas",
+        "shortName": "Abraxas",
+        "name": "Arkarzar Abraxas",
+        "title": "Maestro infernal"
+    },
+    "thousSorcerer": {
+        "extraShortName": "Thaumachus",
+        "shortName": "Thaumachus",
+        "name": "Kairatar Thaumachus",
+        "title": "Hechicero prestigioso"
+    },
+    "thousAhriman": {
+        "extraShortName": "Ahriman",
+        "shortName": "Ahriman",
+        "name": "Ahzek Ahriman",
+        "title": "Arquitecto de la Rúbrica"
+    },
+    "thousSekhetar": {
+        "extraShortName": "Sekhetar Robot",
+        "shortName": "Sekhetar Robot",
+        "name": "Sekhetar Robot",
+        "title": "Autómata sin alma"
+    },
+    "darkaHellblaster": {
+        "extraShortName": "Sarquael",
+        "shortName": "Sarquael",
+        "name": "Sarquael",
+        "title": "Sargento Revientainfiernos"
+    },
+    "darkaTerminator": {
+        "extraShortName": "Baraqiel",
+        "shortName": "Baraqiel",
+        "name": "Baraqiel",
+        "title": "Exterminador del Ala de Muerte"
+    },
+    "darkaCompanion": {
+        "extraShortName": "Forcas",
+        "shortName": "Forcas",
+        "name": "Forcas Oathsworn",
+        "title": "Acompañante del Círculo Interior"
+    },
+    "darkaAsmodai": {
+        "extraShortName": "Asmodai",
+        "shortName": "Asmodai",
+        "name": "Asmodai",
+        "title": "Señor del Arrepentimiento"
+    },
+    "darkaAzrael": {
+        "extraShortName": "Azrael",
+        "shortName": "Azrael",
+        "name": "Azrael",
+        "title": "Gran maestro supremo"
+    },
+    "darkaSternguard": {
+        "extraShortName": "Ramus",
+        "shortName": "Ramus",
+        "name": "Ramus",
+        "title": "Sargento Veterano"
+    },
+    "tyranNeurothrope": {
+        "extraShortName": "Neurótropo",
+        "shortName": "Neurótropo",
+        "name": "Neurótropo",
+        "title": "Organismo psíquico"
+    },
+    "tyranTyrantGuard": {
+        "extraShortName": "Guardia Tirano",
+        "shortName": "Guardia Tirano",
+        "name": "Guardia Tirano",
+        "title": "Organismo guardián"
+    },
+    "tyranWingedPrime": {
+        "extraShortName": "Primus Alado",
+        "shortName": "Primus Alado",
+        "name": "Tiránido Primus Alado",
+        "title": "Organismo guerrero líder"
+    },
+    "tyranDeathleaper": {
+        "extraShortName": "Muerte Silenciosa",
+        "shortName": "Muerte Silenciosa",
+        "name": "Muerte Silenciosa",
+        "title": "Organismo de vanguardia"
+    },
+    "tyranParasite": {
+        "extraShortName": "Parásito de Mortrex",
+        "shortName": "Parásito de Mortrex",
+        "name": "Parásito de Mortrex",
+        "title": "Organismo invasor"
+    },
+    "admecDominus": {
+        "extraShortName": "Vitruvius",
+        "shortName": "Vitruvius",
+        "name": "Magos Dominus Vitruvius Thannek",
+        "title": "Tecnosacerdote Dominus"
+    },
+    "admecManipulus": {
+        "extraShortName": "Actus",
+        "shortName": "Actus",
+        "name": "Manipulus Actus Fulgorosus",
+        "title": "Tecnosacerdote Manipulus"
+    },
+    "admecMarshall": {
+        "extraShortName": "Tan Gi'da",
+        "shortName": "Tan Gi'da",
+        "name": "Tan Gi'da",
+        "title": "Mariscal Skitarii"
+    },
+    "admecRuststalker": {
+        "extraShortName": "Exitor-Rho",
+        "shortName": "Exitor-Rho",
+        "name": "Exitor-Rho-1.15/x",
+        "title": "Ferracechador Sicariano Princeps"
+    },
+    "admecDestroyer": {
+        "extraShortName": "Sy-gex",
+        "shortName": "Sy-gex",
+        "name": "Sy-gex-KPH008/15.mk41",
+        "title": "Destructor Kataphron"
+    },
+    "worldTerminator": {
+        "extraShortName": "Wrask",
+        "shortName": "Wrask",
+        "name": "Wrask, el Carnicero",
+        "title": "Exterminador de Devoradores de Mundos"
+    },
+    "worldJakhal": {
+        "extraShortName": "Macer",
+        "shortName": "Macer",
+        "name": "Macer Bloodgrin",
+        "title": "Jakhal deshonrado"
+    },
+    "worldEightbound": {
+        "extraShortName": "Azkor",
+        "shortName": "Azkor",
+        "name": "Azkor, el Óctuple",
+        "title": "Octojurado Exaltado"
+    },
+    "worldExecutions": {
+        "extraShortName": "Tarvakh",
+        "shortName": "Tarvakh",
+        "name": "Tarvakh, el Verdugo",
+        "title": "Maestro de Ejecuciones"
+    },
+    "worldKharn": {
+        "extraShortName": "Khârn",
+        "shortName": "Khârn",
+        "name": "Khârn el traidor",
+        "title": "Campeón de Khorne"
+    },
+    "bloodIntercessor": {
+        "extraShortName": "Mataneo",
+        "shortName": "Mataneo",
+        "name": "Mataneo",
+        "title": "Sargento Intercesor con propulsor de salto"
+    },
+    "bloodDeathCompany": {
+        "extraShortName": "Lucien",
+        "shortName": "Lucien",
+        "name": "Lucien",
+        "title": "Intercesor de la Compañía de la Muerte"
+    },
+    "bloodSanguinary": {
+        "extraShortName": "Nicodemus",
+        "shortName": "Nicodemus",
+        "name": "Nicodemus",
+        "title": "Sacerdote Sanguinario"
+    },
+    "bloodMephiston": {
+        "extraShortName": "Mephiston",
+        "shortName": "Mephiston",
+        "name": "Mephiston",
+        "title": "Señor de la Muerte"
+    },
+    "bloodDante": {
+        "extraShortName": "Dante",
+        "shortName": "Dante",
+        "name": "Comandante Dante",
+        "title": "Señor del Capítulo"
+    },
+    "bloodTerminator": {
+        "extraShortName": "Cezare",
+        "shortName": "Cezare",
+        "name": "Cezare",
+        "title": "Sargento Exterminador de Asalto"
+    },
+    "genesBiophagus": {
+        "extraShortName": "Hollan",
+        "shortName": "Hollan",
+        "name": "Hollan Baumgart",
+        "title": "Biófago"
+    },
+    "genesMagus": {
+        "extraShortName": "Xybia",
+        "shortName": "Xybia",
+        "name": "Xybia Kheiser",
+        "title": "Magus"
+    },
+    "genesPrimus": {
+        "extraShortName": "Isaak",
+        "shortName": "Isaak",
+        "name": "Isaak Starn",
+        "title": "Primus"
+    },
+    "genesKelermorph": {
+        "extraShortName": "Judh",
+        "shortName": "Judh",
+        "name": "Judh Lhaska",
+        "title": "Kelermorfo"
+    },
+    "genesPatriarch": {
+        "extraShortName": "El Páter Nuestro",
+        "shortName": "El Páter Nuestro",
+        "name": "El Páter Nuestro",
+        "title": "Patriarca Genestealer"
+    },
+    "custoVexilusPraetor": {
+        "extraShortName": "Aesoth",
+        "shortName": "Aesoth",
+        "name": "Aesoth Koumadra",
+        "title": "Pretor Vexilus"
+    },
+    "custoAtlacoya": {
+        "extraShortName": "Atlacoya",
+        "shortName": "Atlacoya",
+        "name": "Atlacoya",
+        "title": "Acechadora"
+    },
+    "custoKyrus": {
+        "extraShortName": "Tyrith",
+        "shortName": "Tyrith",
+        "name": "Tyrith Shiva Kyrus",
+        "title": "Guardia Custodio"
+    },
+    "custoBladeChampion": {
+        "extraShortName": "Kariyan",
+        "shortName": "Kariyan",
+        "name": "Kariyan Helsates",
+        "title": "Campeón de filo"
+    },
+    "custoTrajann": {
+        "extraShortName": "Trajann",
+        "shortName": "Trajann",
+        "name": "Trajann Valoris",
+        "title": "Capitán general"
+    },
+    "emperNoiseMarine": {
+        "extraShortName": "Shiron",
+        "shortName": "Shiron",
+        "name": "Shiron Capersi, el Idólatra",
+        "title": "Marine ruidoso"
+    },
+    "emperFlawlessBlade": {
+        "extraShortName": "Hascule",
+        "shortName": "Hascule",
+        "name": "Hascule Thorn de la Hoja de seda",
+        "title": "Filo Impecable"
+    },
+    "emperKakophonist": {
+        "extraShortName": "Adamatar",
+        "shortName": "Adamatar",
+        "name": "Adamatar Xandassus, el nacido del espejo",
+        "title": "Señor Kakofonista"
+    },
+    "emperExultant": {
+        "extraShortName": "Laviscus",
+        "shortName": "Laviscus",
+        "name": "Laviscus Sentrillion, el perfecto",
+        "title": "Señor Exultante"
+    },
+    "emperLucius": {
+        "extraShortName": "Lucius",
+        "shortName": "Lucius",
+        "name": "Lucius el Sempiterno",
+        "title": "Campeón de Slaanesh"
+    },
+    "votanBeserk": {
+        "extraShortName": "Hâvyr",
+        "shortName": "Hâvyr",
+        "name": "Hâvyr Wârspeke",
+        "title": "Beseker cthoniano"
+    },
+    "votanIronmaster": {
+        "extraShortName": "Vynn",
+        "shortName": "Vynn",
+        "name": "Vynn Conglahr",
+        "title": "Ferromaestro Brôkhyr"
+    },
+    "votanMemnyr": {
+        "extraShortName": "Âmmuk",
+        "shortName": "Âmmuk",
+        "name": "Âmmuk Ojo Agudo",
+        "title": "Estratega Memnyr"
+    },
+    "votanChampion": {
+        "extraShortName": "Kîmm",
+        "shortName": "Kîmm",
+        "name": "Kîmm Skârstreng",
+        "title": "Campeón Einhyr"
+    },
+    "votanUthar": {
+        "extraShortName": "Ûthar",
+        "shortName": "Ûthar el Destinado\n",
+        "name": "Ûthar el Destinado",
+        "title": "Gran Kâhl"
+    },
+    "astarCyrus": {
+        "extraShortName": "Cyrus",
+        "shortName": "Cyrus",
+        "name": "Cyrus",
+        "title": "Capitán con armadura Phobos"
+    },
+    "astarLysander": {
+        "extraShortName": "Lysander",
+        "shortName": "Lysander",
+        "name": "Darnath Lysander",
+        "title": "Capitán de la 1.ª Compañía"
+    },
+    "astarEradicator": {
+        "extraShortName": "Nubari",
+        "shortName": "Nubari",
+        "name": "Nubari Shal'Dar",
+        "title": "Sargento Erradicador"
+    }
+}

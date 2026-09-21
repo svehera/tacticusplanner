@@ -1,0 +1,590 @@
+{
+    "GuildBoss1Boss1TyranTervigonLeviathan": {
+        "extraShortName": "",
+        "shortName": "ターヴィゴン",
+        "name": "ターヴィゴン（群巣艦隊リヴァイアサン）",
+        "title": "群巣艦隊リヴァイアサン"
+    },
+    "GuildBoss1Boss2TyranTervigonKronos": {
+        "extraShortName": "",
+        "shortName": "ターヴィゴン",
+        "name": "ターヴィゴン（群巣艦隊クロノス）",
+        "title": "群巣艦隊クロノス"
+    },
+    "GuildBoss1Boss3TyranTervigonGorgon": {
+        "extraShortName": "",
+        "shortName": "ターヴィゴン",
+        "name": "ターヴィゴン（群巣艦隊ゴルゴン）",
+        "title": "群巣艦隊ゴルゴン"
+    },
+    "GuildBoss1Npc1TyranTermagantLeviathan": {
+        "extraShortName": "",
+        "shortName": "ターマガント",
+        "name": "ターマガント",
+        "title": ""
+    },
+    "GuildBoss1Npc2TyranTermagantKronos": {
+        "extraShortName": "",
+        "shortName": "ターマガント",
+        "name": "ターマガント",
+        "title": ""
+    },
+    "GuildBoss1Npc3TyranTermagantGorgon": {
+        "extraShortName": "",
+        "shortName": "ターマガント",
+        "name": "ターマガント",
+        "title": ""
+    },
+    "GuildBoss2Boss1TyranHiveTyrantLeviathan": {
+        "extraShortName": "",
+        "shortName": "ハイヴタイラント",
+        "name": "ハイヴタイラント（群巣艦隊リヴァイアサン）",
+        "title": "群巣艦隊リヴァイアサン"
+    },
+    "GuildBoss2Boss2TyranHiveTyrantKronos": {
+        "extraShortName": "",
+        "shortName": "ハイヴタイラント",
+        "name": "ハイヴタイラント（群巣艦隊クロノス）",
+        "title": "群巣艦隊クロノス"
+    },
+    "GuildBoss2Boss3TyranHiveTyrantGorgon": {
+        "extraShortName": "",
+        "shortName": "ハイヴタイラント",
+        "name": "ハイヴタイラント（群巣艦隊ゴルゴン）",
+        "title": "群巣艦隊ゴルゴン"
+    },
+    "GuildBoss2Npc1TyranRipperSwarmLeviathan": {
+        "extraShortName": "",
+        "shortName": "リッパー・スウォーム",
+        "name": "リッパー・スウォーム",
+        "title": ""
+    },
+    "GuildBoss2Npc2TyranRipperSwarmKronos": {
+        "extraShortName": "",
+        "shortName": "リッパー・スウォーム",
+        "name": "リッパー・スウォーム",
+        "title": ""
+    },
+    "GuildBoss2Npc3TyranRipperSwarmGorgon": {
+        "extraShortName": "",
+        "shortName": "リッパー・スウォーム",
+        "name": "リッパー・スウォーム",
+        "title": ""
+    },
+    "GuildBoss1MiniBoss1TyranWarriorLeviathan": {
+        "extraShortName": "",
+        "shortName": "ティラニッド・プライム",
+        "name": "ティラニッド・プライム（リヴァイアサン）",
+        "title": "群巣艦隊リヴァイアサン"
+    },
+    "GuildBoss1MiniBoss2TyranWarriorKronos": {
+        "extraShortName": "",
+        "shortName": "ティラニッド・プライム",
+        "name": "ティラニッド・プライム（クロノス）",
+        "title": "群巣艦隊クロノス"
+    },
+    "GuildBoss1MiniBoss3TyranWarriorGorgon": {
+        "extraShortName": "",
+        "shortName": "ティラニッド・プライム",
+        "name": "ティラニッド・プライム（ゴルゴン）",
+        "title": "群巣艦隊ゴルゴン"
+    },
+    "GuildBoss1Npc4TyranHormagauntLeviathan": {
+        "extraShortName": "",
+        "shortName": "ホーマゴーント",
+        "name": "ホーマゴーント",
+        "title": ""
+    },
+    "GuildBoss1Npc5TyranHormagauntKronos": {
+        "extraShortName": "",
+        "shortName": "ホーマゴーント",
+        "name": "ホーマゴーント",
+        "title": ""
+    },
+    "GuildBoss1Npc6TyranHormagauntGorgon": {
+        "extraShortName": "",
+        "shortName": "ホーマゴーント",
+        "name": "ホーマゴーント",
+        "title": ""
+    },
+    "GuildBoss3Boss1NecroSilentKing": {
+        "extraShortName": "",
+        "shortName": "スザーレク",
+        "name": "スザーレク",
+        "title": "沈黙の王"
+    },
+    "GuildBoss3Npc1NecroWarrior": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc2NecroFlayedOne": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc3NecroDeathmark": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc4NecroDestroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Npc5NecroSwarm": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss3Minion1NecroMesophet": {
+        "extraShortName": "",
+        "shortName": "メソフェット",
+        "name": "影なる手のメソフェット",
+        "title": "スザーレカン王朝"
+    },
+    "GuildBoss3Minion2NecroHapthatra": {
+        "extraShortName": "",
+        "shortName": "ハプタットラ",
+        "name": "輝けるハプタットラ",
+        "title": "スザーレカン王朝"
+    },
+    "GuildBoss3Minion3NecroMenhir": {
+        "extraShortName": "",
+        "shortName": "トライアーク・メンヒル",
+        "name": "トライアーク・メンヒル",
+        "title": "スザーレカン王朝"
+    },
+    "GuildBoss3Npc6NecroSmnDeathmark": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Boss1OrksGhazghkull": {
+        "extraShortName": "",
+        "shortName": "ガズグッカル",
+        "name": "ガズグッカル・マグ・ウルク・ザラカ",
+        "title": "いくさの預言者"
+    },
+    "GuildBoss4Npc1OrksGrot": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Npc2OrksOrkBoy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Npc3OrksGrotTank": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Npc4OrksStormboy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4MiniBoss1OrksBigMek": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Minion1OrksKillaKan": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4MiniBoss2OrksNob": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4Minion2OrksRuntherd": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss4LootObjExplOilDrumReworked": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5Boss1DeathMortarion": {
+        "extraShortName": "",
+        "shortName": "モータリオン",
+        "name": "デスロード・モータリオン",
+        "title": "デスガード総魔長"
+    },
+    "GuildBoss5Npc1Poxwalker": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5Npc2PoxwalkerSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5MiniBoss1DeathRotbone": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss5Minion1DeathBlightlord": {
+        "extraShortName": "",
+        "shortName": "ブライトロード・ターミネイター",
+        "name": "ブライトロード・ターミネイター",
+        "title": ""
+    },
+    "GuildBoss5MiniBoss2DeathBlightbringer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss6Boss1TyranScreamerKiller": {
+        "extraShortName": "",
+        "shortName": "スクリーマーキラー",
+        "name": "スクリーマーキラー",
+        "title": "ヘビーアサルト・オーガニズム"
+    },
+    "GuildBoss6MiniBoss1TyranNeurothrope": {
+        "extraShortName": "",
+        "shortName": "ニューロスロープ",
+        "name": "ニューロスロープ",
+        "title": "サイキック・オーガニズム"
+    },
+    "GuildBoss6MiniBoss2TyranWingedPrime": {
+        "extraShortName": "",
+        "shortName": "ウィングド・プライム",
+        "name": "ウィングド・ティラニッド・プライム",
+        "title": "リードウォリアー・オーガニズム"
+    },
+    "GuildBoss6Npc1TyranHormagaunt": {
+        "extraShortName": "",
+        "shortName": "ホーマゴーント",
+        "name": "ホーマゴーント",
+        "title": ""
+    },
+    "GuildBoss6Npc2TyranRipperSwarm": {
+        "extraShortName": "",
+        "shortName": "リッパー・スウォーム",
+        "name": "リッパー・スウォーム",
+        "title": ""
+    },
+    "GuildBoss6Npc3TyranTermagant": {
+        "extraShortName": "",
+        "shortName": "ターマガント",
+        "name": "ターマガント",
+        "title": ""
+    },
+    "GuildBoss6Npc4TyranWarrior": {
+        "extraShortName": "",
+        "shortName": "ティラニッド・ウォリアー",
+        "name": "ティラニッド・ウォリアー",
+        "title": ""
+    },
+    "GuildBoss6Npc5TyranBarbgaunt": {
+        "extraShortName": "",
+        "shortName": "バーブガント",
+        "name": "バーブガント",
+        "title": ""
+    },
+    "GuildBoss7Boss1AstraRogaldorn": {
+        "extraShortName": "",
+        "shortName": "ローガル・ドルン",
+        "name": "ローガル・ドルン・バトルタンク",
+        "title": "ヘヴィバトルタンク"
+    },
+    "GuildBoss7MiniBoss1AstraPrimarisPsy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7MiniBoss2AstraOrdnance": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc1AstraGuardsman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc2AstraLascannon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc3AstraVoxcaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc4Mortar": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss7Npc1AstraGuardsmanSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Boss1EldarAvatar": {
+        "extraShortName": "",
+        "shortName": "アヴァター・オヴ・カイン",
+        "name": "アヴァター・オヴ・カイン",
+        "title": "カインの怒りの欠片"
+    },
+    "GuildBoss8MiniBoss1EldarAutarch": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8MiniBoss2EldarFarseer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc1EldarGuardian": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc2EldarWarlock": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc3EldarHarlequin": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc4EldarWraithguard": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss8Npc5EldarGuardianSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Boss1ThousMagnus": {
+        "extraShortName": "",
+        "shortName": "マグヌス",
+        "name": "“赤き”マグヌス",
+        "title": "真紅の王"
+    },
+    "GuildBoss9MiniBoss1ThousSorcerer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9MiniBoss2ThousInfernalMaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc1ThousPinkHorror": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc2ThousScreamer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc3ThousRubricMarine": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc4ThousTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss9Npc5ThousScreamerSummon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Boss1AdmecBelisarius": {
+        "extraShortName": "",
+        "shortName": "ベリサリウス・カウル",
+        "name": "ベリサリウス・カウル",
+        "title": "アーチマゴス・ドミヌス"
+    },
+    "GuildBoss10MiniBoss1AdmecMarshall": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10MiniBoss2AdmecManipulus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Minion1AdmecRuststalker": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Minion2AdmecDestroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Npc1AdmecTechpriest": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10Npc2AdmecElectropriest": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss10LootObjArcheotecCrate": {
+        "extraShortName": "",
+        "shortName": "アーケオテック・クレート",
+        "name": "アーケオテック・クレート",
+        "title": ""
+    },
+    "GuildBoss11Boss1TauRiptide": {
+        "extraShortName": "",
+        "shortName": "リップタイド",
+        "name": "XV104リップタイド・バトルスーツ",
+        "title": "ノヴァ反応炉パワードヘヴィバトルスーツ"
+    },
+    "GuildBoss11MiniBoss1TauMarksman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11MiniBoss2TauCrisis": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc1TauFireWarrior": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc2TauDroneSniper": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc3TauDroneShield": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss11Npc4TauStealthSuit": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Boss1DarkaLion": {
+        "extraShortName": "",
+        "shortName": "ライオン・エル＝ジョンソン",
+        "name": "ライオン・エル＝ジョンソン",
+        "title": "ダークエンジェルの総主長"
+    },
+    "GuildBoss12MiniBoss1DarkaTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12MiniBoss2DarkaCompanion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc1DarkaInfiltrator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc2DarkaHellblaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc3DarkaTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "GuildBoss12Npc4DarkaWatcher": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    }
+}

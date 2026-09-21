@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Galatian",
+        "shortName": "Galatian",
+        "name": "Galatian",
+        "title": "Islah Edici Dretnot"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Şeytan Çıkarıcı",
+        "shortName": "Şeytan Çıkarıcı",
+        "name": "Şeytan Çıkarıcı",
+        "title": "Topçu Tankı"
+    },
+    "necroReanimator": {
+        "extraShortName": "Reanimasyoncu",
+        "shortName": "Reanimasyoncu",
+        "name": "Canoptek Reanimasyoncu",
+        "title": "Canoptek Yapı"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Malleus Roketatarı",
+        "shortName": "Malleus Roketatarı",
+        "name": "Malleus Roketatarı",
+        "title": "Saha Mühimmat Silahları"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Demir Canavar",
+        "shortName": "Demir Canavar",
+        "name": "Demir Canavar",
+        "title": "İblis Motoru"
+    },
+    "deathCrawler": {
+        "extraShortName": "Veba Patlaması Sürüngeni",
+        "shortName": "Veba Patlaması Sürüngeni",
+        "name": "Veba Patlaması Sürüngeni",
+        "title": "İblis Motoru"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Rukkatrukk",
+        "shortName": "Rukkatrukk",
+        "name": "Rukkatrukk Squig Arabası",
+        "title": "Hız Delisi Trukk"
+    },
+    "tauBroadside": {
+        "extraShortName": "Tson'ji",
+        "shortName": "Tson'ji",
+        "name": "Shas'vre Vior'la Tson'ji",
+        "title": "XV88 Broadside Savaş Kıyafeti"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "Z'Kar",
+        "shortName": "Z'Kar",
+        "name": "Apophitar Z'Kar",
+        "title": "Tzeentch'in İblis Prensi"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Fırtına Hücumcusu",
+        "shortName": "Fırtına Hücumcusu",
+        "name": "Fırtına Hücumcusu Dolu Saldırısı",
+        "title": "Kuzgunkanadı Saldırı Kasası"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Biyovor",
+        "shortName": "Biyovor",
+        "name": "Biyovor",
+        "title": "Topçu Organizma"
+    }
+}

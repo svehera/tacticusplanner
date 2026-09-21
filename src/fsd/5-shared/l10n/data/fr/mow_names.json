@@ -1,0 +1,68 @@
+{
+    "ultraDreadnought": {
+        "extraShortName": "Galatian",
+        "shortName": "Galatian",
+        "name": "Galatian",
+        "title": "Dreadnought Redemptor"
+    },
+    "adeptExorcist": {
+        "extraShortName": "Exorcist",
+        "shortName": "Exorcist",
+        "name": "Exorcist",
+        "title": "Char d'artillerie"
+    },
+    "necroReanimator": {
+        "extraShortName": "Réanimateur",
+        "shortName": "Réanimateur",
+        "name": "Réanimateur Canoptek",
+        "title": "Concept canoptek"
+    },
+    "astraOrdnanceBattery": {
+        "extraShortName": "Lance-roquettes Malleus",
+        "shortName": "Lance-roquettes Malleus",
+        "name": "Lance-roquettes Malleus",
+        "title": "Batterie d'Artillerie"
+    },
+    "blackForgefiend": {
+        "extraShortName": "Ferrocentaurus",
+        "shortName": "Ferrocentaurus",
+        "name": "Ferrocentaurus",
+        "title": "Machine-démon"
+    },
+    "deathCrawler": {
+        "extraShortName": "Chenillé Crachepeste",
+        "shortName": "Chenillé Crachepeste",
+        "name": "Chenillé Crachepeste",
+        "title": "Machine-démon"
+    },
+    "orksRukkatrukk": {
+        "extraShortName": "Rukkatrukk",
+        "shortName": "Rukkatrukk",
+        "name": "Buggy Fourre-Squigs",
+        "title": "Kamion dé fous du volan"
+    },
+    "tauBroadside": {
+        "extraShortName": "Tson'ji",
+        "shortName": "Tson'ji",
+        "name": "Shas'vre Vior'la Tson'ji",
+        "title": "Exo-armure XV88 Broadside"
+    },
+    "thousDaemonPrince": {
+        "extraShortName": "Z'Kar",
+        "shortName": "Z'Kar",
+        "name": "Apophitar Z'Kar",
+        "title": "Prince Démon de Tzeentch"
+    },
+    "darkaStormSpeeder": {
+        "extraShortName": "Storm Speeder",
+        "shortName": "Storm Speeder",
+        "name": "Storm Speeder Hailstrike",
+        "title": "Véhicule de frappe de la Ravenwing"
+    },
+    "tyranBiovore": {
+        "extraShortName": "Biovore",
+        "shortName": "Biovore",
+        "name": "Biovore",
+        "title": "Organisme d'artillerie"
+    }
+}

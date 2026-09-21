@@ -233,7 +233,14 @@ export const ShopEventDetail = () => {
         ]
     );
 
-    const { neededBadges, neededOrbs, neededForgeBadges, neededComponents, neededXp } = useMemo(
+    const {
+        goalEstimates: adjustedGoalEstimates,
+        neededBadges,
+        neededOrbs,
+        neededForgeBadges,
+        neededComponents,
+        neededXp,
+    } = useMemo(
         () =>
             GoalsService.adjustGoalEstimates(
                 cloneDeep(goals),
@@ -247,16 +254,17 @@ export const ShopEventDetail = () => {
         [goals, goalsEstimate, inventory, xpUse, upgradeRankOrMowGoals, ascendGoals, xpIncome]
     );
 
+    // Adjusted estimates price XP-book gold per held/outstanding book rarity; raw ones assume Legendary.
     const totalGold = useMemo(() => {
         let total = 0;
-        for (const est of goalsEstimate) {
+        for (const est of adjustedGoalEstimates) {
             total += est.xpEstimate?.gold ?? 0;
             total += est.xpEstimateAbilities?.gold ?? 0;
             total += est.abilitiesEstimate?.gold ?? 0;
             total += est.mowEstimate?.gold ?? 0;
         }
         return total;
-    }, [goalsEstimate]);
+    }, [adjustedGoalEstimates]);
 
     const mythicMissingByUpgradeId = useMemo(() => {
         const mythicIds = new Set<string>(MYTHIC_UNCRAFTABLE_UPGRADES.map(u => u.id));
