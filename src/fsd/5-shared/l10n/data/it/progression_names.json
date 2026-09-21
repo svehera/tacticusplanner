@@ -1,0 +1,33 @@
+{
+    "ranks": {
+        "0": "Rango Pietra I",
+        "1": "Rango Pietra II",
+        "2": "Rango Pietra III",
+        "3": "Rango Ferro I",
+        "4": "Rango Ferro II",
+        "5": "Rango Ferro III",
+        "6": "Rango Bronzo I",
+        "7": "Rango Bronzo II",
+        "8": "Rango Bronzo III",
+        "9": "Rango Argento I",
+        "10": "Rango Argento II",
+        "11": "Rango Argento III",
+        "12": "Rango Oro I",
+        "13": "Rango Oro II",
+        "14": "Rango Oro III",
+        "15": "Rango Diamante I",
+        "16": "Rango Diamante II",
+        "17": "Rango Diamante III",
+        "18": "Rango Adamantite I",
+        "19": "Rango Adamantite II",
+        "20": "Rango Adamantite III"
+    },
+    "rarities": {
+        "Common": "Comune",
+        "Uncommon": "Non comune",
+        "Rare": "Raro",
+        "Epic": "Epico",
+        "Legendary": "Leggendario",
+        "Mythic": "Mitica"
+    }
+}

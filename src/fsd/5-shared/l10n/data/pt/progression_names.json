@@ -1,0 +1,33 @@
+{
+    "ranks": {
+        "0": "Ranque Pedra I",
+        "1": "Ranque Pedra II",
+        "2": "Ranque Pedra III",
+        "3": "Ranque Ferro I",
+        "4": "Ranque Ferro II",
+        "5": "Ranque Ferro III",
+        "6": "Ranque Bronze I",
+        "7": "Ranque Bronze II",
+        "8": "Ranque Bronze III",
+        "9": "Ranque Prata I",
+        "10": "Ranque Prata II",
+        "11": "Ranque Prata III",
+        "12": "Ranque Ouro I",
+        "13": "Ranque Ouro II",
+        "14": "Ranque Ouro III",
+        "15": "Ranque Diamante I",
+        "16": "Ranque Diamante II",
+        "17": "Ranque Diamante III",
+        "18": "Ranque Adamantina I",
+        "19": "Ranque Adamantina II",
+        "20": "Ranque Adamantina III"
+    },
+    "rarities": {
+        "Common": "Comum",
+        "Uncommon": "Incomum",
+        "Rare": "Rara",
+        "Epic": "Épica",
+        "Legendary": "Lendária",
+        "Mythic": "Mítico"
+    }
+}

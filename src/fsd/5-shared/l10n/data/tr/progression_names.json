@@ -1,0 +1,33 @@
+{
+    "ranks": {
+        "0": "Kaya Rütbe I",
+        "1": "Kaya Rütbe II",
+        "2": "Kaya Rütbe III",
+        "3": "Demir Rütbe I",
+        "4": "Demir Rütbe II",
+        "5": "Demir Rütbe III",
+        "6": "Bronz Rütbe I",
+        "7": "Bronz Rütbe II",
+        "8": "Bronz Rütbe III",
+        "9": "Gümüş Rütbe I",
+        "10": "Gümüş Rütbe II",
+        "11": "Gümüş Rütbe III",
+        "12": "Altın Rütbe I",
+        "13": "Altın Rütbe II",
+        "14": "Altın Rütbe III",
+        "15": "Elmas Rütbe I",
+        "16": "Elmas Rütbe II",
+        "17": "Elmas Rütbe III",
+        "18": "Adamantium Rütbe I",
+        "19": "Adamantium Rütbe II",
+        "20": "Adamantium Rütbe III"
+    },
+    "rarities": {
+        "Common": "Sıradan",
+        "Uncommon": "Sıra Dışı",
+        "Rare": "Nadir",
+        "Epic": "Destansı",
+        "Legendary": "Efsanevi",
+        "Mythic": "Mitik"
+    }
+}

@@ -1,0 +1,3206 @@
+{
+    "necroNpc1Warrior": {
+        "extraShortName": "",
+        "shortName": "ネクロン・ウォリアー",
+        "name": "ネクロン・ウォリアー",
+        "title": ""
+    },
+    "necroNpc1TutWarrior": {
+        "extraShortName": "",
+        "shortName": "ネクロン・ウォリアー",
+        "name": "ネクロン・ウォリアー",
+        "title": ""
+    },
+    "necroNpc1TutWarriorFTUEtest": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpc1WarriorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpc2FlayedOne": {
+        "extraShortName": "",
+        "shortName": "フレイド・ワン",
+        "name": "フレイド・ワン",
+        "title": ""
+    },
+    "necroNpc2TutFlayedOne": {
+        "extraShortName": "",
+        "shortName": "フレイド・ワン",
+        "name": "フレイド・ワン",
+        "title": ""
+    },
+    "necroNpc2TutFlayedOneFTUEtest": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpc3Deathmark": {
+        "extraShortName": "",
+        "shortName": "デスマーク",
+        "name": "デスマーク",
+        "title": ""
+    },
+    "necroNpc4Destroyer": {
+        "extraShortName": "",
+        "shortName": "オフィディアン・デストロイヤー",
+        "name": "オフィディアン・デストロイヤー",
+        "title": ""
+    },
+    "necroNpc4DestroyerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpc4DestroyerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpc5Swarm": {
+        "extraShortName": "",
+        "shortName": "スカラベ・スウォーム",
+        "name": "スカラベ・スウォーム",
+        "title": ""
+    },
+    "necroNpcLHESwarm": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcWarden": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcDestroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcSpyder": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcPlasmancer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcOverlord": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcChronomancer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroNpcMoWReanimator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossWarden": {
+        "extraShortName": "",
+        "shortName": "マホテップ",
+        "name": "ロイヤルウォーデン・マホテップ",
+        "title": ""
+    },
+    "necroBossWardenLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossWardenLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossDestroyer": {
+        "extraShortName": "",
+        "shortName": "イモスぺク",
+        "name": "ヘックスマーク・デストロイヤー・イモスぺク",
+        "title": ""
+    },
+    "necroBossDestroyerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossDestroyerLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossSpyder": {
+        "extraShortName": "",
+        "shortName": "アレフ・ヌル",
+        "name": "カノプテック・スパイダー・アレフ・ヌル",
+        "title": ""
+    },
+    "necroBossSpyderLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossSpyderLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossPlasmancer": {
+        "extraShortName": "",
+        "shortName": "トゥトモース",
+        "name": "プラズマンサー・トゥトモース",
+        "title": ""
+    },
+    "necroBossPlasmancerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossPlasmancerLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossOverlord": {
+        "extraShortName": "",
+        "shortName": "アヌフェット",
+        "name": "オーヴァーロード・アヌフェット",
+        "title": ""
+    },
+    "necroBossOverlordLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossOverlordLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossChronomancerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossChronomancerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossC1Warden": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossC1Destroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossC1Spyder": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossC1Plasmancer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "necroBossC1Overlord": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpc1Guardsman": {
+        "extraShortName": "",
+        "shortName": "ケイディアン・ガーズマン",
+        "name": "ケイディアン・ガーズマン",
+        "title": ""
+    },
+    "astraNpc2Lascannon": {
+        "extraShortName": "",
+        "shortName": "ケイディアン・ラスキャノンチーム",
+        "name": "ケイディアン・ラスキャノンチーム",
+        "title": ""
+    },
+    "astraNpc3Voxcaster": {
+        "extraShortName": "",
+        "shortName": "ケイディアン・ヴォクス・キャスター",
+        "name": "ケイディアン・ヴォクス・キャスター",
+        "title": ""
+    },
+    "astraNpc4Mortar": {
+        "extraShortName": "",
+        "shortName": "ケイディアン・モーター・チーム",
+        "name": "ケイディアン・モーター・チーム",
+        "title": ""
+    },
+    "astraNpc4MortarSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpc5DeathRider": {
+        "extraShortName": "",
+        "shortName": "デスライダー",
+        "name": "クリーグのデスライダー",
+        "title": ""
+    },
+    "ultraBossTigurius": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossTiguriusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossTiguriusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossEliminatorSgt": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossEliminatorSgtLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossEliminatorSgtCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossEliminatorSgtSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossInceptorSgt": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossInceptorSgtLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossInceptorSgtSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossApothecary": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossApothecaryLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossApothecarySurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossCalgar": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossCalgarLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossCalgarSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossTitus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossTitusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraBossTitusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpcTigurius": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpcEliminatorSgt": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpcInceptorSgt": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpcApothecary": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpcCalgar": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpc1BattleSister": {
+        "extraShortName": "",
+        "shortName": "バトルシスター",
+        "name": "バトルシスター",
+        "title": ""
+    },
+    "adeptNpc2Zephyrim": {
+        "extraShortName": "",
+        "shortName": "ゼフィリム",
+        "name": "ゼフィリム",
+        "title": ""
+    },
+    "adeptNpc3Warsuit": {
+        "extraShortName": "",
+        "shortName": "パラゴン・ウォースーツ",
+        "name": "パラゴン・ウォースーツ",
+        "title": ""
+    },
+    "adeptNpc3WarsuitSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossRetributor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossRetributorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossHospitaller": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossHospitallerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossMorvenn": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossMorvennLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossCanoness": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossCanonessLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossCelestine": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossCelestineCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptBossCelestineLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpcMoWExorcist": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpcCelestine": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpcHospitaller": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpcRetributor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpcCanoness": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "adeptNpcMorvenn": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcBullgryn": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcPrimarisPsy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcYarrick": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcOrdnance": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcCreed": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcDreir": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossBullgryn": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossBullgrynLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossBullgrynLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossPrimarisPsy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossPrimarisPsyLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossPrimarisPsySurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossYarrick": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossYarrickLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossYarrickLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossYarrickSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossOrdnance": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossOrdnanceLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossOrdnanceLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossCreed": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossCreedLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossCreedLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraBossCreedSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossTerminatorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossTerminatorLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpcTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossObliterator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossObliteratorCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossObliteratorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossObliteratorLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossObliteratorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpcObliterator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossPossession": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossPossessionLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossPossessionLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossPossessionSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossHaarken": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossHaarkenCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossHaarkenLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossHaarkenLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossHaarkenSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpcHaarken": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossAbaddon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossAbaddonCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossAbaddonLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackBossAbaddonLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpcAbaddon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossTyphus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossTyphusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossTyphusLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossTyphusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossBlightlord": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossBlightlordSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossBlightlordLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossRotbone": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossRotboneSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossRotboneLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossPutrifier": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossPutrifierSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossPutrifierLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossBlightbringer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossBlightbringerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossBlightbringerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossSwordBrother": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossSwordBrother_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossSwordBrotherCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossSwordBrotherSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAggressor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAggressorLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAggressor_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAggressorCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAggressorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAncient": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAncient_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAncientCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossAncientSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossChampion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossChampionLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossChampion_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossChampionSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossChampionCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossHelbrecht": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossHelbrecht_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "templBossHelbrechtSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossKillaKan": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossKillaKanLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossKillaKanLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcKillaKan": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossBigMek": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossBigMekLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossBigMekLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcBigMek": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossRuntherd": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossRuntherdLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossRuntherdLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcRuntherd": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossNob": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossNobLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossNobLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcNob": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossWarboss": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksBossWarbossLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcWarboss": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcWarbossSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksRedGobbo": {
+        "extraShortName": "",
+        "shortName": "ダ・レッド・ゴボ",
+        "name": "ダ・レッド・ゴボ",
+        "title": ""
+    },
+    "eldarBossRanger": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossRangerCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossRangerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossRangerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossAutarch": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossAutarchCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossAutarchLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossFarseer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossFarseerCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossFarseerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossFarseerLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossFarseerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossMauganRa": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossMauganRaCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossMauganRaLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossMauganRaLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossMauganRaUltra": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossJainZar": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossJainZarCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossJainZarLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarBossJainZarLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossTerminatorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossJakhalLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossEightboundLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossExecutionsLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldBossKharnLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc1Hormagaunt": {
+        "extraShortName": "",
+        "shortName": "ホーマゴーント",
+        "name": "ホーマゴーント",
+        "title": ""
+    },
+    "tyranNpc2RipperSwarm": {
+        "extraShortName": "",
+        "shortName": "リッパー・スウォーム",
+        "name": "リッパー・スウォーム",
+        "title": ""
+    },
+    "tyranNpc3Termagant": {
+        "extraShortName": "",
+        "shortName": "ターマガント",
+        "name": "ターマガント",
+        "title": ""
+    },
+    "tyranNpc4Warrior": {
+        "extraShortName": "",
+        "shortName": "ティラニッド・ウォリアー",
+        "name": "ティラニッド・ウォリアー",
+        "title": ""
+    },
+    "tyranNpc4WarriorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc4WarriorCE2Kronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc4WarriorCE2Gorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc1HormagauntKronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc2RipperSwarmKronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc3TermagantKronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc1HormagauntGorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc2RipperSwarmGorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc3TermagantGorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc5Barbgaunt": {
+        "extraShortName": "",
+        "shortName": "バーブガント",
+        "name": "バーブガント",
+        "title": ""
+    },
+    "tyranNpc5BarbgauntSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpc1Inceptor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpc2Eliminator": {
+        "extraShortName": "",
+        "shortName": "エリミネイター",
+        "name": "エリミネイター",
+        "title": ""
+    },
+    "ultraNpc3Intercessor": {
+        "extraShortName": "",
+        "shortName": "インターセッサー",
+        "name": "インターセッサー",
+        "title": ""
+    },
+    "ultraNpc4HeavyIntercessor": {
+        "extraShortName": "",
+        "shortName": "ヘヴィ・インターセッサー",
+        "name": "ヘヴィ・インターセッサー",
+        "title": ""
+    },
+    "ultraNpc4HeavyIntercessorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpc1Grot": {
+        "extraShortName": "",
+        "shortName": "グロット",
+        "name": "グロット",
+        "title": ""
+    },
+    "orksNpc2OrkBoy": {
+        "extraShortName": "",
+        "shortName": "オークボーイ",
+        "name": "オークボーイ",
+        "title": ""
+    },
+    "orksNpc3GrotTank": {
+        "extraShortName": "",
+        "shortName": "グロットタンク",
+        "name": "グロットタンク",
+        "title": ""
+    },
+    "orksNpc4AmmoGrot": {
+        "extraShortName": "",
+        "shortName": "アンモ・グロット",
+        "name": "アンモ・グロット",
+        "title": ""
+    },
+    "orksNpc5LootGrotTeam": {
+        "extraShortName": "",
+        "shortName": "戦利品グロットチーム",
+        "name": "戦利品グロットチーム",
+        "title": ""
+    },
+    "orksNpc6Stormboy": {
+        "extraShortName": "",
+        "shortName": "ストームボーイ",
+        "name": "ストームボーイ",
+        "title": ""
+    },
+    "orksNpc7Squig": {
+        "extraShortName": "",
+        "shortName": "ラージ・スクィグ",
+        "name": "ラージ・スクィグ",
+        "title": ""
+    },
+    "orksNpcHSESquig": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpc7SquigSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "orksNpcMoWRukkatrukk": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "LootObj_AmmoBox": {
+        "extraShortName": "",
+        "shortName": "弾薬箱",
+        "name": "弾薬箱",
+        "title": ""
+    },
+    "LootObj_OilDrum": {
+        "extraShortName": "",
+        "shortName": "ドラム缶",
+        "name": "ドラム缶",
+        "title": ""
+    },
+    "LootObj_ExplOilDrum": {
+        "extraShortName": "",
+        "shortName": "爆発性ドラム缶",
+        "name": "爆発性ドラム缶",
+        "title": ""
+    },
+    "LootObj_Crate_Imp": {
+        "extraShortName": "",
+        "shortName": "インペリアル・クレート",
+        "name": "インペリアル・クレート",
+        "title": ""
+    },
+    "LootObj_Pod_Common_Imp": {
+        "extraShortName": "",
+        "shortName": "コモン・インペリアル補給ポッド",
+        "name": "コモン・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Uncommon_Imp": {
+        "extraShortName": "",
+        "shortName": "アンコモン・インペリアル補給ポッド",
+        "name": "アンコモン・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Rare_Imp": {
+        "extraShortName": "",
+        "shortName": "レア・インペリアル補給ポッド",
+        "name": "レア・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Epic_Imp": {
+        "extraShortName": "",
+        "shortName": "エピック・インペリアル補給ポッド",
+        "name": "エピック・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Legendary_Imp": {
+        "extraShortName": "",
+        "shortName": "レジェンダリー・インペリアル補給ポッド",
+        "name": "レジェンダリー・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Mythic_Imp": {
+        "extraShortName": "",
+        "shortName": "ミシック・インペリアル補給ポッド",
+        "name": "ミシック・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Strongbox_Imp": {
+        "extraShortName": "",
+        "shortName": "ストロングボックス",
+        "name": "ストロングボックス",
+        "title": ""
+    },
+    "LootObj_Crate_Xen": {
+        "extraShortName": "",
+        "shortName": "インペリアル・クレート",
+        "name": "インペリアル・クレート",
+        "title": ""
+    },
+    "LootObj_Pod_Common_Xen": {
+        "extraShortName": "",
+        "shortName": "コモン・インペリアル補給ポッド",
+        "name": "コモン・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Uncommon_Xen": {
+        "extraShortName": "",
+        "shortName": "アンコモン・インペリアル補給ポッド",
+        "name": "アンコモン・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Rare_Xen": {
+        "extraShortName": "",
+        "shortName": "レア・インペリアル補給ポッド",
+        "name": "レア・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Epic_Xen": {
+        "extraShortName": "",
+        "shortName": "エピック・インペリアル補給ポッド",
+        "name": "エピック・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Legendary_Xen": {
+        "extraShortName": "",
+        "shortName": "レジェンダリー・インペリアル補給ポッド",
+        "name": "レジェンダリー・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Mythic_Xen": {
+        "extraShortName": "",
+        "shortName": "ミシック・インペリアル補給ポッド",
+        "name": "ミシック・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Strongbox_Xen": {
+        "extraShortName": "",
+        "shortName": "ストロングボックス",
+        "name": "ストロングボックス",
+        "title": ""
+    },
+    "LootObj_Crate_Cha": {
+        "extraShortName": "",
+        "shortName": "インペリアル・クレート",
+        "name": "インペリアル・クレート",
+        "title": ""
+    },
+    "LootObj_Pod_Common_Cha": {
+        "extraShortName": "",
+        "shortName": "コモン・インペリアル補給ポッド",
+        "name": "コモン・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Uncommon_Cha": {
+        "extraShortName": "",
+        "shortName": "アンコモン・インペリアル補給ポッド",
+        "name": "アンコモン・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Rare_Cha": {
+        "extraShortName": "",
+        "shortName": "レア・インペリアル補給ポッド",
+        "name": "レア・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Epic_Cha": {
+        "extraShortName": "",
+        "shortName": "エピック・インペリアル補給ポッド",
+        "name": "エピック・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Legendary_Cha": {
+        "extraShortName": "",
+        "shortName": "レジェンダリー・インペリアル補給ポッド",
+        "name": "レジェンダリー・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Pod_Mythic_Cha": {
+        "extraShortName": "",
+        "shortName": "ミシック・インペリアル補給ポッド",
+        "name": "ミシック・インペリアル補給ポッド",
+        "title": ""
+    },
+    "LootObj_Strongbox_Cha": {
+        "extraShortName": "",
+        "shortName": "ストロングボックス",
+        "name": "ストロングボックス",
+        "title": ""
+    },
+    "LootObj_FancyBox": {
+        "extraShortName": "",
+        "shortName": "豪華な箱",
+        "name": "豪華な箱",
+        "title": ""
+    },
+    "LootObj_CoinCrate": {
+        "extraShortName": "",
+        "shortName": "コイン・クレート",
+        "name": "コイン・クレート",
+        "title": ""
+    },
+    "LootObj_Blackstone": {
+        "extraShortName": "",
+        "shortName": "ブラックストーン",
+        "name": "ブラックストーン",
+        "title": ""
+    },
+    "LootObj_XPBook": {
+        "extraShortName": "",
+        "shortName": "経験値の秘本",
+        "name": "経験値の秘本",
+        "title": ""
+    },
+    "powupArmor": {
+        "extraShortName": "",
+        "shortName": "アーマーパワーアップ",
+        "name": "アーマーパワーアップ",
+        "title": ""
+    },
+    "powupDamage": {
+        "extraShortName": "",
+        "shortName": "ダメージパワーアップ",
+        "name": "ダメージパワーアップ",
+        "title": ""
+    },
+    "powupHealth": {
+        "extraShortName": "",
+        "shortName": "体力パワーアップ",
+        "name": "体力パワーアップ",
+        "title": ""
+    },
+    "powupHits": {
+        "extraShortName": "",
+        "shortName": "ヒットパワーアップ",
+        "name": "ヒットパワーアップ",
+        "title": ""
+    },
+    "powupMeleeHits": {
+        "extraShortName": "",
+        "shortName": "近接ヒットパワーアップ",
+        "name": "近接ヒットパワーアップ",
+        "title": ""
+    },
+    "powupReactivateAbility": {
+        "extraShortName": "",
+        "shortName": "アビリティ再発動パワーアップ",
+        "name": "アビリティ再発動パワーアップ",
+        "title": ""
+    },
+    "powupHealing": {
+        "extraShortName": "",
+        "shortName": "回復パワーアップ",
+        "name": "回復パワーアップ",
+        "title": ""
+    },
+    "powupReinforcementShield": {
+        "extraShortName": "",
+        "shortName": "シールドパワーアップ",
+        "name": "シールドパワーアップ",
+        "title": ""
+    },
+    "powupReinforcement": {
+        "extraShortName": "",
+        "shortName": "援軍ポイントパワーアップ",
+        "name": "援軍ポイントパワーアップ",
+        "title": ""
+    },
+    "powupResurrect": {
+        "extraShortName": "",
+        "shortName": "復活パワーアップ",
+        "name": "復活パワーアップ",
+        "title": ""
+    },
+    "powupHeroSpawn_Uthar": {
+        "extraShortName": "",
+        "shortName": "父祖の剣パワーアップ",
+        "name": "父祖の剣パワーアップ",
+        "title": ""
+    },
+    "powupHeroSpawn_VexilusPraeto": {
+        "extraShortName": "",
+        "shortName": "ゴールデンライト・パワーアップから",
+        "name": "ゴールデンライト・パワーアップから",
+        "title": ""
+    },
+    "powupHeroSpawn_BladeChampion": {
+        "extraShortName": "",
+        "shortName": "ゴールデンライト・パワーアップから",
+        "name": "ゴールデンライト・パワーアップから",
+        "title": ""
+    },
+    "powupSummonSpawn_ultraSmnInceptor": {
+        "extraShortName": "",
+        "shortName": "インセプターパワーアップ",
+        "name": "インセプターパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_ultraSmnHeavyIntercessor": {
+        "extraShortName": "",
+        "shortName": "ヘヴィ・インターセッサー・パワーアップ",
+        "name": "ヘヴィ・インターセッサー・パワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_templSmnAggressor": {
+        "extraShortName": "",
+        "shortName": "アグレッサーパワーアップ",
+        "name": "アグレッサーパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_bloodSmnIntercessor": {
+        "extraShortName": "",
+        "shortName": "ジャンプパック・インターセッサー・パワーアップ",
+        "name": "ジャンプパック・インターセッサー・パワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_darkaSmnHellblaster": {
+        "extraShortName": "",
+        "shortName": "ヘルブラスターパワーアップ",
+        "name": "ヘルブラスターパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_darkaSmnTerminator": {
+        "extraShortName": "",
+        "shortName": "デスウィング・ナイト・パワーアップ",
+        "name": "デスウィング・ナイト・パワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_necroSmnWarrior": {
+        "extraShortName": "",
+        "shortName": "ネクロン・ウォリアーのパワーアップ",
+        "name": "ネクロン・ウォリアーのパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_necroSmnFlayedOne": {
+        "extraShortName": "",
+        "shortName": "フレイド・ワンのパワーアップ",
+        "name": "フレイド・ワンのパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_necroSmnDeathmark": {
+        "extraShortName": "",
+        "shortName": "デスマークのパワーアップ",
+        "name": "デスマークのパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_necroSmnDestroyer": {
+        "extraShortName": "",
+        "shortName": "オフィディアン・デストロイヤーのパワーアップ",
+        "name": "オフィディアン・デストロイヤーのパワーアップ",
+        "title": ""
+    },
+    "powupSummonSpawn_necroSmnSwarm": {
+        "extraShortName": "",
+        "shortName": "スカラベ・スウォームのパワーアップ",
+        "name": "スカラベ・スウォームのパワーアップ",
+        "title": ""
+    },
+    "powupBomb": {
+        "extraShortName": "",
+        "shortName": "ボムパワーアップ",
+        "name": "ボムパワーアップ",
+        "title": ""
+    },
+    "templNpc1Initiate": {
+        "extraShortName": "",
+        "shortName": "イニシエイト",
+        "name": "イニシエイト",
+        "title": ""
+    },
+    "templNpc2Neophyte": {
+        "extraShortName": "",
+        "shortName": "ネオファイト",
+        "name": "ネオファイト",
+        "title": ""
+    },
+    "templNpc3InitiatePyreblaster": {
+        "extraShortName": "",
+        "shortName": "パイアブラスターのイニシエイト",
+        "name": "パイアブラスターのイニシエイト",
+        "title": ""
+    },
+    "templNpc4Aggressor": {
+        "extraShortName": "",
+        "shortName": "アグレッサー",
+        "name": "プライマリス・アグレッサー",
+        "title": ""
+    },
+    "darkaNpc1Infiltrator": {
+        "extraShortName": "",
+        "shortName": "インフィルトレイター",
+        "name": "インフィルトレイター",
+        "title": ""
+    },
+    "darkaNpc2Hellblaster": {
+        "extraShortName": "",
+        "shortName": "ヘルブラスター",
+        "name": "ヘルブラスター",
+        "title": ""
+    },
+    "darkaNpc3Terminator": {
+        "extraShortName": "",
+        "shortName": "デスウィング・ナイト",
+        "name": "デスウィング・ナイト",
+        "title": ""
+    },
+    "darkaNpc4Watcher": {
+        "extraShortName": "監視者",
+        "shortName": "暗闇の監視者",
+        "name": "暗闇の監視者",
+        "title": ""
+    },
+    "darkaBossLion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcMowStormSpeeder": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcAzrael": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcHellblaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcAsmodai": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcCompanion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaNpcSternguard": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossAzraelLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossHellblasterLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossAsmodaiLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossTerminatorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossTerminatorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossCompanionLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossSternguardLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astarCyrus_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousSekhetar_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaSternguard_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodTerminator_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astarEradicator_LHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpc1Bloodletter": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpc2Terminator": {
+        "extraShortName": "",
+        "shortName": "ケイオス・ターミネイター",
+        "name": "ケイオス・ターミネイター",
+        "title": ""
+    },
+    "blackNpc3TraitorGuardsman": {
+        "extraShortName": "",
+        "shortName": "トレイター・ガーズマン",
+        "name": "トレイター・ガーズマン",
+        "title": ""
+    },
+    "blackNpc4Havoc": {
+        "extraShortName": "",
+        "shortName": "ハヴォック",
+        "name": "ハヴォック",
+        "title": ""
+    },
+    "blackNpc4HavocSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpc1Poxwalker": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpc2PlagueMarine": {
+        "extraShortName": "",
+        "shortName": "プレーグマリーン",
+        "name": "プレーグマリーン",
+        "title": ""
+    },
+    "deathNpc2PlagueMarineSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpc3Nurglings": {
+        "extraShortName": "",
+        "shortName": "ナーグリング",
+        "name": "ナーグリング",
+        "title": ""
+    },
+    "deathNpc4BlightlordTerminator": {
+        "extraShortName": "",
+        "shortName": "ブライトロード・ターミネイター",
+        "name": "ブライトロード・ターミネイター",
+        "title": ""
+    },
+    "thousNpc1PinkHorror": {
+        "extraShortName": "",
+        "shortName": "ピンクホラー",
+        "name": "ティーンチのピンクホラー",
+        "title": ""
+    },
+    "thousNpc2Screamer": {
+        "extraShortName": "",
+        "shortName": "スクリーマー",
+        "name": "ティーンチのスクリーマー",
+        "title": ""
+    },
+    "thousNpc3RubricMarine": {
+        "extraShortName": "",
+        "shortName": "ルブリックマリーン",
+        "name": "ルブリックマリーン",
+        "title": ""
+    },
+    "thousNpc3RubricMarineSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpc4Terminator": {
+        "extraShortName": "",
+        "shortName": "スカラベオカルト・ターミネイター",
+        "name": "スカラベオカルト・ターミネイター",
+        "title": ""
+    },
+    "thousBossTzaangor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossTzaangorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossTzaangorCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossTerminatorLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossTerminatorCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossTerminatorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossInfernalMaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossInfernalMasterLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossInfernalMasterSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossInfernalMasterCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossSorcerer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossSorcererLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossSorcererCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossAhriman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossAhrimanLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousBossAhrimanCamp": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcTzaangor": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcTerminator": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcInfernalMaster": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcSorcerer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcAhriman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcSekhetar": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "thousNpcMowDaemonPrince": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "eldarNpc1Guardian": {
+        "extraShortName": "",
+        "shortName": "ガーディアン",
+        "name": "ガーディアン・ディフェンダー",
+        "title": ""
+    },
+    "eldarNpc2Warlock": {
+        "extraShortName": "",
+        "shortName": "ウォーロック",
+        "name": "ウォーロック",
+        "title": ""
+    },
+    "eldarNpc3Harlequin": {
+        "extraShortName": "",
+        "shortName": "ハーレクイン・プレイヤー",
+        "name": "ハーレクイン・トルゥプ・プレイヤー",
+        "title": ""
+    },
+    "eldarNpc4Wraithguard": {
+        "extraShortName": "",
+        "shortName": "レイスガード",
+        "name": "レイスガード",
+        "title": ""
+    },
+    "eldarNpc4WraithguardSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc1Hormagaunt_SyncPvp_Kronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc1Hormagaunt_SyncPvp_Gorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc2RipperSwarm_SyncPvp_Kronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc2RipperSwarm_SyncPvp_Gorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc3Termagant_SyncPvp_Kronos": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc3Termagant_SyncPvp_Gorgon": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossNeurothrope": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossNeurothropeLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossNeurothropeSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossNeurothropeCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcNeurothrope": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcOSNeurothrope": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossTyrantGuard": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossTyrantGuardLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossTyrantGuardCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcTyrantGuard": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcOSTyrantGuard": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossWingedPrime": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossWingedPrimeLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossWingedPrimeLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossWingedPrimeSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossWingedPrimeCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcWingedPrime": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcOSWingedPrime": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcDeathleaper": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcOSDeathleaper": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossDeathleaper": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossDeathleaperLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossDeathleaperCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossDeathleaperSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcParasite": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcOSParasite": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossParasite": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossParasiteLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossParasiteSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossParasiteCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranBossHiveTyrantLeviathan": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossRuststalker": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossRuststalkerLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossRuststalkerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossRuststalkerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossMarshall": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossMarshallLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossMarshallLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossManipulus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossManipulusLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossManipulusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDominus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDominusLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDominusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDestroyer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDestroyerLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDestroyerCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossRuststalkerCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossMarshallCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossManipulusCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDominusCE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossMarshallSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossManipulusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossDominusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecNpc1Vanguard": {
+        "extraShortName": "",
+        "shortName": "スキタリ・ヴァンガード",
+        "name": "スキタリ・ヴァンガード",
+        "title": ""
+    },
+    "admecNpc2Techpriest": {
+        "extraShortName": "",
+        "shortName": "テックプリースト・エンジンシーア",
+        "name": "テックプリースト・エンジンシーア",
+        "title": ""
+    },
+    "admecNpc3Electropriest": {
+        "extraShortName": "",
+        "shortName": "エレクトロ・プリースト",
+        "name": "コーパスカリ・エレクトロ・プリースト",
+        "title": ""
+    },
+    "admecNpc3ElectropriestSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecNpc1VanguardSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "admecBossBelisarius": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astraNpcMowOrdnanceBattery": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "blackNpcMowForgefiend": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpcMowBiovore": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodBossIntercessorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodBossDeathCompanySurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodBossSanguinarySurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodBossMephistonSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodBossDanteSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodBossTerminatorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "bloodNpc1Intercessor": {
+        "extraShortName": "",
+        "shortName": "ジャンプパックインターセッサー",
+        "name": "ジャンプパックインターセッサー",
+        "title": ""
+    },
+    "bloodNpc1IntercessorSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "ultraNpcMoWDreadnought": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpc1Aberrant": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpc2Genestealer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpc3Neophyte": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesDecoy": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpc1FireWarrior": {
+        "extraShortName": "",
+        "shortName": "ファイアウォリアー",
+        "name": "ファイアウォリアー・シャスーラ",
+        "title": ""
+    },
+    "tauNpc2DroneSniper": {
+        "extraShortName": "",
+        "shortName": "スナイパー・ドローン",
+        "name": "MV71スナイパー・ドローン",
+        "title": ""
+    },
+    "tauNpc3DroneShield": {
+        "extraShortName": "",
+        "shortName": "シールド・ドローン",
+        "name": "MV52シールド・ドローン",
+        "title": ""
+    },
+    "tauNpc4DroneCommandLink": {
+        "extraShortName": "",
+        "shortName": "コマンドリンク・ドローン",
+        "name": "MV62コマンドリンク・ドローン",
+        "title": ""
+    },
+    "tauNpc5StealthSuit": {
+        "extraShortName": "",
+        "shortName": "ステルス・バトルスーツ",
+        "name": "XV25ステルス・バトルスーツ",
+        "title": ""
+    },
+    "tauNpc6Carnivore": {
+        "extraShortName": "",
+        "shortName": "クルート",
+        "name": "クルート・カーニヴォア",
+        "title": ""
+    },
+    "tauBossDarkstrider": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossDarkstriderLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossDarkstriderInc": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossAunShi": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossAunShiInc": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossAunShiLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossShadowsun": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossShadowsunInc": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossShadowsunLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossMarksman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossMarksmanLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossMarksmanInc": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossCrisis": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossCrisisLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossCrisisInc": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossFarsight": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossFarsightInc": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossFarsightLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossFarsightSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcMoWBroadside": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcDarkstrider": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcAunShi": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcShadowsun": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcMarksman": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcCrisis": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauNpcFarsight": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tauBossRiptide": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpcMoWCrawler": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpcTyphus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpcBlightlord": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpcRotbone": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpcPutrifier": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathBossMortarion": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "deathNpcBlightbringer": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "tyranNpc6SporeMine": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpcBiophagus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpcMagus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpcPrimus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpcKelermorph": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesNpcPatriarch": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossBiophagus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossBiophagusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossMagus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossMagusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossMagusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossPrimus": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossPrimusLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossKelermorph": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossKelermorphLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossKelermorphSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossPatriarch": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "genesBossPatriarchLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "votanNpc1Ecog": {
+        "extraShortName": "",
+        "shortName": "E-COG",
+        "name": "E-COG",
+        "title": ""
+    },
+    "votanNpc2Steeljack": {
+        "extraShortName": "",
+        "shortName": "アイアンキン・スティールジャック",
+        "name": "アイアンキン・スティールジャック",
+        "title": ""
+    },
+    "astarBossCyrusSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astarBossLysanderSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "astarNpc1HaywireMine": {
+        "extraShortName": "ヘイワイア・マイン",
+        "shortName": "ヘイワイア・マイン",
+        "name": "ヘイワイア・マイン",
+        "title": ""
+    },
+    "spaceBossWulfenSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "spaceBossHoundSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "spaceBossRockfistSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "spaceBossStormcallerSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "spaceBossWolfPriestSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "spaceBossBlackmaneSurv": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    }
+}

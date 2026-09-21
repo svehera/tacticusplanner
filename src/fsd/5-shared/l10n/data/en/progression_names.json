@@ -1,0 +1,33 @@
+{
+    "ranks": {
+        "0": "Stone Rank I",
+        "1": "Stone Rank II",
+        "2": "Stone Rank III",
+        "3": "Iron Rank I",
+        "4": "Iron Rank II",
+        "5": "Iron Rank III",
+        "6": "Bronze Rank I",
+        "7": "Bronze Rank II",
+        "8": "Bronze Rank III",
+        "9": "Silver Rank I",
+        "10": "Silver Rank II",
+        "11": "Silver Rank III",
+        "12": "Gold Rank I",
+        "13": "Gold Rank II",
+        "14": "Gold Rank III",
+        "15": "Diamond Rank I",
+        "16": "Diamond Rank II",
+        "17": "Diamond Rank III",
+        "18": "Adamantine Rank I",
+        "19": "Adamantine Rank II",
+        "20": "Adamantine Rank III"
+    },
+    "rarities": {
+        "Common": "Common",
+        "Uncommon": "Uncommon",
+        "Rare": "Rare",
+        "Epic": "Epic",
+        "Legendary": "Legendary",
+        "Mythic": "Mythic"
+    }
+}
