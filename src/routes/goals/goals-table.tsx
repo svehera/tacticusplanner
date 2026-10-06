@@ -20,13 +20,14 @@ import {
     GripVertical,
     Hourglass,
     Link2,
-    Lock,
+    LockKeyhole,
+    LockKeyholeOpen,
     Pause,
     Pencil,
     Play,
     Trash2,
 } from 'lucide-react';
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -118,6 +119,8 @@ export const GoalsTable: React.FC<Props> = ({
     onMove,
     totalGoals,
 }) => {
+    const [dragEnabled, setDragEnabled] = useState(true);
+
     // All frequently-changing values live in refs so columnDefs can have stable deps and never
     // recompute — which would reset user-resized column widths.
     const gridApiReference = useRef<GridApi | null>(null);
@@ -179,17 +182,20 @@ export const GoalsTable: React.FC<Props> = ({
         }
     }, []);
 
-    const handleRowDragEnd = useCallback((event_: RowDragEndEvent<TypedGoalSelect>) => {
-        // Under an active sort the post-sort node order isn't the user's intended manual order, so
-        // never persist it (ag-grid also suppresses managed drag while sorted — this is a guard).
-        if (sortActiveReference.current) return;
-        const orderedIds: string[] = [];
-        event_.api.forEachNodeAfterFilterAndSort(node => {
-            if (node.data) orderedIds.push(node.data.goalId);
-        });
-        const movedId = event_.node.data?.goalId;
-        if (movedId) onReorderReference.current(orderedIds, movedId);
-    }, []);
+    const handleRowDragEnd = useCallback(
+        (event_: RowDragEndEvent<TypedGoalSelect>) => {
+            // Under an active sort the post-sort node order isn't the user's intended manual order, so
+            // never persist it (ag-grid also suppresses managed drag while sorted — this is a guard).
+            if (!dragEnabled || sortActiveReference.current) return;
+            const orderedIds: string[] = [];
+            event_.api.forEachNodeAfterFilterAndSort(node => {
+                if (node.data) orderedIds.push(node.data.goalId);
+            });
+            const movedId = event_.node.data?.goalId;
+            if (movedId) onReorderReference.current(orderedIds, movedId);
+        },
+        [dragEnabled]
+    );
 
     const handleSortChanged = useCallback((event_: SortChangedEvent) => {
         sortActiveReference.current = event_.api.getColumnState().some(column => !!column.sort);
@@ -207,13 +213,28 @@ export const GoalsTable: React.FC<Props> = ({
             width: 36,
             maxWidth: 36,
             // Drag only reorders in priority order, which only matches the view when unsorted.
-            rowDrag: () => !sortActiveReference.current,
+            rowDrag: () => dragEnabled && !sortActiveReference.current,
             sortable: false,
             suppressNavigable: true,
+            headerComponent: () => (
+                <button
+                    type="button"
+                    title={dragEnabled ? 'Disable row dragging' : 'Enable row dragging'}
+                    aria-label={dragEnabled ? 'Disable row dragging' : 'Enable row dragging'}
+                    aria-pressed={dragEnabled}
+                    onClick={() => setDragEnabled(enabled => !enabled)}
+                    className="flex h-full w-full cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:text-(--fg)">
+                    {dragEnabled ? <LockKeyholeOpen className="size-3.5" /> : <LockKeyhole className="size-3.5" />}
+                </button>
+            ),
             cellRenderer: () =>
-                sortActiveReference.current ? (
+                !dragEnabled || sortActiveReference.current ? (
                     <div
-                        title="Clear the column sort to drag rows. Use the priority arrows to reorder while sorted."
+                        title={
+                            dragEnabled
+                                ? 'Clear the column sort to drag rows. Use the priority arrows to reorder while sorted.'
+                                : 'Row dragging is disabled. Use the header lock to enable it.'
+                        }
                         className="flex h-full cursor-not-allowed items-center justify-center text-(--soft-fg) opacity-20">
                         <GripVertical className="size-4" />
                     </div>
@@ -446,7 +467,7 @@ export const GoalsTable: React.FC<Props> = ({
                             <div className="flex h-full w-full items-center justify-center" tabIndex={0}>
                                 <div className={chipClassName}>
                                     <span className="flex items-center gap-1.5 text-(--warning)">
-                                        <Lock className="size-3.5 shrink-0" />
+                                        <LockKeyhole className="size-3.5 shrink-0" />
                                         {showText && <span className="truncate text-[13px] font-semibold">Locked</span>}
                                     </span>
                                     {onToggleIncludeReference.current && (
@@ -982,7 +1003,7 @@ export const GoalsTable: React.FC<Props> = ({
             ...(variant === 'rank' ? [upgradesCol] : []),
             notesCol,
         ];
-    }, [variant]);
+    }, [dragEnabled, variant]);
 
     const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>): RowStyle | undefined => {
         const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
