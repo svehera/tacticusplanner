@@ -15,7 +15,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_psyker_Interstitial_Description",
                 "eventId": "trait_boost_psyker_tier_high",
-                "rewardProgressId": "hse_trait_boost_flying_tier_high",
+                "rewardProgressId": "hse_trait_boost_tier_high",
                 "theme": "trait_boost_psyker",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 100,
@@ -34,6 +34,19 @@
                         "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_psyker_Description",
                         "gameModeRestrictions": {
                             "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_trait_boost_psyker_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Psyker"]
                         }
                     }
                 ],
@@ -60,7 +73,11 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 30,
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 40,
                     "chestRewardId": "draft_abilityTokensRare:2"
                 },
                 {
@@ -68,76 +85,72 @@
                     "chestRewardId": "draft_abilityTokensEpic"
                 },
                 {
-                    "requiredProgress": 90,
+                    "requiredProgress": 80,
                     "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 120,
-                    "chestRewardId": "draft_abilityTokensRare:3"
+                    "requiredProgress": 105,
+                    "chestRewardId": "draft_abilityTokensUncommon:5"
                 },
                 {
-                    "requiredProgress": 150,
-                    "chestRewardId": "draft_abilityTokensEpic:2"
-                },
-                {
-                    "requiredProgress": 180,
-                    "chestRewardId": "draft_abilityTokensLegendary"
-                },
-                {
-                    "requiredProgress": 210,
+                    "requiredProgress": 135,
                     "chestRewardId": "draft_abilityTokensRare:4"
                 },
                 {
-                    "requiredProgress": 240,
+                    "requiredProgress": 165,
                     "chestRewardId": "draft_abilityTokensEpic:3"
                 },
                 {
-                    "requiredProgress": 270,
+                    "requiredProgress": 195,
                     "chestRewardId": "draft_abilityTokensLegendary:2"
                 },
                 {
-                    "requiredProgress": 300,
+                    "requiredProgress": 230,
+                    "chestRewardId": "draft_abilityTokensUncommon:6"
+                },
+                {
+                    "requiredProgress": 270,
                     "chestRewardId": "draft_abilityTokensRare:5"
                 },
                 {
-                    "requiredProgress": 340,
+                    "requiredProgress": 320,
                     "chestRewardId": "draft_abilityTokensEpic:4"
                 },
                 {
-                    "requiredProgress": 380,
+                    "requiredProgress": 370,
                     "chestRewardId": "draft_abilityTokensLegendary:3"
                 },
                 {
                     "requiredProgress": 420,
-                    "chestRewardId": "draft_abilityTokensRare:6"
-                },
-                {
-                    "requiredProgress": 460,
-                    "chestRewardId": "draft_abilityTokensEpic:5"
-                },
-                {
-                    "requiredProgress": 500,
-                    "chestRewardId": "draft_abilityTokensLegendary:4"
-                },
-                {
-                    "requiredProgress": 540,
-                    "chestRewardId": "draft_abilityTokensMythic"
-                },
-                {
-                    "requiredProgress": 600,
-                    "chestRewardId": "specialSummoningToken"
-                },
-                {
-                    "requiredProgress": 640,
-                    "chestRewardId": "draft_abilityTokensLegendary:5"
-                },
-                {
-                    "requiredProgress": 680,
                     "chestRewardId": "draft_abilityTokensMythic:2"
                 },
                 {
-                    "requiredProgress": 25,
-                    "chestRewardId": "draft_abilityTokensLegendary:2",
+                    "requiredProgress": 470,
+                    "chestRewardId": "draft_abilityTokensUncommon:10"
+                },
+                {
+                    "requiredProgress": 520,
+                    "chestRewardId": "draft_abilityTokensRare:10"
+                },
+                {
+                    "requiredProgress": 570,
+                    "chestRewardId": "draft_abilityTokensEpic:10"
+                },
+                {
+                    "requiredProgress": 645,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 705,
+                    "chestRewardId": "draft_abilityTokensLegendary:10"
+                },
+                {
+                    "requiredProgress": 765,
+                    "chestRewardId": "draft_abilityTokensMythic:5"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "draft_abilityTokensLegendary",
                     "endless": true
                 }
             ],
@@ -171,7 +184,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_high_bundle"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_high_bundle_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -180,7 +193,7 @@
                         "price": 2399,
                         "mercadoId": "offer_02399",
                         "rewards": [
-                            "tieredRewardPoints_trait_boost_psyker_tier_high:125",
+                            "tieredRewardPoints_trait_boost_psyker_tier_high:80",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:500"
@@ -199,20 +212,18 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_high_playmore"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_high_playmore_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00899",
-                        "price": 899,
-                        "mercadoId": "offer_00899",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_trait_boost_psyker_tier_high:80",
+                            "tieredRewardPoints_trait_boost_psyker_tier_high:30",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2",
-                            "stamina:90",
-                            "gems:400",
                             "raidTicket:15"
                         ]
                     }
@@ -229,7 +240,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_high_booster"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_high_booster_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -237,7 +248,7 @@
                         "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
                         "price": 1399,
                         "mercadoId": "offer_01399",
-                        "rewards": ["tieredRewardPoints_trait_boost_psyker_tier_high:150", "gems:1000"]
+                        "rewards": ["tieredRewardPoints_trait_boost_psyker_tier_high:125", "gems:1000"]
                     }
                 }
             },
@@ -245,6 +256,7 @@
                 "<i>Psyker Boost</i> is here",
                 "Earn points by battling with Psykers and claim exclusive rewards!",
                 "All <style=\"Psyker\">Psyker</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "<style=\"Psyker\">Psyker</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
                 "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         },
@@ -262,7 +274,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_psyker_Interstitial_Description",
                 "eventId": "trait_boost_psyker_tier_mid",
-                "rewardProgressId": "hse_trait_boost_flying_tier_mid",
+                "rewardProgressId": "hse_trait_boost_tier_mid",
                 "theme": "trait_boost_psyker",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 60,
@@ -281,6 +293,19 @@
                         "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_psyker_Description",
                         "gameModeRestrictions": {
                             "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_trait_boost_psyker_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Psyker"]
                         }
                     }
                 ],
@@ -368,7 +393,7 @@
                 },
                 {
                     "requiredProgress": 465,
-                    "chestRewardId": "draft_abilityTokensLegendary:3"
+                    "chestRewardId": "draft_abilityTokensLegendary:4"
                 },
                 {
                     "requiredProgress": 525,
@@ -376,15 +401,15 @@
                 },
                 {
                     "requiredProgress": 565,
-                    "chestRewardId": "draft_abilityTokensLegendary:4"
+                    "chestRewardId": "draft_abilityTokensLegendary:6"
                 },
                 {
                     "requiredProgress": 605,
-                    "chestRewardId": "draft_abilityTokensLegendary:5"
+                    "chestRewardId": "draft_abilityTokensLegendary:8"
                 },
                 {
-                    "requiredProgress": 25,
-                    "chestRewardId": "draft_abilityTokensLegendary:2",
+                    "requiredProgress": 40,
+                    "chestRewardId": "draft_abilityTokensLegendary",
                     "endless": true
                 }
             ],
@@ -418,7 +443,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_mid_bundle"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_mid_bundle_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -427,7 +452,7 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_trait_boost_psyker_tier_mid:75",
+                            "tieredRewardPoints_trait_boost_psyker_tier_mid:35",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -446,20 +471,18 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_mid_playmore"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_mid_playmore_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
-                        "price": 799,
-                        "mercadoId": "offer_00799",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_trait_boost_psyker_tier_mid:75",
+                            "tieredRewardPoints_trait_boost_psyker_tier_mid:30",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2",
-                            "stamina:90",
-                            "gems:300",
                             "raidTicket:15"
                         ]
                     }
@@ -476,15 +499,15 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_mid_booster"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_mid_booster_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
-                        "price": 999,
-                        "mercadoId": "offer_00999",
-                        "rewards": ["tieredRewardPoints_trait_boost_psyker_tier_mid:100", "gems:800"]
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01399",
+                        "price": 1399,
+                        "mercadoId": "offer_01399",
+                        "rewards": ["tieredRewardPoints_trait_boost_psyker_tier_mid:125", "gems:1000"]
                     }
                 }
             },
@@ -492,6 +515,7 @@
                 "<i>Psyker Boost</i> is here",
                 "Earn points by battling with Psykers and claim exclusive rewards!",
                 "All <style=\"Psyker\">Psyker</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "<style=\"Psyker\">Psyker</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
                 "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         },
@@ -509,7 +533,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_psyker_Interstitial_Description",
                 "eventId": "trait_boost_psyker_tier_low",
-                "rewardProgressId": "hse_trait_boost_flying_tier_low",
+                "rewardProgressId": "hse_trait_boost_tier_low",
                 "theme": "trait_boost_psyker",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 20,
@@ -528,6 +552,19 @@
                         "locaKey": "HomeScreenEvents/Modifier_battleEnvironmentAbility_statBoost_psyker_Description",
                         "gameModeRestrictions": {
                             "allowed": ["PvP"]
+                        }
+                    },
+                    {
+                        "type": "unitXp",
+                        "operator": "multiply",
+                        "modifier": 300,
+                        "percentageModifier": true,
+                        "locaKey": "HomeScreenEvents/Modifier_unitxp_trait_boost_psyker_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "allowed": ["Psyker"]
                         }
                     }
                 ],
@@ -555,7 +592,7 @@
             "tieredProgressRewards": [
                 {
                     "requiredProgress": 10,
-                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                    "chestRewardId": "draft_abilityTokensCommon"
                 },
                 {
                     "requiredProgress": 20,
@@ -623,15 +660,15 @@
                 },
                 {
                     "requiredProgress": 325,
-                    "chestRewardId": "draft_abilityTokensRare:4"
+                    "chestRewardId": "draft_abilityTokensRare:5"
                 },
                 {
                     "requiredProgress": 345,
-                    "chestRewardId": "draft_abilityTokensEpic:3"
+                    "chestRewardId": "draft_abilityTokensEpic:5"
                 },
                 {
                     "requiredProgress": 20,
-                    "chestRewardId": "draft_abilityTokensRare:2",
+                    "chestRewardId": "draft_abilityTokensRare",
                     "endless": true
                 }
             ],
@@ -665,7 +702,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_low_bundle"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_low_bundle_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -674,7 +711,7 @@
                         "price": 1999,
                         "mercadoId": "offer_01999",
                         "rewards": [
-                            "tieredRewardPoints_trait_boost_psyker_tier_low:75",
+                            "tieredRewardPoints_trait_boost_psyker_tier_low:35",
                             "summoningToken:5",
                             "specialSummoningToken:5",
                             "gems:200"
@@ -693,20 +730,18 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_low_playmore"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_low_playmore_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
                         "nativeStoreProductType": "Consumable",
-                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
-                        "price": 799,
-                        "mercadoId": "offer_00799",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                        "price": 999,
+                        "mercadoId": "offer_00999",
                         "rewards": [
-                            "tieredRewardPoints_trait_boost_psyker_tier_low:75",
+                            "tieredRewardPoints_trait_boost_psyker_tier_low:30",
                             "stamina_waves:2",
                             "stamina_treasureBeach:2",
-                            "stamina:90",
-                            "gems:300",
                             "raidTicket:15"
                         ]
                     }
@@ -723,7 +758,7 @@
                         "originalPriceMercadoId": "",
                         "visualId": "template_offer",
                         "segment": "specialOffer",
-                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_low_booster"
+                        "realMoneyProductId": "product_homescreen_event_trait_boost_psyker_tier_low_booster_v2"
                     },
                     "realMoneyProduct": {
                         "category": "HSE Offers",
@@ -731,7 +766,7 @@
                         "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00599",
                         "price": 599,
                         "mercadoId": "offer_00599",
-                        "rewards": ["tieredRewardPoints_trait_boost_psyker_tier_low:100", "gems:400"]
+                        "rewards": ["tieredRewardPoints_trait_boost_psyker_tier_low:85", "gems:400"]
                     }
                 }
             },
@@ -739,6 +774,7 @@
                 "<i>Psyker Boost</i> is here",
                 "Earn points by battling with Psykers and claim exclusive rewards!",
                 "All <style=\"Psyker\">Psyker</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
+                "<style=\"Psyker\">Psyker</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
                 "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         }

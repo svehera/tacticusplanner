@@ -227,6 +227,12 @@
         "name": "Gulgortz Bulldoza",
         "title": "Kapoguerra in megarmatura"
     },
+    "orksWeirdboy": {
+        "extraShortName": "ZputaZap",
+        "shortName": "ZputaZap",
+        "name": "Grubak ZputaZap",
+        "title": "Tipo Ztrano"
+    },
     "templSwordBrother": {
         "extraShortName": "Deusvult",
         "shortName": "Confratello della Spada Deusvult",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Ûthar",
-        "shortName": "Ûthar Il Predestinato\n",
+        "shortName": "Ûthar Il Predestinato",
         "name": "Ûthar Il Predestinato",
         "title": "Kâhl supremo"
     },
@@ -700,5 +706,11 @@
         "shortName": "Nubari",
         "name": "Nubari Shal'Dar",
         "title": "Sergente Sterminatore "
+    },
+    "lostaBile": {
+        "extraShortName": "Fabius Bile",
+        "shortName": "Fabius Bile",
+        "name": "Fabius Bile",
+        "title": "Padre dei Cloni. Primogenitore. Ragno."
     }
 }

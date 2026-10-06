@@ -154,23 +154,11 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 250,
-                    "chestRewardId": "itemsChaosEpic"
-                },
-                {
                     "requiredProgress": 500,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
-                    "requiredProgress": 750,
-                    "chestRewardId": "itemsChaosEpic"
-                },
-                {
                     "requiredProgress": 1000,
-                    "chestRewardId": "itemsChaosEpic"
-                },
-                {
-                    "requiredProgress": 1250,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
@@ -179,35 +167,47 @@
                 },
                 {
                     "requiredProgress": 2000,
-                    "chestRewardId": "summoningToken"
+                    "chestRewardId": "itemsChaosEpic"
                 },
                 {
                     "requiredProgress": 2500,
-                    "chestRewardId": "itemsChaosLegendary"
+                    "chestRewardId": "itemsChaosEpic"
                 },
                 {
                     "requiredProgress": 3000,
+                    "chestRewardId": "itemsChaosEpic"
+                },
+                {
+                    "requiredProgress": 3750,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 4600,
                     "chestRewardId": "itemsChaosLegendary"
                 },
                 {
-                    "requiredProgress": 3600,
+                    "requiredProgress": 5450,
                     "chestRewardId": "itemsChaosLegendary"
                 },
                 {
-                    "requiredProgress": 4300,
+                    "requiredProgress": 6300,
                     "chestRewardId": "itemsChaosLegendary"
                 },
                 {
-                    "requiredProgress": 5100,
+                    "requiredProgress": 7150,
+                    "chestRewardId": "itemsChaosLegendary"
+                },
+                {
+                    "requiredProgress": 8050,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 6000,
+                    "requiredProgress": 9000,
                     "chestRewardId": "itemsChaosMythic"
                 },
                 {
-                    "requiredProgress": 7000,
-                    "chestRewardId": "R_Block_DaemonfleshPlate"
+                    "requiredProgress": 10000,
+                    "chestRewardId": "R_Booster_Crit_TalismanOfRage"
                 },
                 {
                     "requiredProgress": 1000,
@@ -599,35 +599,35 @@
                     "chestRewardId": "itemsChaosRare"
                 },
                 {
-                    "requiredProgress": 1700,
+                    "requiredProgress": 1600,
                     "chestRewardId": "summoningToken"
                 },
                 {
-                    "requiredProgress": 2250,
+                    "requiredProgress": 2150,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
-                    "requiredProgress": 2850,
+                    "requiredProgress": 2750,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
-                    "requiredProgress": 3500,
+                    "requiredProgress": 3400,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
-                    "requiredProgress": 4200,
+                    "requiredProgress": 4100,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
-                    "requiredProgress": 4950,
+                    "requiredProgress": 4850,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 5750,
+                    "requiredProgress": 5650,
                     "chestRewardId": "itemsChaosLegendary"
                 },
                 {
-                    "requiredProgress": 6650,
+                    "requiredProgress": 6550,
                     "chestRewardId": "itemsChaosLegendary"
                 },
                 {
@@ -1020,35 +1020,35 @@
                     "chestRewardId": "itemsChaosUncommon"
                 },
                 {
-                    "requiredProgress": 1650,
+                    "requiredProgress": 1600,
                     "chestRewardId": "summoningToken"
                 },
                 {
-                    "requiredProgress": 2150,
+                    "requiredProgress": 2100,
                     "chestRewardId": "itemsChaosRare"
                 },
                 {
-                    "requiredProgress": 2700,
+                    "requiredProgress": 2650,
                     "chestRewardId": "itemsChaosRare"
                 },
                 {
-                    "requiredProgress": 3300,
+                    "requiredProgress": 3250,
                     "chestRewardId": "itemsChaosRare"
                 },
                 {
-                    "requiredProgress": 3950,
+                    "requiredProgress": 3900,
                     "chestRewardId": "itemsChaosRare"
                 },
                 {
-                    "requiredProgress": 4650,
+                    "requiredProgress": 4600,
                     "chestRewardId": "specialSummoningToken"
                 },
                 {
-                    "requiredProgress": 5400,
+                    "requiredProgress": 5350,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {
-                    "requiredProgress": 6200,
+                    "requiredProgress": 6150,
                     "chestRewardId": "itemsChaosEpic"
                 },
                 {

@@ -1687,6 +1687,28 @@
             }
         ]
     },
+    "upgHpE144C": {
+        "material": "Symbol of Chaos",
+        "snowprintId": "upgHpE144C",
+        "rarity": "Epic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpE144C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpR029",
+                "count": 9
+            },
+            {
+                "material": "upgDmgR038",
+                "count": 9
+            },
+            {
+                "material": "upgArmR023",
+                "count": 9
+            }
+        ]
+    },
     "upgHpL001C": {
         "material": "Optimal Bionic Enhancement",
         "snowprintId": "upgHpL001C",
@@ -3489,6 +3511,28 @@
             },
             {
                 "material": "upgHpE143C",
+                "count": 1
+            }
+        ]
+    },
+    "upgHpM144C": {
+        "material": "Grand Symbol of Chaos",
+        "snowprintId": "upgHpM144C",
+        "rarity": "Mythic",
+        "stat": "Health",
+        "icon": "snowprint_assets/upgrade_materials/ui_icon_upgrade_upgHpM144C.png",
+        "craftable": true,
+        "recipe": [
+            {
+                "material": "upgHpM002",
+                "count": 6
+            },
+            {
+                "material": "upgHpL103",
+                "count": 8
+            },
+            {
+                "material": "upgHpE144C",
                 "count": 1
             }
         ]

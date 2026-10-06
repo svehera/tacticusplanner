@@ -99,7 +99,7 @@
                     "lockId": "lock_daily_deals_character_rotation_guild_next"
                 },
                 "cronSchedule": "0 0 0 ? * SUN *",
-                "reward": "shards_spaceWolfPriest:5",
+                "reward": "shards_custoKyrus:5",
                 "maxPurchases": "4",
                 "cost": {
                     "type": "guildCredits",

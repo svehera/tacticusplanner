@@ -21,10 +21,12 @@
     "eventStandard4": "Guarda da Morte Padrão",
     "eventStandard5": "Adepta Sororitas Padrão",
     "eventStandard6": "Dark Angels Padrão",
+    "eventStandard7": "",
     "eventExtremis1": "Adeptus Mechanicus Extremis",
     "eventExtremis2": "Tirânides Extremis",
     "eventExtremis3": "Império T'au Extremis",
     "eventExtremis4": "Guarda da Morte Extremis",
     "eventExtremis5": "Adepta Sororitas Extremis",
-    "eventExtremis6": "Dark Angels Extremis"
+    "eventExtremis6": "Dark Angels Extremis",
+    "eventExtremis7": ""
 }

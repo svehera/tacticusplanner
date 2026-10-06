@@ -84,6 +84,12 @@
         "description": "For attacks with <style=\"Stat_Range\">range 3</style> or more, has <style=\"Stat_Hits\">+{[extraHit]} hits</style> if the target is at <style=\"Stat_Range\">range 2</style>."
     },
     {
+        "id": "DeathToTheFalseEmperor",
+        "name": "Let the Galaxy Burn",
+        "styledName": "<style=\"Death_To_The_False_Emperor\">Let the Galaxy Burn</style>",
+        "description": "Whenever attacking an enemy, there’s a <style=\"Stat_Chance\">50% chance</style> that one additional <style=\"Stat_Hits\">hit</style> is scored against that unit, or a unit adjacent to it, if that unit is not <style=\"Aliance_Chaos\">Chaos</style>. This applies regardless of which side the unit is on."
+    },
+    {
         "id": "Diminutive",
         "name": "Diminutive",
         "styledName": "<style=\"Diminutive\">Diminutive</style>",
@@ -297,7 +303,7 @@
         "id": "TeleportStrike",
         "name": "Deep Strike",
         "styledName": "<style=\"Teleport_Strike\">Deep Strike</style>",
-        "description": "This unit starts the battle in Deep Strike. \n\nUnits in Deep Strike can move to any free hex on the battlefield that is not adjacent to an enemy, or they can move normally from their current position. They cannot be targeted or damaged until they have taken an action or ended their turn."
+        "description": "This unit starts the battle in Deep Strike. Units in Deep Strike can move to any free hex on the battlefield that is not adjacent to an enemy, but then cannot perform ranged attacks until the end of their turn, or they can move normally from their current position. Units in Deep Strike cannot be targeted or damaged until they have taken an action or ended their turn."
     },
     {
         "id": "TerminatorArmour",

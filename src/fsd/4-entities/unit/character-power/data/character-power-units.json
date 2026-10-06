@@ -3066,7 +3066,6 @@
             "FactionId": "Orks",
             "GrandAllianceId": "Xenos",
             "BaseRarity": "Epic",
-            "powerMultiplier": 92,
             "Movement": 3,
             "weapons": [
                 {
@@ -3139,6 +3138,88 @@
                 [250, 250, 70, 60, 70, 60],
                 [269, 230, 70, 60, 70, 60],
                 [222, 278, 58, 72, 58, 72]
+            ]
+        },
+        "orksWeirdboy": {
+            "name": "Zapspitta",
+            "FactionId": "Orks",
+            "GrandAllianceId": "Xenos",
+            "BaseRarity": "Rare",
+            "powerMultiplier": 81,
+            "Movement": 3,
+            "weapons": [
+                {
+                    "hits": 3,
+                    "DamageProfile": "Psychic"
+                },
+                {
+                    "hits": 2,
+                    "DamageProfile": "Psychic",
+                    "Range": 2
+                }
+            ],
+            "stats": {
+                "Health": 100,
+                "Damage": 12,
+                "FixedArmor": 13,
+                "ProgressionIndex": 6
+            },
+            "traits": ["Hero", "GetStuckIn", "Psyker", "Explodes"],
+            "activeAbilities": ["PowerVomit"],
+            "passiveAbilities": ["WaaaghEnergy"],
+            "itemSlots": ["I_Crit", "I_Defensive", "I_Booster_Crit"],
+            "itemSlotsRelic": [0],
+            "eligibilityRequirements": {
+                "canDropIfHeroUnlocked": true,
+                "canDropIfHeroNotUnlocked": true,
+                "timestampIfHeroUnlocked": 1793577600000,
+                "timestampIfHeroNotUnlocked": 1795564800000
+            },
+            "releaseStatus": "1792022400000",
+            "unlockQuestIds": ["hero_orksWeirdboy_01"],
+            "upgrades": [
+                ["upgHpC015", "upgHpC008", "upgDmgC009", "upgDmgC014", "upgArmC004", "upgArmC012"],
+                ["upgHpC001", "upgHpC015", "upgDmgU012", "upgDmgU016C", "upgArmC012", "upgArmC006"],
+                ["upgHpU001", "upgHpU018C", "upgDmgC013", "upgDmgC003", "upgArmU008", "upgArmU002"],
+                ["upgHpU018C", "upgHpU016", "upgDmgU012", "upgDmgU014", "upgArmU002", "upgArmU003C"],
+                ["upgHpU001", "upgHpR016C", "upgDmgU018C", "upgDmgU019", "upgArmR006", "upgArmU013"],
+                ["upgHpR003C", "upgHpU007", "upgDmgR026", "upgDmgR012C", "upgArmU003C", "upgArmR010"],
+                ["upgHpR010", "upgHpR014", "upgDmgR13C", "upgDmgR006", "upgArmR007C", "upgArmR008C"],
+                ["upgHpE005C", "upgHpR013C", "upgDmgR006", "upgDmgE009C", "upgArmR026", "upgArmR013C"],
+                ["upgHpR019", "upgHpE007C", "upgDmgE026C", "upgDmgR016C", "upgArmE026C", "upgArmE009"],
+                ["upgHpE005C", "upgHpE015", "upgDmgE026C", "upgDmgE011", "upgArmE026C", "upgArmE002C"],
+                ["upgHpL106", "upgHpE014C", "upgDmgL026C", "upgDmgE009C", "upgArmE026C", "upgArmE012C"],
+                ["upgHpE005C", "upgHpL011C", "upgDmgE026C", "upgDmgL016C", "upgArmL202", "upgArmL002C"],
+                ["upgHpL006C", "upgHpL009C", "upgDmgL202", "upgDmgL009C", "upgArmL026C", "upgArmL008C"],
+                ["upgHpL126C", "upgHpL014C", "upgDmgL026C", "upgDmgL016C", "upgArmL026C", "upgArmL011C"],
+                ["upgHpL006C", "upgHpL009C", "upgDmgL126C", "upgDmgL008C", "upgArmL126C", "upgArmL008C"],
+                ["upgHpL126C", "upgHpL017C", "upgDmgL126C", "upgDmgL006C", "upgArmL126C", "upgArmL002C"],
+                ["upgHpL126C", "upgHpL211C", "upgDmgL126C", "upgDmgL211C", "upgArmL126C", "upgArmL211C"],
+                ["upgHpL126C", "upgHpL211C", "upgDmgM211C", "upgDmgL211C", "upgArmM213C", "upgArmL211C"],
+                ["upgHpM126C", "upgHpL211C", "upgDmgM211C", "upgDmgL211C", "upgArmM214C", "upgArmL211C"],
+                ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
+            ],
+            "upgradesStatIncrease": [
+                [13, 13, 2, 2, 2, 2],
+                [16, 16, 1, 2, 2, 2],
+                [15, 23, 3, 3, 3, 3],
+                [30, 20, 2, 2, 2, 3],
+                [21, 41, 5, 3, 5, 3],
+                [51, 26, 4, 5, 5, 5],
+                [49, 49, 7, 5, 7, 7],
+                [67, 54, 5, 9, 6, 8],
+                [57, 95, 11, 8, 11, 9],
+                [106, 84, 13, 10, 13, 13],
+                [120, 120, 15, 13, 15, 15],
+                [135, 162, 16, 20, 18, 21],
+                [187, 187, 20, 25, 24, 24],
+                [234, 234, 28, 28, 31, 31],
+                [293, 293, 35, 35, 38, 38],
+                [367, 367, 44, 44, 48, 48],
+                [459, 459, 56, 56, 59, 59],
+                [250, 250, 32, 27, 35, 30],
+                [269, 231, 32, 28, 35, 30],
+                [222, 278, 27, 33, 29, 36]
             ]
         },
         "orksRukkatrukk": {
@@ -4011,8 +4092,8 @@
             "eligibilityRequirements": {
                 "canDropIfHeroUnlocked": true,
                 "canDropIfHeroNotUnlocked": true,
-                "timestampIfHeroUnlocked": 1792454400000,
-                "timestampIfHeroNotUnlocked": 1798502400000
+                "timestampIfHeroUnlocked": 1798545600000,
+                "timestampIfHeroNotUnlocked": 1798545600000
             },
             "releaseStatus": "1785974400000",
             "unlockQuestIds": ["hero_eldarLhykhis_01"],
@@ -5043,7 +5124,7 @@
             "FactionId": "ThousandSons",
             "GrandAllianceId": "Chaos",
             "BaseRarity": "Common",
-            "powerMultiplier": 111,
+            "powerMultiplier": 107,
             "Movement": 4,
             "weapons": [
                 {
@@ -5057,7 +5138,7 @@
                 }
             ],
             "stats": {
-                "Health": 65,
+                "Health": 75,
                 "Damage": 49,
                 "FixedArmor": 14,
                 "ProgressionIndex": 0
@@ -5066,7 +5147,7 @@
             "activeAbilities": ["SorcerousFacade"],
             "passiveAbilities": ["RealityUnbound"],
             "itemSlots": ["I_Crit", "I_Defensive", "I_Booster_Crit"],
-            "itemSlotsRelic": [0],
+            "itemSlotsRelic": [1],
             "eligibilityRequirements": {
                 "canDropIfHeroUnlocked": true,
                 "canDropIfHeroNotUnlocked": true,
@@ -5101,26 +5182,26 @@
                 ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
             ],
             "upgradesStatIncrease": [
-                [8, 8, 6, 6, 2, 2],
-                [11, 11, 6, 10, 2, 2],
-                [10, 15, 10, 10, 3, 3],
-                [19, 13, 12, 12, 2, 4],
-                [13, 27, 18, 12, 5, 4],
-                [33, 17, 16, 22, 6, 6],
-                [32, 32, 27, 20, 7, 7],
-                [43, 35, 23, 38, 7, 9],
-                [37, 62, 41, 32, 12, 9],
-                [69, 55, 52, 42, 13, 13],
-                [78, 78, 64, 53, 15, 19],
-                [88, 105, 66, 80, 19, 23],
-                [122, 122, 83, 100, 26, 26],
-                [152, 152, 115, 115, 33, 33],
-                [190, 190, 143, 143, 41, 41],
-                [239, 239, 180, 180, 51, 51],
-                [298, 298, 225, 225, 65, 65],
-                [163, 163, 132, 113, 37, 32],
-                [174, 150, 132, 113, 38, 32],
-                [144, 181, 109, 136, 31, 39]
+                [10, 10, 6, 6, 2, 2],
+                [12, 12, 6, 10, 2, 2],
+                [11, 17, 10, 10, 3, 3],
+                [22, 15, 12, 12, 2, 4],
+                [16, 31, 18, 12, 5, 4],
+                [39, 19, 16, 22, 6, 6],
+                [37, 37, 27, 20, 7, 7],
+                [50, 40, 23, 38, 7, 9],
+                [43, 71, 41, 32, 12, 9],
+                [79, 64, 52, 42, 13, 13],
+                [90, 90, 64, 53, 15, 19],
+                [101, 122, 66, 80, 19, 23],
+                [140, 140, 83, 100, 26, 26],
+                [176, 176, 115, 115, 33, 33],
+                [219, 219, 143, 143, 41, 41],
+                [276, 276, 180, 180, 51, 51],
+                [344, 344, 225, 225, 65, 65],
+                [187, 187, 132, 113, 37, 32],
+                [202, 173, 132, 113, 38, 32],
+                [167, 208, 109, 136, 31, 39]
             ]
         },
         "thousTerminator": {
@@ -5494,11 +5575,9 @@
             "itemSlotsRelic": [1],
             "eligibilityRequirements": {
                 "canDropIfHeroUnlocked": true,
-                "canDropIfHeroNotUnlocked": true,
-                "timestampIfHeroUnlocked": 1787529600000,
-                "timestampIfHeroNotUnlocked": 1789516800000
+                "canDropIfHeroNotUnlocked": true
             },
-            "releaseStatus": "1785974400000",
+            "releaseStatus": "released",
             "unlockQuestIds": ["hero_thousSekhetar_01"],
             "upgrades": [
                 ["upgHpC002", "upgHpC002", "upgDmgC004", "upgDmgC014", "upgArmC003", "upgArmC013"],
@@ -5877,8 +5956,8 @@
             "name": "Azrael",
             "FactionId": "DarkAngels",
             "GrandAllianceId": "Imperial",
-            "BaseRarity": "Epic",
-            "powerMultiplier": 84,
+            "BaseRarity": "Legendary",
+            "powerMultiplier": 69,
             "Movement": 3,
             "weapons": [
                 {
@@ -5886,7 +5965,7 @@
                     "DamageProfile": "Power"
                 },
                 {
-                    "hits": 1,
+                    "hits": 2,
                     "DamageProfile": "Plasma",
                     "Range": 2
                 }
@@ -5895,13 +5974,13 @@
                 "Health": 95,
                 "Damage": 28,
                 "FixedArmor": 24,
-                "ProgressionIndex": 9
+                "ProgressionIndex": 12
             },
             "traits": ["Hero", "FinalJustice", "Overwatch"],
             "activeAbilities": ["DarkTalonStrike"],
-            "passiveAbilities": ["LionHelm"],
+            "passiveAbilities": ["MasterfulTactician"],
             "itemSlots": ["I_Crit", "I_Block", "I_Booster_Block"],
-            "itemSlotsRelic": [0],
+            "itemSlotsRelic": [2],
             "eligibilityRequirements": {
                 "canDropIfHeroUnlocked": true,
                 "canDropIfHeroNotUnlocked": true
@@ -9534,6 +9613,87 @@
                 [225, 225, 64, 55, 48, 42],
                 [242, 208, 65, 55, 48, 42],
                 [200, 249, 53, 67, 40, 50]
+            ]
+        },
+        "lostaBile": {
+            "name": "Fabius Bile",
+            "FactionId": "TheLostAndTheDamned",
+            "Subfaction": "CreationsOfBile",
+            "GrandAllianceId": "Chaos",
+            "BaseRarity": "Legendary",
+            "powerMultiplier": 94,
+            "Movement": 3,
+            "weapons": [
+                {
+                    "hits": 3,
+                    "DamageProfile": "Physical"
+                },
+                {
+                    "hits": 1,
+                    "DamageProfile": "Toxic",
+                    "Range": 2
+                }
+            ],
+            "stats": {
+                "Health": 90,
+                "Damage": 33,
+                "FixedArmor": 19,
+                "ProgressionIndex": 12
+            },
+            "traits": ["Hero", "Healer", "Resilient"],
+            "activeAbilities": ["PrimeTestSubject"],
+            "passiveAbilities": ["DiabolicRegeneration"],
+            "itemSlots": ["I_Crit", "I_Defensive", "I_Booster_Crit"],
+            "itemSlotsRelic": [0],
+            "eligibilityRequirements": {
+                "canDropIfHeroUnlocked": false,
+                "canDropIfHeroNotUnlocked": false
+            },
+            "releaseStatus": "1793664000000",
+            "unlockQuestIds": ["hero_lostaBile_01"],
+            "upgrades": [
+                ["upgHpC007", "upgHpC010", "upgDmgC009", "upgDmgC014", "upgArmC003", "upgArmC013"],
+                ["upgHpC014", "upgHpC002", "upgDmgU012", "upgDmgU016C", "upgArmC013", "upgArmC006"],
+                ["upgHpU014", "upgHpU004C", "upgDmgC008", "upgDmgC003", "upgArmU005", "upgArmU009"],
+                ["upgHpU005C", "upgHpU017", "upgDmgU012", "upgDmgU014", "upgArmU009", "upgArmU010C"],
+                ["upgHpU014", "upgHpR017C", "upgDmgU008C", "upgDmgU019", "upgArmR005", "upgArmU013"],
+                ["upgHpR012C", "upgHpU009", "upgDmgR039", "upgDmgR012C", "upgArmU010C", "upgArmR010"],
+                ["upgHpR039", "upgHpR008", "upgDmgR14C", "upgDmgR003", "upgArmR003C", "upgArmR012C"],
+                ["upgHpE039C", "upgHpR004C", "upgDmgR005", "upgDmgE009C", "upgArmR023", "upgArmR013C"],
+                ["upgHpR008", "upgHpE001C", "upgDmgE039C", "upgDmgR016C", "upgArmE023C", "upgArmE009"],
+                ["upgHpE039C", "upgHpE017", "upgDmgE039C", "upgDmgE011", "upgArmE023C", "upgArmE004C"],
+                ["upgHpL103", "upgHpE008C", "upgDmgL039C", "upgDmgE009C", "upgArmE023C", "upgArmE006C"],
+                ["upgHpE039C", "upgHpL017C", "upgDmgE039C", "upgDmgL016C", "upgArmL202", "upgArmL004C"],
+                ["upgHpL039C", "upgHpL001C", "upgDmgL003", "upgDmgL009C", "upgArmL023C", "upgArmL006C"],
+                ["upgHpL123C", "upgHpL012C", "upgDmgL039C", "upgDmgL016C", "upgArmL023C", "upgArmL011C"],
+                ["upgHpL039C", "upgHpL011C", "upgDmgL139C", "upgDmgL010C", "upgArmL139C", "upgArmL006C"],
+                ["upgHpL123C", "upgHpL013C", "upgDmgL139C", "upgDmgL006C", "upgArmL139C", "upgArmL004C"],
+                ["upgHpL123C", "upgHpL211C", "upgDmgL139C", "upgDmgL211C", "upgArmL139C", "upgArmL211C"],
+                ["upgHpL123C", "upgHpL211C", "upgDmgM211C", "upgDmgL211C", "upgArmM213C", "upgArmL211C"],
+                ["upgHpM144C", "upgHpL211C", "upgDmgM211C", "upgDmgL211C", "upgArmM214C", "upgArmL211C"],
+                ["upgHpECS", "upgHpCS", "upgDmgECS", "upgDmgCS", "upgArmECS", "upgArmCS"]
+            ],
+            "upgradesStatIncrease": [
+                [12, 12, 4, 4, 3, 3],
+                [14, 14, 4, 7, 3, 3],
+                [14, 21, 7, 7, 3, 3],
+                [26, 18, 8, 8, 4, 6],
+                [19, 37, 12, 8, 7, 4],
+                [47, 23, 11, 14, 8, 8],
+                [44, 44, 18, 14, 9, 9],
+                [60, 48, 15, 25, 10, 13],
+                [51, 86, 28, 22, 16, 13],
+                [96, 76, 35, 28, 18, 18],
+                [107, 107, 43, 36, 23, 23],
+                [122, 147, 45, 54, 25, 31],
+                [168, 168, 56, 67, 36, 36],
+                [211, 211, 77, 77, 44, 44],
+                [264, 264, 97, 97, 56, 56],
+                [330, 330, 121, 121, 70, 70],
+                [413, 413, 152, 152, 87, 87],
+                [225, 225, 88, 76, 51, 43],
+                [242, 208, 89, 76, 51, 44],
+                [200, 249, 73, 92, 42, 53]
             ]
         }
     },
@@ -13240,6 +13400,213 @@
                     "heroAscensionOrbMythic": 25
                 }
             }
+        ],
+        "lostaBile": [
+            {
+                "stars": 0,
+                "rarity": "Common",
+                "costs": {
+                    "shards": 40
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 1,
+                "rarity": "Common",
+                "costs": {
+                    "shards": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 2,
+                "rarity": "Common",
+                "costs": {
+                    "shards": 15
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 2,
+                "rarity": "Uncommon",
+                "costs": {
+                    "shards": 15,
+                    "heroAscensionOrbUncommon": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 3,
+                "rarity": "Uncommon",
+                "costs": {
+                    "shards": 15
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 4,
+                "rarity": "Uncommon",
+                "costs": {
+                    "shards": 15
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 4,
+                "rarity": "Rare",
+                "costs": {
+                    "shards": 20,
+                    "heroAscensionOrbRare": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 5,
+                "rarity": "Rare",
+                "costs": {
+                    "shards": 30
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 6,
+                "rarity": "Rare",
+                "costs": {
+                    "shards": 40
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 6,
+                "rarity": "Epic",
+                "costs": {
+                    "shards": 50,
+                    "heroAscensionOrbEpic": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 7,
+                "rarity": "Epic",
+                "costs": {
+                    "shards": 65
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 8,
+                "rarity": "Epic",
+                "costs": {
+                    "shards": 85
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 0
+                }
+            },
+            {
+                "stars": 8,
+                "rarity": "Legendary",
+                "costs": {
+                    "shards": 100,
+                    "heroAscensionOrbLegendary": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 400
+                }
+            },
+            {
+                "stars": 9,
+                "rarity": "Legendary",
+                "costs": {
+                    "shards": 150,
+                    "heroAscensionOrbLegendary": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 120
+                }
+            },
+            {
+                "stars": 10,
+                "rarity": "Legendary",
+                "costs": {
+                    "shards": 250,
+                    "heroAscensionOrbLegendary": 15
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 180
+                }
+            },
+            {
+                "stars": 11,
+                "rarity": "Legendary",
+                "costs": {
+                    "shards": 500,
+                    "heroAscensionOrbLegendary": 20
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 200
+                }
+            },
+            {
+                "stars": 11,
+                "rarity": "Mythic",
+                "costs": {
+                    "mythicShards": 20,
+                    "heroAscensionOrbMythic": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 250
+                }
+            },
+            {
+                "stars": 12,
+                "rarity": "Mythic",
+                "costs": {
+                    "mythicShards": 30,
+                    "heroAscensionOrbMythic": 10
+                },
+                "ascensionCosts": {
+                    "legendaryEventShards": 150
+                }
+            },
+            {
+                "stars": 13,
+                "rarity": "Mythic",
+                "costs": {
+                    "mythicShards": 50,
+                    "heroAscensionOrbMythic": 15
+                }
+            },
+            {
+                "stars": 14,
+                "rarity": "Mythic",
+                "costs": {
+                    "mythicShards": 100,
+                    "heroAscensionOrbMythic": 25
+                }
+            }
         ]
     },
     "heroProgressionStepsMoW": [
@@ -13931,6 +14298,12 @@
         "RunsAround": {
             "baseMultiplier": 0
         },
+        "PowerVomit": {
+            "baseMultiplier": 100
+        },
+        "WaaaghEnergy": {
+            "baseMultiplier": 100
+        },
         "DevoutPush": {
             "baseMultiplier": 55
         },
@@ -14264,6 +14637,9 @@
         "ScreamerInvocation": {
             "baseMultiplier": 100
         },
+        "TwistedMirage": {
+            "baseMultiplier": 100
+        },
         "GreatFrostAxe": {
             "baseMultiplier": 130
         },
@@ -14320,6 +14696,9 @@
         },
         "LionHelm": {
             "baseMultiplier": 80
+        },
+        "MasterfulTactician": {
+            "baseMultiplier": 100
         },
         "Supercharge": {
             "baseMultiplier": 95
@@ -14505,6 +14884,9 @@
             "baseMultiplier": 100
         },
         "BeaconOfRage": {
+            "baseMultiplier": 100
+        },
+        "BloodSurge": {
             "baseMultiplier": 100
         },
         "EchoesFromTheWarp": {
@@ -15101,6 +15483,15 @@
         "Helspear": {
             "baseMultiplier": 100
         },
+        "LionHelmRelic": {
+            "baseMultiplier": 100
+        },
+        "Fidelity": {
+            "baseMultiplier": 100
+        },
+        "Thrydderghyre": {
+            "baseMultiplier": 100
+        },
         "BlightedLand": {
             "baseMultiplier": 100
         },
@@ -15231,6 +15622,12 @@
             "baseMultiplier": 100
         },
         "CrucibleOfBattle": {
+            "baseMultiplier": 100
+        },
+        "PrimeTestSubject": {
+            "baseMultiplier": 100
+        },
+        "DiabolicRegeneration": {
             "baseMultiplier": 100
         },
         "DeathOnTheWind": {

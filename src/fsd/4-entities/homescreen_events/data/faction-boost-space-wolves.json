@@ -256,7 +256,7 @@
             "descriptions": [
                 "<i>Faction Boost: Space Wolves</i> is here",
                 "Earn points by battling with the Space Wolves and claim exclusive rewards!",
-                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "You gain <style=\"HSE_Points_FactionBoostSpaceWolves\">{[POINTS]} Space Wolves points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
                 "<style=\"HSE_Points_FactionBoostSpaceWolves\">+{[POINTS]} Space Wolves point</style> when the character who defeats the enemy is a <style=\"FactionIcon_SpaceWolves\">Space Wolf</style>."
@@ -517,7 +517,7 @@
             "descriptions": [
                 "<i>Faction Boost: Space Wolves</i> is here",
                 "Earn points by battling with the Space Wolves and claim exclusive rewards!",
-                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "You gain <style=\"HSE_Points_FactionBoostSpaceWolves\">{[POINTS]} Space Wolves points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
                 "<style=\"HSE_Points_FactionBoostSpaceWolves\">+{[POINTS]} Space Wolves point</style> when the character who defeats the enemy is a <style=\"FactionIcon_SpaceWolves\">Space Wolf</style>."
@@ -778,7 +778,7 @@
             "descriptions": [
                 "<i>Faction Boost: Space Wolves</i> is here",
                 "Earn points by battling with the Space Wolves and claim exclusive rewards!",
-                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+{[MODIFIER]}00% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
+                "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> gain <style=\"STAT\">+100% XP</style> for each deployed friendly character of the same faction in Arena, Onslaught, and Salvage Run.",
                 "<style=\"FactionIcon_SpaceWolves\">Space Wolves</style> in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "You gain <style=\"HSE_Points_FactionBoostSpaceWolves\">{[POINTS]} Space Wolves points</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with an <style=\"Aliance_Imperial\">Imperial</style> character in Arena, Onslaught, and Salvage Run.",
                 "<style=\"HSE_Points_FactionBoostSpaceWolves\">+{[POINTS]} Space Wolves point</style> when the character who defeats the enemy is a <style=\"FactionIcon_SpaceWolves\">Space Wolf</style>."

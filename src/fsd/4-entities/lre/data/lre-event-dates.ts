@@ -38,4 +38,9 @@ export const lreEventDates: Record<number, ILreEventDates> = {
         nextEventDate: 'August 30, 2026',
         nextEventDateUtc: 'Sun, 30 August 2026 00:00:00 GMT',
     },
+    [LegendaryEventEnum.FabiusBile]: {
+        finished: false,
+        nextEventDate: 'November 11, 2026',
+        nextEventDateUtc: 'Sun, 11 November 2026 00:00:00 GMT',
+    },
 };

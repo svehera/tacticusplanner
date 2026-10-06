@@ -21,10 +21,12 @@
     "eventStandard4": "Гвардия Смерти Обычная",
     "eventStandard5": "Адепта Сороритас Обычная",
     "eventStandard6": "Тёмные Ангелы Обычная",
+    "eventStandard7": "",
     "eventExtremis1": "Адептус Механикус Высшая",
     "eventExtremis2": "Тираниды Высшая",
     "eventExtremis3": "Империя Т’ау Высшая",
     "eventExtremis4": "Гвардия Смерти Высшая",
     "eventExtremis5": "Адепта Сороритас Высшая",
-    "eventExtremis6": "Тёмные Ангелы Высшая"
+    "eventExtremis6": "Тёмные Ангелы Высшая",
+    "eventExtremis7": ""
 }

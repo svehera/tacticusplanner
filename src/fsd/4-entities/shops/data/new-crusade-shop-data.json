@@ -11,7 +11,20 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_eldarLhykhis_shards_regular"
+                    "lockId": "lock_crusade_shop_slot1_eldarLhykhis_shards_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_eldarLhykhis:3",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 750
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot1_eldarLhykhis_shards_regular"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_eldarLhykhis",
@@ -25,7 +38,61 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_eldarLhykhis_shards_mythic"
+                    "lockId": "lock_crusade_shop_slot1_custoTrajann_shards_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoTrajann:3",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 750
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot1_custoTrajann_shards_regular"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoTrajann",
+                "maxPurchases": "15",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
+            }
+        ],
+        [
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot2_custoBladeChampion_shards_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_custoBladeChampion:3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 750
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot2_custoBladeChampion_shards_regular"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_custoBladeChampion",
+                "maxPurchases": "15",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot2_eldarLhykhis_shards_mythic"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicShards_eldarLhykhis:3",
@@ -34,45 +101,19 @@
                     "type": "crusadeCurrency",
                     "amount": 750
                 }
-            }
-        ],
-        [
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_below_max_legendary_custoBladeChampion"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_custoBladeChampion",
-                "maxPurchases": "15",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 50
-                }
             },
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_not_unlocked_custoBladeChampion"
+                    "lockId": "lock_crusade_shop_slot2_eldarLhykhis_shards_regular"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_custoBladeChampion",
+                "reward": "shards_eldarLhykhis",
                 "maxPurchases": "15",
+                "bannerTextKey": "Offers/SpecialOffer_Banner_Featured_Character",
                 "cost": {
                     "type": "crusadeCurrency",
                     "amount": 50
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_max_legendary_custoBladeChampion"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "mythicShards_custoBladeChampion:3",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 750
                 }
             }
         ],
@@ -80,33 +121,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_below_max_legendary_emperNoiseMarine"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_emperNoiseMarine",
-                "maxPurchases": "15",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 50
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_not_unlocked_emperNoiseMarine"
-                },
-                "cronSchedule": "0 0 0 ? * * *",
-                "reward": "shards_emperNoiseMarine",
-                "maxPurchases": "15",
-                "cost": {
-                    "type": "crusadeCurrency",
-                    "amount": 50
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_max_legendary_emperNoiseMarine"
+                    "lockId": "lock_crusade_shop_slot3_emperNoiseMarine_shards_mythic"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicShards_emperNoiseMarine:3",
@@ -114,16 +129,66 @@
                     "type": "crusadeCurrency",
                     "amount": 750
                 }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot3_emperNoiseMarine_shards_regular"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_emperNoiseMarine",
+                "maxPurchases": "15",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot3_thousSekhetar_shards_mythic"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_thousSekhetar:3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 750
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot3_thousSekhetar_shards_regular"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_thousSekhetar",
+                "maxPurchases": "15",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 50
+                }
             }
         ],
         [
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot4_relic"
+                    "lockId": "lock_crusade_shop_slot4_relic_season1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "R_Booster_Crit_PhasalSubjugator",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 5355
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_relic_season2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Booster_Block_LionHelmRelic",
                 "cost": {
                     "type": "crusadeCurrency",
                     "amount": 5355
@@ -194,10 +259,22 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot5_relic"
+                    "lockId": "lock_crusade_shop_slot5_relic_season1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "R_Crit_Helspear",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 5355
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_relic_season2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Crit_Fidelity",
                 "cost": {
                     "type": "crusadeCurrency",
                     "amount": 5355
@@ -328,10 +405,22 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot6_relic"
+                    "lockId": "lock_crusade_shop_slot6_relic_season1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "R_Booster_Crit_BookOfFate",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 3570
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_relic_season2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "R_Defensive_Thrydderghyre",
                 "cost": {
                     "type": "crusadeCurrency",
                     "amount": 3570
@@ -462,7 +551,19 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot4_relic"
+                    "lockId": "lock_crusade_shop_slot4_relic_season1"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot4_relic_season2"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "itemsMythic_I_Crit",
@@ -536,7 +637,19 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot5_relic"
+                    "lockId": "lock_crusade_shop_slot5_relic_season1"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Defensive",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_relic_season2"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "itemsMythic_I_Defensive",
@@ -682,7 +795,19 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot6_relic"
+                    "lockId": "lock_crusade_shop_slot6_relic_season1"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Booster_Crit",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_relic_season2"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "itemsMythic_I_Booster_Crit",
@@ -1335,7 +1460,34 @@
         [
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot14_season1"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "dust:500",
+                "maxPurchases": "3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 570
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot14_season2_ammo"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "machinesOfWarAmmo:3",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 65
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot14_season2_fallback"
+                },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "dust:500",
                 "maxPurchases": "3",

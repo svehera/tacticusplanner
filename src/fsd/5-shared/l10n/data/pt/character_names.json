@@ -227,6 +227,12 @@
         "name": "Gulgortz Estrassalhadô",
         "title": "Chefaumzaum de Megarmadura"
     },
+    "orksWeirdboy": {
+        "extraShortName": "Zapspitta",
+        "shortName": "Zapspitta",
+        "name": "Grubak Zapspitta",
+        "title": "Rapaizlôco"
+    },
     "templSwordBrother": {
         "extraShortName": "Divindo",
         "shortName": "Irmão de Armas Divindo",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Ûthar",
-        "shortName": "Ûthar, o Predestinado\n",
+        "shortName": "Ûthar, o Predestinado",
         "name": "Ûthar, o Predestinado",
         "title": "Kâhl Supremo"
     },
@@ -700,5 +706,11 @@
         "shortName": "Nubari",
         "name": "Nubari Shal'Dar",
         "title": "Erradicador Sargento"
+    },
+    "lostaBile": {
+        "extraShortName": "Fabius Bile",
+        "shortName": "Fabius Bile",
+        "name": "Fabius Bile",
+        "title": "Pai dos Clones. Primogênito. Aranha."
     }
 }

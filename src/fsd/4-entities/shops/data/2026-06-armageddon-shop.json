@@ -10606,7 +10606,7 @@
                                 "target": 8,
                                 "locaKey": "WinBattlesWithHero_description",
                                 "taskParameters": {
-                                    "heroId": "necroChronomancer"
+                                    "heroId": "orksWeirdboy"
                                 }
                             }
                         ]
@@ -10648,7 +10648,7 @@
                                 "target": 15,
                                 "locaKey": "UseAbilityWithFaction_description",
                                 "taskParameters": {
-                                    "factionId": "Necrons"
+                                    "factionId": "Orks"
                                 }
                             }
                         ]
@@ -10662,7 +10662,7 @@
                                 "target": 60,
                                 "locaKey": "SlayEnemiesOfFaction_description",
                                 "taskParameters": {
-                                    "factionId": "DarkAngels"
+                                    "factionId": "Tau"
                                 }
                             }
                         ]
@@ -10687,7 +10687,7 @@
                                 "target": 30,
                                 "locaKey": "SlayEnemiesWithFaction_description",
                                 "taskParameters": {
-                                    "factionId": "Necrons"
+                                    "factionId": "Orks"
                                 }
                             }
                         ]

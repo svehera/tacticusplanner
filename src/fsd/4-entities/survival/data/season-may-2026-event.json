@@ -164,7 +164,7 @@
         "tier": 0,
         "battleNr": 0,
         "boardId": "survival_13",
-        "power": 60054257326,
+        "power": 60054283733,
         "waves": [
             {
                 "round": 1,
@@ -373,7 +373,7 @@
             },
             {
                 "round": 26,
-                "power": 1335211,
+                "power": 1361618,
                 "army": [
                     "orksNpc2OrkBoy:42",
                     "orksNpc2OrkBoy:42",
@@ -527,7 +527,8 @@
             "Genestealers",
             "Custodes",
             "EmperorsChildren",
-            "LeaguesOfVotann"
+            "LeaguesOfVotann",
+            "TheLostAndTheDamned"
         ]
     },
     "milestoneRewards": [

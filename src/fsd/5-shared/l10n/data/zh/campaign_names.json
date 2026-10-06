@@ -21,10 +21,12 @@
     "eventStandard4": "死亡守衛 標準",
     "eventStandard5": "國教修女會 標準",
     "eventStandard6": "黑暗天使 標準",
+    "eventStandard7": "",
     "eventExtremis1": "機械神教 終極",
     "eventExtremis2": "泰倫蟲族 終極",
     "eventExtremis3": "鈦星帝國 終極",
     "eventExtremis4": "死亡守衛 終極",
     "eventExtremis5": "國教修女會 終極",
-    "eventExtremis6": "黑暗天使 終極"
+    "eventExtremis6": "黑暗天使 終極",
+    "eventExtremis7": ""
 }

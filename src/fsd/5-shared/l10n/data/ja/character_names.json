@@ -227,6 +227,12 @@
         "name": "ガルゴーツ・ブルドーザ",
         "title": "ウォーボス（メガアーマー装備）"
     },
+    "orksWeirdboy": {
+        "extraShortName": "ザップスピッタ",
+        "shortName": "ザップスピッタ",
+        "name": "グルバック・ザップスピッタ",
+        "title": "ウィアードボゥイ"
+    },
     "templSwordBrother": {
         "extraShortName": "ゴッドスウィル",
         "shortName": "ソードブラザー・ゴッドスウィル",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "ユザール",
-        "shortName": "“定められし者”ユザール\n",
+        "shortName": "“定められし者”ユザール",
         "name": "“定められし者”ユザール",
         "title": "ハイ・カール"
     },
@@ -700,5 +706,11 @@
         "shortName": "ヌバリ",
         "name": "ヌバリ・シャルダー",
         "title": "エラディケイター・サージェント"
+    },
+    "lostaBile": {
+        "extraShortName": "ファビウス・バイル",
+        "shortName": "ファビウス・バイル",
+        "name": "ファビウス・バイル",
+        "title": "複製父。始祖。蜘蛛。"
     }
 }
