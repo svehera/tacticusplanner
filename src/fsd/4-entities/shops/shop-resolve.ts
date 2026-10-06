@@ -13,8 +13,53 @@ const BP_SEASON_DURATION_MS = 35 * 86_400_000; // exactly 5 weeks
 /** Rogue Trader's featured-legendary rotation boundary: Trajann is featured until this date, then Lucius. */
 const ELDER_SHOP_FEATURED_ROTATION_MS = Date.UTC(2026, 8, 6); // 2026-09-06T00:00:00Z
 
+/** Crusade season 2 begins here; season-gated crusade/war shop variants swap at this instant. */
+const CRUSADE_SEASON_2_START_MS = Date.UTC(2026, 9, 20); // 2026-10-20T00:00:00Z
+
+/** Battle pass season (starts 2026-10-11T00:00:00Z) whose epic character rotation the war shop's `*_epic_*` locks follow. */
+const EPIC_ROTATION_BP_SEASON = 42;
+
+/** Crusade shop slots 1-3 feature a different hero per season. */
+const CRUSADE_SLOT_HEROES: Record<string, { season1: string; season2: string }> = {
+    '1': { season1: 'eldarLhykhis', season2: 'custoTrajann' },
+    '2': { season1: 'custoBladeChampion', season2: 'eldarLhykhis' },
+    '3': { season1: 'emperNoiseMarine', season2: 'thousSekhetar' },
+};
+
 export function bpSeasonStartMs(season: number): number {
     return BP_SEASON_40_START_MS + (season - 40) * BP_SEASON_DURATION_MS;
+}
+
+/** Resolves crusade-season and epic-rotation lockIds; `undefined` when `lockId` isn't one. */
+function seasonLock(lockId: string, nowMs: number): boolean | undefined {
+    const isSeason2 = nowMs >= CRUSADE_SEASON_2_START_MS;
+    if (lockId === 'lock_daily_deals_crusadeSeason2start') return isSeason2;
+    // War shop epic-character rotation (current + next) belongs to the new battle pass season.
+    if (/^lock_daily_deals_character_rotation_epic_(current|next)$/.test(lockId)) {
+        return nowMs >= bpSeasonStartMs(EPIC_ROTATION_BP_SEASON);
+    }
+    if (!lockId.startsWith('lock_crusade_shop_')) return undefined;
+    if (lockId.endsWith('_season1')) return !isSeason2;
+    if (lockId.endsWith('_season2')) return isSeason2;
+    // Slot 14 offers ammo in season 2 whenever it's available; the dust fallback is never shown.
+    if (lockId === 'lock_crusade_shop_slot14_season2_ammo') return isSeason2;
+    if (lockId === 'lock_crusade_shop_slot14_season2_fallback') return false;
+    return undefined;
+}
+
+/**
+ * Crusade shop slots 1-3 hero locks (`lock_crusade_shop_slot{N}_{hero}_shards_{mythic|regular}`):
+ * active when `hero` is the slot's hero for the current season and its stars match the variant
+ * (mythic shards once blue-star-or-above, regular shards otherwise). `undefined` when not one.
+ */
+function crusadeSlotHeroLock(lockId: string, context: ShopLockContext, nowMs: number): boolean | undefined {
+    const match = /^lock_crusade_shop_slot(\d+)_(.+)_shards_(mythic|regular)$/.exec(lockId);
+    if (!match) return undefined;
+    const [, slot, hero, variant] = match;
+    const heroes = CRUSADE_SLOT_HEROES[slot];
+    if (!heroes) return undefined;
+    if (hero !== (nowMs >= CRUSADE_SEASON_2_START_MS ? heroes.season2 : heroes.season1)) return false;
+    return shardRewardEligible(`${variant === 'mythic' ? 'mythicShards' : 'shards'}_${hero}`, context);
 }
 
 export function lockIsActive(lockId: string | undefined, nowMs = Date.now(), hasBlueStarUnit = false): boolean {
@@ -23,6 +68,8 @@ export function lockIsActive(lockId: string | undefined, nowMs = Date.now(), has
     if (until) return nowMs < bpSeasonStartMs(Number(until[1]));
     const after = /^lock_valid_after_bp_season_(\d+)_start$/.exec(lockId);
     if (after) return nowMs >= bpSeasonStartMs(Number(after[1]));
+    const season = seasonLock(lockId, nowMs);
+    if (season !== undefined) return season;
     if (lockId === 'lock_crusade_shop_owns_unit_at_mythic') return hasBlueStarUnit;
     if (lockId === 'lock_crusade_shop_does_not_own_unit_at_mythic') return !hasBlueStarUnit;
     return false;
@@ -69,6 +116,9 @@ export function resolveEventLockId(lockId: string | undefined, context: ShopLock
     if (until) return nowMs < bpSeasonStartMs(Number(until[1]));
     const after = /^lock_valid_after_bp_season_(\d+)_start$/.exec(lockId);
     if (after) return nowMs >= bpSeasonStartMs(Number(after[1]));
+
+    const season = seasonLock(lockId, nowMs) ?? crusadeSlotHeroLock(lockId, context, nowMs);
+    if (season !== undefined) return season;
 
     if (lockId === 'lock_mythic_shop_tier_high') return context.tier === 'high';
     if (lockId === 'lock_mythic_shop_tier_medium') return context.tier === 'medium';

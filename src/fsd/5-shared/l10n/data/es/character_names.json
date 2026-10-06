@@ -227,6 +227,12 @@
         "name": "Gulgortz Bulldoza",
         "title": "Kaudillo kon megaarmadura"
     },
+    "orksWeirdboy": {
+        "extraShortName": "Zapspitta",
+        "shortName": "Zapspitta",
+        "name": "Grubak Zapspitta",
+        "title": "Eztrambótiko"
+    },
     "templSwordBrother": {
         "extraShortName": "Godswyl",
         "shortName": "Hermano de armas Godswyl",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Ûthar",
-        "shortName": "Ûthar el Destinado\n",
+        "shortName": "Ûthar el Destinado",
         "name": "Ûthar el Destinado",
         "title": "Gran Kâhl"
     },
@@ -700,5 +706,11 @@
         "shortName": "Nubari",
         "name": "Nubari Shal'Dar",
         "title": "Sargento Erradicador"
+    },
+    "lostaBile": {
+        "extraShortName": "Fabius Bilis",
+        "shortName": "Fabius Bilis",
+        "name": "Fabius Bilis",
+        "title": "Padre de los Clones. Primogenitor. La Araña."
     }
 }

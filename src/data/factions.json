@@ -152,5 +152,12 @@
         "snowprintId": "LeaguesOfVotann",
         "icon": "Leagues of Votann.png",
         "color": "#874470"
+    },
+    {
+        "alliance": "Chaos",
+        "name": "The Lost and the Damned",
+        "snowprintId": "TheLostAndTheDamned",
+        "icon": "The Lost and the Damned.png",
+        "color": "#6B4A2B"
     }
 ]

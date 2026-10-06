@@ -21,10 +21,12 @@
     "eventStandard4": "Ölüm Bölüğü Standart",
     "eventStandard5": "Adepta Sororitas Standart",
     "eventStandard6": "Kara Melekler Standart",
+    "eventStandard7": "",
     "eventExtremis1": "Adeptus Mechanicus Ekstrem",
     "eventExtremis2": "Tiranitler Ekstrem",
     "eventExtremis3": "T'au İmparatorluğu Ekstrem",
     "eventExtremis4": "Ölüm Bölüğü Ekstrem",
     "eventExtremis5": "Adepta Sororitas Ekstrem",
-    "eventExtremis6": "Kara Melekler Ekstrem"
+    "eventExtremis6": "Kara Melekler Ekstrem",
+    "eventExtremis7": ""
 }

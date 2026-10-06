@@ -1437,6 +1437,26 @@
             }
         ]
     },
+    "upgHpE144C": {
+        "name": "Symbol of Chaos",
+        "rarity": "Epic",
+        "statType": "hp",
+        "gold": 215,
+        "crafting": [
+            {
+                "id": "upgHpR029",
+                "amount": 9
+            },
+            {
+                "id": "upgDmgR038",
+                "amount": 9
+            },
+            {
+                "id": "upgArmR023",
+                "amount": 9
+            }
+        ]
+    },
     "upgHpL001C": {
         "name": "Optimal Bionic Enhancement",
         "rarity": "Legendary",
@@ -3035,6 +3055,26 @@
             },
             {
                 "id": "upgHpE143C",
+                "amount": 1
+            }
+        ]
+    },
+    "upgHpM144C": {
+        "name": "Grand Symbol of Chaos",
+        "rarity": "Mythic",
+        "statType": "hp",
+        "gold": 2000,
+        "crafting": [
+            {
+                "id": "upgHpM002",
+                "amount": 6
+            },
+            {
+                "id": "upgHpL103",
+                "amount": 8
+            },
+            {
+                "id": "upgHpE144C",
                 "amount": 1
             }
         ]

@@ -155,6 +155,9 @@ function taskText(task: INewTask): string {
         case 'SlayEnemiesOfFaction': {
             return `Defeat ${task.target} ${missionFactionName(p.factionId)}`;
         }
+        case 'SlayEnemiesOfTrait': {
+            return `Defeat ${task.target} ${Trait[p.trait as keyof typeof Trait] ?? p.trait} enemies`;
+        }
         case 'UseAbilityWithFactionTrait': {
             return `Use abilities ${task.target} times with ${p.factionTrait} units`;
         }

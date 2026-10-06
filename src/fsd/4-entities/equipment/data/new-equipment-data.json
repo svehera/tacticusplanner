@@ -24,7 +24,8 @@
             "Genestealers",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -81,7 +82,8 @@
             "Genestealers",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -156,7 +158,8 @@
             "Genestealers",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -249,7 +252,8 @@
             "Genestealers",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -360,7 +364,8 @@
             "Genestealers",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -489,7 +494,8 @@
             "Genestealers",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -2038,7 +2044,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2077,7 +2090,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2134,7 +2154,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2209,7 +2236,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2302,7 +2336,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -2413,7 +2454,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6037,7 +6085,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6076,7 +6131,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6133,7 +6195,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6208,7 +6277,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6301,7 +6377,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -6412,7 +6495,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -8751,7 +8841,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -8809,7 +8900,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -8883,7 +8975,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -8973,7 +9066,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -9079,7 +9173,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -9201,7 +9296,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -10623,7 +10719,15 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10662,7 +10766,15 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10719,7 +10831,15 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10794,7 +10914,15 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -10887,7 +11015,15 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "Orks", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "Orks",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -11395,7 +11531,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -11457,7 +11594,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -11537,7 +11675,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -11635,7 +11774,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -11751,7 +11891,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -11885,7 +12026,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -12773,7 +12915,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12812,7 +12961,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12869,7 +13025,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -12944,7 +13107,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -13037,7 +13207,14 @@
         "isRelic": false,
         "isUniqueRelic": false,
         "allowedUnits": [],
-        "allowedFactions": ["BlackLegion", "DeathGuard", "ThousandSons", "WorldEaters", "EmperorsChildren"],
+        "allowedFactions": [
+            "BlackLegion",
+            "DeathGuard",
+            "ThousandSons",
+            "WorldEaters",
+            "EmperorsChildren",
+            "TheLostAndTheDamned"
+        ],
         "levels": [
             {
                 "goldCost": 0,
@@ -14295,7 +14472,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -14357,7 +14535,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -14437,7 +14616,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -14535,7 +14715,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -14651,7 +14832,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -14785,7 +14967,8 @@
             "Custodes",
             "EmperorsChildren",
             "LeaguesOfVotann",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ],
         "levels": [
             {
@@ -16622,6 +16805,108 @@
             }
         ]
     },
+    "R_Crit_Fidelity": {
+        "name": "Fidelity",
+        "rarity": "Mythic",
+        "type": "I_Crit",
+        "abilityId": "Fidelity",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["tauAunShi"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1050
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1107
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1164
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1221
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1277
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1334
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1391
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1447
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1504
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "critChance": 35,
+                    "critDamage": 1561
+                }
+            }
+        ]
+    },
     "R_Booster_Crit_KardiocoreGalvanus": {
         "name": "Kardiocore Galvanus",
         "rarity": "Mythic",
@@ -17846,6 +18131,108 @@
             }
         ]
     },
+    "R_Defensive_Thrydderghyre": {
+        "name": "Thrydderghyre",
+        "rarity": "Mythic",
+        "type": "I_Defensive",
+        "abilityId": "Thrydderghyre",
+        "isRelic": true,
+        "isUniqueRelic": false,
+        "allowedUnits": ["thousTzaangor"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "hp": 600,
+                    "armor": 320
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "hp": 633,
+                    "armor": 338
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "hp": 665,
+                    "armor": 355
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "hp": 698,
+                    "armor": 372
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "hp": 730,
+                    "armor": 390
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "hp": 762,
+                    "armor": 407
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "hp": 795,
+                    "armor": 424
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "hp": 827,
+                    "armor": 441
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "hp": 860,
+                    "armor": 459
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "hp": 892,
+                    "armor": 476
+                }
+            }
+        ]
+    },
     "R_Block_DaemonfleshPlate": {
         "name": "Daemonflesh Plate",
         "rarity": "Mythic",
@@ -18058,6 +18445,108 @@
         "isRelic": true,
         "isUniqueRelic": true,
         "allowedUnits": ["tyranNeurothrope"],
+        "allowedFactions": [],
+        "levels": [
+            {
+                "goldCost": 0,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 350
+                }
+            },
+            {
+                "goldCost": 50000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 50,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 369
+                }
+            },
+            {
+                "goldCost": 60000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 75,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 388
+                }
+            },
+            {
+                "goldCost": 70000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 100,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 407
+                }
+            },
+            {
+                "goldCost": 85000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 125,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 426
+                }
+            },
+            {
+                "goldCost": 100000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 150,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 445
+                }
+            },
+            {
+                "goldCost": 125000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 200,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 464
+                }
+            },
+            {
+                "goldCost": 150000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 300,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 483
+                }
+            },
+            {
+                "goldCost": 175000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 500,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 502
+                }
+            },
+            {
+                "goldCost": 200000,
+                "salvageCost": 0,
+                "mythicSalvageCost": 1000,
+                "stats": {
+                    "blockChanceBonus": 6,
+                    "blockDamageBonus": 521
+                }
+            }
+        ]
+    },
+    "R_Booster_Block_LionHelmRelic": {
+        "name": "Lion Helm",
+        "rarity": "Mythic",
+        "type": "I_Booster_Block",
+        "abilityId": "LionHelmRelic",
+        "isRelic": true,
+        "isUniqueRelic": true,
+        "allowedUnits": ["darkaAzrael"],
         "allowedFactions": [],
         "levels": [
             {

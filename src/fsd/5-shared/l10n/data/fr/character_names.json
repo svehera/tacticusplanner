@@ -227,6 +227,12 @@
         "name": "Gulgortz Bulldoza",
         "title": "Boss de Guerre en Méga-armure"
     },
+    "orksWeirdboy": {
+        "extraShortName": "Zapspitta",
+        "shortName": "Zapspitta",
+        "name": "Grubak Zapspitta",
+        "title": "Bizarboy"
+    },
     "templSwordBrother": {
         "extraShortName": "Godswyl",
         "shortName": "Frère d’Épée Godswyl",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Ûthar",
-        "shortName": "Ûthar le Destiné\n",
+        "shortName": "Ûthar le Destiné",
         "name": "Ûthar le Destiné",
         "title": "Haut Kâhl"
     },
@@ -700,5 +706,11 @@
         "shortName": "Nubari",
         "name": "Nubari Shal'Dar",
         "title": "Sergent Eradicator"
+    },
+    "lostaBile": {
+        "extraShortName": "Fabius Bile",
+        "shortName": "Fabius Bile",
+        "name": "Fabius Bile",
+        "title": "Père des clones. Progéniteur. Araignée."
     }
 }

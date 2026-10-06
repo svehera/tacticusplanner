@@ -66,6 +66,7 @@ import character from '@/assets/images/snowprint_assets/misc/character.png';
 import overkill from '@/assets/images/snowprint_assets/misc/overkill.png';
 import piercingDamage from '@/assets/images/snowprint_assets/misc/piercing_dmg.png';
 import seasonalEventAugust2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_august_2026.png';
+import seasonalEventOctober2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_october_2026.png';
 import commonEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_common.png';
 import epicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_epic.png';
 import legendaryEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_legendary.png';
@@ -321,6 +322,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: seasonalEventAugust2026AvatarFrame,
         label: 'Seasonal Event (August 2026) Avatar Frame',
     },
+    seasonalEventOctober2026AvatarFrame: {
+        file: seasonalEventOctober2026AvatarFrame,
+        label: 'Seasonal Event (October 2026) Avatar Frame',
+    },
     crusadeBomb: {
         file: crusadeBomb,
         label: 'Crusade Bomb',
@@ -551,7 +556,7 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     },
     effectPinned: {
         file: effectPinned,
-        label: 'Pinned Effect',
+        label: 'Suppressed Effect',
     },
     effectProphets: {
         file: effectProphets,

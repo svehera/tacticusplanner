@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "Lakrimae",
     "R_Crit_HeadwoppasKillchoppa": "Rebanadora de Kabezaz",
     "R_Crit_Helspear": "Lanza Infernal",
+    "R_Crit_Fidelity": "Fidelidad",
     "R_Booster_Crit_KardiocoreGalvanus": "Kardionúcleo Galvanus",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "Amuleto del dragón del vacío",
     "R_Booster_Crit_BookOfFate": "Libro del Destino",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "Subyugador Fásico",
     "R_Defensive_RelicOfLostCadia": "Reliquia de la Cadia perdida",
     "R_Defensive_SupaCyborkBody": "Cuerpo de superciberorko",
+    "R_Defensive_Thrydderghyre": "Thrydderghyre",
     "R_Block_DaemonfleshPlate": "Peto de piel de daemon",
     "R_Booster_Block_PhoenixGem": "Gema fénix",
-    "R_Booster_Block_NornCrown": "Corona de Norna"
+    "R_Booster_Block_NornCrown": "Corona de Norna",
+    "R_Booster_Block_LionHelmRelic": "Yelmo de Lión"
 }

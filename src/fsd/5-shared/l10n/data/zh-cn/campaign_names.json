@@ -21,10 +21,12 @@
     "eventStandard4": "死亡守卫 标准",
     "eventStandard5": "修女会 标准",
     "eventStandard6": "黑暗天使 标准",
+    "eventStandard7": "",
     "eventExtremis1": "机械修会 绝境",
     "eventExtremis2": "泰伦虫族 绝境",
     "eventExtremis3": "钛帝国 绝境",
     "eventExtremis4": "死亡守卫 绝境",
     "eventExtremis5": "修女会 绝境",
-    "eventExtremis6": "黑暗天使 绝境"
+    "eventExtremis6": "黑暗天使 绝境",
+    "eventExtremis7": ""
 }

@@ -3373,6 +3373,136 @@
             ]
         },
         {
+            "characterId": "lostaBile",
+            "characterName": "Fabius Bile",
+            "quests": [
+                {
+                    "number": 1,
+                    "name": "mythic_lostaBile_01",
+                    "rewards": ["mythicShards_lostaBile:4", "heroAscensionOrbMythic_Chaos:2", "xpMythic:1"],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToTraitInOneBattle_description",
+                            "name": "SlayEnemiesWithHeroToTraitInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "trait": "MkXGravis",
+                                "heroId": "lostaBile",
+                                "killAmount": "5"
+                            }
+                        },
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToTraitInOneBattle_description",
+                            "name": "SlayEnemiesWithHeroToTraitInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "trait": "MartialKatah",
+                                "heroId": "lostaBile",
+                                "killAmount": "2"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 2,
+                    "name": "mythic_lostaBile_02",
+                    "rewards": ["mythicShards_lostaBile:4", "heroAscensionOrbMythic_Chaos:2", "gold:250000"],
+                    "tasks": [
+                        {
+                            "locaKey": "HealHealthWithHeroInOneTurn_description",
+                            "name": "HealHealthWithHeroInOneTurn",
+                            "target": 1,
+                            "taskParameters": {
+                                "heroId": "lostaBile",
+                                "healAmount": "8000"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 3,
+                    "name": "mythic_lostaBile_03",
+                    "rewards": [
+                        "mythicShards_lostaBile:4",
+                        "heroAscensionOrbMythic_Chaos:2",
+                        "abilityTokenMythic_Chaos:5"
+                    ],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHero_description",
+                            "name": "SlayEnemiesWithHero",
+                            "target": 200,
+                            "taskParameters": {
+                                "heroId": "lostaBile"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 4,
+                    "name": "mythic_lostaBile_04",
+                    "rewards": ["mythicShards_lostaBile:4", "heroAscensionOrbMythic_Chaos:2", "gold:250000"],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_description",
+                            "name": "SlayEnemiesWithHeroToUnitEffectInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "unitEffect": "Pinned",
+                                "heroId": "lostaBile",
+                                "killAmount": "6"
+                            }
+                        },
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_description",
+                            "name": "SlayEnemiesWithHeroToUnitEffectInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "unitEffect": "Stunned",
+                                "heroId": "lostaBile",
+                                "killAmount": "2"
+                            }
+                        },
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_Taunted_description",
+                            "name": "SlayEnemiesWithHeroToUnitEffectInOneBattle",
+                            "target": 1,
+                            "taskParameters": {
+                                "unitEffect": "Taunted_OnlySpecificTargets",
+                                "heroId": "lostaBile",
+                                "killAmount": "2"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 5,
+                    "name": "mythic_lostaBile_05",
+                    "rewards": ["mythicShards_lostaBile:4", "heroAscensionOrbMythic_Chaos:2", "I_Crit_M006"],
+                    "tasks": [
+                        {
+                            "locaKey": "DealDamageOfProfileTypeWithHero_description",
+                            "name": "DealDamageOfProfileTypeWithHero",
+                            "target": 100000,
+                            "taskParameters": {
+                                "damageProfileType": "Physical",
+                                "heroId": "lostaBile"
+                            }
+                        },
+                        {
+                            "locaKey": "DealDamageOfProfileTypeWithHero_description",
+                            "name": "DealDamageOfProfileTypeWithHero",
+                            "target": 100000,
+                            "taskParameters": {
+                                "damageProfileType": "Toxic",
+                                "heroId": "lostaBile"
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
             "characterId": "tauFarsight",
             "characterName": "Farsight",
             "quests": [
@@ -10996,6 +11126,95 @@
                     ]
                 }
             ]
+        },
+        {
+            "characterId": "orksWeirdboy",
+            "characterName": "Zapspitta",
+            "quests": [
+                {
+                    "number": 1,
+                    "name": "mythic_orksWeirdboy_01",
+                    "rewards": ["mythicShards_orksWeirdboy:4", "heroAscensionOrbMythic_Xenos:2", "xpMythic:1"],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHeroInOneTurn_description",
+                            "name": "SlayEnemiesWithHeroInOneTurn",
+                            "target": 1,
+                            "taskParameters": {
+                                "heroId": "orksWeirdboy",
+                                "killAmount": "7"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 2,
+                    "name": "mythic_orksWeirdboy_02",
+                    "rewards": ["mythicShards_orksWeirdboy:4", "heroAscensionOrbMythic_Xenos:2", "gold:250000"],
+                    "tasks": [
+                        {
+                            "locaKey": "DealDamageWithHeroInOneTurn_description",
+                            "name": "DealDamageWithHeroInOneTurn",
+                            "target": 1,
+                            "taskParameters": {
+                                "heroId": "orksWeirdboy",
+                                "damageAmount": "25000"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 3,
+                    "name": "mythic_orksWeirdboy_03",
+                    "rewards": [
+                        "mythicShards_orksWeirdboy:4",
+                        "heroAscensionOrbMythic_Xenos:2",
+                        "abilityTokenMythic_Xenos:5"
+                    ],
+                    "tasks": [
+                        {
+                            "locaKey": "OverkillWithHero_description",
+                            "name": "OverkillWithHero",
+                            "target": 200,
+                            "taskParameters": {
+                                "heroId": "orksWeirdboy"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 4,
+                    "name": "mythic_orksWeirdboy_04",
+                    "rewards": ["mythicShards_orksWeirdboy:4", "heroAscensionOrbMythic_Xenos:2", "gold:250000"],
+                    "tasks": [
+                        {
+                            "locaKey": "SlayEnemiesWithHeroToUnitEffectInOneTurn_UnitEffect_Taunted_description",
+                            "name": "SlayEnemiesWithHeroToUnitEffectInOneTurn",
+                            "target": 1,
+                            "taskParameters": {
+                                "unitEffect": "Taunted_OnlySpecificTargets",
+                                "heroId": "orksWeirdboy",
+                                "killAmount": "3"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "number": 5,
+                    "name": "mythic_orksWeirdboy_05",
+                    "rewards": ["mythicShards_orksWeirdboy:4", "heroAscensionOrbMythic_Xenos:2", "I_Crit_M007"],
+                    "tasks": [
+                        {
+                            "locaKey": "DealDamageWithHero_description",
+                            "name": "DealDamageWithHero",
+                            "target": 300000,
+                            "taskParameters": {
+                                "heroId": "orksWeirdboy"
+                            }
+                        }
+                    ]
+                }
+            ]
         }
     ],
     "terms": [
@@ -11181,6 +11400,12 @@
             "Term": "Quests/SlayEnemiesWithHeroToUnitEffectInOneTurn_UnitEffect_Overwatch_description",
             "Languages": [
                 "Defeat {[KILL_AMOUNT]} <style=\"Buff_Overwatching\">Overwatching</style> enemies with {[HERO_NAME]} in one turn"
+            ]
+        },
+        {
+            "Term": "Quests/SlayEnemiesWithHeroToUnitEffectInOneBattle_UnitEffect_Taunted_description",
+            "Languages": [
+                "Defeat {[KILL_AMOUNT]} <style=\"Debuff_Taunted\">Taunted</style> enemies with {[HERO_NAME]} in one battle"
             ]
         },
         {

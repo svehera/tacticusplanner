@@ -101,7 +101,9 @@ describe('calculateRosterCharacterPower', () => {
     });
 
     it('reproduces real, in-game-verified power for two equipped characters (Kharn and Gulgortz)', () => {
-        // Values confirmed against the live game for these exact roster records. Kharn's single
+        // Values confirmed against the live game for these exact roster records (Gulgortz's was
+        // re-derived after the Oct 2026 patch dropped his `powerMultiplier` (was 92) from the
+        // GameConfig, not re-verified in-game). Kharn's single
         // weapon has no `Range` (100% of its weapon power went through the buggy range-modifier
         // path above); Gulgortz has one melee + one ranged weapon, diluting that same bug's effect.
         const kharn = calculateRosterCharacterPower(
@@ -138,7 +140,7 @@ describe('calculateRosterCharacterPower', () => {
         );
 
         expect(kharn).toBe(936_827);
-        expect(gulgortz).toBe(954_786);
+        expect(gulgortz).toBe(1_037_811);
     });
 });
 

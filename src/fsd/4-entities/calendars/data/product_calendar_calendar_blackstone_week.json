@@ -341,7 +341,7 @@
                 {
                     "variant": "M2_M",
                     "title": "Advanced Unit Supply",
-                    "banner": "{[RarityTag]} Rewards!",
+                    "banner": "Mythic Rewards!",
                     "free": true,
                     "priceCents": 3699,
                     "rewards": [
@@ -355,7 +355,7 @@
                 {
                     "variant": "M2_L",
                     "title": "Advanced Unit Supply",
-                    "banner": "{[RarityTag]} Rewards!",
+                    "banner": "Legendary Rewards!",
                     "free": true,
                     "priceCents": 1499,
                     "rewards": [
@@ -369,7 +369,7 @@
                 {
                     "variant": "M2_E",
                     "title": "Advanced Unit Supply",
-                    "banner": "{[RarityTag]} Rewards!",
+                    "banner": "Epic Rewards!",
                     "free": true,
                     "priceCents": 449,
                     "rewards": [
@@ -383,7 +383,7 @@
                 {
                     "variant": "M2_R",
                     "title": "Advanced Unit Supply",
-                    "banner": "{[RarityTag]} Rewards!",
+                    "banner": "Rare Rewards!",
                     "free": true,
                     "priceCents": 299,
                     "rewards": [
@@ -397,7 +397,7 @@
                 {
                     "variant": "M2_CU",
                     "title": "Advanced Unit Supply",
-                    "banner": "{[RarityTag]} Rewards!",
+                    "banner": "Uncommon Rewards!",
                     "free": true,
                     "priceCents": 99,
                     "rewards": [

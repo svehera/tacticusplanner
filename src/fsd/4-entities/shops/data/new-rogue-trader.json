@@ -94,7 +94,7 @@
                     "lockId": "lock_elder_shop_relic_featured_slot_3"
                 },
                 "cronSchedule": "0 0 0 ? * WED,SUN *",
-                "reward": "R_Crit_DawnBlade",
+                "reward": "R_Crit_HeadwoppasKillchoppa",
                 "bannerTextKey": "Offers/SpecialOffer_Banner_One_Time",
                 "cost": {
                     "type": "elderShopCurrency",
@@ -1115,7 +1115,7 @@
                     "lockId": "lock_elder_shop_relic_rotation_random_6"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
-                "reward": "R_Crit_HeadwoppasKillchoppa",
+                "reward": "R_Crit_DawnBlade",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 430
@@ -2770,6 +2770,18 @@
                 }
             },
             {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_lostaBile"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_lostaBile:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
                 "weight": 3,
                 "conditions": {
                     "lockId": "lock_max_legendary_blackTerminator"
@@ -3116,6 +3128,18 @@
                     "type": "elderShopCurrency",
                     "amount": 60
                 }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_lostaBile"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_lostaBile:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
             }
         ],
         [
@@ -3345,6 +3369,18 @@
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_orksWarboss:5",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 20
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_hero_not_maxed_out_orksWeirdboy"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_orksWeirdboy:5",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 20
@@ -3849,6 +3885,18 @@
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "mythicShards_orksWarboss:3",
+                "cost": {
+                    "type": "elderShopCurrency",
+                    "amount": 60
+                }
+            },
+            {
+                "weight": 3,
+                "conditions": {
+                    "lockId": "lock_max_legendary_orksWeirdboy"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "mythicShards_orksWeirdboy:3",
                 "cost": {
                     "type": "elderShopCurrency",
                     "amount": 60

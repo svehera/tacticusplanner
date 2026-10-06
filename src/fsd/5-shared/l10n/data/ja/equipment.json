@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "ラクリマエ",
     "R_Crit_HeadwoppasKillchoppa": "ヘッドワッパのキルチョッパ",
     "R_Crit_Helspear": "ヘルスピア",
+    "R_Crit_Fidelity": "忠節の刃",
     "R_Booster_Crit_KardiocoreGalvanus": "カーディオコア・ガルヴァヌス",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "虚空の蛇のアミュレット",
     "R_Booster_Crit_BookOfFate": "宿命の書",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "フェイザル・サブジュゲーター",
     "R_Defensive_RelicOfLostCadia": "失われしケイディアの至宝",
     "R_Defensive_SupaCyborkBody": "スーパーサイボオルク・ボディ",
+    "R_Defensive_Thrydderghyre": "引き裂きの魔転儀",
     "R_Block_DaemonfleshPlate": "魔肉の鎧",
     "R_Booster_Block_PhoenixGem": "フェニックスジェム",
-    "R_Booster_Block_NornCrown": "ノルンの冠"
+    "R_Booster_Block_NornCrown": "ノルンの冠",
+    "R_Booster_Block_LionHelmRelic": "獅子の冠"
 }

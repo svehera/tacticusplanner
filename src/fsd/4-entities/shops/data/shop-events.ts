@@ -29,6 +29,12 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
             { label: 'Bonus shipment', amount: 'ca. +1,000 per week' },
         ],
     },
+    October2026: {
+        id: 'october2026',
+        displayName: 'Armageddon Shop',
+        currencyType: 'seasonalEventCurrencyOctober2026',
+        startUtc: Date.UTC(2026, 9, 26),
+    },
 };
 
 // Every shop-event data file is named `YYYY-MM(-kebab-title).json` (e.g. `2026-06-armageddon-shop.json`),

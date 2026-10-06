@@ -24,7 +24,8 @@
                 "endRewardSender": "Inbox/Sender_Tacticus",
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_high_bundle",
-                    "offer_homescreen_event_squig_smash_tier_high_playmore"
+                    "offer_homescreen_event_squig_smash_tier_high_playmore",
+                    "offer_homescreen_event_squig_smash_tier_high_booster"
                 ],
                 "modifiers": [
                     {
@@ -55,27 +56,6 @@
                                 "Survival",
                                 "LegendaryEvent"
                             ]
-                        }
-                    },
-                    {
-                        "type": "raidBattles",
-                        "scope": "personal",
-                        "points": 1,
-                        "pointsBasedOnEnemiesInBattle": true,
-                        "unitId": "orksNpc7Squig",
-                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
-                        "gameModeRestrictions": {
-                            "allowed": ["MachinesOfWarEvent"]
-                        }
-                    },
-                    {
-                        "type": "killUnits",
-                        "scope": "personal",
-                        "points": 1,
-                        "unitId": "orksNpcHSESquig",
-                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
-                        "gameModeRestrictions": {
-                            "allowed": ["PvP", "TreasureBeach", "Waves"]
                         }
                     }
                 ],
@@ -259,14 +239,36 @@
                             "gems:100"
                         ]
                     }
+                },
+                "offer_homescreen_event_squig_smash_tier_high_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_high_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 7900,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 3,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_high_booster_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00799",
+                        "price": 799,
+                        "mercadoId": "offer_00799",
+                        "rewards": ["tieredRewardPoints_squig_smash_tier_high:20", "gems:1000"]
+                    }
                 }
             },
             "descriptions": [
                 "<i>Squig Smash</i> is here",
                 "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
                 "During this event, Arena, Onslaught and Salvage Run battles start with {[nrOfSummons]} enemy Squigs and spawn {[nrOfSummons_2]} additional Squigs whenever a new enemy wave spawns.",
-                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>.",
-                "Raiding a battle counts as having defeated all enemies."
+                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>."
             ]
         },
         "mid": {
@@ -292,7 +294,8 @@
                 "endRewardSender": "Inbox/Sender_Tacticus",
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_mid_bundle",
-                    "offer_homescreen_event_squig_smash_tier_mid_playmore"
+                    "offer_homescreen_event_squig_smash_tier_mid_playmore",
+                    "offer_homescreen_event_squig_smash_tier_mid_booster"
                 ],
                 "modifiers": [
                     {
@@ -323,27 +326,6 @@
                                 "Survival",
                                 "LegendaryEvent"
                             ]
-                        }
-                    },
-                    {
-                        "type": "raidBattles",
-                        "scope": "personal",
-                        "points": 1,
-                        "pointsBasedOnEnemiesInBattle": true,
-                        "unitId": "orksNpc7Squig",
-                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
-                        "gameModeRestrictions": {
-                            "allowed": ["MachinesOfWarEvent"]
-                        }
-                    },
-                    {
-                        "type": "killUnits",
-                        "scope": "personal",
-                        "points": 1,
-                        "unitId": "orksNpcHSESquig",
-                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
-                        "gameModeRestrictions": {
-                            "allowed": ["PvP", "TreasureBeach", "Waves"]
                         }
                     }
                 ],
@@ -527,14 +509,36 @@
                             "gems:100"
                         ]
                     }
+                },
+                "offer_homescreen_event_squig_smash_tier_mid_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_mid_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_mid_booster_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00699",
+                        "price": 699,
+                        "mercadoId": "offer_00699",
+                        "rewards": ["tieredRewardPoints_squig_smash_tier_mid:20", "gems:800"]
+                    }
                 }
             },
             "descriptions": [
                 "<i>Squig Smash</i> is here",
                 "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
                 "During this event, Arena, Onslaught and Salvage Run battles start with {[nrOfSummons]} enemy Squigs and spawn {[nrOfSummons_2]} additional Squigs whenever a new enemy wave spawns.",
-                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>.",
-                "Raiding a battle counts as having defeated all enemies."
+                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>."
             ]
         },
         "low": {
@@ -560,7 +564,8 @@
                 "endRewardSender": "Inbox/Sender_Tacticus",
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_low_bundle",
-                    "offer_homescreen_event_squig_smash_tier_low_playmore"
+                    "offer_homescreen_event_squig_smash_tier_low_playmore",
+                    "offer_homescreen_event_squig_smash_tier_low_booster"
                 ],
                 "modifiers": [
                     {
@@ -591,27 +596,6 @@
                                 "Survival",
                                 "LegendaryEvent"
                             ]
-                        }
-                    },
-                    {
-                        "type": "raidBattles",
-                        "scope": "personal",
-                        "points": 1,
-                        "pointsBasedOnEnemiesInBattle": true,
-                        "unitId": "orksNpc7Squig",
-                        "locaKey": "HomeScreenEvents/Tracker_raidbattles_Description",
-                        "gameModeRestrictions": {
-                            "allowed": ["MachinesOfWarEvent"]
-                        }
-                    },
-                    {
-                        "type": "killUnits",
-                        "scope": "personal",
-                        "points": 1,
-                        "unitId": "orksNpcHSESquig",
-                        "locaKey": "HomeScreenEvents/Tracker_killunits_squig_smash_Description_2",
-                        "gameModeRestrictions": {
-                            "allowed": ["PvP", "TreasureBeach", "Waves"]
                         }
                     }
                 ],
@@ -795,14 +779,36 @@
                             "gems:100"
                         ]
                     }
+                },
+                "offer_homescreen_event_squig_smash_tier_low_booster": {
+                    "offer": {
+                        "offerId": "offer_homescreen_event_squig_smash_tier_low_booster",
+                        "conditions": {
+                            "needsAssetBundlesDownloaded": true
+                        },
+                        "interstitialPriority": 3100,
+                        "interstitialInterval": 86400,
+                        "maxPurchases": 2,
+                        "originalPriceMercadoId": "",
+                        "visualId": "template_offer",
+                        "segment": "specialOffer",
+                        "realMoneyProductId": "product_homescreen_event_squig_smash_tier_low_booster_v2"
+                    },
+                    "realMoneyProduct": {
+                        "category": "HSE Offers",
+                        "nativeStoreProductType": "Consumable",
+                        "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00399",
+                        "price": 399,
+                        "mercadoId": "offer_00399",
+                        "rewards": ["tieredRewardPoints_squig_smash_tier_low:20", "gems:500"]
+                    }
                 }
             },
             "descriptions": [
                 "<i>Squig Smash</i> is here",
                 "Defeat Squigs, gain Squig Teef and claim exclusive rewards!",
                 "During this event, Arena, Onslaught and Salvage Run battles start with {[nrOfSummons]} enemy Squigs and spawn {[nrOfSummons_2]} additional Squigs whenever a new enemy wave spawns.",
-                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>.",
-                "Raiding a battle counts as having defeated all enemies."
+                "Each time you defeat a Squig throughout the game, you gain <style=\"HSE_Points_SquigTeef\">1 Squig Toof</style>."
             ]
         }
     }

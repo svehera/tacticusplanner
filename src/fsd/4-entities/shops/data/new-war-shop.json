@@ -54,8 +54,19 @@
             },
             {
                 "weight": 1,
+                "conditions": {},
+                "cronSchedule": "0 0 0 ? * SUN *",
+                "freeOffer": "draft_machinesOfWarTokens:10",
+                "reward": "shards_custoBladeChampion:5",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 900
+                }
+            },
+            {
+                "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                    "lockId": "lock_daily_deals_character_rotation_epic_current"
                 },
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "freeOffer": "draft_machinesOfWarTokens:10",
@@ -68,22 +79,11 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                    "lockId": "lock_daily_deals_character_rotation_epic_next"
                 },
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "freeOffer": "draft_machinesOfWarTokens:10",
                 "reward": "shards_astraDreir:5",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 900
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {},
-                "cronSchedule": "0 0 0 ? * SUN *",
-                "freeOffer": "draft_machinesOfWarTokens:10",
-                "reward": "shards_ultraTitus:5",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 900
@@ -132,7 +132,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                    "lockId": "lock_daily_deals_character_rotation_epic_current"
                 },
                 "cronSchedule": "0 0 0 ? * FRI *",
                 "reward": "shards_genesKelermorph:10",
@@ -144,7 +144,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                    "lockId": "lock_daily_deals_character_rotation_epic_next"
                 },
                 "cronSchedule": "0 0 0 ? * FRI *",
                 "reward": "shards_astraDreir:10",
@@ -155,9 +155,23 @@
             },
             {
                 "weight": 1,
-                "conditions": {},
+                "conditions": {
+                    "lockId": "lock_daily_deals_character_rotation_current"
+                },
                 "cronSchedule": "0 0 0 ? * SAT *",
                 "reward": "shards_ultraTitus:10",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 1800
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_crusadeSeason2start"
+                },
+                "cronSchedule": "0 0 0 ? * SAT *",
+                "reward": "shards_custoBladeChampion:10",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 1800
@@ -168,7 +182,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                    "lockId": "lock_daily_deals_character_rotation_epic_current"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_astraDreir:10",
@@ -180,7 +194,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                    "lockId": "lock_daily_deals_character_rotation_epic_next"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_emperExultant:10",
@@ -194,7 +208,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_current"
+                    "lockId": "lock_daily_deals_character_rotation_epic_current"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_emperExultant:10",
@@ -206,7 +220,7 @@
             {
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_next"
+                    "lockId": "lock_daily_deals_character_rotation_epic_next"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_astarCyrus:10",
@@ -252,9 +266,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_current"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
                 "reward": "shards_bloodMephiston:5",
                 "maxPurchases": "2",
@@ -308,23 +320,9 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_current"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * THU *",
                 "reward": "shards_bloodMephiston:20",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 3600
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_guild_next"
-                },
-                "cronSchedule": "0 0 0 ? * THU *",
-                "reward": "shards_genesPatriarch:20",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 3600
@@ -342,21 +340,7 @@
             },
             {
                 "weight": 1,
-                "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_last"
-                },
-                "cronSchedule": "0 0 0 ? * SAT *",
-                "reward": "shards_bloodMephiston:20",
-                "cost": {
-                    "type": "guildWarCurrency",
-                    "amount": 3600
-                }
-            },
-            {
-                "weight": 1,
-                "conditions": {
-                    "lockId": "lock_daily_deals_character_rotation_current"
-                },
+                "conditions": {},
                 "cronSchedule": "0 0 0 ? * SAT *",
                 "reward": "shards_genesPatriarch:20",
                 "cost": {
@@ -382,6 +366,18 @@
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_current"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_bloodDante:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_crusadeSeason2start"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_bloodDante:20",
@@ -411,6 +407,18 @@
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "shards_custoTrajann:20",
+                "cost": {
+                    "type": "guildWarCurrency",
+                    "amount": 3600
+                }
+            },
+            {
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_daily_deals_crusadeSeason2start"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "shards_darkaAzrael:20",
                 "cost": {
                     "type": "guildWarCurrency",
                     "amount": 3600

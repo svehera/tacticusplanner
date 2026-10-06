@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "Лакримэ",
     "R_Crit_HeadwoppasKillchoppa": "Килчоппа Хедвоппы",
     "R_Crit_Helspear": "Адское копьё",
+    "R_Crit_Fidelity": "Преданность",
     "R_Booster_Crit_KardiocoreGalvanus": "Кардиоядерный гальванизатор",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "Амулет Пустотного Змия",
     "R_Booster_Crit_BookOfFate": "Книга судьбы",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "Фазовый поработитель",
     "R_Defensive_RelicOfLostCadia": "Реликвия потерянной Кадии",
     "R_Defensive_SupaCyborkBody": "Тело супиркиборка",
+    "R_Defensive_Thrydderghyre": "Триддергир",
     "R_Block_DaemonfleshPlate": "Панцирь из плоти демонов",
     "R_Booster_Block_PhoenixGem": "Драгоценный камень Феникса",
-    "R_Booster_Block_NornCrown": "Корона Норны"
+    "R_Booster_Block_NornCrown": "Корона Норны",
+    "R_Booster_Block_LionHelmRelic": "Шлем Льва"
 }

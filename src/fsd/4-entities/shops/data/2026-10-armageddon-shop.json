@@ -1,0 +1,4288 @@
+{
+    "event": "October2026",
+    "title": "Armageddon Shop",
+    "weeks": [
+        {
+            "week": 1,
+            "merchant": "October2026EventShop",
+            "slots": [
+                {
+                    "slot": 1,
+                    "variants": [
+                        {
+                            "conditions": {},
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "1",
+                            "reward": "gold:1",
+                            "freeOffer": "seasonalEventCurrencyOctober2026:5"
+                        }
+                    ]
+                },
+                {
+                    "slot": 2,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraYarrick"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraYarrick:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraYarrick"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraYarrick:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraYarrick"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraYarrick:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceRockfist"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceRockfist:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceRockfist"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceRockfist:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceRockfist"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceRockfist:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templAggressor"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAggressor:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templAggressor"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAggressor:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templAggressor"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templAggressor:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceWulfen"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWulfen:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceWulfen"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWulfen:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceWulfen"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceWulfen:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraOrdnance"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraOrdnance:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraOrdnance"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraOrdnance:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraOrdnance"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraOrdnance:5"
+                        }
+                    ]
+                },
+                {
+                    "slot": 3,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templHelbrecht"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templHelbrecht:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templHelbrecht"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templHelbrecht:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templHelbrecht"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templHelbrecht:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraDreir"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraDreir:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraDreir"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraDreir:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraDreir"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraDreir:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceHound"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceHound:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceHound"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceHound:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceHound"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceHound:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceWulfen"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWulfen:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceWulfen"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWulfen:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceWulfen"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceWulfen:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraCreed"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraCreed:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraCreed"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraCreed:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraCreed"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraCreed:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceWolfPriest"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWolfPriest:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceWolfPriest"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWolfPriest:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceWolfPriest"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceWolfPriest:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceStormcaller"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceStormcaller:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceStormcaller"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceStormcaller:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceStormcaller"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceStormcaller:5"
+                        }
+                    ]
+                },
+                {
+                    "slot": 4,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceBlackmane"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceBlackmane:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceBlackmane"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceBlackmane:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceBlackmane"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceBlackmane:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templChampion"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templChampion:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templChampion"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templChampion:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templChampion"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templChampion:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraOrdnance"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraOrdnance:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraOrdnance"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraOrdnance:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraOrdnance"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraOrdnance:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceWolfPriest"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWolfPriest:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceWolfPriest"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceWolfPriest:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceWolfPriest"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceWolfPriest:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templAncient"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAncient:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templAncient"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAncient:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templAncient"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templAncient:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraBullgryn"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraBullgryn:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraBullgryn"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraBullgryn:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraBullgryn"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraBullgryn:5"
+                        }
+                    ]
+                },
+                {
+                    "slot": 5,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraCreed"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraCreed:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraCreed"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraCreed:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraCreed"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraCreed:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceStormcaller"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceStormcaller:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceStormcaller"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceStormcaller:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceStormcaller"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceStormcaller:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templSwordBrother"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templSwordBrother:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templSwordBrother"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templSwordBrother:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templSwordBrother"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templSwordBrother:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraPrimarisPsy"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraPrimarisPsy:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraPrimarisPsy"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraPrimarisPsy:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraPrimarisPsy"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraPrimarisPsy:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceRockfist"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceRockfist:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceRockfist"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceRockfist:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceRockfist"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceRockfist:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templAggressor"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAggressor:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templAggressor"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAggressor:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templAggressor"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templAggressor:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templHelbrecht"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templHelbrecht:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templHelbrecht"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templHelbrecht:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templHelbrecht"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templHelbrecht:5"
+                        }
+                    ]
+                },
+                {
+                    "slot": 6,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templAncient"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAncient:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templAncient"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templAncient:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templAncient"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templAncient:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraBullgryn"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraBullgryn:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraBullgryn"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraBullgryn:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraBullgryn"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraBullgryn:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraPrimarisPsy"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraPrimarisPsy:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraPrimarisPsy"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraPrimarisPsy:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraPrimarisPsy"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraPrimarisPsy:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_templSwordBrother"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templSwordBrother:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_templSwordBrother"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_templSwordBrother:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_templSwordBrother"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_templSwordBrother:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_astraDreir"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraDreir:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_astraDreir"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_astraDreir:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_astraDreir"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_astraDreir:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceHound"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceHound:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceHound"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceHound:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceHound"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceHound:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_below_max_legendary_spaceBlackmane"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceBlackmane:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_not_unlocked_spaceBlackmane"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "shards_spaceBlackmane:25"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_max_legendary_spaceBlackmane"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 45
+                            },
+                            "maxPurchases": "5",
+                            "reward": "mythicShards_spaceBlackmane:5"
+                        }
+                    ]
+                },
+                {
+                    "slot": 7,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 225
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbMythic_Imperial:5"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 200
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbLegendary_Imperial:10"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 85
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbEpic_Imperial:10"
+                        }
+                    ]
+                },
+                {
+                    "slot": 8,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 200
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbLegendary_Imperial:10"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 85
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbEpic_Imperial:10"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbRare_Imperial:10"
+                        }
+                    ]
+                },
+                {
+                    "slot": 9,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 85
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbEpic_Imperial:10"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbRare_Imperial:10"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "5",
+                            "reward": "heroAscensionOrbUncommon_Imperial:10"
+                        }
+                    ]
+                },
+                {
+                    "slot": 10,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "10",
+                            "reward": "xpMythic"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 5
+                            },
+                            "maxPurchases": "20",
+                            "reward": "xpLegendary"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "30",
+                            "reward": "xpRare"
+                        }
+                    ]
+                },
+                {
+                    "slot": 11,
+                    "variants": [
+                        {
+                            "conditions": {},
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "15",
+                            "reward": "summoningToken"
+                        }
+                    ]
+                },
+                {
+                    "slot": 12,
+                    "variants": [
+                        {
+                            "conditions": {},
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 20
+                            },
+                            "maxPurchases": "10",
+                            "reward": "specialSummoningToken"
+                        }
+                    ]
+                },
+                {
+                    "slot": 13,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 100
+                            },
+                            "maxPurchases": "99",
+                            "reward": "mythicDust:250"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "99",
+                            "reward": "gold:35000"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "99",
+                            "reward": "gold:2000"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 4
+                            },
+                            "maxPurchases": "99",
+                            "reward": "gold:10000"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "99",
+                            "reward": "gold:2000"
+                        }
+                    ]
+                },
+                {
+                    "slot": 14,
+                    "variants": [
+                        {
+                            "conditions": {},
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 40
+                            },
+                            "maxPurchases": "99",
+                            "reward": "dust:1000"
+                        }
+                    ]
+                },
+                {
+                    "slot": 15,
+                    "variants": [
+                        {
+                            "conditions": {},
+                            "cronSchedule": "0 0 0 ? * * *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "5",
+                            "reward": "abilityTokenUncommon_Imperial:10"
+                        }
+                    ]
+                },
+                {
+                    "slot": 16,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_october_2026_shop_relic_R_Crit_RelicBoltPistol"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 125
+                            },
+                            "maxPurchases": "1",
+                            "reward": "R_Crit_RelicBoltPistol"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_october_2026_shop_relic_R_Crit_RelicBoltPistol_fallback"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 65
+                            },
+                            "maxPurchases": "1",
+                            "reward": "I_Crit_M001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 65
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Crit_M002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 65
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_M003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 65
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_M003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 65
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Crit_M001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 65
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Block_M002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_L002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_L002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Crit_L002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Crit_L001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Block_L002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_L003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_L003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Crit_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Crit_E001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Block_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_E003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_E003"
+                        }
+                    ]
+                },
+                {
+                    "slot": 17,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,TUE,WED,THU,FRI,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 40
+                            },
+                            "maxPurchases": "99",
+                            "reward": "gold:100000"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "99",
+                            "reward": "gold:2000"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Crit_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Crit_E001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Block_E002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_E003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_E003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_R002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_R002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Crit_R002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Crit_R001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Booster_Block_R002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Block_R003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "3",
+                            "reward": "I_Defensive_R003"
+                        }
+                    ]
+                },
+                {
+                    "slot": 18,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL010C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL015C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL010C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL015C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE006C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE002C"
+                        }
+                    ]
+                },
+                {
+                    "slot": 19,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpM003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpM001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpM004"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 15
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpM002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "10",
+                            "reward": "upgHpL009C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE001C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE009C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE001C"
+                        }
+                    ]
+                },
+                {
+                    "slot": 20,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 35
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpL021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 30
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpL009C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 25
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL006C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 40
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL008C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "2",
+                            "reward": "upgHpL105"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpL111"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpL101"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE011"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE010"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE015"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE013"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE010"
+                        }
+                    ]
+                },
+                {
+                    "slot": 21,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "2",
+                            "reward": "upgHpL105"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpL111"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpL101"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE006C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmR005"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpR019"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgR006"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpR005"
+                        }
+                    ]
+                },
+                {
+                    "slot": 22,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmL204"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmL202"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmL001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmL203"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE015"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE004"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE010"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE012"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE008"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgR003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmR006"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpR002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgR002"
+                        }
+                    ]
+                },
+                {
+                    "slot": 23,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgL204"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgL001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED,SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgL003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 8
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgL202"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE011"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE009"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE010"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE013"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpU002"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgU012"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmU009"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpU015"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgU011"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmU013"
+                        }
+                    ]
+                },
+                {
+                    "slot": 24,
+                    "variants": [
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE025C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE031C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgArmE021C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_high"
+                            },
+                            "cronSchedule": "0 0 0 ? * SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 10
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgDmgE006C"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgHpE017"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE013"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgE003"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_medium"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 3
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmE010"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * MON,SUN *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmU001"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * TUE *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpU006"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * WED *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgU010"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * THU *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgArmU005"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * FRI *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "3",
+                            "reward": "upgHpU016"
+                        },
+                        {
+                            "conditions": {
+                                "lockId": "lock_mythic_shop_tier_low"
+                            },
+                            "cronSchedule": "0 0 0 ? * SAT *",
+                            "cost": {
+                                "type": "seasonalEventCurrencyOctober2026",
+                                "amount": 1
+                            },
+                            "maxPurchases": "5",
+                            "reward": "upgDmgU014"
+                        }
+                    ]
+                }
+            ],
+            "milestoneRewards": [
+                {
+                    "requiredProgress": 100,
+                    "reward": "seasonalEventCurrencyOctober2026:15"
+                },
+                {
+                    "requiredProgress": 210,
+                    "reward": "seasonalEventCurrencyOctober2026:15"
+                },
+                {
+                    "requiredProgress": 330,
+                    "reward": "seasonalEventCurrencyOctober2026:15"
+                },
+                {
+                    "requiredProgress": 460,
+                    "reward": "seasonalEventCurrencyOctober2026:15"
+                },
+                {
+                    "requiredProgress": 600,
+                    "reward": "seasonalEventCurrencyOctober2026:15"
+                },
+                {
+                    "requiredProgress": 760,
+                    "reward": "seasonalEventCurrencyOctober2026:15"
+                },
+                {
+                    "requiredProgress": 940,
+                    "reward": "seasonalEventCurrencyOctober2026:20"
+                },
+                {
+                    "requiredProgress": 1140,
+                    "reward": "seasonalEventCurrencyOctober2026:20"
+                },
+                {
+                    "requiredProgress": 1360,
+                    "reward": "seasonalEventCurrencyOctober2026:20"
+                },
+                {
+                    "requiredProgress": 1600,
+                    "reward": "seasonalEventCurrencyOctober2026:25"
+                },
+                {
+                    "requiredProgress": 1860,
+                    "reward": "seasonalEventCurrencyOctober2026:30"
+                },
+                {
+                    "requiredProgress": 2140,
+                    "reward": "seasonalEventCurrencyOctober2026:35"
+                },
+                {
+                    "requiredProgress": 2440,
+                    "reward": "seasonalEventCurrencyOctober2026:40"
+                },
+                {
+                    "requiredProgress": 2790,
+                    "reward": "seasonalEventCurrencyOctober2026:45"
+                },
+                {
+                    "requiredProgress": 3170,
+                    "reward": "seasonalEventCurrencyOctober2026:50"
+                },
+                {
+                    "requiredProgress": 3580,
+                    "reward": "seasonalEventCurrencyOctober2026:75"
+                },
+                {
+                    "requiredProgress": 4020,
+                    "reward": "specialSummoningToken:1"
+                },
+                {
+                    "requiredProgress": 4500,
+                    "reward": "stamina:100"
+                }
+            ],
+            "progressChests": [
+                {
+                    "requiredProgress": 30,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:600-660", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 65,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:800-880", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 105,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1000-1100", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 150,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:1500-1650", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 200,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:2000-2200", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 255,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:3000-3300", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 315,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:4500-4950", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 380,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:6500-7150", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 450,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:8000-8800", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 525,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:10000-11000", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 605,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:12000-13200", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 690,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:14000-15400", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 780,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:16000-17600", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 875,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:18000-19800", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 975,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:20000-22000", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1085,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:22500-24750", "shards_astraYarrick:5"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1215,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:25000-27500", "shards_astraYarrick:10"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1375,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:30000-33000", "shards_astraYarrick:15"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1595,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:40000-44000", "shards_astraYarrick:20"]
+                        }
+                    ]
+                },
+                {
+                    "requiredProgress": 1845,
+                    "chest": [
+                        {
+                            "type": "Seasonal",
+                            "rewards": ["gold:50000-55000", "shards_astraYarrick:25", "playerProfileTheme_october_2026"]
+                        }
+                    ]
+                }
+            ],
+            "missions": {
+                "daily": [
+                    {
+                        "name": "october_2026_daily_01",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "TraverseHexes",
+                                "target": 150,
+                                "locaKey": "TraverseHexes_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_daily_02",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithMeleeAttacks",
+                                "target": 50,
+                                "locaKey": "SlayEnemiesWithMeleeAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_daily_03",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "Overkill",
+                                "target": 25,
+                                "locaKey": "Overkill_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_daily_04",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "PlayBattlesInGameMode",
+                                "target": 10,
+                                "locaKey": "PlayBattlesInGameMode_description",
+                                "taskParameters": {
+                                    "gameMode": "AllCampaigns"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_daily_05",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "Summon",
+                                "target": 25,
+                                "locaKey": "Summon_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_daily_06",
+                        "rewards": ["xp_seasonal:100"],
+                        "tasks": [
+                            {
+                                "name": "ScoreCrits",
+                                "target": 20,
+                                "locaKey": "ScoreCrits_description"
+                            }
+                        ]
+                    }
+                ],
+                "free": [
+                    {
+                        "name": "october_2026_free_1_chain_01",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 7500,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_02",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 12000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_03",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 15000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_04",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 18000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_05",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 21000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_06",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 24000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_07",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 27000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_08",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 30000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_09",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 33000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_10",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 36000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_11",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 40000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_12",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 45000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_13",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 50000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_14",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 55000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_15",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 60000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_16",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 65000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_17",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 75000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_18",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 85000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_19",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 95000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_free_1_chain_20",
+                        "rewards": ["xp_seasonal:90"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 105000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    }
+                ],
+                "premium": [
+                    {
+                        "name": "october_2026_premium_chain_01",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 45,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_02",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 60,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_03",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 75,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_04",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 90,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_05",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 105,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_06",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 120,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_07",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 135,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_08",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 150,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_09",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 165,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "october_2026_premium_chain_10",
+                        "rewards": ["xp_seasonal:90", "seasonalEventCurrencyOctober2026:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 180,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    }
+                ],
+                "battlePass": [
+                    {
+                        "name": "bp_se_october_2026_daily_s_slay_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemies",
+                                "target": 50,
+                                "locaKey": "SlayEnemies_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_attack_ce_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "AttackUnitsInGameModes",
+                                "target": 50,
+                                "locaKey": "AttackUnitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["CampaignEvent", "PvP", "Waves"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_slay_with_ranged_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithRangedAttacks",
+                                "target": 100,
+                                "locaKey": "SlayEnemiesWithRangedAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_s_heal_health_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "HealHealth",
+                                "target": 2500,
+                                "locaKey": "HealHealth_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_campaign_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "WinCampaignBattles",
+                                "target": 30,
+                                "locaKey": "WinCampaignBattles_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_win_without_dmg_physical_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithoutDamageProfile",
+                                "target": 12,
+                                "locaKey": "WinBattlesWithoutDamageProfile_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Physical"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_s_damage_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "DealDamage",
+                                "target": 3000,
+                                "locaKey": "DealDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_crits_guwa_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "ScoreCritsInGameModes",
+                                "target": 20,
+                                "locaKey": "ScoreCritsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["GuildWars", "Waves", "PvP"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_win_without_dmg_bolter_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithoutDamageProfile",
+                                "target": 12,
+                                "locaKey": "WinBattlesWithoutDamageProfile_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Bolter"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_s_deal_ability_dmg_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "DealAbilityDamage",
+                                "target": 3000,
+                                "locaKey": "DealAbilityDamage_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_hits_sync_pvp_guwa_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "ScoreHitsInGameModes",
+                                "target": 120,
+                                "locaKey": "ScoreHitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["SyncPVP", "GuildWars", "PvP"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_slay_with_melee_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithMeleeAttacks",
+                                "target": 100,
+                                "locaKey": "SlayEnemiesWithMeleeAttacks_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_s_crits_01",
+                        "rewards": ["xp_battlepass:15", "machinesOfWarAmmo:1", "xp_seasonal:50"],
+                        "tasks": [
+                            {
+                                "name": "ScoreCrits",
+                                "target": 5,
+                                "locaKey": "ScoreCrits_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_use_ability_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "UseAbility",
+                                "target": 35,
+                                "locaKey": "UseAbility_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_win_without_dmg_piercing_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "WinBattlesWithoutDamageProfile",
+                                "target": 12,
+                                "locaKey": "WinBattlesWithoutDamageProfile_description",
+                                "taskParameters": {
+                                    "damageProfileType": "Piercing"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_attack_guwa_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "AttackUnitsInGameModes",
+                                "target": 50,
+                                "locaKey": "AttackUnitsInGameModes_description",
+                                "taskParameters": {
+                                    "gameModes": ["GuildWars", "Waves", "PvP"]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_slay_with_trait_infiltrate_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithTrait",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithTrait_description",
+                                "taskParameters": {
+                                    "trait": "Infiltrate"
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_m_traverse_hexes_01",
+                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
+                        "tasks": [
+                            {
+                                "name": "TraverseHexes",
+                                "target": 300,
+                                "locaKey": "TraverseHexes_description"
+                            }
+                        ]
+                    },
+                    {
+                        "name": "bp_se_october_2026_daily_l_slay_with_trait_overwatch_01",
+                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
+                        "tasks": [
+                            {
+                                "name": "SlayEnemiesWithTrait",
+                                "target": 80,
+                                "locaKey": "SlayEnemiesWithTrait_description",
+                                "taskParameters": {
+                                    "trait": "Overwatch"
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    ]
+}

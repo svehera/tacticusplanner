@@ -227,6 +227,12 @@
         "name": "Gulgortz Buldozer",
         "title": "Mega Zırhlı Savaş Şefi"
     },
+    "orksWeirdboy": {
+        "extraShortName": "Zapspitta",
+        "shortName": "Zapspitta",
+        "name": "Grubak Zapspitta",
+        "title": "Tuhaf Velet"
+    },
     "templSwordBrother": {
         "extraShortName": "Godswyl",
         "shortName": "Kılıç Kardeşi Godswyl",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Ûthar",
-        "shortName": "Mukadder Ûthar\n",
+        "shortName": "Mukadder Ûthar",
         "name": "Mukadder Ûthar",
         "title": "Yüce Kâhl"
     },
@@ -700,5 +706,11 @@
         "shortName": "Nubari",
         "name": "Nubari Shal'Dar",
         "title": "İmhacı Çavuş"
+    },
+    "lostaBile": {
+        "extraShortName": "Fabius Bile",
+        "shortName": "Fabius Bile",
+        "name": "Fabius Bile",
+        "title": "Klonbaba. İlk ata. Örümcek."
     }
 }

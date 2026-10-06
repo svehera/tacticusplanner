@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_LEG_lostaBile",
+    "title": "Fabius Bile Squad Requisition",
+    "tagline": "Gain the upper hand in the upcoming <i>{[HRE/name_LEG_TheLostAndTheDamned]}</i> event, featuring <style=\"Faction_TheLostAndTheDamned\">Fabius Bile</style>",
+    "featuredUnits": [
+        "templSwordBrother",
+        "thousSekhetar",
+        "genesPrimus",
+        "templChampion",
+        "templHelbrecht",
+        "darkaAzrael"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 15
+    }
+}

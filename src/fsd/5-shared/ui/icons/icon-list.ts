@@ -239,6 +239,7 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     crusadeNpc: snowprintIcons.crusadeNpc,
     crusadeCurrency: snowprintIcons.crusadeCurrency,
     seasonalEventAugust2026AvatarFrame: snowprintIcons.seasonalEventAugust2026AvatarFrame,
+    seasonalEventOctober2026AvatarFrame: snowprintIcons.seasonalEventOctober2026AvatarFrame,
     guildCredits: snowprintIcons.guildCredits,
     warCredits: snowprintIcons.warCredits,
     archeotech: snowprintIcons.archeotech,

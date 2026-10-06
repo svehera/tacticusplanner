@@ -170,7 +170,7 @@
         "tier": 0,
         "battleNr": 0,
         "boardId": "survival_14",
-        "power": 58875323514,
+        "power": 58875322734,
         "waves": [
             {
                 "round": 1,
@@ -357,7 +357,7 @@
             },
             {
                 "round": 24,
-                "power": 581912,
+                "power": 581132,
                 "army": [
                     "darkaNpc3Terminator:26",
                     "darkaNpcAzrael:16",
@@ -523,7 +523,8 @@
             "BloodAngels",
             "Custodes",
             "EmperorsChildren",
-            "AdeptusAstartes"
+            "AdeptusAstartes",
+            "TheLostAndTheDamned"
         ]
     },
     "milestoneRewards": [

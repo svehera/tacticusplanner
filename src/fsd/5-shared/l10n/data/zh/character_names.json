@@ -227,6 +227,12 @@
         "name": "重踏者古爾托茲",
         "title": "裝備超級裝甲的戰爭頭目"
     },
+    "orksWeirdboy": {
+        "extraShortName": "扎普斯皮塔",
+        "shortName": "扎普斯皮塔",
+        "name": "古巴克‧扎普斯皮塔",
+        "title": "神經小子"
+    },
     "templSwordBrother": {
         "extraShortName": "戈斯維爾",
         "shortName": "劍刃兄弟戈斯維爾",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "鄔薩爾",
-        "shortName": "天命者鄔薩爾\n",
+        "shortName": "天命者鄔薩爾",
         "name": "天命者鄔薩爾",
         "title": "至高戰爭領袖"
     },
@@ -700,5 +706,11 @@
         "shortName": "努巴利",
         "name": "努巴利‧夏達爾",
         "title": "根除者中士"
+    },
+    "lostaBile": {
+        "extraShortName": "法比烏斯‧拜爾",
+        "shortName": "法比烏斯‧拜爾",
+        "name": "法比烏斯‧拜爾",
+        "title": "複製體之父、始祖、蜘蛛。"
     }
 }

@@ -45,6 +45,7 @@ export function getFactionPray(faction: FactionId): string {
         case 'BloodAngels':
         case 'Custodes':
         case 'EmperorsChildren':
+        case 'TheLostAndTheDamned':
         case 'LeaguesOfVotann': {
             return '';
         }

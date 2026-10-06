@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "拉克里梅",
     "R_Crit_HeadwoppasKillchoppa": "碎头者的杀戮砍刀",
     "R_Crit_Helspear": "地狱之矛",
+    "R_Crit_Fidelity": "忠诚",
     "R_Booster_Crit_KardiocoreGalvanus": "电动心脏",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "虚空龙护符",
     "R_Booster_Crit_BookOfFate": "命运之书",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "相位镇压者",
     "R_Defensive_RelicOfLostCadia": "失落卡迪亚圣物",
     "R_Defensive_SupaCyborkBody": "超级仿生躯体",
+    "R_Defensive_Thrydderghyre": "瑟德格里尔",
     "R_Block_DaemonfleshPlate": "恶魔血肉板甲",
     "R_Booster_Block_PhoenixGem": "凤凰宝石",
-    "R_Booster_Block_NornCrown": "诺恩皇冠"
+    "R_Booster_Block_NornCrown": "诺恩皇冠",
+    "R_Booster_Block_LionHelmRelic": "雄狮之盔"
 }
