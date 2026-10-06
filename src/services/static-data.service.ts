@@ -62,6 +62,7 @@ export const StaticDataService = {
             case 'BloodAngels':
             case 'Custodes':
             case 'EmperorsChildren':
+            case 'TheLostAndTheDamned':
             case 'LeaguesOfVotann': {
                 return '';
             }

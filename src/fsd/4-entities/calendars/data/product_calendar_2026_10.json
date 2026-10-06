@@ -1,0 +1,1160 @@
+{
+    "calendar": "calendar_seasonal_event_october_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "L2_SHD",
+                    "title": "Fresh Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:300", "summoningToken:20"]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "Fresh Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:240", "summoningToken:16"]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "Fresh Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:180", "summoningToken:12"]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "Fresh Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyOctober2026:90", "summoningToken:6"]
+                },
+                {
+                    "variant": "M_free",
+                    "title": "Spoils of War",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyOctober2026:10", "gems:50", "mythicDust:25"]
+                },
+                {
+                    "variant": "CUREL_free",
+                    "title": "Spoils of War",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyOctober2026:10", "gems:50", "dust:250"]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Solid Stratagems",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:150", "xpMythic:5", "xpLegendary:20", "gold:20000"]
+                },
+                {
+                    "variant": "XL3_M_SHD",
+                    "title": "Abundant Ascension Resources",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 9999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:1000",
+                        "ascensionOrbsMythic:15",
+                        "ascensionOrbsLegendary:25"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Solid Stratagems",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:100", "xpMythic:3", "xpLegendary:15", "gold:13500"]
+                },
+                {
+                    "variant": "XL3_M_HD",
+                    "title": "Abundant Ascension Resources",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:800",
+                        "ascensionOrbsMythic:12",
+                        "ascensionOrbsLegendary:20"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Solid Stratagems",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:75",
+                        "xpLegendary:18",
+                        "xpEpic:18",
+                        "xpRare:20",
+                        "gold:12000"
+                    ]
+                },
+                {
+                    "variant": "XL3_M_MD",
+                    "title": "Abundant Ascension Resources",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:600",
+                        "ascensionOrbsMythic:9",
+                        "ascensionOrbsLegendary:15"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Solid Stratagems",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:25",
+                        "xpLegendary:5",
+                        "xpEpic:10",
+                        "xpRare:10",
+                        "gold:4500"
+                    ]
+                },
+                {
+                    "variant": "XL3_M_LD",
+                    "title": "Abundant Ascension Resources",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:200",
+                        "ascensionOrbsMythic:3",
+                        "ascensionOrbsLegendary:5"
+                    ]
+                },
+                {
+                    "variant": "XL3_CUREL_LD",
+                    "title": "Abundant Ascension Resources",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:300",
+                        "ascensionOrbsLegendary:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsUncommon:15"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Major Offensive",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:80",
+                        "stamina:480",
+                        "raidTicket:80",
+                        "stamina_waves:4"
+                    ]
+                },
+                {
+                    "variant": "M3_M_SHD",
+                    "title": "Imperial Armoury",
+                    "banner": "Mythic Rewards!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:350",
+                        "mythicDust:210",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "gold:210000"
+                    ]
+                },
+                {
+                    "variant": "M3_L_SHD",
+                    "title": "Imperial Armoury",
+                    "banner": "Legendary Rewards!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:350",
+                        "dust:2800",
+                        "itemsLegendary:3",
+                        "itemsLegendary:2",
+                        "itemsEpic:3",
+                        "itemsEpic:2",
+                        "gold:28000"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_SHD",
+                    "title": "Imperial Armoury",
+                    "banner": "Epic Rewards!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:350",
+                        "dust:4000",
+                        "itemsEpic:4",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:4",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:4",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "gold:40000"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Major Offensive",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:60",
+                        "stamina:360",
+                        "raidTicket:60",
+                        "stamina_waves:3"
+                    ]
+                },
+                {
+                    "variant": "M3_M_HD",
+                    "title": "Imperial Armoury",
+                    "banner": "Mythic Rewards!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "mythicDust:140",
+                        "itemsMythic:1",
+                        "gold:140000"
+                    ]
+                },
+                {
+                    "variant": "M3_L_HD",
+                    "title": "Imperial Armoury",
+                    "banner": "Legendary Rewards!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "dust:1680",
+                        "itemsLegendary:2",
+                        "itemsLegendary:1",
+                        "itemsEpic:2",
+                        "itemsEpic:1",
+                        "gold:16800"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_HD",
+                    "title": "Imperial Armoury",
+                    "banner": "Epic Rewards!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "dust:2400",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "gold:24000"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Major Offensive",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:40",
+                        "stamina:240",
+                        "raidTicket:40",
+                        "stamina_waves:2"
+                    ]
+                },
+                {
+                    "variant": "M3_M_MD",
+                    "title": "Imperial Armoury",
+                    "banner": "Mythic Rewards!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyOctober2026:140", "mythicDust:65", "itemsMythic:1", "gold:70000"]
+                },
+                {
+                    "variant": "M3_L_MD",
+                    "title": "Imperial Armoury",
+                    "banner": "Legendary Rewards!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "dust:1120",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "itemsEpic:1",
+                        "gold:11200"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_MD",
+                    "title": "Imperial Armoury",
+                    "banner": "Epic Rewards!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "dust:1600",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsUncommon:2",
+                        "gold:16000"
+                    ]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Major Offensive",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:20",
+                        "stamina:120",
+                        "raidTicket:20",
+                        "stamina_waves:1"
+                    ]
+                },
+                {
+                    "variant": "M3_M_LD",
+                    "title": "Imperial Armoury",
+                    "banner": "Mythic Rewards!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["seasonalEventCurrencyOctober2026:70", "mythicDust:70", "gold:75000"]
+                },
+                {
+                    "variant": "M3_L_LD",
+                    "title": "Imperial Armoury",
+                    "banner": "Legendary Rewards!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "dust:560",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "gold:5600"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_LD",
+                    "title": "Imperial Armoury",
+                    "banner": "Epic Rewards!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "dust:800",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "gold:8000"
+                    ]
+                },
+                {
+                    "variant": "M3_CU_LD",
+                    "title": "Imperial Armoury",
+                    "banner": "Rare Rewards!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "dust:800",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3",
+                        "gold:8000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "L2_AL50_SHD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:315",
+                        "gold:600000",
+                        "abilityTokenMythic_Imperial:6",
+                        "abilityTokenLegendary_Imperial:6"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_SHD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:315",
+                        "gold:600000",
+                        "abilityTokenLegendary_Imperial:5",
+                        "abilityTokenLegendary_Imperial:5",
+                        "abilityTokenLegendary_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_SHD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:315",
+                        "gold:468000",
+                        "abilityTokenEpic_Imperial:15",
+                        "abilityTokenEpic_Imperial:15",
+                        "abilityTokenRare_Imperial:20",
+                        "abilityTokenRare_Imperial:20"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_SHD",
+                    "title": "Artillery Support",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:700",
+                        "machinesOfWarToken_Imperial:200",
+                        "machinesOfWarToken_Chaos:200",
+                        "machinesOfWarToken_Xenos:200",
+                        "machinesOfWarAmmo:50"
+                    ]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Hardened Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:700", "summoningToken:30"]
+                },
+                {
+                    "variant": "L2_AL50_HD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "gold:400000",
+                        "abilityTokenMythic_Imperial:4",
+                        "abilityTokenLegendary_Imperial:4"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_HD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "gold:400000",
+                        "abilityTokenLegendary_Imperial:5",
+                        "abilityTokenLegendary_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_HD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "gold:312000",
+                        "abilityTokenEpic_Imperial:20",
+                        "abilityTokenRare_Imperial:26"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_HD",
+                    "title": "Artillery Support",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:350",
+                        "machinesOfWarToken_Imperial:100",
+                        "machinesOfWarToken_Chaos:100",
+                        "machinesOfWarToken_Xenos:100",
+                        "machinesOfWarAmmo:25"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Hardened Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyOctober2026:350", "summoningToken:15"]
+                },
+                {
+                    "variant": "L2_AL50_MD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "gold:400000",
+                        "abilityTokenMythic_Imperial:4",
+                        "abilityTokenLegendary_Imperial:4"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_MD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "gold:400000",
+                        "abilityTokenLegendary_Imperial:5",
+                        "abilityTokenLegendary_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_MD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "gold:312000",
+                        "abilityTokenEpic_Imperial:20",
+                        "abilityTokenRare_Imperial:26"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_MD",
+                    "title": "Artillery Support",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "machinesOfWarToken_Imperial:40",
+                        "machinesOfWarToken_Chaos:40",
+                        "machinesOfWarToken_Xenos:40",
+                        "machinesOfWarAmmo:10"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Hardened Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyOctober2026:140", "summoningToken:6"]
+                },
+                {
+                    "variant": "L2_AL50_LD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:105",
+                        "gold:200000",
+                        "abilityTokenMythic_Imperial:2",
+                        "abilityTokenLegendary_Imperial:2"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_LD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:105",
+                        "gold:200000",
+                        "abilityTokenLegendary_Imperial:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_LD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:105",
+                        "gold:156000",
+                        "abilityTokenEpic_Imperial:10",
+                        "abilityTokenRare_Imperial:13"
+                    ]
+                },
+                {
+                    "variant": "L2_F_LD",
+                    "title": "Ability Progress Supplies",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:105",
+                        "gold:72000",
+                        "abilityTokenRare_Imperial:24",
+                        "abilityTokenUncommon_Imperial:24",
+                        "abilityTokenUncommon_Imperial:24",
+                        "abilityTokenCommon_Imperial:24",
+                        "abilityTokenCommon_Imperial:24"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_LD",
+                    "title": "Artillery Support",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "machinesOfWarToken_Imperial:20",
+                        "machinesOfWarToken_Chaos:20",
+                        "machinesOfWarToken_Xenos:20",
+                        "machinesOfWarAmmo:5"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Hardened Recruits",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyOctober2026:70", "summoningToken:3"]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "L2_SHD",
+                    "title": "Front Line Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:400",
+                        "specialSummoningToken:20",
+                        "stamina:600",
+                        "raidTicket:60"
+                    ]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:280",
+                        "ascensionOrbsMythic:4",
+                        "abilityTokensMythic:4",
+                        "gold:500000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:280",
+                        "ascensionOrbsLegendary:8",
+                        "abilityTokensLegendary:20",
+                        "gold:200000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:280",
+                        "ascensionOrbsLegendary:4",
+                        "ascensionOrbsEpic:12",
+                        "abilityTokensEpic:16",
+                        "abilityTokensEpic:16",
+                        "gold:120000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:280",
+                        "ascensionOrbsEpic:8",
+                        "ascensionOrbsRare:20",
+                        "ascensionOrbsRare:20",
+                        "abilityTokensRare:32",
+                        "abilityTokensUncommon:40",
+                        "gold:68000"
+                    ]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "Front Line Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:200",
+                        "specialSummoningToken:10",
+                        "stamina:300",
+                        "raidTicket:50"
+                    ]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "ascensionOrbsMythic:3",
+                        "abilityTokensMythic:3",
+                        "gold:375000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "ascensionOrbsLegendary:6",
+                        "abilityTokensLegendary:15",
+                        "gold:150000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "ascensionOrbsLegendary:3",
+                        "ascensionOrbsEpic:9",
+                        "abilityTokensEpic:24",
+                        "gold:90000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:210",
+                        "ascensionOrbsEpic:6",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsRare:15",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:30",
+                        "gold:51000"
+                    ]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "Front Line Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:80",
+                        "specialSummoningToken:4",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "ascensionOrbsMythic:2",
+                        "abilityTokensMythic:2",
+                        "gold:250000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "ascensionOrbsLegendary:4",
+                        "abilityTokensLegendary:10",
+                        "gold:100000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "ascensionOrbsLegendary:2",
+                        "ascensionOrbsEpic:6",
+                        "abilityTokensEpic:16",
+                        "gold:60000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:140",
+                        "ascensionOrbsEpic:4",
+                        "ascensionOrbsRare:20",
+                        "abilityTokensRare:16",
+                        "abilityTokensUncommon:20",
+                        "gold:34000"
+                    ]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "Front Line Reinforcements",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:40",
+                        "specialSummoningToken:2",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "ascensionOrbsMythic:1",
+                        "abilityTokensMythic:1",
+                        "gold:125000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "ascensionOrbsLegendary:2",
+                        "abilityTokensLegendary:5",
+                        "gold:50000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "ascensionOrbsLegendary:1",
+                        "ascensionOrbsEpic:3",
+                        "abilityTokensEpic:8",
+                        "gold:30000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Powerful Ascension",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:70",
+                        "ascensionOrbsEpic:2",
+                        "ascensionOrbsRare:10",
+                        "abilityTokensRare:8",
+                        "abilityTokensUncommon:10",
+                        "gold:17000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Spoils of War",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["avatarFrame_frameOctober2026:1", "stamina:60", "raidTicket:10"]
+                },
+                {
+                    "variant": "avatar",
+                    "title": "Armageddon's Parade",
+                    "banner": "Unique Avatar!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:100",
+                        "avatar_october_2026_01:1",
+                        "specialSummoningToken:10",
+                        "xpLegendary:10",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Imperial Reinforcements",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:160", "ShardsImperial:160", "ShardsImperial:160"]
+                },
+                {
+                    "variant": "S4_M_SHD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:80",
+                        "upgradesMythic:4",
+                        "upgradesMythic:4",
+                        "upgradesLegendary:6",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_SHD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:80",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesUncommon:36",
+                        "upgradesCommon:36"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Imperial Reinforcements",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:120", "ShardsImperial:120", "ShardsImperial:120"]
+                },
+                {
+                    "variant": "S4_M_HD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:60",
+                        "upgradesMythic:3",
+                        "upgradesMythic:3",
+                        "upgradesLegendary:9",
+                        "upgradesEpic:10",
+                        "upgradesEpic:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_HD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:60",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:5",
+                        "upgradesEpic:10",
+                        "upgradesEpic:5",
+                        "upgradesRare:9",
+                        "upgradesRare:9",
+                        "upgradesRare:9",
+                        "upgradesUncommon:27",
+                        "upgradesCommon:27"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Imperial Reinforcements",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:80", "ShardsImperial:80", "ShardsImperial:80"]
+                },
+                {
+                    "variant": "S4_M_MD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:40",
+                        "upgradesMythic:4",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_MD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:40",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:18",
+                        "upgradesUncommon:18",
+                        "upgradesCommon:18"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Imperial Reinforcements",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyOctober2026:40", "ShardsImperial:40", "ShardsImperial:40"]
+                },
+                {
+                    "variant": "S4_M_LD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:20",
+                        "upgradesMythic:2",
+                        "upgradesLegendary:3",
+                        "upgradesEpic:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_LD",
+                    "title": "Extensive Upgrades",
+                    "banner": "Rank Up!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyOctober2026:20",
+                        "upgradesLegendary:5",
+                        "upgradesEpic:5",
+                        "upgradesRare:9",
+                        "upgradesUncommon:9",
+                        "upgradesCommon:9"
+                    ]
+                }
+            ]
+        }
+    ]
+}

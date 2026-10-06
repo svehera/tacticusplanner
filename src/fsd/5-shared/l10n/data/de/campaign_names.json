@@ -21,10 +21,12 @@
     "eventStandard4": "Death Guard Standard",
     "eventStandard5": "Adepta Sororitas Standard",
     "eventStandard6": "Dunkle Engel Standard",
+    "eventStandard7": "",
     "eventExtremis1": "Adeptus Mechanicus Extremis",
     "eventExtremis2": "Tyraniden Extremis",
     "eventExtremis3": "Sternenreich der T’au Extremis",
     "eventExtremis4": "Death Guard Extremis",
     "eventExtremis5": "Adepta Sororitas Extremis",
-    "eventExtremis6": "Dunkle Engel Extremis"
+    "eventExtremis6": "Dunkle Engel Extremis",
+    "eventExtremis7": ""
 }

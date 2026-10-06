@@ -227,6 +227,12 @@
         "name": "Гулгорц Бульдозер",
         "title": "Варбосс в мегаброне"
     },
+    "orksWeirdboy": {
+        "extraShortName": "Заппаплюй",
+        "shortName": "Заппаплюй",
+        "name": "Грубак Заппаплюй",
+        "title": "Чудила"
+    },
     "templSwordBrother": {
         "extraShortName": "Годсвиль",
         "shortName": "Брат Меча Годсвиль",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Утар",
-        "shortName": "Утар Предначертанный\n",
+        "shortName": "Утар Предначертанный",
         "name": "Утар Предначертанный",
         "title": "Великий кахл"
     },
@@ -700,5 +706,11 @@
         "shortName": "Нубари",
         "name": "Нубари Шал'Дар",
         "title": "Сержант искоренителей"
+    },
+    "lostaBile": {
+        "extraShortName": "Фабий Байл",
+        "shortName": "Фабий Байл",
+        "name": "Фабий Байл",
+        "title": "Отец клонов. Прародитель. Паук."
     }
 }

@@ -19,6 +19,7 @@ const GENERIC_EVENT_IDS: ReadonlySet<LegendaryEventEnum> = new Set([
     LegendaryEventEnum.Farsight,
     LegendaryEventEnum.Uthar,
     LegendaryEventEnum.Lysander,
+    LegendaryEventEnum.FabiusBile,
 ]);
 
 export const getLre = (id: LegendaryEventEnum, characters: ICharacter2[]) => {

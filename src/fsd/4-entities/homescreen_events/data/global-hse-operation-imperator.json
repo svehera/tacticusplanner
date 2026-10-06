@@ -1,0 +1,108 @@
+{
+    "eventName": "global_hse_operation_imperator",
+    "tiers": {
+        "default": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "global_hse_operation_imperator",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_operation_imperator_Interstitial_Header",
+                "visualId": "homescreenevent_global_hse_operation_imperator",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_operation_imperator_Interstitial_Description",
+                "eventId": "global_hse_operation_imperator",
+                "rewardProgressId": "global_hse_operation_imperator",
+                "theme": "global_hse_operation_imperator",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 0,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "global",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_operation_imperator_with_astra_militarum_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["AstraMilitarum"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "global",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_operation_imperator_with_black_templars_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["BlackTemplars"]
+                        }
+                    },
+                    {
+                        "type": "killUnits",
+                        "scope": "global",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_operation_imperator_with_space_wolves_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["SpaceWolves"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 1000000,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 2100000,
+                    "chestRewardId": "stamina:100"
+                },
+                {
+                    "requiredProgress": 3300000,
+                    "chestRewardId": "seasonalEventCurrencyOctober2026:50"
+                },
+                {
+                    "requiredProgress": 4600000,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 1300000,
+                    "chestRewardId": "ShardsImperial:5",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Operation Imperator</i> is here",
+                "Global event: all players contribute to it together!",
+                "<style=\"HSE_Points_OperationImperator\">{[POINTS]}</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) defeated by an <style=\"Faction_AstraMilitarum\">Astra Militarum</style>.",
+                "<style=\"HSE_Points_OperationImperator\">{[POINTS]}</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) defeated by a <style=\"Faction_BlackTemplars\">Black Templar</style>.",
+                "<style=\"HSE_Points_OperationImperator\">{[POINTS]}</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) defeated by a <style=\"Faction_SpaceWolves\">Space Wolf</style>."
+            ]
+        }
+    }
+}

@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "Lakrimae",
     "R_Crit_HeadwoppasKillchoppa": "Mata-corta do Gigantão",
     "R_Crit_Helspear": "Helspear",
+    "R_Crit_Fidelity": "Fidelidade",
     "R_Booster_Crit_KardiocoreGalvanus": "Kardiocore Galvanus",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "Amuleto de Wyrm do Vazio",
     "R_Booster_Crit_BookOfFate": "Livro do Destino",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "Subjugador Fásico",
     "R_Defensive_RelicOfLostCadia": "Relíquia de Cadia Perdida",
     "R_Defensive_SupaCyborkBody": "Corpo Supa-Cybork",
+    "R_Defensive_Thrydderghyre": "Thrydderghyre",
     "R_Block_DaemonfleshPlate": "Placa de Carne Demoníaca",
     "R_Booster_Block_PhoenixGem": "Gema da Fênix",
-    "R_Booster_Block_NornCrown": "Coroa de Norn"
+    "R_Booster_Block_NornCrown": "Coroa de Norn",
+    "R_Booster_Block_LionHelmRelic": "Elmo do Leão"
 }

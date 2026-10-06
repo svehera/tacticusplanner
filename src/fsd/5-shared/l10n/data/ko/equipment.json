@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "라크리메",
     "R_Crit_HeadwoppasKillchoppa": "헤드워파의 킬초파",
     "R_Crit_Helspear": "헬스피어",
+    "R_Crit_Fidelity": "충의",
     "R_Booster_Crit_KardiocoreGalvanus": "심핵 갈바누스",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "보이드웜의 애뮬릿",
     "R_Booster_Crit_BookOfFate": "운명의 서",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "위상 예속자",
     "R_Defensive_RelicOfLostCadia": "잃어버린 카디아의 유물",
     "R_Defensive_SupaCyborkBody": "수파 사이보크 바디",
+    "R_Defensive_Thrydderghyre": "스리더가이어",
     "R_Block_DaemonfleshPlate": "데몬플레시 플레이트",
     "R_Booster_Block_PhoenixGem": "불사조 보석",
-    "R_Booster_Block_NornCrown": "노른의 왕관"
+    "R_Booster_Block_NornCrown": "노른의 왕관",
+    "R_Booster_Block_LionHelmRelic": "사자 투구"
 }

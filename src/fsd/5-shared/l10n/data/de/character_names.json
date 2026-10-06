@@ -227,6 +227,12 @@
         "name": "Gulgortz Bulldoza",
         "title": "Waaaghboss in Megarüstung"
     },
+    "orksWeirdboy": {
+        "extraShortName": "Zappaspukka",
+        "shortName": "Zappaspukka",
+        "name": "Grubak Zappaspukka",
+        "title": "Wirrkopp"
+    },
     "templSwordBrother": {
         "extraShortName": "Godswyl",
         "shortName": "Schwertbruder Godswyl",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "Ûthar",
-        "shortName": "Ûthar der Vorherbestimmte\n",
+        "shortName": "Ûthar der Vorherbestimmte",
         "name": "Ûthar der Vorherbestimmte",
         "title": "Hoch-Kâhl"
     },
@@ -700,5 +706,11 @@
         "shortName": "Nubari",
         "name": "Nubari Shal'Dar",
         "title": "Eradicator-Sergeant"
+    },
+    "lostaBile": {
+        "extraShortName": "Fabius Bile",
+        "shortName": "Fabius Bile",
+        "name": "Fabius Bile",
+        "title": "Klonvater. Primogenitor. Spinne."
     }
 }

@@ -15,7 +15,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_terminator_armour_Interstitial_Description",
                 "eventId": "hse_trait_boost_terminator_armour_tier_high",
-                "rewardProgressId": "hse_trait_boost_flying_tier_high",
+                "rewardProgressId": "hse_trait_boost_tier_high",
                 "theme": "trait_boost_terminator_armour",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 100,
@@ -73,7 +73,11 @@
             },
             "tieredProgressRewards": [
                 {
-                    "requiredProgress": 30,
+                    "requiredProgress": 20,
+                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                },
+                {
+                    "requiredProgress": 40,
                     "chestRewardId": "draft_abilityTokensRare:2"
                 },
                 {
@@ -81,76 +85,72 @@
                     "chestRewardId": "draft_abilityTokensEpic"
                 },
                 {
-                    "requiredProgress": 90,
+                    "requiredProgress": 80,
                     "chestRewardId": "draft_abilityTokensLegendary"
                 },
                 {
-                    "requiredProgress": 120,
-                    "chestRewardId": "draft_abilityTokensRare:3"
+                    "requiredProgress": 105,
+                    "chestRewardId": "draft_abilityTokensUncommon:5"
                 },
                 {
-                    "requiredProgress": 150,
-                    "chestRewardId": "draft_abilityTokensEpic:2"
-                },
-                {
-                    "requiredProgress": 180,
-                    "chestRewardId": "draft_abilityTokensLegendary"
-                },
-                {
-                    "requiredProgress": 210,
+                    "requiredProgress": 135,
                     "chestRewardId": "draft_abilityTokensRare:4"
                 },
                 {
-                    "requiredProgress": 240,
+                    "requiredProgress": 165,
                     "chestRewardId": "draft_abilityTokensEpic:3"
                 },
                 {
-                    "requiredProgress": 270,
+                    "requiredProgress": 195,
                     "chestRewardId": "draft_abilityTokensLegendary:2"
                 },
                 {
-                    "requiredProgress": 300,
+                    "requiredProgress": 230,
+                    "chestRewardId": "draft_abilityTokensUncommon:6"
+                },
+                {
+                    "requiredProgress": 270,
                     "chestRewardId": "draft_abilityTokensRare:5"
                 },
                 {
-                    "requiredProgress": 340,
+                    "requiredProgress": 320,
                     "chestRewardId": "draft_abilityTokensEpic:4"
                 },
                 {
-                    "requiredProgress": 380,
+                    "requiredProgress": 370,
                     "chestRewardId": "draft_abilityTokensLegendary:3"
                 },
                 {
                     "requiredProgress": 420,
-                    "chestRewardId": "draft_abilityTokensRare:6"
-                },
-                {
-                    "requiredProgress": 460,
-                    "chestRewardId": "draft_abilityTokensEpic:5"
-                },
-                {
-                    "requiredProgress": 500,
-                    "chestRewardId": "draft_abilityTokensLegendary:4"
-                },
-                {
-                    "requiredProgress": 540,
-                    "chestRewardId": "draft_abilityTokensMythic"
-                },
-                {
-                    "requiredProgress": 600,
-                    "chestRewardId": "specialSummoningToken"
-                },
-                {
-                    "requiredProgress": 640,
-                    "chestRewardId": "draft_abilityTokensLegendary:5"
-                },
-                {
-                    "requiredProgress": 680,
                     "chestRewardId": "draft_abilityTokensMythic:2"
                 },
                 {
-                    "requiredProgress": 25,
-                    "chestRewardId": "draft_abilityTokensLegendary:2",
+                    "requiredProgress": 470,
+                    "chestRewardId": "draft_abilityTokensUncommon:10"
+                },
+                {
+                    "requiredProgress": 520,
+                    "chestRewardId": "draft_abilityTokensRare:10"
+                },
+                {
+                    "requiredProgress": 570,
+                    "chestRewardId": "draft_abilityTokensEpic:10"
+                },
+                {
+                    "requiredProgress": 645,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 705,
+                    "chestRewardId": "draft_abilityTokensLegendary:10"
+                },
+                {
+                    "requiredProgress": 765,
+                    "chestRewardId": "draft_abilityTokensMythic:5"
+                },
+                {
+                    "requiredProgress": 50,
+                    "chestRewardId": "draft_abilityTokensLegendary",
                     "endless": true
                 }
             ],
@@ -276,7 +276,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_terminator_armour_Interstitial_Description",
                 "eventId": "hse_trait_boost_terminator_armour_tier_mid",
-                "rewardProgressId": "hse_trait_boost_flying_tier_mid",
+                "rewardProgressId": "hse_trait_boost_tier_mid",
                 "theme": "trait_boost_terminator_armour",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 60,
@@ -395,7 +395,7 @@
                 },
                 {
                     "requiredProgress": 465,
-                    "chestRewardId": "draft_abilityTokensLegendary:3"
+                    "chestRewardId": "draft_abilityTokensLegendary:4"
                 },
                 {
                     "requiredProgress": 525,
@@ -403,15 +403,15 @@
                 },
                 {
                     "requiredProgress": 565,
-                    "chestRewardId": "draft_abilityTokensLegendary:4"
+                    "chestRewardId": "draft_abilityTokensLegendary:6"
                 },
                 {
                     "requiredProgress": 605,
-                    "chestRewardId": "draft_abilityTokensLegendary:5"
+                    "chestRewardId": "draft_abilityTokensLegendary:8"
                 },
                 {
-                    "requiredProgress": 25,
-                    "chestRewardId": "draft_abilityTokensLegendary:2",
+                    "requiredProgress": 40,
+                    "chestRewardId": "draft_abilityTokensLegendary",
                     "endless": true
                 }
             ],
@@ -537,7 +537,7 @@
                 "removalDelayAfterPurchase": "",
                 "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_trait_boost_terminator_armour_Interstitial_Description",
                 "eventId": "hse_trait_boost_terminator_armour_tier_low",
-                "rewardProgressId": "hse_trait_boost_flying_tier_low",
+                "rewardProgressId": "hse_trait_boost_tier_low",
                 "theme": "trait_boost_terminator_armour",
                 "tradeInResourceCurrency": "gold",
                 "tradeInResourceAmountPerPoint": 20,
@@ -596,7 +596,7 @@
             "tieredProgressRewards": [
                 {
                     "requiredProgress": 10,
-                    "chestRewardId": "draft_abilityTokensUncommon:3"
+                    "chestRewardId": "draft_abilityTokensCommon"
                 },
                 {
                     "requiredProgress": 20,
@@ -664,15 +664,15 @@
                 },
                 {
                     "requiredProgress": 325,
-                    "chestRewardId": "draft_abilityTokensRare:4"
+                    "chestRewardId": "draft_abilityTokensRare:5"
                 },
                 {
                     "requiredProgress": 345,
-                    "chestRewardId": "draft_abilityTokensEpic:3"
+                    "chestRewardId": "draft_abilityTokensEpic:5"
                 },
                 {
                     "requiredProgress": 20,
-                    "chestRewardId": "draft_abilityTokensRare:2",
+                    "chestRewardId": "draft_abilityTokensRare",
                     "endless": true
                 }
             ],

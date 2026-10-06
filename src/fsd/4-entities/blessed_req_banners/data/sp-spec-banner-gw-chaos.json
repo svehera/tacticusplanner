@@ -3,12 +3,12 @@
     "title": "Heretic Guild War Requisition",
     "tagline": "Higher drop chances for these battle-proven units. Get ready for Guild War!",
     "featuredUnits": [
+        "thousTzaangor",
         "emperNoiseMarine",
-        "deathBlightlord",
         "blackObliterator",
-        "thousSorcerer",
-        "blackAbaddon",
-        "deathCrawler"
+        "blackHaarken",
+        "thousAhriman",
+        "thousDaemonPrince"
     ],
     "unlockRequirement": {
         "PowerLevel": 15

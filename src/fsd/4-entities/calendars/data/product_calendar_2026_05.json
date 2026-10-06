@@ -589,7 +589,7 @@
                         "seasonalEventCurrencyMay2026:120",
                         "ShardsIfUnlocked:135",
                         "ShardsIfUnlocked:135",
-                        "Stamina:240",
+                        "stamina:240",
                         "raidTicket:40"
                     ]
                 },
@@ -611,7 +611,7 @@
                         "seasonalEventCurrencyMay2026:80",
                         "ShardsIfUnlocked:90",
                         "ShardsIfUnlocked:90",
-                        "Stamina:150",
+                        "stamina:150",
                         "raidTicket:25"
                     ]
                 },
@@ -633,7 +633,7 @@
                         "seasonalEventCurrencyMay2026:70",
                         "ShardsIfUnlocked:80",
                         "ShardsIfUnlocked:80",
-                        "Stamina:120",
+                        "stamina:120",
                         "raidTicket:20"
                     ]
                 },
@@ -655,7 +655,7 @@
                         "seasonalEventCurrencyMay2026:35",
                         "ShardsIfUnlocked:40",
                         "ShardsIfUnlocked:40",
-                        "Stamina:60",
+                        "stamina:60",
                         "raidTicket:10"
                     ]
                 }

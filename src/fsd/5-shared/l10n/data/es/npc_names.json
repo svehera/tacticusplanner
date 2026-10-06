@@ -1319,6 +1319,18 @@
         "name": "",
         "title": ""
     },
+    "eldarBossLhykhis": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldNpc1Berzerker": {
+        "extraShortName": "",
+        "shortName": "Bersérker",
+        "name": "Bersérker de Khorne",
+        "title": ""
+    },
     "worldBossTerminatorLHE": {
         "extraShortName": "",
         "shortName": "",
@@ -1326,6 +1338,12 @@
         "title": ""
     },
     "worldBossJakhalLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "worldNpcEightbound": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -1979,6 +1997,12 @@
         "name": "",
         "title": ""
     },
+    "darkaBossAsmodaiLEG": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
     "darkaBossTerminatorLHE": {
         "extraShortName": "",
         "shortName": "",
@@ -1992,6 +2016,12 @@
         "title": ""
     },
     "darkaBossCompanionLHE": {
+        "extraShortName": "",
+        "shortName": "",
+        "name": "",
+        "title": ""
+    },
+    "darkaBossCompanionLEG": {
         "extraShortName": "",
         "shortName": "",
         "name": "",
@@ -2021,7 +2051,7 @@
         "name": "",
         "title": ""
     },
-    "bloodTerminator_LHE": {
+    "votanChampion_LHE": {
         "extraShortName": "",
         "shortName": "",
         "name": "",

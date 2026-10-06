@@ -227,6 +227,12 @@
         "name": "걸고츠 불도자",
         "title": "메가 아머를 입은 워보스"
     },
+    "orksWeirdboy": {
+        "extraShortName": "재프스피타",
+        "shortName": "재프스피타",
+        "name": "그루박 재프스피타",
+        "title": "위어드보이"
+    },
     "templSwordBrother": {
         "extraShortName": "갓스윌",
         "shortName": "소드 형제 갓스윌",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "우타르",
-        "shortName": "운명지어진 자 우타르\n",
+        "shortName": "운명지어진 자 우타르",
         "name": "운명지어진 자 우타르",
         "title": "하이 칼"
     },
@@ -700,5 +706,11 @@
         "shortName": "누바리",
         "name": "누바리 샬다르",
         "title": "이레디케이터 서전트"
+    },
+    "lostaBile": {
+        "extraShortName": "파비우스 바일",
+        "shortName": "파비우스 바일",
+        "name": "파비우스 바일",
+        "title": "클론의 아버지. 프라이모제니터. 거미."
     }
 }

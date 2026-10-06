@@ -227,6 +227,12 @@
         "name": "古尔戈兹·推土机",
         "title": "超重型护甲战争头目"
     },
+    "orksWeirdboy": {
+        "extraShortName": "扎普斯皮塔",
+        "shortName": "扎普斯皮塔",
+        "name": "格鲁巴克·扎普斯皮塔",
+        "title": "灵能小子"
+    },
     "templSwordBrother": {
         "extraShortName": "戈德斯维尔",
         "shortName": "圣剑兵士戈德斯维尔",
@@ -679,7 +685,7 @@
     },
     "votanUthar": {
         "extraShortName": "乌萨尔",
-        "shortName": "天命者乌萨尔\n",
+        "shortName": "天命者乌萨尔",
         "name": "天命者乌萨尔",
         "title": "至高卡赫"
     },
@@ -700,5 +706,11 @@
         "shortName": "努巴里",
         "name": "努巴里·沙尔达",
         "title": "根除者士官"
+    },
+    "lostaBile": {
+        "extraShortName": "法比乌斯·拜尔",
+        "shortName": "法比乌斯·拜尔",
+        "name": "法比乌斯·拜尔",
+        "title": "克隆原父、基因始祖、蜘蛛。"
     }
 }

@@ -66,6 +66,7 @@ export const FACTION_COLORS: Record<string, string> = {
     Genestealers: '#FF8500',
     Custodes: '#E6703D',
     EmperorsChildren: '#DB7093',
+    TheLostAndTheDamned: '#6B4A2B',
     LeaguesOfVotann: '#94C5DC',
     Votann: '#94C5DC',
 };
@@ -115,6 +116,7 @@ const TRAIT_STYLE_TO_ICON: Record<string, string> = {
     Summon: 'traitSummon',
     Suppressive_Fire: 'traitSuppressiveFire',
     Synapse: 'traitSynapse',
+    Teleport_Strike: 'traitTeleportStrike',
     Teleport_Strike_short: 'traitTeleportStrike',
     Terminator_Armor: 'traitTerminatorArmour',
     ThrillSeekers: 'traitThrillSeekers',

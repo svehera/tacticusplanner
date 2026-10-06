@@ -13,4 +13,5 @@ export enum LegendaryEventEnum {
     Farsight = 13,
     Uthar = 14,
     Lysander = 15,
+    FabiusBile = 16,
 }

@@ -20,6 +20,7 @@ import Necrons from '@/assets/images/factions/Necrons.png';
 import Orks from '@/assets/images/factions/Orks.png';
 import SpaceWolves from '@/assets/images/factions/Space Wolves.png';
 import Tau from "@/assets/images/factions/T'au Empire.png";
+import TheLostAndTheDamned from '@/assets/images/factions/The Lost and the Damned.png';
 import ThousandSons from '@/assets/images/factions/Thousand Sons.png';
 import Tyranids from '@/assets/images/factions/Tyranids.png';
 import Ultramarines from '@/assets/images/factions/Ultramarines.png';
@@ -47,6 +48,7 @@ const factionImages: { [key in FactionId]: string } = {
     SpaceWolves,
     Tau,
     ThousandSons,
+    TheLostAndTheDamned,
     Tyranids,
     Ultramarines,
     WorldEaters,

@@ -198,6 +198,7 @@
     "R_Crit_Lakrimae": "Lakrimae",
     "R_Crit_HeadwoppasKillchoppa": "Headwoppa'nın Killchoppa'sı",
     "R_Crit_Helspear": "Helspear",
+    "R_Crit_Fidelity": "Sadakat",
     "R_Booster_Crit_KardiocoreGalvanus": "Kardiocore Galvanus",
     "R_Booster_Crit_AmuletOfTheVoidwyrm": "Hiçlik Ejderi Muskası",
     "R_Booster_Crit_BookOfFate": "Kader Kitabı",
@@ -210,7 +211,9 @@
     "R_Booster_Crit_PhasalSubjugator": "Fazlı Boyun Eğdirici",
     "R_Defensive_RelicOfLostCadia": "Kayıp Cadia Yadigârı",
     "R_Defensive_SupaCyborkBody": "Süper Cybork Gövdesi",
+    "R_Defensive_Thrydderghyre": "Thrydderghyre",
     "R_Block_DaemonfleshPlate": "İblis Eti Plakası",
     "R_Booster_Block_PhoenixGem": "Anka Değerli Taşı",
-    "R_Booster_Block_NornCrown": "Norn Tacı"
+    "R_Booster_Block_NornCrown": "Norn Tacı",
+    "R_Booster_Block_LionHelmRelic": "Aslan Miğferi"
 }

@@ -7,6 +7,7 @@ import luciusJson from './12-lucius.json';
 import farsightJson from './13-farsight.json';
 import utharJson from './14-uthar.json';
 import lysanderJson from './15-lysander.json';
+import fabiusBileJson from './16-fabius-bile.json';
 import shadowsunJson from './2-Shadowsun.json';
 import ragnarJson from './3-Ragnar.json';
 import vitruviusJson from './4-Vitruvius.json';
@@ -32,6 +33,7 @@ const newFormatCharacterJson = [
     farsightJson,
     utharJson,
     lysanderJson,
+    fabiusBileJson,
 ] as unknown as INewCharacterJson[];
 const battleData = battleDataJson.legendaryEvents as unknown as INewBattleJson[];
 
@@ -43,7 +45,7 @@ const genericEvents = newFormatCharacterJson.map(characterJson => {
     return buildStaticLegendaryEvent(characterJson, battleJson, dates);
 });
 
-export const [dante, trajann, lucius, farsight, uthar, lysander] = genericEvents;
+export const [dante, trajann, lucius, farsight, uthar, lysander, fabiusBile] = genericEvents;
 
 /** Raw per-battle data (`objectives[]`, `waves[]`, etc) — used for token/farming estimation. */
 

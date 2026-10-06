@@ -8,6 +8,7 @@ import { tacticusIcons } from '@/fsd/5-shared/ui/icons';
  */
 const CURRENCY_ICON_BY_TYPE: Record<string, keyof typeof tacticusIcons> = {
     seasonalEventCurrencyJune2026: 'armageddonCurrency',
+    seasonalEventCurrencyOctober2026: 'armageddonCurrency',
     seasonalEventCurrencyApril2026: 'seasonalEventCurrencyApril2026',
     seasonalEventCurrencyAugust2026: 'seasonalEventCurrencyAugust2026',
     seasonalEventCurrencyHolidays2025: 'seasonalEventCurrencyHolidays2025',

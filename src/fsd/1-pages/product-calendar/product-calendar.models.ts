@@ -212,9 +212,10 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
         );
 
     const allianceBadgeMatch =
-        /^abilityTokens?(Common|Uncommon|Rare|Epic|Legendary|Mythic)_(Imperial|Chaos|Xenos)$/.exec(type);
+        /^abilityTokens?(Common|Un[cC]ommon|Rare|Epic|Legendary|Mythic)_(Imperial|Chaos|Xenos)$/.exec(type);
     if (allianceBadgeMatch) {
-        const rarity = allianceBadgeMatch[1] as RarityString;
+        // raw game data is inconsistently cased ("UnCommon" vs "Uncommon")
+        const rarity = (allianceBadgeMatch[1] === 'UnCommon' ? 'Uncommon' : allianceBadgeMatch[1]) as RarityString;
         const iconKey = `draftAbilityBadges${rarity}` as keyof typeof tacticusIcons;
         return misc(iconKey, `${rarity} Badge`);
     }

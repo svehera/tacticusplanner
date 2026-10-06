@@ -31,6 +31,10 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
         iconKey: 'seasonalEventAugust2026AvatarFrame',
         label: 'Seasonal Event (August 2026) Avatar Frame',
     },
+    avatarFrame_frameOctober2026: {
+        iconKey: 'seasonalEventOctober2026AvatarFrame',
+        label: 'Seasonal Event (October 2026) Avatar Frame',
+    },
     playerProfileTheme_may_2026: {
         iconKey: 'playerProfileThemeMay2026',
         label: 'Seasonal Event (May 2026) Profile Theme',
