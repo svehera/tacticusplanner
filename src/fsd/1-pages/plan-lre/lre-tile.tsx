@@ -11,16 +11,24 @@ import { CharacterBias, CharactersService, ICharacter2 } from '@/fsd/4-entities/
 import { EquipmentIcon, EquipmentService } from '@/fsd/4-entities/equipment';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal, PersonalGoalType } from '@/fsd/4-entities/goal';
 
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILreTileSettings } from '@/fsd/3-features/view-settings';
 
 interface Props {
     character: ICharacter2;
     settings: ILreTileSettings;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     onClick?: (character: ICharacter2) => void;
 }
 
-export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMowGoals, onClick = () => {} }) => {
+export const LreTile: React.FC<Props> = ({
+    character,
+    settings,
+    upgradeRankOrMowGoals,
+    upgradeAbilities,
+    onClick = () => {},
+}) => {
     const { viewPreferences } = useContext(StoreContext);
 
     // We use the current goals of the tactician, as well as the current state
@@ -97,6 +105,25 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
         return returnValue;
     }, [viewPreferences, upgradeRankOrMowGoals, character]);
 
+    const abilityLevels = useMemo(() => {
+        if (!viewPreferences.lreGoalsPreview) {
+            return {
+                active: character.activeAbilityLevel,
+                passive: character.passiveAbilityLevel,
+            };
+        }
+
+        const levels = { active: character.activeAbilityLevel, passive: character.passiveAbilityLevel };
+        for (const goal of upgradeAbilities) {
+            if (!goal.include || !CharactersService.matchesAnyCharacterId(goal.unitId, character)) continue;
+
+            levels.active = Math.max(levels.active, goal.activeEnd);
+            levels.passive = Math.max(levels.passive, goal.passiveEnd);
+        }
+
+        return levels;
+    }, [viewPreferences.lreGoalsPreview, upgradeAbilities, character]);
+
     // Determine the rarity icon to display based on the goal rank and current
     // character rank.
     const rarityFromRank = useMemo(() => {
@@ -146,8 +173,8 @@ export const LreTile: React.FC<Props> = ({ character, settings, upgradeRankOrMow
             {showRarity && <RarityIcon rarity={rarity} />}
             {settings.lreTileShowUnitRank && <RankIcon key={rank} rank={rank} />}
             {settings.lreTileShowUnitName && <span>{character.shortName || 'Invalid Unit'}</span>}
-            {settings.lreTileShowUnitActiveAbility && <span>A{character.activeAbilityLevel}</span>}
-            {settings.lreTileShowUnitPassiveAbility && <span>P{character.passiveAbilityLevel}</span>}
+            {settings.lreTileShowUnitActiveAbility && <span>A{abilityLevels.active}</span>}
+            {settings.lreTileShowUnitPassiveAbility && <span>P{abilityLevels.passive}</span>}
             {showHealTrait && (
                 <Tooltip placement="top" title="Healer">
                     <span>

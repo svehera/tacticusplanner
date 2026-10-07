@@ -4,10 +4,10 @@ import React, { useContext, useMemo } from 'react';
 // eslint-disable-next-line import-x/no-internal-modules
 import { StoreContext } from '@/reducers/store.provider';
 
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILegendaryEvent, ILegendaryEventTrack, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -19,6 +19,7 @@ interface Props {
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
     progress: Record<string, number>;
     editTeam: (team: ILreTeam) => void;
@@ -37,6 +38,7 @@ export const LreTeamsCard: React.FC<Props> = ({
     track,
     progress,
     upgradeRankOrMowGoals,
+    upgradeAbilities,
     startAddTeam,
     teams: selectedTeams,
     editTeam,
@@ -100,6 +102,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                         <LreTile
                             key={character.id}
                             upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                            upgradeAbilities={upgradeAbilities}
                             character={character}
                             settings={viewPreferences}
                             onClick={addTeam}
@@ -115,6 +118,7 @@ export const LreTeamsCard: React.FC<Props> = ({
                                     key={team.id}
                                     team={team}
                                     upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                    upgradeAbilities={upgradeAbilities}
                                     menuItemSelect={handleAction(team)}
                                 />
                             ))}
