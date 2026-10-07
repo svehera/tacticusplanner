@@ -14,9 +14,11 @@ export { default as globalHse11thEditionWeek2BloodAngels } from './global-hse-11
 export { default as globalHse11thEditionWeek2Orks } from './global-hse-11th-edition-week2-orks.json';
 export { default as globalHse11thEditionWeek3BloodAngels } from './global-hse-11th-edition-week3-blood-angels.json';
 export { default as globalHse11thEditionWeek3Orks } from './global-hse-11th-edition-week3-orks.json';
+export { default as globalHseOperationImperator } from './global-hse-operation-imperator.json';
 export { default as hse11thEditionWeek1 } from './hse-11th-edition-week1.json';
 export { default as hse11thEditionWeek2 } from './hse-11th-edition-week2.json';
 export { default as hse11thEditionWeek3 } from './hse-11th-edition-week3.json';
+export { default as hseFactionFocusOctober2026 } from './hse-faction-focus-october-2026.json';
 export { default as hseTraitBoostRapidAssault } from './hse-trait-boost-rapid-assault.json';
 export { default as hseTraitBoostTerminatorArmour } from './hse-trait-boost-terminator-armour.json';
 export { default as killTyranids } from './kill-tyranids.json';
