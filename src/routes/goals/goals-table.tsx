@@ -27,7 +27,7 @@ import {
     Play,
     Trash2,
 } from 'lucide-react';
-import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef, useState } from 'react';
+import React, { useCallback, useEffect, useLayoutEffect, useMemo, useRef } from 'react';
 import { isMobile } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 
@@ -119,13 +119,12 @@ export const GoalsTable: React.FC<Props> = ({
     onMove,
     totalGoals,
 }) => {
-    const [dragEnabled, setDragEnabled] = useState(true);
-
     // All frequently-changing values live in refs so columnDefs can have stable deps and never
     // recompute — which would reset user-resized column widths.
     const gridApiReference = useRef<GridApi | null>(null);
     const savedWidthsReference = useRef<Record<string, number>>({});
     const statusColWidthReference = useRef(STATUS_COL_DEFAULT_WIDTH);
+    const dragEnabledReference = useRef(true);
     // True while any column sort is active — ag-grid suppresses managed row-drag then, so the grip
     // is dimmed. The arrows still work: they move in global priority space, not display order.
     const sortActiveReference = useRef(false);
@@ -159,6 +158,12 @@ export const GoalsTable: React.FC<Props> = ({
         gridApiReference.current = event_.api;
     }, []);
 
+    const handleToggleDrag = useCallback(() => {
+        dragEnabledReference.current = !dragEnabledReference.current;
+        gridApiReference.current?.redrawRows();
+        gridApiReference.current?.refreshHeader();
+    }, []);
+
     const handleColumnResized = useCallback((event_: ColumnResizedEvent) => {
         if (!event_.finished || !event_.column) return;
         const colId = event_.column.getColId();
@@ -182,20 +187,17 @@ export const GoalsTable: React.FC<Props> = ({
         }
     }, []);
 
-    const handleRowDragEnd = useCallback(
-        (event_: RowDragEndEvent<TypedGoalSelect>) => {
-            // Under an active sort the post-sort node order isn't the user's intended manual order, so
-            // never persist it (ag-grid also suppresses managed drag while sorted — this is a guard).
-            if (!dragEnabled || sortActiveReference.current) return;
-            const orderedIds: string[] = [];
-            event_.api.forEachNodeAfterFilterAndSort(node => {
-                if (node.data) orderedIds.push(node.data.goalId);
-            });
-            const movedId = event_.node.data?.goalId;
-            if (movedId) onReorderReference.current(orderedIds, movedId);
-        },
-        [dragEnabled]
-    );
+    const handleRowDragEnd = useCallback((event_: RowDragEndEvent<TypedGoalSelect>) => {
+        // Under an active sort the post-sort node order isn't the user's intended manual order, so
+        // never persist it (ag-grid also suppresses managed drag while sorted — this is a guard).
+        if (!dragEnabledReference.current || sortActiveReference.current) return;
+        const orderedIds: string[] = [];
+        event_.api.forEachNodeAfterFilterAndSort(node => {
+            if (node.data) orderedIds.push(node.data.goalId);
+        });
+        const movedId = event_.node.data?.goalId;
+        if (movedId) onReorderReference.current(orderedIds, movedId);
+    }, []);
 
     const handleSortChanged = useCallback((event_: SortChangedEvent) => {
         sortActiveReference.current = event_.api.getColumnState().some(column => !!column.sort);
@@ -213,25 +215,29 @@ export const GoalsTable: React.FC<Props> = ({
             width: 36,
             maxWidth: 36,
             // Drag only reorders in priority order, which only matches the view when unsorted.
-            rowDrag: () => dragEnabled && !sortActiveReference.current,
+            rowDrag: () => dragEnabledReference.current && !sortActiveReference.current,
             sortable: false,
             suppressNavigable: true,
             headerComponent: () => (
                 <button
                     type="button"
-                    title={dragEnabled ? 'Disable row dragging' : 'Enable row dragging'}
-                    aria-label={dragEnabled ? 'Disable row dragging' : 'Enable row dragging'}
-                    aria-pressed={dragEnabled}
-                    onClick={() => setDragEnabled(enabled => !enabled)}
+                    title={dragEnabledReference.current ? 'Disable row dragging' : 'Enable row dragging'}
+                    aria-label={dragEnabledReference.current ? 'Disable row dragging' : 'Enable row dragging'}
+                    aria-pressed={dragEnabledReference.current}
+                    onClick={handleToggleDrag}
                     className="flex h-full w-full cursor-pointer items-center justify-center text-(--soft-fg) transition-colors hover:text-(--fg)">
-                    {dragEnabled ? <LockKeyholeOpen className="size-3.5" /> : <LockKeyhole className="size-3.5" />}
+                    {dragEnabledReference.current ? (
+                        <LockKeyholeOpen className="size-3.5" />
+                    ) : (
+                        <LockKeyhole className="size-3.5" />
+                    )}
                 </button>
             ),
             cellRenderer: () =>
-                !dragEnabled || sortActiveReference.current ? (
+                !dragEnabledReference.current || sortActiveReference.current ? (
                     <div
                         title={
-                            dragEnabled
+                            dragEnabledReference.current
                                 ? 'Clear the column sort to drag rows. Use the priority arrows to reorder while sorted.'
                                 : 'Row dragging is disabled. Use the header lock to enable it.'
                         }
@@ -1003,7 +1009,7 @@ export const GoalsTable: React.FC<Props> = ({
             ...(variant === 'rank' ? [upgradesCol] : []),
             notesCol,
         ];
-    }, [dragEnabled, variant]);
+    }, [handleToggleDrag, variant]);
 
     const getRowStyle = useCallback((params: RowClassParams<TypedGoalSelect>): RowStyle | undefined => {
         const goalEstimate = params.data ? estimateMapReference.current.get(params.data.goalId) : undefined;
