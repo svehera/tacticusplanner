@@ -9,6 +9,7 @@ import { StoreContext } from '@/reducers/store.provider';
 import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -16,10 +17,16 @@ import { LreTile } from './lre-tile';
 interface Props {
     team: ILreTeam;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     menuItemSelect: (action: 'edit' | 'delete') => void;
 }
 
-export const SelectedTeamCard: React.FC<Props> = ({ team, upgradeRankOrMowGoals, menuItemSelect }) => {
+export const SelectedTeamCard: React.FC<Props> = ({
+    team,
+    upgradeRankOrMowGoals,
+    upgradeAbilities,
+    menuItemSelect,
+}) => {
     const { viewPreferences, characters: unresolvedCharacters } = useContext(StoreContext);
     const characters = useMemo(
         () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
@@ -57,6 +64,7 @@ export const SelectedTeamCard: React.FC<Props> = ({ team, upgradeRankOrMowGoals,
                         key={x}
                         character={characters.find(c => c.snowprintId === x)!}
                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        upgradeAbilities={upgradeAbilities}
                         settings={viewPreferences}
                     />
                 ))}
