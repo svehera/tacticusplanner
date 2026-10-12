@@ -185,7 +185,12 @@ export const LreSettings: React.FC<Props> = ({ onClose, characters, lreViewSetti
 
                 <h3>Unit tile view</h3>
                 <div className="flex-box gap5 wrap">{lreTileViewOptions.map(option => renderOption(option))}</div>
-                <LreTile character={lreTileCharacter} settings={viewSettings} upgradeRankOrMowGoals={[]} />
+                <LreTile
+                    character={lreTileCharacter}
+                    settings={viewSettings}
+                    upgradeRankOrMowGoals={[]}
+                    upgradeAbilities={[]}
+                />
                 <Divider orientation="horizontal" />
 
                 <h3>Units bias</h3>
