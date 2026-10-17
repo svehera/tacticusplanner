@@ -146,6 +146,7 @@ export class PersonalDataLocalStorage {
                         [Alliance.Xenos]: { sector: 'stone', tier: 1 },
                         [Alliance.Chaos]: { sector: 'stone', tier: 1 },
                     },
+                survivalTeams: this.getItem<Record<string, string[]>>('survivalTeams') ?? defaultData.survivalTeams,
             };
         } else {
             // no version (convert v1 to v2)
