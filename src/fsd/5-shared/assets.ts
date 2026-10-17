@@ -63,6 +63,7 @@ import mythicFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_p
 import rareFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_rare.png';
 import uncommonFrame from '@/assets/images/snowprint_assets/hero_frames/ui_frame_portrait_uncommon.png';
 import character from '@/assets/images/snowprint_assets/misc/character.png';
+import questDamageBurst from '@/assets/images/snowprint_assets/misc/damage.png';
 import overkill from '@/assets/images/snowprint_assets/misc/overkill.png';
 import piercingDamage from '@/assets/images/snowprint_assets/misc/piercing_dmg.png';
 import seasonalEventAugust2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_august_2026.png';
@@ -231,6 +232,7 @@ import xenosComponent from '@/assets/images/snowprint_assets/resources/ui_machin
 import blueStar from '@/assets/images/snowprint_assets/stars/ui_icon_star_legendary_large.png';
 import mythicWings from '@/assets/images/snowprint_assets/stars/ui_icon_star_mythic.png';
 import movement from '@/assets/images/snowprint_assets/stat_icons/ui_icon_movement.png';
+import questScoreHits from '@/assets/images/snowprint_assets/stat_icons/ui_icon_quest_score_hits.png';
 import hitsIcon from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_hit_01.png';
 import meleeAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_melee_01.png';
 import rangedAttack from '@/assets/images/snowprint_assets/stat_icons/ui_icon_stat_rangedattack_01.png';
@@ -303,8 +305,10 @@ import traitTerminatorArmour from '@/assets/images/snowprint_assets/traits/ui_ic
 import traitTerrifying from '@/assets/images/snowprint_assets/traits/ui_icon_trait_terrifying_01.png';
 import traitThrillSeekers from '@/assets/images/snowprint_assets/traits/ui_icon_trait_thrill_seekers_01.png';
 import traitUnknown from '@/assets/images/snowprint_assets/traits/ui_icon_trait_unknown_01.png';
+import traitUnstoppable from '@/assets/images/snowprint_assets/traits/ui_icon_trait_unstoppable_01.png';
 import traitVehicle from '@/assets/images/snowprint_assets/traits/ui_icon_trait_vehicle_01.png';
 import traitWeaversOfFate from '@/assets/images/snowprint_assets/traits/ui_icon_trait_weavers_of_fate_01.png';
+import traitFinalVengeance from '@/assets/images/snowprint_assets/traits/ui_icon_uniteffect_final_vengeance.png';
 import upgradeCommon from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_common.png';
 import upgradeEpic from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_epic.png';
 import upgradeLegendary from '@/assets/images/snowprint_assets/upgrade_materials/ui_icon_droptable_upgrade_legendary.png';
@@ -1169,7 +1173,11 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     traitTerminatorArmour: { file: traitTerminatorArmour, label: 'Terminator Armour' },
     traitTerrifying: { file: traitTerrifying, label: 'Terrifying' },
     traitThrillSeekers: { file: traitThrillSeekers, label: 'Thrill Seekers' },
+    traitFinalVengeance: { file: traitFinalVengeance, label: 'Final Vengeance' },
     traitUnknown: { file: traitUnknown, label: 'Unknown' },
+    traitUnstoppable: { file: traitUnstoppable, label: 'Unstoppable' },
+    questDamageBurst: { file: questDamageBurst, label: 'Damage' },
+    questScoreHits: { file: questScoreHits, label: 'Hits' },
     traitVehicle: { file: traitVehicle, label: 'Vehicle' },
     traitWeaversOfFate: { file: traitWeaversOfFate, label: 'Weavers of Fate' },
     warCredits: { file: warCredits, label: 'War Credits' },
