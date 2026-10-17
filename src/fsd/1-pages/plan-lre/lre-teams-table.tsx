@@ -20,6 +20,7 @@ import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILegendaryEvent, ILegendaryEventTrack, ILegendaryEventTrackRequirement, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -33,6 +34,7 @@ interface Props {
     track: ILegendaryEventTrack;
     teams: ILreTeam[];
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     startAddTeam: (section: LreTrackId, requirements: string[]) => void;
     autoAddTeam: (section: LreTrackId, requirements: string[], characters: ICharacter2[]) => void;
     progress: Record<string, number>;
@@ -55,6 +57,7 @@ export const LreTeamsTable: React.FC<Props> = ({
     legendaryEvent,
     track,
     upgradeRankOrMowGoals,
+    upgradeAbilities,
     startAddTeam,
     progress,
     teams: selectedTeams,
@@ -87,6 +90,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                         character={character}
                         settings={viewPreferences}
                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        upgradeAbilities={upgradeAbilities}
                     />
                 );
             }
@@ -251,6 +255,7 @@ export const LreTeamsTable: React.FC<Props> = ({
                         track={track}
                         rows={selectedTeamsRows}
                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        upgradeAbilities={upgradeAbilities}
                         editTeam={editExistingTeam}
                         deleteTeam={deleteTeam}
                     />

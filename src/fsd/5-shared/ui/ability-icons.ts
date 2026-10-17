@@ -224,6 +224,7 @@ import LegendaryCommanderIcon from '@/assets/images/snowprint_assets/abilities/u
 import LethalMiasmaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LethalMiasma.png';
 import LightImUpIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LightImUp.png';
 import LightOfSanguiniusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LightOfSanguinius.png';
+import LionHelmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LionHelm.png';
 import LionHelmRelicIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LionHelmRelic.png';
 import LivingBatteringRamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LivingBatteringRam.png';
 import LivingLightningIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LivingLightning.png';
@@ -710,6 +711,7 @@ export const abilityIcons: Record<string, IconData> = {
     LethalMiasma: { file: LethalMiasmaIcon, name: 'Lethal Miasma' },
     LightImUp: { file: LightImUpIcon, name: 'Light ’im up!' },
     LightOfSanguinius: { file: LightOfSanguiniusIcon, name: 'Light of Sanguinius' },
+    LionHelm: { file: LionHelmIcon, name: 'Lion Helm' },
     LionHelmRelic: { file: LionHelmRelicIcon, name: 'Lion Helm' },
     LivingBatteringRam: { file: LivingBatteringRamIcon, name: 'Living Battering Ram' },
     LivingLightning: { file: LivingLightningIcon, name: 'Living Lightning' },

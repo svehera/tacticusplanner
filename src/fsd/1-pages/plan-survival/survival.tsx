@@ -54,7 +54,7 @@ export const Survival = () => {
     const sortedEvents = useMemo(
         () =>
             survivalEvents.toSorted((a, b) => {
-                const rankDiff = getSurvivalEventRank(a) - getSurvivalEventRank(b);
+                const rankDiff = getSurvivalEventRank(b) - getSurvivalEventRank(a);
                 return rankDiff === 0 ? getEventDisplayName(a).localeCompare(getEventDisplayName(b)) : rankDiff;
             }),
         []

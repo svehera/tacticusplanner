@@ -17,6 +17,7 @@ import { ICharacter2 } from '@/fsd/4-entities/character';
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 import { LreTrackId } from '@/fsd/4-entities/lre';
 
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -26,6 +27,7 @@ interface Props {
     preselectedTrackId: LreTrackId;
     preselectedRequirements: string[];
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     onClose: () => void;
     addTeam: (team: ILreTeam) => void;
 }
@@ -35,6 +37,7 @@ export const LreAddTeam: React.FC<Props> = ({
     preselectedTrackId,
     preselectedRequirements,
     upgradeRankOrMowGoals,
+    upgradeAbilities,
     onClose,
     addTeam,
 }) => {
@@ -219,6 +222,7 @@ export const LreAddTeam: React.FC<Props> = ({
                                         <LreTile
                                             character={character}
                                             upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                            upgradeAbilities={upgradeAbilities}
                                             settings={viewPreferences}
                                         />
                                     </div>
@@ -246,6 +250,7 @@ export const LreAddTeam: React.FC<Props> = ({
                                     <LreTile
                                         character={character}
                                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                        upgradeAbilities={upgradeAbilities}
                                         settings={viewPreferences}
                                     />
                                 </div>
