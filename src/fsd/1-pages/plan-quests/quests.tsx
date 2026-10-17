@@ -1,5 +1,5 @@
 /* eslint-disable import-x/no-internal-modules */
-import { ChevronDown, ChevronRight, Users } from 'lucide-react';
+import { ChevronDown, ChevronRight, Users, X } from 'lucide-react';
 import { useContext, useMemo, useState } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
@@ -7,7 +7,7 @@ import { StoreContext } from '@/reducers/store.provider';
 import { snowprintIcons } from '@/fsd/5-shared/assets';
 import { Rarity, RarityMapper, RarityString } from '@/fsd/5-shared/model';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
-import { Button } from '@/fsd/5-shared/ui';
+import { Button, PortalDialog } from '@/fsd/5-shared/ui';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
 import { CharactersService } from '@/fsd/4-entities/character';
@@ -16,7 +16,9 @@ import { MowsService } from '@/fsd/4-entities/mow';
 import { INpcData, INpcStats } from '@/fsd/4-entities/npc/model';
 import { NpcPortrait } from '@/fsd/4-entities/npc/npc-portrait';
 import { NpcService } from '@/fsd/4-entities/npc/npc-service';
+import { getObjectiveDisplay, IQuestObjective } from '@/fsd/4-entities/quests';
 import questJson from '@/fsd/4-entities/quests/data/hero-quests.json';
+import { getQuestMapUrl } from '@/fsd/4-entities/quests/quest-maps';
 import { IUnit, UnitsAutocomplete } from '@/fsd/4-entities/unit';
 import { UpgradesService as FsdUpgradesService, UpgradeImage } from '@/fsd/4-entities/upgrade';
 
@@ -56,97 +58,26 @@ const trackQuestPlanUpdate = (action: string) => {
     });
 };
 
-type Objective = { ObjectiveType: string; ObjectiveTarget?: string | number };
-
-const ObjectiveChip = ({ objective }: { objective: Objective }) => {
-    const { ObjectiveType, ObjectiveTarget } = objective;
-
-    if (ObjectiveType === 'DamageType' || ObjectiveType === 'NotDamageType') {
-        const icon = snowprintIcons[`damage${ObjectiveTarget as string}`];
-        const isNot = ObjectiveType === 'NotDamageType';
-        return (
-            <div
-                title={`${isNot ? 'No ' : ''}${ObjectiveTarget as string} damage`}
-                className={`flex items-center gap-0.5 rounded border px-1 py-0.5 ${isNot ? 'border-red-500/50 bg-red-500/10' : 'border-green-500/50 bg-green-500/10'}`}>
-                {isNot && <span className="text-xs font-bold text-red-400">✕</span>}
-                {icon && (
-                    <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
-                )}
-            </div>
-        );
-    }
-
-    if (ObjectiveType === 'UseNoSummons') {
-        const icon = snowprintIcons.traitSummon;
-        return (
-            <div
-                title="No summons"
-                className="flex items-center gap-0.5 rounded border border-red-500/50 bg-red-500/10 px-1 py-0.5">
-                <span className="text-xs font-bold text-red-400">✕</span>
-                <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
-            </div>
-        );
-    }
-
-    if (ObjectiveType === 'HasRangedAttack' || ObjectiveType === 'HasNoRangedAttack') {
-        const icon = snowprintIcons.rangedAttack;
-        const isNot = ObjectiveType === 'HasNoRangedAttack';
-        return (
-            <div
-                title={isNot ? 'No ranged attack' : 'Ranged attack'}
-                className={`flex items-center gap-0.5 rounded border px-1 py-0.5 ${isNot ? 'border-red-500/50 bg-red-500/10' : 'border-green-500/50 bg-green-500/10'}`}>
-                {isNot && <span className="text-xs font-bold text-red-400">✕</span>}
-                <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
-            </div>
-        );
-    }
-
-    if (ObjectiveType === 'Trait' || ObjectiveType === 'NotTrait') {
-        const traitName = ObjectiveTarget as string;
-        const icon = snowprintIcons[`trait${traitName}`];
-        const isNot = ObjectiveType === 'NotTrait';
-        if (icon) {
-            return (
-                <div
-                    title={`${isNot ? 'No ' : ''}${traitName}`}
-                    className={`flex items-center gap-0.5 rounded border px-1 py-0.5 ${isNot ? 'border-red-500/50 bg-red-500/10' : 'border-green-500/50 bg-green-500/10'}`}>
-                    {isNot && <span className="text-xs font-bold text-red-400">✕</span>}
-                    <img src={icon.file} alt={icon.label} width={16} height={16} className="pointer-events-none" />
-                </div>
-            );
-        }
-    }
-
-    let label: string;
-    switch (ObjectiveType) {
-        case 'NoDamageTakenByAnyHero': {
-            label = 'No damage taken';
-            break;
-        }
-        case 'MaxHits': {
-            label = `≤${ObjectiveTarget} hits`;
-            break;
-        }
-        case 'MinHits': {
-            label = `≥${ObjectiveTarget} hits`;
-            break;
-        }
-        case 'NotTrait': {
-            label = `No ${ObjectiveTarget as string}`;
-            break;
-        }
-        case 'Trait': {
-            label = String(ObjectiveTarget);
-            break;
-        }
-        default: {
-            label = ObjectiveType;
-        }
-    }
+const ObjectiveChip = ({ objective }: { objective: IQuestObjective }) => {
+    const { iconKey, factionId, isRestriction, label, description } = getObjectiveDisplay(objective);
+    const icon = iconKey ? snowprintIcons[iconKey] : undefined;
 
     return (
-        <div className="rounded border border-(--card-border) bg-(--soft) px-1.5 py-0.5 text-xs text-(--soft-fg)">
-            {label}
+        <div title={description} className="relative flex size-7 items-center justify-center">
+            {factionId ? (
+                <FactionImage faction={factionId} />
+            ) : icon ? (
+                <img src={icon.file} alt={label} width={28} height={28} className="pointer-events-none" />
+            ) : (
+                <span className="rounded border border-(--card-border) bg-(--soft) px-1.5 py-0.5 text-xs whitespace-nowrap text-(--soft-fg)">
+                    {label}
+                </span>
+            )}
+            {isRestriction && (icon || factionId) && (
+                <span className="absolute -right-1 -bottom-1 flex size-3.5 items-center justify-center rounded-full bg-(--danger) text-(--danger-fg)">
+                    <X size={10} strokeWidth={3} />
+                </span>
+            )}
         </div>
     );
 };
@@ -165,6 +96,7 @@ export const Quests = () => {
     const [questId, setQuestId] = useState<string>(questJson[0].unitId);
     const [expandedTiers, setExpandedTiers] = useState<Record<number, boolean>>({});
     const [expandedBattles, setExpandedBattles] = useState<Record<string, boolean>>({});
+    const [enlargedMap, setEnlargedMap] = useState<{ url: string; label: string } | undefined>();
 
     // Memoize resolution to avoid heavy logic on every render
     const chars = useMemo(
@@ -326,7 +258,7 @@ export const Quests = () => {
                                                             size="extra-small"
                                                             onPress={() => toggleBattle(battleKey)}>
                                                             <Users size={14} />
-                                                            {isBattleExpanded ? 'Hide Enemies' : 'Show Enemies'}
+                                                            {isBattleExpanded ? 'Hide Battle' : 'Show Battle'}
                                                         </Button>
                                                     </div>
                                                 </div>
@@ -335,6 +267,25 @@ export const Quests = () => {
                                                 {isBattleExpanded && (
                                                     <div className="bg-(--soft) px-4 pt-2 pb-4">
                                                         <div className="flex flex-wrap gap-2 rounded-lg border-2 border-dashed border-(--card-border) p-3">
+                                                            {getQuestMapUrl(battle.boardId) && (
+                                                                <button
+                                                                    type="button"
+                                                                    title="Click to enlarge map"
+                                                                    onClick={() =>
+                                                                        setEnlargedMap({
+                                                                            url: getQuestMapUrl(battle.boardId)!,
+                                                                            label: `Battle ${battle.battleNr}`,
+                                                                        })
+                                                                    }
+                                                                    className="h-fit cursor-zoom-in overflow-hidden rounded border border-(--card-border) focus:ring-2 focus:ring-(--ring) focus:outline-none">
+                                                                    <img
+                                                                        src={getQuestMapUrl(battle.boardId)}
+                                                                        alt={`Map for Battle ${battle.battleNr}`}
+                                                                        loading="lazy"
+                                                                        className="h-auto w-[160px]"
+                                                                    />
+                                                                </button>
+                                                            )}
                                                             <div className="mb-3 flex flex-wrap items-start gap-x-3 gap-y-6">
                                                                 {battle.enemies.map((enemy, enemyIndex) => {
                                                                     const npc = NpcService.getNpcById(enemy.name);
@@ -384,6 +335,17 @@ export const Quests = () => {
                     );
                 })}
             </div>
+
+            <PortalDialog
+                open={!!enlargedMap}
+                onClose={() => setEnlargedMap(undefined)}
+                aria-label={enlargedMap ? `${enlargedMap.label} map` : 'Map'}
+                size="3xl">
+                <PortalDialog.Header>{enlargedMap?.label} Map</PortalDialog.Header>
+                <PortalDialog.Body>
+                    {enlargedMap && <img src={enlargedMap.url} alt={`${enlargedMap.label} map`} className="w-full" />}
+                </PortalDialog.Body>
+            </PortalDialog>
         </div>
     );
 };

@@ -9,6 +9,8 @@
                 "battles": [
                     {
                         "battleNr": "1",
+                        "boardId": "C3_70",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -61,6 +63,8 @@
                     },
                     {
                         "battleNr": "2",
+                        "boardId": "LE3_18",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -112,6 +116,8 @@
                     },
                     {
                         "battleNr": "3",
+                        "boardId": "LE3_12",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -168,6 +174,8 @@
                 "battles": [
                     {
                         "battleNr": "4",
+                        "boardId": "MC3_53",
+                        "spawnPointsSet": 9,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -224,6 +232,8 @@
                     },
                     {
                         "battleNr": "5",
+                        "boardId": "LE3_14",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -268,6 +278,8 @@
                     },
                     {
                         "battleNr": "6",
+                        "boardId": "MC3_45",
+                        "spawnPointsSet": 10,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -329,6 +341,8 @@
                 "battles": [
                     {
                         "battleNr": "7",
+                        "boardId": "C3_04",
+                        "spawnPointsSet": 7,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -373,6 +387,8 @@
                     },
                     {
                         "battleNr": "8",
+                        "boardId": "SyncPvp_Arctic_04",
+                        "spawnPointsSet": 3,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -437,6 +453,8 @@
                     },
                     {
                         "battleNr": "9",
+                        "boardId": "C3_06",
+                        "spawnPointsSet": 12,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -489,6 +507,8 @@
                     },
                     {
                         "battleNr": "10",
+                        "boardId": "LE3_23",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -553,6 +573,8 @@
                     },
                     {
                         "battleNr": "11",
+                        "boardId": "C3_75",
+                        "spawnPointsSet": 7,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -618,6 +640,8 @@
                 "battles": [
                     {
                         "battleNr": "12",
+                        "boardId": "C3_13",
+                        "spawnPointsSet": 12,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -666,6 +690,8 @@
                     },
                     {
                         "battleNr": "13",
+                        "boardId": "C3_31",
+                        "spawnPointsSet": 12,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -714,6 +740,8 @@
                     },
                     {
                         "battleNr": "14",
+                        "boardId": "EMC3_03",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -779,6 +807,8 @@
                 "battles": [
                     {
                         "battleNr": "15",
+                        "boardId": "C3_22",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -835,6 +865,8 @@
                     },
                     {
                         "battleNr": "16",
+                        "boardId": "C3_51",
+                        "spawnPointsSet": 11,
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
@@ -892,6 +924,8 @@
                 "battles": [
                     {
                         "battleNr": "17",
+                        "boardId": "LE3_24",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
@@ -968,6 +1002,8 @@
                 "battles": [
                     {
                         "battleNr": "1",
+                        "boardId": "C1_66",
+                        "spawnPointsSet": 3,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1024,6 +1060,8 @@
                     },
                     {
                         "battleNr": "2",
+                        "boardId": "MC1_07",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1079,6 +1117,8 @@
                     },
                     {
                         "battleNr": "3",
+                        "boardId": "MC1_51",
+                        "spawnPointsSet": 9,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1151,6 +1191,8 @@
                 "battles": [
                     {
                         "battleNr": "4",
+                        "boardId": "PVP_desert_07",
+                        "spawnPointsSet": 3,
                         "lightningVictory": 1,
                         "loot": {
                             "reward": {
@@ -1199,6 +1241,8 @@
                     },
                     {
                         "battleNr": "5",
+                        "boardId": "MC1_11",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -1255,6 +1299,8 @@
                     },
                     {
                         "battleNr": "6",
+                        "boardId": "C1_70",
+                        "spawnPointsSet": 7,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1320,6 +1366,8 @@
                 "battles": [
                     {
                         "battleNr": "7",
+                        "boardId": "C1_69",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1372,6 +1420,8 @@
                     },
                     {
                         "battleNr": "8",
+                        "boardId": "PVP_desert_05",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1432,6 +1482,8 @@
                     },
                     {
                         "battleNr": "9",
+                        "boardId": "MC1_68",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -1484,6 +1536,8 @@
                     },
                     {
                         "battleNr": "10",
+                        "boardId": "PVP_desert_08",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -1552,6 +1606,8 @@
                     },
                     {
                         "battleNr": "11",
+                        "boardId": "C1_47",
+                        "spawnPointsSet": 7,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1625,6 +1681,8 @@
                 "battles": [
                     {
                         "battleNr": "12",
+                        "boardId": "SyncPvp_Desert_04",
+                        "spawnPointsSet": 3,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -1693,6 +1751,8 @@
                     },
                     {
                         "battleNr": "13",
+                        "boardId": "C1_37",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -1761,6 +1821,8 @@
                     },
                     {
                         "battleNr": "14",
+                        "boardId": "SyncPvp_Desert_03",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1830,6 +1892,8 @@
                 "battles": [
                     {
                         "battleNr": "15",
+                        "boardId": "SyncPvp_Desert_01",
+                        "spawnPointsSet": 4,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1894,6 +1958,8 @@
                     },
                     {
                         "battleNr": "16",
+                        "boardId": "MC1_15",
+                        "spawnPointsSet": 3,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -1967,6 +2033,8 @@
                 "battles": [
                     {
                         "battleNr": "17",
+                        "boardId": "CE2_02",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2047,6 +2115,8 @@
                 "battles": [
                     {
                         "battleNr": "1",
+                        "boardId": "C3_05",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -2099,6 +2169,8 @@
                     },
                     {
                         "battleNr": "2",
+                        "boardId": "LE3_deathguard_04",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2154,6 +2226,8 @@
                     },
                     {
                         "battleNr": "3",
+                        "boardId": "LE3_deathguard_01",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2214,6 +2288,8 @@
                 "battles": [
                     {
                         "battleNr": "4",
+                        "boardId": "EMC3_02",
+                        "spawnPointsSet": 10,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -2274,6 +2350,8 @@
                     },
                     {
                         "battleNr": "5",
+                        "boardId": "LE3_deathguard_05",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2330,6 +2408,8 @@
                     },
                     {
                         "battleNr": "6",
+                        "boardId": "LE3_deathguard_09",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2395,6 +2475,8 @@
                 "battles": [
                     {
                         "battleNr": "7",
+                        "boardId": "C3_67",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
@@ -2448,6 +2530,8 @@
                     },
                     {
                         "battleNr": "8",
+                        "boardId": "LE3_18",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2508,6 +2592,8 @@
                     },
                     {
                         "battleNr": "9",
+                        "boardId": "LE3_deathguard_07",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2568,6 +2654,8 @@
                     },
                     {
                         "battleNr": "10",
+                        "boardId": "MC3_75",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2624,6 +2712,8 @@
                     },
                     {
                         "battleNr": "11",
+                        "boardId": "LE3_deathguard_02",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
@@ -2693,6 +2783,8 @@
                 "battles": [
                     {
                         "battleNr": "12",
+                        "boardId": "EC3_04",
+                        "spawnPointsSet": 7,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2749,6 +2841,8 @@
                     },
                     {
                         "battleNr": "13",
+                        "boardId": "LE3_deathguard_10",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2805,6 +2899,8 @@
                     },
                     {
                         "battleNr": "14",
+                        "boardId": "LE3_deathguard_12",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2874,6 +2970,8 @@
                 "battles": [
                     {
                         "battleNr": "15",
+                        "boardId": "SyncPvp_Arctic_06",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -2938,6 +3036,8 @@
                     },
                     {
                         "battleNr": "16",
+                        "boardId": "C3_73",
+                        "spawnPointsSet": 9,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3011,6 +3111,8 @@
                 "battles": [
                     {
                         "battleNr": "17",
+                        "boardId": "LE3_deathguard_03",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
@@ -3091,6 +3193,8 @@
                 "battles": [
                     {
                         "battleNr": "1",
+                        "boardId": "EC2_04",
+                        "spawnPointsSet": 3,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3142,6 +3246,8 @@
                     },
                     {
                         "battleNr": "2",
+                        "boardId": "EC2_02",
+                        "spawnPointsSet": 9,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3197,6 +3303,8 @@
                     },
                     {
                         "battleNr": "3",
+                        "boardId": "LE2_07",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3265,6 +3373,8 @@
                 "battles": [
                     {
                         "battleNr": "4",
+                        "boardId": "MC2_01",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3314,6 +3424,8 @@
                     },
                     {
                         "battleNr": "5",
+                        "boardId": "SyncPvp_Temperate_04",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3378,6 +3490,8 @@
                     },
                     {
                         "battleNr": "6",
+                        "boardId": "SyncPvp_Temperate_01",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3443,6 +3557,8 @@
                 "battles": [
                     {
                         "battleNr": "7",
+                        "boardId": "EMC2_05",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3504,6 +3620,8 @@
                     },
                     {
                         "battleNr": "8",
+                        "boardId": "EC2_06",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3568,6 +3686,8 @@
                     },
                     {
                         "battleNr": "9",
+                        "boardId": "MC2_45",
+                        "spawnPointsSet": 10,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3624,6 +3744,8 @@
                     },
                     {
                         "battleNr": "10",
+                        "boardId": "survival_12",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3684,6 +3806,8 @@
                     },
                     {
                         "battleNr": "11",
+                        "boardId": "survival_07",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3749,6 +3873,8 @@
                 "battles": [
                     {
                         "battleNr": "12",
+                        "boardId": "LE2_04",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3809,6 +3935,8 @@
                     },
                     {
                         "battleNr": "13",
+                        "boardId": "SyncPvp_Temperate_07",
+                        "spawnPointsSet": 4,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -3877,6 +4005,8 @@
                     },
                     {
                         "battleNr": "14",
+                        "boardId": "C2_02",
+                        "spawnPointsSet": 12,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -3942,6 +4072,8 @@
                 "battles": [
                     {
                         "battleNr": "15",
+                        "boardId": "survival_01",
+                        "spawnPointsSet": 2,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4010,6 +4142,8 @@
                     },
                     {
                         "battleNr": "16",
+                        "boardId": "C2_15",
+                        "spawnPointsSet": 12,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4083,6 +4217,8 @@
                 "battles": [
                     {
                         "battleNr": "17",
+                        "boardId": "C2_47",
+                        "spawnPointsSet": 13,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4163,6 +4299,8 @@
                 "battles": [
                     {
                         "battleNr": "1",
+                        "boardId": "SR_09",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4219,6 +4357,8 @@
                     },
                     {
                         "battleNr": "2",
+                        "boardId": "SR_04",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4286,6 +4426,8 @@
                     },
                     {
                         "battleNr": "3",
+                        "boardId": "SR_15",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4350,6 +4492,8 @@
                 "battles": [
                     {
                         "battleNr": "4",
+                        "boardId": "C1_06",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4406,6 +4550,8 @@
                     },
                     {
                         "battleNr": "5",
+                        "boardId": "LE1_24",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4458,6 +4604,8 @@
                     },
                     {
                         "battleNr": "6",
+                        "boardId": "LE1_21",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4527,6 +4675,8 @@
                 "battles": [
                     {
                         "battleNr": "7",
+                        "boardId": "LE1_10",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4588,6 +4738,8 @@
                     },
                     {
                         "battleNr": "8",
+                        "boardId": "LE1_14",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4644,6 +4796,8 @@
                     },
                     {
                         "battleNr": "9",
+                        "boardId": "EMC1_06",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4704,6 +4858,8 @@
                     },
                     {
                         "battleNr": "10",
+                        "boardId": "LE1_15",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4768,6 +4924,8 @@
                     },
                     {
                         "battleNr": "11",
+                        "boardId": "LE1_04",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -4833,6 +4991,8 @@
                 "battles": [
                     {
                         "battleNr": "12",
+                        "boardId": "C1_07",
+                        "spawnPointsSet": 5,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4901,6 +5061,8 @@
                     },
                     {
                         "battleNr": "13",
+                        "boardId": "EC1_09",
+                        "spawnPointsSet": 8,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -4969,6 +5131,8 @@
                     },
                     {
                         "battleNr": "14",
+                        "boardId": "LE1_28",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {
@@ -5041,6 +5205,8 @@
                 "battles": [
                     {
                         "battleNr": "15",
+                        "boardId": "MC1_15",
+                        "spawnPointsSet": 4,
                         "lightningVictory": 2,
                         "loot": {
                             "reward": {
@@ -5109,6 +5275,8 @@
                     },
                     {
                         "battleNr": "16",
+                        "boardId": "LE1_30",
+                        "spawnPointsSet": 1,
                         "lightningVictory": 4,
                         "loot": {
                             "reward": {
@@ -5182,6 +5350,8 @@
                 "battles": [
                     {
                         "battleNr": "17",
+                        "boardId": "EMC1_08",
+                        "spawnPointsSet": 6,
                         "lightningVictory": 3,
                         "loot": {
                             "reward": {

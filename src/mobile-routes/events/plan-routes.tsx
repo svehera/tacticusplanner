@@ -5,11 +5,10 @@ import { useNavigate } from 'react-router-dom';
 
 import { PlanGuildWarRoutes } from 'src/mobile-routes/events/guild-war-routes';
 import { PlanLeRoutes } from 'src/mobile-routes/events/le-routes';
+import { getSortedActiveLres } from 'src/mobile-routes/events/sorted-active-lres';
 import { menuItemById } from 'src/models/menu-items';
 
 import { trackEvent } from '@/fsd/5-shared/monitoring';
-
-import { CharactersService } from '@/fsd/4-entities/character';
 
 import { bulkGoalCreatorMenuItem } from '@/fsd/1-pages/plan-bulk-goals/bulk-goal-creator.menu-item';
 import { campaignProgressionMenuItem } from '@/fsd/1-pages/plan-campaign-progression';
@@ -85,7 +84,7 @@ export const PlanRoutes = () => {
                     <MobileCategoryCard
                         icon={<FormatListBulletedIcon />}
                         label="LRE"
-                        items={['Master Table', ...CharactersService.activeLres.map(le => le.name)]}
+                        items={['Master Table', ...getSortedActiveLres().map(le => le.name)]}
                         onClick={() => {
                             trackEvent('nav_menu_select', {
                                 feature: 'navigation',

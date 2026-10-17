@@ -7,48 +7,17 @@ import { cn } from '@/fsd/5-shared/lib';
 import { trackEvent } from '@/fsd/5-shared/monitoring';
 import { UnitShardIcon } from '@/fsd/5-shared/ui/icons';
 
-import { CharactersService } from '@/fsd/4-entities/character';
 import { ICharacterData } from '@/fsd/4-entities/character/model';
 import { LegendaryEventEnum } from '@/fsd/4-entities/lre';
 
 import { MobileNavCard } from '../components/mobile-nav-card';
 
-function isValidLreDate(date: unknown): date is string {
-    return (
-        date !== null &&
-        typeof date === 'string' &&
-        date !== 'TBA' &&
-        date !== '' &&
-        !Number.isNaN(new Date(date).getTime())
-    );
-}
-
-function sortCharsByLreDate(a: ICharacterData, b: ICharacterData) {
-    const aDate = a.lre?.nextEventDateUtc;
-    const bDate = b.lre?.nextEventDateUtc;
-
-    const aHasValidDate = isValidLreDate(aDate);
-    const bHasValidDate = isValidLreDate(bDate);
-
-    if (aHasValidDate && bHasValidDate) {
-        return new Date(aDate).getTime() - new Date(bDate).getTime();
-    }
-
-    if (aHasValidDate && !bHasValidDate) return -1;
-    if (!aHasValidDate && bHasValidDate) return 1;
-
-    const aStage = a.lre?.eventStage || 0;
-    const bStage = b.lre?.eventStage || 0;
-    return bStage - aStage;
-}
+import { getSortedActiveLres } from './sorted-active-lres';
 
 export const PlanLeRoutes = () => {
     const navigate = useNavigate();
     const leMasterTableMenuItem = menuItemById['leMasterTable'];
-    const sortedActiveLres: ICharacterData[] = useMemo(
-        () => CharactersService.activeLres.toSorted(sortCharsByLreDate),
-        []
-    );
+    const sortedActiveLres: ICharacterData[] = useMemo(() => getSortedActiveLres(), []);
 
     const navigateToLre = (eventId: LegendaryEventEnum) => {
         const destinationPath = `/mobile/plan/lre?character=${LegendaryEventEnum[eventId]}`;
