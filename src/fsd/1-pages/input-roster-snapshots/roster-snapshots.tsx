@@ -634,6 +634,7 @@ export const RosterSnapshots = () => {
         () => RosterSnapshotsService.getLiveSnapshotInidices(rosterSnapshots),
         [rosterSnapshots]
     );
+    const snapshotCounts = useMemo(() => RosterSnapshotsService.getSnapshotCounts(rosterSnapshots), [rosterSnapshots]);
     // Both indices address `liveSnapshotIndices`, where the slot one past the end means "Current Roster".
     const [leftIndex, setLeftIndex] = useState<number>(Math.max(0, liveSnapshotIndices.length - 1));
     const [rightIndex, setRightIndex] = useState<number>(liveSnapshotIndices.length);
@@ -1249,6 +1250,9 @@ export const RosterSnapshots = () => {
 
     const getTakeSnapshotTitle = () => {
         if (rosterSnapshots.diffs.length >= RosterSnapshotsService.MAX_SNAPSHOTS - 1) {
+            if (snapshotCounts.deleted > 0) {
+                return `Maximum of ${RosterSnapshotsService.MAX_SNAPSHOTS} snapshots reached, including deleted ones. Click "Manage", then "Empty Trash" to purge all deleted snapshots.`;
+            }
             return `Maximum of ${RosterSnapshotsService.MAX_SNAPSHOTS} snapshots reached. Please delete existing snapshots to take new ones.`;
         }
         return 'Take a snapshot of your current roster state.';
@@ -1363,6 +1367,9 @@ export const RosterSnapshots = () => {
                 onRestoreSnapshot={handleRestoreSnapshot}
                 onDone={handleManageDone}
             />
+            <div className="px-1 pt-2 text-xs text-(--soft-fg)">
+                Active Snapshots: {snapshotCounts.active}, Deleted Snapshots: {snapshotCounts.deleted}
+            </div>
             <div className="flex flex-wrap items-center gap-3 border-b border-(--border) px-1 py-3">
                 <SyncButton showText={!isMobile} />
                 <AccessibleTooltip title={getTakeSnapshotTitle()}>

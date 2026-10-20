@@ -430,6 +430,13 @@ export class RosterSnapshotsService {
         }
     }
 
+    /** @returns how many snapshots are live (shown) and how many are soft-deleted (still counting toward the limit). */
+    public static getSnapshotCounts(rosterSnapshots: IRosterSnapshotsState): { active: number; deleted: number } {
+        const total = (rosterSnapshots.base ? 1 : 0) + rosterSnapshots.diffs.length;
+        const active = this.getLiveSnapshotInidices(rosterSnapshots).length;
+        return { active, deleted: total - active };
+    }
+
     /**
      * Gets the indices of all live (non-deleted) roster snapshots from the state.
      * A snapshot is considered "live" if its `deletedDateMillisUtc` property is undefined.
