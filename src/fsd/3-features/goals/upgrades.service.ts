@@ -2456,12 +2456,28 @@ export class UpgradesService {
                     }
                 }
             })();
+            // A goal with a rarity filter must only consume inventory within that filter; otherwise it would
+            // eat stock (e.g. crafted commons) that lower-priority goals still need, even though those
+            // materials are dropped from this goal's own totals below.
+            const rarityFilter = 'upgradesRarity' in goal ? goal.upgradesRarity : undefined;
+            const goalInventory =
+                rarityFilter && rarityFilter.length > 0
+                    ? this.hideInventoryOutsideRarities(clonedUpgrades, rarityFilter)
+                    : clonedUpgrades;
             const baseUpgradesTotal: Record<string, number> = this.getBaseUpgradesTotal(
                 upgradeMaterials,
                 upgradeRanks,
                 upgradeShards,
-                clonedUpgrades
+                goalInventory
             );
+            if (goalInventory !== clonedUpgrades) {
+                for (const upgradeId in goalInventory) {
+                    // Hidden items were zeroed in the copy, so only propagate consumption of visible ones.
+                    if (this.isInventoryVisibleForRarities(upgradeId, rarityFilter!)) {
+                        clonedUpgrades[upgradeId] = goalInventory[upgradeId];
+                    }
+                }
+            }
 
             // Remove materials already managed by an active pre-farm goal for this goal.
             const coveredMaterials = materialCoveredByPreFarm.get(goal.goalId);
@@ -2512,6 +2528,27 @@ export class UpgradesService {
                 baseUpgradesTotal,
                 relatedUpgrades,
             });
+        }
+        return result;
+    }
+
+    /** Shards and mythic shards are never filtered by rarity; everything else must match one of `rarities`. */
+    private static isInventoryVisibleForRarities(upgradeId: string, rarities: readonly Rarity[]): boolean {
+        if (this.isShard(upgradeId) || this.isMythicShard(upgradeId)) return true;
+        const rarity = FsdUpgradesService.getUpgrade(upgradeId)?.rarity;
+        // Unknown ids can't be classified, so leave them alone.
+        if (rarity === undefined) return true;
+        return rarities.includes(rarity as Rarity);
+    }
+
+    /** @returns a copy of `inventory` with every upgrade outside `rarities` zeroed out. */
+    private static hideInventoryOutsideRarities(
+        inventory: Record<string, number>,
+        rarities: readonly Rarity[]
+    ): Record<string, number> {
+        const result = { ...inventory };
+        for (const upgradeId in result) {
+            if (!this.isInventoryVisibleForRarities(upgradeId, rarities)) result[upgradeId] = 0;
         }
         return result;
     }
