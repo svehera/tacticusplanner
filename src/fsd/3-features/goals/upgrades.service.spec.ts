@@ -1539,6 +1539,48 @@ describe('UpgradesService.getUpgrades', () => {
         expect(upgrades.map(x => x.baseUpgradesTotal)).toEqual([{ upgHpL118: 82, upgArmL203: 1, upgDmgL003: 1 }]);
     });
 
+    it('does not let a rarity-filtered goal consume inventory outside its filter from later goals', () => {
+        const kharn = CharactersService.getUnit('worldKharn')!;
+        const character = createCharacter(kharn);
+        const goalOverrides = {
+            unitId: kharn.snowprintId,
+            unitName: kharn.shortName ?? kharn.name,
+            unitIcon: kharn.icon ?? '',
+            unitRoundIcon: kharn.roundIcon ?? '',
+            unitAlliance: kharn.alliance ?? Alliance.Chaos,
+            rankStart: Rank.Stone1,
+            rankEnd: Rank.Diamond2,
+        };
+        const epicOnlyGoal = createRankGoal(kharn, {
+            ...goalOverrides,
+            goalId: 'goal-epic-only',
+            upgradesRarity: [Rarity.Epic],
+        });
+        const unfilteredGoal = createRankGoal(kharn, { ...goalOverrides, goalId: 'goal-unfiltered' });
+
+        // A crafted, non-epic upgrade that the unfiltered goal needs, stocked in inventory.
+        const neededUpgrades = CharacterUpgradesService.getCharacterUpgradeRank(unfilteredGoal).flatMap(
+            rank => rank.upgrades
+        );
+        const craftedNonEpic = neededUpgrades.find(id => {
+            const upgrade = FsdUpgradesService.getUpgrade(id);
+            return upgrade?.crafted && upgrade.rarity !== Rarity.Epic;
+        });
+        expect(craftedNonEpic).toBeDefined();
+        // Exactly one goal's worth, so any consumption by the epic-only goal would leave none for the next.
+        const inventory = { [craftedNonEpic!]: neededUpgrades.filter(id => id === craftedNonEpic).length };
+
+        const alone = UpgradesService.getUpgrades(inventory, [character], [], [unfilteredGoal])[0].baseUpgradesTotal;
+        const withoutInventory = UpgradesService.getUpgrades({}, [character], [], [unfilteredGoal])[0]
+            .baseUpgradesTotal;
+        expect(alone).not.toEqual(withoutInventory);
+
+        const afterEpicOnly = UpgradesService.getUpgrades(inventory, [character], [], [epicOnlyGoal, unfilteredGoal])[1]
+            .baseUpgradesTotal;
+
+        expect(afterEpicOnly).toEqual(alone);
+    });
+
     it('filters to common through epic upgrades for Kharn Stone I to Diamond III', () => {
         const kharn = CharactersService.getUnit('worldKharn')!;
         const character = createCharacter(kharn);
