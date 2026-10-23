@@ -51,10 +51,13 @@ import {
     buildBulkPlannedGoals,
     buildReadyToRankUpEntries,
     createBulkUnitEntry,
+    getAscendStart,
     getBulkRankGoalPlans,
     getBulkUnitEntryFromUnit,
     getRankGoalSubOrder,
     getTierValue,
+    needsAscendGoal,
+    willUnlockCharacter,
     type CharacterPriorityMode,
     type GoalCategory,
     type IncrementalGoalMode,
@@ -302,7 +305,7 @@ export const BulkGoalCreator = () => {
             const isMow = !('rank' in unit);
 
             // Unlock goal
-            if (!isMow && 'rank' in unit && unit.rank === Rank.Locked && entry.rank > Rank.Locked) {
+            if (!isMow && willUnlockCharacter(unit, entry)) {
                 rows.push({
                     category: 'Unlock',
                     unitName,
@@ -332,7 +335,8 @@ export const BulkGoalCreator = () => {
             }
 
             // Ascend goal
-            if (entry.rarity > unit.rarity || entry.stars > unit.stars) {
+            if (needsAscendGoal(unit, entry)) {
+                const ascendStart = getAscendStart(unit, entry);
                 rows.push({
                     category: 'Ascend',
                     unitName,
@@ -342,8 +346,8 @@ export const BulkGoalCreator = () => {
                     tierValue: getTierValue('Ascend', { rarity: entry.rarity, stars: entry.stars as RarityStars }),
                     change: (
                         <AscendChangeArrow
-                            startRarity={unit.rarity}
-                            startStars={unit.stars as RarityStars}
+                            startRarity={ascendStart.rarity}
+                            startStars={ascendStart.stars}
                             endRarity={entry.rarity}
                             endStars={entry.stars as RarityStars}
                         />
