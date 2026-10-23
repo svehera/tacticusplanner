@@ -60,6 +60,8 @@ import {
 
 import { getOnslaughtRewardMidpoint } from '@/fsd/1-pages/input-onslaught/onslaught-rewards';
 
+const campaignEventsLocationsSet = new Set<Campaign>(campaignEventsLocations);
+
 const INITIAL_STARS_FOR_RARITY: Partial<Record<Rarity, RarityStars>> = {
     [Rarity.Common]: RarityStars.None,
     [Rarity.Uncommon]: RarityStars.TwoStars,
@@ -3027,7 +3029,7 @@ export class UpgradesService {
      * 5.  **Strategy-based Refinement:**
      *     - For 'leastEnergy' or 'leastTime' strategies, it further filters suggested locations to only include those with the minimum energy cost per item.
      *     - For 'custom' strategy, it filters suggested locations based on the user's preferred campaign types (`Normal`, `Elite`, etc.), with logic to handle dependencies (e.g., including `Extremis` if `Elite` is selected).
-     * 6.  **Sorting:** Finally, it sorts the `locations` array for each upgrade primarily by `isSelected`, then by `energyPerItem` (ascending), and `nodeNumber` (descending).
+     * 6.  **Sorting:** Finally, it sorts the `locations` array for each upgrade primarily by `isSelected`, then by `energyPerItem` (ascending), elite first, campaign event first, and `nodeNumber` (descending).
      */
     public static populateLocationsData(
         upgrades: Record<string, ICombinedUpgrade>,
@@ -3110,8 +3112,16 @@ export class UpgradesService {
             }
             combinedUpgrade.locations = orderBy(
                 combinedUpgrade.locations,
-                ['isSuggested', 'energyPerItem', 'isElite', 'nodeNumber'],
-                ['desc', 'asc', 'desc', 'desc']
+                [
+                    'isSuggested',
+                    'energyPerItem',
+                    'isElite',
+                    // On ties, prefer campaign event locations: they also progress the CE crate and
+                    // give HRE/Crusade points.
+                    location => campaignEventsLocationsSet.has(location.campaign as Campaign),
+                    'nodeNumber',
+                ],
+                ['desc', 'asc', 'desc', 'desc', 'desc']
             );
 
             for (const loc of combinedUpgrade.locations) {
