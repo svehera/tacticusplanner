@@ -110,7 +110,6 @@ type RankGoalPlan = {
 
 const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Rank: 2, Abilities: 3 };
 
-/** 0 = Legendary/Mythic pre-farm  1 = Epic pre-farm (D2.5+)  2 = core / plain */
 /** Whether the entry creates an Unlock goal: a locked character with a target rank. */
 export const willUnlockCharacter = (unit: IUnit, entry: BulkUnitEntry): boolean =>
     'rank' in unit && unit.rank === Rank.Locked && entry.rank > Rank.Locked;
@@ -134,6 +133,7 @@ export const needsAscendGoal = (unit: IUnit, entry: BulkUnitEntry): boolean => {
     return entry.rarity > start.rarity || entry.stars > start.stars;
 };
 
+/** 0 = Legendary/Mythic pre-farm  1 = Epic pre-farm (D2.5+)  2 = core / plain */
 export const getRankGoalSubOrder = (filterRarities?: Rarity[]): number => {
     if (filterRarities?.includes(Rarity.Legendary)) return 0;
     if (filterRarities?.length === 1 && filterRarities[0] === Rarity.Epic) return 1;
@@ -384,12 +384,17 @@ export const buildBulkPlannedGoals = ({
         }
 
         if (needsAscendGoal(unit, entry)) {
+            const ascendStart = getAscendStart(unit, entry);
             pushGoal('Ascend', index, {
                 id: createId(),
                 character: unitId,
                 type: PersonalGoalType.Ascend,
                 priority: 1,
                 dailyRaids: true,
+                ...(willUnlockCharacter(unit, entry) && {
+                    startingRarity: ascendStart.rarity,
+                    startingStars: ascendStart.stars,
+                }),
                 targetRarity: entry.rarity,
                 targetStars: entry.stars as RarityStars,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,

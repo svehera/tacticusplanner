@@ -287,6 +287,9 @@ describe('bulk-goal-creator.service', () => {
             PersonalGoalType.Ascend,
             PersonalGoalType.UpgradeRank,
         ]);
+        const ascend = goals.find(goal => goal.type === PersonalGoalType.Ascend);
+        expect(ascend?.startingRarity).toBe(Rarity.Rare);
+        expect(ascend?.startingStars).toBe(RarityStars.FourStars);
     });
 });
 
