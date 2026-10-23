@@ -3029,7 +3029,7 @@ export class UpgradesService {
      * 5.  **Strategy-based Refinement:**
      *     - For 'leastEnergy' or 'leastTime' strategies, it further filters suggested locations to only include those with the minimum energy cost per item.
      *     - For 'custom' strategy, it filters suggested locations based on the user's preferred campaign types (`Normal`, `Elite`, etc.), with logic to handle dependencies (e.g., including `Extremis` if `Elite` is selected).
-     * 6.  **Sorting:** Finally, it sorts the `locations` array for each upgrade primarily by `isSelected`, then by `energyPerItem` (ascending), elite first, campaign event first, and `nodeNumber` (descending).
+     * 6.  **Sorting:** Finally, it sorts the `locations` array for each upgrade primarily by `isSuggested`, then by `energyPerItem` (ascending), elite first, campaign event first, and `nodeNumber` (descending).
      */
     public static populateLocationsData(
         upgrades: Record<string, ICombinedUpgrade>,
