@@ -2,21 +2,15 @@ import { Rarity, RarityStars } from '@/fsd/5-shared/model';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
+import { BONUS_DELIVERY_TOKENS, EVENT_DAYS, LeDailyDeliveryService } from './le-daily-delivery.service';
 import { LeTokenService } from './le-token-service';
-import { ILreProgressModel } from './lre.models';
+import { DailyMultiplier, ILreForecastRoundConfig, ILreProgressModel } from './lre.models';
 import { EventProgress } from './token-estimation-service';
 
 type RoundNumber = 1 | 2 | 3;
 type LeForecastRoundStatus = 'finished' | 'active' | 'upcoming' | 'future';
 
-interface LeForecastRoundConfig {
-    round: RoundNumber;
-    freeMissions: number;
-    buyBonusDelivery: boolean;
-    paidMissions: number;
-    buyCurrencyBundle: boolean;
-    buyOhSoCloseShards: boolean;
-}
+type LeForecastRoundConfig = ILreForecastRoundConfig;
 
 interface LeForecastRoundResult {
     round: RoundNumber;
@@ -38,6 +32,12 @@ interface LeForecastRoundResult {
     ohSoCloseShardCost: number;
     ohSoCloseBlackstoneCost: number;
     boughtOhSoCloseShards: number;
+    /** Estimated average cleared objectives at this round's remaining daily payouts. */
+    estimatedAvgObjectives: number;
+    startObjectives: number;
+    endObjectives: number;
+    dailyPayouts: number;
+    dailyDeliveryCurrency: number;
 }
 
 type AscensionMilestone = {
@@ -50,10 +50,9 @@ type AscensionMilestone = {
 export class LeRoundOutcomeForecastService {
     public static readonly FULL_ROUND_FREE_TOKENS = 61;
     public static readonly FULL_ROUND_AD_TOKENS = 7;
-    public static readonly BONUS_DELIVERY_TOKENS = 6;
+    public static readonly BONUS_DELIVERY_TOKENS = BONUS_DELIVERY_TOKENS;
     public static readonly MISSION_CURRENCY = 25;
     public static readonly BONUS_DELIVERY_EXTRA_CURRENCY = 15;
-    public static readonly CURRENCY_BUNDLE_CURRENCY = 300;
     public static readonly OH_SO_CLOSE_MAX_SHARDS = 75;
     public static readonly OH_SO_CLOSE_BASE_COST = 500;
     public static readonly OH_SO_CLOSE_UNLOCK_COST_PER_SHARD = 100;
@@ -194,23 +193,10 @@ export class LeRoundOutcomeForecastService {
         buyBonusDelivery: boolean,
         nowMillis: number
     ): number {
-        const currentTokens = model.syncedProgress?.currentTokens ?? 0;
-        const freeTokensTotal = LeTokenService.getFreeTokensRemainingInIteration(
-            legendaryEvent,
-            nowMillis,
-            currentTokens,
-            model.syncedProgress?.nextTokenMillisUtc,
-            model.syncedProgress?.regenDelayInSeconds
+        return LeDailyDeliveryService.getTokensPerDay(legendaryEvent, model, buyBonusDelivery, true, nowMillis).reduce(
+            (sum, value) => sum + value,
+            0
         );
-        const adTokens = LeTokenService.getAdTokensRemainingInIteration(
-            legendaryEvent,
-            model.syncedProgress?.hasUsedAdForExtraTokenToday ?? false,
-            nowMillis
-        );
-        const alreadyHasBonusDelivery = !!model.syncedProgress?.hasPremiumPayout;
-        const bonusTokens = buyBonusDelivery && !alreadyHasBonusDelivery ? this.BONUS_DELIVERY_TOKENS : 0;
-
-        return freeTokensTotal + adTokens + bonusTokens;
     }
 
     /** Builds cumulative chest costs from milestone costs. */
@@ -246,7 +232,10 @@ export class LeRoundOutcomeForecastService {
         return ascensionMilestones[index]?.label ?? 'Full Clear';
     }
 
-    /** Creates default per-round forecast settings from stored occurrence progress. */
+    /**
+     * Creates per-round forecast settings: defaults from stored occurrence progress, overridden by any
+     * saved forecast inputs. Values the sync has already locked in for the active round act as floors.
+     */
     public static createInitialLeForecastRoundConfig(
         model: ILreProgressModel,
         legendaryEvent: ILegendaryEvent,
@@ -258,16 +247,29 @@ export class LeRoundOutcomeForecastService {
             const occurrence = model.occurrenceProgress.find(item => item.eventOccurrence === round);
             const status = statuses.find(item => item.round === round)?.status ?? 'future';
             const isCurrentActiveRound = status === 'active';
-
-            return {
+            const lockedBonusDelivery = isCurrentActiveRound && !!model.syncedProgress?.hasPremiumPayout;
+            const seeded: LeForecastRoundConfig = {
                 round,
                 freeMissions: occurrence?.freeMissionsProgress ?? 0,
-                buyBonusDelivery:
-                    (isCurrentActiveRound && !!model.syncedProgress?.hasPremiumPayout) ||
-                    (occurrence?.premiumMissionsProgress ?? 0) > 0,
+                buyBonusDelivery: lockedBonusDelivery || (occurrence?.premiumMissionsProgress ?? 0) > 0,
                 paidMissions: occurrence?.premiumMissionsProgress ?? 0,
-                buyCurrencyBundle: occurrence?.bundlePurchased ?? false,
+                bundleCurrency: occurrence?.bundleCurrency ?? 0,
                 buyOhSoCloseShards: false,
+                dailyMultiplier: 1 as DailyMultiplier,
+                avgObjectivesPerDay: undefined,
+            };
+            const saved = model.forecastConfigs?.[round];
+            if (!saved) return seeded;
+
+            const floor = (value: number, minimum: number) => (isCurrentActiveRound ? Math.max(value, minimum) : value);
+            const buyBonusDelivery = saved.buyBonusDelivery || lockedBonusDelivery;
+            return {
+                ...saved,
+                round,
+                freeMissions: floor(saved.freeMissions, seeded.freeMissions),
+                buyBonusDelivery,
+                paidMissions: buyBonusDelivery ? floor(saved.paidMissions, seeded.paidMissions) : 0,
+                bundleCurrency: floor(saved.bundleCurrency, seeded.bundleCurrency),
             };
         });
     }
@@ -280,6 +282,8 @@ export class LeRoundOutcomeForecastService {
         tokenIncrements,
         roundConfigs,
         nowMillis,
+        tokenObjectives = [],
+        initialObjectivesCleared = 0,
     }: {
         legendaryEvent: ILegendaryEvent;
         model: ILreProgressModel;
@@ -287,6 +291,10 @@ export class LeRoundOutcomeForecastService {
         tokenIncrements: number[];
         roundConfigs: LeForecastRoundConfig[];
         nowMillis: number;
+        /** Objectives cleared by each token, parallel to `tokenIncrements`. */
+        tokenObjectives?: number[];
+        /** Objectives already cleared before the first forecast token is spent. */
+        initialObjectivesCleared?: number;
     }): LeForecastRoundResult[] {
         const statuses = this.getLegendaryEventRoundStatuses(legendaryEvent, nowMillis);
         const configsByRound = new Map(roundConfigs.map(config => [config.round, config]));
@@ -303,6 +311,7 @@ export class LeRoundOutcomeForecastService {
         let currentStars = currentProgress.currentStars;
         let currentShards = currentProgress.currentShards;
         let currentClaimedChestIndex = currentProgress.currentClaimedChestIndex;
+        let totalObjectives = initialObjectivesCleared;
 
         return statuses.map(({ round, status }) => {
             const config = configsByRound.get(round) ?? {
@@ -310,8 +319,9 @@ export class LeRoundOutcomeForecastService {
                 freeMissions: 0,
                 buyBonusDelivery: false,
                 paidMissions: 0,
-                buyCurrencyBundle: false,
+                bundleCurrency: 0,
                 buyOhSoCloseShards: false,
+                dailyMultiplier: 1 as DailyMultiplier,
             };
 
             if (status === 'finished') {
@@ -338,6 +348,11 @@ export class LeRoundOutcomeForecastService {
                     ohSoCloseShardCost: 0,
                     ohSoCloseBlackstoneCost: 0,
                     boughtOhSoCloseShards: 0,
+                    estimatedAvgObjectives: 0,
+                    startObjectives: totalObjectives,
+                    endObjectives: totalObjectives,
+                    dailyPayouts: 0,
+                    dailyDeliveryCurrency: 0,
                 };
             }
 
@@ -346,22 +361,40 @@ export class LeRoundOutcomeForecastService {
                 this.MISSION_CURRENCY + (config.buyBonusDelivery ? this.BONUS_DELIVERY_EXTRA_CURRENCY : 0);
             const currentFreeMissions = status === 'active' ? (occurrence?.freeMissionsProgress ?? 0) : 0;
             const currentPaidMissions = status === 'active' ? (occurrence?.premiumMissionsProgress ?? 0) : 0;
-            const currentBundlePurchased = status === 'active' ? (occurrence?.bundlePurchased ?? false) : false;
+            const currentBundleCurrency = status === 'active' ? (occurrence?.bundleCurrency ?? 0) : 0;
 
             const freeMissions = this.clampMissionCount(config.freeMissions);
             const paidMissions = config.buyBonusDelivery ? this.clampMissionCount(config.paidMissions) : 0;
 
             const additionalFreeMissions = Math.max(0, freeMissions - currentFreeMissions);
             const additionalPaidMissions = Math.max(0, paidMissions - currentPaidMissions);
-            const additionalBundleCurrency =
-                config.buyCurrencyBundle && !currentBundlePurchased ? this.CURRENCY_BUNDLE_CURRENCY : 0;
+            const additionalBundleCurrency = Math.max(0, config.bundleCurrency - currentBundleCurrency);
 
-            const tokensAvailable =
-                status === 'active'
-                    ? this.getCurrentRoundTokens(legendaryEvent, model, config.buyBonusDelivery, nowMillis)
-                    : this.getFullRoundTokens(config.buyBonusDelivery);
+            const isActive = status === 'active';
+            const tokensPerDay = LeDailyDeliveryService.getTokensPerDay(
+                legendaryEvent,
+                model,
+                config.buyBonusDelivery,
+                isActive,
+                nowMillis
+            );
+            const tokensAvailable = tokensPerDay.reduce((sum, value) => sum + value, 0);
 
             const tokensUsed = Math.min(tokensAvailable, tokenIncrements.length - tokenIndex);
+            const firstPayoutDay = LeDailyDeliveryService.getFirstPayoutDay(legendaryEvent, isActive, nowMillis);
+            const objectives = LeDailyDeliveryService.estimateObjectives({
+                tokensPerDay,
+                tokensToUse: tokensUsed,
+                tokenObjectives,
+                tokenStart: tokenIndex,
+                startingObjectives: totalObjectives,
+                firstPayoutDay,
+            });
+            const dailyPayouts = EVENT_DAYS - firstPayoutDay;
+            const avgObjectives = config.avgObjectivesPerDay ?? objectives.averageAtPayouts;
+            const dailyDeliveryCurrency = Math.round(dailyPayouts * config.dailyMultiplier * avgObjectives);
+            const startObjectives = totalObjectives;
+            totalObjectives = objectives.endingObjectives;
             const pointsEarned = tokenIncrements
                 .slice(tokenIndex, tokenIndex + tokensUsed)
                 .reduce((sum, value) => sum + value, 0);
@@ -375,7 +408,8 @@ export class LeRoundOutcomeForecastService {
                 config.buyBonusDelivery
             );
             const missionCurrencyEarned = (additionalFreeMissions + additionalPaidMissions) * missionCurrencyPerMission;
-            const currencyEarned = pointCurrencyEarned + missionCurrencyEarned + additionalBundleCurrency;
+            const currencyEarned =
+                pointCurrencyEarned + missionCurrencyEarned + additionalBundleCurrency + dailyDeliveryCurrency;
             totalPoints = endingPoints;
             totalCurrency += currencyEarned;
 
@@ -456,6 +490,11 @@ export class LeRoundOutcomeForecastService {
                 ohSoCloseShardCost: shardsNeededForNextMilestone,
                 ohSoCloseBlackstoneCost,
                 boughtOhSoCloseShards,
+                estimatedAvgObjectives: Math.round(objectives.averageAtPayouts),
+                startObjectives,
+                endObjectives: objectives.endingObjectives,
+                dailyPayouts,
+                dailyDeliveryCurrency,
             };
         });
     }

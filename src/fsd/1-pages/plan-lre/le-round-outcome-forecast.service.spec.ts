@@ -49,21 +49,21 @@ const createModel = (): ILreProgressModel =>
                 eventOccurrence: 1,
                 freeMissionsProgress: 10,
                 premiumMissionsProgress: 10,
-                bundlePurchased: true,
+                bundleCurrency: 300,
                 ohSoCloseShards: 0,
             },
             {
                 eventOccurrence: 2,
                 freeMissionsProgress: 10,
                 premiumMissionsProgress: 10,
-                bundlePurchased: true,
+                bundleCurrency: 300,
                 ohSoCloseShards: 0,
             },
             {
                 eventOccurrence: 3,
                 freeMissionsProgress: 0,
                 premiumMissionsProgress: 0,
-                bundlePurchased: false,
+                bundleCurrency: 0,
                 ohSoCloseShards: 0,
             },
         ],
@@ -129,7 +129,8 @@ describe('le-round-outcome-forecast.service', () => {
                       freeMissions: 10,
                       buyBonusDelivery: false,
                       paidMissions: 0,
-                      buyCurrencyBundle: false,
+                      bundleCurrency: 0,
+                      dailyMultiplier: 1 as const,
                       buyOhSoCloseShards: false,
                   }
                 : config
@@ -221,6 +222,125 @@ describe('le-round-outcome-forecast.service', () => {
         expect(round3.ohSoCloseEligible).toBe(true);
         expect(round3.shardsNeededForNextMilestone).toBe(70);
         expect(round3.ohSoCloseBlackstoneCost).toBe(500 + 50 * 70);
+    });
+});
+
+describe('LeRoundOutcomeForecastService daily delivery and bundles', () => {
+    const now = new Date('2026-04-01T00:00:00.000Z').getTime();
+    const forecastRound3 = (override: Record<string, unknown>) => {
+        const event = createLegendaryEvent();
+        const model = createModel();
+        const roundConfigs = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, event, now).map(
+            config =>
+                config.round === 3
+                    ? { ...config, freeMissions: 10, buyBonusDelivery: false, paidMissions: 0, ...override }
+                    : config
+        );
+        return LeRoundOutcomeForecastService.computeLeRoundForecasts({
+            legendaryEvent: event,
+            model,
+            currentProgress: createProgress(),
+            tokenIncrements: [250],
+            tokenObjectives: [10],
+            initialObjectivesCleared: 100,
+            roundConfigs,
+            nowMillis: now,
+        })[2];
+    };
+
+    it('pays multiplier * estimated objectives at each of the 7 daily payouts', () => {
+        const round3 = forecastRound3({ dailyMultiplier: 2 });
+        expect(round3.estimatedAvgObjectives).toBe(110);
+        expect(round3.startObjectives).toBe(100);
+        expect(round3.endObjectives).toBe(110);
+        expect(round3.dailyPayouts).toBe(7);
+        expect(round3.dailyDeliveryCurrency).toBe(7 * 2 * 110);
+        expect(round3.currencyEarned).toBe(305 + 7 * 2 * 110);
+    });
+
+    it('uses the user override for average objectives instead of the estimate', () => {
+        const round3 = forecastRound3({ dailyMultiplier: 4, avgObjectivesPerDay: 200 });
+        expect(round3.dailyDeliveryCurrency).toBe(7 * 4 * 200);
+    });
+
+    it('adds an arbitrary bundle currency total separately from daily delivery', () => {
+        const base = forecastRound3({});
+        const withBundles = forecastRound3({ bundleCurrency: 150 + 600 + 600 });
+        expect(withBundles.currencyEarned - base.currencyEarned).toBe(1350);
+        expect(withBundles.dailyDeliveryCurrency).toBe(base.dailyDeliveryCurrency);
+    });
+});
+
+describe('LeRoundOutcomeForecastService saved forecast inputs', () => {
+    const now = new Date('2026-04-01T00:00:00.000Z').getTime();
+
+    it('uses saved inputs in place of the defaults derived from occurrence progress', () => {
+        const model = {
+            ...createModel(),
+            forecastConfigs: {
+                3: {
+                    round: 3,
+                    freeMissions: 4,
+                    buyBonusDelivery: true,
+                    paidMissions: 2,
+                    bundleCurrency: 750,
+                    buyOhSoCloseShards: true,
+                    dailyMultiplier: 4,
+                    avgObjectivesPerDay: 123,
+                },
+            },
+        } as ILreProgressModel;
+
+        const round3 = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(
+            model,
+            createLegendaryEvent(),
+            now
+        )[2];
+
+        expect(round3).toEqual(model.forecastConfigs![3]);
+    });
+
+    it('keeps synced progress as a floor for the active round', () => {
+        const event = createLegendaryEvent({ eventStage: 3, nextEventDateUtc: '2026-04-01T00:00:00.000Z' });
+        const model = {
+            ...createModel(),
+            syncedProgress: { hasPremiumPayout: true },
+            occurrenceProgress: [
+                ...createModel().occurrenceProgress.slice(0, 2),
+                {
+                    eventOccurrence: 3,
+                    freeMissionsProgress: 6,
+                    premiumMissionsProgress: 5,
+                    bundleCurrency: 300,
+                    ohSoCloseShards: 0,
+                },
+            ],
+            forecastConfigs: {
+                3: {
+                    round: 3,
+                    freeMissions: 2,
+                    buyBonusDelivery: false,
+                    paidMissions: 0,
+                    bundleCurrency: 150,
+                    buyOhSoCloseShards: false,
+                    dailyMultiplier: 2,
+                },
+            },
+        } as unknown as ILreProgressModel;
+
+        const round3 = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(
+            model,
+            event,
+            new Date('2026-04-02T00:00:00.000Z').getTime()
+        )[2];
+
+        expect(round3).toMatchObject({
+            freeMissions: 6,
+            buyBonusDelivery: true,
+            paidMissions: 5,
+            bundleCurrency: 300,
+            dailyMultiplier: 2,
+        });
     });
 });
 
