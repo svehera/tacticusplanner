@@ -62,9 +62,7 @@ export class LeProgressService {
 
         const bundleCurrency = useP2P
             ? sum(
-                  model.occurrenceProgress.map(x =>
-                      this.getBundleCurrency(+x.bundlePurchased, x.premiumMissionsProgress)
-                  )
+                  model.occurrenceProgress.map(x => this.getBundleCurrency(x.bundleCurrency, x.premiumMissionsProgress))
               )
             : 0;
 
@@ -141,9 +139,9 @@ export class LeProgressService {
         );
     }
 
-    private static getBundleCurrency(bundle: number, premiumMissionsCount: number): number {
+    private static getBundleCurrency(bundleCurrency: number, premiumMissionsCount: number): number {
         const additionalPayout = premiumMissionsCount > 0 ? 15 : 0;
-        return bundle ? bundle * 300 + additionalPayout : 0;
+        return bundleCurrency > 0 ? bundleCurrency + additionalPayout : 0;
     }
 
     private static computeCurrentCurrency(

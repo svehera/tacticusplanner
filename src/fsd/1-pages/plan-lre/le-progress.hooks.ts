@@ -10,7 +10,12 @@ import { LreTrackId } from '@/fsd/4-entities/lre';
 import { ILegendaryEvent, RequirementStatus } from '@/fsd/3-features/lre';
 import { LrePointsCategoryId } from '@/fsd/3-features/lre-progress';
 
-import { ILreProgressModel, ILreOccurrenceProgress, ILreBattleRequirementsProgress } from './lre.models';
+import {
+    ILreProgressModel,
+    ILreOccurrenceProgress,
+    ILreBattleRequirementsProgress,
+    ILreForecastRoundConfig,
+} from './lre.models';
 import { LreService } from './lre.service';
 
 const createNewModel = (
@@ -159,6 +164,13 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         return updateDto(updatedProgress);
     };
 
+    const updateForecastConfig = (config: ILreForecastRoundConfig) => {
+        const updatedProgress = produce(model, draft => {
+            draft.forecastConfigs = { ...draft.forecastConfigs, [config.round]: config };
+        });
+        return updateDto(updatedProgress);
+    };
+
     const setBattleState = (
         trackId: LreTrackId,
         battleIndex: number,
@@ -169,5 +181,13 @@ export const useLreProgress = (legendaryEvent: ILegendaryEvent) => {
         updateDto(createNewModel(model, trackId, battleIndex, requirementId, status, forceOverwrite));
     };
 
-    return { model, createNewModel, updateDto, updateNotes, updateOccurrenceProgress, setBattleState };
+    return {
+        model,
+        createNewModel,
+        updateDto,
+        updateNotes,
+        updateOccurrenceProgress,
+        updateForecastConfig,
+        setBattleState,
+    };
 };

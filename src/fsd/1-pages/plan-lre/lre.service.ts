@@ -34,6 +34,33 @@ export class LreService {
         return result;
     };
 
+    private static readonly mapForecastDtoToModel = (
+        forecast: ILreProgressDto['forecast']
+    ): ILreProgressModel['forecastConfigs'] => {
+        if (!forecast) return undefined;
+        const result: NonNullable<ILreProgressModel['forecastConfigs']> = {};
+        for (const round of [1, 2, 3] as const) {
+            const config = forecast[round];
+            if (config) result[round] = { ...config, round };
+        }
+        return result;
+    };
+
+    private static readonly mapForecastModelToDto = (
+        forecastConfigs: ILreProgressModel['forecastConfigs']
+    ): ILreProgressDto['forecast'] => {
+        if (!forecastConfigs) return undefined;
+        const result: NonNullable<ILreProgressDto['forecast']> = {};
+        for (const round of [1, 2, 3] as const) {
+            const config = forecastConfigs[round];
+            if (config) {
+                const { round: _round, ...rest } = config;
+                result[round] = rest;
+            }
+        }
+        return result;
+    };
+
     public static readonly mapProgressDtoToModel = (
         dto: ILreProgressDto | undefined,
         lre: ILegendaryEvent
@@ -49,7 +76,7 @@ export class LreService {
                 eventOccurrence: occurrence,
                 premiumMissionsProgress: value.premiumMissions,
                 freeMissionsProgress: value.regularMissions,
-                bundlePurchased: !!value.bundle,
+                bundleCurrency: value.bundleCurrency ?? value.bundle * 300,
                 ohSoCloseShards: value.ohSoCloseShards ?? 0,
             } satisfies ILreOccurrenceProgress;
         });
@@ -157,6 +184,7 @@ export class LreService {
             eventName: dto?.name ?? LegendaryEventEnum[lre.id],
             notes: dto?.notes ?? '',
             occurrenceProgress,
+            forecastConfigs: LreService.mapForecastDtoToModel(dto?.forecast),
             tracksProgress,
             syncedProgress: dto?.forceProgress,
             regularMissions: lre.regularMissions,
@@ -174,7 +202,8 @@ export class LreService {
             overviewDto[occurrenceProgress.eventOccurrence] = {
                 premiumMissions: occurrenceProgress.premiumMissionsProgress,
                 regularMissions: occurrenceProgress.freeMissionsProgress,
-                bundle: +occurrenceProgress.bundlePurchased,
+                bundle: occurrenceProgress.bundleCurrency > 0 ? 1 : 0,
+                bundleCurrency: occurrenceProgress.bundleCurrency,
                 ohSoCloseShards: occurrenceProgress.ohSoCloseShards,
             };
         }
@@ -208,6 +237,7 @@ export class LreService {
             compactProgress: battlesProgressToCompact(battlesProgress),
             forceProgress: model.syncedProgress,
             overview: overviewDto,
+            forecast: LreService.mapForecastModelToDto(model.forecastConfigs),
         };
     };
 }
