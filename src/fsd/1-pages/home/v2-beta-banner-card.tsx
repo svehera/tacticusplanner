@@ -1,6 +1,12 @@
 import { useState } from 'react';
 
-import { dismissV2BetaBanner, isV2BetaBannerVisible, v2BetaAnnouncementLink, v2BetaLink } from './v2-beta-banner';
+import {
+    dismissV2BetaBanner,
+    isV2BetaBannerVisible,
+    isV2BetaPromoActive,
+    v2BetaAnnouncementLink,
+    v2BetaLink,
+} from './v2-beta-banner';
 
 export const V2BetaBanner = () => {
     const [isVisible, setIsVisible] = useState(() => isV2BetaBannerVisible());
@@ -23,7 +29,9 @@ export const V2BetaBanner = () => {
                     Tacticus Planner V2 is in public beta
                 </p>
                 <p className="text-sm text-(--soft-fg)">
-                    Try the rebuilt planner and claim a promo code on its home page. The code is valid until 7 November.{' '}
+                    {isV2BetaPromoActive()
+                        ? 'Try the rebuilt planner and claim a promo code on its home page. The code is valid until 7 November.'
+                        : 'Try the rebuilt planner and see what is new.'}{' '}
                     <a
                         href={v2BetaAnnouncementLink}
                         target="_blank"
