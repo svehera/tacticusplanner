@@ -2,8 +2,7 @@ const v2BetaBannerDismissedStorageKey = 'home-v2-beta-banner-dismissed';
 
 export const v2BetaLink = 'https://new.tacticusplanner.app';
 
-// TODO: replace with the V2 public beta post once it is published on UserJot.
-export const v2BetaAnnouncementLink = 'https://tacticusplanner.userjot.com/updates';
+export const v2BetaAnnouncementLink = 'https://tacticusplanner.userjot.com/updates/p/v2-public-beta-announcement';
 
 // The promo code is valid through 7 November 2026, so the banner disappears at the start of 8 November local time.
 const v2BetaBannerEndsAt = new Date(2026, 10, 8);
