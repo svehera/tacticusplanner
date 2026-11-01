@@ -18,6 +18,7 @@ import { GoalsSection } from './goals-section';
 import { LreSection } from './lre-section';
 import { dismissHomeQuestionnaire, homeQuestionnaireLink, isHomeQuestionnaireDismissed } from './questionnaire-banner';
 import { useBmcWidget } from './use-bmc-widget';
+import { V2BetaBanner } from './v2-beta-banner-card';
 
 // Toggle to re-enable the home questionnaire banner.
 const questionnaireBannerEnabled = false;
@@ -65,6 +66,7 @@ export const DesktopHome = () => {
 
     return (
         <div className="px-4 py-4">
+            <V2BetaBanner />
             {announcements()}
             {showQuestionnaireBanner && (
                 <div className="mx-auto mb-4 flex max-w-[720px] flex-col items-center justify-between gap-3 rounded-xl border border-(--primary)/35 bg-(--card) px-4 py-3 text-center shadow-sm transition-shadow hover:shadow-md motion-safe:animate-[pulse_900ms_ease-out_1] sm:flex-row sm:text-left">
