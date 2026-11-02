@@ -11,9 +11,9 @@ import { isMobile } from 'react-device-detect';
 import { StoreContext } from '@/reducers/store.provider';
 
 import { CharactersService, ICharacter2 } from '@/fsd/4-entities/character';
+import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
-// eslint-disable-next-line import-x/no-internal-modules
-import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/3-features/goals/goals.models';
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILegendaryEvent, ILreTeam } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -22,12 +22,21 @@ interface Props {
     lre: ILegendaryEvent;
     team: ILreTeam;
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     onClose: () => void;
     saveTeam: (team: ILreTeam) => void;
     deleteTeam: (teamId: string) => void;
 }
 
-export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals, onClose, saveTeam, deleteTeam }) => {
+export const LreEditTeam: React.FC<Props> = ({
+    lre,
+    team,
+    upgradeRankOrMowGoals,
+    upgradeAbilities,
+    onClose,
+    saveTeam,
+    deleteTeam,
+}) => {
     const { viewPreferences, autoTeamsPreferences, characters: unresolvedCharacters } = useContext(StoreContext);
     const characters = useMemo(
         () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
@@ -164,6 +173,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                         <LreTile
                                             character={characters.find(x => x.snowprintId === character)!}
                                             upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                            upgradeAbilities={upgradeAbilities}
                                             settings={viewPreferences}
                                         />
                                     </div>
@@ -191,6 +201,7 @@ export const LreEditTeam: React.FC<Props> = ({ lre, team, upgradeRankOrMowGoals,
                                     <LreTile
                                         character={character}
                                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                                        upgradeAbilities={upgradeAbilities}
                                         settings={viewPreferences}
                                     />
                                 </div>

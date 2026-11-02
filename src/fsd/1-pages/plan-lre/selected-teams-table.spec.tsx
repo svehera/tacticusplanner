@@ -117,6 +117,7 @@ const renderTable = (rows: Array<Record<string, ISelectedTeamTableCell | string>
                 track={makeTrack()}
                 rows={rows}
                 upgradeRankOrMowGoals={[]}
+                upgradeAbilities={[]}
                 editTeam={editTeam}
                 deleteTeam={vi.fn()}
             />

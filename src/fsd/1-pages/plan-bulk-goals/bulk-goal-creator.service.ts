@@ -3,7 +3,7 @@ import { CampaignsLocationsUsage, PersonalGoalType } from 'src/models/enums';
 import { IPersonalGoal } from 'src/models/interfaces';
 
 import { filterMap } from '@/fsd/5-shared/lib';
-import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
+import { Rank, Rarity, RarityMapper, RarityStars } from '@/fsd/5-shared/model';
 
 import { ICharacter2 } from '@/fsd/4-entities/character';
 import type { GoalCategory, RankStep } from '@/fsd/4-entities/goal';
@@ -109,6 +109,29 @@ type RankGoalPlan = {
 };
 
 const CATEGORY_ORDER: Record<GoalCategory, number> = { Unlock: 0, Ascend: 1, Rank: 2, Abilities: 3 };
+
+/** Whether the entry creates an Unlock goal: a locked character with a target rank. */
+export const willUnlockCharacter = (unit: IUnit, entry: BulkUnitEntry): boolean =>
+    'rank' in unit && unit.rank === Rank.Locked && entry.rank > Rank.Locked;
+
+/**
+ * Where the entry's Ascend goal starts. Unlocking puts a character at its initial rarity with that
+ * rarity's minimum stars, so when the entry also creates an Unlock goal the Ascend goal starts from
+ * there rather than from the locked unit's stored stars (which would duplicate the Unlock goal).
+ */
+export const getAscendStart = (unit: IUnit, entry: BulkUnitEntry): { rarity: Rarity; stars: RarityStars } => {
+    if (willUnlockCharacter(unit, entry)) {
+        const rarity = 'initialRarity' in unit ? unit.initialRarity : unit.rarity;
+        return { rarity, stars: RarityMapper.toStars[rarity] };
+    }
+    return { rarity: unit.rarity, stars: unit.stars as RarityStars };
+};
+
+/** Whether the entry's target rarity/stars go beyond where its Ascend goal starts. */
+export const needsAscendGoal = (unit: IUnit, entry: BulkUnitEntry): boolean => {
+    const start = getAscendStart(unit, entry);
+    return entry.rarity > start.rarity || entry.stars > start.stars;
+};
 
 /** 0 = Legendary/Mythic pre-farm  1 = Epic pre-farm (D2.5+)  2 = core / plain */
 export const getRankGoalSubOrder = (filterRarities?: Rarity[]): number => {
@@ -348,7 +371,7 @@ export const buildBulkPlannedGoals = ({
         const isMow = !('rank' in unit);
         const unitId = unit.snowprintId;
 
-        if (!isMow && 'rank' in unit && unit.rank === Rank.Locked && entry.rank > Rank.Locked) {
+        if (!isMow && willUnlockCharacter(unit, entry)) {
             pushGoal('Unlock', index, {
                 id: createId(),
                 character: unitId,
@@ -360,13 +383,18 @@ export const buildBulkPlannedGoals = ({
             });
         }
 
-        if (entry.rarity > unit.rarity || entry.stars > unit.stars) {
+        if (needsAscendGoal(unit, entry)) {
+            const ascendStart = getAscendStart(unit, entry);
             pushGoal('Ascend', index, {
                 id: createId(),
                 character: unitId,
                 type: PersonalGoalType.Ascend,
                 priority: 1,
                 dailyRaids: true,
+                ...(willUnlockCharacter(unit, entry) && {
+                    startingRarity: ascendStart.rarity,
+                    startingStars: ascendStart.stars,
+                }),
                 targetRarity: entry.rarity,
                 targetStars: entry.stars as RarityStars,
                 campaignsUsage: CampaignsLocationsUsage.LeastEnergy,

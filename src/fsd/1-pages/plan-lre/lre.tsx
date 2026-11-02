@@ -111,7 +111,7 @@ export const Lre: React.FC = () => {
     const resolvedMows = MowsService.resolveAllFromStorage(mows);
 
     const units = useMemo(() => [...characters, ...resolvedMows], [characters, resolvedMows]);
-    const { allGoals, upgradeRankOrMowGoals } = useMemo(
+    const { allGoals, upgradeRankOrMowGoals, upgradeAbilities } = useMemo(
         () => GoalsService.prepareGoals(goals, units, false),
         [goals, units]
     );
@@ -222,6 +222,7 @@ export const Lre: React.FC = () => {
                     <LegendaryEvent
                         legendaryEvent={legendaryEvent}
                         upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                        upgradeAbilities={upgradeAbilities}
                         sectionVisibility={sectionVisibility}
                     />
                 );

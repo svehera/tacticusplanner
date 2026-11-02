@@ -17,6 +17,7 @@ import { useFitGridOnWindowResize } from '@/fsd/5-shared/lib';
 
 import { ICharacterUpgradeMow, ICharacterUpgradeRankGoal } from '@/fsd/4-entities/goal';
 
+import { ICharacterUpgradeAbilities } from '@/fsd/3-features/goals';
 import { ILegendaryEventTrack, ILegendaryEventTrackRequirement } from '@/fsd/3-features/lre';
 
 import { LreTile } from './lre-tile';
@@ -27,6 +28,7 @@ interface Props {
     track: ILegendaryEventTrack;
     rows: ITableRow<ISelectedTeamTableCell | string>[];
     upgradeRankOrMowGoals: (ICharacterUpgradeRankGoal | ICharacterUpgradeMow)[];
+    upgradeAbilities: ICharacterUpgradeAbilities[];
     editTeam: (teamId: string) => void;
     deleteTeam: (teamId: string) => void;
 }
@@ -39,7 +41,14 @@ const getRowStyle = (params: RowClassParams): RowStyle => {
     return params.node.rowIndex && params.node.rowIndex % 5 === 0 ? { borderTop: '5px dashed' } : {};
 };
 
-export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoals, editTeam, deleteTeam, track }) => {
+export const SelectedTeamsTable: React.FC<Props> = ({
+    rows,
+    upgradeRankOrMowGoals,
+    upgradeAbilities,
+    editTeam,
+    deleteTeam,
+    track,
+}) => {
     const { viewPreferences } = useContext(StoreContext);
     const gridReference = useRef<AgGridReact>(null);
 
@@ -56,6 +65,7 @@ export const SelectedTeamsTable: React.FC<Props> = ({ rows, upgradeRankOrMowGoal
                 <LreTile
                     character={character}
                     upgradeRankOrMowGoals={upgradeRankOrMowGoals}
+                    upgradeAbilities={upgradeAbilities}
                     settings={viewPreferences}
                 />
             );
