@@ -16,7 +16,7 @@ npm run tsc            # type-check without emit
 npm run build          # production build
 ```
 
-CI (`npm run build-ci`) runs format-check, lint, build, and tests in sequence.
+PR checks and the staging deploy run `npm run build-dev-ci` (format-check, lint, staging build, tests in sequence); the production deploy runs `npm run build-ci`.
 
 ## Architecture
 
@@ -92,7 +92,7 @@ See [CONVENTIONS.md](CONVENTIONS.md) for the full reference: design tokens, shar
 - The game uses the name of metals for ranks, each of which can go from one to three. The metals are "stone", "iron", "bronze", "silver", "gold", "diamond", and "adamantine".
 - People often abbreviate ranks, so Diamond Three would be D3, Adamantine Two would be A2, etc. People usually use "St1" for Stone one and "S1" for silver one.
 - Characters must achieve a minimum rarity to rank up beyond at a point. The rarity requirements to reach each rank are defined in rankToRarity in constants.ts.
-- In order to promote or ascend, characters and mows need a certain number of incremental shards and orbs. The incremental shard count is defined in charProgression in constants.ts.
+- In order to promote or ascend, characters and mows need a certain number of incremental shards and orbs. The incremental shard count is defined in charsProgression in src/models/constants.ts.
 - Hereos and MoWs have IDs. These are also called snowprint IDs. There is a legacy ID system that we are mostly rid of, but we haven't cleaned it up, so if you aren't sure, please ask for clarification.
 - In order to rank up, heroes need not only to ascend, but they must also hit a minimum XP level and a apply rank upgrades. The XP levels are defined in rankToLevel in constants.ts.
 - Heroes must apply upgrade materials. Materials (AKA upgrades, mats) can be crafted or uncrafted, and are defined in new-recipe-data.json. The materials a character must apply to rank up are defined in new-rank-up-data.json. The key is the _current_ rank of the character, and the value is an array of six upgrade materials to reach the new rank. It takes six upgrade materials to reach a new rank. Two rows of three columns. The rank-up data is specified in column-major order, starting with the first column.
