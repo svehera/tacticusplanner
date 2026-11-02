@@ -3,7 +3,7 @@
     "unitSnowprintId": "tauFarsight",
     "name": "Farsight",
     "theme": "Tau",
-    "eventStage": 2,
+    "eventStage": 3,
     "heroEventMaxRuns": 3,
     "unlockableHero": {
         "heroId": "tauFarsight",
