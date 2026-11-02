@@ -23,6 +23,8 @@ export interface ILreProgressDto {
     compactProgress?: ILreCompactProgressDto;
     forceProgress?: ILeProgress;
     overview?: Record<1 | 2 | 3, ILreOverviewDto>;
+    /** Saved round-forecast inputs per round. */
+    forecast?: Partial<Record<1 | 2 | 3, ILreForecastRoundDto>>;
     notes: string;
 }
 
@@ -31,10 +33,23 @@ interface ILreTrackProgressLegacyDto {
     battles: Array<boolean[]>;
 }
 
+export interface ILreForecastRoundDto {
+    freeMissions: number;
+    buyBonusDelivery: boolean;
+    paidMissions: number;
+    bundleCurrency: number;
+    buyOhSoCloseShards: boolean;
+    dailyMultiplier: 1 | 2 | 4;
+    avgObjectivesPerDay?: number;
+}
+
 export interface ILreOverviewDto {
     regularMissions: number;
     premiumMissions: number;
+    /** Legacy: number of 300-currency bundles. Superseded by `bundleCurrency`. */
     bundle: number;
+    /** Total currency bought from bundles (150/300/600 offers, any number of them). */
+    bundleCurrency?: number;
     ohSoCloseShards?: number;
 }
 

@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { INpcData, INpcStats, NpcDetailModal, NpcPortrait, NpcService } from '@/fsd/4-entities/npc';
 
 import { ILeBattle, ILeWave } from './le-battle.service';
+import { getLeMapUrl } from './le-maps';
 
 // Type definition for the data we extract from the string
 interface ResolvedEnemyData {
@@ -153,12 +154,7 @@ export const LeBattle: React.FC<LeBattleProps> = ({ battle, trackName }) => {
                     {isMapVisible && (
                         <div className="overflow-hidden rounded-lg border border-(--border)">
                             <img
-                                src={
-                                    new URL(
-                                        `../../../assets/images/snowprint_assets/le_maps/${battle.mapId}.jpg`,
-                                        import.meta.url
-                                    ).href
-                                }
+                                src={getLeMapUrl(battle.mapId)}
                                 alt={`Map for Battle ${battle.number}`}
                                 className="h-auto max-w-[512px] object-cover"
                             />

@@ -20,11 +20,30 @@ export enum LreSection {
     settings,
 }
 
+export type DailyMultiplier = 1 | 2 | 4;
+
+/** The user's planned inputs for one round of the round-outcome forecast. */
+export interface ILreForecastRoundConfig {
+    round: 1 | 2 | 3;
+    freeMissions: number;
+    buyBonusDelivery: boolean;
+    paidMissions: number;
+    /** Total currency expected from bundles (any number of 150/300/600 offers). */
+    bundleCurrency: number;
+    buyOhSoCloseShards: boolean;
+    /** Currency paid per cleared objective at each end-of-day payout. */
+    dailyMultiplier: DailyMultiplier;
+    /** User override for average cleared objectives at the payouts; undefined uses the estimate. */
+    avgObjectivesPerDay?: number;
+}
+
 export interface ILreProgressModel {
     eventId: LegendaryEventEnum;
     eventName: string;
     notes: string;
     occurrenceProgress: ILreOccurrenceProgress[];
+    /** Saved round-forecast inputs, overriding the defaults derived from `occurrenceProgress`. */
+    forecastConfigs?: Partial<Record<1 | 2 | 3, ILreForecastRoundConfig>>;
     tracksProgress: ILreTrackProgress[];
     regularMissions: readonly string[];
     premiumMissions: readonly string[];
@@ -41,7 +60,8 @@ export interface ILreOccurrenceProgress {
     eventOccurrence: 1 | 2 | 3;
     freeMissionsProgress: number;
     premiumMissionsProgress: number;
-    bundlePurchased: boolean;
+    /** Total currency bought from bundles in this occurrence. */
+    bundleCurrency: number;
     ohSoCloseShards: number;
 }
 

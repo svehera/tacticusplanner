@@ -1,4 +1,7 @@
+/* eslint-disable import-x/no-internal-modules */
 import { describe, expect, it } from 'vitest';
+
+import { PersonalGoalType } from 'src/models/enums';
 
 import { Rank, Rarity, RarityStars } from '@/fsd/5-shared/model';
 
@@ -82,6 +85,22 @@ const makeSimpleEntry = (snowprintId: string, overrides: Partial<BulkUnitEntry> 
     incrementalGoalMode: 'milestones',
     ...overrides,
 });
+
+/** A locked Rare character (e.g. Zapspitta) as the bulk creator sees it: no stars yet. */
+const makeLockedRareEntry = (overrides: Partial<BulkUnitEntry> = {}): BulkUnitEntry =>
+    makeSimpleEntry('lockedRare', {
+        unit: {
+            ...makeSimpleEntry('lockedRare').unit,
+            rank: Rank.Locked,
+            rarity: Rarity.Rare,
+            initialRarity: Rarity.Rare,
+            stars: RarityStars.None,
+        } as unknown as BulkUnitEntry['unit'],
+        rank: Rank.Bronze1,
+        rarity: Rarity.Rare,
+        stars: RarityStars.FourStars,
+        ...overrides,
+    });
 
 describe('bulk-goal-creator.service', () => {
     it('splits incremental pre-farm core segment across D2.5 instead of overlapping D1->D3 goals', () => {
@@ -242,6 +261,35 @@ describe('bulk-goal-creator.service', () => {
             createId: () => 'id',
         });
         expect(tierGoals.map(goal => goal.character)).toEqual(['charB', 'charA']);
+    });
+
+    it('does not add an Ascend goal when the Unlock goal already reaches the target rarity', () => {
+        const goals = buildBulkPlannedGoals({
+            bulkUnits: [makeLockedRareEntry()],
+            goalOrder: 'character',
+            characterPriorityMode: 'character',
+            createId: () => 'id',
+        });
+
+        expect(goals.map(goal => goal.type)).toEqual([PersonalGoalType.Unlock, PersonalGoalType.UpgradeRank]);
+    });
+
+    it('still adds an Ascend goal for a locked character targeting beyond its unlock rarity', () => {
+        const goals = buildBulkPlannedGoals({
+            bulkUnits: [makeLockedRareEntry({ stars: RarityStars.FiveStars })],
+            goalOrder: 'character',
+            characterPriorityMode: 'character',
+            createId: () => 'id',
+        });
+
+        expect(goals.map(goal => goal.type)).toEqual([
+            PersonalGoalType.Unlock,
+            PersonalGoalType.Ascend,
+            PersonalGoalType.UpgradeRank,
+        ]);
+        const ascend = goals.find(goal => goal.type === PersonalGoalType.Ascend);
+        expect(ascend?.startingRarity).toBe(Rarity.Rare);
+        expect(ascend?.startingStars).toBe(RarityStars.FourStars);
     });
 });
 

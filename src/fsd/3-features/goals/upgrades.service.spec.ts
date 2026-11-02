@@ -3839,6 +3839,43 @@ describe('UpgradesService.populateLocationsData', () => {
         expect(locationLocked.isSuggested).toBe(false);
     });
 
+    it('prefers campaign event locations over higher node numbers when energy per item is tied', () => {
+        const locationMirrorHigh = { ...CampaignsService.campaignsComposed['IM29'] };
+        const locationMirrorLow = { ...CampaignsService.campaignsComposed['OM13'] };
+        const locationCampaignEvent = { ...CampaignsService.campaignsComposed['AMS01'] };
+
+        const combinedUpgrade: ICombinedUpgrade = {
+            ...FsdUpgradesService.baseUpgradesData.upgHpC015,
+            requiredCount: 1,
+            countByGoalId: {},
+            goalToUnit: {},
+            relatedCharacters: [],
+            relatedGoals: [],
+            locations: [locationMirrorHigh, locationMirrorLow, locationCampaignEvent],
+        };
+
+        const settings = createSettings({
+            completedLocations: [],
+            campaignsProgress: {
+                [Campaign.IM]: 29,
+                [Campaign.OM]: 13,
+                [Campaign.AMS]: 1,
+            } as IEstimatedRanksSettings['campaignsProgress'],
+            preferences: {
+                ...createSettings().preferences,
+                campaignEvent: CampaignGroupType.adMechCE,
+            },
+        });
+
+        UpgradesService.populateLocationsData({ [combinedUpgrade.id]: combinedUpgrade }, settings);
+
+        expect(combinedUpgrade.locations.map(location => location.campaign)).toEqual([
+            Campaign.AMS,
+            Campaign.IM,
+            Campaign.OM,
+        ]);
+    });
+
     it('suggests mythic shards only from extremis nodes', () => {
         const locationExtremis = { ...CampaignsService.campaignsComposed['AME25'] };
 

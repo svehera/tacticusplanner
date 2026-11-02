@@ -1,7 +1,7 @@
 /* eslint-disable boundaries/element-types */
 /* eslint-disable import-x/no-internal-modules */
 import { FormControlLabel, Paper, Switch } from '@mui/material';
-import { useContext, useEffect, useMemo, useState } from 'react';
+import { useContext, useMemo } from 'react';
 
 import { StoreContext } from '@/reducers/store.provider';
 
@@ -19,7 +19,7 @@ import { RosterSnapshotsAssetsProvider } from '../input-roster-snapshots/roster-
 
 import { LeRoundOutcomeForecastService } from './le-round-outcome-forecast.service';
 import { LeTokenService } from './le-token-service';
-import { ILreProgressModel } from './lre.models';
+import { DailyMultiplier, ILreForecastRoundConfig, ILreProgressModel } from './lre.models';
 import { EventProgress } from './token-estimation-service';
 
 interface Props {
@@ -27,7 +27,16 @@ interface Props {
     model: ILreProgressModel;
     progress: EventProgress;
     tokenIncrements: number[];
+    /** Objectives cleared by each token, parallel to `tokenIncrements`. */
+    tokenObjectives: number[];
+    /** Objectives already cleared before the first forecast token is spent. */
+    initialObjectivesCleared: number;
+    /** Persists the user's inputs for one round. */
+    onConfigChange: (config: ILreForecastRoundConfig) => void;
 }
+
+const DAILY_MULTIPLIERS: readonly DailyMultiplier[] = [1, 2, 4];
+const MAX_OBJECTIVES = 324;
 
 const getRoundLabel = (round: 1 | 2 | 3) => {
     switch (round) {
@@ -68,22 +77,25 @@ const getRank = (stars: RarityStars, rank: Rank | undefined): Rank => {
     return Rank.Locked;
 };
 
-export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenIncrements }: Props) => {
+export const LeRoundOutcomeForecast = ({
+    legendaryEvent,
+    model,
+    progress,
+    tokenIncrements,
+    tokenObjectives,
+    initialObjectivesCleared,
+    onConfigChange,
+}: Props) => {
     const { characters: unresolvedCharacters } = useContext(StoreContext);
     const chars = useMemo(
         () => CharactersService.resolveStoredCharacters(unresolvedCharacters),
         [unresolvedCharacters]
     );
     const nowMillis = Date.now();
-    const [roundConfigs, setRoundConfigs] = useState(() =>
-        LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, legendaryEvent, nowMillis)
+    const roundConfigs = useMemo(
+        () => LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, legendaryEvent, nowMillis),
+        [model, legendaryEvent, nowMillis]
     );
-
-    useEffect(() => {
-        setRoundConfigs(
-            LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, legendaryEvent, Date.now())
-        );
-    }, [legendaryEvent, model.occurrenceProgress, model.syncedProgress?.hasPremiumPayout]);
 
     const statuses = useMemo(
         () => LeRoundOutcomeForecastService.getLegendaryEventRoundStatuses(legendaryEvent, nowMillis),
@@ -97,10 +109,21 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                 model,
                 currentProgress: progress,
                 tokenIncrements,
+                tokenObjectives,
+                initialObjectivesCleared,
                 roundConfigs,
                 nowMillis,
             }),
-        [legendaryEvent, model, progress, roundConfigs, tokenIncrements, nowMillis]
+        [
+            legendaryEvent,
+            model,
+            progress,
+            roundConfigs,
+            tokenIncrements,
+            tokenObjectives,
+            initialObjectivesCleared,
+            nowMillis,
+        ]
     );
 
     const ascensionMilestones = useMemo(() => LeRoundOutcomeForecastService.getAscensionMilestones(model), [model]);
@@ -117,10 +140,9 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
         nowMillis <= LeTokenService.getEventEndTimeMillis(legendaryEvent);
     const hasKnownCurrentTokens = !!model.syncedProgress;
 
-    const updateRoundConfig = (round: 1 | 2 | 3, update: Partial<(typeof roundConfigs)[number]>) => {
-        setRoundConfigs(previous =>
-            previous.map(config => (config.round === round ? { ...config, ...update } : config))
-        );
+    const updateRoundConfig = (round: 1 | 2 | 3, update: Partial<ILreForecastRoundConfig>) => {
+        const config = roundConfigs.find(item => item.round === round);
+        if (config) onConfigChange({ ...config, ...update });
     };
 
     return (
@@ -148,7 +170,7 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                         status === 'active' &&
                         forecast.round === activeRound &&
                         !!model.syncedProgress?.hasPremiumPayout;
-                    const bundleLocked = status === 'active' && !!currentOccurrence?.bundlePurchased;
+                    const bundleMin = status === 'active' ? (currentOccurrence?.bundleCurrency ?? 0) : 0;
                     const freeMissionMin = status === 'active' ? (currentOccurrence?.freeMissionsProgress ?? 0) : 0;
                     const paidMissionMin = status === 'active' ? (currentOccurrence?.premiumMissionsProgress ?? 0) : 0;
 
@@ -221,25 +243,67 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                                 max={10}
                                             />
                                         )}
-                                        {!isRoundActive && (
-                                            <FormControlLabel
-                                                label="Buy 300 currency bundle"
-                                                control={
-                                                    <Switch
-                                                        checked={config.buyCurrencyBundle}
-                                                        disabled={bundleLocked}
-                                                        onChange={(_, buyCurrencyBundle) =>
-                                                            updateRoundConfig(forecast.round, { buyCurrencyBundle })
-                                                        }
-                                                    />
+                                        <NumberInput
+                                            fullWidth
+                                            label="Currency from bundles (150 / 300 / 600 offers)"
+                                            value={config.bundleCurrency}
+                                            valueChange={bundleCurrency =>
+                                                updateRoundConfig(forecast.round, { bundleCurrency })
+                                            }
+                                            min={bundleMin}
+                                            max={100_000}
+                                            step={150}
+                                        />
+                                        <div className="flex flex-col gap-1">
+                                            <label className="block text-sm font-medium text-(--soft-fg)">
+                                                Daily delivery multiplier
+                                            </label>
+                                            <select
+                                                value={config.dailyMultiplier}
+                                                onChange={event =>
+                                                    updateRoundConfig(forecast.round, {
+                                                        dailyMultiplier: Number(event.target.value) as DailyMultiplier,
+                                                    })
                                                 }
+                                                className="h-10 w-full rounded-lg border border-(--input) bg-(--neutral) px-3 text-sm text-(--fg) shadow-sm focus:ring-2 focus:ring-(--ring) focus:outline-none">
+                                                {DAILY_MULTIPLIERS.map(multiplier => (
+                                                    <option key={multiplier} value={multiplier}>
+                                                        {multiplier} per objective
+                                                    </option>
+                                                ))}
+                                            </select>
+                                        </div>
+                                        <div className="flex flex-col gap-1">
+                                            <NumberInput
+                                                fullWidth
+                                                label={`Avg objectives cleared at daily payouts (${forecast.dailyPayouts} left)`}
+                                                value={config.avgObjectivesPerDay ?? forecast.estimatedAvgObjectives}
+                                                valueChange={avgObjectivesPerDay =>
+                                                    updateRoundConfig(forecast.round, { avgObjectivesPerDay })
+                                                }
+                                                min={0}
+                                                max={MAX_OBJECTIVES}
                                             />
-                                        )}
-                                        {isRoundActive && (
-                                            <div className="rounded border border-(--border) bg-(--soft) px-3 py-2 text-xs text-(--soft-fg)">
-                                                Event in Progress, Extra Currency Synced
+                                            <div className="flex items-center gap-2 text-xs text-(--soft-fg)">
+                                                <span>
+                                                    Estimated {forecast.estimatedAvgObjectives} (
+                                                    {forecast.startObjectives} → {forecast.endObjectives} cleared over
+                                                    the round)
+                                                </span>
+                                                {config.avgObjectivesPerDay !== undefined && (
+                                                    <button
+                                                        type="button"
+                                                        className="underline"
+                                                        onClick={() =>
+                                                            updateRoundConfig(forecast.round, {
+                                                                avgObjectivesPerDay: undefined,
+                                                            })
+                                                        }>
+                                                        Use estimate
+                                                    </button>
+                                                )}
                                             </div>
-                                        )}
+                                        </div>
                                         {forecast.ohSoCloseEligible && (
                                             <div className="flex flex-col gap-1">
                                                 <FormControlLabel
@@ -276,6 +340,10 @@ export const LeRoundOutcomeForecast = ({ legendaryEvent, model, progress, tokenI
                                         </div>
                                         <div>
                                             Currency: +{forecast.currencyEarned} → {forecast.endingCurrency}
+                                        </div>
+                                        <div className="text-xs text-(--soft-fg)">
+                                            Daily delivery: +{forecast.dailyDeliveryCurrency} ({forecast.dailyPayouts}{' '}
+                                            payouts)
                                         </div>
                                         <div>Chests opened: {forecast.chestsOpened}</div>
                                         <div className="mt-2 flex flex-col items-center gap-1">

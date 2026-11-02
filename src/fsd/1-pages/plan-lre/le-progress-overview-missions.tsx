@@ -1,5 +1,4 @@
-﻿import { FormControlLabel, Switch } from '@mui/material';
-import React from 'react';
+﻿import React from 'react';
 
 import { NumberInput } from '@/fsd/5-shared/ui/input';
 
@@ -30,8 +29,8 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrenc
             <h3>
                 <span className="font-bold">{getEventName()}</span>
                 <span className="italic">
-                    ({occurrence.freeMissionsProgress}-{occurrence.premiumMissionsProgress}-
-                    {+occurrence.bundlePurchased}-{occurrence.ohSoCloseShards})
+                    ({occurrence.freeMissionsProgress}-{occurrence.premiumMissionsProgress}-{occurrence.bundleCurrency}-
+                    {occurrence.ohSoCloseShards})
                 </span>
             </h3>
 
@@ -84,19 +83,19 @@ export const LeProgressOverviewMissions: React.FC<Props> = ({ showP2P, occurrenc
                 )}
 
                 {showP2P && (
-                    <FormControlLabel
-                        label="Bought 300 Currency bundle"
-                        control={
-                            <Switch
-                                checked={occurrence.bundlePurchased}
-                                onChange={(_, bundlePurchased) =>
-                                    progressChange({
-                                        ...occurrence,
-                                        bundlePurchased,
-                                    })
-                                }
-                            />
+                    <NumberInput
+                        fullWidth
+                        label="Currency bought from bundles"
+                        value={occurrence.bundleCurrency}
+                        valueChange={bundleCurrency =>
+                            progressChange({
+                                ...occurrence,
+                                bundleCurrency,
+                            })
                         }
+                        min={0}
+                        max={100_000}
+                        step={150}
                     />
                 )}
             </div>

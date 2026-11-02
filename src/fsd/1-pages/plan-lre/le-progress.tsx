@@ -9,6 +9,7 @@ import { Accordion, AccordionHeader, AccordionBody } from '@/fsd/5-shared/ui';
 
 import { ILegendaryEvent } from '@/fsd/3-features/lre';
 
+import { LeDailyDeliveryService } from './le-daily-delivery.service';
 import { LeNextGoalProgress } from './le-next-goal-progress';
 import { LeProgressOverviewMissions } from './le-progress-overview-missions';
 import { useLreProgress } from './le-progress.hooks';
@@ -27,7 +28,8 @@ export const LeProgress = ({
     progress: EventProgress;
 }) => {
     const { leSelectedTeams, leSettings } = useContext(StoreContext);
-    const { model, updateNotes, updateOccurrenceProgress, createNewModel, updateDto } = useLreProgress(legendaryEvent);
+    const { model, updateNotes, updateOccurrenceProgress, updateForecastConfig, createNewModel, updateDto } =
+        useLreProgress(legendaryEvent);
     const [accordionExpanded, setAccordionExpanded] = useState<string | false>('tracks');
     const [notesDraft, setNotesDraft] = useState(model.notes);
     useEffect(() => {
@@ -62,10 +64,16 @@ export const LeProgress = ({
         )
         .join('-');
 
-    const tokenIncrements = useMemo(() => {
-        const tokens = TokenEstimationService.computeAllTokenUsage(model.tracksProgress, teams);
-        return tokens.map(token => token.incrementalPoints);
-    }, [model.tracksProgress, teams]);
+    const tokenUses = useMemo(
+        () => TokenEstimationService.computeAllTokenUsage(model.tracksProgress, teams),
+        [model.tracksProgress, teams]
+    );
+    const tokenIncrements = useMemo(() => tokenUses.map(token => token.incrementalPoints), [tokenUses]);
+    const tokenObjectives = useMemo(() => tokenUses.map(token => token.restrictionsCleared.length), [tokenUses]);
+    const initialObjectivesCleared = useMemo(
+        () => LeDailyDeliveryService.countClearedObjectives(model.tracksProgress),
+        [model.tracksProgress]
+    );
 
     return (
         <div className="gap-2">
@@ -165,6 +173,9 @@ export const LeProgress = ({
                             model={model}
                             progress={progress}
                             tokenIncrements={tokenIncrements}
+                            tokenObjectives={tokenObjectives}
+                            initialObjectivesCleared={initialObjectivesCleared}
+                            onConfigChange={updateForecastConfig}
                         />
                     </AccordionBody>
                 </Accordion>
