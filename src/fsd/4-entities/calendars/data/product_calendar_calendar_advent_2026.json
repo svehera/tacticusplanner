@@ -51,12 +51,6 @@
                     "free": false,
                     "priceCents": 799,
                     "rewards": ["xpLegendary:15", "gems:250", "gold:7500"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -281,12 +275,6 @@
                         "abilityTokenCommon_Chaos:12",
                         "gold:45000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -332,12 +320,6 @@
                     "free": false,
                     "priceCents": 699,
                     "rewards": ["specialSummoningToken:4"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -515,12 +497,6 @@
                         "ascensionOrbsRare:10",
                         "ascensionOrbsUncommon:10"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -566,12 +542,6 @@
                     "free": false,
                     "priceCents": 199,
                     "rewards": ["stamina:180", "raidTicket:30"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -758,12 +728,6 @@
                         "gold:125000",
                         "gems:1000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -841,12 +805,6 @@
                     "free": false,
                     "priceCents": 399,
                     "rewards": ["specialSummoningToken:1", "summoningToken:2"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -931,12 +889,6 @@
                     "free": false,
                     "priceCents": 999,
                     "rewards": ["draft_offerDKoK_mix_large:1"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -1102,12 +1054,6 @@
                         "draft_ascensionOrbsEpic:15",
                         "draft_ascensionOrbsRare:15"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -1288,12 +1234,6 @@
                         "abilityTokenCommon_Xenos:16",
                         "gold:55000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -1339,12 +1279,6 @@
                     "free": false,
                     "priceCents": 299,
                     "rewards": ["gems:150", "raidTicket:10", "xpLegendary:5", "gold:2500"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -1414,12 +1348,6 @@
                     "free": false,
                     "priceCents": 1599,
                     "rewards": ["specialSummoningToken:10"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -1565,12 +1493,6 @@
                         "abilityTokenCommon_Chaos:16",
                         "gold:55000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -1831,12 +1753,6 @@
                         "abilityTokensCommon:12",
                         "gold:20000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -1906,12 +1822,6 @@
                     "free": false,
                     "priceCents": 199,
                     "rewards": ["xpLegendary:3", "xpEpic:8", "xpRare:10", "gold:3200"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -2073,12 +1983,6 @@
                         "abilityTokenCommon_Imperial:16",
                         "gold:55000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -2148,12 +2052,6 @@
                     "free": false,
                     "priceCents": 599,
                     "rewards": ["specialSummoningToken:2", "summoningToken:2"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -2352,12 +2250,6 @@
                     "free": false,
                     "priceCents": 999,
                     "rewards": ["xpLegendary:15", "xpEpic:35", "gold:12750"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -2403,12 +2295,6 @@
                     "free": false,
                     "priceCents": 199,
                     "rewards": ["stamina:180", "raidTicket:30"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -2634,12 +2520,6 @@
                         "itemsUncommon:1",
                         "gold:10000"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -2685,12 +2565,6 @@
                     "free": false,
                     "priceCents": 1499,
                     "rewards": ["summoningToken:12"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -2736,12 +2610,6 @@
                     "free": false,
                     "priceCents": 699,
                     "rewards": ["specialSummoningToken:4"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         },
@@ -2819,12 +2687,6 @@
                     "free": false,
                     "priceCents": 799,
                     "rewards": ["xpLegendary:15", "gems:250", "gold:7500"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -2870,12 +2732,6 @@
                     "free": false,
                     "priceCents": 499,
                     "rewards": ["summoningToken:4"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 0,
-                    "rewards": []
                 }
             ]
         }

@@ -11,6 +11,7 @@ export {
     resolveHseTier,
     tallyHseRewards,
 } from './homescreen-event.utils';
+export { allHseSchedules } from './hse-runs';
 export { HseIcon } from './ui';
 export {
     getHseDurationDays,
@@ -30,6 +31,7 @@ export type {
     HomescreenEventModifier,
     HomescreenEventOffer,
     HomescreenEventReward,
+    HomescreenEventRun,
     HomescreenEventTier,
     HomescreenEventTierKey,
     HomescreenEventTracker,

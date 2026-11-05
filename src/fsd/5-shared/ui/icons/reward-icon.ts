@@ -24,6 +24,7 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     xp_crusadePoints: { iconKey: 'crusadePoints', label: 'Crusade Points' },
     survivalBoost_stats: { iconKey: 'survivalStatBoost', label: '' },
     ShardsAll: { iconKey: 'shard', label: 'Shards' },
+    ShardsWorldEaters: { iconKey: 'shardsWorldEaters', label: 'World Eaters Shards' },
     gems: { iconKey: 'blackstone', label: 'Blackstone' },
     raidTicket: { iconKey: 'raidTicket', label: 'Raid Ticket' },
     expeditionSpeedUp: { iconKey: 'expeditionSpeedUp', label: 'Expedition Speed Up' },
@@ -38,6 +39,10 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
     avatarFrame_frameNovember2026: {
         iconKey: 'seasonalEventNovember2026AvatarFrame',
         label: 'Seasonal Event (November 2026) Avatar Frame',
+    },
+    playerProfileTheme_november_2026: {
+        iconKey: 'playerProfileThemeNovember2026',
+        label: 'Seasonal Event (November 2026) Profile Theme',
     },
     playerProfileTheme_december_2026: {
         iconKey: 'playerProfileThemeDecember2026',

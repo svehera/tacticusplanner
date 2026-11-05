@@ -576,8 +576,19 @@ export const ShopEventDetail = () => {
     return (
         <div className="flex flex-col gap-6 p-4">
             {/* Header */}
-            <div className="flex flex-wrap items-center justify-between gap-2">
-                <div className="flex items-center gap-2">
+            <div
+                className={[
+                    'relative flex flex-wrap items-center justify-between gap-2',
+                    event.banner ? 'min-h-40 items-end overflow-hidden rounded-xl border border-(--border) p-4' : '',
+                ].join(' ')}>
+                {event.banner && (
+                    <>
+                        <img src={event.banner} alt="" className="absolute inset-0 size-full object-cover" />
+                        {/* Scrim so the title stays readable on any art. */}
+                        <div className="absolute inset-0 bg-linear-to-t from-black/85 via-black/35 to-transparent" />
+                    </>
+                )}
+                <div className={`relative flex items-center gap-2 ${event.banner ? 'text-white' : ''}`}>
                     <Link
                         to="/plan/shop-events"
                         className="flex items-center gap-1 rounded-lg border border-(--border) bg-(--overlay) px-2 py-1 text-xs font-semibold text-(--soft-fg) transition-colors hover:border-(--primary) hover:text-(--primary)">
@@ -594,7 +605,9 @@ export const ShopEventDetail = () => {
                         </div>
                     )}
                 </div>
-                <span className="text-sm text-(--soft-fg)">{resolvedSlots.length} offers available</span>
+                <span className={`relative text-sm ${event.banner ? 'text-white/80' : 'text-(--soft-fg)'}`}>
+                    {resolvedSlots.length} offers available
+                </span>
             </div>
 
             {/* Controls */}

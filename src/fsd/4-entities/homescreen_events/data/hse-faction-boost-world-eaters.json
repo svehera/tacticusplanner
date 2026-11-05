@@ -1,5 +1,13 @@
 {
     "eventName": "hse_faction_boost_world_eaters",
+    "schedule": [
+        {
+            "startDate": "2026-11-23",
+            "endDate": "2026-11-28",
+            "startUtc": "2026-11-23T00:00:00Z",
+            "endUtc": "2026-11-29T00:00:00Z"
+        }
+    ],
     "tiers": {
         "default": {
             "liveEventConfig": {

@@ -81,6 +81,8 @@ export interface ShopEventData {
     displayName: string;
     currencyType: string;
     startUtc: number;
+    /** Interstitial art for the event, shown as a banner. */
+    banner?: string;
     weeks: ShopEventWeek[];
     earningsInfographic?: ShopEventEarningsLine[];
 }

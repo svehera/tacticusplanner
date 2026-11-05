@@ -37,13 +37,17 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
     },
     November2026: {
         id: 'november2026',
-        displayName: 'Boons of Blood',
+        displayName: 'Skull Harvest',
         currencyType: 'seasonalEventCurrencyNovember2026',
-        startUtc: Date.UTC(2026, 10, 1),
+        startUtc: Date.UTC(2026, 10, 23),
+        earningsInfographic: [
+            { label: 'F2P per week', amount: 'ca. 650' },
+            { label: 'Bonus shipment', amount: 'ca. +1,100' },
+        ],
     },
 };
 
-// Every shop-event data file is named `YYYY-MM(-kebab-title).json` (e.g. `2026-06-armageddon-shop.json`),
+// Every shop-event data file is named `YYYY-MM(-kebab-title).json` (e.g. `2026-06-armageddon.json`),
 // which keeps this glob from picking up the other shop data files living in the same directory
 // (`new-guild-shop.json`, `new-war-shop.json`, `new-rogue-trader.json`, `new-crusade-shop-data.json`).
 const modules = import.meta.glob<{ default: SeasonalEventRaw }>('./[0-9][0-9][0-9][0-9]-*.json', { eager: true });

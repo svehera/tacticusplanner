@@ -1,6 +1,9 @@
 {
     "event": "June2026",
-    "title": "Armageddon Shop",
+    "title": "Armageddon",
+    "shopTabTitle": "Armageddon Shop",
+    "theme": "june_2026",
+    "interstitial": "ui_interstitial_june_2026.png",
     "weeks": [
         {
             "week": 1,
@@ -10731,5 +10734,510 @@
                 ]
             }
         }
-    ]
+    ],
+    "offers": {
+        "offer_seasonal_event_june_2026_pass": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_pass",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 17000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_pass"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_00999",
+                "price": 999,
+                "mercadoId": "offer_00999",
+                "rewards": ["seasonalEventCurrencyJune2026:200", "seasonalEcBonus:10", "seasonalPremium:1", "gems:1000"]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_mythic": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_mythic",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_mythic"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:1000",
+                    "itemsMythic:1",
+                    "xpMythic:3"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_legendary": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_legendary",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_legendary"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:1000",
+                    "itemsLegendary:2",
+                    "xpMythic:3",
+                    "xpLegendary:2"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_epic": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_epic",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_epic"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:1000",
+                    "itemsEpic_I_Crit:2",
+                    "itemsEpic_I_Block:2",
+                    "itemsLegendary_I_Booster_Crit:2",
+                    "xpLegendary:11"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_special_bundle_fallback": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_special_bundle_fallback",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 20000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 3,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_special_bundle_fallback"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_04999",
+                "price": 4999,
+                "mercadoId": "offer_04999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:700",
+                    "specialSummoningToken:5",
+                    "gems:2000",
+                    "xpLegendary:10",
+                    "xpEpic:25",
+                    "itemsRare:3",
+                    "itemsUncommon:3",
+                    "itemsCommon:3"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_M_week1": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_M_week1",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_M_week1"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsOrks:100",
+                    "heroAscensionOrbMythic_Xenos:4",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_EL_week1": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_EL_week1",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_EL_week1"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsOrks:100",
+                    "heroAscensionOrbLegendary_Xenos:10",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week1": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week1",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_CUR_week1"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsOrks:100",
+                    "heroAscensionOrbEpic_Xenos:16",
+                    "heroAscensionOrbRare_Xenos:16",
+                    "heroAscensionOrbUncommon_Xenos:16",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_M_week2": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_M_week2",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_M_week2"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsBloodAngels:100",
+                    "heroAscensionOrbMythic_Imperial:4",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_EL_week2": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_EL_week2",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_EL_week2"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsBloodAngels:100",
+                    "heroAscensionOrbLegendary_Imperial:10",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week2": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week2",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_CUR_week2"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "ShardsBloodAngels:100",
+                    "heroAscensionOrbEpic_Imperial:16",
+                    "heroAscensionOrbRare_Imperial:16",
+                    "heroAscensionOrbUncommon_Imperial:16",
+                    "specialSummoningToken:10"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_M_week3": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_M_week3",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_M_week3"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "specialSummoningToken:10",
+                    "ShardsOrks:50",
+                    "ShardsBloodAngels:50",
+                    "heroAscensionOrbMythic_Imperial:2",
+                    "heroAscensionOrbMythic_Xenos:2"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_EL_week3": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_EL_week3",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_EL_week3"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "specialSummoningToken:10",
+                    "ShardsOrks:50",
+                    "ShardsBloodAngels:50",
+                    "heroAscensionOrbLegendary_Imperial:5",
+                    "heroAscensionOrbLegendary_Xenos:5"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week3": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_webstore_exclusive_CUR_week3",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_webstore_exclusive_CUR_week3"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": [
+                    "seasonalEventCurrencyJune2026:1500",
+                    "specialSummoningToken:10",
+                    "ShardsOrks:50",
+                    "ShardsBloodAngels:50",
+                    "heroAscensionOrbEpic_Imperial:8",
+                    "heroAscensionOrbEpic_Xenos:8",
+                    "heroAscensionOrbRare_Imperial:8",
+                    "heroAscensionOrbRare_Xenos:8",
+                    "heroAscensionOrbUncommon_Imperial:8",
+                    "heroAscensionOrbUncommon_Xenos:8"
+                ]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_SHD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_SHD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_SHD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_09999",
+                "price": 9999,
+                "mercadoId": "offer_09999",
+                "rewards": ["seasonalEventCurrencyJune2026:1500", "gems:2500"]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_HD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_HD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_HD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_05999",
+                "price": 5999,
+                "mercadoId": "offer_05999",
+                "rewards": ["seasonalEventCurrencyJune2026:900", "gems:1500"]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_MD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_MD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_MD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_03999_b",
+                "price": 3999,
+                "mercadoId": "offer_03999_b",
+                "rewards": ["seasonalEventCurrencyJune2026:600", "gems:1000"]
+            }
+        },
+        "offer_seasonal_event_june_2026_final_push_LD": {
+            "offer": {
+                "offerId": "offer_seasonal_event_june_2026_final_push_LD",
+                "conditions": {
+                    "needsAssetBundlesDownloaded": true
+                },
+                "interstitialPriority": 25000,
+                "interstitialInterval": 86400,
+                "maxPurchases": 1,
+                "originalPriceMercadoId": "",
+                "visualId": "template_offer",
+                "segment": "specialOffer",
+                "realMoneyProductId": "product_seasonal_event_june_2026_final_push_LD"
+            },
+            "realMoneyProduct": {
+                "category": "Seasonal Offers",
+                "nativeStoreProductType": "Consumable",
+                "nativeStoreProductId": "com.snowprintstudios.tacticus.iap.offer_01999",
+                "price": 1999,
+                "mercadoId": "offer_01999",
+                "rewards": ["seasonalEventCurrencyJune2026:300", "gems:500"]
+            }
+        }
+    }
 }

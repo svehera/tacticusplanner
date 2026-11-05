@@ -1,5 +1,13 @@
 {
     "eventName": "defeat_waves_2",
+    "schedule": [
+        {
+            "startDate": "2026-12-03",
+            "endDate": "2026-12-09",
+            "startUtc": "2026-12-03T00:00:00Z",
+            "endUtc": "2026-12-10T00:00:00Z"
+        }
+    ],
     "tiers": {
         "high": {
             "liveEventConfig": {

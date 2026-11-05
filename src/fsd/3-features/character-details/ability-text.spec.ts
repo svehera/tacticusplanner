@@ -37,6 +37,15 @@ describe('parseAbilityText', () => {
         expect(node.children).toEqual([{ type: 'text', value: '3x' }]);
     });
 
+    it('drops tooltip link tags but keeps their contents', () => {
+        const ast = parseAbilityText('each <link="tooltip:X/Y"><style="KEY">enemy unit</style></link> defeated');
+        expect(ast).toEqual([
+            { type: 'text', value: 'each ' },
+            { type: 'styled', styleName: 'KEY', isDynamic: false, children: [{ type: 'text', value: 'enemy unit' }] },
+            { type: 'text', value: ' defeated' },
+        ]);
+    });
+
     it('parses a variable', () => {
         const ast = parseAbilityText('{[nrOfHits]}');
         expect(ast).toHaveLength(1);

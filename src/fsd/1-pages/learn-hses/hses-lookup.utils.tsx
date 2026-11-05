@@ -26,6 +26,12 @@ const FACTION_LABEL_BY_SHARD_TYPE: Record<string, string> = {
     Chaos: 'Chaos',
     BloodAngels: 'Blood Angels',
     Orks: 'Orks',
+    WorldEaters: 'World Eaters',
+};
+
+/** Faction shard types that have their own art (the shard wreath with the faction logo inside). */
+const SHARD_ICON_BY_FACTION: Record<string, keyof typeof tacticusIcons> = {
+    WorldEaters: 'shardsWorldEaters',
 };
 
 const SUMMONING_TOKEN_ICON_BY_FACTION: Record<string, keyof typeof tacticusIcons> = {
@@ -60,11 +66,17 @@ export function hseRewardInfo(chestRewardId: string): {
     const { type, qty } = parseReward(chestRewardId);
 
     // ── faction shards: Shards{Faction} ──────────────────────────────────────
-    const shardsMatch = /^Shards(All|Imperial|Chaos|BloodAngels|Orks)$/.exec(type);
+    const shardsMatch = /^Shards(All|Imperial|Chaos|BloodAngels|Orks|WorldEaters)$/.exec(type);
     if (shardsMatch) {
         const faction = FACTION_LABEL_BY_SHARD_TYPE[shardsMatch[1]] ?? shardsMatch[1];
         return {
-            icon: <MiscIcon icon="shard" width={REWARD_ICON_SIZE} height={REWARD_ICON_SIZE} />,
+            icon: (
+                <MiscIcon
+                    icon={SHARD_ICON_BY_FACTION[shardsMatch[1]] ?? 'shard'}
+                    width={REWARD_ICON_SIZE}
+                    height={REWARD_ICON_SIZE}
+                />
+            ),
             label: `${faction} Shards`,
             qty,
             resolved: true,

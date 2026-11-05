@@ -1,5 +1,19 @@
 {
     "eventName": "rarity_training_rush",
+    "schedule": [
+        {
+            "startDate": "2026-11-12",
+            "endDate": "2026-11-15",
+            "startUtc": "2026-11-12T00:00:00Z",
+            "endUtc": "2026-11-16T00:00:00Z"
+        },
+        {
+            "startDate": "2026-12-12",
+            "endDate": "2026-12-15",
+            "startUtc": "2026-12-12T00:00:00Z",
+            "endUtc": "2026-12-16T00:00:00Z"
+        }
+    ],
     "tiers": {
         "high": {
             "liveEventConfig": {

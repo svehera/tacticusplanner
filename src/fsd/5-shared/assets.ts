@@ -97,6 +97,7 @@ import survivalToken from '@/assets/images/snowprint_assets/misc/ui_icon_resourc
 import survivalStatBoost from '@/assets/images/snowprint_assets/misc/ui_icon_survival_boost_stats.png';
 import playerProfileThemeDecember2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_december_2026.png';
 import playerProfileThemeMay2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_may_2026.png';
+import playerProfileThemeNovember2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_november_2026.png';
 import chaosOnslaught from '@/assets/images/snowprint_assets/onslaught/chaos.png';
 import imperialOnslaught from '@/assets/images/snowprint_assets/onslaught/imperial.png';
 import onslaughtAdamantine1 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_1.png';
@@ -203,6 +204,7 @@ import draftOrbsMythic from '@/assets/images/snowprint_assets/resources/ui_icon_
 import draftOrbsRare from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsRare.png';
 import draftOrbsUncommon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsUncommon.png';
 import draftMachinesOfWarComponents from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_machinesOfWarToken.png';
+import shardsWorldEatersIcon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_HeroShard_WorldEaters_Medium.png';
 import draftOfferDkokMixLarge from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_resources_reqOrders_gems_xpbook_mythic.png';
 import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
 import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
@@ -672,6 +674,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: playerProfileThemeDecember2026,
         label: 'Seasonal Event (December 2026) Profile Theme',
     },
+    playerProfileThemeNovember2026: {
+        file: playerProfileThemeNovember2026,
+        label: 'Seasonal Event (November 2026) Profile Theme',
+    },
     draftOfferDkokMixLarge: {
         file: draftOfferDkokMixLarge,
         label: 'Mixed Resources (Pick One)',
@@ -1027,6 +1033,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     shard: {
         file: shardIcon,
         label: 'Unit Shard',
+    },
+    shardsWorldEaters: {
+        file: shardsWorldEatersIcon,
+        label: 'World Eaters Shards',
     },
     mythicShard: {
         file: mythicShardIcon,

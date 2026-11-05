@@ -99,12 +99,6 @@
                     "free": true,
                     "priceCents": 149,
                     "rewards": ["xpEpic:5", "xpRare:20", "xpUncommon:20", "gold:2050"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -206,12 +200,6 @@
                     "free": true,
                     "priceCents": 109,
                     "rewards": ["dust:250", "gold:2000"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -331,12 +319,6 @@
                         "draft_ascensionOrbsRare:5",
                         "draft_ascensionOrbsUncommon:5"
                     ]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 },
                 {
                     "variant": "M2_M",
@@ -686,12 +668,6 @@
                     "free": true,
                     "priceCents": 299,
                     "rewards": ["summoningToken:2"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -873,12 +849,6 @@
                     "free": true,
                     "priceCents": 149,
                     "rewards": ["xpEpic:5", "xpRare:20", "xpUncommon:20", "gold:2050"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 }
             ]
         },
@@ -966,12 +936,6 @@
                     ]
                 },
                 {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
-                },
-                {
                     "variant": "M1_fallback",
                     "title": "Artillery Components",
                     "banner": "Requisition Orders!",
@@ -1047,12 +1011,6 @@
                     "free": true,
                     "priceCents": 349,
                     "rewards": ["crusadeNpc:60", "crusadeBomb:60"]
-                },
-                {
-                    "variant": "active",
-                    "free": true,
-                    "priceCents": 1,
-                    "rewards": []
                 },
                 {
                     "variant": "L2_fallback",

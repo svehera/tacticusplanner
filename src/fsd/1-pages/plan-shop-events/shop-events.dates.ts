@@ -54,3 +54,18 @@ export function buildEventDateIndex(event: ShopEventData): EventDateIndex {
 
     return { allDates, todayIndex, defaultIndex };
 }
+
+/** @returns the events newest first (latest start date at the top). */
+export function sortShopEventsNewestFirst(events: ShopEventData[]): ShopEventData[] {
+    return events.toSorted((a, b) => b.startUtc - a.startUtc);
+}
+
+export type ShopEventStatus = 'upcoming' | 'active' | 'ended';
+
+const DAY_MS = 86_400_000;
+
+/** Whether the event has not started yet, is running, or is over (events run for one week per `weeks` entry). */
+export function getShopEventStatus(event: ShopEventData, now: number = Date.now()): ShopEventStatus {
+    if (now < event.startUtc) return 'upcoming';
+    return now >= event.startUtc + event.weeks.length * 7 * DAY_MS ? 'ended' : 'active';
+}

@@ -10,13 +10,20 @@ import { TieredRewardCell, TieredRewardGrid } from '@/fsd/5-shared/ui/tiered-rew
 import { AccessibleTooltip } from '@/fsd/5-shared/ui/tooltip';
 
 import { CharactersService } from '@/fsd/4-entities/character';
-import { getHseDisplayName, homescreenEvents, HseIcon, resolveHseTier } from '@/fsd/4-entities/homescreen_events';
+import {
+    getHseDisplayName,
+    homescreenEvents,
+    HseIcon,
+    allHseSchedules,
+    resolveHseTier,
+} from '@/fsd/4-entities/homescreen_events';
 import { MowsService } from '@/fsd/4-entities/mow';
 import { hasBlueStarUnit, PL_MEDIUM } from '@/fsd/4-entities/shops';
 
 import { AbilityText } from '@/fsd/3-features/character-details/ability-text-renderer';
 import { resolveHseDescriptionLines } from '@/fsd/3-features/homescreen-events/hse-description-resolver';
 
+import { buildHseOptions } from './hses-lookup.options';
 import {
     hseOfferRewardInfo,
     hseOfferTitle,
@@ -25,9 +32,11 @@ import {
     REWARD_ICON_SIZE,
 } from './hses-lookup.utils';
 
-const sortedEvents = homescreenEvents
-    .map(event => ({ event, displayName: getHseDisplayName(event) }))
-    .toSorted((a, b) => a.displayName.localeCompare(b.displayName));
+const hseOptions = buildHseOptions(
+    homescreenEvents.map(event => ({ event, displayName: getHseDisplayName(event) })),
+    allHseSchedules
+);
+const allHseOptions = [...hseOptions.scheduled, ...hseOptions.others];
 
 // TODO(remove after 2026-08-17): temporary Arsenal of War promo banner — delete this const and its usage below.
 const ARSENAL_OF_WAR_PROMO_EXPIRY = new Date('2026-08-17T23:59:00');
@@ -35,7 +44,8 @@ const ARSENAL_OF_WAR_PROMO_EXPIRY = new Date('2026-08-17T23:59:00');
 export const HsesLookup = () => {
     const { characters: unresolvedCharacters, mows, playerMetadata } = useContext(StoreContext);
 
-    const [selectedEventName, setSelectedEventName] = useState(sortedEvents[0]?.event.eventName ?? '');
+    const [selectedOptionValue, setSelectedOptionValue] = useState(allHseOptions[0]?.value ?? '');
+    const selectedEventName = allHseOptions.find(option => option.value === selectedOptionValue)?.eventName;
 
     const pl = playerMetadata.powerLevel ?? 1;
 
@@ -67,12 +77,18 @@ export const HsesLookup = () => {
                     </label>
                     <select
                         id="hse-select"
-                        value={selectedEventName}
-                        onChange={event_ => setSelectedEventName(event_.currentTarget.value)}
+                        value={selectedOptionValue}
+                        onChange={event_ => setSelectedOptionValue(event_.currentTarget.value)}
                         className="rounded-lg border border-(--border) bg-(--overlay) px-2 py-1.5 text-sm text-(--fg)">
-                        {sortedEvents.map(({ event, displayName }) => (
-                            <option key={event.eventName} value={event.eventName}>
-                                {displayName}
+                        {hseOptions.scheduled.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
+                            </option>
+                        ))}
+                        {hseOptions.scheduled.length > 0 && <option disabled>---</option>}
+                        {hseOptions.others.map(option => (
+                            <option key={option.value} value={option.value}>
+                                {option.label}
                             </option>
                         ))}
                     </select>
