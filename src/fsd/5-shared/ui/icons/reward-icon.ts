@@ -35,6 +35,16 @@ const SIMPLE_REWARD_TYPES: Record<string, SimpleRewardIcon> = {
         iconKey: 'seasonalEventOctober2026AvatarFrame',
         label: 'Seasonal Event (October 2026) Avatar Frame',
     },
+    avatarFrame_frameNovember2026: {
+        iconKey: 'seasonalEventNovember2026AvatarFrame',
+        label: 'Seasonal Event (November 2026) Avatar Frame',
+    },
+    playerProfileTheme_december_2026: {
+        iconKey: 'playerProfileThemeDecember2026',
+        label: 'Seasonal Event (December 2026) Profile Theme',
+    },
+    machinesOfWarTokens: { iconKey: 'draftMachinesOfWarComponents', label: 'MoW Components' },
+    draft_offerDKoK_mix_large: { iconKey: 'draftOfferDkokMixLarge', label: 'Mixed Resources (Pick One)' },
     playerProfileTheme_may_2026: {
         iconKey: 'playerProfileThemeMay2026',
         label: 'Seasonal Event (May 2026) Profile Theme',

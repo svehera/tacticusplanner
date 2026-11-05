@@ -10869,7 +10869,7 @@
                                 "target": 5,
                                 "locaKey": "UseAbilityWithFaction_description",
                                 "taskParameters": {
-                                    "factionId": "BloodAngels"
+                                    "factionId": "TheLostAndTheDamned"
                                 }
                             }
                         ]
@@ -10883,7 +10883,7 @@
                                 "target": 5,
                                 "locaKey": "SlayEnemiesWithTrait_description",
                                 "taskParameters": {
-                                    "trait": "TeleportStrike"
+                                    "trait": "Overwatch"
                                 }
                             }
                         ]
@@ -10942,9 +10942,9 @@
                             {
                                 "name": "DealDamageOfProfileType",
                                 "target": 2500,
-                                "locaKey": "DealDamageOfProfileType_Power_description",
+                                "locaKey": "DealDamageOfProfileType_Bolter_description",
                                 "taskParameters": {
-                                    "damageProfileType": "Power"
+                                    "damageProfileType": "Bolter"
                                 }
                             }
                         ]
@@ -10958,7 +10958,7 @@
                                 "target": 8,
                                 "locaKey": "WinBattlesWithHero_description",
                                 "taskParameters": {
-                                    "heroId": "bloodTerminator"
+                                    "heroId": "lostaFearmonger"
                                 }
                             }
                         ]
@@ -10969,10 +10969,10 @@
                         "tasks": [
                             {
                                 "name": "SlayEnemiesWithFaction",
-                                "target": 30,
+                                "target": 15,
                                 "locaKey": "SlayEnemiesWithFaction_description",
                                 "taskParameters": {
-                                    "factionId": "BloodAngels"
+                                    "factionId": "TheLostAndTheDamned"
                                 }
                             }
                         ]
@@ -11023,9 +11023,9 @@
                             {
                                 "name": "SlayEnemiesOfFaction",
                                 "target": 60,
-                                "locaKey": "SlayEnemiesOfFaction_Tyranids_description",
+                                "locaKey": "SlayEnemiesOfFaction_description",
                                 "taskParameters": {
-                                    "factionId": "Tyranids"
+                                    "factionId": "AstraMilitarum"
                                 }
                             }
                         ]
@@ -11051,9 +11051,9 @@
                             {
                                 "name": "DealDamageOfProfileType",
                                 "target": 7000,
-                                "locaKey": "DealDamageOfProfileType_Power_description",
+                                "locaKey": "DealDamageOfProfileType_Bolter_description",
                                 "taskParameters": {
-                                    "damageProfileType": "Power"
+                                    "damageProfileType": "Bolter"
                                 }
                             }
                         ]

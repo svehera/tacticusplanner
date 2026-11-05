@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_high_bundle",
                     "offer_homescreen_event_squig_smash_tier_high_playmore",
@@ -292,6 +298,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_mid_bundle",
                     "offer_homescreen_event_squig_smash_tier_mid_playmore",
@@ -562,6 +574,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_low_bundle",
                     "offer_homescreen_event_squig_smash_tier_low_playmore",

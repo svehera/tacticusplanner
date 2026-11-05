@@ -707,6 +707,12 @@
         "name": "Nubari Shal'Dar",
         "title": "Sergent Eradicator"
     },
+    "lostaFearmonger": {
+        "extraShortName": "Daras",
+        "shortName": "Daras",
+        "name": "Daras Carrow",
+        "title": "L'Épouvanteur de la Griffe Némésis"
+    },
     "lostaBile": {
         "extraShortName": "Fabius Bile",
         "shortName": "Fabius Bile",

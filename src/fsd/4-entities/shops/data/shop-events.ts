@@ -35,6 +35,12 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyOctober2026',
         startUtc: Date.UTC(2026, 9, 26),
     },
+    November2026: {
+        id: 'november2026',
+        displayName: 'Boons of Blood',
+        currencyType: 'seasonalEventCurrencyNovember2026',
+        startUtc: Date.UTC(2026, 10, 1),
+    },
 };
 
 // Every shop-event data file is named `YYYY-MM(-kebab-title).json` (e.g. `2026-06-armageddon-shop.json`),

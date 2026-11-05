@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_defeat_waves_2_tier_high_bundle",
                     "offer_homescreen_event_defeat_waves_2_tier_high_playmore",
@@ -45,27 +51,27 @@
             "tieredProgressRewards": [
                 {
                     "requiredProgress": 20,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 40,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 60,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 85,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 110,
-                    "chestRewardId": "seasonalEventCurrencySeptember2026:50"
+                    "chestRewardId": "seasonalEventCurrencyDecember2026:50"
                 },
                 {
                     "requiredProgress": 135,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 160,
@@ -73,19 +79,19 @@
                 },
                 {
                     "requiredProgress": 190,
-                    "chestRewardId": "itemsXenosLegendary"
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
                     "requiredProgress": 220,
-                    "chestRewardId": "itemsXenosLegendary"
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
                     "requiredProgress": 250,
-                    "chestRewardId": "seasonalEventCurrencySeptember2026:80"
+                    "chestRewardId": "seasonalEventCurrencyDecember2026:80"
                 },
                 {
                     "requiredProgress": 280,
-                    "chestRewardId": "itemsXenosLegendary"
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
                     "requiredProgress": 315,
@@ -93,15 +99,15 @@
                 },
                 {
                     "requiredProgress": 350,
-                    "chestRewardId": "itemsXenosMythic"
+                    "chestRewardId": "itemsImperialMythic"
                 },
                 {
                     "requiredProgress": 385,
-                    "chestRewardId": "R_Booster_Crit_NetherRealmCasket"
+                    "chestRewardId": "R_Crit_RelicBoltPistol"
                 },
                 {
                     "requiredProgress": 40,
-                    "chestRewardId": "itemsXenosLegendary",
+                    "chestRewardId": "itemsImperialLegendary",
                     "endless": true
                 }
             ],
@@ -213,6 +219,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_defeat_waves_2_tier_mid_bundle",
                     "offer_homescreen_event_defeat_waves_2_tier_mid_playmore",
@@ -236,27 +248,27 @@
             "tieredProgressRewards": [
                 {
                     "requiredProgress": 10,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 20,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 30,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 45,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 60,
-                    "chestRewardId": "seasonalEventCurrencySeptember2026:50"
+                    "chestRewardId": "seasonalEventCurrencyDecember2026:50"
                 },
                 {
                     "requiredProgress": 75,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 95,
@@ -264,19 +276,19 @@
                 },
                 {
                     "requiredProgress": 115,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 135,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 155,
-                    "chestRewardId": "seasonalEventCurrencySeptember2026:80"
+                    "chestRewardId": "seasonalEventCurrencyDecember2026:80"
                 },
                 {
                     "requiredProgress": 180,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 210,
@@ -284,15 +296,15 @@
                 },
                 {
                     "requiredProgress": 245,
-                    "chestRewardId": "itemsXenosLegendary"
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
                     "requiredProgress": 285,
-                    "chestRewardId": "itemsXenosLegendary"
+                    "chestRewardId": "itemsImperialLegendary"
                 },
                 {
                     "requiredProgress": 25,
-                    "chestRewardId": "itemsXenosEpic",
+                    "chestRewardId": "itemsImperialEpic",
                     "endless": true
                 }
             ],
@@ -404,6 +416,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_defeat_waves_2_tier_low_bundle",
                     "offer_homescreen_event_defeat_waves_2_tier_low_playmore",
@@ -427,27 +445,27 @@
             "tieredProgressRewards": [
                 {
                     "requiredProgress": 10,
-                    "chestRewardId": "itemsXenosUncommon"
+                    "chestRewardId": "itemsImperialUncommon"
                 },
                 {
                     "requiredProgress": 20,
-                    "chestRewardId": "itemsXenosUncommon"
+                    "chestRewardId": "itemsImperialUncommon"
                 },
                 {
                     "requiredProgress": 30,
-                    "chestRewardId": "itemsXenosUncommon"
+                    "chestRewardId": "itemsImperialUncommon"
                 },
                 {
                     "requiredProgress": 40,
-                    "chestRewardId": "itemsXenosUncommon"
+                    "chestRewardId": "itemsImperialUncommon"
                 },
                 {
                     "requiredProgress": 50,
-                    "chestRewardId": "seasonalEventCurrencySeptember2026:50"
+                    "chestRewardId": "seasonalEventCurrencyDecember2026:50"
                 },
                 {
                     "requiredProgress": 65,
-                    "chestRewardId": "itemsXenosUncommon"
+                    "chestRewardId": "itemsImperialUncommon"
                 },
                 {
                     "requiredProgress": 80,
@@ -455,19 +473,19 @@
                 },
                 {
                     "requiredProgress": 95,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 110,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 125,
-                    "chestRewardId": "seasonalEventCurrencySeptember2026:80"
+                    "chestRewardId": "seasonalEventCurrencyDecember2026:80"
                 },
                 {
                     "requiredProgress": 145,
-                    "chestRewardId": "itemsXenosRare"
+                    "chestRewardId": "itemsImperialRare"
                 },
                 {
                     "requiredProgress": 170,
@@ -475,15 +493,15 @@
                 },
                 {
                     "requiredProgress": 200,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 235,
-                    "chestRewardId": "itemsXenosEpic"
+                    "chestRewardId": "itemsImperialEpic"
                 },
                 {
                     "requiredProgress": 15,
-                    "chestRewardId": "itemsXenosRare",
+                    "chestRewardId": "itemsImperialRare",
                     "endless": true
                 }
             ],

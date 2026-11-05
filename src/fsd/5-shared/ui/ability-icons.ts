@@ -110,6 +110,7 @@ import EcogSupportIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_
 import EcstaticSlaughterIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EcstaticSlaughter.png';
 import ElectroShockIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ElectroShock.png';
 import EmbodiedProphecyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EmbodiedProphecy.png';
+import EmperorsExecutionerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EmperorsExecutioner.png';
 import EmpyricAmbushIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EmpyricAmbush.png';
 import EnmityForTheUnworthyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EnmityForTheUnworthy.png';
 import EntropyCannonsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_EntropyCannons.png';
@@ -224,7 +225,6 @@ import LegendaryCommanderIcon from '@/assets/images/snowprint_assets/abilities/u
 import LethalMiasmaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LethalMiasma.png';
 import LightImUpIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LightImUp.png';
 import LightOfSanguiniusIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LightOfSanguinius.png';
-import LionHelmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LionHelm.png';
 import LionHelmRelicIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LionHelmRelic.png';
 import LivingBatteringRamIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LivingBatteringRam.png';
 import LivingLightningIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_LivingLightning.png';
@@ -280,7 +280,9 @@ import OmnissiahsBlessingIcon from '@/assets/images/snowprint_assets/abilities/u
 import OptimizedGaitIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OptimizedGait.png';
 import OrbsOfDecayIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OrbsOfDecay.png';
 import OverwhelmingWrathIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_OverwhelmingWrath.png';
+import ParagonSpearIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ParagonSpear.png';
 import PathOfCommandIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PathOfCommand.png';
+import PeerlessWarriorIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PeerlessWarrior.png';
 import PhaeronOfTheBladesIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PhaeronOfTheBlades.png';
 import PhaeronOfTheStarsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PhaeronOfTheStars.png';
 import PhantasmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Phantasm.png';
@@ -315,6 +317,7 @@ import PrehensilePincerTailIcon from '@/assets/images/snowprint_assets/abilities
 import PrimarchOfTheFirstLegionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PrimarchOfTheFirstLegion.png';
 import PrimeTestSubjectIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PrimeTestSubject.png';
 import PriorityReclamationIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PriorityReclamation.png';
+import ProclivityForMurderIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ProclivityForMurder.png';
 import ProperKillyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ProperKilly.png';
 import PropheticSentinelIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PropheticSentinel.png';
 import ProphetOfGorkAndMorkIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ProphetOfGorkAndMork.png';
@@ -322,6 +325,7 @@ import PsychicDominionIcon from '@/assets/images/snowprint_assets/abilities/ui_i
 import PsychicFortressIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicFortress.png';
 import PsychicMaelstromIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicMaelstrom.png';
 import PsychicStalkIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PsychicStalk.png';
+import PunishmentInescapableIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PunishmentInescapable.png';
 import PurgeResponseIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_PurgeResponse.png';
 import PyreblasterIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Pyreblaster.png';
 import RadBombardmentIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RadBombardment.png';
@@ -339,7 +343,9 @@ import RedThirstIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ab
 import RefusalToBeOutdoneIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RefusalToBeOutdone.png';
 import ReinforcedHiveNodeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_ReinforcedHiveNode.png';
 import ReinforcementsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Reinforcements.png';
+import RelentlessAssaultIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelentlessAssault.png';
 import RelentlessMarchIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelentlessMarch.png';
+import RelentlessPersecutionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelentlessPersecution.png';
 import RelicBoltPistolIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelicBoltPistol.png';
 import RelicOfLostCadiaIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelicOfLostCadia.png';
 import RelicPowerFistIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_RelicPowerFist.png';
@@ -419,6 +425,7 @@ import TalonsOfTheEmperorIcon from '@/assets/images/snowprint_assets/abilities/u
 import TargetingProtocolsIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TargetingProtocols.png';
 import TargetLockIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TargetLock.png';
 import TerrifyingCrescendoIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TerrifyingCrescendo.png';
+import TerrorchemPoisonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TerrorchemPoison.png';
 import TerrorsLamentIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TerrorsLament.png';
 import TheArdentBladeIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheArdentBlade.png';
 import TheBetrayerIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_TheBetrayer.png';
@@ -474,6 +481,7 @@ import WhipcoilBodyIcon from '@/assets/images/snowprint_assets/abilities/ui_icon
 import WhisperingWebIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WhisperingWeb.png';
 import WireweaveNetIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WireweaveNet.png';
 import WraithcannonIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_Wraithcannon.png';
+import WrathfulAdvanceIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WrathfulAdvance.png';
 import WrathfulDevotionIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WrathfulDevotion.png';
 import WyrdmakersHelmIcon from '@/assets/images/snowprint_assets/abilities/ui_icon_ability2_WyrdmakersHelm.png';
 
@@ -597,6 +605,7 @@ export const abilityIcons: Record<string, IconData> = {
     EcstaticSlaughter: { file: EcstaticSlaughterIcon, name: 'Ecstatic Slaughter' },
     ElectroShock: { file: ElectroShockIcon, name: 'Electro-Shock' },
     EmbodiedProphecy: { file: EmbodiedProphecyIcon, name: 'Embodied Prophecy' },
+    EmperorsExecutioner: { file: EmperorsExecutionerIcon, name: "Emperor's Executioner" },
     EmpyricAmbush: { file: EmpyricAmbushIcon, name: 'Empyric Ambush' },
     EnmityForTheUnworthy: { file: EnmityForTheUnworthyIcon, name: 'Enmity for the Unworthy' },
     EntropyCannons: { file: EntropyCannonsIcon, name: 'Entropy Cannons' },
@@ -711,7 +720,6 @@ export const abilityIcons: Record<string, IconData> = {
     LethalMiasma: { file: LethalMiasmaIcon, name: 'Lethal Miasma' },
     LightImUp: { file: LightImUpIcon, name: 'Light ’im up!' },
     LightOfSanguinius: { file: LightOfSanguiniusIcon, name: 'Light of Sanguinius' },
-    LionHelm: { file: LionHelmIcon, name: 'Lion Helm' },
     LionHelmRelic: { file: LionHelmRelicIcon, name: 'Lion Helm' },
     LivingBatteringRam: { file: LivingBatteringRamIcon, name: 'Living Battering Ram' },
     LivingLightning: { file: LivingLightningIcon, name: 'Living Lightning' },
@@ -767,7 +775,9 @@ export const abilityIcons: Record<string, IconData> = {
     OptimizedGait: { file: OptimizedGaitIcon, name: 'Optimised Gait' },
     OrbsOfDecay: { file: OrbsOfDecayIcon, name: 'Orbs of Decay' },
     OverwhelmingWrath: { file: OverwhelmingWrathIcon, name: 'Overwhelming Wrath' },
+    ParagonSpear: { file: ParagonSpearIcon, name: 'Paragon Spear' },
     PathOfCommand: { file: PathOfCommandIcon, name: 'Path Of Command' },
+    PeerlessWarrior: { file: PeerlessWarriorIcon, name: 'Peerless Warrior' },
     PhaeronOfTheBlades: { file: PhaeronOfTheBladesIcon, name: 'Phaeron of the Blades' },
     PhaeronOfTheStars: { file: PhaeronOfTheStarsIcon, name: 'Phaeron of the Stars' },
     Phantasm: { file: PhantasmIcon, name: 'Phantasm' },
@@ -802,6 +812,7 @@ export const abilityIcons: Record<string, IconData> = {
     PrimarchOfTheFirstLegion: { file: PrimarchOfTheFirstLegionIcon, name: 'Primarch of the First Legion' },
     PrimeTestSubject: { file: PrimeTestSubjectIcon, name: 'Prime Test Subject' },
     PriorityReclamation: { file: PriorityReclamationIcon, name: 'Priority Reclamation' },
+    ProclivityForMurder: { file: ProclivityForMurderIcon, name: 'Proclivity for Murder' },
     ProperKilly: { file: ProperKillyIcon, name: 'Proper Killy' },
     ProphetOfGorkAndMork: { file: ProphetOfGorkAndMorkIcon, name: 'Prophet of Gork and Mork' },
     PropheticSentinel: { file: PropheticSentinelIcon, name: 'Prophetic Sentinel' },
@@ -809,6 +820,7 @@ export const abilityIcons: Record<string, IconData> = {
     PsychicFortress: { file: PsychicFortressIcon, name: 'Psychic Fortress' },
     PsychicMaelstrom: { file: PsychicMaelstromIcon, name: 'Psychic Maelstrom' },
     PsychicStalk: { file: PsychicStalkIcon, name: 'Psychic Stalk' },
+    PunishmentInescapable: { file: PunishmentInescapableIcon, name: 'Punishment Inescapable' },
     PurgeResponse: { file: PurgeResponseIcon, name: 'Purge Response' },
     Pyreblaster: { file: PyreblasterIcon, name: 'Pyreblaster' },
     RadBombardment: { file: RadBombardmentIcon, name: 'Rad-Bombardment' },
@@ -826,7 +838,9 @@ export const abilityIcons: Record<string, IconData> = {
     RefusalToBeOutdone: { file: RefusalToBeOutdoneIcon, name: 'Refusal to be Outdone' },
     ReinforcedHiveNode: { file: ReinforcedHiveNodeIcon, name: 'Reinforced Hive Node' },
     Reinforcements: { file: ReinforcementsIcon, name: 'Reinforcements!' },
+    RelentlessAssault: { file: RelentlessAssaultIcon, name: 'Relentless Assault' },
     RelentlessMarch: { file: RelentlessMarchIcon, name: 'Relentless March' },
+    RelentlessPersecution: { file: RelentlessPersecutionIcon, name: 'Relentless Persecution' },
     RelicBoltPistol: { file: RelicBoltPistolIcon, name: 'Relic Bolt Pistol' },
     RelicOfLostCadia: { file: RelicOfLostCadiaIcon, name: 'Relic of Lost Cadia' },
     RelicPowerFist: { file: RelicPowerFistIcon, name: 'Relic Power Fist' },
@@ -906,6 +920,7 @@ export const abilityIcons: Record<string, IconData> = {
     TargetLock: { file: TargetLockIcon, name: 'Target Lock' },
     TargetingProtocols: { file: TargetingProtocolsIcon, name: 'Targeting Protocols' },
     TerrifyingCrescendo: { file: TerrifyingCrescendoIcon, name: 'Terrifying Crescendo' },
+    TerrorchemPoison: { file: TerrorchemPoisonIcon, name: 'Terrorchem Poison' },
     TerrorsLament: { file: TerrorsLamentIcon, name: "Terror's Lament" },
     TheArdentBlade: { file: TheArdentBladeIcon, name: 'The Ardent Blade' },
     TheBetrayer: { file: TheBetrayerIcon, name: 'The Betrayer' },
@@ -964,6 +979,7 @@ export const abilityIcons: Record<string, IconData> = {
     WhisperingWeb: { file: WhisperingWebIcon, name: 'Whispering Web' },
     WireweaveNet: { file: WireweaveNetIcon, name: 'Wireweave Net' },
     Wraithcannon: { file: WraithcannonIcon, name: 'Wraithcannon' },
+    WrathfulAdvance: { file: WrathfulAdvanceIcon, name: 'Wrathful Advance' },
     WrathfulDevotion: { file: WrathfulDevotionIcon, name: 'Wrathful Devotion' },
     WyrdmakersHelm: { file: WyrdmakersHelmIcon, name: "Wyrdmaker's Helm" },
 };

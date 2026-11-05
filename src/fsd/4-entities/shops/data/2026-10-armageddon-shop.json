@@ -4255,31 +4255,6 @@
                                 }
                             }
                         ]
-                    },
-                    {
-                        "name": "bp_se_october_2026_daily_m_traverse_hexes_01",
-                        "rewards": ["xp_battlepass:24", "machinesOfWarAmmo:1", "xp_seasonal:65"],
-                        "tasks": [
-                            {
-                                "name": "TraverseHexes",
-                                "target": 300,
-                                "locaKey": "TraverseHexes_description"
-                            }
-                        ]
-                    },
-                    {
-                        "name": "bp_se_october_2026_daily_l_slay_with_trait_overwatch_01",
-                        "rewards": ["xp_battlepass:36", "machinesOfWarAmmo:1", "xp_seasonal:85"],
-                        "tasks": [
-                            {
-                                "name": "SlayEnemiesWithTrait",
-                                "target": 80,
-                                "locaKey": "SlayEnemiesWithTrait_description",
-                                "taskParameters": {
-                                    "trait": "Overwatch"
-                                }
-                            }
-                        ]
                     }
                 ]
             }

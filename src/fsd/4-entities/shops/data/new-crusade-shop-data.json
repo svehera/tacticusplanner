@@ -9,6 +9,7 @@
     "products": [
         [
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot1_eldarLhykhis_shards_mythic"
@@ -22,6 +23,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot1_eldarLhykhis_shards_regular"
@@ -36,6 +38,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot1_custoTrajann_shards_mythic"
@@ -49,6 +52,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot1_custoTrajann_shards_regular"
@@ -65,6 +69,7 @@
         ],
         [
             {
+                "slot": 2,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot2_custoBladeChampion_shards_mythic"
@@ -77,6 +82,7 @@
                 }
             },
             {
+                "slot": 2,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot2_custoBladeChampion_shards_regular"
@@ -90,6 +96,7 @@
                 }
             },
             {
+                "slot": 2,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot2_eldarLhykhis_shards_mythic"
@@ -103,6 +110,7 @@
                 }
             },
             {
+                "slot": 2,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot2_eldarLhykhis_shards_regular"
@@ -119,6 +127,7 @@
         ],
         [
             {
+                "slot": 3,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot3_emperNoiseMarine_shards_mythic"
@@ -131,6 +140,7 @@
                 }
             },
             {
+                "slot": 3,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot3_emperNoiseMarine_shards_regular"
@@ -144,6 +154,7 @@
                 }
             },
             {
+                "slot": 3,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot3_thousSekhetar_shards_mythic"
@@ -156,6 +167,7 @@
                 }
             },
             {
+                "slot": 3,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot3_thousSekhetar_shards_regular"
@@ -171,6 +183,7 @@
         ],
         [
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_relic_season1"
@@ -183,6 +196,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_relic_season2"
@@ -195,6 +209,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_mythic_item"
@@ -207,6 +222,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_legendary_item"
@@ -219,6 +235,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_epic_item"
@@ -231,6 +248,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_rare_item"
@@ -243,6 +261,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_fallback"
@@ -257,6 +276,7 @@
         ],
         [
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_relic_season1"
@@ -269,6 +289,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_relic_season2"
@@ -281,6 +302,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_mythic_item"
@@ -293,6 +315,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_legendary_item"
@@ -305,6 +328,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_epic_item"
@@ -317,6 +341,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_rare_item"
@@ -329,6 +354,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_fallback"
@@ -341,6 +367,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_mythic_item"
@@ -353,6 +380,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_legendary_item"
@@ -365,6 +393,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_epic_item"
@@ -377,6 +406,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_rare_item"
@@ -389,6 +419,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_fallback"
@@ -403,6 +434,7 @@
         ],
         [
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_relic_season1"
@@ -415,6 +447,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_relic_season2"
@@ -423,10 +456,11 @@
                 "reward": "R_Defensive_Thrydderghyre",
                 "cost": {
                     "type": "crusadeCurrency",
-                    "amount": 3570
+                    "amount": 5355
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_mythic_item"
@@ -439,6 +473,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_legendary_item"
@@ -451,6 +486,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_epic_item"
@@ -463,6 +499,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_rare_item"
@@ -475,6 +512,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_fallback"
@@ -487,6 +525,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_mythic_item"
@@ -499,6 +538,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_legendary_item"
@@ -511,6 +551,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_epic_item"
@@ -523,6 +564,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_rare_item"
@@ -535,6 +577,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_fallback"
@@ -549,6 +592,7 @@
         ],
         [
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_relic_season1"
@@ -561,6 +605,7 @@
                 }
             },
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_relic_season2"
@@ -573,6 +618,7 @@
                 }
             },
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_mythic_item"
@@ -585,6 +631,7 @@
                 }
             },
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_legendary_item"
@@ -597,6 +644,7 @@
                 }
             },
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_epic_item"
@@ -609,6 +657,7 @@
                 }
             },
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_rare_item"
@@ -621,6 +670,7 @@
                 }
             },
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot4_fallback"
@@ -635,6 +685,7 @@
         ],
         [
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_relic_season1"
@@ -647,6 +698,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_relic_season2"
@@ -659,6 +711,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_mythic_item"
@@ -671,6 +724,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_legendary_item"
@@ -683,6 +737,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_epic_item"
@@ -695,6 +750,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_rare_item"
@@ -707,6 +763,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_fallback"
@@ -719,9 +776,10 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot5_relic"
+                    "lockId": "lock_crusade_shop_slot5_relic_season1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "itemsMythic_I_Block",
@@ -731,6 +789,20 @@
                 }
             },
             {
+                "slot": 8,
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot5_relic_season2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_mythic_item"
@@ -743,6 +815,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_legendary_item"
@@ -755,6 +828,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_epic_item"
@@ -767,6 +841,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_rare_item"
@@ -779,6 +854,7 @@
                 }
             },
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot5_fallback"
@@ -793,6 +869,7 @@
         ],
         [
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_relic_season1"
@@ -805,6 +882,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_relic_season2"
@@ -817,6 +895,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_mythic_item"
@@ -829,6 +908,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_legendary_item"
@@ -841,6 +921,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_epic_item"
@@ -853,6 +934,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_rare_item"
@@ -865,6 +947,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_fallback"
@@ -877,9 +960,10 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
-                    "lockId": "lock_crusade_shop_slot6_relic"
+                    "lockId": "lock_crusade_shop_slot6_relic_season1"
                 },
                 "cronSchedule": "0 0 0 ? * * *",
                 "reward": "itemsMythic_I_Booster_Block",
@@ -889,6 +973,20 @@
                 }
             },
             {
+                "slot": 9,
+                "weight": 1,
+                "conditions": {
+                    "lockId": "lock_crusade_shop_slot6_relic_season2"
+                },
+                "cronSchedule": "0 0 0 ? * * *",
+                "reward": "itemsMythic_I_Booster_Block",
+                "cost": {
+                    "type": "crusadeCurrency",
+                    "amount": 1785
+                }
+            },
+            {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_mythic_item"
@@ -901,6 +999,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_legendary_item"
@@ -913,6 +1012,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_epic_item"
@@ -925,6 +1025,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_rare_item"
@@ -937,6 +1038,7 @@
                 }
             },
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot6_fallback"
@@ -951,6 +1053,7 @@
         ],
         [
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * MON *",
@@ -962,6 +1065,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -975,6 +1079,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -988,6 +1093,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1001,6 +1107,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1014,6 +1121,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1027,6 +1135,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1040,6 +1149,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1053,6 +1163,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1066,6 +1177,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1079,6 +1191,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1092,6 +1205,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1105,6 +1219,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1118,6 +1233,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1131,6 +1247,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1144,6 +1261,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1157,6 +1275,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1170,6 +1289,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1183,6 +1303,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1196,6 +1317,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1209,6 +1331,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1222,6 +1345,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1235,6 +1359,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1248,6 +1373,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1261,6 +1387,7 @@
                 }
             },
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1276,6 +1403,7 @@
         ],
         [
             {
+                "slot": 11,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1289,6 +1417,7 @@
                 }
             },
             {
+                "slot": 11,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1302,6 +1431,7 @@
                 }
             },
             {
+                "slot": 11,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"
@@ -1317,6 +1447,7 @@
         ],
         [
             {
+                "slot": 12,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1330,6 +1461,7 @@
                 }
             },
             {
+                "slot": 12,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1343,6 +1475,7 @@
                 }
             },
             {
+                "slot": 12,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1356,6 +1489,7 @@
                 }
             },
             {
+                "slot": 12,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -1367,6 +1501,7 @@
                 }
             },
             {
+                "slot": 12,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -1380,6 +1515,7 @@
         ],
         [
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * MON *",
@@ -1391,6 +1527,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED *",
@@ -1402,6 +1539,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * FRI *",
@@ -1413,6 +1551,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -1424,6 +1563,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * TUE *",
@@ -1435,6 +1575,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * THU *",
@@ -1446,6 +1587,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SAT *",
@@ -1459,6 +1601,7 @@
         ],
         [
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot14_season1"
@@ -1472,6 +1615,7 @@
                 }
             },
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot14_season2_ammo"
@@ -1484,6 +1628,7 @@
                 }
             },
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_slot14_season2_fallback"
@@ -1499,6 +1644,7 @@
         ],
         [
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "maxPowerLevel": 30
@@ -1512,6 +1658,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 31,
@@ -1526,6 +1673,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 41,
@@ -1540,6 +1688,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 51,
@@ -1554,6 +1703,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 61,
@@ -1568,6 +1718,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 71
@@ -1581,6 +1732,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_owns_unit_at_mythic"
@@ -1594,6 +1746,7 @@
                 }
             },
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_crusade_shop_does_not_own_unit_at_mythic"

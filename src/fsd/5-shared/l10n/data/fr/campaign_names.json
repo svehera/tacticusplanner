@@ -21,12 +21,12 @@
     "eventStandard4": "Death Guard Standard",
     "eventStandard5": "Adepta Sororitas Standard",
     "eventStandard6": "Dark Angels Standard",
-    "eventStandard7": "",
+    "eventStandard7": "Blood Angels Standard",
     "eventExtremis1": "Adeptus Mechanicus Extremis",
     "eventExtremis2": "Tyranides Extremis",
     "eventExtremis3": "Empire T'au Extremis",
     "eventExtremis4": "Death Guard Extremis",
     "eventExtremis5": "Adepta Sororitas Extremis",
     "eventExtremis6": "Dark Angels Extremis",
-    "eventExtremis7": ""
+    "eventExtremis7": "Blood Angels Extremis"
 }

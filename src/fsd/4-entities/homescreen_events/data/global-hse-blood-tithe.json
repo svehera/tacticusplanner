@@ -1,0 +1,82 @@
+{
+    "eventName": "global_hse_blood_tithe",
+    "tiers": {
+        "default": {
+            "liveEventConfig": {
+                "eventType": "homeScreenEvent",
+                "eventName": "global_hse_blood_tithe",
+                "subtitleLocaKey": "",
+                "titleLocaKey": "",
+                "previewTitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_blood_tithe_Interstitial_Header",
+                "visualId": "homescreenevent_global_hse_blood_tithe",
+                "offerId": "",
+                "shortDescriptionLocaKey": "",
+                "longDescriptionLocaKey": "",
+                "removalDelayAfterPurchase": "",
+                "previewSubtitleLocaKey": "HomeScreenEvents/HomeScreenEvent_global_hse_blood_tithe_Interstitial_Description",
+                "eventId": "global_hse_blood_tithe",
+                "rewardProgressId": "global_hse_blood_tithe",
+                "theme": "global_hse_blood_tithe",
+                "tradeInResourceCurrency": "gold",
+                "tradeInResourceAmountPerPoint": 0,
+                "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
+                "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
+                "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
+                "trackers": [
+                    {
+                        "type": "killUnits",
+                        "scope": "global",
+                        "points": 1,
+                        "locaKey": "HomeScreenEvents/Tracker_killunits_blood_tithe_Description",
+                        "gameModeRestrictions": {
+                            "allowed": ["PvP", "TreasureBeach", "Waves"]
+                        },
+                        "traitRestrictions": {
+                            "disallowed": ["Summon", "Steppable"]
+                        },
+                        "playerFactionRestrictions": {
+                            "allowed": ["WorldEaters"]
+                        }
+                    }
+                ],
+                "unlockRequirements": {
+                    "PowerLevel": 7
+                }
+            },
+            "tieredProgressRewards": [
+                {
+                    "requiredProgress": 1000000,
+                    "chestRewardId": "summoningToken"
+                },
+                {
+                    "requiredProgress": 2100000,
+                    "chestRewardId": "stamina:100"
+                },
+                {
+                    "requiredProgress": 3300000,
+                    "chestRewardId": "seasonalEventCurrencyNovember2026:50"
+                },
+                {
+                    "requiredProgress": 4600000,
+                    "chestRewardId": "specialSummoningToken"
+                },
+                {
+                    "requiredProgress": 1300000,
+                    "chestRewardId": "ShardsWorldEaters:5",
+                    "endless": true
+                }
+            ],
+            "descriptions": [
+                "<i>Blood Tithe</i> is here",
+                "Global event: all players contribute to it together!",
+                "Gain <style=\"HSE_Points_BloodTithe\">{[POINTS]} Blood Tithe point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> defeated by a <style=\"FactionIcon_WorldEaters\">World Eater</style> in Arena, Onslaught, and Salvage Run."
+            ]
+        }
+    }
+}

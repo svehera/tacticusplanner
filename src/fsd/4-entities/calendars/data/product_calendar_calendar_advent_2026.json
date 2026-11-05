@@ -1,0 +1,2883 @@
+{
+    "calendar": "calendar_advent_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["specialSummoningToken:1"]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Traditional Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["xpMythic:15", "gems:1250", "gold:30000"]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Traditional Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["xpMythic:9", "gems:750", "gold:18000"]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Traditional Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["xpMythic:6", "gems:500", "gold:12000"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Traditional Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["xpMythic:3", "gems:250", "gold:6000"]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "Traditional Tales",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["xpLegendary:15", "gems:250", "gold:7500"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Gather Together!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["summoningToken:18"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "abilityTokenMythic_Imperial:9",
+                        "abilityTokenMythic_Xenos:9",
+                        "abilityTokenMythic_Chaos:9",
+                        "gold:1200000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "abilityTokenLegendary_Imperial:15",
+                        "abilityTokenLegendary_Xenos:15",
+                        "abilityTokenLegendary_Chaos:15",
+                        "gold:480000"
+                    ]
+                },
+                {
+                    "variant": "L1_RE_SHD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "abilityTokenEpic_Imperial:12",
+                        "abilityTokenEpic_Xenos:12",
+                        "abilityTokenEpic_Chaos:12",
+                        "abilityTokenRare_Imperial:24",
+                        "abilityTokenRare_Xenos:24",
+                        "abilityTokenRare_Chaos:24",
+                        "gold:390000"
+                    ]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Gather Together!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["summoningToken:12"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "abilityTokenMythic_Imperial:8",
+                        "abilityTokenMythic_Xenos:8",
+                        "abilityTokenMythic_Chaos:8",
+                        "gold:1066000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "abilityTokenLegendary_Imperial:14",
+                        "abilityTokenLegendary_Xenos:14",
+                        "abilityTokenLegendary_Chaos:14",
+                        "gold:360000"
+                    ]
+                },
+                {
+                    "variant": "L1_RE_HD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "abilityTokenEpic_Imperial:11",
+                        "abilityTokenEpic_Xenos:11",
+                        "abilityTokenEpic_Chaos:11",
+                        "abilityTokenRare_Imperial:22",
+                        "abilityTokenRare_Xenos:22",
+                        "abilityTokenRare_Chaos:22",
+                        "gold:330000"
+                    ]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Gather Together!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["summoningToken:6"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "abilityTokenMythic_Imperial:6",
+                        "abilityTokenMythic_Xenos:6",
+                        "abilityTokenMythic_Chaos:6",
+                        "gold:800000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "abilityTokenLegendary_Imperial:10",
+                        "abilityTokenLegendary_Xenos:10",
+                        "abilityTokenLegendary_Chaos:10",
+                        "gold:320000"
+                    ]
+                },
+                {
+                    "variant": "L1_RE_MD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "abilityTokenEpic_Imperial:8",
+                        "abilityTokenEpic_Xenos:8",
+                        "abilityTokenEpic_Chaos:8",
+                        "abilityTokenRare_Imperial:16",
+                        "abilityTokenRare_Xenos:16",
+                        "abilityTokenRare_Chaos:16",
+                        "gold:260000"
+                    ]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Gather Together!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["summoningToken:3"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "abilityTokenMythic_Imperial:3",
+                        "abilityTokenMythic_Xenos:3",
+                        "abilityTokenMythic_Chaos:3",
+                        "gold:400000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "abilityTokenLegendary_Imperial:5",
+                        "abilityTokenLegendary_Xenos:5",
+                        "abilityTokenLegendary_Chaos:5",
+                        "gold:160000"
+                    ]
+                },
+                {
+                    "variant": "L1_RE_LD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "abilityTokenEpic_Imperial:4",
+                        "abilityTokenEpic_Xenos:4",
+                        "abilityTokenEpic_Chaos:4",
+                        "abilityTokenRare_Imperial:8",
+                        "abilityTokenRare_Xenos:8",
+                        "abilityTokenRare_Chaos:8",
+                        "gold:130000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Ability Power Advent",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "abilityTokenRare_Imperial:6",
+                        "abilityTokenRare_Xenos:6",
+                        "abilityTokenRare_Chaos:6",
+                        "abilityTokenUncommon_Imperial:9",
+                        "abilityTokenUncommon_Xenos:9",
+                        "abilityTokenUncommon_Chaos:9",
+                        "abilityTokenCommon_Imperial:12",
+                        "abilityTokenCommon_Xenos:12",
+                        "abilityTokenCommon_Chaos:12",
+                        "gold:45000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["gems:50"]
+                },
+                {
+                    "variant": "M3_SHD",
+                    "title": "Holiday Congregation",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["specialSummoningToken:20"]
+                },
+                {
+                    "variant": "M3_HD",
+                    "title": "Holiday Congregation",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["specialSummoningToken:20"]
+                },
+                {
+                    "variant": "M3_MD",
+                    "title": "Holiday Congregation",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["specialSummoningToken:8"]
+                },
+                {
+                    "variant": "M3_LD",
+                    "title": "Holiday Congregation",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["specialSummoningToken:4"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Merry and Bright!",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["stamina:240", "raidTicket:40", "xpLegendary:36", "gold:18000"]
+                },
+                {
+                    "variant": "XL4_M_SHD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 9999,
+                    "rewards": ["summoningToken:40", "ascensionOrbsMythic:10", "ascensionOrbsMythic:10"]
+                },
+                {
+                    "variant": "XL4_L_SHD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 9999,
+                    "rewards": [
+                        "summoningToken:40",
+                        "ascensionOrbsLegendary:20",
+                        "ascensionOrbsLegendary:20",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsEpic:10"
+                    ]
+                },
+                {
+                    "variant": "XL4_CURE_SHD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 9999,
+                    "rewards": [
+                        "summoningToken:40",
+                        "ascensionOrbsLegendary:20",
+                        "ascensionOrbsEpic:20",
+                        "ascensionOrbsEpic:20",
+                        "ascensionOrbsRare:20",
+                        "ascensionOrbsRare:20",
+                        "ascensionOrbsUncommon:20",
+                        "ascensionOrbsUncommon:20"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Merry and Bright!",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["stamina:180", "raidTicket:30", "xpLegendary:27", "gold:13500"]
+                },
+                {
+                    "variant": "XL4_M_HD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": ["summoningToken:32", "ascensionOrbsMythic:10", "ascensionOrbsMythic:6"]
+                },
+                {
+                    "variant": "XL4_L_HD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "summoningToken:32",
+                        "ascensionOrbsLegendary:20",
+                        "ascensionOrbsLegendary:12",
+                        "ascensionOrbsEpic:16"
+                    ]
+                },
+                {
+                    "variant": "XL4_CURE_HD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "summoningToken:32",
+                        "ascensionOrbsLegendary:16",
+                        "ascensionOrbsEpic:16",
+                        "ascensionOrbsEpic:16",
+                        "ascensionOrbsRare:16",
+                        "ascensionOrbsRare:16",
+                        "ascensionOrbsUncommon:16",
+                        "ascensionOrbsUncommon:16"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Merry and Bright!",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["stamina:120", "raidTicket:20", "xpLegendary:18", "gold:9000"]
+                },
+                {
+                    "variant": "XL4_M_MD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["summoningToken:20", "ascensionOrbsMythic:10"]
+                },
+                {
+                    "variant": "XL4_L_MD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["summoningToken:20", "ascensionOrbsLegendary:20", "ascensionOrbsEpic:10"]
+                },
+                {
+                    "variant": "XL4_CURE_MD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": [
+                        "summoningToken:20",
+                        "ascensionOrbsLegendary:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsUncommon:10",
+                        "ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Merry and Bright!",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["stamina:60", "raidTicket:10", "xpLegendary:9", "gold:4500"]
+                },
+                {
+                    "variant": "XL4_M_LD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["summoningToken:10", "ascensionOrbsMythic:5"]
+                },
+                {
+                    "variant": "XL4_L_LD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["summoningToken:10", "ascensionOrbsLegendary:10", "ascensionOrbsEpic:5"]
+                },
+                {
+                    "variant": "XL4_CURE_LD",
+                    "title": "Ascension Advent",
+                    "banner": "Orbs and more!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "summoningToken:10",
+                        "ascensionOrbsLegendary:5",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:10",
+                        "ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["summoningToken:1"]
+                },
+                {
+                    "variant": "XS1_SHD",
+                    "title": "Holiday Outing",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["stamina:900", "raidTicket:150"]
+                },
+                {
+                    "variant": "XS1_HD",
+                    "title": "Holiday Outing",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["stamina:720", "raidTicket:120"]
+                },
+                {
+                    "variant": "XS1_MD",
+                    "title": "Holiday Outing",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["stamina:360", "raidTicket:60"]
+                },
+                {
+                    "variant": "XS1_LD",
+                    "title": "Holiday Outing",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": ["stamina:180", "raidTicket:30"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Holiday Revelry",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["summoningToken:24"]
+                },
+                {
+                    "variant": "L1_RELIC1_SHD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Unique Relic!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["R_Booster_Crit_ChaliceOfBaal:1", "mythicDust:420", "gold:500000", "gems:1000"]
+                },
+                {
+                    "variant": "L1_RELIC2_SHD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Unique Relic!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["R_Booster_Block_NornCrown:1", "mythicDust:420", "gold:500000", "gems:1000"]
+                },
+                {
+                    "variant": "L1_RELIC3_SHD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Unique Relic!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["R_Crit_Lakrimae:1", "mythicDust:420", "gold:500000", "gems:1000"]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "mythicDust:440",
+                        "gold:300000",
+                        "gems:475"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "itemsLegendary:2",
+                        "dust:1500",
+                        "gold:125000",
+                        "gems:750"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Holiday Revelry",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["summoningToken:20"]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "mythicDust:330",
+                        "gold:225000",
+                        "gems:375"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "dust:750",
+                        "gold:62500",
+                        "gems:375"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Holiday Revelry",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["summoningToken:12"]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["itemsMythic:1", "itemsMythic:1", "mythicDust:220", "gold:150000", "gems:250"]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": [
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "dust:450",
+                        "gold:37500",
+                        "gems:225"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Holiday Revelry",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["summoningToken:8"]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["itemsMythic:1", "mythicDust:110", "gold:75000", "gems:125"]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["itemsLegendary:1", "itemsLegendary:1", "dust:300", "gold:25000", "gems:150"]
+                },
+                {
+                    "variant": "L1_CURE_LD",
+                    "title": "Jingle All the Way!",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsUncommon:2",
+                        "itemsUncommon:2",
+                        "dust:1600",
+                        "gold:125000",
+                        "gems:1000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["stamina:30", "raidTicket:5"]
+                },
+                {
+                    "variant": "S4_MOW_SHD",
+                    "title": "Rejoice!",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["ShardsMoW:160", "machinesOfWarTokens:100", "machinesOfWarAmmo:40"]
+                },
+                {
+                    "variant": "S4_SHD",
+                    "title": "Rejoice!",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["specialSummoningToken:5", "summoningToken:10"]
+                },
+                {
+                    "variant": "S4_MOW_HD",
+                    "title": "Rejoice!",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["ShardsMoW:120", "machinesOfWarTokens:75", "machinesOfWarAmmo:30"]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Rejoice!",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["specialSummoningToken:4", "summoningToken:8"]
+                },
+                {
+                    "variant": "S4_MOW_MD",
+                    "title": "Rejoice!",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["ShardsMoW:80", "machinesOfWarTokens:50", "machinesOfWarAmmo:20"]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Rejoice!",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["specialSummoningToken:2", "summoningToken:4"]
+                },
+                {
+                    "variant": "S4_MOW_LD",
+                    "title": "Rejoice!",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["ShardsMoW:40", "machinesOfWarTokens:25", "machinesOfWarAmmo:10"]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Rejoice!",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["specialSummoningToken:1", "summoningToken:2"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 8,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "Deck the Halls!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "ShardsAll:100",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:50"
+                    ]
+                },
+                {
+                    "variant": "M4_SHD",
+                    "title": "All that Glitters",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "draft_offerDKoK_mix_large:1",
+                        "draft_offerDKoK_mix_large:1",
+                        "draft_offerDKoK_mix_large:1",
+                        "draft_offerDKoK_mix_large:1"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "Deck the Halls!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["ShardsAll:75", "ShardsIfUnlocked:50", "ShardsIfUnlocked:50", "ShardsIfUnlocked:50"]
+                },
+                {
+                    "variant": "M4_HD",
+                    "title": "All that Glitters",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_offerDKoK_mix_large:1",
+                        "draft_offerDKoK_mix_large:1",
+                        "draft_offerDKoK_mix_large:1"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "Deck the Halls!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["ShardsAll:50", "ShardsIfUnlocked:50", "ShardsIfUnlocked:50"]
+                },
+                {
+                    "variant": "M4_MD",
+                    "title": "All that Glitters",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["draft_offerDKoK_mix_large:1", "draft_offerDKoK_mix_large:1"]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "Deck the Halls!",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["ShardsAll:25", "ShardsIfUnlocked:50"]
+                },
+                {
+                    "variant": "M4_LD",
+                    "title": "All that Glitters",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["draft_offerDKoK_mix_large:1"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 9,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["stamina_treasureBeach:1"]
+                },
+                {
+                    "variant": "XL1_M_SHD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:15",
+                        "draft_ascensionOrbsMythic:10",
+                        "draft_ascensionOrbsMythic:5",
+                        "draft_ascensionOrbsMythic:2"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_SHD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:25",
+                        "draft_ascensionOrbsLegendary:20",
+                        "draft_ascensionOrbsLegendary:15",
+                        "draft_ascensionOrbsLegendary:12"
+                    ]
+                },
+                {
+                    "variant": "XL1_CURE_SHD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsEpic:20",
+                        "draft_ascensionOrbsEpic:20",
+                        "draft_ascensionOrbsEpic:20",
+                        "draft_ascensionOrbsRare:20",
+                        "draft_ascensionOrbsRare:20",
+                        "draft_ascensionOrbsRare:20"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_HD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:10",
+                        "draft_ascensionOrbsMythic:10",
+                        "draft_ascensionOrbsMythic:4"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_HD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:20",
+                        "draft_ascensionOrbsLegendary:15",
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsLegendary:9"
+                    ]
+                },
+                {
+                    "variant": "XL1_CURE_HD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsRare:15",
+                        "draft_ascensionOrbsRare:15",
+                        "draft_ascensionOrbsRare:15"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_MD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["draft_ascensionOrbsMythic:10", "draft_ascensionOrbsMythic:6"]
+                },
+                {
+                    "variant": "XL1_L_MD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:15",
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsLegendary:8",
+                        "draft_ascensionOrbsLegendary:3"
+                    ]
+                },
+                {
+                    "variant": "XL1_CURE_MD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsRare:15",
+                        "draft_ascensionOrbsRare:15"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_LD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["draft_ascensionOrbsMythic:5", "draft_ascensionOrbsMythic:3"]
+                },
+                {
+                    "variant": "XL1_L_LD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsLegendary:3"
+                    ]
+                },
+                {
+                    "variant": "XL1_CURE_LD",
+                    "title": "Ornaments of Ascension",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsEpic:15",
+                        "draft_ascensionOrbsRare:15"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 10,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Glad Tidings!",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "summoningToken:20",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:50",
+                        "ShardsIfUnlocked:50"
+                    ]
+                },
+                {
+                    "variant": "L3_M_SHD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["heroAscensionOrbMythic_Xenos:8", "abilityTokenMythic_Xenos:8", "gold:800000"]
+                },
+                {
+                    "variant": "L3_L_SHD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["heroAscensionOrbLegendary_Xenos:12", "abilityTokenLegendary_Xenos:32", "gold:540000"]
+                },
+                {
+                    "variant": "L3_CURE_SHD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Xenos:12",
+                        "abilityTokenEpic_Xenos:48",
+                        "heroAscensionOrbRare_Xenos:12",
+                        "abilityTokenRare_Xenos:64",
+                        "heroAscensionOrbUncommon_Xenos:12",
+                        "abilityTokenUncommon_Xenos:64",
+                        "abilityTokenCommon_Xenos:64",
+                        "gold:220000"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Glad Tidings!",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "summoningToken:12",
+                        "ShardsIfUnlocked:40",
+                        "ShardsIfUnlocked:40",
+                        "ShardsIfUnlocked:40"
+                    ]
+                },
+                {
+                    "variant": "L3_M_HD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["heroAscensionOrbMythic_Xenos:6", "abilityTokenMythic_Xenos:6", "gold:600000"]
+                },
+                {
+                    "variant": "L3_L_HD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["heroAscensionOrbLegendary_Xenos:9", "abilityTokenLegendary_Xenos:24", "gold:405000"]
+                },
+                {
+                    "variant": "L3_CURE_HD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Xenos:9",
+                        "abilityTokenEpic_Xenos:36",
+                        "heroAscensionOrbRare_Xenos:9",
+                        "abilityTokenRare_Xenos:48",
+                        "heroAscensionOrbUncommon_Xenos:9",
+                        "abilityTokenUncommon_Xenos:48",
+                        "abilityTokenCommon_Xenos:48",
+                        "gold:165000"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Glad Tidings!",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["summoningToken:8", "ShardsIfUnlocked:40", "ShardsIfUnlocked:40"]
+                },
+                {
+                    "variant": "L3_M_MD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["heroAscensionOrbMythic_Xenos:4", "abilityTokenMythic_Xenos:4", "gold:400000"]
+                },
+                {
+                    "variant": "L3_L_MD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["heroAscensionOrbLegendary_Xenos:6", "abilityTokenLegendary_Xenos:16", "gold:270000"]
+                },
+                {
+                    "variant": "L3_CURE_MD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Xenos:6",
+                        "abilityTokenEpic_Xenos:24",
+                        "heroAscensionOrbRare_Xenos:6",
+                        "abilityTokenRare_Xenos:32",
+                        "heroAscensionOrbUncommon_Xenos:6",
+                        "abilityTokenUncommon_Xenos:32",
+                        "abilityTokenCommon_Xenos:32",
+                        "gold:110000"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Glad Tidings!",
+                    "banner": "Shards and more!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["summoningToken:4", "ShardsIfUnlocked:40"]
+                },
+                {
+                    "variant": "L3_M_LD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["heroAscensionOrbMythic_Xenos:2", "abilityTokenMythic_Xenos:2", "gold:200000"]
+                },
+                {
+                    "variant": "L3_L_LD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["heroAscensionOrbLegendary_Xenos:3", "abilityTokenLegendary_Xenos:8", "gold:135000"]
+                },
+                {
+                    "variant": "L3_CURE_LD",
+                    "title": "Superior Design",
+                    "banner": "Xenos Uprising!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Xenos:3",
+                        "abilityTokenEpic_Xenos:12",
+                        "heroAscensionOrbRare_Xenos:3",
+                        "abilityTokenRare_Xenos:16",
+                        "heroAscensionOrbUncommon_Xenos:3",
+                        "abilityTokenUncommon_Xenos:16",
+                        "abilityTokenCommon_Xenos:16",
+                        "gold:55000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 11,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["specialSummoningToken:1"]
+                },
+                {
+                    "variant": "S1_SHD",
+                    "title": "Holiday Trinkets",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["gems:1200", "raidTicket:80", "xpLegendary:40", "gold:20000"]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Holiday Trinkets",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["gems:750", "raidTicket:50", "xpLegendary:25", "gold:12500"]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Holiday Trinkets",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": ["gems:450", "raidTicket:30", "xpLegendary:15", "gold:7500"]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Holiday Trinkets",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": ["gems:150", "raidTicket:10", "xpLegendary:5", "gold:2500"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 12,
+            "offers": [
+                {
+                    "variant": "XS1_SHD",
+                    "title": "Holiday Travel",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["stamina:1200", "raidTicket:200"]
+                },
+                {
+                    "variant": "XL1_SHD",
+                    "title": "Glorious Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": ["specialSummoningToken:50"]
+                },
+                {
+                    "variant": "XS1_HD",
+                    "title": "Holiday Travel",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["stamina:750", "raidTicket:125"]
+                },
+                {
+                    "variant": "XL1_HD",
+                    "title": "Glorious Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["specialSummoningToken:25"]
+                },
+                {
+                    "variant": "XS1_MD",
+                    "title": "Holiday Travel",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["stamina:450", "raidTicket:75"]
+                },
+                {
+                    "variant": "XL1_MD",
+                    "title": "Glorious Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["specialSummoningToken:15"]
+                },
+                {
+                    "variant": "XS1_LD",
+                    "title": "Holiday Travel",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": ["stamina:150", "raidTicket:25"]
+                },
+                {
+                    "variant": "XL1_LD",
+                    "title": "Glorious Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["specialSummoningToken:10"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 13,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["raidTicket:100"]
+                },
+                {
+                    "variant": "L3_M_SHD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["heroAscensionOrbMythic_Chaos:8", "abilityTokenMythic_Chaos:8", "gold:800000"]
+                },
+                {
+                    "variant": "L3_L_SHD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["heroAscensionOrbLegendary_Chaos:12", "abilityTokenLegendary_Chaos:32", "gold:540000"]
+                },
+                {
+                    "variant": "L3_CURE_SHD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Chaos:12",
+                        "abilityTokenEpic_Chaos:48",
+                        "heroAscensionOrbRare_Chaos:12",
+                        "abilityTokenRare_Chaos:64",
+                        "heroAscensionOrbUncommon_Chaos:12",
+                        "abilityTokenUncommon_Chaos:64",
+                        "abilityTokenCommon_Chaos:64",
+                        "gold:220000"
+                    ]
+                },
+                {
+                    "variant": "L3_M_HD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["heroAscensionOrbMythic_Chaos:6", "abilityTokenMythic_Chaos:6", "gold:600000"]
+                },
+                {
+                    "variant": "L3_L_HD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["heroAscensionOrbLegendary_Chaos:9", "abilityTokenLegendary_Chaos:24", "gold:405000"]
+                },
+                {
+                    "variant": "L3_CURE_HD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Chaos:9",
+                        "abilityTokenEpic_Chaos:36",
+                        "heroAscensionOrbRare_Chaos:9",
+                        "abilityTokenRare_Chaos:48",
+                        "heroAscensionOrbUncommon_Chaos:9",
+                        "abilityTokenUncommon_Chaos:48",
+                        "abilityTokenCommon_Chaos:48",
+                        "gold:165000"
+                    ]
+                },
+                {
+                    "variant": "L3_M_MD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["heroAscensionOrbMythic_Chaos:4", "abilityTokenMythic_Chaos:4", "gold:400000"]
+                },
+                {
+                    "variant": "L3_L_MD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["heroAscensionOrbLegendary_Chaos:6", "abilityTokenLegendary_Chaos:16", "gold:270000"]
+                },
+                {
+                    "variant": "L3_CURE_MD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Chaos:6",
+                        "abilityTokenEpic_Chaos:24",
+                        "heroAscensionOrbRare_Chaos:6",
+                        "abilityTokenRare_Chaos:32",
+                        "heroAscensionOrbUncommon_Chaos:6",
+                        "abilityTokenUncommon_Chaos:32",
+                        "abilityTokenCommon_Chaos:32",
+                        "gold:110000"
+                    ]
+                },
+                {
+                    "variant": "L3_M_LD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["heroAscensionOrbMythic_Chaos:2", "abilityTokenMythic_Chaos:2", "gold:200000"]
+                },
+                {
+                    "variant": "L3_L_LD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["heroAscensionOrbLegendary_Chaos:3", "abilityTokenLegendary_Chaos:8", "gold:135000"]
+                },
+                {
+                    "variant": "L3_CURE_LD",
+                    "title": "Exalted Mutations",
+                    "banner": "Chaos Undivided!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Chaos:3",
+                        "abilityTokenEpic_Chaos:12",
+                        "heroAscensionOrbRare_Chaos:3",
+                        "abilityTokenRare_Chaos:16",
+                        "heroAscensionOrbUncommon_Chaos:3",
+                        "abilityTokenUncommon_Chaos:16",
+                        "abilityTokenCommon_Chaos:16",
+                        "gold:55000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 14,
+            "offers": [
+                {
+                    "variant": "S4_M_SHD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["draft_ascensionOrbsMythic:4", "draft_ascensionOrbsLegendary:8"]
+                },
+                {
+                    "variant": "S4_L_SHD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["draft_ascensionOrbsLegendary:12", "draft_ascensionOrbsEpic:12"]
+                },
+                {
+                    "variant": "S4_CURE_SHD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:10",
+                        "draft_ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["abilityTokensMythic:10", "abilityTokensLegendary:20", "gold:1250000"]
+                },
+                {
+                    "variant": "M1_L_SHD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "abilityTokensLegendary:10",
+                        "abilityTokensLegendary:10",
+                        "abilityTokensEpic:20",
+                        "abilityTokensEpic:20",
+                        "gold:550000"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_SHD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "abilityTokensEpic:32",
+                        "abilityTokensRare:64",
+                        "abilityTokensUncommon:80",
+                        "abilityTokensCommon:96",
+                        "gold:160000"
+                    ]
+                },
+                {
+                    "variant": "S4_M_HD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["draft_ascensionOrbsMythic:3", "draft_ascensionOrbsLegendary:6"]
+                },
+                {
+                    "variant": "S4_L_HD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["draft_ascensionOrbsLegendary:9", "draft_ascensionOrbsEpic:9"]
+                },
+                {
+                    "variant": "S4_CURE_HD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:5",
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsRare:5",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:5",
+                        "draft_ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["abilityTokensMythic:8", "abilityTokensLegendary:16", "gold:1000000"]
+                },
+                {
+                    "variant": "M1_L_HD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "abilityTokensLegendary:8",
+                        "abilityTokensLegendary:8",
+                        "abilityTokensEpic:16",
+                        "abilityTokensEpic:16",
+                        "gold:440000"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_HD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": [
+                        "abilityTokensEpic:12",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:30",
+                        "abilityTokensCommon:36",
+                        "gold:60000"
+                    ]
+                },
+                {
+                    "variant": "S4_M_MD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["draft_ascensionOrbsMythic:2", "draft_ascensionOrbsLegendary:4"]
+                },
+                {
+                    "variant": "S4_L_MD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["draft_ascensionOrbsLegendary:6", "draft_ascensionOrbsEpic:6"]
+                },
+                {
+                    "variant": "S4_CURE_MD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["abilityTokensMythic:5", "abilityTokensLegendary:10", "gold:625000"]
+                },
+                {
+                    "variant": "M1_L_MD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "abilityTokensLegendary:10",
+                        "abilityTokensEpic:10",
+                        "abilityTokensEpic:10",
+                        "gold:275000"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_MD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": [
+                        "abilityTokensEpic:12",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:30",
+                        "abilityTokensCommon:36",
+                        "gold:60000"
+                    ]
+                },
+                {
+                    "variant": "S4_M_LD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["draft_ascensionOrbsMythic:1", "draft_ascensionOrbsLegendary:2"]
+                },
+                {
+                    "variant": "S4_L_LD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["draft_ascensionOrbsLegendary:3", "draft_ascensionOrbsEpic:3"]
+                },
+                {
+                    "variant": "S4_CURE_LD",
+                    "title": "Merry Everything!",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:5",
+                        "draft_ascensionOrbsRare:5",
+                        "draft_ascensionOrbsUncommon:5"
+                    ]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["abilityTokensMythic:2", "abilityTokensLegendary:4", "gold:250000"]
+                },
+                {
+                    "variant": "M1_L_LD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["abilityTokensLegendary:4", "abilityTokensEpic:8", "gold:110000"]
+                },
+                {
+                    "variant": "M1_CURE_LD",
+                    "title": "Season's Greetings!",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 299,
+                    "rewards": [
+                        "abilityTokensEpic:4",
+                        "abilityTokensRare:8",
+                        "abilityTokensUncommon:10",
+                        "abilityTokensCommon:12",
+                        "gold:20000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 15,
+            "offers": [
+                {
+                    "variant": "M2_SHD",
+                    "title": "Comfort!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["summoningToken:20", "stamina:1200", "raidTicket:200"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Joy!",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["xpMythic:10", "xpLegendary:25", "gold:32500"]
+                },
+                {
+                    "variant": "M2_HD",
+                    "title": "Comfort!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["summoningToken:12", "stamina:720", "raidTicket:140"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Joy!",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["xpMythic:5", "xpLegendary:25", "gold:22500"]
+                },
+                {
+                    "variant": "M2_MD",
+                    "title": "Comfort!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["summoningToken:8", "stamina:480", "raidTicket:60"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Joy!",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["xpLegendary:30", "xpEpic:20", "xpRare:25", "gold:19250"]
+                },
+                {
+                    "variant": "M2_LD",
+                    "title": "Comfort!",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["summoningToken:2", "stamina:120", "raidTicket:20"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Joy!",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": ["xpLegendary:3", "xpEpic:8", "xpRare:10", "gold:3200"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 16,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["gems:50"]
+                },
+                {
+                    "variant": "L3_M_SHD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": ["heroAscensionOrbMythic_Imperial:8", "abilityTokenMythic_Imperial:8", "gold:800000"]
+                },
+                {
+                    "variant": "L3_L_SHD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "heroAscensionOrbLegendary_Imperial:12",
+                        "abilityTokenLegendary_Imperial:32",
+                        "gold:540000"
+                    ]
+                },
+                {
+                    "variant": "L3_CURE_SHD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Imperial:12",
+                        "abilityTokenEpic_Imperial:48",
+                        "heroAscensionOrbRare_Imperial:12",
+                        "abilityTokenRare_Imperial:64",
+                        "heroAscensionOrbUncommon_Imperial:12",
+                        "abilityTokenUncommon_Imperial:64",
+                        "abilityTokenCommon_Imperial:64",
+                        "gold:220000"
+                    ]
+                },
+                {
+                    "variant": "L3_M_HD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": ["heroAscensionOrbMythic_Imperial:6", "abilityTokenMythic_Imperial:6", "gold:600000"]
+                },
+                {
+                    "variant": "L3_L_HD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "heroAscensionOrbLegendary_Imperial:9",
+                        "abilityTokenLegendary_Imperial:24",
+                        "gold:405000"
+                    ]
+                },
+                {
+                    "variant": "L3_CURE_HD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Imperial:9",
+                        "abilityTokenEpic_Imperial:36",
+                        "heroAscensionOrbRare_Imperial:9",
+                        "abilityTokenRare_Imperial:48",
+                        "heroAscensionOrbUncommon_Imperial:9",
+                        "abilityTokenUncommon_Imperial:48",
+                        "abilityTokenCommon_Imperial:48",
+                        "gold:165000"
+                    ]
+                },
+                {
+                    "variant": "L3_M_MD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["heroAscensionOrbMythic_Imperial:4", "abilityTokenMythic_Imperial:4", "gold:400000"]
+                },
+                {
+                    "variant": "L3_L_MD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "heroAscensionOrbLegendary_Imperial:6",
+                        "abilityTokenLegendary_Imperial:16",
+                        "gold:270000"
+                    ]
+                },
+                {
+                    "variant": "L3_CURE_MD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Imperial:6",
+                        "abilityTokenEpic_Imperial:24",
+                        "heroAscensionOrbRare_Imperial:6",
+                        "abilityTokenRare_Imperial:32",
+                        "heroAscensionOrbUncommon_Imperial:6",
+                        "abilityTokenUncommon_Imperial:32",
+                        "abilityTokenCommon_Imperial:32",
+                        "gold:110000"
+                    ]
+                },
+                {
+                    "variant": "L3_M_LD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["heroAscensionOrbMythic_Imperial:2", "abilityTokenMythic_Imperial:2", "gold:200000"]
+                },
+                {
+                    "variant": "L3_L_LD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "heroAscensionOrbLegendary_Imperial:3",
+                        "abilityTokenLegendary_Imperial:8",
+                        "gold:135000"
+                    ]
+                },
+                {
+                    "variant": "L3_CURE_LD",
+                    "title": "Holy Human Form",
+                    "banner": "For the Emperor!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "heroAscensionOrbEpic_Imperial:3",
+                        "abilityTokenEpic_Imperial:12",
+                        "heroAscensionOrbRare_Imperial:3",
+                        "abilityTokenRare_Imperial:16",
+                        "heroAscensionOrbUncommon_Imperial:3",
+                        "abilityTokenUncommon_Imperial:16",
+                        "abilityTokenCommon_Imperial:16",
+                        "gold:55000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 17,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Mirth and Mischief",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["gems:3000", "stamina:720", "raidTicket:120"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Yuletide Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["specialSummoningToken:10", "summoningToken:10"]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Mirth and Mischief",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["gems:2000", "stamina:480", "raidTicket:80"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Yuletide Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["specialSummoningToken:8", "summoningToken:8"]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Mirth and Mischief",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["gems:1000", "stamina:240", "raidTicket:40"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Yuletide Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": ["specialSummoningToken:3", "summoningToken:3"]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Mirth and Mischief",
+                    "banner": "More Blackstone!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["gems:500", "stamina:120", "raidTicket:20"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Yuletide Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 599,
+                    "rewards": ["specialSummoningToken:2", "summoningToken:2"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 18,
+            "offers": [
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:3",
+                        "draft_ascensionOrbsMythic:3",
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsLegendary:6"
+                    ]
+                },
+                {
+                    "variant": "M1_L_SHD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:10",
+                        "draft_ascensionOrbsLegendary:5",
+                        "draft_ascensionOrbsLegendary:3",
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsEpic:5",
+                        "draft_ascensionOrbsEpic:3"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_SHD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:14",
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsRare:14",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:14",
+                        "draft_ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "L1_SHD",
+                    "title": "Sacred Songs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["xpMythic:16", "xpLegendary:30", "gold:47000"]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:2",
+                        "draft_ascensionOrbsMythic:2",
+                        "draft_ascensionOrbsLegendary:4",
+                        "draft_ascensionOrbsLegendary:4"
+                    ]
+                },
+                {
+                    "variant": "M1_L_HD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsEpic:6",
+                        "draft_ascensionOrbsEpic:6"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_HD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:6",
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsRare:6",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsUncommon:6",
+                        "draft_ascensionOrbsUncommon:10"
+                    ]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Sacred Songs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["xpMythic:5", "xpLegendary:52", "gold:36000"]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:3",
+                        "draft_ascensionOrbsLegendary:3",
+                        "draft_ascensionOrbsLegendary:3"
+                    ]
+                },
+                {
+                    "variant": "M1_L_MD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:6",
+                        "draft_ascensionOrbsLegendary:3",
+                        "draft_ascensionOrbsEpic:6",
+                        "draft_ascensionOrbsEpic:3"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_MD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:10",
+                        "draft_ascensionOrbsEpic:4",
+                        "draft_ascensionOrbsRare:10",
+                        "draft_ascensionOrbsRare:4",
+                        "draft_ascensionOrbsUncommon:10",
+                        "draft_ascensionOrbsUncommon:4"
+                    ]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Sacred Songs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["xpMythic:2", "xpLegendary:34", "gold:21000"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "draft_ascensionOrbsMythic:2",
+                        "draft_ascensionOrbsLegendary:2",
+                        "draft_ascensionOrbsLegendary:2"
+                    ]
+                },
+                {
+                    "variant": "M1_L_LD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "draft_ascensionOrbsLegendary:3",
+                        "draft_ascensionOrbsLegendary:3",
+                        "draft_ascensionOrbsEpic:3",
+                        "draft_ascensionOrbsEpic:3"
+                    ]
+                },
+                {
+                    "variant": "M1_CURE_LD",
+                    "title": "Holiday Orbs",
+                    "banner": "Your choice!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "draft_ascensionOrbsEpic:7",
+                        "draft_ascensionOrbsRare:7",
+                        "draft_ascensionOrbsUncommon:7"
+                    ]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Sacred Songs",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["xpLegendary:15", "xpEpic:35", "gold:12750"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 19,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["summoningToken:1"]
+                },
+                {
+                    "variant": "XS1_SHD",
+                    "title": "Good cheer!",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["stamina:900", "raidTicket:150"]
+                },
+                {
+                    "variant": "XS1_HD",
+                    "title": "Good cheer!",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["stamina:720", "raidTicket:120"]
+                },
+                {
+                    "variant": "XS1_MD",
+                    "title": "Good cheer!",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["stamina:360", "raidTicket:60"]
+                },
+                {
+                    "variant": "XS1_LD",
+                    "title": "Good cheer!",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 199,
+                    "rewards": ["stamina:180", "raidTicket:30"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 20,
+            "offers": [
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "upgradesMythic:5",
+                        "upgradesMythic:5",
+                        "upgradesMythic:5",
+                        "upgradesMythic:5",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10"
+                    ]
+                },
+                {
+                    "variant": "M1_CUREL_SHD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:10",
+                        "upgradesRare:10",
+                        "upgradesRare:10",
+                        "upgradesRare:10"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_SHD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "mythicDust:1000",
+                        "gems:1000",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "gold:500000"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_SHD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "dust:1660",
+                        "gems:600",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "gold:180000"
+                    ]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["upgradesMythic:6", "upgradesMythic:6", "upgradesLegendary:6", "upgradesLegendary:6"]
+                },
+                {
+                    "variant": "M1_CUREL_HD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "upgradesLegendary:8",
+                        "upgradesLegendary:8",
+                        "upgradesLegendary:8",
+                        "upgradesEpic:8",
+                        "upgradesEpic:8",
+                        "upgradesEpic:8",
+                        "upgradesRare:8",
+                        "upgradesRare:8",
+                        "upgradesRare:8"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_HD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "mythicDust:750",
+                        "gems:750",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "gold:375000"
+                    ]
+                },
+                {
+                    "variant": "XL1_L_HD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "dust:1245",
+                        "gems:450",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "gold:135000"
+                    ]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["upgradesMythic:4", "upgradesMythic:4", "upgradesLegendary:4", "upgradesLegendary:4"]
+                },
+                {
+                    "variant": "M1_CUREL_MD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "upgradesLegendary:8",
+                        "upgradesLegendary:8",
+                        "upgradesEpic:8",
+                        "upgradesEpic:8",
+                        "upgradesRare:8",
+                        "upgradesRare:8"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_MD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["mythicDust:500", "gems:500", "itemsMythic:1", "itemsMythic:1", "gold:250000"]
+                },
+                {
+                    "variant": "XL1_L_MD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["dust:830", "gems:300", "itemsLegendary:1", "itemsLegendary:1", "gold:90000"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["upgradesMythic:2", "upgradesMythic:2", "upgradesLegendary:2", "upgradesLegendary:2"]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "Jolly Upgrades",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "upgradesLegendary:4",
+                        "upgradesLegendary:4",
+                        "upgradesEpic:4",
+                        "upgradesEpic:4",
+                        "upgradesRare:4",
+                        "upgradesRare:4"
+                    ]
+                },
+                {
+                    "variant": "XL1_M_LD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["mythicDust:250", "gems:250", "itemsMythic:1", "gold:125000"]
+                },
+                {
+                    "variant": "XL1_L_LD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["dust:415", "gems:150", "itemsLegendary:1", "gold:45000"]
+                },
+                {
+                    "variant": "XL1_CURE_LD",
+                    "title": "Festive Gear",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "dust:750",
+                        "gems:200",
+                        "itemsEpic:1",
+                        "itemsEpic:1",
+                        "itemsRare:1",
+                        "itemsRare:1",
+                        "itemsUncommon:1",
+                        "itemsUncommon:1",
+                        "gold:10000"
+                    ]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 21,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["stamina:30", "raidTicket:5"]
+                },
+                {
+                    "variant": "L1_SHD",
+                    "title": "Joyous Gathering",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["summoningToken:40"]
+                },
+                {
+                    "variant": "L1_HD",
+                    "title": "Joyous Gathering",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["summoningToken:28"]
+                },
+                {
+                    "variant": "L1_MD",
+                    "title": "Joyous Gathering",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["summoningToken:20"]
+                },
+                {
+                    "variant": "L1_LD",
+                    "title": "Joyous Gathering",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["summoningToken:12"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 22,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["gems:50"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Blessed Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["specialSummoningToken:20"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Blessed Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["specialSummoningToken:20"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Blessed Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["specialSummoningToken:8"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Blessed Gathering",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["specialSummoningToken:4"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 23,
+            "offers": [
+                {
+                    "variant": "S1_SHD",
+                    "title": "Dashing Through the Snow",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["stamina:1260", "raidTicket:210"]
+                },
+                {
+                    "variant": "M1_M_SHD",
+                    "title": "Wisdom and Wealth",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["xpMythic:15", "gems:1250", "gold:30000"]
+                },
+                {
+                    "variant": "S1_HD",
+                    "title": "Dashing Through the Snow",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 899,
+                    "rewards": ["stamina:810", "raidTicket:135"]
+                },
+                {
+                    "variant": "M1_M_HD",
+                    "title": "Wisdom and Wealth",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": ["xpMythic:9", "gems:750", "gold:18000"]
+                },
+                {
+                    "variant": "S1_MD",
+                    "title": "Dashing Through the Snow",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["stamina:630", "raidTicket:105"]
+                },
+                {
+                    "variant": "M1_M_MD",
+                    "title": "Wisdom and Wealth",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["xpMythic:6", "gems:500", "gold:12000"]
+                },
+                {
+                    "variant": "S1_LD",
+                    "title": "Dashing Through the Snow",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 399,
+                    "rewards": ["stamina:360", "raidTicket:60"]
+                },
+                {
+                    "variant": "M1_M_LD",
+                    "title": "Wisdom and Wealth",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["xpMythic:3", "gems:250", "gold:6000"]
+                },
+                {
+                    "variant": "M1_CUREL_LD",
+                    "title": "Wisdom and Wealth",
+                    "banner": "XP and more!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["xpLegendary:15", "gems:250", "gold:7500"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 1,
+                    "rewards": []
+                }
+            ]
+        },
+        {
+            "day": 24,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "'Tis The Season",
+                    "banner": "A Holiday Treat!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["xp_battlepass:100", "xpLegendary:1"]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Gathering on the Eve",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": ["summoningToken:20"]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Gathering on the Eve",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["summoningToken:16"]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Gathering on the Eve",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["summoningToken:12"]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Gathering on the Eve",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": ["summoningToken:4"]
+                },
+                {
+                    "variant": "active",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": []
+                }
+            ]
+        }
+    ]
+}

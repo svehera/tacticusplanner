@@ -3,12 +3,12 @@
     "title": "Terminus Requisition",
     "tagline": "Gain the upper hand in the upcoming <i>Terminus</i> Survival event!",
     "featuredUnits": [
-        "adeptRetributor",
-        "custoKyrus",
-        "adeptHospitaller",
-        "astraYarrick",
-        "admecMarshall",
-        "custoTrajann"
+        "ultraInceptorSgt",
+        "bloodDeathCompany",
+        "spaceWolfPriest",
+        "darkaCompanion",
+        "templChampion",
+        "bloodDante"
     ],
     "unlockRequirement": {
         "PowerLevel": 15

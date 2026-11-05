@@ -18137,7 +18137,7 @@
         "type": "I_Defensive",
         "abilityId": "Thrydderghyre",
         "isRelic": true,
-        "isUniqueRelic": false,
+        "isUniqueRelic": true,
         "allowedUnits": ["thousTzaangor"],
         "allowedFactions": [],
         "levels": [

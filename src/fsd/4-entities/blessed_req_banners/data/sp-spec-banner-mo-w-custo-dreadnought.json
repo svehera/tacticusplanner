@@ -1,0 +1,16 @@
+{
+    "id": "sp_spec_banner_MoW_custoDreadnought",
+    "title": "Dreadnought Incursion Requisition",
+    "tagline": "Gain the upper hand in the upcoming <style=\"FactionIcon_Custodes\">Boudicari</style> Incursion!",
+    "featuredUnits": [
+        "thousTerminator",
+        "blackPossession",
+        "deathBlightbringer",
+        "thousInfernalMaster",
+        "deathRotbone",
+        "emperLucius"
+    ],
+    "unlockRequirement": {
+        "PowerLevel": 12
+    }
+}

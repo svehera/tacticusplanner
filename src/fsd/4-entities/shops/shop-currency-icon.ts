@@ -15,6 +15,8 @@ const CURRENCY_ICON_BY_TYPE: Record<string, keyof typeof tacticusIcons> = {
     seasonalEventCurrencyMarch2026: 'seasonalEventCurrencyMarch2026',
     seasonalEventCurrencyMay2026: 'seasonalEventCurrencyMay2026',
     seasonalEventCurrencySeptember2026: 'seasonalEventCurrencySeptember2026',
+    seasonalEventCurrencyNovember2026: 'seasonalEventCurrencyNovember2026',
+    seasonalEventCurrencyDecember2026: 'seasonalEventCurrencyDecember2026',
     seasonalEventCurrencyCrescendo: 'seasonalEventCurrencyCrescendo',
     crusadeCurrency: 'crusadeCurrency',
     guildCredits: 'guildCredits',

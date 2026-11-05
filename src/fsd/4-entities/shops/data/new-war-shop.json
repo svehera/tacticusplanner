@@ -9,6 +9,7 @@
     "products": [
         [
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -20,6 +21,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -31,6 +33,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -42,6 +45,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -53,6 +57,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -64,6 +69,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_current"
@@ -77,6 +83,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_next"
@@ -90,6 +97,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * MON *",
@@ -100,6 +108,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * TUE *",
@@ -110,6 +119,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED *",
@@ -120,6 +130,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * THU *",
@@ -130,6 +141,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_current"
@@ -142,6 +154,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_next"
@@ -154,6 +167,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_current"
@@ -166,6 +180,7 @@
                 }
             },
             {
+                "slot": 1,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_crusadeSeason2start"
@@ -180,6 +195,7 @@
         ],
         [
             {
+                "slot": 2,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_current"
@@ -192,6 +208,7 @@
                 }
             },
             {
+                "slot": 2,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_next"
@@ -206,6 +223,7 @@
         ],
         [
             {
+                "slot": 3,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_current"
@@ -218,6 +236,7 @@
                 }
             },
             {
+                "slot": 3,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_epic_next"
@@ -232,6 +251,7 @@
         ],
         [
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -243,6 +263,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -254,6 +275,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -265,6 +287,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SUN *",
@@ -276,6 +299,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_current"
@@ -289,6 +313,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * MON *",
@@ -299,6 +324,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * TUE *",
@@ -309,6 +335,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED *",
@@ -319,6 +346,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * THU *",
@@ -329,6 +357,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * FRI *",
@@ -339,6 +368,7 @@
                 }
             },
             {
+                "slot": 4,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * SAT *",
@@ -351,6 +381,7 @@
         ],
         [
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_last"
@@ -363,6 +394,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_current"
@@ -375,6 +407,7 @@
                 }
             },
             {
+                "slot": 5,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_crusadeSeason2start"
@@ -389,6 +422,7 @@
         ],
         [
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_last"
@@ -401,6 +435,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_character_rotation_current"
@@ -413,6 +448,7 @@
                 }
             },
             {
+                "slot": 6,
                 "weight": 1,
                 "conditions": {
                     "lockId": "lock_daily_deals_crusadeSeason2start"
@@ -427,6 +463,7 @@
         ],
         [
             {
+                "slot": 7,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -439,6 +476,7 @@
         ],
         [
             {
+                "slot": 8,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -451,6 +489,7 @@
         ],
         [
             {
+                "slot": 9,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -463,6 +502,7 @@
         ],
         [
             {
+                "slot": 10,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -475,6 +515,7 @@
         ],
         [
             {
+                "slot": 11,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -487,6 +528,7 @@
         ],
         [
             {
+                "slot": 12,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",
@@ -499,6 +541,7 @@
         ],
         [
             {
+                "slot": 13,
                 "weight": 3,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * MON,SAT,SUN *",
@@ -510,6 +553,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 3,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * TUE,SAT,SUN *",
@@ -521,6 +565,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 2,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * WED,SAT,SUN *",
@@ -532,6 +577,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * THU,SAT,SUN *",
@@ -543,6 +589,7 @@
                 }
             },
             {
+                "slot": 13,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * FRI,SAT,SUN *",
@@ -556,6 +603,7 @@
         ],
         [
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "maxPowerLevel": 10
@@ -568,6 +616,7 @@
                 }
             },
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 11,
@@ -581,6 +630,7 @@
                 }
             },
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 21,
@@ -594,6 +644,7 @@
                 }
             },
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 31,
@@ -607,6 +658,7 @@
                 }
             },
             {
+                "slot": 14,
                 "weight": 1,
                 "conditions": {
                     "minPowerLevel": 41
@@ -621,6 +673,7 @@
         ],
         [
             {
+                "slot": 15,
                 "weight": 1,
                 "conditions": {},
                 "cronSchedule": "0 0 0 ? * * *",

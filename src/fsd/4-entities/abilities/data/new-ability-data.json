@@ -724,7 +724,7 @@
         "id": "ReanimationBeam",
         "text": {
             "name": "Reanimation Beam",
-            "currentLevelDescription": "All friendly units that are affected by <i>Nanoscarab Repair Protocols</i> are <style=\"Repairing\">repaired</style> for <style=\"Stat_Health\">{[hpToRepair]} Health</style>. Affected <style=\"Summon\">Summons</style> immediately take an action, using <style=\"Stat\">{[dmgPct]}%</style> of their own <style=\"Stat_Damage\">Damage stat</style> to a maximum of <style=\"Stat_Damage\">{[maxDmg]} Damage</style> when attacking. Until the start of the <style=\"Faction_Necrons\">Reanimator's</style> next turn, the first time a friendly unit affected by <i>Nanoscarab Repair Protocols</i> would be defeated, it is instead revived with a maximum of <style=\"Stat_Health\">{[hp]} Health</style>, unless <style=\"Overkill\">Overkilled</style>.\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} round</style>. \nCost: <style=\"Resource_MachinesOfWarAmmo\">{[munitionsCost]} munition</style>.",
+            "currentLevelDescription": "All friendly units that are affected by <i>Nanoscarab Repair Protocols</i> are <style=\"Repairing\">repaired</style> for <style=\"Stat_Health\">{[hpToRepair]} Health</style>. Affected <style=\"Summon\">Summons</style> immediately take an action, using <style=\"Stat\">{[dmgPct]}%</style> of their own <style=\"Stat_Damage\">Damage stat</style> to a maximum of <style=\"Stat_Damage\">{[maxDmg]} Damage</style> when attacking. Until the start of the <style=\"Faction_Necrons\">Reanimator's</style> next turn, the first friendly unit affected by <i>Nanoscarab Repair Protocols</i> that is defeated, is instead revived with a maximum of <style=\"Stat_Health\">{[hp]} Health</style>, unless <style=\"Overkill\">Overkilled</style>.\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} round</style>. \nCost: <style=\"Resource_MachinesOfWarAmmo\">{[munitionsCost]} munition</style>.",
             "nextLevelDescription": "Affected units are now <style=\"Repairing\">repaired</style> for <style=\"Stat_Health\">{[hpToRepair]} Health</style>. Affected <style=\"Summon\">Summons</style> now use <style=\"Stat\">{[dmgPct]}%</style> of their own <style=\"Stat_Damage\">Damage stat</style> to a maximum of <style=\"Stat_Damage\">{[maxDmg]} Damage</style> and units are now revived with <style=\"Stat_Health\">{[hp]} Health</style>."
         },
         "variables": {
@@ -1527,7 +1527,7 @@
         "id": "GeminaeSuperia",
         "text": {
             "name": "Geminae Superia",
-            "currentLevelDescription": "When attacked, summons a <style=\"Summon\"><style=\"Faction_Sisterhood\">Geminae Superia</style></style> in a free adjacent hex, and immediately triggers its passive ability <link=\"tooltip:Keywords/Lifewards><style=\"KEY\">Lifewards</style></link>. Can do this twice per battle.\n\nGeminae Superia’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "currentLevelDescription": "When attacked, summons a <style=\"Summon\"><style=\"Faction_Sisterhood\">Geminae Superia</style></style> in a free adjacent hex, and immediately triggers its passive ability <link=\"tooltip:Keywords/Lifewards\"><style=\"KEY\">Lifewards</style></link>. Can do this twice per battle.\n\nGeminae Superia’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
             "nextLevelDescription": "Geminae Superia’s stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
         },
         "variables": {
@@ -1999,7 +1999,7 @@
         "id": "TaintedNarthecium",
         "text": {
             "name": "Tainted Narthecium",
-            "currentLevelDescription": "An adjacent friendly <style=\"Aliance_Chaos\">Chaos</style> unit that is defeated has a <style=\"Stat_Chance\">{[chance]}% chance</style> to be revived with a maximum of <style=\"Stat_Health\">{[hp]} Health</style>, even if <style=\"Overkill\">Overkilled</style>. Can only be triggered once per turn.",
+            "currentLevelDescription": "An adjacent friendly non-<style=\"Mechanical\">Mechanical</style> <style=\"Aliance_Chaos\">Chaos</style> unit that is defeated has a <style=\"Stat_Chance\">{[chance]}% chance</style> to be revived with a maximum of <style=\"Stat_Health\">{[hp]} Health</style>, even if <style=\"Overkill\">Overkilled</style>. Can only be triggered once per turn.",
             "nextLevelDescription": "Units are now revived with <style=\"Stat_Health\">{[hp]} Health</style>."
         },
         "variables": {
@@ -3384,8 +3384,8 @@
         "id": "PowerVomit",
         "text": {
             "name": "Power Vomit",
-            "currentLevelDescription": "Affects 3 hexes in a straight line in one of 6 directions. Deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to all units on affected hexes. Deals <style=\"Stat_Damage\">+{[extraDmg_2]} Damage</style> to enemy units for each <i>Waaagh! charge</i> <style=\"Faction_Orks\">Zapspitta</style> has. For <style=\"STAT\">{[nrOfRounds]} rounds</style>, all <style=\"DMG_Psychic\">Psychic Damage</style> taken by and dealt by affected units is increased by <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>.\n\n{[S/AbilityDamageExplanation]}",
-            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> and <style=\"Stat_Damage\">+{[extraDmg_2]} Damage</style> to enemy units for each <i>Waaagh! charge</i>. For <style=\"STAT\">{[nrOfRounds]} rounds</style>, all <style=\"DMG_Psychic\">Psychic Damage</style> taken by and dealt by affected units is increased by <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>."
+            "currentLevelDescription": "Affects 3 hexes in a straight line in one of 6 directions. Deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to all units on affected hexes. Deals <style=\"Stat_Damage\">+{[extraDmg_2]} Damage</style> to enemy units for each level of <i>Waaagh! energy</i> <style=\"Faction_Orks\">Zapspitta</style> has. For <style=\"STAT\">{[nrOfRounds]} rounds</style>, all <style=\"DMG_Psychic\">Psychic Damage</style> taken by and dealt by affected units is increased by <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>.\n\n{[S/AbilityDamageExplanation]}",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> and <style=\"Stat_Damage\">+{[extraDmg_2]} Damage</style> to enemy units for each level of <i>Waaagh! energy</i>. For <style=\"STAT\">{[nrOfRounds]} rounds</style>, all <style=\"DMG_Psychic\">Psychic Damage</style> taken by and dealt by affected units is increased by <style=\"Stat_Damage\">+{[extraDmg]} Damage</style>."
         },
         "attackRangeType": "ranged",
         "variables": {
@@ -3427,7 +3427,7 @@
         "id": "WaaaghEnergy",
         "text": {
             "name": "Waaagh! Energy",
-            "currentLevelDescription": "Whenever another unit within 2 hexes performs an attack, <style=\"Faction_Orks\">Zapspitta</style> gains a <i>Waaagh! charge</i>. When attacking, he deals <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> for each of his <i>Waaagh! charges</i> and loses {[effectLevelPct]}% of them after attacking. At the end of his turn, if he has <style=\"STAT\">{[effectLevel]}</style> or more <i>Waaagh! charges</i>, Zapspitta loses {[hpPct]}% of his current maximum <style=\"Stat_Health\">Health</style>.",
+            "currentLevelDescription": "Whenever another unit within 2 hexes performs an attack, <style=\"Faction_Orks\">Zapspitta</style> gains a level of <i>Waaagh! energy</i>. When attacking, he deals <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> for each level and loses {[effectLevelPct]}% of current levels after attacking. At the end of his turn, if he has <style=\"STAT\">{[effectLevel]}</style> or more levels of <i>Waaagh! energy</i>, Zapspitta loses {[hpPct]}% of his current maximum <style=\"Stat_Health\">Health</style>.",
             "nextLevelDescription": "Now deals <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> per charge and loses <style=\"Stat_Health\">Health</style> if he has <style=\"STAT\">{[effectLevel]}</style> or more charges at the end of his turn."
         },
         "variables": {
@@ -3437,7 +3437,7 @@
                 117, 119, 121, 123, 126, 128, 131, 134, 137, 140, 143, 146
             ],
             "effectLevel": [
-                5, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
+                4, 4, 4, 4, 4, 4, 4, 4, 5, 5, 5, 5, 5, 5, 5, 5, 5, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6, 6,
                 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7, 7
             ]
         },
@@ -5234,6 +5234,100 @@
         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
     },
     {
+        "id": "PowerUp_SummonSpawn_admecSmnVanguard",
+        "text": {
+            "name": "Skitarii Vanguard Power-up",
+            "currentLevelDescription": "Summons <style=\"Summon\">Skitarii Vanguard</style>.\n\nSkitarii Vanguard's stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "nextLevelDescription": ""
+        },
+        "variables": {
+            "summonHp": [
+                36, 43, 50, 58, 65, 73, 81, 90, 98, 106, 114, 123, 131, 139, 148, 156, 164, 172, 181, 189, 200, 216,
+                248, 281, 314, 347, 379, 412, 445, 478, 510, 543, 576, 609, 642, 674, 707, 740, 773, 819, 883, 951,
+                1025, 1106, 1254, 1402, 1550, 1698, 1846, 1994, 2016, 2043, 2070, 2106, 2142, 2178, 2214, 2259, 2304,
+                2349, 2403, 2457, 2511, 2565, 2619
+            ],
+            "summonDmg": [
+                10, 12, 14, 16, 18, 20, 23, 25, 27, 30, 32, 34, 36, 39, 41, 43, 46, 48, 50, 53, 56, 60, 69, 78, 87, 96,
+                105, 115, 124, 133, 142, 151, 160, 169, 178, 187, 196, 206, 215, 227, 245, 264, 285, 307, 348, 390, 431,
+                472, 513, 554, 560, 568, 575, 585, 595, 605, 615, 628, 640, 653, 668, 683, 698, 713, 728
+            ],
+            "summonArmor": [
+                15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90, 104, 117, 131,
+                144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322, 341, 368, 396, 427, 461, 523, 584,
+                646, 708, 769, 831, 840, 851, 863, 878, 893, 908, 923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
+            ]
+        },
+        "constants": {
+            "unitId": "admecSmnVanguard",
+            "nrOfSummons": "1"
+        },
+        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+    },
+    {
+        "id": "PowerUp_SummonSpawn_admecSmnTechpriest",
+        "text": {
+            "name": "Tech-Priest Enginseer Power-up",
+            "currentLevelDescription": "Summons <style=\"Summon\">Tech-Priest Enginseer</style>.\n\nTech-Priest Enginseer's stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "nextLevelDescription": ""
+        },
+        "variables": {
+            "summonHp": [
+                60, 72, 84, 96, 108, 122, 136, 149, 163, 177, 191, 205, 218, 232, 246, 260, 274, 287, 301, 315, 334,
+                359, 414, 469, 523, 578, 632, 687, 742, 796, 851, 905, 960, 1015, 1069, 1124, 1178, 1233, 1288, 1364,
+                1472, 1586, 1708, 1844, 2090, 2337, 2584, 2830, 3077, 3324, 3360, 3405, 3450, 3510, 3570, 3630, 3690,
+                3765, 3840, 3915, 4005, 4095, 4185, 4275, 4365
+            ],
+            "summonDmg": [
+                16, 19, 22, 26, 29, 32, 36, 40, 44, 47, 51, 55, 58, 62, 66, 69, 73, 77, 80, 84, 89, 96, 110, 125, 140,
+                154, 169, 183, 198, 212, 227, 241, 256, 271, 285, 300, 314, 329, 343, 364, 393, 423, 456, 492, 557, 623,
+                689, 755, 820, 886, 896, 908, 920, 936, 952, 968, 984, 1004, 1024, 1044, 1068, 1092, 1116, 1140, 1164
+            ],
+            "summonArmor": [
+                20, 24, 28, 32, 36, 41, 45, 50, 54, 59, 64, 68, 73, 77, 82, 87, 91, 96, 100, 105, 111, 120, 138, 156,
+                174, 193, 211, 229, 247, 265, 284, 302, 320, 338, 356, 375, 393, 411, 429, 455, 491, 529, 569, 615, 697,
+                779, 861, 943, 1026, 1109, 1120, 1135, 1150, 1170, 1190, 1210, 1230, 1255, 1280, 1305, 1335, 1365, 1395,
+                1425, 1455
+            ]
+        },
+        "constants": {
+            "unitId": "admecSmnTechpriest",
+            "nrOfSummons": "1"
+        },
+        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+    },
+    {
+        "id": "PowerUp_SummonSpawn_admecSmnElectropriest",
+        "text": {
+            "name": "Electro-priest Power-up",
+            "currentLevelDescription": "Summons <style=\"Summon\">Electro-priest</style>.\n\nElectro-priest's stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>",
+            "nextLevelDescription": ""
+        },
+        "variables": {
+            "summonHp": [
+                55, 66, 77, 88, 99, 112, 124, 137, 150, 162, 175, 188, 200, 213, 226, 238, 251, 263, 276, 289, 306, 329,
+                380, 430, 480, 530, 580, 630, 680, 730, 780, 830, 880, 930, 980, 1030, 1080, 1130, 1180, 1251, 1350,
+                1454, 1566, 1690, 1916, 2142, 2368, 2594, 2820, 3046, 3080, 3121, 3163, 3218, 3273, 3328, 3383, 3451,
+                3520, 3589, 3671, 3754, 3836, 3919, 4001
+            ],
+            "summonDmg": [
+                18, 22, 25, 29, 32, 37, 41, 45, 49, 53, 57, 61, 66, 70, 74, 78, 82, 86, 90, 95, 100, 108, 124, 141, 157,
+                173, 190, 206, 222, 239, 255, 272, 288, 304, 321, 337, 354, 370, 386, 409, 442, 476, 512, 553, 627, 701,
+                775, 849, 923, 997, 1008, 1022, 1035, 1053, 1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283,
+                1310
+            ],
+            "summonArmor": [
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0,
+                0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0
+            ]
+        },
+        "constants": {
+            "unitId": "admecSmnElectropriest",
+            "nrOfSummons": "1"
+        },
+        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+    },
+    {
         "id": "Player_SummonSpawn:astraSmnGuardsman",
         "text": {
             "name": "",
@@ -5769,7 +5863,8 @@
         },
         "constants": {
             "unitId": "thousSmnPinkHorror",
-            "unitId_2": "thousSmnScreamer"
+            "unitId_2": "thousSmnScreamer",
+            "maxSummons": "20"
         },
         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonHp_2", "summonDmg_2"]
     },
@@ -9451,6 +9546,15 @@
         "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
     },
     {
+        "id": "RelentlessAssault",
+        "text": {
+            "name": "Relentless Assault",
+            "currentLevelDescription": "The first time each turn that this unit defeats an enemy unit, it immediately performs a <style=\"NormalAttack\">normal ranged attack</style>, if possible.",
+            "nextLevelDescription": ""
+        },
+        "variables": {}
+    },
+    {
         "id": "DutyEternal",
         "text": {
             "name": "Duty Eternal",
@@ -10719,6 +10823,18 @@
         }
     },
     {
+        "id": "EnhancementCritReduction",
+        "text": {
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
+        },
+        "variables": {},
+        "constants": {
+            "critDmgPctReduction": "50"
+        }
+    },
+    {
         "id": "EnhancementDamageBoost",
         "text": {
             "name": "",
@@ -10978,6 +11094,31 @@
         "constants": {
             "nrOfSummons": "1",
             "unitId": "deathNpc2PlagueMarine"
+        }
+    },
+    {
+        "id": "EnhancementSummon:PinkHorror",
+        "text": {
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
+        },
+        "variables": {
+            "summonHp": [
+                36, 43, 50, 58, 65, 73, 81, 90, 118, 127, 137, 147, 157, 167, 177, 187, 197, 241, 253, 265, 280, 302,
+                348, 394, 439, 485, 607, 660, 712, 764, 817, 869, 922, 974, 1026, 1214, 1273, 1332, 1391, 1474, 1590,
+                1713, 1845, 1991, 2258, 2524, 2790, 3057, 3323, 3589, 4032, 4086, 4140, 4212, 4284, 4356, 4428, 4518,
+                4608, 4698, 4806, 4914, 5022, 5130, 5238
+            ],
+            "summonDmg": [
+                9, 11, 13, 14, 16, 18, 20, 22, 29, 32, 34, 37, 39, 42, 44, 47, 49, 60, 63, 66, 70, 75, 87, 98, 110, 121,
+                152, 165, 178, 191, 204, 217, 230, 244, 257, 303, 318, 333, 348, 368, 398, 428, 461, 498, 564, 631, 698,
+                764, 831, 897, 1008, 1022, 1035, 1053, 1071, 1089, 1107, 1130, 1152, 1175, 1202, 1229, 1256, 1283, 1310
+            ]
+        },
+        "constants": {
+            "nrOfSummons": "1",
+            "unitId": "thousNpc1PinkHorror"
         }
     },
     {
@@ -11521,25 +11662,26 @@
         },
         "variables": {
             "summonHp": [
-                40, 48, 56, 64, 72, 81, 90, 100, 109, 118, 127, 136, 146, 155, 164, 173, 182, 192, 201, 210, 222, 240,
-                276, 312, 349, 385, 422, 458, 494, 531, 567, 604, 640, 676, 713, 749, 786, 822, 858, 910, 982, 1057,
-                1139, 1229, 1394, 1558, 1722, 1887, 2051, 2216, 2240, 2270, 2300, 2340, 2380, 2420, 2460, 2510, 2560,
-                2610, 2670, 2730, 2790, 2850, 2910
+                60, 72, 84, 96, 108, 122, 136, 149, 163, 177, 191, 205, 218, 232, 246, 260, 274, 287, 301, 315, 334,
+                359, 414, 469, 523, 578, 632, 687, 742, 796, 851, 905, 960, 1015, 1069, 1124, 1178, 1233, 1288, 1364,
+                1472, 1586, 1708, 1844, 2090, 2337, 2584, 2830, 3077, 3324, 3360, 3405, 3450, 3510, 3570, 3630, 3690,
+                3765, 3840, 3915, 4005, 4095, 4185, 4275, 4365
             ],
             "summonDmg": [
-                16, 19, 22, 26, 29, 32, 36, 40, 44, 47, 51, 55, 58, 62, 66, 69, 73, 77, 80, 84, 89, 96, 110, 125, 140,
-                154, 169, 183, 198, 212, 227, 241, 256, 271, 285, 300, 314, 329, 343, 364, 393, 423, 456, 492, 557, 623,
-                689, 755, 820, 886, 896, 908, 920, 936, 952, 968, 984, 1004, 1024, 1044, 1068, 1092, 1116, 1140, 1164
+                20, 24, 28, 32, 36, 41, 45, 50, 54, 59, 64, 68, 73, 77, 82, 87, 91, 96, 100, 105, 111, 120, 138, 156,
+                174, 193, 211, 229, 247, 265, 284, 302, 320, 338, 356, 375, 393, 411, 429, 455, 491, 529, 569, 615, 697,
+                779, 861, 943, 1026, 1109, 1120, 1135, 1150, 1170, 1190, 1210, 1230, 1255, 1280, 1305, 1335, 1365, 1395,
+                1425, 1455
             ],
             "summonArmor": [
-                8, 10, 11, 13, 14, 16, 18, 20, 22, 24, 25, 27, 29, 31, 33, 35, 36, 38, 40, 42, 44, 48, 55, 62, 70, 77,
-                84, 92, 99, 106, 113, 121, 128, 135, 143, 150, 157, 164, 172, 182, 196, 211, 228, 246, 279, 312, 344,
-                377, 410, 443, 448, 454, 460, 468, 476, 484, 492, 502, 512, 522, 534, 546, 558, 570, 582
+                15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90, 104, 117, 131,
+                144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322, 341, 368, 396, 427, 461, 523, 584,
+                646, 708, 769, 831, 840, 851, 863, 878, 893, 908, 923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
             ]
         },
         "constants": {
-            "unitId": "necroSmnDeathmark",
-            "nrOfSummons": "2"
+            "unitId": "necroSmnWarrior",
+            "nrOfSummons": "3"
         },
         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor", "summonCritDmg", "summonBlockDmg"]
     },
@@ -11582,7 +11724,7 @@
         },
         "constants": {
             "unitId": "adeptSmnBattleSister",
-            "nrOfSummons": "2"
+            "nrOfSummons": "1"
         },
         "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor", "summonCritDmg", "summonBlockDmg"]
     },
@@ -12228,6 +12370,121 @@
         "variablesAffectedByRarityBonus": ["minDmg", "maxDmg", "minDmg_2", "maxDmg_2"]
     },
     {
+        "id": "WrathfulAdvance",
+        "text": {
+            "name": "Wrathful Advance",
+            "currentLevelDescription": "Deploys <style=\"Summon\"><style=\"Faction_Custodes\">Boudicari</style></style> as a stationary unit in a 3 hex area on the battlefield. If they are summoned adjacent to a friendly <style=\"Character\">character</style>, they immediately perform a <style=\"NormalAttack\">normal attack</style> against a target in range.\nAfter using this ability, Boudicari can no longer be used as a <style=\"MoW\">Machine of War</style> for the rest of the battle. \n\nBoudicari stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} rounds</style>. \nCost: <style=\"Resource_MachinesOfWarAmmo\">{[munitionsCost]} munition</style>.",
+            "nextLevelDescription": "Boudicari stats:\n<style=\"Stat_Health\">{[summonHp]} Health</style>\n<style=\"Stat_Damage\">{[summonDmg]} Damage</style>\n<style=\"Stat_Armor\">{[summonArmor]} Armour</style>"
+        },
+        "variables": {
+            "summonHp": [
+                150, 180, 210, 240, 270, 305, 339, 374, 408, 443, 477, 512, 546, 581, 615, 650, 684, 719, 753, 788, 834,
+                899, 1035, 1172, 1308, 1445, 1581, 1718, 1854, 1991, 2127, 2264, 2400, 2537, 2673, 2810, 2946, 3083,
+                3219, 3411, 3681, 3965, 4271, 4610, 5226, 5843, 6459, 7076, 7692, 8309, 8400, 8513, 8625, 8775, 8925,
+                9075, 9225, 9413, 9600, 9788, 10013, 10238, 10463, 10688, 10913
+            ],
+            "summonDmg": [
+                25, 30, 35, 40, 45, 51, 57, 62, 68, 74, 80, 85, 91, 97, 103, 108, 114, 120, 126, 131, 139, 150, 173,
+                195, 218, 241, 264, 286, 309, 332, 355, 377, 400, 423, 446, 468, 491, 514, 537, 569, 614, 661, 712, 768,
+                871, 974, 1077, 1179, 1282, 1385, 1400, 1419, 1438, 1463, 1488, 1513, 1538, 1569, 1600, 1631, 1669,
+                1706, 1744, 1781, 1819
+            ],
+            "summonArmor": [
+                30, 36, 42, 48, 54, 61, 68, 75, 82, 89, 95, 102, 109, 116, 123, 130, 137, 144, 151, 158, 167, 180, 207,
+                234, 262, 289, 316, 344, 371, 398, 425, 453, 480, 507, 535, 562, 589, 617, 644, 682, 736, 793, 854, 922,
+                1045, 1169, 1292, 1415, 1538, 1662, 1680, 1703, 1725, 1755, 1785, 1815, 1845, 1883, 1920, 1958, 2003,
+                2048, 2093, 2138, 2183
+            ]
+        },
+        "constants": {
+            "initialCooldownTurns": "2",
+            "munitionsCost": "3",
+            "unitId": "custoSmnDreadnought"
+        },
+        "variablesAffectedByRarityBonus": ["summonHp", "summonDmg", "summonArmor"]
+    },
+    {
+        "id": "RelentlessPersecution",
+        "text": {
+            "name": "Relentless Persecution",
+            "currentLevelDescription": "Targets an enemy unit that has been attacked by a friendly unit this turn and deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to it. This attack deals <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> for each Active Ability that was used this turn.\n\nInitial <style=\"Cooldown\">cooldown: {[initialCooldownTurns]} round</style>.\n\n{[S/AbilityDamageExplanation]}",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> and <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> for each Active Ability that was used this turn."
+        },
+        "attackRangeType": "ranged",
+        "variables": {
+            "minDmg": [
+                45, 54, 63, 72, 81, 91, 102, 112, 122, 133, 143, 153, 164, 174, 185, 195, 205, 216, 226, 236, 250, 270,
+                311, 351, 392, 433, 474, 515, 556, 597, 638, 679, 720, 761, 802, 843, 884, 925, 966, 1023, 1104, 1189,
+                1281, 1383, 1568, 1753, 1938, 2123, 2308, 2493, 2520, 2554, 2588, 2633, 2678, 2723, 2768, 2824, 2880,
+                2936, 3004, 3071, 3139, 3206, 3274
+            ],
+            "maxDmg": [
+                55, 66, 77, 88, 99, 112, 124, 137, 150, 162, 175, 188, 200, 213, 226, 238, 251, 263, 276, 289, 306, 329,
+                380, 430, 480, 530, 580, 630, 680, 730, 780, 830, 880, 930, 980, 1030, 1080, 1130, 1180, 1251, 1350,
+                1454, 1566, 1690, 1916, 2142, 2368, 2594, 2820, 3046, 3080, 3121, 3163, 3218, 3273, 3328, 3383, 3451,
+                3520, 3589, 3671, 3754, 3836, 3919, 4001
+            ],
+            "extraDmg": [
+                15, 18, 21, 24, 27, 30, 34, 37, 41, 44, 48, 51, 55, 58, 62, 65, 68, 72, 75, 79, 83, 90, 104, 117, 131,
+                144, 158, 172, 185, 199, 213, 226, 240, 254, 267, 281, 295, 308, 322, 341, 368, 396, 427, 461, 523, 584,
+                646, 708, 769, 831, 840, 851, 863, 878, 893, 908, 923, 941, 960, 979, 1001, 1024, 1046, 1069, 1091
+            ]
+        },
+        "constants": {
+            "nrOfHits": "1",
+            "damageProfile": "Las",
+            "initialCooldownTurns": "0"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg", "extraDmg"]
+    },
+    {
+        "id": "EmperorsExecutioner",
+        "text": {
+            "name": "Emperor's Executioner",
+            "currentLevelDescription": "Deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to all adjacent enemies. This ability can be used multiple times per battle but has a <style=\"Cooldown\">cooldown of {[cooldownTurns]} rounds.</style> ",
+            "nextLevelDescription": ""
+        },
+        "attackRangeType": "melee",
+        "variables": {
+            "minDmg": [
+                21, 25, 29, 34, 38, 43, 47, 52, 57, 62, 67, 72, 76, 81, 86, 91, 96, 101, 105, 110, 117, 126, 145, 164,
+                183, 202, 221, 240, 260, 279, 298, 317, 336, 355, 374, 393, 412, 432, 451, 478, 515, 555, 598, 645, 732,
+                818, 904, 991, 1077, 1163, 1176, 1192, 1208, 1229, 1250, 1271, 1292, 1318, 1344, 1370, 1402, 1433, 1465,
+                1496, 1528
+            ],
+            "maxDmg": [
+                30, 36, 42, 48, 54, 61, 68, 75, 82, 89, 95, 102, 109, 116, 123, 130, 137, 144, 151, 158, 167, 180, 207,
+                234, 262, 289, 316, 344, 371, 398, 425, 453, 480, 507, 535, 562, 589, 617, 644, 682, 736, 793, 854, 922,
+                1045, 1169, 1292, 1415, 1538, 1662, 1680, 1703, 1725, 1755, 1785, 1815, 1845, 1883, 1920, 1958, 2003,
+                2048, 2093, 2138, 2183
+            ]
+        },
+        "constants": {
+            "nrOfHits": "5",
+            "damageProfile": "Power",
+            "cooldownTurns": "2"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
+    },
+    {
+        "id": "PunishmentInescapable",
+        "text": {
+            "name": "Punishment Inescapable",
+            "currentLevelDescription": "Enemy units that enter a hex adjacent to <style=\"Faction_Custodes\">Boudicari</style> end their movement, excluding units with <style=\"Flying\">Flying</style>, <style=\"Unstoppable\">Unstoppable</style>, <style=\"Vehicle\">Vehicle</style>, or <style=\"Immune\">Immune</style>.",
+            "nextLevelDescription": ""
+        },
+        "variables": {}
+    },
+    {
+        "id": "PeerlessWarrior",
+        "text": {
+            "name": "Peerless Warrior",
+            "currentLevelDescription": "During each enemy turn, after the <style=\"Faction_Custodes\">Sentinel Guard</style> is attacked by an adjacent enemy unit, it performs a <style=\"NormalAttack\">normal attack</style> against the attacker.",
+            "nextLevelDescription": ""
+        },
+        "variables": {}
+    },
+    {
         "id": "EnvAllyAndEnemyNpcs:WarpSurge",
         "text": {
             "name": "",
@@ -12414,6 +12671,21 @@
         }
     },
     {
+        "id": "EnvStatBoost:FactionBoost_WorldEaters",
+        "text": {
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
+        },
+        "variables": {},
+        "constants": {
+            "factionId": "WorldEaters",
+            "dmgPct": "20",
+            "healthPct": "20",
+            "armorPct": "20"
+        }
+    },
+    {
         "id": "EnvStatBoost:TraitBoost_Flying",
         "text": {
             "name": "",
@@ -12497,6 +12769,20 @@
         "constants": {
             "extraPierceRatio": "10",
             "extraArmorPct": "20"
+        }
+    },
+    {
+        "id": "EnvStrategicBuff:RepairField",
+        "text": {
+            "name": "",
+            "currentLevelDescription": "",
+            "nextLevelDescription": ""
+        },
+        "variables": {},
+        "constants": {
+            "healthPct": "20",
+            "effectActivationAmount": "2",
+            "effectId": "EnvStrategicBuff_Repairable"
         }
     },
     {
@@ -13374,7 +13660,7 @@
         "text": {
             "name": "Dawn Blade",
             "currentLevelDescription": "<style=\"Faction_Tau\">Commander Farsight's</style> melee attacks deal <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> for each time another friendly <style=\"Character\">Character</style> within {[range]} hexes has performed a ranged attack this turn. When Commander Farsight kills an enemy unit with a melee attack, he <style=\"Repairing\">repairs</style> himself for <style=\"Stat_Health\">{[hpToHeal]} Health</style>.",
-            "nextLevelDescription": "Now <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> and repairs <style=\"Stat_Health\">{[hpToHeal]} Health</style>."
+            "nextLevelDescription": "Now deals <style=\"Stat_Damage\">+{[extraDmg]} Damage</style> and repairs <style=\"Stat_Health\">{[hpToHeal]} Health</style>."
         },
         "variables": {
             "extraDmg": [390, 411, 432, 453, 474, 495, 516, 537, 558, 579],
@@ -13534,7 +13820,7 @@
         "id": "Thrydderghyre",
         "text": {
             "name": "Thrydderghyre",
-            "currentLevelDescription": "The first time <style=\"Faction_ThousandSons\">Yazaghor</style> loses <style=\"Stat_Health\">Health</style> and the first time he uses <i>Sorcerous Facade</i>, he summons a <style=\"Summon\"><style=\"Faction_ThousandSons\">Copy</style></style> of himself in a free adjacent hex with <style=\"STAT\">{[statsPct]}%</style> of his own <style=\"Stat_Health\">Health</style>, <style=\"Stat_Damage\">Damage</style> and <style=\"Stat_Armor\">Armour</style>. The copies cannot use <i>Sorcerous Facade</i> or <i>Thrydderghyre</i>, but have <i>Twisted Mirage</i> as additional passive ability.",
+            "currentLevelDescription": "The first time <style=\"Faction_ThousandSons\">Yazaghor</style> loses <style=\"Stat_Health\">Health</style> and the first time he uses <i>Sorcerous Facade</i>, he summons a <style=\"Summon\"><style=\"Faction_ThousandSons\">Copy</style></style> of himself in a free adjacent hex with <style=\"STAT\">{[statsPct]}%</style> of his own <style=\"Stat_Health\">Health</style>, <style=\"Stat_Damage\">Damage</style> and <style=\"Stat_Armor\">Armour</style>. The copies cannot use <i>Sorcerous Facade</i> or <i>Thrydderghyre</i>, but have <link=\"tooltip:Keywords/TwistedMirage\"><style=\"KEY\">Twisted Mirage</style></link> as additional passive ability.",
             "nextLevelDescription": "Summons now have <style=\"STAT\">{[statsPct]}%</style> of <style=\"Faction_ThousandSons\">Yazaghor's</style> stats."
         },
         "variables": {
@@ -13680,6 +13966,18 @@
             "tilesTraversed": "2"
         },
         "variablesAffectedByRarityBonus": ["dmgReductionPct"]
+    },
+    {
+        "id": "DefiantToTheLast",
+        "text": {
+            "name": "Defiant to the Last",
+            "currentLevelDescription": "Friendly <style=\"Rarity_Mythic\">Mythic</style> <style=\"Character\">characters</style> deal <style=\"Stat_Damage\">+{[extraDmgPct]}% Damage</style> if they have used an Active Ability this battle or are adjacent to <style=\"Faction_Custodes\">Boudicari</style>.",
+            "nextLevelDescription": "Affected characters now deal <style=\"Stat_Damage\">+{[extraDmgPct]}% Damage</style>."
+        },
+        "variables": {
+            "extraDmgPct": [10, 13, 16, 20]
+        },
+        "variablesAffectedByRarityBonus": ["extraDmgPct"]
     },
     {
         "id": "SquigLaunchas",
@@ -14748,6 +15046,70 @@
             ]
         },
         "variablesAffectedByRarityBonus": ["maxDmg"]
+    },
+    {
+        "id": "ProclivityForMurder",
+        "text": {
+            "name": "Proclivity for Murder",
+            "currentLevelDescription": "Deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style> to all adjacent enemies. Any resulting <style=\"Battle_Fatigue\">Battle Fatigue</style> is triggered twice. After using this ability, <style=\"Faction_TheLostAndTheDamned\">Daras</style> may move again, even if he already moved this turn.",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[nrOfHits]}x</style> <style={[DamageProfileTypeStyle]}>{[minDmg]}-{[maxDmg]} {[DamageProfileType]}</style>."
+        },
+        "attackRangeType": "melee",
+        "variables": {
+            "minDmg": [
+                26, 31, 36, 42, 47, 53, 59, 65, 71, 77, 83, 89, 95, 101, 107, 113, 119, 125, 131, 137, 145, 156, 179,
+                203, 227, 250, 274, 298, 321, 345, 369, 392, 416, 440, 463, 487, 511, 534, 558, 591, 638, 687, 740, 799,
+                906, 1013, 1120, 1226, 1333, 1440, 1456, 1476, 1495, 1521, 1547, 1573, 1599, 1632, 1664, 1697, 1736,
+                1775, 1814, 1853, 1892
+            ],
+            "maxDmg": [
+                31, 37, 43, 50, 56, 63, 70, 77, 84, 91, 99, 106, 113, 120, 127, 134, 141, 148, 156, 163, 172, 186, 214,
+                242, 270, 299, 327, 355, 383, 411, 440, 468, 496, 524, 552, 581, 609, 637, 665, 705, 761, 819, 883, 953,
+                1080, 1207, 1335, 1462, 1590, 1718, 1736, 1759, 1783, 1814, 1845, 1876, 1907, 1945, 1984, 2023, 2069,
+                2116, 2162, 2209, 2255
+            ]
+        },
+        "constants": {
+            "nrOfHits": "3",
+            "damageProfile": "Toxic"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
+    },
+    {
+        "id": "TerrorchemPoison",
+        "text": {
+            "name": "Terrorchem Poison",
+            "currentLevelDescription": "<style=\"Faction_TheLostAndTheDamned\">Daras'</style> melee attacks apply <style=\"Debuff_Poisoned\">Poisoned</style> for {[nrOfRounds]} rounds. Affected enemies take <style=\"Stat_Hits\">{[poisonedNrOfHits]}x</style> <style=\"DMG_Toxic\">{[minDmg]}-{[maxDmg]} Toxic Damage</style> from the <style=\"Debuff_Poisoned\">Poisoned</style> effect at the start and end of their turns. Daras' melee attacks additionally apply <i>Terrorchem Poison</i> for {[nrOfRounds]} rounds. Affected enemies deal <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style> and <style=\"Stat_Health\">Health</style> restored to them is reduced by <style=\"STAT\">{[healPct]}%</style>.",
+            "nextLevelDescription": "Now deals <style=\"Stat_Hits\">{[poisonedNrOfHits]}x</style> <style=\"DMG_Toxic\">{[minDmg]}-{[maxDmg]} Toxic Damage</style>. Affected enemies now deal <style=\"Stat_Damage\">-{[dmgReductionPct]}% Damage</style> and <style=\"Stat_Health\">Health</style> restored to them is reduced by <style=\"STAT\">{[healPct]}%</style>."
+        },
+        "variables": {
+            "minDmg": [
+                14, 17, 20, 22, 25, 28, 32, 35, 38, 41, 45, 48, 51, 54, 57, 61, 64, 67, 70, 74, 78, 84, 97, 109, 122,
+                135, 148, 160, 173, 186, 199, 211, 224, 237, 249, 262, 275, 288, 300, 318, 344, 370, 399, 430, 488, 545,
+                603, 660, 718, 776, 784, 795, 805, 819, 833, 847, 861, 879, 896, 914, 935, 956, 977, 998, 1019
+            ],
+            "maxDmg": [
+                22, 26, 31, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 95, 100, 105, 110, 116, 122, 132, 152, 172,
+                192, 212, 232, 252, 272, 292, 312, 332, 352, 372, 392, 412, 432, 452, 472, 500, 540, 581, 626, 676, 766,
+                857, 947, 1038, 1128, 1219, 1232, 1249, 1265, 1287, 1309, 1331, 1353, 1381, 1408, 1436, 1469, 1502,
+                1535, 1568, 1601
+            ],
+            "dmgReductionPct": [
+                20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 20, 25, 25, 25, 25, 25, 25, 25, 25, 25,
+                25, 25, 25, 25, 25, 25, 25, 25, 25, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30,
+                30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30, 30
+            ],
+            "healPct": [
+                60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 60, 70, 70, 70, 70, 70, 70, 70, 70, 70,
+                70, 70, 70, 70, 70, 70, 70, 70, 70, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80,
+                80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80, 80
+            ]
+        },
+        "constants": {
+            "nrOfRounds": "2",
+            "poisonedNrOfHits": "1"
+        },
+        "variablesAffectedByRarityBonus": ["minDmg", "maxDmg"]
     },
     {
         "id": "DeathOnTheWind",

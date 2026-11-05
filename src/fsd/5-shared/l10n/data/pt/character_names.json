@@ -707,6 +707,12 @@
         "name": "Nubari Shal'Dar",
         "title": "Erradicador Sargento"
     },
+    "lostaFearmonger": {
+        "extraShortName": "Daras",
+        "shortName": "Daras",
+        "name": "Daras Carrow",
+        "title": "Garra da Nêmesis Medonho"
+    },
     "lostaBile": {
         "extraShortName": "Fabius Bile",
         "shortName": "Fabius Bile",

@@ -64,5 +64,11 @@
         "shortName": "Bióvoro",
         "name": "Bióvoro",
         "title": "Organismo de Artilharia"
+    },
+    "custoDreadnought": {
+        "extraShortName": "Boudicari",
+        "shortName": "Boudicari",
+        "name": "Boudicari Feldorus",
+        "title": "Contemptor-Achillus Dreadnought"
     }
 }

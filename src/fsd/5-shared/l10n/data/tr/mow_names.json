@@ -64,5 +64,11 @@
         "shortName": "Biyovor",
         "name": "Biyovor",
         "title": "Topçu Organizma"
+    },
+    "custoDreadnought": {
+        "extraShortName": "Boudicari",
+        "shortName": "Boudicari",
+        "name": "Boudicari Feldorus",
+        "title": "Contemptor-Achillus Dretnot"
     }
 }

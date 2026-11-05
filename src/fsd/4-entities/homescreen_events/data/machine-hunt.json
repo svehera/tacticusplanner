@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_machine_hunt_tier_high_bundle",
                     "offer_homescreen_event_machine_hunt_tier_high_playmore",
@@ -254,7 +260,7 @@
             "descriptions": [
                 "<i>Machine Hunt</i> is here",
                 "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
-                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in any game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
+                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in this game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
                 "Raiding a battle counts as having defeated all enemies."
             ]
         },
@@ -279,6 +285,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_machine_hunt_tier_mid_bundle",
                     "offer_homescreen_event_machine_hunt_tier_mid_playmore",
@@ -511,7 +523,7 @@
             "descriptions": [
                 "<i>Machine Hunt</i> is here",
                 "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
-                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in any game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
+                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in this game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
                 "Raiding a battle counts as having defeated all enemies."
             ]
         },
@@ -536,6 +548,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_machine_hunt_tier_low_bundle",
                     "offer_homescreen_event_machine_hunt_tier_low_playmore",
@@ -773,7 +791,7 @@
             "descriptions": [
                 "<i>Machine Hunt</i> is here",
                 "Defeat <style=\"Mechanical\">Mechanical</style> units, gain Gears and claim exclusive rewards!",
-                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in any game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
+                "Each time you defeat a <style=\"Mechanical\">Mechanical</style> unit (except <style=\"Summon\">Summons</style>) in this game mode, you gain <style=\"HSE_Points_MachineHunt\">{[POINTS]} Gears</style>, which directly contributes to the event's rewards progress bar.",
                 "Raiding a battle counts as having defeated all enemies."
             ]
         }

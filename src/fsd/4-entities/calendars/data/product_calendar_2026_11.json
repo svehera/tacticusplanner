@@ -1,0 +1,1148 @@
+{
+    "calendar": "calendar_seasonal_event_november_2026",
+    "days": [
+        {
+            "day": 1,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "The Arena Awaits",
+                    "banner": "Free gift!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["seasonalEventCurrencyNovember2026:10", "gems:50", "stamina:30", "raidTicket:5"]
+                },
+                {
+                    "variant": "L2_SHD",
+                    "title": "Walking the Eightfold Path",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 4999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:300", "summoningToken:20"]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "Walking the Eightfold Path",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:240", "summoningToken:16"]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "Walking the Eightfold Path",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:180", "summoningToken:12"]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "Walking the Eightfold Path",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyNovember2026:90", "summoningToken:6"]
+                }
+            ]
+        },
+        {
+            "day": 2,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Bite of the Nails",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:150", "xpMythic:5", "xpLegendary:20", "gold:20000"]
+                },
+                {
+                    "variant": "M_SHD",
+                    "title": "Bloody Orbs",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 9999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:1000",
+                        "ascensionOrbsMythic:15",
+                        "ascensionOrbsLegendary:25"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Bite of the Nails",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:100", "xpMythic:3", "xpLegendary:15", "gold:13500"]
+                },
+                {
+                    "variant": "M_HD",
+                    "title": "Bloody Orbs",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 7999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:800",
+                        "ascensionOrbsMythic:12",
+                        "ascensionOrbsLegendary:20"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Bite of the Nails",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:75",
+                        "xpLegendary:18",
+                        "xpEpic:18",
+                        "xpRare:20",
+                        "gold:12000"
+                    ]
+                },
+                {
+                    "variant": "M_MD",
+                    "title": "Bloody Orbs",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 5999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:600",
+                        "ascensionOrbsMythic:9",
+                        "ascensionOrbsLegendary:15"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Bite of the Nails",
+                    "banner": "XP Tomes!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:25",
+                        "xpLegendary:5",
+                        "xpEpic:10",
+                        "xpRare:10",
+                        "gold:4500"
+                    ]
+                },
+                {
+                    "variant": "M_LD",
+                    "title": "Bloody Orbs",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:200",
+                        "ascensionOrbsMythic:3",
+                        "ascensionOrbsLegendary:5"
+                    ]
+                },
+                {
+                    "variant": "XL3_CUREL",
+                    "title": "Bloody Orbs",
+                    "banner": "Orbs Aplenty!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:300",
+                        "ascensionOrbsLegendary:10",
+                        "ascensionOrbsEpic:10",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsUncommon:15"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 3,
+            "offers": [
+                {
+                    "variant": "S4_SHD",
+                    "title": "The Red Tide Rises",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:80",
+                        "stamina:480",
+                        "raidTicket:80",
+                        "stamina_waves:4"
+                    ]
+                },
+                {
+                    "variant": "M3_M_SHD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:350",
+                        "mythicDust:210",
+                        "itemsMythic:1",
+                        "itemsMythic:1",
+                        "gold:210000"
+                    ]
+                },
+                {
+                    "variant": "M3_L_SHD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:350",
+                        "dust:2800",
+                        "itemsLegendary:3",
+                        "itemsLegendary:2",
+                        "itemsEpic:3",
+                        "itemsEpic:2",
+                        "gold:28000"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_SHD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:350",
+                        "dust:4000",
+                        "itemsEpic:4",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:4",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:4",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "gold:40000"
+                    ]
+                },
+                {
+                    "variant": "S4_HD",
+                    "title": "The Red Tide Rises",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:60",
+                        "stamina:360",
+                        "raidTicket:60",
+                        "stamina_waves:3"
+                    ]
+                },
+                {
+                    "variant": "M3_M_HD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "mythicDust:140",
+                        "itemsMythic:1",
+                        "gold:140000"
+                    ]
+                },
+                {
+                    "variant": "M3_L_HD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "dust:1680",
+                        "itemsLegendary:2",
+                        "itemsLegendary:1",
+                        "itemsEpic:2",
+                        "itemsEpic:1",
+                        "gold:16800"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_HD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 2399,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "dust:2400",
+                        "itemsEpic:3",
+                        "itemsEpic:3",
+                        "itemsRare:3",
+                        "itemsRare:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "gold:24000"
+                    ]
+                },
+                {
+                    "variant": "S4_MD",
+                    "title": "The Red Tide Rises",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:40",
+                        "stamina:240",
+                        "raidTicket:40",
+                        "stamina_waves:2"
+                    ]
+                },
+                {
+                    "variant": "M3_M_MD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": ["seasonalEventCurrencyNovember2026:140", "mythicDust:65", "itemsMythic:1", "gold:70000"]
+                },
+                {
+                    "variant": "M3_L_MD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "dust:1120",
+                        "itemsLegendary:1",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "itemsEpic:1",
+                        "gold:11200"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_MD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 1599,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "dust:1600",
+                        "itemsEpic:2",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "itemsUncommon:2",
+                        "gold:16000"
+                    ]
+                },
+                {
+                    "variant": "S4_LD",
+                    "title": "The Red Tide Rises",
+                    "banner": "Energy Boost!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:20",
+                        "stamina:120",
+                        "raidTicket:20",
+                        "stamina_waves:1"
+                    ]
+                },
+                {
+                    "variant": "M3_M_LD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": ["seasonalEventCurrencyNovember2026:70", "mythicDust:70", "gold:75000"]
+                },
+                {
+                    "variant": "M3_L_LD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "dust:560",
+                        "itemsLegendary:1",
+                        "itemsEpic:1",
+                        "gold:5600"
+                    ]
+                },
+                {
+                    "variant": "M3_RE_LD",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "dust:800",
+                        "itemsEpic:2",
+                        "itemsRare:2",
+                        "itemsUncommon:2",
+                        "gold:8000"
+                    ]
+                },
+                {
+                    "variant": "M3_CU",
+                    "title": "Forged in Blood",
+                    "banner": "Salvaged Goods!",
+                    "free": false,
+                    "priceCents": 799,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "dust:800",
+                        "itemsRare:2",
+                        "itemsRare:2",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsUncommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3",
+                        "itemsCommon:3",
+                        "gold:8000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 4,
+            "offers": [
+                {
+                    "variant": "free",
+                    "title": "Glory of the Butcher",
+                    "banner": "Unique Frame!",
+                    "free": true,
+                    "priceCents": 0,
+                    "rewards": ["avatarFrame_frameNovember2026:1", "stamina:60", "raidTicket:10"]
+                },
+                {
+                    "variant": "avatar",
+                    "title": "Lord of the Red Sands",
+                    "banner": "Unique Avatar!",
+                    "free": false,
+                    "priceCents": 2499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "avatar_november_2026_01:1",
+                        "specialSummoningToken:10",
+                        "xpLegendary:10",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 5,
+            "offers": [
+                {
+                    "variant": "L2_SHD",
+                    "title": "No Mercy, No Retreat",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:400",
+                        "specialSummoningToken:20",
+                        "stamina:600",
+                        "raidTicket:60"
+                    ]
+                },
+                {
+                    "variant": "L1_M_SHD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:280",
+                        "ascensionOrbsMythic:4",
+                        "abilityTokensMythic:4",
+                        "gold:500000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_SHD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:280",
+                        "ascensionOrbsLegendary:8",
+                        "abilityTokensLegendary:20",
+                        "gold:200000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_SHD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:280",
+                        "ascensionOrbsLegendary:4",
+                        "ascensionOrbsEpic:12",
+                        "abilityTokensEpic:16",
+                        "abilityTokensEpic:16",
+                        "gold:120000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_SHD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:280",
+                        "ascensionOrbsEpic:8",
+                        "ascensionOrbsRare:20",
+                        "ascensionOrbsRare:20",
+                        "abilityTokensRare:32",
+                        "abilityTokensUncommon:40",
+                        "gold:68000"
+                    ]
+                },
+                {
+                    "variant": "L2_HD",
+                    "title": "No Mercy, No Retreat",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:200",
+                        "specialSummoningToken:10",
+                        "stamina:300",
+                        "raidTicket:50"
+                    ]
+                },
+                {
+                    "variant": "L1_M_HD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "ascensionOrbsMythic:3",
+                        "abilityTokensMythic:3",
+                        "gold:375000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_HD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "ascensionOrbsLegendary:6",
+                        "abilityTokensLegendary:15",
+                        "gold:150000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_HD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "ascensionOrbsLegendary:3",
+                        "ascensionOrbsEpic:9",
+                        "abilityTokensEpic:24",
+                        "gold:90000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_HD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "ascensionOrbsEpic:6",
+                        "ascensionOrbsRare:15",
+                        "ascensionOrbsRare:15",
+                        "abilityTokensRare:24",
+                        "abilityTokensUncommon:30",
+                        "gold:51000"
+                    ]
+                },
+                {
+                    "variant": "L2_MD",
+                    "title": "No Mercy, No Retreat",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:80",
+                        "specialSummoningToken:4",
+                        "stamina:120",
+                        "raidTicket:20"
+                    ]
+                },
+                {
+                    "variant": "L1_M_MD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "ascensionOrbsMythic:2",
+                        "abilityTokensMythic:2",
+                        "gold:250000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_MD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "ascensionOrbsLegendary:4",
+                        "abilityTokensLegendary:10",
+                        "gold:100000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_MD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "ascensionOrbsLegendary:2",
+                        "ascensionOrbsEpic:6",
+                        "abilityTokensEpic:16",
+                        "gold:60000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_MD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "ascensionOrbsEpic:4",
+                        "ascensionOrbsRare:20",
+                        "abilityTokensRare:16",
+                        "abilityTokensUncommon:20",
+                        "gold:34000"
+                    ]
+                },
+                {
+                    "variant": "L2_LD",
+                    "title": "No Mercy, No Retreat",
+                    "banner": "Blessed Requisitions!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:40",
+                        "specialSummoningToken:2",
+                        "stamina:60",
+                        "raidTicket:10"
+                    ]
+                },
+                {
+                    "variant": "L1_M_LD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "ascensionOrbsMythic:1",
+                        "abilityTokensMythic:1",
+                        "gold:125000"
+                    ]
+                },
+                {
+                    "variant": "L1_L_LD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "ascensionOrbsLegendary:2",
+                        "abilityTokensLegendary:5",
+                        "gold:50000"
+                    ]
+                },
+                {
+                    "variant": "L1_E_LD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "ascensionOrbsLegendary:1",
+                        "ascensionOrbsEpic:3",
+                        "abilityTokensEpic:8",
+                        "gold:30000"
+                    ]
+                },
+                {
+                    "variant": "L1_CUR_LD",
+                    "title": "Skulls and Blood",
+                    "banner": "Badges and Orbs!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "ascensionOrbsEpic:2",
+                        "ascensionOrbsRare:10",
+                        "abilityTokensRare:8",
+                        "abilityTokensUncommon:10",
+                        "gold:17000"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 6,
+            "offers": [
+                {
+                    "variant": "L2_AL50_SHD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:315",
+                        "gold:600000",
+                        "abilityTokenMythic_Chaos:6",
+                        "abilityTokenLegendary_Chaos:6"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_SHD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:315",
+                        "gold:600000",
+                        "abilityTokenLegendary_Chaos:5",
+                        "abilityTokenLegendary_Chaos:5",
+                        "abilityTokenLegendary_Chaos:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_SHD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 4499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:315",
+                        "gold:468000",
+                        "abilityTokenEpic_Chaos:15",
+                        "abilityTokenEpic_Chaos:15",
+                        "abilityTokenRare_Chaos:20",
+                        "abilityTokenRare_Chaos:20"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_SHD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:700",
+                        "machinesOfWarToken_Chaos:200",
+                        "machinesOfWarToken_Chaos:200",
+                        "machinesOfWarToken_Xenos:200",
+                        "machinesOfWarAmmo:50"
+                    ]
+                },
+                {
+                    "variant": "M1_SHD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 6999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:700", "summoningToken:30"]
+                },
+                {
+                    "variant": "L2_AL50_HD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "gold:400000",
+                        "abilityTokenMythic_Chaos:4",
+                        "abilityTokenLegendary_Chaos:4"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_HD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "gold:400000",
+                        "abilityTokenLegendary_Chaos:5",
+                        "abilityTokenLegendary_Chaos:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_HD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "gold:312000",
+                        "abilityTokenEpic_Chaos:20",
+                        "abilityTokenRare_Chaos:26"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_HD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:350",
+                        "machinesOfWarToken_Chaos:100",
+                        "machinesOfWarToken_Chaos:100",
+                        "machinesOfWarToken_Xenos:100",
+                        "machinesOfWarAmmo:25"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 3499,
+                    "rewards": ["seasonalEventCurrencyNovember2026:350", "summoningToken:15"]
+                },
+                {
+                    "variant": "L2_AL50_MD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "gold:400000",
+                        "abilityTokenMythic_Chaos:4",
+                        "abilityTokenLegendary_Chaos:4"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_MD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "gold:400000",
+                        "abilityTokenLegendary_Chaos:5",
+                        "abilityTokenLegendary_Chaos:5"
+                    ]
+                },
+                {
+                    "variant": "L2_AL26_MD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:210",
+                        "gold:312000",
+                        "abilityTokenEpic_Chaos:20",
+                        "abilityTokenRare_Chaos:26"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_MD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:140",
+                        "machinesOfWarToken_Chaos:40",
+                        "machinesOfWarToken_Chaos:40",
+                        "machinesOfWarToken_Xenos:40",
+                        "machinesOfWarAmmo:10"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 1399,
+                    "rewards": ["seasonalEventCurrencyNovember2026:140", "summoningToken:6"]
+                },
+                {
+                    "variant": "L2_AL50_LD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:105",
+                        "gold:200000",
+                        "abilityTokenMythic_Chaos:2",
+                        "abilityTokenLegendary_Chaos:2"
+                    ]
+                },
+                {
+                    "variant": "L2_AL35_LD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": ["seasonalEventCurrencyNovember2026:105", "gold:200000", "abilityTokenLegendary_Chaos:5"]
+                },
+                {
+                    "variant": "L2_AL26_LD",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:105",
+                        "gold:156000",
+                        "abilityTokenEpic_Chaos:10",
+                        "abilityTokenRare_Chaos:13"
+                    ]
+                },
+                {
+                    "variant": "M1_MOW_LD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Machine Resources!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:70",
+                        "machinesOfWarToken_Chaos:20",
+                        "machinesOfWarToken_Chaos:20",
+                        "machinesOfWarToken_Xenos:20",
+                        "machinesOfWarAmmo:5"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Black Iron and Brass",
+                    "banner": "Requisition Orders!",
+                    "free": false,
+                    "priceCents": 699,
+                    "rewards": ["seasonalEventCurrencyNovember2026:70", "summoningToken:3"]
+                },
+                {
+                    "variant": "L2_fallback",
+                    "title": "Instruments of Slaughter",
+                    "banner": "Ability Badges!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:105",
+                        "gold:72000",
+                        "abilityTokenRare_Chaos:24",
+                        "abilityTokenUncommon_Chaos:24",
+                        "abilityTokenUncommon_Chaos:24",
+                        "abilityTokenCommon_Chaos:24",
+                        "abilityTokenCommon_Chaos:24"
+                    ]
+                }
+            ]
+        },
+        {
+            "day": 7,
+            "offers": [
+                {
+                    "variant": "M1_SHD",
+                    "title": "Feed the Frenzy",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 3999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:160", "ShardsChaos:160", "ShardsChaos:160"]
+                },
+                {
+                    "variant": "S4_M_SHD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:80",
+                        "upgradesMythic:4",
+                        "upgradesMythic:4",
+                        "upgradesLegendary:6",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_SHD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:80",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesRare:12",
+                        "upgradesUncommon:36",
+                        "upgradesCommon:36"
+                    ]
+                },
+                {
+                    "variant": "M1_HD",
+                    "title": "Feed the Frenzy",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 2999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:120", "ShardsChaos:120", "ShardsChaos:120"]
+                },
+                {
+                    "variant": "S4_M_HD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:60",
+                        "upgradesMythic:3",
+                        "upgradesMythic:3",
+                        "upgradesLegendary:9",
+                        "upgradesEpic:10",
+                        "upgradesEpic:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_HD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 1499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:60",
+                        "upgradesLegendary:10",
+                        "upgradesLegendary:5",
+                        "upgradesEpic:10",
+                        "upgradesEpic:5",
+                        "upgradesRare:9",
+                        "upgradesRare:9",
+                        "upgradesRare:9",
+                        "upgradesUncommon:27",
+                        "upgradesCommon:27"
+                    ]
+                },
+                {
+                    "variant": "M1_MD",
+                    "title": "Feed the Frenzy",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 1999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:80", "ShardsChaos:80", "ShardsChaos:80"]
+                },
+                {
+                    "variant": "S4_M_MD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:40",
+                        "upgradesMythic:4",
+                        "upgradesLegendary:6",
+                        "upgradesEpic:10"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_MD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:40",
+                        "upgradesLegendary:10",
+                        "upgradesEpic:10",
+                        "upgradesRare:18",
+                        "upgradesUncommon:18",
+                        "upgradesCommon:18"
+                    ]
+                },
+                {
+                    "variant": "M1_LD",
+                    "title": "Feed the Frenzy",
+                    "banner": "Character Shards!",
+                    "free": false,
+                    "priceCents": 999,
+                    "rewards": ["seasonalEventCurrencyNovember2026:40", "ShardsChaos:40", "ShardsChaos:40"]
+                },
+                {
+                    "variant": "S4_M_LD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:20",
+                        "upgradesMythic:2",
+                        "upgradesLegendary:3",
+                        "upgradesEpic:5"
+                    ]
+                },
+                {
+                    "variant": "S4_CUREL_LD",
+                    "title": "Kill. Maim. Burn.",
+                    "banner": "Upgrades!",
+                    "free": false,
+                    "priceCents": 499,
+                    "rewards": [
+                        "seasonalEventCurrencyNovember2026:20",
+                        "upgradesLegendary:5",
+                        "upgradesEpic:5",
+                        "upgradesRare:9",
+                        "upgradesUncommon:9",
+                        "upgradesCommon:9"
+                    ]
+                }
+            ]
+        }
+    ]
+}
