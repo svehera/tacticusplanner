@@ -255,7 +255,7 @@ export class LeRoundOutcomeForecastService {
                 paidMissions: occurrence?.premiumMissionsProgress ?? 0,
                 bundleCurrency: occurrence?.bundleCurrency ?? 0,
                 buyOhSoCloseShards: false,
-                dailyMultiplier: 1 as DailyMultiplier,
+                dailyMultiplier: 0 as DailyMultiplier,
                 avgObjectivesPerDay: undefined,
             };
             const saved = model.forecastConfigs?.[round];
@@ -321,7 +321,7 @@ export class LeRoundOutcomeForecastService {
                 paidMissions: 0,
                 bundleCurrency: 0,
                 buyOhSoCloseShards: false,
-                dailyMultiplier: 1 as DailyMultiplier,
+                dailyMultiplier: 0 as DailyMultiplier,
             };
 
             if (status === 'finished') {

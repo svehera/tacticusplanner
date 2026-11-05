@@ -39,7 +39,7 @@ export interface ILreForecastRoundDto {
     paidMissions: number;
     bundleCurrency: number;
     buyOhSoCloseShards: boolean;
-    dailyMultiplier: 1 | 2 | 4;
+    dailyMultiplier: 0 | 1 | 2 | 4;
     avgObjectivesPerDay?: number;
 }
 
