@@ -271,6 +271,29 @@ describe('LeRoundOutcomeForecastService daily delivery and bundles', () => {
     });
 });
 
+describe('LeRoundOutcomeForecastService daily delivery defaults', () => {
+    it('defaults to 0 currency per objective, so no daily delivery is forecast until the user opts in', () => {
+        const now = new Date('2026-04-01T00:00:00.000Z').getTime();
+        const event = createLegendaryEvent();
+        const model = createModel();
+        const roundConfigs = LeRoundOutcomeForecastService.createInitialLeForecastRoundConfig(model, event, now);
+
+        expect(roundConfigs.map(config => config.dailyMultiplier)).toEqual([0, 0, 0]);
+
+        const round3 = LeRoundOutcomeForecastService.computeLeRoundForecasts({
+            legendaryEvent: event,
+            model,
+            currentProgress: createProgress(),
+            tokenIncrements: [250],
+            tokenObjectives: [10],
+            initialObjectivesCleared: 100,
+            roundConfigs,
+            nowMillis: now,
+        })[2];
+        expect(round3.dailyDeliveryCurrency).toBe(0);
+    });
+});
+
 describe('LeRoundOutcomeForecastService saved forecast inputs', () => {
     const now = new Date('2026-04-01T00:00:00.000Z').getTime();
 

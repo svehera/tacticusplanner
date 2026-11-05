@@ -3,7 +3,7 @@
     "unitSnowprintId": "astarLysander",
     "name": "Lysander",
     "theme": "AdeptusAstartes",
-    "eventStage": 1,
+    "eventStage": 2,
     "heroEventMaxRuns": 3,
     "unlockableHero": {
         "heroId": "astarLysander",
