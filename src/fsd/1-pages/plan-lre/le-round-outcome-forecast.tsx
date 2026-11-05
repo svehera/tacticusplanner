@@ -35,7 +35,7 @@ interface Props {
     onConfigChange: (config: ILreForecastRoundConfig) => void;
 }
 
-const DAILY_MULTIPLIERS: readonly DailyMultiplier[] = [1, 2, 4];
+const DAILY_MULTIPLIERS: readonly DailyMultiplier[] = [0, 1, 2, 4];
 const MAX_OBJECTIVES = 324;
 
 const getRoundLabel = (round: 1 | 2 | 3) => {
@@ -268,7 +268,9 @@ export const LeRoundOutcomeForecast = ({
                                                 className="h-10 w-full rounded-lg border border-(--input) bg-(--neutral) px-3 text-sm text-(--fg) shadow-sm focus:ring-2 focus:ring-(--ring) focus:outline-none">
                                                 {DAILY_MULTIPLIERS.map(multiplier => (
                                                     <option key={multiplier} value={multiplier}>
-                                                        {multiplier} per objective
+                                                        {multiplier === 0
+                                                            ? 'None (0 per objective)'
+                                                            : `${multiplier} per objective`}
                                                     </option>
                                                 ))}
                                             </select>
