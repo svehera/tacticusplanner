@@ -28,6 +28,8 @@ export interface SeasonalEventRawWeek {
     milestoneRewards?: ShopEventMilestoneReward[];
     progressChests?: ShopEventProgressChest[];
     missions?: IEventMissions;
+    earnings?: { tooltip?: string };
+    bonusShipment?: { tooltip?: string };
 }
 
 export interface SeasonalEventRaw {
@@ -50,6 +52,8 @@ export function adaptSeasonalEventJson(meta: ShopEventMeta, raw: SeasonalEventRa
             milestoneRewards: week.milestoneRewards,
             progressChests: week.progressChests,
             missions: week.missions,
+            earningsTooltip: week.earnings?.tooltip,
+            bonusShipmentTooltip: week.bonusShipment?.tooltip,
         })),
     };
 }

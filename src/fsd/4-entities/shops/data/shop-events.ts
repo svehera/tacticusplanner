@@ -15,8 +15,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyJune2026',
         startUtc: Date.UTC(2026, 5, 22),
         earningsInfographic: [
-            { label: 'F2P per week', amount: 'ca. 1,000' },
-            { label: 'Bonus shipment', amount: 'ca. +900 per week' },
+            { kind: 'f2p', label: 'F2P per week', amount: 'ca. 1,000' },
+            { kind: 'bonusShipment', label: 'Bonus shipment', amount: 'ca. +900 per week' },
         ],
     },
     August2026: {
@@ -25,8 +25,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyAugust2026',
         startUtc: Date.UTC(2026, 7, 5),
         earningsInfographic: [
-            { label: 'F2P per week', amount: 'ca. 750' },
-            { label: 'Bonus shipment', amount: 'ca. +1,000 per week' },
+            { kind: 'f2p', label: 'F2P per week', amount: 'ca. 750' },
+            { kind: 'bonusShipment', label: 'Bonus shipment', amount: 'ca. +1,000 per week' },
         ],
     },
     October2026: {
@@ -41,8 +41,8 @@ export const EVENT_META: Record<string, ShopEventMeta> = {
         currencyType: 'seasonalEventCurrencyNovember2026',
         startUtc: Date.UTC(2026, 10, 23),
         earningsInfographic: [
-            { label: 'F2P per week', amount: 'ca. 650' },
-            { label: 'Bonus shipment', amount: 'ca. +1,100' },
+            { kind: 'f2p', label: 'F2P per week', amount: 'ca. 850' },
+            { kind: 'bonusShipment', label: 'Bonus shipment', amount: 'ca. +1,100' },
         ],
     },
 };

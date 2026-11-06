@@ -2473,6 +2473,91 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "f2pTotal": 990,
+                "f2pShopOnly": 850,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 800,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "hse_11th_edition_week1",
+                        "label": "The Outer Walls",
+                        "amount": 70,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "amount": 35,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "amount": 35,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>800</b>\nFree daily offers: <b>50</b>\nThe Outer Walls: <b>70</b>\nglobal_hse_11th_edition_blood_angels: <b>35</b>\nglobal_hse_11th_edition_orks: <b>35</b>\n<b>Total: 990</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 13,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "hse_11th_edition_week1",
+                        "label": "The Outer Walls",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "payouts": 0,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1090,
+                "totalWithHomeScreenEvents": 1110,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 13 × 10 = <b>130</b>\n  The Outer Walls: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  global_hse_11th_edition_blood_angels: 0 × 10 = <b>0</b> <i>(may not count)</i>\n  global_hse_11th_edition_orks: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,090</b> <i>(1,110 if home screen events count)</i>"
             }
         },
         {
@@ -6583,6 +6668,103 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "f2pTotal": 1040,
+                "f2pShopOnly": 850,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 800,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "amount": 40,
+                        "kind": "quest"
+                    },
+                    {
+                        "id": "hse_11th_edition_week2",
+                        "label": "The Inner Hab District",
+                        "amount": 70,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "amount": 40,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "amount": 40,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>800</b>\nFree daily offers: <b>50</b>\nSync PvP: <b>40</b>\nThe Inner Hab District: <b>70</b>\nglobal_hse_11th_edition_blood_angels: <b>40</b>\nglobal_hse_11th_edition_orks: <b>40</b>\n<b>Total: 1,040</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 13,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "payouts": 0,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "hse_11th_edition_week2",
+                        "label": "The Inner Hab District",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "payouts": 0,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1090,
+                "totalWithHomeScreenEvents": 1110,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 13 × 10 = <b>130</b>\n  Sync PvP: 0 × 10 = <b>0</b>\n  The Inner Hab District: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  global_hse_11th_edition_blood_angels: 0 × 10 = <b>0</b> <i>(may not count)</i>\n  global_hse_11th_edition_orks: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,090</b> <i>(1,110 if home screen events count)</i>"
             }
         },
         {
@@ -10732,6 +10914,91 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "f2pTotal": 1020,
+                "f2pShopOnly": 850,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 800,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "hse_11th_edition_week3",
+                        "label": "The Inner Spire",
+                        "amount": 70,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>800</b>\nFree daily offers: <b>50</b>\nThe Inner Spire: <b>70</b>\nglobal_hse_11th_edition_blood_angels: <b>50</b>\nglobal_hse_11th_edition_orks: <b>50</b>\n<b>Total: 1,020</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyJune2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 13,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "hse_11th_edition_week3",
+                        "label": "The Inner Spire",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_blood_angels",
+                        "label": "global_hse_11th_edition_blood_angels",
+                        "payouts": 0,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "global_hse_11th_edition_orks",
+                        "label": "global_hse_11th_edition_orks",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1090,
+                "totalWithHomeScreenEvents": 1110,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 13 × 10 = <b>130</b>\n  The Inner Spire: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  global_hse_11th_edition_blood_angels: 0 × 10 = <b>0</b> <i>(may not count)</i>\n  global_hse_11th_edition_orks: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,090</b> <i>(1,110 if home screen events count)</i>"
             }
         }
     ],

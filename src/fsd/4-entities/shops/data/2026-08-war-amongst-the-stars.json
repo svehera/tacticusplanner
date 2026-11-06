@@ -5464,6 +5464,79 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyAugust2026",
+                "f2pTotal": 800,
+                "f2pShopOnly": 680,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 630,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "amount": 40,
+                        "kind": "quest"
+                    },
+                    {
+                        "id": "training_rush",
+                        "label": "training_rush",
+                        "amount": 80,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>630</b>\nFree daily offers: <b>50</b>\nSync PvP: <b>40</b>\ntraining_rush: <b>80</b>\n<b>Total: 800</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyAugust2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "payouts": 0,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "training_rush",
+                        "label": "training_rush",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1060,
+                "totalWithHomeScreenEvents": 1060,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 10 × 10 = <b>100</b>\n  Sync PvP: 0 × 10 = <b>0</b>\n  training_rush: 0 × 10 = <b>0</b> <i>(may not count)</i>\n<b>Total: 1,060</b> <i>(1,060 if home screen events count)</i>"
             }
         },
         {
@@ -11123,6 +11196,79 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyAugust2026",
+                "f2pTotal": 810,
+                "f2pShopOnly": 680,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 630,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "arsenal_of_war",
+                        "label": "Arsenal of War",
+                        "amount": 80,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "conflict_operations",
+                        "label": "Conflict Operations",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>630</b>\nFree daily offers: <b>50</b>\nArsenal of War: <b>80</b>\nConflict Operations: <b>50</b>\n<b>Total: 810</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyAugust2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 10,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "arsenal_of_war",
+                        "label": "Arsenal of War",
+                        "payouts": 2,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "conflict_operations",
+                        "label": "Conflict Operations",
+                        "payouts": 1,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1060,
+                "totalWithHomeScreenEvents": 1090,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+10</b> on each payout\n  Event milestones: 16 × 10 = <b>160</b>\n  Premium missions: 10 × 10 = <b>100</b>\n  Free daily offers: 10 × 10 = <b>100</b>\n  Arsenal of War: 2 × 10 = <b>20</b> <i>(may not count)</i>\n  Conflict Operations: 1 × 10 = <b>10</b> <i>(may not count)</i>\n<b>Total: 1,060</b> <i>(1,090 if home screen events count)</i>"
             }
         }
     ],

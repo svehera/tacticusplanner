@@ -4260,6 +4260,91 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyOctober2026",
+                "f2pTotal": 850,
+                "f2pShopOnly": 500,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 450,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "amount": 40,
+                        "kind": "quest"
+                    },
+                    {
+                        "id": "global_hse_operation_imperator",
+                        "label": "Operation Imperator",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "faction_focus",
+                        "label": "Faction Focus",
+                        "amount": 260,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>450</b>\nFree daily offers: <b>50</b>\nSync PvP: <b>40</b>\nOperation Imperator: <b>50</b>\nFaction Focus: <b>260</b>\n<b>Total: 850</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyOctober2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 8,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "syncPvp",
+                        "label": "Sync PvP",
+                        "payouts": 0,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "global_hse_operation_imperator",
+                        "label": "Operation Imperator",
+                        "payouts": 1,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "faction_focus",
+                        "label": "Faction Focus",
+                        "payouts": 0,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 988,
+                "totalWithHomeScreenEvents": 996,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+8</b> on each payout\n  Event milestones: 16 × 8 = <b>128</b>\n  Premium missions: 10 × 8 = <b>80</b>\n  Free daily offers: 10 × 8 = <b>80</b>\n  Sync PvP: 0 × 8 = <b>0</b>\n  Operation Imperator: 1 × 8 = <b>8</b> <i>(may not count)</i>\n  Faction Focus: 0 × 8 = <b>0</b> <i>(may not count)</i>\n<b>Total: 988</b> <i>(996 if home screen events count)</i>"
             }
         }
     ],

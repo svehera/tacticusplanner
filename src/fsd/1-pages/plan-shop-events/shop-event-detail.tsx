@@ -31,6 +31,7 @@ import {
     ShopProduct,
     shopEvents,
 } from '@/fsd/4-entities/shops';
+import type { ShopEventData } from '@/fsd/4-entities/shops';
 import { IUnit, UnitsAutocomplete } from '@/fsd/4-entities/unit';
 
 import { GoalsService } from '@/fsd/3-features/goals/goals.service';
@@ -40,6 +41,7 @@ import { rewardInfo } from '@/fsd/3-features/shop-rewards';
 import { resolveDraftAllianceType } from './draft-alliance';
 import { PurchasedQtyModal } from './purchased-qty-modal';
 import { ShopCard } from './shop-card';
+import { getEarningsTooltips, type EarningsKind } from './shop-event-earnings-tooltip';
 import { DAYS, DAY_LABELS } from './shop-events.constants';
 import type { Day } from './shop-events.constants';
 import { buildEventDateIndex, getEventDate, getEventDayOrder } from './shop-events.dates';
@@ -65,6 +67,42 @@ function resolveCartEntryType(entry: CartEntry): string {
     if (!entry.draftAlliance) return type;
     return resolveDraftAllianceType(type, entry.draftAlliance) ?? type;
 }
+
+const EarningsInfo = ({ event, kind }: { event: ShopEventData; kind: EarningsKind }) => {
+    const tooltips = getEarningsTooltips(event, kind);
+    if (tooltips.length === 0) return;
+
+    return (
+        <AccessibleTooltip
+            title={
+                <div className="flex flex-col gap-2 text-xs">
+                    {tooltips.map(({ week, lines }) => (
+                        <div key={week ?? 'all'}>
+                            {week !== undefined && <div className="mb-0.5 font-bold">Week {week}</div>}
+                            {lines.map((line, lineIndex) => (
+                                <div key={lineIndex} style={{ paddingLeft: `${line.indent * 0.4}em` }}>
+                                    {line.segments.map((segment, segmentIndex) => (
+                                        <span
+                                            key={segmentIndex}
+                                            className={`${segment.bold ? 'font-bold' : ''} ${segment.italic ? 'italic' : ''}`}>
+                                            {segment.text}
+                                        </span>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    ))}
+                </div>
+            }>
+            <button
+                type="button"
+                aria-label="How this estimate is calculated"
+                className="flex cursor-help text-(--soft-fg) transition-colors hover:text-(--primary)">
+                <Info className="size-3.5" />
+            </button>
+        </AccessibleTooltip>
+    );
+};
 
 export const ShopEventDetail = () => {
     const { eventId } = useParams<{ eventId: string }>();
@@ -996,6 +1034,7 @@ export const ShopEventDetail = () => {
                                     <MiscIcon icon={currencyIconKey} width={16} height={16} />
                                     <span className="text-(--soft-fg)">{line.label}:</span>
                                     <span className="font-semibold text-amber-400">{line.amount}</span>
+                                    {line.kind && <EarningsInfo event={event} kind={line.kind} />}
                                 </div>
                             </Fragment>
                         ))}

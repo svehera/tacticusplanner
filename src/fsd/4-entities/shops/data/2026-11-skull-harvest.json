@@ -3837,6 +3837,91 @@
                         ]
                     }
                 ]
+            },
+            "earnings": {
+                "currency": "seasonalEventCurrencyNovember2026",
+                "f2pTotal": 850,
+                "f2pShopOnly": 500,
+                "sources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "amount": 450,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "amount": 50,
+                        "kind": "shop"
+                    },
+                    {
+                        "id": "linearHeroEvent",
+                        "label": "Grubak's Hero Quest",
+                        "amount": 40,
+                        "kind": "heroQuest"
+                    },
+                    {
+                        "id": "global_hse_blood_tithe",
+                        "label": "Blood Tithe",
+                        "amount": 50,
+                        "kind": "homeScreenEvent"
+                    },
+                    {
+                        "id": "faction_boost_world_eaters",
+                        "label": "Faction Boost: World Eaters",
+                        "amount": 260,
+                        "kind": "homeScreenEvent"
+                    }
+                ],
+                "tooltip": "<b>Free-to-play currency per week</b>\nEvent milestones: <b>450</b>\nFree daily offers: <b>50</b>\nGrubak's Hero Quest: <b>40</b>\nBlood Tithe: <b>50</b>\nFaction Boost: World Eaters: <b>260</b>\n<b>Total: 850</b>\n<i>Maximum; home screen events only pay while they run.</i>"
+            },
+            "bonusShipment": {
+                "currency": "seasonalEventCurrencyNovember2026",
+                "instantAmount": 200,
+                "premiumMissionsAmount": 500,
+                "bonusPerPayout": 8,
+                "payoutSources": [
+                    {
+                        "id": "milestones",
+                        "label": "Event milestones",
+                        "payouts": 16,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "premiumMissions",
+                        "label": "Premium missions",
+                        "payouts": 10,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "freeOffers",
+                        "label": "Free daily offers",
+                        "payouts": 9,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "linearHeroEvent",
+                        "label": "Grubak's Hero Quest",
+                        "payouts": 4,
+                        "listedInGame": true
+                    },
+                    {
+                        "id": "global_hse_blood_tithe",
+                        "label": "Blood Tithe",
+                        "payouts": 1,
+                        "listedInGame": false
+                    },
+                    {
+                        "id": "faction_boost_world_eaters",
+                        "label": "Faction Boost: World Eaters",
+                        "payouts": 13,
+                        "listedInGame": false
+                    }
+                ],
+                "total": 1012,
+                "totalWithHomeScreenEvents": 1124,
+                "tooltip": "<b>Bonus Shipment</b>\nPaid up front: <b>200</b>\nPremium missions: <b>500</b>\nBonus: <b>+8</b> on each payout\n  Event milestones: 16 × 8 = <b>128</b>\n  Premium missions: 10 × 8 = <b>80</b>\n  Free daily offers: 9 × 8 = <b>72</b>\n  Grubak's Hero Quest: 4 × 8 = <b>32</b>\n  Blood Tithe: 1 × 8 = <b>8</b> <i>(may not count)</i>\n  Faction Boost: World Eaters: 13 × 8 = <b>104</b> <i>(may not count)</i>\n<b>Total: 1,012</b> <i>(1,124 if home screen events count)</i>"
             }
         }
     ],
