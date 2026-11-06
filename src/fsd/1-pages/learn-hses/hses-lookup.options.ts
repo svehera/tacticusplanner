@@ -5,6 +5,7 @@ export interface HseOption {
     value: string;
     eventName: string;
     label: string;
+    gameModeIcon?: string;
 }
 
 export interface HseOptionsResult {
@@ -46,6 +47,8 @@ export function buildHseOptions(
 ): HseOptionsResult {
     const nameByEvent = new Map(events.map(({ event, displayName }) => [event.eventName, displayName]));
 
+    const iconByEvent = new Map(events.map(({ event }) => [event.eventName, event.gameModeIcon]));
+
     const scheduled = schedules
         .filter(schedule => nameByEvent.has(schedule.eventName))
         .filter(schedule => ['active', 'upcoming'].includes(getHseScheduleStatus(schedule, now)))
@@ -54,11 +57,17 @@ export function buildHseOptions(
             value: scheduledRunValue(schedule),
             eventName: schedule.eventName,
             label: `${nameByEvent.get(schedule.eventName)} (${formatHseDateRange(schedule, now)})`,
+            gameModeIcon: iconByEvent.get(schedule.eventName),
         }));
 
     const others = events
         .toSorted((a, b) => a.displayName.localeCompare(b.displayName))
-        .map(({ event, displayName }) => ({ value: event.eventName, eventName: event.eventName, label: displayName }));
+        .map(({ event, displayName }) => ({
+            value: event.eventName,
+            eventName: event.eventName,
+            label: displayName,
+            gameModeIcon: event.gameModeIcon,
+        }));
 
     return { scheduled, others };
 }

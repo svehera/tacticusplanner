@@ -12,7 +12,7 @@ export {
     tallyHseRewards,
 } from './homescreen-event.utils';
 export { allHseSchedules } from './hse-runs';
-export { HseIcon } from './ui';
+export { HseIcon, getHseGameModeIconUrl } from './ui';
 export {
     getHseDurationDays,
     getHseRemainingDays,

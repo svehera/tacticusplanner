@@ -8,6 +8,7 @@
             "endUtc": "2026-12-10T00:00:00Z"
         }
     ],
+    "gameModeIcon": "ui_gamemodeicon_defeatwaves_2.png",
     "tiers": {
         "high": {
             "liveEventConfig": {

@@ -82,6 +82,8 @@ export interface HomescreenEventData {
     eventName: string;
     /** Every known run of the event (past, current and upcoming). Absent for events with no known dates. */
     schedule?: HomescreenEventRun[];
+    /** Game-mode icon file name (in `snowprint_assets/misc`). Absent on older events. */
+    gameModeIcon?: string;
     tiers: Partial<Record<HomescreenEventTierKey, HomescreenEventTier>>;
 }
 

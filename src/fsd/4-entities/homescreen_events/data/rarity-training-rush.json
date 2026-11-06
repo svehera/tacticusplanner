@@ -14,6 +14,7 @@
             "endUtc": "2026-12-16T00:00:00Z"
         }
     ],
+    "gameModeIcon": "ui_gamemodeicon_trainingrush.png",
     "tiers": {
         "high": {
             "liveEventConfig": {

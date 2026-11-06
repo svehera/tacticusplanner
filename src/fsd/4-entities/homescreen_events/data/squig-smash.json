@@ -8,6 +8,7 @@
             "endUtc": "2026-11-21T00:00:00Z"
         }
     ],
+    "gameModeIcon": "ui_gamemodeicon_squig_smash.png",
     "tiers": {
         "high": {
             "liveEventConfig": {

@@ -8,6 +8,7 @@
             "endUtc": "2026-11-29T00:00:00Z"
         }
     ],
+    "gameModeIcon": "ui_gamemodeicon_faction_boost_world_eaters.png",
     "tiers": {
         "default": {
             "liveEventConfig": {
