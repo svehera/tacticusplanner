@@ -126,6 +126,7 @@ export const tacticusIcons: Record<string, TacticusIcon> = {
     battlepassPoints: snowprintIcons.battlepassPoints,
     crusadePoints: snowprintIcons.crusadePoints,
     eventPoints: snowprintIcons.eventPoints,
+    eventPointsCrescendo: snowprintIcons.eventPointsCrescendo,
     salvageRunToken: snowprintIcons.salvageRunToken,
     arenaToken: snowprintIcons.arenaToken,
     survivalToken: snowprintIcons.survivalToken,

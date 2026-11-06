@@ -22,7 +22,7 @@ export const MiscIcon = forwardRef<HTMLImageElement, MiscIconProps>(function Mis
         <img
             ref={reference}
             loading="lazy"
-            className={`${onClick ? '' : 'pointer-events-none'} ${className}`}
+            className={`object-contain ${onClick ? '' : 'pointer-events-none'} ${className}`}
             style={{
                 ...(height > 0 ? { height } : {}),
                 ...(width > 0 ? { width } : {}),

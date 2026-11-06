@@ -227,6 +227,7 @@ import seasonalEventCurrencyMarch2026 from '@/assets/images/snowprint_assets/res
 import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
 import seasonalEventCurrencyNovember2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_november_2026.png';
 import seasonalEventCurrencySeptember2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_september_2026.png';
+import eventPointsCrescendo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_points_crescendo_event.png';
 import eventPoints from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_points_seasonalevent.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
@@ -1085,6 +1086,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     eventPoints: {
         file: eventPoints,
         label: 'Event Point',
+    },
+    eventPointsCrescendo: {
+        file: eventPointsCrescendo,
+        label: 'Event Point (Crescendo)',
     },
     mythicSalvage: {
         file: mythicSalvage,
