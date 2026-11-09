@@ -20,7 +20,8 @@ export enum LreSection {
     settings,
 }
 
-export type DailyMultiplier = 1 | 2 | 4;
+/** Currency paid per cleared objective at each daily payout; 0 means no daily delivery. */
+export type DailyMultiplier = 0 | 1 | 2 | 4;
 
 /** The user's planned inputs for one round of the round-outcome forecast. */
 export interface ILreForecastRoundConfig {

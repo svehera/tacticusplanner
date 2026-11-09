@@ -81,7 +81,7 @@ interface Scenario {
 
 const forecast = ({
     bonusDelivery = false,
-    multiplier = 1,
+    multiplier = 0,
     avgObjectives,
     bundles = [0, 0, 0],
     ohSoClose = [false, false, false],
