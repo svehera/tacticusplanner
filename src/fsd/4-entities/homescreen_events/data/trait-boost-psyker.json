@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_trait_boost_psyker_tier_high_bundle",
                     "offer_homescreen_event_trait_boost_psyker_tier_high_playmore",
@@ -257,7 +263,7 @@
                 "Earn points by battling with Psykers and claim exclusive rewards!",
                 "All <style=\"Psyker\">Psyker</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "<style=\"Psyker\">Psyker</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
-                "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
+                "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         },
         "mid": {
@@ -281,6 +287,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_trait_boost_psyker_tier_mid_bundle",
                     "offer_homescreen_event_trait_boost_psyker_tier_mid_playmore",
@@ -516,7 +528,7 @@
                 "Earn points by battling with Psykers and claim exclusive rewards!",
                 "All <style=\"Psyker\">Psyker</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "<style=\"Psyker\">Psyker</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
-                "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
+                "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         },
         "low": {
@@ -540,6 +552,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_trait_boost_psyker_tier_low_bundle",
                     "offer_homescreen_event_trait_boost_psyker_tier_low_playmore",
@@ -775,7 +793,7 @@
                 "Earn points by battling with Psykers and claim exclusive rewards!",
                 "All <style=\"Psyker\">Psyker</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "<style=\"Psyker\">Psyker</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
-                "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
+                "You gain <style=\"HSE_Points_TraitBoostPsyker\">{[POINTS]} Psyker Boost point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Psyker\">Psyker</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         }
     }

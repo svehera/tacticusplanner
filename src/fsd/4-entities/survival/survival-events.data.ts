@@ -1,6 +1,20 @@
-import { seasonMay2026Event, seasonSeptember2026Event, seasonCrescendo01Event } from './data';
+import {
+    seasonMay2026Event,
+    seasonSeptember2026Event,
+    seasonCrescendo01Event,
+    seasonCrescendoAEvent,
+    seasonCrescendoBEvent,
+    seasonDecember2026Event,
+} from './data';
 import type { ISurvivalEvent } from './model';
 
-const rawSurvivalEvents = [seasonMay2026Event, seasonSeptember2026Event, seasonCrescendo01Event];
+const rawSurvivalEvents = [
+    seasonMay2026Event,
+    seasonSeptember2026Event,
+    seasonCrescendo01Event,
+    seasonCrescendoAEvent,
+    seasonCrescendoBEvent,
+    seasonDecember2026Event,
+];
 
 export const survivalEvents = rawSurvivalEvents as unknown as ISurvivalEvent[];

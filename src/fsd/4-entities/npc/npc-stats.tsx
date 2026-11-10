@@ -20,8 +20,8 @@ interface StatCardProps {
 }
 
 const StatCard = ({ label, value, icon, suffix, subIcons = [] }: StatCardProps) => (
-    <div className="flex flex-col items-center justify-center rounded-lg border border-(--border) bg-(--bg-secondary) p-3">
-        <div className="mb-1 text-xs tracking-wider text-(--fg-muted) uppercase">{label}</div>
+    <div className="flex flex-col items-center justify-center rounded-lg border border-(--border) bg-(--soft) p-3">
+        <div className="mb-1 text-xs tracking-wider text-(--soft-fg) uppercase">{label}</div>
         <div className="flex items-center gap-2">
             <MiscIcon icon={icon} />
             {subIcons.map((s: React.ReactNode, index: number) => (
@@ -40,7 +40,7 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
     const rangedAttacks = NpcService.resolveRangedAttacks(npc);
 
     return (
-        <div className="space-y-6 p-6">
+        <div className="space-y-6">
             {/* Stats grid */}
             <div className="grid grid-cols-2 gap-4">
                 <StatCard label="Health" icon="health" value={currentStats?.health} />
@@ -107,7 +107,7 @@ export const NpcStats: React.FC<Props> = ({ npc, currentStats }) => {
             {/* Traits Section */}
             {npc.traits.length > 0 && (
                 <div>
-                    <div className="mb-3 text-xs tracking-wider text-(--fg-muted) uppercase">Traits</div>
+                    <div className="mb-3 text-xs tracking-wider text-(--soft-fg) uppercase">Traits</div>
                     <div className="flex flex-wrap gap-3 rounded-lg border border-(--border) bg-(--neutral) p-4">
                         {npc.traits.map(trait => {
                             const icon = NpcService.getTraitIcon(trait);

@@ -57,6 +57,10 @@ export enum Campaign {
     DASC = 'Dark Angels Standard Challenge',
     DAE = 'Dark Angels Extremis',
     DAEC = 'Dark Angels Extremis Challenge',
+    BAS = 'Blood Angels Standard',
+    BASC = 'Blood Angels Standard Challenge',
+    BAE = 'Blood Angels Extremis',
+    BAEC = 'Blood Angels Extremis Challenge',
 
     Onslaught = 'Onslaught',
 }
@@ -103,6 +107,10 @@ export const campaignDisplayNames: Record<Campaign, string> = {
     [Campaign.DASC]: 'DASC',
     [Campaign.DAE]: 'DAE',
     [Campaign.DAEC]: 'DAEC',
+    [Campaign.BAS]: 'BAS',
+    [Campaign.BASC]: 'BASC',
+    [Campaign.BAE]: 'BAE',
+    [Campaign.BAEC]: 'BAEC',
 
     [Campaign.Onslaught]: 'Onslaught',
 };
@@ -177,6 +185,11 @@ export enum CampaignGroupType {
      * Campaign Event: Adepta Sororitas storyline.
      */
     darkAngelsCE = 'Dark Angels',
+
+    /**
+     * Campaign Event: Blood Angels storyline.
+     */
+    bloodAngelsCE = 'Blood Angels',
 }
 
 /**

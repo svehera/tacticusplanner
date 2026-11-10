@@ -15649,7 +15649,7 @@
         "itemType": "I_Defensive",
         "rarity": "Mythic",
         "isRelic": true,
-        "isUniqueRelic": false,
+        "isUniqueRelic": true,
         "abilityId": "Thrydderghyre",
         "allowedUnits": ["thousTzaangor"],
         "levels": [

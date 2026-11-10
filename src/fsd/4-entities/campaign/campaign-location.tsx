@@ -26,28 +26,32 @@ export const CampaignLocation: React.FC<Props> = ({ location, unlocked, short = 
             Campaign.TAEC,
             Campaign.ASSC,
             Campaign.ASEC,
+            Campaign.DASC,
+            Campaign.DAEC,
+            Campaign.BASC,
+            Campaign.BAEC,
         ];
         if (challengeCampaigns.includes(location.campaign)) {
             return location.nodeNumber + 'B';
         }
         return location.nodeNumber;
-    }, []);
+    }, [location]);
 
     return location === undefined ? (
         <span>undefined</span>
     ) : (
         <div
-            className="flex-box gap-0.5"
+            className="flex items-center gap-0.5"
             style={{
                 opacity: unlocked ? 1 : 0.5,
             }}>
             <CampaignImage campaign={location.campaign} size={30} />
             {short ? (
-                <span className="font-bold text-gray-400">{locationNumber}</span>
+                <span className="font-bold text-(--soft-fg)">{locationNumber}</span>
             ) : (
-                <div className="flex-box column start">
+                <div className="flex flex-col items-start">
                     <span>
-                        Battle <span className="font-bold text-gray-400">{locationNumber}</span>
+                        Battle <span className="font-bold text-(--soft-fg)">{locationNumber}</span>
                     </span>
                     <span className="text-xs">{location.campaign}</span>
                 </div>

@@ -43,6 +43,7 @@ import effectMartialSuperiority from '@/assets/images/snowprint_assets/effects/m
 import effectNeuroparasite from '@/assets/images/snowprint_assets/effects/neuroparasite_effect.png';
 import effectOverwatching from '@/assets/images/snowprint_assets/effects/overwatching_effect.png';
 import effectPinned from '@/assets/images/snowprint_assets/effects/pinned_effect.png';
+import effectPoisoned from '@/assets/images/snowprint_assets/effects/poisoned_effect.png';
 import effectProphets from '@/assets/images/snowprint_assets/effects/prophets_effect.png';
 import effectRevealed from '@/assets/images/snowprint_assets/effects/revealed_effect.png';
 import effectShield from '@/assets/images/snowprint_assets/effects/shield_effect.png';
@@ -67,6 +68,7 @@ import questDamageBurst from '@/assets/images/snowprint_assets/misc/damage.png';
 import overkill from '@/assets/images/snowprint_assets/misc/overkill.png';
 import piercingDamage from '@/assets/images/snowprint_assets/misc/piercing_dmg.png';
 import seasonalEventAugust2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_august_2026.png';
+import seasonalEventNovember2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_november_2026.png';
 import seasonalEventOctober2026AvatarFrame from '@/assets/images/snowprint_assets/misc/ui_avatar_frame_october_2026.png';
 import commonEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_common.png';
 import epicEquipmentFrame from '@/assets/images/snowprint_assets/misc/ui_frame_items_epic.png';
@@ -93,7 +95,9 @@ import onslaughtToken from '@/assets/images/snowprint_assets/misc/ui_icon_resour
 import salvageRunToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_salvage_run.png';
 import survivalToken from '@/assets/images/snowprint_assets/misc/ui_icon_resource_token_survival.png';
 import survivalStatBoost from '@/assets/images/snowprint_assets/misc/ui_icon_survival_boost_stats.png';
+import playerProfileThemeDecember2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_december_2026.png';
 import playerProfileThemeMay2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_may_2026.png';
+import playerProfileThemeNovember2026 from '@/assets/images/snowprint_assets/misc/ui_player_profile_theme_reward_november_2026.png';
 import chaosOnslaught from '@/assets/images/snowprint_assets/onslaught/chaos.png';
 import imperialOnslaught from '@/assets/images/snowprint_assets/onslaught/imperial.png';
 import onslaughtAdamantine1 from '@/assets/images/snowprint_assets/onslaught/onslaught_adamantine_1.png';
@@ -200,6 +204,8 @@ import draftOrbsMythic from '@/assets/images/snowprint_assets/resources/ui_icon_
 import draftOrbsRare from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsRare.png';
 import draftOrbsUncommon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_ascensionOrbsUncommon.png';
 import draftMachinesOfWarComponents from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_draft_machinesOfWarToken.png';
+import shardsWorldEatersIcon from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_HeroShard_WorldEaters_Medium.png';
+import draftOfferDkokMixLarge from '@/assets/images/snowprint_assets/resources/ui_icon_droptable_resources_reqOrders_gems_xpbook_mythic.png';
 import raidTicket from '@/assets/images/snowprint_assets/resources/ui_icon_raid_ticket.png';
 import bloodAngelsReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_blood_june_2026.png';
 import orksReq from '@/assets/images/snowprint_assets/resources/ui_icon_requisition_orkss_june_2026.png';
@@ -214,11 +220,14 @@ import archeotech from '@/assets/images/snowprint_assets/resources/ui_icon_resou
 import seasonalEventCurrencyApril2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_april_2026.png';
 import seasonalEventCurrencyAugust2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_august_2026.png';
 import seasonalEventCurrencyCrescendo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_crescendo_01.png';
+import seasonalEventCurrencyDecember2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_december_2026.png';
 import seasonalEventCurrencyHolidays2025 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_holiday_25.png';
 import armageddonCurrency from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_june_2026.png';
 import seasonalEventCurrencyMarch2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_march_2026.png';
 import seasonalEventCurrencyMay2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_may_2026.png';
+import seasonalEventCurrencyNovember2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_november_2026.png';
 import seasonalEventCurrencySeptember2026 from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_currency_september_2026.png';
+import eventPointsCrescendo from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_points_crescendo_event.png';
 import eventPoints from '@/assets/images/snowprint_assets/resources/ui_icon_resource_event_points_seasonalevent.png';
 import guildCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_credits_large.png';
 import warCredits from '@/assets/images/snowprint_assets/resources/ui_icon_resource_guild_war_currency_large.png';
@@ -326,6 +335,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: seasonalEventAugust2026AvatarFrame,
         label: 'Seasonal Event (August 2026) Avatar Frame',
     },
+    seasonalEventNovember2026AvatarFrame: {
+        file: seasonalEventNovember2026AvatarFrame,
+        label: 'Seasonal Event (November 2026) Avatar Frame',
+    },
     seasonalEventOctober2026AvatarFrame: {
         file: seasonalEventOctober2026AvatarFrame,
         label: 'Seasonal Event (October 2026) Avatar Frame',
@@ -373,6 +386,14 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     seasonalEventCurrencySeptember2026: {
         file: seasonalEventCurrencySeptember2026,
         label: 'Seasonal Event Currency (September 2026)',
+    },
+    seasonalEventCurrencyNovember2026: {
+        file: seasonalEventCurrencyNovember2026,
+        label: 'Seasonal Event Currency (November 2026)',
+    },
+    seasonalEventCurrencyDecember2026: {
+        file: seasonalEventCurrencyDecember2026,
+        label: 'Seasonal Event Currency (December 2026)',
     },
     seasonalEventCurrencyCrescendo: {
         file: seasonalEventCurrencyCrescendo,
@@ -566,6 +587,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: effectProphets,
         label: 'Prophets Effect',
     },
+    effectPoisoned: {
+        file: effectPoisoned,
+        label: 'Poisoned Effect',
+    },
     effectRevealed: {
         file: effectRevealed,
         label: 'Revealed Effect',
@@ -645,6 +670,18 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     survivalStatBoost: {
         file: survivalStatBoost,
         label: 'Survival Stat Boost',
+    },
+    playerProfileThemeDecember2026: {
+        file: playerProfileThemeDecember2026,
+        label: 'Seasonal Event (December 2026) Profile Theme',
+    },
+    playerProfileThemeNovember2026: {
+        file: playerProfileThemeNovember2026,
+        label: 'Seasonal Event (November 2026) Profile Theme',
+    },
+    draftOfferDkokMixLarge: {
+        file: draftOfferDkokMixLarge,
+        label: 'Mixed Resources (Pick One)',
     },
     playerProfileThemeMay2026: {
         file: playerProfileThemeMay2026,
@@ -998,6 +1035,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
         file: shardIcon,
         label: 'Unit Shard',
     },
+    shardsWorldEaters: {
+        file: shardsWorldEatersIcon,
+        label: 'World Eaters Shards',
+    },
     mythicShard: {
         file: mythicShardIcon,
         label: 'Mythic Unit Shard',
@@ -1045,6 +1086,10 @@ export const snowprintIcons: Record<string, SnowprintIcon> = {
     eventPoints: {
         file: eventPoints,
         label: 'Event Point',
+    },
+    eventPointsCrescendo: {
+        file: eventPointsCrescendo,
+        label: 'Event Point (Crescendo)',
     },
     mythicSalvage: {
         file: mythicSalvage,

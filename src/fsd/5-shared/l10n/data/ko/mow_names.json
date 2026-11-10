@@ -64,5 +64,11 @@
         "shortName": "바이오보어",
         "name": "바이오보어",
         "title": "포진 유기체"
+    },
+    "custoDreadnought": {
+        "extraShortName": "부디카리",
+        "shortName": "부디카리",
+        "name": "부디카리 펠도루스",
+        "title": "컨템프터 아킬루스 드레드노트"
     }
 }

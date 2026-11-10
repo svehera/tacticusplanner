@@ -275,3 +275,45 @@ export function calendarRewardInfo(reward: string): CalendarRewardInfo {
 export function isKnownCalendarRewardType(type: string): boolean {
     return calendarRewardInfo(`${type}:0`).icon.kind !== 'text';
 }
+
+export interface FreeRewardTotal {
+    /** Reward type id, e.g. "gems" or "seasonalEventCurrencyNovember2026". */
+    type: string;
+    qty: number;
+}
+
+export interface FreeRewardsSummary {
+    totals: FreeRewardTotal[];
+    /** Days where a free offer has alternative variants with different contents; only one of them is counted. */
+    daysWithAlternatives: number;
+}
+
+/**
+ * Totals everything the calendar gives away for free. Offers on the same day with the same title are
+ * targeted variants of one offer (a player sees one of them), so only the first is counted. Calendars
+ * priced in Blackstone flag every offer as free, so they have no free rewards.
+ */
+export function summarizeFreeRewards(calendar: IProductCalendar): FreeRewardsSummary {
+    if (isBlackstonePricedCalendar(calendar.calendar)) return { totals: [], daysWithAlternatives: 0 };
+
+    const totals = new Map<string, number>();
+    let daysWithAlternatives = 0;
+
+    for (const calDay of calendar.days) {
+        let hasAlternatives = false;
+        for (const offers of offersForDayByTitle(calDay).values()) {
+            const freeOffers = offers.filter(offer => offer.free);
+            if (freeOffers.length === 0) continue;
+            if (freeOffers.length > 1) hasAlternatives = true;
+            for (const reward of freeOffers[0].rewards) {
+                const colonIndex = reward.indexOf(':');
+                const type = colonIndex === -1 ? reward : reward.slice(0, colonIndex);
+                const qty = colonIndex === -1 ? 1 : Number.parseInt(reward.slice(colonIndex + 1), 10);
+                totals.set(type, (totals.get(type) ?? 0) + (Number.isNaN(qty) ? 0 : qty));
+            }
+        }
+        if (hasAlternatives) daysWithAlternatives++;
+    }
+
+    return { totals: [...totals].map(([type, qty]) => ({ type, qty })), daysWithAlternatives };
+}

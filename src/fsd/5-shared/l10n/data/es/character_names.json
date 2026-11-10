@@ -707,6 +707,12 @@
         "name": "Nubari Shal'Dar",
         "title": "Sargento Erradicador"
     },
+    "lostaFearmonger": {
+        "extraShortName": "Daras",
+        "shortName": "Daras",
+        "name": "Daras Carrow",
+        "title": "Siembramiedos de la Garra Némesis"
+    },
     "lostaBile": {
         "extraShortName": "Fabius Bilis",
         "shortName": "Fabius Bilis",

@@ -3,12 +3,12 @@
     "title": "Tournament Arena Requisition",
     "tagline": "Higher drop chances for some of the most effective units in Tournament Arena!",
     "featuredUnits": [
-        "adeptRetributor",
-        "tauCrisis",
-        "blackObliterator",
+        "eldarRanger",
+        "darkaHellblaster",
+        "bloodIntercessor",
+        "necroPlasmancer",
         "genesKelermorph",
-        "tauShadowsun",
-        "orksRukkatrukk"
+        "tauShadowsun"
     ],
     "unlockRequirement": {
         "PowerLevel": 8

@@ -64,5 +64,11 @@
         "shortName": "バイオヴォア",
         "name": "バイオヴォア",
         "title": "アーティラリー・オーガニズム"
+    },
+    "custoDreadnought": {
+        "extraShortName": "ブーディカリ",
+        "shortName": "ブーディカリ",
+        "name": "ブーディカリ・フェルドルス",
+        "title": "コンテンプター・アキルス・ドレッドノート"
     }
 }

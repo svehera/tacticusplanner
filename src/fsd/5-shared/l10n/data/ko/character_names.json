@@ -707,6 +707,12 @@
         "name": "누바리 샬다르",
         "title": "이레디케이터 서전트"
     },
+    "lostaFearmonger": {
+        "extraShortName": "다라스",
+        "shortName": "다라스",
+        "name": "다라스 캐로",
+        "title": "네메시스 클로 피어몽거"
+    },
     "lostaBile": {
         "extraShortName": "파비우스 바일",
         "shortName": "파비우스 바일",

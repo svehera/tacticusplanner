@@ -37,11 +37,17 @@ export interface ShopEventWeek {
     milestoneRewards?: ShopEventMilestoneReward[];
     progressChests?: ShopEventProgressChest[];
     missions?: IEventMissions;
+    /** Explains how the F2P currency estimate for this week is reached (`<b>`/`<i>` markup, newline-separated). */
+    earningsTooltip?: string;
+    /** Explains how the bonus shipment estimate for this week is reached (same markup). */
+    bonusShipmentTooltip?: string;
 }
 
 export interface ShopEventEarningsLine {
     label: string;
     amount: string;
+    /** Which per-week explanation the (i) tooltip next to this estimate shows. */
+    kind?: 'f2p' | 'bonusShipment';
 }
 
 export interface ShopEventMilestoneReward {
@@ -81,6 +87,8 @@ export interface ShopEventData {
     displayName: string;
     currencyType: string;
     startUtc: number;
+    /** Interstitial art for the event, shown as a banner. */
+    banner?: string;
     weeks: ShopEventWeek[];
     earningsInfographic?: ShopEventEarningsLine[];
 }

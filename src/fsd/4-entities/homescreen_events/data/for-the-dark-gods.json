@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": ["offer_homescreen_event_emperor_dark_gods_tier_high_booster"],
                 "trackers": [
                     {
@@ -159,6 +165,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": ["offer_homescreen_event_emperor_dark_gods_tier_mid_booster"],
                 "trackers": [
                     {
@@ -296,6 +308,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": ["offer_homescreen_event_emperor_dark_gods_tier_low_booster"],
                 "trackers": [
                     {

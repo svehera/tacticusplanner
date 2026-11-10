@@ -22,6 +22,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_trait_boost_terminator_armour_tier_high_bundle",
                     "offer_homescreen_event_trait_boost_terminator_armour_tier_high_playmore",
@@ -259,7 +265,7 @@
                 "Earn points by battling with Terminator Armour units and claim exclusive rewards!",
                 "<style=\"Terminator_Armor\">Terminator Armour</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "<style=\"Terminator_Armor\">Terminator Armour</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
-                "You gain <style=\"HSE_Points_TraitBoostTerminatorArmour\">{[POINTS]} Terminator Armour Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Terminator_Armor\">Terminator Armour</style> unit in Arena, Onslaught, and Salvage Run."
+                "You gain <style=\"HSE_Points_TraitBoostTerminatorArmour\">{[POINTS]} Terminator Armour Boost point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Terminator_Armor\">Terminator Armour</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         },
         "mid": {
@@ -283,6 +289,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_trait_boost_terminator_armour_tier_mid_bundle",
                     "offer_homescreen_event_trait_boost_terminator_armour_tier_mid_playmore",
@@ -520,7 +532,7 @@
                 "Earn points by battling with Terminator Armour units and claim exclusive rewards!",
                 "<style=\"Terminator_Armor\">Terminator Armour</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "<style=\"Terminator_Armor\">Terminator Armour</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
-                "You gain <style=\"HSE_Points_TraitBoostTerminatorArmour\">{[POINTS]} Terminator Armour Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Terminator_Armor\">Terminator Armour</style> unit in Arena, Onslaught, and Salvage Run."
+                "You gain <style=\"HSE_Points_TraitBoostTerminatorArmour\">{[POINTS]} Terminator Armour Boost point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Terminator_Armor\">Terminator Armour</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         },
         "low": {
@@ -544,6 +556,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_trait_boost_terminator_armour_tier_low_bundle",
                     "offer_homescreen_event_trait_boost_terminator_armour_tier_low_playmore",
@@ -781,7 +799,7 @@
                 "Earn points by battling with Terminator Armour units and claim exclusive rewards!",
                 "<style=\"Terminator_Armor\">Terminator Armour</style> characters in Arena have +{[healthPct]}% Health, +{[dmgPct]}% Damage, and +{[armorPct]}% Armour.",
                 "<style=\"Terminator_Armor\">Terminator Armour</style> characters gain <style=\"STAT\">{[MODIFIER]}x XP</style> in Arena, Onslaught, and Salvage Run.",
-                "You gain <style=\"HSE_Points_TraitBoostTerminatorArmour\">{[POINTS]} Terminator Armour Boost point</style> for each enemy unit (excluding <style=\"Summon\">Summons</style>) you defeat with a <style=\"Terminator_Armor\">Terminator Armour</style> unit in Arena, Onslaught, and Salvage Run."
+                "You gain <style=\"HSE_Points_TraitBoostTerminatorArmour\">{[POINTS]} Terminator Armour Boost point</style> for each <link=\"tooltip:HomeScreenEvents/Tooltip_unit_tooltip\"><style=\"KEY\">enemy unit</style></link> you defeat with a <style=\"Terminator_Armor\">Terminator Armour</style> unit in Arena, Onslaught, and Salvage Run."
             ]
         }
     }

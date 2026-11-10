@@ -25,6 +25,8 @@ import { TeamTab } from './tabs/team-tab';
 
 const EVENT_DISPLAY_NAME_OVERRIDES: Record<string, string> = {
     season_crescendo_01_event: 'Terminus 01 — Dreir',
+    season_crescendo_a_event: 'Terminus A — Dreir',
+    season_crescendo_b_event: 'Terminus B — Cezare',
 };
 
 const getEventDisplayName = (event: ISurvivalEvent) =>

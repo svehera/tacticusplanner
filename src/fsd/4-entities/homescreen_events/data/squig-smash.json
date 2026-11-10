@@ -1,5 +1,14 @@
 {
     "eventName": "squig_smash",
+    "schedule": [
+        {
+            "startDate": "2026-11-18",
+            "endDate": "2026-11-20",
+            "startUtc": "2026-11-18T00:00:00Z",
+            "endUtc": "2026-11-21T00:00:00Z"
+        }
+    ],
+    "gameModeIcon": "ui_gamemodeicon_squig_smash.png",
     "tiers": {
         "high": {
             "liveEventConfig": {
@@ -22,6 +31,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_high_bundle",
                     "offer_homescreen_event_squig_smash_tier_high_playmore",
@@ -292,6 +307,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_mid_bundle",
                     "offer_homescreen_event_squig_smash_tier_mid_playmore",
@@ -562,6 +583,12 @@
                 "endRewardTitle": "Inbox/SeasonalEvent_UnclaimedRewards_Title",
                 "endRewardBody": "Inbox/SeasonalEvent_UnclaimedRewards_Body",
                 "endRewardSender": "Inbox/Sender_Tacticus",
+                "endRewardValidFor": {
+                    "seconds": 0,
+                    "minutes": 0,
+                    "hours": 0,
+                    "days": 1
+                },
                 "initialOfferIds": [
                     "offer_homescreen_event_squig_smash_tier_low_bundle",
                     "offer_homescreen_event_squig_smash_tier_low_playmore",

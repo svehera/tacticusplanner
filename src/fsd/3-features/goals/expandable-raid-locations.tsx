@@ -12,6 +12,8 @@ const CHALLENGE_CAMPAIGNS = new Set([
     Campaign.AMEC,
     Campaign.DASC,
     Campaign.DAEC,
+    Campaign.BASC,
+    Campaign.BAEC,
     Campaign.DGSC,
     Campaign.DGEC,
     Campaign.TSC,

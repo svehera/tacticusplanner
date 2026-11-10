@@ -71,6 +71,7 @@ const CAMPAIGN_EVENT_OPTIONS: Array<CampaignGroupType | 'none'> = [
     CampaignGroupType.deathGuardCE,
     CampaignGroupType.sistersCE,
     CampaignGroupType.darkAngelsCE,
+    CampaignGroupType.bloodAngelsCE,
 ];
 
 const CAMPAIGN_EVENT_LABELS: Record<string, string> = {
@@ -81,6 +82,7 @@ const CAMPAIGN_EVENT_LABELS: Record<string, string> = {
     [CampaignGroupType.deathGuardCE]: 'Death Guard',
     [CampaignGroupType.sistersCE]: 'Adepta Sororitas',
     [CampaignGroupType.darkAngelsCE]: 'Dark Angels',
+    [CampaignGroupType.bloodAngelsCE]: 'Blood Angels',
 };
 
 const farmOrderOptions = [

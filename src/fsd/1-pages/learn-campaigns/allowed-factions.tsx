@@ -8,14 +8,14 @@ export const AllowedFactions = ({ alliance, factions }: { alliance: Alliance; fa
 
     return (
         <div className="flex flex-col gap-1.5">
-            <span className="text-[10px] font-bold tracking-[.14em] text-(--soft-fg) uppercase">
-                Allowed Factions ({alliance})
+            <span className="text-xs font-bold tracking-widest text-(--soft-fg) uppercase">
+                Allowed factions ({alliance})
             </span>
             <div className="flex flex-wrap items-center gap-1.5">
                 {factions.map(faction => (
                     <span
                         key={faction}
-                        className="flex items-center gap-1.5 rounded-full border border-(--border) bg-(--card) px-2.5 py-1 text-xs text-(--fg)">
+                        className="flex items-center gap-1.5 rounded-full border border-(--border) bg-(--soft) px-2.5 py-1 text-xs text-(--fg)">
                         <FactionImage faction={faction} />
                         {factionLookup[faction].name}
                     </span>
